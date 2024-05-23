@@ -1,0 +1,8 @@
+arb-dir: lib/src/l10n/arb
+output-dir: lib/src/l10n/arb_gen
+synthetic-package: false
+template-arb-file: form_fr.arb
+output-localization-file: form_localizations.dart
+output-class: FormLocalizations
+nullable-getter: false
+untranslated-messages-file: .dart_tool/untranslated_messages.txt
