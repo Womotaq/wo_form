@@ -1,7 +1,7 @@
 import 'package:wo_form/wo_form.dart';
 
-abstract class WoFormInput<T> {
-  const WoFormInput({
+abstract class WoFormInputOLD<T> {
+  const WoFormInputOLD({
     required this.id,
     required this.value,
   });

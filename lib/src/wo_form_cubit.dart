@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wo_form/src/model/input.dart';
 import 'package:wo_form/wo_form.dart';
 
 abstract class WoFormCubitA<T extends WoForm> extends Cubit<T>
@@ -15,7 +16,7 @@ abstract class WoFormCubit extends Cubit<WoForm> with StateStreamable<WoForm> {
 
   /// Setting the status to idle when a modification occurs
   /// allows isPure to work
-  void onInputChanged({required WoFormInput<dynamic> input}) => emit(
+  void onInputChanged({required WoFormInput input}) => emit(
         state.copyWith(
           status: WoFormStatus.idle,
           inputsMap: Map.from(state.inputsMap)..update(input.id, (_) => input),

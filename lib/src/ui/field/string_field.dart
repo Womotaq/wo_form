@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wo_form/src/model/input.dart';
 import 'package:wo_form/wo_form.dart';
 
 class StringField<T extends WoFormCubit> extends StatefulWidget {
@@ -10,14 +11,14 @@ class StringField<T extends WoFormCubit> extends StatefulWidget {
   });
 
   final StringInput Function(WoForm form) input;
-  final StringFieldTheme? theme;
+  final StringFieldSettings? theme;
 
   @override
   State createState() => _StringFieldState<T>();
 }
 
 class _StringFieldState<T extends WoFormCubit> extends State<StringField<T>> {
-  late final StringFieldTheme mergedTheme;
+  late final StringFieldSettings mergedSettings;
   final textEditingController = TextEditingController();
   bool obscureText = false;
 
@@ -25,11 +26,10 @@ class _StringFieldState<T extends WoFormCubit> extends State<StringField<T>> {
   void initState() {
     super.initState();
 
-    final themeFromInput = widget.input(context.read<T>().state).fieldTheme;
-    mergedTheme = (widget.theme?.merge(themeFromInput) ?? themeFromInput) ??
-        StringFieldTheme();
+    final themeFromInput = widget.input(context.read<T>().state).fieldSettings;
+    mergedSettings = widget.theme?.merge(themeFromInput) ?? themeFromInput;
 
-    obscureText = mergedTheme.obscureText ?? false;
+    obscureText = mergedSettings.obscureText ?? false;
   }
 
   @override
@@ -55,25 +55,24 @@ class _StringFieldState<T extends WoFormCubit> extends State<StringField<T>> {
                 input: input.copyWith(value: value),
               ),
               onFieldSubmitted:
-                  (mergedTheme.submitFormOnFieldSubmitted ?? false)
+                  (mergedSettings.submitFormOnFieldSubmitted ?? false)
                       ? (value) => cubit.submit()
                       : null,
-              keyboardType: mergedTheme.keyboardType,
+              keyboardType: mergedSettings.keyboardType,
               obscureText: obscureText,
-              autocorrect: mergedTheme.autocorrect ?? true,
-              autofillHints: mergedTheme.autofillHints,
-              autofocus: mergedTheme.autofocus ?? false,
-              textInputAction: mergedTheme.textInputAction,
+              autocorrect: mergedSettings.autocorrect ?? true,
+              autofillHints: mergedSettings.autofillHints,
+              autofocus: mergedSettings.autofocus ?? false,
+              textInputAction: mergedSettings.textInputAction,
               textCapitalization:
-                  mergedTheme.textCapitalization ?? TextCapitalization.none,
-              style: mergedTheme.style,
-              maxLines: mergedTheme.maxLines,
+                  mergedSettings.textCapitalization ?? TextCapitalization.none,
+              maxLines: mergedSettings.maxLines,
               decoration: InputDecoration(
-                labelText: mergedTheme.labelText,
-                hintText: mergedTheme.hintText,
+                labelText: mergedSettings.labelText,
+                hintText: mergedSettings.hintText,
                 errorText: errorText,
                 errorMaxLines: 10,
-                suffixIcon: switch (mergedTheme.action) {
+                suffixIcon: switch (mergedSettings.action) {
                   null => null,
                   StringFieldAction.clear => IconButton(
                       onPressed: () => cubit.onInputChanged(

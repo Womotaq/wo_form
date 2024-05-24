@@ -1,27 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:wo_form/src/model/json_converter/text_input_type.dart';
+import 'package:wo_form/src/model/json_converter/unknown_type.dart';
 
-part 'field_theme.freezed.dart';
-part 'field_theme.g.dart';
+part 'field_settings.freezed.dart';
+part 'field_settings.g.dart';
 
 enum BooleanFieldOnOffType { checkbox, switchButton }
 
 @freezed
-class BooleanFieldTheme with _$BooleanFieldTheme {
-  factory BooleanFieldTheme({
+class BooleanFieldSettings with _$BooleanFieldSettings {
+  const factory BooleanFieldSettings({
     String? labelText,
     BooleanFieldOnOffType? onOffType,
     ListTileControlAffinity? onOffPosition,
-  }) = _BooleanFieldTheme;
+  }) = _BooleanFieldSettings;
 
-  const BooleanFieldTheme._();
+  const BooleanFieldSettings._();
 
-  factory BooleanFieldTheme.fromJson(Map<String, dynamic> json) =>
-      _$BooleanFieldThemeFromJson(json);
+  factory BooleanFieldSettings.fromJson(Map<String, dynamic> json) =>
+      _$BooleanFieldSettingsFromJson(json);
 
-  BooleanFieldTheme merge(BooleanFieldTheme? other) => other == null
+  BooleanFieldSettings merge(BooleanFieldSettings? other) => other == null
       ? this
-      : BooleanFieldTheme(
+      : BooleanFieldSettings(
           onOffType: onOffType ?? other.onOffType,
           onOffPosition: onOffPosition ?? other.onOffPosition,
           labelText: labelText ?? other.labelText,
@@ -31,55 +33,77 @@ class BooleanFieldTheme with _$BooleanFieldTheme {
 enum SelectFieldDisplayMode { selectChip, radios }
 
 @freezed
-class SelectStringFieldTheme with _$SelectStringFieldTheme {
-  factory SelectStringFieldTheme({
+class SelectFieldSettings<T> with _$SelectFieldSettings<T> {
+  const factory SelectFieldSettings({
     String? labelText,
-    List<String>? values,
+    @UnknownTypeListConverter<T>() List<T>? values,
     SelectFieldDisplayMode? displayMode,
-  }) = _SelectStringFieldTheme;
+  }) = _SelectFieldSettings<T>;
 
-  const SelectStringFieldTheme._();
+  const SelectFieldSettings._();
 
-  factory SelectStringFieldTheme.fromJson(Map<String, dynamic> json) =>
-      _$SelectStringFieldThemeFromJson(json);
+  factory SelectFieldSettings.fromJson(Map<String, dynamic> json) =>
+      _$SelectFieldSettingsFromJson(json);
 
-  SelectStringFieldTheme merge(SelectStringFieldTheme? other) => other == null
+  SelectFieldSettings<T> merge(SelectFieldSettings<T>? other) => other == null
       ? this
-      : SelectStringFieldTheme(
+      : SelectFieldSettings(
           values: values ?? other.values,
           labelText: labelText ?? other.labelText,
           displayMode: displayMode ?? other.displayMode,
         );
 }
 
+@freezed
+class SelectStringFieldSettings with _$SelectStringFieldSettings {
+  const factory SelectStringFieldSettings({
+    String? labelText,
+    List<String>? values,
+    SelectFieldDisplayMode? displayMode,
+  }) = _SelectStringFieldSettings;
+
+  const SelectStringFieldSettings._();
+
+  factory SelectStringFieldSettings.fromJson(Map<String, dynamic> json) =>
+      _$SelectStringFieldSettingsFromJson(json);
+
+  SelectStringFieldSettings merge(SelectStringFieldSettings? other) =>
+      other == null
+          ? this
+          : SelectStringFieldSettings(
+              values: values ?? other.values,
+              labelText: labelText ?? other.labelText,
+              displayMode: displayMode ?? other.displayMode,
+            );
+}
+
 enum StringFieldAction { clear, obscure }
 
 @freezed
-class StringFieldTheme with _$StringFieldTheme {
-  factory StringFieldTheme({
+class StringFieldSettings with _$StringFieldSettings {
+  const factory StringFieldSettings({
     String? labelText,
     StringFieldAction? action,
     bool? submitFormOnFieldSubmitted,
-    TextInputType? keyboardType,
+    @TextInputTypeConverter() TextInputType? keyboardType,
     bool? obscureText,
     bool? autocorrect,
     List<String>? autofillHints,
     bool? autofocus,
     TextInputAction? textInputAction,
     TextCapitalization? textCapitalization,
-    TextStyle? style,
     int? maxLines,
     String? hintText,
-  }) = _StringFieldTheme;
+  }) = _StringFieldSettings;
 
-  factory StringFieldTheme.email({
+  factory StringFieldSettings.email({
     String? labelText,
-    bool submitFormOnFieldSubmitted = false,
-    bool autofocus = false,
+    bool? submitFormOnFieldSubmitted,
+    bool? autofocus,
     TextInputAction? textInputAction,
     String? hintText,
   }) =>
-      StringFieldTheme(
+      StringFieldSettings(
         labelText: labelText,
         submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
         autofocus: autofocus,
@@ -91,13 +115,13 @@ class StringFieldTheme with _$StringFieldTheme {
         maxLines: 1,
       );
 
-  factory StringFieldTheme.password({
+  factory StringFieldSettings.password({
     String? labelText,
-    bool submitFormOnFieldSubmitted = false,
+    bool? submitFormOnFieldSubmitted,
     TextInputAction? textInputAction,
     String? hintText,
   }) =>
-      StringFieldTheme(
+      StringFieldSettings(
         labelText: labelText,
         submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
         textInputAction: textInputAction,
@@ -113,9 +137,14 @@ class StringFieldTheme with _$StringFieldTheme {
         maxLines: 1,
       );
 
-  StringFieldTheme merge(StringFieldTheme? other) => other == null
+  const StringFieldSettings._();
+
+  factory StringFieldSettings.fromJson(Map<String, dynamic> json) =>
+      _$StringFieldSettingsFromJson(json);
+
+  StringFieldSettings merge(StringFieldSettings? other) => other == null
       ? this
-      : StringFieldTheme(
+      : StringFieldSettings(
           action: action ?? other.action,
           submitFormOnFieldSubmitted:
               submitFormOnFieldSubmitted ?? other.submitFormOnFieldSubmitted,
@@ -126,7 +155,6 @@ class StringFieldTheme with _$StringFieldTheme {
           autofocus: autofocus ?? other.autofocus,
           textInputAction: textInputAction ?? other.textInputAction,
           textCapitalization: textCapitalization ?? other.textCapitalization,
-          style: style ?? other.style,
           maxLines: maxLines ?? other.maxLines,
           labelText: labelText ?? other.labelText,
           hintText: hintText ?? other.hintText,

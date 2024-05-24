@@ -17,8 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$WoForm {
   WoFormStatus get status => throw _privateConstructorUsedError;
-  Map<String, WoFormInput<dynamic>> get inputsMap =>
-      throw _privateConstructorUsedError;
+  Map<String, WoFormInput> get inputsMap => throw _privateConstructorUsedError;
   String? get errorCode => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -32,7 +31,7 @@ abstract class $WoFormCopyWith<$Res> {
   @useResult
   $Res call(
       {WoFormStatus status,
-      Map<String, WoFormInput<dynamic>> inputsMap,
+      Map<String, WoFormInput> inputsMap,
       String? errorCode});
 }
 
@@ -61,7 +60,7 @@ class _$WoFormCopyWithImpl<$Res, $Val extends WoForm>
       inputsMap: null == inputsMap
           ? _value.inputsMap
           : inputsMap // ignore: cast_nullable_to_non_nullable
-              as Map<String, WoFormInput<dynamic>>,
+              as Map<String, WoFormInput>,
       errorCode: freezed == errorCode
           ? _value.errorCode
           : errorCode // ignore: cast_nullable_to_non_nullable
@@ -79,7 +78,7 @@ abstract class _$$WoFormWIPImplCopyWith<$Res> implements $WoFormCopyWith<$Res> {
   @useResult
   $Res call(
       {WoFormStatus status,
-      Map<String, WoFormInput<dynamic>> inputsMap,
+      Map<String, WoFormInput> inputsMap,
       String? errorCode});
 }
 
@@ -106,7 +105,7 @@ class __$$WoFormWIPImplCopyWithImpl<$Res>
       inputsMap: null == inputsMap
           ? _value._inputsMap
           : inputsMap // ignore: cast_nullable_to_non_nullable
-              as Map<String, WoFormInput<dynamic>>,
+              as Map<String, WoFormInput>,
       errorCode: freezed == errorCode
           ? _value.errorCode
           : errorCode // ignore: cast_nullable_to_non_nullable
@@ -120,16 +119,16 @@ class __$$WoFormWIPImplCopyWithImpl<$Res>
 class _$WoFormWIPImpl extends _WoFormWIP {
   const _$WoFormWIPImpl(
       {required this.status,
-      required final Map<String, WoFormInput<dynamic>> inputsMap,
+      required final Map<String, WoFormInput> inputsMap,
       this.errorCode})
       : _inputsMap = inputsMap,
         super._();
 
   @override
   final WoFormStatus status;
-  final Map<String, WoFormInput<dynamic>> _inputsMap;
+  final Map<String, WoFormInput> _inputsMap;
   @override
-  Map<String, WoFormInput<dynamic>> get inputsMap {
+  Map<String, WoFormInput> get inputsMap {
     if (_inputsMap is EqualUnmodifiableMapView) return _inputsMap;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_inputsMap);
@@ -169,14 +168,14 @@ class _$WoFormWIPImpl extends _WoFormWIP {
 abstract class _WoFormWIP extends WoForm {
   const factory _WoFormWIP(
       {required final WoFormStatus status,
-      required final Map<String, WoFormInput<dynamic>> inputsMap,
+      required final Map<String, WoFormInput> inputsMap,
       final String? errorCode}) = _$WoFormWIPImpl;
   const _WoFormWIP._() : super._();
 
   @override
   WoFormStatus get status;
   @override
-  Map<String, WoFormInput<dynamic>> get inputsMap;
+  Map<String, WoFormInput> get inputsMap;
   @override
   String? get errorCode;
   @override

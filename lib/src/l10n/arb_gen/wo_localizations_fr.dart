@@ -269,7 +269,7 @@ class WoLocalizationsFr extends WoLocalizations {
   String get settingsAppColor => 'Couleur de l\'app';
 
   @override
-  String get settingsBoardTheme => 'Thème';
+  String get settingsBoardSettings => 'Thème';
 
   @override
   String get settingsBrightness => 'Luminosité';

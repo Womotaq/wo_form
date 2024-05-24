@@ -114,7 +114,7 @@ abstract class FormLocalizations {
   /// No description provided for @formError.
   ///
   /// In fr, this message translates to:
-  /// **'{code, select, other{Erreur inconnue.} empty{Ce champ doit être renseigné.} mailTaken{Cette adresse e-mail est déjà utilisée par un autre compte.} notEmail{Ne semble pas être une adresse e-mail.} notPassword{Trop faible. Un mot de passe doit contenir une minuscule, une majuscule, un chiffre et au moins 8 caractères.} notUsername{Minimum 3 caractères, en alphanumérique\nSymboles acceptés : _ - .\nUn seul symbole à la suite, et uniquement au milieu} invalidCredentials{Le mail et le mot de passe ne correspondent pas. Réessayez ou cliquez sur \"Mot de passe oublié ?\" pour le réinitialiser.} tooLong{Trop long} tooManyRequests{Trop de requêtes. Réessayez plus tard.} usernameTaken{Ce nom est déjà pris.}}'**
+  /// **'{code, select, other{Erreur inconnue.} empty{Ce champ doit être renseigné.} invalid{Cette valeur est incorrecte.} maxBound{Limite maximale dépassée.} minBound{Limite minimale dépassée.}}'**
   String formError(String code);
 
   /// No description provided for @keepEditing.
@@ -122,6 +122,12 @@ abstract class FormLocalizations {
   /// In fr, this message translates to:
   /// **'Continuer d\'éditer'**
   String get keepEditing;
+
+  /// No description provided for @regexPatternUnmatched.
+  ///
+  /// In fr, this message translates to:
+  /// **'{code, select, other{Regex inconnu.} email{Ne semble pas être une adresse e-mail.} password{Trop faible. Un mot de passe doit contenir une minuscule, une majuscule, un chiffre et au moins 8 caractères.} username{Minimum 3 caractères, en alphanumérique\nSymboles acceptés : _ - .\nUn seul symbole à la suite, et uniquement au milieu.}}'**
+  String regexPatternUnmatched(String code);
 
   /// No description provided for @save.
   ///

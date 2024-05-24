@@ -5,17 +5,17 @@ class SelectInput<T> extends WoFormInput<T?> {
     required super.id,
     super.value,
     this.isRequired = false,
-    this.fieldTheme,
+    this.fieldSettings,
   });
 
   final bool isRequired;
-  final SelectFieldTheme<T>? fieldTheme;
+  final SelectFieldSettings<T>? fieldSettings;
 
   SelectInput<T> copyWith({T? value}) => SelectInput(
         id: id,
         value: value ?? this.value,
         isRequired: isRequired,
-        fieldTheme: fieldTheme,
+        fieldSettings: fieldSettings,
       );
 
   @override

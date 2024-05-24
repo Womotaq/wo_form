@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'field_theme.dart';
+part of 'field_settings.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-BooleanFieldTheme _$BooleanFieldThemeFromJson(Map<String, dynamic> json) {
-  return _BooleanFieldTheme.fromJson(json);
+BooleanFieldSettings _$BooleanFieldSettingsFromJson(Map<String, dynamic> json) {
+  return _BooleanFieldSettings.fromJson(json);
 }
 
 /// @nodoc
-mixin _$BooleanFieldTheme {
+mixin _$BooleanFieldSettings {
   String? get labelText => throw _privateConstructorUsedError;
   BooleanFieldOnOffType? get onOffType => throw _privateConstructorUsedError;
   ListTileControlAffinity? get onOffPosition =>
@@ -27,15 +27,15 @@ mixin _$BooleanFieldTheme {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $BooleanFieldThemeCopyWith<BooleanFieldTheme> get copyWith =>
+  $BooleanFieldSettingsCopyWith<BooleanFieldSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $BooleanFieldThemeCopyWith<$Res> {
-  factory $BooleanFieldThemeCopyWith(
-          BooleanFieldTheme value, $Res Function(BooleanFieldTheme) then) =
-      _$BooleanFieldThemeCopyWithImpl<$Res, BooleanFieldTheme>;
+abstract class $BooleanFieldSettingsCopyWith<$Res> {
+  factory $BooleanFieldSettingsCopyWith(BooleanFieldSettings value,
+          $Res Function(BooleanFieldSettings) then) =
+      _$BooleanFieldSettingsCopyWithImpl<$Res, BooleanFieldSettings>;
   @useResult
   $Res call(
       {String? labelText,
@@ -44,9 +44,10 @@ abstract class $BooleanFieldThemeCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$BooleanFieldThemeCopyWithImpl<$Res, $Val extends BooleanFieldTheme>
-    implements $BooleanFieldThemeCopyWith<$Res> {
-  _$BooleanFieldThemeCopyWithImpl(this._value, this._then);
+class _$BooleanFieldSettingsCopyWithImpl<$Res,
+        $Val extends BooleanFieldSettings>
+    implements $BooleanFieldSettingsCopyWith<$Res> {
+  _$BooleanFieldSettingsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -78,11 +79,11 @@ class _$BooleanFieldThemeCopyWithImpl<$Res, $Val extends BooleanFieldTheme>
 }
 
 /// @nodoc
-abstract class _$$BooleanFieldThemeImplCopyWith<$Res>
-    implements $BooleanFieldThemeCopyWith<$Res> {
-  factory _$$BooleanFieldThemeImplCopyWith(_$BooleanFieldThemeImpl value,
-          $Res Function(_$BooleanFieldThemeImpl) then) =
-      __$$BooleanFieldThemeImplCopyWithImpl<$Res>;
+abstract class _$$BooleanFieldSettingsImplCopyWith<$Res>
+    implements $BooleanFieldSettingsCopyWith<$Res> {
+  factory _$$BooleanFieldSettingsImplCopyWith(_$BooleanFieldSettingsImpl value,
+          $Res Function(_$BooleanFieldSettingsImpl) then) =
+      __$$BooleanFieldSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -92,11 +93,11 @@ abstract class _$$BooleanFieldThemeImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$BooleanFieldThemeImplCopyWithImpl<$Res>
-    extends _$BooleanFieldThemeCopyWithImpl<$Res, _$BooleanFieldThemeImpl>
-    implements _$$BooleanFieldThemeImplCopyWith<$Res> {
-  __$$BooleanFieldThemeImplCopyWithImpl(_$BooleanFieldThemeImpl _value,
-      $Res Function(_$BooleanFieldThemeImpl) _then)
+class __$$BooleanFieldSettingsImplCopyWithImpl<$Res>
+    extends _$BooleanFieldSettingsCopyWithImpl<$Res, _$BooleanFieldSettingsImpl>
+    implements _$$BooleanFieldSettingsImplCopyWith<$Res> {
+  __$$BooleanFieldSettingsImplCopyWithImpl(_$BooleanFieldSettingsImpl _value,
+      $Res Function(_$BooleanFieldSettingsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -106,7 +107,7 @@ class __$$BooleanFieldThemeImplCopyWithImpl<$Res>
     Object? onOffType = freezed,
     Object? onOffPosition = freezed,
   }) {
-    return _then(_$BooleanFieldThemeImpl(
+    return _then(_$BooleanFieldSettingsImpl(
       labelText: freezed == labelText
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
@@ -125,12 +126,13 @@ class __$$BooleanFieldThemeImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$BooleanFieldThemeImpl extends _BooleanFieldTheme {
-  _$BooleanFieldThemeImpl({this.labelText, this.onOffType, this.onOffPosition})
+class _$BooleanFieldSettingsImpl extends _BooleanFieldSettings {
+  const _$BooleanFieldSettingsImpl(
+      {this.labelText, this.onOffType, this.onOffPosition})
       : super._();
 
-  factory _$BooleanFieldThemeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$BooleanFieldThemeImplFromJson(json);
+  factory _$BooleanFieldSettingsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BooleanFieldSettingsImplFromJson(json);
 
   @override
   final String? labelText;
@@ -141,14 +143,14 @@ class _$BooleanFieldThemeImpl extends _BooleanFieldTheme {
 
   @override
   String toString() {
-    return 'BooleanFieldTheme(labelText: $labelText, onOffType: $onOffType, onOffPosition: $onOffPosition)';
+    return 'BooleanFieldSettings(labelText: $labelText, onOffType: $onOffType, onOffPosition: $onOffPosition)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BooleanFieldThemeImpl &&
+            other is _$BooleanFieldSettingsImpl &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
             (identical(other.onOffType, onOffType) ||
@@ -165,27 +167,29 @@ class _$BooleanFieldThemeImpl extends _BooleanFieldTheme {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$BooleanFieldThemeImplCopyWith<_$BooleanFieldThemeImpl> get copyWith =>
-      __$$BooleanFieldThemeImplCopyWithImpl<_$BooleanFieldThemeImpl>(
-          this, _$identity);
+  _$$BooleanFieldSettingsImplCopyWith<_$BooleanFieldSettingsImpl>
+      get copyWith =>
+          __$$BooleanFieldSettingsImplCopyWithImpl<_$BooleanFieldSettingsImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$BooleanFieldThemeImplToJson(
+    return _$$BooleanFieldSettingsImplToJson(
       this,
     );
   }
 }
 
-abstract class _BooleanFieldTheme extends BooleanFieldTheme {
-  factory _BooleanFieldTheme(
-      {final String? labelText,
-      final BooleanFieldOnOffType? onOffType,
-      final ListTileControlAffinity? onOffPosition}) = _$BooleanFieldThemeImpl;
-  _BooleanFieldTheme._() : super._();
+abstract class _BooleanFieldSettings extends BooleanFieldSettings {
+  const factory _BooleanFieldSettings(
+          {final String? labelText,
+          final BooleanFieldOnOffType? onOffType,
+          final ListTileControlAffinity? onOffPosition}) =
+      _$BooleanFieldSettingsImpl;
+  const _BooleanFieldSettings._() : super._();
 
-  factory _BooleanFieldTheme.fromJson(Map<String, dynamic> json) =
-      _$BooleanFieldThemeImpl.fromJson;
+  factory _BooleanFieldSettings.fromJson(Map<String, dynamic> json) =
+      _$BooleanFieldSettingsImpl.fromJson;
 
   @override
   String? get labelText;
@@ -195,32 +199,234 @@ abstract class _BooleanFieldTheme extends BooleanFieldTheme {
   ListTileControlAffinity? get onOffPosition;
   @override
   @JsonKey(ignore: true)
-  _$$BooleanFieldThemeImplCopyWith<_$BooleanFieldThemeImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$BooleanFieldSettingsImplCopyWith<_$BooleanFieldSettingsImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
-SelectStringFieldTheme _$SelectStringFieldThemeFromJson(
+SelectFieldSettings<T> _$SelectFieldSettingsFromJson<T>(
     Map<String, dynamic> json) {
-  return _SelectStringFieldTheme.fromJson(json);
+  return _SelectFieldSettings<T>.fromJson(json);
 }
 
 /// @nodoc
-mixin _$SelectStringFieldTheme {
+mixin _$SelectFieldSettings<T> {
+  String? get labelText => throw _privateConstructorUsedError;
+  @UnknownTypeListConverter<T>()
+  List<T>? get values => throw _privateConstructorUsedError;
+  SelectFieldDisplayMode? get displayMode => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $SelectFieldSettingsCopyWith<T, SelectFieldSettings<T>> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SelectFieldSettingsCopyWith<T, $Res> {
+  factory $SelectFieldSettingsCopyWith(SelectFieldSettings<T> value,
+          $Res Function(SelectFieldSettings<T>) then) =
+      _$SelectFieldSettingsCopyWithImpl<T, $Res, SelectFieldSettings<T>>;
+  @useResult
+  $Res call(
+      {String? labelText,
+      @UnknownTypeListConverter<T>() List<T>? values,
+      SelectFieldDisplayMode? displayMode});
+}
+
+/// @nodoc
+class _$SelectFieldSettingsCopyWithImpl<T, $Res,
+        $Val extends SelectFieldSettings<T>>
+    implements $SelectFieldSettingsCopyWith<T, $Res> {
+  _$SelectFieldSettingsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? labelText = freezed,
+    Object? values = freezed,
+    Object? displayMode = freezed,
+  }) {
+    return _then(_value.copyWith(
+      labelText: freezed == labelText
+          ? _value.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      values: freezed == values
+          ? _value.values
+          : values // ignore: cast_nullable_to_non_nullable
+              as List<T>?,
+      displayMode: freezed == displayMode
+          ? _value.displayMode
+          : displayMode // ignore: cast_nullable_to_non_nullable
+              as SelectFieldDisplayMode?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$SelectFieldSettingsImplCopyWith<T, $Res>
+    implements $SelectFieldSettingsCopyWith<T, $Res> {
+  factory _$$SelectFieldSettingsImplCopyWith(_$SelectFieldSettingsImpl<T> value,
+          $Res Function(_$SelectFieldSettingsImpl<T>) then) =
+      __$$SelectFieldSettingsImplCopyWithImpl<T, $Res>;
+  @override
+  @useResult
+  $Res call(
+      {String? labelText,
+      @UnknownTypeListConverter<T>() List<T>? values,
+      SelectFieldDisplayMode? displayMode});
+}
+
+/// @nodoc
+class __$$SelectFieldSettingsImplCopyWithImpl<T, $Res>
+    extends _$SelectFieldSettingsCopyWithImpl<T, $Res,
+        _$SelectFieldSettingsImpl<T>>
+    implements _$$SelectFieldSettingsImplCopyWith<T, $Res> {
+  __$$SelectFieldSettingsImplCopyWithImpl(_$SelectFieldSettingsImpl<T> _value,
+      $Res Function(_$SelectFieldSettingsImpl<T>) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? labelText = freezed,
+    Object? values = freezed,
+    Object? displayMode = freezed,
+  }) {
+    return _then(_$SelectFieldSettingsImpl<T>(
+      labelText: freezed == labelText
+          ? _value.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      values: freezed == values
+          ? _value._values
+          : values // ignore: cast_nullable_to_non_nullable
+              as List<T>?,
+      displayMode: freezed == displayMode
+          ? _value.displayMode
+          : displayMode // ignore: cast_nullable_to_non_nullable
+              as SelectFieldDisplayMode?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$SelectFieldSettingsImpl<T> extends _SelectFieldSettings<T> {
+  const _$SelectFieldSettingsImpl(
+      {this.labelText,
+      @UnknownTypeListConverter<T>() final List<T>? values,
+      this.displayMode})
+      : _values = values,
+        super._();
+
+  factory _$SelectFieldSettingsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SelectFieldSettingsImplFromJson(json);
+
+  @override
+  final String? labelText;
+  final List<T>? _values;
+  @override
+  @UnknownTypeListConverter<T>()
+  List<T>? get values {
+    final value = _values;
+    if (value == null) return null;
+    if (_values is EqualUnmodifiableListView) return _values;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final SelectFieldDisplayMode? displayMode;
+
+  @override
+  String toString() {
+    return 'SelectFieldSettings<$T>(labelText: $labelText, values: $values, displayMode: $displayMode)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SelectFieldSettingsImpl<T> &&
+            (identical(other.labelText, labelText) ||
+                other.labelText == labelText) &&
+            const DeepCollectionEquality().equals(other._values, _values) &&
+            (identical(other.displayMode, displayMode) ||
+                other.displayMode == displayMode));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, labelText,
+      const DeepCollectionEquality().hash(_values), displayMode);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SelectFieldSettingsImplCopyWith<T, _$SelectFieldSettingsImpl<T>>
+      get copyWith => __$$SelectFieldSettingsImplCopyWithImpl<T,
+          _$SelectFieldSettingsImpl<T>>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$SelectFieldSettingsImplToJson<T>(
+      this,
+    );
+  }
+}
+
+abstract class _SelectFieldSettings<T> extends SelectFieldSettings<T> {
+  const factory _SelectFieldSettings(
+          {final String? labelText,
+          @UnknownTypeListConverter<T>() final List<T>? values,
+          final SelectFieldDisplayMode? displayMode}) =
+      _$SelectFieldSettingsImpl<T>;
+  const _SelectFieldSettings._() : super._();
+
+  factory _SelectFieldSettings.fromJson(Map<String, dynamic> json) =
+      _$SelectFieldSettingsImpl<T>.fromJson;
+
+  @override
+  String? get labelText;
+  @override
+  @UnknownTypeListConverter<T>()
+  List<T>? get values;
+  @override
+  SelectFieldDisplayMode? get displayMode;
+  @override
+  @JsonKey(ignore: true)
+  _$$SelectFieldSettingsImplCopyWith<T, _$SelectFieldSettingsImpl<T>>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+SelectStringFieldSettings _$SelectStringFieldSettingsFromJson(
+    Map<String, dynamic> json) {
+  return _SelectStringFieldSettings.fromJson(json);
+}
+
+/// @nodoc
+mixin _$SelectStringFieldSettings {
   String? get labelText => throw _privateConstructorUsedError;
   List<String>? get values => throw _privateConstructorUsedError;
   SelectFieldDisplayMode? get displayMode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $SelectStringFieldThemeCopyWith<SelectStringFieldTheme> get copyWith =>
+  $SelectStringFieldSettingsCopyWith<SelectStringFieldSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SelectStringFieldThemeCopyWith<$Res> {
-  factory $SelectStringFieldThemeCopyWith(SelectStringFieldTheme value,
-          $Res Function(SelectStringFieldTheme) then) =
-      _$SelectStringFieldThemeCopyWithImpl<$Res, SelectStringFieldTheme>;
+abstract class $SelectStringFieldSettingsCopyWith<$Res> {
+  factory $SelectStringFieldSettingsCopyWith(SelectStringFieldSettings value,
+          $Res Function(SelectStringFieldSettings) then) =
+      _$SelectStringFieldSettingsCopyWithImpl<$Res, SelectStringFieldSettings>;
   @useResult
   $Res call(
       {String? labelText,
@@ -229,10 +435,10 @@ abstract class $SelectStringFieldThemeCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SelectStringFieldThemeCopyWithImpl<$Res,
-        $Val extends SelectStringFieldTheme>
-    implements $SelectStringFieldThemeCopyWith<$Res> {
-  _$SelectStringFieldThemeCopyWithImpl(this._value, this._then);
+class _$SelectStringFieldSettingsCopyWithImpl<$Res,
+        $Val extends SelectStringFieldSettings>
+    implements $SelectStringFieldSettingsCopyWith<$Res> {
+  _$SelectStringFieldSettingsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -264,12 +470,12 @@ class _$SelectStringFieldThemeCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$SelectStringFieldThemeImplCopyWith<$Res>
-    implements $SelectStringFieldThemeCopyWith<$Res> {
-  factory _$$SelectStringFieldThemeImplCopyWith(
-          _$SelectStringFieldThemeImpl value,
-          $Res Function(_$SelectStringFieldThemeImpl) then) =
-      __$$SelectStringFieldThemeImplCopyWithImpl<$Res>;
+abstract class _$$SelectStringFieldSettingsImplCopyWith<$Res>
+    implements $SelectStringFieldSettingsCopyWith<$Res> {
+  factory _$$SelectStringFieldSettingsImplCopyWith(
+          _$SelectStringFieldSettingsImpl value,
+          $Res Function(_$SelectStringFieldSettingsImpl) then) =
+      __$$SelectStringFieldSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -279,13 +485,13 @@ abstract class _$$SelectStringFieldThemeImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$SelectStringFieldThemeImplCopyWithImpl<$Res>
-    extends _$SelectStringFieldThemeCopyWithImpl<$Res,
-        _$SelectStringFieldThemeImpl>
-    implements _$$SelectStringFieldThemeImplCopyWith<$Res> {
-  __$$SelectStringFieldThemeImplCopyWithImpl(
-      _$SelectStringFieldThemeImpl _value,
-      $Res Function(_$SelectStringFieldThemeImpl) _then)
+class __$$SelectStringFieldSettingsImplCopyWithImpl<$Res>
+    extends _$SelectStringFieldSettingsCopyWithImpl<$Res,
+        _$SelectStringFieldSettingsImpl>
+    implements _$$SelectStringFieldSettingsImplCopyWith<$Res> {
+  __$$SelectStringFieldSettingsImplCopyWithImpl(
+      _$SelectStringFieldSettingsImpl _value,
+      $Res Function(_$SelectStringFieldSettingsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -295,7 +501,7 @@ class __$$SelectStringFieldThemeImplCopyWithImpl<$Res>
     Object? values = freezed,
     Object? displayMode = freezed,
   }) {
-    return _then(_$SelectStringFieldThemeImpl(
+    return _then(_$SelectStringFieldSettingsImpl(
       labelText: freezed == labelText
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
@@ -314,14 +520,14 @@ class __$$SelectStringFieldThemeImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$SelectStringFieldThemeImpl extends _SelectStringFieldTheme {
-  _$SelectStringFieldThemeImpl(
+class _$SelectStringFieldSettingsImpl extends _SelectStringFieldSettings {
+  const _$SelectStringFieldSettingsImpl(
       {this.labelText, final List<String>? values, this.displayMode})
       : _values = values,
         super._();
 
-  factory _$SelectStringFieldThemeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SelectStringFieldThemeImplFromJson(json);
+  factory _$SelectStringFieldSettingsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SelectStringFieldSettingsImplFromJson(json);
 
   @override
   final String? labelText;
@@ -340,14 +546,14 @@ class _$SelectStringFieldThemeImpl extends _SelectStringFieldTheme {
 
   @override
   String toString() {
-    return 'SelectStringFieldTheme(labelText: $labelText, values: $values, displayMode: $displayMode)';
+    return 'SelectStringFieldSettings(labelText: $labelText, values: $values, displayMode: $displayMode)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SelectStringFieldThemeImpl &&
+            other is _$SelectStringFieldSettingsImpl &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
             const DeepCollectionEquality().equals(other._values, _values) &&
@@ -363,28 +569,28 @@ class _$SelectStringFieldThemeImpl extends _SelectStringFieldTheme {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SelectStringFieldThemeImplCopyWith<_$SelectStringFieldThemeImpl>
-      get copyWith => __$$SelectStringFieldThemeImplCopyWithImpl<
-          _$SelectStringFieldThemeImpl>(this, _$identity);
+  _$$SelectStringFieldSettingsImplCopyWith<_$SelectStringFieldSettingsImpl>
+      get copyWith => __$$SelectStringFieldSettingsImplCopyWithImpl<
+          _$SelectStringFieldSettingsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SelectStringFieldThemeImplToJson(
+    return _$$SelectStringFieldSettingsImplToJson(
       this,
     );
   }
 }
 
-abstract class _SelectStringFieldTheme extends SelectStringFieldTheme {
-  factory _SelectStringFieldTheme(
+abstract class _SelectStringFieldSettings extends SelectStringFieldSettings {
+  const factory _SelectStringFieldSettings(
           {final String? labelText,
           final List<String>? values,
           final SelectFieldDisplayMode? displayMode}) =
-      _$SelectStringFieldThemeImpl;
-  _SelectStringFieldTheme._() : super._();
+      _$SelectStringFieldSettingsImpl;
+  const _SelectStringFieldSettings._() : super._();
 
-  factory _SelectStringFieldTheme.fromJson(Map<String, dynamic> json) =
-      _$SelectStringFieldThemeImpl.fromJson;
+  factory _SelectStringFieldSettings.fromJson(Map<String, dynamic> json) =
+      _$SelectStringFieldSettingsImpl.fromJson;
 
   @override
   String? get labelText;
@@ -394,15 +600,20 @@ abstract class _SelectStringFieldTheme extends SelectStringFieldTheme {
   SelectFieldDisplayMode? get displayMode;
   @override
   @JsonKey(ignore: true)
-  _$$SelectStringFieldThemeImplCopyWith<_$SelectStringFieldThemeImpl>
+  _$$SelectStringFieldSettingsImplCopyWith<_$SelectStringFieldSettingsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
+StringFieldSettings _$StringFieldSettingsFromJson(Map<String, dynamic> json) {
+  return _StringFieldSettings.fromJson(json);
+}
+
 /// @nodoc
-mixin _$StringFieldTheme {
+mixin _$StringFieldSettings {
   String? get labelText => throw _privateConstructorUsedError;
   StringFieldAction? get action => throw _privateConstructorUsedError;
   bool? get submitFormOnFieldSubmitted => throw _privateConstructorUsedError;
+  @TextInputTypeConverter()
   TextInputType? get keyboardType => throw _privateConstructorUsedError;
   bool? get obscureText => throw _privateConstructorUsedError;
   bool? get autocorrect => throw _privateConstructorUsedError;
@@ -411,41 +622,40 @@ mixin _$StringFieldTheme {
   TextInputAction? get textInputAction => throw _privateConstructorUsedError;
   TextCapitalization? get textCapitalization =>
       throw _privateConstructorUsedError;
-  TextStyle? get style => throw _privateConstructorUsedError;
   int? get maxLines => throw _privateConstructorUsedError;
   String? get hintText => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $StringFieldThemeCopyWith<StringFieldTheme> get copyWith =>
+  $StringFieldSettingsCopyWith<StringFieldSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $StringFieldThemeCopyWith<$Res> {
-  factory $StringFieldThemeCopyWith(
-          StringFieldTheme value, $Res Function(StringFieldTheme) then) =
-      _$StringFieldThemeCopyWithImpl<$Res, StringFieldTheme>;
+abstract class $StringFieldSettingsCopyWith<$Res> {
+  factory $StringFieldSettingsCopyWith(
+          StringFieldSettings value, $Res Function(StringFieldSettings) then) =
+      _$StringFieldSettingsCopyWithImpl<$Res, StringFieldSettings>;
   @useResult
   $Res call(
       {String? labelText,
       StringFieldAction? action,
       bool? submitFormOnFieldSubmitted,
-      TextInputType? keyboardType,
+      @TextInputTypeConverter() TextInputType? keyboardType,
       bool? obscureText,
       bool? autocorrect,
       List<String>? autofillHints,
       bool? autofocus,
       TextInputAction? textInputAction,
       TextCapitalization? textCapitalization,
-      TextStyle? style,
       int? maxLines,
       String? hintText});
 }
 
 /// @nodoc
-class _$StringFieldThemeCopyWithImpl<$Res, $Val extends StringFieldTheme>
-    implements $StringFieldThemeCopyWith<$Res> {
-  _$StringFieldThemeCopyWithImpl(this._value, this._then);
+class _$StringFieldSettingsCopyWithImpl<$Res, $Val extends StringFieldSettings>
+    implements $StringFieldSettingsCopyWith<$Res> {
+  _$StringFieldSettingsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -465,7 +675,6 @@ class _$StringFieldThemeCopyWithImpl<$Res, $Val extends StringFieldTheme>
     Object? autofocus = freezed,
     Object? textInputAction = freezed,
     Object? textCapitalization = freezed,
-    Object? style = freezed,
     Object? maxLines = freezed,
     Object? hintText = freezed,
   }) {
@@ -510,10 +719,6 @@ class _$StringFieldThemeCopyWithImpl<$Res, $Val extends StringFieldTheme>
           ? _value.textCapitalization
           : textCapitalization // ignore: cast_nullable_to_non_nullable
               as TextCapitalization?,
-      style: freezed == style
-          ? _value.style
-          : style // ignore: cast_nullable_to_non_nullable
-              as TextStyle?,
       maxLines: freezed == maxLines
           ? _value.maxLines
           : maxLines // ignore: cast_nullable_to_non_nullable
@@ -527,35 +732,34 @@ class _$StringFieldThemeCopyWithImpl<$Res, $Val extends StringFieldTheme>
 }
 
 /// @nodoc
-abstract class _$$StringFieldThemeImplCopyWith<$Res>
-    implements $StringFieldThemeCopyWith<$Res> {
-  factory _$$StringFieldThemeImplCopyWith(_$StringFieldThemeImpl value,
-          $Res Function(_$StringFieldThemeImpl) then) =
-      __$$StringFieldThemeImplCopyWithImpl<$Res>;
+abstract class _$$StringFieldSettingsImplCopyWith<$Res>
+    implements $StringFieldSettingsCopyWith<$Res> {
+  factory _$$StringFieldSettingsImplCopyWith(_$StringFieldSettingsImpl value,
+          $Res Function(_$StringFieldSettingsImpl) then) =
+      __$$StringFieldSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {String? labelText,
       StringFieldAction? action,
       bool? submitFormOnFieldSubmitted,
-      TextInputType? keyboardType,
+      @TextInputTypeConverter() TextInputType? keyboardType,
       bool? obscureText,
       bool? autocorrect,
       List<String>? autofillHints,
       bool? autofocus,
       TextInputAction? textInputAction,
       TextCapitalization? textCapitalization,
-      TextStyle? style,
       int? maxLines,
       String? hintText});
 }
 
 /// @nodoc
-class __$$StringFieldThemeImplCopyWithImpl<$Res>
-    extends _$StringFieldThemeCopyWithImpl<$Res, _$StringFieldThemeImpl>
-    implements _$$StringFieldThemeImplCopyWith<$Res> {
-  __$$StringFieldThemeImplCopyWithImpl(_$StringFieldThemeImpl _value,
-      $Res Function(_$StringFieldThemeImpl) _then)
+class __$$StringFieldSettingsImplCopyWithImpl<$Res>
+    extends _$StringFieldSettingsCopyWithImpl<$Res, _$StringFieldSettingsImpl>
+    implements _$$StringFieldSettingsImplCopyWith<$Res> {
+  __$$StringFieldSettingsImplCopyWithImpl(_$StringFieldSettingsImpl _value,
+      $Res Function(_$StringFieldSettingsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -571,11 +775,10 @@ class __$$StringFieldThemeImplCopyWithImpl<$Res>
     Object? autofocus = freezed,
     Object? textInputAction = freezed,
     Object? textCapitalization = freezed,
-    Object? style = freezed,
     Object? maxLines = freezed,
     Object? hintText = freezed,
   }) {
-    return _then(_$StringFieldThemeImpl(
+    return _then(_$StringFieldSettingsImpl(
       labelText: freezed == labelText
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
@@ -616,10 +819,6 @@ class __$$StringFieldThemeImplCopyWithImpl<$Res>
           ? _value.textCapitalization
           : textCapitalization // ignore: cast_nullable_to_non_nullable
               as TextCapitalization?,
-      style: freezed == style
-          ? _value.style
-          : style // ignore: cast_nullable_to_non_nullable
-              as TextStyle?,
       maxLines: freezed == maxLines
           ? _value.maxLines
           : maxLines // ignore: cast_nullable_to_non_nullable
@@ -633,23 +832,26 @@ class __$$StringFieldThemeImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-class _$StringFieldThemeImpl implements _StringFieldTheme {
-  _$StringFieldThemeImpl(
+@JsonSerializable()
+class _$StringFieldSettingsImpl extends _StringFieldSettings {
+  const _$StringFieldSettingsImpl(
       {this.labelText,
       this.action,
       this.submitFormOnFieldSubmitted,
-      this.keyboardType,
+      @TextInputTypeConverter() this.keyboardType,
       this.obscureText,
       this.autocorrect,
       final List<String>? autofillHints,
       this.autofocus,
       this.textInputAction,
       this.textCapitalization,
-      this.style,
       this.maxLines,
       this.hintText})
-      : _autofillHints = autofillHints;
+      : _autofillHints = autofillHints,
+        super._();
+
+  factory _$StringFieldSettingsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$StringFieldSettingsImplFromJson(json);
 
   @override
   final String? labelText;
@@ -658,6 +860,7 @@ class _$StringFieldThemeImpl implements _StringFieldTheme {
   @override
   final bool? submitFormOnFieldSubmitted;
   @override
+  @TextInputTypeConverter()
   final TextInputType? keyboardType;
   @override
   final bool? obscureText;
@@ -680,22 +883,20 @@ class _$StringFieldThemeImpl implements _StringFieldTheme {
   @override
   final TextCapitalization? textCapitalization;
   @override
-  final TextStyle? style;
-  @override
   final int? maxLines;
   @override
   final String? hintText;
 
   @override
   String toString() {
-    return 'StringFieldTheme(labelText: $labelText, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, style: $style, maxLines: $maxLines, hintText: $hintText)';
+    return 'StringFieldSettings(labelText: $labelText, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, hintText: $hintText)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$StringFieldThemeImpl &&
+            other is _$StringFieldSettingsImpl &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
             (identical(other.action, action) || other.action == action) &&
@@ -717,13 +918,13 @@ class _$StringFieldThemeImpl implements _StringFieldTheme {
                 other.textInputAction == textInputAction) &&
             (identical(other.textCapitalization, textCapitalization) ||
                 other.textCapitalization == textCapitalization) &&
-            (identical(other.style, style) || other.style == style) &&
             (identical(other.maxLines, maxLines) ||
                 other.maxLines == maxLines) &&
             (identical(other.hintText, hintText) ||
                 other.hintText == hintText));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -737,33 +938,42 @@ class _$StringFieldThemeImpl implements _StringFieldTheme {
       autofocus,
       textInputAction,
       textCapitalization,
-      style,
       maxLines,
       hintText);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$StringFieldThemeImplCopyWith<_$StringFieldThemeImpl> get copyWith =>
-      __$$StringFieldThemeImplCopyWithImpl<_$StringFieldThemeImpl>(
+  _$$StringFieldSettingsImplCopyWith<_$StringFieldSettingsImpl> get copyWith =>
+      __$$StringFieldSettingsImplCopyWithImpl<_$StringFieldSettingsImpl>(
           this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$StringFieldSettingsImplToJson(
+      this,
+    );
+  }
 }
 
-abstract class _StringFieldTheme implements StringFieldTheme {
-  factory _StringFieldTheme(
+abstract class _StringFieldSettings extends StringFieldSettings {
+  const factory _StringFieldSettings(
       {final String? labelText,
       final StringFieldAction? action,
       final bool? submitFormOnFieldSubmitted,
-      final TextInputType? keyboardType,
+      @TextInputTypeConverter() final TextInputType? keyboardType,
       final bool? obscureText,
       final bool? autocorrect,
       final List<String>? autofillHints,
       final bool? autofocus,
       final TextInputAction? textInputAction,
       final TextCapitalization? textCapitalization,
-      final TextStyle? style,
       final int? maxLines,
-      final String? hintText}) = _$StringFieldThemeImpl;
+      final String? hintText}) = _$StringFieldSettingsImpl;
+  const _StringFieldSettings._() : super._();
+
+  factory _StringFieldSettings.fromJson(Map<String, dynamic> json) =
+      _$StringFieldSettingsImpl.fromJson;
 
   @override
   String? get labelText;
@@ -772,6 +982,7 @@ abstract class _StringFieldTheme implements StringFieldTheme {
   @override
   bool? get submitFormOnFieldSubmitted;
   @override
+  @TextInputTypeConverter()
   TextInputType? get keyboardType;
   @override
   bool? get obscureText;
@@ -786,13 +997,11 @@ abstract class _StringFieldTheme implements StringFieldTheme {
   @override
   TextCapitalization? get textCapitalization;
   @override
-  TextStyle? get style;
-  @override
   int? get maxLines;
   @override
   String? get hintText;
   @override
   @JsonKey(ignore: true)
-  _$$StringFieldThemeImplCopyWith<_$StringFieldThemeImpl> get copyWith =>
+  _$$StringFieldSettingsImplCopyWith<_$StringFieldSettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

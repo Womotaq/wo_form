@@ -22,14 +22,9 @@ class FormLocalizationsEn extends FormLocalizations {
       {
         'other': 'Unknown error.',
         'empty': 'This field is required.',
-        'mailTaken': 'The email address is already in use by another account.',
-        'notEmail': 'Doesn\'t appear to be an email address.',
-        'notPassword': 'Too weak. A password must contain a lowercase letter, an uppercase letter, a number and at least 8 characters.',
-        'notUsername': 'Minimum 3 characters, only alphanumeric\nSymbols accepted : _ - .\nOnly one symbol in a row, and only in the middle',
-        'invalidCredentials': 'Email and password do not match. Try again or click \"Forgot password ?\" to reset it.',
-        'tooLong': 'Too long',
-        'tooManyRequests': 'Too many requests. Try again later.',
-        'usernameTaken': 'This username is already taken',
+        'invalid': 'This value is invalid.',
+        'maxBound': 'Maximum limit exceeded.',
+        'minBound': 'Minimum limit exceeded.',
       },
     );
     return '$_temp0';
@@ -37,6 +32,20 @@ class FormLocalizationsEn extends FormLocalizations {
 
   @override
   String get keepEditing => 'Keep editing';
+
+  @override
+  String regexPatternUnmatched(String code) {
+    String _temp0 = intl.Intl.selectLogic(
+      code,
+      {
+        'other': 'Unknown regex pattern.',
+        'email': 'Doesn\'t appear to be an email address.',
+        'password': 'Too weak. A password must contain a lowercase letter, an uppercase letter, a number and at least 8 characters.',
+        'username': 'Minimum 3 characters, only alphanumeric\nSymbols accepted : _ - .\nOnly one symbol in a row, and only in the middle',
+      },
+    );
+    return '$_temp0';
+  }
 
   @override
   String get save => 'Save';

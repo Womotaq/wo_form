@@ -531,11 +531,11 @@ abstract class WoLocalizations {
   /// **'Couleur de l\'app'**
   String get settingsAppColor;
 
-  /// No description provided for @settingsBoardTheme.
+  /// No description provided for @settingsBoardSettings.
   ///
   /// In fr, this message translates to:
   /// **'Thème'**
-  String get settingsBoardTheme;
+  String get settingsBoardSettings;
 
   /// No description provided for @settingsBrightness.
   ///

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wo_form/src/model/input.dart';
 import 'package:wo_form/wo_form.dart';
 
 class BooleanField<T extends WoFormCubit> extends StatelessWidget {
@@ -10,20 +11,19 @@ class BooleanField<T extends WoFormCubit> extends StatelessWidget {
   });
 
   final BooleanInput Function(WoForm form) input;
-  final BooleanFieldTheme? theme;
+  final BooleanFieldSettings? theme;
 
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<T>();
 
-    final themeFromInput = input(cubit.state).fieldTheme;
-    final mergedTheme = (theme?.merge(themeFromInput) ?? themeFromInput) ??
-        BooleanFieldTheme();
+    final themeFromInput = input(cubit.state).fieldSettings;
+    final mergedSettings = theme?.merge(themeFromInput) ?? themeFromInput;
 
     return BlocSelector<T, WoForm, BooleanInput>(
       selector: input,
       builder: (context, input) {
-        final onOffType = switch (mergedTheme.onOffType) {
+        final onOffType = switch (mergedSettings.onOffType) {
           null || BooleanFieldOnOffType.switchButton => Switch(
               value: input.value,
               onChanged: (value) => cubit.onInputChanged(
@@ -32,16 +32,16 @@ class BooleanField<T extends WoFormCubit> extends StatelessWidget {
             ),
           BooleanFieldOnOffType.checkbox => Checkbox(
               value: input.value,
-              onChanged: (value) => cubit.onInputChanged(
-                input: input.copyWith(value: value),
-              ),
+              onChanged: (value) => value == null
+                  ? null
+                  : cubit.onInputChanged(input: input.copyWith(value: value)),
             ),
         };
-        final onOffTypeIsLeading = switch (mergedTheme.onOffPosition) {
+        final onOffTypeIsLeading = switch (mergedSettings.onOffPosition) {
           ListTileControlAffinity.leading => true,
           ListTileControlAffinity.trailing => false,
           null || ListTileControlAffinity.platform => switch (
-                mergedTheme.onOffType) {
+                mergedSettings.onOffType) {
               null || BooleanFieldOnOffType.switchButton => false,
               BooleanFieldOnOffType.checkbox => true,
             }
@@ -49,7 +49,7 @@ class BooleanField<T extends WoFormCubit> extends StatelessWidget {
 
         return ListTile(
           leading: onOffTypeIsLeading ? onOffType : null,
-          title: Text(mergedTheme.labelText ?? ''),
+          title: Text(mergedSettings.labelText ?? ''),
           trailing: onOffTypeIsLeading ? null : onOffType,
           onTap: () => cubit.onInputChanged(
             input: input.copyWith(value: !input.value),
