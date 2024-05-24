@@ -3,17 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/wo_form.dart';
 
-enum _SelectFieldDisplayMode { selectChip, radios }
-
 @immutable
 class SelectFieldTheme<T> {
   const SelectFieldTheme({
     this.values,
     this.labelText,
+    this.displayMode,
   });
 
   final Iterable<T>? values;
   final String? labelText;
+  final SelectFieldDisplayMode? displayMode;
 
   SelectFieldTheme<T> merge(SelectFieldTheme<T>? other) => other == null
       ? this
@@ -24,27 +24,18 @@ class SelectFieldTheme<T> {
 }
 
 class SelectField<T extends WoFormCubit, S> extends StatelessWidget {
-  const SelectField.radios({
+  const SelectField({
     required this.input,
     this.valueBuilder,
     this.previewBuilder,
     this.theme,
     super.key,
-  }) : _displayMode = _SelectFieldDisplayMode.radios;
-
-  const SelectField.selectChip({
-    required this.input,
-    this.valueBuilder,
-    this.previewBuilder,
-    this.theme,
-    super.key,
-  }) : _displayMode = _SelectFieldDisplayMode.selectChip;
+  });
 
   final SelectInput<S> Function(WoForm form) input;
   final Widget Function(S?)? valueBuilder;
   final Widget Function(S?)? previewBuilder;
   final SelectFieldTheme<S>? theme;
-  final _SelectFieldDisplayMode _displayMode;
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +47,8 @@ class SelectField<T extends WoFormCubit, S> extends StatelessWidget {
 
     return BlocSelector<T, WoForm, SelectInput<S?>>(
       selector: input,
-      builder: (context, input) => switch (_displayMode) {
-        _SelectFieldDisplayMode.radios => Column(
+      builder: (context, input) => switch (theme?.displayMode) {
+        null || SelectFieldDisplayMode.radios => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (mergedTheme.labelText != null)
@@ -88,7 +79,7 @@ class SelectField<T extends WoFormCubit, S> extends StatelessWidget {
                   [],
             ],
           ),
-        _SelectFieldDisplayMode.selectChip => ListTile(
+        SelectFieldDisplayMode.selectChip => ListTile(
             title: Text(mergedTheme.labelText ?? ''),
             trailing: SelectChip<S>.uniqueChoice(
               values: mergedTheme.values ?? <S>[],
@@ -105,4 +96,14 @@ class SelectField<T extends WoFormCubit, S> extends StatelessWidget {
       },
     );
   }
+}
+
+class SelectStringField<T extends WoFormCubit> extends SelectField<T, String> {
+  const SelectStringField({
+    required super.input,
+    super.valueBuilder,
+    super.previewBuilder,
+    super.theme,
+    super.key,
+  });
 }

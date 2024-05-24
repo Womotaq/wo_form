@@ -2,29 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/wo_form.dart';
 
-enum BooleanFieldOnOffType { checkbox, switchButton }
-
-@immutable
-class BooleanFieldTheme {
-  const BooleanFieldTheme({
-    this.onOffType,
-    this.onOffPosition,
-    this.labelText,
-  });
-
-  final BooleanFieldOnOffType? onOffType;
-  final ListTileControlAffinity? onOffPosition;
-  final String? labelText;
-
-  BooleanFieldTheme merge(BooleanFieldTheme? other) => other == null
-      ? this
-      : BooleanFieldTheme(
-          onOffType: onOffType ?? other.onOffType,
-          onOffPosition: onOffPosition ?? other.onOffPosition,
-          labelText: labelText ?? other.labelText,
-        );
-}
-
 class BooleanField<T extends WoFormCubit> extends StatelessWidget {
   const BooleanField({
     required this.input,
@@ -41,7 +18,7 @@ class BooleanField<T extends WoFormCubit> extends StatelessWidget {
 
     final themeFromInput = input(cubit.state).fieldTheme;
     final mergedTheme = (theme?.merge(themeFromInput) ?? themeFromInput) ??
-        const BooleanFieldTheme();
+        BooleanFieldTheme();
 
     return BlocSelector<T, WoForm, BooleanInput>(
       selector: input,
