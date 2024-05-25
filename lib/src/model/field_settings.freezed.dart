@@ -210,9 +210,14 @@ SelectFieldSettings<T> _$SelectFieldSettingsFromJson<T>(
 
 /// @nodoc
 mixin _$SelectFieldSettings<T> {
-  String? get labelText => throw _privateConstructorUsedError;
-  @UnknownTypeListConverter<T>()
-  List<T>? get values => throw _privateConstructorUsedError;
+  String? get labelText =>
+      throw _privateConstructorUsedError; // @UnknownTypeListConverter<T>() List<T>? values,
+  @UnknownTypeConverter<T>()
+  @protected
+  T? get value1 => throw _privateConstructorUsedError;
+  @UnknownTypeConverter<T>()
+  @protected
+  T? get value2 => throw _privateConstructorUsedError;
   SelectFieldDisplayMode? get displayMode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -229,7 +234,8 @@ abstract class $SelectFieldSettingsCopyWith<T, $Res> {
   @useResult
   $Res call(
       {String? labelText,
-      @UnknownTypeListConverter<T>() List<T>? values,
+      @UnknownTypeConverter<T>() @protected T? value1,
+      @UnknownTypeConverter<T>() @protected T? value2,
       SelectFieldDisplayMode? displayMode});
 }
 
@@ -248,7 +254,8 @@ class _$SelectFieldSettingsCopyWithImpl<T, $Res,
   @override
   $Res call({
     Object? labelText = freezed,
-    Object? values = freezed,
+    Object? value1 = freezed,
+    Object? value2 = freezed,
     Object? displayMode = freezed,
   }) {
     return _then(_value.copyWith(
@@ -256,10 +263,14 @@ class _$SelectFieldSettingsCopyWithImpl<T, $Res,
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
               as String?,
-      values: freezed == values
-          ? _value.values
-          : values // ignore: cast_nullable_to_non_nullable
-              as List<T>?,
+      value1: freezed == value1
+          ? _value.value1
+          : value1 // ignore: cast_nullable_to_non_nullable
+              as T?,
+      value2: freezed == value2
+          ? _value.value2
+          : value2 // ignore: cast_nullable_to_non_nullable
+              as T?,
       displayMode: freezed == displayMode
           ? _value.displayMode
           : displayMode // ignore: cast_nullable_to_non_nullable
@@ -278,7 +289,8 @@ abstract class _$$SelectFieldSettingsImplCopyWith<T, $Res>
   @useResult
   $Res call(
       {String? labelText,
-      @UnknownTypeListConverter<T>() List<T>? values,
+      @UnknownTypeConverter<T>() @protected T? value1,
+      @UnknownTypeConverter<T>() @protected T? value2,
       SelectFieldDisplayMode? displayMode});
 }
 
@@ -295,7 +307,8 @@ class __$$SelectFieldSettingsImplCopyWithImpl<T, $Res>
   @override
   $Res call({
     Object? labelText = freezed,
-    Object? values = freezed,
+    Object? value1 = freezed,
+    Object? value2 = freezed,
     Object? displayMode = freezed,
   }) {
     return _then(_$SelectFieldSettingsImpl<T>(
@@ -303,10 +316,14 @@ class __$$SelectFieldSettingsImplCopyWithImpl<T, $Res>
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
               as String?,
-      values: freezed == values
-          ? _value._values
-          : values // ignore: cast_nullable_to_non_nullable
-              as List<T>?,
+      value1: freezed == value1
+          ? _value.value1
+          : value1 // ignore: cast_nullable_to_non_nullable
+              as T?,
+      value2: freezed == value2
+          ? _value.value2
+          : value2 // ignore: cast_nullable_to_non_nullable
+              as T?,
       displayMode: freezed == displayMode
           ? _value.displayMode
           : displayMode // ignore: cast_nullable_to_non_nullable
@@ -320,33 +337,31 @@ class __$$SelectFieldSettingsImplCopyWithImpl<T, $Res>
 class _$SelectFieldSettingsImpl<T> extends _SelectFieldSettings<T> {
   const _$SelectFieldSettingsImpl(
       {this.labelText,
-      @UnknownTypeListConverter<T>() final List<T>? values,
+      @UnknownTypeConverter<T>() @protected this.value1,
+      @UnknownTypeConverter<T>() @protected this.value2,
       this.displayMode})
-      : _values = values,
-        super._();
+      : super._();
 
   factory _$SelectFieldSettingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$SelectFieldSettingsImplFromJson(json);
 
   @override
   final String? labelText;
-  final List<T>? _values;
+// @UnknownTypeListConverter<T>() List<T>? values,
   @override
-  @UnknownTypeListConverter<T>()
-  List<T>? get values {
-    final value = _values;
-    if (value == null) return null;
-    if (_values is EqualUnmodifiableListView) return _values;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
+  @UnknownTypeConverter<T>()
+  @protected
+  final T? value1;
+  @override
+  @UnknownTypeConverter<T>()
+  @protected
+  final T? value2;
   @override
   final SelectFieldDisplayMode? displayMode;
 
   @override
   String toString() {
-    return 'SelectFieldSettings<$T>(labelText: $labelText, values: $values, displayMode: $displayMode)';
+    return 'SelectFieldSettings<$T>(labelText: $labelText, value1: $value1, value2: $value2, displayMode: $displayMode)';
   }
 
   @override
@@ -356,15 +371,20 @@ class _$SelectFieldSettingsImpl<T> extends _SelectFieldSettings<T> {
             other is _$SelectFieldSettingsImpl<T> &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
-            const DeepCollectionEquality().equals(other._values, _values) &&
+            const DeepCollectionEquality().equals(other.value1, value1) &&
+            const DeepCollectionEquality().equals(other.value2, value2) &&
             (identical(other.displayMode, displayMode) ||
                 other.displayMode == displayMode));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, labelText,
-      const DeepCollectionEquality().hash(_values), displayMode);
+  int get hashCode => Object.hash(
+      runtimeType,
+      labelText,
+      const DeepCollectionEquality().hash(value1),
+      const DeepCollectionEquality().hash(value2),
+      displayMode);
 
   @JsonKey(ignore: true)
   @override
@@ -384,7 +404,8 @@ class _$SelectFieldSettingsImpl<T> extends _SelectFieldSettings<T> {
 abstract class _SelectFieldSettings<T> extends SelectFieldSettings<T> {
   const factory _SelectFieldSettings(
           {final String? labelText,
-          @UnknownTypeListConverter<T>() final List<T>? values,
+          @UnknownTypeConverter<T>() @protected final T? value1,
+          @UnknownTypeConverter<T>() @protected final T? value2,
           final SelectFieldDisplayMode? displayMode}) =
       _$SelectFieldSettingsImpl<T>;
   const _SelectFieldSettings._() : super._();
@@ -394,9 +415,14 @@ abstract class _SelectFieldSettings<T> extends SelectFieldSettings<T> {
 
   @override
   String? get labelText;
+  @override // @UnknownTypeListConverter<T>() List<T>? values,
+  @UnknownTypeConverter<T>()
+  @protected
+  T? get value1;
   @override
-  @UnknownTypeListConverter<T>()
-  List<T>? get values;
+  @UnknownTypeConverter<T>()
+  @protected
+  T? get value2;
   @override
   SelectFieldDisplayMode? get displayMode;
   @override

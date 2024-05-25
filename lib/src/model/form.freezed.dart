@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'wo_form.dart';
+part of 'form.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,19 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+WoForm _$WoFormFromJson(Map<String, dynamic> json) {
+  return _WoForm.fromJson(json);
+}
+
 /// @nodoc
 mixin _$WoForm {
-  WoFormStatus get status => throw _privateConstructorUsedError;
-  Map<String, WoFormInput> get inputsMap => throw _privateConstructorUsedError;
+  @InputsMapConverter()
+  Map<String, WoFormInput<dynamic>> get inputsMap =>
+      throw _privateConstructorUsedError;
+  WoFormStatus? get status => throw _privateConstructorUsedError;
   String? get errorCode => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $WoFormCopyWith<WoForm> get copyWith => throw _privateConstructorUsedError;
 }
@@ -30,8 +37,8 @@ abstract class $WoFormCopyWith<$Res> {
       _$WoFormCopyWithImpl<$Res, WoForm>;
   @useResult
   $Res call(
-      {WoFormStatus status,
-      Map<String, WoFormInput> inputsMap,
+      {@InputsMapConverter() Map<String, WoFormInput<dynamic>> inputsMap,
+      WoFormStatus? status,
       String? errorCode});
 }
 
@@ -48,19 +55,19 @@ class _$WoFormCopyWithImpl<$Res, $Val extends WoForm>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? status = null,
     Object? inputsMap = null,
+    Object? status = freezed,
     Object? errorCode = freezed,
   }) {
     return _then(_value.copyWith(
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as WoFormStatus,
       inputsMap: null == inputsMap
           ? _value.inputsMap
           : inputsMap // ignore: cast_nullable_to_non_nullable
-              as Map<String, WoFormInput>,
+              as Map<String, WoFormInput<dynamic>>,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as WoFormStatus?,
       errorCode: freezed == errorCode
           ? _value.errorCode
           : errorCode // ignore: cast_nullable_to_non_nullable
@@ -70,42 +77,42 @@ class _$WoFormCopyWithImpl<$Res, $Val extends WoForm>
 }
 
 /// @nodoc
-abstract class _$$WoFormWIPImplCopyWith<$Res> implements $WoFormCopyWith<$Res> {
-  factory _$$WoFormWIPImplCopyWith(
-          _$WoFormWIPImpl value, $Res Function(_$WoFormWIPImpl) then) =
-      __$$WoFormWIPImplCopyWithImpl<$Res>;
+abstract class _$$WoFormImplCopyWith<$Res> implements $WoFormCopyWith<$Res> {
+  factory _$$WoFormImplCopyWith(
+          _$WoFormImpl value, $Res Function(_$WoFormImpl) then) =
+      __$$WoFormImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {WoFormStatus status,
-      Map<String, WoFormInput> inputsMap,
+      {@InputsMapConverter() Map<String, WoFormInput<dynamic>> inputsMap,
+      WoFormStatus? status,
       String? errorCode});
 }
 
 /// @nodoc
-class __$$WoFormWIPImplCopyWithImpl<$Res>
-    extends _$WoFormCopyWithImpl<$Res, _$WoFormWIPImpl>
-    implements _$$WoFormWIPImplCopyWith<$Res> {
-  __$$WoFormWIPImplCopyWithImpl(
-      _$WoFormWIPImpl _value, $Res Function(_$WoFormWIPImpl) _then)
+class __$$WoFormImplCopyWithImpl<$Res>
+    extends _$WoFormCopyWithImpl<$Res, _$WoFormImpl>
+    implements _$$WoFormImplCopyWith<$Res> {
+  __$$WoFormImplCopyWithImpl(
+      _$WoFormImpl _value, $Res Function(_$WoFormImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? status = null,
     Object? inputsMap = null,
+    Object? status = freezed,
     Object? errorCode = freezed,
   }) {
-    return _then(_$WoFormWIPImpl(
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as WoFormStatus,
+    return _then(_$WoFormImpl(
       inputsMap: null == inputsMap
           ? _value._inputsMap
           : inputsMap // ignore: cast_nullable_to_non_nullable
-              as Map<String, WoFormInput>,
+              as Map<String, WoFormInput<dynamic>>,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as WoFormStatus?,
       errorCode: freezed == errorCode
           ? _value.errorCode
           : errorCode // ignore: cast_nullable_to_non_nullable
@@ -115,71 +122,89 @@ class __$$WoFormWIPImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-class _$WoFormWIPImpl extends _WoFormWIP {
-  const _$WoFormWIPImpl(
-      {required this.status,
-      required final Map<String, WoFormInput> inputsMap,
+@JsonSerializable()
+class _$WoFormImpl extends _WoForm {
+  const _$WoFormImpl(
+      {@InputsMapConverter()
+      required final Map<String, WoFormInput<dynamic>> inputsMap,
+      this.status = WoFormStatus.idle,
       this.errorCode})
       : _inputsMap = inputsMap,
         super._();
 
+  factory _$WoFormImpl.fromJson(Map<String, dynamic> json) =>
+      _$$WoFormImplFromJson(json);
+
+  final Map<String, WoFormInput<dynamic>> _inputsMap;
   @override
-  final WoFormStatus status;
-  final Map<String, WoFormInput> _inputsMap;
-  @override
-  Map<String, WoFormInput> get inputsMap {
+  @InputsMapConverter()
+  Map<String, WoFormInput<dynamic>> get inputsMap {
     if (_inputsMap is EqualUnmodifiableMapView) return _inputsMap;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_inputsMap);
   }
 
   @override
+  @JsonKey()
+  final WoFormStatus? status;
+  @override
   final String? errorCode;
 
   @override
   String toString() {
-    return 'WoForm(status: $status, inputsMap: $inputsMap, errorCode: $errorCode)';
+    return 'WoForm(inputsMap: $inputsMap, status: $status, errorCode: $errorCode)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$WoFormWIPImpl &&
-            (identical(other.status, status) || other.status == status) &&
+            other is _$WoFormImpl &&
             const DeepCollectionEquality()
                 .equals(other._inputsMap, _inputsMap) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.errorCode, errorCode) ||
                 other.errorCode == errorCode));
   }
 
+  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, status,
-      const DeepCollectionEquality().hash(_inputsMap), errorCode);
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_inputsMap), status, errorCode);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$WoFormWIPImplCopyWith<_$WoFormWIPImpl> get copyWith =>
-      __$$WoFormWIPImplCopyWithImpl<_$WoFormWIPImpl>(this, _$identity);
+  _$$WoFormImplCopyWith<_$WoFormImpl> get copyWith =>
+      __$$WoFormImplCopyWithImpl<_$WoFormImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$WoFormImplToJson(
+      this,
+    );
+  }
 }
 
-abstract class _WoFormWIP extends WoForm {
-  const factory _WoFormWIP(
-      {required final WoFormStatus status,
-      required final Map<String, WoFormInput> inputsMap,
-      final String? errorCode}) = _$WoFormWIPImpl;
-  const _WoFormWIP._() : super._();
+abstract class _WoForm extends WoForm {
+  const factory _WoForm(
+      {@InputsMapConverter()
+      required final Map<String, WoFormInput<dynamic>> inputsMap,
+      final WoFormStatus? status,
+      final String? errorCode}) = _$WoFormImpl;
+  const _WoForm._() : super._();
+
+  factory _WoForm.fromJson(Map<String, dynamic> json) = _$WoFormImpl.fromJson;
 
   @override
-  WoFormStatus get status;
+  @InputsMapConverter()
+  Map<String, WoFormInput<dynamic>> get inputsMap;
   @override
-  Map<String, WoFormInput> get inputsMap;
+  WoFormStatus? get status;
   @override
   String? get errorCode;
   @override
   @JsonKey(ignore: true)
-  _$$WoFormWIPImplCopyWith<_$WoFormWIPImpl> get copyWith =>
+  _$$WoFormImplCopyWith<_$WoFormImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

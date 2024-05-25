@@ -32,7 +32,8 @@ Map<String, dynamic> _$$BooleanInputImplToJson<T>(
 _$SelectInputImpl<T> _$$SelectInputImplFromJson<T>(Map<String, dynamic> json) =>
     _$SelectInputImpl<T>(
       id: json['id'] as String,
-      value: UnknownTypeConverter<T?>().fromJson(json['value'] as String?),
+      value: UnknownTypeConverter<T?>()
+          .fromJson(json['value'] as Map<String, String>?),
       isRequired: json['isRequired'] as bool? ?? false,
       fieldSettings: json['fieldSettings'] == null
           ? null

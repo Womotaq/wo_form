@@ -36,7 +36,9 @@ enum SelectFieldDisplayMode { selectChip, radios }
 class SelectFieldSettings<T> with _$SelectFieldSettings<T> {
   const factory SelectFieldSettings({
     String? labelText,
-    @UnknownTypeListConverter<T>() List<T>? values,
+    // @UnknownTypeListConverter<T>() List<T>? values,
+    @UnknownTypeConverter<T>() @protected T? value1,
+    @UnknownTypeConverter<T>() @protected T? value2,
     SelectFieldDisplayMode? displayMode,
   }) = _SelectFieldSettings<T>;
 

@@ -1,8 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:wo_form/src/model/input.dart';
+import 'package:wo_form/src/model/json_converter/inputs_map.dart';
 import 'package:wo_form/wo_form.dart';
 
-part 'wo_form.freezed.dart';
+part 'form.freezed.dart';
+part 'form.g.dart';
 
 enum WoFormStatus {
   idle,
@@ -15,15 +16,19 @@ enum WoFormStatus {
 @freezed
 abstract class WoForm with _$WoForm {
   const factory WoForm({
-    required WoFormStatus status,
-    required Map<String, WoFormInput> inputsMap,
+    @InputsMapConverter() required Map<String, WoFormInput<dynamic>> inputsMap,
+    @Default(WoFormStatus.idle) WoFormStatus? status,
     String? errorCode,
-  }) = _WoFormWIP;
+  }) = _WoForm;
 
   /// Required for the override getter
   const WoForm._();
 
-  List<WoFormInput> get inputs => inputsMap.values.toList();
+  factory WoForm.fromJson(Map<String, dynamic> json) => _$WoFormFromJson(json);
+
+  // --
+
+  List<WoFormInput<dynamic>> get inputs => inputsMap.values.toList();
 
   /// Whether the [WoFormInput] values are all valid.
   bool get isValid => inputs.every((input) => input.isValid);
@@ -32,7 +37,7 @@ abstract class WoForm with _$WoForm {
   bool get isNotValid => !isValid;
 
   String? getInvalidExplanation(
-    WoFormInput input,
+    WoFormInput<dynamic> input,
     FormLocalizations formL10n,
   ) {
     if (status != WoFormStatus.invalid) return null;
