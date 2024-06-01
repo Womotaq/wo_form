@@ -6,9 +6,48 @@ part of 'input.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$BooleanInputImpl<T> _$$BooleanInputImplFromJson<T>(
-        Map<String, dynamic> json) =>
-    _$BooleanInputImpl<T>(
+SelectInput<T> _$SelectInputFromJson<T>(
+  Map<String, dynamic> json,
+  T Function(Object? json) fromJsonT,
+) =>
+    SelectInput<T>(
+      id: json['id'] as String,
+      value: _$nullableGenericFromJson(json['value'], fromJsonT),
+      isRequired: json['isRequired'] as bool,
+      fieldSettings: json['fieldSettings'] == null
+          ? null
+          : SelectFieldSettings<T>.fromJson(
+              json['fieldSettings'] as Map<String, dynamic>,
+              (value) => fromJsonT(value)),
+    );
+
+Map<String, dynamic> _$SelectInputToJson<T>(
+  SelectInput<T> instance,
+  Object? Function(T value) toJsonT,
+) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'value': _$nullableGenericToJson(instance.value, toJsonT),
+      'isRequired': instance.isRequired,
+      'fieldSettings': instance.fieldSettings?.toJson(
+        (value) => toJsonT(value),
+      ),
+    };
+
+T? _$nullableGenericFromJson<T>(
+  Object? input,
+  T Function(Object? json) fromJson,
+) =>
+    input == null ? null : fromJson(input);
+
+Object? _$nullableGenericToJson<T>(
+  T? input,
+  Object? Function(T value) toJson,
+) =>
+    input == null ? null : toJson(input);
+
+_$BooleanInputImpl _$$BooleanInputImplFromJson(Map<String, dynamic> json) =>
+    _$BooleanInputImpl(
       id: json['id'] as String,
       value: json['value'] as bool? ?? false,
       isRequired: json['isRequired'] as bool? ?? false,
@@ -19,8 +58,7 @@ _$BooleanInputImpl<T> _$$BooleanInputImplFromJson<T>(
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$BooleanInputImplToJson<T>(
-        _$BooleanInputImpl<T> instance) =>
+Map<String, dynamic> _$$BooleanInputImplToJson(_$BooleanInputImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'value': instance.value,
@@ -29,31 +67,8 @@ Map<String, dynamic> _$$BooleanInputImplToJson<T>(
       'runtimeType': instance.$type,
     };
 
-_$SelectInputImpl<T> _$$SelectInputImplFromJson<T>(Map<String, dynamic> json) =>
-    _$SelectInputImpl<T>(
-      id: json['id'] as String,
-      value: UnknownTypeConverter<T?>()
-          .fromJson(json['value'] as Map<String, String>?),
-      isRequired: json['isRequired'] as bool? ?? false,
-      fieldSettings: json['fieldSettings'] == null
-          ? null
-          : SelectFieldSettings<T>.fromJson(
-              json['fieldSettings'] as Map<String, dynamic>),
-      $type: json['runtimeType'] as String?,
-    );
-
-Map<String, dynamic> _$$SelectInputImplToJson<T>(
-        _$SelectInputImpl<T> instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'value': UnknownTypeConverter<T?>().toJson(instance.value),
-      'isRequired': instance.isRequired,
-      'fieldSettings': instance.fieldSettings,
-      'runtimeType': instance.$type,
-    };
-
-_$StringInputImpl<T> _$$StringInputImplFromJson<T>(Map<String, dynamic> json) =>
-    _$StringInputImpl<T>(
+_$StringInputImpl _$$StringInputImplFromJson(Map<String, dynamic> json) =>
+    _$StringInputImpl(
       id: json['id'] as String,
       value: json['value'] as String? ?? '',
       isRequired: json['isRequired'] as bool? ?? false,
@@ -66,8 +81,7 @@ _$StringInputImpl<T> _$$StringInputImplFromJson<T>(Map<String, dynamic> json) =>
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$StringInputImplToJson<T>(
-        _$StringInputImpl<T> instance) =>
+Map<String, dynamic> _$$StringInputImplToJson(_$StringInputImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'value': instance.value,
@@ -82,3 +96,29 @@ const _$RegexPatternEnumMap = {
   RegexPattern.password: 'password',
   RegexPattern.username: 'username',
 };
+
+_$SelectStringInputImpl _$$SelectStringInputImplFromJson(
+        Map<String, dynamic> json) =>
+    _$SelectStringInputImpl(
+      id: json['id'] as String,
+      value: json['value'] as String?,
+      isRequired: json['isRequired'] as bool? ?? false,
+      fieldSettings: json['fieldSettings'] == null
+          ? const SelectFieldSettings<String>()
+          : SelectFieldSettings<String>.fromJson(
+              json['fieldSettings'] as Map<String, dynamic>,
+              (value) => value as String),
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$SelectStringInputImplToJson(
+        _$SelectStringInputImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'value': instance.value,
+      'isRequired': instance.isRequired,
+      'fieldSettings': instance.fieldSettings.toJson(
+        (value) => value,
+      ),
+      'runtimeType': instance.$type,
+    };

@@ -1,25 +1,36 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:wo_form/src/model/json_converter/unknown_type.dart';
 import 'package:wo_form/wo_form.dart';
 
 part 'input.freezed.dart';
 part 'input.g.dart';
 
+mixin WoFormInputMixin {
+  String get id;
+  // Object? get value;
+  // bool get isRequired;
+  // Object? get fieldSettings;
+
+  /// Whether the input value is valid according to the method `getError`.
+  ///
+  /// Returns `true` if `getError` returns `null` for the
+  /// current input value and `false` otherwise.
+  bool get isValid => getError() == null;
+
+  WoFormInputError? getError();
+
+  String? getInvalidExplanation(FormLocalizations formL10n);
+
+  Map<String, dynamic> toJson();
+}
+
 @freezed
-sealed class WoFormInput<T> with _$WoFormInput<T> {
+sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
   const factory WoFormInput.boolean({
     required String id,
     @Default(false) bool value,
     @Default(false) bool isRequired,
     @Default(BooleanFieldSettings()) BooleanFieldSettings fieldSettings,
   }) = BooleanInput;
-
-  const factory WoFormInput.select({
-    required String id,
-    @UnknownTypeConverter<T>() T? value,
-    @Default(false) bool isRequired,
-    SelectFieldSettings<T>? fieldSettings,
-  }) = SelectInput;
 
   const factory WoFormInput.string({
     required String id,
@@ -29,6 +40,14 @@ sealed class WoFormInput<T> with _$WoFormInput<T> {
     @Default(StringFieldSettings()) StringFieldSettings fieldSettings,
   }) = StringInput;
 
+  const factory WoFormInput.selectString({
+    required String id,
+    String? value,
+    @Default(false) bool isRequired,
+    @Default(SelectFieldSettings<String>())
+    SelectFieldSettings<String> fieldSettings,
+  }) = SelectStringInput;
+
   const WoFormInput._();
 
   factory WoFormInput.fromJson(Map<String, dynamic> json) =>
@@ -36,22 +55,11 @@ sealed class WoFormInput<T> with _$WoFormInput<T> {
 
   // --
 
-  /// Whether the [WoFormInput] value is valid according to the
-  /// method `getError`.
-  ///
-  /// Returns `true` if `getError` returns `null` for the
-  /// current [WoFormInput] value and `false` otherwise.
-  bool get isValid => getError() == null;
-
+  @override
   WoFormInputError? getError() {
     switch (this) {
       case BooleanInput(value: final value):
         return isRequired && value == false
-            ? WoFormInputError.empty(inputId: id)
-            : null;
-
-      case SelectInput():
-        return isRequired && value == null
             ? WoFormInputError.empty(inputId: id)
             : null;
 
@@ -64,9 +72,15 @@ sealed class WoFormInput<T> with _$WoFormInput<T> {
         } else {
           return null;
         }
+
+      case SelectStringInput(value: final value):
+        return isRequired && value == null
+            ? WoFormInputError.empty(inputId: id)
+            : null;
     }
   }
 
+  @override
   String? getInvalidExplanation(FormLocalizations formL10n) {
     final error = getError();
 
@@ -74,7 +88,7 @@ sealed class WoFormInput<T> with _$WoFormInput<T> {
 
     switch (this) {
       case BooleanInput():
-      case SelectInput():
+      case SelectStringInput():
         break;
 
       case StringInput(regexPattern: final regexPattern):
@@ -83,6 +97,53 @@ sealed class WoFormInput<T> with _$WoFormInput<T> {
           return formL10n.regexPatternUnmatched(regexPattern.name);
         }
     }
+
+    return formL10n.formError(error.code);
+  }
+}
+
+@freezed
+@JsonSerializable(genericArgumentFactories: true)
+class SelectInput<T> with _$SelectInput<T>, WoFormInputMixin {
+  const factory SelectInput({
+    required String id,
+    T? value,
+    @Default(false) bool isRequired,
+    SelectFieldSettings<T>? fieldSettings,
+    // ignore: invalid_annotation_target
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    Object? Function(T)? toJsonT,
+  }) = _SelectInput<T>;
+
+  const SelectInput._();
+
+  factory SelectInput.fromJson(
+    Map<String, dynamic> json,
+    T Function(Object? json) fromJsonT,
+  ) {
+    return _$SelectInputFromJson(json, fromJsonT);
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    if (toJsonT == null) {
+      throw UnimplementedError('No toJsonT provided for SelectInput<$T>');
+    }
+
+    return _$SelectInputToJson(this, toJsonT!);
+  }
+
+  // --
+
+  @override
+  WoFormInputError? getError() =>
+      isRequired && value == null ? WoFormInputError.empty(inputId: id) : null;
+
+  @override
+  String? getInvalidExplanation(FormLocalizations formL10n) {
+    final error = getError();
+
+    if (error == null) return null;
 
     return formL10n.formError(error.code);
   }

@@ -16,8 +16,8 @@ enum WoFormStatus {
 @freezed
 abstract class WoForm with _$WoForm {
   const factory WoForm({
-    @InputsMapConverter() required Map<String, WoFormInput<dynamic>> inputsMap,
-    @Default(WoFormStatus.idle) WoFormStatus? status,
+    @InputsMapConverter() required Map<String, WoFormInputMixin> inputsMap,
+    @Default(WoFormStatus.idle) WoFormStatus status,
     String? errorCode,
   }) = _WoForm;
 
@@ -28,16 +28,16 @@ abstract class WoForm with _$WoForm {
 
   // --
 
-  List<WoFormInput<dynamic>> get inputs => inputsMap.values.toList();
+  List<WoFormInputMixin> get inputs => inputsMap.values.toList();
 
-  /// Whether the [WoFormInput] values are all valid.
+  /// Whether the input values are all valid.
   bool get isValid => inputs.every((input) => input.isValid);
 
-  /// Whether the [WoFormInput] values are not all valid.
+  /// Whether the input values are not all valid.
   bool get isNotValid => !isValid;
 
   String? getInvalidExplanation(
-    WoFormInput<dynamic> input,
+    WoFormInputMixin input,
     FormLocalizations formL10n,
   ) {
     if (status != WoFormStatus.invalid) return null;

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/src/model/json_converter/text_input_type.dart';
-import 'package:wo_form/src/model/json_converter/unknown_type.dart';
 
 part 'field_settings.freezed.dart';
 part 'field_settings.g.dart';
@@ -33,19 +32,26 @@ class BooleanFieldSettings with _$BooleanFieldSettings {
 enum SelectFieldDisplayMode { selectChip, radios }
 
 @freezed
+@JsonSerializable(genericArgumentFactories: true)
 class SelectFieldSettings<T> with _$SelectFieldSettings<T> {
   const factory SelectFieldSettings({
     String? labelText,
-    // @UnknownTypeListConverter<T>() List<T>? values,
-    @UnknownTypeConverter<T>() @protected T? value1,
-    @UnknownTypeConverter<T>() @protected T? value2,
+    List<T>? values,
     SelectFieldDisplayMode? displayMode,
   }) = _SelectFieldSettings<T>;
 
   const SelectFieldSettings._();
 
-  factory SelectFieldSettings.fromJson(Map<String, dynamic> json) =>
-      _$SelectFieldSettingsFromJson(json);
+  factory SelectFieldSettings.fromJson(
+    Map<String, dynamic> json,
+    T Function(Object? json) fromJsonT,
+  ) {
+    return _$SelectFieldSettingsFromJson<T>(json, fromJsonT);
+  }
+
+  Map<String, dynamic> toJson(Object Function(T value) toJsonT) {
+    return _$SelectFieldSettingsToJson<T>(this, toJsonT);
+  }
 
   SelectFieldSettings<T> merge(SelectFieldSettings<T>? other) => other == null
       ? this

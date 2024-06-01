@@ -16,7 +16,7 @@ abstract class WoFormCubit extends Cubit<WoForm> with StateStreamable<WoForm> {
 
   /// Setting the status to idle when a modification occurs
   /// allows isPure to work
-  void onInputChanged({required WoFormInput input}) => emit(
+  void onInputChanged({required WoFormInputMixin input}) => emit(
         state.copyWith(
           status: WoFormStatus.idle,
           inputsMap: Map.from(state.inputsMap)..update(input.id, (_) => input),

@@ -6,6 +6,32 @@ part of 'field_settings.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+SelectFieldSettings<T> _$SelectFieldSettingsFromJson<T>(
+  Map<String, dynamic> json,
+  T Function(Object? json) fromJsonT,
+) =>
+    SelectFieldSettings<T>(
+      labelText: json['labelText'] as String?,
+      values: (json['values'] as List<dynamic>?)?.map(fromJsonT).toList(),
+      displayMode: $enumDecodeNullable(
+          _$SelectFieldDisplayModeEnumMap, json['displayMode']),
+    );
+
+Map<String, dynamic> _$SelectFieldSettingsToJson<T>(
+  SelectFieldSettings<T> instance,
+  Object? Function(T value) toJsonT,
+) =>
+    <String, dynamic>{
+      'labelText': instance.labelText,
+      'values': instance.values?.map(toJsonT).toList(),
+      'displayMode': _$SelectFieldDisplayModeEnumMap[instance.displayMode],
+    };
+
+const _$SelectFieldDisplayModeEnumMap = {
+  SelectFieldDisplayMode.selectChip: 'selectChip',
+  SelectFieldDisplayMode.radios: 'radios',
+};
+
 _$BooleanFieldSettingsImpl _$$BooleanFieldSettingsImplFromJson(
         Map<String, dynamic> json) =>
     _$BooleanFieldSettingsImpl(
@@ -33,32 +59,6 @@ const _$ListTileControlAffinityEnumMap = {
   ListTileControlAffinity.leading: 'leading',
   ListTileControlAffinity.trailing: 'trailing',
   ListTileControlAffinity.platform: 'platform',
-};
-
-_$SelectFieldSettingsImpl<T> _$$SelectFieldSettingsImplFromJson<T>(
-        Map<String, dynamic> json) =>
-    _$SelectFieldSettingsImpl<T>(
-      labelText: json['labelText'] as String?,
-      value1: UnknownTypeConverter<T?>()
-          .fromJson(json['value1'] as Map<String, String>?),
-      value2: UnknownTypeConverter<T?>()
-          .fromJson(json['value2'] as Map<String, String>?),
-      displayMode: $enumDecodeNullable(
-          _$SelectFieldDisplayModeEnumMap, json['displayMode']),
-    );
-
-Map<String, dynamic> _$$SelectFieldSettingsImplToJson<T>(
-        _$SelectFieldSettingsImpl<T> instance) =>
-    <String, dynamic>{
-      'labelText': instance.labelText,
-      'value1': UnknownTypeConverter<T?>().toJson(instance.value1),
-      'value2': UnknownTypeConverter<T?>().toJson(instance.value2),
-      'displayMode': _$SelectFieldDisplayModeEnumMap[instance.displayMode],
-    };
-
-const _$SelectFieldDisplayModeEnumMap = {
-  SelectFieldDisplayMode.selectChip: 'selectChip',
-  SelectFieldDisplayMode.radios: 'radios',
 };
 
 _$SelectStringFieldSettingsImpl _$$SelectStringFieldSettingsImplFromJson(

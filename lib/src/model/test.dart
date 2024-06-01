@@ -1,21 +1,33 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:wo_form/wo_form.dart';
 
 part 'test.freezed.dart';
 part 'test.g.dart';
 
 @freezed
+@JsonSerializable(genericArgumentFactories: true)
 class TypedValues<T> with _$TypedValues<T> {
   const factory TypedValues({
-    @TypedListConverter<T>() List<T>? values,
+    @Default([]) List<T> values,
+    SelectFieldSettings<T>? fieldSettings,
   }) = _TypedValues<T>;
 
   const TypedValues._();
 
   factory TypedValues.fromJson(
     Map<String, dynamic> json,
-    // T Function(Object? json),
-  ) =>
-      _$TypedValuesFromJson<T>(json);
+    T Function(Object? json) fromJsonT,
+  ) {
+    return _$TypedValuesFromJson<T>(json, fromJsonT);
+  }
+
+  Map<String, dynamic> toJson(Object Function(T value) toJsonT) {
+    return _$TypedValuesToJson<T>(this, toJsonT);
+  }
+
+  void test() {
+    values.first;
+  }
 }
 
 class TypedListConverter<T> extends JsonConverter<List<T>?, List<String>?> {

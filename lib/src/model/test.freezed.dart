@@ -14,16 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-TypedValues<T> _$TypedValuesFromJson<T>(Map<String, dynamic> json) {
-  return _TypedValues<T>.fromJson(json);
-}
-
 /// @nodoc
 mixin _$TypedValues<T> {
-  @TypedListConverter<T>()
-  List<T?>? get values => throw _privateConstructorUsedError;
+  List<T> get values => throw _privateConstructorUsedError;
+  SelectFieldSettings<T>? get fieldSettings =>
+      throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $TypedValuesCopyWith<T, TypedValues<T>> get copyWith =>
       throw _privateConstructorUsedError;
@@ -35,7 +31,9 @@ abstract class $TypedValuesCopyWith<T, $Res> {
           TypedValues<T> value, $Res Function(TypedValues<T>) then) =
       _$TypedValuesCopyWithImpl<T, $Res, TypedValues<T>>;
   @useResult
-  $Res call({@TypedListConverter<T>() List<T?>? values});
+  $Res call({List<T> values, SelectFieldSettings<T>? fieldSettings});
+
+  $SelectFieldSettingsCopyWith<T, $Res>? get fieldSettings;
 }
 
 /// @nodoc
@@ -51,14 +49,32 @@ class _$TypedValuesCopyWithImpl<T, $Res, $Val extends TypedValues<T>>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? values = freezed,
+    Object? values = null,
+    Object? fieldSettings = freezed,
   }) {
     return _then(_value.copyWith(
-      values: freezed == values
+      values: null == values
           ? _value.values
           : values // ignore: cast_nullable_to_non_nullable
-              as List<T?>?,
+              as List<T>,
+      fieldSettings: freezed == fieldSettings
+          ? _value.fieldSettings
+          : fieldSettings // ignore: cast_nullable_to_non_nullable
+              as SelectFieldSettings<T>?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SelectFieldSettingsCopyWith<T, $Res>? get fieldSettings {
+    if (_value.fieldSettings == null) {
+      return null;
+    }
+
+    return $SelectFieldSettingsCopyWith<T, $Res>(_value.fieldSettings!,
+        (value) {
+      return _then(_value.copyWith(fieldSettings: value) as $Val);
+    });
   }
 }
 
@@ -70,7 +86,10 @@ abstract class _$$TypedValuesImplCopyWith<T, $Res>
       __$$TypedValuesImplCopyWithImpl<T, $Res>;
   @override
   @useResult
-  $Res call({@TypedListConverter<T>() List<T?>? values});
+  $Res call({List<T> values, SelectFieldSettings<T>? fieldSettings});
+
+  @override
+  $SelectFieldSettingsCopyWith<T, $Res>? get fieldSettings;
 }
 
 /// @nodoc
@@ -84,41 +103,44 @@ class __$$TypedValuesImplCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? values = freezed,
+    Object? values = null,
+    Object? fieldSettings = freezed,
   }) {
     return _then(_$TypedValuesImpl<T>(
-      values: freezed == values
+      values: null == values
           ? _value._values
           : values // ignore: cast_nullable_to_non_nullable
-              as List<T?>?,
+              as List<T>,
+      fieldSettings: freezed == fieldSettings
+          ? _value.fieldSettings
+          : fieldSettings // ignore: cast_nullable_to_non_nullable
+              as SelectFieldSettings<T>?,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$TypedValuesImpl<T> extends _TypedValues<T> {
-  const _$TypedValuesImpl({@TypedListConverter<T>() final List<T?>? values})
+  const _$TypedValuesImpl({final List<T> values = const [], this.fieldSettings})
       : _values = values,
         super._();
 
-  factory _$TypedValuesImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TypedValuesImplFromJson(json);
-
-  final List<T?>? _values;
+  final List<T> _values;
   @override
-  @TypedListConverter<T>()
-  List<T?>? get values {
-    final value = _values;
-    if (value == null) return null;
+  @JsonKey()
+  List<T> get values {
     if (_values is EqualUnmodifiableListView) return _values;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_values);
   }
 
   @override
+  final SelectFieldSettings<T>? fieldSettings;
+
+  @override
   String toString() {
-    return 'TypedValues<$T>(values: $values)';
+    return 'TypedValues<$T>(values: $values, fieldSettings: $fieldSettings)';
   }
 
   @override
@@ -126,13 +148,14 @@ class _$TypedValuesImpl<T> extends _TypedValues<T> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TypedValuesImpl<T> &&
-            const DeepCollectionEquality().equals(other._values, _values));
+            const DeepCollectionEquality().equals(other._values, _values) &&
+            (identical(other.fieldSettings, fieldSettings) ||
+                other.fieldSettings == fieldSettings));
   }
 
-  @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_values));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_values), fieldSettings);
 
   @JsonKey(ignore: true)
   @override
@@ -140,26 +163,18 @@ class _$TypedValuesImpl<T> extends _TypedValues<T> {
   _$$TypedValuesImplCopyWith<T, _$TypedValuesImpl<T>> get copyWith =>
       __$$TypedValuesImplCopyWithImpl<T, _$TypedValuesImpl<T>>(
           this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$TypedValuesImplToJson<T>(
-      this,
-    );
-  }
 }
 
 abstract class _TypedValues<T> extends TypedValues<T> {
   const factory _TypedValues(
-      {@TypedListConverter<T>() final List<T?>? values}) = _$TypedValuesImpl<T>;
+      {final List<T> values,
+      final SelectFieldSettings<T>? fieldSettings}) = _$TypedValuesImpl<T>;
   const _TypedValues._() : super._();
 
-  factory _TypedValues.fromJson(Map<String, dynamic> json) =
-      _$TypedValuesImpl<T>.fromJson;
-
   @override
-  @TypedListConverter<T>()
-  List<T?>? get values;
+  List<T> get values;
+  @override
+  SelectFieldSettings<T>? get fieldSettings;
   @override
   @JsonKey(ignore: true)
   _$$TypedValuesImplCopyWith<T, _$TypedValuesImpl<T>> get copyWith =>

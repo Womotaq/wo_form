@@ -17,7 +17,7 @@ _$WoFormImpl _$$WoFormImplFromJson(Map<String, dynamic> json) => _$WoFormImpl(
 Map<String, dynamic> _$$WoFormImplToJson(_$WoFormImpl instance) =>
     <String, dynamic>{
       'inputsMap': const InputsMapConverter().toJson(instance.inputsMap),
-      'status': _$WoFormStatusEnumMap[instance.status],
+      'status': _$WoFormStatusEnumMap[instance.status]!,
       'errorCode': instance.errorCode,
     };
 
