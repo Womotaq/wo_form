@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:test/test.dart';
 import 'package:wo_form/src/_export.dart';
 import 'package:wo_form/src/l10n/arb_gen/form_localizations_fr.dart';
+import 'package:wo_form/src/model/json_converter/text_input_type.dart';
 import 'package:wo_form/wo_form.dart';
 
 void main() {
@@ -8,18 +10,12 @@ void main() {
     id: 'name',
     isRequired: true,
     regexPattern: RegexPattern.username.value,
-    // fieldSettings: StringFieldSettings(
-    //   invalidRegexMessage: FormLocalizationsFr()
-    //       .regexPatternUnmatched(RegexPattern.username.name),
-    // ),
+    fieldSettings: StringFieldSettings(
+      invalidRegexMessage: FormLocalizationsFr()
+          .regexPatternUnmatched(RegexPattern.username.name),
+    ),
   );
-  final expectedInputToJson = {
-    'id': 'name',
-    'value': '',
-    'isRequired': true,
-    'regexPattern': RegexPattern.username.value,
-    'runtimeType': 'string',
-  };
+  final expectedInputToJson = expectedInput.toJson();
   final inputForm = WoForm(
     inputs: [
       const StringInput(id: 'id', isRequired: true),
@@ -32,7 +28,27 @@ void main() {
         ),
         toJsonT: (regex) => regex.value,
       ),
-      // const StringInput(id: 'invalidRegexMessage'),
+      InputsListInput(
+        id: 'fieldSettings',
+        value: [
+          const StringInput(id: 'labelText'),
+          const SelectInput<StringFieldAction>(id: 'action'),
+          const BooleanInput(id: 'submitFormOnFieldSubmitted'),
+          SelectInput<TextInputType>(
+            id: 'keyboardType',
+            toJsonT: (value) => const TextInputTypeConverter().toJson(value),
+          ),
+          const BooleanInput(id: 'obscureText'),
+          const BooleanInput(id: 'autocorrect'),
+          // List<String>? autofillHints,
+          const BooleanInput(id: 'autofocus'),
+          const SelectInput<TextInputAction>(id: 'textInputAction'),
+          const SelectInput<TextCapitalization>(id: 'textCapitalization'),
+          // int? maxLines,
+          const StringInput(id: 'hintText'),
+          const StringInput(id: 'invalidRegexMessage'),
+        ],
+      ),
     ],
     unmodifiableValuesJson: {
       'runtimeType': 'string',
@@ -56,13 +72,21 @@ void main() {
         'regexPattern',
         (i) => (i as SelectInput).copyWith(value: RegexPattern.username),
       )
-    // ..update(
-    //   'invalidRegexMessage',
-    //   (i) => (i as StringInput).copyWith(
-    //     value: expectedInput.fieldSettings.invalidRegexMessage ?? '',
-    //   ),
-    // )
-    ,
+      ..update(
+        'fieldSettings',
+        (i) => (i as InputsListInput).copyWith(
+          value: List<WoFormInputMixin>.from(i.value ?? []).map(
+            (fsInput) {
+              if (fsInput.id == 'invalidRegexMessage') {
+                return (fsInput as StringInput).copyWith(
+                  value: expectedInput.fieldSettings.invalidRegexMessage ?? '',
+                );
+              }
+              return fsInput;
+            },
+          ).toList(),
+        ),
+      ),
   );
 
   test('StringInput Creator : Step 0', () {

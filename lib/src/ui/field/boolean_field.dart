@@ -24,7 +24,7 @@ class BooleanField<T extends WoFormCubit> extends StatelessWidget {
       builder: (context, input) {
         final onOffType = switch (mergedSettings.onOffType) {
           null || BooleanFieldOnOffType.switchButton => Switch(
-              value: input.value,
+              value: input.value ?? false,
               onChanged: (value) => cubit.onInputChanged(
                 input: input.copyWith(value: value),
               ),
@@ -51,7 +51,7 @@ class BooleanField<T extends WoFormCubit> extends StatelessWidget {
           title: Text(mergedSettings.labelText ?? ''),
           trailing: onOffTypeIsLeading ? null : onOffType,
           onTap: () => cubit.onInputChanged(
-            input: input.copyWith(value: !input.value),
+            input: input.copyWith(value: !(input.value ?? false)),
           ),
           visualDensity: VisualDensity.compact,
           contentPadding: EdgeInsets.zero,

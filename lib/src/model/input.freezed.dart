@@ -18,6 +18,8 @@ WoFormInput _$WoFormInputFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
     case 'boolean':
       return BooleanInput.fromJson(json);
+    case 'inputsList':
+      return InputsListInput.fromJson(json);
     case 'string':
       return StringInput.fromJson(json);
     case 'selectString':
@@ -40,14 +42,21 @@ mixin _$WoFormInput {
   TResult when<TResult extends Object?>({
     required TResult Function(
             String id,
-            bool value,
+            bool? value,
             bool isRequired,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings fieldSettings)
         boolean,
     required TResult Function(
             String id,
-            String value,
+            @InputsListConverter() List<WoFormInputMixin>? value,
+            bool isRequired,
+            @JsonKey(toJson: MapFieldSettings.staticToJson)
+            MapFieldSettings fieldSettings)
+        inputsList,
+    required TResult Function(
+            String id,
+            String? value,
             bool isRequired,
             String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
@@ -62,14 +71,21 @@ mixin _$WoFormInput {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
             String id,
-            bool value,
+            bool? value,
             bool isRequired,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings fieldSettings)?
         boolean,
     TResult? Function(
             String id,
-            String value,
+            @InputsListConverter() List<WoFormInputMixin>? value,
+            bool isRequired,
+            @JsonKey(toJson: MapFieldSettings.staticToJson)
+            MapFieldSettings fieldSettings)?
+        inputsList,
+    TResult? Function(
+            String id,
+            String? value,
             bool isRequired,
             String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
@@ -84,14 +100,21 @@ mixin _$WoFormInput {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
             String id,
-            bool value,
+            bool? value,
             bool isRequired,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings fieldSettings)?
         boolean,
     TResult Function(
             String id,
-            String value,
+            @InputsListConverter() List<WoFormInputMixin>? value,
+            bool isRequired,
+            @JsonKey(toJson: MapFieldSettings.staticToJson)
+            MapFieldSettings fieldSettings)?
+        inputsList,
+    TResult Function(
+            String id,
+            String? value,
             bool isRequired,
             String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
@@ -106,6 +129,7 @@ mixin _$WoFormInput {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(BooleanInput value) boolean,
+    required TResult Function(InputsListInput value) inputsList,
     required TResult Function(StringInput value) string,
     required TResult Function(SelectStringInput value) selectString,
   }) =>
@@ -113,6 +137,7 @@ mixin _$WoFormInput {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BooleanInput value)? boolean,
+    TResult? Function(InputsListInput value)? inputsList,
     TResult? Function(StringInput value)? string,
     TResult? Function(SelectStringInput value)? selectString,
   }) =>
@@ -120,6 +145,7 @@ mixin _$WoFormInput {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BooleanInput value)? boolean,
+    TResult Function(InputsListInput value)? inputsList,
     TResult Function(StringInput value)? string,
     TResult Function(SelectStringInput value)? selectString,
     required TResult orElse(),
@@ -179,7 +205,7 @@ abstract class _$$BooleanInputImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      bool value,
+      bool? value,
       bool isRequired,
       @JsonKey(toJson: BooleanFieldSettings.staticToJson)
       BooleanFieldSettings fieldSettings});
@@ -199,7 +225,7 @@ class __$$BooleanInputImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? value = null,
+    Object? value = freezed,
     Object? isRequired = null,
     Object? fieldSettings = null,
   }) {
@@ -208,10 +234,10 @@ class __$$BooleanInputImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      value: null == value
+      value: freezed == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       isRequired: null == isRequired
           ? _value.isRequired
           : isRequired // ignore: cast_nullable_to_non_nullable
@@ -237,7 +263,7 @@ class __$$BooleanInputImplCopyWithImpl<$Res>
 class _$BooleanInputImpl extends BooleanInput {
   const _$BooleanInputImpl(
       {required this.id,
-      this.value = false,
+      this.value,
       this.isRequired = false,
       @JsonKey(toJson: BooleanFieldSettings.staticToJson)
       this.fieldSettings = const BooleanFieldSettings(),
@@ -251,8 +277,7 @@ class _$BooleanInputImpl extends BooleanInput {
   @override
   final String id;
   @override
-  @JsonKey()
-  final bool value;
+  final bool? value;
   @override
   @JsonKey()
   final bool isRequired;
@@ -297,14 +322,21 @@ class _$BooleanInputImpl extends BooleanInput {
   TResult when<TResult extends Object?>({
     required TResult Function(
             String id,
-            bool value,
+            bool? value,
             bool isRequired,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings fieldSettings)
         boolean,
     required TResult Function(
             String id,
-            String value,
+            @InputsListConverter() List<WoFormInputMixin>? value,
+            bool isRequired,
+            @JsonKey(toJson: MapFieldSettings.staticToJson)
+            MapFieldSettings fieldSettings)
+        inputsList,
+    required TResult Function(
+            String id,
+            String? value,
             bool isRequired,
             String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
@@ -322,14 +354,21 @@ class _$BooleanInputImpl extends BooleanInput {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
             String id,
-            bool value,
+            bool? value,
             bool isRequired,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings fieldSettings)?
         boolean,
     TResult? Function(
             String id,
-            String value,
+            @InputsListConverter() List<WoFormInputMixin>? value,
+            bool isRequired,
+            @JsonKey(toJson: MapFieldSettings.staticToJson)
+            MapFieldSettings fieldSettings)?
+        inputsList,
+    TResult? Function(
+            String id,
+            String? value,
             bool isRequired,
             String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
@@ -347,14 +386,21 @@ class _$BooleanInputImpl extends BooleanInput {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
             String id,
-            bool value,
+            bool? value,
             bool isRequired,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings fieldSettings)?
         boolean,
     TResult Function(
             String id,
-            String value,
+            @InputsListConverter() List<WoFormInputMixin>? value,
+            bool isRequired,
+            @JsonKey(toJson: MapFieldSettings.staticToJson)
+            MapFieldSettings fieldSettings)?
+        inputsList,
+    TResult Function(
+            String id,
+            String? value,
             bool isRequired,
             String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
@@ -375,6 +421,7 @@ class _$BooleanInputImpl extends BooleanInput {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(BooleanInput value) boolean,
+    required TResult Function(InputsListInput value) inputsList,
     required TResult Function(StringInput value) string,
     required TResult Function(SelectStringInput value) selectString,
   }) {
@@ -385,6 +432,7 @@ class _$BooleanInputImpl extends BooleanInput {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BooleanInput value)? boolean,
+    TResult? Function(InputsListInput value)? inputsList,
     TResult? Function(StringInput value)? string,
     TResult? Function(SelectStringInput value)? selectString,
   }) {
@@ -395,6 +443,7 @@ class _$BooleanInputImpl extends BooleanInput {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BooleanInput value)? boolean,
+    TResult Function(InputsListInput value)? inputsList,
     TResult Function(StringInput value)? string,
     TResult Function(SelectStringInput value)? selectString,
     required TResult orElse(),
@@ -416,7 +465,7 @@ class _$BooleanInputImpl extends BooleanInput {
 abstract class BooleanInput extends WoFormInput {
   const factory BooleanInput(
       {required final String id,
-      final bool value,
+      final bool? value,
       final bool isRequired,
       @JsonKey(toJson: BooleanFieldSettings.staticToJson)
       final BooleanFieldSettings fieldSettings}) = _$BooleanInputImpl;
@@ -428,7 +477,7 @@ abstract class BooleanInput extends WoFormInput {
   @override
   String get id;
   @override
-  bool get value;
+  bool? get value;
   @override
   bool get isRequired;
   @override
@@ -437,6 +486,312 @@ abstract class BooleanInput extends WoFormInput {
   @override
   @JsonKey(ignore: true)
   _$$BooleanInputImplCopyWith<_$BooleanInputImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$InputsListInputImplCopyWith<$Res>
+    implements $WoFormInputCopyWith<$Res> {
+  factory _$$InputsListInputImplCopyWith(_$InputsListInputImpl value,
+          $Res Function(_$InputsListInputImpl) then) =
+      __$$InputsListInputImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      @InputsListConverter() List<WoFormInputMixin>? value,
+      bool isRequired,
+      @JsonKey(toJson: MapFieldSettings.staticToJson)
+      MapFieldSettings fieldSettings});
+
+  $MapFieldSettingsCopyWith<$Res> get fieldSettings;
+}
+
+/// @nodoc
+class __$$InputsListInputImplCopyWithImpl<$Res>
+    extends _$WoFormInputCopyWithImpl<$Res, _$InputsListInputImpl>
+    implements _$$InputsListInputImplCopyWith<$Res> {
+  __$$InputsListInputImplCopyWithImpl(
+      _$InputsListInputImpl _value, $Res Function(_$InputsListInputImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? value = freezed,
+    Object? isRequired = null,
+    Object? fieldSettings = null,
+  }) {
+    return _then(_$InputsListInputImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      value: freezed == value
+          ? _value._value
+          : value // ignore: cast_nullable_to_non_nullable
+              as List<WoFormInputMixin>?,
+      isRequired: null == isRequired
+          ? _value.isRequired
+          : isRequired // ignore: cast_nullable_to_non_nullable
+              as bool,
+      fieldSettings: null == fieldSettings
+          ? _value.fieldSettings
+          : fieldSettings // ignore: cast_nullable_to_non_nullable
+              as MapFieldSettings,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MapFieldSettingsCopyWith<$Res> get fieldSettings {
+    return $MapFieldSettingsCopyWith<$Res>(_value.fieldSettings, (value) {
+      return _then(_value.copyWith(fieldSettings: value));
+    });
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$InputsListInputImpl extends InputsListInput {
+  const _$InputsListInputImpl(
+      {required this.id,
+      @InputsListConverter() final List<WoFormInputMixin>? value,
+      this.isRequired = false,
+      @JsonKey(toJson: MapFieldSettings.staticToJson)
+      this.fieldSettings = const MapFieldSettings(),
+      final String? $type})
+      : _value = value,
+        $type = $type ?? 'inputsList',
+        super._();
+
+  factory _$InputsListInputImpl.fromJson(Map<String, dynamic> json) =>
+      _$$InputsListInputImplFromJson(json);
+
+  @override
+  final String id;
+  final List<WoFormInputMixin>? _value;
+  @override
+  @InputsListConverter()
+  List<WoFormInputMixin>? get value {
+    final value = _value;
+    if (value == null) return null;
+    if (_value is EqualUnmodifiableListView) return _value;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  @JsonKey()
+  final bool isRequired;
+  @override
+  @JsonKey(toJson: MapFieldSettings.staticToJson)
+  final MapFieldSettings fieldSettings;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'WoFormInput.inputsList(id: $id, value: $value, isRequired: $isRequired, fieldSettings: $fieldSettings)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$InputsListInputImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            const DeepCollectionEquality().equals(other._value, _value) &&
+            (identical(other.isRequired, isRequired) ||
+                other.isRequired == isRequired) &&
+            (identical(other.fieldSettings, fieldSettings) ||
+                other.fieldSettings == fieldSettings));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id,
+      const DeepCollectionEquality().hash(_value), isRequired, fieldSettings);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$InputsListInputImplCopyWith<_$InputsListInputImpl> get copyWith =>
+      __$$InputsListInputImplCopyWithImpl<_$InputsListInputImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String id,
+            bool? value,
+            bool isRequired,
+            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
+            BooleanFieldSettings fieldSettings)
+        boolean,
+    required TResult Function(
+            String id,
+            @InputsListConverter() List<WoFormInputMixin>? value,
+            bool isRequired,
+            @JsonKey(toJson: MapFieldSettings.staticToJson)
+            MapFieldSettings fieldSettings)
+        inputsList,
+    required TResult Function(
+            String id,
+            String? value,
+            bool isRequired,
+            String? regexPattern,
+            @JsonKey(toJson: StringFieldSettings.staticToJson)
+            StringFieldSettings fieldSettings)
+        string,
+    required TResult Function(String id, String? value, bool isRequired,
+            SelectFieldSettings<String> fieldSettings)
+        selectString,
+  }) {
+    return inputsList(id, value, isRequired, fieldSettings);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String id,
+            bool? value,
+            bool isRequired,
+            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
+            BooleanFieldSettings fieldSettings)?
+        boolean,
+    TResult? Function(
+            String id,
+            @InputsListConverter() List<WoFormInputMixin>? value,
+            bool isRequired,
+            @JsonKey(toJson: MapFieldSettings.staticToJson)
+            MapFieldSettings fieldSettings)?
+        inputsList,
+    TResult? Function(
+            String id,
+            String? value,
+            bool isRequired,
+            String? regexPattern,
+            @JsonKey(toJson: StringFieldSettings.staticToJson)
+            StringFieldSettings fieldSettings)?
+        string,
+    TResult? Function(String id, String? value, bool isRequired,
+            SelectFieldSettings<String> fieldSettings)?
+        selectString,
+  }) {
+    return inputsList?.call(id, value, isRequired, fieldSettings);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String id,
+            bool? value,
+            bool isRequired,
+            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
+            BooleanFieldSettings fieldSettings)?
+        boolean,
+    TResult Function(
+            String id,
+            @InputsListConverter() List<WoFormInputMixin>? value,
+            bool isRequired,
+            @JsonKey(toJson: MapFieldSettings.staticToJson)
+            MapFieldSettings fieldSettings)?
+        inputsList,
+    TResult Function(
+            String id,
+            String? value,
+            bool isRequired,
+            String? regexPattern,
+            @JsonKey(toJson: StringFieldSettings.staticToJson)
+            StringFieldSettings fieldSettings)?
+        string,
+    TResult Function(String id, String? value, bool isRequired,
+            SelectFieldSettings<String> fieldSettings)?
+        selectString,
+    required TResult orElse(),
+  }) {
+    if (inputsList != null) {
+      return inputsList(id, value, isRequired, fieldSettings);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BooleanInput value) boolean,
+    required TResult Function(InputsListInput value) inputsList,
+    required TResult Function(StringInput value) string,
+    required TResult Function(SelectStringInput value) selectString,
+  }) {
+    return inputsList(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BooleanInput value)? boolean,
+    TResult? Function(InputsListInput value)? inputsList,
+    TResult? Function(StringInput value)? string,
+    TResult? Function(SelectStringInput value)? selectString,
+  }) {
+    return inputsList?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BooleanInput value)? boolean,
+    TResult Function(InputsListInput value)? inputsList,
+    TResult Function(StringInput value)? string,
+    TResult Function(SelectStringInput value)? selectString,
+    required TResult orElse(),
+  }) {
+    if (inputsList != null) {
+      return inputsList(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$InputsListInputImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class InputsListInput extends WoFormInput {
+  const factory InputsListInput(
+      {required final String id,
+      @InputsListConverter() final List<WoFormInputMixin>? value,
+      final bool isRequired,
+      @JsonKey(toJson: MapFieldSettings.staticToJson)
+      final MapFieldSettings fieldSettings}) = _$InputsListInputImpl;
+  const InputsListInput._() : super._();
+
+  factory InputsListInput.fromJson(Map<String, dynamic> json) =
+      _$InputsListInputImpl.fromJson;
+
+  @override
+  String get id;
+  @override
+  @InputsListConverter()
+  List<WoFormInputMixin>? get value;
+  @override
+  bool get isRequired;
+  @override
+  @JsonKey(toJson: MapFieldSettings.staticToJson)
+  MapFieldSettings get fieldSettings;
+  @override
+  @JsonKey(ignore: true)
+  _$$InputsListInputImplCopyWith<_$InputsListInputImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -450,7 +805,7 @@ abstract class _$$StringInputImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String value,
+      String? value,
       bool isRequired,
       String? regexPattern,
       @JsonKey(toJson: StringFieldSettings.staticToJson)
@@ -471,7 +826,7 @@ class __$$StringInputImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? value = null,
+    Object? value = freezed,
     Object? isRequired = null,
     Object? regexPattern = freezed,
     Object? fieldSettings = null,
@@ -481,10 +836,10 @@ class __$$StringInputImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      value: null == value
+      value: freezed == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       isRequired: null == isRequired
           ? _value.isRequired
           : isRequired // ignore: cast_nullable_to_non_nullable
@@ -514,7 +869,7 @@ class __$$StringInputImplCopyWithImpl<$Res>
 class _$StringInputImpl extends StringInput {
   const _$StringInputImpl(
       {required this.id,
-      this.value = '',
+      this.value,
       this.isRequired = false,
       this.regexPattern,
       @JsonKey(toJson: StringFieldSettings.staticToJson)
@@ -529,8 +884,7 @@ class _$StringInputImpl extends StringInput {
   @override
   final String id;
   @override
-  @JsonKey()
-  final String value;
+  final String? value;
   @override
   @JsonKey()
   final bool isRequired;
@@ -579,14 +933,21 @@ class _$StringInputImpl extends StringInput {
   TResult when<TResult extends Object?>({
     required TResult Function(
             String id,
-            bool value,
+            bool? value,
             bool isRequired,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings fieldSettings)
         boolean,
     required TResult Function(
             String id,
-            String value,
+            @InputsListConverter() List<WoFormInputMixin>? value,
+            bool isRequired,
+            @JsonKey(toJson: MapFieldSettings.staticToJson)
+            MapFieldSettings fieldSettings)
+        inputsList,
+    required TResult Function(
+            String id,
+            String? value,
             bool isRequired,
             String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
@@ -604,14 +965,21 @@ class _$StringInputImpl extends StringInput {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
             String id,
-            bool value,
+            bool? value,
             bool isRequired,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings fieldSettings)?
         boolean,
     TResult? Function(
             String id,
-            String value,
+            @InputsListConverter() List<WoFormInputMixin>? value,
+            bool isRequired,
+            @JsonKey(toJson: MapFieldSettings.staticToJson)
+            MapFieldSettings fieldSettings)?
+        inputsList,
+    TResult? Function(
+            String id,
+            String? value,
             bool isRequired,
             String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
@@ -629,14 +997,21 @@ class _$StringInputImpl extends StringInput {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
             String id,
-            bool value,
+            bool? value,
             bool isRequired,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings fieldSettings)?
         boolean,
     TResult Function(
             String id,
-            String value,
+            @InputsListConverter() List<WoFormInputMixin>? value,
+            bool isRequired,
+            @JsonKey(toJson: MapFieldSettings.staticToJson)
+            MapFieldSettings fieldSettings)?
+        inputsList,
+    TResult Function(
+            String id,
+            String? value,
             bool isRequired,
             String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
@@ -657,6 +1032,7 @@ class _$StringInputImpl extends StringInput {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(BooleanInput value) boolean,
+    required TResult Function(InputsListInput value) inputsList,
     required TResult Function(StringInput value) string,
     required TResult Function(SelectStringInput value) selectString,
   }) {
@@ -667,6 +1043,7 @@ class _$StringInputImpl extends StringInput {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BooleanInput value)? boolean,
+    TResult? Function(InputsListInput value)? inputsList,
     TResult? Function(StringInput value)? string,
     TResult? Function(SelectStringInput value)? selectString,
   }) {
@@ -677,6 +1054,7 @@ class _$StringInputImpl extends StringInput {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BooleanInput value)? boolean,
+    TResult Function(InputsListInput value)? inputsList,
     TResult Function(StringInput value)? string,
     TResult Function(SelectStringInput value)? selectString,
     required TResult orElse(),
@@ -698,7 +1076,7 @@ class _$StringInputImpl extends StringInput {
 abstract class StringInput extends WoFormInput {
   const factory StringInput(
       {required final String id,
-      final String value,
+      final String? value,
       final bool isRequired,
       final String? regexPattern,
       @JsonKey(toJson: StringFieldSettings.staticToJson)
@@ -711,7 +1089,7 @@ abstract class StringInput extends WoFormInput {
   @override
   String get id;
   @override
-  String get value;
+  String? get value;
   @override
   bool get isRequired;
   String? get regexPattern;
@@ -851,14 +1229,21 @@ class _$SelectStringInputImpl extends SelectStringInput {
   TResult when<TResult extends Object?>({
     required TResult Function(
             String id,
-            bool value,
+            bool? value,
             bool isRequired,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings fieldSettings)
         boolean,
     required TResult Function(
             String id,
-            String value,
+            @InputsListConverter() List<WoFormInputMixin>? value,
+            bool isRequired,
+            @JsonKey(toJson: MapFieldSettings.staticToJson)
+            MapFieldSettings fieldSettings)
+        inputsList,
+    required TResult Function(
+            String id,
+            String? value,
             bool isRequired,
             String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
@@ -876,14 +1261,21 @@ class _$SelectStringInputImpl extends SelectStringInput {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
             String id,
-            bool value,
+            bool? value,
             bool isRequired,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings fieldSettings)?
         boolean,
     TResult? Function(
             String id,
-            String value,
+            @InputsListConverter() List<WoFormInputMixin>? value,
+            bool isRequired,
+            @JsonKey(toJson: MapFieldSettings.staticToJson)
+            MapFieldSettings fieldSettings)?
+        inputsList,
+    TResult? Function(
+            String id,
+            String? value,
             bool isRequired,
             String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
@@ -901,14 +1293,21 @@ class _$SelectStringInputImpl extends SelectStringInput {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
             String id,
-            bool value,
+            bool? value,
             bool isRequired,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings fieldSettings)?
         boolean,
     TResult Function(
             String id,
-            String value,
+            @InputsListConverter() List<WoFormInputMixin>? value,
+            bool isRequired,
+            @JsonKey(toJson: MapFieldSettings.staticToJson)
+            MapFieldSettings fieldSettings)?
+        inputsList,
+    TResult Function(
+            String id,
+            String? value,
             bool isRequired,
             String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
@@ -929,6 +1328,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(BooleanInput value) boolean,
+    required TResult Function(InputsListInput value) inputsList,
     required TResult Function(StringInput value) string,
     required TResult Function(SelectStringInput value) selectString,
   }) {
@@ -939,6 +1339,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BooleanInput value)? boolean,
+    TResult? Function(InputsListInput value)? inputsList,
     TResult? Function(StringInput value)? string,
     TResult? Function(SelectStringInput value)? selectString,
   }) {
@@ -949,6 +1350,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BooleanInput value)? boolean,
+    TResult Function(InputsListInput value)? inputsList,
     TResult Function(StringInput value)? string,
     TResult Function(SelectStringInput value)? selectString,
     required TResult orElse(),

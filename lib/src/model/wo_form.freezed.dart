@@ -20,7 +20,7 @@ WoForm _$WoFormFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WoForm {
-  @InputsMapConverter()
+  @WoFormInputsConverter()
   @JsonKey(name: 'inputs')
   Map<String, WoFormInputMixin> get inputsMap =>
       throw _privateConstructorUsedError;
@@ -40,7 +40,7 @@ abstract class $WoFormCopyWith<$Res> {
       _$WoFormCopyWithImpl<$Res, WoForm>;
   @useResult
   $Res call(
-      {@InputsMapConverter()
+      {@WoFormInputsConverter()
       @JsonKey(name: 'inputs')
       Map<String, WoFormInputMixin> inputsMap,
       WoFormStatus status,
@@ -95,7 +95,7 @@ abstract class _$$WoFormImplCopyWith<$Res> implements $WoFormCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@InputsMapConverter()
+      {@WoFormInputsConverter()
       @JsonKey(name: 'inputs')
       Map<String, WoFormInputMixin> inputsMap,
       WoFormStatus status,
@@ -144,7 +144,7 @@ class __$$WoFormImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$WoFormImpl extends _WoForm {
   const _$WoFormImpl(
-      {@InputsMapConverter()
+      {@WoFormInputsConverter()
       @JsonKey(name: 'inputs')
       required final Map<String, WoFormInputMixin> inputsMap,
       this.status = WoFormStatus.idle,
@@ -159,7 +159,7 @@ class _$WoFormImpl extends _WoForm {
 
   final Map<String, WoFormInputMixin> _inputsMap;
   @override
-  @InputsMapConverter()
+  @WoFormInputsConverter()
   @JsonKey(name: 'inputs')
   Map<String, WoFormInputMixin> get inputsMap {
     if (_inputsMap is EqualUnmodifiableMapView) return _inputsMap;
@@ -227,7 +227,7 @@ class _$WoFormImpl extends _WoForm {
 
 abstract class _WoForm extends WoForm {
   const factory _WoForm(
-      {@InputsMapConverter()
+      {@WoFormInputsConverter()
       @JsonKey(name: 'inputs')
       required final Map<String, WoFormInputMixin> inputsMap,
       final WoFormStatus status,
@@ -238,7 +238,7 @@ abstract class _WoForm extends WoForm {
   factory _WoForm.fromJson(Map<String, dynamic> json) = _$WoFormImpl.fromJson;
 
   @override
-  @InputsMapConverter()
+  @WoFormInputsConverter()
   @JsonKey(name: 'inputs')
   Map<String, WoFormInputMixin> get inputsMap;
   @override

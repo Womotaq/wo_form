@@ -46,7 +46,7 @@ class _StringFieldState<T extends WoFormCubit> extends State<StringField<T>> {
               form.getInvalidExplanation(input, context.formL10n),
           builder: (context, errorText) {
             if (text != textEditingController.text) {
-              textEditingController.text = text;
+              textEditingController.text = text ?? '';
             }
 
             return TextFormField(

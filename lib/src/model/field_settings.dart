@@ -23,14 +23,32 @@ class BooleanFieldSettings with _$BooleanFieldSettings {
   static Map<String, dynamic> staticToJson(BooleanFieldSettings object) =>
       object.toJson();
 
-  @override
-  Map<String, dynamic> toJson() => {};
-
   BooleanFieldSettings merge(BooleanFieldSettings? other) => other == null
       ? this
       : BooleanFieldSettings(
+          labelText: labelText ?? other.labelText,
           onOffType: onOffType ?? other.onOffType,
           onOffPosition: onOffPosition ?? other.onOffPosition,
+        );
+}
+
+@freezed
+class MapFieldSettings with _$MapFieldSettings {
+  const factory MapFieldSettings({
+    String? labelText,
+  }) = _MapFieldSettings;
+
+  const MapFieldSettings._();
+
+  factory MapFieldSettings.fromJson(Map<String, dynamic> json) =>
+      _$MapFieldSettingsFromJson(json);
+
+  static Map<String, dynamic> staticToJson(MapFieldSettings object) =>
+      object.toJson();
+
+  MapFieldSettings merge(MapFieldSettings? other) => other == null
+      ? this
+      : MapFieldSettings(
           labelText: labelText ?? other.labelText,
         );
 }

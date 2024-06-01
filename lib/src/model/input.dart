@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:wo_form/src/model/json_converter/inputs_list.dart';
 import 'package:wo_form/wo_form.dart';
 
 part 'input.freezed.dart';
@@ -31,16 +32,25 @@ enum WoFormInputType { boolean, string, selectString }
 sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
   const factory WoFormInput.boolean({
     required String id,
-    @Default(false) bool value,
+    bool? value,
     @Default(false) bool isRequired,
     @JsonKey(toJson: BooleanFieldSettings.staticToJson)
     @Default(BooleanFieldSettings())
     BooleanFieldSettings fieldSettings,
   }) = BooleanInput;
 
+  const factory WoFormInput.inputsList({
+    required String id,
+    @InputsListConverter() List<WoFormInputMixin>? value,
+    @Default(false) bool isRequired,
+    @JsonKey(toJson: MapFieldSettings.staticToJson)
+    @Default(MapFieldSettings())
+    MapFieldSettings fieldSettings,
+  }) = InputsListInput;
+
   const factory WoFormInput.string({
     required String id,
-    @Default('') String value,
+    String? value,
     @Default(false) bool isRequired,
     String? regexPattern,
     @JsonKey(toJson: StringFieldSettings.staticToJson)
@@ -80,8 +90,13 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
             ? WoFormInputError.empty(inputId: id)
             : null;
 
+      case InputsListInput(value: final value):
+        return isRequired && (value == null || value.isEmpty)
+            ? WoFormInputError.empty(inputId: id)
+            : null;
+
       case StringInput(value: final value, regexPattern: final regexPattern):
-        if (value.isEmpty) {
+        if (value == null || value.isEmpty) {
           return isRequired ? WoFormInputError.empty(inputId: id) : null;
         } else if (regexPattern != null &&
             !RegExp(regexPattern).hasMatch(value)) {
@@ -105,6 +120,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
 
     switch (this) {
       case BooleanInput():
+      case InputsListInput():
       case SelectStringInput():
         break;
 
@@ -124,6 +140,10 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
   @override
   Object? valueToJson() => switch (this) {
         BooleanInput() => value,
+        InputsListInput(value: final inputs) => {
+            for (final input in inputs ?? <WoFormInputMixin>[])
+              input.id: input.valueToJson(),
+          },
         StringInput() => value,
         SelectStringInput() => value,
       };
@@ -152,6 +172,10 @@ class SelectInput<T> with _$SelectInput<T>, WoFormInputMixin {
 
   @override
   Map<String, dynamic> toJson() {
+    if (value is Enum?) {
+      return _$SelectInputToJson(this, (value) => (value as Enum?)?.name);
+    }
+
     if (toJsonT == null) {
       throw UnimplementedError('No toJsonT provided for SelectInput<$T>');
     }
@@ -162,8 +186,17 @@ class SelectInput<T> with _$SelectInput<T>, WoFormInputMixin {
   // --
 
   @override
-  WoFormInputError? getError() =>
-      isRequired && value == null ? WoFormInputError.empty(inputId: id) : null;
+  WoFormInputError? getError() {
+    if (isRequired && value == null) {
+      return WoFormInputError.empty(inputId: id);
+    }
+
+    if (value != null && !(fieldSettings?.values?.contains(value) ?? true)) {
+      return WoFormInputError.invalid(inputId: id);
+    }
+
+    return null;
+  }
 
   @override
   String? getInvalidExplanation(FormLocalizations formL10n) {
@@ -176,6 +209,10 @@ class SelectInput<T> with _$SelectInput<T>, WoFormInputMixin {
 
   @override
   Object? valueToJson() {
+    if (value is Enum?) {
+      return (value as Enum?)?.name;
+    }
+
     if (toJsonT == null) {
       throw UnimplementedError('No toJsonT provided for SelectInput<$T>');
     }

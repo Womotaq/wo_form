@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:wo_form/src/model/json_converter/inputs_map.dart';
+import 'package:wo_form/src/model/json_converter/wo_form_inputs.dart';
 import 'package:wo_form/wo_form.dart';
 
 part 'wo_form.freezed.dart';
@@ -29,7 +29,7 @@ abstract class WoForm with _$WoForm {
       );
 
   const factory WoForm._private({
-    @InputsMapConverter()
+    @WoFormInputsConverter()
     @JsonKey(name: 'inputs')
     required Map<String, WoFormInputMixin> inputsMap,
     @Default(WoFormStatus.idle) WoFormStatus status,

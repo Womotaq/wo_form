@@ -49,7 +49,7 @@ Object? _$nullableGenericToJson<T>(
 _$BooleanInputImpl _$$BooleanInputImplFromJson(Map<String, dynamic> json) =>
     _$BooleanInputImpl(
       id: json['id'] as String,
-      value: json['value'] as bool? ?? false,
+      value: json['value'] as bool?,
       isRequired: json['isRequired'] as bool? ?? false,
       fieldSettings: json['fieldSettings'] == null
           ? const BooleanFieldSettings()
@@ -68,10 +68,49 @@ Map<String, dynamic> _$$BooleanInputImplToJson(_$BooleanInputImpl instance) =>
       'runtimeType': instance.$type,
     };
 
+_$InputsListInputImpl _$$InputsListInputImplFromJson(
+        Map<String, dynamic> json) =>
+    _$InputsListInputImpl(
+      id: json['id'] as String,
+      value: _$JsonConverterFromJson<List<Map<String, dynamic>>,
+              List<WoFormInputMixin>>(
+          json['value'], const InputsListConverter().fromJson),
+      isRequired: json['isRequired'] as bool? ?? false,
+      fieldSettings: json['fieldSettings'] == null
+          ? const MapFieldSettings()
+          : MapFieldSettings.fromJson(
+              json['fieldSettings'] as Map<String, dynamic>),
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$InputsListInputImplToJson(
+        _$InputsListInputImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'value': _$JsonConverterToJson<List<Map<String, dynamic>>,
+              List<WoFormInputMixin>>(
+          instance.value, const InputsListConverter().toJson),
+      'isRequired': instance.isRequired,
+      'fieldSettings': MapFieldSettings.staticToJson(instance.fieldSettings),
+      'runtimeType': instance.$type,
+    };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) =>
+    json == null ? null : fromJson(json as Json);
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) =>
+    value == null ? null : toJson(value);
+
 _$StringInputImpl _$$StringInputImplFromJson(Map<String, dynamic> json) =>
     _$StringInputImpl(
       id: json['id'] as String,
-      value: json['value'] as String? ?? '',
+      value: json['value'] as String?,
       isRequired: json['isRequired'] as bool? ?? false,
       regexPattern: json['regexPattern'] as String?,
       fieldSettings: json['fieldSettings'] == null

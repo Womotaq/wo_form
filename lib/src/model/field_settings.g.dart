@@ -61,6 +61,18 @@ const _$ListTileControlAffinityEnumMap = {
   ListTileControlAffinity.platform: 'platform',
 };
 
+_$MapFieldSettingsImpl _$$MapFieldSettingsImplFromJson(
+        Map<String, dynamic> json) =>
+    _$MapFieldSettingsImpl(
+      labelText: json['labelText'] as String?,
+    );
+
+Map<String, dynamic> _$$MapFieldSettingsImplToJson(
+        _$MapFieldSettingsImpl instance) =>
+    <String, dynamic>{
+      'labelText': instance.labelText,
+    };
+
 _$SelectStringFieldSettingsImpl _$$SelectStringFieldSettingsImplFromJson(
         Map<String, dynamic> json) =>
     _$SelectStringFieldSettingsImpl(

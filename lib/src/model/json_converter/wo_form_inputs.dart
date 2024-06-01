@@ -1,9 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/wo_form.dart';
 
-class InputsMapConverter extends JsonConverter<Map<String, WoFormInputMixin>,
+class WoFormInputsConverter extends JsonConverter<Map<String, WoFormInputMixin>,
     List<Map<String, dynamic>>> {
-  const InputsMapConverter();
+  const WoFormInputsConverter();
 
   @override
   Map<String, WoFormInputMixin> fromJson(List<Map<String, dynamic>> json) =>

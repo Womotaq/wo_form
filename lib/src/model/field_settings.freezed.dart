@@ -203,6 +203,146 @@ abstract class _BooleanFieldSettings extends BooleanFieldSettings {
       get copyWith => throw _privateConstructorUsedError;
 }
 
+MapFieldSettings _$MapFieldSettingsFromJson(Map<String, dynamic> json) {
+  return _MapFieldSettings.fromJson(json);
+}
+
+/// @nodoc
+mixin _$MapFieldSettings {
+  String? get labelText => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $MapFieldSettingsCopyWith<MapFieldSettings> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MapFieldSettingsCopyWith<$Res> {
+  factory $MapFieldSettingsCopyWith(
+          MapFieldSettings value, $Res Function(MapFieldSettings) then) =
+      _$MapFieldSettingsCopyWithImpl<$Res, MapFieldSettings>;
+  @useResult
+  $Res call({String? labelText});
+}
+
+/// @nodoc
+class _$MapFieldSettingsCopyWithImpl<$Res, $Val extends MapFieldSettings>
+    implements $MapFieldSettingsCopyWith<$Res> {
+  _$MapFieldSettingsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? labelText = freezed,
+  }) {
+    return _then(_value.copyWith(
+      labelText: freezed == labelText
+          ? _value.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$MapFieldSettingsImplCopyWith<$Res>
+    implements $MapFieldSettingsCopyWith<$Res> {
+  factory _$$MapFieldSettingsImplCopyWith(_$MapFieldSettingsImpl value,
+          $Res Function(_$MapFieldSettingsImpl) then) =
+      __$$MapFieldSettingsImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String? labelText});
+}
+
+/// @nodoc
+class __$$MapFieldSettingsImplCopyWithImpl<$Res>
+    extends _$MapFieldSettingsCopyWithImpl<$Res, _$MapFieldSettingsImpl>
+    implements _$$MapFieldSettingsImplCopyWith<$Res> {
+  __$$MapFieldSettingsImplCopyWithImpl(_$MapFieldSettingsImpl _value,
+      $Res Function(_$MapFieldSettingsImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? labelText = freezed,
+  }) {
+    return _then(_$MapFieldSettingsImpl(
+      labelText: freezed == labelText
+          ? _value.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$MapFieldSettingsImpl extends _MapFieldSettings {
+  const _$MapFieldSettingsImpl({this.labelText}) : super._();
+
+  factory _$MapFieldSettingsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MapFieldSettingsImplFromJson(json);
+
+  @override
+  final String? labelText;
+
+  @override
+  String toString() {
+    return 'MapFieldSettings(labelText: $labelText)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MapFieldSettingsImpl &&
+            (identical(other.labelText, labelText) ||
+                other.labelText == labelText));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, labelText);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$MapFieldSettingsImplCopyWith<_$MapFieldSettingsImpl> get copyWith =>
+      __$$MapFieldSettingsImplCopyWithImpl<_$MapFieldSettingsImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$MapFieldSettingsImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _MapFieldSettings extends MapFieldSettings {
+  const factory _MapFieldSettings({final String? labelText}) =
+      _$MapFieldSettingsImpl;
+  const _MapFieldSettings._() : super._();
+
+  factory _MapFieldSettings.fromJson(Map<String, dynamic> json) =
+      _$MapFieldSettingsImpl.fromJson;
+
+  @override
+  String? get labelText;
+  @override
+  @JsonKey(ignore: true)
+  _$$MapFieldSettingsImplCopyWith<_$MapFieldSettingsImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 /// @nodoc
 mixin _$SelectFieldSettings<T> {
   String? get labelText => throw _privateConstructorUsedError;

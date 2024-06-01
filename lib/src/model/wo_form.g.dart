@@ -7,7 +7,7 @@ part of 'wo_form.dart';
 // **************************************************************************
 
 _$WoFormImpl _$$WoFormImplFromJson(Map<String, dynamic> json) => _$WoFormImpl(
-      inputsMap: const InputsMapConverter()
+      inputsMap: const WoFormInputsConverter()
           .fromJson(json['inputs'] as List<Map<String, dynamic>>),
       status: $enumDecodeNullable(_$WoFormStatusEnumMap, json['status']) ??
           WoFormStatus.idle,
@@ -18,7 +18,7 @@ _$WoFormImpl _$$WoFormImplFromJson(Map<String, dynamic> json) => _$WoFormImpl(
 
 Map<String, dynamic> _$$WoFormImplToJson(_$WoFormImpl instance) =>
     <String, dynamic>{
-      'inputs': const InputsMapConverter().toJson(instance.inputsMap),
+      'inputs': const WoFormInputsConverter().toJson(instance.inputsMap),
       'status': _$WoFormStatusEnumMap[instance.status]!,
       'errorCode': instance.errorCode,
       'unmodifiableValuesJson': instance.unmodifiableValuesJson,
