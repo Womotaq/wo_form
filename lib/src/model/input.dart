@@ -29,7 +29,10 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
     required String id,
     @Default(false) bool value,
     @Default(false) bool isRequired,
-    @Default(BooleanFieldSettings()) BooleanFieldSettings fieldSettings,
+    // ignore: invalid_annotation_target
+    @JsonKey(toJson: BooleanFieldSettings.staticToJson)
+    @Default(BooleanFieldSettings())
+    BooleanFieldSettings fieldSettings,
   }) = BooleanInput;
 
   const factory WoFormInput.string({
@@ -37,7 +40,10 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
     @Default('') String value,
     @Default(false) bool isRequired,
     RegexPattern? regexPattern,
-    @Default(StringFieldSettings()) StringFieldSettings fieldSettings,
+    // ignore: invalid_annotation_target
+    @JsonKey(toJson: StringFieldSettings.staticToJson)
+    @Default(StringFieldSettings())
+    StringFieldSettings fieldSettings,
   }) = StringInput;
 
   const factory WoFormInput.selectString({

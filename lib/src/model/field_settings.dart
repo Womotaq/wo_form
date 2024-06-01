@@ -20,6 +20,12 @@ class BooleanFieldSettings with _$BooleanFieldSettings {
   factory BooleanFieldSettings.fromJson(Map<String, dynamic> json) =>
       _$BooleanFieldSettingsFromJson(json);
 
+  static Map<String, dynamic> staticToJson(BooleanFieldSettings object) =>
+      object.toJson();
+
+  @override
+  Map<String, dynamic> toJson() => {};
+
   BooleanFieldSettings merge(BooleanFieldSettings? other) => other == null
       ? this
       : BooleanFieldSettings(
@@ -49,7 +55,7 @@ class SelectFieldSettings<T> with _$SelectFieldSettings<T> {
     return _$SelectFieldSettingsFromJson<T>(json, fromJsonT);
   }
 
-  Map<String, dynamic> toJson(Object Function(T value) toJsonT) {
+  Map<String, dynamic> toJson(Object? Function(T value) toJsonT) {
     return _$SelectFieldSettingsToJson<T>(this, toJsonT);
   }
 
@@ -149,6 +155,9 @@ class StringFieldSettings with _$StringFieldSettings {
 
   factory StringFieldSettings.fromJson(Map<String, dynamic> json) =>
       _$StringFieldSettingsFromJson(json);
+
+  static Map<String, dynamic> staticToJson(StringFieldSettings object) =>
+      object.toJson();
 
   StringFieldSettings merge(StringFieldSettings? other) => other == null
       ? this

@@ -63,7 +63,8 @@ Map<String, dynamic> _$$BooleanInputImplToJson(_$BooleanInputImpl instance) =>
       'id': instance.id,
       'value': instance.value,
       'isRequired': instance.isRequired,
-      'fieldSettings': instance.fieldSettings,
+      'fieldSettings':
+          BooleanFieldSettings.staticToJson(instance.fieldSettings),
       'runtimeType': instance.$type,
     };
 
@@ -87,7 +88,7 @@ Map<String, dynamic> _$$StringInputImplToJson(_$StringInputImpl instance) =>
       'value': instance.value,
       'isRequired': instance.isRequired,
       'regexPattern': _$RegexPatternEnumMap[instance.regexPattern],
-      'fieldSettings': instance.fieldSettings,
+      'fieldSettings': StringFieldSettings.staticToJson(instance.fieldSettings),
       'runtimeType': instance.$type,
     };
 

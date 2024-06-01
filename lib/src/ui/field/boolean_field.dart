@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wo_form/src/model/input.dart';
 import 'package:wo_form/wo_form.dart';
 
 class BooleanField<T extends WoFormCubit> extends StatelessWidget {

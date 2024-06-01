@@ -33,15 +33,26 @@ WoFormInput _$WoFormInputFromJson(Map<String, dynamic> json) {
 mixin _$WoFormInput {
   String get id => throw _privateConstructorUsedError;
   Object? get value => throw _privateConstructorUsedError;
-  bool get isRequired => throw _privateConstructorUsedError;
+  bool get isRequired =>
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
+  @JsonKey(toJson: BooleanFieldSettings.staticToJson)
   Object get fieldSettings => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String id, bool value, bool isRequired,
+    required TResult Function(
+            String id,
+            bool value,
+            bool isRequired,
+            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings fieldSettings)
         boolean,
-    required TResult Function(String id, String value, bool isRequired,
-            RegexPattern? regexPattern, StringFieldSettings fieldSettings)
+    required TResult Function(
+            String id,
+            String value,
+            bool isRequired,
+            RegexPattern? regexPattern,
+            @JsonKey(toJson: StringFieldSettings.staticToJson)
+            StringFieldSettings fieldSettings)
         string,
     required TResult Function(String id, String? value, bool isRequired,
             SelectFieldSettings<String> fieldSettings)
@@ -50,11 +61,20 @@ mixin _$WoFormInput {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id, bool value, bool isRequired,
+    TResult? Function(
+            String id,
+            bool value,
+            bool isRequired,
+            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings fieldSettings)?
         boolean,
-    TResult? Function(String id, String value, bool isRequired,
-            RegexPattern? regexPattern, StringFieldSettings fieldSettings)?
+    TResult? Function(
+            String id,
+            String value,
+            bool isRequired,
+            RegexPattern? regexPattern,
+            @JsonKey(toJson: StringFieldSettings.staticToJson)
+            StringFieldSettings fieldSettings)?
         string,
     TResult? Function(String id, String? value, bool isRequired,
             SelectFieldSettings<String> fieldSettings)?
@@ -63,11 +83,20 @@ mixin _$WoFormInput {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String id, bool value, bool isRequired,
+    TResult Function(
+            String id,
+            bool value,
+            bool isRequired,
+            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings fieldSettings)?
         boolean,
-    TResult Function(String id, String value, bool isRequired,
-            RegexPattern? regexPattern, StringFieldSettings fieldSettings)?
+    TResult Function(
+            String id,
+            String value,
+            bool isRequired,
+            RegexPattern? regexPattern,
+            @JsonKey(toJson: StringFieldSettings.staticToJson)
+            StringFieldSettings fieldSettings)?
         string,
     TResult Function(String id, String? value, bool isRequired,
             SelectFieldSettings<String> fieldSettings)?
@@ -153,6 +182,7 @@ abstract class _$$BooleanInputImplCopyWith<$Res>
       {String id,
       bool value,
       bool isRequired,
+      @JsonKey(toJson: BooleanFieldSettings.staticToJson)
       BooleanFieldSettings fieldSettings});
 
   $BooleanFieldSettingsCopyWith<$Res> get fieldSettings;
@@ -210,6 +240,7 @@ class _$BooleanInputImpl extends BooleanInput {
       {required this.id,
       this.value = false,
       this.isRequired = false,
+      @JsonKey(toJson: BooleanFieldSettings.staticToJson)
       this.fieldSettings = const BooleanFieldSettings(),
       final String? $type})
       : $type = $type ?? 'boolean',
@@ -226,8 +257,9 @@ class _$BooleanInputImpl extends BooleanInput {
   @override
   @JsonKey()
   final bool isRequired;
+// ignore: invalid_annotation_target
   @override
-  @JsonKey()
+  @JsonKey(toJson: BooleanFieldSettings.staticToJson)
   final BooleanFieldSettings fieldSettings;
 
   @JsonKey(name: 'runtimeType')
@@ -265,11 +297,20 @@ class _$BooleanInputImpl extends BooleanInput {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String id, bool value, bool isRequired,
+    required TResult Function(
+            String id,
+            bool value,
+            bool isRequired,
+            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings fieldSettings)
         boolean,
-    required TResult Function(String id, String value, bool isRequired,
-            RegexPattern? regexPattern, StringFieldSettings fieldSettings)
+    required TResult Function(
+            String id,
+            String value,
+            bool isRequired,
+            RegexPattern? regexPattern,
+            @JsonKey(toJson: StringFieldSettings.staticToJson)
+            StringFieldSettings fieldSettings)
         string,
     required TResult Function(String id, String? value, bool isRequired,
             SelectFieldSettings<String> fieldSettings)
@@ -281,11 +322,20 @@ class _$BooleanInputImpl extends BooleanInput {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id, bool value, bool isRequired,
+    TResult? Function(
+            String id,
+            bool value,
+            bool isRequired,
+            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings fieldSettings)?
         boolean,
-    TResult? Function(String id, String value, bool isRequired,
-            RegexPattern? regexPattern, StringFieldSettings fieldSettings)?
+    TResult? Function(
+            String id,
+            String value,
+            bool isRequired,
+            RegexPattern? regexPattern,
+            @JsonKey(toJson: StringFieldSettings.staticToJson)
+            StringFieldSettings fieldSettings)?
         string,
     TResult? Function(String id, String? value, bool isRequired,
             SelectFieldSettings<String> fieldSettings)?
@@ -297,11 +347,20 @@ class _$BooleanInputImpl extends BooleanInput {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String id, bool value, bool isRequired,
+    TResult Function(
+            String id,
+            bool value,
+            bool isRequired,
+            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings fieldSettings)?
         boolean,
-    TResult Function(String id, String value, bool isRequired,
-            RegexPattern? regexPattern, StringFieldSettings fieldSettings)?
+    TResult Function(
+            String id,
+            String value,
+            bool isRequired,
+            RegexPattern? regexPattern,
+            @JsonKey(toJson: StringFieldSettings.staticToJson)
+            StringFieldSettings fieldSettings)?
         string,
     TResult Function(String id, String? value, bool isRequired,
             SelectFieldSettings<String> fieldSettings)?
@@ -361,6 +420,7 @@ abstract class BooleanInput extends WoFormInput {
       {required final String id,
       final bool value,
       final bool isRequired,
+      @JsonKey(toJson: BooleanFieldSettings.staticToJson)
       final BooleanFieldSettings fieldSettings}) = _$BooleanInputImpl;
   const BooleanInput._() : super._();
 
@@ -373,7 +433,8 @@ abstract class BooleanInput extends WoFormInput {
   bool get value;
   @override
   bool get isRequired;
-  @override
+  @override // ignore: invalid_annotation_target
+  @JsonKey(toJson: BooleanFieldSettings.staticToJson)
   BooleanFieldSettings get fieldSettings;
   @override
   @JsonKey(ignore: true)
@@ -394,6 +455,7 @@ abstract class _$$StringInputImplCopyWith<$Res>
       String value,
       bool isRequired,
       RegexPattern? regexPattern,
+      @JsonKey(toJson: StringFieldSettings.staticToJson)
       StringFieldSettings fieldSettings});
 
   $StringFieldSettingsCopyWith<$Res> get fieldSettings;
@@ -457,6 +519,7 @@ class _$StringInputImpl extends StringInput {
       this.value = '',
       this.isRequired = false,
       this.regexPattern,
+      @JsonKey(toJson: StringFieldSettings.staticToJson)
       this.fieldSettings = const StringFieldSettings(),
       final String? $type})
       : $type = $type ?? 'string',
@@ -475,8 +538,9 @@ class _$StringInputImpl extends StringInput {
   final bool isRequired;
   @override
   final RegexPattern? regexPattern;
+// ignore: invalid_annotation_target
   @override
-  @JsonKey()
+  @JsonKey(toJson: StringFieldSettings.staticToJson)
   final StringFieldSettings fieldSettings;
 
   @JsonKey(name: 'runtimeType')
@@ -516,11 +580,20 @@ class _$StringInputImpl extends StringInput {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String id, bool value, bool isRequired,
+    required TResult Function(
+            String id,
+            bool value,
+            bool isRequired,
+            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings fieldSettings)
         boolean,
-    required TResult Function(String id, String value, bool isRequired,
-            RegexPattern? regexPattern, StringFieldSettings fieldSettings)
+    required TResult Function(
+            String id,
+            String value,
+            bool isRequired,
+            RegexPattern? regexPattern,
+            @JsonKey(toJson: StringFieldSettings.staticToJson)
+            StringFieldSettings fieldSettings)
         string,
     required TResult Function(String id, String? value, bool isRequired,
             SelectFieldSettings<String> fieldSettings)
@@ -532,11 +605,20 @@ class _$StringInputImpl extends StringInput {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id, bool value, bool isRequired,
+    TResult? Function(
+            String id,
+            bool value,
+            bool isRequired,
+            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings fieldSettings)?
         boolean,
-    TResult? Function(String id, String value, bool isRequired,
-            RegexPattern? regexPattern, StringFieldSettings fieldSettings)?
+    TResult? Function(
+            String id,
+            String value,
+            bool isRequired,
+            RegexPattern? regexPattern,
+            @JsonKey(toJson: StringFieldSettings.staticToJson)
+            StringFieldSettings fieldSettings)?
         string,
     TResult? Function(String id, String? value, bool isRequired,
             SelectFieldSettings<String> fieldSettings)?
@@ -548,11 +630,20 @@ class _$StringInputImpl extends StringInput {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String id, bool value, bool isRequired,
+    TResult Function(
+            String id,
+            bool value,
+            bool isRequired,
+            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings fieldSettings)?
         boolean,
-    TResult Function(String id, String value, bool isRequired,
-            RegexPattern? regexPattern, StringFieldSettings fieldSettings)?
+    TResult Function(
+            String id,
+            String value,
+            bool isRequired,
+            RegexPattern? regexPattern,
+            @JsonKey(toJson: StringFieldSettings.staticToJson)
+            StringFieldSettings fieldSettings)?
         string,
     TResult Function(String id, String? value, bool isRequired,
             SelectFieldSettings<String> fieldSettings)?
@@ -613,6 +704,7 @@ abstract class StringInput extends WoFormInput {
       final String value,
       final bool isRequired,
       final RegexPattern? regexPattern,
+      @JsonKey(toJson: StringFieldSettings.staticToJson)
       final StringFieldSettings fieldSettings}) = _$StringInputImpl;
   const StringInput._() : super._();
 
@@ -626,7 +718,8 @@ abstract class StringInput extends WoFormInput {
   @override
   bool get isRequired;
   RegexPattern? get regexPattern;
-  @override
+  @override // ignore: invalid_annotation_target
+  @JsonKey(toJson: StringFieldSettings.staticToJson)
   StringFieldSettings get fieldSettings;
   @override
   @JsonKey(ignore: true)
@@ -759,11 +852,20 @@ class _$SelectStringInputImpl extends SelectStringInput {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String id, bool value, bool isRequired,
+    required TResult Function(
+            String id,
+            bool value,
+            bool isRequired,
+            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings fieldSettings)
         boolean,
-    required TResult Function(String id, String value, bool isRequired,
-            RegexPattern? regexPattern, StringFieldSettings fieldSettings)
+    required TResult Function(
+            String id,
+            String value,
+            bool isRequired,
+            RegexPattern? regexPattern,
+            @JsonKey(toJson: StringFieldSettings.staticToJson)
+            StringFieldSettings fieldSettings)
         string,
     required TResult Function(String id, String? value, bool isRequired,
             SelectFieldSettings<String> fieldSettings)
@@ -775,11 +877,20 @@ class _$SelectStringInputImpl extends SelectStringInput {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id, bool value, bool isRequired,
+    TResult? Function(
+            String id,
+            bool value,
+            bool isRequired,
+            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings fieldSettings)?
         boolean,
-    TResult? Function(String id, String value, bool isRequired,
-            RegexPattern? regexPattern, StringFieldSettings fieldSettings)?
+    TResult? Function(
+            String id,
+            String value,
+            bool isRequired,
+            RegexPattern? regexPattern,
+            @JsonKey(toJson: StringFieldSettings.staticToJson)
+            StringFieldSettings fieldSettings)?
         string,
     TResult? Function(String id, String? value, bool isRequired,
             SelectFieldSettings<String> fieldSettings)?
@@ -791,11 +902,20 @@ class _$SelectStringInputImpl extends SelectStringInput {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String id, bool value, bool isRequired,
+    TResult Function(
+            String id,
+            bool value,
+            bool isRequired,
+            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings fieldSettings)?
         boolean,
-    TResult Function(String id, String value, bool isRequired,
-            RegexPattern? regexPattern, StringFieldSettings fieldSettings)?
+    TResult Function(
+            String id,
+            String value,
+            bool isRequired,
+            RegexPattern? regexPattern,
+            @JsonKey(toJson: StringFieldSettings.staticToJson)
+            StringFieldSettings fieldSettings)?
         string,
     TResult Function(String id, String? value, bool isRequired,
             SelectFieldSettings<String> fieldSettings)?
