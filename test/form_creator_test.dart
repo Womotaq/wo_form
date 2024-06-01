@@ -40,10 +40,7 @@ void main() {
           ),
           const BooleanInput(id: 'obscureText'),
           const BooleanInput(id: 'autocorrect'),
-          ListInput<String>(
-            id: 'autofillHints',
-            toJsonT: (value) => value, // TODO : supported type by default
-          ),
+          const ListInput<String>(id: 'autofillHints'),
           const BooleanInput(id: 'autofocus'),
           const SelectInput<TextInputAction>(id: 'textInputAction'),
           const SelectInput<TextCapitalization>(id: 'textCapitalization'),

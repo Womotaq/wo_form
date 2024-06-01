@@ -184,13 +184,7 @@ class ListInput<T> with _$ListInput<T>, WoFormInputMixin {
 
   @override
   Map<String, dynamic> toJson() {
-    if (toJsonT == null) {
-      if (value is Enum?) {
-        return _$ListInputToJson(this, (value) => (value as Enum?)?.name);
-      }
-
-      throw UnimplementedError('No toJsonT provided for ListInput<$T>');
-    }
+    if (toJsonT == null) return _$ListInputToJson(this, _defaultToJsonT<T>);
 
     return _$ListInputToJson(this, toJsonT!);
   }
@@ -199,7 +193,6 @@ class ListInput<T> with _$ListInput<T>, WoFormInputMixin {
 
   @override
   WoFormInputError? getError() {
-    // TODO
     if (isRequired && (value == null || value!.isEmpty)) {
       return WoFormInputError.empty(inputId: id);
     }
@@ -219,11 +212,8 @@ class ListInput<T> with _$ListInput<T>, WoFormInputMixin {
   @override
   Object? valueToJson() {
     if (toJsonT == null) {
-      if (value?.firstOrNull is Enum?) {
-        return value?.map((value) => (value as Enum?)?.name).toList();
-      }
-
-      throw UnimplementedError('No toJsonT provided for ListInput<$T>');
+      if (value == null) return null;
+      return _defaultToJsonT(value as T);
     }
 
     return value?.map((value) => toJsonT!(value)).toList();
@@ -253,13 +243,7 @@ class SelectInput<T> with _$SelectInput<T>, WoFormInputMixin {
 
   @override
   Map<String, dynamic> toJson() {
-    if (toJsonT == null) {
-    if (value is Enum?) {
-      return _$SelectInputToJson(this, (value) => (value as Enum?)?.name);
-    }
-
-      throw UnimplementedError('No toJsonT provided for SelectInput<$T>');
-    }
+    if (toJsonT == null) return _$SelectInputToJson(this, _defaultToJsonT<T>);
 
     return _$SelectInputToJson(this, toJsonT!);
   }
@@ -291,13 +275,20 @@ class SelectInput<T> with _$SelectInput<T>, WoFormInputMixin {
   @override
   Object? valueToJson() {
     if (toJsonT == null) {
-    if (value is Enum?) {
-      return (value as Enum?)?.name;
+      if (value == null) return null;
+      return _defaultToJsonT(value as T);
     }
-
-      throw UnimplementedError('No toJsonT provided for SelectInput<$T>');
-    }
-
+    
     return value == null ? null : toJsonT!(value as T);
   }
+}
+
+Object? _defaultToJsonT<T>(T value) {
+  if (value is Enum) {
+    return (value as Enum).name;
+  } else if (value is String || value is bool || value is num) {
+    return value;
+  }
+
+  throw UnimplementedError('No toJsonT provided for <$T>');
 }
