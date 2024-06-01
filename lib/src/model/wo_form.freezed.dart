@@ -21,10 +21,13 @@ WoForm _$WoFormFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$WoForm {
   @InputsMapConverter()
+  @JsonKey(name: 'inputs')
   Map<String, WoFormInputMixin> get inputsMap =>
       throw _privateConstructorUsedError;
   WoFormStatus get status => throw _privateConstructorUsedError;
   String? get errorCode => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get unmodifiableValuesJson =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,9 +40,12 @@ abstract class $WoFormCopyWith<$Res> {
       _$WoFormCopyWithImpl<$Res, WoForm>;
   @useResult
   $Res call(
-      {@InputsMapConverter() Map<String, WoFormInputMixin> inputsMap,
+      {@InputsMapConverter()
+      @JsonKey(name: 'inputs')
+      Map<String, WoFormInputMixin> inputsMap,
       WoFormStatus status,
-      String? errorCode});
+      String? errorCode,
+      Map<String, dynamic>? unmodifiableValuesJson});
 }
 
 /// @nodoc
@@ -58,6 +64,7 @@ class _$WoFormCopyWithImpl<$Res, $Val extends WoForm>
     Object? inputsMap = null,
     Object? status = null,
     Object? errorCode = freezed,
+    Object? unmodifiableValuesJson = freezed,
   }) {
     return _then(_value.copyWith(
       inputsMap: null == inputsMap
@@ -72,6 +79,10 @@ class _$WoFormCopyWithImpl<$Res, $Val extends WoForm>
           ? _value.errorCode
           : errorCode // ignore: cast_nullable_to_non_nullable
               as String?,
+      unmodifiableValuesJson: freezed == unmodifiableValuesJson
+          ? _value.unmodifiableValuesJson
+          : unmodifiableValuesJson // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ) as $Val);
   }
 }
@@ -84,9 +95,12 @@ abstract class _$$WoFormImplCopyWith<$Res> implements $WoFormCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@InputsMapConverter() Map<String, WoFormInputMixin> inputsMap,
+      {@InputsMapConverter()
+      @JsonKey(name: 'inputs')
+      Map<String, WoFormInputMixin> inputsMap,
       WoFormStatus status,
-      String? errorCode});
+      String? errorCode,
+      Map<String, dynamic>? unmodifiableValuesJson});
 }
 
 /// @nodoc
@@ -103,6 +117,7 @@ class __$$WoFormImplCopyWithImpl<$Res>
     Object? inputsMap = null,
     Object? status = null,
     Object? errorCode = freezed,
+    Object? unmodifiableValuesJson = freezed,
   }) {
     return _then(_$WoFormImpl(
       inputsMap: null == inputsMap
@@ -117,6 +132,10 @@ class __$$WoFormImplCopyWithImpl<$Res>
           ? _value.errorCode
           : errorCode // ignore: cast_nullable_to_non_nullable
               as String?,
+      unmodifiableValuesJson: freezed == unmodifiableValuesJson
+          ? _value._unmodifiableValuesJson
+          : unmodifiableValuesJson // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ));
   }
 }
@@ -126,10 +145,13 @@ class __$$WoFormImplCopyWithImpl<$Res>
 class _$WoFormImpl extends _WoForm {
   const _$WoFormImpl(
       {@InputsMapConverter()
+      @JsonKey(name: 'inputs')
       required final Map<String, WoFormInputMixin> inputsMap,
       this.status = WoFormStatus.idle,
-      this.errorCode})
+      this.errorCode,
+      final Map<String, dynamic>? unmodifiableValuesJson})
       : _inputsMap = inputsMap,
+        _unmodifiableValuesJson = unmodifiableValuesJson,
         super._();
 
   factory _$WoFormImpl.fromJson(Map<String, dynamic> json) =>
@@ -138,6 +160,7 @@ class _$WoFormImpl extends _WoForm {
   final Map<String, WoFormInputMixin> _inputsMap;
   @override
   @InputsMapConverter()
+  @JsonKey(name: 'inputs')
   Map<String, WoFormInputMixin> get inputsMap {
     if (_inputsMap is EqualUnmodifiableMapView) return _inputsMap;
     // ignore: implicit_dynamic_type
@@ -149,10 +172,20 @@ class _$WoFormImpl extends _WoForm {
   final WoFormStatus status;
   @override
   final String? errorCode;
+  final Map<String, dynamic>? _unmodifiableValuesJson;
+  @override
+  Map<String, dynamic>? get unmodifiableValuesJson {
+    final value = _unmodifiableValuesJson;
+    if (value == null) return null;
+    if (_unmodifiableValuesJson is EqualUnmodifiableMapView)
+      return _unmodifiableValuesJson;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
 
   @override
   String toString() {
-    return 'WoForm._private(inputsMap: $inputsMap, status: $status, errorCode: $errorCode)';
+    return 'WoForm._private(inputsMap: $inputsMap, status: $status, errorCode: $errorCode, unmodifiableValuesJson: $unmodifiableValuesJson)';
   }
 
   @override
@@ -164,13 +197,19 @@ class _$WoFormImpl extends _WoForm {
                 .equals(other._inputsMap, _inputsMap) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.errorCode, errorCode) ||
-                other.errorCode == errorCode));
+                other.errorCode == errorCode) &&
+            const DeepCollectionEquality().equals(
+                other._unmodifiableValuesJson, _unmodifiableValuesJson));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_inputsMap), status, errorCode);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_inputsMap),
+      status,
+      errorCode,
+      const DeepCollectionEquality().hash(_unmodifiableValuesJson));
 
   @JsonKey(ignore: true)
   @override
@@ -189,20 +228,25 @@ class _$WoFormImpl extends _WoForm {
 abstract class _WoForm extends WoForm {
   const factory _WoForm(
       {@InputsMapConverter()
+      @JsonKey(name: 'inputs')
       required final Map<String, WoFormInputMixin> inputsMap,
       final WoFormStatus status,
-      final String? errorCode}) = _$WoFormImpl;
+      final String? errorCode,
+      final Map<String, dynamic>? unmodifiableValuesJson}) = _$WoFormImpl;
   const _WoForm._() : super._();
 
   factory _WoForm.fromJson(Map<String, dynamic> json) = _$WoFormImpl.fromJson;
 
   @override
   @InputsMapConverter()
+  @JsonKey(name: 'inputs')
   Map<String, WoFormInputMixin> get inputsMap;
   @override
   WoFormStatus get status;
   @override
   String? get errorCode;
+  @override
+  Map<String, dynamic>? get unmodifiableValuesJson;
   @override
   @JsonKey(ignore: true)
   _$$WoFormImplCopyWith<_$WoFormImpl> get copyWith =>

@@ -599,6 +599,7 @@ mixin _$StringFieldSettings {
       throw _privateConstructorUsedError;
   int? get maxLines => throw _privateConstructorUsedError;
   String? get hintText => throw _privateConstructorUsedError;
+  String? get invalidRegexMessage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -624,7 +625,8 @@ abstract class $StringFieldSettingsCopyWith<$Res> {
       TextInputAction? textInputAction,
       TextCapitalization? textCapitalization,
       int? maxLines,
-      String? hintText});
+      String? hintText,
+      String? invalidRegexMessage});
 }
 
 /// @nodoc
@@ -652,6 +654,7 @@ class _$StringFieldSettingsCopyWithImpl<$Res, $Val extends StringFieldSettings>
     Object? textCapitalization = freezed,
     Object? maxLines = freezed,
     Object? hintText = freezed,
+    Object? invalidRegexMessage = freezed,
   }) {
     return _then(_value.copyWith(
       labelText: freezed == labelText
@@ -702,6 +705,10 @@ class _$StringFieldSettingsCopyWithImpl<$Res, $Val extends StringFieldSettings>
           ? _value.hintText
           : hintText // ignore: cast_nullable_to_non_nullable
               as String?,
+      invalidRegexMessage: freezed == invalidRegexMessage
+          ? _value.invalidRegexMessage
+          : invalidRegexMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -726,7 +733,8 @@ abstract class _$$StringFieldSettingsImplCopyWith<$Res>
       TextInputAction? textInputAction,
       TextCapitalization? textCapitalization,
       int? maxLines,
-      String? hintText});
+      String? hintText,
+      String? invalidRegexMessage});
 }
 
 /// @nodoc
@@ -752,6 +760,7 @@ class __$$StringFieldSettingsImplCopyWithImpl<$Res>
     Object? textCapitalization = freezed,
     Object? maxLines = freezed,
     Object? hintText = freezed,
+    Object? invalidRegexMessage = freezed,
   }) {
     return _then(_$StringFieldSettingsImpl(
       labelText: freezed == labelText
@@ -802,6 +811,10 @@ class __$$StringFieldSettingsImplCopyWithImpl<$Res>
           ? _value.hintText
           : hintText // ignore: cast_nullable_to_non_nullable
               as String?,
+      invalidRegexMessage: freezed == invalidRegexMessage
+          ? _value.invalidRegexMessage
+          : invalidRegexMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -821,7 +834,8 @@ class _$StringFieldSettingsImpl extends _StringFieldSettings {
       this.textInputAction,
       this.textCapitalization,
       this.maxLines,
-      this.hintText})
+      this.hintText,
+      this.invalidRegexMessage})
       : _autofillHints = autofillHints,
         super._();
 
@@ -861,10 +875,12 @@ class _$StringFieldSettingsImpl extends _StringFieldSettings {
   final int? maxLines;
   @override
   final String? hintText;
+  @override
+  final String? invalidRegexMessage;
 
   @override
   String toString() {
-    return 'StringFieldSettings(labelText: $labelText, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, hintText: $hintText)';
+    return 'StringFieldSettings(labelText: $labelText, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, hintText: $hintText, invalidRegexMessage: $invalidRegexMessage)';
   }
 
   @override
@@ -896,7 +912,9 @@ class _$StringFieldSettingsImpl extends _StringFieldSettings {
             (identical(other.maxLines, maxLines) ||
                 other.maxLines == maxLines) &&
             (identical(other.hintText, hintText) ||
-                other.hintText == hintText));
+                other.hintText == hintText) &&
+            (identical(other.invalidRegexMessage, invalidRegexMessage) ||
+                other.invalidRegexMessage == invalidRegexMessage));
   }
 
   @JsonKey(ignore: true)
@@ -914,7 +932,8 @@ class _$StringFieldSettingsImpl extends _StringFieldSettings {
       textInputAction,
       textCapitalization,
       maxLines,
-      hintText);
+      hintText,
+      invalidRegexMessage);
 
   @JsonKey(ignore: true)
   @override
@@ -944,7 +963,8 @@ abstract class _StringFieldSettings extends StringFieldSettings {
       final TextInputAction? textInputAction,
       final TextCapitalization? textCapitalization,
       final int? maxLines,
-      final String? hintText}) = _$StringFieldSettingsImpl;
+      final String? hintText,
+      final String? invalidRegexMessage}) = _$StringFieldSettingsImpl;
   const _StringFieldSettings._() : super._();
 
   factory _StringFieldSettings.fromJson(Map<String, dynamic> json) =
@@ -975,6 +995,8 @@ abstract class _StringFieldSettings extends StringFieldSettings {
   int? get maxLines;
   @override
   String? get hintText;
+  @override
+  String? get invalidRegexMessage;
   @override
   @JsonKey(ignore: true)
   _$$StringFieldSettingsImplCopyWith<_$StringFieldSettingsImpl> get copyWith =>

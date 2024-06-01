@@ -73,8 +73,7 @@ _$StringInputImpl _$$StringInputImplFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       value: json['value'] as String? ?? '',
       isRequired: json['isRequired'] as bool? ?? false,
-      regexPattern:
-          $enumDecodeNullable(_$RegexPatternEnumMap, json['regexPattern']),
+      regexPattern: json['regexPattern'] as String?,
       fieldSettings: json['fieldSettings'] == null
           ? const StringFieldSettings()
           : StringFieldSettings.fromJson(
@@ -87,16 +86,10 @@ Map<String, dynamic> _$$StringInputImplToJson(_$StringInputImpl instance) =>
       'id': instance.id,
       'value': instance.value,
       'isRequired': instance.isRequired,
-      'regexPattern': _$RegexPatternEnumMap[instance.regexPattern],
+      'regexPattern': instance.regexPattern,
       'fieldSettings': StringFieldSettings.staticToJson(instance.fieldSettings),
       'runtimeType': instance.$type,
     };
-
-const _$RegexPatternEnumMap = {
-  RegexPattern.email: 'email',
-  RegexPattern.password: 'password',
-  RegexPattern.username: 'username',
-};
 
 _$SelectStringInputImpl _$$SelectStringInputImplFromJson(
         Map<String, dynamic> json) =>

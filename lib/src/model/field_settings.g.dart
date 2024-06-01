@@ -99,6 +99,7 @@ _$StringFieldSettingsImpl _$$StringFieldSettingsImplFromJson(
           _$TextCapitalizationEnumMap, json['textCapitalization']),
       maxLines: (json['maxLines'] as num?)?.toInt(),
       hintText: json['hintText'] as String?,
+      invalidRegexMessage: json['invalidRegexMessage'] as String?,
     );
 
 Map<String, dynamic> _$$StringFieldSettingsImplToJson(
@@ -118,6 +119,7 @@ Map<String, dynamic> _$$StringFieldSettingsImplToJson(
           _$TextCapitalizationEnumMap[instance.textCapitalization],
       'maxLines': instance.maxLines,
       'hintText': instance.hintText,
+      'invalidRegexMessage': instance.invalidRegexMessage,
     };
 
 const _$StringFieldActionEnumMap = {

@@ -33,8 +33,7 @@ WoFormInput _$WoFormInputFromJson(Map<String, dynamic> json) {
 mixin _$WoFormInput {
   String get id => throw _privateConstructorUsedError;
   Object? get value => throw _privateConstructorUsedError;
-  bool get isRequired =>
-      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
+  bool get isRequired => throw _privateConstructorUsedError;
   @JsonKey(toJson: BooleanFieldSettings.staticToJson)
   Object get fieldSettings => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,7 +49,7 @@ mixin _$WoFormInput {
             String id,
             String value,
             bool isRequired,
-            RegexPattern? regexPattern,
+            String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
             StringFieldSettings fieldSettings)
         string,
@@ -72,7 +71,7 @@ mixin _$WoFormInput {
             String id,
             String value,
             bool isRequired,
-            RegexPattern? regexPattern,
+            String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
             StringFieldSettings fieldSettings)?
         string,
@@ -94,7 +93,7 @@ mixin _$WoFormInput {
             String id,
             String value,
             bool isRequired,
-            RegexPattern? regexPattern,
+            String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
             StringFieldSettings fieldSettings)?
         string,
@@ -257,7 +256,6 @@ class _$BooleanInputImpl extends BooleanInput {
   @override
   @JsonKey()
   final bool isRequired;
-// ignore: invalid_annotation_target
   @override
   @JsonKey(toJson: BooleanFieldSettings.staticToJson)
   final BooleanFieldSettings fieldSettings;
@@ -308,7 +306,7 @@ class _$BooleanInputImpl extends BooleanInput {
             String id,
             String value,
             bool isRequired,
-            RegexPattern? regexPattern,
+            String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
             StringFieldSettings fieldSettings)
         string,
@@ -333,7 +331,7 @@ class _$BooleanInputImpl extends BooleanInput {
             String id,
             String value,
             bool isRequired,
-            RegexPattern? regexPattern,
+            String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
             StringFieldSettings fieldSettings)?
         string,
@@ -358,7 +356,7 @@ class _$BooleanInputImpl extends BooleanInput {
             String id,
             String value,
             bool isRequired,
-            RegexPattern? regexPattern,
+            String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
             StringFieldSettings fieldSettings)?
         string,
@@ -433,7 +431,7 @@ abstract class BooleanInput extends WoFormInput {
   bool get value;
   @override
   bool get isRequired;
-  @override // ignore: invalid_annotation_target
+  @override
   @JsonKey(toJson: BooleanFieldSettings.staticToJson)
   BooleanFieldSettings get fieldSettings;
   @override
@@ -454,7 +452,7 @@ abstract class _$$StringInputImplCopyWith<$Res>
       {String id,
       String value,
       bool isRequired,
-      RegexPattern? regexPattern,
+      String? regexPattern,
       @JsonKey(toJson: StringFieldSettings.staticToJson)
       StringFieldSettings fieldSettings});
 
@@ -494,7 +492,7 @@ class __$$StringInputImplCopyWithImpl<$Res>
       regexPattern: freezed == regexPattern
           ? _value.regexPattern
           : regexPattern // ignore: cast_nullable_to_non_nullable
-              as RegexPattern?,
+              as String?,
       fieldSettings: null == fieldSettings
           ? _value.fieldSettings
           : fieldSettings // ignore: cast_nullable_to_non_nullable
@@ -537,8 +535,7 @@ class _$StringInputImpl extends StringInput {
   @JsonKey()
   final bool isRequired;
   @override
-  final RegexPattern? regexPattern;
-// ignore: invalid_annotation_target
+  final String? regexPattern;
   @override
   @JsonKey(toJson: StringFieldSettings.staticToJson)
   final StringFieldSettings fieldSettings;
@@ -591,7 +588,7 @@ class _$StringInputImpl extends StringInput {
             String id,
             String value,
             bool isRequired,
-            RegexPattern? regexPattern,
+            String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
             StringFieldSettings fieldSettings)
         string,
@@ -616,7 +613,7 @@ class _$StringInputImpl extends StringInput {
             String id,
             String value,
             bool isRequired,
-            RegexPattern? regexPattern,
+            String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
             StringFieldSettings fieldSettings)?
         string,
@@ -641,7 +638,7 @@ class _$StringInputImpl extends StringInput {
             String id,
             String value,
             bool isRequired,
-            RegexPattern? regexPattern,
+            String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
             StringFieldSettings fieldSettings)?
         string,
@@ -703,7 +700,7 @@ abstract class StringInput extends WoFormInput {
       {required final String id,
       final String value,
       final bool isRequired,
-      final RegexPattern? regexPattern,
+      final String? regexPattern,
       @JsonKey(toJson: StringFieldSettings.staticToJson)
       final StringFieldSettings fieldSettings}) = _$StringInputImpl;
   const StringInput._() : super._();
@@ -717,8 +714,8 @@ abstract class StringInput extends WoFormInput {
   String get value;
   @override
   bool get isRequired;
-  RegexPattern? get regexPattern;
-  @override // ignore: invalid_annotation_target
+  String? get regexPattern;
+  @override
   @JsonKey(toJson: StringFieldSettings.staticToJson)
   StringFieldSettings get fieldSettings;
   @override
@@ -863,7 +860,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             String id,
             String value,
             bool isRequired,
-            RegexPattern? regexPattern,
+            String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
             StringFieldSettings fieldSettings)
         string,
@@ -888,7 +885,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             String id,
             String value,
             bool isRequired,
-            RegexPattern? regexPattern,
+            String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
             StringFieldSettings fieldSettings)?
         string,
@@ -913,7 +910,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             String id,
             String value,
             bool isRequired,
-            RegexPattern? regexPattern,
+            String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
             StringFieldSettings fieldSettings)?
         string,
@@ -1002,7 +999,7 @@ mixin _$SelectInput<T> {
   T? get value => throw _privateConstructorUsedError;
   bool get isRequired => throw _privateConstructorUsedError;
   SelectFieldSettings<T>? get fieldSettings =>
-      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
+      throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
   Object? Function(T)? get toJsonT => throw _privateConstructorUsedError;
 
@@ -1167,7 +1164,6 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
   final bool isRequired;
   @override
   final SelectFieldSettings<T>? fieldSettings;
-// ignore: invalid_annotation_target
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final Object? Function(T)? toJsonT;
@@ -1226,7 +1222,7 @@ abstract class _SelectInput<T> extends SelectInput<T> {
   bool get isRequired;
   @override
   SelectFieldSettings<T>? get fieldSettings;
-  @override // ignore: invalid_annotation_target
+  @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   Object? Function(T)? get toJsonT;
   @override

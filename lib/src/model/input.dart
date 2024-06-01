@@ -21,7 +21,11 @@ mixin WoFormInputMixin {
   String? getInvalidExplanation(FormLocalizations formL10n);
 
   Map<String, dynamic> toJson();
+
+  Object? valueToJson();
 }
+
+enum WoFormInputType { boolean, string, selectString }
 
 @freezed
 sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
@@ -29,7 +33,6 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
     required String id,
     @Default(false) bool value,
     @Default(false) bool isRequired,
-    // ignore: invalid_annotation_target
     @JsonKey(toJson: BooleanFieldSettings.staticToJson)
     @Default(BooleanFieldSettings())
     BooleanFieldSettings fieldSettings,
@@ -39,8 +42,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
     required String id,
     @Default('') String value,
     @Default(false) bool isRequired,
-    RegexPattern? regexPattern,
-    // ignore: invalid_annotation_target
+    String? regexPattern,
     @JsonKey(toJson: StringFieldSettings.staticToJson)
     @Default(StringFieldSettings())
     StringFieldSettings fieldSettings,
@@ -61,6 +63,15 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
 
   // --
 
+  static List<String> types = [
+    'boolean',
+    'string',
+    'selectString',
+  ];
+  static String booleanType = 'boolean';
+  static String stringType = 'string';
+  static String selectStringType = 'selectString';
+
   @override
   WoFormInputError? getError() {
     switch (this) {
@@ -73,7 +84,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
         if (value.isEmpty) {
           return isRequired ? WoFormInputError.empty(inputId: id) : null;
         } else if (regexPattern != null &&
-            !RegExp(regexPattern.value).hasMatch(value)) {
+            !RegExp(regexPattern).hasMatch(value)) {
           return WoFormInputError.invalid(inputId: id);
         } else {
           return null;
@@ -97,15 +108,25 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
       case SelectStringInput():
         break;
 
-      case StringInput(regexPattern: final regexPattern):
+      case StringInput(
+          regexPattern: final regexPattern,
+          fieldSettings: final fieldSettings,
+        ):
         if (error.code == WoFormInputError.invalidCode &&
             regexPattern != null) {
-          return formL10n.regexPatternUnmatched(regexPattern.name);
+          return fieldSettings.invalidRegexMessage;
         }
     }
 
     return formL10n.formError(error.code);
   }
+
+  @override
+  Object? valueToJson() => switch (this) {
+        BooleanInput() => value,
+        StringInput() => value,
+        SelectStringInput() => value,
+      };
 }
 
 @freezed
@@ -116,7 +137,6 @@ class SelectInput<T> with _$SelectInput<T>, WoFormInputMixin {
     T? value,
     @Default(false) bool isRequired,
     SelectFieldSettings<T>? fieldSettings,
-    // ignore: invalid_annotation_target
     @JsonKey(includeToJson: false, includeFromJson: false)
     Object? Function(T)? toJsonT,
   }) = _SelectInput<T>;
@@ -153,38 +173,13 @@ class SelectInput<T> with _$SelectInput<T>, WoFormInputMixin {
 
     return formL10n.formError(error.code);
   }
-}
 
-enum RegexPattern {
-  /// Email regex
-  ///
-  /// References: [RFC2822 Email Validation](https://regexr.com/2rhq7) by Tripleaxis
-  email(
-    r"^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$",
-  ),
+  @override
+  Object? valueToJson() {
+    if (toJsonT == null) {
+      throw UnimplementedError('No toJsonT provided for SelectInput<$T>');
+    }
 
-  /// Password (Normal) Regex
-  ///
-  /// No whitespace allowed
-  /// Must contains at least: 1 uppercase letter, 1 lowecase letter & 1 number
-  /// Minimum characters: 8
-  ///
-  /// References: regex_pattern package
-  password(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)\S{8,}$'),
-
-  /// Username regex (v2)
-  ///
-  /// May start with @
-  /// Minimum 3 characters
-  /// Allowed to use aplhanumeric, underscore ("_"), dash ("-"), and period
-  /// (".") characters.
-  /// Has only one symbols in a row.
-  /// Symbols can only be used in the middle of name.
-  ///
-  /// References: regex_pattern package
-  username(r'^(?!.*[_\.\-]{2})@?[a-zA-Z0-9][a-zA-Z0-9_\.\-]+[a-zA-Z0-9]$');
-
-  const RegexPattern(this.value);
-
-  final String value;
+    return value == null ? null : toJsonT!(value as T);
+  }
 }

@@ -15,22 +15,27 @@ enum WoFormStatus {
 
 @freezed
 abstract class WoForm with _$WoForm {
-  const factory WoForm._private({
-    @InputsMapConverter() required Map<String, WoFormInputMixin> inputsMap,
-    @Default(WoFormStatus.idle) WoFormStatus status,
-    String? errorCode,
-  }) = _WoForm;
-
   factory WoForm({
     required Iterable<WoFormInputMixin> inputs,
     WoFormStatus? status,
     String? errorCode,
+    Map<String, dynamic>? unmodifiableValuesJson,
   }) =>
       WoForm._private(
         inputsMap: {for (final input in inputs) input.id: input},
         status: status ?? WoFormStatus.idle,
         errorCode: errorCode,
+        unmodifiableValuesJson: unmodifiableValuesJson,
       );
+
+  const factory WoForm._private({
+    @InputsMapConverter()
+    @JsonKey(name: 'inputs')
+    required Map<String, WoFormInputMixin> inputsMap,
+    @Default(WoFormStatus.idle) WoFormStatus status,
+    String? errorCode,
+    Map<String, dynamic>? unmodifiableValuesJson,
+  }) = _WoForm;
 
   /// Required for the override getter
   const WoForm._();
@@ -55,4 +60,8 @@ abstract class WoForm with _$WoForm {
 
     return input.getInvalidExplanation(formL10n);
   }
+
+  Map<String, dynamic> valuesToJson() => {
+        for (final input in inputs) input.id: input.valueToJson(),
+      }..addEntries((unmodifiableValuesJson ?? {}).entries);
 }

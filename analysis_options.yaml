@@ -6,6 +6,8 @@ analyzer:
     - "**.freezed.dart"
     - "**.g.dart"
     - "**localizations**.dart"
+  errors:
+    invalid_annotation_target: ignore
 
 linter:
   rules:

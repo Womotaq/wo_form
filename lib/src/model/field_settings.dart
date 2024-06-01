@@ -108,6 +108,7 @@ class StringFieldSettings with _$StringFieldSettings {
     TextCapitalization? textCapitalization,
     int? maxLines,
     String? hintText,
+    String? invalidRegexMessage,
   }) = _StringFieldSettings;
 
   factory StringFieldSettings.email({
@@ -116,6 +117,7 @@ class StringFieldSettings with _$StringFieldSettings {
     bool? autofocus,
     TextInputAction? textInputAction,
     String? hintText,
+    String? invalidRegexMessage,
   }) =>
       StringFieldSettings(
         labelText: labelText,
@@ -123,6 +125,7 @@ class StringFieldSettings with _$StringFieldSettings {
         autofocus: autofocus,
         textInputAction: textInputAction,
         hintText: hintText,
+        invalidRegexMessage: invalidRegexMessage,
         keyboardType: TextInputType.emailAddress,
         autocorrect: false,
         autofillHints: const [AutofillHints.email],
@@ -134,12 +137,14 @@ class StringFieldSettings with _$StringFieldSettings {
     bool? submitFormOnFieldSubmitted,
     TextInputAction? textInputAction,
     String? hintText,
+    String? invalidRegexMessage,
   }) =>
       StringFieldSettings(
         labelText: labelText,
         submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
         textInputAction: textInputAction,
         hintText: hintText,
+        invalidRegexMessage: invalidRegexMessage,
         action: StringFieldAction.obscure,
         keyboardType: TextInputType.visiblePassword,
         obscureText: true,
@@ -175,5 +180,6 @@ class StringFieldSettings with _$StringFieldSettings {
           maxLines: maxLines ?? other.maxLines,
           labelText: labelText ?? other.labelText,
           hintText: hintText ?? other.hintText,
+          invalidRegexMessage: invalidRegexMessage ?? other.invalidRegexMessage,
         );
 }
