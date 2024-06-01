@@ -40,11 +40,14 @@ void main() {
           ),
           const BooleanInput(id: 'obscureText'),
           const BooleanInput(id: 'autocorrect'),
-          // List<String>? autofillHints,
+          ListInput<String>(
+            id: 'autofillHints',
+            toJsonT: (value) => value, // TODO : supported type by default
+          ),
           const BooleanInput(id: 'autofocus'),
           const SelectInput<TextInputAction>(id: 'textInputAction'),
           const SelectInput<TextCapitalization>(id: 'textCapitalization'),
-          // int? maxLines,
+          const NumInput(id: 'maxLines'),
           const StringInput(id: 'hintText'),
           const StringInput(id: 'invalidRegexMessage'),
         ],

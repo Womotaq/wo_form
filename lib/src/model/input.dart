@@ -48,6 +48,20 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
     MapFieldSettings fieldSettings,
   }) = InputsListInput;
 
+  const factory WoFormInput.num({
+    required String id,
+    num? value,
+    @Default(false) bool isRequired,
+  }) = NumInput;
+
+  const factory WoFormInput.selectString({
+    required String id,
+    String? value,
+    @Default(false) bool isRequired,
+    @Default(SelectFieldSettings<String>())
+    SelectFieldSettings<String> fieldSettings,
+  }) = SelectStringInput;
+
   const factory WoFormInput.string({
     required String id,
     String? value,
@@ -57,14 +71,6 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
     @Default(StringFieldSettings())
     StringFieldSettings fieldSettings,
   }) = StringInput;
-
-  const factory WoFormInput.selectString({
-    required String id,
-    String? value,
-    @Default(false) bool isRequired,
-    @Default(SelectFieldSettings<String>())
-    SelectFieldSettings<String> fieldSettings,
-  }) = SelectStringInput;
 
   const WoFormInput._();
 
@@ -95,6 +101,11 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
             ? WoFormInputError.empty(inputId: id)
             : null;
 
+      case NumInput(value: final value):
+        return isRequired && value == null
+            ? WoFormInputError.empty(inputId: id)
+            : null;
+
       case StringInput(value: final value, regexPattern: final regexPattern):
         if (value == null || value.isEmpty) {
           return isRequired ? WoFormInputError.empty(inputId: id) : null;
@@ -121,6 +132,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
     switch (this) {
       case BooleanInput():
       case InputsListInput():
+      case NumInput(): // TODO
       case SelectStringInput():
         break;
 
@@ -144,9 +156,78 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
             for (final input in inputs ?? <WoFormInputMixin>[])
               input.id: input.valueToJson(),
           },
+        NumInput() => value,
         StringInput() => value,
         SelectStringInput() => value,
       };
+}
+
+@freezed
+@JsonSerializable(genericArgumentFactories: true)
+class ListInput<T> with _$ListInput<T>, WoFormInputMixin {
+  const factory ListInput({
+    required String id,
+    List<T>? value,
+    @Default(false) bool isRequired,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    Object? Function(T)? toJsonT,
+  }) = _ListInput<T>;
+
+  const ListInput._();
+
+  factory ListInput.fromJson(
+    Map<String, dynamic> json,
+    T Function(Object? json) fromJsonT,
+  ) {
+    return _$ListInputFromJson(json, fromJsonT);
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    if (toJsonT == null) {
+      if (value is Enum?) {
+        return _$ListInputToJson(this, (value) => (value as Enum?)?.name);
+      }
+
+      throw UnimplementedError('No toJsonT provided for ListInput<$T>');
+    }
+
+    return _$ListInputToJson(this, toJsonT!);
+  }
+
+  // --
+
+  @override
+  WoFormInputError? getError() {
+    // TODO
+    if (isRequired && (value == null || value!.isEmpty)) {
+      return WoFormInputError.empty(inputId: id);
+    }
+
+    return null;
+  }
+
+  @override
+  String? getInvalidExplanation(FormLocalizations formL10n) {
+    final error = getError();
+
+    if (error == null) return null;
+
+    return formL10n.formError(error.code);
+  }
+
+  @override
+  Object? valueToJson() {
+    if (toJsonT == null) {
+      if (value?.firstOrNull is Enum?) {
+        return value?.map((value) => (value as Enum?)?.name).toList();
+      }
+
+      throw UnimplementedError('No toJsonT provided for ListInput<$T>');
+    }
+
+    return value?.map((value) => toJsonT!(value)).toList();
+  }
 }
 
 @freezed
@@ -172,11 +253,11 @@ class SelectInput<T> with _$SelectInput<T>, WoFormInputMixin {
 
   @override
   Map<String, dynamic> toJson() {
+    if (toJsonT == null) {
     if (value is Enum?) {
       return _$SelectInputToJson(this, (value) => (value as Enum?)?.name);
     }
 
-    if (toJsonT == null) {
       throw UnimplementedError('No toJsonT provided for SelectInput<$T>');
     }
 
@@ -209,11 +290,11 @@ class SelectInput<T> with _$SelectInput<T>, WoFormInputMixin {
 
   @override
   Object? valueToJson() {
+    if (toJsonT == null) {
     if (value is Enum?) {
       return (value as Enum?)?.name;
     }
 
-    if (toJsonT == null) {
       throw UnimplementedError('No toJsonT provided for SelectInput<$T>');
     }
 

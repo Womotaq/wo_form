@@ -6,6 +6,26 @@ part of 'input.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+ListInput<T> _$ListInputFromJson<T>(
+  Map<String, dynamic> json,
+  T Function(Object? json) fromJsonT,
+) =>
+    ListInput<T>(
+      id: json['id'] as String,
+      value: (json['value'] as List<dynamic>?)?.map(fromJsonT).toList(),
+      isRequired: json['isRequired'] as bool,
+    );
+
+Map<String, dynamic> _$ListInputToJson<T>(
+  ListInput<T> instance,
+  Object? Function(T value) toJsonT,
+) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'value': instance.value?.map(toJsonT).toList(),
+      'isRequired': instance.isRequired,
+    };
+
 SelectInput<T> _$SelectInputFromJson<T>(
   Map<String, dynamic> json,
   T Function(Object? json) fromJsonT,
@@ -107,26 +127,19 @@ Json? _$JsonConverterToJson<Json, Value>(
 ) =>
     value == null ? null : toJson(value);
 
-_$StringInputImpl _$$StringInputImplFromJson(Map<String, dynamic> json) =>
-    _$StringInputImpl(
+_$NumInputImpl _$$NumInputImplFromJson(Map<String, dynamic> json) =>
+    _$NumInputImpl(
       id: json['id'] as String,
-      value: json['value'] as String?,
+      value: json['value'] as num?,
       isRequired: json['isRequired'] as bool? ?? false,
-      regexPattern: json['regexPattern'] as String?,
-      fieldSettings: json['fieldSettings'] == null
-          ? const StringFieldSettings()
-          : StringFieldSettings.fromJson(
-              json['fieldSettings'] as Map<String, dynamic>),
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$StringInputImplToJson(_$StringInputImpl instance) =>
+Map<String, dynamic> _$$NumInputImplToJson(_$NumInputImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'value': instance.value,
       'isRequired': instance.isRequired,
-      'regexPattern': instance.regexPattern,
-      'fieldSettings': StringFieldSettings.staticToJson(instance.fieldSettings),
       'runtimeType': instance.$type,
     };
 
@@ -153,5 +166,28 @@ Map<String, dynamic> _$$SelectStringInputImplToJson(
       'fieldSettings': instance.fieldSettings.toJson(
         (value) => value,
       ),
+      'runtimeType': instance.$type,
+    };
+
+_$StringInputImpl _$$StringInputImplFromJson(Map<String, dynamic> json) =>
+    _$StringInputImpl(
+      id: json['id'] as String,
+      value: json['value'] as String?,
+      isRequired: json['isRequired'] as bool? ?? false,
+      regexPattern: json['regexPattern'] as String?,
+      fieldSettings: json['fieldSettings'] == null
+          ? const StringFieldSettings()
+          : StringFieldSettings.fromJson(
+              json['fieldSettings'] as Map<String, dynamic>),
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$StringInputImplToJson(_$StringInputImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'value': instance.value,
+      'isRequired': instance.isRequired,
+      'regexPattern': instance.regexPattern,
+      'fieldSettings': StringFieldSettings.staticToJson(instance.fieldSettings),
       'runtimeType': instance.$type,
     };
