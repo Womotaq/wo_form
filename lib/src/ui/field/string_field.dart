@@ -4,13 +4,16 @@ import 'package:wo_form/wo_form.dart';
 
 class StringField<T extends WoFormCubit> extends StatefulWidget {
   const StringField({
-    required this.getInput,
+    required this.inputId,
     this.settings,
     super.key,
   });
 
-  final StringInput Function(WoForm form) getInput;
+  final Object inputId;
   final StringFieldSettings? settings;
+
+  StringInput getInput(WoForm form) =>
+      form.getInput(inputId: inputId.toString())! as StringInput;
 
   @override
   State createState() => _StringFieldState<T>();

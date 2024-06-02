@@ -4,13 +4,16 @@ import 'package:wo_form/wo_form.dart';
 
 class BooleanField<T extends WoFormCubit> extends StatelessWidget {
   const BooleanField({
-    required this.getInput,
+    required this.inputId,
     this.settings,
     super.key,
   });
 
-  final BooleanInput Function(WoForm form) getInput;
+  final Object inputId;
   final BooleanFieldSettings? settings;
+
+  BooleanInput getInput(WoForm form) =>
+      form.getInput(inputId: inputId.toString())! as BooleanInput;
 
   @override
   Widget build(BuildContext context) {

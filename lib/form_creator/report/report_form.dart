@@ -8,6 +8,15 @@ enum ReportType {
   other,
 }
 
+enum ReportInputId {
+  type,
+  message,
+  block;
+
+  @override
+  String toString() => name;
+}
+
 extension ReportForm on WoForm {
   static WoForm initial({
     required String reporterId,
@@ -29,9 +38,10 @@ extension ReportForm on WoForm {
               displayMode: SelectFieldDisplayMode.tiles,
             ),
           ),
-          const StringInput(
-            id: 'message',
-            fieldSettings: StringFieldSettings(
+          StringInput(
+            id: ReportInputId.message.name,
+            fieldSettings: const StringFieldSettings(
+              hintText: 'Dites-en plus !',
               textCapitalization: TextCapitalization.sentences,
               maxLines: 5,
             ),
@@ -39,6 +49,7 @@ extension ReportForm on WoForm {
           const BooleanInput(
             id: 'block',
             fieldSettings: BooleanFieldSettings(
+              labelText: 'Bloquer cette raclure ?',
               onOffType: BooleanFieldOnOffType.checkbox,
             ),
           ),
@@ -47,7 +58,7 @@ extension ReportForm on WoForm {
 
   SelectInput<ReportType> get typeInput =>
       inputsMap['type']! as SelectInput<ReportType>;
-  StringInput get messageInput => inputsMap['message']! as StringInput;
+  // StringInput get messageInput => inputsMap['message']! as StringInput;
   BooleanInput get blockInput => inputsMap['block']! as BooleanInput;
 }
 

@@ -6,13 +6,16 @@ import 'package:wo_form/wo_form.dart';
 
 class NumField<T extends WoFormCubit> extends StatelessWidget {
   const NumField({
-    required this.getInput,
+    required this.inputId,
     this.settings,
     super.key,
   });
 
-  final NumInput Function(WoForm form) getInput;
+  final Object inputId;
   final NumFieldSettings? settings;
+
+  NumInput getInput(WoForm form) =>
+      form.getInput(inputId: inputId.toString())! as NumInput;
 
   @override
   Widget build(BuildContext context) {

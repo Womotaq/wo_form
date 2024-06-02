@@ -6,17 +6,20 @@ import 'package:wo_form/wo_form.dart';
 
 class SelectField<T extends WoFormCubit, S> extends StatelessWidget {
   const SelectField({
-    required this.getInput,
+    required this.inputId,
     this.valueBuilder,
     this.previewBuilder,
     this.settings,
     super.key,
   });
 
-  final SelectInput<S> Function(WoForm form) getInput;
+  final Object inputId;
   final Widget Function(S?)? valueBuilder;
   final Widget Function(S?)? previewBuilder;
   final SelectFieldSettings? settings;
+
+  SelectInput<S> getInput(WoForm form) =>
+      form.getInput(inputId: inputId.toString())! as SelectInput<S>;
 
   @override
   Widget build(BuildContext context) {
@@ -105,24 +108,26 @@ class SelectField<T extends WoFormCubit, S> extends StatelessWidget {
 }
 
 class SelectStringField<T extends WoFormCubit> extends SelectField<T, String> {
-  SelectStringField({
-    required SelectStringInput Function(WoForm form) getInput,
+  const SelectStringField({
+    required super.inputId,
     super.valueBuilder,
     super.previewBuilder,
     super.settings,
     super.key,
-  }) : super(
-          getInput: (form) {
-            final selectStringInput = getInput(form);
-            return SelectInput<String>(
-              id: selectStringInput.id,
-              selectedValues: selectStringInput.selectedValues,
-              availibleValues: selectStringInput.availibleValues,
-              maxCount: selectStringInput.maxCount,
-              minCount: selectStringInput.minCount,
-              fieldSettings: selectStringInput.fieldSettings,
-              toJsonT: (value) => value,
-            );
-          },
-        );
+  });
+
+  @override
+  SelectInput<String> getInput(WoForm form) {
+    final selectStringInput =
+        form.getInput(inputId: inputId.toString())! as SelectStringInput;
+    return SelectInput<String>(
+      id: selectStringInput.id,
+      selectedValues: selectStringInput.selectedValues,
+      availibleValues: selectStringInput.availibleValues,
+      maxCount: selectStringInput.maxCount,
+      minCount: selectStringInput.minCount,
+      fieldSettings: selectStringInput.fieldSettings,
+      toJsonT: (value) => value,
+    );
+  }
 }

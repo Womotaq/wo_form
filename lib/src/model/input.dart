@@ -172,25 +172,15 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
   Widget toField<T extends WoFormCubit>() {
     switch (this) {
       case BooleanInput():
-        return BooleanField<T>(
-          getInput: (form) => form.getInput(inputId: id)! as BooleanInput,
-        );
+        return BooleanField<T>(inputId: id);
       case InputsListInput():
-        return InputsListField<T>(
-          getInput: (form) => form.getInput(inputId: id)! as InputsListInput,
-        );
+        return InputsListField<T>(inputId: id);
       case NumInput():
-        return NumField<T>(
-          getInput: (form) => form.getInput(inputId: id)! as NumInput,
-        );
+        return NumField<T>(inputId: id);
       case StringInput():
-        return StringField<T>(
-          getInput: (form) => form.getInput(inputId: id)! as StringInput,
-        );
+        return StringField<T>(inputId: id);
       case SelectStringInput():
-        return SelectStringField<T>(
-          getInput: (form) => form.getInput(inputId: id)! as SelectStringInput,
-        );
+        return SelectStringField<T>(inputId: id);
     }
   }
 
@@ -368,11 +358,7 @@ class SelectInput<T> with _$SelectInput<T>, WoFormInputMixin {
   }
 
   @override
-  Widget toField<C extends WoFormCubit>() {
-    return SelectField<C, T>(
-      getInput: (form) => form.getInput(inputId: id)! as SelectInput<T>,
-    );
-  }
+  Widget toField<C extends WoFormCubit>() => SelectField<C, T>(inputId: id);
 
   @override
   Object? valueToJson() => _selectedValuesToJson<T>(

@@ -4,13 +4,16 @@ import 'package:wo_form/wo_form.dart';
 
 class InputsListField<T extends WoFormCubit> extends StatelessWidget {
   const InputsListField({
-    required this.getInput,
+    required this.inputId,
     this.settings,
     super.key,
   });
 
-  final InputsListInput Function(WoForm form) getInput;
+  final Object inputId;
   final MapFieldSettings? settings;
+
+  InputsListInput getInput(WoForm form) =>
+      form.getInput(inputId: inputId.toString())! as InputsListInput;
 
   @override
   Widget build(BuildContext context) {

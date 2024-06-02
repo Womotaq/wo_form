@@ -46,7 +46,7 @@ class ReportPage extends StatelessWidget {
               Flexible(
                 child: SingleChildScrollView(
                   child: SelectField<ReportFormCubit, ReportType>(
-                    getInput: (form) => form.typeInput,
+                    inputId: ReportInputId.type,
                     valueBuilder: (type) => Text(
                       switch (type) {
                         null => 'Vide',
@@ -61,20 +61,14 @@ class ReportPage extends StatelessWidget {
               ),
               WoGap.medium,
               // message field
-              Flexible(
+              const Flexible(
                 child: StringField<ReportFormCubit>(
-                  getInput: (form) => form.messageInput,
-                  settings: const StringFieldSettings(
-                    hintText: 'Dites-en plus !',
-                  ),
+                  inputId: ReportInputId.message,
                 ),
               ),
               WoGap.medium,
-              BooleanField<ReportFormCubit>(
-                getInput: (form) => form.blockInput,
-                settings: const BooleanFieldSettings(
-                  labelText: 'Bloquer cette raclure ?',
-                ),
+              const BooleanField<ReportFormCubit>(
+                inputId: ReportInputId.block,
               ),
               WoGap.medium,
               BlocBuilder<ReportFormCubit, WoForm>(
