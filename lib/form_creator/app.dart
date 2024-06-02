@@ -68,27 +68,6 @@ class ScreenA extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Création d'un champ texte"),
       ),
-      floatingActionButton: WoFormStatusListener<FormCreatorCubit>(
-        listener: (context, status) {
-          if (status == WoFormStatus.submitted) {
-            Navigator.push(
-              context,
-              MaterialPageRoute<void>(builder: (context) => const ScreenB()),
-            );
-          }
-        },
-        child: IconButton(
-          icon: const Icon(Icons.check),
-          onPressed: context.read<FormCreatorCubit>().submit,
-          style: IconButton.styleFrom(
-            backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            minimumSize: const Size(64, 64),
-          ),
-        ),
-      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: BlocBuilder<FormCreatorCubit, WoForm>(
@@ -100,11 +79,34 @@ class ScreenA extends StatelessWidget {
                     input: (form) => form.inputsMap[input.id]!,
                   ),
                 WoGap.xxxlarge,
-                WoGap.xxxlarge,
                 const Text('Json :'),
                 WoGap.medium,
                 Text(readableJson(form.valuesToJson())),
                 WoGap.xxxlarge,
+                WoFormStatusListener<FormCreatorCubit>(
+                  listener: (context, status) {
+                    if (status == WoFormStatus.submitted) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute<void>(
+                          builder: (context) => const ScreenB(),
+                        ),
+                      );
+                    }
+                  },
+                  child: IconButton(
+                    icon: const Icon(Icons.check),
+                    onPressed: context.read<FormCreatorCubit>().submit,
+                    style: IconButton.styleFrom(
+                      backgroundColor:
+                          Theme.of(context).colorScheme.primaryContainer,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      minimumSize: const Size(64, 64),
+                    ),
+                  ),
+                ),
                 WoGap.xxxlarge,
               ],
             );

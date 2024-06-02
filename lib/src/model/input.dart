@@ -58,9 +58,9 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
   const factory WoFormInput.selectString({
     required String id,
     required int? maxCount,
-    List<String>? selectedValues,
-    List<String>? availibleValues,
-    int? minCount,
+    @Default([]) List<String> selectedValues,
+    @Default([]) List<String> availibleValues,
+    @Default(0) int minCount,
     @Default(SelectFieldSettings()) SelectFieldSettings fieldSettings,
   }) = SelectStringInput;
 
@@ -131,8 +131,8 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
         ):
         return SelectInput.validator(
           inputId: inputId,
-          selectedValues: selectedValues ?? [],
-          availibleValues: availibleValues ?? [],
+          selectedValues: selectedValues,
+          availibleValues: availibleValues,
           minCount: minCount,
           maxCount: maxCount,
         );
@@ -148,7 +148,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
     switch (this) {
       case BooleanInput():
       case InputsListInput():
-      case NumInput(): // TODO
+      case NumInput():
       case SelectStringInput():
         break;
 
@@ -178,7 +178,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
           maxCount: final maxCount,
         ) =>
           SelectInput.selectedValuesToJson(
-            selectedValues: selectedValues ?? [],
+            selectedValues: selectedValues,
             toJsonT: (value) => value,
             asList: maxCount == 1,
           ),
@@ -250,31 +250,13 @@ class SelectInput<T> with _$SelectInput<T>, WoFormInputMixin {
   const factory SelectInput({
     required String id,
     required int? maxCount,
-    List<T>? selectedValues,
-    List<T>? availibleValues,
-    int? minCount,
+    @Default([]) List<T> selectedValues,
+    @Default([]) List<T> availibleValues,
+    @Default(0) int minCount,
     @Default(SelectFieldSettings()) SelectFieldSettings fieldSettings,
     @JsonKey(includeToJson: false, includeFromJson: false)
     Object? Function(T)? toJsonT,
   }) = _SelectInput<T>;
-
-  // factory SelectInput.uniqueChoice({
-  //   required String id,
-  //   T? defaultValues,
-  //   List<T>? availibleValues,
-  //   bool isRequired = false,
-  //   SelectFieldSettings fieldSettings = const SelectFieldSettings(),
-  //   Object? Function(T)? toJsonT,
-  // }) =>
-  //     SelectInput(
-  //       id: id,
-  //       selectedValues: defaultValues == null ? [] : [defaultValues],
-  //       availibleValues: availibleValues,
-  //       minCount: isRequired ? 1 : 0,
-  //       maxCount: 1,
-  //       fieldSettings: fieldSettings,
-  //       toJsonT: toJsonT,
-  //     );
 
   const SelectInput._();
 
@@ -298,14 +280,14 @@ class SelectInput<T> with _$SelectInput<T>, WoFormInputMixin {
     required String inputId,
     required List<T> selectedValues,
     required List<T> availibleValues,
-    required int? minCount,
+    required int minCount,
     required int? maxCount,
   }) {
     if (minCount == 1 && maxCount == 1 && selectedValues.isEmpty) {
       return WoFormInputError.empty(inputId: inputId);
     }
 
-    if (minCount != null && selectedValues.length < minCount) {
+    if (selectedValues.length < minCount) {
       return WoFormInputError.minBound(inputId: inputId);
     }
 
@@ -327,8 +309,8 @@ class SelectInput<T> with _$SelectInput<T>, WoFormInputMixin {
   @override
   WoFormInputError? getError() => validator(
         inputId: id,
-        selectedValues: selectedValues ?? [],
-        availibleValues: availibleValues ?? [],
+        selectedValues: selectedValues,
+        availibleValues: availibleValues,
         minCount: minCount,
         maxCount: maxCount,
       );
@@ -354,7 +336,7 @@ class SelectInput<T> with _$SelectInput<T>, WoFormInputMixin {
 
   @override
   Object? valueToJson() => selectedValuesToJson<T>(
-        selectedValues: selectedValues ?? [],
+        selectedValues: selectedValues,
         toJsonT: toJsonT,
         asList: maxCount == 1,
       );

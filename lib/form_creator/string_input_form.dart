@@ -117,7 +117,7 @@ final stringInputForm = WoForm(
           maxCount: 1,
           fieldSettings: SelectFieldSettings(
             labelText: 'Gestion des majuscules',
-            displayMode: SelectFieldDisplayMode.selectChip,
+            // displayMode: SelectFieldDisplayMode.selectChip,
           ),
         ),
         const NumInput(

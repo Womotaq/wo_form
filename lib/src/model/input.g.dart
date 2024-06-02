@@ -34,10 +34,10 @@ SelectInput<T> _$SelectInputFromJson<T>(
       id: json['id'] as String,
       maxCount: (json['maxCount'] as num?)?.toInt(),
       selectedValues:
-          (json['selectedValues'] as List<dynamic>?)?.map(fromJsonT).toList(),
+          (json['selectedValues'] as List<dynamic>).map(fromJsonT).toList(),
       availibleValues:
-          (json['availibleValues'] as List<dynamic>?)?.map(fromJsonT).toList(),
-      minCount: (json['minCount'] as num?)?.toInt(),
+          (json['availibleValues'] as List<dynamic>).map(fromJsonT).toList(),
+      minCount: (json['minCount'] as num).toInt(),
       fieldSettings: SelectFieldSettings.fromJson(
           json['fieldSettings'] as Map<String, dynamic>),
     );
@@ -49,8 +49,8 @@ Map<String, dynamic> _$SelectInputToJson<T>(
     <String, dynamic>{
       'id': instance.id,
       'maxCount': instance.maxCount,
-      'selectedValues': instance.selectedValues?.map(toJsonT).toList(),
-      'availibleValues': instance.availibleValues?.map(toJsonT).toList(),
+      'selectedValues': instance.selectedValues.map(toJsonT).toList(),
+      'availibleValues': instance.availibleValues.map(toJsonT).toList(),
       'minCount': instance.minCount,
       'fieldSettings': instance.fieldSettings,
     };
@@ -143,12 +143,14 @@ _$SelectStringInputImpl _$$SelectStringInputImplFromJson(
       id: json['id'] as String,
       maxCount: (json['maxCount'] as num?)?.toInt(),
       selectedValues: (json['selectedValues'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
       availibleValues: (json['availibleValues'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
-      minCount: (json['minCount'] as num?)?.toInt(),
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      minCount: (json['minCount'] as num?)?.toInt() ?? 0,
       fieldSettings: json['fieldSettings'] == null
           ? const SelectFieldSettings()
           : SelectFieldSettings.fromJson(

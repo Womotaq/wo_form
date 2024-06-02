@@ -36,40 +36,39 @@ class SelectField<T extends WoFormCubit, S> extends StatelessWidget {
                     ListTile(
                       title: Text(mergedSettings.labelText!),
                       visualDensity: VisualDensity.compact,
+                      contentPadding: EdgeInsets.zero,
                     ),
-                  ...input.availibleValues?.map(
-                        (value) => ListTile(
-                          leading: Radio(
-                            value: value,
-                            groupValue: input.selectedValues?.firstOrNull,
-                            onChanged: (value) => value == null
-                                ? null
-                                : cubit.onInputChanged(
-                                    input:
-                                        input.copyWith(selectedValues: [value]),
-                                  ),
-                          ),
-                          title: valueBuilder?.call(value) ??
-                              Text(value.toString()),
-                          onTap: () => cubit.onInputChanged(
-                            input: input.copyWith(selectedValues: [value]),
-                          ),
-                          visualDensity: VisualDensity.compact,
-                          contentPadding: EdgeInsets.zero,
-                        ),
-                      ) ??
-                      [],
+                  ...input.availibleValues.map(
+                    (value) => ListTile(
+                      leading: Radio(
+                        value: value,
+                        groupValue: input.selectedValues.firstOrNull,
+                        onChanged: (value) => value == null
+                            ? null
+                            : cubit.onInputChanged(
+                                input: input.copyWith(selectedValues: [value]),
+                              ),
+                      ),
+                      title:
+                          valueBuilder?.call(value) ?? Text(value.toString()),
+                      onTap: () => cubit.onInputChanged(
+                        input: input.copyWith(selectedValues: [value]),
+                      ),
+                      visualDensity: VisualDensity.compact,
+                      contentPadding: EdgeInsets.zero,
+                    ),
+                  ),
                 ],
               ),
             SelectFieldDisplayMode.selectChip => ListTile(
                 title: Text(mergedSettings.labelText ?? ''),
-                trailing: SelectChip.uniqueChoice(
+                trailing: SelectChip<S>.uniqueChoice(
                   // values: input.availibleValues ?? <S>[],
-                  values: (input.availibleValues as List<S>?) ?? <S>[],
+                  values: input.availibleValues.whereType(),
                   onSelected: (value) => cubit.onInputChanged(
                     input: input.copyWith(selectedValues: [value]),
                   ),
-                  selectedValue: input.selectedValues?.firstOrNull,
+                  selectedValue: input.selectedValues.firstOrNull,
                   valueBuilder: valueBuilder,
                   previewBuilder: previewBuilder,
                 ),
@@ -81,12 +80,15 @@ class SelectField<T extends WoFormCubit, S> extends StatelessWidget {
 
         return ListTile(
           title: Text(mergedSettings.labelText ?? ''),
-          trailing: SelectChip.multipleChoices(
-            values: (input.availibleValues as List<S>?) ?? <S>[],
+          trailing: SelectChip<S>.multipleChoices(
+            values: input.availibleValues.whereType(),
             onSelected: (value) => cubit.onInputChanged(
-              input: input.copyWith(selectedValues: [value]),
+              input: input.copyWith(
+                selectedValues:
+                    ((input.selectedValues).toSet()..add(value)).toList(),
+              ),
             ),
-            selectedValues: (input.selectedValues as List<S>?) ?? <S>[],
+            selectedValues: input.selectedValues.whereType(),
             valueBuilder: valueBuilder,
           ),
           visualDensity: VisualDensity.compact,

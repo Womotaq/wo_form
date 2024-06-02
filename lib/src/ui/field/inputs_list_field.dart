@@ -23,10 +23,10 @@ class InputsListField<T extends WoFormCubit> extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (mergedSettings.labelText != null)
-          Text(
-            mergedSettings.labelText!,
-            // TODO : WoFormTheme.titleStyle
-            style: Theme.of(context).textTheme.titleMedium,
+          ListTile(
+            title: Text(mergedSettings.labelText!),
+            visualDensity: VisualDensity.compact,
+            contentPadding: EdgeInsets.zero,
           ),
         Padding(
           padding: const EdgeInsets.only(left: 16),
@@ -37,7 +37,13 @@ class InputsListField<T extends WoFormCubit> extends StatelessWidget {
 
               return Column(
                 children: inputs!
-                    .map((i) => SmartField<T>(input: (form) => i))
+                    .map(
+                      (input) => SmartField<T>(
+                        input: (form) => getInput(form)
+                            .value!
+                            .firstWhere((i) => i.id == input.id),
+                      ),
+                    )
                     .toList(),
               );
             },
