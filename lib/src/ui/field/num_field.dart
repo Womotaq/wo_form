@@ -19,8 +19,8 @@ class NumField<T extends WoFormCubit> extends StatelessWidget {
     final cubit = context.read<T>();
     final input = getInput(cubit.state);
 
-    final themeFromInput = input.fieldSettings;
-    final mergedSettings = settings?.merge(themeFromInput) ?? themeFromInput;
+    final inputSettings = input.fieldSettings;
+    final mergedSettings = settings?.merge(inputSettings) ?? inputSettings;
 
     final countController = TextEditingController(text: input.value.toString());
 

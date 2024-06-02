@@ -208,7 +208,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
           SelectInput._selectedValuesToJson(
             selectedValues: selectedValues,
             toJsonT: (value) => value,
-            asList: maxCount == 1,
+            asList: maxCount != 1,
           ),
         StringInput(value: final value) => value,
       };
@@ -378,7 +378,7 @@ class SelectInput<T> with _$SelectInput<T>, WoFormInputMixin {
   Object? valueToJson() => _selectedValuesToJson<T>(
         selectedValues: selectedValues,
         toJsonT: toJsonT,
-        asList: maxCount == 1,
+        asList: maxCount != 1,
       );
 }
 

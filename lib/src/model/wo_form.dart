@@ -33,9 +33,9 @@ abstract class WoForm with _$WoForm {
     @WoFormInputsConverter()
     @JsonKey(name: 'inputs')
     required Map<String, WoFormInputMixin> inputsMap,
+    Map<String, dynamic>? unmodifiableValuesJson,
     @Default(WoFormStatus.idle) WoFormStatus status,
     String? errorCode,
-    Map<String, dynamic>? unmodifiableValuesJson,
   }) = _WoForm;
 
   /// Required for the override getter
@@ -77,8 +77,9 @@ abstract class WoForm with _$WoForm {
   }
 
   Map<String, dynamic> valuesToJson() => {
+        ...unmodifiableValuesJson ?? {},
         for (final input in inputs) input.id: input.valueToJson(),
-      }..addEntries((unmodifiableValuesJson ?? {}).entries);
+      };
 }
 
 extension InputsListInputGetInput on InputsListInput {

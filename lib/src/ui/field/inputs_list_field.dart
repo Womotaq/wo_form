@@ -16,8 +16,8 @@ class InputsListField<T extends WoFormCubit> extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<T>();
 
-    final themeFromInput = getInput(cubit.state).fieldSettings;
-    final mergedSettings = settings?.merge(themeFromInput) ?? themeFromInput;
+    final inputSettings = getInput(cubit.state).fieldSettings;
+    final mergedSettings = settings?.merge(inputSettings) ?? inputSettings;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

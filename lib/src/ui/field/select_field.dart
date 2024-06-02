@@ -22,8 +22,8 @@ class SelectField<T extends WoFormCubit, S> extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<T>();
 
-    final themeFromInput = getInput(cubit.state).fieldSettings;
-    final mergedSettings = settings?.merge(themeFromInput) ?? themeFromInput;
+    final inputSettings = getInput(cubit.state).fieldSettings;
+    final mergedSettings = settings?.merge(inputSettings) ?? inputSettings;
 
     return BlocSelector<T, WoForm, SelectInput<S?>>(
       selector: getInput,

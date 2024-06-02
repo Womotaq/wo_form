@@ -16,8 +16,8 @@ class BooleanField<T extends WoFormCubit> extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<T>();
 
-    final themeFromInput = getInput(cubit.state).fieldSettings;
-    final mergedSettings = settings?.merge(themeFromInput) ?? themeFromInput;
+    final inputSettings = getInput(cubit.state).fieldSettings;
+    final mergedSettings = settings?.merge(inputSettings) ?? inputSettings;
 
     return BlocSelector<T, WoForm, BooleanInput>(
       selector: getInput,
@@ -30,7 +30,7 @@ class BooleanField<T extends WoFormCubit> extends StatelessWidget {
               ),
             ),
           BooleanFieldOnOffType.checkbox => Checkbox(
-              value: input.value,
+              value: input.value ?? false,
               onChanged: (value) => value == null
                   ? null
                   : cubit.onInputChanged(input: input.copyWith(value: value)),
