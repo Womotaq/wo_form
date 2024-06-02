@@ -4,12 +4,12 @@ import 'package:wo_form/wo_form.dart';
 
 class StringField<T extends WoFormCubit> extends StatefulWidget {
   const StringField({
-    required this.input,
+    required this.getInput,
     this.theme,
     super.key,
   });
 
-  final StringInput Function(WoForm form) input;
+  final StringInput Function(WoForm form) getInput;
   final StringFieldSettings? theme;
 
   @override
@@ -25,7 +25,8 @@ class _StringFieldState<T extends WoFormCubit> extends State<StringField<T>> {
   void initState() {
     super.initState();
 
-    final themeFromInput = widget.input(context.read<T>().state).fieldSettings;
+    final themeFromInput =
+        widget.getInput(context.read<T>().state).fieldSettings;
     mergedSettings = widget.theme?.merge(themeFromInput) ?? themeFromInput;
 
     obscureText = mergedSettings.obscureText ?? false;
@@ -36,7 +37,7 @@ class _StringFieldState<T extends WoFormCubit> extends State<StringField<T>> {
     final cubit = context.read<T>();
 
     return BlocSelector<T, WoForm, StringInput>(
-      selector: (form) => widget.input(form),
+      selector: widget.getInput,
       builder: (context, input) {
         final text = input.value;
 

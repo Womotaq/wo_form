@@ -121,6 +121,10 @@ _$NumInputImpl _$$NumInputImplFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       value: json['value'] as num?,
       isRequired: json['isRequired'] as bool? ?? false,
+      fieldSettings: json['fieldSettings'] == null
+          ? const NumFieldSettings()
+          : NumFieldSettings.fromJson(
+              json['fieldSettings'] as Map<String, dynamic>),
       $type: json['runtimeType'] as String?,
     );
 
@@ -129,6 +133,7 @@ Map<String, dynamic> _$$NumInputImplToJson(_$NumInputImpl instance) =>
       'id': instance.id,
       'value': instance.value,
       'isRequired': instance.isRequired,
+      'fieldSettings': instance.fieldSettings,
       'runtimeType': instance.$type,
     };
 

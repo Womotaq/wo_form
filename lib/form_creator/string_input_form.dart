@@ -120,7 +120,12 @@ final stringInputForm = WoForm(
             displayMode: SelectFieldDisplayMode.selectChip,
           ),
         ),
-        const NumInput(id: 'maxLines'),
+        const NumInput(
+          id: 'maxLines',
+          fieldSettings: NumFieldSettings(
+            labelText: 'Nombre maximum de lignes',
+          ),
+        ),
         const StringInput(
           id: 'invalidRegexMessage',
           fieldSettings: StringFieldSettings(

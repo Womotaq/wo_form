@@ -343,6 +343,146 @@ abstract class _MapFieldSettings extends MapFieldSettings {
       throw _privateConstructorUsedError;
 }
 
+NumFieldSettings _$NumFieldSettingsFromJson(Map<String, dynamic> json) {
+  return _NumFieldSettings.fromJson(json);
+}
+
+/// @nodoc
+mixin _$NumFieldSettings {
+  String? get labelText => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $NumFieldSettingsCopyWith<NumFieldSettings> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $NumFieldSettingsCopyWith<$Res> {
+  factory $NumFieldSettingsCopyWith(
+          NumFieldSettings value, $Res Function(NumFieldSettings) then) =
+      _$NumFieldSettingsCopyWithImpl<$Res, NumFieldSettings>;
+  @useResult
+  $Res call({String? labelText});
+}
+
+/// @nodoc
+class _$NumFieldSettingsCopyWithImpl<$Res, $Val extends NumFieldSettings>
+    implements $NumFieldSettingsCopyWith<$Res> {
+  _$NumFieldSettingsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? labelText = freezed,
+  }) {
+    return _then(_value.copyWith(
+      labelText: freezed == labelText
+          ? _value.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$NumFieldSettingsImplCopyWith<$Res>
+    implements $NumFieldSettingsCopyWith<$Res> {
+  factory _$$NumFieldSettingsImplCopyWith(_$NumFieldSettingsImpl value,
+          $Res Function(_$NumFieldSettingsImpl) then) =
+      __$$NumFieldSettingsImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String? labelText});
+}
+
+/// @nodoc
+class __$$NumFieldSettingsImplCopyWithImpl<$Res>
+    extends _$NumFieldSettingsCopyWithImpl<$Res, _$NumFieldSettingsImpl>
+    implements _$$NumFieldSettingsImplCopyWith<$Res> {
+  __$$NumFieldSettingsImplCopyWithImpl(_$NumFieldSettingsImpl _value,
+      $Res Function(_$NumFieldSettingsImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? labelText = freezed,
+  }) {
+    return _then(_$NumFieldSettingsImpl(
+      labelText: freezed == labelText
+          ? _value.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$NumFieldSettingsImpl extends _NumFieldSettings {
+  const _$NumFieldSettingsImpl({this.labelText}) : super._();
+
+  factory _$NumFieldSettingsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NumFieldSettingsImplFromJson(json);
+
+  @override
+  final String? labelText;
+
+  @override
+  String toString() {
+    return 'NumFieldSettings(labelText: $labelText)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$NumFieldSettingsImpl &&
+            (identical(other.labelText, labelText) ||
+                other.labelText == labelText));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, labelText);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$NumFieldSettingsImplCopyWith<_$NumFieldSettingsImpl> get copyWith =>
+      __$$NumFieldSettingsImplCopyWithImpl<_$NumFieldSettingsImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$NumFieldSettingsImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _NumFieldSettings extends NumFieldSettings {
+  const factory _NumFieldSettings({final String? labelText}) =
+      _$NumFieldSettingsImpl;
+  const _NumFieldSettings._() : super._();
+
+  factory _NumFieldSettings.fromJson(Map<String, dynamic> json) =
+      _$NumFieldSettingsImpl.fromJson;
+
+  @override
+  String? get labelText;
+  @override
+  @JsonKey(ignore: true)
+  _$$NumFieldSettingsImplCopyWith<_$NumFieldSettingsImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 SelectFieldSettings _$SelectFieldSettingsFromJson(Map<String, dynamic> json) {
   return _SelectFieldSettings.fromJson(json);
 }

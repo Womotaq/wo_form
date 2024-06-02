@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/form_creator/string_input_form.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -98,6 +99,13 @@ class ScreenA extends StatelessWidget {
                   SmartField<FormCreatorCubit>(
                     input: (form) => form.inputsMap[input.id]!,
                   ),
+                WoGap.xxxlarge,
+                WoGap.xxxlarge,
+                const Text('Json :'),
+                WoGap.medium,
+                Text(readableJson(form.valuesToJson())),
+                WoGap.xxxlarge,
+                WoGap.xxxlarge,
               ],
             );
           },
@@ -105,6 +113,27 @@ class ScreenA extends StatelessWidget {
       ),
     );
   }
+}
+
+String readableJson(Map<String, dynamic> json, {int indentStep = 4}) {
+  final buffer = StringBuffer();
+  var indent = 0;
+
+  for (final char in json.toString().characters) {
+    if (char == '}') {
+      indent -= indentStep;
+      buffer.write('\n${' ' * indent}');
+    }
+    buffer.write(char);
+    if (char == '{') {
+      indent += indentStep;
+      buffer.write('\n${' ' * indent}');
+    } else if (char == ',') {
+      buffer.write('\n${' ' * indent}');
+    }
+  }
+
+  return buffer.toString();
 }
 
 class ScreenB extends StatelessWidget {

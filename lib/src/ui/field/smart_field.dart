@@ -16,25 +16,27 @@ class SmartField<T extends WoFormCubit> extends StatelessWidget {
     if (i is WoFormInput) {
       switch (i) {
         case BooleanInput():
-          return BooleanField<T>(input: (form) => input(form) as BooleanInput);
+          return BooleanField<T>(
+            getInput: (form) => input(form) as BooleanInput,
+          );
         case InputsListInput():
           return InputsListField<T>(
-            input: (form) => input(form) as InputsListInput,
+            getInput: (form) => input(form) as InputsListInput,
           );
         case NumInput():
-          throw UnimplementedError('No field implemented for NumInput');
+          return NumField<T>(getInput: (form) => input(form) as NumInput);
         case StringInput():
-          return StringField<T>(input: (form) => input(form) as StringInput);
+          return StringField<T>(getInput: (form) => input(form) as StringInput);
         case SelectStringInput():
           return SelectStringField<T>(
-            input: (form) => input(form) as SelectStringInput,
+            getInput: (form) => input(form) as SelectStringInput,
           );
       }
     } else if (i is ListInput) {
       throw UnimplementedError('No field implemented for ListInput');
     } else if (i is SelectInput) {
       return SelectField<T, dynamic>(
-        input: (form) => input(form) as SelectInput<dynamic>,
+        getInput: (form) => input(form) as SelectInput<dynamic>,
       );
     } else {
       throw UnimplementedError('Unsupported input type : ${i.runtimeType}');

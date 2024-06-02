@@ -36,6 +36,8 @@ WoFormInput _$WoFormInputFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$WoFormInput {
   String get id => throw _privateConstructorUsedError;
+  @JsonKey(toJson: BooleanFieldSettings.staticToJson)
+  Object get fieldSettings => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
@@ -52,7 +54,9 @@ mixin _$WoFormInput {
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)
         inputsList,
-    required TResult Function(String id, num? value, bool isRequired) num,
+    required TResult Function(String id, num? value, bool isRequired,
+            NumFieldSettings fieldSettings)
+        num,
     required TResult Function(
             String id,
             int? maxCount,
@@ -87,7 +91,9 @@ mixin _$WoFormInput {
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
         inputsList,
-    TResult? Function(String id, num? value, bool isRequired)? num,
+    TResult? Function(String id, num? value, bool isRequired,
+            NumFieldSettings fieldSettings)?
+        num,
     TResult? Function(
             String id,
             int? maxCount,
@@ -122,7 +128,9 @@ mixin _$WoFormInput {
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
         inputsList,
-    TResult Function(String id, num? value, bool isRequired)? num,
+    TResult Function(String id, num? value, bool isRequired,
+            NumFieldSettings fieldSettings)?
+        num,
     TResult Function(
             String id,
             int? maxCount,
@@ -348,7 +356,9 @@ class _$BooleanInputImpl extends BooleanInput {
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)
         inputsList,
-    required TResult Function(String id, num? value, bool isRequired) num,
+    required TResult Function(String id, num? value, bool isRequired,
+            NumFieldSettings fieldSettings)
+        num,
     required TResult Function(
             String id,
             int? maxCount,
@@ -386,7 +396,9 @@ class _$BooleanInputImpl extends BooleanInput {
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
         inputsList,
-    TResult? Function(String id, num? value, bool isRequired)? num,
+    TResult? Function(String id, num? value, bool isRequired,
+            NumFieldSettings fieldSettings)?
+        num,
     TResult? Function(
             String id,
             int? maxCount,
@@ -424,7 +436,9 @@ class _$BooleanInputImpl extends BooleanInput {
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
         inputsList,
-    TResult Function(String id, num? value, bool isRequired)? num,
+    TResult Function(String id, num? value, bool isRequired,
+            NumFieldSettings fieldSettings)?
+        num,
     TResult Function(
             String id,
             int? maxCount,
@@ -513,6 +527,7 @@ abstract class BooleanInput extends WoFormInput {
   String get id;
   bool? get value;
   bool get isRequired;
+  @override
   @JsonKey(toJson: BooleanFieldSettings.staticToJson)
   BooleanFieldSettings get fieldSettings;
   @override
@@ -671,7 +686,9 @@ class _$InputsListInputImpl extends InputsListInput {
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)
         inputsList,
-    required TResult Function(String id, num? value, bool isRequired) num,
+    required TResult Function(String id, num? value, bool isRequired,
+            NumFieldSettings fieldSettings)
+        num,
     required TResult Function(
             String id,
             int? maxCount,
@@ -709,7 +726,9 @@ class _$InputsListInputImpl extends InputsListInput {
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
         inputsList,
-    TResult? Function(String id, num? value, bool isRequired)? num,
+    TResult? Function(String id, num? value, bool isRequired,
+            NumFieldSettings fieldSettings)?
+        num,
     TResult? Function(
             String id,
             int? maxCount,
@@ -747,7 +766,9 @@ class _$InputsListInputImpl extends InputsListInput {
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
         inputsList,
-    TResult Function(String id, num? value, bool isRequired)? num,
+    TResult Function(String id, num? value, bool isRequired,
+            NumFieldSettings fieldSettings)?
+        num,
     TResult Function(
             String id,
             int? maxCount,
@@ -837,6 +858,7 @@ abstract class InputsListInput extends WoFormInput {
   @InputsListConverter()
   List<WoFormInputMixin>? get value;
   bool get isRequired;
+  @override
   @JsonKey(toJson: MapFieldSettings.staticToJson)
   MapFieldSettings get fieldSettings;
   @override
@@ -853,7 +875,10 @@ abstract class _$$NumInputImplCopyWith<$Res>
       __$$NumInputImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, num? value, bool isRequired});
+  $Res call(
+      {String id, num? value, bool isRequired, NumFieldSettings fieldSettings});
+
+  $NumFieldSettingsCopyWith<$Res> get fieldSettings;
 }
 
 /// @nodoc
@@ -870,6 +895,7 @@ class __$$NumInputImplCopyWithImpl<$Res>
     Object? id = null,
     Object? value = freezed,
     Object? isRequired = null,
+    Object? fieldSettings = null,
   }) {
     return _then(_$NumInputImpl(
       id: null == id
@@ -884,7 +910,19 @@ class __$$NumInputImplCopyWithImpl<$Res>
           ? _value.isRequired
           : isRequired // ignore: cast_nullable_to_non_nullable
               as bool,
+      fieldSettings: null == fieldSettings
+          ? _value.fieldSettings
+          : fieldSettings // ignore: cast_nullable_to_non_nullable
+              as NumFieldSettings,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $NumFieldSettingsCopyWith<$Res> get fieldSettings {
+    return $NumFieldSettingsCopyWith<$Res>(_value.fieldSettings, (value) {
+      return _then(_value.copyWith(fieldSettings: value));
+    });
   }
 }
 
@@ -895,6 +933,7 @@ class _$NumInputImpl extends NumInput {
       {required this.id,
       this.value,
       this.isRequired = false,
+      this.fieldSettings = const NumFieldSettings(),
       final String? $type})
       : $type = $type ?? 'num',
         super._();
@@ -909,13 +948,16 @@ class _$NumInputImpl extends NumInput {
   @override
   @JsonKey()
   final bool isRequired;
+  @override
+  @JsonKey()
+  final NumFieldSettings fieldSettings;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'WoFormInput.num(id: $id, value: $value, isRequired: $isRequired)';
+    return 'WoFormInput.num(id: $id, value: $value, isRequired: $isRequired, fieldSettings: $fieldSettings)';
   }
 
   @override
@@ -926,12 +968,15 @@ class _$NumInputImpl extends NumInput {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.value, value) || other.value == value) &&
             (identical(other.isRequired, isRequired) ||
-                other.isRequired == isRequired));
+                other.isRequired == isRequired) &&
+            (identical(other.fieldSettings, fieldSettings) ||
+                other.fieldSettings == fieldSettings));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, value, isRequired);
+  int get hashCode =>
+      Object.hash(runtimeType, id, value, isRequired, fieldSettings);
 
   @JsonKey(ignore: true)
   @override
@@ -956,7 +1001,9 @@ class _$NumInputImpl extends NumInput {
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)
         inputsList,
-    required TResult Function(String id, num? value, bool isRequired) num,
+    required TResult Function(String id, num? value, bool isRequired,
+            NumFieldSettings fieldSettings)
+        num,
     required TResult Function(
             String id,
             int? maxCount,
@@ -974,7 +1021,7 @@ class _$NumInputImpl extends NumInput {
             StringFieldSettings fieldSettings)
         string,
   }) {
-    return num(id, value, isRequired);
+    return num(id, value, isRequired, fieldSettings);
   }
 
   @override
@@ -994,7 +1041,9 @@ class _$NumInputImpl extends NumInput {
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
         inputsList,
-    TResult? Function(String id, num? value, bool isRequired)? num,
+    TResult? Function(String id, num? value, bool isRequired,
+            NumFieldSettings fieldSettings)?
+        num,
     TResult? Function(
             String id,
             int? maxCount,
@@ -1012,7 +1061,7 @@ class _$NumInputImpl extends NumInput {
             StringFieldSettings fieldSettings)?
         string,
   }) {
-    return num?.call(id, value, isRequired);
+    return num?.call(id, value, isRequired, fieldSettings);
   }
 
   @override
@@ -1032,7 +1081,9 @@ class _$NumInputImpl extends NumInput {
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
         inputsList,
-    TResult Function(String id, num? value, bool isRequired)? num,
+    TResult Function(String id, num? value, bool isRequired,
+            NumFieldSettings fieldSettings)?
+        num,
     TResult Function(
             String id,
             int? maxCount,
@@ -1052,7 +1103,7 @@ class _$NumInputImpl extends NumInput {
     required TResult orElse(),
   }) {
     if (num != null) {
-      return num(id, value, isRequired);
+      return num(id, value, isRequired, fieldSettings);
     }
     return orElse();
   }
@@ -1109,7 +1160,8 @@ abstract class NumInput extends WoFormInput {
   const factory NumInput(
       {required final String id,
       final num? value,
-      final bool isRequired}) = _$NumInputImpl;
+      final bool isRequired,
+      final NumFieldSettings fieldSettings}) = _$NumInputImpl;
   const NumInput._() : super._();
 
   factory NumInput.fromJson(Map<String, dynamic> json) =
@@ -1119,6 +1171,8 @@ abstract class NumInput extends WoFormInput {
   String get id;
   num? get value;
   bool get isRequired;
+  @override
+  NumFieldSettings get fieldSettings;
   @override
   @JsonKey(ignore: true)
   _$$NumInputImplCopyWith<_$NumInputImpl> get copyWith =>
@@ -1309,7 +1363,9 @@ class _$SelectStringInputImpl extends SelectStringInput {
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)
         inputsList,
-    required TResult Function(String id, num? value, bool isRequired) num,
+    required TResult Function(String id, num? value, bool isRequired,
+            NumFieldSettings fieldSettings)
+        num,
     required TResult Function(
             String id,
             int? maxCount,
@@ -1348,7 +1404,9 @@ class _$SelectStringInputImpl extends SelectStringInput {
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
         inputsList,
-    TResult? Function(String id, num? value, bool isRequired)? num,
+    TResult? Function(String id, num? value, bool isRequired,
+            NumFieldSettings fieldSettings)?
+        num,
     TResult? Function(
             String id,
             int? maxCount,
@@ -1387,7 +1445,9 @@ class _$SelectStringInputImpl extends SelectStringInput {
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
         inputsList,
-    TResult Function(String id, num? value, bool isRequired)? num,
+    TResult Function(String id, num? value, bool isRequired,
+            NumFieldSettings fieldSettings)?
+        num,
     TResult Function(
             String id,
             int? maxCount,
@@ -1480,6 +1540,7 @@ abstract class SelectStringInput extends WoFormInput {
   List<String>? get selectedValues;
   List<String>? get availibleValues;
   int? get minCount;
+  @override
   SelectFieldSettings get fieldSettings;
   @override
   @JsonKey(ignore: true)
@@ -1637,7 +1698,9 @@ class _$StringInputImpl extends StringInput {
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)
         inputsList,
-    required TResult Function(String id, num? value, bool isRequired) num,
+    required TResult Function(String id, num? value, bool isRequired,
+            NumFieldSettings fieldSettings)
+        num,
     required TResult Function(
             String id,
             int? maxCount,
@@ -1675,7 +1738,9 @@ class _$StringInputImpl extends StringInput {
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
         inputsList,
-    TResult? Function(String id, num? value, bool isRequired)? num,
+    TResult? Function(String id, num? value, bool isRequired,
+            NumFieldSettings fieldSettings)?
+        num,
     TResult? Function(
             String id,
             int? maxCount,
@@ -1713,7 +1778,9 @@ class _$StringInputImpl extends StringInput {
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
         inputsList,
-    TResult Function(String id, num? value, bool isRequired)? num,
+    TResult Function(String id, num? value, bool isRequired,
+            NumFieldSettings fieldSettings)?
+        num,
     TResult Function(
             String id,
             int? maxCount,
@@ -1804,6 +1871,7 @@ abstract class StringInput extends WoFormInput {
   String? get value;
   bool get isRequired;
   String? get regexPattern;
+  @override
   @JsonKey(toJson: StringFieldSettings.staticToJson)
   StringFieldSettings get fieldSettings;
   @override

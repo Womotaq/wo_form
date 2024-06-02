@@ -4,19 +4,19 @@ import 'package:wo_form/wo_form.dart';
 
 class InputsListField<T extends WoFormCubit> extends StatelessWidget {
   const InputsListField({
-    required this.input,
+    required this.getInput,
     this.settings,
     super.key,
   });
 
-  final InputsListInput Function(WoForm form) input;
+  final InputsListInput Function(WoForm form) getInput;
   final MapFieldSettings? settings;
 
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<T>();
 
-    final themeFromInput = input(cubit.state).fieldSettings;
+    final themeFromInput = getInput(cubit.state).fieldSettings;
     final mergedSettings = settings?.merge(themeFromInput) ?? themeFromInput;
 
     return Column(
@@ -31,7 +31,7 @@ class InputsListField<T extends WoFormCubit> extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 16),
           child: BlocSelector<T, WoForm, List<WoFormInputMixin>?>(
-            selector: (form) => input(form).value,
+            selector: (form) => getInput(form).value,
             builder: (context, inputs) {
               if (inputs == null) const SizedBox.shrink();
 

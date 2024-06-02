@@ -47,6 +47,18 @@ Map<String, dynamic> _$$MapFieldSettingsImplToJson(
       'labelText': instance.labelText,
     };
 
+_$NumFieldSettingsImpl _$$NumFieldSettingsImplFromJson(
+        Map<String, dynamic> json) =>
+    _$NumFieldSettingsImpl(
+      labelText: json['labelText'] as String?,
+    );
+
+Map<String, dynamic> _$$NumFieldSettingsImplToJson(
+        _$NumFieldSettingsImpl instance) =>
+    <String, dynamic>{
+      'labelText': instance.labelText,
+    };
+
 _$SelectFieldSettingsImpl _$$SelectFieldSettingsImplFromJson(
         Map<String, dynamic> json) =>
     _$SelectFieldSettingsImpl(

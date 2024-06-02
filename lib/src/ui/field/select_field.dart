@@ -5,14 +5,14 @@ import 'package:wo_form/wo_form.dart';
 
 class SelectField<T extends WoFormCubit, S> extends StatelessWidget {
   const SelectField({
-    required this.input,
+    required this.getInput,
     this.valueBuilder,
     this.previewBuilder,
     this.settings,
     super.key,
   });
 
-  final SelectInput<S> Function(WoForm form) input;
+  final SelectInput<S> Function(WoForm form) getInput;
   final Widget Function(S?)? valueBuilder;
   final Widget Function(S?)? previewBuilder;
   final SelectFieldSettings? settings;
@@ -21,11 +21,11 @@ class SelectField<T extends WoFormCubit, S> extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<T>();
 
-    final themeFromInput = input(cubit.state).fieldSettings;
+    final themeFromInput = getInput(cubit.state).fieldSettings;
     final mergedSettings = settings?.merge(themeFromInput) ?? themeFromInput;
 
     return BlocSelector<T, WoForm, SelectInput<S?>>(
-      selector: input,
+      selector: getInput,
       builder: (context, input) {
         if (input.maxCount == 1) {
           return switch (mergedSettings.displayMode) {
@@ -99,14 +99,14 @@ class SelectField<T extends WoFormCubit, S> extends StatelessWidget {
 
 class SelectStringField<T extends WoFormCubit> extends SelectField<T, String> {
   SelectStringField({
-    required SelectStringInput Function(WoForm form) input,
+    required SelectStringInput Function(WoForm form) getInput,
     super.valueBuilder,
     super.previewBuilder,
     super.settings,
     super.key,
   }) : super(
-          input: (form) {
-            final selectStringInput = input(form);
+          getInput: (form) {
+            final selectStringInput = getInput(form);
             return SelectInput<String>(
               id: selectStringInput.id,
               selectedValues: selectStringInput.selectedValues,

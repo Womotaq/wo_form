@@ -52,6 +52,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
     required String id,
     num? value,
     @Default(false) bool isRequired,
+    @Default(NumFieldSettings()) NumFieldSettings fieldSettings,
   }) = NumInput;
 
   const factory WoFormInput.selectString({

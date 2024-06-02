@@ -53,6 +53,27 @@ class MapFieldSettings with _$MapFieldSettings {
         );
 }
 
+@freezed
+class NumFieldSettings with _$NumFieldSettings {
+  const factory NumFieldSettings({
+    String? labelText,
+  }) = _NumFieldSettings;
+
+  const NumFieldSettings._();
+
+  factory NumFieldSettings.fromJson(Map<String, dynamic> json) =>
+      _$NumFieldSettingsFromJson(json);
+
+  static Map<String, dynamic> staticToJson(NumFieldSettings object) =>
+      object.toJson();
+
+  NumFieldSettings merge(NumFieldSettings? other) => other == null
+      ? this
+      : NumFieldSettings(
+          labelText: labelText ?? other.labelText,
+        );
+}
+
 enum SelectFieldDisplayMode { selectChip, tiles }
 
 @freezed
