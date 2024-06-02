@@ -20,24 +20,28 @@ class InputsListField<T extends WoFormCubit> extends StatelessWidget {
     final mergedSettings = settings?.merge(themeFromInput) ?? themeFromInput;
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (mergedSettings.labelText != null)
           Text(
             mergedSettings.labelText!,
             // TODO : WoFormTheme.titleStyle
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: Theme.of(context).textTheme.titleMedium,
           ),
-        BlocSelector<T, WoForm, List<WoFormInputMixin>?>(
-          selector: (form) => input(form).value,
-          builder: (context, inputs) {
-            if (inputs == null) const SizedBox.shrink();
+        Padding(
+          padding: const EdgeInsets.only(left: 16),
+          child: BlocSelector<T, WoForm, List<WoFormInputMixin>?>(
+            selector: (form) => input(form).value,
+            builder: (context, inputs) {
+              if (inputs == null) const SizedBox.shrink();
 
-            return Column(
-              children: inputs!
-                  .map((i) => SmartField<T>(input: (form) => i))
-                  .toList(),
-            );
-          },
+              return Column(
+                children: inputs!
+                    .map((i) => SmartField<T>(input: (form) => i))
+                    .toList(),
+              );
+            },
+          ),
         ),
       ],
     );

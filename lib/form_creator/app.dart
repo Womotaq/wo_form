@@ -65,7 +65,7 @@ class ScreenA extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Screen A'),
+        title: const Text("Création d'un champ texte"),
       ),
       floatingActionButton: WoFormStatusListener<FormCreatorCubit>(
         listener: (context, status) {
@@ -88,17 +88,20 @@ class ScreenA extends StatelessWidget {
           ),
         ),
       ),
-      body: BlocBuilder<FormCreatorCubit, WoForm>(
-        builder: (context, form) {
-          return Column(
-            children: [
-              for (final input in form.inputs)
-                SmartField<FormCreatorCubit>(
-                  input: (form) => form.inputsMap[input.id]!,
-                ),
-            ],
-          );
-        },
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: BlocBuilder<FormCreatorCubit, WoForm>(
+          builder: (context, form) {
+            return Column(
+              children: [
+                for (final input in form.inputs)
+                  SmartField<FormCreatorCubit>(
+                    input: (form) => form.inputsMap[input.id]!,
+                  ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
