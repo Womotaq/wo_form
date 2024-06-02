@@ -343,33 +343,33 @@ abstract class _MapFieldSettings extends MapFieldSettings {
       throw _privateConstructorUsedError;
 }
 
+SelectFieldSettings _$SelectFieldSettingsFromJson(Map<String, dynamic> json) {
+  return _SelectFieldSettings.fromJson(json);
+}
+
 /// @nodoc
-mixin _$SelectFieldSettings<T> {
+mixin _$SelectFieldSettings {
   String? get labelText => throw _privateConstructorUsedError;
-  List<T>? get values => throw _privateConstructorUsedError;
   SelectFieldDisplayMode? get displayMode => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $SelectFieldSettingsCopyWith<T, SelectFieldSettings<T>> get copyWith =>
+  $SelectFieldSettingsCopyWith<SelectFieldSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SelectFieldSettingsCopyWith<T, $Res> {
-  factory $SelectFieldSettingsCopyWith(SelectFieldSettings<T> value,
-          $Res Function(SelectFieldSettings<T>) then) =
-      _$SelectFieldSettingsCopyWithImpl<T, $Res, SelectFieldSettings<T>>;
+abstract class $SelectFieldSettingsCopyWith<$Res> {
+  factory $SelectFieldSettingsCopyWith(
+          SelectFieldSettings value, $Res Function(SelectFieldSettings) then) =
+      _$SelectFieldSettingsCopyWithImpl<$Res, SelectFieldSettings>;
   @useResult
-  $Res call(
-      {String? labelText,
-      List<T>? values,
-      SelectFieldDisplayMode? displayMode});
+  $Res call({String? labelText, SelectFieldDisplayMode? displayMode});
 }
 
 /// @nodoc
-class _$SelectFieldSettingsCopyWithImpl<T, $Res,
-        $Val extends SelectFieldSettings<T>>
-    implements $SelectFieldSettingsCopyWith<T, $Res> {
+class _$SelectFieldSettingsCopyWithImpl<$Res, $Val extends SelectFieldSettings>
+    implements $SelectFieldSettingsCopyWith<$Res> {
   _$SelectFieldSettingsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -381,7 +381,6 @@ class _$SelectFieldSettingsCopyWithImpl<T, $Res,
   @override
   $Res call({
     Object? labelText = freezed,
-    Object? values = freezed,
     Object? displayMode = freezed,
   }) {
     return _then(_value.copyWith(
@@ -389,10 +388,6 @@ class _$SelectFieldSettingsCopyWithImpl<T, $Res,
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
               as String?,
-      values: freezed == values
-          ? _value.values
-          : values // ignore: cast_nullable_to_non_nullable
-              as List<T>?,
       displayMode: freezed == displayMode
           ? _value.displayMode
           : displayMode // ignore: cast_nullable_to_non_nullable
@@ -402,44 +397,35 @@ class _$SelectFieldSettingsCopyWithImpl<T, $Res,
 }
 
 /// @nodoc
-abstract class _$$SelectFieldSettingsImplCopyWith<T, $Res>
-    implements $SelectFieldSettingsCopyWith<T, $Res> {
-  factory _$$SelectFieldSettingsImplCopyWith(_$SelectFieldSettingsImpl<T> value,
-          $Res Function(_$SelectFieldSettingsImpl<T>) then) =
-      __$$SelectFieldSettingsImplCopyWithImpl<T, $Res>;
+abstract class _$$SelectFieldSettingsImplCopyWith<$Res>
+    implements $SelectFieldSettingsCopyWith<$Res> {
+  factory _$$SelectFieldSettingsImplCopyWith(_$SelectFieldSettingsImpl value,
+          $Res Function(_$SelectFieldSettingsImpl) then) =
+      __$$SelectFieldSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String? labelText,
-      List<T>? values,
-      SelectFieldDisplayMode? displayMode});
+  $Res call({String? labelText, SelectFieldDisplayMode? displayMode});
 }
 
 /// @nodoc
-class __$$SelectFieldSettingsImplCopyWithImpl<T, $Res>
-    extends _$SelectFieldSettingsCopyWithImpl<T, $Res,
-        _$SelectFieldSettingsImpl<T>>
-    implements _$$SelectFieldSettingsImplCopyWith<T, $Res> {
-  __$$SelectFieldSettingsImplCopyWithImpl(_$SelectFieldSettingsImpl<T> _value,
-      $Res Function(_$SelectFieldSettingsImpl<T>) _then)
+class __$$SelectFieldSettingsImplCopyWithImpl<$Res>
+    extends _$SelectFieldSettingsCopyWithImpl<$Res, _$SelectFieldSettingsImpl>
+    implements _$$SelectFieldSettingsImplCopyWith<$Res> {
+  __$$SelectFieldSettingsImplCopyWithImpl(_$SelectFieldSettingsImpl _value,
+      $Res Function(_$SelectFieldSettingsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? labelText = freezed,
-    Object? values = freezed,
     Object? displayMode = freezed,
   }) {
-    return _then(_$SelectFieldSettingsImpl<T>(
+    return _then(_$SelectFieldSettingsImpl(
       labelText: freezed == labelText
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
               as String?,
-      values: freezed == values
-          ? _value._values
-          : values // ignore: cast_nullable_to_non_nullable
-              as List<T>?,
       displayMode: freezed == displayMode
           ? _value.displayMode
           : displayMode // ignore: cast_nullable_to_non_nullable
@@ -449,75 +435,71 @@ class __$$SelectFieldSettingsImplCopyWithImpl<T, $Res>
 }
 
 /// @nodoc
+@JsonSerializable()
+class _$SelectFieldSettingsImpl extends _SelectFieldSettings {
+  const _$SelectFieldSettingsImpl({this.labelText, this.displayMode})
+      : super._();
 
-class _$SelectFieldSettingsImpl<T> extends _SelectFieldSettings<T> {
-  const _$SelectFieldSettingsImpl(
-      {this.labelText, final List<T>? values, this.displayMode})
-      : _values = values,
-        super._();
+  factory _$SelectFieldSettingsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SelectFieldSettingsImplFromJson(json);
 
   @override
   final String? labelText;
-  final List<T>? _values;
-  @override
-  List<T>? get values {
-    final value = _values;
-    if (value == null) return null;
-    if (_values is EqualUnmodifiableListView) return _values;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
   @override
   final SelectFieldDisplayMode? displayMode;
 
   @override
   String toString() {
-    return 'SelectFieldSettings<$T>(labelText: $labelText, values: $values, displayMode: $displayMode)';
+    return 'SelectFieldSettings(labelText: $labelText, displayMode: $displayMode)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SelectFieldSettingsImpl<T> &&
+            other is _$SelectFieldSettingsImpl &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
-            const DeepCollectionEquality().equals(other._values, _values) &&
             (identical(other.displayMode, displayMode) ||
                 other.displayMode == displayMode));
   }
 
+  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, labelText,
-      const DeepCollectionEquality().hash(_values), displayMode);
+  int get hashCode => Object.hash(runtimeType, labelText, displayMode);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SelectFieldSettingsImplCopyWith<T, _$SelectFieldSettingsImpl<T>>
-      get copyWith => __$$SelectFieldSettingsImplCopyWithImpl<T,
-          _$SelectFieldSettingsImpl<T>>(this, _$identity);
+  _$$SelectFieldSettingsImplCopyWith<_$SelectFieldSettingsImpl> get copyWith =>
+      __$$SelectFieldSettingsImplCopyWithImpl<_$SelectFieldSettingsImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$SelectFieldSettingsImplToJson(
+      this,
+    );
+  }
 }
 
-abstract class _SelectFieldSettings<T> extends SelectFieldSettings<T> {
+abstract class _SelectFieldSettings extends SelectFieldSettings {
   const factory _SelectFieldSettings(
-          {final String? labelText,
-          final List<T>? values,
-          final SelectFieldDisplayMode? displayMode}) =
-      _$SelectFieldSettingsImpl<T>;
+      {final String? labelText,
+      final SelectFieldDisplayMode? displayMode}) = _$SelectFieldSettingsImpl;
   const _SelectFieldSettings._() : super._();
+
+  factory _SelectFieldSettings.fromJson(Map<String, dynamic> json) =
+      _$SelectFieldSettingsImpl.fromJson;
 
   @override
   String? get labelText;
   @override
-  List<T>? get values;
-  @override
   SelectFieldDisplayMode? get displayMode;
   @override
   @JsonKey(ignore: true)
-  _$$SelectFieldSettingsImplCopyWith<T, _$SelectFieldSettingsImpl<T>>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$SelectFieldSettingsImplCopyWith<_$SelectFieldSettingsImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 SelectStringFieldSettings _$SelectStringFieldSettingsFromJson(
@@ -528,7 +510,6 @@ SelectStringFieldSettings _$SelectStringFieldSettingsFromJson(
 /// @nodoc
 mixin _$SelectStringFieldSettings {
   String? get labelText => throw _privateConstructorUsedError;
-  List<String>? get values => throw _privateConstructorUsedError;
   SelectFieldDisplayMode? get displayMode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -543,10 +524,7 @@ abstract class $SelectStringFieldSettingsCopyWith<$Res> {
           $Res Function(SelectStringFieldSettings) then) =
       _$SelectStringFieldSettingsCopyWithImpl<$Res, SelectStringFieldSettings>;
   @useResult
-  $Res call(
-      {String? labelText,
-      List<String>? values,
-      SelectFieldDisplayMode? displayMode});
+  $Res call({String? labelText, SelectFieldDisplayMode? displayMode});
 }
 
 /// @nodoc
@@ -564,7 +542,6 @@ class _$SelectStringFieldSettingsCopyWithImpl<$Res,
   @override
   $Res call({
     Object? labelText = freezed,
-    Object? values = freezed,
     Object? displayMode = freezed,
   }) {
     return _then(_value.copyWith(
@@ -572,10 +549,6 @@ class _$SelectStringFieldSettingsCopyWithImpl<$Res,
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
               as String?,
-      values: freezed == values
-          ? _value.values
-          : values // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
       displayMode: freezed == displayMode
           ? _value.displayMode
           : displayMode // ignore: cast_nullable_to_non_nullable
@@ -593,10 +566,7 @@ abstract class _$$SelectStringFieldSettingsImplCopyWith<$Res>
       __$$SelectStringFieldSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String? labelText,
-      List<String>? values,
-      SelectFieldDisplayMode? displayMode});
+  $Res call({String? labelText, SelectFieldDisplayMode? displayMode});
 }
 
 /// @nodoc
@@ -613,7 +583,6 @@ class __$$SelectStringFieldSettingsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? labelText = freezed,
-    Object? values = freezed,
     Object? displayMode = freezed,
   }) {
     return _then(_$SelectStringFieldSettingsImpl(
@@ -621,10 +590,6 @@ class __$$SelectStringFieldSettingsImplCopyWithImpl<$Res>
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
               as String?,
-      values: freezed == values
-          ? _value._values
-          : values // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
       displayMode: freezed == displayMode
           ? _value.displayMode
           : displayMode // ignore: cast_nullable_to_non_nullable
@@ -636,32 +601,20 @@ class __$$SelectStringFieldSettingsImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$SelectStringFieldSettingsImpl extends _SelectStringFieldSettings {
-  const _$SelectStringFieldSettingsImpl(
-      {this.labelText, final List<String>? values, this.displayMode})
-      : _values = values,
-        super._();
+  const _$SelectStringFieldSettingsImpl({this.labelText, this.displayMode})
+      : super._();
 
   factory _$SelectStringFieldSettingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$SelectStringFieldSettingsImplFromJson(json);
 
   @override
   final String? labelText;
-  final List<String>? _values;
-  @override
-  List<String>? get values {
-    final value = _values;
-    if (value == null) return null;
-    if (_values is EqualUnmodifiableListView) return _values;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
   @override
   final SelectFieldDisplayMode? displayMode;
 
   @override
   String toString() {
-    return 'SelectStringFieldSettings(labelText: $labelText, values: $values, displayMode: $displayMode)';
+    return 'SelectStringFieldSettings(labelText: $labelText, displayMode: $displayMode)';
   }
 
   @override
@@ -671,15 +624,13 @@ class _$SelectStringFieldSettingsImpl extends _SelectStringFieldSettings {
             other is _$SelectStringFieldSettingsImpl &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
-            const DeepCollectionEquality().equals(other._values, _values) &&
             (identical(other.displayMode, displayMode) ||
                 other.displayMode == displayMode));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, labelText,
-      const DeepCollectionEquality().hash(_values), displayMode);
+  int get hashCode => Object.hash(runtimeType, labelText, displayMode);
 
   @JsonKey(ignore: true)
   @override
@@ -699,7 +650,6 @@ class _$SelectStringFieldSettingsImpl extends _SelectStringFieldSettings {
 abstract class _SelectStringFieldSettings extends SelectStringFieldSettings {
   const factory _SelectStringFieldSettings(
           {final String? labelText,
-          final List<String>? values,
           final SelectFieldDisplayMode? displayMode}) =
       _$SelectStringFieldSettingsImpl;
   const _SelectStringFieldSettings._() : super._();
@@ -709,8 +659,6 @@ abstract class _SelectStringFieldSettings extends SelectStringFieldSettings {
 
   @override
   String? get labelText;
-  @override
-  List<String>? get values;
   @override
   SelectFieldDisplayMode? get displayMode;
   @override

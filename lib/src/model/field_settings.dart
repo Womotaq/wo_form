@@ -53,34 +53,23 @@ class MapFieldSettings with _$MapFieldSettings {
         );
 }
 
-enum SelectFieldDisplayMode { selectChip, radios }
+enum SelectFieldDisplayMode { selectChip, tiles }
 
 @freezed
-@JsonSerializable(genericArgumentFactories: true)
-class SelectFieldSettings<T> with _$SelectFieldSettings<T> {
+class SelectFieldSettings with _$SelectFieldSettings {
   const factory SelectFieldSettings({
     String? labelText,
-    List<T>? values,
     SelectFieldDisplayMode? displayMode,
-  }) = _SelectFieldSettings<T>;
+  }) = _SelectFieldSettings;
 
   const SelectFieldSettings._();
 
-  factory SelectFieldSettings.fromJson(
-    Map<String, dynamic> json,
-    T Function(Object? json) fromJsonT,
-  ) {
-    return _$SelectFieldSettingsFromJson<T>(json, fromJsonT);
-  }
+  factory SelectFieldSettings.fromJson(Map<String, dynamic> json) =>
+      _$SelectFieldSettingsFromJson(json);
 
-  Map<String, dynamic> toJson(Object? Function(T value) toJsonT) {
-    return _$SelectFieldSettingsToJson<T>(this, toJsonT);
-  }
-
-  SelectFieldSettings<T> merge(SelectFieldSettings<T>? other) => other == null
+  SelectFieldSettings merge(SelectFieldSettings? other) => other == null
       ? this
       : SelectFieldSettings(
-          values: values ?? other.values,
           labelText: labelText ?? other.labelText,
           displayMode: displayMode ?? other.displayMode,
         );
@@ -90,7 +79,6 @@ class SelectFieldSettings<T> with _$SelectFieldSettings<T> {
 class SelectStringFieldSettings with _$SelectStringFieldSettings {
   const factory SelectStringFieldSettings({
     String? labelText,
-    List<String>? values,
     SelectFieldDisplayMode? displayMode,
   }) = _SelectStringFieldSettings;
 
@@ -103,7 +91,6 @@ class SelectStringFieldSettings with _$SelectStringFieldSettings {
       other == null
           ? this
           : SelectStringFieldSettings(
-              values: values ?? other.values,
               labelText: labelText ?? other.labelText,
               displayMode: displayMode ?? other.displayMode,
             );

@@ -1,9 +1,8 @@
 import 'package:test/test.dart';
+import 'package:wo_form/form_creator/string_input_form.dart';
 import 'package:wo_form/src/_export.dart';
 import 'package:wo_form/src/l10n/arb_gen/form_localizations_fr.dart';
 import 'package:wo_form/wo_form.dart';
-
-import '../../lib/form_creator/string_input_form.dart';
 
 void main() {
   final expectedInput = StringInput(
@@ -32,7 +31,8 @@ void main() {
       )
       ..update(
         'regexPattern',
-        (i) => (i as SelectInput).copyWith(value: RegexPattern.username),
+        (i) => (i as SelectInput)
+            .copyWith(selectedValues: [RegexPattern.username]),
       )
       ..update(
         'fieldSettings',

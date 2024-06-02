@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wo_form/src/model/input.dart';
 import 'package:wo_form/wo_form.dart';
 
 abstract class WoFormCubitA<T extends WoForm> extends Cubit<T>

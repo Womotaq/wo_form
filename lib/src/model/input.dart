@@ -56,10 +56,11 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
 
   const factory WoFormInput.selectString({
     required String id,
-    String? value,
-    @Default(false) bool isRequired,
-    @Default(SelectFieldSettings<String>())
-    SelectFieldSettings<String> fieldSettings,
+    required int? maxCount,
+    List<String>? selectedValues,
+    List<String>? availibleValues,
+    int? minCount,
+    @Default(SelectFieldSettings()) SelectFieldSettings fieldSettings,
   }) = SelectStringInput;
 
   const factory WoFormInput.string({
@@ -91,22 +92,26 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
   @override
   WoFormInputError? getError() {
     switch (this) {
-      case BooleanInput(value: final value):
+      case BooleanInput(value: final value, isRequired: final isRequired):
         return isRequired && value == false
             ? WoFormInputError.empty(inputId: id)
             : null;
 
-      case InputsListInput(value: final value):
+      case InputsListInput(value: final value, isRequired: final isRequired):
         return isRequired && (value == null || value.isEmpty)
             ? WoFormInputError.empty(inputId: id)
             : null;
 
-      case NumInput(value: final value):
+      case NumInput(value: final value, isRequired: final isRequired):
         return isRequired && value == null
             ? WoFormInputError.empty(inputId: id)
             : null;
 
-      case StringInput(value: final value, regexPattern: final regexPattern):
+      case StringInput(
+          value: final value,
+          isRequired: final isRequired,
+          regexPattern: final regexPattern,
+        ):
         if (value == null || value.isEmpty) {
           return isRequired ? WoFormInputError.empty(inputId: id) : null;
         } else if (regexPattern != null &&
@@ -116,10 +121,20 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
           return null;
         }
 
-      case SelectStringInput(value: final value):
-        return isRequired && value == null
-            ? WoFormInputError.empty(inputId: id)
-            : null;
+      case SelectStringInput(
+          id: final inputId,
+          selectedValues: final selectedValues,
+          availibleValues: final availibleValues,
+          minCount: final minCount,
+          maxCount: final maxCount,
+        ):
+        return SelectInput.validator(
+          inputId: inputId,
+          selectedValues: selectedValues ?? [],
+          availibleValues: availibleValues ?? [],
+          minCount: minCount,
+          maxCount: maxCount,
+        );
     }
   }
 
@@ -151,14 +166,22 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
 
   @override
   Object? valueToJson() => switch (this) {
-        BooleanInput() => value,
+        BooleanInput(value: final value) => value,
         InputsListInput(value: final inputs) => {
             for (final input in inputs ?? <WoFormInputMixin>[])
               input.id: input.valueToJson(),
           },
-        NumInput() => value,
-        StringInput() => value,
-        SelectStringInput() => value,
+        NumInput(value: final value) => value,
+        SelectStringInput(
+          selectedValues: final selectedValues,
+          maxCount: final maxCount,
+        ) =>
+          SelectInput.selectedValuesToJson(
+            selectedValues: selectedValues ?? [],
+            toJsonT: (value) => value,
+            asList: maxCount == 1,
+          ),
+        StringInput(value: final value) => value,
       };
 }
 
@@ -225,12 +248,32 @@ class ListInput<T> with _$ListInput<T>, WoFormInputMixin {
 class SelectInput<T> with _$SelectInput<T>, WoFormInputMixin {
   const factory SelectInput({
     required String id,
-    T? value,
-    @Default(false) bool isRequired,
-    SelectFieldSettings<T>? fieldSettings,
+    required int? maxCount,
+    List<T>? selectedValues,
+    List<T>? availibleValues,
+    int? minCount,
+    @Default(SelectFieldSettings()) SelectFieldSettings fieldSettings,
     @JsonKey(includeToJson: false, includeFromJson: false)
     Object? Function(T)? toJsonT,
   }) = _SelectInput<T>;
+
+  // factory SelectInput.uniqueChoice({
+  //   required String id,
+  //   T? defaultValues,
+  //   List<T>? availibleValues,
+  //   bool isRequired = false,
+  //   SelectFieldSettings fieldSettings = const SelectFieldSettings(),
+  //   Object? Function(T)? toJsonT,
+  // }) =>
+  //     SelectInput(
+  //       id: id,
+  //       selectedValues: defaultValues == null ? [] : [defaultValues],
+  //       availibleValues: availibleValues,
+  //       minCount: isRequired ? 1 : 0,
+  //       maxCount: 1,
+  //       fieldSettings: fieldSettings,
+  //       toJsonT: toJsonT,
+  //     );
 
   const SelectInput._();
 
@@ -250,18 +293,44 @@ class SelectInput<T> with _$SelectInput<T>, WoFormInputMixin {
 
   // --
 
-  @override
-  WoFormInputError? getError() {
-    if (isRequired && value == null) {
-      return WoFormInputError.empty(inputId: id);
+  static WoFormInputError? validator<T>({
+    required String inputId,
+    required List<T> selectedValues,
+    required List<T> availibleValues,
+    required int? minCount,
+    required int? maxCount,
+  }) {
+    if (minCount == 1 && maxCount == 1 && selectedValues.isEmpty) {
+      return WoFormInputError.empty(inputId: inputId);
     }
 
-    if (value != null && !(fieldSettings?.values?.contains(value) ?? true)) {
-      return WoFormInputError.invalid(inputId: id);
+    if (minCount != null && selectedValues.length < minCount) {
+      return WoFormInputError.minBound(inputId: inputId);
+    }
+
+    if (maxCount != null && selectedValues.length > maxCount) {
+      return WoFormInputError.maxBound(inputId: inputId);
+    }
+
+    if (availibleValues.isNotEmpty) {
+      for (final value in selectedValues) {
+        if (!availibleValues.contains(value)) {
+          return WoFormInputError.invalid(inputId: inputId);
+        }
+      }
     }
 
     return null;
   }
+
+  @override
+  WoFormInputError? getError() => validator(
+        inputId: id,
+        selectedValues: selectedValues ?? [],
+        availibleValues: availibleValues ?? [],
+        minCount: minCount,
+        maxCount: maxCount,
+      );
 
   @override
   String? getInvalidExplanation(FormLocalizations formL10n) {
@@ -272,15 +341,22 @@ class SelectInput<T> with _$SelectInput<T>, WoFormInputMixin {
     return formL10n.formError(error.code);
   }
 
-  @override
-  Object? valueToJson() {
-    if (toJsonT == null) {
-      if (value == null) return null;
-      return _defaultToJsonT(value as T);
-    }
-    
-    return value == null ? null : toJsonT!(value as T);
+  static Object? selectedValuesToJson<T>({
+    required List<T> selectedValues,
+    required Object? Function(T)? toJsonT,
+    required bool asList,
+  }) {
+    final valuesToJson = selectedValues.map(toJsonT ?? _defaultToJsonT);
+
+    return asList ? valuesToJson.toList() : valuesToJson.firstOrNull;
   }
+
+  @override
+  Object? valueToJson() => selectedValuesToJson<T>(
+        selectedValues: selectedValues ?? [],
+        toJsonT: toJsonT,
+        asList: maxCount == 1,
+      );
 }
 
 Object? _defaultToJsonT<T>(T value) {

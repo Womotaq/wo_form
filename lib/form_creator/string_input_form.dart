@@ -9,14 +9,12 @@ final stringInputForm = WoForm(
       isRequired: true,
       fieldSettings: StringFieldSettings(
         labelText: 'Clef',
-        // hintText: 'La clef du json',
       ),
     ),
     const StringInput(
       id: 'value',
       fieldSettings: StringFieldSettings(
         labelText: 'Valeur par défaut',
-        // hintText: 'Votre utilisateur pourra modifier ce champ.',
       ),
     ),
     const BooleanInput(
@@ -27,9 +25,10 @@ final stringInputForm = WoForm(
     ),
     SelectInput(
       id: 'regexPattern',
+      availibleValues: RegexPattern.values,
+      maxCount: 1,
       fieldSettings: const SelectFieldSettings(
         labelText: 'Regex pattern',
-        values: RegexPattern.values,
         displayMode: SelectFieldDisplayMode.selectChip,
       ),
       toJsonT: (regex) => regex.value,
@@ -46,11 +45,18 @@ final stringInputForm = WoForm(
             labelText: 'Titre',
           ),
         ),
+        const StringInput(
+          id: 'hintText',
+          fieldSettings: StringFieldSettings(
+            labelText: 'Aide',
+          ),
+        ),
         const SelectInput<StringFieldAction>(
           id: 'action',
+          availibleValues: StringFieldAction.values,
+          maxCount: 1,
           fieldSettings: SelectFieldSettings(
-            labelText: 'Action spéciale',
-            values: StringFieldAction.values,
+            labelText: 'Action à droite du champ',
             displayMode: SelectFieldDisplayMode.selectChip,
           ),
         ),
@@ -62,9 +68,10 @@ final stringInputForm = WoForm(
         ),
         SelectInput<TextInputType>(
           id: 'keyboardType',
+          availibleValues: TextInputType.values,
+          maxCount: 1,
           fieldSettings: const SelectFieldSettings(
             labelText: 'Type de text',
-            values: TextInputType.values,
             displayMode: SelectFieldDisplayMode.selectChip,
           ),
           toJsonT: (value) => const TextInputTypeConverter().toJson(value),
@@ -81,15 +88,45 @@ final stringInputForm = WoForm(
             labelText: "Autoriser l'auto-correction",
           ),
         ),
-        const ListInput<String>(
+        const SelectStringInput(
           id: 'autofillHints',
+          availibleValues: AutofillHintsX.all,
+          maxCount: null,
+          fieldSettings: SelectFieldSettings(
+            labelText: 'Auto-remplissage',
+          ),
         ),
-        const BooleanInput(id: 'autofocus'),
-        const SelectInput<TextInputAction>(id: 'textInputAction'),
-        const SelectInput<TextCapitalization>(id: 'textCapitalization'),
+        const BooleanInput(
+          id: 'autofocus',
+          fieldSettings: BooleanFieldSettings(
+            labelText: 'Auto-focus',
+          ),
+        ),
+        const SelectInput<TextInputAction>(
+          id: 'textInputAction',
+          availibleValues: TextInputAction.values,
+          maxCount: 1,
+          fieldSettings: SelectFieldSettings(
+            labelText: "Bouton 'Entrée' du clavier",
+            displayMode: SelectFieldDisplayMode.selectChip,
+          ),
+        ),
+        const SelectInput<TextCapitalization>(
+          id: 'textCapitalization',
+          availibleValues: TextCapitalization.values,
+          maxCount: 1,
+          fieldSettings: SelectFieldSettings(
+            labelText: 'Gestion des majuscules',
+            displayMode: SelectFieldDisplayMode.selectChip,
+          ),
+        ),
         const NumInput(id: 'maxLines'),
-        const StringInput(id: 'hintText'),
-        const StringInput(id: 'invalidRegexMessage'),
+        const StringInput(
+          id: 'invalidRegexMessage',
+          fieldSettings: StringFieldSettings(
+            labelText: 'Message en cas de regex invalide',
+          ),
+        ),
       ],
     ),
   ],

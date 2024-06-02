@@ -26,7 +26,7 @@ class SmartField<T extends WoFormCubit> extends StatelessWidget {
         case StringInput():
           return StringField<T>(input: (form) => input(form) as StringInput);
         case SelectStringInput():
-          return SelectStringField(
+          return SelectStringField<T>(
             input: (form) => input(form) as SelectStringInput,
           );
       }

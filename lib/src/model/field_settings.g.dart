@@ -6,32 +6,6 @@ part of 'field_settings.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SelectFieldSettings<T> _$SelectFieldSettingsFromJson<T>(
-  Map<String, dynamic> json,
-  T Function(Object? json) fromJsonT,
-) =>
-    SelectFieldSettings<T>(
-      labelText: json['labelText'] as String?,
-      values: (json['values'] as List<dynamic>?)?.map(fromJsonT).toList(),
-      displayMode: $enumDecodeNullable(
-          _$SelectFieldDisplayModeEnumMap, json['displayMode']),
-    );
-
-Map<String, dynamic> _$SelectFieldSettingsToJson<T>(
-  SelectFieldSettings<T> instance,
-  Object? Function(T value) toJsonT,
-) =>
-    <String, dynamic>{
-      'labelText': instance.labelText,
-      'values': instance.values?.map(toJsonT).toList(),
-      'displayMode': _$SelectFieldDisplayModeEnumMap[instance.displayMode],
-    };
-
-const _$SelectFieldDisplayModeEnumMap = {
-  SelectFieldDisplayMode.selectChip: 'selectChip',
-  SelectFieldDisplayMode.radios: 'radios',
-};
-
 _$BooleanFieldSettingsImpl _$$BooleanFieldSettingsImplFromJson(
         Map<String, dynamic> json) =>
     _$BooleanFieldSettingsImpl(
@@ -73,12 +47,30 @@ Map<String, dynamic> _$$MapFieldSettingsImplToJson(
       'labelText': instance.labelText,
     };
 
+_$SelectFieldSettingsImpl _$$SelectFieldSettingsImplFromJson(
+        Map<String, dynamic> json) =>
+    _$SelectFieldSettingsImpl(
+      labelText: json['labelText'] as String?,
+      displayMode: $enumDecodeNullable(
+          _$SelectFieldDisplayModeEnumMap, json['displayMode']),
+    );
+
+Map<String, dynamic> _$$SelectFieldSettingsImplToJson(
+        _$SelectFieldSettingsImpl instance) =>
+    <String, dynamic>{
+      'labelText': instance.labelText,
+      'displayMode': _$SelectFieldDisplayModeEnumMap[instance.displayMode],
+    };
+
+const _$SelectFieldDisplayModeEnumMap = {
+  SelectFieldDisplayMode.selectChip: 'selectChip',
+  SelectFieldDisplayMode.tiles: 'tiles',
+};
+
 _$SelectStringFieldSettingsImpl _$$SelectStringFieldSettingsImplFromJson(
         Map<String, dynamic> json) =>
     _$SelectStringFieldSettingsImpl(
       labelText: json['labelText'] as String?,
-      values:
-          (json['values'] as List<dynamic>?)?.map((e) => e as String).toList(),
       displayMode: $enumDecodeNullable(
           _$SelectFieldDisplayModeEnumMap, json['displayMode']),
     );
@@ -87,7 +79,6 @@ Map<String, dynamic> _$$SelectStringFieldSettingsImplToJson(
         _$SelectStringFieldSettingsImpl instance) =>
     <String, dynamic>{
       'labelText': instance.labelText,
-      'values': instance.values,
       'displayMode': _$SelectFieldDisplayModeEnumMap[instance.displayMode],
     };
 

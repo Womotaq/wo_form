@@ -32,13 +32,14 @@ SelectInput<T> _$SelectInputFromJson<T>(
 ) =>
     SelectInput<T>(
       id: json['id'] as String,
-      value: _$nullableGenericFromJson(json['value'], fromJsonT),
-      isRequired: json['isRequired'] as bool,
-      fieldSettings: json['fieldSettings'] == null
-          ? null
-          : SelectFieldSettings<T>.fromJson(
-              json['fieldSettings'] as Map<String, dynamic>,
-              (value) => fromJsonT(value)),
+      maxCount: (json['maxCount'] as num?)?.toInt(),
+      selectedValues:
+          (json['selectedValues'] as List<dynamic>?)?.map(fromJsonT).toList(),
+      availibleValues:
+          (json['availibleValues'] as List<dynamic>?)?.map(fromJsonT).toList(),
+      minCount: (json['minCount'] as num?)?.toInt(),
+      fieldSettings: SelectFieldSettings.fromJson(
+          json['fieldSettings'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$SelectInputToJson<T>(
@@ -47,24 +48,12 @@ Map<String, dynamic> _$SelectInputToJson<T>(
 ) =>
     <String, dynamic>{
       'id': instance.id,
-      'value': _$nullableGenericToJson(instance.value, toJsonT),
-      'isRequired': instance.isRequired,
-      'fieldSettings': instance.fieldSettings?.toJson(
-        (value) => toJsonT(value),
-      ),
+      'maxCount': instance.maxCount,
+      'selectedValues': instance.selectedValues?.map(toJsonT).toList(),
+      'availibleValues': instance.availibleValues?.map(toJsonT).toList(),
+      'minCount': instance.minCount,
+      'fieldSettings': instance.fieldSettings,
     };
-
-T? _$nullableGenericFromJson<T>(
-  Object? input,
-  T Function(Object? json) fromJson,
-) =>
-    input == null ? null : fromJson(input);
-
-Object? _$nullableGenericToJson<T>(
-  T? input,
-  Object? Function(T value) toJson,
-) =>
-    input == null ? null : toJson(input);
 
 _$BooleanInputImpl _$$BooleanInputImplFromJson(Map<String, dynamic> json) =>
     _$BooleanInputImpl(
@@ -147,13 +136,18 @@ _$SelectStringInputImpl _$$SelectStringInputImplFromJson(
         Map<String, dynamic> json) =>
     _$SelectStringInputImpl(
       id: json['id'] as String,
-      value: json['value'] as String?,
-      isRequired: json['isRequired'] as bool? ?? false,
+      maxCount: (json['maxCount'] as num?)?.toInt(),
+      selectedValues: (json['selectedValues'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      availibleValues: (json['availibleValues'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      minCount: (json['minCount'] as num?)?.toInt(),
       fieldSettings: json['fieldSettings'] == null
-          ? const SelectFieldSettings<String>()
-          : SelectFieldSettings<String>.fromJson(
-              json['fieldSettings'] as Map<String, dynamic>,
-              (value) => value as String),
+          ? const SelectFieldSettings()
+          : SelectFieldSettings.fromJson(
+              json['fieldSettings'] as Map<String, dynamic>),
       $type: json['runtimeType'] as String?,
     );
 
@@ -161,11 +155,11 @@ Map<String, dynamic> _$$SelectStringInputImplToJson(
         _$SelectStringInputImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'value': instance.value,
-      'isRequired': instance.isRequired,
-      'fieldSettings': instance.fieldSettings.toJson(
-        (value) => value,
-      ),
+      'maxCount': instance.maxCount,
+      'selectedValues': instance.selectedValues,
+      'availibleValues': instance.availibleValues,
+      'minCount': instance.minCount,
+      'fieldSettings': instance.fieldSettings,
       'runtimeType': instance.$type,
     };
 

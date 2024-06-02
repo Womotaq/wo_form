@@ -92,7 +92,7 @@ class ScreenA extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: BlocBuilder<FormCreatorCubit, WoForm>(
           builder: (context, form) {
-            return Column(
+            return ListView(
               children: [
                 for (final input in form.inputs)
                   SmartField<FormCreatorCubit>(
