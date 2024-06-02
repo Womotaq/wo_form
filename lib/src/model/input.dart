@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/src/model/json_converter/inputs_list.dart';
 import 'package:wo_form/wo_form.dart';
@@ -24,6 +25,8 @@ mixin WoFormInputMixin {
   Map<String, dynamic> toJson();
 
   Object? valueToJson();
+
+  Widget toField<T extends WoFormCubit>();
 }
 
 enum WoFormInputType { boolean, string, selectString }
@@ -129,7 +132,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
           minCount: final minCount,
           maxCount: final maxCount,
         ):
-        return SelectInput.validator(
+        return SelectInput._validator(
           inputId: inputId,
           selectedValues: selectedValues,
           availibleValues: availibleValues,
@@ -166,6 +169,28 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
   }
 
   @override
+  Widget toField<T extends WoFormCubit>() {
+    switch (this) {
+      case BooleanInput():
+        return BooleanField<T>(
+          getInput: (form) => this as BooleanInput,
+        );
+      case InputsListInput():
+        return InputsListField<T>(
+          getInput: (form) => this as InputsListInput,
+        );
+      case NumInput():
+        return NumField<T>(getInput: (form) => this as NumInput);
+      case StringInput():
+        return StringField<T>(getInput: (form) => this as StringInput);
+      case SelectStringInput():
+        return SelectStringField<T>(
+          getInput: (form) => this as SelectStringInput,
+        );
+    }
+  }
+
+  @override
   Object? valueToJson() => switch (this) {
         BooleanInput(value: final value) => value,
         InputsListInput(value: final inputs) => {
@@ -177,7 +202,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
           selectedValues: final selectedValues,
           maxCount: final maxCount,
         ) =>
-          SelectInput.selectedValuesToJson(
+          SelectInput._selectedValuesToJson(
             selectedValues: selectedValues,
             toJsonT: (value) => value,
             asList: maxCount == 1,
@@ -234,6 +259,12 @@ class ListInput<T> with _$ListInput<T>, WoFormInputMixin {
   }
 
   @override
+  Widget toField<T extends WoFormCubit>() {
+    // TODO: implement toField
+    throw UnimplementedError();
+  }
+
+  @override
   Object? valueToJson() {
     if (toJsonT == null) {
       if (value == null) return null;
@@ -276,7 +307,7 @@ class SelectInput<T> with _$SelectInput<T>, WoFormInputMixin {
 
   // --
 
-  static WoFormInputError? validator<T>({
+  static WoFormInputError? _validator<T>({
     required String inputId,
     required List<T> selectedValues,
     required List<T> availibleValues,
@@ -306,8 +337,18 @@ class SelectInput<T> with _$SelectInput<T>, WoFormInputMixin {
     return null;
   }
 
+  static Object? _selectedValuesToJson<T>({
+    required List<T> selectedValues,
+    required Object? Function(T)? toJsonT,
+    required bool asList,
+  }) {
+    final valuesToJson = selectedValues.map(toJsonT ?? _defaultToJsonT);
+
+    return asList ? valuesToJson.toList() : valuesToJson.firstOrNull;
+  }
+
   @override
-  WoFormInputError? getError() => validator(
+  WoFormInputError? getError() => _validator(
         inputId: id,
         selectedValues: selectedValues,
         availibleValues: availibleValues,
@@ -324,18 +365,13 @@ class SelectInput<T> with _$SelectInput<T>, WoFormInputMixin {
     return formL10n.formError(error.code);
   }
 
-  static Object? selectedValuesToJson<T>({
-    required List<T> selectedValues,
-    required Object? Function(T)? toJsonT,
-    required bool asList,
-  }) {
-    final valuesToJson = selectedValues.map(toJsonT ?? _defaultToJsonT);
-
-    return asList ? valuesToJson.toList() : valuesToJson.firstOrNull;
+  @override
+  Widget toField<C extends WoFormCubit>() {
+    return SelectField<C, T>(getInput: (form) => this);
   }
 
   @override
-  Object? valueToJson() => selectedValuesToJson<T>(
+  Object? valueToJson() => _selectedValuesToJson<T>(
         selectedValues: selectedValues,
         toJsonT: toJsonT,
         asList: maxCount == 1,

@@ -74,10 +74,7 @@ class ScreenA extends StatelessWidget {
           builder: (context, form) {
             return ListView(
               children: [
-                for (final input in form.inputs)
-                  SmartField<FormCreatorCubit>(
-                    input: (form) => form.inputsMap[input.id]!,
-                  ),
+                ...form.inputs.map((i) => i.toField<FormCreatorCubit>()),
                 WoGap.xxxlarge,
                 const Text('Json :'),
                 WoGap.medium,

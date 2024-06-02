@@ -36,15 +36,7 @@ class InputsListField<T extends WoFormCubit> extends StatelessWidget {
               if (inputs == null) const SizedBox.shrink();
 
               return Column(
-                children: inputs!
-                    .map(
-                      (input) => SmartField<T>(
-                        input: (form) => getInput(form)
-                            .value!
-                            .firstWhere((i) => i.id == input.id),
-                      ),
-                    )
-                    .toList(),
+                children: inputs!.map((i) => i.toField<T>()).toList(),
               );
             },
           ),
