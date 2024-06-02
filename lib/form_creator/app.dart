@@ -19,6 +19,8 @@ class FormCreatorApp extends StatelessWidget {
           ),
           // primarySwatch: Colors.blue,
         ),
+        supportedLocales: FormLocalizations.supportedLocales,
+        localizationsDelegates: FormLocalizations.localizationsDelegates,
         home: const ScreenA(),
       ),
     );
@@ -86,16 +88,17 @@ class ScreenA extends StatelessWidget {
           ),
         ),
       ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute<void>(builder: (context) => const ScreenB()),
-            );
-          },
-          child: const Text('Go to Screen B'),
-        ),
+      body: BlocBuilder<FormCreatorCubit, WoForm>(
+        builder: (context, form) {
+          return Column(
+            children: [
+              for (final input in form.inputs)
+                SmartField<FormCreatorCubit>(
+                  input: (form) => form.inputsMap[input.id]!,
+                ),
+            ],
+          );
+        },
       ),
     );
   }
