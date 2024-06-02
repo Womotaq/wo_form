@@ -18,15 +18,16 @@ class SmartField<T extends WoFormCubit> extends StatelessWidget {
         case BooleanInput():
           return BooleanField<T>(input: (form) => input(form) as BooleanInput);
         case InputsListInput():
-          throw UnimplementedError('No field implemented for InputsListInput');
+          return InputsListField<T>(
+            input: (form) => input(form) as InputsListInput,
+          );
         case NumInput():
           throw UnimplementedError('No field implemented for NumInput');
         case StringInput():
           return StringField<T>(input: (form) => input(form) as StringInput);
         case SelectStringInput():
-          throw UnimplementedError(
-            'No field implemented for SelectStringInput',
-          );
+          return SelectStringField(
+              input: (form) => input(form) as SelectStringInput);
       }
     } else if (i is ListInput) {
       throw UnimplementedError('No field implemented for ListInput');

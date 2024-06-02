@@ -8,26 +8,27 @@ class SelectField<T extends WoFormCubit, S> extends StatelessWidget {
     required this.input,
     this.valueBuilder,
     this.previewBuilder,
-    this.theme,
+    this.settings,
     super.key,
   });
 
   final SelectInput<S> Function(WoForm form) input;
   final Widget Function(S?)? valueBuilder;
   final Widget Function(S?)? previewBuilder;
-  final SelectFieldSettings<S>? theme;
+  final SelectFieldSettings<S>? settings;
 
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<T>();
 
     final themeFromInput = input(cubit.state).fieldSettings;
-    final mergedSettings = (theme?.merge(themeFromInput) ?? themeFromInput) ??
-        SelectFieldSettings<S>();
+    final mergedSettings =
+        (settings?.merge(themeFromInput) ?? themeFromInput) ??
+            SelectFieldSettings<S>();
 
     return BlocSelector<T, WoForm, SelectInput<S?>>(
       selector: input,
-      builder: (context, input) => switch (theme?.displayMode) {
+      builder: (context, input) => switch (mergedSettings.displayMode) {
         null || SelectFieldDisplayMode.radios => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -79,11 +80,22 @@ class SelectField<T extends WoFormCubit, S> extends StatelessWidget {
 }
 
 class SelectStringField<T extends WoFormCubit> extends SelectField<T, String> {
-  const SelectStringField({
-    required super.input,
+  SelectStringField({
+    required SelectStringInput Function(WoForm form) input,
     super.valueBuilder,
     super.previewBuilder,
-    super.theme,
+    super.settings,
     super.key,
-  });
+  }) : super(
+          input: (form) {
+            final selectStringInput = input(form);
+            return SelectInput<String>(
+              id: selectStringInput.id,
+              value: selectStringInput.value,
+              isRequired: selectStringInput.isRequired,
+              fieldSettings: selectStringInput.fieldSettings,
+              toJsonT: (value) => value,
+            );
+          },
+        );
 }

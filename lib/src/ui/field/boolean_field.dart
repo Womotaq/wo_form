@@ -5,19 +5,19 @@ import 'package:wo_form/wo_form.dart';
 class BooleanField<T extends WoFormCubit> extends StatelessWidget {
   const BooleanField({
     required this.input,
-    this.theme,
+    this.settings,
     super.key,
   });
 
   final BooleanInput Function(WoForm form) input;
-  final BooleanFieldSettings? theme;
+  final BooleanFieldSettings? settings;
 
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<T>();
 
     final themeFromInput = input(cubit.state).fieldSettings;
-    final mergedSettings = theme?.merge(themeFromInput) ?? themeFromInput;
+    final mergedSettings = settings?.merge(themeFromInput) ?? themeFromInput;
 
     return BlocSelector<T, WoForm, BooleanInput>(
       selector: input,
