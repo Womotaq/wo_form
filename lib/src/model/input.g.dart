@@ -81,9 +81,10 @@ _$InputsListInputImpl _$$InputsListInputImplFromJson(
         Map<String, dynamic> json) =>
     _$InputsListInputImpl(
       id: json['id'] as String,
-      value: _$JsonConverterFromJson<List<Map<String, dynamic>>,
-              List<WoFormInputMixin>>(
-          json['value'], const InputsListConverter().fromJson),
+      value: json['value'] == null
+          ? const []
+          : const InputsListConverter()
+              .fromJson(json['value'] as List<Map<String, dynamic>>),
       isRequired: json['isRequired'] as bool? ?? false,
       fieldSettings: json['fieldSettings'] == null
           ? const MapFieldSettings()
@@ -96,25 +97,11 @@ Map<String, dynamic> _$$InputsListInputImplToJson(
         _$InputsListInputImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'value': _$JsonConverterToJson<List<Map<String, dynamic>>,
-              List<WoFormInputMixin>>(
-          instance.value, const InputsListConverter().toJson),
+      'value': const InputsListConverter().toJson(instance.value),
       'isRequired': instance.isRequired,
       'fieldSettings': MapFieldSettings.staticToJson(instance.fieldSettings),
       'runtimeType': instance.$type,
     };
-
-Value? _$JsonConverterFromJson<Json, Value>(
-  Object? json,
-  Value? Function(Json json) fromJson,
-) =>
-    json == null ? null : fromJson(json as Json);
-
-Json? _$JsonConverterToJson<Json, Value>(
-  Value? value,
-  Json? Function(Value value) toJson,
-) =>
-    value == null ? null : toJson(value);
 
 _$NumInputImpl _$$NumInputImplFromJson(Map<String, dynamic> json) =>
     _$NumInputImpl(

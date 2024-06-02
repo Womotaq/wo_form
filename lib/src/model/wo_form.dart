@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/src/model/json_converter/wo_form_inputs.dart';
 import 'package:wo_form/wo_form.dart';
@@ -52,6 +53,20 @@ abstract class WoForm with _$WoForm {
   /// Whether the input values are not all valid.
   bool get isNotValid => !isValid;
 
+  WoFormInputMixin? getInput({required String inputId}) {
+    final input = inputs.firstWhereOrNull((i) => i.id == inputId);
+    if (input != null) return input;
+
+    for (final input in inputs) {
+      if (input is InputsListInput) {
+        final gatcha = input.getInput(inputId: inputId);
+        if (gatcha != null) return gatcha;
+      }
+    }
+
+    return null;
+  }
+
   String? getInvalidExplanation(
     WoFormInputMixin input,
     FormLocalizations formL10n,
@@ -64,4 +79,20 @@ abstract class WoForm with _$WoForm {
   Map<String, dynamic> valuesToJson() => {
         for (final input in inputs) input.id: input.valueToJson(),
       }..addEntries((unmodifiableValuesJson ?? {}).entries);
+}
+
+extension InputsListInputGetInput on InputsListInput {
+  WoFormInputMixin? getInput({required String inputId}) {
+    final input = value.firstWhereOrNull((i) => i.id == inputId);
+    if (input != null) return input;
+
+    for (final input in value) {
+      if (input is InputsListInput) {
+        final gatcha = input.getInput(inputId: inputId);
+        if (gatcha != null) return gatcha;
+      }
+    }
+
+    return null;
+  }
 }

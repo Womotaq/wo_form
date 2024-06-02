@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
@@ -46,14 +47,17 @@ class SelectField<T extends WoFormCubit, S> extends StatelessWidget {
                         onChanged: (value) => value == null
                             ? null
                             : cubit.onInputChanged(
-                                input: input.copyWith(selectedValues: [value]),
+                                input:
+                                    input.copyWith(selectedValues: <S>[value]),
                               ),
                       ),
                       title:
                           valueBuilder?.call(value) ?? Text(value.toString()),
-                      onTap: () => cubit.onInputChanged(
-                        input: input.copyWith(selectedValues: [value]),
-                      ),
+                      onTap: () => value == null
+                          ? null
+                          : cubit.onInputChanged(
+                              input: input.copyWith(selectedValues: <S>[value]),
+                            ),
                       visualDensity: VisualDensity.compact,
                       contentPadding: EdgeInsets.zero,
                     ),
@@ -63,11 +67,12 @@ class SelectField<T extends WoFormCubit, S> extends StatelessWidget {
             SelectFieldDisplayMode.selectChip => ListTile(
                 title: Text(mergedSettings.labelText ?? ''),
                 trailing: SelectChip<S>.uniqueChoice(
-                  // values: input.availibleValues ?? <S>[],
                   values: input.availibleValues.whereType(),
-                  onSelected: (value) => cubit.onInputChanged(
-                    input: input.copyWith(selectedValues: [value]),
-                  ),
+                  onSelected: (value) => value == null
+                      ? null
+                      : cubit.onInputChanged(
+                          input: input.copyWith(selectedValues: <S>[value]),
+                        ),
                   selectedValue: input.selectedValues.firstOrNull,
                   valueBuilder: valueBuilder,
                   previewBuilder: previewBuilder,

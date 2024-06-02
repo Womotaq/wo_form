@@ -44,7 +44,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
 
   const factory WoFormInput.inputsList({
     required String id,
-    @InputsListConverter() List<WoFormInputMixin>? value,
+    @InputsListConverter() @Default([]) List<WoFormInputMixin> value,
     @Default(false) bool isRequired,
     @JsonKey(toJson: MapFieldSettings.staticToJson)
     @Default(MapFieldSettings())
@@ -102,7 +102,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
             : null;
 
       case InputsListInput(value: final value, isRequired: final isRequired):
-        return isRequired && (value == null || value.isEmpty)
+        return isRequired && value.isEmpty
             ? WoFormInputError.empty(inputId: id)
             : null;
 
@@ -173,19 +173,23 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
     switch (this) {
       case BooleanInput():
         return BooleanField<T>(
-          getInput: (form) => this as BooleanInput,
+          getInput: (form) => form.getInput(inputId: id)! as BooleanInput,
         );
       case InputsListInput():
         return InputsListField<T>(
-          getInput: (form) => this as InputsListInput,
+          getInput: (form) => form.getInput(inputId: id)! as InputsListInput,
         );
       case NumInput():
-        return NumField<T>(getInput: (form) => this as NumInput);
+        return NumField<T>(
+          getInput: (form) => form.getInput(inputId: id)! as NumInput,
+        );
       case StringInput():
-        return StringField<T>(getInput: (form) => this as StringInput);
+        return StringField<T>(
+          getInput: (form) => form.getInput(inputId: id)! as StringInput,
+        );
       case SelectStringInput():
         return SelectStringField<T>(
-          getInput: (form) => this as SelectStringInput,
+          getInput: (form) => form.getInput(inputId: id)! as SelectStringInput,
         );
     }
   }
@@ -194,8 +198,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
   Object? valueToJson() => switch (this) {
         BooleanInput(value: final value) => value,
         InputsListInput(value: final inputs) => {
-            for (final input in inputs ?? <WoFormInputMixin>[])
-              input.id: input.valueToJson(),
+            for (final input in inputs) input.id: input.valueToJson(),
           },
         NumInput(value: final value) => value,
         SelectStringInput(
@@ -259,9 +262,8 @@ class ListInput<T> with _$ListInput<T>, WoFormInputMixin {
   }
 
   @override
-  Widget toField<T extends WoFormCubit>() {
-    // TODO: implement toField
-    throw UnimplementedError();
+  Widget toField<C extends WoFormCubit>() {
+    throw UnimplementedError('No field implemented for ListInput');
   }
 
   @override
@@ -367,7 +369,9 @@ class SelectInput<T> with _$SelectInput<T>, WoFormInputMixin {
 
   @override
   Widget toField<C extends WoFormCubit>() {
-    return SelectField<C, T>(getInput: (form) => this);
+    return SelectField<C, T>(
+      getInput: (form) => form.getInput(inputId: id)! as SelectInput<T>,
+    );
   }
 
   @override

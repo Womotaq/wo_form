@@ -62,11 +62,11 @@ extension InputsMapX on Map<String, WoFormInputMixin> {
 
 extension InputsListInputX on InputsListInput {
   InputsListInput? copyWithInput(WoFormInputMixin newInput) {
-    for (final input in value ?? <WoFormInputMixin>[]) {
+    for (final input in value) {
       if (input.id == newInput.id) return uncheckedCopyWithInput(newInput);
     }
 
-    for (final input in value ?? []) {
+    for (final input in value) {
       if (input is InputsListInput) {
         final updatedInput = input.copyWithInput(newInput);
         if (updatedInput != null) return uncheckedCopyWithInput(updatedInput);
@@ -77,6 +77,6 @@ extension InputsListInputX on InputsListInput {
   }
 
   InputsListInput uncheckedCopyWithInput(WoFormInputMixin newInput) => copyWith(
-        value: value!.map((i) => i.id == newInput.id ? newInput : i).toList(),
+        value: value.map((i) => i.id == newInput.id ? newInput : i).toList(),
       );
 }

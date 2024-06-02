@@ -37,7 +37,7 @@ void main() {
       ..update(
         'fieldSettings',
         (i) => (i as InputsListInput).copyWith(
-          value: List<WoFormInputMixin>.from(i.value ?? []).map(
+          value: List<WoFormInputMixin>.from(i.value).map(
             (fsInput) {
               if (fsInput.id == 'invalidRegexMessage') {
                 return (fsInput as StringInput).copyWith(

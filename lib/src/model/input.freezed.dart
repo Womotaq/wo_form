@@ -49,7 +49,7 @@ mixin _$WoFormInput {
         boolean,
     required TResult Function(
             String id,
-            @InputsListConverter() List<WoFormInputMixin>? value,
+            @InputsListConverter() List<WoFormInputMixin> value,
             bool isRequired,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)
@@ -86,7 +86,7 @@ mixin _$WoFormInput {
         boolean,
     TResult? Function(
             String id,
-            @InputsListConverter() List<WoFormInputMixin>? value,
+            @InputsListConverter() List<WoFormInputMixin> value,
             bool isRequired,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
@@ -123,7 +123,7 @@ mixin _$WoFormInput {
         boolean,
     TResult Function(
             String id,
-            @InputsListConverter() List<WoFormInputMixin>? value,
+            @InputsListConverter() List<WoFormInputMixin> value,
             bool isRequired,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
@@ -351,7 +351,7 @@ class _$BooleanInputImpl extends BooleanInput {
         boolean,
     required TResult Function(
             String id,
-            @InputsListConverter() List<WoFormInputMixin>? value,
+            @InputsListConverter() List<WoFormInputMixin> value,
             bool isRequired,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)
@@ -391,7 +391,7 @@ class _$BooleanInputImpl extends BooleanInput {
         boolean,
     TResult? Function(
             String id,
-            @InputsListConverter() List<WoFormInputMixin>? value,
+            @InputsListConverter() List<WoFormInputMixin> value,
             bool isRequired,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
@@ -431,7 +431,7 @@ class _$BooleanInputImpl extends BooleanInput {
         boolean,
     TResult Function(
             String id,
-            @InputsListConverter() List<WoFormInputMixin>? value,
+            @InputsListConverter() List<WoFormInputMixin> value,
             bool isRequired,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
@@ -546,7 +546,7 @@ abstract class _$$InputsListInputImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      @InputsListConverter() List<WoFormInputMixin>? value,
+      @InputsListConverter() List<WoFormInputMixin> value,
       bool isRequired,
       @JsonKey(toJson: MapFieldSettings.staticToJson)
       MapFieldSettings fieldSettings});
@@ -566,7 +566,7 @@ class __$$InputsListInputImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? value = freezed,
+    Object? value = null,
     Object? isRequired = null,
     Object? fieldSettings = null,
   }) {
@@ -575,10 +575,10 @@ class __$$InputsListInputImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      value: freezed == value
+      value: null == value
           ? _value._value
           : value // ignore: cast_nullable_to_non_nullable
-              as List<WoFormInputMixin>?,
+              as List<WoFormInputMixin>,
       isRequired: null == isRequired
           ? _value.isRequired
           : isRequired // ignore: cast_nullable_to_non_nullable
@@ -604,7 +604,7 @@ class __$$InputsListInputImplCopyWithImpl<$Res>
 class _$InputsListInputImpl extends InputsListInput {
   const _$InputsListInputImpl(
       {required this.id,
-      @InputsListConverter() final List<WoFormInputMixin>? value,
+      @InputsListConverter() final List<WoFormInputMixin> value = const [],
       this.isRequired = false,
       @JsonKey(toJson: MapFieldSettings.staticToJson)
       this.fieldSettings = const MapFieldSettings(),
@@ -618,15 +618,14 @@ class _$InputsListInputImpl extends InputsListInput {
 
   @override
   final String id;
-  final List<WoFormInputMixin>? _value;
+  final List<WoFormInputMixin> _value;
   @override
+  @JsonKey()
   @InputsListConverter()
-  List<WoFormInputMixin>? get value {
-    final value = _value;
-    if (value == null) return null;
+  List<WoFormInputMixin> get value {
     if (_value is EqualUnmodifiableListView) return _value;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_value);
   }
 
   @override
@@ -681,7 +680,7 @@ class _$InputsListInputImpl extends InputsListInput {
         boolean,
     required TResult Function(
             String id,
-            @InputsListConverter() List<WoFormInputMixin>? value,
+            @InputsListConverter() List<WoFormInputMixin> value,
             bool isRequired,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)
@@ -721,7 +720,7 @@ class _$InputsListInputImpl extends InputsListInput {
         boolean,
     TResult? Function(
             String id,
-            @InputsListConverter() List<WoFormInputMixin>? value,
+            @InputsListConverter() List<WoFormInputMixin> value,
             bool isRequired,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
@@ -761,7 +760,7 @@ class _$InputsListInputImpl extends InputsListInput {
         boolean,
     TResult Function(
             String id,
-            @InputsListConverter() List<WoFormInputMixin>? value,
+            @InputsListConverter() List<WoFormInputMixin> value,
             bool isRequired,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
@@ -844,7 +843,7 @@ class _$InputsListInputImpl extends InputsListInput {
 abstract class InputsListInput extends WoFormInput {
   const factory InputsListInput(
       {required final String id,
-      @InputsListConverter() final List<WoFormInputMixin>? value,
+      @InputsListConverter() final List<WoFormInputMixin> value,
       final bool isRequired,
       @JsonKey(toJson: MapFieldSettings.staticToJson)
       final MapFieldSettings fieldSettings}) = _$InputsListInputImpl;
@@ -856,7 +855,7 @@ abstract class InputsListInput extends WoFormInput {
   @override
   String get id;
   @InputsListConverter()
-  List<WoFormInputMixin>? get value;
+  List<WoFormInputMixin> get value;
   bool get isRequired;
   @override
   @JsonKey(toJson: MapFieldSettings.staticToJson)
@@ -996,7 +995,7 @@ class _$NumInputImpl extends NumInput {
         boolean,
     required TResult Function(
             String id,
-            @InputsListConverter() List<WoFormInputMixin>? value,
+            @InputsListConverter() List<WoFormInputMixin> value,
             bool isRequired,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)
@@ -1036,7 +1035,7 @@ class _$NumInputImpl extends NumInput {
         boolean,
     TResult? Function(
             String id,
-            @InputsListConverter() List<WoFormInputMixin>? value,
+            @InputsListConverter() List<WoFormInputMixin> value,
             bool isRequired,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
@@ -1076,7 +1075,7 @@ class _$NumInputImpl extends NumInput {
         boolean,
     TResult Function(
             String id,
-            @InputsListConverter() List<WoFormInputMixin>? value,
+            @InputsListConverter() List<WoFormInputMixin> value,
             bool isRequired,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
@@ -1357,7 +1356,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
         boolean,
     required TResult Function(
             String id,
-            @InputsListConverter() List<WoFormInputMixin>? value,
+            @InputsListConverter() List<WoFormInputMixin> value,
             bool isRequired,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)
@@ -1398,7 +1397,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
         boolean,
     TResult? Function(
             String id,
-            @InputsListConverter() List<WoFormInputMixin>? value,
+            @InputsListConverter() List<WoFormInputMixin> value,
             bool isRequired,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
@@ -1439,7 +1438,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
         boolean,
     TResult Function(
             String id,
-            @InputsListConverter() List<WoFormInputMixin>? value,
+            @InputsListConverter() List<WoFormInputMixin> value,
             bool isRequired,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
@@ -1692,7 +1691,7 @@ class _$StringInputImpl extends StringInput {
         boolean,
     required TResult Function(
             String id,
-            @InputsListConverter() List<WoFormInputMixin>? value,
+            @InputsListConverter() List<WoFormInputMixin> value,
             bool isRequired,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)
@@ -1732,7 +1731,7 @@ class _$StringInputImpl extends StringInput {
         boolean,
     TResult? Function(
             String id,
-            @InputsListConverter() List<WoFormInputMixin>? value,
+            @InputsListConverter() List<WoFormInputMixin> value,
             bool isRequired,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
@@ -1772,7 +1771,7 @@ class _$StringInputImpl extends StringInput {
         boolean,
     TResult Function(
             String id,
-            @InputsListConverter() List<WoFormInputMixin>? value,
+            @InputsListConverter() List<WoFormInputMixin> value,
             bool isRequired,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
