@@ -2,41 +2,69 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/wo_form.dart';
 
-class BooleanField<T extends WoFormCubit> extends StatelessWidget {
+class BooleanField extends StatelessWidget {
   const BooleanField({
     required this.inputId,
     this.settings,
     super.key,
   });
 
-  final Object inputId;
+  final String inputId;
   final BooleanFieldSettings? settings;
 
-  BooleanInput getInput(WoForm form) =>
-      form.getInput(inputId: inputId.toString())! as BooleanInput;
+  BooleanInput getInput(WoForm form) {
+    try {
+      return form.getInput(inputId: inputId)! as BooleanInput;
+    } catch (e) {
+      // TODO
+      print(e);
+      print(e.runtimeType);
+      throw ArgumentError('No input found for id: $inputId');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<T>();
+    final valuesCubit = context.read<WoFormValuesCubit>();
 
-    final inputSettings = getInput(cubit.state).fieldSettings;
+    final inputSettings =
+        context.select<WoFormNodesCubit, BooleanFieldSettings>(
+      (nodesCubit) => getInput(nodesCubit.state).fieldSettings,
+    );
     final mergedSettings = settings?.merge(inputSettings) ?? inputSettings;
 
-    return BlocSelector<T, WoForm, BooleanInput>(
-      selector: getInput,
-      builder: (context, input) {
+    return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, bool>(
+      selector: (values) {
+        final value = values[inputId];
+        try {
+          return (value as bool?) ?? false;
+        } catch (e) {
+          // TODO
+          print(e);
+          print(e.runtimeType);
+          throw ArgumentError(
+            'Expected a boolean at inputId $inputId, '
+            'found: <${value.runtimeType}>$value',
+          );
+        }
+      },
+      builder: (context, value) {
         final onOffType = switch (mergedSettings.onOffType) {
           null || BooleanFieldOnOffType.switchButton => Switch(
-              value: input.value ?? false,
-              onChanged: (value) => cubit.onInputChanged(
-                input: input.copyWith(value: value),
+              value: value,
+              onChanged: (value) => valuesCubit.onValueChanged(
+                inputId: inputId,
+                value: value,
               ),
             ),
           BooleanFieldOnOffType.checkbox => Checkbox(
-              value: input.value ?? false,
+              value: value,
               onChanged: (value) => value == null
                   ? null
-                  : cubit.onInputChanged(input: input.copyWith(value: value)),
+                  : valuesCubit.onValueChanged(
+                      inputId: inputId,
+                      value: value,
+                    ),
             ),
         };
         final onOffTypeIsLeading = switch (mergedSettings.onOffPosition) {
@@ -53,8 +81,9 @@ class BooleanField<T extends WoFormCubit> extends StatelessWidget {
           leading: onOffTypeIsLeading ? onOffType : null,
           title: Text(mergedSettings.labelText ?? ''),
           trailing: onOffTypeIsLeading ? null : onOffType,
-          onTap: () => cubit.onInputChanged(
-            input: input.copyWith(value: !(input.value ?? false)),
+          onTap: () => valuesCubit.onValueChanged(
+            inputId: inputId,
+            value: !value,
           ),
           visualDensity: VisualDensity.compact,
           contentPadding: EdgeInsets.zero,

@@ -1,59 +1,65 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:wo_form/src/model/json_converter/inputs_list.dart';
 import 'package:wo_form/wo_form.dart';
 
 part 'input.freezed.dart';
 part 'input.g.dart';
 
+@freezed
+sealed class WoFormInputError with _$WoFormInputError {
+  const factory WoFormInputError.empty({
+    required String inputId,
+  }) = EmptyInputError;
+
+  const factory WoFormInputError.invalid({
+    required String inputId,
+  }) = InvalidInputError;
+
+  const factory WoFormInputError.maxBound({
+    required String inputId,
+  }) = MaxBoundInputError;
+
+  const factory WoFormInputError.minBound({
+    required String inputId,
+  }) = MinBoundInputError;
+}
+
 mixin WoFormInputMixin {
+  Object? get defaultValue;
+
+  WoFormInputError? getError(Object? value);
+
+  String? getInvalidExplanation(Object? value, FormLocalizations formL10n);
+
+  Widget toField<T extends WoFormValuesCubit>();
+
+  // WoFormElementMixin
+
   String get id;
-  // Object? get value;
-  // bool get isRequired;
-  // Object? get fieldSettings;
-
-  /// Whether the input value is valid according to the method `getError`.
-  ///
-  /// Returns `true` if `getError` returns `null` for the
-  /// current input value and `false` otherwise.
-  bool get isValid => getError() == null;
-
-  WoFormInputError? getError();
-
-  String? getInvalidExplanation(FormLocalizations formL10n);
 
   Map<String, dynamic> toJson();
 
-  Object? valueToJson();
-
-  Widget toField<T extends WoFormCubit>();
+  /// When a parent of this element will jsonify, this method will take an
+  /// object (the value from the form fulfillment) and return a json value.
+  Object? valueToJson(Object? value);
 }
 
-enum WoFormInputType { boolean, string, selectString }
-
 @freezed
-sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
+sealed class WoFormInput
+    with _$WoFormInput, WoFormElementMixin, WoFormInputMixin {
   const factory WoFormInput.boolean({
     required String id,
-    bool? value,
+    bool? defaultValue,
     @Default(false) bool isRequired,
     @JsonKey(toJson: BooleanFieldSettings.staticToJson)
     @Default(BooleanFieldSettings())
     BooleanFieldSettings fieldSettings,
   }) = BooleanInput;
 
-  const factory WoFormInput.inputsList({
-    required String id,
-    @InputsListConverter() @Default([]) List<WoFormInputMixin> value,
-    @Default(false) bool isRequired,
-    @JsonKey(toJson: MapFieldSettings.staticToJson)
-    @Default(MapFieldSettings())
-    MapFieldSettings fieldSettings,
-  }) = InputsListInput;
-
   const factory WoFormInput.num({
     required String id,
-    num? value,
+    num? defaultValue,
     @Default(false) bool isRequired,
     @Default(NumFieldSettings()) NumFieldSettings fieldSettings,
   }) = NumInput;
@@ -61,7 +67,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
   const factory WoFormInput.selectString({
     required String id,
     required int? maxCount,
-    @Default([]) List<String> selectedValues,
+    @Default([]) List<String> defaultValue,
     @Default([]) List<String> availibleValues,
     @Default(0) int minCount,
     @Default(SelectFieldSettings()) SelectFieldSettings fieldSettings,
@@ -69,7 +75,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
 
   const factory WoFormInput.string({
     required String id,
-    String? value,
+    String? defaultValue,
     @Default(false) bool isRequired,
     String? regexPattern,
     @JsonKey(toJson: StringFieldSettings.staticToJson)
@@ -84,6 +90,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
 
   // --
 
+  // TODO remove
   static List<String> types = [
     'boolean',
     'string',
@@ -94,28 +101,24 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
   static String selectStringType = 'selectString';
 
   @override
-  WoFormInputError? getError() {
+  WoFormInputError? getError(dynamic value) {
     switch (this) {
-      case BooleanInput(value: final value, isRequired: final isRequired):
+      case BooleanInput(isRequired: final isRequired):
         return isRequired && value == false
             ? WoFormInputError.empty(inputId: id)
             : null;
 
-      case InputsListInput(value: final value, isRequired: final isRequired):
-        return isRequired && value.isEmpty
-            ? WoFormInputError.empty(inputId: id)
-            : null;
-
-      case NumInput(value: final value, isRequired: final isRequired):
+      case NumInput(isRequired: final isRequired):
         return isRequired && value == null
             ? WoFormInputError.empty(inputId: id)
             : null;
 
       case StringInput(
-          value: final value,
           isRequired: final isRequired,
           regexPattern: final regexPattern,
         ):
+        value as String?;
+
         if (value == null || value.isEmpty) {
           return isRequired ? WoFormInputError.empty(inputId: id) : null;
         } else if (regexPattern != null &&
@@ -127,14 +130,13 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
 
       case SelectStringInput(
           id: final inputId,
-          selectedValues: final selectedValues,
           availibleValues: final availibleValues,
           minCount: final minCount,
           maxCount: final maxCount,
         ):
         return SelectInput._validator(
           inputId: inputId,
-          selectedValues: selectedValues,
+          selectedValues: (value as List<String>?) ?? [],
           availibleValues: availibleValues,
           minCount: minCount,
           maxCount: maxCount,
@@ -143,14 +145,13 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
   }
 
   @override
-  String? getInvalidExplanation(FormLocalizations formL10n) {
-    final error = getError();
+  String? getInvalidExplanation(dynamic value, FormLocalizations formL10n) {
+    final error = getError(value);
 
     if (error == null) return null;
 
     switch (this) {
       case BooleanInput():
-      case InputsListInput():
       case NumInput():
       case SelectStringInput():
         break;
@@ -159,22 +160,19 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
           regexPattern: final regexPattern,
           fieldSettings: final fieldSettings,
         ):
-        if (error.code == WoFormInputError.invalidCode &&
-            regexPattern != null) {
+        if (error is InvalidInputError && regexPattern != null) {
           return fieldSettings.invalidRegexMessage;
         }
     }
 
-    return formL10n.formError(error.code);
+    return formL10n.formError(error.runtimeType.toString());
   }
 
   @override
-  Widget toField<T extends WoFormCubit>() {
+  Widget toField<T extends WoFormValuesCubit>() {
     switch (this) {
       case BooleanInput():
-        return BooleanField<T>(inputId: id);
-      case InputsListInput():
-        return InputsListField<T>(inputId: id);
+        return BooleanField(inputId: id);
       case NumInput():
         return NumField<T>(inputId: id);
       case StringInput():
@@ -185,97 +183,29 @@ sealed class WoFormInput with _$WoFormInput, WoFormInputMixin {
   }
 
   @override
-  Object? valueToJson() => switch (this) {
-        BooleanInput(value: final value) => value,
-        InputsListInput(value: final inputs) => {
-            for (final input in inputs) input.id: input.valueToJson(),
-          },
-        NumInput(value: final value) => value,
-        SelectStringInput(
-          selectedValues: final selectedValues,
-          maxCount: final maxCount,
-        ) =>
+  Object? valueToJson(dynamic value) => switch (this) {
+        BooleanInput() => value as bool?,
+        NumInput() => value as num?,
+        SelectStringInput(maxCount: final maxCount) =>
           SelectInput._selectedValuesToJson(
-            selectedValues: selectedValues,
+            selectedValues: (value as List<String>?) ?? [],
             toJsonT: (value) => value,
             asList: maxCount != 1,
           ),
-        StringInput(value: final value) => value,
+        StringInput() => value as String?,
       };
 }
 
 @freezed
 @JsonSerializable(genericArgumentFactories: true)
-class ListInput<T> with _$ListInput<T>, WoFormInputMixin {
-  const factory ListInput({
-    required String id,
-    List<T>? value,
-    @Default(false) bool isRequired,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    Object? Function(T)? toJsonT,
-  }) = _ListInput<T>;
-
-  const ListInput._();
-
-  factory ListInput.fromJson(
-    Map<String, dynamic> json,
-    T Function(Object? json) fromJsonT,
-  ) {
-    return _$ListInputFromJson(json, fromJsonT);
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    if (toJsonT == null) return _$ListInputToJson(this, _defaultToJsonT<T>);
-
-    return _$ListInputToJson(this, toJsonT!);
-  }
-
-  // --
-
-  @override
-  WoFormInputError? getError() {
-    if (isRequired && (value == null || value!.isEmpty)) {
-      return WoFormInputError.empty(inputId: id);
-    }
-
-    return null;
-  }
-
-  @override
-  String? getInvalidExplanation(FormLocalizations formL10n) {
-    final error = getError();
-
-    if (error == null) return null;
-
-    return formL10n.formError(error.code);
-  }
-
-  @override
-  Widget toField<C extends WoFormCubit>() {
-    throw UnimplementedError('No field implemented for ListInput');
-  }
-
-  @override
-  Object? valueToJson() {
-    if (toJsonT == null) {
-      if (value == null) return null;
-      return _defaultToJsonT(value as T);
-    }
-
-    return value?.map((value) => toJsonT!(value)).toList();
-  }
-}
-
-@freezed
-@JsonSerializable(genericArgumentFactories: true)
-class SelectInput<T> with _$SelectInput<T>, WoFormInputMixin {
+class SelectInput<T>
+    with _$SelectInput<T>, WoFormElementMixin, WoFormInputMixin {
   const factory SelectInput({
     required String id,
     required int? maxCount,
-    @Default([]) List<T> selectedValues,
-    @Default([]) List<T> availibleValues,
     @Default(0) int minCount,
+    @Default([]) List<T> defaultValues,
+    @Default([]) List<T> availibleValues,
     @Default(SelectFieldSettings()) SelectFieldSettings fieldSettings,
     @JsonKey(includeToJson: false, includeFromJson: false)
     Object? Function(T)? toJsonT,
@@ -296,6 +226,11 @@ class SelectInput<T> with _$SelectInput<T>, WoFormInputMixin {
 
     return _$SelectInputToJson(this, toJsonT!);
   }
+
+  // defaultValue can't be set from the constructor, because it has
+  // a type parameter (obscure restrictions)
+  @override
+  List<T> get defaultValue => defaultValues;
 
   // --
 
@@ -340,29 +275,34 @@ class SelectInput<T> with _$SelectInput<T>, WoFormInputMixin {
   }
 
   @override
-  WoFormInputError? getError() => _validator(
+  WoFormInputError? getError(dynamic value) => _validator(
         inputId: id,
-        selectedValues: selectedValues,
+        selectedValues: (value as List<T>?) ?? [],
         availibleValues: availibleValues,
         minCount: minCount,
         maxCount: maxCount,
       );
 
   @override
-  String? getInvalidExplanation(FormLocalizations formL10n) {
-    final error = getError();
+  String? getInvalidExplanation(dynamic value, FormLocalizations formL10n) {
+    // TODO : replace formL10n by function of type
+    // String? Function(WoFormInputError)
+    // Is it possible ?
+
+    final error = getError(value);
 
     if (error == null) return null;
 
-    return formL10n.formError(error.code);
+    return formL10n.formError(error.runtimeType.toString());
   }
 
   @override
-  Widget toField<C extends WoFormCubit>() => SelectField<C, T>(inputId: id);
+  Widget toField<C extends WoFormValuesCubit>() =>
+      SelectField<C, T>(inputId: id);
 
   @override
-  Object? valueToJson() => _selectedValuesToJson<T>(
-        selectedValues: selectedValues,
+  Object? valueToJson(dynamic value) => _selectedValuesToJson<T>(
+        selectedValues: (value as List<T>?) ?? [],
         toJsonT: toJsonT,
         asList: maxCount != 1,
       );

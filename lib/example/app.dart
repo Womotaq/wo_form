@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
-import 'package:wo_form/form_creator/form_creator/string_input_page.dart';
-import 'package:wo_form/form_creator/report/report_page.dart';
+import 'package:wo_form/example/form_creator/string_input_page.dart';
+import 'package:wo_form/example/report/report_page.dart';
 import 'package:wo_form/wo_form.dart';
 
 class FormCreatorApp extends StatelessWidget {

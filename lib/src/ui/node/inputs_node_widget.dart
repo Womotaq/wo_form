@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/wo_form.dart';
 
-class InputsListField<T extends WoFormCubit> extends StatelessWidget {
-  const InputsListField({
+class InputsNodeWidget<T extends WoFormCubit> extends StatelessWidget {
+  const InputsNodeWidget({
     required this.inputId,
     this.settings,
     super.key,
@@ -12,8 +12,8 @@ class InputsListField<T extends WoFormCubit> extends StatelessWidget {
   final Object inputId;
   final MapFieldSettings? settings;
 
-  InputsListInput getInput(WoForm form) =>
-      form.getInput(inputId: inputId.toString())! as InputsListInput;
+  InputsNode getInput(WoForm form) =>
+      form.getInput(inputId: inputId.toString())! as InputsNode;
 
   @override
   Widget build(BuildContext context) {

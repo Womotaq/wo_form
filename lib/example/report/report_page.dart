@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
-import 'package:wo_form/form_creator/report/report_form.dart';
-import 'package:wo_form/form_creator/utils/readable_json.dart';
+import 'package:wo_form/example/report/report_form.dart';
+import 'package:wo_form/example/utils/readable_json.dart';
 import 'package:wo_form/wo_form.dart';
 
 class ReportPage extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:wo_form/form_creator/form_creator/string_input_form.dart';
+import 'package:wo_form/example/form_creator/string_input_form.dart';
 import 'package:wo_form/src/_export.dart';
 import 'package:wo_form/src/l10n/arb_gen/form_localizations_fr.dart';
 import 'package:wo_form/wo_form.dart';
@@ -36,7 +36,7 @@ void main() {
       )
       ..update(
         'fieldSettings',
-        (i) => (i as InputsListInput).copyWith(
+        (i) => (i as InputsNode).copyWith(
           value: List<WoFormInputMixin>.from(i.value).map(
             (fsInput) {
               if (fsInput.id == 'invalidRegexMessage') {

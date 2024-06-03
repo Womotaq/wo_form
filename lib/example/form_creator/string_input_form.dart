@@ -33,7 +33,7 @@ final stringInputForm = WoForm(
       ),
       toJsonT: (regex) => regex.value,
     ),
-    InputsListInput(
+    InputsNode(
       id: 'fieldSettings',
       fieldSettings: const MapFieldSettings(
         labelText: 'Interface',

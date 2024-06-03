@@ -32,6 +32,7 @@ class BooleanFieldSettings with _$BooleanFieldSettings {
         );
 }
 
+// TODO : rename ?
 @freezed
 class MapFieldSettings with _$MapFieldSettings {
   const factory MapFieldSettings({

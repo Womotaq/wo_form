@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
 // import 'package:wo_form/form_creator/app.dart';
-import 'package:wo_form/form_creator/form_creator/string_input_form.dart';
-import 'package:wo_form/form_creator/utils/readable_json.dart';
+import 'package:wo_form/example/form_creator/string_input_form.dart';
+import 'package:wo_form/example/utils/readable_json.dart';
 import 'package:wo_form/wo_form.dart';
 
 class FormCreatorCubit extends WoFormCubit {
