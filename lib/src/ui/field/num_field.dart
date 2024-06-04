@@ -4,53 +4,58 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/wo_form.dart';
 
-class NumField<T extends WoFormCubit> extends StatelessWidget {
+class NumField extends StatelessWidget {
   const NumField({
     required this.inputId,
     this.settings,
     super.key,
   });
 
-  final Object inputId;
+  final String inputId;
   final NumFieldSettings? settings;
 
   NumInput getInput(WoForm form) =>
-      form.getInput(inputId: inputId.toString())! as NumInput;
+      form.getInput(inputId: inputId)! as NumInput;
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<T>();
-    final input = getInput(cubit.state);
+    final valuesCubit = context.read<WoFormValuesCubit>();
+    final countController =
+        TextEditingController(text: valuesCubit.state[inputId]?.toString());
 
-    final inputSettings = input.fieldSettings;
-    final mergedSettings = settings?.merge(inputSettings) ?? inputSettings;
+    return BlocSelector<WoFormNodesCubit, WoForm, NumFieldSettings>(
+      selector: (form) => getInput(form).fieldSettings,
+      builder: (context, inputSettings) {
+        final mergedSettings = settings?.merge(inputSettings) ?? inputSettings;
 
-    final countController = TextEditingController(text: input.value.toString());
+        return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, String>(
+          selector: (values) => (values[inputId] as num?)?.toString() ?? '',
+          builder: (context, countText) {
+            if (countController.text != countText) {
+              countController.text = countText;
+            }
 
-    return BlocSelector<T, WoForm, NumInput>(
-      selector: getInput,
-      builder: (context, input) {
-        final newCount = input.value.toString();
-        if (countController.text != newCount) {
-          countController.text = newCount;
-        }
-
-        return ListTile(
-          title: Text(mergedSettings.labelText ?? ''),
-          trailing: CountSelector(
-            controller: countController,
-            onChanged: (value) =>
-                cubit.onInputChanged(input: input.copyWith(value: value)),
-            axis: Axis.horizontal,
-          ),
-          visualDensity: VisualDensity.compact,
-          contentPadding: EdgeInsets.zero,
+            return ListTile(
+              title: Text(mergedSettings.labelText ?? ''),
+              trailing: CountSelector(
+                controller: countController,
+                onChanged: (value) => valuesCubit.onValueChanged(
+                  inputId: inputId,
+                  value: value,
+                ),
+                axis: Axis.horizontal,
+              ),
+              visualDensity: VisualDensity.compact,
+              contentPadding: EdgeInsets.zero,
+            );
+          },
         );
       },
     );
   }
 }
 
+// TODO : send in atomic_design
 class CountSelector extends StatelessWidget {
   const CountSelector({
     required this.controller,

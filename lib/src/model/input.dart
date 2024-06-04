@@ -34,6 +34,8 @@ mixin WoFormInputMixin {
 
   Widget toField<T extends WoFormValuesCubit>();
 
+  Widget toWidget<C extends WoFormValuesCubit>() => toField();
+
   // WoFormElementMixin
 
   String get id;
@@ -165,7 +167,8 @@ sealed class WoFormInput
         }
     }
 
-    return formL10n.formError(error.runtimeType.toString());
+    final errorType = error.runtimeType.toString();
+    return formL10n.formError(errorType.substring(2, errorType.length - 4));
   }
 
   @override
@@ -174,11 +177,11 @@ sealed class WoFormInput
       case BooleanInput():
         return BooleanField(inputId: id);
       case NumInput():
-        return NumField<T>(inputId: id);
+        return NumField(inputId: id);
       case StringInput():
-        return StringField<T>(inputId: id);
+        return StringField(inputId: id);
       case SelectStringInput():
-        return SelectStringField<T>(inputId: id);
+        return SelectStringField(inputId: id);
     }
   }
 
@@ -188,7 +191,7 @@ sealed class WoFormInput
         NumInput() => value as num?,
         SelectStringInput(maxCount: final maxCount) =>
           SelectInput._selectedValuesToJson(
-            selectedValues: (value as List<String>?) ?? [],
+            selectedValues: value as List<String>?,
             toJsonT: (value) => value,
             asList: maxCount != 1,
           ),
@@ -265,10 +268,12 @@ class SelectInput<T>
   }
 
   static Object? _selectedValuesToJson<T>({
-    required List<T> selectedValues,
+    required List<T>? selectedValues,
     required Object? Function(T)? toJsonT,
     required bool asList,
   }) {
+    if (selectedValues == null) return null;
+
     final valuesToJson = selectedValues.map(toJsonT ?? _defaultToJsonT);
 
     return asList ? valuesToJson.toList() : valuesToJson.firstOrNull;
@@ -297,12 +302,11 @@ class SelectInput<T>
   }
 
   @override
-  Widget toField<C extends WoFormValuesCubit>() =>
-      SelectField<C, T>(inputId: id);
+  Widget toField<C extends WoFormValuesCubit>() => SelectField<T>(inputId: id);
 
   @override
   Object? valueToJson(dynamic value) => _selectedValuesToJson<T>(
-        selectedValues: (value as List<T>?) ?? [],
+        selectedValues: value as List<T>?,
         toJsonT: toJsonT,
         asList: maxCount != 1,
       );

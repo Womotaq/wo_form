@@ -27,66 +27,67 @@ class BooleanField extends StatelessWidget {
   Widget build(BuildContext context) {
     final valuesCubit = context.read<WoFormValuesCubit>();
 
-    final inputSettings =
-        context.select<WoFormNodesCubit, BooleanFieldSettings>(
-      (nodesCubit) => getInput(nodesCubit.state).fieldSettings,
-    );
-    final mergedSettings = settings?.merge(inputSettings) ?? inputSettings;
+    return BlocSelector<WoFormNodesCubit, WoForm, BooleanFieldSettings>(
+      selector: (form) => getInput(form).fieldSettings,
+      builder: (context, inputSettings) {
+        final mergedSettings = settings?.merge(inputSettings) ?? inputSettings;
 
-    return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, bool>(
-      selector: (values) {
-        final value = values[inputId];
-        try {
-          return (value as bool?) ?? false;
-        } catch (e) {
-          // TODO
-          print(e);
-          print(e.runtimeType);
-          throw ArgumentError(
-            'Expected a boolean at inputId $inputId, '
-            'found: <${value.runtimeType}>$value',
-          );
-        }
-      },
-      builder: (context, value) {
-        final onOffType = switch (mergedSettings.onOffType) {
-          null || BooleanFieldOnOffType.switchButton => Switch(
-              value: value,
-              onChanged: (value) => valuesCubit.onValueChanged(
-                inputId: inputId,
-                value: value,
-              ),
-            ),
-          BooleanFieldOnOffType.checkbox => Checkbox(
-              value: value,
-              onChanged: (value) => value == null
-                  ? null
-                  : valuesCubit.onValueChanged(
-                      inputId: inputId,
-                      value: value,
-                    ),
-            ),
-        };
-        final onOffTypeIsLeading = switch (mergedSettings.onOffPosition) {
-          ListTileControlAffinity.leading => true,
-          ListTileControlAffinity.trailing => false,
-          null || ListTileControlAffinity.platform => switch (
-                mergedSettings.onOffType) {
-              null || BooleanFieldOnOffType.switchButton => false,
-              BooleanFieldOnOffType.checkbox => true,
+        return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, bool>(
+          selector: (values) {
+            final value = values[inputId];
+            try {
+              return (value as bool?) ?? false;
+            } catch (e) {
+              // TODO
+              print(e);
+              print(e.runtimeType);
+              throw ArgumentError(
+                'Expected a boolean at inputId $inputId, '
+                'found: <${value.runtimeType}>$value',
+              );
             }
-        };
+          },
+          builder: (context, value) {
+            final onOffType = switch (mergedSettings.onOffType) {
+              null || BooleanFieldOnOffType.switchButton => Switch(
+                  value: value,
+                  onChanged: (value) => valuesCubit.onValueChanged(
+                    inputId: inputId,
+                    value: value,
+                  ),
+                ),
+              BooleanFieldOnOffType.checkbox => Checkbox(
+                  value: value,
+                  onChanged: (value) => value == null
+                      ? null
+                      : valuesCubit.onValueChanged(
+                          inputId: inputId,
+                          value: value,
+                        ),
+                ),
+            };
+            final onOffTypeIsLeading = switch (mergedSettings.onOffPosition) {
+              ListTileControlAffinity.leading => true,
+              ListTileControlAffinity.trailing => false,
+              null || ListTileControlAffinity.platform => switch (
+                    mergedSettings.onOffType) {
+                  null || BooleanFieldOnOffType.switchButton => false,
+                  BooleanFieldOnOffType.checkbox => true,
+                }
+            };
 
-        return ListTile(
-          leading: onOffTypeIsLeading ? onOffType : null,
-          title: Text(mergedSettings.labelText ?? ''),
-          trailing: onOffTypeIsLeading ? null : onOffType,
-          onTap: () => valuesCubit.onValueChanged(
-            inputId: inputId,
-            value: !value,
-          ),
-          visualDensity: VisualDensity.compact,
-          contentPadding: EdgeInsets.zero,
+            return ListTile(
+              leading: onOffTypeIsLeading ? onOffType : null,
+              title: Text(mergedSettings.labelText ?? ''),
+              trailing: onOffTypeIsLeading ? null : onOffType,
+              onTap: () => valuesCubit.onValueChanged(
+                inputId: inputId,
+                value: !value,
+              ),
+              visualDensity: VisualDensity.compact,
+              contentPadding: EdgeInsets.zero,
+            );
+          },
         );
       },
     );

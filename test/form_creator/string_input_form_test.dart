@@ -15,48 +15,20 @@ void main() {
     ),
   );
   final expectedInputToJson = expectedInput.toJson();
-  final filledInputForm = stringInputForm.copyWith(
-    inputsMap: Map.from(stringInputForm.inputsMap)
-      ..update(
-        'id',
-        (i) => (i as StringInput).copyWith(value: expectedInput.id),
-      )
-      ..update(
-        'value',
-        (i) => (i as StringInput).copyWith(value: expectedInput.value),
-      )
-      ..update(
-        'isRequired',
-        (i) => (i as BooleanInput).copyWith(value: expectedInput.isRequired),
-      )
-      ..update(
-        'regexPattern',
-        (i) => (i as SelectInput)
-            .copyWith(selectedValues: [RegexPattern.username]),
-      )
-      ..update(
-        'fieldSettings',
-        (i) => (i as InputsNode).copyWith(
-          value: List<WoFormInputMixin>.from(i.value).map(
-            (fsInput) {
-              if (fsInput.id == 'invalidRegexMessage') {
-                return (fsInput as StringInput).copyWith(
-                  value: expectedInput.fieldSettings.invalidRegexMessage ?? '',
-                );
-              }
-              return fsInput;
-            },
-          ).toList(),
-        ),
-      ),
-  );
+  final values = stringInputForm.defaultValues();
+  values['id'] = expectedInput.id;
+  values['defaultValue'] = expectedInput.defaultValue;
+  values['isRequired'] = expectedInput.isRequired;
+  values['regexPattern'] = [RegexPattern.username];
+  values['invalidRegexMessage'] =
+      expectedInput.fieldSettings.invalidRegexMessage;
 
   test('StringInput Form : Step 0', () {
-    expect(filledInputForm.isValid, true);
+    expect(stringInputForm.getErrors(values).isEmpty, true);
   });
 
   test('StringInput Form : Step 1', () {
-    expect(filledInputForm.valuesToJson(), expectedInputToJson);
+    expect(stringInputForm.valueToJson(values), expectedInputToJson);
   });
 
   test('StringInput Form : Step 2', () {

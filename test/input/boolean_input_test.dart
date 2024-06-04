@@ -4,7 +4,6 @@ import 'package:wo_form/wo_form.dart';
 void main() {
   const input = BooleanInput(
     id: 'isRequired',
-    value: true,
     fieldSettings: BooleanFieldSettings(
       onOffType: BooleanFieldOnOffType.switchButton,
     ),
@@ -29,11 +28,11 @@ void main() {
     expect(BooleanInput.fromJson(json), input);
   });
 
-  test('BooleanInput.isValid', () {
-    expect(input.isValid, true);
+  test('BooleanInput.getError', () {
+    expect(input.getError(true) == null, true);
   });
 
-  test('BooleanInput.submittedJson()', () {
-    expect(input.valueToJson(), true);
+  test('BooleanInput.valueToJson()', () {
+    expect(input.valueToJson(true), true);
   });
 }

@@ -114,7 +114,7 @@ abstract class FormLocalizations {
   /// No description provided for @formError.
   ///
   /// In fr, this message translates to:
-  /// **'{code, select, other{Erreur inconnue.} empty{Ce champ doit être renseigné.} invalid{Cette valeur est incorrecte.} maxBound{Limite maximale dépassée.} minBound{Limite minimale dépassée.}}'**
+  /// **'{code, select, other{Erreur inconnue.} EmptyInputError{Ce champ doit être renseigné.} InvalidInputError{Cette valeur est incorrecte.} MaxBoundInputError{Limite maximale dépassée.} MinBoundInputError{Limite minimale dépassée.}}'**
   String formError(String code);
 
   /// No description provided for @keepEditing.

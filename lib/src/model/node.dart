@@ -11,91 +11,9 @@ mixin WoFormElementMixin {
   String get id;
 
   Map<String, dynamic> toJson();
+
+  Widget toWidget<T extends WoFormValuesCubit>();
 }
-
-// @freezed
-// sealed class WoForm with _$WoForm, WoFormElementMixin {
-//   const factory WoForm.root({
-//     @Default(r'$root$') String id,
-//     @InputsListConverter() @Default([]) List<WoFormElementMixin> inputs,
-//     Map<String, dynamic>? unmodifiableValuesJson,
-//   }) = WoFormRoot;
-
-//   const factory WoForm.inputs({
-//     required String id,
-//     @InputsListConverter() @Default([]) List<WoFormElementMixin> inputs,
-//     Map<String, dynamic>? unmodifiableValuesJson,
-//     @JsonKey(toJson: MapFieldSettings.staticToJson)
-//     @Default(MapFieldSettings())
-//     MapFieldSettings fieldSettings,
-//   }) = InputsNode;
-
-//   const WoForm._();
-
-//   factory WoForm.fromJson(Map<String, dynamic> json) => _$WoFormFromJson(json);
-
-//   // --
-
-//   Map<String, dynamic> defaultValues() => {
-//         for (final input in inputs)
-//           if (input is WoForm)
-//             input.id: input.defaultValues()
-//           else if (input is WoFormInputMixin)
-//             input.id: (input as WoFormInputMixin).defaultValue,
-//       };
-
-//   Iterable<WoFormInputError> getErrors(Map<String, dynamic> valuesMap) => [
-//         for (final input in inputs)
-//           if (input is WoForm)
-//             ...input.getErrors(valuesMap)
-//           else if (input is WoFormInputMixin)
-//             (input as WoFormInputMixin).getError(valuesMap[input.id]),
-//       ].whereNotNull();
-
-//   Widget toWidget<T extends WoFormValuesCubit>() {
-//     switch (this) {
-//       case WoFormRoot():
-//         throw UnimplementedError();
-//       case InputsNode():
-//         return InputsNodeWidget<T>(inputId: id);
-//     }
-//   }
-
-//   Map<String, dynamic> valueToJson(Map<String, dynamic> valuesMap) {
-//     return {
-//       ...unmodifiableValuesJson ?? {},
-//       for (final input in inputs)
-//         if (input is WoForm)
-//           input.id: input.valueToJson(valuesMap)
-//         else if (input is WoFormInputMixin)
-//           input.id:
-//               (input as WoFormInputMixin).valueToJson(valuesMap[input.id]),
-//     };
-//   }
-// }
-
-// @freezed
-// abstract class WoFormValues with _$WoFormValues {
-//   const factory WoFormValues({
-//     required Map<String, dynamic> valuesMap,
-//     @Default(WoFormStatus.idle) WoFormStatus status,
-//     String? errorCode,
-//   }) = _WoFormValues;
-
-//   /// Required for the override getter
-//   const WoFormValues._();
-
-//   // --
-
-//   String? getInvalidExplanation(
-//     WoFormInputMixin input,
-//     FormLocalizations formL10n,
-//   ) {
-//     if (status != WoFormStatus.invalid) return null;
-
-//     return input.getInvalidExplanation(valuesMap[input.id], formL10n);
-//   }
-// }
 
 @freezed
 sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
@@ -150,9 +68,10 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
     return null;
   }
 
+  @override
   Widget toWidget<T extends WoFormValuesCubit>() => switch (this) {
         WoForm() => throw UnimplementedError(),
-        InputsNode() => InputsNodeWidget<T>(inputId: id),
+        InputsNode() => InputsNodeWidget(inputId: id),
       };
 
   Map<String, dynamic> valueToJson(Map<String, dynamic> valuesMap) => {

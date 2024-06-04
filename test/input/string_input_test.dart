@@ -5,7 +5,6 @@ import 'package:wo_form/wo_form.dart';
 void main() {
   final input = StringInput(
     id: 'name',
-    value: 'John',
     regexPattern: RegexPattern.username.value,
     fieldSettings: StringFieldSettings(
       labelText: 'Type your username',
@@ -16,7 +15,7 @@ void main() {
   );
   final json = {
     'id': 'name',
-    'value': 'John',
+    'defaultValue': null,
     'isRequired': false,
     'regexPattern':
         r'^(?!.*[_\.\-]{2})@?[a-zA-Z0-9][a-zA-Z0-9_\.\-]+[a-zA-Z0-9]$',
@@ -48,11 +47,11 @@ void main() {
     expect(StringInput.fromJson(json), input);
   });
 
-  test('StringInput.isValid', () {
-    expect(input.isValid, true);
+  test('StringInput.getError', () {
+    expect(input.getError('John') == null, true);
   });
 
   test('StringInput.valueToJson()', () {
-    expect(input.valueToJson(), 'John');
+    expect(input.valueToJson('John'), 'John');
   });
 }

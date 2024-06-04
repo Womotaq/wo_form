@@ -2,22 +2,21 @@ import 'package:test/test.dart';
 import 'package:wo_form/wo_form.dart';
 
 void main() {
-  final form = WoForm(
+  const form = WoForm(
     inputs: [
-      const StringInput(
+      StringInput(
         id: 'name',
-        value: 'John',
       ),
     ],
   );
   final json = {
+    'id': r'$root$',
     'inputs': [
       {
         'id': 'name',
-        'value': 'John',
+        'defaultValue': null,
         'isRequired': false,
         'regexPattern': null,
-        'invalidRegexMessage': null,
         'fieldSettings': {
           'labelText': null,
           'action': null,
@@ -31,13 +30,13 @@ void main() {
           'textCapitalization': null,
           'maxLines': null,
           'hintText': null,
+          'invalidRegexMessage': null,
         },
         'runtimeType': 'string',
       }
     ],
-    'status': 'idle',
-    'errorCode': null,
     'unmodifiableValuesJson': null,
+    'runtimeType': 'root',
   };
 
   test('WoForm.toJson()', () {
@@ -50,7 +49,7 @@ void main() {
 
   test('WoForm.valuesToJson()', () {
     expect(
-      form.valuesToJson(),
+      form.valueToJson({'name': 'John'}),
       {
         'name': 'John',
       },

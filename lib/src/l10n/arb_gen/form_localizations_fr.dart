@@ -21,10 +21,10 @@ class FormLocalizationsFr extends FormLocalizations {
       code,
       {
         'other': 'Erreur inconnue.',
-        'empty': 'Ce champ doit être renseigné.',
-        'invalid': 'Cette valeur est incorrecte.',
-        'maxBound': 'Limite maximale dépassée.',
-        'minBound': 'Limite minimale dépassée.',
+        'EmptyInputError': 'Ce champ doit être renseigné.',
+        'InvalidInputError': 'Cette valeur est incorrecte.',
+        'MaxBoundInputError': 'Limite maximale dépassée.',
+        'MinBoundInputError': 'Limite minimale dépassée.',
       },
     );
     return '$_temp0';

@@ -21,10 +21,10 @@ class FormLocalizationsEn extends FormLocalizations {
       code,
       {
         'other': 'Unknown error.',
-        'empty': 'This field is required.',
-        'invalid': 'This value is invalid.',
-        'maxBound': 'Maximum limit exceeded.',
-        'minBound': 'Minimum limit exceeded.',
+        'EmptyInputError': 'This field is required.',
+        'InvalidInputError': 'This value is invalid.',
+        'MaxBoundInputError': 'Maximum limit exceeded.',
+        'MinBoundInputError': 'Minimum limit exceeded.',
       },
     );
     return '$_temp0';

@@ -1,10 +1,10 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
+import 'package:wo_form/src/cubit/wo_form_cubit.dart';
 import 'package:wo_form/wo_form.dart';
 
-class SelectField<T extends WoFormCubit, S> extends StatelessWidget {
+class SelectField<S> extends StatelessWidget {
   const SelectField({
     required this.inputId,
     this.valueBuilder,
@@ -13,101 +13,122 @@ class SelectField<T extends WoFormCubit, S> extends StatelessWidget {
     super.key,
   });
 
-  final Object inputId;
+  final String inputId;
   final Widget Function(S?)? valueBuilder;
   final Widget Function(S?)? previewBuilder;
   final SelectFieldSettings? settings;
 
   SelectInput<S> getInput(WoForm form) =>
-      form.getInput(inputId: inputId.toString())! as SelectInput<S>;
+      form.getInput(inputId: inputId)! as SelectInput<S>;
+
+  void onUniqueChoice({
+    required WoFormValuesCubit valuesCubit,
+    S? value,
+  }) =>
+      value == null
+          ? null
+          : valuesCubit.onValueChanged(
+              inputId: inputId,
+              value: [value],
+            );
+
+  void onMultipleChoice({
+    required WoFormValuesCubit valuesCubit,
+    required Iterable<S> selectedValues,
+    required S value,
+  }) =>
+      valuesCubit.onValueChanged(
+        inputId: inputId,
+        value: (selectedValues.toSet()..add(value)).toList(),
+      );
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<T>();
+    final valuesCubit = context.read<WoFormValuesCubit>();
 
-    final inputSettings = getInput(cubit.state).fieldSettings;
-    final mergedSettings = settings?.merge(inputSettings) ?? inputSettings;
-
-    return BlocSelector<T, WoForm, SelectInput<S?>>(
+    return BlocSelector<WoFormNodesCubit, WoForm, SelectInput<S>>(
       selector: getInput,
       builder: (context, input) {
-        if (input.maxCount == 1) {
-          return switch (mergedSettings.displayMode) {
-            null || SelectFieldDisplayMode.tiles => Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (mergedSettings.labelText != null)
-                    ListTile(
-                      title: Text(mergedSettings.labelText!),
-                      visualDensity: VisualDensity.compact,
-                      contentPadding: EdgeInsets.zero,
-                    ),
-                  ...input.availibleValues.map(
-                    (value) => ListTile(
-                      leading: Radio(
-                        value: value,
-                        groupValue: input.selectedValues.firstOrNull,
-                        onChanged: (value) => value == null
-                            ? null
-                            : cubit.onInputChanged(
-                                input:
-                                    input.copyWith(selectedValues: <S>[value]),
-                              ),
-                      ),
-                      title:
-                          valueBuilder?.call(value) ?? Text(value.toString()),
-                      onTap: () => value == null
-                          ? null
-                          : cubit.onInputChanged(
-                              input: input.copyWith(selectedValues: <S>[value]),
-                            ),
-                      visualDensity: VisualDensity.compact,
-                      contentPadding: EdgeInsets.zero,
-                    ),
-                  ),
-                ],
-              ),
-            SelectFieldDisplayMode.selectChip => ListTile(
-                title: Text(mergedSettings.labelText ?? ''),
-                trailing: SelectChip<S>.uniqueChoice(
-                  values: input.availibleValues.whereType(),
-                  onSelected: (value) => value == null
-                      ? null
-                      : cubit.onInputChanged(
-                          input: input.copyWith(selectedValues: <S>[value]),
-                        ),
-                  selectedValue: input.selectedValues.firstOrNull,
-                  valueBuilder: valueBuilder,
-                  previewBuilder: previewBuilder,
-                ),
-                visualDensity: VisualDensity.compact,
-                contentPadding: EdgeInsets.zero,
-              ),
-          };
-        }
+        final mergedSettings =
+            settings?.merge(input.fieldSettings) ?? input.fieldSettings;
 
-        return ListTile(
-          title: Text(mergedSettings.labelText ?? ''),
-          trailing: SelectChip<S>.multipleChoices(
-            values: input.availibleValues.whereType(),
-            onSelected: (value) => cubit.onInputChanged(
-              input: input.copyWith(
-                selectedValues:
-                    ((input.selectedValues).toSet()..add(value)).toList(),
+        return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, List<S>>(
+          selector: (values) => (values[inputId] as List<S>?) ?? [],
+          builder: (context, selectedValues) {
+            if (input.maxCount == 1) {
+              return switch (mergedSettings.displayMode) {
+                null || SelectFieldDisplayMode.tiles => Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (mergedSettings.labelText != null)
+                        ListTile(
+                          title: Text(mergedSettings.labelText!),
+                          visualDensity: VisualDensity.compact,
+                          contentPadding: EdgeInsets.zero,
+                        ),
+                      ...input.availibleValues.map(
+                        (value) => ListTile(
+                          leading: Radio(
+                            value: value,
+                            groupValue: selectedValues.firstOrNull,
+                            onChanged: (value) => onUniqueChoice(
+                              valuesCubit: valuesCubit,
+                              value: value,
+                            ),
+                          ),
+                          title: valueBuilder?.call(value) ??
+                              Text(value.toString()),
+                          onTap: () => onUniqueChoice(
+                            valuesCubit: valuesCubit,
+                            value: value,
+                          ),
+                          visualDensity: VisualDensity.compact,
+                          contentPadding: EdgeInsets.zero,
+                        ),
+                      ),
+                    ],
+                  ),
+                SelectFieldDisplayMode.selectChip => ListTile(
+                    title: Text(mergedSettings.labelText ?? ''),
+                    trailing: SelectChip<S>.uniqueChoice(
+                      values: input.availibleValues.whereType(),
+                      onSelected: (value) => onUniqueChoice(
+                        valuesCubit: valuesCubit,
+                        value: value,
+                      ),
+                      selectedValue: selectedValues.firstOrNull,
+                      valueBuilder: valueBuilder,
+                      previewBuilder: previewBuilder,
+                    ),
+                    visualDensity: VisualDensity.compact,
+                    contentPadding: EdgeInsets.zero,
+                  ),
+              };
+            }
+
+            return ListTile(
+              title: Text(mergedSettings.labelText ?? ''),
+              trailing: SelectChip<S>.multipleChoices(
+                values: input.availibleValues.whereType(),
+                onSelected: (value) => onMultipleChoice(
+                  valuesCubit: valuesCubit,
+                  selectedValues: selectedValues,
+                  value: value,
+                ),
+                selectedValues: selectedValues.whereType(),
+                valueBuilder: valueBuilder,
               ),
-            ),
-            selectedValues: input.selectedValues.whereType(),
-            valueBuilder: valueBuilder,
-          ),
-          visualDensity: VisualDensity.compact,
-          contentPadding: EdgeInsets.zero,
+              visualDensity: VisualDensity.compact,
+              contentPadding: EdgeInsets.zero,
+            );
+          },
         );
       },
     );
   }
 }
 
-class SelectStringField<T extends WoFormCubit> extends SelectField<T, String> {
+class SelectStringField extends SelectField<String> {
   const SelectStringField({
     required super.inputId,
     super.valueBuilder,
@@ -119,13 +140,13 @@ class SelectStringField<T extends WoFormCubit> extends SelectField<T, String> {
   @override
   SelectInput<String> getInput(WoForm form) {
     final selectStringInput =
-        form.getInput(inputId: inputId.toString())! as SelectStringInput;
+        form.getInput(inputId: inputId)! as SelectStringInput;
     return SelectInput<String>(
       id: selectStringInput.id,
-      selectedValues: selectStringInput.selectedValues,
-      availibleValues: selectStringInput.availibleValues,
       maxCount: selectStringInput.maxCount,
       minCount: selectStringInput.minCount,
+      defaultValues: selectStringInput.defaultValue,
+      availibleValues: selectStringInput.availibleValues,
       fieldSettings: selectStringInput.fieldSettings,
       toJsonT: (value) => value,
     );

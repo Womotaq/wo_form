@@ -1,48 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
-// import 'package:wo_form/form_creator/app.dart';
 import 'package:wo_form/example/form_creator/string_input_form.dart';
 import 'package:wo_form/example/utils/readable_json.dart';
 import 'package:wo_form/wo_form.dart';
-
-class FormCreatorCubit extends WoFormCubit {
-  FormCreatorCubit() : super(stringInputForm);
-
-  @override
-  void submit() {
-    if (state.isNotValid) return setInvalid();
-
-    setSubmitted();
-  }
-}
 
 class StringInputPage extends StatelessWidget {
   const StringInputPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => FormCreatorCubit(),
+    return WoFormInitializer(
+      form: stringInputForm,
+      onSubmitting: () {},
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Création d'un champ texte"),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: BlocBuilder<FormCreatorCubit, WoForm>(
-            builder: (context, form) {
+          child: WoFormBuilder(
+            builder: (context, form, status, values) {
               return ListView(
                 children: [
-                  ...form.inputs.map((i) => i.toField<FormCreatorCubit>()),
+                  ...form.inputs.map((e) => e.toWidget()),
                   WoGap.xxxlarge,
                   const Text('Json :'),
                   WoGap.medium,
-                  Text(readableJson(form.valuesToJson())),
+                  Text(readableJson(form.valueToJson(values))),
                   WoGap.xxxlarge,
-                  WoFormStatusListener<FormCreatorCubit>(
+                  BlocListener<WoFormStatusCubit, WoFormStatus>(
                     listener: (context, status) {
-                      if (status == WoFormStatus.submitted) {
+                      if (status is SubmittedStatus) {
                         Navigator.push(
                           context,
                           MaterialPageRoute<void>(
@@ -53,7 +42,7 @@ class StringInputPage extends StatelessWidget {
                     },
                     child: IconButton(
                       icon: const Icon(Icons.check),
-                      onPressed: context.read<FormCreatorCubit>().submit,
+                      onPressed: context.read<WoFormValuesCubit>().submit,
                       style: IconButton.styleFrom(
                         backgroundColor:
                             Theme.of(context).colorScheme.primaryContainer,

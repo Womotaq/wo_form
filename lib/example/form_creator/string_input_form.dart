@@ -12,7 +12,7 @@ final stringInputForm = WoForm(
       ),
     ),
     const StringInput(
-      id: 'value',
+      id: 'defaultValue',
       fieldSettings: StringFieldSettings(
         labelText: 'Valeur par défaut',
       ),
@@ -38,7 +38,7 @@ final stringInputForm = WoForm(
       fieldSettings: const MapFieldSettings(
         labelText: 'Interface',
       ),
-      value: [
+      inputs: [
         const StringInput(
           id: 'labelText',
           fieldSettings: StringFieldSettings(

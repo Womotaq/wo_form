@@ -2,24 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/wo_form.dart';
 
-class StringField<T extends WoFormCubit> extends StatefulWidget {
+class StringField extends StatefulWidget {
   const StringField({
     required this.inputId,
     this.settings,
     super.key,
   });
 
-  final Object inputId;
+  final String inputId;
   final StringFieldSettings? settings;
 
   StringInput getInput(WoForm form) =>
-      form.getInput(inputId: inputId.toString())! as StringInput;
+      form.getInput(inputId: inputId)! as StringInput;
 
   @override
-  State createState() => _StringFieldState<T>();
+  State createState() => _StringFieldState();
 }
 
-class _StringFieldState<T extends WoFormCubit> extends State<StringField<T>> {
+class _StringFieldState extends State<StringField> {
   late final StringFieldSettings mergedSettings;
   final textEditingController = TextEditingController();
   bool obscureText = false;
@@ -29,7 +29,7 @@ class _StringFieldState<T extends WoFormCubit> extends State<StringField<T>> {
     super.initState();
 
     final inputSettings =
-        widget.getInput(context.read<T>().state).fieldSettings;
+        widget.getInput(context.read<WoFormNodesCubit>().state).fieldSettings;
     mergedSettings = widget.settings?.merge(inputSettings) ?? inputSettings;
 
     obscureText = mergedSettings.obscureText ?? false;
@@ -37,62 +37,71 @@ class _StringFieldState<T extends WoFormCubit> extends State<StringField<T>> {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<T>();
+    final valuesCubit = context.read<WoFormValuesCubit>();
 
-    return BlocSelector<T, WoForm, StringInput>(
-      selector: widget.getInput,
-      builder: (context, input) {
-        final text = input.value;
+    return BlocBuilder<WoFormNodesCubit, WoForm>(
+      builder: (context, form) {
+        return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
+          builder: (context, status) {
+            return BlocSelector<WoFormValuesCubit, Map<String, dynamic>,
+                String>(
+              selector: (values) => (values[widget.inputId] as String?) ?? '',
+              builder: (context, text) {
+                if (text != textEditingController.text) {
+                  textEditingController.text = text;
+                }
 
-        return BlocSelector<T, WoForm, String?>(
-          selector: (form) =>
-              form.getInvalidExplanation(input, context.formL10n),
-          builder: (context, errorText) {
-            if (text != textEditingController.text) {
-              textEditingController.text = text ?? '';
-            }
+                final errorText = status is! InvalidValuesStatus
+                    ? null
+                    : widget
+                        .getInput(form)
+                        .getInvalidExplanation(text, context.formL10n);
 
-            return TextFormField(
-              controller: textEditingController,
-              onChanged: (value) => cubit.onInputChanged(
-                input: input.copyWith(value: value),
-              ),
-              onFieldSubmitted:
-                  (mergedSettings.submitFormOnFieldSubmitted ?? false)
-                      ? (value) => cubit.submit()
-                      : null,
-              keyboardType: mergedSettings.keyboardType,
-              obscureText: obscureText,
-              autocorrect: mergedSettings.autocorrect ?? true,
-              autofillHints: mergedSettings.autofillHints,
-              autofocus: mergedSettings.autofocus ?? false,
-              textInputAction: mergedSettings.textInputAction,
-              textCapitalization:
-                  mergedSettings.textCapitalization ?? TextCapitalization.none,
-              maxLines: mergedSettings.maxLines,
-              decoration: InputDecoration(
-                labelText: mergedSettings.labelText,
-                hintText: mergedSettings.hintText,
-                errorText: errorText,
-                errorMaxLines: 10,
-                suffixIcon: switch (mergedSettings.action) {
-                  null => null,
-                  StringFieldAction.clear => IconButton(
-                      onPressed: () => cubit.onInputChanged(
-                        input: input.copyWith(value: ''),
-                      ),
-                      icon: const Icon(Icons.clear),
-                    ),
-                  StringFieldAction.obscure => IconButton(
-                      onPressed: () => setState(() {
-                        obscureText = !obscureText;
-                      }),
-                      icon: obscureText
-                          ? const Icon(Icons.visibility_off)
-                          : const Icon(Icons.visibility),
-                    ),
-                },
-              ),
+                return TextFormField(
+                  controller: textEditingController,
+                  onChanged: (value) => valuesCubit.onValueChanged(
+                    inputId: widget.inputId,
+                    value: value,
+                  ),
+                  onFieldSubmitted:
+                      (mergedSettings.submitFormOnFieldSubmitted ?? false)
+                          ? (value) => valuesCubit.submit()
+                          : null,
+                  keyboardType: mergedSettings.keyboardType,
+                  obscureText: obscureText,
+                  autocorrect: mergedSettings.autocorrect ?? true,
+                  autofillHints: mergedSettings.autofillHints,
+                  autofocus: mergedSettings.autofocus ?? false,
+                  textInputAction: mergedSettings.textInputAction,
+                  textCapitalization: mergedSettings.textCapitalization ??
+                      TextCapitalization.none,
+                  maxLines: mergedSettings.maxLines,
+                  decoration: InputDecoration(
+                    labelText: mergedSettings.labelText,
+                    hintText: mergedSettings.hintText,
+                    errorText: errorText,
+                    errorMaxLines: 10,
+                    suffixIcon: switch (mergedSettings.action) {
+                      null => null,
+                      StringFieldAction.clear => IconButton(
+                          onPressed: () => valuesCubit.onValueChanged(
+                            inputId: widget.inputId,
+                            value: null,
+                          ),
+                          icon: const Icon(Icons.clear),
+                        ),
+                      StringFieldAction.obscure => IconButton(
+                          onPressed: () => setState(() {
+                            obscureText = !obscureText;
+                          }),
+                          icon: obscureText
+                              ? const Icon(Icons.visibility_off)
+                              : const Icon(Icons.visibility),
+                        ),
+                    },
+                  ),
+                );
+              },
             );
           },
         );

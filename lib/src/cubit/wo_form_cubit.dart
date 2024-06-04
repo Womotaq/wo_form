@@ -12,13 +12,7 @@ class WoFormStatusCubit extends Cubit<WoFormStatus> {
   WoFormStatusCubit._({WoFormStatus? initialStatus})
       : super(initialStatus ?? const WoFormStatus.idle());
 
-  // TODO : remove ?
-  // void clearError() {
-  //   if (state is InvalidValuesStatus) return _setInvalidValues();
-  //   if (state is SubmitErrorStatus) return _setSubmitError();
-  // }
-
-  void _setIdle() => emit(const WoFormStatus.idle());
+  void setIdle() => emit(const WoFormStatus.idle());
   void _setInvalidValues({Iterable<WoFormInputError>? inputErrors}) =>
       emit(WoFormStatus.invalidValues(inputErrors: inputErrors));
   void _setSubmitting() => emit(const WoFormStatus.submitting());
@@ -51,7 +45,7 @@ class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
 
     // Setting the status to idle when a modification occurs allows isPure to
     // work
-    if (_statusCubit.state is! InvalidValuesStatus) _statusCubit._setIdle();
+    if (_statusCubit.state is! InvalidValuesStatus) _statusCubit.setIdle();
 
     emit(newMap);
   }
@@ -75,8 +69,8 @@ class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
   }
 }
 
-class WoFormCubitsProvider extends StatelessWidget {
-  const WoFormCubitsProvider({
+class WoFormInitializer extends StatelessWidget {
+  const WoFormInitializer({
     required this.form,
     required this.onSubmitting,
     required this.child,
@@ -102,6 +96,37 @@ class WoFormCubitsProvider extends StatelessWidget {
         ),
       ],
       child: child,
+    );
+  }
+}
+
+class WoFormBuilder extends StatelessWidget {
+  const WoFormBuilder({
+    required this.builder,
+    super.key,
+  });
+
+  final Widget Function(
+    BuildContext context,
+    WoForm form,
+    WoFormStatus status,
+    Map<String, dynamic> values,
+  ) builder;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<WoFormNodesCubit, WoForm>(
+      builder: (context, form) {
+        return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
+          builder: (context, status) {
+            return BlocBuilder<WoFormValuesCubit, Map<String, dynamic>>(
+              builder: (context, valuesMap) {
+                return builder(context, form, status, valuesMap);
+              },
+            );
+          },
+        );
+      },
     );
   }
 }
