@@ -23,13 +23,14 @@ class SelectField<S> extends StatelessWidget {
 
   void onUniqueChoice({
     required WoFormValuesCubit valuesCubit,
+    required List<S> selectedValues,
     S? value,
   }) =>
       value == null
           ? null
           : valuesCubit.onValueChanged(
               inputId: inputId,
-              value: [value],
+              value: selectedValues.contains(value) ? <S>[] : [value],
             );
 
   void onMultipleChoice({
@@ -73,6 +74,7 @@ class SelectField<S> extends StatelessWidget {
                             groupValue: selectedValues.firstOrNull,
                             onChanged: (value) => onUniqueChoice(
                               valuesCubit: valuesCubit,
+                              selectedValues: selectedValues,
                               value: value,
                             ),
                           ),
@@ -80,6 +82,7 @@ class SelectField<S> extends StatelessWidget {
                               Text(value.toString()),
                           onTap: () => onUniqueChoice(
                             valuesCubit: valuesCubit,
+                            selectedValues: selectedValues,
                             value: value,
                           ),
                           visualDensity: VisualDensity.compact,
@@ -94,6 +97,7 @@ class SelectField<S> extends StatelessWidget {
                       values: input.availibleValues.whereType(),
                       onSelected: (value) => onUniqueChoice(
                         valuesCubit: valuesCubit,
+                        selectedValues: selectedValues,
                         value: value,
                       ),
                       selectedValue: selectedValues.firstOrNull,
