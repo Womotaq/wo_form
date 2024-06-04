@@ -19,15 +19,19 @@ class StringInputPage extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: WoFormBuilder(
-            builder: (context, form, status, values) {
+          child: BlocBuilder<WoFormNodesCubit, WoForm>(
+            builder: (context, form) {
               return ListView(
                 children: [
                   ...form.inputs.map((e) => e.toWidget()),
                   WoGap.xxxlarge,
                   const Text('Json :'),
                   WoGap.medium,
-                  Text(readableJson(form.valueToJson(values))),
+                  BlocBuilder<WoFormValuesCubit, Map<String, dynamic>>(
+                    builder: (context, values) {
+                      return Text(readableJson(form.valueToJson(values)));
+                    },
+                  ),
                   WoGap.xxxlarge,
                   BlocListener<WoFormStatusCubit, WoFormStatus>(
                     listener: (context, status) {

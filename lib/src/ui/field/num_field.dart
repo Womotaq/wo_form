@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/wo_form.dart';
 
-class NumField extends StatelessWidget {
+class NumField extends StatefulWidget {
   const NumField({
     required this.inputId,
     this.settings,
@@ -14,33 +14,55 @@ class NumField extends StatelessWidget {
   final String inputId;
   final NumFieldSettings? settings;
 
+  @override
+  State<NumField> createState() => _NumFieldState();
+}
+
+class _NumFieldState extends State<NumField> {
+  final countController = TextEditingController();
+
   NumInput getInput(WoForm form) =>
-      form.getInput(inputId: inputId)! as NumInput;
+      form.getInput(inputId: widget.inputId)! as NumInput;
+
+  @override
+  void initState() {
+    super.initState();
+
+    countController.text =
+        context.read<WoFormValuesCubit>().state[widget.inputId]?.toString() ??
+            '';
+  }
 
   @override
   Widget build(BuildContext context) {
     final valuesCubit = context.read<WoFormValuesCubit>();
-    final countController =
-        TextEditingController(text: valuesCubit.state[inputId]?.toString());
 
     return BlocSelector<WoFormNodesCubit, WoForm, NumFieldSettings>(
       selector: (form) => getInput(form).fieldSettings,
       builder: (context, inputSettings) {
-        final mergedSettings = settings?.merge(inputSettings) ?? inputSettings;
+        final mergedSettings =
+            widget.settings?.merge(inputSettings) ?? inputSettings;
 
-        return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, String>(
-          selector: (values) => (values[inputId] as num?)?.toString() ?? '',
-          builder: (context, countText) {
+        return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, num?>(
+          selector: (values) => values[widget.inputId] as num?,
+          builder: (context, count) {
+            final countText = count?.toString() ?? '';
             if (countController.text != countText) {
-              countController.text = countText;
+              countController
+                ..text = countText
+                // This always brings the cursor to the last position possible.
+                // By default, when the text changes, it is selected.
+                ..selection = TextSelection.collapsed(
+                  offset: countController.text.length,
+                );
             }
 
             return ListTile(
               title: Text(mergedSettings.labelText ?? ''),
               trailing: CountSelector(
                 controller: countController,
-                onChanged: (value) => valuesCubit.onValueChanged(
-                  inputId: inputId,
+                onChanged: (value) async => valuesCubit.onValueChanged(
+                  inputId: widget.inputId,
                   value: value,
                 ),
                 axis: Axis.horizontal,
@@ -62,16 +84,17 @@ class CountSelector extends StatelessWidget {
     required this.onChanged,
     this.axis = Axis.vertical,
     this.step = 1,
+    this.minCount = 0,
+    this.maxCount,
     super.key,
   });
 
   final TextEditingController controller;
-  final void Function(int) onChanged;
+  final Future<void> Function(num?) onChanged;
   final Axis axis;
   final int step;
-
-  static const minCount = 0;
-  static const maxCount = 99;
+  final num? minCount;
+  final num? maxCount;
 
   Widget getSideButton({
     required Axis axis,
@@ -97,9 +120,12 @@ class CountSelector extends StatelessWidget {
             icon: icon,
             color: Theme.of(context).colorScheme.primaryContainer,
             onPressed: () {
-              final newVal =
-                  int.parse(controller.text) + (isPlus ? step : -step);
-              if (newVal >= minCount && newVal <= maxCount) onChanged(newVal);
+              var newVal = num.tryParse(controller.text) ?? 0;
+              newVal += (isPlus ? step : -step);
+              if (minCount != null && newVal < minCount!) return;
+              if (maxCount != null && newVal > maxCount!) return;
+              controller.text = newVal.toString();
+              onChanged(newVal);
             },
           );
         },
@@ -115,22 +141,24 @@ class CountSelector extends StatelessWidget {
         isPlus: false,
       ),
       if (axis == Axis.horizontal) WoGap.xsmall,
-      SizedBox(
-        width: 40,
-        child: TextField(
-          controller: controller,
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-            isDense: true,
-            contentPadding: EdgeInsets.all(WoSize.small),
+      ConstrainedBox(
+        constraints: const BoxConstraints(minWidth: WoSize.xxlarge),
+        child: IntrinsicWidth(
+          child: TextField(
+            controller: controller,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              isDense: true,
+              contentPadding: EdgeInsets.all(WoSize.small),
+            ),
+            textAlign: TextAlign.center,
+            keyboardType: TextInputType.number,
+            inputFormatters: <TextInputFormatter>[
+              FilteringTextInputFormatter.digitsOnly,
+              // LengthLimitingTextInputFormatter(2),
+            ],
+            onChanged: (string) => onChanged(num.tryParse(string)),
           ),
-          textAlign: TextAlign.center,
-          keyboardType: TextInputType.number,
-          inputFormatters: <TextInputFormatter>[
-            FilteringTextInputFormatter.digitsOnly,
-            LengthLimitingTextInputFormatter(2),
-          ],
-          onChanged: (string) => onChanged(int.parse(string)),
         ),
       ),
       if (axis == Axis.horizontal) WoGap.xsmall,

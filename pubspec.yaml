@@ -1,6 +1,6 @@
 name: wo_form
 description: "A package made for easily creating forms, with Womotaq's identity."
-version: 0.0.2
+version: 0.1.0
 publish_to: none
 
 environment:
