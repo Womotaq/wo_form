@@ -24,7 +24,7 @@ class SelectField<S> extends StatelessWidget {
   void onUniqueChoice({
     required WoFormValuesCubit valuesCubit,
     required List<S> selectedValues,
-    S? value,
+    required S value,
   }) =>
       value == null
           ? null
@@ -37,11 +37,14 @@ class SelectField<S> extends StatelessWidget {
     required WoFormValuesCubit valuesCubit,
     required Iterable<S> selectedValues,
     required S value,
-  }) =>
-      valuesCubit.onValueChanged(
-        inputId: inputId,
-        value: (selectedValues.toSet()..add(value)).toList(),
-      );
+  }) {
+    final selectedSet = selectedValues.toSet();
+    if (!selectedSet.add(value)) selectedSet.remove(value);
+    valuesCubit.onValueChanged(
+      inputId: inputId,
+      value: selectedSet.toList(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +75,7 @@ class SelectField<S> extends StatelessWidget {
                           leading: Radio(
                             value: value,
                             groupValue: selectedValues.firstOrNull,
-                            onChanged: (value) => onUniqueChoice(
+                            onChanged: (_) => onUniqueChoice(
                               valuesCubit: valuesCubit,
                               selectedValues: selectedValues,
                               value: value,
