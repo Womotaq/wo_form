@@ -19,48 +19,46 @@ class StringInputPage extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: BlocBuilder<WoFormNodesCubit, WoForm>(
-            builder: (context, form) {
-              return ListView(
-                children: [
-                  ...form.inputs.map((e) => e.toWidget()),
-                  WoGap.xxxlarge,
-                  const Text('Json :'),
-                  WoGap.medium,
-                  BlocBuilder<WoFormValuesCubit, Map<String, dynamic>>(
-                    builder: (context, values) {
-                      return Text(readableJson(form.valueToJson(values)));
-                    },
-                  ),
-                  WoGap.xxxlarge,
-                  BlocListener<WoFormStatusCubit, WoFormStatus>(
-                    listener: (context, status) {
-                      if (status is SubmittedStatus) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute<void>(
-                            builder: (context) => const ScreenB(),
-                          ),
-                        );
-                      }
-                    },
-                    child: IconButton(
-                      icon: const Icon(Icons.check),
-                      onPressed: context.read<WoFormValuesCubit>().submit,
-                      style: IconButton.styleFrom(
-                        backgroundColor:
-                            Theme.of(context).colorScheme.primaryContainer,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        minimumSize: const Size(64, 64),
+          child: ListView(
+            children: [
+              ...stringInputForm.inputs.map((e) => e.toWidget()),
+              WoGap.xxxlarge,
+              const Text('Json :'),
+              WoGap.medium,
+              BlocBuilder<WoFormValuesCubit, Map<String, dynamic>>(
+                builder: (context, values) {
+                  return Text(
+                    readableJson(stringInputForm.valueToJson(values)),
+                  );
+                },
+              ),
+              WoGap.xxxlarge,
+              BlocListener<WoFormStatusCubit, WoFormStatus>(
+                listener: (context, status) {
+                  if (status is SubmittedStatus) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (context) => const ScreenB(),
                       ),
+                    );
+                  }
+                },
+                child: IconButton(
+                  icon: const Icon(Icons.check),
+                  onPressed: context.read<WoFormValuesCubit>().submit,
+                  style: IconButton.styleFrom(
+                    backgroundColor:
+                        Theme.of(context).colorScheme.primaryContainer,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
                     ),
+                    minimumSize: const Size(64, 64),
                   ),
-                  WoGap.xxxlarge,
-                ],
-              );
-            },
+                ),
+              ),
+              WoGap.xxxlarge,
+            ],
           ),
         ),
       ),

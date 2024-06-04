@@ -28,80 +28,78 @@ class _StringFieldState extends State<StringField> {
   void initState() {
     super.initState();
 
-    final inputSettings =
-        widget.getInput(context.read<WoFormNodesCubit>().state).fieldSettings;
-    mergedSettings = widget.settings?.merge(inputSettings) ?? inputSettings;
+    final input = context.read<WoForm>().getInput(inputId: widget.inputId)!
+        as StringInput;
+    final inputSettings = input.fieldSettings;
+    final mergedSettings =
+        widget.settings?.merge(inputSettings) ?? inputSettings;
 
     obscureText = mergedSettings.obscureText ?? false;
   }
 
   @override
   Widget build(BuildContext context) {
+    final form = context.read<WoForm>();
     final valuesCubit = context.read<WoFormValuesCubit>();
 
-    return BlocBuilder<WoFormNodesCubit, WoForm>(
-      builder: (context, form) {
-        return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
-          builder: (context, status) {
-            return BlocSelector<WoFormValuesCubit, Map<String, dynamic>,
-                String>(
-              selector: (values) => (values[widget.inputId] as String?) ?? '',
-              builder: (context, text) {
-                if (text != textEditingController.text) {
-                  textEditingController.text = text;
-                }
+    return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
+      builder: (context, status) {
+        return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, String>(
+          selector: (values) => (values[widget.inputId] as String?) ?? '',
+          builder: (context, text) {
+            if (text != textEditingController.text) {
+              textEditingController.text = text;
+            }
 
-                final errorText = status is! InvalidValuesStatus
-                    ? null
-                    : widget
-                        .getInput(form)
-                        .getInvalidExplanation(text, context.formL10n);
+            final errorText = status is! InvalidValuesStatus
+                ? null
+                : widget
+                    .getInput(form)
+                    .getInvalidExplanation(text, context.formL10n);
 
-                return TextFormField(
-                  controller: textEditingController,
-                  onChanged: (value) => valuesCubit.onValueChanged(
-                    inputId: widget.inputId,
-                    value: value,
-                  ),
-                  onFieldSubmitted:
-                      (mergedSettings.submitFormOnFieldSubmitted ?? false)
-                          ? (value) => valuesCubit.submit()
-                          : null,
-                  keyboardType: mergedSettings.keyboardType,
-                  obscureText: obscureText,
-                  autocorrect: mergedSettings.autocorrect ?? true,
-                  autofillHints: mergedSettings.autofillHints,
-                  autofocus: mergedSettings.autofocus ?? false,
-                  textInputAction: mergedSettings.textInputAction,
-                  textCapitalization: mergedSettings.textCapitalization ??
-                      TextCapitalization.none,
-                  maxLines: mergedSettings.maxLines,
-                  decoration: InputDecoration(
-                    labelText: mergedSettings.labelText,
-                    hintText: mergedSettings.hintText,
-                    errorText: errorText,
-                    errorMaxLines: 10,
-                    suffixIcon: switch (mergedSettings.action) {
-                      null => null,
-                      StringFieldAction.clear => IconButton(
-                          onPressed: () => valuesCubit.onValueChanged(
-                            inputId: widget.inputId,
-                            value: null,
-                          ),
-                          icon: const Icon(Icons.clear),
-                        ),
-                      StringFieldAction.obscure => IconButton(
-                          onPressed: () => setState(() {
-                            obscureText = !obscureText;
-                          }),
-                          icon: obscureText
-                              ? const Icon(Icons.visibility_off)
-                              : const Icon(Icons.visibility),
-                        ),
-                    },
-                  ),
-                );
-              },
+            return TextFormField(
+              controller: textEditingController,
+              onChanged: (value) => valuesCubit.onValueChanged(
+                inputId: widget.inputId,
+                value: value,
+              ),
+              onFieldSubmitted:
+                  (mergedSettings.submitFormOnFieldSubmitted ?? false)
+                      ? (value) => valuesCubit.submit()
+                      : null,
+              keyboardType: mergedSettings.keyboardType,
+              obscureText: obscureText,
+              autocorrect: mergedSettings.autocorrect ?? true,
+              autofillHints: mergedSettings.autofillHints,
+              autofocus: mergedSettings.autofocus ?? false,
+              textInputAction: mergedSettings.textInputAction,
+              textCapitalization:
+                  mergedSettings.textCapitalization ?? TextCapitalization.none,
+              maxLines: mergedSettings.maxLines,
+              decoration: InputDecoration(
+                labelText: mergedSettings.labelText,
+                hintText: mergedSettings.hintText,
+                errorText: errorText,
+                errorMaxLines: 10,
+                suffixIcon: switch (mergedSettings.action) {
+                  null => null,
+                  StringFieldAction.clear => IconButton(
+                      onPressed: () => valuesCubit.onValueChanged(
+                        inputId: widget.inputId,
+                        value: null,
+                      ),
+                      icon: const Icon(Icons.clear),
+                    ),
+                  StringFieldAction.obscure => IconButton(
+                      onPressed: () => setState(() {
+                        obscureText = !obscureText;
+                      }),
+                      icon: obscureText
+                          ? const Icon(Icons.visibility_off)
+                          : const Icon(Icons.visibility),
+                    ),
+                },
+              ),
             );
           },
         );

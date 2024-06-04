@@ -4,10 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/wo_form.dart';
 
-class WoFormNodesCubit extends Cubit<WoForm> {
-  WoFormNodesCubit._(super.initialState);
-}
-
 class WoFormStatusCubit extends Cubit<WoFormStatus> {
   WoFormStatusCubit._({WoFormStatus? initialStatus})
       : super(initialStatus ?? const WoFormStatus.idle());
@@ -24,12 +20,12 @@ class WoFormStatusCubit extends Cubit<WoFormStatus> {
 class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
   // with StateStreamable<WoFormValues>
   WoFormValuesCubit._(
-    this._nodesCubit,
+    this.form,
     this._statusCubit, {
     required this.onSubmitting,
-  }) : super(_nodesCubit.state.defaultValues());
+  }) : super(form.defaultValues());
 
-  final WoFormNodesCubit _nodesCubit;
+  final WoForm form;
   final WoFormStatusCubit _statusCubit;
   final FutureOr<void> Function() onSubmitting;
 
@@ -51,7 +47,7 @@ class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
   }
 
   Future<void> submit() async {
-    final inputErrors = _nodesCubit.state.getErrors(state);
+    final inputErrors = form.getErrors(state);
     if (inputErrors.isNotEmpty) {
       return _statusCubit._setInvalidValues(inputErrors: inputErrors);
     }
@@ -64,8 +60,6 @@ class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
     } catch (e, s) {
       _statusCubit._setSubmitError(error: e, stackTrace: s);
     }
-
-    // setSubmitted();
   }
 }
 
@@ -83,19 +77,21 @@ class WoFormInitializer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => WoFormNodesCubit._(form)),
-        BlocProvider(create: (context) => WoFormStatusCubit._()),
-        BlocProvider(
-          create: (context) => WoFormValuesCubit._(
-            context.read(),
-            context.read(),
-            onSubmitting: onSubmitting,
+    return RepositoryProvider.value(
+      value: form,
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => WoFormStatusCubit._()),
+          BlocProvider(
+            create: (context) => WoFormValuesCubit._(
+              context.read(),
+              context.read(),
+              onSubmitting: onSubmitting,
+            ),
           ),
-        ),
-      ],
-      child: child,
+        ],
+        child: child,
+      ),
     );
   }
 }
@@ -115,15 +111,12 @@ class WoFormBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<WoFormNodesCubit, WoForm>(
-      builder: (context, form) {
-        return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
-          builder: (context, status) {
-            return BlocBuilder<WoFormValuesCubit, Map<String, dynamic>>(
-              builder: (context, valuesMap) {
-                return builder(context, form, status, valuesMap);
-              },
-            );
+    final form = context.read<WoForm>();
+    return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
+      builder: (_, status) {
+        return BlocBuilder<WoFormValuesCubit, Map<String, dynamic>>(
+          builder: (context, valuesMap) {
+            return builder(context, form, status, valuesMap);
           },
         );
       },

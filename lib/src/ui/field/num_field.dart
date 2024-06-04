@@ -35,42 +35,39 @@ class _NumFieldState extends State<NumField> {
 
   @override
   Widget build(BuildContext context) {
+    final form = context.read<WoForm>();
     final valuesCubit = context.read<WoFormValuesCubit>();
 
-    return BlocSelector<WoFormNodesCubit, WoForm, NumFieldSettings>(
-      selector: (form) => getInput(form).fieldSettings,
-      builder: (context, inputSettings) {
-        final mergedSettings =
-            widget.settings?.merge(inputSettings) ?? inputSettings;
+    final inputSettings = getInput(form).fieldSettings;
+    final mergedSettings =
+        widget.settings?.merge(inputSettings) ?? inputSettings;
 
-        return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, num?>(
-          selector: (values) => values[widget.inputId] as num?,
-          builder: (context, count) {
-            final countText = count?.toString() ?? '';
-            if (countController.text != countText) {
-              countController
-                ..text = countText
-                // This always brings the cursor to the last position possible.
-                // By default, when the text changes, it is selected.
-                ..selection = TextSelection.collapsed(
-                  offset: countController.text.length,
-                );
-            }
-
-            return ListTile(
-              title: Text(mergedSettings.labelText ?? ''),
-              trailing: CountSelector(
-                controller: countController,
-                onChanged: (value) async => valuesCubit.onValueChanged(
-                  inputId: widget.inputId,
-                  value: value,
-                ),
-                axis: Axis.horizontal,
-              ),
-              visualDensity: VisualDensity.compact,
-              contentPadding: EdgeInsets.zero,
+    return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, num?>(
+      selector: (values) => values[widget.inputId] as num?,
+      builder: (context, count) {
+        final countText = count?.toString() ?? '';
+        if (countController.text != countText) {
+          countController
+            ..text = countText
+            // This always brings the cursor to the last position possible.
+            // By default, when the text changes, it is selected.
+            ..selection = TextSelection.collapsed(
+              offset: countController.text.length,
             );
-          },
+        }
+
+        return ListTile(
+          title: Text(mergedSettings.labelText ?? ''),
+          trailing: CountSelector(
+            controller: countController,
+            onChanged: (value) async => valuesCubit.onValueChanged(
+              inputId: widget.inputId,
+              value: value,
+            ),
+            axis: Axis.horizontal,
+          ),
+          visualDensity: VisualDensity.compact,
+          contentPadding: EdgeInsets.zero,
         );
       },
     );

@@ -9,16 +9,15 @@ class InputsNodeWidget extends StatelessWidget {
     super.key,
   });
 
-  final Object inputId;
+  final String inputId;
   final MapFieldSettings? settings;
-
-  InputsNode getInput(WoForm form) =>
-      form.getInput(inputId: inputId.toString())! as InputsNode;
 
   @override
   Widget build(BuildContext context) {
-    final inputSettings =
-        context.select((WoFormNodesCubit c) => getInput(c.state).fieldSettings);
+    final form = context.read<WoForm>();
+
+    final input = form.getInput(inputId: inputId)! as InputsNode;
+    final inputSettings = input.fieldSettings;
     final mergedSettings = settings?.merge(inputSettings) ?? inputSettings;
 
     return Column(
@@ -32,16 +31,8 @@ class InputsNodeWidget extends StatelessWidget {
           ),
         Padding(
           padding: const EdgeInsets.only(left: 16),
-          child:
-              BlocSelector<WoFormNodesCubit, WoForm, List<WoFormElementMixin>?>(
-            selector: (form) => getInput(form).inputs,
-            builder: (context, inputs) {
-              if (inputs == null) const SizedBox.shrink();
-    
-              return Column(
-                children: inputs!.map((i) => i.toWidget()).toList(),
-              );
-            },
+          child: Column(
+            children: input.inputs.map((i) => i.toWidget()).toList(),
           ),
         ),
       ],

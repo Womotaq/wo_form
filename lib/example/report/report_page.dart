@@ -72,7 +72,7 @@ class _ReportPage extends StatelessWidget {
         listener: (context, status) {
           if (status is SubmittedStatus) {
             context.read<WoFormStatusCubit>().setIdle();
-            final form = context.read<WoFormNodesCubit>().state;
+            final form = context.read<WoForm>();
             final values = context.read<WoFormValuesCubit>().state;
             showDialog<AlertDialog>(
               context: context,
