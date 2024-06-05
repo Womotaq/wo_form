@@ -6,12 +6,12 @@ import 'package:wo_form/wo_form.dart';
 
 class NumField extends StatefulWidget {
   const NumField({
-    required this.inputId,
+    required this.inputPath,
     this.settings,
     super.key,
   });
 
-  final String inputId;
+  final String inputPath;
   final NumFieldSettings? settings;
 
   @override
@@ -21,15 +21,12 @@ class NumField extends StatefulWidget {
 class _NumFieldState extends State<NumField> {
   final countController = TextEditingController();
 
-  NumInput getInput(WoForm form) =>
-      form.getInput(inputId: widget.inputId)! as NumInput;
-
   @override
   void initState() {
     super.initState();
 
     countController.text =
-        context.read<WoFormValuesCubit>().state[widget.inputId]?.toString() ??
+        context.read<WoFormValuesCubit>().state[widget.inputPath]?.toString() ??
             '';
   }
 
@@ -38,12 +35,13 @@ class _NumFieldState extends State<NumField> {
     final form = context.read<WoForm>();
     final valuesCubit = context.read<WoFormValuesCubit>();
 
-    final inputSettings = getInput(form).fieldSettings;
+    final input = form.getInput(path: widget.inputPath)! as NumInput;
+    final inputSettings = input.fieldSettings;
     final mergedSettings =
         widget.settings?.merge(inputSettings) ?? inputSettings;
 
     return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, num?>(
-      selector: (values) => values[widget.inputId] as num?,
+      selector: (values) => values[input.id] as num?,
       builder: (context, count) {
         final countText = count?.toString() ?? '';
         if (countController.text != countText) {
@@ -61,7 +59,7 @@ class _NumFieldState extends State<NumField> {
           trailing: CountSelector(
             controller: countController,
             onChanged: (value) async => valuesCubit.onValueChanged(
-              inputId: widget.inputId,
+              inputId: input.id,
               value: value,
             ),
             axis: Axis.horizontal,

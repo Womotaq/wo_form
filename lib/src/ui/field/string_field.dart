@@ -4,16 +4,13 @@ import 'package:wo_form/wo_form.dart';
 
 class StringField extends StatefulWidget {
   const StringField({
-    required this.inputId,
+    required this.inputPath,
     this.settings,
     super.key,
   });
 
-  final String inputId;
+  final String inputPath;
   final StringFieldSettings? settings;
-
-  StringInput getInput(WoForm form) =>
-      form.getInput(inputId: inputId)! as StringInput;
 
   @override
   State createState() => _StringFieldState();
@@ -28,8 +25,8 @@ class _StringFieldState extends State<StringField> {
   void initState() {
     super.initState();
 
-    final input = context.read<WoForm>().getInput(inputId: widget.inputId)!
-        as StringInput;
+    final input =
+        context.read<WoForm>().getInput(path: widget.inputPath)! as StringInput;
     final inputSettings = input.fieldSettings;
     final mergedSettings =
         widget.settings?.merge(inputSettings) ?? inputSettings;
@@ -39,13 +36,15 @@ class _StringFieldState extends State<StringField> {
 
   @override
   Widget build(BuildContext context) {
-    final form = context.read<WoForm>();
     final valuesCubit = context.read<WoFormValuesCubit>();
+
+    final input =
+        context.read<WoForm>().getInput(path: widget.inputPath)! as StringInput;
 
     return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
       builder: (context, status) {
         return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, String>(
-          selector: (values) => (values[widget.inputId] as String?) ?? '',
+          selector: (values) => (values[input.id] as String?) ?? '',
           builder: (context, text) {
             if (text != textEditingController.text) {
               textEditingController.text = text;
@@ -53,14 +52,12 @@ class _StringFieldState extends State<StringField> {
 
             final errorText = status is! InvalidValuesStatus
                 ? null
-                : widget
-                    .getInput(form)
-                    .getInvalidExplanation(text, context.formL10n);
+                : input.getInvalidExplanation(text, context.formL10n);
 
             return TextFormField(
               controller: textEditingController,
               onChanged: (value) => valuesCubit.onValueChanged(
-                inputId: widget.inputId,
+                inputId: input.id,
                 value: value,
               ),
               onFieldSubmitted:
@@ -85,7 +82,7 @@ class _StringFieldState extends State<StringField> {
                   null => null,
                   StringFieldAction.clear => IconButton(
                       onPressed: () => valuesCubit.onValueChanged(
-                        inputId: widget.inputId,
+                        inputId: input.id,
                         value: null,
                       ),
                       icon: const Icon(Icons.clear),

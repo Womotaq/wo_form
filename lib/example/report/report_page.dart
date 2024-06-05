@@ -11,7 +11,7 @@ enum ReportType {
   other;
 }
 
-class ReportInputId {
+class ReportInputPath {
   static const type = 'type';
   static const message = 'message';
   static const block = 'block';
@@ -30,7 +30,7 @@ class ReportPage extends StatelessWidget {
         },
         inputs: [
           SelectInput<ReportType>(
-            id: ReportInputId.type,
+            id: ReportInputPath.type,
             availibleValues: ReportType.values,
             minCount: 1,
             maxCount: 1,
@@ -39,7 +39,7 @@ class ReportPage extends StatelessWidget {
             ),
           ),
           StringInput(
-            id: ReportInputId.message,
+            id: ReportInputPath.message,
             fieldSettings: StringFieldSettings(
               hintText: 'Dites-en plus !',
               textCapitalization: TextCapitalization.sentences,
@@ -47,7 +47,7 @@ class ReportPage extends StatelessWidget {
             ),
           ),
           BooleanInput(
-            id: ReportInputId.block,
+            id: ReportInputPath.block,
             fieldSettings: BooleanFieldSettings(
               labelText: 'Bloquer cette raclure ?',
               onOffType: BooleanFieldOnOffType.checkbox,
@@ -101,7 +101,7 @@ class _ReportPage extends StatelessWidget {
             Flexible(
               child: SingleChildScrollView(
                 child: SelectField<ReportType>(
-                  inputId: ReportInputId.type,
+                  inputPath: ReportInputPath.type,
                   valueBuilder: (type) => Text(
                     switch (type) {
                       null => 'Vide',
@@ -117,10 +117,10 @@ class _ReportPage extends StatelessWidget {
             WoGap.medium,
             // message field
             const Flexible(
-              child: StringField(inputId: ReportInputId.message),
+              child: StringField(inputPath: ReportInputPath.message),
             ),
             WoGap.medium,
-            const BooleanField(inputId: ReportInputId.block),
+            const BooleanField(inputPath: ReportInputPath.block),
             WoGap.medium,
             WoFormBuilder(
               builder: (context, form, status, values) {

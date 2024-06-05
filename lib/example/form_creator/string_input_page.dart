@@ -21,7 +21,9 @@ class StringInputPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: ListView(
             children: [
-              ...stringInputForm.inputs.map((e) => e.toWidget()),
+              ...stringInputForm.inputs.map(
+                (e) => e.toWidget(parentPath: null),
+              ),
               WoGap.xxxlarge,
               const Text('Json :'),
               WoGap.medium,

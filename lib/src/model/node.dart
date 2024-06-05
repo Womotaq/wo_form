@@ -12,7 +12,7 @@ mixin WoFormElementMixin {
 
   Map<String, dynamic> toJson();
 
-  Widget toWidget<T extends WoFormValuesCubit>();
+  Widget toWidget<T extends WoFormValuesCubit>({required String? parentPath});
 }
 
 @freezed
@@ -39,6 +39,8 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
 
   // --
 
+  Iterable<WoFormNode> get nodes => inputs.whereType();
+
   Map<String, dynamic> defaultValues() => {
         for (final input in inputs)
           if (input is WoFormNode)
@@ -55,23 +57,36 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
             (input as WoFormInputMixin).getError(valuesMap[input.id]),
       ].whereNotNull();
 
-  WoFormElementMixin? getInput({required String inputId}) {
-    for (final input in inputs) {
-      if (input.id == inputId) return input;
+  /// The path of an input is the ids of it and its parents, separated by the
+  /// character '/'.
+  ///
+  /// Exemple :
+  ///
+  /// InputsNode(
+  ///   id: 'profile',
+  ///   inputs: [
+  ///     StringInput(
+  ///       id: 'name',
+  ///       ...
+  ///
+  /// Thae path of the input with id 'name' is 'profile/name'.
+  WoFormElementMixin? getInput({required String path}) {
+    final slashIndex = path.indexOf('/');
 
-      if (input is WoFormNode) {
-        final gatcha = input.getInput(inputId: inputId);
-        if (gatcha != null) return gatcha;
-      }
-    }
+    if (slashIndex == -1) return inputs.firstWhereOrNull((i) => i.id == path);
 
-    return null;
+    return nodes
+        .firstWhereOrNull((i) => i.id == path)
+        ?.getInput(path: path.substring(slashIndex + 1));
   }
 
   @override
-  Widget toWidget<T extends WoFormValuesCubit>() => switch (this) {
+  Widget toWidget<T extends WoFormValuesCubit>({required String? parentPath}) =>
+      switch (this) {
         WoForm() => throw UnimplementedError(),
-        InputsNode() => InputsNodeWidget(inputId: id),
+        InputsNode() => InputsNodeWidget(
+            inputPath: parentPath == null ? id : '$parentPath/id',
+          ),
       };
 
   Map<String, dynamic> valueToJson(Map<String, dynamic> valuesMap) => {

@@ -4,19 +4,19 @@ import 'package:wo_form/wo_form.dart';
 
 class InputsNodeWidget extends StatelessWidget {
   const InputsNodeWidget({
-    required this.inputId,
+    required this.inputPath,
     this.settings,
     super.key,
   });
 
-  final String inputId;
+  final String inputPath;
   final MapFieldSettings? settings;
 
   @override
   Widget build(BuildContext context) {
     final form = context.read<WoForm>();
 
-    final input = form.getInput(inputId: inputId)! as InputsNode;
+    final input = form.getInput(path: inputPath)! as InputsNode;
     final inputSettings = input.fieldSettings;
     final mergedSettings = settings?.merge(inputSettings) ?? inputSettings;
 
@@ -32,7 +32,9 @@ class InputsNodeWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 16),
           child: Column(
-            children: input.inputs.map((i) => i.toWidget()).toList(),
+            children: input.inputs
+                .map((i) => i.toWidget(parentPath: inputPath))
+                .toList(),
           ),
         ),
       ],

@@ -5,22 +5,23 @@ import 'package:wo_form/wo_form.dart';
 
 class SelectField<S> extends StatelessWidget {
   const SelectField({
-    required this.inputId,
+    required this.inputPath,
     this.valueBuilder,
     this.previewBuilder,
     this.settings,
     super.key,
   });
 
-  final String inputId;
+  final String inputPath;
   final Widget Function(S?)? valueBuilder;
   final Widget Function(S?)? previewBuilder;
   final SelectFieldSettings? settings;
 
   SelectInput<S> getInput(WoForm form) =>
-      form.getInput(inputId: inputId)! as SelectInput<S>;
+      form.getInput(path: inputPath)! as SelectInput<S>;
 
   void onUniqueChoice({
+    required String inputId,
     required WoFormValuesCubit valuesCubit,
     required List<S> selectedValues,
     required S value,
@@ -33,6 +34,7 @@ class SelectField<S> extends StatelessWidget {
             );
 
   void onMultipleChoice({
+    required String inputId,
     required WoFormValuesCubit valuesCubit,
     required Iterable<S> selectedValues,
     required S value,
@@ -55,7 +57,7 @@ class SelectField<S> extends StatelessWidget {
     final mergedSettings = settings?.merge(inputSettings) ?? inputSettings;
 
     return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, List<S>>(
-      selector: (values) => (values[inputId] as List<S>?) ?? [],
+      selector: (values) => (values[input.id] as List<S>?) ?? [],
       builder: (context, selectedValues) {
         if (input.maxCount == 1) {
           return switch (mergedSettings.displayMode) {
@@ -74,6 +76,7 @@ class SelectField<S> extends StatelessWidget {
                         value: value,
                         groupValue: selectedValues.firstOrNull,
                         onChanged: (_) => onUniqueChoice(
+                          inputId: input.id,
                           valuesCubit: valuesCubit,
                           selectedValues: selectedValues,
                           value: value,
@@ -82,6 +85,7 @@ class SelectField<S> extends StatelessWidget {
                       title:
                           valueBuilder?.call(value) ?? Text(value.toString()),
                       onTap: () => onUniqueChoice(
+                          inputId: input.id,
                         valuesCubit: valuesCubit,
                         selectedValues: selectedValues,
                         value: value,
@@ -97,6 +101,7 @@ class SelectField<S> extends StatelessWidget {
                 trailing: SelectChip<S>.uniqueChoice(
                   values: input.availibleValues.whereType(),
                   onSelected: (value) => onUniqueChoice(
+                          inputId: input.id,
                     valuesCubit: valuesCubit,
                     selectedValues: selectedValues,
                     value: value,
@@ -116,6 +121,7 @@ class SelectField<S> extends StatelessWidget {
           trailing: SelectChip<S>.multipleChoices(
             values: input.availibleValues.whereType(),
             onSelected: (value) => onMultipleChoice(
+                          inputId: input.id,
               valuesCubit: valuesCubit,
               selectedValues: selectedValues,
               value: value,
@@ -133,7 +139,7 @@ class SelectField<S> extends StatelessWidget {
 
 class SelectStringField extends SelectField<String> {
   const SelectStringField({
-    required super.inputId,
+    required super.inputPath,
     super.valueBuilder,
     super.previewBuilder,
     super.settings,
@@ -143,7 +149,8 @@ class SelectStringField extends SelectField<String> {
   @override
   SelectInput<String> getInput(WoForm form) {
     final selectStringInput =
-        form.getInput(inputId: inputId)! as SelectStringInput;
+        form.getInput(path: inputPath)! as SelectStringInput;
+        
     return SelectInput<String>(
       id: selectStringInput.id,
       maxCount: selectStringInput.maxCount,

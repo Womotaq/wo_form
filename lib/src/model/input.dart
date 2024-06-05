@@ -32,9 +32,10 @@ mixin WoFormInputMixin {
 
   String? getInvalidExplanation(Object? value, FormLocalizations formL10n);
 
-  Widget toField<T extends WoFormValuesCubit>();
+  Widget toField<T extends WoFormValuesCubit>({required String? parentPath});
 
-  Widget toWidget<C extends WoFormValuesCubit>() => toField();
+  Widget toWidget<C extends WoFormValuesCubit>({required String? parentPath}) =>
+      toField(parentPath: parentPath);
 
   // WoFormElementMixin
 
@@ -91,16 +92,6 @@ sealed class WoFormInput
       _$WoFormInputFromJson(json);
 
   // --
-
-  // TODO remove
-  static List<String> types = [
-    'boolean',
-    'string',
-    'selectString',
-  ];
-  static String booleanType = 'boolean';
-  static String stringType = 'string';
-  static String selectStringType = 'selectString';
 
   @override
   WoFormInputError? getError(dynamic value) {
@@ -172,16 +163,17 @@ sealed class WoFormInput
   }
 
   @override
-  Widget toField<T extends WoFormValuesCubit>() {
+  Widget toField<T extends WoFormValuesCubit>({required String? parentPath}) {
+    final path = parentPath == null ? id : '$parentPath/id';
     switch (this) {
       case BooleanInput():
-        return BooleanField(inputId: id);
+        return BooleanField(inputPath: path);
       case NumInput():
-        return NumField(inputId: id);
+        return NumField(inputPath: path);
       case StringInput():
-        return StringField(inputId: id);
+        return StringField(inputPath: path);
       case SelectStringInput():
-        return SelectStringField(inputId: id);
+        return SelectStringField(inputPath: path);
     }
   }
 
@@ -302,7 +294,8 @@ class SelectInput<T>
   }
 
   @override
-  Widget toField<C extends WoFormValuesCubit>() => SelectField<T>(inputId: id);
+  Widget toField<C extends WoFormValuesCubit>({required String? parentPath}) =>
+      SelectField<T>(inputPath: parentPath == null ? id : '$parentPath/id');
 
   @override
   Object? valueToJson(dynamic value) => _selectedValuesToJson<T>(

@@ -4,22 +4,22 @@ import 'package:wo_form/wo_form.dart';
 
 class BooleanField extends StatelessWidget {
   const BooleanField({
-    required this.inputId,
+    required this.inputPath,
     this.settings,
     super.key,
   });
 
-  final String inputId;
+  final String inputPath;
   final BooleanFieldSettings? settings;
 
   BooleanInput getInput(WoForm form) {
     try {
-      return form.getInput(inputId: inputId)! as BooleanInput;
+      return form.getInput(path: inputPath)! as BooleanInput;
     } catch (e) {
       // TODO
       print(e);
       print(e.runtimeType);
-      throw ArgumentError('No input found for id: $inputId');
+      throw ArgumentError('No input found at path: $inputPath');
     }
   }
 
@@ -28,12 +28,21 @@ class BooleanField extends StatelessWidget {
     final form = context.read<WoForm>();
     final valuesCubit = context.read<WoFormValuesCubit>();
 
-    final inputSettings = getInput(form).fieldSettings;
+    final BooleanInput input;
+    try {
+      input = form.getInput(path: inputPath)! as BooleanInput;
+    } catch (e) {
+      // TODO
+      print(e);
+      print(e.runtimeType);
+      throw ArgumentError('No input found at path: $inputPath');
+    }
+    final inputSettings = input.fieldSettings;
     final mergedSettings = settings?.merge(inputSettings) ?? inputSettings;
 
     return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, bool>(
       selector: (values) {
-        final value = values[inputId];
+        final value = values[input.id];
         try {
           return (value as bool?) ?? false;
         } catch (e) {
@@ -41,7 +50,7 @@ class BooleanField extends StatelessWidget {
           print(e);
           print(e.runtimeType);
           throw ArgumentError(
-            'Expected a boolean at inputId $inputId, '
+            'Expected a boolean at inputId ${input.id}, '
             'found: <${value.runtimeType}>$value',
           );
         }
@@ -51,7 +60,7 @@ class BooleanField extends StatelessWidget {
           null || BooleanFieldOnOffType.switchButton => Switch(
               value: value,
               onChanged: (value) => valuesCubit.onValueChanged(
-                inputId: inputId,
+                inputId: input.id,
                 value: value,
               ),
             ),
@@ -60,7 +69,7 @@ class BooleanField extends StatelessWidget {
               onChanged: (value) => value == null
                   ? null
                   : valuesCubit.onValueChanged(
-                      inputId: inputId,
+                      inputId: input.id,
                       value: value,
                     ),
             ),
@@ -80,7 +89,7 @@ class BooleanField extends StatelessWidget {
           title: Text(mergedSettings.labelText ?? ''),
           trailing: onOffTypeIsLeading ? null : onOffType,
           onTap: () => valuesCubit.onValueChanged(
-            inputId: inputId,
+            inputId: input.id,
             value: !value,
           ),
           visualDensity: VisualDensity.compact,
