@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:wo_form/example/form_creator/string_input_form.dart';
+import 'package:wo_form/example/form_creator/string_input_node.dart';
 import 'package:wo_form/src/_export.dart';
 import 'package:wo_form/src/l10n/arb_gen/form_localizations_fr.dart';
 import 'package:wo_form/wo_form.dart';
@@ -15,7 +15,7 @@ void main() {
     ),
   );
   final expectedInputToJson = expectedInput.toJson();
-  final values = stringInputForm.defaultValues();
+  final values = stringInputNode.defaultValues();
   values['id'] = expectedInput.id;
   values['defaultValue'] = expectedInput.defaultValue;
   values['isRequired'] = expectedInput.isRequired;
@@ -24,11 +24,11 @@ void main() {
       expectedInput.fieldSettings.invalidRegexMessage;
 
   test('StringInput Form : Step 0', () {
-    expect(stringInputForm.getErrors(values).isEmpty, true);
+    expect(stringInputNode.getErrors(values).isEmpty, true);
   });
 
   test('StringInput Form : Step 1', () {
-    expect(stringInputForm.valueToJson(values), expectedInputToJson);
+    expect(stringInputNode.valueToJson(values), expectedInputToJson);
   });
 
   test('StringInput Form : Step 2', () {

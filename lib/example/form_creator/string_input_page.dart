@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
-import 'package:wo_form/example/form_creator/string_input_form.dart';
+import 'package:wo_form/example/form_creator/num_input_node.dart';
+import 'package:wo_form/example/form_creator/string_input_node.dart';
 import 'package:wo_form/example/utils/readable_json.dart';
 import 'package:wo_form/wo_form.dart';
+
+final woFormCreator = WoForm(
+  inputs: [
+    stringInputNode,
+    numInputNode,
+  ],
+);
 
 class StringInputPage extends StatelessWidget {
   const StringInputPage({super.key});
@@ -11,7 +19,7 @@ class StringInputPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WoFormInitializer(
-      form: stringInputForm,
+      form: woFormCreator,
       onSubmitting: () {},
       child: Scaffold(
         appBar: AppBar(
@@ -21,7 +29,7 @@ class StringInputPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: ListView(
             children: [
-              ...stringInputForm.inputs.map(
+              ...woFormCreator.inputs.map(
                 (e) => e.toWidget(parentPath: null),
               ),
               WoGap.xxxlarge,
@@ -30,7 +38,7 @@ class StringInputPage extends StatelessWidget {
               BlocBuilder<WoFormValuesCubit, Map<String, dynamic>>(
                 builder: (context, values) {
                   return Text(
-                    readableJson(stringInputForm.valueToJson(values)),
+                    readableJson(woFormCreator.valueToJson(values)),
                   );
                 },
               ),
@@ -45,7 +53,7 @@ class StringInputPage extends StatelessWidget {
                           form: WoForm(
                             inputs: [
                               StringInput.fromJson(
-                                stringInputForm.valueToJson(
+                                woFormCreator.valueToJson(
                                   context.read<WoFormValuesCubit>().state,
                                 ),
                               ),

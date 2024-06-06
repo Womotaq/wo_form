@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:wo_form/src/model/json_converter/text_input_type.dart';
 import 'package:wo_form/wo_form.dart';
 
-final stringInputForm = WoForm(
+final stringInputNode = InputsNode(
+  id: 'stringInput',
+  fieldSettings: const MapFieldSettings(
+    labelText: 'StringInput',
+  ),
   inputs: [
     const StringInput(
       id: 'id',
