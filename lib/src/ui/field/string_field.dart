@@ -25,10 +25,16 @@ class _StringFieldState extends State<StringField> {
   void initState() {
     super.initState();
 
-    final input =
-        context.read<WoForm>().getInput(path: widget.inputPath)! as StringInput;
+    final input = context.read<WoForm>().getInput(path: widget.inputPath);
+    if (input is! StringInput) {
+      throw ArgumentError(
+        'Wrong input at path "${widget.inputPath}". '
+        'Expected StringInput, got ${input.runtimeType}',
+      );
+    }
+
     final inputSettings = input.fieldSettings;
-    final mergedSettings =
+    mergedSettings =
         widget.settings?.merge(inputSettings) ?? inputSettings;
 
     obscureText = mergedSettings.obscureText ?? false;

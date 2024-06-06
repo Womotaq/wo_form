@@ -17,8 +17,17 @@ class SelectField<S> extends StatelessWidget {
   final Widget Function(S?)? previewBuilder;
   final SelectFieldSettings? settings;
 
-  SelectInput<S> getInput(WoForm form) =>
-      form.getInput(path: inputPath)! as SelectInput<S>;
+  SelectInput<S> getInput(WoForm form) {
+    final input = form.getInput(path: inputPath);
+    if (input is! SelectInput<S>) {
+      throw ArgumentError(
+        'Wrong input at path "$inputPath". '
+        'Expected SelectInput<$S>, got ${input.runtimeType}',
+      );
+    }
+
+    return input;
+  }
 
   void onUniqueChoice({
     required String inputId,
@@ -148,8 +157,13 @@ class SelectStringField extends SelectField<String> {
 
   @override
   SelectInput<String> getInput(WoForm form) {
-    final selectStringInput =
-        form.getInput(path: inputPath)! as SelectStringInput;
+    final selectStringInput = form.getInput(path: inputPath);
+    if (selectStringInput is! SelectStringInput) {
+      throw ArgumentError(
+        'Wrong input at path "$inputPath". '
+        'Expected SelectStringInput, got ${selectStringInput.runtimeType}',
+      );
+    }
         
     return SelectInput<String>(
       id: selectStringInput.id,

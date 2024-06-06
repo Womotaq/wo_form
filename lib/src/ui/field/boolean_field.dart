@@ -12,31 +12,19 @@ class BooleanField extends StatelessWidget {
   final String inputPath;
   final BooleanFieldSettings? settings;
 
-  BooleanInput getInput(WoForm form) {
-    try {
-      return form.getInput(path: inputPath)! as BooleanInput;
-    } catch (e) {
-      // TODO
-      print(e);
-      print(e.runtimeType);
-      throw ArgumentError('No input found at path: $inputPath');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final form = context.read<WoForm>();
     final valuesCubit = context.read<WoFormValuesCubit>();
 
-    final BooleanInput input;
-    try {
-      input = form.getInput(path: inputPath)! as BooleanInput;
-    } catch (e) {
-      // TODO
-      print(e);
-      print(e.runtimeType);
-      throw ArgumentError('No input found at path: $inputPath');
+    final input = form.getInput(path: inputPath);
+    if (input is! BooleanInput) {
+      throw ArgumentError(
+        'Wrong input at path "$inputPath". '
+        'Expected BooleanInput, got ${input.runtimeType}',
+      );
     }
+
     final inputSettings = input.fieldSettings;
     final mergedSettings = settings?.merge(inputSettings) ?? inputSettings;
 

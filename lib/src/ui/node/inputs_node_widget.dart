@@ -16,7 +16,14 @@ class InputsNodeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final form = context.read<WoForm>();
 
-    final input = form.getInput(path: inputPath)! as InputsNode;
+    final input = form.getInput(path: inputPath);
+    if (input is! InputsNode) {
+      throw ArgumentError(
+        'Wrong input at path "$inputPath". '
+        'Expected InputsNode, got ${input.runtimeType}',
+      );
+    }
+
     final inputSettings = input.fieldSettings;
     final mergedSettings = settings?.merge(inputSettings) ?? inputSettings;
 
