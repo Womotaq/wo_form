@@ -76,8 +76,6 @@ class BooleanField extends StatelessWidget {
             inputId: input.id,
             value: !value,
           ),
-          visualDensity: VisualDensity.compact,
-          contentPadding: EdgeInsets.zero,
         );
       },
     );

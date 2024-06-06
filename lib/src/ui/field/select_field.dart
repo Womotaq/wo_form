@@ -85,8 +85,6 @@ class SelectField<S> extends StatelessWidget {
                   if (mergedSettings.labelText != null)
                     ListTile(
                       title: Text(mergedSettings.labelText!),
-                      visualDensity: VisualDensity.compact,
-                      contentPadding: EdgeInsets.zero,
                     ),
                   ...input.availibleValues.map(
                     (value) => ListTile(
@@ -108,8 +106,6 @@ class SelectField<S> extends StatelessWidget {
                         selectedValues: selectedValues,
                         value: value,
                       ),
-                      visualDensity: VisualDensity.compact,
-                      contentPadding: EdgeInsets.zero,
                     ),
                   ),
                 ],
@@ -128,8 +124,6 @@ class SelectField<S> extends StatelessWidget {
                   valueBuilder: valueBuilder,
                   previewBuilder: previewBuilder,
                 ),
-                visualDensity: VisualDensity.compact,
-                contentPadding: EdgeInsets.zero,
               ),
           };
         }
@@ -147,8 +141,6 @@ class SelectField<S> extends StatelessWidget {
             selectedValues: selectedValues.whereType(),
             valueBuilder: valueBuilder,
           ),
-          visualDensity: VisualDensity.compact,
-          contentPadding: EdgeInsets.zero,
         );
       },
     );

@@ -31,19 +31,12 @@ class InputsNodeWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (mergedSettings.labelText != null)
-          ListTile(
+          ExpansionTile(
             title: Text(mergedSettings.labelText!),
-            visualDensity: VisualDensity.compact,
-            contentPadding: EdgeInsets.zero,
-          ),
-        Padding(
-          padding: const EdgeInsets.only(left: 16),
-          child: Column(
             children: input.inputs
                 .map((i) => i.toWidget(parentPath: inputPath))
                 .toList(),
           ),
-        ),
       ],
     );
   }

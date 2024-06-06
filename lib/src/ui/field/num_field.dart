@@ -80,8 +80,6 @@ class _NumFieldState extends State<NumField> {
             ),
             axis: Axis.horizontal,
           ),
-          visualDensity: VisualDensity.compact,
-          contentPadding: EdgeInsets.zero,
         );
       },
     );

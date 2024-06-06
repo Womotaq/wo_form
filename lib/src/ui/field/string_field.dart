@@ -68,48 +68,50 @@ class _StringFieldState extends State<StringField> {
                 ? null
                 : input.getInvalidExplanation(text, context.formL10n);
 
-            return TextFormField(
-              controller: textEditingController,
-              onChanged: (value) => valuesCubit.onValueChanged(
-                inputId: input.id,
-                value: value,
-              ),
-              onFieldSubmitted:
-                  (mergedSettings.submitFormOnFieldSubmitted ?? false)
-                      ? (value) => valuesCubit.submit()
-                      : null,
-              keyboardType: mergedSettings.keyboardType,
-              obscureText: obscureText,
-              autocorrect: mergedSettings.autocorrect ?? true,
-              autofillHints: mergedSettings.autofillHints,
-              autofocus: mergedSettings.autofocus ?? false,
-              textInputAction: mergedSettings.textInputAction,
-              textCapitalization:
-                  mergedSettings.textCapitalization ?? TextCapitalization.none,
-              maxLines: mergedSettings.maxLines,
-              decoration: InputDecoration(
-                labelText: mergedSettings.labelText,
-                hintText: mergedSettings.hintText,
-                errorText: errorText,
-                errorMaxLines: 10,
-                suffixIcon: switch (mergedSettings.action) {
-                  null => null,
-                  StringFieldAction.clear => IconButton(
-                      onPressed: () => valuesCubit.onValueChanged(
-                        inputId: input.id,
-                        value: null,
+            return ListTile(
+              title: TextFormField(
+                controller: textEditingController,
+                onChanged: (value) => valuesCubit.onValueChanged(
+                  inputId: input.id,
+                  value: value,
+                ),
+                onFieldSubmitted:
+                    (mergedSettings.submitFormOnFieldSubmitted ?? false)
+                        ? (value) => valuesCubit.submit()
+                        : null,
+                keyboardType: mergedSettings.keyboardType,
+                obscureText: obscureText,
+                autocorrect: mergedSettings.autocorrect ?? true,
+                autofillHints: mergedSettings.autofillHints,
+                autofocus: mergedSettings.autofocus ?? false,
+                textInputAction: mergedSettings.textInputAction,
+                textCapitalization: mergedSettings.textCapitalization ??
+                    TextCapitalization.none,
+                maxLines: mergedSettings.maxLines,
+                decoration: InputDecoration(
+                  labelText: mergedSettings.labelText,
+                  hintText: mergedSettings.hintText,
+                  errorText: errorText,
+                  errorMaxLines: 10,
+                  suffixIcon: switch (mergedSettings.action) {
+                    null => null,
+                    StringFieldAction.clear => IconButton(
+                        onPressed: () => valuesCubit.onValueChanged(
+                          inputId: input.id,
+                          value: null,
+                        ),
+                        icon: const Icon(Icons.clear),
                       ),
-                      icon: const Icon(Icons.clear),
-                    ),
-                  StringFieldAction.obscure => IconButton(
-                      onPressed: () => setState(() {
-                        obscureText = !obscureText;
-                      }),
-                      icon: obscureText
-                          ? const Icon(Icons.visibility_off)
-                          : const Icon(Icons.visibility),
-                    ),
-                },
+                    StringFieldAction.obscure => IconButton(
+                        onPressed: () => setState(() {
+                          obscureText = !obscureText;
+                        }),
+                        icon: obscureText
+                            ? const Icon(Icons.visibility_off)
+                            : const Icon(Icons.visibility),
+                      ),
+                  },
+                ),
               ),
             );
           },
