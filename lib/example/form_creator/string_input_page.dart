@@ -41,7 +41,17 @@ class StringInputPage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute<void>(
-                        builder: (context) => const ScreenB(),
+                        builder: (_) => ScreenB(
+                          form: WoForm(
+                            inputs: [
+                              StringInput.fromJson(
+                                stringInputForm.valueToJson(
+                                  context.read<WoFormValuesCubit>().state,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     );
                   }
@@ -73,16 +83,44 @@ class StringInputPage extends StatelessWidget {
 }
 
 class ScreenB extends StatelessWidget {
-  const ScreenB({super.key});
+  const ScreenB({
+    required this.form,
+    super.key,
+  });
+
+  final WoForm form;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Screen B'),
+        title: const Text('Utilisation du champ texte'),
       ),
-      body: const Center(
-        child: Text('Welcome to Screen B'),
+      body: Center(
+        child: WoFormInitializer(
+          form: form,
+          onSubmitting: () {},
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              children: [
+                ...form.inputs.map(
+                  (e) => e.toWidget(parentPath: null),
+                ),
+                WoGap.xxxlarge,
+                const Text('Json :'),
+                WoGap.medium,
+                BlocBuilder<WoFormValuesCubit, Map<String, dynamic>>(
+                  builder: (context, values) {
+                    return Text(
+                      readableJson(form.valueToJson(values)),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

@@ -75,10 +75,6 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
 
     if (slashIndex == -1) return inputs.firstWhereOrNull((i) => i.id == path);
 
-    print(path.substring(0, slashIndex));
-    print(path.substring(slashIndex + 1));
-    print(nodes.firstWhereOrNull((i) => i.id == path.substring(0, slashIndex)));
-
     return nodes
         .firstWhereOrNull((i) => i.id == path.substring(0, slashIndex))
         ?.getInput(path: path.substring(slashIndex + 1));

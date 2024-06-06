@@ -38,8 +38,8 @@ class _NumFieldState extends State<NumField> {
     final input = form.getInput(path: widget.inputPath);
     if (input is! NumInput) {
       throw ArgumentError(
-        'Wrong input at path "${widget.inputPath}". '
-        'Expected NumInput, got ${input.runtimeType}',
+        'Expected <NumInput> at path: "${widget.inputPath}", '
+        'found: <${input.runtimeType}>',
       );
     }
 
@@ -48,7 +48,16 @@ class _NumFieldState extends State<NumField> {
         widget.settings?.merge(inputSettings) ?? inputSettings;
 
     return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, num?>(
-      selector: (values) => values[input.id] as num?,
+      selector: (values) {
+        final value = values[input.id];
+        if (value is! num?) {
+          throw ArgumentError(
+            'Expected <num?> at inputId: "${input.id}", '
+            'found: <${value.runtimeType}>',
+          );
+        }
+        return value;
+      },
       builder: (context, count) {
         final countText = count?.toString() ?? '';
         if (countController.text != countText) {

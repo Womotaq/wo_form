@@ -21,8 +21,8 @@ class SelectField<S> extends StatelessWidget {
     final input = form.getInput(path: inputPath);
     if (input is! SelectInput<S>) {
       throw ArgumentError(
-        'Wrong input at path "$inputPath". '
-        'Expected SelectInput<$S>, got ${input.runtimeType}',
+        'Expected <SelectInput<$S>> at path: "$inputPath", '
+        'found: <${input.runtimeType}>',
       );
     }
 
@@ -66,7 +66,16 @@ class SelectField<S> extends StatelessWidget {
     final mergedSettings = settings?.merge(inputSettings) ?? inputSettings;
 
     return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, List<S>>(
-      selector: (values) => (values[input.id] as List<S>?) ?? [],
+      selector: (values) {
+        final value = values[input.id];
+        if (value is! List<S>?) {
+          throw ArgumentError(
+            'Expected <List<$S>?> at inputId: "${input.id}", '
+            'found: <${value.runtimeType}>',
+          );
+        }
+        return value ?? [];
+      },
       builder: (context, selectedValues) {
         if (input.maxCount == 1) {
           return switch (mergedSettings.displayMode) {

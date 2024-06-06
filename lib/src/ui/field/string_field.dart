@@ -28,14 +28,13 @@ class _StringFieldState extends State<StringField> {
     final input = context.read<WoForm>().getInput(path: widget.inputPath);
     if (input is! StringInput) {
       throw ArgumentError(
-        'Wrong input at path "${widget.inputPath}". '
-        'Expected StringInput, got ${input.runtimeType}',
+        'Expected <StringInput> at path: "${widget.inputPath}", '
+        'found: <${input.runtimeType}>',
       );
     }
 
     final inputSettings = input.fieldSettings;
-    mergedSettings =
-        widget.settings?.merge(inputSettings) ?? inputSettings;
+    mergedSettings = widget.settings?.merge(inputSettings) ?? inputSettings;
 
     obscureText = mergedSettings.obscureText ?? false;
   }
@@ -50,7 +49,16 @@ class _StringFieldState extends State<StringField> {
     return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
       builder: (context, status) {
         return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, String>(
-          selector: (values) => (values[input.id] as String?) ?? '',
+          selector: (values) {
+            final value = values[input.id];
+            if (value is! String?) {
+              throw ArgumentError(
+                'Expected <String?> at inputId: "${input.id}", '
+                'found: <${value.runtimeType}>',
+              );
+            }
+            return value ?? '';
+          },
           builder: (context, text) {
             if (text != textEditingController.text) {
               textEditingController.text = text;

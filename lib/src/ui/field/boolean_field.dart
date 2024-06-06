@@ -20,8 +20,8 @@ class BooleanField extends StatelessWidget {
     final input = form.getInput(path: inputPath);
     if (input is! BooleanInput) {
       throw ArgumentError(
-        'Wrong input at path "$inputPath". '
-        'Expected BooleanInput, got ${input.runtimeType}',
+        'Expected <BooleanInput> at path: "$inputPath", '
+        'found: <${input.runtimeType}>',
       );
     }
 
@@ -31,17 +31,13 @@ class BooleanField extends StatelessWidget {
     return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, bool>(
       selector: (values) {
         final value = values[input.id];
-        try {
-          return (value as bool?) ?? false;
-        } catch (e) {
-          // TODO
-          print(e);
-          print(e.runtimeType);
+        if (value is! bool?) {
           throw ArgumentError(
-            'Expected a boolean at inputId ${input.id}, '
-            'found: <${value.runtimeType}>$value',
+            'Expected <bool?> at inputId: "${input.id}", '
+            'found: <${value.runtimeType}>',
           );
         }
+        return value ?? false;
       },
       builder: (context, value) {
         final onOffType = switch (mergedSettings.onOffType) {

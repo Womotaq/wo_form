@@ -19,8 +19,8 @@ class InputsNodeWidget extends StatelessWidget {
     final input = form.getInput(path: inputPath);
     if (input is! InputsNode) {
       throw ArgumentError(
-        'Wrong input at path "$inputPath". '
-        'Expected InputsNode, got ${input.runtimeType}',
+        'Expected <InputsNode> at path: "$inputPath", '
+        'found: <${input.runtimeType}>',
       );
     }
 
