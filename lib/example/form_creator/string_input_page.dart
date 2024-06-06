@@ -46,17 +46,21 @@ class StringInputPage extends StatelessWidget {
                     );
                   }
                 },
-                child: IconButton(
-                  icon: const Icon(Icons.check),
-                  onPressed: context.read<WoFormValuesCubit>().submit,
-                  style: IconButton.styleFrom(
-                    backgroundColor:
-                        Theme.of(context).colorScheme.primaryContainer,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    minimumSize: const Size(64, 64),
-                  ),
+                child: Builder(
+                  builder: (context) {
+                    return IconButton(
+                      icon: const Icon(Icons.check),
+                      onPressed: context.read<WoFormValuesCubit>().submit,
+                      style: IconButton.styleFrom(
+                        backgroundColor:
+                            Theme.of(context).colorScheme.primaryContainer,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        minimumSize: const Size(64, 64),
+                      ),
+                    );
+                  },
                 ),
               ),
               WoGap.xxxlarge,
