@@ -164,7 +164,7 @@ sealed class WoFormInput
 
   @override
   Widget toField<T extends WoFormValuesCubit>({required String? parentPath}) {
-    final path = parentPath == null ? id : '$parentPath/id';
+    final path = parentPath == null ? id : '$parentPath/$id';
     switch (this) {
       case BooleanInput():
         return BooleanField(inputPath: path);
@@ -295,7 +295,7 @@ class SelectInput<T>
 
   @override
   Widget toField<C extends WoFormValuesCubit>({required String? parentPath}) =>
-      SelectField<T>(inputPath: parentPath == null ? id : '$parentPath/id');
+      SelectField<T>(inputPath: parentPath == null ? id : '$parentPath/$id');
 
   @override
   Object? valueToJson(dynamic value) => _selectedValuesToJson<T>(
