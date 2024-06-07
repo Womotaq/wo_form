@@ -39,13 +39,13 @@ class ReportPage extends StatelessWidget {
             availibleValues: ReportType.values,
             minCount: 1,
             maxCount: 1,
-            fieldSettings: SelectFieldSettings(
+            uiSettings: SelectFieldSettings(
               displayMode: SelectFieldDisplayMode.tiles,
             ),
           ),
           StringInput(
             id: ReportForm.messageId,
-            fieldSettings: StringFieldSettings(
+            uiSettings: StringFieldSettings(
               hintText: 'Dites-en plus !',
               textCapitalization: TextCapitalization.sentences,
               maxLines: 5,
@@ -53,7 +53,7 @@ class ReportPage extends StatelessWidget {
           ),
           BooleanInput(
             id: ReportForm.blockId,
-            fieldSettings: BooleanFieldSettings(
+            uiSettings: BooleanFieldSettings(
               labelText: 'Bloquer cette raclure ?',
               onOffType: BooleanFieldOnOffType.checkbox,
             ),

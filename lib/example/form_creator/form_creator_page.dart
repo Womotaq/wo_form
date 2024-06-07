@@ -12,8 +12,8 @@ final woFormCreator = WoForm(
       id: 'inputs',
       exportType: NodeExportType.list,
       inputs: [
-        stringInputNode,
-        numInputNode,
+        createStringInputNode(),
+        createNumInputNode(),
       ],
     ),
   ],

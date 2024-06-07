@@ -32,24 +32,23 @@ class BooleanFieldSettings with _$BooleanFieldSettings {
         );
 }
 
-// TODO : rename ?
 @freezed
-class MapFieldSettings with _$MapFieldSettings {
-  const factory MapFieldSettings({
+class NodeFieldSettings with _$NodeFieldSettings {
+  const factory NodeFieldSettings({
     String? labelText,
-  }) = _MapFieldSettings;
+  }) = _NodeFieldSettings;
 
-  const MapFieldSettings._();
+  const NodeFieldSettings._();
 
-  factory MapFieldSettings.fromJson(Map<String, dynamic> json) =>
-      _$MapFieldSettingsFromJson(json);
+  factory NodeFieldSettings.fromJson(Map<String, dynamic> json) =>
+      _$NodeFieldSettingsFromJson(json);
 
-  static Map<String, dynamic> staticToJson(MapFieldSettings object) =>
+  static Map<String, dynamic> staticToJson(NodeFieldSettings object) =>
       object.toJson();
 
-  MapFieldSettings merge(MapFieldSettings? other) => other == null
+  NodeFieldSettings merge(NodeFieldSettings? other) => other == null
       ? this
-      : MapFieldSettings(
+      : NodeFieldSettings(
           labelText: labelText ?? other.labelText,
         );
 }

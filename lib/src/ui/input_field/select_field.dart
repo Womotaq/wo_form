@@ -60,7 +60,7 @@ class SelectField<S> extends StatelessWidget {
     final valuesCubit = context.read<WoFormValuesCubit>();
 
     final input = getInput(form);
-    final inputSettings = input.fieldSettings;
+    final inputSettings = input.uiSettings;
     final mergedSettings = settings?.merge(inputSettings) ?? inputSettings;
 
     return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, List<S>>(
@@ -166,7 +166,7 @@ class SelectStringField extends SelectField<String> {
       minCount: selectStringInput.minCount,
       defaultValues: selectStringInput.defaultValue,
       availibleValues: selectStringInput.availibleValues,
-      fieldSettings: selectStringInput.fieldSettings,
+      uiSettings: selectStringInput.uiSettings,
       toJsonT: (value) => value,
     );
   }

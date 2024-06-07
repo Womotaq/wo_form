@@ -25,7 +25,7 @@ class BooleanField extends StatelessWidget {
       );
     }
 
-    final inputSettings = input.fieldSettings;
+    final inputSettings = input.uiSettings;
     final mergedSettings = settings?.merge(inputSettings) ?? inputSettings;
 
     return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, bool>(

@@ -6,7 +6,7 @@ void main() {
   final input = StringInput(
     id: 'name',
     regexPattern: RegexPattern.username.value,
-    fieldSettings: StringFieldSettings(
+    uiSettings: StringFieldSettings(
       labelText: 'Type your username',
       submitFormOnFieldSubmitted: true,
       invalidRegexMessage: FormLocalizationsFr()
@@ -19,7 +19,7 @@ void main() {
     'isRequired': false,
     'regexPattern':
         r'^(?!.*[_\.\-]{2})@?[a-zA-Z0-9][a-zA-Z0-9_\.\-]+[a-zA-Z0-9]$',
-    'fieldSettings': {
+    'uiSettings': {
       'labelText': 'Type your username',
       'action': null,
       'submitFormOnFieldSubmitted': true,

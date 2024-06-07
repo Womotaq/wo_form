@@ -57,14 +57,14 @@ sealed class WoFormInput
     @Default(false) bool isRequired,
     @JsonKey(toJson: BooleanFieldSettings.staticToJson)
     @Default(BooleanFieldSettings())
-    BooleanFieldSettings fieldSettings,
+    BooleanFieldSettings uiSettings,
   }) = BooleanInput;
 
   const factory WoFormInput.num({
     required String id,
     num? defaultValue,
     @Default(false) bool isRequired,
-    @Default(NumFieldSettings()) NumFieldSettings fieldSettings,
+    @Default(NumFieldSettings()) NumFieldSettings uiSettings,
   }) = NumInput;
 
   const factory WoFormInput.selectString({
@@ -73,7 +73,7 @@ sealed class WoFormInput
     @Default([]) List<String> defaultValue,
     @Default([]) List<String> availibleValues,
     @Default(0) int minCount,
-    @Default(SelectFieldSettings()) SelectFieldSettings fieldSettings,
+    @Default(SelectFieldSettings()) SelectFieldSettings uiSettings,
   }) = SelectStringInput;
 
   const factory WoFormInput.string({
@@ -83,7 +83,7 @@ sealed class WoFormInput
     String? regexPattern,
     @JsonKey(toJson: StringFieldSettings.staticToJson)
     @Default(StringFieldSettings())
-    StringFieldSettings fieldSettings,
+    StringFieldSettings uiSettings,
   }) = StringInput;
 
   const WoFormInput._();
@@ -151,10 +151,10 @@ sealed class WoFormInput
 
       case StringInput(
           regexPattern: final regexPattern,
-          fieldSettings: final fieldSettings,
+          uiSettings: final uiSettings,
         ):
         if (error is InvalidInputError && regexPattern != null) {
-          return fieldSettings.invalidRegexMessage;
+          return uiSettings.invalidRegexMessage;
         }
     }
 
@@ -201,7 +201,7 @@ class SelectInput<T>
     @Default(0) int minCount,
     @Default([]) List<T> defaultValues,
     @Default([]) List<T> availibleValues,
-    @Default(SelectFieldSettings()) SelectFieldSettings fieldSettings,
+    @Default(SelectFieldSettings()) SelectFieldSettings uiSettings,
     @JsonKey(includeToJson: false, includeFromJson: false)
     Object? Function(T)? toJsonT,
   }) = _SelectInput<T>;

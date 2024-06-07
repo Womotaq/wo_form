@@ -203,33 +203,33 @@ abstract class _BooleanFieldSettings extends BooleanFieldSettings {
       get copyWith => throw _privateConstructorUsedError;
 }
 
-MapFieldSettings _$MapFieldSettingsFromJson(Map<String, dynamic> json) {
-  return _MapFieldSettings.fromJson(json);
+NodeFieldSettings _$NodeFieldSettingsFromJson(Map<String, dynamic> json) {
+  return _NodeFieldSettings.fromJson(json);
 }
 
 /// @nodoc
-mixin _$MapFieldSettings {
+mixin _$NodeFieldSettings {
   String? get labelText => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $MapFieldSettingsCopyWith<MapFieldSettings> get copyWith =>
+  $NodeFieldSettingsCopyWith<NodeFieldSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $MapFieldSettingsCopyWith<$Res> {
-  factory $MapFieldSettingsCopyWith(
-          MapFieldSettings value, $Res Function(MapFieldSettings) then) =
-      _$MapFieldSettingsCopyWithImpl<$Res, MapFieldSettings>;
+abstract class $NodeFieldSettingsCopyWith<$Res> {
+  factory $NodeFieldSettingsCopyWith(
+          NodeFieldSettings value, $Res Function(NodeFieldSettings) then) =
+      _$NodeFieldSettingsCopyWithImpl<$Res, NodeFieldSettings>;
   @useResult
   $Res call({String? labelText});
 }
 
 /// @nodoc
-class _$MapFieldSettingsCopyWithImpl<$Res, $Val extends MapFieldSettings>
-    implements $MapFieldSettingsCopyWith<$Res> {
-  _$MapFieldSettingsCopyWithImpl(this._value, this._then);
+class _$NodeFieldSettingsCopyWithImpl<$Res, $Val extends NodeFieldSettings>
+    implements $NodeFieldSettingsCopyWith<$Res> {
+  _$NodeFieldSettingsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -251,22 +251,22 @@ class _$MapFieldSettingsCopyWithImpl<$Res, $Val extends MapFieldSettings>
 }
 
 /// @nodoc
-abstract class _$$MapFieldSettingsImplCopyWith<$Res>
-    implements $MapFieldSettingsCopyWith<$Res> {
-  factory _$$MapFieldSettingsImplCopyWith(_$MapFieldSettingsImpl value,
-          $Res Function(_$MapFieldSettingsImpl) then) =
-      __$$MapFieldSettingsImplCopyWithImpl<$Res>;
+abstract class _$$NodeFieldSettingsImplCopyWith<$Res>
+    implements $NodeFieldSettingsCopyWith<$Res> {
+  factory _$$NodeFieldSettingsImplCopyWith(_$NodeFieldSettingsImpl value,
+          $Res Function(_$NodeFieldSettingsImpl) then) =
+      __$$NodeFieldSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? labelText});
 }
 
 /// @nodoc
-class __$$MapFieldSettingsImplCopyWithImpl<$Res>
-    extends _$MapFieldSettingsCopyWithImpl<$Res, _$MapFieldSettingsImpl>
-    implements _$$MapFieldSettingsImplCopyWith<$Res> {
-  __$$MapFieldSettingsImplCopyWithImpl(_$MapFieldSettingsImpl _value,
-      $Res Function(_$MapFieldSettingsImpl) _then)
+class __$$NodeFieldSettingsImplCopyWithImpl<$Res>
+    extends _$NodeFieldSettingsCopyWithImpl<$Res, _$NodeFieldSettingsImpl>
+    implements _$$NodeFieldSettingsImplCopyWith<$Res> {
+  __$$NodeFieldSettingsImplCopyWithImpl(_$NodeFieldSettingsImpl _value,
+      $Res Function(_$NodeFieldSettingsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -274,7 +274,7 @@ class __$$MapFieldSettingsImplCopyWithImpl<$Res>
   $Res call({
     Object? labelText = freezed,
   }) {
-    return _then(_$MapFieldSettingsImpl(
+    return _then(_$NodeFieldSettingsImpl(
       labelText: freezed == labelText
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
@@ -285,25 +285,25 @@ class __$$MapFieldSettingsImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$MapFieldSettingsImpl extends _MapFieldSettings {
-  const _$MapFieldSettingsImpl({this.labelText}) : super._();
+class _$NodeFieldSettingsImpl extends _NodeFieldSettings {
+  const _$NodeFieldSettingsImpl({this.labelText}) : super._();
 
-  factory _$MapFieldSettingsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$MapFieldSettingsImplFromJson(json);
+  factory _$NodeFieldSettingsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NodeFieldSettingsImplFromJson(json);
 
   @override
   final String? labelText;
 
   @override
   String toString() {
-    return 'MapFieldSettings(labelText: $labelText)';
+    return 'NodeFieldSettings(labelText: $labelText)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MapFieldSettingsImpl &&
+            other is _$NodeFieldSettingsImpl &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText));
   }
@@ -315,31 +315,31 @@ class _$MapFieldSettingsImpl extends _MapFieldSettings {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$MapFieldSettingsImplCopyWith<_$MapFieldSettingsImpl> get copyWith =>
-      __$$MapFieldSettingsImplCopyWithImpl<_$MapFieldSettingsImpl>(
+  _$$NodeFieldSettingsImplCopyWith<_$NodeFieldSettingsImpl> get copyWith =>
+      __$$NodeFieldSettingsImplCopyWithImpl<_$NodeFieldSettingsImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$MapFieldSettingsImplToJson(
+    return _$$NodeFieldSettingsImplToJson(
       this,
     );
   }
 }
 
-abstract class _MapFieldSettings extends MapFieldSettings {
-  const factory _MapFieldSettings({final String? labelText}) =
-      _$MapFieldSettingsImpl;
-  const _MapFieldSettings._() : super._();
+abstract class _NodeFieldSettings extends NodeFieldSettings {
+  const factory _NodeFieldSettings({final String? labelText}) =
+      _$NodeFieldSettingsImpl;
+  const _NodeFieldSettings._() : super._();
 
-  factory _MapFieldSettings.fromJson(Map<String, dynamic> json) =
-      _$MapFieldSettingsImpl.fromJson;
+  factory _NodeFieldSettings.fromJson(Map<String, dynamic> json) =
+      _$NodeFieldSettingsImpl.fromJson;
 
   @override
   String? get labelText;
   @override
   @JsonKey(ignore: true)
-  _$$MapFieldSettingsImplCopyWith<_$MapFieldSettingsImpl> get copyWith =>
+  _$$NodeFieldSettingsImplCopyWith<_$NodeFieldSettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

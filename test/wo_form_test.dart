@@ -17,7 +17,7 @@ void main() {
         'defaultValue': null,
         'isRequired': false,
         'regexPattern': null,
-        'fieldSettings': {
+        'uiSettings': {
           'labelText': null,
           'action': null,
           'submitFormOnFieldSubmitted': null,

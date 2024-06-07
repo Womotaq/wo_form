@@ -2,144 +2,144 @@ import 'package:flutter/material.dart';
 import 'package:wo_form/src/model/json_converter/text_input_type.dart';
 import 'package:wo_form/wo_form.dart';
 
-final stringInputNode = InputsNode(
-  id: 'stringInput',
-  fieldSettings: const MapFieldSettings(
-    labelText: 'StringInput',
-  ),
-  inputs: [
-    const StringInput(
-      id: 'id',
-      isRequired: true,
-      fieldSettings: StringFieldSettings(
-        labelText: 'Clef',
-      ),
-    ),
-    const StringInput(
-      id: 'defaultValue',
-      fieldSettings: StringFieldSettings(
-        labelText: 'Valeur par défaut',
-      ),
-    ),
-    const BooleanInput(
-      id: 'isRequired',
-      fieldSettings: BooleanFieldSettings(
-        labelText: 'Requis',
-      ),
-    ),
-    SelectInput(
-      id: 'regexPattern',
-      availibleValues: RegexPattern.values,
-      maxCount: 1,
-      fieldSettings: const SelectFieldSettings(
-        labelText: 'Regex pattern',
-        displayMode: SelectFieldDisplayMode.selectChip,
-      ),
-      toJsonT: (regex) => regex.value,
-    ),
-    InputsNode(
-      id: 'fieldSettings',
-      fieldSettings: const MapFieldSettings(
-        labelText: 'Interface',
+InputsNode createStringInputNode({String id = 'stringInput'}) => InputsNode(
+      id: id,
+      uiSettings: const NodeFieldSettings(
+        labelText: 'StringInput',
       ),
       inputs: [
         const StringInput(
-          id: 'labelText',
-          fieldSettings: StringFieldSettings(
-            labelText: 'Titre',
+          id: 'id',
+          isRequired: true,
+          uiSettings: StringFieldSettings(
+            labelText: 'Clef',
           ),
         ),
         const StringInput(
-          id: 'hintText',
-          fieldSettings: StringFieldSettings(
-            labelText: 'Aide',
+          id: 'defaultValue',
+          uiSettings: StringFieldSettings(
+            labelText: 'Valeur par défaut',
           ),
         ),
-        const SelectInput<StringFieldAction>(
-          id: 'action',
-          availibleValues: StringFieldAction.values,
+        const BooleanInput(
+          id: 'isRequired',
+          uiSettings: BooleanFieldSettings(
+            labelText: 'Requis',
+          ),
+        ),
+        SelectInput(
+          id: 'regexPattern',
+          availibleValues: RegexPattern.values,
           maxCount: 1,
-          fieldSettings: SelectFieldSettings(
-            labelText: 'Action à droite du champ',
+          uiSettings: const SelectFieldSettings(
+            labelText: 'Regex pattern',
             displayMode: SelectFieldDisplayMode.selectChip,
           ),
+          toJsonT: (regex) => regex.value,
         ),
-        const BooleanInput(
-          id: 'submitFormOnFieldSubmitted',
-          fieldSettings: BooleanFieldSettings(
-            labelText: 'Envoyer le formulaire quand le champ est validé',
+        InputsNode(
+          id: 'uiSettings',
+          uiSettings: const NodeFieldSettings(
+            labelText: 'Interface',
           ),
-        ),
-        SelectInput<TextInputType>(
-          id: 'keyboardType',
-          availibleValues: TextInputType.values,
-          maxCount: 1,
-          fieldSettings: const SelectFieldSettings(
-            labelText: 'Type de text',
-            displayMode: SelectFieldDisplayMode.selectChip,
-          ),
-          toJsonT: (value) => const TextInputTypeConverter().toJson(value),
-        ),
-        const BooleanInput(
-          id: 'obscureText',
-          fieldSettings: BooleanFieldSettings(
-            labelText: 'Cacher le texte',
-          ),
-        ),
-        const BooleanInput(
-          id: 'autocorrect',
-          fieldSettings: BooleanFieldSettings(
-            labelText: "Autoriser l'auto-correction",
-          ),
-        ),
-        const SelectStringInput(
-          id: 'autofillHints',
-          availibleValues: AutofillHintsX.all,
-          maxCount: null,
-          fieldSettings: SelectFieldSettings(
-            labelText: 'Auto-remplissage',
-          ),
-        ),
-        const BooleanInput(
-          id: 'autofocus',
-          fieldSettings: BooleanFieldSettings(
-            labelText: 'Auto-focus',
-          ),
-        ),
-        const SelectInput<TextInputAction>(
-          id: 'textInputAction',
-          availibleValues: TextInputAction.values,
-          maxCount: 1,
-          fieldSettings: SelectFieldSettings(
-            labelText: "Bouton 'Entrée' du clavier",
-            displayMode: SelectFieldDisplayMode.selectChip,
-          ),
-        ),
-        const SelectInput<TextCapitalization>(
-          id: 'textCapitalization',
-          availibleValues: TextCapitalization.values,
-          maxCount: 1,
-          fieldSettings: SelectFieldSettings(
-            labelText: 'Gestion des majuscules',
-            // displayMode: SelectFieldDisplayMode.selectChip,
-          ),
-        ),
-        const NumInput(
-          id: 'maxLines',
-          fieldSettings: NumFieldSettings(
-            labelText: 'Nombre maximum de lignes',
-          ),
-        ),
-        const StringInput(
-          id: 'invalidRegexMessage',
-          fieldSettings: StringFieldSettings(
-            labelText: 'Message en cas de regex invalide',
-          ),
+          inputs: [
+            const StringInput(
+              id: 'labelText',
+              uiSettings: StringFieldSettings(
+                labelText: 'Titre',
+              ),
+            ),
+            const StringInput(
+              id: 'hintText',
+              uiSettings: StringFieldSettings(
+                labelText: 'Aide',
+              ),
+            ),
+            const SelectInput<StringFieldAction>(
+              id: 'action',
+              availibleValues: StringFieldAction.values,
+              maxCount: 1,
+              uiSettings: SelectFieldSettings(
+                labelText: 'Action à droite du champ',
+                displayMode: SelectFieldDisplayMode.selectChip,
+              ),
+            ),
+            const BooleanInput(
+              id: 'submitFormOnFieldSubmitted',
+              uiSettings: BooleanFieldSettings(
+                labelText: 'Envoyer le formulaire quand le champ est validé',
+              ),
+            ),
+            SelectInput<TextInputType>(
+              id: 'keyboardType',
+              availibleValues: TextInputType.values,
+              maxCount: 1,
+              uiSettings: const SelectFieldSettings(
+                labelText: 'Type de text',
+                displayMode: SelectFieldDisplayMode.selectChip,
+              ),
+              toJsonT: (value) => const TextInputTypeConverter().toJson(value),
+            ),
+            const BooleanInput(
+              id: 'obscureText',
+              uiSettings: BooleanFieldSettings(
+                labelText: 'Cacher le texte',
+              ),
+            ),
+            const BooleanInput(
+              id: 'autocorrect',
+              uiSettings: BooleanFieldSettings(
+                labelText: "Autoriser l'auto-correction",
+              ),
+            ),
+            const SelectStringInput(
+              id: 'autofillHints',
+              availibleValues: AutofillHintsX.all,
+              maxCount: null,
+              uiSettings: SelectFieldSettings(
+                labelText: 'Auto-remplissage',
+              ),
+            ),
+            const BooleanInput(
+              id: 'autofocus',
+              uiSettings: BooleanFieldSettings(
+                labelText: 'Auto-focus',
+              ),
+            ),
+            const SelectInput<TextInputAction>(
+              id: 'textInputAction',
+              availibleValues: TextInputAction.values,
+              maxCount: 1,
+              uiSettings: SelectFieldSettings(
+                labelText: "Bouton 'Entrée' du clavier",
+                displayMode: SelectFieldDisplayMode.selectChip,
+              ),
+            ),
+            const SelectInput<TextCapitalization>(
+              id: 'textCapitalization',
+              availibleValues: TextCapitalization.values,
+              maxCount: 1,
+              uiSettings: SelectFieldSettings(
+                labelText: 'Gestion des majuscules',
+                // displayMode: SelectFieldDisplayMode.selectChip,
+              ),
+            ),
+            const NumInput(
+              id: 'maxLines',
+              uiSettings: NumFieldSettings(
+                labelText: 'Nombre maximum de lignes',
+              ),
+            ),
+            const StringInput(
+              id: 'invalidRegexMessage',
+              uiSettings: StringFieldSettings(
+                labelText: 'Message en cas de regex invalide',
+              ),
+            ),
+          ],
         ),
       ],
-    ),
-  ],
-  unmodifiableValuesJson: {
-    'runtimeType': 'string',
-  },
-);
+      unmodifiableValuesJson: {
+        'runtimeType': 'string',
+      },
+    );

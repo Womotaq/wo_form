@@ -732,7 +732,7 @@ mixin _$WoFormInput {
   String get id => throw _privateConstructorUsedError;
   Object? get defaultValue => throw _privateConstructorUsedError;
   @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-  Object get fieldSettings => throw _privateConstructorUsedError;
+  Object get uiSettings => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
@@ -740,10 +740,10 @@ mixin _$WoFormInput {
             bool? defaultValue,
             bool isRequired,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings fieldSettings)
+            BooleanFieldSettings uiSettings)
         boolean,
     required TResult Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings fieldSettings)
+            NumFieldSettings uiSettings)
         num,
     required TResult Function(
             String id,
@@ -751,7 +751,7 @@ mixin _$WoFormInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings fieldSettings)
+            SelectFieldSettings uiSettings)
         selectString,
     required TResult Function(
             String id,
@@ -759,7 +759,7 @@ mixin _$WoFormInput {
             bool isRequired,
             String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings fieldSettings)
+            StringFieldSettings uiSettings)
         string,
   }) =>
       throw _privateConstructorUsedError;
@@ -770,10 +770,10 @@ mixin _$WoFormInput {
             bool? defaultValue,
             bool isRequired,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings fieldSettings)?
+            BooleanFieldSettings uiSettings)?
         boolean,
     TResult? Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings fieldSettings)?
+            NumFieldSettings uiSettings)?
         num,
     TResult? Function(
             String id,
@@ -781,7 +781,7 @@ mixin _$WoFormInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings fieldSettings)?
+            SelectFieldSettings uiSettings)?
         selectString,
     TResult? Function(
             String id,
@@ -789,7 +789,7 @@ mixin _$WoFormInput {
             bool isRequired,
             String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings fieldSettings)?
+            StringFieldSettings uiSettings)?
         string,
   }) =>
       throw _privateConstructorUsedError;
@@ -800,10 +800,10 @@ mixin _$WoFormInput {
             bool? defaultValue,
             bool isRequired,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings fieldSettings)?
+            BooleanFieldSettings uiSettings)?
         boolean,
     TResult Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings fieldSettings)?
+            NumFieldSettings uiSettings)?
         num,
     TResult Function(
             String id,
@@ -811,7 +811,7 @@ mixin _$WoFormInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings fieldSettings)?
+            SelectFieldSettings uiSettings)?
         selectString,
     TResult Function(
             String id,
@@ -819,7 +819,7 @@ mixin _$WoFormInput {
             bool isRequired,
             String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings fieldSettings)?
+            StringFieldSettings uiSettings)?
         string,
     required TResult orElse(),
   }) =>
@@ -901,9 +901,9 @@ abstract class _$$BooleanInputImplCopyWith<$Res>
       bool? defaultValue,
       bool isRequired,
       @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-      BooleanFieldSettings fieldSettings});
+      BooleanFieldSettings uiSettings});
 
-  $BooleanFieldSettingsCopyWith<$Res> get fieldSettings;
+  $BooleanFieldSettingsCopyWith<$Res> get uiSettings;
 }
 
 /// @nodoc
@@ -920,7 +920,7 @@ class __$$BooleanInputImplCopyWithImpl<$Res>
     Object? id = null,
     Object? defaultValue = freezed,
     Object? isRequired = null,
-    Object? fieldSettings = null,
+    Object? uiSettings = null,
   }) {
     return _then(_$BooleanInputImpl(
       id: null == id
@@ -935,18 +935,18 @@ class __$$BooleanInputImplCopyWithImpl<$Res>
           ? _value.isRequired
           : isRequired // ignore: cast_nullable_to_non_nullable
               as bool,
-      fieldSettings: null == fieldSettings
-          ? _value.fieldSettings
-          : fieldSettings // ignore: cast_nullable_to_non_nullable
+      uiSettings: null == uiSettings
+          ? _value.uiSettings
+          : uiSettings // ignore: cast_nullable_to_non_nullable
               as BooleanFieldSettings,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $BooleanFieldSettingsCopyWith<$Res> get fieldSettings {
-    return $BooleanFieldSettingsCopyWith<$Res>(_value.fieldSettings, (value) {
-      return _then(_value.copyWith(fieldSettings: value));
+  $BooleanFieldSettingsCopyWith<$Res> get uiSettings {
+    return $BooleanFieldSettingsCopyWith<$Res>(_value.uiSettings, (value) {
+      return _then(_value.copyWith(uiSettings: value));
     });
   }
 }
@@ -959,7 +959,7 @@ class _$BooleanInputImpl extends BooleanInput {
       this.defaultValue,
       this.isRequired = false,
       @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-      this.fieldSettings = const BooleanFieldSettings(),
+      this.uiSettings = const BooleanFieldSettings(),
       final String? $type})
       : $type = $type ?? 'boolean',
         super._();
@@ -976,14 +976,14 @@ class _$BooleanInputImpl extends BooleanInput {
   final bool isRequired;
   @override
   @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-  final BooleanFieldSettings fieldSettings;
+  final BooleanFieldSettings uiSettings;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'WoFormInput.boolean(id: $id, defaultValue: $defaultValue, isRequired: $isRequired, fieldSettings: $fieldSettings)';
+    return 'WoFormInput.boolean(id: $id, defaultValue: $defaultValue, isRequired: $isRequired, uiSettings: $uiSettings)';
   }
 
   @override
@@ -996,14 +996,14 @@ class _$BooleanInputImpl extends BooleanInput {
                 other.defaultValue == defaultValue) &&
             (identical(other.isRequired, isRequired) ||
                 other.isRequired == isRequired) &&
-            (identical(other.fieldSettings, fieldSettings) ||
-                other.fieldSettings == fieldSettings));
+            (identical(other.uiSettings, uiSettings) ||
+                other.uiSettings == uiSettings));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, defaultValue, isRequired, fieldSettings);
+      Object.hash(runtimeType, id, defaultValue, isRequired, uiSettings);
 
   @JsonKey(ignore: true)
   @override
@@ -1019,10 +1019,10 @@ class _$BooleanInputImpl extends BooleanInput {
             bool? defaultValue,
             bool isRequired,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings fieldSettings)
+            BooleanFieldSettings uiSettings)
         boolean,
     required TResult Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings fieldSettings)
+            NumFieldSettings uiSettings)
         num,
     required TResult Function(
             String id,
@@ -1030,7 +1030,7 @@ class _$BooleanInputImpl extends BooleanInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings fieldSettings)
+            SelectFieldSettings uiSettings)
         selectString,
     required TResult Function(
             String id,
@@ -1038,10 +1038,10 @@ class _$BooleanInputImpl extends BooleanInput {
             bool isRequired,
             String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings fieldSettings)
+            StringFieldSettings uiSettings)
         string,
   }) {
-    return boolean(id, defaultValue, isRequired, fieldSettings);
+    return boolean(id, defaultValue, isRequired, uiSettings);
   }
 
   @override
@@ -1052,10 +1052,10 @@ class _$BooleanInputImpl extends BooleanInput {
             bool? defaultValue,
             bool isRequired,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings fieldSettings)?
+            BooleanFieldSettings uiSettings)?
         boolean,
     TResult? Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings fieldSettings)?
+            NumFieldSettings uiSettings)?
         num,
     TResult? Function(
             String id,
@@ -1063,7 +1063,7 @@ class _$BooleanInputImpl extends BooleanInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings fieldSettings)?
+            SelectFieldSettings uiSettings)?
         selectString,
     TResult? Function(
             String id,
@@ -1071,10 +1071,10 @@ class _$BooleanInputImpl extends BooleanInput {
             bool isRequired,
             String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings fieldSettings)?
+            StringFieldSettings uiSettings)?
         string,
   }) {
-    return boolean?.call(id, defaultValue, isRequired, fieldSettings);
+    return boolean?.call(id, defaultValue, isRequired, uiSettings);
   }
 
   @override
@@ -1085,10 +1085,10 @@ class _$BooleanInputImpl extends BooleanInput {
             bool? defaultValue,
             bool isRequired,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings fieldSettings)?
+            BooleanFieldSettings uiSettings)?
         boolean,
     TResult Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings fieldSettings)?
+            NumFieldSettings uiSettings)?
         num,
     TResult Function(
             String id,
@@ -1096,7 +1096,7 @@ class _$BooleanInputImpl extends BooleanInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings fieldSettings)?
+            SelectFieldSettings uiSettings)?
         selectString,
     TResult Function(
             String id,
@@ -1104,12 +1104,12 @@ class _$BooleanInputImpl extends BooleanInput {
             bool isRequired,
             String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings fieldSettings)?
+            StringFieldSettings uiSettings)?
         string,
     required TResult orElse(),
   }) {
     if (boolean != null) {
-      return boolean(id, defaultValue, isRequired, fieldSettings);
+      return boolean(id, defaultValue, isRequired, uiSettings);
     }
     return orElse();
   }
@@ -1165,7 +1165,7 @@ abstract class BooleanInput extends WoFormInput {
       final bool? defaultValue,
       final bool isRequired,
       @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-      final BooleanFieldSettings fieldSettings}) = _$BooleanInputImpl;
+      final BooleanFieldSettings uiSettings}) = _$BooleanInputImpl;
   const BooleanInput._() : super._();
 
   factory BooleanInput.fromJson(Map<String, dynamic> json) =
@@ -1178,7 +1178,7 @@ abstract class BooleanInput extends WoFormInput {
   bool get isRequired;
   @override
   @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-  BooleanFieldSettings get fieldSettings;
+  BooleanFieldSettings get uiSettings;
   @override
   @JsonKey(ignore: true)
   _$$BooleanInputImplCopyWith<_$BooleanInputImpl> get copyWith =>
@@ -1197,9 +1197,9 @@ abstract class _$$NumInputImplCopyWith<$Res>
       {String id,
       num? defaultValue,
       bool isRequired,
-      NumFieldSettings fieldSettings});
+      NumFieldSettings uiSettings});
 
-  $NumFieldSettingsCopyWith<$Res> get fieldSettings;
+  $NumFieldSettingsCopyWith<$Res> get uiSettings;
 }
 
 /// @nodoc
@@ -1216,7 +1216,7 @@ class __$$NumInputImplCopyWithImpl<$Res>
     Object? id = null,
     Object? defaultValue = freezed,
     Object? isRequired = null,
-    Object? fieldSettings = null,
+    Object? uiSettings = null,
   }) {
     return _then(_$NumInputImpl(
       id: null == id
@@ -1231,18 +1231,18 @@ class __$$NumInputImplCopyWithImpl<$Res>
           ? _value.isRequired
           : isRequired // ignore: cast_nullable_to_non_nullable
               as bool,
-      fieldSettings: null == fieldSettings
-          ? _value.fieldSettings
-          : fieldSettings // ignore: cast_nullable_to_non_nullable
+      uiSettings: null == uiSettings
+          ? _value.uiSettings
+          : uiSettings // ignore: cast_nullable_to_non_nullable
               as NumFieldSettings,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $NumFieldSettingsCopyWith<$Res> get fieldSettings {
-    return $NumFieldSettingsCopyWith<$Res>(_value.fieldSettings, (value) {
-      return _then(_value.copyWith(fieldSettings: value));
+  $NumFieldSettingsCopyWith<$Res> get uiSettings {
+    return $NumFieldSettingsCopyWith<$Res>(_value.uiSettings, (value) {
+      return _then(_value.copyWith(uiSettings: value));
     });
   }
 }
@@ -1254,7 +1254,7 @@ class _$NumInputImpl extends NumInput {
       {required this.id,
       this.defaultValue,
       this.isRequired = false,
-      this.fieldSettings = const NumFieldSettings(),
+      this.uiSettings = const NumFieldSettings(),
       final String? $type})
       : $type = $type ?? 'num',
         super._();
@@ -1271,14 +1271,14 @@ class _$NumInputImpl extends NumInput {
   final bool isRequired;
   @override
   @JsonKey()
-  final NumFieldSettings fieldSettings;
+  final NumFieldSettings uiSettings;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'WoFormInput.num(id: $id, defaultValue: $defaultValue, isRequired: $isRequired, fieldSettings: $fieldSettings)';
+    return 'WoFormInput.num(id: $id, defaultValue: $defaultValue, isRequired: $isRequired, uiSettings: $uiSettings)';
   }
 
   @override
@@ -1291,14 +1291,14 @@ class _$NumInputImpl extends NumInput {
                 other.defaultValue == defaultValue) &&
             (identical(other.isRequired, isRequired) ||
                 other.isRequired == isRequired) &&
-            (identical(other.fieldSettings, fieldSettings) ||
-                other.fieldSettings == fieldSettings));
+            (identical(other.uiSettings, uiSettings) ||
+                other.uiSettings == uiSettings));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, defaultValue, isRequired, fieldSettings);
+      Object.hash(runtimeType, id, defaultValue, isRequired, uiSettings);
 
   @JsonKey(ignore: true)
   @override
@@ -1314,10 +1314,10 @@ class _$NumInputImpl extends NumInput {
             bool? defaultValue,
             bool isRequired,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings fieldSettings)
+            BooleanFieldSettings uiSettings)
         boolean,
     required TResult Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings fieldSettings)
+            NumFieldSettings uiSettings)
         num,
     required TResult Function(
             String id,
@@ -1325,7 +1325,7 @@ class _$NumInputImpl extends NumInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings fieldSettings)
+            SelectFieldSettings uiSettings)
         selectString,
     required TResult Function(
             String id,
@@ -1333,10 +1333,10 @@ class _$NumInputImpl extends NumInput {
             bool isRequired,
             String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings fieldSettings)
+            StringFieldSettings uiSettings)
         string,
   }) {
-    return num(id, defaultValue, isRequired, fieldSettings);
+    return num(id, defaultValue, isRequired, uiSettings);
   }
 
   @override
@@ -1347,10 +1347,10 @@ class _$NumInputImpl extends NumInput {
             bool? defaultValue,
             bool isRequired,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings fieldSettings)?
+            BooleanFieldSettings uiSettings)?
         boolean,
     TResult? Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings fieldSettings)?
+            NumFieldSettings uiSettings)?
         num,
     TResult? Function(
             String id,
@@ -1358,7 +1358,7 @@ class _$NumInputImpl extends NumInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings fieldSettings)?
+            SelectFieldSettings uiSettings)?
         selectString,
     TResult? Function(
             String id,
@@ -1366,10 +1366,10 @@ class _$NumInputImpl extends NumInput {
             bool isRequired,
             String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings fieldSettings)?
+            StringFieldSettings uiSettings)?
         string,
   }) {
-    return num?.call(id, defaultValue, isRequired, fieldSettings);
+    return num?.call(id, defaultValue, isRequired, uiSettings);
   }
 
   @override
@@ -1380,10 +1380,10 @@ class _$NumInputImpl extends NumInput {
             bool? defaultValue,
             bool isRequired,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings fieldSettings)?
+            BooleanFieldSettings uiSettings)?
         boolean,
     TResult Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings fieldSettings)?
+            NumFieldSettings uiSettings)?
         num,
     TResult Function(
             String id,
@@ -1391,7 +1391,7 @@ class _$NumInputImpl extends NumInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings fieldSettings)?
+            SelectFieldSettings uiSettings)?
         selectString,
     TResult Function(
             String id,
@@ -1399,12 +1399,12 @@ class _$NumInputImpl extends NumInput {
             bool isRequired,
             String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings fieldSettings)?
+            StringFieldSettings uiSettings)?
         string,
     required TResult orElse(),
   }) {
     if (num != null) {
-      return num(id, defaultValue, isRequired, fieldSettings);
+      return num(id, defaultValue, isRequired, uiSettings);
     }
     return orElse();
   }
@@ -1459,7 +1459,7 @@ abstract class NumInput extends WoFormInput {
       {required final String id,
       final num? defaultValue,
       final bool isRequired,
-      final NumFieldSettings fieldSettings}) = _$NumInputImpl;
+      final NumFieldSettings uiSettings}) = _$NumInputImpl;
   const NumInput._() : super._();
 
   factory NumInput.fromJson(Map<String, dynamic> json) =
@@ -1471,7 +1471,7 @@ abstract class NumInput extends WoFormInput {
   num? get defaultValue;
   bool get isRequired;
   @override
-  NumFieldSettings get fieldSettings;
+  NumFieldSettings get uiSettings;
   @override
   @JsonKey(ignore: true)
   _$$NumInputImplCopyWith<_$NumInputImpl> get copyWith =>
@@ -1492,9 +1492,9 @@ abstract class _$$SelectStringInputImplCopyWith<$Res>
       List<String> defaultValue,
       List<String> availibleValues,
       int minCount,
-      SelectFieldSettings fieldSettings});
+      SelectFieldSettings uiSettings});
 
-  $SelectFieldSettingsCopyWith<$Res> get fieldSettings;
+  $SelectFieldSettingsCopyWith<$Res> get uiSettings;
 }
 
 /// @nodoc
@@ -1513,7 +1513,7 @@ class __$$SelectStringInputImplCopyWithImpl<$Res>
     Object? defaultValue = null,
     Object? availibleValues = null,
     Object? minCount = null,
-    Object? fieldSettings = null,
+    Object? uiSettings = null,
   }) {
     return _then(_$SelectStringInputImpl(
       id: null == id
@@ -1536,18 +1536,18 @@ class __$$SelectStringInputImplCopyWithImpl<$Res>
           ? _value.minCount
           : minCount // ignore: cast_nullable_to_non_nullable
               as int,
-      fieldSettings: null == fieldSettings
-          ? _value.fieldSettings
-          : fieldSettings // ignore: cast_nullable_to_non_nullable
+      uiSettings: null == uiSettings
+          ? _value.uiSettings
+          : uiSettings // ignore: cast_nullable_to_non_nullable
               as SelectFieldSettings,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $SelectFieldSettingsCopyWith<$Res> get fieldSettings {
-    return $SelectFieldSettingsCopyWith<$Res>(_value.fieldSettings, (value) {
-      return _then(_value.copyWith(fieldSettings: value));
+  $SelectFieldSettingsCopyWith<$Res> get uiSettings {
+    return $SelectFieldSettingsCopyWith<$Res>(_value.uiSettings, (value) {
+      return _then(_value.copyWith(uiSettings: value));
     });
   }
 }
@@ -1561,7 +1561,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
       final List<String> defaultValue = const [],
       final List<String> availibleValues = const [],
       this.minCount = 0,
-      this.fieldSettings = const SelectFieldSettings(),
+      this.uiSettings = const SelectFieldSettings(),
       final String? $type})
       : _defaultValue = defaultValue,
         _availibleValues = availibleValues,
@@ -1598,14 +1598,14 @@ class _$SelectStringInputImpl extends SelectStringInput {
   final int minCount;
   @override
   @JsonKey()
-  final SelectFieldSettings fieldSettings;
+  final SelectFieldSettings uiSettings;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'WoFormInput.selectString(id: $id, maxCount: $maxCount, defaultValue: $defaultValue, availibleValues: $availibleValues, minCount: $minCount, fieldSettings: $fieldSettings)';
+    return 'WoFormInput.selectString(id: $id, maxCount: $maxCount, defaultValue: $defaultValue, availibleValues: $availibleValues, minCount: $minCount, uiSettings: $uiSettings)';
   }
 
   @override
@@ -1622,8 +1622,8 @@ class _$SelectStringInputImpl extends SelectStringInput {
                 .equals(other._availibleValues, _availibleValues) &&
             (identical(other.minCount, minCount) ||
                 other.minCount == minCount) &&
-            (identical(other.fieldSettings, fieldSettings) ||
-                other.fieldSettings == fieldSettings));
+            (identical(other.uiSettings, uiSettings) ||
+                other.uiSettings == uiSettings));
   }
 
   @JsonKey(ignore: true)
@@ -1635,7 +1635,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
       const DeepCollectionEquality().hash(_defaultValue),
       const DeepCollectionEquality().hash(_availibleValues),
       minCount,
-      fieldSettings);
+      uiSettings);
 
   @JsonKey(ignore: true)
   @override
@@ -1652,10 +1652,10 @@ class _$SelectStringInputImpl extends SelectStringInput {
             bool? defaultValue,
             bool isRequired,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings fieldSettings)
+            BooleanFieldSettings uiSettings)
         boolean,
     required TResult Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings fieldSettings)
+            NumFieldSettings uiSettings)
         num,
     required TResult Function(
             String id,
@@ -1663,7 +1663,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings fieldSettings)
+            SelectFieldSettings uiSettings)
         selectString,
     required TResult Function(
             String id,
@@ -1671,11 +1671,11 @@ class _$SelectStringInputImpl extends SelectStringInput {
             bool isRequired,
             String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings fieldSettings)
+            StringFieldSettings uiSettings)
         string,
   }) {
     return selectString(
-        id, maxCount, defaultValue, availibleValues, minCount, fieldSettings);
+        id, maxCount, defaultValue, availibleValues, minCount, uiSettings);
   }
 
   @override
@@ -1686,10 +1686,10 @@ class _$SelectStringInputImpl extends SelectStringInput {
             bool? defaultValue,
             bool isRequired,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings fieldSettings)?
+            BooleanFieldSettings uiSettings)?
         boolean,
     TResult? Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings fieldSettings)?
+            NumFieldSettings uiSettings)?
         num,
     TResult? Function(
             String id,
@@ -1697,7 +1697,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings fieldSettings)?
+            SelectFieldSettings uiSettings)?
         selectString,
     TResult? Function(
             String id,
@@ -1705,11 +1705,11 @@ class _$SelectStringInputImpl extends SelectStringInput {
             bool isRequired,
             String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings fieldSettings)?
+            StringFieldSettings uiSettings)?
         string,
   }) {
     return selectString?.call(
-        id, maxCount, defaultValue, availibleValues, minCount, fieldSettings);
+        id, maxCount, defaultValue, availibleValues, minCount, uiSettings);
   }
 
   @override
@@ -1720,10 +1720,10 @@ class _$SelectStringInputImpl extends SelectStringInput {
             bool? defaultValue,
             bool isRequired,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings fieldSettings)?
+            BooleanFieldSettings uiSettings)?
         boolean,
     TResult Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings fieldSettings)?
+            NumFieldSettings uiSettings)?
         num,
     TResult Function(
             String id,
@@ -1731,7 +1731,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings fieldSettings)?
+            SelectFieldSettings uiSettings)?
         selectString,
     TResult Function(
             String id,
@@ -1739,13 +1739,13 @@ class _$SelectStringInputImpl extends SelectStringInput {
             bool isRequired,
             String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings fieldSettings)?
+            StringFieldSettings uiSettings)?
         string,
     required TResult orElse(),
   }) {
     if (selectString != null) {
       return selectString(
-          id, maxCount, defaultValue, availibleValues, minCount, fieldSettings);
+          id, maxCount, defaultValue, availibleValues, minCount, uiSettings);
     }
     return orElse();
   }
@@ -1802,7 +1802,7 @@ abstract class SelectStringInput extends WoFormInput {
       final List<String> defaultValue,
       final List<String> availibleValues,
       final int minCount,
-      final SelectFieldSettings fieldSettings}) = _$SelectStringInputImpl;
+      final SelectFieldSettings uiSettings}) = _$SelectStringInputImpl;
   const SelectStringInput._() : super._();
 
   factory SelectStringInput.fromJson(Map<String, dynamic> json) =
@@ -1816,7 +1816,7 @@ abstract class SelectStringInput extends WoFormInput {
   List<String> get availibleValues;
   int get minCount;
   @override
-  SelectFieldSettings get fieldSettings;
+  SelectFieldSettings get uiSettings;
   @override
   @JsonKey(ignore: true)
   _$$SelectStringInputImplCopyWith<_$SelectStringInputImpl> get copyWith =>
@@ -1837,9 +1837,9 @@ abstract class _$$StringInputImplCopyWith<$Res>
       bool isRequired,
       String? regexPattern,
       @JsonKey(toJson: StringFieldSettings.staticToJson)
-      StringFieldSettings fieldSettings});
+      StringFieldSettings uiSettings});
 
-  $StringFieldSettingsCopyWith<$Res> get fieldSettings;
+  $StringFieldSettingsCopyWith<$Res> get uiSettings;
 }
 
 /// @nodoc
@@ -1857,7 +1857,7 @@ class __$$StringInputImplCopyWithImpl<$Res>
     Object? defaultValue = freezed,
     Object? isRequired = null,
     Object? regexPattern = freezed,
-    Object? fieldSettings = null,
+    Object? uiSettings = null,
   }) {
     return _then(_$StringInputImpl(
       id: null == id
@@ -1876,18 +1876,18 @@ class __$$StringInputImplCopyWithImpl<$Res>
           ? _value.regexPattern
           : regexPattern // ignore: cast_nullable_to_non_nullable
               as String?,
-      fieldSettings: null == fieldSettings
-          ? _value.fieldSettings
-          : fieldSettings // ignore: cast_nullable_to_non_nullable
+      uiSettings: null == uiSettings
+          ? _value.uiSettings
+          : uiSettings // ignore: cast_nullable_to_non_nullable
               as StringFieldSettings,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $StringFieldSettingsCopyWith<$Res> get fieldSettings {
-    return $StringFieldSettingsCopyWith<$Res>(_value.fieldSettings, (value) {
-      return _then(_value.copyWith(fieldSettings: value));
+  $StringFieldSettingsCopyWith<$Res> get uiSettings {
+    return $StringFieldSettingsCopyWith<$Res>(_value.uiSettings, (value) {
+      return _then(_value.copyWith(uiSettings: value));
     });
   }
 }
@@ -1901,7 +1901,7 @@ class _$StringInputImpl extends StringInput {
       this.isRequired = false,
       this.regexPattern,
       @JsonKey(toJson: StringFieldSettings.staticToJson)
-      this.fieldSettings = const StringFieldSettings(),
+      this.uiSettings = const StringFieldSettings(),
       final String? $type})
       : $type = $type ?? 'string',
         super._();
@@ -1920,14 +1920,14 @@ class _$StringInputImpl extends StringInput {
   final String? regexPattern;
   @override
   @JsonKey(toJson: StringFieldSettings.staticToJson)
-  final StringFieldSettings fieldSettings;
+  final StringFieldSettings uiSettings;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'WoFormInput.string(id: $id, defaultValue: $defaultValue, isRequired: $isRequired, regexPattern: $regexPattern, fieldSettings: $fieldSettings)';
+    return 'WoFormInput.string(id: $id, defaultValue: $defaultValue, isRequired: $isRequired, regexPattern: $regexPattern, uiSettings: $uiSettings)';
   }
 
   @override
@@ -1942,14 +1942,14 @@ class _$StringInputImpl extends StringInput {
                 other.isRequired == isRequired) &&
             (identical(other.regexPattern, regexPattern) ||
                 other.regexPattern == regexPattern) &&
-            (identical(other.fieldSettings, fieldSettings) ||
-                other.fieldSettings == fieldSettings));
+            (identical(other.uiSettings, uiSettings) ||
+                other.uiSettings == uiSettings));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, defaultValue, isRequired, regexPattern, fieldSettings);
+      runtimeType, id, defaultValue, isRequired, regexPattern, uiSettings);
 
   @JsonKey(ignore: true)
   @override
@@ -1965,10 +1965,10 @@ class _$StringInputImpl extends StringInput {
             bool? defaultValue,
             bool isRequired,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings fieldSettings)
+            BooleanFieldSettings uiSettings)
         boolean,
     required TResult Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings fieldSettings)
+            NumFieldSettings uiSettings)
         num,
     required TResult Function(
             String id,
@@ -1976,7 +1976,7 @@ class _$StringInputImpl extends StringInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings fieldSettings)
+            SelectFieldSettings uiSettings)
         selectString,
     required TResult Function(
             String id,
@@ -1984,10 +1984,10 @@ class _$StringInputImpl extends StringInput {
             bool isRequired,
             String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings fieldSettings)
+            StringFieldSettings uiSettings)
         string,
   }) {
-    return string(id, defaultValue, isRequired, regexPattern, fieldSettings);
+    return string(id, defaultValue, isRequired, regexPattern, uiSettings);
   }
 
   @override
@@ -1998,10 +1998,10 @@ class _$StringInputImpl extends StringInput {
             bool? defaultValue,
             bool isRequired,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings fieldSettings)?
+            BooleanFieldSettings uiSettings)?
         boolean,
     TResult? Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings fieldSettings)?
+            NumFieldSettings uiSettings)?
         num,
     TResult? Function(
             String id,
@@ -2009,7 +2009,7 @@ class _$StringInputImpl extends StringInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings fieldSettings)?
+            SelectFieldSettings uiSettings)?
         selectString,
     TResult? Function(
             String id,
@@ -2017,11 +2017,11 @@ class _$StringInputImpl extends StringInput {
             bool isRequired,
             String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings fieldSettings)?
+            StringFieldSettings uiSettings)?
         string,
   }) {
     return string?.call(
-        id, defaultValue, isRequired, regexPattern, fieldSettings);
+        id, defaultValue, isRequired, regexPattern, uiSettings);
   }
 
   @override
@@ -2032,10 +2032,10 @@ class _$StringInputImpl extends StringInput {
             bool? defaultValue,
             bool isRequired,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings fieldSettings)?
+            BooleanFieldSettings uiSettings)?
         boolean,
     TResult Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings fieldSettings)?
+            NumFieldSettings uiSettings)?
         num,
     TResult Function(
             String id,
@@ -2043,7 +2043,7 @@ class _$StringInputImpl extends StringInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings fieldSettings)?
+            SelectFieldSettings uiSettings)?
         selectString,
     TResult Function(
             String id,
@@ -2051,12 +2051,12 @@ class _$StringInputImpl extends StringInput {
             bool isRequired,
             String? regexPattern,
             @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings fieldSettings)?
+            StringFieldSettings uiSettings)?
         string,
     required TResult orElse(),
   }) {
     if (string != null) {
-      return string(id, defaultValue, isRequired, regexPattern, fieldSettings);
+      return string(id, defaultValue, isRequired, regexPattern, uiSettings);
     }
     return orElse();
   }
@@ -2113,7 +2113,7 @@ abstract class StringInput extends WoFormInput {
       final bool isRequired,
       final String? regexPattern,
       @JsonKey(toJson: StringFieldSettings.staticToJson)
-      final StringFieldSettings fieldSettings}) = _$StringInputImpl;
+      final StringFieldSettings uiSettings}) = _$StringInputImpl;
   const StringInput._() : super._();
 
   factory StringInput.fromJson(Map<String, dynamic> json) =
@@ -2127,7 +2127,7 @@ abstract class StringInput extends WoFormInput {
   String? get regexPattern;
   @override
   @JsonKey(toJson: StringFieldSettings.staticToJson)
-  StringFieldSettings get fieldSettings;
+  StringFieldSettings get uiSettings;
   @override
   @JsonKey(ignore: true)
   _$$StringInputImplCopyWith<_$StringInputImpl> get copyWith =>
@@ -2141,7 +2141,7 @@ mixin _$SelectInput<T> {
   int get minCount => throw _privateConstructorUsedError;
   List<T> get defaultValues => throw _privateConstructorUsedError;
   List<T> get availibleValues => throw _privateConstructorUsedError;
-  SelectFieldSettings get fieldSettings => throw _privateConstructorUsedError;
+  SelectFieldSettings get uiSettings => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
   Object? Function(T)? get toJsonT => throw _privateConstructorUsedError;
 
@@ -2162,11 +2162,11 @@ abstract class $SelectInputCopyWith<T, $Res> {
       int minCount,
       List<T> defaultValues,
       List<T> availibleValues,
-      SelectFieldSettings fieldSettings,
+      SelectFieldSettings uiSettings,
       @JsonKey(includeToJson: false, includeFromJson: false)
       Object? Function(T)? toJsonT});
 
-  $SelectFieldSettingsCopyWith<$Res> get fieldSettings;
+  $SelectFieldSettingsCopyWith<$Res> get uiSettings;
 }
 
 /// @nodoc
@@ -2187,7 +2187,7 @@ class _$SelectInputCopyWithImpl<T, $Res, $Val extends SelectInput<T>>
     Object? minCount = null,
     Object? defaultValues = null,
     Object? availibleValues = null,
-    Object? fieldSettings = null,
+    Object? uiSettings = null,
     Object? toJsonT = freezed,
   }) {
     return _then(_value.copyWith(
@@ -2211,9 +2211,9 @@ class _$SelectInputCopyWithImpl<T, $Res, $Val extends SelectInput<T>>
           ? _value.availibleValues
           : availibleValues // ignore: cast_nullable_to_non_nullable
               as List<T>,
-      fieldSettings: null == fieldSettings
-          ? _value.fieldSettings
-          : fieldSettings // ignore: cast_nullable_to_non_nullable
+      uiSettings: null == uiSettings
+          ? _value.uiSettings
+          : uiSettings // ignore: cast_nullable_to_non_nullable
               as SelectFieldSettings,
       toJsonT: freezed == toJsonT
           ? _value.toJsonT
@@ -2224,9 +2224,9 @@ class _$SelectInputCopyWithImpl<T, $Res, $Val extends SelectInput<T>>
 
   @override
   @pragma('vm:prefer-inline')
-  $SelectFieldSettingsCopyWith<$Res> get fieldSettings {
-    return $SelectFieldSettingsCopyWith<$Res>(_value.fieldSettings, (value) {
-      return _then(_value.copyWith(fieldSettings: value) as $Val);
+  $SelectFieldSettingsCopyWith<$Res> get uiSettings {
+    return $SelectFieldSettingsCopyWith<$Res>(_value.uiSettings, (value) {
+      return _then(_value.copyWith(uiSettings: value) as $Val);
     });
   }
 }
@@ -2245,12 +2245,12 @@ abstract class _$$SelectInputImplCopyWith<T, $Res>
       int minCount,
       List<T> defaultValues,
       List<T> availibleValues,
-      SelectFieldSettings fieldSettings,
+      SelectFieldSettings uiSettings,
       @JsonKey(includeToJson: false, includeFromJson: false)
       Object? Function(T)? toJsonT});
 
   @override
-  $SelectFieldSettingsCopyWith<$Res> get fieldSettings;
+  $SelectFieldSettingsCopyWith<$Res> get uiSettings;
 }
 
 /// @nodoc
@@ -2269,7 +2269,7 @@ class __$$SelectInputImplCopyWithImpl<T, $Res>
     Object? minCount = null,
     Object? defaultValues = null,
     Object? availibleValues = null,
-    Object? fieldSettings = null,
+    Object? uiSettings = null,
     Object? toJsonT = freezed,
   }) {
     return _then(_$SelectInputImpl<T>(
@@ -2293,9 +2293,9 @@ class __$$SelectInputImplCopyWithImpl<T, $Res>
           ? _value._availibleValues
           : availibleValues // ignore: cast_nullable_to_non_nullable
               as List<T>,
-      fieldSettings: null == fieldSettings
-          ? _value.fieldSettings
-          : fieldSettings // ignore: cast_nullable_to_non_nullable
+      uiSettings: null == uiSettings
+          ? _value.uiSettings
+          : uiSettings // ignore: cast_nullable_to_non_nullable
               as SelectFieldSettings,
       toJsonT: freezed == toJsonT
           ? _value.toJsonT
@@ -2314,7 +2314,7 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
       this.minCount = 0,
       final List<T> defaultValues = const [],
       final List<T> availibleValues = const [],
-      this.fieldSettings = const SelectFieldSettings(),
+      this.uiSettings = const SelectFieldSettings(),
       @JsonKey(includeToJson: false, includeFromJson: false) this.toJsonT})
       : _defaultValues = defaultValues,
         _availibleValues = availibleValues,
@@ -2347,14 +2347,14 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
 
   @override
   @JsonKey()
-  final SelectFieldSettings fieldSettings;
+  final SelectFieldSettings uiSettings;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final Object? Function(T)? toJsonT;
 
   @override
   String toString() {
-    return 'SelectInput<$T>(id: $id, maxCount: $maxCount, minCount: $minCount, defaultValues: $defaultValues, availibleValues: $availibleValues, fieldSettings: $fieldSettings, toJsonT: $toJsonT)';
+    return 'SelectInput<$T>(id: $id, maxCount: $maxCount, minCount: $minCount, defaultValues: $defaultValues, availibleValues: $availibleValues, uiSettings: $uiSettings, toJsonT: $toJsonT)';
   }
 
   @override
@@ -2371,8 +2371,8 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
                 .equals(other._defaultValues, _defaultValues) &&
             const DeepCollectionEquality()
                 .equals(other._availibleValues, _availibleValues) &&
-            (identical(other.fieldSettings, fieldSettings) ||
-                other.fieldSettings == fieldSettings) &&
+            (identical(other.uiSettings, uiSettings) ||
+                other.uiSettings == uiSettings) &&
             (identical(other.toJsonT, toJsonT) || other.toJsonT == toJsonT));
   }
 
@@ -2384,7 +2384,7 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
       minCount,
       const DeepCollectionEquality().hash(_defaultValues),
       const DeepCollectionEquality().hash(_availibleValues),
-      fieldSettings,
+      uiSettings,
       toJsonT);
 
   @JsonKey(ignore: true)
@@ -2402,7 +2402,7 @@ abstract class _SelectInput<T> extends SelectInput<T> {
       final int minCount,
       final List<T> defaultValues,
       final List<T> availibleValues,
-      final SelectFieldSettings fieldSettings,
+      final SelectFieldSettings uiSettings,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final Object? Function(T)? toJsonT}) = _$SelectInputImpl<T>;
   const _SelectInput._() : super._();
@@ -2418,7 +2418,7 @@ abstract class _SelectInput<T> extends SelectInput<T> {
   @override
   List<T> get availibleValues;
   @override
-  SelectFieldSettings get fieldSettings;
+  SelectFieldSettings get uiSettings;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   Object? Function(T)? get toJsonT;

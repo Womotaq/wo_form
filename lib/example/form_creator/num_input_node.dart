@@ -1,46 +1,46 @@
 import 'package:wo_form/wo_form.dart';
 
-const numInputNode = InputsNode(
-  id: 'numInput',
-  fieldSettings: MapFieldSettings(
-    labelText: 'NumInput',
-  ),
-  inputs: [
-    StringInput(
-      id: 'id',
-      isRequired: true,
-      fieldSettings: StringFieldSettings(
-        labelText: 'Clef',
+InputsNode createNumInputNode({String id = 'numInput'}) => InputsNode(
+      id: id,
+      uiSettings: const NodeFieldSettings(
+        labelText: 'NumInput',
       ),
-    ),
-    NumInput(
-      id: 'defaultValue',
-      fieldSettings: NumFieldSettings(
-        labelText: 'Valeur par défaut',
-      ),
-    ),
-    BooleanInput(
-      id: 'isRequired',
-      fieldSettings: BooleanFieldSettings(
-        labelText: 'Requis',
-      ),
-    ),
-    InputsNode(
-      id: 'fieldSettings',
-      fieldSettings: MapFieldSettings(
-        labelText: 'Interface',
-      ),
-      inputs: [
+      inputs: const [
         StringInput(
-          id: 'labelText',
-          fieldSettings: StringFieldSettings(
-            labelText: 'Titre',
+          id: 'id',
+          isRequired: true,
+          uiSettings: StringFieldSettings(
+            labelText: 'Clef',
           ),
         ),
+        NumInput(
+          id: 'defaultValue',
+          uiSettings: NumFieldSettings(
+            labelText: 'Valeur par défaut',
+          ),
+        ),
+        BooleanInput(
+          id: 'isRequired',
+          uiSettings: BooleanFieldSettings(
+            labelText: 'Requis',
+          ),
+        ),
+        InputsNode(
+          id: 'uiSettings',
+          uiSettings: NodeFieldSettings(
+            labelText: 'Interface',
+          ),
+          inputs: [
+            StringInput(
+              id: 'labelText',
+              uiSettings: StringFieldSettings(
+                labelText: 'Titre',
+              ),
+            ),
+          ],
+        ),
       ],
-    ),
-  ],
-  unmodifiableValuesJson: {
-    'runtimeType': 'num',
-  },
-);
+      unmodifiableValuesJson: {
+        'runtimeType': 'num',
+      },
+    );

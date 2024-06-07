@@ -43,7 +43,7 @@ class _NumFieldState extends State<NumField> {
       );
     }
 
-    final inputSettings = input.fieldSettings;
+    final inputSettings = input.uiSettings;
     final mergedSettings =
         widget.settings?.merge(inputSettings) ?? inputSettings;
 

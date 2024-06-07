@@ -10,7 +10,7 @@ class InputsNodeWidget extends StatelessWidget {
   });
 
   final String inputPath;
-  final MapFieldSettings? settings;
+  final NodeFieldSettings? settings;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class InputsNodeWidget extends StatelessWidget {
       );
     }
 
-    final inputSettings = input.fieldSettings;
+    final inputSettings = input.uiSettings;
     final mergedSettings = settings?.merge(inputSettings) ?? inputSettings;
 
     return Column(

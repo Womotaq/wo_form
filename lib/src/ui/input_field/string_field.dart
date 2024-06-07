@@ -33,7 +33,7 @@ class _StringFieldState extends State<StringField> {
       );
     }
 
-    final inputSettings = input.fieldSettings;
+    final inputSettings = input.uiSettings;
     mergedSettings = widget.settings?.merge(inputSettings) ?? inputSettings;
 
     obscureText = mergedSettings.obscureText ?? false;

@@ -9,7 +9,7 @@ void main() {
     id: 'name',
     isRequired: true,
     regexPattern: RegexPattern.username.value,
-    fieldSettings: StringFieldSettings(
+    uiSettings: StringFieldSettings(
       invalidRegexMessage: FormLocalizationsFr()
           .regexPatternUnmatched(RegexPattern.username.name),
     ),
@@ -21,7 +21,7 @@ void main() {
   values['isRequired'] = expectedInput.isRequired;
   values['regexPattern'] = [RegexPattern.username];
   values['invalidRegexMessage'] =
-      expectedInput.fieldSettings.invalidRegexMessage;
+      expectedInput.uiSettings.invalidRegexMessage;
 
   test('StringInput Form : Step 0', () {
     expect(stringInputNode.getErrors(values, parentPath: '').isEmpty, true);

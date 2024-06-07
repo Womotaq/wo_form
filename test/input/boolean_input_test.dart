@@ -4,7 +4,7 @@ import 'package:wo_form/wo_form.dart';
 void main() {
   const input = BooleanInput(
     id: 'isRequired',
-    fieldSettings: BooleanFieldSettings(
+    uiSettings: BooleanFieldSettings(
       onOffType: BooleanFieldOnOffType.switchButton,
     ),
   );
@@ -12,7 +12,7 @@ void main() {
     'id': 'isRequired',
     'value': true,
     'isRequired': false,
-    'fieldSettings': {
+    'uiSettings': {
       'labelText': null,
       'onOffType': 'switchButton',
       'onOffPosition': null,
