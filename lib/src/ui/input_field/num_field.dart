@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
-import 'package:wo_form/src/ui/input_field/input_list_tile.dart';
 import 'package:wo_form/wo_form.dart';
 
 class NumField extends StatefulWidget {
@@ -70,8 +69,8 @@ class _NumFieldState extends State<NumField> {
             );
         }
 
-        return InputListTile(
-          leading: Text(mergedSettings.labelText ?? ''),
+        return ListTile(
+          title: Text(mergedSettings.labelText ?? ''),
           trailing: NumSelector(
             controller: countController,
             onChanged: (value) async => valuesCubit.onValueChanged(
