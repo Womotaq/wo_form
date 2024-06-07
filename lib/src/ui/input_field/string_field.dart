@@ -107,8 +107,8 @@ class _StringFieldState extends State<StringField> {
                           obscureText = !obscureText;
                         }),
                         icon: obscureText
-                            ? const Icon(Icons.visibility_off)
-                            : const Icon(Icons.visibility),
+                            ? const Icon(Icons.visibility_off_outlined)
+                            : const Icon(Icons.visibility_outlined),
                       ),
                   },
                 ),
