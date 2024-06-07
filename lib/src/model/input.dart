@@ -73,7 +73,8 @@ sealed class WoFormInput
     @Default([]) List<String> defaultValue,
     @Default([]) List<String> availibleValues,
     @Default(0) int minCount,
-    @Default(SelectFieldSettings()) SelectFieldSettings uiSettings,
+    @Default(SelectFieldSettings<String>())
+    SelectFieldSettings<String> uiSettings,
   }) = SelectStringInput;
 
   const factory WoFormInput.string({
@@ -201,7 +202,7 @@ class SelectInput<T>
     @Default(0) int minCount,
     @Default([]) List<T> defaultValues,
     @Default([]) List<T> availibleValues,
-    @Default(SelectFieldSettings()) SelectFieldSettings uiSettings,
+    SelectFieldSettings<T>? uiSettings,
     @JsonKey(includeToJson: false, includeFromJson: false)
     Object? Function(T)? toJsonT,
   }) = _SelectInput<T>;

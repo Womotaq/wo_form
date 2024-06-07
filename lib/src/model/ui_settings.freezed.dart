@@ -483,40 +483,41 @@ abstract class _NumFieldSettings extends NumFieldSettings {
       throw _privateConstructorUsedError;
 }
 
-SelectFieldSettings _$SelectFieldSettingsFromJson(Map<String, dynamic> json) {
-  return _SelectFieldSettings.fromJson(json);
+SelectFieldSettings<T> _$SelectFieldSettingsFromJson<T>(
+    Map<String, dynamic> json) {
+  return _SelectFieldSettings<T>.fromJson(json);
 }
 
 /// @nodoc
-mixin _$SelectFieldSettings {
+mixin _$SelectFieldSettings<T> {
   String? get labelText => throw _privateConstructorUsedError;
   SelectFieldDisplayMode? get displayMode => throw _privateConstructorUsedError;
   @JsonKey(includeFromJson: false, includeToJson: false)
-  Widget Function(dynamic)? get valueBuilder =>
-      throw _privateConstructorUsedError;
+  Widget Function(T?)? get valueBuilder => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $SelectFieldSettingsCopyWith<SelectFieldSettings> get copyWith =>
+  $SelectFieldSettingsCopyWith<T, SelectFieldSettings<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SelectFieldSettingsCopyWith<$Res> {
-  factory $SelectFieldSettingsCopyWith(
-          SelectFieldSettings value, $Res Function(SelectFieldSettings) then) =
-      _$SelectFieldSettingsCopyWithImpl<$Res, SelectFieldSettings>;
+abstract class $SelectFieldSettingsCopyWith<T, $Res> {
+  factory $SelectFieldSettingsCopyWith(SelectFieldSettings<T> value,
+          $Res Function(SelectFieldSettings<T>) then) =
+      _$SelectFieldSettingsCopyWithImpl<T, $Res, SelectFieldSettings<T>>;
   @useResult
   $Res call(
       {String? labelText,
       SelectFieldDisplayMode? displayMode,
       @JsonKey(includeFromJson: false, includeToJson: false)
-      Widget Function(dynamic)? valueBuilder});
+      Widget Function(T?)? valueBuilder});
 }
 
 /// @nodoc
-class _$SelectFieldSettingsCopyWithImpl<$Res, $Val extends SelectFieldSettings>
-    implements $SelectFieldSettingsCopyWith<$Res> {
+class _$SelectFieldSettingsCopyWithImpl<T, $Res,
+        $Val extends SelectFieldSettings<T>>
+    implements $SelectFieldSettingsCopyWith<T, $Res> {
   _$SelectFieldSettingsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -543,32 +544,33 @@ class _$SelectFieldSettingsCopyWithImpl<$Res, $Val extends SelectFieldSettings>
       valueBuilder: freezed == valueBuilder
           ? _value.valueBuilder
           : valueBuilder // ignore: cast_nullable_to_non_nullable
-              as Widget Function(dynamic)?,
+              as Widget Function(T?)?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$SelectFieldSettingsImplCopyWith<$Res>
-    implements $SelectFieldSettingsCopyWith<$Res> {
-  factory _$$SelectFieldSettingsImplCopyWith(_$SelectFieldSettingsImpl value,
-          $Res Function(_$SelectFieldSettingsImpl) then) =
-      __$$SelectFieldSettingsImplCopyWithImpl<$Res>;
+abstract class _$$SelectFieldSettingsImplCopyWith<T, $Res>
+    implements $SelectFieldSettingsCopyWith<T, $Res> {
+  factory _$$SelectFieldSettingsImplCopyWith(_$SelectFieldSettingsImpl<T> value,
+          $Res Function(_$SelectFieldSettingsImpl<T>) then) =
+      __$$SelectFieldSettingsImplCopyWithImpl<T, $Res>;
   @override
   @useResult
   $Res call(
       {String? labelText,
       SelectFieldDisplayMode? displayMode,
       @JsonKey(includeFromJson: false, includeToJson: false)
-      Widget Function(dynamic)? valueBuilder});
+      Widget Function(T?)? valueBuilder});
 }
 
 /// @nodoc
-class __$$SelectFieldSettingsImplCopyWithImpl<$Res>
-    extends _$SelectFieldSettingsCopyWithImpl<$Res, _$SelectFieldSettingsImpl>
-    implements _$$SelectFieldSettingsImplCopyWith<$Res> {
-  __$$SelectFieldSettingsImplCopyWithImpl(_$SelectFieldSettingsImpl _value,
-      $Res Function(_$SelectFieldSettingsImpl) _then)
+class __$$SelectFieldSettingsImplCopyWithImpl<T, $Res>
+    extends _$SelectFieldSettingsCopyWithImpl<T, $Res,
+        _$SelectFieldSettingsImpl<T>>
+    implements _$$SelectFieldSettingsImplCopyWith<T, $Res> {
+  __$$SelectFieldSettingsImplCopyWithImpl(_$SelectFieldSettingsImpl<T> _value,
+      $Res Function(_$SelectFieldSettingsImpl<T>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -578,7 +580,7 @@ class __$$SelectFieldSettingsImplCopyWithImpl<$Res>
     Object? displayMode = freezed,
     Object? valueBuilder = freezed,
   }) {
-    return _then(_$SelectFieldSettingsImpl(
+    return _then(_$SelectFieldSettingsImpl<T>(
       labelText: freezed == labelText
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
@@ -590,14 +592,14 @@ class __$$SelectFieldSettingsImplCopyWithImpl<$Res>
       valueBuilder: freezed == valueBuilder
           ? _value.valueBuilder
           : valueBuilder // ignore: cast_nullable_to_non_nullable
-              as Widget Function(dynamic)?,
+              as Widget Function(T?)?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$SelectFieldSettingsImpl extends _SelectFieldSettings {
+class _$SelectFieldSettingsImpl<T> extends _SelectFieldSettings<T> {
   const _$SelectFieldSettingsImpl(
       {this.labelText,
       this.displayMode,
@@ -613,18 +615,18 @@ class _$SelectFieldSettingsImpl extends _SelectFieldSettings {
   final SelectFieldDisplayMode? displayMode;
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  final Widget Function(dynamic)? valueBuilder;
+  final Widget Function(T?)? valueBuilder;
 
   @override
   String toString() {
-    return 'SelectFieldSettings(labelText: $labelText, displayMode: $displayMode, valueBuilder: $valueBuilder)';
+    return 'SelectFieldSettings<$T>(labelText: $labelText, displayMode: $displayMode, valueBuilder: $valueBuilder)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SelectFieldSettingsImpl &&
+            other is _$SelectFieldSettingsImpl<T> &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
             (identical(other.displayMode, displayMode) ||
@@ -641,29 +643,28 @@ class _$SelectFieldSettingsImpl extends _SelectFieldSettings {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SelectFieldSettingsImplCopyWith<_$SelectFieldSettingsImpl> get copyWith =>
-      __$$SelectFieldSettingsImplCopyWithImpl<_$SelectFieldSettingsImpl>(
-          this, _$identity);
+  _$$SelectFieldSettingsImplCopyWith<T, _$SelectFieldSettingsImpl<T>>
+      get copyWith => __$$SelectFieldSettingsImplCopyWithImpl<T,
+          _$SelectFieldSettingsImpl<T>>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SelectFieldSettingsImplToJson(
+    return _$$SelectFieldSettingsImplToJson<T>(
       this,
     );
   }
 }
 
-abstract class _SelectFieldSettings extends SelectFieldSettings {
+abstract class _SelectFieldSettings<T> extends SelectFieldSettings<T> {
   const factory _SelectFieldSettings(
-          {final String? labelText,
-          final SelectFieldDisplayMode? displayMode,
-          @JsonKey(includeFromJson: false, includeToJson: false)
-          final Widget Function(dynamic)? valueBuilder}) =
-      _$SelectFieldSettingsImpl;
+      {final String? labelText,
+      final SelectFieldDisplayMode? displayMode,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      final Widget Function(T?)? valueBuilder}) = _$SelectFieldSettingsImpl<T>;
   const _SelectFieldSettings._() : super._();
 
   factory _SelectFieldSettings.fromJson(Map<String, dynamic> json) =
-      _$SelectFieldSettingsImpl.fromJson;
+      _$SelectFieldSettingsImpl<T>.fromJson;
 
   @override
   String? get labelText;
@@ -671,11 +672,11 @@ abstract class _SelectFieldSettings extends SelectFieldSettings {
   SelectFieldDisplayMode? get displayMode;
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  Widget Function(dynamic)? get valueBuilder;
+  Widget Function(T?)? get valueBuilder;
   @override
   @JsonKey(ignore: true)
-  _$$SelectFieldSettingsImplCopyWith<_$SelectFieldSettingsImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$SelectFieldSettingsImplCopyWith<T, _$SelectFieldSettingsImpl<T>>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 SelectStringFieldSettings _$SelectStringFieldSettingsFromJson(

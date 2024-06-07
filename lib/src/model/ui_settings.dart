@@ -77,20 +77,20 @@ class NumFieldSettings with _$NumFieldSettings {
 enum SelectFieldDisplayMode { selectChip, tiles }
 
 @freezed
-class SelectFieldSettings with _$SelectFieldSettings {
+class SelectFieldSettings<T> with _$SelectFieldSettings<T> {
   const factory SelectFieldSettings({
     String? labelText,
     SelectFieldDisplayMode? displayMode,
     @JsonKey(includeFromJson: false, includeToJson: false)
-    Widget Function(dynamic)? valueBuilder,
-  }) = _SelectFieldSettings;
+    Widget Function(T?)? valueBuilder,
+  }) = _SelectFieldSettings<T>;
 
   const SelectFieldSettings._();
 
   factory SelectFieldSettings.fromJson(Map<String, dynamic> json) =>
       _$SelectFieldSettingsFromJson(json);
 
-  SelectFieldSettings merge(SelectFieldSettings? other) => other == null
+  SelectFieldSettings<T> merge(SelectFieldSettings<T>? other) => other == null
       ? this
       : SelectFieldSettings(
           labelText: labelText ?? other.labelText,

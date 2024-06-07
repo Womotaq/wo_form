@@ -751,7 +751,7 @@ mixin _$WoFormInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings uiSettings)
+            SelectFieldSettings<String> uiSettings)
         selectString,
     required TResult Function(
             String id,
@@ -781,7 +781,7 @@ mixin _$WoFormInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings uiSettings)?
+            SelectFieldSettings<String> uiSettings)?
         selectString,
     TResult? Function(
             String id,
@@ -811,7 +811,7 @@ mixin _$WoFormInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings uiSettings)?
+            SelectFieldSettings<String> uiSettings)?
         selectString,
     TResult Function(
             String id,
@@ -1030,7 +1030,7 @@ class _$BooleanInputImpl extends BooleanInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings uiSettings)
+            SelectFieldSettings<String> uiSettings)
         selectString,
     required TResult Function(
             String id,
@@ -1063,7 +1063,7 @@ class _$BooleanInputImpl extends BooleanInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings uiSettings)?
+            SelectFieldSettings<String> uiSettings)?
         selectString,
     TResult? Function(
             String id,
@@ -1096,7 +1096,7 @@ class _$BooleanInputImpl extends BooleanInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings uiSettings)?
+            SelectFieldSettings<String> uiSettings)?
         selectString,
     TResult Function(
             String id,
@@ -1325,7 +1325,7 @@ class _$NumInputImpl extends NumInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings uiSettings)
+            SelectFieldSettings<String> uiSettings)
         selectString,
     required TResult Function(
             String id,
@@ -1358,7 +1358,7 @@ class _$NumInputImpl extends NumInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings uiSettings)?
+            SelectFieldSettings<String> uiSettings)?
         selectString,
     TResult? Function(
             String id,
@@ -1391,7 +1391,7 @@ class _$NumInputImpl extends NumInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings uiSettings)?
+            SelectFieldSettings<String> uiSettings)?
         selectString,
     TResult Function(
             String id,
@@ -1492,9 +1492,9 @@ abstract class _$$SelectStringInputImplCopyWith<$Res>
       List<String> defaultValue,
       List<String> availibleValues,
       int minCount,
-      SelectFieldSettings uiSettings});
+      SelectFieldSettings<String> uiSettings});
 
-  $SelectFieldSettingsCopyWith<$Res> get uiSettings;
+  $SelectFieldSettingsCopyWith<String, $Res> get uiSettings;
 }
 
 /// @nodoc
@@ -1539,14 +1539,15 @@ class __$$SelectStringInputImplCopyWithImpl<$Res>
       uiSettings: null == uiSettings
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
-              as SelectFieldSettings,
+              as SelectFieldSettings<String>,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $SelectFieldSettingsCopyWith<$Res> get uiSettings {
-    return $SelectFieldSettingsCopyWith<$Res>(_value.uiSettings, (value) {
+  $SelectFieldSettingsCopyWith<String, $Res> get uiSettings {
+    return $SelectFieldSettingsCopyWith<String, $Res>(_value.uiSettings,
+        (value) {
       return _then(_value.copyWith(uiSettings: value));
     });
   }
@@ -1561,7 +1562,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
       final List<String> defaultValue = const [],
       final List<String> availibleValues = const [],
       this.minCount = 0,
-      this.uiSettings = const SelectFieldSettings(),
+      this.uiSettings = const SelectFieldSettings<String>(),
       final String? $type})
       : _defaultValue = defaultValue,
         _availibleValues = availibleValues,
@@ -1598,7 +1599,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
   final int minCount;
   @override
   @JsonKey()
-  final SelectFieldSettings uiSettings;
+  final SelectFieldSettings<String> uiSettings;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
@@ -1663,7 +1664,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings uiSettings)
+            SelectFieldSettings<String> uiSettings)
         selectString,
     required TResult Function(
             String id,
@@ -1697,7 +1698,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings uiSettings)?
+            SelectFieldSettings<String> uiSettings)?
         selectString,
     TResult? Function(
             String id,
@@ -1731,7 +1732,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings uiSettings)?
+            SelectFieldSettings<String> uiSettings)?
         selectString,
     TResult Function(
             String id,
@@ -1802,7 +1803,7 @@ abstract class SelectStringInput extends WoFormInput {
       final List<String> defaultValue,
       final List<String> availibleValues,
       final int minCount,
-      final SelectFieldSettings uiSettings}) = _$SelectStringInputImpl;
+      final SelectFieldSettings<String> uiSettings}) = _$SelectStringInputImpl;
   const SelectStringInput._() : super._();
 
   factory SelectStringInput.fromJson(Map<String, dynamic> json) =
@@ -1816,7 +1817,7 @@ abstract class SelectStringInput extends WoFormInput {
   List<String> get availibleValues;
   int get minCount;
   @override
-  SelectFieldSettings get uiSettings;
+  SelectFieldSettings<String> get uiSettings;
   @override
   @JsonKey(ignore: true)
   _$$SelectStringInputImplCopyWith<_$SelectStringInputImpl> get copyWith =>
@@ -1976,7 +1977,7 @@ class _$StringInputImpl extends StringInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings uiSettings)
+            SelectFieldSettings<String> uiSettings)
         selectString,
     required TResult Function(
             String id,
@@ -2009,7 +2010,7 @@ class _$StringInputImpl extends StringInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings uiSettings)?
+            SelectFieldSettings<String> uiSettings)?
         selectString,
     TResult? Function(
             String id,
@@ -2042,7 +2043,7 @@ class _$StringInputImpl extends StringInput {
             List<String> defaultValue,
             List<String> availibleValues,
             int minCount,
-            SelectFieldSettings uiSettings)?
+            SelectFieldSettings<String> uiSettings)?
         selectString,
     TResult Function(
             String id,
@@ -2140,7 +2141,7 @@ mixin _$SelectInput<T> {
   int get minCount => throw _privateConstructorUsedError;
   List<T> get defaultValues => throw _privateConstructorUsedError;
   List<T> get availibleValues => throw _privateConstructorUsedError;
-  SelectFieldSettings get uiSettings => throw _privateConstructorUsedError;
+  SelectFieldSettings<T>? get uiSettings => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
   Object? Function(T)? get toJsonT => throw _privateConstructorUsedError;
 
@@ -2161,11 +2162,11 @@ abstract class $SelectInputCopyWith<T, $Res> {
       int minCount,
       List<T> defaultValues,
       List<T> availibleValues,
-      SelectFieldSettings uiSettings,
+      SelectFieldSettings<T>? uiSettings,
       @JsonKey(includeToJson: false, includeFromJson: false)
       Object? Function(T)? toJsonT});
 
-  $SelectFieldSettingsCopyWith<$Res> get uiSettings;
+  $SelectFieldSettingsCopyWith<T, $Res>? get uiSettings;
 }
 
 /// @nodoc
@@ -2186,7 +2187,7 @@ class _$SelectInputCopyWithImpl<T, $Res, $Val extends SelectInput<T>>
     Object? minCount = null,
     Object? defaultValues = null,
     Object? availibleValues = null,
-    Object? uiSettings = null,
+    Object? uiSettings = freezed,
     Object? toJsonT = freezed,
   }) {
     return _then(_value.copyWith(
@@ -2210,10 +2211,10 @@ class _$SelectInputCopyWithImpl<T, $Res, $Val extends SelectInput<T>>
           ? _value.availibleValues
           : availibleValues // ignore: cast_nullable_to_non_nullable
               as List<T>,
-      uiSettings: null == uiSettings
+      uiSettings: freezed == uiSettings
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
-              as SelectFieldSettings,
+              as SelectFieldSettings<T>?,
       toJsonT: freezed == toJsonT
           ? _value.toJsonT
           : toJsonT // ignore: cast_nullable_to_non_nullable
@@ -2223,8 +2224,12 @@ class _$SelectInputCopyWithImpl<T, $Res, $Val extends SelectInput<T>>
 
   @override
   @pragma('vm:prefer-inline')
-  $SelectFieldSettingsCopyWith<$Res> get uiSettings {
-    return $SelectFieldSettingsCopyWith<$Res>(_value.uiSettings, (value) {
+  $SelectFieldSettingsCopyWith<T, $Res>? get uiSettings {
+    if (_value.uiSettings == null) {
+      return null;
+    }
+
+    return $SelectFieldSettingsCopyWith<T, $Res>(_value.uiSettings!, (value) {
       return _then(_value.copyWith(uiSettings: value) as $Val);
     });
   }
@@ -2244,12 +2249,12 @@ abstract class _$$SelectInputImplCopyWith<T, $Res>
       int minCount,
       List<T> defaultValues,
       List<T> availibleValues,
-      SelectFieldSettings uiSettings,
+      SelectFieldSettings<T>? uiSettings,
       @JsonKey(includeToJson: false, includeFromJson: false)
       Object? Function(T)? toJsonT});
 
   @override
-  $SelectFieldSettingsCopyWith<$Res> get uiSettings;
+  $SelectFieldSettingsCopyWith<T, $Res>? get uiSettings;
 }
 
 /// @nodoc
@@ -2268,7 +2273,7 @@ class __$$SelectInputImplCopyWithImpl<T, $Res>
     Object? minCount = null,
     Object? defaultValues = null,
     Object? availibleValues = null,
-    Object? uiSettings = null,
+    Object? uiSettings = freezed,
     Object? toJsonT = freezed,
   }) {
     return _then(_$SelectInputImpl<T>(
@@ -2292,10 +2297,10 @@ class __$$SelectInputImplCopyWithImpl<T, $Res>
           ? _value._availibleValues
           : availibleValues // ignore: cast_nullable_to_non_nullable
               as List<T>,
-      uiSettings: null == uiSettings
+      uiSettings: freezed == uiSettings
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
-              as SelectFieldSettings,
+              as SelectFieldSettings<T>?,
       toJsonT: freezed == toJsonT
           ? _value.toJsonT
           : toJsonT // ignore: cast_nullable_to_non_nullable
@@ -2313,7 +2318,7 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
       this.minCount = 0,
       final List<T> defaultValues = const [],
       final List<T> availibleValues = const [],
-      this.uiSettings = const SelectFieldSettings(),
+      this.uiSettings,
       @JsonKey(includeToJson: false, includeFromJson: false) this.toJsonT})
       : _defaultValues = defaultValues,
         _availibleValues = availibleValues,
@@ -2345,8 +2350,7 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
   }
 
   @override
-  @JsonKey()
-  final SelectFieldSettings uiSettings;
+  final SelectFieldSettings<T>? uiSettings;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final Object? Function(T)? toJsonT;
@@ -2401,7 +2405,7 @@ abstract class _SelectInput<T> extends SelectInput<T> {
       final int minCount,
       final List<T> defaultValues,
       final List<T> availibleValues,
-      final SelectFieldSettings uiSettings,
+      final SelectFieldSettings<T>? uiSettings,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final Object? Function(T)? toJsonT}) = _$SelectInputImpl<T>;
   const _SelectInput._() : super._();
@@ -2417,7 +2421,7 @@ abstract class _SelectInput<T> extends SelectInput<T> {
   @override
   List<T> get availibleValues;
   @override
-  SelectFieldSettings get uiSettings;
+  SelectFieldSettings<T>? get uiSettings;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   Object? Function(T)? get toJsonT;

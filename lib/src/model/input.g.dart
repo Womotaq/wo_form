@@ -18,8 +18,10 @@ SelectInput<T> _$SelectInputFromJson<T>(
           (json['defaultValues'] as List<dynamic>).map(fromJsonT).toList(),
       availibleValues:
           (json['availibleValues'] as List<dynamic>).map(fromJsonT).toList(),
-      uiSettings: SelectFieldSettings.fromJson(
-          json['uiSettings'] as Map<String, dynamic>),
+      uiSettings: json['uiSettings'] == null
+          ? null
+          : SelectFieldSettings<T>.fromJson(
+              json['uiSettings'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$SelectInputToJson<T>(
@@ -92,8 +94,8 @@ _$SelectStringInputImpl _$$SelectStringInputImplFromJson(
           const [],
       minCount: (json['minCount'] as num?)?.toInt() ?? 0,
       uiSettings: json['uiSettings'] == null
-          ? const SelectFieldSettings()
-          : SelectFieldSettings.fromJson(
+          ? const SelectFieldSettings<String>()
+          : SelectFieldSettings<String>.fromJson(
               json['uiSettings'] as Map<String, dynamic>),
       $type: json['runtimeType'] as String?,
     );

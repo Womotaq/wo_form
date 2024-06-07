@@ -3,23 +3,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/wo_form.dart';
 
-class SelectField<S> extends StatelessWidget {
+class SelectField<T> extends StatelessWidget {
   const SelectField({
     required this.inputPath,
-    this.valueBuilder,
     this.settings,
     super.key,
   });
 
   final String inputPath;
-  final Widget Function(S?)? valueBuilder;
-  final SelectFieldSettings? settings;
+  final SelectFieldSettings<T>? settings;
 
-  SelectInput<S> getInput(WoForm form) {
+  SelectInput<T> getInput(WoForm form) {
     final input = form.getInput(path: inputPath);
-    if (input is! SelectInput<S>) {
+    if (input is! SelectInput<T>) {
       throw ArgumentError(
-        'Expected <SelectInput<$S>> at path: "$inputPath", '
+        'Expected <SelectInput<$T>> at path: "$inputPath", '
         'found: <${input.runtimeType}>',
       );
     }
@@ -29,20 +27,18 @@ class SelectField<S> extends StatelessWidget {
 
   void onUniqueChoice({
     required WoFormValuesCubit valuesCubit,
-    required List<S> selectedValues,
-    required S value,
+    required List<T> selectedValues,
+    required T value,
   }) =>
-      value == null
-          ? null
-          : valuesCubit.onValueChanged(
-              inputPath: inputPath,
-              value: selectedValues.contains(value) ? <S>[] : [value],
-            );
+      valuesCubit.onValueChanged(
+        inputPath: inputPath,
+        value: selectedValues.contains(value) ? <T>[] : [value],
+      );
 
   void onMultipleChoice({
     required WoFormValuesCubit valuesCubit,
-    required Iterable<S> selectedValues,
-    required S value,
+    required Iterable<T> selectedValues,
+    required T value,
   }) {
     final selectedSet = selectedValues.toSet();
     if (!selectedSet.add(value)) selectedSet.remove(value);
@@ -59,14 +55,18 @@ class SelectField<S> extends StatelessWidget {
 
     final input = getInput(form);
     final inputSettings = input.uiSettings;
-    final mergedSettings = settings?.merge(inputSettings) ?? inputSettings;
+    final mergedSettings = settings?.merge(inputSettings) ??
+        inputSettings ??
+        const SelectFieldSettings();
 
-    return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, List<S>>(
+    final valueBuilder = mergedSettings.valueBuilder;
+
+    return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, List<T>>(
       selector: (values) {
         final value = values[inputPath];
-        if (value is! List<S>?) {
+        if (value is! List<T>?) {
           throw ArgumentError(
-            'Expected <List<$S>?> at inputId: "$inputPath", '
+            'Expected <List<$T>?> at inputId: "$inputPath", '
             'found: <${value.runtimeType}>',
           );
         }
@@ -106,7 +106,7 @@ class SelectField<S> extends StatelessWidget {
               ),
             SelectFieldDisplayMode.selectChip => ListTile(
                 title: Text(mergedSettings.labelText ?? ''),
-                trailing: SelectChip<S>.uniqueChoice(
+                trailing: SelectChip<T>.uniqueChoice(
                   values: input.availibleValues.whereType(),
                   onSelected: (value) => onUniqueChoice(
                     valuesCubit: valuesCubit,
@@ -122,7 +122,7 @@ class SelectField<S> extends StatelessWidget {
 
         return ListTile(
           title: Text(mergedSettings.labelText ?? ''),
-          trailing: SelectChip<S>.multipleChoices(
+          trailing: SelectChip<T>.multipleChoices(
             values: input.availibleValues.whereType(),
             onSelected: (value) => onMultipleChoice(
               valuesCubit: valuesCubit,
@@ -141,7 +141,6 @@ class SelectField<S> extends StatelessWidget {
 class SelectStringField extends SelectField<String> {
   const SelectStringField({
     required super.inputPath,
-    super.valueBuilder,
     super.settings,
     super.key,
   });
@@ -155,7 +154,7 @@ class SelectStringField extends SelectField<String> {
         'Expected SelectStringInput, got ${selectStringInput.runtimeType}',
       );
     }
-        
+
     return SelectInput<String>(
       id: selectStringInput.id,
       maxCount: selectStringInput.maxCount,

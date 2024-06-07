@@ -27,16 +27,16 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
             labelText: 'Requis',
           ),
         ),
-        SelectInput(
+        SelectInput<RegexPattern?>(
           id: 'regexPattern',
-          availibleValues: RegexPattern.values,
+          availibleValues: <RegexPattern?>[null] + RegexPattern.values,
           maxCount: 1,
           uiSettings: SelectFieldSettings(
             labelText: 'Regex pattern',
             displayMode: SelectFieldDisplayMode.selectChip,
-            valueBuilder: (regex) => Text((regex as RegexPattern?)?.name ?? ''),
+            valueBuilder: (regex) => Text(regex?.name ?? 'Aucun'),
           ),
-          toJsonT: (regex) => regex.value,
+          toJsonT: (regex) => regex?.value,
         ),
         InputsNode(
           id: 'uiSettings',

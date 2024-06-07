@@ -59,16 +59,16 @@ Map<String, dynamic> _$$NumFieldSettingsImplToJson(
       'labelText': instance.labelText,
     };
 
-_$SelectFieldSettingsImpl _$$SelectFieldSettingsImplFromJson(
+_$SelectFieldSettingsImpl<T> _$$SelectFieldSettingsImplFromJson<T>(
         Map<String, dynamic> json) =>
-    _$SelectFieldSettingsImpl(
+    _$SelectFieldSettingsImpl<T>(
       labelText: json['labelText'] as String?,
       displayMode: $enumDecodeNullable(
           _$SelectFieldDisplayModeEnumMap, json['displayMode']),
     );
 
-Map<String, dynamic> _$$SelectFieldSettingsImplToJson(
-        _$SelectFieldSettingsImpl instance) =>
+Map<String, dynamic> _$$SelectFieldSettingsImplToJson<T>(
+        _$SelectFieldSettingsImpl<T> instance) =>
     <String, dynamic>{
       'labelText': instance.labelText,
       'displayMode': _$SelectFieldDisplayModeEnumMap[instance.displayMode],

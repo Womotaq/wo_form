@@ -28,7 +28,7 @@ class ReportPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WoFormInitializer(
-      form: const WoForm(
+      form: WoForm(
         unmodifiableValuesJson: {
           'reporterId': 'me',
           'reportedId': 'him',
@@ -41,9 +41,18 @@ class ReportPage extends StatelessWidget {
             maxCount: 1,
             uiSettings: SelectFieldSettings(
               displayMode: SelectFieldDisplayMode.tiles,
+              valueBuilder: (type) => Text(
+                switch (type as ReportType?) {
+                  null => 'Vide',
+                  ReportType.cheating => 'Triche',
+                  ReportType.fairPlay => 'Fair play',
+                  ReportType.verbalAbuse => 'Violence verbale',
+                  ReportType.other => 'Autre',
+                },
+              ),
             ),
           ),
-          StringInput(
+          const StringInput(
             id: ReportForm.messageId,
             uiSettings: StringFieldSettings(
               hintText: 'Dites-en plus !',
@@ -51,7 +60,7 @@ class ReportPage extends StatelessWidget {
               maxLines: 5,
             ),
           ),
-          BooleanInput(
+          const BooleanInput(
             id: ReportForm.blockId,
             uiSettings: BooleanFieldSettings(
               labelText: 'Bloquer cette raclure ?',
@@ -105,20 +114,9 @@ class _ReportPage extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Flexible(
+            const Flexible(
               child: SingleChildScrollView(
-                child: SelectField<ReportType>(
-                  inputPath: ReportForm.typePath,
-                  valueBuilder: (type) => Text(
-                    switch (type) {
-                      null => 'Vide',
-                      ReportType.cheating => 'Triche',
-                      ReportType.fairPlay => 'Fair play',
-                      ReportType.verbalAbuse => 'Violence verbale',
-                      ReportType.other => 'Autre',
-                    },
-                  ),
-                ),
+                child: SelectField<ReportType>(inputPath: ReportForm.typePath),
               ),
             ),
             WoGap.medium,
