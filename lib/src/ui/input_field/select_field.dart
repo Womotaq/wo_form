@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
+import 'package:wo_form/src/ui/input_field/input_list_tile.dart';
 import 'package:wo_form/wo_form.dart';
 
 class SelectField<T> extends StatelessWidget {
@@ -75,7 +76,7 @@ class SelectField<T> extends StatelessWidget {
       builder: (context, selectedValues) {
         if (input.maxCount == 1) {
           return switch (mergedSettings.displayMode) {
-            null || SelectFieldDisplayMode.tiles => Column(
+            null || SelectFieldDisplayMode.tile => Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (mergedSettings.labelText != null)
@@ -104,10 +105,10 @@ class SelectField<T> extends StatelessWidget {
                   ),
                 ],
               ),
-            SelectFieldDisplayMode.selectChip => ListTile(
-                title: Text(mergedSettings.labelText ?? ''),
+            SelectFieldDisplayMode.chip => InputListTile(
+                leading: Text(mergedSettings.labelText ?? ''),
                 trailing: SelectChip<T>.uniqueChoice(
-                  values: input.availibleValues.whereType(),
+                  values: input.availibleValues,
                   onSelected: (value) => onUniqueChoice(
                     valuesCubit: valuesCubit,
                     selectedValues: selectedValues,
@@ -118,21 +119,53 @@ class SelectField<T> extends StatelessWidget {
                 ),
               ),
           };
+        } else {
+          return Column(
+            children: [
+              InputListTile(
+                leading: Text(mergedSettings.labelText ?? ''),
+                trailing: SelectChip<T>.multipleChoices(
+                  values: input.availibleValues,
+                  onSelected: (value) => onMultipleChoice(
+                    valuesCubit: valuesCubit,
+                    selectedValues: selectedValues,
+                    value: value,
+                  ),
+                  selectedValues: selectedValues,
+                  valueBuilder: valueBuilder,
+                  showArrow: false,
+                  previewBuilder: (_) => const Icon(Icons.add),
+                ),
+              ),
+              if (selectedValues.isNotEmpty)
+                ListTile(
+                  title: Wrap(
+                    spacing: WoSize.small,
+                    runSpacing: WoSize.small,
+                    children: [
+                      ...selectedValues.map(
+                        (v) => CardButton.filled(
+                          onPressed: () => onMultipleChoice(
+                            valuesCubit: valuesCubit,
+                            selectedValues: selectedValues,
+                            value: v,
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              valueBuilder?.call(v) ?? Text(v.toString()),
+                              WoGap.xsmall,
+                              const Icon(Icons.close, size: WoSize.medium),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+            ],
+          );
         }
-
-        return ListTile(
-          title: Text(mergedSettings.labelText ?? ''),
-          trailing: SelectChip<T>.multipleChoices(
-            values: input.availibleValues.whereType(),
-            onSelected: (value) => onMultipleChoice(
-              valuesCubit: valuesCubit,
-              selectedValues: selectedValues,
-              value: value,
-            ),
-            selectedValues: selectedValues.whereType(),
-            valueBuilder: valueBuilder,
-          ),
-        );
       },
     );
   }
@@ -163,6 +196,43 @@ class SelectStringField extends SelectField<String> {
       availibleValues: selectStringInput.availibleValues,
       uiSettings: selectStringInput.uiSettings,
       toJsonT: (value) => value,
+    );
+  }
+}
+
+class _Deletable extends StatelessWidget {
+  const _Deletable({required this.child, required this.onDelete});
+
+  final Widget child;
+  final VoidCallback onDelete;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          child,
+          WoGap.xsmall,
+          const Icon(Icons.close, size: WoSize.medium),
+        ],
+      ),
+    );
+  }
+}
+
+class _SelectChipLike extends StatelessWidget {
+  const _SelectChipLike({required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card.filled(
+      margin: EdgeInsets.zero,
+      child: InkWell(
+        child: WoPadding.allSmall(child: child),
+      ),
     );
   }
 }

@@ -74,7 +74,7 @@ class NumFieldSettings with _$NumFieldSettings {
         );
 }
 
-enum SelectFieldDisplayMode { selectChip, tiles }
+enum SelectFieldDisplayMode { chip, tile }
 
 @freezed
 class SelectFieldSettings<T> with _$SelectFieldSettings<T> {

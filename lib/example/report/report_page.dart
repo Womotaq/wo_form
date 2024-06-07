@@ -40,7 +40,7 @@ class ReportPage extends StatelessWidget {
             minCount: 1,
             maxCount: 1,
             uiSettings: SelectFieldSettings(
-              displayMode: SelectFieldDisplayMode.tiles,
+              displayMode: SelectFieldDisplayMode.tile,
               valueBuilder: (type) => Text(
                 switch (type as ReportType?) {
                   null => 'Vide',

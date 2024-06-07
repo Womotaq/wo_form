@@ -33,7 +33,7 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
           maxCount: 1,
           uiSettings: SelectFieldSettings(
             labelText: 'Regex pattern',
-            displayMode: SelectFieldDisplayMode.selectChip,
+            displayMode: SelectFieldDisplayMode.chip,
             valueBuilder: (regex) => Text(regex?.name ?? 'Aucun'),
           ),
           toJsonT: (regex) => regex?.value,
@@ -62,7 +62,7 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
               maxCount: 1,
               uiSettings: SelectFieldSettings(
                 labelText: 'Action à droite du champ',
-                displayMode: SelectFieldDisplayMode.selectChip,
+                displayMode: SelectFieldDisplayMode.chip,
                 valueBuilder: (value) => Text(value?.name ?? 'Aucune'),
               ),
             ),
@@ -78,7 +78,7 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
               maxCount: 1,
               uiSettings: SelectFieldSettings(
                 labelText: 'Type de text',
-                displayMode: SelectFieldDisplayMode.selectChip,
+                displayMode: SelectFieldDisplayMode.chip,
                 valueBuilder: (value) => Text(value?.name ?? 'Défaut'),
               ),
               toJsonT: (value) => const TextInputTypeConverter().toJson(value),
@@ -115,7 +115,7 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
               maxCount: 1,
               uiSettings: SelectFieldSettings(
                 labelText: "Bouton 'Entrée' du clavier",
-                displayMode: SelectFieldDisplayMode.selectChip,
+                displayMode: SelectFieldDisplayMode.chip,
                 valueBuilder: (value) => Text(value?.name ?? 'Défaut'),
               ),
             ),
@@ -126,7 +126,7 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
               maxCount: 1,
               uiSettings: SelectFieldSettings(
                 labelText: 'Gestion des majuscules',
-                // displayMode: SelectFieldDisplayMode.selectChip,
+                // displayMode: SelectFieldDisplayMode.chip,
                 valueBuilder: (value) => Text(value?.name ?? ''),
               ),
             ),

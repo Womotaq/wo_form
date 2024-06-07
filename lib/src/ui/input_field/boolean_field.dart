@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wo_form/src/ui/input_field/input_list_tile.dart';
 import 'package:wo_form/wo_form.dart';
 
 class BooleanField extends StatelessWidget {
@@ -40,7 +41,7 @@ class BooleanField extends StatelessWidget {
         return value ?? false;
       },
       builder: (context, value) {
-        final onOffType = switch (mergedSettings.onOffType) {
+        final onOffButton = switch (mergedSettings.onOffType) {
           null || BooleanFieldOnOffType.switchButton => Switch(
               value: value,
               onChanged: (value) => valuesCubit.onValueChanged(
@@ -58,7 +59,9 @@ class BooleanField extends StatelessWidget {
                     ),
             ),
         };
-        final onOffTypeIsLeading = switch (mergedSettings.onOffPosition) {
+        final title = Text(mergedSettings.labelText ?? '');
+
+        final onOffIsLeading = switch (mergedSettings.onOffPosition) {
           ListTileControlAffinity.leading => true,
           ListTileControlAffinity.trailing => false,
           null || ListTileControlAffinity.platform => switch (
@@ -68,10 +71,9 @@ class BooleanField extends StatelessWidget {
             }
         };
 
-        return ListTile(
-          leading: onOffTypeIsLeading ? onOffType : null,
-          title: Text(mergedSettings.labelText ?? ''),
-          trailing: onOffTypeIsLeading ? null : onOffType,
+        return InputListTile(
+          leading: onOffIsLeading ? onOffButton : title,
+          trailing: onOffIsLeading ? title : onOffButton,
           onTap: () => valuesCubit.onValueChanged(
             inputPath: inputPath,
             value: !value,

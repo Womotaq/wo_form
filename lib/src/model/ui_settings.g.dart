@@ -75,8 +75,8 @@ Map<String, dynamic> _$$SelectFieldSettingsImplToJson<T>(
     };
 
 const _$SelectFieldDisplayModeEnumMap = {
-  SelectFieldDisplayMode.selectChip: 'selectChip',
-  SelectFieldDisplayMode.tiles: 'tiles',
+  SelectFieldDisplayMode.chip: 'chip',
+  SelectFieldDisplayMode.tile: 'tile',
 };
 
 _$SelectStringFieldSettingsImpl _$$SelectStringFieldSettingsImplFromJson(
