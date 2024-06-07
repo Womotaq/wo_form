@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/wo_form.dart';
 
 class InputsNodeWidget extends StatelessWidget {
@@ -32,7 +33,10 @@ class InputsNodeWidget extends StatelessWidget {
       children: [
         if (mergedSettings.labelText != null)
           ExpansionTile(
-            title: Text(mergedSettings.labelText!),
+            title: Text(
+              mergedSettings.labelText!,
+              style: TextStyleExt.bold,
+            ),
             children: input.inputs
                 .map((i) => i.toWidget(parentPath: inputPath))
                 .toList(),

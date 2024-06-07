@@ -144,7 +144,7 @@ class SelectField<T> extends StatelessWidget {
                     runSpacing: WoSize.small,
                     children: [
                       ...selectedValues.map(
-                        (v) => CardButton.filled(
+                        (v) => CardButton.outlined(
                           onPressed: () => onMultipleChoice(
                             valuesCubit: valuesCubit,
                             selectedValues: selectedValues,
@@ -228,7 +228,7 @@ class _SelectChipLike extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card.filled(
+    return Card.outlined(
       margin: EdgeInsets.zero,
       child: InkWell(
         child: WoPadding.allSmall(child: child),

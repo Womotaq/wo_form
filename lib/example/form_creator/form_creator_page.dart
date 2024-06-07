@@ -36,6 +36,7 @@ class StringInputPage extends StatelessWidget {
       form: woFormCreator,
       onSubmitting: () {},
       child: Scaffold(
+        backgroundColor: context.colorScheme.contrastedBackground,
         appBar: AppBar(
           title: const Text("Création d'un champ texte"),
         ),

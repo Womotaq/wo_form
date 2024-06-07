@@ -11,13 +11,17 @@ class WoFormExamplesApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'WoForm Examples',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          // seedColor: const Color.fromARGB(255, 197, 5, 181),
-          seedColor: Color.fromARGB(255, 5, 197, 69),
-          // brightness: Brightness.dark,
-        ),
+      theme: WoTheme.getThemeData(
+        brightness: Brightness.light,
+        primary: const Color.fromARGB(255, 5, 197, 69),
       ),
+      // theme: ThemeData(
+      //   colorScheme: ColorScheme.fromSeed(
+      //     // seedColor: const Color.fromARGB(255, 197, 5, 181),
+      //     seedColor: Color.fromARGB(255, 5, 197, 69),
+      //     // brightness: Brightness.dark,
+      //   ),
+      // ),
       supportedLocales: FormLocalizations.supportedLocales,
       localizationsDelegates: FormLocalizations.localizationsDelegates,
       home: const HomePage(),
