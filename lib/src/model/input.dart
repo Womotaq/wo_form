@@ -32,9 +32,9 @@ mixin WoFormInputMixin {
 
   String? getInvalidExplanation(Object? value, FormLocalizations formL10n);
 
-  Widget toField<T extends WoFormValuesCubit>({required String? parentPath});
+  Widget toField<T extends WoFormValuesCubit>({required String parentPath});
 
-  Widget toWidget<C extends WoFormValuesCubit>({required String? parentPath}) =>
+  Widget toWidget<C extends WoFormValuesCubit>({required String parentPath}) =>
       toField(parentPath: parentPath);
 
   // WoFormElementMixin
@@ -163,8 +163,8 @@ sealed class WoFormInput
   }
 
   @override
-  Widget toField<T extends WoFormValuesCubit>({required String? parentPath}) {
-    final path = parentPath == null ? id : '$parentPath/$id';
+  Widget toField<T extends WoFormValuesCubit>({required String parentPath}) {
+    final path = '$parentPath/$id';
     switch (this) {
       case BooleanInput():
         return BooleanField(inputPath: path);
@@ -294,8 +294,8 @@ class SelectInput<T>
   }
 
   @override
-  Widget toField<C extends WoFormValuesCubit>({required String? parentPath}) =>
-      SelectField<T>(inputPath: parentPath == null ? id : '$parentPath/$id');
+  Widget toField<C extends WoFormValuesCubit>({required String parentPath}) =>
+      SelectField<T>(inputPath: '$parentPath/$id');
 
   @override
   Object? valueToJson(dynamic value) => _selectedValuesToJson<T>(
@@ -306,11 +306,11 @@ class SelectInput<T>
 }
 
 Object? _defaultToJsonT<T>(T value) {
-  if (value is Enum) {
-    return (value as Enum).name;
-  } else if (value is String || value is bool || value is num) {
+  if (value is String || value is bool || value is num) {
     return value;
-  }
+  } else if (value is Enum) {
+    return (value as Enum).name;
+  } 
 
   throw UnimplementedError('No toJsonT provided for <$T>');
 }

@@ -4,61 +4,38 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/src/model/json_converter/inputs_list.dart';
 import 'package:wo_form/wo_form.dart';
 
-part 'node.freezed.dart';
-part 'node.g.dart';
-
-mixin WoFormElementMixin {
-  String get id;
-
-  Map<String, dynamic> toJson();
-
-  Widget toWidget<T extends WoFormValuesCubit>({required String parentPath});
-}
+part 'form.freezed.dart';
+part 'form.g.dart';
 
 @freezed
-sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
-  const factory WoFormNode.inputs({
-    required String id,
+class WoForm with _$WoForm {
+  const factory WoForm({
     Map<String, dynamic>? unmodifiableValuesJson,
     @InputsListConverter() @Default([]) List<WoFormElementMixin> inputs,
-    @JsonKey(toJson: MapFieldSettings.staticToJson)
-    @Default(MapFieldSettings())
-    MapFieldSettings fieldSettings,
-  }) = InputsNode;
+  }) = _WoForm;
 
-  const WoFormNode._();
+  const WoForm._();
 
-  factory WoFormNode.fromJson(Map<String, dynamic> json) =>
-      _$WoFormNodeFromJson(json);
+  factory WoForm.fromJson(Map<String, dynamic> json) => _$WoFormFromJson(json);
 
   // --
 
   Iterable<WoFormNode> get nodes => inputs.whereType();
 
-  Map<String, dynamic> defaultValues({required String parentPath}) => {
+  Map<String, dynamic> defaultValues() => {
         for (final input in inputs)
           if (input is WoFormNode)
-            ...input.defaultValues(parentPath: '$parentPath/$id')
+            ...input.defaultValues(parentPath: '')
           else if (input is WoFormInputMixin)
-            '$parentPath/$id/${input.id}':
-                (input as WoFormInputMixin).defaultValue,
+            '/${input.id}': (input as WoFormInputMixin).defaultValue,
       };
 
-  Iterable<WoFormInputError> getErrors(
-    Map<String, dynamic> valuesMap, {
-    required String parentPath,
-  }) =>
-      [
+  Iterable<WoFormInputError> getErrors(Map<String, dynamic> valuesMap) => [
         for (final input in inputs)
           if (input is WoFormNode)
-            ...input.getErrors(
-              valuesMap,
-              parentPath: '$parentPath/$id',
-            )
+            ...input.getErrors(valuesMap, parentPath: '')
           else if (input is WoFormInputMixin)
-            (input as WoFormInputMixin).getError(
-              valuesMap['$parentPath/$id/${input.id}'],
-            ),
+            (input as WoFormInputMixin).getError(valuesMap['/${input.id}']),
       ].whereNotNull();
 
   /// The path of an input is the ids of it and its parents, separated by the
@@ -91,28 +68,16 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
         ?.getInput(path: path.substring(slashIndex + 1));
   }
 
-  @override
   Widget toWidget<T extends WoFormValuesCubit>({required String parentPath}) =>
-      switch (this) {
-        WoForm() => throw UnimplementedError(),
-        InputsNode() => InputsNodeWidget(inputPath: '$parentPath/$id'),
-      };
+      throw UnimplementedError();
 
-  Map<String, dynamic> valueToJson(
-    Map<String, dynamic> valuesMap, {
-    required String parentPath,
-  }) =>
-      {
+  Map<String, dynamic> valueToJson(Map<String, dynamic> valuesMap) => {
         ...unmodifiableValuesJson ?? {},
         for (final input in inputs)
           if (input is WoFormNode)
-            input.id: input.valueToJson(
-              valuesMap,
-              parentPath: '$parentPath/$id',
-            )
+            input.id: input.valueToJson(valuesMap, parentPath: '')
           else if (input is WoFormInputMixin)
-            input.id: (input as WoFormInputMixin).valueToJson(
-              valuesMap['$parentPath/$id/${input.id}'],
-            ),
+            input.id:
+                (input as WoFormInputMixin).valueToJson(valuesMap[input.id]),
       };
 }

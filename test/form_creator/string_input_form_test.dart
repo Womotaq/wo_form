@@ -15,7 +15,7 @@ void main() {
     ),
   );
   final expectedInputToJson = expectedInput.toJson();
-  final values = stringInputNode.defaultValues();
+  final values = stringInputNode.defaultValues(parentPath: '');
   values['id'] = expectedInput.id;
   values['defaultValue'] = expectedInput.defaultValue;
   values['isRequired'] = expectedInput.isRequired;
@@ -24,11 +24,14 @@ void main() {
       expectedInput.fieldSettings.invalidRegexMessage;
 
   test('StringInput Form : Step 0', () {
-    expect(stringInputNode.getErrors(values).isEmpty, true);
+    expect(stringInputNode.getErrors(values, parentPath: '').isEmpty, true);
   });
 
   test('StringInput Form : Step 1', () {
-    expect(stringInputNode.valueToJson(values), expectedInputToJson);
+    expect(
+      stringInputNode.valueToJson(values, parentPath: ''),
+      expectedInputToJson,
+    );
   });
 
   test('StringInput Form : Step 2', () {

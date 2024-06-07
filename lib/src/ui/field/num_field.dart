@@ -49,10 +49,10 @@ class _NumFieldState extends State<NumField> {
 
     return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, num?>(
       selector: (values) {
-        final value = values[input.id];
+        final value = values[widget.inputPath];
         if (value is! num?) {
           throw ArgumentError(
-            'Expected <num?> at inputId: "${input.id}", '
+            'Expected <num?> at inputId: "${widget.inputPath}", '
             'found: <${value.runtimeType}>',
           );
         }
@@ -75,7 +75,7 @@ class _NumFieldState extends State<NumField> {
           trailing: CountSelector(
             controller: countController,
             onChanged: (value) async => valuesCubit.onValueChanged(
-              inputId: input.id,
+              inputPath: widget.inputPath,
               value: value,
             ),
             axis: Axis.horizontal,

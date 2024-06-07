@@ -30,7 +30,6 @@ class SelectField<S> extends StatelessWidget {
   }
 
   void onUniqueChoice({
-    required String inputId,
     required WoFormValuesCubit valuesCubit,
     required List<S> selectedValues,
     required S value,
@@ -38,12 +37,11 @@ class SelectField<S> extends StatelessWidget {
       value == null
           ? null
           : valuesCubit.onValueChanged(
-              inputId: inputId,
+              inputPath: inputPath,
               value: selectedValues.contains(value) ? <S>[] : [value],
             );
 
   void onMultipleChoice({
-    required String inputId,
     required WoFormValuesCubit valuesCubit,
     required Iterable<S> selectedValues,
     required S value,
@@ -51,7 +49,7 @@ class SelectField<S> extends StatelessWidget {
     final selectedSet = selectedValues.toSet();
     if (!selectedSet.add(value)) selectedSet.remove(value);
     valuesCubit.onValueChanged(
-      inputId: inputId,
+      inputPath: inputPath,
       value: selectedSet.toList(),
     );
   }
@@ -67,10 +65,10 @@ class SelectField<S> extends StatelessWidget {
 
     return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, List<S>>(
       selector: (values) {
-        final value = values[input.id];
+        final value = values[inputPath];
         if (value is! List<S>?) {
           throw ArgumentError(
-            'Expected <List<$S>?> at inputId: "${input.id}", '
+            'Expected <List<$S>?> at inputId: "$inputPath", '
             'found: <${value.runtimeType}>',
           );
         }
@@ -92,7 +90,6 @@ class SelectField<S> extends StatelessWidget {
                         value: value,
                         groupValue: selectedValues.firstOrNull,
                         onChanged: (_) => onUniqueChoice(
-                          inputId: input.id,
                           valuesCubit: valuesCubit,
                           selectedValues: selectedValues,
                           value: value,
@@ -101,7 +98,6 @@ class SelectField<S> extends StatelessWidget {
                       title:
                           valueBuilder?.call(value) ?? Text(value.toString()),
                       onTap: () => onUniqueChoice(
-                          inputId: input.id,
                         valuesCubit: valuesCubit,
                         selectedValues: selectedValues,
                         value: value,
@@ -115,7 +111,6 @@ class SelectField<S> extends StatelessWidget {
                 trailing: SelectChip<S>.uniqueChoice(
                   values: input.availibleValues.whereType(),
                   onSelected: (value) => onUniqueChoice(
-                          inputId: input.id,
                     valuesCubit: valuesCubit,
                     selectedValues: selectedValues,
                     value: value,
@@ -133,7 +128,6 @@ class SelectField<S> extends StatelessWidget {
           trailing: SelectChip<S>.multipleChoices(
             values: input.availibleValues.whereType(),
             onSelected: (value) => onMultipleChoice(
-                          inputId: input.id,
               valuesCubit: valuesCubit,
               selectedValues: selectedValues,
               value: value,

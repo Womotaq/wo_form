@@ -15,36 +15,24 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 WoFormNode _$WoFormNodeFromJson(Map<String, dynamic> json) {
-  switch (json['runtimeType']) {
-    case 'root':
-      return WoForm.fromJson(json);
-    case 'inputs':
-      return InputsNode.fromJson(json);
-
-    default:
-      throw CheckedFromJsonException(json, 'runtimeType', 'WoFormNode',
-          'Invalid union type "${json['runtimeType']}"!');
-  }
+  return InputsNode.fromJson(json);
 }
 
 /// @nodoc
 mixin _$WoFormNode {
   String get id => throw _privateConstructorUsedError;
-  @InputsListConverter()
-  List<WoFormElementMixin> get inputs => throw _privateConstructorUsedError;
   Map<String, dynamic>? get unmodifiableValuesJson =>
       throw _privateConstructorUsedError;
+  @InputsListConverter()
+  List<WoFormElementMixin> get inputs => throw _privateConstructorUsedError;
+  @JsonKey(toJson: MapFieldSettings.staticToJson)
+  MapFieldSettings get fieldSettings => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
             String id,
-            @InputsListConverter() List<WoFormElementMixin> inputs,
-            Map<String, dynamic>? unmodifiableValuesJson)
-        root,
-    required TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormElementMixin> inputs,
             Map<String, dynamic>? unmodifiableValuesJson,
+            @InputsListConverter() List<WoFormElementMixin> inputs,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)
         inputs,
@@ -54,13 +42,8 @@ mixin _$WoFormNode {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
             String id,
-            @InputsListConverter() List<WoFormElementMixin> inputs,
-            Map<String, dynamic>? unmodifiableValuesJson)?
-        root,
-    TResult? Function(
-            String id,
-            @InputsListConverter() List<WoFormElementMixin> inputs,
             Map<String, dynamic>? unmodifiableValuesJson,
+            @InputsListConverter() List<WoFormElementMixin> inputs,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
         inputs,
@@ -70,13 +53,8 @@ mixin _$WoFormNode {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
             String id,
-            @InputsListConverter() List<WoFormElementMixin> inputs,
-            Map<String, dynamic>? unmodifiableValuesJson)?
-        root,
-    TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormElementMixin> inputs,
             Map<String, dynamic>? unmodifiableValuesJson,
+            @InputsListConverter() List<WoFormElementMixin> inputs,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
         inputs,
@@ -85,19 +63,16 @@ mixin _$WoFormNode {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(WoForm value) root,
     required TResult Function(InputsNode value) inputs,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(WoForm value)? root,
     TResult? Function(InputsNode value)? inputs,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(WoForm value)? root,
     TResult Function(InputsNode value)? inputs,
     required TResult orElse(),
   }) =>
@@ -116,8 +91,12 @@ abstract class $WoFormNodeCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
+      Map<String, dynamic>? unmodifiableValuesJson,
       @InputsListConverter() List<WoFormElementMixin> inputs,
-      Map<String, dynamic>? unmodifiableValuesJson});
+      @JsonKey(toJson: MapFieldSettings.staticToJson)
+      MapFieldSettings fieldSettings});
+
+  $MapFieldSettingsCopyWith<$Res> get fieldSettings;
 }
 
 /// @nodoc
@@ -134,265 +113,37 @@ class _$WoFormNodeCopyWithImpl<$Res, $Val extends WoFormNode>
   @override
   $Res call({
     Object? id = null,
-    Object? inputs = null,
     Object? unmodifiableValuesJson = freezed,
+    Object? inputs = null,
+    Object? fieldSettings = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      inputs: null == inputs
-          ? _value.inputs
-          : inputs // ignore: cast_nullable_to_non_nullable
-              as List<WoFormElementMixin>,
       unmodifiableValuesJson: freezed == unmodifiableValuesJson
           ? _value.unmodifiableValuesJson
           : unmodifiableValuesJson // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$WoFormImplCopyWith<$Res>
-    implements $WoFormNodeCopyWith<$Res> {
-  factory _$$WoFormImplCopyWith(
-          _$WoFormImpl value, $Res Function(_$WoFormImpl) then) =
-      __$$WoFormImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      @InputsListConverter() List<WoFormElementMixin> inputs,
-      Map<String, dynamic>? unmodifiableValuesJson});
-}
-
-/// @nodoc
-class __$$WoFormImplCopyWithImpl<$Res>
-    extends _$WoFormNodeCopyWithImpl<$Res, _$WoFormImpl>
-    implements _$$WoFormImplCopyWith<$Res> {
-  __$$WoFormImplCopyWithImpl(
-      _$WoFormImpl _value, $Res Function(_$WoFormImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? inputs = null,
-    Object? unmodifiableValuesJson = freezed,
-  }) {
-    return _then(_$WoFormImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       inputs: null == inputs
-          ? _value._inputs
+          ? _value.inputs
           : inputs // ignore: cast_nullable_to_non_nullable
               as List<WoFormElementMixin>,
-      unmodifiableValuesJson: freezed == unmodifiableValuesJson
-          ? _value._unmodifiableValuesJson
-          : unmodifiableValuesJson // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$WoFormImpl extends WoForm {
-  const _$WoFormImpl(
-      {this.id = r'$root$',
-      @InputsListConverter() final List<WoFormElementMixin> inputs = const [],
-      final Map<String, dynamic>? unmodifiableValuesJson,
-      final String? $type})
-      : _inputs = inputs,
-        _unmodifiableValuesJson = unmodifiableValuesJson,
-        $type = $type ?? 'root',
-        super._();
-
-  factory _$WoFormImpl.fromJson(Map<String, dynamic> json) =>
-      _$$WoFormImplFromJson(json);
-
-  @override
-  @JsonKey()
-  final String id;
-  final List<WoFormElementMixin> _inputs;
-  @override
-  @JsonKey()
-  @InputsListConverter()
-  List<WoFormElementMixin> get inputs {
-    if (_inputs is EqualUnmodifiableListView) return _inputs;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_inputs);
+      fieldSettings: null == fieldSettings
+          ? _value.fieldSettings
+          : fieldSettings // ignore: cast_nullable_to_non_nullable
+              as MapFieldSettings,
+    ) as $Val);
   }
 
-  final Map<String, dynamic>? _unmodifiableValuesJson;
-  @override
-  Map<String, dynamic>? get unmodifiableValuesJson {
-    final value = _unmodifiableValuesJson;
-    if (value == null) return null;
-    if (_unmodifiableValuesJson is EqualUnmodifiableMapView)
-      return _unmodifiableValuesJson;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
-  }
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
-
-  @override
-  String toString() {
-    return 'WoFormNode.root(id: $id, inputs: $inputs, unmodifiableValuesJson: $unmodifiableValuesJson)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$WoFormImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            const DeepCollectionEquality().equals(other._inputs, _inputs) &&
-            const DeepCollectionEquality().equals(
-                other._unmodifiableValuesJson, _unmodifiableValuesJson));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      const DeepCollectionEquality().hash(_inputs),
-      const DeepCollectionEquality().hash(_unmodifiableValuesJson));
-
-  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$WoFormImplCopyWith<_$WoFormImpl> get copyWith =>
-      __$$WoFormImplCopyWithImpl<_$WoFormImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormElementMixin> inputs,
-            Map<String, dynamic>? unmodifiableValuesJson)
-        root,
-    required TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormElementMixin> inputs,
-            Map<String, dynamic>? unmodifiableValuesJson,
-            @JsonKey(toJson: MapFieldSettings.staticToJson)
-            MapFieldSettings fieldSettings)
-        inputs,
-  }) {
-    return root(id, this.inputs, unmodifiableValuesJson);
+  $MapFieldSettingsCopyWith<$Res> get fieldSettings {
+    return $MapFieldSettingsCopyWith<$Res>(_value.fieldSettings, (value) {
+      return _then(_value.copyWith(fieldSettings: value) as $Val);
+    });
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String id,
-            @InputsListConverter() List<WoFormElementMixin> inputs,
-            Map<String, dynamic>? unmodifiableValuesJson)?
-        root,
-    TResult? Function(
-            String id,
-            @InputsListConverter() List<WoFormElementMixin> inputs,
-            Map<String, dynamic>? unmodifiableValuesJson,
-            @JsonKey(toJson: MapFieldSettings.staticToJson)
-            MapFieldSettings fieldSettings)?
-        inputs,
-  }) {
-    return root?.call(id, this.inputs, unmodifiableValuesJson);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormElementMixin> inputs,
-            Map<String, dynamic>? unmodifiableValuesJson)?
-        root,
-    TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormElementMixin> inputs,
-            Map<String, dynamic>? unmodifiableValuesJson,
-            @JsonKey(toJson: MapFieldSettings.staticToJson)
-            MapFieldSettings fieldSettings)?
-        inputs,
-    required TResult orElse(),
-  }) {
-    if (root != null) {
-      return root(id, this.inputs, unmodifiableValuesJson);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(WoForm value) root,
-    required TResult Function(InputsNode value) inputs,
-  }) {
-    return root(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(WoForm value)? root,
-    TResult? Function(InputsNode value)? inputs,
-  }) {
-    return root?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(WoForm value)? root,
-    TResult Function(InputsNode value)? inputs,
-    required TResult orElse(),
-  }) {
-    if (root != null) {
-      return root(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$WoFormImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class WoForm extends WoFormNode {
-  const factory WoForm(
-      {final String id,
-      @InputsListConverter() final List<WoFormElementMixin> inputs,
-      final Map<String, dynamic>? unmodifiableValuesJson}) = _$WoFormImpl;
-  const WoForm._() : super._();
-
-  factory WoForm.fromJson(Map<String, dynamic> json) = _$WoFormImpl.fromJson;
-
-  @override
-  String get id;
-  @override
-  @InputsListConverter()
-  List<WoFormElementMixin> get inputs;
-  @override
-  Map<String, dynamic>? get unmodifiableValuesJson;
-  @override
-  @JsonKey(ignore: true)
-  _$$WoFormImplCopyWith<_$WoFormImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -405,11 +156,12 @@ abstract class _$$InputsNodeImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      @InputsListConverter() List<WoFormElementMixin> inputs,
       Map<String, dynamic>? unmodifiableValuesJson,
+      @InputsListConverter() List<WoFormElementMixin> inputs,
       @JsonKey(toJson: MapFieldSettings.staticToJson)
       MapFieldSettings fieldSettings});
 
+  @override
   $MapFieldSettingsCopyWith<$Res> get fieldSettings;
 }
 
@@ -425,8 +177,8 @@ class __$$InputsNodeImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? inputs = null,
     Object? unmodifiableValuesJson = freezed,
+    Object? inputs = null,
     Object? fieldSettings = null,
   }) {
     return _then(_$InputsNodeImpl(
@@ -434,27 +186,19 @@ class __$$InputsNodeImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      inputs: null == inputs
-          ? _value._inputs
-          : inputs // ignore: cast_nullable_to_non_nullable
-              as List<WoFormElementMixin>,
       unmodifiableValuesJson: freezed == unmodifiableValuesJson
           ? _value._unmodifiableValuesJson
           : unmodifiableValuesJson // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
+      inputs: null == inputs
+          ? _value._inputs
+          : inputs // ignore: cast_nullable_to_non_nullable
+              as List<WoFormElementMixin>,
       fieldSettings: null == fieldSettings
           ? _value.fieldSettings
           : fieldSettings // ignore: cast_nullable_to_non_nullable
               as MapFieldSettings,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $MapFieldSettingsCopyWith<$Res> get fieldSettings {
-    return $MapFieldSettingsCopyWith<$Res>(_value.fieldSettings, (value) {
-      return _then(_value.copyWith(fieldSettings: value));
-    });
   }
 }
 
@@ -463,14 +207,12 @@ class __$$InputsNodeImplCopyWithImpl<$Res>
 class _$InputsNodeImpl extends InputsNode {
   const _$InputsNodeImpl(
       {required this.id,
-      @InputsListConverter() final List<WoFormElementMixin> inputs = const [],
       final Map<String, dynamic>? unmodifiableValuesJson,
+      @InputsListConverter() final List<WoFormElementMixin> inputs = const [],
       @JsonKey(toJson: MapFieldSettings.staticToJson)
-      this.fieldSettings = const MapFieldSettings(),
-      final String? $type})
-      : _inputs = inputs,
-        _unmodifiableValuesJson = unmodifiableValuesJson,
-        $type = $type ?? 'inputs',
+      this.fieldSettings = const MapFieldSettings()})
+      : _unmodifiableValuesJson = unmodifiableValuesJson,
+        _inputs = inputs,
         super._();
 
   factory _$InputsNodeImpl.fromJson(Map<String, dynamic> json) =>
@@ -478,16 +220,6 @@ class _$InputsNodeImpl extends InputsNode {
 
   @override
   final String id;
-  final List<WoFormElementMixin> _inputs;
-  @override
-  @JsonKey()
-  @InputsListConverter()
-  List<WoFormElementMixin> get inputs {
-    if (_inputs is EqualUnmodifiableListView) return _inputs;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_inputs);
-  }
-
   final Map<String, dynamic>? _unmodifiableValuesJson;
   @override
   Map<String, dynamic>? get unmodifiableValuesJson {
@@ -499,16 +231,23 @@ class _$InputsNodeImpl extends InputsNode {
     return EqualUnmodifiableMapView(value);
   }
 
+  final List<WoFormElementMixin> _inputs;
+  @override
+  @JsonKey()
+  @InputsListConverter()
+  List<WoFormElementMixin> get inputs {
+    if (_inputs is EqualUnmodifiableListView) return _inputs;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_inputs);
+  }
+
   @override
   @JsonKey(toJson: MapFieldSettings.staticToJson)
   final MapFieldSettings fieldSettings;
 
-  @JsonKey(name: 'runtimeType')
-  final String $type;
-
   @override
   String toString() {
-    return 'WoFormNode.inputs(id: $id, inputs: $inputs, unmodifiableValuesJson: $unmodifiableValuesJson, fieldSettings: $fieldSettings)';
+    return 'WoFormNode.inputs(id: $id, unmodifiableValuesJson: $unmodifiableValuesJson, inputs: $inputs, fieldSettings: $fieldSettings)';
   }
 
   @override
@@ -517,9 +256,9 @@ class _$InputsNodeImpl extends InputsNode {
         (other.runtimeType == runtimeType &&
             other is _$InputsNodeImpl &&
             (identical(other.id, id) || other.id == id) &&
-            const DeepCollectionEquality().equals(other._inputs, _inputs) &&
             const DeepCollectionEquality().equals(
                 other._unmodifiableValuesJson, _unmodifiableValuesJson) &&
+            const DeepCollectionEquality().equals(other._inputs, _inputs) &&
             (identical(other.fieldSettings, fieldSettings) ||
                 other.fieldSettings == fieldSettings));
   }
@@ -529,8 +268,8 @@ class _$InputsNodeImpl extends InputsNode {
   int get hashCode => Object.hash(
       runtimeType,
       id,
-      const DeepCollectionEquality().hash(_inputs),
       const DeepCollectionEquality().hash(_unmodifiableValuesJson),
+      const DeepCollectionEquality().hash(_inputs),
       fieldSettings);
 
   @JsonKey(ignore: true)
@@ -544,18 +283,13 @@ class _$InputsNodeImpl extends InputsNode {
   TResult when<TResult extends Object?>({
     required TResult Function(
             String id,
-            @InputsListConverter() List<WoFormElementMixin> inputs,
-            Map<String, dynamic>? unmodifiableValuesJson)
-        root,
-    required TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormElementMixin> inputs,
             Map<String, dynamic>? unmodifiableValuesJson,
+            @InputsListConverter() List<WoFormElementMixin> inputs,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)
         inputs,
   }) {
-    return inputs(id, this.inputs, unmodifiableValuesJson, fieldSettings);
+    return inputs(id, unmodifiableValuesJson, this.inputs, fieldSettings);
   }
 
   @override
@@ -563,18 +297,13 @@ class _$InputsNodeImpl extends InputsNode {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
             String id,
-            @InputsListConverter() List<WoFormElementMixin> inputs,
-            Map<String, dynamic>? unmodifiableValuesJson)?
-        root,
-    TResult? Function(
-            String id,
-            @InputsListConverter() List<WoFormElementMixin> inputs,
             Map<String, dynamic>? unmodifiableValuesJson,
+            @InputsListConverter() List<WoFormElementMixin> inputs,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
         inputs,
   }) {
-    return inputs?.call(id, this.inputs, unmodifiableValuesJson, fieldSettings);
+    return inputs?.call(id, unmodifiableValuesJson, this.inputs, fieldSettings);
   }
 
   @override
@@ -582,20 +311,15 @@ class _$InputsNodeImpl extends InputsNode {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
             String id,
-            @InputsListConverter() List<WoFormElementMixin> inputs,
-            Map<String, dynamic>? unmodifiableValuesJson)?
-        root,
-    TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormElementMixin> inputs,
             Map<String, dynamic>? unmodifiableValuesJson,
+            @InputsListConverter() List<WoFormElementMixin> inputs,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
         inputs,
     required TResult orElse(),
   }) {
     if (inputs != null) {
-      return inputs(id, this.inputs, unmodifiableValuesJson, fieldSettings);
+      return inputs(id, unmodifiableValuesJson, this.inputs, fieldSettings);
     }
     return orElse();
   }
@@ -603,7 +327,6 @@ class _$InputsNodeImpl extends InputsNode {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(WoForm value) root,
     required TResult Function(InputsNode value) inputs,
   }) {
     return inputs(this);
@@ -612,7 +335,6 @@ class _$InputsNodeImpl extends InputsNode {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(WoForm value)? root,
     TResult? Function(InputsNode value)? inputs,
   }) {
     return inputs?.call(this);
@@ -621,7 +343,6 @@ class _$InputsNodeImpl extends InputsNode {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(WoForm value)? root,
     TResult Function(InputsNode value)? inputs,
     required TResult orElse(),
   }) {
@@ -642,8 +363,8 @@ class _$InputsNodeImpl extends InputsNode {
 abstract class InputsNode extends WoFormNode {
   const factory InputsNode(
       {required final String id,
-      @InputsListConverter() final List<WoFormElementMixin> inputs,
       final Map<String, dynamic>? unmodifiableValuesJson,
+      @InputsListConverter() final List<WoFormElementMixin> inputs,
       @JsonKey(toJson: MapFieldSettings.staticToJson)
       final MapFieldSettings fieldSettings}) = _$InputsNodeImpl;
   const InputsNode._() : super._();
@@ -654,10 +375,11 @@ abstract class InputsNode extends WoFormNode {
   @override
   String get id;
   @override
+  Map<String, dynamic>? get unmodifiableValuesJson;
+  @override
   @InputsListConverter()
   List<WoFormElementMixin> get inputs;
   @override
-  Map<String, dynamic>? get unmodifiableValuesJson;
   @JsonKey(toJson: MapFieldSettings.staticToJson)
   MapFieldSettings get fieldSettings;
   @override

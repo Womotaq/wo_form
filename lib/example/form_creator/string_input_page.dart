@@ -29,9 +29,7 @@ class StringInputPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: ListView(
             children: [
-              ...woFormCreator.inputs.map(
-                (e) => e.toWidget(parentPath: null),
-              ),
+              ...woFormCreator.inputs.map((e) => e.toWidget(parentPath: '')),
               WoGap.xxxlarge,
               const Text('Json :'),
               WoGap.medium,
@@ -50,14 +48,10 @@ class StringInputPage extends StatelessWidget {
                       context,
                       MaterialPageRoute<void>(
                         builder: (_) => ScreenB(
-                          form: WoForm(
-                            inputs: [
-                              StringInput.fromJson(
-                                woFormCreator.valueToJson(
-                                  context.read<WoFormValuesCubit>().state,
-                                ),
-                              ),
-                            ],
+                          form: WoForm.fromJson(
+                            woFormCreator.valueToJson(
+                              context.read<WoFormValuesCubit>().state,
+                            ),
                           ),
                         ),
                       ),
@@ -112,16 +106,16 @@ class ScreenB extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
-                ...form.inputs.map(
-                  (e) => e.toWidget(parentPath: null),
-                ),
+                ...form.inputs.map((e) => e.toWidget(parentPath: '')),
                 WoGap.xxxlarge,
                 const Text('Json :'),
                 WoGap.medium,
                 BlocBuilder<WoFormValuesCubit, Map<String, dynamic>>(
                   builder: (context, values) {
                     return Text(
-                      readableJson(form.valueToJson(values)),
+                      readableJson(
+                        form.valueToJson(values),
+                      ),
                     );
                   },
                 ),

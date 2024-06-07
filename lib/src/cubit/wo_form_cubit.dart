@@ -33,11 +33,11 @@ class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
 
   /// **Use this method precautiously since there is no type checking !**
   void onValueChanged({
-    required String inputId,
+    required String inputPath,
     required dynamic value,
   }) {
     final newMap = Map<String, dynamic>.from(state);
-    newMap[inputId] = value;
+    newMap[inputPath] = value;
 
     // Setting the status to idle when a modification occurs allows isPure to
     // work

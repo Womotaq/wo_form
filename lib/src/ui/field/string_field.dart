@@ -50,10 +50,10 @@ class _StringFieldState extends State<StringField> {
       builder: (context, status) {
         return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, String>(
           selector: (values) {
-            final value = values[input.id];
+            final value = values[widget.inputPath];
             if (value is! String?) {
               throw ArgumentError(
-                'Expected <String?> at inputId: "${input.id}", '
+                'Expected <String?> at inputId: "${widget.inputPath}", '
                 'found: <${value.runtimeType}>',
               );
             }
@@ -72,7 +72,7 @@ class _StringFieldState extends State<StringField> {
               title: TextFormField(
                 controller: textEditingController,
                 onChanged: (value) => valuesCubit.onValueChanged(
-                  inputId: input.id,
+                  inputPath: widget.inputPath,
                   value: value,
                 ),
                 onFieldSubmitted:
@@ -97,7 +97,7 @@ class _StringFieldState extends State<StringField> {
                     null => null,
                     StringFieldAction.clear => IconButton(
                         onPressed: () => valuesCubit.onValueChanged(
-                          inputId: input.id,
+                          inputPath: widget.inputPath,
                           value: null,
                         ),
                         icon: const Icon(Icons.clear),

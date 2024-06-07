@@ -30,10 +30,10 @@ class BooleanField extends StatelessWidget {
 
     return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, bool>(
       selector: (values) {
-        final value = values[input.id];
+        final value = values[inputPath];
         if (value is! bool?) {
           throw ArgumentError(
-            'Expected <bool?> at inputId: "${input.id}", '
+            'Expected <bool?> at inputId: "$inputPath", '
             'found: <${value.runtimeType}>',
           );
         }
@@ -44,7 +44,7 @@ class BooleanField extends StatelessWidget {
           null || BooleanFieldOnOffType.switchButton => Switch(
               value: value,
               onChanged: (value) => valuesCubit.onValueChanged(
-                inputId: input.id,
+                inputPath: inputPath,
                 value: value,
               ),
             ),
@@ -53,7 +53,7 @@ class BooleanField extends StatelessWidget {
               onChanged: (value) => value == null
                   ? null
                   : valuesCubit.onValueChanged(
-                      inputId: input.id,
+                      inputPath: inputPath,
                       value: value,
                     ),
             ),
@@ -73,7 +73,7 @@ class BooleanField extends StatelessWidget {
           title: Text(mergedSettings.labelText ?? ''),
           trailing: onOffTypeIsLeading ? null : onOffType,
           onTap: () => valuesCubit.onValueChanged(
-            inputId: input.id,
+            inputPath: inputPath,
             value: !value,
           ),
         );

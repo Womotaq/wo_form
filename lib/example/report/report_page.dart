@@ -11,10 +11,15 @@ enum ReportType {
   other;
 }
 
-class ReportInputPath {
-  static const type = 'type';
-  static const message = 'message';
-  static const block = 'block';
+class ReportForm {
+  static const typeId = 'type';
+  static const typePath = '/type';
+
+  static const messageId = 'message';
+  static const messagePath = '/message';
+
+  static const blockId = 'block';
+  static const blockPath = '/block';
 }
 
 class ReportPage extends StatelessWidget {
@@ -30,7 +35,7 @@ class ReportPage extends StatelessWidget {
         },
         inputs: [
           SelectInput<ReportType>(
-            id: ReportInputPath.type,
+            id: ReportForm.typeId,
             availibleValues: ReportType.values,
             minCount: 1,
             maxCount: 1,
@@ -39,7 +44,7 @@ class ReportPage extends StatelessWidget {
             ),
           ),
           StringInput(
-            id: ReportInputPath.message,
+            id: ReportForm.messageId,
             fieldSettings: StringFieldSettings(
               hintText: 'Dites-en plus !',
               textCapitalization: TextCapitalization.sentences,
@@ -47,7 +52,7 @@ class ReportPage extends StatelessWidget {
             ),
           ),
           BooleanInput(
-            id: ReportInputPath.block,
+            id: ReportForm.blockId,
             fieldSettings: BooleanFieldSettings(
               labelText: 'Bloquer cette raclure ?',
               onOffType: BooleanFieldOnOffType.checkbox,
@@ -80,7 +85,9 @@ class _ReportPage extends StatelessWidget {
                 return AlertDialog(
                   icon: const Icon(Icons.data_array),
                   title: const Text('JSON'),
-                  content: Text(readableJson(form.valueToJson(values))),
+                  content: Text(
+                    readableJson(form.valueToJson(values)),
+                  ),
                   actions: [
                     TextButton(
                       onPressed: () {
@@ -101,7 +108,7 @@ class _ReportPage extends StatelessWidget {
             Flexible(
               child: SingleChildScrollView(
                 child: SelectField<ReportType>(
-                  inputPath: ReportInputPath.type,
+                  inputPath: ReportForm.typePath,
                   valueBuilder: (type) => Text(
                     switch (type) {
                       null => 'Vide',
@@ -117,10 +124,10 @@ class _ReportPage extends StatelessWidget {
             WoGap.medium,
             // message field
             const Flexible(
-              child: StringField(inputPath: ReportInputPath.message),
+              child: StringField(inputPath: ReportForm.messagePath),
             ),
             WoGap.medium,
-            const BooleanField(inputPath: ReportInputPath.block),
+            const BooleanField(inputPath: ReportForm.blockPath),
             WoGap.medium,
             WoFormBuilder(
               builder: (context, form, status, values) {
