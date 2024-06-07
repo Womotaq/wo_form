@@ -36,6 +36,12 @@ class InputsNodeWidget extends StatelessWidget {
             children: input.inputs
                 .map((i) => i.toWidget(parentPath: inputPath))
                 .toList(),
+          )
+        else
+          Column(
+            children: input.inputs
+                .map((i) => i.toWidget(parentPath: inputPath))
+                .toList(),
           ),
       ],
     );

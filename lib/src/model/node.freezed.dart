@@ -25,6 +25,7 @@ mixin _$WoFormNode {
       throw _privateConstructorUsedError;
   @InputsListConverter()
   List<WoFormElementMixin> get inputs => throw _privateConstructorUsedError;
+  NodeExportType get exportType => throw _privateConstructorUsedError;
   @JsonKey(toJson: MapFieldSettings.staticToJson)
   MapFieldSettings get fieldSettings => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -33,6 +34,7 @@ mixin _$WoFormNode {
             String id,
             Map<String, dynamic>? unmodifiableValuesJson,
             @InputsListConverter() List<WoFormElementMixin> inputs,
+            NodeExportType exportType,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)
         inputs,
@@ -44,6 +46,7 @@ mixin _$WoFormNode {
             String id,
             Map<String, dynamic>? unmodifiableValuesJson,
             @InputsListConverter() List<WoFormElementMixin> inputs,
+            NodeExportType exportType,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
         inputs,
@@ -55,6 +58,7 @@ mixin _$WoFormNode {
             String id,
             Map<String, dynamic>? unmodifiableValuesJson,
             @InputsListConverter() List<WoFormElementMixin> inputs,
+            NodeExportType exportType,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
         inputs,
@@ -93,6 +97,7 @@ abstract class $WoFormNodeCopyWith<$Res> {
       {String id,
       Map<String, dynamic>? unmodifiableValuesJson,
       @InputsListConverter() List<WoFormElementMixin> inputs,
+      NodeExportType exportType,
       @JsonKey(toJson: MapFieldSettings.staticToJson)
       MapFieldSettings fieldSettings});
 
@@ -115,6 +120,7 @@ class _$WoFormNodeCopyWithImpl<$Res, $Val extends WoFormNode>
     Object? id = null,
     Object? unmodifiableValuesJson = freezed,
     Object? inputs = null,
+    Object? exportType = null,
     Object? fieldSettings = null,
   }) {
     return _then(_value.copyWith(
@@ -130,6 +136,10 @@ class _$WoFormNodeCopyWithImpl<$Res, $Val extends WoFormNode>
           ? _value.inputs
           : inputs // ignore: cast_nullable_to_non_nullable
               as List<WoFormElementMixin>,
+      exportType: null == exportType
+          ? _value.exportType
+          : exportType // ignore: cast_nullable_to_non_nullable
+              as NodeExportType,
       fieldSettings: null == fieldSettings
           ? _value.fieldSettings
           : fieldSettings // ignore: cast_nullable_to_non_nullable
@@ -158,6 +168,7 @@ abstract class _$$InputsNodeImplCopyWith<$Res>
       {String id,
       Map<String, dynamic>? unmodifiableValuesJson,
       @InputsListConverter() List<WoFormElementMixin> inputs,
+      NodeExportType exportType,
       @JsonKey(toJson: MapFieldSettings.staticToJson)
       MapFieldSettings fieldSettings});
 
@@ -179,6 +190,7 @@ class __$$InputsNodeImplCopyWithImpl<$Res>
     Object? id = null,
     Object? unmodifiableValuesJson = freezed,
     Object? inputs = null,
+    Object? exportType = null,
     Object? fieldSettings = null,
   }) {
     return _then(_$InputsNodeImpl(
@@ -194,6 +206,10 @@ class __$$InputsNodeImplCopyWithImpl<$Res>
           ? _value._inputs
           : inputs // ignore: cast_nullable_to_non_nullable
               as List<WoFormElementMixin>,
+      exportType: null == exportType
+          ? _value.exportType
+          : exportType // ignore: cast_nullable_to_non_nullable
+              as NodeExportType,
       fieldSettings: null == fieldSettings
           ? _value.fieldSettings
           : fieldSettings // ignore: cast_nullable_to_non_nullable
@@ -209,6 +225,7 @@ class _$InputsNodeImpl extends InputsNode {
       {required this.id,
       final Map<String, dynamic>? unmodifiableValuesJson,
       @InputsListConverter() final List<WoFormElementMixin> inputs = const [],
+      this.exportType = NodeExportType.map,
       @JsonKey(toJson: MapFieldSettings.staticToJson)
       this.fieldSettings = const MapFieldSettings()})
       : _unmodifiableValuesJson = unmodifiableValuesJson,
@@ -242,12 +259,15 @@ class _$InputsNodeImpl extends InputsNode {
   }
 
   @override
+  @JsonKey()
+  final NodeExportType exportType;
+  @override
   @JsonKey(toJson: MapFieldSettings.staticToJson)
   final MapFieldSettings fieldSettings;
 
   @override
   String toString() {
-    return 'WoFormNode.inputs(id: $id, unmodifiableValuesJson: $unmodifiableValuesJson, inputs: $inputs, fieldSettings: $fieldSettings)';
+    return 'WoFormNode.inputs(id: $id, unmodifiableValuesJson: $unmodifiableValuesJson, inputs: $inputs, exportType: $exportType, fieldSettings: $fieldSettings)';
   }
 
   @override
@@ -259,6 +279,8 @@ class _$InputsNodeImpl extends InputsNode {
             const DeepCollectionEquality().equals(
                 other._unmodifiableValuesJson, _unmodifiableValuesJson) &&
             const DeepCollectionEquality().equals(other._inputs, _inputs) &&
+            (identical(other.exportType, exportType) ||
+                other.exportType == exportType) &&
             (identical(other.fieldSettings, fieldSettings) ||
                 other.fieldSettings == fieldSettings));
   }
@@ -270,6 +292,7 @@ class _$InputsNodeImpl extends InputsNode {
       id,
       const DeepCollectionEquality().hash(_unmodifiableValuesJson),
       const DeepCollectionEquality().hash(_inputs),
+      exportType,
       fieldSettings);
 
   @JsonKey(ignore: true)
@@ -285,11 +308,13 @@ class _$InputsNodeImpl extends InputsNode {
             String id,
             Map<String, dynamic>? unmodifiableValuesJson,
             @InputsListConverter() List<WoFormElementMixin> inputs,
+            NodeExportType exportType,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)
         inputs,
   }) {
-    return inputs(id, unmodifiableValuesJson, this.inputs, fieldSettings);
+    return inputs(
+        id, unmodifiableValuesJson, this.inputs, exportType, fieldSettings);
   }
 
   @override
@@ -299,11 +324,13 @@ class _$InputsNodeImpl extends InputsNode {
             String id,
             Map<String, dynamic>? unmodifiableValuesJson,
             @InputsListConverter() List<WoFormElementMixin> inputs,
+            NodeExportType exportType,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
         inputs,
   }) {
-    return inputs?.call(id, unmodifiableValuesJson, this.inputs, fieldSettings);
+    return inputs?.call(
+        id, unmodifiableValuesJson, this.inputs, exportType, fieldSettings);
   }
 
   @override
@@ -313,13 +340,15 @@ class _$InputsNodeImpl extends InputsNode {
             String id,
             Map<String, dynamic>? unmodifiableValuesJson,
             @InputsListConverter() List<WoFormElementMixin> inputs,
+            NodeExportType exportType,
             @JsonKey(toJson: MapFieldSettings.staticToJson)
             MapFieldSettings fieldSettings)?
         inputs,
     required TResult orElse(),
   }) {
     if (inputs != null) {
-      return inputs(id, unmodifiableValuesJson, this.inputs, fieldSettings);
+      return inputs(
+          id, unmodifiableValuesJson, this.inputs, exportType, fieldSettings);
     }
     return orElse();
   }
@@ -365,6 +394,7 @@ abstract class InputsNode extends WoFormNode {
       {required final String id,
       final Map<String, dynamic>? unmodifiableValuesJson,
       @InputsListConverter() final List<WoFormElementMixin> inputs,
+      final NodeExportType exportType,
       @JsonKey(toJson: MapFieldSettings.staticToJson)
       final MapFieldSettings fieldSettings}) = _$InputsNodeImpl;
   const InputsNode._() : super._();
@@ -379,6 +409,8 @@ abstract class InputsNode extends WoFormNode {
   @override
   @InputsListConverter()
   List<WoFormElementMixin> get inputs;
+  @override
+  NodeExportType get exportType;
   @override
   @JsonKey(toJson: MapFieldSettings.staticToJson)
   MapFieldSettings get fieldSettings;

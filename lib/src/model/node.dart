@@ -15,12 +15,15 @@ mixin WoFormElementMixin {
   Widget toWidget<T extends WoFormValuesCubit>({required String parentPath});
 }
 
+enum NodeExportType { list, map }
+
 @freezed
 sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
   const factory WoFormNode.inputs({
     required String id,
     Map<String, dynamic>? unmodifiableValuesJson,
     @InputsListConverter() @Default([]) List<WoFormElementMixin> inputs,
+    @Default(NodeExportType.map) NodeExportType exportType,
     @JsonKey(toJson: MapFieldSettings.staticToJson)
     @Default(MapFieldSettings())
     MapFieldSettings fieldSettings,
@@ -98,21 +101,36 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
         InputsNode() => InputsNodeWidget(inputPath: '$parentPath/$id'),
       };
 
-  Map<String, dynamic> valueToJson(
+  dynamic valueToJson(
     Map<String, dynamic> valuesMap, {
     required String parentPath,
   }) =>
-      {
-        ...unmodifiableValuesJson ?? {},
-        for (final input in inputs)
-          if (input is WoFormNode)
-            input.id: input.valueToJson(
-              valuesMap,
-              parentPath: '$parentPath/$id',
-            )
-          else if (input is WoFormInputMixin)
-            input.id: (input as WoFormInputMixin).valueToJson(
-              valuesMap['$parentPath/$id/${input.id}'],
-            ),
+      switch (exportType) {
+        NodeExportType.list => [
+            ...?unmodifiableValuesJson?.values,
+            for (final input in inputs)
+              if (input is WoFormNode)
+                input.valueToJson(
+                  valuesMap,
+                  parentPath: '$parentPath/$id',
+                )
+              else if (input is WoFormInputMixin)
+                (input as WoFormInputMixin).valueToJson(
+                  valuesMap['$parentPath/$id/${input.id}'],
+                ),
+          ],
+        NodeExportType.map => {
+            ...?unmodifiableValuesJson,
+            for (final input in inputs)
+              if (input is WoFormNode)
+                input.id: input.valueToJson(
+                  valuesMap,
+                  parentPath: '$parentPath/$id',
+                )
+              else if (input is WoFormInputMixin)
+                input.id: (input as WoFormInputMixin).valueToJson(
+                  valuesMap['$parentPath/$id/${input.id}'],
+                ),
+          },
       };
 }

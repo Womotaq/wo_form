@@ -11,8 +11,7 @@ _$WoFormImpl _$$WoFormImplFromJson(Map<String, dynamic> json) => _$WoFormImpl(
           json['unmodifiableValuesJson'] as Map<String, dynamic>?,
       inputs: json['inputs'] == null
           ? const []
-          : const InputsListConverter()
-              .fromJson(json['inputs'] as List<Map<String, dynamic>>),
+          : const InputsListConverter().fromJson(json['inputs'] as List),
     );
 
 Map<String, dynamic> _$$WoFormImplToJson(_$WoFormImpl instance) =>

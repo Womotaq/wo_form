@@ -2,20 +2,20 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/wo_form.dart';
 
 class InputsListConverter extends JsonConverter<List<WoFormElementMixin>,
-    List<Map<String, dynamic>>> {
+    List<dynamic>> {
   const InputsListConverter();
 
   @override
-  List<WoFormElementMixin> fromJson(List<Map<String, dynamic>> json) =>
+  List<WoFormElementMixin> fromJson(List<dynamic> json) =>
       json.map((inputJson) {
         try {
-          return WoFormInput.fromJson(inputJson);
+          return WoFormInput.fromJson(inputJson as Map<String, dynamic>);
         } catch (_) {
-          return WoFormNode.fromJson(inputJson);
+          return WoFormNode.fromJson(inputJson as Map<String, dynamic>);
         }
       }).toList();
 
   @override
-  List<Map<String, dynamic>> toJson(List<WoFormElementMixin> object) =>
+  List<dynamic> toJson(List<WoFormElementMixin> object) =>
       object.map((input) => input.toJson()).toList();
 }

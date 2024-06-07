@@ -8,8 +8,14 @@ import 'package:wo_form/wo_form.dart';
 
 final woFormCreator = WoForm(
   inputs: [
-    stringInputNode,
-    numInputNode,
+    InputsNode(
+      id: 'inputs',
+      exportType: NodeExportType.list,
+      inputs: [
+        stringInputNode,
+        numInputNode,
+      ],
+    ),
   ],
 );
 

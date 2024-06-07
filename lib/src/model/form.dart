@@ -78,6 +78,7 @@ class WoForm with _$WoForm {
             input.id: input.valueToJson(valuesMap, parentPath: '')
           else if (input is WoFormInputMixin)
             input.id:
-                (input as WoFormInputMixin).valueToJson(valuesMap[input.id]),
+                (input as WoFormInputMixin)
+                .valueToJson(valuesMap['/${input.id}']),
       };
 }

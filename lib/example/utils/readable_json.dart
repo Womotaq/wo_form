@@ -5,12 +5,12 @@ String readableJson(Map<String, dynamic> json, {int indentStep = 4}) {
   var indent = 0;
 
   for (final char in json.toString().characters) {
-    if (char == '}') {
+    if (char == '}' || char == ']') {
       indent -= indentStep;
       buffer.write('\n${' ' * indent}');
     }
     buffer.write(char);
-    if (char == '{') {
+    if (char == '{' || char == '[') {
       indent += indentStep;
       buffer.write('\n${' ' * indent}');
     } else if (char == ',') {
