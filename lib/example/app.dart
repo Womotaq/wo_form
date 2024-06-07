@@ -13,7 +13,9 @@ class WoFormExamplesApp extends StatelessWidget {
       title: 'WoForm Examples',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color.fromARGB(255, 197, 5, 181),
+          // seedColor: const Color.fromARGB(255, 197, 5, 181),
+          seedColor: Color.fromARGB(255, 5, 197, 69),
+          // brightness: Brightness.dark,
         ),
       ),
       supportedLocales: FormLocalizations.supportedLocales,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/src/ui/input_field/input_list_tile.dart';
@@ -73,7 +72,7 @@ class _NumFieldState extends State<NumField> {
 
         return InputListTile(
           leading: Text(mergedSettings.labelText ?? ''),
-          trailing: CountSelector(
+          trailing: NumSelector(
             controller: countController,
             onChanged: (value) async => valuesCubit.onValueChanged(
               inputPath: widget.inputPath,
@@ -83,115 +82,6 @@ class _NumFieldState extends State<NumField> {
           ),
         );
       },
-    );
-  }
-}
-
-// TODO : send in atomic_design
-class CountSelector extends StatelessWidget {
-  const CountSelector({
-    required this.controller,
-    required this.onChanged,
-    this.axis = Axis.vertical,
-    this.step = 1,
-    this.minCount = 0,
-    this.maxCount,
-    super.key,
-  });
-
-  final TextEditingController controller;
-  final Future<void> Function(num?) onChanged;
-  final Axis axis;
-  final int step;
-  final num? minCount;
-  final num? maxCount;
-
-  Widget getSideButton({
-    required Axis axis,
-    required bool isPlus,
-  }) {
-    final iconHeight = axis == Axis.vertical ? 22.0 : null;
-    final icon = Icon(
-      size: iconHeight,
-      axis == Axis.vertical
-          ? isPlus
-              ? Icons.arrow_drop_up
-              : Icons.arrow_drop_down
-          : isPlus
-              ? Icons.add_circle
-              : Icons.remove_circle,
-    );
-    return SizedBox(
-      height: iconHeight,
-      child: Builder(
-        builder: (context) {
-          return IconButton(
-            padding: EdgeInsets.zero,
-            icon: icon,
-            color: Theme.of(context).colorScheme.primary,
-            onPressed: () {
-              var newVal = num.tryParse(controller.text) ?? 0;
-              newVal += (isPlus ? step : -step);
-              if (minCount != null && newVal < minCount!) return;
-              if (maxCount != null && newVal > maxCount!) return;
-              controller.text = newVal.toString();
-              onChanged(newVal);
-            },
-          );
-        },
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final children = [
-      getSideButton(
-        axis: axis,
-        isPlus: false,
-      ),
-      if (axis == Axis.horizontal) WoGap.xsmall,
-      ConstrainedBox(
-        constraints: const BoxConstraints(minWidth: WoSize.xxlarge),
-        child: IntrinsicWidth(
-          child: TextField(
-            controller: controller,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              isDense: true,
-              contentPadding: EdgeInsets.all(WoSize.small),
-            ),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            inputFormatters: <TextInputFormatter>[
-              FilteringTextInputFormatter.digitsOnly,
-              // LengthLimitingTextInputFormatter(2),
-            ],
-            onChanged: (string) => onChanged(num.tryParse(string)),
-          ),
-        ),
-      ),
-      if (axis == Axis.horizontal) WoGap.xsmall,
-      getSideButton(
-        axis: axis,
-        isPlus: true,
-      ),
-    ];
-
-    return Card(
-      borderOnForeground: false,
-      margin: EdgeInsets.zero,
-      clipBehavior: Clip.antiAlias,
-      child: axis == Axis.horizontal
-          ? Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: children,
-            )
-          : Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: children.reversed.toList(),
-            ),
     );
   }
 }

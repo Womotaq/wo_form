@@ -83,9 +83,9 @@ class StringInputPage extends StatelessWidget {
                       onPressed: context.read<WoFormValuesCubit>().submit,
                       style: IconButton.styleFrom(
                         backgroundColor:
-                            Theme.of(context).colorScheme.primary,
+                            context.colorScheme.primary,
                         foregroundColor:
-                            Theme.of(context).colorScheme.onPrimary,
+                            context.colorScheme.onPrimary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                         ),
