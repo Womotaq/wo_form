@@ -81,6 +81,8 @@ class SelectFieldSettings with _$SelectFieldSettings {
   const factory SelectFieldSettings({
     String? labelText,
     SelectFieldDisplayMode? displayMode,
+    @JsonKey(includeFromJson: false, includeToJson: false)
+    Widget Function(dynamic)? valueBuilder,
   }) = _SelectFieldSettings;
 
   const SelectFieldSettings._();
@@ -93,6 +95,7 @@ class SelectFieldSettings with _$SelectFieldSettings {
       : SelectFieldSettings(
           labelText: labelText ?? other.labelText,
           displayMode: displayMode ?? other.displayMode,
+          valueBuilder: valueBuilder ?? other.valueBuilder,
         );
 }
 

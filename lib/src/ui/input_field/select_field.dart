@@ -7,14 +7,12 @@ class SelectField<S> extends StatelessWidget {
   const SelectField({
     required this.inputPath,
     this.valueBuilder,
-    this.previewBuilder,
     this.settings,
     super.key,
   });
 
   final String inputPath;
   final Widget Function(S?)? valueBuilder;
-  final Widget Function(S?)? previewBuilder;
   final SelectFieldSettings? settings;
 
   SelectInput<S> getInput(WoForm form) {
@@ -117,7 +115,6 @@ class SelectField<S> extends StatelessWidget {
                   ),
                   selectedValue: selectedValues.firstOrNull,
                   valueBuilder: valueBuilder,
-                  previewBuilder: previewBuilder,
                 ),
               ),
           };
@@ -145,7 +142,6 @@ class SelectStringField extends SelectField<String> {
   const SelectStringField({
     required super.inputPath,
     super.valueBuilder,
-    super.previewBuilder,
     super.settings,
     super.key,
   });

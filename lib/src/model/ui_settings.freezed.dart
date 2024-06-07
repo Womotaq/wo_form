@@ -491,6 +491,9 @@ SelectFieldSettings _$SelectFieldSettingsFromJson(Map<String, dynamic> json) {
 mixin _$SelectFieldSettings {
   String? get labelText => throw _privateConstructorUsedError;
   SelectFieldDisplayMode? get displayMode => throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  Widget Function(dynamic)? get valueBuilder =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -504,7 +507,11 @@ abstract class $SelectFieldSettingsCopyWith<$Res> {
           SelectFieldSettings value, $Res Function(SelectFieldSettings) then) =
       _$SelectFieldSettingsCopyWithImpl<$Res, SelectFieldSettings>;
   @useResult
-  $Res call({String? labelText, SelectFieldDisplayMode? displayMode});
+  $Res call(
+      {String? labelText,
+      SelectFieldDisplayMode? displayMode,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      Widget Function(dynamic)? valueBuilder});
 }
 
 /// @nodoc
@@ -522,6 +529,7 @@ class _$SelectFieldSettingsCopyWithImpl<$Res, $Val extends SelectFieldSettings>
   $Res call({
     Object? labelText = freezed,
     Object? displayMode = freezed,
+    Object? valueBuilder = freezed,
   }) {
     return _then(_value.copyWith(
       labelText: freezed == labelText
@@ -532,6 +540,10 @@ class _$SelectFieldSettingsCopyWithImpl<$Res, $Val extends SelectFieldSettings>
           ? _value.displayMode
           : displayMode // ignore: cast_nullable_to_non_nullable
               as SelectFieldDisplayMode?,
+      valueBuilder: freezed == valueBuilder
+          ? _value.valueBuilder
+          : valueBuilder // ignore: cast_nullable_to_non_nullable
+              as Widget Function(dynamic)?,
     ) as $Val);
   }
 }
@@ -544,7 +556,11 @@ abstract class _$$SelectFieldSettingsImplCopyWith<$Res>
       __$$SelectFieldSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? labelText, SelectFieldDisplayMode? displayMode});
+  $Res call(
+      {String? labelText,
+      SelectFieldDisplayMode? displayMode,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      Widget Function(dynamic)? valueBuilder});
 }
 
 /// @nodoc
@@ -560,6 +576,7 @@ class __$$SelectFieldSettingsImplCopyWithImpl<$Res>
   $Res call({
     Object? labelText = freezed,
     Object? displayMode = freezed,
+    Object? valueBuilder = freezed,
   }) {
     return _then(_$SelectFieldSettingsImpl(
       labelText: freezed == labelText
@@ -570,6 +587,10 @@ class __$$SelectFieldSettingsImplCopyWithImpl<$Res>
           ? _value.displayMode
           : displayMode // ignore: cast_nullable_to_non_nullable
               as SelectFieldDisplayMode?,
+      valueBuilder: freezed == valueBuilder
+          ? _value.valueBuilder
+          : valueBuilder // ignore: cast_nullable_to_non_nullable
+              as Widget Function(dynamic)?,
     ));
   }
 }
@@ -577,7 +598,10 @@ class __$$SelectFieldSettingsImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$SelectFieldSettingsImpl extends _SelectFieldSettings {
-  const _$SelectFieldSettingsImpl({this.labelText, this.displayMode})
+  const _$SelectFieldSettingsImpl(
+      {this.labelText,
+      this.displayMode,
+      @JsonKey(includeFromJson: false, includeToJson: false) this.valueBuilder})
       : super._();
 
   factory _$SelectFieldSettingsImpl.fromJson(Map<String, dynamic> json) =>
@@ -587,10 +611,13 @@ class _$SelectFieldSettingsImpl extends _SelectFieldSettings {
   final String? labelText;
   @override
   final SelectFieldDisplayMode? displayMode;
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final Widget Function(dynamic)? valueBuilder;
 
   @override
   String toString() {
-    return 'SelectFieldSettings(labelText: $labelText, displayMode: $displayMode)';
+    return 'SelectFieldSettings(labelText: $labelText, displayMode: $displayMode, valueBuilder: $valueBuilder)';
   }
 
   @override
@@ -601,12 +628,15 @@ class _$SelectFieldSettingsImpl extends _SelectFieldSettings {
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
             (identical(other.displayMode, displayMode) ||
-                other.displayMode == displayMode));
+                other.displayMode == displayMode) &&
+            (identical(other.valueBuilder, valueBuilder) ||
+                other.valueBuilder == valueBuilder));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, labelText, displayMode);
+  int get hashCode =>
+      Object.hash(runtimeType, labelText, displayMode, valueBuilder);
 
   @JsonKey(ignore: true)
   @override
@@ -625,8 +655,11 @@ class _$SelectFieldSettingsImpl extends _SelectFieldSettings {
 
 abstract class _SelectFieldSettings extends SelectFieldSettings {
   const factory _SelectFieldSettings(
-      {final String? labelText,
-      final SelectFieldDisplayMode? displayMode}) = _$SelectFieldSettingsImpl;
+          {final String? labelText,
+          final SelectFieldDisplayMode? displayMode,
+          @JsonKey(includeFromJson: false, includeToJson: false)
+          final Widget Function(dynamic)? valueBuilder}) =
+      _$SelectFieldSettingsImpl;
   const _SelectFieldSettings._() : super._();
 
   factory _SelectFieldSettings.fromJson(Map<String, dynamic> json) =
@@ -636,6 +669,9 @@ abstract class _SelectFieldSettings extends SelectFieldSettings {
   String? get labelText;
   @override
   SelectFieldDisplayMode? get displayMode;
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  Widget Function(dynamic)? get valueBuilder;
   @override
   @JsonKey(ignore: true)
   _$$SelectFieldSettingsImplCopyWith<_$SelectFieldSettingsImpl> get copyWith =>

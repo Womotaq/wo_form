@@ -31,9 +31,10 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
           id: 'regexPattern',
           availibleValues: RegexPattern.values,
           maxCount: 1,
-          uiSettings: const SelectFieldSettings(
+          uiSettings: SelectFieldSettings(
             labelText: 'Regex pattern',
             displayMode: SelectFieldDisplayMode.selectChip,
+            valueBuilder: (regex) => Text((regex as RegexPattern?)?.name ?? ''),
           ),
           toJsonT: (regex) => regex.value,
         ),
