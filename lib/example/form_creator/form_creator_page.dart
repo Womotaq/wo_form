@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
@@ -6,14 +8,20 @@ import 'package:wo_form/example/form_creator/string_input_node.dart';
 import 'package:wo_form/example/utils/readable_json.dart';
 import 'package:wo_form/wo_form.dart';
 
+final idGenerator = Random();
+
+extension RandomX on Random {
+  String generateId() => nextDouble().toString().substring(2);
+}
+
 final woFormCreator = WoForm(
   inputs: [
     InputsNode(
       id: 'inputs',
       exportType: NodeExportType.list,
       inputs: [
-        createStringInputNode(),
-        createNumInputNode(),
+        createStringInputNode(id: idGenerator.generateId()),
+        createNumInputNode(id: idGenerator.generateId()),
       ],
     ),
   ],
@@ -37,14 +45,18 @@ class StringInputPage extends StatelessWidget {
             children: [
               ...woFormCreator.inputs.map((e) => e.toWidget(parentPath: '')),
               WoGap.xxxlarge,
-              const Text('Json :'),
-              WoGap.medium,
-              BlocBuilder<WoFormValuesCubit, Map<String, dynamic>>(
-                builder: (context, values) {
-                  return Text(
-                    readableJson(woFormCreator.valueToJson(values)),
-                  );
-                },
+              ExpansionTile(
+                title: const Text('JSON'),
+                expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  BlocBuilder<WoFormValuesCubit, Map<String, dynamic>>(
+                    builder: (context, values) {
+                      return Text(
+                        readableJson(woFormCreator.valueToJson(values)),
+                      );
+                    },
+                  ),
+                ],
               ),
               WoGap.xxxlarge,
               BlocListener<WoFormStatusCubit, WoFormStatus>(
@@ -71,7 +83,9 @@ class StringInputPage extends StatelessWidget {
                       onPressed: context.read<WoFormValuesCubit>().submit,
                       style: IconButton.styleFrom(
                         backgroundColor:
-                            Theme.of(context).colorScheme.primaryContainer,
+                            Theme.of(context).colorScheme.primary,
+                        foregroundColor:
+                            Theme.of(context).colorScheme.onPrimary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                         ),

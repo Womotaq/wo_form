@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/src/model/json_converter/text_input_type.dart';
 
-part 'field_settings.freezed.dart';
-part 'field_settings.g.dart';
+part 'ui_settings.freezed.dart';
+part 'ui_settings.g.dart';
 
 enum BooleanFieldOnOffType { checkbox, switchButton }
 
@@ -33,22 +33,22 @@ class BooleanFieldSettings with _$BooleanFieldSettings {
 }
 
 @freezed
-class NodeFieldSettings with _$NodeFieldSettings {
-  const factory NodeFieldSettings({
+class NodeWidgetSettings with _$NodeWidgetSettings {
+  const factory NodeWidgetSettings({
     String? labelText,
-  }) = _NodeFieldSettings;
+  }) = _NodeWidgetSettings;
 
-  const NodeFieldSettings._();
+  const NodeWidgetSettings._();
 
-  factory NodeFieldSettings.fromJson(Map<String, dynamic> json) =>
-      _$NodeFieldSettingsFromJson(json);
+  factory NodeWidgetSettings.fromJson(Map<String, dynamic> json) =>
+      _$NodeWidgetSettingsFromJson(json);
 
-  static Map<String, dynamic> staticToJson(NodeFieldSettings object) =>
+  static Map<String, dynamic> staticToJson(NodeWidgetSettings object) =>
       object.toJson();
 
-  NodeFieldSettings merge(NodeFieldSettings? other) => other == null
+  NodeWidgetSettings merge(NodeWidgetSettings? other) => other == null
       ? this
-      : NodeFieldSettings(
+      : NodeWidgetSettings(
           labelText: labelText ?? other.labelText,
         );
 }
@@ -207,5 +207,26 @@ class StringFieldSettings with _$StringFieldSettings {
           labelText: labelText ?? other.labelText,
           hintText: hintText ?? other.hintText,
           invalidRegexMessage: invalidRegexMessage ?? other.invalidRegexMessage,
+        );
+}
+
+@freezed
+class WoFormUiSettings with _$WoFormUiSettings {
+  const factory WoFormUiSettings({
+    String? title,
+  }) = _WoFormUiSettings;
+
+  const WoFormUiSettings._();
+
+  factory WoFormUiSettings.fromJson(Map<String, dynamic> json) =>
+      _$WoFormUiSettingsFromJson(json);
+
+  static Map<String, dynamic> staticToJson(WoFormUiSettings object) =>
+      object.toJson();
+
+  WoFormUiSettings merge(WoFormUiSettings? other) => other == null
+      ? this
+      : WoFormUiSettings(
+          title: title ?? other.title,
         );
 }

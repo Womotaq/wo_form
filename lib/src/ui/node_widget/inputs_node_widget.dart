@@ -10,7 +10,7 @@ class InputsNodeWidget extends StatelessWidget {
   });
 
   final String inputPath;
-  final NodeFieldSettings? settings;
+  final NodeWidgetSettings? settings;
 
   @override
   Widget build(BuildContext context) {

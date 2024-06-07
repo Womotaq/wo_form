@@ -2020,8 +2020,7 @@ class _$StringInputImpl extends StringInput {
             StringFieldSettings uiSettings)?
         string,
   }) {
-    return string?.call(
-        id, defaultValue, isRequired, regexPattern, uiSettings);
+    return string?.call(id, defaultValue, isRequired, regexPattern, uiSettings);
   }
 
   @override

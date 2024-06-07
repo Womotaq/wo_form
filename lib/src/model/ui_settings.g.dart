@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'field_settings.dart';
+part of 'ui_settings.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -35,14 +35,14 @@ const _$ListTileControlAffinityEnumMap = {
   ListTileControlAffinity.platform: 'platform',
 };
 
-_$NodeFieldSettingsImpl _$$NodeFieldSettingsImplFromJson(
+_$NodeWidgetSettingsImpl _$$NodeWidgetSettingsImplFromJson(
         Map<String, dynamic> json) =>
-    _$NodeFieldSettingsImpl(
+    _$NodeWidgetSettingsImpl(
       labelText: json['labelText'] as String?,
     );
 
-Map<String, dynamic> _$$NodeFieldSettingsImplToJson(
-        _$NodeFieldSettingsImpl instance) =>
+Map<String, dynamic> _$$NodeWidgetSettingsImplToJson(
+        _$NodeWidgetSettingsImpl instance) =>
     <String, dynamic>{
       'labelText': instance.labelText,
     };
@@ -164,3 +164,15 @@ const _$TextCapitalizationEnumMap = {
   TextCapitalization.characters: 'characters',
   TextCapitalization.none: 'none',
 };
+
+_$WoFormUiSettingsImpl _$$WoFormUiSettingsImplFromJson(
+        Map<String, dynamic> json) =>
+    _$WoFormUiSettingsImpl(
+      title: json['title'] as String?,
+    );
+
+Map<String, dynamic> _$$WoFormUiSettingsImplToJson(
+        _$WoFormUiSettingsImpl instance) =>
+    <String, dynamic>{
+      'title': instance.title,
+    };

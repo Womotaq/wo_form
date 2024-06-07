@@ -4,19 +4,17 @@ import 'package:wo_form/example/form_creator/form_creator_page.dart';
 import 'package:wo_form/example/report/report_page.dart';
 import 'package:wo_form/wo_form.dart';
 
-class FormCreatorApp extends StatelessWidget {
-  const FormCreatorApp({super.key});
+class WoFormExamplesApp extends StatelessWidget {
+  const WoFormExamplesApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Form Creator',
+      title: 'WoForm Examples',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.lightBlue,
-          brightness: Brightness.dark,
+          seedColor: const Color.fromARGB(255, 197, 5, 181),
         ),
-        // primarySwatch: Colors.blue,
       ),
       supportedLocales: FormLocalizations.supportedLocales,
       localizationsDelegates: FormLocalizations.localizationsDelegates,

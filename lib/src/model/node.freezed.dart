@@ -26,8 +26,8 @@ mixin _$WoFormNode {
   @InputsListConverter()
   List<WoFormElementMixin> get inputs => throw _privateConstructorUsedError;
   NodeExportType get exportType => throw _privateConstructorUsedError;
-  @JsonKey(toJson: NodeFieldSettings.staticToJson)
-  NodeFieldSettings get uiSettings => throw _privateConstructorUsedError;
+  @JsonKey(toJson: NodeWidgetSettings.staticToJson)
+  NodeWidgetSettings get uiSettings => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
@@ -35,8 +35,8 @@ mixin _$WoFormNode {
             Map<String, dynamic>? unmodifiableValuesJson,
             @InputsListConverter() List<WoFormElementMixin> inputs,
             NodeExportType exportType,
-            @JsonKey(toJson: NodeFieldSettings.staticToJson)
-            NodeFieldSettings uiSettings)
+            @JsonKey(toJson: NodeWidgetSettings.staticToJson)
+            NodeWidgetSettings uiSettings)
         inputs,
   }) =>
       throw _privateConstructorUsedError;
@@ -47,8 +47,8 @@ mixin _$WoFormNode {
             Map<String, dynamic>? unmodifiableValuesJson,
             @InputsListConverter() List<WoFormElementMixin> inputs,
             NodeExportType exportType,
-            @JsonKey(toJson: NodeFieldSettings.staticToJson)
-            NodeFieldSettings uiSettings)?
+            @JsonKey(toJson: NodeWidgetSettings.staticToJson)
+            NodeWidgetSettings uiSettings)?
         inputs,
   }) =>
       throw _privateConstructorUsedError;
@@ -59,8 +59,8 @@ mixin _$WoFormNode {
             Map<String, dynamic>? unmodifiableValuesJson,
             @InputsListConverter() List<WoFormElementMixin> inputs,
             NodeExportType exportType,
-            @JsonKey(toJson: NodeFieldSettings.staticToJson)
-            NodeFieldSettings uiSettings)?
+            @JsonKey(toJson: NodeWidgetSettings.staticToJson)
+            NodeWidgetSettings uiSettings)?
         inputs,
     required TResult orElse(),
   }) =>
@@ -98,10 +98,10 @@ abstract class $WoFormNodeCopyWith<$Res> {
       Map<String, dynamic>? unmodifiableValuesJson,
       @InputsListConverter() List<WoFormElementMixin> inputs,
       NodeExportType exportType,
-      @JsonKey(toJson: NodeFieldSettings.staticToJson)
-      NodeFieldSettings uiSettings});
+      @JsonKey(toJson: NodeWidgetSettings.staticToJson)
+      NodeWidgetSettings uiSettings});
 
-  $NodeFieldSettingsCopyWith<$Res> get uiSettings;
+  $NodeWidgetSettingsCopyWith<$Res> get uiSettings;
 }
 
 /// @nodoc
@@ -143,14 +143,14 @@ class _$WoFormNodeCopyWithImpl<$Res, $Val extends WoFormNode>
       uiSettings: null == uiSettings
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
-              as NodeFieldSettings,
+              as NodeWidgetSettings,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $NodeFieldSettingsCopyWith<$Res> get uiSettings {
-    return $NodeFieldSettingsCopyWith<$Res>(_value.uiSettings, (value) {
+  $NodeWidgetSettingsCopyWith<$Res> get uiSettings {
+    return $NodeWidgetSettingsCopyWith<$Res>(_value.uiSettings, (value) {
       return _then(_value.copyWith(uiSettings: value) as $Val);
     });
   }
@@ -169,11 +169,11 @@ abstract class _$$InputsNodeImplCopyWith<$Res>
       Map<String, dynamic>? unmodifiableValuesJson,
       @InputsListConverter() List<WoFormElementMixin> inputs,
       NodeExportType exportType,
-      @JsonKey(toJson: NodeFieldSettings.staticToJson)
-      NodeFieldSettings uiSettings});
+      @JsonKey(toJson: NodeWidgetSettings.staticToJson)
+      NodeWidgetSettings uiSettings});
 
   @override
-  $NodeFieldSettingsCopyWith<$Res> get uiSettings;
+  $NodeWidgetSettingsCopyWith<$Res> get uiSettings;
 }
 
 /// @nodoc
@@ -213,7 +213,7 @@ class __$$InputsNodeImplCopyWithImpl<$Res>
       uiSettings: null == uiSettings
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
-              as NodeFieldSettings,
+              as NodeWidgetSettings,
     ));
   }
 }
@@ -226,8 +226,8 @@ class _$InputsNodeImpl extends InputsNode {
       final Map<String, dynamic>? unmodifiableValuesJson,
       @InputsListConverter() final List<WoFormElementMixin> inputs = const [],
       this.exportType = NodeExportType.map,
-      @JsonKey(toJson: NodeFieldSettings.staticToJson)
-      this.uiSettings = const NodeFieldSettings()})
+      @JsonKey(toJson: NodeWidgetSettings.staticToJson)
+      this.uiSettings = const NodeWidgetSettings()})
       : _unmodifiableValuesJson = unmodifiableValuesJson,
         _inputs = inputs,
         super._();
@@ -262,8 +262,8 @@ class _$InputsNodeImpl extends InputsNode {
   @JsonKey()
   final NodeExportType exportType;
   @override
-  @JsonKey(toJson: NodeFieldSettings.staticToJson)
-  final NodeFieldSettings uiSettings;
+  @JsonKey(toJson: NodeWidgetSettings.staticToJson)
+  final NodeWidgetSettings uiSettings;
 
   @override
   String toString() {
@@ -309,8 +309,8 @@ class _$InputsNodeImpl extends InputsNode {
             Map<String, dynamic>? unmodifiableValuesJson,
             @InputsListConverter() List<WoFormElementMixin> inputs,
             NodeExportType exportType,
-            @JsonKey(toJson: NodeFieldSettings.staticToJson)
-            NodeFieldSettings uiSettings)
+            @JsonKey(toJson: NodeWidgetSettings.staticToJson)
+            NodeWidgetSettings uiSettings)
         inputs,
   }) {
     return inputs(
@@ -325,8 +325,8 @@ class _$InputsNodeImpl extends InputsNode {
             Map<String, dynamic>? unmodifiableValuesJson,
             @InputsListConverter() List<WoFormElementMixin> inputs,
             NodeExportType exportType,
-            @JsonKey(toJson: NodeFieldSettings.staticToJson)
-            NodeFieldSettings uiSettings)?
+            @JsonKey(toJson: NodeWidgetSettings.staticToJson)
+            NodeWidgetSettings uiSettings)?
         inputs,
   }) {
     return inputs?.call(
@@ -341,8 +341,8 @@ class _$InputsNodeImpl extends InputsNode {
             Map<String, dynamic>? unmodifiableValuesJson,
             @InputsListConverter() List<WoFormElementMixin> inputs,
             NodeExportType exportType,
-            @JsonKey(toJson: NodeFieldSettings.staticToJson)
-            NodeFieldSettings uiSettings)?
+            @JsonKey(toJson: NodeWidgetSettings.staticToJson)
+            NodeWidgetSettings uiSettings)?
         inputs,
     required TResult orElse(),
   }) {
@@ -395,8 +395,8 @@ abstract class InputsNode extends WoFormNode {
       final Map<String, dynamic>? unmodifiableValuesJson,
       @InputsListConverter() final List<WoFormElementMixin> inputs,
       final NodeExportType exportType,
-      @JsonKey(toJson: NodeFieldSettings.staticToJson)
-      final NodeFieldSettings uiSettings}) = _$InputsNodeImpl;
+      @JsonKey(toJson: NodeWidgetSettings.staticToJson)
+      final NodeWidgetSettings uiSettings}) = _$InputsNodeImpl;
   const InputsNode._() : super._();
 
   factory InputsNode.fromJson(Map<String, dynamic> json) =
@@ -412,8 +412,8 @@ abstract class InputsNode extends WoFormNode {
   @override
   NodeExportType get exportType;
   @override
-  @JsonKey(toJson: NodeFieldSettings.staticToJson)
-  NodeFieldSettings get uiSettings;
+  @JsonKey(toJson: NodeWidgetSettings.staticToJson)
+  NodeWidgetSettings get uiSettings;
   @override
   @JsonKey(ignore: true)
   _$$InputsNodeImplCopyWith<_$InputsNodeImpl> get copyWith =>

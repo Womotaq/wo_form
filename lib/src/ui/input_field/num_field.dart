@@ -127,7 +127,7 @@ class CountSelector extends StatelessWidget {
           return IconButton(
             padding: EdgeInsets.zero,
             icon: icon,
-            color: Theme.of(context).colorScheme.primaryContainer,
+            color: Theme.of(context).colorScheme.primary,
             onPressed: () {
               var newVal = num.tryParse(controller.text) ?? 0;
               newVal += (isPlus ? step : -step);

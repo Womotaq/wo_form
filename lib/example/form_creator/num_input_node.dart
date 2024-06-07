@@ -1,8 +1,8 @@
 import 'package:wo_form/wo_form.dart';
 
-InputsNode createNumInputNode({String id = 'numInput'}) => InputsNode(
+InputsNode createNumInputNode({required String id}) => InputsNode(
       id: id,
-      uiSettings: const NodeFieldSettings(
+      uiSettings: const NodeWidgetSettings(
         labelText: 'NumInput',
       ),
       inputs: const [
@@ -27,7 +27,7 @@ InputsNode createNumInputNode({String id = 'numInput'}) => InputsNode(
         ),
         InputsNode(
           id: 'uiSettings',
-          uiSettings: NodeFieldSettings(
+          uiSettings: NodeWidgetSettings(
             labelText: 'Interface',
           ),
           inputs: [

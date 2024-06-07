@@ -12,6 +12,9 @@ class WoForm with _$WoForm {
   const factory WoForm({
     Map<String, dynamic>? unmodifiableValuesJson,
     @InputsListConverter() @Default([]) List<WoFormElementMixin> inputs,
+    @JsonKey(toJson: WoFormUiSettings.staticToJson)
+    @Default(WoFormUiSettings())
+    WoFormUiSettings uiSettings,
   }) = _WoForm;
 
   const WoForm._();

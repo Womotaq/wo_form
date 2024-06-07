@@ -24,9 +24,9 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
     Map<String, dynamic>? unmodifiableValuesJson,
     @InputsListConverter() @Default([]) List<WoFormElementMixin> inputs,
     @Default(NodeExportType.map) NodeExportType exportType,
-    @JsonKey(toJson: NodeFieldSettings.staticToJson)
-    @Default(NodeFieldSettings())
-    NodeFieldSettings uiSettings,
+    @JsonKey(toJson: NodeWidgetSettings.staticToJson)
+    @Default(NodeWidgetSettings())
+    NodeWidgetSettings uiSettings,
   }) = InputsNode;
 
   const WoFormNode._();

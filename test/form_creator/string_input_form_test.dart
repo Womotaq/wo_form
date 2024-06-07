@@ -5,6 +5,7 @@ import 'package:wo_form/src/l10n/arb_gen/form_localizations_fr.dart';
 import 'package:wo_form/wo_form.dart';
 
 void main() {
+  final stringInputNode = createStringInputNode(id: 'stringInput');
   final expectedInput = StringInput(
     id: 'name',
     isRequired: true,
@@ -20,8 +21,7 @@ void main() {
   values['defaultValue'] = expectedInput.defaultValue;
   values['isRequired'] = expectedInput.isRequired;
   values['regexPattern'] = [RegexPattern.username];
-  values['invalidRegexMessage'] =
-      expectedInput.uiSettings.invalidRegexMessage;
+  values['invalidRegexMessage'] = expectedInput.uiSettings.invalidRegexMessage;
 
   test('StringInput Form : Step 0', () {
     expect(stringInputNode.getErrors(values, parentPath: '').isEmpty, true);

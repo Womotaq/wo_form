@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:wo_form/src/model/json_converter/text_input_type.dart';
 import 'package:wo_form/wo_form.dart';
 
-InputsNode createStringInputNode({String id = 'stringInput'}) => InputsNode(
+InputsNode createStringInputNode({required String id}) => InputsNode(
       id: id,
-      uiSettings: const NodeFieldSettings(
+      uiSettings: const NodeWidgetSettings(
         labelText: 'StringInput',
       ),
       inputs: [
@@ -39,7 +39,7 @@ InputsNode createStringInputNode({String id = 'stringInput'}) => InputsNode(
         ),
         InputsNode(
           id: 'uiSettings',
-          uiSettings: const NodeFieldSettings(
+          uiSettings: const NodeWidgetSettings(
             labelText: 'Interface',
           ),
           inputs: [

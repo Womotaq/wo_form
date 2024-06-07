@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'field_settings.dart';
+part of 'ui_settings.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -203,33 +203,33 @@ abstract class _BooleanFieldSettings extends BooleanFieldSettings {
       get copyWith => throw _privateConstructorUsedError;
 }
 
-NodeFieldSettings _$NodeFieldSettingsFromJson(Map<String, dynamic> json) {
-  return _NodeFieldSettings.fromJson(json);
+NodeWidgetSettings _$NodeWidgetSettingsFromJson(Map<String, dynamic> json) {
+  return _NodeWidgetSettings.fromJson(json);
 }
 
 /// @nodoc
-mixin _$NodeFieldSettings {
+mixin _$NodeWidgetSettings {
   String? get labelText => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $NodeFieldSettingsCopyWith<NodeFieldSettings> get copyWith =>
+  $NodeWidgetSettingsCopyWith<NodeWidgetSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $NodeFieldSettingsCopyWith<$Res> {
-  factory $NodeFieldSettingsCopyWith(
-          NodeFieldSettings value, $Res Function(NodeFieldSettings) then) =
-      _$NodeFieldSettingsCopyWithImpl<$Res, NodeFieldSettings>;
+abstract class $NodeWidgetSettingsCopyWith<$Res> {
+  factory $NodeWidgetSettingsCopyWith(
+          NodeWidgetSettings value, $Res Function(NodeWidgetSettings) then) =
+      _$NodeWidgetSettingsCopyWithImpl<$Res, NodeWidgetSettings>;
   @useResult
   $Res call({String? labelText});
 }
 
 /// @nodoc
-class _$NodeFieldSettingsCopyWithImpl<$Res, $Val extends NodeFieldSettings>
-    implements $NodeFieldSettingsCopyWith<$Res> {
-  _$NodeFieldSettingsCopyWithImpl(this._value, this._then);
+class _$NodeWidgetSettingsCopyWithImpl<$Res, $Val extends NodeWidgetSettings>
+    implements $NodeWidgetSettingsCopyWith<$Res> {
+  _$NodeWidgetSettingsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -251,22 +251,22 @@ class _$NodeFieldSettingsCopyWithImpl<$Res, $Val extends NodeFieldSettings>
 }
 
 /// @nodoc
-abstract class _$$NodeFieldSettingsImplCopyWith<$Res>
-    implements $NodeFieldSettingsCopyWith<$Res> {
-  factory _$$NodeFieldSettingsImplCopyWith(_$NodeFieldSettingsImpl value,
-          $Res Function(_$NodeFieldSettingsImpl) then) =
-      __$$NodeFieldSettingsImplCopyWithImpl<$Res>;
+abstract class _$$NodeWidgetSettingsImplCopyWith<$Res>
+    implements $NodeWidgetSettingsCopyWith<$Res> {
+  factory _$$NodeWidgetSettingsImplCopyWith(_$NodeWidgetSettingsImpl value,
+          $Res Function(_$NodeWidgetSettingsImpl) then) =
+      __$$NodeWidgetSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? labelText});
 }
 
 /// @nodoc
-class __$$NodeFieldSettingsImplCopyWithImpl<$Res>
-    extends _$NodeFieldSettingsCopyWithImpl<$Res, _$NodeFieldSettingsImpl>
-    implements _$$NodeFieldSettingsImplCopyWith<$Res> {
-  __$$NodeFieldSettingsImplCopyWithImpl(_$NodeFieldSettingsImpl _value,
-      $Res Function(_$NodeFieldSettingsImpl) _then)
+class __$$NodeWidgetSettingsImplCopyWithImpl<$Res>
+    extends _$NodeWidgetSettingsCopyWithImpl<$Res, _$NodeWidgetSettingsImpl>
+    implements _$$NodeWidgetSettingsImplCopyWith<$Res> {
+  __$$NodeWidgetSettingsImplCopyWithImpl(_$NodeWidgetSettingsImpl _value,
+      $Res Function(_$NodeWidgetSettingsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -274,7 +274,7 @@ class __$$NodeFieldSettingsImplCopyWithImpl<$Res>
   $Res call({
     Object? labelText = freezed,
   }) {
-    return _then(_$NodeFieldSettingsImpl(
+    return _then(_$NodeWidgetSettingsImpl(
       labelText: freezed == labelText
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
@@ -285,25 +285,25 @@ class __$$NodeFieldSettingsImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$NodeFieldSettingsImpl extends _NodeFieldSettings {
-  const _$NodeFieldSettingsImpl({this.labelText}) : super._();
+class _$NodeWidgetSettingsImpl extends _NodeWidgetSettings {
+  const _$NodeWidgetSettingsImpl({this.labelText}) : super._();
 
-  factory _$NodeFieldSettingsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$NodeFieldSettingsImplFromJson(json);
+  factory _$NodeWidgetSettingsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NodeWidgetSettingsImplFromJson(json);
 
   @override
   final String? labelText;
 
   @override
   String toString() {
-    return 'NodeFieldSettings(labelText: $labelText)';
+    return 'NodeWidgetSettings(labelText: $labelText)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NodeFieldSettingsImpl &&
+            other is _$NodeWidgetSettingsImpl &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText));
   }
@@ -315,31 +315,31 @@ class _$NodeFieldSettingsImpl extends _NodeFieldSettings {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$NodeFieldSettingsImplCopyWith<_$NodeFieldSettingsImpl> get copyWith =>
-      __$$NodeFieldSettingsImplCopyWithImpl<_$NodeFieldSettingsImpl>(
+  _$$NodeWidgetSettingsImplCopyWith<_$NodeWidgetSettingsImpl> get copyWith =>
+      __$$NodeWidgetSettingsImplCopyWithImpl<_$NodeWidgetSettingsImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$NodeFieldSettingsImplToJson(
+    return _$$NodeWidgetSettingsImplToJson(
       this,
     );
   }
 }
 
-abstract class _NodeFieldSettings extends NodeFieldSettings {
-  const factory _NodeFieldSettings({final String? labelText}) =
-      _$NodeFieldSettingsImpl;
-  const _NodeFieldSettings._() : super._();
+abstract class _NodeWidgetSettings extends NodeWidgetSettings {
+  const factory _NodeWidgetSettings({final String? labelText}) =
+      _$NodeWidgetSettingsImpl;
+  const _NodeWidgetSettings._() : super._();
 
-  factory _NodeFieldSettings.fromJson(Map<String, dynamic> json) =
-      _$NodeFieldSettingsImpl.fromJson;
+  factory _NodeWidgetSettings.fromJson(Map<String, dynamic> json) =
+      _$NodeWidgetSettingsImpl.fromJson;
 
   @override
   String? get labelText;
   @override
   @JsonKey(ignore: true)
-  _$$NodeFieldSettingsImplCopyWith<_$NodeFieldSettingsImpl> get copyWith =>
+  _$$NodeWidgetSettingsImplCopyWith<_$NodeWidgetSettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1228,5 +1228,144 @@ abstract class _StringFieldSettings extends StringFieldSettings {
   @override
   @JsonKey(ignore: true)
   _$$StringFieldSettingsImplCopyWith<_$StringFieldSettingsImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+WoFormUiSettings _$WoFormUiSettingsFromJson(Map<String, dynamic> json) {
+  return _WoFormUiSettings.fromJson(json);
+}
+
+/// @nodoc
+mixin _$WoFormUiSettings {
+  String? get title => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $WoFormUiSettingsCopyWith<WoFormUiSettings> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $WoFormUiSettingsCopyWith<$Res> {
+  factory $WoFormUiSettingsCopyWith(
+          WoFormUiSettings value, $Res Function(WoFormUiSettings) then) =
+      _$WoFormUiSettingsCopyWithImpl<$Res, WoFormUiSettings>;
+  @useResult
+  $Res call({String? title});
+}
+
+/// @nodoc
+class _$WoFormUiSettingsCopyWithImpl<$Res, $Val extends WoFormUiSettings>
+    implements $WoFormUiSettingsCopyWith<$Res> {
+  _$WoFormUiSettingsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? title = freezed,
+  }) {
+    return _then(_value.copyWith(
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$WoFormUiSettingsImplCopyWith<$Res>
+    implements $WoFormUiSettingsCopyWith<$Res> {
+  factory _$$WoFormUiSettingsImplCopyWith(_$WoFormUiSettingsImpl value,
+          $Res Function(_$WoFormUiSettingsImpl) then) =
+      __$$WoFormUiSettingsImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String? title});
+}
+
+/// @nodoc
+class __$$WoFormUiSettingsImplCopyWithImpl<$Res>
+    extends _$WoFormUiSettingsCopyWithImpl<$Res, _$WoFormUiSettingsImpl>
+    implements _$$WoFormUiSettingsImplCopyWith<$Res> {
+  __$$WoFormUiSettingsImplCopyWithImpl(_$WoFormUiSettingsImpl _value,
+      $Res Function(_$WoFormUiSettingsImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? title = freezed,
+  }) {
+    return _then(_$WoFormUiSettingsImpl(
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$WoFormUiSettingsImpl extends _WoFormUiSettings {
+  const _$WoFormUiSettingsImpl({this.title}) : super._();
+
+  factory _$WoFormUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$WoFormUiSettingsImplFromJson(json);
+
+  @override
+  final String? title;
+
+  @override
+  String toString() {
+    return 'WoFormUiSettings(title: $title)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$WoFormUiSettingsImpl &&
+            (identical(other.title, title) || other.title == title));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, title);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$WoFormUiSettingsImplCopyWith<_$WoFormUiSettingsImpl> get copyWith =>
+      __$$WoFormUiSettingsImplCopyWithImpl<_$WoFormUiSettingsImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$WoFormUiSettingsImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _WoFormUiSettings extends WoFormUiSettings {
+  const factory _WoFormUiSettings({final String? title}) =
+      _$WoFormUiSettingsImpl;
+  const _WoFormUiSettings._() : super._();
+
+  factory _WoFormUiSettings.fromJson(Map<String, dynamic> json) =
+      _$WoFormUiSettingsImpl.fromJson;
+
+  @override
+  String? get title;
+  @override
+  @JsonKey(ignore: true)
+  _$$WoFormUiSettingsImplCopyWith<_$WoFormUiSettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
