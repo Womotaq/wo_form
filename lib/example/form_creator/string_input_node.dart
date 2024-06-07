@@ -29,7 +29,7 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
         ),
         SelectInput<RegexPattern?>(
           id: 'regexPattern',
-          availibleValues: <RegexPattern?>[null] + RegexPattern.values,
+          availibleValues: [null, ...RegexPattern.values],
           maxCount: 1,
           uiSettings: SelectFieldSettings(
             labelText: 'Regex pattern',
@@ -56,13 +56,14 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
                 labelText: 'Aide',
               ),
             ),
-            const SelectInput<StringFieldAction>(
+            SelectInput<StringFieldAction?>(
               id: 'action',
-              availibleValues: StringFieldAction.values,
+              availibleValues: [null, ...StringFieldAction.values],
               maxCount: 1,
               uiSettings: SelectFieldSettings(
                 labelText: 'Action à droite du champ',
                 displayMode: SelectFieldDisplayMode.selectChip,
+                valueBuilder: (value) => Text(value?.name ?? 'Aucune'),
               ),
             ),
             const BooleanInput(
@@ -71,13 +72,14 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
                 labelText: 'Envoyer le formulaire quand le champ est validé',
               ),
             ),
-            SelectInput<TextInputType>(
+            SelectInput<TextInputType?>(
               id: 'keyboardType',
-              availibleValues: TextInputType.values,
+              availibleValues: [null, ...TextInputType.values],
               maxCount: 1,
-              uiSettings: const SelectFieldSettings(
+              uiSettings: SelectFieldSettings(
                 labelText: 'Type de text',
                 displayMode: SelectFieldDisplayMode.selectChip,
+                valueBuilder: (value) => Text(value?.name ?? 'Défaut'),
               ),
               toJsonT: (value) => const TextInputTypeConverter().toJson(value),
             ),
@@ -107,22 +109,25 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
                 labelText: 'Auto-focus',
               ),
             ),
-            const SelectInput<TextInputAction>(
+            SelectInput<TextInputAction?>(
               id: 'textInputAction',
-              availibleValues: TextInputAction.values,
+              availibleValues: [null, ...TextInputAction.values],
               maxCount: 1,
               uiSettings: SelectFieldSettings(
                 labelText: "Bouton 'Entrée' du clavier",
                 displayMode: SelectFieldDisplayMode.selectChip,
+                valueBuilder: (value) => Text(value?.name ?? 'Défaut'),
               ),
             ),
-            const SelectInput<TextCapitalization>(
+            SelectInput<TextCapitalization>(
               id: 'textCapitalization',
+              defaultValues: [TextCapitalization.none],
               availibleValues: TextCapitalization.values,
               maxCount: 1,
               uiSettings: SelectFieldSettings(
                 labelText: 'Gestion des majuscules',
                 // displayMode: SelectFieldDisplayMode.selectChip,
+                valueBuilder: (value) => Text(value?.name ?? ''),
               ),
             ),
             const NumInput(
