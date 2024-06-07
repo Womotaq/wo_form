@@ -19,6 +19,9 @@ final woFormCreator = WoForm(
     InputsNode(
       id: 'inputs',
       exportType: NodeExportType.list,
+      uiSettings: const NodeWidgetSettings(
+        displayMode: NodeDisplayMode.tile,
+      ),
       inputs: [
         createStringInputNode(id: idGenerator.generateId()),
         createNumInputNode(id: idGenerator.generateId()),
@@ -36,7 +39,7 @@ class StringInputPage extends StatelessWidget {
       form: woFormCreator,
       onSubmitting: () {},
       child: Scaffold(
-        backgroundColor: context.colorScheme.contrastedBackground,
+        // backgroundColor: context.colorScheme.contrastedBackground,
         appBar: AppBar(
           title: const Text("Création d'un champ texte"),
         ),

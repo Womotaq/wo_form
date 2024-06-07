@@ -210,6 +210,7 @@ NodeWidgetSettings _$NodeWidgetSettingsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$NodeWidgetSettings {
   String? get labelText => throw _privateConstructorUsedError;
+  NodeDisplayMode? get displayMode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -223,7 +224,7 @@ abstract class $NodeWidgetSettingsCopyWith<$Res> {
           NodeWidgetSettings value, $Res Function(NodeWidgetSettings) then) =
       _$NodeWidgetSettingsCopyWithImpl<$Res, NodeWidgetSettings>;
   @useResult
-  $Res call({String? labelText});
+  $Res call({String? labelText, NodeDisplayMode? displayMode});
 }
 
 /// @nodoc
@@ -240,12 +241,17 @@ class _$NodeWidgetSettingsCopyWithImpl<$Res, $Val extends NodeWidgetSettings>
   @override
   $Res call({
     Object? labelText = freezed,
+    Object? displayMode = freezed,
   }) {
     return _then(_value.copyWith(
       labelText: freezed == labelText
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
               as String?,
+      displayMode: freezed == displayMode
+          ? _value.displayMode
+          : displayMode // ignore: cast_nullable_to_non_nullable
+              as NodeDisplayMode?,
     ) as $Val);
   }
 }
@@ -258,7 +264,7 @@ abstract class _$$NodeWidgetSettingsImplCopyWith<$Res>
       __$$NodeWidgetSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? labelText});
+  $Res call({String? labelText, NodeDisplayMode? displayMode});
 }
 
 /// @nodoc
@@ -273,12 +279,17 @@ class __$$NodeWidgetSettingsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? labelText = freezed,
+    Object? displayMode = freezed,
   }) {
     return _then(_$NodeWidgetSettingsImpl(
       labelText: freezed == labelText
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
               as String?,
+      displayMode: freezed == displayMode
+          ? _value.displayMode
+          : displayMode // ignore: cast_nullable_to_non_nullable
+              as NodeDisplayMode?,
     ));
   }
 }
@@ -286,17 +297,20 @@ class __$$NodeWidgetSettingsImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$NodeWidgetSettingsImpl extends _NodeWidgetSettings {
-  const _$NodeWidgetSettingsImpl({this.labelText}) : super._();
+  const _$NodeWidgetSettingsImpl({this.labelText, this.displayMode})
+      : super._();
 
   factory _$NodeWidgetSettingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$NodeWidgetSettingsImplFromJson(json);
 
   @override
   final String? labelText;
+  @override
+  final NodeDisplayMode? displayMode;
 
   @override
   String toString() {
-    return 'NodeWidgetSettings(labelText: $labelText)';
+    return 'NodeWidgetSettings(labelText: $labelText, displayMode: $displayMode)';
   }
 
   @override
@@ -305,12 +319,14 @@ class _$NodeWidgetSettingsImpl extends _NodeWidgetSettings {
         (other.runtimeType == runtimeType &&
             other is _$NodeWidgetSettingsImpl &&
             (identical(other.labelText, labelText) ||
-                other.labelText == labelText));
+                other.labelText == labelText) &&
+            (identical(other.displayMode, displayMode) ||
+                other.displayMode == displayMode));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, labelText);
+  int get hashCode => Object.hash(runtimeType, labelText, displayMode);
 
   @JsonKey(ignore: true)
   @override
@@ -328,8 +344,9 @@ class _$NodeWidgetSettingsImpl extends _NodeWidgetSettings {
 }
 
 abstract class _NodeWidgetSettings extends NodeWidgetSettings {
-  const factory _NodeWidgetSettings({final String? labelText}) =
-      _$NodeWidgetSettingsImpl;
+  const factory _NodeWidgetSettings(
+      {final String? labelText,
+      final NodeDisplayMode? displayMode}) = _$NodeWidgetSettingsImpl;
   const _NodeWidgetSettings._() : super._();
 
   factory _NodeWidgetSettings.fromJson(Map<String, dynamic> json) =
@@ -337,6 +354,8 @@ abstract class _NodeWidgetSettings extends NodeWidgetSettings {
 
   @override
   String? get labelText;
+  @override
+  NodeDisplayMode? get displayMode;
   @override
   @JsonKey(ignore: true)
   _$$NodeWidgetSettingsImplCopyWith<_$NodeWidgetSettingsImpl> get copyWith =>

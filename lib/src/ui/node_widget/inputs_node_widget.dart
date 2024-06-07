@@ -28,26 +28,32 @@ class InputsNodeWidget extends StatelessWidget {
     final inputSettings = input.uiSettings;
     final mergedSettings = settings?.merge(inputSettings) ?? inputSettings;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (mergedSettings.labelText != null)
-          ExpansionTile(
-            title: Text(
-              mergedSettings.labelText!,
-              style: TextStyleExt.bold,
-            ),
-            children: input.inputs
-                .map((i) => i.toWidget(parentPath: inputPath))
-                .toList(),
-          )
-        else
-          Column(
-            children: input.inputs
-                .map((i) => i.toWidget(parentPath: inputPath))
-                .toList(),
-          ),
-      ],
-    );
+    final inputWidgets =
+        input.inputs.map((i) => i.toWidget(parentPath: inputPath)).toList();
+
+    switch (mergedSettings.displayMode) {
+      case null:
+      case NodeDisplayMode.card:
+        return FeedCard(
+          title: mergedSettings.labelText,
+          child: Column(children: inputWidgets),
+        );
+      case NodeDisplayMode.tile:
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (mergedSettings.labelText != null)
+              ExpansionTile(
+                title: Text(
+                  mergedSettings.labelText!,
+                  style: TextStyleExt.bold,
+                ),
+                children: inputWidgets,
+              )
+            else
+              Column(children: inputWidgets),
+          ],
+        );
+    }
   }
 }

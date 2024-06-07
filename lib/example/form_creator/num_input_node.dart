@@ -29,6 +29,7 @@ InputsNode createNumInputNode({required String id}) => InputsNode(
           id: 'uiSettings',
           uiSettings: NodeWidgetSettings(
             labelText: 'Interface',
+            displayMode: NodeDisplayMode.tile,
           ),
           inputs: [
             StringInput(

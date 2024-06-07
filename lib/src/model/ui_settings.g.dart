@@ -39,13 +39,21 @@ _$NodeWidgetSettingsImpl _$$NodeWidgetSettingsImplFromJson(
         Map<String, dynamic> json) =>
     _$NodeWidgetSettingsImpl(
       labelText: json['labelText'] as String?,
+      displayMode:
+          $enumDecodeNullable(_$NodeDisplayModeEnumMap, json['displayMode']),
     );
 
 Map<String, dynamic> _$$NodeWidgetSettingsImplToJson(
         _$NodeWidgetSettingsImpl instance) =>
     <String, dynamic>{
       'labelText': instance.labelText,
+      'displayMode': _$NodeDisplayModeEnumMap[instance.displayMode],
     };
+
+const _$NodeDisplayModeEnumMap = {
+  NodeDisplayMode.card: 'card',
+  NodeDisplayMode.tile: 'tile',
+};
 
 _$NumFieldSettingsImpl _$$NumFieldSettingsImplFromJson(
         Map<String, dynamic> json) =>

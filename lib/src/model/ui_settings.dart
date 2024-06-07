@@ -32,10 +32,13 @@ class BooleanFieldSettings with _$BooleanFieldSettings {
         );
 }
 
+enum NodeDisplayMode { card, tile }
+
 @freezed
 class NodeWidgetSettings with _$NodeWidgetSettings {
   const factory NodeWidgetSettings({
     String? labelText,
+    NodeDisplayMode? displayMode,
   }) = _NodeWidgetSettings;
 
   const NodeWidgetSettings._();
@@ -50,6 +53,7 @@ class NodeWidgetSettings with _$NodeWidgetSettings {
       ? this
       : NodeWidgetSettings(
           labelText: labelText ?? other.labelText,
+          displayMode: displayMode ?? other.displayMode,
         );
 }
 
