@@ -12,7 +12,7 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
           id: 'id',
           isRequired: true,
           uiSettings: StringFieldSettings(
-            labelText: 'Clef',
+            labelText: 'Id',
           ),
         ),
         const StringInput(

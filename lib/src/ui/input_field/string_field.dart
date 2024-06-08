@@ -89,13 +89,13 @@ class _StringFieldState extends State<StringField> {
                     TextCapitalization.none,
                 maxLines: mergedSettings.maxLines,
                 decoration: InputDecoration(
-                  labelText: mergedSettings.labelText,
-                  // hint's height & never null alws to
-                  // move the floating label up
+                  border: const OutlineInputBorder(),
+                  labelText: (mergedSettings.labelText ?? '') +
+                      (input.isRequired ? '*' : ''),
+                  labelStyle: input.isRequired
+                      ? null
+                      : TextStyle(color: Theme.of(context).disabledColor),
                   hintText: mergedSettings.hintText ?? '',
-                  hintStyle: (mergedSettings.labelText ?? '').isNotEmpty
-                      ? const TextStyle(height: 2.2)
-                      : null,
                   errorText: errorText,
                   errorMaxLines: 10,
                   suffixIcon: switch (mergedSettings.action) {
