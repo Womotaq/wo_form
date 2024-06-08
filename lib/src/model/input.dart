@@ -37,10 +37,7 @@ mixin WoFormInputMixin {
 
   String? getInvalidExplanation(Object? value, FormLocalizations formL10n);
 
-  Widget toField<T extends WoFormValuesCubit>({required String parentPath});
-
-  Widget toWidget<C extends WoFormValuesCubit>({required String parentPath}) =>
-      toField(parentPath: parentPath);
+  Widget toWidget<C extends WoFormValuesCubit>({required String parentPath});
 
   // WoFormElementMixin
 
@@ -172,6 +169,8 @@ sealed class WoFormInput
 
     if (error == null) return null;
 
+    if (error is CustomInputError) return error.message;
+
     switch (this) {
       case BooleanInput():
       case NumInput():
@@ -192,7 +191,7 @@ sealed class WoFormInput
   }
 
   @override
-  Widget toField<T extends WoFormValuesCubit>({required String parentPath}) {
+  Widget toWidget<T extends WoFormValuesCubit>({required String parentPath}) {
     final path = '$parentPath/$id';
     switch (this) {
       case BooleanInput():
@@ -311,20 +310,18 @@ class SelectInput<T>
 
   @override
   String? getInvalidExplanation(dynamic value, FormLocalizations formL10n) {
-    // TODO : replace formL10n by function of type
-    // String? Function(WoFormInputError)
-    // Is it possible ?
-
     final error = getError(value);
 
     if (error == null) return null;
+
+    if (error is CustomInputError) return error.message;
 
     final errorType = error.runtimeType.toString();
     return formL10n.formError(errorType.substring(2, errorType.length - 4));
   }
 
   @override
-  Widget toField<C extends WoFormValuesCubit>({required String parentPath}) =>
+  Widget toWidget<C extends WoFormValuesCubit>({required String parentPath}) =>
       SelectField<T>(inputPath: '$parentPath/$id');
 
   @override

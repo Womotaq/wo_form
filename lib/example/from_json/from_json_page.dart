@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
-import 'package:wo_form/example/form_creator/form_creator_page.dart';
+import 'package:wo_form/src/ui/prefab/wo_form_card_page.dart';
 import 'package:wo_form/wo_form.dart';
 
 class FromJsonPage extends StatelessWidget {
@@ -51,7 +51,7 @@ class OpenFormButton extends StatelessWidget {
     return WoFormValueBuilder<String>(
       inputPath: '/json',
       builder: (context, jsonString) {
-        return FilledFeedCardButton(
+        return FilledBigCardButton(
           onPressed: (jsonString != null && jsonString.isNotEmpty)
               ? () {
                   final Map<String, dynamic> json;
@@ -79,7 +79,7 @@ class OpenFormButton extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute<void>(
-                      builder: (_) => WoFormPage(initialForm: form),
+                      builder: (_) => WoFormCardPage(form: form),
                     ),
                   );
                 }

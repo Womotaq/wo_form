@@ -4,8 +4,8 @@ import 'package:wo_form/wo_form.dart';
 
 InputsNode createStringInputNode({required String id}) => InputsNode(
       id: id,
-      uiSettings: const NodeWidgetSettings(
-        labelText: 'StringInput',
+      uiSettings: const InputsNodeWidgetSettings(
+        labelText: 'Saisie de texte',
       ),
       inputs: [
         const StringInput(
@@ -50,7 +50,7 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
         ),
         InputsNode(
           id: 'uiSettings',
-          uiSettings: const NodeWidgetSettings(
+          uiSettings: const InputsNodeWidgetSettings(
             labelText: 'Interface',
             displayMode: NodeDisplayMode.tile,
           ),

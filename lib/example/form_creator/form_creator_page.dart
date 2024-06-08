@@ -8,6 +8,7 @@ import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/example/form_creator/num_input_node.dart';
 import 'package:wo_form/example/form_creator/string_input_node.dart';
 import 'package:wo_form/example/utils/readable_json.dart';
+import 'package:wo_form/src/ui/prefab/wo_form_card_page.dart';
 import 'package:wo_form/wo_form.dart';
 
 final idGenerator = Random();
@@ -23,10 +24,22 @@ final woFormCreator = WoForm(
     },
   },
   inputs: [
+    const InputsNode(
+      id: 'uiSettings',
+      uiSettings: InputsNodeWidgetSettings(
+        labelText: 'Paramètres généraux',
+      ),
+      inputs: [
+        StringInput(
+          id: 'titleText',
+          uiSettings: StringFieldSettings(labelText: 'Titre du formulaire'),
+        ),
+      ],
+    ),
     InputsNode(
       id: 'inputs',
       exportType: NodeExportType.list,
-      uiSettings: const NodeWidgetSettings(
+      uiSettings: const InputsNodeWidgetSettings(
         displayMode: NodeDisplayMode.tile,
       ),
       inputs: [
@@ -60,7 +73,7 @@ class StringInputPage extends StatelessWidget {
                 builder: (context) => Row(
                   children: [
                     Flexible(
-                      child: FeedCardButton(
+                      child: BigCardButton(
                         onPressed: () {
                           final values =
                               context.read<WoFormValuesCubit>().state;
@@ -94,12 +107,12 @@ class StringInputPage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute<void>(
-                                builder: (_) => WoFormPage(initialForm: form),
+                                builder: (_) => WoFormCardPage(form: form),
                               ),
                             );
                           }
                         },
-                        child: FilledFeedCardButton(
+                        child: FilledBigCardButton(
                           onPressed: context.read<WoFormValuesCubit>().submit,
                           leading: const Icon(Icons.visibility_outlined),
                           child: const Text('Prévisualiser'),
@@ -126,49 +139,6 @@ class StringInputPage extends StatelessWidget {
               WoGap.xxxlarge,
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-// TODO : finish
-class WoFormPage extends StatelessWidget {
-  const WoFormPage({
-    required this.initialForm,
-    super.key,
-  });
-
-  final WoForm initialForm;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Utilisation du formulaire'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: initialForm.toWidget(
-          onSubmitting: () {},
-          onSubmitted: (context) {
-            final form = context.read<WoForm>();
-            final values = context.read<WoFormValuesCubit>().state;
-            showActionDialog(
-              pageContext: context,
-              title: 'JSON',
-              actionText: 'Ok',
-              onAction: context.read<WoFormStatusCubit>().setIdle,
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(readableJson(form.exportValues(values))),
-                  // WoGap.large,
-                  // Text(readableJson(form.toJson())),
-                ],
-              ),
-            );
-          },
         ),
       ),
     );

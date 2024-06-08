@@ -37,17 +37,17 @@ const _$ListTileControlAffinityEnumMap = {
   ListTileControlAffinity.platform: 'platform',
 };
 
-_$NodeWidgetSettingsImpl _$$NodeWidgetSettingsImplFromJson(
+_$InputsNodeWidgetSettingsImpl _$$InputsNodeWidgetSettingsImplFromJson(
         Map<String, dynamic> json) =>
-    _$NodeWidgetSettingsImpl(
+    _$InputsNodeWidgetSettingsImpl(
       labelText: json['labelText'] as String?,
       helperText: json['helperText'] as String?,
       displayMode:
           $enumDecodeNullable(_$NodeDisplayModeEnumMap, json['displayMode']),
     );
 
-Map<String, dynamic> _$$NodeWidgetSettingsImplToJson(
-        _$NodeWidgetSettingsImpl instance) =>
+Map<String, dynamic> _$$InputsNodeWidgetSettingsImplToJson(
+        _$InputsNodeWidgetSettingsImpl instance) =>
     <String, dynamic>{
       'labelText': instance.labelText,
       'helperText': instance.helperText,
@@ -91,8 +91,8 @@ Map<String, dynamic> _$$SelectFieldSettingsImplToJson<T>(
     };
 
 const _$SelectFieldDisplayModeEnumMap = {
-  SelectFieldDisplayMode.chip: 'chip',
   SelectFieldDisplayMode.tile: 'tile',
+  SelectFieldDisplayMode.chip: 'chip',
 };
 
 _$StringFieldSettingsImpl _$$StringFieldSettingsImplFromJson(
@@ -171,11 +171,32 @@ const _$TextCapitalizationEnumMap = {
 _$WoFormUiSettingsImpl _$$WoFormUiSettingsImplFromJson(
         Map<String, dynamic> json) =>
     _$WoFormUiSettingsImpl(
-      title: json['title'] as String?,
+      titleText: json['titleText'] as String?,
+      submitText: json['submitText'] as String?,
+      submittedText: json['submittedText'] as String?,
+      displayMode:
+          $enumDecodeNullable(_$WoFormDisplayModeEnumMap, json['displayMode']),
+      submitMode:
+          $enumDecodeNullable(_$WoFormSubmitModeEnumMap, json['submitMode']),
     );
 
 Map<String, dynamic> _$$WoFormUiSettingsImplToJson(
         _$WoFormUiSettingsImpl instance) =>
     <String, dynamic>{
-      'title': instance.title,
+      'titleText': instance.titleText,
+      'submitText': instance.submitText,
+      'submittedText': instance.submittedText,
+      'displayMode': _$WoFormDisplayModeEnumMap[instance.displayMode],
+      'submitMode': _$WoFormSubmitModeEnumMap[instance.submitMode],
     };
+
+const _$WoFormDisplayModeEnumMap = {
+  WoFormDisplayMode.card: 'card',
+  WoFormDisplayMode.page: 'page',
+};
+
+const _$WoFormSubmitModeEnumMap = {
+  WoFormSubmitMode.submit: 'submit',
+  WoFormSubmitMode.submitIfValid: 'submitIfValid',
+  WoFormSubmitMode.save: 'save',
+};

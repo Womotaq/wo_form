@@ -223,36 +223,38 @@ abstract class _BooleanFieldSettings extends BooleanFieldSettings {
       get copyWith => throw _privateConstructorUsedError;
 }
 
-NodeWidgetSettings _$NodeWidgetSettingsFromJson(Map<String, dynamic> json) {
-  return _NodeWidgetSettings.fromJson(json);
+InputsNodeWidgetSettings _$InputsNodeWidgetSettingsFromJson(
+    Map<String, dynamic> json) {
+  return _InputsNodeWidgetSettings.fromJson(json);
 }
 
 /// @nodoc
-mixin _$NodeWidgetSettings {
+mixin _$InputsNodeWidgetSettings {
   String? get labelText => throw _privateConstructorUsedError;
   String? get helperText => throw _privateConstructorUsedError;
   NodeDisplayMode? get displayMode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $NodeWidgetSettingsCopyWith<NodeWidgetSettings> get copyWith =>
+  $InputsNodeWidgetSettingsCopyWith<InputsNodeWidgetSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $NodeWidgetSettingsCopyWith<$Res> {
-  factory $NodeWidgetSettingsCopyWith(
-          NodeWidgetSettings value, $Res Function(NodeWidgetSettings) then) =
-      _$NodeWidgetSettingsCopyWithImpl<$Res, NodeWidgetSettings>;
+abstract class $InputsNodeWidgetSettingsCopyWith<$Res> {
+  factory $InputsNodeWidgetSettingsCopyWith(InputsNodeWidgetSettings value,
+          $Res Function(InputsNodeWidgetSettings) then) =
+      _$InputsNodeWidgetSettingsCopyWithImpl<$Res, InputsNodeWidgetSettings>;
   @useResult
   $Res call(
       {String? labelText, String? helperText, NodeDisplayMode? displayMode});
 }
 
 /// @nodoc
-class _$NodeWidgetSettingsCopyWithImpl<$Res, $Val extends NodeWidgetSettings>
-    implements $NodeWidgetSettingsCopyWith<$Res> {
-  _$NodeWidgetSettingsCopyWithImpl(this._value, this._then);
+class _$InputsNodeWidgetSettingsCopyWithImpl<$Res,
+        $Val extends InputsNodeWidgetSettings>
+    implements $InputsNodeWidgetSettingsCopyWith<$Res> {
+  _$InputsNodeWidgetSettingsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -284,11 +286,12 @@ class _$NodeWidgetSettingsCopyWithImpl<$Res, $Val extends NodeWidgetSettings>
 }
 
 /// @nodoc
-abstract class _$$NodeWidgetSettingsImplCopyWith<$Res>
-    implements $NodeWidgetSettingsCopyWith<$Res> {
-  factory _$$NodeWidgetSettingsImplCopyWith(_$NodeWidgetSettingsImpl value,
-          $Res Function(_$NodeWidgetSettingsImpl) then) =
-      __$$NodeWidgetSettingsImplCopyWithImpl<$Res>;
+abstract class _$$InputsNodeWidgetSettingsImplCopyWith<$Res>
+    implements $InputsNodeWidgetSettingsCopyWith<$Res> {
+  factory _$$InputsNodeWidgetSettingsImplCopyWith(
+          _$InputsNodeWidgetSettingsImpl value,
+          $Res Function(_$InputsNodeWidgetSettingsImpl) then) =
+      __$$InputsNodeWidgetSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -296,11 +299,13 @@ abstract class _$$NodeWidgetSettingsImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$NodeWidgetSettingsImplCopyWithImpl<$Res>
-    extends _$NodeWidgetSettingsCopyWithImpl<$Res, _$NodeWidgetSettingsImpl>
-    implements _$$NodeWidgetSettingsImplCopyWith<$Res> {
-  __$$NodeWidgetSettingsImplCopyWithImpl(_$NodeWidgetSettingsImpl _value,
-      $Res Function(_$NodeWidgetSettingsImpl) _then)
+class __$$InputsNodeWidgetSettingsImplCopyWithImpl<$Res>
+    extends _$InputsNodeWidgetSettingsCopyWithImpl<$Res,
+        _$InputsNodeWidgetSettingsImpl>
+    implements _$$InputsNodeWidgetSettingsImplCopyWith<$Res> {
+  __$$InputsNodeWidgetSettingsImplCopyWithImpl(
+      _$InputsNodeWidgetSettingsImpl _value,
+      $Res Function(_$InputsNodeWidgetSettingsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -310,7 +315,7 @@ class __$$NodeWidgetSettingsImplCopyWithImpl<$Res>
     Object? helperText = freezed,
     Object? displayMode = freezed,
   }) {
-    return _then(_$NodeWidgetSettingsImpl(
+    return _then(_$InputsNodeWidgetSettingsImpl(
       labelText: freezed == labelText
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
@@ -329,13 +334,13 @@ class __$$NodeWidgetSettingsImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$NodeWidgetSettingsImpl extends _NodeWidgetSettings {
-  const _$NodeWidgetSettingsImpl(
+class _$InputsNodeWidgetSettingsImpl extends _InputsNodeWidgetSettings {
+  const _$InputsNodeWidgetSettingsImpl(
       {this.labelText, this.helperText, this.displayMode})
       : super._();
 
-  factory _$NodeWidgetSettingsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$NodeWidgetSettingsImplFromJson(json);
+  factory _$InputsNodeWidgetSettingsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$InputsNodeWidgetSettingsImplFromJson(json);
 
   @override
   final String? labelText;
@@ -346,14 +351,14 @@ class _$NodeWidgetSettingsImpl extends _NodeWidgetSettings {
 
   @override
   String toString() {
-    return 'NodeWidgetSettings(labelText: $labelText, helperText: $helperText, displayMode: $displayMode)';
+    return 'InputsNodeWidgetSettings(labelText: $labelText, helperText: $helperText, displayMode: $displayMode)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NodeWidgetSettingsImpl &&
+            other is _$InputsNodeWidgetSettingsImpl &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
             (identical(other.helperText, helperText) ||
@@ -370,27 +375,27 @@ class _$NodeWidgetSettingsImpl extends _NodeWidgetSettings {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$NodeWidgetSettingsImplCopyWith<_$NodeWidgetSettingsImpl> get copyWith =>
-      __$$NodeWidgetSettingsImplCopyWithImpl<_$NodeWidgetSettingsImpl>(
-          this, _$identity);
+  _$$InputsNodeWidgetSettingsImplCopyWith<_$InputsNodeWidgetSettingsImpl>
+      get copyWith => __$$InputsNodeWidgetSettingsImplCopyWithImpl<
+          _$InputsNodeWidgetSettingsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$NodeWidgetSettingsImplToJson(
+    return _$$InputsNodeWidgetSettingsImplToJson(
       this,
     );
   }
 }
 
-abstract class _NodeWidgetSettings extends NodeWidgetSettings {
-  const factory _NodeWidgetSettings(
+abstract class _InputsNodeWidgetSettings extends InputsNodeWidgetSettings {
+  const factory _InputsNodeWidgetSettings(
       {final String? labelText,
       final String? helperText,
-      final NodeDisplayMode? displayMode}) = _$NodeWidgetSettingsImpl;
-  const _NodeWidgetSettings._() : super._();
+      final NodeDisplayMode? displayMode}) = _$InputsNodeWidgetSettingsImpl;
+  const _InputsNodeWidgetSettings._() : super._();
 
-  factory _NodeWidgetSettings.fromJson(Map<String, dynamic> json) =
-      _$NodeWidgetSettingsImpl.fromJson;
+  factory _InputsNodeWidgetSettings.fromJson(Map<String, dynamic> json) =
+      _$InputsNodeWidgetSettingsImpl.fromJson;
 
   @override
   String? get labelText;
@@ -400,8 +405,8 @@ abstract class _NodeWidgetSettings extends NodeWidgetSettings {
   NodeDisplayMode? get displayMode;
   @override
   @JsonKey(ignore: true)
-  _$$NodeWidgetSettingsImplCopyWith<_$NodeWidgetSettingsImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$InputsNodeWidgetSettingsImplCopyWith<_$InputsNodeWidgetSettingsImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 NumFieldSettings _$NumFieldSettingsFromJson(Map<String, dynamic> json) {
@@ -1261,7 +1266,11 @@ WoFormUiSettings _$WoFormUiSettingsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WoFormUiSettings {
-  String? get title => throw _privateConstructorUsedError;
+  String? get titleText => throw _privateConstructorUsedError;
+  String? get submitText => throw _privateConstructorUsedError;
+  String? get submittedText => throw _privateConstructorUsedError;
+  WoFormDisplayMode? get displayMode => throw _privateConstructorUsedError;
+  WoFormSubmitMode? get submitMode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1275,7 +1284,12 @@ abstract class $WoFormUiSettingsCopyWith<$Res> {
           WoFormUiSettings value, $Res Function(WoFormUiSettings) then) =
       _$WoFormUiSettingsCopyWithImpl<$Res, WoFormUiSettings>;
   @useResult
-  $Res call({String? title});
+  $Res call(
+      {String? titleText,
+      String? submitText,
+      String? submittedText,
+      WoFormDisplayMode? displayMode,
+      WoFormSubmitMode? submitMode});
 }
 
 /// @nodoc
@@ -1291,13 +1305,33 @@ class _$WoFormUiSettingsCopyWithImpl<$Res, $Val extends WoFormUiSettings>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? title = freezed,
+    Object? titleText = freezed,
+    Object? submitText = freezed,
+    Object? submittedText = freezed,
+    Object? displayMode = freezed,
+    Object? submitMode = freezed,
   }) {
     return _then(_value.copyWith(
-      title: freezed == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      titleText: freezed == titleText
+          ? _value.titleText
+          : titleText // ignore: cast_nullable_to_non_nullable
               as String?,
+      submitText: freezed == submitText
+          ? _value.submitText
+          : submitText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      submittedText: freezed == submittedText
+          ? _value.submittedText
+          : submittedText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      displayMode: freezed == displayMode
+          ? _value.displayMode
+          : displayMode // ignore: cast_nullable_to_non_nullable
+              as WoFormDisplayMode?,
+      submitMode: freezed == submitMode
+          ? _value.submitMode
+          : submitMode // ignore: cast_nullable_to_non_nullable
+              as WoFormSubmitMode?,
     ) as $Val);
   }
 }
@@ -1310,7 +1344,12 @@ abstract class _$$WoFormUiSettingsImplCopyWith<$Res>
       __$$WoFormUiSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? title});
+  $Res call(
+      {String? titleText,
+      String? submitText,
+      String? submittedText,
+      WoFormDisplayMode? displayMode,
+      WoFormSubmitMode? submitMode});
 }
 
 /// @nodoc
@@ -1324,13 +1363,33 @@ class __$$WoFormUiSettingsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? title = freezed,
+    Object? titleText = freezed,
+    Object? submitText = freezed,
+    Object? submittedText = freezed,
+    Object? displayMode = freezed,
+    Object? submitMode = freezed,
   }) {
     return _then(_$WoFormUiSettingsImpl(
-      title: freezed == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      titleText: freezed == titleText
+          ? _value.titleText
+          : titleText // ignore: cast_nullable_to_non_nullable
               as String?,
+      submitText: freezed == submitText
+          ? _value.submitText
+          : submitText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      submittedText: freezed == submittedText
+          ? _value.submittedText
+          : submittedText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      displayMode: freezed == displayMode
+          ? _value.displayMode
+          : displayMode // ignore: cast_nullable_to_non_nullable
+              as WoFormDisplayMode?,
+      submitMode: freezed == submitMode
+          ? _value.submitMode
+          : submitMode // ignore: cast_nullable_to_non_nullable
+              as WoFormSubmitMode?,
     ));
   }
 }
@@ -1338,17 +1397,31 @@ class __$$WoFormUiSettingsImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$WoFormUiSettingsImpl extends _WoFormUiSettings {
-  const _$WoFormUiSettingsImpl({this.title}) : super._();
+  const _$WoFormUiSettingsImpl(
+      {this.titleText,
+      this.submitText,
+      this.submittedText,
+      this.displayMode,
+      this.submitMode})
+      : super._();
 
   factory _$WoFormUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$WoFormUiSettingsImplFromJson(json);
 
   @override
-  final String? title;
+  final String? titleText;
+  @override
+  final String? submitText;
+  @override
+  final String? submittedText;
+  @override
+  final WoFormDisplayMode? displayMode;
+  @override
+  final WoFormSubmitMode? submitMode;
 
   @override
   String toString() {
-    return 'WoFormUiSettings(title: $title)';
+    return 'WoFormUiSettings(titleText: $titleText, submitText: $submitText, submittedText: $submittedText, displayMode: $displayMode, submitMode: $submitMode)';
   }
 
   @override
@@ -1356,12 +1429,22 @@ class _$WoFormUiSettingsImpl extends _WoFormUiSettings {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WoFormUiSettingsImpl &&
-            (identical(other.title, title) || other.title == title));
+            (identical(other.titleText, titleText) ||
+                other.titleText == titleText) &&
+            (identical(other.submitText, submitText) ||
+                other.submitText == submitText) &&
+            (identical(other.submittedText, submittedText) ||
+                other.submittedText == submittedText) &&
+            (identical(other.displayMode, displayMode) ||
+                other.displayMode == displayMode) &&
+            (identical(other.submitMode, submitMode) ||
+                other.submitMode == submitMode));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, title);
+  int get hashCode => Object.hash(runtimeType, titleText, submitText,
+      submittedText, displayMode, submitMode);
 
   @JsonKey(ignore: true)
   @override
@@ -1379,15 +1462,27 @@ class _$WoFormUiSettingsImpl extends _WoFormUiSettings {
 }
 
 abstract class _WoFormUiSettings extends WoFormUiSettings {
-  const factory _WoFormUiSettings({final String? title}) =
-      _$WoFormUiSettingsImpl;
+  const factory _WoFormUiSettings(
+      {final String? titleText,
+      final String? submitText,
+      final String? submittedText,
+      final WoFormDisplayMode? displayMode,
+      final WoFormSubmitMode? submitMode}) = _$WoFormUiSettingsImpl;
   const _WoFormUiSettings._() : super._();
 
   factory _WoFormUiSettings.fromJson(Map<String, dynamic> json) =
       _$WoFormUiSettingsImpl.fromJson;
 
   @override
-  String? get title;
+  String? get titleText;
+  @override
+  String? get submitText;
+  @override
+  String? get submittedText;
+  @override
+  WoFormDisplayMode? get displayMode;
+  @override
+  WoFormSubmitMode? get submitMode;
   @override
   @JsonKey(ignore: true)
   _$$WoFormUiSettingsImplCopyWith<_$WoFormUiSettingsImpl> get copyWith =>

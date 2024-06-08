@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
+import 'package:wo_form/src/ui/node_widget/form_card.dart';
 import 'package:wo_form/wo_form.dart';
 
 class InputsNodeWidget extends StatelessWidget {
@@ -11,7 +12,7 @@ class InputsNodeWidget extends StatelessWidget {
   });
 
   final String inputPath;
-  final NodeWidgetSettings? settings;
+  final InputsNodeWidgetSettings? settings;
 
   @override
   Widget build(BuildContext context) {
@@ -41,25 +42,10 @@ class InputsNodeWidget extends StatelessWidget {
     switch (mergedSettings.displayMode) {
       case null:
       case NodeDisplayMode.card:
-        return FeedCard(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              WoPadding.horizontalMedium(
-                child: Column(
-                  children: [
-                    Text(
-                      mergedSettings.labelText ?? '',
-                      style: context.textTheme.titleCard,
-                    ),
-                    if (subtitle != null) subtitle,
-                  ],
-                ),
-              ),
-              WoGap.medium,
-              ...inputWidgets,
-            ],
-          ),
+        return FormCard(
+          labelText: mergedSettings.labelText ?? '',
+          helperText: mergedSettings.helperText ?? '',
+          child: Column(children: inputWidgets),
         );
       case NodeDisplayMode.tile:
         return Column(

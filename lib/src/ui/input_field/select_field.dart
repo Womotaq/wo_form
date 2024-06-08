@@ -98,7 +98,6 @@ class SelectField<T> extends StatelessWidget {
                 null || SelectFieldDisplayMode.tile => Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (mergedSettings.labelText != null)
                         ListTile(title: title, subtitle: subtitle),
                       ...input.availibleValues.map(
                         (value) {
@@ -106,6 +105,7 @@ class SelectField<T> extends StatelessWidget {
                               mergedSettings.helpValueBuilder?.call(value);
                           return ListTile(
                             leading: Radio(
+                              toggleable: true,
                               value: value,
                               groupValue: selectedValues.firstOrNull,
                               onChanged: (_) => onUniqueChoice(

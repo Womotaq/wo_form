@@ -18,8 +18,8 @@ _$InputsNodeImpl _$$InputsNodeImplFromJson(Map<String, dynamic> json) =>
           $enumDecodeNullable(_$NodeExportTypeEnumMap, json['exportType']) ??
               NodeExportType.map,
       uiSettings: json['uiSettings'] == null
-          ? const NodeWidgetSettings()
-          : NodeWidgetSettings.fromJson(
+          ? const InputsNodeWidgetSettings()
+          : InputsNodeWidgetSettings.fromJson(
               json['uiSettings'] as Map<String, dynamic>),
     );
 
@@ -29,7 +29,7 @@ Map<String, dynamic> _$$InputsNodeImplToJson(_$InputsNodeImpl instance) =>
       'unmodifiableValuesJson': instance.unmodifiableValuesJson,
       'inputs': const InputsListConverter().toJson(instance.inputs),
       'exportType': _$NodeExportTypeEnumMap[instance.exportType]!,
-      'uiSettings': NodeWidgetSettings.staticToJson(instance.uiSettings),
+      'uiSettings': InputsNodeWidgetSettings.staticToJson(instance.uiSettings),
     };
 
 const _$NodeExportTypeEnumMap = {

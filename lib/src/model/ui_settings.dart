@@ -37,24 +37,25 @@ class BooleanFieldSettings with _$BooleanFieldSettings {
 enum NodeDisplayMode { card, tile }
 
 @freezed
-class NodeWidgetSettings with _$NodeWidgetSettings {
-  const factory NodeWidgetSettings({
+class InputsNodeWidgetSettings with _$InputsNodeWidgetSettings {
+  const factory InputsNodeWidgetSettings({
     String? labelText,
     String? helperText,
     NodeDisplayMode? displayMode,
-  }) = _NodeWidgetSettings;
+  }) = _InputsNodeWidgetSettings;
 
-  const NodeWidgetSettings._();
+  const InputsNodeWidgetSettings._();
 
-  factory NodeWidgetSettings.fromJson(Map<String, dynamic> json) =>
-      _$NodeWidgetSettingsFromJson(json);
+  factory InputsNodeWidgetSettings.fromJson(Map<String, dynamic> json) =>
+      _$InputsNodeWidgetSettingsFromJson(json);
 
-  static Map<String, dynamic> staticToJson(NodeWidgetSettings object) =>
+  static Map<String, dynamic> staticToJson(InputsNodeWidgetSettings object) =>
       object.toJson();
 
-  NodeWidgetSettings merge(NodeWidgetSettings? other) => other == null
+  InputsNodeWidgetSettings merge(InputsNodeWidgetSettings? other) =>
+      other == null
       ? this
-      : NodeWidgetSettings(
+          : InputsNodeWidgetSettings(
           labelText: labelText ?? other.labelText,
           helperText: helperText ?? other.helperText,
           displayMode: displayMode ?? other.displayMode,
@@ -84,7 +85,7 @@ class NumFieldSettings with _$NumFieldSettings {
         );
 }
 
-enum SelectFieldDisplayMode { chip, tile }
+enum SelectFieldDisplayMode { tile, chip }
 
 @freezed
 class SelectFieldSettings<T> with _$SelectFieldSettings<T> {
@@ -213,10 +214,18 @@ class StringFieldSettings with _$StringFieldSettings {
         );
 }
 
+enum WoFormDisplayMode { card, page }
+
+enum WoFormSubmitMode { submit, submitIfValid, save }
+
 @freezed
 class WoFormUiSettings with _$WoFormUiSettings {
   const factory WoFormUiSettings({
-    String? title,
+    String? titleText,
+    String? submitText,
+    String? submittedText,
+    WoFormDisplayMode? displayMode,
+    WoFormSubmitMode? submitMode,
   }) = _WoFormUiSettings;
 
   const WoFormUiSettings._();
@@ -230,6 +239,10 @@ class WoFormUiSettings with _$WoFormUiSettings {
   WoFormUiSettings merge(WoFormUiSettings? other) => other == null
       ? this
       : WoFormUiSettings(
-          title: title ?? other.title,
+          titleText: titleText ?? other.titleText,
+          submitText: submitText ?? other.submitText,
+          submittedText: submittedText ?? other.submittedText,
+          displayMode: displayMode ?? other.displayMode,
+          submitMode: submitMode ?? other.submitMode,
         );
 }

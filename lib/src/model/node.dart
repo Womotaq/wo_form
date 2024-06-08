@@ -24,10 +24,17 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
     Map<String, dynamic>? unmodifiableValuesJson,
     @InputsListConverter() @Default([]) List<WoFormElementMixin> inputs,
     @Default(NodeExportType.map) NodeExportType exportType,
-    @JsonKey(toJson: NodeWidgetSettings.staticToJson)
-    @Default(NodeWidgetSettings())
-    NodeWidgetSettings uiSettings,
+    @JsonKey(toJson: InputsNodeWidgetSettings.staticToJson)
+    @Default(InputsNodeWidgetSettings())
+    InputsNodeWidgetSettings uiSettings,
   }) = InputsNode;
+
+  // const factory WoFormNode.valueBuilder({
+  //   required String inputPath,
+  //   @InputsListConverter() @Default([]) List<WoFormElementMixin> inputs,
+  //   @JsonKey(includeToJson: false, includeFromJson: false)
+  //   WoFormElementMixin Function(BuildContext context, dynamic value) builder,
+  // }) = ValueBuilderNode;
 
   const WoFormNode._();
 
@@ -45,6 +52,39 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
           else if (input is WoFormInputMixin)
             '$parentPath/$id/${input.id}':
                 (input as WoFormInputMixin).defaultValue,
+      };
+
+  dynamic exportValues(
+    Map<String, dynamic> valuesMap, {
+    required String parentPath,
+  }) =>
+      switch (exportType) {
+        NodeExportType.list => [
+            ...?unmodifiableValuesJson?.values,
+            for (final input in inputs)
+              if (input is WoFormNode)
+                input.exportValues(
+                  valuesMap,
+                  parentPath: '$parentPath/$id',
+                )
+              else if (input is WoFormInputMixin)
+                (input as WoFormInputMixin).exportValue(
+                  valuesMap['$parentPath/$id/${input.id}'],
+                ),
+          ],
+        NodeExportType.map => {
+            ...?unmodifiableValuesJson,
+            for (final input in inputs)
+              if (input is WoFormNode)
+                input.id: input.exportValues(
+                  valuesMap,
+                  parentPath: '$parentPath/$id',
+                )
+              else if (input is WoFormInputMixin)
+                input.id: (input as WoFormInputMixin).exportValue(
+                  valuesMap['$parentPath/$id/${input.id}'],
+                ),
+          },
       };
 
   Iterable<WoFormInputError> getErrors(
@@ -97,40 +137,16 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
   @override
   Widget toWidget<T extends WoFormValuesCubit>({required String parentPath}) =>
       switch (this) {
-        WoForm() => throw UnimplementedError(),
         InputsNode() => InputsNodeWidget(inputPath: '$parentPath/$id'),
-      };
-
-  dynamic exportValues(
-    Map<String, dynamic> valuesMap, {
-    required String parentPath,
-  }) =>
-      switch (exportType) {
-        NodeExportType.list => [
-            ...?unmodifiableValuesJson?.values,
-            for (final input in inputs)
-              if (input is WoFormNode)
-                input.exportValues(
-                  valuesMap,
-                  parentPath: '$parentPath/$id',
-                )
-              else if (input is WoFormInputMixin)
-                (input as WoFormInputMixin).exportValue(
-                  valuesMap['$parentPath/$id/${input.id}'],
-                ),
-          ],
-        NodeExportType.map => {
-            ...?unmodifiableValuesJson,
-            for (final input in inputs)
-              if (input is WoFormNode)
-                input.id: input.exportValues(
-                  valuesMap,
-                  parentPath: '$parentPath/$id',
-                )
-              else if (input is WoFormInputMixin)
-                input.id: (input as WoFormInputMixin).exportValue(
-                  valuesMap['$parentPath/$id/${input.id}'],
-                ),
-          },
+        // ValueBuilderNode(
+        //   inputPath: final inputPath,
+        //   builder: final builder,
+        // ) =>
+        //   WoFormValueBuilder<dynamic>(
+        //     inputPath: inputPath,
+        //     builder: (context, value) => builder(context, value).toWidget(
+        //       parentPath: '$parentPath/$id',
+        //     ),
+        //   ),
       };
 }
