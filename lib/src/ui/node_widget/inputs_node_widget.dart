@@ -43,12 +43,17 @@ class InputsNodeWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (mergedSettings.labelText != null)
-              ExpansionTile(
-                title: Text(
-                  mergedSettings.labelText!,
-                  style: TextStyleExt.bold,
+              Theme(
+                // just to remove borders of ExpansionTile
+                data: Theme.of(context)
+                    .copyWith(dividerColor: Colors.transparent),
+                child: ExpansionTile(
+                  title: Text(
+                    mergedSettings.labelText!,
+                    style: TextStyleExt.bold,
+                  ),
+                  children: inputWidgets,
                 ),
-                children: inputWidgets,
               )
             else
               Column(children: inputWidgets),
