@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/example/form_creator/num_input_node.dart';
@@ -54,6 +56,59 @@ class StringInputPage extends StatelessWidget {
             children: [
               ...woFormCreator.inputs.map((e) => e.toWidget(parentPath: '')),
               WoGap.xxxlarge,
+              Builder(
+                builder: (context) => Row(
+                  children: [
+                    Flexible(
+                      child: FeedCardButton(
+                        onPressed: () {
+                          final values =
+                              context.read<WoFormValuesCubit>().state;
+                          Clipboard.setData(
+                            ClipboardData(
+                              text:
+                                  jsonEncode(woFormCreator.valueToJson(values)),
+                            ),
+                          );
+                          snackBarNotify(context, 'Copié');
+                        },
+                        child: const Text('Copier le json'),
+                      ),
+                    ),
+                    Flexible(
+                      child: BlocListener<WoFormStatusCubit, WoFormStatus>(
+                        listener: (context, status) {
+                          if (status is SubmittedStatus) {
+                            final WoForm form;
+                            try {
+                              form = WoForm.fromJson(
+                                woFormCreator.valueToJson(
+                                  context.read<WoFormValuesCubit>().state,
+                                ),
+                              );
+                            } catch (e) {
+                              snackBarError(context, e.toString());
+                              return;
+                            }
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute<void>(
+                                builder: (_) => WoFormPage(initialForm: form),
+                              ),
+                            );
+                          }
+                        },
+                        child: FilledFeedCardButton(
+                          onPressed: context.read<WoFormValuesCubit>().submit,
+                          leading: const Icon(Icons.visibility_outlined),
+                          child: const Text('Prévisualiser'),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              WoGap.xxxlarge,
               ExpansionTile(
                 title: const Text('JSON'),
                 expandedCrossAxisAlignment: CrossAxisAlignment.start,
@@ -68,48 +123,6 @@ class StringInputPage extends StatelessWidget {
                 ],
               ),
               WoGap.xxxlarge,
-              BlocListener<WoFormStatusCubit, WoFormStatus>(
-                listener: (context, status) {
-                  if (status is SubmittedStatus) {
-                    final WoForm form;
-                    try {
-                      form = WoForm.fromJson(
-                        woFormCreator.valueToJson(
-                          context.read<WoFormValuesCubit>().state,
-                        ),
-                      );
-                    } catch (e) {
-                      snackBarError(context, e.toString());
-                      return;
-                    }
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute<void>(
-                        builder: (_) {
-                          return CreatedFormPage(initialForm: form);
-                        },
-                      ),
-                    );
-                  }
-                },
-                child: Builder(
-                  builder: (context) {
-                    return IconButton(
-                      icon: const Icon(Icons.check),
-                      onPressed: context.read<WoFormValuesCubit>().submit,
-                      style: IconButton.styleFrom(
-                        backgroundColor: context.colorScheme.primary,
-                        foregroundColor: context.colorScheme.onPrimary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        minimumSize: const Size(64, 64),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              WoGap.xxxlarge,
             ],
           ),
         ),
@@ -118,8 +131,9 @@ class StringInputPage extends StatelessWidget {
   }
 }
 
-class CreatedFormPage extends StatelessWidget {
-  const CreatedFormPage({
+// TODO : finish
+class WoFormPage extends StatelessWidget {
+  const WoFormPage({
     required this.initialForm,
     super.key,
   });
