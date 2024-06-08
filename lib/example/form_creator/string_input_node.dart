@@ -24,7 +24,7 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
         const BooleanInput(
           id: 'isRequired',
           uiSettings: BooleanFieldSettings(
-            labelText: 'Requis',
+            labelText: 'Doit être renseigné',
           ),
         ),
         SelectInput<RegexPattern?>(
@@ -32,9 +32,16 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
           availibleValues: [null, ...RegexPattern.values],
           maxCount: 1,
           uiSettings: SelectFieldSettings(
-            labelText: 'Regex pattern',
+            labelText: 'Doit correspondre à',
             displayMode: SelectFieldDisplayMode.chip,
-            valueBuilder: (regex) => Text(regex?.name ?? 'Aucun'),
+            valueBuilder: (regex) => Text(
+              switch (regex) {
+                null => 'Peu importe',
+                RegexPattern.email => 'Une adresse mail',
+                RegexPattern.password => 'Un mot de passe',
+                RegexPattern.username => "Un nom d'utilisateur",
+              },
+            ),
           ),
           toJsonT: (regex) => regex?.value,
         ),
@@ -62,9 +69,15 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
               availibleValues: [null, ...StringFieldAction.values],
               maxCount: 1,
               uiSettings: SelectFieldSettings(
-                labelText: 'Action à droite du champ',
+                labelText: 'Action spéciale (à droite)',
                 displayMode: SelectFieldDisplayMode.chip,
-                valueBuilder: (value) => Text(value?.name ?? 'Aucune'),
+                valueBuilder: (value) => Text(
+                  switch (value) {
+                    null => 'Aucune',
+                    StringFieldAction.clear => 'Tout effacer',
+                    StringFieldAction.obscure => 'Cacher/Afficher le texte',
+                  },
+                ),
               ),
             ),
             const BooleanInput(
@@ -73,27 +86,43 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
                 labelText: 'Envoyer le formulaire quand le champ est validé',
               ),
             ),
-            SelectInput<TextInputType?>(
+            SelectInput<TextInputType>(
               id: 'keyboardType',
-              availibleValues: [null, ...TextInputType.values],
+              defaultValues: [TextInputType.none],
+              availibleValues: TextInputType.values.toList()
+                ..remove(TextInputType.text),
               maxCount: 1,
               uiSettings: SelectFieldSettings(
-                labelText: 'Type de text',
+                labelText: 'Clavier (mobile) optimisé pour',
                 displayMode: SelectFieldDisplayMode.chip,
-                valueBuilder: (value) => Text(value?.name ?? 'Défaut'),
+                valueBuilder: (value) => Text(
+                  switch (value?.name) {
+                    'multiline' => 'Du texte à plusieurs lignes',
+                    'number' => 'Un nombre',
+                    'phone' => 'Un numéro de téléphone',
+                    'datetime' => 'Une date',
+                    'emailAddress' => 'Une adresse mail',
+                    'url' => 'Une url',
+                    'visiblePassword' => 'Un mot de passe',
+                    'name' => "Le nom d'une personne",
+                    'streetAddress' => 'Une adresse postale',
+                    _ => 'Du texte',
+                  },
+                ),
               ),
               toJsonT: (value) => const TextInputTypeConverter().toJson(value),
             ),
             const BooleanInput(
               id: 'obscureText',
               uiSettings: BooleanFieldSettings(
-                labelText: 'Cacher le texte',
+                labelText: 'Cacher le text ••••',
               ),
             ),
             const BooleanInput(
               id: 'autocorrect',
+              defaultValue: true,
               uiSettings: BooleanFieldSettings(
-                labelText: "Autoriser l'auto-correction",
+                labelText: 'Correction automatique',
               ),
             ),
             const SelectStringInput(
@@ -101,7 +130,7 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
               availibleValues: AutofillHintsX.all,
               maxCount: null,
               uiSettings: SelectFieldSettings(
-                labelText: 'Auto-remplissage',
+                labelText: 'Saisie automatique',
               ),
             ),
             const BooleanInput(
@@ -115,24 +144,32 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
               availibleValues: [null, ...TextInputAction.values],
               maxCount: 1,
               uiSettings: SelectFieldSettings(
-                labelText: "Bouton 'Entrée' du clavier",
+                labelText: "Bouton 'Entrée' (sur mobile)",
                 displayMode: SelectFieldDisplayMode.chip,
                 valueBuilder: (value) => Text(value?.name ?? 'Défaut'),
               ),
             ),
             SelectInput<TextCapitalization>(
               id: 'textCapitalization',
-              defaultValues: [TextCapitalization.none],
+              defaultValues: [TextCapitalization.sentences],
               availibleValues: TextCapitalization.values,
               maxCount: 1,
               uiSettings: SelectFieldSettings(
-                labelText: 'Gestion des majuscules',
-                // displayMode: SelectFieldDisplayMode.chip,
-                valueBuilder: (value) => Text(value?.name ?? ''),
+                labelText: 'Mettre le clavier en majuscule',
+                displayMode: SelectFieldDisplayMode.chip,
+                valueBuilder: (value) => Text(
+                  switch (value) {
+                    null || TextCapitalization.none => 'Jamais',
+                    TextCapitalization.words => 'À chaque début de mot',
+                    TextCapitalization.sentences => 'À chaque début de phrase',
+                    TextCapitalization.characters => 'À chaque caractère',
+                  },
+                ),
               ),
             ),
             const NumInput(
               id: 'maxLines',
+              defaultValue: 1,
               uiSettings: NumFieldSettings(
                 labelText: 'Nombre maximum de lignes',
               ),

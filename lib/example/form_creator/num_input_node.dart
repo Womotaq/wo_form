@@ -22,7 +22,7 @@ InputsNode createNumInputNode({required String id}) => InputsNode(
         BooleanInput(
           id: 'isRequired',
           uiSettings: BooleanFieldSettings(
-            labelText: 'Requis',
+            labelText: 'Doit être renseigné',
           ),
         ),
         InputsNode(

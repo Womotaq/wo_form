@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
-import 'package:wo_form/src/ui/input_field/input_list_tile.dart';
 import 'package:wo_form/wo_form.dart';
 
 class SelectField<T> extends StatelessWidget {
@@ -105,8 +104,8 @@ class SelectField<T> extends StatelessWidget {
                   ),
                 ],
               ),
-            SelectFieldDisplayMode.chip => InputListTile(
-                leading: Text(mergedSettings.labelText ?? ''),
+            SelectFieldDisplayMode.chip => ListTile(
+                title: Text(mergedSettings.labelText ?? ''),
                 trailing: SelectChip<T>.uniqueChoice(
                   values: input.availibleValues,
                   onSelected: (value) => onUniqueChoice(
@@ -122,8 +121,8 @@ class SelectField<T> extends StatelessWidget {
         } else {
           return Column(
             children: [
-              InputListTile(
-                leading: Text(mergedSettings.labelText ?? ''),
+              ListTile(
+                title: Text(mergedSettings.labelText ?? ''),
                 trailing: SelectChip<T>.multipleChoices(
                   values: input.availibleValues,
                   onSelected: (value) => onMultipleChoice(
@@ -196,43 +195,6 @@ class SelectStringField extends SelectField<String> {
       availibleValues: selectStringInput.availibleValues,
       uiSettings: selectStringInput.uiSettings,
       toJsonT: (value) => value,
-    );
-  }
-}
-
-class _Deletable extends StatelessWidget {
-  const _Deletable({required this.child, required this.onDelete});
-
-  final Widget child;
-  final VoidCallback onDelete;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          child,
-          WoGap.xsmall,
-          const Icon(Icons.close, size: WoSize.medium),
-        ],
-      ),
-    );
-  }
-}
-
-class _SelectChipLike extends StatelessWidget {
-  const _SelectChipLike({required this.child});
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card.outlined(
-      margin: EdgeInsets.zero,
-      child: InkWell(
-        child: WoPadding.allSmall(child: child),
-      ),
     );
   }
 }
