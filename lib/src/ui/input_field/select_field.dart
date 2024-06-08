@@ -32,7 +32,11 @@ class SelectField<T> extends StatelessWidget {
   }) =>
       valuesCubit.onValueChanged(
         inputPath: inputPath,
-        value: selectedValues.contains(value) ? <T>[] : [value],
+        value: value == null
+            ? <T>[]
+            : selectedValues.contains(value)
+                ? <T>[]
+                : [value],
       );
 
   void onMultipleChoice({
@@ -61,110 +65,130 @@ class SelectField<T> extends StatelessWidget {
 
     final valueBuilder = mergedSettings.valueBuilder;
 
-    return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, List<T>>(
-      selector: (values) {
-        final value = values[inputPath];
-        if (value is! List<T>?) {
-          throw ArgumentError(
-            'Expected <List<$T>?> at inputId: "$inputPath", '
-            'found: <${value.runtimeType}>',
-          );
-        }
-        return value ?? [];
-      },
-      builder: (context, selectedValues) {
-        if (input.maxCount == 1) {
-          return switch (mergedSettings.displayMode) {
-            null || SelectFieldDisplayMode.tile => Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (mergedSettings.labelText != null)
-                    ListTile(
-                      title: Text(mergedSettings.labelText!),
-                    ),
-                  ...input.availibleValues.map(
-                    (value) => ListTile(
-                      leading: Radio(
-                        value: value,
-                        groupValue: selectedValues.firstOrNull,
-                        onChanged: (_) => onUniqueChoice(
-                          valuesCubit: valuesCubit,
-                          selectedValues: selectedValues,
-                          value: value,
-                        ),
-                      ),
-                      title:
-                          valueBuilder?.call(value) ?? Text(value.toString()),
-                      onTap: () => onUniqueChoice(
-                        valuesCubit: valuesCubit,
-                        selectedValues: selectedValues,
-                        value: value,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            SelectFieldDisplayMode.chip => ListTile(
-                title: Text(mergedSettings.labelText ?? ''),
-                trailing: SelectChip<T>.uniqueChoice(
-                  values: input.availibleValues,
-                  onSelected: (value) => onUniqueChoice(
-                    valuesCubit: valuesCubit,
-                    selectedValues: selectedValues,
-                    value: value,
-                  ),
-                  selectedValue: selectedValues.firstOrNull,
-                  valueBuilder: valueBuilder,
-                ),
-              ),
-          };
-        } else {
-          return Column(
-            children: [
-              ListTile(
-                title: Text(mergedSettings.labelText ?? ''),
-                trailing: SelectChip<T>.multipleChoices(
-                  values: input.availibleValues,
-                  onSelected: (value) => onMultipleChoice(
-                    valuesCubit: valuesCubit,
-                    selectedValues: selectedValues,
-                    value: value,
-                  ),
-                  selectedValues: selectedValues,
-                  valueBuilder: valueBuilder,
-                  showArrow: false,
-                  previewBuilder: (_) => const Icon(Icons.add),
-                ),
-              ),
-              if (selectedValues.isNotEmpty)
-                ListTile(
-                  title: Wrap(
-                    spacing: WoSize.small,
-                    runSpacing: WoSize.small,
+    return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
+      builder: (context, status) {
+        return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, List<T>>(
+          selector: (values) {
+            final value = values[inputPath];
+            if (value is! List<T>?) {
+              throw ArgumentError(
+                'Expected <List<$T>?> at inputId: "$inputPath", '
+                'found: <${value.runtimeType}>',
+              );
+            }
+            return value ?? [];
+          },
+          builder: (context, selectedValues) {
+            final title = Text(
+              (mergedSettings.labelText ?? '') +
+                  (input.minCount > 0 ? '*' : ''),
+            );
+
+            final errorText = status is! InvalidValuesStatus
+                ? null
+                : input.getInvalidExplanation(selectedValues, context.formL10n);
+            final subtitle = errorText != null
+                ? Text(
+                    errorText,
+                    style: context.textTheme.labelMedium
+                        ?.copyWith(color: context.colorScheme.error),
+                  )
+                : null;
+
+            if (input.maxCount == 1) {
+              return switch (mergedSettings.displayMode) {
+                null || SelectFieldDisplayMode.tile => Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ...selectedValues.map(
-                        (v) => CardButton.outlined(
-                          onPressed: () => onMultipleChoice(
+                      if (mergedSettings.labelText != null)
+                        ListTile(title: title, subtitle: subtitle),
+                      ...input.availibleValues.map(
+                        (value) => ListTile(
+                          leading: Radio(
+                            value: value,
+                            groupValue: selectedValues.firstOrNull,
+                            onChanged: (_) => onUniqueChoice(
+                              valuesCubit: valuesCubit,
+                              selectedValues: selectedValues,
+                              value: value,
+                            ),
+                          ),
+                          title: valueBuilder?.call(value) ??
+                              Text(value.toString()),
+                          onTap: () => onUniqueChoice(
                             valuesCubit: valuesCubit,
                             selectedValues: selectedValues,
-                            value: v,
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              valueBuilder?.call(v) ?? Text(v.toString()),
-                              WoGap.xsmall,
-                              const Icon(Icons.close, size: WoSize.medium),
-                            ],
+                            value: value,
                           ),
                         ),
                       ),
                     ],
                   ),
-                ),
-            ],
-          );
-        }
+                SelectFieldDisplayMode.chip => ListTile(
+                    title: title,
+                    subtitle: subtitle,
+                    trailing: SelectChip<T>.uniqueChoice(
+                      values: input.availibleValues,
+                      onSelected: (value) => onUniqueChoice(
+                        valuesCubit: valuesCubit,
+                        selectedValues: selectedValues,
+                        value: value,
+                      ),
+                      selectedValue: selectedValues.firstOrNull,
+                      valueBuilder: valueBuilder,
+                    ),
+                  ),
+              };
+            } else {
+              return Column(
+                children: [
+                  ListTile(
+                    title: title,
+                    subtitle: subtitle,
+                    trailing: SelectChip<T>.multipleChoices(
+                      values: input.availibleValues,
+                      onSelected: (value) => onMultipleChoice(
+                        valuesCubit: valuesCubit,
+                        selectedValues: selectedValues,
+                        value: value,
+                      ),
+                      selectedValues: selectedValues,
+                      valueBuilder: valueBuilder,
+                      showArrow: false,
+                      previewBuilder: (_) => const Icon(Icons.add),
+                    ),
+                  ),
+                  if (selectedValues.isNotEmpty)
+                    ListTile(
+                      title: Wrap(
+                        spacing: WoSize.small,
+                        runSpacing: WoSize.small,
+                        children: [
+                          ...selectedValues.map(
+                            (v) => CardButton.outlined(
+                              onPressed: () => onMultipleChoice(
+                                valuesCubit: valuesCubit,
+                                selectedValues: selectedValues,
+                                value: v,
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  valueBuilder?.call(v) ?? Text(v.toString()),
+                                  WoGap.xsmall,
+                                  const Icon(Icons.close, size: WoSize.medium),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                ],
+              );
+            }
+          },
+        );
       },
     );
   }

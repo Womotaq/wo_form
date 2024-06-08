@@ -13,7 +13,7 @@ class WoFormScreen extends StatelessWidget {
 
   final WoForm form;
   final VoidCallback onSubmitting;
-  final void Function(WoForm form, Map<String, dynamic> valuesMap)? onSubmitted;
+  final void Function(BuildContext context)? onSubmitted;
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +26,7 @@ class WoFormScreen extends StatelessWidget {
             listener: (context, status) {
               if (status is SubmittedStatus && onSubmitted != null) {
                 context.read<WoFormStatusCubit>().setIdle();
-                final form = context.read<WoForm>();
-                final values = context.read<WoFormValuesCubit>().state;
-                onSubmitted!(form, values);
+                onSubmitted!(context);
               }
             },
             child: Column(

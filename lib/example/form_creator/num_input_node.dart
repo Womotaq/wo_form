@@ -25,6 +25,20 @@ InputsNode createNumInputNode({required String id}) => InputsNode(
             labelText: 'Doit être renseigné',
           ),
         ),
+        NumInput(
+          id: 'minBound',
+          defaultValue: 0,
+          isRequired: true,
+          uiSettings: NumFieldSettings(
+            labelText: 'Valeur minimale',
+          ),
+        ),
+        NumInput(
+          id: 'maxBound',
+          uiSettings: NumFieldSettings(
+            labelText: 'Valeur maximale',
+          ),
+        ),
         InputsNode(
           id: 'uiSettings',
           uiSettings: NodeWidgetSettings(

@@ -60,13 +60,23 @@ sealed class WoFormInput
     BooleanFieldSettings uiSettings,
   }) = BooleanInput;
 
+  @Assert(
+    'maxBound == null || minBound <= maxBound',
+    'maxBound must be higher or equal to minBound',
+  )
   const factory WoFormInput.num({
     required String id,
     num? defaultValue,
     @Default(false) bool isRequired,
+    int? maxBound,
+    @Default(0) int minBound,
     @Default(NumFieldSettings()) NumFieldSettings uiSettings,
   }) = NumInput;
 
+  @Assert(
+    'maxCount == null || minCount <= maxCount',
+    'maxCount must be higher or equal to minCount',
+  )
   const factory WoFormInput.selectString({
     required String id,
     required int? maxCount,
@@ -98,14 +108,27 @@ sealed class WoFormInput
   WoFormInputError? getError(dynamic value) {
     switch (this) {
       case BooleanInput(isRequired: final isRequired):
-        return isRequired && value == false
+        return isRequired && value != true
             ? WoFormInputError.empty(inputId: id)
             : null;
 
-      case NumInput(isRequired: final isRequired):
-        return isRequired && value == null
-            ? WoFormInputError.empty(inputId: id)
-            : null;
+      case NumInput(
+          isRequired: final isRequired,
+          minBound: final minBound,
+          maxBound: final maxBound,
+        ):
+        value as num?;
+
+        if (value == null) {
+          return isRequired ? WoFormInputError.empty(inputId: id) : null;
+        }
+
+        if (value < minBound) return WoFormInputError.minBound(inputId: id);
+        if (maxBound != null && value > maxBound) {
+          return WoFormInputError.maxBound(inputId: id);
+        }
+
+        return null;
 
       case StringInput(
           isRequired: final isRequired,
@@ -291,7 +314,8 @@ class SelectInput<T>
 
     if (error == null) return null;
 
-    return formL10n.formError(error.runtimeType.toString());
+    final errorType = error.runtimeType.toString();
+    return formL10n.formError(errorType.substring(2, errorType.length - 4));
   }
 
   @override
@@ -311,7 +335,7 @@ Object? _defaultToJsonT<T>(T value) {
     return value;
   } else if (value is Enum) {
     return (value as Enum).name;
-  } 
+  }
 
   throw UnimplementedError('No toJsonT provided for <$T>');
 }

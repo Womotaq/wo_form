@@ -46,7 +46,7 @@ class HomePage extends StatelessWidget {
                   builder: (context) => const StringInputPage(),
                 ),
               ),
-              child: const Text("Création d'un champ texte"),
+              child: const Text("Création d'un formulaire"),
             ),
             WoGap.medium,
             TextButton(

@@ -46,39 +46,57 @@ class _NumFieldState extends State<NumField> {
     final mergedSettings =
         widget.settings?.merge(inputSettings) ?? inputSettings;
 
-    return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, num?>(
-      selector: (values) {
-        final value = values[widget.inputPath];
-        if (value is! num?) {
-          throw ArgumentError(
-            'Expected <num?> at inputId: "${widget.inputPath}", '
-            'found: <${value.runtimeType}>',
-          );
-        }
-        return value;
-      },
-      builder: (context, count) {
-        final countText = count?.toString() ?? '';
-        if (countController.text != countText) {
-          countController
-            ..text = countText
-            // This always brings the cursor to the last position possible.
-            // By default, when the text changes, it is selected.
-            ..selection = TextSelection.collapsed(
-              offset: countController.text.length,
-            );
-        }
+    return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
+      builder: (context, status) {
+        return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, num?>(
+          selector: (values) {
+            final value = values[widget.inputPath];
+            if (value is! num?) {
+              throw ArgumentError(
+                'Expected <num?> at inputId: "${widget.inputPath}", '
+                'found: <${value.runtimeType}>',
+              );
+            }
+            return value;
+          },
+          builder: (context, count) {
+            final countText = count?.toString() ?? '';
+            if (countController.text != countText) {
+              countController
+                ..text = countText
+                // This always brings the cursor to the last position possible.
+                // By default, when the text changes, it is selected.
+                ..selection = TextSelection.collapsed(
+                  offset: countController.text.length,
+                );
+            }
 
-        return ListTile(
-          title: Text(mergedSettings.labelText ?? ''),
-          trailing: NumSelector(
-            controller: countController,
-            onChanged: (value) async => valuesCubit.onValueChanged(
-              inputPath: widget.inputPath,
-              value: value,
-            ),
-            axis: Axis.horizontal,
-          ),
+            final errorText = status is! InvalidValuesStatus
+                ? null
+                : input.getInvalidExplanation(count, context.formL10n);
+
+            return ListTile(
+              title: Text(
+                (mergedSettings.labelText ?? '') +
+                    (input.isRequired ? '*' : ''),
+              ),
+              subtitle: errorText != null
+                  ? Text(
+                      errorText,
+                      style: context.textTheme.labelMedium
+                          ?.copyWith(color: context.colorScheme.error),
+                    )
+                  : null,
+              trailing: NumSelector(
+                controller: countController,
+                onChanged: (value) async => valuesCubit.onValueChanged(
+                  inputPath: widget.inputPath,
+                  value: value,
+                ),
+                axis: Axis.horizontal,
+              ),
+            );
+          },
         );
       },
     );

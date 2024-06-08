@@ -743,7 +743,7 @@ mixin _$WoFormInput {
             BooleanFieldSettings uiSettings)
         boolean,
     required TResult Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings uiSettings)
+            int? maxBound, int minBound, NumFieldSettings uiSettings)
         num,
     required TResult Function(
             String id,
@@ -773,7 +773,7 @@ mixin _$WoFormInput {
             BooleanFieldSettings uiSettings)?
         boolean,
     TResult? Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings uiSettings)?
+            int? maxBound, int minBound, NumFieldSettings uiSettings)?
         num,
     TResult? Function(
             String id,
@@ -803,7 +803,7 @@ mixin _$WoFormInput {
             BooleanFieldSettings uiSettings)?
         boolean,
     TResult Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings uiSettings)?
+            int? maxBound, int minBound, NumFieldSettings uiSettings)?
         num,
     TResult Function(
             String id,
@@ -1022,7 +1022,7 @@ class _$BooleanInputImpl extends BooleanInput {
             BooleanFieldSettings uiSettings)
         boolean,
     required TResult Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings uiSettings)
+            int? maxBound, int minBound, NumFieldSettings uiSettings)
         num,
     required TResult Function(
             String id,
@@ -1055,7 +1055,7 @@ class _$BooleanInputImpl extends BooleanInput {
             BooleanFieldSettings uiSettings)?
         boolean,
     TResult? Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings uiSettings)?
+            int? maxBound, int minBound, NumFieldSettings uiSettings)?
         num,
     TResult? Function(
             String id,
@@ -1088,7 +1088,7 @@ class _$BooleanInputImpl extends BooleanInput {
             BooleanFieldSettings uiSettings)?
         boolean,
     TResult Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings uiSettings)?
+            int? maxBound, int minBound, NumFieldSettings uiSettings)?
         num,
     TResult Function(
             String id,
@@ -1197,6 +1197,8 @@ abstract class _$$NumInputImplCopyWith<$Res>
       {String id,
       num? defaultValue,
       bool isRequired,
+      int? maxBound,
+      int minBound,
       NumFieldSettings uiSettings});
 
   $NumFieldSettingsCopyWith<$Res> get uiSettings;
@@ -1216,6 +1218,8 @@ class __$$NumInputImplCopyWithImpl<$Res>
     Object? id = null,
     Object? defaultValue = freezed,
     Object? isRequired = null,
+    Object? maxBound = freezed,
+    Object? minBound = null,
     Object? uiSettings = null,
   }) {
     return _then(_$NumInputImpl(
@@ -1231,6 +1235,14 @@ class __$$NumInputImplCopyWithImpl<$Res>
           ? _value.isRequired
           : isRequired // ignore: cast_nullable_to_non_nullable
               as bool,
+      maxBound: freezed == maxBound
+          ? _value.maxBound
+          : maxBound // ignore: cast_nullable_to_non_nullable
+              as int?,
+      minBound: null == minBound
+          ? _value.minBound
+          : minBound // ignore: cast_nullable_to_non_nullable
+              as int,
       uiSettings: null == uiSettings
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
@@ -1254,9 +1266,13 @@ class _$NumInputImpl extends NumInput {
       {required this.id,
       this.defaultValue,
       this.isRequired = false,
+      this.maxBound,
+      this.minBound = 0,
       this.uiSettings = const NumFieldSettings(),
       final String? $type})
-      : $type = $type ?? 'num',
+      : assert(maxBound == null || minBound <= maxBound,
+            'maxBound must be higher or equal to minBound'),
+        $type = $type ?? 'num',
         super._();
 
   factory _$NumInputImpl.fromJson(Map<String, dynamic> json) =>
@@ -1270,6 +1286,11 @@ class _$NumInputImpl extends NumInput {
   @JsonKey()
   final bool isRequired;
   @override
+  final int? maxBound;
+  @override
+  @JsonKey()
+  final int minBound;
+  @override
   @JsonKey()
   final NumFieldSettings uiSettings;
 
@@ -1278,7 +1299,7 @@ class _$NumInputImpl extends NumInput {
 
   @override
   String toString() {
-    return 'WoFormInput.num(id: $id, defaultValue: $defaultValue, isRequired: $isRequired, uiSettings: $uiSettings)';
+    return 'WoFormInput.num(id: $id, defaultValue: $defaultValue, isRequired: $isRequired, maxBound: $maxBound, minBound: $minBound, uiSettings: $uiSettings)';
   }
 
   @override
@@ -1291,14 +1312,18 @@ class _$NumInputImpl extends NumInput {
                 other.defaultValue == defaultValue) &&
             (identical(other.isRequired, isRequired) ||
                 other.isRequired == isRequired) &&
+            (identical(other.maxBound, maxBound) ||
+                other.maxBound == maxBound) &&
+            (identical(other.minBound, minBound) ||
+                other.minBound == minBound) &&
             (identical(other.uiSettings, uiSettings) ||
                 other.uiSettings == uiSettings));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, defaultValue, isRequired, uiSettings);
+  int get hashCode => Object.hash(runtimeType, id, defaultValue, isRequired,
+      maxBound, minBound, uiSettings);
 
   @JsonKey(ignore: true)
   @override
@@ -1317,7 +1342,7 @@ class _$NumInputImpl extends NumInput {
             BooleanFieldSettings uiSettings)
         boolean,
     required TResult Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings uiSettings)
+            int? maxBound, int minBound, NumFieldSettings uiSettings)
         num,
     required TResult Function(
             String id,
@@ -1336,7 +1361,7 @@ class _$NumInputImpl extends NumInput {
             StringFieldSettings uiSettings)
         string,
   }) {
-    return num(id, defaultValue, isRequired, uiSettings);
+    return num(id, defaultValue, isRequired, maxBound, minBound, uiSettings);
   }
 
   @override
@@ -1350,7 +1375,7 @@ class _$NumInputImpl extends NumInput {
             BooleanFieldSettings uiSettings)?
         boolean,
     TResult? Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings uiSettings)?
+            int? maxBound, int minBound, NumFieldSettings uiSettings)?
         num,
     TResult? Function(
             String id,
@@ -1369,7 +1394,8 @@ class _$NumInputImpl extends NumInput {
             StringFieldSettings uiSettings)?
         string,
   }) {
-    return num?.call(id, defaultValue, isRequired, uiSettings);
+    return num?.call(
+        id, defaultValue, isRequired, maxBound, minBound, uiSettings);
   }
 
   @override
@@ -1383,7 +1409,7 @@ class _$NumInputImpl extends NumInput {
             BooleanFieldSettings uiSettings)?
         boolean,
     TResult Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings uiSettings)?
+            int? maxBound, int minBound, NumFieldSettings uiSettings)?
         num,
     TResult Function(
             String id,
@@ -1404,7 +1430,7 @@ class _$NumInputImpl extends NumInput {
     required TResult orElse(),
   }) {
     if (num != null) {
-      return num(id, defaultValue, isRequired, uiSettings);
+      return num(id, defaultValue, isRequired, maxBound, minBound, uiSettings);
     }
     return orElse();
   }
@@ -1459,6 +1485,8 @@ abstract class NumInput extends WoFormInput {
       {required final String id,
       final num? defaultValue,
       final bool isRequired,
+      final int? maxBound,
+      final int minBound,
       final NumFieldSettings uiSettings}) = _$NumInputImpl;
   const NumInput._() : super._();
 
@@ -1470,6 +1498,8 @@ abstract class NumInput extends WoFormInput {
   @override
   num? get defaultValue;
   bool get isRequired;
+  int? get maxBound;
+  int get minBound;
   @override
   NumFieldSettings get uiSettings;
   @override
@@ -1564,7 +1594,9 @@ class _$SelectStringInputImpl extends SelectStringInput {
       this.minCount = 0,
       this.uiSettings = const SelectFieldSettings<String>(),
       final String? $type})
-      : _defaultValue = defaultValue,
+      : assert(maxCount == null || minCount <= maxCount,
+            'maxCount must be higher or equal to minCount'),
+        _defaultValue = defaultValue,
         _availibleValues = availibleValues,
         $type = $type ?? 'selectString',
         super._();
@@ -1656,7 +1688,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             BooleanFieldSettings uiSettings)
         boolean,
     required TResult Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings uiSettings)
+            int? maxBound, int minBound, NumFieldSettings uiSettings)
         num,
     required TResult Function(
             String id,
@@ -1690,7 +1722,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             BooleanFieldSettings uiSettings)?
         boolean,
     TResult? Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings uiSettings)?
+            int? maxBound, int minBound, NumFieldSettings uiSettings)?
         num,
     TResult? Function(
             String id,
@@ -1724,7 +1756,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             BooleanFieldSettings uiSettings)?
         boolean,
     TResult Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings uiSettings)?
+            int? maxBound, int minBound, NumFieldSettings uiSettings)?
         num,
     TResult Function(
             String id,
@@ -1969,7 +2001,7 @@ class _$StringInputImpl extends StringInput {
             BooleanFieldSettings uiSettings)
         boolean,
     required TResult Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings uiSettings)
+            int? maxBound, int minBound, NumFieldSettings uiSettings)
         num,
     required TResult Function(
             String id,
@@ -2002,7 +2034,7 @@ class _$StringInputImpl extends StringInput {
             BooleanFieldSettings uiSettings)?
         boolean,
     TResult? Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings uiSettings)?
+            int? maxBound, int minBound, NumFieldSettings uiSettings)?
         num,
     TResult? Function(
             String id,
@@ -2035,7 +2067,7 @@ class _$StringInputImpl extends StringInput {
             BooleanFieldSettings uiSettings)?
         boolean,
     TResult Function(String id, num? defaultValue, bool isRequired,
-            NumFieldSettings uiSettings)?
+            int? maxBound, int minBound, NumFieldSettings uiSettings)?
         num,
     TResult Function(
             String id,

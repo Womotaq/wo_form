@@ -71,16 +71,23 @@ class StringInputPage extends StatelessWidget {
               BlocListener<WoFormStatusCubit, WoFormStatus>(
                 listener: (context, status) {
                   if (status is SubmittedStatus) {
+                    final WoForm form;
+                    try {
+                      form = WoForm.fromJson(
+                        woFormCreator.valueToJson(
+                          context.read<WoFormValuesCubit>().state,
+                        ),
+                      );
+                    } catch (e) {
+                      snackBarError(context, e.toString());
+                      return;
+                    }
                     Navigator.push(
                       context,
                       MaterialPageRoute<void>(
-                        builder: (_) => CreatedFormPage(
-                          initialForm: WoForm.fromJson(
-                            woFormCreator.valueToJson(
-                              context.read<WoFormValuesCubit>().state,
-                            ),
-                          ),
-                        ),
+                        builder: (_) {
+                          return CreatedFormPage(initialForm: form);
+                        },
                       ),
                     );
                   }
@@ -129,15 +136,22 @@ class CreatedFormPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: initialForm.toWidget(
           onSubmitting: () {},
-          onSubmitted: (form, values) => showDialog<AlertDialog>(
+          onSubmitted: (context) {
+            final form = context.read<WoForm>();
+            final values = context.read<WoFormValuesCubit>().state;
+            showDialog<AlertDialog>(
             context: context,
             builder: (dialogContext) {
               return AlertDialog(
                 icon: const Icon(Icons.data_array),
                 title: const Text('JSON'),
-                content: Text(
-                  readableJson(form.valueToJson(values)),
-                      ),
+                  content: Column(
+                    children: [
+                      Text(readableJson(form.valueToJson(values))),
+                      WoGap.large,
+                      Text(readableJson(form.toJson())),
+                    ],
+                  ),
                 actions: [
                   TextButton(
                     onPressed: () {
@@ -149,7 +163,8 @@ class CreatedFormPage extends StatelessWidget {
                 ],
               );
             },
-          ),
+            );
+          },
         ),
       ),
     );

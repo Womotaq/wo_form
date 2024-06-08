@@ -63,6 +63,8 @@ _$NumInputImpl _$$NumInputImplFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       defaultValue: json['defaultValue'] as num?,
       isRequired: json['isRequired'] as bool? ?? false,
+      maxBound: (json['maxBound'] as num?)?.toInt(),
+      minBound: (json['minBound'] as num?)?.toInt() ?? 0,
       uiSettings: json['uiSettings'] == null
           ? const NumFieldSettings()
           : NumFieldSettings.fromJson(
@@ -75,6 +77,8 @@ Map<String, dynamic> _$$NumInputImplToJson(_$NumInputImpl instance) =>
       'id': instance.id,
       'defaultValue': instance.defaultValue,
       'isRequired': instance.isRequired,
+      'maxBound': instance.maxBound,
+      'minBound': instance.minBound,
       'uiSettings': instance.uiSettings,
       'runtimeType': instance.$type,
     };

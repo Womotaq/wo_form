@@ -3,7 +3,7 @@
   "discardChanges": "Abandonner les modifications",
   "discardChangesQuestion": "Abandonner les modifications ?",
   "errorOccurred": "Une erreur s'est produite.",
-  "formError": "{code, select, other{Erreur inconnue.} EmptyInputError{Ce champ doit être renseigné.} InvalidInputError{Cette valeur est incorrecte.} MaxBoundInputError{Limite maximale dépassée.} MinBoundInputError{Limite minimale dépassée.}}",
+  "formError": "{code, select, other{Erreur inconnue.} EmptyInputError{Ce champ doit être renseigné.} InvalidInputError{Cette valeur est incorrecte.} MaxBoundInputError{Au dessus de la limite maximale.} MinBoundInputError{En dessous du minimum requis.}}",
   "@formError": {
     "placeholders": {
       "code": {}

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/wo_form.dart';
 
 class BooleanField extends StatelessWidget {
@@ -28,55 +29,73 @@ class BooleanField extends StatelessWidget {
     final inputSettings = input.uiSettings;
     final mergedSettings = settings?.merge(inputSettings) ?? inputSettings;
 
-    return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, bool>(
-      selector: (values) {
-        final value = values[inputPath];
-        if (value is! bool?) {
-          throw ArgumentError(
-            'Expected <bool?> at inputId: "$inputPath", '
-            'found: <${value.runtimeType}>',
-          );
-        }
-        return value ?? false;
-      },
-      builder: (context, value) {
-        final onOffButton = switch (mergedSettings.onOffType) {
-          null || BooleanFieldOnOffType.switchButton => Switch(
-              value: value,
-              onChanged: (value) => valuesCubit.onValueChanged(
-                inputPath: inputPath,
-                value: value,
-              ),
-            ),
-          BooleanFieldOnOffType.checkbox => Checkbox(
-              value: value,
-              onChanged: (value) => value == null
-                  ? null
-                  : valuesCubit.onValueChanged(
-                      inputPath: inputPath,
-                      value: value,
-                    ),
-            ),
-        };
-
-        final onOffIsLeading = switch (mergedSettings.onOffPosition) {
-          ListTileControlAffinity.leading => true,
-          ListTileControlAffinity.trailing => false,
-          null || ListTileControlAffinity.platform => switch (
-                mergedSettings.onOffType) {
-              null || BooleanFieldOnOffType.switchButton => false,
-              BooleanFieldOnOffType.checkbox => true,
+    return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
+      builder: (context, status) {
+        return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, bool>(
+          selector: (values) {
+            final value = values[inputPath];
+            if (value is! bool?) {
+              throw ArgumentError(
+                'Expected <bool?> at inputId: "$inputPath", '
+                'found: <${value.runtimeType}>',
+              );
             }
-        };
+            return value ?? false;
+          },
+          builder: (context, value) {
+            final onOffButton = switch (mergedSettings.onOffType) {
+              null || BooleanFieldOnOffType.switchButton => Switch(
+                  value: value,
+                  onChanged: (value) => valuesCubit.onValueChanged(
+                    inputPath: inputPath,
+                    value: value,
+                  ),
+                ),
+              BooleanFieldOnOffType.checkbox => Checkbox(
+                  value: value,
+                  onChanged: (value) => value == null
+                      ? null
+                      : valuesCubit.onValueChanged(
+                          inputPath: inputPath,
+                          value: value,
+                        ),
+                ),
+            };
 
-        return ListTile(
-          leading: onOffIsLeading ? onOffButton : null,
-          title: Text(mergedSettings.labelText ?? ''),
-          trailing: onOffIsLeading ? null : onOffButton,
-          onTap: () => valuesCubit.onValueChanged(
-            inputPath: inputPath,
-            value: !value,
-          ),
+            final onOffIsLeading = switch (mergedSettings.onOffPosition) {
+              ListTileControlAffinity.leading => true,
+              ListTileControlAffinity.trailing => false,
+              null || ListTileControlAffinity.platform => switch (
+                    mergedSettings.onOffType) {
+                  null || BooleanFieldOnOffType.switchButton => false,
+                  BooleanFieldOnOffType.checkbox => true,
+                }
+            };
+
+            final errorText = status is! InvalidValuesStatus
+                ? null
+                : input.getInvalidExplanation(value, context.formL10n);
+
+            return ListTile(
+              leading: onOffIsLeading ? onOffButton : null,
+              title: Text(
+                (mergedSettings.labelText ?? '') +
+                    (input.isRequired ? '*' : ''),
+              ),
+              subtitle: errorText != null
+                  ? Text(
+                      errorText,
+                      style: context.textTheme.labelMedium
+                          ?.copyWith(color: context.colorScheme.error),
+                    )
+                  : null,
+              trailing: onOffIsLeading ? null : onOffButton,
+              onTap: () => valuesCubit.onValueChanged(
+                inputPath: inputPath,
+                value: !value,
+              ),
+            );
+          },
         );
       },
     );

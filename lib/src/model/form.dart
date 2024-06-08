@@ -74,7 +74,7 @@ class WoForm with _$WoForm {
 
   Widget toWidget<T extends WoFormValuesCubit>({
     required VoidCallback onSubmitting,
-    void Function(WoForm form, Map<String, dynamic> valuesMap)? onSubmitted,
+    void Function(BuildContext context)? onSubmitted,
   }) =>
       WoFormScreen(
         form: this,

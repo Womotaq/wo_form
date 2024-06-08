@@ -10,7 +10,7 @@ class InputsListConverter extends JsonConverter<List<WoFormElementMixin>,
       json.map((inputJson) {
         try {
           return WoFormInput.fromJson(inputJson as Map<String, dynamic>);
-        } catch (_) {
+        } on CheckedFromJsonException {
           return WoFormNode.fromJson(inputJson as Map<String, dynamic>);
         }
       }).toList();
