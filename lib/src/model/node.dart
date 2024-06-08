@@ -101,7 +101,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
         InputsNode() => InputsNodeWidget(inputPath: '$parentPath/$id'),
       };
 
-  dynamic valueToJson(
+  dynamic exportValues(
     Map<String, dynamic> valuesMap, {
     required String parentPath,
   }) =>
@@ -110,12 +110,12 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
             ...?unmodifiableValuesJson?.values,
             for (final input in inputs)
               if (input is WoFormNode)
-                input.valueToJson(
+                input.exportValues(
                   valuesMap,
                   parentPath: '$parentPath/$id',
                 )
               else if (input is WoFormInputMixin)
-                (input as WoFormInputMixin).valueToJson(
+                (input as WoFormInputMixin).exportValue(
                   valuesMap['$parentPath/$id/${input.id}'],
                 ),
           ],
@@ -123,12 +123,12 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
             ...?unmodifiableValuesJson,
             for (final input in inputs)
               if (input is WoFormNode)
-                input.id: input.valueToJson(
+                input.id: input.exportValues(
                   valuesMap,
                   parentPath: '$parentPath/$id',
                 )
               else if (input is WoFormInputMixin)
-                input.id: (input as WoFormInputMixin).valueToJson(
+                input.id: (input as WoFormInputMixin).exportValue(
                   valuesMap['$parentPath/$id/${input.id}'],
                 ),
           },

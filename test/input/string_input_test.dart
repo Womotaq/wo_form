@@ -51,7 +51,7 @@ void main() {
     expect(input.getError('John') == null, true);
   });
 
-  test('StringInput.valueToJson()', () {
-    expect(input.valueToJson('John'), 'John');
+  test('StringInput.exportValue()', () {
+    expect(input.exportValue('John'), 'John');
   });
 }

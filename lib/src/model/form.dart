@@ -82,13 +82,13 @@ class WoForm with _$WoForm {
         onSubmitted: onSubmitted,
       );
 
-  Map<String, dynamic> valueToJson(Map<String, dynamic> valuesMap) => {
+  Map<String, dynamic> exportValues(Map<String, dynamic> valuesMap) => {
         ...unmodifiableValuesJson ?? {},
         for (final input in inputs)
           if (input is WoFormNode)
-            input.id: input.valueToJson(valuesMap, parentPath: '')
+            input.id: input.exportValues(valuesMap, parentPath: '')
           else if (input is WoFormInputMixin)
             input.id: (input as WoFormInputMixin)
-                .valueToJson(valuesMap['/${input.id}']),
+                .exportValue(valuesMap['/${input.id}']),
       };
 }

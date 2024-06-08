@@ -50,7 +50,7 @@ mixin WoFormInputMixin {
 
   /// When a parent of this element will jsonify, this method will take an
   /// object (the value from the form fulfillment) and return a json value.
-  Object? valueToJson(Object? value);
+  Object? exportValue(Object? value);
 }
 
 @freezed
@@ -207,7 +207,7 @@ sealed class WoFormInput
   }
 
   @override
-  Object? valueToJson(dynamic value) => switch (this) {
+  Object? exportValue(dynamic value) => switch (this) {
         BooleanInput() => value as bool?,
         NumInput() => value as num?,
         SelectStringInput(maxCount: final maxCount) =>
@@ -328,7 +328,7 @@ class SelectInput<T>
       SelectField<T>(inputPath: '$parentPath/$id');
 
   @override
-  Object? valueToJson(dynamic value) => _selectedValuesToJson<T>(
+  Object? exportValue(dynamic value) => _selectedValuesToJson<T>(
         selectedValues: value as List<T>?,
         toJsonT: toJsonT,
         asList: maxCount != 1,

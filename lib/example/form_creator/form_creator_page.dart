@@ -66,8 +66,9 @@ class StringInputPage extends StatelessWidget {
                               context.read<WoFormValuesCubit>().state;
                           Clipboard.setData(
                             ClipboardData(
-                              text:
-                                  jsonEncode(woFormCreator.valueToJson(values)),
+                              text: jsonEncode(
+                                woFormCreator.exportValues(values),
+                              ),
                             ),
                           );
                           snackBarNotify(context, 'Copié');
@@ -82,7 +83,7 @@ class StringInputPage extends StatelessWidget {
                             final WoForm form;
                             try {
                               form = WoForm.fromJson(
-                                woFormCreator.valueToJson(
+                                woFormCreator.exportValues(
                                   context.read<WoFormValuesCubit>().state,
                                 ),
                               );
@@ -116,7 +117,7 @@ class StringInputPage extends StatelessWidget {
                   BlocBuilder<WoFormValuesCubit, Map<String, dynamic>>(
                     builder: (context, values) {
                       return Text(
-                        readableJson(woFormCreator.valueToJson(values)),
+                        readableJson(woFormCreator.exportValues(values)),
                       );
                     },
                   ),
@@ -161,7 +162,7 @@ class WoFormPage extends StatelessWidget {
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(readableJson(form.valueToJson(values))),
+                  Text(readableJson(form.exportValues(values))),
                   // WoGap.large,
                   // Text(readableJson(form.toJson())),
                 ],

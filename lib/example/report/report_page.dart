@@ -94,7 +94,7 @@ class _ReportPage extends StatelessWidget {
               title: 'JSON',
               actionText: 'Ok',
               onAction: context.read<WoFormStatusCubit>().setIdle,
-              content: Text(readableJson(form.valueToJson(values))),
+              content: Text(readableJson(form.exportValues(values))),
             );
           }
         },

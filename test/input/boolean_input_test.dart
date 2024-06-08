@@ -32,7 +32,7 @@ void main() {
     expect(input.getError(true) == null, true);
   });
 
-  test('BooleanInput.valueToJson()', () {
-    expect(input.valueToJson(true), true);
+  test('BooleanInput.exportValue()', () {
+    expect(input.exportValue(true), true);
   });
 }
