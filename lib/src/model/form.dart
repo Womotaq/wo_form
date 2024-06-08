@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/src/model/json_converter/inputs_list.dart';
+import 'package:wo_form/src/ui/prefab/wo_form_screen.dart';
 import 'package:wo_form/wo_form.dart';
 
 part 'form.freezed.dart';
@@ -71,8 +72,15 @@ class WoForm with _$WoForm {
         ?.getInput(path: path.substring(slashIndex + 1));
   }
 
-  Widget toWidget<T extends WoFormValuesCubit>({required String parentPath}) =>
-      throw UnimplementedError();
+  Widget toWidget<T extends WoFormValuesCubit>({
+    required VoidCallback onSubmitting,
+    void Function(WoForm form, Map<String, dynamic> valuesMap)? onSubmitted,
+  }) =>
+      WoFormScreen(
+        form: this,
+        onSubmitting: onSubmitting,
+        onSubmitted: onSubmitted,
+      );
 
   Map<String, dynamic> valueToJson(Map<String, dynamic> valuesMap) => {
         ...unmodifiableValuesJson ?? {},
@@ -80,8 +88,7 @@ class WoForm with _$WoForm {
           if (input is WoFormNode)
             input.id: input.valueToJson(valuesMap, parentPath: '')
           else if (input is WoFormInputMixin)
-            input.id:
-                (input as WoFormInputMixin)
+            input.id: (input as WoFormInputMixin)
                 .valueToJson(valuesMap['/${input.id}']),
       };
 }

@@ -42,7 +42,7 @@ class ReportPage extends StatelessWidget {
             uiSettings: SelectFieldSettings(
               displayMode: SelectFieldDisplayMode.tile,
               valueBuilder: (type) => Text(
-                switch (type as ReportType?) {
+                switch (type) {
                   null => 'Vide',
                   ReportType.cheating => 'Triche',
                   ReportType.fairPlay => 'Fair play',

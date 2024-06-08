@@ -15,6 +15,11 @@ extension RandomX on Random {
 }
 
 final woFormCreator = WoForm(
+  unmodifiableValuesJson: {
+    'uiSettings': {
+      'title': 'Profil',
+    },
+  },
   inputs: [
     InputsNode(
       id: 'inputs',
@@ -69,8 +74,8 @@ class StringInputPage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute<void>(
-                        builder: (_) => ScreenB(
-                          form: WoForm.fromJson(
+                        builder: (_) => CreatedFormPage(
+                          initialForm: WoForm.fromJson(
                             woFormCreator.valueToJson(
                               context.read<WoFormValuesCubit>().state,
                             ),
@@ -86,10 +91,8 @@ class StringInputPage extends StatelessWidget {
                       icon: const Icon(Icons.check),
                       onPressed: context.read<WoFormValuesCubit>().submit,
                       style: IconButton.styleFrom(
-                        backgroundColor:
-                            context.colorScheme.primary,
-                        foregroundColor:
-                            context.colorScheme.onPrimary,
+                        backgroundColor: context.colorScheme.primary,
+                        foregroundColor: context.colorScheme.onPrimary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                         ),
@@ -108,13 +111,13 @@ class StringInputPage extends StatelessWidget {
   }
 }
 
-class ScreenB extends StatelessWidget {
-  const ScreenB({
-    required this.form,
+class CreatedFormPage extends StatelessWidget {
+  const CreatedFormPage({
+    required this.initialForm,
     super.key,
   });
 
-  final WoForm form;
+  final WoForm initialForm;
 
   @override
   Widget build(BuildContext context) {
@@ -122,29 +125,30 @@ class ScreenB extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Utilisation du champ texte'),
       ),
-      body: Center(
-        child: WoFormInitializer(
-          form: form,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: initialForm.toWidget(
           onSubmitting: () {},
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              children: [
-                ...form.inputs.map((e) => e.toWidget(parentPath: '')),
-                WoGap.xxxlarge,
-                const Text('Json :'),
-                WoGap.medium,
-                BlocBuilder<WoFormValuesCubit, Map<String, dynamic>>(
-                  builder: (context, values) {
-                    return Text(
-                      readableJson(
-                        form.valueToJson(values),
+          onSubmitted: (form, values) => showDialog<AlertDialog>(
+            context: context,
+            builder: (dialogContext) {
+              return AlertDialog(
+                icon: const Icon(Icons.data_array),
+                title: const Text('JSON'),
+                content: Text(
+                  readableJson(form.valueToJson(values)),
                       ),
-                    );
-                  },
-                ),
-              ],
-            ),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(dialogContext).pop();
+                      context.read<WoFormStatusCubit>().setIdle();
+                    },
+                    child: const Text('Ok'),
+                  ),
+                ],
+              );
+            },
           ),
         ),
       ),
