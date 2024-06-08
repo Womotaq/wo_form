@@ -67,18 +67,11 @@ class SelectField<T> extends StatelessWidget {
 
     return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
       builder: (context, status) {
-        return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, List<T>>(
-          selector: (values) {
-            final value = values[inputPath];
-            if (value is! List<T>?) {
-              throw ArgumentError(
-                'Expected <List<$T>?> at inputId: "$inputPath", '
-                'found: <${value.runtimeType}>',
-              );
-            }
-            return value ?? [];
-          },
-          builder: (context, selectedValues) {
+        return WoFormValueBuilder<List<T>>(
+          inputPath: inputPath,
+          builder: (context, selectedValues_) {
+            final selectedValues = selectedValues_ ?? [];
+            
             final title = Text(
               (mergedSettings.labelText ?? '') +
                   (input.minCount > 0 ? '*' : ''),

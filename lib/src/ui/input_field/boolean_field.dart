@@ -31,18 +31,11 @@ class BooleanField extends StatelessWidget {
 
     return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
       builder: (context, status) {
-        return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, bool>(
-          selector: (values) {
-            final value = values[inputPath];
-            if (value is! bool?) {
-              throw ArgumentError(
-                'Expected <bool?> at inputId: "$inputPath", '
-                'found: <${value.runtimeType}>',
-              );
-            }
-            return value ?? false;
-          },
-          builder: (context, value) {
+        return WoFormValueBuilder<bool>(
+          inputPath: inputPath,
+          builder: (context, valueNullable) {
+            final value = valueNullable ?? false;
+
             final onOffButton = switch (mergedSettings.onOffType) {
               null || BooleanFieldOnOffType.switchButton => Switch(
                   value: value,

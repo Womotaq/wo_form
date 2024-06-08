@@ -19,66 +19,74 @@ class FromJsonPage extends StatelessWidget {
           ),
           onSubmitting: () {},
           child: Builder(
-            builder: (context) => FeedCard(
+            builder: (context) => const FeedCard(
               title: 'Copiez ici le formulaire en format json.',
               child: Column(
                 children: [
-                  const StringField(
+                  StringField(
                     inputPath: '/json',
                     settings: StringFieldSettings(
                       maxLines: 20,
                     ),
                   ),
                   WoGap.medium,
-                  WoFormValueBuilder(
-                    inputPath: '/json',
-                    builder: (context, jsonString) {
-                      return FilledFeedCardButton(
-                        onPressed:
-                            (jsonString is String && jsonString.isNotEmpty)
-                                ? () {
-                                    final Map<String, dynamic> json;
-                                    try {
-                                      json = jsonDecode(jsonString)
-                                          as Map<String, dynamic>;
-                                    } catch (e) {
-                                      snackBarError(
-                                        context,
-                                        'Failed to decode json : $e',
-                                      );
-                                      return;
-                                    }
-
-                                    final WoForm form;
-                                    try {
-                                      form = WoForm.fromJson(json);
-                                    } catch (e) {
-                                      snackBarError(
-                                        context,
-                                        'Failed to build WoForm from json : $e',
-                                      );
-                                      return;
-                                    }
-
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute<void>(
-                                        builder: (_) =>
-                                            WoFormPage(initialForm: form),
-                                      ),
-                                    );
-                                  }
-                                : null,
-                        child: const Text('Ouvrir le formulaire'),
-                      );
-                    },
-                  ),
+                  OpenFormButton(),
                 ],
               ),
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class OpenFormButton extends StatelessWidget {
+  const OpenFormButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return WoFormValueBuilder<String>(
+      inputPath: '/json',
+      builder: (context, jsonString) {
+        return FilledFeedCardButton(
+          onPressed: (jsonString != null && jsonString.isNotEmpty)
+              ? () {
+                  final Map<String, dynamic> json;
+                  try {
+                    json = jsonDecode(jsonString) as Map<String, dynamic>;
+                  } catch (e) {
+                    snackBarError(
+                      context,
+                      'Failed to decode json : $e',
+                    );
+                    return;
+                  }
+
+                  final WoForm form;
+                  try {
+                    form = WoForm.fromJson(json);
+                  } catch (e) {
+                    snackBarError(
+                      context,
+                      'Failed to build WoForm from json : $e',
+                    );
+                    return;
+                  }
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (_) => WoFormPage(initialForm: form),
+                    ),
+                  );
+                }
+              : null,
+          child: const Text('Ouvrir le formulaire'),
+        );
+      },
     );
   }
 }

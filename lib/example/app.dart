@@ -43,7 +43,7 @@ class HomePage extends StatelessWidget {
             WoGap.xxxlarge,
             WoPadding.allMedium(
               child: Text(
-                "Examples d'utilisation du package wo_form",
+                "Exemples d'utilisation du package wo_form",
                 style: context.textTheme.titleCard,
               ),
             ),

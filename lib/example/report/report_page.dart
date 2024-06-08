@@ -81,6 +81,7 @@ class _ReportPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.colorScheme.contrastedBackground,
       appBar: AppBar(title: const Text('Signaler un utilisateur')),
       body: BlocListener<WoFormStatusCubit, WoFormStatus>(
         listener: (context, status) {
@@ -97,33 +98,37 @@ class _ReportPage extends StatelessWidget {
             );
           }
         },
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Flexible(
-              child: SingleChildScrollView(
-                child: SelectField<ReportType>(inputPath: ReportForm.typePath),
+        child: WoPadding.allMedium(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              WoGap.medium,
+              const Flexible(
+                child: SingleChildScrollView(
+                  child:
+                      SelectField<ReportType>(inputPath: ReportForm.typePath),
+                ),
               ),
-            ),
-            WoGap.medium,
-            // message field
-            const Flexible(
-              child: StringField(inputPath: ReportForm.messagePath),
-            ),
-            WoGap.medium,
-            const BooleanField(inputPath: ReportForm.blockPath),
-            WoGap.medium,
-            WoFormBuilder(
-              builder: (context, form, status, values) {
-                return FilledButton(
-                  onPressed: form.getErrors(values).isEmpty
-                      ? context.read<WoFormValuesCubit>().submit
-                      : null,
-                  child: const Text('Envoyer'),
-                );
-              },
-            ),
-          ],
+              WoGap.medium,
+              // message field
+              const Flexible(
+                child: StringField(inputPath: ReportForm.messagePath),
+              ),
+              WoGap.medium,
+              const BooleanField(inputPath: ReportForm.blockPath),
+              WoGap.medium,
+              WoFormBuilder(
+                builder: (context, form, status, values) {
+                  return FilledFeedCardButton(
+                    onPressed: form.getErrors(values).isEmpty
+                        ? context.read<WoFormValuesCubit>().submit
+                        : null,
+                    child: const Text('Envoyer'),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

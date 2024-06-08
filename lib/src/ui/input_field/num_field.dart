@@ -48,17 +48,8 @@ class _NumFieldState extends State<NumField> {
 
     return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
       builder: (context, status) {
-        return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, num?>(
-          selector: (values) {
-            final value = values[widget.inputPath];
-            if (value is! num?) {
-              throw ArgumentError(
-                'Expected <num?> at inputId: "${widget.inputPath}", '
-                'found: <${value.runtimeType}>',
-              );
-            }
-            return value;
-          },
+        return WoFormValueBuilder<num>(
+          inputPath: widget.inputPath,
           builder: (context, count) {
             final countText = count?.toString() ?? '';
             if (countController.text != countText) {

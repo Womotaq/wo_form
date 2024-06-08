@@ -49,18 +49,11 @@ class _StringFieldState extends State<StringField> {
 
     return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
       builder: (context, status) {
-        return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, String>(
-          selector: (values) {
-            final value = values[widget.inputPath];
-            if (value is! String?) {
-              throw ArgumentError(
-                'Expected <String?> at inputId: "${widget.inputPath}", '
-                'found: <${value.runtimeType}>',
-              );
-            }
-            return value ?? '';
-          },
-          builder: (context, text) {
+        return WoFormValueBuilder<String>(
+          inputPath: widget.inputPath,
+          builder: (context, text_) {
+            final text = text_ ?? '';
+
             if (text != textEditingController.text) {
               textEditingController.text = text;
             }
