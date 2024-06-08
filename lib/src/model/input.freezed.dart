@@ -23,6 +23,7 @@ mixin _$WoFormInputError {
     required TResult Function(String inputId) invalid,
     required TResult Function(String inputId) maxBound,
     required TResult Function(String inputId) minBound,
+    required TResult Function(String inputId, String message) custom,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -31,6 +32,7 @@ mixin _$WoFormInputError {
     TResult? Function(String inputId)? invalid,
     TResult? Function(String inputId)? maxBound,
     TResult? Function(String inputId)? minBound,
+    TResult? Function(String inputId, String message)? custom,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -39,6 +41,7 @@ mixin _$WoFormInputError {
     TResult Function(String inputId)? invalid,
     TResult Function(String inputId)? maxBound,
     TResult Function(String inputId)? minBound,
+    TResult Function(String inputId, String message)? custom,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -48,6 +51,7 @@ mixin _$WoFormInputError {
     required TResult Function(InvalidInputError value) invalid,
     required TResult Function(MaxBoundInputError value) maxBound,
     required TResult Function(MinBoundInputError value) minBound,
+    required TResult Function(CustomInputError value) custom,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +60,7 @@ mixin _$WoFormInputError {
     TResult? Function(InvalidInputError value)? invalid,
     TResult? Function(MaxBoundInputError value)? maxBound,
     TResult? Function(MinBoundInputError value)? minBound,
+    TResult? Function(CustomInputError value)? custom,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -64,6 +69,7 @@ mixin _$WoFormInputError {
     TResult Function(InvalidInputError value)? invalid,
     TResult Function(MaxBoundInputError value)? maxBound,
     TResult Function(MinBoundInputError value)? minBound,
+    TResult Function(CustomInputError value)? custom,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -177,6 +183,7 @@ class _$EmptyInputErrorImpl implements EmptyInputError {
     required TResult Function(String inputId) invalid,
     required TResult Function(String inputId) maxBound,
     required TResult Function(String inputId) minBound,
+    required TResult Function(String inputId, String message) custom,
   }) {
     return empty(inputId);
   }
@@ -188,6 +195,7 @@ class _$EmptyInputErrorImpl implements EmptyInputError {
     TResult? Function(String inputId)? invalid,
     TResult? Function(String inputId)? maxBound,
     TResult? Function(String inputId)? minBound,
+    TResult? Function(String inputId, String message)? custom,
   }) {
     return empty?.call(inputId);
   }
@@ -199,6 +207,7 @@ class _$EmptyInputErrorImpl implements EmptyInputError {
     TResult Function(String inputId)? invalid,
     TResult Function(String inputId)? maxBound,
     TResult Function(String inputId)? minBound,
+    TResult Function(String inputId, String message)? custom,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -214,6 +223,7 @@ class _$EmptyInputErrorImpl implements EmptyInputError {
     required TResult Function(InvalidInputError value) invalid,
     required TResult Function(MaxBoundInputError value) maxBound,
     required TResult Function(MinBoundInputError value) minBound,
+    required TResult Function(CustomInputError value) custom,
   }) {
     return empty(this);
   }
@@ -225,6 +235,7 @@ class _$EmptyInputErrorImpl implements EmptyInputError {
     TResult? Function(InvalidInputError value)? invalid,
     TResult? Function(MaxBoundInputError value)? maxBound,
     TResult? Function(MinBoundInputError value)? minBound,
+    TResult? Function(CustomInputError value)? custom,
   }) {
     return empty?.call(this);
   }
@@ -236,6 +247,7 @@ class _$EmptyInputErrorImpl implements EmptyInputError {
     TResult Function(InvalidInputError value)? invalid,
     TResult Function(MaxBoundInputError value)? maxBound,
     TResult Function(MinBoundInputError value)? minBound,
+    TResult Function(CustomInputError value)? custom,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -328,6 +340,7 @@ class _$InvalidInputErrorImpl implements InvalidInputError {
     required TResult Function(String inputId) invalid,
     required TResult Function(String inputId) maxBound,
     required TResult Function(String inputId) minBound,
+    required TResult Function(String inputId, String message) custom,
   }) {
     return invalid(inputId);
   }
@@ -339,6 +352,7 @@ class _$InvalidInputErrorImpl implements InvalidInputError {
     TResult? Function(String inputId)? invalid,
     TResult? Function(String inputId)? maxBound,
     TResult? Function(String inputId)? minBound,
+    TResult? Function(String inputId, String message)? custom,
   }) {
     return invalid?.call(inputId);
   }
@@ -350,6 +364,7 @@ class _$InvalidInputErrorImpl implements InvalidInputError {
     TResult Function(String inputId)? invalid,
     TResult Function(String inputId)? maxBound,
     TResult Function(String inputId)? minBound,
+    TResult Function(String inputId, String message)? custom,
     required TResult orElse(),
   }) {
     if (invalid != null) {
@@ -365,6 +380,7 @@ class _$InvalidInputErrorImpl implements InvalidInputError {
     required TResult Function(InvalidInputError value) invalid,
     required TResult Function(MaxBoundInputError value) maxBound,
     required TResult Function(MinBoundInputError value) minBound,
+    required TResult Function(CustomInputError value) custom,
   }) {
     return invalid(this);
   }
@@ -376,6 +392,7 @@ class _$InvalidInputErrorImpl implements InvalidInputError {
     TResult? Function(InvalidInputError value)? invalid,
     TResult? Function(MaxBoundInputError value)? maxBound,
     TResult? Function(MinBoundInputError value)? minBound,
+    TResult? Function(CustomInputError value)? custom,
   }) {
     return invalid?.call(this);
   }
@@ -387,6 +404,7 @@ class _$InvalidInputErrorImpl implements InvalidInputError {
     TResult Function(InvalidInputError value)? invalid,
     TResult Function(MaxBoundInputError value)? maxBound,
     TResult Function(MinBoundInputError value)? minBound,
+    TResult Function(CustomInputError value)? custom,
     required TResult orElse(),
   }) {
     if (invalid != null) {
@@ -479,6 +497,7 @@ class _$MaxBoundInputErrorImpl implements MaxBoundInputError {
     required TResult Function(String inputId) invalid,
     required TResult Function(String inputId) maxBound,
     required TResult Function(String inputId) minBound,
+    required TResult Function(String inputId, String message) custom,
   }) {
     return maxBound(inputId);
   }
@@ -490,6 +509,7 @@ class _$MaxBoundInputErrorImpl implements MaxBoundInputError {
     TResult? Function(String inputId)? invalid,
     TResult? Function(String inputId)? maxBound,
     TResult? Function(String inputId)? minBound,
+    TResult? Function(String inputId, String message)? custom,
   }) {
     return maxBound?.call(inputId);
   }
@@ -501,6 +521,7 @@ class _$MaxBoundInputErrorImpl implements MaxBoundInputError {
     TResult Function(String inputId)? invalid,
     TResult Function(String inputId)? maxBound,
     TResult Function(String inputId)? minBound,
+    TResult Function(String inputId, String message)? custom,
     required TResult orElse(),
   }) {
     if (maxBound != null) {
@@ -516,6 +537,7 @@ class _$MaxBoundInputErrorImpl implements MaxBoundInputError {
     required TResult Function(InvalidInputError value) invalid,
     required TResult Function(MaxBoundInputError value) maxBound,
     required TResult Function(MinBoundInputError value) minBound,
+    required TResult Function(CustomInputError value) custom,
   }) {
     return maxBound(this);
   }
@@ -527,6 +549,7 @@ class _$MaxBoundInputErrorImpl implements MaxBoundInputError {
     TResult? Function(InvalidInputError value)? invalid,
     TResult? Function(MaxBoundInputError value)? maxBound,
     TResult? Function(MinBoundInputError value)? minBound,
+    TResult? Function(CustomInputError value)? custom,
   }) {
     return maxBound?.call(this);
   }
@@ -538,6 +561,7 @@ class _$MaxBoundInputErrorImpl implements MaxBoundInputError {
     TResult Function(InvalidInputError value)? invalid,
     TResult Function(MaxBoundInputError value)? maxBound,
     TResult Function(MinBoundInputError value)? minBound,
+    TResult Function(CustomInputError value)? custom,
     required TResult orElse(),
   }) {
     if (maxBound != null) {
@@ -630,6 +654,7 @@ class _$MinBoundInputErrorImpl implements MinBoundInputError {
     required TResult Function(String inputId) invalid,
     required TResult Function(String inputId) maxBound,
     required TResult Function(String inputId) minBound,
+    required TResult Function(String inputId, String message) custom,
   }) {
     return minBound(inputId);
   }
@@ -641,6 +666,7 @@ class _$MinBoundInputErrorImpl implements MinBoundInputError {
     TResult? Function(String inputId)? invalid,
     TResult? Function(String inputId)? maxBound,
     TResult? Function(String inputId)? minBound,
+    TResult? Function(String inputId, String message)? custom,
   }) {
     return minBound?.call(inputId);
   }
@@ -652,6 +678,7 @@ class _$MinBoundInputErrorImpl implements MinBoundInputError {
     TResult Function(String inputId)? invalid,
     TResult Function(String inputId)? maxBound,
     TResult Function(String inputId)? minBound,
+    TResult Function(String inputId, String message)? custom,
     required TResult orElse(),
   }) {
     if (minBound != null) {
@@ -667,6 +694,7 @@ class _$MinBoundInputErrorImpl implements MinBoundInputError {
     required TResult Function(InvalidInputError value) invalid,
     required TResult Function(MaxBoundInputError value) maxBound,
     required TResult Function(MinBoundInputError value) minBound,
+    required TResult Function(CustomInputError value) custom,
   }) {
     return minBound(this);
   }
@@ -678,6 +706,7 @@ class _$MinBoundInputErrorImpl implements MinBoundInputError {
     TResult? Function(InvalidInputError value)? invalid,
     TResult? Function(MaxBoundInputError value)? maxBound,
     TResult? Function(MinBoundInputError value)? minBound,
+    TResult? Function(CustomInputError value)? custom,
   }) {
     return minBound?.call(this);
   }
@@ -689,6 +718,7 @@ class _$MinBoundInputErrorImpl implements MinBoundInputError {
     TResult Function(InvalidInputError value)? invalid,
     TResult Function(MaxBoundInputError value)? maxBound,
     TResult Function(MinBoundInputError value)? minBound,
+    TResult Function(CustomInputError value)? custom,
     required TResult orElse(),
   }) {
     if (minBound != null) {
@@ -707,6 +737,173 @@ abstract class MinBoundInputError implements WoFormInputError {
   @override
   @JsonKey(ignore: true)
   _$$MinBoundInputErrorImplCopyWith<_$MinBoundInputErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CustomInputErrorImplCopyWith<$Res>
+    implements $WoFormInputErrorCopyWith<$Res> {
+  factory _$$CustomInputErrorImplCopyWith(_$CustomInputErrorImpl value,
+          $Res Function(_$CustomInputErrorImpl) then) =
+      __$$CustomInputErrorImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String inputId, String message});
+}
+
+/// @nodoc
+class __$$CustomInputErrorImplCopyWithImpl<$Res>
+    extends _$WoFormInputErrorCopyWithImpl<$Res, _$CustomInputErrorImpl>
+    implements _$$CustomInputErrorImplCopyWith<$Res> {
+  __$$CustomInputErrorImplCopyWithImpl(_$CustomInputErrorImpl _value,
+      $Res Function(_$CustomInputErrorImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? inputId = null,
+    Object? message = null,
+  }) {
+    return _then(_$CustomInputErrorImpl(
+      inputId: null == inputId
+          ? _value.inputId
+          : inputId // ignore: cast_nullable_to_non_nullable
+              as String,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CustomInputErrorImpl implements CustomInputError {
+  const _$CustomInputErrorImpl({required this.inputId, required this.message});
+
+  @override
+  final String inputId;
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'WoFormInputError.custom(inputId: $inputId, message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CustomInputErrorImpl &&
+            (identical(other.inputId, inputId) || other.inputId == inputId) &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, inputId, message);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CustomInputErrorImplCopyWith<_$CustomInputErrorImpl> get copyWith =>
+      __$$CustomInputErrorImplCopyWithImpl<_$CustomInputErrorImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String inputId) empty,
+    required TResult Function(String inputId) invalid,
+    required TResult Function(String inputId) maxBound,
+    required TResult Function(String inputId) minBound,
+    required TResult Function(String inputId, String message) custom,
+  }) {
+    return custom(inputId, message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String inputId)? empty,
+    TResult? Function(String inputId)? invalid,
+    TResult? Function(String inputId)? maxBound,
+    TResult? Function(String inputId)? minBound,
+    TResult? Function(String inputId, String message)? custom,
+  }) {
+    return custom?.call(inputId, message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String inputId)? empty,
+    TResult Function(String inputId)? invalid,
+    TResult Function(String inputId)? maxBound,
+    TResult Function(String inputId)? minBound,
+    TResult Function(String inputId, String message)? custom,
+    required TResult orElse(),
+  }) {
+    if (custom != null) {
+      return custom(inputId, message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(EmptyInputError value) empty,
+    required TResult Function(InvalidInputError value) invalid,
+    required TResult Function(MaxBoundInputError value) maxBound,
+    required TResult Function(MinBoundInputError value) minBound,
+    required TResult Function(CustomInputError value) custom,
+  }) {
+    return custom(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(EmptyInputError value)? empty,
+    TResult? Function(InvalidInputError value)? invalid,
+    TResult? Function(MaxBoundInputError value)? maxBound,
+    TResult? Function(MinBoundInputError value)? minBound,
+    TResult? Function(CustomInputError value)? custom,
+  }) {
+    return custom?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(EmptyInputError value)? empty,
+    TResult Function(InvalidInputError value)? invalid,
+    TResult Function(MaxBoundInputError value)? maxBound,
+    TResult Function(MinBoundInputError value)? minBound,
+    TResult Function(CustomInputError value)? custom,
+    required TResult orElse(),
+  }) {
+    if (custom != null) {
+      return custom(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CustomInputError implements WoFormInputError {
+  const factory CustomInputError(
+      {required final String inputId,
+      required final String message}) = _$CustomInputErrorImpl;
+
+  @override
+  String get inputId;
+  String get message;
+  @override
+  @JsonKey(ignore: true)
+  _$$CustomInputErrorImplCopyWith<_$CustomInputErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

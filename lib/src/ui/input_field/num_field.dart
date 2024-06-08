@@ -86,7 +86,13 @@ class _NumFieldState extends State<NumField> {
                       style: context.textTheme.labelMedium
                           ?.copyWith(color: context.colorScheme.error),
                     )
-                  : null,
+                  : (mergedSettings.helperText ?? '').isNotEmpty
+                      ? Text(
+                          mergedSettings.helperText ?? '',
+                          style: context.textTheme.labelMedium
+                              ?.copyWith(color: context.colorScheme.outline),
+                        )
+                      : null,
               trailing: NumSelector(
                 controller: countController,
                 onChanged: (value) async => valuesCubit.onValueChanged(

@@ -46,7 +46,7 @@ class StringInputPage extends StatelessWidget {
       child: Scaffold(
         // backgroundColor: context.colorScheme.contrastedBackground,
         appBar: AppBar(
-          title: const Text("Création d'un champ texte"),
+          title: const Text('Créer un formulaire'),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -130,7 +130,7 @@ class CreatedFormPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Utilisation du champ texte'),
+        title: const Text('Utilisation du formulaire'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -139,30 +139,19 @@ class CreatedFormPage extends StatelessWidget {
           onSubmitted: (context) {
             final form = context.read<WoForm>();
             final values = context.read<WoFormValuesCubit>().state;
-            showDialog<AlertDialog>(
-            context: context,
-            builder: (dialogContext) {
-              return AlertDialog(
-                icon: const Icon(Icons.data_array),
-                title: const Text('JSON'),
-                  content: Column(
-                    children: [
-                      Text(readableJson(form.valueToJson(values))),
-                      WoGap.large,
-                      Text(readableJson(form.toJson())),
-                    ],
-                  ),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(dialogContext).pop();
-                      context.read<WoFormStatusCubit>().setIdle();
-                    },
-                    child: const Text('Ok'),
-                  ),
+            showActionDialog(
+              pageContext: context,
+              title: 'JSON',
+              actionText: 'Ok',
+              onAction: context.read<WoFormStatusCubit>().setIdle,
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(readableJson(form.valueToJson(values))),
+                  // WoGap.large,
+                  // Text(readableJson(form.toJson())),
                 ],
-              );
-            },
+              ),
             );
           },
         ),

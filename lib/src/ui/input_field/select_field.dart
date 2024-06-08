@@ -93,7 +93,13 @@ class SelectField<T> extends StatelessWidget {
                     style: context.textTheme.labelMedium
                         ?.copyWith(color: context.colorScheme.error),
                   )
-                : null;
+                : (mergedSettings.helperText ?? '').isNotEmpty
+                    ? Text(
+                        mergedSettings.helperText ?? '',
+                        style: context.textTheme.labelMedium
+                            ?.copyWith(color: context.colorScheme.outline),
+                      )
+                    : null;
 
             if (input.maxCount == 1) {
               return switch (mergedSettings.displayMode) {

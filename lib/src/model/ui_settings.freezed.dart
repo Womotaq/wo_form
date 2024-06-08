@@ -21,6 +21,7 @@ BooleanFieldSettings _$BooleanFieldSettingsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$BooleanFieldSettings {
   String? get labelText => throw _privateConstructorUsedError;
+  String? get helperText => throw _privateConstructorUsedError;
   BooleanFieldOnOffType? get onOffType => throw _privateConstructorUsedError;
   ListTileControlAffinity? get onOffPosition =>
       throw _privateConstructorUsedError;
@@ -39,6 +40,7 @@ abstract class $BooleanFieldSettingsCopyWith<$Res> {
   @useResult
   $Res call(
       {String? labelText,
+      String? helperText,
       BooleanFieldOnOffType? onOffType,
       ListTileControlAffinity? onOffPosition});
 }
@@ -58,6 +60,7 @@ class _$BooleanFieldSettingsCopyWithImpl<$Res,
   @override
   $Res call({
     Object? labelText = freezed,
+    Object? helperText = freezed,
     Object? onOffType = freezed,
     Object? onOffPosition = freezed,
   }) {
@@ -65,6 +68,10 @@ class _$BooleanFieldSettingsCopyWithImpl<$Res,
       labelText: freezed == labelText
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _value.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
       onOffType: freezed == onOffType
           ? _value.onOffType
@@ -88,6 +95,7 @@ abstract class _$$BooleanFieldSettingsImplCopyWith<$Res>
   @useResult
   $Res call(
       {String? labelText,
+      String? helperText,
       BooleanFieldOnOffType? onOffType,
       ListTileControlAffinity? onOffPosition});
 }
@@ -104,6 +112,7 @@ class __$$BooleanFieldSettingsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? labelText = freezed,
+    Object? helperText = freezed,
     Object? onOffType = freezed,
     Object? onOffPosition = freezed,
   }) {
@@ -111,6 +120,10 @@ class __$$BooleanFieldSettingsImplCopyWithImpl<$Res>
       labelText: freezed == labelText
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _value.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
       onOffType: freezed == onOffType
           ? _value.onOffType
@@ -128,7 +141,7 @@ class __$$BooleanFieldSettingsImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$BooleanFieldSettingsImpl extends _BooleanFieldSettings {
   const _$BooleanFieldSettingsImpl(
-      {this.labelText, this.onOffType, this.onOffPosition})
+      {this.labelText, this.helperText, this.onOffType, this.onOffPosition})
       : super._();
 
   factory _$BooleanFieldSettingsImpl.fromJson(Map<String, dynamic> json) =>
@@ -137,13 +150,15 @@ class _$BooleanFieldSettingsImpl extends _BooleanFieldSettings {
   @override
   final String? labelText;
   @override
+  final String? helperText;
+  @override
   final BooleanFieldOnOffType? onOffType;
   @override
   final ListTileControlAffinity? onOffPosition;
 
   @override
   String toString() {
-    return 'BooleanFieldSettings(labelText: $labelText, onOffType: $onOffType, onOffPosition: $onOffPosition)';
+    return 'BooleanFieldSettings(labelText: $labelText, helperText: $helperText, onOffType: $onOffType, onOffPosition: $onOffPosition)';
   }
 
   @override
@@ -153,6 +168,8 @@ class _$BooleanFieldSettingsImpl extends _BooleanFieldSettings {
             other is _$BooleanFieldSettingsImpl &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
+            (identical(other.helperText, helperText) ||
+                other.helperText == helperText) &&
             (identical(other.onOffType, onOffType) ||
                 other.onOffType == onOffType) &&
             (identical(other.onOffPosition, onOffPosition) ||
@@ -162,7 +179,7 @@ class _$BooleanFieldSettingsImpl extends _BooleanFieldSettings {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, labelText, onOffType, onOffPosition);
+      Object.hash(runtimeType, labelText, helperText, onOffType, onOffPosition);
 
   @JsonKey(ignore: true)
   @override
@@ -183,6 +200,7 @@ class _$BooleanFieldSettingsImpl extends _BooleanFieldSettings {
 abstract class _BooleanFieldSettings extends BooleanFieldSettings {
   const factory _BooleanFieldSettings(
           {final String? labelText,
+          final String? helperText,
           final BooleanFieldOnOffType? onOffType,
           final ListTileControlAffinity? onOffPosition}) =
       _$BooleanFieldSettingsImpl;
@@ -193,6 +211,8 @@ abstract class _BooleanFieldSettings extends BooleanFieldSettings {
 
   @override
   String? get labelText;
+  @override
+  String? get helperText;
   @override
   BooleanFieldOnOffType? get onOffType;
   @override
@@ -210,6 +230,7 @@ NodeWidgetSettings _$NodeWidgetSettingsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$NodeWidgetSettings {
   String? get labelText => throw _privateConstructorUsedError;
+  String? get helperText => throw _privateConstructorUsedError;
   NodeDisplayMode? get displayMode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -224,7 +245,8 @@ abstract class $NodeWidgetSettingsCopyWith<$Res> {
           NodeWidgetSettings value, $Res Function(NodeWidgetSettings) then) =
       _$NodeWidgetSettingsCopyWithImpl<$Res, NodeWidgetSettings>;
   @useResult
-  $Res call({String? labelText, NodeDisplayMode? displayMode});
+  $Res call(
+      {String? labelText, String? helperText, NodeDisplayMode? displayMode});
 }
 
 /// @nodoc
@@ -241,12 +263,17 @@ class _$NodeWidgetSettingsCopyWithImpl<$Res, $Val extends NodeWidgetSettings>
   @override
   $Res call({
     Object? labelText = freezed,
+    Object? helperText = freezed,
     Object? displayMode = freezed,
   }) {
     return _then(_value.copyWith(
       labelText: freezed == labelText
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _value.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
       displayMode: freezed == displayMode
           ? _value.displayMode
@@ -264,7 +291,8 @@ abstract class _$$NodeWidgetSettingsImplCopyWith<$Res>
       __$$NodeWidgetSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? labelText, NodeDisplayMode? displayMode});
+  $Res call(
+      {String? labelText, String? helperText, NodeDisplayMode? displayMode});
 }
 
 /// @nodoc
@@ -279,12 +307,17 @@ class __$$NodeWidgetSettingsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? labelText = freezed,
+    Object? helperText = freezed,
     Object? displayMode = freezed,
   }) {
     return _then(_$NodeWidgetSettingsImpl(
       labelText: freezed == labelText
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _value.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
       displayMode: freezed == displayMode
           ? _value.displayMode
@@ -297,7 +330,8 @@ class __$$NodeWidgetSettingsImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$NodeWidgetSettingsImpl extends _NodeWidgetSettings {
-  const _$NodeWidgetSettingsImpl({this.labelText, this.displayMode})
+  const _$NodeWidgetSettingsImpl(
+      {this.labelText, this.helperText, this.displayMode})
       : super._();
 
   factory _$NodeWidgetSettingsImpl.fromJson(Map<String, dynamic> json) =>
@@ -306,11 +340,13 @@ class _$NodeWidgetSettingsImpl extends _NodeWidgetSettings {
   @override
   final String? labelText;
   @override
+  final String? helperText;
+  @override
   final NodeDisplayMode? displayMode;
 
   @override
   String toString() {
-    return 'NodeWidgetSettings(labelText: $labelText, displayMode: $displayMode)';
+    return 'NodeWidgetSettings(labelText: $labelText, helperText: $helperText, displayMode: $displayMode)';
   }
 
   @override
@@ -320,13 +356,16 @@ class _$NodeWidgetSettingsImpl extends _NodeWidgetSettings {
             other is _$NodeWidgetSettingsImpl &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
+            (identical(other.helperText, helperText) ||
+                other.helperText == helperText) &&
             (identical(other.displayMode, displayMode) ||
                 other.displayMode == displayMode));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, labelText, displayMode);
+  int get hashCode =>
+      Object.hash(runtimeType, labelText, helperText, displayMode);
 
   @JsonKey(ignore: true)
   @override
@@ -346,6 +385,7 @@ class _$NodeWidgetSettingsImpl extends _NodeWidgetSettings {
 abstract class _NodeWidgetSettings extends NodeWidgetSettings {
   const factory _NodeWidgetSettings(
       {final String? labelText,
+      final String? helperText,
       final NodeDisplayMode? displayMode}) = _$NodeWidgetSettingsImpl;
   const _NodeWidgetSettings._() : super._();
 
@@ -354,6 +394,8 @@ abstract class _NodeWidgetSettings extends NodeWidgetSettings {
 
   @override
   String? get labelText;
+  @override
+  String? get helperText;
   @override
   NodeDisplayMode? get displayMode;
   @override
@@ -369,6 +411,7 @@ NumFieldSettings _$NumFieldSettingsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$NumFieldSettings {
   String? get labelText => throw _privateConstructorUsedError;
+  String? get helperText => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -382,7 +425,7 @@ abstract class $NumFieldSettingsCopyWith<$Res> {
           NumFieldSettings value, $Res Function(NumFieldSettings) then) =
       _$NumFieldSettingsCopyWithImpl<$Res, NumFieldSettings>;
   @useResult
-  $Res call({String? labelText});
+  $Res call({String? labelText, String? helperText});
 }
 
 /// @nodoc
@@ -399,11 +442,16 @@ class _$NumFieldSettingsCopyWithImpl<$Res, $Val extends NumFieldSettings>
   @override
   $Res call({
     Object? labelText = freezed,
+    Object? helperText = freezed,
   }) {
     return _then(_value.copyWith(
       labelText: freezed == labelText
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _value.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -417,7 +465,7 @@ abstract class _$$NumFieldSettingsImplCopyWith<$Res>
       __$$NumFieldSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? labelText});
+  $Res call({String? labelText, String? helperText});
 }
 
 /// @nodoc
@@ -432,11 +480,16 @@ class __$$NumFieldSettingsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? labelText = freezed,
+    Object? helperText = freezed,
   }) {
     return _then(_$NumFieldSettingsImpl(
       labelText: freezed == labelText
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _value.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -445,17 +498,19 @@ class __$$NumFieldSettingsImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$NumFieldSettingsImpl extends _NumFieldSettings {
-  const _$NumFieldSettingsImpl({this.labelText}) : super._();
+  const _$NumFieldSettingsImpl({this.labelText, this.helperText}) : super._();
 
   factory _$NumFieldSettingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$NumFieldSettingsImplFromJson(json);
 
   @override
   final String? labelText;
+  @override
+  final String? helperText;
 
   @override
   String toString() {
-    return 'NumFieldSettings(labelText: $labelText)';
+    return 'NumFieldSettings(labelText: $labelText, helperText: $helperText)';
   }
 
   @override
@@ -464,12 +519,14 @@ class _$NumFieldSettingsImpl extends _NumFieldSettings {
         (other.runtimeType == runtimeType &&
             other is _$NumFieldSettingsImpl &&
             (identical(other.labelText, labelText) ||
-                other.labelText == labelText));
+                other.labelText == labelText) &&
+            (identical(other.helperText, helperText) ||
+                other.helperText == helperText));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, labelText);
+  int get hashCode => Object.hash(runtimeType, labelText, helperText);
 
   @JsonKey(ignore: true)
   @override
@@ -487,8 +544,9 @@ class _$NumFieldSettingsImpl extends _NumFieldSettings {
 }
 
 abstract class _NumFieldSettings extends NumFieldSettings {
-  const factory _NumFieldSettings({final String? labelText}) =
-      _$NumFieldSettingsImpl;
+  const factory _NumFieldSettings(
+      {final String? labelText,
+      final String? helperText}) = _$NumFieldSettingsImpl;
   const _NumFieldSettings._() : super._();
 
   factory _NumFieldSettings.fromJson(Map<String, dynamic> json) =
@@ -496,6 +554,8 @@ abstract class _NumFieldSettings extends NumFieldSettings {
 
   @override
   String? get labelText;
+  @override
+  String? get helperText;
   @override
   @JsonKey(ignore: true)
   _$$NumFieldSettingsImplCopyWith<_$NumFieldSettingsImpl> get copyWith =>
@@ -510,6 +570,7 @@ SelectFieldSettings<T> _$SelectFieldSettingsFromJson<T>(
 /// @nodoc
 mixin _$SelectFieldSettings<T> {
   String? get labelText => throw _privateConstructorUsedError;
+  String? get helperText => throw _privateConstructorUsedError;
   SelectFieldDisplayMode? get displayMode => throw _privateConstructorUsedError;
   @JsonKey(includeFromJson: false, includeToJson: false)
   Widget Function(T?)? get valueBuilder => throw _privateConstructorUsedError;
@@ -528,6 +589,7 @@ abstract class $SelectFieldSettingsCopyWith<T, $Res> {
   @useResult
   $Res call(
       {String? labelText,
+      String? helperText,
       SelectFieldDisplayMode? displayMode,
       @JsonKey(includeFromJson: false, includeToJson: false)
       Widget Function(T?)? valueBuilder});
@@ -548,6 +610,7 @@ class _$SelectFieldSettingsCopyWithImpl<T, $Res,
   @override
   $Res call({
     Object? labelText = freezed,
+    Object? helperText = freezed,
     Object? displayMode = freezed,
     Object? valueBuilder = freezed,
   }) {
@@ -555,6 +618,10 @@ class _$SelectFieldSettingsCopyWithImpl<T, $Res,
       labelText: freezed == labelText
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _value.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
       displayMode: freezed == displayMode
           ? _value.displayMode
@@ -578,6 +645,7 @@ abstract class _$$SelectFieldSettingsImplCopyWith<T, $Res>
   @useResult
   $Res call(
       {String? labelText,
+      String? helperText,
       SelectFieldDisplayMode? displayMode,
       @JsonKey(includeFromJson: false, includeToJson: false)
       Widget Function(T?)? valueBuilder});
@@ -596,6 +664,7 @@ class __$$SelectFieldSettingsImplCopyWithImpl<T, $Res>
   @override
   $Res call({
     Object? labelText = freezed,
+    Object? helperText = freezed,
     Object? displayMode = freezed,
     Object? valueBuilder = freezed,
   }) {
@@ -603,6 +672,10 @@ class __$$SelectFieldSettingsImplCopyWithImpl<T, $Res>
       labelText: freezed == labelText
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _value.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
       displayMode: freezed == displayMode
           ? _value.displayMode
@@ -621,6 +694,7 @@ class __$$SelectFieldSettingsImplCopyWithImpl<T, $Res>
 class _$SelectFieldSettingsImpl<T> extends _SelectFieldSettings<T> {
   const _$SelectFieldSettingsImpl(
       {this.labelText,
+      this.helperText,
       this.displayMode,
       @JsonKey(includeFromJson: false, includeToJson: false) this.valueBuilder})
       : super._();
@@ -631,6 +705,8 @@ class _$SelectFieldSettingsImpl<T> extends _SelectFieldSettings<T> {
   @override
   final String? labelText;
   @override
+  final String? helperText;
+  @override
   final SelectFieldDisplayMode? displayMode;
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -638,7 +714,7 @@ class _$SelectFieldSettingsImpl<T> extends _SelectFieldSettings<T> {
 
   @override
   String toString() {
-    return 'SelectFieldSettings<$T>(labelText: $labelText, displayMode: $displayMode, valueBuilder: $valueBuilder)';
+    return 'SelectFieldSettings<$T>(labelText: $labelText, helperText: $helperText, displayMode: $displayMode, valueBuilder: $valueBuilder)';
   }
 
   @override
@@ -648,6 +724,8 @@ class _$SelectFieldSettingsImpl<T> extends _SelectFieldSettings<T> {
             other is _$SelectFieldSettingsImpl<T> &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
+            (identical(other.helperText, helperText) ||
+                other.helperText == helperText) &&
             (identical(other.displayMode, displayMode) ||
                 other.displayMode == displayMode) &&
             (identical(other.valueBuilder, valueBuilder) ||
@@ -656,8 +734,8 @@ class _$SelectFieldSettingsImpl<T> extends _SelectFieldSettings<T> {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, labelText, displayMode, valueBuilder);
+  int get hashCode => Object.hash(
+      runtimeType, labelText, helperText, displayMode, valueBuilder);
 
   @JsonKey(ignore: true)
   @override
@@ -677,6 +755,7 @@ class _$SelectFieldSettingsImpl<T> extends _SelectFieldSettings<T> {
 abstract class _SelectFieldSettings<T> extends SelectFieldSettings<T> {
   const factory _SelectFieldSettings(
       {final String? labelText,
+      final String? helperText,
       final SelectFieldDisplayMode? displayMode,
       @JsonKey(includeFromJson: false, includeToJson: false)
       final Widget Function(T?)? valueBuilder}) = _$SelectFieldSettingsImpl<T>;
@@ -688,6 +767,8 @@ abstract class _SelectFieldSettings<T> extends SelectFieldSettings<T> {
   @override
   String? get labelText;
   @override
+  String? get helperText;
+  @override
   SelectFieldDisplayMode? get displayMode;
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -698,171 +779,6 @@ abstract class _SelectFieldSettings<T> extends SelectFieldSettings<T> {
       get copyWith => throw _privateConstructorUsedError;
 }
 
-SelectStringFieldSettings _$SelectStringFieldSettingsFromJson(
-    Map<String, dynamic> json) {
-  return _SelectStringFieldSettings.fromJson(json);
-}
-
-/// @nodoc
-mixin _$SelectStringFieldSettings {
-  String? get labelText => throw _privateConstructorUsedError;
-  SelectFieldDisplayMode? get displayMode => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $SelectStringFieldSettingsCopyWith<SelectStringFieldSettings> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $SelectStringFieldSettingsCopyWith<$Res> {
-  factory $SelectStringFieldSettingsCopyWith(SelectStringFieldSettings value,
-          $Res Function(SelectStringFieldSettings) then) =
-      _$SelectStringFieldSettingsCopyWithImpl<$Res, SelectStringFieldSettings>;
-  @useResult
-  $Res call({String? labelText, SelectFieldDisplayMode? displayMode});
-}
-
-/// @nodoc
-class _$SelectStringFieldSettingsCopyWithImpl<$Res,
-        $Val extends SelectStringFieldSettings>
-    implements $SelectStringFieldSettingsCopyWith<$Res> {
-  _$SelectStringFieldSettingsCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? labelText = freezed,
-    Object? displayMode = freezed,
-  }) {
-    return _then(_value.copyWith(
-      labelText: freezed == labelText
-          ? _value.labelText
-          : labelText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      displayMode: freezed == displayMode
-          ? _value.displayMode
-          : displayMode // ignore: cast_nullable_to_non_nullable
-              as SelectFieldDisplayMode?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$SelectStringFieldSettingsImplCopyWith<$Res>
-    implements $SelectStringFieldSettingsCopyWith<$Res> {
-  factory _$$SelectStringFieldSettingsImplCopyWith(
-          _$SelectStringFieldSettingsImpl value,
-          $Res Function(_$SelectStringFieldSettingsImpl) then) =
-      __$$SelectStringFieldSettingsImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String? labelText, SelectFieldDisplayMode? displayMode});
-}
-
-/// @nodoc
-class __$$SelectStringFieldSettingsImplCopyWithImpl<$Res>
-    extends _$SelectStringFieldSettingsCopyWithImpl<$Res,
-        _$SelectStringFieldSettingsImpl>
-    implements _$$SelectStringFieldSettingsImplCopyWith<$Res> {
-  __$$SelectStringFieldSettingsImplCopyWithImpl(
-      _$SelectStringFieldSettingsImpl _value,
-      $Res Function(_$SelectStringFieldSettingsImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? labelText = freezed,
-    Object? displayMode = freezed,
-  }) {
-    return _then(_$SelectStringFieldSettingsImpl(
-      labelText: freezed == labelText
-          ? _value.labelText
-          : labelText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      displayMode: freezed == displayMode
-          ? _value.displayMode
-          : displayMode // ignore: cast_nullable_to_non_nullable
-              as SelectFieldDisplayMode?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$SelectStringFieldSettingsImpl extends _SelectStringFieldSettings {
-  const _$SelectStringFieldSettingsImpl({this.labelText, this.displayMode})
-      : super._();
-
-  factory _$SelectStringFieldSettingsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SelectStringFieldSettingsImplFromJson(json);
-
-  @override
-  final String? labelText;
-  @override
-  final SelectFieldDisplayMode? displayMode;
-
-  @override
-  String toString() {
-    return 'SelectStringFieldSettings(labelText: $labelText, displayMode: $displayMode)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SelectStringFieldSettingsImpl &&
-            (identical(other.labelText, labelText) ||
-                other.labelText == labelText) &&
-            (identical(other.displayMode, displayMode) ||
-                other.displayMode == displayMode));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, labelText, displayMode);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$SelectStringFieldSettingsImplCopyWith<_$SelectStringFieldSettingsImpl>
-      get copyWith => __$$SelectStringFieldSettingsImplCopyWithImpl<
-          _$SelectStringFieldSettingsImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SelectStringFieldSettingsImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _SelectStringFieldSettings extends SelectStringFieldSettings {
-  const factory _SelectStringFieldSettings(
-          {final String? labelText,
-          final SelectFieldDisplayMode? displayMode}) =
-      _$SelectStringFieldSettingsImpl;
-  const _SelectStringFieldSettings._() : super._();
-
-  factory _SelectStringFieldSettings.fromJson(Map<String, dynamic> json) =
-      _$SelectStringFieldSettingsImpl.fromJson;
-
-  @override
-  String? get labelText;
-  @override
-  SelectFieldDisplayMode? get displayMode;
-  @override
-  @JsonKey(ignore: true)
-  _$$SelectStringFieldSettingsImplCopyWith<_$SelectStringFieldSettingsImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
 StringFieldSettings _$StringFieldSettingsFromJson(Map<String, dynamic> json) {
   return _StringFieldSettings.fromJson(json);
 }
@@ -870,6 +786,8 @@ StringFieldSettings _$StringFieldSettingsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$StringFieldSettings {
   String? get labelText => throw _privateConstructorUsedError;
+  String? get hintText => throw _privateConstructorUsedError;
+  String? get helperText => throw _privateConstructorUsedError;
   StringFieldAction? get action => throw _privateConstructorUsedError;
   bool? get submitFormOnFieldSubmitted => throw _privateConstructorUsedError;
   @TextInputTypeConverter()
@@ -882,7 +800,6 @@ mixin _$StringFieldSettings {
   TextCapitalization? get textCapitalization =>
       throw _privateConstructorUsedError;
   int? get maxLines => throw _privateConstructorUsedError;
-  String? get hintText => throw _privateConstructorUsedError;
   String? get invalidRegexMessage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -899,6 +816,8 @@ abstract class $StringFieldSettingsCopyWith<$Res> {
   @useResult
   $Res call(
       {String? labelText,
+      String? hintText,
+      String? helperText,
       StringFieldAction? action,
       bool? submitFormOnFieldSubmitted,
       @TextInputTypeConverter() TextInputType? keyboardType,
@@ -909,7 +828,6 @@ abstract class $StringFieldSettingsCopyWith<$Res> {
       TextInputAction? textInputAction,
       TextCapitalization? textCapitalization,
       int? maxLines,
-      String? hintText,
       String? invalidRegexMessage});
 }
 
@@ -927,6 +845,8 @@ class _$StringFieldSettingsCopyWithImpl<$Res, $Val extends StringFieldSettings>
   @override
   $Res call({
     Object? labelText = freezed,
+    Object? hintText = freezed,
+    Object? helperText = freezed,
     Object? action = freezed,
     Object? submitFormOnFieldSubmitted = freezed,
     Object? keyboardType = freezed,
@@ -937,13 +857,20 @@ class _$StringFieldSettingsCopyWithImpl<$Res, $Val extends StringFieldSettings>
     Object? textInputAction = freezed,
     Object? textCapitalization = freezed,
     Object? maxLines = freezed,
-    Object? hintText = freezed,
     Object? invalidRegexMessage = freezed,
   }) {
     return _then(_value.copyWith(
       labelText: freezed == labelText
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hintText: freezed == hintText
+          ? _value.hintText
+          : hintText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _value.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
       action: freezed == action
           ? _value.action
@@ -985,10 +912,6 @@ class _$StringFieldSettingsCopyWithImpl<$Res, $Val extends StringFieldSettings>
           ? _value.maxLines
           : maxLines // ignore: cast_nullable_to_non_nullable
               as int?,
-      hintText: freezed == hintText
-          ? _value.hintText
-          : hintText // ignore: cast_nullable_to_non_nullable
-              as String?,
       invalidRegexMessage: freezed == invalidRegexMessage
           ? _value.invalidRegexMessage
           : invalidRegexMessage // ignore: cast_nullable_to_non_nullable
@@ -1007,6 +930,8 @@ abstract class _$$StringFieldSettingsImplCopyWith<$Res>
   @useResult
   $Res call(
       {String? labelText,
+      String? hintText,
+      String? helperText,
       StringFieldAction? action,
       bool? submitFormOnFieldSubmitted,
       @TextInputTypeConverter() TextInputType? keyboardType,
@@ -1017,7 +942,6 @@ abstract class _$$StringFieldSettingsImplCopyWith<$Res>
       TextInputAction? textInputAction,
       TextCapitalization? textCapitalization,
       int? maxLines,
-      String? hintText,
       String? invalidRegexMessage});
 }
 
@@ -1033,6 +957,8 @@ class __$$StringFieldSettingsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? labelText = freezed,
+    Object? hintText = freezed,
+    Object? helperText = freezed,
     Object? action = freezed,
     Object? submitFormOnFieldSubmitted = freezed,
     Object? keyboardType = freezed,
@@ -1043,13 +969,20 @@ class __$$StringFieldSettingsImplCopyWithImpl<$Res>
     Object? textInputAction = freezed,
     Object? textCapitalization = freezed,
     Object? maxLines = freezed,
-    Object? hintText = freezed,
     Object? invalidRegexMessage = freezed,
   }) {
     return _then(_$StringFieldSettingsImpl(
       labelText: freezed == labelText
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hintText: freezed == hintText
+          ? _value.hintText
+          : hintText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _value.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
       action: freezed == action
           ? _value.action
@@ -1091,10 +1024,6 @@ class __$$StringFieldSettingsImplCopyWithImpl<$Res>
           ? _value.maxLines
           : maxLines // ignore: cast_nullable_to_non_nullable
               as int?,
-      hintText: freezed == hintText
-          ? _value.hintText
-          : hintText // ignore: cast_nullable_to_non_nullable
-              as String?,
       invalidRegexMessage: freezed == invalidRegexMessage
           ? _value.invalidRegexMessage
           : invalidRegexMessage // ignore: cast_nullable_to_non_nullable
@@ -1108,6 +1037,8 @@ class __$$StringFieldSettingsImplCopyWithImpl<$Res>
 class _$StringFieldSettingsImpl extends _StringFieldSettings {
   const _$StringFieldSettingsImpl(
       {this.labelText,
+      this.hintText,
+      this.helperText,
       this.action,
       this.submitFormOnFieldSubmitted,
       @TextInputTypeConverter() this.keyboardType,
@@ -1118,7 +1049,6 @@ class _$StringFieldSettingsImpl extends _StringFieldSettings {
       this.textInputAction,
       this.textCapitalization,
       this.maxLines,
-      this.hintText,
       this.invalidRegexMessage})
       : _autofillHints = autofillHints,
         super._();
@@ -1128,6 +1058,10 @@ class _$StringFieldSettingsImpl extends _StringFieldSettings {
 
   @override
   final String? labelText;
+  @override
+  final String? hintText;
+  @override
+  final String? helperText;
   @override
   final StringFieldAction? action;
   @override
@@ -1158,13 +1092,11 @@ class _$StringFieldSettingsImpl extends _StringFieldSettings {
   @override
   final int? maxLines;
   @override
-  final String? hintText;
-  @override
   final String? invalidRegexMessage;
 
   @override
   String toString() {
-    return 'StringFieldSettings(labelText: $labelText, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, hintText: $hintText, invalidRegexMessage: $invalidRegexMessage)';
+    return 'StringFieldSettings(labelText: $labelText, hintText: $hintText, helperText: $helperText, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage)';
   }
 
   @override
@@ -1174,6 +1106,10 @@ class _$StringFieldSettingsImpl extends _StringFieldSettings {
             other is _$StringFieldSettingsImpl &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
+            (identical(other.hintText, hintText) ||
+                other.hintText == hintText) &&
+            (identical(other.helperText, helperText) ||
+                other.helperText == helperText) &&
             (identical(other.action, action) || other.action == action) &&
             (identical(other.submitFormOnFieldSubmitted,
                     submitFormOnFieldSubmitted) ||
@@ -1195,8 +1131,6 @@ class _$StringFieldSettingsImpl extends _StringFieldSettings {
                 other.textCapitalization == textCapitalization) &&
             (identical(other.maxLines, maxLines) ||
                 other.maxLines == maxLines) &&
-            (identical(other.hintText, hintText) ||
-                other.hintText == hintText) &&
             (identical(other.invalidRegexMessage, invalidRegexMessage) ||
                 other.invalidRegexMessage == invalidRegexMessage));
   }
@@ -1206,6 +1140,8 @@ class _$StringFieldSettingsImpl extends _StringFieldSettings {
   int get hashCode => Object.hash(
       runtimeType,
       labelText,
+      hintText,
+      helperText,
       action,
       submitFormOnFieldSubmitted,
       keyboardType,
@@ -1216,7 +1152,6 @@ class _$StringFieldSettingsImpl extends _StringFieldSettings {
       textInputAction,
       textCapitalization,
       maxLines,
-      hintText,
       invalidRegexMessage);
 
   @JsonKey(ignore: true)
@@ -1237,6 +1172,8 @@ class _$StringFieldSettingsImpl extends _StringFieldSettings {
 abstract class _StringFieldSettings extends StringFieldSettings {
   const factory _StringFieldSettings(
       {final String? labelText,
+      final String? hintText,
+      final String? helperText,
       final StringFieldAction? action,
       final bool? submitFormOnFieldSubmitted,
       @TextInputTypeConverter() final TextInputType? keyboardType,
@@ -1247,7 +1184,6 @@ abstract class _StringFieldSettings extends StringFieldSettings {
       final TextInputAction? textInputAction,
       final TextCapitalization? textCapitalization,
       final int? maxLines,
-      final String? hintText,
       final String? invalidRegexMessage}) = _$StringFieldSettingsImpl;
   const _StringFieldSettings._() : super._();
 
@@ -1256,6 +1192,10 @@ abstract class _StringFieldSettings extends StringFieldSettings {
 
   @override
   String? get labelText;
+  @override
+  String? get hintText;
+  @override
+  String? get helperText;
   @override
   StringFieldAction? get action;
   @override
@@ -1277,8 +1217,6 @@ abstract class _StringFieldSettings extends StringFieldSettings {
   TextCapitalization? get textCapitalization;
   @override
   int? get maxLines;
-  @override
-  String? get hintText;
   @override
   String? get invalidRegexMessage;
   @override

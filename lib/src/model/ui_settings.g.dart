@@ -10,6 +10,7 @@ _$BooleanFieldSettingsImpl _$$BooleanFieldSettingsImplFromJson(
         Map<String, dynamic> json) =>
     _$BooleanFieldSettingsImpl(
       labelText: json['labelText'] as String?,
+      helperText: json['helperText'] as String?,
       onOffType: $enumDecodeNullable(
           _$BooleanFieldOnOffTypeEnumMap, json['onOffType']),
       onOffPosition: $enumDecodeNullable(
@@ -20,6 +21,7 @@ Map<String, dynamic> _$$BooleanFieldSettingsImplToJson(
         _$BooleanFieldSettingsImpl instance) =>
     <String, dynamic>{
       'labelText': instance.labelText,
+      'helperText': instance.helperText,
       'onOffType': _$BooleanFieldOnOffTypeEnumMap[instance.onOffType],
       'onOffPosition': _$ListTileControlAffinityEnumMap[instance.onOffPosition],
     };
@@ -39,6 +41,7 @@ _$NodeWidgetSettingsImpl _$$NodeWidgetSettingsImplFromJson(
         Map<String, dynamic> json) =>
     _$NodeWidgetSettingsImpl(
       labelText: json['labelText'] as String?,
+      helperText: json['helperText'] as String?,
       displayMode:
           $enumDecodeNullable(_$NodeDisplayModeEnumMap, json['displayMode']),
     );
@@ -47,6 +50,7 @@ Map<String, dynamic> _$$NodeWidgetSettingsImplToJson(
         _$NodeWidgetSettingsImpl instance) =>
     <String, dynamic>{
       'labelText': instance.labelText,
+      'helperText': instance.helperText,
       'displayMode': _$NodeDisplayModeEnumMap[instance.displayMode],
     };
 
@@ -59,18 +63,21 @@ _$NumFieldSettingsImpl _$$NumFieldSettingsImplFromJson(
         Map<String, dynamic> json) =>
     _$NumFieldSettingsImpl(
       labelText: json['labelText'] as String?,
+      helperText: json['helperText'] as String?,
     );
 
 Map<String, dynamic> _$$NumFieldSettingsImplToJson(
         _$NumFieldSettingsImpl instance) =>
     <String, dynamic>{
       'labelText': instance.labelText,
+      'helperText': instance.helperText,
     };
 
 _$SelectFieldSettingsImpl<T> _$$SelectFieldSettingsImplFromJson<T>(
         Map<String, dynamic> json) =>
     _$SelectFieldSettingsImpl<T>(
       labelText: json['labelText'] as String?,
+      helperText: json['helperText'] as String?,
       displayMode: $enumDecodeNullable(
           _$SelectFieldDisplayModeEnumMap, json['displayMode']),
     );
@@ -79,6 +86,7 @@ Map<String, dynamic> _$$SelectFieldSettingsImplToJson<T>(
         _$SelectFieldSettingsImpl<T> instance) =>
     <String, dynamic>{
       'labelText': instance.labelText,
+      'helperText': instance.helperText,
       'displayMode': _$SelectFieldDisplayModeEnumMap[instance.displayMode],
     };
 
@@ -87,25 +95,12 @@ const _$SelectFieldDisplayModeEnumMap = {
   SelectFieldDisplayMode.tile: 'tile',
 };
 
-_$SelectStringFieldSettingsImpl _$$SelectStringFieldSettingsImplFromJson(
-        Map<String, dynamic> json) =>
-    _$SelectStringFieldSettingsImpl(
-      labelText: json['labelText'] as String?,
-      displayMode: $enumDecodeNullable(
-          _$SelectFieldDisplayModeEnumMap, json['displayMode']),
-    );
-
-Map<String, dynamic> _$$SelectStringFieldSettingsImplToJson(
-        _$SelectStringFieldSettingsImpl instance) =>
-    <String, dynamic>{
-      'labelText': instance.labelText,
-      'displayMode': _$SelectFieldDisplayModeEnumMap[instance.displayMode],
-    };
-
 _$StringFieldSettingsImpl _$$StringFieldSettingsImplFromJson(
         Map<String, dynamic> json) =>
     _$StringFieldSettingsImpl(
       labelText: json['labelText'] as String?,
+      hintText: json['hintText'] as String?,
+      helperText: json['helperText'] as String?,
       action: $enumDecodeNullable(_$StringFieldActionEnumMap, json['action']),
       submitFormOnFieldSubmitted: json['submitFormOnFieldSubmitted'] as bool?,
       keyboardType: const TextInputTypeConverter()
@@ -121,7 +116,6 @@ _$StringFieldSettingsImpl _$$StringFieldSettingsImplFromJson(
       textCapitalization: $enumDecodeNullable(
           _$TextCapitalizationEnumMap, json['textCapitalization']),
       maxLines: (json['maxLines'] as num?)?.toInt(),
-      hintText: json['hintText'] as String?,
       invalidRegexMessage: json['invalidRegexMessage'] as String?,
     );
 
@@ -129,6 +123,8 @@ Map<String, dynamic> _$$StringFieldSettingsImplToJson(
         _$StringFieldSettingsImpl instance) =>
     <String, dynamic>{
       'labelText': instance.labelText,
+      'hintText': instance.hintText,
+      'helperText': instance.helperText,
       'action': _$StringFieldActionEnumMap[instance.action],
       'submitFormOnFieldSubmitted': instance.submitFormOnFieldSubmitted,
       'keyboardType':
@@ -141,7 +137,6 @@ Map<String, dynamic> _$$StringFieldSettingsImplToJson(
       'textCapitalization':
           _$TextCapitalizationEnumMap[instance.textCapitalization],
       'maxLines': instance.maxLines,
-      'hintText': instance.hintText,
       'invalidRegexMessage': instance.invalidRegexMessage,
     };
 

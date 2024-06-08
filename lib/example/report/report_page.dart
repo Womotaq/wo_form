@@ -81,33 +81,19 @@ class _ReportPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Formulaire de signalement')),
+      appBar: AppBar(title: const Text('Signaler un utilisateur')),
       body: BlocListener<WoFormStatusCubit, WoFormStatus>(
         listener: (context, status) {
           if (status is SubmittedStatus) {
             context.read<WoFormStatusCubit>().setIdle();
             final form = context.read<WoForm>();
             final values = context.read<WoFormValuesCubit>().state;
-            showDialog<AlertDialog>(
-              context: context,
-              builder: (dialogContext) {
-                return AlertDialog(
-                  icon: const Icon(Icons.data_array),
-                  title: const Text('JSON'),
-                  content: Text(
-                    readableJson(form.valueToJson(values)),
-                  ),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(dialogContext).pop();
-                        context.read<WoFormStatusCubit>().setIdle();
-                      },
-                      child: const Text('Ok'),
-                    ),
-                  ],
-                );
-              },
+            showActionDialog(
+              pageContext: context,
+              title: 'JSON',
+              actionText: 'Ok',
+              onAction: context.read<WoFormStatusCubit>().setIdle,
+              content: Text(readableJson(form.valueToJson(values))),
             );
           }
         },

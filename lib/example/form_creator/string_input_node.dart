@@ -13,6 +13,8 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
           isRequired: true,
           uiSettings: StringFieldSettings(
             labelText: 'Id',
+            helperText: 'Ceci sera la clef associée à la réponse de votre '
+                "utilisateur, dans le json qu'il produira.",
           ),
         ),
         const StringInput(
@@ -25,6 +27,7 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
           id: 'isRequired',
           uiSettings: BooleanFieldSettings(
             labelText: 'Doit être renseigné',
+            helperText: 'Un texte vide ne sera pas accepté.',
           ),
         ),
         SelectInput<RegexPattern?>(
@@ -33,6 +36,7 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
           maxCount: 1,
           uiSettings: SelectFieldSettings(
             labelText: 'Doit correspondre à',
+            helperText: 'TODO : helpValueBuilder',
             displayMode: SelectFieldDisplayMode.chip,
             valueBuilder: (regex) => Text(
               switch (regex) {
@@ -59,9 +63,18 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
               ),
             ),
             const StringInput(
+              id: 'helperText',
+              uiSettings: StringFieldSettings(
+                labelText: 'Sous-titre',
+                helperText: 'Ceci sera affiché en dessous du champ.',
+              ),
+            ),
+            const StringInput(
               id: 'hintText',
               uiSettings: StringFieldSettings(
                 labelText: 'Aide',
+                hintText: "Ceci est un message d'aide",
+                helperText: 'Ceci sera affiché dans le champ.',
               ),
             ),
             SelectInput<StringFieldAction?>(
@@ -84,6 +97,8 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
               id: 'submitFormOnFieldSubmitted',
               uiSettings: BooleanFieldSettings(
                 labelText: 'Envoyer le formulaire quand le champ est validé',
+                helperText: "Par exemple, lorsque l'utilisateur presse "
+                    '"Entrée"',
               ),
             ),
             SelectInput<TextInputType>(
@@ -171,7 +186,9 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
               id: 'maxLines',
               defaultValue: 1,
               uiSettings: NumFieldSettings(
-                labelText: 'Nombre maximum de lignes',
+                labelText: 'Nombre de lignes',
+                helperText: "Pour que le champ s'adapte à la hauteur du texte, "
+                    'laissez vide.',
               ),
             ),
             const StringInput(

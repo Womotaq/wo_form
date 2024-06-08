@@ -31,12 +31,36 @@ class InputsNodeWidget extends StatelessWidget {
     final inputWidgets =
         input.inputs.map((i) => i.toWidget(parentPath: inputPath)).toList();
 
+    final subtitle = (mergedSettings.helperText ?? '').isNotEmpty
+        ? Text(
+            mergedSettings.helperText ?? '',
+            style: context.textTheme.labelMedium
+                ?.copyWith(color: context.colorScheme.outline),
+          )
+        : null;
+
     switch (mergedSettings.displayMode) {
       case null:
       case NodeDisplayMode.card:
         return FeedCard(
-          title: mergedSettings.labelText,
-          child: Column(children: inputWidgets),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              WoPadding.horizontalMedium(
+                child: Column(
+                  children: [
+                    Text(
+                      mergedSettings.labelText ?? '',
+                      style: context.textTheme.titleCard,
+                    ),
+                    if (subtitle != null) subtitle,
+                  ],
+                ),
+              ),
+              WoGap.medium,
+              ...inputWidgets,
+            ],
+          ),
         );
       case NodeDisplayMode.tile:
         return Column(
@@ -52,11 +76,18 @@ class InputsNodeWidget extends StatelessWidget {
                     mergedSettings.labelText!,
                     style: TextStyleExt.bold,
                   ),
+                  subtitle: subtitle,
                   children: inputWidgets,
                 ),
               )
             else
-              Column(children: inputWidgets),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  if (subtitle != null) subtitle,
+                  ...inputWidgets,
+                ],
+              ),
           ],
         );
     }

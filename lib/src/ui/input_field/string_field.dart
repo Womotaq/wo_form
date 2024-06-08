@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/wo_form.dart';
 
 class StringField extends StatefulWidget {
@@ -90,12 +91,18 @@ class _StringFieldState extends State<StringField> {
                 maxLines: mergedSettings.maxLines,
                 decoration: InputDecoration(
                   border: const OutlineInputBorder(),
-                  labelText: (mergedSettings.labelText ?? '') +
-                      (input.isRequired ? '*' : ''),
+                  labelText: (mergedSettings.labelText ?? '').isNotEmpty
+                      ? (mergedSettings.labelText ?? '') +
+                          (input.isRequired ? '*' : '')
+                      : null,
                   labelStyle: input.isRequired
                       ? null
-                      : TextStyle(color: Theme.of(context).disabledColor),
-                  hintText: mergedSettings.hintText ?? '',
+                      : TextStyle(color: context.colorScheme.outline),
+                  hintText: mergedSettings.hintText,
+                  helperText: mergedSettings.helperText,
+                  helperStyle: context.textTheme.labelMedium
+                      ?.copyWith(color: context.colorScheme.outline),
+                  helperMaxLines: 10,
                   errorText: errorText,
                   errorMaxLines: 10,
                   suffixIcon: switch (mergedSettings.action) {

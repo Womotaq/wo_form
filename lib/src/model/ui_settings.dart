@@ -11,6 +11,7 @@ enum BooleanFieldOnOffType { checkbox, switchButton }
 class BooleanFieldSettings with _$BooleanFieldSettings {
   const factory BooleanFieldSettings({
     String? labelText,
+    String? helperText,
     BooleanFieldOnOffType? onOffType,
     ListTileControlAffinity? onOffPosition,
   }) = _BooleanFieldSettings;
@@ -27,6 +28,7 @@ class BooleanFieldSettings with _$BooleanFieldSettings {
       ? this
       : BooleanFieldSettings(
           labelText: labelText ?? other.labelText,
+          helperText: helperText ?? other.helperText,
           onOffType: onOffType ?? other.onOffType,
           onOffPosition: onOffPosition ?? other.onOffPosition,
         );
@@ -38,6 +40,7 @@ enum NodeDisplayMode { card, tile }
 class NodeWidgetSettings with _$NodeWidgetSettings {
   const factory NodeWidgetSettings({
     String? labelText,
+    String? helperText,
     NodeDisplayMode? displayMode,
   }) = _NodeWidgetSettings;
 
@@ -53,6 +56,7 @@ class NodeWidgetSettings with _$NodeWidgetSettings {
       ? this
       : NodeWidgetSettings(
           labelText: labelText ?? other.labelText,
+          helperText: helperText ?? other.helperText,
           displayMode: displayMode ?? other.displayMode,
         );
 }
@@ -61,6 +65,7 @@ class NodeWidgetSettings with _$NodeWidgetSettings {
 class NumFieldSettings with _$NumFieldSettings {
   const factory NumFieldSettings({
     String? labelText,
+    String? helperText,
   }) = _NumFieldSettings;
 
   const NumFieldSettings._();
@@ -75,6 +80,7 @@ class NumFieldSettings with _$NumFieldSettings {
       ? this
       : NumFieldSettings(
           labelText: labelText ?? other.labelText,
+          helperText: helperText ?? other.helperText,
         );
 }
 
@@ -84,6 +90,7 @@ enum SelectFieldDisplayMode { chip, tile }
 class SelectFieldSettings<T> with _$SelectFieldSettings<T> {
   const factory SelectFieldSettings({
     String? labelText,
+    String? helperText,
     SelectFieldDisplayMode? displayMode,
     @JsonKey(includeFromJson: false, includeToJson: false)
     Widget Function(T?)? valueBuilder,
@@ -98,30 +105,10 @@ class SelectFieldSettings<T> with _$SelectFieldSettings<T> {
       ? this
       : SelectFieldSettings(
           labelText: labelText ?? other.labelText,
+          helperText: helperText ?? other.helperText,
           displayMode: displayMode ?? other.displayMode,
           valueBuilder: valueBuilder ?? other.valueBuilder,
         );
-}
-
-@freezed
-class SelectStringFieldSettings with _$SelectStringFieldSettings {
-  const factory SelectStringFieldSettings({
-    String? labelText,
-    SelectFieldDisplayMode? displayMode,
-  }) = _SelectStringFieldSettings;
-
-  const SelectStringFieldSettings._();
-
-  factory SelectStringFieldSettings.fromJson(Map<String, dynamic> json) =>
-      _$SelectStringFieldSettingsFromJson(json);
-
-  SelectStringFieldSettings merge(SelectStringFieldSettings? other) =>
-      other == null
-          ? this
-          : SelectStringFieldSettings(
-              labelText: labelText ?? other.labelText,
-              displayMode: displayMode ?? other.displayMode,
-            );
 }
 
 enum StringFieldAction { clear, obscure }
@@ -130,6 +117,8 @@ enum StringFieldAction { clear, obscure }
 class StringFieldSettings with _$StringFieldSettings {
   const factory StringFieldSettings({
     String? labelText,
+    String? hintText,
+    String? helperText,
     StringFieldAction? action,
     bool? submitFormOnFieldSubmitted,
     @TextInputTypeConverter() TextInputType? keyboardType,
@@ -140,24 +129,25 @@ class StringFieldSettings with _$StringFieldSettings {
     TextInputAction? textInputAction,
     TextCapitalization? textCapitalization,
     int? maxLines,
-    String? hintText,
     String? invalidRegexMessage,
   }) = _StringFieldSettings;
 
   factory StringFieldSettings.email({
     String? labelText,
+    String? hintText,
+    String? helperText,
     bool? submitFormOnFieldSubmitted,
     bool? autofocus,
     TextInputAction? textInputAction,
-    String? hintText,
     String? invalidRegexMessage,
   }) =>
       StringFieldSettings(
         labelText: labelText,
+        hintText: hintText,
+        helperText: helperText,
         submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
         autofocus: autofocus,
         textInputAction: textInputAction,
-        hintText: hintText,
         invalidRegexMessage: invalidRegexMessage,
         keyboardType: TextInputType.emailAddress,
         autocorrect: false,
@@ -167,16 +157,18 @@ class StringFieldSettings with _$StringFieldSettings {
 
   factory StringFieldSettings.password({
     String? labelText,
+    String? hintText,
+    String? helperText,
     bool? submitFormOnFieldSubmitted,
     TextInputAction? textInputAction,
-    String? hintText,
     String? invalidRegexMessage,
   }) =>
       StringFieldSettings(
         labelText: labelText,
+        hintText: hintText,
+        helperText: helperText,
         submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
         textInputAction: textInputAction,
-        hintText: hintText,
         invalidRegexMessage: invalidRegexMessage,
         action: StringFieldAction.obscure,
         keyboardType: TextInputType.visiblePassword,
@@ -200,6 +192,9 @@ class StringFieldSettings with _$StringFieldSettings {
   StringFieldSettings merge(StringFieldSettings? other) => other == null
       ? this
       : StringFieldSettings(
+          labelText: labelText ?? other.labelText,
+          hintText: hintText ?? other.hintText,
+          helperText: helperText ?? other.helperText,
           action: action ?? other.action,
           submitFormOnFieldSubmitted:
               submitFormOnFieldSubmitted ?? other.submitFormOnFieldSubmitted,
@@ -211,8 +206,6 @@ class StringFieldSettings with _$StringFieldSettings {
           textInputAction: textInputAction ?? other.textInputAction,
           textCapitalization: textCapitalization ?? other.textCapitalization,
           maxLines: maxLines ?? other.maxLines,
-          labelText: labelText ?? other.labelText,
-          hintText: hintText ?? other.hintText,
           invalidRegexMessage: invalidRegexMessage ?? other.invalidRegexMessage,
         );
 }

@@ -88,7 +88,13 @@ class BooleanField extends StatelessWidget {
                       style: context.textTheme.labelMedium
                           ?.copyWith(color: context.colorScheme.error),
                     )
-                  : null,
+                  : (mergedSettings.helperText ?? '').isNotEmpty
+                      ? Text(
+                          mergedSettings.helperText ?? '',
+                          style: context.textTheme.labelMedium
+                              ?.copyWith(color: context.colorScheme.outline),
+                        )
+                      : null,
               trailing: onOffIsLeading ? null : onOffButton,
               onTap: () => valuesCubit.onValueChanged(
                 inputPath: inputPath,

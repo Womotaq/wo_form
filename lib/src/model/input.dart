@@ -23,6 +23,11 @@ sealed class WoFormInputError with _$WoFormInputError {
   const factory WoFormInputError.minBound({
     required String inputId,
   }) = MinBoundInputError;
+
+  const factory WoFormInputError.custom({
+    required String inputId,
+    required String message,
+  }) = CustomInputError;
 }
 
 mixin WoFormInputMixin {

@@ -35,28 +35,47 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('WoForm tests')),
-      body: Center(
+      backgroundColor: context.colorScheme.contrastedBackground,
+      body: WoPadding.allMedium(
         child: Column(
           children: [
-            TextButton(
-              onPressed: () => Navigator.push(
+            WoGap.xxxlarge,
+            WoPadding.allMedium(
+              child: Text(
+                "Examples d'utilisation du package wo_form",
+                style: context.textTheme.titleCard,
+              ),
+            ),
+            WoGap.small,
+            ListTile(
+              onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute<void>(
                   builder: (context) => const StringInputPage(),
                 ),
               ),
-              child: const Text("Création d'un formulaire"),
+              leading: const Icon(Icons.edit_note),
+              title: const Text(
+                'Créer un formulaire',
+                style: TextStyleExt.bold,
+              ),
+              subtitle: const Text('Formulaire avancé'),
+              trailing: const Icon(Icons.chevron_right),
             ),
-            WoGap.medium,
-            TextButton(
-              onPressed: () => Navigator.push(
+            ListTile(
+              onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute<void>(
                   builder: (context) => const ReportPage(),
                 ),
               ),
-              child: const Text('Formulaire de signalement'),
+              leading: const Icon(Icons.report),
+              title: const Text(
+                'Signaler un utilisateur',
+                style: TextStyleExt.bold,
+              ),
+              subtitle: const Text('Formulaire éditable à distance'),
+              trailing: const Icon(Icons.chevron_right),
             ),
           ],
         ),

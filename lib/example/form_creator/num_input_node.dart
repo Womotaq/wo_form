@@ -4,13 +4,15 @@ InputsNode createNumInputNode({required String id}) => InputsNode(
       id: id,
       uiSettings: const NodeWidgetSettings(
         labelText: 'NumInput',
+        helperText: 'Demandez un nombre.',
       ),
       inputs: const [
         StringInput(
           id: 'id',
           isRequired: true,
           uiSettings: StringFieldSettings(
-            labelText: 'Clef',
+            labelText: 'Id',
+            helperText: 'Id',
           ),
         ),
         NumInput(
@@ -23,6 +25,7 @@ InputsNode createNumInputNode({required String id}) => InputsNode(
           id: 'isRequired',
           uiSettings: BooleanFieldSettings(
             labelText: 'Doit être renseigné',
+            helperText: 'Un champ vide ne sera pas accepté. 0 sera accepté.',
           ),
         ),
         NumInput(
