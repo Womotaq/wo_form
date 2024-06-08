@@ -574,6 +574,9 @@ mixin _$SelectFieldSettings<T> {
   SelectFieldDisplayMode? get displayMode => throw _privateConstructorUsedError;
   @JsonKey(includeFromJson: false, includeToJson: false)
   Widget Function(T?)? get valueBuilder => throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  Widget? Function(T)? get helpValueBuilder =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -592,7 +595,9 @@ abstract class $SelectFieldSettingsCopyWith<T, $Res> {
       String? helperText,
       SelectFieldDisplayMode? displayMode,
       @JsonKey(includeFromJson: false, includeToJson: false)
-      Widget Function(T?)? valueBuilder});
+      Widget Function(T?)? valueBuilder,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      Widget? Function(T)? helpValueBuilder});
 }
 
 /// @nodoc
@@ -613,6 +618,7 @@ class _$SelectFieldSettingsCopyWithImpl<T, $Res,
     Object? helperText = freezed,
     Object? displayMode = freezed,
     Object? valueBuilder = freezed,
+    Object? helpValueBuilder = freezed,
   }) {
     return _then(_value.copyWith(
       labelText: freezed == labelText
@@ -631,6 +637,10 @@ class _$SelectFieldSettingsCopyWithImpl<T, $Res,
           ? _value.valueBuilder
           : valueBuilder // ignore: cast_nullable_to_non_nullable
               as Widget Function(T?)?,
+      helpValueBuilder: freezed == helpValueBuilder
+          ? _value.helpValueBuilder
+          : helpValueBuilder // ignore: cast_nullable_to_non_nullable
+              as Widget? Function(T)?,
     ) as $Val);
   }
 }
@@ -648,7 +658,9 @@ abstract class _$$SelectFieldSettingsImplCopyWith<T, $Res>
       String? helperText,
       SelectFieldDisplayMode? displayMode,
       @JsonKey(includeFromJson: false, includeToJson: false)
-      Widget Function(T?)? valueBuilder});
+      Widget Function(T?)? valueBuilder,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      Widget? Function(T)? helpValueBuilder});
 }
 
 /// @nodoc
@@ -667,6 +679,7 @@ class __$$SelectFieldSettingsImplCopyWithImpl<T, $Res>
     Object? helperText = freezed,
     Object? displayMode = freezed,
     Object? valueBuilder = freezed,
+    Object? helpValueBuilder = freezed,
   }) {
     return _then(_$SelectFieldSettingsImpl<T>(
       labelText: freezed == labelText
@@ -685,6 +698,10 @@ class __$$SelectFieldSettingsImplCopyWithImpl<T, $Res>
           ? _value.valueBuilder
           : valueBuilder // ignore: cast_nullable_to_non_nullable
               as Widget Function(T?)?,
+      helpValueBuilder: freezed == helpValueBuilder
+          ? _value.helpValueBuilder
+          : helpValueBuilder // ignore: cast_nullable_to_non_nullable
+              as Widget? Function(T)?,
     ));
   }
 }
@@ -696,7 +713,9 @@ class _$SelectFieldSettingsImpl<T> extends _SelectFieldSettings<T> {
       {this.labelText,
       this.helperText,
       this.displayMode,
-      @JsonKey(includeFromJson: false, includeToJson: false) this.valueBuilder})
+      @JsonKey(includeFromJson: false, includeToJson: false) this.valueBuilder,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      this.helpValueBuilder})
       : super._();
 
   factory _$SelectFieldSettingsImpl.fromJson(Map<String, dynamic> json) =>
@@ -711,10 +730,13 @@ class _$SelectFieldSettingsImpl<T> extends _SelectFieldSettings<T> {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   final Widget Function(T?)? valueBuilder;
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final Widget? Function(T)? helpValueBuilder;
 
   @override
   String toString() {
-    return 'SelectFieldSettings<$T>(labelText: $labelText, helperText: $helperText, displayMode: $displayMode, valueBuilder: $valueBuilder)';
+    return 'SelectFieldSettings<$T>(labelText: $labelText, helperText: $helperText, displayMode: $displayMode, valueBuilder: $valueBuilder, helpValueBuilder: $helpValueBuilder)';
   }
 
   @override
@@ -729,13 +751,15 @@ class _$SelectFieldSettingsImpl<T> extends _SelectFieldSettings<T> {
             (identical(other.displayMode, displayMode) ||
                 other.displayMode == displayMode) &&
             (identical(other.valueBuilder, valueBuilder) ||
-                other.valueBuilder == valueBuilder));
+                other.valueBuilder == valueBuilder) &&
+            (identical(other.helpValueBuilder, helpValueBuilder) ||
+                other.helpValueBuilder == helpValueBuilder));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, labelText, helperText, displayMode, valueBuilder);
+  int get hashCode => Object.hash(runtimeType, labelText, helperText,
+      displayMode, valueBuilder, helpValueBuilder);
 
   @JsonKey(ignore: true)
   @override
@@ -754,11 +778,14 @@ class _$SelectFieldSettingsImpl<T> extends _SelectFieldSettings<T> {
 
 abstract class _SelectFieldSettings<T> extends SelectFieldSettings<T> {
   const factory _SelectFieldSettings(
-      {final String? labelText,
-      final String? helperText,
-      final SelectFieldDisplayMode? displayMode,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      final Widget Function(T?)? valueBuilder}) = _$SelectFieldSettingsImpl<T>;
+          {final String? labelText,
+          final String? helperText,
+          final SelectFieldDisplayMode? displayMode,
+          @JsonKey(includeFromJson: false, includeToJson: false)
+          final Widget Function(T?)? valueBuilder,
+          @JsonKey(includeFromJson: false, includeToJson: false)
+          final Widget? Function(T)? helpValueBuilder}) =
+      _$SelectFieldSettingsImpl<T>;
   const _SelectFieldSettings._() : super._();
 
   factory _SelectFieldSettings.fromJson(Map<String, dynamic> json) =
@@ -773,6 +800,9 @@ abstract class _SelectFieldSettings<T> extends SelectFieldSettings<T> {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   Widget Function(T?)? get valueBuilder;
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  Widget? Function(T)? get helpValueBuilder;
   @override
   @JsonKey(ignore: true)
   _$$SelectFieldSettingsImplCopyWith<T, _$SelectFieldSettingsImpl<T>>

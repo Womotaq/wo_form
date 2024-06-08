@@ -96,8 +96,7 @@ class SelectField<T> extends StatelessWidget {
                 : (mergedSettings.helperText ?? '').isNotEmpty
                     ? Text(
                         mergedSettings.helperText ?? '',
-                        style: context.textTheme.labelMedium
-                            ?.copyWith(color: context.colorScheme.outline),
+                        style: context.woTheme.infoStyle,
                       )
                     : null;
 
@@ -109,24 +108,34 @@ class SelectField<T> extends StatelessWidget {
                       if (mergedSettings.labelText != null)
                         ListTile(title: title, subtitle: subtitle),
                       ...input.availibleValues.map(
-                        (value) => ListTile(
-                          leading: Radio(
-                            value: value,
-                            groupValue: selectedValues.firstOrNull,
-                            onChanged: (_) => onUniqueChoice(
+                        (value) {
+                          final subtitle =
+                              mergedSettings.helpValueBuilder?.call(value);
+                          return ListTile(
+                            leading: Radio(
+                              value: value,
+                              groupValue: selectedValues.firstOrNull,
+                              onChanged: (_) => onUniqueChoice(
+                                valuesCubit: valuesCubit,
+                                selectedValues: selectedValues,
+                                value: value,
+                              ),
+                            ),
+                            title: valueBuilder?.call(value) ??
+                                Text(value.toString()),
+                            subtitle: subtitle == null
+                                ? null
+                                : DefaultTextStyle(
+                                    style: context.woTheme.infoStyle!,
+                                    child: subtitle,
+                                  ),
+                            onTap: () => onUniqueChoice(
                               valuesCubit: valuesCubit,
                               selectedValues: selectedValues,
                               value: value,
                             ),
-                          ),
-                          title: valueBuilder?.call(value) ??
-                              Text(value.toString()),
-                          onTap: () => onUniqueChoice(
-                            valuesCubit: valuesCubit,
-                            selectedValues: selectedValues,
-                            value: value,
-                          ),
-                        ),
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -142,6 +151,7 @@ class SelectField<T> extends StatelessWidget {
                       ),
                       selectedValue: selectedValues.firstOrNull,
                       valueBuilder: valueBuilder,
+                      helpValueBuilder: mergedSettings.helpValueBuilder,
                     ),
                   ),
               };
@@ -160,6 +170,7 @@ class SelectField<T> extends StatelessWidget {
                       ),
                       selectedValues: selectedValues,
                       valueBuilder: valueBuilder,
+                      helpValueBuilder: mergedSettings.helpValueBuilder,
                       showArrow: false,
                       previewBuilder: (_) => const Icon(Icons.add),
                     ),

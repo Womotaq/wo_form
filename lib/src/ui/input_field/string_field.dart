@@ -97,11 +97,10 @@ class _StringFieldState extends State<StringField> {
                       : null,
                   labelStyle: input.isRequired
                       ? null
-                      : TextStyle(color: context.colorScheme.outline),
+                      : TextStyle(color: context.woTheme.infoStyle?.color),
                   hintText: mergedSettings.hintText,
                   helperText: mergedSettings.helperText,
-                  helperStyle: context.textTheme.labelMedium
-                      ?.copyWith(color: context.colorScheme.outline),
+                  helperStyle: context.woTheme.infoStyle,
                   helperMaxLines: 10,
                   errorText: errorText,
                   errorMaxLines: 10,

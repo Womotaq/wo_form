@@ -36,7 +36,6 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
           maxCount: 1,
           uiSettings: SelectFieldSettings(
             labelText: 'Doit correspondre à',
-            helperText: 'TODO : helpValueBuilder',
             displayMode: SelectFieldDisplayMode.chip,
             valueBuilder: (regex) => Text(
               switch (regex) {
@@ -98,17 +97,17 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
               uiSettings: BooleanFieldSettings(
                 labelText: 'Envoyer le formulaire quand le champ est validé',
                 helperText: "Par exemple, lorsque l'utilisateur presse "
-                    '"Entrée"',
+                    '"Entrée".',
               ),
             ),
             SelectInput<TextInputType>(
               id: 'keyboardType',
-              defaultValues: [TextInputType.none],
-              availibleValues: TextInputType.values.toList()
-                ..remove(TextInputType.text),
+              defaultValues: [TextInputType.text],
+              availibleValues: TextInputType.values,
               maxCount: 1,
               uiSettings: SelectFieldSettings(
-                labelText: 'Clavier (mobile) optimisé pour',
+                labelText: 'Clavier optimisé pour écrire',
+                helperText: 'Seulement sur mobile.',
                 displayMode: SelectFieldDisplayMode.chip,
                 valueBuilder: (value) => Text(
                   switch (value?.name) {
@@ -120,10 +119,26 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
                     'url' => 'Une url',
                     'visiblePassword' => 'Un mot de passe',
                     'name' => "Le nom d'une personne",
-                    'streetAddress' => 'Une adresse postale',
+                    'address' => 'Une adresse postale',
+                    'none' => 'Ne pas afficher le clavier',
                     _ => 'Du texte',
                   },
                 ),
+                helpValueBuilder: (value) => switch (value.name) {
+                  'datetime' => const Text(
+                      'Sur Android, donne accès aux touches ":" et "-".',
+                    ),
+                  'emailAddress' => const Text(
+                      'Donne accès aux touches "@" et ".".',
+                    ),
+                  'url' => const Text(
+                      'Donne accès aux touches "/" et ".".',
+                    ),
+                  'visiblePassword' => const Text(
+                      'Donne accès aux lettres et aux chiffres',
+                    ),
+                  _ => null,
+                },
               ),
               toJsonT: (value) => const TextInputTypeConverter().toJson(value),
             ),

@@ -91,8 +91,7 @@ class BooleanField extends StatelessWidget {
                   : (mergedSettings.helperText ?? '').isNotEmpty
                       ? Text(
                           mergedSettings.helperText ?? '',
-                          style: context.textTheme.labelMedium
-                              ?.copyWith(color: context.colorScheme.outline),
+                          style: context.woTheme.infoStyle,
                         )
                       : null,
               trailing: onOffIsLeading ? null : onOffButton,

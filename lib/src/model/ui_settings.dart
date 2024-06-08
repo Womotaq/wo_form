@@ -94,6 +94,8 @@ class SelectFieldSettings<T> with _$SelectFieldSettings<T> {
     SelectFieldDisplayMode? displayMode,
     @JsonKey(includeFromJson: false, includeToJson: false)
     Widget Function(T?)? valueBuilder,
+    @JsonKey(includeFromJson: false, includeToJson: false)
+    Widget? Function(T)? helpValueBuilder,
   }) = _SelectFieldSettings<T>;
 
   const SelectFieldSettings._();
@@ -108,6 +110,7 @@ class SelectFieldSettings<T> with _$SelectFieldSettings<T> {
           helperText: helperText ?? other.helperText,
           displayMode: displayMode ?? other.displayMode,
           valueBuilder: valueBuilder ?? other.valueBuilder,
+          helpValueBuilder: helpValueBuilder ?? other.helpValueBuilder,
         );
 }
 
