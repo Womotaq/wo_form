@@ -31,9 +31,9 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
     Map<String, dynamic>? unmodifiableValuesJson,
     @InputsListConverter() @Default([]) List<WoFormElementMixin> inputs,
     @Default(NodeExportType.map) NodeExportType exportType,
-    @JsonKey(toJson: InputsNodeWidgetSettings.staticToJson)
-    @Default(InputsNodeWidgetSettings())
-    InputsNodeWidgetSettings uiSettings,
+    @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
+    @Default(InputsNodeUiSettings())
+    InputsNodeUiSettings uiSettings,
   }) = InputsNode;
 
   @Assert('builder != null', 'ValueBuilderNode.builder cannot be null')

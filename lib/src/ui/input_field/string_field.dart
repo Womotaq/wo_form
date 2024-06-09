@@ -7,12 +7,12 @@ import 'package:wo_form/wo_form.dart';
 class StringField extends StatefulWidget {
   const StringField({
     required this.inputPath,
-    this.settings,
+    this.uiSettings,
     super.key,
   });
 
   final String inputPath;
-  final StringFieldSettings? settings;
+  final StringInputUiSettings? uiSettings;
 
   @override
   State createState() => _StringFieldState();
@@ -39,7 +39,7 @@ class _StringFieldState extends State<StringField> {
 
     final inputSettings = input.uiSettings;
     final mergedSettings =
-        widget.settings?.merge(inputSettings) ?? inputSettings;
+        widget.uiSettings?.merge(inputSettings) ?? inputSettings;
 
     obscureText = mergedSettings.obscureText ?? false;
 

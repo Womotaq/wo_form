@@ -46,9 +46,9 @@ sealed class WoFormInput
     @Default(false) bool isRequired,
     @JsonKey(includeToJson: false, includeFromJson: false)
     WoFormInputError? Function(bool? value)? getCustomError,
-    @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-    @Default(BooleanFieldSettings())
-    BooleanFieldSettings uiSettings,
+    @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+    @Default(BooleanInputUiSettings())
+    BooleanInputUiSettings uiSettings,
   }) = BooleanInput;
 
   @Assert(
@@ -63,7 +63,7 @@ sealed class WoFormInput
     @Default(0) int minBound,
     @JsonKey(includeToJson: false, includeFromJson: false)
     WoFormInputError? Function(num? value)? getCustomError,
-    @Default(NumFieldSettings()) NumFieldSettings uiSettings,
+    @Default(NumInputUiSettings()) NumInputUiSettings uiSettings,
   }) = NumInput;
 
   @Assert(
@@ -78,8 +78,8 @@ sealed class WoFormInput
     @Default(0) int minCount,
     @JsonKey(includeToJson: false, includeFromJson: false)
     WoFormInputError? Function(List<String> selectedValues)? getCustomError,
-    @Default(SelectFieldSettings<String>())
-    SelectFieldSettings<String> uiSettings,
+    @Default(SelectInputUiSettings<String>())
+    SelectInputUiSettings<String> uiSettings,
   }) = SelectStringInput;
 
   const factory WoFormInput.string({
@@ -89,9 +89,9 @@ sealed class WoFormInput
     String? regexPattern,
     @JsonKey(includeToJson: false, includeFromJson: false)
     WoFormInputError? Function(String? value)? getCustomError,
-    @JsonKey(toJson: StringFieldSettings.staticToJson)
-    @Default(StringFieldSettings())
-    StringFieldSettings uiSettings,
+    @JsonKey(toJson: StringInputUiSettings.staticToJson)
+    @Default(StringInputUiSettings())
+    StringInputUiSettings uiSettings,
   }) = StringInput;
 
   const WoFormInput._();
@@ -252,7 +252,7 @@ class SelectInput<T>
     @Default([]) List<T> availibleValues,
     @JsonKey(includeToJson: false, includeFromJson: false)
     WoFormInputError? Function(List<T> selectedValues)? getCustomError,
-    SelectFieldSettings<T>? uiSettings,
+    SelectInputUiSettings<T>? uiSettings,
     @JsonKey(includeToJson: false, includeFromJson: false)
     Object? Function(T)? toJsonT,
   }) = _SelectInput<T>;

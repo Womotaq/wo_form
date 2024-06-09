@@ -6,9 +6,9 @@ part of 'ui_settings.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$BooleanFieldSettingsImpl _$$BooleanFieldSettingsImplFromJson(
+_$BooleanInputUiSettingsImpl _$$BooleanInputUiSettingsImplFromJson(
         Map<String, dynamic> json) =>
-    _$BooleanFieldSettingsImpl(
+    _$BooleanInputUiSettingsImpl(
       labelText: json['labelText'] as String?,
       helperText: json['helperText'] as String?,
       onOffType: $enumDecodeNullable(
@@ -17,8 +17,8 @@ _$BooleanFieldSettingsImpl _$$BooleanFieldSettingsImplFromJson(
           _$ListTileControlAffinityEnumMap, json['onOffPosition']),
     );
 
-Map<String, dynamic> _$$BooleanFieldSettingsImplToJson(
-        _$BooleanFieldSettingsImpl instance) =>
+Map<String, dynamic> _$$BooleanInputUiSettingsImplToJson(
+        _$BooleanInputUiSettingsImpl instance) =>
     <String, dynamic>{
       'labelText': instance.labelText,
       'helperText': instance.helperText,
@@ -37,17 +37,17 @@ const _$ListTileControlAffinityEnumMap = {
   ListTileControlAffinity.platform: 'platform',
 };
 
-_$InputsNodeWidgetSettingsImpl _$$InputsNodeWidgetSettingsImplFromJson(
+_$InputsNodeUiSettingsImpl _$$InputsNodeUiSettingsImplFromJson(
         Map<String, dynamic> json) =>
-    _$InputsNodeWidgetSettingsImpl(
+    _$InputsNodeUiSettingsImpl(
       labelText: json['labelText'] as String?,
       helperText: json['helperText'] as String?,
       displayMode:
           $enumDecodeNullable(_$NodeDisplayModeEnumMap, json['displayMode']),
     );
 
-Map<String, dynamic> _$$InputsNodeWidgetSettingsImplToJson(
-        _$InputsNodeWidgetSettingsImpl instance) =>
+Map<String, dynamic> _$$InputsNodeUiSettingsImplToJson(
+        _$InputsNodeUiSettingsImpl instance) =>
     <String, dynamic>{
       'labelText': instance.labelText,
       'helperText': instance.helperText,
@@ -59,31 +59,31 @@ const _$NodeDisplayModeEnumMap = {
   NodeDisplayMode.tile: 'tile',
 };
 
-_$NumFieldSettingsImpl _$$NumFieldSettingsImplFromJson(
+_$NumInputUiSettingsImpl _$$NumInputUiSettingsImplFromJson(
         Map<String, dynamic> json) =>
-    _$NumFieldSettingsImpl(
+    _$NumInputUiSettingsImpl(
       labelText: json['labelText'] as String?,
       helperText: json['helperText'] as String?,
     );
 
-Map<String, dynamic> _$$NumFieldSettingsImplToJson(
-        _$NumFieldSettingsImpl instance) =>
+Map<String, dynamic> _$$NumInputUiSettingsImplToJson(
+        _$NumInputUiSettingsImpl instance) =>
     <String, dynamic>{
       'labelText': instance.labelText,
       'helperText': instance.helperText,
     };
 
-_$SelectFieldSettingsImpl<T> _$$SelectFieldSettingsImplFromJson<T>(
+_$SelectInputUiSettingsImpl<T> _$$SelectInputUiSettingsImplFromJson<T>(
         Map<String, dynamic> json) =>
-    _$SelectFieldSettingsImpl<T>(
+    _$SelectInputUiSettingsImpl<T>(
       labelText: json['labelText'] as String?,
       helperText: json['helperText'] as String?,
       displayMode: $enumDecodeNullable(
           _$SelectFieldDisplayModeEnumMap, json['displayMode']),
     );
 
-Map<String, dynamic> _$$SelectFieldSettingsImplToJson<T>(
-        _$SelectFieldSettingsImpl<T> instance) =>
+Map<String, dynamic> _$$SelectInputUiSettingsImplToJson<T>(
+        _$SelectInputUiSettingsImpl<T> instance) =>
     <String, dynamic>{
       'labelText': instance.labelText,
       'helperText': instance.helperText,
@@ -95,9 +95,9 @@ const _$SelectFieldDisplayModeEnumMap = {
   SelectFieldDisplayMode.chip: 'chip',
 };
 
-_$StringFieldSettingsImpl _$$StringFieldSettingsImplFromJson(
+_$StringInputUiSettingsImpl _$$StringInputUiSettingsImplFromJson(
         Map<String, dynamic> json) =>
-    _$StringFieldSettingsImpl(
+    _$StringInputUiSettingsImpl(
       labelText: json['labelText'] as String?,
       hintText: json['hintText'] as String?,
       helperText: json['helperText'] as String?,
@@ -119,8 +119,8 @@ _$StringFieldSettingsImpl _$$StringFieldSettingsImplFromJson(
       invalidRegexMessage: json['invalidRegexMessage'] as String?,
     );
 
-Map<String, dynamic> _$$StringFieldSettingsImplToJson(
-        _$StringFieldSettingsImpl instance) =>
+Map<String, dynamic> _$$StringInputUiSettingsImplToJson(
+        _$StringInputUiSettingsImpl instance) =>
     <String, dynamic>{
       'labelText': instance.labelText,
       'hintText': instance.hintText,

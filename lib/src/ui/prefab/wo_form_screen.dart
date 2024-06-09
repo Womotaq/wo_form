@@ -9,19 +9,19 @@ class WoFormScreen extends StatelessWidget {
     required this.form,
     this.onSubmitting,
     this.onSubmitted,
-    this.settings,
+    this.uiSettings,
     super.key,
   });
 
   final WoForm form;
   final void Function(Map<String, dynamic> values)? onSubmitting;
   final void Function(BuildContext context)? onSubmitted;
-  final WoFormUiSettings? settings;
+  final WoFormUiSettings? uiSettings;
 
   @override
   Widget build(BuildContext context) {
     final inputSettings = form.uiSettings;
-    final mergedSettings = settings?.merge(inputSettings) ?? inputSettings;
+    final mergedSettings = uiSettings?.merge(inputSettings) ?? inputSettings;
 
     final submitButton = BlocBuilder<WoFormStatusCubit, WoFormStatus>(
       builder: (context, status) {

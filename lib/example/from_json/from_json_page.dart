@@ -21,7 +21,7 @@ class FromJsonPage extends StatelessWidget {
         StringInput(
           id: 'json',
           isRequired: true,
-          uiSettings: StringFieldSettings(
+          uiSettings: StringInputUiSettings(
             maxLines: 20,
             hintText: 'Copiez ici le formulaire en format json.',
           ),

@@ -15,21 +15,21 @@ class ProfileCreationPage extends StatelessWidget {
       inputs: [
         const InputsNode(
           id: 'namePage',
-          uiSettings: InputsNodeWidgetSettings(
+          uiSettings: InputsNodeUiSettings(
             labelText: "Comment t'appelles-tu ?",
           ),
           inputs: [
             StringInput(
               id: 'firstName',
               isRequired: true,
-              uiSettings: StringFieldSettings(
+              uiSettings: StringInputUiSettings(
                 labelText: 'Prénom',
                 autofillHints: [AutofillHints.givenName],
               ),
             ),
             StringInput(
               id: 'lastName',
-              uiSettings: StringFieldSettings(
+              uiSettings: StringInputUiSettings(
                 labelText: 'Nom',
                 // submitFormOnFieldSubmitted: true,
                 // TODO : next page on submitted
@@ -40,20 +40,20 @@ class ProfileCreationPage extends StatelessWidget {
         ),
         const InputsNode(
           id: 'addressPage',
-          uiSettings: InputsNodeWidgetSettings(
+          uiSettings: InputsNodeUiSettings(
             labelText: 'Où habites-tu ?',
           ),
           inputs: [
             StringInput(
               id: 'street',
-              uiSettings: StringFieldSettings(
+              uiSettings: StringInputUiSettings(
                 labelText: 'Rue',
                 autofillHints: [AutofillHints.streetAddressLevel1],
               ),
             ),
             StringInput(
               id: 'postalCode',
-              uiSettings: StringFieldSettings(
+              uiSettings: StringInputUiSettings(
                 labelText: 'Code postal',
                 hintText: 'XX XXX',
                 autofillHints: [AutofillHints.postalCode],
@@ -61,14 +61,14 @@ class ProfileCreationPage extends StatelessWidget {
             ),
             StringInput(
               id: 'postalCode',
-              uiSettings: StringFieldSettings(
+              uiSettings: StringInputUiSettings(
                 labelText: 'Ville',
                 autofillHints: [AutofillHints.addressCity],
               ),
             ),
             StringInput(
               id: 'country',
-              uiSettings: StringFieldSettings(
+              uiSettings: StringInputUiSettings(
                 labelText: 'Pays',
                 autofillHints: [AutofillHints.countryName],
               ),
@@ -77,7 +77,7 @@ class ProfileCreationPage extends StatelessWidget {
         ),
         InputsNode(
           id: 'contactPage',
-          uiSettings: const InputsNodeWidgetSettings(
+          uiSettings: const InputsNodeUiSettings(
             labelText: 'Comment te contacter ?',
           ),
           inputs: [
@@ -85,13 +85,13 @@ class ProfileCreationPage extends StatelessWidget {
               id: 'mail',
               isRequired: true,
               regexPattern: RegexPattern.email.value,
-              uiSettings: StringFieldSettings.email(
+              uiSettings: StringInputUiSettings.email(
                 labelText: 'Email',
               ),
             ),
             const StringInput(
               id: 'phone',
-              uiSettings: StringFieldSettings(
+              uiSettings: StringInputUiSettings(
                 labelText: 'Numéro de téléphone',
                 autofillHints: [AutofillHints.familyName],
               ),

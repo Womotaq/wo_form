@@ -43,7 +43,7 @@ class ReportPage extends StatelessWidget {
           availibleValues: ReportType.values,
           minCount: 1,
           maxCount: 1,
-          uiSettings: SelectFieldSettings(
+          uiSettings: SelectInputUiSettings(
             labelText: 'De quoi accusez-vous cette raclure ?',
             displayMode: SelectFieldDisplayMode.tile,
             valueBuilder: (type) => Text(
@@ -59,7 +59,7 @@ class ReportPage extends StatelessWidget {
         ),
         const StringInput(
           id: ReportForm.messageId,
-          uiSettings: StringFieldSettings(
+          uiSettings: StringInputUiSettings(
             hintText: 'Dites-en plus !',
             textCapitalization: TextCapitalization.sentences,
             maxLines: 5,
@@ -67,7 +67,7 @@ class ReportPage extends StatelessWidget {
         ),
         const BooleanInput(
           id: ReportForm.blockId,
-          uiSettings: BooleanFieldSettings(
+          uiSettings: BooleanInputUiSettings(
             labelText: 'Bloquer cette raclure ?',
             onOffType: BooleanFieldOnOffType.checkbox,
           ),

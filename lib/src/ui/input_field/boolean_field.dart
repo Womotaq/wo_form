@@ -7,12 +7,12 @@ import 'package:wo_form/wo_form.dart';
 class BooleanField extends StatelessWidget {
   const BooleanField({
     required this.inputPath,
-    this.settings,
+    this.uiSettings,
     super.key,
   });
 
   final String inputPath;
-  final BooleanFieldSettings? settings;
+  final BooleanInputUiSettings? uiSettings;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class BooleanField extends StatelessWidget {
     }
 
     final inputSettings = input.uiSettings;
-    final mergedSettings = settings?.merge(inputSettings) ?? inputSettings;
+    final mergedSettings = uiSettings?.merge(inputSettings) ?? inputSettings;
 
     return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
       builder: (context, status) {

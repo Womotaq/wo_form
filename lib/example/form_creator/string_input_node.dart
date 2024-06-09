@@ -7,26 +7,26 @@ import 'package:wo_form/wo_form.dart';
 
 InputsNode createStringInputNode({required String id}) => InputsNode(
       id: id,
-      uiSettings: const InputsNodeWidgetSettings(
+      uiSettings: const InputsNodeUiSettings(
         labelText: 'Saisie de texte',
       ),
       inputs: [
         const StringInput(
           id: 'id',
           isRequired: true,
-          uiSettings: StringFieldSettings(
+          uiSettings: StringInputUiSettings(
             labelText: 'Clef json',
           ),
         ),
         const StringInput(
           id: 'defaultValue',
-          uiSettings: StringFieldSettings(
+          uiSettings: StringInputUiSettings(
             labelText: 'Valeur par défaut',
           ),
         ),
         const BooleanInput(
           id: 'isRequired',
-          uiSettings: BooleanFieldSettings(
+          uiSettings: BooleanInputUiSettings(
             labelText: 'Doit être renseigné',
             helperText: 'Un texte vide ne sera pas accepté.',
           ),
@@ -35,7 +35,7 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
           id: 'regexPattern',
           availibleValues: [null, ...RegexPattern.values],
           maxCount: 1,
-          uiSettings: SelectFieldSettings(
+          uiSettings: SelectInputUiSettings(
             labelText: 'Doit correspondre à',
             displayMode: SelectFieldDisplayMode.chip,
             valueBuilder: (regex) => Text(
@@ -68,27 +68,27 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
         ),
         InputsNode(
           id: 'uiSettings',
-          uiSettings: const InputsNodeWidgetSettings(
+          uiSettings: const InputsNodeUiSettings(
             labelText: 'Interface',
             displayMode: NodeDisplayMode.tile,
           ),
           inputs: [
             const StringInput(
               id: 'labelText',
-              uiSettings: StringFieldSettings(
+              uiSettings: StringInputUiSettings(
                 labelText: 'Titre (ceci est un titre)',
               ),
             ),
             const StringInput(
               id: 'helperText',
-              uiSettings: StringFieldSettings(
+              uiSettings: StringInputUiSettings(
                 labelText: 'Sous-titre',
                 helperText: '(ceci est un sous-titre)',
               ),
             ),
             const StringInput(
               id: 'hintText',
-              uiSettings: StringFieldSettings(
+              uiSettings: StringInputUiSettings(
                 labelText: 'Aide',
                 hintText: '(ceci est une aide)',
               ),
@@ -97,7 +97,7 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
               id: 'action',
               availibleValues: [null, ...StringFieldAction.values],
               maxCount: 1,
-              uiSettings: SelectFieldSettings(
+              uiSettings: SelectInputUiSettings(
                 labelText: 'Action spéciale (à droite)',
                 displayMode: SelectFieldDisplayMode.chip,
                 valueBuilder: (value) => Text(
@@ -111,7 +111,7 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
             ),
             const BooleanInput(
               id: 'submitFormOnFieldSubmitted',
-              uiSettings: BooleanFieldSettings(
+              uiSettings: BooleanInputUiSettings(
                 labelText: 'Envoyer le formulaire quand le champ est validé',
                 helperText: "Par exemple, lorsque l'utilisateur presse "
                     '"Entrée".',
@@ -122,7 +122,7 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
               defaultValues: [TextInputType.text],
               availibleValues: TextInputType.values,
               maxCount: 1,
-              uiSettings: SelectFieldSettings(
+              uiSettings: SelectInputUiSettings(
                 labelText: 'Clavier optimisé pour écrire',
                 helperText: 'Seulement sur mobile.',
                 displayMode: SelectFieldDisplayMode.chip,
@@ -161,14 +161,14 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
             ),
             const BooleanInput(
               id: 'obscureText',
-              uiSettings: BooleanFieldSettings(
+              uiSettings: BooleanInputUiSettings(
                 labelText: 'Cacher le text ••••',
               ),
             ),
             const BooleanInput(
               id: 'autocorrect',
               defaultValue: true,
-              uiSettings: BooleanFieldSettings(
+              uiSettings: BooleanInputUiSettings(
                 labelText: 'Correction automatique',
               ),
             ),
@@ -176,13 +176,13 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
               id: 'autofillHints',
               availibleValues: AutofillHintsX.all,
               maxCount: null,
-              uiSettings: SelectFieldSettings(
+              uiSettings: SelectInputUiSettings(
                 labelText: 'Saisie automatique',
               ),
             ),
             const BooleanInput(
               id: 'autofocus',
-              uiSettings: BooleanFieldSettings(
+              uiSettings: BooleanInputUiSettings(
                 labelText: 'Auto-focus',
               ),
             ),
@@ -190,7 +190,7 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
               id: 'textInputAction',
               availibleValues: [null, ...TextInputAction.values],
               maxCount: 1,
-              uiSettings: SelectFieldSettings(
+              uiSettings: SelectInputUiSettings(
                 labelText: "Bouton 'Entrée' (sur mobile)",
                 displayMode: SelectFieldDisplayMode.chip,
                 valueBuilder: (value) => Text(value?.name ?? 'Défaut'),
@@ -201,7 +201,7 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
               defaultValues: [TextCapitalization.sentences],
               availibleValues: TextCapitalization.values,
               maxCount: 1,
-              uiSettings: SelectFieldSettings(
+              uiSettings: SelectInputUiSettings(
                 labelText: 'Mettre le clavier en majuscule',
                 displayMode: SelectFieldDisplayMode.chip,
                 valueBuilder: (value) => Text(
@@ -217,7 +217,7 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
             const NumInput(
               id: 'maxLines',
               defaultValue: 1,
-              uiSettings: NumFieldSettings(
+              uiSettings: NumInputUiSettings(
                 labelText: 'Nombre de lignes',
                 helperText: "Pour que le champ s'adapte à la hauteur du texte, "
                     'laissez vide.',
@@ -225,7 +225,7 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
             ),
             const StringInput(
               id: 'invalidRegexMessage',
-              uiSettings: StringFieldSettings(
+              uiSettings: StringInputUiSettings(
                 labelText: 'Message en cas de regex invalide',
               ),
             ),

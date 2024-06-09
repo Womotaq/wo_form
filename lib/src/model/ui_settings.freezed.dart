@@ -14,12 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-BooleanFieldSettings _$BooleanFieldSettingsFromJson(Map<String, dynamic> json) {
-  return _BooleanFieldSettings.fromJson(json);
+BooleanInputUiSettings _$BooleanInputUiSettingsFromJson(
+    Map<String, dynamic> json) {
+  return _BooleanInputUiSettings.fromJson(json);
 }
 
 /// @nodoc
-mixin _$BooleanFieldSettings {
+mixin _$BooleanInputUiSettings {
   String? get labelText => throw _privateConstructorUsedError;
   String? get helperText => throw _privateConstructorUsedError;
   BooleanFieldOnOffType? get onOffType => throw _privateConstructorUsedError;
@@ -28,15 +29,15 @@ mixin _$BooleanFieldSettings {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $BooleanFieldSettingsCopyWith<BooleanFieldSettings> get copyWith =>
+  $BooleanInputUiSettingsCopyWith<BooleanInputUiSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $BooleanFieldSettingsCopyWith<$Res> {
-  factory $BooleanFieldSettingsCopyWith(BooleanFieldSettings value,
-          $Res Function(BooleanFieldSettings) then) =
-      _$BooleanFieldSettingsCopyWithImpl<$Res, BooleanFieldSettings>;
+abstract class $BooleanInputUiSettingsCopyWith<$Res> {
+  factory $BooleanInputUiSettingsCopyWith(BooleanInputUiSettings value,
+          $Res Function(BooleanInputUiSettings) then) =
+      _$BooleanInputUiSettingsCopyWithImpl<$Res, BooleanInputUiSettings>;
   @useResult
   $Res call(
       {String? labelText,
@@ -46,10 +47,10 @@ abstract class $BooleanFieldSettingsCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$BooleanFieldSettingsCopyWithImpl<$Res,
-        $Val extends BooleanFieldSettings>
-    implements $BooleanFieldSettingsCopyWith<$Res> {
-  _$BooleanFieldSettingsCopyWithImpl(this._value, this._then);
+class _$BooleanInputUiSettingsCopyWithImpl<$Res,
+        $Val extends BooleanInputUiSettings>
+    implements $BooleanInputUiSettingsCopyWith<$Res> {
+  _$BooleanInputUiSettingsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -86,11 +87,12 @@ class _$BooleanFieldSettingsCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$BooleanFieldSettingsImplCopyWith<$Res>
-    implements $BooleanFieldSettingsCopyWith<$Res> {
-  factory _$$BooleanFieldSettingsImplCopyWith(_$BooleanFieldSettingsImpl value,
-          $Res Function(_$BooleanFieldSettingsImpl) then) =
-      __$$BooleanFieldSettingsImplCopyWithImpl<$Res>;
+abstract class _$$BooleanInputUiSettingsImplCopyWith<$Res>
+    implements $BooleanInputUiSettingsCopyWith<$Res> {
+  factory _$$BooleanInputUiSettingsImplCopyWith(
+          _$BooleanInputUiSettingsImpl value,
+          $Res Function(_$BooleanInputUiSettingsImpl) then) =
+      __$$BooleanInputUiSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -101,11 +103,13 @@ abstract class _$$BooleanFieldSettingsImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$BooleanFieldSettingsImplCopyWithImpl<$Res>
-    extends _$BooleanFieldSettingsCopyWithImpl<$Res, _$BooleanFieldSettingsImpl>
-    implements _$$BooleanFieldSettingsImplCopyWith<$Res> {
-  __$$BooleanFieldSettingsImplCopyWithImpl(_$BooleanFieldSettingsImpl _value,
-      $Res Function(_$BooleanFieldSettingsImpl) _then)
+class __$$BooleanInputUiSettingsImplCopyWithImpl<$Res>
+    extends _$BooleanInputUiSettingsCopyWithImpl<$Res,
+        _$BooleanInputUiSettingsImpl>
+    implements _$$BooleanInputUiSettingsImplCopyWith<$Res> {
+  __$$BooleanInputUiSettingsImplCopyWithImpl(
+      _$BooleanInputUiSettingsImpl _value,
+      $Res Function(_$BooleanInputUiSettingsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -116,7 +120,7 @@ class __$$BooleanFieldSettingsImplCopyWithImpl<$Res>
     Object? onOffType = freezed,
     Object? onOffPosition = freezed,
   }) {
-    return _then(_$BooleanFieldSettingsImpl(
+    return _then(_$BooleanInputUiSettingsImpl(
       labelText: freezed == labelText
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
@@ -139,13 +143,13 @@ class __$$BooleanFieldSettingsImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$BooleanFieldSettingsImpl extends _BooleanFieldSettings {
-  const _$BooleanFieldSettingsImpl(
+class _$BooleanInputUiSettingsImpl extends _BooleanInputUiSettings {
+  const _$BooleanInputUiSettingsImpl(
       {this.labelText, this.helperText, this.onOffType, this.onOffPosition})
       : super._();
 
-  factory _$BooleanFieldSettingsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$BooleanFieldSettingsImplFromJson(json);
+  factory _$BooleanInputUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BooleanInputUiSettingsImplFromJson(json);
 
   @override
   final String? labelText;
@@ -158,14 +162,14 @@ class _$BooleanFieldSettingsImpl extends _BooleanFieldSettings {
 
   @override
   String toString() {
-    return 'BooleanFieldSettings(labelText: $labelText, helperText: $helperText, onOffType: $onOffType, onOffPosition: $onOffPosition)';
+    return 'BooleanInputUiSettings(labelText: $labelText, helperText: $helperText, onOffType: $onOffType, onOffPosition: $onOffPosition)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BooleanFieldSettingsImpl &&
+            other is _$BooleanInputUiSettingsImpl &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
             (identical(other.helperText, helperText) ||
@@ -184,30 +188,31 @@ class _$BooleanFieldSettingsImpl extends _BooleanFieldSettings {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$BooleanFieldSettingsImplCopyWith<_$BooleanFieldSettingsImpl>
+  _$$BooleanInputUiSettingsImplCopyWith<_$BooleanInputUiSettingsImpl>
       get copyWith =>
-          __$$BooleanFieldSettingsImplCopyWithImpl<_$BooleanFieldSettingsImpl>(
+          __$$BooleanInputUiSettingsImplCopyWithImpl<
+          _$BooleanInputUiSettingsImpl>(
               this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$BooleanFieldSettingsImplToJson(
+    return _$$BooleanInputUiSettingsImplToJson(
       this,
     );
   }
 }
 
-abstract class _BooleanFieldSettings extends BooleanFieldSettings {
-  const factory _BooleanFieldSettings(
+abstract class _BooleanInputUiSettings extends BooleanInputUiSettings {
+  const factory _BooleanInputUiSettings(
           {final String? labelText,
           final String? helperText,
           final BooleanFieldOnOffType? onOffType,
           final ListTileControlAffinity? onOffPosition}) =
-      _$BooleanFieldSettingsImpl;
-  const _BooleanFieldSettings._() : super._();
+      _$BooleanInputUiSettingsImpl;
+  const _BooleanInputUiSettings._() : super._();
 
-  factory _BooleanFieldSettings.fromJson(Map<String, dynamic> json) =
-      _$BooleanFieldSettingsImpl.fromJson;
+  factory _BooleanInputUiSettings.fromJson(Map<String, dynamic> json) =
+      _$BooleanInputUiSettingsImpl.fromJson;
 
   @override
   String? get labelText;
@@ -219,42 +224,42 @@ abstract class _BooleanFieldSettings extends BooleanFieldSettings {
   ListTileControlAffinity? get onOffPosition;
   @override
   @JsonKey(ignore: true)
-  _$$BooleanFieldSettingsImplCopyWith<_$BooleanFieldSettingsImpl>
+  _$$BooleanInputUiSettingsImplCopyWith<_$BooleanInputUiSettingsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
-InputsNodeWidgetSettings _$InputsNodeWidgetSettingsFromJson(
+InputsNodeUiSettings _$InputsNodeUiSettingsFromJson(
     Map<String, dynamic> json) {
-  return _InputsNodeWidgetSettings.fromJson(json);
+  return _InputsNodeUiSettings.fromJson(json);
 }
 
 /// @nodoc
-mixin _$InputsNodeWidgetSettings {
+mixin _$InputsNodeUiSettings {
   String? get labelText => throw _privateConstructorUsedError;
   String? get helperText => throw _privateConstructorUsedError;
   NodeDisplayMode? get displayMode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $InputsNodeWidgetSettingsCopyWith<InputsNodeWidgetSettings> get copyWith =>
+  $InputsNodeUiSettingsCopyWith<InputsNodeUiSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $InputsNodeWidgetSettingsCopyWith<$Res> {
-  factory $InputsNodeWidgetSettingsCopyWith(InputsNodeWidgetSettings value,
-          $Res Function(InputsNodeWidgetSettings) then) =
-      _$InputsNodeWidgetSettingsCopyWithImpl<$Res, InputsNodeWidgetSettings>;
+abstract class $InputsNodeUiSettingsCopyWith<$Res> {
+  factory $InputsNodeUiSettingsCopyWith(InputsNodeUiSettings value,
+          $Res Function(InputsNodeUiSettings) then) =
+      _$InputsNodeUiSettingsCopyWithImpl<$Res, InputsNodeUiSettings>;
   @useResult
   $Res call(
       {String? labelText, String? helperText, NodeDisplayMode? displayMode});
 }
 
 /// @nodoc
-class _$InputsNodeWidgetSettingsCopyWithImpl<$Res,
-        $Val extends InputsNodeWidgetSettings>
-    implements $InputsNodeWidgetSettingsCopyWith<$Res> {
-  _$InputsNodeWidgetSettingsCopyWithImpl(this._value, this._then);
+class _$InputsNodeUiSettingsCopyWithImpl<$Res,
+        $Val extends InputsNodeUiSettings>
+    implements $InputsNodeUiSettingsCopyWith<$Res> {
+  _$InputsNodeUiSettingsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -286,12 +291,11 @@ class _$InputsNodeWidgetSettingsCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$InputsNodeWidgetSettingsImplCopyWith<$Res>
-    implements $InputsNodeWidgetSettingsCopyWith<$Res> {
-  factory _$$InputsNodeWidgetSettingsImplCopyWith(
-          _$InputsNodeWidgetSettingsImpl value,
-          $Res Function(_$InputsNodeWidgetSettingsImpl) then) =
-      __$$InputsNodeWidgetSettingsImplCopyWithImpl<$Res>;
+abstract class _$$InputsNodeUiSettingsImplCopyWith<$Res>
+    implements $InputsNodeUiSettingsCopyWith<$Res> {
+  factory _$$InputsNodeUiSettingsImplCopyWith(_$InputsNodeUiSettingsImpl value,
+          $Res Function(_$InputsNodeUiSettingsImpl) then) =
+      __$$InputsNodeUiSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -299,13 +303,11 @@ abstract class _$$InputsNodeWidgetSettingsImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$InputsNodeWidgetSettingsImplCopyWithImpl<$Res>
-    extends _$InputsNodeWidgetSettingsCopyWithImpl<$Res,
-        _$InputsNodeWidgetSettingsImpl>
-    implements _$$InputsNodeWidgetSettingsImplCopyWith<$Res> {
-  __$$InputsNodeWidgetSettingsImplCopyWithImpl(
-      _$InputsNodeWidgetSettingsImpl _value,
-      $Res Function(_$InputsNodeWidgetSettingsImpl) _then)
+class __$$InputsNodeUiSettingsImplCopyWithImpl<$Res>
+    extends _$InputsNodeUiSettingsCopyWithImpl<$Res, _$InputsNodeUiSettingsImpl>
+    implements _$$InputsNodeUiSettingsImplCopyWith<$Res> {
+  __$$InputsNodeUiSettingsImplCopyWithImpl(_$InputsNodeUiSettingsImpl _value,
+      $Res Function(_$InputsNodeUiSettingsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -315,7 +317,7 @@ class __$$InputsNodeWidgetSettingsImplCopyWithImpl<$Res>
     Object? helperText = freezed,
     Object? displayMode = freezed,
   }) {
-    return _then(_$InputsNodeWidgetSettingsImpl(
+    return _then(_$InputsNodeUiSettingsImpl(
       labelText: freezed == labelText
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
@@ -334,13 +336,13 @@ class __$$InputsNodeWidgetSettingsImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$InputsNodeWidgetSettingsImpl extends _InputsNodeWidgetSettings {
-  const _$InputsNodeWidgetSettingsImpl(
+class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
+  const _$InputsNodeUiSettingsImpl(
       {this.labelText, this.helperText, this.displayMode})
       : super._();
 
-  factory _$InputsNodeWidgetSettingsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$InputsNodeWidgetSettingsImplFromJson(json);
+  factory _$InputsNodeUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$InputsNodeUiSettingsImplFromJson(json);
 
   @override
   final String? labelText;
@@ -351,14 +353,14 @@ class _$InputsNodeWidgetSettingsImpl extends _InputsNodeWidgetSettings {
 
   @override
   String toString() {
-    return 'InputsNodeWidgetSettings(labelText: $labelText, helperText: $helperText, displayMode: $displayMode)';
+    return 'InputsNodeUiSettings(labelText: $labelText, helperText: $helperText, displayMode: $displayMode)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$InputsNodeWidgetSettingsImpl &&
+            other is _$InputsNodeUiSettingsImpl &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
             (identical(other.helperText, helperText) ||
@@ -375,27 +377,28 @@ class _$InputsNodeWidgetSettingsImpl extends _InputsNodeWidgetSettings {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$InputsNodeWidgetSettingsImplCopyWith<_$InputsNodeWidgetSettingsImpl>
-      get copyWith => __$$InputsNodeWidgetSettingsImplCopyWithImpl<
-          _$InputsNodeWidgetSettingsImpl>(this, _$identity);
+  _$$InputsNodeUiSettingsImplCopyWith<_$InputsNodeUiSettingsImpl>
+      get copyWith =>
+          __$$InputsNodeUiSettingsImplCopyWithImpl<_$InputsNodeUiSettingsImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$InputsNodeWidgetSettingsImplToJson(
+    return _$$InputsNodeUiSettingsImplToJson(
       this,
     );
   }
 }
 
-abstract class _InputsNodeWidgetSettings extends InputsNodeWidgetSettings {
-  const factory _InputsNodeWidgetSettings(
+abstract class _InputsNodeUiSettings extends InputsNodeUiSettings {
+  const factory _InputsNodeUiSettings(
       {final String? labelText,
       final String? helperText,
-      final NodeDisplayMode? displayMode}) = _$InputsNodeWidgetSettingsImpl;
-  const _InputsNodeWidgetSettings._() : super._();
+      final NodeDisplayMode? displayMode}) = _$InputsNodeUiSettingsImpl;
+  const _InputsNodeUiSettings._() : super._();
 
-  factory _InputsNodeWidgetSettings.fromJson(Map<String, dynamic> json) =
-      _$InputsNodeWidgetSettingsImpl.fromJson;
+  factory _InputsNodeUiSettings.fromJson(Map<String, dynamic> json) =
+      _$InputsNodeUiSettingsImpl.fromJson;
 
   @override
   String? get labelText;
@@ -405,38 +408,38 @@ abstract class _InputsNodeWidgetSettings extends InputsNodeWidgetSettings {
   NodeDisplayMode? get displayMode;
   @override
   @JsonKey(ignore: true)
-  _$$InputsNodeWidgetSettingsImplCopyWith<_$InputsNodeWidgetSettingsImpl>
+  _$$InputsNodeUiSettingsImplCopyWith<_$InputsNodeUiSettingsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
-NumFieldSettings _$NumFieldSettingsFromJson(Map<String, dynamic> json) {
-  return _NumFieldSettings.fromJson(json);
+NumInputUiSettings _$NumInputUiSettingsFromJson(Map<String, dynamic> json) {
+  return _NumInputUiSettings.fromJson(json);
 }
 
 /// @nodoc
-mixin _$NumFieldSettings {
+mixin _$NumInputUiSettings {
   String? get labelText => throw _privateConstructorUsedError;
   String? get helperText => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $NumFieldSettingsCopyWith<NumFieldSettings> get copyWith =>
+  $NumInputUiSettingsCopyWith<NumInputUiSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $NumFieldSettingsCopyWith<$Res> {
-  factory $NumFieldSettingsCopyWith(
-          NumFieldSettings value, $Res Function(NumFieldSettings) then) =
-      _$NumFieldSettingsCopyWithImpl<$Res, NumFieldSettings>;
+abstract class $NumInputUiSettingsCopyWith<$Res> {
+  factory $NumInputUiSettingsCopyWith(
+          NumInputUiSettings value, $Res Function(NumInputUiSettings) then) =
+      _$NumInputUiSettingsCopyWithImpl<$Res, NumInputUiSettings>;
   @useResult
   $Res call({String? labelText, String? helperText});
 }
 
 /// @nodoc
-class _$NumFieldSettingsCopyWithImpl<$Res, $Val extends NumFieldSettings>
-    implements $NumFieldSettingsCopyWith<$Res> {
-  _$NumFieldSettingsCopyWithImpl(this._value, this._then);
+class _$NumInputUiSettingsCopyWithImpl<$Res, $Val extends NumInputUiSettings>
+    implements $NumInputUiSettingsCopyWith<$Res> {
+  _$NumInputUiSettingsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -463,22 +466,22 @@ class _$NumFieldSettingsCopyWithImpl<$Res, $Val extends NumFieldSettings>
 }
 
 /// @nodoc
-abstract class _$$NumFieldSettingsImplCopyWith<$Res>
-    implements $NumFieldSettingsCopyWith<$Res> {
-  factory _$$NumFieldSettingsImplCopyWith(_$NumFieldSettingsImpl value,
-          $Res Function(_$NumFieldSettingsImpl) then) =
-      __$$NumFieldSettingsImplCopyWithImpl<$Res>;
+abstract class _$$NumInputUiSettingsImplCopyWith<$Res>
+    implements $NumInputUiSettingsCopyWith<$Res> {
+  factory _$$NumInputUiSettingsImplCopyWith(_$NumInputUiSettingsImpl value,
+          $Res Function(_$NumInputUiSettingsImpl) then) =
+      __$$NumInputUiSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? labelText, String? helperText});
 }
 
 /// @nodoc
-class __$$NumFieldSettingsImplCopyWithImpl<$Res>
-    extends _$NumFieldSettingsCopyWithImpl<$Res, _$NumFieldSettingsImpl>
-    implements _$$NumFieldSettingsImplCopyWith<$Res> {
-  __$$NumFieldSettingsImplCopyWithImpl(_$NumFieldSettingsImpl _value,
-      $Res Function(_$NumFieldSettingsImpl) _then)
+class __$$NumInputUiSettingsImplCopyWithImpl<$Res>
+    extends _$NumInputUiSettingsCopyWithImpl<$Res, _$NumInputUiSettingsImpl>
+    implements _$$NumInputUiSettingsImplCopyWith<$Res> {
+  __$$NumInputUiSettingsImplCopyWithImpl(_$NumInputUiSettingsImpl _value,
+      $Res Function(_$NumInputUiSettingsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -487,7 +490,7 @@ class __$$NumFieldSettingsImplCopyWithImpl<$Res>
     Object? labelText = freezed,
     Object? helperText = freezed,
   }) {
-    return _then(_$NumFieldSettingsImpl(
+    return _then(_$NumInputUiSettingsImpl(
       labelText: freezed == labelText
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
@@ -502,11 +505,11 @@ class __$$NumFieldSettingsImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$NumFieldSettingsImpl extends _NumFieldSettings {
-  const _$NumFieldSettingsImpl({this.labelText, this.helperText}) : super._();
+class _$NumInputUiSettingsImpl extends _NumInputUiSettings {
+  const _$NumInputUiSettingsImpl({this.labelText, this.helperText}) : super._();
 
-  factory _$NumFieldSettingsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$NumFieldSettingsImplFromJson(json);
+  factory _$NumInputUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NumInputUiSettingsImplFromJson(json);
 
   @override
   final String? labelText;
@@ -515,14 +518,14 @@ class _$NumFieldSettingsImpl extends _NumFieldSettings {
 
   @override
   String toString() {
-    return 'NumFieldSettings(labelText: $labelText, helperText: $helperText)';
+    return 'NumInputUiSettings(labelText: $labelText, helperText: $helperText)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NumFieldSettingsImpl &&
+            other is _$NumInputUiSettingsImpl &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
             (identical(other.helperText, helperText) ||
@@ -536,26 +539,26 @@ class _$NumFieldSettingsImpl extends _NumFieldSettings {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$NumFieldSettingsImplCopyWith<_$NumFieldSettingsImpl> get copyWith =>
-      __$$NumFieldSettingsImplCopyWithImpl<_$NumFieldSettingsImpl>(
+  _$$NumInputUiSettingsImplCopyWith<_$NumInputUiSettingsImpl> get copyWith =>
+      __$$NumInputUiSettingsImplCopyWithImpl<_$NumInputUiSettingsImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$NumFieldSettingsImplToJson(
+    return _$$NumInputUiSettingsImplToJson(
       this,
     );
   }
 }
 
-abstract class _NumFieldSettings extends NumFieldSettings {
-  const factory _NumFieldSettings(
+abstract class _NumInputUiSettings extends NumInputUiSettings {
+  const factory _NumInputUiSettings(
       {final String? labelText,
-      final String? helperText}) = _$NumFieldSettingsImpl;
-  const _NumFieldSettings._() : super._();
+      final String? helperText}) = _$NumInputUiSettingsImpl;
+  const _NumInputUiSettings._() : super._();
 
-  factory _NumFieldSettings.fromJson(Map<String, dynamic> json) =
-      _$NumFieldSettingsImpl.fromJson;
+  factory _NumInputUiSettings.fromJson(Map<String, dynamic> json) =
+      _$NumInputUiSettingsImpl.fromJson;
 
   @override
   String? get labelText;
@@ -563,17 +566,17 @@ abstract class _NumFieldSettings extends NumFieldSettings {
   String? get helperText;
   @override
   @JsonKey(ignore: true)
-  _$$NumFieldSettingsImplCopyWith<_$NumFieldSettingsImpl> get copyWith =>
+  _$$NumInputUiSettingsImplCopyWith<_$NumInputUiSettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
-SelectFieldSettings<T> _$SelectFieldSettingsFromJson<T>(
+SelectInputUiSettings<T> _$SelectInputUiSettingsFromJson<T>(
     Map<String, dynamic> json) {
-  return _SelectFieldSettings<T>.fromJson(json);
+  return _SelectInputUiSettings<T>.fromJson(json);
 }
 
 /// @nodoc
-mixin _$SelectFieldSettings<T> {
+mixin _$SelectInputUiSettings<T> {
   String? get labelText => throw _privateConstructorUsedError;
   String? get helperText => throw _privateConstructorUsedError;
   SelectFieldDisplayMode? get displayMode => throw _privateConstructorUsedError;
@@ -585,15 +588,15 @@ mixin _$SelectFieldSettings<T> {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $SelectFieldSettingsCopyWith<T, SelectFieldSettings<T>> get copyWith =>
+  $SelectInputUiSettingsCopyWith<T, SelectInputUiSettings<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SelectFieldSettingsCopyWith<T, $Res> {
-  factory $SelectFieldSettingsCopyWith(SelectFieldSettings<T> value,
-          $Res Function(SelectFieldSettings<T>) then) =
-      _$SelectFieldSettingsCopyWithImpl<T, $Res, SelectFieldSettings<T>>;
+abstract class $SelectInputUiSettingsCopyWith<T, $Res> {
+  factory $SelectInputUiSettingsCopyWith(SelectInputUiSettings<T> value,
+          $Res Function(SelectInputUiSettings<T>) then) =
+      _$SelectInputUiSettingsCopyWithImpl<T, $Res, SelectInputUiSettings<T>>;
   @useResult
   $Res call(
       {String? labelText,
@@ -606,10 +609,10 @@ abstract class $SelectFieldSettingsCopyWith<T, $Res> {
 }
 
 /// @nodoc
-class _$SelectFieldSettingsCopyWithImpl<T, $Res,
-        $Val extends SelectFieldSettings<T>>
-    implements $SelectFieldSettingsCopyWith<T, $Res> {
-  _$SelectFieldSettingsCopyWithImpl(this._value, this._then);
+class _$SelectInputUiSettingsCopyWithImpl<T, $Res,
+        $Val extends SelectInputUiSettings<T>>
+    implements $SelectInputUiSettingsCopyWith<T, $Res> {
+  _$SelectInputUiSettingsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -651,11 +654,12 @@ class _$SelectFieldSettingsCopyWithImpl<T, $Res,
 }
 
 /// @nodoc
-abstract class _$$SelectFieldSettingsImplCopyWith<T, $Res>
-    implements $SelectFieldSettingsCopyWith<T, $Res> {
-  factory _$$SelectFieldSettingsImplCopyWith(_$SelectFieldSettingsImpl<T> value,
-          $Res Function(_$SelectFieldSettingsImpl<T>) then) =
-      __$$SelectFieldSettingsImplCopyWithImpl<T, $Res>;
+abstract class _$$SelectInputUiSettingsImplCopyWith<T, $Res>
+    implements $SelectInputUiSettingsCopyWith<T, $Res> {
+  factory _$$SelectInputUiSettingsImplCopyWith(
+          _$SelectInputUiSettingsImpl<T> value,
+          $Res Function(_$SelectInputUiSettingsImpl<T>) then) =
+      __$$SelectInputUiSettingsImplCopyWithImpl<T, $Res>;
   @override
   @useResult
   $Res call(
@@ -669,12 +673,13 @@ abstract class _$$SelectFieldSettingsImplCopyWith<T, $Res>
 }
 
 /// @nodoc
-class __$$SelectFieldSettingsImplCopyWithImpl<T, $Res>
-    extends _$SelectFieldSettingsCopyWithImpl<T, $Res,
-        _$SelectFieldSettingsImpl<T>>
-    implements _$$SelectFieldSettingsImplCopyWith<T, $Res> {
-  __$$SelectFieldSettingsImplCopyWithImpl(_$SelectFieldSettingsImpl<T> _value,
-      $Res Function(_$SelectFieldSettingsImpl<T>) _then)
+class __$$SelectInputUiSettingsImplCopyWithImpl<T, $Res>
+    extends _$SelectInputUiSettingsCopyWithImpl<T, $Res,
+        _$SelectInputUiSettingsImpl<T>>
+    implements _$$SelectInputUiSettingsImplCopyWith<T, $Res> {
+  __$$SelectInputUiSettingsImplCopyWithImpl(
+      _$SelectInputUiSettingsImpl<T> _value,
+      $Res Function(_$SelectInputUiSettingsImpl<T>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -686,7 +691,7 @@ class __$$SelectFieldSettingsImplCopyWithImpl<T, $Res>
     Object? valueBuilder = freezed,
     Object? helpValueBuilder = freezed,
   }) {
-    return _then(_$SelectFieldSettingsImpl<T>(
+    return _then(_$SelectInputUiSettingsImpl<T>(
       labelText: freezed == labelText
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
@@ -713,8 +718,8 @@ class __$$SelectFieldSettingsImplCopyWithImpl<T, $Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$SelectFieldSettingsImpl<T> extends _SelectFieldSettings<T> {
-  const _$SelectFieldSettingsImpl(
+class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
+  const _$SelectInputUiSettingsImpl(
       {this.labelText,
       this.helperText,
       this.displayMode,
@@ -723,8 +728,8 @@ class _$SelectFieldSettingsImpl<T> extends _SelectFieldSettings<T> {
       this.helpValueBuilder})
       : super._();
 
-  factory _$SelectFieldSettingsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SelectFieldSettingsImplFromJson(json);
+  factory _$SelectInputUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SelectInputUiSettingsImplFromJson(json);
 
   @override
   final String? labelText;
@@ -741,14 +746,14 @@ class _$SelectFieldSettingsImpl<T> extends _SelectFieldSettings<T> {
 
   @override
   String toString() {
-    return 'SelectFieldSettings<$T>(labelText: $labelText, helperText: $helperText, displayMode: $displayMode, valueBuilder: $valueBuilder, helpValueBuilder: $helpValueBuilder)';
+    return 'SelectInputUiSettings<$T>(labelText: $labelText, helperText: $helperText, displayMode: $displayMode, valueBuilder: $valueBuilder, helpValueBuilder: $helpValueBuilder)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SelectFieldSettingsImpl<T> &&
+            other is _$SelectInputUiSettingsImpl<T> &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
             (identical(other.helperText, helperText) ||
@@ -769,20 +774,20 @@ class _$SelectFieldSettingsImpl<T> extends _SelectFieldSettings<T> {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SelectFieldSettingsImplCopyWith<T, _$SelectFieldSettingsImpl<T>>
-      get copyWith => __$$SelectFieldSettingsImplCopyWithImpl<T,
-          _$SelectFieldSettingsImpl<T>>(this, _$identity);
+  _$$SelectInputUiSettingsImplCopyWith<T, _$SelectInputUiSettingsImpl<T>>
+      get copyWith => __$$SelectInputUiSettingsImplCopyWithImpl<T,
+          _$SelectInputUiSettingsImpl<T>>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SelectFieldSettingsImplToJson<T>(
+    return _$$SelectInputUiSettingsImplToJson<T>(
       this,
     );
   }
 }
 
-abstract class _SelectFieldSettings<T> extends SelectFieldSettings<T> {
-  const factory _SelectFieldSettings(
+abstract class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
+  const factory _SelectInputUiSettings(
           {final String? labelText,
           final String? helperText,
           final SelectFieldDisplayMode? displayMode,
@@ -790,11 +795,11 @@ abstract class _SelectFieldSettings<T> extends SelectFieldSettings<T> {
           final Widget Function(T?)? valueBuilder,
           @JsonKey(includeFromJson: false, includeToJson: false)
           final Widget? Function(T)? helpValueBuilder}) =
-      _$SelectFieldSettingsImpl<T>;
-  const _SelectFieldSettings._() : super._();
+      _$SelectInputUiSettingsImpl<T>;
+  const _SelectInputUiSettings._() : super._();
 
-  factory _SelectFieldSettings.fromJson(Map<String, dynamic> json) =
-      _$SelectFieldSettingsImpl<T>.fromJson;
+  factory _SelectInputUiSettings.fromJson(Map<String, dynamic> json) =
+      _$SelectInputUiSettingsImpl<T>.fromJson;
 
   @override
   String? get labelText;
@@ -810,16 +815,17 @@ abstract class _SelectFieldSettings<T> extends SelectFieldSettings<T> {
   Widget? Function(T)? get helpValueBuilder;
   @override
   @JsonKey(ignore: true)
-  _$$SelectFieldSettingsImplCopyWith<T, _$SelectFieldSettingsImpl<T>>
+  _$$SelectInputUiSettingsImplCopyWith<T, _$SelectInputUiSettingsImpl<T>>
       get copyWith => throw _privateConstructorUsedError;
 }
 
-StringFieldSettings _$StringFieldSettingsFromJson(Map<String, dynamic> json) {
-  return _StringFieldSettings.fromJson(json);
+StringInputUiSettings _$StringInputUiSettingsFromJson(
+    Map<String, dynamic> json) {
+  return _StringInputUiSettings.fromJson(json);
 }
 
 /// @nodoc
-mixin _$StringFieldSettings {
+mixin _$StringInputUiSettings {
   String? get labelText => throw _privateConstructorUsedError;
   String? get hintText => throw _privateConstructorUsedError;
   String? get helperText => throw _privateConstructorUsedError;
@@ -839,15 +845,15 @@ mixin _$StringFieldSettings {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $StringFieldSettingsCopyWith<StringFieldSettings> get copyWith =>
+  $StringInputUiSettingsCopyWith<StringInputUiSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $StringFieldSettingsCopyWith<$Res> {
-  factory $StringFieldSettingsCopyWith(
-          StringFieldSettings value, $Res Function(StringFieldSettings) then) =
-      _$StringFieldSettingsCopyWithImpl<$Res, StringFieldSettings>;
+abstract class $StringInputUiSettingsCopyWith<$Res> {
+  factory $StringInputUiSettingsCopyWith(StringInputUiSettings value,
+          $Res Function(StringInputUiSettings) then) =
+      _$StringInputUiSettingsCopyWithImpl<$Res, StringInputUiSettings>;
   @useResult
   $Res call(
       {String? labelText,
@@ -867,9 +873,10 @@ abstract class $StringFieldSettingsCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$StringFieldSettingsCopyWithImpl<$Res, $Val extends StringFieldSettings>
-    implements $StringFieldSettingsCopyWith<$Res> {
-  _$StringFieldSettingsCopyWithImpl(this._value, this._then);
+class _$StringInputUiSettingsCopyWithImpl<$Res,
+        $Val extends StringInputUiSettings>
+    implements $StringInputUiSettingsCopyWith<$Res> {
+  _$StringInputUiSettingsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -956,11 +963,12 @@ class _$StringFieldSettingsCopyWithImpl<$Res, $Val extends StringFieldSettings>
 }
 
 /// @nodoc
-abstract class _$$StringFieldSettingsImplCopyWith<$Res>
-    implements $StringFieldSettingsCopyWith<$Res> {
-  factory _$$StringFieldSettingsImplCopyWith(_$StringFieldSettingsImpl value,
-          $Res Function(_$StringFieldSettingsImpl) then) =
-      __$$StringFieldSettingsImplCopyWithImpl<$Res>;
+abstract class _$$StringInputUiSettingsImplCopyWith<$Res>
+    implements $StringInputUiSettingsCopyWith<$Res> {
+  factory _$$StringInputUiSettingsImplCopyWith(
+          _$StringInputUiSettingsImpl value,
+          $Res Function(_$StringInputUiSettingsImpl) then) =
+      __$$StringInputUiSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -981,11 +989,12 @@ abstract class _$$StringFieldSettingsImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$StringFieldSettingsImplCopyWithImpl<$Res>
-    extends _$StringFieldSettingsCopyWithImpl<$Res, _$StringFieldSettingsImpl>
-    implements _$$StringFieldSettingsImplCopyWith<$Res> {
-  __$$StringFieldSettingsImplCopyWithImpl(_$StringFieldSettingsImpl _value,
-      $Res Function(_$StringFieldSettingsImpl) _then)
+class __$$StringInputUiSettingsImplCopyWithImpl<$Res>
+    extends _$StringInputUiSettingsCopyWithImpl<$Res,
+        _$StringInputUiSettingsImpl>
+    implements _$$StringInputUiSettingsImplCopyWith<$Res> {
+  __$$StringInputUiSettingsImplCopyWithImpl(_$StringInputUiSettingsImpl _value,
+      $Res Function(_$StringInputUiSettingsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1006,7 +1015,7 @@ class __$$StringFieldSettingsImplCopyWithImpl<$Res>
     Object? maxLines = freezed,
     Object? invalidRegexMessage = freezed,
   }) {
-    return _then(_$StringFieldSettingsImpl(
+    return _then(_$StringInputUiSettingsImpl(
       labelText: freezed == labelText
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
@@ -1069,8 +1078,8 @@ class __$$StringFieldSettingsImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$StringFieldSettingsImpl extends _StringFieldSettings {
-  const _$StringFieldSettingsImpl(
+class _$StringInputUiSettingsImpl extends _StringInputUiSettings {
+  const _$StringInputUiSettingsImpl(
       {this.labelText,
       this.hintText,
       this.helperText,
@@ -1088,8 +1097,8 @@ class _$StringFieldSettingsImpl extends _StringFieldSettings {
       : _autofillHints = autofillHints,
         super._();
 
-  factory _$StringFieldSettingsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$StringFieldSettingsImplFromJson(json);
+  factory _$StringInputUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$StringInputUiSettingsImplFromJson(json);
 
   @override
   final String? labelText;
@@ -1131,14 +1140,14 @@ class _$StringFieldSettingsImpl extends _StringFieldSettings {
 
   @override
   String toString() {
-    return 'StringFieldSettings(labelText: $labelText, hintText: $hintText, helperText: $helperText, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage)';
+    return 'StringInputUiSettings(labelText: $labelText, hintText: $hintText, helperText: $helperText, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$StringFieldSettingsImpl &&
+            other is _$StringInputUiSettingsImpl &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
             (identical(other.hintText, hintText) ||
@@ -1192,20 +1201,21 @@ class _$StringFieldSettingsImpl extends _StringFieldSettings {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$StringFieldSettingsImplCopyWith<_$StringFieldSettingsImpl> get copyWith =>
-      __$$StringFieldSettingsImplCopyWithImpl<_$StringFieldSettingsImpl>(
+  _$$StringInputUiSettingsImplCopyWith<_$StringInputUiSettingsImpl>
+      get copyWith => __$$StringInputUiSettingsImplCopyWithImpl<
+          _$StringInputUiSettingsImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$StringFieldSettingsImplToJson(
+    return _$$StringInputUiSettingsImplToJson(
       this,
     );
   }
 }
 
-abstract class _StringFieldSettings extends StringFieldSettings {
-  const factory _StringFieldSettings(
+abstract class _StringInputUiSettings extends StringInputUiSettings {
+  const factory _StringInputUiSettings(
       {final String? labelText,
       final String? hintText,
       final String? helperText,
@@ -1219,11 +1229,11 @@ abstract class _StringFieldSettings extends StringFieldSettings {
       final TextInputAction? textInputAction,
       final TextCapitalization? textCapitalization,
       final int? maxLines,
-      final String? invalidRegexMessage}) = _$StringFieldSettingsImpl;
-  const _StringFieldSettings._() : super._();
+      final String? invalidRegexMessage}) = _$StringInputUiSettingsImpl;
+  const _StringInputUiSettings._() : super._();
 
-  factory _StringFieldSettings.fromJson(Map<String, dynamic> json) =
-      _$StringFieldSettingsImpl.fromJson;
+  factory _StringInputUiSettings.fromJson(Map<String, dynamic> json) =
+      _$StringInputUiSettingsImpl.fromJson;
 
   @override
   String? get labelText;
@@ -1256,7 +1266,8 @@ abstract class _StringFieldSettings extends StringFieldSettings {
   String? get invalidRegexMessage;
   @override
   @JsonKey(ignore: true)
-  _$$StringFieldSettingsImplCopyWith<_$StringFieldSettingsImpl> get copyWith =>
+  _$$StringInputUiSettingsImplCopyWith<_$StringInputUiSettingsImpl>
+      get copyWith =>
       throw _privateConstructorUsedError;
 }
 

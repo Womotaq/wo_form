@@ -10,7 +10,7 @@ void main() {
     id: 'name',
     isRequired: true,
     regexPattern: RegexPattern.username.value,
-    uiSettings: StringFieldSettings(
+    uiSettings: StringInputUiSettings(
       invalidRegexMessage: FormLocalizationsFr()
           .regexPatternUnmatched(RegexPattern.username.name),
     ),

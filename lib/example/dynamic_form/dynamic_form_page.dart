@@ -21,7 +21,7 @@ class DynamicFormPage extends StatelessWidget {
                   message: 'Donne ton prénom !',
                 )
               : null,
-          uiSettings: const StringFieldSettings(
+          uiSettings: const StringInputUiSettings(
             labelText: 'Prénom',
           ),
         ),
@@ -32,7 +32,7 @@ class DynamicFormPage extends StatelessWidget {
             final name = value as String?;
             return StringInput(
               id: id,
-              uiSettings: StringFieldSettings(
+              uiSettings: StringInputUiSettings(
                 hintText: "Bonjour ${(name ?? '').isEmpty ? '' : '$name '}! "
                     "Comment allez-vous aujourd'hui ?",
                 maxLines: 5,
@@ -47,7 +47,7 @@ class DynamicFormPage extends StatelessWidget {
             final name = value as String?;
             return BooleanInput(
               id: id,
-              uiSettings: BooleanFieldSettings(
+              uiSettings: BooleanInputUiSettings(
                 labelText: 'Êtes-vous un homme'
                     "${(name ?? '').isEmpty ? '' : ', $name'} ?",
               ),
@@ -68,7 +68,7 @@ class DynamicFormPage extends StatelessWidget {
                   : const CustomInputError(
                       message: 'Eh non mon coco y faut être majeur ici !',
                     ),
-              uiSettings: NumFieldSettings(
+              uiSettings: NumInputUiSettings(
                 labelText: 'Quel âge avez-vous'
                     "${(name ?? '').isEmpty ? '' : ', $name'} ?",
               ),
@@ -101,7 +101,7 @@ class DynamicFormPage extends StatelessWidget {
                       : const CustomInputError(
                           message: 'Bah alors ? On veut pas de pseudo ?',
                         ),
-                  uiSettings: SelectFieldSettings(
+                  uiSettings: SelectInputUiSettings(
                     labelText: 'Choisissez votre pseudo',
                     valueBuilder: (value) => Text(
                       switch (value) {
@@ -132,7 +132,7 @@ class DynamicFormPage extends StatelessWidget {
                       message: 'Eh $name ! '
                           'Tu as oublié les conditions météorologiques !',
                     ),
-              uiSettings: const BooleanFieldSettings(
+              uiSettings: const BooleanInputUiSettings(
                 labelText:
                     "J'ai lu et j'accepte les conditions météorologiques",
                 onOffType: BooleanFieldOnOffType.checkbox,

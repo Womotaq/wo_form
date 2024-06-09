@@ -30,23 +30,23 @@ final woFormCreator = WoForm(
   inputs: [
     const InputsNode(
       id: 'uiSettings',
-      uiSettings: InputsNodeWidgetSettings(
+      uiSettings: InputsNodeUiSettings(
         labelText: 'Paramètres généraux',
       ),
       inputs: [
         StringInput(
           id: 'titleText',
-          uiSettings: StringFieldSettings(labelText: 'Titre du formulaire'),
+          uiSettings: StringInputUiSettings(labelText: 'Titre du formulaire'),
         ),
         StringInput(
           id: 'submitText',
-          uiSettings: StringFieldSettings(
+          uiSettings: StringInputUiSettings(
             labelText: 'Label du bouton de validation',
           ),
         ),
         StringInput(
           id: 'submittedText',
-          uiSettings: StringFieldSettings(
+          uiSettings: StringInputUiSettings(
             labelText: 'Label du bouton validé',
           ),
         ),
@@ -55,7 +55,7 @@ final woFormCreator = WoForm(
     InputsNode(
       id: 'inputs',
       exportType: NodeExportType.list,
-      uiSettings: const InputsNodeWidgetSettings(
+      uiSettings: const InputsNodeUiSettings(
         displayMode: NodeDisplayMode.tile,
       ),
       inputs: [

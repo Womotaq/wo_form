@@ -749,7 +749,7 @@ mixin _$WoFormInput {
   @JsonKey(includeToJson: false, includeFromJson: false)
   WoFormInputError? Function(Never)? get getCustomError =>
       throw _privateConstructorUsedError;
-  @JsonKey(toJson: BooleanFieldSettings.staticToJson)
+  @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
   Object get uiSettings => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -759,8 +759,8 @@ mixin _$WoFormInput {
             bool isRequired,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(bool?)? getCustomError,
-            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings uiSettings)
+            @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+            BooleanInputUiSettings uiSettings)
         boolean,
     required TResult Function(
             String id,
@@ -770,7 +770,7 @@ mixin _$WoFormInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(num?)? getCustomError,
-            NumFieldSettings uiSettings)
+            NumInputUiSettings uiSettings)
         num,
     required TResult Function(
             String id,
@@ -780,7 +780,7 @@ mixin _$WoFormInput {
             int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
-            SelectFieldSettings<String> uiSettings)
+            SelectInputUiSettings<String> uiSettings)
         selectString,
     required TResult Function(
             String id,
@@ -789,8 +789,8 @@ mixin _$WoFormInput {
             String? regexPattern,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(String?)? getCustomError,
-            @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings uiSettings)
+            @JsonKey(toJson: StringInputUiSettings.staticToJson)
+            StringInputUiSettings uiSettings)
         string,
   }) =>
       throw _privateConstructorUsedError;
@@ -802,8 +802,8 @@ mixin _$WoFormInput {
             bool isRequired,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(bool?)? getCustomError,
-            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings uiSettings)?
+            @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+            BooleanInputUiSettings uiSettings)?
         boolean,
     TResult? Function(
             String id,
@@ -813,7 +813,7 @@ mixin _$WoFormInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(num?)? getCustomError,
-            NumFieldSettings uiSettings)?
+            NumInputUiSettings uiSettings)?
         num,
     TResult? Function(
             String id,
@@ -823,7 +823,7 @@ mixin _$WoFormInput {
             int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
-            SelectFieldSettings<String> uiSettings)?
+            SelectInputUiSettings<String> uiSettings)?
         selectString,
     TResult? Function(
             String id,
@@ -832,8 +832,8 @@ mixin _$WoFormInput {
             String? regexPattern,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(String?)? getCustomError,
-            @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings uiSettings)?
+            @JsonKey(toJson: StringInputUiSettings.staticToJson)
+            StringInputUiSettings uiSettings)?
         string,
   }) =>
       throw _privateConstructorUsedError;
@@ -845,8 +845,8 @@ mixin _$WoFormInput {
             bool isRequired,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(bool?)? getCustomError,
-            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings uiSettings)?
+            @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+            BooleanInputUiSettings uiSettings)?
         boolean,
     TResult Function(
             String id,
@@ -856,7 +856,7 @@ mixin _$WoFormInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(num?)? getCustomError,
-            NumFieldSettings uiSettings)?
+            NumInputUiSettings uiSettings)?
         num,
     TResult Function(
             String id,
@@ -866,7 +866,7 @@ mixin _$WoFormInput {
             int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
-            SelectFieldSettings<String> uiSettings)?
+            SelectInputUiSettings<String> uiSettings)?
         selectString,
     TResult Function(
             String id,
@@ -875,8 +875,8 @@ mixin _$WoFormInput {
             String? regexPattern,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(String?)? getCustomError,
-            @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings uiSettings)?
+            @JsonKey(toJson: StringInputUiSettings.staticToJson)
+            StringInputUiSettings uiSettings)?
         string,
     required TResult orElse(),
   }) =>
@@ -959,10 +959,10 @@ abstract class _$$BooleanInputImplCopyWith<$Res>
       bool isRequired,
       @JsonKey(includeToJson: false, includeFromJson: false)
       WoFormInputError? Function(bool?)? getCustomError,
-      @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-      BooleanFieldSettings uiSettings});
+      @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+      BooleanInputUiSettings uiSettings});
 
-  $BooleanFieldSettingsCopyWith<$Res> get uiSettings;
+  $BooleanInputUiSettingsCopyWith<$Res> get uiSettings;
 }
 
 /// @nodoc
@@ -1002,14 +1002,14 @@ class __$$BooleanInputImplCopyWithImpl<$Res>
       uiSettings: null == uiSettings
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
-              as BooleanFieldSettings,
+              as BooleanInputUiSettings,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $BooleanFieldSettingsCopyWith<$Res> get uiSettings {
-    return $BooleanFieldSettingsCopyWith<$Res>(_value.uiSettings, (value) {
+  $BooleanInputUiSettingsCopyWith<$Res> get uiSettings {
+    return $BooleanInputUiSettingsCopyWith<$Res>(_value.uiSettings, (value) {
       return _then(_value.copyWith(uiSettings: value));
     });
   }
@@ -1024,8 +1024,8 @@ class _$BooleanInputImpl extends BooleanInput {
       this.isRequired = false,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.getCustomError,
-      @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-      this.uiSettings = const BooleanFieldSettings(),
+      @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+      this.uiSettings = const BooleanInputUiSettings(),
       final String? $type})
       : $type = $type ?? 'boolean',
         super._();
@@ -1044,8 +1044,8 @@ class _$BooleanInputImpl extends BooleanInput {
   @JsonKey(includeToJson: false, includeFromJson: false)
   final WoFormInputError? Function(bool?)? getCustomError;
   @override
-  @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-  final BooleanFieldSettings uiSettings;
+  @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+  final BooleanInputUiSettings uiSettings;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
@@ -1091,8 +1091,8 @@ class _$BooleanInputImpl extends BooleanInput {
             bool isRequired,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(bool?)? getCustomError,
-            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings uiSettings)
+            @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+            BooleanInputUiSettings uiSettings)
         boolean,
     required TResult Function(
             String id,
@@ -1102,7 +1102,7 @@ class _$BooleanInputImpl extends BooleanInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(num?)? getCustomError,
-            NumFieldSettings uiSettings)
+            NumInputUiSettings uiSettings)
         num,
     required TResult Function(
             String id,
@@ -1112,7 +1112,7 @@ class _$BooleanInputImpl extends BooleanInput {
             int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
-            SelectFieldSettings<String> uiSettings)
+            SelectInputUiSettings<String> uiSettings)
         selectString,
     required TResult Function(
             String id,
@@ -1121,8 +1121,8 @@ class _$BooleanInputImpl extends BooleanInput {
             String? regexPattern,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(String?)? getCustomError,
-            @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings uiSettings)
+            @JsonKey(toJson: StringInputUiSettings.staticToJson)
+            StringInputUiSettings uiSettings)
         string,
   }) {
     return boolean(id, defaultValue, isRequired, getCustomError, uiSettings);
@@ -1137,8 +1137,8 @@ class _$BooleanInputImpl extends BooleanInput {
             bool isRequired,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(bool?)? getCustomError,
-            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings uiSettings)?
+            @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+            BooleanInputUiSettings uiSettings)?
         boolean,
     TResult? Function(
             String id,
@@ -1148,7 +1148,7 @@ class _$BooleanInputImpl extends BooleanInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(num?)? getCustomError,
-            NumFieldSettings uiSettings)?
+            NumInputUiSettings uiSettings)?
         num,
     TResult? Function(
             String id,
@@ -1158,7 +1158,7 @@ class _$BooleanInputImpl extends BooleanInput {
             int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
-            SelectFieldSettings<String> uiSettings)?
+            SelectInputUiSettings<String> uiSettings)?
         selectString,
     TResult? Function(
             String id,
@@ -1167,8 +1167,8 @@ class _$BooleanInputImpl extends BooleanInput {
             String? regexPattern,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(String?)? getCustomError,
-            @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings uiSettings)?
+            @JsonKey(toJson: StringInputUiSettings.staticToJson)
+            StringInputUiSettings uiSettings)?
         string,
   }) {
     return boolean?.call(
@@ -1184,8 +1184,8 @@ class _$BooleanInputImpl extends BooleanInput {
             bool isRequired,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(bool?)? getCustomError,
-            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings uiSettings)?
+            @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+            BooleanInputUiSettings uiSettings)?
         boolean,
     TResult Function(
             String id,
@@ -1195,7 +1195,7 @@ class _$BooleanInputImpl extends BooleanInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(num?)? getCustomError,
-            NumFieldSettings uiSettings)?
+            NumInputUiSettings uiSettings)?
         num,
     TResult Function(
             String id,
@@ -1205,7 +1205,7 @@ class _$BooleanInputImpl extends BooleanInput {
             int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
-            SelectFieldSettings<String> uiSettings)?
+            SelectInputUiSettings<String> uiSettings)?
         selectString,
     TResult Function(
             String id,
@@ -1214,8 +1214,8 @@ class _$BooleanInputImpl extends BooleanInput {
             String? regexPattern,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(String?)? getCustomError,
-            @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings uiSettings)?
+            @JsonKey(toJson: StringInputUiSettings.staticToJson)
+            StringInputUiSettings uiSettings)?
         string,
     required TResult orElse(),
   }) {
@@ -1277,8 +1277,8 @@ abstract class BooleanInput extends WoFormInput {
       final bool isRequired,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final WoFormInputError? Function(bool?)? getCustomError,
-      @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-      final BooleanFieldSettings uiSettings}) = _$BooleanInputImpl;
+      @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+      final BooleanInputUiSettings uiSettings}) = _$BooleanInputImpl;
   const BooleanInput._() : super._();
 
   factory BooleanInput.fromJson(Map<String, dynamic> json) =
@@ -1293,8 +1293,8 @@ abstract class BooleanInput extends WoFormInput {
   @JsonKey(includeToJson: false, includeFromJson: false)
   WoFormInputError? Function(bool?)? get getCustomError;
   @override
-  @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-  BooleanFieldSettings get uiSettings;
+  @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+  BooleanInputUiSettings get uiSettings;
   @override
   @JsonKey(ignore: true)
   _$$BooleanInputImplCopyWith<_$BooleanInputImpl> get copyWith =>
@@ -1317,9 +1317,9 @@ abstract class _$$NumInputImplCopyWith<$Res>
       int minBound,
       @JsonKey(includeToJson: false, includeFromJson: false)
       WoFormInputError? Function(num?)? getCustomError,
-      NumFieldSettings uiSettings});
+      NumInputUiSettings uiSettings});
 
-  $NumFieldSettingsCopyWith<$Res> get uiSettings;
+  $NumInputUiSettingsCopyWith<$Res> get uiSettings;
 }
 
 /// @nodoc
@@ -1369,14 +1369,14 @@ class __$$NumInputImplCopyWithImpl<$Res>
       uiSettings: null == uiSettings
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
-              as NumFieldSettings,
+              as NumInputUiSettings,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $NumFieldSettingsCopyWith<$Res> get uiSettings {
-    return $NumFieldSettingsCopyWith<$Res>(_value.uiSettings, (value) {
+  $NumInputUiSettingsCopyWith<$Res> get uiSettings {
+    return $NumInputUiSettingsCopyWith<$Res>(_value.uiSettings, (value) {
       return _then(_value.copyWith(uiSettings: value));
     });
   }
@@ -1393,7 +1393,7 @@ class _$NumInputImpl extends NumInput {
       this.minBound = 0,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.getCustomError,
-      this.uiSettings = const NumFieldSettings(),
+      this.uiSettings = const NumInputUiSettings(),
       final String? $type})
       : assert(maxBound == null || minBound <= maxBound,
             'maxBound must be higher or equal to minBound'),
@@ -1420,7 +1420,7 @@ class _$NumInputImpl extends NumInput {
   final WoFormInputError? Function(num?)? getCustomError;
   @override
   @JsonKey()
-  final NumFieldSettings uiSettings;
+  final NumInputUiSettings uiSettings;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
@@ -1470,8 +1470,8 @@ class _$NumInputImpl extends NumInput {
             bool isRequired,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(bool?)? getCustomError,
-            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings uiSettings)
+            @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+            BooleanInputUiSettings uiSettings)
         boolean,
     required TResult Function(
             String id,
@@ -1481,7 +1481,7 @@ class _$NumInputImpl extends NumInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(num?)? getCustomError,
-            NumFieldSettings uiSettings)
+            NumInputUiSettings uiSettings)
         num,
     required TResult Function(
             String id,
@@ -1491,7 +1491,7 @@ class _$NumInputImpl extends NumInput {
             int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
-            SelectFieldSettings<String> uiSettings)
+            SelectInputUiSettings<String> uiSettings)
         selectString,
     required TResult Function(
             String id,
@@ -1500,8 +1500,8 @@ class _$NumInputImpl extends NumInput {
             String? regexPattern,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(String?)? getCustomError,
-            @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings uiSettings)
+            @JsonKey(toJson: StringInputUiSettings.staticToJson)
+            StringInputUiSettings uiSettings)
         string,
   }) {
     return num(id, defaultValue, isRequired, maxBound, minBound, getCustomError,
@@ -1517,8 +1517,8 @@ class _$NumInputImpl extends NumInput {
             bool isRequired,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(bool?)? getCustomError,
-            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings uiSettings)?
+            @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+            BooleanInputUiSettings uiSettings)?
         boolean,
     TResult? Function(
             String id,
@@ -1528,7 +1528,7 @@ class _$NumInputImpl extends NumInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(num?)? getCustomError,
-            NumFieldSettings uiSettings)?
+            NumInputUiSettings uiSettings)?
         num,
     TResult? Function(
             String id,
@@ -1538,7 +1538,7 @@ class _$NumInputImpl extends NumInput {
             int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
-            SelectFieldSettings<String> uiSettings)?
+            SelectInputUiSettings<String> uiSettings)?
         selectString,
     TResult? Function(
             String id,
@@ -1547,8 +1547,8 @@ class _$NumInputImpl extends NumInput {
             String? regexPattern,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(String?)? getCustomError,
-            @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings uiSettings)?
+            @JsonKey(toJson: StringInputUiSettings.staticToJson)
+            StringInputUiSettings uiSettings)?
         string,
   }) {
     return num?.call(id, defaultValue, isRequired, maxBound, minBound,
@@ -1564,8 +1564,8 @@ class _$NumInputImpl extends NumInput {
             bool isRequired,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(bool?)? getCustomError,
-            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings uiSettings)?
+            @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+            BooleanInputUiSettings uiSettings)?
         boolean,
     TResult Function(
             String id,
@@ -1575,7 +1575,7 @@ class _$NumInputImpl extends NumInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(num?)? getCustomError,
-            NumFieldSettings uiSettings)?
+            NumInputUiSettings uiSettings)?
         num,
     TResult Function(
             String id,
@@ -1585,7 +1585,7 @@ class _$NumInputImpl extends NumInput {
             int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
-            SelectFieldSettings<String> uiSettings)?
+            SelectInputUiSettings<String> uiSettings)?
         selectString,
     TResult Function(
             String id,
@@ -1594,8 +1594,8 @@ class _$NumInputImpl extends NumInput {
             String? regexPattern,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(String?)? getCustomError,
-            @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings uiSettings)?
+            @JsonKey(toJson: StringInputUiSettings.staticToJson)
+            StringInputUiSettings uiSettings)?
         string,
     required TResult orElse(),
   }) {
@@ -1660,7 +1660,7 @@ abstract class NumInput extends WoFormInput {
       final int minBound,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final WoFormInputError? Function(num?)? getCustomError,
-      final NumFieldSettings uiSettings}) = _$NumInputImpl;
+      final NumInputUiSettings uiSettings}) = _$NumInputImpl;
   const NumInput._() : super._();
 
   factory NumInput.fromJson(Map<String, dynamic> json) =
@@ -1677,7 +1677,7 @@ abstract class NumInput extends WoFormInput {
   @JsonKey(includeToJson: false, includeFromJson: false)
   WoFormInputError? Function(num?)? get getCustomError;
   @override
-  NumFieldSettings get uiSettings;
+  NumInputUiSettings get uiSettings;
   @override
   @JsonKey(ignore: true)
   _$$NumInputImplCopyWith<_$NumInputImpl> get copyWith =>
@@ -1700,9 +1700,9 @@ abstract class _$$SelectStringInputImplCopyWith<$Res>
       int minCount,
       @JsonKey(includeToJson: false, includeFromJson: false)
       WoFormInputError? Function(List<String>)? getCustomError,
-      SelectFieldSettings<String> uiSettings});
+      SelectInputUiSettings<String> uiSettings});
 
-  $SelectFieldSettingsCopyWith<String, $Res> get uiSettings;
+  $SelectInputUiSettingsCopyWith<String, $Res> get uiSettings;
 }
 
 /// @nodoc
@@ -1752,14 +1752,14 @@ class __$$SelectStringInputImplCopyWithImpl<$Res>
       uiSettings: null == uiSettings
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
-              as SelectFieldSettings<String>,
+              as SelectInputUiSettings<String>,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $SelectFieldSettingsCopyWith<String, $Res> get uiSettings {
-    return $SelectFieldSettingsCopyWith<String, $Res>(_value.uiSettings,
+  $SelectInputUiSettingsCopyWith<String, $Res> get uiSettings {
+    return $SelectInputUiSettingsCopyWith<String, $Res>(_value.uiSettings,
         (value) {
       return _then(_value.copyWith(uiSettings: value));
     });
@@ -1777,7 +1777,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
       this.minCount = 0,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.getCustomError,
-      this.uiSettings = const SelectFieldSettings<String>(),
+      this.uiSettings = const SelectInputUiSettings<String>(),
       final String? $type})
       : assert(maxCount == null || minCount <= maxCount,
             'maxCount must be higher or equal to minCount'),
@@ -1819,7 +1819,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
   final WoFormInputError? Function(List<String>)? getCustomError;
   @override
   @JsonKey()
-  final SelectFieldSettings<String> uiSettings;
+  final SelectInputUiSettings<String> uiSettings;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
@@ -1877,8 +1877,8 @@ class _$SelectStringInputImpl extends SelectStringInput {
             bool isRequired,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(bool?)? getCustomError,
-            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings uiSettings)
+            @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+            BooleanInputUiSettings uiSettings)
         boolean,
     required TResult Function(
             String id,
@@ -1888,7 +1888,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(num?)? getCustomError,
-            NumFieldSettings uiSettings)
+            NumInputUiSettings uiSettings)
         num,
     required TResult Function(
             String id,
@@ -1898,7 +1898,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
-            SelectFieldSettings<String> uiSettings)
+            SelectInputUiSettings<String> uiSettings)
         selectString,
     required TResult Function(
             String id,
@@ -1907,8 +1907,8 @@ class _$SelectStringInputImpl extends SelectStringInput {
             String? regexPattern,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(String?)? getCustomError,
-            @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings uiSettings)
+            @JsonKey(toJson: StringInputUiSettings.staticToJson)
+            StringInputUiSettings uiSettings)
         string,
   }) {
     return selectString(id, maxCount, defaultValue, availibleValues, minCount,
@@ -1924,8 +1924,8 @@ class _$SelectStringInputImpl extends SelectStringInput {
             bool isRequired,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(bool?)? getCustomError,
-            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings uiSettings)?
+            @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+            BooleanInputUiSettings uiSettings)?
         boolean,
     TResult? Function(
             String id,
@@ -1935,7 +1935,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(num?)? getCustomError,
-            NumFieldSettings uiSettings)?
+            NumInputUiSettings uiSettings)?
         num,
     TResult? Function(
             String id,
@@ -1945,7 +1945,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
-            SelectFieldSettings<String> uiSettings)?
+            SelectInputUiSettings<String> uiSettings)?
         selectString,
     TResult? Function(
             String id,
@@ -1954,8 +1954,8 @@ class _$SelectStringInputImpl extends SelectStringInput {
             String? regexPattern,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(String?)? getCustomError,
-            @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings uiSettings)?
+            @JsonKey(toJson: StringInputUiSettings.staticToJson)
+            StringInputUiSettings uiSettings)?
         string,
   }) {
     return selectString?.call(id, maxCount, defaultValue, availibleValues,
@@ -1971,8 +1971,8 @@ class _$SelectStringInputImpl extends SelectStringInput {
             bool isRequired,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(bool?)? getCustomError,
-            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings uiSettings)?
+            @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+            BooleanInputUiSettings uiSettings)?
         boolean,
     TResult Function(
             String id,
@@ -1982,7 +1982,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(num?)? getCustomError,
-            NumFieldSettings uiSettings)?
+            NumInputUiSettings uiSettings)?
         num,
     TResult Function(
             String id,
@@ -1992,7 +1992,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
-            SelectFieldSettings<String> uiSettings)?
+            SelectInputUiSettings<String> uiSettings)?
         selectString,
     TResult Function(
             String id,
@@ -2001,8 +2001,8 @@ class _$SelectStringInputImpl extends SelectStringInput {
             String? regexPattern,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(String?)? getCustomError,
-            @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings uiSettings)?
+            @JsonKey(toJson: StringInputUiSettings.staticToJson)
+            StringInputUiSettings uiSettings)?
         string,
     required TResult orElse(),
   }) {
@@ -2067,7 +2067,8 @@ abstract class SelectStringInput extends WoFormInput {
       final int minCount,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final WoFormInputError? Function(List<String>)? getCustomError,
-      final SelectFieldSettings<String> uiSettings}) = _$SelectStringInputImpl;
+          final SelectInputUiSettings<String> uiSettings}) =
+      _$SelectStringInputImpl;
   const SelectStringInput._() : super._();
 
   factory SelectStringInput.fromJson(Map<String, dynamic> json) =
@@ -2084,7 +2085,7 @@ abstract class SelectStringInput extends WoFormInput {
   @JsonKey(includeToJson: false, includeFromJson: false)
   WoFormInputError? Function(List<String>)? get getCustomError;
   @override
-  SelectFieldSettings<String> get uiSettings;
+  SelectInputUiSettings<String> get uiSettings;
   @override
   @JsonKey(ignore: true)
   _$$SelectStringInputImplCopyWith<_$SelectStringInputImpl> get copyWith =>
@@ -2106,10 +2107,10 @@ abstract class _$$StringInputImplCopyWith<$Res>
       String? regexPattern,
       @JsonKey(includeToJson: false, includeFromJson: false)
       WoFormInputError? Function(String?)? getCustomError,
-      @JsonKey(toJson: StringFieldSettings.staticToJson)
-      StringFieldSettings uiSettings});
+      @JsonKey(toJson: StringInputUiSettings.staticToJson)
+      StringInputUiSettings uiSettings});
 
-  $StringFieldSettingsCopyWith<$Res> get uiSettings;
+  $StringInputUiSettingsCopyWith<$Res> get uiSettings;
 }
 
 /// @nodoc
@@ -2154,14 +2155,14 @@ class __$$StringInputImplCopyWithImpl<$Res>
       uiSettings: null == uiSettings
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
-              as StringFieldSettings,
+              as StringInputUiSettings,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $StringFieldSettingsCopyWith<$Res> get uiSettings {
-    return $StringFieldSettingsCopyWith<$Res>(_value.uiSettings, (value) {
+  $StringInputUiSettingsCopyWith<$Res> get uiSettings {
+    return $StringInputUiSettingsCopyWith<$Res>(_value.uiSettings, (value) {
       return _then(_value.copyWith(uiSettings: value));
     });
   }
@@ -2177,8 +2178,8 @@ class _$StringInputImpl extends StringInput {
       this.regexPattern,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.getCustomError,
-      @JsonKey(toJson: StringFieldSettings.staticToJson)
-      this.uiSettings = const StringFieldSettings(),
+      @JsonKey(toJson: StringInputUiSettings.staticToJson)
+      this.uiSettings = const StringInputUiSettings(),
       final String? $type})
       : $type = $type ?? 'string',
         super._();
@@ -2199,8 +2200,8 @@ class _$StringInputImpl extends StringInput {
   @JsonKey(includeToJson: false, includeFromJson: false)
   final WoFormInputError? Function(String?)? getCustomError;
   @override
-  @JsonKey(toJson: StringFieldSettings.staticToJson)
-  final StringFieldSettings uiSettings;
+  @JsonKey(toJson: StringInputUiSettings.staticToJson)
+  final StringInputUiSettings uiSettings;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
@@ -2248,8 +2249,8 @@ class _$StringInputImpl extends StringInput {
             bool isRequired,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(bool?)? getCustomError,
-            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings uiSettings)
+            @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+            BooleanInputUiSettings uiSettings)
         boolean,
     required TResult Function(
             String id,
@@ -2259,7 +2260,7 @@ class _$StringInputImpl extends StringInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(num?)? getCustomError,
-            NumFieldSettings uiSettings)
+            NumInputUiSettings uiSettings)
         num,
     required TResult Function(
             String id,
@@ -2269,7 +2270,7 @@ class _$StringInputImpl extends StringInput {
             int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
-            SelectFieldSettings<String> uiSettings)
+            SelectInputUiSettings<String> uiSettings)
         selectString,
     required TResult Function(
             String id,
@@ -2278,8 +2279,8 @@ class _$StringInputImpl extends StringInput {
             String? regexPattern,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(String?)? getCustomError,
-            @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings uiSettings)
+            @JsonKey(toJson: StringInputUiSettings.staticToJson)
+            StringInputUiSettings uiSettings)
         string,
   }) {
     return string(
@@ -2295,8 +2296,8 @@ class _$StringInputImpl extends StringInput {
             bool isRequired,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(bool?)? getCustomError,
-            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings uiSettings)?
+            @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+            BooleanInputUiSettings uiSettings)?
         boolean,
     TResult? Function(
             String id,
@@ -2306,7 +2307,7 @@ class _$StringInputImpl extends StringInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(num?)? getCustomError,
-            NumFieldSettings uiSettings)?
+            NumInputUiSettings uiSettings)?
         num,
     TResult? Function(
             String id,
@@ -2316,7 +2317,7 @@ class _$StringInputImpl extends StringInput {
             int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
-            SelectFieldSettings<String> uiSettings)?
+            SelectInputUiSettings<String> uiSettings)?
         selectString,
     TResult? Function(
             String id,
@@ -2325,8 +2326,8 @@ class _$StringInputImpl extends StringInput {
             String? regexPattern,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(String?)? getCustomError,
-            @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings uiSettings)?
+            @JsonKey(toJson: StringInputUiSettings.staticToJson)
+            StringInputUiSettings uiSettings)?
         string,
   }) {
     return string?.call(
@@ -2342,8 +2343,8 @@ class _$StringInputImpl extends StringInput {
             bool isRequired,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(bool?)? getCustomError,
-            @JsonKey(toJson: BooleanFieldSettings.staticToJson)
-            BooleanFieldSettings uiSettings)?
+            @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+            BooleanInputUiSettings uiSettings)?
         boolean,
     TResult Function(
             String id,
@@ -2353,7 +2354,7 @@ class _$StringInputImpl extends StringInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(num?)? getCustomError,
-            NumFieldSettings uiSettings)?
+            NumInputUiSettings uiSettings)?
         num,
     TResult Function(
             String id,
@@ -2363,7 +2364,7 @@ class _$StringInputImpl extends StringInput {
             int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
-            SelectFieldSettings<String> uiSettings)?
+            SelectInputUiSettings<String> uiSettings)?
         selectString,
     TResult Function(
             String id,
@@ -2372,8 +2373,8 @@ class _$StringInputImpl extends StringInput {
             String? regexPattern,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(String?)? getCustomError,
-            @JsonKey(toJson: StringFieldSettings.staticToJson)
-            StringFieldSettings uiSettings)?
+            @JsonKey(toJson: StringInputUiSettings.staticToJson)
+            StringInputUiSettings uiSettings)?
         string,
     required TResult orElse(),
   }) {
@@ -2437,8 +2438,8 @@ abstract class StringInput extends WoFormInput {
       final String? regexPattern,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final WoFormInputError? Function(String?)? getCustomError,
-      @JsonKey(toJson: StringFieldSettings.staticToJson)
-      final StringFieldSettings uiSettings}) = _$StringInputImpl;
+      @JsonKey(toJson: StringInputUiSettings.staticToJson)
+      final StringInputUiSettings uiSettings}) = _$StringInputImpl;
   const StringInput._() : super._();
 
   factory StringInput.fromJson(Map<String, dynamic> json) =
@@ -2454,8 +2455,8 @@ abstract class StringInput extends WoFormInput {
   @JsonKey(includeToJson: false, includeFromJson: false)
   WoFormInputError? Function(String?)? get getCustomError;
   @override
-  @JsonKey(toJson: StringFieldSettings.staticToJson)
-  StringFieldSettings get uiSettings;
+  @JsonKey(toJson: StringInputUiSettings.staticToJson)
+  StringInputUiSettings get uiSettings;
   @override
   @JsonKey(ignore: true)
   _$$StringInputImplCopyWith<_$StringInputImpl> get copyWith =>
@@ -2472,7 +2473,8 @@ mixin _$SelectInput<T> {
   @JsonKey(includeToJson: false, includeFromJson: false)
   WoFormInputError? Function(List<T>)? get getCustomError =>
       throw _privateConstructorUsedError;
-  SelectFieldSettings<T>? get uiSettings => throw _privateConstructorUsedError;
+  SelectInputUiSettings<T>? get uiSettings =>
+      throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
   Object? Function(T)? get toJsonT => throw _privateConstructorUsedError;
 
@@ -2495,11 +2497,11 @@ abstract class $SelectInputCopyWith<T, $Res> {
       List<T> availibleValues,
       @JsonKey(includeToJson: false, includeFromJson: false)
       WoFormInputError? Function(List<T>)? getCustomError,
-      SelectFieldSettings<T>? uiSettings,
+      SelectInputUiSettings<T>? uiSettings,
       @JsonKey(includeToJson: false, includeFromJson: false)
       Object? Function(T)? toJsonT});
 
-  $SelectFieldSettingsCopyWith<T, $Res>? get uiSettings;
+  $SelectInputUiSettingsCopyWith<T, $Res>? get uiSettings;
 }
 
 /// @nodoc
@@ -2552,7 +2554,7 @@ class _$SelectInputCopyWithImpl<T, $Res, $Val extends SelectInput<T>>
       uiSettings: freezed == uiSettings
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
-              as SelectFieldSettings<T>?,
+              as SelectInputUiSettings<T>?,
       toJsonT: freezed == toJsonT
           ? _value.toJsonT
           : toJsonT // ignore: cast_nullable_to_non_nullable
@@ -2562,12 +2564,12 @@ class _$SelectInputCopyWithImpl<T, $Res, $Val extends SelectInput<T>>
 
   @override
   @pragma('vm:prefer-inline')
-  $SelectFieldSettingsCopyWith<T, $Res>? get uiSettings {
+  $SelectInputUiSettingsCopyWith<T, $Res>? get uiSettings {
     if (_value.uiSettings == null) {
       return null;
     }
 
-    return $SelectFieldSettingsCopyWith<T, $Res>(_value.uiSettings!, (value) {
+    return $SelectInputUiSettingsCopyWith<T, $Res>(_value.uiSettings!, (value) {
       return _then(_value.copyWith(uiSettings: value) as $Val);
     });
   }
@@ -2589,12 +2591,12 @@ abstract class _$$SelectInputImplCopyWith<T, $Res>
       List<T> availibleValues,
       @JsonKey(includeToJson: false, includeFromJson: false)
       WoFormInputError? Function(List<T>)? getCustomError,
-      SelectFieldSettings<T>? uiSettings,
+      SelectInputUiSettings<T>? uiSettings,
       @JsonKey(includeToJson: false, includeFromJson: false)
       Object? Function(T)? toJsonT});
 
   @override
-  $SelectFieldSettingsCopyWith<T, $Res>? get uiSettings;
+  $SelectInputUiSettingsCopyWith<T, $Res>? get uiSettings;
 }
 
 /// @nodoc
@@ -2645,7 +2647,7 @@ class __$$SelectInputImplCopyWithImpl<T, $Res>
       uiSettings: freezed == uiSettings
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
-              as SelectFieldSettings<T>?,
+              as SelectInputUiSettings<T>?,
       toJsonT: freezed == toJsonT
           ? _value.toJsonT
           : toJsonT // ignore: cast_nullable_to_non_nullable
@@ -2700,7 +2702,7 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
   @JsonKey(includeToJson: false, includeFromJson: false)
   final WoFormInputError? Function(List<T>)? getCustomError;
   @override
-  final SelectFieldSettings<T>? uiSettings;
+  final SelectInputUiSettings<T>? uiSettings;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final Object? Function(T)? toJsonT;
@@ -2760,7 +2762,7 @@ abstract class _SelectInput<T> extends SelectInput<T> {
       final List<T> availibleValues,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final WoFormInputError? Function(List<T>)? getCustomError,
-      final SelectFieldSettings<T>? uiSettings,
+      final SelectInputUiSettings<T>? uiSettings,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final Object? Function(T)? toJsonT}) = _$SelectInputImpl<T>;
   const _SelectInput._() : super._();
@@ -2779,7 +2781,7 @@ abstract class _SelectInput<T> extends SelectInput<T> {
   @JsonKey(includeToJson: false, includeFromJson: false)
   WoFormInputError? Function(List<T>)? get getCustomError;
   @override
-  SelectFieldSettings<T>? get uiSettings;
+  SelectInputUiSettings<T>? get uiSettings;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   Object? Function(T)? get toJsonT;

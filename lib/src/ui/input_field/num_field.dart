@@ -7,12 +7,12 @@ import 'package:wo_form/wo_form.dart';
 class NumField extends StatefulWidget {
   const NumField({
     required this.inputPath,
-    this.settings,
+    this.uiSettings,
     super.key,
   });
 
   final String inputPath;
-  final NumFieldSettings? settings;
+  final NumInputUiSettings? uiSettings;
 
   @override
   State<NumField> createState() => _NumFieldState();
@@ -48,7 +48,7 @@ class _NumFieldState extends State<NumField> {
 
     final inputSettings = input.uiSettings;
     final mergedSettings =
-        widget.settings?.merge(inputSettings) ?? inputSettings;
+        widget.uiSettings?.merge(inputSettings) ?? inputSettings;
 
     return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
       builder: (context, status) {

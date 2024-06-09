@@ -8,25 +8,25 @@ part 'ui_settings.g.dart';
 enum BooleanFieldOnOffType { checkbox, switchButton }
 
 @freezed
-class BooleanFieldSettings with _$BooleanFieldSettings {
-  const factory BooleanFieldSettings({
+class BooleanInputUiSettings with _$BooleanInputUiSettings {
+  const factory BooleanInputUiSettings({
     String? labelText,
     String? helperText,
     BooleanFieldOnOffType? onOffType,
     ListTileControlAffinity? onOffPosition,
-  }) = _BooleanFieldSettings;
+  }) = _BooleanInputUiSettings;
 
-  const BooleanFieldSettings._();
+  const BooleanInputUiSettings._();
 
-  factory BooleanFieldSettings.fromJson(Map<String, dynamic> json) =>
-      _$BooleanFieldSettingsFromJson(json);
+  factory BooleanInputUiSettings.fromJson(Map<String, dynamic> json) =>
+      _$BooleanInputUiSettingsFromJson(json);
 
-  static Map<String, dynamic> staticToJson(BooleanFieldSettings object) =>
+  static Map<String, dynamic> staticToJson(BooleanInputUiSettings object) =>
       object.toJson();
 
-  BooleanFieldSettings merge(BooleanFieldSettings? other) => other == null
+  BooleanInputUiSettings merge(BooleanInputUiSettings? other) => other == null
       ? this
-      : BooleanFieldSettings(
+      : BooleanInputUiSettings(
           labelText: labelText ?? other.labelText,
           helperText: helperText ?? other.helperText,
           onOffType: onOffType ?? other.onOffType,
@@ -37,25 +37,25 @@ class BooleanFieldSettings with _$BooleanFieldSettings {
 enum NodeDisplayMode { card, tile }
 
 @freezed
-class InputsNodeWidgetSettings with _$InputsNodeWidgetSettings {
-  const factory InputsNodeWidgetSettings({
+class InputsNodeUiSettings with _$InputsNodeUiSettings {
+  const factory InputsNodeUiSettings({
     String? labelText,
     String? helperText,
     NodeDisplayMode? displayMode,
-  }) = _InputsNodeWidgetSettings;
+  }) = _InputsNodeUiSettings;
 
-  const InputsNodeWidgetSettings._();
+  const InputsNodeUiSettings._();
 
-  factory InputsNodeWidgetSettings.fromJson(Map<String, dynamic> json) =>
-      _$InputsNodeWidgetSettingsFromJson(json);
+  factory InputsNodeUiSettings.fromJson(Map<String, dynamic> json) =>
+      _$InputsNodeUiSettingsFromJson(json);
 
-  static Map<String, dynamic> staticToJson(InputsNodeWidgetSettings object) =>
+  static Map<String, dynamic> staticToJson(InputsNodeUiSettings object) =>
       object.toJson();
 
-  InputsNodeWidgetSettings merge(InputsNodeWidgetSettings? other) =>
+  InputsNodeUiSettings merge(InputsNodeUiSettings? other) =>
       other == null
       ? this
-          : InputsNodeWidgetSettings(
+      : InputsNodeUiSettings(
           labelText: labelText ?? other.labelText,
           helperText: helperText ?? other.helperText,
           displayMode: displayMode ?? other.displayMode,
@@ -63,23 +63,23 @@ class InputsNodeWidgetSettings with _$InputsNodeWidgetSettings {
 }
 
 @freezed
-class NumFieldSettings with _$NumFieldSettings {
-  const factory NumFieldSettings({
+class NumInputUiSettings with _$NumInputUiSettings {
+  const factory NumInputUiSettings({
     String? labelText,
     String? helperText,
-  }) = _NumFieldSettings;
+  }) = _NumInputUiSettings;
 
-  const NumFieldSettings._();
+  const NumInputUiSettings._();
 
-  factory NumFieldSettings.fromJson(Map<String, dynamic> json) =>
-      _$NumFieldSettingsFromJson(json);
+  factory NumInputUiSettings.fromJson(Map<String, dynamic> json) =>
+      _$NumInputUiSettingsFromJson(json);
 
-  static Map<String, dynamic> staticToJson(NumFieldSettings object) =>
+  static Map<String, dynamic> staticToJson(NumInputUiSettings object) =>
       object.toJson();
 
-  NumFieldSettings merge(NumFieldSettings? other) => other == null
+  NumInputUiSettings merge(NumInputUiSettings? other) => other == null
       ? this
-      : NumFieldSettings(
+      : NumInputUiSettings(
           labelText: labelText ?? other.labelText,
           helperText: helperText ?? other.helperText,
         );
@@ -88,8 +88,8 @@ class NumFieldSettings with _$NumFieldSettings {
 enum SelectFieldDisplayMode { tile, chip }
 
 @freezed
-class SelectFieldSettings<T> with _$SelectFieldSettings<T> {
-  const factory SelectFieldSettings({
+class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
+  const factory SelectInputUiSettings({
     String? labelText,
     String? helperText,
     SelectFieldDisplayMode? displayMode,
@@ -97,16 +97,17 @@ class SelectFieldSettings<T> with _$SelectFieldSettings<T> {
     Widget Function(T?)? valueBuilder,
     @JsonKey(includeFromJson: false, includeToJson: false)
     Widget? Function(T)? helpValueBuilder,
-  }) = _SelectFieldSettings<T>;
+  }) = _SelectInputUiSettings<T>;
 
-  const SelectFieldSettings._();
+  const SelectInputUiSettings._();
 
-  factory SelectFieldSettings.fromJson(Map<String, dynamic> json) =>
-      _$SelectFieldSettingsFromJson(json);
+  factory SelectInputUiSettings.fromJson(Map<String, dynamic> json) =>
+      _$SelectInputUiSettingsFromJson(json);
 
-  SelectFieldSettings<T> merge(SelectFieldSettings<T>? other) => other == null
+  SelectInputUiSettings<T> merge(SelectInputUiSettings<T>? other) =>
+      other == null
       ? this
-      : SelectFieldSettings(
+          : SelectInputUiSettings(
           labelText: labelText ?? other.labelText,
           helperText: helperText ?? other.helperText,
           displayMode: displayMode ?? other.displayMode,
@@ -118,8 +119,8 @@ class SelectFieldSettings<T> with _$SelectFieldSettings<T> {
 enum StringFieldAction { clear, obscure }
 
 @freezed
-class StringFieldSettings with _$StringFieldSettings {
-  const factory StringFieldSettings({
+class StringInputUiSettings with _$StringInputUiSettings {
+  const factory StringInputUiSettings({
     String? labelText,
     String? hintText,
     String? helperText,
@@ -134,9 +135,9 @@ class StringFieldSettings with _$StringFieldSettings {
     TextCapitalization? textCapitalization,
     int? maxLines,
     String? invalidRegexMessage,
-  }) = _StringFieldSettings;
+  }) = _StringInputUiSettings;
 
-  factory StringFieldSettings.email({
+  factory StringInputUiSettings.email({
     String? labelText,
     String? hintText,
     String? helperText,
@@ -145,7 +146,7 @@ class StringFieldSettings with _$StringFieldSettings {
     TextInputAction? textInputAction,
     String? invalidRegexMessage,
   }) =>
-      StringFieldSettings(
+      StringInputUiSettings(
         labelText: labelText,
         hintText: hintText,
         helperText: helperText,
@@ -159,7 +160,7 @@ class StringFieldSettings with _$StringFieldSettings {
         maxLines: 1,
       );
 
-  factory StringFieldSettings.password({
+  factory StringInputUiSettings.password({
     String? labelText,
     String? hintText,
     String? helperText,
@@ -167,7 +168,7 @@ class StringFieldSettings with _$StringFieldSettings {
     TextInputAction? textInputAction,
     String? invalidRegexMessage,
   }) =>
-      StringFieldSettings(
+      StringInputUiSettings(
         labelText: labelText,
         hintText: hintText,
         helperText: helperText,
@@ -185,17 +186,17 @@ class StringFieldSettings with _$StringFieldSettings {
         maxLines: 1,
       );
 
-  const StringFieldSettings._();
+  const StringInputUiSettings._();
 
-  factory StringFieldSettings.fromJson(Map<String, dynamic> json) =>
-      _$StringFieldSettingsFromJson(json);
+  factory StringInputUiSettings.fromJson(Map<String, dynamic> json) =>
+      _$StringInputUiSettingsFromJson(json);
 
-  static Map<String, dynamic> staticToJson(StringFieldSettings object) =>
+  static Map<String, dynamic> staticToJson(StringInputUiSettings object) =>
       object.toJson();
 
-  StringFieldSettings merge(StringFieldSettings? other) => other == null
+  StringInputUiSettings merge(StringInputUiSettings? other) => other == null
       ? this
-      : StringFieldSettings(
+      : StringInputUiSettings(
           labelText: labelText ?? other.labelText,
           hintText: hintText ?? other.hintText,
           helperText: helperText ?? other.helperText,

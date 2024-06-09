@@ -7,12 +7,12 @@ import 'package:wo_form/wo_form.dart';
 class SelectField<T> extends StatelessWidget {
   const SelectField({
     required this.inputPath,
-    this.settings,
+    this.uiSettings,
     super.key,
   });
 
   final String inputPath;
-  final SelectFieldSettings<T>? settings;
+  final SelectInputUiSettings<T>? uiSettings;
 
   SelectInput<T> getInput(WoForm form, Map<String, dynamic> valuesMap) {
     final input = form.getInput(path: inputPath, valuesMap: valuesMap);
@@ -60,9 +60,9 @@ class SelectField<T> extends StatelessWidget {
 
     final input = getInput(form, valuesCubit.state);
     final inputSettings = input.uiSettings;
-    final mergedSettings = settings?.merge(inputSettings) ??
+    final mergedSettings = uiSettings?.merge(inputSettings) ??
         inputSettings ??
-        const SelectFieldSettings();
+        const SelectInputUiSettings();
 
     final valueBuilder = mergedSettings.valueBuilder;
 
@@ -211,7 +211,7 @@ class SelectField<T> extends StatelessWidget {
 class SelectStringField extends SelectField<String> {
   const SelectStringField({
     required super.inputPath,
-    super.settings,
+    super.uiSettings,
     super.key,
   });
 

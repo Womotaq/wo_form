@@ -28,14 +28,14 @@ class EditEventPage extends StatelessWidget {
           id: 'title',
           defaultValue: event.title,
           isRequired: true,
-          uiSettings: const StringFieldSettings(
+          uiSettings: const StringInputUiSettings(
             labelText: 'Titre',
           ),
         ),
         StringInput(
           id: 'address',
           defaultValue: event.address,
-          uiSettings: const StringFieldSettings(
+          uiSettings: const StringInputUiSettings(
             labelText: 'Adresse',
             keyboardType: TextInputType.streetAddress,
             autofillHints: [AutofillHints.addressCity],

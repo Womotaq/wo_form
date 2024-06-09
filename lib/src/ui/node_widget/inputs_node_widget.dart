@@ -7,12 +7,12 @@ import 'package:wo_form/wo_form.dart';
 class InputsNodeWidget extends StatelessWidget {
   const InputsNodeWidget({
     required this.inputPath,
-    this.settings,
+    this.uiSettings,
     super.key,
   });
 
   final String inputPath;
-  final InputsNodeWidgetSettings? settings;
+  final InputsNodeUiSettings? uiSettings;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class InputsNodeWidget extends StatelessWidget {
     }
 
     final inputSettings = input.uiSettings;
-    final mergedSettings = settings?.merge(inputSettings) ?? inputSettings;
+    final mergedSettings = uiSettings?.merge(inputSettings) ?? inputSettings;
 
     final inputWidgets =
         input.inputs.map((i) => i.toWidget(parentPath: inputPath)).toList();

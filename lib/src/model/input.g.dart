@@ -20,7 +20,7 @@ SelectInput<T> _$SelectInputFromJson<T>(
           (json['availibleValues'] as List<dynamic>).map(fromJsonT).toList(),
       uiSettings: json['uiSettings'] == null
           ? null
-          : SelectFieldSettings<T>.fromJson(
+          : SelectInputUiSettings<T>.fromJson(
               json['uiSettings'] as Map<String, dynamic>),
     );
 
@@ -43,8 +43,8 @@ _$BooleanInputImpl _$$BooleanInputImplFromJson(Map<String, dynamic> json) =>
       defaultValue: json['defaultValue'] as bool?,
       isRequired: json['isRequired'] as bool? ?? false,
       uiSettings: json['uiSettings'] == null
-          ? const BooleanFieldSettings()
-          : BooleanFieldSettings.fromJson(
+          ? const BooleanInputUiSettings()
+          : BooleanInputUiSettings.fromJson(
               json['uiSettings'] as Map<String, dynamic>),
       $type: json['runtimeType'] as String?,
     );
@@ -54,7 +54,7 @@ Map<String, dynamic> _$$BooleanInputImplToJson(_$BooleanInputImpl instance) =>
       'id': instance.id,
       'defaultValue': instance.defaultValue,
       'isRequired': instance.isRequired,
-      'uiSettings': BooleanFieldSettings.staticToJson(instance.uiSettings),
+      'uiSettings': BooleanInputUiSettings.staticToJson(instance.uiSettings),
       'runtimeType': instance.$type,
     };
 
@@ -66,8 +66,8 @@ _$NumInputImpl _$$NumInputImplFromJson(Map<String, dynamic> json) =>
       maxBound: (json['maxBound'] as num?)?.toInt(),
       minBound: (json['minBound'] as num?)?.toInt() ?? 0,
       uiSettings: json['uiSettings'] == null
-          ? const NumFieldSettings()
-          : NumFieldSettings.fromJson(
+          ? const NumInputUiSettings()
+          : NumInputUiSettings.fromJson(
               json['uiSettings'] as Map<String, dynamic>),
       $type: json['runtimeType'] as String?,
     );
@@ -98,8 +98,8 @@ _$SelectStringInputImpl _$$SelectStringInputImplFromJson(
           const [],
       minCount: (json['minCount'] as num?)?.toInt() ?? 0,
       uiSettings: json['uiSettings'] == null
-          ? const SelectFieldSettings<String>()
-          : SelectFieldSettings<String>.fromJson(
+          ? const SelectInputUiSettings<String>()
+          : SelectInputUiSettings<String>.fromJson(
               json['uiSettings'] as Map<String, dynamic>),
       $type: json['runtimeType'] as String?,
     );
@@ -123,8 +123,8 @@ _$StringInputImpl _$$StringInputImplFromJson(Map<String, dynamic> json) =>
       isRequired: json['isRequired'] as bool? ?? false,
       regexPattern: json['regexPattern'] as String?,
       uiSettings: json['uiSettings'] == null
-          ? const StringFieldSettings()
-          : StringFieldSettings.fromJson(
+          ? const StringInputUiSettings()
+          : StringInputUiSettings.fromJson(
               json['uiSettings'] as Map<String, dynamic>),
       $type: json['runtimeType'] as String?,
     );
@@ -135,6 +135,6 @@ Map<String, dynamic> _$$StringInputImplToJson(_$StringInputImpl instance) =>
       'defaultValue': instance.defaultValue,
       'isRequired': instance.isRequired,
       'regexPattern': instance.regexPattern,
-      'uiSettings': StringFieldSettings.staticToJson(instance.uiSettings),
+      'uiSettings': StringInputUiSettings.staticToJson(instance.uiSettings),
       'runtimeType': instance.$type,
     };

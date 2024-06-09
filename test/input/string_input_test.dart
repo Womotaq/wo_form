@@ -6,7 +6,7 @@ void main() {
   final input = StringInput(
     id: 'name',
     regexPattern: RegexPattern.username.value,
-    uiSettings: StringFieldSettings(
+    uiSettings: StringInputUiSettings(
       labelText: 'Type your username',
       submitFormOnFieldSubmitted: true,
       invalidRegexMessage: FormLocalizationsFr()
