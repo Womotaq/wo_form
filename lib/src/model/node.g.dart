@@ -21,6 +21,7 @@ _$InputsNodeImpl _$$InputsNodeImplFromJson(Map<String, dynamic> json) =>
           ? const InputsNodeWidgetSettings()
           : InputsNodeWidgetSettings.fromJson(
               json['uiSettings'] as Map<String, dynamic>),
+      $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$InputsNodeImplToJson(_$InputsNodeImpl instance) =>
@@ -30,9 +31,28 @@ Map<String, dynamic> _$$InputsNodeImplToJson(_$InputsNodeImpl instance) =>
       'inputs': const InputsListConverter().toJson(instance.inputs),
       'exportType': _$NodeExportTypeEnumMap[instance.exportType]!,
       'uiSettings': InputsNodeWidgetSettings.staticToJson(instance.uiSettings),
+      'runtimeType': instance.$type,
     };
 
 const _$NodeExportTypeEnumMap = {
   NodeExportType.list: 'list',
   NodeExportType.map: 'map',
 };
+
+_$ValueBuilderNodeImpl _$$ValueBuilderNodeImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ValueBuilderNodeImpl(
+      id: json['id'] as String,
+      inputPath: json['inputPath'] as String,
+      defaultValue: json['defaultValue'],
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$ValueBuilderNodeImplToJson(
+        _$ValueBuilderNodeImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'inputPath': instance.inputPath,
+      'defaultValue': instance.defaultValue,
+      'runtimeType': instance.$type,
+    };

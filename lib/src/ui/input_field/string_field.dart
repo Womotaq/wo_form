@@ -18,15 +18,17 @@ class StringField extends StatefulWidget {
 }
 
 class _StringFieldState extends State<StringField> {
-  late final StringFieldSettings mergedSettings;
   final textEditingController = TextEditingController();
   bool obscureText = false;
 
   @override
-  void initState() {
-    super.initState();
+  Widget build(BuildContext context) {
+    final valuesCubit = context.read<WoFormValuesCubit>();
 
-    final input = context.read<WoForm>().getInput(path: widget.inputPath);
+    final input = context.read<WoForm>().getInput(
+          path: widget.inputPath,
+          valuesMap: context.read<WoFormValuesCubit>().state,
+        );
     if (input is! StringInput) {
       throw ArgumentError(
         'Expected <StringInput> at path: "${widget.inputPath}", '
@@ -35,17 +37,10 @@ class _StringFieldState extends State<StringField> {
     }
 
     final inputSettings = input.uiSettings;
-    mergedSettings = widget.settings?.merge(inputSettings) ?? inputSettings;
+    final mergedSettings =
+        widget.settings?.merge(inputSettings) ?? inputSettings;
 
     obscureText = mergedSettings.obscureText ?? false;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final valuesCubit = context.read<WoFormValuesCubit>();
-
-    final input =
-        context.read<WoForm>().getInput(path: widget.inputPath)! as StringInput;
 
     return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
       builder: (context, status) {

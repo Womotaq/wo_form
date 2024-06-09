@@ -34,7 +34,10 @@ class _NumFieldState extends State<NumField> {
     final form = context.read<WoForm>();
     final valuesCubit = context.read<WoFormValuesCubit>();
 
-    final input = form.getInput(path: widget.inputPath);
+    final input = form.getInput(
+      path: widget.inputPath,
+      valuesMap: valuesCubit.state,
+    );
     if (input is! NumInput) {
       throw ArgumentError(
         'Expected <NumInput> at path: "${widget.inputPath}", '

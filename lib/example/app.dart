@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
+import 'package:wo_form/example/dynamic_form/dynamic_form_page.dart';
 import 'package:wo_form/example/edit_event/event_page.dart';
 import 'package:wo_form/example/form_creator/form_creator_page.dart';
 import 'package:wo_form/example/from_json/from_json_page.dart';
@@ -80,13 +81,23 @@ class HomePage extends StatelessWidget {
               trailing: const Icon(Icons.chevron_right),
             ),
             ListTile(
+              onTap: () => context.pushPage(const DynamicFormPage()),
+              leading: const Icon(Icons.electric_bolt),
+              title: const Text(
+                'Dynamiser un formulaire',
+                style: TextStyleExt.bold,
+              ),
+              subtitle: const Text("C'est sympa ça"),
+              trailing: const Icon(Icons.chevron_right),
+            ),
+            ListTile(
               onTap: () => context.pushPage(const StringInputPage()),
               leading: const Icon(Icons.edit_note),
               title: const Text(
-                'Créer un formulaire',
+                'Créer un formulaire en quelques clics',
                 style: TextStyleExt.bold,
               ),
-              subtitle: const Text('Formulaire avancé'),
+              subtitle: const Text('Via un formulaire'),
               trailing: const Icon(Icons.chevron_right),
             ),
           ],

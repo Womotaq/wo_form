@@ -47,6 +47,8 @@ mixin WoFormInputMixin {
 
   /// When a parent of this element will jsonify, this method will take an
   /// object (the value from the form fulfillment) and return a json value.
+  // TODO : rename as submitJson
+  // TODO : add values in parameters
   Object? exportValue(Object? value);
 }
 

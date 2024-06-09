@@ -68,7 +68,10 @@ class WoForm with _$WoForm {
   ///
   /// The path of the input with id 'name' is '/profile/name'.
   /// In a form, the full path might be '/#/profile/name'
-  WoFormElementMixin? getInput({required String path}) {
+  WoFormElementMixin? getInput({
+    required String path,
+    Map<String, dynamic>? valuesMap,
+  }) {
     if (!path.startsWith('/')) {
       throw ArgumentError('An input path must start with character "/".');
     }
@@ -81,7 +84,7 @@ class WoForm with _$WoForm {
 
     return nodes
         .firstWhereOrNull((i) => i.id == path.substring(1, slashIndex + 1))
-        ?.getInput(path: path.substring(slashIndex + 1));
+        ?.getInput(path: path.substring(slashIndex + 1), valuesMap: valuesMap);
   }
 
   Widget toPage({

@@ -13,8 +13,8 @@ class SelectField<T> extends StatelessWidget {
   final String inputPath;
   final SelectFieldSettings<T>? settings;
 
-  SelectInput<T> getInput(WoForm form) {
-    final input = form.getInput(path: inputPath);
+  SelectInput<T> getInput(WoForm form, Map<String, dynamic> valuesMap) {
+    final input = form.getInput(path: inputPath, valuesMap: valuesMap);
     if (input is! SelectInput<T>) {
       throw ArgumentError(
         'Expected <SelectInput<$T>> at path: "$inputPath", '
@@ -57,7 +57,7 @@ class SelectField<T> extends StatelessWidget {
     final form = context.read<WoForm>();
     final valuesCubit = context.read<WoFormValuesCubit>();
 
-    final input = getInput(form);
+    final input = getInput(form, valuesCubit.state);
     final inputSettings = input.uiSettings;
     final mergedSettings = settings?.merge(inputSettings) ??
         inputSettings ??
@@ -71,7 +71,7 @@ class SelectField<T> extends StatelessWidget {
           inputPath: inputPath,
           builder: (context, selectedValues_) {
             final selectedValues = selectedValues_ ?? [];
-            
+
             final title = Text(
               (mergedSettings.labelText ?? '') +
                   (input.minCount > 0 ? '*' : ''),
@@ -98,7 +98,7 @@ class SelectField<T> extends StatelessWidget {
                 null || SelectFieldDisplayMode.tile => Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                        ListTile(title: title, subtitle: subtitle),
+                      ListTile(title: title, subtitle: subtitle),
                       ...input.availibleValues.map(
                         (value) {
                           final subtitle =
@@ -212,8 +212,9 @@ class SelectStringField extends SelectField<String> {
   });
 
   @override
-  SelectInput<String> getInput(WoForm form) {
-    final selectStringInput = form.getInput(path: inputPath);
+  SelectInput<String> getInput(WoForm form, Map<String, dynamic> valuesMap) {
+    final selectStringInput =
+        form.getInput(path: inputPath, valuesMap: valuesMap);
     if (selectStringInput is! SelectStringInput) {
       throw ArgumentError(
         'Wrong input at path "$inputPath". '

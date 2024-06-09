@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
-import 'package:wo_form/src/ui/node_widget/form_card.dart';
+import 'package:wo_form/src/ui/prefab/form_card.dart';
 import 'package:wo_form/wo_form.dart';
 
 class InputsNodeWidget extends StatelessWidget {
@@ -18,7 +18,10 @@ class InputsNodeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final form = context.read<WoForm>();
 
-    final input = form.getInput(path: inputPath);
+    final input = form.getInput(
+      path: inputPath,
+      valuesMap: context.read<WoFormValuesCubit>().state,
+    );
     if (input is! InputsNode) {
       throw ArgumentError(
         'Expected <InputsNode> at path: "$inputPath", '
