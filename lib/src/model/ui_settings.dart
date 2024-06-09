@@ -217,7 +217,21 @@ class StringInputUiSettings with _$StringInputUiSettings {
         );
 }
 
-enum WoFormDisplayMode { card, page }
+@freezed
+sealed class WoFormDisplayMode with _$WoFormDisplayMode {
+  const factory WoFormDisplayMode.card() = WoFormDisplayedInCard;
+  const factory WoFormDisplayMode.page() = WoFormDisplayedInPage;
+  const factory WoFormDisplayMode.pages({
+    String? nextText,
+    String? backText,
+  }) = WoFormDisplayedInPages;
+
+  factory WoFormDisplayMode.fromJson(Map<String, dynamic> json) =>
+      _$WoFormDisplayModeFromJson(json);
+
+  static Map<String, dynamic>? staticToJson(WoFormDisplayMode? object) =>
+      object?.toJson();
+}
 
 enum WoFormSubmitMode { submit, submitIfValid, save }
 
@@ -227,6 +241,7 @@ class WoFormUiSettings with _$WoFormUiSettings {
     String? titleText,
     String? submitText,
     String? submittedText,
+    @JsonKey(toJson: WoFormDisplayMode.staticToJson)
     WoFormDisplayMode? displayMode,
     WoFormSubmitMode? submitMode,
   }) = _WoFormUiSettings;

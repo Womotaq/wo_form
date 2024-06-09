@@ -168,14 +168,56 @@ const _$TextCapitalizationEnumMap = {
   TextCapitalization.none: 'none',
 };
 
+_$WoFormDisplayedInCardImpl _$$WoFormDisplayedInCardImplFromJson(
+        Map<String, dynamic> json) =>
+    _$WoFormDisplayedInCardImpl(
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$WoFormDisplayedInCardImplToJson(
+        _$WoFormDisplayedInCardImpl instance) =>
+    <String, dynamic>{
+      'runtimeType': instance.$type,
+    };
+
+_$WoFormDisplayedInPageImpl _$$WoFormDisplayedInPageImplFromJson(
+        Map<String, dynamic> json) =>
+    _$WoFormDisplayedInPageImpl(
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$WoFormDisplayedInPageImplToJson(
+        _$WoFormDisplayedInPageImpl instance) =>
+    <String, dynamic>{
+      'runtimeType': instance.$type,
+    };
+
+_$WoFormDisplayedInPagesImpl _$$WoFormDisplayedInPagesImplFromJson(
+        Map<String, dynamic> json) =>
+    _$WoFormDisplayedInPagesImpl(
+      nextText: json['nextText'] as String?,
+      backText: json['backText'] as String?,
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$WoFormDisplayedInPagesImplToJson(
+        _$WoFormDisplayedInPagesImpl instance) =>
+    <String, dynamic>{
+      'nextText': instance.nextText,
+      'backText': instance.backText,
+      'runtimeType': instance.$type,
+    };
+
 _$WoFormUiSettingsImpl _$$WoFormUiSettingsImplFromJson(
         Map<String, dynamic> json) =>
     _$WoFormUiSettingsImpl(
       titleText: json['titleText'] as String?,
       submitText: json['submitText'] as String?,
       submittedText: json['submittedText'] as String?,
-      displayMode:
-          $enumDecodeNullable(_$WoFormDisplayModeEnumMap, json['displayMode']),
+      displayMode: json['displayMode'] == null
+          ? null
+          : WoFormDisplayMode.fromJson(
+              json['displayMode'] as Map<String, dynamic>),
       submitMode:
           $enumDecodeNullable(_$WoFormSubmitModeEnumMap, json['submitMode']),
     );
@@ -186,14 +228,9 @@ Map<String, dynamic> _$$WoFormUiSettingsImplToJson(
       'titleText': instance.titleText,
       'submitText': instance.submitText,
       'submittedText': instance.submittedText,
-      'displayMode': _$WoFormDisplayModeEnumMap[instance.displayMode],
+      'displayMode': WoFormDisplayMode.staticToJson(instance.displayMode),
       'submitMode': _$WoFormSubmitModeEnumMap[instance.submitMode],
     };
-
-const _$WoFormDisplayModeEnumMap = {
-  WoFormDisplayMode.card: 'card',
-  WoFormDisplayMode.page: 'page',
-};
 
 const _$WoFormSubmitModeEnumMap = {
   WoFormSubmitMode.submit: 'submit',

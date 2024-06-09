@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/src/model/json_converter/inputs_list.dart';
-import 'package:wo_form/src/ui/prefab/wo_form_screen.dart';
 import 'package:wo_form/wo_form.dart';
 
 part 'form.freezed.dart';
@@ -101,14 +100,14 @@ class WoForm with _$WoForm {
       onSubmitted: onSubmitted,
     );
 
-    return uiSettings.displayMode == WoFormDisplayMode.page
-        ? widget
-        : Scaffold(
-            appBar: AppBar(),
+    return uiSettings.displayMode is WoFormDisplayedInCard
+        ? Scaffold(
+            appBar: AppBar(leading: WoFormPopButton(form: this)),
             body: SingleChildScrollView(
               child: WoPadding.allMedium(child: widget),
             ),
-          );
+          )
+        : widget;
   }
 
   Widget toWidget({

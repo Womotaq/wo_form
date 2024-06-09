@@ -48,7 +48,10 @@ class InputsNodeWidget extends StatelessWidget {
         return FormCard(
           labelText: mergedSettings.labelText ?? '',
           helperText: mergedSettings.helperText ?? '',
-          child: Column(children: inputWidgets),
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: WoSize.small),
+            child: Column(children: inputWidgets),
+          ),
         );
       case NodeDisplayMode.tile:
         return Column(

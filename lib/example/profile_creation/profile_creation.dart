@@ -10,7 +10,10 @@ class ProfileCreationPage extends StatelessWidget {
     final form = WoForm(
       uiSettings: const WoFormUiSettings(
         submitText: 'Enregistrer',
-        displayMode: WoFormDisplayMode.page,
+        displayMode: WoFormDisplayedInPages(
+          nextText: 'Suivant',
+          backText: 'Retour',
+        ),
       ),
       inputs: [
         const InputsNode(

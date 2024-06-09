@@ -26,7 +26,7 @@ class WoFormScreen extends StatelessWidget {
     final submitButton = BlocBuilder<WoFormStatusCubit, WoFormStatus>(
       builder: (context, status) {
         return switch (mergedSettings.submitMode) {
-          _ when mergedSettings.displayMode == WoFormDisplayMode.page
+          _ when mergedSettings.displayMode is WoFormDisplayedInPage
             // || WoFormSubmitMode.save
             =>
             switch (status) {
@@ -135,7 +135,7 @@ class WoFormScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         ...form.inputs.map((e) => e.toWidget(parentPath: '')),
-        if (mergedSettings.displayMode != WoFormDisplayMode.page) ...[
+        if (mergedSettings.displayMode is! WoFormDisplayedInPage) ...[
           WoGap.xlarge,
           submitButton,
         ],
@@ -152,29 +152,14 @@ class WoFormScreen extends StatelessWidget {
           }
         },
         child: switch (mergedSettings.displayMode) {
-          null || WoFormDisplayMode.card => FormCard(
+          null || WoFormDisplayedInCard() => FormCard(
               labelText: mergedSettings.titleText ?? '',
               helperText: '',
               child: body,
             ),
-          WoFormDisplayMode.page => Scaffold(
+          WoFormDisplayedInPage() => Scaffold(
               appBar: AppBar(
-                leading: Builder(
-                  builder: (context) {
-                    return IconButton(
-                      icon: const Icon(Icons.arrow_back),
-                      onPressed: () {
-                        if (form.onUnsubmittedQuit == null ||
-                            context.read<WoFormStatusCubit>().state
-                                is SubmittedStatus) {
-                          return Navigator.of(context).pop();
-                        } else {
-                          form.onUnsubmittedQuit!(context);
-                        }
-                      },
-                    );
-                  },
-                ),
+                leading: WoFormPopButton(form: form),
                 title: Text(mergedSettings.titleText ?? ''),
                 actions: [submitButton, WoGap.small],
               ),
@@ -182,8 +167,108 @@ class WoFormScreen extends StatelessWidget {
                 child: WoPadding.allMedium(child: body),
               ),
             ),
+          WoFormDisplayedInPages(
+            nextText: final nextText,
+            backText: final backText,
+          ) =>
+            Scaffold(
+              appBar: AppBar(
+                leading: WoFormPopButton(form: form),
+                title: Text(mergedSettings.titleText ?? ''),
+              ),
+              body: WoPadding.allMedium(
+                child: _WoFormPageView(
+                  form: form,
+                  backText: backText,
+                  nextText: nextText,
+                  submitButton: submitButton,
+                ),
+              ),
+            ),
         },
       ),
+    );
+  }
+}
+
+class _WoFormPageView extends StatelessWidget {
+  const _WoFormPageView({
+    required this.form,
+    required this.backText,
+    required this.submitButton,
+    required this.nextText,
+    super.key,
+  });
+
+  final WoForm form;
+  final String? backText;
+  final BlocBuilder<WoFormStatusCubit, WoFormStatus> submitButton;
+  final String? nextText;
+
+  @override
+  Widget build(BuildContext context) {
+    final pageController = PageController();
+
+    return PageView.builder(
+      controller: pageController,
+      itemCount: form.inputs.length,
+      itemBuilder: (context, index) => Column(
+        children: [
+          form.inputs[index].toWidget(parentPath: ''),
+          WoGap.xlarge,
+          Row(
+            children: [
+              if (index > 0)
+                BigButton(
+                  onPressed: () {
+                    pageController.previousPage(
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.easeOut,
+                    );
+                  },
+                  child: Text(backText ?? ''),
+                ),
+              const Spacer(),
+              if (index == form.inputs.length - 1)
+                submitButton
+              else
+                BigButton.filled(
+                  onPressed: () {
+                    pageController.nextPage(
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.easeOut,
+                    );
+                  },
+                  child: Text(nextText ?? ''),
+                ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class WoFormPopButton extends StatelessWidget {
+  const WoFormPopButton({
+    required this.form,
+    super.key,
+  });
+
+  final WoForm form;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.arrow_back),
+      onPressed: () {
+        if (form.onUnsubmittedQuit == null ||
+            context.read<WoFormStatusCubit>().state is SubmittedStatus) {
+          return Navigator.of(context).pop();
+        } else {
+          form.onUnsubmittedQuit!(context);
+        }
+      },
     );
   }
 }
