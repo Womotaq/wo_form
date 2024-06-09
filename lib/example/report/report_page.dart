@@ -85,7 +85,7 @@ class ReportPage extends StatelessWidget {
           title: "Ce json vient d'être envoyé.",
           actionText: 'Ok',
           onAction: context.read<WoFormStatusCubit>().setIdle,
-          content: Text(readableJson(form.exportValues(values))),
+          content: Text(readableJson(form.getSubmittedJson(values))),
         );
       },
     );

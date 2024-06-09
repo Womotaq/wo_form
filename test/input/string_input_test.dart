@@ -51,7 +51,13 @@ void main() {
     expect(input.getError('John') == null, true);
   });
 
-  test('StringInput.exportValue()', () {
-    expect(input.exportValue('John'), 'John');
+  test('StringInput.submitJson()', () {
+    expect(
+      input.getSubmittedJson(
+        valuesMap: {'name': 'John'},
+        parentPath: '',
+      ),
+      'John',
+    );
   });
 }

@@ -90,7 +90,7 @@ class StringInputPage extends StatelessWidget {
                           Clipboard.setData(
                             ClipboardData(
                               text: jsonEncode(
-                                woFormCreator.exportValues(values),
+                                woFormCreator.getSubmittedJson(values),
                               ),
                             ),
                           );
@@ -106,7 +106,7 @@ class StringInputPage extends StatelessWidget {
                             final WoForm form;
                             try {
                               form = WoForm.fromJson(
-                                woFormCreator.exportValues(
+                                woFormCreator.getSubmittedJson(
                                   context.read<WoFormValuesCubit>().state,
                                 ),
                               );
@@ -137,7 +137,7 @@ class StringInputPage extends StatelessWidget {
                   BlocBuilder<WoFormValuesCubit, Map<String, dynamic>>(
                     builder: (context, values) {
                       return Text(
-                        readableJson(woFormCreator.exportValues(values)),
+                        readableJson(woFormCreator.getSubmittedJson(values)),
                       );
                     },
                   ),

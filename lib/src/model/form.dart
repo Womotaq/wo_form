@@ -36,16 +36,6 @@ class WoForm with _$WoForm {
             '/${input.id}': (input as WoFormInputMixin).defaultValue,
       };
 
-  Map<String, dynamic> exportValues(Map<String, dynamic> valuesMap) => {
-        ...unmodifiableValuesJson ?? {},
-        for (final input in inputs)
-          if (input is WoFormNode)
-            input.id: input.exportValues(valuesMap, parentPath: '')
-          else if (input is WoFormInputMixin)
-            input.id: (input as WoFormInputMixin)
-                .exportValue(valuesMap['/${input.id}']),
-      };
-
   Iterable<WoFormInputError> getErrors(Map<String, dynamic> valuesMap) => [
         for (final input in inputs)
           if (input is WoFormNode)
@@ -86,6 +76,15 @@ class WoForm with _$WoForm {
         .firstWhereOrNull((i) => i.id == path.substring(1, slashIndex + 1))
         ?.getInput(path: path.substring(slashIndex + 1), valuesMap: valuesMap);
   }
+
+  Map<String, dynamic> getSubmittedJson(Map<String, dynamic> valuesMap) => {
+        ...unmodifiableValuesJson ?? {},
+        for (final input in inputs)
+          input.id: input.getSubmittedJson(
+            valuesMap: valuesMap,
+            parentPath: '',
+          ),
+      };
 
   Widget toPage({
     void Function(Map<String, dynamic> values)? onSubmitting,

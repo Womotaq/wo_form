@@ -11,7 +11,7 @@ void showJsonDialog(BuildContext context) {
     title: 'JSON',
     actionText: 'Ok',
     onAction: context.read<WoFormStatusCubit>().setIdle,
-    content: Text(readableJson(form.exportValues(values))),
+    content: Text(readableJson(form.getSubmittedJson(values))),
   );
 }
 

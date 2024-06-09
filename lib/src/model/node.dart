@@ -12,6 +12,11 @@ mixin WoFormElementMixin {
 
   Map<String, dynamic> toJson();
 
+  dynamic getSubmittedJson({
+    required Map<String, dynamic> valuesMap, // TODO : rename as values
+    required String parentPath,
+  });
+
   Widget toWidget<T extends WoFormValuesCubit>({required String parentPath});
 }
 
@@ -74,8 +79,9 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
     }
   }
 
-  dynamic exportValues(
-    Map<String, dynamic> valuesMap, {
+  @override
+  dynamic getSubmittedJson({
+    required Map<String, dynamic> valuesMap,
     required String parentPath,
   }) {
     switch (this) {
@@ -88,45 +94,27 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
           NodeExportType.list => [
               ...?unmodifiableValuesJson?.values,
               for (final input in inputs)
-                if (input is WoFormNode)
-                  input.exportValues(
-                    valuesMap,
-                    parentPath: '$parentPath/$id',
-                  )
-                else if (input is WoFormInputMixin)
-                  (input as WoFormInputMixin).exportValue(
-                    valuesMap['$parentPath/$id/${input.id}'],
-                  ),
+                input.getSubmittedJson(
+                  valuesMap: valuesMap,
+                  parentPath: '$parentPath/$id',
+                ),
             ],
           NodeExportType.map => {
               ...?unmodifiableValuesJson,
               for (final input in inputs)
-                if (input is WoFormNode)
-                  input.id: input.exportValues(
-                    valuesMap,
-                    parentPath: '$parentPath/$id',
-                  )
-                else if (input is WoFormInputMixin)
-                  input.id: (input as WoFormInputMixin).exportValue(
-                    valuesMap['$parentPath/$id/${input.id}'],
-                  ),
+                input.id: input.getSubmittedJson(
+                  valuesMap: valuesMap,
+                  parentPath: '$parentPath/$id',
+                ),
             },
         };
       case ValueBuilderNode(inputPath: final inputPath, builder: final builder):
         final input = builder!(id, valuesMap[inputPath]);
 
-        if (input is WoFormNode) {
-          return input.exportValues(
-            valuesMap,
-            parentPath: '$parentPath/$id',
-          );
-        } else if (input is WoFormInputMixin) {
-          return (input as WoFormInputMixin).exportValue(
-            valuesMap['$parentPath/$id/${input.id}'],
-          );
-        } else {
-          throw UnimplementedError('Unknown input type : ${input.runtimeType}');
-        }
+        return input.getSubmittedJson(
+          valuesMap: valuesMap,
+          parentPath: '$parentPath/$id',
+        );
     }
   }
 
@@ -137,13 +125,13 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
     switch (this) {
       case InputsNode(inputs: final inputs):
         return [
-        for (final input in inputs)
-          if (input is WoFormNode)
-            ...input.getErrors(
-              valuesMap,
-              parentPath: '$parentPath/$id',
-            )
-          else if (input is WoFormInputMixin)
+          for (final input in inputs)
+            if (input is WoFormNode)
+              ...input.getErrors(
+                valuesMap,
+                parentPath: '$parentPath/$id',
+              )
+            else if (input is WoFormInputMixin)
               (input as WoFormInputMixin).getError(
                 valuesMap['$parentPath/$id/${input.id}'],
               ),

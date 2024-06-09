@@ -32,7 +32,13 @@ void main() {
     expect(input.getError(true) == null, true);
   });
 
-  test('BooleanInput.exportValue()', () {
-    expect(input.exportValue(true), true);
+  test('BooleanInput.submitJson()', () {
+    expect(
+      input.getSubmittedJson(
+        valuesMap: {'isRequired': true},
+        parentPath: '',
+      ),
+      true,
+    );
   });
 }

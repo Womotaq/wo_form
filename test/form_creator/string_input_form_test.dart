@@ -29,7 +29,7 @@ void main() {
 
   test('StringInput Form : Step 1', () {
     expect(
-      stringInputNode.exportValues(values, parentPath: ''),
+      stringInputNode.getSubmittedJson(valuesMap: values, parentPath: ''),
       expectedInputToJson,
     );
   });

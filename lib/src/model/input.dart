@@ -33,12 +33,6 @@ mixin WoFormInputMixin {
   String get id;
 
   Map<String, dynamic> toJson();
-
-  /// When a parent of this element will jsonify, this method will take an
-  /// object (the value from the form fulfillment) and return a json value.
-  // TODO : rename as submitJson
-  // TODO : add values in parameters
-  Object? exportValue(Object? value);
 }
 
 @freezed
@@ -210,6 +204,25 @@ sealed class WoFormInput
   }
 
   @override
+  dynamic getSubmittedJson({
+    required Map<String, dynamic> valuesMap, // TODO : rename as values
+    required String parentPath,
+  }) =>
+      _valueToJson(valuesMap['$parentPath/$id']);
+
+  Object? _valueToJson(dynamic value) => switch (this) {
+        BooleanInput() => value as bool?,
+        NumInput() => value as num?,
+        SelectStringInput(maxCount: final maxCount) =>
+          SelectInput._selectedValuesToJson(
+            selectedValues: value as List<String>?,
+            toJsonT: (value) => value,
+            asList: maxCount != 1,
+          ),
+        StringInput() => value as String?,
+      };
+
+  @override
   Widget toWidget<T extends WoFormValuesCubit>({required String parentPath}) {
     final path = '$parentPath/$id';
     switch (this) {
@@ -223,19 +236,6 @@ sealed class WoFormInput
         return SelectStringField(inputPath: path);
     }
   }
-
-  @override
-  Object? exportValue(dynamic value) => switch (this) {
-        BooleanInput() => value as bool?,
-        NumInput() => value as num?,
-        SelectStringInput(maxCount: final maxCount) =>
-          SelectInput._selectedValuesToJson(
-            selectedValues: value as List<String>?,
-            toJsonT: (value) => value,
-            asList: maxCount != 1,
-          ),
-        StringInput() => value as String?,
-      };
 }
 
 @freezed
@@ -349,15 +349,19 @@ class SelectInput<T>
   }
 
   @override
-  Widget toWidget<C extends WoFormValuesCubit>({required String parentPath}) =>
-      SelectField<T>(inputPath: '$parentPath/$id');
-
-  @override
-  Object? exportValue(dynamic value) => _selectedValuesToJson<T>(
-        selectedValues: value as List<T>?,
+  dynamic getSubmittedJson({
+    required Map<String, dynamic> valuesMap, // TODO : rename as values
+    required String parentPath,
+  }) =>
+      _selectedValuesToJson<T>(
+        selectedValues: valuesMap['$parentPath/$id'] as List<T>?,
         toJsonT: toJsonT,
         asList: maxCount != 1,
       );
+
+  @override
+  Widget toWidget<C extends WoFormValuesCubit>({required String parentPath}) =>
+      SelectField<T>(inputPath: '$parentPath/$id');
 }
 
 Object? _defaultToJsonT<T>(T value) {
