@@ -18,7 +18,6 @@ class DynamicFormPage extends StatelessWidget {
           isRequired: true,
           getCustomError: (value) => (value ?? '').isEmpty
               ? const CustomInputError(
-                  inputId: 'test',
                   message: 'Donne ton prénom !',
                 )
               : null,
@@ -66,8 +65,7 @@ class DynamicFormPage extends StatelessWidget {
               minBound: 18,
               getCustomError: (value) => value == null || value >= 18
                   ? null
-                  : CustomInputError(
-                      inputId: id,
+                  : const CustomInputError(
                       message: 'Eh non mon coco y faut être majeur ici !',
                     ),
               uiSettings: NumFieldSettings(
@@ -100,8 +98,7 @@ class DynamicFormPage extends StatelessWidget {
                   maxCount: 1,
                   getCustomError: (values) => values.isNotEmpty
                       ? null
-                      : CustomInputError(
-                          inputId: id,
+                      : const CustomInputError(
                           message: 'Bah alors ? On veut pas de pseudo ?',
                         ),
                   uiSettings: SelectFieldSettings(
@@ -131,9 +128,7 @@ class DynamicFormPage extends StatelessWidget {
               isRequired: true,
               getCustomError: (value) => value == true
                   ? null
-                  // TODO : try to remove error.inputId
                   : CustomInputError(
-                      inputId: id,
                       message: 'Eh $name ! '
                           'Tu as oublié les conditions météorologiques !',
                     ),

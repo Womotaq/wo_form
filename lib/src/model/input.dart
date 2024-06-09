@@ -8,26 +8,12 @@ part 'input.g.dart';
 
 @freezed
 sealed class WoFormInputError with _$WoFormInputError {
-  const factory WoFormInputError.empty({
-    required String inputId,
-  }) = EmptyInputError;
-
-  const factory WoFormInputError.invalid({
-    required String inputId,
-  }) = InvalidInputError;
-
-  const factory WoFormInputError.maxBound({
-    required String inputId,
-  }) = MaxBoundInputError;
-
-  const factory WoFormInputError.minBound({
-    required String inputId,
-  }) = MinBoundInputError;
-
-  const factory WoFormInputError.custom({
-    required String inputId,
-    required String message,
-  }) = CustomInputError;
+  const factory WoFormInputError.empty() = EmptyInputError;
+  const factory WoFormInputError.invalid() = InvalidInputError;
+  const factory WoFormInputError.maxBound() = MaxBoundInputError;
+  const factory WoFormInputError.minBound() = MinBoundInputError;
+  const factory WoFormInputError.custom({required String message}) =
+      CustomInputError;
 }
 
 mixin WoFormInputMixin {
@@ -132,7 +118,7 @@ sealed class WoFormInput
         if (customError != null) return customError;
 
         return isRequired && value != true
-            ? WoFormInputError.empty(inputId: id)
+            ? const WoFormInputError.empty()
             : null;
 
       case NumInput(
@@ -147,12 +133,12 @@ sealed class WoFormInput
         if (customError != null) return customError;
 
         if (value == null) {
-          return isRequired ? WoFormInputError.empty(inputId: id) : null;
+          return isRequired ? const WoFormInputError.empty() : null;
         }
 
-        if (value < minBound) return WoFormInputError.minBound(inputId: id);
+        if (value < minBound) return const WoFormInputError.minBound();
         if (maxBound != null && value > maxBound) {
-          return WoFormInputError.maxBound(inputId: id);
+          return const WoFormInputError.maxBound();
         }
 
         return null;
@@ -168,10 +154,10 @@ sealed class WoFormInput
         if (customError != null) return customError;
 
         if (value == null || value.isEmpty) {
-          return isRequired ? WoFormInputError.empty(inputId: id) : null;
+          return isRequired ? const WoFormInputError.empty() : null;
         } else if (regexPattern != null &&
             !RegExp(regexPattern).hasMatch(value)) {
-          return WoFormInputError.invalid(inputId: id);
+          return const WoFormInputError.invalid();
         } else {
           return null;
         }
@@ -304,21 +290,21 @@ class SelectInput<T>
     if (customError != null) return customError;
 
     if (minCount == 1 && maxCount == 1 && selectedValues.isEmpty) {
-      return WoFormInputError.empty(inputId: inputId);
+      return const WoFormInputError.empty();
     }
 
     if (selectedValues.length < minCount) {
-      return WoFormInputError.minBound(inputId: inputId);
+      return const WoFormInputError.minBound();
     }
 
     if (maxCount != null && selectedValues.length > maxCount) {
-      return WoFormInputError.maxBound(inputId: inputId);
+      return const WoFormInputError.maxBound();
     }
 
     if (availibleValues.isNotEmpty) {
       for (final value in selectedValues) {
         if (!availibleValues.contains(value)) {
-          return WoFormInputError.invalid(inputId: inputId);
+          return const WoFormInputError.invalid();
         }
       }
     }
