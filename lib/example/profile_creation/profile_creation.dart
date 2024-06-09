@@ -59,7 +59,7 @@ class ProfileCreationPage extends StatelessWidget {
               id: 'postalCode',
               uiSettings: StringInputUiSettings(
                 labelText: 'Code postal',
-                hintText: 'XX XXX',
+                keyboardType: TextInputType.number,
                 autofillHints: [AutofillHints.postalCode],
               ),
             ),
@@ -72,6 +72,7 @@ class ProfileCreationPage extends StatelessWidget {
             ),
             StringInput(
               id: 'country',
+              defaultValue: 'France',
               uiSettings: StringInputUiSettings(
                 labelText: 'Pays',
                 autofillHints: [AutofillHints.countryName],
@@ -99,6 +100,7 @@ class ProfileCreationPage extends StatelessWidget {
               id: 'phone',
               uiSettings: StringInputUiSettings(
                 labelText: 'Numéro de téléphone',
+                keyboardType: TextInputType.phone,
                 autofillHints: [AutofillHints.familyName],
               ),
             ),

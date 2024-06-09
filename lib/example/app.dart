@@ -41,7 +41,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: context.colorScheme.contrastedBackground,
       body: WoPadding.allMedium(
-        child: Column(
+        child: ListView(
           children: [
             WoGap.xxxlarge,
             WoPadding.allMedium(

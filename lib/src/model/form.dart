@@ -100,14 +100,15 @@ class WoForm with _$WoForm {
       onSubmitted: onSubmitted,
     );
 
-    return uiSettings.displayMode is WoFormDisplayedInCard
-        ? Scaffold(
-            appBar: AppBar(leading: WoFormPopButton(form: this)),
-            body: SingleChildScrollView(
-              child: WoPadding.allMedium(child: widget),
-            ),
-          )
-        : widget;
+    return switch (uiSettings.displayMode) {
+      null || WoFormDisplayedInCard() => Scaffold(
+          appBar: AppBar(leading: WoFormPopButton(form: this)),
+          body: SingleChildScrollView(
+            child: WoPadding.allMedium(child: widget),
+          ),
+        ),
+      WoFormDisplayedInPage() || WoFormDisplayedInPages() => widget,
+    };
   }
 
   Widget toWidget({
