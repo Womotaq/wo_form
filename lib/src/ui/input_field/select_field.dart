@@ -14,8 +14,8 @@ class SelectField<T> extends StatelessWidget {
   final String inputPath;
   final SelectInputUiSettings<T>? uiSettings;
 
-  SelectInput<T> getInput(WoForm form, Map<String, dynamic> valuesMap) {
-    final input = form.getInput(path: inputPath, valuesMap: valuesMap);
+  SelectInput<T> getInput(WoForm form, Map<String, dynamic> values) {
+    final input = form.getInput(path: inputPath, values: values);
     if (input is! SelectInput<T>) {
       throw ArgumentError(
         'Expected <SelectInput<$T>> at path: "$inputPath", '
@@ -218,9 +218,9 @@ class SelectStringField extends SelectField<String> {
   });
 
   @override
-  SelectInput<String> getInput(WoForm form, Map<String, dynamic> valuesMap) {
+  SelectInput<String> getInput(WoForm form, Map<String, dynamic> values) {
     final selectStringInput =
-        form.getInput(path: inputPath, valuesMap: valuesMap);
+        form.getInput(path: inputPath, values: values);
     if (selectStringInput is! SelectStringInput) {
       throw ArgumentError(
         'Wrong input at path "$inputPath". '

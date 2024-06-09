@@ -37,12 +37,12 @@ class WoForm with _$WoForm {
             '/${input.id}': (input as WoFormInputMixin).defaultValue,
       };
 
-  Iterable<WoFormInputError> getErrors(Map<String, dynamic> valuesMap) => [
+  Iterable<WoFormInputError> getErrors(Map<String, dynamic> values) => [
         for (final input in inputs)
           if (input is WoFormNode)
-            ...input.getErrors(valuesMap, parentPath: '')
+            ...input.getErrors(values, parentPath: '')
           else if (input is WoFormInputMixin)
-            (input as WoFormInputMixin).getError(valuesMap['/${input.id}']),
+            (input as WoFormInputMixin).getError(values['/${input.id}']),
       ].whereNotNull();
 
   /// The path of an input is the ids of it and its parents, separated by the
@@ -61,7 +61,7 @@ class WoForm with _$WoForm {
   /// In a form, the full path might be '/#/profile/name'
   WoFormElementMixin? getInput({
     required String path,
-    Map<String, dynamic>? valuesMap,
+    Map<String, dynamic>? values,
   }) {
     if (!path.startsWith('/')) {
       throw ArgumentError('An input path must start with character "/".');
@@ -78,15 +78,15 @@ class WoForm with _$WoForm {
         ?.getInput(
           path: path.substring(slashIndex + 1),
           parentPath: '',
-          valuesMap: valuesMap,
+          values: values,
         );
   }
 
-  Map<String, dynamic> getSubmittedJson(Map<String, dynamic> valuesMap) => {
+  Map<String, dynamic> getSubmittedJson(Map<String, dynamic> values) => {
         ...unmodifiableValuesJson ?? {},
         for (final input in inputs)
           input.id: input.getSubmittedJson(
-            valuesMap: valuesMap,
+            values: values,
             parentPath: '',
           ),
       };

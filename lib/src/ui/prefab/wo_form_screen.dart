@@ -234,15 +234,15 @@ class _WoFormPageView extends StatelessWidget {
                   BigButton.filled(
                     onPressed: () {
                       final input = form.inputs[index];
-                      final valuesMap = context.read<WoFormValuesCubit>().state;
+                      final values = context.read<WoFormValuesCubit>().state;
 
                       final Iterable<WoFormInputError> errors;
                       if (input is WoFormNode) {
-                        errors = input.getErrors(valuesMap, parentPath: '');
+                        errors = input.getErrors(values, parentPath: '');
                       } else if (input is WoFormInputMixin) {
                         errors = [
                           (input as WoFormInputMixin)
-                              .getError(valuesMap['/${input.id}']),
+                              .getError(values['/${input.id}']),
                         ].whereNotNull();
                       } else {
                         throw UnimplementedError();

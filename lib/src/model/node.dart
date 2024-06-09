@@ -15,7 +15,7 @@ mixin WoFormElementMixin {
   Map<String, dynamic> toJson();
 
   dynamic getSubmittedJson({
-    required Map<String, dynamic> valuesMap, // TODO : rename as values
+    required Map<String, dynamic> values, // TODO : rename as values
     required String parentPath,
   });
 
@@ -96,7 +96,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
 
   @override
   dynamic getSubmittedJson({
-    required Map<String, dynamic> valuesMap,
+    required Map<String, dynamic> values,
     required String parentPath,
   }) {
     switch (this) {
@@ -110,7 +110,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
               ...?unmodifiableValuesJson?.values,
               for (final input in inputs)
                 input.getSubmittedJson(
-                  valuesMap: valuesMap,
+                  values: values,
                   parentPath: '$parentPath/$id',
                 ),
             ],
@@ -118,7 +118,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
               ...?unmodifiableValuesJson,
               for (final input in inputs)
                 input.id: input.getSubmittedJson(
-                  valuesMap: valuesMap,
+                  values: values,
                   parentPath: '$parentPath/$id',
                 ),
             },
@@ -126,14 +126,14 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
       case ValueBuilderNode(inputPath: final inputPath, builder: final builder):
         final input = builder!(
           id,
-          valuesMap[toAbsolutePath(
+          values[toAbsolutePath(
             parentPath: parentPath,
             inputPath: inputPath,
           )],
         );
 
         return input.getSubmittedJson(
-          valuesMap: valuesMap,
+          values: values,
           parentPath: '$parentPath/$id',
         );
       case ValueListenerNode():
@@ -142,7 +142,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
   }
 
   Iterable<WoFormInputError> getErrors(
-    Map<String, dynamic> valuesMap, {
+    Map<String, dynamic> values, {
     required String parentPath,
   }) {
     switch (this) {
@@ -151,18 +151,18 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
           for (final input in inputs)
             if (input is WoFormNode)
               ...input.getErrors(
-                valuesMap,
+                values,
                 parentPath: '$parentPath/$id',
               )
             else if (input is WoFormInputMixin)
               (input as WoFormInputMixin).getError(
-                valuesMap['$parentPath/$id/${input.id}'],
+                values['$parentPath/$id/${input.id}'],
               ),
         ].whereNotNull();
       case ValueBuilderNode(inputPath: final inputPath, builder: final builder):
         final input = builder!(
           id,
-          valuesMap[toAbsolutePath(
+          values[toAbsolutePath(
             parentPath: parentPath,
             inputPath: inputPath,
           )],
@@ -170,13 +170,13 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
 
         if (input is WoFormNode) {
           return input.getErrors(
-            valuesMap,
+            values,
             parentPath: '$parentPath/$id',
           );
         } else if (input is WoFormInputMixin) {
           return [
             (input as WoFormInputMixin).getError(
-              valuesMap['$parentPath/$id/${input.id}'],
+              values['$parentPath/$id/${input.id}'],
             ),
           ].whereNotNull();
         } else {
@@ -203,7 +203,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
   WoFormElementMixin? getInput({
     required String path,
     required String parentPath,
-    Map<String, dynamic>? valuesMap,
+    Map<String, dynamic>? values,
   }) {
     if (!path.startsWith('/')) {
       throw ArgumentError('An input path must start with character "/".');
@@ -223,20 +223,20 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
             ?.getInput(
               path: path.substring(slashIndex + 1),
               parentPath: '$parentPath/$id',
-              valuesMap: valuesMap,
+              values: values,
             );
       case ValueBuilderNode(
           inputPath: final inputPath,
           builder: final builder,
         ):
-        if (valuesMap == null) {
+        if (values == null) {
           throw ArgumentError(
-            'valuesMap must be provided in order to access a dynamic input.',
+            'values must be provided in order to access a dynamic input.',
           );
         }
         final input = builder!(
           id,
-          valuesMap[toAbsolutePath(
+          values[toAbsolutePath(
             parentPath: parentPath,
             inputPath: inputPath,
           )],
@@ -248,7 +248,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
           return input.getInput(
             path: path.substring(slashIndex + 1),
             parentPath: '$parentPath/$id',
-            valuesMap: valuesMap,
+            values: values,
           );
         }
 

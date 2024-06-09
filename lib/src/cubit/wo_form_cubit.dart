@@ -118,8 +118,8 @@ class WoFormBuilder extends StatelessWidget {
     return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
       builder: (_, status) {
         return BlocBuilder<WoFormValuesCubit, Map<String, dynamic>>(
-          builder: (context, valuesMap) {
-            return builder(context, form, status, valuesMap);
+          builder: (context, values) {
+            return builder(context, form, status, values);
           },
         );
       },

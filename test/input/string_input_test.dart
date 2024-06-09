@@ -54,7 +54,7 @@ void main() {
   test('StringInput.submitJson()', () {
     expect(
       input.getSubmittedJson(
-        valuesMap: {'name': 'John'},
+        values: {'name': 'John'},
         parentPath: '',
       ),
       'John',

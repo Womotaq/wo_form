@@ -20,7 +20,7 @@ class InputsNodeWidget extends StatelessWidget {
 
     final input = form.getInput(
       path: inputPath,
-      valuesMap: context.read<WoFormValuesCubit>().state,
+      values: context.read<WoFormValuesCubit>().state,
     );
     if (input is! InputsNode) {
       throw ArgumentError(

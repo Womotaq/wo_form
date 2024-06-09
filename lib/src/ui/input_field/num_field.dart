@@ -37,7 +37,7 @@ class _NumFieldState extends State<NumField> {
 
     final input = form.getInput(
       path: widget.inputPath,
-      valuesMap: valuesCubit.state,
+      values: valuesCubit.state,
     );
     if (input is! NumInput) {
       throw ArgumentError(

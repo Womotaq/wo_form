@@ -35,7 +35,7 @@ void main() {
   test('BooleanInput.submitJson()', () {
     expect(
       input.getSubmittedJson(
-        valuesMap: {'isRequired': true},
+        values: {'isRequired': true},
         parentPath: '',
       ),
       true,

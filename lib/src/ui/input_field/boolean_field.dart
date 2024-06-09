@@ -19,7 +19,7 @@ class BooleanField extends StatelessWidget {
     final form = context.read<WoForm>();
     final valuesCubit = context.read<WoFormValuesCubit>();
 
-    final input = form.getInput(path: inputPath, valuesMap: valuesCubit.state);
+    final input = form.getInput(path: inputPath, values: valuesCubit.state);
     if (input is! BooleanInput) {
       throw ArgumentError(
         'Expected <BooleanInput> at path: "$inputPath", '

@@ -28,7 +28,7 @@ class _StringFieldState extends State<StringField> {
 
     final input = context.read<WoForm>().getInput(
           path: widget.inputPath,
-          valuesMap: context.read<WoFormValuesCubit>().state,
+          values: context.read<WoFormValuesCubit>().state,
         );
     if (input is! StringInput) {
       throw ArgumentError(

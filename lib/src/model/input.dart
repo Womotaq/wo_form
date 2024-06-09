@@ -207,10 +207,10 @@ sealed class WoFormInput
 
   @override
   dynamic getSubmittedJson({
-    required Map<String, dynamic> valuesMap, // TODO : rename as values
+    required Map<String, dynamic> values, // TODO : rename as values
     required String parentPath,
   }) =>
-      _valueToJson(valuesMap['$parentPath/$id']);
+      _valueToJson(values['$parentPath/$id']);
 
   Object? _valueToJson(dynamic value) => switch (this) {
         BooleanInput() => value as bool?,
@@ -352,11 +352,11 @@ class SelectInput<T>
 
   @override
   dynamic getSubmittedJson({
-    required Map<String, dynamic> valuesMap, // TODO : rename as values
+    required Map<String, dynamic> values, // TODO : rename as values
     required String parentPath,
   }) =>
       _selectedValuesToJson<T>(
-        selectedValues: valuesMap['$parentPath/$id'] as List<T>?,
+        selectedValues: values['$parentPath/$id'] as List<T>?,
         toJsonT: toJsonT,
         asList: maxCount != 1,
       );
