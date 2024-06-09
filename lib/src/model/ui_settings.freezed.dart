@@ -189,10 +189,8 @@ class _$BooleanInputUiSettingsImpl extends _BooleanInputUiSettings {
   @override
   @pragma('vm:prefer-inline')
   _$$BooleanInputUiSettingsImplCopyWith<_$BooleanInputUiSettingsImpl>
-      get copyWith =>
-          __$$BooleanInputUiSettingsImplCopyWithImpl<
-          _$BooleanInputUiSettingsImpl>(
-              this, _$identity);
+      get copyWith => __$$BooleanInputUiSettingsImplCopyWithImpl<
+          _$BooleanInputUiSettingsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -228,8 +226,7 @@ abstract class _BooleanInputUiSettings extends BooleanInputUiSettings {
       get copyWith => throw _privateConstructorUsedError;
 }
 
-InputsNodeUiSettings _$InputsNodeUiSettingsFromJson(
-    Map<String, dynamic> json) {
+InputsNodeUiSettings _$InputsNodeUiSettingsFromJson(Map<String, dynamic> json) {
   return _InputsNodeUiSettings.fromJson(json);
 }
 
@@ -585,6 +582,9 @@ mixin _$SelectInputUiSettings<T> {
   @JsonKey(includeFromJson: false, includeToJson: false)
   Widget? Function(T)? get helpValueBuilder =>
       throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  double Function(String, T)? get searcher =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -605,7 +605,9 @@ abstract class $SelectInputUiSettingsCopyWith<T, $Res> {
       @JsonKey(includeFromJson: false, includeToJson: false)
       Widget Function(T?)? valueBuilder,
       @JsonKey(includeFromJson: false, includeToJson: false)
-      Widget? Function(T)? helpValueBuilder});
+      Widget? Function(T)? helpValueBuilder,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      double Function(String, T)? searcher});
 }
 
 /// @nodoc
@@ -627,6 +629,7 @@ class _$SelectInputUiSettingsCopyWithImpl<T, $Res,
     Object? displayMode = freezed,
     Object? valueBuilder = freezed,
     Object? helpValueBuilder = freezed,
+    Object? searcher = freezed,
   }) {
     return _then(_value.copyWith(
       labelText: freezed == labelText
@@ -649,6 +652,10 @@ class _$SelectInputUiSettingsCopyWithImpl<T, $Res,
           ? _value.helpValueBuilder
           : helpValueBuilder // ignore: cast_nullable_to_non_nullable
               as Widget? Function(T)?,
+      searcher: freezed == searcher
+          ? _value.searcher
+          : searcher // ignore: cast_nullable_to_non_nullable
+              as double Function(String, T)?,
     ) as $Val);
   }
 }
@@ -669,7 +676,9 @@ abstract class _$$SelectInputUiSettingsImplCopyWith<T, $Res>
       @JsonKey(includeFromJson: false, includeToJson: false)
       Widget Function(T?)? valueBuilder,
       @JsonKey(includeFromJson: false, includeToJson: false)
-      Widget? Function(T)? helpValueBuilder});
+      Widget? Function(T)? helpValueBuilder,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      double Function(String, T)? searcher});
 }
 
 /// @nodoc
@@ -690,6 +699,7 @@ class __$$SelectInputUiSettingsImplCopyWithImpl<T, $Res>
     Object? displayMode = freezed,
     Object? valueBuilder = freezed,
     Object? helpValueBuilder = freezed,
+    Object? searcher = freezed,
   }) {
     return _then(_$SelectInputUiSettingsImpl<T>(
       labelText: freezed == labelText
@@ -712,6 +722,10 @@ class __$$SelectInputUiSettingsImplCopyWithImpl<T, $Res>
           ? _value.helpValueBuilder
           : helpValueBuilder // ignore: cast_nullable_to_non_nullable
               as Widget? Function(T)?,
+      searcher: freezed == searcher
+          ? _value.searcher
+          : searcher // ignore: cast_nullable_to_non_nullable
+              as double Function(String, T)?,
     ));
   }
 }
@@ -725,7 +739,8 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
       this.displayMode,
       @JsonKey(includeFromJson: false, includeToJson: false) this.valueBuilder,
       @JsonKey(includeFromJson: false, includeToJson: false)
-      this.helpValueBuilder})
+      this.helpValueBuilder,
+      @JsonKey(includeFromJson: false, includeToJson: false) this.searcher})
       : super._();
 
   factory _$SelectInputUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
@@ -743,10 +758,13 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   final Widget? Function(T)? helpValueBuilder;
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final double Function(String, T)? searcher;
 
   @override
   String toString() {
-    return 'SelectInputUiSettings<$T>(labelText: $labelText, helperText: $helperText, displayMode: $displayMode, valueBuilder: $valueBuilder, helpValueBuilder: $helpValueBuilder)';
+    return 'SelectInputUiSettings<$T>(labelText: $labelText, helperText: $helperText, displayMode: $displayMode, valueBuilder: $valueBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher)';
   }
 
   @override
@@ -763,13 +781,15 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
             (identical(other.valueBuilder, valueBuilder) ||
                 other.valueBuilder == valueBuilder) &&
             (identical(other.helpValueBuilder, helpValueBuilder) ||
-                other.helpValueBuilder == helpValueBuilder));
+                other.helpValueBuilder == helpValueBuilder) &&
+            (identical(other.searcher, searcher) ||
+                other.searcher == searcher));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, labelText, helperText,
-      displayMode, valueBuilder, helpValueBuilder);
+      displayMode, valueBuilder, helpValueBuilder, searcher);
 
   @JsonKey(ignore: true)
   @override
@@ -794,7 +814,9 @@ abstract class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
           @JsonKey(includeFromJson: false, includeToJson: false)
           final Widget Function(T?)? valueBuilder,
           @JsonKey(includeFromJson: false, includeToJson: false)
-          final Widget? Function(T)? helpValueBuilder}) =
+          final Widget? Function(T)? helpValueBuilder,
+          @JsonKey(includeFromJson: false, includeToJson: false)
+          final double Function(String, T)? searcher}) =
       _$SelectInputUiSettingsImpl<T>;
   const _SelectInputUiSettings._() : super._();
 
@@ -813,6 +835,9 @@ abstract class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   Widget? Function(T)? get helpValueBuilder;
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  double Function(String, T)? get searcher;
   @override
   @JsonKey(ignore: true)
   _$$SelectInputUiSettingsImplCopyWith<T, _$SelectInputUiSettingsImpl<T>>
@@ -1203,8 +1228,7 @@ class _$StringInputUiSettingsImpl extends _StringInputUiSettings {
   @pragma('vm:prefer-inline')
   _$$StringInputUiSettingsImplCopyWith<_$StringInputUiSettingsImpl>
       get copyWith => __$$StringInputUiSettingsImplCopyWithImpl<
-          _$StringInputUiSettingsImpl>(
-          this, _$identity);
+          _$StringInputUiSettingsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -1267,8 +1291,7 @@ abstract class _StringInputUiSettings extends StringInputUiSettings {
   @override
   @JsonKey(ignore: true)
   _$$StringInputUiSettingsImplCopyWith<_$StringInputUiSettingsImpl>
-      get copyWith =>
-      throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 WoFormUiSettings _$WoFormUiSettingsFromJson(Map<String, dynamic> json) {

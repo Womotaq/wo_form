@@ -2060,13 +2060,13 @@ class _$SelectStringInputImpl extends SelectStringInput {
 
 abstract class SelectStringInput extends WoFormInput {
   const factory SelectStringInput(
-      {required final String id,
-      required final int? maxCount,
-      final List<String> defaultValue,
-      final List<String> availibleValues,
-      final int minCount,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      final WoFormInputError? Function(List<String>)? getCustomError,
+          {required final String id,
+          required final int? maxCount,
+          final List<String> defaultValue,
+          final List<String> availibleValues,
+          final int minCount,
+          @JsonKey(includeToJson: false, includeFromJson: false)
+          final WoFormInputError? Function(List<String>)? getCustomError,
           final SelectInputUiSettings<String> uiSettings}) =
       _$SelectStringInputImpl;
   const SelectStringInput._() : super._();

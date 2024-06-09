@@ -172,12 +172,19 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
                 labelText: 'Correction automatique',
               ),
             ),
-            const SelectStringInput(
+            SelectStringInput(
               id: 'autofillHints',
               availibleValues: AutofillHintsX.all,
               maxCount: null,
               uiSettings: SelectInputUiSettings(
                 labelText: 'Saisie automatique',
+                searcher: (query_, value_) {
+                  final query = query_.toLowerCase();
+                  final value = value_.toLowerCase();
+                  if (value.startsWith(query)) return 1;
+                  if (value.contains(query)) return .5;
+                  return 0;
+                },
               ),
             ),
             const BooleanInput(

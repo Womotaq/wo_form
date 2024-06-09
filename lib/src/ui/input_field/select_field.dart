@@ -149,6 +149,7 @@ class SelectField<T> extends StatelessWidget {
                       selectedValue: selectedValues.firstOrNull,
                       valueBuilder: valueBuilder,
                       helpValueBuilder: mergedSettings.helpValueBuilder,
+                      searcher: mergedSettings.searcher,
                     ),
                   ),
               };
@@ -170,6 +171,7 @@ class SelectField<T> extends StatelessWidget {
                       helpValueBuilder: mergedSettings.helpValueBuilder,
                       showArrow: false,
                       previewBuilder: (_) => const Icon(Icons.add),
+                      searcher: mergedSettings.searcher,
                     ),
                   ),
                   if (selectedValues.isNotEmpty)

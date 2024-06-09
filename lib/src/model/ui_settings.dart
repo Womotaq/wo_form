@@ -97,6 +97,8 @@ class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
     Widget Function(T?)? valueBuilder,
     @JsonKey(includeFromJson: false, includeToJson: false)
     Widget? Function(T)? helpValueBuilder,
+    @JsonKey(includeFromJson: false, includeToJson: false)
+    double Function(String query, T value)? searcher,
   }) = _SelectInputUiSettings<T>;
 
   const SelectInputUiSettings._();
