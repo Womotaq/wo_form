@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wo_form/src/l10n/arb_gen/form_localizations_fr.dart';
 import 'package:wo_form/src/model/json_converter/text_input_type.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -206,11 +207,23 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
                     'laissez vide.',
               ),
             ),
-            const StringInput(
+            ValueBuilderNode(
               id: 'invalidRegexMessage',
-              uiSettings: StringFieldSettings(
-                labelText: 'Message en cas de regex invalide',
-              ),
+              inputPath: '../../regexPattern',
+              builder: (id, value) {
+                final regex = (value as List<RegexPattern?>?)?.firstOrNull;
+                return StringInput(
+                  id: 'invalidRegexMessage',
+                  defaultValue: switch (regex) {
+                    null => null,
+                    _ =>
+                      FormLocalizationsFr().regexPatternUnmatched(regex.name),
+                  },
+                  uiSettings: const StringFieldSettings(
+                    labelText: 'Message en cas de regex invalide',
+                  ),
+                );
+              },
             ),
           ],
         ),

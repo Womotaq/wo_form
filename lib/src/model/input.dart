@@ -35,6 +35,8 @@ mixin WoFormInputMixin {
   Map<String, dynamic> toJson();
 }
 
+// TODO : assert / is not in an input id
+
 @freezed
 sealed class WoFormInput
     with _$WoFormInput, WoFormElementMixin, WoFormInputMixin {

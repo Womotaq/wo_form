@@ -162,7 +162,9 @@ class WoFormScreen extends StatelessWidget {
                 title: Text(mergedSettings.titleText ?? ''),
                 actions: [submitButton, WoGap.small],
               ),
-              body: WoPadding.allMedium(child: body),
+              body: SingleChildScrollView(
+                child: WoPadding.allMedium(child: body),
+              ),
             ),
         },
       ),
