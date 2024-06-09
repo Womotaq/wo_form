@@ -57,7 +57,6 @@ class StringInputPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return WoFormInitializer(
       form: woFormCreator,
-      onSubmitting: () {},
       child: Scaffold(
         // backgroundColor: context.colorScheme.contrastedBackground,
         appBar: AppBar(

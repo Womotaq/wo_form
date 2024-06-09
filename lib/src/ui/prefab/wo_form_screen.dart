@@ -14,7 +14,7 @@ class WoFormScreen extends StatelessWidget {
   });
 
   final WoForm form;
-  final VoidCallback? onSubmitting;
+  final void Function(Map<String, dynamic> values)? onSubmitting;
   final void Function(BuildContext context)? onSubmitted;
   final WoFormUiSettings? settings;
 

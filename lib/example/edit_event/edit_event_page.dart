@@ -43,9 +43,14 @@ class EditEventPage extends StatelessWidget {
         ),
       ],
     ).toWidget(
-      onSubmitting: () async =>
-          Future<void>.delayed(const Duration(seconds: 3)),
-      onSubmitted: (context) {},
+      onSubmitting: (values) {
+        final edittedEvent = event.copyWith(
+          title: values['/title'] as String,
+          address: values['/address'] as String,
+        );
+        eventsCubit.update(event: edittedEvent);
+      },
+      onSubmitted: (context) => Navigator.of(context).pop(),
     );
   }
 }

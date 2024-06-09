@@ -14,7 +14,7 @@ class EditFormPage extends StatelessWidget {
   });
 
   final WoForm form;
-  final FutureOr<void> Function() onSubmitting;
+  final FutureOr<void> Function(Map<String, dynamic> values) onSubmitting;
   final Widget Function(BuildContext context) builder;
 
   @override

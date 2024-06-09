@@ -26,7 +26,7 @@ class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
 
   final WoForm form;
   final WoFormStatusCubit _statusCubit;
-  final FutureOr<void> Function()? onSubmitting;
+  final FutureOr<void> Function(Map<String, dynamic> values)? onSubmitting;
 
   bool get isPure => _statusCubit.state is SubmittedStatus;
 
@@ -54,7 +54,7 @@ class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
     _statusCubit._setSubmitting();
 
     try {
-      await onSubmitting?.call();
+      await onSubmitting?.call(state);
       _statusCubit._setSubmitted();
     } catch (e, s) {
       _statusCubit._setSubmitError(error: e, stackTrace: s);
@@ -71,7 +71,7 @@ class WoFormInitializer extends StatelessWidget {
   });
 
   final WoForm form;
-  final FutureOr<void> Function()? onSubmitting;
+  final FutureOr<void> Function(Map<String, dynamic> values)? onSubmitting;
   final Widget child;
 
   @override

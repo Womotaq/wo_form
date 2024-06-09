@@ -7,6 +7,12 @@ import 'package:wo_form/example/edit_event/event.dart';
 
 class EventsCubit extends Cubit<List<EventModel>> {
   EventsCubit(super.initialState);
+
+  void update({required EventModel event}) => emit(
+        List<EventModel>.from(state)
+            .map((e) => e.id == event.id ? event : e)
+            .toList(),
+      );
 }
 
 class EventsPage extends StatelessWidget {

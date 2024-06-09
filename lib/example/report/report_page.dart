@@ -78,7 +78,7 @@ class ReportPage extends StatelessWidget {
             ),
           ],
         ).toWidget(
-          onSubmitting: () async {
+          onSubmitting: (_) async {
             await Future<void>.delayed(const Duration(seconds: 3));
           },
           onSubmitted: (context) {

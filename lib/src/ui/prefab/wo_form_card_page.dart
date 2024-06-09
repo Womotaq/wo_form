@@ -28,7 +28,6 @@ class WoFormCardPage extends StatelessWidget {
               ),
             )
             .toWidget(
-              onSubmitting: () {},
               onSubmitted: (context) {
                 final values = context.read<WoFormValuesCubit>().state;
                 showActionDialog(
