@@ -35,7 +35,10 @@ mixin WoFormInputMixin {
 
   WoFormInputError? getError(Object? value);
 
-  String? getInvalidExplanation(Object? value, FormLocalizations formL10n);
+  String? getInvalidExplanation(
+    Object? value,
+    String Function(WoFormInputError) localizeInputError,
+  );
 
   Widget toWidget<C extends WoFormValuesCubit>({required String parentPath});
 
@@ -59,6 +62,8 @@ sealed class WoFormInput
     required String id,
     bool? defaultValue,
     @Default(false) bool isRequired,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    WoFormInputError? Function(bool? value)? getCustomError,
     @JsonKey(toJson: BooleanFieldSettings.staticToJson)
     @Default(BooleanFieldSettings())
     BooleanFieldSettings uiSettings,
@@ -111,7 +116,15 @@ sealed class WoFormInput
   @override
   WoFormInputError? getError(dynamic value) {
     switch (this) {
-      case BooleanInput(isRequired: final isRequired):
+      case BooleanInput(
+          isRequired: final isRequired,
+          getCustomError: final getCustomError,
+        ):
+        value as bool?;
+
+        final customError = getCustomError?.call(value);
+        if (customError != null) return customError;
+
         return isRequired && value != true
             ? WoFormInputError.empty(inputId: id)
             : null;
@@ -166,7 +179,10 @@ sealed class WoFormInput
   }
 
   @override
-  String? getInvalidExplanation(dynamic value, FormLocalizations formL10n) {
+  String? getInvalidExplanation(
+    dynamic value,
+    String Function(WoFormInputError) localizeInputError,
+  ) {
     final error = getError(value);
 
     if (error == null) return null;
@@ -188,8 +204,7 @@ sealed class WoFormInput
         }
     }
 
-    final errorType = error.runtimeType.toString();
-    return formL10n.formError(errorType.substring(2, errorType.length - 4));
+    return localizeInputError(error);
   }
 
   @override
@@ -311,15 +326,17 @@ class SelectInput<T>
       );
 
   @override
-  String? getInvalidExplanation(dynamic value, FormLocalizations formL10n) {
+  String? getInvalidExplanation(
+    dynamic value,
+    String Function(WoFormInputError) localizeInputError,
+  ) {
     final error = getError(value);
 
     if (error == null) return null;
 
     if (error is CustomInputError) return error.message;
 
-    final errorType = error.runtimeType.toString();
-    return formL10n.formError(errorType.substring(2, errorType.length - 4));
+    return localizeInputError(error);
   }
 
   @override

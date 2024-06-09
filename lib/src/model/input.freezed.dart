@@ -936,6 +936,8 @@ mixin _$WoFormInput {
             String id,
             bool? defaultValue,
             bool isRequired,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormInputError? Function(bool?)? getCustomError,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings uiSettings)
         boolean,
@@ -966,6 +968,8 @@ mixin _$WoFormInput {
             String id,
             bool? defaultValue,
             bool isRequired,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormInputError? Function(bool?)? getCustomError,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings uiSettings)?
         boolean,
@@ -996,6 +1000,8 @@ mixin _$WoFormInput {
             String id,
             bool? defaultValue,
             bool isRequired,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormInputError? Function(bool?)? getCustomError,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings uiSettings)?
         boolean,
@@ -1097,6 +1103,8 @@ abstract class _$$BooleanInputImplCopyWith<$Res>
       {String id,
       bool? defaultValue,
       bool isRequired,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      WoFormInputError? Function(bool?)? getCustomError,
       @JsonKey(toJson: BooleanFieldSettings.staticToJson)
       BooleanFieldSettings uiSettings});
 
@@ -1117,6 +1125,7 @@ class __$$BooleanInputImplCopyWithImpl<$Res>
     Object? id = null,
     Object? defaultValue = freezed,
     Object? isRequired = null,
+    Object? getCustomError = freezed,
     Object? uiSettings = null,
   }) {
     return _then(_$BooleanInputImpl(
@@ -1132,6 +1141,10 @@ class __$$BooleanInputImplCopyWithImpl<$Res>
           ? _value.isRequired
           : isRequired // ignore: cast_nullable_to_non_nullable
               as bool,
+      getCustomError: freezed == getCustomError
+          ? _value.getCustomError
+          : getCustomError // ignore: cast_nullable_to_non_nullable
+              as WoFormInputError? Function(bool?)?,
       uiSettings: null == uiSettings
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
@@ -1155,6 +1168,8 @@ class _$BooleanInputImpl extends BooleanInput {
       {required this.id,
       this.defaultValue,
       this.isRequired = false,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      this.getCustomError,
       @JsonKey(toJson: BooleanFieldSettings.staticToJson)
       this.uiSettings = const BooleanFieldSettings(),
       final String? $type})
@@ -1172,6 +1187,9 @@ class _$BooleanInputImpl extends BooleanInput {
   @JsonKey()
   final bool isRequired;
   @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final WoFormInputError? Function(bool?)? getCustomError;
+  @override
   @JsonKey(toJson: BooleanFieldSettings.staticToJson)
   final BooleanFieldSettings uiSettings;
 
@@ -1180,7 +1198,7 @@ class _$BooleanInputImpl extends BooleanInput {
 
   @override
   String toString() {
-    return 'WoFormInput.boolean(id: $id, defaultValue: $defaultValue, isRequired: $isRequired, uiSettings: $uiSettings)';
+    return 'WoFormInput.boolean(id: $id, defaultValue: $defaultValue, isRequired: $isRequired, getCustomError: $getCustomError, uiSettings: $uiSettings)';
   }
 
   @override
@@ -1193,14 +1211,16 @@ class _$BooleanInputImpl extends BooleanInput {
                 other.defaultValue == defaultValue) &&
             (identical(other.isRequired, isRequired) ||
                 other.isRequired == isRequired) &&
+            (identical(other.getCustomError, getCustomError) ||
+                other.getCustomError == getCustomError) &&
             (identical(other.uiSettings, uiSettings) ||
                 other.uiSettings == uiSettings));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, defaultValue, isRequired, uiSettings);
+  int get hashCode => Object.hash(
+      runtimeType, id, defaultValue, isRequired, getCustomError, uiSettings);
 
   @JsonKey(ignore: true)
   @override
@@ -1215,6 +1235,8 @@ class _$BooleanInputImpl extends BooleanInput {
             String id,
             bool? defaultValue,
             bool isRequired,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormInputError? Function(bool?)? getCustomError,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings uiSettings)
         boolean,
@@ -1238,7 +1260,7 @@ class _$BooleanInputImpl extends BooleanInput {
             StringFieldSettings uiSettings)
         string,
   }) {
-    return boolean(id, defaultValue, isRequired, uiSettings);
+    return boolean(id, defaultValue, isRequired, getCustomError, uiSettings);
   }
 
   @override
@@ -1248,6 +1270,8 @@ class _$BooleanInputImpl extends BooleanInput {
             String id,
             bool? defaultValue,
             bool isRequired,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormInputError? Function(bool?)? getCustomError,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings uiSettings)?
         boolean,
@@ -1271,7 +1295,8 @@ class _$BooleanInputImpl extends BooleanInput {
             StringFieldSettings uiSettings)?
         string,
   }) {
-    return boolean?.call(id, defaultValue, isRequired, uiSettings);
+    return boolean?.call(
+        id, defaultValue, isRequired, getCustomError, uiSettings);
   }
 
   @override
@@ -1281,6 +1306,8 @@ class _$BooleanInputImpl extends BooleanInput {
             String id,
             bool? defaultValue,
             bool isRequired,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormInputError? Function(bool?)? getCustomError,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings uiSettings)?
         boolean,
@@ -1306,7 +1333,7 @@ class _$BooleanInputImpl extends BooleanInput {
     required TResult orElse(),
   }) {
     if (boolean != null) {
-      return boolean(id, defaultValue, isRequired, uiSettings);
+      return boolean(id, defaultValue, isRequired, getCustomError, uiSettings);
     }
     return orElse();
   }
@@ -1361,6 +1388,8 @@ abstract class BooleanInput extends WoFormInput {
       {required final String id,
       final bool? defaultValue,
       final bool isRequired,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final WoFormInputError? Function(bool?)? getCustomError,
       @JsonKey(toJson: BooleanFieldSettings.staticToJson)
       final BooleanFieldSettings uiSettings}) = _$BooleanInputImpl;
   const BooleanInput._() : super._();
@@ -1373,6 +1402,8 @@ abstract class BooleanInput extends WoFormInput {
   @override
   bool? get defaultValue;
   bool get isRequired;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  WoFormInputError? Function(bool?)? get getCustomError;
   @override
   @JsonKey(toJson: BooleanFieldSettings.staticToJson)
   BooleanFieldSettings get uiSettings;
@@ -1535,6 +1566,8 @@ class _$NumInputImpl extends NumInput {
             String id,
             bool? defaultValue,
             bool isRequired,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormInputError? Function(bool?)? getCustomError,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings uiSettings)
         boolean,
@@ -1568,6 +1601,8 @@ class _$NumInputImpl extends NumInput {
             String id,
             bool? defaultValue,
             bool isRequired,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormInputError? Function(bool?)? getCustomError,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings uiSettings)?
         boolean,
@@ -1602,6 +1637,8 @@ class _$NumInputImpl extends NumInput {
             String id,
             bool? defaultValue,
             bool isRequired,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormInputError? Function(bool?)? getCustomError,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings uiSettings)?
         boolean,
@@ -1881,6 +1918,8 @@ class _$SelectStringInputImpl extends SelectStringInput {
             String id,
             bool? defaultValue,
             bool isRequired,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormInputError? Function(bool?)? getCustomError,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings uiSettings)
         boolean,
@@ -1915,6 +1954,8 @@ class _$SelectStringInputImpl extends SelectStringInput {
             String id,
             bool? defaultValue,
             bool isRequired,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormInputError? Function(bool?)? getCustomError,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings uiSettings)?
         boolean,
@@ -1949,6 +1990,8 @@ class _$SelectStringInputImpl extends SelectStringInput {
             String id,
             bool? defaultValue,
             bool isRequired,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormInputError? Function(bool?)? getCustomError,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings uiSettings)?
         boolean,
@@ -2194,6 +2237,8 @@ class _$StringInputImpl extends StringInput {
             String id,
             bool? defaultValue,
             bool isRequired,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormInputError? Function(bool?)? getCustomError,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings uiSettings)
         boolean,
@@ -2227,6 +2272,8 @@ class _$StringInputImpl extends StringInput {
             String id,
             bool? defaultValue,
             bool isRequired,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormInputError? Function(bool?)? getCustomError,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings uiSettings)?
         boolean,
@@ -2260,6 +2307,8 @@ class _$StringInputImpl extends StringInput {
             String id,
             bool? defaultValue,
             bool isRequired,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormInputError? Function(bool?)? getCustomError,
             @JsonKey(toJson: BooleanFieldSettings.staticToJson)
             BooleanFieldSettings uiSettings)?
         boolean,

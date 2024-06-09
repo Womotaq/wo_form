@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
+import 'package:wo_form/src/ui/prefab/localize_form_error.dart';
 import 'package:wo_form/wo_form.dart';
 
 class BooleanField extends StatelessWidget {
@@ -67,7 +68,10 @@ class BooleanField extends StatelessWidget {
 
             final errorText = status is! InvalidValuesStatus
                 ? null
-                : input.getInvalidExplanation(value, context.formL10n);
+                : input.getInvalidExplanation(
+                    value,
+                    localizeInputError(context.formL10n),
+                  );
 
             return ListTile(
               leading: onOffIsLeading ? onOffButton : null,

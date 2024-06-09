@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
+import 'package:wo_form/src/ui/prefab/localize_form_error.dart';
 import 'package:wo_form/wo_form.dart';
 
 class SelectField<T> extends StatelessWidget {
@@ -79,7 +80,10 @@ class SelectField<T> extends StatelessWidget {
 
             final errorText = status is! InvalidValuesStatus
                 ? null
-                : input.getInvalidExplanation(selectedValues, context.formL10n);
+                : input.getInvalidExplanation(
+                    selectedValues,
+                    localizeInputError(context.formL10n),
+                  );
             final subtitle = errorText != null
                 ? Text(
                     errorText,

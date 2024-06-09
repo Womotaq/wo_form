@@ -56,6 +56,7 @@ class DynamicFormPage extends StatelessWidget {
             final name = value as String?;
             return NumInput(
               id: id,
+              isRequired: true,
               minBound: 18,
               uiSettings: NumFieldSettings(
                 labelText: 'Quel âge avez-vous'
@@ -110,6 +111,14 @@ class DynamicFormPage extends StatelessWidget {
             return BooleanInput(
               id: id,
               isRequired: true,
+              getCustomError: (value) => value == true
+                  ? null
+                  // TODO : try to remove error.inputId
+                  : CustomInputError(
+                      inputId: 'acceptConditions',
+                      message: 'Eh $name ! '
+                          'Tu as oublié les conditions météorologiques !',
+                    ),
               uiSettings: const BooleanFieldSettings(
                 labelText:
                     "J'ai lu et j'accepte les conditions météorologiques",
