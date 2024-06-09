@@ -56,3 +56,19 @@ Map<String, dynamic> _$$ValueBuilderNodeImplToJson(
       'defaultValue': instance.defaultValue,
       'runtimeType': instance.$type,
     };
+
+_$ValueListenerNodeImpl _$$ValueListenerNodeImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ValueListenerNodeImpl(
+      id: json['id'] as String,
+      inputPath: json['inputPath'] as String,
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$ValueListenerNodeImplToJson(
+        _$ValueListenerNodeImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'inputPath': instance.inputPath,
+      'runtimeType': instance.$type,
+    };

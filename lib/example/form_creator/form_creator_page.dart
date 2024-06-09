@@ -13,7 +13,12 @@ import 'package:wo_form/wo_form.dart';
 final idGenerator = Random();
 
 extension RandomX on Random {
-  String generateId() => nextDouble().toString().substring(2);
+  String generateId() {
+    const chars = '0123456789'
+        'abcdefghijklmnopqrstuvwxyz'
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    return List<String>.generate(6, (_) => chars[nextInt(chars.length)]).join();
+  }
 }
 
 final woFormCreator = WoForm(

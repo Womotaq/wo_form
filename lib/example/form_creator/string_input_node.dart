@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/src/l10n/arb_gen/form_localizations_fr.dart';
 import 'package:wo_form/src/model/json_converter/text_input_type.dart';
+import 'package:wo_form/src/utils/to_absolute_path.dart';
 import 'package:wo_form/wo_form.dart';
 
 InputsNode createStringInputNode({required String id}) => InputsNode(
@@ -48,6 +50,23 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
             ),
           ),
           toJsonT: (regex) => regex?.value,
+        ),
+        ValueListenerNode(
+          id: 'regexPatternListener',
+          inputPath: '../regexPattern',
+          listener: (context, parentPath, value) {
+            final regex = (value as List<RegexPattern?>?)?.firstOrNull;
+
+            context.read<WoFormValuesCubit>().onValueChanged(
+                  inputPath: toAbsolutePath(
+                    parentPath: parentPath,
+                    inputPath: '../uiSettings/invalidRegexMessage',
+                  ),
+                  value: regex == null
+                      ? null
+                      : FormLocalizationsFr().regexPatternUnmatched(regex.name),
+                );
+          },
         ),
         InputsNode(
           id: 'uiSettings',
@@ -207,23 +226,11 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
                     'laissez vide.',
               ),
             ),
-            ValueBuilderNode(
+            const StringInput(
               id: 'invalidRegexMessage',
-              inputPath: '../../regexPattern',
-              builder: (id, value) {
-                final regex = (value as List<RegexPattern?>?)?.firstOrNull;
-                return StringInput(
-                  id: 'invalidRegexMessage',
-                  defaultValue: switch (regex) {
-                    null => null,
-                    _ =>
-                      FormLocalizationsFr().regexPatternUnmatched(regex.name),
-                  },
-                  uiSettings: const StringFieldSettings(
-                    labelText: 'Message en cas de regex invalide',
-                  ),
-                );
-              },
+              uiSettings: StringFieldSettings(
+                labelText: 'Message en cas de regex invalide',
+              ),
             ),
           ],
         ),

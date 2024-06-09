@@ -74,7 +74,11 @@ class WoForm with _$WoForm {
 
     return nodes
         .firstWhereOrNull((i) => i.id == path.substring(1, slashIndex + 1))
-        ?.getInput(path: path.substring(slashIndex + 1), valuesMap: valuesMap);
+        ?.getInput(
+          path: path.substring(slashIndex + 1),
+          parentPath: '',
+          valuesMap: valuesMap,
+        );
   }
 
   Map<String, dynamic> getSubmittedJson(Map<String, dynamic> valuesMap) => {

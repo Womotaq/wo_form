@@ -37,11 +37,6 @@ class _StringFieldState extends State<StringField> {
       );
     }
 
-    final defaultValue = input.defaultValue;
-    if (defaultValue != null && defaultValue != textEditingController.text) {
-      textEditingController.text = defaultValue;
-    }
-
     final inputSettings = input.uiSettings;
     final mergedSettings =
         widget.settings?.merge(inputSettings) ?? inputSettings;

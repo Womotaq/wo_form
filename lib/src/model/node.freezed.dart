@@ -20,6 +20,8 @@ WoFormNode _$WoFormNodeFromJson(Map<String, dynamic> json) {
       return InputsNode.fromJson(json);
     case 'valueBuilder':
       return ValueBuilderNode.fromJson(json);
+    case 'valueListener':
+      return ValueListenerNode.fromJson(json);
 
     default:
       throw CheckedFromJsonException(json, 'runtimeType', 'WoFormNode',
@@ -47,6 +49,14 @@ mixin _$WoFormNode {
             WoFormElementMixin Function(String, Object?)? builder,
             Object? defaultValue)
         valueBuilder,
+    required TResult Function(
+            String id,
+            String inputPath,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            bool Function(Object?, Object?)? listenWhen,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(BuildContext, String, Object?)? listener)
+        valueListener,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -66,6 +76,14 @@ mixin _$WoFormNode {
             WoFormElementMixin Function(String, Object?)? builder,
             Object? defaultValue)?
         valueBuilder,
+    TResult? Function(
+            String id,
+            String inputPath,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            bool Function(Object?, Object?)? listenWhen,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(BuildContext, String, Object?)? listener)?
+        valueListener,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -85,6 +103,14 @@ mixin _$WoFormNode {
             WoFormElementMixin Function(String, Object?)? builder,
             Object? defaultValue)?
         valueBuilder,
+    TResult Function(
+            String id,
+            String inputPath,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            bool Function(Object?, Object?)? listenWhen,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(BuildContext, String, Object?)? listener)?
+        valueListener,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -92,18 +118,21 @@ mixin _$WoFormNode {
   TResult map<TResult extends Object?>({
     required TResult Function(InputsNode value) inputs,
     required TResult Function(ValueBuilderNode value) valueBuilder,
+    required TResult Function(ValueListenerNode value) valueListener,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(InputsNode value)? inputs,
     TResult? Function(ValueBuilderNode value)? valueBuilder,
+    TResult? Function(ValueListenerNode value)? valueListener,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(InputsNode value)? inputs,
     TResult Function(ValueBuilderNode value)? valueBuilder,
+    TResult Function(ValueListenerNode value)? valueListener,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -321,6 +350,14 @@ class _$InputsNodeImpl extends InputsNode {
             WoFormElementMixin Function(String, Object?)? builder,
             Object? defaultValue)
         valueBuilder,
+    required TResult Function(
+            String id,
+            String inputPath,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            bool Function(Object?, Object?)? listenWhen,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(BuildContext, String, Object?)? listener)
+        valueListener,
   }) {
     return inputs(
         id, unmodifiableValuesJson, this.inputs, exportType, uiSettings);
@@ -344,6 +381,14 @@ class _$InputsNodeImpl extends InputsNode {
             WoFormElementMixin Function(String, Object?)? builder,
             Object? defaultValue)?
         valueBuilder,
+    TResult? Function(
+            String id,
+            String inputPath,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            bool Function(Object?, Object?)? listenWhen,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(BuildContext, String, Object?)? listener)?
+        valueListener,
   }) {
     return inputs?.call(
         id, unmodifiableValuesJson, this.inputs, exportType, uiSettings);
@@ -367,6 +412,14 @@ class _$InputsNodeImpl extends InputsNode {
             WoFormElementMixin Function(String, Object?)? builder,
             Object? defaultValue)?
         valueBuilder,
+    TResult Function(
+            String id,
+            String inputPath,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            bool Function(Object?, Object?)? listenWhen,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(BuildContext, String, Object?)? listener)?
+        valueListener,
     required TResult orElse(),
   }) {
     if (inputs != null) {
@@ -381,6 +434,7 @@ class _$InputsNodeImpl extends InputsNode {
   TResult map<TResult extends Object?>({
     required TResult Function(InputsNode value) inputs,
     required TResult Function(ValueBuilderNode value) valueBuilder,
+    required TResult Function(ValueListenerNode value) valueListener,
   }) {
     return inputs(this);
   }
@@ -390,6 +444,7 @@ class _$InputsNodeImpl extends InputsNode {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(InputsNode value)? inputs,
     TResult? Function(ValueBuilderNode value)? valueBuilder,
+    TResult? Function(ValueListenerNode value)? valueListener,
   }) {
     return inputs?.call(this);
   }
@@ -399,6 +454,7 @@ class _$InputsNodeImpl extends InputsNode {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(InputsNode value)? inputs,
     TResult Function(ValueBuilderNode value)? valueBuilder,
+    TResult Function(ValueListenerNode value)? valueListener,
     required TResult orElse(),
   }) {
     if (inputs != null) {
@@ -570,6 +626,14 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
             WoFormElementMixin Function(String, Object?)? builder,
             Object? defaultValue)
         valueBuilder,
+    required TResult Function(
+            String id,
+            String inputPath,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            bool Function(Object?, Object?)? listenWhen,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(BuildContext, String, Object?)? listener)
+        valueListener,
   }) {
     return valueBuilder(id, inputPath, builder, defaultValue);
   }
@@ -592,6 +656,14 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
             WoFormElementMixin Function(String, Object?)? builder,
             Object? defaultValue)?
         valueBuilder,
+    TResult? Function(
+            String id,
+            String inputPath,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            bool Function(Object?, Object?)? listenWhen,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(BuildContext, String, Object?)? listener)?
+        valueListener,
   }) {
     return valueBuilder?.call(id, inputPath, builder, defaultValue);
   }
@@ -614,6 +686,14 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
             WoFormElementMixin Function(String, Object?)? builder,
             Object? defaultValue)?
         valueBuilder,
+    TResult Function(
+            String id,
+            String inputPath,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            bool Function(Object?, Object?)? listenWhen,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(BuildContext, String, Object?)? listener)?
+        valueListener,
     required TResult orElse(),
   }) {
     if (valueBuilder != null) {
@@ -627,6 +707,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
   TResult map<TResult extends Object?>({
     required TResult Function(InputsNode value) inputs,
     required TResult Function(ValueBuilderNode value) valueBuilder,
+    required TResult Function(ValueListenerNode value) valueListener,
   }) {
     return valueBuilder(this);
   }
@@ -636,6 +717,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(InputsNode value)? inputs,
     TResult? Function(ValueBuilderNode value)? valueBuilder,
+    TResult? Function(ValueListenerNode value)? valueListener,
   }) {
     return valueBuilder?.call(this);
   }
@@ -645,6 +727,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(InputsNode value)? inputs,
     TResult Function(ValueBuilderNode value)? valueBuilder,
+    TResult Function(ValueListenerNode value)? valueListener,
     required TResult orElse(),
   }) {
     if (valueBuilder != null) {
@@ -682,5 +765,283 @@ abstract class ValueBuilderNode extends WoFormNode {
   @override
   @JsonKey(ignore: true)
   _$$ValueBuilderNodeImplCopyWith<_$ValueBuilderNodeImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ValueListenerNodeImplCopyWith<$Res>
+    implements $WoFormNodeCopyWith<$Res> {
+  factory _$$ValueListenerNodeImplCopyWith(_$ValueListenerNodeImpl value,
+          $Res Function(_$ValueListenerNodeImpl) then) =
+      __$$ValueListenerNodeImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String inputPath,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      bool Function(Object?, Object?)? listenWhen,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      void Function(BuildContext, String, Object?)? listener});
+}
+
+/// @nodoc
+class __$$ValueListenerNodeImplCopyWithImpl<$Res>
+    extends _$WoFormNodeCopyWithImpl<$Res, _$ValueListenerNodeImpl>
+    implements _$$ValueListenerNodeImplCopyWith<$Res> {
+  __$$ValueListenerNodeImplCopyWithImpl(_$ValueListenerNodeImpl _value,
+      $Res Function(_$ValueListenerNodeImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? inputPath = null,
+    Object? listenWhen = freezed,
+    Object? listener = freezed,
+  }) {
+    return _then(_$ValueListenerNodeImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      inputPath: null == inputPath
+          ? _value.inputPath
+          : inputPath // ignore: cast_nullable_to_non_nullable
+              as String,
+      listenWhen: freezed == listenWhen
+          ? _value.listenWhen
+          : listenWhen // ignore: cast_nullable_to_non_nullable
+              as bool Function(Object?, Object?)?,
+      listener: freezed == listener
+          ? _value.listener
+          : listener // ignore: cast_nullable_to_non_nullable
+              as void Function(BuildContext, String, Object?)?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ValueListenerNodeImpl extends ValueListenerNode {
+  const _$ValueListenerNodeImpl(
+      {required this.id,
+      required this.inputPath,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.listenWhen,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.listener,
+      final String? $type})
+      : assert(listener != null, 'ValueListenerNode.listener cannot be null'),
+        $type = $type ?? 'valueListener',
+        super._();
+
+  factory _$ValueListenerNodeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ValueListenerNodeImplFromJson(json);
+
+  @override
+  final String id;
+  @override
+  final String inputPath;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final bool Function(Object?, Object?)? listenWhen;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final void Function(BuildContext, String, Object?)? listener;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'WoFormNode.valueListener(id: $id, inputPath: $inputPath, listenWhen: $listenWhen, listener: $listener)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ValueListenerNodeImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.inputPath, inputPath) ||
+                other.inputPath == inputPath) &&
+            (identical(other.listenWhen, listenWhen) ||
+                other.listenWhen == listenWhen) &&
+            (identical(other.listener, listener) ||
+                other.listener == listener));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, id, inputPath, listenWhen, listener);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ValueListenerNodeImplCopyWith<_$ValueListenerNodeImpl> get copyWith =>
+      __$$ValueListenerNodeImplCopyWithImpl<_$ValueListenerNodeImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String id,
+            Map<String, dynamic>? unmodifiableValuesJson,
+            @InputsListConverter() List<WoFormElementMixin> inputs,
+            NodeExportType exportType,
+            @JsonKey(toJson: InputsNodeWidgetSettings.staticToJson)
+            InputsNodeWidgetSettings uiSettings)
+        inputs,
+    required TResult Function(
+            String id,
+            String inputPath,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormElementMixin Function(String, Object?)? builder,
+            Object? defaultValue)
+        valueBuilder,
+    required TResult Function(
+            String id,
+            String inputPath,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            bool Function(Object?, Object?)? listenWhen,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(BuildContext, String, Object?)? listener)
+        valueListener,
+  }) {
+    return valueListener(id, inputPath, listenWhen, listener);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String id,
+            Map<String, dynamic>? unmodifiableValuesJson,
+            @InputsListConverter() List<WoFormElementMixin> inputs,
+            NodeExportType exportType,
+            @JsonKey(toJson: InputsNodeWidgetSettings.staticToJson)
+            InputsNodeWidgetSettings uiSettings)?
+        inputs,
+    TResult? Function(
+            String id,
+            String inputPath,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormElementMixin Function(String, Object?)? builder,
+            Object? defaultValue)?
+        valueBuilder,
+    TResult? Function(
+            String id,
+            String inputPath,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            bool Function(Object?, Object?)? listenWhen,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(BuildContext, String, Object?)? listener)?
+        valueListener,
+  }) {
+    return valueListener?.call(id, inputPath, listenWhen, listener);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String id,
+            Map<String, dynamic>? unmodifiableValuesJson,
+            @InputsListConverter() List<WoFormElementMixin> inputs,
+            NodeExportType exportType,
+            @JsonKey(toJson: InputsNodeWidgetSettings.staticToJson)
+            InputsNodeWidgetSettings uiSettings)?
+        inputs,
+    TResult Function(
+            String id,
+            String inputPath,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormElementMixin Function(String, Object?)? builder,
+            Object? defaultValue)?
+        valueBuilder,
+    TResult Function(
+            String id,
+            String inputPath,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            bool Function(Object?, Object?)? listenWhen,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(BuildContext, String, Object?)? listener)?
+        valueListener,
+    required TResult orElse(),
+  }) {
+    if (valueListener != null) {
+      return valueListener(id, inputPath, listenWhen, listener);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(InputsNode value) inputs,
+    required TResult Function(ValueBuilderNode value) valueBuilder,
+    required TResult Function(ValueListenerNode value) valueListener,
+  }) {
+    return valueListener(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InputsNode value)? inputs,
+    TResult? Function(ValueBuilderNode value)? valueBuilder,
+    TResult? Function(ValueListenerNode value)? valueListener,
+  }) {
+    return valueListener?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InputsNode value)? inputs,
+    TResult Function(ValueBuilderNode value)? valueBuilder,
+    TResult Function(ValueListenerNode value)? valueListener,
+    required TResult orElse(),
+  }) {
+    if (valueListener != null) {
+      return valueListener(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ValueListenerNodeImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class ValueListenerNode extends WoFormNode {
+  const factory ValueListenerNode(
+          {required final String id,
+          required final String inputPath,
+          @JsonKey(includeToJson: false, includeFromJson: false)
+          final bool Function(Object?, Object?)? listenWhen,
+          @JsonKey(includeToJson: false, includeFromJson: false)
+          final void Function(BuildContext, String, Object?)? listener}) =
+      _$ValueListenerNodeImpl;
+  const ValueListenerNode._() : super._();
+
+  factory ValueListenerNode.fromJson(Map<String, dynamic> json) =
+      _$ValueListenerNodeImpl.fromJson;
+
+  @override
+  String get id;
+  String get inputPath;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  bool Function(Object?, Object?)? get listenWhen;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  void Function(BuildContext, String, Object?)? get listener;
+  @override
+  @JsonKey(ignore: true)
+  _$$ValueListenerNodeImplCopyWith<_$ValueListenerNodeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

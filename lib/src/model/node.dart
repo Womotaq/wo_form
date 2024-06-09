@@ -1,7 +1,9 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/src/model/json_converter/inputs_list.dart';
+import 'package:wo_form/src/utils/to_absolute_path.dart';
 import 'package:wo_form/wo_form.dart';
 
 part 'node.freezed.dart';
@@ -43,6 +45,17 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
     Object? defaultValue,
   }) = ValueBuilderNode;
 
+  @Assert('listener != null', 'ValueListenerNode.listener cannot be null')
+  const factory WoFormNode.valueListener({
+    required String id,
+    required String inputPath,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    bool Function(Object? previous, Object? current)? listenWhen,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    void Function(BuildContext context, String parentPath, Object? value)?
+        listener,
+  }) = ValueListenerNode;
+
   const WoFormNode._();
 
   factory WoFormNode.fromJson(Map<String, dynamic> json) =>
@@ -76,6 +89,8 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
         } else {
           throw UnimplementedError('Unknown input type : ${input.runtimeType}');
         }
+      case ValueListenerNode():
+        return {};
     }
   }
 
@@ -109,12 +124,20 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
             },
         };
       case ValueBuilderNode(inputPath: final inputPath, builder: final builder):
-        final input = builder!(id, valuesMap[inputPath]);
+        final input = builder!(
+          id,
+          valuesMap[toAbsolutePath(
+            parentPath: parentPath,
+            inputPath: inputPath,
+          )],
+        );
 
         return input.getSubmittedJson(
           valuesMap: valuesMap,
           parentPath: '$parentPath/$id',
         );
+      case ValueListenerNode():
+        return null;
     }
   }
 
@@ -137,7 +160,13 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
               ),
         ].whereNotNull();
       case ValueBuilderNode(inputPath: final inputPath, builder: final builder):
-        final input = builder!(id, valuesMap[inputPath]);
+        final input = builder!(
+          id,
+          valuesMap[toAbsolutePath(
+            parentPath: parentPath,
+            inputPath: inputPath,
+          )],
+        );
 
         if (input is WoFormNode) {
           return input.getErrors(
@@ -153,6 +182,8 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
         } else {
           throw UnimplementedError('Unknown input type : ${input.runtimeType}');
         }
+      case ValueListenerNode():
+        return [];
     }
   }
 
@@ -169,9 +200,9 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
   ///       ...
   ///
   /// The path of the input with id 'name' is '/profile/name'.
-  /// In a form, the full path might be '/#/profile/name'
   WoFormElementMixin? getInput({
     required String path,
+    required String parentPath,
     Map<String, dynamic>? valuesMap,
   }) {
     if (!path.startsWith('/')) {
@@ -191,6 +222,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
             .firstWhereOrNull((i) => i.id == path.substring(1, slashIndex + 1))
             ?.getInput(
               path: path.substring(slashIndex + 1),
+              parentPath: '$parentPath/$id',
               valuesMap: valuesMap,
             );
       case ValueBuilderNode(
@@ -202,17 +234,26 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
             'valuesMap must be provided in order to access a dynamic input.',
           );
         }
-        final input = builder!(id, valuesMap[inputPath]);
+        final input = builder!(
+          id,
+          valuesMap[toAbsolutePath(
+            parentPath: parentPath,
+            inputPath: inputPath,
+          )],
+        );
 
         if (input.id == path.substring(1)) return input;
 
         if (input is WoFormNode) {
           return input.getInput(
             path: path.substring(slashIndex + 1),
+            parentPath: '$parentPath/$id',
             valuesMap: valuesMap,
           );
         }
 
+        return null;
+      case ValueListenerNode():
         return null;
     }
   }
@@ -226,45 +267,34 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
           builder: final builder,
         ) =>
           WoFormValueBuilder<dynamic>(
-            inputPath: _toAbsolutePath(
+            inputPath: toAbsolutePath(
               inputPath: inputPath,
               parentPath: parentPath,
             ),
-            builder: (context, value) => builder!(id, value).toWidget(
+            builder: (context, value) {
+              final input = builder!(id, value);
+              return input.toWidget(
+                parentPath: '$parentPath/$id',
+              );
+            },
+          ),
+        ValueListenerNode(
+          inputPath: final inputPath,
+          listenWhen: final listenWhen,
+          listener: final listener,
+        ) =>
+          WoFormValueListener<dynamic>(
+            inputPath: toAbsolutePath(
+              inputPath: inputPath,
               parentPath: '$parentPath/$id',
             ),
+            listenWhen: listenWhen,
+            listener: (context, value) => listener!(
+              context,
+              '$parentPath/$id',
+              value,
+            ),
+            child: WoGap.zero,
           ),
       };
-
-  String _toAbsolutePath({
-    required String parentPath,
-    required String inputPath,
-  }) {
-    if (inputPath.startsWith('/')) return inputPath;
-    if (!inputPath.startsWith('.')) {
-      throw ArgumentError(
-        'An input path must start with character "/" or ".".',
-      );
-    }
-
-    final relativePath = inputPath.substring(1);
-
-    if (relativePath.startsWith('/')) return '$parentPath$relativePath';
-    if (!relativePath.startsWith('./')) {
-      throw ArgumentError(
-        'An input relative path must start with "./" or "../".',
-      );
-    }
-
-    // Here, we go looking for the absolute path, by going backward in the tree.
-
-    if (!parentPath.contains('/')) {
-      throw ArgumentError('The relative path is backwarding too far.');
-    }
-
-    final newParentPath = (parentPath.split('/')..removeLast()).join('/');
-    final newInputPath = relativePath.substring(3);
-
-    return _toAbsolutePath(parentPath: newParentPath, inputPath: newInputPath);
-  }
 }
