@@ -13,6 +13,7 @@ class WoForm with _$WoForm {
   const factory WoForm({
     Map<String, dynamic>? unmodifiableValuesJson,
     @InputsListConverter() @Default([]) List<WoFormElementMixin> inputs,
+    @Default(false) bool initialStatusIsSubmitted,
     @JsonKey(toJson: WoFormUiSettings.staticToJson)
     @Default(WoFormUiSettings())
     WoFormUiSettings uiSettings,
@@ -73,7 +74,7 @@ class WoForm with _$WoForm {
   }
 
   Widget toWidget<T extends WoFormValuesCubit>({
-    required VoidCallback onSubmitting,
+    VoidCallback? onSubmitting,
     void Function(BuildContext context)? onSubmitted,
   }) =>
       WoFormScreen(

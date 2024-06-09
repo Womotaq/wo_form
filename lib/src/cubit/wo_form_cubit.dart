@@ -5,16 +5,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/wo_form.dart';
 
 class WoFormStatusCubit extends Cubit<WoFormStatus> {
-  WoFormStatusCubit._({WoFormStatus? initialStatus})
-      : super(initialStatus ?? const WoFormStatus.idle());
+  WoFormStatusCubit._(super.initialStatus);
 
-  void setIdle() => emit(const WoFormStatus.idle());
+  void setIdle() => emit(const IdleStatus());
   void _setInvalidValues({Iterable<WoFormInputError>? inputErrors}) =>
-      emit(WoFormStatus.invalidValues(inputErrors: inputErrors));
-  void _setSubmitting() => emit(const WoFormStatus.submitting());
+      emit(InvalidValuesStatus(inputErrors: inputErrors));
+  void _setSubmitting() => emit(const SubmittingStatus());
   void _setSubmitError({Object? error, StackTrace? stackTrace}) =>
-      emit(WoFormStatus.submitError(error: error, stackTrace: stackTrace));
-  void _setSubmitted() => emit(const WoFormStatus.submitted());
+      emit(SubmitErrorStatus(error: error, stackTrace: stackTrace));
+  void _setSubmitted() => emit(const SubmittedStatus());
 }
 
 class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
@@ -22,12 +21,12 @@ class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
   WoFormValuesCubit._(
     this.form,
     this._statusCubit, {
-    required this.onSubmitting,
+    this.onSubmitting,
   }) : super(form.defaultValues());
 
   final WoForm form;
   final WoFormStatusCubit _statusCubit;
-  final FutureOr<void> Function() onSubmitting;
+  final FutureOr<void> Function()? onSubmitting;
 
   bool get isPure => _statusCubit.state is SubmittedStatus;
 
@@ -55,7 +54,7 @@ class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
     _statusCubit._setSubmitting();
 
     try {
-      await onSubmitting();
+      await onSubmitting?.call();
       _statusCubit._setSubmitted();
     } catch (e, s) {
       _statusCubit._setSubmitError(error: e, stackTrace: s);
@@ -66,13 +65,13 @@ class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
 class WoFormInitializer extends StatelessWidget {
   const WoFormInitializer({
     required this.form,
-    required this.onSubmitting,
     required this.child,
+    this.onSubmitting,
     super.key,
   });
 
   final WoForm form;
-  final FutureOr<void> Function() onSubmitting;
+  final FutureOr<void> Function()? onSubmitting;
   final Widget child;
 
   @override
@@ -81,7 +80,13 @@ class WoFormInitializer extends StatelessWidget {
       value: form,
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (context) => WoFormStatusCubit._()),
+          BlocProvider(
+            create: (context) => WoFormStatusCubit._(
+              form.initialStatusIsSubmitted
+                  ? const SubmittedStatus()
+                  : const IdleStatus(),
+            ),
+          ),
           BlocProvider(
             create: (context) => WoFormValuesCubit._(
               context.read(),

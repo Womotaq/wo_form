@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
+import 'package:wo_form/example/edit_event/event_page.dart';
 import 'package:wo_form/example/form_creator/form_creator_page.dart';
 import 'package:wo_form/example/from_json/from_json_page.dart';
 import 'package:wo_form/example/report/report_page.dart';
@@ -49,12 +50,7 @@ class HomePage extends StatelessWidget {
             ),
             WoGap.small,
             ListTile(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute<void>(
-                  builder: (context) => const ReportPage(),
-                ),
-              ),
+              onTap: () => context.pushPage(const ReportPage()),
               leading: const Icon(Icons.report),
               title: const Text(
                 'Signaler un utilisateur',
@@ -64,12 +60,7 @@ class HomePage extends StatelessWidget {
               trailing: const Icon(Icons.chevron_right),
             ),
             ListTile(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute<void>(
-                  builder: (context) => const FromJsonPage(),
-                ),
-              ),
+              onTap: () => context.pushPage(const FromJsonPage()),
               leading: const Icon(Icons.download),
               title: const Text(
                 'Importer un formulaire',
@@ -79,12 +70,17 @@ class HomePage extends StatelessWidget {
               trailing: const Icon(Icons.chevron_right),
             ),
             ListTile(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute<void>(
-                  builder: (context) => const StringInputPage(),
-                ),
+              onTap: () => context.pushPage(const EventsPage()),
+              leading: const Icon(Icons.edit),
+              title: const Text(
+                'Éditer un freezed',
+                style: TextStyleExt.bold,
               ),
+              subtitle: const Text('En quelques lignes'),
+              trailing: const Icon(Icons.chevron_right),
+            ),
+            ListTile(
+              onTap: () => context.pushPage(const StringInputPage()),
               leading: const Icon(Icons.edit_note),
               title: const Text(
                 'Créer un formulaire',

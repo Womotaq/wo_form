@@ -7,14 +7,14 @@ import 'package:wo_form/wo_form.dart';
 class WoFormScreen extends StatelessWidget {
   const WoFormScreen({
     required this.form,
-    required this.onSubmitting,
+    this.onSubmitting,
     this.onSubmitted,
     this.settings,
     super.key,
   });
 
   final WoForm form;
-  final VoidCallback onSubmitting;
+  final VoidCallback? onSubmitting;
   final void Function(BuildContext context)? onSubmitted;
   final WoFormUiSettings? settings;
 
@@ -26,28 +26,42 @@ class WoFormScreen extends StatelessWidget {
     final submitButton = BlocBuilder<WoFormStatusCubit, WoFormStatus>(
       builder: (context, status) {
         return switch (mergedSettings.submitMode) {
-          null || WoFormSubmitMode.submit => switch (status) {
-              IdleStatus() ||
-              InvalidValuesStatus() ||
-              SubmitErrorStatus() =>
-                FilledBigCardButton(
-                  onPressed: context.read<WoFormValuesCubit>().submit,
-                  child: Text(mergedSettings.submitText ?? ''),
-                ),
-              SubmittingStatus() => FilledBigCardButton(
+          _ when mergedSettings.displayMode == WoFormDisplayMode.page
+            // || WoFormSubmitMode.save
+            =>
+            switch (status) {
+              SubmittingStatus() => FilledButton.icon(
                   onPressed: () {},
-                  child: Text(mergedSettings.submitText ?? ''),
+                  icon: Padding(
+                    padding: const EdgeInsets.only(right: WoSize.xsmall),
+                    child: SizedBox.square(
+                      dimension: WoSize.medium,
+                      child: CircularProgressIndicator(
+                        color: context.colorScheme.onPrimary,
+                        strokeWidth: 2,
+                      ),
+                    ),
+                  ),
+                  label: Text(mergedSettings.submitText ?? ''),
                 ),
-              SubmittedStatus() => FilledBigCardButton(
+              SubmittedStatus()
+                  when (mergedSettings.submittedText ?? '').isNotEmpty =>
+                TextButton(
+                  onPressed: null,
                   child: Text(
                     mergedSettings.submittedText ??
                         mergedSettings.submitText ??
                         '',
                   ),
                 ),
+              _ => FilledButton(
+                  onPressed: context.read<WoFormValuesCubit>().submit,
+                  child: Text(mergedSettings.submitText ?? ''),
+                ),
             },
-          WoFormSubmitMode.submitIfValid => switch (status) {
-              SubmittingStatus() => FilledBigCardButton(
+          null || WoFormSubmitMode.submit || WoFormSubmitMode.save => switch (
+                status) {
+              SubmittingStatus() => BigButton.filled(
                   onPressed: () {},
                   leading: Padding(
                     padding: const EdgeInsets.only(right: WoSize.small),
@@ -64,7 +78,37 @@ class WoFormScreen extends StatelessWidget {
                 ),
               SubmittedStatus()
                   when (mergedSettings.submittedText ?? '').isNotEmpty =>
-                FilledBigCardButton(
+                BigButton.filled(
+                  child: Text(
+                    mergedSettings.submittedText ??
+                        mergedSettings.submitText ??
+                        '',
+                  ),
+                ),
+              _ => BigButton.filled(
+                  onPressed: context.read<WoFormValuesCubit>().submit,
+                  child: Text(mergedSettings.submitText ?? ''),
+                ),
+            },
+          WoFormSubmitMode.submitIfValid => switch (status) {
+              SubmittingStatus() => BigButton.filled(
+                  onPressed: () {},
+                  leading: Padding(
+                    padding: const EdgeInsets.only(right: WoSize.small),
+                    child: SizedBox.square(
+                      dimension: WoSize.medium,
+                      child: CircularProgressIndicator(
+                        color: context.colorScheme.onPrimary,
+                        strokeWidth: 2,
+                      ),
+                    ),
+                  ),
+                  trailing: const SizedBox(width: WoSize.large),
+                  child: Text(mergedSettings.submitText ?? ''),
+                ),
+              SubmittedStatus()
+                  when (mergedSettings.submittedText ?? '').isNotEmpty =>
+                BigButton.filled(
                   child: Text(
                     mergedSettings.submittedText ??
                         mergedSettings.submitText ??
@@ -74,34 +118,13 @@ class WoFormScreen extends StatelessWidget {
               _ => BlocBuilder<WoFormValuesCubit, Map<String, dynamic>>(
                   builder: (context, values) {
                     final isValid = form.getErrors(values).isEmpty;
-                    return FilledBigCardButton(
+                    return BigButton.filled(
                       onPressed: isValid
                           ? context.read<WoFormValuesCubit>().submit
                           : null,
                       child: Text(mergedSettings.submitText ?? ''),
                     );
                   },
-                ),
-            },
-          WoFormSubmitMode.save => switch (status) {
-              SubmittingStatus() => FilledButton(
-                  onPressed: () {},
-                  child: Text(mergedSettings.submitText ?? ''),
-                ),
-              IdleStatus() ||
-              InvalidValuesStatus() ||
-              SubmitErrorStatus() =>
-                FilledButton(
-                  onPressed: context.read<WoFormValuesCubit>().submit,
-                  child: Text(mergedSettings.submitText ?? ''),
-                ),
-              SubmittedStatus() => TextButton(
-                  onPressed: null,
-                  child: Text(
-                    mergedSettings.submittedText ??
-                        mergedSettings.submitText ??
-                        '',
-                  ),
                 ),
             },
         };
@@ -137,7 +160,7 @@ class WoFormScreen extends StatelessWidget {
           WoFormDisplayMode.page => Scaffold(
               appBar: AppBar(
                 title: Text(mergedSettings.titleText ?? ''),
-                actions: [submitButton],
+                actions: [submitButton, WoGap.small],
               ),
               body: WoPadding.allMedium(child: body),
             ),

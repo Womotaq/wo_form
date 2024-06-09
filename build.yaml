@@ -5,3 +5,4 @@ targets:
         generate_for:
           include:
             - lib/src/model/**.dart
+            - lib/example/edit_event/event.dart

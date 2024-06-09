@@ -73,7 +73,7 @@ class StringInputPage extends StatelessWidget {
                 builder: (context) => Row(
                   children: [
                     Flexible(
-                      child: BigCardButton(
+                      child: BigButton(
                         onPressed: () {
                           final values =
                               context.read<WoFormValuesCubit>().state;
@@ -112,7 +112,7 @@ class StringInputPage extends StatelessWidget {
                             );
                           }
                         },
-                        child: FilledBigCardButton(
+                        child: BigButton.filled(
                           onPressed: context.read<WoFormValuesCubit>().submit,
                           leading: const Icon(Icons.visibility_outlined),
                           child: const Text('Prévisualiser'),
