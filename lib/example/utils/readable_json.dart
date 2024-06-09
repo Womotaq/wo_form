@@ -1,4 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:package_atomic_design/package_atomic_design.dart';
+import 'package:wo_form/wo_form.dart';
+
+void showJsonDialog(BuildContext context) {
+  final form = context.read<WoForm>();
+  final values = context.read<WoFormValuesCubit>().state;
+  showActionDialog(
+    pageContext: context,
+    title: 'JSON',
+    actionText: 'Ok',
+    onAction: context.read<WoFormStatusCubit>().setIdle,
+    content: Text(readableJson(form.exportValues(values))),
+  );
+}
 
 String readableJson(Map<String, dynamic> json, {int indentStep = 4}) {
   final buffer = StringBuffer();

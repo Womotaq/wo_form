@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/src/model/json_converter/inputs_list.dart';
 import 'package:wo_form/src/ui/prefab/wo_form_screen.dart';
 import 'package:wo_form/wo_form.dart';
@@ -33,6 +34,16 @@ class WoForm with _$WoForm {
             ...input.defaultValues(parentPath: '')
           else if (input is WoFormInputMixin)
             '/${input.id}': (input as WoFormInputMixin).defaultValue,
+      };
+
+  Map<String, dynamic> exportValues(Map<String, dynamic> valuesMap) => {
+        ...unmodifiableValuesJson ?? {},
+        for (final input in inputs)
+          if (input is WoFormNode)
+            input.id: input.exportValues(valuesMap, parentPath: '')
+          else if (input is WoFormInputMixin)
+            input.id: (input as WoFormInputMixin)
+                .exportValue(valuesMap['/${input.id}']),
       };
 
   Iterable<WoFormInputError> getErrors(Map<String, dynamic> valuesMap) => [
@@ -73,7 +84,26 @@ class WoForm with _$WoForm {
         ?.getInput(path: path.substring(slashIndex + 1));
   }
 
-  Widget toWidget<T extends WoFormValuesCubit>({
+  Widget toPage({
+    void Function(Map<String, dynamic> values)? onSubmitting,
+    void Function(BuildContext context)? onSubmitted,
+  }) {
+    final widget = toWidget(
+      onSubmitting: onSubmitting,
+      onSubmitted: onSubmitted,
+    );
+
+    return uiSettings.displayMode == WoFormDisplayMode.page
+        ? widget
+        : Scaffold(
+            appBar: AppBar(),
+            body: SingleChildScrollView(
+              child: WoPadding.allMedium(child: widget),
+            ),
+          );
+  }
+
+  Widget toWidget({
     void Function(Map<String, dynamic> values)? onSubmitting,
     void Function(BuildContext context)? onSubmitted,
   }) =>
@@ -82,14 +112,4 @@ class WoForm with _$WoForm {
         onSubmitting: onSubmitting,
         onSubmitted: onSubmitted,
       );
-
-  Map<String, dynamic> exportValues(Map<String, dynamic> valuesMap) => {
-        ...unmodifiableValuesJson ?? {},
-        for (final input in inputs)
-          if (input is WoFormNode)
-            input.id: input.exportValues(valuesMap, parentPath: '')
-          else if (input is WoFormInputMixin)
-            input.id: (input as WoFormInputMixin)
-                .exportValue(valuesMap['/${input.id}']),
-      };
 }

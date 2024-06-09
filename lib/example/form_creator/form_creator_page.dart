@@ -8,7 +8,6 @@ import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/example/form_creator/num_input_node.dart';
 import 'package:wo_form/example/form_creator/string_input_node.dart';
 import 'package:wo_form/example/utils/readable_json.dart';
-import 'package:wo_form/src/ui/prefab/wo_form_card_page.dart';
 import 'package:wo_form/wo_form.dart';
 
 final idGenerator = Random();
@@ -33,6 +32,18 @@ final woFormCreator = WoForm(
         StringInput(
           id: 'titleText',
           uiSettings: StringFieldSettings(labelText: 'Titre du formulaire'),
+        ),
+        StringInput(
+          id: 'submitText',
+          uiSettings: StringFieldSettings(
+            labelText: 'Label du bouton de validation',
+          ),
+        ),
+        StringInput(
+          id: 'submittedText',
+          uiSettings: StringFieldSettings(
+            labelText: 'Label du bouton validé',
+          ),
         ),
       ],
     ),
@@ -103,11 +114,8 @@ class StringInputPage extends StatelessWidget {
                               snackBarError(context, e.toString());
                               return;
                             }
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute<void>(
-                                builder: (_) => WoFormCardPage(form: form),
-                              ),
+                            context.pushPage(
+                              form.toPage(onSubmitted: showJsonDialog),
                             );
                           }
                         },
