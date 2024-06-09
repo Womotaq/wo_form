@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wo_form/example/edit_event/event.dart';
 import 'package:wo_form/example/edit_event/event_page.dart';
+import 'package:wo_form/src/ui/prefab/show_discard_changes_dialog.dart';
 import 'package:wo_form/wo_form.dart';
 
 class EditEventPage extends StatelessWidget {
@@ -17,6 +18,7 @@ class EditEventPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return WoForm(
       initialStatusIsSubmitted: true,
+      onUnsubmittedQuit: showDiscardChangesDialog,
       uiSettings: const WoFormUiSettings(
         titleText: "Édition d'un événement",
         submitText: 'Enregistrer',

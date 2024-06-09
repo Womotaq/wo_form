@@ -15,6 +15,8 @@ class WoForm with _$WoForm {
     Map<String, dynamic>? unmodifiableValuesJson,
     @InputsListConverter() @Default([]) List<WoFormElementMixin> inputs,
     @Default(false) bool initialStatusIsSubmitted,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    void Function(BuildContext context)? onUnsubmittedQuit,
     @JsonKey(toJson: WoFormUiSettings.staticToJson)
     @Default(WoFormUiSettings())
     WoFormUiSettings uiSettings,

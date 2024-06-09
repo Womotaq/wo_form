@@ -28,8 +28,6 @@ class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
   final WoFormStatusCubit _statusCubit;
   final FutureOr<void> Function(Map<String, dynamic> values)? onSubmitting;
 
-  bool get isPure => _statusCubit.state is SubmittedStatus;
-
   /// **Use this method precautiously since there is no type checking !**
   void onValueChanged({
     required String inputPath,

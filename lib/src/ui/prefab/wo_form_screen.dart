@@ -159,6 +159,22 @@ class WoFormScreen extends StatelessWidget {
             ),
           WoFormDisplayMode.page => Scaffold(
               appBar: AppBar(
+                leading: Builder(
+                  builder: (context) {
+                    return IconButton(
+                      icon: const Icon(Icons.arrow_back),
+                      onPressed: () {
+                        if (form.onUnsubmittedQuit == null ||
+                            context.read<WoFormStatusCubit>().state
+                                is SubmittedStatus) {
+                          return Navigator.of(context).pop();
+                        } else {
+                          form.onUnsubmittedQuit!(context);
+                        }
+                      },
+                    );
+                  },
+                ),
                 title: Text(mergedSettings.titleText ?? ''),
                 actions: [submitButton, WoGap.small],
               ),
