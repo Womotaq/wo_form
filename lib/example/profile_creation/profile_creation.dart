@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wo_form/example/utils/readable_json.dart';
+import 'package:wo_form/src/l10n/arb_gen/form_localizations_fr.dart';
 import 'package:wo_form/wo_form.dart';
 
 class ProfileCreationPage extends StatelessWidget {
@@ -63,7 +64,7 @@ class ProfileCreationPage extends StatelessWidget {
               ),
             ),
             StringInput(
-              id: 'postalCode',
+              id: 'city',
               uiSettings: StringInputUiSettings(
                 labelText: 'Ville',
                 autofillHints: [AutofillHints.addressCity],
@@ -90,6 +91,8 @@ class ProfileCreationPage extends StatelessWidget {
               regexPattern: RegexPattern.email.value,
               uiSettings: StringInputUiSettings.email(
                 labelText: 'Email',
+                invalidRegexMessage: FormLocalizationsFr()
+                    .regexPatternUnmatched(RegexPattern.email.name),
               ),
             ),
             const StringInput(

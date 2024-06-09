@@ -8,7 +8,7 @@ class WoFormStatusCubit extends Cubit<WoFormStatus> {
   WoFormStatusCubit._(super.initialStatus);
 
   void setIdle() => emit(const IdleStatus());
-  void _setInvalidValues({Iterable<WoFormInputError>? inputErrors}) =>
+  void setInvalidValues({Iterable<WoFormInputError>? inputErrors}) =>
       emit(InvalidValuesStatus(inputErrors: inputErrors));
   void _setSubmitting() => emit(const SubmittingStatus());
   void _setSubmitError({Object? error, StackTrace? stackTrace}) =>
@@ -46,7 +46,7 @@ class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
   Future<void> submit() async {
     final inputErrors = form.getErrors(state);
     if (inputErrors.isNotEmpty) {
-      return _statusCubit._setInvalidValues(inputErrors: inputErrors);
+      return _statusCubit.setInvalidValues(inputErrors: inputErrors);
     }
 
     _statusCubit._setSubmitting();

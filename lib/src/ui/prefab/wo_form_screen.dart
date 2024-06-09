@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
@@ -176,13 +177,11 @@ class WoFormScreen extends StatelessWidget {
                 leading: WoFormPopButton(form: form),
                 title: Text(mergedSettings.titleText ?? ''),
               ),
-              body: WoPadding.allMedium(
-                child: _WoFormPageView(
-                  form: form,
-                  backText: backText,
-                  nextText: nextText,
-                  submitButton: submitButton,
-                ),
+              body: _WoFormPageView(
+                form: form,
+                backText: backText,
+                nextText: nextText,
+                submitButton: submitButton,
               ),
             ),
         },
@@ -197,7 +196,6 @@ class _WoFormPageView extends StatelessWidget {
     required this.backText,
     required this.submitButton,
     required this.nextText,
-    super.key,
   });
 
   final WoForm form;
@@ -212,38 +210,63 @@ class _WoFormPageView extends StatelessWidget {
     return PageView.builder(
       controller: pageController,
       itemCount: form.inputs.length,
-      itemBuilder: (context, index) => Column(
-        children: [
-          form.inputs[index].toWidget(parentPath: ''),
-          WoGap.xlarge,
-          Row(
-            children: [
-              if (index > 0)
-                BigButton(
-                  onPressed: () {
-                    pageController.previousPage(
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.easeOut,
-                    );
-                  },
-                  child: Text(backText ?? ''),
-                ),
-              const Spacer(),
-              if (index == form.inputs.length - 1)
-                submitButton
-              else
-                BigButton.filled(
-                  onPressed: () {
-                    pageController.nextPage(
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.easeOut,
-                    );
-                  },
-                  child: Text(nextText ?? ''),
-                ),
-            ],
-          ),
-        ],
+      itemBuilder: (context, index) => WoPadding.allMedium(
+        child: Column(
+          children: [
+            form.inputs[index].toWidget(parentPath: ''),
+            WoGap.xlarge,
+            Row(
+              children: [
+                if (index > 0)
+                  BigButton(
+                    onPressed: () {
+                      pageController.previousPage(
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeOut,
+                      );
+                    },
+                    child: Text(backText ?? ''),
+                  ),
+                const Spacer(),
+                if (index == form.inputs.length - 1)
+                  submitButton
+                else
+                  BigButton.filled(
+                    onPressed: () {
+                      final input = form.inputs[index];
+                      final valuesMap = context.read<WoFormValuesCubit>().state;
+
+                      final Iterable<WoFormInputError> errors;
+                      if (input is WoFormNode) {
+                        errors = input.getErrors(valuesMap, parentPath: '');
+                      } else if (input is WoFormInputMixin) {
+                        errors = [
+                          (input as WoFormInputMixin)
+                              .getError(valuesMap['/${input.id}']),
+                        ].whereNotNull();
+                      } else {
+                        throw UnimplementedError();
+                      }
+
+                      if (errors.isNotEmpty) {
+                        return context
+                            .read<WoFormStatusCubit>()
+                            .setInvalidValues(inputErrors: errors);
+                      } else {
+                        // remove the InvalidValuesStatus
+                        context.read<WoFormStatusCubit>().setIdle();
+                        pageController.nextPage(
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.easeOut,
+                        );
+                      }
+                    },
+                    child: Text(nextText ?? ''),
+                  ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
