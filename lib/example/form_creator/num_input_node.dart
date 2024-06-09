@@ -11,8 +11,7 @@ InputsNode createNumInputNode({required String id}) => InputsNode(
           id: 'id',
           isRequired: true,
           uiSettings: StringFieldSettings(
-            labelText: 'Id',
-            helperText: 'Id',
+            labelText: 'Clef json',
           ),
         ),
         NumInput(

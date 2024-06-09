@@ -54,6 +54,12 @@ class _StringFieldState extends State<StringField> {
               textEditingController.text = text;
             }
 
+            final labelText = (mergedSettings.labelText ?? '') +
+                (input.isRequired ? '*' : '');
+            final showTitle = labelText.isNotEmpty && labelText != '*';
+
+            final showHelper = (mergedSettings.helperText ?? '').isNotEmpty;
+
             final errorText = status is! InvalidValuesStatus
                 ? null
                 : input.getInvalidExplanation(
@@ -61,61 +67,74 @@ class _StringFieldState extends State<StringField> {
                     localizeInputError(context.formL10n),
                   );
 
-            return ListTile(
-              title: TextFormField(
-                controller: textEditingController,
-                onChanged: (value) => valuesCubit.onValueChanged(
-                  inputPath: widget.inputPath,
-                  value: value,
-                ),
-                onFieldSubmitted:
-                    (mergedSettings.submitFormOnFieldSubmitted ?? false)
-                        ? (value) => valuesCubit.submit()
-                        : null,
-                keyboardType: mergedSettings.keyboardType,
-                obscureText: obscureText,
-                autocorrect: mergedSettings.autocorrect ?? true,
-                autofillHints: mergedSettings.autofillHints,
-                autofocus: mergedSettings.autofocus ?? false,
-                textInputAction: mergedSettings.textInputAction,
-                textCapitalization: mergedSettings.textCapitalization ??
-                    TextCapitalization.none,
-                maxLines: mergedSettings.maxLines,
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  labelText: (mergedSettings.labelText ?? '').isNotEmpty
-                      ? (mergedSettings.labelText ?? '') +
-                          (input.isRequired ? '*' : '')
-                      : null,
-                  labelStyle: input.isRequired
-                      ? null
-                      : TextStyle(color: context.woTheme.infoStyle?.color),
-                  hintText: mergedSettings.hintText,
-                  helperText: mergedSettings.helperText,
-                  helperStyle: context.woTheme.infoStyle,
-                  helperMaxLines: 10,
-                  errorText: errorText,
-                  errorMaxLines: 10,
-                  suffixIcon: switch (mergedSettings.action) {
-                    null => null,
-                    StringFieldAction.clear => IconButton(
-                        onPressed: () => valuesCubit.onValueChanged(
-                          inputPath: widget.inputPath,
-                          value: null,
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                WoPadding.horizontalMedium(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (showTitle || showHelper) WoGap.small,
+                      if (showTitle)
+                        Text(
+                          labelText,
+                          style: context.textTheme.bodyLarge,
                         ),
-                        icon: const Icon(Icons.clear),
-                      ),
-                    StringFieldAction.obscure => IconButton(
-                        onPressed: () => setState(() {
-                          obscureText = !obscureText;
-                        }),
-                        icon: obscureText
-                            ? const Icon(Icons.visibility_off_outlined)
-                            : const Icon(Icons.visibility_outlined),
-                      ),
-                  },
+                      if (showHelper)
+                        Text(
+                          mergedSettings.helperText ?? '',
+                          style: context.woTheme.infoStyle,
+                        ),
+                    ],
+                  ),
                 ),
-              ),
+                ListTile(
+                  title: TextFormField(
+                    controller: textEditingController,
+                    onChanged: (value) => valuesCubit.onValueChanged(
+                      inputPath: widget.inputPath,
+                      value: value,
+                    ),
+                    onFieldSubmitted:
+                        (mergedSettings.submitFormOnFieldSubmitted ?? false)
+                            ? (value) => valuesCubit.submit()
+                            : null,
+                    keyboardType: mergedSettings.keyboardType,
+                    obscureText: obscureText,
+                    autocorrect: mergedSettings.autocorrect ?? true,
+                    autofillHints: mergedSettings.autofillHints,
+                    autofocus: mergedSettings.autofocus ?? false,
+                    textInputAction: mergedSettings.textInputAction,
+                    textCapitalization: mergedSettings.textCapitalization ??
+                        TextCapitalization.none,
+                    maxLines: mergedSettings.maxLines,
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      hintText: mergedSettings.hintText,
+                      errorText: errorText,
+                      errorMaxLines: 10,
+                      suffixIcon: switch (mergedSettings.action) {
+                        null => null,
+                        StringFieldAction.clear => IconButton(
+                            onPressed: () => valuesCubit.onValueChanged(
+                              inputPath: widget.inputPath,
+                              value: null,
+                            ),
+                            icon: const Icon(Icons.clear),
+                          ),
+                        StringFieldAction.obscure => IconButton(
+                            onPressed: () => setState(() {
+                              obscureText = !obscureText;
+                            }),
+                            icon: obscureText
+                                ? const Icon(Icons.visibility_off_outlined)
+                                : const Icon(Icons.visibility_outlined),
+                          ),
+                      },
+                    ),
+                  ),
+                ),
+              ],
             );
           },
         );

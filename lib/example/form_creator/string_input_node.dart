@@ -15,9 +15,7 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
           id: 'id',
           isRequired: true,
           uiSettings: StringFieldSettings(
-            labelText: 'Id',
-            helperText: 'Ceci sera la clef associée à la réponse de votre '
-                "utilisateur, dans le json qu'il produira.",
+            labelText: 'Clef json',
           ),
         ),
         const StringInput(
@@ -78,22 +76,21 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
             const StringInput(
               id: 'labelText',
               uiSettings: StringFieldSettings(
-                labelText: 'Titre',
+                labelText: 'Titre (ceci est un titre)',
               ),
             ),
             const StringInput(
               id: 'helperText',
               uiSettings: StringFieldSettings(
                 labelText: 'Sous-titre',
-                helperText: 'Ceci sera affiché en dessous du champ.',
+                helperText: '(ceci est un sous-titre)',
               ),
             ),
             const StringInput(
               id: 'hintText',
               uiSettings: StringFieldSettings(
                 labelText: 'Aide',
-                hintText: "Ceci est un message d'aide",
-                helperText: 'Ceci sera affiché dans le champ.',
+                hintText: '(ceci est une aide)',
               ),
             ),
             SelectInput<StringFieldAction?>(
