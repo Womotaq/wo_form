@@ -13,10 +13,16 @@ class DynamicFormPage extends StatelessWidget {
         submitText: 'Envoyer',
       ),
       inputs: [
-        const StringInput(
+        StringInput(
           id: 'name',
           isRequired: true,
-          uiSettings: StringFieldSettings(
+          getCustomError: (value) => (value ?? '').isEmpty
+              ? const CustomInputError(
+                  inputId: 'test',
+                  message: 'Donne ton prénom !',
+                )
+              : null,
+          uiSettings: const StringFieldSettings(
             labelText: 'Prénom',
           ),
         ),
@@ -58,6 +64,12 @@ class DynamicFormPage extends StatelessWidget {
               id: id,
               isRequired: true,
               minBound: 18,
+              getCustomError: (value) => value == null || value >= 18
+                  ? null
+                  : CustomInputError(
+                      inputId: id,
+                      message: 'Eh non mon coco y faut être majeur ici !',
+                    ),
               uiSettings: NumFieldSettings(
                 labelText: 'Quel âge avez-vous'
                     "${(name ?? '').isEmpty ? '' : ', $name'} ?",
@@ -86,6 +98,12 @@ class DynamicFormPage extends StatelessWidget {
                   },
                   minCount: 1,
                   maxCount: 1,
+                  getCustomError: (values) => values.isNotEmpty
+                      ? null
+                      : CustomInputError(
+                          inputId: id,
+                          message: 'Bah alors ? On veut pas de pseudo ?',
+                        ),
                   uiSettings: SelectFieldSettings(
                     labelText: 'Choisissez votre pseudo',
                     valueBuilder: (value) => Text(
@@ -115,7 +133,7 @@ class DynamicFormPage extends StatelessWidget {
                   ? null
                   // TODO : try to remove error.inputId
                   : CustomInputError(
-                      inputId: 'acceptConditions',
+                      inputId: id,
                       message: 'Eh $name ! '
                           'Tu as oublié les conditions météorologiques !',
                     ),

@@ -79,6 +79,8 @@ sealed class WoFormInput
     @Default(false) bool isRequired,
     int? maxBound,
     @Default(0) int minBound,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    WoFormInputError? Function(num? value)? getCustomError,
     @Default(NumFieldSettings()) NumFieldSettings uiSettings,
   }) = NumInput;
 
@@ -92,6 +94,8 @@ sealed class WoFormInput
     @Default([]) List<String> defaultValue,
     @Default([]) List<String> availibleValues,
     @Default(0) int minCount,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    WoFormInputError? Function(List<String> selectedValues)? getCustomError,
     @Default(SelectFieldSettings<String>())
     SelectFieldSettings<String> uiSettings,
   }) = SelectStringInput;
@@ -101,6 +105,8 @@ sealed class WoFormInput
     String? defaultValue,
     @Default(false) bool isRequired,
     String? regexPattern,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    WoFormInputError? Function(String? value)? getCustomError,
     @JsonKey(toJson: StringFieldSettings.staticToJson)
     @Default(StringFieldSettings())
     StringFieldSettings uiSettings,
@@ -133,8 +139,12 @@ sealed class WoFormInput
           isRequired: final isRequired,
           minBound: final minBound,
           maxBound: final maxBound,
+          getCustomError: final getCustomError,
         ):
         value as num?;
+
+        final customError = getCustomError?.call(value);
+        if (customError != null) return customError;
 
         if (value == null) {
           return isRequired ? WoFormInputError.empty(inputId: id) : null;
@@ -150,8 +160,12 @@ sealed class WoFormInput
       case StringInput(
           isRequired: final isRequired,
           regexPattern: final regexPattern,
+          getCustomError: final getCustomError,
         ):
         value as String?;
+
+        final customError = getCustomError?.call(value);
+        if (customError != null) return customError;
 
         if (value == null || value.isEmpty) {
           return isRequired ? WoFormInputError.empty(inputId: id) : null;
@@ -167,13 +181,15 @@ sealed class WoFormInput
           availibleValues: final availibleValues,
           minCount: final minCount,
           maxCount: final maxCount,
+          getCustomError: final getCustomError,
         ):
-        return SelectInput._validator(
+        return SelectInput._validator<String>(
           inputId: inputId,
           selectedValues: (value as List<String>?) ?? [],
           availibleValues: availibleValues,
           minCount: minCount,
           maxCount: maxCount,
+          getCustomError: getCustomError,
         );
     }
   }
@@ -246,6 +262,8 @@ class SelectInput<T>
     @Default(0) int minCount,
     @Default([]) List<T> defaultValues,
     @Default([]) List<T> availibleValues,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    WoFormInputError? Function(List<T> selectedValues)? getCustomError,
     SelectFieldSettings<T>? uiSettings,
     @JsonKey(includeToJson: false, includeFromJson: false)
     Object? Function(T)? toJsonT,
@@ -280,7 +298,11 @@ class SelectInput<T>
     required List<T> availibleValues,
     required int minCount,
     required int? maxCount,
+    required WoFormInputError? Function(List<T>)? getCustomError,
   }) {
+    final customError = getCustomError?.call(selectedValues);
+    if (customError != null) return customError;
+
     if (minCount == 1 && maxCount == 1 && selectedValues.isEmpty) {
       return WoFormInputError.empty(inputId: inputId);
     }
@@ -317,12 +339,13 @@ class SelectInput<T>
   }
 
   @override
-  WoFormInputError? getError(dynamic value) => _validator(
+  WoFormInputError? getError(dynamic value) => _validator<T>(
         inputId: id,
         selectedValues: (value as List<T>?) ?? [],
         availibleValues: availibleValues,
         minCount: minCount,
         maxCount: maxCount,
+        getCustomError: getCustomError,
       );
 
   @override
