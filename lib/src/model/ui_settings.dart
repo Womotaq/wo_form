@@ -223,7 +223,6 @@ sealed class WoFormDisplayMode with _$WoFormDisplayMode {
   const factory WoFormDisplayMode.page() = WoFormDisplayedInPage;
   const factory WoFormDisplayMode.pages({
     String? nextText,
-    String? backText,
   }) = WoFormDisplayedInPages;
 
   factory WoFormDisplayMode.fromJson(Map<String, dynamic> json) =>

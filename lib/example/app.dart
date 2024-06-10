@@ -5,6 +5,7 @@ import 'package:wo_form/example/edit_event/event_page.dart';
 import 'package:wo_form/example/form_creator/form_creator_page.dart';
 import 'package:wo_form/example/from_json/from_json_page.dart';
 import 'package:wo_form/example/profile_creation/profile_creation.dart';
+import 'package:wo_form/example/quiz/quiz_page.dart';
 import 'package:wo_form/example/report/report_page.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -19,13 +20,6 @@ class WoFormExamplesApp extends StatelessWidget {
         brightness: Brightness.light,
         primary: const Color.fromARGB(255, 5, 197, 69),
       ),
-      // theme: ThemeData(
-      //   colorScheme: ColorScheme.fromSeed(
-      //     // seedColor: const Color.fromARGB(255, 197, 5, 181),
-      //     seedColor: Color.fromARGB(255, 5, 197, 69),
-      //     // brightness: Brightness.dark,
-      //   ),
-      // ),
       supportedLocales: FormLocalizations.supportedLocales,
       localizationsDelegates: FormLocalizations.localizationsDelegates,
       home: const HomePage(),
@@ -89,6 +83,16 @@ class HomePage extends StatelessWidget {
                 style: TextStyleExt.bold,
               ),
               subtitle: const Text('Ex : Formulaire de création de profil'),
+              trailing: const Icon(Icons.chevron_right),
+            ),
+            ListTile(
+              onTap: () => context.pushPage(const QuizPage()),
+              leading: const Icon(Icons.check_box_outlined),
+              title: const Text(
+                'Soumettre un questionnaire',
+                style: TextStyleExt.bold,
+              ),
+              subtitle: const Text('Interactif et en plusieurs pages'),
               trailing: const Icon(Icons.chevron_right),
             ),
             ListTile(

@@ -127,7 +127,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
         final input = builder!(
           id,
           values[toAbsolutePath(
-            parentPath: parentPath,
+            parentPath: '$parentPath/$id',
             inputPath: inputPath,
           )],
         );
@@ -163,7 +163,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
         final input = builder!(
           id,
           values[toAbsolutePath(
-            parentPath: parentPath,
+            parentPath: '$parentPath/$id',
             inputPath: inputPath,
           )],
         );
@@ -237,7 +237,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
         final input = builder!(
           id,
           values[toAbsolutePath(
-            parentPath: parentPath,
+            parentPath: '$parentPath/$id',
             inputPath: inputPath,
           )],
         );
@@ -269,7 +269,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
           WoFormValueBuilder<dynamic>(
             inputPath: toAbsolutePath(
               inputPath: inputPath,
-              parentPath: parentPath,
+              parentPath: '$parentPath/$id',
             ),
             builder: (context, value) {
               final input = builder!(id, value);
