@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -196,6 +198,12 @@ class WoFormScreen extends StatelessWidget {
   }
 }
 
+class _PageIndexCubit extends Cubit<int> {
+  _PageIndexCubit() : super(0);
+
+  void set(int index) => emit(index);
+}
+
 class _WoFormPageView extends StatelessWidget {
   const _WoFormPageView({
     required this.form,
@@ -214,81 +222,109 @@ class _WoFormPageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pageController = PageController();
+    final pageIndexCubit = _PageIndexCubit();
 
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            if (pageController.page != null && pageController.page! > 0) {
-              FocusScope.of(context).unfocus();
-              pageController.previousPage(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeOut,
-              );
-            } else if (form.onUnsubmittedQuit == null ||
-                context.read<WoFormStatusCubit>().state is SubmittedStatus) {
-              return Navigator.of(context).pop();
-            } else {
-              form.onUnsubmittedQuit!(context);
-            }
-          },
+    return BlocProvider.value(
+      value: pageIndexCubit,
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              if (pageController.page != null && pageController.page! > 0) {
+                FocusScope.of(context).unfocus();
+                pageController.previousPage(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeIn,
+                );
+              } else if (form.onUnsubmittedQuit == null ||
+                  context.read<WoFormStatusCubit>().state is SubmittedStatus) {
+                return Navigator.of(context).pop();
+              } else {
+                form.onUnsubmittedQuit!(context);
+              }
+            },
+          ),
+          title: Text(titleText),
         ),
-        title: Text(titleText),
-      ),
-      body: PageView.builder(
-        controller: pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: form.inputs.length,
-        itemBuilder: (context, index) => ListView(
+        body: Stack(
           children: [
-            WoGap.medium,
-            form.inputs[index].toWidget(parentPath: ''),
-            WoGap.xlarge,
-            WoPadding.horizontalSmall(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+            PageView.builder(
+              controller: pageController,
+              physics: const NeverScrollableScrollPhysics(),
+              onPageChanged: pageIndexCubit.set,
+              itemCount: form.inputs.length,
+              itemBuilder: (context, index) => ListView(
                 children: [
-                  if (index == form.inputs.length - 1)
-                    submitButton
-                  else
-                    BigButton.filled(
-                      onPressed: () {
-                        final input = form.inputs[index];
-                        final values = context.read<WoFormValuesCubit>().state;
-              
-                        final Iterable<WoFormInputError> errors;
-                        if (input is WoFormNode) {
-                          errors = input.getErrors(values, parentPath: '');
-                        } else if (input is WoFormInputMixin) {
-                          errors = [
-                            (input as WoFormInputMixin)
-                                .getError(values['/${input.id}']),
-                          ].whereNotNull();
-                        } else {
-                          throw UnimplementedError();
-                        }
-              
-                        if (errors.isNotEmpty) {
-                          return context
-                              .read<WoFormStatusCubit>()
-                              .setInvalidValues(inputErrors: errors);
-                        } else {
-                          FocusScope.of(context).unfocus();
-                          // remove the InvalidValuesStatus
-                          context.read<WoFormStatusCubit>().setIdle();
-                          pageController.nextPage(
-                            duration: const Duration(milliseconds: 500),
-                            curve: Curves.easeOut,
-                          );
-                        }
-                      },
-                      child: Text(nextText ?? ''),
+                  WoGap.medium,
+                  form.inputs[index].toWidget(parentPath: ''),
+                  WoGap.xlarge,
+                  WoPadding.horizontalSmall(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        if (index == form.inputs.length - 1)
+                          submitButton
+                        else
+                          BigButton.filled(
+                            onPressed: () {
+                              final input = form.inputs[index];
+                              final values =
+                                  context.read<WoFormValuesCubit>().state;
+
+                              final Iterable<WoFormInputError> errors;
+                              if (input is WoFormNode) {
+                                errors =
+                                    input.getErrors(values, parentPath: '');
+                              } else if (input is WoFormInputMixin) {
+                                errors = [
+                                  (input as WoFormInputMixin)
+                                      .getError(values['/${input.id}']),
+                                ].whereNotNull();
+                              } else {
+                                throw UnimplementedError();
+                              }
+
+                              if (errors.isNotEmpty) {
+                                return context
+                                    .read<WoFormStatusCubit>()
+                                    .setInvalidValues(inputErrors: errors);
+                              } else {
+                                FocusScope.of(context).unfocus();
+                                // remove the InvalidValuesStatus
+                                context.read<WoFormStatusCubit>().setIdle();
+                                pageController.nextPage(
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.easeIn,
+                                );
+                              }
+                            },
+                            child: Text(nextText ?? ''),
+                          ),
+                      ],
                     ),
+                  ),
+                  WoGap.medium,
                 ],
               ),
             ),
-            WoGap.medium,
+            BlocBuilder<_PageIndexCubit, int>(
+              builder: (context, pageIndex) {
+                return TweenAnimationBuilder<double>(
+                  duration: const Duration(milliseconds: 250),
+                  curve: Curves.easeInOut,
+                  tween: Tween<double>(
+                    begin: 0,
+                    end: pageIndex.toDouble(),
+                  ),
+                  builder: (context, value, _) {
+                    return LinearProgressIndicator(
+                      value: value / max(1, form.inputs.length - 1),
+                    );
+                  },
+                );
+              },
+            )
           ],
         ),
       ),
