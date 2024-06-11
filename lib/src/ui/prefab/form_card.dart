@@ -15,33 +15,31 @@ class FormCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FeedCard(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          WoPadding.horizontalMedium(
-            child: Column(
-              children: [
-                WoGap.medium,
-                Text(
-                  labelText,
-                  style: context.textTheme.titleCard,
-                ),
-                WoPadding.horizontalXxlarge(
-                  child: Divider(color: context.colorScheme.primary),
-                ),
-                if (helperText.isNotEmpty) ...[
-                  Text(helperText, style: context.woTheme.infoStyle),
-                  WoGap.small,
-                ],
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        WoPadding.horizontalMedium(
+          child: Column(
+            children: [
+              WoGap.medium,
+              Text(
+                labelText,
+                style: context.textTheme.titleCard,
+              ),
+              WoPadding.horizontalXxlarge(
+                child: Divider(color: context.colorScheme.primary),
+              ),
+              if (helperText.isNotEmpty) ...[
+                Text(helperText, style: context.woTheme.infoStyle),
                 WoGap.small,
               ],
-            ),
+              WoGap.small,
+            ],
           ),
-          WoGap.medium,
-          child,
-        ],
-      ),
+        ),
+        WoGap.medium,
+        child,
+      ],
     );
   }
 }

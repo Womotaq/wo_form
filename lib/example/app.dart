@@ -33,90 +33,87 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.colorScheme.contrastedBackground,
-      body: WoPadding.allMedium(
-        child: ListView(
-          children: [
-            WoGap.xxxlarge,
-            WoPadding.allMedium(
-              child: Text(
-                "Exemples d'utilisation du package wo_form",
-                style: context.textTheme.titleCard,
-              ),
+      body: ListView(
+        children: [
+          WoGap.xxxlarge,
+          WoPadding.allMedium(
+            child: Text(
+              "Exemples d'utilisation du package wo_form",
+              style: context.textTheme.titleCard,
             ),
-            WoGap.small,
-            ListTile(
-              onTap: () => context.pushPage(const ReportPage()),
-              leading: const Icon(Icons.quiz),
-              title: const Text(
-                'Poser des questions',
-                style: TextStyleExt.bold,
-              ),
-              subtitle: const Text('Ex : Formulaire de signalement'),
-              trailing: const Icon(Icons.chevron_right),
+          ),
+          WoGap.small,
+          ListTile(
+            onTap: () => context.pushPage(const ReportPage()),
+            leading: const Icon(Icons.quiz),
+            title: const Text(
+              'Poser des questions',
+              style: TextStyleExt.bold,
             ),
-            ListTile(
-              onTap: () => context.pushPage(const EventsPage()),
-              leading: const Icon(Icons.edit),
-              title: const Text(
-                'Éditer un objet',
-                style: TextStyleExt.bold,
-              ),
-              subtitle: const Text('En quelques lignes'),
-              trailing: const Icon(Icons.chevron_right),
+            subtitle: const Text('Ex : Formulaire de signalement'),
+            trailing: const Icon(Icons.chevron_right),
+          ),
+          ListTile(
+            onTap: () => context.pushPage(const EventsPage()),
+            leading: const Icon(Icons.edit),
+            title: const Text(
+              'Éditer un objet',
+              style: TextStyleExt.bold,
             ),
-            ListTile(
-              onTap: () => context.pushPage(const DynamicFormPage()),
-              leading: const Icon(Icons.electric_bolt),
-              title: const Text(
-                'Dynamiser un formulaire',
-                style: TextStyleExt.bold,
-              ),
-              subtitle: const Text("C'est sympa ça"),
-              trailing: const Icon(Icons.chevron_right),
+            subtitle: const Text('En quelques lignes'),
+            trailing: const Icon(Icons.chevron_right),
+          ),
+          ListTile(
+            onTap: () => context.pushPage(const DynamicFormPage()),
+            leading: const Icon(Icons.electric_bolt),
+            title: const Text(
+              'Dynamiser un formulaire',
+              style: TextStyleExt.bold,
             ),
-            ListTile(
-              onTap: () => context.pushPage(const ProfileCreationPage()),
-              leading: const Icon(Icons.local_shipping),
-              title: const Text(
-                "Fluidifier l'UX grâce à plusieurs pages",
-                style: TextStyleExt.bold,
-              ),
-              subtitle: const Text('Ex : Formulaire de création de profil'),
-              trailing: const Icon(Icons.chevron_right),
+            subtitle: const Text("C'est sympa ça"),
+            trailing: const Icon(Icons.chevron_right),
+          ),
+          ListTile(
+            onTap: () => context.pushPage(const ProfileCreationPage()),
+            leading: const Icon(Icons.local_shipping),
+            title: const Text(
+              "Fluidifier l'UX grâce à plusieurs pages",
+              style: TextStyleExt.bold,
             ),
-            ListTile(
-              onTap: () => context.pushPage(const QuizPage()),
-              leading: const Icon(Icons.check_box_outlined),
-              title: const Text(
-                'Soumettre un questionnaire',
-                style: TextStyleExt.bold,
-              ),
-              subtitle: const Text('Interactif et en plusieurs pages'),
-              trailing: const Icon(Icons.chevron_right),
+            subtitle: const Text('Ex : Formulaire de création de profil'),
+            trailing: const Icon(Icons.chevron_right),
+          ),
+          ListTile(
+            onTap: () => context.pushPage(const QuizPage()),
+            leading: const Icon(Icons.check_box_outlined),
+            title: const Text(
+              'Soumettre un questionnaire',
+              style: TextStyleExt.bold,
             ),
-            ListTile(
-              onTap: () => context.pushPage(const StringInputPage()),
-              leading: const Icon(Icons.edit_note),
-              title: const Text(
-                'Créer un formulaire en quelques clics...',
-                style: TextStyleExt.bold,
-              ),
-              subtitle: const Text('Via un formulaire'),
-              trailing: const Icon(Icons.chevron_right),
+            subtitle: const Text('Interactif et en plusieurs pages'),
+            trailing: const Icon(Icons.chevron_right),
+          ),
+          ListTile(
+            onTap: () => context.pushPage(const StringInputPage()),
+            leading: const Icon(Icons.edit_note),
+            title: const Text(
+              'Créer un formulaire en quelques clics...',
+              style: TextStyleExt.bold,
             ),
-            ListTile(
-              onTap: () => context.pushPage(const FromJsonPage()),
-              leading: const Icon(Icons.download),
-              title: const Text(
-                "... et l'importer ailleurs",
-                style: TextStyleExt.bold,
-              ),
-              subtitle: const Text('Via un fichier JSON'),
-              trailing: const Icon(Icons.chevron_right),
+            subtitle: const Text('Via un formulaire'),
+            trailing: const Icon(Icons.chevron_right),
+          ),
+          ListTile(
+            onTap: () => context.pushPage(const FromJsonPage()),
+            leading: const Icon(Icons.download),
+            title: const Text(
+              "... et l'importer ailleurs",
+              style: TextStyleExt.bold,
             ),
-          ],
-        ),
+            subtitle: const Text('Via un fichier JSON'),
+            trailing: const Icon(Icons.chevron_right),
+          ),
+        ],
       ),
     );
   }

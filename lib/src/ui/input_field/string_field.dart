@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:package_atomic_design/package_atomic_design.dart';
+import 'package:wo_form/src/ui/input_field/input_header.dart';
 import 'package:wo_form/src/ui/prefab/localize_form_error.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -54,12 +54,6 @@ class _StringFieldState extends State<StringField> {
               textEditingController.text = text;
             }
 
-            final labelText = (mergedSettings.labelText ?? '') +
-                (input.isRequired ? '*' : '');
-            final showTitle = labelText.isNotEmpty && labelText != '*';
-
-            final showHelper = (mergedSettings.helperText ?? '').isNotEmpty;
-
             final errorText = status is! InvalidValuesStatus
                 ? null
                 : input.getInvalidExplanation(
@@ -70,23 +64,11 @@ class _StringFieldState extends State<StringField> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                WoPadding.horizontalMedium(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (showTitle || showHelper) WoGap.small,
-                      if (showTitle)
-                        Text(
-                          labelText,
-                          style: context.textTheme.bodyLarge,
-                        ),
-                      if (showHelper)
-                        Text(
-                          mergedSettings.helperText ?? '',
-                          style: context.woTheme.infoStyle,
-                        ),
-                    ],
-                  ),
+                InputHeader(
+                  isRequired: input.isRequired,
+                  labelText: mergedSettings.labelText ?? '',
+                  helperText: mergedSettings.helperText ?? '',
+                  errorText: '',
                 ),
                 ListTile(
                   title: TextFormField(
@@ -109,10 +91,8 @@ class _StringFieldState extends State<StringField> {
                         TextCapitalization.none,
                     maxLines: mergedSettings.maxLines,
                     decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
                       hintText: mergedSettings.hintText,
                       errorText: errorText,
-                      errorMaxLines: 10,
                       suffixIcon: switch (mergedSettings.action) {
                         null => null,
                         StringFieldAction.clear => IconButton(

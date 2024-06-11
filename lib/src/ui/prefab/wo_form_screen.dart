@@ -141,16 +141,16 @@ class WoFormScreen extends StatelessWidget {
       },
     );
 
-    final body = Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        ...form.inputs.map((e) => e.toWidget(parentPath: '')),
-        if (mergedSettings.displayMode is! WoFormDisplayedInPage) ...[
-          WoGap.xlarge,
-          submitButton,
-        ],
-      ],
-    );
+    Widget buildBody() => Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ...form.inputs.map((e) => e.toWidget(parentPath: '')),
+            if (mergedSettings.displayMode is! WoFormDisplayedInPage) ...[
+              WoGap.xlarge,
+              WoPadding.horizontalSmall(child: submitButton),
+            ],
+          ],
+        );
 
     return WoFormInitializer(
       form: form,
@@ -162,10 +162,12 @@ class WoFormScreen extends StatelessWidget {
           }
         },
         child: switch (mergedSettings.displayMode) {
-          null || WoFormDisplayedInCard() => FormCard(
-              labelText: mergedSettings.titleText ?? '',
-              helperText: '',
-              child: body,
+          null || WoFormDisplayedInCard() => WoPadding.verticalMedium(
+              child: FormCard(
+                labelText: mergedSettings.titleText ?? '',
+                helperText: '',
+                child: buildBody(),
+              ),
             ),
           WoFormDisplayedInPage() => Scaffold(
               appBar: AppBar(
@@ -174,7 +176,7 @@ class WoFormScreen extends StatelessWidget {
                 actions: [submitButton, WoGap.small],
               ),
               body: SingleChildScrollView(
-                child: WoPadding.allMedium(child: body),
+                child: WoPadding.verticalMedium(child: buildBody()),
               ),
             ),
           WoFormDisplayedInPages(
@@ -238,13 +240,13 @@ class _WoFormPageView extends StatelessWidget {
         controller: pageController,
         physics: const NeverScrollableScrollPhysics(),
         itemCount: form.inputs.length,
-        itemBuilder: (context, index) => WoPadding.horizontalMedium(
-          child: ListView(
-            children: [
-              WoGap.medium,
-              form.inputs[index].toWidget(parentPath: ''),
-              WoGap.xlarge,
-              Row(
+        itemBuilder: (context, index) => ListView(
+          children: [
+            WoGap.medium,
+            form.inputs[index].toWidget(parentPath: ''),
+            WoGap.xlarge,
+            WoPadding.horizontalSmall(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   if (index == form.inputs.length - 1)
@@ -254,7 +256,7 @@ class _WoFormPageView extends StatelessWidget {
                       onPressed: () {
                         final input = form.inputs[index];
                         final values = context.read<WoFormValuesCubit>().state;
-
+              
                         final Iterable<WoFormInputError> errors;
                         if (input is WoFormNode) {
                           errors = input.getErrors(values, parentPath: '');
@@ -266,7 +268,7 @@ class _WoFormPageView extends StatelessWidget {
                         } else {
                           throw UnimplementedError();
                         }
-
+              
                         if (errors.isNotEmpty) {
                           return context
                               .read<WoFormStatusCubit>()
@@ -285,9 +287,9 @@ class _WoFormPageView extends StatelessWidget {
                     ),
                 ],
               ),
-              WoGap.medium,
-            ],
-          ),
+            ),
+            WoGap.medium,
+          ],
         ),
       ),
     );

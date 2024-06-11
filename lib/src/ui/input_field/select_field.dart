@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
+import 'package:wo_form/src/ui/input_field/input_header.dart';
 import 'package:wo_form/src/ui/prefab/localize_form_error.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -136,21 +137,30 @@ class SelectField<T> extends StatelessWidget {
                       ),
                     ],
                   ),
-                SelectFieldDisplayMode.chip => ListTile(
-                    title: title,
-                    subtitle: subtitle,
-                    trailing: SelectChip<T>.uniqueChoice(
-                      values: input.availibleValues,
-                      onSelected: (value) => onUniqueChoice(
-                        valuesCubit: valuesCubit,
-                        selectedValues: selectedValues,
-                        value: value,
+                SelectFieldDisplayMode.chip => Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      InputHeader(
+                        isRequired: input.minCount > 0,
+                        labelText: mergedSettings.labelText ?? '',
+                        helperText: mergedSettings.helperText ?? '',
+                        errorText: errorText ?? '',
                       ),
-                      selectedValue: selectedValues.firstOrNull,
-                      valueBuilder: valueBuilder,
-                      helpValueBuilder: mergedSettings.helpValueBuilder,
-                      searcher: mergedSettings.searcher,
-                    ),
+                      ListTile(
+                        title: SelectChip<T>.uniqueChoice(
+                          values: input.availibleValues,
+                          onSelected: (value) => onUniqueChoice(
+                            valuesCubit: valuesCubit,
+                            selectedValues: selectedValues,
+                            value: value,
+                          ),
+                          selectedValue: selectedValues.firstOrNull,
+                          valueBuilder: valueBuilder,
+                          helpValueBuilder: mergedSettings.helpValueBuilder,
+                          searcher: mergedSettings.searcher,
+                        ),
+                      ),
+                    ],
                   ),
               };
             } else {
@@ -169,32 +179,28 @@ class SelectField<T> extends StatelessWidget {
                       selectedValues: selectedValues,
                       valueBuilder: valueBuilder,
                       helpValueBuilder: mergedSettings.helpValueBuilder,
-                      showArrow: false,
-                      previewBuilder: (_) => const Icon(Icons.add),
                       searcher: mergedSettings.searcher,
+                      builder: (onPressed) => IconButton(
+                        onPressed: onPressed,
+                        icon: const Icon(Icons.add),
+                      ),
                     ),
                   ),
                   if (selectedValues.isNotEmpty)
                     ListTile(
                       title: Wrap(
                         spacing: WoSize.small,
-                        runSpacing: WoSize.small,
                         children: [
                           ...selectedValues.map(
-                            (v) => CardButton.outlined(
-                              onPressed: () => onMultipleChoice(
+                            (v) => _MultipleSelectChip(
+                              helper: mergedSettings.helpValueBuilder?.call(v),
+                              onDeleted: () => onMultipleChoice(
                                 valuesCubit: valuesCubit,
                                 selectedValues: selectedValues,
                                 value: v,
                               ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
+                              label:
                                   valueBuilder?.call(v) ?? Text(v.toString()),
-                                  WoGap.xsmall,
-                                  const Icon(Icons.close, size: WoSize.medium),
-                                ],
-                              ),
                             ),
                           ),
                         ],
@@ -210,6 +216,35 @@ class SelectField<T> extends StatelessWidget {
   }
 }
 
+class _MultipleSelectChip extends StatelessWidget {
+  const _MultipleSelectChip({
+    required this.label,
+    this.onDeleted,
+    this.helper,
+  });
+
+  final Widget label;
+  final VoidCallback? onDeleted;
+  final Widget? helper;
+
+  @override
+  Widget build(BuildContext context) {
+    return InputChip(
+      label: label,
+      backgroundColor: context.colorScheme.cardColor,
+      onDeleted: onDeleted,
+      onPressed: helper == null
+          ? null
+          : () => showInfoPopover(
+                context: context,
+                builder: (popoverContext, pop) => WoPadding.allMedium(
+                  child: helper,
+                ),
+              ),
+    );
+  }
+}
+
 class SelectStringField extends SelectField<String> {
   const SelectStringField({
     required super.inputPath,
@@ -219,8 +254,7 @@ class SelectStringField extends SelectField<String> {
 
   @override
   SelectInput<String> getInput(WoForm form, Map<String, dynamic> values) {
-    final selectStringInput =
-        form.getInput(path: inputPath, values: values);
+    final selectStringInput = form.getInput(path: inputPath, values: values);
     if (selectStringInput is! SelectStringInput) {
       throw ArgumentError(
         'Wrong input at path "$inputPath". '

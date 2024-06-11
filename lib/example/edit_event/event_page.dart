@@ -40,13 +40,14 @@ class EventsPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(),
         body: SingleChildScrollView(
-          child: WoPadding.horizontalMedium(
+          child: WoPadding.horizontalSmall(
             child: BlocBuilder<EventsCubit, List<EventModel>>(
               builder: (context, events) {
                 return Column(
                   children: [
-                    WoGap.medium,
+                    WoGap.small,
                     ...events.map(EventCard.new),
+                    WoGap.small,
                   ],
                 );
               },
@@ -79,7 +80,7 @@ class EventCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final dateFormat = DateFormat.MMMMEEEEd();
 
-    return FeedCard(
+    return FeedCard.outlined(
       title: event.title,
       actions: [
         IconButton(

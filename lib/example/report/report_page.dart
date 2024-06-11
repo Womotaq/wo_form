@@ -44,11 +44,10 @@ class ReportPage extends StatelessWidget {
           minCount: 1,
           maxCount: 1,
           uiSettings: SelectInputUiSettings(
-            labelText: 'De quoi accusez-vous cette raclure ?',
-            displayMode: SelectFieldDisplayMode.tile,
+            labelText: 'Motif',
             valueBuilder: (type) => Text(
               switch (type) {
-                null => 'Vide',
+                null => 'Sélectionnez un motif',
                 ReportType.cheating => 'Triche',
                 ReportType.fairPlay => 'Fair play',
                 ReportType.verbalAbuse => 'Violence verbale',
