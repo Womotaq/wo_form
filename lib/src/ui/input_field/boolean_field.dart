@@ -103,3 +103,67 @@ class BooleanField extends StatelessWidget {
     );
   }
 }
+
+class WoFormTheme {
+  const WoFormTheme({
+    this.booleanFieldTheme,
+  });
+
+  final BooleanFieldTheme? booleanFieldTheme;
+}
+
+class BooleanFieldTheme {
+  const BooleanFieldTheme({
+    this.labelStyle,
+    this.helperStyle,
+    this.errorStyle,
+    this.controlAffinity,
+  });
+
+  final TextStyle? labelStyle;
+  final TextStyle? helperStyle;
+  final TextStyle? errorStyle;
+  final ListTileControlAffinity? controlAffinity;
+}
+
+class BooeanField2 extends StatelessWidget {
+  const BooeanField2.checkBox({
+    bool? value,
+    String? labelText,
+    String? helperText,
+    String? errorText,
+    BooleanFieldTheme? theme,
+    super.key,
+  });
+
+  final StringInputUiSettings uiSettings;
+  final String? errorText;
+  final void Function(bool? value)? onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return CheckboxListTile(
+      leading: onOffIsLeading ? onOffButton : null,
+      title: Text(
+        (uiSettings.labelText ?? '') + (input.isRequired ? '*' : ''),
+      ),
+      subtitle: errorText != null
+          ? Text(
+              errorText,
+              style: context.textTheme.labelMedium
+                  ?.copyWith(color: context.colorScheme.error),
+            )
+          : (mergedSettings.helperText ?? '').isNotEmpty
+              ? Text(
+                  mergedSettings.helperText ?? '',
+                  style: context.woTheme.infoStyle,
+                )
+              : null,
+      trailing: onOffIsLeading ? null : onOffButton,
+      onTap: () => valuesCubit.onValueChanged(
+        inputPath: inputPath,
+        value: !value,
+      ),
+    );
+  }
+}

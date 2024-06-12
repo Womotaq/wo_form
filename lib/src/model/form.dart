@@ -14,7 +14,7 @@ class WoForm with _$WoForm {
     @InputsListConverter() @Default([]) List<WoFormElementMixin> inputs,
     @Default(false) bool initialStatusIsSubmitted,
     @JsonKey(includeToJson: false, includeFromJson: false)
-    void Function(BuildContext context)? onUnsubmittedQuit,
+    Future<bool?> Function(BuildContext context)? onUnsubmittedQuit,
     @JsonKey(toJson: WoFormUiSettings.staticToJson)
     @Default(WoFormUiSettings())
     WoFormUiSettings uiSettings,
@@ -104,7 +104,9 @@ class WoForm with _$WoForm {
       null || WoFormDisplayedInCard() => Builder(
           builder: (context) {
             return Scaffold(
-              appBar: AppBar(leading: WoFormPopButton(form: this)),
+              appBar: AppBar(
+                leading: WoFormPopButton(onUnsubmittedQuit: onUnsubmittedQuit),
+              ),
               body: SingleChildScrollView(
                 child: widget,
               ),

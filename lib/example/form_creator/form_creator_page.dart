@@ -84,6 +84,15 @@ class StringInputPage extends StatelessWidget {
             children: [
               ...woFormCreator.inputs.map((e) => e.toWidget(parentPath: '')),
               WoGap.xxxlarge,
+              WoFormValueBuilder(
+                inputPath: '/uiSettings/titleText',
+                builder: (context, value) => ListTile(
+                  title: Text(
+                    'Titre: $value',
+                  ),
+                ),
+              ),
+              WoGap.xxxlarge,
               Builder(
                 builder: (context) => Row(
                   children: [

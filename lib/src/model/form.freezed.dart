@@ -26,7 +26,7 @@ mixin _$WoForm {
   List<WoFormElementMixin> get inputs => throw _privateConstructorUsedError;
   bool get initialStatusIsSubmitted => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
-  void Function(BuildContext)? get onUnsubmittedQuit =>
+  Future<bool?> Function(BuildContext)? get onUnsubmittedQuit =>
       throw _privateConstructorUsedError;
   @JsonKey(toJson: WoFormUiSettings.staticToJson)
   WoFormUiSettings get uiSettings => throw _privateConstructorUsedError;
@@ -46,7 +46,7 @@ abstract class $WoFormCopyWith<$Res> {
       @InputsListConverter() List<WoFormElementMixin> inputs,
       bool initialStatusIsSubmitted,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      void Function(BuildContext)? onUnsubmittedQuit,
+      Future<bool?> Function(BuildContext)? onUnsubmittedQuit,
       @JsonKey(toJson: WoFormUiSettings.staticToJson)
       WoFormUiSettings uiSettings});
 
@@ -88,7 +88,7 @@ class _$WoFormCopyWithImpl<$Res, $Val extends WoForm>
       onUnsubmittedQuit: freezed == onUnsubmittedQuit
           ? _value.onUnsubmittedQuit
           : onUnsubmittedQuit // ignore: cast_nullable_to_non_nullable
-              as void Function(BuildContext)?,
+              as Future<bool?> Function(BuildContext)?,
       uiSettings: null == uiSettings
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
@@ -117,7 +117,7 @@ abstract class _$$WoFormImplCopyWith<$Res> implements $WoFormCopyWith<$Res> {
       @InputsListConverter() List<WoFormElementMixin> inputs,
       bool initialStatusIsSubmitted,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      void Function(BuildContext)? onUnsubmittedQuit,
+      Future<bool?> Function(BuildContext)? onUnsubmittedQuit,
       @JsonKey(toJson: WoFormUiSettings.staticToJson)
       WoFormUiSettings uiSettings});
 
@@ -158,7 +158,7 @@ class __$$WoFormImplCopyWithImpl<$Res>
       onUnsubmittedQuit: freezed == onUnsubmittedQuit
           ? _value.onUnsubmittedQuit
           : onUnsubmittedQuit // ignore: cast_nullable_to_non_nullable
-              as void Function(BuildContext)?,
+              as Future<bool?> Function(BuildContext)?,
       uiSettings: null == uiSettings
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
@@ -211,7 +211,7 @@ class _$WoFormImpl extends _WoForm {
   final bool initialStatusIsSubmitted;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final void Function(BuildContext)? onUnsubmittedQuit;
+  final Future<bool?> Function(BuildContext)? onUnsubmittedQuit;
   @override
   @JsonKey(toJson: WoFormUiSettings.staticToJson)
   final WoFormUiSettings uiSettings;
@@ -268,7 +268,7 @@ abstract class _WoForm extends WoForm {
       @InputsListConverter() final List<WoFormElementMixin> inputs,
       final bool initialStatusIsSubmitted,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      final void Function(BuildContext)? onUnsubmittedQuit,
+      final Future<bool?> Function(BuildContext)? onUnsubmittedQuit,
       @JsonKey(toJson: WoFormUiSettings.staticToJson)
       final WoFormUiSettings uiSettings}) = _$WoFormImpl;
   const _WoForm._() : super._();
@@ -284,7 +284,7 @@ abstract class _WoForm extends WoForm {
   bool get initialStatusIsSubmitted;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  void Function(BuildContext)? get onUnsubmittedQuit;
+  Future<bool?> Function(BuildContext)? get onUnsubmittedQuit;
   @override
   @JsonKey(toJson: WoFormUiSettings.staticToJson)
   WoFormUiSettings get uiSettings;

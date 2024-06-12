@@ -173,7 +173,9 @@ class WoFormScreen extends StatelessWidget {
             ),
           WoFormDisplayedInPage() => Scaffold(
               appBar: AppBar(
-                leading: WoFormPopButton(form: form),
+                leading: WoFormPopButton(
+                  onUnsubmittedQuit: form.onUnsubmittedQuit,
+                ),
                 title: Text(mergedSettings.titleText ?? ''),
                 actions: [submitButton, WoGap.small],
               ),
@@ -183,12 +185,10 @@ class WoFormScreen extends StatelessWidget {
             ),
           WoFormDisplayedInPages(
             nextText: final nextText,
-            backText: final backText,
           ) =>
             _WoFormPageView(
               form: form,
               titleText: mergedSettings.titleText ?? '',
-              backText: backText,
               nextText: nextText,
               submitButton: submitButton,
             ),
@@ -208,14 +208,12 @@ class _WoFormPageView extends StatelessWidget {
   const _WoFormPageView({
     required this.form,
     required this.titleText,
-    required this.backText,
     required this.nextText,
     required this.submitButton,
   });
 
   final WoForm form;
   final String titleText;
-  final String? backText;
   final String? nextText;
   final BlocBuilder<WoFormStatusCubit, WoFormStatus> submitButton;
 
@@ -228,9 +226,28 @@ class _WoFormPageView extends StatelessWidget {
       value: pageIndexCubit,
       child: Scaffold(
         appBar: AppBar(
+          // leading: WoFormPopButton(
+          //   onUnsubmittedQuit: (context) {
+          //     // TODO : PopScope
+          //     if (pageController.page != null && pageController.page! > 0) {
+          //       FocusScope.of(context).unfocus();
+          //       pageController.previousPage(
+          //         duration: const Duration(milliseconds: 300),
+          //         curve: Curves.easeIn,
+          //       );
+          //       return false;
+          //     } else if (form.onUnsubmittedQuit == null ||
+          //         context.read<WoFormStatusCubit>().state is SubmittedStatus) {
+          //       return Navigator.of(context).pop();
+          //     } else {
+          //       form.onUnsubmittedQuit!(context);
+          //     }
+          //   },
+          // ),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
+              // TODO : PopScope
               if (pageController.page != null && pageController.page! > 0) {
                 FocusScope.of(context).unfocus();
                 pageController.previousPage(
@@ -324,7 +341,7 @@ class _WoFormPageView extends StatelessWidget {
                   },
                 );
               },
-            )
+            ),
           ],
         ),
       ),
@@ -334,23 +351,44 @@ class _WoFormPageView extends StatelessWidget {
 
 class WoFormPopButton extends StatelessWidget {
   const WoFormPopButton({
-    required this.form,
+    required this.onUnsubmittedQuit,
     super.key,
   });
 
-  final WoForm form;
+  final Future<bool?> Function(BuildContext)? onUnsubmittedQuit;
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: const Icon(Icons.arrow_back),
-      onPressed: () {
-        if (form.onUnsubmittedQuit == null ||
-            context.read<WoFormStatusCubit>().state is SubmittedStatus) {
-          return Navigator.of(context).pop();
-        } else {
-          form.onUnsubmittedQuit!(context);
-        }
+    return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
+      builder: (context, status) {
+        final canPop = onUnsubmittedQuit == null || status is SubmittedStatus;
+
+        return PopScope(
+          canPop: canPop,
+          onPopInvoked: (didPop) async {
+            if (didPop) return;
+            if (canPop) return;
+            final confirmPop = await onUnsubmittedQuit!(context);
+            if (confirmPop ?? false) {
+              if (!context.mounted) return;
+              Navigator.of(context).pop();
+            }
+          },
+          child: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () async {
+              if (onUnsubmittedQuit == null || status is SubmittedStatus) {
+                return Navigator.of(context).pop();
+              } else {
+                final confirmPop = await onUnsubmittedQuit!(context);
+                if (confirmPop ?? false) {
+                  if (!context.mounted) return;
+                  Navigator.of(context).pop();
+                }
+              }
+            },
+          ),
+        );
       },
     );
   }

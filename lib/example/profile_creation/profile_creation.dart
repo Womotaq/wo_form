@@ -13,7 +13,6 @@ class ProfileCreationPage extends StatelessWidget {
         submitText: 'Enregistrer',
         displayMode: WoFormDisplayedInPages(
           nextText: 'Suivant',
-          backText: 'Retour',
         ),
       ),
       inputs: [

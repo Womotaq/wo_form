@@ -1315,21 +1315,21 @@ mixin _$WoFormDisplayMode {
   TResult when<TResult extends Object?>({
     required TResult Function() card,
     required TResult Function() page,
-    required TResult Function(String? nextText, String? backText) pages,
+    required TResult Function(String? nextText) pages,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? card,
     TResult? Function()? page,
-    TResult? Function(String? nextText, String? backText)? pages,
+    TResult? Function(String? nextText)? pages,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? card,
     TResult Function()? page,
-    TResult Function(String? nextText, String? backText)? pages,
+    TResult Function(String? nextText)? pages,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -1426,7 +1426,7 @@ class _$WoFormDisplayedInCardImpl implements WoFormDisplayedInCard {
   TResult when<TResult extends Object?>({
     required TResult Function() card,
     required TResult Function() page,
-    required TResult Function(String? nextText, String? backText) pages,
+    required TResult Function(String? nextText) pages,
   }) {
     return card();
   }
@@ -1436,7 +1436,7 @@ class _$WoFormDisplayedInCardImpl implements WoFormDisplayedInCard {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? card,
     TResult? Function()? page,
-    TResult? Function(String? nextText, String? backText)? pages,
+    TResult? Function(String? nextText)? pages,
   }) {
     return card?.call();
   }
@@ -1446,7 +1446,7 @@ class _$WoFormDisplayedInCardImpl implements WoFormDisplayedInCard {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? card,
     TResult Function()? page,
-    TResult Function(String? nextText, String? backText)? pages,
+    TResult Function(String? nextText)? pages,
     required TResult orElse(),
   }) {
     if (card != null) {
@@ -1554,7 +1554,7 @@ class _$WoFormDisplayedInPageImpl implements WoFormDisplayedInPage {
   TResult when<TResult extends Object?>({
     required TResult Function() card,
     required TResult Function() page,
-    required TResult Function(String? nextText, String? backText) pages,
+    required TResult Function(String? nextText) pages,
   }) {
     return page();
   }
@@ -1564,7 +1564,7 @@ class _$WoFormDisplayedInPageImpl implements WoFormDisplayedInPage {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? card,
     TResult? Function()? page,
-    TResult? Function(String? nextText, String? backText)? pages,
+    TResult? Function(String? nextText)? pages,
   }) {
     return page?.call();
   }
@@ -1574,7 +1574,7 @@ class _$WoFormDisplayedInPageImpl implements WoFormDisplayedInPage {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? card,
     TResult Function()? page,
-    TResult Function(String? nextText, String? backText)? pages,
+    TResult Function(String? nextText)? pages,
     required TResult orElse(),
   }) {
     if (page != null) {
@@ -1639,7 +1639,7 @@ abstract class _$$WoFormDisplayedInPagesImplCopyWith<$Res> {
           $Res Function(_$WoFormDisplayedInPagesImpl) then) =
       __$$WoFormDisplayedInPagesImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String? nextText, String? backText});
+  $Res call({String? nextText});
 }
 
 /// @nodoc
@@ -1655,16 +1655,11 @@ class __$$WoFormDisplayedInPagesImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? nextText = freezed,
-    Object? backText = freezed,
   }) {
     return _then(_$WoFormDisplayedInPagesImpl(
       nextText: freezed == nextText
           ? _value.nextText
           : nextText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      backText: freezed == backText
-          ? _value.backText
-          : backText // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -1673,8 +1668,7 @@ class __$$WoFormDisplayedInPagesImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$WoFormDisplayedInPagesImpl implements WoFormDisplayedInPages {
-  const _$WoFormDisplayedInPagesImpl(
-      {this.nextText, this.backText, final String? $type})
+  const _$WoFormDisplayedInPagesImpl({this.nextText, final String? $type})
       : $type = $type ?? 'pages';
 
   factory _$WoFormDisplayedInPagesImpl.fromJson(Map<String, dynamic> json) =>
@@ -1682,15 +1676,13 @@ class _$WoFormDisplayedInPagesImpl implements WoFormDisplayedInPages {
 
   @override
   final String? nextText;
-  @override
-  final String? backText;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'WoFormDisplayMode.pages(nextText: $nextText, backText: $backText)';
+    return 'WoFormDisplayMode.pages(nextText: $nextText)';
   }
 
   @override
@@ -1699,14 +1691,12 @@ class _$WoFormDisplayedInPagesImpl implements WoFormDisplayedInPages {
         (other.runtimeType == runtimeType &&
             other is _$WoFormDisplayedInPagesImpl &&
             (identical(other.nextText, nextText) ||
-                other.nextText == nextText) &&
-            (identical(other.backText, backText) ||
-                other.backText == backText));
+                other.nextText == nextText));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, nextText, backText);
+  int get hashCode => Object.hash(runtimeType, nextText);
 
   @JsonKey(ignore: true)
   @override
@@ -1720,9 +1710,9 @@ class _$WoFormDisplayedInPagesImpl implements WoFormDisplayedInPages {
   TResult when<TResult extends Object?>({
     required TResult Function() card,
     required TResult Function() page,
-    required TResult Function(String? nextText, String? backText) pages,
+    required TResult Function(String? nextText) pages,
   }) {
-    return pages(nextText, backText);
+    return pages(nextText);
   }
 
   @override
@@ -1730,9 +1720,9 @@ class _$WoFormDisplayedInPagesImpl implements WoFormDisplayedInPages {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? card,
     TResult? Function()? page,
-    TResult? Function(String? nextText, String? backText)? pages,
+    TResult? Function(String? nextText)? pages,
   }) {
-    return pages?.call(nextText, backText);
+    return pages?.call(nextText);
   }
 
   @override
@@ -1740,11 +1730,11 @@ class _$WoFormDisplayedInPagesImpl implements WoFormDisplayedInPages {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? card,
     TResult Function()? page,
-    TResult Function(String? nextText, String? backText)? pages,
+    TResult Function(String? nextText)? pages,
     required TResult orElse(),
   }) {
     if (pages != null) {
-      return pages(nextText, backText);
+      return pages(nextText);
     }
     return orElse();
   }
@@ -1792,15 +1782,13 @@ class _$WoFormDisplayedInPagesImpl implements WoFormDisplayedInPages {
 }
 
 abstract class WoFormDisplayedInPages implements WoFormDisplayMode {
-  const factory WoFormDisplayedInPages(
-      {final String? nextText,
-      final String? backText}) = _$WoFormDisplayedInPagesImpl;
+  const factory WoFormDisplayedInPages({final String? nextText}) =
+      _$WoFormDisplayedInPagesImpl;
 
   factory WoFormDisplayedInPages.fromJson(Map<String, dynamic> json) =
       _$WoFormDisplayedInPagesImpl.fromJson;
 
   String? get nextText;
-  String? get backText;
   @JsonKey(ignore: true)
   _$$WoFormDisplayedInPagesImplCopyWith<_$WoFormDisplayedInPagesImpl>
       get copyWith => throw _privateConstructorUsedError;

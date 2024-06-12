@@ -196,7 +196,6 @@ _$WoFormDisplayedInPagesImpl _$$WoFormDisplayedInPagesImplFromJson(
         Map<String, dynamic> json) =>
     _$WoFormDisplayedInPagesImpl(
       nextText: json['nextText'] as String?,
-      backText: json['backText'] as String?,
       $type: json['runtimeType'] as String?,
     );
 
@@ -204,7 +203,6 @@ Map<String, dynamic> _$$WoFormDisplayedInPagesImplToJson(
         _$WoFormDisplayedInPagesImpl instance) =>
     <String, dynamic>{
       'nextText': instance.nextText,
-      'backText': instance.backText,
       'runtimeType': instance.$type,
     };
 
