@@ -23,8 +23,12 @@ BooleanInputUiSettings _$BooleanInputUiSettingsFromJson(
 mixin _$BooleanInputUiSettings {
   String? get labelText => throw _privateConstructorUsedError;
   String? get helperText => throw _privateConstructorUsedError;
-  BooleanFieldOnOffType? get onOffType => throw _privateConstructorUsedError;
-  ListTileControlAffinity? get onOffPosition =>
+  BooleanFieldControlType? get controlType =>
+      throw _privateConstructorUsedError;
+  ListTileControlAffinity? get controlAffinity =>
+      throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  Widget Function(WoField<bool, BooleanInputUiSettings>)? get widgetBuilder =>
       throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -42,8 +46,10 @@ abstract class $BooleanInputUiSettingsCopyWith<$Res> {
   $Res call(
       {String? labelText,
       String? helperText,
-      BooleanFieldOnOffType? onOffType,
-      ListTileControlAffinity? onOffPosition});
+      BooleanFieldControlType? controlType,
+      ListTileControlAffinity? controlAffinity,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      Widget Function(WoField<bool, BooleanInputUiSettings>)? widgetBuilder});
 }
 
 /// @nodoc
@@ -62,8 +68,9 @@ class _$BooleanInputUiSettingsCopyWithImpl<$Res,
   $Res call({
     Object? labelText = freezed,
     Object? helperText = freezed,
-    Object? onOffType = freezed,
-    Object? onOffPosition = freezed,
+    Object? controlType = freezed,
+    Object? controlAffinity = freezed,
+    Object? widgetBuilder = freezed,
   }) {
     return _then(_value.copyWith(
       labelText: freezed == labelText
@@ -74,14 +81,18 @@ class _$BooleanInputUiSettingsCopyWithImpl<$Res,
           ? _value.helperText
           : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
-      onOffType: freezed == onOffType
-          ? _value.onOffType
-          : onOffType // ignore: cast_nullable_to_non_nullable
-              as BooleanFieldOnOffType?,
-      onOffPosition: freezed == onOffPosition
-          ? _value.onOffPosition
-          : onOffPosition // ignore: cast_nullable_to_non_nullable
+      controlType: freezed == controlType
+          ? _value.controlType
+          : controlType // ignore: cast_nullable_to_non_nullable
+              as BooleanFieldControlType?,
+      controlAffinity: freezed == controlAffinity
+          ? _value.controlAffinity
+          : controlAffinity // ignore: cast_nullable_to_non_nullable
               as ListTileControlAffinity?,
+      widgetBuilder: freezed == widgetBuilder
+          ? _value.widgetBuilder
+          : widgetBuilder // ignore: cast_nullable_to_non_nullable
+              as Widget Function(WoField<bool, BooleanInputUiSettings>)?,
     ) as $Val);
   }
 }
@@ -98,8 +109,10 @@ abstract class _$$BooleanInputUiSettingsImplCopyWith<$Res>
   $Res call(
       {String? labelText,
       String? helperText,
-      BooleanFieldOnOffType? onOffType,
-      ListTileControlAffinity? onOffPosition});
+      BooleanFieldControlType? controlType,
+      ListTileControlAffinity? controlAffinity,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      Widget Function(WoField<bool, BooleanInputUiSettings>)? widgetBuilder});
 }
 
 /// @nodoc
@@ -117,8 +130,9 @@ class __$$BooleanInputUiSettingsImplCopyWithImpl<$Res>
   $Res call({
     Object? labelText = freezed,
     Object? helperText = freezed,
-    Object? onOffType = freezed,
-    Object? onOffPosition = freezed,
+    Object? controlType = freezed,
+    Object? controlAffinity = freezed,
+    Object? widgetBuilder = freezed,
   }) {
     return _then(_$BooleanInputUiSettingsImpl(
       labelText: freezed == labelText
@@ -129,14 +143,18 @@ class __$$BooleanInputUiSettingsImplCopyWithImpl<$Res>
           ? _value.helperText
           : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
-      onOffType: freezed == onOffType
-          ? _value.onOffType
-          : onOffType // ignore: cast_nullable_to_non_nullable
-              as BooleanFieldOnOffType?,
-      onOffPosition: freezed == onOffPosition
-          ? _value.onOffPosition
-          : onOffPosition // ignore: cast_nullable_to_non_nullable
+      controlType: freezed == controlType
+          ? _value.controlType
+          : controlType // ignore: cast_nullable_to_non_nullable
+              as BooleanFieldControlType?,
+      controlAffinity: freezed == controlAffinity
+          ? _value.controlAffinity
+          : controlAffinity // ignore: cast_nullable_to_non_nullable
               as ListTileControlAffinity?,
+      widgetBuilder: freezed == widgetBuilder
+          ? _value.widgetBuilder
+          : widgetBuilder // ignore: cast_nullable_to_non_nullable
+              as Widget Function(WoField<bool, BooleanInputUiSettings>)?,
     ));
   }
 }
@@ -145,7 +163,12 @@ class __$$BooleanInputUiSettingsImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$BooleanInputUiSettingsImpl extends _BooleanInputUiSettings {
   const _$BooleanInputUiSettingsImpl(
-      {this.labelText, this.helperText, this.onOffType, this.onOffPosition})
+      {this.labelText,
+      this.helperText,
+      this.controlType,
+      this.controlAffinity,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      this.widgetBuilder})
       : super._();
 
   factory _$BooleanInputUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
@@ -156,13 +179,16 @@ class _$BooleanInputUiSettingsImpl extends _BooleanInputUiSettings {
   @override
   final String? helperText;
   @override
-  final BooleanFieldOnOffType? onOffType;
+  final BooleanFieldControlType? controlType;
   @override
-  final ListTileControlAffinity? onOffPosition;
+  final ListTileControlAffinity? controlAffinity;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final Widget Function(WoField<bool, BooleanInputUiSettings>)? widgetBuilder;
 
   @override
   String toString() {
-    return 'BooleanInputUiSettings(labelText: $labelText, helperText: $helperText, onOffType: $onOffType, onOffPosition: $onOffPosition)';
+    return 'BooleanInputUiSettings(labelText: $labelText, helperText: $helperText, controlType: $controlType, controlAffinity: $controlAffinity, widgetBuilder: $widgetBuilder)';
   }
 
   @override
@@ -174,16 +200,18 @@ class _$BooleanInputUiSettingsImpl extends _BooleanInputUiSettings {
                 other.labelText == labelText) &&
             (identical(other.helperText, helperText) ||
                 other.helperText == helperText) &&
-            (identical(other.onOffType, onOffType) ||
-                other.onOffType == onOffType) &&
-            (identical(other.onOffPosition, onOffPosition) ||
-                other.onOffPosition == onOffPosition));
+            (identical(other.controlType, controlType) ||
+                other.controlType == controlType) &&
+            (identical(other.controlAffinity, controlAffinity) ||
+                other.controlAffinity == controlAffinity) &&
+            (identical(other.widgetBuilder, widgetBuilder) ||
+                other.widgetBuilder == widgetBuilder));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, labelText, helperText, onOffType, onOffPosition);
+  int get hashCode => Object.hash(runtimeType, labelText, helperText,
+      controlType, controlAffinity, widgetBuilder);
 
   @JsonKey(ignore: true)
   @override
@@ -202,11 +230,13 @@ class _$BooleanInputUiSettingsImpl extends _BooleanInputUiSettings {
 
 abstract class _BooleanInputUiSettings extends BooleanInputUiSettings {
   const factory _BooleanInputUiSettings(
-          {final String? labelText,
-          final String? helperText,
-          final BooleanFieldOnOffType? onOffType,
-          final ListTileControlAffinity? onOffPosition}) =
-      _$BooleanInputUiSettingsImpl;
+      {final String? labelText,
+      final String? helperText,
+      final BooleanFieldControlType? controlType,
+      final ListTileControlAffinity? controlAffinity,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final Widget Function(WoField<bool, BooleanInputUiSettings>)?
+          widgetBuilder}) = _$BooleanInputUiSettingsImpl;
   const _BooleanInputUiSettings._() : super._();
 
   factory _BooleanInputUiSettings.fromJson(Map<String, dynamic> json) =
@@ -217,9 +247,12 @@ abstract class _BooleanInputUiSettings extends BooleanInputUiSettings {
   @override
   String? get helperText;
   @override
-  BooleanFieldOnOffType? get onOffType;
+  BooleanFieldControlType? get controlType;
   @override
-  ListTileControlAffinity? get onOffPosition;
+  ListTileControlAffinity? get controlAffinity;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  Widget Function(WoField<bool, BooleanInputUiSettings>)? get widgetBuilder;
   @override
   @JsonKey(ignore: true)
   _$$BooleanInputUiSettingsImplCopyWith<_$BooleanInputUiSettingsImpl>

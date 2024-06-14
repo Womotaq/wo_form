@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/src/model/json_converter/text_input_type.dart';
+import 'package:wo_form/wo_form.dart';
 
 part 'ui_settings.freezed.dart';
 part 'ui_settings.g.dart';
 
-enum BooleanFieldOnOffType { checkbox, switchButton }
+enum BooleanFieldControlType { checkbox, switchButton }
 
 @freezed
 class BooleanInputUiSettings with _$BooleanInputUiSettings {
   const factory BooleanInputUiSettings({
     String? labelText,
     String? helperText,
-    BooleanFieldOnOffType? onOffType,
-    ListTileControlAffinity? onOffPosition,
+    BooleanFieldControlType? controlType,
+    ListTileControlAffinity? controlAffinity,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    Widget Function(WoField<bool, BooleanInputUiSettings>)? widgetBuilder,
   }) = _BooleanInputUiSettings;
 
   const BooleanInputUiSettings._();
@@ -29,8 +32,8 @@ class BooleanInputUiSettings with _$BooleanInputUiSettings {
       : BooleanInputUiSettings(
           labelText: labelText ?? other.labelText,
           helperText: helperText ?? other.helperText,
-          onOffType: onOffType ?? other.onOffType,
-          onOffPosition: onOffPosition ?? other.onOffPosition,
+          controlType: controlType ?? other.controlType,
+          controlAffinity: controlAffinity ?? other.controlAffinity,
         );
 }
 
@@ -52,8 +55,7 @@ class InputsNodeUiSettings with _$InputsNodeUiSettings {
   static Map<String, dynamic> staticToJson(InputsNodeUiSettings object) =>
       object.toJson();
 
-  InputsNodeUiSettings merge(InputsNodeUiSettings? other) =>
-      other == null
+  InputsNodeUiSettings merge(InputsNodeUiSettings? other) => other == null
       ? this
       : InputsNodeUiSettings(
           labelText: labelText ?? other.labelText,
@@ -108,14 +110,14 @@ class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
 
   SelectInputUiSettings<T> merge(SelectInputUiSettings<T>? other) =>
       other == null
-      ? this
+          ? this
           : SelectInputUiSettings(
-          labelText: labelText ?? other.labelText,
-          helperText: helperText ?? other.helperText,
-          displayMode: displayMode ?? other.displayMode,
-          valueBuilder: valueBuilder ?? other.valueBuilder,
-          helpValueBuilder: helpValueBuilder ?? other.helpValueBuilder,
-        );
+              labelText: labelText ?? other.labelText,
+              helperText: helperText ?? other.helperText,
+              displayMode: displayMode ?? other.displayMode,
+              valueBuilder: valueBuilder ?? other.valueBuilder,
+              helpValueBuilder: helpValueBuilder ?? other.helpValueBuilder,
+            );
 }
 
 enum StringFieldAction { clear, obscure }

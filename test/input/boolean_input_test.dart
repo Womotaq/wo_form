@@ -5,7 +5,7 @@ void main() {
   const input = BooleanInput(
     id: 'isRequired',
     uiSettings: BooleanInputUiSettings(
-      onOffType: BooleanFieldOnOffType.switchButton,
+      controlType: BooleanFieldControlType.switchButton,
     ),
   );
   final json = {
@@ -14,8 +14,8 @@ void main() {
     'isRequired': false,
     'uiSettings': {
       'labelText': null,
-      'onOffType': 'switchButton',
-      'onOffPosition': null,
+      'controlType': 'switchButton',
+      'controlAffinity': null,
     },
     'runtimeType': 'boolean',
   };

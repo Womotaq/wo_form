@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/wo_form.dart';
 
-part 'status.freezed.dart';
+part 'wo_form_status.freezed.dart';
 
 @freezed
 sealed class WoFormStatus with _$WoFormStatus {

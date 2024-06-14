@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'input.dart';
+part of 'wo_form_input.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

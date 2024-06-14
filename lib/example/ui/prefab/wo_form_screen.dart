@@ -4,9 +4,10 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
-import 'package:wo_form/src/ui/prefab/form_card.dart';
+import 'package:wo_form/example/ui/prefab/form_card.dart';
 import 'package:wo_form/wo_form.dart';
 
+// TODO : name as page
 class WoFormScreen extends StatelessWidget {
   const WoFormScreen({
     required this.form,
@@ -165,10 +166,18 @@ class WoFormScreen extends StatelessWidget {
         },
         child: switch (mergedSettings.displayMode) {
           null || WoFormDisplayedInCard() => WoPadding.verticalMedium(
-              child: FormCard(
-                labelText: mergedSettings.titleText ?? '',
-                helperText: '',
-                child: buildBody(),
+              child: Scaffold(
+                appBar: AppBar(
+                  leading: WoFormPopButton(
+                      onUnsubmittedQuit: form.onUnsubmittedQuit),
+                ),
+                body: SingleChildScrollView(
+                  child: FormCard(
+                    labelText: mergedSettings.titleText ?? '',
+                    helperText: '',
+                    child: buildBody(),
+                  ),
+                ),
               ),
             ),
           WoFormDisplayedInPage() => Scaffold(

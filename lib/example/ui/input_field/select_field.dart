@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
-import 'package:wo_form/src/ui/input_field/input_header.dart';
-import 'package:wo_form/src/ui/prefab/localize_form_error.dart';
+import 'package:wo_form/example/ui/input_field/input_header.dart';
+import 'package:wo_form/example/ui/prefab/localize_form_error.dart';
 import 'package:wo_form/wo_form.dart';
 
 class SelectField<T> extends StatelessWidget {

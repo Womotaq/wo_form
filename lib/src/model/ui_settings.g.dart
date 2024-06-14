@@ -11,10 +11,10 @@ _$BooleanInputUiSettingsImpl _$$BooleanInputUiSettingsImplFromJson(
     _$BooleanInputUiSettingsImpl(
       labelText: json['labelText'] as String?,
       helperText: json['helperText'] as String?,
-      onOffType: $enumDecodeNullable(
-          _$BooleanFieldOnOffTypeEnumMap, json['onOffType']),
-      onOffPosition: $enumDecodeNullable(
-          _$ListTileControlAffinityEnumMap, json['onOffPosition']),
+      controlType: $enumDecodeNullable(
+          _$BooleanFieldControlTypeEnumMap, json['controlType']),
+      controlAffinity: $enumDecodeNullable(
+          _$ListTileControlAffinityEnumMap, json['controlAffinity']),
     );
 
 Map<String, dynamic> _$$BooleanInputUiSettingsImplToJson(
@@ -22,13 +22,14 @@ Map<String, dynamic> _$$BooleanInputUiSettingsImplToJson(
     <String, dynamic>{
       'labelText': instance.labelText,
       'helperText': instance.helperText,
-      'onOffType': _$BooleanFieldOnOffTypeEnumMap[instance.onOffType],
-      'onOffPosition': _$ListTileControlAffinityEnumMap[instance.onOffPosition],
+      'controlType': _$BooleanFieldControlTypeEnumMap[instance.controlType],
+      'controlAffinity':
+          _$ListTileControlAffinityEnumMap[instance.controlAffinity],
     };
 
-const _$BooleanFieldOnOffTypeEnumMap = {
-  BooleanFieldOnOffType.checkbox: 'checkbox',
-  BooleanFieldOnOffType.switchButton: 'switchButton',
+const _$BooleanFieldControlTypeEnumMap = {
+  BooleanFieldControlType.checkbox: 'checkbox',
+  BooleanFieldControlType.switchButton: 'switchButton',
 };
 
 const _$ListTileControlAffinityEnumMap = {

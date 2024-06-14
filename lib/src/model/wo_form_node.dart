@@ -2,12 +2,13 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
+import 'package:wo_form/example/ui/node_widget/inputs_node_widget.dart';
 import 'package:wo_form/src/model/json_converter/inputs_list.dart';
 import 'package:wo_form/src/utils/to_absolute_path.dart';
 import 'package:wo_form/wo_form.dart';
 
-part 'node.freezed.dart';
-part 'node.g.dart';
+part 'wo_form_node.freezed.dart';
+part 'wo_form_node.g.dart';
 
 mixin WoFormElementMixin {
   String get id;

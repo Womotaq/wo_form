@@ -1,10 +1,13 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:wo_form/example/ui/input_field/num_field.dart';
+import 'package:wo_form/example/ui/input_field/select_field.dart';
+import 'package:wo_form/example/ui/input_field/string_field.dart';
 import 'package:wo_form/wo_form.dart';
 
-part 'input.freezed.dart';
-part 'input.g.dart';
+part 'wo_form_input.freezed.dart';
+part 'wo_form_input.g.dart';
 
 @freezed
 sealed class WoFormInputError with _$WoFormInputError {
@@ -179,7 +182,7 @@ sealed class WoFormInput
   @override
   String? getInvalidExplanation(
     dynamic value,
-    String Function(WoFormInputError) localizeInputError,
+    String Function(WoFormInputError)? localizeInputError,
   ) {
     final error = getError(value);
 
@@ -202,7 +205,7 @@ sealed class WoFormInput
         }
     }
 
-    return localizeInputError(error);
+    return localizeInputError?.call(error) ?? error.toString();
   }
 
   @override
@@ -229,7 +232,7 @@ sealed class WoFormInput
     final path = '$parentPath/$id';
     switch (this) {
       case BooleanInput():
-        return BooleanField(inputPath: path);
+        return BooleanFieldBuilder(inputPath: path);
       case NumInput():
         return NumField(inputPath: path);
       case StringInput():

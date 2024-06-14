@@ -1,11 +1,13 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:package_atomic_design/package_atomic_design.dart';
+import 'package:wo_form/example/ui/prefab/wo_form_screen.dart';
 import 'package:wo_form/src/model/json_converter/inputs_list.dart';
 import 'package:wo_form/wo_form.dart';
 
-part 'form.freezed.dart';
-part 'form.g.dart';
+part 'wo_form.freezed.dart';
+part 'wo_form.g.dart';
 
 @freezed
 class WoForm with _$WoForm {
@@ -94,7 +96,7 @@ class WoForm with _$WoForm {
     void Function(Map<String, dynamic> values)? onSubmitting,
     void Function(BuildContext context)? onSubmitted,
   }) {
-    final widget = toWidget(
+    return toWidget(
       onSubmitting: onSubmitting,
       onSubmitted: onSubmitted,
     );
@@ -108,15 +110,16 @@ class WoForm with _$WoForm {
                 leading: WoFormPopButton(onUnsubmittedQuit: onUnsubmittedQuit),
               ),
               body: SingleChildScrollView(
-                child: widget,
+                child: WoGap.large,
               ),
             );
           },
         ),
-      WoFormDisplayedInPage() || WoFormDisplayedInPages() => widget,
+      WoFormDisplayedInPage() || WoFormDisplayedInPages() => WoGap.large,
     };
   }
 
+  @protected
   Widget toWidget({
     void Function(Map<String, dynamic> values)? onSubmitting,
     void Function(BuildContext context)? onSubmitted,

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
-import 'package:wo_form/src/ui/prefab/localize_form_error.dart';
+import 'package:wo_form/example/ui/prefab/localize_form_error.dart';
 import 'package:wo_form/wo_form.dart';
 
-class BooleanField extends StatelessWidget {
-  const BooleanField({
+class BooleanFieldTBR extends StatelessWidget {
+  const BooleanFieldTBR({
     required this.inputPath,
     this.uiSettings,
     super.key,
@@ -37,15 +37,15 @@ class BooleanField extends StatelessWidget {
           builder: (context, valueNullable) {
             final value = valueNullable ?? false;
 
-            final onOffButton = switch (mergedSettings.onOffType) {
-              null || BooleanFieldOnOffType.switchButton => Switch(
+            final onOffButton = switch (mergedSettings.controlType) {
+              null || BooleanFieldControlType.switchButton => Switch(
                   value: value,
                   onChanged: (value) => valuesCubit.onValueChanged(
                     inputPath: inputPath,
                     value: value,
                   ),
                 ),
-              BooleanFieldOnOffType.checkbox => Checkbox(
+              BooleanFieldControlType.checkbox => Checkbox(
                   value: value,
                   onChanged: (value) => value == null
                       ? null
@@ -56,13 +56,13 @@ class BooleanField extends StatelessWidget {
                 ),
             };
 
-            final onOffIsLeading = switch (mergedSettings.onOffPosition) {
+            final onOffIsLeading = switch (mergedSettings.controlAffinity) {
               ListTileControlAffinity.leading => true,
               ListTileControlAffinity.trailing => false,
               null || ListTileControlAffinity.platform => switch (
-                    mergedSettings.onOffType) {
-                  null || BooleanFieldOnOffType.switchButton => false,
-                  BooleanFieldOnOffType.checkbox => true,
+                    mergedSettings.controlType) {
+                  null || BooleanFieldControlType.switchButton => false,
+                  BooleanFieldControlType.checkbox => true,
                 }
             };
 
@@ -72,6 +72,24 @@ class BooleanField extends StatelessWidget {
                     value,
                     localizeInputError(context.formL10n),
                   );
+
+            final field = WoField<bool, BooleanInputUiSettings>(
+              inputPath: inputPath,
+              value: value,
+              errorText: errorText,
+              uiSettings: mergedSettings,
+              onValueChanged: (bool? value) => valuesCubit.onValueChanged(
+                inputPath: inputPath,
+                value: value,
+              ),
+            );
+
+            // TODO
+            final test = mergedSettings.widgetBuilder?.call(field) ??
+                Theme.of(context)
+                    .extension<WoFormTheme>()
+                    ?.booleanFieldBuilder!(field) ??
+                BooleanField(field: field);
 
             return ListTile(
               leading: onOffIsLeading ? onOffButton : null,
@@ -100,70 +118,6 @@ class BooleanField extends StatelessWidget {
           },
         );
       },
-    );
-  }
-}
-
-class WoFormTheme {
-  const WoFormTheme({
-    this.booleanFieldTheme,
-  });
-
-  final BooleanFieldTheme? booleanFieldTheme;
-}
-
-class BooleanFieldTheme {
-  const BooleanFieldTheme({
-    this.labelStyle,
-    this.helperStyle,
-    this.errorStyle,
-    this.controlAffinity,
-  });
-
-  final TextStyle? labelStyle;
-  final TextStyle? helperStyle;
-  final TextStyle? errorStyle;
-  final ListTileControlAffinity? controlAffinity;
-}
-
-class BooeanField2 extends StatelessWidget {
-  const BooeanField2.checkBox({
-    bool? value,
-    String? labelText,
-    String? helperText,
-    String? errorText,
-    BooleanFieldTheme? theme,
-    super.key,
-  });
-
-  final StringInputUiSettings uiSettings;
-  final String? errorText;
-  final void Function(bool? value)? onChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    return CheckboxListTile(
-      leading: onOffIsLeading ? onOffButton : null,
-      title: Text(
-        (uiSettings.labelText ?? '') + (input.isRequired ? '*' : ''),
-      ),
-      subtitle: errorText != null
-          ? Text(
-              errorText,
-              style: context.textTheme.labelMedium
-                  ?.copyWith(color: context.colorScheme.error),
-            )
-          : (mergedSettings.helperText ?? '').isNotEmpty
-              ? Text(
-                  mergedSettings.helperText ?? '',
-                  style: context.woTheme.infoStyle,
-                )
-              : null,
-      trailing: onOffIsLeading ? null : onOffButton,
-      onTap: () => valuesCubit.onValueChanged(
-        inputPath: inputPath,
-        value: !value,
-      ),
     );
   }
 }

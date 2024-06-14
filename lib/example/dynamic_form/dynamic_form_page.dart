@@ -135,7 +135,7 @@ class DynamicFormPage extends StatelessWidget {
               uiSettings: const BooleanInputUiSettings(
                 labelText:
                     "J'ai lu et j'accepte les conditions météorologiques",
-                onOffType: BooleanFieldOnOffType.checkbox,
+                controlType: BooleanFieldControlType.checkbox,
               ),
             );
           },
