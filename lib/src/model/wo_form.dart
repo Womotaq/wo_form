@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/example/ui/prefab/wo_form_screen.dart';
 import 'package:wo_form/src/model/json_converter/inputs_list.dart';
 import 'package:wo_form/wo_form.dart';
@@ -95,29 +94,11 @@ class WoForm with _$WoForm {
   Widget toPage({
     void Function(Map<String, dynamic> values)? onSubmitting,
     void Function(BuildContext context)? onSubmitted,
-  }) {
-    return toWidget(
-      onSubmitting: onSubmitting,
-      onSubmitted: onSubmitted,
-    );
-
-    return switch (uiSettings.displayMode) {
-      // TODO : rework
-      null || WoFormDisplayedInCard() => Builder(
-          builder: (context) {
-            return Scaffold(
-              appBar: AppBar(
-                leading: WoFormPopButton(onUnsubmittedQuit: onUnsubmittedQuit),
-              ),
-              body: SingleChildScrollView(
-                child: WoGap.large,
-              ),
-            );
-          },
-        ),
-      WoFormDisplayedInPage() || WoFormDisplayedInPages() => WoGap.large,
-    };
-  }
+  }) =>
+      toWidget(
+        onSubmitting: onSubmitting,
+        onSubmitted: onSubmitted,
+      );
 
   @protected
   Widget toWidget({

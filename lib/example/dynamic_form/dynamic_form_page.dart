@@ -136,6 +136,7 @@ class DynamicFormPage extends StatelessWidget {
                 labelText:
                     "J'ai lu et j'accepte les conditions météorologiques",
                 controlType: BooleanFieldControlType.checkbox,
+                controlAffinity: ListTileControlAffinity.leading,
               ),
             );
           },

@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:wo_form/example/ui/input_field/num_field.dart';
 import 'package:wo_form/example/ui/input_field/select_field.dart';
 import 'package:wo_form/example/ui/input_field/string_field.dart';
 import 'package:wo_form/wo_form.dart';
@@ -234,7 +233,7 @@ sealed class WoFormInput
       case BooleanInput():
         return BooleanFieldBuilder(inputPath: path);
       case NumInput():
-        return NumField(inputPath: path);
+        return NumFieldBuilder(inputPath: path);
       case StringInput():
         return StringField(inputPath: path);
       case SelectStringInput():

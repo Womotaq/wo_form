@@ -44,7 +44,7 @@ class EditEventPage extends StatelessWidget {
           ),
         ),
       ],
-    ).toWidget(
+    ).toPage(
       onSubmitting: (values) {
         final edittedEvent = event.copyWith(
           title: values['/title'] as String,

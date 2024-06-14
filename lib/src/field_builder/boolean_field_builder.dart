@@ -72,8 +72,8 @@ class BooleanField extends StatelessWidget {
   Widget build(BuildContext context) {
     final inputDecorationTheme = Theme.of(context).inputDecorationTheme;
 
-    return CheckboxListTile(
-      value: field.value,
+    return buildTile(
+      value: field.value ?? false,
       controlAffinity:
           field.uiSettings.controlAffinity ?? ListTileControlAffinity.platform,
       title: Text(field.uiSettings.labelText ?? ''),
@@ -89,7 +89,29 @@ class BooleanField extends StatelessWidget {
                   style: inputDecorationTheme.helperStyle,
                 )
               : null,
-      onChanged: field.onValueChanged,
     );
   }
+
+  Widget buildTile({
+    required bool value,
+    required ListTileControlAffinity controlAffinity,
+    required Widget title,
+    required Widget? subtitle,
+  }) =>
+      switch (field.uiSettings.controlType) {
+        null || BooleanFieldControlType.switchButton => SwitchListTile(
+            value: value,
+            controlAffinity: controlAffinity,
+            title: title,
+            subtitle: subtitle,
+            onChanged: field.onValueChanged,
+          ),
+        BooleanFieldControlType.checkbox => CheckboxListTile(
+            value: value,
+            controlAffinity: controlAffinity,
+            title: title,
+            subtitle: subtitle,
+            onChanged: field.onValueChanged,
+          )
+      };
 }

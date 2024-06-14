@@ -69,10 +69,11 @@ class ReportPage extends StatelessWidget {
           uiSettings: BooleanInputUiSettings(
             labelText: 'Bloquer cette raclure ?',
             controlType: BooleanFieldControlType.checkbox,
+            controlAffinity: ListTileControlAffinity.leading,
           ),
         ),
       ],
-    ).toWidget(
+    ).toPage(
       onSubmitting: (_) async {
         await Future<void>.delayed(const Duration(seconds: 3));
       },
