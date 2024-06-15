@@ -1,5 +1,5 @@
-class WoField<T, U> {
-  const WoField({
+class WoFieldData<T, U> {
+  const WoFieldData({
     required this.inputPath,
     required this.value,
     required this.errorText,

@@ -28,8 +28,8 @@ mixin _$BooleanInputUiSettings {
   ListTileControlAffinity? get controlAffinity =>
       throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
-  Widget Function(WoField<bool, BooleanInputUiSettings>)? get widgetBuilder =>
-      throw _privateConstructorUsedError;
+  Widget Function(WoFieldData<bool, BooleanInputUiSettings>)?
+      get widgetBuilder => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,7 +49,8 @@ abstract class $BooleanInputUiSettingsCopyWith<$Res> {
       BooleanFieldControlType? controlType,
       ListTileControlAffinity? controlAffinity,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      Widget Function(WoField<bool, BooleanInputUiSettings>)? widgetBuilder});
+      Widget Function(WoFieldData<bool, BooleanInputUiSettings>)?
+          widgetBuilder});
 }
 
 /// @nodoc
@@ -92,7 +93,7 @@ class _$BooleanInputUiSettingsCopyWithImpl<$Res,
       widgetBuilder: freezed == widgetBuilder
           ? _value.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
-              as Widget Function(WoField<bool, BooleanInputUiSettings>)?,
+              as Widget Function(WoFieldData<bool, BooleanInputUiSettings>)?,
     ) as $Val);
   }
 }
@@ -112,7 +113,8 @@ abstract class _$$BooleanInputUiSettingsImplCopyWith<$Res>
       BooleanFieldControlType? controlType,
       ListTileControlAffinity? controlAffinity,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      Widget Function(WoField<bool, BooleanInputUiSettings>)? widgetBuilder});
+      Widget Function(WoFieldData<bool, BooleanInputUiSettings>)?
+          widgetBuilder});
 }
 
 /// @nodoc
@@ -154,7 +156,7 @@ class __$$BooleanInputUiSettingsImplCopyWithImpl<$Res>
       widgetBuilder: freezed == widgetBuilder
           ? _value.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
-              as Widget Function(WoField<bool, BooleanInputUiSettings>)?,
+              as Widget Function(WoFieldData<bool, BooleanInputUiSettings>)?,
     ));
   }
 }
@@ -184,7 +186,8 @@ class _$BooleanInputUiSettingsImpl extends _BooleanInputUiSettings {
   final ListTileControlAffinity? controlAffinity;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final Widget Function(WoField<bool, BooleanInputUiSettings>)? widgetBuilder;
+  final Widget Function(WoFieldData<bool, BooleanInputUiSettings>)?
+      widgetBuilder;
 
   @override
   String toString() {
@@ -235,7 +238,7 @@ abstract class _BooleanInputUiSettings extends BooleanInputUiSettings {
       final BooleanFieldControlType? controlType,
       final ListTileControlAffinity? controlAffinity,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      final Widget Function(WoField<bool, BooleanInputUiSettings>)?
+      final Widget Function(WoFieldData<bool, BooleanInputUiSettings>)?
           widgetBuilder}) = _$BooleanInputUiSettingsImpl;
   const _BooleanInputUiSettings._() : super._();
 
@@ -252,7 +255,7 @@ abstract class _BooleanInputUiSettings extends BooleanInputUiSettings {
   ListTileControlAffinity? get controlAffinity;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  Widget Function(WoField<bool, BooleanInputUiSettings>)? get widgetBuilder;
+  Widget Function(WoFieldData<bool, BooleanInputUiSettings>)? get widgetBuilder;
   @override
   @JsonKey(ignore: true)
   _$$BooleanInputUiSettingsImplCopyWith<_$BooleanInputUiSettingsImpl>

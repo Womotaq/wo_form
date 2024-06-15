@@ -16,7 +16,7 @@ class BooleanInputUiSettings with _$BooleanInputUiSettings {
     BooleanFieldControlType? controlType,
     ListTileControlAffinity? controlAffinity,
     @JsonKey(includeToJson: false, includeFromJson: false)
-    Widget Function(WoField<bool, BooleanInputUiSettings>)? widgetBuilder,
+    Widget Function(WoFieldData<bool, BooleanInputUiSettings>)? widgetBuilder,
   }) = _BooleanInputUiSettings;
 
   const BooleanInputUiSettings._();

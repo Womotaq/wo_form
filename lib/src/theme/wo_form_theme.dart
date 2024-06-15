@@ -8,13 +8,13 @@ class WoFormTheme extends ThemeExtension<WoFormTheme> {
   });
 
   final String Function(WoFormInputError error)? localizeInputError;
-  final Widget Function(WoField<bool, BooleanInputUiSettings> field)?
+  final Widget Function(WoFieldData<bool, BooleanInputUiSettings> field)?
       booleanFieldBuilder;
 
   @override
   WoFormTheme copyWith({
     String Function(WoFormInputError error)? localizeInputError,
-    Widget Function(WoField<bool, BooleanInputUiSettings> field)?
+    Widget Function(WoFieldData<bool, BooleanInputUiSettings> field)?
         booleanFieldBuilder,
   }) {
     return WoFormTheme(

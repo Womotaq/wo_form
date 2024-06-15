@@ -23,6 +23,7 @@ class DynamicFormPage extends StatelessWidget {
               : null,
           uiSettings: const StringInputUiSettings(
             labelText: 'Prénom',
+            helperText: 'Vous pouvez aussi nous donner votre surnom',
           ),
         ),
         ValueBuilderNode(
@@ -33,6 +34,7 @@ class DynamicFormPage extends StatelessWidget {
             return StringInput(
               id: id,
               uiSettings: StringInputUiSettings(
+                helperText: 'Le soleil est la lumière de la vie',
                 hintText: "Bonjour ${(name ?? '').isEmpty ? '' : '$name '}! "
                     "Comment allez-vous aujourd'hui ?",
                 maxLines: 5,

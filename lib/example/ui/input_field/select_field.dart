@@ -141,7 +141,6 @@ class SelectField<T> extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       InputHeader(
-                        isRequired: input.minCount > 0,
                         labelText: mergedSettings.labelText ?? '',
                         helperText: mergedSettings.helperText ?? '',
                         errorText: errorText ?? '',

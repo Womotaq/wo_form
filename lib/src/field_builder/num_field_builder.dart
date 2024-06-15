@@ -45,7 +45,7 @@ class NumFieldBuilder extends StatelessWidget {
                     localizeInputError(context.formL10n),
                   );
 
-            final field = WoField<num, NumInputUiSettings>(
+            final fieldData = WoFieldData<num, NumInputUiSettings>(
               inputPath: inputPath,
               value: count,
               errorText: errorText,
@@ -56,7 +56,7 @@ class NumFieldBuilder extends StatelessWidget {
               ),
             );
 
-            return NumField(field: field);
+            return NumField(data: fieldData);
           },
         );
       },
@@ -65,9 +65,9 @@ class NumFieldBuilder extends StatelessWidget {
 }
 
 class NumField extends StatefulWidget {
-  const NumField({required this.field, super.key});
+  const NumField({required this.data, super.key});
 
-  final WoField<num?, NumInputUiSettings> field;
+  final WoFieldData<num?, NumInputUiSettings> data;
 
   @override
   State<NumField> createState() => _NumFieldState();
@@ -80,28 +80,28 @@ class _NumFieldState extends State<NumField> {
   void initState() {
     super.initState();
 
-    countController.text = widget.field.value?.toString() ?? '';
+    countController.text = widget.data.value?.toString() ?? '';
   }
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(widget.field.uiSettings.labelText ?? ''),
-      subtitle: widget.field.errorText != null
+      title: Text(widget.data.uiSettings.labelText ?? ''),
+      subtitle: widget.data.errorText != null
           ? Text(
-              widget.field.errorText!,
+              widget.data.errorText!,
               style: context.textTheme.labelMedium
                   ?.copyWith(color: context.colorScheme.error),
             )
-          : (widget.field.uiSettings.helperText ?? '').isNotEmpty
+          : (widget.data.uiSettings.helperText ?? '').isNotEmpty
               ? Text(
-                  widget.field.uiSettings.helperText ?? '',
+                  widget.data.uiSettings.helperText ?? '',
                   style: context.woTheme.infoStyle,
                 )
               : null,
       trailing: NumSelector(
         controller: countController,
-        onChanged: widget.field.onValueChanged,
+        onChanged: widget.data.onValueChanged,
         axis: Axis.horizontal,
       ),
     );

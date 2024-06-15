@@ -42,7 +42,7 @@ class BooleanFieldBuilder extends StatelessWidget {
                     formTheme?.localizeInputError,
                   );
 
-            final field = WoField<bool, BooleanInputUiSettings>(
+            final fieldData = WoFieldData<bool, BooleanInputUiSettings>(
               inputPath: inputPath,
               value: value,
               errorText: errorText,
@@ -53,9 +53,9 @@ class BooleanFieldBuilder extends StatelessWidget {
               ),
             );
 
-            return mergedSettings.widgetBuilder?.call(field) ??
-                formTheme?.booleanFieldBuilder!(field) ??
-                BooleanField(field: field);
+            return mergedSettings.widgetBuilder?.call(fieldData) ??
+                formTheme?.booleanFieldBuilder!(fieldData) ??
+                BooleanField(data: fieldData);
           },
         );
       },
@@ -64,28 +64,28 @@ class BooleanFieldBuilder extends StatelessWidget {
 }
 
 class BooleanField extends StatelessWidget {
-  const BooleanField({required this.field, super.key});
+  const BooleanField({required this.data, super.key});
 
-  final WoField<bool, BooleanInputUiSettings> field;
+  final WoFieldData<bool, BooleanInputUiSettings> data;
 
   @override
   Widget build(BuildContext context) {
     final inputDecorationTheme = Theme.of(context).inputDecorationTheme;
 
     return buildTile(
-      value: field.value ?? false,
+      value: data.value ?? false,
       controlAffinity:
-          field.uiSettings.controlAffinity ?? ListTileControlAffinity.platform,
-      title: Text(field.uiSettings.labelText ?? ''),
-      subtitle: field.errorText != null
+          data.uiSettings.controlAffinity ?? ListTileControlAffinity.platform,
+      title: Text(data.uiSettings.labelText ?? ''),
+      subtitle: data.errorText != null
           ? Text(
-              field.errorText!,
+              data.errorText!,
               style: TextStyle(color: Theme.of(context).colorScheme.error)
                   .merge(inputDecorationTheme.errorStyle),
             )
-          : (field.uiSettings.helperText ?? '').isNotEmpty
+          : (data.uiSettings.helperText ?? '').isNotEmpty
               ? Text(
-                  field.uiSettings.helperText ?? '',
+                  data.uiSettings.helperText ?? '',
                   style: inputDecorationTheme.helperStyle,
                 )
               : null,
@@ -98,20 +98,20 @@ class BooleanField extends StatelessWidget {
     required Widget title,
     required Widget? subtitle,
   }) =>
-      switch (field.uiSettings.controlType) {
+      switch (data.uiSettings.controlType) {
         null || BooleanFieldControlType.switchButton => SwitchListTile(
             value: value,
             controlAffinity: controlAffinity,
             title: title,
             subtitle: subtitle,
-            onChanged: field.onValueChanged,
+            onChanged: data.onValueChanged,
           ),
         BooleanFieldControlType.checkbox => CheckboxListTile(
             value: value,
             controlAffinity: controlAffinity,
             title: title,
             subtitle: subtitle,
-            onChanged: field.onValueChanged,
+            onChanged: data.onValueChanged,
           )
       };
 }
