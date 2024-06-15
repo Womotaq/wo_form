@@ -56,8 +56,8 @@ Map<String, dynamic> _$$InputsNodeUiSettingsImplToJson(
     };
 
 const _$NodeDisplayModeEnumMap = {
-  NodeDisplayMode.card: 'card',
-  NodeDisplayMode.tile: 'tile',
+  NodeDisplayMode.screenWithHeader: 'screenWithHeader',
+  NodeDisplayMode.expansionTile: 'expansionTile',
 };
 
 _$NumInputUiSettingsImpl _$$NumInputUiSettingsImplFromJson(

@@ -28,8 +28,10 @@ class WoFormExamplesApp extends StatelessWidget {
       child: MaterialApp(
         title: 'WoForm Examples',
         theme: ThemeData(
-          brightness: Brightness.dark,
-          primarySwatch: Colors.amber,
+          colorScheme: ColorScheme.fromSeed(
+            brightness: Brightness.dark,
+            seedColor: const Color.fromARGB(255, 0, 41, 5),
+          ),
           inputDecorationTheme:
               const InputDecorationTheme(border: OutlineInputBorder()),
         ),

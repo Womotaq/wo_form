@@ -71,7 +71,7 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
           id: 'uiSettings',
           uiSettings: const InputsNodeUiSettings(
             labelText: 'Interface',
-            displayMode: NodeDisplayMode.tile,
+            displayMode: NodeDisplayMode.expansionTile,
           ),
           inputs: [
             const StringInput(

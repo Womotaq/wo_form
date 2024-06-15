@@ -55,9 +55,6 @@ final woFormCreator = WoForm(
     InputsNode(
       id: 'inputs',
       exportType: NodeExportType.list,
-      uiSettings: const InputsNodeUiSettings(
-        displayMode: NodeDisplayMode.tile,
-      ),
       inputs: [
         createStringInputNode(id: idGenerator.generateId()),
         createNumInputNode(id: idGenerator.generateId()),

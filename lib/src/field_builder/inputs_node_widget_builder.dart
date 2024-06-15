@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
-import 'package:wo_form/example/ui/prefab/form_card.dart';
+import 'package:wo_form/example/ui/prefab/form_header.dart';
 import 'package:wo_form/wo_form.dart';
 
 class InputsNodeWidgetBuilder extends StatelessWidget {
@@ -67,43 +67,32 @@ class InputsNodeWidget extends StatelessWidget {
 
     switch (data.uiSettings.displayMode) {
       case null:
-      case NodeDisplayMode.card:
-        return FormCard(
-          labelText: data.uiSettings.labelText ?? '',
-          helperText: data.uiSettings.helperText ?? '',
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: WoSize.small),
-            child: Column(children: inputWidgets),
-          ),
-        );
-      case NodeDisplayMode.tile:
+      case NodeDisplayMode.screenWithHeader:
         return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (data.uiSettings.labelText != null)
-              Theme(
-                // just to remove borders of ExpansionTile
-                data: Theme.of(context)
-                    .copyWith(dividerColor: Colors.transparent),
-                child: ExpansionTile(
-                  title: Text(
-                    data.uiSettings.labelText!,
-                    style: inputDecorationTheme.labelStyle
-                        ?.copyWith(fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: subtitle,
-                  children: inputWidgets,
-                ),
-              )
-            else
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  if (subtitle != null) subtitle,
-                  ...inputWidgets,
-                ],
-              ),
+            FormHeader(
+              labelText: data.uiSettings.labelText ?? '',
+              helperText: data.uiSettings.helperText ?? '',
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: WoSize.small),
+              child: Column(children: inputWidgets),
+            ),
           ],
+        );
+      case NodeDisplayMode.expansionTile:
+        return Theme(
+          // just to remove borders of ExpansionTile
+          data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+          child: ExpansionTile(
+            title: Text(
+              data.uiSettings.labelText ?? '',
+              style: inputDecorationTheme.labelStyle
+                  ?.copyWith(fontWeight: FontWeight.bold),
+            ),
+            subtitle: subtitle,
+            children: inputWidgets,
+          ),
         );
     }
   }

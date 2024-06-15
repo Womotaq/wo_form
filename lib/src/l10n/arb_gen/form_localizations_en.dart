@@ -16,21 +16,6 @@ class FormLocalizationsEn extends FormLocalizations {
   String get errorOccurred => 'An error has occured.';
 
   @override
-  String formError(String code) {
-    String _temp0 = intl.Intl.selectLogic(
-      code,
-      {
-        'other': 'Unknown error.',
-        'EmptyInputError': 'This field is required.',
-        'InvalidInputError': 'This value is invalid.',
-        'MaxBoundInputError': 'Maximum limit exceeded.',
-        'MinBoundInputError': 'Minimum limit exceeded.',
-      },
-    );
-    return '$_temp0';
-  }
-
-  @override
   String get keepEditing => 'Keep editing';
 
   @override

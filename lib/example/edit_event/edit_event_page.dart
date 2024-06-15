@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/example/edit_event/event.dart';
 import 'package:wo_form/example/edit_event/event_page.dart';
-import 'package:wo_form/example/ui/prefab/show_discard_changes_dialog.dart';
 import 'package:wo_form/wo_form.dart';
 
 class EditEventPage extends StatelessWidget {
@@ -18,7 +18,13 @@ class EditEventPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return WoForm(
       initialStatusIsSubmitted: true,
-      onUnsubmittedQuit: showDiscardChangesDialog,
+      onUnsubmittedQuit: (context) => showActionDialog(
+        pageContext: context,
+        title: 'Abandonner les modifications ?',
+        actionText: 'Abandonner les modifications',
+        onAction: () => true,
+        cancelText: "Continuer d'éditer",
+      ),
       uiSettings: const WoFormUiSettings(
         titleText: "Édition d'un événement",
         submitText: 'Enregistrer',

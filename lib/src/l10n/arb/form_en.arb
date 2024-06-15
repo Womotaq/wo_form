@@ -3,12 +3,6 @@
   "discardChanges": "Discard changes",
   "discardChangesQuestion": "Discard unsaved changes ?",
   "errorOccurred": "An error has occured.",
-  "formError": "{code, select, other{Unknown error.} EmptyInputError{This field is required.} InvalidInputError{This value is invalid.} MaxBoundInputError{Maximum limit exceeded.} MinBoundInputError{Minimum limit exceeded.}}",
-  "@formError": {
-    "placeholders": {
-      "code": {}
-    }
-  },
   "keepEditing": "Keep editing",
   "regexPatternUnmatched": "{code, select, other{Unknown regex pattern.} email{Doesn't appear to be an email address.} password{Too weak. A password must contain a lowercase letter, an uppercase letter, a number and at least 8 characters.} username{Minimum 3 characters, only alphanumeric\nSymbols accepted : _ - .\nOnly one symbol in a row, and only in the middle}}",
   "@regexPatternUnmatched": {

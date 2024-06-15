@@ -111,12 +111,6 @@ abstract class FormLocalizations {
   /// **'Une erreur s\'est produite.'**
   String get errorOccurred;
 
-  /// No description provided for @formError.
-  ///
-  /// In fr, this message translates to:
-  /// **'{code, select, other{Erreur inconnue.} EmptyInputError{Ce champ doit être renseigné.} InvalidInputError{Cette valeur est incorrecte.} MaxBoundInputError{Au dessus de la limite maximale.} MinBoundInputError{En dessous du minimum requis.}}'**
-  String formError(String code);
-
   /// No description provided for @keepEditing.
   ///
   /// In fr, this message translates to:

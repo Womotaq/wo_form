@@ -3,12 +3,6 @@
   "discardChanges": "Abandonner les modifications",
   "discardChangesQuestion": "Abandonner les modifications ?",
   "errorOccurred": "Une erreur s'est produite.",
-  "formError": "{code, select, other{Erreur inconnue.} EmptyInputError{Ce champ doit être renseigné.} InvalidInputError{Cette valeur est incorrecte.} MaxBoundInputError{Au dessus de la limite maximale.} MinBoundInputError{En dessous du minimum requis.}}",
-  "@formError": {
-    "placeholders": {
-      "code": {}
-    }
-  },
   "keepEditing": "Continuer d'éditer",
   "regexPatternUnmatched": "{code, select, other{Regex inconnu.} email{Ne semble pas être une adresse e-mail.} password{Trop faible. Un mot de passe doit contenir une minuscule, une majuscule, un chiffre et au moins 8 caractères.} username{Minimum 3 caractères, en alphanumérique\nSymboles acceptés : _ - .\nUn seul symbole à la suite, et uniquement au milieu.}}",
   "@regexPatternUnmatched": {

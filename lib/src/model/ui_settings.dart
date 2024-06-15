@@ -42,7 +42,7 @@ class BooleanInputUiSettings with _$BooleanInputUiSettings {
         );
 }
 
-enum NodeDisplayMode { card, tile }
+enum NodeDisplayMode { screenWithHeader, expansionTile }
 
 @freezed
 class InputsNodeUiSettings with _$InputsNodeUiSettings {
