@@ -30,7 +30,10 @@ class FormCard extends StatelessWidget {
                 child: Divider(color: context.colorScheme.primary),
               ),
               if (helperText.isNotEmpty) ...[
-                Text(helperText, style: context.woTheme.infoStyle),
+                Text(
+                  helperText,
+                  style: Theme.of(context).inputDecorationTheme.helperStyle,
+                ),
                 WoGap.small,
               ],
               WoGap.small,

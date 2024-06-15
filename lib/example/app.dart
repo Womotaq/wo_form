@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/example/dynamic_form/dynamic_form_page.dart';
 import 'package:wo_form/example/edit_event/event_page.dart';
@@ -14,15 +15,27 @@ class WoFormExamplesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'WoForm Examples',
-      theme: WoTheme.getThemeData(
-        brightness: Brightness.dark,
-        primary: const Color.fromARGB(255, 5, 197, 69),
+    return RepositoryProvider(
+      create: (context) => WoFormInputErrorTranslator(
+        translateError: (WoFormInputError error) => switch (error) {
+          EmptyInputError() => 'Ce champ doit être renseigné.',
+          InvalidInputError() => 'Cette valeur est invalide.',
+          MaxBoundInputError() => 'Au dessus de la limite maximale.',
+          MinBoundInputError() => 'En dessous du minimum requis.',
+          CustomInputError(message: final message) => message,
+        },
       ),
-      supportedLocales: FormLocalizations.supportedLocales,
-      localizationsDelegates: FormLocalizations.localizationsDelegates,
-      home: const HomePage(),
+      child: MaterialApp(
+        title: 'WoForm Examples',
+        theme: ThemeData(
+          brightness: Brightness.dark,
+          primarySwatch: Colors.amber,
+        ),
+        // TOD : remove
+        supportedLocales: FormLocalizations.supportedLocales,
+        localizationsDelegates: FormLocalizations.localizationsDelegates,
+        home: const HomePage(),
+      ),
     );
   }
 }

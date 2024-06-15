@@ -38,7 +38,7 @@ class InputsNodeWidget extends StatelessWidget {
     final subtitle = (mergedSettings.helperText ?? '').isNotEmpty
         ? Text(
             mergedSettings.helperText ?? '',
-            style: context.woTheme.infoStyle,
+            style: Theme.of(context).inputDecorationTheme.helperStyle,
           )
         : null;
 

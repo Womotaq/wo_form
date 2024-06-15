@@ -23,9 +23,17 @@ mixin WoFormInputMixin {
   WoFormInputError? getError(Object? value);
 
   String? getInvalidExplanation(
-    Object? value,
-    String Function(WoFormInputError) localizeInputError,
-  );
+    dynamic value,
+    TranslateInputError? translateError,
+  ) {
+    final error = getError(value);
+
+    if (error == null) return null;
+
+    if (error is CustomInputError) return error.message;
+
+    return translateError?.call(error) ?? error.toString();
+  }
 
   Widget toWidget<C extends WoFormValuesCubit>({required String parentPath});
 
@@ -144,6 +152,7 @@ sealed class WoFormInput
           isRequired: final isRequired,
           regexPattern: final regexPattern,
           getCustomError: final getCustomError,
+          uiSettings: final uiSettings,
         ):
         value as String?;
 
@@ -154,7 +163,9 @@ sealed class WoFormInput
           return isRequired ? const WoFormInputError.empty() : null;
         } else if (regexPattern != null &&
             !RegExp(regexPattern).hasMatch(value)) {
-          return const WoFormInputError.invalid();
+          return WoFormInputError.custom(
+            message: uiSettings.invalidRegexMessage ?? '',
+          );
         } else {
           return null;
         }
@@ -175,35 +186,6 @@ sealed class WoFormInput
           getCustomError: getCustomError,
         );
     }
-  }
-
-  @override
-  String? getInvalidExplanation(
-    dynamic value,
-    String Function(WoFormInputError)? localizeInputError,
-  ) {
-    final error = getError(value);
-
-    if (error == null) return null;
-
-    if (error is CustomInputError) return error.message;
-
-    switch (this) {
-      case BooleanInput():
-      case NumInput():
-      case SelectStringInput():
-        break;
-
-      case StringInput(
-          regexPattern: final regexPattern,
-          uiSettings: final uiSettings,
-        ):
-        if (error is InvalidInputError && regexPattern != null) {
-          return uiSettings.invalidRegexMessage;
-        }
-    }
-
-    return localizeInputError?.call(error) ?? error.toString();
   }
 
   @override
@@ -336,20 +318,6 @@ class SelectInput<T>
         maxCount: maxCount,
         getCustomError: getCustomError,
       );
-
-  @override
-  String? getInvalidExplanation(
-    dynamic value,
-    String Function(WoFormInputError)? localizeInputError,
-  ) {
-    final error = getError(value);
-
-    if (error == null) return null;
-
-    if (error is CustomInputError) return error.message;
-
-    return localizeInputError?.call(error) ?? error.toString();
-  }
 
   @override
   dynamic getSubmittedJson({

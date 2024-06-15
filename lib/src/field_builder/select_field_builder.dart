@@ -78,14 +78,21 @@ class SelectFieldBuilder<T> extends StatelessWidget {
                   (input.minCount > 0 ? '*' : ''),
             );
 
-            final formTheme = Theme.of(context).extension<WoFormTheme>();
-
-            final errorText = status is! InvalidValuesStatus
-                ? null
-                : input.getInvalidExplanation(
-                    selectedValues,
-                    formTheme?.localizeInputError,
-                  );
+            final String? errorText;
+            if (status is InvalidValuesStatus) {
+              final error = input.getError(selectedValues);
+              if (error == null) {
+                errorText = null;
+              } else {
+                final translateError = context
+                        .read<WoFormInputErrorTranslator?>()
+                        ?.translateError ??
+                    (error) => error.toString();
+                errorText = translateError(error);
+              }
+            } else {
+              errorText = null;
+            }
 
             final fieldData = WoFieldData<List<T>, SelectInputUiSettings<T>>(
               inputPath: inputPath,
@@ -99,7 +106,7 @@ class SelectFieldBuilder<T> extends StatelessWidget {
             );
 
             final test = mergedSettings.widgetBuilder?.call(fieldData) ??
-                formTheme?.selectFieldBuilder!(fieldData) ??
+                WoFormTheme.of(context)?.selectFieldBuilder!(fieldData) ??
                 SelectField(data: fieldData);
 
             final subtitle = errorText != null

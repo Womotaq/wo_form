@@ -36,14 +36,21 @@ class StringFieldBuilder extends StatelessWidget {
         return WoFormValueBuilder<String>(
           inputPath: inputPath,
           builder: (context, value) {
-            final formTheme = Theme.of(context).extension<WoFormTheme>();
-
-            final errorText = status is! InvalidValuesStatus
-                ? null
-                : input.getInvalidExplanation(
-                    value,
-                    formTheme?.localizeInputError,
-                  );
+            final String? errorText;
+            if (status is InvalidValuesStatus) {
+              final error = input.getError(value);
+              if (error == null) {
+                errorText = null;
+              } else {
+                final translateError = context
+                        .read<WoFormInputErrorTranslator?>()
+                        ?.translateError ??
+                    (error) => error.toString();
+                errorText = translateError(error);
+              }
+            } else {
+              errorText = null;
+            }
 
             final fieldData = WoFieldData<String, StringInputUiSettings>(
               inputPath: inputPath,
@@ -57,7 +64,7 @@ class StringFieldBuilder extends StatelessWidget {
             );
 
             return mergedSettings.widgetBuilder?.call(fieldData) ??
-                formTheme?.stringFieldBuilder!(fieldData) ??
+                WoFormTheme.of(context)?.stringFieldBuilder?.call(fieldData) ??
                 StringField(data: fieldData);
           },
         );

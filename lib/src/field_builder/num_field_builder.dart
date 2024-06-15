@@ -37,14 +37,21 @@ class NumFieldBuilder extends StatelessWidget {
         return WoFormValueBuilder<num>(
           inputPath: inputPath,
           builder: (context, value) {
-            final formTheme = Theme.of(context).extension<WoFormTheme>();
-
-            final errorText = status is! InvalidValuesStatus
-                ? null
-                : input.getInvalidExplanation(
-                    value,
-                    formTheme?.localizeInputError,
-                  );
+            final String? errorText;
+            if (status is InvalidValuesStatus) {
+              final error = input.getError(value);
+              if (error == null) {
+                errorText = null;
+              } else {
+                final translateError = context
+                        .read<WoFormInputErrorTranslator?>()
+                        ?.translateError ??
+                    (error) => error.toString();
+                errorText = translateError(error);
+              }
+            } else {
+              errorText = null;
+            }
 
             final fieldData = WoFieldData<num, NumInputUiSettings>(
               inputPath: inputPath,
@@ -58,7 +65,7 @@ class NumFieldBuilder extends StatelessWidget {
             );
 
             return mergedSettings.widgetBuilder?.call(fieldData) ??
-                formTheme?.numFieldBuilder!(fieldData) ??
+                WoFormTheme.of(context)?.numFieldBuilder?.call(fieldData) ??
                 NumField(data: fieldData);
           },
         );
