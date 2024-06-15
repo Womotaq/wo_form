@@ -2,9 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
-import 'package:wo_form/example/ui/node_widget/inputs_node_widget.dart';
 import 'package:wo_form/src/model/json_converter/inputs_list.dart';
-import 'package:wo_form/src/utils/to_absolute_path.dart';
 import 'package:wo_form/wo_form.dart';
 
 part 'wo_form_node.freezed.dart';
@@ -21,6 +19,37 @@ mixin WoFormElementMixin {
   });
 
   Widget toWidget<T extends WoFormValuesCubit>({required String parentPath});
+
+  static String getAbsolutePath({
+    required String parentPath,
+    required String inputPath,
+  }) {
+    if (inputPath.startsWith('/')) return inputPath;
+    if (!inputPath.startsWith('.')) {
+      throw ArgumentError(
+        'An input path must start with character "/" or ".".',
+      );
+    }
+
+    final relativePath = inputPath.substring(1);
+
+    if (relativePath.startsWith('/')) return '$parentPath$relativePath';
+    if (!relativePath.startsWith('./')) {
+      throw ArgumentError(
+        'An input relative path must start with "./" or "../".',
+      );
+    }
+
+    // Here, we go looking for the absolute path, by going backward in the tree.
+
+    if (!parentPath.contains('/')) {
+      throw ArgumentError('The relative path is backwarding too far.');
+    }
+
+    final newParentPath = (parentPath.split('/')..removeLast()).join('/');
+
+    return getAbsolutePath(parentPath: newParentPath, inputPath: relativePath);
+  }
 }
 
 enum NodeExportType { list, map }
@@ -127,7 +156,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
       case ValueBuilderNode(inputPath: final inputPath, builder: final builder):
         final input = builder!(
           id,
-          values[toAbsolutePath(
+          values[WoFormElementMixin.getAbsolutePath(
             parentPath: '$parentPath/$id',
             inputPath: inputPath,
           )],
@@ -163,7 +192,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
       case ValueBuilderNode(inputPath: final inputPath, builder: final builder):
         final input = builder!(
           id,
-          values[toAbsolutePath(
+          values[WoFormElementMixin.getAbsolutePath(
             parentPath: '$parentPath/$id',
             inputPath: inputPath,
           )],
@@ -237,7 +266,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
         }
         final input = builder!(
           id,
-          values[toAbsolutePath(
+          values[WoFormElementMixin.getAbsolutePath(
             parentPath: '$parentPath/$id',
             inputPath: inputPath,
           )],
@@ -262,13 +291,13 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
   @override
   Widget toWidget<T extends WoFormValuesCubit>({required String parentPath}) =>
       switch (this) {
-        InputsNode() => InputsNodeWidget(inputPath: '$parentPath/$id'),
+        InputsNode() => InputsNodeWidgetBuilder(inputPath: '$parentPath/$id'),
         ValueBuilderNode(
           inputPath: final inputPath,
           builder: final builder,
         ) =>
           WoFormValueBuilder<dynamic>(
-            inputPath: toAbsolutePath(
+            inputPath: WoFormElementMixin.getAbsolutePath(
               inputPath: inputPath,
               parentPath: '$parentPath/$id',
             ),
@@ -285,7 +314,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
           listener: final listener,
         ) =>
           WoFormValueListener<dynamic>(
-            inputPath: toAbsolutePath(
+            inputPath: WoFormElementMixin.getAbsolutePath(
               inputPath: inputPath,
               parentPath: '$parentPath/$id',
             ),

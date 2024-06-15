@@ -4,8 +4,8 @@ import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/example/ui/prefab/form_card.dart';
 import 'package:wo_form/wo_form.dart';
 
-class InputsNodeWidget extends StatelessWidget {
-  const InputsNodeWidget({
+class InputsNodeWidgetBuilder extends StatelessWidget {
+  const InputsNodeWidgetBuilder({
     required this.inputPath,
     this.uiSettings,
     super.key,
@@ -29,25 +29,48 @@ class InputsNodeWidget extends StatelessWidget {
       );
     }
 
-    final inputSettings = input.uiSettings;
-    final mergedSettings = uiSettings?.merge(inputSettings) ?? inputSettings;
+    final mergedSettings =
+        uiSettings?.merge(input.uiSettings) ?? input.uiSettings;
 
-    final inputWidgets =
-        input.inputs.map((i) => i.toWidget(parentPath: inputPath)).toList();
+    final fieldData = WoFieldData(
+      inputPath: inputPath,
+      input: input,
+      value: null,
+      errorText: null,
+      uiSettings: mergedSettings,
+      onValueChanged: (_) {},
+    );
 
-    final subtitle = (mergedSettings.helperText ?? '').isNotEmpty
+    return InputsNodeWidget(data: fieldData);
+  }
+}
+
+class InputsNodeWidget extends StatelessWidget {
+  const InputsNodeWidget({required this.data, super.key});
+
+  final WoFieldData<InputsNode, void, InputsNodeUiSettings> data;
+
+  @override
+  Widget build(BuildContext context) {
+    final inputDecorationTheme = Theme.of(context).inputDecorationTheme;
+
+    final inputWidgets = data.input.inputs
+        .map((i) => i.toWidget(parentPath: data.inputPath))
+        .toList();
+
+    final subtitle = (data.uiSettings.helperText ?? '').isNotEmpty
         ? Text(
-            mergedSettings.helperText ?? '',
-            style: Theme.of(context).inputDecorationTheme.helperStyle,
+            data.uiSettings.helperText ?? '',
+            style: inputDecorationTheme.helperStyle,
           )
         : null;
 
-    switch (mergedSettings.displayMode) {
+    switch (data.uiSettings.displayMode) {
       case null:
       case NodeDisplayMode.card:
         return FormCard(
-          labelText: mergedSettings.labelText ?? '',
-          helperText: mergedSettings.helperText ?? '',
+          labelText: data.uiSettings.labelText ?? '',
+          helperText: data.uiSettings.helperText ?? '',
           child: Padding(
             padding: const EdgeInsets.only(bottom: WoSize.small),
             child: Column(children: inputWidgets),
@@ -57,15 +80,16 @@ class InputsNodeWidget extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (mergedSettings.labelText != null)
+            if (data.uiSettings.labelText != null)
               Theme(
                 // just to remove borders of ExpansionTile
                 data: Theme.of(context)
                     .copyWith(dividerColor: Colors.transparent),
                 child: ExpansionTile(
                   title: Text(
-                    mergedSettings.labelText!,
-                    style: TextStyleExt.bold,
+                    data.uiSettings.labelText!,
+                    style: inputDecorationTheme.labelStyle
+                        ?.copyWith(fontWeight: FontWeight.bold),
                   ),
                   subtitle: subtitle,
                   children: inputWidgets,

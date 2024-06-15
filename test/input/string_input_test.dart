@@ -1,4 +1,5 @@
 import 'package:test/test.dart';
+import 'package:wo_form/example/utils/regex_pattern.dart';
 import 'package:wo_form/src/l10n/arb_gen/form_localizations_fr.dart';
 import 'package:wo_form/wo_form.dart';
 

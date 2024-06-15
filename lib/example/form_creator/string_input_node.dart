@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wo_form/example/utils/auto_fill_hints.dart';
+import 'package:wo_form/example/utils/regex_pattern.dart';
 import 'package:wo_form/src/l10n/arb_gen/form_localizations_fr.dart';
 import 'package:wo_form/src/model/json_converter/text_input_type.dart';
-import 'package:wo_form/src/utils/to_absolute_path.dart';
 import 'package:wo_form/wo_form.dart';
 
 InputsNode createStringInputNode({required String id}) => InputsNode(
@@ -56,7 +57,7 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
             final regex = (value as List<RegexPattern?>?)?.firstOrNull;
 
             context.read<WoFormValuesCubit>().onValueChanged(
-                  inputPath: toAbsolutePath(
+                  inputPath: WoFormElementMixin.getAbsolutePath(
                     parentPath: parentPath,
                     inputPath: '../uiSettings/invalidRegexMessage',
                   ),

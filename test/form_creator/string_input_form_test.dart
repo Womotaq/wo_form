@@ -1,5 +1,6 @@
 import 'package:test/test.dart';
 import 'package:wo_form/example/form_creator/string_input_node.dart';
+import 'package:wo_form/example/utils/regex_pattern.dart';
 import 'package:wo_form/src/_export.dart';
 import 'package:wo_form/src/l10n/arb_gen/form_localizations_fr.dart';
 import 'package:wo_form/wo_form.dart';

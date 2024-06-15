@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wo_form/example/ui/input_field/input_header.dart';
+import 'package:wo_form/src/field_builder/input_header.dart';
 import 'package:wo_form/wo_form.dart';
 
 class StringFieldBuilder extends StatelessWidget {
