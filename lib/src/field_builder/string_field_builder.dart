@@ -52,8 +52,10 @@ class StringFieldBuilder extends StatelessWidget {
               errorText = null;
             }
 
-            final fieldData = WoFieldData<String, StringInputUiSettings>(
+            final fieldData =
+                WoFieldData<StringInput, String, StringInputUiSettings>(
               inputPath: inputPath,
+              input: input,
               value: value,
               errorText: errorText,
               uiSettings: mergedSettings,
@@ -76,7 +78,7 @@ class StringFieldBuilder extends StatelessWidget {
 class StringField extends StatefulWidget {
   const StringField({required this.data, super.key});
 
-  final WoFieldData<String, StringInputUiSettings> data;
+  final WoFieldData<StringInput, String, StringInputUiSettings> data;
 
   @override
   State<StringField> createState() => _StringFieldState();

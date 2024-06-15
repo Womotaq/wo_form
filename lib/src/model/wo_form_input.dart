@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:wo_form/example/ui/input_field/select_field.dart';
 import 'package:wo_form/wo_form.dart';
 
 part 'wo_form_input.freezed.dart';
@@ -218,7 +217,7 @@ sealed class WoFormInput
       case StringInput():
         return StringFieldBuilder(inputPath: path);
       case SelectStringInput():
-        return SelectStringField(inputPath: path);
+        return SelectStringFieldBuilder(inputPath: path);
     }
   }
 }
@@ -332,7 +331,7 @@ class SelectInput<T>
 
   @override
   Widget toWidget<C extends WoFormValuesCubit>({required String parentPath}) =>
-      SelectField<T>(inputPath: '$parentPath/$id');
+      SelectFieldBuilder<T>(inputPath: '$parentPath/$id');
 }
 
 Object? _defaultToJsonT<T>(T value) {

@@ -1,6 +1,7 @@
-class WoFieldData<T, U> {
+class WoFieldData<I, T, U> {
   const WoFieldData({
     required this.inputPath,
+    required this.input,
     required this.value,
     required this.errorText,
     required this.uiSettings,
@@ -8,6 +9,7 @@ class WoFieldData<T, U> {
   });
 
   final String inputPath;
+  final I input;
   final T? value;
   final String? errorText;
   final U uiSettings;

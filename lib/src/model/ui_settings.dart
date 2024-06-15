@@ -9,7 +9,7 @@ part 'ui_settings.g.dart';
 enum BooleanFieldControlType { checkbox, switchButton }
 
 typedef BooleanFieldBuilderDef = Widget Function(
-  WoFieldData<bool, BooleanInputUiSettings> data,
+  WoFieldData<BooleanInput, bool, BooleanInputUiSettings> data,
 );
 
 @freezed
@@ -70,7 +70,7 @@ class InputsNodeUiSettings with _$InputsNodeUiSettings {
 }
 
 typedef NumFieldBuilderDef = Widget Function(
-  WoFieldData<num, NumInputUiSettings> data,
+  WoFieldData<NumInput, num, NumInputUiSettings> data,
 );
 
 @freezed
@@ -102,7 +102,7 @@ class NumInputUiSettings with _$NumInputUiSettings {
 enum SelectFieldDisplayMode { tile, chip }
 
 typedef SelectFieldBuilderDef<T> = Widget Function(
-  WoFieldData<List<T>, SelectInputUiSettings<T>> data,
+  WoFieldData<SelectInput<T>, List<T>, SelectInputUiSettings<T>> data,
 );
 
 @freezed
@@ -142,7 +142,7 @@ class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
 enum StringFieldAction { clear, obscure }
 
 typedef StringFieldBuilderDef = Widget Function(
-  WoFieldData<String, StringInputUiSettings> data,
+  WoFieldData<StringInput, String, StringInputUiSettings> data,
 );
 
 @freezed

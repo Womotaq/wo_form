@@ -53,8 +53,9 @@ class NumFieldBuilder extends StatelessWidget {
               errorText = null;
             }
 
-            final fieldData = WoFieldData<num, NumInputUiSettings>(
+            final fieldData = WoFieldData<NumInput, num, NumInputUiSettings>(
               inputPath: inputPath,
+              input: input,
               value: value,
               errorText: errorText,
               uiSettings: mergedSettings,
@@ -77,7 +78,7 @@ class NumFieldBuilder extends StatelessWidget {
 class NumField extends StatefulWidget {
   const NumField({required this.data, super.key});
 
-  final WoFieldData<num?, NumInputUiSettings> data;
+  final WoFieldData<NumInput, num?, NumInputUiSettings> data;
 
   @override
   State<NumField> createState() => _NumFieldState();
@@ -95,18 +96,22 @@ class _NumFieldState extends State<NumField> {
 
   @override
   Widget build(BuildContext context) {
+    final inputDecorationTheme = Theme.of(context).inputDecorationTheme;
+
     return ListTile(
-      title: Text(widget.data.uiSettings.labelText ?? ''),
+      title: Text(
+        widget.data.uiSettings.labelText ?? '',
+        style: inputDecorationTheme.labelStyle,
+      ),
       subtitle: widget.data.errorText != null
           ? Text(
               widget.data.errorText!,
-              style: context.textTheme.labelMedium
-                  ?.copyWith(color: context.colorScheme.error),
+              style: inputDecorationTheme.errorStyle,
             )
           : (widget.data.uiSettings.helperText ?? '').isNotEmpty
               ? Text(
                   widget.data.uiSettings.helperText ?? '',
-                  style: context.woTheme.infoStyle,
+                  style: inputDecorationTheme.helperStyle,
                 )
               : null,
       trailing: NumSelector(

@@ -49,8 +49,10 @@ class BooleanFieldBuilder extends StatelessWidget {
               errorText = null;
             }
 
-            final fieldData = WoFieldData<bool, BooleanInputUiSettings>(
+            final fieldData =
+                WoFieldData<BooleanInput, bool, BooleanInputUiSettings>(
               inputPath: inputPath,
+              input: input,
               value: value,
               errorText: errorText,
               uiSettings: mergedSettings,
@@ -73,7 +75,7 @@ class BooleanFieldBuilder extends StatelessWidget {
 class BooleanField extends StatelessWidget {
   const BooleanField({required this.data, super.key});
 
-  final WoFieldData<bool, BooleanInputUiSettings> data;
+  final WoFieldData<BooleanInput, bool, BooleanInputUiSettings> data;
 
   @override
   Widget build(BuildContext context) {
