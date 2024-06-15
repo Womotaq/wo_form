@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
-import 'package:wo_form/example/ui/prefab/localize_form_error.dart';
 import 'package:wo_form/wo_form.dart';
 
 class NumFieldBuilder extends StatelessWidget {
@@ -37,17 +36,19 @@ class NumFieldBuilder extends StatelessWidget {
       builder: (context, status) {
         return WoFormValueBuilder<num>(
           inputPath: inputPath,
-          builder: (context, count) {
+          builder: (context, value) {
+            final formTheme = Theme.of(context).extension<WoFormTheme>();
+
             final errorText = status is! InvalidValuesStatus
                 ? null
                 : input.getInvalidExplanation(
-                    count,
-                    localizeInputError(context.formL10n),
+                    value,
+                    formTheme?.localizeInputError,
                   );
 
             final fieldData = WoFieldData<num, NumInputUiSettings>(
               inputPath: inputPath,
-              value: count,
+              value: value,
               errorText: errorText,
               uiSettings: mergedSettings,
               onValueChanged: (num? value) => valuesCubit.onValueChanged(
@@ -56,7 +57,9 @@ class NumFieldBuilder extends StatelessWidget {
               ),
             );
 
-            return NumField(data: fieldData);
+            return mergedSettings.widgetBuilder?.call(fieldData) ??
+                formTheme?.numFieldBuilder!(fieldData) ??
+                NumField(data: fieldData);
           },
         );
       },

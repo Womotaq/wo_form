@@ -8,6 +8,10 @@ part 'ui_settings.g.dart';
 
 enum BooleanFieldControlType { checkbox, switchButton }
 
+typedef BooleanFieldBuilderDef = Widget Function(
+  WoFieldData<bool, BooleanInputUiSettings> data,
+);
+
 @freezed
 class BooleanInputUiSettings with _$BooleanInputUiSettings {
   const factory BooleanInputUiSettings({
@@ -16,7 +20,7 @@ class BooleanInputUiSettings with _$BooleanInputUiSettings {
     BooleanFieldControlType? controlType,
     ListTileControlAffinity? controlAffinity,
     @JsonKey(includeToJson: false, includeFromJson: false)
-    Widget Function(WoFieldData<bool, BooleanInputUiSettings>)? widgetBuilder,
+    BooleanFieldBuilderDef? widgetBuilder,
   }) = _BooleanInputUiSettings;
 
   const BooleanInputUiSettings._();
@@ -34,6 +38,7 @@ class BooleanInputUiSettings with _$BooleanInputUiSettings {
           helperText: helperText ?? other.helperText,
           controlType: controlType ?? other.controlType,
           controlAffinity: controlAffinity ?? other.controlAffinity,
+          widgetBuilder: widgetBuilder ?? other.widgetBuilder,
         );
 }
 
@@ -64,11 +69,17 @@ class InputsNodeUiSettings with _$InputsNodeUiSettings {
         );
 }
 
+typedef NumFieldBuilderDef = Widget Function(
+  WoFieldData<num, NumInputUiSettings> data,
+);
+
 @freezed
 class NumInputUiSettings with _$NumInputUiSettings {
   const factory NumInputUiSettings({
     String? labelText,
     String? helperText,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    NumFieldBuilderDef? widgetBuilder,
   }) = _NumInputUiSettings;
 
   const NumInputUiSettings._();
@@ -84,10 +95,15 @@ class NumInputUiSettings with _$NumInputUiSettings {
       : NumInputUiSettings(
           labelText: labelText ?? other.labelText,
           helperText: helperText ?? other.helperText,
+          widgetBuilder: widgetBuilder ?? other.widgetBuilder,
         );
 }
 
 enum SelectFieldDisplayMode { tile, chip }
+
+typedef SelectFieldBuilderDef<T> = Widget Function(
+  WoFieldData<List<T>, SelectInputUiSettings<T>> data,
+);
 
 @freezed
 class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
@@ -101,6 +117,8 @@ class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
     Widget? Function(T)? helpValueBuilder,
     @JsonKey(includeFromJson: false, includeToJson: false)
     double Function(String query, T value)? searcher,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    SelectFieldBuilderDef<T>? widgetBuilder,
   }) = _SelectInputUiSettings<T>;
 
   const SelectInputUiSettings._();
@@ -117,10 +135,15 @@ class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
               displayMode: displayMode ?? other.displayMode,
               valueBuilder: valueBuilder ?? other.valueBuilder,
               helpValueBuilder: helpValueBuilder ?? other.helpValueBuilder,
+              widgetBuilder: widgetBuilder ?? other.widgetBuilder,
             );
 }
 
 enum StringFieldAction { clear, obscure }
+
+typedef StringFieldBuilderDef = Widget Function(
+  WoFieldData<String, StringInputUiSettings> data,
+);
 
 @freezed
 class StringInputUiSettings with _$StringInputUiSettings {
@@ -139,6 +162,8 @@ class StringInputUiSettings with _$StringInputUiSettings {
     TextCapitalization? textCapitalization,
     int? maxLines,
     String? invalidRegexMessage,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    StringFieldBuilderDef? widgetBuilder,
   }) = _StringInputUiSettings;
 
   factory StringInputUiSettings.email({
@@ -149,6 +174,7 @@ class StringInputUiSettings with _$StringInputUiSettings {
     bool? autofocus,
     TextInputAction? textInputAction,
     String? invalidRegexMessage,
+    StringFieldBuilderDef? widgetBuilder,
   }) =>
       StringInputUiSettings(
         labelText: labelText,
@@ -158,6 +184,7 @@ class StringInputUiSettings with _$StringInputUiSettings {
         autofocus: autofocus,
         textInputAction: textInputAction,
         invalidRegexMessage: invalidRegexMessage,
+        widgetBuilder: widgetBuilder,
         keyboardType: TextInputType.emailAddress,
         autocorrect: false,
         autofillHints: const [AutofillHints.email],
@@ -171,6 +198,7 @@ class StringInputUiSettings with _$StringInputUiSettings {
     bool? submitFormOnFieldSubmitted,
     TextInputAction? textInputAction,
     String? invalidRegexMessage,
+    StringFieldBuilderDef? widgetBuilder,
   }) =>
       StringInputUiSettings(
         labelText: labelText,
@@ -179,6 +207,7 @@ class StringInputUiSettings with _$StringInputUiSettings {
         submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
         textInputAction: textInputAction,
         invalidRegexMessage: invalidRegexMessage,
+        widgetBuilder: widgetBuilder,
         action: StringFieldAction.obscure,
         keyboardType: TextInputType.visiblePassword,
         obscureText: true,
@@ -216,6 +245,7 @@ class StringInputUiSettings with _$StringInputUiSettings {
           textCapitalization: textCapitalization ?? other.textCapitalization,
           maxLines: maxLines ?? other.maxLines,
           invalidRegexMessage: invalidRegexMessage ?? other.invalidRegexMessage,
+          widgetBuilder: widgetBuilder ?? other.widgetBuilder,
         );
 }
 

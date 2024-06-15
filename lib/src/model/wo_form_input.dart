@@ -340,7 +340,7 @@ class SelectInput<T>
   @override
   String? getInvalidExplanation(
     dynamic value,
-    String Function(WoFormInputError) localizeInputError,
+    String Function(WoFormInputError)? localizeInputError,
   ) {
     final error = getError(value);
 
@@ -348,7 +348,7 @@ class SelectInput<T>
 
     if (error is CustomInputError) return error.message;
 
-    return localizeInputError(error);
+    return localizeInputError?.call(error) ?? error.toString();
   }
 
   @override

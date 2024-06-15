@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/example/ui/input_field/input_header.dart';
-import 'package:wo_form/example/ui/prefab/localize_form_error.dart';
 import 'package:wo_form/wo_form.dart';
 
 class StringFieldBuilder extends StatelessWidget {
@@ -36,17 +35,19 @@ class StringFieldBuilder extends StatelessWidget {
       builder: (context, status) {
         return WoFormValueBuilder<String>(
           inputPath: inputPath,
-          builder: (context, text) {
+          builder: (context, value) {
+            final formTheme = Theme.of(context).extension<WoFormTheme>();
+
             final errorText = status is! InvalidValuesStatus
                 ? null
                 : input.getInvalidExplanation(
-                    text,
-                    localizeInputError(context.formL10n),
+                    value,
+                    formTheme?.localizeInputError,
                   );
 
             final fieldData = WoFieldData<String, StringInputUiSettings>(
               inputPath: inputPath,
-              value: text,
+              value: value,
               errorText: errorText,
               uiSettings: mergedSettings,
               onValueChanged: (String? value) => valuesCubit.onValueChanged(
@@ -55,7 +56,9 @@ class StringFieldBuilder extends StatelessWidget {
               ),
             );
 
-            return StringField(data: fieldData);
+            return mergedSettings.widgetBuilder?.call(fieldData) ??
+                formTheme?.stringFieldBuilder!(fieldData) ??
+                StringField(data: fieldData);
           },
         );
       },
@@ -75,6 +78,12 @@ class StringField extends StatefulWidget {
 class _StringFieldState extends State<StringField> {
   final textEditingController = TextEditingController();
   bool obscureText = false;
+
+  @override
+  void initState() {
+    super.initState();
+    textEditingController.text = widget.data.value ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
