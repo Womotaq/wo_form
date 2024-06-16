@@ -16,6 +16,7 @@ class ProfileCreationPage extends StatelessWidget {
         submitMode: PageByPageSubmitMode(
           submitText: 'Enregistrer',
           nextText: 'Suivant',
+          showProgressIndicator: false,
         ),
       ),
       inputs: [

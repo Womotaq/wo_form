@@ -292,6 +292,7 @@ sealed class WoFormSubmitMode with _$WoFormSubmitMode {
     String? submitText,
     String? nextText,
     @Default(DisableSubmitButton.never) DisableSubmitButton disableSubmitMode,
+    @Default(true) bool showProgressIndicator,
   }) = PageByPageSubmitMode;
 
   const WoFormSubmitMode._();

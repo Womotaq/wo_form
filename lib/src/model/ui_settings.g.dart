@@ -237,6 +237,7 @@ _$PageByPageSubmitModeImpl _$$PageByPageSubmitModeImplFromJson(
       disableSubmitMode: $enumDecodeNullable(
               _$DisableSubmitButtonEnumMap, json['disableSubmitMode']) ??
           DisableSubmitButton.never,
+      showProgressIndicator: json['showProgressIndicator'] as bool? ?? true,
       $type: json['runtimeType'] as String?,
     );
 
@@ -247,5 +248,6 @@ Map<String, dynamic> _$$PageByPageSubmitModeImplToJson(
       'nextText': instance.nextText,
       'disableSubmitMode':
           _$DisableSubmitButtonEnumMap[instance.disableSubmitMode]!,
+      'showProgressIndicator': instance.showProgressIndicator,
       'runtimeType': instance.$type,
     };

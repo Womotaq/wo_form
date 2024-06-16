@@ -27,10 +27,17 @@ class WoFormPage extends StatelessWidget {
     return WoFormInitializer(
       form: form,
       onSubmitting: onSubmitting,
-      child: _WoFormPage(
-        form: form,
-        onSubmitted: onSubmitted,
-        uiSettings: uiSettings,
+      child: BlocListener<WoFormStatusCubit, WoFormStatus>(
+        listener: (context, status) {
+          if (status is SubmittedStatus && onSubmitted != null) {
+            onSubmitted!(context);
+          }
+        },
+        child: _WoFormPage(
+          form: form,
+          onSubmitted: onSubmitted,
+          uiSettings: uiSettings,
+        ),
       ),
     );
   }
@@ -105,38 +112,31 @@ class _WoFormPage extends StatelessWidget {
           ],
         );
 
-    return BlocListener<WoFormStatusCubit, WoFormStatus>(
-      listener: (context, status) {
-        if (status is SubmittedStatus && onSubmitted != null) {
-          onSubmitted!(context);
-        }
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          leading: QuitPageButton(canQuit: form.canQuit),
-          title: uiSettings.titlePosition == WoFormTitlePosition.appBar
-              ? Text(uiSettings.titleText)
-              : null,
-          actions: [
-            if (uiSettings.submitMode.buttonPosition ==
-                SubmitButtonPosition.appBar) ...[
-              submitButton,
-              WoGap.small,
-            ],
+    return Scaffold(
+      appBar: AppBar(
+        leading: QuitPageButton(canQuit: form.canQuit),
+        title: uiSettings.titlePosition == WoFormTitlePosition.appBar
+            ? Text(uiSettings.titleText)
+            : null,
+        actions: [
+          if (uiSettings.submitMode.buttonPosition ==
+              SubmitButtonPosition.appBar) ...[
+            submitButton,
+            WoGap.small,
           ],
-        ),
-        body: SingleChildScrollView(
-          child: WoPadding.verticalMedium(
-            child: Column(
-              children: [
-                if (uiSettings.titlePosition == WoFormTitlePosition.header)
-                  FormHeader(
-                    labelText: uiSettings.titleText,
-                    helperText: '',
-                  ),
-                buildBody(),
-              ],
-            ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: WoPadding.verticalMedium(
+          child: Column(
+            children: [
+              if (uiSettings.titlePosition == WoFormTitlePosition.header)
+                FormHeader(
+                  labelText: uiSettings.titleText,
+                  helperText: '',
+                ),
+              buildBody(),
+            ],
           ),
         ),
       ),
@@ -261,23 +261,25 @@ class _WoFormPageView extends StatelessWidget {
                 ],
               ),
             ),
-            BlocBuilder<_PageIndexCubit, int>(
-              builder: (context, pageIndex) {
-                return TweenAnimationBuilder<double>(
-                  duration: const Duration(milliseconds: 250),
-                  curve: Curves.easeInOut,
-                  tween: Tween<double>(
-                    begin: 0,
-                    end: pageIndex.toDouble(),
-                  ),
-                  builder: (context, value, _) {
-                    return LinearProgressIndicator(
-                      value: value / max(1, form.inputs.length - 1),
-                    );
-                  },
-                );
-              },
-            ),
+            if ((form.uiSettings.submitMode as PageByPageSubmitMode)
+                .showProgressIndicator)
+              BlocBuilder<_PageIndexCubit, int>(
+                builder: (context, pageIndex) {
+                  return TweenAnimationBuilder<double>(
+                    duration: const Duration(milliseconds: 250),
+                    curve: Curves.easeInOut,
+                    tween: Tween<double>(
+                      begin: 1,
+                      end: pageIndex.toDouble() + 1,
+                    ),
+                    builder: (context, value, _) {
+                      return LinearProgressIndicator(
+                        value: value / max(1, form.inputs.length),
+                      );
+                    },
+                  );
+                },
+              ),
           ],
         ),
       ),

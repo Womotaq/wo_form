@@ -1688,7 +1688,7 @@ mixin _$WoFormSubmitMode {
             SubmitButtonPosition buttonPosition)
         standard,
     required TResult Function(String? submitText, String? nextText,
-            DisableSubmitButton disableSubmitMode)
+            DisableSubmitButton disableSubmitMode, bool showProgressIndicator)
         pageByPage,
   }) =>
       throw _privateConstructorUsedError;
@@ -1698,7 +1698,7 @@ mixin _$WoFormSubmitMode {
             SubmitButtonPosition buttonPosition)?
         standard,
     TResult? Function(String? submitText, String? nextText,
-            DisableSubmitButton disableSubmitMode)?
+            DisableSubmitButton disableSubmitMode, bool showProgressIndicator)?
         pageByPage,
   }) =>
       throw _privateConstructorUsedError;
@@ -1708,7 +1708,7 @@ mixin _$WoFormSubmitMode {
             SubmitButtonPosition buttonPosition)?
         standard,
     TResult Function(String? submitText, String? nextText,
-            DisableSubmitButton disableSubmitMode)?
+            DisableSubmitButton disableSubmitMode, bool showProgressIndicator)?
         pageByPage,
     required TResult orElse(),
   }) =>
@@ -1887,7 +1887,7 @@ class _$StandardSubmitModeImpl extends StandardSubmitMode {
             SubmitButtonPosition buttonPosition)
         standard,
     required TResult Function(String? submitText, String? nextText,
-            DisableSubmitButton disableSubmitMode)
+            DisableSubmitButton disableSubmitMode, bool showProgressIndicator)
         pageByPage,
   }) {
     return standard(submitText, disableSubmitMode, buttonPosition);
@@ -1900,7 +1900,7 @@ class _$StandardSubmitModeImpl extends StandardSubmitMode {
             SubmitButtonPosition buttonPosition)?
         standard,
     TResult? Function(String? submitText, String? nextText,
-            DisableSubmitButton disableSubmitMode)?
+            DisableSubmitButton disableSubmitMode, bool showProgressIndicator)?
         pageByPage,
   }) {
     return standard?.call(submitText, disableSubmitMode, buttonPosition);
@@ -1913,7 +1913,7 @@ class _$StandardSubmitModeImpl extends StandardSubmitMode {
             SubmitButtonPosition buttonPosition)?
         standard,
     TResult Function(String? submitText, String? nextText,
-            DisableSubmitButton disableSubmitMode)?
+            DisableSubmitButton disableSubmitMode, bool showProgressIndicator)?
         pageByPage,
     required TResult orElse(),
   }) {
@@ -1994,7 +1994,8 @@ abstract class _$$PageByPageSubmitModeImplCopyWith<$Res>
   $Res call(
       {String? submitText,
       String? nextText,
-      DisableSubmitButton disableSubmitMode});
+      DisableSubmitButton disableSubmitMode,
+      bool showProgressIndicator});
 }
 
 /// @nodoc
@@ -2011,6 +2012,7 @@ class __$$PageByPageSubmitModeImplCopyWithImpl<$Res>
     Object? submitText = freezed,
     Object? nextText = freezed,
     Object? disableSubmitMode = null,
+    Object? showProgressIndicator = null,
   }) {
     return _then(_$PageByPageSubmitModeImpl(
       submitText: freezed == submitText
@@ -2025,6 +2027,10 @@ class __$$PageByPageSubmitModeImplCopyWithImpl<$Res>
           ? _value.disableSubmitMode
           : disableSubmitMode // ignore: cast_nullable_to_non_nullable
               as DisableSubmitButton,
+      showProgressIndicator: null == showProgressIndicator
+          ? _value.showProgressIndicator
+          : showProgressIndicator // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -2036,6 +2042,7 @@ class _$PageByPageSubmitModeImpl extends PageByPageSubmitMode {
       {this.submitText,
       this.nextText,
       this.disableSubmitMode = DisableSubmitButton.never,
+      this.showProgressIndicator = true,
       final String? $type})
       : $type = $type ?? 'pageByPage',
         super._();
@@ -2050,13 +2057,16 @@ class _$PageByPageSubmitModeImpl extends PageByPageSubmitMode {
   @override
   @JsonKey()
   final DisableSubmitButton disableSubmitMode;
+  @override
+  @JsonKey()
+  final bool showProgressIndicator;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'WoFormSubmitMode.pageByPage(submitText: $submitText, nextText: $nextText, disableSubmitMode: $disableSubmitMode)';
+    return 'WoFormSubmitMode.pageByPage(submitText: $submitText, nextText: $nextText, disableSubmitMode: $disableSubmitMode, showProgressIndicator: $showProgressIndicator)';
   }
 
   @override
@@ -2069,13 +2079,15 @@ class _$PageByPageSubmitModeImpl extends PageByPageSubmitMode {
             (identical(other.nextText, nextText) ||
                 other.nextText == nextText) &&
             (identical(other.disableSubmitMode, disableSubmitMode) ||
-                other.disableSubmitMode == disableSubmitMode));
+                other.disableSubmitMode == disableSubmitMode) &&
+            (identical(other.showProgressIndicator, showProgressIndicator) ||
+                other.showProgressIndicator == showProgressIndicator));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, submitText, nextText, disableSubmitMode);
+  int get hashCode => Object.hash(runtimeType, submitText, nextText,
+      disableSubmitMode, showProgressIndicator);
 
   @JsonKey(ignore: true)
   @override
@@ -2094,10 +2106,11 @@ class _$PageByPageSubmitModeImpl extends PageByPageSubmitMode {
             SubmitButtonPosition buttonPosition)
         standard,
     required TResult Function(String? submitText, String? nextText,
-            DisableSubmitButton disableSubmitMode)
+            DisableSubmitButton disableSubmitMode, bool showProgressIndicator)
         pageByPage,
   }) {
-    return pageByPage(submitText, nextText, disableSubmitMode);
+    return pageByPage(
+        submitText, nextText, disableSubmitMode, showProgressIndicator);
   }
 
   @override
@@ -2107,10 +2120,11 @@ class _$PageByPageSubmitModeImpl extends PageByPageSubmitMode {
             SubmitButtonPosition buttonPosition)?
         standard,
     TResult? Function(String? submitText, String? nextText,
-            DisableSubmitButton disableSubmitMode)?
+            DisableSubmitButton disableSubmitMode, bool showProgressIndicator)?
         pageByPage,
   }) {
-    return pageByPage?.call(submitText, nextText, disableSubmitMode);
+    return pageByPage?.call(
+        submitText, nextText, disableSubmitMode, showProgressIndicator);
   }
 
   @override
@@ -2120,12 +2134,13 @@ class _$PageByPageSubmitModeImpl extends PageByPageSubmitMode {
             SubmitButtonPosition buttonPosition)?
         standard,
     TResult Function(String? submitText, String? nextText,
-            DisableSubmitButton disableSubmitMode)?
+            DisableSubmitButton disableSubmitMode, bool showProgressIndicator)?
         pageByPage,
     required TResult orElse(),
   }) {
     if (pageByPage != null) {
-      return pageByPage(submitText, nextText, disableSubmitMode);
+      return pageByPage(
+          submitText, nextText, disableSubmitMode, showProgressIndicator);
     }
     return orElse();
   }
@@ -2171,10 +2186,10 @@ class _$PageByPageSubmitModeImpl extends PageByPageSubmitMode {
 
 abstract class PageByPageSubmitMode extends WoFormSubmitMode {
   const factory PageByPageSubmitMode(
-          {final String? submitText,
-          final String? nextText,
-          final DisableSubmitButton disableSubmitMode}) =
-      _$PageByPageSubmitModeImpl;
+      {final String? submitText,
+      final String? nextText,
+      final DisableSubmitButton disableSubmitMode,
+      final bool showProgressIndicator}) = _$PageByPageSubmitModeImpl;
   const PageByPageSubmitMode._() : super._();
 
   factory PageByPageSubmitMode.fromJson(Map<String, dynamic> json) =
@@ -2185,6 +2200,7 @@ abstract class PageByPageSubmitMode extends WoFormSubmitMode {
   String? get nextText;
   @override
   DisableSubmitButton get disableSubmitMode;
+  bool get showProgressIndicator;
   @override
   @JsonKey(ignore: true)
   _$$PageByPageSubmitModeImplCopyWith<_$PageByPageSubmitModeImpl>
