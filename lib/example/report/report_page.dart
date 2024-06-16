@@ -28,10 +28,12 @@ class ReportPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WoForm(
-      unmodifiableValuesJson: {
-        'reporterId': 'me',
-        'reportedId': 'him',
-      },
+      exportSettings: const ExportSettings(
+        exportedMetadata: {
+          'reporterId': 'me',
+          'reportedId': 'him',
+        },
+      ),
       uiSettings: const WoFormUiSettings(
         titleText: 'Signaler un utilisateur',
         submitText: 'Envoyer',
@@ -85,7 +87,7 @@ class ReportPage extends StatelessWidget {
           title: "Ce json vient d'être envoyé.",
           actionText: 'Ok',
           onAction: context.read<WoFormStatusCubit>().setInProgress,
-          content: Text(readableJson(form.getSubmittedJson(values))),
+          content: Text(readableJson(form.export(values))),
         );
       },
     );

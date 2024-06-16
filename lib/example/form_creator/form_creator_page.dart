@@ -22,11 +22,6 @@ extension RandomX on Random {
 }
 
 final woFormCreator = WoForm(
-  unmodifiableValuesJson: {
-    'uiSettings': {
-      'title': 'Profil',
-    },
-  },
   inputs: [
     const InputsNode(
       id: 'uiSettings',
@@ -54,7 +49,7 @@ final woFormCreator = WoForm(
     ),
     InputsNode(
       id: 'inputs',
-      exportType: NodeExportType.list,
+      exportSettings: const ExportSettings(exportType: ExportType.list),
       inputs: [
         createStringInputNode(id: idGenerator.generateId()),
         createNumInputNode(id: idGenerator.generateId()),
@@ -101,7 +96,7 @@ class StringInputPage extends StatelessWidget {
                           Clipboard.setData(
                             ClipboardData(
                               text: jsonEncode(
-                                woFormCreator.getSubmittedJson(values),
+                                woFormCreator.export(values),
                               ),
                             ),
                           );
@@ -117,9 +112,9 @@ class StringInputPage extends StatelessWidget {
                             final WoForm form;
                             try {
                               form = WoForm.fromJson(
-                                woFormCreator.getSubmittedJson(
+                                woFormCreator.export(
                                   context.read<WoFormValuesCubit>().state,
-                                ),
+                                ) as Map<String, dynamic>,
                               );
                             } catch (e) {
                               snackBarError(context, e.toString());
@@ -148,7 +143,7 @@ class StringInputPage extends StatelessWidget {
                   BlocBuilder<WoFormValuesCubit, Map<String, dynamic>>(
                     builder: (context, values) {
                       return Text(
-                        readableJson(woFormCreator.getSubmittedJson(values)),
+                        readableJson(woFormCreator.export(values)),
                       );
                     },
                   ),

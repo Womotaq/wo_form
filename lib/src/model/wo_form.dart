@@ -14,13 +14,15 @@ class WoForm with _$WoForm {
     @JsonKey(includeToJson: false, includeFromJson: false)
     @Default(InitialStatus())
     WoFormStatus initialStatus,
-    Map<String, dynamic>? unmodifiableValuesJson,
     @InputsListConverter() @Default([]) List<WoFormElementMixin> inputs,
     @JsonKey(includeToJson: false, includeFromJson: false)
     Future<bool?> Function(BuildContext context)? canQuit,
     @JsonKey(toJson: WoFormUiSettings.staticToJson)
     @Default(WoFormUiSettings())
     WoFormUiSettings uiSettings,
+    @JsonKey(toJson: ExportSettings.staticToJson)
+    @Default(ExportSettings())
+    ExportSettings exportSettings,
   }) = _WoForm;
 
   const WoForm._();
@@ -84,13 +86,24 @@ class WoForm with _$WoForm {
         );
   }
 
-  Map<String, dynamic> getSubmittedJson(Map<String, dynamic> values) => {
-        ...unmodifiableValuesJson ?? {},
-        for (final input in inputs)
-          input.id: input.getSubmittedJson(
-            values: values,
-            parentPath: '',
-          ),
+  dynamic export(Map<String, dynamic> values) =>
+      switch (exportSettings.exportType) {
+        ExportType.list => [
+            ...?exportSettings.exportedMetadata?.values,
+            for (final input in inputs)
+              input.export(
+                values: values,
+                parentPath: '',
+              ),
+          ],
+        ExportType.map => {
+            ...?exportSettings.exportedMetadata,
+            for (final input in inputs)
+              input.id: input.export(
+                values: values,
+                parentPath: '',
+              ),
+          },
       };
 
   Widget toPage({

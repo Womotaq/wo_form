@@ -240,7 +240,9 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
           ],
         ),
       ],
-      unmodifiableValuesJson: {
-        'runtimeType': 'string',
-      },
+      exportSettings: const ExportSettings(
+        exportedMetadata: {
+          'runtimeType': 'string',
+        },
+      ),
     );

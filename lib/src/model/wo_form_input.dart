@@ -188,7 +188,7 @@ sealed class WoFormInput
   }
 
   @override
-  dynamic getSubmittedJson({
+  dynamic export({
     required Map<String, dynamic> values, // TODO : rename as values
     required String parentPath,
   }) =>
@@ -319,7 +319,7 @@ class SelectInput<T>
       );
 
   @override
-  dynamic getSubmittedJson({
+  dynamic export({
     required Map<String, dynamic> values, // TODO : rename as values
     required String parentPath,
   }) =>

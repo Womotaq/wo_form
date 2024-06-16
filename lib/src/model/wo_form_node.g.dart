@@ -9,35 +9,28 @@ part of 'wo_form_node.dart';
 _$InputsNodeImpl _$$InputsNodeImplFromJson(Map<String, dynamic> json) =>
     _$InputsNodeImpl(
       id: json['id'] as String,
-      unmodifiableValuesJson:
-          json['unmodifiableValuesJson'] as Map<String, dynamic>?,
       inputs: json['inputs'] == null
           ? const []
           : const InputsListConverter().fromJson(json['inputs'] as List),
-      exportType:
-          $enumDecodeNullable(_$NodeExportTypeEnumMap, json['exportType']) ??
-              NodeExportType.map,
       uiSettings: json['uiSettings'] == null
           ? const InputsNodeUiSettings()
           : InputsNodeUiSettings.fromJson(
               json['uiSettings'] as Map<String, dynamic>),
+      exportSettings: json['exportSettings'] == null
+          ? const ExportSettings()
+          : ExportSettings.fromJson(
+              json['exportSettings'] as Map<String, dynamic>),
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$InputsNodeImplToJson(_$InputsNodeImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'unmodifiableValuesJson': instance.unmodifiableValuesJson,
       'inputs': const InputsListConverter().toJson(instance.inputs),
-      'exportType': _$NodeExportTypeEnumMap[instance.exportType]!,
       'uiSettings': InputsNodeUiSettings.staticToJson(instance.uiSettings),
+      'exportSettings': ExportSettings.staticToJson(instance.exportSettings),
       'runtimeType': instance.$type,
     };
-
-const _$NodeExportTypeEnumMap = {
-  NodeExportType.list: 'list',
-  NodeExportType.map: 'map',
-};
 
 _$ValueBuilderNodeImpl _$$ValueBuilderNodeImplFromJson(
         Map<String, dynamic> json) =>

@@ -57,7 +57,9 @@ InputsNode createNumInputNode({required String id}) => InputsNode(
           ],
         ),
       ],
-      unmodifiableValuesJson: {
-        'runtimeType': 'num',
-      },
+      exportSettings: const ExportSettings(
+        exportedMetadata: {
+          'runtimeType': 'num',
+        },
+      ),
     );

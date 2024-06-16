@@ -13,7 +13,7 @@ mixin WoFormElementMixin {
 
   Map<String, dynamic> toJson();
 
-  dynamic getSubmittedJson({
+  dynamic export({
     required Map<String, dynamic> values, // TODO : rename as values
     required String parentPath,
   });
@@ -52,18 +52,17 @@ mixin WoFormElementMixin {
   }
 }
 
-enum NodeExportType { list, map }
-
 @freezed
 sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
   const factory WoFormNode.inputs({
     required String id,
-    Map<String, dynamic>? unmodifiableValuesJson,
     @InputsListConverter() @Default([]) List<WoFormElementMixin> inputs,
-    @Default(NodeExportType.map) NodeExportType exportType,
     @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
     @Default(InputsNodeUiSettings())
     InputsNodeUiSettings uiSettings,
+    @JsonKey(toJson: ExportSettings.staticToJson)
+    @Default(ExportSettings())
+    ExportSettings exportSettings,
   }) = InputsNode;
 
   @Assert('builder != null', 'ValueBuilderNode.builder cannot be null')
@@ -125,29 +124,28 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
   }
 
   @override
-  dynamic getSubmittedJson({
+  dynamic export({
     required Map<String, dynamic> values,
     required String parentPath,
   }) {
     switch (this) {
       case InputsNode(
-          unmodifiableValuesJson: final unmodifiableValuesJson,
           inputs: final inputs,
-          exportType: final exportType,
+          exportSettings: final exportSettings,
         ):
-        return switch (exportType) {
-          NodeExportType.list => [
-              ...?unmodifiableValuesJson?.values,
+        return switch (exportSettings.exportType) {
+          ExportType.list => [
+              ...?exportSettings.exportedMetadata?.values,
               for (final input in inputs)
-                input.getSubmittedJson(
+                input.export(
                   values: values,
                   parentPath: '$parentPath/$id',
                 ),
             ],
-          NodeExportType.map => {
-              ...?unmodifiableValuesJson,
+          ExportType.map => {
+              ...?exportSettings.exportedMetadata,
               for (final input in inputs)
-                input.id: input.getSubmittedJson(
+                input.id: input.export(
                   values: values,
                   parentPath: '$parentPath/$id',
                 ),
@@ -162,7 +160,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
           )],
         );
 
-        return input.getSubmittedJson(
+        return input.export(
           values: values,
           parentPath: '$parentPath/$id',
         );

@@ -54,7 +54,7 @@ void main() {
 
   test('StringInput.submitJson()', () {
     expect(
-      input.getSubmittedJson(
+      input.export(
         values: {'name': 'John'},
         parentPath: '',
       ),

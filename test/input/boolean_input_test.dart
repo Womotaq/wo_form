@@ -34,7 +34,7 @@ void main() {
 
   test('BooleanInput.submitJson()', () {
     expect(
-      input.getSubmittedJson(
+      input.export(
         values: {'isRequired': true},
         parentPath: '',
       ),

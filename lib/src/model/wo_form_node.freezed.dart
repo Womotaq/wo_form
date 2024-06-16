@@ -36,11 +36,11 @@ mixin _$WoFormNode {
   TResult when<TResult extends Object?>({
     required TResult Function(
             String id,
-            Map<String, dynamic>? unmodifiableValuesJson,
             @InputsListConverter() List<WoFormElementMixin> inputs,
-            NodeExportType exportType,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings)
+            InputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)
         inputs,
     required TResult Function(
             String id,
@@ -63,11 +63,11 @@ mixin _$WoFormNode {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
             String id,
-            Map<String, dynamic>? unmodifiableValuesJson,
             @InputsListConverter() List<WoFormElementMixin> inputs,
-            NodeExportType exportType,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings)?
+            InputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)?
         inputs,
     TResult? Function(
             String id,
@@ -90,11 +90,11 @@ mixin _$WoFormNode {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
             String id,
-            Map<String, dynamic>? unmodifiableValuesJson,
             @InputsListConverter() List<WoFormElementMixin> inputs,
-            NodeExportType exportType,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings)?
+            InputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)?
         inputs,
     TResult Function(
             String id,
@@ -185,13 +185,14 @@ abstract class _$$InputsNodeImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      Map<String, dynamic>? unmodifiableValuesJson,
       @InputsListConverter() List<WoFormElementMixin> inputs,
-      NodeExportType exportType,
       @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-      InputsNodeUiSettings uiSettings});
+      InputsNodeUiSettings uiSettings,
+      @JsonKey(toJson: ExportSettings.staticToJson)
+      ExportSettings exportSettings});
 
   $InputsNodeUiSettingsCopyWith<$Res> get uiSettings;
+  $ExportSettingsCopyWith<$Res> get exportSettings;
 }
 
 /// @nodoc
@@ -206,32 +207,27 @@ class __$$InputsNodeImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? unmodifiableValuesJson = freezed,
     Object? inputs = null,
-    Object? exportType = null,
     Object? uiSettings = null,
+    Object? exportSettings = null,
   }) {
     return _then(_$InputsNodeImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      unmodifiableValuesJson: freezed == unmodifiableValuesJson
-          ? _value._unmodifiableValuesJson
-          : unmodifiableValuesJson // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
       inputs: null == inputs
           ? _value._inputs
           : inputs // ignore: cast_nullable_to_non_nullable
               as List<WoFormElementMixin>,
-      exportType: null == exportType
-          ? _value.exportType
-          : exportType // ignore: cast_nullable_to_non_nullable
-              as NodeExportType,
       uiSettings: null == uiSettings
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
               as InputsNodeUiSettings,
+      exportSettings: null == exportSettings
+          ? _value.exportSettings
+          : exportSettings // ignore: cast_nullable_to_non_nullable
+              as ExportSettings,
     ));
   }
 
@@ -242,6 +238,14 @@ class __$$InputsNodeImplCopyWithImpl<$Res>
       return _then(_value.copyWith(uiSettings: value));
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ExportSettingsCopyWith<$Res> get exportSettings {
+    return $ExportSettingsCopyWith<$Res>(_value.exportSettings, (value) {
+      return _then(_value.copyWith(exportSettings: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -249,14 +253,13 @@ class __$$InputsNodeImplCopyWithImpl<$Res>
 class _$InputsNodeImpl extends InputsNode {
   const _$InputsNodeImpl(
       {required this.id,
-      final Map<String, dynamic>? unmodifiableValuesJson,
       @InputsListConverter() final List<WoFormElementMixin> inputs = const [],
-      this.exportType = NodeExportType.map,
       @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
       this.uiSettings = const InputsNodeUiSettings(),
+      @JsonKey(toJson: ExportSettings.staticToJson)
+      this.exportSettings = const ExportSettings(),
       final String? $type})
-      : _unmodifiableValuesJson = unmodifiableValuesJson,
-        _inputs = inputs,
+      : _inputs = inputs,
         $type = $type ?? 'inputs',
         super._();
 
@@ -265,17 +268,6 @@ class _$InputsNodeImpl extends InputsNode {
 
   @override
   final String id;
-  final Map<String, dynamic>? _unmodifiableValuesJson;
-  @override
-  Map<String, dynamic>? get unmodifiableValuesJson {
-    final value = _unmodifiableValuesJson;
-    if (value == null) return null;
-    if (_unmodifiableValuesJson is EqualUnmodifiableMapView)
-      return _unmodifiableValuesJson;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
-  }
-
   final List<WoFormElementMixin> _inputs;
   @override
   @JsonKey()
@@ -287,18 +279,18 @@ class _$InputsNodeImpl extends InputsNode {
   }
 
   @override
-  @JsonKey()
-  final NodeExportType exportType;
-  @override
   @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
   final InputsNodeUiSettings uiSettings;
+  @override
+  @JsonKey(toJson: ExportSettings.staticToJson)
+  final ExportSettings exportSettings;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'WoFormNode.inputs(id: $id, unmodifiableValuesJson: $unmodifiableValuesJson, inputs: $inputs, exportType: $exportType, uiSettings: $uiSettings)';
+    return 'WoFormNode.inputs(id: $id, inputs: $inputs, uiSettings: $uiSettings, exportSettings: $exportSettings)';
   }
 
   @override
@@ -307,24 +299,17 @@ class _$InputsNodeImpl extends InputsNode {
         (other.runtimeType == runtimeType &&
             other is _$InputsNodeImpl &&
             (identical(other.id, id) || other.id == id) &&
-            const DeepCollectionEquality().equals(
-                other._unmodifiableValuesJson, _unmodifiableValuesJson) &&
             const DeepCollectionEquality().equals(other._inputs, _inputs) &&
-            (identical(other.exportType, exportType) ||
-                other.exportType == exportType) &&
             (identical(other.uiSettings, uiSettings) ||
-                other.uiSettings == uiSettings));
+                other.uiSettings == uiSettings) &&
+            (identical(other.exportSettings, exportSettings) ||
+                other.exportSettings == exportSettings));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      const DeepCollectionEquality().hash(_unmodifiableValuesJson),
-      const DeepCollectionEquality().hash(_inputs),
-      exportType,
-      uiSettings);
+  int get hashCode => Object.hash(runtimeType, id,
+      const DeepCollectionEquality().hash(_inputs), uiSettings, exportSettings);
 
   @JsonKey(ignore: true)
   @override
@@ -337,11 +322,11 @@ class _$InputsNodeImpl extends InputsNode {
   TResult when<TResult extends Object?>({
     required TResult Function(
             String id,
-            Map<String, dynamic>? unmodifiableValuesJson,
             @InputsListConverter() List<WoFormElementMixin> inputs,
-            NodeExportType exportType,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings)
+            InputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)
         inputs,
     required TResult Function(
             String id,
@@ -359,8 +344,7 @@ class _$InputsNodeImpl extends InputsNode {
             void Function(BuildContext, String, Object?)? listener)
         valueListener,
   }) {
-    return inputs(
-        id, unmodifiableValuesJson, this.inputs, exportType, uiSettings);
+    return inputs(id, this.inputs, uiSettings, exportSettings);
   }
 
   @override
@@ -368,11 +352,11 @@ class _$InputsNodeImpl extends InputsNode {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
             String id,
-            Map<String, dynamic>? unmodifiableValuesJson,
             @InputsListConverter() List<WoFormElementMixin> inputs,
-            NodeExportType exportType,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings)?
+            InputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)?
         inputs,
     TResult? Function(
             String id,
@@ -390,8 +374,7 @@ class _$InputsNodeImpl extends InputsNode {
             void Function(BuildContext, String, Object?)? listener)?
         valueListener,
   }) {
-    return inputs?.call(
-        id, unmodifiableValuesJson, this.inputs, exportType, uiSettings);
+    return inputs?.call(id, this.inputs, uiSettings, exportSettings);
   }
 
   @override
@@ -399,11 +382,11 @@ class _$InputsNodeImpl extends InputsNode {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
             String id,
-            Map<String, dynamic>? unmodifiableValuesJson,
             @InputsListConverter() List<WoFormElementMixin> inputs,
-            NodeExportType exportType,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings)?
+            InputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)?
         inputs,
     TResult Function(
             String id,
@@ -423,8 +406,7 @@ class _$InputsNodeImpl extends InputsNode {
     required TResult orElse(),
   }) {
     if (inputs != null) {
-      return inputs(
-          id, unmodifiableValuesJson, this.inputs, exportType, uiSettings);
+      return inputs(id, this.inputs, uiSettings, exportSettings);
     }
     return orElse();
   }
@@ -474,11 +456,11 @@ class _$InputsNodeImpl extends InputsNode {
 abstract class InputsNode extends WoFormNode {
   const factory InputsNode(
       {required final String id,
-      final Map<String, dynamic>? unmodifiableValuesJson,
       @InputsListConverter() final List<WoFormElementMixin> inputs,
-      final NodeExportType exportType,
       @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-      final InputsNodeUiSettings uiSettings}) = _$InputsNodeImpl;
+      final InputsNodeUiSettings uiSettings,
+      @JsonKey(toJson: ExportSettings.staticToJson)
+      final ExportSettings exportSettings}) = _$InputsNodeImpl;
   const InputsNode._() : super._();
 
   factory InputsNode.fromJson(Map<String, dynamic> json) =
@@ -486,12 +468,12 @@ abstract class InputsNode extends WoFormNode {
 
   @override
   String get id;
-  Map<String, dynamic>? get unmodifiableValuesJson;
   @InputsListConverter()
   List<WoFormElementMixin> get inputs;
-  NodeExportType get exportType;
   @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
   InputsNodeUiSettings get uiSettings;
+  @JsonKey(toJson: ExportSettings.staticToJson)
+  ExportSettings get exportSettings;
   @override
   @JsonKey(ignore: true)
   _$$InputsNodeImplCopyWith<_$InputsNodeImpl> get copyWith =>
@@ -613,11 +595,11 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
   TResult when<TResult extends Object?>({
     required TResult Function(
             String id,
-            Map<String, dynamic>? unmodifiableValuesJson,
             @InputsListConverter() List<WoFormElementMixin> inputs,
-            NodeExportType exportType,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings)
+            InputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)
         inputs,
     required TResult Function(
             String id,
@@ -643,11 +625,11 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
             String id,
-            Map<String, dynamic>? unmodifiableValuesJson,
             @InputsListConverter() List<WoFormElementMixin> inputs,
-            NodeExportType exportType,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings)?
+            InputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)?
         inputs,
     TResult? Function(
             String id,
@@ -673,11 +655,11 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
             String id,
-            Map<String, dynamic>? unmodifiableValuesJson,
             @InputsListConverter() List<WoFormElementMixin> inputs,
-            NodeExportType exportType,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings)?
+            InputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)?
         inputs,
     TResult Function(
             String id,
@@ -888,11 +870,11 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
   TResult when<TResult extends Object?>({
     required TResult Function(
             String id,
-            Map<String, dynamic>? unmodifiableValuesJson,
             @InputsListConverter() List<WoFormElementMixin> inputs,
-            NodeExportType exportType,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings)
+            InputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)
         inputs,
     required TResult Function(
             String id,
@@ -918,11 +900,11 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
             String id,
-            Map<String, dynamic>? unmodifiableValuesJson,
             @InputsListConverter() List<WoFormElementMixin> inputs,
-            NodeExportType exportType,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings)?
+            InputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)?
         inputs,
     TResult? Function(
             String id,
@@ -948,11 +930,11 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
             String id,
-            Map<String, dynamic>? unmodifiableValuesJson,
             @InputsListConverter() List<WoFormElementMixin> inputs,
-            NodeExportType exportType,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings)?
+            InputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)?
         inputs,
     TResult Function(
             String id,

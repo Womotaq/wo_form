@@ -47,9 +47,9 @@ void main() {
     expect(WoForm.fromJson(json), form);
   });
 
-  test('WoForm.getSubmittedJson()', () {
+  test('WoForm.export()', () {
     expect(
-      form.getSubmittedJson({'name': 'John'}),
+      form.export({'name': 'John'}),
       {
         'name': 'John',
       },

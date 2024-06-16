@@ -22,8 +22,6 @@ WoForm _$WoFormFromJson(Map<String, dynamic> json) {
 mixin _$WoForm {
   @JsonKey(includeToJson: false, includeFromJson: false)
   WoFormStatus get initialStatus => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get unmodifiableValuesJson =>
-      throw _privateConstructorUsedError;
   @InputsListConverter()
   List<WoFormElementMixin> get inputs => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
@@ -31,6 +29,8 @@ mixin _$WoForm {
       throw _privateConstructorUsedError;
   @JsonKey(toJson: WoFormUiSettings.staticToJson)
   WoFormUiSettings get uiSettings => throw _privateConstructorUsedError;
+  @JsonKey(toJson: ExportSettings.staticToJson)
+  ExportSettings get exportSettings => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,15 +45,17 @@ abstract class $WoFormCopyWith<$Res> {
   $Res call(
       {@JsonKey(includeToJson: false, includeFromJson: false)
       WoFormStatus initialStatus,
-      Map<String, dynamic>? unmodifiableValuesJson,
       @InputsListConverter() List<WoFormElementMixin> inputs,
       @JsonKey(includeToJson: false, includeFromJson: false)
       Future<bool?> Function(BuildContext)? canQuit,
       @JsonKey(toJson: WoFormUiSettings.staticToJson)
-      WoFormUiSettings uiSettings});
+      WoFormUiSettings uiSettings,
+      @JsonKey(toJson: ExportSettings.staticToJson)
+      ExportSettings exportSettings});
 
   $WoFormStatusCopyWith<$Res> get initialStatus;
   $WoFormUiSettingsCopyWith<$Res> get uiSettings;
+  $ExportSettingsCopyWith<$Res> get exportSettings;
 }
 
 /// @nodoc
@@ -70,20 +72,16 @@ class _$WoFormCopyWithImpl<$Res, $Val extends WoForm>
   @override
   $Res call({
     Object? initialStatus = null,
-    Object? unmodifiableValuesJson = freezed,
     Object? inputs = null,
     Object? canQuit = freezed,
     Object? uiSettings = null,
+    Object? exportSettings = null,
   }) {
     return _then(_value.copyWith(
       initialStatus: null == initialStatus
           ? _value.initialStatus
           : initialStatus // ignore: cast_nullable_to_non_nullable
               as WoFormStatus,
-      unmodifiableValuesJson: freezed == unmodifiableValuesJson
-          ? _value.unmodifiableValuesJson
-          : unmodifiableValuesJson // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
       inputs: null == inputs
           ? _value.inputs
           : inputs // ignore: cast_nullable_to_non_nullable
@@ -96,6 +94,10 @@ class _$WoFormCopyWithImpl<$Res, $Val extends WoForm>
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
               as WoFormUiSettings,
+      exportSettings: null == exportSettings
+          ? _value.exportSettings
+          : exportSettings // ignore: cast_nullable_to_non_nullable
+              as ExportSettings,
     ) as $Val);
   }
 
@@ -114,6 +116,14 @@ class _$WoFormCopyWithImpl<$Res, $Val extends WoForm>
       return _then(_value.copyWith(uiSettings: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ExportSettingsCopyWith<$Res> get exportSettings {
+    return $ExportSettingsCopyWith<$Res>(_value.exportSettings, (value) {
+      return _then(_value.copyWith(exportSettings: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -126,17 +136,20 @@ abstract class _$$WoFormImplCopyWith<$Res> implements $WoFormCopyWith<$Res> {
   $Res call(
       {@JsonKey(includeToJson: false, includeFromJson: false)
       WoFormStatus initialStatus,
-      Map<String, dynamic>? unmodifiableValuesJson,
       @InputsListConverter() List<WoFormElementMixin> inputs,
       @JsonKey(includeToJson: false, includeFromJson: false)
       Future<bool?> Function(BuildContext)? canQuit,
       @JsonKey(toJson: WoFormUiSettings.staticToJson)
-      WoFormUiSettings uiSettings});
+      WoFormUiSettings uiSettings,
+      @JsonKey(toJson: ExportSettings.staticToJson)
+      ExportSettings exportSettings});
 
   @override
   $WoFormStatusCopyWith<$Res> get initialStatus;
   @override
   $WoFormUiSettingsCopyWith<$Res> get uiSettings;
+  @override
+  $ExportSettingsCopyWith<$Res> get exportSettings;
 }
 
 /// @nodoc
@@ -151,20 +164,16 @@ class __$$WoFormImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? initialStatus = null,
-    Object? unmodifiableValuesJson = freezed,
     Object? inputs = null,
     Object? canQuit = freezed,
     Object? uiSettings = null,
+    Object? exportSettings = null,
   }) {
     return _then(_$WoFormImpl(
       initialStatus: null == initialStatus
           ? _value.initialStatus
           : initialStatus // ignore: cast_nullable_to_non_nullable
               as WoFormStatus,
-      unmodifiableValuesJson: freezed == unmodifiableValuesJson
-          ? _value._unmodifiableValuesJson
-          : unmodifiableValuesJson // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
       inputs: null == inputs
           ? _value._inputs
           : inputs // ignore: cast_nullable_to_non_nullable
@@ -177,6 +186,10 @@ class __$$WoFormImplCopyWithImpl<$Res>
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
               as WoFormUiSettings,
+      exportSettings: null == exportSettings
+          ? _value.exportSettings
+          : exportSettings // ignore: cast_nullable_to_non_nullable
+              as ExportSettings,
     ));
   }
 }
@@ -187,13 +200,13 @@ class _$WoFormImpl extends _WoForm {
   const _$WoFormImpl(
       {@JsonKey(includeToJson: false, includeFromJson: false)
       this.initialStatus = const InitialStatus(),
-      final Map<String, dynamic>? unmodifiableValuesJson,
       @InputsListConverter() final List<WoFormElementMixin> inputs = const [],
       @JsonKey(includeToJson: false, includeFromJson: false) this.canQuit,
       @JsonKey(toJson: WoFormUiSettings.staticToJson)
-      this.uiSettings = const WoFormUiSettings()})
-      : _unmodifiableValuesJson = unmodifiableValuesJson,
-        _inputs = inputs,
+      this.uiSettings = const WoFormUiSettings(),
+      @JsonKey(toJson: ExportSettings.staticToJson)
+      this.exportSettings = const ExportSettings()})
+      : _inputs = inputs,
         super._();
 
   factory _$WoFormImpl.fromJson(Map<String, dynamic> json) =>
@@ -202,17 +215,6 @@ class _$WoFormImpl extends _WoForm {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final WoFormStatus initialStatus;
-  final Map<String, dynamic>? _unmodifiableValuesJson;
-  @override
-  Map<String, dynamic>? get unmodifiableValuesJson {
-    final value = _unmodifiableValuesJson;
-    if (value == null) return null;
-    if (_unmodifiableValuesJson is EqualUnmodifiableMapView)
-      return _unmodifiableValuesJson;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
-  }
-
   final List<WoFormElementMixin> _inputs;
   @override
   @JsonKey()
@@ -229,10 +231,13 @@ class _$WoFormImpl extends _WoForm {
   @override
   @JsonKey(toJson: WoFormUiSettings.staticToJson)
   final WoFormUiSettings uiSettings;
+  @override
+  @JsonKey(toJson: ExportSettings.staticToJson)
+  final ExportSettings exportSettings;
 
   @override
   String toString() {
-    return 'WoForm(initialStatus: $initialStatus, unmodifiableValuesJson: $unmodifiableValuesJson, inputs: $inputs, canQuit: $canQuit, uiSettings: $uiSettings)';
+    return 'WoForm(initialStatus: $initialStatus, inputs: $inputs, canQuit: $canQuit, uiSettings: $uiSettings, exportSettings: $exportSettings)';
   }
 
   @override
@@ -242,12 +247,12 @@ class _$WoFormImpl extends _WoForm {
             other is _$WoFormImpl &&
             (identical(other.initialStatus, initialStatus) ||
                 other.initialStatus == initialStatus) &&
-            const DeepCollectionEquality().equals(
-                other._unmodifiableValuesJson, _unmodifiableValuesJson) &&
             const DeepCollectionEquality().equals(other._inputs, _inputs) &&
             (identical(other.canQuit, canQuit) || other.canQuit == canQuit) &&
             (identical(other.uiSettings, uiSettings) ||
-                other.uiSettings == uiSettings));
+                other.uiSettings == uiSettings) &&
+            (identical(other.exportSettings, exportSettings) ||
+                other.exportSettings == exportSettings));
   }
 
   @JsonKey(ignore: true)
@@ -255,10 +260,10 @@ class _$WoFormImpl extends _WoForm {
   int get hashCode => Object.hash(
       runtimeType,
       initialStatus,
-      const DeepCollectionEquality().hash(_unmodifiableValuesJson),
       const DeepCollectionEquality().hash(_inputs),
       canQuit,
-      uiSettings);
+      uiSettings,
+      exportSettings);
 
   @JsonKey(ignore: true)
   @override
@@ -278,12 +283,13 @@ abstract class _WoForm extends WoForm {
   const factory _WoForm(
       {@JsonKey(includeToJson: false, includeFromJson: false)
       final WoFormStatus initialStatus,
-      final Map<String, dynamic>? unmodifiableValuesJson,
       @InputsListConverter() final List<WoFormElementMixin> inputs,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final Future<bool?> Function(BuildContext)? canQuit,
       @JsonKey(toJson: WoFormUiSettings.staticToJson)
-      final WoFormUiSettings uiSettings}) = _$WoFormImpl;
+      final WoFormUiSettings uiSettings,
+      @JsonKey(toJson: ExportSettings.staticToJson)
+      final ExportSettings exportSettings}) = _$WoFormImpl;
   const _WoForm._() : super._();
 
   factory _WoForm.fromJson(Map<String, dynamic> json) = _$WoFormImpl.fromJson;
@@ -291,8 +297,6 @@ abstract class _WoForm extends WoForm {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   WoFormStatus get initialStatus;
-  @override
-  Map<String, dynamic>? get unmodifiableValuesJson;
   @override
   @InputsListConverter()
   List<WoFormElementMixin> get inputs;
@@ -302,6 +306,9 @@ abstract class _WoForm extends WoForm {
   @override
   @JsonKey(toJson: WoFormUiSettings.staticToJson)
   WoFormUiSettings get uiSettings;
+  @override
+  @JsonKey(toJson: ExportSettings.staticToJson)
+  ExportSettings get exportSettings;
   @override
   @JsonKey(ignore: true)
   _$$WoFormImplCopyWith<_$WoFormImpl> get copyWith =>

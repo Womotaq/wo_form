@@ -30,7 +30,7 @@ void main() {
 
   test('StringInput Form : Step 1', () {
     expect(
-      stringInputNode.getSubmittedJson(values: values, parentPath: ''),
+      stringInputNode.export(values: values, parentPath: ''),
       expectedInputToJson,
     );
   });

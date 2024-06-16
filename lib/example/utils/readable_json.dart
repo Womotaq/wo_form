@@ -13,11 +13,11 @@ void showJsonDialog(BuildContext context) {
     title: 'JSON',
     actionText: 'Ok',
     onAction: context.read<WoFormStatusCubit>().setInProgress,
-    content: Text(readableJson(form.getSubmittedJson(values))),
+    content: Text(readableJson(form.export(values))),
   );
 }
 
-String readableJson(Map<String, dynamic> json, {int indentStep = 4}) {
+String readableJson(dynamic json, {int indentStep = 4}) {
   final buffer = StringBuffer();
   var indent = 0;
   var insideString = false;
