@@ -9,10 +9,10 @@ class QuizPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return WoForm(
       uiSettings: const WoFormUiSettings(
-        submitText: 'Terminer',
-        submitMode: WoFormSubmitMode.submitIfValid,
-        displayMode: WoFormDisplayMode.pages(
+        submitMode: PageByPageSubmitMode(
+          submitText: 'Terminer',
           nextText: 'Répondre',
+          disableSubmitMode: DisableSubmitButton.whenInvalid,
         ),
       ),
       inputs: [

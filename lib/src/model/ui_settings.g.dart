@@ -169,70 +169,83 @@ const _$TextCapitalizationEnumMap = {
   TextCapitalization.none: 'none',
 };
 
-_$WoFormDisplayedInCardImpl _$$WoFormDisplayedInCardImplFromJson(
-        Map<String, dynamic> json) =>
-    _$WoFormDisplayedInCardImpl(
-      $type: json['runtimeType'] as String?,
-    );
-
-Map<String, dynamic> _$$WoFormDisplayedInCardImplToJson(
-        _$WoFormDisplayedInCardImpl instance) =>
-    <String, dynamic>{
-      'runtimeType': instance.$type,
-    };
-
-_$WoFormDisplayedInPageImpl _$$WoFormDisplayedInPageImplFromJson(
-        Map<String, dynamic> json) =>
-    _$WoFormDisplayedInPageImpl(
-      $type: json['runtimeType'] as String?,
-    );
-
-Map<String, dynamic> _$$WoFormDisplayedInPageImplToJson(
-        _$WoFormDisplayedInPageImpl instance) =>
-    <String, dynamic>{
-      'runtimeType': instance.$type,
-    };
-
-_$WoFormDisplayedInPagesImpl _$$WoFormDisplayedInPagesImplFromJson(
-        Map<String, dynamic> json) =>
-    _$WoFormDisplayedInPagesImpl(
-      nextText: json['nextText'] as String?,
-      $type: json['runtimeType'] as String?,
-    );
-
-Map<String, dynamic> _$$WoFormDisplayedInPagesImplToJson(
-        _$WoFormDisplayedInPagesImpl instance) =>
-    <String, dynamic>{
-      'nextText': instance.nextText,
-      'runtimeType': instance.$type,
-    };
-
 _$WoFormUiSettingsImpl _$$WoFormUiSettingsImplFromJson(
         Map<String, dynamic> json) =>
     _$WoFormUiSettingsImpl(
-      titleText: json['titleText'] as String?,
-      submitText: json['submitText'] as String?,
-      submittedText: json['submittedText'] as String?,
-      displayMode: json['displayMode'] == null
-          ? null
-          : WoFormDisplayMode.fromJson(
-              json['displayMode'] as Map<String, dynamic>),
-      submitMode:
-          $enumDecodeNullable(_$WoFormSubmitModeEnumMap, json['submitMode']),
+      titleText: json['titleText'] as String? ?? '',
+      titlePosition: $enumDecodeNullable(
+              _$WoFormTitlePositionEnumMap, json['titlePosition']) ??
+          WoFormTitlePosition.header,
+      submitMode: json['submitMode'] == null
+          ? const WoFormSubmitMode.standard()
+          : WoFormSubmitMode.fromJson(
+              json['submitMode'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$WoFormUiSettingsImplToJson(
         _$WoFormUiSettingsImpl instance) =>
     <String, dynamic>{
       'titleText': instance.titleText,
-      'submitText': instance.submitText,
-      'submittedText': instance.submittedText,
-      'displayMode': WoFormDisplayMode.staticToJson(instance.displayMode),
-      'submitMode': _$WoFormSubmitModeEnumMap[instance.submitMode],
+      'titlePosition': _$WoFormTitlePositionEnumMap[instance.titlePosition]!,
+      'submitMode': WoFormSubmitMode.staticToJson(instance.submitMode),
     };
 
-const _$WoFormSubmitModeEnumMap = {
-  WoFormSubmitMode.submit: 'submit',
-  WoFormSubmitMode.submitIfValid: 'submitIfValid',
-  WoFormSubmitMode.save: 'save',
+const _$WoFormTitlePositionEnumMap = {
+  WoFormTitlePosition.header: 'header',
+  WoFormTitlePosition.appBar: 'appBar',
 };
+
+_$StandardSubmitModeImpl _$$StandardSubmitModeImplFromJson(
+        Map<String, dynamic> json) =>
+    _$StandardSubmitModeImpl(
+      submitText: json['submitText'] as String?,
+      disableSubmitMode: $enumDecodeNullable(
+              _$DisableSubmitButtonEnumMap, json['disableSubmitMode']) ??
+          DisableSubmitButton.never,
+      buttonPosition: $enumDecodeNullable(
+              _$SubmitButtonPositionEnumMap, json['buttonPosition']) ??
+          SubmitButtonPosition.footer,
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$StandardSubmitModeImplToJson(
+        _$StandardSubmitModeImpl instance) =>
+    <String, dynamic>{
+      'submitText': instance.submitText,
+      'disableSubmitMode':
+          _$DisableSubmitButtonEnumMap[instance.disableSubmitMode]!,
+      'buttonPosition': _$SubmitButtonPositionEnumMap[instance.buttonPosition]!,
+      'runtimeType': instance.$type,
+    };
+
+const _$DisableSubmitButtonEnumMap = {
+  DisableSubmitButton.never: 'never',
+  DisableSubmitButton.whenInvalid: 'whenInvalid',
+  DisableSubmitButton.whenInitialOrSubmitted: 'whenInitialOrSubmitted',
+};
+
+const _$SubmitButtonPositionEnumMap = {
+  SubmitButtonPosition.footer: 'footer',
+  SubmitButtonPosition.appBar: 'appBar',
+};
+
+_$PageByPageSubmitModeImpl _$$PageByPageSubmitModeImplFromJson(
+        Map<String, dynamic> json) =>
+    _$PageByPageSubmitModeImpl(
+      submitText: json['submitText'] as String?,
+      nextText: json['nextText'] as String?,
+      disableSubmitMode: $enumDecodeNullable(
+              _$DisableSubmitButtonEnumMap, json['disableSubmitMode']) ??
+          DisableSubmitButton.never,
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$PageByPageSubmitModeImplToJson(
+        _$PageByPageSubmitModeImpl instance) =>
+    <String, dynamic>{
+      'submitText': instance.submitText,
+      'nextText': instance.nextText,
+      'disableSubmitMode':
+          _$DisableSubmitButtonEnumMap[instance.disableSubmitMode]!,
+      'runtimeType': instance.$type,
+    };

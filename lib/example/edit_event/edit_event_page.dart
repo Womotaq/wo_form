@@ -31,9 +31,11 @@ class EditEventPage extends StatelessWidget {
                 ),
       uiSettings: const WoFormUiSettings(
         titleText: "Édition d'un événement",
-        submitText: 'Enregistrer',
-        submittedText: 'Enregistré',
-        displayMode: WoFormDisplayedInPage(),
+        submitMode: StandardSubmitMode(
+          submitText: 'Enregistrer',
+          disableSubmitMode: DisableSubmitButton.whenInitialOrSubmitted,
+          buttonPosition: SubmitButtonPosition.appBar,
+        ),
       ),
       inputs: [
         StringInput(

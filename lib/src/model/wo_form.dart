@@ -120,7 +120,7 @@ class WoForm with _$WoForm {
     void Function(Map<String, dynamic> values)? onSubmitting,
     void Function(BuildContext context)? onSubmitted,
   }) =>
-      WoFormScreen(
+      WoFormPage(
         form: this,
         onSubmitting: onSubmitting,
         onSubmitted: onSubmitted,

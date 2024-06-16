@@ -121,7 +121,8 @@ class SelectField<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     final selectedValues = data.value ?? [];
 
-    final inputDecorationTheme = Theme.of(context).inputDecorationTheme;
+    final theme = Theme.of(context);
+    final inputDecorationTheme = theme.inputDecorationTheme;
 
     // TODO : shpwAsterixWhenRequired : data.input.minCount > 0 ? '*' : ''
     final title = Text(
@@ -132,12 +133,15 @@ class SelectField<T> extends StatelessWidget {
     final subtitle = data.errorText != null
         ? Text(
             data.errorText!,
-            style: inputDecorationTheme.errorStyle,
+            style: inputDecorationTheme.errorStyle ??
+                theme.textTheme.labelMedium
+                    ?.copyWith(color: theme.colorScheme.error),
           )
         : (data.uiSettings.helperText ?? '').isNotEmpty
             ? Text(
                 data.uiSettings.helperText ?? '',
-                style: inputDecorationTheme.helperStyle,
+                style: inputDecorationTheme.helperStyle ??
+                    theme.textTheme.labelMedium,
               )
             : null;
 

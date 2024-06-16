@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:wo_form/src/_export.dart';
+import 'package:wo_form/src/model/_export.dart';
 import 'package:wo_form/src/model/json_converter/text_input_type.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -249,32 +251,20 @@ class StringInputUiSettings with _$StringInputUiSettings {
         );
 }
 
-@freezed
-sealed class WoFormDisplayMode with _$WoFormDisplayMode {
-  const factory WoFormDisplayMode.card() = WoFormDisplayedInCard;
-  const factory WoFormDisplayMode.page() = WoFormDisplayedInPage;
-  const factory WoFormDisplayMode.pages({
-    String? nextText,
-  }) = WoFormDisplayedInPages;
+enum WoFormTitlePosition { header, appBar }
 
-  factory WoFormDisplayMode.fromJson(Map<String, dynamic> json) =>
-      _$WoFormDisplayModeFromJson(json);
-
-  static Map<String, dynamic>? staticToJson(WoFormDisplayMode? object) =>
-      object?.toJson();
-}
-
-enum WoFormSubmitMode { submit, submitIfValid, save }
+typedef SubmitButtonBuilderDef = Widget Function(SubmitButtonData data);
 
 @freezed
 class WoFormUiSettings with _$WoFormUiSettings {
   const factory WoFormUiSettings({
-    String? titleText,
-    String? submitText,
-    String? submittedText,
-    @JsonKey(toJson: WoFormDisplayMode.staticToJson)
-    WoFormDisplayMode? displayMode,
-    WoFormSubmitMode? submitMode,
+    @Default('') String titleText,
+    @Default(WoFormTitlePosition.header) WoFormTitlePosition titlePosition,
+    @JsonKey(toJson: WoFormSubmitMode.staticToJson)
+    @Default(WoFormSubmitMode.standard())
+    WoFormSubmitMode submitMode,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    SubmitButtonBuilderDef? submitButtonBuilder,
   }) = _WoFormUiSettings;
 
   const WoFormUiSettings._();
@@ -284,14 +274,38 @@ class WoFormUiSettings with _$WoFormUiSettings {
 
   static Map<String, dynamic> staticToJson(WoFormUiSettings object) =>
       object.toJson();
+}
 
-  WoFormUiSettings merge(WoFormUiSettings? other) => other == null
-      ? this
-      : WoFormUiSettings(
-          titleText: titleText ?? other.titleText,
-          submitText: submitText ?? other.submitText,
-          submittedText: submittedText ?? other.submittedText,
-          displayMode: displayMode ?? other.displayMode,
-          submitMode: submitMode ?? other.submitMode,
-        );
+enum SubmitButtonPosition { footer, appBar }
+
+enum DisableSubmitButton { never, whenInvalid, whenInitialOrSubmitted }
+
+@freezed
+sealed class WoFormSubmitMode with _$WoFormSubmitMode {
+  const factory WoFormSubmitMode.standard({
+    String? submitText,
+    @Default(DisableSubmitButton.never) DisableSubmitButton disableSubmitMode,
+    @Default(SubmitButtonPosition.footer) SubmitButtonPosition buttonPosition,
+  }) = StandardSubmitMode;
+
+  const factory WoFormSubmitMode.pageByPage({
+    String? submitText,
+    String? nextText,
+    @Default(DisableSubmitButton.never) DisableSubmitButton disableSubmitMode,
+  }) = PageByPageSubmitMode;
+
+  const WoFormSubmitMode._();
+
+  factory WoFormSubmitMode.fromJson(Map<String, dynamic> json) =>
+      _$WoFormSubmitModeFromJson(json);
+
+  static Map<String, dynamic> staticToJson(WoFormSubmitMode object) =>
+      object.toJson();
+
+  // --
+
+  SubmitButtonPosition get buttonPosition => switch (this) {
+        StandardSubmitMode(buttonPosition: final p) => p,
+        PageByPageSubmitMode() => SubmitButtonPosition.footer,
+      };
 }

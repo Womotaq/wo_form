@@ -29,7 +29,8 @@ class FormHeader extends StatelessWidget {
           if (helperText.isNotEmpty) ...[
             Text(
               helperText,
-              style: Theme.of(context).inputDecorationTheme.helperStyle,
+              style: Theme.of(context).inputDecorationTheme.helperStyle ??
+                  Theme.of(context).textTheme.labelMedium,
             ),
             WoGap.small,
           ],

@@ -13,8 +13,8 @@ class ProfileCreationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final form = WoForm(
       uiSettings: const WoFormUiSettings(
-        submitText: 'Enregistrer',
-        displayMode: WoFormDisplayedInPages(
+        submitMode: PageByPageSubmitMode(
+          submitText: 'Enregistrer',
           nextText: 'Suivant',
         ),
       ),

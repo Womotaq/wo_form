@@ -51,7 +51,8 @@ class InputsNodeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final inputDecorationTheme = Theme.of(context).inputDecorationTheme;
+    final theme = Theme.of(context);
+    final inputDecorationTheme = theme.inputDecorationTheme;
 
     final inputWidgets = data.input.inputs
         .map((i) => i.toWidget(parentPath: data.inputPath))
@@ -60,7 +61,8 @@ class InputsNodeWidget extends StatelessWidget {
     final subtitle = (data.uiSettings.helperText ?? '').isNotEmpty
         ? Text(
             data.uiSettings.helperText ?? '',
-            style: inputDecorationTheme.helperStyle,
+            style:
+                inputDecorationTheme.helperStyle ?? theme.textTheme.labelMedium,
           )
         : null;
 

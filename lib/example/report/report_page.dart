@@ -36,8 +36,10 @@ class ReportPage extends StatelessWidget {
       ),
       uiSettings: const WoFormUiSettings(
         titleText: 'Signaler un utilisateur',
-        submitText: 'Envoyer',
-        submitMode: WoFormSubmitMode.submitIfValid,
+        submitMode: StandardSubmitMode(
+          submitText: 'Envoyer',
+          disableSubmitMode: DisableSubmitButton.whenInvalid,
+        ),
       ),
       inputs: [
         SelectInput<ReportType>(

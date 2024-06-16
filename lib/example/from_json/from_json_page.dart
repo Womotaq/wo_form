@@ -14,8 +14,10 @@ class FromJsonPage extends StatelessWidget {
     return const WoForm(
       uiSettings: WoFormUiSettings(
         titleText: 'Import de formulaire',
-        submitText: 'Ouvrir le formulaire',
-        submitMode: WoFormSubmitMode.submitIfValid,
+        submitMode: StandardSubmitMode(
+          submitText: 'Ouvrir le formulaire',
+          disableSubmitMode: DisableSubmitButton.whenInvalid,
+        ),
       ),
       inputs: [
         StringInput(

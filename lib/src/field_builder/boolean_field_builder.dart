@@ -79,23 +79,29 @@ class BooleanField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final inputDecorationTheme = Theme.of(context).inputDecorationTheme;
+    final theme = Theme.of(context);
+    final inputDecorationTheme = theme.inputDecorationTheme;
 
     return buildTile(
       value: data.value ?? false,
       controlAffinity:
           data.uiSettings.controlAffinity ?? ListTileControlAffinity.platform,
-      title: Text(data.uiSettings.labelText ?? ''),
+      title: Text(
+        data.uiSettings.labelText ?? '',
+        style: inputDecorationTheme.labelStyle,
+      ),
       subtitle: data.errorText != null
           ? Text(
               data.errorText!,
-              style: TextStyle(color: Theme.of(context).colorScheme.error)
-                  .merge(inputDecorationTheme.errorStyle),
+              style: inputDecorationTheme.errorStyle ??
+                  theme.textTheme.labelMedium
+                      ?.copyWith(color: theme.colorScheme.error),
             )
           : (data.uiSettings.helperText ?? '').isNotEmpty
               ? Text(
                   data.uiSettings.helperText ?? '',
-                  style: inputDecorationTheme.helperStyle,
+                  style: inputDecorationTheme.helperStyle ??
+                      theme.textTheme.labelMedium,
                 )
               : null,
     );

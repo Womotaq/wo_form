@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:package_atomic_design/package_atomic_design.dart';
 
 class InputHeader extends StatelessWidget {
   const InputHeader({
@@ -11,36 +10,35 @@ class InputHeader extends StatelessWidget {
 
   final String labelText;
   final String helperText;
-  final String errorText; // TODO : below box ?
+  final String errorText;
 
   @override
   Widget build(BuildContext context) {
-    final inputDecorationTheme = Theme.of(context).inputDecorationTheme;
+    final theme = Theme.of(context);
+    final inputDecorationTheme = theme.inputDecorationTheme;
 
-    final showSubtitle = helperText.isNotEmpty || errorText.isNotEmpty;
+    if (labelText.isEmpty && errorText.isEmpty && helperText.isEmpty) {
+      return const SizedBox.shrink();
+    }
 
-    return WoPadding.horizontalMedium(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (labelText.isNotEmpty || showSubtitle) WoGap.medium,
-          if (labelText.isNotEmpty)
-            Text(
-              labelText,
-              style: inputDecorationTheme.labelStyle,
-            ),
-          if (errorText.isNotEmpty)
-            Text(
+    return ListTile(
+      title: Text(labelText),
+      subtitle: errorText.isNotEmpty
+          ? Text(
               errorText,
-              style: inputDecorationTheme.errorStyle,
+              style: inputDecorationTheme.errorStyle ??
+                  theme.textTheme.labelMedium
+                      ?.copyWith(color: theme.colorScheme.error),
             )
-          else if (helperText.isNotEmpty)
-            Text(
-              helperText,
-              style: inputDecorationTheme.helperStyle,
-            ),
-        ],
-      ),
+          : helperText.isNotEmpty
+              ? Text(
+                  helperText,
+                  style: inputDecorationTheme.helperStyle ??
+                      theme.textTheme.labelMedium,
+                )
+              : null,
+      minTileHeight: 0,
+      minVerticalPadding: 0,
     );
   }
 }

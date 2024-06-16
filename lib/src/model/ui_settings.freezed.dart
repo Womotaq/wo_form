@@ -1423,518 +1423,19 @@ abstract class _StringInputUiSettings extends StringInputUiSettings {
       get copyWith => throw _privateConstructorUsedError;
 }
 
-WoFormDisplayMode _$WoFormDisplayModeFromJson(Map<String, dynamic> json) {
-  switch (json['runtimeType']) {
-    case 'card':
-      return WoFormDisplayedInCard.fromJson(json);
-    case 'page':
-      return WoFormDisplayedInPage.fromJson(json);
-    case 'pages':
-      return WoFormDisplayedInPages.fromJson(json);
-
-    default:
-      throw CheckedFromJsonException(json, 'runtimeType', 'WoFormDisplayMode',
-          'Invalid union type "${json['runtimeType']}"!');
-  }
-}
-
-/// @nodoc
-mixin _$WoFormDisplayMode {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() card,
-    required TResult Function() page,
-    required TResult Function(String? nextText) pages,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? card,
-    TResult? Function()? page,
-    TResult? Function(String? nextText)? pages,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? card,
-    TResult Function()? page,
-    TResult Function(String? nextText)? pages,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(WoFormDisplayedInCard value) card,
-    required TResult Function(WoFormDisplayedInPage value) page,
-    required TResult Function(WoFormDisplayedInPages value) pages,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(WoFormDisplayedInCard value)? card,
-    TResult? Function(WoFormDisplayedInPage value)? page,
-    TResult? Function(WoFormDisplayedInPages value)? pages,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(WoFormDisplayedInCard value)? card,
-    TResult Function(WoFormDisplayedInPage value)? page,
-    TResult Function(WoFormDisplayedInPages value)? pages,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $WoFormDisplayModeCopyWith<$Res> {
-  factory $WoFormDisplayModeCopyWith(
-          WoFormDisplayMode value, $Res Function(WoFormDisplayMode) then) =
-      _$WoFormDisplayModeCopyWithImpl<$Res, WoFormDisplayMode>;
-}
-
-/// @nodoc
-class _$WoFormDisplayModeCopyWithImpl<$Res, $Val extends WoFormDisplayMode>
-    implements $WoFormDisplayModeCopyWith<$Res> {
-  _$WoFormDisplayModeCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$WoFormDisplayedInCardImplCopyWith<$Res> {
-  factory _$$WoFormDisplayedInCardImplCopyWith(
-          _$WoFormDisplayedInCardImpl value,
-          $Res Function(_$WoFormDisplayedInCardImpl) then) =
-      __$$WoFormDisplayedInCardImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$WoFormDisplayedInCardImplCopyWithImpl<$Res>
-    extends _$WoFormDisplayModeCopyWithImpl<$Res, _$WoFormDisplayedInCardImpl>
-    implements _$$WoFormDisplayedInCardImplCopyWith<$Res> {
-  __$$WoFormDisplayedInCardImplCopyWithImpl(_$WoFormDisplayedInCardImpl _value,
-      $Res Function(_$WoFormDisplayedInCardImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$WoFormDisplayedInCardImpl implements WoFormDisplayedInCard {
-  const _$WoFormDisplayedInCardImpl({final String? $type})
-      : $type = $type ?? 'card';
-
-  factory _$WoFormDisplayedInCardImpl.fromJson(Map<String, dynamic> json) =>
-      _$$WoFormDisplayedInCardImplFromJson(json);
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
-
-  @override
-  String toString() {
-    return 'WoFormDisplayMode.card()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$WoFormDisplayedInCardImpl);
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() card,
-    required TResult Function() page,
-    required TResult Function(String? nextText) pages,
-  }) {
-    return card();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? card,
-    TResult? Function()? page,
-    TResult? Function(String? nextText)? pages,
-  }) {
-    return card?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? card,
-    TResult Function()? page,
-    TResult Function(String? nextText)? pages,
-    required TResult orElse(),
-  }) {
-    if (card != null) {
-      return card();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(WoFormDisplayedInCard value) card,
-    required TResult Function(WoFormDisplayedInPage value) page,
-    required TResult Function(WoFormDisplayedInPages value) pages,
-  }) {
-    return card(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(WoFormDisplayedInCard value)? card,
-    TResult? Function(WoFormDisplayedInPage value)? page,
-    TResult? Function(WoFormDisplayedInPages value)? pages,
-  }) {
-    return card?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(WoFormDisplayedInCard value)? card,
-    TResult Function(WoFormDisplayedInPage value)? page,
-    TResult Function(WoFormDisplayedInPages value)? pages,
-    required TResult orElse(),
-  }) {
-    if (card != null) {
-      return card(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$WoFormDisplayedInCardImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class WoFormDisplayedInCard implements WoFormDisplayMode {
-  const factory WoFormDisplayedInCard() = _$WoFormDisplayedInCardImpl;
-
-  factory WoFormDisplayedInCard.fromJson(Map<String, dynamic> json) =
-      _$WoFormDisplayedInCardImpl.fromJson;
-}
-
-/// @nodoc
-abstract class _$$WoFormDisplayedInPageImplCopyWith<$Res> {
-  factory _$$WoFormDisplayedInPageImplCopyWith(
-          _$WoFormDisplayedInPageImpl value,
-          $Res Function(_$WoFormDisplayedInPageImpl) then) =
-      __$$WoFormDisplayedInPageImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$WoFormDisplayedInPageImplCopyWithImpl<$Res>
-    extends _$WoFormDisplayModeCopyWithImpl<$Res, _$WoFormDisplayedInPageImpl>
-    implements _$$WoFormDisplayedInPageImplCopyWith<$Res> {
-  __$$WoFormDisplayedInPageImplCopyWithImpl(_$WoFormDisplayedInPageImpl _value,
-      $Res Function(_$WoFormDisplayedInPageImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$WoFormDisplayedInPageImpl implements WoFormDisplayedInPage {
-  const _$WoFormDisplayedInPageImpl({final String? $type})
-      : $type = $type ?? 'page';
-
-  factory _$WoFormDisplayedInPageImpl.fromJson(Map<String, dynamic> json) =>
-      _$$WoFormDisplayedInPageImplFromJson(json);
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
-
-  @override
-  String toString() {
-    return 'WoFormDisplayMode.page()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$WoFormDisplayedInPageImpl);
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() card,
-    required TResult Function() page,
-    required TResult Function(String? nextText) pages,
-  }) {
-    return page();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? card,
-    TResult? Function()? page,
-    TResult? Function(String? nextText)? pages,
-  }) {
-    return page?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? card,
-    TResult Function()? page,
-    TResult Function(String? nextText)? pages,
-    required TResult orElse(),
-  }) {
-    if (page != null) {
-      return page();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(WoFormDisplayedInCard value) card,
-    required TResult Function(WoFormDisplayedInPage value) page,
-    required TResult Function(WoFormDisplayedInPages value) pages,
-  }) {
-    return page(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(WoFormDisplayedInCard value)? card,
-    TResult? Function(WoFormDisplayedInPage value)? page,
-    TResult? Function(WoFormDisplayedInPages value)? pages,
-  }) {
-    return page?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(WoFormDisplayedInCard value)? card,
-    TResult Function(WoFormDisplayedInPage value)? page,
-    TResult Function(WoFormDisplayedInPages value)? pages,
-    required TResult orElse(),
-  }) {
-    if (page != null) {
-      return page(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$WoFormDisplayedInPageImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class WoFormDisplayedInPage implements WoFormDisplayMode {
-  const factory WoFormDisplayedInPage() = _$WoFormDisplayedInPageImpl;
-
-  factory WoFormDisplayedInPage.fromJson(Map<String, dynamic> json) =
-      _$WoFormDisplayedInPageImpl.fromJson;
-}
-
-/// @nodoc
-abstract class _$$WoFormDisplayedInPagesImplCopyWith<$Res> {
-  factory _$$WoFormDisplayedInPagesImplCopyWith(
-          _$WoFormDisplayedInPagesImpl value,
-          $Res Function(_$WoFormDisplayedInPagesImpl) then) =
-      __$$WoFormDisplayedInPagesImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String? nextText});
-}
-
-/// @nodoc
-class __$$WoFormDisplayedInPagesImplCopyWithImpl<$Res>
-    extends _$WoFormDisplayModeCopyWithImpl<$Res, _$WoFormDisplayedInPagesImpl>
-    implements _$$WoFormDisplayedInPagesImplCopyWith<$Res> {
-  __$$WoFormDisplayedInPagesImplCopyWithImpl(
-      _$WoFormDisplayedInPagesImpl _value,
-      $Res Function(_$WoFormDisplayedInPagesImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? nextText = freezed,
-  }) {
-    return _then(_$WoFormDisplayedInPagesImpl(
-      nextText: freezed == nextText
-          ? _value.nextText
-          : nextText // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$WoFormDisplayedInPagesImpl implements WoFormDisplayedInPages {
-  const _$WoFormDisplayedInPagesImpl({this.nextText, final String? $type})
-      : $type = $type ?? 'pages';
-
-  factory _$WoFormDisplayedInPagesImpl.fromJson(Map<String, dynamic> json) =>
-      _$$WoFormDisplayedInPagesImplFromJson(json);
-
-  @override
-  final String? nextText;
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
-
-  @override
-  String toString() {
-    return 'WoFormDisplayMode.pages(nextText: $nextText)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$WoFormDisplayedInPagesImpl &&
-            (identical(other.nextText, nextText) ||
-                other.nextText == nextText));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, nextText);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$WoFormDisplayedInPagesImplCopyWith<_$WoFormDisplayedInPagesImpl>
-      get copyWith => __$$WoFormDisplayedInPagesImplCopyWithImpl<
-          _$WoFormDisplayedInPagesImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() card,
-    required TResult Function() page,
-    required TResult Function(String? nextText) pages,
-  }) {
-    return pages(nextText);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? card,
-    TResult? Function()? page,
-    TResult? Function(String? nextText)? pages,
-  }) {
-    return pages?.call(nextText);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? card,
-    TResult Function()? page,
-    TResult Function(String? nextText)? pages,
-    required TResult orElse(),
-  }) {
-    if (pages != null) {
-      return pages(nextText);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(WoFormDisplayedInCard value) card,
-    required TResult Function(WoFormDisplayedInPage value) page,
-    required TResult Function(WoFormDisplayedInPages value) pages,
-  }) {
-    return pages(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(WoFormDisplayedInCard value)? card,
-    TResult? Function(WoFormDisplayedInPage value)? page,
-    TResult? Function(WoFormDisplayedInPages value)? pages,
-  }) {
-    return pages?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(WoFormDisplayedInCard value)? card,
-    TResult Function(WoFormDisplayedInPage value)? page,
-    TResult Function(WoFormDisplayedInPages value)? pages,
-    required TResult orElse(),
-  }) {
-    if (pages != null) {
-      return pages(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$WoFormDisplayedInPagesImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class WoFormDisplayedInPages implements WoFormDisplayMode {
-  const factory WoFormDisplayedInPages({final String? nextText}) =
-      _$WoFormDisplayedInPagesImpl;
-
-  factory WoFormDisplayedInPages.fromJson(Map<String, dynamic> json) =
-      _$WoFormDisplayedInPagesImpl.fromJson;
-
-  String? get nextText;
-  @JsonKey(ignore: true)
-  _$$WoFormDisplayedInPagesImplCopyWith<_$WoFormDisplayedInPagesImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
 WoFormUiSettings _$WoFormUiSettingsFromJson(Map<String, dynamic> json) {
   return _WoFormUiSettings.fromJson(json);
 }
 
 /// @nodoc
 mixin _$WoFormUiSettings {
-  String? get titleText => throw _privateConstructorUsedError;
-  String? get submitText => throw _privateConstructorUsedError;
-  String? get submittedText => throw _privateConstructorUsedError;
-  @JsonKey(toJson: WoFormDisplayMode.staticToJson)
-  WoFormDisplayMode? get displayMode => throw _privateConstructorUsedError;
-  WoFormSubmitMode? get submitMode => throw _privateConstructorUsedError;
+  String get titleText => throw _privateConstructorUsedError;
+  WoFormTitlePosition get titlePosition => throw _privateConstructorUsedError;
+  @JsonKey(toJson: WoFormSubmitMode.staticToJson)
+  WoFormSubmitMode get submitMode => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  SubmitButtonBuilderDef? get submitButtonBuilder =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1949,14 +1450,14 @@ abstract class $WoFormUiSettingsCopyWith<$Res> {
       _$WoFormUiSettingsCopyWithImpl<$Res, WoFormUiSettings>;
   @useResult
   $Res call(
-      {String? titleText,
-      String? submitText,
-      String? submittedText,
-      @JsonKey(toJson: WoFormDisplayMode.staticToJson)
-      WoFormDisplayMode? displayMode,
-      WoFormSubmitMode? submitMode});
+      {String titleText,
+      WoFormTitlePosition titlePosition,
+      @JsonKey(toJson: WoFormSubmitMode.staticToJson)
+      WoFormSubmitMode submitMode,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      SubmitButtonBuilderDef? submitButtonBuilder});
 
-  $WoFormDisplayModeCopyWith<$Res>? get displayMode;
+  $WoFormSubmitModeCopyWith<$Res> get submitMode;
 }
 
 /// @nodoc
@@ -1972,45 +1473,36 @@ class _$WoFormUiSettingsCopyWithImpl<$Res, $Val extends WoFormUiSettings>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? titleText = freezed,
-    Object? submitText = freezed,
-    Object? submittedText = freezed,
-    Object? displayMode = freezed,
-    Object? submitMode = freezed,
+    Object? titleText = null,
+    Object? titlePosition = null,
+    Object? submitMode = null,
+    Object? submitButtonBuilder = freezed,
   }) {
     return _then(_value.copyWith(
-      titleText: freezed == titleText
+      titleText: null == titleText
           ? _value.titleText
           : titleText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      submitText: freezed == submitText
-          ? _value.submitText
-          : submitText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      submittedText: freezed == submittedText
-          ? _value.submittedText
-          : submittedText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      displayMode: freezed == displayMode
-          ? _value.displayMode
-          : displayMode // ignore: cast_nullable_to_non_nullable
-              as WoFormDisplayMode?,
-      submitMode: freezed == submitMode
+              as String,
+      titlePosition: null == titlePosition
+          ? _value.titlePosition
+          : titlePosition // ignore: cast_nullable_to_non_nullable
+              as WoFormTitlePosition,
+      submitMode: null == submitMode
           ? _value.submitMode
           : submitMode // ignore: cast_nullable_to_non_nullable
-              as WoFormSubmitMode?,
+              as WoFormSubmitMode,
+      submitButtonBuilder: freezed == submitButtonBuilder
+          ? _value.submitButtonBuilder
+          : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
+              as SubmitButtonBuilderDef?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $WoFormDisplayModeCopyWith<$Res>? get displayMode {
-    if (_value.displayMode == null) {
-      return null;
-    }
-
-    return $WoFormDisplayModeCopyWith<$Res>(_value.displayMode!, (value) {
-      return _then(_value.copyWith(displayMode: value) as $Val);
+  $WoFormSubmitModeCopyWith<$Res> get submitMode {
+    return $WoFormSubmitModeCopyWith<$Res>(_value.submitMode, (value) {
+      return _then(_value.copyWith(submitMode: value) as $Val);
     });
   }
 }
@@ -2024,15 +1516,15 @@ abstract class _$$WoFormUiSettingsImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? titleText,
-      String? submitText,
-      String? submittedText,
-      @JsonKey(toJson: WoFormDisplayMode.staticToJson)
-      WoFormDisplayMode? displayMode,
-      WoFormSubmitMode? submitMode});
+      {String titleText,
+      WoFormTitlePosition titlePosition,
+      @JsonKey(toJson: WoFormSubmitMode.staticToJson)
+      WoFormSubmitMode submitMode,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      SubmitButtonBuilderDef? submitButtonBuilder});
 
   @override
-  $WoFormDisplayModeCopyWith<$Res>? get displayMode;
+  $WoFormSubmitModeCopyWith<$Res> get submitMode;
 }
 
 /// @nodoc
@@ -2046,33 +1538,28 @@ class __$$WoFormUiSettingsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? titleText = freezed,
-    Object? submitText = freezed,
-    Object? submittedText = freezed,
-    Object? displayMode = freezed,
-    Object? submitMode = freezed,
+    Object? titleText = null,
+    Object? titlePosition = null,
+    Object? submitMode = null,
+    Object? submitButtonBuilder = freezed,
   }) {
     return _then(_$WoFormUiSettingsImpl(
-      titleText: freezed == titleText
+      titleText: null == titleText
           ? _value.titleText
           : titleText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      submitText: freezed == submitText
-          ? _value.submitText
-          : submitText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      submittedText: freezed == submittedText
-          ? _value.submittedText
-          : submittedText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      displayMode: freezed == displayMode
-          ? _value.displayMode
-          : displayMode // ignore: cast_nullable_to_non_nullable
-              as WoFormDisplayMode?,
-      submitMode: freezed == submitMode
+              as String,
+      titlePosition: null == titlePosition
+          ? _value.titlePosition
+          : titlePosition // ignore: cast_nullable_to_non_nullable
+              as WoFormTitlePosition,
+      submitMode: null == submitMode
           ? _value.submitMode
           : submitMode // ignore: cast_nullable_to_non_nullable
-              as WoFormSubmitMode?,
+              as WoFormSubmitMode,
+      submitButtonBuilder: freezed == submitButtonBuilder
+          ? _value.submitButtonBuilder
+          : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
+              as SubmitButtonBuilderDef?,
     ));
   }
 }
@@ -2081,31 +1568,33 @@ class __$$WoFormUiSettingsImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$WoFormUiSettingsImpl extends _WoFormUiSettings {
   const _$WoFormUiSettingsImpl(
-      {this.titleText,
-      this.submitText,
-      this.submittedText,
-      @JsonKey(toJson: WoFormDisplayMode.staticToJson) this.displayMode,
-      this.submitMode})
+      {this.titleText = '',
+      this.titlePosition = WoFormTitlePosition.header,
+      @JsonKey(toJson: WoFormSubmitMode.staticToJson)
+      this.submitMode = const WoFormSubmitMode.standard(),
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      this.submitButtonBuilder})
       : super._();
 
   factory _$WoFormUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$WoFormUiSettingsImplFromJson(json);
 
   @override
-  final String? titleText;
+  @JsonKey()
+  final String titleText;
   @override
-  final String? submitText;
+  @JsonKey()
+  final WoFormTitlePosition titlePosition;
   @override
-  final String? submittedText;
+  @JsonKey(toJson: WoFormSubmitMode.staticToJson)
+  final WoFormSubmitMode submitMode;
   @override
-  @JsonKey(toJson: WoFormDisplayMode.staticToJson)
-  final WoFormDisplayMode? displayMode;
-  @override
-  final WoFormSubmitMode? submitMode;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final SubmitButtonBuilderDef? submitButtonBuilder;
 
   @override
   String toString() {
-    return 'WoFormUiSettings(titleText: $titleText, submitText: $submitText, submittedText: $submittedText, displayMode: $displayMode, submitMode: $submitMode)';
+    return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, submitMode: $submitMode, submitButtonBuilder: $submitButtonBuilder)';
   }
 
   @override
@@ -2115,20 +1604,18 @@ class _$WoFormUiSettingsImpl extends _WoFormUiSettings {
             other is _$WoFormUiSettingsImpl &&
             (identical(other.titleText, titleText) ||
                 other.titleText == titleText) &&
-            (identical(other.submitText, submitText) ||
-                other.submitText == submitText) &&
-            (identical(other.submittedText, submittedText) ||
-                other.submittedText == submittedText) &&
-            (identical(other.displayMode, displayMode) ||
-                other.displayMode == displayMode) &&
+            (identical(other.titlePosition, titlePosition) ||
+                other.titlePosition == titlePosition) &&
             (identical(other.submitMode, submitMode) ||
-                other.submitMode == submitMode));
+                other.submitMode == submitMode) &&
+            (identical(other.submitButtonBuilder, submitButtonBuilder) ||
+                other.submitButtonBuilder == submitButtonBuilder));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, titleText, submitText,
-      submittedText, displayMode, submitMode);
+  int get hashCode => Object.hash(
+      runtimeType, titleText, titlePosition, submitMode, submitButtonBuilder);
 
   @JsonKey(ignore: true)
   @override
@@ -2147,30 +1634,559 @@ class _$WoFormUiSettingsImpl extends _WoFormUiSettings {
 
 abstract class _WoFormUiSettings extends WoFormUiSettings {
   const factory _WoFormUiSettings(
-      {final String? titleText,
-      final String? submitText,
-      final String? submittedText,
-      @JsonKey(toJson: WoFormDisplayMode.staticToJson)
-      final WoFormDisplayMode? displayMode,
-      final WoFormSubmitMode? submitMode}) = _$WoFormUiSettingsImpl;
+          {final String titleText,
+          final WoFormTitlePosition titlePosition,
+          @JsonKey(toJson: WoFormSubmitMode.staticToJson)
+          final WoFormSubmitMode submitMode,
+          @JsonKey(includeToJson: false, includeFromJson: false)
+          final SubmitButtonBuilderDef? submitButtonBuilder}) =
+      _$WoFormUiSettingsImpl;
   const _WoFormUiSettings._() : super._();
 
   factory _WoFormUiSettings.fromJson(Map<String, dynamic> json) =
       _$WoFormUiSettingsImpl.fromJson;
 
   @override
-  String? get titleText;
+  String get titleText;
   @override
-  String? get submitText;
+  WoFormTitlePosition get titlePosition;
   @override
-  String? get submittedText;
+  @JsonKey(toJson: WoFormSubmitMode.staticToJson)
+  WoFormSubmitMode get submitMode;
   @override
-  @JsonKey(toJson: WoFormDisplayMode.staticToJson)
-  WoFormDisplayMode? get displayMode;
-  @override
-  WoFormSubmitMode? get submitMode;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  SubmitButtonBuilderDef? get submitButtonBuilder;
   @override
   @JsonKey(ignore: true)
   _$$WoFormUiSettingsImplCopyWith<_$WoFormUiSettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+WoFormSubmitMode _$WoFormSubmitModeFromJson(Map<String, dynamic> json) {
+  switch (json['runtimeType']) {
+    case 'standard':
+      return StandardSubmitMode.fromJson(json);
+    case 'pageByPage':
+      return PageByPageSubmitMode.fromJson(json);
+
+    default:
+      throw CheckedFromJsonException(json, 'runtimeType', 'WoFormSubmitMode',
+          'Invalid union type "${json['runtimeType']}"!');
+  }
+}
+
+/// @nodoc
+mixin _$WoFormSubmitMode {
+  String? get submitText => throw _privateConstructorUsedError;
+  DisableSubmitButton get disableSubmitMode =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String? submitText,
+            DisableSubmitButton disableSubmitMode,
+            SubmitButtonPosition buttonPosition)
+        standard,
+    required TResult Function(String? submitText, String? nextText,
+            DisableSubmitButton disableSubmitMode)
+        pageByPage,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? submitText, DisableSubmitButton disableSubmitMode,
+            SubmitButtonPosition buttonPosition)?
+        standard,
+    TResult? Function(String? submitText, String? nextText,
+            DisableSubmitButton disableSubmitMode)?
+        pageByPage,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? submitText, DisableSubmitButton disableSubmitMode,
+            SubmitButtonPosition buttonPosition)?
+        standard,
+    TResult Function(String? submitText, String? nextText,
+            DisableSubmitButton disableSubmitMode)?
+        pageByPage,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(StandardSubmitMode value) standard,
+    required TResult Function(PageByPageSubmitMode value) pageByPage,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(StandardSubmitMode value)? standard,
+    TResult? Function(PageByPageSubmitMode value)? pageByPage,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(StandardSubmitMode value)? standard,
+    TResult Function(PageByPageSubmitMode value)? pageByPage,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $WoFormSubmitModeCopyWith<WoFormSubmitMode> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $WoFormSubmitModeCopyWith<$Res> {
+  factory $WoFormSubmitModeCopyWith(
+          WoFormSubmitMode value, $Res Function(WoFormSubmitMode) then) =
+      _$WoFormSubmitModeCopyWithImpl<$Res, WoFormSubmitMode>;
+  @useResult
+  $Res call({String? submitText, DisableSubmitButton disableSubmitMode});
+}
+
+/// @nodoc
+class _$WoFormSubmitModeCopyWithImpl<$Res, $Val extends WoFormSubmitMode>
+    implements $WoFormSubmitModeCopyWith<$Res> {
+  _$WoFormSubmitModeCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? submitText = freezed,
+    Object? disableSubmitMode = null,
+  }) {
+    return _then(_value.copyWith(
+      submitText: freezed == submitText
+          ? _value.submitText
+          : submitText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      disableSubmitMode: null == disableSubmitMode
+          ? _value.disableSubmitMode
+          : disableSubmitMode // ignore: cast_nullable_to_non_nullable
+              as DisableSubmitButton,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$StandardSubmitModeImplCopyWith<$Res>
+    implements $WoFormSubmitModeCopyWith<$Res> {
+  factory _$$StandardSubmitModeImplCopyWith(_$StandardSubmitModeImpl value,
+          $Res Function(_$StandardSubmitModeImpl) then) =
+      __$$StandardSubmitModeImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String? submitText,
+      DisableSubmitButton disableSubmitMode,
+      SubmitButtonPosition buttonPosition});
+}
+
+/// @nodoc
+class __$$StandardSubmitModeImplCopyWithImpl<$Res>
+    extends _$WoFormSubmitModeCopyWithImpl<$Res, _$StandardSubmitModeImpl>
+    implements _$$StandardSubmitModeImplCopyWith<$Res> {
+  __$$StandardSubmitModeImplCopyWithImpl(_$StandardSubmitModeImpl _value,
+      $Res Function(_$StandardSubmitModeImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? submitText = freezed,
+    Object? disableSubmitMode = null,
+    Object? buttonPosition = null,
+  }) {
+    return _then(_$StandardSubmitModeImpl(
+      submitText: freezed == submitText
+          ? _value.submitText
+          : submitText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      disableSubmitMode: null == disableSubmitMode
+          ? _value.disableSubmitMode
+          : disableSubmitMode // ignore: cast_nullable_to_non_nullable
+              as DisableSubmitButton,
+      buttonPosition: null == buttonPosition
+          ? _value.buttonPosition
+          : buttonPosition // ignore: cast_nullable_to_non_nullable
+              as SubmitButtonPosition,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$StandardSubmitModeImpl extends StandardSubmitMode {
+  const _$StandardSubmitModeImpl(
+      {this.submitText,
+      this.disableSubmitMode = DisableSubmitButton.never,
+      this.buttonPosition = SubmitButtonPosition.footer,
+      final String? $type})
+      : $type = $type ?? 'standard',
+        super._();
+
+  factory _$StandardSubmitModeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$StandardSubmitModeImplFromJson(json);
+
+  @override
+  final String? submitText;
+  @override
+  @JsonKey()
+  final DisableSubmitButton disableSubmitMode;
+  @override
+  @JsonKey()
+  final SubmitButtonPosition buttonPosition;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'WoFormSubmitMode.standard(submitText: $submitText, disableSubmitMode: $disableSubmitMode, buttonPosition: $buttonPosition)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$StandardSubmitModeImpl &&
+            (identical(other.submitText, submitText) ||
+                other.submitText == submitText) &&
+            (identical(other.disableSubmitMode, disableSubmitMode) ||
+                other.disableSubmitMode == disableSubmitMode) &&
+            (identical(other.buttonPosition, buttonPosition) ||
+                other.buttonPosition == buttonPosition));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, submitText, disableSubmitMode, buttonPosition);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$StandardSubmitModeImplCopyWith<_$StandardSubmitModeImpl> get copyWith =>
+      __$$StandardSubmitModeImplCopyWithImpl<_$StandardSubmitModeImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String? submitText,
+            DisableSubmitButton disableSubmitMode,
+            SubmitButtonPosition buttonPosition)
+        standard,
+    required TResult Function(String? submitText, String? nextText,
+            DisableSubmitButton disableSubmitMode)
+        pageByPage,
+  }) {
+    return standard(submitText, disableSubmitMode, buttonPosition);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? submitText, DisableSubmitButton disableSubmitMode,
+            SubmitButtonPosition buttonPosition)?
+        standard,
+    TResult? Function(String? submitText, String? nextText,
+            DisableSubmitButton disableSubmitMode)?
+        pageByPage,
+  }) {
+    return standard?.call(submitText, disableSubmitMode, buttonPosition);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? submitText, DisableSubmitButton disableSubmitMode,
+            SubmitButtonPosition buttonPosition)?
+        standard,
+    TResult Function(String? submitText, String? nextText,
+            DisableSubmitButton disableSubmitMode)?
+        pageByPage,
+    required TResult orElse(),
+  }) {
+    if (standard != null) {
+      return standard(submitText, disableSubmitMode, buttonPosition);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(StandardSubmitMode value) standard,
+    required TResult Function(PageByPageSubmitMode value) pageByPage,
+  }) {
+    return standard(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(StandardSubmitMode value)? standard,
+    TResult? Function(PageByPageSubmitMode value)? pageByPage,
+  }) {
+    return standard?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(StandardSubmitMode value)? standard,
+    TResult Function(PageByPageSubmitMode value)? pageByPage,
+    required TResult orElse(),
+  }) {
+    if (standard != null) {
+      return standard(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$StandardSubmitModeImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class StandardSubmitMode extends WoFormSubmitMode {
+  const factory StandardSubmitMode(
+      {final String? submitText,
+      final DisableSubmitButton disableSubmitMode,
+      final SubmitButtonPosition buttonPosition}) = _$StandardSubmitModeImpl;
+  const StandardSubmitMode._() : super._();
+
+  factory StandardSubmitMode.fromJson(Map<String, dynamic> json) =
+      _$StandardSubmitModeImpl.fromJson;
+
+  @override
+  String? get submitText;
+  @override
+  DisableSubmitButton get disableSubmitMode;
+  SubmitButtonPosition get buttonPosition;
+  @override
+  @JsonKey(ignore: true)
+  _$$StandardSubmitModeImplCopyWith<_$StandardSubmitModeImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$PageByPageSubmitModeImplCopyWith<$Res>
+    implements $WoFormSubmitModeCopyWith<$Res> {
+  factory _$$PageByPageSubmitModeImplCopyWith(_$PageByPageSubmitModeImpl value,
+          $Res Function(_$PageByPageSubmitModeImpl) then) =
+      __$$PageByPageSubmitModeImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String? submitText,
+      String? nextText,
+      DisableSubmitButton disableSubmitMode});
+}
+
+/// @nodoc
+class __$$PageByPageSubmitModeImplCopyWithImpl<$Res>
+    extends _$WoFormSubmitModeCopyWithImpl<$Res, _$PageByPageSubmitModeImpl>
+    implements _$$PageByPageSubmitModeImplCopyWith<$Res> {
+  __$$PageByPageSubmitModeImplCopyWithImpl(_$PageByPageSubmitModeImpl _value,
+      $Res Function(_$PageByPageSubmitModeImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? submitText = freezed,
+    Object? nextText = freezed,
+    Object? disableSubmitMode = null,
+  }) {
+    return _then(_$PageByPageSubmitModeImpl(
+      submitText: freezed == submitText
+          ? _value.submitText
+          : submitText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      nextText: freezed == nextText
+          ? _value.nextText
+          : nextText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      disableSubmitMode: null == disableSubmitMode
+          ? _value.disableSubmitMode
+          : disableSubmitMode // ignore: cast_nullable_to_non_nullable
+              as DisableSubmitButton,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$PageByPageSubmitModeImpl extends PageByPageSubmitMode {
+  const _$PageByPageSubmitModeImpl(
+      {this.submitText,
+      this.nextText,
+      this.disableSubmitMode = DisableSubmitButton.never,
+      final String? $type})
+      : $type = $type ?? 'pageByPage',
+        super._();
+
+  factory _$PageByPageSubmitModeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PageByPageSubmitModeImplFromJson(json);
+
+  @override
+  final String? submitText;
+  @override
+  final String? nextText;
+  @override
+  @JsonKey()
+  final DisableSubmitButton disableSubmitMode;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'WoFormSubmitMode.pageByPage(submitText: $submitText, nextText: $nextText, disableSubmitMode: $disableSubmitMode)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PageByPageSubmitModeImpl &&
+            (identical(other.submitText, submitText) ||
+                other.submitText == submitText) &&
+            (identical(other.nextText, nextText) ||
+                other.nextText == nextText) &&
+            (identical(other.disableSubmitMode, disableSubmitMode) ||
+                other.disableSubmitMode == disableSubmitMode));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, submitText, nextText, disableSubmitMode);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PageByPageSubmitModeImplCopyWith<_$PageByPageSubmitModeImpl>
+      get copyWith =>
+          __$$PageByPageSubmitModeImplCopyWithImpl<_$PageByPageSubmitModeImpl>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String? submitText,
+            DisableSubmitButton disableSubmitMode,
+            SubmitButtonPosition buttonPosition)
+        standard,
+    required TResult Function(String? submitText, String? nextText,
+            DisableSubmitButton disableSubmitMode)
+        pageByPage,
+  }) {
+    return pageByPage(submitText, nextText, disableSubmitMode);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? submitText, DisableSubmitButton disableSubmitMode,
+            SubmitButtonPosition buttonPosition)?
+        standard,
+    TResult? Function(String? submitText, String? nextText,
+            DisableSubmitButton disableSubmitMode)?
+        pageByPage,
+  }) {
+    return pageByPage?.call(submitText, nextText, disableSubmitMode);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? submitText, DisableSubmitButton disableSubmitMode,
+            SubmitButtonPosition buttonPosition)?
+        standard,
+    TResult Function(String? submitText, String? nextText,
+            DisableSubmitButton disableSubmitMode)?
+        pageByPage,
+    required TResult orElse(),
+  }) {
+    if (pageByPage != null) {
+      return pageByPage(submitText, nextText, disableSubmitMode);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(StandardSubmitMode value) standard,
+    required TResult Function(PageByPageSubmitMode value) pageByPage,
+  }) {
+    return pageByPage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(StandardSubmitMode value)? standard,
+    TResult? Function(PageByPageSubmitMode value)? pageByPage,
+  }) {
+    return pageByPage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(StandardSubmitMode value)? standard,
+    TResult Function(PageByPageSubmitMode value)? pageByPage,
+    required TResult orElse(),
+  }) {
+    if (pageByPage != null) {
+      return pageByPage(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$PageByPageSubmitModeImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class PageByPageSubmitMode extends WoFormSubmitMode {
+  const factory PageByPageSubmitMode(
+          {final String? submitText,
+          final String? nextText,
+          final DisableSubmitButton disableSubmitMode}) =
+      _$PageByPageSubmitModeImpl;
+  const PageByPageSubmitMode._() : super._();
+
+  factory PageByPageSubmitMode.fromJson(Map<String, dynamic> json) =
+      _$PageByPageSubmitModeImpl.fromJson;
+
+  @override
+  String? get submitText;
+  String? get nextText;
+  @override
+  DisableSubmitButton get disableSubmitMode;
+  @override
+  @JsonKey(ignore: true)
+  _$$PageByPageSubmitModeImplCopyWith<_$PageByPageSubmitModeImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

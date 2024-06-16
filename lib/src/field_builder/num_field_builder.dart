@@ -96,7 +96,8 @@ class _NumFieldState extends State<NumField> {
 
   @override
   Widget build(BuildContext context) {
-    final inputDecorationTheme = Theme.of(context).inputDecorationTheme;
+    final theme = Theme.of(context);
+    final inputDecorationTheme = theme.inputDecorationTheme;
 
     return ListTile(
       title: Text(
@@ -106,12 +107,15 @@ class _NumFieldState extends State<NumField> {
       subtitle: widget.data.errorText != null
           ? Text(
               widget.data.errorText!,
-              style: inputDecorationTheme.errorStyle,
+              style: inputDecorationTheme.errorStyle ??
+                  theme.textTheme.labelMedium
+                      ?.copyWith(color: theme.colorScheme.error),
             )
           : (widget.data.uiSettings.helperText ?? '').isNotEmpty
               ? Text(
                   widget.data.uiSettings.helperText ?? '',
-                  style: inputDecorationTheme.helperStyle,
+                  style: inputDecorationTheme.helperStyle ??
+                      theme.textTheme.labelMedium,
                 )
               : null,
       trailing: NumSelector(
