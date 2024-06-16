@@ -5,7 +5,8 @@ part 'wo_form_status.freezed.dart';
 
 @freezed
 sealed class WoFormStatus with _$WoFormStatus {
-  const factory WoFormStatus.idle() = IdleStatus;
+  const factory WoFormStatus.initial() = InitialStatus;
+  const factory WoFormStatus.inProgress() = InProgressStatus;
   const factory WoFormStatus.invalidValues({
     Iterable<WoFormInputError>? inputErrors,
   }) = InvalidValuesStatus;

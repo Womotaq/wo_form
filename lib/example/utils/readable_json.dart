@@ -12,7 +12,7 @@ void showJsonDialog(BuildContext context) {
     pageContext: context,
     title: 'JSON',
     actionText: 'Ok',
-    onAction: context.read<WoFormStatusCubit>().setIdle,
+    onAction: context.read<WoFormStatusCubit>().setInProgress,
     content: Text(readableJson(form.getSubmittedJson(values))),
   );
 }

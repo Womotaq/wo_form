@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/example/utils/readable_json.dart';
 import 'package:wo_form/example/utils/regex_pattern.dart';
 import 'package:wo_form/src/l10n/arb_gen/form_localizations_fr.dart';
@@ -107,6 +109,17 @@ class ProfileCreationPage extends StatelessWidget {
           ],
         ),
       ],
+      canQuit: (context) async =>
+          context.read<WoFormStatusCubit>().state is InitialStatus ||
+                  context.read<WoFormStatusCubit>().state is SubmittedStatus
+              ? true
+              : await showActionDialog(
+                  pageContext: context,
+                  title: 'Abandonner les modifications ?',
+                  actionText: 'Abandonner les modifications',
+                  onAction: () => true,
+                  cancelText: "Continuer d'éditer",
+                ),
     );
     return form.toPage(onSubmitted: showJsonDialog);
   }

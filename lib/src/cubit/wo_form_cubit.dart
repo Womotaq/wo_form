@@ -5,9 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/wo_form.dart';
 
 class WoFormStatusCubit extends Cubit<WoFormStatus> {
-  WoFormStatusCubit._(super.initialStatus);
+  WoFormStatusCubit._(super.initialState);
 
-  void setIdle() => emit(const IdleStatus());
+  void setInProgress() => emit(const InProgressStatus());
   void setInvalidValues({Iterable<WoFormInputError>? inputErrors}) =>
       emit(InvalidValuesStatus(inputErrors: inputErrors));
   void _setSubmitting() => emit(const SubmittingStatus());
@@ -38,7 +38,9 @@ class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
 
     // Setting the status to idle when a modification occurs allows isPure to
     // work
-    if (_statusCubit.state is! InvalidValuesStatus) _statusCubit.setIdle();
+    if (_statusCubit.state is! InvalidValuesStatus) {
+      _statusCubit.setInProgress();
+    }
 
     emit(newMap);
   }
@@ -79,11 +81,7 @@ class WoFormInitializer extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => WoFormStatusCubit._(
-              form.initialStatusIsSubmitted
-                  ? const SubmittedStatus()
-                  : const IdleStatus(),
-            ),
+            create: (context) => WoFormStatusCubit._(form.initialStatus),
           ),
           BlocProvider(
             create: (context) => WoFormValuesCubit._(

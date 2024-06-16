@@ -11,11 +11,13 @@ part 'wo_form.g.dart';
 @freezed
 class WoForm with _$WoForm {
   const factory WoForm({
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    @Default(InitialStatus())
+    WoFormStatus initialStatus,
     Map<String, dynamic>? unmodifiableValuesJson,
     @InputsListConverter() @Default([]) List<WoFormElementMixin> inputs,
-    @Default(false) bool initialStatusIsSubmitted,
     @JsonKey(includeToJson: false, includeFromJson: false)
-    Future<bool?> Function(BuildContext context)? onUnsubmittedQuit,
+    Future<bool?> Function(BuildContext context)? canQuit,
     @JsonKey(toJson: WoFormUiSettings.staticToJson)
     @Default(WoFormUiSettings())
     WoFormUiSettings uiSettings,

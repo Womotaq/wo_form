@@ -18,7 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$WoFormStatus {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() idle,
+    required TResult Function() initial,
+    required TResult Function() inProgress,
     required TResult Function(Iterable<WoFormInputError>? inputErrors)
         invalidValues,
     required TResult Function() submitting,
@@ -29,7 +30,8 @@ mixin _$WoFormStatus {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? idle,
+    TResult? Function()? initial,
+    TResult? Function()? inProgress,
     TResult? Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
     TResult? Function()? submitting,
     TResult? Function(Object? error, StackTrace? stackTrace)? submitError,
@@ -38,7 +40,8 @@ mixin _$WoFormStatus {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? idle,
+    TResult Function()? initial,
+    TResult Function()? inProgress,
     TResult Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
     TResult Function()? submitting,
     TResult Function(Object? error, StackTrace? stackTrace)? submitError,
@@ -48,7 +51,8 @@ mixin _$WoFormStatus {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(IdleStatus value) idle,
+    required TResult Function(InitialStatus value) initial,
+    required TResult Function(InProgressStatus value) inProgress,
     required TResult Function(InvalidValuesStatus value) invalidValues,
     required TResult Function(SubmittingStatus value) submitting,
     required TResult Function(SubmitErrorStatus value) submitError,
@@ -57,7 +61,8 @@ mixin _$WoFormStatus {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(IdleStatus value)? idle,
+    TResult? Function(InitialStatus value)? initial,
+    TResult? Function(InProgressStatus value)? inProgress,
     TResult? Function(InvalidValuesStatus value)? invalidValues,
     TResult? Function(SubmittingStatus value)? submitting,
     TResult? Function(SubmitErrorStatus value)? submitError,
@@ -66,7 +71,8 @@ mixin _$WoFormStatus {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(IdleStatus value)? idle,
+    TResult Function(InitialStatus value)? initial,
+    TResult Function(InProgressStatus value)? inProgress,
     TResult Function(InvalidValuesStatus value)? invalidValues,
     TResult Function(SubmittingStatus value)? submitting,
     TResult Function(SubmitErrorStatus value)? submitError,
@@ -95,35 +101,35 @@ class _$WoFormStatusCopyWithImpl<$Res, $Val extends WoFormStatus>
 }
 
 /// @nodoc
-abstract class _$$IdleStatusImplCopyWith<$Res> {
-  factory _$$IdleStatusImplCopyWith(
-          _$IdleStatusImpl value, $Res Function(_$IdleStatusImpl) then) =
-      __$$IdleStatusImplCopyWithImpl<$Res>;
+abstract class _$$InitialStatusImplCopyWith<$Res> {
+  factory _$$InitialStatusImplCopyWith(
+          _$InitialStatusImpl value, $Res Function(_$InitialStatusImpl) then) =
+      __$$InitialStatusImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$IdleStatusImplCopyWithImpl<$Res>
-    extends _$WoFormStatusCopyWithImpl<$Res, _$IdleStatusImpl>
-    implements _$$IdleStatusImplCopyWith<$Res> {
-  __$$IdleStatusImplCopyWithImpl(
-      _$IdleStatusImpl _value, $Res Function(_$IdleStatusImpl) _then)
+class __$$InitialStatusImplCopyWithImpl<$Res>
+    extends _$WoFormStatusCopyWithImpl<$Res, _$InitialStatusImpl>
+    implements _$$InitialStatusImplCopyWith<$Res> {
+  __$$InitialStatusImplCopyWithImpl(
+      _$InitialStatusImpl _value, $Res Function(_$InitialStatusImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$IdleStatusImpl implements IdleStatus {
-  const _$IdleStatusImpl();
+class _$InitialStatusImpl implements InitialStatus {
+  const _$InitialStatusImpl();
 
   @override
   String toString() {
-    return 'WoFormStatus.idle()';
+    return 'WoFormStatus.initial()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$IdleStatusImpl);
+        (other.runtimeType == runtimeType && other is _$InitialStatusImpl);
   }
 
   @override
@@ -132,7 +138,8 @@ class _$IdleStatusImpl implements IdleStatus {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() idle,
+    required TResult Function() initial,
+    required TResult Function() inProgress,
     required TResult Function(Iterable<WoFormInputError>? inputErrors)
         invalidValues,
     required TResult Function() submitting,
@@ -140,33 +147,35 @@ class _$IdleStatusImpl implements IdleStatus {
         submitError,
     required TResult Function() submitted,
   }) {
-    return idle();
+    return initial();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? idle,
+    TResult? Function()? initial,
+    TResult? Function()? inProgress,
     TResult? Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
     TResult? Function()? submitting,
     TResult? Function(Object? error, StackTrace? stackTrace)? submitError,
     TResult? Function()? submitted,
   }) {
-    return idle?.call();
+    return initial?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? idle,
+    TResult Function()? initial,
+    TResult Function()? inProgress,
     TResult Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
     TResult Function()? submitting,
     TResult Function(Object? error, StackTrace? stackTrace)? submitError,
     TResult Function()? submitted,
     required TResult orElse(),
   }) {
-    if (idle != null) {
-      return idle();
+    if (initial != null) {
+      return initial();
     }
     return orElse();
   }
@@ -174,46 +183,177 @@ class _$IdleStatusImpl implements IdleStatus {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(IdleStatus value) idle,
+    required TResult Function(InitialStatus value) initial,
+    required TResult Function(InProgressStatus value) inProgress,
     required TResult Function(InvalidValuesStatus value) invalidValues,
     required TResult Function(SubmittingStatus value) submitting,
     required TResult Function(SubmitErrorStatus value) submitError,
     required TResult Function(SubmittedStatus value) submitted,
   }) {
-    return idle(this);
+    return initial(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(IdleStatus value)? idle,
+    TResult? Function(InitialStatus value)? initial,
+    TResult? Function(InProgressStatus value)? inProgress,
     TResult? Function(InvalidValuesStatus value)? invalidValues,
     TResult? Function(SubmittingStatus value)? submitting,
     TResult? Function(SubmitErrorStatus value)? submitError,
     TResult? Function(SubmittedStatus value)? submitted,
   }) {
-    return idle?.call(this);
+    return initial?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(IdleStatus value)? idle,
+    TResult Function(InitialStatus value)? initial,
+    TResult Function(InProgressStatus value)? inProgress,
     TResult Function(InvalidValuesStatus value)? invalidValues,
     TResult Function(SubmittingStatus value)? submitting,
     TResult Function(SubmitErrorStatus value)? submitError,
     TResult Function(SubmittedStatus value)? submitted,
     required TResult orElse(),
   }) {
-    if (idle != null) {
-      return idle(this);
+    if (initial != null) {
+      return initial(this);
     }
     return orElse();
   }
 }
 
-abstract class IdleStatus implements WoFormStatus {
-  const factory IdleStatus() = _$IdleStatusImpl;
+abstract class InitialStatus implements WoFormStatus {
+  const factory InitialStatus() = _$InitialStatusImpl;
+}
+
+/// @nodoc
+abstract class _$$InProgressStatusImplCopyWith<$Res> {
+  factory _$$InProgressStatusImplCopyWith(_$InProgressStatusImpl value,
+          $Res Function(_$InProgressStatusImpl) then) =
+      __$$InProgressStatusImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$InProgressStatusImplCopyWithImpl<$Res>
+    extends _$WoFormStatusCopyWithImpl<$Res, _$InProgressStatusImpl>
+    implements _$$InProgressStatusImplCopyWith<$Res> {
+  __$$InProgressStatusImplCopyWithImpl(_$InProgressStatusImpl _value,
+      $Res Function(_$InProgressStatusImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$InProgressStatusImpl implements InProgressStatus {
+  const _$InProgressStatusImpl();
+
+  @override
+  String toString() {
+    return 'WoFormStatus.inProgress()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$InProgressStatusImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() inProgress,
+    required TResult Function(Iterable<WoFormInputError>? inputErrors)
+        invalidValues,
+    required TResult Function() submitting,
+    required TResult Function(Object? error, StackTrace? stackTrace)
+        submitError,
+    required TResult Function() submitted,
+  }) {
+    return inProgress();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? inProgress,
+    TResult? Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
+    TResult? Function()? submitting,
+    TResult? Function(Object? error, StackTrace? stackTrace)? submitError,
+    TResult? Function()? submitted,
+  }) {
+    return inProgress?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? inProgress,
+    TResult Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
+    TResult Function()? submitting,
+    TResult Function(Object? error, StackTrace? stackTrace)? submitError,
+    TResult Function()? submitted,
+    required TResult orElse(),
+  }) {
+    if (inProgress != null) {
+      return inProgress();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitialStatus value) initial,
+    required TResult Function(InProgressStatus value) inProgress,
+    required TResult Function(InvalidValuesStatus value) invalidValues,
+    required TResult Function(SubmittingStatus value) submitting,
+    required TResult Function(SubmitErrorStatus value) submitError,
+    required TResult Function(SubmittedStatus value) submitted,
+  }) {
+    return inProgress(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitialStatus value)? initial,
+    TResult? Function(InProgressStatus value)? inProgress,
+    TResult? Function(InvalidValuesStatus value)? invalidValues,
+    TResult? Function(SubmittingStatus value)? submitting,
+    TResult? Function(SubmitErrorStatus value)? submitError,
+    TResult? Function(SubmittedStatus value)? submitted,
+  }) {
+    return inProgress?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitialStatus value)? initial,
+    TResult Function(InProgressStatus value)? inProgress,
+    TResult Function(InvalidValuesStatus value)? invalidValues,
+    TResult Function(SubmittingStatus value)? submitting,
+    TResult Function(SubmitErrorStatus value)? submitError,
+    TResult Function(SubmittedStatus value)? submitted,
+    required TResult orElse(),
+  }) {
+    if (inProgress != null) {
+      return inProgress(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class InProgressStatus implements WoFormStatus {
+  const factory InProgressStatus() = _$InProgressStatusImpl;
 }
 
 /// @nodoc
@@ -283,7 +423,8 @@ class _$InvalidValuesStatusImpl implements InvalidValuesStatus {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() idle,
+    required TResult Function() initial,
+    required TResult Function() inProgress,
     required TResult Function(Iterable<WoFormInputError>? inputErrors)
         invalidValues,
     required TResult Function() submitting,
@@ -297,7 +438,8 @@ class _$InvalidValuesStatusImpl implements InvalidValuesStatus {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? idle,
+    TResult? Function()? initial,
+    TResult? Function()? inProgress,
     TResult? Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
     TResult? Function()? submitting,
     TResult? Function(Object? error, StackTrace? stackTrace)? submitError,
@@ -309,7 +451,8 @@ class _$InvalidValuesStatusImpl implements InvalidValuesStatus {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? idle,
+    TResult Function()? initial,
+    TResult Function()? inProgress,
     TResult Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
     TResult Function()? submitting,
     TResult Function(Object? error, StackTrace? stackTrace)? submitError,
@@ -325,7 +468,8 @@ class _$InvalidValuesStatusImpl implements InvalidValuesStatus {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(IdleStatus value) idle,
+    required TResult Function(InitialStatus value) initial,
+    required TResult Function(InProgressStatus value) inProgress,
     required TResult Function(InvalidValuesStatus value) invalidValues,
     required TResult Function(SubmittingStatus value) submitting,
     required TResult Function(SubmitErrorStatus value) submitError,
@@ -337,7 +481,8 @@ class _$InvalidValuesStatusImpl implements InvalidValuesStatus {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(IdleStatus value)? idle,
+    TResult? Function(InitialStatus value)? initial,
+    TResult? Function(InProgressStatus value)? inProgress,
     TResult? Function(InvalidValuesStatus value)? invalidValues,
     TResult? Function(SubmittingStatus value)? submitting,
     TResult? Function(SubmitErrorStatus value)? submitError,
@@ -349,7 +494,8 @@ class _$InvalidValuesStatusImpl implements InvalidValuesStatus {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(IdleStatus value)? idle,
+    TResult Function(InitialStatus value)? initial,
+    TResult Function(InProgressStatus value)? inProgress,
     TResult Function(InvalidValuesStatus value)? invalidValues,
     TResult Function(SubmittingStatus value)? submitting,
     TResult Function(SubmitErrorStatus value)? submitError,
@@ -412,7 +558,8 @@ class _$SubmittingStatusImpl implements SubmittingStatus {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() idle,
+    required TResult Function() initial,
+    required TResult Function() inProgress,
     required TResult Function(Iterable<WoFormInputError>? inputErrors)
         invalidValues,
     required TResult Function() submitting,
@@ -426,7 +573,8 @@ class _$SubmittingStatusImpl implements SubmittingStatus {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? idle,
+    TResult? Function()? initial,
+    TResult? Function()? inProgress,
     TResult? Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
     TResult? Function()? submitting,
     TResult? Function(Object? error, StackTrace? stackTrace)? submitError,
@@ -438,7 +586,8 @@ class _$SubmittingStatusImpl implements SubmittingStatus {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? idle,
+    TResult Function()? initial,
+    TResult Function()? inProgress,
     TResult Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
     TResult Function()? submitting,
     TResult Function(Object? error, StackTrace? stackTrace)? submitError,
@@ -454,7 +603,8 @@ class _$SubmittingStatusImpl implements SubmittingStatus {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(IdleStatus value) idle,
+    required TResult Function(InitialStatus value) initial,
+    required TResult Function(InProgressStatus value) inProgress,
     required TResult Function(InvalidValuesStatus value) invalidValues,
     required TResult Function(SubmittingStatus value) submitting,
     required TResult Function(SubmitErrorStatus value) submitError,
@@ -466,7 +616,8 @@ class _$SubmittingStatusImpl implements SubmittingStatus {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(IdleStatus value)? idle,
+    TResult? Function(InitialStatus value)? initial,
+    TResult? Function(InProgressStatus value)? inProgress,
     TResult? Function(InvalidValuesStatus value)? invalidValues,
     TResult? Function(SubmittingStatus value)? submitting,
     TResult? Function(SubmitErrorStatus value)? submitError,
@@ -478,7 +629,8 @@ class _$SubmittingStatusImpl implements SubmittingStatus {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(IdleStatus value)? idle,
+    TResult Function(InitialStatus value)? initial,
+    TResult Function(InProgressStatus value)? inProgress,
     TResult Function(InvalidValuesStatus value)? invalidValues,
     TResult Function(SubmittingStatus value)? submitting,
     TResult Function(SubmitErrorStatus value)? submitError,
@@ -568,7 +720,8 @@ class _$SubmitErrorStatusImpl implements SubmitErrorStatus {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() idle,
+    required TResult Function() initial,
+    required TResult Function() inProgress,
     required TResult Function(Iterable<WoFormInputError>? inputErrors)
         invalidValues,
     required TResult Function() submitting,
@@ -582,7 +735,8 @@ class _$SubmitErrorStatusImpl implements SubmitErrorStatus {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? idle,
+    TResult? Function()? initial,
+    TResult? Function()? inProgress,
     TResult? Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
     TResult? Function()? submitting,
     TResult? Function(Object? error, StackTrace? stackTrace)? submitError,
@@ -594,7 +748,8 @@ class _$SubmitErrorStatusImpl implements SubmitErrorStatus {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? idle,
+    TResult Function()? initial,
+    TResult Function()? inProgress,
     TResult Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
     TResult Function()? submitting,
     TResult Function(Object? error, StackTrace? stackTrace)? submitError,
@@ -610,7 +765,8 @@ class _$SubmitErrorStatusImpl implements SubmitErrorStatus {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(IdleStatus value) idle,
+    required TResult Function(InitialStatus value) initial,
+    required TResult Function(InProgressStatus value) inProgress,
     required TResult Function(InvalidValuesStatus value) invalidValues,
     required TResult Function(SubmittingStatus value) submitting,
     required TResult Function(SubmitErrorStatus value) submitError,
@@ -622,7 +778,8 @@ class _$SubmitErrorStatusImpl implements SubmitErrorStatus {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(IdleStatus value)? idle,
+    TResult? Function(InitialStatus value)? initial,
+    TResult? Function(InProgressStatus value)? inProgress,
     TResult? Function(InvalidValuesStatus value)? invalidValues,
     TResult? Function(SubmittingStatus value)? submitting,
     TResult? Function(SubmitErrorStatus value)? submitError,
@@ -634,7 +791,8 @@ class _$SubmitErrorStatusImpl implements SubmitErrorStatus {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(IdleStatus value)? idle,
+    TResult Function(InitialStatus value)? initial,
+    TResult Function(InProgressStatus value)? inProgress,
     TResult Function(InvalidValuesStatus value)? invalidValues,
     TResult Function(SubmittingStatus value)? submitting,
     TResult Function(SubmitErrorStatus value)? submitError,
@@ -698,7 +856,8 @@ class _$SubmittedStatusImpl implements SubmittedStatus {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() idle,
+    required TResult Function() initial,
+    required TResult Function() inProgress,
     required TResult Function(Iterable<WoFormInputError>? inputErrors)
         invalidValues,
     required TResult Function() submitting,
@@ -712,7 +871,8 @@ class _$SubmittedStatusImpl implements SubmittedStatus {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? idle,
+    TResult? Function()? initial,
+    TResult? Function()? inProgress,
     TResult? Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
     TResult? Function()? submitting,
     TResult? Function(Object? error, StackTrace? stackTrace)? submitError,
@@ -724,7 +884,8 @@ class _$SubmittedStatusImpl implements SubmittedStatus {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? idle,
+    TResult Function()? initial,
+    TResult Function()? inProgress,
     TResult Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
     TResult Function()? submitting,
     TResult Function(Object? error, StackTrace? stackTrace)? submitError,
@@ -740,7 +901,8 @@ class _$SubmittedStatusImpl implements SubmittedStatus {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(IdleStatus value) idle,
+    required TResult Function(InitialStatus value) initial,
+    required TResult Function(InProgressStatus value) inProgress,
     required TResult Function(InvalidValuesStatus value) invalidValues,
     required TResult Function(SubmittingStatus value) submitting,
     required TResult Function(SubmitErrorStatus value) submitError,
@@ -752,7 +914,8 @@ class _$SubmittedStatusImpl implements SubmittedStatus {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(IdleStatus value)? idle,
+    TResult? Function(InitialStatus value)? initial,
+    TResult? Function(InProgressStatus value)? inProgress,
     TResult? Function(InvalidValuesStatus value)? invalidValues,
     TResult? Function(SubmittingStatus value)? submitting,
     TResult? Function(SubmitErrorStatus value)? submitError,
@@ -764,7 +927,8 @@ class _$SubmittedStatusImpl implements SubmittedStatus {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(IdleStatus value)? idle,
+    TResult Function(InitialStatus value)? initial,
+    TResult Function(InProgressStatus value)? inProgress,
     TResult Function(InvalidValuesStatus value)? invalidValues,
     TResult Function(SubmittingStatus value)? submitting,
     TResult Function(SubmitErrorStatus value)? submitError,

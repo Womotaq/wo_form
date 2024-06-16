@@ -4,7 +4,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
-import 'package:wo_form/example/ui/prefab/form_header.dart';
+import 'package:wo_form/src/_export.dart';
 import 'package:wo_form/wo_form.dart';
 
 // TODO : name as page
@@ -48,7 +48,7 @@ class WoFormScreen extends StatelessWidget {
                   ),
                   label: Text(mergedSettings.submitText ?? ''),
                 ),
-              SubmittedStatus()
+              (InitialStatus() || SubmittedStatus())
                   when (mergedSettings.submittedText ?? '').isNotEmpty =>
                 TextButton(
                   onPressed: null,
@@ -167,9 +167,7 @@ class WoFormScreen extends StatelessWidget {
         child: switch (mergedSettings.displayMode) {
           null || WoFormDisplayedInCard() => Scaffold(
               appBar: AppBar(
-                leading: WoFormPopButton(
-                  onUnsubmittedQuit: form.onUnsubmittedQuit,
-                ),
+                leading: QuitPageButton(canQuit: form.canQuit),
               ),
               body: SingleChildScrollView(
                 child: WoPadding.verticalMedium(
@@ -187,9 +185,7 @@ class WoFormScreen extends StatelessWidget {
             ),
           WoFormDisplayedInPage() => Scaffold(
               appBar: AppBar(
-                leading: WoFormPopButton(
-                  onUnsubmittedQuit: form.onUnsubmittedQuit,
-                ),
+                leading: QuitPageButton(canQuit: form.canQuit),
                 title: Text(mergedSettings.titleText ?? ''),
                 actions: [submitButton, WoGap.small],
               ),
@@ -240,39 +236,17 @@ class _WoFormPageView extends StatelessWidget {
       value: pageIndexCubit,
       child: Scaffold(
         appBar: AppBar(
-          // leading: WoFormPopButton(
-          //   onUnsubmittedQuit: (context) {
-          //     // TODO : PopScope
-          //     if (pageController.page != null && pageController.page! > 0) {
-          //       FocusScope.of(context).unfocus();
-          //       pageController.previousPage(
-          //         duration: const Duration(milliseconds: 300),
-          //         curve: Curves.easeIn,
-          //       );
-          //       return false;
-          //     } else if (form.onUnsubmittedQuit == null ||
-          //         context.read<WoFormStatusCubit>().state is SubmittedStatus) {
-          //       return Navigator.of(context).pop();
-          //     } else {
-          //       form.onUnsubmittedQuit!(context);
-          //     }
-          //   },
-          // ),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              // TODO : PopScope
+          leading: QuitPageButton(
+            canQuit: (context) async {
               if (pageController.page != null && pageController.page! > 0) {
                 FocusScope.of(context).unfocus();
-                pageController.previousPage(
+                await pageController.previousPage(
                   duration: const Duration(milliseconds: 300),
                   curve: Curves.easeIn,
                 );
-              } else if (form.onUnsubmittedQuit == null ||
-                  context.read<WoFormStatusCubit>().state is SubmittedStatus) {
-                return Navigator.of(context).pop();
+                return false;
               } else {
-                form.onUnsubmittedQuit!(context);
+                return form.canQuit?.call(context) ?? true;
               }
             },
           ),
@@ -323,7 +297,9 @@ class _WoFormPageView extends StatelessWidget {
                               } else {
                                 FocusScope.of(context).unfocus();
                                 // remove the InvalidValuesStatus
-                                context.read<WoFormStatusCubit>().setIdle();
+                                context
+                                    .read<WoFormStatusCubit>()
+                                    .setInProgress();
                                 pageController.nextPage(
                                   duration: const Duration(milliseconds: 300),
                                   curve: Curves.easeIn,
@@ -359,51 +335,6 @@ class _WoFormPageView extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class WoFormPopButton extends StatelessWidget {
-  const WoFormPopButton({
-    required this.onUnsubmittedQuit,
-    super.key,
-  });
-
-  final Future<bool?> Function(BuildContext)? onUnsubmittedQuit;
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
-      builder: (context, status) {
-        final canPop = onUnsubmittedQuit == null || status is SubmittedStatus;
-
-        return PopScope(
-          canPop: canPop,
-          onPopInvoked: (didPop) async {
-            if (didPop) return;
-            if (canPop) return;
-            final confirmPop = await onUnsubmittedQuit!(context);
-            if (confirmPop ?? false) {
-              if (!context.mounted) return;
-              Navigator.of(context).pop();
-            }
-          },
-          child: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () async {
-              if (onUnsubmittedQuit == null || status is SubmittedStatus) {
-                return Navigator.of(context).pop();
-              } else {
-                final confirmPop = await onUnsubmittedQuit!(context);
-                if (confirmPop ?? false) {
-                  if (!context.mounted) return;
-                  Navigator.of(context).pop();
-                }
-              }
-            },
-          ),
-        );
-      },
     );
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
-import 'package:wo_form/example/ui/prefab/form_header.dart';
 import 'package:wo_form/wo_form.dart';
 
 class InputsNodeWidgetBuilder extends StatelessWidget {
