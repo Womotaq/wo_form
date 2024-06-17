@@ -15,7 +15,6 @@ class SelectField<T> extends StatelessWidget {
     final theme = Theme.of(context);
     final inputDecorationTheme = theme.inputDecorationTheme;
 
-    // TODO : shpwAsterixWhenRequired : data.input.minCount > 0 ? '*' : ''
     final title = Text(
       data.uiSettings.labelText ?? '',
       style: inputDecorationTheme.labelStyle,

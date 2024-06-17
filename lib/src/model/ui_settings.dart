@@ -267,6 +267,7 @@ class WoFormUiSettings with _$WoFormUiSettings {
     WoFormSubmitMode submitMode,
     @JsonKey(includeToJson: false, includeFromJson: false)
     SubmitButtonBuilderDef? submitButtonBuilder,
+    bool? showAsteriskIfRequired,
   }) = _WoFormUiSettings;
 
   const WoFormUiSettings._();

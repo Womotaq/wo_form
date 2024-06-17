@@ -26,7 +26,17 @@ class BooleanFieldBuilder extends StatelessWidget {
     }
 
     final inputSettings = input.uiSettings;
-    final mergedSettings = uiSettings?.merge(inputSettings) ?? inputSettings;
+    var mergedSettings = uiSettings?.merge(inputSettings) ?? inputSettings;
+
+    final showAsterisk = input.isRequired &&
+        (form.uiSettings.showAsteriskIfRequired ??
+            WoFormTheme.of(context)?.showAsteriskIfRequired ??
+            true);
+    if (showAsterisk && mergedSettings.labelText != null) {
+      mergedSettings = mergedSettings.copyWith(
+        labelText: '${mergedSettings.labelText ?? ''}*',
+      );
+    }
 
     return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
       builder: (context, status) {

@@ -16,10 +16,11 @@ class StringFieldBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     final valuesCubit = context.read<WoFormValuesCubit>();
 
-    final input = context.read<WoForm>().getInput(
-          path: inputPath,
-          values: context.read<WoFormValuesCubit>().state,
-        );
+    final form = context.read<WoForm>();
+    final input = form.getInput(
+      path: inputPath,
+      values: context.read<WoFormValuesCubit>().state,
+    );
     if (input is! StringInput) {
       throw ArgumentError(
         'Expected <StringInput> at path: "$inputPath", '
@@ -28,7 +29,17 @@ class StringFieldBuilder extends StatelessWidget {
     }
 
     final inputSettings = input.uiSettings;
-    final mergedSettings = uiSettings?.merge(inputSettings) ?? inputSettings;
+    var mergedSettings = uiSettings?.merge(inputSettings) ?? inputSettings;
+
+    final showAsterisk = input.isRequired &&
+        (form.uiSettings.showAsteriskIfRequired ??
+            WoFormTheme.of(context)?.showAsteriskIfRequired ??
+            true);
+    if (showAsterisk && mergedSettings.labelText != null) {
+      mergedSettings = mergedSettings.copyWith(
+        labelText: '${mergedSettings.labelText}*',
+      );
+    }
 
     return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
       builder: (context, status) {

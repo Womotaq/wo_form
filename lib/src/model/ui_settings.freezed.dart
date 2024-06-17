@@ -1470,6 +1470,7 @@ mixin _$WoFormUiSettings {
   @JsonKey(includeToJson: false, includeFromJson: false)
   SubmitButtonBuilderDef? get submitButtonBuilder =>
       throw _privateConstructorUsedError;
+  bool? get showAsteriskIfRequired => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1489,7 +1490,8 @@ abstract class $WoFormUiSettingsCopyWith<$Res> {
       @JsonKey(toJson: WoFormSubmitMode.staticToJson)
       WoFormSubmitMode submitMode,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      SubmitButtonBuilderDef? submitButtonBuilder});
+      SubmitButtonBuilderDef? submitButtonBuilder,
+      bool? showAsteriskIfRequired});
 
   $WoFormSubmitModeCopyWith<$Res> get submitMode;
 }
@@ -1511,6 +1513,7 @@ class _$WoFormUiSettingsCopyWithImpl<$Res, $Val extends WoFormUiSettings>
     Object? titlePosition = null,
     Object? submitMode = null,
     Object? submitButtonBuilder = freezed,
+    Object? showAsteriskIfRequired = freezed,
   }) {
     return _then(_value.copyWith(
       titleText: null == titleText
@@ -1529,6 +1532,10 @@ class _$WoFormUiSettingsCopyWithImpl<$Res, $Val extends WoFormUiSettings>
           ? _value.submitButtonBuilder
           : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
               as SubmitButtonBuilderDef?,
+      showAsteriskIfRequired: freezed == showAsteriskIfRequired
+          ? _value.showAsteriskIfRequired
+          : showAsteriskIfRequired // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 
@@ -1555,7 +1562,8 @@ abstract class _$$WoFormUiSettingsImplCopyWith<$Res>
       @JsonKey(toJson: WoFormSubmitMode.staticToJson)
       WoFormSubmitMode submitMode,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      SubmitButtonBuilderDef? submitButtonBuilder});
+      SubmitButtonBuilderDef? submitButtonBuilder,
+      bool? showAsteriskIfRequired});
 
   @override
   $WoFormSubmitModeCopyWith<$Res> get submitMode;
@@ -1576,6 +1584,7 @@ class __$$WoFormUiSettingsImplCopyWithImpl<$Res>
     Object? titlePosition = null,
     Object? submitMode = null,
     Object? submitButtonBuilder = freezed,
+    Object? showAsteriskIfRequired = freezed,
   }) {
     return _then(_$WoFormUiSettingsImpl(
       titleText: null == titleText
@@ -1594,6 +1603,10 @@ class __$$WoFormUiSettingsImplCopyWithImpl<$Res>
           ? _value.submitButtonBuilder
           : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
               as SubmitButtonBuilderDef?,
+      showAsteriskIfRequired: freezed == showAsteriskIfRequired
+          ? _value.showAsteriskIfRequired
+          : showAsteriskIfRequired // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -1607,7 +1620,8 @@ class _$WoFormUiSettingsImpl extends _WoFormUiSettings {
       @JsonKey(toJson: WoFormSubmitMode.staticToJson)
       this.submitMode = const WoFormSubmitMode.standard(),
       @JsonKey(includeToJson: false, includeFromJson: false)
-      this.submitButtonBuilder})
+      this.submitButtonBuilder,
+      this.showAsteriskIfRequired})
       : super._();
 
   factory _$WoFormUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
@@ -1625,10 +1639,12 @@ class _$WoFormUiSettingsImpl extends _WoFormUiSettings {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final SubmitButtonBuilderDef? submitButtonBuilder;
+  @override
+  final bool? showAsteriskIfRequired;
 
   @override
   String toString() {
-    return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, submitMode: $submitMode, submitButtonBuilder: $submitButtonBuilder)';
+    return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, submitMode: $submitMode, submitButtonBuilder: $submitButtonBuilder, showAsteriskIfRequired: $showAsteriskIfRequired)';
   }
 
   @override
@@ -1643,13 +1659,15 @@ class _$WoFormUiSettingsImpl extends _WoFormUiSettings {
             (identical(other.submitMode, submitMode) ||
                 other.submitMode == submitMode) &&
             (identical(other.submitButtonBuilder, submitButtonBuilder) ||
-                other.submitButtonBuilder == submitButtonBuilder));
+                other.submitButtonBuilder == submitButtonBuilder) &&
+            (identical(other.showAsteriskIfRequired, showAsteriskIfRequired) ||
+                other.showAsteriskIfRequired == showAsteriskIfRequired));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, titleText, titlePosition, submitMode, submitButtonBuilder);
+  int get hashCode => Object.hash(runtimeType, titleText, titlePosition,
+      submitMode, submitButtonBuilder, showAsteriskIfRequired);
 
   @JsonKey(ignore: true)
   @override
@@ -1668,13 +1686,13 @@ class _$WoFormUiSettingsImpl extends _WoFormUiSettings {
 
 abstract class _WoFormUiSettings extends WoFormUiSettings {
   const factory _WoFormUiSettings(
-          {final String titleText,
-          final WoFormTitlePosition titlePosition,
-          @JsonKey(toJson: WoFormSubmitMode.staticToJson)
-          final WoFormSubmitMode submitMode,
-          @JsonKey(includeToJson: false, includeFromJson: false)
-          final SubmitButtonBuilderDef? submitButtonBuilder}) =
-      _$WoFormUiSettingsImpl;
+      {final String titleText,
+      final WoFormTitlePosition titlePosition,
+      @JsonKey(toJson: WoFormSubmitMode.staticToJson)
+      final WoFormSubmitMode submitMode,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final SubmitButtonBuilderDef? submitButtonBuilder,
+      final bool? showAsteriskIfRequired}) = _$WoFormUiSettingsImpl;
   const _WoFormUiSettings._() : super._();
 
   factory _WoFormUiSettings.fromJson(Map<String, dynamic> json) =
@@ -1690,6 +1708,8 @@ abstract class _WoFormUiSettings extends WoFormUiSettings {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   SubmitButtonBuilderDef? get submitButtonBuilder;
+  @override
+  bool? get showAsteriskIfRequired;
   @override
   @JsonKey(ignore: true)
   _$$WoFormUiSettingsImplCopyWith<_$WoFormUiSettingsImpl> get copyWith =>

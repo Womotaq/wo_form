@@ -9,6 +9,7 @@ class WoFormThemeData extends ThemeExtension<WoFormThemeData> {
     this.numFieldBuilder,
     this.selectFieldBuilder,
     this.stringFieldBuilder,
+    this.showAsteriskIfRequired,
   });
 
   final SubmitButtonBuilderDef? submitButtonBuilder;
@@ -17,6 +18,10 @@ class WoFormThemeData extends ThemeExtension<WoFormThemeData> {
   final SelectFieldBuilderDef<dynamic>? selectFieldBuilder;
   final StringFieldBuilderDef? stringFieldBuilder;
 
+  /// Add the character '*' after the labelText of [WoFormInput]s.
+  /// Default to true.
+  final bool? showAsteriskIfRequired;
+
   @override
   WoFormThemeData copyWith({
     SubmitButtonBuilderDef? submitButtonBuilder,
@@ -24,6 +29,7 @@ class WoFormThemeData extends ThemeExtension<WoFormThemeData> {
     NumFieldBuilderDef? numFieldBuilder,
     SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
     StringFieldBuilderDef? stringFieldBuilder,
+    bool? showAsteriskIfRequired,
   }) {
     return WoFormThemeData(
       submitButtonBuilder: submitButtonBuilder ?? this.submitButtonBuilder,
@@ -31,6 +37,8 @@ class WoFormThemeData extends ThemeExtension<WoFormThemeData> {
       numFieldBuilder: numFieldBuilder ?? this.numFieldBuilder,
       selectFieldBuilder: selectFieldBuilder ?? this.selectFieldBuilder,
       stringFieldBuilder: stringFieldBuilder ?? this.stringFieldBuilder,
+      showAsteriskIfRequired:
+          showAsteriskIfRequired ?? this.showAsteriskIfRequired,
     );
   }
 
@@ -49,6 +57,8 @@ class WoFormThemeData extends ThemeExtension<WoFormThemeData> {
           t < 0.5 ? selectFieldBuilder : other.selectFieldBuilder,
       stringFieldBuilder:
           t < 0.5 ? stringFieldBuilder : other.stringFieldBuilder,
+      showAsteriskIfRequired:
+          t < 0.5 ? showAsteriskIfRequired : other.showAsteriskIfRequired,
     );
   }
 
@@ -59,6 +69,7 @@ class WoFormThemeData extends ThemeExtension<WoFormThemeData> {
         numFieldBuilder,
         selectFieldBuilder,
         stringFieldBuilder,
+        showAsteriskIfRequired,
       );
 
   @override
@@ -74,7 +85,8 @@ class WoFormThemeData extends ThemeExtension<WoFormThemeData> {
         other.booleanFieldBuilder == booleanFieldBuilder &&
         other.numFieldBuilder == numFieldBuilder &&
         other.selectFieldBuilder == selectFieldBuilder &&
-        other.stringFieldBuilder == stringFieldBuilder;
+        other.stringFieldBuilder == stringFieldBuilder &&
+        other.showAsteriskIfRequired == showAsteriskIfRequired;
   }
 }
 

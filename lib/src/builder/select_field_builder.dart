@@ -30,9 +30,19 @@ class SelectFieldBuilder<T> extends StatelessWidget {
     final valuesCubit = context.read<WoFormValuesCubit>();
 
     final input = getInput(form, valuesCubit.state);
-    final mergedSettings = uiSettings?.merge(input.uiSettings) ??
+    var mergedSettings = uiSettings?.merge(input.uiSettings) ??
         input.uiSettings ??
         const SelectInputUiSettings();
+
+    final showAsterisk = input.minCount > 0 &&
+        (form.uiSettings.showAsteriskIfRequired ??
+            WoFormTheme.of(context)?.showAsteriskIfRequired ??
+            true);
+    if (showAsterisk && mergedSettings.labelText != null) {
+      mergedSettings = mergedSettings.copyWith(
+        labelText: '${mergedSettings.labelText}*',
+      );
+    }
 
     return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
       builder: (context, status) {
