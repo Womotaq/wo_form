@@ -4,12 +4,14 @@ import 'package:wo_form/wo_form.dart';
 @immutable
 class WoFormThemeData extends ThemeExtension<WoFormThemeData> {
   const WoFormThemeData({
+    this.submitButtonBuilder,
     this.booleanFieldBuilder,
     this.numFieldBuilder,
     this.selectFieldBuilder,
     this.stringFieldBuilder,
   });
 
+  final SubmitButtonBuilderDef? submitButtonBuilder;
   final BooleanFieldBuilderDef? booleanFieldBuilder;
   final NumFieldBuilderDef? numFieldBuilder;
   final SelectFieldBuilderDef<dynamic>? selectFieldBuilder;
@@ -17,13 +19,14 @@ class WoFormThemeData extends ThemeExtension<WoFormThemeData> {
 
   @override
   WoFormThemeData copyWith({
-    String Function(WoFormInputError error)? localizeInputError,
+    SubmitButtonBuilderDef? submitButtonBuilder,
     BooleanFieldBuilderDef? booleanFieldBuilder,
     NumFieldBuilderDef? numFieldBuilder,
     SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
     StringFieldBuilderDef? stringFieldBuilder,
   }) {
     return WoFormThemeData(
+      submitButtonBuilder: submitButtonBuilder ?? this.submitButtonBuilder,
       booleanFieldBuilder: booleanFieldBuilder ?? this.booleanFieldBuilder,
       numFieldBuilder: numFieldBuilder ?? this.numFieldBuilder,
       selectFieldBuilder: selectFieldBuilder ?? this.selectFieldBuilder,
@@ -37,6 +40,8 @@ class WoFormThemeData extends ThemeExtension<WoFormThemeData> {
       return this;
     }
     return WoFormThemeData(
+      submitButtonBuilder:
+          t < 0.5 ? submitButtonBuilder : other.submitButtonBuilder,
       booleanFieldBuilder:
           t < 0.5 ? booleanFieldBuilder : other.booleanFieldBuilder,
       numFieldBuilder: t < 0.5 ? numFieldBuilder : other.numFieldBuilder,
@@ -49,6 +54,7 @@ class WoFormThemeData extends ThemeExtension<WoFormThemeData> {
 
   @override
   int get hashCode => Object.hash(
+        submitButtonBuilder,
         booleanFieldBuilder,
         numFieldBuilder,
         selectFieldBuilder,
@@ -64,6 +70,7 @@ class WoFormThemeData extends ThemeExtension<WoFormThemeData> {
       return false;
     }
     return other is WoFormThemeData &&
+        other.submitButtonBuilder == submitButtonBuilder &&
         other.booleanFieldBuilder == booleanFieldBuilder &&
         other.numFieldBuilder == numFieldBuilder &&
         other.selectFieldBuilder == selectFieldBuilder &&

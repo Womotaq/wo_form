@@ -90,6 +90,9 @@ class _WoFormPage extends StatelessWidget {
         );
 
         return uiSettings.submitButtonBuilder?.call(submitButtonData) ??
+            WoFormTheme.of(context)
+                ?.submitButtonBuilder
+                ?.call(submitButtonData) ??
             SubmitButton(data: submitButtonData);
       },
     );
@@ -108,10 +111,8 @@ class _WoFormPage extends StatelessWidget {
           children: [
             ...form.inputs.map((e) => e.toWidget(parentPath: '')),
             if (uiSettings.submitMode.buttonPosition ==
-                SubmitButtonPosition.footer) ...[
-              WoGap.xlarge,
-              WoPadding.horizontalSmall(child: submitButton),
-            ],
+                SubmitButtonPosition.footer)
+              submitButton,
           ],
         );
 
@@ -253,6 +254,9 @@ class _WoFormPageView extends StatelessWidget {
                               );
 
                               return form.uiSettings.submitButtonBuilder
+                                      ?.call(submitButtonData) ??
+                                  WoFormTheme.of(context)
+                                      ?.submitButtonBuilder
                                       ?.call(submitButtonData) ??
                                   SubmitButton(data: submitButtonData);
                             },

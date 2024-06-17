@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/src/_export.dart';
 
 class SubmitButtonData {
@@ -24,31 +23,44 @@ class SubmitButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loadingIndicator = data.formStatus is SubmittingStatus
-        ? Padding(
-            padding: const EdgeInsets.only(right: WoSize.xsmall),
-            child: SizedBox.square(
-              dimension: WoSize.medium,
-              child: CircularProgressIndicator(
-                color: context.colorScheme.onPrimary,
-                strokeWidth: 2,
-              ),
+        ? SizedBox.square(
+            dimension: 16,
+            child: CircularProgressIndicator(
+              color: Theme.of(context).colorScheme.onPrimary,
+              strokeWidth: 2,
             ),
           )
         : null;
 
+    final text = Text(data.text ?? ''); // TODO : woFormL10n.submit
+    final child = loadingIndicator == null
+        ? text
+        : Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              loadingIndicator,
+              const SizedBox(width: 8),
+              text,
+              const SizedBox(width: 24),
+            ],
+          );
+
     switch (data.position) {
       case SubmitButtonPosition.appBar:
-        return FilledButton.icon(
+        return FilledButton(
           onPressed: data.onPressed,
-          icon: loadingIndicator,
-          label: Text(data.text ?? ''), // TODO : woFormL10n.submit
+          child: child,
         );
       // TODO : change
       case SubmitButtonPosition.footer:
-        return BigButton.filled(
-          onPressed: data.onPressed,
-          leading: loadingIndicator,
-          child: Text(data.text ?? ''), // TODO : woFormL10n.submit
+        return Padding(
+          padding: const EdgeInsets.only(top: 32),
+          child: ListTile(
+            title: FilledButton(
+              onPressed: data.onPressed,
+              child: child,
+            ),
+          ),
         );
     }
   }
