@@ -31,6 +31,9 @@ mixin _$WoForm {
   WoFormUiSettings get uiSettings => throw _privateConstructorUsedError;
   @JsonKey(toJson: ExportSettings.staticToJson)
   ExportSettings get exportSettings => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  ThemeData Function(BuildContext)? get themeBuilder =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,7 +54,9 @@ abstract class $WoFormCopyWith<$Res> {
       @JsonKey(toJson: WoFormUiSettings.staticToJson)
       WoFormUiSettings uiSettings,
       @JsonKey(toJson: ExportSettings.staticToJson)
-      ExportSettings exportSettings});
+      ExportSettings exportSettings,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      ThemeData Function(BuildContext)? themeBuilder});
 
   $WoFormStatusCopyWith<$Res> get initialStatus;
   $WoFormUiSettingsCopyWith<$Res> get uiSettings;
@@ -76,6 +81,7 @@ class _$WoFormCopyWithImpl<$Res, $Val extends WoForm>
     Object? canQuit = freezed,
     Object? uiSettings = null,
     Object? exportSettings = null,
+    Object? themeBuilder = freezed,
   }) {
     return _then(_value.copyWith(
       initialStatus: null == initialStatus
@@ -98,6 +104,10 @@ class _$WoFormCopyWithImpl<$Res, $Val extends WoForm>
           ? _value.exportSettings
           : exportSettings // ignore: cast_nullable_to_non_nullable
               as ExportSettings,
+      themeBuilder: freezed == themeBuilder
+          ? _value.themeBuilder
+          : themeBuilder // ignore: cast_nullable_to_non_nullable
+              as ThemeData Function(BuildContext)?,
     ) as $Val);
   }
 
@@ -142,7 +152,9 @@ abstract class _$$WoFormImplCopyWith<$Res> implements $WoFormCopyWith<$Res> {
       @JsonKey(toJson: WoFormUiSettings.staticToJson)
       WoFormUiSettings uiSettings,
       @JsonKey(toJson: ExportSettings.staticToJson)
-      ExportSettings exportSettings});
+      ExportSettings exportSettings,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      ThemeData Function(BuildContext)? themeBuilder});
 
   @override
   $WoFormStatusCopyWith<$Res> get initialStatus;
@@ -168,6 +180,7 @@ class __$$WoFormImplCopyWithImpl<$Res>
     Object? canQuit = freezed,
     Object? uiSettings = null,
     Object? exportSettings = null,
+    Object? themeBuilder = freezed,
   }) {
     return _then(_$WoFormImpl(
       initialStatus: null == initialStatus
@@ -190,6 +203,10 @@ class __$$WoFormImplCopyWithImpl<$Res>
           ? _value.exportSettings
           : exportSettings // ignore: cast_nullable_to_non_nullable
               as ExportSettings,
+      themeBuilder: freezed == themeBuilder
+          ? _value.themeBuilder
+          : themeBuilder // ignore: cast_nullable_to_non_nullable
+              as ThemeData Function(BuildContext)?,
     ));
   }
 }
@@ -205,7 +222,8 @@ class _$WoFormImpl extends _WoForm {
       @JsonKey(toJson: WoFormUiSettings.staticToJson)
       this.uiSettings = const WoFormUiSettings(),
       @JsonKey(toJson: ExportSettings.staticToJson)
-      this.exportSettings = const ExportSettings()})
+      this.exportSettings = const ExportSettings(),
+      @JsonKey(includeToJson: false, includeFromJson: false) this.themeBuilder})
       : _inputs = inputs,
         super._();
 
@@ -234,10 +252,13 @@ class _$WoFormImpl extends _WoForm {
   @override
   @JsonKey(toJson: ExportSettings.staticToJson)
   final ExportSettings exportSettings;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final ThemeData Function(BuildContext)? themeBuilder;
 
   @override
   String toString() {
-    return 'WoForm(initialStatus: $initialStatus, inputs: $inputs, canQuit: $canQuit, uiSettings: $uiSettings, exportSettings: $exportSettings)';
+    return 'WoForm(initialStatus: $initialStatus, inputs: $inputs, canQuit: $canQuit, uiSettings: $uiSettings, exportSettings: $exportSettings, themeBuilder: $themeBuilder)';
   }
 
   @override
@@ -252,7 +273,9 @@ class _$WoFormImpl extends _WoForm {
             (identical(other.uiSettings, uiSettings) ||
                 other.uiSettings == uiSettings) &&
             (identical(other.exportSettings, exportSettings) ||
-                other.exportSettings == exportSettings));
+                other.exportSettings == exportSettings) &&
+            (identical(other.themeBuilder, themeBuilder) ||
+                other.themeBuilder == themeBuilder));
   }
 
   @JsonKey(ignore: true)
@@ -263,7 +286,8 @@ class _$WoFormImpl extends _WoForm {
       const DeepCollectionEquality().hash(_inputs),
       canQuit,
       uiSettings,
-      exportSettings);
+      exportSettings,
+      themeBuilder);
 
   @JsonKey(ignore: true)
   @override
@@ -289,7 +313,9 @@ abstract class _WoForm extends WoForm {
       @JsonKey(toJson: WoFormUiSettings.staticToJson)
       final WoFormUiSettings uiSettings,
       @JsonKey(toJson: ExportSettings.staticToJson)
-      final ExportSettings exportSettings}) = _$WoFormImpl;
+      final ExportSettings exportSettings,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final ThemeData Function(BuildContext)? themeBuilder}) = _$WoFormImpl;
   const _WoForm._() : super._();
 
   factory _WoForm.fromJson(Map<String, dynamic> json) = _$WoFormImpl.fromJson;
@@ -309,6 +335,9 @@ abstract class _WoForm extends WoForm {
   @override
   @JsonKey(toJson: ExportSettings.staticToJson)
   ExportSettings get exportSettings;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  ThemeData Function(BuildContext)? get themeBuilder;
   @override
   @JsonKey(ignore: true)
   _$$WoFormImplCopyWith<_$WoFormImpl> get copyWith =>

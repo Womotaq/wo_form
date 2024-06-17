@@ -8,6 +8,11 @@ class QuizPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WoForm(
+      themeBuilder: (context) => Theme.of(context).copyWith(
+        progressIndicatorTheme: const ProgressIndicatorThemeData(
+          linearTrackColor: Colors.transparent,
+        ),
+      ),
       uiSettings: const WoFormUiSettings(
         submitMode: PageByPageSubmitMode(
           submitText: 'Terminer',

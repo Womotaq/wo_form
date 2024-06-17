@@ -33,10 +33,13 @@ class WoFormPage extends StatelessWidget {
             onSubmitted!(context);
           }
         },
-        child: _WoFormPage(
-          form: form,
-          onSubmitted: onSubmitted,
-          uiSettings: uiSettings,
+        child: Theme(
+          data: form.themeBuilder?.call(context) ?? Theme.of(context),
+          child: _WoFormPage(
+            form: form,
+            onSubmitted: onSubmitted,
+            uiSettings: uiSettings,
+          ),
         ),
       ),
     );

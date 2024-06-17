@@ -23,6 +23,8 @@ class WoForm with _$WoForm {
     @JsonKey(toJson: ExportSettings.staticToJson)
     @Default(ExportSettings())
     ExportSettings exportSettings,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    ThemeData Function(BuildContext context)? themeBuilder,
   }) = _WoForm;
 
   const WoForm._();
