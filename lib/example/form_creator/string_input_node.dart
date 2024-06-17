@@ -224,11 +224,12 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
             ),
             const NumInput(
               id: 'maxLines',
+              isRequired: true,
               defaultValue: 1,
               uiSettings: NumInputUiSettings(
                 labelText: 'Nombre de lignes',
                 helperText: "Pour que le champ s'adapte à la hauteur du texte, "
-                    'laissez vide.',
+                    'entrez 0.',
               ),
             ),
             const StringInput(

@@ -31,14 +31,13 @@ class ProfileCreationPage extends StatelessWidget {
               uiSettings: StringInputUiSettings(
                 labelText: 'Prénom',
                 autofillHints: [AutofillHints.givenName],
+                maxLines: 0,
               ),
             ),
             StringInput(
               id: 'lastName',
               uiSettings: StringInputUiSettings(
                 labelText: 'Nom',
-                // submitFormOnFieldSubmitted: true,
-                // TODO : next page on submitted
                 autofillHints: [AutofillHints.familyName],
               ),
             ),

@@ -164,6 +164,8 @@ class StringInputUiSettings with _$StringInputUiSettings {
     bool? autofocus,
     TextInputAction? textInputAction,
     TextCapitalization? textCapitalization,
+
+    /// Defaults to 1. If you want to set it to null, enter 0.
     int? maxLines,
     String? invalidRegexMessage,
     @JsonKey(includeToJson: false, includeFromJson: false)

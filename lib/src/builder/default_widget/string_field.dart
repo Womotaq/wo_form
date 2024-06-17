@@ -36,7 +36,7 @@ class _StringFieldState extends State<StringField> {
             controller: textEditingController,
             onChanged: widget.data.onValueChanged,
             onFieldSubmitted:
-                (widget.data.uiSettings.submitFormOnFieldSubmitted ?? false)
+                (widget.data.uiSettings.submitFormOnFieldSubmitted ?? true)
                     ? (_) => context.read<WoFormValuesCubit>().submit()
                     : null,
             keyboardType: widget.data.uiSettings.keyboardType,
@@ -47,7 +47,9 @@ class _StringFieldState extends State<StringField> {
             textInputAction: widget.data.uiSettings.textInputAction,
             textCapitalization: widget.data.uiSettings.textCapitalization ??
                 TextCapitalization.none,
-            maxLines: widget.data.uiSettings.maxLines,
+            maxLines: widget.data.uiSettings.maxLines == 0
+                ? null
+                : widget.data.uiSettings.maxLines ?? 1,
             decoration: InputDecoration(
               hintText: widget.data.uiSettings.hintText,
               errorText: widget.data.errorText,
