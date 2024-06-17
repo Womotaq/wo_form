@@ -12,6 +12,16 @@ class SubmitButtonData {
   final String? text;
   final VoidCallback? onPressed;
   final SubmitButtonPosition position;
+
+  SubmitButtonData copyWith({
+    String? text,
+    SubmitButtonPosition? position,
+  }) =>
+      SubmitButtonData(
+        text: text ?? this.text,
+        onPressed: onPressed,
+        position: position ?? this.position,
+      );
 }
 
 class SubmitButton extends StatelessWidget {

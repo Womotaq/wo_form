@@ -156,38 +156,29 @@ class _WoFormPageView extends StatefulWidget {
 }
 
 class _WoFormPageViewState extends State<_WoFormPageView> {
-  late PageController _pageController;
   double _currentPage = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    _pageController = PageController();
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _pageController.addListener(
-      () => setState(() => _currentPage = _pageController.page!),
+
+    final pageController = context.read<WoFormValuesCubit>().pageController;
+    pageController.addListener(
+      () => setState(() => _currentPage = pageController.page!),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final pageController = context.read<WoFormValuesCubit>().pageController;
+
     return Scaffold(
       appBar: AppBar(
         leading: QuitPageButton(
           canQuit: (context) async {
-            if (_pageController.page != null && _pageController.page! > 0) {
+            if (pageController.page != null && pageController.page! > 0) {
               FocusScope.of(context).unfocus();
-              await _pageController.previousPage(
+              await pageController.previousPage(
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.easeIn,
               );
@@ -202,7 +193,7 @@ class _WoFormPageViewState extends State<_WoFormPageView> {
       body: Stack(
         children: [
           PageView.builder(
-            controller: _pageController,
+            controller: pageController,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: widget.form.inputs.length,
             itemBuilder: (context, index) => ListView(
@@ -216,28 +207,13 @@ class _WoFormPageViewState extends State<_WoFormPageView> {
                     children: [
                       Builder(
                         builder: (context) {
-                          final submitButtonData =
-                              index == widget.form.inputs.length - 1
-                                  ? widget.submitButtonData
-                                  : SubmitButtonData(
-                                      text: widget.nextText ??
-                                          context.read<WoFormL10n?>()?.nextText,
-                                      onPressed: () => context
-                                          .read<WoFormValuesCubit>()
-                                          .submitInput(
-                                            index: index,
-                                            onSuccess: () {
-                                              FocusScope.of(context).unfocus();
-                                              _pageController.nextPage(
-                                                duration: const Duration(
-                                                  milliseconds: 300,
-                                                ),
-                                                curve: Curves.easeIn,
-                                              );
-                                            },
-                                          ),
-                                      position: SubmitButtonPosition.bottom,
-                                    );
+                          final submitButtonData = index ==
+                                  widget.form.inputs.length - 1
+                              ? widget.submitButtonData
+                              : widget.submitButtonData.copyWith(
+                                  text: context.read<WoFormL10n?>()?.nextText,
+                                  position: SubmitButtonPosition.bottom,
+                                );
 
                           return widget.form.uiSettings.submitButtonBuilder
                                   ?.call(submitButtonData) ??

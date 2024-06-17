@@ -16,7 +16,6 @@ class QuizPage extends StatelessWidget {
       uiSettings: const WoFormUiSettings(
         submitMode: PageByPageSubmitMode(
           submitText: 'Terminer',
-          disableSubmitMode: DisableSubmitButton.whenInvalid,
         ),
       ),
       inputs: [
@@ -28,6 +27,7 @@ class QuizPage extends StatelessWidget {
           uiSettings: SelectInputUiSettings(
             labelText: 'De quelle couleur est le soleil ?',
             displayMode: SelectFieldDisplayMode.tile,
+            submitFormOnSelect: true,
             // TODO : nullValueText
           ),
         ),

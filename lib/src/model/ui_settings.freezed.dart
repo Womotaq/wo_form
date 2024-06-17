@@ -658,6 +658,9 @@ mixin _$SelectInputUiSettings<T> {
   SelectFieldBuilderDef<T>? get widgetBuilder =>
       throw _privateConstructorUsedError;
 
+  /// Only applies to unique choices
+  bool get submitFormOnSelect => throw _privateConstructorUsedError;
+
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $SelectInputUiSettingsCopyWith<T, SelectInputUiSettings<T>> get copyWith =>
@@ -681,7 +684,8 @@ abstract class $SelectInputUiSettingsCopyWith<T, $Res> {
       @JsonKey(includeFromJson: false, includeToJson: false)
       double Function(String, T)? searcher,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      SelectFieldBuilderDef<T>? widgetBuilder});
+      SelectFieldBuilderDef<T>? widgetBuilder,
+      bool submitFormOnSelect});
 }
 
 /// @nodoc
@@ -705,6 +709,7 @@ class _$SelectInputUiSettingsCopyWithImpl<T, $Res,
     Object? helpValueBuilder = freezed,
     Object? searcher = freezed,
     Object? widgetBuilder = freezed,
+    Object? submitFormOnSelect = null,
   }) {
     return _then(_value.copyWith(
       labelText: freezed == labelText
@@ -735,6 +740,10 @@ class _$SelectInputUiSettingsCopyWithImpl<T, $Res,
           ? _value.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
               as SelectFieldBuilderDef<T>?,
+      submitFormOnSelect: null == submitFormOnSelect
+          ? _value.submitFormOnSelect
+          : submitFormOnSelect // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -759,7 +768,8 @@ abstract class _$$SelectInputUiSettingsImplCopyWith<T, $Res>
       @JsonKey(includeFromJson: false, includeToJson: false)
       double Function(String, T)? searcher,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      SelectFieldBuilderDef<T>? widgetBuilder});
+      SelectFieldBuilderDef<T>? widgetBuilder,
+      bool submitFormOnSelect});
 }
 
 /// @nodoc
@@ -782,6 +792,7 @@ class __$$SelectInputUiSettingsImplCopyWithImpl<T, $Res>
     Object? helpValueBuilder = freezed,
     Object? searcher = freezed,
     Object? widgetBuilder = freezed,
+    Object? submitFormOnSelect = null,
   }) {
     return _then(_$SelectInputUiSettingsImpl<T>(
       labelText: freezed == labelText
@@ -812,6 +823,10 @@ class __$$SelectInputUiSettingsImplCopyWithImpl<T, $Res>
           ? _value.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
               as SelectFieldBuilderDef<T>?,
+      submitFormOnSelect: null == submitFormOnSelect
+          ? _value.submitFormOnSelect
+          : submitFormOnSelect // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -827,8 +842,8 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
       @JsonKey(includeFromJson: false, includeToJson: false)
       this.helpValueBuilder,
       @JsonKey(includeFromJson: false, includeToJson: false) this.searcher,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      this.widgetBuilder})
+      @JsonKey(includeToJson: false, includeFromJson: false) this.widgetBuilder,
+      this.submitFormOnSelect = false})
       : super._();
 
   factory _$SelectInputUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
@@ -853,9 +868,14 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
   @JsonKey(includeToJson: false, includeFromJson: false)
   final SelectFieldBuilderDef<T>? widgetBuilder;
 
+  /// Only applies to unique choices
+  @override
+  @JsonKey()
+  final bool submitFormOnSelect;
+
   @override
   String toString() {
-    return 'SelectInputUiSettings<$T>(labelText: $labelText, helperText: $helperText, displayMode: $displayMode, valueBuilder: $valueBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher, widgetBuilder: $widgetBuilder)';
+    return 'SelectInputUiSettings<$T>(labelText: $labelText, helperText: $helperText, displayMode: $displayMode, valueBuilder: $valueBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher, widgetBuilder: $widgetBuilder, submitFormOnSelect: $submitFormOnSelect)';
   }
 
   @override
@@ -876,13 +896,23 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
             (identical(other.searcher, searcher) ||
                 other.searcher == searcher) &&
             (identical(other.widgetBuilder, widgetBuilder) ||
-                other.widgetBuilder == widgetBuilder));
+                other.widgetBuilder == widgetBuilder) &&
+            (identical(other.submitFormOnSelect, submitFormOnSelect) ||
+                other.submitFormOnSelect == submitFormOnSelect));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, labelText, helperText,
-      displayMode, valueBuilder, helpValueBuilder, searcher, widgetBuilder);
+  int get hashCode => Object.hash(
+      runtimeType,
+      labelText,
+      helperText,
+      displayMode,
+      valueBuilder,
+      helpValueBuilder,
+      searcher,
+      widgetBuilder,
+      submitFormOnSelect);
 
   @JsonKey(ignore: true)
   @override
@@ -901,18 +931,18 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
 
 abstract class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
   const factory _SelectInputUiSettings(
-          {final String? labelText,
-          final String? helperText,
-          final SelectFieldDisplayMode? displayMode,
-          @JsonKey(includeFromJson: false, includeToJson: false)
-          final Widget Function(T?)? valueBuilder,
-          @JsonKey(includeFromJson: false, includeToJson: false)
-          final Widget? Function(T)? helpValueBuilder,
-          @JsonKey(includeFromJson: false, includeToJson: false)
-          final double Function(String, T)? searcher,
-          @JsonKey(includeToJson: false, includeFromJson: false)
-          final SelectFieldBuilderDef<T>? widgetBuilder}) =
-      _$SelectInputUiSettingsImpl<T>;
+      {final String? labelText,
+      final String? helperText,
+      final SelectFieldDisplayMode? displayMode,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      final Widget Function(T?)? valueBuilder,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      final Widget? Function(T)? helpValueBuilder,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      final double Function(String, T)? searcher,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final SelectFieldBuilderDef<T>? widgetBuilder,
+      final bool submitFormOnSelect}) = _$SelectInputUiSettingsImpl<T>;
   const _SelectInputUiSettings._() : super._();
 
   factory _SelectInputUiSettings.fromJson(Map<String, dynamic> json) =
@@ -936,6 +966,10 @@ abstract class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   SelectFieldBuilderDef<T>? get widgetBuilder;
+  @override
+
+  /// Only applies to unique choices
+  bool get submitFormOnSelect;
   @override
   @JsonKey(ignore: true)
   _$$SelectInputUiSettingsImplCopyWith<T, _$SelectInputUiSettingsImpl<T>>

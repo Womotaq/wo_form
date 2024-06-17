@@ -251,15 +251,17 @@ class SelectField<T> extends StatelessWidget {
     required WoFormValuesCubit valuesCubit,
     required List<T> selectedValues,
     required T value,
-  }) =>
-      valuesCubit.onValueChanged(
-        inputPath: data.inputPath,
-        value: value == null
-            ? <T>[]
-            : selectedValues.contains(value)
-                ? <T>[]
-                : [value],
-      );
+  }) {
+    valuesCubit.onValueChanged(
+      inputPath: data.inputPath,
+      value: value == null
+          ? <T>[]
+          : selectedValues.contains(value)
+              ? <T>[]
+              : [value],
+    );
+    if (data.uiSettings.submitFormOnSelect) valuesCubit.submit();
+  }
 
   void onMultipleChoice({
     required WoFormValuesCubit valuesCubit,

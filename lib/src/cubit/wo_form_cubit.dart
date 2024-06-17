@@ -24,11 +24,19 @@ class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
     this.form,
     this._statusCubit, {
     this.onSubmitting,
-  }) : super(form.defaultValues());
+  })  : pageController = PageController(),
+        super(form.defaultValues());
 
   final WoForm form;
+  final PageController pageController;
   final WoFormStatusCubit _statusCubit;
   final FutureOr<void> Function(Map<String, dynamic> values)? onSubmitting;
+
+  @override
+  Future<void> close() {
+    pageController.dispose();
+    return super.close();
+  }
 
   /// **Use this method precautiously since there is no type checking !**
   void onValueChanged({
@@ -47,34 +55,38 @@ class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
     emit(newMap);
   }
 
-  void submitInput({
-    required int index,
-    required VoidCallback onSuccess,
-  }) {
-    final input = form.inputs[index];
-
-    final Iterable<WoFormInputError> errors;
-    if (input is WoFormNode) {
-      errors = input.getErrors(state, parentPath: '');
-    } else if (input is WoFormInputMixin) {
-      errors = [
-        (input as WoFormInputMixin).getError(state['/${input.id}']),
-      ].whereNotNull();
-    } else {
-      throw UnimplementedError();
-    }
-
-    if (errors.isNotEmpty) {
-      return _statusCubit.setInvalidValues(inputErrors: errors);
-    } else {
-      // remove the InvalidValuesStatus
-      _statusCubit.setInProgress();
-
-      onSuccess();
-    }
-  }
-
   Future<void> submit() async {
+    if (form.uiSettings.submitMode is PageByPageSubmitMode &&
+        (pageController.page ?? 0) < form.inputs.length - 1) {
+      final index = pageController.page?.toInt() ?? 0;
+      final input = form.inputs[index];
+
+      final Iterable<WoFormInputError> errors;
+      if (input is WoFormNode) {
+        errors = input.getErrors(state, parentPath: '');
+      } else if (input is WoFormInputMixin) {
+        errors = [
+          (input as WoFormInputMixin).getError(state['/${input.id}']),
+        ].whereNotNull();
+      } else {
+        throw UnimplementedError();
+      }
+
+      if (errors.isNotEmpty) {
+        return _statusCubit.setInvalidValues(inputErrors: errors);
+      } else {
+        // remove the InvalidValuesStatus
+        _statusCubit.setInProgress();
+
+        return pageController.nextPage(
+          duration: const Duration(
+            milliseconds: 300,
+          ),
+          curve: Curves.easeIn,
+        );
+      }
+    }
+
     final inputErrors = form.getErrors(state);
     if (inputErrors.isNotEmpty) {
       return _statusCubit.setInvalidValues(inputErrors: inputErrors);

@@ -120,6 +120,9 @@ class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
     double Function(String query, T value)? searcher,
     @JsonKey(includeToJson: false, includeFromJson: false)
     SelectFieldBuilderDef<T>? widgetBuilder,
+
+    /// Only applies to unique choices
+    @Default(false) bool submitFormOnSelect,
   }) = _SelectInputUiSettings<T>;
 
   const SelectInputUiSettings._();
