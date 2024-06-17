@@ -61,6 +61,7 @@ class QuizPage extends StatelessWidget {
           uiSettings: SelectInputUiSettings(
             labelText: "Quelle est l'hypothénuse de x ?",
             displayMode: SelectFieldDisplayMode.tile,
+            submitFormOnSelect: true,
             valueBuilder: (value) => Text(
               switch (value) {
                 'A' => '√2',

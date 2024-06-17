@@ -37,9 +37,6 @@ class WoFormExamplesApp extends StatelessWidget {
           inputDecorationTheme:
               const InputDecorationTheme(border: OutlineInputBorder()),
         ),
-        // TOD : remove
-        supportedLocales: FormLocalizations.supportedLocales,
-        localizationsDelegates: FormLocalizations.localizationsDelegates,
         home: const HomePage(),
       ),
     );

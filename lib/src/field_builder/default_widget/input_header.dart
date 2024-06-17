@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:wo_form/wo_form.dart';
 
+/// By default, used by [StringField] and [SelectField].
 class InputHeader extends StatelessWidget {
   const InputHeader({
     required this.labelText,

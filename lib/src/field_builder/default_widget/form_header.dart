@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:package_atomic_design/package_atomic_design.dart';
+import 'package:wo_form/wo_form.dart';
 
+/// By default, used by [InputsNodeWidget] and [WoFormPage].
 class FormHeader extends StatelessWidget {
   const FormHeader({
     required this.labelText,
@@ -15,16 +16,21 @@ class FormHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     if (labelText.isEmpty && helperText.isEmpty) return const SizedBox.shrink();
 
-    return WoPadding.horizontalMedium(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         children: [
-          WoGap.medium,
+          const SizedBox(height: 16),
           Text(
             labelText,
-            style: context.textTheme.titleCard,
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(fontWeight: FontWeight.bold),
           ),
-          WoPadding.horizontalXxlarge(
-            child: Divider(color: context.colorScheme.primary),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 48),
+            child: Divider(color: Theme.of(context).colorScheme.primary),
           ),
           if (helperText.isNotEmpty) ...[
             Text(
@@ -32,9 +38,9 @@ class FormHeader extends StatelessWidget {
               style: Theme.of(context).inputDecorationTheme.helperStyle ??
                   Theme.of(context).textTheme.labelMedium,
             ),
-            WoGap.small,
+            const SizedBox(height: 8),
           ],
-          WoGap.large,
+          const SizedBox(height: 24),
         ],
       ),
     );

@@ -2,28 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/src/_export.dart';
 
-class SubmitButtonData {
-  const SubmitButtonData({
-    required this.text,
-    required this.onPressed,
-    required this.position,
-  });
-
-  final String? text;
-  final VoidCallback? onPressed;
-  final SubmitButtonPosition position;
-
-  SubmitButtonData copyWith({
-    String? text,
-    SubmitButtonPosition? position,
-  }) =>
-      SubmitButtonData(
-        text: text ?? this.text,
-        onPressed: onPressed,
-        position: position ?? this.position,
-      );
-}
-
+/// Default submt button. Can be overriden by submitButtonBuilder from
+/// [WoFormUiSettings] or using [WoFormTheme].
 class SubmitButton extends StatelessWidget {
   const SubmitButton({required this.data, super.key});
 

@@ -60,43 +60,15 @@ class _WoFormPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final uiSettings = form.uiSettings;
 
-    void submit() {
-      FocusScope.of(context).unfocus();
-      context.read<WoFormValuesCubit>().submit();
-    }
-
     final submitMode = uiSettings.submitMode;
-    final disabled = switch (submitMode.disableSubmitMode) {
-      DisableSubmitButton.whenInitialOrSubmitted => switch (
-            context.watch<WoFormStatusCubit>().state) {
-          InitialStatus() || SubmittedStatus() => true,
-          _ => false,
-        },
-      DisableSubmitButton.whenInvalid => context.select(
-          (WoFormValuesCubit c) => form.getErrors(c.state).isNotEmpty,
-        ),
-      DisableSubmitButton.never => false,
-    };
-
-    final submitButtonData = SubmitButtonData(
-      onPressed: disabled ? null : submit,
-      text: submitMode.submitText ?? context.read<WoFormL10n?>()?.submitText,
-      position: submitMode.buttonPosition,
-    );
 
     if (submitMode is PageByPageSubmitMode) {
       return _WoFormPageView(
         form: form,
         titleText: uiSettings.titleText,
         nextText: submitMode.nextText,
-        submitButtonData: submitButtonData,
       );
     }
-
-    final submitButton = uiSettings.submitButtonBuilder
-            ?.call(submitButtonData) ??
-        WoFormTheme.of(context)?.submitButtonBuilder?.call(submitButtonData) ??
-        SubmitButton(data: submitButtonData);
 
     return Scaffold(
       appBar: AppBar(
@@ -107,7 +79,7 @@ class _WoFormPage extends StatelessWidget {
         actions: [
           if (uiSettings.submitMode.buttonPosition ==
               SubmitButtonPosition.appBar) ...[
-            submitButton,
+            const SubmitButtonBuilder(),
             WoGap.small,
           ],
         ],
@@ -127,7 +99,7 @@ class _WoFormPage extends StatelessWidget {
                   ...form.inputs.map((e) => e.toWidget(parentPath: '')),
                   if (uiSettings.submitMode.buttonPosition ==
                       SubmitButtonPosition.bottom)
-                    submitButton,
+                    const SubmitButtonBuilder(),
                 ],
               ),
             ],
@@ -143,20 +115,18 @@ class _WoFormPageView extends StatefulWidget {
     required this.form,
     required this.titleText,
     required this.nextText,
-    required this.submitButtonData,
   });
 
   final WoForm form;
   final String titleText;
   final String? nextText;
-  final SubmitButtonData submitButtonData;
 
   @override
   State<_WoFormPageView> createState() => _WoFormPageViewState();
 }
 
 class _WoFormPageViewState extends State<_WoFormPageView> {
-  double _currentPage = 0;
+  double pageIndex = 0;
 
   @override
   void didChangeDependencies() {
@@ -164,7 +134,7 @@ class _WoFormPageViewState extends State<_WoFormPageView> {
 
     final pageController = context.read<WoFormValuesCubit>().pageController;
     pageController.addListener(
-      () => setState(() => _currentPage = pageController.page!),
+      () => setState(() => pageIndex = pageController.page!),
     );
   }
 
@@ -201,28 +171,11 @@ class _WoFormPageViewState extends State<_WoFormPageView> {
                 WoGap.medium,
                 widget.form.inputs[index].toWidget(parentPath: ''),
                 WoGap.xlarge,
-                WoPadding.horizontalSmall(
+                const WoPadding.horizontalSmall(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Builder(
-                        builder: (context) {
-                          final submitButtonData = index ==
-                                  widget.form.inputs.length - 1
-                              ? widget.submitButtonData
-                              : widget.submitButtonData.copyWith(
-                                  text: context.read<WoFormL10n?>()?.nextText,
-                                  position: SubmitButtonPosition.bottom,
-                                );
-
-                          return widget.form.uiSettings.submitButtonBuilder
-                                  ?.call(submitButtonData) ??
-                              WoFormTheme.of(context)
-                                  ?.submitButtonBuilder
-                                  ?.call(submitButtonData) ??
-                              SubmitButton(data: submitButtonData);
-                        },
-                      ),
+                      SubmitButtonBuilder(),
                     ],
                   ),
                 ),
@@ -237,7 +190,7 @@ class _WoFormPageViewState extends State<_WoFormPageView> {
               curve: Curves.easeInOut,
               tween: Tween<double>(
                 begin: 1,
-                end: _currentPage + 1,
+                end: pageIndex + 1,
               ),
               builder: (context, value, _) {
                 return LinearProgressIndicator(
