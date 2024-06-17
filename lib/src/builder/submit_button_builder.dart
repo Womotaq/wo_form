@@ -27,25 +27,10 @@ class SubmitButtonData {
       );
 }
 
-class SubmitButtonBuilder extends StatefulWidget {
-  const SubmitButtonBuilder({super.key});
+class SubmitButtonBuilder extends StatelessWidget {
+  const SubmitButtonBuilder({this.pageIndex = 0, super.key});
 
-  @override
-  State<SubmitButtonBuilder> createState() => _SubmitButtonBuilderState();
-}
-
-class _SubmitButtonBuilderState extends State<SubmitButtonBuilder> {
-  int pageIndex = 0;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    final pageController = context.read<WoFormValuesCubit>().pageController;
-    pageController.addListener(
-      () => setState(() => pageIndex = pageController.page!.toInt()),
-    );
-  }
+  final int pageIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -63,18 +48,23 @@ class _SubmitButtonBuilderState extends State<SubmitButtonBuilder> {
       DisableSubmitButton.never => false,
     };
 
+    final submitMode = form.uiSettings.submitMode;
+
     final submitButtonData = SubmitButtonData(
       pageIndex: pageIndex,
-      text: pageIndex == form.inputs.length - 1
-          ? context.read<WoFormL10n?>()?.submitText
-          : context.read<WoFormL10n?>()?.nextText,
+      text: submitMode is PageByPageSubmitMode &&
+              pageIndex < form.inputs.length - 1
+          ? submitMode.nextText ?? context.read<WoFormL10n?>()?.nextText
+          : submitMode.submitText ?? context.read<WoFormL10n?>()?.submitText,
       onPressed: disabled
           ? null
           : () {
               FocusScope.of(context).unfocus();
               context.read<WoFormValuesCubit>().submit();
             },
-      position: SubmitButtonPosition.bottom,
+      position: submitMode is StandardSubmitMode
+          ? submitMode.buttonPosition
+          : SubmitButtonPosition.bottom,
     );
 
     return form.uiSettings.submitButtonBuilder?.call(submitButtonData) ??

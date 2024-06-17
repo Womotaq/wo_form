@@ -21,6 +21,12 @@ mixin WoFormInputMixin {
 
   WoFormInputError? getError(Object? value);
 
+  Iterable<WoFormInputError> getErrors(
+    Map<String, dynamic> values, {
+    required String parentPath,
+  }) =>
+      [getError(values['$parentPath/$id'])].whereNotNull();
+
   String? getInvalidExplanation(
     dynamic value,
     TranslateInputError? translateError,

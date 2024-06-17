@@ -14,7 +14,12 @@ mixin WoFormElementMixin {
   Map<String, dynamic> toJson();
 
   dynamic export({
-    required Map<String, dynamic> values, // TODO : rename as values
+    required Map<String, dynamic> values,
+    required String parentPath,
+  });
+
+  Iterable<WoFormInputError> getErrors(
+    Map<String, dynamic> values, {
     required String parentPath,
   });
 
@@ -169,6 +174,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
     }
   }
 
+  @override
   Iterable<WoFormInputError> getErrors(
     Map<String, dynamic> values, {
     required String parentPath,
@@ -177,15 +183,10 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
       case InputsNode(inputs: final inputs):
         return [
           for (final input in inputs)
-            if (input is WoFormNode)
-              ...input.getErrors(
-                values,
-                parentPath: '$parentPath/$id',
-              )
-            else if (input is WoFormInputMixin)
-              (input as WoFormInputMixin).getError(
-                values['$parentPath/$id/${input.id}'],
-              ),
+            ...input.getErrors(
+              values,
+              parentPath: '$parentPath/$id',
+            ),
         ].whereNotNull();
       case ValueBuilderNode(inputPath: final inputPath, builder: final builder):
         final input = builder!(
@@ -196,20 +197,10 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
           )],
         );
 
-        if (input is WoFormNode) {
-          return input.getErrors(
-            values,
-            parentPath: '$parentPath/$id',
-          );
-        } else if (input is WoFormInputMixin) {
-          return [
-            (input as WoFormInputMixin).getError(
-              values['$parentPath/$id/${input.id}'],
-            ),
-          ].whereNotNull();
-        } else {
-          throw UnimplementedError('Unknown input type : ${input.runtimeType}');
-        }
+        return input.getErrors(
+          values,
+          parentPath: '$parentPath/$id',
+        );
       case ValueListenerNode():
         return [];
     }

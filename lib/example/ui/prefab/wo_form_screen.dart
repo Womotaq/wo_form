@@ -6,7 +6,7 @@ import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/src/_export.dart';
 import 'package:wo_form/wo_form.dart';
 
-// TODO : name as page
+// TODO : name file as page
 class WoFormPage extends StatelessWidget {
   const WoFormPage({
     required this.form,
@@ -171,11 +171,11 @@ class _WoFormPageViewState extends State<_WoFormPageView> {
                 WoGap.medium,
                 widget.form.inputs[index].toWidget(parentPath: ''),
                 WoGap.xlarge,
-                const WoPadding.horizontalSmall(
+                WoPadding.horizontalSmall(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      SubmitButtonBuilder(),
+                      SubmitButtonBuilder(pageIndex: index),
                     ],
                   ),
                 ),

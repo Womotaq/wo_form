@@ -13,10 +13,13 @@ class QuizPage extends StatelessWidget {
           linearTrackColor: Colors.transparent,
         ),
       ),
-      uiSettings: const WoFormUiSettings(
-        submitMode: PageByPageSubmitMode(
+      uiSettings: WoFormUiSettings(
+        submitMode: const PageByPageSubmitMode(
           submitText: 'Terminer',
         ),
+        submitButtonBuilder: (data) => data.pageIndex.isEven
+            ? const SizedBox.shrink()
+            : SubmitButton(data: data),
       ),
       inputs: [
         const SelectStringInput(
