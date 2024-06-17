@@ -148,13 +148,7 @@ class _WoFormPage extends StatelessWidget {
   }
 }
 
-class _PageIndexCubit extends Cubit<int> {
-  _PageIndexCubit() : super(0);
-
-  void set(int index) => emit(index);
-}
-
-class _WoFormPageView extends StatelessWidget {
+class _WoFormPageView extends StatefulWidget {
   const _WoFormPageView({
     required this.form,
     required this.titleText,
@@ -168,107 +162,123 @@ class _WoFormPageView extends StatelessWidget {
   final BlocBuilder<WoFormStatusCubit, WoFormStatus> submitButton;
 
   @override
+  State<_WoFormPageView> createState() => _WoFormPageViewState();
+}
+
+class _WoFormPageViewState extends State<_WoFormPageView> {
+  late PageController _pageController;
+  double _currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _pageController.addListener(
+      () => setState(() => _currentPage = _pageController.page!),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final pageController = PageController();
-    final pageIndexCubit = _PageIndexCubit();
-
-    return BlocProvider.value(
-      value: pageIndexCubit,
-      child: Scaffold(
-        appBar: AppBar(
-          leading: QuitPageButton(
-            canQuit: (context) async {
-              if (pageController.page != null && pageController.page! > 0) {
-                FocusScope.of(context).unfocus();
-                await pageController.previousPage(
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeIn,
-                );
-                return false;
-              } else {
-                return form.canQuit?.call(context) ?? true;
-              }
-            },
-          ),
-          title: Text(titleText),
+    return Scaffold(
+      appBar: AppBar(
+        leading: QuitPageButton(
+          canQuit: (context) async {
+            if (_pageController.page != null && _pageController.page! > 0) {
+              FocusScope.of(context).unfocus();
+              await _pageController.previousPage(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeIn,
+              );
+              return false;
+            } else {
+              return widget.form.canQuit?.call(context) ?? true;
+            }
+          },
         ),
-        body: Stack(
-          children: [
-            PageView.builder(
-              controller: pageController,
-              physics: const NeverScrollableScrollPhysics(),
-              onPageChanged: pageIndexCubit.set,
-              itemCount: form.inputs.length,
-              itemBuilder: (context, index) => ListView(
-                children: [
-                  WoGap.medium,
-                  form.inputs[index].toWidget(parentPath: ''),
-                  WoGap.xlarge,
-                  WoPadding.horizontalSmall(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        if (index == form.inputs.length - 1)
-                          submitButton
-                        else
-                          Builder(
-                            builder: (context) {
-                              final submitButtonData = SubmitButtonData(
-                                text: nextText ??
-                                    context.read<WoFormL10n?>()?.nextText,
-                                onPressed: () => context
-                                    .read<WoFormValuesCubit>()
-                                    .submitInput(
-                                      index: index,
-                                      onSuccess: () {
-                                        FocusScope.of(context).unfocus();
-                                        pageController.nextPage(
-                                          duration: const Duration(
-                                            milliseconds: 300,
-                                          ),
-                                          curve: Curves.easeIn,
-                                        );
-                                      },
-                                    ),
-                                position: SubmitButtonPosition.bottom,
-                              );
+        title: Text(widget.titleText),
+      ),
+      body: Stack(
+        children: [
+          PageView.builder(
+            controller: _pageController,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: widget.form.inputs.length,
+            itemBuilder: (context, index) => ListView(
+              children: [
+                WoGap.medium,
+                widget.form.inputs[index].toWidget(parentPath: ''),
+                WoGap.xlarge,
+                WoPadding.horizontalSmall(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      if (index == widget.form.inputs.length - 1)
+                        widget.submitButton
+                      else
+                        Builder(
+                          builder: (context) {
+                            final submitButtonData = SubmitButtonData(
+                              text: widget.nextText ??
+                                  context.read<WoFormL10n?>()?.nextText,
+                              onPressed: () =>
+                                  context.read<WoFormValuesCubit>().submitInput(
+                                        index: index,
+                                        onSuccess: () {
+                                          FocusScope.of(context).unfocus();
+                                          _pageController.nextPage(
+                                            duration: const Duration(
+                                              milliseconds: 300,
+                                            ),
+                                            curve: Curves.easeIn,
+                                          );
+                                        },
+                                      ),
+                              position: SubmitButtonPosition.bottom,
+                            );
 
-                              return form.uiSettings.submitButtonBuilder
-                                      ?.call(submitButtonData) ??
-                                  WoFormTheme.of(context)
-                                      ?.submitButtonBuilder
-                                      ?.call(submitButtonData) ??
-                                  SubmitButton(data: submitButtonData);
-                            },
-                          ),
-                      ],
-                    ),
+                            return widget.form.uiSettings.submitButtonBuilder
+                                    ?.call(submitButtonData) ??
+                                WoFormTheme.of(context)
+                                    ?.submitButtonBuilder
+                                    ?.call(submitButtonData) ??
+                                SubmitButton(data: submitButtonData);
+                          },
+                        ),
+                    ],
                   ),
-                  WoGap.medium,
-                ],
-              ),
+                ),
+                WoGap.medium,
+              ],
             ),
-            if ((form.uiSettings.submitMode as PageByPageSubmitMode)
-                .showProgressIndicator)
-              BlocBuilder<_PageIndexCubit, int>(
-                builder: (context, pageIndex) {
-                  return TweenAnimationBuilder<double>(
-                    duration: const Duration(milliseconds: 250),
-                    curve: Curves.easeInOut,
-                    tween: Tween<double>(
-                      begin: 1,
-                      end: pageIndex.toDouble() + 1,
-                    ),
-                    builder: (context, value, _) {
-                      return LinearProgressIndicator(
-                        value: value / max(1, form.inputs.length),
-                      );
-                    },
-                  );
-                },
+          ),
+          if ((widget.form.uiSettings.submitMode as PageByPageSubmitMode)
+              .showProgressIndicator)
+            TweenAnimationBuilder<double>(
+              duration: const Duration(milliseconds: 250),
+              curve: Curves.easeInOut,
+              tween: Tween<double>(
+                begin: 1,
+                end: _currentPage + 1,
               ),
-          ],
-        ),
+              builder: (context, value, _) {
+                return LinearProgressIndicator(
+                  value: value / max(1, widget.form.inputs.length),
+                );
+              },
+            ),
+        ],
       ),
     );
   }
