@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -43,6 +45,33 @@ class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
     }
 
     emit(newMap);
+  }
+
+  void submitInput({
+    required int index,
+    required VoidCallback onSuccess,
+  }) {
+    final input = form.inputs[index];
+
+    final Iterable<WoFormInputError> errors;
+    if (input is WoFormNode) {
+      errors = input.getErrors(state, parentPath: '');
+    } else if (input is WoFormInputMixin) {
+      errors = [
+        (input as WoFormInputMixin).getError(state['/${input.id}']),
+      ].whereNotNull();
+    } else {
+      throw UnimplementedError();
+    }
+
+    if (errors.isNotEmpty) {
+      return _statusCubit.setInvalidValues(inputErrors: errors);
+    } else {
+      // remove the InvalidValuesStatus
+      _statusCubit.setInProgress();
+
+      onSuccess();
+    }
   }
 
   Future<void> submit() async {
@@ -97,6 +126,7 @@ class WoFormInitializer extends StatelessWidget {
   }
 }
 
+// TODO : move
 class WoFormBuilder extends StatelessWidget {
   const WoFormBuilder({
     required this.builder,

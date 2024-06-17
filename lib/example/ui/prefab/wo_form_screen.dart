@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
@@ -217,41 +216,20 @@ class _WoFormPageView extends StatelessWidget {
                               final submitButtonData = SubmitButtonData(
                                 text: nextText ??
                                     context.read<WoFormL10n?>()?.nextText,
-                                onPressed: () {
-                                  final input = form.inputs[index];
-                                  final values =
-                                      context.read<WoFormValuesCubit>().state;
-
-                                  final Iterable<WoFormInputError> errors;
-                                  if (input is WoFormNode) {
-                                    errors =
-                                        input.getErrors(values, parentPath: '');
-                                  } else if (input is WoFormInputMixin) {
-                                    errors = [
-                                      (input as WoFormInputMixin)
-                                          .getError(values['/${input.id}']),
-                                    ].whereNotNull();
-                                  } else {
-                                    throw UnimplementedError();
-                                  }
-
-                                  if (errors.isNotEmpty) {
-                                    return context
-                                        .read<WoFormStatusCubit>()
-                                        .setInvalidValues(inputErrors: errors);
-                                  } else {
-                                    FocusScope.of(context).unfocus();
-                                    // remove the InvalidValuesStatus
-                                    context
-                                        .read<WoFormStatusCubit>()
-                                        .setInProgress();
-                                    pageController.nextPage(
-                                      duration:
-                                          const Duration(milliseconds: 300),
-                                      curve: Curves.easeIn,
-                                    );
-                                  }
-                                },
+                                onPressed: () => context
+                                    .read<WoFormValuesCubit>()
+                                    .submitInput(
+                                      index: index,
+                                      onSuccess: () {
+                                        FocusScope.of(context).unfocus();
+                                        pageController.nextPage(
+                                          duration: const Duration(
+                                            milliseconds: 300,
+                                          ),
+                                          curve: Curves.easeIn,
+                                        );
+                                      },
+                                    ),
                                 position: SubmitButtonPosition.bottom,
                               );
 
