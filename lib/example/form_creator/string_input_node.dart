@@ -120,7 +120,6 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
             ),
             SelectInput<TextInputType>(
               id: 'keyboardType',
-              defaultValues: [TextInputType.text],
               availibleValues: TextInputType.values,
               maxCount: 1,
               uiSettings: SelectInputUiSettings(
@@ -129,6 +128,7 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
                 displayMode: SelectFieldDisplayMode.chip,
                 valueBuilder: (value) => Text(
                   switch (value?.name) {
+                    'text' => 'Du texte à une seule ligne',
                     'multiline' => 'Du texte à plusieurs lignes',
                     'number' => 'Un nombre',
                     'phone' => 'Un numéro de téléphone',

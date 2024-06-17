@@ -11,7 +11,7 @@ class TextInputTypeConverter extends JsonConverter<TextInputType?, String?> {
 
   @override
   TextInputType? fromJson(String? json) =>
-      json == null ? null : TextInputTypeX.fromName(json)!;
+      json == null ? null : TextInputTypeX.fromName(json);
 }
 
 extension TextInputTypeX on TextInputType {
