@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/example/form_creator/form_creator_page.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -21,7 +22,9 @@ class CustomSubmitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loadingIndicator = data.formStatus is SubmittingStatus
+    final formStatus = context.watch<WoFormStatusCubit>().state;
+
+    final loadingIndicator = formStatus is SubmittingStatus
         ? Padding(
             padding: const EdgeInsets.only(right: 4),
             child: SizedBox.square(

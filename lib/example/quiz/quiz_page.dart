@@ -16,7 +16,6 @@ class QuizPage extends StatelessWidget {
       uiSettings: const WoFormUiSettings(
         submitMode: PageByPageSubmitMode(
           submitText: 'Terminer',
-          nextText: 'Répondre',
           disableSubmitMode: DisableSubmitButton.whenInvalid,
         ),
       ),

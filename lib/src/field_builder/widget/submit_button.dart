@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/src/_export.dart';
 
 class SubmitButtonData {
@@ -6,13 +7,11 @@ class SubmitButtonData {
     required this.text,
     required this.onPressed,
     required this.position,
-    this.formStatus,
   });
 
   final String? text;
   final VoidCallback? onPressed;
   final SubmitButtonPosition position;
-  final WoFormStatus? formStatus;
 }
 
 class SubmitButton extends StatelessWidget {
@@ -22,7 +21,9 @@ class SubmitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loadingIndicator = data.formStatus is SubmittingStatus
+    final formStatus = context.watch<WoFormStatusCubit>().state;
+
+    final loadingIndicator = formStatus is SubmittingStatus
         ? SizedBox.square(
             dimension: 12,
             child: CircularProgressIndicator(
