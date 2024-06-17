@@ -43,7 +43,8 @@ class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
     required String inputPath,
     required dynamic value,
   }) {
-    // TODO : ignore if submitting
+    // Can't edit a form while submitting it
+    if (_statusCubit.state is SubmittingStatus) return;
 
     final newMap = Map<String, dynamic>.from(state);
     newMap[inputPath] = value;
