@@ -111,6 +111,7 @@ class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
   const factory SelectInputUiSettings({
     String? labelText,
     String? helperText,
+    String? hintText,
     SelectFieldDisplayMode? displayMode,
     @JsonKey(includeFromJson: false, includeToJson: false)
     Widget Function(T?)? valueBuilder,
@@ -136,9 +137,11 @@ class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
           : SelectInputUiSettings(
               labelText: labelText ?? other.labelText,
               helperText: helperText ?? other.helperText,
+              hintText: hintText ?? other.hintText,
               displayMode: displayMode ?? other.displayMode,
               valueBuilder: valueBuilder ?? other.valueBuilder,
               helpValueBuilder: helpValueBuilder ?? other.helpValueBuilder,
+              searcher: searcher ?? other.searcher,
               widgetBuilder: widgetBuilder ?? other.widgetBuilder,
             );
 }

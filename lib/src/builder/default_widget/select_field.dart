@@ -88,6 +88,7 @@ class SelectField<T> extends StatelessWidget {
                   selectedValue: selectedValues.firstOrNull,
                   valueBuilder: data.uiSettings.valueBuilder,
                   helpValueBuilder: data.uiSettings.helpValueBuilder,
+                  hintText: data.uiSettings.hintText,
                   searcher: data.uiSettings.searcher,
                 ),
               ),
@@ -110,6 +111,7 @@ class SelectField<T> extends StatelessWidget {
               selectedValues: selectedValues,
               valueBuilder: data.uiSettings.valueBuilder,
               helpValueBuilder: data.uiSettings.helpValueBuilder,
+              hintText: data.uiSettings.hintText,
               searcher: data.uiSettings.searcher,
               builder: (onPressed) => IconButton(
                 onPressed: onPressed,

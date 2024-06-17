@@ -43,9 +43,8 @@ class CustomSubmitButton extends StatelessWidget {
         return FilledButton.icon(
           onPressed: data.onPressed,
           icon: loadingIndicator,
-          label: Text(data.text ?? ''), // TODO : woFormL10n.submit
+          label: Text(data.text ?? ''),
         );
-      // TODO : change
       case SubmitButtonPosition.bottom:
         return Padding(
           padding: const EdgeInsets.only(top: 32),
@@ -53,7 +52,7 @@ class CustomSubmitButton extends StatelessWidget {
             title: FilledButton.icon(
               onPressed: data.onPressed,
               icon: loadingIndicator,
-              label: Text(data.text ?? ''), // TODO : woFormL10n.submit
+              label: Text(data.text ?? ''),
             ),
           ),
         );

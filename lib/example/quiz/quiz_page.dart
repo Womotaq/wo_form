@@ -29,9 +29,9 @@ class QuizPage extends StatelessWidget {
           availibleValues: ['Bleu', 'Rouge', 'Vert', 'Jaune'],
           uiSettings: SelectInputUiSettings(
             labelText: 'De quelle couleur est le soleil ?',
-            displayMode: SelectFieldDisplayMode.tile,
+            hintText: 'Sélectionner une réponse',
+            displayMode: SelectFieldDisplayMode.chip,
             submitFormOnSelect: true,
-            // TODO : nullValueText
           ),
         ),
         ValueBuilderNode(

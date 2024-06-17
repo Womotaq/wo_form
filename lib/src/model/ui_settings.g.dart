@@ -79,6 +79,7 @@ _$SelectInputUiSettingsImpl<T> _$$SelectInputUiSettingsImplFromJson<T>(
     _$SelectInputUiSettingsImpl<T>(
       labelText: json['labelText'] as String?,
       helperText: json['helperText'] as String?,
+      hintText: json['hintText'] as String?,
       displayMode: $enumDecodeNullable(
           _$SelectFieldDisplayModeEnumMap, json['displayMode']),
       submitFormOnSelect: json['submitFormOnSelect'] as bool? ?? false,
@@ -89,6 +90,7 @@ Map<String, dynamic> _$$SelectInputUiSettingsImplToJson<T>(
     <String, dynamic>{
       'labelText': instance.labelText,
       'helperText': instance.helperText,
+      'hintText': instance.hintText,
       'displayMode': _$SelectFieldDisplayModeEnumMap[instance.displayMode],
       'submitFormOnSelect': instance.submitFormOnSelect,
     };

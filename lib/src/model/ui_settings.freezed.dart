@@ -645,6 +645,7 @@ SelectInputUiSettings<T> _$SelectInputUiSettingsFromJson<T>(
 mixin _$SelectInputUiSettings<T> {
   String? get labelText => throw _privateConstructorUsedError;
   String? get helperText => throw _privateConstructorUsedError;
+  String? get hintText => throw _privateConstructorUsedError;
   SelectFieldDisplayMode? get displayMode => throw _privateConstructorUsedError;
   @JsonKey(includeFromJson: false, includeToJson: false)
   Widget Function(T?)? get valueBuilder => throw _privateConstructorUsedError;
@@ -676,6 +677,7 @@ abstract class $SelectInputUiSettingsCopyWith<T, $Res> {
   $Res call(
       {String? labelText,
       String? helperText,
+      String? hintText,
       SelectFieldDisplayMode? displayMode,
       @JsonKey(includeFromJson: false, includeToJson: false)
       Widget Function(T?)? valueBuilder,
@@ -704,6 +706,7 @@ class _$SelectInputUiSettingsCopyWithImpl<T, $Res,
   $Res call({
     Object? labelText = freezed,
     Object? helperText = freezed,
+    Object? hintText = freezed,
     Object? displayMode = freezed,
     Object? valueBuilder = freezed,
     Object? helpValueBuilder = freezed,
@@ -719,6 +722,10 @@ class _$SelectInputUiSettingsCopyWithImpl<T, $Res,
       helperText: freezed == helperText
           ? _value.helperText
           : helperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hintText: freezed == hintText
+          ? _value.hintText
+          : hintText // ignore: cast_nullable_to_non_nullable
               as String?,
       displayMode: freezed == displayMode
           ? _value.displayMode
@@ -760,6 +767,7 @@ abstract class _$$SelectInputUiSettingsImplCopyWith<T, $Res>
   $Res call(
       {String? labelText,
       String? helperText,
+      String? hintText,
       SelectFieldDisplayMode? displayMode,
       @JsonKey(includeFromJson: false, includeToJson: false)
       Widget Function(T?)? valueBuilder,
@@ -787,6 +795,7 @@ class __$$SelectInputUiSettingsImplCopyWithImpl<T, $Res>
   $Res call({
     Object? labelText = freezed,
     Object? helperText = freezed,
+    Object? hintText = freezed,
     Object? displayMode = freezed,
     Object? valueBuilder = freezed,
     Object? helpValueBuilder = freezed,
@@ -802,6 +811,10 @@ class __$$SelectInputUiSettingsImplCopyWithImpl<T, $Res>
       helperText: freezed == helperText
           ? _value.helperText
           : helperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hintText: freezed == hintText
+          ? _value.hintText
+          : hintText // ignore: cast_nullable_to_non_nullable
               as String?,
       displayMode: freezed == displayMode
           ? _value.displayMode
@@ -837,6 +850,7 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
   const _$SelectInputUiSettingsImpl(
       {this.labelText,
       this.helperText,
+      this.hintText,
       this.displayMode,
       @JsonKey(includeFromJson: false, includeToJson: false) this.valueBuilder,
       @JsonKey(includeFromJson: false, includeToJson: false)
@@ -853,6 +867,8 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
   final String? labelText;
   @override
   final String? helperText;
+  @override
+  final String? hintText;
   @override
   final SelectFieldDisplayMode? displayMode;
   @override
@@ -875,7 +891,7 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
 
   @override
   String toString() {
-    return 'SelectInputUiSettings<$T>(labelText: $labelText, helperText: $helperText, displayMode: $displayMode, valueBuilder: $valueBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher, widgetBuilder: $widgetBuilder, submitFormOnSelect: $submitFormOnSelect)';
+    return 'SelectInputUiSettings<$T>(labelText: $labelText, helperText: $helperText, hintText: $hintText, displayMode: $displayMode, valueBuilder: $valueBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher, widgetBuilder: $widgetBuilder, submitFormOnSelect: $submitFormOnSelect)';
   }
 
   @override
@@ -887,6 +903,8 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
                 other.labelText == labelText) &&
             (identical(other.helperText, helperText) ||
                 other.helperText == helperText) &&
+            (identical(other.hintText, hintText) ||
+                other.hintText == hintText) &&
             (identical(other.displayMode, displayMode) ||
                 other.displayMode == displayMode) &&
             (identical(other.valueBuilder, valueBuilder) ||
@@ -907,6 +925,7 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
       runtimeType,
       labelText,
       helperText,
+      hintText,
       displayMode,
       valueBuilder,
       helpValueBuilder,
@@ -933,6 +952,7 @@ abstract class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
   const factory _SelectInputUiSettings(
       {final String? labelText,
       final String? helperText,
+      final String? hintText,
       final SelectFieldDisplayMode? displayMode,
       @JsonKey(includeFromJson: false, includeToJson: false)
       final Widget Function(T?)? valueBuilder,
@@ -952,6 +972,8 @@ abstract class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
   String? get labelText;
   @override
   String? get helperText;
+  @override
+  String? get hintText;
   @override
   SelectFieldDisplayMode? get displayMode;
   @override
@@ -997,6 +1019,8 @@ mixin _$StringInputUiSettings {
   TextInputAction? get textInputAction => throw _privateConstructorUsedError;
   TextCapitalization? get textCapitalization =>
       throw _privateConstructorUsedError;
+
+  /// Defaults to 1. If you want to set it to null, enter 0.
   int? get maxLines => throw _privateConstructorUsedError;
   String? get invalidRegexMessage => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
@@ -1309,6 +1333,8 @@ class _$StringInputUiSettingsImpl extends _StringInputUiSettings {
   final TextInputAction? textInputAction;
   @override
   final TextCapitalization? textCapitalization;
+
+  /// Defaults to 1. If you want to set it to null, enter 0.
   @override
   final int? maxLines;
   @override
@@ -1445,6 +1471,8 @@ abstract class _StringInputUiSettings extends StringInputUiSettings {
   @override
   TextCapitalization? get textCapitalization;
   @override
+
+  /// Defaults to 1. If you want to set it to null, enter 0.
   int? get maxLines;
   @override
   String? get invalidRegexMessage;
