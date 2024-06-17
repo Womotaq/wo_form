@@ -31,7 +31,7 @@ class SubmitButton extends StatelessWidget {
                 ? Theme.of(context).disabledColor
                 : Theme.of(context).colorScheme.onPrimary,
           ),
-    ); // TODO : woFormL10n.submit
+    );
     final child = loadingIndicator == null
         ? text
         : Row(
@@ -50,7 +50,6 @@ class SubmitButton extends StatelessWidget {
           onPressed: data.onPressed,
           child: child,
         );
-      // TODO : change
       case SubmitButtonPosition.bottom:
         return Padding(
           padding: const EdgeInsets.only(

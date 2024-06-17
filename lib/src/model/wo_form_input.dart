@@ -49,8 +49,6 @@ mixin WoFormInputMixin {
   Map<String, dynamic> toJson();
 }
 
-// TODO : assert / is not in an input id
-
 @freezed
 sealed class WoFormInput
     with _$WoFormInput, WoFormElementMixin, WoFormInputMixin {
@@ -195,7 +193,7 @@ sealed class WoFormInput
 
   @override
   dynamic export({
-    required Map<String, dynamic> values, // TODO : rename as values
+    required Map<String, dynamic> values,
     required String parentPath,
   }) =>
       _valueToJson(values['$parentPath/$id']);
@@ -326,7 +324,7 @@ class SelectInput<T>
 
   @override
   dynamic export({
-    required Map<String, dynamic> values, // TODO : rename as values
+    required Map<String, dynamic> values,
     required String parentPath,
   }) =>
       _selectedValuesToJson<T>(

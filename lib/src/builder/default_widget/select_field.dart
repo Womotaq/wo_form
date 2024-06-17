@@ -144,6 +144,7 @@ class SelectField<T> extends StatelessWidget {
     }
   }
 
+  // TODO : move in data.onValueChanged
   void onUniqueChoice({
     required WoFormValuesCubit valuesCubit,
     required List<T> selectedValues,
@@ -160,6 +161,7 @@ class SelectField<T> extends StatelessWidget {
     if (data.uiSettings.submitFormOnSelect) valuesCubit.submit();
   }
 
+  // TODO : move in data.onValueChanged
   void onMultipleChoice({
     required WoFormValuesCubit valuesCubit,
     required Iterable<T> selectedValues,

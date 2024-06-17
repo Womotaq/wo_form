@@ -31,7 +31,6 @@ class ProfileCreationPage extends StatelessWidget {
               uiSettings: StringInputUiSettings(
                 labelText: 'Prénom',
                 autofillHints: [AutofillHints.givenName],
-                maxLines: 0,
               ),
             ),
             StringInput(

@@ -32,6 +32,7 @@ class InputsNodeWidget extends StatelessWidget {
               labelText: data.uiSettings.labelText ?? '',
               helperText: data.uiSettings.helperText ?? '',
             ),
+            const SizedBox(height: 24),
             Padding(
               padding: const EdgeInsets.only(bottom: 8),
               child: Column(children: inputWidgets),

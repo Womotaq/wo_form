@@ -6,20 +6,17 @@ import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/src/_export.dart';
 import 'package:wo_form/wo_form.dart';
 
-// TODO : name file as page
 class WoFormPage extends StatelessWidget {
   const WoFormPage({
     required this.form,
-    this.onSubmitting,
+    this.onSubmitting, // TODO : move to WoForm
     this.onSubmitted,
-    this.uiSettings,
     super.key,
   });
 
   final WoForm form;
   final void Function(Map<String, dynamic> values)? onSubmitting;
   final void Function(BuildContext context)? onSubmitted;
-  final WoFormUiSettings? uiSettings;
 
   @override
   Widget build(BuildContext context) {
@@ -32,43 +29,47 @@ class WoFormPage extends StatelessWidget {
             onSubmitted!(context);
           }
         },
-        child: Theme(
-          data: form.themeBuilder?.call(context) ?? Theme.of(context),
-          child: _WoFormPage(
-            form: form,
-            onSubmitted: onSubmitted,
-            uiSettings: uiSettings,
-          ),
+        child: Builder(
+          builder: (context) {
+            final uiSettings = form.uiSettings;
+
+            final submitMode = uiSettings.submitMode;
+            final page = submitMode is PageByPageSubmitMode
+                ? _WoFormStandardPageByPage(
+                    form: form,
+                    titleText: uiSettings.titleText,
+                    nextText: submitMode.nextText,
+                  )
+                : _WoFormStandardPage(
+                    form: form,
+                    onSubmitted: onSubmitted,
+                  );
+
+            return form.themeBuilder == null
+                ? page
+                : Theme(
+                    data: form.themeBuilder!(context),
+                    child: page,
+                  );
+          },
         ),
       ),
     );
   }
 }
 
-class _WoFormPage extends StatelessWidget {
-  const _WoFormPage({
+class _WoFormStandardPage extends StatelessWidget {
+  const _WoFormStandardPage({
     required this.form,
     this.onSubmitted,
-    this.uiSettings,
   });
 
   final WoForm form;
   final void Function(BuildContext context)? onSubmitted;
-  final WoFormUiSettings? uiSettings;
 
   @override
   Widget build(BuildContext context) {
     final uiSettings = form.uiSettings;
-
-    final submitMode = uiSettings.submitMode;
-
-    if (submitMode is PageByPageSubmitMode) {
-      return _WoFormPageView(
-        form: form,
-        titleText: uiSettings.titleText,
-        nextText: submitMode.nextText,
-      );
-    }
 
     return Scaffold(
       appBar: AppBar(
@@ -93,6 +94,7 @@ class _WoFormPage extends StatelessWidget {
                   labelText: uiSettings.titleText,
                   helperText: '',
                 ),
+              const SizedBox(height: 24),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -110,8 +112,8 @@ class _WoFormPage extends StatelessWidget {
   }
 }
 
-class _WoFormPageView extends StatefulWidget {
-  const _WoFormPageView({
+class _WoFormStandardPageByPage extends StatefulWidget {
+  const _WoFormStandardPageByPage({
     required this.form,
     required this.titleText,
     required this.nextText,
@@ -122,10 +124,11 @@ class _WoFormPageView extends StatefulWidget {
   final String? nextText;
 
   @override
-  State<_WoFormPageView> createState() => _WoFormPageViewState();
+  State<_WoFormStandardPageByPage> createState() =>
+      _WoFormStandardPageByPageState();
 }
 
-class _WoFormPageViewState extends State<_WoFormPageView> {
+class _WoFormStandardPageByPageState extends State<_WoFormStandardPageByPage> {
   double pageIndex = 0;
 
   @override
@@ -168,9 +171,9 @@ class _WoFormPageViewState extends State<_WoFormPageView> {
             itemCount: widget.form.inputs.length,
             itemBuilder: (context, index) => ListView(
               children: [
-                WoGap.medium,
+                const SizedBox(height: 16),
                 widget.form.inputs[index].toWidget(parentPath: ''),
-                WoGap.xlarge,
+                const SizedBox(height: 32),
                 WoPadding.horizontalSmall(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,

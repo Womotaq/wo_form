@@ -16,23 +16,32 @@ class QuizPage extends StatelessWidget {
       uiSettings: WoFormUiSettings(
         submitMode: const PageByPageSubmitMode(
           submitText: 'Terminer',
+          // TODO : canModifyValidatedPages: false,
         ),
         submitButtonBuilder: (data) => data.pageIndex.isEven
             ? const SizedBox.shrink()
             : SubmitButton(data: data),
       ),
       inputs: [
-        const SelectStringInput(
+        const InputsNode(
           id: 'q1',
-          maxCount: 1,
-          minCount: 1,
-          availibleValues: ['Bleu', 'Rouge', 'Vert', 'Jaune'],
-          uiSettings: SelectInputUiSettings(
+          uiSettings: InputsNodeUiSettings(
             labelText: 'De quelle couleur est le soleil ?',
-            hintText: 'Sélectionner une réponse',
-            displayMode: SelectFieldDisplayMode.chip,
-            submitFormOnSelect: true,
           ),
+          inputs: [
+            // TODO : WidgetNode(),
+            SelectStringInput(
+              id: 'q1',
+              maxCount: 1,
+              minCount: 1,
+              availibleValues: ['Bleu', 'Rouge', 'Vert', 'Jaune'],
+              uiSettings: SelectInputUiSettings(
+                hintText: 'Sélectionner une réponse',
+                displayMode: SelectFieldDisplayMode.chip,
+                submitFormOnSelect: true,
+              ),
+            ),
+          ],
         ),
         ValueBuilderNode(
           id: 'a1',

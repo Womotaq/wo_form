@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:wo_form/example/ui/prefab/wo_form_screen.dart';
+import 'package:wo_form/example/ui/prefab/wo_form_page.dart';
 import 'package:wo_form/src/model/json_converter/inputs_list.dart';
 import 'package:wo_form/wo_form.dart';
 

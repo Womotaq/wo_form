@@ -16,8 +16,8 @@ class WoFormExamplesApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return RepositoryProvider(
       create: (context) => WoFormL10n(
-        submitText: 'Envoyer',
-        nextText: 'Suivant',
+        submit: 'Envoyer',
+        next: 'Suivant',
         translateError: (WoFormInputError? error) => switch (error) {
           EmptyInputError() => 'Ce champ doit être renseigné.',
           InvalidInputError() => 'Cette valeur est invalide.',
