@@ -15,13 +15,16 @@ class WoFormExamplesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RepositoryProvider(
-      create: (context) => WoFormInputErrorTranslator(
-        translateError: (WoFormInputError error) => switch (error) {
+      create: (context) => WoFormL10n(
+        submitText: 'Envoyer',
+        nextText: 'Suivant',
+        translateError: (WoFormInputError? error) => switch (error) {
           EmptyInputError() => 'Ce champ doit être renseigné.',
           InvalidInputError() => 'Cette valeur est invalide.',
           MaxBoundInputError() => 'Au dessus de la limite maximale.',
           MinBoundInputError() => 'En dessous du minimum requis.',
           CustomInputError(message: final message) => message,
+          null => error.toString(),
         },
       ),
       child: MaterialApp(

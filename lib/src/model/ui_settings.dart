@@ -276,7 +276,7 @@ class WoFormUiSettings with _$WoFormUiSettings {
       object.toJson();
 }
 
-enum SubmitButtonPosition { footer, appBar }
+enum SubmitButtonPosition { bottom, appBar }
 
 enum DisableSubmitButton { never, whenInvalid, whenInitialOrSubmitted }
 
@@ -285,7 +285,7 @@ sealed class WoFormSubmitMode with _$WoFormSubmitMode {
   const factory WoFormSubmitMode.standard({
     String? submitText,
     @Default(DisableSubmitButton.never) DisableSubmitButton disableSubmitMode,
-    @Default(SubmitButtonPosition.footer) SubmitButtonPosition buttonPosition,
+    @Default(SubmitButtonPosition.bottom) SubmitButtonPosition buttonPosition,
   }) = StandardSubmitMode;
 
   const factory WoFormSubmitMode.pageByPage({
@@ -307,6 +307,6 @@ sealed class WoFormSubmitMode with _$WoFormSubmitMode {
 
   SubmitButtonPosition get buttonPosition => switch (this) {
         StandardSubmitMode(buttonPosition: final p) => p,
-        PageByPageSubmitMode() => SubmitButtonPosition.footer,
+        PageByPageSubmitMode() => SubmitButtonPosition.bottom,
       };
 }

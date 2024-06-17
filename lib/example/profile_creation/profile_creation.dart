@@ -15,7 +15,6 @@ class ProfileCreationPage extends StatelessWidget {
       uiSettings: const WoFormUiSettings(
         submitMode: PageByPageSubmitMode(
           submitText: 'Enregistrer',
-          nextText: 'Suivant',
           showProgressIndicator: false,
         ),
       ),

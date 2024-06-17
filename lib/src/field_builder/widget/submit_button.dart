@@ -24,7 +24,7 @@ class SubmitButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final loadingIndicator = data.formStatus is SubmittingStatus
         ? SizedBox.square(
-            dimension: 16,
+            dimension: 12,
             child: CircularProgressIndicator(
               color: Theme.of(context).colorScheme.onPrimary,
               strokeWidth: 2,
@@ -32,7 +32,15 @@ class SubmitButton extends StatelessWidget {
           )
         : null;
 
-    final text = Text(data.text ?? ''); // TODO : woFormL10n.submit
+    final text = Text(
+      data.text ?? '',
+      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+            fontWeight: FontWeight.bold,
+            color: data.onPressed == null
+                ? Theme.of(context).disabledColor
+                : Theme.of(context).colorScheme.onPrimary,
+          ),
+    ); // TODO : woFormL10n.submit
     final child = loadingIndicator == null
         ? text
         : Row(
@@ -41,7 +49,7 @@ class SubmitButton extends StatelessWidget {
               loadingIndicator,
               const SizedBox(width: 8),
               text,
-              const SizedBox(width: 24),
+              const SizedBox(width: 20),
             ],
           );
 
@@ -52,14 +60,16 @@ class SubmitButton extends StatelessWidget {
           child: child,
         );
       // TODO : change
-      case SubmitButtonPosition.footer:
+      case SubmitButtonPosition.bottom:
         return Padding(
-          padding: const EdgeInsets.only(top: 32),
-          child: ListTile(
-            title: FilledButton(
-              onPressed: data.onPressed,
-              child: child,
-            ),
+          padding: const EdgeInsets.only(
+            top: 32,
+            left: 16,
+            right: 16,
+          ),
+          child: FilledButton(
+            onPressed: data.onPressed,
+            child: child,
           ),
         );
     }

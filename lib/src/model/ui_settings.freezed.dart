@@ -1828,7 +1828,7 @@ class _$StandardSubmitModeImpl extends StandardSubmitMode {
   const _$StandardSubmitModeImpl(
       {this.submitText,
       this.disableSubmitMode = DisableSubmitButton.never,
-      this.buttonPosition = SubmitButtonPosition.footer,
+      this.buttonPosition = SubmitButtonPosition.bottom,
       final String? $type})
       : $type = $type ?? 'standard',
         super._();

@@ -1,15 +1,15 @@
 import 'package:wo_form/wo_form.dart';
 
-typedef TranslateInputError = String? Function(WoFormInputError error);
+typedef TranslateInputError = String? Function(WoFormInputError? error);
 
-class WoFormInputErrorTranslator {
-  const WoFormInputErrorTranslator({required this.translateError});
+class WoFormL10n {
+  const WoFormL10n({
+    required this.submitText,
+    required this.nextText,
+    required this.translateError,
+  });
 
+  final String submitText;
+  final String nextText;
   final TranslateInputError translateError;
-
-  String? getTranslatedError(WoFormInputError? error) {
-    if (error == null) return null;
-
-    return translateError.call(error);
-  }
 }

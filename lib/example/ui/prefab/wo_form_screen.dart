@@ -85,7 +85,8 @@ class _WoFormPage extends StatelessWidget {
               : disabled
                   ? null
                   : submit,
-          text: submitMode.submitText,
+          text:
+              submitMode.submitText ?? context.read<WoFormL10n?>()?.submitText,
           position: submitMode.buttonPosition,
         );
 
@@ -111,7 +112,7 @@ class _WoFormPage extends StatelessWidget {
           children: [
             ...form.inputs.map((e) => e.toWidget(parentPath: '')),
             if (uiSettings.submitMode.buttonPosition ==
-                SubmitButtonPosition.footer)
+                SubmitButtonPosition.bottom)
               submitButton,
           ],
         );
@@ -214,7 +215,8 @@ class _WoFormPageView extends StatelessWidget {
                           Builder(
                             builder: (context) {
                               final submitButtonData = SubmitButtonData(
-                                text: nextText,
+                                text: nextText ??
+                                    context.read<WoFormL10n?>()?.nextText,
                                 onPressed: () {
                                   final input = form.inputs[index];
                                   final values =
@@ -250,7 +252,7 @@ class _WoFormPageView extends StatelessWidget {
                                     );
                                   }
                                 },
-                                position: SubmitButtonPosition.footer,
+                                position: SubmitButtonPosition.bottom,
                               );
 
                               return form.uiSettings.submitButtonBuilder

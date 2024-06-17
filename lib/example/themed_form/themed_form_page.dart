@@ -42,7 +42,7 @@ class CustomSubmitButton extends StatelessWidget {
           label: Text(data.text ?? ''), // TODO : woFormL10n.submit
         );
       // TODO : change
-      case SubmitButtonPosition.footer:
+      case SubmitButtonPosition.bottom:
         return Padding(
           padding: const EdgeInsets.only(top: 32),
           child: ListTile(

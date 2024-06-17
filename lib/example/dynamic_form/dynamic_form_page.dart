@@ -10,9 +10,6 @@ class DynamicFormPage extends StatelessWidget {
     return WoForm(
       uiSettings: const WoFormUiSettings(
         titleText: 'Formulaire dynamique',
-        submitMode: StandardSubmitMode(
-          submitText: 'Envoyer',
-        ),
       ),
       inputs: [
         StringInput(
