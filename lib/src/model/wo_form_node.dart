@@ -22,6 +22,19 @@ mixin WoFormElementMixin {
     required String parentPath,
   });
 
+  String? getExportKey({
+    required Map<String, dynamic> values,
+    required String parentPath,
+  });
+
+  /// Return true if this element has data that can be exported.
+  ///
+  /// Used by ExportType.firstExportable.
+  bool isExportable({
+    required Map<String, dynamic> values,
+    required String parentPath,
+  });
+
   Widget toWidget<T extends WoFormValuesCubit>({required String parentPath});
 
   Iterable<String> getAllInputPaths({
@@ -149,23 +162,35 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
           inputs: final inputs,
           exportSettings: final exportSettings,
         ):
+        final exportableInputs = inputs.where(
+          (i) => i.isExportable(
+            values: values,
+            parentPath: '$parentPath/$id',
+          ),
+        );
+
         return switch (exportSettings.exportType) {
+          ExportType.map => {
+              ...?exportSettings.exportedMetadata,
+              for (final input in exportableInputs)
+                input.getExportKey(
+                  values: values,
+                  parentPath: '',
+                ): input.export(
+                  values: values,
+                  parentPath: '',
+                ),
+            },
           ExportType.list => [
               ...?exportSettings.exportedMetadata?.values,
-              for (final input in inputs)
+              for (final input in exportableInputs)
                 input.export(
                   values: values,
                   parentPath: '$parentPath/$id',
                 ),
             ],
-          ExportType.map => {
-              ...?exportSettings.exportedMetadata,
-              for (final input in inputs)
-                input.id: input.export(
-                  values: values,
-                  parentPath: '$parentPath/$id',
-                ),
-            },
+          ExportType.firstExportable => exportableInputs.firstOrNull
+              ?.export(values: values, parentPath: '$parentPath/$id'),
         };
       case ValueBuilderNode(inputPath: final inputPath, builder: final builder):
         final input = builder!(
@@ -183,6 +208,71 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
       case ValueListenerNode():
       case WidgetNode():
         return null;
+    }
+  }
+
+  @override
+  String? getExportKey({
+    required Map<String, dynamic> values,
+    required String parentPath,
+  }) {
+    switch (this) {
+      case InputsNode(
+          inputs: final inputs,
+          exportSettings: final exportSettings,
+        ):
+        return switch (exportSettings.exportType) {
+          ExportType.map || ExportType.list => id,
+          ExportType.firstExportable => inputs
+              .firstWhereOrNull(
+                (i) => i.isExportable(
+                  values: values,
+                  parentPath: '$parentPath/$id',
+                ),
+              )
+              ?.getExportKey(values: values, parentPath: parentPath)
+        };
+      case ValueBuilderNode(inputPath: final inputPath, builder: final builder):
+        final input = builder!(
+          id,
+          values[WoFormElementMixin.getAbsolutePath(
+            parentPath: '$parentPath/$id',
+            inputPath: inputPath,
+          )],
+        );
+
+        return input.getExportKey(
+          values: values,
+          parentPath: '$parentPath/$id',
+        );
+      case ValueListenerNode() || WidgetNode():
+        return null;
+    }
+  }
+
+  @override
+  bool isExportable({
+    required Map<String, dynamic> values,
+    required String parentPath,
+  }) {
+    switch (this) {
+      case InputsNode():
+        return true;
+      case ValueBuilderNode(inputPath: final inputPath, builder: final builder):
+        final input = builder!(
+          id,
+          values[WoFormElementMixin.getAbsolutePath(
+            parentPath: '$parentPath/$id',
+            inputPath: inputPath,
+          )],
+        );
+
+        return input.isExportable(
+          values: values,
+          parentPath: '$parentPath/$id',
+        );
+      case ValueListenerNode() || WidgetNode():
+        return false;
     }
   }
 

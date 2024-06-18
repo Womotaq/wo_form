@@ -21,18 +21,6 @@ mixin WoFormInputMixin {
 
   WoFormInputError? getError(Object? value);
 
-  Iterable<String> getAllInputPaths({
-    required Map<String, dynamic> values,
-    required String parentPath,
-  }) =>
-      ['$parentPath/$id'];
-
-  Iterable<WoFormInputError> getErrors(
-    Map<String, dynamic> values, {
-    required String parentPath,
-  }) =>
-      [getError(values['$parentPath/$id'])].whereNotNull();
-
   String? getInvalidExplanation(
     dynamic value,
     TranslateInputError? translateError,
@@ -46,13 +34,37 @@ mixin WoFormInputMixin {
     return translateError?.call(error) ?? error.toString();
   }
 
-  Widget toWidget<C extends WoFormValuesCubit>({required String parentPath});
-
   // WoFormElementMixin
+
+  bool isExportable({
+    required Map<String, dynamic> values,
+    required String parentPath,
+  }) =>
+      true;
 
   String get id;
 
+  Iterable<String> getAllInputPaths({
+    required Map<String, dynamic> values,
+    required String parentPath,
+  }) =>
+      ['$parentPath/$id'];
+
+  Iterable<WoFormInputError> getErrors(
+    Map<String, dynamic> values, {
+    required String parentPath,
+  }) =>
+      [getError(values['$parentPath/$id'])].whereNotNull();
+
+  String? getExportKey({
+    required Map<String, dynamic> values,
+    required String parentPath,
+  }) =>
+      id;
+
   Map<String, dynamic> toJson();
+
+  Widget toWidget<C extends WoFormValuesCubit>({required String parentPath});
 }
 
 @freezed

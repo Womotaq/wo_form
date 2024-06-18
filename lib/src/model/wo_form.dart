@@ -98,25 +98,34 @@ class WoForm with _$WoForm {
         );
   }
 
-  dynamic export(Map<String, dynamic> values) =>
-      switch (exportSettings.exportType) {
-        ExportType.list => [
-            ...?exportSettings.exportedMetadata?.values,
-            for (final input in inputs)
-              input.export(
-                values: values,
-                parentPath: '',
-              ),
-          ],
-        ExportType.map => {
-            ...?exportSettings.exportedMetadata,
-            for (final input in inputs)
-              input.id: input.export(
-                values: values,
-                parentPath: '',
-              ),
-          },
-      };
+  dynamic export(Map<String, dynamic> values) {
+    final exportableInputs =
+        inputs.where((i) => i.isExportable(values: values, parentPath: ''));
+
+    return switch (exportSettings.exportType) {
+      ExportType.map => {
+          ...?exportSettings.exportedMetadata,
+          for (final input in exportableInputs)
+            input.getExportKey(
+              values: values,
+              parentPath: '',
+            ): input.export(
+              values: values,
+              parentPath: '',
+            ),
+        },
+      ExportType.list => [
+          ...?exportSettings.exportedMetadata?.values,
+          for (final input in exportableInputs)
+            input.export(
+              values: values,
+              parentPath: '',
+            ),
+        ],
+      ExportType.firstExportable =>
+        exportableInputs.firstOrNull?.export(values: values, parentPath: ''),
+    };
+  }
 
   Widget toPage() => toWidget();
 

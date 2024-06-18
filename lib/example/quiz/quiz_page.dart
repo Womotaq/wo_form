@@ -40,7 +40,10 @@ class QuizPage extends StatelessWidget {
       ),
       inputs: [
         InputsNode(
-          id: 'q1',
+          id: 'q1-page',
+          exportSettings: const ExportSettings(
+            exportType: ExportType.firstExportable,
+          ),
           inputs: [
             WidgetNode(
               id: 'header',
@@ -62,7 +65,7 @@ class QuizPage extends StatelessWidget {
         ),
         ValueBuilderNode(
           id: 'a1',
-          inputPath: '../q1/q1',
+          inputPath: '../q1-page/q1',
           builder: (id, value) {
             return WidgetNode(
               id: id,
@@ -80,7 +83,10 @@ class QuizPage extends StatelessWidget {
           },
         ),
         InputsNode(
-          id: 'q2',
+          id: 'q2-page',
+          exportSettings: const ExportSettings(
+            exportType: ExportType.firstExportable,
+          ),
           inputs: [
             WidgetNode(
               id: 'header',
@@ -113,7 +119,7 @@ class QuizPage extends StatelessWidget {
         ),
         ValueBuilderNode(
           id: 'a2',
-          inputPath: '../q2/q2',
+          inputPath: '../q2-page/q2',
           builder: (id, value) {
             return WidgetNode(
               id: id,
@@ -127,7 +133,10 @@ class QuizPage extends StatelessWidget {
           },
         ),
         InputsNode(
-          id: 'q3',
+          id: 'q3-page',
+          exportSettings: const ExportSettings(
+            exportType: ExportType.firstExportable,
+          ),
           inputs: [
             WidgetNode(
               id: 'header',
@@ -144,7 +153,7 @@ class QuizPage extends StatelessWidget {
         ),
         ValueBuilderNode(
           id: 'a3',
-          inputPath: '../q3/q3',
+          inputPath: '../q3-page/q3',
           builder: (id, value) {
             return WidgetNode(
               id: id,
@@ -163,7 +172,10 @@ class QuizPage extends StatelessWidget {
           },
         ),
         InputsNode(
-          id: 'q4',
+          id: 'q4-page',
+          exportSettings: const ExportSettings(
+            exportType: ExportType.firstExportable,
+          ),
           inputs: [
             WidgetNode(
               id: 'header',
@@ -173,12 +185,13 @@ class QuizPage extends StatelessWidget {
             const StringInput(
               id: 'q4',
               isRequired: true,
+              uiSettings: StringInputUiSettings(autofocus: true),
             ),
           ],
         ),
         ValueBuilderNode(
           id: 'r4',
-          inputPath: '../q4/q4',
+          inputPath: '../q4-page/q4',
           builder: (id, value) {
             return WidgetNode(
               id: id,
@@ -192,7 +205,10 @@ class QuizPage extends StatelessWidget {
           },
         ),
         InputsNode(
-          id: 'q5',
+          id: 'q5-page',
+          exportSettings: const ExportSettings(
+            exportType: ExportType.firstExportable,
+          ),
           inputs: [
             WidgetNode(
               id: 'header',
@@ -211,7 +227,7 @@ class QuizPage extends StatelessWidget {
         ),
         ValueBuilderNode(
           id: 'r5',
-          inputPath: '../q5/q5',
+          inputPath: '../q5-page/q5',
           builder: (id, value) {
             return WidgetNode(
               id: id,
