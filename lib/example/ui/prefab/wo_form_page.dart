@@ -56,6 +56,8 @@ class _WoFormStandardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final uiSettings = form.uiSettings;
 
+    final woFormTheme = WoFormTheme.of(context);
+
     return Scaffold(
       appBar: AppBar(
         leading: QuitPageButton(canQuit: form.canQuit),
@@ -82,16 +84,21 @@ class _WoFormStandardPage extends StatelessWidget {
                     );
 
                     return uiSettings.headerBuilder?.call(headerData) ??
-                        WoFormTheme.of(context)
-                            ?.headerBuilder
-                            ?.call(headerData) ??
+                        woFormTheme?.headerBuilder?.call(headerData) ??
                         FormHeader(data: headerData);
                   },
                 ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  ...form.inputs.map((e) => e.toWidget(parentPath: '')),
+                  ...form.inputs.map(
+                    (e) => Padding(
+                      padding: EdgeInsets.only(
+                        bottom: woFormTheme?.verticalSpacing ?? 0,
+                      ),
+                      child: e.toWidget(parentPath: ''),
+                    ),
+                  ),
                   if (uiSettings.submitMode.buttonPosition ==
                       SubmitButtonPosition.bottom)
                     const SubmitButtonBuilder(),

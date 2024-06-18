@@ -31,6 +31,9 @@ mixin _$WoFormThemeData {
   SubmitButtonBuilderDef? get submitButtonBuilder =>
       throw _privateConstructorUsedError;
 
+  /// This spacing will be added at the bottom of each [WoFormElementMixin].
+  double? get verticalSpacing => throw _privateConstructorUsedError;
+
   /// Add the character '*' after the labelText of [WoFormInput]s.
   /// Default to true.
   bool? get showAsteriskIfRequired => throw _privateConstructorUsedError;
@@ -55,6 +58,7 @@ abstract class $WoFormThemeDataCopyWith<$Res> {
       SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
       StringFieldBuilderDef? stringFieldBuilder,
       SubmitButtonBuilderDef? submitButtonBuilder,
+      double? verticalSpacing,
       bool? showAsteriskIfRequired});
 }
 
@@ -79,6 +83,7 @@ class _$WoFormThemeDataCopyWithImpl<$Res, $Val extends WoFormThemeData>
     Object? selectFieldBuilder = freezed,
     Object? stringFieldBuilder = freezed,
     Object? submitButtonBuilder = freezed,
+    Object? verticalSpacing = freezed,
     Object? showAsteriskIfRequired = freezed,
   }) {
     return _then(_value.copyWith(
@@ -114,6 +119,10 @@ class _$WoFormThemeDataCopyWithImpl<$Res, $Val extends WoFormThemeData>
           ? _value.submitButtonBuilder
           : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
               as SubmitButtonBuilderDef?,
+      verticalSpacing: freezed == verticalSpacing
+          ? _value.verticalSpacing
+          : verticalSpacing // ignore: cast_nullable_to_non_nullable
+              as double?,
       showAsteriskIfRequired: freezed == showAsteriskIfRequired
           ? _value.showAsteriskIfRequired
           : showAsteriskIfRequired // ignore: cast_nullable_to_non_nullable
@@ -139,6 +148,7 @@ abstract class _$$WoFormThemeDataImplCopyWith<$Res>
       SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
       StringFieldBuilderDef? stringFieldBuilder,
       SubmitButtonBuilderDef? submitButtonBuilder,
+      double? verticalSpacing,
       bool? showAsteriskIfRequired});
 }
 
@@ -161,6 +171,7 @@ class __$$WoFormThemeDataImplCopyWithImpl<$Res>
     Object? selectFieldBuilder = freezed,
     Object? stringFieldBuilder = freezed,
     Object? submitButtonBuilder = freezed,
+    Object? verticalSpacing = freezed,
     Object? showAsteriskIfRequired = freezed,
   }) {
     return _then(_$WoFormThemeDataImpl(
@@ -196,6 +207,10 @@ class __$$WoFormThemeDataImplCopyWithImpl<$Res>
           ? _value.submitButtonBuilder
           : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
               as SubmitButtonBuilderDef?,
+      verticalSpacing: freezed == verticalSpacing
+          ? _value.verticalSpacing
+          : verticalSpacing // ignore: cast_nullable_to_non_nullable
+              as double?,
       showAsteriskIfRequired: freezed == showAsteriskIfRequired
           ? _value.showAsteriskIfRequired
           : showAsteriskIfRequired // ignore: cast_nullable_to_non_nullable
@@ -216,6 +231,7 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
       this.selectFieldBuilder,
       this.stringFieldBuilder,
       this.submitButtonBuilder,
+      this.verticalSpacing,
       this.showAsteriskIfRequired})
       : super._();
 
@@ -236,6 +252,10 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
   @override
   final SubmitButtonBuilderDef? submitButtonBuilder;
 
+  /// This spacing will be added at the bottom of each [WoFormElementMixin].
+  @override
+  final double? verticalSpacing;
+
   /// Add the character '*' after the labelText of [WoFormInput]s.
   /// Default to true.
   @override
@@ -243,7 +263,7 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
 
   @override
   String toString() {
-    return 'WoFormThemeData(booleanFieldBuilder: $booleanFieldBuilder, headerBuilder: $headerBuilder, inputHeaderBuilder: $inputHeaderBuilder, inputsNodeWidgetBuilder: $inputsNodeWidgetBuilder, numFieldBuilder: $numFieldBuilder, selectFieldBuilder: $selectFieldBuilder, stringFieldBuilder: $stringFieldBuilder, submitButtonBuilder: $submitButtonBuilder, showAsteriskIfRequired: $showAsteriskIfRequired)';
+    return 'WoFormThemeData(booleanFieldBuilder: $booleanFieldBuilder, headerBuilder: $headerBuilder, inputHeaderBuilder: $inputHeaderBuilder, inputsNodeWidgetBuilder: $inputsNodeWidgetBuilder, numFieldBuilder: $numFieldBuilder, selectFieldBuilder: $selectFieldBuilder, stringFieldBuilder: $stringFieldBuilder, submitButtonBuilder: $submitButtonBuilder, verticalSpacing: $verticalSpacing, showAsteriskIfRequired: $showAsteriskIfRequired)';
   }
 
   @override
@@ -268,6 +288,8 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
                 other.stringFieldBuilder == stringFieldBuilder) &&
             (identical(other.submitButtonBuilder, submitButtonBuilder) ||
                 other.submitButtonBuilder == submitButtonBuilder) &&
+            (identical(other.verticalSpacing, verticalSpacing) ||
+                other.verticalSpacing == verticalSpacing) &&
             (identical(other.showAsteriskIfRequired, showAsteriskIfRequired) ||
                 other.showAsteriskIfRequired == showAsteriskIfRequired));
   }
@@ -283,6 +305,7 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
       selectFieldBuilder,
       stringFieldBuilder,
       submitButtonBuilder,
+      verticalSpacing,
       showAsteriskIfRequired);
 
   @JsonKey(ignore: true)
@@ -303,6 +326,7 @@ abstract class _WoFormThemeData extends WoFormThemeData {
       final SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
       final StringFieldBuilderDef? stringFieldBuilder,
       final SubmitButtonBuilderDef? submitButtonBuilder,
+      final double? verticalSpacing,
       final bool? showAsteriskIfRequired}) = _$WoFormThemeDataImpl;
   const _WoFormThemeData._() : super._();
 
@@ -322,6 +346,10 @@ abstract class _WoFormThemeData extends WoFormThemeData {
   StringFieldBuilderDef? get stringFieldBuilder;
   @override
   SubmitButtonBuilderDef? get submitButtonBuilder;
+  @override
+
+  /// This spacing will be added at the bottom of each [WoFormElementMixin].
+  double? get verticalSpacing;
   @override
 
   /// Add the character '*' after the labelText of [WoFormInput]s.

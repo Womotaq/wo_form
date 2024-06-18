@@ -15,6 +15,9 @@ class WoFormThemeData with _$WoFormThemeData {
     StringFieldBuilderDef? stringFieldBuilder,
     SubmitButtonBuilderDef? submitButtonBuilder,
 
+    /// This spacing will be added at the bottom of each [WoFormElementMixin].
+    double? verticalSpacing,
+
     /// Add the character '*' after the labelText of [WoFormInput]s.
     /// Default to true.
     bool? showAsteriskIfRequired,

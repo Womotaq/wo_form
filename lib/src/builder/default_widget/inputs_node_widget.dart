@@ -11,8 +11,15 @@ class InputsNodeWidget extends StatelessWidget {
     final theme = Theme.of(context);
     final inputDecorationTheme = theme.inputDecorationTheme;
 
+    final woFormTheme = WoFormTheme.of(context);
+
     final inputWidgets = data.input.inputs
-        .map((i) => i.toWidget(parentPath: data.inputPath))
+        .map(
+          (i) => Padding(
+            padding: EdgeInsets.only(bottom: woFormTheme?.verticalSpacing ?? 0),
+            child: i.toWidget(parentPath: data.inputPath),
+          ),
+        )
         .toList();
 
     final subtitle = (data.uiSettings.helperText ?? '').isNotEmpty
@@ -36,7 +43,7 @@ class InputsNodeWidget extends StatelessWidget {
                 );
 
                 return data.uiSettings.headerBuilder?.call(headerData) ??
-                    WoFormTheme.of(context)?.headerBuilder?.call(headerData) ??
+                    woFormTheme?.headerBuilder?.call(headerData) ??
                     FormHeader(data: headerData);
               },
             ),

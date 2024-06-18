@@ -44,8 +44,8 @@ class _StringFieldState extends State<StringField> {
             ? null
             : widget.data.uiSettings.maxLines ?? 1,
         decoration: InputDecoration(
-          labelText: widget.data.uiSettings.labelText ?? '',
-          helperText: widget.data.uiSettings.helperText ?? '',
+          labelText: widget.data.uiSettings.labelText,
+          helperText: widget.data.uiSettings.helperText,
           hintText: widget.data.uiSettings.hintText,
           errorText: widget.data.errorText,
           suffixIcon: switch (widget.data.uiSettings.action) {

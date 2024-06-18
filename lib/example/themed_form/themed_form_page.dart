@@ -12,6 +12,7 @@ class ShowCustomThemeCubit extends Cubit<bool> {
     headerBuilder: CustomFormHeader.new,
     stringFieldBuilder: CustomStringField.new,
     submitButtonBuilder: CustomSubmitButton.new,
+    verticalSpacing: 16,
   );
 }
 
