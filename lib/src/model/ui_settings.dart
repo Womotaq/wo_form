@@ -120,6 +120,10 @@ typedef InputHeaderBuilderDef = Widget Function(WoFormInputHeaderData data);
 
 @freezed
 class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
+  /// Defines how the SelectInput should be rendered.
+  ///
+  /// searcher is a function that returns a double between 0 and 1,
+  /// depending on how much the query is close to a value. 1 is the closest.
   const factory SelectInputUiSettings({
     String? labelText,
     String? helperText,

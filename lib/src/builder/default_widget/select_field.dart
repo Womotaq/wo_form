@@ -67,7 +67,7 @@ class SelectField<T> extends StatelessWidget {
                 },
               ),
               ListTile(
-                title: SelectChip<T>.uniqueChoice(
+                title: SearchField<T>.uniqueChoice(
                   values: data.input.availibleValues,
                   onSelected:
                       data.onValueChanged == null ? null : onUniqueChoice,
@@ -89,7 +89,7 @@ class SelectField<T> extends StatelessWidget {
               final headerData = WoFormInputHeaderData(
                 labelText: data.uiSettings.labelText,
                 helperText: data.uiSettings.helperText,
-                trailing: SelectChip<T>.multipleChoices(
+                trailing: SearchField<T>.multipleChoices(
                   values: data.input.availibleValues,
                   onSelected:
                       data.onValueChanged == null ? null : onMultipleChoice,
