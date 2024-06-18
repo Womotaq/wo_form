@@ -23,58 +23,50 @@ class _StringFieldState extends State<StringField> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        InputHeader(
+    return ListTile(
+      title: TextFormField(
+        enabled: widget.data.onValueChanged != null,
+        controller: textEditingController,
+        onChanged: widget.data.onValueChanged,
+        onFieldSubmitted:
+            (widget.data.uiSettings.submitFormOnFieldSubmitted ?? true)
+                ? (_) => context.read<WoFormValuesCubit>().submit()
+                : null,
+        keyboardType: widget.data.uiSettings.keyboardType,
+        obscureText: obscureText,
+        autocorrect: widget.data.uiSettings.autocorrect ?? true,
+        autofillHints: widget.data.uiSettings.autofillHints,
+        autofocus: widget.data.uiSettings.autofocus ?? false,
+        textInputAction: widget.data.uiSettings.textInputAction,
+        textCapitalization: widget.data.uiSettings.textCapitalization ??
+            TextCapitalization.none,
+        maxLines: widget.data.uiSettings.maxLines == 0
+            ? null
+            : widget.data.uiSettings.maxLines ?? 1,
+        decoration: InputDecoration(
           labelText: widget.data.uiSettings.labelText ?? '',
           helperText: widget.data.uiSettings.helperText ?? '',
-          errorText: '',
+          hintText: widget.data.uiSettings.hintText,
+          errorText: widget.data.errorText,
+          suffixIcon: switch (widget.data.uiSettings.action) {
+            null => null,
+            StringFieldAction.clear => IconButton(
+                onPressed: widget.data.onValueChanged == null
+                    ? null
+                    : () => widget.data.onValueChanged!(null),
+                icon: const Icon(Icons.clear),
+              ),
+            StringFieldAction.obscure => IconButton(
+                onPressed: () => setState(() {
+                  obscureText = !obscureText;
+                }),
+                icon: obscureText
+                    ? const Icon(Icons.visibility_off_outlined)
+                    : const Icon(Icons.visibility_outlined),
+              ),
+          },
         ),
-        ListTile(
-          title: TextFormField(
-            enabled: widget.data.onValueChanged != null,
-            controller: textEditingController,
-            onChanged: widget.data.onValueChanged,
-            onFieldSubmitted:
-                (widget.data.uiSettings.submitFormOnFieldSubmitted ?? true)
-                    ? (_) => context.read<WoFormValuesCubit>().submit()
-                    : null,
-            keyboardType: widget.data.uiSettings.keyboardType,
-            obscureText: obscureText,
-            autocorrect: widget.data.uiSettings.autocorrect ?? true,
-            autofillHints: widget.data.uiSettings.autofillHints,
-            autofocus: widget.data.uiSettings.autofocus ?? false,
-            textInputAction: widget.data.uiSettings.textInputAction,
-            textCapitalization: widget.data.uiSettings.textCapitalization ??
-                TextCapitalization.none,
-            maxLines: widget.data.uiSettings.maxLines == 0
-                ? null
-                : widget.data.uiSettings.maxLines ?? 1,
-            decoration: InputDecoration(
-              hintText: widget.data.uiSettings.hintText,
-              errorText: widget.data.errorText,
-              suffixIcon: switch (widget.data.uiSettings.action) {
-                null => null,
-                StringFieldAction.clear => IconButton(
-                    onPressed: widget.data.onValueChanged == null
-                        ? null
-                        : () => widget.data.onValueChanged!(null),
-                    icon: const Icon(Icons.clear),
-                  ),
-                StringFieldAction.obscure => IconButton(
-                    onPressed: () => setState(() {
-                      obscureText = !obscureText;
-                    }),
-                    icon: obscureText
-                        ? const Icon(Icons.visibility_off_outlined)
-                        : const Icon(Icons.visibility_outlined),
-                  ),
-              },
-            ),
-          ),
-        ),
-      ],
+      ),
     );
   }
 }

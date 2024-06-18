@@ -268,6 +268,11 @@ mixin _$InputsNodeUiSettings {
   String? get labelText => throw _privateConstructorUsedError;
   String? get helperText => throw _privateConstructorUsedError;
   NodeDisplayMode? get displayMode => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  InputNodeWidgetBuilderDef? get widgetBuilder =>
+      throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  HeaderBuilderDef? get headerBuilder => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -282,7 +287,13 @@ abstract class $InputsNodeUiSettingsCopyWith<$Res> {
       _$InputsNodeUiSettingsCopyWithImpl<$Res, InputsNodeUiSettings>;
   @useResult
   $Res call(
-      {String? labelText, String? helperText, NodeDisplayMode? displayMode});
+      {String? labelText,
+      String? helperText,
+      NodeDisplayMode? displayMode,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      InputNodeWidgetBuilderDef? widgetBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      HeaderBuilderDef? headerBuilder});
 }
 
 /// @nodoc
@@ -302,6 +313,8 @@ class _$InputsNodeUiSettingsCopyWithImpl<$Res,
     Object? labelText = freezed,
     Object? helperText = freezed,
     Object? displayMode = freezed,
+    Object? widgetBuilder = freezed,
+    Object? headerBuilder = freezed,
   }) {
     return _then(_value.copyWith(
       labelText: freezed == labelText
@@ -316,6 +329,14 @@ class _$InputsNodeUiSettingsCopyWithImpl<$Res,
           ? _value.displayMode
           : displayMode // ignore: cast_nullable_to_non_nullable
               as NodeDisplayMode?,
+      widgetBuilder: freezed == widgetBuilder
+          ? _value.widgetBuilder
+          : widgetBuilder // ignore: cast_nullable_to_non_nullable
+              as InputNodeWidgetBuilderDef?,
+      headerBuilder: freezed == headerBuilder
+          ? _value.headerBuilder
+          : headerBuilder // ignore: cast_nullable_to_non_nullable
+              as HeaderBuilderDef?,
     ) as $Val);
   }
 }
@@ -329,7 +350,13 @@ abstract class _$$InputsNodeUiSettingsImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? labelText, String? helperText, NodeDisplayMode? displayMode});
+      {String? labelText,
+      String? helperText,
+      NodeDisplayMode? displayMode,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      InputNodeWidgetBuilderDef? widgetBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      HeaderBuilderDef? headerBuilder});
 }
 
 /// @nodoc
@@ -346,6 +373,8 @@ class __$$InputsNodeUiSettingsImplCopyWithImpl<$Res>
     Object? labelText = freezed,
     Object? helperText = freezed,
     Object? displayMode = freezed,
+    Object? widgetBuilder = freezed,
+    Object? headerBuilder = freezed,
   }) {
     return _then(_$InputsNodeUiSettingsImpl(
       labelText: freezed == labelText
@@ -360,6 +389,14 @@ class __$$InputsNodeUiSettingsImplCopyWithImpl<$Res>
           ? _value.displayMode
           : displayMode // ignore: cast_nullable_to_non_nullable
               as NodeDisplayMode?,
+      widgetBuilder: freezed == widgetBuilder
+          ? _value.widgetBuilder
+          : widgetBuilder // ignore: cast_nullable_to_non_nullable
+              as InputNodeWidgetBuilderDef?,
+      headerBuilder: freezed == headerBuilder
+          ? _value.headerBuilder
+          : headerBuilder // ignore: cast_nullable_to_non_nullable
+              as HeaderBuilderDef?,
     ));
   }
 }
@@ -368,7 +405,12 @@ class __$$InputsNodeUiSettingsImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
   const _$InputsNodeUiSettingsImpl(
-      {this.labelText, this.helperText, this.displayMode})
+      {this.labelText,
+      this.helperText,
+      this.displayMode,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.widgetBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      this.headerBuilder})
       : super._();
 
   factory _$InputsNodeUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
@@ -380,10 +422,16 @@ class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
   final String? helperText;
   @override
   final NodeDisplayMode? displayMode;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final InputNodeWidgetBuilderDef? widgetBuilder;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final HeaderBuilderDef? headerBuilder;
 
   @override
   String toString() {
-    return 'InputsNodeUiSettings(labelText: $labelText, helperText: $helperText, displayMode: $displayMode)';
+    return 'InputsNodeUiSettings(labelText: $labelText, helperText: $helperText, displayMode: $displayMode, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder)';
   }
 
   @override
@@ -396,13 +444,17 @@ class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
             (identical(other.helperText, helperText) ||
                 other.helperText == helperText) &&
             (identical(other.displayMode, displayMode) ||
-                other.displayMode == displayMode));
+                other.displayMode == displayMode) &&
+            (identical(other.widgetBuilder, widgetBuilder) ||
+                other.widgetBuilder == widgetBuilder) &&
+            (identical(other.headerBuilder, headerBuilder) ||
+                other.headerBuilder == headerBuilder));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, labelText, helperText, displayMode);
+  int get hashCode => Object.hash(runtimeType, labelText, helperText,
+      displayMode, widgetBuilder, headerBuilder);
 
   @JsonKey(ignore: true)
   @override
@@ -424,7 +476,11 @@ abstract class _InputsNodeUiSettings extends InputsNodeUiSettings {
   const factory _InputsNodeUiSettings(
       {final String? labelText,
       final String? helperText,
-      final NodeDisplayMode? displayMode}) = _$InputsNodeUiSettingsImpl;
+      final NodeDisplayMode? displayMode,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final InputNodeWidgetBuilderDef? widgetBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final HeaderBuilderDef? headerBuilder}) = _$InputsNodeUiSettingsImpl;
   const _InputsNodeUiSettings._() : super._();
 
   factory _InputsNodeUiSettings.fromJson(Map<String, dynamic> json) =
@@ -436,6 +492,12 @@ abstract class _InputsNodeUiSettings extends InputsNodeUiSettings {
   String? get helperText;
   @override
   NodeDisplayMode? get displayMode;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  InputNodeWidgetBuilderDef? get widgetBuilder;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  HeaderBuilderDef? get headerBuilder;
   @override
   @JsonKey(ignore: true)
   _$$InputsNodeUiSettingsImplCopyWith<_$InputsNodeUiSettingsImpl>
@@ -1493,6 +1555,8 @@ WoFormUiSettings _$WoFormUiSettingsFromJson(Map<String, dynamic> json) {
 mixin _$WoFormUiSettings {
   String get titleText => throw _privateConstructorUsedError;
   WoFormTitlePosition get titlePosition => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  HeaderBuilderDef? get headerBuilder => throw _privateConstructorUsedError;
   @JsonKey(toJson: WoFormSubmitMode.staticToJson)
   WoFormSubmitMode get submitMode => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
@@ -1515,6 +1579,8 @@ abstract class $WoFormUiSettingsCopyWith<$Res> {
   $Res call(
       {String titleText,
       WoFormTitlePosition titlePosition,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      HeaderBuilderDef? headerBuilder,
       @JsonKey(toJson: WoFormSubmitMode.staticToJson)
       WoFormSubmitMode submitMode,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -1539,6 +1605,7 @@ class _$WoFormUiSettingsCopyWithImpl<$Res, $Val extends WoFormUiSettings>
   $Res call({
     Object? titleText = null,
     Object? titlePosition = null,
+    Object? headerBuilder = freezed,
     Object? submitMode = null,
     Object? submitButtonBuilder = freezed,
     Object? showAsteriskIfRequired = freezed,
@@ -1552,6 +1619,10 @@ class _$WoFormUiSettingsCopyWithImpl<$Res, $Val extends WoFormUiSettings>
           ? _value.titlePosition
           : titlePosition // ignore: cast_nullable_to_non_nullable
               as WoFormTitlePosition,
+      headerBuilder: freezed == headerBuilder
+          ? _value.headerBuilder
+          : headerBuilder // ignore: cast_nullable_to_non_nullable
+              as HeaderBuilderDef?,
       submitMode: null == submitMode
           ? _value.submitMode
           : submitMode // ignore: cast_nullable_to_non_nullable
@@ -1587,6 +1658,8 @@ abstract class _$$WoFormUiSettingsImplCopyWith<$Res>
   $Res call(
       {String titleText,
       WoFormTitlePosition titlePosition,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      HeaderBuilderDef? headerBuilder,
       @JsonKey(toJson: WoFormSubmitMode.staticToJson)
       WoFormSubmitMode submitMode,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -1610,6 +1683,7 @@ class __$$WoFormUiSettingsImplCopyWithImpl<$Res>
   $Res call({
     Object? titleText = null,
     Object? titlePosition = null,
+    Object? headerBuilder = freezed,
     Object? submitMode = null,
     Object? submitButtonBuilder = freezed,
     Object? showAsteriskIfRequired = freezed,
@@ -1623,6 +1697,10 @@ class __$$WoFormUiSettingsImplCopyWithImpl<$Res>
           ? _value.titlePosition
           : titlePosition // ignore: cast_nullable_to_non_nullable
               as WoFormTitlePosition,
+      headerBuilder: freezed == headerBuilder
+          ? _value.headerBuilder
+          : headerBuilder // ignore: cast_nullable_to_non_nullable
+              as HeaderBuilderDef?,
       submitMode: null == submitMode
           ? _value.submitMode
           : submitMode // ignore: cast_nullable_to_non_nullable
@@ -1645,6 +1723,7 @@ class _$WoFormUiSettingsImpl extends _WoFormUiSettings {
   const _$WoFormUiSettingsImpl(
       {this.titleText = '',
       this.titlePosition = WoFormTitlePosition.header,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.headerBuilder,
       @JsonKey(toJson: WoFormSubmitMode.staticToJson)
       this.submitMode = const WoFormSubmitMode.standard(),
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -1662,6 +1741,9 @@ class _$WoFormUiSettingsImpl extends _WoFormUiSettings {
   @JsonKey()
   final WoFormTitlePosition titlePosition;
   @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final HeaderBuilderDef? headerBuilder;
+  @override
   @JsonKey(toJson: WoFormSubmitMode.staticToJson)
   final WoFormSubmitMode submitMode;
   @override
@@ -1672,7 +1754,7 @@ class _$WoFormUiSettingsImpl extends _WoFormUiSettings {
 
   @override
   String toString() {
-    return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, submitMode: $submitMode, submitButtonBuilder: $submitButtonBuilder, showAsteriskIfRequired: $showAsteriskIfRequired)';
+    return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, submitButtonBuilder: $submitButtonBuilder, showAsteriskIfRequired: $showAsteriskIfRequired)';
   }
 
   @override
@@ -1684,6 +1766,8 @@ class _$WoFormUiSettingsImpl extends _WoFormUiSettings {
                 other.titleText == titleText) &&
             (identical(other.titlePosition, titlePosition) ||
                 other.titlePosition == titlePosition) &&
+            (identical(other.headerBuilder, headerBuilder) ||
+                other.headerBuilder == headerBuilder) &&
             (identical(other.submitMode, submitMode) ||
                 other.submitMode == submitMode) &&
             (identical(other.submitButtonBuilder, submitButtonBuilder) ||
@@ -1695,7 +1779,7 @@ class _$WoFormUiSettingsImpl extends _WoFormUiSettings {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, titleText, titlePosition,
-      submitMode, submitButtonBuilder, showAsteriskIfRequired);
+      headerBuilder, submitMode, submitButtonBuilder, showAsteriskIfRequired);
 
   @JsonKey(ignore: true)
   @override
@@ -1716,6 +1800,8 @@ abstract class _WoFormUiSettings extends WoFormUiSettings {
   const factory _WoFormUiSettings(
       {final String titleText,
       final WoFormTitlePosition titlePosition,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final HeaderBuilderDef? headerBuilder,
       @JsonKey(toJson: WoFormSubmitMode.staticToJson)
       final WoFormSubmitMode submitMode,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -1730,6 +1816,9 @@ abstract class _WoFormUiSettings extends WoFormUiSettings {
   String get titleText;
   @override
   WoFormTitlePosition get titlePosition;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  HeaderBuilderDef? get headerBuilder;
   @override
   @JsonKey(toJson: WoFormSubmitMode.staticToJson)
   WoFormSubmitMode get submitMode;

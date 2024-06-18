@@ -39,7 +39,8 @@ class InputsNodeWidgetBuilder extends StatelessWidget {
       onValueChanged: (_) {},
     );
 
-    // TODO : builder from theme & uiSettings
-    return InputsNodeWidget(data: fieldData);
+    return mergedSettings.widgetBuilder?.call(fieldData) ??
+        WoFormTheme.of(context)?.inputsNodeWidgetBuilder?.call(fieldData) ??
+        InputsNodeWidget(data: fieldData);
   }
 }

@@ -41,6 +41,8 @@ class WoFormExamplesApp extends StatelessWidget {
         ),
         child: Builder(
           builder: (context) {
+            final isDarkMode = context.watch<DarkModeCubit>().state;
+            final useCustomTheme = context.watch<ShowCustomThemeCubit>().state;
             return WoFormTheme(
               data: context.watch<ShowCustomThemeCubit>().state
                   ? ShowCustomThemeCubit.customTheme
@@ -50,13 +52,18 @@ class WoFormExamplesApp extends StatelessWidget {
                 title: 'WoForm Examples',
                 theme: ThemeData(
                   colorScheme: ColorScheme.fromSeed(
-                    brightness: context.watch<DarkModeCubit>().state
-                        ? Brightness.dark
-                        : Brightness.light,
-                    seedColor: const Color.fromARGB(255, 0, 41, 5),
+                    brightness: isDarkMode ? Brightness.dark : Brightness.light,
+                    seedColor: useCustomTheme
+                        ? const Color.fromARGB(255, 0, 41, 5)
+                        : Colors.lightBlue,
                   ),
                   inputDecorationTheme:
                       const InputDecorationTheme(border: OutlineInputBorder()),
+                  scaffoldBackgroundColor: useCustomTheme
+                      ? isDarkMode
+                          ? Colors.black
+                          : Colors.white
+                      : null,
                 ),
                 home: Scaffold(
                   appBar: AppBar(

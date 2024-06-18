@@ -3,24 +3,23 @@ import 'package:wo_form/wo_form.dart';
 
 /// By default, used by [InputsNodeWidget] and [WoFormPage].
 class FormHeader extends StatelessWidget {
-  const FormHeader({
-    required this.labelText,
-    required this.helperText,
-    super.key,
-  });
+  const FormHeader({required this.data, super.key});
 
-  final String labelText;
-  final String helperText;
+  final WoFormHeaderData data;
 
   @override
   Widget build(BuildContext context) {
+    final labelText = data.labelText ?? '';
+    final helperText = data.helperText ?? '';
+
     if (labelText.isEmpty && helperText.isEmpty) return const SizedBox.shrink();
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 16),
+          const SizedBox(height: 32),
           Text(
             labelText,
             style: Theme.of(context)
@@ -28,16 +27,9 @@ class FormHeader extends StatelessWidget {
                 .titleLarge
                 ?.copyWith(fontWeight: FontWeight.bold),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 48),
-            child: Divider(color: Theme.of(context).colorScheme.primary),
-          ),
+          Divider(color: Theme.of(context).colorScheme.primary),
           if (helperText.isNotEmpty) ...[
-            Text(
-              helperText,
-              style: Theme.of(context).inputDecorationTheme.helperStyle ??
-                  Theme.of(context).textTheme.labelMedium,
-            ),
+            Text(helperText),
             const SizedBox(height: 8),
           ],
           const SizedBox(height: 24),

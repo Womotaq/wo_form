@@ -45,12 +45,22 @@ class BooleanInputUiSettings with _$BooleanInputUiSettings {
 
 enum NodeDisplayMode { screenWithHeader, expansionTile }
 
+typedef InputNodeWidgetBuilderDef = Widget Function(
+  WoFieldData<InputsNode, void, InputsNodeUiSettings> data,
+);
+
+typedef HeaderBuilderDef = Widget Function(WoFormHeaderData data);
+
 @freezed
 class InputsNodeUiSettings with _$InputsNodeUiSettings {
   const factory InputsNodeUiSettings({
     String? labelText,
     String? helperText,
     NodeDisplayMode? displayMode,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    InputNodeWidgetBuilderDef? widgetBuilder,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    HeaderBuilderDef? headerBuilder,
   }) = _InputsNodeUiSettings;
 
   const InputsNodeUiSettings._();
@@ -267,6 +277,8 @@ class WoFormUiSettings with _$WoFormUiSettings {
   const factory WoFormUiSettings({
     @Default('') String titleText,
     @Default(WoFormTitlePosition.header) WoFormTitlePosition titlePosition,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    HeaderBuilderDef? headerBuilder,
     @JsonKey(toJson: WoFormSubmitMode.staticToJson)
     @Default(WoFormSubmitMode.standard())
     WoFormSubmitMode submitMode,

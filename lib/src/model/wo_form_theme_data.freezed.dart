@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'wo_form_theme.dart';
+part of 'wo_form_theme_data.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -16,14 +16,17 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$WoFormThemeData {
-  SubmitButtonBuilderDef? get submitButtonBuilder =>
-      throw _privateConstructorUsedError;
   BooleanFieldBuilderDef? get booleanFieldBuilder =>
+      throw _privateConstructorUsedError;
+  HeaderBuilderDef? get headerBuilder => throw _privateConstructorUsedError;
+  InputNodeWidgetBuilderDef? get inputsNodeWidgetBuilder =>
       throw _privateConstructorUsedError;
   NumFieldBuilderDef? get numFieldBuilder => throw _privateConstructorUsedError;
   SelectFieldBuilderDef<dynamic>? get selectFieldBuilder =>
       throw _privateConstructorUsedError;
   StringFieldBuilderDef? get stringFieldBuilder =>
+      throw _privateConstructorUsedError;
+  SubmitButtonBuilderDef? get submitButtonBuilder =>
       throw _privateConstructorUsedError;
 
   /// Add the character '*' after the labelText of [WoFormInput]s.
@@ -42,11 +45,13 @@ abstract class $WoFormThemeDataCopyWith<$Res> {
       _$WoFormThemeDataCopyWithImpl<$Res, WoFormThemeData>;
   @useResult
   $Res call(
-      {SubmitButtonBuilderDef? submitButtonBuilder,
-      BooleanFieldBuilderDef? booleanFieldBuilder,
+      {BooleanFieldBuilderDef? booleanFieldBuilder,
+      HeaderBuilderDef? headerBuilder,
+      InputNodeWidgetBuilderDef? inputsNodeWidgetBuilder,
       NumFieldBuilderDef? numFieldBuilder,
       SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
       StringFieldBuilderDef? stringFieldBuilder,
+      SubmitButtonBuilderDef? submitButtonBuilder,
       bool? showAsteriskIfRequired});
 }
 
@@ -63,22 +68,28 @@ class _$WoFormThemeDataCopyWithImpl<$Res, $Val extends WoFormThemeData>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? submitButtonBuilder = freezed,
     Object? booleanFieldBuilder = freezed,
+    Object? headerBuilder = freezed,
+    Object? inputsNodeWidgetBuilder = freezed,
     Object? numFieldBuilder = freezed,
     Object? selectFieldBuilder = freezed,
     Object? stringFieldBuilder = freezed,
+    Object? submitButtonBuilder = freezed,
     Object? showAsteriskIfRequired = freezed,
   }) {
     return _then(_value.copyWith(
-      submitButtonBuilder: freezed == submitButtonBuilder
-          ? _value.submitButtonBuilder
-          : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
-              as SubmitButtonBuilderDef?,
       booleanFieldBuilder: freezed == booleanFieldBuilder
           ? _value.booleanFieldBuilder
           : booleanFieldBuilder // ignore: cast_nullable_to_non_nullable
               as BooleanFieldBuilderDef?,
+      headerBuilder: freezed == headerBuilder
+          ? _value.headerBuilder
+          : headerBuilder // ignore: cast_nullable_to_non_nullable
+              as HeaderBuilderDef?,
+      inputsNodeWidgetBuilder: freezed == inputsNodeWidgetBuilder
+          ? _value.inputsNodeWidgetBuilder
+          : inputsNodeWidgetBuilder // ignore: cast_nullable_to_non_nullable
+              as InputNodeWidgetBuilderDef?,
       numFieldBuilder: freezed == numFieldBuilder
           ? _value.numFieldBuilder
           : numFieldBuilder // ignore: cast_nullable_to_non_nullable
@@ -91,6 +102,10 @@ class _$WoFormThemeDataCopyWithImpl<$Res, $Val extends WoFormThemeData>
           ? _value.stringFieldBuilder
           : stringFieldBuilder // ignore: cast_nullable_to_non_nullable
               as StringFieldBuilderDef?,
+      submitButtonBuilder: freezed == submitButtonBuilder
+          ? _value.submitButtonBuilder
+          : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
+              as SubmitButtonBuilderDef?,
       showAsteriskIfRequired: freezed == showAsteriskIfRequired
           ? _value.showAsteriskIfRequired
           : showAsteriskIfRequired // ignore: cast_nullable_to_non_nullable
@@ -108,11 +123,13 @@ abstract class _$$WoFormThemeDataImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {SubmitButtonBuilderDef? submitButtonBuilder,
-      BooleanFieldBuilderDef? booleanFieldBuilder,
+      {BooleanFieldBuilderDef? booleanFieldBuilder,
+      HeaderBuilderDef? headerBuilder,
+      InputNodeWidgetBuilderDef? inputsNodeWidgetBuilder,
       NumFieldBuilderDef? numFieldBuilder,
       SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
       StringFieldBuilderDef? stringFieldBuilder,
+      SubmitButtonBuilderDef? submitButtonBuilder,
       bool? showAsteriskIfRequired});
 }
 
@@ -127,22 +144,28 @@ class __$$WoFormThemeDataImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? submitButtonBuilder = freezed,
     Object? booleanFieldBuilder = freezed,
+    Object? headerBuilder = freezed,
+    Object? inputsNodeWidgetBuilder = freezed,
     Object? numFieldBuilder = freezed,
     Object? selectFieldBuilder = freezed,
     Object? stringFieldBuilder = freezed,
+    Object? submitButtonBuilder = freezed,
     Object? showAsteriskIfRequired = freezed,
   }) {
     return _then(_$WoFormThemeDataImpl(
-      submitButtonBuilder: freezed == submitButtonBuilder
-          ? _value.submitButtonBuilder
-          : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
-              as SubmitButtonBuilderDef?,
       booleanFieldBuilder: freezed == booleanFieldBuilder
           ? _value.booleanFieldBuilder
           : booleanFieldBuilder // ignore: cast_nullable_to_non_nullable
               as BooleanFieldBuilderDef?,
+      headerBuilder: freezed == headerBuilder
+          ? _value.headerBuilder
+          : headerBuilder // ignore: cast_nullable_to_non_nullable
+              as HeaderBuilderDef?,
+      inputsNodeWidgetBuilder: freezed == inputsNodeWidgetBuilder
+          ? _value.inputsNodeWidgetBuilder
+          : inputsNodeWidgetBuilder // ignore: cast_nullable_to_non_nullable
+              as InputNodeWidgetBuilderDef?,
       numFieldBuilder: freezed == numFieldBuilder
           ? _value.numFieldBuilder
           : numFieldBuilder // ignore: cast_nullable_to_non_nullable
@@ -155,6 +178,10 @@ class __$$WoFormThemeDataImplCopyWithImpl<$Res>
           ? _value.stringFieldBuilder
           : stringFieldBuilder // ignore: cast_nullable_to_non_nullable
               as StringFieldBuilderDef?,
+      submitButtonBuilder: freezed == submitButtonBuilder
+          ? _value.submitButtonBuilder
+          : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
+              as SubmitButtonBuilderDef?,
       showAsteriskIfRequired: freezed == showAsteriskIfRequired
           ? _value.showAsteriskIfRequired
           : showAsteriskIfRequired // ignore: cast_nullable_to_non_nullable
@@ -167,24 +194,30 @@ class __$$WoFormThemeDataImplCopyWithImpl<$Res>
 
 class _$WoFormThemeDataImpl extends _WoFormThemeData {
   const _$WoFormThemeDataImpl(
-      {this.submitButtonBuilder,
-      this.booleanFieldBuilder,
+      {this.booleanFieldBuilder,
+      this.headerBuilder,
+      this.inputsNodeWidgetBuilder,
       this.numFieldBuilder,
       this.selectFieldBuilder,
       this.stringFieldBuilder,
+      this.submitButtonBuilder,
       this.showAsteriskIfRequired})
       : super._();
 
   @override
-  final SubmitButtonBuilderDef? submitButtonBuilder;
-  @override
   final BooleanFieldBuilderDef? booleanFieldBuilder;
+  @override
+  final HeaderBuilderDef? headerBuilder;
+  @override
+  final InputNodeWidgetBuilderDef? inputsNodeWidgetBuilder;
   @override
   final NumFieldBuilderDef? numFieldBuilder;
   @override
   final SelectFieldBuilderDef<dynamic>? selectFieldBuilder;
   @override
   final StringFieldBuilderDef? stringFieldBuilder;
+  @override
+  final SubmitButtonBuilderDef? submitButtonBuilder;
 
   /// Add the character '*' after the labelText of [WoFormInput]s.
   /// Default to true.
@@ -193,7 +226,7 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
 
   @override
   String toString() {
-    return 'WoFormThemeData(submitButtonBuilder: $submitButtonBuilder, booleanFieldBuilder: $booleanFieldBuilder, numFieldBuilder: $numFieldBuilder, selectFieldBuilder: $selectFieldBuilder, stringFieldBuilder: $stringFieldBuilder, showAsteriskIfRequired: $showAsteriskIfRequired)';
+    return 'WoFormThemeData(booleanFieldBuilder: $booleanFieldBuilder, headerBuilder: $headerBuilder, inputsNodeWidgetBuilder: $inputsNodeWidgetBuilder, numFieldBuilder: $numFieldBuilder, selectFieldBuilder: $selectFieldBuilder, stringFieldBuilder: $stringFieldBuilder, submitButtonBuilder: $submitButtonBuilder, showAsteriskIfRequired: $showAsteriskIfRequired)';
   }
 
   @override
@@ -201,16 +234,21 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WoFormThemeDataImpl &&
-            (identical(other.submitButtonBuilder, submitButtonBuilder) ||
-                other.submitButtonBuilder == submitButtonBuilder) &&
             (identical(other.booleanFieldBuilder, booleanFieldBuilder) ||
                 other.booleanFieldBuilder == booleanFieldBuilder) &&
+            (identical(other.headerBuilder, headerBuilder) ||
+                other.headerBuilder == headerBuilder) &&
+            (identical(
+                    other.inputsNodeWidgetBuilder, inputsNodeWidgetBuilder) ||
+                other.inputsNodeWidgetBuilder == inputsNodeWidgetBuilder) &&
             (identical(other.numFieldBuilder, numFieldBuilder) ||
                 other.numFieldBuilder == numFieldBuilder) &&
             (identical(other.selectFieldBuilder, selectFieldBuilder) ||
                 other.selectFieldBuilder == selectFieldBuilder) &&
             (identical(other.stringFieldBuilder, stringFieldBuilder) ||
                 other.stringFieldBuilder == stringFieldBuilder) &&
+            (identical(other.submitButtonBuilder, submitButtonBuilder) ||
+                other.submitButtonBuilder == submitButtonBuilder) &&
             (identical(other.showAsteriskIfRequired, showAsteriskIfRequired) ||
                 other.showAsteriskIfRequired == showAsteriskIfRequired));
   }
@@ -218,11 +256,13 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      submitButtonBuilder,
       booleanFieldBuilder,
+      headerBuilder,
+      inputsNodeWidgetBuilder,
       numFieldBuilder,
       selectFieldBuilder,
       stringFieldBuilder,
+      submitButtonBuilder,
       showAsteriskIfRequired);
 
   @JsonKey(ignore: true)
@@ -235,24 +275,30 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
 
 abstract class _WoFormThemeData extends WoFormThemeData {
   const factory _WoFormThemeData(
-      {final SubmitButtonBuilderDef? submitButtonBuilder,
-      final BooleanFieldBuilderDef? booleanFieldBuilder,
+      {final BooleanFieldBuilderDef? booleanFieldBuilder,
+      final HeaderBuilderDef? headerBuilder,
+      final InputNodeWidgetBuilderDef? inputsNodeWidgetBuilder,
       final NumFieldBuilderDef? numFieldBuilder,
       final SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
       final StringFieldBuilderDef? stringFieldBuilder,
+      final SubmitButtonBuilderDef? submitButtonBuilder,
       final bool? showAsteriskIfRequired}) = _$WoFormThemeDataImpl;
   const _WoFormThemeData._() : super._();
 
   @override
-  SubmitButtonBuilderDef? get submitButtonBuilder;
-  @override
   BooleanFieldBuilderDef? get booleanFieldBuilder;
+  @override
+  HeaderBuilderDef? get headerBuilder;
+  @override
+  InputNodeWidgetBuilderDef? get inputsNodeWidgetBuilder;
   @override
   NumFieldBuilderDef? get numFieldBuilder;
   @override
   SelectFieldBuilderDef<dynamic>? get selectFieldBuilder;
   @override
   StringFieldBuilderDef? get stringFieldBuilder;
+  @override
+  SubmitButtonBuilderDef? get submitButtonBuilder;
   @override
 
   /// Add the character '*' after the labelText of [WoFormInput]s.

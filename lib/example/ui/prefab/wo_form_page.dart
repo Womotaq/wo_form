@@ -75,9 +75,18 @@ class _WoFormStandardPage extends StatelessWidget {
           child: Column(
             children: [
               if (uiSettings.titlePosition == WoFormTitlePosition.header)
-                FormHeader(
-                  labelText: uiSettings.titleText,
-                  helperText: '',
+                Builder(
+                  builder: (context) {
+                    final headerData = WoFormHeaderData(
+                      labelText: uiSettings.titleText,
+                    );
+
+                    return uiSettings.headerBuilder?.call(headerData) ??
+                        WoFormTheme.of(context)
+                            ?.headerBuilder
+                            ?.call(headerData) ??
+                        FormHeader(data: headerData);
+                  },
                 ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,

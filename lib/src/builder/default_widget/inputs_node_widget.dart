@@ -28,9 +28,17 @@ class InputsNodeWidget extends StatelessWidget {
       case NodeDisplayMode.screenWithHeader:
         return Column(
           children: [
-            FormHeader(
-              labelText: data.uiSettings.labelText ?? '',
-              helperText: data.uiSettings.helperText ?? '',
+            Builder(
+              builder: (context) {
+                final headerData = WoFormHeaderData(
+                  labelText: data.uiSettings.labelText,
+                  helperText: data.uiSettings.helperText,
+                );
+
+                return data.uiSettings.headerBuilder?.call(headerData) ??
+                    WoFormTheme.of(context)?.headerBuilder?.call(headerData) ??
+                    FormHeader(data: headerData);
+              },
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 8),
