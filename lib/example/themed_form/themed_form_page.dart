@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wo_form/example/form_creator/form_creator_page.dart';
+import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/wo_form.dart';
 
-// TODO
-class ThemedFormPage extends StatelessWidget {
-  const ThemedFormPage({super.key});
+class ShowCustomThemeCubit extends Cubit<bool> {
+  ShowCustomThemeCubit() : super(false);
 
-  @override
-  Widget build(BuildContext context) {
-    return WoFormTheme(
-      data: const WoFormThemeData(submitButtonBuilder: CustomSubmitButton.new),
-      child: woFormCreator.toPage(),
-    );
-  }
+  void set(bool value) => emit(value);
+
+  static WoFormThemeData customTheme = const WoFormThemeData(
+    submitButtonBuilder: CustomSubmitButton.new,
+  );
 }
 
 class CustomSubmitButton extends StatelessWidget {
@@ -26,34 +23,49 @@ class CustomSubmitButton extends StatelessWidget {
     final formStatus = context.watch<WoFormStatusCubit>().state;
 
     final loadingIndicator = formStatus is SubmittingStatus
-        ? Padding(
-            padding: const EdgeInsets.only(right: 4),
-            child: SizedBox.square(
-              dimension: 16,
-              child: CircularProgressIndicator(
-                color: Theme.of(context).colorScheme.onPrimary,
-                strokeWidth: 2,
-              ),
+        ? SizedBox.square(
+            dimension: 12,
+            child: CircularProgressIndicator(
+              color: Theme.of(context).colorScheme.onPrimary,
+              strokeWidth: 2,
             ),
           )
         : null;
 
+    final text = Text(
+      data.text ?? '',
+      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.bold,
+            color: data.onPressed == null
+                ? Theme.of(context).disabledColor
+                : Theme.of(context).colorScheme.onPrimary,
+          ),
+    );
+    final child = loadingIndicator ?? text;
+
     switch (data.position) {
       case SubmitButtonPosition.appBar:
-        return FilledButton.icon(
+        return FilledButton(
+          style: FilledButton.styleFrom(
+            backgroundColor: context.colorScheme.secondary,
+          ),
           onPressed: data.onPressed,
-          icon: loadingIndicator,
-          label: Text(data.text ?? ''),
+          child: child,
         );
       case SubmitButtonPosition.bottom:
         return Padding(
-          padding: const EdgeInsets.only(top: 32),
-          child: ListTile(
-            title: FilledButton.icon(
-              onPressed: data.onPressed,
-              icon: loadingIndicator,
-              label: Text(data.text ?? ''),
+          padding: const EdgeInsets.only(
+            top: 32,
+            left: 16,
+            right: 16,
+          ),
+          child: FilledButton(
+            style: FilledButton.styleFrom(
+              backgroundColor: context.colorScheme.tertiary,
+              padding: const EdgeInsets.all(24),
             ),
+            onPressed: data.onPressed,
+            child: child,
           ),
         );
     }

@@ -83,7 +83,9 @@ class SelectFieldBuilder<T> extends StatelessWidget {
                 );
 
                 return mergedSettings.widgetBuilder?.call(fieldData) ??
-                    WoFormTheme.of(context)?.selectFieldBuilder!(fieldData) ??
+                    WoFormTheme.of(context)
+                        ?.selectFieldBuilder
+                        ?.call(fieldData) ??
                     SelectField(data: fieldData);
               },
             );
