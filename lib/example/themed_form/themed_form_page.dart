@@ -78,10 +78,18 @@ class _CustomStringFieldState extends State<CustomStringField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        InputHeader(
-          labelText: widget.data.uiSettings.labelText ?? '',
-          helperText: widget.data.uiSettings.helperText ?? '',
-          errorText: '',
+        Builder(
+          builder: (context) {
+            final headerData = WoFormInputHeaderData(
+              labelText: widget.data.uiSettings.labelText,
+              helperText: widget.data.uiSettings.helperText,
+            );
+
+            return WoFormTheme.of(context)
+                    ?.inputHeaderBuilder
+                    ?.call(headerData) ??
+                InputHeader(data: headerData);
+          },
         ),
         ListTile(
           title: TextFormField(

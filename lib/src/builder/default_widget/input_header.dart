@@ -3,19 +3,16 @@ import 'package:wo_form/wo_form.dart';
 
 /// By default, used by [StringField] and [SelectField].
 class InputHeader extends StatelessWidget {
-  const InputHeader({
-    required this.labelText,
-    required this.helperText,
-    required this.errorText,
-    super.key,
-  });
+  const InputHeader({required this.data, super.key});
 
-  final String labelText;
-  final String helperText;
-  final String errorText;
+  final WoFormInputHeaderData data;
 
   @override
   Widget build(BuildContext context) {
+    final labelText = data.labelText ?? '';
+    final helperText = data.helperText ?? '';
+    final errorText = data.errorText ?? '';
+
     final theme = Theme.of(context);
     final inputDecorationTheme = theme.inputDecorationTheme;
 
@@ -39,8 +36,9 @@ class InputHeader extends StatelessWidget {
                       theme.textTheme.labelMedium,
                 )
               : null,
-      minTileHeight: 0,
-      minVerticalPadding: 0,
+      trailing: data.trailing,
+      minTileHeight: data.shrinkWrap ? 0 : null,
+      minVerticalPadding: data.shrinkWrap ? 0 : null,
     );
   }
 }

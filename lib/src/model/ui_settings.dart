@@ -116,6 +116,8 @@ typedef SelectFieldBuilderDef<T> = Widget Function(
   WoFieldData<SelectInput<T>, List<T>, SelectInputUiSettings<T>> data,
 );
 
+typedef InputHeaderBuilderDef = Widget Function(WoFormInputHeaderData data);
+
 @freezed
 class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
   const factory SelectInputUiSettings({
@@ -131,6 +133,8 @@ class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
     double Function(String query, T value)? searcher,
     @JsonKey(includeToJson: false, includeFromJson: false)
     SelectFieldBuilderDef<T>? widgetBuilder,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    InputHeaderBuilderDef? headerBuilder,
 
     /// Only applies to unique choices
     @Default(false) bool submitFormOnSelect,

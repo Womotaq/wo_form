@@ -11,18 +11,24 @@ class SelectField<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     final selectedValues = data.value ?? [];
 
-    final theme = Theme.of(context);
-    final inputDecorationTheme = theme.inputDecorationTheme;
-
     if (data.input.maxCount == 1) {
       return switch (data.uiSettings.displayMode) {
         null || SelectFieldDisplayMode.tile => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              InputHeader(
-                labelText: data.uiSettings.labelText ?? '',
-                helperText: data.uiSettings.helperText ?? '',
-                errorText: data.errorText ?? '',
+              Builder(
+                builder: (context) {
+                  final headerData = WoFormInputHeaderData(
+                    labelText: data.uiSettings.labelText,
+                    helperText: data.uiSettings.helperText,
+                  );
+
+                  return data.uiSettings.headerBuilder?.call(headerData) ??
+                      WoFormTheme.of(context)
+                          ?.inputHeaderBuilder
+                          ?.call(headerData) ??
+                      InputHeader(data: headerData);
+                },
               ),
               ...data.input.availibleValues.map(
                 (value) {
@@ -46,10 +52,19 @@ class SelectField<T> extends StatelessWidget {
         SelectFieldDisplayMode.chip => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              InputHeader(
-                labelText: data.uiSettings.labelText ?? '',
-                helperText: data.uiSettings.helperText ?? '',
-                errorText: data.errorText ?? '',
+              Builder(
+                builder: (context) {
+                  final headerData = WoFormInputHeaderData(
+                    labelText: data.uiSettings.labelText,
+                    helperText: data.uiSettings.helperText,
+                  );
+
+                  return data.uiSettings.headerBuilder?.call(headerData) ??
+                      WoFormTheme.of(context)
+                          ?.inputHeaderBuilder
+                          ?.call(headerData) ??
+                      InputHeader(data: headerData);
+                },
               ),
               ListTile(
                 title: SelectChip<T>.uniqueChoice(
@@ -69,38 +84,34 @@ class SelectField<T> extends StatelessWidget {
     } else {
       return Column(
         children: [
-          ListTile(
-            title: Text(
-              data.uiSettings.labelText ?? '',
-              style: inputDecorationTheme.labelStyle,
-            ),
-            subtitle: data.errorText != null
-                ? Text(
-                    data.errorText!,
-                    style: inputDecorationTheme.errorStyle ??
-                        theme.textTheme.labelMedium
-                            ?.copyWith(color: theme.colorScheme.error),
-                  )
-                : (data.uiSettings.helperText ?? '').isNotEmpty
-                    ? Text(
-                        data.uiSettings.helperText ?? '',
-                        style: inputDecorationTheme.helperStyle ??
-                            theme.textTheme.labelMedium,
-                      )
-                    : null,
-            trailing: SelectChip<T>.multipleChoices(
-              values: data.input.availibleValues,
-              onSelected: data.onValueChanged == null ? null : onMultipleChoice,
-              selectedValues: selectedValues,
-              valueBuilder: data.uiSettings.valueBuilder,
-              helpValueBuilder: data.uiSettings.helpValueBuilder,
-              hintText: data.uiSettings.hintText,
-              searcher: data.uiSettings.searcher,
-              builder: (onPressed) => IconButton(
-                onPressed: onPressed,
-                icon: const Icon(Icons.add),
-              ),
-            ),
+          Builder(
+            builder: (context) {
+              final headerData = WoFormInputHeaderData(
+                labelText: data.uiSettings.labelText,
+                helperText: data.uiSettings.helperText,
+                trailing: SelectChip<T>.multipleChoices(
+                  values: data.input.availibleValues,
+                  onSelected:
+                      data.onValueChanged == null ? null : onMultipleChoice,
+                  selectedValues: selectedValues,
+                  valueBuilder: data.uiSettings.valueBuilder,
+                  helpValueBuilder: data.uiSettings.helpValueBuilder,
+                  hintText: data.uiSettings.hintText,
+                  searcher: data.uiSettings.searcher,
+                  builder: (onPressed) => IconButton(
+                    onPressed: onPressed,
+                    icon: const Icon(Icons.add),
+                  ),
+                ),
+                shrinkWrap: false,
+              );
+
+              return data.uiSettings.headerBuilder?.call(headerData) ??
+                  WoFormTheme.of(context)
+                      ?.inputHeaderBuilder
+                      ?.call(headerData) ??
+                  InputHeader(data: headerData);
+            },
           ),
           if (selectedValues.isNotEmpty)
             ListTile(
@@ -159,6 +170,7 @@ class _MultipleSelectChip extends StatelessWidget {
       label: label,
       backgroundColor: Theme.of(context).colorScheme.cardColor,
       onDeleted: onDeleted,
+      deleteButtonTooltipMessage: '',
       onPressed: helper == null
           ? null
           : () => showInfoPopover(

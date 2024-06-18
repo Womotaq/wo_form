@@ -720,6 +720,9 @@ mixin _$SelectInputUiSettings<T> {
   @JsonKey(includeToJson: false, includeFromJson: false)
   SelectFieldBuilderDef<T>? get widgetBuilder =>
       throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  InputHeaderBuilderDef? get headerBuilder =>
+      throw _privateConstructorUsedError;
 
   /// Only applies to unique choices
   bool get submitFormOnSelect => throw _privateConstructorUsedError;
@@ -749,6 +752,8 @@ abstract class $SelectInputUiSettingsCopyWith<T, $Res> {
       double Function(String, T)? searcher,
       @JsonKey(includeToJson: false, includeFromJson: false)
       SelectFieldBuilderDef<T>? widgetBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      InputHeaderBuilderDef? headerBuilder,
       bool submitFormOnSelect});
 }
 
@@ -774,6 +779,7 @@ class _$SelectInputUiSettingsCopyWithImpl<T, $Res,
     Object? helpValueBuilder = freezed,
     Object? searcher = freezed,
     Object? widgetBuilder = freezed,
+    Object? headerBuilder = freezed,
     Object? submitFormOnSelect = null,
   }) {
     return _then(_value.copyWith(
@@ -809,6 +815,10 @@ class _$SelectInputUiSettingsCopyWithImpl<T, $Res,
           ? _value.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
               as SelectFieldBuilderDef<T>?,
+      headerBuilder: freezed == headerBuilder
+          ? _value.headerBuilder
+          : headerBuilder // ignore: cast_nullable_to_non_nullable
+              as InputHeaderBuilderDef?,
       submitFormOnSelect: null == submitFormOnSelect
           ? _value.submitFormOnSelect
           : submitFormOnSelect // ignore: cast_nullable_to_non_nullable
@@ -839,6 +849,8 @@ abstract class _$$SelectInputUiSettingsImplCopyWith<T, $Res>
       double Function(String, T)? searcher,
       @JsonKey(includeToJson: false, includeFromJson: false)
       SelectFieldBuilderDef<T>? widgetBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      InputHeaderBuilderDef? headerBuilder,
       bool submitFormOnSelect});
 }
 
@@ -863,6 +875,7 @@ class __$$SelectInputUiSettingsImplCopyWithImpl<T, $Res>
     Object? helpValueBuilder = freezed,
     Object? searcher = freezed,
     Object? widgetBuilder = freezed,
+    Object? headerBuilder = freezed,
     Object? submitFormOnSelect = null,
   }) {
     return _then(_$SelectInputUiSettingsImpl<T>(
@@ -898,6 +911,10 @@ class __$$SelectInputUiSettingsImplCopyWithImpl<T, $Res>
           ? _value.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
               as SelectFieldBuilderDef<T>?,
+      headerBuilder: freezed == headerBuilder
+          ? _value.headerBuilder
+          : headerBuilder // ignore: cast_nullable_to_non_nullable
+              as InputHeaderBuilderDef?,
       submitFormOnSelect: null == submitFormOnSelect
           ? _value.submitFormOnSelect
           : submitFormOnSelect // ignore: cast_nullable_to_non_nullable
@@ -919,6 +936,7 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
       this.helpValueBuilder,
       @JsonKey(includeFromJson: false, includeToJson: false) this.searcher,
       @JsonKey(includeToJson: false, includeFromJson: false) this.widgetBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.headerBuilder,
       this.submitFormOnSelect = false})
       : super._();
 
@@ -945,6 +963,9 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final SelectFieldBuilderDef<T>? widgetBuilder;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final InputHeaderBuilderDef? headerBuilder;
 
   /// Only applies to unique choices
   @override
@@ -953,7 +974,7 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
 
   @override
   String toString() {
-    return 'SelectInputUiSettings<$T>(labelText: $labelText, helperText: $helperText, hintText: $hintText, displayMode: $displayMode, valueBuilder: $valueBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher, widgetBuilder: $widgetBuilder, submitFormOnSelect: $submitFormOnSelect)';
+    return 'SelectInputUiSettings<$T>(labelText: $labelText, helperText: $helperText, hintText: $hintText, displayMode: $displayMode, valueBuilder: $valueBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, submitFormOnSelect: $submitFormOnSelect)';
   }
 
   @override
@@ -977,6 +998,8 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
                 other.searcher == searcher) &&
             (identical(other.widgetBuilder, widgetBuilder) ||
                 other.widgetBuilder == widgetBuilder) &&
+            (identical(other.headerBuilder, headerBuilder) ||
+                other.headerBuilder == headerBuilder) &&
             (identical(other.submitFormOnSelect, submitFormOnSelect) ||
                 other.submitFormOnSelect == submitFormOnSelect));
   }
@@ -993,6 +1016,7 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
       helpValueBuilder,
       searcher,
       widgetBuilder,
+      headerBuilder,
       submitFormOnSelect);
 
   @JsonKey(ignore: true)
@@ -1024,6 +1048,8 @@ abstract class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
       final double Function(String, T)? searcher,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final SelectFieldBuilderDef<T>? widgetBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final InputHeaderBuilderDef? headerBuilder,
       final bool submitFormOnSelect}) = _$SelectInputUiSettingsImpl<T>;
   const _SelectInputUiSettings._() : super._();
 
@@ -1050,6 +1076,9 @@ abstract class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   SelectFieldBuilderDef<T>? get widgetBuilder;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  InputHeaderBuilderDef? get headerBuilder;
   @override
 
   /// Only applies to unique choices

@@ -8,6 +8,7 @@ class WoFormThemeData with _$WoFormThemeData {
   const factory WoFormThemeData({
     BooleanFieldBuilderDef? booleanFieldBuilder,
     HeaderBuilderDef? headerBuilder,
+    InputHeaderBuilderDef? inputHeaderBuilder,
     InputNodeWidgetBuilderDef? inputsNodeWidgetBuilder,
     NumFieldBuilderDef? numFieldBuilder,
     SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
