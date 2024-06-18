@@ -26,6 +26,9 @@ class WoFormLockCubit extends Cubit<Set<String>> {
 
   void lockInput({required String inputPath}) =>
       emit(Set<String>.from(state)..add(inputPath));
+
+  void unlockInput({required String inputPath}) =>
+      emit(Set<String>.from(state)..remove(inputPath));
 }
 
 class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
@@ -116,11 +119,23 @@ class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
 
     _statusCubit._setSubmitting();
 
+    final oldLocks = _lockCubit.state;
+
+    for (final inputPath in form.getAllInputPaths(values: state)) {
+      _lockCubit.lockInput(inputPath: inputPath);
+    }
+
     try {
       await form.onSubmitting?.call(state);
       _statusCubit._setSubmitted();
     } catch (e, s) {
       _statusCubit._setSubmitError(error: e, stackTrace: s);
+    }
+
+    for (final inputPath in _lockCubit.state) {
+      if (!oldLocks.contains(inputPath)) {
+        _lockCubit.unlockInput(inputPath: inputPath);
+      }
     }
   }
 }
