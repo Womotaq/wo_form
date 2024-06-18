@@ -76,10 +76,15 @@ class SelectFieldBuilder<T> extends StatelessWidget {
                   uiSettings: mergedSettings,
                   onValueChanged: inputIsLocked
                       ? null
-                      : (List<T>? value) => valuesCubit.onValueChanged(
+                      : (List<T>? value) {
+                          valuesCubit.onValueChanged(
                             inputPath: inputPath,
                             value: value,
-                          ),
+                          );
+                          if (mergedSettings.submitFormOnSelect) {
+                            valuesCubit.submit();
+                          }
+                        },
                 );
 
                 return mergedSettings.widgetBuilder?.call(fieldData) ??

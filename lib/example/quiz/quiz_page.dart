@@ -33,7 +33,8 @@ class QuizPage extends StatelessWidget {
 
             return [0, 2].contains(data.pageIndex) && !inputIsLocked
                 ? const SizedBox.shrink()
-                : SubmitButton(data: data);
+                : WoFormTheme.of(context)?.submitButtonBuilder?.call(data) ??
+                    SubmitButton(data: data);
           },
         ),
       ),

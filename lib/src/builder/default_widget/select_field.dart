@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -29,29 +28,16 @@ class SelectField<T> extends StatelessWidget {
                 (value) {
                   final subtitle =
                       data.uiSettings.helpValueBuilder?.call(value);
-                  return ListTile(
-                    leading: Radio<T>(
-                      toggleable: true,
-                      value: value,
-                      groupValue: data.value?.firstOrNull,
-                      onChanged: data.onValueChanged == null
-                          ? null
-                          : (_) => onUniqueChoice(
-                                valuesCubit: context.read(),
-                                selectedValues: selectedValues,
-                                value: value,
-                              ),
-                    ),
+                  return RadioListTile<T>(
+                    toggleable: true,
+                    value: value,
+                    groupValue: data.value?.firstOrNull,
+                    onChanged: data.onValueChanged == null
+                        ? null
+                        : (_) => onUniqueChoice(value),
                     title: data.uiSettings.valueBuilder?.call(value) ??
                         Text(value.toString()),
                     subtitle: subtitle,
-                    onTap: data.onValueChanged == null
-                        ? null
-                        : () => onUniqueChoice(
-                              valuesCubit: context.read(),
-                              selectedValues: selectedValues,
-                              value: value,
-                            ),
                   );
                 },
               ),
@@ -68,13 +54,8 @@ class SelectField<T> extends StatelessWidget {
               ListTile(
                 title: SelectChip<T>.uniqueChoice(
                   values: data.input.availibleValues,
-                  onSelected: data.onValueChanged == null
-                      ? null
-                      : (value) => onUniqueChoice(
-                            valuesCubit: context.read(),
-                            selectedValues: selectedValues,
-                            value: value,
-                          ),
+                  onSelected:
+                      data.onValueChanged == null ? null : onUniqueChoice,
                   selectedValue: selectedValues.firstOrNull,
                   valueBuilder: data.uiSettings.valueBuilder,
                   helpValueBuilder: data.uiSettings.helpValueBuilder,
@@ -109,13 +90,7 @@ class SelectField<T> extends StatelessWidget {
                     : null,
             trailing: SelectChip<T>.multipleChoices(
               values: data.input.availibleValues,
-              onSelected: data.onValueChanged == null
-                  ? null
-                  : (value) => onMultipleChoice(
-                        valuesCubit: context.read(),
-                        selectedValues: selectedValues,
-                        value: value,
-                      ),
+              onSelected: data.onValueChanged == null ? null : onMultipleChoice,
               selectedValues: selectedValues,
               valueBuilder: data.uiSettings.valueBuilder,
               helpValueBuilder: data.uiSettings.helpValueBuilder,
@@ -137,11 +112,7 @@ class SelectField<T> extends StatelessWidget {
                       helper: data.uiSettings.helpValueBuilder?.call(v),
                       onDeleted: data.onValueChanged == null
                           ? null
-                          : () => onMultipleChoice(
-                                valuesCubit: context.read(),
-                                selectedValues: selectedValues,
-                                value: v,
-                              ),
+                          : () => onMultipleChoice(v),
                       label: data.uiSettings.valueBuilder?.call(v) ??
                           Text(v.toString()),
                     ),
@@ -154,28 +125,18 @@ class SelectField<T> extends StatelessWidget {
     }
   }
 
-  // TODO : move to builder
-  void onUniqueChoice({
-    required WoFormValuesCubit valuesCubit,
-    required List<T> selectedValues,
-    required T value,
-  }) {
+  void onUniqueChoice(T value) {
     data.onValueChanged?.call(
       value == null
           ? <T>[]
-          : selectedValues.contains(value)
+          : data.value?.contains(value) ?? false
               ? <T>[]
               : [value],
     );
-    if (data.uiSettings.submitFormOnSelect) valuesCubit.submit();
   }
 
-  void onMultipleChoice({
-    required WoFormValuesCubit valuesCubit,
-    required Iterable<T> selectedValues,
-    required T value,
-  }) {
-    final selectedSet = selectedValues.toSet();
+  void onMultipleChoice(T value) {
+    final selectedSet = data.value?.toSet() ?? {};
     if (!selectedSet.add(value)) selectedSet.remove(value);
     data.onValueChanged?.call(selectedSet.toList());
   }
