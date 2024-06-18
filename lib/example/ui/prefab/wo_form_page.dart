@@ -94,7 +94,6 @@ class _WoFormStandardPage extends StatelessWidget {
                   labelText: uiSettings.titleText,
                   helperText: '',
                 ),
-              const SizedBox(height: 24),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [

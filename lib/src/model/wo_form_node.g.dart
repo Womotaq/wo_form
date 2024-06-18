@@ -65,3 +65,15 @@ Map<String, dynamic> _$$ValueListenerNodeImplToJson(
       'inputPath': instance.inputPath,
       'runtimeType': instance.$type,
     };
+
+_$WidgetNodeImpl _$$WidgetNodeImplFromJson(Map<String, dynamic> json) =>
+    _$WidgetNodeImpl(
+      id: json['id'] as String,
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$WidgetNodeImplToJson(_$WidgetNodeImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'runtimeType': instance.$type,
+    };

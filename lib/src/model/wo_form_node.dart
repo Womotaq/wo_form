@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/src/model/json_converter/inputs_list.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -95,6 +94,12 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
         listener,
   }) = ValueListenerNode;
 
+  const factory WoFormNode.widget({
+    required String id,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    Widget Function(BuildContext context)? builder,
+  }) = WidgetNode;
+
   const WoFormNode._();
 
   factory WoFormNode.fromJson(Map<String, dynamic> json) =>
@@ -129,6 +134,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
           throw UnimplementedError('Unknown input type : ${input.runtimeType}');
         }
       case ValueListenerNode():
+      case WidgetNode():
         return {};
     }
   }
@@ -175,6 +181,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
           parentPath: '$parentPath/$id',
         );
       case ValueListenerNode():
+      case WidgetNode():
         return null;
     }
   }
@@ -211,6 +218,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
           ),
         ];
       case ValueListenerNode():
+      case WidgetNode():
         return ['$parentPath/$id'];
     }
   }
@@ -243,6 +251,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
           parentPath: '$parentPath/$id',
         );
       case ValueListenerNode():
+      case WidgetNode():
         return [];
     }
   }
@@ -314,6 +323,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
 
         return null;
       case ValueListenerNode():
+      case WidgetNode():
         return null;
     }
   }
@@ -354,7 +364,9 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
               '$parentPath/$id',
               value,
             ),
-            child: WoGap.zero,
+            child: const SizedBox.shrink(),
           ),
+        WidgetNode(builder: final builder) =>
+          builder == null ? const SizedBox.shrink() : Builder(builder: builder)
       };
 }

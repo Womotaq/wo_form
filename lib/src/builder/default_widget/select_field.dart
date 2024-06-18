@@ -15,32 +15,16 @@ class SelectField<T> extends StatelessWidget {
     final theme = Theme.of(context);
     final inputDecorationTheme = theme.inputDecorationTheme;
 
-    final title = Text(
-      data.uiSettings.labelText ?? '',
-      style: inputDecorationTheme.labelStyle,
-    );
-
-    final subtitle = data.errorText != null
-        ? Text(
-            data.errorText!,
-            style: inputDecorationTheme.errorStyle ??
-                theme.textTheme.labelMedium
-                    ?.copyWith(color: theme.colorScheme.error),
-          )
-        : (data.uiSettings.helperText ?? '').isNotEmpty
-            ? Text(
-                data.uiSettings.helperText ?? '',
-                style: inputDecorationTheme.helperStyle ??
-                    theme.textTheme.labelMedium,
-              )
-            : null;
-
     if (data.input.maxCount == 1) {
       return switch (data.uiSettings.displayMode) {
         null || SelectFieldDisplayMode.tile => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ListTile(title: title, subtitle: subtitle),
+              InputHeader(
+                labelText: data.uiSettings.labelText ?? '',
+                helperText: data.uiSettings.helperText ?? '',
+                errorText: data.errorText ?? '',
+              ),
               ...data.input.availibleValues.map(
                 (value) {
                   final subtitle =
@@ -105,8 +89,24 @@ class SelectField<T> extends StatelessWidget {
       return Column(
         children: [
           ListTile(
-            title: title,
-            subtitle: subtitle,
+            title: Text(
+              data.uiSettings.labelText ?? '',
+              style: inputDecorationTheme.labelStyle,
+            ),
+            subtitle: data.errorText != null
+                ? Text(
+                    data.errorText!,
+                    style: inputDecorationTheme.errorStyle ??
+                        theme.textTheme.labelMedium
+                            ?.copyWith(color: theme.colorScheme.error),
+                  )
+                : (data.uiSettings.helperText ?? '').isNotEmpty
+                    ? Text(
+                        data.uiSettings.helperText ?? '',
+                        style: inputDecorationTheme.helperStyle ??
+                            theme.textTheme.labelMedium,
+                      )
+                    : null,
             trailing: SelectChip<T>.multipleChoices(
               values: data.input.availibleValues,
               onSelected: data.onValueChanged == null
