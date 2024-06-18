@@ -33,6 +33,7 @@ class _StringFieldState extends State<StringField> {
         ),
         ListTile(
           title: TextFormField(
+            enabled: widget.data.onValueChanged != null,
             controller: textEditingController,
             onChanged: widget.data.onValueChanged,
             onFieldSubmitted:
@@ -56,7 +57,9 @@ class _StringFieldState extends State<StringField> {
               suffixIcon: switch (widget.data.uiSettings.action) {
                 null => null,
                 StringFieldAction.clear => IconButton(
-                    onPressed: () => widget.data.onValueChanged(null),
+                    onPressed: widget.data.onValueChanged == null
+                        ? null
+                        : () => widget.data.onValueChanged!(null),
                     icon: const Icon(Icons.clear),
                   ),
                 StringFieldAction.obscure => IconButton(

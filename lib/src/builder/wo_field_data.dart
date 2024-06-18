@@ -13,5 +13,5 @@ class WoFieldData<I, T, U> {
   final T? value;
   final String? errorText;
   final U uiSettings;
-  final void Function(T?) onValueChanged;
+  final void Function(T?)? onValueChanged;
 }

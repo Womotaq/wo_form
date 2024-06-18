@@ -44,41 +44,49 @@ class SelectFieldBuilder<T> extends StatelessWidget {
       );
     }
 
-    return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
-      builder: (context, status) {
-        return WoFormValueBuilder<List<T>>(
-          inputPath: inputPath,
-          builder: (context, selectedValues_) {
-            final selectedValues = selectedValues_ ?? [];
-
-            final String? errorText;
-            if (status is InvalidValuesStatus) {
-              final error = input.getError(selectedValues);
-              if (error == null) {
-                errorText = null;
-              } else {
-                errorText = context.read<WoFormL10n?>()?.translateError(error);
-              }
-            } else {
-              errorText = null;
-            }
-
-            final fieldData =
-                WoFieldData<SelectInput<T>, List<T>, SelectInputUiSettings<T>>(
+    return BlocSelector<WoFormLockCubit, Set<String>, bool>(
+      selector: (lockedInputs) => lockedInputs.contains(inputPath),
+      builder: (context, inputIsLocked) {
+        return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
+          builder: (context, status) {
+            return WoFormValueBuilder<List<T>>(
               inputPath: inputPath,
-              input: input,
-              value: selectedValues,
-              errorText: errorText,
-              uiSettings: mergedSettings,
-              onValueChanged: (List<T>? value) => valuesCubit.onValueChanged(
-                inputPath: inputPath,
-                value: value,
-              ),
-            );
+              builder: (context, selectedValues_) {
+                final selectedValues = selectedValues_ ?? [];
 
-            return mergedSettings.widgetBuilder?.call(fieldData) ??
-                WoFormTheme.of(context)?.selectFieldBuilder!(fieldData) ??
-                SelectField(data: fieldData);
+                final String? errorText;
+                if (status is InvalidValuesStatus) {
+                  final error = input.getError(selectedValues);
+                  if (error == null) {
+                    errorText = null;
+                  } else {
+                    errorText =
+                        context.read<WoFormL10n?>()?.translateError(error);
+                  }
+                } else {
+                  errorText = null;
+                }
+
+                final fieldData = WoFieldData<SelectInput<T>, List<T>,
+                    SelectInputUiSettings<T>>(
+                  inputPath: inputPath,
+                  input: input,
+                  value: selectedValues,
+                  errorText: errorText,
+                  uiSettings: mergedSettings,
+                  onValueChanged: inputIsLocked
+                      ? null
+                      : (List<T>? value) => valuesCubit.onValueChanged(
+                            inputPath: inputPath,
+                            value: value,
+                          ),
+                );
+
+                return mergedSettings.widgetBuilder?.call(fieldData) ??
+                    WoFormTheme.of(context)?.selectFieldBuilder!(fieldData) ??
+                    SelectField(data: fieldData);
+              },
+            );
           },
         );
       },

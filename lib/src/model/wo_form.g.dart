@@ -10,6 +10,8 @@ _$WoFormImpl _$$WoFormImplFromJson(Map<String, dynamic> json) => _$WoFormImpl(
       inputs: json['inputs'] == null
           ? const []
           : const InputsListConverter().fromJson(json['inputs'] as List),
+      canModifySubmittedValues:
+          json['canModifySubmittedValues'] as bool? ?? true,
       uiSettings: json['uiSettings'] == null
           ? const WoFormUiSettings()
           : WoFormUiSettings.fromJson(
@@ -23,6 +25,7 @@ _$WoFormImpl _$$WoFormImplFromJson(Map<String, dynamic> json) => _$WoFormImpl(
 Map<String, dynamic> _$$WoFormImplToJson(_$WoFormImpl instance) =>
     <String, dynamic>{
       'inputs': const InputsListConverter().toJson(instance.inputs),
+      'canModifySubmittedValues': instance.canModifySubmittedValues,
       'uiSettings': WoFormUiSettings.staticToJson(instance.uiSettings),
       'exportSettings': ExportSettings.staticToJson(instance.exportSettings),
     };

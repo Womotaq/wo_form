@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/example/utils/readable_json.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -13,14 +14,27 @@ class QuizPage extends StatelessWidget {
           linearTrackColor: Colors.transparent,
         ),
       ),
+      canModifySubmittedValues: false,
       uiSettings: WoFormUiSettings(
+        showAsteriskIfRequired: false,
         submitMode: const PageByPageSubmitMode(
           submitText: 'Terminer',
-          // TODO : canModifyValidatedPages: false,
         ),
-        submitButtonBuilder: (data) => data.pageIndex.isEven
-            ? const SizedBox.shrink()
-            : SubmitButton(data: data),
+        submitButtonBuilder: (data) => Builder(
+          builder: (context) {
+            final form = context.read<WoForm>();
+            final currentInput = form.inputs[data.pageIndex];
+
+            final inputIsLocked = context.select(
+              (WoFormLockCubit c) =>
+                  c.inputIsLocked(inputPath: '/${currentInput.id}'),
+            );
+
+            return [0, 2].contains(data.pageIndex) && !inputIsLocked
+                ? const SizedBox.shrink()
+                : SubmitButton(data: data);
+          },
+        ),
       ),
       inputs: [
         const InputsNode(
@@ -95,6 +109,80 @@ class QuizPage extends StatelessWidget {
                 labelText: answer == 'C' ? 'Bonne réponse !' : 'Dommage...',
                 helperText: "L'hypothénuse est en réalité la face cachée de la "
                     'Lune...',
+              ),
+            );
+          },
+        ),
+        const NumInput(
+          id: 'q3',
+          defaultValue: 0,
+          isRequired: true,
+          uiSettings: NumInputUiSettings(
+            labelText: 'Quel est le record du monde de jonglage, '
+                'avec un ballon de foot, sans interruption ?',
+          ),
+        ),
+        ValueBuilderNode(
+          id: 'a3',
+          inputPath: '../q3',
+          builder: (id, value) {
+            final answer = value as num?;
+            return InputsNode(
+              id: id,
+              uiSettings: InputsNodeUiSettings(
+                labelText: answer == 170515 ? 'Bonne réponse !' : 'Dommage...',
+                helperText:
+                    'Le record du monde actuel de jonglage avec un ballon de '
+                    "football est détenu par l'athlète japonais Yuki Kadono. "
+                    'En 2018, il a réalisé 170 515 jongles en une seule '
+                    'session, battant ainsi le record précédent qui était de '
+                    '170 405 jongles. Ce record a été officiellement '
+                    'enregistré par Guinness World Records.',
+              ),
+            );
+          },
+        ),
+        const StringInput(
+          id: 'q4',
+          isRequired: true,
+          uiSettings: StringInputUiSettings(
+            labelText: 'Quel est votre prénom ?',
+          ),
+        ),
+        const InputsNode(
+          id: 'r4',
+          uiSettings: InputsNodeUiSettings(
+            labelText: 'Bonne réponse !',
+            helperText:
+                'Un prénom est personnel, propre à chacun et sale aux autres.',
+          ),
+        ),
+        const BooleanInput(
+          id: 'q5',
+          uiSettings: BooleanInputUiSettings(
+            labelText:
+                "J'ai vu et je reconnais que le package wo_form est un package"
+                ' extraordinaire et très utile.',
+            controlType: BooleanFieldControlType.checkbox,
+          ),
+        ),
+        ValueBuilderNode(
+          id: 'r5',
+          inputPath: '../q5',
+          builder: (id, value) {
+            final answer = value as bool?;
+            return InputsNode(
+              id: id,
+              uiSettings: InputsNodeUiSettings(
+                labelText: answer == true
+                    ? 'Bonne réponse !'
+                    : 'Il va falloir mettre des lunettes',
+                helperText:
+                    'Le package wo_form vous permet tout ce dont vous avez '
+                    "besoin pour tout type de formulaire, de l'éditeur au "
+                    'questionnaire, en fournissant des fonctionnalités '
+                    'avancées telles que le thème, les champs dynamiques, '
+                    'la jsonification...',
               ),
             );
           },

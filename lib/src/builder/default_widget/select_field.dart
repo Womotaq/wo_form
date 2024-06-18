@@ -46,24 +46,28 @@ class SelectField<T> extends StatelessWidget {
                   final subtitle =
                       data.uiSettings.helpValueBuilder?.call(value);
                   return ListTile(
-                    leading: Radio(
+                    leading: Radio<T>(
                       toggleable: true,
                       value: value,
                       groupValue: data.value?.firstOrNull,
-                      onChanged: (_) => onUniqueChoice(
-                        valuesCubit: context.read(),
-                        selectedValues: selectedValues,
-                        value: value,
-                      ),
+                      onChanged: data.onValueChanged == null
+                          ? null
+                          : (_) => onUniqueChoice(
+                                valuesCubit: context.read(),
+                                selectedValues: selectedValues,
+                                value: value,
+                              ),
                     ),
                     title: data.uiSettings.valueBuilder?.call(value) ??
                         Text(value.toString()),
                     subtitle: subtitle,
-                    onTap: () => onUniqueChoice(
-                      valuesCubit: context.read(),
-                      selectedValues: selectedValues,
-                      value: value,
-                    ),
+                    onTap: data.onValueChanged == null
+                        ? null
+                        : () => onUniqueChoice(
+                              valuesCubit: context.read(),
+                              selectedValues: selectedValues,
+                              value: value,
+                            ),
                   );
                 },
               ),
@@ -80,11 +84,13 @@ class SelectField<T> extends StatelessWidget {
               ListTile(
                 title: SelectChip<T>.uniqueChoice(
                   values: data.input.availibleValues,
-                  onSelected: (value) => onUniqueChoice(
-                    valuesCubit: context.read(),
-                    selectedValues: selectedValues,
-                    value: value,
-                  ),
+                  onSelected: data.onValueChanged == null
+                      ? null
+                      : (value) => onUniqueChoice(
+                            valuesCubit: context.read(),
+                            selectedValues: selectedValues,
+                            value: value,
+                          ),
                   selectedValue: selectedValues.firstOrNull,
                   valueBuilder: data.uiSettings.valueBuilder,
                   helpValueBuilder: data.uiSettings.helpValueBuilder,
@@ -103,11 +109,13 @@ class SelectField<T> extends StatelessWidget {
             subtitle: subtitle,
             trailing: SelectChip<T>.multipleChoices(
               values: data.input.availibleValues,
-              onSelected: (value) => onMultipleChoice(
-                valuesCubit: context.read(),
-                selectedValues: selectedValues,
-                value: value,
-              ),
+              onSelected: data.onValueChanged == null
+                  ? null
+                  : (value) => onMultipleChoice(
+                        valuesCubit: context.read(),
+                        selectedValues: selectedValues,
+                        value: value,
+                      ),
               selectedValues: selectedValues,
               valueBuilder: data.uiSettings.valueBuilder,
               helpValueBuilder: data.uiSettings.helpValueBuilder,
@@ -127,11 +135,13 @@ class SelectField<T> extends StatelessWidget {
                   ...selectedValues.map(
                     (v) => _MultipleSelectChip(
                       helper: data.uiSettings.helpValueBuilder?.call(v),
-                      onDeleted: () => onMultipleChoice(
-                        valuesCubit: context.read(),
-                        selectedValues: selectedValues,
-                        value: v,
-                      ),
+                      onDeleted: data.onValueChanged == null
+                          ? null
+                          : () => onMultipleChoice(
+                                valuesCubit: context.read(),
+                                selectedValues: selectedValues,
+                                value: v,
+                              ),
                       label: data.uiSettings.valueBuilder?.call(v) ??
                           Text(v.toString()),
                     ),
@@ -150,9 +160,8 @@ class SelectField<T> extends StatelessWidget {
     required List<T> selectedValues,
     required T value,
   }) {
-    valuesCubit.onValueChanged(
-      inputPath: data.inputPath,
-      value: value == null
+    data.onValueChanged?.call(
+      value == null
           ? <T>[]
           : selectedValues.contains(value)
               ? <T>[]
@@ -169,10 +178,7 @@ class SelectField<T> extends StatelessWidget {
   }) {
     final selectedSet = selectedValues.toSet();
     if (!selectedSet.add(value)) selectedSet.remove(value);
-    valuesCubit.onValueChanged(
-      inputPath: data.inputPath,
-      value: selectedSet.toList(),
-    );
+    data.onValueChanged?.call(selectedSet.toList());
   }
 }
 

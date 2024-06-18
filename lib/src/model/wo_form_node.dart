@@ -25,6 +25,11 @@ mixin WoFormElementMixin {
 
   Widget toWidget<T extends WoFormValuesCubit>({required String parentPath});
 
+  Iterable<String> getAllInputPaths({
+    required Map<String, dynamic> values,
+    required String parentPath,
+  });
+
   static String getAbsolutePath({
     required String parentPath,
     required String inputPath,
@@ -171,6 +176,42 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
         );
       case ValueListenerNode():
         return null;
+    }
+  }
+
+  @override
+  Iterable<String> getAllInputPaths({
+    required Map<String, dynamic> values,
+    required String parentPath,
+  }) {
+    switch (this) {
+      case InputsNode(inputs: final inputs):
+        return [
+          '$parentPath/$id',
+          for (final input in inputs)
+            ...input.getAllInputPaths(
+              values: values,
+              parentPath: '$parentPath/$id',
+            ),
+        ];
+      case ValueBuilderNode(inputPath: final inputPath, builder: final builder):
+        final input = builder!(
+          id,
+          values[WoFormElementMixin.getAbsolutePath(
+            parentPath: '$parentPath/$id',
+            inputPath: inputPath,
+          )],
+        );
+
+        return [
+          '$parentPath/$id',
+          ...input.getAllInputPaths(
+            values: values,
+            parentPath: '$parentPath/$id',
+          ),
+        ];
+      case ValueListenerNode():
+        return ['$parentPath/$id'];
     }
   }
 

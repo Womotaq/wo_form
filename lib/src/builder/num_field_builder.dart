@@ -41,38 +41,47 @@ class NumFieldBuilder extends StatelessWidget {
       );
     }
 
-    return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
-      builder: (context, status) {
-        return WoFormValueBuilder<num>(
-          inputPath: inputPath,
-          builder: (context, value) {
-            final String? errorText;
-            if (status is InvalidValuesStatus) {
-              final error = input.getError(value);
-              if (error == null) {
-                errorText = null;
-              } else {
-                errorText = context.read<WoFormL10n?>()?.translateError(error);
-              }
-            } else {
-              errorText = null;
-            }
-
-            final fieldData = WoFieldData<NumInput, num, NumInputUiSettings>(
+    return BlocSelector<WoFormLockCubit, Set<String>, bool>(
+      selector: (lockedInputs) => lockedInputs.contains(inputPath),
+      builder: (context, inputIsLocked) {
+        return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
+          builder: (context, status) {
+            return WoFormValueBuilder<num>(
               inputPath: inputPath,
-              input: input,
-              value: value,
-              errorText: errorText,
-              uiSettings: mergedSettings,
-              onValueChanged: (num? value) => valuesCubit.onValueChanged(
-                inputPath: inputPath,
-                value: value,
-              ),
-            );
+              builder: (context, value) {
+                final String? errorText;
+                if (status is InvalidValuesStatus) {
+                  final error = input.getError(value);
+                  if (error == null) {
+                    errorText = null;
+                  } else {
+                    errorText =
+                        context.read<WoFormL10n?>()?.translateError(error);
+                  }
+                } else {
+                  errorText = null;
+                }
 
-            return mergedSettings.widgetBuilder?.call(fieldData) ??
-                WoFormTheme.of(context)?.numFieldBuilder?.call(fieldData) ??
-                NumField(data: fieldData);
+                final fieldData =
+                    WoFieldData<NumInput, num, NumInputUiSettings>(
+                  inputPath: inputPath,
+                  input: input,
+                  value: value,
+                  errorText: errorText,
+                  uiSettings: mergedSettings,
+                  onValueChanged: inputIsLocked
+                      ? null
+                      : (num? value) => valuesCubit.onValueChanged(
+                            inputPath: inputPath,
+                            value: value,
+                          ),
+                );
+
+                return mergedSettings.widgetBuilder?.call(fieldData) ??
+                    WoFormTheme.of(context)?.numFieldBuilder?.call(fieldData) ??
+                    NumField(data: fieldData);
+              },
+            );
           },
         );
       },

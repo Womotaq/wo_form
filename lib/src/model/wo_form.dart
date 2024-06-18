@@ -15,6 +15,7 @@ class WoForm with _$WoForm {
     @Default(InitialStatus())
     WoFormStatus initialStatus,
     @InputsListConverter() @Default([]) List<WoFormElementMixin> inputs,
+    @Default(true) bool canModifySubmittedValues,
     @JsonKey(includeToJson: false, includeFromJson: false)
     Future<bool?> Function(BuildContext context)? canQuit,
     @JsonKey(toJson: WoFormUiSettings.staticToJson)

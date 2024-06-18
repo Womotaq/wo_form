@@ -24,6 +24,7 @@ mixin _$WoForm {
   WoFormStatus get initialStatus => throw _privateConstructorUsedError;
   @InputsListConverter()
   List<WoFormElementMixin> get inputs => throw _privateConstructorUsedError;
+  bool get canModifySubmittedValues => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
   Future<bool?> Function(BuildContext)? get canQuit =>
       throw _privateConstructorUsedError;
@@ -49,6 +50,7 @@ abstract class $WoFormCopyWith<$Res> {
       {@JsonKey(includeToJson: false, includeFromJson: false)
       WoFormStatus initialStatus,
       @InputsListConverter() List<WoFormElementMixin> inputs,
+      bool canModifySubmittedValues,
       @JsonKey(includeToJson: false, includeFromJson: false)
       Future<bool?> Function(BuildContext)? canQuit,
       @JsonKey(toJson: WoFormUiSettings.staticToJson)
@@ -78,6 +80,7 @@ class _$WoFormCopyWithImpl<$Res, $Val extends WoForm>
   $Res call({
     Object? initialStatus = null,
     Object? inputs = null,
+    Object? canModifySubmittedValues = null,
     Object? canQuit = freezed,
     Object? uiSettings = null,
     Object? exportSettings = null,
@@ -92,6 +95,10 @@ class _$WoFormCopyWithImpl<$Res, $Val extends WoForm>
           ? _value.inputs
           : inputs // ignore: cast_nullable_to_non_nullable
               as List<WoFormElementMixin>,
+      canModifySubmittedValues: null == canModifySubmittedValues
+          ? _value.canModifySubmittedValues
+          : canModifySubmittedValues // ignore: cast_nullable_to_non_nullable
+              as bool,
       canQuit: freezed == canQuit
           ? _value.canQuit
           : canQuit // ignore: cast_nullable_to_non_nullable
@@ -147,6 +154,7 @@ abstract class _$$WoFormImplCopyWith<$Res> implements $WoFormCopyWith<$Res> {
       {@JsonKey(includeToJson: false, includeFromJson: false)
       WoFormStatus initialStatus,
       @InputsListConverter() List<WoFormElementMixin> inputs,
+      bool canModifySubmittedValues,
       @JsonKey(includeToJson: false, includeFromJson: false)
       Future<bool?> Function(BuildContext)? canQuit,
       @JsonKey(toJson: WoFormUiSettings.staticToJson)
@@ -177,6 +185,7 @@ class __$$WoFormImplCopyWithImpl<$Res>
   $Res call({
     Object? initialStatus = null,
     Object? inputs = null,
+    Object? canModifySubmittedValues = null,
     Object? canQuit = freezed,
     Object? uiSettings = null,
     Object? exportSettings = null,
@@ -191,6 +200,10 @@ class __$$WoFormImplCopyWithImpl<$Res>
           ? _value._inputs
           : inputs // ignore: cast_nullable_to_non_nullable
               as List<WoFormElementMixin>,
+      canModifySubmittedValues: null == canModifySubmittedValues
+          ? _value.canModifySubmittedValues
+          : canModifySubmittedValues // ignore: cast_nullable_to_non_nullable
+              as bool,
       canQuit: freezed == canQuit
           ? _value.canQuit
           : canQuit // ignore: cast_nullable_to_non_nullable
@@ -218,6 +231,7 @@ class _$WoFormImpl extends _WoForm {
       {@JsonKey(includeToJson: false, includeFromJson: false)
       this.initialStatus = const InitialStatus(),
       @InputsListConverter() final List<WoFormElementMixin> inputs = const [],
+      this.canModifySubmittedValues = true,
       @JsonKey(includeToJson: false, includeFromJson: false) this.canQuit,
       @JsonKey(toJson: WoFormUiSettings.staticToJson)
       this.uiSettings = const WoFormUiSettings(),
@@ -244,6 +258,9 @@ class _$WoFormImpl extends _WoForm {
   }
 
   @override
+  @JsonKey()
+  final bool canModifySubmittedValues;
+  @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final Future<bool?> Function(BuildContext)? canQuit;
   @override
@@ -258,7 +275,7 @@ class _$WoFormImpl extends _WoForm {
 
   @override
   String toString() {
-    return 'WoForm(initialStatus: $initialStatus, inputs: $inputs, canQuit: $canQuit, uiSettings: $uiSettings, exportSettings: $exportSettings, themeBuilder: $themeBuilder)';
+    return 'WoForm(initialStatus: $initialStatus, inputs: $inputs, canModifySubmittedValues: $canModifySubmittedValues, canQuit: $canQuit, uiSettings: $uiSettings, exportSettings: $exportSettings, themeBuilder: $themeBuilder)';
   }
 
   @override
@@ -269,6 +286,9 @@ class _$WoFormImpl extends _WoForm {
             (identical(other.initialStatus, initialStatus) ||
                 other.initialStatus == initialStatus) &&
             const DeepCollectionEquality().equals(other._inputs, _inputs) &&
+            (identical(
+                    other.canModifySubmittedValues, canModifySubmittedValues) ||
+                other.canModifySubmittedValues == canModifySubmittedValues) &&
             (identical(other.canQuit, canQuit) || other.canQuit == canQuit) &&
             (identical(other.uiSettings, uiSettings) ||
                 other.uiSettings == uiSettings) &&
@@ -284,6 +304,7 @@ class _$WoFormImpl extends _WoForm {
       runtimeType,
       initialStatus,
       const DeepCollectionEquality().hash(_inputs),
+      canModifySubmittedValues,
       canQuit,
       uiSettings,
       exportSettings,
@@ -308,6 +329,7 @@ abstract class _WoForm extends WoForm {
       {@JsonKey(includeToJson: false, includeFromJson: false)
       final WoFormStatus initialStatus,
       @InputsListConverter() final List<WoFormElementMixin> inputs,
+      final bool canModifySubmittedValues,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final Future<bool?> Function(BuildContext)? canQuit,
       @JsonKey(toJson: WoFormUiSettings.staticToJson)
@@ -326,6 +348,8 @@ abstract class _WoForm extends WoForm {
   @override
   @InputsListConverter()
   List<WoFormElementMixin> get inputs;
+  @override
+  bool get canModifySubmittedValues;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   Future<bool?> Function(BuildContext)? get canQuit;

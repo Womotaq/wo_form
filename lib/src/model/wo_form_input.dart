@@ -21,6 +21,12 @@ mixin WoFormInputMixin {
 
   WoFormInputError? getError(Object? value);
 
+  Iterable<String> getAllInputPaths({
+    required Map<String, dynamic> values,
+    required String parentPath,
+  }) =>
+      ['$parentPath/$id'];
+
   Iterable<WoFormInputError> getErrors(
     Map<String, dynamic> values, {
     required String parentPath,

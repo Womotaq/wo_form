@@ -18,19 +18,31 @@ class WoFormStatusCubit extends Cubit<WoFormStatus> {
   void _setSubmitted() => emit(const SubmittedStatus());
 }
 
+/// This cubit references the paths of all the locked inputs.
+class WoFormLockCubit extends Cubit<Set<String>> {
+  WoFormLockCubit._() : super({});
+
+  bool inputIsLocked({required String inputPath}) => state.contains(inputPath);
+
+  void lockInput({required String inputPath}) =>
+      emit(Set<String>.from(state)..add(inputPath));
+}
+
 class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
   // with StateStreamable<WoFormValues>
   WoFormValuesCubit._(
     this.form,
-    this._statusCubit, {
+    this._statusCubit,
+    this._lockCubit, {
     this.onSubmitting,
   })  : pageController = PageController(),
         super(form.defaultValues());
 
   final WoForm form;
-  final PageController pageController;
   final WoFormStatusCubit _statusCubit;
+  final WoFormLockCubit _lockCubit;
   final FutureOr<void> Function(Map<String, dynamic> values)? onSubmitting;
+  final PageController pageController;
 
   @override
   Future<void> close() {
@@ -45,6 +57,8 @@ class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
   }) {
     // Can't edit a form while submitting it
     if (_statusCubit.state is SubmittingStatus) return;
+
+    if (_lockCubit.inputIsLocked(inputPath: inputPath)) return;
 
     final newMap = Map<String, dynamic>.from(state);
     newMap[inputPath] = value;
@@ -78,6 +92,13 @@ class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
       if (errors.isNotEmpty) {
         return _statusCubit.setInvalidValues(inputErrors: errors);
       } else {
+        if (!form.canModifySubmittedValues) {
+          for (final inputPath
+              in input.getAllInputPaths(values: state, parentPath: '')) {
+            _lockCubit.lockInput(inputPath: inputPath);
+          }
+        }
+
         // remove the InvalidValuesStatus
         _statusCubit.setInProgress();
 
@@ -128,7 +149,11 @@ class WoFormInitializer extends StatelessWidget {
             create: (context) => WoFormStatusCubit._(form.initialStatus),
           ),
           BlocProvider(
+            create: (context) => WoFormLockCubit._(),
+          ),
+          BlocProvider(
             create: (context) => WoFormValuesCubit._(
+              context.read(),
               context.read(),
               context.read(),
               onSubmitting: onSubmitting,
