@@ -154,6 +154,7 @@ class SelectField<T> extends StatelessWidget {
     }
   }
 
+  // TODO : move to builder
   void onUniqueChoice({
     required WoFormValuesCubit valuesCubit,
     required List<T> selectedValues,

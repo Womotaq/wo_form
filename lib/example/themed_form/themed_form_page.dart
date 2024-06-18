@@ -10,6 +10,7 @@ class ShowCustomThemeCubit extends Cubit<bool> {
 
   static WoFormThemeData customTheme = const WoFormThemeData(
     submitButtonBuilder: CustomSubmitButton.new,
+    stringFieldBuilder: CustomStringField.new,
   );
 }
 
@@ -69,5 +70,74 @@ class CustomSubmitButton extends StatelessWidget {
           ),
         );
     }
+  }
+}
+
+class CustomStringField extends StatefulWidget {
+  const CustomStringField(this.data, {super.key});
+
+  final WoFieldData<StringInput, String, StringInputUiSettings> data;
+
+  @override
+  State<CustomStringField> createState() => _CustomStringFieldState();
+}
+
+class _CustomStringFieldState extends State<CustomStringField> {
+  final textEditingController = TextEditingController();
+  bool obscureText = false;
+
+  @override
+  void initState() {
+    super.initState();
+    textEditingController.text = widget.data.value ?? '';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: TextFormField(
+        enabled: widget.data.onValueChanged != null,
+        controller: textEditingController,
+        onChanged: widget.data.onValueChanged,
+        onFieldSubmitted:
+            (widget.data.uiSettings.submitFormOnFieldSubmitted ?? true)
+                ? (_) => context.read<WoFormValuesCubit>().submit()
+                : null,
+        keyboardType: widget.data.uiSettings.keyboardType,
+        obscureText: obscureText,
+        autocorrect: widget.data.uiSettings.autocorrect ?? true,
+        autofillHints: widget.data.uiSettings.autofillHints,
+        autofocus: widget.data.uiSettings.autofocus ?? false,
+        textInputAction: widget.data.uiSettings.textInputAction,
+        textCapitalization: widget.data.uiSettings.textCapitalization ??
+            TextCapitalization.none,
+        maxLines: widget.data.uiSettings.maxLines == 0
+            ? null
+            : widget.data.uiSettings.maxLines ?? 1,
+        decoration: InputDecoration(
+          labelText: widget.data.uiSettings.labelText ?? '',
+          helperText: widget.data.uiSettings.helperText ?? '',
+          hintText: widget.data.uiSettings.hintText,
+          errorText: widget.data.errorText,
+          suffixIcon: switch (widget.data.uiSettings.action) {
+            null => null,
+            StringFieldAction.clear => IconButton(
+                onPressed: widget.data.onValueChanged == null
+                    ? null
+                    : () => widget.data.onValueChanged!(null),
+                icon: const Icon(Icons.clear),
+              ),
+            StringFieldAction.obscure => IconButton(
+                onPressed: () => setState(() {
+                  obscureText = !obscureText;
+                }),
+                icon: obscureText
+                    ? const Icon(Icons.visibility_off_outlined)
+                    : const Icon(Icons.visibility_outlined),
+              ),
+          },
+        ),
+      ),
+    );
   }
 }
