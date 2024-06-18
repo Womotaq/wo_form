@@ -175,10 +175,10 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
               for (final input in exportableInputs)
                 input.getExportKey(
                   values: values,
-                  parentPath: '',
+                  parentPath: '$parentPath/$id',
                 ): input.export(
                   values: values,
-                  parentPath: '',
+                  parentPath: '$parentPath/$id',
                 ),
             },
           ExportType.list => [

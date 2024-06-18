@@ -214,9 +214,9 @@ sealed class WoFormInput
     required Map<String, dynamic> values,
     required String parentPath,
   }) =>
-      _valueToJson(values['$parentPath/$id']);
+      _exportValue(values['$parentPath/$id']);
 
-  Object? _valueToJson(dynamic value) => switch (this) {
+  Object? _exportValue(dynamic value) => switch (this) {
         BooleanInput() => value as bool?,
         NumInput() => value as num?,
         SelectStringInput(maxCount: final maxCount) =>

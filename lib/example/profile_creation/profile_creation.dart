@@ -30,6 +30,8 @@ class ProfileCreationPage extends StatelessWidget {
               isRequired: true,
               uiSettings: StringInputUiSettings(
                 labelText: 'Prénom',
+                prefixIcon: Icon(Icons.person),
+                autofocus: true,
                 autofillHints: [AutofillHints.givenName],
               ),
             ),
@@ -37,6 +39,7 @@ class ProfileCreationPage extends StatelessWidget {
               id: 'lastName',
               uiSettings: StringInputUiSettings(
                 labelText: 'Nom',
+                prefixIcon: SizedBox.square(dimension: 24),
                 autofillHints: [AutofillHints.familyName],
               ),
             ),
@@ -52,6 +55,8 @@ class ProfileCreationPage extends StatelessWidget {
               id: 'street',
               uiSettings: StringInputUiSettings(
                 labelText: 'Rue',
+                prefixIcon: Icon(Icons.signpost),
+                autofocus: true,
                 autofillHints: [AutofillHints.streetAddressLevel1],
               ),
             ),
@@ -59,6 +64,7 @@ class ProfileCreationPage extends StatelessWidget {
               id: 'postalCode',
               uiSettings: StringInputUiSettings(
                 labelText: 'Code postal',
+                prefixIcon: SizedBox.square(dimension: 24),
                 keyboardType: TextInputType.number,
                 autofillHints: [AutofillHints.postalCode],
               ),
@@ -67,6 +73,7 @@ class ProfileCreationPage extends StatelessWidget {
               id: 'city',
               uiSettings: StringInputUiSettings(
                 labelText: 'Ville',
+                prefixIcon: SizedBox.square(dimension: 24),
                 autofillHints: [AutofillHints.addressCity],
               ),
             ),
@@ -75,6 +82,7 @@ class ProfileCreationPage extends StatelessWidget {
               defaultValue: 'France',
               uiSettings: StringInputUiSettings(
                 labelText: 'Pays',
+                prefixIcon: Icon(Icons.public),
                 autofillHints: [AutofillHints.countryName],
               ),
             ),
@@ -92,6 +100,8 @@ class ProfileCreationPage extends StatelessWidget {
               regexPattern: RegexPattern.email.value,
               uiSettings: StringInputUiSettings.email(
                 labelText: 'Email',
+                prefixIcon: const Icon(Icons.mail),
+                autofocus: true,
                 invalidRegexMessage: FormLocalizationsFr()
                     .regexPatternUnmatched(RegexPattern.email.name),
               ),
@@ -100,6 +110,7 @@ class ProfileCreationPage extends StatelessWidget {
               id: 'phone',
               uiSettings: StringInputUiSettings(
                 labelText: 'Numéro de téléphone',
+                prefixIcon: Icon(Icons.phone),
                 keyboardType: TextInputType.phone,
                 autofillHints: [AutofillHints.familyName],
               ),

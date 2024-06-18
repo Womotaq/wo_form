@@ -1099,6 +1099,8 @@ mixin _$StringInputUiSettings {
   String? get labelText => throw _privateConstructorUsedError;
   String? get hintText => throw _privateConstructorUsedError;
   String? get helperText => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  Widget? get prefixIcon => throw _privateConstructorUsedError;
   StringFieldAction? get action => throw _privateConstructorUsedError;
   bool? get submitFormOnFieldSubmitted => throw _privateConstructorUsedError;
   @TextInputTypeConverter()
@@ -1134,6 +1136,7 @@ abstract class $StringInputUiSettingsCopyWith<$Res> {
       {String? labelText,
       String? hintText,
       String? helperText,
+      @JsonKey(includeToJson: false, includeFromJson: false) Widget? prefixIcon,
       StringFieldAction? action,
       bool? submitFormOnFieldSubmitted,
       @TextInputTypeConverter() TextInputType? keyboardType,
@@ -1166,6 +1169,7 @@ class _$StringInputUiSettingsCopyWithImpl<$Res,
     Object? labelText = freezed,
     Object? hintText = freezed,
     Object? helperText = freezed,
+    Object? prefixIcon = freezed,
     Object? action = freezed,
     Object? submitFormOnFieldSubmitted = freezed,
     Object? keyboardType = freezed,
@@ -1192,6 +1196,10 @@ class _$StringInputUiSettingsCopyWithImpl<$Res,
           ? _value.helperText
           : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
+      prefixIcon: freezed == prefixIcon
+          ? _value.prefixIcon
+          : prefixIcon // ignore: cast_nullable_to_non_nullable
+              as Widget?,
       action: freezed == action
           ? _value.action
           : action // ignore: cast_nullable_to_non_nullable
@@ -1257,6 +1265,7 @@ abstract class _$$StringInputUiSettingsImplCopyWith<$Res>
       {String? labelText,
       String? hintText,
       String? helperText,
+      @JsonKey(includeToJson: false, includeFromJson: false) Widget? prefixIcon,
       StringFieldAction? action,
       bool? submitFormOnFieldSubmitted,
       @TextInputTypeConverter() TextInputType? keyboardType,
@@ -1287,6 +1296,7 @@ class __$$StringInputUiSettingsImplCopyWithImpl<$Res>
     Object? labelText = freezed,
     Object? hintText = freezed,
     Object? helperText = freezed,
+    Object? prefixIcon = freezed,
     Object? action = freezed,
     Object? submitFormOnFieldSubmitted = freezed,
     Object? keyboardType = freezed,
@@ -1313,6 +1323,10 @@ class __$$StringInputUiSettingsImplCopyWithImpl<$Res>
           ? _value.helperText
           : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
+      prefixIcon: freezed == prefixIcon
+          ? _value.prefixIcon
+          : prefixIcon // ignore: cast_nullable_to_non_nullable
+              as Widget?,
       action: freezed == action
           ? _value.action
           : action // ignore: cast_nullable_to_non_nullable
@@ -1372,6 +1386,7 @@ class _$StringInputUiSettingsImpl extends _StringInputUiSettings {
       {this.labelText,
       this.hintText,
       this.helperText,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.prefixIcon,
       this.action,
       this.submitFormOnFieldSubmitted,
       @TextInputTypeConverter() this.keyboardType,
@@ -1397,6 +1412,9 @@ class _$StringInputUiSettingsImpl extends _StringInputUiSettings {
   final String? hintText;
   @override
   final String? helperText;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final Widget? prefixIcon;
   @override
   final StringFieldAction? action;
   @override
@@ -1436,7 +1454,7 @@ class _$StringInputUiSettingsImpl extends _StringInputUiSettings {
 
   @override
   String toString() {
-    return 'StringInputUiSettings(labelText: $labelText, hintText: $hintText, helperText: $helperText, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage, widgetBuilder: $widgetBuilder)';
+    return 'StringInputUiSettings(labelText: $labelText, hintText: $hintText, helperText: $helperText, prefixIcon: $prefixIcon, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage, widgetBuilder: $widgetBuilder)';
   }
 
   @override
@@ -1450,6 +1468,8 @@ class _$StringInputUiSettingsImpl extends _StringInputUiSettings {
                 other.hintText == hintText) &&
             (identical(other.helperText, helperText) ||
                 other.helperText == helperText) &&
+            (identical(other.prefixIcon, prefixIcon) ||
+                other.prefixIcon == prefixIcon) &&
             (identical(other.action, action) || other.action == action) &&
             (identical(other.submitFormOnFieldSubmitted,
                     submitFormOnFieldSubmitted) ||
@@ -1484,6 +1504,7 @@ class _$StringInputUiSettingsImpl extends _StringInputUiSettings {
       labelText,
       hintText,
       helperText,
+      prefixIcon,
       action,
       submitFormOnFieldSubmitted,
       keyboardType,
@@ -1517,6 +1538,8 @@ abstract class _StringInputUiSettings extends StringInputUiSettings {
           {final String? labelText,
           final String? hintText,
           final String? helperText,
+          @JsonKey(includeToJson: false, includeFromJson: false)
+          final Widget? prefixIcon,
           final StringFieldAction? action,
           final bool? submitFormOnFieldSubmitted,
           @TextInputTypeConverter() final TextInputType? keyboardType,
@@ -1542,6 +1565,9 @@ abstract class _StringInputUiSettings extends StringInputUiSettings {
   String? get hintText;
   @override
   String? get helperText;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  Widget? get prefixIcon;
   @override
   StringFieldAction? get action;
   @override

@@ -77,6 +77,8 @@ class InputsNodeUiSettings with _$InputsNodeUiSettings {
           labelText: labelText ?? other.labelText,
           helperText: helperText ?? other.helperText,
           displayMode: displayMode ?? other.displayMode,
+          widgetBuilder: widgetBuilder ?? other.widgetBuilder,
+          headerBuilder: headerBuilder ?? other.headerBuilder,
         );
 }
 
@@ -161,6 +163,7 @@ class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
               helpValueBuilder: helpValueBuilder ?? other.helpValueBuilder,
               searcher: searcher ?? other.searcher,
               widgetBuilder: widgetBuilder ?? other.widgetBuilder,
+              headerBuilder: headerBuilder ?? other.headerBuilder,
             );
 }
 
@@ -176,6 +179,7 @@ class StringInputUiSettings with _$StringInputUiSettings {
     String? labelText,
     String? hintText,
     String? helperText,
+    @JsonKey(includeToJson: false, includeFromJson: false) Widget? prefixIcon,
     StringFieldAction? action,
     bool? submitFormOnFieldSubmitted,
     @TextInputTypeConverter() TextInputType? keyboardType,
@@ -197,6 +201,7 @@ class StringInputUiSettings with _$StringInputUiSettings {
     String? labelText,
     String? hintText,
     String? helperText,
+    Widget? prefixIcon,
     bool? submitFormOnFieldSubmitted,
     bool? autofocus,
     TextInputAction? textInputAction,
@@ -207,6 +212,7 @@ class StringInputUiSettings with _$StringInputUiSettings {
         labelText: labelText,
         hintText: hintText,
         helperText: helperText,
+        prefixIcon: prefixIcon,
         submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
         autofocus: autofocus,
         textInputAction: textInputAction,
@@ -222,6 +228,7 @@ class StringInputUiSettings with _$StringInputUiSettings {
     String? labelText,
     String? hintText,
     String? helperText,
+    Widget? prefixIcon,
     bool? submitFormOnFieldSubmitted,
     TextInputAction? textInputAction,
     String? invalidRegexMessage,
@@ -231,6 +238,7 @@ class StringInputUiSettings with _$StringInputUiSettings {
         labelText: labelText,
         hintText: hintText,
         helperText: helperText,
+        prefixIcon: prefixIcon,
         submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
         textInputAction: textInputAction,
         invalidRegexMessage: invalidRegexMessage,
@@ -260,6 +268,7 @@ class StringInputUiSettings with _$StringInputUiSettings {
           labelText: labelText ?? other.labelText,
           hintText: hintText ?? other.hintText,
           helperText: helperText ?? other.helperText,
+          prefixIcon: prefixIcon ?? other.prefixIcon,
           action: action ?? other.action,
           submitFormOnFieldSubmitted:
               submitFormOnFieldSubmitted ?? other.submitFormOnFieldSubmitted,

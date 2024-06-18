@@ -24,4 +24,5 @@ Map<String, dynamic> _$$ExportSettingsImplToJson(
 const _$ExportTypeEnumMap = {
   ExportType.list: 'list',
   ExportType.map: 'map',
+  ExportType.firstExportable: 'firstExportable',
 };
