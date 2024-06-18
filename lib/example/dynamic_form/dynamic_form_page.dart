@@ -143,6 +143,7 @@ class DynamicFormPage extends StatelessWidget {
           },
         ),
       ],
-    ).toPage(onSubmitted: showJsonDialog);
+      onSubmitted: showJsonDialog,
+    ).toPage();
   }
 }

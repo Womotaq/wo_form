@@ -33,15 +33,13 @@ class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
   WoFormValuesCubit._(
     this.form,
     this._statusCubit,
-    this._lockCubit, {
-    this.onSubmitting,
-  })  : pageController = PageController(),
+    this._lockCubit,
+  )   : pageController = PageController(),
         super(form.defaultValues());
 
   final WoForm form;
   final WoFormStatusCubit _statusCubit;
   final WoFormLockCubit _lockCubit;
-  final FutureOr<void> Function(Map<String, dynamic> values)? onSubmitting;
   final PageController pageController;
 
   @override
@@ -119,7 +117,7 @@ class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
     _statusCubit._setSubmitting();
 
     try {
-      await onSubmitting?.call(state);
+      await form.onSubmitting?.call(state);
       _statusCubit._setSubmitted();
     } catch (e, s) {
       _statusCubit._setSubmitError(error: e, stackTrace: s);
@@ -131,12 +129,10 @@ class WoFormInitializer extends StatelessWidget {
   const WoFormInitializer({
     required this.form,
     required this.child,
-    this.onSubmitting,
     super.key,
   });
 
   final WoForm form;
-  final FutureOr<void> Function(Map<String, dynamic> values)? onSubmitting;
   final Widget child;
 
   @override
@@ -156,7 +152,6 @@ class WoFormInitializer extends StatelessWidget {
               context.read(),
               context.read(),
               context.read(),
-              onSubmitting: onSubmitting,
             ),
           ),
         ],

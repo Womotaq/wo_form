@@ -69,9 +69,10 @@ class QuizPage extends StatelessWidget {
                 choice: (value as List<String>?)?.firstOrNull,
                 answer: 'Jaune',
                 explanation: 'Le Soleil est une étoile comme celles qu’on voit'
-                    ' briller la nuit, mais c’est la plus proche de la Terre.'
-                    ' Une étoile est une énorme boule de gaz très chaud, qui'
-                    ' produit énormément d’énergie. Et cette énergie émerge'
+                    ' briller la nuit, mais c’est la plus proche de '
+                    'la Terre. Une étoile est une énorme boule de gaz'
+                    ' très chaud, qui produit énormément d’énergie. '
+                    'Et cette énergie émerge'
                     ' de la surface sous forme de lumière.',
               ),
             );
@@ -216,18 +217,18 @@ class QuizPage extends StatelessWidget {
               builder: (context) => QuizAnswer(
                 choice: value as bool?,
                 answer: true,
-                explanation:
-                    'Le package wo_form vous permet tout ce dont vous avez '
-                    "besoin pour tout type de formulaire, de l'éditeur au "
-                    'questionnaire, en fournissant des fonctionnalités '
-                    'avancées telles que le thème, les champs dynamiques, '
-                    'la jsonification...',
+                explanation: 'Le package wo_form vous permet tout ce dont vous '
+                    'avez besoin pour tout type de formulaire, de '
+                    "l'éditeur au questionnaire, en fournissant des"
+                    ' fonctionnalités avancées telles que le thème,'
+                    ' les champs dynamiques, la jsonification...',
               ),
             );
           },
         ),
       ],
-    ).toPage(onSubmitted: showJsonDialog);
+      onSubmitted: showJsonDialog,
+    ).toPage();
   }
 }
 

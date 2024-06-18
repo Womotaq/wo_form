@@ -11,10 +11,14 @@ part 'wo_form.g.dart';
 @freezed
 class WoForm with _$WoForm {
   const factory WoForm({
+    @InputsListConverter() @Default([]) List<WoFormElementMixin> inputs,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    Future<void> Function(Map<String, dynamic> values)? onSubmitting,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    void Function(BuildContext context)? onSubmitted,
     @JsonKey(includeToJson: false, includeFromJson: false)
     @Default(InitialStatus())
     WoFormStatus initialStatus,
-    @InputsListConverter() @Default([]) List<WoFormElementMixin> inputs,
     @Default(true) bool canModifySubmittedValues,
     @JsonKey(includeToJson: false, includeFromJson: false)
     Future<bool?> Function(BuildContext context)? canQuit,
@@ -109,23 +113,8 @@ class WoForm with _$WoForm {
           },
       };
 
-  Widget toPage({
-    void Function(Map<String, dynamic> values)? onSubmitting,
-    void Function(BuildContext context)? onSubmitted,
-  }) =>
-      toWidget(
-        onSubmitting: onSubmitting,
-        onSubmitted: onSubmitted,
-      );
+  Widget toPage() => toWidget();
 
   @protected
-  Widget toWidget({
-    void Function(Map<String, dynamic> values)? onSubmitting,
-    void Function(BuildContext context)? onSubmitted,
-  }) =>
-      WoFormPage(
-        form: this,
-        onSubmitting: onSubmitting,
-        onSubmitted: onSubmitted,
-      );
+  Widget toWidget() => WoFormPage(form: this);
 }

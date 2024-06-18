@@ -7,26 +7,18 @@ import 'package:wo_form/src/_export.dart';
 import 'package:wo_form/wo_form.dart';
 
 class WoFormPage extends StatelessWidget {
-  const WoFormPage({
-    required this.form,
-    this.onSubmitting, // TODO : move to WoForm
-    this.onSubmitted,
-    super.key,
-  });
+  const WoFormPage({required this.form, super.key});
 
   final WoForm form;
-  final void Function(Map<String, dynamic> values)? onSubmitting;
-  final void Function(BuildContext context)? onSubmitted;
 
   @override
   Widget build(BuildContext context) {
     return WoFormInitializer(
       form: form,
-      onSubmitting: onSubmitting,
       child: BlocListener<WoFormStatusCubit, WoFormStatus>(
         listener: (context, status) {
-          if (status is SubmittedStatus && onSubmitted != null) {
-            onSubmitted!(context);
+          if (form.onSubmitted != null && status is SubmittedStatus) {
+            form.onSubmitted!(context);
           }
         },
         child: Builder(
@@ -40,10 +32,7 @@ class WoFormPage extends StatelessWidget {
                     titleText: uiSettings.titleText,
                     nextText: submitMode.nextText,
                   )
-                : _WoFormStandardPage(
-                    form: form,
-                    onSubmitted: onSubmitted,
-                  );
+                : _WoFormStandardPage(form: form);
 
             return form.themeBuilder == null
                 ? page
@@ -59,13 +48,9 @@ class WoFormPage extends StatelessWidget {
 }
 
 class _WoFormStandardPage extends StatelessWidget {
-  const _WoFormStandardPage({
-    required this.form,
-    this.onSubmitted,
-  });
+  const _WoFormStandardPage({required this.form});
 
   final WoForm form;
-  final void Function(BuildContext context)? onSubmitted;
 
   @override
   Widget build(BuildContext context) {

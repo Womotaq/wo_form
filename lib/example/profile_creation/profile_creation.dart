@@ -118,7 +118,8 @@ class ProfileCreationPage extends StatelessWidget {
                   onAction: () => true,
                   cancelText: "Continuer d'éditer",
                 ),
+      onSubmitted: showJsonDialog,
     );
-    return form.toPage(onSubmitted: showJsonDialog);
+    return form.toPage();
   }
 }

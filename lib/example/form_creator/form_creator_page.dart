@@ -121,7 +121,9 @@ class StringInputPage extends StatelessWidget {
                               return;
                             }
                             context.pushPage(
-                              form.toPage(onSubmitted: showJsonDialog),
+                              form
+                                  .copyWith(onSubmitted: showJsonDialog)
+                                  .toPage(),
                             );
                           }
                         },

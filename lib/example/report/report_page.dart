@@ -77,7 +77,6 @@ class ReportPage extends StatelessWidget {
           ),
         ),
       ],
-    ).toPage(
       onSubmitting: (_) async {
         await Future<void>.delayed(const Duration(seconds: 3));
       },
@@ -92,6 +91,6 @@ class ReportPage extends StatelessWidget {
           content: Text(readableJson(form.export(values))),
         );
       },
-    );
+    ).toPage();
   }
 }

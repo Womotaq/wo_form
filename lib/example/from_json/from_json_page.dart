@@ -11,8 +11,8 @@ class FromJsonPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const WoForm(
-      uiSettings: WoFormUiSettings(
+    return WoForm(
+      uiSettings: const WoFormUiSettings(
         titleText: 'Import de formulaire',
         submitMode: StandardSubmitMode(
           submitText: 'Ouvrir le formulaire',
@@ -20,7 +20,7 @@ class FromJsonPage extends StatelessWidget {
         ),
       ),
       inputs: [
-        StringInput(
+        const StringInput(
           id: 'json',
           isRequired: true,
           uiSettings: StringInputUiSettings(
@@ -29,7 +29,6 @@ class FromJsonPage extends StatelessWidget {
           ),
         ),
       ],
-    ).toPage(
       onSubmitted: (context) {
         final jsonString =
             context.read<WoFormValuesCubit>().state['/json'] as String?;
@@ -57,8 +56,8 @@ class FromJsonPage extends StatelessWidget {
           return;
         }
 
-        context.pushPage(form.toPage(onSubmitted: showJsonDialog));
+        context.pushPage(form.copyWith(onSubmitted: showJsonDialog).toPage());
       },
-    );
+    ).toPage();
   }
 }

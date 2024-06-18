@@ -56,8 +56,7 @@ class EditEventPage extends StatelessWidget {
           ),
         ),
       ],
-    ).toPage(
-      onSubmitting: (values) {
+      onSubmitting: (values) async {
         final edittedEvent = event.copyWith(
           title: values['/title'] as String,
           address: values['/address'] as String,
@@ -65,6 +64,6 @@ class EditEventPage extends StatelessWidget {
         eventsCubit.update(event: edittedEvent);
       },
       onSubmitted: (context) => Navigator.of(context).pop(),
-    );
+    ).toPage();
   }
 }
