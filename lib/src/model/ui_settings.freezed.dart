@@ -1933,37 +1933,64 @@ WoFormSubmitMode _$WoFormSubmitModeFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$WoFormSubmitMode {
   String? get submitText => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  IconData? get submitIcon => throw _privateConstructorUsedError;
   DisableSubmitButton get disableSubmitMode =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
             String? submitText,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            IconData? submitIcon,
             DisableSubmitButton disableSubmitMode,
             SubmitButtonPosition buttonPosition)
         standard,
-    required TResult Function(String? submitText, String? nextText,
-            DisableSubmitButton disableSubmitMode, bool showProgressIndicator)
+    required TResult Function(
+            String? submitText,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            IconData? submitIcon,
+            String? nextText,
+            DisableSubmitButton disableSubmitMode,
+            bool showProgressIndicator)
         pageByPage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? submitText, DisableSubmitButton disableSubmitMode,
+    TResult? Function(
+            String? submitText,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            IconData? submitIcon,
+            DisableSubmitButton disableSubmitMode,
             SubmitButtonPosition buttonPosition)?
         standard,
-    TResult? Function(String? submitText, String? nextText,
-            DisableSubmitButton disableSubmitMode, bool showProgressIndicator)?
+    TResult? Function(
+            String? submitText,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            IconData? submitIcon,
+            String? nextText,
+            DisableSubmitButton disableSubmitMode,
+            bool showProgressIndicator)?
         pageByPage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? submitText, DisableSubmitButton disableSubmitMode,
+    TResult Function(
+            String? submitText,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            IconData? submitIcon,
+            DisableSubmitButton disableSubmitMode,
             SubmitButtonPosition buttonPosition)?
         standard,
-    TResult Function(String? submitText, String? nextText,
-            DisableSubmitButton disableSubmitMode, bool showProgressIndicator)?
+    TResult Function(
+            String? submitText,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            IconData? submitIcon,
+            String? nextText,
+            DisableSubmitButton disableSubmitMode,
+            bool showProgressIndicator)?
         pageByPage,
     required TResult orElse(),
   }) =>
@@ -1999,7 +2026,11 @@ abstract class $WoFormSubmitModeCopyWith<$Res> {
           WoFormSubmitMode value, $Res Function(WoFormSubmitMode) then) =
       _$WoFormSubmitModeCopyWithImpl<$Res, WoFormSubmitMode>;
   @useResult
-  $Res call({String? submitText, DisableSubmitButton disableSubmitMode});
+  $Res call(
+      {String? submitText,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      IconData? submitIcon,
+      DisableSubmitButton disableSubmitMode});
 }
 
 /// @nodoc
@@ -2016,6 +2047,7 @@ class _$WoFormSubmitModeCopyWithImpl<$Res, $Val extends WoFormSubmitMode>
   @override
   $Res call({
     Object? submitText = freezed,
+    Object? submitIcon = freezed,
     Object? disableSubmitMode = null,
   }) {
     return _then(_value.copyWith(
@@ -2023,6 +2055,10 @@ class _$WoFormSubmitModeCopyWithImpl<$Res, $Val extends WoFormSubmitMode>
           ? _value.submitText
           : submitText // ignore: cast_nullable_to_non_nullable
               as String?,
+      submitIcon: freezed == submitIcon
+          ? _value.submitIcon
+          : submitIcon // ignore: cast_nullable_to_non_nullable
+              as IconData?,
       disableSubmitMode: null == disableSubmitMode
           ? _value.disableSubmitMode
           : disableSubmitMode // ignore: cast_nullable_to_non_nullable
@@ -2041,6 +2077,8 @@ abstract class _$$StandardSubmitModeImplCopyWith<$Res>
   @useResult
   $Res call(
       {String? submitText,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      IconData? submitIcon,
       DisableSubmitButton disableSubmitMode,
       SubmitButtonPosition buttonPosition});
 }
@@ -2057,6 +2095,7 @@ class __$$StandardSubmitModeImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? submitText = freezed,
+    Object? submitIcon = freezed,
     Object? disableSubmitMode = null,
     Object? buttonPosition = null,
   }) {
@@ -2065,6 +2104,10 @@ class __$$StandardSubmitModeImplCopyWithImpl<$Res>
           ? _value.submitText
           : submitText // ignore: cast_nullable_to_non_nullable
               as String?,
+      submitIcon: freezed == submitIcon
+          ? _value.submitIcon
+          : submitIcon // ignore: cast_nullable_to_non_nullable
+              as IconData?,
       disableSubmitMode: null == disableSubmitMode
           ? _value.disableSubmitMode
           : disableSubmitMode // ignore: cast_nullable_to_non_nullable
@@ -2082,6 +2125,7 @@ class __$$StandardSubmitModeImplCopyWithImpl<$Res>
 class _$StandardSubmitModeImpl extends StandardSubmitMode {
   const _$StandardSubmitModeImpl(
       {this.submitText,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.submitIcon,
       this.disableSubmitMode = DisableSubmitButton.never,
       this.buttonPosition = SubmitButtonPosition.bottom,
       final String? $type})
@@ -2094,6 +2138,9 @@ class _$StandardSubmitModeImpl extends StandardSubmitMode {
   @override
   final String? submitText;
   @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final IconData? submitIcon;
+  @override
   @JsonKey()
   final DisableSubmitButton disableSubmitMode;
   @override
@@ -2105,7 +2152,7 @@ class _$StandardSubmitModeImpl extends StandardSubmitMode {
 
   @override
   String toString() {
-    return 'WoFormSubmitMode.standard(submitText: $submitText, disableSubmitMode: $disableSubmitMode, buttonPosition: $buttonPosition)';
+    return 'WoFormSubmitMode.standard(submitText: $submitText, submitIcon: $submitIcon, disableSubmitMode: $disableSubmitMode, buttonPosition: $buttonPosition)';
   }
 
   @override
@@ -2115,6 +2162,8 @@ class _$StandardSubmitModeImpl extends StandardSubmitMode {
             other is _$StandardSubmitModeImpl &&
             (identical(other.submitText, submitText) ||
                 other.submitText == submitText) &&
+            (identical(other.submitIcon, submitIcon) ||
+                other.submitIcon == submitIcon) &&
             (identical(other.disableSubmitMode, disableSubmitMode) ||
                 other.disableSubmitMode == disableSubmitMode) &&
             (identical(other.buttonPosition, buttonPosition) ||
@@ -2123,8 +2172,8 @@ class _$StandardSubmitModeImpl extends StandardSubmitMode {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, submitText, disableSubmitMode, buttonPosition);
+  int get hashCode => Object.hash(
+      runtimeType, submitText, submitIcon, disableSubmitMode, buttonPosition);
 
   @JsonKey(ignore: true)
   @override
@@ -2138,42 +2187,69 @@ class _$StandardSubmitModeImpl extends StandardSubmitMode {
   TResult when<TResult extends Object?>({
     required TResult Function(
             String? submitText,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            IconData? submitIcon,
             DisableSubmitButton disableSubmitMode,
             SubmitButtonPosition buttonPosition)
         standard,
-    required TResult Function(String? submitText, String? nextText,
-            DisableSubmitButton disableSubmitMode, bool showProgressIndicator)
+    required TResult Function(
+            String? submitText,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            IconData? submitIcon,
+            String? nextText,
+            DisableSubmitButton disableSubmitMode,
+            bool showProgressIndicator)
         pageByPage,
   }) {
-    return standard(submitText, disableSubmitMode, buttonPosition);
+    return standard(submitText, submitIcon, disableSubmitMode, buttonPosition);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? submitText, DisableSubmitButton disableSubmitMode,
+    TResult? Function(
+            String? submitText,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            IconData? submitIcon,
+            DisableSubmitButton disableSubmitMode,
             SubmitButtonPosition buttonPosition)?
         standard,
-    TResult? Function(String? submitText, String? nextText,
-            DisableSubmitButton disableSubmitMode, bool showProgressIndicator)?
+    TResult? Function(
+            String? submitText,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            IconData? submitIcon,
+            String? nextText,
+            DisableSubmitButton disableSubmitMode,
+            bool showProgressIndicator)?
         pageByPage,
   }) {
-    return standard?.call(submitText, disableSubmitMode, buttonPosition);
+    return standard?.call(
+        submitText, submitIcon, disableSubmitMode, buttonPosition);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? submitText, DisableSubmitButton disableSubmitMode,
+    TResult Function(
+            String? submitText,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            IconData? submitIcon,
+            DisableSubmitButton disableSubmitMode,
             SubmitButtonPosition buttonPosition)?
         standard,
-    TResult Function(String? submitText, String? nextText,
-            DisableSubmitButton disableSubmitMode, bool showProgressIndicator)?
+    TResult Function(
+            String? submitText,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            IconData? submitIcon,
+            String? nextText,
+            DisableSubmitButton disableSubmitMode,
+            bool showProgressIndicator)?
         pageByPage,
     required TResult orElse(),
   }) {
     if (standard != null) {
-      return standard(submitText, disableSubmitMode, buttonPosition);
+      return standard(
+          submitText, submitIcon, disableSubmitMode, buttonPosition);
     }
     return orElse();
   }
@@ -2220,6 +2296,8 @@ class _$StandardSubmitModeImpl extends StandardSubmitMode {
 abstract class StandardSubmitMode extends WoFormSubmitMode {
   const factory StandardSubmitMode(
       {final String? submitText,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final IconData? submitIcon,
       final DisableSubmitButton disableSubmitMode,
       final SubmitButtonPosition buttonPosition}) = _$StandardSubmitModeImpl;
   const StandardSubmitMode._() : super._();
@@ -2229,6 +2307,9 @@ abstract class StandardSubmitMode extends WoFormSubmitMode {
 
   @override
   String? get submitText;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  IconData? get submitIcon;
   @override
   DisableSubmitButton get disableSubmitMode;
   SubmitButtonPosition get buttonPosition;
@@ -2248,6 +2329,8 @@ abstract class _$$PageByPageSubmitModeImplCopyWith<$Res>
   @useResult
   $Res call(
       {String? submitText,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      IconData? submitIcon,
       String? nextText,
       DisableSubmitButton disableSubmitMode,
       bool showProgressIndicator});
@@ -2265,6 +2348,7 @@ class __$$PageByPageSubmitModeImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? submitText = freezed,
+    Object? submitIcon = freezed,
     Object? nextText = freezed,
     Object? disableSubmitMode = null,
     Object? showProgressIndicator = null,
@@ -2274,6 +2358,10 @@ class __$$PageByPageSubmitModeImplCopyWithImpl<$Res>
           ? _value.submitText
           : submitText // ignore: cast_nullable_to_non_nullable
               as String?,
+      submitIcon: freezed == submitIcon
+          ? _value.submitIcon
+          : submitIcon // ignore: cast_nullable_to_non_nullable
+              as IconData?,
       nextText: freezed == nextText
           ? _value.nextText
           : nextText // ignore: cast_nullable_to_non_nullable
@@ -2295,6 +2383,7 @@ class __$$PageByPageSubmitModeImplCopyWithImpl<$Res>
 class _$PageByPageSubmitModeImpl extends PageByPageSubmitMode {
   const _$PageByPageSubmitModeImpl(
       {this.submitText,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.submitIcon,
       this.nextText,
       this.disableSubmitMode = DisableSubmitButton.never,
       this.showProgressIndicator = true,
@@ -2307,6 +2396,9 @@ class _$PageByPageSubmitModeImpl extends PageByPageSubmitMode {
 
   @override
   final String? submitText;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final IconData? submitIcon;
   @override
   final String? nextText;
   @override
@@ -2321,7 +2413,7 @@ class _$PageByPageSubmitModeImpl extends PageByPageSubmitMode {
 
   @override
   String toString() {
-    return 'WoFormSubmitMode.pageByPage(submitText: $submitText, nextText: $nextText, disableSubmitMode: $disableSubmitMode, showProgressIndicator: $showProgressIndicator)';
+    return 'WoFormSubmitMode.pageByPage(submitText: $submitText, submitIcon: $submitIcon, nextText: $nextText, disableSubmitMode: $disableSubmitMode, showProgressIndicator: $showProgressIndicator)';
   }
 
   @override
@@ -2331,6 +2423,8 @@ class _$PageByPageSubmitModeImpl extends PageByPageSubmitMode {
             other is _$PageByPageSubmitModeImpl &&
             (identical(other.submitText, submitText) ||
                 other.submitText == submitText) &&
+            (identical(other.submitIcon, submitIcon) ||
+                other.submitIcon == submitIcon) &&
             (identical(other.nextText, nextText) ||
                 other.nextText == nextText) &&
             (identical(other.disableSubmitMode, disableSubmitMode) ||
@@ -2341,7 +2435,7 @@ class _$PageByPageSubmitModeImpl extends PageByPageSubmitMode {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, submitText, nextText,
+  int get hashCode => Object.hash(runtimeType, submitText, submitIcon, nextText,
       disableSubmitMode, showProgressIndicator);
 
   @JsonKey(ignore: true)
@@ -2357,45 +2451,70 @@ class _$PageByPageSubmitModeImpl extends PageByPageSubmitMode {
   TResult when<TResult extends Object?>({
     required TResult Function(
             String? submitText,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            IconData? submitIcon,
             DisableSubmitButton disableSubmitMode,
             SubmitButtonPosition buttonPosition)
         standard,
-    required TResult Function(String? submitText, String? nextText,
-            DisableSubmitButton disableSubmitMode, bool showProgressIndicator)
+    required TResult Function(
+            String? submitText,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            IconData? submitIcon,
+            String? nextText,
+            DisableSubmitButton disableSubmitMode,
+            bool showProgressIndicator)
         pageByPage,
   }) {
-    return pageByPage(
-        submitText, nextText, disableSubmitMode, showProgressIndicator);
+    return pageByPage(submitText, submitIcon, nextText, disableSubmitMode,
+        showProgressIndicator);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? submitText, DisableSubmitButton disableSubmitMode,
+    TResult? Function(
+            String? submitText,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            IconData? submitIcon,
+            DisableSubmitButton disableSubmitMode,
             SubmitButtonPosition buttonPosition)?
         standard,
-    TResult? Function(String? submitText, String? nextText,
-            DisableSubmitButton disableSubmitMode, bool showProgressIndicator)?
+    TResult? Function(
+            String? submitText,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            IconData? submitIcon,
+            String? nextText,
+            DisableSubmitButton disableSubmitMode,
+            bool showProgressIndicator)?
         pageByPage,
   }) {
-    return pageByPage?.call(
-        submitText, nextText, disableSubmitMode, showProgressIndicator);
+    return pageByPage?.call(submitText, submitIcon, nextText, disableSubmitMode,
+        showProgressIndicator);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? submitText, DisableSubmitButton disableSubmitMode,
+    TResult Function(
+            String? submitText,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            IconData? submitIcon,
+            DisableSubmitButton disableSubmitMode,
             SubmitButtonPosition buttonPosition)?
         standard,
-    TResult Function(String? submitText, String? nextText,
-            DisableSubmitButton disableSubmitMode, bool showProgressIndicator)?
+    TResult Function(
+            String? submitText,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            IconData? submitIcon,
+            String? nextText,
+            DisableSubmitButton disableSubmitMode,
+            bool showProgressIndicator)?
         pageByPage,
     required TResult orElse(),
   }) {
     if (pageByPage != null) {
-      return pageByPage(
-          submitText, nextText, disableSubmitMode, showProgressIndicator);
+      return pageByPage(submitText, submitIcon, nextText, disableSubmitMode,
+          showProgressIndicator);
     }
     return orElse();
   }
@@ -2442,6 +2561,8 @@ class _$PageByPageSubmitModeImpl extends PageByPageSubmitMode {
 abstract class PageByPageSubmitMode extends WoFormSubmitMode {
   const factory PageByPageSubmitMode(
       {final String? submitText,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final IconData? submitIcon,
       final String? nextText,
       final DisableSubmitButton disableSubmitMode,
       final bool showProgressIndicator}) = _$PageByPageSubmitModeImpl;
@@ -2452,6 +2573,9 @@ abstract class PageByPageSubmitMode extends WoFormSubmitMode {
 
   @override
   String? get submitText;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  IconData? get submitIcon;
   String? get nextText;
   @override
   DisableSubmitButton get disableSubmitMode;

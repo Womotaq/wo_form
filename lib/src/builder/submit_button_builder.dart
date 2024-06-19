@@ -8,22 +8,26 @@ class SubmitButtonData {
     required this.text,
     required this.onPressed,
     required this.position,
+    this.icon,
   });
 
   final int pageIndex;
   final String? text;
   final VoidCallback? onPressed;
   final SubmitButtonPosition position;
+  final IconData? icon;
 
   SubmitButtonData copyWith({
     String? text,
     SubmitButtonPosition? position,
+    IconData? icon,
   }) =>
       SubmitButtonData(
         pageIndex: pageIndex,
         text: text ?? this.text,
         onPressed: onPressed,
         position: position ?? this.position,
+        icon: icon ?? this.icon,
       );
 }
 
@@ -56,6 +60,7 @@ class SubmitButtonBuilder extends StatelessWidget {
               pageIndex < form.inputs.length - 1
           ? submitMode.nextText ?? context.read<WoFormL10n?>()?.next
           : submitMode.submitText ?? context.read<WoFormL10n?>()?.submit,
+      icon: submitMode.submitIcon,
       onPressed: disabled
           ? null
           : () {

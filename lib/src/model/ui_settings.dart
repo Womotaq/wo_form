@@ -324,12 +324,14 @@ enum DisableSubmitButton { never, whenInvalid, whenInitialOrSubmitSuccess }
 sealed class WoFormSubmitMode with _$WoFormSubmitMode {
   const factory WoFormSubmitMode.standard({
     String? submitText,
+    @JsonKey(includeToJson: false, includeFromJson: false) IconData? submitIcon,
     @Default(DisableSubmitButton.never) DisableSubmitButton disableSubmitMode,
     @Default(SubmitButtonPosition.bottom) SubmitButtonPosition buttonPosition,
   }) = StandardSubmitMode;
 
   const factory WoFormSubmitMode.pageByPage({
     String? submitText,
+    @JsonKey(includeToJson: false, includeFromJson: false) IconData? submitIcon,
     String? nextText,
     @Default(DisableSubmitButton.never) DisableSubmitButton disableSubmitMode,
     @Default(true) bool showProgressIndicator,

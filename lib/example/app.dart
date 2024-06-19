@@ -11,7 +11,7 @@ import 'package:wo_form/example/themed_form/themed_form_page.dart';
 import 'package:wo_form/wo_form.dart';
 
 class DarkModeCubit extends Cubit<bool> {
-  DarkModeCubit() : super(false);
+  DarkModeCubit() : super(true);
 
   void toggle() => emit(!state);
 }
@@ -159,7 +159,7 @@ class HomePage extends StatelessWidget {
               trailing: const Icon(Icons.chevron_right),
             ),
             ListTile(
-              onTap: () => context.pushPage(const StringInputPage()),
+              onTap: () => context.pushPage(const FormCreatorPage()),
               leading: const Icon(Icons.edit_note),
               title: const Text('Créer un formulaire en quelques clics...'),
               subtitle: const Text('Via un formulaire'),

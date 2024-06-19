@@ -17,6 +17,7 @@ class QuizPage extends StatelessWidget {
       ),
       canModifySubmittedValues: false,
       uiSettings: WoFormUiSettings(
+        titleText: 'Quiz du jour',
         showAsteriskIfRequired: false,
         submitMode: const PageByPageSubmitMode(
           submitText: 'Terminer',

@@ -43,7 +43,7 @@ class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
   final WoForm form;
   final WoFormStatusCubit _statusCubit;
   final WoFormLockCubit _lockCubit;
-  final PageController pageController;
+  final PageController pageController; // TODO: replace by currentInputPath
 
   @override
   Future<void> close() {
@@ -74,6 +74,7 @@ class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
   }
 
   Future<void> submit() async {
+    // TODO: this only submits the currentInputPath
     if (form.uiSettings.submitMode is PageByPageSubmitMode &&
         (pageController.page ?? 0) < form.inputs.length - 1) {
       final index = pageController.page?.toInt() ?? 0;

@@ -44,12 +44,20 @@ class SubmitButton extends StatelessWidget {
             ],
           );
 
+    final button = data.icon == null
+        ? FilledButton(
+            onPressed: data.onPressed,
+            child: child,
+          )
+        : FilledButton.icon(
+            onPressed: data.onPressed,
+            icon: Icon(data.icon),
+            label: child,
+          );
+
     switch (data.position) {
       case SubmitButtonPosition.appBar:
-        return FilledButton(
-          onPressed: data.onPressed,
-          child: child,
-        );
+        return button;
       case SubmitButtonPosition.bottom:
         return Padding(
           padding: const EdgeInsets.only(
@@ -57,10 +65,7 @@ class SubmitButton extends StatelessWidget {
             left: 16,
             right: 16,
           ),
-          child: FilledButton(
-            onPressed: data.onPressed,
-            child: child,
-          ),
+          child: button,
         );
     }
   }

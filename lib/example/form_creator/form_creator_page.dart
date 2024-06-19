@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:package_atomic_design/package_atomic_design.dart';
+import 'package:wo_form/example/app.dart';
 import 'package:wo_form/example/form_creator/num_input_node.dart';
 import 'package:wo_form/example/form_creator/string_input_node.dart';
 import 'package:wo_form/example/utils/readable_json.dart';
@@ -50,11 +50,17 @@ final woFormCreator = WoForm(
         createNumInputNode(id: idGenerator.generateId()),
       ],
     ),
+    WidgetNode(
+      id: 'jsonClipboarder',
+      builder: (context) => const JsonClipboarder(),
+    ),
   ],
-  uiSettings: WoFormUiSettings(
+  uiSettings: const WoFormUiSettings(
     titleText: 'Créer un formulaire',
-    titlePosition: WoFormTitlePosition.appBar,
-    submitButtonBuilder: (data) => const Footer(),
+    submitMode: WoFormSubmitMode.standard(
+      submitText: 'Prévisualiser',
+      submitIcon: Icons.visibility_outlined,
+    ),
   ),
   onSubmitSuccess: (context) {
     try {
@@ -67,70 +73,73 @@ final woFormCreator = WoForm(
         form.copyWith(onSubmitSuccess: showJsonDialog).toPage(),
       );
     } catch (e) {
-      snackBarError(context, e.toString());
+      showDialog<void>(
+        context: context,
+        builder: (context) => AlertDialog(
+          icon: const Icon(Icons.error),
+          content: Text(e.toString()),
+        ),
+      );
       return;
     }
   },
 );
 
-class StringInputPage extends StatelessWidget {
-  const StringInputPage({super.key});
+class FormCreatorPage extends StatelessWidget {
+  const FormCreatorPage({super.key});
 
   @override
   Widget build(BuildContext context) => woFormCreator.toPage();
 }
 
-class Footer extends StatelessWidget {
-  const Footer({super.key});
+class JsonClipboarder extends StatefulWidget {
+  const JsonClipboarder({super.key});
+
+  @override
+  State<JsonClipboarder> createState() => _JsonClipboarderState();
+}
+
+class _JsonClipboarderState extends State<JsonClipboarder> {
+  bool copied = false;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Builder(
-          builder: (context) => Row(
-            children: [
-              Flexible(
-                child: BigButton(
-                  onPressed: () {
-                    final values = context.read<WoFormValuesCubit>().state;
-                    Clipboard.setData(
-                      ClipboardData(
-                        text: jsonEncode(
-                          woFormCreator.export(values),
-                        ),
-                      ),
-                    );
-                    snackBarNotify(context, 'Copié');
-                  },
-                  child: const Text('Copier le json'),
-                ),
+    final values = context.watch<WoFormValuesCubit>().state;
+
+    final form = context.read<WoForm>();
+    final woFormL10n = context.read<WoFormL10n>();
+
+    final errorsText = woFormL10n.errors(form.getErrors(values).length);
+
+    return ExpansionTile(
+      leading: IconButton(
+        icon: copied ? const Icon(Icons.check) : const Icon(Icons.copy),
+        onPressed: () {
+          final values = context.read<WoFormValuesCubit>().state;
+          Clipboard.setData(
+            ClipboardData(
+              text: jsonEncode(
+                woFormCreator.export(values),
               ),
-              Flexible(
-                child: BigButton.filled(
-                  onPressed: context.read<WoFormValuesCubit>().submit,
-                  leading: const Icon(Icons.visibility_outlined),
-                  child: const Text('Prévisualiser'),
-                ),
-              ),
-            ],
-          ),
-        ),
-        WoGap.xxxlarge,
-        ExpansionTile(
-          title: const Text('JSON'),
-          expandedCrossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            BlocBuilder<WoFormValuesCubit, Map<String, dynamic>>(
-              builder: (context, values) {
-                return Text(
-                  readableJson(woFormCreator.export(values)),
-                );
-              },
             ),
-          ],
-        ),
-        WoGap.xxxlarge,
+          );
+          setState(() => copied = true);
+          Future.delayed(
+            const Duration(seconds: 4),
+            () => setState(() => copied = false),
+          );
+        },
+      ),
+      title: const Text('JSON'),
+      subtitle: errorsText == null
+          ? null
+          : Text(
+              errorsText,
+              style: TextStyle(color: Theme.of(context).colorScheme.error),
+            ),
+      expandedCrossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(readableJson(woFormCreator.export(values))),
       ],
     );
   }
