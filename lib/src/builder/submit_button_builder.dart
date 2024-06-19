@@ -37,9 +37,9 @@ class SubmitButtonBuilder extends StatelessWidget {
     final form = context.read<WoForm>();
 
     final disabled = switch (form.uiSettings.submitMode.disableSubmitMode) {
-      DisableSubmitButton.whenInitialOrSubmitted => switch (
+      DisableSubmitButton.whenInitialOrSubmitSuccess => switch (
             context.watch<WoFormStatusCubit>().state) {
-          InitialStatus() || SubmittedStatus() => true,
+          InitialStatus() || SubmitSuccessStatus() => true,
           _ => false,
         },
       DisableSubmitButton.whenInvalid => context.select(

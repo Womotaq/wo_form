@@ -30,6 +30,7 @@ class ProfileCreationPage extends StatelessWidget {
               isRequired: true,
               uiSettings: StringInputUiSettings(
                 labelText: 'Prénom',
+                hintText: "N'écris pas John stp !!",
                 prefixIcon: Icon(Icons.person),
                 autofocus: true,
                 autofillHints: [AutofillHints.givenName],
@@ -120,7 +121,7 @@ class ProfileCreationPage extends StatelessWidget {
       ],
       canQuit: (context) async =>
           context.read<WoFormStatusCubit>().state is InitialStatus ||
-                  context.read<WoFormStatusCubit>().state is SubmittedStatus
+                  context.read<WoFormStatusCubit>().state is SubmitSuccessStatus
               ? true
               : await showActionDialog(
                   pageContext: context,
@@ -129,7 +130,12 @@ class ProfileCreationPage extends StatelessWidget {
                   onAction: () => true,
                   cancelText: "Continuer d'éditer",
                 ),
-      onSubmitted: showJsonDialog,
+      onSubmitting: (form, values) async {
+        if (values['/namePage/firstName'] == 'John') {
+          throw ArgumentError("On t'avais dit de ne pas écrire John...");
+        }
+      },
+      onSubmitSuccess: showJsonDialog,
     );
     return form.toPage();
   }

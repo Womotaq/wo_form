@@ -44,12 +44,6 @@ final woFormCreator = WoForm(
               labelText: 'Label du bouton de validation',
             ),
           ),
-          StringInput(
-            id: 'submittedText',
-            uiSettings: StringInputUiSettings(
-              labelText: 'Label du bouton validé',
-            ),
-          ),
         ],
       ),
     ),
@@ -79,7 +73,7 @@ final woFormCreator = WoForm(
     titlePosition: WoFormTitlePosition.appBar,
     submitButtonBuilder: (data) => const Footer(),
   ),
-  onSubmitted: (context) {
+  onSubmitSuccess: (context) {
     try {
       final form = WoForm.fromJson(
         context.read<WoForm>().export(
@@ -87,10 +81,9 @@ final woFormCreator = WoForm(
             ) as Map<String, dynamic>,
       );
       context.pushPage(
-        form.copyWith(onSubmitted: showJsonDialog).toPage(),
+        form.copyWith(onSubmitSuccess: showJsonDialog).toPage(),
       );
     } catch (e) {
-      // TODO : onSubmitError
       snackBarError(context, e.toString());
       return;
     }

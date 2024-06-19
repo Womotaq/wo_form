@@ -15,7 +15,7 @@ class WoFormStatusCubit extends Cubit<WoFormStatus> {
   void _setSubmitting() => emit(const SubmittingStatus());
   void _setSubmitError({Object? error, StackTrace? stackTrace}) =>
       emit(SubmitErrorStatus(error: error, stackTrace: stackTrace));
-  void _setSubmitted() => emit(const SubmittedStatus());
+  void _setSubmitSuccess() => emit(const SubmitSuccessStatus());
 }
 
 /// This cubit references the paths of all the locked inputs.
@@ -126,8 +126,8 @@ class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
     }
 
     try {
-      await form.onSubmitting?.call(state);
-      _statusCubit._setSubmitted();
+      await form.onSubmitting?.call(form, state);
+      _statusCubit._setSubmitSuccess();
     } catch (e, s) {
       _statusCubit._setSubmitError(error: e, stackTrace: s);
     }

@@ -15,5 +15,5 @@ sealed class WoFormStatus with _$WoFormStatus {
     Object? error,
     StackTrace? stackTrace,
   }) = SubmitErrorStatus;
-  const factory WoFormStatus.submitted() = SubmittedStatus;
+  const factory WoFormStatus.submitSuccess() = SubmitSuccessStatus;
 }

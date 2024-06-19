@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/wo_form.dart';
 
 class ShowCustomThemeCubit extends Cubit<bool> {
@@ -8,11 +7,18 @@ class ShowCustomThemeCubit extends Cubit<bool> {
 
   void set(bool value) => emit(value);
 
-  static WoFormThemeData customTheme = const WoFormThemeData(
+  static WoFormThemeData customTheme = WoFormThemeData(
     headerBuilder: CustomFormHeader.new,
     stringFieldBuilder: CustomStringField.new,
     submitButtonBuilder: CustomSubmitButton.new,
     verticalSpacing: 16,
+    onSubmitError: (context, status) => showDialog<void>(
+      context: context,
+      builder: (context) => AlertDialog(
+        icon: const Icon(Icons.error),
+        content: Text(status.error.toString()),
+      ),
+    ),
   );
 }
 
@@ -175,7 +181,7 @@ class CustomSubmitButton extends StatelessWidget {
       case SubmitButtonPosition.appBar:
         return FilledButton(
           style: FilledButton.styleFrom(
-            backgroundColor: context.colorScheme.secondary,
+            backgroundColor: Theme.of(context).colorScheme.secondary,
           ),
           onPressed: data.onPressed,
           child: child,
@@ -189,7 +195,7 @@ class CustomSubmitButton extends StatelessWidget {
           ),
           child: FilledButton(
             style: FilledButton.styleFrom(
-              backgroundColor: context.colorScheme.primary,
+              backgroundColor: Theme.of(context).colorScheme.primary,
               padding: const EdgeInsets.all(24),
             ),
             onPressed: data.onPressed,

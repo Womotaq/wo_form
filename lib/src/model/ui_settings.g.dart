@@ -241,7 +241,7 @@ Map<String, dynamic> _$$StandardSubmitModeImplToJson(
 const _$DisableSubmitButtonEnumMap = {
   DisableSubmitButton.never: 'never',
   DisableSubmitButton.whenInvalid: 'whenInvalid',
-  DisableSubmitButton.whenInitialOrSubmitted: 'whenInitialOrSubmitted',
+  DisableSubmitButton.whenInitialOrSubmitSuccess: 'whenInitialOrSubmitSuccess',
 };
 
 const _$SubmitButtonPositionEnumMap = {

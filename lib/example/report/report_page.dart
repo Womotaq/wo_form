@@ -77,10 +77,10 @@ class ReportPage extends StatelessWidget {
           ),
         ),
       ],
-      onSubmitting: (_) async {
+      onSubmitting: (_, __) async {
         await Future<void>.delayed(const Duration(seconds: 3));
       },
-      onSubmitted: (context) {
+      onSubmitSuccess: (context) {
         final form = context.read<WoForm>();
         final values = context.read<WoFormValuesCubit>().state;
         showActionDialog(

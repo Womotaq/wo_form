@@ -8,14 +8,22 @@ import 'package:wo_form/wo_form.dart';
 part 'wo_form.freezed.dart';
 part 'wo_form.g.dart';
 
+typedef OnSubmitErrorDef = void Function(
+  BuildContext context,
+  SubmitErrorStatus errorStatus,
+);
+
 @freezed
 class WoForm with _$WoForm {
   const factory WoForm({
     @InputsListConverter() @Default([]) List<WoFormElementMixin> inputs,
     @JsonKey(includeToJson: false, includeFromJson: false)
-    Future<void> Function(Map<String, dynamic> values)? onSubmitting,
+    Future<void> Function(WoForm form, Map<String, dynamic> values)?
+        onSubmitting,
     @JsonKey(includeToJson: false, includeFromJson: false)
-    void Function(BuildContext context)? onSubmitted,
+    OnSubmitErrorDef? onSubmitError,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    void Function(BuildContext context)? onSubmitSuccess,
     @JsonKey(includeToJson: false, includeFromJson: false)
     @Default(InitialStatus())
     WoFormStatus initialStatus,

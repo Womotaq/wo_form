@@ -29,7 +29,7 @@ class FromJsonPage extends StatelessWidget {
           ),
         ),
       ],
-      onSubmitted: (context) {
+      onSubmitSuccess: (context) {
         final jsonString =
             context.read<WoFormValuesCubit>().state['/json'] as String?;
         if (jsonString == null) return;
@@ -56,7 +56,8 @@ class FromJsonPage extends StatelessWidget {
           return;
         }
 
-        context.pushPage(form.copyWith(onSubmitted: showJsonDialog).toPage());
+        context
+            .pushPage(form.copyWith(onSubmitSuccess: showJsonDialog).toPage());
       },
     ).toPage();
   }

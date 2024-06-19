@@ -345,7 +345,7 @@ class WoFormUiSettings with _$WoFormUiSettings {
 
 enum SubmitButtonPosition { bottom, appBar }
 
-enum DisableSubmitButton { never, whenInvalid, whenInitialOrSubmitted }
+enum DisableSubmitButton { never, whenInvalid, whenInitialOrSubmitSuccess }
 
 @freezed
 sealed class WoFormSubmitMode with _$WoFormSubmitMode {

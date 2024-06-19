@@ -20,7 +20,7 @@ class EditEventPage extends StatelessWidget {
     return WoForm(
       canQuit: (context) async =>
           context.read<WoFormStatusCubit>().state is InitialStatus ||
-                  context.read<WoFormStatusCubit>().state is SubmittedStatus
+                  context.read<WoFormStatusCubit>().state is SubmitSuccessStatus
               ? true
               : await showActionDialog(
                   pageContext: context,
@@ -33,7 +33,7 @@ class EditEventPage extends StatelessWidget {
         titleText: "Édition d'un événement",
         submitMode: StandardSubmitMode(
           submitText: 'Enregistrer',
-          disableSubmitMode: DisableSubmitButton.whenInitialOrSubmitted,
+          disableSubmitMode: DisableSubmitButton.whenInitialOrSubmitSuccess,
           buttonPosition: SubmitButtonPosition.appBar,
         ),
       ),
@@ -56,14 +56,14 @@ class EditEventPage extends StatelessWidget {
           ),
         ),
       ],
-      onSubmitting: (values) async {
+      onSubmitting: (form, values) async {
         final edittedEvent = event.copyWith(
           title: values['/title'] as String,
           address: values['/address'] as String,
         );
         eventsCubit.update(event: edittedEvent);
       },
-      onSubmitted: (context) => Navigator.of(context).pop(),
+      onSubmitSuccess: (context) => Navigator.of(context).pop(),
     ).toPage();
   }
 }

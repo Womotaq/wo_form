@@ -23,10 +23,12 @@ mixin _$WoForm {
   @InputsListConverter()
   List<WoFormElementMixin> get inputs => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
-  Future<void> Function(Map<String, dynamic>)? get onSubmitting =>
+  Future<void> Function(WoForm, Map<String, dynamic>)? get onSubmitting =>
       throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
-  void Function(BuildContext)? get onSubmitted =>
+  OnSubmitErrorDef? get onSubmitError => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  void Function(BuildContext)? get onSubmitSuccess =>
       throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
   WoFormStatus get initialStatus => throw _privateConstructorUsedError;
@@ -55,9 +57,11 @@ abstract class $WoFormCopyWith<$Res> {
   $Res call(
       {@InputsListConverter() List<WoFormElementMixin> inputs,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      Future<void> Function(Map<String, dynamic>)? onSubmitting,
+      Future<void> Function(WoForm, Map<String, dynamic>)? onSubmitting,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      void Function(BuildContext)? onSubmitted,
+      OnSubmitErrorDef? onSubmitError,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      void Function(BuildContext)? onSubmitSuccess,
       @JsonKey(includeToJson: false, includeFromJson: false)
       WoFormStatus initialStatus,
       bool canModifySubmittedValues,
@@ -90,7 +94,8 @@ class _$WoFormCopyWithImpl<$Res, $Val extends WoForm>
   $Res call({
     Object? inputs = null,
     Object? onSubmitting = freezed,
-    Object? onSubmitted = freezed,
+    Object? onSubmitError = freezed,
+    Object? onSubmitSuccess = freezed,
     Object? initialStatus = null,
     Object? canModifySubmittedValues = null,
     Object? canQuit = freezed,
@@ -106,10 +111,14 @@ class _$WoFormCopyWithImpl<$Res, $Val extends WoForm>
       onSubmitting: freezed == onSubmitting
           ? _value.onSubmitting
           : onSubmitting // ignore: cast_nullable_to_non_nullable
-              as Future<void> Function(Map<String, dynamic>)?,
-      onSubmitted: freezed == onSubmitted
-          ? _value.onSubmitted
-          : onSubmitted // ignore: cast_nullable_to_non_nullable
+              as Future<void> Function(WoForm, Map<String, dynamic>)?,
+      onSubmitError: freezed == onSubmitError
+          ? _value.onSubmitError
+          : onSubmitError // ignore: cast_nullable_to_non_nullable
+              as OnSubmitErrorDef?,
+      onSubmitSuccess: freezed == onSubmitSuccess
+          ? _value.onSubmitSuccess
+          : onSubmitSuccess // ignore: cast_nullable_to_non_nullable
               as void Function(BuildContext)?,
       initialStatus: null == initialStatus
           ? _value.initialStatus
@@ -173,9 +182,11 @@ abstract class _$$WoFormImplCopyWith<$Res> implements $WoFormCopyWith<$Res> {
   $Res call(
       {@InputsListConverter() List<WoFormElementMixin> inputs,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      Future<void> Function(Map<String, dynamic>)? onSubmitting,
+      Future<void> Function(WoForm, Map<String, dynamic>)? onSubmitting,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      void Function(BuildContext)? onSubmitted,
+      OnSubmitErrorDef? onSubmitError,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      void Function(BuildContext)? onSubmitSuccess,
       @JsonKey(includeToJson: false, includeFromJson: false)
       WoFormStatus initialStatus,
       bool canModifySubmittedValues,
@@ -209,7 +220,8 @@ class __$$WoFormImplCopyWithImpl<$Res>
   $Res call({
     Object? inputs = null,
     Object? onSubmitting = freezed,
-    Object? onSubmitted = freezed,
+    Object? onSubmitError = freezed,
+    Object? onSubmitSuccess = freezed,
     Object? initialStatus = null,
     Object? canModifySubmittedValues = null,
     Object? canQuit = freezed,
@@ -225,10 +237,14 @@ class __$$WoFormImplCopyWithImpl<$Res>
       onSubmitting: freezed == onSubmitting
           ? _value.onSubmitting
           : onSubmitting // ignore: cast_nullable_to_non_nullable
-              as Future<void> Function(Map<String, dynamic>)?,
-      onSubmitted: freezed == onSubmitted
-          ? _value.onSubmitted
-          : onSubmitted // ignore: cast_nullable_to_non_nullable
+              as Future<void> Function(WoForm, Map<String, dynamic>)?,
+      onSubmitError: freezed == onSubmitError
+          ? _value.onSubmitError
+          : onSubmitError // ignore: cast_nullable_to_non_nullable
+              as OnSubmitErrorDef?,
+      onSubmitSuccess: freezed == onSubmitSuccess
+          ? _value.onSubmitSuccess
+          : onSubmitSuccess // ignore: cast_nullable_to_non_nullable
               as void Function(BuildContext)?,
       initialStatus: null == initialStatus
           ? _value.initialStatus
@@ -264,7 +280,9 @@ class _$WoFormImpl extends _WoForm {
   const _$WoFormImpl(
       {@InputsListConverter() final List<WoFormElementMixin> inputs = const [],
       @JsonKey(includeToJson: false, includeFromJson: false) this.onSubmitting,
-      @JsonKey(includeToJson: false, includeFromJson: false) this.onSubmitted,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.onSubmitError,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      this.onSubmitSuccess,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.initialStatus = const InitialStatus(),
       this.canModifySubmittedValues = true,
@@ -292,10 +310,13 @@ class _$WoFormImpl extends _WoForm {
 
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final Future<void> Function(Map<String, dynamic>)? onSubmitting;
+  final Future<void> Function(WoForm, Map<String, dynamic>)? onSubmitting;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final void Function(BuildContext)? onSubmitted;
+  final OnSubmitErrorDef? onSubmitError;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final void Function(BuildContext)? onSubmitSuccess;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final WoFormStatus initialStatus;
@@ -317,7 +338,7 @@ class _$WoFormImpl extends _WoForm {
 
   @override
   String toString() {
-    return 'WoForm(inputs: $inputs, onSubmitting: $onSubmitting, onSubmitted: $onSubmitted, initialStatus: $initialStatus, canModifySubmittedValues: $canModifySubmittedValues, canQuit: $canQuit, uiSettings: $uiSettings, exportSettings: $exportSettings, themeBuilder: $themeBuilder)';
+    return 'WoForm(inputs: $inputs, onSubmitting: $onSubmitting, onSubmitError: $onSubmitError, onSubmitSuccess: $onSubmitSuccess, initialStatus: $initialStatus, canModifySubmittedValues: $canModifySubmittedValues, canQuit: $canQuit, uiSettings: $uiSettings, exportSettings: $exportSettings, themeBuilder: $themeBuilder)';
   }
 
   @override
@@ -328,8 +349,10 @@ class _$WoFormImpl extends _WoForm {
             const DeepCollectionEquality().equals(other._inputs, _inputs) &&
             (identical(other.onSubmitting, onSubmitting) ||
                 other.onSubmitting == onSubmitting) &&
-            (identical(other.onSubmitted, onSubmitted) ||
-                other.onSubmitted == onSubmitted) &&
+            (identical(other.onSubmitError, onSubmitError) ||
+                other.onSubmitError == onSubmitError) &&
+            (identical(other.onSubmitSuccess, onSubmitSuccess) ||
+                other.onSubmitSuccess == onSubmitSuccess) &&
             (identical(other.initialStatus, initialStatus) ||
                 other.initialStatus == initialStatus) &&
             (identical(
@@ -350,7 +373,8 @@ class _$WoFormImpl extends _WoForm {
       runtimeType,
       const DeepCollectionEquality().hash(_inputs),
       onSubmitting,
-      onSubmitted,
+      onSubmitError,
+      onSubmitSuccess,
       initialStatus,
       canModifySubmittedValues,
       canQuit,
@@ -376,9 +400,11 @@ abstract class _WoForm extends WoForm {
   const factory _WoForm(
       {@InputsListConverter() final List<WoFormElementMixin> inputs,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      final Future<void> Function(Map<String, dynamic>)? onSubmitting,
+      final Future<void> Function(WoForm, Map<String, dynamic>)? onSubmitting,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      final void Function(BuildContext)? onSubmitted,
+      final OnSubmitErrorDef? onSubmitError,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final void Function(BuildContext)? onSubmitSuccess,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final WoFormStatus initialStatus,
       final bool canModifySubmittedValues,
@@ -399,10 +425,13 @@ abstract class _WoForm extends WoForm {
   List<WoFormElementMixin> get inputs;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  Future<void> Function(Map<String, dynamic>)? get onSubmitting;
+  Future<void> Function(WoForm, Map<String, dynamic>)? get onSubmitting;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  void Function(BuildContext)? get onSubmitted;
+  OnSubmitErrorDef? get onSubmitError;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  void Function(BuildContext)? get onSubmitSuccess;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   WoFormStatus get initialStatus;

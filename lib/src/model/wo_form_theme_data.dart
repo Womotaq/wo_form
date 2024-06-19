@@ -15,6 +15,7 @@ class WoFormThemeData with _$WoFormThemeData {
     SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
     StringFieldBuilderDef? stringFieldBuilder,
     SubmitButtonBuilderDef? submitButtonBuilder,
+    OnSubmitErrorDef? onSubmitError,
 
     /// This spacing will be added at the bottom of each [WoFormElementMixin].
     double? verticalSpacing,

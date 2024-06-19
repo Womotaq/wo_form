@@ -25,7 +25,7 @@ mixin _$WoFormStatus {
     required TResult Function() submitting,
     required TResult Function(Object? error, StackTrace? stackTrace)
         submitError,
-    required TResult Function() submitted,
+    required TResult Function() submitSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,7 +35,7 @@ mixin _$WoFormStatus {
     TResult? Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
     TResult? Function()? submitting,
     TResult? Function(Object? error, StackTrace? stackTrace)? submitError,
-    TResult? Function()? submitted,
+    TResult? Function()? submitSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -45,7 +45,7 @@ mixin _$WoFormStatus {
     TResult Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
     TResult Function()? submitting,
     TResult Function(Object? error, StackTrace? stackTrace)? submitError,
-    TResult Function()? submitted,
+    TResult Function()? submitSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -56,7 +56,7 @@ mixin _$WoFormStatus {
     required TResult Function(InvalidValuesStatus value) invalidValues,
     required TResult Function(SubmittingStatus value) submitting,
     required TResult Function(SubmitErrorStatus value) submitError,
-    required TResult Function(SubmittedStatus value) submitted,
+    required TResult Function(SubmitSuccessStatus value) submitSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -66,7 +66,7 @@ mixin _$WoFormStatus {
     TResult? Function(InvalidValuesStatus value)? invalidValues,
     TResult? Function(SubmittingStatus value)? submitting,
     TResult? Function(SubmitErrorStatus value)? submitError,
-    TResult? Function(SubmittedStatus value)? submitted,
+    TResult? Function(SubmitSuccessStatus value)? submitSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -76,7 +76,7 @@ mixin _$WoFormStatus {
     TResult Function(InvalidValuesStatus value)? invalidValues,
     TResult Function(SubmittingStatus value)? submitting,
     TResult Function(SubmitErrorStatus value)? submitError,
-    TResult Function(SubmittedStatus value)? submitted,
+    TResult Function(SubmitSuccessStatus value)? submitSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -145,7 +145,7 @@ class _$InitialStatusImpl implements InitialStatus {
     required TResult Function() submitting,
     required TResult Function(Object? error, StackTrace? stackTrace)
         submitError,
-    required TResult Function() submitted,
+    required TResult Function() submitSuccess,
   }) {
     return initial();
   }
@@ -158,7 +158,7 @@ class _$InitialStatusImpl implements InitialStatus {
     TResult? Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
     TResult? Function()? submitting,
     TResult? Function(Object? error, StackTrace? stackTrace)? submitError,
-    TResult? Function()? submitted,
+    TResult? Function()? submitSuccess,
   }) {
     return initial?.call();
   }
@@ -171,7 +171,7 @@ class _$InitialStatusImpl implements InitialStatus {
     TResult Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
     TResult Function()? submitting,
     TResult Function(Object? error, StackTrace? stackTrace)? submitError,
-    TResult Function()? submitted,
+    TResult Function()? submitSuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -188,7 +188,7 @@ class _$InitialStatusImpl implements InitialStatus {
     required TResult Function(InvalidValuesStatus value) invalidValues,
     required TResult Function(SubmittingStatus value) submitting,
     required TResult Function(SubmitErrorStatus value) submitError,
-    required TResult Function(SubmittedStatus value) submitted,
+    required TResult Function(SubmitSuccessStatus value) submitSuccess,
   }) {
     return initial(this);
   }
@@ -201,7 +201,7 @@ class _$InitialStatusImpl implements InitialStatus {
     TResult? Function(InvalidValuesStatus value)? invalidValues,
     TResult? Function(SubmittingStatus value)? submitting,
     TResult? Function(SubmitErrorStatus value)? submitError,
-    TResult? Function(SubmittedStatus value)? submitted,
+    TResult? Function(SubmitSuccessStatus value)? submitSuccess,
   }) {
     return initial?.call(this);
   }
@@ -214,7 +214,7 @@ class _$InitialStatusImpl implements InitialStatus {
     TResult Function(InvalidValuesStatus value)? invalidValues,
     TResult Function(SubmittingStatus value)? submitting,
     TResult Function(SubmitErrorStatus value)? submitError,
-    TResult Function(SubmittedStatus value)? submitted,
+    TResult Function(SubmitSuccessStatus value)? submitSuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -273,7 +273,7 @@ class _$InProgressStatusImpl implements InProgressStatus {
     required TResult Function() submitting,
     required TResult Function(Object? error, StackTrace? stackTrace)
         submitError,
-    required TResult Function() submitted,
+    required TResult Function() submitSuccess,
   }) {
     return inProgress();
   }
@@ -286,7 +286,7 @@ class _$InProgressStatusImpl implements InProgressStatus {
     TResult? Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
     TResult? Function()? submitting,
     TResult? Function(Object? error, StackTrace? stackTrace)? submitError,
-    TResult? Function()? submitted,
+    TResult? Function()? submitSuccess,
   }) {
     return inProgress?.call();
   }
@@ -299,7 +299,7 @@ class _$InProgressStatusImpl implements InProgressStatus {
     TResult Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
     TResult Function()? submitting,
     TResult Function(Object? error, StackTrace? stackTrace)? submitError,
-    TResult Function()? submitted,
+    TResult Function()? submitSuccess,
     required TResult orElse(),
   }) {
     if (inProgress != null) {
@@ -316,7 +316,7 @@ class _$InProgressStatusImpl implements InProgressStatus {
     required TResult Function(InvalidValuesStatus value) invalidValues,
     required TResult Function(SubmittingStatus value) submitting,
     required TResult Function(SubmitErrorStatus value) submitError,
-    required TResult Function(SubmittedStatus value) submitted,
+    required TResult Function(SubmitSuccessStatus value) submitSuccess,
   }) {
     return inProgress(this);
   }
@@ -329,7 +329,7 @@ class _$InProgressStatusImpl implements InProgressStatus {
     TResult? Function(InvalidValuesStatus value)? invalidValues,
     TResult? Function(SubmittingStatus value)? submitting,
     TResult? Function(SubmitErrorStatus value)? submitError,
-    TResult? Function(SubmittedStatus value)? submitted,
+    TResult? Function(SubmitSuccessStatus value)? submitSuccess,
   }) {
     return inProgress?.call(this);
   }
@@ -342,7 +342,7 @@ class _$InProgressStatusImpl implements InProgressStatus {
     TResult Function(InvalidValuesStatus value)? invalidValues,
     TResult Function(SubmittingStatus value)? submitting,
     TResult Function(SubmitErrorStatus value)? submitError,
-    TResult Function(SubmittedStatus value)? submitted,
+    TResult Function(SubmitSuccessStatus value)? submitSuccess,
     required TResult orElse(),
   }) {
     if (inProgress != null) {
@@ -430,7 +430,7 @@ class _$InvalidValuesStatusImpl implements InvalidValuesStatus {
     required TResult Function() submitting,
     required TResult Function(Object? error, StackTrace? stackTrace)
         submitError,
-    required TResult Function() submitted,
+    required TResult Function() submitSuccess,
   }) {
     return invalidValues(inputErrors);
   }
@@ -443,7 +443,7 @@ class _$InvalidValuesStatusImpl implements InvalidValuesStatus {
     TResult? Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
     TResult? Function()? submitting,
     TResult? Function(Object? error, StackTrace? stackTrace)? submitError,
-    TResult? Function()? submitted,
+    TResult? Function()? submitSuccess,
   }) {
     return invalidValues?.call(inputErrors);
   }
@@ -456,7 +456,7 @@ class _$InvalidValuesStatusImpl implements InvalidValuesStatus {
     TResult Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
     TResult Function()? submitting,
     TResult Function(Object? error, StackTrace? stackTrace)? submitError,
-    TResult Function()? submitted,
+    TResult Function()? submitSuccess,
     required TResult orElse(),
   }) {
     if (invalidValues != null) {
@@ -473,7 +473,7 @@ class _$InvalidValuesStatusImpl implements InvalidValuesStatus {
     required TResult Function(InvalidValuesStatus value) invalidValues,
     required TResult Function(SubmittingStatus value) submitting,
     required TResult Function(SubmitErrorStatus value) submitError,
-    required TResult Function(SubmittedStatus value) submitted,
+    required TResult Function(SubmitSuccessStatus value) submitSuccess,
   }) {
     return invalidValues(this);
   }
@@ -486,7 +486,7 @@ class _$InvalidValuesStatusImpl implements InvalidValuesStatus {
     TResult? Function(InvalidValuesStatus value)? invalidValues,
     TResult? Function(SubmittingStatus value)? submitting,
     TResult? Function(SubmitErrorStatus value)? submitError,
-    TResult? Function(SubmittedStatus value)? submitted,
+    TResult? Function(SubmitSuccessStatus value)? submitSuccess,
   }) {
     return invalidValues?.call(this);
   }
@@ -499,7 +499,7 @@ class _$InvalidValuesStatusImpl implements InvalidValuesStatus {
     TResult Function(InvalidValuesStatus value)? invalidValues,
     TResult Function(SubmittingStatus value)? submitting,
     TResult Function(SubmitErrorStatus value)? submitError,
-    TResult Function(SubmittedStatus value)? submitted,
+    TResult Function(SubmitSuccessStatus value)? submitSuccess,
     required TResult orElse(),
   }) {
     if (invalidValues != null) {
@@ -565,7 +565,7 @@ class _$SubmittingStatusImpl implements SubmittingStatus {
     required TResult Function() submitting,
     required TResult Function(Object? error, StackTrace? stackTrace)
         submitError,
-    required TResult Function() submitted,
+    required TResult Function() submitSuccess,
   }) {
     return submitting();
   }
@@ -578,7 +578,7 @@ class _$SubmittingStatusImpl implements SubmittingStatus {
     TResult? Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
     TResult? Function()? submitting,
     TResult? Function(Object? error, StackTrace? stackTrace)? submitError,
-    TResult? Function()? submitted,
+    TResult? Function()? submitSuccess,
   }) {
     return submitting?.call();
   }
@@ -591,7 +591,7 @@ class _$SubmittingStatusImpl implements SubmittingStatus {
     TResult Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
     TResult Function()? submitting,
     TResult Function(Object? error, StackTrace? stackTrace)? submitError,
-    TResult Function()? submitted,
+    TResult Function()? submitSuccess,
     required TResult orElse(),
   }) {
     if (submitting != null) {
@@ -608,7 +608,7 @@ class _$SubmittingStatusImpl implements SubmittingStatus {
     required TResult Function(InvalidValuesStatus value) invalidValues,
     required TResult Function(SubmittingStatus value) submitting,
     required TResult Function(SubmitErrorStatus value) submitError,
-    required TResult Function(SubmittedStatus value) submitted,
+    required TResult Function(SubmitSuccessStatus value) submitSuccess,
   }) {
     return submitting(this);
   }
@@ -621,7 +621,7 @@ class _$SubmittingStatusImpl implements SubmittingStatus {
     TResult? Function(InvalidValuesStatus value)? invalidValues,
     TResult? Function(SubmittingStatus value)? submitting,
     TResult? Function(SubmitErrorStatus value)? submitError,
-    TResult? Function(SubmittedStatus value)? submitted,
+    TResult? Function(SubmitSuccessStatus value)? submitSuccess,
   }) {
     return submitting?.call(this);
   }
@@ -634,7 +634,7 @@ class _$SubmittingStatusImpl implements SubmittingStatus {
     TResult Function(InvalidValuesStatus value)? invalidValues,
     TResult Function(SubmittingStatus value)? submitting,
     TResult Function(SubmitErrorStatus value)? submitError,
-    TResult Function(SubmittedStatus value)? submitted,
+    TResult Function(SubmitSuccessStatus value)? submitSuccess,
     required TResult orElse(),
   }) {
     if (submitting != null) {
@@ -727,7 +727,7 @@ class _$SubmitErrorStatusImpl implements SubmitErrorStatus {
     required TResult Function() submitting,
     required TResult Function(Object? error, StackTrace? stackTrace)
         submitError,
-    required TResult Function() submitted,
+    required TResult Function() submitSuccess,
   }) {
     return submitError(error, stackTrace);
   }
@@ -740,7 +740,7 @@ class _$SubmitErrorStatusImpl implements SubmitErrorStatus {
     TResult? Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
     TResult? Function()? submitting,
     TResult? Function(Object? error, StackTrace? stackTrace)? submitError,
-    TResult? Function()? submitted,
+    TResult? Function()? submitSuccess,
   }) {
     return submitError?.call(error, stackTrace);
   }
@@ -753,7 +753,7 @@ class _$SubmitErrorStatusImpl implements SubmitErrorStatus {
     TResult Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
     TResult Function()? submitting,
     TResult Function(Object? error, StackTrace? stackTrace)? submitError,
-    TResult Function()? submitted,
+    TResult Function()? submitSuccess,
     required TResult orElse(),
   }) {
     if (submitError != null) {
@@ -770,7 +770,7 @@ class _$SubmitErrorStatusImpl implements SubmitErrorStatus {
     required TResult Function(InvalidValuesStatus value) invalidValues,
     required TResult Function(SubmittingStatus value) submitting,
     required TResult Function(SubmitErrorStatus value) submitError,
-    required TResult Function(SubmittedStatus value) submitted,
+    required TResult Function(SubmitSuccessStatus value) submitSuccess,
   }) {
     return submitError(this);
   }
@@ -783,7 +783,7 @@ class _$SubmitErrorStatusImpl implements SubmitErrorStatus {
     TResult? Function(InvalidValuesStatus value)? invalidValues,
     TResult? Function(SubmittingStatus value)? submitting,
     TResult? Function(SubmitErrorStatus value)? submitError,
-    TResult? Function(SubmittedStatus value)? submitted,
+    TResult? Function(SubmitSuccessStatus value)? submitSuccess,
   }) {
     return submitError?.call(this);
   }
@@ -796,7 +796,7 @@ class _$SubmitErrorStatusImpl implements SubmitErrorStatus {
     TResult Function(InvalidValuesStatus value)? invalidValues,
     TResult Function(SubmittingStatus value)? submitting,
     TResult Function(SubmitErrorStatus value)? submitError,
-    TResult Function(SubmittedStatus value)? submitted,
+    TResult Function(SubmitSuccessStatus value)? submitSuccess,
     required TResult orElse(),
   }) {
     if (submitError != null) {
@@ -819,35 +819,36 @@ abstract class SubmitErrorStatus implements WoFormStatus {
 }
 
 /// @nodoc
-abstract class _$$SubmittedStatusImplCopyWith<$Res> {
-  factory _$$SubmittedStatusImplCopyWith(_$SubmittedStatusImpl value,
-          $Res Function(_$SubmittedStatusImpl) then) =
-      __$$SubmittedStatusImplCopyWithImpl<$Res>;
+abstract class _$$SubmitSuccessStatusImplCopyWith<$Res> {
+  factory _$$SubmitSuccessStatusImplCopyWith(_$SubmitSuccessStatusImpl value,
+          $Res Function(_$SubmitSuccessStatusImpl) then) =
+      __$$SubmitSuccessStatusImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$SubmittedStatusImplCopyWithImpl<$Res>
-    extends _$WoFormStatusCopyWithImpl<$Res, _$SubmittedStatusImpl>
-    implements _$$SubmittedStatusImplCopyWith<$Res> {
-  __$$SubmittedStatusImplCopyWithImpl(
-      _$SubmittedStatusImpl _value, $Res Function(_$SubmittedStatusImpl) _then)
+class __$$SubmitSuccessStatusImplCopyWithImpl<$Res>
+    extends _$WoFormStatusCopyWithImpl<$Res, _$SubmitSuccessStatusImpl>
+    implements _$$SubmitSuccessStatusImplCopyWith<$Res> {
+  __$$SubmitSuccessStatusImplCopyWithImpl(_$SubmitSuccessStatusImpl _value,
+      $Res Function(_$SubmitSuccessStatusImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$SubmittedStatusImpl implements SubmittedStatus {
-  const _$SubmittedStatusImpl();
+class _$SubmitSuccessStatusImpl implements SubmitSuccessStatus {
+  const _$SubmitSuccessStatusImpl();
 
   @override
   String toString() {
-    return 'WoFormStatus.submitted()';
+    return 'WoFormStatus.submitSuccess()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SubmittedStatusImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$SubmitSuccessStatusImpl);
   }
 
   @override
@@ -863,9 +864,9 @@ class _$SubmittedStatusImpl implements SubmittedStatus {
     required TResult Function() submitting,
     required TResult Function(Object? error, StackTrace? stackTrace)
         submitError,
-    required TResult Function() submitted,
+    required TResult Function() submitSuccess,
   }) {
-    return submitted();
+    return submitSuccess();
   }
 
   @override
@@ -876,9 +877,9 @@ class _$SubmittedStatusImpl implements SubmittedStatus {
     TResult? Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
     TResult? Function()? submitting,
     TResult? Function(Object? error, StackTrace? stackTrace)? submitError,
-    TResult? Function()? submitted,
+    TResult? Function()? submitSuccess,
   }) {
-    return submitted?.call();
+    return submitSuccess?.call();
   }
 
   @override
@@ -889,11 +890,11 @@ class _$SubmittedStatusImpl implements SubmittedStatus {
     TResult Function(Iterable<WoFormInputError>? inputErrors)? invalidValues,
     TResult Function()? submitting,
     TResult Function(Object? error, StackTrace? stackTrace)? submitError,
-    TResult Function()? submitted,
+    TResult Function()? submitSuccess,
     required TResult orElse(),
   }) {
-    if (submitted != null) {
-      return submitted();
+    if (submitSuccess != null) {
+      return submitSuccess();
     }
     return orElse();
   }
@@ -906,9 +907,9 @@ class _$SubmittedStatusImpl implements SubmittedStatus {
     required TResult Function(InvalidValuesStatus value) invalidValues,
     required TResult Function(SubmittingStatus value) submitting,
     required TResult Function(SubmitErrorStatus value) submitError,
-    required TResult Function(SubmittedStatus value) submitted,
+    required TResult Function(SubmitSuccessStatus value) submitSuccess,
   }) {
-    return submitted(this);
+    return submitSuccess(this);
   }
 
   @override
@@ -919,9 +920,9 @@ class _$SubmittedStatusImpl implements SubmittedStatus {
     TResult? Function(InvalidValuesStatus value)? invalidValues,
     TResult? Function(SubmittingStatus value)? submitting,
     TResult? Function(SubmitErrorStatus value)? submitError,
-    TResult? Function(SubmittedStatus value)? submitted,
+    TResult? Function(SubmitSuccessStatus value)? submitSuccess,
   }) {
-    return submitted?.call(this);
+    return submitSuccess?.call(this);
   }
 
   @override
@@ -932,16 +933,16 @@ class _$SubmittedStatusImpl implements SubmittedStatus {
     TResult Function(InvalidValuesStatus value)? invalidValues,
     TResult Function(SubmittingStatus value)? submitting,
     TResult Function(SubmitErrorStatus value)? submitError,
-    TResult Function(SubmittedStatus value)? submitted,
+    TResult Function(SubmitSuccessStatus value)? submitSuccess,
     required TResult orElse(),
   }) {
-    if (submitted != null) {
-      return submitted(this);
+    if (submitSuccess != null) {
+      return submitSuccess(this);
     }
     return orElse();
   }
 }
 
-abstract class SubmittedStatus implements WoFormStatus {
-  const factory SubmittedStatus() = _$SubmittedStatusImpl;
+abstract class SubmitSuccessStatus implements WoFormStatus {
+  const factory SubmitSuccessStatus() = _$SubmitSuccessStatusImpl;
 }

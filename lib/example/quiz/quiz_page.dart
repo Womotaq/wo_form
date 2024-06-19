@@ -244,7 +244,7 @@ class QuizPage extends StatelessWidget {
           },
         ),
       ],
-      onSubmitted: showJsonDialog,
+      onSubmitSuccess: showJsonDialog,
     ).toPage();
   }
 }

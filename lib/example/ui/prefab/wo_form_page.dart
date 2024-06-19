@@ -6,6 +6,7 @@ import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/src/_export.dart';
 import 'package:wo_form/wo_form.dart';
 
+// TODO : move in builder folder ? default_widget folder ?
 class WoFormPage extends StatelessWidget {
   const WoFormPage({required this.form, super.key});
 
@@ -17,8 +18,13 @@ class WoFormPage extends StatelessWidget {
       form: form,
       child: BlocListener<WoFormStatusCubit, WoFormStatus>(
         listener: (context, status) {
-          if (form.onSubmitted != null && status is SubmittedStatus) {
-            form.onSubmitted!(context);
+          switch (status) {
+            case SubmitSuccessStatus():
+              form.onSubmitSuccess?.call(context);
+            case SubmitErrorStatus():
+              (form.onSubmitError ?? WoFormTheme.of(context)?.onSubmitError)
+                  ?.call(context, status);
+            default:
           }
         },
         child: Builder(
