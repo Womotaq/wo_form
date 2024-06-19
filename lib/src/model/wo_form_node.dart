@@ -209,7 +209,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
                 input.getExportKey(
                   values: values,
                   parentPath: '$parentPath/$id',
-                ): input.export(
+                )!: input.export(
                   values: values,
                   parentPath: '$parentPath/$id',
                 ),
@@ -296,8 +296,15 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
     required String parentPath,
   }) {
     switch (this) {
-      case InputsNode():
-        return true; // TODO : one of the inputs must be exportable
+      case InputsNode(inputs: final inputs):
+        return inputs
+            .map(
+              (i) => i.isExportable(
+                values: values,
+                parentPath: '$parentPath/$id',
+              ),
+            )
+            .contains(true);
       case PushPageNode(input: final input):
         return input.isExportable(
           values: values,
