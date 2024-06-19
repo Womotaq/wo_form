@@ -6,55 +6,27 @@ import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/src/_export.dart';
 import 'package:wo_form/wo_form.dart';
 
-// TODO : move in builder folder ? default_widget folder ?
 class WoFormPage extends StatelessWidget {
-  const WoFormPage({required this.form, super.key});
-
-  final WoForm form;
+  const WoFormPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return WoFormInitializer(
-      form: form,
-      child: BlocListener<WoFormStatusCubit, WoFormStatus>(
-        listener: (context, status) {
-          switch (status) {
-            case SubmitSuccessStatus():
-              form.onSubmitSuccess?.call(context);
-            case SubmitErrorStatus():
-              (form.onSubmitError ?? WoFormTheme.of(context)?.onSubmitError)
-                  ?.call(context, status);
-            default:
-          }
-        },
-        child: Builder(
-          builder: (context) {
-            final uiSettings = form.uiSettings;
+    final form = context.read<WoForm>();
+    final uiSettings = form.uiSettings;
 
-            final submitMode = uiSettings.submitMode;
-            final page = submitMode is PageByPageSubmitMode
-                ? _WoFormStandardPageByPage(
-                    form: form,
-                    titleText: uiSettings.titleText,
-                    nextText: submitMode.nextText,
-                  )
-                : _WoFormStandardPage(form: form);
-
-            return form.themeBuilder == null
-                ? page
-                : Theme(
-                    data: form.themeBuilder!(context),
-                    child: page,
-                  );
-          },
-        ),
-      ),
-    );
+    final submitMode = uiSettings.submitMode;
+    return submitMode is PageByPageSubmitMode
+        ? WoFormPageByPage(
+            form: form,
+            titleText: uiSettings.titleText,
+            nextText: submitMode.nextText,
+          )
+        : WoFormStandardPage(form: form);
   }
 }
 
-class _WoFormStandardPage extends StatelessWidget {
-  const _WoFormStandardPage({required this.form});
+class WoFormStandardPage extends StatelessWidget {
+  const WoFormStandardPage({required this.form, super.key});
 
   final WoForm form;
 
@@ -119,11 +91,12 @@ class _WoFormStandardPage extends StatelessWidget {
   }
 }
 
-class _WoFormStandardPageByPage extends StatefulWidget {
-  const _WoFormStandardPageByPage({
+class WoFormPageByPage extends StatefulWidget {
+  const WoFormPageByPage({
     required this.form,
     required this.titleText,
     required this.nextText,
+    super.key,
   });
 
   final WoForm form;
@@ -131,11 +104,10 @@ class _WoFormStandardPageByPage extends StatefulWidget {
   final String? nextText;
 
   @override
-  State<_WoFormStandardPageByPage> createState() =>
-      _WoFormStandardPageByPageState();
+  State<WoFormPageByPage> createState() => WoFormPageByPageState();
 }
 
-class _WoFormStandardPageByPageState extends State<_WoFormStandardPageByPage> {
+class WoFormPageByPageState extends State<WoFormPageByPage> {
   double pageIndex = 0;
 
   @override

@@ -154,7 +154,9 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
       //           (input as WoFormInputMixin).defaultValue,
       //     };
       //   } else {
-      //     throw UnimplementedError('Unknown input type : ${input.runtimeType}');
+      //     throw UnimplementedError(
+      //       'Unknown input type : ${input.runtimeType}',
+      //     );
       //   }
       case ValueBuilderNode(
           builder: final builder,
