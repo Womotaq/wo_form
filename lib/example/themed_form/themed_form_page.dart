@@ -36,7 +36,11 @@ class CustomFormHeader extends StatelessWidget {
     if (labelText.isEmpty && helperText.isEmpty) return const SizedBox.shrink();
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.only(
+        top: 32,
+        left: 16,
+        right: 16,
+      ),
       child: Column(
         children: [
           const SizedBox(height: 16),

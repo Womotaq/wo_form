@@ -55,11 +55,14 @@ final woFormCreator = WoForm(
       builder: (context) => const JsonClipboarder(),
     ),
   ],
-  uiSettings: const WoFormUiSettings(
-    titleText: 'Créer un formulaire',
-    submitMode: WoFormSubmitMode.standard(
-      submitText: 'Prévisualiser',
-      submitIcon: Icons.visibility_outlined,
+  uiSettings: WoFormUiSettings(
+    titleText: "Création d'un formulaire",
+    submitMode: const WoFormSubmitMode.standard(
+      buttonPosition: SubmitButtonPosition.appBar,
+    ),
+    submitButtonBuilder: (data) => TextButton(
+      onPressed: data.onPressed,
+      child: const Text('Prévisualiser'),
     ),
   ),
   onSubmitSuccess: (context) {
@@ -111,35 +114,43 @@ class _JsonClipboarderState extends State<JsonClipboarder> {
 
     final errorsText = woFormL10n.errors(form.getErrors(values).length);
 
-    return ExpansionTile(
-      leading: IconButton(
-        icon: copied ? const Icon(Icons.check) : const Icon(Icons.copy),
-        onPressed: () {
-          final values = context.read<WoFormValuesCubit>().state;
-          Clipboard.setData(
-            ClipboardData(
-              text: jsonEncode(
-                woFormCreator.export(values),
-              ),
-            ),
-          );
-          setState(() => copied = true);
-          Future.delayed(
-            const Duration(seconds: 4),
-            () => setState(() => copied = false),
-          );
-        },
-      ),
-      title: const Text('JSON'),
-      subtitle: errorsText == null
-          ? null
-          : Text(
-              errorsText,
-              style: TextStyle(color: Theme.of(context).colorScheme.error),
-            ),
-      expandedCrossAxisAlignment: CrossAxisAlignment.start,
+    return Column(
       children: [
-        Text(readableJson(woFormCreator.export(values))),
+        const SizedBox(height: 32),
+        ListTile(
+          onTap: () {
+            final values = context.read<WoFormValuesCubit>().state;
+            Clipboard.setData(
+              ClipboardData(
+                text: jsonEncode(
+                  woFormCreator.export(values),
+                ),
+              ),
+            );
+            setState(() => copied = true);
+            Future.delayed(
+              const Duration(seconds: 4),
+              () => setState(() => copied = false),
+            );
+          },
+          leading: copied ? const Icon(Icons.check) : const Icon(Icons.copy),
+          title: const Text(
+            'Copier le formulaire',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ),
+        ExpansionTile(
+          title: errorsText == null
+              ? const Text('')
+              : Text(
+                  'Json incorrect : $errorsText',
+                  style: TextStyle(color: Theme.of(context).colorScheme.error),
+                ),
+          expandedCrossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(readableJson(woFormCreator.export(values))),
+          ],
+        ),
       ],
     );
   }

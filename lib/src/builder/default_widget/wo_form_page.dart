@@ -51,7 +51,7 @@ class WoFormStandardPage extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
-        child: WoPadding.verticalMedium(
+        child: SafeArea(
           child: Column(
             children: [
               if (uiSettings.titlePosition == WoFormTitlePosition.header)
@@ -142,45 +142,47 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
         ),
         title: Text(widget.titleText),
       ),
-      body: Stack(
-        children: [
-          PageView.builder(
-            controller: pageController,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: widget.form.inputs.length,
-            itemBuilder: (context, index) => ListView(
-              children: [
-                const SizedBox(height: 16),
-                widget.form.inputs[index].toWidget(parentPath: ''),
-                const SizedBox(height: 32),
-                WoPadding.horizontalSmall(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      SubmitButtonBuilder(pageIndex: index),
-                    ],
+      body: SafeArea(
+        child: Stack(
+          children: [
+            PageView.builder(
+              controller: pageController,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: widget.form.inputs.length,
+              itemBuilder: (context, index) => ListView(
+                children: [
+                  const SizedBox(height: 16),
+                  widget.form.inputs[index].toWidget(parentPath: ''),
+                  const SizedBox(height: 32),
+                  WoPadding.horizontalSmall(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        SubmitButtonBuilder(pageIndex: index),
+                      ],
+                    ),
                   ),
-                ),
-                WoGap.medium,
-              ],
-            ),
-          ),
-          if ((widget.form.uiSettings.submitMode as PageByPageSubmitMode)
-              .showProgressIndicator)
-            TweenAnimationBuilder<double>(
-              duration: const Duration(milliseconds: 250),
-              curve: Curves.easeInOut,
-              tween: Tween<double>(
-                begin: 1,
-                end: pageIndex + 1,
+                  WoGap.medium,
+                ],
               ),
-              builder: (context, value, _) {
-                return LinearProgressIndicator(
-                  value: value / max(1, widget.form.inputs.length),
-                );
-              },
             ),
-        ],
+            if ((widget.form.uiSettings.submitMode as PageByPageSubmitMode)
+                .showProgressIndicator)
+              TweenAnimationBuilder<double>(
+                duration: const Duration(milliseconds: 250),
+                curve: Curves.easeInOut,
+                tween: Tween<double>(
+                  begin: 1,
+                  end: pageIndex + 1,
+                ),
+                builder: (context, value, _) {
+                  return LinearProgressIndicator(
+                    value: value / max(1, widget.form.inputs.length),
+                  );
+                },
+              ),
+          ],
+        ),
       ),
     );
   }

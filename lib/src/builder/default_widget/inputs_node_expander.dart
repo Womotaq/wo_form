@@ -33,22 +33,25 @@ class InputsNodeExpander extends StatelessWidget {
             child: Scaffold(
               appBar: AppBar(),
               body: SingleChildScrollView(
-                child: Builder(
-                  builder: (context) {
-                    final fieldData = WoFieldData(
-                      inputPath: data.inputPath,
-                      input: data.input,
-                      value: null,
-                      errorText: null,
-                      uiSettings: data.uiSettings,
-                      onValueChanged: (_) {},
-                    );
+                child: SafeArea(
+                  child: Builder(
+                    builder: (context) {
+                      final fieldData = WoFieldData(
+                        inputPath: data.inputPath,
+                        input: data.input,
+                        value: null,
+                        errorText: null,
+                        uiSettings: data.uiSettings,
+                        onValueChanged: (_) {},
+                      );
 
-                    return (data.uiSettings.widgetBuilder ??
-                            WoFormTheme.of(context)?.inputsNodeWidgetBuilder ??
-                            InputsNodeWidget.new)
-                        .call(fieldData);
-                  },
+                      return (data.uiSettings.widgetBuilder ??
+                              WoFormTheme.of(context)
+                                  ?.inputsNodeWidgetBuilder ??
+                              InputsNodeWidget.new)
+                          .call(fieldData);
+                    },
+                  ),
                 ),
               ),
             ),
