@@ -18,6 +18,7 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
           isRequired: true,
           uiSettings: StringInputUiSettings(
             labelText: 'Clef json',
+            autofocus: true,
           ),
         ),
         const StringInput(

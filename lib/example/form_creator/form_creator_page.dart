@@ -22,6 +22,7 @@ extension RandomX on Random {
 }
 
 final woFormCreator = WoForm(
+  initialStatus: const InvalidValuesStatus(),
   inputs: [
     const InputsNode(
       id: 'uiSettings',
@@ -59,10 +60,11 @@ final woFormCreator = WoForm(
     titleText: "Création d'un formulaire",
     submitMode: const WoFormSubmitMode.standard(
       buttonPosition: SubmitButtonPosition.appBar,
+      disableSubmitMode: DisableSubmitButton.whenInvalid,
     ),
     submitButtonBuilder: (data) => TextButton(
       onPressed: data.onPressed,
-      child: const Text('Prévisualiser'),
+      child: const Text('Exporter'),
     ),
   ),
   onSubmitSuccess: (context) {
@@ -73,7 +75,10 @@ final woFormCreator = WoForm(
             ) as Map<String, dynamic>,
       );
       context.pushPage(
-        form.copyWith(onSubmitSuccess: showJsonDialog).toPage(),
+        Hero(
+          tag: 'createdForm',
+          child: form.copyWith(onSubmitSuccess: showJsonDialog).toPage(),
+        ),
       );
     } catch (e) {
       showDialog<void>(
@@ -117,6 +122,60 @@ class _JsonClipboarderState extends State<JsonClipboarder> {
     return Column(
       children: [
         const SizedBox(height: 32),
+        InputHeader(
+          WoFormInputHeaderData(
+            labelText: 'Prévisualisation',
+            trailing: IconButton(
+              icon: const Icon(Icons.open_in_browser),
+              onPressed: context.read<WoFormValuesCubit>().submit,
+            ),
+            shrinkWrap: false,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Builder(
+            builder: (context) {
+              WoForm? createdForm;
+              try {
+                createdForm = WoForm.fromJson(
+                  form.export(values) as Map<String, dynamic>,
+                );
+              } catch (_) {}
+
+              return InputDecorator(
+                decoration: InputDecoration(
+                  helperText: ' ',
+                  errorText: createdForm == null ? ' ' : null,
+                  border: const OutlineInputBorder(),
+                  contentPadding: const EdgeInsets.all(2),
+                ),
+                child: createdForm != null
+                    ? AspectRatio(
+                        aspectRatio: 1,
+                        child: Hero(
+                          tag: 'createdForm',
+                          child: createdForm
+                              .copyWith(
+                                onSubmitSuccess: showJsonDialog,
+                                canQuit: (_) async => false,
+                              )
+                              .toPage(key: UniqueKey()),
+                        ),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Text(
+                          '$errorsText',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.error,
+                          ),
+                        ),
+                      ),
+              );
+            },
+          ),
+        ),
         ListTile(
           onTap: () {
             final values = context.read<WoFormValuesCubit>().state;
@@ -140,12 +199,7 @@ class _JsonClipboarderState extends State<JsonClipboarder> {
           ),
         ),
         ExpansionTile(
-          title: errorsText == null
-              ? const Text('')
-              : Text(
-                  'Json incorrect : $errorsText',
-                  style: TextStyle(color: Theme.of(context).colorScheme.error),
-                ),
+          title: const Text(''),
           expandedCrossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(readableJson(woFormCreator.export(values))),

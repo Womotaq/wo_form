@@ -12,6 +12,7 @@ InputsNode createNumInputNode({required String id}) => InputsNode(
           isRequired: true,
           uiSettings: StringInputUiSettings(
             labelText: 'Clef json',
+            autofocus: true,
           ),
         ),
         NumInput(

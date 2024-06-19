@@ -46,6 +46,7 @@ class CustomFormHeader extends StatelessWidget {
           const SizedBox(height: 16),
           Text(
             labelText,
+            textAlign: TextAlign.center,
             style: Theme.of(context)
                 .textTheme
                 .titleLarge
