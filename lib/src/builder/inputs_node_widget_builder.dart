@@ -16,23 +16,23 @@ class InputsNodeWidgetBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     final form = context.read<WoForm>();
 
-    final input = form.getInput(
+    final node = form.getInput(
       path: inputPath,
       values: context.read<WoFormValuesCubit>().state,
     );
-    if (input is! InputsNode) {
+    if (node is! InputsNode) {
       throw ArgumentError(
         'Expected <InputsNode> at path: "$inputPath", '
-        'found: <${input.runtimeType}>',
+        'found: <${node.runtimeType}>',
       );
     }
 
     final mergedSettings =
-        uiSettings?.merge(input.uiSettings) ?? input.uiSettings;
+        uiSettings?.merge(node.uiSettings) ?? node.uiSettings;
 
     final fieldData = WoFieldData(
       inputPath: inputPath,
-      input: input,
+      input: node,
       value: null,
       errorText: null,
       uiSettings: mergedSettings,

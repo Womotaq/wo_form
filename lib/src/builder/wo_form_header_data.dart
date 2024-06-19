@@ -16,6 +16,7 @@ class WoFormInputHeaderData {
     this.helperText,
     this.errorText,
     this.trailing,
+    this.onTap,
     this.shrinkWrap = true,
   });
 
@@ -23,5 +24,6 @@ class WoFormInputHeaderData {
   final String? helperText;
   final String? errorText;
   final Widget? trailing;
+  final VoidCallback? onTap;
   final bool shrinkWrap;
 }

@@ -1,4 +1,7 @@
 class WoFieldData<I, T, U> {
+  /// I : input
+  /// T : value
+  /// U : uiSettings
   const WoFieldData({
     required this.inputPath,
     required this.input,

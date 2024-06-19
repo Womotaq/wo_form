@@ -23,36 +23,54 @@ extension RandomX on Random {
 
 final woFormCreator = WoForm(
   inputs: [
-    const InputsNode(
-      id: 'uiSettings',
-      uiSettings: InputsNodeUiSettings(
+    const PushPageNode(
+      id: 'uiSettings-pushPage',
+      uiSettings: PushPageNodeUiSettings(
         labelText: 'Paramètres généraux',
       ),
-      inputs: [
-        StringInput(
-          id: 'titleText',
-          uiSettings: StringInputUiSettings(labelText: 'Titre du formulaire'),
+      input: InputsNode(
+        id: 'uiSettings',
+        uiSettings: InputsNodeUiSettings(
+          labelText: 'Paramètres généraux',
         ),
-        StringInput(
-          id: 'submitText',
-          uiSettings: StringInputUiSettings(
-            labelText: 'Label du bouton de validation',
+        inputs: [
+          StringInput(
+            id: 'titleText',
+            uiSettings: StringInputUiSettings(labelText: 'Titre du formulaire'),
           ),
-        ),
-        StringInput(
-          id: 'submittedText',
-          uiSettings: StringInputUiSettings(
-            labelText: 'Label du bouton validé',
+          StringInput(
+            id: 'submitText',
+            uiSettings: StringInputUiSettings(
+              labelText: 'Label du bouton de validation',
+            ),
           ),
-        ),
-      ],
+          StringInput(
+            id: 'submittedText',
+            uiSettings: StringInputUiSettings(
+              labelText: 'Label du bouton validé',
+            ),
+          ),
+        ],
+      ),
     ),
     InputsNode(
       id: 'inputs',
       exportSettings: const ExportSettings(exportType: ExportType.list),
       inputs: [
-        createStringInputNode(id: idGenerator.generateId()),
-        createNumInputNode(id: idGenerator.generateId()),
+        PushPageNode(
+          id: 'stringInput-pushPage',
+          uiSettings: const PushPageNodeUiSettings(
+            labelText: 'Saisie de texte',
+          ),
+          input: createStringInputNode(id: idGenerator.generateId()),
+        ),
+        PushPageNode(
+          id: 'stringInput-pushPage',
+          uiSettings: const PushPageNodeUiSettings(
+            labelText: 'Saisie de nombre',
+          ),
+          input: createNumInputNode(id: idGenerator.generateId()),
+        ),
       ],
     ),
   ],

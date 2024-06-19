@@ -37,6 +37,7 @@ class InputHeader extends StatelessWidget {
                 )
               : null,
       trailing: data.trailing,
+      onTap: data.onTap,
       minTileHeight: data.shrinkWrap ? 0 : null,
       minVerticalPadding: data.shrinkWrap ? 0 : null,
     );

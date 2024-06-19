@@ -698,6 +698,207 @@ abstract class _NumInputUiSettings extends NumInputUiSettings {
       throw _privateConstructorUsedError;
 }
 
+PushPageNodeUiSettings _$PushPageNodeUiSettingsFromJson(
+    Map<String, dynamic> json) {
+  return _PushPageNodeUiSettings.fromJson(json);
+}
+
+/// @nodoc
+mixin _$PushPageNodeUiSettings {
+  String? get labelText => throw _privateConstructorUsedError;
+  String? get helperText => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  PushPageNodeWidgetBuilderDef? get widgetBuilder =>
+      throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $PushPageNodeUiSettingsCopyWith<PushPageNodeUiSettings> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PushPageNodeUiSettingsCopyWith<$Res> {
+  factory $PushPageNodeUiSettingsCopyWith(PushPageNodeUiSettings value,
+          $Res Function(PushPageNodeUiSettings) then) =
+      _$PushPageNodeUiSettingsCopyWithImpl<$Res, PushPageNodeUiSettings>;
+  @useResult
+  $Res call(
+      {String? labelText,
+      String? helperText,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      PushPageNodeWidgetBuilderDef? widgetBuilder});
+}
+
+/// @nodoc
+class _$PushPageNodeUiSettingsCopyWithImpl<$Res,
+        $Val extends PushPageNodeUiSettings>
+    implements $PushPageNodeUiSettingsCopyWith<$Res> {
+  _$PushPageNodeUiSettingsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? labelText = freezed,
+    Object? helperText = freezed,
+    Object? widgetBuilder = freezed,
+  }) {
+    return _then(_value.copyWith(
+      labelText: freezed == labelText
+          ? _value.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _value.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      widgetBuilder: freezed == widgetBuilder
+          ? _value.widgetBuilder
+          : widgetBuilder // ignore: cast_nullable_to_non_nullable
+              as PushPageNodeWidgetBuilderDef?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$PushPageNodeUiSettingsImplCopyWith<$Res>
+    implements $PushPageNodeUiSettingsCopyWith<$Res> {
+  factory _$$PushPageNodeUiSettingsImplCopyWith(
+          _$PushPageNodeUiSettingsImpl value,
+          $Res Function(_$PushPageNodeUiSettingsImpl) then) =
+      __$$PushPageNodeUiSettingsImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String? labelText,
+      String? helperText,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      PushPageNodeWidgetBuilderDef? widgetBuilder});
+}
+
+/// @nodoc
+class __$$PushPageNodeUiSettingsImplCopyWithImpl<$Res>
+    extends _$PushPageNodeUiSettingsCopyWithImpl<$Res,
+        _$PushPageNodeUiSettingsImpl>
+    implements _$$PushPageNodeUiSettingsImplCopyWith<$Res> {
+  __$$PushPageNodeUiSettingsImplCopyWithImpl(
+      _$PushPageNodeUiSettingsImpl _value,
+      $Res Function(_$PushPageNodeUiSettingsImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? labelText = freezed,
+    Object? helperText = freezed,
+    Object? widgetBuilder = freezed,
+  }) {
+    return _then(_$PushPageNodeUiSettingsImpl(
+      labelText: freezed == labelText
+          ? _value.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _value.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      widgetBuilder: freezed == widgetBuilder
+          ? _value.widgetBuilder
+          : widgetBuilder // ignore: cast_nullable_to_non_nullable
+              as PushPageNodeWidgetBuilderDef?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$PushPageNodeUiSettingsImpl extends _PushPageNodeUiSettings {
+  const _$PushPageNodeUiSettingsImpl(
+      {this.labelText,
+      this.helperText,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      this.widgetBuilder})
+      : super._();
+
+  factory _$PushPageNodeUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PushPageNodeUiSettingsImplFromJson(json);
+
+  @override
+  final String? labelText;
+  @override
+  final String? helperText;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final PushPageNodeWidgetBuilderDef? widgetBuilder;
+
+  @override
+  String toString() {
+    return 'PushPageNodeUiSettings(labelText: $labelText, helperText: $helperText, widgetBuilder: $widgetBuilder)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PushPageNodeUiSettingsImpl &&
+            (identical(other.labelText, labelText) ||
+                other.labelText == labelText) &&
+            (identical(other.helperText, helperText) ||
+                other.helperText == helperText) &&
+            (identical(other.widgetBuilder, widgetBuilder) ||
+                other.widgetBuilder == widgetBuilder));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, labelText, helperText, widgetBuilder);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PushPageNodeUiSettingsImplCopyWith<_$PushPageNodeUiSettingsImpl>
+      get copyWith => __$$PushPageNodeUiSettingsImplCopyWithImpl<
+          _$PushPageNodeUiSettingsImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$PushPageNodeUiSettingsImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _PushPageNodeUiSettings extends PushPageNodeUiSettings {
+  const factory _PushPageNodeUiSettings(
+          {final String? labelText,
+          final String? helperText,
+          @JsonKey(includeToJson: false, includeFromJson: false)
+          final PushPageNodeWidgetBuilderDef? widgetBuilder}) =
+      _$PushPageNodeUiSettingsImpl;
+  const _PushPageNodeUiSettings._() : super._();
+
+  factory _PushPageNodeUiSettings.fromJson(Map<String, dynamic> json) =
+      _$PushPageNodeUiSettingsImpl.fromJson;
+
+  @override
+  String? get labelText;
+  @override
+  String? get helperText;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  PushPageNodeWidgetBuilderDef? get widgetBuilder;
+  @override
+  @JsonKey(ignore: true)
+  _$$PushPageNodeUiSettingsImplCopyWith<_$PushPageNodeUiSettingsImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
 SelectInputUiSettings<T> _$SelectInputUiSettingsFromJson<T>(
     Map<String, dynamic> json) {
   return _SelectInputUiSettings<T>.fromJson(json);

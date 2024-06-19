@@ -11,6 +11,7 @@ class WoFormThemeData with _$WoFormThemeData {
     InputHeaderBuilderDef? inputHeaderBuilder,
     InputNodeWidgetBuilderDef? inputsNodeWidgetBuilder,
     NumFieldBuilderDef? numFieldBuilder,
+    PushPageNodeWidgetBuilderDef? pushPageNodeWidgetBuilder,
     SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
     StringFieldBuilderDef? stringFieldBuilder,
     SubmitButtonBuilderDef? submitButtonBuilder,
