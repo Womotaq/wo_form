@@ -5,7 +5,7 @@ import 'package:wo_form/src/_export.dart';
 /// Default submt button. Can be overriden by submitButtonBuilder from
 /// [WoFormUiSettings] or using [WoFormTheme].
 class SubmitButton extends StatelessWidget {
-  const SubmitButton({required this.data, super.key});
+  const SubmitButton(this.data, {super.key});
 
   final SubmitButtonData data;
 

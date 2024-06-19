@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wo_form/wo_form.dart';
 
 class NumField extends StatefulWidget {
-  const NumField({required this.data, super.key});
+  const NumField(this.data, {super.key});
 
   final WoFieldData<NumInput, num?, NumInputUiSettings> data;
 

@@ -74,11 +74,10 @@ class BooleanFieldBuilder extends StatelessWidget {
                           ),
                 );
 
-                return mergedSettings.widgetBuilder?.call(fieldData) ??
-                    WoFormTheme.of(context)
-                        ?.booleanFieldBuilder
-                        ?.call(fieldData) ??
-                    BooleanField(data: fieldData);
+                return (mergedSettings.widgetBuilder ??
+                        WoFormTheme.of(context)?.booleanFieldBuilder ??
+                        BooleanField.new)
+                    .call(fieldData);
               },
             );
           },

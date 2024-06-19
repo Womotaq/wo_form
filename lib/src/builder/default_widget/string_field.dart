@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/wo_form.dart';
 
 class StringField extends StatefulWidget {
-  const StringField({required this.data, super.key});
+  const StringField(this.data, {super.key});
 
   final WoFieldData<StringInput, String, StringInputUiSettings> data;
 

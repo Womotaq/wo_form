@@ -3,27 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/example/app.dart';
 import 'package:wo_form/wo_form.dart';
 
-class PushPageNodeWidget extends StatelessWidget {
-  const PushPageNodeWidget({required this.data, super.key});
-
-  final WoFieldData<PushPageNode, void, PushPageNodeUiSettings> data;
-
-  @override
-  Widget build(BuildContext context) {
-    final headerData = WoFormInputHeaderData(
-      labelText: data.uiSettings.labelText,
-      helperText: data.uiSettings.helperText,
-      errorText: data.errorText,
-      trailing: const Icon(Icons.chevron_right),
-      onTap: () => data.onValueChanged?.call(null),
-      shrinkWrap: false,
-    );
-
-    return (WoFormTheme.of(context)?.inputHeaderBuilder ?? InputHeader.new)
-        .call(headerData);
-  }
-}
-
 class InputsNodeExpander extends StatelessWidget {
   const InputsNodeExpander(this.data, {super.key});
 

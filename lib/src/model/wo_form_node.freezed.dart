@@ -18,8 +18,6 @@ WoFormNode _$WoFormNodeFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
     case 'inputs':
       return InputsNode.fromJson(json);
-    case 'pushPage':
-      return PushPageNode.fromJson(json);
     case 'valueBuilder':
       return ValueBuilderNode.fromJson(json);
     case 'valueListener':
@@ -46,12 +44,6 @@ mixin _$WoFormNode {
             @JsonKey(toJson: ExportSettings.staticToJson)
             ExportSettings exportSettings)
         inputs,
-    required TResult Function(
-            String id,
-            @WoFormElementConverter() WoFormElementMixin input,
-            @JsonKey(toJson: PushPageNodeUiSettings.staticToJson)
-            PushPageNodeUiSettings uiSettings)
-        pushPage,
     required TResult Function(
             String id,
             String inputPath,
@@ -86,12 +78,6 @@ mixin _$WoFormNode {
         inputs,
     TResult? Function(
             String id,
-            @WoFormElementConverter() WoFormElementMixin input,
-            @JsonKey(toJson: PushPageNodeUiSettings.staticToJson)
-            PushPageNodeUiSettings uiSettings)?
-        pushPage,
-    TResult? Function(
-            String id,
             String inputPath,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
@@ -124,12 +110,6 @@ mixin _$WoFormNode {
         inputs,
     TResult Function(
             String id,
-            @WoFormElementConverter() WoFormElementMixin input,
-            @JsonKey(toJson: PushPageNodeUiSettings.staticToJson)
-            PushPageNodeUiSettings uiSettings)?
-        pushPage,
-    TResult Function(
-            String id,
             String inputPath,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
@@ -154,7 +134,6 @@ mixin _$WoFormNode {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(InputsNode value) inputs,
-    required TResult Function(PushPageNode value) pushPage,
     required TResult Function(ValueBuilderNode value) valueBuilder,
     required TResult Function(ValueListenerNode value) valueListener,
     required TResult Function(WidgetNode value) widget,
@@ -163,7 +142,6 @@ mixin _$WoFormNode {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(InputsNode value)? inputs,
-    TResult? Function(PushPageNode value)? pushPage,
     TResult? Function(ValueBuilderNode value)? valueBuilder,
     TResult? Function(ValueListenerNode value)? valueListener,
     TResult? Function(WidgetNode value)? widget,
@@ -172,7 +150,6 @@ mixin _$WoFormNode {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(InputsNode value)? inputs,
-    TResult Function(PushPageNode value)? pushPage,
     TResult Function(ValueBuilderNode value)? valueBuilder,
     TResult Function(ValueListenerNode value)? valueListener,
     TResult Function(WidgetNode value)? widget,
@@ -373,12 +350,6 @@ class _$InputsNodeImpl extends InputsNode {
         inputs,
     required TResult Function(
             String id,
-            @WoFormElementConverter() WoFormElementMixin input,
-            @JsonKey(toJson: PushPageNodeUiSettings.staticToJson)
-            PushPageNodeUiSettings uiSettings)
-        pushPage,
-    required TResult Function(
-            String id,
             String inputPath,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
@@ -412,12 +383,6 @@ class _$InputsNodeImpl extends InputsNode {
             @JsonKey(toJson: ExportSettings.staticToJson)
             ExportSettings exportSettings)?
         inputs,
-    TResult? Function(
-            String id,
-            @WoFormElementConverter() WoFormElementMixin input,
-            @JsonKey(toJson: PushPageNodeUiSettings.staticToJson)
-            PushPageNodeUiSettings uiSettings)?
-        pushPage,
     TResult? Function(
             String id,
             String inputPath,
@@ -455,12 +420,6 @@ class _$InputsNodeImpl extends InputsNode {
         inputs,
     TResult Function(
             String id,
-            @WoFormElementConverter() WoFormElementMixin input,
-            @JsonKey(toJson: PushPageNodeUiSettings.staticToJson)
-            PushPageNodeUiSettings uiSettings)?
-        pushPage,
-    TResult Function(
-            String id,
             String inputPath,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
@@ -491,7 +450,6 @@ class _$InputsNodeImpl extends InputsNode {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(InputsNode value) inputs,
-    required TResult Function(PushPageNode value) pushPage,
     required TResult Function(ValueBuilderNode value) valueBuilder,
     required TResult Function(ValueListenerNode value) valueListener,
     required TResult Function(WidgetNode value) widget,
@@ -503,7 +461,6 @@ class _$InputsNodeImpl extends InputsNode {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(InputsNode value)? inputs,
-    TResult? Function(PushPageNode value)? pushPage,
     TResult? Function(ValueBuilderNode value)? valueBuilder,
     TResult? Function(ValueListenerNode value)? valueListener,
     TResult? Function(WidgetNode value)? widget,
@@ -515,7 +472,6 @@ class _$InputsNodeImpl extends InputsNode {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(InputsNode value)? inputs,
-    TResult Function(PushPageNode value)? pushPage,
     TResult Function(ValueBuilderNode value)? valueBuilder,
     TResult Function(ValueListenerNode value)? valueListener,
     TResult Function(WidgetNode value)? widget,
@@ -559,314 +515,6 @@ abstract class InputsNode extends WoFormNode {
   @override
   @JsonKey(ignore: true)
   _$$InputsNodeImplCopyWith<_$InputsNodeImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$PushPageNodeImplCopyWith<$Res>
-    implements $WoFormNodeCopyWith<$Res> {
-  factory _$$PushPageNodeImplCopyWith(
-          _$PushPageNodeImpl value, $Res Function(_$PushPageNodeImpl) then) =
-      __$$PushPageNodeImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      @WoFormElementConverter() WoFormElementMixin input,
-      @JsonKey(toJson: PushPageNodeUiSettings.staticToJson)
-      PushPageNodeUiSettings uiSettings});
-
-  $PushPageNodeUiSettingsCopyWith<$Res> get uiSettings;
-}
-
-/// @nodoc
-class __$$PushPageNodeImplCopyWithImpl<$Res>
-    extends _$WoFormNodeCopyWithImpl<$Res, _$PushPageNodeImpl>
-    implements _$$PushPageNodeImplCopyWith<$Res> {
-  __$$PushPageNodeImplCopyWithImpl(
-      _$PushPageNodeImpl _value, $Res Function(_$PushPageNodeImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? input = null,
-    Object? uiSettings = null,
-  }) {
-    return _then(_$PushPageNodeImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      input: null == input
-          ? _value.input
-          : input // ignore: cast_nullable_to_non_nullable
-              as WoFormElementMixin,
-      uiSettings: null == uiSettings
-          ? _value.uiSettings
-          : uiSettings // ignore: cast_nullable_to_non_nullable
-              as PushPageNodeUiSettings,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PushPageNodeUiSettingsCopyWith<$Res> get uiSettings {
-    return $PushPageNodeUiSettingsCopyWith<$Res>(_value.uiSettings, (value) {
-      return _then(_value.copyWith(uiSettings: value));
-    });
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$PushPageNodeImpl extends PushPageNode {
-  const _$PushPageNodeImpl(
-      {required this.id,
-      @WoFormElementConverter() required this.input,
-      @JsonKey(toJson: PushPageNodeUiSettings.staticToJson)
-      this.uiSettings = const PushPageNodeUiSettings(),
-      final String? $type})
-      : $type = $type ?? 'pushPage',
-        super._();
-
-  factory _$PushPageNodeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PushPageNodeImplFromJson(json);
-
-  @override
-  final String id;
-  @override
-  @WoFormElementConverter()
-  final WoFormElementMixin input;
-  @override
-  @JsonKey(toJson: PushPageNodeUiSettings.staticToJson)
-  final PushPageNodeUiSettings uiSettings;
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
-
-  @override
-  String toString() {
-    return 'WoFormNode.pushPage(id: $id, input: $input, uiSettings: $uiSettings)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$PushPageNodeImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.input, input) || other.input == input) &&
-            (identical(other.uiSettings, uiSettings) ||
-                other.uiSettings == uiSettings));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, id, input, uiSettings);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$PushPageNodeImplCopyWith<_$PushPageNodeImpl> get copyWith =>
-      __$$PushPageNodeImplCopyWithImpl<_$PushPageNodeImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormElementMixin> inputs,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)
-        inputs,
-    required TResult Function(
-            String id,
-            @WoFormElementConverter() WoFormElementMixin input,
-            @JsonKey(toJson: PushPageNodeUiSettings.staticToJson)
-            PushPageNodeUiSettings uiSettings)
-        pushPage,
-    required TResult Function(
-            String id,
-            String inputPath,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormElementMixin Function(String, Object?)? builder,
-            Object? defaultValue)
-        valueBuilder,
-    required TResult Function(
-            String id,
-            String inputPath,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)
-        valueListener,
-    required TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)
-        widget,
-  }) {
-    return pushPage(id, input, uiSettings);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String id,
-            @InputsListConverter() List<WoFormElementMixin> inputs,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        inputs,
-    TResult? Function(
-            String id,
-            @WoFormElementConverter() WoFormElementMixin input,
-            @JsonKey(toJson: PushPageNodeUiSettings.staticToJson)
-            PushPageNodeUiSettings uiSettings)?
-        pushPage,
-    TResult? Function(
-            String id,
-            String inputPath,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormElementMixin Function(String, Object?)? builder,
-            Object? defaultValue)?
-        valueBuilder,
-    TResult? Function(
-            String id,
-            String inputPath,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)?
-        valueListener,
-    TResult? Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
-        widget,
-  }) {
-    return pushPage?.call(id, input, uiSettings);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormElementMixin> inputs,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        inputs,
-    TResult Function(
-            String id,
-            @WoFormElementConverter() WoFormElementMixin input,
-            @JsonKey(toJson: PushPageNodeUiSettings.staticToJson)
-            PushPageNodeUiSettings uiSettings)?
-        pushPage,
-    TResult Function(
-            String id,
-            String inputPath,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormElementMixin Function(String, Object?)? builder,
-            Object? defaultValue)?
-        valueBuilder,
-    TResult Function(
-            String id,
-            String inputPath,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)?
-        valueListener,
-    TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
-        widget,
-    required TResult orElse(),
-  }) {
-    if (pushPage != null) {
-      return pushPage(id, input, uiSettings);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(InputsNode value) inputs,
-    required TResult Function(PushPageNode value) pushPage,
-    required TResult Function(ValueBuilderNode value) valueBuilder,
-    required TResult Function(ValueListenerNode value) valueListener,
-    required TResult Function(WidgetNode value) widget,
-  }) {
-    return pushPage(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(InputsNode value)? inputs,
-    TResult? Function(PushPageNode value)? pushPage,
-    TResult? Function(ValueBuilderNode value)? valueBuilder,
-    TResult? Function(ValueListenerNode value)? valueListener,
-    TResult? Function(WidgetNode value)? widget,
-  }) {
-    return pushPage?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(InputsNode value)? inputs,
-    TResult Function(PushPageNode value)? pushPage,
-    TResult Function(ValueBuilderNode value)? valueBuilder,
-    TResult Function(ValueListenerNode value)? valueListener,
-    TResult Function(WidgetNode value)? widget,
-    required TResult orElse(),
-  }) {
-    if (pushPage != null) {
-      return pushPage(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PushPageNodeImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class PushPageNode extends WoFormNode {
-  const factory PushPageNode(
-      {required final String id,
-      @WoFormElementConverter() required final WoFormElementMixin input,
-      @JsonKey(toJson: PushPageNodeUiSettings.staticToJson)
-      final PushPageNodeUiSettings uiSettings}) = _$PushPageNodeImpl;
-  const PushPageNode._() : super._();
-
-  factory PushPageNode.fromJson(Map<String, dynamic> json) =
-      _$PushPageNodeImpl.fromJson;
-
-  @override
-  String get id;
-  @WoFormElementConverter()
-  WoFormElementMixin get input;
-  @JsonKey(toJson: PushPageNodeUiSettings.staticToJson)
-  PushPageNodeUiSettings get uiSettings;
-  @override
-  @JsonKey(ignore: true)
-  _$$PushPageNodeImplCopyWith<_$PushPageNodeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -993,12 +641,6 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
         inputs,
     required TResult Function(
             String id,
-            @WoFormElementConverter() WoFormElementMixin input,
-            @JsonKey(toJson: PushPageNodeUiSettings.staticToJson)
-            PushPageNodeUiSettings uiSettings)
-        pushPage,
-    required TResult Function(
-            String id,
             String inputPath,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
@@ -1032,12 +674,6 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
             @JsonKey(toJson: ExportSettings.staticToJson)
             ExportSettings exportSettings)?
         inputs,
-    TResult? Function(
-            String id,
-            @WoFormElementConverter() WoFormElementMixin input,
-            @JsonKey(toJson: PushPageNodeUiSettings.staticToJson)
-            PushPageNodeUiSettings uiSettings)?
-        pushPage,
     TResult? Function(
             String id,
             String inputPath,
@@ -1075,12 +711,6 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
         inputs,
     TResult Function(
             String id,
-            @WoFormElementConverter() WoFormElementMixin input,
-            @JsonKey(toJson: PushPageNodeUiSettings.staticToJson)
-            PushPageNodeUiSettings uiSettings)?
-        pushPage,
-    TResult Function(
-            String id,
             String inputPath,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
@@ -1111,7 +741,6 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(InputsNode value) inputs,
-    required TResult Function(PushPageNode value) pushPage,
     required TResult Function(ValueBuilderNode value) valueBuilder,
     required TResult Function(ValueListenerNode value) valueListener,
     required TResult Function(WidgetNode value) widget,
@@ -1123,7 +752,6 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(InputsNode value)? inputs,
-    TResult? Function(PushPageNode value)? pushPage,
     TResult? Function(ValueBuilderNode value)? valueBuilder,
     TResult? Function(ValueListenerNode value)? valueListener,
     TResult? Function(WidgetNode value)? widget,
@@ -1135,7 +763,6 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(InputsNode value)? inputs,
-    TResult Function(PushPageNode value)? pushPage,
     TResult Function(ValueBuilderNode value)? valueBuilder,
     TResult Function(ValueListenerNode value)? valueListener,
     TResult Function(WidgetNode value)? widget,
@@ -1307,12 +934,6 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
         inputs,
     required TResult Function(
             String id,
-            @WoFormElementConverter() WoFormElementMixin input,
-            @JsonKey(toJson: PushPageNodeUiSettings.staticToJson)
-            PushPageNodeUiSettings uiSettings)
-        pushPage,
-    required TResult Function(
-            String id,
             String inputPath,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
@@ -1346,12 +967,6 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
             @JsonKey(toJson: ExportSettings.staticToJson)
             ExportSettings exportSettings)?
         inputs,
-    TResult? Function(
-            String id,
-            @WoFormElementConverter() WoFormElementMixin input,
-            @JsonKey(toJson: PushPageNodeUiSettings.staticToJson)
-            PushPageNodeUiSettings uiSettings)?
-        pushPage,
     TResult? Function(
             String id,
             String inputPath,
@@ -1389,12 +1004,6 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
         inputs,
     TResult Function(
             String id,
-            @WoFormElementConverter() WoFormElementMixin input,
-            @JsonKey(toJson: PushPageNodeUiSettings.staticToJson)
-            PushPageNodeUiSettings uiSettings)?
-        pushPage,
-    TResult Function(
-            String id,
             String inputPath,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
@@ -1425,7 +1034,6 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(InputsNode value) inputs,
-    required TResult Function(PushPageNode value) pushPage,
     required TResult Function(ValueBuilderNode value) valueBuilder,
     required TResult Function(ValueListenerNode value) valueListener,
     required TResult Function(WidgetNode value) widget,
@@ -1437,7 +1045,6 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(InputsNode value)? inputs,
-    TResult? Function(PushPageNode value)? pushPage,
     TResult? Function(ValueBuilderNode value)? valueBuilder,
     TResult? Function(ValueListenerNode value)? valueListener,
     TResult? Function(WidgetNode value)? widget,
@@ -1449,7 +1056,6 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(InputsNode value)? inputs,
-    TResult Function(PushPageNode value)? pushPage,
     TResult Function(ValueBuilderNode value)? valueBuilder,
     TResult Function(ValueListenerNode value)? valueListener,
     TResult Function(WidgetNode value)? widget,
@@ -1596,12 +1202,6 @@ class _$WidgetNodeImpl extends WidgetNode {
         inputs,
     required TResult Function(
             String id,
-            @WoFormElementConverter() WoFormElementMixin input,
-            @JsonKey(toJson: PushPageNodeUiSettings.staticToJson)
-            PushPageNodeUiSettings uiSettings)
-        pushPage,
-    required TResult Function(
-            String id,
             String inputPath,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
@@ -1635,12 +1235,6 @@ class _$WidgetNodeImpl extends WidgetNode {
             @JsonKey(toJson: ExportSettings.staticToJson)
             ExportSettings exportSettings)?
         inputs,
-    TResult? Function(
-            String id,
-            @WoFormElementConverter() WoFormElementMixin input,
-            @JsonKey(toJson: PushPageNodeUiSettings.staticToJson)
-            PushPageNodeUiSettings uiSettings)?
-        pushPage,
     TResult? Function(
             String id,
             String inputPath,
@@ -1678,12 +1272,6 @@ class _$WidgetNodeImpl extends WidgetNode {
         inputs,
     TResult Function(
             String id,
-            @WoFormElementConverter() WoFormElementMixin input,
-            @JsonKey(toJson: PushPageNodeUiSettings.staticToJson)
-            PushPageNodeUiSettings uiSettings)?
-        pushPage,
-    TResult Function(
-            String id,
             String inputPath,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
@@ -1714,7 +1302,6 @@ class _$WidgetNodeImpl extends WidgetNode {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(InputsNode value) inputs,
-    required TResult Function(PushPageNode value) pushPage,
     required TResult Function(ValueBuilderNode value) valueBuilder,
     required TResult Function(ValueListenerNode value) valueListener,
     required TResult Function(WidgetNode value) widget,
@@ -1726,7 +1313,6 @@ class _$WidgetNodeImpl extends WidgetNode {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(InputsNode value)? inputs,
-    TResult? Function(PushPageNode value)? pushPage,
     TResult? Function(ValueBuilderNode value)? valueBuilder,
     TResult? Function(ValueListenerNode value)? valueListener,
     TResult? Function(WidgetNode value)? widget,
@@ -1738,7 +1324,6 @@ class _$WidgetNodeImpl extends WidgetNode {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(InputsNode value)? inputs,
-    TResult Function(PushPageNode value)? pushPage,
     TResult Function(ValueBuilderNode value)? valueBuilder,
     TResult Function(ValueListenerNode value)? valueListener,
     TResult Function(WidgetNode value)? widget,

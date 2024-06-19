@@ -89,9 +89,10 @@ class _WoFormStandardPage extends StatelessWidget {
                       labelText: uiSettings.titleText,
                     );
 
-                    return uiSettings.headerBuilder?.call(headerData) ??
-                        woFormTheme?.headerBuilder?.call(headerData) ??
-                        FormHeader(data: headerData);
+                    return (uiSettings.headerBuilder ??
+                            woFormTheme?.headerBuilder ??
+                            FormHeader.new)
+                        .call(headerData);
                   },
                 ),
               Column(

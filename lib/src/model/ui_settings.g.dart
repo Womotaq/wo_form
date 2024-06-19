@@ -74,20 +74,6 @@ Map<String, dynamic> _$$NumInputUiSettingsImplToJson(
       'helperText': instance.helperText,
     };
 
-_$PushPageNodeUiSettingsImpl _$$PushPageNodeUiSettingsImplFromJson(
-        Map<String, dynamic> json) =>
-    _$PushPageNodeUiSettingsImpl(
-      labelText: json['labelText'] as String?,
-      helperText: json['helperText'] as String?,
-    );
-
-Map<String, dynamic> _$$PushPageNodeUiSettingsImplToJson(
-        _$PushPageNodeUiSettingsImpl instance) =>
-    <String, dynamic>{
-      'labelText': instance.labelText,
-      'helperText': instance.helperText,
-    };
-
 _$SelectInputUiSettingsImpl<T> _$$SelectInputUiSettingsImplFromJson<T>(
         Map<String, dynamic> json) =>
     _$SelectInputUiSettingsImpl<T>(

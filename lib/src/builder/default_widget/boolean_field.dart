@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wo_form/wo_form.dart';
 
 class BooleanField extends StatelessWidget {
-  const BooleanField({required this.data, super.key});
+  const BooleanField(this.data, {super.key});
 
   final WoFieldData<BooleanInput, bool, BooleanInputUiSettings> data;
 

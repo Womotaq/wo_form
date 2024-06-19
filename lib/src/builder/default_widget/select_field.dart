@@ -3,7 +3,7 @@ import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/wo_form.dart';
 
 class SelectField<T> extends StatelessWidget {
-  const SelectField({required this.data, super.key});
+  const SelectField(this.data, {super.key});
 
   final WoFieldData<SelectInput<T>, List<T>, SelectInputUiSettings<T>> data;
 

@@ -77,11 +77,10 @@ class StringFieldBuilder extends StatelessWidget {
                           ),
                 );
 
-                return mergedSettings.widgetBuilder?.call(fieldData) ??
-                    WoFormTheme.of(context)
-                        ?.stringFieldBuilder
-                        ?.call(fieldData) ??
-                    StringField(data: fieldData);
+                return (mergedSettings.widgetBuilder ??
+                        WoFormTheme.of(context)?.stringFieldBuilder ??
+                        StringField.new)
+                    .call(fieldData);
               },
             );
           },

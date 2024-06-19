@@ -115,36 +115,6 @@ class NumInputUiSettings with _$NumInputUiSettings {
         );
 }
 
-typedef PushPageNodeWidgetBuilderDef = Widget Function(
-  WoFieldData<PushPageNode, void, PushPageNodeUiSettings> data,
-);
-
-@freezed
-class PushPageNodeUiSettings with _$PushPageNodeUiSettings {
-  const factory PushPageNodeUiSettings({
-    String? labelText,
-    String? helperText,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    PushPageNodeWidgetBuilderDef? widgetBuilder,
-  }) = _PushPageNodeUiSettings;
-
-  const PushPageNodeUiSettings._();
-
-  factory PushPageNodeUiSettings.fromJson(Map<String, dynamic> json) =>
-      _$PushPageNodeUiSettingsFromJson(json);
-
-  static Map<String, dynamic> staticToJson(PushPageNodeUiSettings object) =>
-      object.toJson();
-
-  PushPageNodeUiSettings merge(PushPageNodeUiSettings? other) => other == null
-      ? this
-      : PushPageNodeUiSettings(
-          labelText: labelText ?? other.labelText,
-          helperText: helperText ?? other.helperText,
-          widgetBuilder: widgetBuilder ?? other.widgetBuilder,
-        );
-}
-
 enum SelectFieldDisplayMode { tile, chip }
 
 typedef SelectFieldBuilderDef<T> = Widget Function(

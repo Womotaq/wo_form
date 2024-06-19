@@ -67,8 +67,9 @@ class SubmitButtonBuilder extends StatelessWidget {
           : SubmitButtonPosition.bottom,
     );
 
-    return form.uiSettings.submitButtonBuilder?.call(submitButtonData) ??
-        WoFormTheme.of(context)?.submitButtonBuilder?.call(submitButtonData) ??
-        SubmitButton(data: submitButtonData);
+    return (form.uiSettings.submitButtonBuilder ??
+            WoFormTheme.of(context)?.submitButtonBuilder ??
+            SubmitButton.new)
+        .call(submitButtonData);
   }
 }

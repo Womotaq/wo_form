@@ -30,9 +30,10 @@ class InputsNodeWidget extends StatelessWidget {
               helperText: data.uiSettings.helperText,
             );
 
-            return data.uiSettings.headerBuilder?.call(headerData) ??
-                woFormTheme?.headerBuilder?.call(headerData) ??
-                FormHeader(data: headerData);
+            return (data.uiSettings.headerBuilder ??
+                    woFormTheme?.headerBuilder ??
+                    FormHeader.new)
+                .call(headerData);
           },
         ),
         Padding(

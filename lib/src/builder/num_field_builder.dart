@@ -77,9 +77,10 @@ class NumFieldBuilder extends StatelessWidget {
                           ),
                 );
 
-                return mergedSettings.widgetBuilder?.call(fieldData) ??
-                    WoFormTheme.of(context)?.numFieldBuilder?.call(fieldData) ??
-                    NumField(data: fieldData);
+                return (mergedSettings.widgetBuilder ??
+                        WoFormTheme.of(context)?.numFieldBuilder ??
+                        NumField.new)
+                    .call(fieldData);
               },
             );
           },

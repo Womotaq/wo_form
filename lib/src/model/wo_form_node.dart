@@ -101,14 +101,6 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
     ExportSettings exportSettings,
   }) = InputsNode;
 
-  const factory WoFormNode.pushPage({
-    required String id,
-    @WoFormElementConverter() required WoFormElementMixin input,
-    @JsonKey(toJson: PushPageNodeUiSettings.staticToJson)
-    @Default(PushPageNodeUiSettings())
-    PushPageNodeUiSettings uiSettings,
-  }) = PushPageNode;
-
   @Assert('builder != null', 'ValueBuilderNode.builder cannot be null')
   const factory WoFormNode.valueBuilder({
     required String id,
@@ -153,17 +145,17 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
               '$parentPath/$id/${input.id}':
                   (input as WoFormInputMixin).defaultValue,
         };
-      case PushPageNode(input: final input):
-        if (input is WoFormNode) {
-          return input.defaultValues(parentPath: '$parentPath/$id');
-        } else if (input is WoFormInputMixin) {
-          return {
-            '$parentPath/$id/${input.id}':
-                (input as WoFormInputMixin).defaultValue,
-          };
-        } else {
-          throw UnimplementedError('Unknown input type : ${input.runtimeType}');
-        }
+      // case PushPageNode(input: final input):
+      //   if (input is WoFormNode) {
+      //     return input.defaultValues(parentPath: '$parentPath/$id');
+      //   } else if (input is WoFormInputMixin) {
+      //     return {
+      //       '$parentPath/$id/${input.id}':
+      //           (input as WoFormInputMixin).defaultValue,
+      //     };
+      //   } else {
+      //     throw UnimplementedError('Unknown input type : ${input.runtimeType}');
+      //   }
       case ValueBuilderNode(
           builder: final builder,
           defaultValue: final defaultValue,
@@ -225,8 +217,8 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
           ExportType.firstExportable => exportableInputs.firstOrNull
               ?.export(values: values, parentPath: '$parentPath/$id'),
         };
-      case PushPageNode(input: final input):
-        return input.export(values: values, parentPath: '$parentPath/$id');
+      // case PushPageNode(input: final input):
+      //   return input.export(values: values, parentPath: '$parentPath/$id');
       case ValueBuilderNode(inputPath: final inputPath, builder: final builder):
         final input = builder!(
           id,
@@ -267,11 +259,11 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
               )
               ?.getExportKey(values: values, parentPath: parentPath)
         };
-      case PushPageNode(input: final input):
-        return input.getExportKey(
-          values: values,
-          parentPath: '$parentPath/$id',
-        );
+      // case PushPageNode(input: final input):
+      //   return input.getExportKey(
+      //     values: values,
+      //     parentPath: '$parentPath/$id',
+      //   );
       case ValueBuilderNode(inputPath: final inputPath, builder: final builder):
         final input = builder!(
           id,
@@ -305,11 +297,11 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
               ),
             )
             .contains(true);
-      case PushPageNode(input: final input):
-        return input.isExportable(
-          values: values,
-          parentPath: '$parentPath/$id',
-        );
+      // case PushPageNode(input: final input):
+      //   return input.isExportable(
+      //     values: values,
+      //     parentPath: '$parentPath/$id',
+      //   );
       case ValueBuilderNode(inputPath: final inputPath, builder: final builder):
         final input = builder!(
           id,
@@ -343,14 +335,14 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
               parentPath: '$parentPath/$id',
             ),
         ];
-      case PushPageNode(input: final input):
-        return [
-          '$parentPath/$id',
-          ...input.getAllInputPaths(
-            values: values,
-            parentPath: '$parentPath/$id',
-          ),
-        ];
+      // case PushPageNode(input: final input):
+      //   return [
+      //     '$parentPath/$id',
+      //     ...input.getAllInputPaths(
+      //       values: values,
+      //       parentPath: '$parentPath/$id',
+      //     ),
+      //   ];
       case ValueBuilderNode(inputPath: final inputPath, builder: final builder):
         final input = builder!(
           id,
@@ -387,8 +379,8 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
               parentPath: '$parentPath/$id',
             ),
         ].whereNotNull();
-      case PushPageNode(input: final input):
-        return input.getErrors(values, parentPath: '$parentPath/$id');
+      // case PushPageNode(input: final input):
+      //   return input.getErrors(values, parentPath: '$parentPath/$id');
       case ValueBuilderNode(inputPath: final inputPath, builder: final builder):
         final input = builder!(
           id,
@@ -446,18 +438,18 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
               parentPath: '$parentPath/$id',
               values: values,
             );
-      case PushPageNode(input: final input):
-        if (input.id == path.substring(1)) return input;
+      // case PushPageNode(input: final input):
+      //   if (input.id == path.substring(1)) return input;
 
-        if (input is WoFormNode) {
-          return input.getInput(
-            path: path.substring(slashIndex + 1),
-            parentPath: '$parentPath/$id',
-            values: values,
-          );
-        }
+      //   if (input is WoFormNode) {
+      //     return input.getInput(
+      //       path: path.substring(slashIndex + 1),
+      //       parentPath: '$parentPath/$id',
+      //       values: values,
+      //     );
+      //   }
 
-        return null;
+      //   return null;
       case ValueBuilderNode(
           inputPath: final inputPath,
           builder: final builder,
@@ -512,8 +504,8 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
               );
             },
           ),
-        PushPageNode() =>
-          PushPageNodeWidgetBuilder(inputPath: '$parentPath/$id'),
+        // PushPageNode() =>
+        //   PushPageNodeWidgetBuilder(inputPath: '$parentPath/$id'),
         ValueListenerNode(
           inputPath: final inputPath,
           listenWhen: final listenWhen,

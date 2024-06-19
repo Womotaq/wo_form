@@ -3,7 +3,7 @@ import 'package:wo_form/wo_form.dart';
 
 /// By default, used by [InputsNodeWidget] and [WoFormPage].
 class FormHeader extends StatelessWidget {
-  const FormHeader({required this.data, super.key});
+  const FormHeader(this.data, {super.key});
 
   final WoFormHeaderData data;
 

@@ -32,26 +32,6 @@ Map<String, dynamic> _$$InputsNodeImplToJson(_$InputsNodeImpl instance) =>
       'runtimeType': instance.$type,
     };
 
-_$PushPageNodeImpl _$$PushPageNodeImplFromJson(Map<String, dynamic> json) =>
-    _$PushPageNodeImpl(
-      id: json['id'] as String,
-      input: const WoFormElementConverter()
-          .fromJson(json['input'] as Map<String, dynamic>),
-      uiSettings: json['uiSettings'] == null
-          ? const PushPageNodeUiSettings()
-          : PushPageNodeUiSettings.fromJson(
-              json['uiSettings'] as Map<String, dynamic>),
-      $type: json['runtimeType'] as String?,
-    );
-
-Map<String, dynamic> _$$PushPageNodeImplToJson(_$PushPageNodeImpl instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'input': const WoFormElementConverter().toJson(instance.input),
-      'uiSettings': PushPageNodeUiSettings.staticToJson(instance.uiSettings),
-      'runtimeType': instance.$type,
-    };
-
 _$ValueBuilderNodeImpl _$$ValueBuilderNodeImplFromJson(
         Map<String, dynamic> json) =>
     _$ValueBuilderNodeImpl(
