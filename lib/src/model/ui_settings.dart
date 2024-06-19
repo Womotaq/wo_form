@@ -43,7 +43,7 @@ class BooleanInputUiSettings with _$BooleanInputUiSettings {
         );
 }
 
-enum NodeDisplayMode { screenWithHeader, expansionTile }
+enum InputsNodeDisplayMode { expanded, tapToExpand }
 
 typedef InputNodeWidgetBuilderDef = Widget Function(
   WoFieldData<InputsNode, void, InputsNodeUiSettings> data,
@@ -56,11 +56,13 @@ class InputsNodeUiSettings with _$InputsNodeUiSettings {
   const factory InputsNodeUiSettings({
     String? labelText,
     String? helperText,
-    NodeDisplayMode? displayMode,
+    InputsNodeDisplayMode? displayMode,
     @JsonKey(includeToJson: false, includeFromJson: false)
     InputNodeWidgetBuilderDef? widgetBuilder,
     @JsonKey(includeToJson: false, includeFromJson: false)
     HeaderBuilderDef? headerBuilder,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    InputNodeWidgetBuilderDef? expanderBuilder,
   }) = _InputsNodeUiSettings;
 
   const InputsNodeUiSettings._();
@@ -79,6 +81,7 @@ class InputsNodeUiSettings with _$InputsNodeUiSettings {
           displayMode: displayMode ?? other.displayMode,
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,
           headerBuilder: headerBuilder ?? other.headerBuilder,
+          expanderBuilder: expanderBuilder ?? other.expanderBuilder,
         );
 }
 

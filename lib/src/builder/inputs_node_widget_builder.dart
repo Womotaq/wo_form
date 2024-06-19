@@ -30,17 +30,61 @@ class InputsNodeWidgetBuilder extends StatelessWidget {
     final mergedSettings =
         uiSettings?.merge(node.uiSettings) ?? node.uiSettings;
 
-    final fieldData = WoFieldData(
-      inputPath: inputPath,
-      input: node,
-      value: null,
-      errorText: null,
-      uiSettings: mergedSettings,
-      onValueChanged: (_) {},
-    );
+    switch (mergedSettings.displayMode) {
+      case null:
+      case InputsNodeDisplayMode.expanded:
+        final fieldData = WoFieldData(
+          inputPath: inputPath,
+          input: node,
+          value: null,
+          errorText: null,
+          uiSettings: mergedSettings,
+          onValueChanged: (_) {},
+        );
 
-    return mergedSettings.widgetBuilder?.call(fieldData) ??
-        WoFormTheme.of(context)?.inputsNodeWidgetBuilder?.call(fieldData) ??
-        InputsNodeWidget(data: fieldData);
+        return (mergedSettings.widgetBuilder ??
+                WoFormTheme.of(context)?.inputsNodeWidgetBuilder ??
+                InputsNodeWidget.new)
+            .call(fieldData);
+      case InputsNodeDisplayMode.tapToExpand:
+        final woFormL10n = context.read<WoFormL10n?>();
+
+        return BlocSelector<WoFormStatusCubit, WoFormStatus, bool>(
+          selector: (status) {
+            return status is InvalidValuesStatus;
+          },
+          builder: (context, showError) {
+            return BlocSelector<WoFormValuesCubit, Map<String, dynamic>,
+                String?>(
+              selector: (values) {
+                return woFormL10n?.errors(
+                  node
+                      .getErrors(
+                        values,
+                        parentPath:
+                            (inputPath.split('/')..removeLast()).join('/'),
+                      )
+                      .length,
+                );
+              },
+              builder: (context, errorText) {
+                final expanderData = WoFieldData(
+                  inputPath: inputPath,
+                  input: node,
+                  value: null,
+                  errorText: showError ? errorText : null,
+                  uiSettings: mergedSettings,
+                  onValueChanged: (_) {},
+                );
+
+                return (mergedSettings.expanderBuilder ??
+                        WoFormTheme.of(context)?.inputsNodeExpanderBuilder ??
+                        InputsNodeExpander.new)
+                    .call(expanderData);
+              },
+            );
+          },
+        );
+    }
   }
 }

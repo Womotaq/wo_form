@@ -43,8 +43,8 @@ _$InputsNodeUiSettingsImpl _$$InputsNodeUiSettingsImplFromJson(
     _$InputsNodeUiSettingsImpl(
       labelText: json['labelText'] as String?,
       helperText: json['helperText'] as String?,
-      displayMode:
-          $enumDecodeNullable(_$NodeDisplayModeEnumMap, json['displayMode']),
+      displayMode: $enumDecodeNullable(
+          _$InputsNodeDisplayModeEnumMap, json['displayMode']),
     );
 
 Map<String, dynamic> _$$InputsNodeUiSettingsImplToJson(
@@ -52,12 +52,12 @@ Map<String, dynamic> _$$InputsNodeUiSettingsImplToJson(
     <String, dynamic>{
       'labelText': instance.labelText,
       'helperText': instance.helperText,
-      'displayMode': _$NodeDisplayModeEnumMap[instance.displayMode],
+      'displayMode': _$InputsNodeDisplayModeEnumMap[instance.displayMode],
     };
 
-const _$NodeDisplayModeEnumMap = {
-  NodeDisplayMode.screenWithHeader: 'screenWithHeader',
-  NodeDisplayMode.expansionTile: 'expansionTile',
+const _$InputsNodeDisplayModeEnumMap = {
+  InputsNodeDisplayMode.expanded: 'expanded',
+  InputsNodeDisplayMode.tapToExpand: 'tapToExpand',
 };
 
 _$NumInputUiSettingsImpl _$$NumInputUiSettingsImplFromJson(

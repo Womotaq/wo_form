@@ -9,6 +9,7 @@ class ShowCustomThemeCubit extends Cubit<bool> {
 
   static WoFormThemeData customTheme = WoFormThemeData(
     headerBuilder: CustomFormHeader.new,
+    inputsNodeExpanderBuilder: CustomInputsNodeExpander.new,
     stringFieldBuilder: CustomStringField.new,
     submitButtonBuilder: CustomSubmitButton.new,
     verticalSpacing: 16,
@@ -77,6 +78,7 @@ class _CustomStringFieldState extends State<CustomStringField> {
   @override
   void initState() {
     super.initState();
+    obscureText = widget.data.uiSettings.obscureText ?? false;
     textEditingController.text = widget.data.value ?? '';
   }
 
@@ -92,10 +94,9 @@ class _CustomStringFieldState extends State<CustomStringField> {
               helperText: widget.data.uiSettings.helperText,
             );
 
-            return WoFormTheme.of(context)
-                    ?.inputHeaderBuilder
-                    ?.call(headerData) ??
-                InputHeader(data: headerData);
+            return (WoFormTheme.of(context)?.inputHeaderBuilder ??
+                    InputHeader.new)
+                .call(headerData);
           },
         ),
         ListTile(
@@ -203,5 +204,53 @@ class CustomSubmitButton extends StatelessWidget {
           ),
         );
     }
+  }
+}
+
+class CustomInputsNodeExpander extends StatelessWidget {
+  const CustomInputsNodeExpander(this.data, {super.key});
+
+  final WoFieldData<InputsNode, void, InputsNodeUiSettings> data;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    final errorText = data.errorText ?? '';
+    final helperText = data.uiSettings.helperText ?? '';
+
+    return Theme(
+      // just to remove borders of ExpansionTile
+      data: theme.copyWith(dividerColor: Colors.transparent),
+      child: ExpansionTile(
+        title: Text(
+          data.uiSettings.labelText ?? '',
+          style:
+              theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+        ),
+        subtitle: errorText.isNotEmpty
+            ? Text(
+                errorText,
+                style: theme.textTheme.labelMedium
+                    ?.copyWith(color: theme.colorScheme.error),
+              )
+            : helperText.isNotEmpty
+                ? Text(
+                    helperText,
+                    style: theme.textTheme.labelMedium,
+                  )
+                : null,
+        children: data.input.inputs
+            .map(
+              (i) => Padding(
+                padding: EdgeInsets.only(
+                  bottom: WoFormTheme.of(context)?.verticalSpacing ?? 0,
+                ),
+                child: i.toWidget(parentPath: data.inputPath),
+              ),
+            )
+            .toList(),
+      ),
+    );
   }
 }

@@ -23,11 +23,10 @@ class SelectField<T> extends StatelessWidget {
                     helperText: data.uiSettings.helperText,
                   );
 
-                  return data.uiSettings.headerBuilder?.call(headerData) ??
-                      WoFormTheme.of(context)
-                          ?.inputHeaderBuilder
-                          ?.call(headerData) ??
-                      InputHeader(data: headerData);
+                  return (data.uiSettings.headerBuilder ??
+                          WoFormTheme.of(context)?.inputHeaderBuilder ??
+                          InputHeader.new)
+                      .call(headerData);
                 },
               ),
               ...data.input.availibleValues.map(
@@ -59,11 +58,10 @@ class SelectField<T> extends StatelessWidget {
                     helperText: data.uiSettings.helperText,
                   );
 
-                  return data.uiSettings.headerBuilder?.call(headerData) ??
-                      WoFormTheme.of(context)
-                          ?.inputHeaderBuilder
-                          ?.call(headerData) ??
-                      InputHeader(data: headerData);
+                  return (data.uiSettings.headerBuilder ??
+                          WoFormTheme.of(context)?.inputHeaderBuilder ??
+                          InputHeader.new)
+                      .call(headerData);
                 },
               ),
               ListTile(
@@ -106,11 +104,10 @@ class SelectField<T> extends StatelessWidget {
                 shrinkWrap: false,
               );
 
-              return data.uiSettings.headerBuilder?.call(headerData) ??
-                  WoFormTheme.of(context)
-                      ?.inputHeaderBuilder
-                      ?.call(headerData) ??
-                  InputHeader(data: headerData);
+              return (data.uiSettings.headerBuilder ??
+                      WoFormTheme.of(context)?.inputHeaderBuilder ??
+                      InputHeader.new)
+                  .call(headerData);
             },
           ),
           if (selectedValues.isNotEmpty)

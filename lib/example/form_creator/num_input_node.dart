@@ -4,7 +4,7 @@ InputsNode createNumInputNode({required String id}) => InputsNode(
       id: id,
       uiSettings: const InputsNodeUiSettings(
         labelText: 'Saisie de nombre',
-        helperText: 'Demandez un nombre.',
+        displayMode: InputsNodeDisplayMode.tapToExpand,
       ),
       inputs: const [
         StringInput(
@@ -45,7 +45,7 @@ InputsNode createNumInputNode({required String id}) => InputsNode(
           id: 'uiSettings',
           uiSettings: InputsNodeUiSettings(
             labelText: 'Interface',
-            displayMode: NodeDisplayMode.expansionTile,
+            displayMode: InputsNodeDisplayMode.tapToExpand,
           ),
           inputs: [
             StringInput(

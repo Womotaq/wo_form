@@ -10,6 +10,7 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
       id: id,
       uiSettings: const InputsNodeUiSettings(
         labelText: 'Saisie de texte',
+        displayMode: InputsNodeDisplayMode.tapToExpand,
       ),
       inputs: [
         const StringInput(
@@ -71,7 +72,7 @@ InputsNode createStringInputNode({required String id}) => InputsNode(
           id: 'uiSettings',
           uiSettings: const InputsNodeUiSettings(
             labelText: 'Interface',
-            displayMode: NodeDisplayMode.expansionTile,
+            displayMode: InputsNodeDisplayMode.tapToExpand,
           ),
           inputs: [
             const StringInput(

@@ -18,6 +18,7 @@ class _StringFieldState extends State<StringField> {
   @override
   void initState() {
     super.initState();
+    obscureText = widget.data.uiSettings.obscureText ?? false;
     textEditingController.text = widget.data.value ?? '';
   }
 

@@ -3,7 +3,7 @@ import 'package:wo_form/wo_form.dart';
 
 /// By default, used by [StringField] and [SelectField].
 class InputHeader extends StatelessWidget {
-  const InputHeader({required this.data, super.key});
+  const InputHeader(this.data, {super.key});
 
   final WoFormInputHeaderData data;
 

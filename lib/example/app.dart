@@ -11,7 +11,7 @@ import 'package:wo_form/example/themed_form/themed_form_page.dart';
 import 'package:wo_form/wo_form.dart';
 
 class DarkModeCubit extends Cubit<bool> {
-  DarkModeCubit() : super(true);
+  DarkModeCubit() : super(false);
 
   void toggle() => emit(!state);
 }

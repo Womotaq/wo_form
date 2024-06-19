@@ -23,48 +23,31 @@ extension RandomX on Random {
 
 final woFormCreator = WoForm(
   inputs: [
-    const PushPageNode(
-      id: 'uiSettings-pushPage',
-      uiSettings: PushPageNodeUiSettings(
+    const InputsNode(
+      id: 'uiSettings',
+      uiSettings: InputsNodeUiSettings(
         labelText: 'Paramètres généraux',
+        displayMode: InputsNodeDisplayMode.tapToExpand,
       ),
-      input: InputsNode(
-        id: 'uiSettings',
-        uiSettings: InputsNodeUiSettings(
-          labelText: 'Paramètres généraux',
+      inputs: [
+        StringInput(
+          id: 'titleText',
+          uiSettings: StringInputUiSettings(labelText: 'Titre du formulaire'),
         ),
-        inputs: [
-          StringInput(
-            id: 'titleText',
-            uiSettings: StringInputUiSettings(labelText: 'Titre du formulaire'),
+        StringInput(
+          id: 'submitText',
+          uiSettings: StringInputUiSettings(
+            labelText: 'Label du bouton de validation',
           ),
-          StringInput(
-            id: 'submitText',
-            uiSettings: StringInputUiSettings(
-              labelText: 'Label du bouton de validation',
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     ),
     InputsNode(
       id: 'inputs',
       exportSettings: const ExportSettings(exportType: ExportType.list),
       inputs: [
-        PushPageNode(
-          id: 'stringInput-pushPage',
-          uiSettings: const PushPageNodeUiSettings(
-            labelText: 'Saisie de texte',
-          ),
-          input: createStringInputNode(id: idGenerator.generateId()),
-        ),
-        PushPageNode(
-          id: 'numInput-pushPage',
-          uiSettings: const PushPageNodeUiSettings(
-            labelText: 'Saisie de nombre',
-          ),
-          input: createNumInputNode(id: idGenerator.generateId()),
-        ),
+        createStringInputNode(id: idGenerator.generateId()),
+        createNumInputNode(id: idGenerator.generateId()),
       ],
     ),
   ],

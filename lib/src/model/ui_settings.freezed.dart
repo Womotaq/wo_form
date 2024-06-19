@@ -267,12 +267,15 @@ InputsNodeUiSettings _$InputsNodeUiSettingsFromJson(Map<String, dynamic> json) {
 mixin _$InputsNodeUiSettings {
   String? get labelText => throw _privateConstructorUsedError;
   String? get helperText => throw _privateConstructorUsedError;
-  NodeDisplayMode? get displayMode => throw _privateConstructorUsedError;
+  InputsNodeDisplayMode? get displayMode => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
   InputNodeWidgetBuilderDef? get widgetBuilder =>
       throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
   HeaderBuilderDef? get headerBuilder => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  InputNodeWidgetBuilderDef? get expanderBuilder =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -289,11 +292,13 @@ abstract class $InputsNodeUiSettingsCopyWith<$Res> {
   $Res call(
       {String? labelText,
       String? helperText,
-      NodeDisplayMode? displayMode,
+      InputsNodeDisplayMode? displayMode,
       @JsonKey(includeToJson: false, includeFromJson: false)
       InputNodeWidgetBuilderDef? widgetBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      HeaderBuilderDef? headerBuilder});
+      HeaderBuilderDef? headerBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      InputNodeWidgetBuilderDef? expanderBuilder});
 }
 
 /// @nodoc
@@ -315,6 +320,7 @@ class _$InputsNodeUiSettingsCopyWithImpl<$Res,
     Object? displayMode = freezed,
     Object? widgetBuilder = freezed,
     Object? headerBuilder = freezed,
+    Object? expanderBuilder = freezed,
   }) {
     return _then(_value.copyWith(
       labelText: freezed == labelText
@@ -328,7 +334,7 @@ class _$InputsNodeUiSettingsCopyWithImpl<$Res,
       displayMode: freezed == displayMode
           ? _value.displayMode
           : displayMode // ignore: cast_nullable_to_non_nullable
-              as NodeDisplayMode?,
+              as InputsNodeDisplayMode?,
       widgetBuilder: freezed == widgetBuilder
           ? _value.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
@@ -337,6 +343,10 @@ class _$InputsNodeUiSettingsCopyWithImpl<$Res,
           ? _value.headerBuilder
           : headerBuilder // ignore: cast_nullable_to_non_nullable
               as HeaderBuilderDef?,
+      expanderBuilder: freezed == expanderBuilder
+          ? _value.expanderBuilder
+          : expanderBuilder // ignore: cast_nullable_to_non_nullable
+              as InputNodeWidgetBuilderDef?,
     ) as $Val);
   }
 }
@@ -352,11 +362,13 @@ abstract class _$$InputsNodeUiSettingsImplCopyWith<$Res>
   $Res call(
       {String? labelText,
       String? helperText,
-      NodeDisplayMode? displayMode,
+      InputsNodeDisplayMode? displayMode,
       @JsonKey(includeToJson: false, includeFromJson: false)
       InputNodeWidgetBuilderDef? widgetBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      HeaderBuilderDef? headerBuilder});
+      HeaderBuilderDef? headerBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      InputNodeWidgetBuilderDef? expanderBuilder});
 }
 
 /// @nodoc
@@ -375,6 +387,7 @@ class __$$InputsNodeUiSettingsImplCopyWithImpl<$Res>
     Object? displayMode = freezed,
     Object? widgetBuilder = freezed,
     Object? headerBuilder = freezed,
+    Object? expanderBuilder = freezed,
   }) {
     return _then(_$InputsNodeUiSettingsImpl(
       labelText: freezed == labelText
@@ -388,7 +401,7 @@ class __$$InputsNodeUiSettingsImplCopyWithImpl<$Res>
       displayMode: freezed == displayMode
           ? _value.displayMode
           : displayMode // ignore: cast_nullable_to_non_nullable
-              as NodeDisplayMode?,
+              as InputsNodeDisplayMode?,
       widgetBuilder: freezed == widgetBuilder
           ? _value.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
@@ -397,6 +410,10 @@ class __$$InputsNodeUiSettingsImplCopyWithImpl<$Res>
           ? _value.headerBuilder
           : headerBuilder // ignore: cast_nullable_to_non_nullable
               as HeaderBuilderDef?,
+      expanderBuilder: freezed == expanderBuilder
+          ? _value.expanderBuilder
+          : expanderBuilder // ignore: cast_nullable_to_non_nullable
+              as InputNodeWidgetBuilderDef?,
     ));
   }
 }
@@ -409,8 +426,9 @@ class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
       this.helperText,
       this.displayMode,
       @JsonKey(includeToJson: false, includeFromJson: false) this.widgetBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.headerBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      this.headerBuilder})
+      this.expanderBuilder})
       : super._();
 
   factory _$InputsNodeUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
@@ -421,17 +439,20 @@ class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
   @override
   final String? helperText;
   @override
-  final NodeDisplayMode? displayMode;
+  final InputsNodeDisplayMode? displayMode;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final InputNodeWidgetBuilderDef? widgetBuilder;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final HeaderBuilderDef? headerBuilder;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final InputNodeWidgetBuilderDef? expanderBuilder;
 
   @override
   String toString() {
-    return 'InputsNodeUiSettings(labelText: $labelText, helperText: $helperText, displayMode: $displayMode, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder)';
+    return 'InputsNodeUiSettings(labelText: $labelText, helperText: $helperText, displayMode: $displayMode, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, expanderBuilder: $expanderBuilder)';
   }
 
   @override
@@ -448,13 +469,15 @@ class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
             (identical(other.widgetBuilder, widgetBuilder) ||
                 other.widgetBuilder == widgetBuilder) &&
             (identical(other.headerBuilder, headerBuilder) ||
-                other.headerBuilder == headerBuilder));
+                other.headerBuilder == headerBuilder) &&
+            (identical(other.expanderBuilder, expanderBuilder) ||
+                other.expanderBuilder == expanderBuilder));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, labelText, helperText,
-      displayMode, widgetBuilder, headerBuilder);
+      displayMode, widgetBuilder, headerBuilder, expanderBuilder);
 
   @JsonKey(ignore: true)
   @override
@@ -474,13 +497,16 @@ class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
 
 abstract class _InputsNodeUiSettings extends InputsNodeUiSettings {
   const factory _InputsNodeUiSettings(
-      {final String? labelText,
-      final String? helperText,
-      final NodeDisplayMode? displayMode,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      final InputNodeWidgetBuilderDef? widgetBuilder,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      final HeaderBuilderDef? headerBuilder}) = _$InputsNodeUiSettingsImpl;
+          {final String? labelText,
+          final String? helperText,
+          final InputsNodeDisplayMode? displayMode,
+          @JsonKey(includeToJson: false, includeFromJson: false)
+          final InputNodeWidgetBuilderDef? widgetBuilder,
+          @JsonKey(includeToJson: false, includeFromJson: false)
+          final HeaderBuilderDef? headerBuilder,
+          @JsonKey(includeToJson: false, includeFromJson: false)
+          final InputNodeWidgetBuilderDef? expanderBuilder}) =
+      _$InputsNodeUiSettingsImpl;
   const _InputsNodeUiSettings._() : super._();
 
   factory _InputsNodeUiSettings.fromJson(Map<String, dynamic> json) =
@@ -491,13 +517,16 @@ abstract class _InputsNodeUiSettings extends InputsNodeUiSettings {
   @override
   String? get helperText;
   @override
-  NodeDisplayMode? get displayMode;
+  InputsNodeDisplayMode? get displayMode;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   InputNodeWidgetBuilderDef? get widgetBuilder;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   HeaderBuilderDef? get headerBuilder;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  InputNodeWidgetBuilderDef? get expanderBuilder;
   @override
   @JsonKey(ignore: true)
   _$$InputsNodeUiSettingsImplCopyWith<_$InputsNodeUiSettingsImpl>
