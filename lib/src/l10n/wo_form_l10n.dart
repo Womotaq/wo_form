@@ -7,9 +7,11 @@ class WoFormL10n {
     required this.submit,
     required this.next,
     required this.translateError,
+    required this.errors,
   });
 
   final String submit;
   final String next;
   final TranslateInputError translateError;
+  final String? Function(int) errors;
 }

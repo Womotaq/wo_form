@@ -36,7 +36,12 @@ class WoFormExamplesApp extends StatelessWidget {
             MaxBoundInputError() => 'Au dessus de la limite maximale.',
             MinBoundInputError() => 'En dessous du minimum requis.',
             CustomInputError(message: final message) => message,
-            null => error.toString(),
+            null => null,
+          },
+          errors: (count) {
+            if (count == 0) return null;
+            if (count == 1) return '1 erreur';
+            return '$count erreurs';
           },
         ),
         child: Builder(

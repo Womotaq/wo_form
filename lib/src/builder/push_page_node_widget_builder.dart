@@ -34,21 +34,22 @@ class PushPageNodeWidgetBuilder extends StatelessWidget {
     final woFormL10n = context.read<WoFormL10n?>();
 
     return BlocSelector<WoFormStatusCubit, WoFormStatus, bool>(
-      selector: (status) => status is InvalidValuesStatus,
+      selector: (status) {
+        return status is InvalidValuesStatus;
+      },
       builder: (context, showError) {
         return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, String?>(
-          // TODO : solve : error doesn't work
-          selector: (values) => showError
-              ? woFormL10n?.translateError(
-                  node.getErrors(values, parentPath: inputPath).firstOrNull,
-                )
-              : null,
+          selector: (values) {
+            return woFormL10n?.errors(
+              node.input.getErrors(values, parentPath: inputPath).length,
+            );
+          },
           builder: (context, errorText) {
             final fieldData = WoFieldData(
               inputPath: inputPath,
               input: node,
               value: null,
-              errorText: errorText,
+              errorText: showError ? errorText : null,
               uiSettings: mergedSettings,
               onValueChanged: (_) => context.pushPage(
                 RepositoryProvider.value(
@@ -67,7 +68,9 @@ class PushPageNodeWidgetBuilder extends StatelessWidget {
                     ],
                     child: Scaffold(
                       appBar: AppBar(),
-                      body: node.input.toWidget(parentPath: inputPath),
+                      body: SingleChildScrollView(
+                        child: node.input.toWidget(parentPath: inputPath),
+                      ),
                     ),
                   ),
                 ),

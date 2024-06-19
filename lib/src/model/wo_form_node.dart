@@ -297,7 +297,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
   }) {
     switch (this) {
       case InputsNode():
-        return true;
+        return true; // TODO : one of the inputs must be exportable
       case PushPageNode(input: final input):
         return input.isExportable(
           values: values,
