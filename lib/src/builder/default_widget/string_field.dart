@@ -34,6 +34,7 @@ class _StringFieldState extends State<StringField> {
             (widget.data.uiSettings.submitFormOnFieldSubmitted ?? true)
                 ? (_) => context.read<WoFormValuesCubit>().submit()
                 : null,
+        style: widget.data.uiSettings.style,
         keyboardType: widget.data.uiSettings.keyboardType,
         obscureText: obscureText,
         autocorrect: widget.data.uiSettings.autocorrect ?? true,
@@ -49,6 +50,7 @@ class _StringFieldState extends State<StringField> {
           labelText: widget.data.uiSettings.labelText,
           helperText: widget.data.uiSettings.helperText,
           hintText: widget.data.uiSettings.hintText,
+          hintStyle: widget.data.uiSettings.style,
           errorText: widget.data.errorText,
           suffixIcon: switch (widget.data.uiSettings.action) {
             null => null,

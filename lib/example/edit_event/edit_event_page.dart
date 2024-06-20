@@ -52,8 +52,12 @@ class EditEventPage extends StatelessWidget {
           id: 'title',
           initialValue: event.title,
           isRequired: true,
-          uiSettings: const StringInputUiSettings(
+          uiSettings: StringInputUiSettings(
             labelText: 'Titre',
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(fontWeight: FontWeight.bold),
           ),
         ),
         StringInput(

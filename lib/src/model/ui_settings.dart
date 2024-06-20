@@ -232,6 +232,7 @@ class StringInputUiSettings with _$StringInputUiSettings {
     /// Defaults to 1. If you want to set it to null, enter 0.
     int? maxLines,
     String? invalidRegexMessage,
+    @JsonKey(includeToJson: false, includeFromJson: false) TextStyle? style,
     @JsonKey(includeToJson: false, includeFromJson: false)
     StringFieldBuilderDef? widgetBuilder,
   }) = _StringInputUiSettings;

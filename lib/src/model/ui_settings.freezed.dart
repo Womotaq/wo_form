@@ -1351,6 +1351,8 @@ mixin _$StringInputUiSettings {
   int? get maxLines => throw _privateConstructorUsedError;
   String? get invalidRegexMessage => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
+  TextStyle? get style => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
   StringFieldBuilderDef? get widgetBuilder =>
       throw _privateConstructorUsedError;
 
@@ -1382,6 +1384,7 @@ abstract class $StringInputUiSettingsCopyWith<$Res> {
       TextCapitalization? textCapitalization,
       int? maxLines,
       String? invalidRegexMessage,
+      @JsonKey(includeToJson: false, includeFromJson: false) TextStyle? style,
       @JsonKey(includeToJson: false, includeFromJson: false)
       StringFieldBuilderDef? widgetBuilder});
 }
@@ -1415,6 +1418,7 @@ class _$StringInputUiSettingsCopyWithImpl<$Res,
     Object? textCapitalization = freezed,
     Object? maxLines = freezed,
     Object? invalidRegexMessage = freezed,
+    Object? style = freezed,
     Object? widgetBuilder = freezed,
   }) {
     return _then(_value.copyWith(
@@ -1478,6 +1482,10 @@ class _$StringInputUiSettingsCopyWithImpl<$Res,
           ? _value.invalidRegexMessage
           : invalidRegexMessage // ignore: cast_nullable_to_non_nullable
               as String?,
+      style: freezed == style
+          ? _value.style
+          : style // ignore: cast_nullable_to_non_nullable
+              as TextStyle?,
       widgetBuilder: freezed == widgetBuilder
           ? _value.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
@@ -1511,6 +1519,7 @@ abstract class _$$StringInputUiSettingsImplCopyWith<$Res>
       TextCapitalization? textCapitalization,
       int? maxLines,
       String? invalidRegexMessage,
+      @JsonKey(includeToJson: false, includeFromJson: false) TextStyle? style,
       @JsonKey(includeToJson: false, includeFromJson: false)
       StringFieldBuilderDef? widgetBuilder});
 }
@@ -1542,6 +1551,7 @@ class __$$StringInputUiSettingsImplCopyWithImpl<$Res>
     Object? textCapitalization = freezed,
     Object? maxLines = freezed,
     Object? invalidRegexMessage = freezed,
+    Object? style = freezed,
     Object? widgetBuilder = freezed,
   }) {
     return _then(_$StringInputUiSettingsImpl(
@@ -1605,6 +1615,10 @@ class __$$StringInputUiSettingsImplCopyWithImpl<$Res>
           ? _value.invalidRegexMessage
           : invalidRegexMessage // ignore: cast_nullable_to_non_nullable
               as String?,
+      style: freezed == style
+          ? _value.style
+          : style // ignore: cast_nullable_to_non_nullable
+              as TextStyle?,
       widgetBuilder: freezed == widgetBuilder
           ? _value.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
@@ -1632,6 +1646,7 @@ class _$StringInputUiSettingsImpl extends _StringInputUiSettings {
       this.textCapitalization,
       this.maxLines,
       this.invalidRegexMessage,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.style,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.widgetBuilder})
       : _autofillHints = autofillHints,
@@ -1684,11 +1699,14 @@ class _$StringInputUiSettingsImpl extends _StringInputUiSettings {
   final String? invalidRegexMessage;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
+  final TextStyle? style;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
   final StringFieldBuilderDef? widgetBuilder;
 
   @override
   String toString() {
-    return 'StringInputUiSettings(labelText: $labelText, hintText: $hintText, helperText: $helperText, prefixIcon: $prefixIcon, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage, widgetBuilder: $widgetBuilder)';
+    return 'StringInputUiSettings(labelText: $labelText, hintText: $hintText, helperText: $helperText, prefixIcon: $prefixIcon, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage, style: $style, widgetBuilder: $widgetBuilder)';
   }
 
   @override
@@ -1727,6 +1745,7 @@ class _$StringInputUiSettingsImpl extends _StringInputUiSettings {
                 other.maxLines == maxLines) &&
             (identical(other.invalidRegexMessage, invalidRegexMessage) ||
                 other.invalidRegexMessage == invalidRegexMessage) &&
+            (identical(other.style, style) || other.style == style) &&
             (identical(other.widgetBuilder, widgetBuilder) ||
                 other.widgetBuilder == widgetBuilder));
   }
@@ -1750,6 +1769,7 @@ class _$StringInputUiSettingsImpl extends _StringInputUiSettings {
       textCapitalization,
       maxLines,
       invalidRegexMessage,
+      style,
       widgetBuilder);
 
   @JsonKey(ignore: true)
@@ -1785,6 +1805,8 @@ abstract class _StringInputUiSettings extends StringInputUiSettings {
           final TextCapitalization? textCapitalization,
           final int? maxLines,
           final String? invalidRegexMessage,
+          @JsonKey(includeToJson: false, includeFromJson: false)
+          final TextStyle? style,
           @JsonKey(includeToJson: false, includeFromJson: false)
           final StringFieldBuilderDef? widgetBuilder}) =
       _$StringInputUiSettingsImpl;
@@ -1827,6 +1849,9 @@ abstract class _StringInputUiSettings extends StringInputUiSettings {
   int? get maxLines;
   @override
   String? get invalidRegexMessage;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  TextStyle? get style;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   StringFieldBuilderDef? get widgetBuilder;
