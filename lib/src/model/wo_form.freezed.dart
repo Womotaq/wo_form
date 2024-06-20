@@ -44,7 +44,7 @@ mixin _$WoForm {
   ThemeData Function(BuildContext)? get themeBuilder =>
       throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
-  Widget Function()? get pageBuilder => throw _privateConstructorUsedError;
+  WoFormPageBuilderDef? get pageBuilder => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -76,7 +76,7 @@ abstract class $WoFormCopyWith<$Res> {
       @JsonKey(includeToJson: false, includeFromJson: false)
       ThemeData Function(BuildContext)? themeBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      Widget Function()? pageBuilder});
+      WoFormPageBuilderDef? pageBuilder});
 
   $WoFormStatusCopyWith<$Res> get initialStatus;
   $WoFormUiSettingsCopyWith<$Res> get uiSettings;
@@ -152,7 +152,7 @@ class _$WoFormCopyWithImpl<$Res, $Val extends WoForm>
       pageBuilder: freezed == pageBuilder
           ? _value.pageBuilder
           : pageBuilder // ignore: cast_nullable_to_non_nullable
-              as Widget Function()?,
+              as WoFormPageBuilderDef?,
     ) as $Val);
   }
 
@@ -208,7 +208,7 @@ abstract class _$$WoFormImplCopyWith<$Res> implements $WoFormCopyWith<$Res> {
       @JsonKey(includeToJson: false, includeFromJson: false)
       ThemeData Function(BuildContext)? themeBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      Widget Function()? pageBuilder});
+      WoFormPageBuilderDef? pageBuilder});
 
   @override
   $WoFormStatusCopyWith<$Res> get initialStatus;
@@ -285,7 +285,7 @@ class __$$WoFormImplCopyWithImpl<$Res>
       pageBuilder: freezed == pageBuilder
           ? _value.pageBuilder
           : pageBuilder // ignore: cast_nullable_to_non_nullable
-              as Widget Function()?,
+              as WoFormPageBuilderDef?,
     ));
   }
 }
@@ -354,7 +354,7 @@ class _$WoFormImpl extends _WoForm {
   final ThemeData Function(BuildContext)? themeBuilder;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final Widget Function()? pageBuilder;
+  final WoFormPageBuilderDef? pageBuilder;
 
   @override
   String toString() {
@@ -440,7 +440,7 @@ abstract class _WoForm extends WoForm {
       @JsonKey(includeToJson: false, includeFromJson: false)
       final ThemeData Function(BuildContext)? themeBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      final Widget Function()? pageBuilder}) = _$WoFormImpl;
+      final WoFormPageBuilderDef? pageBuilder}) = _$WoFormImpl;
   const _WoForm._() : super._();
 
   factory _WoForm.fromJson(Map<String, dynamic> json) = _$WoFormImpl.fromJson;
@@ -476,7 +476,7 @@ abstract class _WoForm extends WoForm {
   ThemeData Function(BuildContext)? get themeBuilder;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  Widget Function()? get pageBuilder;
+  WoFormPageBuilderDef? get pageBuilder;
   @override
   @JsonKey(ignore: true)
   _$$WoFormImplCopyWith<_$WoFormImpl> get copyWith =>

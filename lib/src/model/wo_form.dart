@@ -12,6 +12,8 @@ typedef OnSubmitErrorDef = void Function(
   SubmitErrorStatus errorStatus,
 );
 
+typedef WoFormPageBuilderDef = Widget Function(BuildContext context);
+
 @freezed
 class WoForm with _$WoForm {
   const factory WoForm({
@@ -37,7 +39,7 @@ class WoForm with _$WoForm {
     @JsonKey(includeToJson: false, includeFromJson: false)
     ThemeData Function(BuildContext context)? themeBuilder,
     @JsonKey(includeToJson: false, includeFromJson: false)
-    Widget Function()? pageBuilder,
+    WoFormPageBuilderDef? pageBuilder,
   }) = _WoForm;
 
   const WoForm._();

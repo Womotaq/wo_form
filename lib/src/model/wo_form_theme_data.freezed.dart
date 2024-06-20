@@ -20,7 +20,8 @@ mixin _$WoFormThemeData {
       throw _privateConstructorUsedError;
   DynamicInputNodeWidgetBuilderDef? get dynamicInputsNodeWidgetBuilder =>
       throw _privateConstructorUsedError;
-  Widget Function()? get formPageBuilder => throw _privateConstructorUsedError;
+  WoFormPageBuilderDef? get formPageBuilder =>
+      throw _privateConstructorUsedError;
   HeaderBuilderDef? get headerBuilder => throw _privateConstructorUsedError;
   InputHeaderBuilderDef? get inputHeaderBuilder =>
       throw _privateConstructorUsedError;
@@ -58,7 +59,7 @@ abstract class $WoFormThemeDataCopyWith<$Res> {
   $Res call(
       {BooleanFieldBuilderDef? booleanFieldBuilder,
       DynamicInputNodeWidgetBuilderDef? dynamicInputsNodeWidgetBuilder,
-      Widget Function()? formPageBuilder,
+      WoFormPageBuilderDef? formPageBuilder,
       HeaderBuilderDef? headerBuilder,
       InputHeaderBuilderDef? inputHeaderBuilder,
       InputNodeWidgetBuilderDef? inputsNodeExpanderBuilder,
@@ -112,7 +113,7 @@ class _$WoFormThemeDataCopyWithImpl<$Res, $Val extends WoFormThemeData>
       formPageBuilder: freezed == formPageBuilder
           ? _value.formPageBuilder
           : formPageBuilder // ignore: cast_nullable_to_non_nullable
-              as Widget Function()?,
+              as WoFormPageBuilderDef?,
       headerBuilder: freezed == headerBuilder
           ? _value.headerBuilder
           : headerBuilder // ignore: cast_nullable_to_non_nullable
@@ -172,7 +173,7 @@ abstract class _$$WoFormThemeDataImplCopyWith<$Res>
   $Res call(
       {BooleanFieldBuilderDef? booleanFieldBuilder,
       DynamicInputNodeWidgetBuilderDef? dynamicInputsNodeWidgetBuilder,
-      Widget Function()? formPageBuilder,
+      WoFormPageBuilderDef? formPageBuilder,
       HeaderBuilderDef? headerBuilder,
       InputHeaderBuilderDef? inputHeaderBuilder,
       InputNodeWidgetBuilderDef? inputsNodeExpanderBuilder,
@@ -224,7 +225,7 @@ class __$$WoFormThemeDataImplCopyWithImpl<$Res>
       formPageBuilder: freezed == formPageBuilder
           ? _value.formPageBuilder
           : formPageBuilder // ignore: cast_nullable_to_non_nullable
-              as Widget Function()?,
+              as WoFormPageBuilderDef?,
       headerBuilder: freezed == headerBuilder
           ? _value.headerBuilder
           : headerBuilder // ignore: cast_nullable_to_non_nullable
@@ -298,7 +299,7 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
   @override
   final DynamicInputNodeWidgetBuilderDef? dynamicInputsNodeWidgetBuilder;
   @override
-  final Widget Function()? formPageBuilder;
+  final WoFormPageBuilderDef? formPageBuilder;
   @override
   final HeaderBuilderDef? headerBuilder;
   @override
@@ -401,7 +402,7 @@ abstract class _WoFormThemeData extends WoFormThemeData {
   const factory _WoFormThemeData(
       {final BooleanFieldBuilderDef? booleanFieldBuilder,
       final DynamicInputNodeWidgetBuilderDef? dynamicInputsNodeWidgetBuilder,
-      final Widget Function()? formPageBuilder,
+      final WoFormPageBuilderDef? formPageBuilder,
       final HeaderBuilderDef? headerBuilder,
       final InputHeaderBuilderDef? inputHeaderBuilder,
       final InputNodeWidgetBuilderDef? inputsNodeExpanderBuilder,
@@ -420,7 +421,7 @@ abstract class _WoFormThemeData extends WoFormThemeData {
   @override
   DynamicInputNodeWidgetBuilderDef? get dynamicInputsNodeWidgetBuilder;
   @override
-  Widget Function()? get formPageBuilder;
+  WoFormPageBuilderDef? get formPageBuilder;
   @override
   HeaderBuilderDef? get headerBuilder;
   @override
