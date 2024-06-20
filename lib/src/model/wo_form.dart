@@ -49,12 +49,12 @@ class WoForm with _$WoForm {
 
   Iterable<WoFormNode> get nodes => inputs.whereType();
 
-  Map<String, dynamic> defaultValues() => {
+  Map<String, dynamic> initialValues() => {
         for (final input in inputs)
           if (input is WoFormNode)
-            ...input.defaultValues(parentPath: '')
+            ...input.initialValues(parentPath: '')
           else if (input is WoFormInputMixin)
-            '/${input.id}': (input as WoFormInputMixin).defaultValue,
+            '/${input.id}': (input as WoFormInputMixin).initialValue,
       };
 
   Iterable<String> getAllInputPaths({required Map<String, dynamic> values}) => [

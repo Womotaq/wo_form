@@ -22,7 +22,7 @@ InputsNode createStringInputNode() => InputsNode(
           ),
         ),
         const StringInput(
-          id: 'defaultValue',
+          id: 'initialValue',
           uiSettings: StringInputUiSettings(
             labelText: 'Valeur par défaut',
           ),
@@ -170,7 +170,7 @@ InputsNode createStringInputNode() => InputsNode(
             ),
             const BooleanInput(
               id: 'autocorrect',
-              defaultValue: true,
+              initialValue: true,
               uiSettings: BooleanInputUiSettings(
                 labelText: 'Correction automatique',
               ),
@@ -208,7 +208,7 @@ InputsNode createStringInputNode() => InputsNode(
             ),
             SelectInput<TextCapitalization>(
               id: 'textCapitalization',
-              defaultValues: [TextCapitalization.sentences],
+              initialValues: [TextCapitalization.sentences],
               availibleValues: TextCapitalization.values,
               maxCount: 1,
               uiSettings: SelectInputUiSettings(
@@ -227,7 +227,7 @@ InputsNode createStringInputNode() => InputsNode(
             const NumInput(
               id: 'maxLines',
               isRequired: true,
-              defaultValue: 1,
+              initialValue: 1,
               uiSettings: NumInputUiSettings(
                 labelText: 'Nombre de lignes',
                 helperText: "Pour que le champ s'adapte à la hauteur du texte, "

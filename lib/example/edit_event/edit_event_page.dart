@@ -50,7 +50,7 @@ class EditEventPage extends StatelessWidget {
       inputs: [
         StringInput(
           id: 'title',
-          defaultValue: event.title,
+          initialValue: event.title,
           isRequired: true,
           uiSettings: const StringInputUiSettings(
             labelText: 'Titre',
@@ -58,7 +58,7 @@ class EditEventPage extends StatelessWidget {
         ),
         StringInput(
           id: 'address',
-          defaultValue: event.address,
+          initialValue: event.address,
           uiSettings: const StringInputUiSettings(
             labelText: 'Adresse',
             keyboardType: TextInputType.streetAddress,

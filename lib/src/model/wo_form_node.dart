@@ -127,7 +127,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
     required String inputPath,
     @JsonKey(includeToJson: false, includeFromJson: false)
     WoFormElementMixin Function(String id, Object? value)? builder,
-    Object? defaultValue,
+    Object? initialValue,
   }) = ValueBuilderNode;
 
   @Assert('listener != null', 'ValueListenerNode.listener cannot be null')
@@ -154,7 +154,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
 
   // --
 
-  Map<String, dynamic> defaultValues({required String parentPath}) {
+  Map<String, dynamic> initialValues({required String parentPath}) {
     switch (this) {
       case DynamicInputsNode():
         return {};
@@ -162,18 +162,18 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
         return {
           for (final input in inputs)
             if (input is WoFormNode)
-              ...input.defaultValues(parentPath: '$parentPath/$id')
+              ...input.initialValues(parentPath: '$parentPath/$id')
             else if (input is WoFormInputMixin)
               '$parentPath/$id/${input.id}':
-                  (input as WoFormInputMixin).defaultValue,
+                  (input as WoFormInputMixin).initialValue,
         };
       // case PushPageNode(input: final input):
       //   if (input is WoFormNode) {
-      //     return input.defaultValues(parentPath: '$parentPath/$id');
+      //     return input.initialValues(parentPath: '$parentPath/$id');
       //   } else if (input is WoFormInputMixin) {
       //     return {
       //       '$parentPath/$id/${input.id}':
-      //           (input as WoFormInputMixin).defaultValue,
+      //           (input as WoFormInputMixin).initialValue,
       //     };
       //   } else {
       //     throw UnimplementedError(
@@ -182,15 +182,15 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
       //   }
       case ValueBuilderNode(
           builder: final builder,
-          defaultValue: final defaultValue,
+          initialValue: final initialValue,
         ):
-        final input = builder!(id, defaultValue);
+        final input = builder!(id, initialValue);
         if (input is WoFormNode) {
-          return input.defaultValues(parentPath: '$parentPath/$id');
+          return input.initialValues(parentPath: '$parentPath/$id');
         } else if (input is WoFormInputMixin) {
           return {
             '$parentPath/$id/${input.id}':
-                (input as WoFormInputMixin).defaultValue,
+                (input as WoFormInputMixin).initialValue,
           };
         } else {
           throw UnimplementedError('Unknown input type : ${input.runtimeType}');

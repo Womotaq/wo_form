@@ -14,8 +14,8 @@ SelectInput<T> _$SelectInputFromJson<T>(
       id: json['id'] as String,
       maxCount: (json['maxCount'] as num?)?.toInt(),
       minCount: (json['minCount'] as num).toInt(),
-      defaultValues:
-          (json['defaultValues'] as List<dynamic>).map(fromJsonT).toList(),
+      initialValues:
+          (json['initialValues'] as List<dynamic>).map(fromJsonT).toList(),
       availibleValues:
           (json['availibleValues'] as List<dynamic>).map(fromJsonT).toList(),
       uiSettings: json['uiSettings'] == null
@@ -32,7 +32,7 @@ Map<String, dynamic> _$SelectInputToJson<T>(
       'id': instance.id,
       'maxCount': instance.maxCount,
       'minCount': instance.minCount,
-      'defaultValues': instance.defaultValues.map(toJsonT).toList(),
+      'initialValues': instance.initialValues.map(toJsonT).toList(),
       'availibleValues': instance.availibleValues.map(toJsonT).toList(),
       'uiSettings': instance.uiSettings,
     };
@@ -40,7 +40,7 @@ Map<String, dynamic> _$SelectInputToJson<T>(
 _$BooleanInputImpl _$$BooleanInputImplFromJson(Map<String, dynamic> json) =>
     _$BooleanInputImpl(
       id: json['id'] as String,
-      defaultValue: json['defaultValue'] as bool?,
+      initialValue: json['initialValue'] as bool?,
       isRequired: json['isRequired'] as bool? ?? false,
       uiSettings: json['uiSettings'] == null
           ? const BooleanInputUiSettings()
@@ -52,7 +52,7 @@ _$BooleanInputImpl _$$BooleanInputImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$BooleanInputImplToJson(_$BooleanInputImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'defaultValue': instance.defaultValue,
+      'initialValue': instance.initialValue,
       'isRequired': instance.isRequired,
       'uiSettings': BooleanInputUiSettings.staticToJson(instance.uiSettings),
       'runtimeType': instance.$type,
@@ -61,7 +61,7 @@ Map<String, dynamic> _$$BooleanInputImplToJson(_$BooleanInputImpl instance) =>
 _$NumInputImpl _$$NumInputImplFromJson(Map<String, dynamic> json) =>
     _$NumInputImpl(
       id: json['id'] as String,
-      defaultValue: json['defaultValue'] as num?,
+      initialValue: json['initialValue'] as num?,
       isRequired: json['isRequired'] as bool? ?? false,
       maxBound: (json['maxBound'] as num?)?.toInt(),
       minBound: (json['minBound'] as num?)?.toInt() ?? 0,
@@ -75,7 +75,7 @@ _$NumInputImpl _$$NumInputImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$NumInputImplToJson(_$NumInputImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'defaultValue': instance.defaultValue,
+      'initialValue': instance.initialValue,
       'isRequired': instance.isRequired,
       'maxBound': instance.maxBound,
       'minBound': instance.minBound,
@@ -88,7 +88,7 @@ _$SelectStringInputImpl _$$SelectStringInputImplFromJson(
     _$SelectStringInputImpl(
       id: json['id'] as String,
       maxCount: (json['maxCount'] as num?)?.toInt(),
-      defaultValue: (json['defaultValue'] as List<dynamic>?)
+      initialValue: (json['initialValue'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           const [],
@@ -109,7 +109,7 @@ Map<String, dynamic> _$$SelectStringInputImplToJson(
     <String, dynamic>{
       'id': instance.id,
       'maxCount': instance.maxCount,
-      'defaultValue': instance.defaultValue,
+      'initialValue': instance.initialValue,
       'availibleValues': instance.availibleValues,
       'minCount': instance.minCount,
       'uiSettings': instance.uiSettings,
@@ -119,7 +119,7 @@ Map<String, dynamic> _$$SelectStringInputImplToJson(
 _$StringInputImpl _$$StringInputImplFromJson(Map<String, dynamic> json) =>
     _$StringInputImpl(
       id: json['id'] as String,
-      defaultValue: json['defaultValue'] as String?,
+      initialValue: json['initialValue'] as String?,
       isRequired: json['isRequired'] as bool? ?? false,
       regexPattern: json['regexPattern'] as String?,
       uiSettings: json['uiSettings'] == null
@@ -132,7 +132,7 @@ _$StringInputImpl _$$StringInputImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$StringInputImplToJson(_$StringInputImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'defaultValue': instance.defaultValue,
+      'initialValue': instance.initialValue,
       'isRequired': instance.isRequired,
       'regexPattern': instance.regexPattern,
       'uiSettings': StringInputUiSettings.staticToJson(instance.uiSettings),

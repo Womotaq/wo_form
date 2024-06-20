@@ -16,7 +16,7 @@ InputsNode createNumInputNode() => const InputsNode(
           ),
         ),
         NumInput(
-          id: 'defaultValue',
+          id: 'initialValue',
           uiSettings: NumInputUiSettings(
             labelText: 'Valeur par défaut',
           ),
@@ -30,7 +30,7 @@ InputsNode createNumInputNode() => const InputsNode(
         ),
         NumInput(
           id: 'minBound',
-          defaultValue: 0,
+          initialValue: 0,
           isRequired: true,
           uiSettings: NumInputUiSettings(
             labelText: 'Valeur minimale',

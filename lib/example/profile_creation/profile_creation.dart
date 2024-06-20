@@ -79,7 +79,7 @@ class ProfileCreationPage extends StatelessWidget {
             ),
             StringInput(
               id: 'country',
-              defaultValue: 'France',
+              initialValue: 'France',
               uiSettings: StringInputUiSettings(
                 labelText: 'Pays',
                 prefixIcon: Icon(Icons.public),

@@ -38,7 +38,7 @@ class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
     this._statusCubit,
     this._lockCubit,
   )   : pageController = PageController(),
-        super(form.defaultValues());
+        super(form.initialValues());
 
   final WoForm form;
   final WoFormStatusCubit _statusCubit;

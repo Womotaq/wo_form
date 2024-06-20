@@ -121,7 +121,7 @@ class SelectStringFieldBuilder extends SelectFieldBuilder<String> {
       id: selectStringInput.id,
       maxCount: selectStringInput.maxCount,
       minCount: selectStringInput.minCount,
-      defaultValues: selectStringInput.defaultValue,
+      initialValues: selectStringInput.initialValue,
       availibleValues: selectStringInput.availibleValues,
       getCustomError: selectStringInput.getCustomError,
       uiSettings: selectStringInput.uiSettings,

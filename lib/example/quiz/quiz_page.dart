@@ -147,7 +147,7 @@ class QuizPage extends StatelessWidget {
             ),
             const NumInput(
               id: 'q3',
-              defaultValue: 0,
+              initialValue: 0,
               isRequired: true,
             ),
           ],

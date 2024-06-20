@@ -26,7 +26,7 @@ class DynamicInputsNodeWidget extends StatelessWidget {
         if (input is WoFormInput) {
           valuesCubit.onValueChanged(
             inputPath: inputPath,
-            value: input.defaultValue,
+            value: input.initialValue,
           );
         }
       }

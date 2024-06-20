@@ -17,7 +17,7 @@ sealed class WoFormInputError with _$WoFormInputError {
 }
 
 mixin WoFormInputMixin {
-  Object? get defaultValue;
+  Object? get initialValue;
 
   WoFormInputError? getError(Object? value);
 
@@ -72,7 +72,7 @@ sealed class WoFormInput
     with _$WoFormInput, WoFormElementMixin, WoFormInputMixin {
   const factory WoFormInput.boolean({
     required String id,
-    bool? defaultValue,
+    bool? initialValue,
     @Default(false) bool isRequired,
     @JsonKey(includeToJson: false, includeFromJson: false)
     WoFormInputError? Function(bool? value)? getCustomError,
@@ -87,7 +87,7 @@ sealed class WoFormInput
   )
   const factory WoFormInput.num({
     required String id,
-    num? defaultValue,
+    num? initialValue,
     @Default(false) bool isRequired,
     int? maxBound,
     @Default(0) int minBound,
@@ -103,7 +103,7 @@ sealed class WoFormInput
   const factory WoFormInput.selectString({
     required String id,
     required int? maxCount,
-    @Default([]) List<String> defaultValue,
+    @Default([]) List<String> initialValue,
     @Default([]) List<String> availibleValues,
     @Default(0) int minCount,
     @JsonKey(includeToJson: false, includeFromJson: false)
@@ -114,7 +114,7 @@ sealed class WoFormInput
 
   const factory WoFormInput.string({
     required String id,
-    String? defaultValue,
+    String? initialValue,
     @Default(false) bool isRequired,
     String? regexPattern,
     @JsonKey(includeToJson: false, includeFromJson: false)
@@ -255,7 +255,7 @@ class SelectInput<T>
     required String id,
     required int? maxCount,
     @Default(0) int minCount,
-    @Default([]) List<T> defaultValues,
+    @Default([]) List<T> initialValues,
     @Default([]) List<T> availibleValues,
     @JsonKey(includeToJson: false, includeFromJson: false)
     WoFormInputError? Function(List<T> selectedValues)? getCustomError,
@@ -280,10 +280,10 @@ class SelectInput<T>
     return _$SelectInputToJson(this, toJsonT!);
   }
 
-  // defaultValue can't be set from the constructor, because it has
+  // initialValue can't be set from the constructor, because it has
   // a type parameter (obscure restrictions)
   @override
-  List<T> get defaultValue => defaultValues;
+  List<T> get initialValue => initialValues;
 
   // --
 

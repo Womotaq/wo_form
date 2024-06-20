@@ -85,7 +85,7 @@ _$ValueBuilderNodeImpl _$$ValueBuilderNodeImplFromJson(
     _$ValueBuilderNodeImpl(
       id: json['id'] as String,
       inputPath: json['inputPath'] as String,
-      defaultValue: json['defaultValue'],
+      initialValue: json['initialValue'],
       $type: json['runtimeType'] as String?,
     );
 
@@ -94,7 +94,7 @@ Map<String, dynamic> _$$ValueBuilderNodeImplToJson(
     <String, dynamic>{
       'id': instance.id,
       'inputPath': instance.inputPath,
-      'defaultValue': instance.defaultValue,
+      'initialValue': instance.initialValue,
       'runtimeType': instance.$type,
     };
 
