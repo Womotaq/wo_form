@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/src/_export.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -46,7 +45,7 @@ class WoFormStandardPage extends StatelessWidget {
           if (uiSettings.submitMode.buttonPosition ==
               SubmitButtonPosition.appBar) ...[
             const SubmitButtonBuilder(),
-            WoGap.small,
+            const SizedBox(width: 8),
           ],
         ],
       ),
@@ -154,7 +153,8 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
                   const SizedBox(height: 16),
                   widget.form.inputs[index].toWidget(parentPath: ''),
                   const SizedBox(height: 32),
-                  WoPadding.horizontalSmall(
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -162,7 +162,7 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
                       ],
                     ),
                   ),
-                  WoGap.medium,
+                  const SizedBox(height: 16),
                 ],
               ),
             ),

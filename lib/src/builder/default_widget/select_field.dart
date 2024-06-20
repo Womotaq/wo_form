@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:package_atomic_design/package_atomic_design.dart';
+import 'package:popover/popover.dart';
 import 'package:wo_form/wo_form.dart';
 
 class SelectField<T> extends StatelessWidget {
@@ -96,9 +96,10 @@ class SelectField<T> extends StatelessWidget {
                   helpValueBuilder: data.uiSettings.helpValueBuilder,
                   hintText: data.uiSettings.hintText,
                   searcher: data.uiSettings.searcher,
-                  builder: (onPressed) => IconButton(
+                  builder: (onPressed) => IconButton.filled(
                     onPressed: onPressed,
                     icon: const Icon(Icons.add),
+                    color: Theme.of(context).colorScheme.onPrimary,
                   ),
                 ),
                 shrinkWrap: false,
@@ -113,7 +114,7 @@ class SelectField<T> extends StatelessWidget {
           if (selectedValues.isNotEmpty)
             ListTile(
               title: Wrap(
-                spacing: WoSize.small,
+                spacing: 8,
                 children: [
                   ...selectedValues.map(
                     (v) => _MultipleSelectChip(
@@ -164,15 +165,19 @@ class _MultipleSelectChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InputChip(
+      // This key prevents the onDeleted animation to be assignated
+      // to the next InputChip.
+      key: UniqueKey(),
       label: label,
-      backgroundColor: Theme.of(context).colorScheme.cardColor,
       onDeleted: onDeleted,
       deleteButtonTooltipMessage: '',
       onPressed: helper == null
           ? null
-          : () => showInfoPopover(
+          : () => showPopover(
                 context: context,
-                builder: (popoverContext, pop) => WoPadding.allMedium(
+                backgroundColor: Theme.of(context).colorScheme.surfaceBright,
+                bodyBuilder: (popoverContext) => Padding(
+                  padding: const EdgeInsets.all(16),
                   child: helper,
                 ),
               ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/example/edit_event/event.dart';
 import 'package:wo_form/example/edit_event/event_page.dart';
 import 'package:wo_form/wo_form.dart';
@@ -18,17 +17,28 @@ class EditEventPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WoForm(
-      canQuit: (context) async =>
-          context.read<WoFormStatusCubit>().state is InitialStatus ||
-                  context.read<WoFormStatusCubit>().state is SubmitSuccessStatus
-              ? true
-              : await showActionDialog(
-                  pageContext: context,
-                  title: 'Abandonner les modifications ?',
-                  actionText: 'Abandonner les modifications',
-                  onAction: () => true,
-                  cancelText: "Continuer d'éditer",
-                ),
+      canQuit: (context) async => context.read<WoFormStatusCubit>().state
+                  is InitialStatus ||
+              context.read<WoFormStatusCubit>().state is SubmitSuccessStatus
+          ? true
+          : showDialog<bool>(
+              context: context,
+              builder: (BuildContext dialogContext) {
+                return AlertDialog(
+                  title: const Text('Abandonner les modifications en cours ?'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(dialogContext).pop(),
+                      child: const Text("Continuer d'éditer"),
+                    ),
+                    FilledButton.tonal(
+                      onPressed: () => Navigator.of(dialogContext).pop(true),
+                      child: const Text('Abandonner les modifications'),
+                    ),
+                  ],
+                );
+              },
+            ),
       uiSettings: const WoFormUiSettings(
         titleText: "Édition d'un événement",
         submitMode: StandardSubmitMode(

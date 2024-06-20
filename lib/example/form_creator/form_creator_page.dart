@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:package_atomic_design/package_atomic_design.dart';
+import 'package:wo_form/example/app.dart';
 import 'package:wo_form/example/form_creator/num_input_node.dart';
 import 'package:wo_form/example/form_creator/string_input_node.dart';
 import 'package:wo_form/example/utils/readable_json.dart';
@@ -16,17 +16,28 @@ class FormCreatorPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final woFormCreator = WoForm(
       initialStatus: const InvalidValuesStatus(),
-      canQuit: (context) async =>
-          context.read<WoFormStatusCubit>().state is InitialStatus ||
-                  context.read<WoFormStatusCubit>().state is SubmitSuccessStatus
-              ? true
-              : await showActionDialog(
-                  pageContext: context,
-                  title: 'Supprimer le formulaire ?',
-                  actionText: 'Supprimer le formulaire',
-                  onAction: () => true,
-                  cancelText: "Continuer d'éditer",
-                ),
+      canQuit: (context) async => context.read<WoFormStatusCubit>().state
+                  is InitialStatus ||
+              context.read<WoFormStatusCubit>().state is SubmitSuccessStatus
+          ? true
+          : showDialog<bool>(
+              context: context,
+              builder: (BuildContext dialogContext) {
+                return AlertDialog(
+                  title: const Text('Supprimer le formulaire ?'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(dialogContext).pop(),
+                      child: const Text("Continuer d'éditer"),
+                    ),
+                    FilledButton.tonal(
+                      onPressed: () => Navigator.of(dialogContext).pop(true),
+                      child: const Text('Supprimer le formulaire'),
+                    ),
+                  ],
+                );
+              },
+            ),
       inputs: [
         const InputsNode(
           id: 'uiSettings',

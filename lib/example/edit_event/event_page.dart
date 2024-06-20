@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:package_atomic_design/package_atomic_design.dart';
+import 'package:wo_form/example/app.dart';
 import 'package:wo_form/example/edit_event/edit_event_page.dart';
 import 'package:wo_form/example/edit_event/event.dart';
 
@@ -40,14 +40,15 @@ class EventsPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(),
         body: SingleChildScrollView(
-          child: WoPadding.horizontalSmall(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             child: BlocBuilder<EventsCubit, List<EventModel>>(
               builder: (context, events) {
                 return Column(
                   children: [
-                    WoGap.small,
+                    const SizedBox(width: 8),
                     ...events.map(EventCard.new),
-                    WoGap.small,
+                    const SizedBox(width: 8),
                   ],
                 );
               },
@@ -80,30 +81,50 @@ class EventCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final dateFormat = DateFormat.MMMMEEEEd();
 
-    return FeedCard.outlined(
-      title: event.title,
-      actions: [
-        IconButton(
-          onPressed: () => context.pushPage(
-            EditEventPage(
-              event: event,
-              eventsCubit: context.read(),
-            ),
-          ),
-          icon: const Icon(Icons.edit),
-        ),
-      ],
+    return Card.outlined(
+      margin: const EdgeInsets.all(8),
       child: Column(
         children: [
-          ListTile(
-            leading: const Icon(Icons.calendar_today),
-            title: Text(dateFormat.format(event.start)),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              const SizedBox(width: 16),
+              Text(
+                event.title,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(fontWeight: FontWeight.bold),
+              ),
+              const Spacer(),
+              IconButton(
+                onPressed: () => context.pushPage(
+                  EditEventPage(
+                    event: event,
+                    eventsCubit: context.read(),
+                  ),
+                ),
+                icon: const Icon(Icons.edit),
+              ),
+            ],
           ),
-          if ((event.address ?? '').isNotEmpty)
-            ListTile(
-              leading: const Icon(Icons.location_on),
-              title: Text(event.address!),
+          const Divider(),
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              children: [
+                ListTile(
+                  leading: const Icon(Icons.calendar_today),
+                  title: Text(dateFormat.format(event.start)),
+                ),
+                if ((event.address ?? '').isNotEmpty)
+                  ListTile(
+                    leading: const Icon(Icons.location_on),
+                    title: Text(event.address!),
+                  ),
+              ],
             ),
+          ),
         ],
       ),
     );

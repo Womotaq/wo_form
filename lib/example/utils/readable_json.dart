@@ -2,18 +2,25 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/wo_form.dart';
 
 void showJsonDialog(BuildContext context) {
   final form = context.read<WoForm>();
   final values = context.read<WoFormValuesCubit>().state;
-  showActionDialog(
-    pageContext: context,
-    title: 'JSON',
-    actionText: 'Ok',
-    onAction: context.read<WoFormStatusCubit>().setInProgress,
-    content: Text(readableJson(form.export(values))),
+  showDialog<void>(
+    context: context,
+    builder: (BuildContext dialogContext) {
+      return AlertDialog(
+        title: const Text('JSON'),
+        content: Text(readableJson(form.export(values))),
+        actions: [
+          FilledButton.tonalIcon(
+            onPressed: () => Navigator.of(dialogContext).pop(),
+            label: const Text('Ok'),
+          ),
+        ],
+      );
+    },
   );
 }
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/example/utils/readable_json.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -264,7 +263,9 @@ class QuizQuestion extends StatelessWidget {
         alignment: Alignment.centerLeft,
         child: Text(
           question,
-          style: context.textTheme.titleLarge
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge
               ?.copyWith(fontWeight: FontWeight.bold),
         ),
       ),
@@ -294,7 +295,9 @@ class QuizAnswer<T> extends StatelessWidget {
           const SizedBox(height: 24),
           Text(
             choice == answer ? 'Bonne réponse !' : 'Dommage...',
-            style: context.textTheme.titleLarge
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge
                 ?.copyWith(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 32),

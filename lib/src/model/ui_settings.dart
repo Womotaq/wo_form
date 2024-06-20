@@ -78,7 +78,7 @@ class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
 
 enum InputsNodeDisplayMode { expanded, tapToExpand }
 
-// TODO : when submitting a field from an opened page, only submit this page,
+// LATER : when submitting a field from an opened page, only submit this page,
 //  and let custom functions be launched at submitting, error, and success.
 
 typedef InputNodeWidgetBuilderDef = Widget Function(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:package_atomic_design/package_atomic_design.dart';
 import 'package:wo_form/example/utils/readable_json.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -83,12 +82,20 @@ class ReportPage extends StatelessWidget {
       onSubmitSuccess: (context) {
         final form = context.read<WoForm>();
         final values = context.read<WoFormValuesCubit>().state;
-        showActionDialog(
-          pageContext: context,
-          title: "Ce json vient d'être envoyé.",
-          actionText: 'Ok',
-          onAction: context.read<WoFormStatusCubit>().setInProgress,
-          content: Text(readableJson(form.export(values))),
+        showDialog<void>(
+          context: context,
+          builder: (BuildContext dialogContext) {
+            return AlertDialog(
+              title: const Text("Ce json vient d'être envoyé."),
+              content: Text(readableJson(form.export(values))),
+              actions: [
+                FilledButton.tonalIcon(
+                  onPressed: () => Navigator.of(dialogContext).pop(),
+                  label: const Text('Ok'),
+                ),
+              ],
+            );
+          },
         );
       },
     ).toPage();

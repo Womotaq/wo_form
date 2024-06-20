@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:package_atomic_design/package_atomic_design.dart';
 
 class NumSelector extends StatelessWidget {
   const NumSelector({
@@ -42,7 +41,7 @@ class NumSelector extends StatelessWidget {
           return IconButton(
             padding: EdgeInsets.zero,
             icon: icon,
-            color: context.colorScheme.primary,
+            color: Theme.of(context).colorScheme.primary,
             onPressed: onChanged == null
                 ? null
                 : () {
@@ -67,7 +66,7 @@ class NumSelector extends StatelessWidget {
         isPlus: false,
       ),
       ConstrainedBox(
-        constraints: const BoxConstraints(minWidth: WoSize.xxlarge),
+        constraints: const BoxConstraints(minWidth: 48),
         child: IntrinsicWidth(
           child: TextField(
             enabled: onChanged != null,
@@ -75,7 +74,7 @@ class NumSelector extends StatelessWidget {
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               isDense: true,
-              contentPadding: EdgeInsets.all(WoSize.small),
+              contentPadding: EdgeInsets.all(8),
             ),
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
@@ -97,7 +96,7 @@ class NumSelector extends StatelessWidget {
 
     return axis == Axis.horizontal
         ? Padding(
-            padding: const EdgeInsets.symmetric(vertical: WoSize.xsmall),
+            padding: const EdgeInsets.symmetric(vertical: 4),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,

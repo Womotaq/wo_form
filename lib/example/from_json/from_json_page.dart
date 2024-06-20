@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:package_atomic_design/package_atomic_design.dart';
+import 'package:wo_form/example/app.dart';
 import 'package:wo_form/example/utils/readable_json.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -38,9 +38,10 @@ class FromJsonPage extends StatelessWidget {
         try {
           json = jsonDecode(jsonString) as Map<String, dynamic>;
         } catch (e) {
-          snackBarError(
+          showErrorDialog(
             context,
-            'Failed to decode json : $e',
+            'Failed to decode json',
+            e,
           );
           return;
         }
@@ -49,9 +50,10 @@ class FromJsonPage extends StatelessWidget {
         try {
           form = WoForm.fromJson(json);
         } catch (e) {
-          snackBarError(
+          showErrorDialog(
             context,
-            'Failed to build WoForm from json : $e',
+            'Failed to build WoForm from json',
+            e,
           );
           return;
         }
@@ -60,5 +62,27 @@ class FromJsonPage extends StatelessWidget {
             .pushPage(form.copyWith(onSubmitSuccess: showJsonDialog).toPage());
       },
     ).toPage();
+  }
+
+  void showErrorDialog(
+    BuildContext context,
+    String title,
+    Object error,
+  ) {
+    showDialog<void>(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(error.toString()),
+          actions: [
+            FilledButton.tonal(
+              onPressed: () => Navigator.of(dialogContext).pop(),
+              child: const Text('Fermer'),
+            ),
+          ],
+        );
+      },
+    );
   }
 }
