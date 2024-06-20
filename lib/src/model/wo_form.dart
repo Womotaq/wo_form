@@ -17,8 +17,7 @@ class WoForm with _$WoForm {
   const factory WoForm({
     @InputsListConverter() @Default([]) List<WoFormElementMixin> inputs,
     @JsonKey(includeToJson: false, includeFromJson: false)
-    Future<void> Function(WoForm form, Map<String, dynamic> values)?
-        onSubmitting,
+    Future<void> Function(WoForm form, WoFormValues values)? onSubmitting,
     @JsonKey(includeToJson: false, includeFromJson: false)
     OnSubmitErrorDef? onSubmitError,
     @JsonKey(includeToJson: false, includeFromJson: false)
@@ -57,12 +56,12 @@ class WoForm with _$WoForm {
             '/${input.id}': (input as WoFormInputMixin).initialValue,
       };
 
-  Iterable<String> getAllInputPaths({required Map<String, dynamic> values}) => [
+  Iterable<String> getAllInputPaths({required WoFormValues values}) => [
         for (final input in inputs)
           ...input.getAllInputPaths(values: values, parentPath: ''),
       ];
 
-  Iterable<WoFormInputError> getErrors(Map<String, dynamic> values) => [
+  Iterable<WoFormInputError> getErrors(WoFormValues values) => [
         for (final input in inputs)
           if (input is WoFormNode)
             ...input.getErrors(values, parentPath: '')
@@ -107,7 +106,7 @@ class WoForm with _$WoForm {
         );
   }
 
-  dynamic export(Map<String, dynamic> values) {
+  dynamic export(WoFormValues values) {
     final exportableInputs =
         inputs.where((i) => i.isExportable(values: values, parentPath: ''));
 

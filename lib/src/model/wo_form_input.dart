@@ -37,7 +37,7 @@ mixin WoFormInputMixin {
   // WoFormElementMixin
 
   bool isExportable({
-    required Map<String, dynamic> values,
+    required WoFormValues values,
     required String parentPath,
   }) =>
       true;
@@ -45,19 +45,19 @@ mixin WoFormInputMixin {
   String get id;
 
   Iterable<String> getAllInputPaths({
-    required Map<String, dynamic> values,
+    required WoFormValues values,
     required String parentPath,
   }) =>
       ['$parentPath/$id'];
 
   Iterable<WoFormInputError> getErrors(
-    Map<String, dynamic> values, {
+    WoFormValues values, {
     required String parentPath,
   }) =>
       [getError(values['$parentPath/$id'])].whereNotNull();
 
   String? getExportKey({
-    required Map<String, dynamic> values,
+    required WoFormValues values,
     required String parentPath,
   }) =>
       id;
@@ -211,7 +211,7 @@ sealed class WoFormInput
 
   @override
   dynamic export({
-    required Map<String, dynamic> values,
+    required WoFormValues values,
     required String parentPath,
   }) =>
       _exportValue(values['$parentPath/$id']);
@@ -345,7 +345,7 @@ class SelectInput<T>
 
   @override
   dynamic export({
-    required Map<String, dynamic> values,
+    required WoFormValues values,
     required String parentPath,
   }) =>
       _selectedValuesToJson<T>(

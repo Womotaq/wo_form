@@ -31,7 +31,9 @@ class WoFormLockCubit extends Cubit<Set<String>> {
       emit(Set<String>.from(state)..remove(inputPath));
 }
 
-class WoFormValuesCubit extends Cubit<Map<String, dynamic>> {
+typedef WoFormValues = Map<String, dynamic>;
+
+class WoFormValuesCubit extends Cubit<WoFormValues> {
   // with StateStreamable<WoFormValues>
   WoFormValuesCubit._(
     this.form,

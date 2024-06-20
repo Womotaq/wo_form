@@ -15,17 +15,17 @@ mixin WoFormElementMixin {
   Map<String, dynamic> toJson();
 
   dynamic export({
-    required Map<String, dynamic> values,
+    required WoFormValues values,
     required String parentPath,
   });
 
   Iterable<WoFormInputError> getErrors(
-    Map<String, dynamic> values, {
+    WoFormValues values, {
     required String parentPath,
   });
 
   String? getExportKey({
-    required Map<String, dynamic> values,
+    required WoFormValues values,
     required String parentPath,
   });
 
@@ -33,14 +33,14 @@ mixin WoFormElementMixin {
   ///
   /// Used by ExportType.firstExportable.
   bool isExportable({
-    required Map<String, dynamic> values,
+    required WoFormValues values,
     required String parentPath,
   });
 
   Widget toWidget<T extends WoFormValuesCubit>({required String parentPath});
 
   Iterable<String> getAllInputPaths({
-    required Map<String, dynamic> values,
+    required WoFormValues values,
     required String parentPath,
   });
 
@@ -203,7 +203,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
 
   dynamic _exportInputs({
     required List<WoFormElementMixin> inputs,
-    required Map<String, dynamic> values,
+    required WoFormValues values,
     required String parentPath,
     required ExportType exportType,
     required Map<String, dynamic>? metadata,
@@ -242,7 +242,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
 
   @override
   dynamic export({
-    required Map<String, dynamic> values,
+    required WoFormValues values,
     required String parentPath,
   }) {
     switch (this) {
@@ -282,7 +282,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
 
   @override
   String? getExportKey({
-    required Map<String, dynamic> values,
+    required WoFormValues values,
     required String parentPath,
   }) {
     switch (this) {
@@ -328,7 +328,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
 
   @override
   bool isExportable({
-    required Map<String, dynamic> values,
+    required WoFormValues values,
     required String parentPath,
   }) {
     switch (this) {
@@ -371,7 +371,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
 
   @override
   Iterable<String> getAllInputPaths({
-    required Map<String, dynamic> values,
+    required WoFormValues values,
     required String parentPath,
   }) {
     switch (this) {
@@ -421,7 +421,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
 
   @override
   Iterable<WoFormInputError> getErrors(
-    Map<String, dynamic> values, {
+    WoFormValues values, {
     required String parentPath,
   }) {
     switch (this) {

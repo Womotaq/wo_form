@@ -12,7 +12,7 @@ class SelectFieldBuilder<T> extends StatelessWidget {
   final String inputPath;
   final SelectInputUiSettings<T>? uiSettings;
 
-  SelectInput<T> getInput(WoForm form, Map<String, dynamic> values) {
+  SelectInput<T> getInput(WoForm form, WoFormValues values) {
     final input = form.getInput(path: inputPath, values: values);
     if (input is! SelectInput<T>) {
       throw ArgumentError(
@@ -108,7 +108,7 @@ class SelectStringFieldBuilder extends SelectFieldBuilder<String> {
   });
 
   @override
-  SelectInput<String> getInput(WoForm form, Map<String, dynamic> values) {
+  SelectInput<String> getInput(WoForm form, WoFormValues values) {
     final selectStringInput = form.getInput(path: inputPath, values: values);
     if (selectStringInput is! SelectStringInput) {
       throw ArgumentError(
