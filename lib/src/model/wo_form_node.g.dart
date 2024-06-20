@@ -6,6 +6,54 @@ part of 'wo_form_node.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+_$DynamicInputTemplateImpl _$$DynamicInputTemplateImplFromJson(
+        Map<String, dynamic> json) =>
+    _$DynamicInputTemplateImpl(
+      input: const WoFormElementConverter()
+          .fromJson(json['input'] as Map<String, dynamic>),
+      labelText: json['labelText'] as String?,
+      helperText: json['helperText'] as String?,
+    );
+
+Map<String, dynamic> _$$DynamicInputTemplateImplToJson(
+        _$DynamicInputTemplateImpl instance) =>
+    <String, dynamic>{
+      'input': const WoFormElementConverter().toJson(instance.input),
+      'labelText': instance.labelText,
+      'helperText': instance.helperText,
+    };
+
+_$DynamicInputsNodeImpl _$$DynamicInputsNodeImplFromJson(
+        Map<String, dynamic> json) =>
+    _$DynamicInputsNodeImpl(
+      id: json['id'] as String,
+      templates: json['templates'] == null
+          ? const []
+          : const DynamicInputTemplatesConverter()
+              .fromJson(json['templates'] as List),
+      uiSettings: json['uiSettings'] == null
+          ? const DynamicInputsNodeUiSettings()
+          : DynamicInputsNodeUiSettings.fromJson(
+              json['uiSettings'] as Map<String, dynamic>),
+      exportSettings: json['exportSettings'] == null
+          ? const ExportSettings()
+          : ExportSettings.fromJson(
+              json['exportSettings'] as Map<String, dynamic>),
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$DynamicInputsNodeImplToJson(
+        _$DynamicInputsNodeImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'templates':
+          const DynamicInputTemplatesConverter().toJson(instance.templates),
+      'uiSettings':
+          DynamicInputsNodeUiSettings.staticToJson(instance.uiSettings),
+      'exportSettings': ExportSettings.staticToJson(instance.exportSettings),
+      'runtimeType': instance.$type,
+    };
+
 _$InputsNodeImpl _$$InputsNodeImplFromJson(Map<String, dynamic> json) =>
     _$InputsNodeImpl(
       id: json['id'] as String,

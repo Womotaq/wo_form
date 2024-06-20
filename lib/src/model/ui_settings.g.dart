@@ -38,6 +38,20 @@ const _$ListTileControlAffinityEnumMap = {
   ListTileControlAffinity.platform: 'platform',
 };
 
+_$DynamicInputsNodeUiSettingsImpl _$$DynamicInputsNodeUiSettingsImplFromJson(
+        Map<String, dynamic> json) =>
+    _$DynamicInputsNodeUiSettingsImpl(
+      labelText: json['labelText'] as String?,
+      helperText: json['helperText'] as String?,
+    );
+
+Map<String, dynamic> _$$DynamicInputsNodeUiSettingsImplToJson(
+        _$DynamicInputsNodeUiSettingsImpl instance) =>
+    <String, dynamic>{
+      'labelText': instance.labelText,
+      'helperText': instance.helperText,
+    };
+
 _$InputsNodeUiSettingsImpl _$$InputsNodeUiSettingsImplFromJson(
         Map<String, dynamic> json) =>
     _$InputsNodeUiSettingsImpl(

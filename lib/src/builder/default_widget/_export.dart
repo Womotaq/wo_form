@@ -1,5 +1,6 @@
 export 'boolean_field.dart';
 export 'deletable_field.dart';
+export 'dynamic_inputs_node_widget.dart';
 export 'form_header.dart';
 export 'input_header.dart';
 export 'inputs_node_expander.dart';

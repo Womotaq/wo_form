@@ -43,6 +43,38 @@ class BooleanInputUiSettings with _$BooleanInputUiSettings {
         );
 }
 
+typedef DynamicInputNodeWidgetBuilderDef = Widget Function(
+  WoFieldData<DynamicInputsNode, void, DynamicInputsNodeUiSettings> data,
+);
+
+@freezed
+class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
+  const factory DynamicInputsNodeUiSettings({
+    String? labelText,
+    String? helperText,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    DynamicInputNodeWidgetBuilderDef? widgetBuilder,
+  }) = _DynamicInputsNodeUiSettings;
+
+  const DynamicInputsNodeUiSettings._();
+
+  factory DynamicInputsNodeUiSettings.fromJson(Map<String, dynamic> json) =>
+      _$DynamicInputsNodeUiSettingsFromJson(json);
+
+  static Map<String, dynamic> staticToJson(
+          DynamicInputsNodeUiSettings object) =>
+      object.toJson();
+
+  DynamicInputsNodeUiSettings merge(DynamicInputsNodeUiSettings? other) =>
+      other == null
+          ? this
+          : DynamicInputsNodeUiSettings(
+              labelText: labelText ?? other.labelText,
+              helperText: helperText ?? other.helperText,
+              widgetBuilder: widgetBuilder ?? other.widgetBuilder,
+            );
+}
+
 enum InputsNodeDisplayMode { expanded, tapToExpand }
 
 // TODO : when submitting a field from an opened page, only submit this page,

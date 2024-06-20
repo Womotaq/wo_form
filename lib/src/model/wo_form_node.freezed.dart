@@ -14,8 +14,200 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+DynamicInputTemplate _$DynamicInputTemplateFromJson(Map<String, dynamic> json) {
+  return _DynamicInputTemplate.fromJson(json);
+}
+
+/// @nodoc
+mixin _$DynamicInputTemplate {
+  @WoFormElementConverter()
+  WoFormElementMixin get input => throw _privateConstructorUsedError;
+  String? get labelText => throw _privateConstructorUsedError;
+  String? get helperText => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $DynamicInputTemplateCopyWith<DynamicInputTemplate> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $DynamicInputTemplateCopyWith<$Res> {
+  factory $DynamicInputTemplateCopyWith(DynamicInputTemplate value,
+          $Res Function(DynamicInputTemplate) then) =
+      _$DynamicInputTemplateCopyWithImpl<$Res, DynamicInputTemplate>;
+  @useResult
+  $Res call(
+      {@WoFormElementConverter() WoFormElementMixin input,
+      String? labelText,
+      String? helperText});
+}
+
+/// @nodoc
+class _$DynamicInputTemplateCopyWithImpl<$Res,
+        $Val extends DynamicInputTemplate>
+    implements $DynamicInputTemplateCopyWith<$Res> {
+  _$DynamicInputTemplateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? input = null,
+    Object? labelText = freezed,
+    Object? helperText = freezed,
+  }) {
+    return _then(_value.copyWith(
+      input: null == input
+          ? _value.input
+          : input // ignore: cast_nullable_to_non_nullable
+              as WoFormElementMixin,
+      labelText: freezed == labelText
+          ? _value.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _value.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$DynamicInputTemplateImplCopyWith<$Res>
+    implements $DynamicInputTemplateCopyWith<$Res> {
+  factory _$$DynamicInputTemplateImplCopyWith(_$DynamicInputTemplateImpl value,
+          $Res Function(_$DynamicInputTemplateImpl) then) =
+      __$$DynamicInputTemplateImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@WoFormElementConverter() WoFormElementMixin input,
+      String? labelText,
+      String? helperText});
+}
+
+/// @nodoc
+class __$$DynamicInputTemplateImplCopyWithImpl<$Res>
+    extends _$DynamicInputTemplateCopyWithImpl<$Res, _$DynamicInputTemplateImpl>
+    implements _$$DynamicInputTemplateImplCopyWith<$Res> {
+  __$$DynamicInputTemplateImplCopyWithImpl(_$DynamicInputTemplateImpl _value,
+      $Res Function(_$DynamicInputTemplateImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? input = null,
+    Object? labelText = freezed,
+    Object? helperText = freezed,
+  }) {
+    return _then(_$DynamicInputTemplateImpl(
+      input: null == input
+          ? _value.input
+          : input // ignore: cast_nullable_to_non_nullable
+              as WoFormElementMixin,
+      labelText: freezed == labelText
+          ? _value.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _value.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$DynamicInputTemplateImpl extends _DynamicInputTemplate {
+  const _$DynamicInputTemplateImpl(
+      {@WoFormElementConverter() required this.input,
+      this.labelText,
+      this.helperText})
+      : super._();
+
+  factory _$DynamicInputTemplateImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DynamicInputTemplateImplFromJson(json);
+
+  @override
+  @WoFormElementConverter()
+  final WoFormElementMixin input;
+  @override
+  final String? labelText;
+  @override
+  final String? helperText;
+
+  @override
+  String toString() {
+    return 'DynamicInputTemplate(input: $input, labelText: $labelText, helperText: $helperText)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DynamicInputTemplateImpl &&
+            (identical(other.input, input) || other.input == input) &&
+            (identical(other.labelText, labelText) ||
+                other.labelText == labelText) &&
+            (identical(other.helperText, helperText) ||
+                other.helperText == helperText));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, input, labelText, helperText);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DynamicInputTemplateImplCopyWith<_$DynamicInputTemplateImpl>
+      get copyWith =>
+          __$$DynamicInputTemplateImplCopyWithImpl<_$DynamicInputTemplateImpl>(
+              this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$DynamicInputTemplateImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _DynamicInputTemplate extends DynamicInputTemplate {
+  const factory _DynamicInputTemplate(
+      {@WoFormElementConverter() required final WoFormElementMixin input,
+      final String? labelText,
+      final String? helperText}) = _$DynamicInputTemplateImpl;
+  const _DynamicInputTemplate._() : super._();
+
+  factory _DynamicInputTemplate.fromJson(Map<String, dynamic> json) =
+      _$DynamicInputTemplateImpl.fromJson;
+
+  @override
+  @WoFormElementConverter()
+  WoFormElementMixin get input;
+  @override
+  String? get labelText;
+  @override
+  String? get helperText;
+  @override
+  @JsonKey(ignore: true)
+  _$$DynamicInputTemplateImplCopyWith<_$DynamicInputTemplateImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
 WoFormNode _$WoFormNodeFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
+    case 'dynamicInputs':
+      return DynamicInputsNode.fromJson(json);
     case 'inputs':
       return InputsNode.fromJson(json);
     case 'valueBuilder':
@@ -36,6 +228,15 @@ mixin _$WoFormNode {
   String get id => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(
+            String id,
+            @DynamicInputTemplatesConverter()
+            List<DynamicInputTemplate> templates,
+            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
+            DynamicInputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)
+        dynamicInputs,
     required TResult Function(
             String id,
             @InputsListConverter() List<WoFormElementMixin> inputs,
@@ -70,6 +271,15 @@ mixin _$WoFormNode {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
             String id,
+            @DynamicInputTemplatesConverter()
+            List<DynamicInputTemplate> templates,
+            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
+            DynamicInputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)?
+        dynamicInputs,
+    TResult? Function(
+            String id,
             @InputsListConverter() List<WoFormElementMixin> inputs,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
             InputsNodeUiSettings uiSettings,
@@ -100,6 +310,15 @@ mixin _$WoFormNode {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String id,
+            @DynamicInputTemplatesConverter()
+            List<DynamicInputTemplate> templates,
+            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
+            DynamicInputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)?
+        dynamicInputs,
     TResult Function(
             String id,
             @InputsListConverter() List<WoFormElementMixin> inputs,
@@ -133,6 +352,7 @@ mixin _$WoFormNode {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(DynamicInputsNode value) dynamicInputs,
     required TResult Function(InputsNode value) inputs,
     required TResult Function(ValueBuilderNode value) valueBuilder,
     required TResult Function(ValueListenerNode value) valueListener,
@@ -141,6 +361,7 @@ mixin _$WoFormNode {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(DynamicInputsNode value)? dynamicInputs,
     TResult? Function(InputsNode value)? inputs,
     TResult? Function(ValueBuilderNode value)? valueBuilder,
     TResult? Function(ValueListenerNode value)? valueListener,
@@ -149,6 +370,7 @@ mixin _$WoFormNode {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(DynamicInputsNode value)? dynamicInputs,
     TResult Function(InputsNode value)? inputs,
     TResult Function(ValueBuilderNode value)? valueBuilder,
     TResult Function(ValueListenerNode value)? valueListener,
@@ -193,6 +415,368 @@ class _$WoFormNodeCopyWithImpl<$Res, $Val extends WoFormNode>
               as String,
     ) as $Val);
   }
+}
+
+/// @nodoc
+abstract class _$$DynamicInputsNodeImplCopyWith<$Res>
+    implements $WoFormNodeCopyWith<$Res> {
+  factory _$$DynamicInputsNodeImplCopyWith(_$DynamicInputsNodeImpl value,
+          $Res Function(_$DynamicInputsNodeImpl) then) =
+      __$$DynamicInputsNodeImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      @DynamicInputTemplatesConverter() List<DynamicInputTemplate> templates,
+      @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
+      DynamicInputsNodeUiSettings uiSettings,
+      @JsonKey(toJson: ExportSettings.staticToJson)
+      ExportSettings exportSettings});
+
+  $DynamicInputsNodeUiSettingsCopyWith<$Res> get uiSettings;
+  $ExportSettingsCopyWith<$Res> get exportSettings;
+}
+
+/// @nodoc
+class __$$DynamicInputsNodeImplCopyWithImpl<$Res>
+    extends _$WoFormNodeCopyWithImpl<$Res, _$DynamicInputsNodeImpl>
+    implements _$$DynamicInputsNodeImplCopyWith<$Res> {
+  __$$DynamicInputsNodeImplCopyWithImpl(_$DynamicInputsNodeImpl _value,
+      $Res Function(_$DynamicInputsNodeImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? templates = null,
+    Object? uiSettings = null,
+    Object? exportSettings = null,
+  }) {
+    return _then(_$DynamicInputsNodeImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      templates: null == templates
+          ? _value._templates
+          : templates // ignore: cast_nullable_to_non_nullable
+              as List<DynamicInputTemplate>,
+      uiSettings: null == uiSettings
+          ? _value.uiSettings
+          : uiSettings // ignore: cast_nullable_to_non_nullable
+              as DynamicInputsNodeUiSettings,
+      exportSettings: null == exportSettings
+          ? _value.exportSettings
+          : exportSettings // ignore: cast_nullable_to_non_nullable
+              as ExportSettings,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DynamicInputsNodeUiSettingsCopyWith<$Res> get uiSettings {
+    return $DynamicInputsNodeUiSettingsCopyWith<$Res>(_value.uiSettings,
+        (value) {
+      return _then(_value.copyWith(uiSettings: value));
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ExportSettingsCopyWith<$Res> get exportSettings {
+    return $ExportSettingsCopyWith<$Res>(_value.exportSettings, (value) {
+      return _then(_value.copyWith(exportSettings: value));
+    });
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$DynamicInputsNodeImpl extends DynamicInputsNode {
+  const _$DynamicInputsNodeImpl(
+      {required this.id,
+      @DynamicInputTemplatesConverter()
+      final List<DynamicInputTemplate> templates = const [],
+      @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
+      this.uiSettings = const DynamicInputsNodeUiSettings(),
+      @JsonKey(toJson: ExportSettings.staticToJson)
+      this.exportSettings = const ExportSettings(),
+      final String? $type})
+      : _templates = templates,
+        $type = $type ?? 'dynamicInputs',
+        super._();
+
+  factory _$DynamicInputsNodeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DynamicInputsNodeImplFromJson(json);
+
+  @override
+  final String id;
+  final List<DynamicInputTemplate> _templates;
+  @override
+  @JsonKey()
+  @DynamicInputTemplatesConverter()
+  List<DynamicInputTemplate> get templates {
+    if (_templates is EqualUnmodifiableListView) return _templates;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_templates);
+  }
+
+  @override
+  @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
+  final DynamicInputsNodeUiSettings uiSettings;
+  @override
+  @JsonKey(toJson: ExportSettings.staticToJson)
+  final ExportSettings exportSettings;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'WoFormNode.dynamicInputs(id: $id, templates: $templates, uiSettings: $uiSettings, exportSettings: $exportSettings)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DynamicInputsNodeImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            const DeepCollectionEquality()
+                .equals(other._templates, _templates) &&
+            (identical(other.uiSettings, uiSettings) ||
+                other.uiSettings == uiSettings) &&
+            (identical(other.exportSettings, exportSettings) ||
+                other.exportSettings == exportSettings));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      const DeepCollectionEquality().hash(_templates),
+      uiSettings,
+      exportSettings);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DynamicInputsNodeImplCopyWith<_$DynamicInputsNodeImpl> get copyWith =>
+      __$$DynamicInputsNodeImplCopyWithImpl<_$DynamicInputsNodeImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String id,
+            @DynamicInputTemplatesConverter()
+            List<DynamicInputTemplate> templates,
+            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
+            DynamicInputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)
+        dynamicInputs,
+    required TResult Function(
+            String id,
+            @InputsListConverter() List<WoFormElementMixin> inputs,
+            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
+            InputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)
+        inputs,
+    required TResult Function(
+            String id,
+            String inputPath,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormElementMixin Function(String, Object?)? builder,
+            Object? defaultValue)
+        valueBuilder,
+    required TResult Function(
+            String id,
+            String inputPath,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            bool Function(Object?, Object?)? listenWhen,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(BuildContext, String, Object?)? listener)
+        valueListener,
+    required TResult Function(
+            String id,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            Widget Function(BuildContext)? builder)
+        widget,
+  }) {
+    return dynamicInputs(id, templates, uiSettings, exportSettings);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String id,
+            @DynamicInputTemplatesConverter()
+            List<DynamicInputTemplate> templates,
+            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
+            DynamicInputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)?
+        dynamicInputs,
+    TResult? Function(
+            String id,
+            @InputsListConverter() List<WoFormElementMixin> inputs,
+            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
+            InputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)?
+        inputs,
+    TResult? Function(
+            String id,
+            String inputPath,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormElementMixin Function(String, Object?)? builder,
+            Object? defaultValue)?
+        valueBuilder,
+    TResult? Function(
+            String id,
+            String inputPath,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            bool Function(Object?, Object?)? listenWhen,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(BuildContext, String, Object?)? listener)?
+        valueListener,
+    TResult? Function(
+            String id,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            Widget Function(BuildContext)? builder)?
+        widget,
+  }) {
+    return dynamicInputs?.call(id, templates, uiSettings, exportSettings);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String id,
+            @DynamicInputTemplatesConverter()
+            List<DynamicInputTemplate> templates,
+            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
+            DynamicInputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)?
+        dynamicInputs,
+    TResult Function(
+            String id,
+            @InputsListConverter() List<WoFormElementMixin> inputs,
+            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
+            InputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)?
+        inputs,
+    TResult Function(
+            String id,
+            String inputPath,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormElementMixin Function(String, Object?)? builder,
+            Object? defaultValue)?
+        valueBuilder,
+    TResult Function(
+            String id,
+            String inputPath,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            bool Function(Object?, Object?)? listenWhen,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(BuildContext, String, Object?)? listener)?
+        valueListener,
+    TResult Function(
+            String id,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            Widget Function(BuildContext)? builder)?
+        widget,
+    required TResult orElse(),
+  }) {
+    if (dynamicInputs != null) {
+      return dynamicInputs(id, templates, uiSettings, exportSettings);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(DynamicInputsNode value) dynamicInputs,
+    required TResult Function(InputsNode value) inputs,
+    required TResult Function(ValueBuilderNode value) valueBuilder,
+    required TResult Function(ValueListenerNode value) valueListener,
+    required TResult Function(WidgetNode value) widget,
+  }) {
+    return dynamicInputs(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(DynamicInputsNode value)? dynamicInputs,
+    TResult? Function(InputsNode value)? inputs,
+    TResult? Function(ValueBuilderNode value)? valueBuilder,
+    TResult? Function(ValueListenerNode value)? valueListener,
+    TResult? Function(WidgetNode value)? widget,
+  }) {
+    return dynamicInputs?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(DynamicInputsNode value)? dynamicInputs,
+    TResult Function(InputsNode value)? inputs,
+    TResult Function(ValueBuilderNode value)? valueBuilder,
+    TResult Function(ValueListenerNode value)? valueListener,
+    TResult Function(WidgetNode value)? widget,
+    required TResult orElse(),
+  }) {
+    if (dynamicInputs != null) {
+      return dynamicInputs(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$DynamicInputsNodeImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class DynamicInputsNode extends WoFormNode {
+  const factory DynamicInputsNode(
+      {required final String id,
+      @DynamicInputTemplatesConverter()
+      final List<DynamicInputTemplate> templates,
+      @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
+      final DynamicInputsNodeUiSettings uiSettings,
+      @JsonKey(toJson: ExportSettings.staticToJson)
+      final ExportSettings exportSettings}) = _$DynamicInputsNodeImpl;
+  const DynamicInputsNode._() : super._();
+
+  factory DynamicInputsNode.fromJson(Map<String, dynamic> json) =
+      _$DynamicInputsNodeImpl.fromJson;
+
+  @override
+  String get id;
+  @DynamicInputTemplatesConverter()
+  List<DynamicInputTemplate> get templates;
+  @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
+  DynamicInputsNodeUiSettings get uiSettings;
+  @JsonKey(toJson: ExportSettings.staticToJson)
+  ExportSettings get exportSettings;
+  @override
+  @JsonKey(ignore: true)
+  _$$DynamicInputsNodeImplCopyWith<_$DynamicInputsNodeImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -342,6 +926,15 @@ class _$InputsNodeImpl extends InputsNode {
   TResult when<TResult extends Object?>({
     required TResult Function(
             String id,
+            @DynamicInputTemplatesConverter()
+            List<DynamicInputTemplate> templates,
+            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
+            DynamicInputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)
+        dynamicInputs,
+    required TResult Function(
+            String id,
             @InputsListConverter() List<WoFormElementMixin> inputs,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
             InputsNodeUiSettings uiSettings,
@@ -377,6 +970,15 @@ class _$InputsNodeImpl extends InputsNode {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
             String id,
+            @DynamicInputTemplatesConverter()
+            List<DynamicInputTemplate> templates,
+            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
+            DynamicInputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)?
+        dynamicInputs,
+    TResult? Function(
+            String id,
             @InputsListConverter() List<WoFormElementMixin> inputs,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
             InputsNodeUiSettings uiSettings,
@@ -410,6 +1012,15 @@ class _$InputsNodeImpl extends InputsNode {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String id,
+            @DynamicInputTemplatesConverter()
+            List<DynamicInputTemplate> templates,
+            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
+            DynamicInputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)?
+        dynamicInputs,
     TResult Function(
             String id,
             @InputsListConverter() List<WoFormElementMixin> inputs,
@@ -449,6 +1060,7 @@ class _$InputsNodeImpl extends InputsNode {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(DynamicInputsNode value) dynamicInputs,
     required TResult Function(InputsNode value) inputs,
     required TResult Function(ValueBuilderNode value) valueBuilder,
     required TResult Function(ValueListenerNode value) valueListener,
@@ -460,6 +1072,7 @@ class _$InputsNodeImpl extends InputsNode {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(DynamicInputsNode value)? dynamicInputs,
     TResult? Function(InputsNode value)? inputs,
     TResult? Function(ValueBuilderNode value)? valueBuilder,
     TResult? Function(ValueListenerNode value)? valueListener,
@@ -471,6 +1084,7 @@ class _$InputsNodeImpl extends InputsNode {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(DynamicInputsNode value)? dynamicInputs,
     TResult Function(InputsNode value)? inputs,
     TResult Function(ValueBuilderNode value)? valueBuilder,
     TResult Function(ValueListenerNode value)? valueListener,
@@ -633,6 +1247,15 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
   TResult when<TResult extends Object?>({
     required TResult Function(
             String id,
+            @DynamicInputTemplatesConverter()
+            List<DynamicInputTemplate> templates,
+            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
+            DynamicInputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)
+        dynamicInputs,
+    required TResult Function(
+            String id,
             @InputsListConverter() List<WoFormElementMixin> inputs,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
             InputsNodeUiSettings uiSettings,
@@ -668,6 +1291,15 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
             String id,
+            @DynamicInputTemplatesConverter()
+            List<DynamicInputTemplate> templates,
+            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
+            DynamicInputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)?
+        dynamicInputs,
+    TResult? Function(
+            String id,
             @InputsListConverter() List<WoFormElementMixin> inputs,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
             InputsNodeUiSettings uiSettings,
@@ -701,6 +1333,15 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String id,
+            @DynamicInputTemplatesConverter()
+            List<DynamicInputTemplate> templates,
+            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
+            DynamicInputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)?
+        dynamicInputs,
     TResult Function(
             String id,
             @InputsListConverter() List<WoFormElementMixin> inputs,
@@ -740,6 +1381,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(DynamicInputsNode value) dynamicInputs,
     required TResult Function(InputsNode value) inputs,
     required TResult Function(ValueBuilderNode value) valueBuilder,
     required TResult Function(ValueListenerNode value) valueListener,
@@ -751,6 +1393,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(DynamicInputsNode value)? dynamicInputs,
     TResult? Function(InputsNode value)? inputs,
     TResult? Function(ValueBuilderNode value)? valueBuilder,
     TResult? Function(ValueListenerNode value)? valueListener,
@@ -762,6 +1405,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(DynamicInputsNode value)? dynamicInputs,
     TResult Function(InputsNode value)? inputs,
     TResult Function(ValueBuilderNode value)? valueBuilder,
     TResult Function(ValueListenerNode value)? valueListener,
@@ -926,6 +1570,15 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
   TResult when<TResult extends Object?>({
     required TResult Function(
             String id,
+            @DynamicInputTemplatesConverter()
+            List<DynamicInputTemplate> templates,
+            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
+            DynamicInputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)
+        dynamicInputs,
+    required TResult Function(
+            String id,
             @InputsListConverter() List<WoFormElementMixin> inputs,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
             InputsNodeUiSettings uiSettings,
@@ -961,6 +1614,15 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
             String id,
+            @DynamicInputTemplatesConverter()
+            List<DynamicInputTemplate> templates,
+            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
+            DynamicInputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)?
+        dynamicInputs,
+    TResult? Function(
+            String id,
             @InputsListConverter() List<WoFormElementMixin> inputs,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
             InputsNodeUiSettings uiSettings,
@@ -994,6 +1656,15 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String id,
+            @DynamicInputTemplatesConverter()
+            List<DynamicInputTemplate> templates,
+            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
+            DynamicInputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)?
+        dynamicInputs,
     TResult Function(
             String id,
             @InputsListConverter() List<WoFormElementMixin> inputs,
@@ -1033,6 +1704,7 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(DynamicInputsNode value) dynamicInputs,
     required TResult Function(InputsNode value) inputs,
     required TResult Function(ValueBuilderNode value) valueBuilder,
     required TResult Function(ValueListenerNode value) valueListener,
@@ -1044,6 +1716,7 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(DynamicInputsNode value)? dynamicInputs,
     TResult? Function(InputsNode value)? inputs,
     TResult? Function(ValueBuilderNode value)? valueBuilder,
     TResult? Function(ValueListenerNode value)? valueListener,
@@ -1055,6 +1728,7 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(DynamicInputsNode value)? dynamicInputs,
     TResult Function(InputsNode value)? inputs,
     TResult Function(ValueBuilderNode value)? valueBuilder,
     TResult Function(ValueListenerNode value)? valueListener,
@@ -1194,6 +1868,15 @@ class _$WidgetNodeImpl extends WidgetNode {
   TResult when<TResult extends Object?>({
     required TResult Function(
             String id,
+            @DynamicInputTemplatesConverter()
+            List<DynamicInputTemplate> templates,
+            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
+            DynamicInputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)
+        dynamicInputs,
+    required TResult Function(
+            String id,
             @InputsListConverter() List<WoFormElementMixin> inputs,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
             InputsNodeUiSettings uiSettings,
@@ -1229,6 +1912,15 @@ class _$WidgetNodeImpl extends WidgetNode {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
             String id,
+            @DynamicInputTemplatesConverter()
+            List<DynamicInputTemplate> templates,
+            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
+            DynamicInputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)?
+        dynamicInputs,
+    TResult? Function(
+            String id,
             @InputsListConverter() List<WoFormElementMixin> inputs,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
             InputsNodeUiSettings uiSettings,
@@ -1262,6 +1954,15 @@ class _$WidgetNodeImpl extends WidgetNode {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String id,
+            @DynamicInputTemplatesConverter()
+            List<DynamicInputTemplate> templates,
+            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
+            DynamicInputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)?
+        dynamicInputs,
     TResult Function(
             String id,
             @InputsListConverter() List<WoFormElementMixin> inputs,
@@ -1301,6 +2002,7 @@ class _$WidgetNodeImpl extends WidgetNode {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(DynamicInputsNode value) dynamicInputs,
     required TResult Function(InputsNode value) inputs,
     required TResult Function(ValueBuilderNode value) valueBuilder,
     required TResult Function(ValueListenerNode value) valueListener,
@@ -1312,6 +2014,7 @@ class _$WidgetNodeImpl extends WidgetNode {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(DynamicInputsNode value)? dynamicInputs,
     TResult? Function(InputsNode value)? inputs,
     TResult? Function(ValueBuilderNode value)? valueBuilder,
     TResult? Function(ValueListenerNode value)? valueListener,
@@ -1323,6 +2026,7 @@ class _$WidgetNodeImpl extends WidgetNode {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(DynamicInputsNode value)? dynamicInputs,
     TResult Function(InputsNode value)? inputs,
     TResult Function(ValueBuilderNode value)? valueBuilder,
     TResult Function(ValueListenerNode value)? valueListener,

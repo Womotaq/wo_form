@@ -59,11 +59,7 @@ class InputsNodeWidgetBuilder extends StatelessWidget {
               selector: (values) {
                 return woFormL10n?.errors(
                   node
-                      .getErrors(
-                        values,
-                        parentPath:
-                            (inputPath.split('/')..removeLast()).join('/'),
-                      )
+                      .getErrors(values, parentPath: inputPath.parentPath)
                       .length,
                 );
               },

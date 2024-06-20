@@ -19,20 +19,3 @@ class InputsListConverter
   List<dynamic> toJson(List<WoFormElementMixin> object) =>
       object.map((input) => input.toJson()).toList();
 }
-
-class WoFormElementConverter
-    extends JsonConverter<WoFormElementMixin, Map<String, dynamic>> {
-  const WoFormElementConverter();
-
-  @override
-  WoFormElementMixin fromJson(Map<String, dynamic> json) {
-    try {
-      return WoFormInput.fromJson(json);
-    } on CheckedFromJsonException {
-      return WoFormNode.fromJson(json);
-    }
-  }
-
-  @override
-  Map<String, dynamic> toJson(WoFormElementMixin object) => object.toJson();
-}

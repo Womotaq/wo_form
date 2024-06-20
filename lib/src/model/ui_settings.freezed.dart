@@ -259,6 +259,211 @@ abstract class _BooleanInputUiSettings extends BooleanInputUiSettings {
       get copyWith => throw _privateConstructorUsedError;
 }
 
+DynamicInputsNodeUiSettings _$DynamicInputsNodeUiSettingsFromJson(
+    Map<String, dynamic> json) {
+  return _DynamicInputsNodeUiSettings.fromJson(json);
+}
+
+/// @nodoc
+mixin _$DynamicInputsNodeUiSettings {
+  String? get labelText => throw _privateConstructorUsedError;
+  String? get helperText => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  DynamicInputNodeWidgetBuilderDef? get widgetBuilder =>
+      throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $DynamicInputsNodeUiSettingsCopyWith<DynamicInputsNodeUiSettings>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $DynamicInputsNodeUiSettingsCopyWith<$Res> {
+  factory $DynamicInputsNodeUiSettingsCopyWith(
+          DynamicInputsNodeUiSettings value,
+          $Res Function(DynamicInputsNodeUiSettings) then) =
+      _$DynamicInputsNodeUiSettingsCopyWithImpl<$Res,
+          DynamicInputsNodeUiSettings>;
+  @useResult
+  $Res call(
+      {String? labelText,
+      String? helperText,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      DynamicInputNodeWidgetBuilderDef? widgetBuilder});
+}
+
+/// @nodoc
+class _$DynamicInputsNodeUiSettingsCopyWithImpl<$Res,
+        $Val extends DynamicInputsNodeUiSettings>
+    implements $DynamicInputsNodeUiSettingsCopyWith<$Res> {
+  _$DynamicInputsNodeUiSettingsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? labelText = freezed,
+    Object? helperText = freezed,
+    Object? widgetBuilder = freezed,
+  }) {
+    return _then(_value.copyWith(
+      labelText: freezed == labelText
+          ? _value.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _value.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      widgetBuilder: freezed == widgetBuilder
+          ? _value.widgetBuilder
+          : widgetBuilder // ignore: cast_nullable_to_non_nullable
+              as DynamicInputNodeWidgetBuilderDef?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$DynamicInputsNodeUiSettingsImplCopyWith<$Res>
+    implements $DynamicInputsNodeUiSettingsCopyWith<$Res> {
+  factory _$$DynamicInputsNodeUiSettingsImplCopyWith(
+          _$DynamicInputsNodeUiSettingsImpl value,
+          $Res Function(_$DynamicInputsNodeUiSettingsImpl) then) =
+      __$$DynamicInputsNodeUiSettingsImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String? labelText,
+      String? helperText,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      DynamicInputNodeWidgetBuilderDef? widgetBuilder});
+}
+
+/// @nodoc
+class __$$DynamicInputsNodeUiSettingsImplCopyWithImpl<$Res>
+    extends _$DynamicInputsNodeUiSettingsCopyWithImpl<$Res,
+        _$DynamicInputsNodeUiSettingsImpl>
+    implements _$$DynamicInputsNodeUiSettingsImplCopyWith<$Res> {
+  __$$DynamicInputsNodeUiSettingsImplCopyWithImpl(
+      _$DynamicInputsNodeUiSettingsImpl _value,
+      $Res Function(_$DynamicInputsNodeUiSettingsImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? labelText = freezed,
+    Object? helperText = freezed,
+    Object? widgetBuilder = freezed,
+  }) {
+    return _then(_$DynamicInputsNodeUiSettingsImpl(
+      labelText: freezed == labelText
+          ? _value.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _value.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      widgetBuilder: freezed == widgetBuilder
+          ? _value.widgetBuilder
+          : widgetBuilder // ignore: cast_nullable_to_non_nullable
+              as DynamicInputNodeWidgetBuilderDef?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$DynamicInputsNodeUiSettingsImpl extends _DynamicInputsNodeUiSettings {
+  const _$DynamicInputsNodeUiSettingsImpl(
+      {this.labelText,
+      this.helperText,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      this.widgetBuilder})
+      : super._();
+
+  factory _$DynamicInputsNodeUiSettingsImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$DynamicInputsNodeUiSettingsImplFromJson(json);
+
+  @override
+  final String? labelText;
+  @override
+  final String? helperText;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final DynamicInputNodeWidgetBuilderDef? widgetBuilder;
+
+  @override
+  String toString() {
+    return 'DynamicInputsNodeUiSettings(labelText: $labelText, helperText: $helperText, widgetBuilder: $widgetBuilder)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DynamicInputsNodeUiSettingsImpl &&
+            (identical(other.labelText, labelText) ||
+                other.labelText == labelText) &&
+            (identical(other.helperText, helperText) ||
+                other.helperText == helperText) &&
+            (identical(other.widgetBuilder, widgetBuilder) ||
+                other.widgetBuilder == widgetBuilder));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, labelText, helperText, widgetBuilder);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DynamicInputsNodeUiSettingsImplCopyWith<_$DynamicInputsNodeUiSettingsImpl>
+      get copyWith => __$$DynamicInputsNodeUiSettingsImplCopyWithImpl<
+          _$DynamicInputsNodeUiSettingsImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$DynamicInputsNodeUiSettingsImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _DynamicInputsNodeUiSettings
+    extends DynamicInputsNodeUiSettings {
+  const factory _DynamicInputsNodeUiSettings(
+          {final String? labelText,
+          final String? helperText,
+          @JsonKey(includeToJson: false, includeFromJson: false)
+          final DynamicInputNodeWidgetBuilderDef? widgetBuilder}) =
+      _$DynamicInputsNodeUiSettingsImpl;
+  const _DynamicInputsNodeUiSettings._() : super._();
+
+  factory _DynamicInputsNodeUiSettings.fromJson(Map<String, dynamic> json) =
+      _$DynamicInputsNodeUiSettingsImpl.fromJson;
+
+  @override
+  String? get labelText;
+  @override
+  String? get helperText;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  DynamicInputNodeWidgetBuilderDef? get widgetBuilder;
+  @override
+  @JsonKey(ignore: true)
+  _$$DynamicInputsNodeUiSettingsImplCopyWith<_$DynamicInputsNodeUiSettingsImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
 InputsNodeUiSettings _$InputsNodeUiSettingsFromJson(Map<String, dynamic> json) {
   return _InputsNodeUiSettings.fromJson(json);
 }
