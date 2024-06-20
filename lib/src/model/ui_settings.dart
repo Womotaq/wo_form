@@ -62,7 +62,8 @@ class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
       _$DynamicInputsNodeUiSettingsFromJson(json);
 
   static Map<String, dynamic> staticToJson(
-          DynamicInputsNodeUiSettings object) =>
+    DynamicInputsNodeUiSettings object,
+  ) =>
       object.toJson();
 
   DynamicInputsNodeUiSettings merge(DynamicInputsNodeUiSettings? other) =>

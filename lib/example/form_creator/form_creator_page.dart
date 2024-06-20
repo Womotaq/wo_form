@@ -48,25 +48,17 @@ class FormCreatorPage extends StatelessWidget {
             ),
           ],
         ),
-        // InputsNode(
-        //   id: 'inputs',
-        //   exportSettings: const ExportSettings(exportType: ExportType.list),
-        //   inputs: [
-        //     createStringInputNode(id: idGenerator.generateId()),
-        //     createNumInputNode(id: idGenerator.generateId()),
-        //   ],
-        // ),
         DynamicInputsNode(
           id: 'inputs',
           exportSettings: const ExportSettings(exportType: ExportType.list),
           templates: [
             DynamicInputTemplate(
               labelText: 'Saisie de texte',
-              input: createStringInputNode(id: 'stringInput'),
+              input: createStringInputNode(),
             ),
             DynamicInputTemplate(
               labelText: 'Saisie de nombre',
-              input: createNumInputNode(id: 'numInput'),
+              input: createNumInputNode(),
             ),
           ],
           uiSettings: const DynamicInputsNodeUiSettings(

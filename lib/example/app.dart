@@ -111,7 +111,7 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         body: ListView(
           children: [
-            const SizedBox(height: 64),
+            const SizedBox(height: 32),
             Padding(
               padding: const EdgeInsets.all(16),
               child: Text(

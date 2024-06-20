@@ -37,6 +37,8 @@ class WoForm with _$WoForm {
     ExportSettings exportSettings,
     @JsonKey(includeToJson: false, includeFromJson: false)
     ThemeData Function(BuildContext context)? themeBuilder,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    Widget Function()? pageBuilder,
   }) = _WoForm;
 
   const WoForm._();

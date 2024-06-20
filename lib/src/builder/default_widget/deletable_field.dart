@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-// TODO : use
 class DeletableField extends StatelessWidget {
   const DeletableField({
     required this.child,

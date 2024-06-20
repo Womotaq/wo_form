@@ -6,8 +6,8 @@ import 'package:wo_form/src/l10n/arb_gen/form_localizations_fr.dart';
 import 'package:wo_form/src/model/json_converter/text_input_type.dart';
 import 'package:wo_form/wo_form.dart';
 
-InputsNode createStringInputNode({required String id}) => InputsNode(
-      id: id,
+InputsNode createStringInputNode() => InputsNode(
+      id: 'stringInput',
       uiSettings: const InputsNodeUiSettings(
         labelText: 'Saisie de texte',
         displayMode: InputsNodeDisplayMode.tapToExpand,

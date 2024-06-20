@@ -43,6 +43,8 @@ mixin _$WoForm {
   @JsonKey(includeToJson: false, includeFromJson: false)
   ThemeData Function(BuildContext)? get themeBuilder =>
       throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  Widget Function()? get pageBuilder => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -72,7 +74,9 @@ abstract class $WoFormCopyWith<$Res> {
       @JsonKey(toJson: ExportSettings.staticToJson)
       ExportSettings exportSettings,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      ThemeData Function(BuildContext)? themeBuilder});
+      ThemeData Function(BuildContext)? themeBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      Widget Function()? pageBuilder});
 
   $WoFormStatusCopyWith<$Res> get initialStatus;
   $WoFormUiSettingsCopyWith<$Res> get uiSettings;
@@ -102,6 +106,7 @@ class _$WoFormCopyWithImpl<$Res, $Val extends WoForm>
     Object? uiSettings = null,
     Object? exportSettings = null,
     Object? themeBuilder = freezed,
+    Object? pageBuilder = freezed,
   }) {
     return _then(_value.copyWith(
       inputs: null == inputs
@@ -144,6 +149,10 @@ class _$WoFormCopyWithImpl<$Res, $Val extends WoForm>
           ? _value.themeBuilder
           : themeBuilder // ignore: cast_nullable_to_non_nullable
               as ThemeData Function(BuildContext)?,
+      pageBuilder: freezed == pageBuilder
+          ? _value.pageBuilder
+          : pageBuilder // ignore: cast_nullable_to_non_nullable
+              as Widget Function()?,
     ) as $Val);
   }
 
@@ -197,7 +206,9 @@ abstract class _$$WoFormImplCopyWith<$Res> implements $WoFormCopyWith<$Res> {
       @JsonKey(toJson: ExportSettings.staticToJson)
       ExportSettings exportSettings,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      ThemeData Function(BuildContext)? themeBuilder});
+      ThemeData Function(BuildContext)? themeBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      Widget Function()? pageBuilder});
 
   @override
   $WoFormStatusCopyWith<$Res> get initialStatus;
@@ -228,6 +239,7 @@ class __$$WoFormImplCopyWithImpl<$Res>
     Object? uiSettings = null,
     Object? exportSettings = null,
     Object? themeBuilder = freezed,
+    Object? pageBuilder = freezed,
   }) {
     return _then(_$WoFormImpl(
       inputs: null == inputs
@@ -270,6 +282,10 @@ class __$$WoFormImplCopyWithImpl<$Res>
           ? _value.themeBuilder
           : themeBuilder // ignore: cast_nullable_to_non_nullable
               as ThemeData Function(BuildContext)?,
+      pageBuilder: freezed == pageBuilder
+          ? _value.pageBuilder
+          : pageBuilder // ignore: cast_nullable_to_non_nullable
+              as Widget Function()?,
     ));
   }
 }
@@ -291,7 +307,8 @@ class _$WoFormImpl extends _WoForm {
       this.uiSettings = const WoFormUiSettings(),
       @JsonKey(toJson: ExportSettings.staticToJson)
       this.exportSettings = const ExportSettings(),
-      @JsonKey(includeToJson: false, includeFromJson: false) this.themeBuilder})
+      @JsonKey(includeToJson: false, includeFromJson: false) this.themeBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.pageBuilder})
       : _inputs = inputs,
         super._();
 
@@ -335,10 +352,13 @@ class _$WoFormImpl extends _WoForm {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final ThemeData Function(BuildContext)? themeBuilder;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final Widget Function()? pageBuilder;
 
   @override
   String toString() {
-    return 'WoForm(inputs: $inputs, onSubmitting: $onSubmitting, onSubmitError: $onSubmitError, onSubmitSuccess: $onSubmitSuccess, initialStatus: $initialStatus, canModifySubmittedValues: $canModifySubmittedValues, canQuit: $canQuit, uiSettings: $uiSettings, exportSettings: $exportSettings, themeBuilder: $themeBuilder)';
+    return 'WoForm(inputs: $inputs, onSubmitting: $onSubmitting, onSubmitError: $onSubmitError, onSubmitSuccess: $onSubmitSuccess, initialStatus: $initialStatus, canModifySubmittedValues: $canModifySubmittedValues, canQuit: $canQuit, uiSettings: $uiSettings, exportSettings: $exportSettings, themeBuilder: $themeBuilder, pageBuilder: $pageBuilder)';
   }
 
   @override
@@ -364,7 +384,9 @@ class _$WoFormImpl extends _WoForm {
             (identical(other.exportSettings, exportSettings) ||
                 other.exportSettings == exportSettings) &&
             (identical(other.themeBuilder, themeBuilder) ||
-                other.themeBuilder == themeBuilder));
+                other.themeBuilder == themeBuilder) &&
+            (identical(other.pageBuilder, pageBuilder) ||
+                other.pageBuilder == pageBuilder));
   }
 
   @JsonKey(ignore: true)
@@ -380,7 +402,8 @@ class _$WoFormImpl extends _WoForm {
       canQuit,
       uiSettings,
       exportSettings,
-      themeBuilder);
+      themeBuilder,
+      pageBuilder);
 
   @JsonKey(ignore: true)
   @override
@@ -415,7 +438,9 @@ abstract class _WoForm extends WoForm {
       @JsonKey(toJson: ExportSettings.staticToJson)
       final ExportSettings exportSettings,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      final ThemeData Function(BuildContext)? themeBuilder}) = _$WoFormImpl;
+      final ThemeData Function(BuildContext)? themeBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final Widget Function()? pageBuilder}) = _$WoFormImpl;
   const _WoForm._() : super._();
 
   factory _WoForm.fromJson(Map<String, dynamic> json) = _$WoFormImpl.fromJson;
@@ -449,6 +474,9 @@ abstract class _WoForm extends WoForm {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   ThemeData Function(BuildContext)? get themeBuilder;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  Widget Function()? get pageBuilder;
   @override
   @JsonKey(ignore: true)
   _$$WoFormImplCopyWith<_$WoFormImpl> get copyWith =>

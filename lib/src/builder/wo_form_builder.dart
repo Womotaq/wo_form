@@ -24,8 +24,10 @@ class WoFormBuilder extends StatelessWidget {
         },
         child: Builder(
           builder: (context) {
-            // TODO: theme.formPageBuilder ?
-            const page = WoFormPage();
+            final page = (form.pageBuilder ??
+                    WoFormTheme.of(context)?.formPageBuilder ??
+                    WoFormPage.new)
+                .call();
 
             return form.themeBuilder == null
                 ? page

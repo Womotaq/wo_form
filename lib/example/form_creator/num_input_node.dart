@@ -1,12 +1,12 @@
 import 'package:wo_form/wo_form.dart';
 
-InputsNode createNumInputNode({required String id}) => InputsNode(
-      id: id,
-      uiSettings: const InputsNodeUiSettings(
+InputsNode createNumInputNode() => const InputsNode(
+      id: 'numInput',
+      uiSettings: InputsNodeUiSettings(
         labelText: 'Saisie de nombre',
         displayMode: InputsNodeDisplayMode.tapToExpand,
       ),
-      inputs: const [
+      inputs: [
         StringInput(
           id: 'id',
           isRequired: true,
@@ -58,7 +58,7 @@ InputsNode createNumInputNode({required String id}) => InputsNode(
           ],
         ),
       ],
-      exportSettings: const ExportSettings(
+      exportSettings: ExportSettings(
         exportedMetadata: {
           'runtimeType': 'num',
         },

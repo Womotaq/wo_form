@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -8,6 +9,7 @@ class WoFormThemeData with _$WoFormThemeData {
   const factory WoFormThemeData({
     BooleanFieldBuilderDef? booleanFieldBuilder,
     DynamicInputNodeWidgetBuilderDef? dynamicInputsNodeWidgetBuilder,
+    Widget Function()? formPageBuilder,
     HeaderBuilderDef? headerBuilder,
     InputHeaderBuilderDef? inputHeaderBuilder,
     InputNodeWidgetBuilderDef? inputsNodeExpanderBuilder,
