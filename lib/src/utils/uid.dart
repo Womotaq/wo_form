@@ -1,12 +1,11 @@
 import 'dart:math';
 
-final uidGenerator = Random();
-
 extension RandomX on Random {
-  String generateUid() {
+  String generateUid({int length = 6}) {
     const chars = '0123456789'
         'abcdefghijklmnopqrstuvwxyz'
         'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    return List<String>.generate(6, (_) => chars[nextInt(chars.length)]).join();
+    return List<String>.generate(length, (_) => chars[nextInt(chars.length)])
+        .join();
   }
 }

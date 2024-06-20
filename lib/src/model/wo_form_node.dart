@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -595,5 +597,5 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
       };
 
   @override
-  WoFormNode withUid() => copyWith(id: uidGenerator.generateUid());
+  WoFormNode withUid() => copyWith(id: Random().generateUid());
 }
