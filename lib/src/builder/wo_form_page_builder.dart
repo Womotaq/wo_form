@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/wo_form.dart';
 
-class WoFormBuilder extends StatelessWidget {
-  const WoFormBuilder({required this.form, super.key});
+class WoFormPageBuilder extends StatelessWidget {
+  const WoFormPageBuilder({required this.form, super.key});
 
   final WoForm form;
 

@@ -139,5 +139,5 @@ class WoForm with _$WoForm {
 
   Widget toPage({Key? key}) => toWidget(key: key);
 
-  Widget toWidget({Key? key}) => WoFormBuilder(form: this, key: key);
+  Widget toWidget({Key? key}) => WoFormPageBuilder(form: this, key: key);
 }

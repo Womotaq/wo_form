@@ -7,10 +7,10 @@ class FormLocalizationsEn extends FormLocalizations {
   FormLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get discardChanges => 'Discard changes';
+  String get discardChanges => 'Abandonner les modifications';
 
   @override
-  String get discardChangesQuestion => 'Discard unsaved changes ?';
+  String get discardChangesQuestion => 'Abandonner les modifications ?';
 
   @override
   String get errorOccurred => 'An error has occured.';

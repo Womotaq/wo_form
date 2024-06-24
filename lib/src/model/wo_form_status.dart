@@ -8,6 +8,7 @@ sealed class WoFormStatus with _$WoFormStatus {
   const factory WoFormStatus.initial() = InitialStatus;
   const factory WoFormStatus.inProgress() = InProgressStatus;
   const factory WoFormStatus.invalidValues({
+    // TODO: remove ? are they used ? usefull ?
     Iterable<WoFormInputError>? inputErrors,
   }) = InvalidValuesStatus;
   const factory WoFormStatus.submitting() = SubmittingStatus;
