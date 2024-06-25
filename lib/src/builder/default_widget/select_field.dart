@@ -21,6 +21,7 @@ class SelectField<T> extends StatelessWidget {
                   final headerData = WoFormInputHeaderData(
                     labelText: data.uiSettings.labelText,
                     helperText: data.uiSettings.helperText,
+                    errorText: data.errorText,
                   );
 
                   return (data.uiSettings.headerBuilder ??
@@ -56,6 +57,7 @@ class SelectField<T> extends StatelessWidget {
                   final headerData = WoFormInputHeaderData(
                     labelText: data.uiSettings.labelText,
                     helperText: data.uiSettings.helperText,
+                    errorText: data.errorText,
                   );
 
                   return (data.uiSettings.headerBuilder ??
@@ -87,6 +89,7 @@ class SelectField<T> extends StatelessWidget {
               final headerData = WoFormInputHeaderData(
                 labelText: data.uiSettings.labelText,
                 helperText: data.uiSettings.helperText,
+                errorText: data.errorText,
                 trailing: SearchField<T>.multipleChoices(
                   values: data.input.availibleValues,
                   onSelected:

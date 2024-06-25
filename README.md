@@ -1,38 +1,92 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# wo_form
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
-
-A package made for easily creating forms, with Womotaq's identity.
+`wo_form` is a feature-rich Dart package designed to make form handling easier and more efficient. With `wo_form`, you can seamlessly jsonify and unjsonify forms, gain complete control over form rendering, and utilize a collection of prebuilt advanced widgets for basic inputs.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- **Jsonify/Unjsonify Forms**: Easily convert your forms to and from JSON for effortless data handling.
+- **Customizable Rendering**: Take full control over how your forms are rendered, enabling a highly customizable user experience.
+- **Prebuilt Advanced Widgets**: Access a variety of advanced widgets for common input types, saving you time and effort in form creation.
+- **Easy Integration**: Quickly integrate `wo_form` into your projects and streamline your form management processes.
 
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+## Example
 
 ```dart
-const like = 'sample';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wo_form/wo_form.dart';
+
+enum ReportType {
+  verbalAbuse,
+  cheating,
+  fairPlay,
+  other;
+}
+
+class ReportPage extends StatelessWidget {
+  const ReportPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return WoForm(
+      exportSettings: const ExportSettings(
+        exportedMetadata: {
+          'reporterId': 'me',
+          'reportedId': 'him',
+        },
+      ),
+      uiSettings: const WoFormUiSettings(
+        titleText: 'Report a user',
+        submitMode: StandardSubmitMode(
+          submitText: 'Send',
+          disableSubmitMode: DisableSubmitButton.whenInvalid,
+        ),
+      ),
+      inputs: [
+        SelectInput<ReportType>(
+          id: 'type',
+          availibleValues: ReportType.values,
+          minCount: 1,
+          maxCount: 1,
+          uiSettings: SelectInputUiSettings(
+            labelText: 'Reason',
+            valueBuilder: (type) => Text(
+              switch (type) {
+                null => 'Select a reason',
+                ReportType.cheating => 'Cheating',
+                ReportType.fairPlay => 'Fair play',
+                ReportType.verbalAbuse => 'Verbal abuse',
+                ReportType.other => 'Other',
+              },
+            ),
+          ),
+        ),
+        const StringInput(
+          id: 'message',
+          uiSettings: StringInputUiSettings(
+            hintText: 'Tell us more !',
+            textCapitalization: TextCapitalization.sentences,
+            maxLines: 5,
+          ),
+        ),
+        const BooleanInput(
+          id: 'block',
+          uiSettings: BooleanInputUiSettings(
+            labelText: 'Block this user ?',
+            controlType: BooleanFieldControlType.checkbox,
+            controlAffinity: ListTileControlAffinity.leading,
+          ),
+        ),
+      ],
+      onSubmitting: (_, __) async {
+        await Future<void>.delayed(const Duration(seconds: 3));
+        // Do your stuff here
+      },
+      onSubmitSuccess: (context) {
+        // Close the page here
+      },
+    ).toPage();
+  }
+}
+
 ```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
