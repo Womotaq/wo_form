@@ -10,17 +10,6 @@ enum ReportType {
   other;
 }
 
-class ReportForm {
-  static const typeId = 'type';
-  static const typePath = '/type';
-
-  static const messageId = 'message';
-  static const messagePath = '/message';
-
-  static const blockId = 'block';
-  static const blockPath = '/block';
-}
-
 class ReportPage extends StatelessWidget {
   const ReportPage({super.key});
 
@@ -42,7 +31,7 @@ class ReportPage extends StatelessWidget {
       ),
       inputs: [
         SelectInput<ReportType>(
-          id: ReportForm.typeId,
+          id: 'type',
           availibleValues: ReportType.values,
           minCount: 1,
           maxCount: 1,
@@ -60,7 +49,7 @@ class ReportPage extends StatelessWidget {
           ),
         ),
         const StringInput(
-          id: ReportForm.messageId,
+          id: 'message',
           uiSettings: StringInputUiSettings(
             hintText: 'Dites-en plus !',
             textCapitalization: TextCapitalization.sentences,
@@ -68,7 +57,7 @@ class ReportPage extends StatelessWidget {
           ),
         ),
         const BooleanInput(
-          id: ReportForm.blockId,
+          id: 'block',
           uiSettings: BooleanInputUiSettings(
             labelText: 'Bloquer cette raclure ?',
             controlType: BooleanFieldControlType.checkbox,

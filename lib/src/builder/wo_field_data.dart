@@ -16,5 +16,7 @@ class WoFieldData<I, T, U> {
   final T? value;
   final String? errorText;
   final U uiSettings;
+
+  /// Null means locked field
   final void Function(T?)? onValueChanged;
 }

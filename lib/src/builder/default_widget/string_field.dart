@@ -46,6 +46,9 @@ class _StringFieldState extends State<StringField> {
         maxLines: widget.data.uiSettings.maxLines == 0
             ? null
             : widget.data.uiSettings.maxLines ?? 1,
+        inputFormatters: const [
+          // LATER : LengthLimitingTextInputFormatter
+        ],
         decoration: InputDecoration(
           labelText: widget.data.uiSettings.labelText,
           helperText: widget.data.uiSettings.helperText,
