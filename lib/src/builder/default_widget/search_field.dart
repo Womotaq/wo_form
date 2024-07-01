@@ -73,25 +73,35 @@ class SearchField<T> extends StatelessWidget {
       );
     }
 
-    return InkWell(
-      onTap: onSelected == null
-          ? null
-          : () => onPressed(
-                context,
-                valueBuilderSafe,
+    final themedBorder = Theme.of(context).inputDecorationTheme.border;
+
+    return Opacity(
+      opacity: onSelected == null ? 0.3 : 1,
+      child: InkWell(
+        borderRadius: themedBorder is OutlineInputBorder
+            ? themedBorder.borderRadius
+            : themedBorder is UnderlineInputBorder
+                ? themedBorder.borderRadius
+                : BorderRadius.zero,
+        onTap: onSelected == null
+            ? null
+            : () => onPressed(
+                  context,
+                  valueBuilderSafe,
+                ),
+        child: InputDecorator(
+          decoration: const InputDecoration(),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: previewBuilderSafe(selectedValues),
               ),
-      child: InputDecorator(
-        decoration: const InputDecoration(),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: previewBuilderSafe(selectedValues),
-            ),
-            if (showArrow) const Icon(Icons.keyboard_arrow_down),
-          ],
+              if (showArrow) const Icon(Icons.keyboard_arrow_down),
+            ],
+          ),
         ),
       ),
     );

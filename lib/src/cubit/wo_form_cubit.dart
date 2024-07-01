@@ -53,6 +53,10 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     return super.close();
   }
 
+  // --
+
+  void clear() => emit(form.initialValues());
+
   /// **Use this method precautiously since there is no type checking !**
   void onValueChanged({
     required String inputPath,

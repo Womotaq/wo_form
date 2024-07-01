@@ -16,19 +16,22 @@ class SelectField<T> extends StatelessWidget {
         null || SelectFieldDisplayMode.tile => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Builder(
-                builder: (context) {
-                  final headerData = WoFormInputHeaderData(
-                    labelText: data.uiSettings.labelText,
-                    helperText: data.uiSettings.helperText,
-                    errorText: data.errorText,
-                  );
+              Opacity(
+                opacity: data.onValueChanged == null ? 0.3 : 1,
+                child: Builder(
+                  builder: (context) {
+                    final headerData = WoFormInputHeaderData(
+                      labelText: data.uiSettings.labelText,
+                      helperText: data.uiSettings.helperText,
+                      errorText: data.errorText,
+                    );
 
-                  return (data.uiSettings.headerBuilder ??
-                          WoFormTheme.of(context)?.inputHeaderBuilder ??
-                          InputHeader.new)
-                      .call(headerData);
-                },
+                    return (data.uiSettings.headerBuilder ??
+                            WoFormTheme.of(context)?.inputHeaderBuilder ??
+                            InputHeader.new)
+                        .call(headerData);
+                  },
+                ),
               ),
               ...data.input.availibleValues.map(
                 (value) {
@@ -52,21 +55,25 @@ class SelectField<T> extends StatelessWidget {
         SelectFieldDisplayMode.chip => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Builder(
-                builder: (context) {
-                  final headerData = WoFormInputHeaderData(
-                    labelText: data.uiSettings.labelText,
-                    helperText: data.uiSettings.helperText,
-                    errorText: data.errorText,
-                  );
+              Opacity(
+                opacity: data.onValueChanged == null ? 0.3 : 1,
+                child: Builder(
+                  builder: (context) {
+                    final headerData = WoFormInputHeaderData(
+                      labelText: data.uiSettings.labelText,
+                      helperText: data.uiSettings.helperText,
+                      errorText: data.errorText,
+                    );
 
-                  return (data.uiSettings.headerBuilder ??
-                          WoFormTheme.of(context)?.inputHeaderBuilder ??
-                          InputHeader.new)
-                      .call(headerData);
-                },
+                    return (data.uiSettings.headerBuilder ??
+                            WoFormTheme.of(context)?.inputHeaderBuilder ??
+                            InputHeader.new)
+                        .call(headerData);
+                  },
+                ),
               ),
               ListTile(
+                contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                 title: SearchField<T>.uniqueChoice(
                   values: data.input.availibleValues,
                   onSelected:
@@ -82,57 +89,60 @@ class SelectField<T> extends StatelessWidget {
           ),
       };
     } else {
-      return Column(
-        children: [
-          Builder(
-            builder: (context) {
-              final headerData = WoFormInputHeaderData(
-                labelText: data.uiSettings.labelText,
-                helperText: data.uiSettings.helperText,
-                errorText: data.errorText,
-                trailing: SearchField<T>.multipleChoices(
-                  values: data.input.availibleValues,
-                  onSelected:
-                      data.onValueChanged == null ? null : onMultipleChoice,
-                  selectedValues: selectedValues,
-                  valueBuilder: data.uiSettings.valueBuilder,
-                  helpValueBuilder: data.uiSettings.helpValueBuilder,
-                  hintText: data.uiSettings.hintText,
-                  searcher: data.uiSettings.searcher,
-                  builder: (onPressed) => IconButton.filled(
-                    onPressed: onPressed,
-                    icon: const Icon(Icons.add),
-                    color: Theme.of(context).colorScheme.onPrimary,
-                  ),
-                ),
-                shrinkWrap: false,
-              );
-
-              return (data.uiSettings.headerBuilder ??
-                      WoFormTheme.of(context)?.inputHeaderBuilder ??
-                      InputHeader.new)
-                  .call(headerData);
-            },
-          ),
-          if (selectedValues.isNotEmpty)
-            ListTile(
-              title: Wrap(
-                spacing: 8,
-                children: [
-                  ...selectedValues.map(
-                    (v) => _MultipleSelectChip(
-                      helper: data.uiSettings.helpValueBuilder?.call(v),
-                      onDeleted: data.onValueChanged == null
-                          ? null
-                          : () => onMultipleChoice(v),
-                      label: data.uiSettings.valueBuilder?.call(v) ??
-                          Text(v.toString()),
+      return Opacity(
+        opacity: data.onValueChanged == null ? 0.3 : 1,
+        child: Column(
+          children: [
+            Builder(
+              builder: (context) {
+                final headerData = WoFormInputHeaderData(
+                  labelText: data.uiSettings.labelText,
+                  helperText: data.uiSettings.helperText,
+                  errorText: data.errorText,
+                  trailing: SearchField<T>.multipleChoices(
+                    values: data.input.availibleValues,
+                    onSelected:
+                        data.onValueChanged == null ? null : onMultipleChoice,
+                    selectedValues: selectedValues,
+                    valueBuilder: data.uiSettings.valueBuilder,
+                    helpValueBuilder: data.uiSettings.helpValueBuilder,
+                    hintText: data.uiSettings.hintText,
+                    searcher: data.uiSettings.searcher,
+                    builder: (onPressed) => IconButton.filled(
+                      onPressed: onPressed,
+                      icon: const Icon(Icons.add),
+                      color: Theme.of(context).colorScheme.onPrimary,
                     ),
                   ),
-                ],
-              ),
+                  shrinkWrap: false,
+                );
+
+                return (data.uiSettings.headerBuilder ??
+                        WoFormTheme.of(context)?.inputHeaderBuilder ??
+                        InputHeader.new)
+                    .call(headerData);
+              },
             ),
-        ],
+            if (selectedValues.isNotEmpty)
+              ListTile(
+                title: Wrap(
+                  spacing: 8,
+                  children: [
+                    ...selectedValues.map(
+                      (v) => _MultipleSelectChip(
+                        helper: data.uiSettings.helpValueBuilder?.call(v),
+                        onDeleted: data.onValueChanged == null
+                            ? null
+                            : () => onMultipleChoice(v),
+                        label: data.uiSettings.valueBuilder?.call(v) ??
+                            Text(v.toString()),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+          ],
+        ),
       );
     }
   }
