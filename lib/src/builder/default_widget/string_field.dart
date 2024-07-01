@@ -25,6 +25,7 @@ class _StringFieldState extends State<StringField> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16),
       leading: widget.data.uiSettings.prefixIcon,
       title: TextFormField(
         enabled: widget.data.onValueChanged != null,
