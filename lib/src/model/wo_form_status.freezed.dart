@@ -392,6 +392,7 @@ class __$$InvalidValuesStatusImplCopyWithImpl<$Res>
 class _$InvalidValuesStatusImpl implements InvalidValuesStatus {
   const _$InvalidValuesStatusImpl({this.inputErrors});
 
+// TODO: remove ? are they used ? usefull ?
   @override
   final Iterable<WoFormInputError>? inputErrors;
 
@@ -514,6 +515,7 @@ abstract class InvalidValuesStatus implements WoFormStatus {
           {final Iterable<WoFormInputError>? inputErrors}) =
       _$InvalidValuesStatusImpl;
 
+// TODO: remove ? are they used ? usefull ?
   Iterable<WoFormInputError>? get inputErrors;
   @JsonKey(ignore: true)
   _$$InvalidValuesStatusImplCopyWith<_$InvalidValuesStatusImpl> get copyWith =>

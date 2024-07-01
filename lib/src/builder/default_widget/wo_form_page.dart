@@ -31,18 +31,73 @@ class WoFormStandardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final submitMode = form.uiSettings.submitMode;
+    if (submitMode is! StandardSubmitMode) {
+      throw ArgumentError('submitMode must be StandardSubmitMode');
+    }
+
     final uiSettings = form.uiSettings;
 
     final woFormTheme = WoFormTheme.of(context);
 
+    final column = Column(
+      children: [
+        if (uiSettings.titlePosition == WoFormTitlePosition.header)
+          Builder(
+            builder: (context) {
+              final headerData = WoFormHeaderData(
+                labelText: uiSettings.titleText,
+              );
+
+              return (uiSettings.headerBuilder ??
+                      woFormTheme?.headerBuilder ??
+                      FormHeader.new)
+                  .call(headerData);
+            },
+          ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ...form.inputs.map(
+              (e) => Padding(
+                padding: EdgeInsets.only(
+                  bottom: woFormTheme?.verticalSpacing ?? 0,
+                ),
+                child: e.toWidget(parentPath: ''),
+              ),
+            ),
+            if (uiSettings.submitMode.buttonPosition ==
+                SubmitButtonPosition.bottom)
+              const SubmitButtonBuilder(),
+          ],
+        ),
+      ],
+    );
+
+    return (submitMode.scaffoldBuilder ??
+            WoFormTheme.of(context)?.standardScaffoldBuilder ??
+            _StandardScaffold.new)
+        .call(column);
+  }
+}
+
+class _StandardScaffold extends StatelessWidget {
+  const _StandardScaffold(this.body);
+
+  final Column body;
+
+  @override
+  Widget build(BuildContext context) {
+    final form = context.read<WoForm>();
+
     return Scaffold(
       appBar: AppBar(
         leading: QuitPageButton(canQuit: form.canQuit),
-        title: uiSettings.titlePosition == WoFormTitlePosition.appBar
-            ? Text(uiSettings.titleText)
+        title: form.uiSettings.titlePosition == WoFormTitlePosition.appBar
+            ? Text(form.uiSettings.titleText)
             : null,
         actions: [
-          if (uiSettings.submitMode.buttonPosition ==
+          if (form.uiSettings.submitMode.buttonPosition ==
               SubmitButtonPosition.appBar) ...[
             const SubmitButtonBuilder(),
             const SizedBox(width: 8),
@@ -51,39 +106,7 @@ class WoFormStandardPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: SafeArea(
-          child: Column(
-            children: [
-              if (uiSettings.titlePosition == WoFormTitlePosition.header)
-                Builder(
-                  builder: (context) {
-                    final headerData = WoFormHeaderData(
-                      labelText: uiSettings.titleText,
-                    );
-
-                    return (uiSettings.headerBuilder ??
-                            woFormTheme?.headerBuilder ??
-                            FormHeader.new)
-                        .call(headerData);
-                  },
-                ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  ...form.inputs.map(
-                    (e) => Padding(
-                      padding: EdgeInsets.only(
-                        bottom: woFormTheme?.verticalSpacing ?? 0,
-                      ),
-                      child: e.toWidget(parentPath: ''),
-                    ),
-                  ),
-                  if (uiSettings.submitMode.buttonPosition ==
-                      SubmitButtonPosition.bottom)
-                    const SubmitButtonBuilder(),
-                ],
-              ),
-            ],
-          ),
+          child: body,
         ),
       ),
     );

@@ -357,6 +357,8 @@ enum SubmitButtonPosition { bottom, appBar }
 
 enum DisableSubmitButton { never, whenInvalid, whenInitialOrSubmitSuccess }
 
+typedef ScaffoldBuilderDef = Widget Function(Widget body);
+
 @freezed
 sealed class WoFormSubmitMode with _$WoFormSubmitMode {
   const factory WoFormSubmitMode.standard({
@@ -364,6 +366,8 @@ sealed class WoFormSubmitMode with _$WoFormSubmitMode {
     @JsonKey(includeToJson: false, includeFromJson: false) IconData? submitIcon,
     @Default(DisableSubmitButton.never) DisableSubmitButton disableSubmitMode,
     @Default(SubmitButtonPosition.bottom) SubmitButtonPosition buttonPosition,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    ScaffoldBuilderDef? scaffoldBuilder,
   }) = StandardSubmitMode;
 
   const factory WoFormSubmitMode.pageByPage({

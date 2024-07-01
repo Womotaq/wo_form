@@ -2174,7 +2174,9 @@ mixin _$WoFormSubmitMode {
             @JsonKey(includeToJson: false, includeFromJson: false)
             IconData? submitIcon,
             DisableSubmitButton disableSubmitMode,
-            SubmitButtonPosition buttonPosition)
+            SubmitButtonPosition buttonPosition,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            ScaffoldBuilderDef? scaffoldBuilder)
         standard,
     required TResult Function(
             String? submitText,
@@ -2193,7 +2195,9 @@ mixin _$WoFormSubmitMode {
             @JsonKey(includeToJson: false, includeFromJson: false)
             IconData? submitIcon,
             DisableSubmitButton disableSubmitMode,
-            SubmitButtonPosition buttonPosition)?
+            SubmitButtonPosition buttonPosition,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            ScaffoldBuilderDef? scaffoldBuilder)?
         standard,
     TResult? Function(
             String? submitText,
@@ -2212,7 +2216,9 @@ mixin _$WoFormSubmitMode {
             @JsonKey(includeToJson: false, includeFromJson: false)
             IconData? submitIcon,
             DisableSubmitButton disableSubmitMode,
-            SubmitButtonPosition buttonPosition)?
+            SubmitButtonPosition buttonPosition,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            ScaffoldBuilderDef? scaffoldBuilder)?
         standard,
     TResult Function(
             String? submitText,
@@ -2310,7 +2316,9 @@ abstract class _$$StandardSubmitModeImplCopyWith<$Res>
       @JsonKey(includeToJson: false, includeFromJson: false)
       IconData? submitIcon,
       DisableSubmitButton disableSubmitMode,
-      SubmitButtonPosition buttonPosition});
+      SubmitButtonPosition buttonPosition,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      ScaffoldBuilderDef? scaffoldBuilder});
 }
 
 /// @nodoc
@@ -2328,6 +2336,7 @@ class __$$StandardSubmitModeImplCopyWithImpl<$Res>
     Object? submitIcon = freezed,
     Object? disableSubmitMode = null,
     Object? buttonPosition = null,
+    Object? scaffoldBuilder = freezed,
   }) {
     return _then(_$StandardSubmitModeImpl(
       submitText: freezed == submitText
@@ -2346,6 +2355,10 @@ class __$$StandardSubmitModeImplCopyWithImpl<$Res>
           ? _value.buttonPosition
           : buttonPosition // ignore: cast_nullable_to_non_nullable
               as SubmitButtonPosition,
+      scaffoldBuilder: freezed == scaffoldBuilder
+          ? _value.scaffoldBuilder
+          : scaffoldBuilder // ignore: cast_nullable_to_non_nullable
+              as ScaffoldBuilderDef?,
     ));
   }
 }
@@ -2358,6 +2371,8 @@ class _$StandardSubmitModeImpl extends StandardSubmitMode {
       @JsonKey(includeToJson: false, includeFromJson: false) this.submitIcon,
       this.disableSubmitMode = DisableSubmitButton.never,
       this.buttonPosition = SubmitButtonPosition.bottom,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      this.scaffoldBuilder,
       final String? $type})
       : $type = $type ?? 'standard',
         super._();
@@ -2376,13 +2391,16 @@ class _$StandardSubmitModeImpl extends StandardSubmitMode {
   @override
   @JsonKey()
   final SubmitButtonPosition buttonPosition;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final ScaffoldBuilderDef? scaffoldBuilder;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'WoFormSubmitMode.standard(submitText: $submitText, submitIcon: $submitIcon, disableSubmitMode: $disableSubmitMode, buttonPosition: $buttonPosition)';
+    return 'WoFormSubmitMode.standard(submitText: $submitText, submitIcon: $submitIcon, disableSubmitMode: $disableSubmitMode, buttonPosition: $buttonPosition, scaffoldBuilder: $scaffoldBuilder)';
   }
 
   @override
@@ -2397,13 +2415,15 @@ class _$StandardSubmitModeImpl extends StandardSubmitMode {
             (identical(other.disableSubmitMode, disableSubmitMode) ||
                 other.disableSubmitMode == disableSubmitMode) &&
             (identical(other.buttonPosition, buttonPosition) ||
-                other.buttonPosition == buttonPosition));
+                other.buttonPosition == buttonPosition) &&
+            (identical(other.scaffoldBuilder, scaffoldBuilder) ||
+                other.scaffoldBuilder == scaffoldBuilder));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, submitText, submitIcon, disableSubmitMode, buttonPosition);
+  int get hashCode => Object.hash(runtimeType, submitText, submitIcon,
+      disableSubmitMode, buttonPosition, scaffoldBuilder);
 
   @JsonKey(ignore: true)
   @override
@@ -2420,7 +2440,9 @@ class _$StandardSubmitModeImpl extends StandardSubmitMode {
             @JsonKey(includeToJson: false, includeFromJson: false)
             IconData? submitIcon,
             DisableSubmitButton disableSubmitMode,
-            SubmitButtonPosition buttonPosition)
+            SubmitButtonPosition buttonPosition,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            ScaffoldBuilderDef? scaffoldBuilder)
         standard,
     required TResult Function(
             String? submitText,
@@ -2431,7 +2453,8 @@ class _$StandardSubmitModeImpl extends StandardSubmitMode {
             bool showProgressIndicator)
         pageByPage,
   }) {
-    return standard(submitText, submitIcon, disableSubmitMode, buttonPosition);
+    return standard(submitText, submitIcon, disableSubmitMode, buttonPosition,
+        scaffoldBuilder);
   }
 
   @override
@@ -2442,7 +2465,9 @@ class _$StandardSubmitModeImpl extends StandardSubmitMode {
             @JsonKey(includeToJson: false, includeFromJson: false)
             IconData? submitIcon,
             DisableSubmitButton disableSubmitMode,
-            SubmitButtonPosition buttonPosition)?
+            SubmitButtonPosition buttonPosition,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            ScaffoldBuilderDef? scaffoldBuilder)?
         standard,
     TResult? Function(
             String? submitText,
@@ -2453,8 +2478,8 @@ class _$StandardSubmitModeImpl extends StandardSubmitMode {
             bool showProgressIndicator)?
         pageByPage,
   }) {
-    return standard?.call(
-        submitText, submitIcon, disableSubmitMode, buttonPosition);
+    return standard?.call(submitText, submitIcon, disableSubmitMode,
+        buttonPosition, scaffoldBuilder);
   }
 
   @override
@@ -2465,7 +2490,9 @@ class _$StandardSubmitModeImpl extends StandardSubmitMode {
             @JsonKey(includeToJson: false, includeFromJson: false)
             IconData? submitIcon,
             DisableSubmitButton disableSubmitMode,
-            SubmitButtonPosition buttonPosition)?
+            SubmitButtonPosition buttonPosition,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            ScaffoldBuilderDef? scaffoldBuilder)?
         standard,
     TResult Function(
             String? submitText,
@@ -2478,8 +2505,8 @@ class _$StandardSubmitModeImpl extends StandardSubmitMode {
     required TResult orElse(),
   }) {
     if (standard != null) {
-      return standard(
-          submitText, submitIcon, disableSubmitMode, buttonPosition);
+      return standard(submitText, submitIcon, disableSubmitMode, buttonPosition,
+          scaffoldBuilder);
     }
     return orElse();
   }
@@ -2529,7 +2556,9 @@ abstract class StandardSubmitMode extends WoFormSubmitMode {
       @JsonKey(includeToJson: false, includeFromJson: false)
       final IconData? submitIcon,
       final DisableSubmitButton disableSubmitMode,
-      final SubmitButtonPosition buttonPosition}) = _$StandardSubmitModeImpl;
+      final SubmitButtonPosition buttonPosition,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final ScaffoldBuilderDef? scaffoldBuilder}) = _$StandardSubmitModeImpl;
   const StandardSubmitMode._() : super._();
 
   factory StandardSubmitMode.fromJson(Map<String, dynamic> json) =
@@ -2543,6 +2572,8 @@ abstract class StandardSubmitMode extends WoFormSubmitMode {
   @override
   DisableSubmitButton get disableSubmitMode;
   SubmitButtonPosition get buttonPosition;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  ScaffoldBuilderDef? get scaffoldBuilder;
   @override
   @JsonKey(ignore: true)
   _$$StandardSubmitModeImplCopyWith<_$StandardSubmitModeImpl> get copyWith =>
@@ -2684,7 +2715,9 @@ class _$PageByPageSubmitModeImpl extends PageByPageSubmitMode {
             @JsonKey(includeToJson: false, includeFromJson: false)
             IconData? submitIcon,
             DisableSubmitButton disableSubmitMode,
-            SubmitButtonPosition buttonPosition)
+            SubmitButtonPosition buttonPosition,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            ScaffoldBuilderDef? scaffoldBuilder)
         standard,
     required TResult Function(
             String? submitText,
@@ -2707,7 +2740,9 @@ class _$PageByPageSubmitModeImpl extends PageByPageSubmitMode {
             @JsonKey(includeToJson: false, includeFromJson: false)
             IconData? submitIcon,
             DisableSubmitButton disableSubmitMode,
-            SubmitButtonPosition buttonPosition)?
+            SubmitButtonPosition buttonPosition,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            ScaffoldBuilderDef? scaffoldBuilder)?
         standard,
     TResult? Function(
             String? submitText,
@@ -2730,7 +2765,9 @@ class _$PageByPageSubmitModeImpl extends PageByPageSubmitMode {
             @JsonKey(includeToJson: false, includeFromJson: false)
             IconData? submitIcon,
             DisableSubmitButton disableSubmitMode,
-            SubmitButtonPosition buttonPosition)?
+            SubmitButtonPosition buttonPosition,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            ScaffoldBuilderDef? scaffoldBuilder)?
         standard,
     TResult Function(
             String? submitText,
