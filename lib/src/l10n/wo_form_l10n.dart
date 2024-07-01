@@ -10,8 +10,8 @@ class WoFormL10n {
     required this.errors,
   });
 
-  final String submit;
-  final String next;
+  final String Function() submit;
+  final String Function() next;
   final TranslateInputError translateError;
   final String? Function(int) errors;
 }

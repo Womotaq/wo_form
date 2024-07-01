@@ -58,8 +58,8 @@ class SubmitButtonBuilder extends StatelessWidget {
       pageIndex: pageIndex,
       text: submitMode is PageByPageSubmitMode &&
               pageIndex < form.inputs.length - 1
-          ? submitMode.nextText ?? context.read<WoFormL10n?>()?.next
-          : submitMode.submitText ?? context.read<WoFormL10n?>()?.submit,
+          ? submitMode.nextText ?? context.read<WoFormL10n?>()?.next()
+          : submitMode.submitText ?? context.read<WoFormL10n?>()?.submit(),
       icon: submitMode.submitIcon,
       onPressed: disabled
           ? null
