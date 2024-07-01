@@ -24,6 +24,10 @@ class _StringFieldState extends State<StringField> {
 
   @override
   Widget build(BuildContext context) {
+    if ((widget.data.value ?? '') != textEditingController.text) {
+      textEditingController.text = widget.data.value ?? '';
+    }
+
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 16),
       leading: widget.data.uiSettings.prefixIcon,
