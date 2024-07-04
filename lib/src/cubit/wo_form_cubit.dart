@@ -177,7 +177,19 @@ class WoFormInitializer extends StatelessWidget {
             ),
           ),
         ],
-        child: child,
+        child: BlocListener<WoFormStatusCubit, WoFormStatus>(
+          listener: (context, status) {
+            switch (status) {
+              case SubmitSuccessStatus():
+                form.onSubmitSuccess?.call(context);
+              case SubmitErrorStatus():
+                (form.onSubmitError ?? WoFormTheme.of(context)?.onSubmitError)
+                    ?.call(context, status);
+              default:
+            }
+          },
+          child: child,
+        ),
       ),
     );
   }
