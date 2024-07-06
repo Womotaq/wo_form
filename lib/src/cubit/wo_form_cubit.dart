@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -86,16 +85,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
       final index = pageController.page?.toInt() ?? 0;
       final input = form.inputs[index];
 
-      final Iterable<WoFormInputError> errors;
-      if (input is WoFormNode) {
-        errors = input.getErrors(state, parentPath: '');
-      } else if (input is WoFormInputMixin) {
-        errors = [
-          (input as WoFormInputMixin).getError(state['/${input.id}']),
-        ].whereNotNull();
-      } else {
-        throw UnimplementedError();
-      }
+      final errors = input.getErrors(state, parentPath: '');
 
       if (errors.isNotEmpty) {
         return _statusCubit.setInvalidValues(inputErrors: errors);

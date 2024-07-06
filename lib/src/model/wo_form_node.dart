@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/src/model/json_converter/dynamic_input_templates.dart';
 import 'package:wo_form/src/model/json_converter/inputs_list.dart';
@@ -21,6 +22,11 @@ mixin WoFormElementMixin {
     required String parentPath,
   });
 
+  Iterable<String> getAllInputPaths({
+    required WoFormValues values,
+    required String parentPath,
+  });
+
   Iterable<WoFormInputError> getErrors(
     WoFormValues values, {
     required String parentPath,
@@ -32,19 +38,12 @@ mixin WoFormElementMixin {
   });
 
   /// Return true if this element has data that can be exported.
-  ///
-  /// Used by ExportType.firstExportable.
   bool isExportable({
     required WoFormValues values,
     required String parentPath,
   });
 
-  Widget toWidget<T extends WoFormValuesCubit>({required String parentPath});
-
-  Iterable<String> getAllInputPaths({
-    required WoFormValues values,
-    required String parentPath,
-  });
+  Widget toWidget({required String parentPath, Key? key});
 
   static String getAbsolutePath({
     required String parentPath,
@@ -80,6 +79,18 @@ mixin WoFormElementMixin {
   WoFormElementMixin withUid();
 }
 
+mixin WoFormNodeMixin {
+  String get id;
+
+  Map<String, dynamic> initialValues({required String parentPath});
+
+  WoFormElementMixin? getInput({
+    required String path,
+    required String parentPath,
+    Map<String, dynamic>? values,
+  });
+}
+
 @freezed
 class DynamicInputTemplate with _$DynamicInputTemplate {
   const factory DynamicInputTemplate({
@@ -98,7 +109,7 @@ class DynamicInputTemplate with _$DynamicInputTemplate {
 }
 
 @freezed
-sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
+sealed class WoFormNode with _$WoFormNode, WoFormElementMixin, WoFormNodeMixin {
   const factory WoFormNode.dynamicInputs({
     required String id,
     @DynamicInputTemplatesConverter()
@@ -156,6 +167,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
 
   // --
 
+  @override
   Map<String, dynamic> initialValues({required String parentPath}) {
     switch (this) {
       case DynamicInputsNode():
@@ -163,8 +175,9 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
       case InputsNode(inputs: final inputs):
         return {
           for (final input in inputs)
-            if (input is WoFormNode)
-              ...input.initialValues(parentPath: '$parentPath/$id')
+            if (input is WoFormNodeMixin)
+              ...(input as WoFormNodeMixin)
+                  .initialValues(parentPath: '$parentPath/$id')
             else if (input is WoFormInputMixin)
               '$parentPath/$id/${input.id}':
                   (input as WoFormInputMixin).initialValue,
@@ -187,8 +200,9 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
           initialValue: final initialValue,
         ):
         final input = builder!(id, initialValue);
-        if (input is WoFormNode) {
-          return input.initialValues(parentPath: '$parentPath/$id');
+        if (input is WoFormNodeMixin) {
+          return (input as WoFormNodeMixin)
+              .initialValues(parentPath: '$parentPath/$id');
         } else if (input is WoFormInputMixin) {
           return {
             '$parentPath/$id/${input.id}':
@@ -283,6 +297,56 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
   }
 
   @override
+  Iterable<String> getAllInputPaths({
+    required WoFormValues values,
+    required String parentPath,
+  }) {
+    switch (this) {
+      case DynamicInputsNode():
+      case InputsNode():
+        final inputs = this is InputsNode
+            ? (this as InputsNode).inputs
+            : (values['$parentPath/$id'] as List<WoFormElementMixin>?) ?? [];
+
+        return [
+          '$parentPath/$id',
+          for (final input in inputs)
+            ...input.getAllInputPaths(
+              values: values,
+              parentPath: '$parentPath/$id',
+            ),
+        ];
+      // case PushPageNode(input: final input):
+      //   return [
+      //     '$parentPath/$id',
+      //     ...input.getAllInputPaths(
+      //       values: values,
+      //       parentPath: '$parentPath/$id',
+      //     ),
+      //   ];
+      case ValueBuilderNode(inputPath: final inputPath, builder: final builder):
+        final input = builder!(
+          id,
+          values[WoFormElementMixin.getAbsolutePath(
+            parentPath: '$parentPath/$id',
+            inputPath: inputPath,
+          )],
+        );
+
+        return [
+          '$parentPath/$id',
+          ...input.getAllInputPaths(
+            values: values,
+            parentPath: '$parentPath/$id',
+          ),
+        ];
+      case ValueListenerNode():
+      case WidgetNode():
+        return ['$parentPath/$id'];
+    }
+  }
+
+  @override
   String? getExportKey({
     required WoFormValues values,
     required String parentPath,
@@ -372,56 +436,6 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
   }
 
   @override
-  Iterable<String> getAllInputPaths({
-    required WoFormValues values,
-    required String parentPath,
-  }) {
-    switch (this) {
-      case DynamicInputsNode():
-      case InputsNode():
-        final inputs = this is InputsNode
-            ? (this as InputsNode).inputs
-            : (values['$parentPath/$id'] as List<WoFormElementMixin>?) ?? [];
-
-        return [
-          '$parentPath/$id',
-          for (final input in inputs)
-            ...input.getAllInputPaths(
-              values: values,
-              parentPath: '$parentPath/$id',
-            ),
-        ];
-      // case PushPageNode(input: final input):
-      //   return [
-      //     '$parentPath/$id',
-      //     ...input.getAllInputPaths(
-      //       values: values,
-      //       parentPath: '$parentPath/$id',
-      //     ),
-      //   ];
-      case ValueBuilderNode(inputPath: final inputPath, builder: final builder):
-        final input = builder!(
-          id,
-          values[WoFormElementMixin.getAbsolutePath(
-            parentPath: '$parentPath/$id',
-            inputPath: inputPath,
-          )],
-        );
-
-        return [
-          '$parentPath/$id',
-          ...input.getAllInputPaths(
-            values: values,
-            parentPath: '$parentPath/$id',
-          ),
-        ];
-      case ValueListenerNode():
-      case WidgetNode():
-        return ['$parentPath/$id'];
-    }
-  }
-
-  @override
   Iterable<WoFormInputError> getErrors(
     WoFormValues values, {
     required String parentPath,
@@ -474,6 +488,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
   ///       ...
   ///
   /// The path of the input with id 'name' is '/profile/name'.
+  @override
   WoFormElementMixin? getInput({
     required String path,
     required String parentPath,
@@ -535,8 +550,8 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
 
         if (input.id == path.substring(1)) return input;
 
-        if (input is WoFormNode) {
-          return input.getInput(
+        if (input is WoFormNodeMixin) {
+          return (input as WoFormNodeMixin).getInput(
             path: path.substring(slashIndex + 1),
             parentPath: '$parentPath/$id',
             values: values,
@@ -551,16 +566,21 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
   }
 
   @override
-  Widget toWidget<T extends WoFormValuesCubit>({required String parentPath}) =>
-      switch (this) {
-        DynamicInputsNode() =>
-          DynamicInputsNodeWidgetBuilder(inputPath: '$parentPath/$id'),
-        InputsNode() => InputsNodeWidgetBuilder(inputPath: '$parentPath/$id'),
+  Widget toWidget({required String parentPath, Key? key}) => switch (this) {
+        DynamicInputsNode() => DynamicInputsNodeWidgetBuilder(
+            key: key,
+            inputPath: '$parentPath/$id',
+          ),
+        InputsNode() => InputsNodeWidgetBuilder(
+            key: key,
+            inputPath: '$parentPath/$id',
+          ),
         ValueBuilderNode(
           inputPath: final inputPath,
           builder: final builder,
         ) =>
           WoFormValueBuilder<dynamic>(
+            key: key,
             inputPath: WoFormElementMixin.getAbsolutePath(
               inputPath: inputPath,
               parentPath: '$parentPath/$id',
@@ -580,6 +600,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
           listener: final listener,
         ) =>
           WoFormValueListener<dynamic>(
+            key: key,
             inputPath: WoFormElementMixin.getAbsolutePath(
               inputPath: inputPath,
               parentPath: '$parentPath/$id',
@@ -592,10 +613,256 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin {
             ),
             child: const SizedBox.shrink(),
           ),
-        WidgetNode(builder: final builder) =>
-          builder == null ? const SizedBox.shrink() : Builder(builder: builder)
+        WidgetNode(builder: final builder) => builder == null
+            ? SizedBox.shrink(key: key)
+            : Builder(key: key, builder: builder)
       };
 
   @override
   WoFormNode withUid() => copyWith(id: Random().generateUid());
+}
+
+@freezed
+class FutureNode<T> with _$FutureNode<T>, WoFormElementMixin, WoFormNodeMixin {
+  const factory FutureNode({
+    required String id,
+    required Future<T>? future,
+    required WoFormElementMixin Function(
+      String parentPath,
+      AsyncSnapshot<T?> snapshot,
+    ) builder,
+    T? initialData,
+
+    /// If true, when the future will be completed, the values of
+    /// the children inputs will be reseted to their initialValues.
+    @Default(true) bool willResetToInitialValues,
+  }) = _FutureNode<T>;
+
+  const FutureNode._();
+
+  @override
+  Map<String, dynamic> toJson() => {};
+
+  // --
+
+  @override
+  dynamic export({
+    required WoFormValues values,
+    required String parentPath,
+  }) {
+    final snapshot = values['$parentPath/$id'];
+
+    if (snapshot is! AsyncSnapshot<T?>) return null;
+
+    return builder(parentPath, snapshot).export(
+      values: values,
+      parentPath: '$parentPath/$id',
+    );
+  }
+
+  @override
+  Iterable<String> getAllInputPaths({
+    required WoFormValues values,
+    required String parentPath,
+  }) {
+    final snapshot = values['$parentPath/$id'];
+
+    return [
+      '$parentPath/$id',
+      if (snapshot is AsyncSnapshot<T?>)
+        ...builder(parentPath, snapshot).getAllInputPaths(
+          values: values,
+          parentPath: '$parentPath/$id',
+        ),
+    ];
+  }
+
+  @override
+  Iterable<WoFormInputError> getErrors(
+    WoFormValues values, {
+    required String parentPath,
+  }) {
+    final snapshot = values['$parentPath/$id'];
+
+    if (snapshot is! AsyncSnapshot<T?>) return [];
+
+    return builder(parentPath, snapshot).getErrors(
+      values,
+      parentPath: '$parentPath/$id',
+    );
+  }
+
+  @override
+  String? getExportKey({
+    required WoFormValues values,
+    required String parentPath,
+  }) {
+    final snapshot = values['$parentPath/$id'];
+
+    if (snapshot is! AsyncSnapshot<T?>) return null;
+
+    return builder(parentPath, snapshot).getExportKey(
+      values: values,
+      parentPath: '$parentPath/$id',
+    );
+  }
+
+  /// The path of an input is the ids of it and its parents, separated by the
+  /// character '/'.
+  ///
+  /// Exemple :
+  ///
+  /// InputsNode(
+  ///   id: 'profile',
+  ///   inputs: [
+  ///     StringInput(
+  ///       id: 'name',
+  ///       ...
+  ///
+  /// The path of the input with id 'name' is '/profile/name'.
+  @override
+  WoFormElementMixin? getInput({
+    required String path,
+    required String parentPath,
+    Map<String, dynamic>? values,
+  }) {
+    if (values == null) {
+      throw ArgumentError(
+        'values must be provided in order to access a dynamic input.',
+      );
+    }
+
+    final snapshot = values['$parentPath/$id'];
+
+    if (snapshot is! AsyncSnapshot<T?>) return null;
+
+    final input = builder('$parentPath/$id', snapshot);
+
+    if (input.id == path.substring(1)) return input;
+
+    final slashIndex = path.substring(1).indexOf('/');
+
+    if (input is WoFormNodeMixin) {
+      return (input as WoFormNodeMixin).getInput(
+        path: path.substring(slashIndex + 1),
+        parentPath: '$parentPath/$id',
+        values: values,
+      );
+    }
+
+    return null;
+  }
+
+  @override
+  Map<String, dynamic> initialValues({
+    required String parentPath,
+    AsyncSnapshot<T?>? initialSnapshot,
+  }) {
+    final snapshot = initialSnapshot ??
+        AsyncSnapshot.withData(ConnectionState.waiting, initialData);
+    final input = builder('$parentPath/$id', snapshot);
+
+    return {
+      '$parentPath/$id': snapshot,
+      if (input is WoFormNodeMixin)
+        ...(input as WoFormNodeMixin)
+            .initialValues(parentPath: '$parentPath/$id')
+      else if (input is WoFormInputMixin)
+        '$parentPath/$id/${input.id}': (input as WoFormInputMixin).initialValue,
+    };
+  }
+
+  /// Return true if this element has data that can be exported.
+  @override
+  bool isExportable({
+    required WoFormValues values,
+    required String parentPath,
+  }) {
+    final snapshot = values['$parentPath/$id'];
+
+    if (snapshot is! AsyncSnapshot<T?>) return false;
+
+    return builder(parentPath, snapshot).isExportable(
+      values: values,
+      parentPath: '$parentPath/$id',
+    );
+  }
+
+  @override
+  Widget toWidget({required String parentPath, Key? key}) =>
+      FutureNodeBuilder<T>(
+        key: key,
+        parentPath: parentPath,
+        node: this,
+      );
+
+  @override
+  FutureNode<T> withUid() => copyWith(id: Random().generateUid());
+}
+
+class FutureNodeBuilder<T> extends StatelessWidget {
+  const FutureNodeBuilder({
+    required this.parentPath,
+    required this.node,
+    super.key,
+  });
+
+  final String parentPath;
+  final FutureNode<T> node;
+
+  Future<void> getData(
+    void Function(AsyncSnapshot<T?> snapshot) onSnapshotChanged,
+  ) async {
+    try {
+      final data = await node.future;
+      onSnapshotChanged(AsyncSnapshot.withData(ConnectionState.done, data));
+    } catch (error) {
+      onSnapshotChanged(AsyncSnapshot.withError(ConnectionState.done, error));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final valuesCubit = context.read<WoFormValuesCubit>();
+
+    final nodePath = '$parentPath/${node.id}';
+
+    getData(
+      (snapshot) => valuesCubit.onValueChanged(
+        inputPath: nodePath,
+        value: snapshot,
+      ),
+    );
+
+    return WoFormValueBuilder<AsyncSnapshot<T?>>(
+      inputPath: nodePath,
+      builder: (context, snapshot) {
+        final input = node.builder(
+          nodePath,
+          snapshot ?? const AsyncSnapshot.nothing(),
+        );
+
+        if (node.willResetToInitialValues) {
+          if (snapshot?.connectionState == ConnectionState.done) {
+            final newInitialValues = node.initialValues(
+              parentPath: parentPath,
+              initialSnapshot: snapshot,
+            );
+
+            for (final entry in newInitialValues.entries) {
+              valuesCubit.onValueChanged(
+                inputPath: entry.key,
+                value: entry.value,
+              );
+            }
+          }
+        }
+
+        return input.toWidget(
+          key: ValueKey(snapshot?.connectionState),
+          parentPath: nodePath,
+        );
+      },
+    );
+  }
 }

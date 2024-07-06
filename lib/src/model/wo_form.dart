@@ -48,12 +48,12 @@ class WoForm with _$WoForm {
 
   // --
 
-  Iterable<WoFormNode> get nodes => inputs.whereType();
+  Iterable<WoFormNodeMixin> get nodes => inputs.whereType();
 
   Map<String, dynamic> initialValues() => {
         for (final input in inputs)
-          if (input is WoFormNode)
-            ...input.initialValues(parentPath: '')
+          if (input is WoFormNodeMixin)
+            ...(input as WoFormNodeMixin).initialValues(parentPath: '')
           else if (input is WoFormInputMixin)
             '/${input.id}': (input as WoFormInputMixin).initialValue,
       };
@@ -63,13 +63,8 @@ class WoForm with _$WoForm {
           ...input.getAllInputPaths(values: values, parentPath: ''),
       ];
 
-  Iterable<WoFormInputError> getErrors(WoFormValues values) => [
-        for (final input in inputs)
-          if (input is WoFormNode)
-            ...input.getErrors(values, parentPath: '')
-          else if (input is WoFormInputMixin)
-            (input as WoFormInputMixin).getError(values['/${input.id}']),
-      ].whereNotNull();
+  Iterable<WoFormInputError> getErrors(WoFormValues values) =>
+      [for (final input in inputs) ...input.getErrors(values, parentPath: '')];
 
   /// The path of an input is the ids of it and its parents, separated by the
   /// character '/'.
@@ -139,5 +134,5 @@ class WoForm with _$WoForm {
 
   Widget toPage({Key? key}) => toWidget(key: key);
 
-  Widget toWidget({Key? key}) => WoFormPageBuilder(form: this, key: key);
+  Widget toWidget({Key? key}) => WoFormPageBuilder(key: key, form: this);
 }

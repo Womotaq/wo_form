@@ -2066,3 +2066,218 @@ abstract class WidgetNode extends WoFormNode {
   _$$WidgetNodeImplCopyWith<_$WidgetNodeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+mixin _$FutureNode<T> {
+  String get id => throw _privateConstructorUsedError;
+  Future<T>? get future => throw _privateConstructorUsedError;
+  WoFormElementMixin Function(String, AsyncSnapshot<T?>) get builder =>
+      throw _privateConstructorUsedError;
+  T? get initialData => throw _privateConstructorUsedError;
+  bool get willResetToInitialValues => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $FutureNodeCopyWith<T, FutureNode<T>> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $FutureNodeCopyWith<T, $Res> {
+  factory $FutureNodeCopyWith(
+          FutureNode<T> value, $Res Function(FutureNode<T>) then) =
+      _$FutureNodeCopyWithImpl<T, $Res, FutureNode<T>>;
+  @useResult
+  $Res call(
+      {String id,
+      Future<T>? future,
+      WoFormElementMixin Function(String, AsyncSnapshot<T?>) builder,
+      T? initialData,
+      bool willResetToInitialValues});
+}
+
+/// @nodoc
+class _$FutureNodeCopyWithImpl<T, $Res, $Val extends FutureNode<T>>
+    implements $FutureNodeCopyWith<T, $Res> {
+  _$FutureNodeCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? future = freezed,
+    Object? builder = null,
+    Object? initialData = freezed,
+    Object? willResetToInitialValues = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      future: freezed == future
+          ? _value.future
+          : future // ignore: cast_nullable_to_non_nullable
+              as Future<T>?,
+      builder: null == builder
+          ? _value.builder
+          : builder // ignore: cast_nullable_to_non_nullable
+              as WoFormElementMixin Function(String, AsyncSnapshot<T?>),
+      initialData: freezed == initialData
+          ? _value.initialData
+          : initialData // ignore: cast_nullable_to_non_nullable
+              as T?,
+      willResetToInitialValues: null == willResetToInitialValues
+          ? _value.willResetToInitialValues
+          : willResetToInitialValues // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$FutureNodeImplCopyWith<T, $Res>
+    implements $FutureNodeCopyWith<T, $Res> {
+  factory _$$FutureNodeImplCopyWith(
+          _$FutureNodeImpl<T> value, $Res Function(_$FutureNodeImpl<T>) then) =
+      __$$FutureNodeImplCopyWithImpl<T, $Res>;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      Future<T>? future,
+      WoFormElementMixin Function(String, AsyncSnapshot<T?>) builder,
+      T? initialData,
+      bool willResetToInitialValues});
+}
+
+/// @nodoc
+class __$$FutureNodeImplCopyWithImpl<T, $Res>
+    extends _$FutureNodeCopyWithImpl<T, $Res, _$FutureNodeImpl<T>>
+    implements _$$FutureNodeImplCopyWith<T, $Res> {
+  __$$FutureNodeImplCopyWithImpl(
+      _$FutureNodeImpl<T> _value, $Res Function(_$FutureNodeImpl<T>) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? future = freezed,
+    Object? builder = null,
+    Object? initialData = freezed,
+    Object? willResetToInitialValues = null,
+  }) {
+    return _then(_$FutureNodeImpl<T>(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      future: freezed == future
+          ? _value.future
+          : future // ignore: cast_nullable_to_non_nullable
+              as Future<T>?,
+      builder: null == builder
+          ? _value.builder
+          : builder // ignore: cast_nullable_to_non_nullable
+              as WoFormElementMixin Function(String, AsyncSnapshot<T?>),
+      initialData: freezed == initialData
+          ? _value.initialData
+          : initialData // ignore: cast_nullable_to_non_nullable
+              as T?,
+      willResetToInitialValues: null == willResetToInitialValues
+          ? _value.willResetToInitialValues
+          : willResetToInitialValues // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$FutureNodeImpl<T> extends _FutureNode<T> {
+  const _$FutureNodeImpl(
+      {required this.id,
+      required this.future,
+      required this.builder,
+      this.initialData,
+      this.willResetToInitialValues = true})
+      : super._();
+
+  @override
+  final String id;
+  @override
+  final Future<T>? future;
+  @override
+  final WoFormElementMixin Function(String, AsyncSnapshot<T?>) builder;
+  @override
+  final T? initialData;
+  @override
+  @JsonKey()
+  final bool willResetToInitialValues;
+
+  @override
+  String toString() {
+    return 'FutureNode<$T>(id: $id, future: $future, builder: $builder, initialData: $initialData, willResetToInitialValues: $willResetToInitialValues)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FutureNodeImpl<T> &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.future, future) || other.future == future) &&
+            (identical(other.builder, builder) || other.builder == builder) &&
+            const DeepCollectionEquality()
+                .equals(other.initialData, initialData) &&
+            (identical(
+                    other.willResetToInitialValues, willResetToInitialValues) ||
+                other.willResetToInitialValues == willResetToInitialValues));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      future,
+      builder,
+      const DeepCollectionEquality().hash(initialData),
+      willResetToInitialValues);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FutureNodeImplCopyWith<T, _$FutureNodeImpl<T>> get copyWith =>
+      __$$FutureNodeImplCopyWithImpl<T, _$FutureNodeImpl<T>>(this, _$identity);
+}
+
+abstract class _FutureNode<T> extends FutureNode<T> {
+  const factory _FutureNode(
+      {required final String id,
+      required final Future<T>? future,
+      required final WoFormElementMixin Function(String, AsyncSnapshot<T?>)
+          builder,
+      final T? initialData,
+      final bool willResetToInitialValues}) = _$FutureNodeImpl<T>;
+  const _FutureNode._() : super._();
+
+  @override
+  String get id;
+  @override
+  Future<T>? get future;
+  @override
+  WoFormElementMixin Function(String, AsyncSnapshot<T?>) get builder;
+  @override
+  T? get initialData;
+  @override
+  bool get willResetToInitialValues;
+  @override
+  @JsonKey(ignore: true)
+  _$$FutureNodeImplCopyWith<T, _$FutureNodeImpl<T>> get copyWith =>
+      throw _privateConstructorUsedError;
+}

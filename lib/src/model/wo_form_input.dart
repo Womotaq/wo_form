@@ -66,7 +66,7 @@ mixin WoFormInputMixin {
 
   Map<String, dynamic> toJson();
 
-  Widget toWidget<C extends WoFormValuesCubit>({required String parentPath});
+  Widget toWidget({required String parentPath, Key? key});
 }
 
 @freezed
@@ -231,17 +231,17 @@ sealed class WoFormInput
       };
 
   @override
-  Widget toWidget<T extends WoFormValuesCubit>({required String parentPath}) {
+  Widget toWidget({required String parentPath, Key? key}) {
     final path = '$parentPath/$id';
     switch (this) {
       case BooleanInput():
-        return BooleanFieldBuilder(inputPath: path);
+        return BooleanFieldBuilder(key: key, inputPath: path);
       case NumInput():
-        return NumFieldBuilder(inputPath: path);
+        return NumFieldBuilder(key: key, inputPath: path);
       case StringInput():
-        return StringFieldBuilder(inputPath: path);
+        return StringFieldBuilder(key: key, inputPath: path);
       case SelectStringInput():
-        return SelectStringFieldBuilder(inputPath: path);
+        return SelectStringFieldBuilder(key: key, inputPath: path);
     }
   }
 
@@ -357,8 +357,8 @@ class SelectInput<T>
       );
 
   @override
-  Widget toWidget<C extends WoFormValuesCubit>({required String parentPath}) =>
-      SelectFieldBuilder<T>(inputPath: '$parentPath/$id');
+  Widget toWidget({required String parentPath, Key? key}) =>
+      SelectFieldBuilder<T>(key: key, inputPath: '$parentPath/$id');
 
   @override
   SelectInput<T> withUid() => copyWith(id: Random().generateUid());
