@@ -16,7 +16,10 @@ class InputHeader extends StatelessWidget {
     final theme = Theme.of(context);
     final inputDecorationTheme = theme.inputDecorationTheme;
 
-    if (labelText.isEmpty && errorText.isEmpty && helperText.isEmpty) {
+    if (labelText.isEmpty &&
+        errorText.isEmpty &&
+        helperText.isEmpty &&
+        data.trailing == null) {
       return const SizedBox.shrink();
     }
 
