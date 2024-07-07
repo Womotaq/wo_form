@@ -224,7 +224,7 @@ _$StandardSubmitModeImpl _$$StandardSubmitModeImplFromJson(
           DisableSubmitButton.never,
       buttonPosition: $enumDecodeNullable(
               _$SubmitButtonPositionEnumMap, json['buttonPosition']) ??
-          SubmitButtonPosition.bottom,
+          SubmitButtonPosition.body,
       $type: json['runtimeType'] as String?,
     );
 
@@ -245,8 +245,9 @@ const _$DisableSubmitButtonEnumMap = {
 };
 
 const _$SubmitButtonPositionEnumMap = {
-  SubmitButtonPosition.bottom: 'bottom',
+  SubmitButtonPosition.body: 'body',
   SubmitButtonPosition.appBar: 'appBar',
+  SubmitButtonPosition.bottomBar: 'bottomBar',
 };
 
 _$PageByPageSubmitModeImpl _$$PageByPageSubmitModeImplFromJson(

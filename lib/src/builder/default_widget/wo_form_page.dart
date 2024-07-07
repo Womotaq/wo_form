@@ -67,7 +67,7 @@ class WoFormStandardPage extends StatelessWidget {
               ),
             ),
             if (uiSettings.submitMode.buttonPosition ==
-                SubmitButtonPosition.bottom)
+                SubmitButtonPosition.body)
               const SubmitButtonBuilder(),
           ],
         ),
@@ -104,6 +104,10 @@ class _StandardScaffold extends StatelessWidget {
           ],
         ],
       ),
+      bottomNavigationBar: form.uiSettings.submitMode.buttonPosition ==
+              SubmitButtonPosition.bottomBar
+          ? const SubmitButtonBuilder()
+          : null,
       body: SingleChildScrollView(
         child: SafeArea(
           child: body,

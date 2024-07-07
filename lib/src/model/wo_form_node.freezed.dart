@@ -2074,6 +2074,9 @@ mixin _$FutureNode<T> {
   WoFormElementMixin Function(String, AsyncSnapshot<T?>) get builder =>
       throw _privateConstructorUsedError;
   T? get initialData => throw _privateConstructorUsedError;
+
+  /// If true, when the future will be completed, the values of
+  /// the children inputs will be reseted to their initialValues.
   bool get willResetToInitialValues => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -2216,6 +2219,9 @@ class _$FutureNodeImpl<T> extends _FutureNode<T> {
   final WoFormElementMixin Function(String, AsyncSnapshot<T?>) builder;
   @override
   final T? initialData;
+
+  /// If true, when the future will be completed, the values of
+  /// the children inputs will be reseted to their initialValues.
   @override
   @JsonKey()
   final bool willResetToInitialValues;
@@ -2275,6 +2281,9 @@ abstract class _FutureNode<T> extends FutureNode<T> {
   @override
   T? get initialData;
   @override
+
+  /// If true, when the future will be completed, the values of
+  /// the children inputs will be reseted to their initialValues.
   bool get willResetToInitialValues;
   @override
   @JsonKey(ignore: true)

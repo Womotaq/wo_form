@@ -2370,7 +2370,7 @@ class _$StandardSubmitModeImpl extends StandardSubmitMode {
       {this.submitText,
       @JsonKey(includeToJson: false, includeFromJson: false) this.submitIcon,
       this.disableSubmitMode = DisableSubmitButton.never,
-      this.buttonPosition = SubmitButtonPosition.bottom,
+      this.buttonPosition = SubmitButtonPosition.body,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.scaffoldBuilder,
       final String? $type})

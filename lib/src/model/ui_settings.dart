@@ -353,7 +353,7 @@ class WoFormUiSettings with _$WoFormUiSettings {
       object.toJson();
 }
 
-enum SubmitButtonPosition { bottom, appBar }
+enum SubmitButtonPosition { body, appBar, bottomBar }
 
 enum DisableSubmitButton { never, whenInvalid, whenInitialOrSubmitSuccess }
 
@@ -365,7 +365,7 @@ sealed class WoFormSubmitMode with _$WoFormSubmitMode {
     String? submitText,
     @JsonKey(includeToJson: false, includeFromJson: false) IconData? submitIcon,
     @Default(DisableSubmitButton.never) DisableSubmitButton disableSubmitMode,
-    @Default(SubmitButtonPosition.bottom) SubmitButtonPosition buttonPosition,
+    @Default(SubmitButtonPosition.body) SubmitButtonPosition buttonPosition,
     @JsonKey(includeToJson: false, includeFromJson: false)
     ScaffoldBuilderDef? scaffoldBuilder,
   }) = StandardSubmitMode;
@@ -390,6 +390,6 @@ sealed class WoFormSubmitMode with _$WoFormSubmitMode {
 
   SubmitButtonPosition get buttonPosition => switch (this) {
         StandardSubmitMode(buttonPosition: final p) => p,
-        PageByPageSubmitMode() => SubmitButtonPosition.bottom,
+        PageByPageSubmitMode() => SubmitButtonPosition.bottomBar,
       };
 }

@@ -58,13 +58,18 @@ class SubmitButton extends StatelessWidget {
     switch (data.position) {
       case SubmitButtonPosition.appBar:
         return button;
-      case SubmitButtonPosition.bottom:
+      case SubmitButtonPosition.body:
         return Padding(
           padding: const EdgeInsets.only(
             top: 32,
             left: 16,
             right: 16,
           ),
+          child: button,
+        );
+      case SubmitButtonPosition.bottomBar:
+        return Padding(
+          padding: const EdgeInsets.all(16),
           child: button,
         );
     }
