@@ -11,16 +11,17 @@ _$DynamicInputTemplateImpl _$$DynamicInputTemplateImplFromJson(
     _$DynamicInputTemplateImpl(
       input: const WoFormElementConverter()
           .fromJson(json['input'] as Map<String, dynamic>),
-      labelText: json['labelText'] as String?,
-      helperText: json['helperText'] as String?,
+      uiSettings: json['uiSettings'] == null
+          ? const DynamicInputUiSettings()
+          : DynamicInputUiSettings.fromJson(
+              json['uiSettings'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$DynamicInputTemplateImplToJson(
         _$DynamicInputTemplateImpl instance) =>
     <String, dynamic>{
       'input': const WoFormElementConverter().toJson(instance.input),
-      'labelText': instance.labelText,
-      'helperText': instance.helperText,
+      'uiSettings': DynamicInputUiSettings.staticToJson(instance.uiSettings),
     };
 
 _$DynamicInputsNodeImpl _$$DynamicInputsNodeImplFromJson(

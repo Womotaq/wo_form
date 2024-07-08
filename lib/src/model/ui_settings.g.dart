@@ -52,6 +52,20 @@ Map<String, dynamic> _$$DynamicInputsNodeUiSettingsImplToJson(
       'helperText': instance.helperText,
     };
 
+_$DynamicInputUiSettingsImpl _$$DynamicInputUiSettingsImplFromJson(
+        Map<String, dynamic> json) =>
+    _$DynamicInputUiSettingsImpl(
+      labelText: json['labelText'] as String?,
+      helperText: json['helperText'] as String?,
+    );
+
+Map<String, dynamic> _$$DynamicInputUiSettingsImplToJson(
+        _$DynamicInputUiSettingsImpl instance) =>
+    <String, dynamic>{
+      'labelText': instance.labelText,
+      'helperText': instance.helperText,
+    };
+
 _$InputsNodeUiSettingsImpl _$$InputsNodeUiSettingsImplFromJson(
         Map<String, dynamic> json) =>
     _$InputsNodeUiSettingsImpl(

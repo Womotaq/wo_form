@@ -7,7 +7,8 @@ part 'wo_form_theme_data.freezed.dart';
 class WoFormThemeData with _$WoFormThemeData {
   const factory WoFormThemeData({
     BooleanFieldBuilderDef? booleanFieldBuilder,
-    DynamicInputNodeWidgetBuilderDef? dynamicInputsNodeWidgetBuilder,
+    DynamicInputsNodeWidgetBuilderDef? dynamicInputsNodeWidgetBuilder,
+    DynamicInputWidgetBuilderDef? dynamicInputWidgetBuilder,
     WoFormPageBuilderDef? formPageBuilder,
     GenerateIdDef? generateId,
     HeaderBuilderDef? headerBuilder,

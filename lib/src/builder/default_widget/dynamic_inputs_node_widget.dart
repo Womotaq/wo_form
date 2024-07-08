@@ -40,10 +40,10 @@ class DynamicInputsNodeWidget extends StatelessWidget {
         parentPath: data.inputPath,
       )) {
         final input = form.getInput(path: inputPath, values: values);
-        if (input is WoFormInput) {
+        if (input is WoFormInputMixin) {
           valuesCubit.onValueChanged(
             inputPath: inputPath,
-            value: input.initialValue,
+            value: (input! as WoFormInputMixin).initialValue,
           );
         }
       }
@@ -64,10 +64,12 @@ class DynamicInputsNodeWidget extends StatelessWidget {
             onSelected: data.onValueChanged == null
                 ? null
                 : (template) => onAddChoice(template.input),
-            valueBuilder: (template) => Text(template?.labelText ?? ''),
-            helpValueBuilder: (template) => (template.helperText ?? '').isEmpty
-                ? null
-                : Text(template.helperText ?? ''),
+            valueBuilder: (template) =>
+                Text(template?.uiSettings.labelText ?? ''),
+            helpValueBuilder: (template) =>
+                (template.uiSettings.helperText ?? '').isEmpty
+                    ? null
+                    : Text(template.uiSettings.helperText ?? ''),
             builder: (onPressed) => IconButton.filled(
               onPressed: onPressed,
               icon: const Icon(Icons.add),

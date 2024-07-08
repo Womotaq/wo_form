@@ -78,6 +78,7 @@ InputsNode createStringInputNode() => InputsNode(
           inputs: [
             const StringInput(
               id: 'labelText',
+              initialValue: 'Text',
               uiSettings: StringInputUiSettings(
                 labelText: 'Titre (ceci est un titre)',
               ),

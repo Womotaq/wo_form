@@ -63,7 +63,9 @@ InputsNode createSelectStringInputNode() => InputsNode(
                 ),
                 SelectInput<InputsVisibility?>(
                   id: 'inputsVisibility',
+                  initialValues: [InputsVisibility.always],
                   availibleValues: InputsVisibility.values,
+                  minCount: 1,
                   maxCount: 1,
                   uiSettings: SelectInputUiSettings(
                     labelText: 'Visibilité des options',

@@ -88,8 +88,9 @@ mixin WoFormNodeMixin {
 class DynamicInputTemplate with _$DynamicInputTemplate {
   const factory DynamicInputTemplate({
     @WoFormElementConverter() required WoFormElementMixin input,
-    String? labelText,
-    String? helperText,
+    @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
+    @Default(DynamicInputUiSettings())
+    DynamicInputUiSettings uiSettings,
   }) = _DynamicInputTemplate;
 
   const DynamicInputTemplate._();

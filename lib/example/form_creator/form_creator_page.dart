@@ -65,15 +65,21 @@ class FormCreatorPage extends StatelessWidget {
           exportSettings: const ExportSettings(type: ExportType.list),
           templates: [
             DynamicInputTemplate(
-              labelText: 'Choix de text',
+              uiSettings: const DynamicInputUiSettings(
+                labelText: 'Choix de texte',
+              ),
               input: createSelectStringInputNode(),
             ),
             DynamicInputTemplate(
-              labelText: 'Saisie de texte',
+              uiSettings: const DynamicInputUiSettings(
+                labelText: 'Saisie de texte',
+              ),
               input: createStringInputNode(),
             ),
             DynamicInputTemplate(
-              labelText: 'Saisie de nombre',
+              uiSettings: const DynamicInputUiSettings(
+                labelText: 'Saisie de nombre',
+              ),
               input: createNumInputNode(),
             ),
           ],

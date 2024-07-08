@@ -22,8 +22,8 @@ DynamicInputTemplate _$DynamicInputTemplateFromJson(Map<String, dynamic> json) {
 mixin _$DynamicInputTemplate {
   @WoFormElementConverter()
   WoFormElementMixin get input => throw _privateConstructorUsedError;
-  String? get labelText => throw _privateConstructorUsedError;
-  String? get helperText => throw _privateConstructorUsedError;
+  @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
+  DynamicInputUiSettings get uiSettings => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,8 +39,10 @@ abstract class $DynamicInputTemplateCopyWith<$Res> {
   @useResult
   $Res call(
       {@WoFormElementConverter() WoFormElementMixin input,
-      String? labelText,
-      String? helperText});
+      @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
+      DynamicInputUiSettings uiSettings});
+
+  $DynamicInputUiSettingsCopyWith<$Res> get uiSettings;
 }
 
 /// @nodoc
@@ -58,23 +60,26 @@ class _$DynamicInputTemplateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? input = null,
-    Object? labelText = freezed,
-    Object? helperText = freezed,
+    Object? uiSettings = null,
   }) {
     return _then(_value.copyWith(
       input: null == input
           ? _value.input
           : input // ignore: cast_nullable_to_non_nullable
               as WoFormElementMixin,
-      labelText: freezed == labelText
-          ? _value.labelText
-          : labelText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      helperText: freezed == helperText
-          ? _value.helperText
-          : helperText // ignore: cast_nullable_to_non_nullable
-              as String?,
+      uiSettings: null == uiSettings
+          ? _value.uiSettings
+          : uiSettings // ignore: cast_nullable_to_non_nullable
+              as DynamicInputUiSettings,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DynamicInputUiSettingsCopyWith<$Res> get uiSettings {
+    return $DynamicInputUiSettingsCopyWith<$Res>(_value.uiSettings, (value) {
+      return _then(_value.copyWith(uiSettings: value) as $Val);
+    });
   }
 }
 
@@ -88,8 +93,11 @@ abstract class _$$DynamicInputTemplateImplCopyWith<$Res>
   @useResult
   $Res call(
       {@WoFormElementConverter() WoFormElementMixin input,
-      String? labelText,
-      String? helperText});
+      @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
+      DynamicInputUiSettings uiSettings});
+
+  @override
+  $DynamicInputUiSettingsCopyWith<$Res> get uiSettings;
 }
 
 /// @nodoc
@@ -104,22 +112,17 @@ class __$$DynamicInputTemplateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? input = null,
-    Object? labelText = freezed,
-    Object? helperText = freezed,
+    Object? uiSettings = null,
   }) {
     return _then(_$DynamicInputTemplateImpl(
       input: null == input
           ? _value.input
           : input // ignore: cast_nullable_to_non_nullable
               as WoFormElementMixin,
-      labelText: freezed == labelText
-          ? _value.labelText
-          : labelText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      helperText: freezed == helperText
-          ? _value.helperText
-          : helperText // ignore: cast_nullable_to_non_nullable
-              as String?,
+      uiSettings: null == uiSettings
+          ? _value.uiSettings
+          : uiSettings // ignore: cast_nullable_to_non_nullable
+              as DynamicInputUiSettings,
     ));
   }
 }
@@ -129,8 +132,8 @@ class __$$DynamicInputTemplateImplCopyWithImpl<$Res>
 class _$DynamicInputTemplateImpl extends _DynamicInputTemplate {
   const _$DynamicInputTemplateImpl(
       {@WoFormElementConverter() required this.input,
-      this.labelText,
-      this.helperText})
+      @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
+      this.uiSettings = const DynamicInputUiSettings()})
       : super._();
 
   factory _$DynamicInputTemplateImpl.fromJson(Map<String, dynamic> json) =>
@@ -140,13 +143,12 @@ class _$DynamicInputTemplateImpl extends _DynamicInputTemplate {
   @WoFormElementConverter()
   final WoFormElementMixin input;
   @override
-  final String? labelText;
-  @override
-  final String? helperText;
+  @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
+  final DynamicInputUiSettings uiSettings;
 
   @override
   String toString() {
-    return 'DynamicInputTemplate(input: $input, labelText: $labelText, helperText: $helperText)';
+    return 'DynamicInputTemplate(input: $input, uiSettings: $uiSettings)';
   }
 
   @override
@@ -155,15 +157,13 @@ class _$DynamicInputTemplateImpl extends _DynamicInputTemplate {
         (other.runtimeType == runtimeType &&
             other is _$DynamicInputTemplateImpl &&
             (identical(other.input, input) || other.input == input) &&
-            (identical(other.labelText, labelText) ||
-                other.labelText == labelText) &&
-            (identical(other.helperText, helperText) ||
-                other.helperText == helperText));
+            (identical(other.uiSettings, uiSettings) ||
+                other.uiSettings == uiSettings));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, input, labelText, helperText);
+  int get hashCode => Object.hash(runtimeType, input, uiSettings);
 
   @JsonKey(ignore: true)
   @override
@@ -184,8 +184,8 @@ class _$DynamicInputTemplateImpl extends _DynamicInputTemplate {
 abstract class _DynamicInputTemplate extends DynamicInputTemplate {
   const factory _DynamicInputTemplate(
       {@WoFormElementConverter() required final WoFormElementMixin input,
-      final String? labelText,
-      final String? helperText}) = _$DynamicInputTemplateImpl;
+      @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
+      final DynamicInputUiSettings uiSettings}) = _$DynamicInputTemplateImpl;
   const _DynamicInputTemplate._() : super._();
 
   factory _DynamicInputTemplate.fromJson(Map<String, dynamic> json) =
@@ -195,9 +195,8 @@ abstract class _DynamicInputTemplate extends DynamicInputTemplate {
   @WoFormElementConverter()
   WoFormElementMixin get input;
   @override
-  String? get labelText;
-  @override
-  String? get helperText;
+  @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
+  DynamicInputUiSettings get uiSettings;
   @override
   @JsonKey(ignore: true)
   _$$DynamicInputTemplateImplCopyWith<_$DynamicInputTemplateImpl>

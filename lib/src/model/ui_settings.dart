@@ -43,7 +43,7 @@ class BooleanInputUiSettings with _$BooleanInputUiSettings {
         );
 }
 
-typedef DynamicInputNodeWidgetBuilderDef = Widget Function(
+typedef DynamicInputsNodeWidgetBuilderDef = Widget Function(
   WoFieldData<DynamicInputsNode, void, DynamicInputsNodeUiSettings> data,
 );
 
@@ -57,7 +57,7 @@ class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
     @JsonKey(includeToJson: false, includeFromJson: false)
     GenerateIdDef? generateId,
     @JsonKey(includeToJson: false, includeFromJson: false)
-    DynamicInputNodeWidgetBuilderDef? widgetBuilder,
+    DynamicInputsNodeWidgetBuilderDef? widgetBuilder,
   }) = _DynamicInputsNodeUiSettings;
 
   const DynamicInputsNodeUiSettings._();
@@ -78,6 +78,35 @@ class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
               helperText: helperText ?? other.helperText,
               widgetBuilder: widgetBuilder ?? other.widgetBuilder,
             );
+}
+
+typedef DynamicInputWidgetBuilderDef = Widget Function(
+  WoFieldData<WoFormElementMixin, void, DynamicInputUiSettings> data,
+);
+
+@freezed
+class DynamicInputUiSettings with _$DynamicInputUiSettings {
+  const factory DynamicInputUiSettings({
+    String? labelText,
+    String? helperText,
+  }) = _DynamicInputUiSettings;
+
+  const DynamicInputUiSettings._();
+
+  factory DynamicInputUiSettings.fromJson(Map<String, dynamic> json) =>
+      _$DynamicInputUiSettingsFromJson(json);
+
+  static Map<String, dynamic> staticToJson(
+    DynamicInputUiSettings object,
+  ) =>
+      object.toJson();
+
+  DynamicInputUiSettings merge(DynamicInputUiSettings? other) => other == null
+      ? this
+      : DynamicInputUiSettings(
+          labelText: labelText ?? other.labelText,
+          helperText: helperText ?? other.helperText,
+        );
 }
 
 enum InputsVisibility { always, whenAsked }
