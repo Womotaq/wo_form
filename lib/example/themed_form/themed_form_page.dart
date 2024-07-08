@@ -265,7 +265,7 @@ class CustomInputsNodeExpander extends StatelessWidget {
                 padding: EdgeInsets.only(
                   bottom: WoFormTheme.of(context)?.verticalSpacing ?? 0,
                 ),
-                child: i.toWidget(parentPath: data.inputPath),
+                child: i.toWidget(parentPath: data.path),
               ),
             )
             .toList(),

@@ -16,7 +16,7 @@ class InputsNodeWidget extends StatelessWidget {
         .map(
           (i) => Padding(
             padding: EdgeInsets.only(bottom: woFormTheme?.verticalSpacing ?? 0),
-            child: i.toWidget(parentPath: data.inputPath),
+            child: i.toWidget(parentPath: data.path),
           ),
         )
         .toList();

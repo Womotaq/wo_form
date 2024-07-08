@@ -3,7 +3,7 @@ import 'package:wo_form/wo_form.dart';
 
 WoFormElementMixin createSelectStringInputNode() => ValueBuilderNode(
       id: 'labelText-builder',
-      inputPath: './selectStringInput/uiSettings/labelText',
+      path: './selectStringInput/uiSettings/labelText',
       builder: (context, value) {
         value as String?;
         return InputsNode(

@@ -4,14 +4,14 @@ import 'package:wo_form/wo_form.dart';
 
 class WoFormValueListener<T> extends StatelessWidget {
   const WoFormValueListener({
-    required this.inputPath,
+    required this.path,
     required this.listener,
     required this.child,
     this.listenWhen,
     super.key,
   });
 
-  final String inputPath;
+  final String path;
   final void Function(BuildContext context, T? value) listener;
   final bool Function(T? previous, T? current)? listenWhen;
   final Widget child;
@@ -21,12 +21,12 @@ class WoFormValueListener<T> extends StatelessWidget {
     return BlocListener<WoFormValuesCubit, Map<String, dynamic>>(
       listenWhen: (previous, current) {
         return listenWhen?.call(
-              previous[inputPath] as T?,
-              current[inputPath] as T?,
+              previous[path] as T?,
+              current[path] as T?,
             ) ??
-            previous[inputPath] != current[inputPath];
+            previous[path] != current[path];
       },
-      listener: (context, values) => listener(context, values[inputPath] as T?),
+      listener: (context, values) => listener(context, values[path] as T?),
       child: child,
     );
   }

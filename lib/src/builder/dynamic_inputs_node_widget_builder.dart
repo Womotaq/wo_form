@@ -4,12 +4,12 @@ import 'package:wo_form/wo_form.dart';
 
 class DynamicInputsNodeWidgetBuilder extends StatelessWidget {
   const DynamicInputsNodeWidgetBuilder({
-    required this.inputPath,
+    required this.path,
     this.uiSettings,
     super.key,
   });
 
-  final String inputPath;
+  final String path;
   final DynamicInputsNodeUiSettings? uiSettings;
 
   @override
@@ -18,12 +18,12 @@ class DynamicInputsNodeWidgetBuilder extends StatelessWidget {
     final valuesCubit = context.read<WoFormValuesCubit>();
 
     final node = form.getInput(
-      path: inputPath,
+      path: path,
       values: context.read<WoFormValuesCubit>().state,
     );
     if (node is! DynamicInputsNode) {
       throw ArgumentError(
-        'Expected <DynamicInputsNode> at path: "$inputPath", '
+        'Expected <DynamicInputsNode> at path: "$path", '
         'found: <${node.runtimeType}>',
       );
     }
@@ -32,13 +32,13 @@ class DynamicInputsNodeWidgetBuilder extends StatelessWidget {
         uiSettings?.merge(node.uiSettings) ?? node.uiSettings;
 
     return BlocSelector<WoFormLockCubit, Set<String>, bool>(
-      selector: (lockedInputs) => lockedInputs.contains(inputPath),
+      selector: (lockedInputs) => lockedInputs.contains(path),
       builder: (context, inputIsLocked) {
         return WoFormValueBuilder<List<WoFormElementMixin>>(
-          inputPath: inputPath,
+          path: path,
           builder: (context, inputs) {
             final fieldData = WoFieldData(
-              inputPath: inputPath,
+              path: path,
               input: node,
               value: inputs,
               errorText: null,
@@ -47,7 +47,7 @@ class DynamicInputsNodeWidgetBuilder extends StatelessWidget {
                   ? null
                   : (List<WoFormElementMixin>? newInputs) {
                       valuesCubit.onValueChanged(
-                        inputPath: inputPath,
+                        path: path,
                         value: List<WoFormElementMixin>.unmodifiable(
                           newInputs ?? [],
                         ),

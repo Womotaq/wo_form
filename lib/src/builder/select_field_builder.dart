@@ -4,19 +4,19 @@ import 'package:wo_form/wo_form.dart';
 
 class SelectFieldBuilder<T> extends StatelessWidget {
   const SelectFieldBuilder({
-    required this.inputPath,
+    required this.path,
     this.uiSettings,
     super.key,
   });
 
-  final String inputPath;
+  final String path;
   final SelectInputUiSettings<T>? uiSettings;
 
   SelectInput<T> getInput(WoForm form, WoFormValues values) {
-    final input = form.getInput(path: inputPath, values: values);
+    final input = form.getInput(path: path, values: values);
     if (input is! SelectInput<T>) {
       throw ArgumentError(
-        'Expected <SelectInput<$T>> at path: "$inputPath", '
+        'Expected <SelectInput<$T>> at path: "$path", '
         'found: <${input.runtimeType}>',
       );
     }
@@ -45,12 +45,12 @@ class SelectFieldBuilder<T> extends StatelessWidget {
     }
 
     return BlocSelector<WoFormLockCubit, Set<String>, bool>(
-      selector: (lockedInputs) => lockedInputs.contains(inputPath),
+      selector: (lockedInputs) => lockedInputs.contains(path),
       builder: (context, inputIsLocked) {
         return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
           builder: (context, status) {
             return WoFormValueBuilder<List<T>>(
-              inputPath: inputPath,
+              path: path,
               builder: (context, selectedValues_) {
                 final selectedValues = selectedValues_ ?? [];
 
@@ -69,7 +69,7 @@ class SelectFieldBuilder<T> extends StatelessWidget {
 
                 final fieldData = WoFieldData<SelectInput<T>, List<T>,
                     SelectInputUiSettings<T>>(
-                  inputPath: inputPath,
+                  path: path,
                   input: input,
                   value: selectedValues,
                   errorText: errorText,
@@ -78,7 +78,7 @@ class SelectFieldBuilder<T> extends StatelessWidget {
                       ? null
                       : (List<T>? value) {
                           valuesCubit.onValueChanged(
-                            inputPath: inputPath,
+                            path: path,
                             value: value,
                           );
                           if (mergedSettings.submitFormOnSelect) {
@@ -102,17 +102,17 @@ class SelectFieldBuilder<T> extends StatelessWidget {
 
 class SelectStringFieldBuilder extends SelectFieldBuilder<String> {
   const SelectStringFieldBuilder({
-    required super.inputPath,
+    required super.path,
     super.uiSettings,
     super.key,
   });
 
   @override
   SelectInput<String> getInput(WoForm form, WoFormValues values) {
-    final selectStringInput = form.getInput(path: inputPath, values: values);
+    final selectStringInput = form.getInput(path: path, values: values);
     if (selectStringInput is! SelectStringInput) {
       throw ArgumentError(
-        'Wrong input at path "$inputPath". '
+        'Wrong input at path "$path". '
         'Expected SelectStringInput, got ${selectStringInput.runtimeType}',
       );
     }

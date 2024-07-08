@@ -4,12 +4,12 @@ import 'package:wo_form/wo_form.dart';
 
 class BooleanFieldBuilder extends StatelessWidget {
   const BooleanFieldBuilder({
-    required this.inputPath,
+    required this.path,
     this.uiSettings,
     super.key,
   });
 
-  final String inputPath;
+  final String path;
   final BooleanInputUiSettings? uiSettings;
 
   @override
@@ -17,10 +17,10 @@ class BooleanFieldBuilder extends StatelessWidget {
     final form = context.read<WoForm>();
     final valuesCubit = context.read<WoFormValuesCubit>();
 
-    final input = form.getInput(path: inputPath, values: valuesCubit.state);
+    final input = form.getInput(path: path, values: valuesCubit.state);
     if (input is! BooleanInput) {
       throw ArgumentError(
-        'Expected <BooleanInput> at path: "$inputPath", '
+        'Expected <BooleanInput> at path: "$path", '
         'found: <${input.runtimeType}>',
       );
     }
@@ -39,12 +39,12 @@ class BooleanFieldBuilder extends StatelessWidget {
     }
 
     return BlocSelector<WoFormLockCubit, Set<String>, bool>(
-      selector: (lockedInputs) => lockedInputs.contains(inputPath),
+      selector: (lockedInputs) => lockedInputs.contains(path),
       builder: (context, inputIsLocked) {
         return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
           builder: (context, status) {
             return WoFormValueBuilder<bool>(
-              inputPath: inputPath,
+              path: path,
               builder: (context, value) {
                 final String? errorText;
                 if (status is InvalidValuesStatus) {
@@ -61,7 +61,7 @@ class BooleanFieldBuilder extends StatelessWidget {
 
                 final fieldData =
                     WoFieldData<BooleanInput, bool, BooleanInputUiSettings>(
-                  inputPath: inputPath,
+                  path: path,
                   input: input,
                   value: value,
                   errorText: errorText,
@@ -69,7 +69,7 @@ class BooleanFieldBuilder extends StatelessWidget {
                   onValueChanged: inputIsLocked
                       ? null
                       : (bool? value) => valuesCubit.onValueChanged(
-                            inputPath: inputPath,
+                            path: path,
                             value: value,
                           ),
                 );

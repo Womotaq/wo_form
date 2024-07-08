@@ -3,7 +3,7 @@ class WoFieldData<I, T, U> {
   /// T : value
   /// U : uiSettings
   const WoFieldData({
-    required this.inputPath,
+    required this.path,
     required this.input,
     required this.value,
     required this.errorText,
@@ -11,7 +11,7 @@ class WoFieldData<I, T, U> {
     required this.onValueChanged,
   });
 
-  final String inputPath;
+  final String path;
   final I input;
   final T? value;
   final String? errorText;

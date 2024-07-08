@@ -4,12 +4,12 @@ import 'package:wo_form/wo_form.dart';
 
 class InputsNodeWidgetBuilder extends StatelessWidget {
   const InputsNodeWidgetBuilder({
-    required this.inputPath,
+    required this.path,
     this.uiSettings,
     super.key,
   });
 
-  final String inputPath;
+  final String path;
   final InputsNodeUiSettings? uiSettings;
 
   @override
@@ -17,12 +17,12 @@ class InputsNodeWidgetBuilder extends StatelessWidget {
     final form = context.read<WoForm>();
 
     final node = form.getInput(
-      path: inputPath,
+      path: path,
       values: context.read<WoFormValuesCubit>().state,
     );
     if (node is! InputsNode) {
       throw ArgumentError(
-        'Expected <InputsNode> at path: "$inputPath", '
+        'Expected <InputsNode> at path: "$path", '
         'found: <${node.runtimeType}>',
       );
     }
@@ -34,7 +34,7 @@ class InputsNodeWidgetBuilder extends StatelessWidget {
       case null:
       case InputsVisibility.always:
         final fieldData = WoFieldData(
-          inputPath: inputPath,
+          path: path,
           input: node,
           value: null,
           errorText: null,
@@ -58,14 +58,12 @@ class InputsNodeWidgetBuilder extends StatelessWidget {
                 String?>(
               selector: (values) {
                 return woFormL10n?.errors(
-                  node
-                      .getErrors(values, parentPath: inputPath.parentPath)
-                      .length,
+                  node.getErrors(values, parentPath: path.parentPath).length,
                 );
               },
               builder: (context, errorText) {
                 final expanderData = WoFieldData(
-                  inputPath: inputPath,
+                  path: path,
                   input: node,
                   value: null,
                   errorText: showError ? errorText : null,

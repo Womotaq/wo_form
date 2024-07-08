@@ -235,13 +235,13 @@ sealed class WoFormInput
     final path = '$parentPath/$id';
     switch (this) {
       case BooleanInput():
-        return BooleanFieldBuilder(key: key, inputPath: path);
+        return BooleanFieldBuilder(key: key, path: path);
       case NumInput():
-        return NumFieldBuilder(key: key, inputPath: path);
+        return NumFieldBuilder(key: key, path: path);
       case StringInput():
-        return StringFieldBuilder(key: key, inputPath: path);
+        return StringFieldBuilder(key: key, path: path);
       case SelectStringInput():
-        return SelectStringFieldBuilder(key: key, inputPath: path);
+        return SelectStringFieldBuilder(key: key, path: path);
     }
   }
 
@@ -366,7 +366,7 @@ class SelectInput<T>
 
   @override
   Widget toWidget({required String parentPath, Key? key}) =>
-      SelectFieldBuilder<T>(key: key, inputPath: '$parentPath/$id');
+      SelectFieldBuilder<T>(key: key, path: '$parentPath/$id');
 
   @override
   SelectInput<T> withId({required String id}) => copyWith(id: id);

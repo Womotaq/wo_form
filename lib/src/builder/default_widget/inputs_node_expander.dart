@@ -37,7 +37,7 @@ class InputsNodeExpander extends StatelessWidget {
                   child: Builder(
                     builder: (context) {
                       final fieldData = WoFieldData(
-                        inputPath: data.inputPath,
+                        path: data.path,
                         input: data.input,
                         value: null,
                         errorText: null,

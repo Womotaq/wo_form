@@ -35,14 +35,14 @@ class DynamicInputsNodeWidget extends StatelessWidget {
       final form = context.read<WoForm>();
       final valuesCubit = context.read<WoFormValuesCubit>();
       final values = valuesCubit.state;
-      for (final inputPath in input.getAllInputPaths(
+      for (final path in input.getAllInputPaths(
         values: values,
-        parentPath: data.inputPath,
+        parentPath: data.path,
       )) {
-        final input = form.getInput(path: inputPath, values: values);
+        final input = form.getInput(path: path, values: values);
         if (input is WoFormInputMixin) {
           valuesCubit.onValueChanged(
-            inputPath: inputPath,
+            path: path,
             value: (input! as WoFormInputMixin).initialValue,
           );
         }
@@ -92,9 +92,9 @@ class DynamicInputsNodeWidget extends StatelessWidget {
           (e) => DeletableField(
             onDelete: () => onRemoveChoice(e),
             child: WoFormElementBuilder(
-              inputPath: '${data.inputPath}/${e.id}',
+              path: '${data.path}/${e.id}',
               key: Key(
-                '${data.inputPath}/${e.id}',
+                '${data.path}/${e.id}',
               ),
             ),
           ),

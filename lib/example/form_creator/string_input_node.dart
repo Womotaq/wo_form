@@ -8,7 +8,7 @@ import 'package:wo_form/wo_form.dart';
 
 WoFormElementMixin createStringInputNode() => ValueBuilderNode(
       id: 'labelText-builder',
-      inputPath: './stringInput/uiSettings/labelText',
+      path: './stringInput/uiSettings/labelText',
       builder: (context, value) {
         value as String?;
         return InputsNode(
@@ -65,14 +65,14 @@ WoFormElementMixin createStringInputNode() => ValueBuilderNode(
             ),
             ValueListenerNode(
               id: 'regexPatternListener',
-              inputPath: '../regexPattern',
+              path: '../regexPattern',
               listener: (context, parentPath, value) {
                 final regex = (value as List<RegexPattern?>?)?.firstOrNull;
 
                 context.read<WoFormValuesCubit>().onValueChanged(
-                      inputPath: WoFormElementMixin.getAbsolutePath(
+                      path: WoFormElementMixin.getAbsolutePath(
                         parentPath: parentPath,
-                        inputPath: '../uiSettings/invalidRegexMessage',
+                        path: '../uiSettings/invalidRegexMessage',
                       ),
                       value: regex == null
                           ? null

@@ -29,7 +29,7 @@ class QuizPage extends StatelessWidget {
 
             final inputIsLocked = context.select(
               (WoFormLockCubit c) =>
-                  c.inputIsLocked(inputPath: '/${currentInput.id}'),
+                  c.inputIsLocked(path: '/${currentInput.id}'),
             );
 
             return [0, 2].contains(data.pageIndex) && !inputIsLocked
@@ -69,7 +69,7 @@ class QuizPage extends StatelessWidget {
           ),
           ValueBuilderNode(
             id: 'a1',
-            inputPath: '../q1-page/q1',
+            path: '../q1-page/q1',
             builder: (id, value) {
               return WidgetNode(
                 id: id,
@@ -124,7 +124,7 @@ class QuizPage extends StatelessWidget {
           ),
           ValueBuilderNode(
             id: 'a2',
-            inputPath: '../q2-page/q2',
+            path: '../q2-page/q2',
             builder: (id, value) {
               return WidgetNode(
                 id: id,
@@ -158,7 +158,7 @@ class QuizPage extends StatelessWidget {
           ),
           ValueBuilderNode(
             id: 'a3',
-            inputPath: '../q3-page/q3',
+            path: '../q3-page/q3',
             builder: (id, value) {
               return WidgetNode(
                 id: id,
@@ -196,7 +196,7 @@ class QuizPage extends StatelessWidget {
           ),
           ValueBuilderNode(
             id: 'r4',
-            inputPath: '../q4-page/q4',
+            path: '../q4-page/q4',
             builder: (id, value) {
               return WidgetNode(
                 id: id,
@@ -233,7 +233,7 @@ class QuizPage extends StatelessWidget {
           ),
           ValueBuilderNode(
             id: 'r5',
-            inputPath: '../q5-page/q5',
+            path: '../q5-page/q5',
             builder: (id, value) {
               return WidgetNode(
                 id: id,

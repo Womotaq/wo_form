@@ -264,14 +264,14 @@ mixin _$WoFormNode {
         inputs,
     required TResult Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
             Object? initialValue)
         valueBuilder,
     required TResult Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             bool Function(Object?, Object?)? listenWhen,
             @JsonKey(includeToJson: false, includeFromJson: false)
@@ -305,14 +305,14 @@ mixin _$WoFormNode {
         inputs,
     TResult? Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
             Object? initialValue)?
         valueBuilder,
     TResult? Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             bool Function(Object?, Object?)? listenWhen,
             @JsonKey(includeToJson: false, includeFromJson: false)
@@ -346,14 +346,14 @@ mixin _$WoFormNode {
         inputs,
     TResult Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
             Object? initialValue)?
         valueBuilder,
     TResult Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             bool Function(Object?, Object?)? listenWhen,
             @JsonKey(includeToJson: false, includeFromJson: false)
@@ -606,14 +606,14 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
         inputs,
     required TResult Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
             Object? initialValue)
         valueBuilder,
     required TResult Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             bool Function(Object?, Object?)? listenWhen,
             @JsonKey(includeToJson: false, includeFromJson: false)
@@ -650,14 +650,14 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
         inputs,
     TResult? Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
             Object? initialValue)?
         valueBuilder,
     TResult? Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             bool Function(Object?, Object?)? listenWhen,
             @JsonKey(includeToJson: false, includeFromJson: false)
@@ -694,14 +694,14 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
         inputs,
     TResult Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
             Object? initialValue)?
         valueBuilder,
     TResult Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             bool Function(Object?, Object?)? listenWhen,
             @JsonKey(includeToJson: false, includeFromJson: false)
@@ -964,14 +964,14 @@ class _$InputsNodeImpl extends InputsNode {
         inputs,
     required TResult Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
             Object? initialValue)
         valueBuilder,
     required TResult Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             bool Function(Object?, Object?)? listenWhen,
             @JsonKey(includeToJson: false, includeFromJson: false)
@@ -1008,14 +1008,14 @@ class _$InputsNodeImpl extends InputsNode {
         inputs,
     TResult? Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
             Object? initialValue)?
         valueBuilder,
     TResult? Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             bool Function(Object?, Object?)? listenWhen,
             @JsonKey(includeToJson: false, includeFromJson: false)
@@ -1052,14 +1052,14 @@ class _$InputsNodeImpl extends InputsNode {
         inputs,
     TResult Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
             Object? initialValue)?
         valueBuilder,
     TResult Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             bool Function(Object?, Object?)? listenWhen,
             @JsonKey(includeToJson: false, includeFromJson: false)
@@ -1163,7 +1163,7 @@ abstract class _$$ValueBuilderNodeImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String inputPath,
+      String path,
       @JsonKey(includeToJson: false, includeFromJson: false)
       WoFormElementMixin Function(String, Object?)? builder,
       Object? initialValue});
@@ -1181,7 +1181,7 @@ class __$$ValueBuilderNodeImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? inputPath = null,
+    Object? path = null,
     Object? builder = freezed,
     Object? initialValue = freezed,
   }) {
@@ -1190,9 +1190,9 @@ class __$$ValueBuilderNodeImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      inputPath: null == inputPath
-          ? _value.inputPath
-          : inputPath // ignore: cast_nullable_to_non_nullable
+      path: null == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
               as String,
       builder: freezed == builder
           ? _value.builder
@@ -1209,7 +1209,7 @@ class __$$ValueBuilderNodeImplCopyWithImpl<$Res>
 class _$ValueBuilderNodeImpl extends ValueBuilderNode {
   const _$ValueBuilderNodeImpl(
       {required this.id,
-      required this.inputPath,
+      required this.path,
       @JsonKey(includeToJson: false, includeFromJson: false) this.builder,
       this.initialValue,
       final String? $type})
@@ -1223,7 +1223,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
   @override
   final String id;
   @override
-  final String inputPath;
+  final String path;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final WoFormElementMixin Function(String, Object?)? builder;
@@ -1235,7 +1235,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
 
   @override
   String toString() {
-    return 'WoFormNode.valueBuilder(id: $id, inputPath: $inputPath, builder: $builder, initialValue: $initialValue)';
+    return 'WoFormNode.valueBuilder(id: $id, path: $path, builder: $builder, initialValue: $initialValue)';
   }
 
   @override
@@ -1244,8 +1244,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
         (other.runtimeType == runtimeType &&
             other is _$ValueBuilderNodeImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.inputPath, inputPath) ||
-                other.inputPath == inputPath) &&
+            (identical(other.path, path) || other.path == path) &&
             (identical(other.builder, builder) || other.builder == builder) &&
             const DeepCollectionEquality()
                 .equals(other.initialValue, initialValue));
@@ -1253,7 +1252,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, inputPath, builder,
+  int get hashCode => Object.hash(runtimeType, id, path, builder,
       const DeepCollectionEquality().hash(initialValue));
 
   @JsonKey(ignore: true)
@@ -1285,14 +1284,14 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
         inputs,
     required TResult Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
             Object? initialValue)
         valueBuilder,
     required TResult Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             bool Function(Object?, Object?)? listenWhen,
             @JsonKey(includeToJson: false, includeFromJson: false)
@@ -1304,7 +1303,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
             Widget Function(BuildContext)? builder)
         widget,
   }) {
-    return valueBuilder(id, inputPath, builder, initialValue);
+    return valueBuilder(id, path, builder, initialValue);
   }
 
   @override
@@ -1329,14 +1328,14 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
         inputs,
     TResult? Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
             Object? initialValue)?
         valueBuilder,
     TResult? Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             bool Function(Object?, Object?)? listenWhen,
             @JsonKey(includeToJson: false, includeFromJson: false)
@@ -1348,7 +1347,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
             Widget Function(BuildContext)? builder)?
         widget,
   }) {
-    return valueBuilder?.call(id, inputPath, builder, initialValue);
+    return valueBuilder?.call(id, path, builder, initialValue);
   }
 
   @override
@@ -1373,14 +1372,14 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
         inputs,
     TResult Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
             Object? initialValue)?
         valueBuilder,
     TResult Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             bool Function(Object?, Object?)? listenWhen,
             @JsonKey(includeToJson: false, includeFromJson: false)
@@ -1394,7 +1393,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
     required TResult orElse(),
   }) {
     if (valueBuilder != null) {
-      return valueBuilder(id, inputPath, builder, initialValue);
+      return valueBuilder(id, path, builder, initialValue);
     }
     return orElse();
   }
@@ -1450,7 +1449,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
 abstract class ValueBuilderNode extends WoFormNode {
   const factory ValueBuilderNode(
       {required final String id,
-      required final String inputPath,
+      required final String path,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final WoFormElementMixin Function(String, Object?)? builder,
       final Object? initialValue}) = _$ValueBuilderNodeImpl;
@@ -1461,7 +1460,7 @@ abstract class ValueBuilderNode extends WoFormNode {
 
   @override
   String get id;
-  String get inputPath;
+  String get path;
   @JsonKey(includeToJson: false, includeFromJson: false)
   WoFormElementMixin Function(String, Object?)? get builder;
   Object? get initialValue;
@@ -1481,7 +1480,7 @@ abstract class _$$ValueListenerNodeImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String inputPath,
+      String path,
       @JsonKey(includeToJson: false, includeFromJson: false)
       bool Function(Object?, Object?)? listenWhen,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -1500,7 +1499,7 @@ class __$$ValueListenerNodeImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? inputPath = null,
+    Object? path = null,
     Object? listenWhen = freezed,
     Object? listener = freezed,
   }) {
@@ -1509,9 +1508,9 @@ class __$$ValueListenerNodeImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      inputPath: null == inputPath
-          ? _value.inputPath
-          : inputPath // ignore: cast_nullable_to_non_nullable
+      path: null == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
               as String,
       listenWhen: freezed == listenWhen
           ? _value.listenWhen
@@ -1530,7 +1529,7 @@ class __$$ValueListenerNodeImplCopyWithImpl<$Res>
 class _$ValueListenerNodeImpl extends ValueListenerNode {
   const _$ValueListenerNodeImpl(
       {required this.id,
-      required this.inputPath,
+      required this.path,
       @JsonKey(includeToJson: false, includeFromJson: false) this.listenWhen,
       @JsonKey(includeToJson: false, includeFromJson: false) this.listener,
       final String? $type})
@@ -1544,7 +1543,7 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
   @override
   final String id;
   @override
-  final String inputPath;
+  final String path;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final bool Function(Object?, Object?)? listenWhen;
@@ -1557,7 +1556,7 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
 
   @override
   String toString() {
-    return 'WoFormNode.valueListener(id: $id, inputPath: $inputPath, listenWhen: $listenWhen, listener: $listener)';
+    return 'WoFormNode.valueListener(id: $id, path: $path, listenWhen: $listenWhen, listener: $listener)';
   }
 
   @override
@@ -1566,8 +1565,7 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
         (other.runtimeType == runtimeType &&
             other is _$ValueListenerNodeImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.inputPath, inputPath) ||
-                other.inputPath == inputPath) &&
+            (identical(other.path, path) || other.path == path) &&
             (identical(other.listenWhen, listenWhen) ||
                 other.listenWhen == listenWhen) &&
             (identical(other.listener, listener) ||
@@ -1576,8 +1574,7 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, inputPath, listenWhen, listener);
+  int get hashCode => Object.hash(runtimeType, id, path, listenWhen, listener);
 
   @JsonKey(ignore: true)
   @override
@@ -1608,14 +1605,14 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
         inputs,
     required TResult Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
             Object? initialValue)
         valueBuilder,
     required TResult Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             bool Function(Object?, Object?)? listenWhen,
             @JsonKey(includeToJson: false, includeFromJson: false)
@@ -1627,7 +1624,7 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
             Widget Function(BuildContext)? builder)
         widget,
   }) {
-    return valueListener(id, inputPath, listenWhen, listener);
+    return valueListener(id, path, listenWhen, listener);
   }
 
   @override
@@ -1652,14 +1649,14 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
         inputs,
     TResult? Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
             Object? initialValue)?
         valueBuilder,
     TResult? Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             bool Function(Object?, Object?)? listenWhen,
             @JsonKey(includeToJson: false, includeFromJson: false)
@@ -1671,7 +1668,7 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
             Widget Function(BuildContext)? builder)?
         widget,
   }) {
-    return valueListener?.call(id, inputPath, listenWhen, listener);
+    return valueListener?.call(id, path, listenWhen, listener);
   }
 
   @override
@@ -1696,14 +1693,14 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
         inputs,
     TResult Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
             Object? initialValue)?
         valueBuilder,
     TResult Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             bool Function(Object?, Object?)? listenWhen,
             @JsonKey(includeToJson: false, includeFromJson: false)
@@ -1717,7 +1714,7 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
     required TResult orElse(),
   }) {
     if (valueListener != null) {
-      return valueListener(id, inputPath, listenWhen, listener);
+      return valueListener(id, path, listenWhen, listener);
     }
     return orElse();
   }
@@ -1773,7 +1770,7 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
 abstract class ValueListenerNode extends WoFormNode {
   const factory ValueListenerNode(
           {required final String id,
-          required final String inputPath,
+          required final String path,
           @JsonKey(includeToJson: false, includeFromJson: false)
           final bool Function(Object?, Object?)? listenWhen,
           @JsonKey(includeToJson: false, includeFromJson: false)
@@ -1786,7 +1783,7 @@ abstract class ValueListenerNode extends WoFormNode {
 
   @override
   String get id;
-  String get inputPath;
+  String get path;
   @JsonKey(includeToJson: false, includeFromJson: false)
   bool Function(Object?, Object?)? get listenWhen;
   @JsonKey(includeToJson: false, includeFromJson: false)
@@ -1906,14 +1903,14 @@ class _$WidgetNodeImpl extends WidgetNode {
         inputs,
     required TResult Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
             Object? initialValue)
         valueBuilder,
     required TResult Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             bool Function(Object?, Object?)? listenWhen,
             @JsonKey(includeToJson: false, includeFromJson: false)
@@ -1950,14 +1947,14 @@ class _$WidgetNodeImpl extends WidgetNode {
         inputs,
     TResult? Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
             Object? initialValue)?
         valueBuilder,
     TResult? Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             bool Function(Object?, Object?)? listenWhen,
             @JsonKey(includeToJson: false, includeFromJson: false)
@@ -1994,14 +1991,14 @@ class _$WidgetNodeImpl extends WidgetNode {
         inputs,
     TResult Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormElementMixin Function(String, Object?)? builder,
             Object? initialValue)?
         valueBuilder,
     TResult Function(
             String id,
-            String inputPath,
+            String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
             bool Function(Object?, Object?)? listenWhen,
             @JsonKey(includeToJson: false, includeFromJson: false)

@@ -4,12 +4,12 @@ import 'package:wo_form/wo_form.dart';
 
 class NumFieldBuilder extends StatelessWidget {
   const NumFieldBuilder({
-    required this.inputPath,
+    required this.path,
     this.uiSettings,
     super.key,
   });
 
-  final String inputPath;
+  final String path;
   final NumInputUiSettings? uiSettings;
 
   @override
@@ -18,12 +18,12 @@ class NumFieldBuilder extends StatelessWidget {
     final valuesCubit = context.read<WoFormValuesCubit>();
 
     final input = form.getInput(
-      path: inputPath,
+      path: path,
       values: valuesCubit.state,
     );
     if (input is! NumInput) {
       throw ArgumentError(
-        'Expected <NumInput> at path: "$inputPath", '
+        'Expected <NumInput> at path: "$path", '
         'found: <${input.runtimeType}>',
       );
     }
@@ -42,12 +42,12 @@ class NumFieldBuilder extends StatelessWidget {
     }
 
     return BlocSelector<WoFormLockCubit, Set<String>, bool>(
-      selector: (lockedInputs) => lockedInputs.contains(inputPath),
+      selector: (lockedInputs) => lockedInputs.contains(path),
       builder: (context, inputIsLocked) {
         return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
           builder: (context, status) {
             return WoFormValueBuilder<num>(
-              inputPath: inputPath,
+              path: path,
               builder: (context, value) {
                 final String? errorText;
                 if (status is InvalidValuesStatus) {
@@ -64,7 +64,7 @@ class NumFieldBuilder extends StatelessWidget {
 
                 final fieldData =
                     WoFieldData<NumInput, num, NumInputUiSettings>(
-                  inputPath: inputPath,
+                  path: path,
                   input: input,
                   value: value,
                   errorText: errorText,
@@ -72,7 +72,7 @@ class NumFieldBuilder extends StatelessWidget {
                   onValueChanged: inputIsLocked
                       ? null
                       : (num? value) => valuesCubit.onValueChanged(
-                            inputPath: inputPath,
+                            path: path,
                             value: value,
                           ),
                 );

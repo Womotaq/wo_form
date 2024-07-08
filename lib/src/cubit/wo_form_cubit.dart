@@ -21,13 +21,13 @@ class WoFormStatusCubit extends Cubit<WoFormStatus> {
 class WoFormLockCubit extends Cubit<Set<String>> {
   WoFormLockCubit._() : super({});
 
-  bool inputIsLocked({required String inputPath}) => state.contains(inputPath);
+  bool inputIsLocked({required String path}) => state.contains(path);
 
-  void lockInput({required String inputPath}) =>
-      emit(Set<String>.from(state)..add(inputPath));
+  void lockInput({required String path}) =>
+      emit(Set<String>.from(state)..add(path));
 
-  void unlockInput({required String inputPath}) =>
-      emit(Set<String>.from(state)..remove(inputPath));
+  void unlockInput({required String path}) =>
+      emit(Set<String>.from(state)..remove(path));
 }
 
 typedef WoFormValues = Map<String, dynamic>;
@@ -58,16 +58,16 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   /// **Use this method precautiously since there is no type checking !**
   void onValueChanged({
-    required String inputPath,
+    required String path,
     required dynamic value,
   }) {
     // Can't edit a form while submitting it
     if (_statusCubit.state is SubmittingStatus) return;
 
-    if (_lockCubit.inputIsLocked(inputPath: inputPath)) return;
+    if (_lockCubit.inputIsLocked(path: path)) return;
 
     final newMap = Map<String, dynamic>.from(state);
-    newMap[inputPath] = value;
+    newMap[path] = value;
 
     // Setting the status to idle when a modification occurs allows isPure to
     // work
@@ -91,9 +91,9 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     //     return _statusCubit.setInvalidValues(inputErrors: errors);
     //   } else {
     //     if (!form.canModifySubmittedValues) {
-    //       for (final inputPath
+    //       for (final path
     //           in input.getAllInputPaths(values: state, parentPath: '')) {
-    //         _lockCubit.lockInput(inputPath: inputPath);
+    //         _lockCubit.lockInput(path: path);
     //       }
     //     }
 
@@ -118,8 +118,8 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
     final oldLocks = _lockCubit.state;
 
-    for (final inputPath in form.getAllInputPaths(values: state)) {
-      _lockCubit.lockInput(inputPath: inputPath);
+    for (final path in form.getAllInputPaths(values: state)) {
+      _lockCubit.lockInput(path: path);
     }
 
     try {
@@ -129,9 +129,9 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
       _statusCubit._setSubmitError(error: e, stackTrace: s);
     }
 
-    for (final inputPath in _lockCubit.state) {
-      if (!oldLocks.contains(inputPath)) {
-        _lockCubit.unlockInput(inputPath: inputPath);
+    for (final path in _lockCubit.state) {
+      if (!oldLocks.contains(path)) {
+        _lockCubit.unlockInput(path: path);
       }
     }
   }

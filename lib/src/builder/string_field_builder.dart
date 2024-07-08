@@ -4,12 +4,12 @@ import 'package:wo_form/wo_form.dart';
 
 class StringFieldBuilder extends StatelessWidget {
   const StringFieldBuilder({
-    required this.inputPath,
+    required this.path,
     this.uiSettings,
     super.key,
   });
 
-  final String inputPath;
+  final String path;
   final StringInputUiSettings? uiSettings;
 
   @override
@@ -18,12 +18,12 @@ class StringFieldBuilder extends StatelessWidget {
 
     final form = context.read<WoForm>();
     final input = form.getInput(
-      path: inputPath,
+      path: path,
       values: context.read<WoFormValuesCubit>().state,
     );
     if (input is! StringInput) {
       throw ArgumentError(
-        'Expected <StringInput> at path: "$inputPath", '
+        'Expected <StringInput> at path: "$path", '
         'found: <${input.runtimeType}>',
       );
     }
@@ -42,12 +42,12 @@ class StringFieldBuilder extends StatelessWidget {
     }
 
     return BlocSelector<WoFormLockCubit, Set<String>, bool>(
-      selector: (lockedInputs) => lockedInputs.contains(inputPath),
+      selector: (lockedInputs) => lockedInputs.contains(path),
       builder: (context, inputIsLocked) {
         return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
           builder: (context, status) {
             return WoFormValueBuilder<String>(
-              inputPath: inputPath,
+              path: path,
               builder: (context, value) {
                 final String? errorText;
                 if (status is InvalidValuesStatus) {
@@ -64,7 +64,7 @@ class StringFieldBuilder extends StatelessWidget {
 
                 final fieldData =
                     WoFieldData<StringInput, String, StringInputUiSettings>(
-                  inputPath: inputPath,
+                  path: path,
                   input: input,
                   value: value,
                   errorText: errorText,
@@ -72,7 +72,7 @@ class StringFieldBuilder extends StatelessWidget {
                   onValueChanged: inputIsLocked
                       ? null
                       : (String? value) => valuesCubit.onValueChanged(
-                            inputPath: inputPath,
+                            path: path,
                             value: value,
                           ),
                 );

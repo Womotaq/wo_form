@@ -29,7 +29,7 @@ class DynamicFormPage extends StatelessWidget {
           ),
           ValueBuilderNode(
             id: 'feeling',
-            inputPath: '/name',
+            path: '/name',
             builder: (id, value) {
               final name = value as String?;
               return StringInput(
@@ -45,7 +45,7 @@ class DynamicFormPage extends StatelessWidget {
           ),
           ValueBuilderNode(
             id: 'isMale',
-            inputPath: '/name',
+            path: '/name',
             builder: (id, value) {
               final name = value as String?;
               return BooleanInput(
@@ -59,7 +59,7 @@ class DynamicFormPage extends StatelessWidget {
           ),
           ValueBuilderNode(
             id: 'age',
-            inputPath: '/name',
+            path: '/name',
             builder: (id, value) {
               final name = value as String?;
               return NumInput(
@@ -80,12 +80,12 @@ class DynamicFormPage extends StatelessWidget {
           ),
           ValueBuilderNode(
             id: 'username',
-            inputPath: '/isMale/isMale',
+            path: '/isMale/isMale',
             builder: (id, value) {
               final isMale = (value as bool?) ?? false;
               return ValueBuilderNode(
                 id: id,
-                inputPath: '/name',
+                path: '/name',
                 builder: (id, value) {
                   final name = value as String?;
                   return SelectInput<num>(
@@ -124,7 +124,7 @@ class DynamicFormPage extends StatelessWidget {
           ),
           ValueBuilderNode(
             id: 'acceptConditions',
-            inputPath: '/name',
+            path: '/name',
             builder: (id, value) {
               final name = value as String?;
               return BooleanInput(
