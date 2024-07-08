@@ -88,6 +88,7 @@ _$SelectStringInputImpl _$$SelectStringInputImplFromJson(
     _$SelectStringInputImpl(
       id: json['id'] as String,
       maxCount: (json['maxCount'] as num?)?.toInt(),
+      minCount: (json['minCount'] as num?)?.toInt() ?? 0,
       initialValue: (json['initialValue'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -96,7 +97,6 @@ _$SelectStringInputImpl _$$SelectStringInputImplFromJson(
               ?.map((e) => e as String)
               .toList() ??
           const [],
-      minCount: (json['minCount'] as num?)?.toInt() ?? 0,
       uiSettings: json['uiSettings'] == null
           ? const SelectInputUiSettings<String>()
           : SelectInputUiSettings<String>.fromJson(
@@ -109,9 +109,9 @@ Map<String, dynamic> _$$SelectStringInputImplToJson(
     <String, dynamic>{
       'id': instance.id,
       'maxCount': instance.maxCount,
+      'minCount': instance.minCount,
       'initialValue': instance.initialValue,
       'availibleValues': instance.availibleValues,
-      'minCount': instance.minCount,
       'uiSettings': instance.uiSettings,
       'runtimeType': instance.$type,
     };

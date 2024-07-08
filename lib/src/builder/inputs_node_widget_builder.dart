@@ -30,9 +30,9 @@ class InputsNodeWidgetBuilder extends StatelessWidget {
     final mergedSettings =
         uiSettings?.merge(node.uiSettings) ?? node.uiSettings;
 
-    switch (mergedSettings.displayMode) {
+    switch (mergedSettings.inputsVisibility) {
       case null:
-      case InputsNodeDisplayMode.expanded:
+      case InputsVisibility.always:
         final fieldData = WoFieldData(
           inputPath: inputPath,
           input: node,
@@ -46,7 +46,7 @@ class InputsNodeWidgetBuilder extends StatelessWidget {
                 WoFormTheme.of(context)?.inputsNodeWidgetBuilder ??
                 InputsNodeWidget.new)
             .call(fieldData);
-      case InputsNodeDisplayMode.tapToExpand:
+      case InputsVisibility.whenAsked:
         final woFormL10n = context.read<WoFormL10n?>();
 
         return BlocSelector<WoFormStatusCubit, WoFormStatus, bool>(

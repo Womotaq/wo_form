@@ -76,7 +76,7 @@ class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
             );
 }
 
-enum InputsNodeDisplayMode { expanded, tapToExpand }
+enum InputsVisibility { always, whenAsked }
 
 // LATER : when submitting a field from an opened page, only submit this page,
 //  and let custom functions be launched at submitting, error, and success.
@@ -92,7 +92,7 @@ class InputsNodeUiSettings with _$InputsNodeUiSettings {
   const factory InputsNodeUiSettings({
     String? labelText,
     String? helperText,
-    InputsNodeDisplayMode? displayMode,
+    InputsVisibility? inputsVisibility,
     @JsonKey(includeToJson: false, includeFromJson: false)
     InputNodeWidgetBuilderDef? widgetBuilder,
     @JsonKey(includeToJson: false, includeFromJson: false)
@@ -114,7 +114,7 @@ class InputsNodeUiSettings with _$InputsNodeUiSettings {
       : InputsNodeUiSettings(
           labelText: labelText ?? other.labelText,
           helperText: helperText ?? other.helperText,
-          displayMode: displayMode ?? other.displayMode,
+          inputsVisibility: inputsVisibility ?? other.inputsVisibility,
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,
           headerBuilder: headerBuilder ?? other.headerBuilder,
           expanderBuilder: expanderBuilder ?? other.expanderBuilder,
@@ -151,8 +151,6 @@ class NumInputUiSettings with _$NumInputUiSettings {
         );
 }
 
-enum SelectFieldDisplayMode { tile, chip }
-
 typedef SelectFieldBuilderDef<T> = Widget Function(
   WoFieldData<SelectInput<T>, List<T>, SelectInputUiSettings<T>> data,
 );
@@ -169,7 +167,7 @@ class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
     String? labelText,
     String? helperText,
     String? hintText,
-    SelectFieldDisplayMode? displayMode,
+    InputsVisibility? inputsVisibility,
     @JsonKey(includeFromJson: false, includeToJson: false)
     Widget Function(T?)? valueBuilder,
     @JsonKey(includeFromJson: false, includeToJson: false)
@@ -197,7 +195,7 @@ class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
               labelText: labelText ?? other.labelText,
               helperText: helperText ?? other.helperText,
               hintText: hintText ?? other.hintText,
-              displayMode: displayMode ?? other.displayMode,
+              inputsVisibility: inputsVisibility ?? other.inputsVisibility,
               valueBuilder: valueBuilder ?? other.valueBuilder,
               helpValueBuilder: helpValueBuilder ?? other.helpValueBuilder,
               searcher: searcher ?? other.searcher,

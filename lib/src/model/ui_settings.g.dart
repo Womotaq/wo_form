@@ -57,8 +57,8 @@ _$InputsNodeUiSettingsImpl _$$InputsNodeUiSettingsImplFromJson(
     _$InputsNodeUiSettingsImpl(
       labelText: json['labelText'] as String?,
       helperText: json['helperText'] as String?,
-      displayMode: $enumDecodeNullable(
-          _$InputsNodeDisplayModeEnumMap, json['displayMode']),
+      inputsVisibility: $enumDecodeNullable(
+          _$InputsVisibilityEnumMap, json['inputsVisibility']),
     );
 
 Map<String, dynamic> _$$InputsNodeUiSettingsImplToJson(
@@ -66,12 +66,12 @@ Map<String, dynamic> _$$InputsNodeUiSettingsImplToJson(
     <String, dynamic>{
       'labelText': instance.labelText,
       'helperText': instance.helperText,
-      'displayMode': _$InputsNodeDisplayModeEnumMap[instance.displayMode],
+      'inputsVisibility': _$InputsVisibilityEnumMap[instance.inputsVisibility],
     };
 
-const _$InputsNodeDisplayModeEnumMap = {
-  InputsNodeDisplayMode.expanded: 'expanded',
-  InputsNodeDisplayMode.tapToExpand: 'tapToExpand',
+const _$InputsVisibilityEnumMap = {
+  InputsVisibility.always: 'always',
+  InputsVisibility.whenAsked: 'whenAsked',
 };
 
 _$NumInputUiSettingsImpl _$$NumInputUiSettingsImplFromJson(
@@ -94,8 +94,8 @@ _$SelectInputUiSettingsImpl<T> _$$SelectInputUiSettingsImplFromJson<T>(
       labelText: json['labelText'] as String?,
       helperText: json['helperText'] as String?,
       hintText: json['hintText'] as String?,
-      displayMode: $enumDecodeNullable(
-          _$SelectFieldDisplayModeEnumMap, json['displayMode']),
+      inputsVisibility: $enumDecodeNullable(
+          _$InputsVisibilityEnumMap, json['inputsVisibility']),
       submitFormOnSelect: json['submitFormOnSelect'] as bool? ?? false,
     );
 
@@ -105,14 +105,9 @@ Map<String, dynamic> _$$SelectInputUiSettingsImplToJson<T>(
       'labelText': instance.labelText,
       'helperText': instance.helperText,
       'hintText': instance.hintText,
-      'displayMode': _$SelectFieldDisplayModeEnumMap[instance.displayMode],
+      'inputsVisibility': _$InputsVisibilityEnumMap[instance.inputsVisibility],
       'submitFormOnSelect': instance.submitFormOnSelect,
     };
-
-const _$SelectFieldDisplayModeEnumMap = {
-  SelectFieldDisplayMode.tile: 'tile',
-  SelectFieldDisplayMode.chip: 'chip',
-};
 
 _$StringInputUiSettingsImpl _$$StringInputUiSettingsImplFromJson(
         Map<String, dynamic> json) =>

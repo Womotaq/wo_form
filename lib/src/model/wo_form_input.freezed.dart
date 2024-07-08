@@ -775,9 +775,9 @@ mixin _$WoFormInput {
     required TResult Function(
             String id,
             int? maxCount,
+            int minCount,
             List<String> initialValue,
             List<String> availibleValues,
-            int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
             SelectInputUiSettings<String> uiSettings)
@@ -818,9 +818,9 @@ mixin _$WoFormInput {
     TResult? Function(
             String id,
             int? maxCount,
+            int minCount,
             List<String> initialValue,
             List<String> availibleValues,
-            int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
             SelectInputUiSettings<String> uiSettings)?
@@ -861,9 +861,9 @@ mixin _$WoFormInput {
     TResult Function(
             String id,
             int? maxCount,
+            int minCount,
             List<String> initialValue,
             List<String> availibleValues,
-            int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
             SelectInputUiSettings<String> uiSettings)?
@@ -1107,9 +1107,9 @@ class _$BooleanInputImpl extends BooleanInput {
     required TResult Function(
             String id,
             int? maxCount,
+            int minCount,
             List<String> initialValue,
             List<String> availibleValues,
-            int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
             SelectInputUiSettings<String> uiSettings)
@@ -1153,9 +1153,9 @@ class _$BooleanInputImpl extends BooleanInput {
     TResult? Function(
             String id,
             int? maxCount,
+            int minCount,
             List<String> initialValue,
             List<String> availibleValues,
-            int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
             SelectInputUiSettings<String> uiSettings)?
@@ -1200,9 +1200,9 @@ class _$BooleanInputImpl extends BooleanInput {
     TResult Function(
             String id,
             int? maxCount,
+            int minCount,
             List<String> initialValue,
             List<String> availibleValues,
-            int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
             SelectInputUiSettings<String> uiSettings)?
@@ -1486,9 +1486,9 @@ class _$NumInputImpl extends NumInput {
     required TResult Function(
             String id,
             int? maxCount,
+            int minCount,
             List<String> initialValue,
             List<String> availibleValues,
-            int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
             SelectInputUiSettings<String> uiSettings)
@@ -1533,9 +1533,9 @@ class _$NumInputImpl extends NumInput {
     TResult? Function(
             String id,
             int? maxCount,
+            int minCount,
             List<String> initialValue,
             List<String> availibleValues,
-            int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
             SelectInputUiSettings<String> uiSettings)?
@@ -1580,9 +1580,9 @@ class _$NumInputImpl extends NumInput {
     TResult Function(
             String id,
             int? maxCount,
+            int minCount,
             List<String> initialValue,
             List<String> availibleValues,
-            int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
             SelectInputUiSettings<String> uiSettings)?
@@ -1695,9 +1695,9 @@ abstract class _$$SelectStringInputImplCopyWith<$Res>
   $Res call(
       {String id,
       int? maxCount,
+      int minCount,
       List<String> initialValue,
       List<String> availibleValues,
-      int minCount,
       @JsonKey(includeToJson: false, includeFromJson: false)
       WoFormInputError? Function(List<String>)? getCustomError,
       SelectInputUiSettings<String> uiSettings});
@@ -1718,9 +1718,9 @@ class __$$SelectStringInputImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? maxCount = freezed,
+    Object? minCount = null,
     Object? initialValue = null,
     Object? availibleValues = null,
-    Object? minCount = null,
     Object? getCustomError = freezed,
     Object? uiSettings = null,
   }) {
@@ -1733,6 +1733,10 @@ class __$$SelectStringInputImplCopyWithImpl<$Res>
           ? _value.maxCount
           : maxCount // ignore: cast_nullable_to_non_nullable
               as int?,
+      minCount: null == minCount
+          ? _value.minCount
+          : minCount // ignore: cast_nullable_to_non_nullable
+              as int,
       initialValue: null == initialValue
           ? _value._initialValue
           : initialValue // ignore: cast_nullable_to_non_nullable
@@ -1741,10 +1745,6 @@ class __$$SelectStringInputImplCopyWithImpl<$Res>
           ? _value._availibleValues
           : availibleValues // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      minCount: null == minCount
-          ? _value.minCount
-          : minCount // ignore: cast_nullable_to_non_nullable
-              as int,
       getCustomError: freezed == getCustomError
           ? _value.getCustomError
           : getCustomError // ignore: cast_nullable_to_non_nullable
@@ -1772,9 +1772,9 @@ class _$SelectStringInputImpl extends SelectStringInput {
   const _$SelectStringInputImpl(
       {required this.id,
       required this.maxCount,
+      this.minCount = 0,
       final List<String> initialValue = const [],
       final List<String> availibleValues = const [],
-      this.minCount = 0,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.getCustomError,
       this.uiSettings = const SelectInputUiSettings<String>(),
@@ -1793,6 +1793,9 @@ class _$SelectStringInputImpl extends SelectStringInput {
   final String id;
   @override
   final int? maxCount;
+  @override
+  @JsonKey()
+  final int minCount;
   final List<String> _initialValue;
   @override
   @JsonKey()
@@ -1812,9 +1815,6 @@ class _$SelectStringInputImpl extends SelectStringInput {
   }
 
   @override
-  @JsonKey()
-  final int minCount;
-  @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final WoFormInputError? Function(List<String>)? getCustomError;
   @override
@@ -1826,7 +1826,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
 
   @override
   String toString() {
-    return 'WoFormInput.selectString(id: $id, maxCount: $maxCount, initialValue: $initialValue, availibleValues: $availibleValues, minCount: $minCount, getCustomError: $getCustomError, uiSettings: $uiSettings)';
+    return 'WoFormInput.selectString(id: $id, maxCount: $maxCount, minCount: $minCount, initialValue: $initialValue, availibleValues: $availibleValues, getCustomError: $getCustomError, uiSettings: $uiSettings)';
   }
 
   @override
@@ -1837,12 +1837,12 @@ class _$SelectStringInputImpl extends SelectStringInput {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.maxCount, maxCount) ||
                 other.maxCount == maxCount) &&
+            (identical(other.minCount, minCount) ||
+                other.minCount == minCount) &&
             const DeepCollectionEquality()
                 .equals(other._initialValue, _initialValue) &&
             const DeepCollectionEquality()
                 .equals(other._availibleValues, _availibleValues) &&
-            (identical(other.minCount, minCount) ||
-                other.minCount == minCount) &&
             (identical(other.getCustomError, getCustomError) ||
                 other.getCustomError == getCustomError) &&
             (identical(other.uiSettings, uiSettings) ||
@@ -1855,9 +1855,9 @@ class _$SelectStringInputImpl extends SelectStringInput {
       runtimeType,
       id,
       maxCount,
+      minCount,
       const DeepCollectionEquality().hash(_initialValue),
       const DeepCollectionEquality().hash(_availibleValues),
-      minCount,
       getCustomError,
       uiSettings);
 
@@ -1893,9 +1893,9 @@ class _$SelectStringInputImpl extends SelectStringInput {
     required TResult Function(
             String id,
             int? maxCount,
+            int minCount,
             List<String> initialValue,
             List<String> availibleValues,
-            int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
             SelectInputUiSettings<String> uiSettings)
@@ -1911,7 +1911,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             StringInputUiSettings uiSettings)
         string,
   }) {
-    return selectString(id, maxCount, initialValue, availibleValues, minCount,
+    return selectString(id, maxCount, minCount, initialValue, availibleValues,
         getCustomError, uiSettings);
   }
 
@@ -1940,9 +1940,9 @@ class _$SelectStringInputImpl extends SelectStringInput {
     TResult? Function(
             String id,
             int? maxCount,
+            int minCount,
             List<String> initialValue,
             List<String> availibleValues,
-            int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
             SelectInputUiSettings<String> uiSettings)?
@@ -1958,8 +1958,8 @@ class _$SelectStringInputImpl extends SelectStringInput {
             StringInputUiSettings uiSettings)?
         string,
   }) {
-    return selectString?.call(id, maxCount, initialValue, availibleValues,
-        minCount, getCustomError, uiSettings);
+    return selectString?.call(id, maxCount, minCount, initialValue,
+        availibleValues, getCustomError, uiSettings);
   }
 
   @override
@@ -1987,9 +1987,9 @@ class _$SelectStringInputImpl extends SelectStringInput {
     TResult Function(
             String id,
             int? maxCount,
+            int minCount,
             List<String> initialValue,
             List<String> availibleValues,
-            int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
             SelectInputUiSettings<String> uiSettings)?
@@ -2007,7 +2007,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
     required TResult orElse(),
   }) {
     if (selectString != null) {
-      return selectString(id, maxCount, initialValue, availibleValues, minCount,
+      return selectString(id, maxCount, minCount, initialValue, availibleValues,
           getCustomError, uiSettings);
     }
     return orElse();
@@ -2062,9 +2062,9 @@ abstract class SelectStringInput extends WoFormInput {
   const factory SelectStringInput(
           {required final String id,
           required final int? maxCount,
+          final int minCount,
           final List<String> initialValue,
           final List<String> availibleValues,
-          final int minCount,
           @JsonKey(includeToJson: false, includeFromJson: false)
           final WoFormInputError? Function(List<String>)? getCustomError,
           final SelectInputUiSettings<String> uiSettings}) =
@@ -2077,10 +2077,10 @@ abstract class SelectStringInput extends WoFormInput {
   @override
   String get id;
   int? get maxCount;
+  int get minCount;
   @override
   List<String> get initialValue;
   List<String> get availibleValues;
-  int get minCount;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   WoFormInputError? Function(List<String>)? get getCustomError;
@@ -2265,9 +2265,9 @@ class _$StringInputImpl extends StringInput {
     required TResult Function(
             String id,
             int? maxCount,
+            int minCount,
             List<String> initialValue,
             List<String> availibleValues,
-            int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
             SelectInputUiSettings<String> uiSettings)
@@ -2312,9 +2312,9 @@ class _$StringInputImpl extends StringInput {
     TResult? Function(
             String id,
             int? maxCount,
+            int minCount,
             List<String> initialValue,
             List<String> availibleValues,
-            int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
             SelectInputUiSettings<String> uiSettings)?
@@ -2359,9 +2359,9 @@ class _$StringInputImpl extends StringInput {
     TResult Function(
             String id,
             int? maxCount,
+            int minCount,
             List<String> initialValue,
             List<String> availibleValues,
-            int minCount,
             @JsonKey(includeToJson: false, includeFromJson: false)
             WoFormInputError? Function(List<String>)? getCustomError,
             SelectInputUiSettings<String> uiSettings)?

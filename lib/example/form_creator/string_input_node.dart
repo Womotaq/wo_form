@@ -10,7 +10,7 @@ InputsNode createStringInputNode() => InputsNode(
       id: 'stringInput',
       uiSettings: const InputsNodeUiSettings(
         labelText: 'Saisie de texte',
-        displayMode: InputsNodeDisplayMode.tapToExpand,
+        inputsVisibility: InputsVisibility.whenAsked,
       ),
       inputs: [
         const StringInput(
@@ -40,7 +40,7 @@ InputsNode createStringInputNode() => InputsNode(
           maxCount: 1,
           uiSettings: SelectInputUiSettings(
             labelText: 'Doit correspondre à',
-            displayMode: SelectFieldDisplayMode.chip,
+            inputsVisibility: InputsVisibility.whenAsked,
             valueBuilder: (regex) => Text(
               switch (regex) {
                 null => 'Peu importe',
@@ -73,7 +73,7 @@ InputsNode createStringInputNode() => InputsNode(
           id: 'uiSettings',
           uiSettings: const InputsNodeUiSettings(
             labelText: 'Interface',
-            displayMode: InputsNodeDisplayMode.tapToExpand,
+            inputsVisibility: InputsVisibility.whenAsked,
           ),
           inputs: [
             const StringInput(
@@ -102,7 +102,7 @@ InputsNode createStringInputNode() => InputsNode(
               maxCount: 1,
               uiSettings: SelectInputUiSettings(
                 labelText: 'Action spéciale (à droite)',
-                displayMode: SelectFieldDisplayMode.chip,
+                inputsVisibility: InputsVisibility.whenAsked,
                 valueBuilder: (value) => Text(
                   switch (value) {
                     null => 'Aucune',
@@ -127,7 +127,7 @@ InputsNode createStringInputNode() => InputsNode(
               uiSettings: SelectInputUiSettings(
                 labelText: 'Clavier optimisé pour écrire',
                 helperText: 'Seulement sur mobile.',
-                displayMode: SelectFieldDisplayMode.chip,
+                inputsVisibility: InputsVisibility.whenAsked,
                 valueBuilder: (value) => Text(
                   switch (value?.name) {
                     'text' => 'Du texte à une seule ligne',
@@ -202,7 +202,7 @@ InputsNode createStringInputNode() => InputsNode(
               maxCount: 1,
               uiSettings: SelectInputUiSettings(
                 labelText: "Bouton 'Entrée' (sur mobile)",
-                displayMode: SelectFieldDisplayMode.chip,
+                inputsVisibility: InputsVisibility.whenAsked,
                 valueBuilder: (value) => Text(value?.name ?? 'Défaut'),
               ),
             ),
@@ -213,7 +213,7 @@ InputsNode createStringInputNode() => InputsNode(
               maxCount: 1,
               uiSettings: SelectInputUiSettings(
                 labelText: 'Mettre le clavier en majuscule',
-                displayMode: SelectFieldDisplayMode.chip,
+                inputsVisibility: InputsVisibility.whenAsked,
                 valueBuilder: (value) => Text(
                   switch (value) {
                     null || TextCapitalization.none => 'Jamais',

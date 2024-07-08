@@ -472,7 +472,7 @@ InputsNodeUiSettings _$InputsNodeUiSettingsFromJson(Map<String, dynamic> json) {
 mixin _$InputsNodeUiSettings {
   String? get labelText => throw _privateConstructorUsedError;
   String? get helperText => throw _privateConstructorUsedError;
-  InputsNodeDisplayMode? get displayMode => throw _privateConstructorUsedError;
+  InputsVisibility? get inputsVisibility => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
   InputNodeWidgetBuilderDef? get widgetBuilder =>
       throw _privateConstructorUsedError;
@@ -497,7 +497,7 @@ abstract class $InputsNodeUiSettingsCopyWith<$Res> {
   $Res call(
       {String? labelText,
       String? helperText,
-      InputsNodeDisplayMode? displayMode,
+      InputsVisibility? inputsVisibility,
       @JsonKey(includeToJson: false, includeFromJson: false)
       InputNodeWidgetBuilderDef? widgetBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -522,7 +522,7 @@ class _$InputsNodeUiSettingsCopyWithImpl<$Res,
   $Res call({
     Object? labelText = freezed,
     Object? helperText = freezed,
-    Object? displayMode = freezed,
+    Object? inputsVisibility = freezed,
     Object? widgetBuilder = freezed,
     Object? headerBuilder = freezed,
     Object? expanderBuilder = freezed,
@@ -536,10 +536,10 @@ class _$InputsNodeUiSettingsCopyWithImpl<$Res,
           ? _value.helperText
           : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
-      displayMode: freezed == displayMode
-          ? _value.displayMode
-          : displayMode // ignore: cast_nullable_to_non_nullable
-              as InputsNodeDisplayMode?,
+      inputsVisibility: freezed == inputsVisibility
+          ? _value.inputsVisibility
+          : inputsVisibility // ignore: cast_nullable_to_non_nullable
+              as InputsVisibility?,
       widgetBuilder: freezed == widgetBuilder
           ? _value.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
@@ -567,7 +567,7 @@ abstract class _$$InputsNodeUiSettingsImplCopyWith<$Res>
   $Res call(
       {String? labelText,
       String? helperText,
-      InputsNodeDisplayMode? displayMode,
+      InputsVisibility? inputsVisibility,
       @JsonKey(includeToJson: false, includeFromJson: false)
       InputNodeWidgetBuilderDef? widgetBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -589,7 +589,7 @@ class __$$InputsNodeUiSettingsImplCopyWithImpl<$Res>
   $Res call({
     Object? labelText = freezed,
     Object? helperText = freezed,
-    Object? displayMode = freezed,
+    Object? inputsVisibility = freezed,
     Object? widgetBuilder = freezed,
     Object? headerBuilder = freezed,
     Object? expanderBuilder = freezed,
@@ -603,10 +603,10 @@ class __$$InputsNodeUiSettingsImplCopyWithImpl<$Res>
           ? _value.helperText
           : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
-      displayMode: freezed == displayMode
-          ? _value.displayMode
-          : displayMode // ignore: cast_nullable_to_non_nullable
-              as InputsNodeDisplayMode?,
+      inputsVisibility: freezed == inputsVisibility
+          ? _value.inputsVisibility
+          : inputsVisibility // ignore: cast_nullable_to_non_nullable
+              as InputsVisibility?,
       widgetBuilder: freezed == widgetBuilder
           ? _value.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
@@ -629,7 +629,7 @@ class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
   const _$InputsNodeUiSettingsImpl(
       {this.labelText,
       this.helperText,
-      this.displayMode,
+      this.inputsVisibility,
       @JsonKey(includeToJson: false, includeFromJson: false) this.widgetBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false) this.headerBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -644,7 +644,7 @@ class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
   @override
   final String? helperText;
   @override
-  final InputsNodeDisplayMode? displayMode;
+  final InputsVisibility? inputsVisibility;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final InputNodeWidgetBuilderDef? widgetBuilder;
@@ -657,7 +657,7 @@ class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
 
   @override
   String toString() {
-    return 'InputsNodeUiSettings(labelText: $labelText, helperText: $helperText, displayMode: $displayMode, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, expanderBuilder: $expanderBuilder)';
+    return 'InputsNodeUiSettings(labelText: $labelText, helperText: $helperText, inputsVisibility: $inputsVisibility, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, expanderBuilder: $expanderBuilder)';
   }
 
   @override
@@ -669,8 +669,8 @@ class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
                 other.labelText == labelText) &&
             (identical(other.helperText, helperText) ||
                 other.helperText == helperText) &&
-            (identical(other.displayMode, displayMode) ||
-                other.displayMode == displayMode) &&
+            (identical(other.inputsVisibility, inputsVisibility) ||
+                other.inputsVisibility == inputsVisibility) &&
             (identical(other.widgetBuilder, widgetBuilder) ||
                 other.widgetBuilder == widgetBuilder) &&
             (identical(other.headerBuilder, headerBuilder) ||
@@ -682,7 +682,7 @@ class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, labelText, helperText,
-      displayMode, widgetBuilder, headerBuilder, expanderBuilder);
+      inputsVisibility, widgetBuilder, headerBuilder, expanderBuilder);
 
   @JsonKey(ignore: true)
   @override
@@ -704,7 +704,7 @@ abstract class _InputsNodeUiSettings extends InputsNodeUiSettings {
   const factory _InputsNodeUiSettings(
           {final String? labelText,
           final String? helperText,
-          final InputsNodeDisplayMode? displayMode,
+          final InputsVisibility? inputsVisibility,
           @JsonKey(includeToJson: false, includeFromJson: false)
           final InputNodeWidgetBuilderDef? widgetBuilder,
           @JsonKey(includeToJson: false, includeFromJson: false)
@@ -722,7 +722,7 @@ abstract class _InputsNodeUiSettings extends InputsNodeUiSettings {
   @override
   String? get helperText;
   @override
-  InputsNodeDisplayMode? get displayMode;
+  InputsVisibility? get inputsVisibility;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   InputNodeWidgetBuilderDef? get widgetBuilder;
@@ -942,7 +942,7 @@ mixin _$SelectInputUiSettings<T> {
   String? get labelText => throw _privateConstructorUsedError;
   String? get helperText => throw _privateConstructorUsedError;
   String? get hintText => throw _privateConstructorUsedError;
-  SelectFieldDisplayMode? get displayMode => throw _privateConstructorUsedError;
+  InputsVisibility? get inputsVisibility => throw _privateConstructorUsedError;
   @JsonKey(includeFromJson: false, includeToJson: false)
   Widget Function(T?)? get valueBuilder => throw _privateConstructorUsedError;
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -977,7 +977,7 @@ abstract class $SelectInputUiSettingsCopyWith<T, $Res> {
       {String? labelText,
       String? helperText,
       String? hintText,
-      SelectFieldDisplayMode? displayMode,
+      InputsVisibility? inputsVisibility,
       @JsonKey(includeFromJson: false, includeToJson: false)
       Widget Function(T?)? valueBuilder,
       @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1008,7 +1008,7 @@ class _$SelectInputUiSettingsCopyWithImpl<T, $Res,
     Object? labelText = freezed,
     Object? helperText = freezed,
     Object? hintText = freezed,
-    Object? displayMode = freezed,
+    Object? inputsVisibility = freezed,
     Object? valueBuilder = freezed,
     Object? helpValueBuilder = freezed,
     Object? searcher = freezed,
@@ -1029,10 +1029,10 @@ class _$SelectInputUiSettingsCopyWithImpl<T, $Res,
           ? _value.hintText
           : hintText // ignore: cast_nullable_to_non_nullable
               as String?,
-      displayMode: freezed == displayMode
-          ? _value.displayMode
-          : displayMode // ignore: cast_nullable_to_non_nullable
-              as SelectFieldDisplayMode?,
+      inputsVisibility: freezed == inputsVisibility
+          ? _value.inputsVisibility
+          : inputsVisibility // ignore: cast_nullable_to_non_nullable
+              as InputsVisibility?,
       valueBuilder: freezed == valueBuilder
           ? _value.valueBuilder
           : valueBuilder // ignore: cast_nullable_to_non_nullable
@@ -1074,7 +1074,7 @@ abstract class _$$SelectInputUiSettingsImplCopyWith<T, $Res>
       {String? labelText,
       String? helperText,
       String? hintText,
-      SelectFieldDisplayMode? displayMode,
+      InputsVisibility? inputsVisibility,
       @JsonKey(includeFromJson: false, includeToJson: false)
       Widget Function(T?)? valueBuilder,
       @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1104,7 +1104,7 @@ class __$$SelectInputUiSettingsImplCopyWithImpl<T, $Res>
     Object? labelText = freezed,
     Object? helperText = freezed,
     Object? hintText = freezed,
-    Object? displayMode = freezed,
+    Object? inputsVisibility = freezed,
     Object? valueBuilder = freezed,
     Object? helpValueBuilder = freezed,
     Object? searcher = freezed,
@@ -1125,10 +1125,10 @@ class __$$SelectInputUiSettingsImplCopyWithImpl<T, $Res>
           ? _value.hintText
           : hintText // ignore: cast_nullable_to_non_nullable
               as String?,
-      displayMode: freezed == displayMode
-          ? _value.displayMode
-          : displayMode // ignore: cast_nullable_to_non_nullable
-              as SelectFieldDisplayMode?,
+      inputsVisibility: freezed == inputsVisibility
+          ? _value.inputsVisibility
+          : inputsVisibility // ignore: cast_nullable_to_non_nullable
+              as InputsVisibility?,
       valueBuilder: freezed == valueBuilder
           ? _value.valueBuilder
           : valueBuilder // ignore: cast_nullable_to_non_nullable
@@ -1164,7 +1164,7 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
       {this.labelText,
       this.helperText,
       this.hintText,
-      this.displayMode,
+      this.inputsVisibility,
       @JsonKey(includeFromJson: false, includeToJson: false) this.valueBuilder,
       @JsonKey(includeFromJson: false, includeToJson: false)
       this.helpValueBuilder,
@@ -1184,7 +1184,7 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
   @override
   final String? hintText;
   @override
-  final SelectFieldDisplayMode? displayMode;
+  final InputsVisibility? inputsVisibility;
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   final Widget Function(T?)? valueBuilder;
@@ -1208,7 +1208,7 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
 
   @override
   String toString() {
-    return 'SelectInputUiSettings<$T>(labelText: $labelText, helperText: $helperText, hintText: $hintText, displayMode: $displayMode, valueBuilder: $valueBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, submitFormOnSelect: $submitFormOnSelect)';
+    return 'SelectInputUiSettings<$T>(labelText: $labelText, helperText: $helperText, hintText: $hintText, inputsVisibility: $inputsVisibility, valueBuilder: $valueBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, submitFormOnSelect: $submitFormOnSelect)';
   }
 
   @override
@@ -1222,8 +1222,8 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
                 other.helperText == helperText) &&
             (identical(other.hintText, hintText) ||
                 other.hintText == hintText) &&
-            (identical(other.displayMode, displayMode) ||
-                other.displayMode == displayMode) &&
+            (identical(other.inputsVisibility, inputsVisibility) ||
+                other.inputsVisibility == inputsVisibility) &&
             (identical(other.valueBuilder, valueBuilder) ||
                 other.valueBuilder == valueBuilder) &&
             (identical(other.helpValueBuilder, helpValueBuilder) ||
@@ -1245,7 +1245,7 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
       labelText,
       helperText,
       hintText,
-      displayMode,
+      inputsVisibility,
       valueBuilder,
       helpValueBuilder,
       searcher,
@@ -1273,7 +1273,7 @@ abstract class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
       {final String? labelText,
       final String? helperText,
       final String? hintText,
-      final SelectFieldDisplayMode? displayMode,
+      final InputsVisibility? inputsVisibility,
       @JsonKey(includeFromJson: false, includeToJson: false)
       final Widget Function(T?)? valueBuilder,
       @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1297,7 +1297,7 @@ abstract class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
   @override
   String? get hintText;
   @override
-  SelectFieldDisplayMode? get displayMode;
+  InputsVisibility? get inputsVisibility;
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   Widget Function(T?)? get valueBuilder;

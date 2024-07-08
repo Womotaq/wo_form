@@ -12,10 +12,11 @@ class SelectField<T> extends StatelessWidget {
     final selectedValues = data.value ?? [];
 
     if (data.input.maxCount == 1) {
-      return switch (data.uiSettings.displayMode) {
-        null || SelectFieldDisplayMode.tile => Column(
+      return switch (data.uiSettings.inputsVisibility) {
+        null || InputsVisibility.always => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(height: 8),
               Opacity(
                 opacity: data.onValueChanged == null ? 0.3 : 1,
                 child: Builder(
@@ -52,7 +53,7 @@ class SelectField<T> extends StatelessWidget {
               ),
             ],
           ),
-        SelectFieldDisplayMode.chip => Column(
+        InputsVisibility.whenAsked => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Opacity(
@@ -89,10 +90,11 @@ class SelectField<T> extends StatelessWidget {
           ),
       };
     } else {
-      return switch (data.uiSettings.displayMode) {
-        null || SelectFieldDisplayMode.tile => Column(
+      return switch (data.uiSettings.inputsVisibility) {
+        null || InputsVisibility.always => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(height: 8),
               Opacity(
                 opacity: data.onValueChanged == null ? 0.3 : 1,
                 child: Builder(
@@ -118,7 +120,7 @@ class SelectField<T> extends StatelessWidget {
                     value: selectedValues.contains(value),
                     onChanged: data.onValueChanged == null
                         ? null
-                        : (_) => onUniqueChoice(value),
+                        : (_) => onMultipleChoice,
                     title: data.uiSettings.valueBuilder?.call(value) ??
                         Text(value.toString()),
                     subtitle: subtitle,
@@ -128,7 +130,7 @@ class SelectField<T> extends StatelessWidget {
               ),
             ],
           ),
-        SelectFieldDisplayMode.chip => Opacity(
+        InputsVisibility.whenAsked => Opacity(
             opacity: data.onValueChanged == null ? 0.3 : 1,
             child: Column(
               children: [

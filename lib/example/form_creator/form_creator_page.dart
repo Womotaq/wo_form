@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/example/app.dart';
 import 'package:wo_form/example/form_creator/num_input_node.dart';
+import 'package:wo_form/example/form_creator/select_string_input_node.dart';
 import 'package:wo_form/example/form_creator/string_input_node.dart';
 import 'package:wo_form/example/utils/readable_json.dart';
 import 'package:wo_form/wo_form.dart';
@@ -14,6 +15,7 @@ class FormCreatorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(const SelectStringInput(id: 'test', maxCount: 3).toJson());
     final woFormCreator = WoForm(
       initialStatus: const InvalidValuesStatus(),
       canQuit: (context) async => context.read<WoFormStatusCubit>().state
@@ -43,7 +45,7 @@ class FormCreatorPage extends StatelessWidget {
           id: 'uiSettings',
           uiSettings: InputsNodeUiSettings(
             labelText: 'Paramètres généraux',
-            displayMode: InputsNodeDisplayMode.tapToExpand,
+            inputsVisibility: InputsVisibility.whenAsked,
           ),
           inputs: [
             StringInput(
@@ -63,6 +65,10 @@ class FormCreatorPage extends StatelessWidget {
           id: 'inputs',
           exportSettings: const ExportSettings(exportType: ExportType.list),
           templates: [
+            DynamicInputTemplate(
+              labelText: 'Choix de text',
+              input: createSelectStringInputNode(),
+            ),
             DynamicInputTemplate(
               labelText: 'Saisie de texte',
               input: createStringInputNode(),

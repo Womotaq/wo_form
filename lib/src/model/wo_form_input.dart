@@ -105,9 +105,9 @@ sealed class WoFormInput
   const factory WoFormInput.selectString({
     required String id,
     required int? maxCount,
+    @Default(0) int minCount,
     @Default([]) List<String> initialValue,
     @Default([]) List<String> availibleValues,
-    @Default(0) int minCount,
     @JsonKey(includeToJson: false, includeFromJson: false)
     WoFormInputError? Function(List<String> selectedValues)? getCustomError,
     @Default(SelectInputUiSettings<String>())
