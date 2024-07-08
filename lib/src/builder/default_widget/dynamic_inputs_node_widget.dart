@@ -1,6 +1,18 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/wo_form.dart';
+
+extension RandomX on Random {
+  String _generateUid({int length = 6}) {
+    const chars = '0123456789'
+        'abcdefghijklmnopqrstuvwxyz'
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    return List<String>.generate(length, (_) => chars[nextInt(chars.length)])
+        .join();
+  }
+}
 
 class DynamicInputsNodeWidget extends StatelessWidget {
   const DynamicInputsNodeWidget(this.data, {super.key});
@@ -11,7 +23,12 @@ class DynamicInputsNodeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void onAddChoice(WoFormElementMixin inputFromTemplate) {
-      final input = inputFromTemplate.withUid();
+      final input = inputFromTemplate.withId(
+        id: (data.uiSettings.generateId ??
+                WoFormTheme.of(context)?.generateId ??
+                Random()._generateUid)
+            .call(),
+      );
 
       data.onValueChanged?.call(List.from(data.value ?? [])..add(input));
 

@@ -9,6 +9,7 @@ class WoFormThemeData with _$WoFormThemeData {
     BooleanFieldBuilderDef? booleanFieldBuilder,
     DynamicInputNodeWidgetBuilderDef? dynamicInputsNodeWidgetBuilder,
     WoFormPageBuilderDef? formPageBuilder,
+    GenerateIdDef? generateId,
     HeaderBuilderDef? headerBuilder,
     InputHeaderBuilderDef? inputHeaderBuilder,
     InputNodeWidgetBuilderDef? inputsNodeExpanderBuilder,

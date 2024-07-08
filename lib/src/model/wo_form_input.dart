@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -248,7 +246,7 @@ sealed class WoFormInput
   }
 
   @override
-  WoFormInput withUid() => copyWith(id: Random().generateUid());
+  WoFormInput withId({required String id}) => copyWith(id: id);
 }
 
 @freezed
@@ -371,7 +369,7 @@ class SelectInput<T>
       SelectFieldBuilder<T>(key: key, inputPath: '$parentPath/$id');
 
   @override
-  SelectInput<T> withUid() => copyWith(id: Random().generateUid());
+  SelectInput<T> withId({required String id}) => copyWith(id: id);
 }
 
 Object? _defaultToJsonT<T>(T value) {

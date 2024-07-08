@@ -22,6 +22,7 @@ mixin _$WoFormThemeData {
       throw _privateConstructorUsedError;
   WoFormPageBuilderDef? get formPageBuilder =>
       throw _privateConstructorUsedError;
+  GenerateIdDef? get generateId => throw _privateConstructorUsedError;
   HeaderBuilderDef? get headerBuilder => throw _privateConstructorUsedError;
   InputHeaderBuilderDef? get inputHeaderBuilder =>
       throw _privateConstructorUsedError;
@@ -62,6 +63,7 @@ abstract class $WoFormThemeDataCopyWith<$Res> {
       {BooleanFieldBuilderDef? booleanFieldBuilder,
       DynamicInputNodeWidgetBuilderDef? dynamicInputsNodeWidgetBuilder,
       WoFormPageBuilderDef? formPageBuilder,
+      GenerateIdDef? generateId,
       HeaderBuilderDef? headerBuilder,
       InputHeaderBuilderDef? inputHeaderBuilder,
       InputNodeWidgetBuilderDef? inputsNodeExpanderBuilder,
@@ -92,6 +94,7 @@ class _$WoFormThemeDataCopyWithImpl<$Res, $Val extends WoFormThemeData>
     Object? booleanFieldBuilder = freezed,
     Object? dynamicInputsNodeWidgetBuilder = freezed,
     Object? formPageBuilder = freezed,
+    Object? generateId = freezed,
     Object? headerBuilder = freezed,
     Object? inputHeaderBuilder = freezed,
     Object? inputsNodeExpanderBuilder = freezed,
@@ -118,6 +121,10 @@ class _$WoFormThemeDataCopyWithImpl<$Res, $Val extends WoFormThemeData>
           ? _value.formPageBuilder
           : formPageBuilder // ignore: cast_nullable_to_non_nullable
               as WoFormPageBuilderDef?,
+      generateId: freezed == generateId
+          ? _value.generateId
+          : generateId // ignore: cast_nullable_to_non_nullable
+              as GenerateIdDef?,
       headerBuilder: freezed == headerBuilder
           ? _value.headerBuilder
           : headerBuilder // ignore: cast_nullable_to_non_nullable
@@ -182,6 +189,7 @@ abstract class _$$WoFormThemeDataImplCopyWith<$Res>
       {BooleanFieldBuilderDef? booleanFieldBuilder,
       DynamicInputNodeWidgetBuilderDef? dynamicInputsNodeWidgetBuilder,
       WoFormPageBuilderDef? formPageBuilder,
+      GenerateIdDef? generateId,
       HeaderBuilderDef? headerBuilder,
       InputHeaderBuilderDef? inputHeaderBuilder,
       InputNodeWidgetBuilderDef? inputsNodeExpanderBuilder,
@@ -210,6 +218,7 @@ class __$$WoFormThemeDataImplCopyWithImpl<$Res>
     Object? booleanFieldBuilder = freezed,
     Object? dynamicInputsNodeWidgetBuilder = freezed,
     Object? formPageBuilder = freezed,
+    Object? generateId = freezed,
     Object? headerBuilder = freezed,
     Object? inputHeaderBuilder = freezed,
     Object? inputsNodeExpanderBuilder = freezed,
@@ -236,6 +245,10 @@ class __$$WoFormThemeDataImplCopyWithImpl<$Res>
           ? _value.formPageBuilder
           : formPageBuilder // ignore: cast_nullable_to_non_nullable
               as WoFormPageBuilderDef?,
+      generateId: freezed == generateId
+          ? _value.generateId
+          : generateId // ignore: cast_nullable_to_non_nullable
+              as GenerateIdDef?,
       headerBuilder: freezed == headerBuilder
           ? _value.headerBuilder
           : headerBuilder // ignore: cast_nullable_to_non_nullable
@@ -295,6 +308,7 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
       {this.booleanFieldBuilder,
       this.dynamicInputsNodeWidgetBuilder,
       this.formPageBuilder,
+      this.generateId,
       this.headerBuilder,
       this.inputHeaderBuilder,
       this.inputsNodeExpanderBuilder,
@@ -315,6 +329,8 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
   final DynamicInputNodeWidgetBuilderDef? dynamicInputsNodeWidgetBuilder;
   @override
   final WoFormPageBuilderDef? formPageBuilder;
+  @override
+  final GenerateIdDef? generateId;
   @override
   final HeaderBuilderDef? headerBuilder;
   @override
@@ -347,7 +363,7 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
 
   @override
   String toString() {
-    return 'WoFormThemeData(booleanFieldBuilder: $booleanFieldBuilder, dynamicInputsNodeWidgetBuilder: $dynamicInputsNodeWidgetBuilder, formPageBuilder: $formPageBuilder, headerBuilder: $headerBuilder, inputHeaderBuilder: $inputHeaderBuilder, inputsNodeExpanderBuilder: $inputsNodeExpanderBuilder, inputsNodeWidgetBuilder: $inputsNodeWidgetBuilder, numFieldBuilder: $numFieldBuilder, selectFieldBuilder: $selectFieldBuilder, standardScaffoldBuilder: $standardScaffoldBuilder, stringFieldBuilder: $stringFieldBuilder, submitButtonBuilder: $submitButtonBuilder, onSubmitError: $onSubmitError, verticalSpacing: $verticalSpacing, showAsteriskIfRequired: $showAsteriskIfRequired)';
+    return 'WoFormThemeData(booleanFieldBuilder: $booleanFieldBuilder, dynamicInputsNodeWidgetBuilder: $dynamicInputsNodeWidgetBuilder, formPageBuilder: $formPageBuilder, generateId: $generateId, headerBuilder: $headerBuilder, inputHeaderBuilder: $inputHeaderBuilder, inputsNodeExpanderBuilder: $inputsNodeExpanderBuilder, inputsNodeWidgetBuilder: $inputsNodeWidgetBuilder, numFieldBuilder: $numFieldBuilder, selectFieldBuilder: $selectFieldBuilder, standardScaffoldBuilder: $standardScaffoldBuilder, stringFieldBuilder: $stringFieldBuilder, submitButtonBuilder: $submitButtonBuilder, onSubmitError: $onSubmitError, verticalSpacing: $verticalSpacing, showAsteriskIfRequired: $showAsteriskIfRequired)';
   }
 
   @override
@@ -363,6 +379,8 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
                     dynamicInputsNodeWidgetBuilder) &&
             (identical(other.formPageBuilder, formPageBuilder) ||
                 other.formPageBuilder == formPageBuilder) &&
+            (identical(other.generateId, generateId) ||
+                other.generateId == generateId) &&
             (identical(other.headerBuilder, headerBuilder) ||
                 other.headerBuilder == headerBuilder) &&
             (identical(other.inputHeaderBuilder, inputHeaderBuilder) ||
@@ -398,6 +416,7 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
       booleanFieldBuilder,
       dynamicInputsNodeWidgetBuilder,
       formPageBuilder,
+      generateId,
       headerBuilder,
       inputHeaderBuilder,
       inputsNodeExpanderBuilder,
@@ -424,6 +443,7 @@ abstract class _WoFormThemeData extends WoFormThemeData {
       {final BooleanFieldBuilderDef? booleanFieldBuilder,
       final DynamicInputNodeWidgetBuilderDef? dynamicInputsNodeWidgetBuilder,
       final WoFormPageBuilderDef? formPageBuilder,
+      final GenerateIdDef? generateId,
       final HeaderBuilderDef? headerBuilder,
       final InputHeaderBuilderDef? inputHeaderBuilder,
       final InputNodeWidgetBuilderDef? inputsNodeExpanderBuilder,
@@ -444,6 +464,8 @@ abstract class _WoFormThemeData extends WoFormThemeData {
   DynamicInputNodeWidgetBuilderDef? get dynamicInputsNodeWidgetBuilder;
   @override
   WoFormPageBuilderDef? get formPageBuilder;
+  @override
+  GenerateIdDef? get generateId;
   @override
   HeaderBuilderDef? get headerBuilder;
   @override

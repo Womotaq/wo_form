@@ -47,11 +47,15 @@ typedef DynamicInputNodeWidgetBuilderDef = Widget Function(
   WoFieldData<DynamicInputsNode, void, DynamicInputsNodeUiSettings> data,
 );
 
+typedef GenerateIdDef = String Function();
+
 @freezed
 class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
   const factory DynamicInputsNodeUiSettings({
     String? labelText,
     String? helperText,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    GenerateIdDef? generateId,
     @JsonKey(includeToJson: false, includeFromJson: false)
     DynamicInputNodeWidgetBuilderDef? widgetBuilder,
   }) = _DynamicInputsNodeUiSettings;

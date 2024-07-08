@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -71,7 +69,7 @@ mixin WoFormElementMixin {
     return getAbsolutePath(parentPath: newParentPath, inputPath: relativePath);
   }
 
-  WoFormElementMixin withUid();
+  WoFormElementMixin withId({required String id});
 }
 
 mixin WoFormNodeMixin {
@@ -550,7 +548,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin, WoFormNodeMixin {
       };
 
   @override
-  WoFormNode withUid() => copyWith(id: Random().generateUid());
+  WoFormNode withId({required String id}) => copyWith(id: id);
 }
 
 @freezed
@@ -714,7 +712,7 @@ class FutureNode<T> with _$FutureNode<T>, WoFormElementMixin, WoFormNodeMixin {
       );
 
   @override
-  FutureNode<T> withUid() => copyWith(id: Random().generateUid());
+  FutureNode<T> withId({required String id}) => copyWith(id: id);
 }
 
 class FutureNodeBuilder<T> extends StatelessWidget {
