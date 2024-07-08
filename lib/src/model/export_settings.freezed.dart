@@ -20,9 +20,8 @@ ExportSettings _$ExportSettingsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ExportSettings {
-  Map<String, dynamic>? get exportedMetadata =>
-      throw _privateConstructorUsedError;
-  ExportType get exportType => throw _privateConstructorUsedError;
+  Map<String, dynamic> get metadata => throw _privateConstructorUsedError;
+  ExportType get type => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +35,7 @@ abstract class $ExportSettingsCopyWith<$Res> {
           ExportSettings value, $Res Function(ExportSettings) then) =
       _$ExportSettingsCopyWithImpl<$Res, ExportSettings>;
   @useResult
-  $Res call({Map<String, dynamic>? exportedMetadata, ExportType exportType});
+  $Res call({Map<String, dynamic> metadata, ExportType type});
 }
 
 /// @nodoc
@@ -52,17 +51,17 @@ class _$ExportSettingsCopyWithImpl<$Res, $Val extends ExportSettings>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? exportedMetadata = freezed,
-    Object? exportType = null,
+    Object? metadata = null,
+    Object? type = null,
   }) {
     return _then(_value.copyWith(
-      exportedMetadata: freezed == exportedMetadata
-          ? _value.exportedMetadata
-          : exportedMetadata // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-      exportType: null == exportType
-          ? _value.exportType
-          : exportType // ignore: cast_nullable_to_non_nullable
+      metadata: null == metadata
+          ? _value.metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
               as ExportType,
     ) as $Val);
   }
@@ -76,7 +75,7 @@ abstract class _$$ExportSettingsImplCopyWith<$Res>
       __$$ExportSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Map<String, dynamic>? exportedMetadata, ExportType exportType});
+  $Res call({Map<String, dynamic> metadata, ExportType type});
 }
 
 /// @nodoc
@@ -90,17 +89,17 @@ class __$$ExportSettingsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? exportedMetadata = freezed,
-    Object? exportType = null,
+    Object? metadata = null,
+    Object? type = null,
   }) {
     return _then(_$ExportSettingsImpl(
-      exportedMetadata: freezed == exportedMetadata
-          ? _value._exportedMetadata
-          : exportedMetadata // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-      exportType: null == exportType
-          ? _value.exportType
-          : exportType // ignore: cast_nullable_to_non_nullable
+      metadata: null == metadata
+          ? _value._metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
               as ExportType,
     ));
   }
@@ -110,31 +109,30 @@ class __$$ExportSettingsImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ExportSettingsImpl extends _ExportSettings {
   const _$ExportSettingsImpl(
-      {final Map<String, dynamic>? exportedMetadata,
-      this.exportType = ExportType.map})
-      : _exportedMetadata = exportedMetadata,
+      {final Map<String, dynamic> metadata = const {},
+      this.type = ExportType.map})
+      : _metadata = metadata,
         super._();
 
   factory _$ExportSettingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$ExportSettingsImplFromJson(json);
 
-  final Map<String, dynamic>? _exportedMetadata;
+  final Map<String, dynamic> _metadata;
   @override
-  Map<String, dynamic>? get exportedMetadata {
-    final value = _exportedMetadata;
-    if (value == null) return null;
-    if (_exportedMetadata is EqualUnmodifiableMapView) return _exportedMetadata;
+  @JsonKey()
+  Map<String, dynamic> get metadata {
+    if (_metadata is EqualUnmodifiableMapView) return _metadata;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
+    return EqualUnmodifiableMapView(_metadata);
   }
 
   @override
   @JsonKey()
-  final ExportType exportType;
+  final ExportType type;
 
   @override
   String toString() {
-    return 'ExportSettings(exportedMetadata: $exportedMetadata, exportType: $exportType)';
+    return 'ExportSettings(metadata: $metadata, type: $type)';
   }
 
   @override
@@ -142,16 +140,14 @@ class _$ExportSettingsImpl extends _ExportSettings {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ExportSettingsImpl &&
-            const DeepCollectionEquality()
-                .equals(other._exportedMetadata, _exportedMetadata) &&
-            (identical(other.exportType, exportType) ||
-                other.exportType == exportType));
+            const DeepCollectionEquality().equals(other._metadata, _metadata) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_exportedMetadata), exportType);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_metadata), type);
 
   @JsonKey(ignore: true)
   @override
@@ -170,17 +166,17 @@ class _$ExportSettingsImpl extends _ExportSettings {
 
 abstract class _ExportSettings extends ExportSettings {
   const factory _ExportSettings(
-      {final Map<String, dynamic>? exportedMetadata,
-      final ExportType exportType}) = _$ExportSettingsImpl;
+      {final Map<String, dynamic> metadata,
+      final ExportType type}) = _$ExportSettingsImpl;
   const _ExportSettings._() : super._();
 
   factory _ExportSettings.fromJson(Map<String, dynamic> json) =
       _$ExportSettingsImpl.fromJson;
 
   @override
-  Map<String, dynamic>? get exportedMetadata;
+  Map<String, dynamic> get metadata;
   @override
-  ExportType get exportType;
+  ExportType get type;
   @override
   @JsonKey(ignore: true)
   _$$ExportSettingsImplCopyWith<_$ExportSettingsImpl> get copyWith =>

@@ -42,7 +42,7 @@ InputsNode createSelectStringInputNode() => InputsNode(
             InputsNode(
               id: 'uiSettings-More',
               exportSettings: const ExportSettings(
-                exportType: ExportType.list,
+                type: ExportType.mergeWithParent,
               ),
               uiSettings: const InputsNodeUiSettings(
                 labelText: 'Interface',
@@ -89,7 +89,7 @@ InputsNode createSelectStringInputNode() => InputsNode(
         ),
         const DynamicInputsNode(
           id: 'availibleValues',
-          exportSettings: ExportSettings(exportType: ExportType.list),
+          exportSettings: ExportSettings(type: ExportType.list),
           templates: [
             DynamicInputTemplate(
               input: StringInput(
@@ -108,7 +108,7 @@ InputsNode createSelectStringInputNode() => InputsNode(
         ),
       ],
       exportSettings: const ExportSettings(
-        exportedMetadata: {
+        metadata: {
           'runtimeType': 'selectString',
         },
       ),

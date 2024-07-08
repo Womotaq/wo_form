@@ -12,16 +12,16 @@ enum ExportType {
   /// containing the inputs exported data.
   map,
 
-  /// The nede will export its first exportable child's exported data.
-  /// LATER : replace by mergeWithParent
-  firstExportable;
+  /// If the parent node is The node will export its first exportable child's exported data.
+  /// TODO : replace by mergeWithParent
+  mergeWithParent;
 }
 
 @freezed
 class ExportSettings with _$ExportSettings {
   const factory ExportSettings({
-    Map<String, dynamic>? exportedMetadata,
-    @Default(ExportType.map) ExportType exportType,
+    @Default({}) Map<String, dynamic> metadata,
+    @Default(ExportType.map) ExportType type,
   }) = _ExportSettings;
 
   const ExportSettings._();

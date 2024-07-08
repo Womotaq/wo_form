@@ -43,7 +43,7 @@ class QuizPage extends StatelessWidget {
         InputsNode(
           id: 'q1-page',
           exportSettings: const ExportSettings(
-            exportType: ExportType.firstExportable,
+            type: ExportType.mergeWithParent,
           ),
           inputs: [
             WidgetNode(
@@ -86,7 +86,7 @@ class QuizPage extends StatelessWidget {
         InputsNode(
           id: 'q2-page',
           exportSettings: const ExportSettings(
-            exportType: ExportType.firstExportable,
+            type: ExportType.mergeWithParent,
           ),
           inputs: [
             WidgetNode(
@@ -136,7 +136,7 @@ class QuizPage extends StatelessWidget {
         InputsNode(
           id: 'q3-page',
           exportSettings: const ExportSettings(
-            exportType: ExportType.firstExportable,
+            type: ExportType.mergeWithParent,
           ),
           inputs: [
             WidgetNode(
@@ -175,7 +175,7 @@ class QuizPage extends StatelessWidget {
         InputsNode(
           id: 'q4-page',
           exportSettings: const ExportSettings(
-            exportType: ExportType.firstExportable,
+            type: ExportType.mergeWithParent,
           ),
           inputs: [
             WidgetNode(
@@ -208,7 +208,7 @@ class QuizPage extends StatelessWidget {
         InputsNode(
           id: 'q5-page',
           exportSettings: const ExportSettings(
-            exportType: ExportType.firstExportable,
+            type: ExportType.mergeWithParent,
           ),
           inputs: [
             WidgetNode(

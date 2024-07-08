@@ -17,7 +17,8 @@ mixin WoFormElementMixin {
 
   Map<String, dynamic> toJson();
 
-  dynamic export({
+  void export({
+    required dynamic into,
     required WoFormValues values,
     required String parentPath,
   });
@@ -33,12 +34,6 @@ mixin WoFormElementMixin {
   });
 
   String? getExportKey({
-    required WoFormValues values,
-    required String parentPath,
-  });
-
-  /// Return true if this element has data that can be exported.
-  bool isExportable({
     required WoFormValues values,
     required String parentPath,
   });
@@ -217,47 +212,9 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin, WoFormNodeMixin {
     }
   }
 
-  dynamic _exportInputs({
-    required List<WoFormElementMixin> inputs,
-    required WoFormValues values,
-    required String parentPath,
-    required ExportType exportType,
-    required Map<String, dynamic>? metadata,
-  }) {
-    final exportableInputs = inputs.where(
-      (i) => i.isExportable(
-        values: values,
-        parentPath: '$parentPath/$id',
-      ),
-    );
-
-    return switch (exportType) {
-      ExportType.map => {
-          ...?metadata,
-          for (final input in exportableInputs)
-            input.getExportKey(
-              values: values,
-              parentPath: '$parentPath/$id',
-            )!: input.export(
-              values: values,
-              parentPath: '$parentPath/$id',
-            ),
-        },
-      ExportType.list => [
-          ...?metadata?.values,
-          for (final input in exportableInputs)
-            input.export(
-              values: values,
-              parentPath: '$parentPath/$id',
-            ),
-        ],
-      ExportType.firstExportable => exportableInputs.firstOrNull
-          ?.export(values: values, parentPath: '$parentPath/$id'),
-    };
-  }
-
   @override
-  dynamic export({
+  void export({
+    required dynamic into,
     required WoFormValues values,
     required String parentPath,
   }) {
@@ -268,15 +225,56 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin, WoFormNodeMixin {
             ? (this as InputsNode).inputs
             : (values['$parentPath/$id'] as List<WoFormElementMixin>?) ?? [];
 
-        return _exportInputs(
-          inputs: inputs,
-          values: values,
-          parentPath: parentPath,
-          exportType: exportSettings.exportType,
-          metadata: exportSettings.exportedMetadata,
-        );
-      // case PushPageNode(input: final input):
-      //   return input.export(values: values, parentPath: '$parentPath/$id');
+        switch (exportSettings.type) {
+          case ExportType.mergeWithParent:
+            final data = Map<String, dynamic>.from(exportSettings.metadata);
+
+            for (final input in inputs) {
+              input.export(
+                into: data,
+                values: values,
+                parentPath: '$parentPath/$id',
+              );
+            }
+
+            if (into is List) {
+              into.addAll(data.values);
+            } else if (into is Map) {
+              into.addAll(data);
+            }
+          case ExportType.map:
+            final data = Map<String, dynamic>.from(exportSettings.metadata);
+
+            for (final input in inputs) {
+              input.export(
+                into: data,
+                values: values,
+                parentPath: '$parentPath/$id',
+              );
+            }
+
+            if (into is List) {
+              into.add(data);
+            } else if (into is Map) {
+              into[getExportKey(values: values, parentPath: parentPath)] = data;
+            }
+          case ExportType.list:
+            final data = List<dynamic>.from(exportSettings.metadata.values);
+
+            for (final input in inputs) {
+              input.export(
+                into: data,
+                values: values,
+                parentPath: '$parentPath/$id',
+              );
+            }
+
+            if (into is List) {
+              into.add(data);
+            } else if (into is Map) {
+              into[getExportKey(values: values, parentPath: parentPath)] = data;
+            }
+        }
       case ValueBuilderNode(inputPath: final inputPath, builder: final builder):
         final input = builder!(
           id,
@@ -286,13 +284,13 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin, WoFormNodeMixin {
           )],
         );
 
-        return input.export(
+        input.export(
+          into: into,
           values: values,
           parentPath: '$parentPath/$id',
         );
       case ValueListenerNode():
       case WidgetNode():
-        return null;
     }
   }
 
@@ -316,14 +314,6 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin, WoFormNodeMixin {
               parentPath: '$parentPath/$id',
             ),
         ];
-      // case PushPageNode(input: final input):
-      //   return [
-      //     '$parentPath/$id',
-      //     ...input.getAllInputPaths(
-      //       values: values,
-      //       parentPath: '$parentPath/$id',
-      //     ),
-      //   ];
       case ValueBuilderNode(inputPath: final inputPath, builder: final builder):
         final input = builder!(
           id,
@@ -354,26 +344,10 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin, WoFormNodeMixin {
     switch (this) {
       case DynamicInputsNode(exportSettings: final exportSettings):
       case InputsNode(exportSettings: final exportSettings):
-        final inputs = this is InputsNode
-            ? (this as InputsNode).inputs
-            : (values['$parentPath/$id'] as List<WoFormElementMixin>?) ?? [];
-
-        return switch (exportSettings.exportType) {
+        return switch (exportSettings.type) {
           ExportType.map || ExportType.list => id,
-          ExportType.firstExportable => inputs
-              .firstWhereOrNull(
-                (i) => i.isExportable(
-                  values: values,
-                  parentPath: '$parentPath/$id',
-                ),
-              )
-              ?.getExportKey(values: values, parentPath: parentPath)
+          ExportType.mergeWithParent => null,
         };
-      // case PushPageNode(input: final input):
-      //   return input.getExportKey(
-      //     values: values,
-      //     parentPath: '$parentPath/$id',
-      //   );
       case ValueBuilderNode(inputPath: final inputPath, builder: final builder):
         final input = builder!(
           id,
@@ -389,49 +363,6 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin, WoFormNodeMixin {
         );
       case ValueListenerNode() || WidgetNode():
         return null;
-    }
-  }
-
-  @override
-  bool isExportable({
-    required WoFormValues values,
-    required String parentPath,
-  }) {
-    switch (this) {
-      case DynamicInputsNode():
-      case InputsNode():
-        final inputs = this is InputsNode
-            ? (this as InputsNode).inputs
-            : (values['$parentPath/$id'] as List<WoFormElementMixin>?) ?? [];
-
-        return inputs
-            .map(
-              (i) => i.isExportable(
-                values: values,
-                parentPath: '$parentPath/$id',
-              ),
-            )
-            .contains(true);
-      // case PushPageNode(input: final input):
-      //   return input.isExportable(
-      //     values: values,
-      //     parentPath: '$parentPath/$id',
-      //   );
-      case ValueBuilderNode(inputPath: final inputPath, builder: final builder):
-        final input = builder!(
-          id,
-          values[WoFormElementMixin.getAbsolutePath(
-            parentPath: '$parentPath/$id',
-            inputPath: inputPath,
-          )],
-        );
-
-        return input.isExportable(
-          values: values,
-          parentPath: '$parentPath/$id',
-        );
-      case ValueListenerNode() || WidgetNode():
-        return false;
     }
   }
 
@@ -647,6 +578,7 @@ class FutureNode<T> with _$FutureNode<T>, WoFormElementMixin, WoFormNodeMixin {
 
   @override
   dynamic export({
+    required dynamic into,
     required WoFormValues values,
     required String parentPath,
   }) {
@@ -655,6 +587,7 @@ class FutureNode<T> with _$FutureNode<T>, WoFormElementMixin, WoFormNodeMixin {
     if (snapshot is! AsyncSnapshot<T?>) return null;
 
     return builder(parentPath, snapshot).export(
+      into: into,
       values: values,
       parentPath: '$parentPath/$id',
     );
@@ -770,22 +703,6 @@ class FutureNode<T> with _$FutureNode<T>, WoFormElementMixin, WoFormNodeMixin {
       else if (input is WoFormInputMixin)
         '$parentPath/$id/${input.id}': (input as WoFormInputMixin).initialValue,
     };
-  }
-
-  /// Return true if this element has data that can be exported.
-  @override
-  bool isExportable({
-    required WoFormValues values,
-    required String parentPath,
-  }) {
-    final snapshot = values['$parentPath/$id'];
-
-    if (snapshot is! AsyncSnapshot<T?>) return false;
-
-    return builder(parentPath, snapshot).isExportable(
-      values: values,
-      parentPath: '$parentPath/$id',
-    );
   }
 
   @override

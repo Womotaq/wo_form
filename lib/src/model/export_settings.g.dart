@@ -8,21 +8,20 @@ part of 'export_settings.dart';
 
 _$ExportSettingsImpl _$$ExportSettingsImplFromJson(Map<String, dynamic> json) =>
     _$ExportSettingsImpl(
-      exportedMetadata: json['exportedMetadata'] as Map<String, dynamic>?,
-      exportType:
-          $enumDecodeNullable(_$ExportTypeEnumMap, json['exportType']) ??
-              ExportType.map,
+      metadata: json['metadata'] as Map<String, dynamic>? ?? const {},
+      type: $enumDecodeNullable(_$ExportTypeEnumMap, json['type']) ??
+          ExportType.map,
     );
 
 Map<String, dynamic> _$$ExportSettingsImplToJson(
         _$ExportSettingsImpl instance) =>
     <String, dynamic>{
-      'exportedMetadata': instance.exportedMetadata,
-      'exportType': _$ExportTypeEnumMap[instance.exportType]!,
+      'metadata': instance.metadata,
+      'type': _$ExportTypeEnumMap[instance.type]!,
     };
 
 const _$ExportTypeEnumMap = {
   ExportType.list: 'list',
   ExportType.map: 'map',
-  ExportType.firstExportable: 'firstExportable',
+  ExportType.mergeWithParent: 'mergeWithParent',
 };

@@ -17,7 +17,7 @@ class ReportPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return WoForm(
       exportSettings: const ExportSettings(
-        exportedMetadata: {
+        metadata: {
           'reporterId': 'me',
           'reportedId': 'him',
         },

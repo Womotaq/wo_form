@@ -244,7 +244,7 @@ InputsNode createStringInputNode() => InputsNode(
         ),
       ],
       exportSettings: const ExportSettings(
-        exportedMetadata: {
+        metadata: {
           'runtimeType': 'string',
         },
       ),

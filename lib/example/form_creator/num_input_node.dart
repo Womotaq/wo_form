@@ -59,7 +59,7 @@ InputsNode createNumInputNode() => const InputsNode(
         ),
       ],
       exportSettings: ExportSettings(
-        exportedMetadata: {
+        metadata: {
           'runtimeType': 'num',
         },
       ),

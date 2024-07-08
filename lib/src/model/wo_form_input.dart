@@ -38,12 +38,6 @@ mixin WoFormInputMixin {
 
   // WoFormElementMixin
 
-  bool isExportable({
-    required WoFormValues values,
-    required String parentPath,
-  }) =>
-      true;
-
   String get id;
 
   Iterable<String> getAllInputPaths({
@@ -212,11 +206,19 @@ sealed class WoFormInput
   }
 
   @override
-  dynamic export({
+  void export({
+    required dynamic into,
     required WoFormValues values,
     required String parentPath,
-  }) =>
-      _exportValue(values['$parentPath/$id']);
+  }) {
+    final exportValue = _exportValue(values['$parentPath/$id']);
+
+    if (into is List) {
+      into.add(exportValue);
+    } else if (into is Map) {
+      into[getExportKey(values: values, parentPath: parentPath)] = exportValue;
+    }
+  }
 
   Object? _exportValue(dynamic value) => switch (this) {
         BooleanInput() => value as bool?,
@@ -346,15 +348,23 @@ class SelectInput<T>
       );
 
   @override
-  dynamic export({
+  void export({
+    required dynamic into,
     required WoFormValues values,
     required String parentPath,
-  }) =>
-      _selectedValuesToJson<T>(
-        selectedValues: values['$parentPath/$id'] as List<T>?,
-        toJsonT: toJsonT,
-        asList: maxCount != 1,
-      );
+  }) {
+    final exportValue = _selectedValuesToJson<T>(
+      selectedValues: values['$parentPath/$id'] as List<T>?,
+      toJsonT: toJsonT,
+      asList: maxCount != 1,
+    );
+
+    if (into is List) {
+      into.add(exportValue);
+    } else if (into is Map) {
+      into[getExportKey(values: values, parentPath: parentPath)] = exportValue;
+    }
+  }
 
   @override
   Widget toWidget({required String parentPath, Key? key}) =>
