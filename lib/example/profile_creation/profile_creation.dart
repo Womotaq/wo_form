@@ -17,107 +17,110 @@ class ProfileCreationPage extends StatelessWidget {
           showProgressIndicator: false,
         ),
       ),
-      inputs: [
-        const InputsNode(
-          id: 'namePage',
-          uiSettings: InputsNodeUiSettings(
-            labelText: "Comment t'appelles-tu ?",
+      input: InputsNode(
+        id: '#',
+        inputs: [
+          const InputsNode(
+            id: 'namePage',
+            uiSettings: InputsNodeUiSettings(
+              labelText: "Comment t'appelles-tu ?",
+            ),
+            inputs: [
+              StringInput(
+                id: 'firstName',
+                isRequired: true,
+                uiSettings: StringInputUiSettings(
+                  labelText: 'Prénom',
+                  hintText: "N'écris pas John stp !!",
+                  prefixIcon: Icon(Icons.person),
+                  autofocus: true,
+                  autofillHints: [AutofillHints.givenName],
+                ),
+              ),
+              StringInput(
+                id: 'lastName',
+                uiSettings: StringInputUiSettings(
+                  labelText: 'Nom',
+                  prefixIcon: SizedBox.square(dimension: 24),
+                  autofillHints: [AutofillHints.familyName],
+                ),
+              ),
+            ],
           ),
-          inputs: [
-            StringInput(
-              id: 'firstName',
-              isRequired: true,
-              uiSettings: StringInputUiSettings(
-                labelText: 'Prénom',
-                hintText: "N'écris pas John stp !!",
-                prefixIcon: Icon(Icons.person),
-                autofocus: true,
-                autofillHints: [AutofillHints.givenName],
-              ),
+          const InputsNode(
+            id: 'addressPage',
+            uiSettings: InputsNodeUiSettings(
+              labelText: 'Où habites-tu ?',
             ),
-            StringInput(
-              id: 'lastName',
-              uiSettings: StringInputUiSettings(
-                labelText: 'Nom',
-                prefixIcon: SizedBox.square(dimension: 24),
-                autofillHints: [AutofillHints.familyName],
+            inputs: [
+              StringInput(
+                id: 'street',
+                uiSettings: StringInputUiSettings(
+                  labelText: 'Rue',
+                  prefixIcon: Icon(Icons.signpost),
+                  autofocus: true,
+                  autofillHints: [AutofillHints.streetAddressLevel1],
+                ),
               ),
-            ),
-          ],
-        ),
-        const InputsNode(
-          id: 'addressPage',
-          uiSettings: InputsNodeUiSettings(
-            labelText: 'Où habites-tu ?',
+              StringInput(
+                id: 'postalCode',
+                uiSettings: StringInputUiSettings(
+                  labelText: 'Code postal',
+                  prefixIcon: SizedBox.square(dimension: 24),
+                  keyboardType: TextInputType.number,
+                  autofillHints: [AutofillHints.postalCode],
+                ),
+              ),
+              StringInput(
+                id: 'city',
+                uiSettings: StringInputUiSettings(
+                  labelText: 'Ville',
+                  prefixIcon: SizedBox.square(dimension: 24),
+                  autofillHints: [AutofillHints.addressCity],
+                ),
+              ),
+              StringInput(
+                id: 'country',
+                initialValue: 'France',
+                uiSettings: StringInputUiSettings(
+                  labelText: 'Pays',
+                  prefixIcon: Icon(Icons.public),
+                  autofillHints: [AutofillHints.countryName],
+                ),
+              ),
+            ],
           ),
-          inputs: [
-            StringInput(
-              id: 'street',
-              uiSettings: StringInputUiSettings(
-                labelText: 'Rue',
-                prefixIcon: Icon(Icons.signpost),
-                autofocus: true,
-                autofillHints: [AutofillHints.streetAddressLevel1],
-              ),
+          InputsNode(
+            id: 'contactPage',
+            uiSettings: const InputsNodeUiSettings(
+              labelText: 'Comment te contacter ?',
             ),
-            StringInput(
-              id: 'postalCode',
-              uiSettings: StringInputUiSettings(
-                labelText: 'Code postal',
-                prefixIcon: SizedBox.square(dimension: 24),
-                keyboardType: TextInputType.number,
-                autofillHints: [AutofillHints.postalCode],
+            inputs: [
+              StringInput(
+                id: 'mail',
+                isRequired: true,
+                regexPattern: RegexPattern.email.value,
+                uiSettings: StringInputUiSettings.email(
+                  labelText: 'Email',
+                  prefixIcon: const Icon(Icons.mail),
+                  autofocus: true,
+                  invalidRegexMessage: FormLocalizationsFr()
+                      .regexPatternUnmatched(RegexPattern.email.name),
+                ),
               ),
-            ),
-            StringInput(
-              id: 'city',
-              uiSettings: StringInputUiSettings(
-                labelText: 'Ville',
-                prefixIcon: SizedBox.square(dimension: 24),
-                autofillHints: [AutofillHints.addressCity],
+              const StringInput(
+                id: 'phone',
+                uiSettings: StringInputUiSettings(
+                  labelText: 'Numéro de téléphone',
+                  prefixIcon: Icon(Icons.phone),
+                  keyboardType: TextInputType.phone,
+                  autofillHints: [AutofillHints.familyName],
+                ),
               ),
-            ),
-            StringInput(
-              id: 'country',
-              initialValue: 'France',
-              uiSettings: StringInputUiSettings(
-                labelText: 'Pays',
-                prefixIcon: Icon(Icons.public),
-                autofillHints: [AutofillHints.countryName],
-              ),
-            ),
-          ],
-        ),
-        InputsNode(
-          id: 'contactPage',
-          uiSettings: const InputsNodeUiSettings(
-            labelText: 'Comment te contacter ?',
+            ],
           ),
-          inputs: [
-            StringInput(
-              id: 'mail',
-              isRequired: true,
-              regexPattern: RegexPattern.email.value,
-              uiSettings: StringInputUiSettings.email(
-                labelText: 'Email',
-                prefixIcon: const Icon(Icons.mail),
-                autofocus: true,
-                invalidRegexMessage: FormLocalizationsFr()
-                    .regexPatternUnmatched(RegexPattern.email.name),
-              ),
-            ),
-            const StringInput(
-              id: 'phone',
-              uiSettings: StringInputUiSettings(
-                labelText: 'Numéro de téléphone',
-                prefixIcon: Icon(Icons.phone),
-                keyboardType: TextInputType.phone,
-                autofillHints: [AutofillHints.familyName],
-              ),
-            ),
-          ],
-        ),
-      ],
+        ],
+      ),
       canQuit: (context) async => context.read<WoFormStatusCubit>().state
                   is InitialStatus ||
               context.read<WoFormStatusCubit>().state is SubmitSuccessStatus

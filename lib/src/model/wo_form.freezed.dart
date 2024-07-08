@@ -20,8 +20,8 @@ WoForm _$WoFormFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WoForm {
-  @InputsListConverter()
-  List<WoFormElementMixin> get inputs => throw _privateConstructorUsedError;
+  @WoFormElementConverter()
+  WoFormElementMixin get input => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
   Future<void> Function(WoForm, Map<String, dynamic>)? get onSubmitting =>
       throw _privateConstructorUsedError;
@@ -38,8 +38,6 @@ mixin _$WoForm {
       throw _privateConstructorUsedError;
   @JsonKey(toJson: WoFormUiSettings.staticToJson)
   WoFormUiSettings get uiSettings => throw _privateConstructorUsedError;
-  @JsonKey(toJson: ExportSettings.staticToJson)
-  ExportSettings get exportSettings => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
   ThemeData Function(BuildContext)? get themeBuilder =>
       throw _privateConstructorUsedError;
@@ -57,7 +55,7 @@ abstract class $WoFormCopyWith<$Res> {
       _$WoFormCopyWithImpl<$Res, WoForm>;
   @useResult
   $Res call(
-      {@InputsListConverter() List<WoFormElementMixin> inputs,
+      {@WoFormElementConverter() WoFormElementMixin input,
       @JsonKey(includeToJson: false, includeFromJson: false)
       Future<void> Function(WoForm, Map<String, dynamic>)? onSubmitting,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -71,8 +69,6 @@ abstract class $WoFormCopyWith<$Res> {
       Future<bool?> Function(BuildContext)? canQuit,
       @JsonKey(toJson: WoFormUiSettings.staticToJson)
       WoFormUiSettings uiSettings,
-      @JsonKey(toJson: ExportSettings.staticToJson)
-      ExportSettings exportSettings,
       @JsonKey(includeToJson: false, includeFromJson: false)
       ThemeData Function(BuildContext)? themeBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -80,7 +76,6 @@ abstract class $WoFormCopyWith<$Res> {
 
   $WoFormStatusCopyWith<$Res> get initialStatus;
   $WoFormUiSettingsCopyWith<$Res> get uiSettings;
-  $ExportSettingsCopyWith<$Res> get exportSettings;
 }
 
 /// @nodoc
@@ -96,7 +91,7 @@ class _$WoFormCopyWithImpl<$Res, $Val extends WoForm>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? inputs = null,
+    Object? input = null,
     Object? onSubmitting = freezed,
     Object? onSubmitError = freezed,
     Object? onSubmitSuccess = freezed,
@@ -104,15 +99,14 @@ class _$WoFormCopyWithImpl<$Res, $Val extends WoForm>
     Object? canModifySubmittedValues = null,
     Object? canQuit = freezed,
     Object? uiSettings = null,
-    Object? exportSettings = null,
     Object? themeBuilder = freezed,
     Object? pageBuilder = freezed,
   }) {
     return _then(_value.copyWith(
-      inputs: null == inputs
-          ? _value.inputs
-          : inputs // ignore: cast_nullable_to_non_nullable
-              as List<WoFormElementMixin>,
+      input: null == input
+          ? _value.input
+          : input // ignore: cast_nullable_to_non_nullable
+              as WoFormElementMixin,
       onSubmitting: freezed == onSubmitting
           ? _value.onSubmitting
           : onSubmitting // ignore: cast_nullable_to_non_nullable
@@ -141,10 +135,6 @@ class _$WoFormCopyWithImpl<$Res, $Val extends WoForm>
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
               as WoFormUiSettings,
-      exportSettings: null == exportSettings
-          ? _value.exportSettings
-          : exportSettings // ignore: cast_nullable_to_non_nullable
-              as ExportSettings,
       themeBuilder: freezed == themeBuilder
           ? _value.themeBuilder
           : themeBuilder // ignore: cast_nullable_to_non_nullable
@@ -171,14 +161,6 @@ class _$WoFormCopyWithImpl<$Res, $Val extends WoForm>
       return _then(_value.copyWith(uiSettings: value) as $Val);
     });
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ExportSettingsCopyWith<$Res> get exportSettings {
-    return $ExportSettingsCopyWith<$Res>(_value.exportSettings, (value) {
-      return _then(_value.copyWith(exportSettings: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -189,7 +171,7 @@ abstract class _$$WoFormImplCopyWith<$Res> implements $WoFormCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@InputsListConverter() List<WoFormElementMixin> inputs,
+      {@WoFormElementConverter() WoFormElementMixin input,
       @JsonKey(includeToJson: false, includeFromJson: false)
       Future<void> Function(WoForm, Map<String, dynamic>)? onSubmitting,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -203,8 +185,6 @@ abstract class _$$WoFormImplCopyWith<$Res> implements $WoFormCopyWith<$Res> {
       Future<bool?> Function(BuildContext)? canQuit,
       @JsonKey(toJson: WoFormUiSettings.staticToJson)
       WoFormUiSettings uiSettings,
-      @JsonKey(toJson: ExportSettings.staticToJson)
-      ExportSettings exportSettings,
       @JsonKey(includeToJson: false, includeFromJson: false)
       ThemeData Function(BuildContext)? themeBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -214,8 +194,6 @@ abstract class _$$WoFormImplCopyWith<$Res> implements $WoFormCopyWith<$Res> {
   $WoFormStatusCopyWith<$Res> get initialStatus;
   @override
   $WoFormUiSettingsCopyWith<$Res> get uiSettings;
-  @override
-  $ExportSettingsCopyWith<$Res> get exportSettings;
 }
 
 /// @nodoc
@@ -229,7 +207,7 @@ class __$$WoFormImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? inputs = null,
+    Object? input = null,
     Object? onSubmitting = freezed,
     Object? onSubmitError = freezed,
     Object? onSubmitSuccess = freezed,
@@ -237,15 +215,14 @@ class __$$WoFormImplCopyWithImpl<$Res>
     Object? canModifySubmittedValues = null,
     Object? canQuit = freezed,
     Object? uiSettings = null,
-    Object? exportSettings = null,
     Object? themeBuilder = freezed,
     Object? pageBuilder = freezed,
   }) {
     return _then(_$WoFormImpl(
-      inputs: null == inputs
-          ? _value._inputs
-          : inputs // ignore: cast_nullable_to_non_nullable
-              as List<WoFormElementMixin>,
+      input: null == input
+          ? _value.input
+          : input // ignore: cast_nullable_to_non_nullable
+              as WoFormElementMixin,
       onSubmitting: freezed == onSubmitting
           ? _value.onSubmitting
           : onSubmitting // ignore: cast_nullable_to_non_nullable
@@ -274,10 +251,6 @@ class __$$WoFormImplCopyWithImpl<$Res>
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
               as WoFormUiSettings,
-      exportSettings: null == exportSettings
-          ? _value.exportSettings
-          : exportSettings // ignore: cast_nullable_to_non_nullable
-              as ExportSettings,
       themeBuilder: freezed == themeBuilder
           ? _value.themeBuilder
           : themeBuilder // ignore: cast_nullable_to_non_nullable
@@ -294,7 +267,7 @@ class __$$WoFormImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$WoFormImpl extends _WoForm {
   const _$WoFormImpl(
-      {@InputsListConverter() final List<WoFormElementMixin> inputs = const [],
+      {@WoFormElementConverter() required this.input,
       @JsonKey(includeToJson: false, includeFromJson: false) this.onSubmitting,
       @JsonKey(includeToJson: false, includeFromJson: false) this.onSubmitError,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -305,26 +278,16 @@ class _$WoFormImpl extends _WoForm {
       @JsonKey(includeToJson: false, includeFromJson: false) this.canQuit,
       @JsonKey(toJson: WoFormUiSettings.staticToJson)
       this.uiSettings = const WoFormUiSettings(),
-      @JsonKey(toJson: ExportSettings.staticToJson)
-      this.exportSettings = const ExportSettings(),
       @JsonKey(includeToJson: false, includeFromJson: false) this.themeBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false) this.pageBuilder})
-      : _inputs = inputs,
-        super._();
+      : super._();
 
   factory _$WoFormImpl.fromJson(Map<String, dynamic> json) =>
       _$$WoFormImplFromJson(json);
 
-  final List<WoFormElementMixin> _inputs;
   @override
-  @JsonKey()
-  @InputsListConverter()
-  List<WoFormElementMixin> get inputs {
-    if (_inputs is EqualUnmodifiableListView) return _inputs;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_inputs);
-  }
-
+  @WoFormElementConverter()
+  final WoFormElementMixin input;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final Future<void> Function(WoForm, Map<String, dynamic>)? onSubmitting;
@@ -347,9 +310,6 @@ class _$WoFormImpl extends _WoForm {
   @JsonKey(toJson: WoFormUiSettings.staticToJson)
   final WoFormUiSettings uiSettings;
   @override
-  @JsonKey(toJson: ExportSettings.staticToJson)
-  final ExportSettings exportSettings;
-  @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final ThemeData Function(BuildContext)? themeBuilder;
   @override
@@ -358,7 +318,7 @@ class _$WoFormImpl extends _WoForm {
 
   @override
   String toString() {
-    return 'WoForm(inputs: $inputs, onSubmitting: $onSubmitting, onSubmitError: $onSubmitError, onSubmitSuccess: $onSubmitSuccess, initialStatus: $initialStatus, canModifySubmittedValues: $canModifySubmittedValues, canQuit: $canQuit, uiSettings: $uiSettings, exportSettings: $exportSettings, themeBuilder: $themeBuilder, pageBuilder: $pageBuilder)';
+    return 'WoForm(input: $input, onSubmitting: $onSubmitting, onSubmitError: $onSubmitError, onSubmitSuccess: $onSubmitSuccess, initialStatus: $initialStatus, canModifySubmittedValues: $canModifySubmittedValues, canQuit: $canQuit, uiSettings: $uiSettings, themeBuilder: $themeBuilder, pageBuilder: $pageBuilder)';
   }
 
   @override
@@ -366,7 +326,7 @@ class _$WoFormImpl extends _WoForm {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WoFormImpl &&
-            const DeepCollectionEquality().equals(other._inputs, _inputs) &&
+            (identical(other.input, input) || other.input == input) &&
             (identical(other.onSubmitting, onSubmitting) ||
                 other.onSubmitting == onSubmitting) &&
             (identical(other.onSubmitError, onSubmitError) ||
@@ -381,8 +341,6 @@ class _$WoFormImpl extends _WoForm {
             (identical(other.canQuit, canQuit) || other.canQuit == canQuit) &&
             (identical(other.uiSettings, uiSettings) ||
                 other.uiSettings == uiSettings) &&
-            (identical(other.exportSettings, exportSettings) ||
-                other.exportSettings == exportSettings) &&
             (identical(other.themeBuilder, themeBuilder) ||
                 other.themeBuilder == themeBuilder) &&
             (identical(other.pageBuilder, pageBuilder) ||
@@ -393,7 +351,7 @@ class _$WoFormImpl extends _WoForm {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(_inputs),
+      input,
       onSubmitting,
       onSubmitError,
       onSubmitSuccess,
@@ -401,7 +359,6 @@ class _$WoFormImpl extends _WoForm {
       canModifySubmittedValues,
       canQuit,
       uiSettings,
-      exportSettings,
       themeBuilder,
       pageBuilder);
 
@@ -421,7 +378,7 @@ class _$WoFormImpl extends _WoForm {
 
 abstract class _WoForm extends WoForm {
   const factory _WoForm(
-      {@InputsListConverter() final List<WoFormElementMixin> inputs,
+      {@WoFormElementConverter() required final WoFormElementMixin input,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final Future<void> Function(WoForm, Map<String, dynamic>)? onSubmitting,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -435,8 +392,6 @@ abstract class _WoForm extends WoForm {
       final Future<bool?> Function(BuildContext)? canQuit,
       @JsonKey(toJson: WoFormUiSettings.staticToJson)
       final WoFormUiSettings uiSettings,
-      @JsonKey(toJson: ExportSettings.staticToJson)
-      final ExportSettings exportSettings,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final ThemeData Function(BuildContext)? themeBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -446,8 +401,8 @@ abstract class _WoForm extends WoForm {
   factory _WoForm.fromJson(Map<String, dynamic> json) = _$WoFormImpl.fromJson;
 
   @override
-  @InputsListConverter()
-  List<WoFormElementMixin> get inputs;
+  @WoFormElementConverter()
+  WoFormElementMixin get input;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   Future<void> Function(WoForm, Map<String, dynamic>)? get onSubmitting;
@@ -468,9 +423,6 @@ abstract class _WoForm extends WoForm {
   @override
   @JsonKey(toJson: WoFormUiSettings.staticToJson)
   WoFormUiSettings get uiSettings;
-  @override
-  @JsonKey(toJson: ExportSettings.staticToJson)
-  ExportSettings get exportSettings;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   ThemeData Function(BuildContext)? get themeBuilder;

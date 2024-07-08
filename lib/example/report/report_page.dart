@@ -16,12 +16,6 @@ class ReportPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WoForm(
-      exportSettings: const ExportSettings(
-        metadata: {
-          'reporterId': 'me',
-          'reportedId': 'him',
-        },
-      ),
       uiSettings: const WoFormUiSettings(
         titleText: 'Signaler un utilisateur',
         submitMode: StandardSubmitMode(
@@ -29,42 +23,51 @@ class ReportPage extends StatelessWidget {
           disableSubmitMode: DisableSubmitButton.whenInvalid,
         ),
       ),
-      inputs: [
-        SelectInput<ReportType>(
-          id: 'type',
-          availibleValues: ReportType.values,
-          minCount: 1,
-          maxCount: 1,
-          uiSettings: SelectInputUiSettings(
-            labelText: 'Motif',
-            valueBuilder: (type) => Text(
-              switch (type) {
-                null => 'Sélectionnez un motif',
-                ReportType.cheating => 'Triche',
-                ReportType.fairPlay => 'Fair play',
-                ReportType.verbalAbuse => 'Violence verbale',
-                ReportType.other => 'Autre',
-              },
+      input: InputsNode(
+        id: '#',
+        exportSettings: const ExportSettings(
+          metadata: {
+            'reporterId': 'me',
+            'reportedId': 'him',
+          },
+        ),
+        inputs: [
+          SelectInput<ReportType>(
+            id: 'type',
+            availibleValues: ReportType.values,
+            minCount: 1,
+            maxCount: 1,
+            uiSettings: SelectInputUiSettings(
+              labelText: 'Motif',
+              valueBuilder: (type) => Text(
+                switch (type) {
+                  null => 'Sélectionnez un motif',
+                  ReportType.cheating => 'Triche',
+                  ReportType.fairPlay => 'Fair play',
+                  ReportType.verbalAbuse => 'Violence verbale',
+                  ReportType.other => 'Autre',
+                },
+              ),
             ),
           ),
-        ),
-        const StringInput(
-          id: 'message',
-          uiSettings: StringInputUiSettings(
-            hintText: 'Dites-en plus !',
-            textCapitalization: TextCapitalization.sentences,
-            maxLines: 5,
+          const StringInput(
+            id: 'message',
+            uiSettings: StringInputUiSettings(
+              hintText: 'Dites-en plus !',
+              textCapitalization: TextCapitalization.sentences,
+              maxLines: 5,
+            ),
           ),
-        ),
-        const BooleanInput(
-          id: 'block',
-          uiSettings: BooleanInputUiSettings(
-            labelText: 'Bloquer cette raclure ?',
-            controlType: BooleanFieldControlType.checkbox,
-            controlAffinity: ListTileControlAffinity.leading,
+          const BooleanInput(
+            id: 'block',
+            uiSettings: BooleanInputUiSettings(
+              labelText: 'Bloquer cette raclure ?',
+              controlType: BooleanFieldControlType.checkbox,
+              controlAffinity: ListTileControlAffinity.leading,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
       onSubmitting: (_, __) async {
         await Future<void>.delayed(const Duration(seconds: 3));
       },

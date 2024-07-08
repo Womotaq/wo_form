@@ -1,7 +1,6 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:wo_form/src/model/json_converter/inputs_list.dart';
+import 'package:wo_form/src/model/json_converter/wo_form_element_converter.dart';
 import 'package:wo_form/wo_form.dart';
 
 part 'wo_form.freezed.dart';
@@ -17,7 +16,7 @@ typedef WoFormPageBuilderDef = Widget Function(BuildContext context);
 @freezed
 class WoForm with _$WoForm {
   const factory WoForm({
-    @InputsListConverter() @Default([]) List<WoFormElementMixin> inputs,
+    @WoFormElementConverter() required WoFormElementMixin input,
     @JsonKey(includeToJson: false, includeFromJson: false)
     Future<void> Function(WoForm form, WoFormValues values)? onSubmitting,
     @JsonKey(includeToJson: false, includeFromJson: false)
@@ -33,9 +32,6 @@ class WoForm with _$WoForm {
     @JsonKey(toJson: WoFormUiSettings.staticToJson)
     @Default(WoFormUiSettings())
     WoFormUiSettings uiSettings,
-    @JsonKey(toJson: ExportSettings.staticToJson)
-    @Default(ExportSettings())
-    ExportSettings exportSettings,
     @JsonKey(includeToJson: false, includeFromJson: false)
     ThemeData Function(BuildContext context)? themeBuilder,
     @JsonKey(includeToJson: false, includeFromJson: false)
@@ -48,23 +44,18 @@ class WoForm with _$WoForm {
 
   // --
 
-  Iterable<WoFormNodeMixin> get nodes => inputs.whereType();
-
   Map<String, dynamic> initialValues() => {
-        for (final input in inputs)
-          if (input is WoFormNodeMixin)
-            ...(input as WoFormNodeMixin).initialValues(parentPath: '')
-          else if (input is WoFormInputMixin)
-            '/${input.id}': (input as WoFormInputMixin).initialValue,
+        if (input is WoFormNodeMixin)
+          ...(input as WoFormNodeMixin).initialValues(parentPath: '')
+        else if (input is WoFormInputMixin)
+          '/${input.id}': (input as WoFormInputMixin).initialValue,
       };
 
-  Iterable<String> getAllInputPaths({required WoFormValues values}) => [
-        for (final input in inputs)
-          ...input.getAllInputPaths(values: values, parentPath: ''),
-      ];
+  Iterable<String> getAllInputPaths({required WoFormValues values}) =>
+      input.getAllInputPaths(values: values, parentPath: '');
 
   Iterable<WoFormInputError> getErrors(WoFormValues values) =>
-      [for (final input in inputs) ...input.getErrors(values, parentPath: '')];
+      input.getErrors(values, parentPath: '');
 
   /// The path of an input is the ids of it and its parents, separated by the
   /// character '/'.
@@ -79,7 +70,6 @@ class WoForm with _$WoForm {
   ///       ...
   ///
   /// The path of the input with id 'name' is '/profile/name'.
-  /// In a form, the full path might be '/#/profile/name'
   WoFormElementMixin? getInput({
     required String path,
     Map<String, dynamic>? values,
@@ -91,35 +81,29 @@ class WoForm with _$WoForm {
     final slashIndex = path.substring(1).indexOf('/');
 
     if (slashIndex == -1) {
-      return inputs.firstWhereOrNull((i) => i.id == path.substring(1));
+      return input.id == path.substring(1) ? input : null;
     }
 
-    return nodes
-        .firstWhereOrNull((i) => i.id == path.substring(1, slashIndex + 1))
-        ?.getInput(
-          path: path.substring(slashIndex + 1),
-          parentPath: '',
-          values: values,
-        );
-  }
-
-  dynamic export(WoFormValues values) {
-    final data = switch (exportSettings.type) {
-      ExportType.mergeWithParent || ExportType.map => Map<String, dynamic>.from(
-          exportSettings.metadata,
-        ),
-      ExportType.list => List<dynamic>.from(
-          exportSettings.metadata.values,
-        ),
-    };
-
-    for (final input in inputs) {
-      input.export(
-        into: data,
-        values: values,
+    if (input is WoFormNodeMixin &&
+        input.id == path.substring(1, slashIndex + 1)) {
+      return (input as WoFormNodeMixin).getInput(
+        path: path.substring(slashIndex + 1),
         parentPath: '',
+        values: values,
       );
     }
+
+    return null;
+  }
+
+  Map<String, dynamic> export(WoFormValues values) {
+    final data = <String, dynamic>{};
+
+    input.export(
+      into: data,
+      values: values,
+      parentPath: '',
+    );
 
     return data;
   }

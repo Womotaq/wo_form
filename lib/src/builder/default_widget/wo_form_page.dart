@@ -58,13 +58,11 @@ class WoFormStandardPage extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            ...form.inputs.map(
-              (e) => Padding(
-                padding: EdgeInsets.only(
-                  bottom: woFormTheme?.verticalSpacing ?? 0,
-                ),
-                child: e.toWidget(parentPath: ''),
+            Padding(
+              padding: EdgeInsets.only(
+                bottom: woFormTheme?.verticalSpacing ?? 0,
               ),
+              child: form.input.toWidget(parentPath: ''),
             ),
             if (uiSettings.submitMode.buttonPosition ==
                 SubmitButtonPosition.body)
@@ -171,14 +169,15 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
       body: SafeArea(
         child: Stack(
           children: [
+            // TODO : new way
             PageView.builder(
               controller: pageController,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: widget.form.inputs.length,
+              itemCount: 1,
               itemBuilder: (context, index) => ListView(
                 children: [
                   const SizedBox(height: 16),
-                  widget.form.inputs[index].toWidget(parentPath: ''),
+                  widget.form.input.toWidget(parentPath: ''),
                   const SizedBox(height: 32),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -204,7 +203,8 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
                 ),
                 builder: (context, value, _) {
                   return LinearProgressIndicator(
-                    value: value / max(1, widget.form.inputs.length),
+                    // TODO : new way
+                    value: value / max(1, [widget.form.input].length),
                   );
                 },
               ),

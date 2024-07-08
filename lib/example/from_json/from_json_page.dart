@@ -19,16 +19,19 @@ class FromJsonPage extends StatelessWidget {
           disableSubmitMode: DisableSubmitButton.whenInvalid,
         ),
       ),
-      inputs: [
-        const StringInput(
-          id: 'json',
-          isRequired: true,
-          uiSettings: StringInputUiSettings(
-            maxLines: 20,
-            hintText: 'Copiez ici le formulaire en format json.',
+      input: InputsNode(
+        id: '#',
+        inputs: [
+          const StringInput(
+            id: 'json',
+            isRequired: true,
+            uiSettings: StringInputUiSettings(
+              maxLines: 20,
+              hintText: 'Copiez ici le formulaire en format json.',
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
       onSubmitSuccess: (context) {
         final jsonString =
             context.read<WoFormValuesCubit>().state['/json'] as String?;

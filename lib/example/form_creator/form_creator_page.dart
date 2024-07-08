@@ -39,59 +39,77 @@ class FormCreatorPage extends StatelessWidget {
                 );
               },
             ),
-      inputs: [
-        const InputsNode(
-          id: 'uiSettings',
-          uiSettings: InputsNodeUiSettings(
-            labelText: 'Paramètres généraux',
-            inputsVisibility: InputsVisibility.whenAsked,
+      input: InputsNode(
+        id: '#',
+        exportSettings: const ExportSettings(type: ExportType.mergeWithParent),
+        inputs: [
+          const InputsNode(
+            id: 'uiSettings',
+            uiSettings: InputsNodeUiSettings(
+              labelText: 'Paramètres généraux',
+              inputsVisibility: InputsVisibility.whenAsked,
+            ),
+            inputs: [
+              StringInput(
+                id: 'titleText',
+                uiSettings:
+                    StringInputUiSettings(labelText: 'Titre du formulaire'),
+              ),
+              StringInput(
+                id: 'submitText',
+                uiSettings: StringInputUiSettings(
+                  labelText: 'Label du bouton de validation',
+                ),
+              ),
+            ],
           ),
-          inputs: [
-            StringInput(
-              id: 'titleText',
-              uiSettings:
-                  StringInputUiSettings(labelText: 'Titre du formulaire'),
+          InputsNode(
+            id: 'input',
+            exportSettings: const ExportSettings(
+              metadata: {
+                'runtimeType': 'inputs',
+                'id': '#',
+                'exportSettings': {
+                  'type': 'mergeWithParent',
+                },
+              },
             ),
-            StringInput(
-              id: 'submitText',
-              uiSettings: StringInputUiSettings(
-                labelText: 'Label du bouton de validation',
+            inputs: [
+              DynamicInputsNode(
+                id: 'inputs',
+                exportSettings: const ExportSettings(type: ExportType.list),
+                templates: [
+                  DynamicInputTemplate(
+                    uiSettings: const DynamicInputUiSettings(
+                      labelText: 'Choix de texte',
+                    ),
+                    input: createSelectStringInputNode(),
+                  ),
+                  DynamicInputTemplate(
+                    uiSettings: const DynamicInputUiSettings(
+                      labelText: 'Saisie de texte',
+                    ),
+                    input: createStringInputNode(),
+                  ),
+                  DynamicInputTemplate(
+                    uiSettings: const DynamicInputUiSettings(
+                      labelText: 'Saisie de nombre',
+                    ),
+                    input: createNumInputNode(),
+                  ),
+                ],
+                uiSettings: const DynamicInputsNodeUiSettings(
+                  labelText: 'Ajouter une saisie',
+                ),
               ),
-            ),
-          ],
-        ),
-        DynamicInputsNode(
-          id: 'inputs',
-          exportSettings: const ExportSettings(type: ExportType.list),
-          templates: [
-            DynamicInputTemplate(
-              uiSettings: const DynamicInputUiSettings(
-                labelText: 'Choix de texte',
-              ),
-              input: createSelectStringInputNode(),
-            ),
-            DynamicInputTemplate(
-              uiSettings: const DynamicInputUiSettings(
-                labelText: 'Saisie de texte',
-              ),
-              input: createStringInputNode(),
-            ),
-            DynamicInputTemplate(
-              uiSettings: const DynamicInputUiSettings(
-                labelText: 'Saisie de nombre',
-              ),
-              input: createNumInputNode(),
-            ),
-          ],
-          uiSettings: const DynamicInputsNodeUiSettings(
-            labelText: 'Ajouter une saisie',
+            ],
           ),
-        ),
-        WidgetNode(
-          id: 'jsonClipboarder',
-          builder: (context) => const JsonClipboarder(),
-        ),
-      ],
+          WidgetNode(
+            id: 'jsonClipboarder',
+            builder: (context) => const JsonClipboarder(),
+          ),
+        ],
+      ),
       uiSettings: WoFormUiSettings(
         titleText: "Création d'un formulaire",
         submitMode: const WoFormSubmitMode.standard(
@@ -108,7 +126,7 @@ class FormCreatorPage extends StatelessWidget {
           final form = WoForm.fromJson(
             context.read<WoForm>().export(
                   context.read<WoFormValuesCubit>().state,
-                ) as Map<String, dynamic>,
+                ),
           );
           context.pushPage(
             Hero(
@@ -172,7 +190,7 @@ class _JsonClipboarderState extends State<JsonClipboarder> {
               WoForm? createdForm;
               try {
                 createdForm = WoForm.fromJson(
-                  form.export(values) as Map<String, dynamic>,
+                  form.export(values),
                 ).copyWith(
                   uiSettings: WoFormUiSettings(
                     submitMode: StandardSubmitMode(
