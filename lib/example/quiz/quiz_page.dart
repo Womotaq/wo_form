@@ -14,7 +14,7 @@ class QuizPage extends StatelessWidget {
           linearTrackColor: Colors.transparent,
         ),
       ),
-      canModifySubmittedValues: false,
+      // TODO : replace by onSubmtSuccess => lockAll
       uiSettings: WoFormUiSettings(
         titleText: 'Quiz du jour',
         showAsteriskIfRequired: false,

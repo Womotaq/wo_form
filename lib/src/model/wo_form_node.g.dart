@@ -9,8 +9,7 @@ part of 'wo_form_node.dart';
 _$DynamicInputTemplateImpl _$$DynamicInputTemplateImplFromJson(
         Map<String, dynamic> json) =>
     _$DynamicInputTemplateImpl(
-      input: const WoFormElementConverter()
-          .fromJson(json['input'] as Map<String, dynamic>),
+      input: WoFormElementMixin.fromJson(json['input'] as Map<String, dynamic>),
       uiSettings: json['uiSettings'] == null
           ? const DynamicInputUiSettings()
           : DynamicInputUiSettings.fromJson(
@@ -20,7 +19,7 @@ _$DynamicInputTemplateImpl _$$DynamicInputTemplateImplFromJson(
 Map<String, dynamic> _$$DynamicInputTemplateImplToJson(
         _$DynamicInputTemplateImpl instance) =>
     <String, dynamic>{
-      'input': const WoFormElementConverter().toJson(instance.input),
+      'input': WoFormElementMixin.staticToJson(instance.input),
       'uiSettings': DynamicInputUiSettings.staticToJson(instance.uiSettings),
     };
 

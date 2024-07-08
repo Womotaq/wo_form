@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:wo_form/src/model/json_converter/wo_form_element_converter.dart';
 import 'package:wo_form/wo_form.dart';
 
 part 'wo_form.freezed.dart';
@@ -16,7 +15,11 @@ typedef WoFormPageBuilderDef = Widget Function(BuildContext context);
 @freezed
 class WoForm with _$WoForm {
   const factory WoForm({
-    @WoFormElementConverter() required WoFormElementMixin input,
+    @JsonKey(
+      fromJson: WoFormElementMixin.fromJson,
+      toJson: WoFormElementMixin.staticToJson,
+    )
+    required WoFormElementMixin input,
     @JsonKey(includeToJson: false, includeFromJson: false)
     Future<void> Function(WoForm form, WoFormValues values)? onSubmitting,
     @JsonKey(includeToJson: false, includeFromJson: false)
@@ -26,7 +29,6 @@ class WoForm with _$WoForm {
     @JsonKey(includeToJson: false, includeFromJson: false)
     @Default(InitialStatus())
     WoFormStatus initialStatus,
-    @Default(true) bool canModifySubmittedValues,
     @JsonKey(includeToJson: false, includeFromJson: false)
     Future<bool?> Function(BuildContext context)? canQuit,
     @JsonKey(toJson: WoFormUiSettings.staticToJson)

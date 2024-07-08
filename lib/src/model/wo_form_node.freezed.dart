@@ -20,7 +20,9 @@ DynamicInputTemplate _$DynamicInputTemplateFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$DynamicInputTemplate {
-  @WoFormElementConverter()
+  @JsonKey(
+      fromJson: WoFormElementMixin.fromJson,
+      toJson: WoFormElementMixin.staticToJson)
   WoFormElementMixin get input => throw _privateConstructorUsedError;
   @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
   DynamicInputUiSettings get uiSettings => throw _privateConstructorUsedError;
@@ -38,7 +40,10 @@ abstract class $DynamicInputTemplateCopyWith<$Res> {
       _$DynamicInputTemplateCopyWithImpl<$Res, DynamicInputTemplate>;
   @useResult
   $Res call(
-      {@WoFormElementConverter() WoFormElementMixin input,
+      {@JsonKey(
+          fromJson: WoFormElementMixin.fromJson,
+          toJson: WoFormElementMixin.staticToJson)
+      WoFormElementMixin input,
       @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
       DynamicInputUiSettings uiSettings});
 
@@ -92,7 +97,10 @@ abstract class _$$DynamicInputTemplateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@WoFormElementConverter() WoFormElementMixin input,
+      {@JsonKey(
+          fromJson: WoFormElementMixin.fromJson,
+          toJson: WoFormElementMixin.staticToJson)
+      WoFormElementMixin input,
       @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
       DynamicInputUiSettings uiSettings});
 
@@ -131,7 +139,10 @@ class __$$DynamicInputTemplateImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$DynamicInputTemplateImpl extends _DynamicInputTemplate {
   const _$DynamicInputTemplateImpl(
-      {@WoFormElementConverter() required this.input,
+      {@JsonKey(
+          fromJson: WoFormElementMixin.fromJson,
+          toJson: WoFormElementMixin.staticToJson)
+      required this.input,
       @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
       this.uiSettings = const DynamicInputUiSettings()})
       : super._();
@@ -140,7 +151,9 @@ class _$DynamicInputTemplateImpl extends _DynamicInputTemplate {
       _$$DynamicInputTemplateImplFromJson(json);
 
   @override
-  @WoFormElementConverter()
+  @JsonKey(
+      fromJson: WoFormElementMixin.fromJson,
+      toJson: WoFormElementMixin.staticToJson)
   final WoFormElementMixin input;
   @override
   @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
@@ -183,7 +196,10 @@ class _$DynamicInputTemplateImpl extends _DynamicInputTemplate {
 
 abstract class _DynamicInputTemplate extends DynamicInputTemplate {
   const factory _DynamicInputTemplate(
-      {@WoFormElementConverter() required final WoFormElementMixin input,
+      {@JsonKey(
+          fromJson: WoFormElementMixin.fromJson,
+          toJson: WoFormElementMixin.staticToJson)
+      required final WoFormElementMixin input,
       @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
       final DynamicInputUiSettings uiSettings}) = _$DynamicInputTemplateImpl;
   const _DynamicInputTemplate._() : super._();
@@ -192,7 +208,9 @@ abstract class _DynamicInputTemplate extends DynamicInputTemplate {
       _$DynamicInputTemplateImpl.fromJson;
 
   @override
-  @WoFormElementConverter()
+  @JsonKey(
+      fromJson: WoFormElementMixin.fromJson,
+      toJson: WoFormElementMixin.staticToJson)
   WoFormElementMixin get input;
   @override
   @JsonKey(toJson: DynamicInputUiSettings.staticToJson)

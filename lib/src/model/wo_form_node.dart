@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/src/model/json_converter/dynamic_input_templates.dart';
 import 'package:wo_form/src/model/json_converter/inputs_list.dart';
-import 'package:wo_form/src/model/json_converter/wo_form_element_converter.dart';
 import 'package:wo_form/wo_form.dart';
 
 part 'wo_form_node.freezed.dart';
@@ -12,6 +11,17 @@ part 'wo_form_node.g.dart';
 
 mixin WoFormElementMixin {
   String get id;
+
+  static WoFormElementMixin fromJson(Map<String, dynamic> json) {
+    try {
+      return WoFormInput.fromJson(json);
+    } on CheckedFromJsonException {
+      return WoFormNode.fromJson(json);
+    }
+  }
+
+  static Map<String, dynamic> staticToJson(WoFormElementMixin object) =>
+      object.toJson();
 
   Map<String, dynamic> toJson();
 
@@ -87,7 +97,11 @@ mixin WoFormNodeMixin {
 @freezed
 class DynamicInputTemplate with _$DynamicInputTemplate {
   const factory DynamicInputTemplate({
-    @WoFormElementConverter() required WoFormElementMixin input,
+    @JsonKey(
+      fromJson: WoFormElementMixin.fromJson,
+      toJson: WoFormElementMixin.staticToJson,
+    )
+    required WoFormElementMixin input,
     @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
     @Default(DynamicInputUiSettings())
     DynamicInputUiSettings uiSettings,
