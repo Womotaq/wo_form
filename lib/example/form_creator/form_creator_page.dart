@@ -15,7 +15,6 @@ class FormCreatorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(const SelectStringInput(id: 'test', maxCount: 3).toJson());
     final woFormCreator = WoForm(
       initialStatus: const InvalidValuesStatus(),
       canQuit: (context) async => context.read<WoFormStatusCubit>().state
@@ -168,6 +167,12 @@ class _JsonClipboarderState extends State<JsonClipboarder> {
               try {
                 createdForm = WoForm.fromJson(
                   form.export(values) as Map<String, dynamic>,
+                ).copyWith(
+                  uiSettings: WoFormUiSettings(
+                    submitMode: StandardSubmitMode(
+                      scaffoldBuilder: (body) => body,
+                    ),
+                  ),
                 );
               } catch (_) {}
 
@@ -176,13 +181,12 @@ class _JsonClipboarderState extends State<JsonClipboarder> {
                   helperText: ' ',
                   errorText: createdForm == null ? ' ' : null,
                   border: const OutlineInputBorder(),
-                  contentPadding: const EdgeInsets.all(2),
+                  contentPadding: const EdgeInsets.all(8),
                 ),
                 child: createdForm != null
-                    ? AspectRatio(
-                        aspectRatio: 1,
-                        child: Hero(
-                          tag: 'createdForm',
+                    ? Hero(
+                        tag: 'createdForm',
+                        child: Material(
                           child: createdForm
                               .copyWith(
                                 onSubmitSuccess: showJsonDialog,
