@@ -19,10 +19,10 @@ class FromJsonPage extends StatelessWidget {
           disableSubmitMode: DisableSubmitButton.whenInvalid,
         ),
       ),
-      input: InputsNode(
+      child: const InputsNode(
         id: '#',
-        inputs: [
-          const StringInput(
+        children: [
+          StringInput(
             id: 'json',
             isRequired: true,
             uiSettings: StringInputUiSettings(

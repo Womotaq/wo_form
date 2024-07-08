@@ -11,9 +11,9 @@ class DynamicFormPage extends StatelessWidget {
       uiSettings: const WoFormUiSettings(
         titleText: 'Formulaire dynamique',
       ),
-      input: InputsNode(
+      child: InputsNode(
         id: '#',
-        inputs: [
+        children: [
           StringInput(
             id: 'name',
             isRequired: true,

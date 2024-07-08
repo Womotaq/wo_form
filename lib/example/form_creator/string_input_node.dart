@@ -23,7 +23,7 @@ WoFormElementMixin createStringInputNode() => ValueBuilderNode(
             helperText: value == null ? null : 'Saisie de texte',
             inputsVisibility: InputsVisibility.whenAsked,
           ),
-          inputs: [
+          children: [
             const StringInput(
               id: 'id',
               isRequired: true,
@@ -87,7 +87,7 @@ WoFormElementMixin createStringInputNode() => ValueBuilderNode(
                 labelText: 'Interface',
                 inputsVisibility: InputsVisibility.whenAsked,
               ),
-              inputs: [
+              children: [
                 const StringInput(
                   id: 'labelText',
                   uiSettings: StringInputUiSettings(

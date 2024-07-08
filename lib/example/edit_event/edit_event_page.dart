@@ -47,9 +47,9 @@ class EditEventPage extends StatelessWidget {
           buttonPosition: SubmitButtonPosition.appBar,
         ),
       ),
-      input: InputsNode(
+      child: InputsNode(
         id: '#',
-        inputs: [
+        children: [
           StringInput(
             id: 'title',
             initialValue: event.title,

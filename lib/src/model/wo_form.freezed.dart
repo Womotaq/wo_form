@@ -23,7 +23,7 @@ mixin _$WoForm {
   @JsonKey(
       fromJson: WoFormElementMixin.fromJson,
       toJson: WoFormElementMixin.staticToJson)
-  WoFormElementMixin get input => throw _privateConstructorUsedError;
+  WoFormElementMixin get child => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
   Future<void> Function(WoForm, Map<String, dynamic>)? get onSubmitting =>
       throw _privateConstructorUsedError;
@@ -59,7 +59,7 @@ abstract class $WoFormCopyWith<$Res> {
       {@JsonKey(
           fromJson: WoFormElementMixin.fromJson,
           toJson: WoFormElementMixin.staticToJson)
-      WoFormElementMixin input,
+      WoFormElementMixin child,
       @JsonKey(includeToJson: false, includeFromJson: false)
       Future<void> Function(WoForm, Map<String, dynamic>)? onSubmitting,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -94,7 +94,7 @@ class _$WoFormCopyWithImpl<$Res, $Val extends WoForm>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? input = null,
+    Object? child = null,
     Object? onSubmitting = freezed,
     Object? onSubmitError = freezed,
     Object? onSubmitSuccess = freezed,
@@ -105,9 +105,9 @@ class _$WoFormCopyWithImpl<$Res, $Val extends WoForm>
     Object? pageBuilder = freezed,
   }) {
     return _then(_value.copyWith(
-      input: null == input
-          ? _value.input
-          : input // ignore: cast_nullable_to_non_nullable
+      child: null == child
+          ? _value.child
+          : child // ignore: cast_nullable_to_non_nullable
               as WoFormElementMixin,
       onSubmitting: freezed == onSubmitting
           ? _value.onSubmitting
@@ -172,7 +172,7 @@ abstract class _$$WoFormImplCopyWith<$Res> implements $WoFormCopyWith<$Res> {
       {@JsonKey(
           fromJson: WoFormElementMixin.fromJson,
           toJson: WoFormElementMixin.staticToJson)
-      WoFormElementMixin input,
+      WoFormElementMixin child,
       @JsonKey(includeToJson: false, includeFromJson: false)
       Future<void> Function(WoForm, Map<String, dynamic>)? onSubmitting,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -207,7 +207,7 @@ class __$$WoFormImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? input = null,
+    Object? child = null,
     Object? onSubmitting = freezed,
     Object? onSubmitError = freezed,
     Object? onSubmitSuccess = freezed,
@@ -218,9 +218,9 @@ class __$$WoFormImplCopyWithImpl<$Res>
     Object? pageBuilder = freezed,
   }) {
     return _then(_$WoFormImpl(
-      input: null == input
-          ? _value.input
-          : input // ignore: cast_nullable_to_non_nullable
+      child: null == child
+          ? _value.child
+          : child // ignore: cast_nullable_to_non_nullable
               as WoFormElementMixin,
       onSubmitting: freezed == onSubmitting
           ? _value.onSubmitting
@@ -265,7 +265,7 @@ class _$WoFormImpl extends _WoForm {
       {@JsonKey(
           fromJson: WoFormElementMixin.fromJson,
           toJson: WoFormElementMixin.staticToJson)
-      required this.input,
+      required this.child,
       @JsonKey(includeToJson: false, includeFromJson: false) this.onSubmitting,
       @JsonKey(includeToJson: false, includeFromJson: false) this.onSubmitError,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -286,7 +286,7 @@ class _$WoFormImpl extends _WoForm {
   @JsonKey(
       fromJson: WoFormElementMixin.fromJson,
       toJson: WoFormElementMixin.staticToJson)
-  final WoFormElementMixin input;
+  final WoFormElementMixin child;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final Future<void> Function(WoForm, Map<String, dynamic>)? onSubmitting;
@@ -314,7 +314,7 @@ class _$WoFormImpl extends _WoForm {
 
   @override
   String toString() {
-    return 'WoForm(input: $input, onSubmitting: $onSubmitting, onSubmitError: $onSubmitError, onSubmitSuccess: $onSubmitSuccess, initialStatus: $initialStatus, canQuit: $canQuit, uiSettings: $uiSettings, themeBuilder: $themeBuilder, pageBuilder: $pageBuilder)';
+    return 'WoForm(child: $child, onSubmitting: $onSubmitting, onSubmitError: $onSubmitError, onSubmitSuccess: $onSubmitSuccess, initialStatus: $initialStatus, canQuit: $canQuit, uiSettings: $uiSettings, themeBuilder: $themeBuilder, pageBuilder: $pageBuilder)';
   }
 
   @override
@@ -322,7 +322,7 @@ class _$WoFormImpl extends _WoForm {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WoFormImpl &&
-            (identical(other.input, input) || other.input == input) &&
+            (identical(other.child, child) || other.child == child) &&
             (identical(other.onSubmitting, onSubmitting) ||
                 other.onSubmitting == onSubmitting) &&
             (identical(other.onSubmitError, onSubmitError) ||
@@ -344,7 +344,7 @@ class _$WoFormImpl extends _WoForm {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      input,
+      child,
       onSubmitting,
       onSubmitError,
       onSubmitSuccess,
@@ -373,7 +373,7 @@ abstract class _WoForm extends WoForm {
       {@JsonKey(
           fromJson: WoFormElementMixin.fromJson,
           toJson: WoFormElementMixin.staticToJson)
-      required final WoFormElementMixin input,
+      required final WoFormElementMixin child,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final Future<void> Function(WoForm, Map<String, dynamic>)? onSubmitting,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -398,7 +398,7 @@ abstract class _WoForm extends WoForm {
   @JsonKey(
       fromJson: WoFormElementMixin.fromJson,
       toJson: WoFormElementMixin.staticToJson)
-  WoFormElementMixin get input;
+  WoFormElementMixin get child;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   Future<void> Function(WoForm, Map<String, dynamic>)? get onSubmitting;

@@ -39,17 +39,17 @@ class FormCreatorPage extends StatelessWidget {
                 );
               },
             ),
-      input: InputsNode(
+      child: InputsNode(
         id: '#',
         exportSettings: const ExportSettings(type: ExportType.mergeWithParent),
-        inputs: [
+        children: [
           const InputsNode(
             id: 'uiSettings',
             uiSettings: InputsNodeUiSettings(
               labelText: 'Paramètres généraux',
               inputsVisibility: InputsVisibility.whenAsked,
             ),
-            inputs: [
+            children: [
               StringInput(
                 id: 'titleText',
                 uiSettings:
@@ -74,7 +74,7 @@ class FormCreatorPage extends StatelessWidget {
                 },
               },
             ),
-            inputs: [
+            children: [
               DynamicInputsNode(
                 id: 'inputs',
                 exportSettings: const ExportSettings(type: ExportType.list),
@@ -83,19 +83,19 @@ class FormCreatorPage extends StatelessWidget {
                     uiSettings: const DynamicInputUiSettings(
                       labelText: 'Choix de texte',
                     ),
-                    input: createSelectStringInputNode(),
+                    child: createSelectStringInputNode(),
                   ),
                   DynamicInputTemplate(
                     uiSettings: const DynamicInputUiSettings(
                       labelText: 'Saisie de texte',
                     ),
-                    input: createStringInputNode(),
+                    child: createStringInputNode(),
                   ),
                   DynamicInputTemplate(
                     uiSettings: const DynamicInputUiSettings(
                       labelText: 'Saisie de nombre',
                     ),
-                    input: createNumInputNode(),
+                    child: createNumInputNode(),
                   ),
                 ],
                 uiSettings: const DynamicInputsNodeUiSettings(

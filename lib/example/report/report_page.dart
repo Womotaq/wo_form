@@ -23,7 +23,7 @@ class ReportPage extends StatelessWidget {
           disableSubmitMode: DisableSubmitButton.whenInvalid,
         ),
       ),
-      input: InputsNode(
+      child: InputsNode(
         id: '#',
         exportSettings: const ExportSettings(
           metadata: {
@@ -31,7 +31,7 @@ class ReportPage extends StatelessWidget {
             'reportedId': 'him',
           },
         ),
-        inputs: [
+        children: [
           SelectInput<ReportType>(
             id: 'type',
             availibleValues: ReportType.values,

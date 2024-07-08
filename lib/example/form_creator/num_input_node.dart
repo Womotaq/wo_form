@@ -17,7 +17,7 @@ WoFormElementMixin createNumInputNode() => ValueBuilderNode(
             helperText: value == null ? null : 'Saisie de nombre',
             inputsVisibility: InputsVisibility.whenAsked,
           ),
-          inputs: [
+          children: [
             const StringInput(
               id: 'id',
               isRequired: true,
@@ -60,7 +60,7 @@ WoFormElementMixin createNumInputNode() => ValueBuilderNode(
                 labelText: 'Interface',
                 inputsVisibility: InputsVisibility.whenAsked,
               ),
-              inputs: [
+              children: [
                 StringInput(
                   id: 'labelText',
                   uiSettings: StringInputUiSettings(

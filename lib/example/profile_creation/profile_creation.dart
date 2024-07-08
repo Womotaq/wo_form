@@ -17,15 +17,15 @@ class ProfileCreationPage extends StatelessWidget {
           showProgressIndicator: false,
         ),
       ),
-      input: InputsNode(
+      child: InputsNode(
         id: '#',
-        inputs: [
+        children: [
           const InputsNode(
             id: 'namePage',
             uiSettings: InputsNodeUiSettings(
               labelText: "Comment t'appelles-tu ?",
             ),
-            inputs: [
+            children: [
               StringInput(
                 id: 'firstName',
                 isRequired: true,
@@ -52,7 +52,7 @@ class ProfileCreationPage extends StatelessWidget {
             uiSettings: InputsNodeUiSettings(
               labelText: 'Où habites-tu ?',
             ),
-            inputs: [
+            children: [
               StringInput(
                 id: 'street',
                 uiSettings: StringInputUiSettings(
@@ -95,7 +95,7 @@ class ProfileCreationPage extends StatelessWidget {
             uiSettings: const InputsNodeUiSettings(
               labelText: 'Comment te contacter ?',
             ),
-            inputs: [
+            children: [
               StringInput(
                 id: 'mail',
                 isRequired: true,

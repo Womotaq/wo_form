@@ -19,7 +19,7 @@ class WoForm with _$WoForm {
       fromJson: WoFormElementMixin.fromJson,
       toJson: WoFormElementMixin.staticToJson,
     )
-    required WoFormElementMixin input,
+    required WoFormElementMixin child,
     @JsonKey(includeToJson: false, includeFromJson: false)
     Future<void> Function(WoForm form, WoFormValues values)? onSubmitting,
     @JsonKey(includeToJson: false, includeFromJson: false)
@@ -47,17 +47,17 @@ class WoForm with _$WoForm {
   // --
 
   Map<String, dynamic> initialValues() => {
-        if (input is WoFormNodeMixin)
-          ...(input as WoFormNodeMixin).initialValues(parentPath: '')
-        else if (input is WoFormInputMixin)
-          '/${input.id}': (input as WoFormInputMixin).initialValue,
+        if (child is WoFormNodeMixin)
+          ...(child as WoFormNodeMixin).initialValues(parentPath: '')
+        else if (child is WoFormInputMixin)
+          '/${child.id}': (child as WoFormInputMixin).initialValue,
       };
 
   Iterable<String> getAllInputPaths({required WoFormValues values}) =>
-      input.getAllInputPaths(values: values, parentPath: '');
+      child.getAllInputPaths(values: values, parentPath: '');
 
   Iterable<WoFormInputError> getErrors(WoFormValues values) =>
-      input.getErrors(values, parentPath: '');
+      child.getErrors(values, parentPath: '');
 
   /// The path of an input is the ids of it and its parents, separated by the
   /// character '/'.
@@ -83,12 +83,12 @@ class WoForm with _$WoForm {
     final slashIndex = path.substring(1).indexOf('/');
 
     if (slashIndex == -1) {
-      return input.id == path.substring(1) ? input : null;
+      return child.id == path.substring(1) ? child : null;
     }
 
-    if (input is WoFormNodeMixin &&
-        input.id == path.substring(1, slashIndex + 1)) {
-      return (input as WoFormNodeMixin).getInput(
+    if (child is WoFormNodeMixin &&
+        child.id == path.substring(1, slashIndex + 1)) {
+      return (child as WoFormNodeMixin).getInput(
         path: path.substring(slashIndex + 1),
         parentPath: '',
         values: values,
@@ -101,7 +101,7 @@ class WoForm with _$WoForm {
   Map<String, dynamic> export(WoFormValues values) {
     final data = <String, dynamic>{};
 
-    input.export(
+    child.export(
       into: data,
       values: values,
       parentPath: '',

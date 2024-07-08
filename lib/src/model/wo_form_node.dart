@@ -101,7 +101,7 @@ class DynamicInputTemplate with _$DynamicInputTemplate {
       fromJson: WoFormElementMixin.fromJson,
       toJson: WoFormElementMixin.staticToJson,
     )
-    required WoFormElementMixin input,
+    required WoFormElementMixin child,
     @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
     @Default(DynamicInputUiSettings())
     DynamicInputUiSettings uiSettings,
@@ -133,7 +133,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin, WoFormNodeMixin {
 
   const factory WoFormNode.inputs({
     required String id,
-    @InputsListConverter() @Default([]) List<WoFormElementMixin> inputs,
+    @InputsListConverter() @Default([]) List<WoFormElementMixin> children,
     @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
     @Default(InputsNodeUiSettings())
     InputsNodeUiSettings uiSettings,
@@ -180,15 +180,15 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin, WoFormNodeMixin {
     switch (this) {
       case DynamicInputsNode():
         return {};
-      case InputsNode(inputs: final inputs):
+      case InputsNode(children: final children):
         return {
-          for (final input in inputs)
-            if (input is WoFormNodeMixin)
-              ...(input as WoFormNodeMixin)
+          for (final child in children)
+            if (child is WoFormNodeMixin)
+              ...(child as WoFormNodeMixin)
                   .initialValues(parentPath: '$parentPath/$id')
-            else if (input is WoFormInputMixin)
-              '$parentPath/$id/${input.id}':
-                  (input as WoFormInputMixin).initialValue,
+            else if (child is WoFormInputMixin)
+              '$parentPath/$id/${child.id}':
+                  (child as WoFormInputMixin).initialValue,
         };
       // case PushPageNode(input: final input):
       //   if (input is WoFormNode) {
@@ -234,16 +234,16 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin, WoFormNodeMixin {
     switch (this) {
       case DynamicInputsNode(exportSettings: final exportSettings):
       case InputsNode(exportSettings: final exportSettings):
-        final inputs = this is InputsNode
-            ? (this as InputsNode).inputs
+        final children = this is InputsNode
+            ? (this as InputsNode).children
             : (values['$parentPath/$id'] as List<WoFormElementMixin>?) ?? [];
 
         switch (exportSettings.type) {
           case ExportType.mergeWithParent:
             final data = Map<String, dynamic>.from(exportSettings.metadata);
 
-            for (final input in inputs) {
-              input.export(
+            for (final child in children) {
+              child.export(
                 into: data,
                 values: values,
                 parentPath: '$parentPath/$id',
@@ -258,8 +258,8 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin, WoFormNodeMixin {
           case ExportType.map:
             final data = Map<String, dynamic>.from(exportSettings.metadata);
 
-            for (final input in inputs) {
-              input.export(
+            for (final child in children) {
+              child.export(
                 into: data,
                 values: values,
                 parentPath: '$parentPath/$id',
@@ -274,8 +274,8 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin, WoFormNodeMixin {
           case ExportType.list:
             final data = List<dynamic>.from(exportSettings.metadata.values);
 
-            for (final input in inputs) {
-              input.export(
+            for (final child in children) {
+              child.export(
                 into: data,
                 values: values,
                 parentPath: '$parentPath/$id',
@@ -315,14 +315,14 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin, WoFormNodeMixin {
     switch (this) {
       case DynamicInputsNode():
       case InputsNode():
-        final inputs = this is InputsNode
-            ? (this as InputsNode).inputs
+        final children = this is InputsNode
+            ? (this as InputsNode).children
             : (values['$parentPath/$id'] as List<WoFormElementMixin>?) ?? [];
 
         return [
           '$parentPath/$id',
-          for (final input in inputs)
-            ...input.getAllInputPaths(
+          for (final child in children)
+            ...child.getAllInputPaths(
               values: values,
               parentPath: '$parentPath/$id',
             ),
@@ -387,19 +387,17 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin, WoFormNodeMixin {
     switch (this) {
       case DynamicInputsNode():
       case InputsNode():
-        final inputs = this is InputsNode
-            ? (this as InputsNode).inputs
+        final children = this is InputsNode
+            ? (this as InputsNode).children
             : (values['$parentPath/$id'] as List<WoFormElementMixin>?) ?? [];
 
         return [
-          for (final input in inputs)
-            ...input.getErrors(
+          for (final child in children)
+            ...child.getErrors(
               values,
               parentPath: '$parentPath/$id',
             ),
         ].whereNotNull();
-      // case PushPageNode(input: final input):
-      //   return input.getErrors(values, parentPath: '$parentPath/$id');
       case ValueBuilderNode(inputPath: final inputPath, builder: final builder):
         final input = builder!(
           id,
@@ -447,16 +445,16 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin, WoFormNodeMixin {
     switch (this) {
       case DynamicInputsNode():
       case InputsNode():
-        final inputs = this is InputsNode
-            ? (this as InputsNode).inputs
+        final children = this is InputsNode
+            ? (this as InputsNode).children
             : (values?['$parentPath/$id'] as List<WoFormElementMixin>?) ?? [];
 
         if (slashIndex == -1) {
-          return inputs.firstWhereOrNull((i) => i.id == path.substring(1));
+          return children.firstWhereOrNull((i) => i.id == path.substring(1));
         }
 
-        return inputs
-            .whereType<WoFormNode>()
+        return children
+            .whereType<WoFormNodeMixin>()
             .firstWhereOrNull((i) => i.id == path.substring(1, slashIndex + 1))
             ?.getInput(
               path: path.substring(slashIndex + 1),
@@ -682,14 +680,14 @@ class FutureNode<T> with _$FutureNode<T>, WoFormElementMixin, WoFormNodeMixin {
 
     if (snapshot is! AsyncSnapshot<T?>) return null;
 
-    final input = builder('$parentPath/$id', snapshot);
+    final child = builder('$parentPath/$id', snapshot);
 
-    if (input.id == path.substring(1)) return input;
+    if (child.id == path.substring(1)) return child;
 
     final slashIndex = path.substring(1).indexOf('/');
 
-    if (input is WoFormNodeMixin) {
-      return (input as WoFormNodeMixin).getInput(
+    if (child is WoFormNodeMixin) {
+      return (child as WoFormNodeMixin).getInput(
         path: path.substring(slashIndex + 1),
         parentPath: '$parentPath/$id',
         values: values,
@@ -706,15 +704,15 @@ class FutureNode<T> with _$FutureNode<T>, WoFormElementMixin, WoFormNodeMixin {
   }) {
     final snapshot = initialSnapshot ??
         AsyncSnapshot.withData(ConnectionState.waiting, initialData);
-    final input = builder('$parentPath/$id', snapshot);
+    final child = builder('$parentPath/$id', snapshot);
 
     return {
       '$parentPath/$id': snapshot,
-      if (input is WoFormNodeMixin)
-        ...(input as WoFormNodeMixin)
+      if (child is WoFormNodeMixin)
+        ...(child as WoFormNodeMixin)
             .initialValues(parentPath: '$parentPath/$id')
-      else if (input is WoFormInputMixin)
-        '$parentPath/$id/${input.id}': (input as WoFormInputMixin).initialValue,
+      else if (child is WoFormInputMixin)
+        '$parentPath/$id/${child.id}': (child as WoFormInputMixin).initialValue,
     };
   }
 
@@ -723,28 +721,29 @@ class FutureNode<T> with _$FutureNode<T>, WoFormElementMixin, WoFormNodeMixin {
       FutureNodeBuilder<T>(
         key: key,
         parentPath: parentPath,
-        node: this,
+        child: this,
       );
 
   @override
   FutureNode<T> withId({required String id}) => copyWith(id: id);
 }
 
+// TODO : move
 class FutureNodeBuilder<T> extends StatelessWidget {
   const FutureNodeBuilder({
     required this.parentPath,
-    required this.node,
+    required this.child,
     super.key,
   });
 
   final String parentPath;
-  final FutureNode<T> node;
+  final FutureNode<T> child;
 
   Future<void> getData(
     void Function(AsyncSnapshot<T?> snapshot) onSnapshotChanged,
   ) async {
     try {
-      final data = await node.future;
+      final data = await child.future;
       onSnapshotChanged(AsyncSnapshot.withData(ConnectionState.done, data));
     } catch (error) {
       onSnapshotChanged(AsyncSnapshot.withError(ConnectionState.done, error));
@@ -755,26 +754,26 @@ class FutureNodeBuilder<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     final valuesCubit = context.read<WoFormValuesCubit>();
 
-    final nodePath = '$parentPath/${node.id}';
+    final childPath = '$parentPath/${child.id}';
 
     getData(
       (snapshot) => valuesCubit.onValueChanged(
-        inputPath: nodePath,
+        inputPath: childPath,
         value: snapshot,
       ),
     );
 
     return WoFormValueBuilder<AsyncSnapshot<T?>>(
-      inputPath: nodePath,
+      inputPath: childPath,
       builder: (context, snapshot) {
-        final input = node.builder(
-          nodePath,
+        final input = child.builder(
+          childPath,
           snapshot ?? const AsyncSnapshot.nothing(),
         );
 
-        if (node.willResetToInitialValues) {
+        if (child.willResetToInitialValues) {
           if (snapshot?.connectionState == ConnectionState.done) {
-            final newInitialValues = node.initialValues(
+            final newInitialValues = child.initialValues(
               parentPath: parentPath,
               initialSnapshot: snapshot,
             );
@@ -790,7 +789,7 @@ class FutureNodeBuilder<T> extends StatelessWidget {
 
         return input.toWidget(
           key: ValueKey(snapshot?.connectionState),
-          parentPath: nodePath,
+          parentPath: childPath,
         );
       },
     );

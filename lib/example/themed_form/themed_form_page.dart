@@ -259,7 +259,7 @@ class CustomInputsNodeExpander extends StatelessWidget {
                     style: theme.textTheme.labelMedium,
                   )
                 : null,
-        children: data.input.inputs
+        children: data.input.children
             .map(
               (i) => Padding(
                 padding: EdgeInsets.only(

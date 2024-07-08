@@ -12,7 +12,7 @@ class InputsNodeWidget extends StatelessWidget {
 
     final woFormTheme = WoFormTheme.of(context);
 
-    final inputWidgets = node.inputs
+    final inputWidgets = node.children
         .map(
           (i) => Padding(
             padding: EdgeInsets.only(bottom: woFormTheme?.verticalSpacing ?? 0),

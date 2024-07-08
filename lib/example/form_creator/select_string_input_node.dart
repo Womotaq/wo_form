@@ -18,7 +18,7 @@ WoFormElementMixin createSelectStringInputNode() => ValueBuilderNode(
             helperText: value == null ? null : 'Choix de texte',
             inputsVisibility: InputsVisibility.whenAsked,
           ),
-          inputs: [
+          children: [
             const StringInput(
               id: 'id',
               isRequired: true,
@@ -49,7 +49,7 @@ WoFormElementMixin createSelectStringInputNode() => ValueBuilderNode(
               uiSettings: const InputsNodeUiSettings(
                 inputsVisibility: InputsVisibility.always,
               ),
-              inputs: [
+              children: [
                 InputsNode(
                   id: 'uiSettings-More',
                   exportSettings: const ExportSettings(
@@ -59,7 +59,7 @@ WoFormElementMixin createSelectStringInputNode() => ValueBuilderNode(
                     labelText: 'Interface',
                     inputsVisibility: InputsVisibility.whenAsked,
                   ),
-                  inputs: [
+                  children: [
                     const StringInput(
                       id: 'helperText',
                       uiSettings: StringInputUiSettings(
@@ -106,7 +106,7 @@ WoFormElementMixin createSelectStringInputNode() => ValueBuilderNode(
               exportSettings: ExportSettings(type: ExportType.list),
               templates: [
                 DynamicInputTemplate(
-                  input: StringInput(
+                  child: StringInput(
                     id: '', // will be overwritten
                     isRequired: true,
                     uiSettings: StringInputUiSettings(

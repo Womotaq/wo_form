@@ -9,7 +9,7 @@ part of 'wo_form_node.dart';
 _$DynamicInputTemplateImpl _$$DynamicInputTemplateImplFromJson(
         Map<String, dynamic> json) =>
     _$DynamicInputTemplateImpl(
-      input: WoFormElementMixin.fromJson(json['input'] as Map<String, dynamic>),
+      child: WoFormElementMixin.fromJson(json['child'] as Map<String, dynamic>),
       uiSettings: json['uiSettings'] == null
           ? const DynamicInputUiSettings()
           : DynamicInputUiSettings.fromJson(
@@ -19,7 +19,7 @@ _$DynamicInputTemplateImpl _$$DynamicInputTemplateImplFromJson(
 Map<String, dynamic> _$$DynamicInputTemplateImplToJson(
         _$DynamicInputTemplateImpl instance) =>
     <String, dynamic>{
-      'input': WoFormElementMixin.staticToJson(instance.input),
+      'child': WoFormElementMixin.staticToJson(instance.child),
       'uiSettings': DynamicInputUiSettings.staticToJson(instance.uiSettings),
     };
 
@@ -57,9 +57,9 @@ Map<String, dynamic> _$$DynamicInputsNodeImplToJson(
 _$InputsNodeImpl _$$InputsNodeImplFromJson(Map<String, dynamic> json) =>
     _$InputsNodeImpl(
       id: json['id'] as String,
-      inputs: json['inputs'] == null
+      children: json['children'] == null
           ? const []
-          : const InputsListConverter().fromJson(json['inputs'] as List),
+          : const InputsListConverter().fromJson(json['children'] as List),
       uiSettings: json['uiSettings'] == null
           ? const InputsNodeUiSettings()
           : InputsNodeUiSettings.fromJson(
@@ -74,7 +74,7 @@ _$InputsNodeImpl _$$InputsNodeImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$InputsNodeImplToJson(_$InputsNodeImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'inputs': const InputsListConverter().toJson(instance.inputs),
+      'children': const InputsListConverter().toJson(instance.children),
       'uiSettings': InputsNodeUiSettings.staticToJson(instance.uiSettings),
       'exportSettings': ExportSettings.staticToJson(instance.exportSettings),
       'runtimeType': instance.$type,

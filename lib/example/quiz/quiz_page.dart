@@ -25,7 +25,7 @@ class QuizPage extends StatelessWidget {
           builder: (context) {
             final form = context.read<WoForm>();
             // TODO : new way
-            final currentInput = form.input;
+            final currentInput = form.child;
 
             final inputIsLocked = context.select(
               (WoFormLockCubit c) =>
@@ -40,15 +40,15 @@ class QuizPage extends StatelessWidget {
           },
         ),
       ),
-      input: InputsNode(
+      child: InputsNode(
         id: '#',
-        inputs: [
+        children: [
           InputsNode(
             id: 'q1-page',
             exportSettings: const ExportSettings(
               type: ExportType.mergeWithParent,
             ),
-            inputs: [
+            children: [
               WidgetNode(
                 id: 'header',
                 builder: (context) =>
@@ -92,7 +92,7 @@ class QuizPage extends StatelessWidget {
             exportSettings: const ExportSettings(
               type: ExportType.mergeWithParent,
             ),
-            inputs: [
+            children: [
               WidgetNode(
                 id: 'header',
                 builder: (context) =>
@@ -142,7 +142,7 @@ class QuizPage extends StatelessWidget {
             exportSettings: const ExportSettings(
               type: ExportType.mergeWithParent,
             ),
-            inputs: [
+            children: [
               WidgetNode(
                 id: 'header',
                 builder: (context) => const QuizQuestion(
@@ -181,7 +181,7 @@ class QuizPage extends StatelessWidget {
             exportSettings: const ExportSettings(
               type: ExportType.mergeWithParent,
             ),
-            inputs: [
+            children: [
               WidgetNode(
                 id: 'header',
                 builder: (context) =>
@@ -215,7 +215,7 @@ class QuizPage extends StatelessWidget {
             exportSettings: const ExportSettings(
               type: ExportType.mergeWithParent,
             ),
-            inputs: [
+            children: [
               WidgetNode(
                 id: 'header',
                 builder: (context) => const QuizQuestion(
