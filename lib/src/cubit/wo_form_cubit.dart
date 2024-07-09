@@ -9,8 +9,8 @@ class WoFormStatusCubit extends Cubit<WoFormStatus> {
   WoFormStatusCubit._(super.initialState);
 
   void setInProgress() => emit(const InProgressStatus());
-  void setInvalidValues({Iterable<WoFormInputError>? inputErrors}) =>
-      emit(InvalidValuesStatus(inputErrors: inputErrors));
+  void setInvalidValues({Iterable<WoFormInputError>? errors}) =>
+      emit(InvalidValuesStatus(errors: errors));
   void _setSubmitting() => emit(const SubmittingStatus());
   void _setSubmitError({Object? error, StackTrace? stackTrace}) =>
       emit(SubmitErrorStatus(error: error, stackTrace: stackTrace));
@@ -35,16 +35,25 @@ typedef WoFormValues = Map<String, dynamic>;
 class WoFormValuesCubit extends Cubit<WoFormValues> {
   // with StateStreamable<WoFormValues>
   WoFormValuesCubit._(
-    this.form,
+    this._root,
     this._statusCubit,
-    this._lockCubit,
-  )   : pageController = PageController(),
-        super(form.initialValues());
+    this._lockCubit, {
+    required this.onSubmitting,
+  })  : pageController = PageController(),
+        super(_root.initialValues(parentPath: ''));
 
-  final WoForm form;
+  final WoFormElementMixin _root;
   final WoFormStatusCubit _statusCubit;
   final WoFormLockCubit _lockCubit;
+  final Future<void> Function(WoFormElementMixin root, WoFormValues values)?
+      onSubmitting;
   final PageController pageController; // LATER: replace by currentInputPath
+
+  final String _currentPath = '';
+  WoFormElementMixin get currentNode => _root.getInput(
+        values: state,
+        parentpath: _currentPath,
+      );
 
   @override
   Future<void> close() {
@@ -54,7 +63,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   // --
 
-  void clear() => emit(form.initialValues());
+  void clear() => emit(_root.initialValues(parentPath: ''));
 
   /// **Use this method precautiously since there is no type checking !**
   void onValueChanged({
@@ -109,21 +118,26 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     //   }
     // }
 
-    final inputErrors = form.getErrors(state);
-    if (inputErrors.isNotEmpty) {
-      return _statusCubit.setInvalidValues(inputErrors: inputErrors);
+    final node = currentNode;
+
+    final errors = node.getErrors(values: state, parentPath: _currentPath);
+    if (errors.isNotEmpty) {
+      return _statusCubit.setInvalidValues(errors: errors);
     }
 
     _statusCubit._setSubmitting();
 
     final oldLocks = _lockCubit.state;
 
-    for (final path in form.getAllInputPaths(values: state)) {
+    for (final path in currentNode.getAllInputPaths(
+      values: state,
+      parentPath: _currentPath,
+    )) {
       _lockCubit.lockInput(path: path);
     }
 
     try {
-      await form.onSubmitting?.call(form, state);
+      await onSubmitting?.call(node, state);
       _statusCubit._setSubmitSuccess();
     } catch (e, s) {
       _statusCubit._setSubmitError(error: e, stackTrace: s);
@@ -137,24 +151,37 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   }
 }
 
-class WoFormInitializer extends StatelessWidget {
-  const WoFormInitializer({
-    required this.form,
+class WoFormW extends StatelessWidget {
+  const WoFormW({
     required this.child,
+    this.onSubmitting,
+    this.onSubmitError,
+    this.onSubmitSuccess,
+    this.initialStatus = const InitialStatus(),
+    this.canQuit,
+    this.uiSettings = const WoFormUiSettings(),
+    this.pageBuilder,
     super.key,
   });
 
-  final WoForm form;
-  final Widget child;
+  final WoFormElementMixin child;
+  final Future<void> Function(WoFormElementMixin root, WoFormValues values)?
+      onSubmitting;
+  final OnSubmitErrorDef? onSubmitError;
+  final void Function(BuildContext context)? onSubmitSuccess;
+  final WoFormStatus initialStatus;
+  final Future<bool?> Function(BuildContext context)? canQuit;
+  final WoFormUiSettings uiSettings;
+  final WoFormPageBuilderDef? pageBuilder;
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider.value(
-      value: form,
+    return RepositoryProvider<WoFormElementMixin>.value(
+      value: child,
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => WoFormStatusCubit._(form.initialStatus),
+            create: (context) => WoFormStatusCubit._(initialStatus),
           ),
           BlocProvider(
             create: (context) => WoFormLockCubit._(),
@@ -164,6 +191,7 @@ class WoFormInitializer extends StatelessWidget {
               context.read(),
               context.read(),
               context.read(),
+              onSubmitting: onSubmitting,
             ),
           ),
         ],
@@ -171,14 +199,14 @@ class WoFormInitializer extends StatelessWidget {
           listener: (context, status) {
             switch (status) {
               case SubmitSuccessStatus():
-                form.onSubmitSuccess?.call(context);
+                onSubmitSuccess?.call(context);
               case SubmitErrorStatus():
-                (form.onSubmitError ?? WoFormTheme.of(context)?.onSubmitError)
+                (onSubmitError ?? WoFormTheme.of(context)?.onSubmitError)
                     ?.call(context, status);
               default:
             }
           },
-          child: child,
+          child: child.toWidget(parentPath: ''),
         ),
       ),
     );

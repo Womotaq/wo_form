@@ -25,6 +25,8 @@ mixin WoFormElementMixin {
 
   Map<String, dynamic> toJson();
 
+  // --
+
   void export({
     required dynamic into,
     required WoFormValues values,
@@ -36,8 +38,8 @@ mixin WoFormElementMixin {
     required String parentPath,
   });
 
-  Iterable<WoFormInputError> getErrors(
-    WoFormValues values, {
+  Iterable<WoFormInputError> getErrors({
+    required WoFormValues values,
     required String parentPath,
   });
 
@@ -45,6 +47,8 @@ mixin WoFormElementMixin {
     required WoFormValues values,
     required String parentPath,
   });
+
+  Map<String, dynamic> initialValues({required String parentPath});
 
   Widget toWidget({required String parentPath, Key? key});
 
@@ -84,8 +88,6 @@ mixin WoFormElementMixin {
 
 mixin WoFormNodeMixin {
   String get id;
-
-  Map<String, dynamic> initialValues({required String parentPath});
 
   WoFormElementMixin? getInput({
     required String path,
@@ -183,42 +185,14 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin, WoFormNodeMixin {
       case InputsNode(children: final children):
         return {
           for (final child in children)
-            if (child is WoFormNodeMixin)
-              ...(child as WoFormNodeMixin)
-                  .initialValues(parentPath: '$parentPath/$id')
-            else if (child is WoFormInputMixin)
-              '$parentPath/$id/${child.id}':
-                  (child as WoFormInputMixin).initialValue,
+            ...child.initialValues(parentPath: '$parentPath/$id'),
         };
-      // case PushPageNode(input: final input):
-      //   if (input is WoFormNode) {
-      //     return input.initialValues(parentPath: '$parentPath/$id');
-      //   } else if (input is WoFormInputMixin) {
-      //     return {
-      //       '$parentPath/$id/${input.id}':
-      //           (input as WoFormInputMixin).initialValue,
-      //     };
-      //   } else {
-      //     throw UnimplementedError(
-      //       'Unknown input type : ${input.runtimeType}',
-      //     );
-      //   }
       case ValueBuilderNode(
           builder: final builder,
           initialValue: final initialValue,
         ):
         final input = builder!(id, initialValue);
-        if (input is WoFormNodeMixin) {
-          return (input as WoFormNodeMixin)
-              .initialValues(parentPath: '$parentPath/$id');
-        } else if (input is WoFormInputMixin) {
-          return {
-            '$parentPath/$id/${input.id}':
-                (input as WoFormInputMixin).initialValue,
-          };
-        } else {
-          throw UnimplementedError('Unknown input type : ${input.runtimeType}');
-        }
+        return input.initialValues(parentPath: '$parentPath/$id');
       case ValueListenerNode():
       case WidgetNode():
         return {};
@@ -380,8 +354,8 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin, WoFormNodeMixin {
   }
 
   @override
-  Iterable<WoFormInputError> getErrors(
-    WoFormValues values, {
+  Iterable<WoFormInputError> getErrors({
+    required WoFormValues values,
     required String parentPath,
   }) {
     switch (this) {
@@ -394,7 +368,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin, WoFormNodeMixin {
         return [
           for (final child in children)
             ...child.getErrors(
-              values,
+              values: values,
               parentPath: '$parentPath/$id',
             ),
         ].whereNotNull();
@@ -408,7 +382,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormElementMixin, WoFormNodeMixin {
         );
 
         return input.getErrors(
-          values,
+          values: values,
           parentPath: '$parentPath/$id',
         );
       case ValueListenerNode():
@@ -622,8 +596,8 @@ class FutureNode<T> with _$FutureNode<T>, WoFormElementMixin, WoFormNodeMixin {
   }
 
   @override
-  Iterable<WoFormInputError> getErrors(
-    WoFormValues values, {
+  Iterable<WoFormInputError> getErrors({
+    required WoFormValues values,
     required String parentPath,
   }) {
     final snapshot = values['$parentPath/$id'];
@@ -631,7 +605,7 @@ class FutureNode<T> with _$FutureNode<T>, WoFormElementMixin, WoFormNodeMixin {
     if (snapshot is! AsyncSnapshot<T?>) return [];
 
     return builder(parentPath, snapshot).getErrors(
-      values,
+      values: values,
       parentPath: '$parentPath/$id',
     );
   }
@@ -708,11 +682,7 @@ class FutureNode<T> with _$FutureNode<T>, WoFormElementMixin, WoFormNodeMixin {
 
     return {
       '$parentPath/$id': snapshot,
-      if (child is WoFormNodeMixin)
-        ...(child as WoFormNodeMixin)
-            .initialValues(parentPath: '$parentPath/$id')
-      else if (child is WoFormInputMixin)
-        '$parentPath/$id/${child.id}': (child as WoFormInputMixin).initialValue,
+      ...child.initialValues(parentPath: '$parentPath/$id'),
     };
   }
 

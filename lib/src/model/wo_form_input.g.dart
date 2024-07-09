@@ -14,8 +14,8 @@ SelectInput<T> _$SelectInputFromJson<T>(
       id: json['id'] as String,
       maxCount: (json['maxCount'] as num?)?.toInt(),
       minCount: (json['minCount'] as num).toInt(),
-      initialValues:
-          (json['initialValues'] as List<dynamic>).map(fromJsonT).toList(),
+      initialValue_:
+          (json['initialValue_'] as List<dynamic>).map(fromJsonT).toList(),
       availibleValues:
           (json['availibleValues'] as List<dynamic>).map(fromJsonT).toList(),
       uiSettings: json['uiSettings'] == null
@@ -32,7 +32,7 @@ Map<String, dynamic> _$SelectInputToJson<T>(
       'id': instance.id,
       'maxCount': instance.maxCount,
       'minCount': instance.minCount,
-      'initialValues': instance.initialValues.map(toJsonT).toList(),
+      'initialValue_': instance.initialValue_.map(toJsonT).toList(),
       'availibleValues': instance.availibleValues.map(toJsonT).toList(),
       'uiSettings': instance.uiSettings,
     };

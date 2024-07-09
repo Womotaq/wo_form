@@ -10,8 +10,6 @@ typedef OnSubmitErrorDef = void Function(
   SubmitErrorStatus errorStatus,
 );
 
-typedef WoFormPageBuilderDef = Widget Function(BuildContext context);
-
 @freezed
 class WoForm with _$WoForm {
   const factory WoForm({
@@ -36,8 +34,6 @@ class WoForm with _$WoForm {
     WoFormUiSettings uiSettings,
     @JsonKey(includeToJson: false, includeFromJson: false)
     ThemeData Function(BuildContext context)? themeBuilder,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    WoFormPageBuilderDef? pageBuilder,
   }) = _WoForm;
 
   const WoForm._();
@@ -45,19 +41,6 @@ class WoForm with _$WoForm {
   factory WoForm.fromJson(Map<String, dynamic> json) => _$WoFormFromJson(json);
 
   // --
-
-  Map<String, dynamic> initialValues() => {
-        if (child is WoFormNodeMixin)
-          ...(child as WoFormNodeMixin).initialValues(parentPath: '')
-        else if (child is WoFormInputMixin)
-          '/${child.id}': (child as WoFormInputMixin).initialValue,
-      };
-
-  Iterable<String> getAllInputPaths({required WoFormValues values}) =>
-      child.getAllInputPaths(values: values, parentPath: '');
-
-  Iterable<WoFormInputError> getErrors(WoFormValues values) =>
-      child.getErrors(values, parentPath: '');
 
   /// The path of an input is the ids of it and its parents, separated by the
   /// character '/'.
@@ -109,8 +92,4 @@ class WoForm with _$WoForm {
 
     return data;
   }
-
-  Widget toPage({Key? key}) => toWidget(key: key);
-
-  Widget toWidget({Key? key}) => WoFormPageBuilder(key: key, form: this);
 }

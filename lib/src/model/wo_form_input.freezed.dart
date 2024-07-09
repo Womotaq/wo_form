@@ -16,31 +16,32 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$WoFormInputError {
+  String get path => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() empty,
-    required TResult Function() invalid,
-    required TResult Function() maxBound,
-    required TResult Function() minBound,
-    required TResult Function(String message) custom,
+    required TResult Function(String path) empty,
+    required TResult Function(String path) invalid,
+    required TResult Function(String path) maxBound,
+    required TResult Function(String path) minBound,
+    required TResult Function(String path, String message) custom,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? empty,
-    TResult? Function()? invalid,
-    TResult? Function()? maxBound,
-    TResult? Function()? minBound,
-    TResult? Function(String message)? custom,
+    TResult? Function(String path)? empty,
+    TResult? Function(String path)? invalid,
+    TResult? Function(String path)? maxBound,
+    TResult? Function(String path)? minBound,
+    TResult? Function(String path, String message)? custom,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? empty,
-    TResult Function()? invalid,
-    TResult Function()? maxBound,
-    TResult Function()? minBound,
-    TResult Function(String message)? custom,
+    TResult Function(String path)? empty,
+    TResult Function(String path)? invalid,
+    TResult Function(String path)? maxBound,
+    TResult Function(String path)? minBound,
+    TResult Function(String path, String message)? custom,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -72,6 +73,10 @@ mixin _$WoFormInputError {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $WoFormInputErrorCopyWith<WoFormInputError> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -79,6 +84,8 @@ abstract class $WoFormInputErrorCopyWith<$Res> {
   factory $WoFormInputErrorCopyWith(
           WoFormInputError value, $Res Function(WoFormInputError) then) =
       _$WoFormInputErrorCopyWithImpl<$Res, WoFormInputError>;
+  @useResult
+  $Res call({String path});
 }
 
 /// @nodoc
@@ -90,13 +97,30 @@ class _$WoFormInputErrorCopyWithImpl<$Res, $Val extends WoFormInputError>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? path = null,
+  }) {
+    return _then(_value.copyWith(
+      path: null == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$EmptyInputErrorImplCopyWith<$Res> {
+abstract class _$$EmptyInputErrorImplCopyWith<$Res>
+    implements $WoFormInputErrorCopyWith<$Res> {
   factory _$$EmptyInputErrorImplCopyWith(_$EmptyInputErrorImpl value,
           $Res Function(_$EmptyInputErrorImpl) then) =
       __$$EmptyInputErrorImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String path});
 }
 
 /// @nodoc
@@ -106,63 +130,88 @@ class __$$EmptyInputErrorImplCopyWithImpl<$Res>
   __$$EmptyInputErrorImplCopyWithImpl(
       _$EmptyInputErrorImpl _value, $Res Function(_$EmptyInputErrorImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? path = null,
+  }) {
+    return _then(_$EmptyInputErrorImpl(
+      path: null == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$EmptyInputErrorImpl implements EmptyInputError {
-  const _$EmptyInputErrorImpl();
+  const _$EmptyInputErrorImpl({required this.path});
+
+  @override
+  final String path;
 
   @override
   String toString() {
-    return 'WoFormInputError.empty()';
+    return 'WoFormInputError.empty(path: $path)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$EmptyInputErrorImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$EmptyInputErrorImpl &&
+            (identical(other.path, path) || other.path == path));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, path);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$EmptyInputErrorImplCopyWith<_$EmptyInputErrorImpl> get copyWith =>
+      __$$EmptyInputErrorImplCopyWithImpl<_$EmptyInputErrorImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() empty,
-    required TResult Function() invalid,
-    required TResult Function() maxBound,
-    required TResult Function() minBound,
-    required TResult Function(String message) custom,
+    required TResult Function(String path) empty,
+    required TResult Function(String path) invalid,
+    required TResult Function(String path) maxBound,
+    required TResult Function(String path) minBound,
+    required TResult Function(String path, String message) custom,
   }) {
-    return empty();
+    return empty(path);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? empty,
-    TResult? Function()? invalid,
-    TResult? Function()? maxBound,
-    TResult? Function()? minBound,
-    TResult? Function(String message)? custom,
+    TResult? Function(String path)? empty,
+    TResult? Function(String path)? invalid,
+    TResult? Function(String path)? maxBound,
+    TResult? Function(String path)? minBound,
+    TResult? Function(String path, String message)? custom,
   }) {
-    return empty?.call();
+    return empty?.call(path);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? empty,
-    TResult Function()? invalid,
-    TResult Function()? maxBound,
-    TResult Function()? minBound,
-    TResult Function(String message)? custom,
+    TResult Function(String path)? empty,
+    TResult Function(String path)? invalid,
+    TResult Function(String path)? maxBound,
+    TResult Function(String path)? minBound,
+    TResult Function(String path, String message)? custom,
     required TResult orElse(),
   }) {
     if (empty != null) {
-      return empty();
+      return empty(path);
     }
     return orElse();
   }
@@ -209,14 +258,26 @@ class _$EmptyInputErrorImpl implements EmptyInputError {
 }
 
 abstract class EmptyInputError implements WoFormInputError {
-  const factory EmptyInputError() = _$EmptyInputErrorImpl;
+  const factory EmptyInputError({required final String path}) =
+      _$EmptyInputErrorImpl;
+
+  @override
+  String get path;
+  @override
+  @JsonKey(ignore: true)
+  _$$EmptyInputErrorImplCopyWith<_$EmptyInputErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$InvalidInputErrorImplCopyWith<$Res> {
+abstract class _$$InvalidInputErrorImplCopyWith<$Res>
+    implements $WoFormInputErrorCopyWith<$Res> {
   factory _$$InvalidInputErrorImplCopyWith(_$InvalidInputErrorImpl value,
           $Res Function(_$InvalidInputErrorImpl) then) =
       __$$InvalidInputErrorImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String path});
 }
 
 /// @nodoc
@@ -226,63 +287,88 @@ class __$$InvalidInputErrorImplCopyWithImpl<$Res>
   __$$InvalidInputErrorImplCopyWithImpl(_$InvalidInputErrorImpl _value,
       $Res Function(_$InvalidInputErrorImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? path = null,
+  }) {
+    return _then(_$InvalidInputErrorImpl(
+      path: null == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$InvalidInputErrorImpl implements InvalidInputError {
-  const _$InvalidInputErrorImpl();
+  const _$InvalidInputErrorImpl({required this.path});
+
+  @override
+  final String path;
 
   @override
   String toString() {
-    return 'WoFormInputError.invalid()';
+    return 'WoFormInputError.invalid(path: $path)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InvalidInputErrorImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$InvalidInputErrorImpl &&
+            (identical(other.path, path) || other.path == path));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, path);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$InvalidInputErrorImplCopyWith<_$InvalidInputErrorImpl> get copyWith =>
+      __$$InvalidInputErrorImplCopyWithImpl<_$InvalidInputErrorImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() empty,
-    required TResult Function() invalid,
-    required TResult Function() maxBound,
-    required TResult Function() minBound,
-    required TResult Function(String message) custom,
+    required TResult Function(String path) empty,
+    required TResult Function(String path) invalid,
+    required TResult Function(String path) maxBound,
+    required TResult Function(String path) minBound,
+    required TResult Function(String path, String message) custom,
   }) {
-    return invalid();
+    return invalid(path);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? empty,
-    TResult? Function()? invalid,
-    TResult? Function()? maxBound,
-    TResult? Function()? minBound,
-    TResult? Function(String message)? custom,
+    TResult? Function(String path)? empty,
+    TResult? Function(String path)? invalid,
+    TResult? Function(String path)? maxBound,
+    TResult? Function(String path)? minBound,
+    TResult? Function(String path, String message)? custom,
   }) {
-    return invalid?.call();
+    return invalid?.call(path);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? empty,
-    TResult Function()? invalid,
-    TResult Function()? maxBound,
-    TResult Function()? minBound,
-    TResult Function(String message)? custom,
+    TResult Function(String path)? empty,
+    TResult Function(String path)? invalid,
+    TResult Function(String path)? maxBound,
+    TResult Function(String path)? minBound,
+    TResult Function(String path, String message)? custom,
     required TResult orElse(),
   }) {
     if (invalid != null) {
-      return invalid();
+      return invalid(path);
     }
     return orElse();
   }
@@ -329,14 +415,26 @@ class _$InvalidInputErrorImpl implements InvalidInputError {
 }
 
 abstract class InvalidInputError implements WoFormInputError {
-  const factory InvalidInputError() = _$InvalidInputErrorImpl;
+  const factory InvalidInputError({required final String path}) =
+      _$InvalidInputErrorImpl;
+
+  @override
+  String get path;
+  @override
+  @JsonKey(ignore: true)
+  _$$InvalidInputErrorImplCopyWith<_$InvalidInputErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$MaxBoundInputErrorImplCopyWith<$Res> {
+abstract class _$$MaxBoundInputErrorImplCopyWith<$Res>
+    implements $WoFormInputErrorCopyWith<$Res> {
   factory _$$MaxBoundInputErrorImplCopyWith(_$MaxBoundInputErrorImpl value,
           $Res Function(_$MaxBoundInputErrorImpl) then) =
       __$$MaxBoundInputErrorImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String path});
 }
 
 /// @nodoc
@@ -346,63 +444,88 @@ class __$$MaxBoundInputErrorImplCopyWithImpl<$Res>
   __$$MaxBoundInputErrorImplCopyWithImpl(_$MaxBoundInputErrorImpl _value,
       $Res Function(_$MaxBoundInputErrorImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? path = null,
+  }) {
+    return _then(_$MaxBoundInputErrorImpl(
+      path: null == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$MaxBoundInputErrorImpl implements MaxBoundInputError {
-  const _$MaxBoundInputErrorImpl();
+  const _$MaxBoundInputErrorImpl({required this.path});
+
+  @override
+  final String path;
 
   @override
   String toString() {
-    return 'WoFormInputError.maxBound()';
+    return 'WoFormInputError.maxBound(path: $path)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$MaxBoundInputErrorImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$MaxBoundInputErrorImpl &&
+            (identical(other.path, path) || other.path == path));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, path);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$MaxBoundInputErrorImplCopyWith<_$MaxBoundInputErrorImpl> get copyWith =>
+      __$$MaxBoundInputErrorImplCopyWithImpl<_$MaxBoundInputErrorImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() empty,
-    required TResult Function() invalid,
-    required TResult Function() maxBound,
-    required TResult Function() minBound,
-    required TResult Function(String message) custom,
+    required TResult Function(String path) empty,
+    required TResult Function(String path) invalid,
+    required TResult Function(String path) maxBound,
+    required TResult Function(String path) minBound,
+    required TResult Function(String path, String message) custom,
   }) {
-    return maxBound();
+    return maxBound(path);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? empty,
-    TResult? Function()? invalid,
-    TResult? Function()? maxBound,
-    TResult? Function()? minBound,
-    TResult? Function(String message)? custom,
+    TResult? Function(String path)? empty,
+    TResult? Function(String path)? invalid,
+    TResult? Function(String path)? maxBound,
+    TResult? Function(String path)? minBound,
+    TResult? Function(String path, String message)? custom,
   }) {
-    return maxBound?.call();
+    return maxBound?.call(path);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? empty,
-    TResult Function()? invalid,
-    TResult Function()? maxBound,
-    TResult Function()? minBound,
-    TResult Function(String message)? custom,
+    TResult Function(String path)? empty,
+    TResult Function(String path)? invalid,
+    TResult Function(String path)? maxBound,
+    TResult Function(String path)? minBound,
+    TResult Function(String path, String message)? custom,
     required TResult orElse(),
   }) {
     if (maxBound != null) {
-      return maxBound();
+      return maxBound(path);
     }
     return orElse();
   }
@@ -449,14 +572,26 @@ class _$MaxBoundInputErrorImpl implements MaxBoundInputError {
 }
 
 abstract class MaxBoundInputError implements WoFormInputError {
-  const factory MaxBoundInputError() = _$MaxBoundInputErrorImpl;
+  const factory MaxBoundInputError({required final String path}) =
+      _$MaxBoundInputErrorImpl;
+
+  @override
+  String get path;
+  @override
+  @JsonKey(ignore: true)
+  _$$MaxBoundInputErrorImplCopyWith<_$MaxBoundInputErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$MinBoundInputErrorImplCopyWith<$Res> {
+abstract class _$$MinBoundInputErrorImplCopyWith<$Res>
+    implements $WoFormInputErrorCopyWith<$Res> {
   factory _$$MinBoundInputErrorImplCopyWith(_$MinBoundInputErrorImpl value,
           $Res Function(_$MinBoundInputErrorImpl) then) =
       __$$MinBoundInputErrorImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String path});
 }
 
 /// @nodoc
@@ -466,63 +601,88 @@ class __$$MinBoundInputErrorImplCopyWithImpl<$Res>
   __$$MinBoundInputErrorImplCopyWithImpl(_$MinBoundInputErrorImpl _value,
       $Res Function(_$MinBoundInputErrorImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? path = null,
+  }) {
+    return _then(_$MinBoundInputErrorImpl(
+      path: null == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$MinBoundInputErrorImpl implements MinBoundInputError {
-  const _$MinBoundInputErrorImpl();
+  const _$MinBoundInputErrorImpl({required this.path});
+
+  @override
+  final String path;
 
   @override
   String toString() {
-    return 'WoFormInputError.minBound()';
+    return 'WoFormInputError.minBound(path: $path)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$MinBoundInputErrorImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$MinBoundInputErrorImpl &&
+            (identical(other.path, path) || other.path == path));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, path);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$MinBoundInputErrorImplCopyWith<_$MinBoundInputErrorImpl> get copyWith =>
+      __$$MinBoundInputErrorImplCopyWithImpl<_$MinBoundInputErrorImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() empty,
-    required TResult Function() invalid,
-    required TResult Function() maxBound,
-    required TResult Function() minBound,
-    required TResult Function(String message) custom,
+    required TResult Function(String path) empty,
+    required TResult Function(String path) invalid,
+    required TResult Function(String path) maxBound,
+    required TResult Function(String path) minBound,
+    required TResult Function(String path, String message) custom,
   }) {
-    return minBound();
+    return minBound(path);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? empty,
-    TResult? Function()? invalid,
-    TResult? Function()? maxBound,
-    TResult? Function()? minBound,
-    TResult? Function(String message)? custom,
+    TResult? Function(String path)? empty,
+    TResult? Function(String path)? invalid,
+    TResult? Function(String path)? maxBound,
+    TResult? Function(String path)? minBound,
+    TResult? Function(String path, String message)? custom,
   }) {
-    return minBound?.call();
+    return minBound?.call(path);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? empty,
-    TResult Function()? invalid,
-    TResult Function()? maxBound,
-    TResult Function()? minBound,
-    TResult Function(String message)? custom,
+    TResult Function(String path)? empty,
+    TResult Function(String path)? invalid,
+    TResult Function(String path)? maxBound,
+    TResult Function(String path)? minBound,
+    TResult Function(String path, String message)? custom,
     required TResult orElse(),
   }) {
     if (minBound != null) {
-      return minBound();
+      return minBound(path);
     }
     return orElse();
   }
@@ -569,16 +729,26 @@ class _$MinBoundInputErrorImpl implements MinBoundInputError {
 }
 
 abstract class MinBoundInputError implements WoFormInputError {
-  const factory MinBoundInputError() = _$MinBoundInputErrorImpl;
+  const factory MinBoundInputError({required final String path}) =
+      _$MinBoundInputErrorImpl;
+
+  @override
+  String get path;
+  @override
+  @JsonKey(ignore: true)
+  _$$MinBoundInputErrorImplCopyWith<_$MinBoundInputErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$CustomInputErrorImplCopyWith<$Res> {
+abstract class _$$CustomInputErrorImplCopyWith<$Res>
+    implements $WoFormInputErrorCopyWith<$Res> {
   factory _$$CustomInputErrorImplCopyWith(_$CustomInputErrorImpl value,
           $Res Function(_$CustomInputErrorImpl) then) =
       __$$CustomInputErrorImplCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call({String message});
+  $Res call({String path, String message});
 }
 
 /// @nodoc
@@ -592,9 +762,14 @@ class __$$CustomInputErrorImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? path = null,
     Object? message = null,
   }) {
     return _then(_$CustomInputErrorImpl(
+      path: null == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String,
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -606,14 +781,16 @@ class __$$CustomInputErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CustomInputErrorImpl implements CustomInputError {
-  const _$CustomInputErrorImpl({required this.message});
+  const _$CustomInputErrorImpl({required this.path, required this.message});
 
+  @override
+  final String path;
   @override
   final String message;
 
   @override
   String toString() {
-    return 'WoFormInputError.custom(message: $message)';
+    return 'WoFormInputError.custom(path: $path, message: $message)';
   }
 
   @override
@@ -621,11 +798,12 @@ class _$CustomInputErrorImpl implements CustomInputError {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CustomInputErrorImpl &&
+            (identical(other.path, path) || other.path == path) &&
             (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode => Object.hash(runtimeType, path, message);
 
   @JsonKey(ignore: true)
   @override
@@ -637,39 +815,39 @@ class _$CustomInputErrorImpl implements CustomInputError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() empty,
-    required TResult Function() invalid,
-    required TResult Function() maxBound,
-    required TResult Function() minBound,
-    required TResult Function(String message) custom,
+    required TResult Function(String path) empty,
+    required TResult Function(String path) invalid,
+    required TResult Function(String path) maxBound,
+    required TResult Function(String path) minBound,
+    required TResult Function(String path, String message) custom,
   }) {
-    return custom(message);
+    return custom(path, message);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? empty,
-    TResult? Function()? invalid,
-    TResult? Function()? maxBound,
-    TResult? Function()? minBound,
-    TResult? Function(String message)? custom,
+    TResult? Function(String path)? empty,
+    TResult? Function(String path)? invalid,
+    TResult? Function(String path)? maxBound,
+    TResult? Function(String path)? minBound,
+    TResult? Function(String path, String message)? custom,
   }) {
-    return custom?.call(message);
+    return custom?.call(path, message);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? empty,
-    TResult Function()? invalid,
-    TResult Function()? maxBound,
-    TResult Function()? minBound,
-    TResult Function(String message)? custom,
+    TResult Function(String path)? empty,
+    TResult Function(String path)? invalid,
+    TResult Function(String path)? maxBound,
+    TResult Function(String path)? minBound,
+    TResult Function(String path, String message)? custom,
     required TResult orElse(),
   }) {
     if (custom != null) {
-      return custom(message);
+      return custom(path, message);
     }
     return orElse();
   }
@@ -716,10 +894,14 @@ class _$CustomInputErrorImpl implements CustomInputError {
 }
 
 abstract class CustomInputError implements WoFormInputError {
-  const factory CustomInputError({required final String message}) =
-      _$CustomInputErrorImpl;
+  const factory CustomInputError(
+      {required final String path,
+      required final String message}) = _$CustomInputErrorImpl;
 
+  @override
+  String get path;
   String get message;
+  @override
   @JsonKey(ignore: true)
   _$$CustomInputErrorImplCopyWith<_$CustomInputErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -2468,7 +2650,7 @@ mixin _$SelectInput<T> {
   String get id => throw _privateConstructorUsedError;
   int? get maxCount => throw _privateConstructorUsedError;
   int get minCount => throw _privateConstructorUsedError;
-  List<T> get initialValues => throw _privateConstructorUsedError;
+  List<T> get initialValue_ => throw _privateConstructorUsedError;
   List<T> get availibleValues => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
   WoFormInputError? Function(List<T>)? get getCustomError =>
@@ -2493,7 +2675,7 @@ abstract class $SelectInputCopyWith<T, $Res> {
       {String id,
       int? maxCount,
       int minCount,
-      List<T> initialValues,
+      List<T> initialValue_,
       List<T> availibleValues,
       @JsonKey(includeToJson: false, includeFromJson: false)
       WoFormInputError? Function(List<T>)? getCustomError,
@@ -2520,7 +2702,7 @@ class _$SelectInputCopyWithImpl<T, $Res, $Val extends SelectInput<T>>
     Object? id = null,
     Object? maxCount = freezed,
     Object? minCount = null,
-    Object? initialValues = null,
+    Object? initialValue_ = null,
     Object? availibleValues = null,
     Object? getCustomError = freezed,
     Object? uiSettings = freezed,
@@ -2539,9 +2721,9 @@ class _$SelectInputCopyWithImpl<T, $Res, $Val extends SelectInput<T>>
           ? _value.minCount
           : minCount // ignore: cast_nullable_to_non_nullable
               as int,
-      initialValues: null == initialValues
-          ? _value.initialValues
-          : initialValues // ignore: cast_nullable_to_non_nullable
+      initialValue_: null == initialValue_
+          ? _value.initialValue_
+          : initialValue_ // ignore: cast_nullable_to_non_nullable
               as List<T>,
       availibleValues: null == availibleValues
           ? _value.availibleValues
@@ -2587,7 +2769,7 @@ abstract class _$$SelectInputImplCopyWith<T, $Res>
       {String id,
       int? maxCount,
       int minCount,
-      List<T> initialValues,
+      List<T> initialValue_,
       List<T> availibleValues,
       @JsonKey(includeToJson: false, includeFromJson: false)
       WoFormInputError? Function(List<T>)? getCustomError,
@@ -2613,7 +2795,7 @@ class __$$SelectInputImplCopyWithImpl<T, $Res>
     Object? id = null,
     Object? maxCount = freezed,
     Object? minCount = null,
-    Object? initialValues = null,
+    Object? initialValue_ = null,
     Object? availibleValues = null,
     Object? getCustomError = freezed,
     Object? uiSettings = freezed,
@@ -2632,9 +2814,9 @@ class __$$SelectInputImplCopyWithImpl<T, $Res>
           ? _value.minCount
           : minCount // ignore: cast_nullable_to_non_nullable
               as int,
-      initialValues: null == initialValues
-          ? _value._initialValues
-          : initialValues // ignore: cast_nullable_to_non_nullable
+      initialValue_: null == initialValue_
+          ? _value._initialValue_
+          : initialValue_ // ignore: cast_nullable_to_non_nullable
               as List<T>,
       availibleValues: null == availibleValues
           ? _value._availibleValues
@@ -2663,13 +2845,13 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
       {required this.id,
       required this.maxCount,
       this.minCount = 0,
-      final List<T> initialValues = const [],
+      final List<T> initialValue_ = const [],
       final List<T> availibleValues = const [],
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.getCustomError,
       this.uiSettings,
       @JsonKey(includeToJson: false, includeFromJson: false) this.toJsonT})
-      : _initialValues = initialValues,
+      : _initialValue_ = initialValue_,
         _availibleValues = availibleValues,
         super._();
 
@@ -2680,13 +2862,13 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
   @override
   @JsonKey()
   final int minCount;
-  final List<T> _initialValues;
+  final List<T> _initialValue_;
   @override
   @JsonKey()
-  List<T> get initialValues {
-    if (_initialValues is EqualUnmodifiableListView) return _initialValues;
+  List<T> get initialValue_ {
+    if (_initialValue_ is EqualUnmodifiableListView) return _initialValue_;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_initialValues);
+    return EqualUnmodifiableListView(_initialValue_);
   }
 
   final List<T> _availibleValues;
@@ -2709,7 +2891,7 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
 
   @override
   String toString() {
-    return 'SelectInput<$T>(id: $id, maxCount: $maxCount, minCount: $minCount, initialValues: $initialValues, availibleValues: $availibleValues, getCustomError: $getCustomError, uiSettings: $uiSettings, toJsonT: $toJsonT)';
+    return 'SelectInput<$T>(id: $id, maxCount: $maxCount, minCount: $minCount, initialValue_: $initialValue_, availibleValues: $availibleValues, getCustomError: $getCustomError, uiSettings: $uiSettings, toJsonT: $toJsonT)';
   }
 
   @override
@@ -2723,7 +2905,7 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
             (identical(other.minCount, minCount) ||
                 other.minCount == minCount) &&
             const DeepCollectionEquality()
-                .equals(other._initialValues, _initialValues) &&
+                .equals(other._initialValue_, _initialValue_) &&
             const DeepCollectionEquality()
                 .equals(other._availibleValues, _availibleValues) &&
             (identical(other.getCustomError, getCustomError) ||
@@ -2739,7 +2921,7 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
       id,
       maxCount,
       minCount,
-      const DeepCollectionEquality().hash(_initialValues),
+      const DeepCollectionEquality().hash(_initialValue_),
       const DeepCollectionEquality().hash(_availibleValues),
       getCustomError,
       uiSettings,
@@ -2758,7 +2940,7 @@ abstract class _SelectInput<T> extends SelectInput<T> {
       {required final String id,
       required final int? maxCount,
       final int minCount,
-      final List<T> initialValues,
+      final List<T> initialValue_,
       final List<T> availibleValues,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final WoFormInputError? Function(List<T>)? getCustomError,
@@ -2774,7 +2956,7 @@ abstract class _SelectInput<T> extends SelectInput<T> {
   @override
   int get minCount;
   @override
-  List<T> get initialValues;
+  List<T> get initialValue_;
   @override
   List<T> get availibleValues;
   @override

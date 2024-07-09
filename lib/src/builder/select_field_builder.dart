@@ -56,7 +56,10 @@ class SelectFieldBuilder<T> extends StatelessWidget {
 
                 final String? errorText;
                 if (status is InvalidValuesStatus) {
-                  final error = input.getError(selectedValues);
+                  final error = input.getError(
+                    selectedValues,
+                    parentPath: path.parentPath,
+                  );
                   if (error == null) {
                     errorText = null;
                   } else {
@@ -121,7 +124,7 @@ class SelectStringFieldBuilder extends SelectFieldBuilder<String> {
       id: selectStringInput.id,
       maxCount: selectStringInput.maxCount,
       minCount: selectStringInput.minCount,
-      initialValues: selectStringInput.initialValue,
+      initialValue_: selectStringInput.initialValue,
       availibleValues: selectStringInput.availibleValues,
       getCustomError: selectStringInput.getCustomError,
       uiSettings: selectStringInput.uiSettings,

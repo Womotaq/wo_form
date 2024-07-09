@@ -9,7 +9,7 @@ sealed class WoFormStatus with _$WoFormStatus {
   const factory WoFormStatus.inProgress() = InProgressStatus;
   const factory WoFormStatus.invalidValues({
     // TODO: remove ? are they used ? usefull ?
-    Iterable<WoFormInputError>? inputErrors,
+    Iterable<WoFormInputError>? errors,
   }) = InvalidValuesStatus;
   const factory WoFormStatus.submitting() = SubmittingStatus;
   const factory WoFormStatus.submitError({

@@ -8,24 +8,42 @@ part 'wo_form_input.g.dart';
 
 @freezed
 sealed class WoFormInputError with _$WoFormInputError {
-  const factory WoFormInputError.empty() = EmptyInputError;
-  const factory WoFormInputError.invalid() = InvalidInputError;
-  const factory WoFormInputError.maxBound() = MaxBoundInputError;
-  const factory WoFormInputError.minBound() = MinBoundInputError;
-  const factory WoFormInputError.custom({required String message}) =
-      CustomInputError;
+  const factory WoFormInputError.empty({
+    required String path,
+  }) = EmptyInputError;
+  const factory WoFormInputError.invalid({
+    required String path,
+  }) = InvalidInputError;
+  const factory WoFormInputError.maxBound({
+    required String path,
+  }) = MaxBoundInputError;
+  const factory WoFormInputError.minBound({
+    required String path,
+  }) = MinBoundInputError;
+  const factory WoFormInputError.custom({
+    required String path,
+    required String message,
+  }) = CustomInputError;
 }
 
 mixin WoFormInputMixin {
   Object? get initialValue;
 
-  WoFormInputError? getError(Object? value);
+  WoFormInputError? getError(
+    Object? value, {
+    required String parentPath,
+  });
 
+  // TODO : rework ?
   String? getInvalidExplanation(
     dynamic value,
+    String parentPath,
     TranslateInputError? translateError,
   ) {
-    final error = getError(value);
+    final error = getError(
+      value,
+      parentPath: parentPath,
+    );
 
     if (error == null) return null;
 
@@ -44,17 +62,21 @@ mixin WoFormInputMixin {
   }) =>
       ['$parentPath/$id'];
 
-  Iterable<WoFormInputError> getErrors(
-    WoFormValues values, {
+  Iterable<WoFormInputError> getErrors({
+    required WoFormValues values,
     required String parentPath,
   }) =>
-      [getError(values['$parentPath/$id'])].whereNotNull();
+      [getError(values['$parentPath/$id'], parentPath: parentPath)]
+          .whereNotNull();
 
   String? getExportKey({
     required WoFormValues values,
     required String parentPath,
   }) =>
       id;
+
+  Map<String, dynamic> initialValues({required String parentPath}) =>
+      {'$parentPath/$id': initialValue};
 
   Map<String, dynamic> toJson();
 
@@ -126,7 +148,7 @@ sealed class WoFormInput
   // --
 
   @override
-  WoFormInputError? getError(dynamic value) {
+  WoFormInputError? getError(dynamic value, {required String parentPath}) {
     switch (this) {
       case BooleanInput(
           isRequired: final isRequired,
@@ -138,7 +160,7 @@ sealed class WoFormInput
         if (customError != null) return customError;
 
         return isRequired && value != true
-            ? const WoFormInputError.empty()
+            ? WoFormInputError.empty(path: '$parentPath/$id')
             : null;
 
       case NumInput(
@@ -153,12 +175,15 @@ sealed class WoFormInput
         if (customError != null) return customError;
 
         if (value == null) {
-          return isRequired ? const WoFormInputError.empty() : null;
+          return isRequired
+              ? WoFormInputError.empty(path: '$parentPath/$id')
+              : null;
         }
 
-        if (value < minBound) return const WoFormInputError.minBound();
+        if (value < minBound)
+          return WoFormInputError.minBound(path: '$parentPath/$id');
         if (maxBound != null && value > maxBound) {
-          return const WoFormInputError.maxBound();
+          return WoFormInputError.maxBound(path: '$parentPath/$id');
         }
 
         return null;
@@ -175,10 +200,13 @@ sealed class WoFormInput
         if (customError != null) return customError;
 
         if (value == null || value.isEmpty) {
-          return isRequired ? const WoFormInputError.empty() : null;
+          return isRequired
+              ? WoFormInputError.empty(path: '$parentPath/$id')
+              : null;
         } else if (regexPattern != null &&
             !RegExp(regexPattern).hasMatch(value)) {
           return WoFormInputError.custom(
+            path: '$parentPath/$id',
             message: uiSettings.invalidRegexMessage ?? '',
           );
         } else {
@@ -194,6 +222,7 @@ sealed class WoFormInput
         ):
         return SelectInput._validator<String>(
           inputId: inputId,
+          parentPath: parentPath,
           selectedValues: (value as List<String>?) ?? [],
           availibleValues: availibleValues,
           minCount: minCount,
@@ -257,7 +286,7 @@ class SelectInput<T>
     required String id,
     required int? maxCount,
     @Default(0) int minCount,
-    @Default([]) List<T> initialValues,
+    @Default([]) List<T> initialValue_,
     @Default([]) List<T> availibleValues,
     @JsonKey(includeToJson: false, includeFromJson: false)
     WoFormInputError? Function(List<T> selectedValues)? getCustomError,
@@ -285,12 +314,13 @@ class SelectInput<T>
   // initialValue can't be set from the constructor, because it has
   // a type parameter (obscure restrictions)
   @override
-  List<T> get initialValue => initialValues;
+  List<T> get initialValue => initialValue_;
 
   // --
 
   static WoFormInputError? _validator<T>({
     required String inputId,
+    required String parentPath,
     required List<T> selectedValues,
     required List<T> availibleValues,
     required int minCount,
@@ -301,21 +331,21 @@ class SelectInput<T>
     if (customError != null) return customError;
 
     if (minCount == 1 && maxCount == 1 && selectedValues.isEmpty) {
-      return const WoFormInputError.empty();
+      return WoFormInputError.empty(path: '$parentPath/${inputId}');
     }
 
     if (selectedValues.length < minCount) {
-      return const WoFormInputError.minBound();
+      return WoFormInputError.minBound(path: '$parentPath/$inputId');
     }
 
     if (maxCount != null && selectedValues.length > maxCount) {
-      return const WoFormInputError.maxBound();
+      return WoFormInputError.maxBound(path: '$parentPath/$inputId');
     }
 
     if (availibleValues.isNotEmpty) {
       for (final value in selectedValues) {
         if (!availibleValues.contains(value)) {
-          return const WoFormInputError.invalid();
+          return WoFormInputError.invalid(path: '$parentPath/$inputId');
         }
       }
     }
@@ -336,8 +366,10 @@ class SelectInput<T>
   }
 
   @override
-  WoFormInputError? getError(dynamic value) => _validator<T>(
+  WoFormInputError? getError(dynamic value, {required String parentPath}) =>
+      _validator<T>(
         inputId: id,
+        parentPath: parentPath,
         selectedValues: (value as List<T>?) ?? [],
         availibleValues: availibleValues,
         minCount: minCount,

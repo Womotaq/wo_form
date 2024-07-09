@@ -51,7 +51,8 @@ class NumFieldBuilder extends StatelessWidget {
               builder: (context, value) {
                 final String? errorText;
                 if (status is InvalidValuesStatus) {
-                  final error = input.getError(value);
+                  final error =
+                      input.getError(value, parentPath: path.parentPath);
                   if (error == null) {
                     errorText = null;
                   } else {
