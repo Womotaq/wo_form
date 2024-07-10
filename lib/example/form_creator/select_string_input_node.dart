@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wo_form/wo_form.dart';
 
-WoFormElementMixin createSelectStringInputNode() => ValueBuilderNode(
+WoFormNodeMixin createSelectStringInputNode() => ValueBuilderNode(
       id: 'labelText-builder',
       path: './selectStringInput/uiSettings/labelText',
       builder: (context, value) {
@@ -74,7 +74,7 @@ WoFormElementMixin createSelectStringInputNode() => ValueBuilderNode(
                     ),
                     SelectInput<InputsVisibility?>(
                       id: 'inputsVisibility',
-                      initialValues: [InputsVisibility.always],
+                      initialValue_: [InputsVisibility.always],
                       availibleValues: InputsVisibility.values,
                       minCount: 1,
                       maxCount: 1,

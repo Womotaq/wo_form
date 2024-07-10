@@ -81,7 +81,7 @@ class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
 }
 
 typedef DynamicInputWidgetBuilderDef = Widget Function(
-  WoFieldData<WoFormElementMixin, void, DynamicInputUiSettings> data,
+  WoFieldData<WoFormNodeMixin, void, DynamicInputUiSettings> data,
 );
 
 @freezed
@@ -373,6 +373,8 @@ class WoFormUiSettings with _$WoFormUiSettings {
     @JsonKey(includeToJson: false, includeFromJson: false)
     SubmitButtonBuilderDef? submitButtonBuilder,
     bool? showAsteriskIfRequired,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    Future<bool?> Function(BuildContext context)? canQuit,
   }) = _WoFormUiSettings;
 
   const WoFormUiSettings._();

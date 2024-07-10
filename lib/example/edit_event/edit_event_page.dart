@@ -17,62 +17,60 @@ class EditEventPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WoForm(
-      canQuit: (context) async => context.read<WoFormStatusCubit>().state
-                  is InitialStatus ||
-              context.read<WoFormStatusCubit>().state is SubmitSuccessStatus
-          ? true
-          : showDialog<bool>(
-              context: context,
-              builder: (BuildContext dialogContext) {
-                return AlertDialog(
-                  title: const Text('Abandonner les modifications en cours ?'),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.of(dialogContext).pop(),
-                      child: const Text("Continuer d'éditer"),
-                    ),
-                    FilledButton.tonal(
-                      onPressed: () => Navigator.of(dialogContext).pop(true),
-                      child: const Text('Abandonner les modifications'),
-                    ),
-                  ],
-                );
-              },
-            ),
-      uiSettings: const WoFormUiSettings(
+      uiSettings: WoFormUiSettings(
         titleText: "Édition d'un événement",
-        submitMode: StandardSubmitMode(
+        submitMode: const StandardSubmitMode(
           submitText: 'Enregistrer',
           disableSubmitMode: DisableSubmitButton.whenInitialOrSubmitSuccess,
           buttonPosition: SubmitButtonPosition.appBar,
         ),
+        canQuit: (context) async => context.read<WoFormStatusCubit>().state
+                    is InitialStatus ||
+                context.read<WoFormStatusCubit>().state is SubmitSuccessStatus
+            ? true
+            : showDialog<bool>(
+                context: context,
+                builder: (BuildContext dialogContext) {
+                  return AlertDialog(
+                    title:
+                        const Text('Abandonner les modifications en cours ?'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.of(dialogContext).pop(),
+                        child: const Text("Continuer d'éditer"),
+                      ),
+                      FilledButton.tonal(
+                        onPressed: () => Navigator.of(dialogContext).pop(true),
+                        child: const Text('Quitter'),
+                      ),
+                    ],
+                  );
+                },
+              ),
       ),
-      child: InputsNode(
-        id: '#',
-        children: [
-          StringInput(
-            id: 'title',
-            initialValue: event.title,
-            isRequired: true,
-            uiSettings: StringInputUiSettings(
-              labelText: 'Titre',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge
-                  ?.copyWith(fontWeight: FontWeight.bold),
-            ),
+      children: [
+        StringInput(
+          id: 'title',
+          initialValue: event.title,
+          isRequired: true,
+          uiSettings: StringInputUiSettings(
+            labelText: 'Titre',
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(fontWeight: FontWeight.bold),
           ),
-          StringInput(
-            id: 'address',
-            initialValue: event.address,
-            uiSettings: const StringInputUiSettings(
-              labelText: 'Adresse',
-              keyboardType: TextInputType.streetAddress,
-              autofillHints: [AutofillHints.addressCity],
-            ),
+        ),
+        StringInput(
+          id: 'address',
+          initialValue: event.address,
+          uiSettings: const StringInputUiSettings(
+            labelText: 'Adresse',
+            keyboardType: TextInputType.streetAddress,
+            autofillHints: [AutofillHints.addressCity],
           ),
-        ],
-      ),
+        ),
+      ],
       onSubmitting: (form, values) async {
         final edittedEvent = event.copyWith(
           title: values['/title'] as String,
@@ -81,6 +79,6 @@ class EditEventPage extends StatelessWidget {
         eventsCubit.update(event: edittedEvent);
       },
       onSubmitSuccess: (context) => Navigator.of(context).pop(),
-    ).toPage();
+    );
   }
 }

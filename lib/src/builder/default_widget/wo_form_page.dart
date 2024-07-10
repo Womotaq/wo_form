@@ -10,46 +10,43 @@ class WoFormPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final form = context.read<WoForm>();
-    final uiSettings = form.uiSettings;
+    final root = context.read<RootNode>();
 
-    final submitMode = uiSettings.submitMode;
+    final submitMode = root.uiSettings.submitMode;
     return submitMode is PageByPageSubmitMode
         ? WoFormPageByPage(
-            form: form,
-            titleText: uiSettings.titleText,
+            root: root,
+            titleText: root.uiSettings.titleText,
             nextText: submitMode.nextText,
           )
-        : WoFormStandardPage(form: form);
+        : WoFormStandardPage(root: root);
   }
 }
 
 class WoFormStandardPage extends StatelessWidget {
-  const WoFormStandardPage({required this.form, super.key});
+  const WoFormStandardPage({required this.root, super.key});
 
-  final WoForm form;
+  final RootNode root;
 
   @override
   Widget build(BuildContext context) {
-    final submitMode = form.uiSettings.submitMode;
+    final submitMode = root.uiSettings.submitMode;
     if (submitMode is! StandardSubmitMode) {
       throw ArgumentError('submitMode must be StandardSubmitMode');
     }
-
-    final uiSettings = form.uiSettings;
 
     final woFormTheme = WoFormTheme.of(context);
 
     final column = Column(
       children: [
-        if (uiSettings.titlePosition == WoFormTitlePosition.header)
+        if (root.uiSettings.titlePosition == WoFormTitlePosition.header)
           Builder(
             builder: (context) {
               final headerData = WoFormHeaderData(
-                labelText: uiSettings.titleText,
+                labelText: root.uiSettings.titleText,
               );
 
-              return (uiSettings.headerBuilder ??
+              return (root.uiSettings.headerBuilder ??
                       woFormTheme?.headerBuilder ??
                       FormHeader.new)
                   .call(headerData);
@@ -58,13 +55,15 @@ class WoFormStandardPage extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Padding(
-              padding: EdgeInsets.only(
-                bottom: woFormTheme?.verticalSpacing ?? 0,
+            ...root.children.map(
+              (child) => Padding(
+                padding: EdgeInsets.only(
+                  bottom: woFormTheme?.verticalSpacing ?? 0,
+                ),
+                child: child.toWidget(parentPath: ''),
               ),
-              child: form.child.toWidget(parentPath: ''),
             ),
-            if (uiSettings.submitMode.buttonPosition ==
+            if (root.uiSettings.submitMode.buttonPosition ==
                 SubmitButtonPosition.body)
               const SubmitButtonBuilder(),
           ],
@@ -73,7 +72,7 @@ class WoFormStandardPage extends StatelessWidget {
     );
 
     return (submitMode.scaffoldBuilder ??
-            WoFormTheme.of(context)?.standardScaffoldBuilder ??
+            woFormTheme?.standardScaffoldBuilder ??
             _StandardScaffold.new)
         .call(column);
   }
@@ -82,30 +81,30 @@ class WoFormStandardPage extends StatelessWidget {
 class _StandardScaffold extends StatelessWidget {
   const _StandardScaffold(this.body);
 
-  final Column body;
+  final Widget body;
 
   @override
   Widget build(BuildContext context) {
-    final form = context.read<WoForm>();
+    final uiSettings = context.read<RootNode>().uiSettings;
 
     return Scaffold(
       appBar: AppBar(
-        leading: QuitPageButton(canQuit: form.canQuit),
-        title: form.uiSettings.titlePosition == WoFormTitlePosition.appBar
-            ? Text(form.uiSettings.titleText)
+        leading: QuitPageButton(canQuit: uiSettings.canQuit),
+        title: uiSettings.titlePosition == WoFormTitlePosition.appBar
+            ? Text(uiSettings.titleText)
             : null,
         actions: [
-          if (form.uiSettings.submitMode.buttonPosition ==
+          if (uiSettings.submitMode.buttonPosition ==
               SubmitButtonPosition.appBar) ...[
             const SubmitButtonBuilder(),
             const SizedBox(width: 8),
           ],
         ],
       ),
-      bottomNavigationBar: form.uiSettings.submitMode.buttonPosition ==
-              SubmitButtonPosition.bottomBar
-          ? const SubmitButtonBuilder()
-          : null,
+      bottomNavigationBar:
+          uiSettings.submitMode.buttonPosition == SubmitButtonPosition.bottomBar
+              ? const SubmitButtonBuilder()
+              : null,
       body: SingleChildScrollView(
         child: SafeArea(
           child: body,
@@ -117,13 +116,13 @@ class _StandardScaffold extends StatelessWidget {
 
 class WoFormPageByPage extends StatefulWidget {
   const WoFormPageByPage({
-    required this.form,
+    required this.root,
     required this.titleText,
     required this.nextText,
     super.key,
   });
 
-  final WoForm form;
+  final RootNode root;
   final String titleText;
   final String? nextText;
 
@@ -146,6 +145,7 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
 
   @override
   Widget build(BuildContext context) {
+    final uiSettings = context.read<RootNode>().uiSettings;
     final pageController = context.read<WoFormValuesCubit>().pageController;
 
     return Scaffold(
@@ -160,7 +160,7 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
               );
               return false;
             } else {
-              return widget.form.canQuit?.call(context) ?? true;
+              return uiSettings.canQuit?.call(context) ?? true;
             }
           },
         ),
@@ -177,7 +177,7 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
               itemBuilder: (context, index) => ListView(
                 children: [
                   const SizedBox(height: 16),
-                  widget.form.child.toWidget(parentPath: ''),
+                  widget.root.children[index].toWidget(parentPath: ''),
                   const SizedBox(height: 32),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -192,7 +192,7 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
                 ],
               ),
             ),
-            if ((widget.form.uiSettings.submitMode as PageByPageSubmitMode)
+            if ((uiSettings.submitMode as PageByPageSubmitMode)
                 .showProgressIndicator)
               TweenAnimationBuilder<double>(
                 duration: const Duration(milliseconds: 250),
@@ -204,7 +204,7 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
                 builder: (context, value, _) {
                   return LinearProgressIndicator(
                     // TODO : new way
-                    value: value / max(1, [widget.form.child].length),
+                    value: value / max(1, [widget.root].length),
                   );
                 },
               ),

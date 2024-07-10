@@ -17,12 +17,12 @@ extension RandomX on Random {
 class DynamicInputsNodeWidget extends StatelessWidget {
   const DynamicInputsNodeWidget(this.data, {super.key});
 
-  final WoFieldData<DynamicInputsNode, List<WoFormElementMixin>,
+  final WoFieldData<DynamicInputsNode, List<WoFormNodeMixin>,
       DynamicInputsNodeUiSettings> data;
 
   @override
   Widget build(BuildContext context) {
-    void onAddChoice(WoFormElementMixin inputFromTemplate) {
+    void onAddChoice(WoFormNodeMixin inputFromTemplate) {
       final input = inputFromTemplate.withId(
         id: (data.uiSettings.generateId ??
                 WoFormTheme.of(context)?.generateId ??
@@ -32,14 +32,14 @@ class DynamicInputsNodeWidget extends StatelessWidget {
 
       data.onValueChanged?.call(List.from(data.value ?? [])..add(input));
 
-      final form = context.read<WoForm>();
+      final form = context.read<RootNode>();
       final valuesCubit = context.read<WoFormValuesCubit>();
       final values = valuesCubit.state;
       for (final path in input.getAllInputPaths(
         values: values,
         parentPath: data.path,
       )) {
-        final input = form.getInput(path: path, values: values);
+        final input = form.getChild(path: path, parentPath: '', values: values);
         if (input is WoFormInputMixin) {
           valuesCubit.onValueChanged(
             path: path,
@@ -103,6 +103,6 @@ class DynamicInputsNodeWidget extends StatelessWidget {
     );
   }
 
-  void onRemoveChoice(WoFormElementMixin input) =>
+  void onRemoveChoice(WoFormNodeMixin input) =>
       data.onValueChanged?.call(List.from(data.value ?? [])..remove(input));
 }

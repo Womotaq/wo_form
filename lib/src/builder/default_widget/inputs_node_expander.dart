@@ -17,7 +17,7 @@ class InputsNodeExpander extends StatelessWidget {
       trailing: const Icon(Icons.chevron_right),
       onTap: () => context.pushPage(
         RepositoryProvider.value(
-          value: context.read<WoForm>(),
+          value: context.read<RootNode>(),
           child: MultiBlocProvider(
             providers: [
               BlocProvider.value(

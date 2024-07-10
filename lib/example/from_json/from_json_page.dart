@@ -19,19 +19,16 @@ class FromJsonPage extends StatelessWidget {
           disableSubmitMode: DisableSubmitButton.whenInvalid,
         ),
       ),
-      child: const InputsNode(
-        id: '#',
-        children: [
-          StringInput(
-            id: 'json',
-            isRequired: true,
-            uiSettings: StringInputUiSettings(
-              maxLines: 20,
-              hintText: 'Copiez ici le formulaire en format json.',
-            ),
+      children: [
+        StringInput(
+          id: 'json',
+          isRequired: true,
+          uiSettings: StringInputUiSettings(
+            maxLines: 20,
+            hintText: 'Copiez ici le formulaire en format json.',
           ),
-        ],
-      ),
+        ),
+      ],
       onSubmitSuccess: (context) {
         final jsonString =
             context.read<WoFormValuesCubit>().state['/json'] as String?;
@@ -49,9 +46,9 @@ class FromJsonPage extends StatelessWidget {
           return;
         }
 
-        final WoForm form;
+        final RootNode root;
         try {
-          form = WoForm.fromJson(json);
+          root = RootNode.fromJson(json);
         } catch (e) {
           showErrorDialog(
             context,
@@ -61,10 +58,14 @@ class FromJsonPage extends StatelessWidget {
           return;
         }
 
-        context
-            .pushPage(form.copyWith(onSubmitSuccess: showJsonDialog).toPage());
+        context.pushPage(
+          WoForm.root(
+            root: root,
+            onSubmitSuccess: showJsonDialog,
+          ),
+        );
       },
-    ).toPage();
+    );
   }
 
   void showErrorDialog(

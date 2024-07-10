@@ -23,63 +23,61 @@ class ReportPage extends StatelessWidget {
           disableSubmitMode: DisableSubmitButton.whenInvalid,
         ),
       ),
-      child: InputsNode(
-        id: '#',
-        exportSettings: const ExportSettings(
-          metadata: {
-            'reporterId': 'me',
-            'reportedId': 'him',
-          },
-        ),
-        children: [
-          SelectInput<ReportType>(
-            id: 'type',
-            availibleValues: ReportType.values,
-            minCount: 1,
-            maxCount: 1,
-            uiSettings: SelectInputUiSettings(
-              labelText: 'Motif',
-              valueBuilder: (type) => Text(
-                switch (type) {
-                  null => 'Sélectionnez un motif',
-                  ReportType.cheating => 'Triche',
-                  ReportType.fairPlay => 'Fair play',
-                  ReportType.verbalAbuse => 'Violence verbale',
-                  ReportType.other => 'Autre',
-                },
-              ),
-            ),
-          ),
-          const StringInput(
-            id: 'message',
-            uiSettings: StringInputUiSettings(
-              hintText: 'Dites-en plus !',
-              textCapitalization: TextCapitalization.sentences,
-              maxLines: 5,
-            ),
-          ),
-          const BooleanInput(
-            id: 'block',
-            uiSettings: BooleanInputUiSettings(
-              labelText: 'Bloquer cette raclure ?',
-              controlType: BooleanFieldControlType.checkbox,
-              controlAffinity: ListTileControlAffinity.leading,
-            ),
-          ),
-        ],
+      exportSettings: const ExportSettings(
+        metadata: {
+          'reporterId': 'me',
+          'reportedId': 'him',
+        },
       ),
+      children: [
+        SelectInput<ReportType>(
+          id: 'type',
+          availibleValues: ReportType.values,
+          minCount: 1,
+          maxCount: 1,
+          uiSettings: SelectInputUiSettings(
+            labelText: 'Motif',
+            valueBuilder: (type) => Text(
+              switch (type) {
+                null => 'Sélectionnez un motif',
+                ReportType.cheating => 'Triche',
+                ReportType.fairPlay => 'Fair play',
+                ReportType.verbalAbuse => 'Violence verbale',
+                ReportType.other => 'Autre',
+              },
+            ),
+          ),
+        ),
+        const StringInput(
+          id: 'message',
+          uiSettings: StringInputUiSettings(
+            hintText: 'Dites-en plus !',
+            textCapitalization: TextCapitalization.sentences,
+            maxLines: 5,
+          ),
+        ),
+        const BooleanInput(
+          id: 'block',
+          uiSettings: BooleanInputUiSettings(
+            labelText: 'Bloquer cette raclure ?',
+            controlType: BooleanFieldControlType.checkbox,
+            controlAffinity: ListTileControlAffinity.leading,
+          ),
+        ),
+      ],
       onSubmitting: (_, __) async {
         await Future<void>.delayed(const Duration(seconds: 3));
       },
       onSubmitSuccess: (context) {
-        final form = context.read<WoForm>();
+        final root = context.read<RootNode>();
         final values = context.read<WoFormValuesCubit>().state;
+
         showDialog<void>(
           context: context,
           builder: (BuildContext dialogContext) {
             return AlertDialog(
               title: const Text("Ce json vient d'être envoyé."),
-              content: Text(readableJson(form.export(values))),
+              content: Text(readableJson(root.exportToMap(values: values))),
               actions: [
                 FilledButton.tonalIcon(
                   onPressed: () => Navigator.of(dialogContext).pop(),
@@ -90,6 +88,6 @@ class ReportPage extends StatelessWidget {
           },
         );
       },
-    ).toPage();
+    );
   }
 }

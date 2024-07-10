@@ -21,9 +21,8 @@ DynamicInputTemplate _$DynamicInputTemplateFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$DynamicInputTemplate {
   @JsonKey(
-      fromJson: WoFormElementMixin.fromJson,
-      toJson: WoFormElementMixin.staticToJson)
-  WoFormElementMixin get child => throw _privateConstructorUsedError;
+      fromJson: WoFormNodeMixin.fromJson, toJson: WoFormNodeMixin.staticToJson)
+  WoFormNodeMixin get child => throw _privateConstructorUsedError;
   @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
   DynamicInputUiSettings get uiSettings => throw _privateConstructorUsedError;
 
@@ -41,9 +40,9 @@ abstract class $DynamicInputTemplateCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(
-          fromJson: WoFormElementMixin.fromJson,
-          toJson: WoFormElementMixin.staticToJson)
-      WoFormElementMixin child,
+          fromJson: WoFormNodeMixin.fromJson,
+          toJson: WoFormNodeMixin.staticToJson)
+      WoFormNodeMixin child,
       @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
       DynamicInputUiSettings uiSettings});
 
@@ -71,7 +70,7 @@ class _$DynamicInputTemplateCopyWithImpl<$Res,
       child: null == child
           ? _value.child
           : child // ignore: cast_nullable_to_non_nullable
-              as WoFormElementMixin,
+              as WoFormNodeMixin,
       uiSettings: null == uiSettings
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
@@ -98,9 +97,9 @@ abstract class _$$DynamicInputTemplateImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(
-          fromJson: WoFormElementMixin.fromJson,
-          toJson: WoFormElementMixin.staticToJson)
-      WoFormElementMixin child,
+          fromJson: WoFormNodeMixin.fromJson,
+          toJson: WoFormNodeMixin.staticToJson)
+      WoFormNodeMixin child,
       @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
       DynamicInputUiSettings uiSettings});
 
@@ -126,7 +125,7 @@ class __$$DynamicInputTemplateImplCopyWithImpl<$Res>
       child: null == child
           ? _value.child
           : child // ignore: cast_nullable_to_non_nullable
-              as WoFormElementMixin,
+              as WoFormNodeMixin,
       uiSettings: null == uiSettings
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
@@ -140,8 +139,8 @@ class __$$DynamicInputTemplateImplCopyWithImpl<$Res>
 class _$DynamicInputTemplateImpl extends _DynamicInputTemplate {
   const _$DynamicInputTemplateImpl(
       {@JsonKey(
-          fromJson: WoFormElementMixin.fromJson,
-          toJson: WoFormElementMixin.staticToJson)
+          fromJson: WoFormNodeMixin.fromJson,
+          toJson: WoFormNodeMixin.staticToJson)
       required this.child,
       @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
       this.uiSettings = const DynamicInputUiSettings()})
@@ -152,9 +151,8 @@ class _$DynamicInputTemplateImpl extends _DynamicInputTemplate {
 
   @override
   @JsonKey(
-      fromJson: WoFormElementMixin.fromJson,
-      toJson: WoFormElementMixin.staticToJson)
-  final WoFormElementMixin child;
+      fromJson: WoFormNodeMixin.fromJson, toJson: WoFormNodeMixin.staticToJson)
+  final WoFormNodeMixin child;
   @override
   @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
   final DynamicInputUiSettings uiSettings;
@@ -197,9 +195,9 @@ class _$DynamicInputTemplateImpl extends _DynamicInputTemplate {
 abstract class _DynamicInputTemplate extends DynamicInputTemplate {
   const factory _DynamicInputTemplate(
       {@JsonKey(
-          fromJson: WoFormElementMixin.fromJson,
-          toJson: WoFormElementMixin.staticToJson)
-      required final WoFormElementMixin child,
+          fromJson: WoFormNodeMixin.fromJson,
+          toJson: WoFormNodeMixin.staticToJson)
+      required final WoFormNodeMixin child,
       @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
       final DynamicInputUiSettings uiSettings}) = _$DynamicInputTemplateImpl;
   const _DynamicInputTemplate._() : super._();
@@ -209,9 +207,8 @@ abstract class _DynamicInputTemplate extends DynamicInputTemplate {
 
   @override
   @JsonKey(
-      fromJson: WoFormElementMixin.fromJson,
-      toJson: WoFormElementMixin.staticToJson)
-  WoFormElementMixin get child;
+      fromJson: WoFormNodeMixin.fromJson, toJson: WoFormNodeMixin.staticToJson)
+  WoFormNodeMixin get child;
   @override
   @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
   DynamicInputUiSettings get uiSettings;
@@ -256,7 +253,7 @@ mixin _$WoFormNode {
         dynamicInputs,
     required TResult Function(
             String id,
-            @InputsListConverter() List<WoFormElementMixin> children,
+            @InputsListConverter() List<WoFormNodeMixin> children,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
             InputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -266,7 +263,7 @@ mixin _$WoFormNode {
             String id,
             String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormElementMixin Function(String, Object?)? builder,
+            WoFormNodeMixin Function(String, Object?)? builder,
             Object? initialValue)
         valueBuilder,
     required TResult Function(
@@ -297,7 +294,7 @@ mixin _$WoFormNode {
         dynamicInputs,
     TResult? Function(
             String id,
-            @InputsListConverter() List<WoFormElementMixin> children,
+            @InputsListConverter() List<WoFormNodeMixin> children,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
             InputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -307,7 +304,7 @@ mixin _$WoFormNode {
             String id,
             String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormElementMixin Function(String, Object?)? builder,
+            WoFormNodeMixin Function(String, Object?)? builder,
             Object? initialValue)?
         valueBuilder,
     TResult? Function(
@@ -338,7 +335,7 @@ mixin _$WoFormNode {
         dynamicInputs,
     TResult Function(
             String id,
-            @InputsListConverter() List<WoFormElementMixin> children,
+            @InputsListConverter() List<WoFormNodeMixin> children,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
             InputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -348,7 +345,7 @@ mixin _$WoFormNode {
             String id,
             String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormElementMixin Function(String, Object?)? builder,
+            WoFormNodeMixin Function(String, Object?)? builder,
             Object? initialValue)?
         valueBuilder,
     TResult Function(
@@ -598,7 +595,7 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
         dynamicInputs,
     required TResult Function(
             String id,
-            @InputsListConverter() List<WoFormElementMixin> children,
+            @InputsListConverter() List<WoFormNodeMixin> children,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
             InputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -608,7 +605,7 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
             String id,
             String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormElementMixin Function(String, Object?)? builder,
+            WoFormNodeMixin Function(String, Object?)? builder,
             Object? initialValue)
         valueBuilder,
     required TResult Function(
@@ -642,7 +639,7 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
         dynamicInputs,
     TResult? Function(
             String id,
-            @InputsListConverter() List<WoFormElementMixin> children,
+            @InputsListConverter() List<WoFormNodeMixin> children,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
             InputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -652,7 +649,7 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
             String id,
             String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormElementMixin Function(String, Object?)? builder,
+            WoFormNodeMixin Function(String, Object?)? builder,
             Object? initialValue)?
         valueBuilder,
     TResult? Function(
@@ -686,7 +683,7 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
         dynamicInputs,
     TResult Function(
             String id,
-            @InputsListConverter() List<WoFormElementMixin> children,
+            @InputsListConverter() List<WoFormNodeMixin> children,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
             InputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -696,7 +693,7 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
             String id,
             String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormElementMixin Function(String, Object?)? builder,
+            WoFormNodeMixin Function(String, Object?)? builder,
             Object? initialValue)?
         valueBuilder,
     TResult Function(
@@ -806,7 +803,7 @@ abstract class _$$InputsNodeImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      @InputsListConverter() List<WoFormElementMixin> children,
+      @InputsListConverter() List<WoFormNodeMixin> children,
       @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
       InputsNodeUiSettings uiSettings,
       @JsonKey(toJson: ExportSettings.staticToJson)
@@ -840,7 +837,7 @@ class __$$InputsNodeImplCopyWithImpl<$Res>
       children: null == children
           ? _value._children
           : children // ignore: cast_nullable_to_non_nullable
-              as List<WoFormElementMixin>,
+              as List<WoFormNodeMixin>,
       uiSettings: null == uiSettings
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
@@ -874,7 +871,7 @@ class __$$InputsNodeImplCopyWithImpl<$Res>
 class _$InputsNodeImpl extends InputsNode {
   const _$InputsNodeImpl(
       {required this.id,
-      @InputsListConverter() final List<WoFormElementMixin> children = const [],
+      @InputsListConverter() final List<WoFormNodeMixin> children = const [],
       @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
       this.uiSettings = const InputsNodeUiSettings(),
       @JsonKey(toJson: ExportSettings.staticToJson)
@@ -889,11 +886,11 @@ class _$InputsNodeImpl extends InputsNode {
 
   @override
   final String id;
-  final List<WoFormElementMixin> _children;
+  final List<WoFormNodeMixin> _children;
   @override
   @JsonKey()
   @InputsListConverter()
-  List<WoFormElementMixin> get children {
+  List<WoFormNodeMixin> get children {
     if (_children is EqualUnmodifiableListView) return _children;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_children);
@@ -956,7 +953,7 @@ class _$InputsNodeImpl extends InputsNode {
         dynamicInputs,
     required TResult Function(
             String id,
-            @InputsListConverter() List<WoFormElementMixin> children,
+            @InputsListConverter() List<WoFormNodeMixin> children,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
             InputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -966,7 +963,7 @@ class _$InputsNodeImpl extends InputsNode {
             String id,
             String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormElementMixin Function(String, Object?)? builder,
+            WoFormNodeMixin Function(String, Object?)? builder,
             Object? initialValue)
         valueBuilder,
     required TResult Function(
@@ -1000,7 +997,7 @@ class _$InputsNodeImpl extends InputsNode {
         dynamicInputs,
     TResult? Function(
             String id,
-            @InputsListConverter() List<WoFormElementMixin> children,
+            @InputsListConverter() List<WoFormNodeMixin> children,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
             InputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -1010,7 +1007,7 @@ class _$InputsNodeImpl extends InputsNode {
             String id,
             String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormElementMixin Function(String, Object?)? builder,
+            WoFormNodeMixin Function(String, Object?)? builder,
             Object? initialValue)?
         valueBuilder,
     TResult? Function(
@@ -1044,7 +1041,7 @@ class _$InputsNodeImpl extends InputsNode {
         dynamicInputs,
     TResult Function(
             String id,
-            @InputsListConverter() List<WoFormElementMixin> children,
+            @InputsListConverter() List<WoFormNodeMixin> children,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
             InputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -1054,7 +1051,7 @@ class _$InputsNodeImpl extends InputsNode {
             String id,
             String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormElementMixin Function(String, Object?)? builder,
+            WoFormNodeMixin Function(String, Object?)? builder,
             Object? initialValue)?
         valueBuilder,
     TResult Function(
@@ -1129,7 +1126,7 @@ class _$InputsNodeImpl extends InputsNode {
 abstract class InputsNode extends WoFormNode {
   const factory InputsNode(
       {required final String id,
-      @InputsListConverter() final List<WoFormElementMixin> children,
+      @InputsListConverter() final List<WoFormNodeMixin> children,
       @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
       final InputsNodeUiSettings uiSettings,
       @JsonKey(toJson: ExportSettings.staticToJson)
@@ -1142,7 +1139,7 @@ abstract class InputsNode extends WoFormNode {
   @override
   String get id;
   @InputsListConverter()
-  List<WoFormElementMixin> get children;
+  List<WoFormNodeMixin> get children;
   @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
   InputsNodeUiSettings get uiSettings;
   @JsonKey(toJson: ExportSettings.staticToJson)
@@ -1165,7 +1162,7 @@ abstract class _$$ValueBuilderNodeImplCopyWith<$Res>
       {String id,
       String path,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      WoFormElementMixin Function(String, Object?)? builder,
+      WoFormNodeMixin Function(String, Object?)? builder,
       Object? initialValue});
 }
 
@@ -1197,7 +1194,7 @@ class __$$ValueBuilderNodeImplCopyWithImpl<$Res>
       builder: freezed == builder
           ? _value.builder
           : builder // ignore: cast_nullable_to_non_nullable
-              as WoFormElementMixin Function(String, Object?)?,
+              as WoFormNodeMixin Function(String, Object?)?,
       initialValue:
           freezed == initialValue ? _value.initialValue : initialValue,
     ));
@@ -1226,7 +1223,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
   final String path;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final WoFormElementMixin Function(String, Object?)? builder;
+  final WoFormNodeMixin Function(String, Object?)? builder;
   @override
   final Object? initialValue;
 
@@ -1276,7 +1273,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
         dynamicInputs,
     required TResult Function(
             String id,
-            @InputsListConverter() List<WoFormElementMixin> children,
+            @InputsListConverter() List<WoFormNodeMixin> children,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
             InputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -1286,7 +1283,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
             String id,
             String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormElementMixin Function(String, Object?)? builder,
+            WoFormNodeMixin Function(String, Object?)? builder,
             Object? initialValue)
         valueBuilder,
     required TResult Function(
@@ -1320,7 +1317,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
         dynamicInputs,
     TResult? Function(
             String id,
-            @InputsListConverter() List<WoFormElementMixin> children,
+            @InputsListConverter() List<WoFormNodeMixin> children,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
             InputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -1330,7 +1327,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
             String id,
             String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormElementMixin Function(String, Object?)? builder,
+            WoFormNodeMixin Function(String, Object?)? builder,
             Object? initialValue)?
         valueBuilder,
     TResult? Function(
@@ -1364,7 +1361,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
         dynamicInputs,
     TResult Function(
             String id,
-            @InputsListConverter() List<WoFormElementMixin> children,
+            @InputsListConverter() List<WoFormNodeMixin> children,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
             InputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -1374,7 +1371,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
             String id,
             String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormElementMixin Function(String, Object?)? builder,
+            WoFormNodeMixin Function(String, Object?)? builder,
             Object? initialValue)?
         valueBuilder,
     TResult Function(
@@ -1451,7 +1448,7 @@ abstract class ValueBuilderNode extends WoFormNode {
       {required final String id,
       required final String path,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      final WoFormElementMixin Function(String, Object?)? builder,
+      final WoFormNodeMixin Function(String, Object?)? builder,
       final Object? initialValue}) = _$ValueBuilderNodeImpl;
   const ValueBuilderNode._() : super._();
 
@@ -1462,7 +1459,7 @@ abstract class ValueBuilderNode extends WoFormNode {
   String get id;
   String get path;
   @JsonKey(includeToJson: false, includeFromJson: false)
-  WoFormElementMixin Function(String, Object?)? get builder;
+  WoFormNodeMixin Function(String, Object?)? get builder;
   Object? get initialValue;
   @override
   @JsonKey(ignore: true)
@@ -1597,7 +1594,7 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
         dynamicInputs,
     required TResult Function(
             String id,
-            @InputsListConverter() List<WoFormElementMixin> children,
+            @InputsListConverter() List<WoFormNodeMixin> children,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
             InputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -1607,7 +1604,7 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
             String id,
             String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormElementMixin Function(String, Object?)? builder,
+            WoFormNodeMixin Function(String, Object?)? builder,
             Object? initialValue)
         valueBuilder,
     required TResult Function(
@@ -1641,7 +1638,7 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
         dynamicInputs,
     TResult? Function(
             String id,
-            @InputsListConverter() List<WoFormElementMixin> children,
+            @InputsListConverter() List<WoFormNodeMixin> children,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
             InputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -1651,7 +1648,7 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
             String id,
             String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormElementMixin Function(String, Object?)? builder,
+            WoFormNodeMixin Function(String, Object?)? builder,
             Object? initialValue)?
         valueBuilder,
     TResult? Function(
@@ -1685,7 +1682,7 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
         dynamicInputs,
     TResult Function(
             String id,
-            @InputsListConverter() List<WoFormElementMixin> children,
+            @InputsListConverter() List<WoFormNodeMixin> children,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
             InputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -1695,7 +1692,7 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
             String id,
             String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormElementMixin Function(String, Object?)? builder,
+            WoFormNodeMixin Function(String, Object?)? builder,
             Object? initialValue)?
         valueBuilder,
     TResult Function(
@@ -1895,7 +1892,7 @@ class _$WidgetNodeImpl extends WidgetNode {
         dynamicInputs,
     required TResult Function(
             String id,
-            @InputsListConverter() List<WoFormElementMixin> children,
+            @InputsListConverter() List<WoFormNodeMixin> children,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
             InputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -1905,7 +1902,7 @@ class _$WidgetNodeImpl extends WidgetNode {
             String id,
             String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormElementMixin Function(String, Object?)? builder,
+            WoFormNodeMixin Function(String, Object?)? builder,
             Object? initialValue)
         valueBuilder,
     required TResult Function(
@@ -1939,7 +1936,7 @@ class _$WidgetNodeImpl extends WidgetNode {
         dynamicInputs,
     TResult? Function(
             String id,
-            @InputsListConverter() List<WoFormElementMixin> children,
+            @InputsListConverter() List<WoFormNodeMixin> children,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
             InputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -1949,7 +1946,7 @@ class _$WidgetNodeImpl extends WidgetNode {
             String id,
             String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormElementMixin Function(String, Object?)? builder,
+            WoFormNodeMixin Function(String, Object?)? builder,
             Object? initialValue)?
         valueBuilder,
     TResult? Function(
@@ -1983,7 +1980,7 @@ class _$WidgetNodeImpl extends WidgetNode {
         dynamicInputs,
     TResult Function(
             String id,
-            @InputsListConverter() List<WoFormElementMixin> children,
+            @InputsListConverter() List<WoFormNodeMixin> children,
             @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
             InputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -1993,7 +1990,7 @@ class _$WidgetNodeImpl extends WidgetNode {
             String id,
             String path,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormElementMixin Function(String, Object?)? builder,
+            WoFormNodeMixin Function(String, Object?)? builder,
             Object? initialValue)?
         valueBuilder,
     TResult Function(
@@ -2089,7 +2086,7 @@ abstract class WidgetNode extends WoFormNode {
 mixin _$FutureNode<T> {
   String get id => throw _privateConstructorUsedError;
   Future<T>? get future => throw _privateConstructorUsedError;
-  WoFormElementMixin Function(String, AsyncSnapshot<T?>) get builder =>
+  WoFormNodeMixin Function(String, AsyncSnapshot<T?>) get builder =>
       throw _privateConstructorUsedError;
   T? get initialData => throw _privateConstructorUsedError;
 
@@ -2111,7 +2108,7 @@ abstract class $FutureNodeCopyWith<T, $Res> {
   $Res call(
       {String id,
       Future<T>? future,
-      WoFormElementMixin Function(String, AsyncSnapshot<T?>) builder,
+      WoFormNodeMixin Function(String, AsyncSnapshot<T?>) builder,
       T? initialData,
       bool willResetToInitialValues});
 }
@@ -2147,7 +2144,7 @@ class _$FutureNodeCopyWithImpl<T, $Res, $Val extends FutureNode<T>>
       builder: null == builder
           ? _value.builder
           : builder // ignore: cast_nullable_to_non_nullable
-              as WoFormElementMixin Function(String, AsyncSnapshot<T?>),
+              as WoFormNodeMixin Function(String, AsyncSnapshot<T?>),
       initialData: freezed == initialData
           ? _value.initialData
           : initialData // ignore: cast_nullable_to_non_nullable
@@ -2171,7 +2168,7 @@ abstract class _$$FutureNodeImplCopyWith<T, $Res>
   $Res call(
       {String id,
       Future<T>? future,
-      WoFormElementMixin Function(String, AsyncSnapshot<T?>) builder,
+      WoFormNodeMixin Function(String, AsyncSnapshot<T?>) builder,
       T? initialData,
       bool willResetToInitialValues});
 }
@@ -2205,7 +2202,7 @@ class __$$FutureNodeImplCopyWithImpl<T, $Res>
       builder: null == builder
           ? _value.builder
           : builder // ignore: cast_nullable_to_non_nullable
-              as WoFormElementMixin Function(String, AsyncSnapshot<T?>),
+              as WoFormNodeMixin Function(String, AsyncSnapshot<T?>),
       initialData: freezed == initialData
           ? _value.initialData
           : initialData // ignore: cast_nullable_to_non_nullable
@@ -2234,7 +2231,7 @@ class _$FutureNodeImpl<T> extends _FutureNode<T> {
   @override
   final Future<T>? future;
   @override
-  final WoFormElementMixin Function(String, AsyncSnapshot<T?>) builder;
+  final WoFormNodeMixin Function(String, AsyncSnapshot<T?>) builder;
   @override
   final T? initialData;
 
@@ -2284,7 +2281,7 @@ abstract class _FutureNode<T> extends FutureNode<T> {
   const factory _FutureNode(
       {required final String id,
       required final Future<T>? future,
-      required final WoFormElementMixin Function(String, AsyncSnapshot<T?>)
+      required final WoFormNodeMixin Function(String, AsyncSnapshot<T?>)
           builder,
       final T? initialData,
       final bool willResetToInitialValues}) = _$FutureNodeImpl<T>;
@@ -2295,7 +2292,7 @@ abstract class _FutureNode<T> extends FutureNode<T> {
   @override
   Future<T>? get future;
   @override
-  WoFormElementMixin Function(String, AsyncSnapshot<T?>) get builder;
+  WoFormNodeMixin Function(String, AsyncSnapshot<T?>) get builder;
   @override
   T? get initialData;
   @override
@@ -2306,5 +2303,263 @@ abstract class _FutureNode<T> extends FutureNode<T> {
   @override
   @JsonKey(ignore: true)
   _$$FutureNodeImplCopyWith<T, _$FutureNodeImpl<T>> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+RootNode _$RootNodeFromJson(Map<String, dynamic> json) {
+  return _RootNode.fromJson(json);
+}
+
+/// @nodoc
+mixin _$RootNode {
+  String get id => throw _privateConstructorUsedError;
+  @InputsListConverter()
+  List<WoFormNodeMixin> get children => throw _privateConstructorUsedError;
+  @JsonKey(toJson: WoFormUiSettings.staticToJson)
+  WoFormUiSettings get uiSettings => throw _privateConstructorUsedError;
+  @JsonKey(toJson: ExportSettings.staticToJson)
+  ExportSettings get exportSettings => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $RootNodeCopyWith<RootNode> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $RootNodeCopyWith<$Res> {
+  factory $RootNodeCopyWith(RootNode value, $Res Function(RootNode) then) =
+      _$RootNodeCopyWithImpl<$Res, RootNode>;
+  @useResult
+  $Res call(
+      {String id,
+      @InputsListConverter() List<WoFormNodeMixin> children,
+      @JsonKey(toJson: WoFormUiSettings.staticToJson)
+      WoFormUiSettings uiSettings,
+      @JsonKey(toJson: ExportSettings.staticToJson)
+      ExportSettings exportSettings});
+
+  $WoFormUiSettingsCopyWith<$Res> get uiSettings;
+  $ExportSettingsCopyWith<$Res> get exportSettings;
+}
+
+/// @nodoc
+class _$RootNodeCopyWithImpl<$Res, $Val extends RootNode>
+    implements $RootNodeCopyWith<$Res> {
+  _$RootNodeCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? children = null,
+    Object? uiSettings = null,
+    Object? exportSettings = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      children: null == children
+          ? _value.children
+          : children // ignore: cast_nullable_to_non_nullable
+              as List<WoFormNodeMixin>,
+      uiSettings: null == uiSettings
+          ? _value.uiSettings
+          : uiSettings // ignore: cast_nullable_to_non_nullable
+              as WoFormUiSettings,
+      exportSettings: null == exportSettings
+          ? _value.exportSettings
+          : exportSettings // ignore: cast_nullable_to_non_nullable
+              as ExportSettings,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $WoFormUiSettingsCopyWith<$Res> get uiSettings {
+    return $WoFormUiSettingsCopyWith<$Res>(_value.uiSettings, (value) {
+      return _then(_value.copyWith(uiSettings: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ExportSettingsCopyWith<$Res> get exportSettings {
+    return $ExportSettingsCopyWith<$Res>(_value.exportSettings, (value) {
+      return _then(_value.copyWith(exportSettings: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$RootNodeImplCopyWith<$Res>
+    implements $RootNodeCopyWith<$Res> {
+  factory _$$RootNodeImplCopyWith(
+          _$RootNodeImpl value, $Res Function(_$RootNodeImpl) then) =
+      __$$RootNodeImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      @InputsListConverter() List<WoFormNodeMixin> children,
+      @JsonKey(toJson: WoFormUiSettings.staticToJson)
+      WoFormUiSettings uiSettings,
+      @JsonKey(toJson: ExportSettings.staticToJson)
+      ExportSettings exportSettings});
+
+  @override
+  $WoFormUiSettingsCopyWith<$Res> get uiSettings;
+  @override
+  $ExportSettingsCopyWith<$Res> get exportSettings;
+}
+
+/// @nodoc
+class __$$RootNodeImplCopyWithImpl<$Res>
+    extends _$RootNodeCopyWithImpl<$Res, _$RootNodeImpl>
+    implements _$$RootNodeImplCopyWith<$Res> {
+  __$$RootNodeImplCopyWithImpl(
+      _$RootNodeImpl _value, $Res Function(_$RootNodeImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? children = null,
+    Object? uiSettings = null,
+    Object? exportSettings = null,
+  }) {
+    return _then(_$RootNodeImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      children: null == children
+          ? _value._children
+          : children // ignore: cast_nullable_to_non_nullable
+              as List<WoFormNodeMixin>,
+      uiSettings: null == uiSettings
+          ? _value.uiSettings
+          : uiSettings // ignore: cast_nullable_to_non_nullable
+              as WoFormUiSettings,
+      exportSettings: null == exportSettings
+          ? _value.exportSettings
+          : exportSettings // ignore: cast_nullable_to_non_nullable
+              as ExportSettings,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$RootNodeImpl extends _RootNode {
+  const _$RootNodeImpl(
+      {this.id = '#',
+      @InputsListConverter() final List<WoFormNodeMixin> children = const [],
+      @JsonKey(toJson: WoFormUiSettings.staticToJson)
+      this.uiSettings = const WoFormUiSettings(),
+      @JsonKey(toJson: ExportSettings.staticToJson)
+      this.exportSettings = const ExportSettings()})
+      : _children = children,
+        super._();
+
+  factory _$RootNodeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RootNodeImplFromJson(json);
+
+  @override
+  @JsonKey()
+  final String id;
+  final List<WoFormNodeMixin> _children;
+  @override
+  @JsonKey()
+  @InputsListConverter()
+  List<WoFormNodeMixin> get children {
+    if (_children is EqualUnmodifiableListView) return _children;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_children);
+  }
+
+  @override
+  @JsonKey(toJson: WoFormUiSettings.staticToJson)
+  final WoFormUiSettings uiSettings;
+  @override
+  @JsonKey(toJson: ExportSettings.staticToJson)
+  final ExportSettings exportSettings;
+
+  @override
+  String toString() {
+    return 'RootNode(id: $id, children: $children, uiSettings: $uiSettings, exportSettings: $exportSettings)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RootNodeImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            const DeepCollectionEquality().equals(other._children, _children) &&
+            (identical(other.uiSettings, uiSettings) ||
+                other.uiSettings == uiSettings) &&
+            (identical(other.exportSettings, exportSettings) ||
+                other.exportSettings == exportSettings));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      const DeepCollectionEquality().hash(_children),
+      uiSettings,
+      exportSettings);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$RootNodeImplCopyWith<_$RootNodeImpl> get copyWith =>
+      __$$RootNodeImplCopyWithImpl<_$RootNodeImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$RootNodeImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _RootNode extends RootNode {
+  const factory _RootNode(
+      {final String id,
+      @InputsListConverter() final List<WoFormNodeMixin> children,
+      @JsonKey(toJson: WoFormUiSettings.staticToJson)
+      final WoFormUiSettings uiSettings,
+      @JsonKey(toJson: ExportSettings.staticToJson)
+      final ExportSettings exportSettings}) = _$RootNodeImpl;
+  const _RootNode._() : super._();
+
+  factory _RootNode.fromJson(Map<String, dynamic> json) =
+      _$RootNodeImpl.fromJson;
+
+  @override
+  String get id;
+  @override
+  @InputsListConverter()
+  List<WoFormNodeMixin> get children;
+  @override
+  @JsonKey(toJson: WoFormUiSettings.staticToJson)
+  WoFormUiSettings get uiSettings;
+  @override
+  @JsonKey(toJson: ExportSettings.staticToJson)
+  ExportSettings get exportSettings;
+  @override
+  @JsonKey(ignore: true)
+  _$$RootNodeImplCopyWith<_$RootNodeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

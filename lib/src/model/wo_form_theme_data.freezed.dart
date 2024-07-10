@@ -42,7 +42,7 @@ mixin _$WoFormThemeData {
       throw _privateConstructorUsedError;
   OnSubmitErrorDef? get onSubmitError => throw _privateConstructorUsedError;
 
-  /// This spacing will be added at the bottom of each [WoFormElementMixin].
+  /// This spacing will be added at the bottom of each [WoFormNodeMixin].
   double? get verticalSpacing => throw _privateConstructorUsedError;
 
   /// Add the character '*' after the labelText of [WoFormInput]s.
@@ -368,7 +368,7 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
   @override
   final OnSubmitErrorDef? onSubmitError;
 
-  /// This spacing will be added at the bottom of each [WoFormElementMixin].
+  /// This spacing will be added at the bottom of each [WoFormNodeMixin].
   @override
   final double? verticalSpacing;
 
@@ -508,7 +508,7 @@ abstract class _WoFormThemeData extends WoFormThemeData {
   OnSubmitErrorDef? get onSubmitError;
   @override
 
-  /// This spacing will be added at the bottom of each [WoFormElementMixin].
+  /// This spacing will be added at the bottom of each [WoFormNodeMixin].
   double? get verticalSpacing;
   @override
 

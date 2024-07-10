@@ -1,6 +1,6 @@
 import 'package:wo_form/wo_form.dart';
 
-WoFormElementMixin createNumInputNode() => ValueBuilderNode(
+WoFormNodeMixin createNumInputNode() => ValueBuilderNode(
       id: 'labelText-builder',
       path: './numInput/uiSettings/labelText',
       builder: (context, value) {

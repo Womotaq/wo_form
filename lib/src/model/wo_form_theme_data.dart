@@ -25,7 +25,7 @@ class WoFormThemeData with _$WoFormThemeData {
     SubmitButtonBuilderDef? submitButtonBuilder,
     OnSubmitErrorDef? onSubmitError,
 
-    /// This spacing will be added at the bottom of each [WoFormElementMixin].
+    /// This spacing will be added at the bottom of each [WoFormNodeMixin].
     double? verticalSpacing,
 
     /// Add the character '*' after the labelText of [WoFormInput]s.

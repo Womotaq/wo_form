@@ -9,14 +9,14 @@ class WoFormElementBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final input = context.read<WoForm>().getInput(
+    final input = context.read<RootNode>().getChild(
           path: path,
           values: context.read<WoFormValuesCubit>().state,
         );
 
     if (input == null) {
       throw ArgumentError(
-        'Expected <WoFormElementMixin> at path: "$path", '
+        'Expected <WoFormNodeMixin> at path: "$path", '
         'found: <${input.runtimeType}>',
       );
     }

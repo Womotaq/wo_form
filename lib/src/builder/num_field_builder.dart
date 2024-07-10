@@ -14,13 +14,10 @@ class NumFieldBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final form = context.read<WoForm>();
+    final root = context.read<RootNode>();
     final valuesCubit = context.read<WoFormValuesCubit>();
 
-    final input = form.getInput(
-      path: path,
-      values: valuesCubit.state,
-    );
+    final input = root.getChild(path: path, values: valuesCubit.state);
     if (input is! NumInput) {
       throw ArgumentError(
         'Expected <NumInput> at path: "$path", '
@@ -32,7 +29,7 @@ class NumFieldBuilder extends StatelessWidget {
     var mergedSettings = uiSettings?.merge(inputSettings) ?? inputSettings;
 
     final showAsterisk = input.isRequired &&
-        (form.uiSettings.showAsteriskIfRequired ??
+        (root.uiSettings.showAsteriskIfRequired ??
             WoFormTheme.of(context)?.showAsteriskIfRequired ??
             true);
     if (showAsterisk && mergedSettings.labelText != null) {

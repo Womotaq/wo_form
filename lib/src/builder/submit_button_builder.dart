@@ -38,26 +38,21 @@ class SubmitButtonBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final form = context.read<WoForm>();
+    final root = context.read<RootNode>();
 
-    final disabled = switch (form.uiSettings.submitMode.disableSubmitMode) {
+    final disabled = switch (root.uiSettings.submitMode.disableSubmitMode) {
       DisableSubmitButton.whenInitialOrSubmitSuccess => switch (
             context.watch<WoFormStatusCubit>().state) {
           InitialStatus() || SubmitSuccessStatus() => true,
           _ => false,
         },
       DisableSubmitButton.whenInvalid => context.select(
-          (WoFormValuesCubit c) => form.child
-              .getErrors(
-                values: c.state,
-                parentPath: '',
-              )
-              .isNotEmpty,
+          (WoFormValuesCubit c) => root.getErrors(values: c.state).isNotEmpty,
         ),
       DisableSubmitButton.never => false,
     };
 
-    final submitMode = form.uiSettings.submitMode;
+    final submitMode = root.uiSettings.submitMode;
 
     final submitButtonData = SubmitButtonData(
       pageIndex: pageIndex,
@@ -77,7 +72,7 @@ class SubmitButtonBuilder extends StatelessWidget {
       position: submitMode.buttonPosition,
     );
 
-    return (form.uiSettings.submitButtonBuilder ??
+    return (root.uiSettings.submitButtonBuilder ??
             WoFormTheme.of(context)?.submitButtonBuilder ??
             SubmitButton.new)
         .call(submitButtonData);

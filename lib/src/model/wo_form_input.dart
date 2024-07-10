@@ -34,6 +34,13 @@ mixin WoFormInputMixin {
     required String parentPath,
   });
 
+  WoFormNodeMixin? getChild({
+    required String path,
+    required String parentPath,
+    required Map<String, dynamic> values,
+  }) =>
+      null;
+
   // TODO : rework ?
   String? getInvalidExplanation(
     dynamic value,
@@ -52,7 +59,7 @@ mixin WoFormInputMixin {
     return translateError?.call(error) ?? error.toString();
   }
 
-  // WoFormElementMixin
+  // WoFormNodeMixin
 
   String get id;
 
@@ -83,15 +90,23 @@ mixin WoFormInputMixin {
   Widget toWidget({required String parentPath, Key? key});
 }
 
+typedef GetCustomErrorDef<T> = WoFormInputError? Function(
+  T? value,
+  String path,
+);
+typedef GetCustomErrorForListDef<T> = WoFormInputError? Function(
+  List<T> value,
+  String path,
+);
+
 @freezed
-sealed class WoFormInput
-    with _$WoFormInput, WoFormElementMixin, WoFormInputMixin {
+sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
   const factory WoFormInput.boolean({
     required String id,
     bool? initialValue,
     @Default(false) bool isRequired,
     @JsonKey(includeToJson: false, includeFromJson: false)
-    WoFormInputError? Function(bool? value)? getCustomError,
+    GetCustomErrorDef<bool>? getCustomError,
     @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
     @Default(BooleanInputUiSettings())
     BooleanInputUiSettings uiSettings,
@@ -108,7 +123,7 @@ sealed class WoFormInput
     int? maxBound,
     @Default(0) int minBound,
     @JsonKey(includeToJson: false, includeFromJson: false)
-    WoFormInputError? Function(num? value)? getCustomError,
+    GetCustomErrorDef<num>? getCustomError,
     @Default(NumInputUiSettings()) NumInputUiSettings uiSettings,
   }) = NumInput;
 
@@ -123,7 +138,7 @@ sealed class WoFormInput
     @Default([]) List<String> initialValue,
     @Default([]) List<String> availibleValues,
     @JsonKey(includeToJson: false, includeFromJson: false)
-    WoFormInputError? Function(List<String> selectedValues)? getCustomError,
+    GetCustomErrorForListDef<String>? getCustomError,
     @Default(SelectInputUiSettings<String>())
     SelectInputUiSettings<String> uiSettings,
   }) = SelectStringInput;
@@ -134,7 +149,7 @@ sealed class WoFormInput
     @Default(false) bool isRequired,
     String? regexPattern,
     @JsonKey(includeToJson: false, includeFromJson: false)
-    WoFormInputError? Function(String? value)? getCustomError,
+    GetCustomErrorDef<String>? getCustomError,
     @JsonKey(toJson: StringInputUiSettings.staticToJson)
     @Default(StringInputUiSettings())
     StringInputUiSettings uiSettings,
@@ -156,7 +171,10 @@ sealed class WoFormInput
         ):
         value as bool?;
 
-        final customError = getCustomError?.call(value);
+        final customError = getCustomError?.call(
+          value,
+          '$parentPath/$id',
+        );
         if (customError != null) return customError;
 
         return isRequired && value != true
@@ -171,7 +189,10 @@ sealed class WoFormInput
         ):
         value as num?;
 
-        final customError = getCustomError?.call(value);
+        final customError = getCustomError?.call(
+          value,
+          '$parentPath/$id',
+        );
         if (customError != null) return customError;
 
         if (value == null) {
@@ -180,8 +201,9 @@ sealed class WoFormInput
               : null;
         }
 
-        if (value < minBound)
+        if (value < minBound) {
           return WoFormInputError.minBound(path: '$parentPath/$id');
+        }
         if (maxBound != null && value > maxBound) {
           return WoFormInputError.maxBound(path: '$parentPath/$id');
         }
@@ -196,7 +218,10 @@ sealed class WoFormInput
         ):
         value as String?;
 
-        final customError = getCustomError?.call(value);
+        final customError = getCustomError?.call(
+          value,
+          '$parentPath/$id',
+        );
         if (customError != null) return customError;
 
         if (value == null || value.isEmpty) {
@@ -280,8 +305,7 @@ sealed class WoFormInput
 
 @freezed
 @JsonSerializable(genericArgumentFactories: true)
-class SelectInput<T>
-    with _$SelectInput<T>, WoFormElementMixin, WoFormInputMixin {
+class SelectInput<T> with _$SelectInput<T>, WoFormNodeMixin, WoFormInputMixin {
   const factory SelectInput({
     required String id,
     required int? maxCount,
@@ -289,7 +313,7 @@ class SelectInput<T>
     @Default([]) List<T> initialValue_,
     @Default([]) List<T> availibleValues,
     @JsonKey(includeToJson: false, includeFromJson: false)
-    WoFormInputError? Function(List<T> selectedValues)? getCustomError,
+    GetCustomErrorForListDef<T>? getCustomError,
     SelectInputUiSettings<T>? uiSettings,
     @JsonKey(includeToJson: false, includeFromJson: false)
     Object? Function(T)? toJsonT,
@@ -311,8 +335,8 @@ class SelectInput<T>
     return _$SelectInputToJson(this, toJsonT!);
   }
 
-  // initialValue can't be set from the constructor, because it has
-  // a type parameter (obscure restrictions)
+  // initialValue_ can't be override WoFormNodeMixin.initialValue,
+  // because it has a type parameter
   @override
   List<T> get initialValue => initialValue_;
 
@@ -325,13 +349,16 @@ class SelectInput<T>
     required List<T> availibleValues,
     required int minCount,
     required int? maxCount,
-    required WoFormInputError? Function(List<T>)? getCustomError,
+    required GetCustomErrorForListDef<T>? getCustomError,
   }) {
-    final customError = getCustomError?.call(selectedValues);
+    final customError = getCustomError?.call(
+      selectedValues,
+      '$parentPath/$inputId',
+    );
     if (customError != null) return customError;
 
     if (minCount == 1 && maxCount == 1 && selectedValues.isEmpty) {
-      return WoFormInputError.empty(path: '$parentPath/${inputId}');
+      return WoFormInputError.empty(path: '$parentPath/$inputId');
     }
 
     if (selectedValues.length < minCount) {

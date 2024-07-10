@@ -12,8 +12,8 @@ class SelectFieldBuilder<T> extends StatelessWidget {
   final String path;
   final SelectInputUiSettings<T>? uiSettings;
 
-  SelectInput<T> getInput(WoForm form, WoFormValues values) {
-    final input = form.getInput(path: path, values: values);
+  SelectInput<T> getChild(WoFormNodeMixin form, WoFormValues values) {
+    final input = form.getChild(path: path, parentPath: '', values: values);
     if (input is! SelectInput<T>) {
       throw ArgumentError(
         'Expected <SelectInput<$T>> at path: "$path", '
@@ -26,16 +26,16 @@ class SelectFieldBuilder<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final form = context.read<WoForm>();
+    final root = context.read<RootNode>();
     final valuesCubit = context.read<WoFormValuesCubit>();
 
-    final input = getInput(form, valuesCubit.state);
+    final input = getChild(root, valuesCubit.state);
     var mergedSettings = uiSettings?.merge(input.uiSettings) ??
         input.uiSettings ??
         const SelectInputUiSettings();
 
     final showAsterisk = input.minCount > 0 &&
-        (form.uiSettings.showAsteriskIfRequired ??
+        (root.uiSettings.showAsteriskIfRequired ??
             WoFormTheme.of(context)?.showAsteriskIfRequired ??
             true);
     if (showAsterisk && mergedSettings.labelText != null) {
@@ -111,8 +111,12 @@ class SelectStringFieldBuilder extends SelectFieldBuilder<String> {
   });
 
   @override
-  SelectInput<String> getInput(WoForm form, WoFormValues values) {
-    final selectStringInput = form.getInput(path: path, values: values);
+  SelectInput<String> getChild(WoFormNodeMixin form, WoFormValues values) {
+    final selectStringInput = form.getChild(
+      path: path,
+      parentPath: '',
+      values: values,
+    );
     if (selectStringInput is! SelectStringInput) {
       throw ArgumentError(
         'Wrong input at path "$path". '

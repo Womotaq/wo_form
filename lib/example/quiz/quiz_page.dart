@@ -8,40 +8,36 @@ class QuizPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WoForm(
-      themeBuilder: (context) => Theme.of(context).copyWith(
+    return Theme(
+      data: Theme.of(context).copyWith(
         progressIndicatorTheme: const ProgressIndicatorThemeData(
           linearTrackColor: Colors.transparent,
         ),
       ),
-      // TODO : replace by onSubmtSuccess => lockAll
-      uiSettings: WoFormUiSettings(
-        titleText: 'Quiz du jour',
-        showAsteriskIfRequired: false,
-        submitMode: const PageByPageSubmitMode(
-          submitText: 'Terminer',
-        ),
-        submitButtonBuilder: (data) => Builder(
-          builder: (context) {
-            final form = context.read<WoForm>();
-            // TODO : new way
-            final currentInput = form.child;
+      child: WoForm(
+        // TODO : replace by onSubmtSuccess => lockAll ?
+        uiSettings: WoFormUiSettings(
+          titleText: 'Quiz du jour',
+          showAsteriskIfRequired: false,
+          submitMode: const PageByPageSubmitMode(
+            submitText: 'Terminer',
+          ),
+          submitButtonBuilder: (data) => Builder(
+            builder: (context) {
+              final root = context.read<RootNode>();
+              // TODO : new way
+              final inputIsLocked = context.select(
+                (WoFormLockCubit c) => c.inputIsLocked(path: '/${root.id}'),
+              );
 
-            final inputIsLocked = context.select(
-              (WoFormLockCubit c) =>
-                  c.inputIsLocked(path: '/${currentInput.id}'),
-            );
-
-            return [0, 2].contains(data.pageIndex) && !inputIsLocked
-                ? const SizedBox.shrink()
-                : (WoFormTheme.of(context)?.submitButtonBuilder ??
-                        SubmitButton.new)
-                    .call(data);
-          },
+              return [0, 2].contains(data.pageIndex) && !inputIsLocked
+                  ? const SizedBox.shrink()
+                  : (WoFormTheme.of(context)?.submitButtonBuilder ??
+                          SubmitButton.new)
+                      .call(data);
+            },
+          ),
         ),
-      ),
-      child: InputsNode(
-        id: '#',
         children: [
           InputsNode(
             id: 'q1-page',
@@ -251,9 +247,9 @@ class QuizPage extends StatelessWidget {
             },
           ),
         ],
+        onSubmitSuccess: showJsonDialog,
       ),
-      onSubmitSuccess: showJsonDialog,
-    ).toPage();
+    );
   }
 }
 

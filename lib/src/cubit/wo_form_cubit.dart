@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wo_form/src/_export.dart';
 import 'package:wo_form/wo_form.dart';
 
 class WoFormStatusCubit extends Cubit<WoFormStatus> {
@@ -40,20 +41,27 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     this._lockCubit, {
     required this.onSubmitting,
   })  : pageController = PageController(),
-        super(_root.initialValues(parentPath: ''));
+        super(_root.initialValues());
 
-  final WoFormElementMixin _root;
+  final RootNode _root;
   final WoFormStatusCubit _statusCubit;
   final WoFormLockCubit _lockCubit;
-  final Future<void> Function(WoFormElementMixin root, WoFormValues values)?
-      onSubmitting;
-  final PageController pageController; // LATER: replace by currentInputPath
+  final Future<void> Function(RootNode root, WoFormValues values)? onSubmitting;
+  final PageController pageController; // TODO: replace by currentInputPath
 
   final String _currentPath = '';
-  WoFormElementMixin get currentNode => _root.getInput(
+  WoFormNodeMixin get currentNode {
+    if (_currentPath == '') return _root;
+
+    try {
+      return _root.getChild(
+        path: _currentPath,
         values: state,
-        parentpath: _currentPath,
-      );
+      )!;
+    } catch (e) {
+      throw Exception('No node found at path $_currentPath');
+    }
+  }
 
   @override
   Future<void> close() {
@@ -63,7 +71,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   // --
 
-  void clear() => emit(_root.initialValues(parentPath: ''));
+  void clear() => emit(_root.initialValues());
 
   /// **Use this method precautiously since there is no type checking !**
   void onValueChanged({
@@ -136,11 +144,13 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
       _lockCubit.lockInput(path: path);
     }
 
-    try {
-      await onSubmitting?.call(node, state);
-      _statusCubit._setSubmitSuccess();
-    } catch (e, s) {
-      _statusCubit._setSubmitError(error: e, stackTrace: s);
+    if (node == _root) {
+      try {
+        await onSubmitting?.call(_root, state);
+        _statusCubit._setSubmitSuccess();
+      } catch (e, s) {
+        _statusCubit._setSubmitError(error: e, stackTrace: s);
+      }
     }
 
     for (final path in _lockCubit.state) {
@@ -151,33 +161,51 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   }
 }
 
-class WoFormW extends StatelessWidget {
-  const WoFormW({
-    required this.child,
+typedef OnSubmitErrorDef = void Function(
+  BuildContext context,
+  SubmitErrorStatus errorStatus,
+);
+
+class WoForm extends StatelessWidget {
+  WoForm({
+    required List<WoFormNodeMixin> children,
+    ExportSettings? exportSettings,
+    WoFormUiSettings? uiSettings,
     this.onSubmitting,
     this.onSubmitError,
     this.onSubmitSuccess,
     this.initialStatus = const InitialStatus(),
-    this.canQuit,
-    this.uiSettings = const WoFormUiSettings(),
+    this.pageBuilder,
+    super.key,
+  }) : root = RootNode(
+          exportSettings: exportSettings ?? const ExportSettings(),
+          uiSettings: uiSettings ?? const WoFormUiSettings(),
+          children: children,
+        );
+
+  const WoForm.root({
+    required this.root,
+    this.onSubmitting,
+    this.onSubmitError,
+    this.onSubmitSuccess,
+    this.initialStatus = const InitialStatus(),
     this.pageBuilder,
     super.key,
   });
 
-  final WoFormElementMixin child;
-  final Future<void> Function(WoFormElementMixin root, WoFormValues values)?
-      onSubmitting;
+  final RootNode root;
+  final Future<void> Function(RootNode root, WoFormValues values)? onSubmitting;
   final OnSubmitErrorDef? onSubmitError;
   final void Function(BuildContext context)? onSubmitSuccess;
   final WoFormStatus initialStatus;
-  final Future<bool?> Function(BuildContext context)? canQuit;
-  final WoFormUiSettings uiSettings;
-  final WoFormPageBuilderDef? pageBuilder;
+  final WidgetBuilderDef? pageBuilder;
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider<WoFormElementMixin>.value(
-      value: child,
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider.value(value: root),
+      ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
@@ -206,7 +234,7 @@ class WoFormW extends StatelessWidget {
               default:
             }
           },
-          child: child.toWidget(parentPath: ''),
+          child: root.toWidget(),
         ),
       ),
     );

@@ -9,7 +9,7 @@ part of 'wo_form_node.dart';
 _$DynamicInputTemplateImpl _$$DynamicInputTemplateImplFromJson(
         Map<String, dynamic> json) =>
     _$DynamicInputTemplateImpl(
-      child: WoFormElementMixin.fromJson(json['child'] as Map<String, dynamic>),
+      child: WoFormNodeMixin.fromJson(json['child'] as Map<String, dynamic>),
       uiSettings: json['uiSettings'] == null
           ? const DynamicInputUiSettings()
           : DynamicInputUiSettings.fromJson(
@@ -19,7 +19,7 @@ _$DynamicInputTemplateImpl _$$DynamicInputTemplateImplFromJson(
 Map<String, dynamic> _$$DynamicInputTemplateImplToJson(
         _$DynamicInputTemplateImpl instance) =>
     <String, dynamic>{
-      'child': WoFormElementMixin.staticToJson(instance.child),
+      'child': WoFormNodeMixin.staticToJson(instance.child),
       'uiSettings': DynamicInputUiSettings.staticToJson(instance.uiSettings),
     };
 
@@ -124,4 +124,28 @@ Map<String, dynamic> _$$WidgetNodeImplToJson(_$WidgetNodeImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'runtimeType': instance.$type,
+    };
+
+_$RootNodeImpl _$$RootNodeImplFromJson(Map<String, dynamic> json) =>
+    _$RootNodeImpl(
+      id: json['id'] as String? ?? '#',
+      children: json['children'] == null
+          ? const []
+          : const InputsListConverter().fromJson(json['children'] as List),
+      uiSettings: json['uiSettings'] == null
+          ? const WoFormUiSettings()
+          : WoFormUiSettings.fromJson(
+              json['uiSettings'] as Map<String, dynamic>),
+      exportSettings: json['exportSettings'] == null
+          ? const ExportSettings()
+          : ExportSettings.fromJson(
+              json['exportSettings'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$RootNodeImplToJson(_$RootNodeImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'children': const InputsListConverter().toJson(instance.children),
+      'uiSettings': WoFormUiSettings.staticToJson(instance.uiSettings),
+      'exportSettings': ExportSettings.staticToJson(instance.exportSettings),
     };

@@ -5,14 +5,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/wo_form.dart';
 
 void showJsonDialog(BuildContext context) {
-  final form = context.read<WoForm>();
+  final form = context.read<RootNode>();
   final values = context.read<WoFormValuesCubit>().state;
+
+  final json = <String, dynamic>{};
+  form.export(
+    into: json,
+    parentPath: '',
+    values: values,
+  );
+
   showDialog<void>(
     context: context,
     builder: (BuildContext dialogContext) {
       return AlertDialog(
         title: const Text('JSON'),
-        content: Text(readableJson(form.export(values))),
+        content: Text(readableJson(json)),
         actions: [
           FilledButton.tonalIcon(
             onPressed: () => Navigator.of(dialogContext).pop(),

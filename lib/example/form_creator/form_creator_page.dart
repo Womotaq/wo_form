@@ -15,101 +15,61 @@ class FormCreatorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final woFormCreator = WoForm(
+    return WoForm(
       initialStatus: const InvalidValuesStatus(),
-      canQuit: (context) async => context.read<WoFormStatusCubit>().state
-                  is InitialStatus ||
-              context.read<WoFormStatusCubit>().state is SubmitSuccessStatus
-          ? true
-          : showDialog<bool>(
-              context: context,
-              builder: (BuildContext dialogContext) {
-                return AlertDialog(
-                  title: const Text('Supprimer le formulaire ?'),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.of(dialogContext).pop(),
-                      child: const Text("Continuer d'éditer"),
-                    ),
-                    FilledButton.tonal(
-                      onPressed: () => Navigator.of(dialogContext).pop(true),
-                      child: const Text('Supprimer le formulaire'),
-                    ),
-                  ],
-                );
-              },
-            ),
-      child: InputsNode(
-        id: '#',
-        exportSettings: const ExportSettings(type: ExportType.mergeWithParent),
-        children: [
-          const InputsNode(
-            id: 'uiSettings',
-            uiSettings: InputsNodeUiSettings(
-              labelText: 'Paramètres généraux',
-              inputsVisibility: InputsVisibility.whenAsked,
-            ),
-            children: [
-              StringInput(
-                id: 'titleText',
-                uiSettings:
-                    StringInputUiSettings(labelText: 'Titre du formulaire'),
-              ),
-              StringInput(
-                id: 'submitText',
-                uiSettings: StringInputUiSettings(
-                  labelText: 'Label du bouton de validation',
-                ),
-              ),
-            ],
+      children: [
+        const InputsNode(
+          id: 'uiSettings',
+          uiSettings: InputsNodeUiSettings(
+            labelText: 'Paramètres généraux',
+            inputsVisibility: InputsVisibility.whenAsked,
           ),
-          InputsNode(
-            id: 'input',
-            exportSettings: const ExportSettings(
-              metadata: {
-                'runtimeType': 'inputs',
-                'id': '#',
-                'exportSettings': {
-                  'type': 'mergeWithParent',
-                },
-              },
+          children: [
+            StringInput(
+              id: 'titleText',
+              uiSettings:
+                  StringInputUiSettings(labelText: 'Titre du formulaire'),
             ),
-            children: [
-              DynamicInputsNode(
-                id: 'inputs',
-                exportSettings: const ExportSettings(type: ExportType.list),
-                templates: [
-                  DynamicInputTemplate(
-                    uiSettings: const DynamicInputUiSettings(
-                      labelText: 'Choix de texte',
-                    ),
-                    child: createSelectStringInputNode(),
-                  ),
-                  DynamicInputTemplate(
-                    uiSettings: const DynamicInputUiSettings(
-                      labelText: 'Saisie de texte',
-                    ),
-                    child: createStringInputNode(),
-                  ),
-                  DynamicInputTemplate(
-                    uiSettings: const DynamicInputUiSettings(
-                      labelText: 'Saisie de nombre',
-                    ),
-                    child: createNumInputNode(),
-                  ),
-                ],
-                uiSettings: const DynamicInputsNodeUiSettings(
-                  labelText: 'Ajouter une saisie',
-                ),
+            StringInput(
+              id: 'submitText',
+              uiSettings: StringInputUiSettings(
+                labelText: 'Label du bouton de validation',
               ),
-            ],
+            ),
+          ],
+        ),
+        DynamicInputsNode(
+          id: 'children',
+          exportSettings: const ExportSettings(type: ExportType.list),
+          templates: [
+            DynamicInputTemplate(
+              uiSettings: const DynamicInputUiSettings(
+                labelText: 'Choix de texte',
+              ),
+              child: createSelectStringInputNode(),
+            ),
+            DynamicInputTemplate(
+              uiSettings: const DynamicInputUiSettings(
+                labelText: 'Saisie de texte',
+              ),
+              child: createStringInputNode(),
+            ),
+            DynamicInputTemplate(
+              uiSettings: const DynamicInputUiSettings(
+                labelText: 'Saisie de nombre',
+              ),
+              child: createNumInputNode(),
+            ),
+          ],
+          uiSettings: const DynamicInputsNodeUiSettings(
+            labelText: 'Ajouter une saisie',
           ),
-          WidgetNode(
-            id: 'jsonClipboarder',
-            builder: (context) => const JsonClipboarder(),
-          ),
-        ],
-      ),
+        ),
+        WidgetNode(
+          id: 'jsonClipboarder',
+          builder: (context) => const JsonClipboarder(),
+        ),
+      ],
       uiSettings: WoFormUiSettings(
         titleText: "Création d'un formulaire",
         submitMode: const WoFormSubmitMode.standard(
@@ -120,18 +80,44 @@ class FormCreatorPage extends StatelessWidget {
           onPressed: data.onPressed,
           child: const Text('Exporter'),
         ),
+        canQuit: (context) async => context.read<WoFormStatusCubit>().state
+                    is InitialStatus ||
+                context.read<WoFormStatusCubit>().state is SubmitSuccessStatus
+            ? true
+            : showDialog<bool>(
+                context: context,
+                builder: (BuildContext dialogContext) {
+                  return AlertDialog(
+                    title: const Text('Supprimer le formulaire ?'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.of(dialogContext).pop(),
+                        child: const Text("Continuer d'éditer"),
+                      ),
+                      FilledButton.tonal(
+                        onPressed: () => Navigator.of(dialogContext).pop(true),
+                        child: const Text('Supprimer le formulaire'),
+                      ),
+                    ],
+                  );
+                },
+              ),
       ),
       onSubmitSuccess: (context) {
         try {
-          final form = WoForm.fromJson(
-            context.read<WoForm>().export(
-                  context.read<WoFormValuesCubit>().state,
+          final root = RootNode.fromJson(
+            context.read<RootNode>().exportToMap(
+                  values: context.read<WoFormValuesCubit>().state,
                 ),
           );
+
           context.pushPage(
             Hero(
               tag: 'createdForm',
-              child: form.copyWith(onSubmitSuccess: showJsonDialog).toPage(),
+              child: WoForm.root(
+                root: root,
+                onSubmitSuccess: showJsonDialog,
+              ),
             ),
           );
         } catch (e) {
@@ -146,8 +132,6 @@ class FormCreatorPage extends StatelessWidget {
         }
       },
     );
-
-    return woFormCreator.toPage();
   }
 }
 
@@ -165,10 +149,12 @@ class _JsonClipboarderState extends State<JsonClipboarder> {
   Widget build(BuildContext context) {
     final values = context.watch<WoFormValuesCubit>().state;
 
-    final form = context.read<WoForm>();
+    final root = context.read<RootNode>();
     final woFormL10n = context.read<WoFormL10n>();
 
-    final errorsText = woFormL10n.errors(form.getErrors(values).length);
+    final errorsText = woFormL10n.errors(
+      root.getErrors(values: values).length,
+    );
 
     return Column(
       children: [
@@ -187,36 +173,34 @@ class _JsonClipboarderState extends State<JsonClipboarder> {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Builder(
             builder: (context) {
-              WoForm? createdForm;
+              RootNode? createdRoot;
               try {
-                createdForm = WoForm.fromJson(
-                  form.export(values),
-                ).copyWith(
-                  uiSettings: WoFormUiSettings(
-                    submitMode: StandardSubmitMode(
-                      scaffoldBuilder: (body) => body,
-                    ),
-                  ),
-                );
+                createdRoot =
+                    RootNode.fromJson(root.exportToMap(values: values));
               } catch (_) {}
 
               return InputDecorator(
                 decoration: InputDecoration(
                   helperText: ' ',
-                  errorText: createdForm == null ? ' ' : null,
+                  errorText: createdRoot == null ? ' ' : null,
                   border: const OutlineInputBorder(),
                   contentPadding: const EdgeInsets.all(8),
                 ),
-                child: createdForm != null
+                child: createdRoot != null
                     ? Hero(
                         tag: 'createdForm',
                         child: Material(
-                          child: createdForm
-                              .copyWith(
-                                onSubmitSuccess: showJsonDialog,
-                                canQuit: (_) async => false,
-                              )
-                              .toPage(key: UniqueKey()),
+                          child: WoForm.root(
+                            key: UniqueKey(),
+                            root: createdRoot.copyWith(
+                              uiSettings: WoFormUiSettings(
+                                submitMode: StandardSubmitMode(
+                                  scaffoldBuilder: (body) => body,
+                                ),
+                              ),
+                            ),
+                            onSubmitSuccess: showJsonDialog,
+                          ),
                         ),
                       )
                     : Padding(
@@ -234,11 +218,12 @@ class _JsonClipboarderState extends State<JsonClipboarder> {
         ),
         ListTile(
           onTap: () {
-            final values = context.read<WoFormValuesCubit>().state;
             Clipboard.setData(
               ClipboardData(
                 text: jsonEncode(
-                  form.export(values),
+                  root.exportToMap(
+                    values: context.read<WoFormValuesCubit>().state,
+                  ),
                 ),
               ),
             );
@@ -258,7 +243,11 @@ class _JsonClipboarderState extends State<JsonClipboarder> {
           title: const Text(''),
           expandedCrossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(readableJson(form.export(values))),
+            Builder(
+              builder: (context) {
+                return Text(readableJson(root.exportToMap(values: values)));
+              },
+            ),
           ],
         ),
       ],

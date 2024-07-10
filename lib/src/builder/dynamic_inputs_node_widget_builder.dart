@@ -14,13 +14,10 @@ class DynamicInputsNodeWidgetBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final form = context.read<WoForm>();
+    final form = context.read<RootNode>();
     final valuesCubit = context.read<WoFormValuesCubit>();
 
-    final node = form.getInput(
-      path: path,
-      values: context.read<WoFormValuesCubit>().state,
-    );
+    final node = form.getChild(path: path, values: valuesCubit.state);
     if (node is! DynamicInputsNode) {
       throw ArgumentError(
         'Expected <DynamicInputsNode> at path: "$path", '
@@ -34,7 +31,7 @@ class DynamicInputsNodeWidgetBuilder extends StatelessWidget {
     return BlocSelector<WoFormLockCubit, Set<String>, bool>(
       selector: (lockedInputs) => lockedInputs.contains(path),
       builder: (context, inputIsLocked) {
-        return WoFormValueBuilder<List<WoFormElementMixin>>(
+        return WoFormValueBuilder<List<WoFormNodeMixin>>(
           path: path,
           builder: (context, inputs) {
             final fieldData = WoFieldData(
@@ -45,10 +42,10 @@ class DynamicInputsNodeWidgetBuilder extends StatelessWidget {
               uiSettings: mergedSettings,
               onValueChanged: inputIsLocked
                   ? null
-                  : (List<WoFormElementMixin>? newInputs) {
+                  : (List<WoFormNodeMixin>? newInputs) {
                       valuesCubit.onValueChanged(
                         path: path,
-                        value: List<WoFormElementMixin>.unmodifiable(
+                        value: List<WoFormNodeMixin>.unmodifiable(
                           newInputs ?? [],
                         ),
                       );

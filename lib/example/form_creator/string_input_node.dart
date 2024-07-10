@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/example/utils/auto_fill_hints.dart';
 import 'package:wo_form/example/utils/regex_pattern.dart';
-import 'package:wo_form/src/l10n/arb_gen/form_localizations_fr.dart';
 import 'package:wo_form/src/model/json_converter/text_input_type.dart';
 import 'package:wo_form/wo_form.dart';
 
-WoFormElementMixin createStringInputNode() => ValueBuilderNode(
+WoFormNodeMixin createStringInputNode() => ValueBuilderNode(
       id: 'labelText-builder',
       path: './stringInput/uiSettings/labelText',
       builder: (context, value) {
@@ -70,14 +69,19 @@ WoFormElementMixin createStringInputNode() => ValueBuilderNode(
                 final regex = (value as List<RegexPattern?>?)?.firstOrNull;
 
                 context.read<WoFormValuesCubit>().onValueChanged(
-                      path: WoFormElementMixin.getAbsolutePath(
+                      path: WoFormNodeMixin.getAbsolutePath(
                         parentPath: parentPath,
                         path: '../uiSettings/invalidRegexMessage',
                       ),
                       value: regex == null
                           ? null
-                          : FormLocalizationsFr()
-                              .regexPatternUnmatched(regex.name),
+                          : switch (regex) {
+                              RegexPattern.email =>
+                                'Ne correspond pas à une adresse email',
+                              RegexPattern.password => 'Trop faible',
+                              RegexPattern.username =>
+                                "Ne correspond pas à un nom d'utilisateur",
+                            },
                     );
               },
             ),
@@ -222,7 +226,7 @@ WoFormElementMixin createStringInputNode() => ValueBuilderNode(
                 ),
                 SelectInput<TextCapitalization>(
                   id: 'textCapitalization',
-                  initialValues: [TextCapitalization.sentences],
+                  initialValue_: [TextCapitalization.sentences],
                   availibleValues: TextCapitalization.values,
                   maxCount: 1,
                   uiSettings: SelectInputUiSettings(
