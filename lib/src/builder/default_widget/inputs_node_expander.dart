@@ -50,7 +50,12 @@ class InputsNodeExpander extends StatelessWidget {
             ),
           ],
           child: Scaffold(
-            appBar: AppBar(),
+            appBar: AppBar(
+              actions: const [
+                SubmitButtonBuilder(),
+                SizedBox(width: 8),
+              ],
+            ),
             body: SingleChildScrollView(
               child: SafeArea(
                 child: Builder(
