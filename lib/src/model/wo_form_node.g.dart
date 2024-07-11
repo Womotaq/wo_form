@@ -31,6 +31,10 @@ _$DynamicInputsNodeImpl _$$DynamicInputsNodeImplFromJson(
           ? const []
           : const DynamicInputTemplatesConverter()
               .fromJson(json['templates'] as List),
+      initialChildren: json['initialChildren'] == null
+          ? const []
+          : const InputsListConverter()
+              .fromJson(json['initialChildren'] as List),
       uiSettings: json['uiSettings'] == null
           ? const DynamicInputsNodeUiSettings()
           : DynamicInputsNodeUiSettings.fromJson(
@@ -48,6 +52,8 @@ Map<String, dynamic> _$$DynamicInputsNodeImplToJson(
       'id': instance.id,
       'templates':
           const DynamicInputTemplatesConverter().toJson(instance.templates),
+      'initialChildren':
+          const InputsListConverter().toJson(instance.initialChildren),
       'uiSettings':
           DynamicInputsNodeUiSettings.staticToJson(instance.uiSettings),
       'exportSettings': ExportSettings.staticToJson(instance.exportSettings),

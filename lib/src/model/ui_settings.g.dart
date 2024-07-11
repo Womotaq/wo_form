@@ -70,6 +70,8 @@ _$InputsNodeUiSettingsImpl _$$InputsNodeUiSettingsImplFromJson(
         Map<String, dynamic> json) =>
     _$InputsNodeUiSettingsImpl(
       labelText: json['labelText'] as String?,
+      labelTextWhenChildrenHidden:
+          json['labelTextWhenChildrenHidden'] as String?,
       helperText: json['helperText'] as String?,
       childrenVisibility: $enumDecodeNullable(
           _$ChildrenVisibilityEnumMap, json['childrenVisibility']),
@@ -79,6 +81,7 @@ Map<String, dynamic> _$$InputsNodeUiSettingsImplToJson(
         _$InputsNodeUiSettingsImpl instance) =>
     <String, dynamic>{
       'labelText': instance.labelText,
+      'labelTextWhenChildrenHidden': instance.labelTextWhenChildrenHidden,
       'helperText': instance.helperText,
       'childrenVisibility':
           _$ChildrenVisibilityEnumMap[instance.childrenVisibility],

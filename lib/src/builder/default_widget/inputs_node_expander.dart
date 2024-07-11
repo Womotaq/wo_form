@@ -11,7 +11,8 @@ class InputsNodeExpander extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final headerData = WoFormInputHeaderData(
-      labelText: data.uiSettings.labelText,
+      labelText: data.uiSettings.labelTextWhenChildrenHidden ??
+          data.uiSettings.labelText,
       helperText: data.uiSettings.helperText,
       errorText: data.errorText,
       trailing: const Icon(Icons.chevron_right),

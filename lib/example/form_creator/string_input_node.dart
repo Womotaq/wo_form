@@ -226,7 +226,7 @@ WoFormNodeMixin createStringInputNode() => ValueBuilderNode(
                 ),
                 SelectInput<TextCapitalization>(
                   id: 'textCapitalization',
-                  initialValue_: [TextCapitalization.sentences],
+                  initialValues: [TextCapitalization.sentences],
                   availibleValues: TextCapitalization.values,
                   maxCount: 1,
                   uiSettings: SelectInputUiSettings(

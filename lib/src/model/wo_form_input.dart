@@ -27,8 +27,6 @@ sealed class WoFormInputError with _$WoFormInputError {
 }
 
 mixin WoFormInputMixin {
-  Object? get initialValue;
-
   WoFormInputError? getError(
     Object? value, {
     required String parentPath,
@@ -82,9 +80,6 @@ mixin WoFormInputMixin {
   }) =>
       id;
 
-  Map<String, dynamic> initialValues({required String parentPath}) =>
-      {'$parentPath/$id': initialValue};
-
   Map<String, dynamic> toJson();
 
   Widget toWidget({required String parentPath, Key? key});
@@ -135,7 +130,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     required String id,
     required int? maxCount,
     @Default(0) int minCount,
-    @Default([]) List<String> initialValue,
+    @Default([]) List<String> initialValues,
     @Default([]) List<String> availibleValues,
     @JsonKey(includeToJson: false, includeFromJson: false)
     GetCustomErrorForListDef<String>? getCustomError,
@@ -161,6 +156,33 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
       _$WoFormInputFromJson(json);
 
   // --
+
+  @override
+  void export({
+    required dynamic into,
+    required WoFormValues values,
+    required String parentPath,
+  }) {
+    final exportValue = _exportValue(values['$parentPath/$id']);
+
+    if (into is List) {
+      into.add(exportValue);
+    } else if (into is Map) {
+      into[getExportKey(values: values, parentPath: parentPath)] = exportValue;
+    }
+  }
+
+  Object? _exportValue(dynamic value) => switch (this) {
+        BooleanInput() => value as bool?,
+        NumInput() => value as num?,
+        SelectStringInput(maxCount: final maxCount) =>
+          SelectInput._selectedValuesToJson(
+            selectedValues: value as List<String>?,
+            toJsonT: (value) => value,
+            asList: maxCount != 1,
+          ),
+        StringInput() => value as String?,
+      };
 
   @override
   WoFormInputError? getError(dynamic value, {required String parentPath}) {
@@ -258,31 +280,18 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
   }
 
   @override
-  void export({
-    required dynamic into,
-    required WoFormValues values,
-    required String parentPath,
-  }) {
-    final exportValue = _exportValue(values['$parentPath/$id']);
-
-    if (into is List) {
-      into.add(exportValue);
-    } else if (into is Map) {
-      into[getExportKey(values: values, parentPath: parentPath)] = exportValue;
+  Map<String, dynamic> getInitialValues({required String parentPath}) {
+    switch (this) {
+      case BooleanInput(initialValue: final initialValue):
+        return {'$parentPath/$id': initialValue};
+      case NumInput(initialValue: final initialValue):
+        return {'$parentPath/$id': initialValue};
+      case StringInput(initialValue: final initialValue):
+        return {'$parentPath/$id': initialValue};
+      case SelectStringInput(initialValues: final initialValues):
+        return {'$parentPath/$id': initialValues};
     }
   }
-
-  Object? _exportValue(dynamic value) => switch (this) {
-        BooleanInput() => value as bool?,
-        NumInput() => value as num?,
-        SelectStringInput(maxCount: final maxCount) =>
-          SelectInput._selectedValuesToJson(
-            selectedValues: value as List<String>?,
-            toJsonT: (value) => value,
-            asList: maxCount != 1,
-          ),
-        StringInput() => value as String?,
-      };
 
   @override
   Widget toWidget({required String parentPath, Key? key}) {
@@ -310,7 +319,7 @@ class SelectInput<T> with _$SelectInput<T>, WoFormNodeMixin, WoFormInputMixin {
     required String id,
     required int? maxCount,
     @Default(0) int minCount,
-    @Default([]) List<T> initialValue_,
+    @Default([]) List<T> initialValues,
     @Default([]) List<T> availibleValues,
     @JsonKey(includeToJson: false, includeFromJson: false)
     GetCustomErrorForListDef<T>? getCustomError,
@@ -334,11 +343,6 @@ class SelectInput<T> with _$SelectInput<T>, WoFormNodeMixin, WoFormInputMixin {
 
     return _$SelectInputToJson(this, toJsonT!);
   }
-
-  // initialValue_ can't be override WoFormNodeMixin.initialValue,
-  // because it has a type parameter
-  @override
-  List<T> get initialValue => initialValue_;
 
   // --
 
@@ -393,18 +397,6 @@ class SelectInput<T> with _$SelectInput<T>, WoFormNodeMixin, WoFormInputMixin {
   }
 
   @override
-  WoFormInputError? getError(dynamic value, {required String parentPath}) =>
-      _validator<T>(
-        inputId: id,
-        parentPath: parentPath,
-        selectedValues: (value as List<T>?) ?? [],
-        availibleValues: availibleValues,
-        minCount: minCount,
-        maxCount: maxCount,
-        getCustomError: getCustomError,
-      );
-
-  @override
   void export({
     required dynamic into,
     required WoFormValues values,
@@ -422,6 +414,22 @@ class SelectInput<T> with _$SelectInput<T>, WoFormNodeMixin, WoFormInputMixin {
       into[getExportKey(values: values, parentPath: parentPath)] = exportValue;
     }
   }
+
+  @override
+  WoFormInputError? getError(dynamic value, {required String parentPath}) =>
+      _validator<T>(
+        inputId: id,
+        parentPath: parentPath,
+        selectedValues: (value as List<T>?) ?? [],
+        availibleValues: availibleValues,
+        minCount: minCount,
+        maxCount: maxCount,
+        getCustomError: getCustomError,
+      );
+
+  @override
+  Map<String, dynamic> getInitialValues({required String parentPath}) =>
+      {'$parentPath/$id': initialValues};
 
   @override
   Widget toWidget({required String parentPath, Key? key}) =>

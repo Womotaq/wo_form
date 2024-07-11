@@ -124,6 +124,7 @@ typedef HeaderBuilderDef = Widget Function(WoFormHeaderData data);
 class InputsNodeUiSettings with _$InputsNodeUiSettings {
   const factory InputsNodeUiSettings({
     String? labelText,
+    String? labelTextWhenChildrenHidden,
     String? helperText,
     ChildrenVisibility? childrenVisibility,
     @JsonKey(includeToJson: false, includeFromJson: false)

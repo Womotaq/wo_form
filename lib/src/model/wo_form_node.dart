@@ -54,7 +54,7 @@ mixin WoFormNodeMixin {
     required String parentPath,
   });
 
-  Map<String, dynamic> initialValues({required String parentPath});
+  Map<String, dynamic> getInitialValues({required String parentPath});
 
   Widget toWidget({required String parentPath, Key? key});
 
@@ -121,6 +121,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
     @DynamicInputTemplatesConverter()
     @Default([])
     List<DynamicInputTemplate> templates,
+    @InputsListConverter() @Default([]) List<WoFormNodeMixin> initialChildren,
     @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
     @Default(DynamicInputsNodeUiSettings())
     DynamicInputsNodeUiSettings uiSettings,
@@ -440,21 +441,25 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
   }
 
   @override
-  Map<String, dynamic> initialValues({required String parentPath}) {
+  Map<String, dynamic> getInitialValues({required String parentPath}) {
     switch (this) {
-      case DynamicInputsNode():
-        return {};
+      case DynamicInputsNode(initialChildren: final initialChildren):
+        return {
+          '$parentPath/$id': initialChildren,
+          for (final child in initialChildren)
+            ...child.getInitialValues(parentPath: '$parentPath/$id'),
+        };
       case InputsNode(children: final children):
         return {
           for (final child in children)
-            ...child.initialValues(parentPath: '$parentPath/$id'),
+            ...child.getInitialValues(parentPath: '$parentPath/$id'),
         };
       case ValueBuilderNode(
           builder: final builder,
           initialValue: final initialValue,
         ):
         final input = builder!(id, initialValue);
-        return input.initialValues(parentPath: '$parentPath/$id');
+        return input.getInitialValues(parentPath: '$parentPath/$id');
       case ValueListenerNode():
       case WidgetNode():
         return {};
@@ -530,7 +535,7 @@ class FutureNode<T> with _$FutureNode<T>, WoFormNodeMixin {
     T? initialData,
 
     /// If true, when the future will be completed, the values of
-    /// the children inputs will be reseted to their initialValues.
+    /// the children inputs will be reseted to their getInitialValues.
     @Default(true) bool willResetToInitialValues,
   }) = _FutureNode<T>;
 
@@ -645,7 +650,7 @@ class FutureNode<T> with _$FutureNode<T>, WoFormNodeMixin {
   }
 
   @override
-  Map<String, dynamic> initialValues({
+  Map<String, dynamic> getInitialValues({
     required String parentPath,
     AsyncSnapshot<T?>? initialSnapshot,
   }) {
@@ -655,7 +660,7 @@ class FutureNode<T> with _$FutureNode<T>, WoFormNodeMixin {
 
     return {
       '$parentPath/$id': snapshot,
-      ...child.initialValues(parentPath: '$parentPath/$id'),
+      ...child.getInitialValues(parentPath: '$parentPath/$id'),
     };
   }
 
@@ -716,7 +721,7 @@ class FutureNodeBuilder<T> extends StatelessWidget {
 
         if (child.willResetToInitialValues) {
           if (snapshot?.connectionState == ConnectionState.done) {
-            final newInitialValues = child.initialValues(
+            final newInitialValues = child.getInitialValues(
               parentPath: parentPath,
               initialSnapshot: snapshot,
             );
@@ -859,9 +864,9 @@ class RootNode with _$RootNode, WoFormNodeMixin {
   }
 
   @override
-  Map<String, dynamic> initialValues({String parentPath = ''}) => {
+  Map<String, dynamic> getInitialValues({String parentPath = ''}) => {
         for (final child in children)
-          ...child.initialValues(parentPath: parentPath),
+          ...child.getInitialValues(parentPath: parentPath),
       };
 
   @override

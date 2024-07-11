@@ -39,11 +39,11 @@ class DynamicInputsNodeWidget extends StatelessWidget {
         values: values,
         parentPath: data.path,
       )) {
-        final input = form.getChild(path: path, parentPath: '', values: values);
+        final input = form.getChild(path: path, values: values);
         if (input is WoFormInputMixin) {
           valuesCubit.onValueChanged(
             path: path,
-            value: (input! as WoFormInputMixin).initialValue,
+            value: input!.getInitialValues(parentPath: '').values.firstOrNull,
           );
         }
       }

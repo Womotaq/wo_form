@@ -662,6 +662,7 @@ InputsNodeUiSettings _$InputsNodeUiSettingsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$InputsNodeUiSettings {
   String? get labelText => throw _privateConstructorUsedError;
+  String? get labelTextWhenChildrenHidden => throw _privateConstructorUsedError;
   String? get helperText => throw _privateConstructorUsedError;
   ChildrenVisibility? get childrenVisibility =>
       throw _privateConstructorUsedError;
@@ -688,6 +689,7 @@ abstract class $InputsNodeUiSettingsCopyWith<$Res> {
   @useResult
   $Res call(
       {String? labelText,
+      String? labelTextWhenChildrenHidden,
       String? helperText,
       ChildrenVisibility? childrenVisibility,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -713,6 +715,7 @@ class _$InputsNodeUiSettingsCopyWithImpl<$Res,
   @override
   $Res call({
     Object? labelText = freezed,
+    Object? labelTextWhenChildrenHidden = freezed,
     Object? helperText = freezed,
     Object? childrenVisibility = freezed,
     Object? widgetBuilder = freezed,
@@ -723,6 +726,10 @@ class _$InputsNodeUiSettingsCopyWithImpl<$Res,
       labelText: freezed == labelText
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      labelTextWhenChildrenHidden: freezed == labelTextWhenChildrenHidden
+          ? _value.labelTextWhenChildrenHidden
+          : labelTextWhenChildrenHidden // ignore: cast_nullable_to_non_nullable
               as String?,
       helperText: freezed == helperText
           ? _value.helperText
@@ -758,6 +765,7 @@ abstract class _$$InputsNodeUiSettingsImplCopyWith<$Res>
   @useResult
   $Res call(
       {String? labelText,
+      String? labelTextWhenChildrenHidden,
       String? helperText,
       ChildrenVisibility? childrenVisibility,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -780,6 +788,7 @@ class __$$InputsNodeUiSettingsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? labelText = freezed,
+    Object? labelTextWhenChildrenHidden = freezed,
     Object? helperText = freezed,
     Object? childrenVisibility = freezed,
     Object? widgetBuilder = freezed,
@@ -790,6 +799,10 @@ class __$$InputsNodeUiSettingsImplCopyWithImpl<$Res>
       labelText: freezed == labelText
           ? _value.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      labelTextWhenChildrenHidden: freezed == labelTextWhenChildrenHidden
+          ? _value.labelTextWhenChildrenHidden
+          : labelTextWhenChildrenHidden // ignore: cast_nullable_to_non_nullable
               as String?,
       helperText: freezed == helperText
           ? _value.helperText
@@ -820,6 +833,7 @@ class __$$InputsNodeUiSettingsImplCopyWithImpl<$Res>
 class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
   const _$InputsNodeUiSettingsImpl(
       {this.labelText,
+      this.labelTextWhenChildrenHidden,
       this.helperText,
       this.childrenVisibility,
       @JsonKey(includeToJson: false, includeFromJson: false) this.widgetBuilder,
@@ -833,6 +847,8 @@ class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
 
   @override
   final String? labelText;
+  @override
+  final String? labelTextWhenChildrenHidden;
   @override
   final String? helperText;
   @override
@@ -849,7 +865,7 @@ class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
 
   @override
   String toString() {
-    return 'InputsNodeUiSettings(labelText: $labelText, helperText: $helperText, childrenVisibility: $childrenVisibility, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, expanderBuilder: $expanderBuilder)';
+    return 'InputsNodeUiSettings(labelText: $labelText, labelTextWhenChildrenHidden: $labelTextWhenChildrenHidden, helperText: $helperText, childrenVisibility: $childrenVisibility, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, expanderBuilder: $expanderBuilder)';
   }
 
   @override
@@ -859,6 +875,10 @@ class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
             other is _$InputsNodeUiSettingsImpl &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
+            (identical(other.labelTextWhenChildrenHidden,
+                    labelTextWhenChildrenHidden) ||
+                other.labelTextWhenChildrenHidden ==
+                    labelTextWhenChildrenHidden) &&
             (identical(other.helperText, helperText) ||
                 other.helperText == helperText) &&
             (identical(other.childrenVisibility, childrenVisibility) ||
@@ -873,8 +893,15 @@ class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, labelText, helperText,
-      childrenVisibility, widgetBuilder, headerBuilder, expanderBuilder);
+  int get hashCode => Object.hash(
+      runtimeType,
+      labelText,
+      labelTextWhenChildrenHidden,
+      helperText,
+      childrenVisibility,
+      widgetBuilder,
+      headerBuilder,
+      expanderBuilder);
 
   @JsonKey(ignore: true)
   @override
@@ -895,6 +922,7 @@ class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
 abstract class _InputsNodeUiSettings extends InputsNodeUiSettings {
   const factory _InputsNodeUiSettings(
           {final String? labelText,
+          final String? labelTextWhenChildrenHidden,
           final String? helperText,
           final ChildrenVisibility? childrenVisibility,
           @JsonKey(includeToJson: false, includeFromJson: false)
@@ -911,6 +939,8 @@ abstract class _InputsNodeUiSettings extends InputsNodeUiSettings {
 
   @override
   String? get labelText;
+  @override
+  String? get labelTextWhenChildrenHidden;
   @override
   String? get helperText;
   @override

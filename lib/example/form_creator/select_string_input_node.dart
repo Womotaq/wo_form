@@ -74,7 +74,7 @@ WoFormNodeMixin createSelectStringInputNode() => ValueBuilderNode(
                     ),
                     SelectInput<ChildrenVisibility?>(
                       id: 'childrenVisibility',
-                      initialValue_: [ChildrenVisibility.always],
+                      initialValues: [ChildrenVisibility.always],
                       availibleValues: ChildrenVisibility.values,
                       minCount: 1,
                       maxCount: 1,

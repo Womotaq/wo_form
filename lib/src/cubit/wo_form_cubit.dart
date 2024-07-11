@@ -40,7 +40,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     this._statusCubit,
     this._lockCubit, {
     required this.onSubmitting,
-  }) : super(_root.initialValues());
+  }) : super(_root.getInitialValues());
 
   final RootNode _root;
   final WoFormStatusCubit _statusCubit;
@@ -65,7 +65,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   // --
 
-  void clear() => emit(_root.initialValues());
+  void clear() => emit(_root.getInitialValues());
 
   /// **Use this method precautiously since there is no type checking !**
   void onValueChanged({

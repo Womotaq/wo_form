@@ -246,6 +246,7 @@ mixin _$WoFormNode {
             String id,
             @DynamicInputTemplatesConverter()
             List<DynamicInputTemplate> templates,
+            @InputsListConverter() List<WoFormNodeMixin> initialChildren,
             @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
             DynamicInputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -287,6 +288,7 @@ mixin _$WoFormNode {
             String id,
             @DynamicInputTemplatesConverter()
             List<DynamicInputTemplate> templates,
+            @InputsListConverter() List<WoFormNodeMixin> initialChildren,
             @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
             DynamicInputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -328,6 +330,7 @@ mixin _$WoFormNode {
             String id,
             @DynamicInputTemplatesConverter()
             List<DynamicInputTemplate> templates,
+            @InputsListConverter() List<WoFormNodeMixin> initialChildren,
             @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
             DynamicInputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -442,6 +445,7 @@ abstract class _$$DynamicInputsNodeImplCopyWith<$Res>
   $Res call(
       {String id,
       @DynamicInputTemplatesConverter() List<DynamicInputTemplate> templates,
+      @InputsListConverter() List<WoFormNodeMixin> initialChildren,
       @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
       DynamicInputsNodeUiSettings uiSettings,
       @JsonKey(toJson: ExportSettings.staticToJson)
@@ -464,6 +468,7 @@ class __$$DynamicInputsNodeImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? templates = null,
+    Object? initialChildren = null,
     Object? uiSettings = null,
     Object? exportSettings = null,
   }) {
@@ -476,6 +481,10 @@ class __$$DynamicInputsNodeImplCopyWithImpl<$Res>
           ? _value._templates
           : templates // ignore: cast_nullable_to_non_nullable
               as List<DynamicInputTemplate>,
+      initialChildren: null == initialChildren
+          ? _value._initialChildren
+          : initialChildren // ignore: cast_nullable_to_non_nullable
+              as List<WoFormNodeMixin>,
       uiSettings: null == uiSettings
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
@@ -512,12 +521,15 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
       {required this.id,
       @DynamicInputTemplatesConverter()
       final List<DynamicInputTemplate> templates = const [],
+      @InputsListConverter()
+      final List<WoFormNodeMixin> initialChildren = const [],
       @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
       this.uiSettings = const DynamicInputsNodeUiSettings(),
       @JsonKey(toJson: ExportSettings.staticToJson)
       this.exportSettings = const ExportSettings(),
       final String? $type})
       : _templates = templates,
+        _initialChildren = initialChildren,
         $type = $type ?? 'dynamicInputs',
         super._();
 
@@ -536,6 +548,16 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
     return EqualUnmodifiableListView(_templates);
   }
 
+  final List<WoFormNodeMixin> _initialChildren;
+  @override
+  @JsonKey()
+  @InputsListConverter()
+  List<WoFormNodeMixin> get initialChildren {
+    if (_initialChildren is EqualUnmodifiableListView) return _initialChildren;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_initialChildren);
+  }
+
   @override
   @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
   final DynamicInputsNodeUiSettings uiSettings;
@@ -548,7 +570,7 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
 
   @override
   String toString() {
-    return 'WoFormNode.dynamicInputs(id: $id, templates: $templates, uiSettings: $uiSettings, exportSettings: $exportSettings)';
+    return 'WoFormNode.dynamicInputs(id: $id, templates: $templates, initialChildren: $initialChildren, uiSettings: $uiSettings, exportSettings: $exportSettings)';
   }
 
   @override
@@ -559,6 +581,8 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
             (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality()
                 .equals(other._templates, _templates) &&
+            const DeepCollectionEquality()
+                .equals(other._initialChildren, _initialChildren) &&
             (identical(other.uiSettings, uiSettings) ||
                 other.uiSettings == uiSettings) &&
             (identical(other.exportSettings, exportSettings) ||
@@ -571,6 +595,7 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
       runtimeType,
       id,
       const DeepCollectionEquality().hash(_templates),
+      const DeepCollectionEquality().hash(_initialChildren),
       uiSettings,
       exportSettings);
 
@@ -588,6 +613,7 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
             String id,
             @DynamicInputTemplatesConverter()
             List<DynamicInputTemplate> templates,
+            @InputsListConverter() List<WoFormNodeMixin> initialChildren,
             @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
             DynamicInputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -622,7 +648,8 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
             Widget Function(BuildContext)? builder)
         widget,
   }) {
-    return dynamicInputs(id, templates, uiSettings, exportSettings);
+    return dynamicInputs(
+        id, templates, initialChildren, uiSettings, exportSettings);
   }
 
   @override
@@ -632,6 +659,7 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
             String id,
             @DynamicInputTemplatesConverter()
             List<DynamicInputTemplate> templates,
+            @InputsListConverter() List<WoFormNodeMixin> initialChildren,
             @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
             DynamicInputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -666,7 +694,8 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
             Widget Function(BuildContext)? builder)?
         widget,
   }) {
-    return dynamicInputs?.call(id, templates, uiSettings, exportSettings);
+    return dynamicInputs?.call(
+        id, templates, initialChildren, uiSettings, exportSettings);
   }
 
   @override
@@ -676,6 +705,7 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
             String id,
             @DynamicInputTemplatesConverter()
             List<DynamicInputTemplate> templates,
+            @InputsListConverter() List<WoFormNodeMixin> initialChildren,
             @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
             DynamicInputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -712,7 +742,8 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
     required TResult orElse(),
   }) {
     if (dynamicInputs != null) {
-      return dynamicInputs(id, templates, uiSettings, exportSettings);
+      return dynamicInputs(
+          id, templates, initialChildren, uiSettings, exportSettings);
     }
     return orElse();
   }
@@ -770,6 +801,7 @@ abstract class DynamicInputsNode extends WoFormNode {
       {required final String id,
       @DynamicInputTemplatesConverter()
       final List<DynamicInputTemplate> templates,
+      @InputsListConverter() final List<WoFormNodeMixin> initialChildren,
       @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
       final DynamicInputsNodeUiSettings uiSettings,
       @JsonKey(toJson: ExportSettings.staticToJson)
@@ -783,6 +815,8 @@ abstract class DynamicInputsNode extends WoFormNode {
   String get id;
   @DynamicInputTemplatesConverter()
   List<DynamicInputTemplate> get templates;
+  @InputsListConverter()
+  List<WoFormNodeMixin> get initialChildren;
   @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
   DynamicInputsNodeUiSettings get uiSettings;
   @JsonKey(toJson: ExportSettings.staticToJson)
@@ -946,6 +980,7 @@ class _$InputsNodeImpl extends InputsNode {
             String id,
             @DynamicInputTemplatesConverter()
             List<DynamicInputTemplate> templates,
+            @InputsListConverter() List<WoFormNodeMixin> initialChildren,
             @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
             DynamicInputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -990,6 +1025,7 @@ class _$InputsNodeImpl extends InputsNode {
             String id,
             @DynamicInputTemplatesConverter()
             List<DynamicInputTemplate> templates,
+            @InputsListConverter() List<WoFormNodeMixin> initialChildren,
             @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
             DynamicInputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -1034,6 +1070,7 @@ class _$InputsNodeImpl extends InputsNode {
             String id,
             @DynamicInputTemplatesConverter()
             List<DynamicInputTemplate> templates,
+            @InputsListConverter() List<WoFormNodeMixin> initialChildren,
             @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
             DynamicInputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -1266,6 +1303,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
             String id,
             @DynamicInputTemplatesConverter()
             List<DynamicInputTemplate> templates,
+            @InputsListConverter() List<WoFormNodeMixin> initialChildren,
             @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
             DynamicInputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -1310,6 +1348,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
             String id,
             @DynamicInputTemplatesConverter()
             List<DynamicInputTemplate> templates,
+            @InputsListConverter() List<WoFormNodeMixin> initialChildren,
             @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
             DynamicInputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -1354,6 +1393,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
             String id,
             @DynamicInputTemplatesConverter()
             List<DynamicInputTemplate> templates,
+            @InputsListConverter() List<WoFormNodeMixin> initialChildren,
             @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
             DynamicInputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -1587,6 +1627,7 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
             String id,
             @DynamicInputTemplatesConverter()
             List<DynamicInputTemplate> templates,
+            @InputsListConverter() List<WoFormNodeMixin> initialChildren,
             @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
             DynamicInputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -1631,6 +1672,7 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
             String id,
             @DynamicInputTemplatesConverter()
             List<DynamicInputTemplate> templates,
+            @InputsListConverter() List<WoFormNodeMixin> initialChildren,
             @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
             DynamicInputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -1675,6 +1717,7 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
             String id,
             @DynamicInputTemplatesConverter()
             List<DynamicInputTemplate> templates,
+            @InputsListConverter() List<WoFormNodeMixin> initialChildren,
             @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
             DynamicInputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -1885,6 +1928,7 @@ class _$WidgetNodeImpl extends WidgetNode {
             String id,
             @DynamicInputTemplatesConverter()
             List<DynamicInputTemplate> templates,
+            @InputsListConverter() List<WoFormNodeMixin> initialChildren,
             @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
             DynamicInputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -1929,6 +1973,7 @@ class _$WidgetNodeImpl extends WidgetNode {
             String id,
             @DynamicInputTemplatesConverter()
             List<DynamicInputTemplate> templates,
+            @InputsListConverter() List<WoFormNodeMixin> initialChildren,
             @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
             DynamicInputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -1973,6 +2018,7 @@ class _$WidgetNodeImpl extends WidgetNode {
             String id,
             @DynamicInputTemplatesConverter()
             List<DynamicInputTemplate> templates,
+            @InputsListConverter() List<WoFormNodeMixin> initialChildren,
             @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
             DynamicInputsNodeUiSettings uiSettings,
             @JsonKey(toJson: ExportSettings.staticToJson)
@@ -2091,7 +2137,7 @@ mixin _$FutureNode<T> {
   T? get initialData => throw _privateConstructorUsedError;
 
   /// If true, when the future will be completed, the values of
-  /// the children inputs will be reseted to their initialValues.
+  /// the children inputs will be reseted to their getInitialValues.
   bool get willResetToInitialValues => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -2236,7 +2282,7 @@ class _$FutureNodeImpl<T> extends _FutureNode<T> {
   final T? initialData;
 
   /// If true, when the future will be completed, the values of
-  /// the children inputs will be reseted to their initialValues.
+  /// the children inputs will be reseted to their getInitialValues.
   @override
   @JsonKey()
   final bool willResetToInitialValues;
@@ -2298,7 +2344,7 @@ abstract class _FutureNode<T> extends FutureNode<T> {
   @override
 
   /// If true, when the future will be completed, the values of
-  /// the children inputs will be reseted to their initialValues.
+  /// the children inputs will be reseted to their getInitialValues.
   bool get willResetToInitialValues;
   @override
   @JsonKey(ignore: true)
