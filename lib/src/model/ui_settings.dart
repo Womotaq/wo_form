@@ -373,6 +373,7 @@ class WoFormUiSettings with _$WoFormUiSettings {
     @JsonKey(includeToJson: false, includeFromJson: false)
     SubmitButtonBuilderDef? submitButtonBuilder,
     bool? showAsteriskIfRequired,
+    bool? canModifySubmittedValues,
     @JsonKey(includeToJson: false, includeFromJson: false)
     Future<bool?> Function(BuildContext context)? canQuit,
   }) = _WoFormUiSettings;

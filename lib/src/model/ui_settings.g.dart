@@ -208,6 +208,7 @@ _$WoFormUiSettingsImpl _$$WoFormUiSettingsImplFromJson(
           : WoFormSubmitMode.fromJson(
               json['submitMode'] as Map<String, dynamic>),
       showAsteriskIfRequired: json['showAsteriskIfRequired'] as bool?,
+      canModifySubmittedValues: json['canModifySubmittedValues'] as bool?,
     );
 
 Map<String, dynamic> _$$WoFormUiSettingsImplToJson(
@@ -217,6 +218,7 @@ Map<String, dynamic> _$$WoFormUiSettingsImplToJson(
       'titlePosition': _$WoFormTitlePositionEnumMap[instance.titlePosition]!,
       'submitMode': WoFormSubmitMode.staticToJson(instance.submitMode),
       'showAsteriskIfRequired': instance.showAsteriskIfRequired,
+      'canModifySubmittedValues': instance.canModifySubmittedValues,
     };
 
 const _$WoFormTitlePositionEnumMap = {

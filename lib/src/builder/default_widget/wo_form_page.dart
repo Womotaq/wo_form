@@ -131,7 +131,42 @@ class WoFormPageByPage extends StatefulWidget {
 }
 
 class WoFormPageByPageState extends State<WoFormPageByPage> {
+  late PageController pageController;
   double pageIndex = 0;
+
+  @override
+  void initState() {
+    pageController = PageController();
+
+    context.read<WoFormValuesCubit>().setTemporarySubmitData(
+          onSubmitting: () => pageController.nextPage(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeIn,
+          ),
+          path: '/${widget.root.children[0].id}',
+        );
+
+    pageController.addListener(
+      () {
+        final newPageIndex = pageController.page!;
+        setState(() => pageIndex = newPageIndex);
+
+        if (newPageIndex == widget.root.children.length - 1) {
+          context.read<WoFormValuesCubit>().clearTemporarySubmitData();
+        } else {
+          context.read<WoFormValuesCubit>().setTemporarySubmitData(
+                onSubmitting: () => pageController.nextPage(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeIn,
+                ),
+                path: '/${widget.root.children[newPageIndex.toInt()].id}',
+              );
+        }
+      },
+    );
+
+    super.initState();
+  }
 
   @override
   void didChangeDependencies() {
@@ -147,7 +182,7 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
   Widget build(BuildContext context) {
     final uiSettings = context.read<RootNode>().uiSettings;
     // final pageController = context.read<WoFormValuesCubit>().pageController;
-    final pageController = PageController();
+    // final pageController = PageController();
 
     return Scaffold(
       appBar: AppBar(
@@ -174,7 +209,7 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
             PageView.builder(
               controller: pageController,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: 1,
+              itemCount: widget.root.children.length,
               itemBuilder: (context, index) => ListView(
                 children: [
                   const SizedBox(height: 16),
@@ -204,8 +239,7 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
                 ),
                 builder: (context, value, _) {
                   return LinearProgressIndicator(
-                    // TODO : new way
-                    value: value / max(1, [widget.root].length),
+                    value: value / max(1, widget.root.children.length),
                   );
                 },
               ),

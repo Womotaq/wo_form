@@ -46,18 +46,20 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   final WoFormStatusCubit _statusCubit;
   final WoFormLockCubit _lockCubit;
   final Future<void> Function(RootNode root, WoFormValues values)? onSubmitting;
+  (Future<void> Function() onSubmitting, String path)? _tempSubmitData;
 
-  final String _currentPath = '';
+  String get currentPath => _tempSubmitData?.$2 ?? '';
+
   WoFormNodeMixin get currentNode {
-    if (_currentPath == '') return _root;
+    if (_tempSubmitData == null) return _root;
 
     try {
       return _root.getChild(
-        path: _currentPath,
+        path: _tempSubmitData!.$2,
         values: state,
       )!;
     } catch (e) {
-      throw Exception('No node found at path $_currentPath');
+      throw Exception('No node found at path ${_tempSubmitData!.$2}');
     }
   }
 
@@ -85,6 +87,15 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     }
 
     emit(newMap);
+  }
+
+  void clearTemporarySubmitData() => _tempSubmitData = null;
+
+  void setTemporarySubmitData({
+    required Future<void> Function() onSubmitting,
+    required String path,
+  }) {
+    _tempSubmitData = (onSubmitting, path);
   }
 
   Future<void> submit() async {
@@ -120,7 +131,8 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
     final node = currentNode;
 
-    final errors = node.getErrors(values: state, parentPath: _currentPath);
+    final errors =
+        node.getErrors(values: state, parentPath: currentPath.parentPath);
     if (errors.isNotEmpty) {
       return _statusCubit.setInvalidValues(errors: errors);
     }
@@ -131,23 +143,28 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
     for (final path in currentNode.getAllInputPaths(
       values: state,
-      parentPath: _currentPath,
+      parentPath: currentPath.parentPath,
     )) {
       _lockCubit.lockInput(path: path);
     }
 
-    if (node == _root) {
-      try {
+    try {
+      if (_tempSubmitData != null) {
+        await _tempSubmitData!.$1();
+        _statusCubit.setInProgress();
+      } else {
         await onSubmitting?.call(_root, state);
         _statusCubit._setSubmitSuccess();
-      } catch (e, s) {
-        _statusCubit._setSubmitError(error: e, stackTrace: s);
       }
+    } catch (e, s) {
+      _statusCubit._setSubmitError(error: e, stackTrace: s);
     }
 
-    for (final path in _lockCubit.state) {
-      if (!oldLocks.contains(path)) {
-        _lockCubit.unlockInput(path: path);
+    if (_root.uiSettings.canModifySubmittedValues ?? true) {
+      for (final path in _lockCubit.state) {
+        if (!oldLocks.contains(path)) {
+          _lockCubit.unlockInput(path: path);
+        }
       }
     }
   }

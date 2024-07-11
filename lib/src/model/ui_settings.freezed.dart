@@ -2068,6 +2068,7 @@ mixin _$WoFormUiSettings {
   SubmitButtonBuilderDef? get submitButtonBuilder =>
       throw _privateConstructorUsedError;
   bool? get showAsteriskIfRequired => throw _privateConstructorUsedError;
+  bool? get canModifySubmittedValues => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
   Future<bool?> Function(BuildContext)? get canQuit =>
       throw _privateConstructorUsedError;
@@ -2094,6 +2095,7 @@ abstract class $WoFormUiSettingsCopyWith<$Res> {
       @JsonKey(includeToJson: false, includeFromJson: false)
       SubmitButtonBuilderDef? submitButtonBuilder,
       bool? showAsteriskIfRequired,
+      bool? canModifySubmittedValues,
       @JsonKey(includeToJson: false, includeFromJson: false)
       Future<bool?> Function(BuildContext)? canQuit});
 
@@ -2119,6 +2121,7 @@ class _$WoFormUiSettingsCopyWithImpl<$Res, $Val extends WoFormUiSettings>
     Object? submitMode = null,
     Object? submitButtonBuilder = freezed,
     Object? showAsteriskIfRequired = freezed,
+    Object? canModifySubmittedValues = freezed,
     Object? canQuit = freezed,
   }) {
     return _then(_value.copyWith(
@@ -2145,6 +2148,10 @@ class _$WoFormUiSettingsCopyWithImpl<$Res, $Val extends WoFormUiSettings>
       showAsteriskIfRequired: freezed == showAsteriskIfRequired
           ? _value.showAsteriskIfRequired
           : showAsteriskIfRequired // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      canModifySubmittedValues: freezed == canModifySubmittedValues
+          ? _value.canModifySubmittedValues
+          : canModifySubmittedValues // ignore: cast_nullable_to_non_nullable
               as bool?,
       canQuit: freezed == canQuit
           ? _value.canQuit
@@ -2180,6 +2187,7 @@ abstract class _$$WoFormUiSettingsImplCopyWith<$Res>
       @JsonKey(includeToJson: false, includeFromJson: false)
       SubmitButtonBuilderDef? submitButtonBuilder,
       bool? showAsteriskIfRequired,
+      bool? canModifySubmittedValues,
       @JsonKey(includeToJson: false, includeFromJson: false)
       Future<bool?> Function(BuildContext)? canQuit});
 
@@ -2204,6 +2212,7 @@ class __$$WoFormUiSettingsImplCopyWithImpl<$Res>
     Object? submitMode = null,
     Object? submitButtonBuilder = freezed,
     Object? showAsteriskIfRequired = freezed,
+    Object? canModifySubmittedValues = freezed,
     Object? canQuit = freezed,
   }) {
     return _then(_$WoFormUiSettingsImpl(
@@ -2231,6 +2240,10 @@ class __$$WoFormUiSettingsImplCopyWithImpl<$Res>
           ? _value.showAsteriskIfRequired
           : showAsteriskIfRequired // ignore: cast_nullable_to_non_nullable
               as bool?,
+      canModifySubmittedValues: freezed == canModifySubmittedValues
+          ? _value.canModifySubmittedValues
+          : canModifySubmittedValues // ignore: cast_nullable_to_non_nullable
+              as bool?,
       canQuit: freezed == canQuit
           ? _value.canQuit
           : canQuit // ignore: cast_nullable_to_non_nullable
@@ -2251,6 +2264,7 @@ class _$WoFormUiSettingsImpl extends _WoFormUiSettings {
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.submitButtonBuilder,
       this.showAsteriskIfRequired,
+      this.canModifySubmittedValues,
       @JsonKey(includeToJson: false, includeFromJson: false) this.canQuit})
       : super._();
 
@@ -2275,12 +2289,14 @@ class _$WoFormUiSettingsImpl extends _WoFormUiSettings {
   @override
   final bool? showAsteriskIfRequired;
   @override
+  final bool? canModifySubmittedValues;
+  @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final Future<bool?> Function(BuildContext)? canQuit;
 
   @override
   String toString() {
-    return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, submitButtonBuilder: $submitButtonBuilder, showAsteriskIfRequired: $showAsteriskIfRequired, canQuit: $canQuit)';
+    return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, submitButtonBuilder: $submitButtonBuilder, showAsteriskIfRequired: $showAsteriskIfRequired, canModifySubmittedValues: $canModifySubmittedValues, canQuit: $canQuit)';
   }
 
   @override
@@ -2300,6 +2316,9 @@ class _$WoFormUiSettingsImpl extends _WoFormUiSettings {
                 other.submitButtonBuilder == submitButtonBuilder) &&
             (identical(other.showAsteriskIfRequired, showAsteriskIfRequired) ||
                 other.showAsteriskIfRequired == showAsteriskIfRequired) &&
+            (identical(
+                    other.canModifySubmittedValues, canModifySubmittedValues) ||
+                other.canModifySubmittedValues == canModifySubmittedValues) &&
             (identical(other.canQuit, canQuit) || other.canQuit == canQuit));
   }
 
@@ -2313,6 +2332,7 @@ class _$WoFormUiSettingsImpl extends _WoFormUiSettings {
       submitMode,
       submitButtonBuilder,
       showAsteriskIfRequired,
+      canModifySubmittedValues,
       canQuit);
 
   @JsonKey(ignore: true)
@@ -2341,6 +2361,7 @@ abstract class _WoFormUiSettings extends WoFormUiSettings {
           @JsonKey(includeToJson: false, includeFromJson: false)
           final SubmitButtonBuilderDef? submitButtonBuilder,
           final bool? showAsteriskIfRequired,
+          final bool? canModifySubmittedValues,
           @JsonKey(includeToJson: false, includeFromJson: false)
           final Future<bool?> Function(BuildContext)? canQuit}) =
       _$WoFormUiSettingsImpl;
@@ -2364,6 +2385,8 @@ abstract class _WoFormUiSettings extends WoFormUiSettings {
   SubmitButtonBuilderDef? get submitButtonBuilder;
   @override
   bool? get showAsteriskIfRequired;
+  @override
+  bool? get canModifySubmittedValues;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   Future<bool?> Function(BuildContext)? get canQuit;

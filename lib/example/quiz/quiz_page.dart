@@ -22,19 +22,25 @@ class QuizPage extends StatelessWidget {
           submitMode: const PageByPageSubmitMode(
             submitText: 'Terminer',
           ),
+          canModifySubmittedValues: false,
           submitButtonBuilder: (data) => Builder(
             builder: (context) {
               final root = context.read<RootNode>();
               // TODO : new way
               final inputIsLocked = context.select(
-                (WoFormLockCubit c) => c.inputIsLocked(path: '/${root.id}'),
+                (WoFormLockCubit c) => c.inputIsLocked(
+                    path: '/${root.children[data.pageIndex].id}'),
               );
 
               return [0, 2].contains(data.pageIndex) && !inputIsLocked
                   ? const SizedBox.shrink()
                   : (WoFormTheme.of(context)?.submitButtonBuilder ??
                           SubmitButton.new)
-                      .call(data);
+                      .call(
+                      data.pageIndex == root.children.length - 1
+                          ? data
+                          : data.copyWith(text: 'Suivant'),
+                    );
             },
           ),
         ),

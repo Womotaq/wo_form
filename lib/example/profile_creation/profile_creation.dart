@@ -77,7 +77,7 @@ class ProfileCreationPage extends StatelessWidget {
               id: 'street',
               uiSettings: StringInputUiSettings(
                 labelText: 'Rue',
-                prefixIcon: Icon(Icons.signpost),
+                prefixIcon: Icon(Icons.location_on),
                 autofocus: true,
                 autofillHints: [AutofillHints.streetAddressLevel1],
               ),
