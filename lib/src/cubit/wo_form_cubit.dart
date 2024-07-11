@@ -40,14 +40,12 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     this._statusCubit,
     this._lockCubit, {
     required this.onSubmitting,
-  })  : pageController = PageController(),
-        super(_root.initialValues());
+  }) : super(_root.initialValues());
 
   final RootNode _root;
   final WoFormStatusCubit _statusCubit;
   final WoFormLockCubit _lockCubit;
   final Future<void> Function(RootNode root, WoFormValues values)? onSubmitting;
-  final PageController pageController; // TODO: replace by currentInputPath
 
   final String _currentPath = '';
   WoFormNodeMixin get currentNode {
@@ -61,12 +59,6 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     } catch (e) {
       throw Exception('No node found at path $_currentPath');
     }
-  }
-
-  @override
-  Future<void> close() {
-    pageController.dispose();
-    return super.close();
   }
 
   // --

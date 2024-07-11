@@ -137,16 +137,17 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    final pageController = context.read<WoFormValuesCubit>().pageController;
-    pageController.addListener(
-      () => setState(() => pageIndex = pageController.page!),
-    );
+    // final pageController = context.read<WoFormValuesCubit>().pageController;
+    // pageController.addListener(
+    //   () => setState(() => pageIndex = pageController.page!),
+    // );
   }
 
   @override
   Widget build(BuildContext context) {
     final uiSettings = context.read<RootNode>().uiSettings;
-    final pageController = context.read<WoFormValuesCubit>().pageController;
+    // final pageController = context.read<WoFormValuesCubit>().pageController;
+    final pageController = PageController();
 
     return Scaffold(
       appBar: AppBar(
