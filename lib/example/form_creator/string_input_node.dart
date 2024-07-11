@@ -20,7 +20,7 @@ WoFormNodeMixin createStringInputNode() => ValueBuilderNode(
           uiSettings: InputsNodeUiSettings(
             labelText: value ?? 'Saisie de texte',
             helperText: value == null ? null : 'Saisie de texte',
-            inputsVisibility: InputsVisibility.whenAsked,
+            childrenVisibility: ChildrenVisibility.whenAsked,
           ),
           children: [
             const StringInput(
@@ -50,7 +50,7 @@ WoFormNodeMixin createStringInputNode() => ValueBuilderNode(
               maxCount: 1,
               uiSettings: SelectInputUiSettings(
                 labelText: 'Doit correspondre à',
-                inputsVisibility: InputsVisibility.whenAsked,
+                childrenVisibility: ChildrenVisibility.whenAsked,
                 valueBuilder: (regex) => Text(
                   switch (regex) {
                     null => 'Peu importe',
@@ -89,7 +89,7 @@ WoFormNodeMixin createStringInputNode() => ValueBuilderNode(
               id: 'uiSettings',
               uiSettings: const InputsNodeUiSettings(
                 labelText: 'Interface',
-                inputsVisibility: InputsVisibility.whenAsked,
+                childrenVisibility: ChildrenVisibility.whenAsked,
               ),
               children: [
                 const StringInput(
@@ -118,7 +118,7 @@ WoFormNodeMixin createStringInputNode() => ValueBuilderNode(
                   maxCount: 1,
                   uiSettings: SelectInputUiSettings(
                     labelText: 'Action spéciale (à droite)',
-                    inputsVisibility: InputsVisibility.whenAsked,
+                    childrenVisibility: ChildrenVisibility.whenAsked,
                     valueBuilder: (value) => Text(
                       switch (value) {
                         null => 'Aucune',
@@ -144,7 +144,7 @@ WoFormNodeMixin createStringInputNode() => ValueBuilderNode(
                   uiSettings: SelectInputUiSettings(
                     labelText: 'Clavier optimisé pour écrire',
                     helperText: 'Seulement sur mobile.',
-                    inputsVisibility: InputsVisibility.whenAsked,
+                    childrenVisibility: ChildrenVisibility.whenAsked,
                     valueBuilder: (value) => Text(
                       switch (value?.name) {
                         'text' => 'Du texte à une seule ligne',
@@ -220,7 +220,7 @@ WoFormNodeMixin createStringInputNode() => ValueBuilderNode(
                   maxCount: 1,
                   uiSettings: SelectInputUiSettings(
                     labelText: "Bouton 'Entrée' (sur mobile)",
-                    inputsVisibility: InputsVisibility.whenAsked,
+                    childrenVisibility: ChildrenVisibility.whenAsked,
                     valueBuilder: (value) => Text(value?.name ?? 'Défaut'),
                   ),
                 ),
@@ -231,7 +231,7 @@ WoFormNodeMixin createStringInputNode() => ValueBuilderNode(
                   maxCount: 1,
                   uiSettings: SelectInputUiSettings(
                     labelText: 'Mettre le clavier en majuscule',
-                    inputsVisibility: InputsVisibility.whenAsked,
+                    childrenVisibility: ChildrenVisibility.whenAsked,
                     valueBuilder: (value) => Text(
                       switch (value) {
                         null || TextCapitalization.none => 'Jamais',

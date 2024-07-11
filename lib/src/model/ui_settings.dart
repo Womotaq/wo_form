@@ -109,7 +109,7 @@ class DynamicInputUiSettings with _$DynamicInputUiSettings {
         );
 }
 
-enum InputsVisibility { always, whenAsked }
+enum ChildrenVisibility { always, whenAsked }
 
 // LATER : when submitting a field from an opened page, only submit this page,
 //  and let custom functions be launched at submitting, error, and success.
@@ -125,7 +125,7 @@ class InputsNodeUiSettings with _$InputsNodeUiSettings {
   const factory InputsNodeUiSettings({
     String? labelText,
     String? helperText,
-    InputsVisibility? inputsVisibility,
+    ChildrenVisibility? childrenVisibility,
     @JsonKey(includeToJson: false, includeFromJson: false)
     InputNodeWidgetBuilderDef? widgetBuilder,
     @JsonKey(includeToJson: false, includeFromJson: false)
@@ -147,7 +147,7 @@ class InputsNodeUiSettings with _$InputsNodeUiSettings {
       : InputsNodeUiSettings(
           labelText: labelText ?? other.labelText,
           helperText: helperText ?? other.helperText,
-          inputsVisibility: inputsVisibility ?? other.inputsVisibility,
+          childrenVisibility: childrenVisibility ?? other.childrenVisibility,
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,
           headerBuilder: headerBuilder ?? other.headerBuilder,
           expanderBuilder: expanderBuilder ?? other.expanderBuilder,
@@ -200,7 +200,7 @@ class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
     String? labelText,
     String? helperText,
     String? hintText,
-    InputsVisibility? inputsVisibility,
+    ChildrenVisibility? childrenVisibility,
     @JsonKey(includeFromJson: false, includeToJson: false)
     Widget Function(T?)? valueBuilder,
     @JsonKey(includeFromJson: false, includeToJson: false)
@@ -228,7 +228,8 @@ class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
               labelText: labelText ?? other.labelText,
               helperText: helperText ?? other.helperText,
               hintText: hintText ?? other.hintText,
-              inputsVisibility: inputsVisibility ?? other.inputsVisibility,
+              childrenVisibility:
+                  childrenVisibility ?? other.childrenVisibility,
               valueBuilder: valueBuilder ?? other.valueBuilder,
               helpValueBuilder: helpValueBuilder ?? other.helpValueBuilder,
               searcher: searcher ?? other.searcher,

@@ -71,8 +71,8 @@ _$InputsNodeUiSettingsImpl _$$InputsNodeUiSettingsImplFromJson(
     _$InputsNodeUiSettingsImpl(
       labelText: json['labelText'] as String?,
       helperText: json['helperText'] as String?,
-      inputsVisibility: $enumDecodeNullable(
-          _$InputsVisibilityEnumMap, json['inputsVisibility']),
+      childrenVisibility: $enumDecodeNullable(
+          _$ChildrenVisibilityEnumMap, json['childrenVisibility']),
     );
 
 Map<String, dynamic> _$$InputsNodeUiSettingsImplToJson(
@@ -80,12 +80,13 @@ Map<String, dynamic> _$$InputsNodeUiSettingsImplToJson(
     <String, dynamic>{
       'labelText': instance.labelText,
       'helperText': instance.helperText,
-      'inputsVisibility': _$InputsVisibilityEnumMap[instance.inputsVisibility],
+      'childrenVisibility':
+          _$ChildrenVisibilityEnumMap[instance.childrenVisibility],
     };
 
-const _$InputsVisibilityEnumMap = {
-  InputsVisibility.always: 'always',
-  InputsVisibility.whenAsked: 'whenAsked',
+const _$ChildrenVisibilityEnumMap = {
+  ChildrenVisibility.always: 'always',
+  ChildrenVisibility.whenAsked: 'whenAsked',
 };
 
 _$NumInputUiSettingsImpl _$$NumInputUiSettingsImplFromJson(
@@ -108,8 +109,8 @@ _$SelectInputUiSettingsImpl<T> _$$SelectInputUiSettingsImplFromJson<T>(
       labelText: json['labelText'] as String?,
       helperText: json['helperText'] as String?,
       hintText: json['hintText'] as String?,
-      inputsVisibility: $enumDecodeNullable(
-          _$InputsVisibilityEnumMap, json['inputsVisibility']),
+      childrenVisibility: $enumDecodeNullable(
+          _$ChildrenVisibilityEnumMap, json['childrenVisibility']),
       submitFormOnSelect: json['submitFormOnSelect'] as bool? ?? false,
     );
 
@@ -119,7 +120,8 @@ Map<String, dynamic> _$$SelectInputUiSettingsImplToJson<T>(
       'labelText': instance.labelText,
       'helperText': instance.helperText,
       'hintText': instance.hintText,
-      'inputsVisibility': _$InputsVisibilityEnumMap[instance.inputsVisibility],
+      'childrenVisibility':
+          _$ChildrenVisibilityEnumMap[instance.childrenVisibility],
       'submitFormOnSelect': instance.submitFormOnSelect,
     };
 

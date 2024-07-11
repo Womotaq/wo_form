@@ -22,7 +22,7 @@ class FormCreatorPage extends StatelessWidget {
           id: 'uiSettings',
           uiSettings: InputsNodeUiSettings(
             labelText: 'Paramètres généraux',
-            inputsVisibility: InputsVisibility.whenAsked,
+            childrenVisibility: ChildrenVisibility.whenAsked,
           ),
           children: [
             StringInput(

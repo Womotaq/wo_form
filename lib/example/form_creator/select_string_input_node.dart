@@ -16,7 +16,7 @@ WoFormNodeMixin createSelectStringInputNode() => ValueBuilderNode(
           uiSettings: InputsNodeUiSettings(
             labelText: value ?? 'Choix de texte',
             helperText: value == null ? null : 'Choix de texte',
-            inputsVisibility: InputsVisibility.whenAsked,
+            childrenVisibility: ChildrenVisibility.whenAsked,
           ),
           children: [
             const StringInput(
@@ -47,7 +47,7 @@ WoFormNodeMixin createSelectStringInputNode() => ValueBuilderNode(
             InputsNode(
               id: 'uiSettings',
               uiSettings: const InputsNodeUiSettings(
-                inputsVisibility: InputsVisibility.always,
+                childrenVisibility: ChildrenVisibility.always,
               ),
               children: [
                 InputsNode(
@@ -57,7 +57,7 @@ WoFormNodeMixin createSelectStringInputNode() => ValueBuilderNode(
                   ),
                   uiSettings: const InputsNodeUiSettings(
                     labelText: 'Interface',
-                    inputsVisibility: InputsVisibility.whenAsked,
+                    childrenVisibility: ChildrenVisibility.whenAsked,
                   ),
                   children: [
                     const StringInput(
@@ -72,10 +72,10 @@ WoFormNodeMixin createSelectStringInputNode() => ValueBuilderNode(
                         labelText: 'Affichage en cas de valeur nulle',
                       ),
                     ),
-                    SelectInput<InputsVisibility?>(
-                      id: 'inputsVisibility',
-                      initialValue_: [InputsVisibility.always],
-                      availibleValues: InputsVisibility.values,
+                    SelectInput<ChildrenVisibility?>(
+                      id: 'childrenVisibility',
+                      initialValue_: [ChildrenVisibility.always],
+                      availibleValues: ChildrenVisibility.values,
                       minCount: 1,
                       maxCount: 1,
                       uiSettings: SelectInputUiSettings(
@@ -83,9 +83,9 @@ WoFormNodeMixin createSelectStringInputNode() => ValueBuilderNode(
                         valueBuilder: (value) => Text(
                           switch (value) {
                             null => "Sélectionnez un type d'affichage",
-                            InputsVisibility.whenAsked =>
+                            ChildrenVisibility.whenAsked =>
                               'Cliquer pour voir les options',
-                            InputsVisibility.always =>
+                            ChildrenVisibility.always =>
                               'Toujours voir les options',
                           },
                         ),

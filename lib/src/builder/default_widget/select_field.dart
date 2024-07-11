@@ -12,8 +12,8 @@ class SelectField<T> extends StatelessWidget {
     final selectedValues = data.value ?? [];
 
     if (data.input.maxCount == 1) {
-      return switch (data.uiSettings.inputsVisibility) {
-        null || InputsVisibility.always => Column(
+      return switch (data.uiSettings.childrenVisibility) {
+        null || ChildrenVisibility.always => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 8),
@@ -53,7 +53,7 @@ class SelectField<T> extends StatelessWidget {
               ),
             ],
           ),
-        InputsVisibility.whenAsked => Column(
+        ChildrenVisibility.whenAsked => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Opacity(
@@ -90,8 +90,8 @@ class SelectField<T> extends StatelessWidget {
           ),
       };
     } else {
-      return switch (data.uiSettings.inputsVisibility) {
-        null || InputsVisibility.always => Column(
+      return switch (data.uiSettings.childrenVisibility) {
+        null || ChildrenVisibility.always => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 8),
@@ -130,7 +130,7 @@ class SelectField<T> extends StatelessWidget {
               ),
             ],
           ),
-        InputsVisibility.whenAsked => Opacity(
+        ChildrenVisibility.whenAsked => Opacity(
             opacity: data.onValueChanged == null ? 0.3 : 1,
             child: Column(
               children: [
