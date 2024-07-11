@@ -48,18 +48,15 @@ class InputsNodeWidgetBuilder extends StatelessWidget {
         final woFormL10n = context.read<WoFormL10n?>();
 
         return BlocSelector<WoFormStatusCubit, WoFormStatus, bool>(
-          selector: (status) {
-            return status is InvalidValuesStatus;
-          },
+          selector: (status) => status is InvalidValuesStatus,
           builder: (context, showError) {
             return BlocSelector<WoFormValuesCubit, Map<String, dynamic>,
                 String?>(
               selector: (values) {
-                return woFormL10n?.errors(
-                  node
-                      .getErrors(values: values, parentPath: path.parentPath)
-                      .length,
-                );
+                final nErrors = node
+                    .getErrors(values: values, parentPath: path.parentPath)
+                    .length;
+                return nErrors == 0 ? null : woFormL10n?.errors(nErrors);
               },
               builder: (context, errorText) {
                 final expanderData = WoFieldData(
