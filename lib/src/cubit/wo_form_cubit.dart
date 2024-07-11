@@ -243,7 +243,7 @@ class WoForm extends StatelessWidget {
               default:
             }
           },
-          child: root.toWidget(),
+          child: pageBuilder?.call(context) ?? root.toWidget(),
         ),
       ),
     );
