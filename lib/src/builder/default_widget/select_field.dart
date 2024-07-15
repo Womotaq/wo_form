@@ -120,7 +120,7 @@ class SelectField<T> extends StatelessWidget {
                     value: selectedValues.contains(value),
                     onChanged: data.onValueChanged == null
                         ? null
-                        : (_) => onMultipleChoice,
+                        : (_) => onMultipleChoice(value),
                     title: data.uiSettings.valueBuilder?.call(value) ??
                         Text(value.toString()),
                     subtitle: subtitle,
