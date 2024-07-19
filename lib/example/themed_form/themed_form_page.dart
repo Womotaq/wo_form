@@ -95,6 +95,7 @@ class _CustomStringFieldState extends State<CustomStringField> {
         Builder(
           builder: (context) {
             final headerData = WoFormInputHeaderData(
+              path: widget.data.path,
               labelText: widget.data.uiSettings.labelText,
               helperText: widget.data.uiSettings.helperText,
             );

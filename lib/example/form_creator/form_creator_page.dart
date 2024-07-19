@@ -161,6 +161,7 @@ class _JsonClipboarderState extends State<JsonClipboarder> {
         const SizedBox(height: 32),
         InputHeader(
           WoFormInputHeaderData(
+            path: '',
             labelText: 'Prévisualisation',
             trailing: IconButton(
               icon: const Icon(Icons.open_in_browser),
