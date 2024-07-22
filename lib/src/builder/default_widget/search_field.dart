@@ -95,9 +95,11 @@ class SearchField<T> extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: previewBuilderSafe(selectedValues),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: previewBuilderSafe(selectedValues),
+                ),
               ),
               if (showArrow) const Icon(Icons.keyboard_arrow_down),
             ],
