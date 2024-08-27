@@ -49,7 +49,9 @@ mixin _$WoFormThemeData {
   /// Default to true.
   bool? get showAsteriskIfRequired => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WoFormThemeData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WoFormThemeDataCopyWith<WoFormThemeData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -90,6 +92,8 @@ class _$WoFormThemeDataCopyWithImpl<$Res, $Val extends WoFormThemeData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WoFormThemeData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -220,6 +224,8 @@ class __$$WoFormThemeDataImplCopyWithImpl<$Res>
       _$WoFormThemeDataImpl _value, $Res Function(_$WoFormThemeDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WoFormThemeData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -447,7 +453,9 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
       verticalSpacing,
       showAsteriskIfRequired);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WoFormThemeData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WoFormThemeDataImplCopyWith<_$WoFormThemeDataImpl> get copyWith =>
@@ -506,17 +514,20 @@ abstract class _WoFormThemeData extends WoFormThemeData {
   SubmitButtonBuilderDef? get submitButtonBuilder;
   @override
   OnSubmitErrorDef? get onSubmitError;
-  @override
 
   /// This spacing will be added at the bottom of each [WoFormNodeMixin].
-  double? get verticalSpacing;
   @override
+  double? get verticalSpacing;
 
   /// Add the character '*' after the labelText of [WoFormInput]s.
   /// Default to true.
-  bool? get showAsteriskIfRequired;
   @override
-  @JsonKey(ignore: true)
+  bool? get showAsteriskIfRequired;
+
+  /// Create a copy of WoFormThemeData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WoFormThemeDataImplCopyWith<_$WoFormThemeDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

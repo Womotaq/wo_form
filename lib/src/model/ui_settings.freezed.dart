@@ -31,8 +31,12 @@ mixin _$BooleanInputUiSettings {
   BooleanFieldBuilderDef? get widgetBuilder =>
       throw _privateConstructorUsedError;
 
+  /// Serializes this BooleanInputUiSettings to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of BooleanInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $BooleanInputUiSettingsCopyWith<BooleanInputUiSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -63,6 +67,8 @@ class _$BooleanInputUiSettingsCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of BooleanInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -125,6 +131,8 @@ class __$$BooleanInputUiSettingsImplCopyWithImpl<$Res>
       $Res Function(_$BooleanInputUiSettingsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of BooleanInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -208,12 +216,14 @@ class _$BooleanInputUiSettingsImpl extends _BooleanInputUiSettings {
                 other.widgetBuilder == widgetBuilder));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, labelText, helperText,
       controlType, controlAffinity, widgetBuilder);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BooleanInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$BooleanInputUiSettingsImplCopyWith<_$BooleanInputUiSettingsImpl>
@@ -253,8 +263,11 @@ abstract class _BooleanInputUiSettings extends BooleanInputUiSettings {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   BooleanFieldBuilderDef? get widgetBuilder;
+
+  /// Create a copy of BooleanInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BooleanInputUiSettingsImplCopyWith<_$BooleanInputUiSettingsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -274,8 +287,12 @@ mixin _$DynamicInputsNodeUiSettings {
   DynamicInputsNodeWidgetBuilderDef? get widgetBuilder =>
       throw _privateConstructorUsedError;
 
+  /// Serializes this DynamicInputsNodeUiSettings to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DynamicInputsNodeUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DynamicInputsNodeUiSettingsCopyWith<DynamicInputsNodeUiSettings>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -308,6 +325,8 @@ class _$DynamicInputsNodeUiSettingsCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DynamicInputsNodeUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -365,6 +384,8 @@ class __$$DynamicInputsNodeUiSettingsImplCopyWithImpl<$Res>
       $Res Function(_$DynamicInputsNodeUiSettingsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DynamicInputsNodeUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -440,12 +461,14 @@ class _$DynamicInputsNodeUiSettingsImpl extends _DynamicInputsNodeUiSettings {
                 other.widgetBuilder == widgetBuilder));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, labelText, helperText, generateId, widgetBuilder);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DynamicInputsNodeUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DynamicInputsNodeUiSettingsImplCopyWith<_$DynamicInputsNodeUiSettingsImpl>
@@ -485,8 +508,11 @@ abstract class _DynamicInputsNodeUiSettings
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   DynamicInputsNodeWidgetBuilderDef? get widgetBuilder;
+
+  /// Create a copy of DynamicInputsNodeUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DynamicInputsNodeUiSettingsImplCopyWith<_$DynamicInputsNodeUiSettingsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -501,8 +527,12 @@ mixin _$DynamicInputUiSettings {
   String? get labelText => throw _privateConstructorUsedError;
   String? get helperText => throw _privateConstructorUsedError;
 
+  /// Serializes this DynamicInputUiSettings to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DynamicInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DynamicInputUiSettingsCopyWith<DynamicInputUiSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -527,6 +557,8 @@ class _$DynamicInputUiSettingsCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DynamicInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -568,6 +600,8 @@ class __$$DynamicInputUiSettingsImplCopyWithImpl<$Res>
       $Res Function(_$DynamicInputUiSettingsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DynamicInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -617,11 +651,13 @@ class _$DynamicInputUiSettingsImpl extends _DynamicInputUiSettings {
                 other.helperText == helperText));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, labelText, helperText);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DynamicInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DynamicInputUiSettingsImplCopyWith<_$DynamicInputUiSettingsImpl>
@@ -649,8 +685,11 @@ abstract class _DynamicInputUiSettings extends DynamicInputUiSettings {
   String? get labelText;
   @override
   String? get helperText;
+
+  /// Create a copy of DynamicInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DynamicInputUiSettingsImplCopyWith<_$DynamicInputUiSettingsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -675,8 +714,12 @@ mixin _$InputsNodeUiSettings {
   InputNodeWidgetBuilderDef? get expanderBuilder =>
       throw _privateConstructorUsedError;
 
+  /// Serializes this InputsNodeUiSettings to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of InputsNodeUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $InputsNodeUiSettingsCopyWith<InputsNodeUiSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -711,6 +754,8 @@ class _$InputsNodeUiSettingsCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of InputsNodeUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -784,6 +829,8 @@ class __$$InputsNodeUiSettingsImplCopyWithImpl<$Res>
       $Res Function(_$InputsNodeUiSettingsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of InputsNodeUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -891,7 +938,7 @@ class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
                 other.expanderBuilder == expanderBuilder));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -903,7 +950,9 @@ class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
       headerBuilder,
       expanderBuilder);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of InputsNodeUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$InputsNodeUiSettingsImplCopyWith<_$InputsNodeUiSettingsImpl>
@@ -954,8 +1003,11 @@ abstract class _InputsNodeUiSettings extends InputsNodeUiSettings {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   InputNodeWidgetBuilderDef? get expanderBuilder;
+
+  /// Create a copy of InputsNodeUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$InputsNodeUiSettingsImplCopyWith<_$InputsNodeUiSettingsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -971,8 +1023,12 @@ mixin _$NumInputUiSettings {
   @JsonKey(includeToJson: false, includeFromJson: false)
   NumFieldBuilderDef? get widgetBuilder => throw _privateConstructorUsedError;
 
+  /// Serializes this NumInputUiSettings to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of NumInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $NumInputUiSettingsCopyWith<NumInputUiSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1000,6 +1056,8 @@ class _$NumInputUiSettingsCopyWithImpl<$Res, $Val extends NumInputUiSettings>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of NumInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1047,6 +1105,8 @@ class __$$NumInputUiSettingsImplCopyWithImpl<$Res>
       $Res Function(_$NumInputUiSettingsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of NumInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1110,12 +1170,14 @@ class _$NumInputUiSettingsImpl extends _NumInputUiSettings {
                 other.widgetBuilder == widgetBuilder));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, labelText, helperText, widgetBuilder);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of NumInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$NumInputUiSettingsImplCopyWith<_$NumInputUiSettingsImpl> get copyWith =>
@@ -1148,8 +1210,11 @@ abstract class _NumInputUiSettings extends NumInputUiSettings {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   NumFieldBuilderDef? get widgetBuilder;
+
+  /// Create a copy of NumInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$NumInputUiSettingsImplCopyWith<_$NumInputUiSettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1184,8 +1249,12 @@ mixin _$SelectInputUiSettings<T> {
   /// Only applies to unique choices
   bool get submitFormOnSelect => throw _privateConstructorUsedError;
 
+  /// Serializes this SelectInputUiSettings to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SelectInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SelectInputUiSettingsCopyWith<T, SelectInputUiSettings<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1225,6 +1294,8 @@ class _$SelectInputUiSettingsCopyWithImpl<T, $Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SelectInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1321,6 +1392,8 @@ class __$$SelectInputUiSettingsImplCopyWithImpl<T, $Res>
       $Res Function(_$SelectInputUiSettingsImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of SelectInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1461,7 +1534,7 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
                 other.submitFormOnSelect == submitFormOnSelect));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -1476,7 +1549,9 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
       headerBuilder,
       submitFormOnSelect);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SelectInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SelectInputUiSettingsImplCopyWith<T, _$SelectInputUiSettingsImpl<T>>
@@ -1536,12 +1611,15 @@ abstract class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   InputHeaderBuilderDef? get headerBuilder;
-  @override
 
   /// Only applies to unique choices
-  bool get submitFormOnSelect;
   @override
-  @JsonKey(ignore: true)
+  bool get submitFormOnSelect;
+
+  /// Create a copy of SelectInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SelectInputUiSettingsImplCopyWith<T, _$SelectInputUiSettingsImpl<T>>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -1579,8 +1657,12 @@ mixin _$StringInputUiSettings {
   StringFieldBuilderDef? get widgetBuilder =>
       throw _privateConstructorUsedError;
 
+  /// Serializes this StringInputUiSettings to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of StringInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $StringInputUiSettingsCopyWith<StringInputUiSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1623,6 +1705,8 @@ class _$StringInputUiSettingsCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of StringInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1756,6 +1840,8 @@ class __$$StringInputUiSettingsImplCopyWithImpl<$Res>
       $Res Function(_$StringInputUiSettingsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of StringInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1973,7 +2059,7 @@ class _$StringInputUiSettingsImpl extends _StringInputUiSettings {
                 other.widgetBuilder == widgetBuilder));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -1995,7 +2081,9 @@ class _$StringInputUiSettingsImpl extends _StringInputUiSettings {
       style,
       widgetBuilder);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of StringInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$StringInputUiSettingsImplCopyWith<_$StringInputUiSettingsImpl>
@@ -2066,9 +2154,9 @@ abstract class _StringInputUiSettings extends StringInputUiSettings {
   TextInputAction? get textInputAction;
   @override
   TextCapitalization? get textCapitalization;
-  @override
 
   /// Defaults to 1. If you want to set it to null, enter 0.
+  @override
   int? get maxLines;
   @override
   String? get invalidRegexMessage;
@@ -2078,8 +2166,11 @@ abstract class _StringInputUiSettings extends StringInputUiSettings {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   StringFieldBuilderDef? get widgetBuilder;
+
+  /// Create a copy of StringInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$StringInputUiSettingsImplCopyWith<_$StringInputUiSettingsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -2105,8 +2196,12 @@ mixin _$WoFormUiSettings {
   Future<bool?> Function(BuildContext)? get canQuit =>
       throw _privateConstructorUsedError;
 
+  /// Serializes this WoFormUiSettings to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of WoFormUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WoFormUiSettingsCopyWith<WoFormUiSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2144,6 +2239,8 @@ class _$WoFormUiSettingsCopyWithImpl<$Res, $Val extends WoFormUiSettings>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WoFormUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2192,6 +2289,8 @@ class _$WoFormUiSettingsCopyWithImpl<$Res, $Val extends WoFormUiSettings>
     ) as $Val);
   }
 
+  /// Create a copy of WoFormUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $WoFormSubmitModeCopyWith<$Res> get submitMode {
@@ -2235,6 +2334,8 @@ class __$$WoFormUiSettingsImplCopyWithImpl<$Res>
       $Res Function(_$WoFormUiSettingsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WoFormUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2354,7 +2455,7 @@ class _$WoFormUiSettingsImpl extends _WoFormUiSettings {
             (identical(other.canQuit, canQuit) || other.canQuit == canQuit));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -2367,7 +2468,9 @@ class _$WoFormUiSettingsImpl extends _WoFormUiSettings {
       canModifySubmittedValues,
       canQuit);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WoFormUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WoFormUiSettingsImplCopyWith<_$WoFormUiSettingsImpl> get copyWith =>
@@ -2422,8 +2525,11 @@ abstract class _WoFormUiSettings extends WoFormUiSettings {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   Future<bool?> Function(BuildContext)? get canQuit;
+
+  /// Create a copy of WoFormUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WoFormUiSettingsImplCopyWith<_$WoFormUiSettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2531,8 +2637,13 @@ mixin _$WoFormSubmitMode {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this WoFormSubmitMode to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of WoFormSubmitMode
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WoFormSubmitModeCopyWith<WoFormSubmitMode> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2560,6 +2671,8 @@ class _$WoFormSubmitModeCopyWithImpl<$Res, $Val extends WoFormSubmitMode>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WoFormSubmitMode
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2610,6 +2723,8 @@ class __$$StandardSubmitModeImplCopyWithImpl<$Res>
       $Res Function(_$StandardSubmitModeImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WoFormSubmitMode
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2701,12 +2816,14 @@ class _$StandardSubmitModeImpl extends StandardSubmitMode {
                 other.scaffoldBuilder == scaffoldBuilder));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, submitText, submitIcon,
       disableSubmitMode, buttonPosition, scaffoldBuilder);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WoFormSubmitMode
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$StandardSubmitModeImplCopyWith<_$StandardSubmitModeImpl> get copyWith =>
@@ -2855,8 +2972,11 @@ abstract class StandardSubmitMode extends WoFormSubmitMode {
   SubmitButtonPosition get buttonPosition;
   @JsonKey(includeToJson: false, includeFromJson: false)
   ScaffoldBuilderDef? get scaffoldBuilder;
+
+  /// Create a copy of WoFormSubmitMode
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$StandardSubmitModeImplCopyWith<_$StandardSubmitModeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2886,6 +3006,8 @@ class __$$PageByPageSubmitModeImplCopyWithImpl<$Res>
       $Res Function(_$PageByPageSubmitModeImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WoFormSubmitMode
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2975,12 +3097,14 @@ class _$PageByPageSubmitModeImpl extends PageByPageSubmitMode {
                 other.showProgressIndicator == showProgressIndicator));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, submitText, submitIcon, nextText,
       disableSubmitMode, showProgressIndicator);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WoFormSubmitMode
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PageByPageSubmitModeImplCopyWith<_$PageByPageSubmitModeImpl>
@@ -3128,8 +3252,11 @@ abstract class PageByPageSubmitMode extends WoFormSubmitMode {
   @override
   DisableSubmitButton get disableSubmitMode;
   bool get showProgressIndicator;
+
+  /// Create a copy of WoFormSubmitMode
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PageByPageSubmitModeImplCopyWith<_$PageByPageSubmitModeImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

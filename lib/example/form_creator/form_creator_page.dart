@@ -67,7 +67,7 @@ class FormCreatorPage extends StatelessWidget {
         ),
         WidgetNode(
           id: 'jsonClipboarder',
-          builder: (context) => const JsonClipboarder(),
+          builder: (_, __) => const JsonClipboarder(),
         ),
       ],
       uiSettings: WoFormUiSettings(

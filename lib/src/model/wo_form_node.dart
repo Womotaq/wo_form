@@ -164,7 +164,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
   const factory WoFormNode.widget({
     required String id,
     @JsonKey(includeToJson: false, includeFromJson: false)
-    Widget Function(BuildContext context)? builder,
+    Widget Function(BuildContext context, String path)? builder,
   }) = WidgetNode;
 
   const WoFormNode._();
@@ -516,7 +516,10 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
           ),
         WidgetNode(builder: final builder) => builder == null
             ? SizedBox.shrink(key: key)
-            : Builder(key: key, builder: builder)
+            : Builder(
+                key: key,
+                builder: (context) => builder(context, '$parentPath/$id'),
+              ),
       };
 
   @override
@@ -852,10 +855,12 @@ class RootNode with _$RootNode, WoFormNodeMixin {
     final firstPathId = path.substring(1, secondSlashIndex + 1);
 
     return children
-        .firstWhereOrNull((
-          child,
-        ) =>
-            child.id == firstPathId)
+        .firstWhereOrNull(
+          (
+            child,
+          ) =>
+              child.id == firstPathId,
+        )
         ?.getChild(
           path: path.substring(secondSlashIndex + 1),
           parentPath: parentPath,

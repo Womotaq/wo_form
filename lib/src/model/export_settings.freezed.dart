@@ -23,8 +23,12 @@ mixin _$ExportSettings {
   Map<String, dynamic> get metadata => throw _privateConstructorUsedError;
   ExportType get type => throw _privateConstructorUsedError;
 
+  /// Serializes this ExportSettings to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ExportSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ExportSettingsCopyWith<ExportSettings> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -48,6 +52,8 @@ class _$ExportSettingsCopyWithImpl<$Res, $Val extends ExportSettings>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ExportSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -86,6 +92,8 @@ class __$$ExportSettingsImplCopyWithImpl<$Res>
       _$ExportSettingsImpl _value, $Res Function(_$ExportSettingsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ExportSettings
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -144,12 +152,14 @@ class _$ExportSettingsImpl extends _ExportSettings {
             (identical(other.type, type) || other.type == type));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_metadata), type);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ExportSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ExportSettingsImplCopyWith<_$ExportSettingsImpl> get copyWith =>
@@ -177,8 +187,11 @@ abstract class _ExportSettings extends ExportSettings {
   Map<String, dynamic> get metadata;
   @override
   ExportType get type;
+
+  /// Create a copy of ExportSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ExportSettingsImplCopyWith<_$ExportSettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -97,6 +97,9 @@ class _$WoFormStatusCopyWithImpl<$Res, $Val extends WoFormStatus>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of WoFormStatus
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -113,6 +116,9 @@ class __$$InitialStatusImplCopyWithImpl<$Res>
   __$$InitialStatusImplCopyWithImpl(
       _$InitialStatusImpl _value, $Res Function(_$InitialStatusImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of WoFormStatus
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -240,6 +246,9 @@ class __$$InProgressStatusImplCopyWithImpl<$Res>
   __$$InProgressStatusImplCopyWithImpl(_$InProgressStatusImpl _value,
       $Res Function(_$InProgressStatusImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of WoFormStatus
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -370,6 +379,8 @@ class __$$InvalidValuesStatusImplCopyWithImpl<$Res>
       $Res Function(_$InvalidValuesStatusImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WoFormStatus
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -410,7 +421,9 @@ class _$InvalidValuesStatusImpl implements InvalidValuesStatus {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(errors));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WoFormStatus
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$InvalidValuesStatusImplCopyWith<_$InvalidValuesStatusImpl> get copyWith =>
@@ -511,7 +524,10 @@ abstract class InvalidValuesStatus implements WoFormStatus {
 
 // TODO: remove ? are they used ? usefull ?
   Iterable<WoFormInputError>? get errors;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of WoFormStatus
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$InvalidValuesStatusImplCopyWith<_$InvalidValuesStatusImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -530,6 +546,9 @@ class __$$SubmittingStatusImplCopyWithImpl<$Res>
   __$$SubmittingStatusImplCopyWithImpl(_$SubmittingStatusImpl _value,
       $Res Function(_$SubmittingStatusImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of WoFormStatus
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -660,6 +679,8 @@ class __$$SubmitErrorStatusImplCopyWithImpl<$Res>
       $Res Function(_$SubmitErrorStatusImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WoFormStatus
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -705,7 +726,9 @@ class _$SubmitErrorStatusImpl implements SubmitErrorStatus {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(error), stackTrace);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WoFormStatus
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SubmitErrorStatusImplCopyWith<_$SubmitErrorStatusImpl> get copyWith =>
@@ -807,7 +830,10 @@ abstract class SubmitErrorStatus implements WoFormStatus {
 
   Object? get error;
   StackTrace? get stackTrace;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of WoFormStatus
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SubmitErrorStatusImplCopyWith<_$SubmitErrorStatusImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -826,6 +852,9 @@ class __$$SubmitSuccessStatusImplCopyWithImpl<$Res>
   __$$SubmitSuccessStatusImplCopyWithImpl(_$SubmitSuccessStatusImpl _value,
       $Res Function(_$SubmitSuccessStatusImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of WoFormStatus
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

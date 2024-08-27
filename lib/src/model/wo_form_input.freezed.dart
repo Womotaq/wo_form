@@ -74,7 +74,9 @@ mixin _$WoFormInputError {
   }) =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WoFormInputError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WoFormInputErrorCopyWith<WoFormInputError> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -98,6 +100,8 @@ class _$WoFormInputErrorCopyWithImpl<$Res, $Val extends WoFormInputError>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WoFormInputError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -131,6 +135,8 @@ class __$$EmptyInputErrorImplCopyWithImpl<$Res>
       _$EmptyInputErrorImpl _value, $Res Function(_$EmptyInputErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WoFormInputError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -169,7 +175,9 @@ class _$EmptyInputErrorImpl implements EmptyInputError {
   @override
   int get hashCode => Object.hash(runtimeType, path);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WoFormInputError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$EmptyInputErrorImplCopyWith<_$EmptyInputErrorImpl> get copyWith =>
@@ -263,8 +271,11 @@ abstract class EmptyInputError implements WoFormInputError {
 
   @override
   String get path;
+
+  /// Create a copy of WoFormInputError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$EmptyInputErrorImplCopyWith<_$EmptyInputErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -288,6 +299,8 @@ class __$$InvalidInputErrorImplCopyWithImpl<$Res>
       $Res Function(_$InvalidInputErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WoFormInputError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -326,7 +339,9 @@ class _$InvalidInputErrorImpl implements InvalidInputError {
   @override
   int get hashCode => Object.hash(runtimeType, path);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WoFormInputError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$InvalidInputErrorImplCopyWith<_$InvalidInputErrorImpl> get copyWith =>
@@ -420,8 +435,11 @@ abstract class InvalidInputError implements WoFormInputError {
 
   @override
   String get path;
+
+  /// Create a copy of WoFormInputError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$InvalidInputErrorImplCopyWith<_$InvalidInputErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -445,6 +463,8 @@ class __$$MaxBoundInputErrorImplCopyWithImpl<$Res>
       $Res Function(_$MaxBoundInputErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WoFormInputError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -483,7 +503,9 @@ class _$MaxBoundInputErrorImpl implements MaxBoundInputError {
   @override
   int get hashCode => Object.hash(runtimeType, path);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WoFormInputError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MaxBoundInputErrorImplCopyWith<_$MaxBoundInputErrorImpl> get copyWith =>
@@ -577,8 +599,11 @@ abstract class MaxBoundInputError implements WoFormInputError {
 
   @override
   String get path;
+
+  /// Create a copy of WoFormInputError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MaxBoundInputErrorImplCopyWith<_$MaxBoundInputErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -602,6 +627,8 @@ class __$$MinBoundInputErrorImplCopyWithImpl<$Res>
       $Res Function(_$MinBoundInputErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WoFormInputError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -640,7 +667,9 @@ class _$MinBoundInputErrorImpl implements MinBoundInputError {
   @override
   int get hashCode => Object.hash(runtimeType, path);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WoFormInputError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MinBoundInputErrorImplCopyWith<_$MinBoundInputErrorImpl> get copyWith =>
@@ -734,8 +763,11 @@ abstract class MinBoundInputError implements WoFormInputError {
 
   @override
   String get path;
+
+  /// Create a copy of WoFormInputError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MinBoundInputErrorImplCopyWith<_$MinBoundInputErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -759,6 +791,8 @@ class __$$CustomInputErrorImplCopyWithImpl<$Res>
       $Res Function(_$CustomInputErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WoFormInputError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -805,7 +839,9 @@ class _$CustomInputErrorImpl implements CustomInputError {
   @override
   int get hashCode => Object.hash(runtimeType, path, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WoFormInputError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CustomInputErrorImplCopyWith<_$CustomInputErrorImpl> get copyWith =>
@@ -901,8 +937,11 @@ abstract class CustomInputError implements WoFormInputError {
   @override
   String get path;
   String get message;
+
+  /// Create a copy of WoFormInputError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CustomInputErrorImplCopyWith<_$CustomInputErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1087,8 +1126,13 @@ mixin _$WoFormInput {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this WoFormInput to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WoFormInputCopyWith<WoFormInput> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1112,6 +1156,8 @@ class _$WoFormInputCopyWithImpl<$Res, $Val extends WoFormInput>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1154,6 +1200,8 @@ class __$$BooleanInputImplCopyWithImpl<$Res>
       _$BooleanInputImpl _value, $Res Function(_$BooleanInputImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1187,6 +1235,8 @@ class __$$BooleanInputImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $BooleanInputUiSettingsCopyWith<$Res> get uiSettings {
@@ -1252,12 +1302,14 @@ class _$BooleanInputImpl extends BooleanInput {
                 other.uiSettings == uiSettings));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, id, initialValue, isRequired, getCustomError, uiSettings);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$BooleanInputImplCopyWith<_$BooleanInputImpl> get copyWith =>
@@ -1475,8 +1527,11 @@ abstract class BooleanInput extends WoFormInput {
   @override
   @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
   BooleanInputUiSettings get uiSettings;
+
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BooleanInputImplCopyWith<_$BooleanInputImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1510,6 +1565,8 @@ class __$$NumInputImplCopyWithImpl<$Res>
       _$NumInputImpl _value, $Res Function(_$NumInputImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1553,6 +1610,8 @@ class __$$NumInputImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $NumInputUiSettingsCopyWith<$Res> get uiSettings {
@@ -1630,12 +1689,14 @@ class _$NumInputImpl extends NumInput {
                 other.uiSettings == uiSettings));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, initialValue, isRequired,
       maxBound, minBound, getCustomError, uiSettings);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$NumInputImplCopyWith<_$NumInputImpl> get copyWith =>
@@ -1857,8 +1918,11 @@ abstract class NumInput extends WoFormInput {
   GetCustomErrorDef<num>? get getCustomError;
   @override
   NumInputUiSettings get uiSettings;
+
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$NumInputImplCopyWith<_$NumInputImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1892,6 +1956,8 @@ class __$$SelectStringInputImplCopyWithImpl<$Res>
       $Res Function(_$SelectStringInputImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1935,6 +2001,8 @@ class __$$SelectStringInputImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SelectInputUiSettingsCopyWith<String, $Res> get uiSettings {
@@ -2028,7 +2096,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
                 other.uiSettings == uiSettings));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -2040,7 +2108,9 @@ class _$SelectStringInputImpl extends SelectStringInput {
       getCustomError,
       uiSettings);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SelectStringInputImplCopyWith<_$SelectStringInputImpl> get copyWith =>
@@ -2264,8 +2334,11 @@ abstract class SelectStringInput extends WoFormInput {
   GetCustomErrorForListDef<String>? get getCustomError;
   @override
   SelectInputUiSettings<String> get uiSettings;
+
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SelectStringInputImplCopyWith<_$SelectStringInputImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2299,6 +2372,8 @@ class __$$StringInputImplCopyWithImpl<$Res>
       _$StringInputImpl _value, $Res Function(_$StringInputImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2337,6 +2412,8 @@ class __$$StringInputImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $StringInputUiSettingsCopyWith<$Res> get uiSettings {
@@ -2407,12 +2484,14 @@ class _$StringInputImpl extends StringInput {
                 other.uiSettings == uiSettings));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, initialValue, isRequired,
       regexPattern, getCustomError, uiSettings);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$StringInputImplCopyWith<_$StringInputImpl> get copyWith =>
@@ -2634,8 +2713,11 @@ abstract class StringInput extends WoFormInput {
   @override
   @JsonKey(toJson: StringInputUiSettings.staticToJson)
   StringInputUiSettings get uiSettings;
+
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$StringInputImplCopyWith<_$StringInputImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2655,7 +2737,9 @@ mixin _$SelectInput<T> {
   @JsonKey(includeToJson: false, includeFromJson: false)
   Object? Function(T)? get toJsonT => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SelectInput
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SelectInputCopyWith<T, SelectInput<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2691,6 +2775,8 @@ class _$SelectInputCopyWithImpl<T, $Res, $Val extends SelectInput<T>>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SelectInput
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2739,6 +2825,8 @@ class _$SelectInputCopyWithImpl<T, $Res, $Val extends SelectInput<T>>
     ) as $Val);
   }
 
+  /// Create a copy of SelectInput
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SelectInputUiSettingsCopyWith<T, $Res>? get uiSettings {
@@ -2784,6 +2872,8 @@ class __$$SelectInputImplCopyWithImpl<T, $Res>
       _$SelectInputImpl<T> _value, $Res Function(_$SelectInputImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of SelectInput
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2922,7 +3012,9 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
       uiSettings,
       toJsonT);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SelectInput
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SelectInputImplCopyWith<T, _$SelectInputImpl<T>> get copyWith =>
@@ -2962,8 +3054,11 @@ abstract class _SelectInput<T> extends SelectInput<T> {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   Object? Function(T)? get toJsonT;
+
+  /// Create a copy of SelectInput
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SelectInputImplCopyWith<T, _$SelectInputImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -26,8 +26,12 @@ mixin _$DynamicInputTemplate {
   @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
   DynamicInputUiSettings get uiSettings => throw _privateConstructorUsedError;
 
+  /// Serializes this DynamicInputTemplate to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DynamicInputTemplate
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DynamicInputTemplateCopyWith<DynamicInputTemplate> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -60,6 +64,8 @@ class _$DynamicInputTemplateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DynamicInputTemplate
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -78,6 +84,8 @@ class _$DynamicInputTemplateCopyWithImpl<$Res,
     ) as $Val);
   }
 
+  /// Create a copy of DynamicInputTemplate
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DynamicInputUiSettingsCopyWith<$Res> get uiSettings {
@@ -115,6 +123,8 @@ class __$$DynamicInputTemplateImplCopyWithImpl<$Res>
       $Res Function(_$DynamicInputTemplateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DynamicInputTemplate
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -172,11 +182,13 @@ class _$DynamicInputTemplateImpl extends _DynamicInputTemplate {
                 other.uiSettings == uiSettings));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, child, uiSettings);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DynamicInputTemplate
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DynamicInputTemplateImplCopyWith<_$DynamicInputTemplateImpl>
@@ -212,8 +224,11 @@ abstract class _DynamicInputTemplate extends DynamicInputTemplate {
   @override
   @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
   DynamicInputUiSettings get uiSettings;
+
+  /// Create a copy of DynamicInputTemplate
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DynamicInputTemplateImplCopyWith<_$DynamicInputTemplateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -278,7 +293,7 @@ mixin _$WoFormNode {
     required TResult Function(
             String id,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)
+            Widget Function(BuildContext, String)? builder)
         widget,
   }) =>
       throw _privateConstructorUsedError;
@@ -320,7 +335,7 @@ mixin _$WoFormNode {
     TResult? Function(
             String id,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
+            Widget Function(BuildContext, String)? builder)?
         widget,
   }) =>
       throw _privateConstructorUsedError;
@@ -362,7 +377,7 @@ mixin _$WoFormNode {
     TResult Function(
             String id,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
+            Widget Function(BuildContext, String)? builder)?
         widget,
     required TResult orElse(),
   }) =>
@@ -395,8 +410,13 @@ mixin _$WoFormNode {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this WoFormNode to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WoFormNodeCopyWith<WoFormNode> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -420,6 +440,8 @@ class _$WoFormNodeCopyWithImpl<$Res, $Val extends WoFormNode>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -463,6 +485,8 @@ class __$$DynamicInputsNodeImplCopyWithImpl<$Res>
       $Res Function(_$DynamicInputsNodeImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -496,6 +520,8 @@ class __$$DynamicInputsNodeImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DynamicInputsNodeUiSettingsCopyWith<$Res> get uiSettings {
@@ -505,6 +531,8 @@ class __$$DynamicInputsNodeImplCopyWithImpl<$Res>
     });
   }
 
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ExportSettingsCopyWith<$Res> get exportSettings {
@@ -589,7 +617,7 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
                 other.exportSettings == exportSettings));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -599,7 +627,9 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
       uiSettings,
       exportSettings);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DynamicInputsNodeImplCopyWith<_$DynamicInputsNodeImpl> get copyWith =>
@@ -645,7 +675,7 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
     required TResult Function(
             String id,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)
+            Widget Function(BuildContext, String)? builder)
         widget,
   }) {
     return dynamicInputs(
@@ -691,7 +721,7 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
     TResult? Function(
             String id,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
+            Widget Function(BuildContext, String)? builder)?
         widget,
   }) {
     return dynamicInputs?.call(
@@ -737,7 +767,7 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
     TResult Function(
             String id,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
+            Widget Function(BuildContext, String)? builder)?
         widget,
     required TResult orElse(),
   }) {
@@ -821,8 +851,11 @@ abstract class DynamicInputsNode extends WoFormNode {
   DynamicInputsNodeUiSettings get uiSettings;
   @JsonKey(toJson: ExportSettings.staticToJson)
   ExportSettings get exportSettings;
+
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DynamicInputsNodeImplCopyWith<_$DynamicInputsNodeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -855,6 +888,8 @@ class __$$InputsNodeImplCopyWithImpl<$Res>
       _$InputsNodeImpl _value, $Res Function(_$InputsNodeImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -883,6 +918,8 @@ class __$$InputsNodeImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $InputsNodeUiSettingsCopyWith<$Res> get uiSettings {
@@ -891,6 +928,8 @@ class __$$InputsNodeImplCopyWithImpl<$Res>
     });
   }
 
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ExportSettingsCopyWith<$Res> get exportSettings {
@@ -958,7 +997,7 @@ class _$InputsNodeImpl extends InputsNode {
                 other.exportSettings == exportSettings));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -967,7 +1006,9 @@ class _$InputsNodeImpl extends InputsNode {
       uiSettings,
       exportSettings);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$InputsNodeImplCopyWith<_$InputsNodeImpl> get copyWith =>
@@ -1012,7 +1053,7 @@ class _$InputsNodeImpl extends InputsNode {
     required TResult Function(
             String id,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)
+            Widget Function(BuildContext, String)? builder)
         widget,
   }) {
     return inputs(id, children, uiSettings, exportSettings);
@@ -1057,7 +1098,7 @@ class _$InputsNodeImpl extends InputsNode {
     TResult? Function(
             String id,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
+            Widget Function(BuildContext, String)? builder)?
         widget,
   }) {
     return inputs?.call(id, children, uiSettings, exportSettings);
@@ -1102,7 +1143,7 @@ class _$InputsNodeImpl extends InputsNode {
     TResult Function(
             String id,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
+            Widget Function(BuildContext, String)? builder)?
         widget,
     required TResult orElse(),
   }) {
@@ -1181,8 +1222,11 @@ abstract class InputsNode extends WoFormNode {
   InputsNodeUiSettings get uiSettings;
   @JsonKey(toJson: ExportSettings.staticToJson)
   ExportSettings get exportSettings;
+
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$InputsNodeImplCopyWith<_$InputsNodeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1211,6 +1255,8 @@ class __$$ValueBuilderNodeImplCopyWithImpl<$Res>
       $Res Function(_$ValueBuilderNodeImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1284,12 +1330,14 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
                 .equals(other.initialValue, initialValue));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, path, builder,
       const DeepCollectionEquality().hash(initialValue));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ValueBuilderNodeImplCopyWith<_$ValueBuilderNodeImpl> get copyWith =>
@@ -1335,7 +1383,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
     required TResult Function(
             String id,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)
+            Widget Function(BuildContext, String)? builder)
         widget,
   }) {
     return valueBuilder(id, path, builder, initialValue);
@@ -1380,7 +1428,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
     TResult? Function(
             String id,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
+            Widget Function(BuildContext, String)? builder)?
         widget,
   }) {
     return valueBuilder?.call(id, path, builder, initialValue);
@@ -1425,7 +1473,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
     TResult Function(
             String id,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
+            Widget Function(BuildContext, String)? builder)?
         widget,
     required TResult orElse(),
   }) {
@@ -1501,8 +1549,11 @@ abstract class ValueBuilderNode extends WoFormNode {
   @JsonKey(includeToJson: false, includeFromJson: false)
   WoFormNodeMixin Function(String, Object?)? get builder;
   Object? get initialValue;
+
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ValueBuilderNodeImplCopyWith<_$ValueBuilderNodeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1532,6 +1583,8 @@ class __$$ValueListenerNodeImplCopyWithImpl<$Res>
       $Res Function(_$ValueListenerNodeImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1609,11 +1662,13 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
                 other.listener == listener));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, path, listenWhen, listener);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ValueListenerNodeImplCopyWith<_$ValueListenerNodeImpl> get copyWith =>
@@ -1659,7 +1714,7 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
     required TResult Function(
             String id,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)
+            Widget Function(BuildContext, String)? builder)
         widget,
   }) {
     return valueListener(id, path, listenWhen, listener);
@@ -1704,7 +1759,7 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
     TResult? Function(
             String id,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
+            Widget Function(BuildContext, String)? builder)?
         widget,
   }) {
     return valueListener?.call(id, path, listenWhen, listener);
@@ -1749,7 +1804,7 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
     TResult Function(
             String id,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
+            Widget Function(BuildContext, String)? builder)?
         widget,
     required TResult orElse(),
   }) {
@@ -1828,8 +1883,11 @@ abstract class ValueListenerNode extends WoFormNode {
   bool Function(Object?, Object?)? get listenWhen;
   @JsonKey(includeToJson: false, includeFromJson: false)
   void Function(BuildContext, String, Object?)? get listener;
+
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ValueListenerNodeImplCopyWith<_$ValueListenerNodeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1845,7 +1903,7 @@ abstract class _$$WidgetNodeImplCopyWith<$Res>
   $Res call(
       {String id,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      Widget Function(BuildContext)? builder});
+      Widget Function(BuildContext, String)? builder});
 }
 
 /// @nodoc
@@ -1856,6 +1914,8 @@ class __$$WidgetNodeImplCopyWithImpl<$Res>
       _$WidgetNodeImpl _value, $Res Function(_$WidgetNodeImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1870,7 +1930,7 @@ class __$$WidgetNodeImplCopyWithImpl<$Res>
       builder: freezed == builder
           ? _value.builder
           : builder // ignore: cast_nullable_to_non_nullable
-              as Widget Function(BuildContext)?,
+              as Widget Function(BuildContext, String)?,
     ));
   }
 }
@@ -1892,7 +1952,7 @@ class _$WidgetNodeImpl extends WidgetNode {
   final String id;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final Widget Function(BuildContext)? builder;
+  final Widget Function(BuildContext, String)? builder;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
@@ -1911,11 +1971,13 @@ class _$WidgetNodeImpl extends WidgetNode {
             (identical(other.builder, builder) || other.builder == builder));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, builder);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WidgetNodeImplCopyWith<_$WidgetNodeImpl> get copyWith =>
@@ -1960,7 +2022,7 @@ class _$WidgetNodeImpl extends WidgetNode {
     required TResult Function(
             String id,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)
+            Widget Function(BuildContext, String)? builder)
         widget,
   }) {
     return widget(id, builder);
@@ -2005,7 +2067,7 @@ class _$WidgetNodeImpl extends WidgetNode {
     TResult? Function(
             String id,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
+            Widget Function(BuildContext, String)? builder)?
         widget,
   }) {
     return widget?.call(id, builder);
@@ -2050,7 +2112,7 @@ class _$WidgetNodeImpl extends WidgetNode {
     TResult Function(
             String id,
             @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
+            Widget Function(BuildContext, String)? builder)?
         widget,
     required TResult orElse(),
   }) {
@@ -2112,7 +2174,7 @@ abstract class WidgetNode extends WoFormNode {
   const factory WidgetNode(
       {required final String id,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      final Widget Function(BuildContext)? builder}) = _$WidgetNodeImpl;
+      final Widget Function(BuildContext, String)? builder}) = _$WidgetNodeImpl;
   const WidgetNode._() : super._();
 
   factory WidgetNode.fromJson(Map<String, dynamic> json) =
@@ -2121,9 +2183,12 @@ abstract class WidgetNode extends WoFormNode {
   @override
   String get id;
   @JsonKey(includeToJson: false, includeFromJson: false)
-  Widget Function(BuildContext)? get builder;
+  Widget Function(BuildContext, String)? get builder;
+
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WidgetNodeImplCopyWith<_$WidgetNodeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2140,7 +2205,9 @@ mixin _$FutureNode<T> {
   /// the children inputs will be reseted to their getInitialValues.
   bool get willResetToInitialValues => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FutureNode
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $FutureNodeCopyWith<T, FutureNode<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2169,6 +2236,8 @@ class _$FutureNodeCopyWithImpl<T, $Res, $Val extends FutureNode<T>>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of FutureNode
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2227,6 +2296,8 @@ class __$$FutureNodeImplCopyWithImpl<T, $Res>
       _$FutureNodeImpl<T> _value, $Res Function(_$FutureNodeImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of FutureNode
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2316,7 +2387,9 @@ class _$FutureNodeImpl<T> extends _FutureNode<T> {
       const DeepCollectionEquality().hash(initialData),
       willResetToInitialValues);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FutureNode
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FutureNodeImplCopyWith<T, _$FutureNodeImpl<T>> get copyWith =>
@@ -2341,13 +2414,16 @@ abstract class _FutureNode<T> extends FutureNode<T> {
   WoFormNodeMixin Function(String, AsyncSnapshot<T?>) get builder;
   @override
   T? get initialData;
-  @override
 
   /// If true, when the future will be completed, the values of
   /// the children inputs will be reseted to their getInitialValues.
-  bool get willResetToInitialValues;
   @override
-  @JsonKey(ignore: true)
+  bool get willResetToInitialValues;
+
+  /// Create a copy of FutureNode
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FutureNodeImplCopyWith<T, _$FutureNodeImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2366,8 +2442,12 @@ mixin _$RootNode {
   @JsonKey(toJson: ExportSettings.staticToJson)
   ExportSettings get exportSettings => throw _privateConstructorUsedError;
 
+  /// Serializes this RootNode to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of RootNode
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $RootNodeCopyWith<RootNode> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2399,6 +2479,8 @@ class _$RootNodeCopyWithImpl<$Res, $Val extends RootNode>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of RootNode
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2427,6 +2509,8 @@ class _$RootNodeCopyWithImpl<$Res, $Val extends RootNode>
     ) as $Val);
   }
 
+  /// Create a copy of RootNode
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $WoFormUiSettingsCopyWith<$Res> get uiSettings {
@@ -2435,6 +2519,8 @@ class _$RootNodeCopyWithImpl<$Res, $Val extends RootNode>
     });
   }
 
+  /// Create a copy of RootNode
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ExportSettingsCopyWith<$Res> get exportSettings {
@@ -2474,6 +2560,8 @@ class __$$RootNodeImplCopyWithImpl<$Res>
       _$RootNodeImpl _value, $Res Function(_$RootNodeImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of RootNode
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2557,7 +2645,7 @@ class _$RootNodeImpl extends _RootNode {
                 other.exportSettings == exportSettings));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -2566,7 +2654,9 @@ class _$RootNodeImpl extends _RootNode {
       uiSettings,
       exportSettings);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RootNode
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$RootNodeImplCopyWith<_$RootNodeImpl> get copyWith =>
@@ -2604,8 +2694,11 @@ abstract class _RootNode extends RootNode {
   @override
   @JsonKey(toJson: ExportSettings.staticToJson)
   ExportSettings get exportSettings;
+
+  /// Create a copy of RootNode
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RootNodeImplCopyWith<_$RootNodeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

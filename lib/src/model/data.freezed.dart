@@ -19,7 +19,9 @@ mixin _$WoFormHeaderData {
   String? get labelText => throw _privateConstructorUsedError;
   String? get helperText => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WoFormHeaderData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WoFormHeaderDataCopyWith<WoFormHeaderData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,6 +45,8 @@ class _$WoFormHeaderDataCopyWithImpl<$Res, $Val extends WoFormHeaderData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WoFormHeaderData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,6 +85,8 @@ class __$$WoFormHeaderDataImplCopyWithImpl<$Res>
       $Res Function(_$WoFormHeaderDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WoFormHeaderData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -129,7 +135,9 @@ class _$WoFormHeaderDataImpl implements _WoFormHeaderData {
   @override
   int get hashCode => Object.hash(runtimeType, labelText, helperText);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WoFormHeaderData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WoFormHeaderDataImplCopyWith<_$WoFormHeaderDataImpl> get copyWith =>
@@ -146,8 +154,11 @@ abstract class _WoFormHeaderData implements WoFormHeaderData {
   String? get labelText;
   @override
   String? get helperText;
+
+  /// Create a copy of WoFormHeaderData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WoFormHeaderDataImplCopyWith<_$WoFormHeaderDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -162,7 +173,9 @@ mixin _$WoFormInputHeaderData {
   VoidCallback? get onTap => throw _privateConstructorUsedError;
   bool get shrinkWrap => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WoFormInputHeaderData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WoFormInputHeaderDataCopyWith<WoFormInputHeaderData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -194,6 +207,8 @@ class _$WoFormInputHeaderDataCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WoFormInputHeaderData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -266,6 +281,8 @@ class __$$WoFormInputHeaderDataImplCopyWithImpl<$Res>
       $Res Function(_$WoFormInputHeaderDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WoFormInputHeaderData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -366,7 +383,9 @@ class _$WoFormInputHeaderDataImpl implements _WoFormInputHeaderData {
   int get hashCode => Object.hash(runtimeType, path, labelText, helperText,
       errorText, trailing, onTap, shrinkWrap);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WoFormInputHeaderData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WoFormInputHeaderDataImplCopyWith<_$WoFormInputHeaderDataImpl>
@@ -398,8 +417,11 @@ abstract class _WoFormInputHeaderData implements WoFormInputHeaderData {
   VoidCallback? get onTap;
   @override
   bool get shrinkWrap;
+
+  /// Create a copy of WoFormInputHeaderData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WoFormInputHeaderDataImplCopyWith<_$WoFormInputHeaderDataImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
