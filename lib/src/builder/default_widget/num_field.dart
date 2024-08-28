@@ -26,6 +26,10 @@ class _NumFieldState extends State<NumField> {
     final inputDecorationTheme = theme.inputDecorationTheme;
 
     return ListTile(
+      contentPadding: const EdgeInsets.only(
+        left: 16,
+        right: 4,
+      ),
       title: Text(
         widget.data.uiSettings.labelText ?? '',
         style: inputDecorationTheme.labelStyle,
@@ -48,6 +52,9 @@ class _NumFieldState extends State<NumField> {
         controller: countController,
         onChanged: widget.data.onValueChanged,
         axis: Axis.horizontal,
+        minCount: widget.data.input.minBound,
+        maxCount: widget.data.input.maxBound,
+        unit: widget.data.uiSettings.unit,
       ),
     );
   }

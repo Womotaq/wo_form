@@ -164,6 +164,7 @@ class NumInputUiSettings with _$NumInputUiSettings {
   const factory NumInputUiSettings({
     String? labelText,
     String? helperText,
+    @JsonKey(includeToJson: false, includeFromJson: false) Widget? unit,
     @JsonKey(includeToJson: false, includeFromJson: false)
     NumFieldBuilderDef? widgetBuilder,
   }) = _NumInputUiSettings;
@@ -181,6 +182,7 @@ class NumInputUiSettings with _$NumInputUiSettings {
       : NumInputUiSettings(
           labelText: labelText ?? other.labelText,
           helperText: helperText ?? other.helperText,
+          unit: unit ?? other.unit,
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,
         );
 }

@@ -24,6 +24,7 @@ class InputHeader extends StatelessWidget {
     }
 
     return ListTile(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16),
       title: Text(labelText),
       subtitle: errorText.isNotEmpty
           ? Text(

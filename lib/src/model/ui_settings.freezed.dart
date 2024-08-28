@@ -1021,6 +1021,8 @@ mixin _$NumInputUiSettings {
   String? get labelText => throw _privateConstructorUsedError;
   String? get helperText => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
+  Widget? get unit => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
   NumFieldBuilderDef? get widgetBuilder => throw _privateConstructorUsedError;
 
   /// Serializes this NumInputUiSettings to a JSON map.
@@ -1042,6 +1044,7 @@ abstract class $NumInputUiSettingsCopyWith<$Res> {
   $Res call(
       {String? labelText,
       String? helperText,
+      @JsonKey(includeToJson: false, includeFromJson: false) Widget? unit,
       @JsonKey(includeToJson: false, includeFromJson: false)
       NumFieldBuilderDef? widgetBuilder});
 }
@@ -1063,6 +1066,7 @@ class _$NumInputUiSettingsCopyWithImpl<$Res, $Val extends NumInputUiSettings>
   $Res call({
     Object? labelText = freezed,
     Object? helperText = freezed,
+    Object? unit = freezed,
     Object? widgetBuilder = freezed,
   }) {
     return _then(_value.copyWith(
@@ -1074,6 +1078,10 @@ class _$NumInputUiSettingsCopyWithImpl<$Res, $Val extends NumInputUiSettings>
           ? _value.helperText
           : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
+      unit: freezed == unit
+          ? _value.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as Widget?,
       widgetBuilder: freezed == widgetBuilder
           ? _value.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
@@ -1093,6 +1101,7 @@ abstract class _$$NumInputUiSettingsImplCopyWith<$Res>
   $Res call(
       {String? labelText,
       String? helperText,
+      @JsonKey(includeToJson: false, includeFromJson: false) Widget? unit,
       @JsonKey(includeToJson: false, includeFromJson: false)
       NumFieldBuilderDef? widgetBuilder});
 }
@@ -1112,6 +1121,7 @@ class __$$NumInputUiSettingsImplCopyWithImpl<$Res>
   $Res call({
     Object? labelText = freezed,
     Object? helperText = freezed,
+    Object? unit = freezed,
     Object? widgetBuilder = freezed,
   }) {
     return _then(_$NumInputUiSettingsImpl(
@@ -1123,6 +1133,10 @@ class __$$NumInputUiSettingsImplCopyWithImpl<$Res>
           ? _value.helperText
           : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
+      unit: freezed == unit
+          ? _value.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as Widget?,
       widgetBuilder: freezed == widgetBuilder
           ? _value.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
@@ -1137,6 +1151,7 @@ class _$NumInputUiSettingsImpl extends _NumInputUiSettings {
   const _$NumInputUiSettingsImpl(
       {this.labelText,
       this.helperText,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.unit,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.widgetBuilder})
       : super._();
@@ -1150,11 +1165,14 @@ class _$NumInputUiSettingsImpl extends _NumInputUiSettings {
   final String? helperText;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
+  final Widget? unit;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
   final NumFieldBuilderDef? widgetBuilder;
 
   @override
   String toString() {
-    return 'NumInputUiSettings(labelText: $labelText, helperText: $helperText, widgetBuilder: $widgetBuilder)';
+    return 'NumInputUiSettings(labelText: $labelText, helperText: $helperText, unit: $unit, widgetBuilder: $widgetBuilder)';
   }
 
   @override
@@ -1166,6 +1184,7 @@ class _$NumInputUiSettingsImpl extends _NumInputUiSettings {
                 other.labelText == labelText) &&
             (identical(other.helperText, helperText) ||
                 other.helperText == helperText) &&
+            (identical(other.unit, unit) || other.unit == unit) &&
             (identical(other.widgetBuilder, widgetBuilder) ||
                 other.widgetBuilder == widgetBuilder));
   }
@@ -1173,7 +1192,7 @@ class _$NumInputUiSettingsImpl extends _NumInputUiSettings {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, labelText, helperText, widgetBuilder);
+      Object.hash(runtimeType, labelText, helperText, unit, widgetBuilder);
 
   /// Create a copy of NumInputUiSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -1196,6 +1215,7 @@ abstract class _NumInputUiSettings extends NumInputUiSettings {
   const factory _NumInputUiSettings(
       {final String? labelText,
       final String? helperText,
+      @JsonKey(includeToJson: false, includeFromJson: false) final Widget? unit,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final NumFieldBuilderDef? widgetBuilder}) = _$NumInputUiSettingsImpl;
   const _NumInputUiSettings._() : super._();
@@ -1207,6 +1227,9 @@ abstract class _NumInputUiSettings extends NumInputUiSettings {
   String? get labelText;
   @override
   String? get helperText;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  Widget? get unit;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   NumFieldBuilderDef? get widgetBuilder;

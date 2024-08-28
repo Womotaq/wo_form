@@ -9,6 +9,7 @@ class NumSelector extends StatelessWidget {
     this.step = 1,
     this.minCount = 0,
     this.maxCount,
+    this.unit,
     super.key,
   });
 
@@ -18,6 +19,7 @@ class NumSelector extends StatelessWidget {
   final int step;
   final num? minCount;
   final num? maxCount;
+  final Widget? unit;
 
   Widget getSideButton({
     required Axis axis,
@@ -71,10 +73,11 @@ class NumSelector extends StatelessWidget {
           child: TextField(
             enabled: onChanged != null,
             controller: controller,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
               isDense: true,
-              contentPadding: EdgeInsets.all(8),
+              contentPadding: const EdgeInsets.all(8),
+              suffix: unit,
             ),
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
