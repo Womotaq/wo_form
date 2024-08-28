@@ -89,17 +89,21 @@ class SearchField<T> extends StatelessWidget {
                   context,
                   valueBuilderSafe,
                 ),
-        child: InputDecorator(
-          decoration: const InputDecoration(),
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: Theme.of(context).inputDecorationTheme.fillColor,
+            border: Border.all(
+              strokeAlign: BorderSide.strokeAlignOutside,
+            ),
+            borderRadius: BorderRadius.circular(8),
+          ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: previewBuilderSafe(selectedValues),
-                ),
+                child: previewBuilderSafe(selectedValues),
               ),
               if (showArrow) const Icon(Icons.keyboard_arrow_down),
             ],
