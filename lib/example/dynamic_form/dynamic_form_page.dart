@@ -29,10 +29,10 @@ class DynamicFormPage extends StatelessWidget {
         ValueBuilderNode(
           id: 'feeling',
           path: '/name',
-          builder: (id, value) {
+          builder: (value) {
             final name = value as String?;
             return StringInput(
-              id: id,
+              id: 'feeling',
               uiSettings: StringInputUiSettings(
                 helperText: 'Le soleil est la lumière de la vie',
                 hintText: "Bonjour ${(name ?? '').isEmpty ? '' : '$name '}! "
@@ -45,10 +45,10 @@ class DynamicFormPage extends StatelessWidget {
         ValueBuilderNode(
           id: 'isMale',
           path: '/name',
-          builder: (id, value) {
+          builder: (value) {
             final name = value as String?;
             return BooleanInput(
-              id: id,
+              id: 'isMale',
               uiSettings: BooleanInputUiSettings(
                 labelText: 'Êtes-vous un homme'
                     "${(name ?? '').isEmpty ? '' : ', $name'} ?",
@@ -59,10 +59,10 @@ class DynamicFormPage extends StatelessWidget {
         ValueBuilderNode(
           id: 'age',
           path: '/name',
-          builder: (id, value) {
+          builder: (value) {
             final name = value as String?;
             return NumInput(
-              id: id,
+              id: 'age',
               isRequired: true,
               minBound: 18,
               getCustomError: (value, path) => value == null || value >= 18
@@ -81,15 +81,15 @@ class DynamicFormPage extends StatelessWidget {
         ValueBuilderNode(
           id: 'username',
           path: '/isMale/isMale',
-          builder: (id, value) {
+          builder: (value) {
             final isMale = (value as bool?) ?? false;
             return ValueBuilderNode(
-              id: id,
+              id: 'username',
               path: '/name',
-              builder: (id, value) {
+              builder: (value) {
                 final name = value as String?;
                 return SelectInput<num>(
-                  id: id,
+                  id: 'username',
                   availibleValues: [1, 2, 3],
                   toJsonT: (value) => switch (value) {
                     1 => '@${name}_du49',
@@ -125,10 +125,10 @@ class DynamicFormPage extends StatelessWidget {
         ValueBuilderNode(
           id: 'acceptConditions',
           path: '/name',
-          builder: (id, value) {
+          builder: (value) {
             final name = value as String?;
             return BooleanInput(
-              id: id,
+              id: 'acceptConditions',
               isRequired: true,
               getCustomError: (value, path) => value == true
                   ? null

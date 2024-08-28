@@ -53,7 +53,7 @@ class QuizPage extends StatelessWidget {
             children: [
               WidgetNode(
                 id: 'header',
-                builder: (context, path) =>
+                builder: (_) =>
                     const QuizQuestion('De quelle couleur est le soleil ?'),
               ),
               const SelectStringInput(
@@ -72,10 +72,10 @@ class QuizPage extends StatelessWidget {
           ValueBuilderNode(
             id: 'a1',
             path: '../q1-page/q1',
-            builder: (id, value) {
+            builder: (value) {
               return WidgetNode(
-                id: id,
-                builder: (context, path) => QuizAnswer(
+                id: 'a1',
+                builder: (context) => QuizAnswer(
                   choice: (value as List<String>?)?.firstOrNull,
                   answer: 'Jaune',
                   explanation:
@@ -97,7 +97,7 @@ class QuizPage extends StatelessWidget {
             children: [
               WidgetNode(
                 id: 'header',
-                builder: (context, path) =>
+                builder: (_) =>
                     const QuizQuestion("Quelle est l'hypothénuse de x ?"),
               ),
               SelectStringInput(
@@ -127,10 +127,10 @@ class QuizPage extends StatelessWidget {
           ValueBuilderNode(
             id: 'a2',
             path: '../q2-page/q2',
-            builder: (id, value) {
+            builder: (value) {
               return WidgetNode(
-                id: id,
-                builder: (context, path) => QuizAnswer(
+                id: 'a2',
+                builder: (context) => QuizAnswer(
                   choice: (value as List<String>?)?.firstOrNull,
                   answer: 'C',
                   explanation: "L'hypothénuse est en réalité la face cachée de "
@@ -147,7 +147,7 @@ class QuizPage extends StatelessWidget {
             children: [
               WidgetNode(
                 id: 'header',
-                builder: (context, path) => const QuizQuestion(
+                builder: (context) => const QuizQuestion(
                     'Quel est le record du monde de jonglage, '
                     'avec un ballon de foot, sans interruption ?'),
               ),
@@ -161,10 +161,10 @@ class QuizPage extends StatelessWidget {
           ValueBuilderNode(
             id: 'a3',
             path: '../q3-page/q3',
-            builder: (id, value) {
+            builder: (value) {
               return WidgetNode(
-                id: id,
-                builder: (context, path) => QuizAnswer(
+                id: 'a3',
+                builder: (context) => QuizAnswer(
                   choice: value as num?,
                   answer: 170515,
                   explanation:
@@ -186,8 +186,7 @@ class QuizPage extends StatelessWidget {
             children: [
               WidgetNode(
                 id: 'header',
-                builder: (context, path) =>
-                    const QuizQuestion('Quel est votre prénom ?'),
+                builder: (_) => const QuizQuestion('Quel est votre prénom ?'),
               ),
               const StringInput(
                 id: 'q4',
@@ -199,10 +198,10 @@ class QuizPage extends StatelessWidget {
           ValueBuilderNode(
             id: 'r4',
             path: '../q4-page/q4',
-            builder: (id, value) {
+            builder: (value) {
               return WidgetNode(
-                id: id,
-                builder: (context, path) => QuizAnswer(
+                id: 'r4',
+                builder: (context) => QuizAnswer(
                   choice: value as String?,
                   answer: value,
                   explanation:
@@ -220,7 +219,7 @@ class QuizPage extends StatelessWidget {
             children: [
               WidgetNode(
                 id: 'header',
-                builder: (context, path) => const QuizQuestion(
+                builder: (context) => const QuizQuestion(
                   "J'ai vu et je reconnais que le package wo_form est un package"
                   ' extraordinaire et très utile.',
                 ),
@@ -236,10 +235,10 @@ class QuizPage extends StatelessWidget {
           ValueBuilderNode(
             id: 'r5',
             path: '../q5-page/q5',
-            builder: (id, value) {
+            builder: (value) {
               return WidgetNode(
-                id: id,
-                builder: (context, path) => QuizAnswer(
+                id: 'r5',
+                builder: (context) => QuizAnswer(
                   choice: value as bool?,
                   answer: true,
                   explanation:

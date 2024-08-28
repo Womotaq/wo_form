@@ -86,6 +86,20 @@ Map<String, dynamic> _$$InputsNodeImplToJson(_$InputsNodeImpl instance) =>
       'runtimeType': instance.$type,
     };
 
+_$PathBuilderNodeImpl _$$PathBuilderNodeImplFromJson(
+        Map<String, dynamic> json) =>
+    _$PathBuilderNodeImpl(
+      id: json['id'] as String,
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$PathBuilderNodeImplToJson(
+        _$PathBuilderNodeImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'runtimeType': instance.$type,
+    };
+
 _$ValueBuilderNodeImpl _$$ValueBuilderNodeImplFromJson(
         Map<String, dynamic> json) =>
     _$ValueBuilderNodeImpl(
@@ -107,22 +121,22 @@ Map<String, dynamic> _$$ValueBuilderNodeImplToJson(
 _$ValueListenerNodeImpl _$$ValueListenerNodeImplFromJson(
         Map<String, dynamic> json) =>
     _$ValueListenerNodeImpl(
-      id: json['id'] as String,
       path: json['path'] as String,
+      id: json['id'] as String? ?? 'ValueListenerNode',
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$$ValueListenerNodeImplToJson(
         _$ValueListenerNodeImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'path': instance.path,
+      'id': instance.id,
       'runtimeType': instance.$type,
     };
 
 _$WidgetNodeImpl _$$WidgetNodeImplFromJson(Map<String, dynamic> json) =>
     _$WidgetNodeImpl(
-      id: json['id'] as String,
+      id: json['id'] as String? ?? 'WidgetNode',
       $type: json['runtimeType'] as String?,
     );
 

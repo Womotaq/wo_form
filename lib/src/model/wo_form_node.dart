@@ -141,19 +141,26 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
     ExportSettings exportSettings,
   }) = InputsNode;
 
+  @Assert('builder != null', 'PathBuilderNode.builder cannot be null')
+  const factory WoFormNode.pathBuilder({
+    required String id,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    WoFormNodeMixin Function(String path)? builder,
+  }) = PathBuilderNode;
+
   @Assert('builder != null', 'ValueBuilderNode.builder cannot be null')
   const factory WoFormNode.valueBuilder({
     required String id,
     required String path,
     @JsonKey(includeToJson: false, includeFromJson: false)
-    WoFormNodeMixin Function(String id, Object? value)? builder,
+    WoFormNodeMixin Function(Object? value)? builder,
     Object? initialValue,
   }) = ValueBuilderNode;
 
   @Assert('listener != null', 'ValueListenerNode.listener cannot be null')
   const factory WoFormNode.valueListener({
-    required String id,
     required String path,
+    @Default('ValueListenerNode') String id,
     @JsonKey(includeToJson: false, includeFromJson: false)
     bool Function(Object? previous, Object? current)? listenWhen,
     @JsonKey(includeToJson: false, includeFromJson: false)
@@ -162,9 +169,9 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
   }) = ValueListenerNode;
 
   const factory WoFormNode.widget({
-    required String id,
+    @Default('WidgetNode') String id,
     @JsonKey(includeToJson: false, includeFromJson: false)
-    Widget Function(BuildContext context, String path)? builder,
+    Widget Function(BuildContext context)? builder,
   }) = WidgetNode;
 
   const WoFormNode._();
@@ -237,16 +244,18 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
               into[getExportKey(values: values, parentPath: parentPath)] = data;
             }
         }
-      case ValueBuilderNode(path: final path, builder: final builder):
-        final input = builder!(
-          id,
-          values[WoFormNodeMixin.getAbsolutePath(
-            parentPath: '$parentPath/$id',
-            path: path,
-          )],
-        );
+      case PathBuilderNode():
+      case ValueBuilderNode():
+        final child = this is ValueBuilderNode
+            ? (this as ValueBuilderNode).builder!(
+                values[WoFormNodeMixin.getAbsolutePath(
+                  parentPath: '$parentPath/$id',
+                  path: (this as ValueBuilderNode).path,
+                )],
+              )
+            : (this as PathBuilderNode).builder!('$parentPath/$id');
 
-        input.export(
+        child.export(
           into: into,
           values: values,
           parentPath: '$parentPath/$id',
@@ -276,18 +285,20 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
               parentPath: '$parentPath/$id',
             ),
         ];
-      case ValueBuilderNode(path: final path, builder: final builder):
-        final input = builder!(
-          id,
-          values[WoFormNodeMixin.getAbsolutePath(
-            parentPath: '$parentPath/$id',
-            path: path,
-          )],
-        );
+      case PathBuilderNode():
+      case ValueBuilderNode():
+        final child = this is ValueBuilderNode
+            ? (this as ValueBuilderNode).builder!(
+                values[WoFormNodeMixin.getAbsolutePath(
+                  parentPath: '$parentPath/$id',
+                  path: (this as ValueBuilderNode).path,
+                )],
+              )
+            : (this as PathBuilderNode).builder!('$parentPath/$id');
 
         return [
           '$parentPath/$id',
-          ...input.getAllInputPaths(
+          ...child.getAllInputPaths(
             values: values,
             parentPath: '$parentPath/$id',
           ),
@@ -344,17 +355,16 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
               parentPath: '$parentPath/$id',
               values: values,
             );
-      case ValueBuilderNode(
-          path: final childPath,
-          builder: final builder,
-        ):
-        final child = builder!(
-          id,
-          values[WoFormNodeMixin.getAbsolutePath(
-            parentPath: '$parentPath/$id',
-            path: childPath,
-          )],
-        );
+      case PathBuilderNode():
+      case ValueBuilderNode():
+        final child = this is ValueBuilderNode
+            ? (this as ValueBuilderNode).builder!(
+                values[WoFormNodeMixin.getAbsolutePath(
+                  parentPath: '$parentPath/$id',
+                  path: (this as ValueBuilderNode).path,
+                )],
+              )
+            : (this as PathBuilderNode).builder!('$parentPath/$id');
 
         // if the path ends at the child of this node
         if (secondSlashIndex == -1) {
@@ -391,16 +401,18 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
               parentPath: '$parentPath/$id',
             ),
         ].whereNotNull();
-      case ValueBuilderNode(path: final path, builder: final builder):
-        final input = builder!(
-          id,
-          values[WoFormNodeMixin.getAbsolutePath(
-            parentPath: '$parentPath/$id',
-            path: path,
-          )],
-        );
+      case PathBuilderNode():
+      case ValueBuilderNode():
+        final child = this is ValueBuilderNode
+            ? (this as ValueBuilderNode).builder!(
+                values[WoFormNodeMixin.getAbsolutePath(
+                  parentPath: '$parentPath/$id',
+                  path: (this as ValueBuilderNode).path,
+                )],
+              )
+            : (this as PathBuilderNode).builder!('$parentPath/$id');
 
-        return input.getErrors(
+        return child.getErrors(
           values: values,
           parentPath: '$parentPath/$id',
         );
@@ -422,16 +434,18 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
           ExportType.map || ExportType.list => id,
           ExportType.mergeWithParent => null,
         };
-      case ValueBuilderNode(path: final path, builder: final builder):
-        final input = builder!(
-          id,
-          values[WoFormNodeMixin.getAbsolutePath(
-            parentPath: '$parentPath/$id',
-            path: path,
-          )],
-        );
+      case PathBuilderNode():
+      case ValueBuilderNode():
+        final child = this is ValueBuilderNode
+            ? (this as ValueBuilderNode).builder!(
+                values[WoFormNodeMixin.getAbsolutePath(
+                  parentPath: '$parentPath/$id',
+                  path: (this as ValueBuilderNode).path,
+                )],
+              )
+            : (this as PathBuilderNode).builder!('$parentPath/$id');
 
-        return input.getExportKey(
+        return child.getExportKey(
           values: values,
           parentPath: '$parentPath/$id',
         );
@@ -454,12 +468,15 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
           for (final child in children)
             ...child.getInitialValues(parentPath: '$parentPath/$id'),
         };
+      case PathBuilderNode(builder: final builder):
+        final child = builder!('$parentPath/$id');
+        return child.getInitialValues(parentPath: '$parentPath/$id');
       case ValueBuilderNode(
           builder: final builder,
           initialValue: final initialValue,
         ):
-        final input = builder!(id, initialValue);
-        return input.getInitialValues(parentPath: '$parentPath/$id');
+        final child = builder!(initialValue);
+        return child.getInitialValues(parentPath: '$parentPath/$id');
       case ValueListenerNode():
       case WidgetNode():
         return {};
@@ -476,6 +493,8 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
             key: key,
             path: '$parentPath/$id',
           ),
+        PathBuilderNode(builder: final builder) =>
+          builder!('$parentPath/$id').toWidget(parentPath: '$parentPath/$id'),
         ValueBuilderNode(
           path: final path,
           builder: final builder,
@@ -487,8 +506,8 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
               parentPath: '$parentPath/$id',
             ),
             builder: (context, value) {
-              final input = builder!(id, value);
-              return input.toWidget(
+              final child = builder!(value);
+              return child.toWidget(
                 parentPath: '$parentPath/$id',
               );
             },
@@ -516,10 +535,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
           ),
         WidgetNode(builder: final builder) => builder == null
             ? SizedBox.shrink(key: key)
-            : Builder(
-                key: key,
-                builder: (context) => builder(context, '$parentPath/$id'),
-              ),
+            : Builder(key: key, builder: builder),
       };
 
   @override
