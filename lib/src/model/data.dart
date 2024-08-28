@@ -23,3 +23,20 @@ class WoFormInputHeaderData with _$WoFormInputHeaderData {
     @Default(true) bool shrinkWrap,
   }) = _WoFormInputHeaderData;
 }
+
+@freezed
+class WoFieldData<I, T, U> with _$WoFieldData<I, T, U> {
+  /// I : input
+  /// T : value
+  /// U : uiSettings
+  const factory WoFieldData({
+    required String path,
+    required I input,
+    required T? value,
+    required String? errorText,
+    required U uiSettings,
+
+    /// Null means locked field
+    required void Function(T?)? onValueChanged,
+  }) = _WoFieldData;
+}

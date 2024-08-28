@@ -425,3 +425,255 @@ abstract class _WoFormInputHeaderData implements WoFormInputHeaderData {
   _$$WoFormInputHeaderDataImplCopyWith<_$WoFormInputHeaderDataImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+mixin _$WoFieldData<I, T, U> {
+  String get path => throw _privateConstructorUsedError;
+  I get input => throw _privateConstructorUsedError;
+  T? get value => throw _privateConstructorUsedError;
+  String? get errorText => throw _privateConstructorUsedError;
+  U get uiSettings => throw _privateConstructorUsedError;
+
+  /// Null means locked field
+  void Function(T?)? get onValueChanged => throw _privateConstructorUsedError;
+
+  /// Create a copy of WoFieldData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $WoFieldDataCopyWith<I, T, U, WoFieldData<I, T, U>> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $WoFieldDataCopyWith<I, T, U, $Res> {
+  factory $WoFieldDataCopyWith(WoFieldData<I, T, U> value,
+          $Res Function(WoFieldData<I, T, U>) then) =
+      _$WoFieldDataCopyWithImpl<I, T, U, $Res, WoFieldData<I, T, U>>;
+  @useResult
+  $Res call(
+      {String path,
+      I input,
+      T? value,
+      String? errorText,
+      U uiSettings,
+      void Function(T?)? onValueChanged});
+}
+
+/// @nodoc
+class _$WoFieldDataCopyWithImpl<I, T, U, $Res,
+        $Val extends WoFieldData<I, T, U>>
+    implements $WoFieldDataCopyWith<I, T, U, $Res> {
+  _$WoFieldDataCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of WoFieldData
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? path = null,
+    Object? input = freezed,
+    Object? value = freezed,
+    Object? errorText = freezed,
+    Object? uiSettings = freezed,
+    Object? onValueChanged = freezed,
+  }) {
+    return _then(_value.copyWith(
+      path: null == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String,
+      input: freezed == input
+          ? _value.input
+          : input // ignore: cast_nullable_to_non_nullable
+              as I,
+      value: freezed == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as T?,
+      errorText: freezed == errorText
+          ? _value.errorText
+          : errorText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      uiSettings: freezed == uiSettings
+          ? _value.uiSettings
+          : uiSettings // ignore: cast_nullable_to_non_nullable
+              as U,
+      onValueChanged: freezed == onValueChanged
+          ? _value.onValueChanged
+          : onValueChanged // ignore: cast_nullable_to_non_nullable
+              as void Function(T?)?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$WoFieldDataImplCopyWith<I, T, U, $Res>
+    implements $WoFieldDataCopyWith<I, T, U, $Res> {
+  factory _$$WoFieldDataImplCopyWith(_$WoFieldDataImpl<I, T, U> value,
+          $Res Function(_$WoFieldDataImpl<I, T, U>) then) =
+      __$$WoFieldDataImplCopyWithImpl<I, T, U, $Res>;
+  @override
+  @useResult
+  $Res call(
+      {String path,
+      I input,
+      T? value,
+      String? errorText,
+      U uiSettings,
+      void Function(T?)? onValueChanged});
+}
+
+/// @nodoc
+class __$$WoFieldDataImplCopyWithImpl<I, T, U, $Res>
+    extends _$WoFieldDataCopyWithImpl<I, T, U, $Res, _$WoFieldDataImpl<I, T, U>>
+    implements _$$WoFieldDataImplCopyWith<I, T, U, $Res> {
+  __$$WoFieldDataImplCopyWithImpl(_$WoFieldDataImpl<I, T, U> _value,
+      $Res Function(_$WoFieldDataImpl<I, T, U>) _then)
+      : super(_value, _then);
+
+  /// Create a copy of WoFieldData
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? path = null,
+    Object? input = freezed,
+    Object? value = freezed,
+    Object? errorText = freezed,
+    Object? uiSettings = freezed,
+    Object? onValueChanged = freezed,
+  }) {
+    return _then(_$WoFieldDataImpl<I, T, U>(
+      path: null == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String,
+      input: freezed == input
+          ? _value.input
+          : input // ignore: cast_nullable_to_non_nullable
+              as I,
+      value: freezed == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as T?,
+      errorText: freezed == errorText
+          ? _value.errorText
+          : errorText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      uiSettings: freezed == uiSettings
+          ? _value.uiSettings
+          : uiSettings // ignore: cast_nullable_to_non_nullable
+              as U,
+      onValueChanged: freezed == onValueChanged
+          ? _value.onValueChanged
+          : onValueChanged // ignore: cast_nullable_to_non_nullable
+              as void Function(T?)?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$WoFieldDataImpl<I, T, U> implements _WoFieldData<I, T, U> {
+  const _$WoFieldDataImpl(
+      {required this.path,
+      required this.input,
+      required this.value,
+      required this.errorText,
+      required this.uiSettings,
+      required this.onValueChanged});
+
+  @override
+  final String path;
+  @override
+  final I input;
+  @override
+  final T? value;
+  @override
+  final String? errorText;
+  @override
+  final U uiSettings;
+
+  /// Null means locked field
+  @override
+  final void Function(T?)? onValueChanged;
+
+  @override
+  String toString() {
+    return 'WoFieldData<$I, $T, $U>(path: $path, input: $input, value: $value, errorText: $errorText, uiSettings: $uiSettings, onValueChanged: $onValueChanged)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$WoFieldDataImpl<I, T, U> &&
+            (identical(other.path, path) || other.path == path) &&
+            const DeepCollectionEquality().equals(other.input, input) &&
+            const DeepCollectionEquality().equals(other.value, value) &&
+            (identical(other.errorText, errorText) ||
+                other.errorText == errorText) &&
+            const DeepCollectionEquality()
+                .equals(other.uiSettings, uiSettings) &&
+            (identical(other.onValueChanged, onValueChanged) ||
+                other.onValueChanged == onValueChanged));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      path,
+      const DeepCollectionEquality().hash(input),
+      const DeepCollectionEquality().hash(value),
+      errorText,
+      const DeepCollectionEquality().hash(uiSettings),
+      onValueChanged);
+
+  /// Create a copy of WoFieldData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$WoFieldDataImplCopyWith<I, T, U, _$WoFieldDataImpl<I, T, U>>
+      get copyWith =>
+          __$$WoFieldDataImplCopyWithImpl<I, T, U, _$WoFieldDataImpl<I, T, U>>(
+              this, _$identity);
+}
+
+abstract class _WoFieldData<I, T, U> implements WoFieldData<I, T, U> {
+  const factory _WoFieldData(
+          {required final String path,
+          required final I input,
+          required final T? value,
+          required final String? errorText,
+          required final U uiSettings,
+          required final void Function(T?)? onValueChanged}) =
+      _$WoFieldDataImpl<I, T, U>;
+
+  @override
+  String get path;
+  @override
+  I get input;
+  @override
+  T? get value;
+  @override
+  String? get errorText;
+  @override
+  U get uiSettings;
+
+  /// Null means locked field
+  @override
+  void Function(T?)? get onValueChanged;
+
+  /// Create a copy of WoFieldData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$WoFieldDataImplCopyWith<I, T, U, _$WoFieldDataImpl<I, T, U>>
+      get copyWith => throw _privateConstructorUsedError;
+}

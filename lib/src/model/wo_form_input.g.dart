@@ -112,7 +112,8 @@ Map<String, dynamic> _$$SelectStringInputImplToJson(
       'minCount': instance.minCount,
       'initialValues': instance.initialValues,
       'availibleValues': instance.availibleValues,
-      'uiSettings': instance.uiSettings,
+      'uiSettings':
+          _SelectInputUiSettingsX.staticToJsonString(instance.uiSettings),
       'runtimeType': instance.$type,
     };
 

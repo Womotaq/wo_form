@@ -1000,6 +1000,7 @@ mixin _$WoFormInput {
             List<String> availibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings)
         selectString,
     required TResult Function(
@@ -1043,6 +1044,7 @@ mixin _$WoFormInput {
             List<String> availibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings)?
         selectString,
     TResult? Function(
@@ -1086,6 +1088,7 @@ mixin _$WoFormInput {
             List<String> availibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings)?
         selectString,
     TResult Function(
@@ -1345,6 +1348,7 @@ class _$BooleanInputImpl extends BooleanInput {
             List<String> availibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings)
         selectString,
     required TResult Function(
@@ -1391,6 +1395,7 @@ class _$BooleanInputImpl extends BooleanInput {
             List<String> availibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings)?
         selectString,
     TResult? Function(
@@ -1438,6 +1443,7 @@ class _$BooleanInputImpl extends BooleanInput {
             List<String> availibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings)?
         selectString,
     TResult Function(
@@ -1732,6 +1738,7 @@ class _$NumInputImpl extends NumInput {
             List<String> availibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings)
         selectString,
     required TResult Function(
@@ -1779,6 +1786,7 @@ class _$NumInputImpl extends NumInput {
             List<String> availibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings)?
         selectString,
     TResult? Function(
@@ -1826,6 +1834,7 @@ class _$NumInputImpl extends NumInput {
             List<String> availibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings)?
         selectString,
     TResult Function(
@@ -1943,6 +1952,7 @@ abstract class _$$SelectStringInputImplCopyWith<$Res>
       List<String> availibleValues,
       @JsonKey(includeToJson: false, includeFromJson: false)
       GetCustomErrorForListDef<String>? getCustomError,
+      @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
       SelectInputUiSettings<String> uiSettings});
 
   $SelectInputUiSettingsCopyWith<String, $Res> get uiSettings;
@@ -2024,6 +2034,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
       final List<String> availibleValues = const [],
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.getCustomError,
+      @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
       this.uiSettings = const SelectInputUiSettings<String>(),
       final String? $type})
       : assert(maxCount == null || minCount <= maxCount,
@@ -2065,7 +2076,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
   @JsonKey(includeToJson: false, includeFromJson: false)
   final GetCustomErrorForListDef<String>? getCustomError;
   @override
-  @JsonKey()
+  @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
   final SelectInputUiSettings<String> uiSettings;
 
   @JsonKey(name: 'runtimeType')
@@ -2147,6 +2158,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             List<String> availibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings)
         selectString,
     required TResult Function(
@@ -2194,6 +2206,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             List<String> availibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings)?
         selectString,
     TResult? Function(
@@ -2241,6 +2254,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             List<String> availibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings)?
         selectString,
     TResult Function(
@@ -2316,6 +2330,7 @@ abstract class SelectStringInput extends WoFormInput {
           final List<String> availibleValues,
           @JsonKey(includeToJson: false, includeFromJson: false)
           final GetCustomErrorForListDef<String>? getCustomError,
+          @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
           final SelectInputUiSettings<String> uiSettings}) =
       _$SelectStringInputImpl;
   const SelectStringInput._() : super._();
@@ -2333,6 +2348,7 @@ abstract class SelectStringInput extends WoFormInput {
   @JsonKey(includeToJson: false, includeFromJson: false)
   GetCustomErrorForListDef<String>? get getCustomError;
   @override
+  @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
   SelectInputUiSettings<String> get uiSettings;
 
   /// Create a copy of WoFormInput
@@ -2527,6 +2543,7 @@ class _$StringInputImpl extends StringInput {
             List<String> availibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings)
         selectString,
     required TResult Function(
@@ -2574,6 +2591,7 @@ class _$StringInputImpl extends StringInput {
             List<String> availibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings)?
         selectString,
     TResult? Function(
@@ -2621,6 +2639,7 @@ class _$StringInputImpl extends StringInput {
             List<String> availibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings)?
         selectString,
     TResult Function(

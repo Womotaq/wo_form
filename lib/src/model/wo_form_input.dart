@@ -94,6 +94,13 @@ typedef GetCustomErrorForListDef<T> = WoFormInputError? Function(
   String path,
 );
 
+extension _SelectInputUiSettingsX<T> on SelectInputUiSettings<T> {
+  static Map<String, dynamic> staticToJsonString(
+    SelectInputUiSettings<String> object,
+  ) =>
+      object.toJson();
+}
+
 @freezed
 sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
   const factory WoFormInput.boolean({
@@ -134,6 +141,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     @Default([]) List<String> availibleValues,
     @JsonKey(includeToJson: false, includeFromJson: false)
     GetCustomErrorForListDef<String>? getCustomError,
+    @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
     @Default(SelectInputUiSettings<String>())
     SelectInputUiSettings<String> uiSettings,
   }) = SelectStringInput;
