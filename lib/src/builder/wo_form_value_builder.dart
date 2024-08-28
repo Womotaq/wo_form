@@ -29,3 +29,24 @@ class WoFormValueBuilder<T> extends StatelessWidget {
     );
   }
 }
+
+class WoFormValuesBuilder extends StatelessWidget {
+  const WoFormValuesBuilder({
+    required this.paths,
+    required this.builder,
+    super.key,
+  });
+
+  final List<String> paths;
+  final Widget Function(BuildContext context, Map<String, dynamic> values)
+      builder;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocSelector<WoFormValuesCubit, Map<String, dynamic>,
+        Map<String, dynamic>>(
+      selector: (values) => {for (final path in paths) path: values[path]},
+      builder: builder,
+    );
+  }
+}

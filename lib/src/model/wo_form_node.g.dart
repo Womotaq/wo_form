@@ -118,6 +118,24 @@ Map<String, dynamic> _$$ValueBuilderNodeImplToJson(
       'runtimeType': instance.$type,
     };
 
+_$ValuesBuilderNodeImpl _$$ValuesBuilderNodeImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ValuesBuilderNodeImpl(
+      id: json['id'] as String,
+      paths: (json['paths'] as List<dynamic>).map((e) => e as String).toList(),
+      initialValues: json['initialValues'] as Map<String, dynamic>?,
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$ValuesBuilderNodeImplToJson(
+        _$ValuesBuilderNodeImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'paths': instance.paths,
+      'initialValues': instance.initialValues,
+      'runtimeType': instance.$type,
+    };
+
 _$ValueListenerNodeImpl _$$ValueListenerNodeImplFromJson(
         Map<String, dynamic> json) =>
     _$ValueListenerNodeImpl(
