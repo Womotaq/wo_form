@@ -144,6 +144,9 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
     @Default(SelectInputUiSettings<String>())
     SelectInputUiSettings<String> uiSettings,
+    // The correct answer is the index of availibleValues
+    @JsonKey(toJson: QuizSettingsNum.staticToJson)
+    QuizSettingsNum? quizSettings,
   }) = SelectStringInput;
 
   const factory WoFormInput.string({

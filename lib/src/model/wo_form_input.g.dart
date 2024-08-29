@@ -101,6 +101,10 @@ _$SelectStringInputImpl _$$SelectStringInputImplFromJson(
           ? const SelectInputUiSettings<String>()
           : SelectInputUiSettings<String>.fromJson(
               json['uiSettings'] as Map<String, dynamic>),
+      quizSettings: json['quizSettings'] == null
+          ? null
+          : QuizSettingsNum.fromJson(
+              json['quizSettings'] as Map<String, dynamic>),
       $type: json['runtimeType'] as String?,
     );
 
@@ -114,6 +118,7 @@ Map<String, dynamic> _$$SelectStringInputImplToJson(
       'availibleValues': instance.availibleValues,
       'uiSettings':
           _SelectInputUiSettingsX.staticToJsonString(instance.uiSettings),
+      'quizSettings': QuizSettingsNum.staticToJson(instance.quizSettings),
       'runtimeType': instance.$type,
     };
 

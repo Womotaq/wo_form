@@ -1001,7 +1001,9 @@ mixin _$WoFormInput {
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
-            SelectInputUiSettings<String> uiSettings)
+            SelectInputUiSettings<String> uiSettings,
+            @JsonKey(toJson: QuizSettingsNum.staticToJson)
+            QuizSettingsNum? quizSettings)
         selectString,
     required TResult Function(
             String id,
@@ -1045,7 +1047,9 @@ mixin _$WoFormInput {
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
-            SelectInputUiSettings<String> uiSettings)?
+            SelectInputUiSettings<String> uiSettings,
+            @JsonKey(toJson: QuizSettingsNum.staticToJson)
+            QuizSettingsNum? quizSettings)?
         selectString,
     TResult? Function(
             String id,
@@ -1089,7 +1093,9 @@ mixin _$WoFormInput {
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
-            SelectInputUiSettings<String> uiSettings)?
+            SelectInputUiSettings<String> uiSettings,
+            @JsonKey(toJson: QuizSettingsNum.staticToJson)
+            QuizSettingsNum? quizSettings)?
         selectString,
     TResult Function(
             String id,
@@ -1349,7 +1355,9 @@ class _$BooleanInputImpl extends BooleanInput {
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
-            SelectInputUiSettings<String> uiSettings)
+            SelectInputUiSettings<String> uiSettings,
+            @JsonKey(toJson: QuizSettingsNum.staticToJson)
+            QuizSettingsNum? quizSettings)
         selectString,
     required TResult Function(
             String id,
@@ -1396,7 +1404,9 @@ class _$BooleanInputImpl extends BooleanInput {
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
-            SelectInputUiSettings<String> uiSettings)?
+            SelectInputUiSettings<String> uiSettings,
+            @JsonKey(toJson: QuizSettingsNum.staticToJson)
+            QuizSettingsNum? quizSettings)?
         selectString,
     TResult? Function(
             String id,
@@ -1444,7 +1454,9 @@ class _$BooleanInputImpl extends BooleanInput {
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
-            SelectInputUiSettings<String> uiSettings)?
+            SelectInputUiSettings<String> uiSettings,
+            @JsonKey(toJson: QuizSettingsNum.staticToJson)
+            QuizSettingsNum? quizSettings)?
         selectString,
     TResult Function(
             String id,
@@ -1739,7 +1751,9 @@ class _$NumInputImpl extends NumInput {
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
-            SelectInputUiSettings<String> uiSettings)
+            SelectInputUiSettings<String> uiSettings,
+            @JsonKey(toJson: QuizSettingsNum.staticToJson)
+            QuizSettingsNum? quizSettings)
         selectString,
     required TResult Function(
             String id,
@@ -1787,7 +1801,9 @@ class _$NumInputImpl extends NumInput {
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
-            SelectInputUiSettings<String> uiSettings)?
+            SelectInputUiSettings<String> uiSettings,
+            @JsonKey(toJson: QuizSettingsNum.staticToJson)
+            QuizSettingsNum? quizSettings)?
         selectString,
     TResult? Function(
             String id,
@@ -1835,7 +1851,9 @@ class _$NumInputImpl extends NumInput {
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
-            SelectInputUiSettings<String> uiSettings)?
+            SelectInputUiSettings<String> uiSettings,
+            @JsonKey(toJson: QuizSettingsNum.staticToJson)
+            QuizSettingsNum? quizSettings)?
         selectString,
     TResult Function(
             String id,
@@ -1953,9 +1971,12 @@ abstract class _$$SelectStringInputImplCopyWith<$Res>
       @JsonKey(includeToJson: false, includeFromJson: false)
       GetCustomErrorForListDef<String>? getCustomError,
       @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
-      SelectInputUiSettings<String> uiSettings});
+      SelectInputUiSettings<String> uiSettings,
+      @JsonKey(toJson: QuizSettingsNum.staticToJson)
+      QuizSettingsNum? quizSettings});
 
   $SelectInputUiSettingsCopyWith<String, $Res> get uiSettings;
+  $QuizSettingsNumCopyWith<$Res>? get quizSettings;
 }
 
 /// @nodoc
@@ -1978,6 +1999,7 @@ class __$$SelectStringInputImplCopyWithImpl<$Res>
     Object? availibleValues = null,
     Object? getCustomError = freezed,
     Object? uiSettings = null,
+    Object? quizSettings = freezed,
   }) {
     return _then(_$SelectStringInputImpl(
       id: null == id
@@ -2008,6 +2030,10 @@ class __$$SelectStringInputImplCopyWithImpl<$Res>
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
               as SelectInputUiSettings<String>,
+      quizSettings: freezed == quizSettings
+          ? _value.quizSettings
+          : quizSettings // ignore: cast_nullable_to_non_nullable
+              as QuizSettingsNum?,
     ));
   }
 
@@ -2019,6 +2045,20 @@ class __$$SelectStringInputImplCopyWithImpl<$Res>
     return $SelectInputUiSettingsCopyWith<String, $Res>(_value.uiSettings,
         (value) {
       return _then(_value.copyWith(uiSettings: value));
+    });
+  }
+
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $QuizSettingsNumCopyWith<$Res>? get quizSettings {
+    if (_value.quizSettings == null) {
+      return null;
+    }
+
+    return $QuizSettingsNumCopyWith<$Res>(_value.quizSettings!, (value) {
+      return _then(_value.copyWith(quizSettings: value));
     });
   }
 }
@@ -2036,6 +2076,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
       this.getCustomError,
       @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
       this.uiSettings = const SelectInputUiSettings<String>(),
+      @JsonKey(toJson: QuizSettingsNum.staticToJson) this.quizSettings,
       final String? $type})
       : assert(maxCount == null || minCount <= maxCount,
             'maxCount must be higher or equal to minCount'),
@@ -2078,13 +2119,17 @@ class _$SelectStringInputImpl extends SelectStringInput {
   @override
   @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
   final SelectInputUiSettings<String> uiSettings;
+// The correct answer is the index of availibleValues
+  @override
+  @JsonKey(toJson: QuizSettingsNum.staticToJson)
+  final QuizSettingsNum? quizSettings;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'WoFormInput.selectString(id: $id, maxCount: $maxCount, minCount: $minCount, initialValues: $initialValues, availibleValues: $availibleValues, getCustomError: $getCustomError, uiSettings: $uiSettings)';
+    return 'WoFormInput.selectString(id: $id, maxCount: $maxCount, minCount: $minCount, initialValues: $initialValues, availibleValues: $availibleValues, getCustomError: $getCustomError, uiSettings: $uiSettings, quizSettings: $quizSettings)';
   }
 
   @override
@@ -2104,7 +2149,9 @@ class _$SelectStringInputImpl extends SelectStringInput {
             (identical(other.getCustomError, getCustomError) ||
                 other.getCustomError == getCustomError) &&
             (identical(other.uiSettings, uiSettings) ||
-                other.uiSettings == uiSettings));
+                other.uiSettings == uiSettings) &&
+            (identical(other.quizSettings, quizSettings) ||
+                other.quizSettings == quizSettings));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2117,7 +2164,8 @@ class _$SelectStringInputImpl extends SelectStringInput {
       const DeepCollectionEquality().hash(_initialValues),
       const DeepCollectionEquality().hash(_availibleValues),
       getCustomError,
-      uiSettings);
+      uiSettings,
+      quizSettings);
 
   /// Create a copy of WoFormInput
   /// with the given fields replaced by the non-null parameter values.
@@ -2159,7 +2207,9 @@ class _$SelectStringInputImpl extends SelectStringInput {
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
-            SelectInputUiSettings<String> uiSettings)
+            SelectInputUiSettings<String> uiSettings,
+            @JsonKey(toJson: QuizSettingsNum.staticToJson)
+            QuizSettingsNum? quizSettings)
         selectString,
     required TResult Function(
             String id,
@@ -2173,7 +2223,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
         string,
   }) {
     return selectString(id, maxCount, minCount, initialValues, availibleValues,
-        getCustomError, uiSettings);
+        getCustomError, uiSettings, quizSettings);
   }
 
   @override
@@ -2207,7 +2257,9 @@ class _$SelectStringInputImpl extends SelectStringInput {
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
-            SelectInputUiSettings<String> uiSettings)?
+            SelectInputUiSettings<String> uiSettings,
+            @JsonKey(toJson: QuizSettingsNum.staticToJson)
+            QuizSettingsNum? quizSettings)?
         selectString,
     TResult? Function(
             String id,
@@ -2221,7 +2273,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
         string,
   }) {
     return selectString?.call(id, maxCount, minCount, initialValues,
-        availibleValues, getCustomError, uiSettings);
+        availibleValues, getCustomError, uiSettings, quizSettings);
   }
 
   @override
@@ -2255,7 +2307,9 @@ class _$SelectStringInputImpl extends SelectStringInput {
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
-            SelectInputUiSettings<String> uiSettings)?
+            SelectInputUiSettings<String> uiSettings,
+            @JsonKey(toJson: QuizSettingsNum.staticToJson)
+            QuizSettingsNum? quizSettings)?
         selectString,
     TResult Function(
             String id,
@@ -2271,7 +2325,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
   }) {
     if (selectString != null) {
       return selectString(id, maxCount, minCount, initialValues,
-          availibleValues, getCustomError, uiSettings);
+          availibleValues, getCustomError, uiSettings, quizSettings);
     }
     return orElse();
   }
@@ -2323,16 +2377,17 @@ class _$SelectStringInputImpl extends SelectStringInput {
 
 abstract class SelectStringInput extends WoFormInput {
   const factory SelectStringInput(
-          {required final String id,
-          required final int? maxCount,
-          final int minCount,
-          final List<String> initialValues,
-          final List<String> availibleValues,
-          @JsonKey(includeToJson: false, includeFromJson: false)
-          final GetCustomErrorForListDef<String>? getCustomError,
-          @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
-          final SelectInputUiSettings<String> uiSettings}) =
-      _$SelectStringInputImpl;
+      {required final String id,
+      required final int? maxCount,
+      final int minCount,
+      final List<String> initialValues,
+      final List<String> availibleValues,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final GetCustomErrorForListDef<String>? getCustomError,
+      @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
+      final SelectInputUiSettings<String> uiSettings,
+      @JsonKey(toJson: QuizSettingsNum.staticToJson)
+      final QuizSettingsNum? quizSettings}) = _$SelectStringInputImpl;
   const SelectStringInput._() : super._();
 
   factory SelectStringInput.fromJson(Map<String, dynamic> json) =
@@ -2349,7 +2404,10 @@ abstract class SelectStringInput extends WoFormInput {
   GetCustomErrorForListDef<String>? get getCustomError;
   @override
   @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
-  SelectInputUiSettings<String> get uiSettings;
+  SelectInputUiSettings<String>
+      get uiSettings; // The correct answer is the index of availibleValues
+  @JsonKey(toJson: QuizSettingsNum.staticToJson)
+  QuizSettingsNum? get quizSettings;
 
   /// Create a copy of WoFormInput
   /// with the given fields replaced by the non-null parameter values.
@@ -2544,7 +2602,9 @@ class _$StringInputImpl extends StringInput {
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
-            SelectInputUiSettings<String> uiSettings)
+            SelectInputUiSettings<String> uiSettings,
+            @JsonKey(toJson: QuizSettingsNum.staticToJson)
+            QuizSettingsNum? quizSettings)
         selectString,
     required TResult Function(
             String id,
@@ -2592,7 +2652,9 @@ class _$StringInputImpl extends StringInput {
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
-            SelectInputUiSettings<String> uiSettings)?
+            SelectInputUiSettings<String> uiSettings,
+            @JsonKey(toJson: QuizSettingsNum.staticToJson)
+            QuizSettingsNum? quizSettings)?
         selectString,
     TResult? Function(
             String id,
@@ -2640,7 +2702,9 @@ class _$StringInputImpl extends StringInput {
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
-            SelectInputUiSettings<String> uiSettings)?
+            SelectInputUiSettings<String> uiSettings,
+            @JsonKey(toJson: QuizSettingsNum.staticToJson)
+            QuizSettingsNum? quizSettings)?
         selectString,
     TResult Function(
             String id,
