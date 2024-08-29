@@ -40,26 +40,28 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     this._statusCubit,
     this._lockCubit, {
     required this.onSubmitting,
-  }) : super(_root.getInitialValues());
+  })  : _tempSubmitDatas = [],
+        super(_root.getInitialValues());
 
   final RootNode _root;
   final WoFormStatusCubit _statusCubit;
   final WoFormLockCubit _lockCubit;
   final Future<void> Function(RootNode root, WoFormValues values)? onSubmitting;
-  (Future<void> Function() onSubmitting, String path)? _tempSubmitData;
+  List<(Future<void> Function() onSubmitting, String path)> _tempSubmitDatas;
 
-  String get currentPath => _tempSubmitData?.$2 ?? '';
+  String get currentPath => _tempSubmitDatas.lastOrNull?.$2 ?? '';
 
   WoFormNodeMixin get currentNode {
-    if (_tempSubmitData == null) return _root;
+    final tempSubmitData = _tempSubmitDatas.lastOrNull;
+    if (tempSubmitData == null) return _root;
 
     try {
       return _root.getChild(
-        path: _tempSubmitData!.$2,
+        path: tempSubmitData.$2,
         values: state,
       )!;
     } catch (e) {
-      throw Exception('No node found at path ${_tempSubmitData!.$2}');
+      throw Exception('No node found at path ${tempSubmitData.$2}');
     }
   }
 
@@ -89,14 +91,16 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     emit(newMap);
   }
 
-  void clearTemporarySubmitData() => _tempSubmitData = null;
+  void clearTemporarySubmitData() => _tempSubmitDatas.clear();
+
+  void removeLastTemporarySubmitData() =>
+      _tempSubmitDatas.isEmpty ? null : _tempSubmitDatas.removeLast();
 
   void setTemporarySubmitData({
     required Future<void> Function() onSubmitting,
     required String path,
-  }) {
-    _tempSubmitData = (onSubmitting, path);
-  }
+  }) =>
+      _tempSubmitDatas.add((onSubmitting, path));
 
   Future<void> submit() async {
     // LATER: this only submits the currentInputPath
@@ -149,8 +153,9 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     }
 
     try {
-      if (_tempSubmitData != null) {
-        await _tempSubmitData!.$1();
+      final tempSubmitData = _tempSubmitDatas.lastOrNull;
+      if (tempSubmitData != null) {
+        await tempSubmitData.$1();
         _statusCubit.setInProgress();
       } else {
         await onSubmitting?.call(_root, state);

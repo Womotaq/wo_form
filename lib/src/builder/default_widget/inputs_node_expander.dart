@@ -29,7 +29,7 @@ class InputsNodeExpander extends StatelessWidget {
     final valuesCubit = context.read<WoFormValuesCubit>();
     valuesCubit.setTemporarySubmitData(
       onSubmitting: () async {
-        valuesCubit.clearTemporarySubmitData();
+        valuesCubit.removeLastTemporarySubmitData();
         Navigator.pop(context);
       },
       path: data.path,
