@@ -47,7 +47,8 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   final WoFormStatusCubit _statusCubit;
   final WoFormLockCubit _lockCubit;
   final Future<void> Function(RootNode root, WoFormValues values)? onSubmitting;
-  List<(Future<void> Function() onSubmitting, String path)> _tempSubmitDatas;
+  final List<(Future<void> Function() onSubmitting, String path)>
+      _tempSubmitDatas;
 
   String get currentPath => _tempSubmitDatas.lastOrNull?.$2 ?? '';
 

@@ -2816,7 +2816,9 @@ mixin _$SelectInput<T> {
   GetCustomErrorForListDef<T>? get getCustomError =>
       throw _privateConstructorUsedError;
   SelectInputUiSettings<T>? get uiSettings =>
-      throw _privateConstructorUsedError;
+      throw _privateConstructorUsedError; // The correct answer is the index of availibleValues
+  @JsonKey(toJson: QuizSettingsNum.staticToJson)
+  QuizSettingsNum? get quizSettings => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
   Object? Function(T)? get toJsonT => throw _privateConstructorUsedError;
 
@@ -2842,10 +2844,13 @@ abstract class $SelectInputCopyWith<T, $Res> {
       @JsonKey(includeToJson: false, includeFromJson: false)
       GetCustomErrorForListDef<T>? getCustomError,
       SelectInputUiSettings<T>? uiSettings,
+      @JsonKey(toJson: QuizSettingsNum.staticToJson)
+      QuizSettingsNum? quizSettings,
       @JsonKey(includeToJson: false, includeFromJson: false)
       Object? Function(T)? toJsonT});
 
   $SelectInputUiSettingsCopyWith<T, $Res>? get uiSettings;
+  $QuizSettingsNumCopyWith<$Res>? get quizSettings;
 }
 
 /// @nodoc
@@ -2870,6 +2875,7 @@ class _$SelectInputCopyWithImpl<T, $Res, $Val extends SelectInput<T>>
     Object? availibleValues = null,
     Object? getCustomError = freezed,
     Object? uiSettings = freezed,
+    Object? quizSettings = freezed,
     Object? toJsonT = freezed,
   }) {
     return _then(_value.copyWith(
@@ -2901,6 +2907,10 @@ class _$SelectInputCopyWithImpl<T, $Res, $Val extends SelectInput<T>>
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
               as SelectInputUiSettings<T>?,
+      quizSettings: freezed == quizSettings
+          ? _value.quizSettings
+          : quizSettings // ignore: cast_nullable_to_non_nullable
+              as QuizSettingsNum?,
       toJsonT: freezed == toJsonT
           ? _value.toJsonT
           : toJsonT // ignore: cast_nullable_to_non_nullable
@@ -2919,6 +2929,20 @@ class _$SelectInputCopyWithImpl<T, $Res, $Val extends SelectInput<T>>
 
     return $SelectInputUiSettingsCopyWith<T, $Res>(_value.uiSettings!, (value) {
       return _then(_value.copyWith(uiSettings: value) as $Val);
+    });
+  }
+
+  /// Create a copy of SelectInput
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $QuizSettingsNumCopyWith<$Res>? get quizSettings {
+    if (_value.quizSettings == null) {
+      return null;
+    }
+
+    return $QuizSettingsNumCopyWith<$Res>(_value.quizSettings!, (value) {
+      return _then(_value.copyWith(quizSettings: value) as $Val);
     });
   }
 }
@@ -2940,11 +2964,15 @@ abstract class _$$SelectInputImplCopyWith<T, $Res>
       @JsonKey(includeToJson: false, includeFromJson: false)
       GetCustomErrorForListDef<T>? getCustomError,
       SelectInputUiSettings<T>? uiSettings,
+      @JsonKey(toJson: QuizSettingsNum.staticToJson)
+      QuizSettingsNum? quizSettings,
       @JsonKey(includeToJson: false, includeFromJson: false)
       Object? Function(T)? toJsonT});
 
   @override
   $SelectInputUiSettingsCopyWith<T, $Res>? get uiSettings;
+  @override
+  $QuizSettingsNumCopyWith<$Res>? get quizSettings;
 }
 
 /// @nodoc
@@ -2967,6 +2995,7 @@ class __$$SelectInputImplCopyWithImpl<T, $Res>
     Object? availibleValues = null,
     Object? getCustomError = freezed,
     Object? uiSettings = freezed,
+    Object? quizSettings = freezed,
     Object? toJsonT = freezed,
   }) {
     return _then(_$SelectInputImpl<T>(
@@ -2998,6 +3027,10 @@ class __$$SelectInputImplCopyWithImpl<T, $Res>
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
               as SelectInputUiSettings<T>?,
+      quizSettings: freezed == quizSettings
+          ? _value.quizSettings
+          : quizSettings // ignore: cast_nullable_to_non_nullable
+              as QuizSettingsNum?,
       toJsonT: freezed == toJsonT
           ? _value.toJsonT
           : toJsonT // ignore: cast_nullable_to_non_nullable
@@ -3018,6 +3051,7 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.getCustomError,
       this.uiSettings,
+      @JsonKey(toJson: QuizSettingsNum.staticToJson) this.quizSettings,
       @JsonKey(includeToJson: false, includeFromJson: false) this.toJsonT})
       : _initialValues = initialValues,
         _availibleValues = availibleValues,
@@ -3053,13 +3087,17 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
   final GetCustomErrorForListDef<T>? getCustomError;
   @override
   final SelectInputUiSettings<T>? uiSettings;
+// The correct answer is the index of availibleValues
+  @override
+  @JsonKey(toJson: QuizSettingsNum.staticToJson)
+  final QuizSettingsNum? quizSettings;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final Object? Function(T)? toJsonT;
 
   @override
   String toString() {
-    return 'SelectInput<$T>(id: $id, maxCount: $maxCount, minCount: $minCount, initialValues: $initialValues, availibleValues: $availibleValues, getCustomError: $getCustomError, uiSettings: $uiSettings, toJsonT: $toJsonT)';
+    return 'SelectInput<$T>(id: $id, maxCount: $maxCount, minCount: $minCount, initialValues: $initialValues, availibleValues: $availibleValues, getCustomError: $getCustomError, uiSettings: $uiSettings, quizSettings: $quizSettings, toJsonT: $toJsonT)';
   }
 
   @override
@@ -3080,6 +3118,8 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
                 other.getCustomError == getCustomError) &&
             (identical(other.uiSettings, uiSettings) ||
                 other.uiSettings == uiSettings) &&
+            (identical(other.quizSettings, quizSettings) ||
+                other.quizSettings == quizSettings) &&
             (identical(other.toJsonT, toJsonT) || other.toJsonT == toJsonT));
   }
 
@@ -3093,6 +3133,7 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
       const DeepCollectionEquality().hash(_availibleValues),
       getCustomError,
       uiSettings,
+      quizSettings,
       toJsonT);
 
   /// Create a copy of SelectInput
@@ -3115,6 +3156,8 @@ abstract class _SelectInput<T> extends SelectInput<T> {
       @JsonKey(includeToJson: false, includeFromJson: false)
       final GetCustomErrorForListDef<T>? getCustomError,
       final SelectInputUiSettings<T>? uiSettings,
+      @JsonKey(toJson: QuizSettingsNum.staticToJson)
+      final QuizSettingsNum? quizSettings,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final Object? Function(T)? toJsonT}) = _$SelectInputImpl<T>;
   const _SelectInput._() : super._();
@@ -3133,7 +3176,11 @@ abstract class _SelectInput<T> extends SelectInput<T> {
   @JsonKey(includeToJson: false, includeFromJson: false)
   GetCustomErrorForListDef<T>? get getCustomError;
   @override
-  SelectInputUiSettings<T>? get uiSettings;
+  SelectInputUiSettings<T>?
+      get uiSettings; // The correct answer is the index of availibleValues
+  @override
+  @JsonKey(toJson: QuizSettingsNum.staticToJson)
+  QuizSettingsNum? get quizSettings;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   Object? Function(T)? get toJsonT;

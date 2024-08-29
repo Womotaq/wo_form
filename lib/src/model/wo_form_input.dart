@@ -335,6 +335,9 @@ class SelectInput<T> with _$SelectInput<T>, WoFormNodeMixin, WoFormInputMixin {
     @JsonKey(includeToJson: false, includeFromJson: false)
     GetCustomErrorForListDef<T>? getCustomError,
     SelectInputUiSettings<T>? uiSettings,
+    // The correct answer is the index of availibleValues
+    @JsonKey(toJson: QuizSettingsNum.staticToJson)
+    QuizSettingsNum? quizSettings,
     @JsonKey(includeToJson: false, includeFromJson: false)
     Object? Function(T)? toJsonT,
   }) = _SelectInput<T>;

@@ -1268,6 +1268,8 @@ mixin _$SelectInputUiSettings<T> {
   @JsonKey(includeToJson: false, includeFromJson: false)
   InputHeaderBuilderDef? get headerBuilder =>
       throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  ScoreWidgetBuilderDef? get scoreBuilder => throw _privateConstructorUsedError;
 
   /// Only applies to unique choices
   bool get submitFormOnSelect => throw _privateConstructorUsedError;
@@ -1303,6 +1305,8 @@ abstract class $SelectInputUiSettingsCopyWith<T, $Res> {
       SelectFieldBuilderDef<T>? widgetBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false)
       InputHeaderBuilderDef? headerBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      ScoreWidgetBuilderDef? scoreBuilder,
       bool submitFormOnSelect});
 }
 
@@ -1331,6 +1335,7 @@ class _$SelectInputUiSettingsCopyWithImpl<T, $Res,
     Object? searcher = freezed,
     Object? widgetBuilder = freezed,
     Object? headerBuilder = freezed,
+    Object? scoreBuilder = freezed,
     Object? submitFormOnSelect = null,
   }) {
     return _then(_value.copyWith(
@@ -1370,6 +1375,10 @@ class _$SelectInputUiSettingsCopyWithImpl<T, $Res,
           ? _value.headerBuilder
           : headerBuilder // ignore: cast_nullable_to_non_nullable
               as InputHeaderBuilderDef?,
+      scoreBuilder: freezed == scoreBuilder
+          ? _value.scoreBuilder
+          : scoreBuilder // ignore: cast_nullable_to_non_nullable
+              as ScoreWidgetBuilderDef?,
       submitFormOnSelect: null == submitFormOnSelect
           ? _value.submitFormOnSelect
           : submitFormOnSelect // ignore: cast_nullable_to_non_nullable
@@ -1402,6 +1411,8 @@ abstract class _$$SelectInputUiSettingsImplCopyWith<T, $Res>
       SelectFieldBuilderDef<T>? widgetBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false)
       InputHeaderBuilderDef? headerBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      ScoreWidgetBuilderDef? scoreBuilder,
       bool submitFormOnSelect});
 }
 
@@ -1429,6 +1440,7 @@ class __$$SelectInputUiSettingsImplCopyWithImpl<T, $Res>
     Object? searcher = freezed,
     Object? widgetBuilder = freezed,
     Object? headerBuilder = freezed,
+    Object? scoreBuilder = freezed,
     Object? submitFormOnSelect = null,
   }) {
     return _then(_$SelectInputUiSettingsImpl<T>(
@@ -1468,6 +1480,10 @@ class __$$SelectInputUiSettingsImplCopyWithImpl<T, $Res>
           ? _value.headerBuilder
           : headerBuilder // ignore: cast_nullable_to_non_nullable
               as InputHeaderBuilderDef?,
+      scoreBuilder: freezed == scoreBuilder
+          ? _value.scoreBuilder
+          : scoreBuilder // ignore: cast_nullable_to_non_nullable
+              as ScoreWidgetBuilderDef?,
       submitFormOnSelect: null == submitFormOnSelect
           ? _value.submitFormOnSelect
           : submitFormOnSelect // ignore: cast_nullable_to_non_nullable
@@ -1490,6 +1506,7 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
       @JsonKey(includeFromJson: false, includeToJson: false) this.searcher,
       @JsonKey(includeToJson: false, includeFromJson: false) this.widgetBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false) this.headerBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.scoreBuilder,
       this.submitFormOnSelect = false})
       : super._();
 
@@ -1519,6 +1536,9 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final InputHeaderBuilderDef? headerBuilder;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final ScoreWidgetBuilderDef? scoreBuilder;
 
   /// Only applies to unique choices
   @override
@@ -1527,7 +1547,7 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
 
   @override
   String toString() {
-    return 'SelectInputUiSettings<$T>(labelText: $labelText, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, valueBuilder: $valueBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, submitFormOnSelect: $submitFormOnSelect)';
+    return 'SelectInputUiSettings<$T>(labelText: $labelText, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, valueBuilder: $valueBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder, submitFormOnSelect: $submitFormOnSelect)';
   }
 
   @override
@@ -1553,6 +1573,8 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
                 other.widgetBuilder == widgetBuilder) &&
             (identical(other.headerBuilder, headerBuilder) ||
                 other.headerBuilder == headerBuilder) &&
+            (identical(other.scoreBuilder, scoreBuilder) ||
+                other.scoreBuilder == scoreBuilder) &&
             (identical(other.submitFormOnSelect, submitFormOnSelect) ||
                 other.submitFormOnSelect == submitFormOnSelect));
   }
@@ -1570,6 +1592,7 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
       searcher,
       widgetBuilder,
       headerBuilder,
+      scoreBuilder,
       submitFormOnSelect);
 
   /// Create a copy of SelectInputUiSettings
@@ -1605,6 +1628,8 @@ abstract class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
       final SelectFieldBuilderDef<T>? widgetBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final InputHeaderBuilderDef? headerBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final ScoreWidgetBuilderDef? scoreBuilder,
       final bool submitFormOnSelect}) = _$SelectInputUiSettingsImpl<T>;
   const _SelectInputUiSettings._() : super._();
 
@@ -1634,6 +1659,9 @@ abstract class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   InputHeaderBuilderDef? get headerBuilder;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  ScoreWidgetBuilderDef? get scoreBuilder;
 
   /// Only applies to unique choices
   @override

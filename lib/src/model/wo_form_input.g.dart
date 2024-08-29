@@ -22,6 +22,10 @@ SelectInput<T> _$SelectInputFromJson<T>(
           ? null
           : SelectInputUiSettings<T>.fromJson(
               json['uiSettings'] as Map<String, dynamic>),
+      quizSettings: json['quizSettings'] == null
+          ? null
+          : QuizSettingsNum.fromJson(
+              json['quizSettings'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$SelectInputToJson<T>(
@@ -35,6 +39,7 @@ Map<String, dynamic> _$SelectInputToJson<T>(
       'initialValues': instance.initialValues.map(toJsonT).toList(),
       'availibleValues': instance.availibleValues.map(toJsonT).toList(),
       'uiSettings': instance.uiSettings,
+      'quizSettings': QuizSettingsNum.staticToJson(instance.quizSettings),
     };
 
 _$BooleanInputImpl _$$BooleanInputImplFromJson(Map<String, dynamic> json) =>

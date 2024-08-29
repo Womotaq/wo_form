@@ -132,6 +132,7 @@ class SelectStringFieldBuilder extends SelectFieldBuilder<String> {
       availibleValues: selectStringInput.availibleValues,
       getCustomError: selectStringInput.getCustomError,
       uiSettings: selectStringInput.uiSettings,
+      quizSettings: selectStringInput.quizSettings,
       toJsonT: (value) => value,
     );
   }

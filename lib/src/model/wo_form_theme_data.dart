@@ -5,6 +5,7 @@ import 'package:wo_form/wo_form.dart';
 part 'wo_form_theme_data.freezed.dart';
 
 typedef WidgetBuilderDef = Widget Function(BuildContext context);
+typedef ScoreWidgetBuilderDef = Widget Function({required num score});
 
 @freezed
 class WoFormThemeData with _$WoFormThemeData {
@@ -19,6 +20,7 @@ class WoFormThemeData with _$WoFormThemeData {
     InputNodeWidgetBuilderDef? inputsNodeExpanderBuilder,
     InputNodeWidgetBuilderDef? inputsNodeWidgetBuilder,
     NumFieldBuilderDef? numFieldBuilder,
+    ScoreWidgetBuilderDef? scoreBuilder,
     SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
     ScaffoldBuilderDef? standardScaffoldBuilder,
     StringFieldBuilderDef? stringFieldBuilder,

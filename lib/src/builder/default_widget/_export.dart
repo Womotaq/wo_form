@@ -7,6 +7,7 @@ export 'inputs_node_expander.dart';
 export 'inputs_node_widget.dart';
 export 'num_field.dart';
 export 'num_selector.dart';
+export 'score_widget.dart';
 export 'search_field.dart';
 export 'select_field.dart';
 export 'string_field.dart';

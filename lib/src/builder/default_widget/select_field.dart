@@ -9,7 +9,15 @@ class SelectField<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final woTheme = WoFormTheme.of(context);
     final selectedValues = data.value ?? [];
+    final quizSettings = data.input.quizSettings;
+    final scoreWidget = quizSettings == null
+        ? null
+        : (data.uiSettings.scoreBuilder ??
+                woTheme?.scoreBuilder ??
+                ScoreWidget.new)
+            .call(score: quizSettings.score);
 
     if (data.input.maxCount == 1) {
       return switch (data.uiSettings.childrenVisibility) {
@@ -26,10 +34,11 @@ class SelectField<T> extends StatelessWidget {
                       labelText: data.uiSettings.labelText,
                       helperText: data.uiSettings.helperText,
                       errorText: data.errorText,
+                      trailing: scoreWidget,
                     );
 
                     return (data.uiSettings.headerBuilder ??
-                            WoFormTheme.of(context)?.inputHeaderBuilder ??
+                            woTheme?.inputHeaderBuilder ??
                             InputHeader.new)
                         .call(headerData);
                   },
@@ -66,10 +75,11 @@ class SelectField<T> extends StatelessWidget {
                       labelText: data.uiSettings.labelText,
                       helperText: data.uiSettings.helperText,
                       errorText: data.errorText,
+                      trailing: scoreWidget,
                     );
 
                     return (data.uiSettings.headerBuilder ??
-                            WoFormTheme.of(context)?.inputHeaderBuilder ??
+                            woTheme?.inputHeaderBuilder ??
                             InputHeader.new)
                         .call(headerData);
                   },
@@ -106,10 +116,11 @@ class SelectField<T> extends StatelessWidget {
                       labelText: data.uiSettings.labelText,
                       helperText: data.uiSettings.helperText,
                       errorText: data.errorText,
+                      trailing: scoreWidget,
                     );
 
                     return (data.uiSettings.headerBuilder ??
-                            WoFormTheme.of(context)?.inputHeaderBuilder ??
+                            woTheme?.inputHeaderBuilder ??
                             InputHeader.new)
                         .call(headerData);
                   },
@@ -144,27 +155,36 @@ class SelectField<T> extends StatelessWidget {
                       labelText: data.uiSettings.labelText,
                       helperText: data.uiSettings.helperText,
                       errorText: data.errorText,
-                      trailing: SearchField<T>.multipleChoices(
-                        values: data.input.availibleValues,
-                        onSelected: data.onValueChanged == null
-                            ? null
-                            : onMultipleChoice,
-                        selectedValues: selectedValues,
-                        valueBuilder: data.uiSettings.valueBuilder,
-                        helpValueBuilder: data.uiSettings.helpValueBuilder,
-                        hintText: data.uiSettings.hintText,
-                        searcher: data.uiSettings.searcher,
-                        builder: (onPressed) => IconButton.filled(
-                          onPressed: onPressed,
-                          icon: const Icon(Icons.add),
-                          color: Theme.of(context).colorScheme.onPrimary,
-                        ),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          if (scoreWidget != null) ...[
+                            scoreWidget,
+                            const SizedBox(width: 8),
+                          ],
+                          SearchField<T>.multipleChoices(
+                            values: data.input.availibleValues,
+                            onSelected: data.onValueChanged == null
+                                ? null
+                                : onMultipleChoice,
+                            selectedValues: selectedValues,
+                            valueBuilder: data.uiSettings.valueBuilder,
+                            helpValueBuilder: data.uiSettings.helpValueBuilder,
+                            hintText: data.uiSettings.hintText,
+                            searcher: data.uiSettings.searcher,
+                            builder: (onPressed) => IconButton.filled(
+                              onPressed: onPressed,
+                              icon: const Icon(Icons.add),
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
+                          ),
+                        ],
                       ),
                       shrinkWrap: false,
                     );
 
                     return (data.uiSettings.headerBuilder ??
-                            WoFormTheme.of(context)?.inputHeaderBuilder ??
+                            woTheme?.inputHeaderBuilder ??
                             InputHeader.new)
                         .call(headerData);
                   },

@@ -32,6 +32,7 @@ mixin _$WoFormThemeData {
   InputNodeWidgetBuilderDef? get inputsNodeWidgetBuilder =>
       throw _privateConstructorUsedError;
   NumFieldBuilderDef? get numFieldBuilder => throw _privateConstructorUsedError;
+  ScoreWidgetBuilderDef? get scoreBuilder => throw _privateConstructorUsedError;
   SelectFieldBuilderDef<dynamic>? get selectFieldBuilder =>
       throw _privateConstructorUsedError;
   ScaffoldBuilderDef? get standardScaffoldBuilder =>
@@ -73,6 +74,7 @@ abstract class $WoFormThemeDataCopyWith<$Res> {
       InputNodeWidgetBuilderDef? inputsNodeExpanderBuilder,
       InputNodeWidgetBuilderDef? inputsNodeWidgetBuilder,
       NumFieldBuilderDef? numFieldBuilder,
+      ScoreWidgetBuilderDef? scoreBuilder,
       SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
       ScaffoldBuilderDef? standardScaffoldBuilder,
       StringFieldBuilderDef? stringFieldBuilder,
@@ -107,6 +109,7 @@ class _$WoFormThemeDataCopyWithImpl<$Res, $Val extends WoFormThemeData>
     Object? inputsNodeExpanderBuilder = freezed,
     Object? inputsNodeWidgetBuilder = freezed,
     Object? numFieldBuilder = freezed,
+    Object? scoreBuilder = freezed,
     Object? selectFieldBuilder = freezed,
     Object? standardScaffoldBuilder = freezed,
     Object? stringFieldBuilder = freezed,
@@ -156,6 +159,10 @@ class _$WoFormThemeDataCopyWithImpl<$Res, $Val extends WoFormThemeData>
           ? _value.numFieldBuilder
           : numFieldBuilder // ignore: cast_nullable_to_non_nullable
               as NumFieldBuilderDef?,
+      scoreBuilder: freezed == scoreBuilder
+          ? _value.scoreBuilder
+          : scoreBuilder // ignore: cast_nullable_to_non_nullable
+              as ScoreWidgetBuilderDef?,
       selectFieldBuilder: freezed == selectFieldBuilder
           ? _value.selectFieldBuilder
           : selectFieldBuilder // ignore: cast_nullable_to_non_nullable
@@ -207,6 +214,7 @@ abstract class _$$WoFormThemeDataImplCopyWith<$Res>
       InputNodeWidgetBuilderDef? inputsNodeExpanderBuilder,
       InputNodeWidgetBuilderDef? inputsNodeWidgetBuilder,
       NumFieldBuilderDef? numFieldBuilder,
+      ScoreWidgetBuilderDef? scoreBuilder,
       SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
       ScaffoldBuilderDef? standardScaffoldBuilder,
       StringFieldBuilderDef? stringFieldBuilder,
@@ -239,6 +247,7 @@ class __$$WoFormThemeDataImplCopyWithImpl<$Res>
     Object? inputsNodeExpanderBuilder = freezed,
     Object? inputsNodeWidgetBuilder = freezed,
     Object? numFieldBuilder = freezed,
+    Object? scoreBuilder = freezed,
     Object? selectFieldBuilder = freezed,
     Object? standardScaffoldBuilder = freezed,
     Object? stringFieldBuilder = freezed,
@@ -288,6 +297,10 @@ class __$$WoFormThemeDataImplCopyWithImpl<$Res>
           ? _value.numFieldBuilder
           : numFieldBuilder // ignore: cast_nullable_to_non_nullable
               as NumFieldBuilderDef?,
+      scoreBuilder: freezed == scoreBuilder
+          ? _value.scoreBuilder
+          : scoreBuilder // ignore: cast_nullable_to_non_nullable
+              as ScoreWidgetBuilderDef?,
       selectFieldBuilder: freezed == selectFieldBuilder
           ? _value.selectFieldBuilder
           : selectFieldBuilder // ignore: cast_nullable_to_non_nullable
@@ -334,6 +347,7 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
       this.inputsNodeExpanderBuilder,
       this.inputsNodeWidgetBuilder,
       this.numFieldBuilder,
+      this.scoreBuilder,
       this.selectFieldBuilder,
       this.standardScaffoldBuilder,
       this.stringFieldBuilder,
@@ -364,6 +378,8 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
   @override
   final NumFieldBuilderDef? numFieldBuilder;
   @override
+  final ScoreWidgetBuilderDef? scoreBuilder;
+  @override
   final SelectFieldBuilderDef<dynamic>? selectFieldBuilder;
   @override
   final ScaffoldBuilderDef? standardScaffoldBuilder;
@@ -385,7 +401,7 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
 
   @override
   String toString() {
-    return 'WoFormThemeData(booleanFieldBuilder: $booleanFieldBuilder, dynamicInputsNodeWidgetBuilder: $dynamicInputsNodeWidgetBuilder, dynamicInputWidgetBuilder: $dynamicInputWidgetBuilder, formPageBuilder: $formPageBuilder, generateId: $generateId, headerBuilder: $headerBuilder, inputHeaderBuilder: $inputHeaderBuilder, inputsNodeExpanderBuilder: $inputsNodeExpanderBuilder, inputsNodeWidgetBuilder: $inputsNodeWidgetBuilder, numFieldBuilder: $numFieldBuilder, selectFieldBuilder: $selectFieldBuilder, standardScaffoldBuilder: $standardScaffoldBuilder, stringFieldBuilder: $stringFieldBuilder, submitButtonBuilder: $submitButtonBuilder, onSubmitError: $onSubmitError, verticalSpacing: $verticalSpacing, showAsteriskIfRequired: $showAsteriskIfRequired)';
+    return 'WoFormThemeData(booleanFieldBuilder: $booleanFieldBuilder, dynamicInputsNodeWidgetBuilder: $dynamicInputsNodeWidgetBuilder, dynamicInputWidgetBuilder: $dynamicInputWidgetBuilder, formPageBuilder: $formPageBuilder, generateId: $generateId, headerBuilder: $headerBuilder, inputHeaderBuilder: $inputHeaderBuilder, inputsNodeExpanderBuilder: $inputsNodeExpanderBuilder, inputsNodeWidgetBuilder: $inputsNodeWidgetBuilder, numFieldBuilder: $numFieldBuilder, scoreBuilder: $scoreBuilder, selectFieldBuilder: $selectFieldBuilder, standardScaffoldBuilder: $standardScaffoldBuilder, stringFieldBuilder: $stringFieldBuilder, submitButtonBuilder: $submitButtonBuilder, onSubmitError: $onSubmitError, verticalSpacing: $verticalSpacing, showAsteriskIfRequired: $showAsteriskIfRequired)';
   }
 
   @override
@@ -416,6 +432,8 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
                 other.inputsNodeWidgetBuilder == inputsNodeWidgetBuilder) &&
             (identical(other.numFieldBuilder, numFieldBuilder) ||
                 other.numFieldBuilder == numFieldBuilder) &&
+            (identical(other.scoreBuilder, scoreBuilder) ||
+                other.scoreBuilder == scoreBuilder) &&
             (identical(other.selectFieldBuilder, selectFieldBuilder) ||
                 other.selectFieldBuilder == selectFieldBuilder) &&
             (identical(other.standardScaffoldBuilder, standardScaffoldBuilder) ||
@@ -445,6 +463,7 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
       inputsNodeExpanderBuilder,
       inputsNodeWidgetBuilder,
       numFieldBuilder,
+      scoreBuilder,
       selectFieldBuilder,
       standardScaffoldBuilder,
       stringFieldBuilder,
@@ -475,6 +494,7 @@ abstract class _WoFormThemeData extends WoFormThemeData {
       final InputNodeWidgetBuilderDef? inputsNodeExpanderBuilder,
       final InputNodeWidgetBuilderDef? inputsNodeWidgetBuilder,
       final NumFieldBuilderDef? numFieldBuilder,
+      final ScoreWidgetBuilderDef? scoreBuilder,
       final SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
       final ScaffoldBuilderDef? standardScaffoldBuilder,
       final StringFieldBuilderDef? stringFieldBuilder,
@@ -504,6 +524,8 @@ abstract class _WoFormThemeData extends WoFormThemeData {
   InputNodeWidgetBuilderDef? get inputsNodeWidgetBuilder;
   @override
   NumFieldBuilderDef? get numFieldBuilder;
+  @override
+  ScoreWidgetBuilderDef? get scoreBuilder;
   @override
   SelectFieldBuilderDef<dynamic>? get selectFieldBuilder;
   @override

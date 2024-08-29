@@ -214,6 +214,8 @@ class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
     SelectFieldBuilderDef<T>? widgetBuilder,
     @JsonKey(includeToJson: false, includeFromJson: false)
     InputHeaderBuilderDef? headerBuilder,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    ScoreWidgetBuilderDef? scoreBuilder,
 
     /// Only applies to unique choices
     @Default(false) bool submitFormOnSelect,
