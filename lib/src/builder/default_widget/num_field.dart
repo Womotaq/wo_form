@@ -21,6 +21,12 @@ class _NumFieldState extends State<NumField> {
   }
 
   @override
+  void dispose() {
+    countController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final inputDecorationTheme = theme.inputDecorationTheme;

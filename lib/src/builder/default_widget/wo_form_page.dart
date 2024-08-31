@@ -179,6 +179,12 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
   }
 
   @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final uiSettings = context.read<RootNode>().uiSettings;
     // final pageController = context.read<WoFormValuesCubit>().pageController;

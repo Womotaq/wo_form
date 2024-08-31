@@ -23,6 +23,12 @@ class _StringFieldState extends State<StringField> {
   }
 
   @override
+  void dispose() {
+    textEditingController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     if ((widget.data.value ?? '') != textEditingController.text) {
       textEditingController.text = widget.data.value ?? '';
