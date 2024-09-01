@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:wo_form/wo_form.dart';
 
 part 'data.freezed.dart';
 
@@ -39,4 +40,15 @@ class WoFieldData<I, T, U> with _$WoFieldData<I, T, U> {
     /// Null means locked field
     required void Function(T?)? onValueChanged,
   }) = _WoFieldData;
+}
+
+@freezed
+class SubmitButtonData with _$SubmitButtonData {
+  const factory SubmitButtonData({
+    required String? text,
+    required VoidCallback? onPressed,
+    required SubmitButtonPosition position,
+    required int pageIndex,
+    IconData? icon,
+  }) = _SubmitButtonData;
 }

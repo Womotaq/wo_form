@@ -677,3 +677,220 @@ abstract class _WoFieldData<I, T, U> implements WoFieldData<I, T, U> {
   _$$WoFieldDataImplCopyWith<I, T, U, _$WoFieldDataImpl<I, T, U>>
       get copyWith => throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+mixin _$SubmitButtonData {
+  String? get text => throw _privateConstructorUsedError;
+  VoidCallback? get onPressed => throw _privateConstructorUsedError;
+  SubmitButtonPosition get position => throw _privateConstructorUsedError;
+  int get pageIndex => throw _privateConstructorUsedError;
+  IconData? get icon => throw _privateConstructorUsedError;
+
+  /// Create a copy of SubmitButtonData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $SubmitButtonDataCopyWith<SubmitButtonData> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SubmitButtonDataCopyWith<$Res> {
+  factory $SubmitButtonDataCopyWith(
+          SubmitButtonData value, $Res Function(SubmitButtonData) then) =
+      _$SubmitButtonDataCopyWithImpl<$Res, SubmitButtonData>;
+  @useResult
+  $Res call(
+      {String? text,
+      VoidCallback? onPressed,
+      SubmitButtonPosition position,
+      int pageIndex,
+      IconData? icon});
+}
+
+/// @nodoc
+class _$SubmitButtonDataCopyWithImpl<$Res, $Val extends SubmitButtonData>
+    implements $SubmitButtonDataCopyWith<$Res> {
+  _$SubmitButtonDataCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of SubmitButtonData
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? text = freezed,
+    Object? onPressed = freezed,
+    Object? position = null,
+    Object? pageIndex = null,
+    Object? icon = freezed,
+  }) {
+    return _then(_value.copyWith(
+      text: freezed == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String?,
+      onPressed: freezed == onPressed
+          ? _value.onPressed
+          : onPressed // ignore: cast_nullable_to_non_nullable
+              as VoidCallback?,
+      position: null == position
+          ? _value.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as SubmitButtonPosition,
+      pageIndex: null == pageIndex
+          ? _value.pageIndex
+          : pageIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      icon: freezed == icon
+          ? _value.icon
+          : icon // ignore: cast_nullable_to_non_nullable
+              as IconData?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$SubmitButtonDataImplCopyWith<$Res>
+    implements $SubmitButtonDataCopyWith<$Res> {
+  factory _$$SubmitButtonDataImplCopyWith(_$SubmitButtonDataImpl value,
+          $Res Function(_$SubmitButtonDataImpl) then) =
+      __$$SubmitButtonDataImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String? text,
+      VoidCallback? onPressed,
+      SubmitButtonPosition position,
+      int pageIndex,
+      IconData? icon});
+}
+
+/// @nodoc
+class __$$SubmitButtonDataImplCopyWithImpl<$Res>
+    extends _$SubmitButtonDataCopyWithImpl<$Res, _$SubmitButtonDataImpl>
+    implements _$$SubmitButtonDataImplCopyWith<$Res> {
+  __$$SubmitButtonDataImplCopyWithImpl(_$SubmitButtonDataImpl _value,
+      $Res Function(_$SubmitButtonDataImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of SubmitButtonData
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? text = freezed,
+    Object? onPressed = freezed,
+    Object? position = null,
+    Object? pageIndex = null,
+    Object? icon = freezed,
+  }) {
+    return _then(_$SubmitButtonDataImpl(
+      text: freezed == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String?,
+      onPressed: freezed == onPressed
+          ? _value.onPressed
+          : onPressed // ignore: cast_nullable_to_non_nullable
+              as VoidCallback?,
+      position: null == position
+          ? _value.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as SubmitButtonPosition,
+      pageIndex: null == pageIndex
+          ? _value.pageIndex
+          : pageIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      icon: freezed == icon
+          ? _value.icon
+          : icon // ignore: cast_nullable_to_non_nullable
+              as IconData?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SubmitButtonDataImpl implements _SubmitButtonData {
+  const _$SubmitButtonDataImpl(
+      {required this.text,
+      required this.onPressed,
+      required this.position,
+      required this.pageIndex,
+      this.icon});
+
+  @override
+  final String? text;
+  @override
+  final VoidCallback? onPressed;
+  @override
+  final SubmitButtonPosition position;
+  @override
+  final int pageIndex;
+  @override
+  final IconData? icon;
+
+  @override
+  String toString() {
+    return 'SubmitButtonData(text: $text, onPressed: $onPressed, position: $position, pageIndex: $pageIndex, icon: $icon)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SubmitButtonDataImpl &&
+            (identical(other.text, text) || other.text == text) &&
+            (identical(other.onPressed, onPressed) ||
+                other.onPressed == onPressed) &&
+            (identical(other.position, position) ||
+                other.position == position) &&
+            (identical(other.pageIndex, pageIndex) ||
+                other.pageIndex == pageIndex) &&
+            (identical(other.icon, icon) || other.icon == icon));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, text, onPressed, position, pageIndex, icon);
+
+  /// Create a copy of SubmitButtonData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SubmitButtonDataImplCopyWith<_$SubmitButtonDataImpl> get copyWith =>
+      __$$SubmitButtonDataImplCopyWithImpl<_$SubmitButtonDataImpl>(
+          this, _$identity);
+}
+
+abstract class _SubmitButtonData implements SubmitButtonData {
+  const factory _SubmitButtonData(
+      {required final String? text,
+      required final VoidCallback? onPressed,
+      required final SubmitButtonPosition position,
+      required final int pageIndex,
+      final IconData? icon}) = _$SubmitButtonDataImpl;
+
+  @override
+  String? get text;
+  @override
+  VoidCallback? get onPressed;
+  @override
+  SubmitButtonPosition get position;
+  @override
+  int get pageIndex;
+  @override
+  IconData? get icon;
+
+  /// Create a copy of SubmitButtonData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SubmitButtonDataImplCopyWith<_$SubmitButtonDataImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
