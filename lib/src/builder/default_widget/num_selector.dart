@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class NumSelector extends StatelessWidget {
+class NumSelector extends StatefulWidget {
   const NumSelector({
-    required this.controller,
+    required this.onChanged,
+    this.initialValue,
+    this.axis = Axis.vertical,
+    this.step = 1,
+    this.minCount = 0,
+    this.maxCount,
+    this.unit,
+    super.key,
+  }) : controller = null;
+
+  const NumSelector.withTextController({
+    required TextEditingController controller,
     required this.onChanged,
     this.axis = Axis.vertical,
     this.step = 1,
@@ -11,15 +22,38 @@ class NumSelector extends StatelessWidget {
     this.maxCount,
     this.unit,
     super.key,
-  });
+    // ignore: prefer_initializing_formals
+  })  : controller = controller,
+        initialValue = null;
 
-  final TextEditingController controller;
+  final TextEditingController? controller;
+  final int? initialValue;
   final void Function(num? value)? onChanged;
   final Axis axis;
   final int step;
   final num? minCount;
   final num? maxCount;
   final Widget? unit;
+
+  @override
+  State<NumSelector> createState() => _NumSelectorState();
+}
+
+class _NumSelectorState extends State<NumSelector> {
+  late TextEditingController controller;
+
+  @override
+  void initState() {
+    controller = widget.controller ??
+        TextEditingController(text: (widget.initialValue ?? 0).toString());
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   Widget getSideButton({
     required Axis axis,
@@ -36,6 +70,13 @@ class NumSelector extends StatelessWidget {
               ? Icons.add_circle
               : Icons.remove_circle,
     );
+
+    final currentValue = num.tryParse(controller.text) ?? 0;
+    final nextValue = currentValue + (isPlus ? widget.step : -widget.step);
+    final disabled =
+        (widget.minCount != null && nextValue < widget.minCount!) ||
+            (widget.maxCount != null && nextValue > widget.maxCount!);
+
     return SizedBox(
       height: iconHeight,
       child: Builder(
@@ -44,15 +85,19 @@ class NumSelector extends StatelessWidget {
             padding: EdgeInsets.zero,
             icon: icon,
             color: Theme.of(context).colorScheme.primary,
-            onPressed: onChanged == null
+            onPressed: disabled || widget.onChanged == null
                 ? null
                 : () {
                     var newVal = num.tryParse(controller.text) ?? 0;
-                    newVal += (isPlus ? step : -step);
-                    if (minCount != null && newVal < minCount!) return;
-                    if (maxCount != null && newVal > maxCount!) return;
+                    newVal += (isPlus ? widget.step : -widget.step);
+                    if (widget.minCount != null && newVal < widget.minCount!) {
+                      return;
+                    }
+                    if (widget.maxCount != null && newVal > widget.maxCount!) {
+                      return;
+                    }
                     controller.text = newVal.toString();
-                    onChanged!(newVal);
+                    widget.onChanged!(newVal);
                   },
           );
         },
@@ -64,40 +109,43 @@ class NumSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     final children = [
       getSideButton(
-        axis: axis,
+        axis: widget.axis,
         isPlus: false,
       ),
-      ConstrainedBox(
-        constraints: const BoxConstraints(minWidth: 48),
-        child: IntrinsicWidth(
-          child: TextField(
-            enabled: onChanged != null,
-            controller: controller,
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              isDense: true,
-              contentPadding: const EdgeInsets.all(8),
-              suffix: unit,
+      if (widget.controller != null)
+        ConstrainedBox(
+          constraints: const BoxConstraints(minWidth: 48),
+          child: IntrinsicWidth(
+            child: TextField(
+              enabled: widget.onChanged != null,
+              controller: controller,
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                isDense: true,
+                contentPadding: const EdgeInsets.all(8),
+                suffix: widget.unit,
+              ),
+              textAlign: TextAlign.center,
+              keyboardType: TextInputType.number,
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.digitsOnly,
+                // LengthLimitingTextInputFormatter(2),
+              ],
+              onChanged: widget.onChanged == null
+                  ? null
+                  : (string) => widget.onChanged!(num.tryParse(string)),
             ),
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            inputFormatters: <TextInputFormatter>[
-              FilteringTextInputFormatter.digitsOnly,
-              // LengthLimitingTextInputFormatter(2),
-            ],
-            onChanged: onChanged == null
-                ? null
-                : (string) => onChanged!(num.tryParse(string)),
           ),
-        ),
-      ),
+        )
+      else
+        Text(controller.text),
       getSideButton(
-        axis: axis,
+        axis: widget.axis,
         isPlus: true,
       ),
     ];
 
-    return axis == Axis.horizontal
+    return widget.axis == Axis.horizontal
         ? Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: Row(

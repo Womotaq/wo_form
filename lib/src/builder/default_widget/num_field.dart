@@ -54,7 +54,7 @@ class _NumFieldState extends State<NumField> {
                       theme.textTheme.labelMedium,
                 )
               : null,
-      trailing: NumSelector(
+      trailing: NumSelector.withTextController(
         controller: countController,
         onChanged: widget.data.onValueChanged,
         axis: Axis.horizontal,
