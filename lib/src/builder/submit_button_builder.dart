@@ -32,8 +32,7 @@ class SubmitButtonBuilder extends StatelessWidget {
       onPressed: disabled
           ? null
           : () {
-              FocusScope.of(context).unfocus();
-              context.read<WoFormValuesCubit>().submit();
+              context.read<WoFormValuesCubit>().submit(context);
             },
       position: submitMode.buttonPosition,
     );

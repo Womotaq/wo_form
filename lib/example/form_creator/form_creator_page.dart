@@ -165,7 +165,8 @@ class _JsonClipboarderState extends State<JsonClipboarder> {
             labelText: 'Prévisualisation',
             trailing: IconButton(
               icon: const Icon(Icons.open_in_browser),
-              onPressed: context.read<WoFormValuesCubit>().submit,
+              onPressed: () =>
+                  context.read<WoFormValuesCubit>().submit(context),
             ),
             shrinkWrap: false,
           ),

@@ -118,7 +118,7 @@ class _CustomStringFieldState extends State<CustomStringField> {
             onChanged: widget.data.onValueChanged,
             onFieldSubmitted:
                 (widget.data.uiSettings.submitFormOnFieldSubmitted ?? true)
-                    ? (_) => context.read<WoFormValuesCubit>().submit()
+                    ? (_) => context.read<WoFormValuesCubit>().submit(context)
                     : null,
             keyboardType: widget.data.uiSettings.keyboardType,
             obscureText: obscureText,

@@ -43,7 +43,7 @@ class _StringFieldState extends State<StringField> {
         onChanged: widget.data.onValueChanged,
         onFieldSubmitted:
             (widget.data.uiSettings.submitFormOnFieldSubmitted ?? true)
-                ? (_) => context.read<WoFormValuesCubit>().submit()
+                ? (_) => context.read<WoFormValuesCubit>().submit(context)
                 : null,
         style: widget.data.uiSettings.style,
         keyboardType: widget.data.uiSettings.keyboardType,
