@@ -47,7 +47,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   final RootNode _root;
   final WoFormStatusCubit _statusCubit;
   final WoFormLockCubit _lockCubit;
-  final bool Function(BuildContext context) _canSubmit;
+  final Future<bool> Function(BuildContext context) _canSubmit;
   final Future<void> Function(RootNode root, WoFormValues values)? onSubmitting;
   final List<(Future<void> Function() onSubmitting, String path)>
       _tempSubmitDatas;
@@ -133,7 +133,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
         await tempSubmitData.$1();
         _statusCubit.setInProgress();
       } else {
-        if (_canSubmit(context)) {
+        if (await _canSubmit(context)) {
           await onSubmitting?.call(_root, state);
           _statusCubit._setSubmitSuccess();
         } else {
@@ -189,7 +189,7 @@ class WoForm extends StatelessWidget {
   });
 
   final RootNode root;
-  final bool Function(BuildContext context)? canSubmit;
+  final Future<bool> Function(BuildContext context)? canSubmit;
   final Future<void> Function(RootNode root, WoFormValues values)? onSubmitting;
   final OnSubmitErrorDef? onSubmitError;
   final void Function(BuildContext context)? onSubmitSuccess;
@@ -215,7 +215,7 @@ class WoForm extends StatelessWidget {
               context.read(),
               context.read(),
               context.read(),
-              canSubmit ?? (_) => true,
+              canSubmit ?? (_) async => true,
               onSubmitting: onSubmitting,
             ),
           ),
