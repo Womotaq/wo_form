@@ -3,15 +3,29 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:wo_form/src/_export.dart';
 import 'package:wo_form/wo_form.dart';
 
-class WoFormStatusCubit extends Cubit<WoFormStatus> {
-  WoFormStatusCubit._(super.initialState);
+class WoFormStatusCubit extends HydratedCubit<WoFormStatus> {
+  WoFormStatusCubit._(String hydratationId, super.initialState)
+      : id = '$hydratationId-WoFormStatusCubit';
+
+  @override
+  final String id;
+  @override
+  String get storagePrefix => '';
+
+  @override
+  WoFormStatus? fromJson(Map<String, dynamic> json) =>
+      id.isEmpty ? null : WoFormStatus.fromJson(json);
+
+  @override
+  Map<String, dynamic>? toJson(WoFormStatus state) =>
+      id.isEmpty ? null : state.toJson();
 
   void setInProgress() => emit(const InProgressStatus());
-  void setInvalidValues({Iterable<WoFormInputError>? errors}) =>
-      emit(InvalidValuesStatus(errors: errors));
+  void setInvalidValues() => emit(const InvalidValuesStatus());
   void _setSubmitting() => emit(const SubmittingStatus());
   void _setSubmitError({Object? error, StackTrace? stackTrace}) =>
       emit(SubmitErrorStatus(error: error, stackTrace: stackTrace));
@@ -19,8 +33,26 @@ class WoFormStatusCubit extends Cubit<WoFormStatus> {
 }
 
 /// This cubit references the paths of all the locked inputs.
-class WoFormLockCubit extends Cubit<Set<String>> {
-  WoFormLockCubit._() : super({});
+class WoFormLockCubit extends HydratedCubit<Set<String>> {
+  WoFormLockCubit._(String hydratationId)
+      : id = '$hydratationId-WoFormLockCubit',
+        super({});
+
+  @override
+  final String id;
+  @override
+  String get storagePrefix => '';
+
+  @override
+  Set<String>? fromJson(Map<String, dynamic> json) {
+    if (id.isEmpty) return null;
+    final data = json['locks'];
+    return data is Iterable<String> ? data.toSet() : null;
+  }
+
+  @override
+  Map<String, dynamic>? toJson(Set<String> state) =>
+      id.isEmpty ? null : {'locks': state.toList()};
 
   bool inputIsLocked({required String path}) => state.contains(path);
 
@@ -33,16 +65,28 @@ class WoFormLockCubit extends Cubit<Set<String>> {
 
 typedef WoFormValues = Map<String, dynamic>;
 
-class WoFormValuesCubit extends Cubit<WoFormValues> {
-  // with StateStreamable<WoFormValues>
+class WoFormValuesCubit extends HydratedCubit<WoFormValues> {
   WoFormValuesCubit._(
+    String hydratationId,
     this._root,
     this._statusCubit,
     this._lockCubit,
     this._canSubmit, {
     required this.onSubmitting,
-  })  : _tempSubmitDatas = [],
+  })  : id = '$hydratationId-WoFormValuesCubit',
+        _tempSubmitDatas = [],
         super(_root.getInitialValues());
+
+  @override
+  final String id;
+  @override
+  String get storagePrefix => '';
+
+  @override
+  WoFormValues? fromJson(Map<String, dynamic> json) => id.isEmpty ? null : json;
+
+  @override
+  Map<String, dynamic>? toJson(WoFormValues state) => id.isEmpty ? null : state;
 
   final RootNode _root;
   final WoFormStatusCubit _statusCubit;
@@ -70,7 +114,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   // --
 
-  void clear() => emit(_root.getInitialValues());
+  void clearValues() => emit(_root.getInitialValues());
 
   /// **Use this method precautiously since there is no type checking !**
   void onValueChanged({
@@ -113,7 +157,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     final errors =
         node.getErrors(values: state, parentPath: currentPath.parentPath);
     if (errors.isNotEmpty) {
-      return _statusCubit.setInvalidValues(errors: errors);
+      return _statusCubit.setInvalidValues();
     }
 
     _statusCubit._setSubmitting();
@@ -170,6 +214,7 @@ class WoForm extends StatelessWidget {
     this.onSubmitSuccess,
     this.initialStatus = const InitialStatus(),
     this.pageBuilder,
+    this.hydratationId = '',
     super.key,
   }) : root = RootNode(
           exportSettings: exportSettings ?? const ExportSettings(),
@@ -185,6 +230,7 @@ class WoForm extends StatelessWidget {
     this.onSubmitSuccess,
     this.initialStatus = const InitialStatus(),
     this.pageBuilder,
+    this.hydratationId = '',
     super.key,
   });
 
@@ -196,6 +242,9 @@ class WoForm extends StatelessWidget {
   final WoFormStatus initialStatus;
   final WidgetBuilderDef? pageBuilder;
 
+  /// If not empty, this form will be locally persistent, using HydratedCubit.
+  final String hydratationId;
+
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
@@ -205,13 +254,15 @@ class WoForm extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => WoFormStatusCubit._(initialStatus),
+            create: (context) =>
+                WoFormStatusCubit._(hydratationId, initialStatus),
           ),
           BlocProvider(
-            create: (context) => WoFormLockCubit._(),
+            create: (context) => WoFormLockCubit._(hydratationId),
           ),
           BlocProvider(
             create: (context) => WoFormValuesCubit._(
+              hydratationId,
               context.read(),
               context.read(),
               context.read(),
