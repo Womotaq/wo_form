@@ -7,22 +7,8 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:wo_form/src/_export.dart';
 import 'package:wo_form/wo_form.dart';
 
-class WoFormStatusCubit extends HydratedCubit<WoFormStatus> {
-  WoFormStatusCubit._(String hydratationId, super.initialState)
-      : id = '$hydratationId-WoFormStatusCubit';
-
-  @override
-  final String id;
-  @override
-  String get storagePrefix => '';
-
-  @override
-  WoFormStatus? fromJson(Map<String, dynamic> json) =>
-      id.isEmpty ? null : WoFormStatus.fromJson(json);
-
-  @override
-  Map<String, dynamic>? toJson(WoFormStatus state) =>
-      id.isEmpty ? null : state.toJson();
+class WoFormStatusCubit extends Cubit<WoFormStatus> {
+  WoFormStatusCubit._(super.initialState);
 
   void setInProgress() => emit(const InProgressStatus());
   void setInvalidValues() => emit(const InvalidValuesStatus());
@@ -32,11 +18,17 @@ class WoFormStatusCubit extends HydratedCubit<WoFormStatus> {
   void _setSubmitSuccess() => emit(const SubmitSuccessStatus());
 }
 
-/// This cubit references the paths of all the locked inputs.
-class WoFormLockCubit extends HydratedCubit<Set<String>> {
-  WoFormLockCubit._(String hydratationId)
-      : id = '$hydratationId-WoFormLockCubit',
-        super({});
+class HydratedWoFormStatusCubit extends WoFormStatusCubit
+    with HydratedMixin<WoFormStatus> {
+  HydratedWoFormStatusCubit._(String hydratationId, super.initialState)
+      : assert(
+          hydratationId.isNotEmpty,
+          'hydratationId must not be an empty string',
+        ),
+        id = '$hydratationId-WoFormStatusCubit',
+        super._() {
+    hydrate();
+  }
 
   @override
   final String id;
@@ -44,15 +36,16 @@ class WoFormLockCubit extends HydratedCubit<Set<String>> {
   String get storagePrefix => '';
 
   @override
-  Set<String>? fromJson(Map<String, dynamic> json) {
-    if (id.isEmpty) return null;
-    final data = json['locks'];
-    return data is Iterable<String> ? data.toSet() : null;
-  }
+  WoFormStatus? fromJson(Map<String, dynamic> json) =>
+      WoFormStatus.fromJson(json);
 
   @override
-  Map<String, dynamic>? toJson(Set<String> state) =>
-      id.isEmpty ? null : {'locks': state.toList()};
+  Map<String, dynamic>? toJson(WoFormStatus state) => state.toJson();
+}
+
+/// This cubit references the paths of all the locked inputs.
+class WoFormLockCubit extends Cubit<Set<String>> {
+  WoFormLockCubit._() : super({});
 
   bool inputIsLocked({required String path}) => state.contains(path);
 
@@ -63,19 +56,17 @@ class WoFormLockCubit extends HydratedCubit<Set<String>> {
       emit(Set<String>.from(state)..remove(path));
 }
 
-typedef WoFormValues = Map<String, dynamic>;
-
-class WoFormValuesCubit extends HydratedCubit<WoFormValues> {
-  WoFormValuesCubit._(
-    String hydratationId,
-    this._root,
-    this._statusCubit,
-    this._lockCubit,
-    this._canSubmit, {
-    required this.onSubmitting,
-  })  : id = '$hydratationId-WoFormValuesCubit',
-        _tempSubmitDatas = [],
-        super(_root.getInitialValues());
+class HydratedWoFormLockCubit extends WoFormLockCubit
+    with HydratedMixin<Set<String>> {
+  HydratedWoFormLockCubit._(String hydratationId)
+      : assert(
+          hydratationId.isNotEmpty,
+          'hydratationId must not be an empty string',
+        ),
+        id = '$hydratationId-WoFormLockCubit',
+        super._() {
+    hydrate();
+  }
 
   @override
   final String id;
@@ -83,10 +74,26 @@ class WoFormValuesCubit extends HydratedCubit<WoFormValues> {
   String get storagePrefix => '';
 
   @override
-  WoFormValues? fromJson(Map<String, dynamic> json) => id.isEmpty ? null : json;
+  Set<String>? fromJson(Map<String, dynamic> json) {
+    final data = json['locks'];
+    return data is Iterable<String> ? data.toSet() : null;
+  }
 
   @override
-  Map<String, dynamic>? toJson(WoFormValues state) => id.isEmpty ? null : state;
+  Map<String, dynamic>? toJson(Set<String> state) => {'locks': state.toList()};
+}
+
+typedef WoFormValues = Map<String, dynamic>;
+
+class WoFormValuesCubit extends Cubit<WoFormValues> {
+  WoFormValuesCubit._(
+    this._root,
+    this._statusCubit,
+    this._lockCubit,
+    this._canSubmit, {
+    required this.onSubmitting,
+  })  : _tempSubmitDatas = [],
+        super(_root.getInitialValues());
 
   final RootNode _root;
   final WoFormStatusCubit _statusCubit;
@@ -198,6 +205,36 @@ class WoFormValuesCubit extends HydratedCubit<WoFormValues> {
   }
 }
 
+class HydratedWoFormValuesCubit extends WoFormValuesCubit
+    with HydratedMixin<WoFormValues> {
+  HydratedWoFormValuesCubit._(
+    String hydratationId,
+    super._root,
+    super._statusCubit,
+    super._lockCubit,
+    super._canSubmit, {
+    required super.onSubmitting,
+  })  : assert(
+          hydratationId.isNotEmpty,
+          'hydratationId must not be an empty string',
+        ),
+        id = '$hydratationId-WoFormValuesCubit',
+        super._() {
+    hydrate();
+  }
+
+  @override
+  final String id;
+  @override
+  String get storagePrefix => '';
+
+  @override
+  WoFormValues? fromJson(Map<String, dynamic> json) => json;
+
+  @override
+  Map<String, dynamic>? toJson(WoFormValues state) => state;
+}
+
 typedef OnSubmitErrorDef = void Function(
   BuildContext context,
   SubmitErrorStatus errorStatus,
@@ -254,21 +291,32 @@ class WoForm extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) =>
-                WoFormStatusCubit._(hydratationId, initialStatus),
+            create: (context) => hydratationId.isEmpty
+                ? WoFormStatusCubit._(initialStatus)
+                : HydratedWoFormStatusCubit._(hydratationId, initialStatus),
           ),
           BlocProvider(
-            create: (context) => WoFormLockCubit._(hydratationId),
+            create: (context) => hydratationId.isEmpty
+                ? WoFormLockCubit._()
+                : HydratedWoFormLockCubit._(hydratationId),
           ),
           BlocProvider(
-            create: (context) => WoFormValuesCubit._(
-              hydratationId,
-              context.read(),
-              context.read(),
-              context.read(),
-              canSubmit ?? (_) async => true,
-              onSubmitting: onSubmitting,
-            ),
+            create: (context) => hydratationId.isEmpty
+                ? WoFormValuesCubit._(
+                    context.read(),
+                    context.read(),
+                    context.read(),
+                    canSubmit ?? (_) async => true,
+                    onSubmitting: onSubmitting,
+                  )
+                : HydratedWoFormValuesCubit._(
+                    hydratationId,
+                    context.read(),
+                    context.read(),
+                    context.read(),
+                    canSubmit ?? (_) async => true,
+                    onSubmitting: onSubmitting,
+                  ),
           ),
         ],
         child: BlocListener<WoFormStatusCubit, WoFormStatus>(
