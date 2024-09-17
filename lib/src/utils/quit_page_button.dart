@@ -11,7 +11,7 @@ class QuitPageButton extends StatelessWidget {
 
     return PopScope(
       canPop: canQuit == null,
-      onPopInvoked: (didPop) async {
+      onPopInvokedWithResult: (didPop, result) async {
         if (didPop) return;
         if (canQuit == null) return;
         final confirmPop = await canQuit!(context);

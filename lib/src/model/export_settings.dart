@@ -12,8 +12,8 @@ enum ExportType {
   /// containing the inputs exported data.
   map,
 
-  /// If the parent node is The node will export its first exportable child's exported data.
-  /// TODO : replace by mergeWithParent
+  /// If the parent node is The node will export its first exportable child's
+  /// exported data.
   mergeWithParent;
 }
 

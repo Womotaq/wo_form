@@ -39,7 +39,6 @@ mixin WoFormInputMixin {
   }) =>
       null;
 
-  // TODO : rework ?
   String? getInvalidExplanation(
     dynamic value,
     String parentPath,

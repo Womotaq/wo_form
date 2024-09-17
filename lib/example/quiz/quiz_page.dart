@@ -15,7 +15,6 @@ class QuizPage extends StatelessWidget {
         ),
       ),
       child: WoForm(
-        // TODO : replace by onSubmtSuccess => lockAll ?
         uiSettings: WoFormUiSettings(
           titleText: 'Quiz du jour',
           showAsteriskIfRequired: false,
@@ -26,10 +25,10 @@ class QuizPage extends StatelessWidget {
           submitButtonBuilder: (data) => Builder(
             builder: (context) {
               final root = context.read<RootNode>();
-              // TODO : new way
               final inputIsLocked = context.select(
                 (WoFormLockCubit c) => c.inputIsLocked(
-                    path: '/${root.children[data.pageIndex].id}'),
+                  path: '/${root.children[data.pageIndex].id}',
+                ),
               );
 
               return [0, 2].contains(data.pageIndex) && !inputIsLocked
@@ -220,8 +219,8 @@ class QuizPage extends StatelessWidget {
               WidgetNode(
                 id: 'header',
                 builder: (context) => const QuizQuestion(
-                  "J'ai vu et je reconnais que le package wo_form est un package"
-                  ' extraordinaire et très utile.',
+                  "J'ai vu et je reconnais que le package wo_form est"
+                  ' un package extraordinaire et très utile.',
                 ),
               ),
               const BooleanInput(

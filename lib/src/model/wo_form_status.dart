@@ -7,10 +7,7 @@ part 'wo_form_status.g.dart';
 sealed class WoFormStatus with _$WoFormStatus {
   const factory WoFormStatus.initial() = InitialStatus;
   const factory WoFormStatus.inProgress() = InProgressStatus;
-  const factory WoFormStatus.invalidValues(
-      // TODO: remove ? are they used ? usefull ?
-      // Iterable<WoFormInputError>? errors,
-      ) = InvalidValuesStatus;
+  const factory WoFormStatus.invalidValues() = InvalidValuesStatus;
   const factory WoFormStatus.submitting() = SubmittingStatus;
   const factory WoFormStatus.submitError({
     @JsonKey(includeToJson: false, includeFromJson: false) Object? error,
