@@ -30,4 +30,16 @@ enum RegexPattern {
   const RegexPattern(this.value);
 
   final String value;
+
+  /// Checks whether this regex pattern has a match in the [input].
+  ///
+  /// ```dart
+  /// var string = '@monica';
+  /// var regex = RegexPattern.username;
+  /// var match = regex.hasMatch(string); // true
+  ///
+  /// regex = RegexPattern.email;
+  /// match = regex.hasMatch(string); // false
+  /// ```
+  bool hasMatch(String input) => RegExp(value).hasMatch(input);
 }
