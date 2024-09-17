@@ -20,21 +20,21 @@ QuizSettingsNum _$QuizSettingsNumFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$QuizSettingsNum {
-  num get correctAnswer => throw _privateConstructorUsedError;
+  int get correctAnswer => throw _privateConstructorUsedError;
   num get score => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(num correctAnswer, num score) single,
+    required TResult Function(int correctAnswer, num score) single,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(num correctAnswer, num score)? single,
+    TResult? Function(int correctAnswer, num score)? single,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(num correctAnswer, num score)? single,
+    TResult Function(int correctAnswer, num score)? single,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -71,7 +71,7 @@ abstract class $QuizSettingsNumCopyWith<$Res> {
           QuizSettingsNum value, $Res Function(QuizSettingsNum) then) =
       _$QuizSettingsNumCopyWithImpl<$Res, QuizSettingsNum>;
   @useResult
-  $Res call({num correctAnswer, num score});
+  $Res call({int correctAnswer, num score});
 }
 
 /// @nodoc
@@ -96,7 +96,7 @@ class _$QuizSettingsNumCopyWithImpl<$Res, $Val extends QuizSettingsNum>
       correctAnswer: null == correctAnswer
           ? _value.correctAnswer
           : correctAnswer // ignore: cast_nullable_to_non_nullable
-              as num,
+              as int,
       score: null == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
@@ -114,7 +114,7 @@ abstract class _$$QuizSettingsNumSingleImplCopyWith<$Res>
       __$$QuizSettingsNumSingleImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({num correctAnswer, num score});
+  $Res call({int correctAnswer, num score});
 }
 
 /// @nodoc
@@ -137,7 +137,7 @@ class __$$QuizSettingsNumSingleImplCopyWithImpl<$Res>
       correctAnswer: null == correctAnswer
           ? _value.correctAnswer
           : correctAnswer // ignore: cast_nullable_to_non_nullable
-              as num,
+              as int,
       score: null == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
@@ -158,7 +158,7 @@ class _$QuizSettingsNumSingleImpl extends QuizSettingsNumSingle {
       _$$QuizSettingsNumSingleImplFromJson(json);
 
   @override
-  final num correctAnswer;
+  final int correctAnswer;
   @override
   @JsonKey()
   final num score;
@@ -194,7 +194,7 @@ class _$QuizSettingsNumSingleImpl extends QuizSettingsNumSingle {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(num correctAnswer, num score) single,
+    required TResult Function(int correctAnswer, num score) single,
   }) {
     return single(correctAnswer, score);
   }
@@ -202,7 +202,7 @@ class _$QuizSettingsNumSingleImpl extends QuizSettingsNumSingle {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(num correctAnswer, num score)? single,
+    TResult? Function(int correctAnswer, num score)? single,
   }) {
     return single?.call(correctAnswer, score);
   }
@@ -210,7 +210,7 @@ class _$QuizSettingsNumSingleImpl extends QuizSettingsNumSingle {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(num correctAnswer, num score)? single,
+    TResult Function(int correctAnswer, num score)? single,
     required TResult orElse(),
   }) {
     if (single != null) {
@@ -257,7 +257,7 @@ class _$QuizSettingsNumSingleImpl extends QuizSettingsNumSingle {
 
 abstract class QuizSettingsNumSingle extends QuizSettingsNum {
   const factory QuizSettingsNumSingle(
-      {required final num correctAnswer,
+      {required final int correctAnswer,
       final num score}) = _$QuizSettingsNumSingleImpl;
   const QuizSettingsNumSingle._() : super._();
 
@@ -265,7 +265,7 @@ abstract class QuizSettingsNumSingle extends QuizSettingsNum {
       _$QuizSettingsNumSingleImpl.fromJson;
 
   @override
-  num get correctAnswer;
+  int get correctAnswer;
   @override
   num get score;
 

@@ -24,7 +24,7 @@ part 'quiz_settings.g.dart';
 sealed class QuizSettingsNum with _$QuizSettingsNum {
   @Assert('score > 0', 'score must be positive')
   const factory QuizSettingsNum.single({
-    required num correctAnswer,
+    required int correctAnswer,
     @Default(1) num score,
   }) = QuizSettingsNumSingle;
 

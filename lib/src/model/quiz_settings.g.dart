@@ -9,7 +9,7 @@ part of 'quiz_settings.dart';
 _$QuizSettingsNumSingleImpl _$$QuizSettingsNumSingleImplFromJson(
         Map<String, dynamic> json) =>
     _$QuizSettingsNumSingleImpl(
-      correctAnswer: json['correctAnswer'] as num,
+      correctAnswer: (json['correctAnswer'] as num).toInt(),
       score: json['score'] as num? ?? 1,
     );
 
