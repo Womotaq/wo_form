@@ -75,6 +75,7 @@ _$InputsNodeUiSettingsImpl _$$InputsNodeUiSettingsImplFromJson(
       helperText: json['helperText'] as String?,
       childrenVisibility: $enumDecodeNullable(
           _$ChildrenVisibilityEnumMap, json['childrenVisibility']),
+      showChildrenInitially: json['showChildrenInitially'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$InputsNodeUiSettingsImplToJson(
@@ -85,6 +86,7 @@ Map<String, dynamic> _$$InputsNodeUiSettingsImplToJson(
       'helperText': instance.helperText,
       'childrenVisibility':
           _$ChildrenVisibilityEnumMap[instance.childrenVisibility],
+      'showChildrenInitially': instance.showChildrenInitially,
     };
 
 const _$ChildrenVisibilityEnumMap = {

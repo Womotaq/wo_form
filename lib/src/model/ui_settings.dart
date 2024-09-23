@@ -44,7 +44,9 @@ class BooleanInputUiSettings with _$BooleanInputUiSettings {
 }
 
 typedef DynamicInputsNodeWidgetBuilderDef = Widget Function(
-  WoFieldData<DynamicInputsNode, void, DynamicInputsNodeUiSettings> data,
+  WoFieldData<DynamicInputsNode, List<WoFormNodeMixin>,
+          DynamicInputsNodeUiSettings>
+      data,
 );
 
 typedef GenerateIdDef = String Function();
@@ -79,10 +81,6 @@ class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
               widgetBuilder: widgetBuilder ?? other.widgetBuilder,
             );
 }
-
-typedef DynamicInputWidgetBuilderDef = Widget Function(
-  WoFieldData<WoFormNodeMixin, void, DynamicInputUiSettings> data,
-);
 
 @freezed
 class DynamicInputUiSettings with _$DynamicInputUiSettings {
@@ -127,6 +125,11 @@ class InputsNodeUiSettings with _$InputsNodeUiSettings {
     String? labelTextWhenChildrenHidden,
     String? helperText,
     ChildrenVisibility? childrenVisibility,
+
+    /// Only used by [ChildrenVisibility.whenAsked].
+    /// If true, when the widget will be rendered,
+    /// the children's visibility will be asked.
+    @Default(false) bool showChildrenInitially,
     @JsonKey(includeToJson: false, includeFromJson: false)
     InputNodeWidgetBuilderDef? widgetBuilder,
     @JsonKey(includeToJson: false, includeFromJson: false)

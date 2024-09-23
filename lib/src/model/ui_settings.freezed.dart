@@ -705,6 +705,11 @@ mixin _$InputsNodeUiSettings {
   String? get helperText => throw _privateConstructorUsedError;
   ChildrenVisibility? get childrenVisibility =>
       throw _privateConstructorUsedError;
+
+  /// Only used by [ChildrenVisibility.whenAsked].
+  /// If true, when the widget will be rendered,
+  /// the children's visibility will be asked.
+  bool get showChildrenInitially => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
   InputNodeWidgetBuilderDef? get widgetBuilder =>
       throw _privateConstructorUsedError;
@@ -735,6 +740,7 @@ abstract class $InputsNodeUiSettingsCopyWith<$Res> {
       String? labelTextWhenChildrenHidden,
       String? helperText,
       ChildrenVisibility? childrenVisibility,
+      bool showChildrenInitially,
       @JsonKey(includeToJson: false, includeFromJson: false)
       InputNodeWidgetBuilderDef? widgetBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -763,6 +769,7 @@ class _$InputsNodeUiSettingsCopyWithImpl<$Res,
     Object? labelTextWhenChildrenHidden = freezed,
     Object? helperText = freezed,
     Object? childrenVisibility = freezed,
+    Object? showChildrenInitially = null,
     Object? widgetBuilder = freezed,
     Object? headerBuilder = freezed,
     Object? expanderBuilder = freezed,
@@ -784,6 +791,10 @@ class _$InputsNodeUiSettingsCopyWithImpl<$Res,
           ? _value.childrenVisibility
           : childrenVisibility // ignore: cast_nullable_to_non_nullable
               as ChildrenVisibility?,
+      showChildrenInitially: null == showChildrenInitially
+          ? _value.showChildrenInitially
+          : showChildrenInitially // ignore: cast_nullable_to_non_nullable
+              as bool,
       widgetBuilder: freezed == widgetBuilder
           ? _value.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
@@ -813,6 +824,7 @@ abstract class _$$InputsNodeUiSettingsImplCopyWith<$Res>
       String? labelTextWhenChildrenHidden,
       String? helperText,
       ChildrenVisibility? childrenVisibility,
+      bool showChildrenInitially,
       @JsonKey(includeToJson: false, includeFromJson: false)
       InputNodeWidgetBuilderDef? widgetBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -838,6 +850,7 @@ class __$$InputsNodeUiSettingsImplCopyWithImpl<$Res>
     Object? labelTextWhenChildrenHidden = freezed,
     Object? helperText = freezed,
     Object? childrenVisibility = freezed,
+    Object? showChildrenInitially = null,
     Object? widgetBuilder = freezed,
     Object? headerBuilder = freezed,
     Object? expanderBuilder = freezed,
@@ -859,6 +872,10 @@ class __$$InputsNodeUiSettingsImplCopyWithImpl<$Res>
           ? _value.childrenVisibility
           : childrenVisibility // ignore: cast_nullable_to_non_nullable
               as ChildrenVisibility?,
+      showChildrenInitially: null == showChildrenInitially
+          ? _value.showChildrenInitially
+          : showChildrenInitially // ignore: cast_nullable_to_non_nullable
+              as bool,
       widgetBuilder: freezed == widgetBuilder
           ? _value.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
@@ -883,6 +900,7 @@ class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
       this.labelTextWhenChildrenHidden,
       this.helperText,
       this.childrenVisibility,
+      this.showChildrenInitially = false,
       @JsonKey(includeToJson: false, includeFromJson: false) this.widgetBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false) this.headerBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -900,6 +918,13 @@ class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
   final String? helperText;
   @override
   final ChildrenVisibility? childrenVisibility;
+
+  /// Only used by [ChildrenVisibility.whenAsked].
+  /// If true, when the widget will be rendered,
+  /// the children's visibility will be asked.
+  @override
+  @JsonKey()
+  final bool showChildrenInitially;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final InputNodeWidgetBuilderDef? widgetBuilder;
@@ -912,7 +937,7 @@ class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
 
   @override
   String toString() {
-    return 'InputsNodeUiSettings(labelText: $labelText, labelTextWhenChildrenHidden: $labelTextWhenChildrenHidden, helperText: $helperText, childrenVisibility: $childrenVisibility, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, expanderBuilder: $expanderBuilder)';
+    return 'InputsNodeUiSettings(labelText: $labelText, labelTextWhenChildrenHidden: $labelTextWhenChildrenHidden, helperText: $helperText, childrenVisibility: $childrenVisibility, showChildrenInitially: $showChildrenInitially, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, expanderBuilder: $expanderBuilder)';
   }
 
   @override
@@ -930,6 +955,8 @@ class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
                 other.helperText == helperText) &&
             (identical(other.childrenVisibility, childrenVisibility) ||
                 other.childrenVisibility == childrenVisibility) &&
+            (identical(other.showChildrenInitially, showChildrenInitially) ||
+                other.showChildrenInitially == showChildrenInitially) &&
             (identical(other.widgetBuilder, widgetBuilder) ||
                 other.widgetBuilder == widgetBuilder) &&
             (identical(other.headerBuilder, headerBuilder) ||
@@ -946,6 +973,7 @@ class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
       labelTextWhenChildrenHidden,
       helperText,
       childrenVisibility,
+      showChildrenInitially,
       widgetBuilder,
       headerBuilder,
       expanderBuilder);
@@ -974,6 +1002,7 @@ abstract class _InputsNodeUiSettings extends InputsNodeUiSettings {
           final String? labelTextWhenChildrenHidden,
           final String? helperText,
           final ChildrenVisibility? childrenVisibility,
+          final bool showChildrenInitially,
           @JsonKey(includeToJson: false, includeFromJson: false)
           final InputNodeWidgetBuilderDef? widgetBuilder,
           @JsonKey(includeToJson: false, includeFromJson: false)
@@ -994,6 +1023,12 @@ abstract class _InputsNodeUiSettings extends InputsNodeUiSettings {
   String? get helperText;
   @override
   ChildrenVisibility? get childrenVisibility;
+
+  /// Only used by [ChildrenVisibility.whenAsked].
+  /// If true, when the widget will be rendered,
+  /// the children's visibility will be asked.
+  @override
+  bool get showChildrenInitially;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   InputNodeWidgetBuilderDef? get widgetBuilder;

@@ -12,7 +12,6 @@ class WoFormThemeData with _$WoFormThemeData {
   const factory WoFormThemeData({
     BooleanFieldBuilderDef? booleanFieldBuilder,
     DynamicInputsNodeWidgetBuilderDef? dynamicInputsNodeWidgetBuilder,
-    DynamicInputWidgetBuilderDef? dynamicInputWidgetBuilder,
     WidgetBuilderDef? formPageBuilder,
     GenerateIdDef? generateId,
     HeaderBuilderDef? headerBuilder,

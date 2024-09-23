@@ -3,19 +3,36 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/example/app.dart';
 import 'package:wo_form/wo_form.dart';
 
-class InputsNodeExpander extends StatelessWidget {
+class InputsNodeExpander extends StatefulWidget {
   const InputsNodeExpander(this.data, {super.key});
 
   final WoFieldData<InputsNode, void, InputsNodeUiSettings> data;
 
   @override
+  State<InputsNodeExpander> createState() => _InputsNodeExpanderState();
+}
+
+class _InputsNodeExpanderState extends State<InputsNodeExpander> {
+  @override
+  void initState() {
+    if (widget.data.uiSettings.showChildrenInitially) {
+      Future.delayed(
+        Duration.zero,
+        () => mounted ? pushPage(context) : null,
+      );
+    }
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final headerData = WoFormInputHeaderData(
-      path: data.path,
-      labelText: data.uiSettings.labelTextWhenChildrenHidden ??
-          data.uiSettings.labelText,
-      helperText: data.uiSettings.helperText,
-      errorText: data.errorText,
+      path: widget.data.path,
+      labelText: widget.data.uiSettings.labelTextWhenChildrenHidden ??
+          widget.data.uiSettings.labelText,
+      helperText: widget.data.uiSettings.helperText,
+      errorText: widget.data.errorText,
       trailing: const Icon(Icons.chevron_right),
       onTap: () => pushPage(context),
       shrinkWrap: false,
@@ -32,7 +49,7 @@ class InputsNodeExpander extends StatelessWidget {
         valuesCubit.removeLastTemporarySubmitData();
         Navigator.pop(context);
       },
-      path: data.path,
+      path: widget.data.path,
     );
 
     context.pushPage(
@@ -62,15 +79,15 @@ class InputsNodeExpander extends StatelessWidget {
                 child: Builder(
                   builder: (context) {
                     final fieldData = WoFieldData(
-                      path: data.path,
-                      input: data.input,
+                      path: widget.data.path,
+                      input: widget.data.input,
                       value: null,
                       errorText: null,
-                      uiSettings: data.uiSettings,
+                      uiSettings: widget.data.uiSettings,
                       onValueChanged: (_) {},
                     );
 
-                    return (data.uiSettings.widgetBuilder ??
+                    return (widget.data.uiSettings.widgetBuilder ??
                             WoFormTheme.of(context)?.inputsNodeWidgetBuilder ??
                             InputsNodeWidget.new)
                         .call(fieldData);
