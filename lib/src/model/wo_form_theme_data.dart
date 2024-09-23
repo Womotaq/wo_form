@@ -24,6 +24,7 @@ class WoFormThemeData with _$WoFormThemeData {
     ScaffoldBuilderDef? standardScaffoldBuilder,
     StringFieldBuilderDef? stringFieldBuilder,
     SubmitButtonBuilderDef? submitButtonBuilder,
+    OnDynamicInputDeletionDef? onDynamicInputDeletion,
     OnSubmitErrorDef? onSubmitError,
 
     /// This spacing will be added at the bottom of each [WoFormNodeMixin].

@@ -91,12 +91,19 @@ class DynamicInputsNodeWidget extends StatelessWidget {
             .call(headerData),
         ...?data.value?.map(
           (e) => DeletableField(
-            onDelete: () => onRemoveChoice(e),
+            // This key avoids unnecessary rebuilds
+            key: Key('${data.path}/${e.id}'),
+            onDelete: () {
+              (data.uiSettings.onChildDeletion ??
+                      WoFormTheme.of(context)?.onDynamicInputDeletion)
+                  ?.call(
+                () => data.onValueChanged?.call(data.value ?? []),
+              );
+              onRemoveChoice(e);
+            },
             child: WoFormElementBuilder(
               path: '${data.path}/${e.id}',
-              key: Key(
-                '${data.path}/${e.id}',
-              ),
+              key: Key('${data.path}/${e.id}'),
             ),
           ),
         ),

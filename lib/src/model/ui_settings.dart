@@ -50,6 +50,7 @@ typedef DynamicInputsNodeWidgetBuilderDef = Widget Function(
 );
 
 typedef GenerateIdDef = String Function();
+typedef OnDynamicInputDeletionDef = void Function(VoidCallback cancel);
 
 @freezed
 class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
@@ -58,6 +59,8 @@ class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
     String? helperText,
     @JsonKey(includeToJson: false, includeFromJson: false)
     GenerateIdDef? generateId,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    OnDynamicInputDeletionDef? onChildDeletion,
     @JsonKey(includeToJson: false, includeFromJson: false)
     DynamicInputsNodeWidgetBuilderDef? widgetBuilder,
   }) = _DynamicInputsNodeUiSettings;

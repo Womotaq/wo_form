@@ -39,6 +39,8 @@ mixin _$WoFormThemeData {
       throw _privateConstructorUsedError;
   SubmitButtonBuilderDef? get submitButtonBuilder =>
       throw _privateConstructorUsedError;
+  OnDynamicInputDeletionDef? get onDynamicInputDeletion =>
+      throw _privateConstructorUsedError;
   OnSubmitErrorDef? get onSubmitError => throw _privateConstructorUsedError;
 
   /// This spacing will be added at the bottom of each [WoFormNodeMixin].
@@ -76,6 +78,7 @@ abstract class $WoFormThemeDataCopyWith<$Res> {
       ScaffoldBuilderDef? standardScaffoldBuilder,
       StringFieldBuilderDef? stringFieldBuilder,
       SubmitButtonBuilderDef? submitButtonBuilder,
+      OnDynamicInputDeletionDef? onDynamicInputDeletion,
       OnSubmitErrorDef? onSubmitError,
       double? verticalSpacing,
       bool? showAsteriskIfRequired});
@@ -110,6 +113,7 @@ class _$WoFormThemeDataCopyWithImpl<$Res, $Val extends WoFormThemeData>
     Object? standardScaffoldBuilder = freezed,
     Object? stringFieldBuilder = freezed,
     Object? submitButtonBuilder = freezed,
+    Object? onDynamicInputDeletion = freezed,
     Object? onSubmitError = freezed,
     Object? verticalSpacing = freezed,
     Object? showAsteriskIfRequired = freezed,
@@ -171,6 +175,10 @@ class _$WoFormThemeDataCopyWithImpl<$Res, $Val extends WoFormThemeData>
           ? _value.submitButtonBuilder
           : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
               as SubmitButtonBuilderDef?,
+      onDynamicInputDeletion: freezed == onDynamicInputDeletion
+          ? _value.onDynamicInputDeletion
+          : onDynamicInputDeletion // ignore: cast_nullable_to_non_nullable
+              as OnDynamicInputDeletionDef?,
       onSubmitError: freezed == onSubmitError
           ? _value.onSubmitError
           : onSubmitError // ignore: cast_nullable_to_non_nullable
@@ -210,6 +218,7 @@ abstract class _$$WoFormThemeDataImplCopyWith<$Res>
       ScaffoldBuilderDef? standardScaffoldBuilder,
       StringFieldBuilderDef? stringFieldBuilder,
       SubmitButtonBuilderDef? submitButtonBuilder,
+      OnDynamicInputDeletionDef? onDynamicInputDeletion,
       OnSubmitErrorDef? onSubmitError,
       double? verticalSpacing,
       bool? showAsteriskIfRequired});
@@ -242,6 +251,7 @@ class __$$WoFormThemeDataImplCopyWithImpl<$Res>
     Object? standardScaffoldBuilder = freezed,
     Object? stringFieldBuilder = freezed,
     Object? submitButtonBuilder = freezed,
+    Object? onDynamicInputDeletion = freezed,
     Object? onSubmitError = freezed,
     Object? verticalSpacing = freezed,
     Object? showAsteriskIfRequired = freezed,
@@ -303,6 +313,10 @@ class __$$WoFormThemeDataImplCopyWithImpl<$Res>
           ? _value.submitButtonBuilder
           : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
               as SubmitButtonBuilderDef?,
+      onDynamicInputDeletion: freezed == onDynamicInputDeletion
+          ? _value.onDynamicInputDeletion
+          : onDynamicInputDeletion // ignore: cast_nullable_to_non_nullable
+              as OnDynamicInputDeletionDef?,
       onSubmitError: freezed == onSubmitError
           ? _value.onSubmitError
           : onSubmitError // ignore: cast_nullable_to_non_nullable
@@ -337,6 +351,7 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
       this.standardScaffoldBuilder,
       this.stringFieldBuilder,
       this.submitButtonBuilder,
+      this.onDynamicInputDeletion,
       this.onSubmitError,
       this.verticalSpacing,
       this.showAsteriskIfRequired})
@@ -371,6 +386,8 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
   @override
   final SubmitButtonBuilderDef? submitButtonBuilder;
   @override
+  final OnDynamicInputDeletionDef? onDynamicInputDeletion;
+  @override
   final OnSubmitErrorDef? onSubmitError;
 
   /// This spacing will be added at the bottom of each [WoFormNodeMixin].
@@ -384,7 +401,7 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
 
   @override
   String toString() {
-    return 'WoFormThemeData(booleanFieldBuilder: $booleanFieldBuilder, dynamicInputsNodeWidgetBuilder: $dynamicInputsNodeWidgetBuilder, formPageBuilder: $formPageBuilder, generateId: $generateId, headerBuilder: $headerBuilder, inputHeaderBuilder: $inputHeaderBuilder, inputsNodeExpanderBuilder: $inputsNodeExpanderBuilder, inputsNodeWidgetBuilder: $inputsNodeWidgetBuilder, numFieldBuilder: $numFieldBuilder, scoreBuilder: $scoreBuilder, selectFieldBuilder: $selectFieldBuilder, standardScaffoldBuilder: $standardScaffoldBuilder, stringFieldBuilder: $stringFieldBuilder, submitButtonBuilder: $submitButtonBuilder, onSubmitError: $onSubmitError, verticalSpacing: $verticalSpacing, showAsteriskIfRequired: $showAsteriskIfRequired)';
+    return 'WoFormThemeData(booleanFieldBuilder: $booleanFieldBuilder, dynamicInputsNodeWidgetBuilder: $dynamicInputsNodeWidgetBuilder, formPageBuilder: $formPageBuilder, generateId: $generateId, headerBuilder: $headerBuilder, inputHeaderBuilder: $inputHeaderBuilder, inputsNodeExpanderBuilder: $inputsNodeExpanderBuilder, inputsNodeWidgetBuilder: $inputsNodeWidgetBuilder, numFieldBuilder: $numFieldBuilder, scoreBuilder: $scoreBuilder, selectFieldBuilder: $selectFieldBuilder, standardScaffoldBuilder: $standardScaffoldBuilder, stringFieldBuilder: $stringFieldBuilder, submitButtonBuilder: $submitButtonBuilder, onDynamicInputDeletion: $onDynamicInputDeletion, onSubmitError: $onSubmitError, verticalSpacing: $verticalSpacing, showAsteriskIfRequired: $showAsteriskIfRequired)';
   }
 
   @override
@@ -417,13 +434,14 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
                 other.scoreBuilder == scoreBuilder) &&
             (identical(other.selectFieldBuilder, selectFieldBuilder) ||
                 other.selectFieldBuilder == selectFieldBuilder) &&
-            (identical(
-                    other.standardScaffoldBuilder, standardScaffoldBuilder) ||
+            (identical(other.standardScaffoldBuilder, standardScaffoldBuilder) ||
                 other.standardScaffoldBuilder == standardScaffoldBuilder) &&
             (identical(other.stringFieldBuilder, stringFieldBuilder) ||
                 other.stringFieldBuilder == stringFieldBuilder) &&
             (identical(other.submitButtonBuilder, submitButtonBuilder) ||
                 other.submitButtonBuilder == submitButtonBuilder) &&
+            (identical(other.onDynamicInputDeletion, onDynamicInputDeletion) ||
+                other.onDynamicInputDeletion == onDynamicInputDeletion) &&
             (identical(other.onSubmitError, onSubmitError) ||
                 other.onSubmitError == onSubmitError) &&
             (identical(other.verticalSpacing, verticalSpacing) ||
@@ -449,6 +467,7 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
       standardScaffoldBuilder,
       stringFieldBuilder,
       submitButtonBuilder,
+      onDynamicInputDeletion,
       onSubmitError,
       verticalSpacing,
       showAsteriskIfRequired);
@@ -479,6 +498,7 @@ abstract class _WoFormThemeData extends WoFormThemeData {
       final ScaffoldBuilderDef? standardScaffoldBuilder,
       final StringFieldBuilderDef? stringFieldBuilder,
       final SubmitButtonBuilderDef? submitButtonBuilder,
+      final OnDynamicInputDeletionDef? onDynamicInputDeletion,
       final OnSubmitErrorDef? onSubmitError,
       final double? verticalSpacing,
       final bool? showAsteriskIfRequired}) = _$WoFormThemeDataImpl;
@@ -512,6 +532,8 @@ abstract class _WoFormThemeData extends WoFormThemeData {
   StringFieldBuilderDef? get stringFieldBuilder;
   @override
   SubmitButtonBuilderDef? get submitButtonBuilder;
+  @override
+  OnDynamicInputDeletionDef? get onDynamicInputDeletion;
   @override
   OnSubmitErrorDef? get onSubmitError;
 
