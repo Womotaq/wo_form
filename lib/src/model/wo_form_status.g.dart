@@ -28,18 +28,6 @@ Map<String, dynamic> _$$InProgressStatusImplToJson(
       'runtimeType': instance.$type,
     };
 
-_$InvalidValuesStatusImpl _$$InvalidValuesStatusImplFromJson(
-        Map<String, dynamic> json) =>
-    _$InvalidValuesStatusImpl(
-      $type: json['runtimeType'] as String?,
-    );
-
-Map<String, dynamic> _$$InvalidValuesStatusImplToJson(
-        _$InvalidValuesStatusImpl instance) =>
-    <String, dynamic>{
-      'runtimeType': instance.$type,
-    };
-
 _$SubmittingStatusImpl _$$SubmittingStatusImplFromJson(
         Map<String, dynamic> json) =>
     _$SubmittingStatusImpl(

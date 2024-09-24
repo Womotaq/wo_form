@@ -28,37 +28,44 @@ class DynamicInputsNodeWidgetBuilder extends StatelessWidget {
     final mergedSettings =
         uiSettings?.merge(node.uiSettings) ?? node.uiSettings;
 
-    return BlocSelector<WoFormLockCubit, Set<String>, bool>(
-      selector: (lockedInputs) => lockedInputs.contains(path),
-      builder: (context, inputIsLocked) {
-        return WoFormValueBuilder<List<WoFormNodeMixin>>(
-          path: path,
-          builder: (context, inputs) {
-            final fieldData = WoFieldData(
-              path: path,
-              input: node,
-              value: inputs,
-              errorText: null,
-              uiSettings: mergedSettings,
-              onValueChanged: inputIsLocked
-                  ? null
-                  : (List<WoFormNodeMixin>? newInputs) {
-                      valuesCubit.onValueChanged(
-                        path: path,
-                        value: List<WoFormNodeMixin>.unmodifiable(
-                          newInputs ?? [],
-                        ),
-                      );
-                    },
-            );
-
-            return (mergedSettings.widgetBuilder ??
-                    WoFormTheme.of(context)?.dynamicInputsNodeWidgetBuilder ??
-                    DynamicInputsNodeWidget.new)
-                .call(fieldData);
-          },
-        );
+    return Focus(
+      onFocusChange: (value) {
+        if (value == false) {
+          context.read<WoFormValuesCubit>().pathIsVisited(path: path);
+        }
       },
+      child: BlocSelector<WoFormLockCubit, Set<String>, bool>(
+        selector: (lockedInputs) => lockedInputs.contains(path),
+        builder: (context, inputIsLocked) {
+          return WoFormValueBuilder<List<WoFormNodeMixin>>(
+            path: path,
+            builder: (context, inputs) {
+              final fieldData = WoFieldData(
+                path: path,
+                input: node,
+                value: inputs,
+                errorText: null,
+                uiSettings: mergedSettings,
+                onValueChanged: inputIsLocked
+                    ? null
+                    : (List<WoFormNodeMixin>? newInputs) {
+                        valuesCubit.onValueChanged(
+                          path: path,
+                          value: List<WoFormNodeMixin>.unmodifiable(
+                            newInputs ?? [],
+                          ),
+                        );
+                      },
+              );
+
+              return (mergedSettings.widgetBuilder ??
+                      WoFormTheme.of(context)?.dynamicInputsNodeWidgetBuilder ??
+                      DynamicInputsNodeWidget.new)
+                  .call(fieldData);
+            },
+          );
+        },
+      ),
     );
   }
 }

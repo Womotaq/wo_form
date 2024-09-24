@@ -44,61 +44,65 @@ class SelectFieldBuilder<T> extends StatelessWidget {
       );
     }
 
-    return BlocSelector<WoFormLockCubit, Set<String>, bool>(
-      selector: (lockedInputs) => lockedInputs.contains(path),
-      builder: (context, inputIsLocked) {
-        return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
-          builder: (context, status) {
-            return WoFormValueBuilder<List<T>>(
-              path: path,
-              builder: (context, selectedValues_) {
-                final selectedValues = selectedValues_ ?? [];
-
-                final String? errorText;
-                if (status is InvalidValuesStatus) {
-                  final error = input.getError(
-                    selectedValues,
-                    parentPath: path.parentPath,
-                  );
-                  if (error == null) {
-                    errorText = null;
-                  } else {
-                    errorText =
-                        context.read<WoFormL10n?>()?.translateError(error);
-                  }
-                } else {
-                  errorText = null;
-                }
-
-                final fieldData = WoFieldData<SelectInput<T>, List<T>,
-                    SelectInputUiSettings<T>>(
-                  path: path,
-                  input: input,
-                  value: selectedValues,
-                  errorText: errorText,
-                  uiSettings: mergedSettings,
-                  onValueChanged: inputIsLocked
-                      ? null
-                      : (List<T>? value) {
-                          valuesCubit.onValueChanged(
-                            path: path,
-                            value: value,
-                          );
-                          if (mergedSettings.submitFormOnSelect) {
-                            valuesCubit.submit(context);
-                          }
-                        },
-                );
-
-                return (mergedSettings.widgetBuilder ??
-                        WoFormTheme.of(context)?.selectFieldBuilder ??
-                        SelectField.new)
-                    .call(fieldData);
-              },
-            );
-          },
-        );
+    return Focus(
+      onFocusChange: (value) {
+        if (value == false) {
+          context.read<WoFormValuesCubit>().pathIsVisited(path: path);
+        }
       },
+      child: BlocSelector<WoFormLockCubit, Set<String>, bool>(
+        selector: (lockedInputs) => lockedInputs.contains(path),
+        builder: (context, inputIsLocked) {
+          return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
+            builder: (context, status) {
+              return WoFormValueBuilder<List<T>>(
+                path: path,
+                builder: (context, selectedValues_) {
+                  final selectedValues = selectedValues_ ?? [];
+
+                  final String? errorText;
+                  if (status is InProgressStatus) {
+                    final error = status.getError(path: path);
+                    if (error == null) {
+                      errorText = null;
+                    } else {
+                      errorText =
+                          context.read<WoFormL10n?>()?.translateError(error);
+                    }
+                  } else {
+                    errorText = null;
+                  }
+
+                  final fieldData = WoFieldData<SelectInput<T>, List<T>,
+                      SelectInputUiSettings<T>>(
+                    path: path,
+                    input: input,
+                    value: selectedValues,
+                    errorText: errorText,
+                    uiSettings: mergedSettings,
+                    onValueChanged: inputIsLocked
+                        ? null
+                        : (List<T>? value) {
+                            valuesCubit.onValueChanged(
+                              path: path,
+                              value: value,
+                            );
+                            if (mergedSettings.submitFormOnSelect) {
+                              valuesCubit.submit(context);
+                            }
+                          },
+                  );
+
+                  return (mergedSettings.widgetBuilder ??
+                          WoFormTheme.of(context)?.selectFieldBuilder ??
+                          SelectField.new)
+                      .call(fieldData);
+                },
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }

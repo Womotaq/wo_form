@@ -46,6 +46,7 @@ mixin WoFormNodeMixin {
   Iterable<WoFormInputError> getErrors({
     required WoFormValues values,
     required String parentPath,
+    bool recursive = true,
   });
 
   String? getExportKey({
@@ -427,7 +428,10 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
   Iterable<WoFormInputError> getErrors({
     required WoFormValues values,
     required String parentPath,
+    bool recursive = true,
   }) {
+    if (!recursive) return [];
+
     switch (this) {
       case DynamicInputsNode():
       case InputsNode():
@@ -680,7 +684,10 @@ class FutureNode<T> with _$FutureNode<T>, WoFormNodeMixin {
   Iterable<WoFormInputError> getErrors({
     required WoFormValues values,
     required String parentPath,
+    bool recursive = true,
   }) {
+    if (!recursive) return [];
+
     final snapshot = values['$parentPath/$id'];
 
     if (snapshot is! AsyncSnapshot<T?>) return [];
@@ -844,14 +851,18 @@ class RootNode with _$RootNode, WoFormNodeMixin {
   Iterable<WoFormInputError> getErrors({
     required WoFormValues values,
     String parentPath = '',
-  }) =>
-      [
-        for (final child in children)
-          ...child.getErrors(
-            values: values,
-            parentPath: parentPath,
-          ),
-      ].whereNotNull();
+    bool recursive = true,
+  }) {
+    if (!recursive) return [];
+
+    return [
+      for (final child in children)
+        ...child.getErrors(
+          values: values,
+          parentPath: parentPath,
+        ),
+    ].whereNotNull();
+  }
 
   @override
   String? getExportKey({
@@ -867,7 +878,9 @@ class RootNode with _$RootNode, WoFormNodeMixin {
     String parentPath = '',
   }) {
     if (!path.startsWith('/')) {
-      throw ArgumentError('An input path must start with character "/".');
+      throw ArgumentError(
+        'An input path must start with character "/" : $path',
+      );
     }
 
     final secondSlashIndex = path.substring(1).indexOf('/');

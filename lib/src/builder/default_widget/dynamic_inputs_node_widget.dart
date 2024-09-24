@@ -55,7 +55,10 @@ class DynamicInputsNodeWidget extends StatelessWidget {
         ? IconButton.filled(
             onPressed: data.onValueChanged == null
                 ? null
-                : () => onAddChoice(data.input.templates.first.child),
+                : () {
+                    Focus.of(context).unfocus();
+                    onAddChoice(data.input.templates.first.child);
+                  },
             icon: const Icon(Icons.add),
             color: Theme.of(context).colorScheme.onPrimary,
           )

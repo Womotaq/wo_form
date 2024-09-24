@@ -69,6 +69,7 @@ mixin WoFormInputMixin {
   Iterable<WoFormInputError> getErrors({
     required WoFormValues values,
     required String parentPath,
+    bool recursive = true,
   }) =>
       [getError(values['$parentPath/$id'], parentPath: parentPath)]
           .whereNotNull();

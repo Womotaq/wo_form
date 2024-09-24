@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,8 +11,8 @@ import 'package:wo_form/wo_form.dart';
 class WoFormStatusCubit extends Cubit<WoFormStatus> {
   WoFormStatusCubit._(super.initialState);
 
-  void setInProgress() => emit(const InProgressStatus());
-  void setInvalidValues() => emit(const InvalidValuesStatus());
+  void setInProgress({List<WoFormInputError> errors = const []}) =>
+      emit(InProgressStatus(errors: errors));
   void _setSubmitting() => emit(const SubmittingStatus());
   void _setSubmitError({Object? error, StackTrace? stackTrace}) =>
       emit(SubmitErrorStatus(error: error, stackTrace: stackTrace));
@@ -121,7 +122,15 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   // --
 
+  void addTemporarySubmitData({
+    required Future<void> Function() onSubmitting,
+    required String path,
+  }) =>
+      _tempSubmitDatas.add((onSubmitting, path));
+
   void clearValues() => emit(_root.getInitialValues());
+
+  void clearTemporarySubmitData() => _tempSubmitDatas.clear();
 
   /// **Use this method precautiously since there is no type checking !**
   void onValueChanged({
@@ -136,35 +145,79 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     final newMap = Map<String, dynamic>.from(state);
     newMap[path] = value;
 
-    // Setting the status to idle when a modification occurs allows isPure to
-    // work
-    if (_statusCubit.state is! InvalidValuesStatus) {
-      _statusCubit.setInProgress();
-    }
+    emit(newMap);
 
+    _updateErrors();
+  }
+
+  void _updateErrors() => _statusCubit.setInProgress(
+        errors: _visitedPaths
+            .map(
+              (path) => _root
+                  .getChild(
+                    path: path,
+                    values: state,
+                  )
+                  ?.getErrors(
+                    values: state,
+                    parentPath: path.parentPath,
+                    recursive: false,
+                  ),
+            )
+            .whereNotNull()
+            .expand((list) => list)
+            .toList(),
+      );
+
+  Set<String> get _visitedPaths =>
+      state['__wo_reserved_visited_paths'] as Set<String>? ?? {};
+
+  /// Marks the node at this path as visited by the user.
+  /// Before submission, only visited nodes show errors.
+  void pathIsVisited({required String path}) {
+    final newMap = Map<String, dynamic>.from(state);
+    final visitedPaths = Set<String>.from(
+      newMap['__wo_reserved_visited_paths'] as Set<String>? ?? {},
+    )..add(path);
+    newMap['__wo_reserved_visited_paths'] = visitedPaths;
+    emit(newMap);
+
+    _updateErrors();
+  }
+
+  /// Marks the nodes at these paths as visited by the user.
+  /// Before submission, only visited nodes show errors.
+  void _pathsAreVisited({required Iterable<String> paths}) {
+    final newMap = Map<String, dynamic>.from(state);
+    final visitedPaths = Set<String>.from(
+      newMap['__wo_reserved_visited_paths'] as Set<String>? ?? {},
+    )..addAll(paths);
+    newMap['__wo_reserved_visited_paths'] = visitedPaths;
     emit(newMap);
   }
 
-  void clearTemporarySubmitData() => _tempSubmitDatas.clear();
-
   void removeTemporarySubmitData({required String path}) =>
       _tempSubmitDatas.removeWhere((data) => data.$2 == path);
-
-  void addTemporarySubmitData({
-    required Future<void> Function() onSubmitting,
-    required String path,
-  }) =>
-      _tempSubmitDatas.add((onSubmitting, path));
 
   Future<void> submit(BuildContext context) async {
     FocusScope.of(context).unfocus();
 
     final node = currentNode;
 
+    _pathsAreVisited(
+      paths: node
+          .getAllInputPaths(
+            values: state,
+            parentPath: currentPath.parentPath,
+          )
+          // Remove root path
+          .whereNot((path) => path.isEmpty),
+    );
+
     final errors =
         node.getErrors(values: state, parentPath: currentPath.parentPath);
     if (errors.isNotEmpty) {
-      return _statusCubit.setInvalidValues();
+      return _statusCubit.setInProgress(errors: errors.toList());
     }
 
     _statusCubit._setSubmitting();
@@ -330,7 +383,9 @@ class WoForm extends StatelessWidget {
               default:
             }
           },
-          child: pageBuilder?.call(context) ?? root.toWidget(),
+          child: pageBuilder == null
+              ? root.toWidget()
+              : Builder(builder: pageBuilder!),
         ),
       ),
     );

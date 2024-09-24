@@ -38,52 +38,58 @@ class NumFieldBuilder extends StatelessWidget {
       );
     }
 
-    return BlocSelector<WoFormLockCubit, Set<String>, bool>(
-      selector: (lockedInputs) => lockedInputs.contains(path),
-      builder: (context, inputIsLocked) {
-        return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
-          builder: (context, status) {
-            return WoFormValueBuilder<num>(
-              path: path,
-              builder: (context, value) {
-                final String? errorText;
-                if (status is InvalidValuesStatus) {
-                  final error =
-                      input.getError(value, parentPath: path.parentPath);
-                  if (error == null) {
-                    errorText = null;
-                  } else {
-                    errorText =
-                        context.read<WoFormL10n?>()?.translateError(error);
-                  }
-                } else {
-                  errorText = null;
-                }
-
-                final fieldData =
-                    WoFieldData<NumInput, num, NumInputUiSettings>(
-                  path: path,
-                  input: input,
-                  value: value,
-                  errorText: errorText,
-                  uiSettings: mergedSettings,
-                  onValueChanged: inputIsLocked
-                      ? null
-                      : (num? value) => valuesCubit.onValueChanged(
-                            path: path,
-                            value: value,
-                          ),
-                );
-
-                return (mergedSettings.widgetBuilder ??
-                        WoFormTheme.of(context)?.numFieldBuilder ??
-                        NumField.new)
-                    .call(fieldData);
-              },
-            );
-          },
-        );
+    return Focus(
+      onFocusChange: (value) {
+        if (value == false) {
+          context.read<WoFormValuesCubit>().pathIsVisited(path: path);
+        }
       },
+      child: BlocSelector<WoFormLockCubit, Set<String>, bool>(
+        selector: (lockedInputs) => lockedInputs.contains(path),
+        builder: (context, inputIsLocked) {
+          return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
+            builder: (context, status) {
+              return WoFormValueBuilder<num>(
+                path: path,
+                builder: (context, value) {
+                  final String? errorText;
+                  if (status is InProgressStatus) {
+                    final error = status.getError(path: path);
+                    if (error == null) {
+                      errorText = null;
+                    } else {
+                      errorText =
+                          context.read<WoFormL10n?>()?.translateError(error);
+                    }
+                  } else {
+                    errorText = null;
+                  }
+
+                  final fieldData =
+                      WoFieldData<NumInput, num, NumInputUiSettings>(
+                    path: path,
+                    input: input,
+                    value: value,
+                    errorText: errorText,
+                    uiSettings: mergedSettings,
+                    onValueChanged: inputIsLocked
+                        ? null
+                        : (num? value) => valuesCubit.onValueChanged(
+                              path: path,
+                              value: value,
+                            ),
+                  );
+
+                  return (mergedSettings.widgetBuilder ??
+                          WoFormTheme.of(context)?.numFieldBuilder ??
+                          NumField.new)
+                      .call(fieldData);
+                },
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }
