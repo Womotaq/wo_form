@@ -147,10 +147,10 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   void clearTemporarySubmitData() => _tempSubmitDatas.clear();
 
-  void removeLastTemporarySubmitData() =>
-      _tempSubmitDatas.isEmpty ? null : _tempSubmitDatas.removeLast();
+  void removeTemporarySubmitData({required String path}) =>
+      _tempSubmitDatas.removeWhere((data) => data.$2 == path);
 
-  void setTemporarySubmitData({
+  void addTemporarySubmitData({
     required Future<void> Function() onSubmitting,
     required String path,
   }) =>

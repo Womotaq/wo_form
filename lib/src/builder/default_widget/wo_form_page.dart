@@ -134,7 +134,7 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
   void initState() {
     pageController = PageController();
 
-    context.read<WoFormValuesCubit>().setTemporarySubmitData(
+    context.read<WoFormValuesCubit>().addTemporarySubmitData(
           onSubmitting: () => pageController.nextPage(
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeIn,
@@ -150,7 +150,7 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
         if (newPageIndex == widget.root.children.length - 1) {
           context.read<WoFormValuesCubit>().clearTemporarySubmitData();
         } else {
-          context.read<WoFormValuesCubit>().setTemporarySubmitData(
+          context.read<WoFormValuesCubit>().addTemporarySubmitData(
                 onSubmitting: () => pageController.nextPage(
                   duration: const Duration(milliseconds: 300),
                   curve: Curves.easeIn,

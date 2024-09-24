@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/example/app.dart';
 import 'package:wo_form/wo_form.dart';
@@ -16,9 +17,8 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
   @override
   void initState() {
     if (widget.data.uiSettings.showChildrenInitially) {
-      Future.delayed(
-        Duration.zero,
-        () => mounted ? pushPage(context) : null,
+      SchedulerBinding.instance.addPostFrameCallback(
+        (_) => mounted ? pushPage(context) : null,
       );
     }
 
@@ -43,15 +43,6 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
   }
 
   void pushPage(BuildContext context) {
-    final valuesCubit = context.read<WoFormValuesCubit>();
-    valuesCubit.setTemporarySubmitData(
-      onSubmitting: () async {
-        valuesCubit.removeLastTemporarySubmitData();
-        Navigator.pop(context);
-      },
-      path: widget.data.path,
-    );
-
     context.pushPage(
       RepositoryProvider.value(
         value: context.read<RootNode>(),
@@ -67,33 +58,58 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
               value: context.read<WoFormLockCubit>(),
             ),
           ],
-          child: Scaffold(
-            appBar: AppBar(
-              actions: const [
-                SubmitButtonBuilder(),
-                SizedBox(width: 8),
-              ],
-            ),
-            body: SingleChildScrollView(
-              child: SafeArea(
-                child: Builder(
-                  builder: (context) {
-                    final fieldData = WoFieldData(
-                      path: widget.data.path,
-                      input: widget.data.input,
-                      value: null,
-                      errorText: null,
-                      uiSettings: widget.data.uiSettings,
-                      onValueChanged: (_) {},
-                    );
+          child: _InputsNodePage(data: widget.data),
+        ),
+      ),
+    );
+  }
+}
 
-                    return (widget.data.uiSettings.widgetBuilder ??
-                            WoFormTheme.of(context)?.inputsNodeWidgetBuilder ??
-                            InputsNodeWidget.new)
-                        .call(fieldData);
-                  },
-                ),
-              ),
+class _InputsNodePage extends StatelessWidget {
+  const _InputsNodePage({required this.data});
+
+  final WoFieldData<InputsNode, void, InputsNodeUiSettings> data;
+
+  @override
+  Widget build(BuildContext context) {
+    context.read<WoFormValuesCubit>().addTemporarySubmitData(
+          onSubmitting: () async => Navigator.pop(context),
+          path: data.path,
+        );
+
+    return PopScope(
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) {
+          context
+              .read<WoFormValuesCubit>()
+              .removeTemporarySubmitData(path: data.path);
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          actions: const [
+            SubmitButtonBuilder(),
+            SizedBox(width: 8),
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: SafeArea(
+            child: Builder(
+              builder: (context) {
+                final fieldData = WoFieldData(
+                  path: data.path,
+                  input: data.input,
+                  value: null,
+                  errorText: null,
+                  uiSettings: data.uiSettings,
+                  onValueChanged: (_) {},
+                );
+
+                return (data.uiSettings.widgetBuilder ??
+                        WoFormTheme.of(context)?.inputsNodeWidgetBuilder ??
+                        InputsNodeWidget.new)
+                    .call(fieldData);
+              },
             ),
           ),
         ),
