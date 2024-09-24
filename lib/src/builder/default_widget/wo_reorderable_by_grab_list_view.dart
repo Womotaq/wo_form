@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wo_form/wo_form.dart';
 
 class WoReorderableByGrabListView extends StatefulWidget {
   const WoReorderableByGrabListView({
@@ -37,11 +39,27 @@ class _WoReorderableByGrabListViewState
     final oddItemColor = colorScheme.primary.withOpacity(0.05);
     final evenItemColor = colorScheme.primary.withOpacity(0.2);
 
-    // TODO : remove error warning of provider not found for dragged children
+    final rootNode = context.read<RootNode>();
+    final valuesCubit = context.read<WoFormValuesCubit>();
+    final statusCubit = context.read<WoFormStatusCubit>();
+    final lockCubit = context.read<WoFormLockCubit>();
 
     return ReorderableListView(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
+      // Because the dragged widget is not in the page's context,
+      // we need to provide the following
+      proxyDecorator: (child, index, animation) => RepositoryProvider.value(
+        value: rootNode,
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider.value(value: valuesCubit),
+            BlocProvider.value(value: statusCubit),
+            BlocProvider.value(value: lockCubit),
+          ],
+          child: child,
+        ),
+      ),
       onReorder: (oldIndex, newIndex) {
         if (oldIndex < newIndex) newIndex -= 1;
 
