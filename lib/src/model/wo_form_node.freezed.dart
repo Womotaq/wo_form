@@ -235,6 +235,8 @@ abstract class _DynamicInputTemplate extends DynamicInputTemplate {
 
 WoFormNode _$WoFormNodeFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
+    case 'conditionnal':
+      return ConditionnalNode.fromJson(json);
     case 'dynamicInputs':
       return DynamicInputsNode.fromJson(json);
     case 'inputs':
@@ -261,6 +263,9 @@ mixin _$WoFormNode {
   String get id => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String id, List<Condition> conditions,
+            @InputConverter() WoFormNodeMixin child)
+        conditionnal,
     required TResult Function(
             String id,
             @DynamicInputTemplatesConverter()
@@ -315,6 +320,9 @@ mixin _$WoFormNode {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id, List<Condition> conditions,
+            @InputConverter() WoFormNodeMixin child)?
+        conditionnal,
     TResult? Function(
             String id,
             @DynamicInputTemplatesConverter()
@@ -369,6 +377,9 @@ mixin _$WoFormNode {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id, List<Condition> conditions,
+            @InputConverter() WoFormNodeMixin child)?
+        conditionnal,
     TResult Function(
             String id,
             @DynamicInputTemplatesConverter()
@@ -424,6 +435,7 @@ mixin _$WoFormNode {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(ConditionnalNode value) conditionnal,
     required TResult Function(DynamicInputsNode value) dynamicInputs,
     required TResult Function(InputsNode value) inputs,
     required TResult Function(PathBuilderNode value) pathBuilder,
@@ -435,6 +447,7 @@ mixin _$WoFormNode {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ConditionnalNode value)? conditionnal,
     TResult? Function(DynamicInputsNode value)? dynamicInputs,
     TResult? Function(InputsNode value)? inputs,
     TResult? Function(PathBuilderNode value)? pathBuilder,
@@ -446,6 +459,7 @@ mixin _$WoFormNode {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(ConditionnalNode value)? conditionnal,
     TResult Function(DynamicInputsNode value)? dynamicInputs,
     TResult Function(InputsNode value)? inputs,
     TResult Function(PathBuilderNode value)? pathBuilder,
@@ -500,6 +514,382 @@ class _$WoFormNodeCopyWithImpl<$Res, $Val extends WoFormNode>
               as String,
     ) as $Val);
   }
+}
+
+/// @nodoc
+abstract class _$$ConditionnalNodeImplCopyWith<$Res>
+    implements $WoFormNodeCopyWith<$Res> {
+  factory _$$ConditionnalNodeImplCopyWith(_$ConditionnalNodeImpl value,
+          $Res Function(_$ConditionnalNodeImpl) then) =
+      __$$ConditionnalNodeImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      List<Condition> conditions,
+      @InputConverter() WoFormNodeMixin child});
+}
+
+/// @nodoc
+class __$$ConditionnalNodeImplCopyWithImpl<$Res>
+    extends _$WoFormNodeCopyWithImpl<$Res, _$ConditionnalNodeImpl>
+    implements _$$ConditionnalNodeImplCopyWith<$Res> {
+  __$$ConditionnalNodeImplCopyWithImpl(_$ConditionnalNodeImpl _value,
+      $Res Function(_$ConditionnalNodeImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? conditions = null,
+    Object? child = null,
+  }) {
+    return _then(_$ConditionnalNodeImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      conditions: null == conditions
+          ? _value._conditions
+          : conditions // ignore: cast_nullable_to_non_nullable
+              as List<Condition>,
+      child: null == child
+          ? _value.child
+          : child // ignore: cast_nullable_to_non_nullable
+              as WoFormNodeMixin,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ConditionnalNodeImpl extends ConditionnalNode {
+  const _$ConditionnalNodeImpl(
+      {required this.id,
+      required final List<Condition> conditions,
+      @InputConverter() required this.child,
+      final String? $type})
+      : _conditions = conditions,
+        $type = $type ?? 'conditionnal',
+        super._();
+
+  factory _$ConditionnalNodeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ConditionnalNodeImplFromJson(json);
+
+  @override
+  final String id;
+  final List<Condition> _conditions;
+  @override
+  List<Condition> get conditions {
+    if (_conditions is EqualUnmodifiableListView) return _conditions;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_conditions);
+  }
+
+  @override
+  @InputConverter()
+  final WoFormNodeMixin child;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'WoFormNode.conditionnal(id: $id, conditions: $conditions, child: $child)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ConditionnalNodeImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            const DeepCollectionEquality()
+                .equals(other._conditions, _conditions) &&
+            (identical(other.child, child) || other.child == child));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, id, const DeepCollectionEquality().hash(_conditions), child);
+
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ConditionnalNodeImplCopyWith<_$ConditionnalNodeImpl> get copyWith =>
+      __$$ConditionnalNodeImplCopyWithImpl<_$ConditionnalNodeImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String id, List<Condition> conditions,
+            @InputConverter() WoFormNodeMixin child)
+        conditionnal,
+    required TResult Function(
+            String id,
+            @DynamicInputTemplatesConverter()
+            List<DynamicInputTemplate> templates,
+            @InputsListConverter() List<WoFormNodeMixin> initialChildren,
+            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
+            DynamicInputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)
+        dynamicInputs,
+    required TResult Function(
+            String id,
+            @InputsListConverter() List<WoFormNodeMixin> children,
+            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
+            InputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)
+        inputs,
+    required TResult Function(
+            String id,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormNodeMixin Function(String)? builder)
+        pathBuilder,
+    required TResult Function(
+            String id,
+            String path,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormNodeMixin Function(Object?)? builder,
+            Object? initialValue)
+        valueBuilder,
+    required TResult Function(
+            String id,
+            List<String> paths,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormNodeMixin Function(Map<String, Object?>)? builder,
+            Map<String, Object?>? initialValues)
+        valuesBuilder,
+    required TResult Function(
+            String path,
+            String id,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            bool Function(Object?, Object?)? listenWhen,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(BuildContext, String, Object?)? listener)
+        valueListener,
+    required TResult Function(
+            String id,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            Widget Function(BuildContext)? builder)
+        widget,
+  }) {
+    return conditionnal(id, conditions, child);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id, List<Condition> conditions,
+            @InputConverter() WoFormNodeMixin child)?
+        conditionnal,
+    TResult? Function(
+            String id,
+            @DynamicInputTemplatesConverter()
+            List<DynamicInputTemplate> templates,
+            @InputsListConverter() List<WoFormNodeMixin> initialChildren,
+            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
+            DynamicInputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)?
+        dynamicInputs,
+    TResult? Function(
+            String id,
+            @InputsListConverter() List<WoFormNodeMixin> children,
+            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
+            InputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)?
+        inputs,
+    TResult? Function(
+            String id,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormNodeMixin Function(String)? builder)?
+        pathBuilder,
+    TResult? Function(
+            String id,
+            String path,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormNodeMixin Function(Object?)? builder,
+            Object? initialValue)?
+        valueBuilder,
+    TResult? Function(
+            String id,
+            List<String> paths,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormNodeMixin Function(Map<String, Object?>)? builder,
+            Map<String, Object?>? initialValues)?
+        valuesBuilder,
+    TResult? Function(
+            String path,
+            String id,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            bool Function(Object?, Object?)? listenWhen,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(BuildContext, String, Object?)? listener)?
+        valueListener,
+    TResult? Function(
+            String id,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            Widget Function(BuildContext)? builder)?
+        widget,
+  }) {
+    return conditionnal?.call(id, conditions, child);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id, List<Condition> conditions,
+            @InputConverter() WoFormNodeMixin child)?
+        conditionnal,
+    TResult Function(
+            String id,
+            @DynamicInputTemplatesConverter()
+            List<DynamicInputTemplate> templates,
+            @InputsListConverter() List<WoFormNodeMixin> initialChildren,
+            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
+            DynamicInputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)?
+        dynamicInputs,
+    TResult Function(
+            String id,
+            @InputsListConverter() List<WoFormNodeMixin> children,
+            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
+            InputsNodeUiSettings uiSettings,
+            @JsonKey(toJson: ExportSettings.staticToJson)
+            ExportSettings exportSettings)?
+        inputs,
+    TResult Function(
+            String id,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormNodeMixin Function(String)? builder)?
+        pathBuilder,
+    TResult Function(
+            String id,
+            String path,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormNodeMixin Function(Object?)? builder,
+            Object? initialValue)?
+        valueBuilder,
+    TResult Function(
+            String id,
+            List<String> paths,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            WoFormNodeMixin Function(Map<String, Object?>)? builder,
+            Map<String, Object?>? initialValues)?
+        valuesBuilder,
+    TResult Function(
+            String path,
+            String id,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            bool Function(Object?, Object?)? listenWhen,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(BuildContext, String, Object?)? listener)?
+        valueListener,
+    TResult Function(
+            String id,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            Widget Function(BuildContext)? builder)?
+        widget,
+    required TResult orElse(),
+  }) {
+    if (conditionnal != null) {
+      return conditionnal(id, conditions, child);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ConditionnalNode value) conditionnal,
+    required TResult Function(DynamicInputsNode value) dynamicInputs,
+    required TResult Function(InputsNode value) inputs,
+    required TResult Function(PathBuilderNode value) pathBuilder,
+    required TResult Function(ValueBuilderNode value) valueBuilder,
+    required TResult Function(ValuesBuilderNode value) valuesBuilder,
+    required TResult Function(ValueListenerNode value) valueListener,
+    required TResult Function(WidgetNode value) widget,
+  }) {
+    return conditionnal(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ConditionnalNode value)? conditionnal,
+    TResult? Function(DynamicInputsNode value)? dynamicInputs,
+    TResult? Function(InputsNode value)? inputs,
+    TResult? Function(PathBuilderNode value)? pathBuilder,
+    TResult? Function(ValueBuilderNode value)? valueBuilder,
+    TResult? Function(ValuesBuilderNode value)? valuesBuilder,
+    TResult? Function(ValueListenerNode value)? valueListener,
+    TResult? Function(WidgetNode value)? widget,
+  }) {
+    return conditionnal?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ConditionnalNode value)? conditionnal,
+    TResult Function(DynamicInputsNode value)? dynamicInputs,
+    TResult Function(InputsNode value)? inputs,
+    TResult Function(PathBuilderNode value)? pathBuilder,
+    TResult Function(ValueBuilderNode value)? valueBuilder,
+    TResult Function(ValuesBuilderNode value)? valuesBuilder,
+    TResult Function(ValueListenerNode value)? valueListener,
+    TResult Function(WidgetNode value)? widget,
+    required TResult orElse(),
+  }) {
+    if (conditionnal != null) {
+      return conditionnal(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ConditionnalNodeImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class ConditionnalNode extends WoFormNode {
+  const factory ConditionnalNode(
+          {required final String id,
+          required final List<Condition> conditions,
+          @InputConverter() required final WoFormNodeMixin child}) =
+      _$ConditionnalNodeImpl;
+  const ConditionnalNode._() : super._();
+
+  factory ConditionnalNode.fromJson(Map<String, dynamic> json) =
+      _$ConditionnalNodeImpl.fromJson;
+
+  @override
+  String get id;
+  List<Condition> get conditions;
+  @InputConverter()
+  WoFormNodeMixin get child;
+
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ConditionnalNodeImplCopyWith<_$ConditionnalNodeImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -685,6 +1075,9 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String id, List<Condition> conditions,
+            @InputConverter() WoFormNodeMixin child)
+        conditionnal,
     required TResult Function(
             String id,
             @DynamicInputTemplatesConverter()
@@ -743,6 +1136,9 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id, List<Condition> conditions,
+            @InputConverter() WoFormNodeMixin child)?
+        conditionnal,
     TResult? Function(
             String id,
             @DynamicInputTemplatesConverter()
@@ -801,6 +1197,9 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id, List<Condition> conditions,
+            @InputConverter() WoFormNodeMixin child)?
+        conditionnal,
     TResult Function(
             String id,
             @DynamicInputTemplatesConverter()
@@ -863,6 +1262,7 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(ConditionnalNode value) conditionnal,
     required TResult Function(DynamicInputsNode value) dynamicInputs,
     required TResult Function(InputsNode value) inputs,
     required TResult Function(PathBuilderNode value) pathBuilder,
@@ -877,6 +1277,7 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ConditionnalNode value)? conditionnal,
     TResult? Function(DynamicInputsNode value)? dynamicInputs,
     TResult? Function(InputsNode value)? inputs,
     TResult? Function(PathBuilderNode value)? pathBuilder,
@@ -891,6 +1292,7 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(ConditionnalNode value)? conditionnal,
     TResult Function(DynamicInputsNode value)? dynamicInputs,
     TResult Function(InputsNode value)? inputs,
     TResult Function(PathBuilderNode value)? pathBuilder,
@@ -1105,6 +1507,9 @@ class _$InputsNodeImpl extends InputsNode {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String id, List<Condition> conditions,
+            @InputConverter() WoFormNodeMixin child)
+        conditionnal,
     required TResult Function(
             String id,
             @DynamicInputTemplatesConverter()
@@ -1162,6 +1567,9 @@ class _$InputsNodeImpl extends InputsNode {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id, List<Condition> conditions,
+            @InputConverter() WoFormNodeMixin child)?
+        conditionnal,
     TResult? Function(
             String id,
             @DynamicInputTemplatesConverter()
@@ -1219,6 +1627,9 @@ class _$InputsNodeImpl extends InputsNode {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id, List<Condition> conditions,
+            @InputConverter() WoFormNodeMixin child)?
+        conditionnal,
     TResult Function(
             String id,
             @DynamicInputTemplatesConverter()
@@ -1280,6 +1691,7 @@ class _$InputsNodeImpl extends InputsNode {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(ConditionnalNode value) conditionnal,
     required TResult Function(DynamicInputsNode value) dynamicInputs,
     required TResult Function(InputsNode value) inputs,
     required TResult Function(PathBuilderNode value) pathBuilder,
@@ -1294,6 +1706,7 @@ class _$InputsNodeImpl extends InputsNode {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ConditionnalNode value)? conditionnal,
     TResult? Function(DynamicInputsNode value)? dynamicInputs,
     TResult? Function(InputsNode value)? inputs,
     TResult? Function(PathBuilderNode value)? pathBuilder,
@@ -1308,6 +1721,7 @@ class _$InputsNodeImpl extends InputsNode {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(ConditionnalNode value)? conditionnal,
     TResult Function(DynamicInputsNode value)? dynamicInputs,
     TResult Function(InputsNode value)? inputs,
     TResult Function(PathBuilderNode value)? pathBuilder,
@@ -1457,6 +1871,9 @@ class _$PathBuilderNodeImpl extends PathBuilderNode {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String id, List<Condition> conditions,
+            @InputConverter() WoFormNodeMixin child)
+        conditionnal,
     required TResult Function(
             String id,
             @DynamicInputTemplatesConverter()
@@ -1514,6 +1931,9 @@ class _$PathBuilderNodeImpl extends PathBuilderNode {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id, List<Condition> conditions,
+            @InputConverter() WoFormNodeMixin child)?
+        conditionnal,
     TResult? Function(
             String id,
             @DynamicInputTemplatesConverter()
@@ -1571,6 +1991,9 @@ class _$PathBuilderNodeImpl extends PathBuilderNode {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id, List<Condition> conditions,
+            @InputConverter() WoFormNodeMixin child)?
+        conditionnal,
     TResult Function(
             String id,
             @DynamicInputTemplatesConverter()
@@ -1632,6 +2055,7 @@ class _$PathBuilderNodeImpl extends PathBuilderNode {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(ConditionnalNode value) conditionnal,
     required TResult Function(DynamicInputsNode value) dynamicInputs,
     required TResult Function(InputsNode value) inputs,
     required TResult Function(PathBuilderNode value) pathBuilder,
@@ -1646,6 +2070,7 @@ class _$PathBuilderNodeImpl extends PathBuilderNode {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ConditionnalNode value)? conditionnal,
     TResult? Function(DynamicInputsNode value)? dynamicInputs,
     TResult? Function(InputsNode value)? inputs,
     TResult? Function(PathBuilderNode value)? pathBuilder,
@@ -1660,6 +2085,7 @@ class _$PathBuilderNodeImpl extends PathBuilderNode {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(ConditionnalNode value)? conditionnal,
     TResult Function(DynamicInputsNode value)? dynamicInputs,
     TResult Function(InputsNode value)? inputs,
     TResult Function(PathBuilderNode value)? pathBuilder,
@@ -1822,6 +2248,9 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String id, List<Condition> conditions,
+            @InputConverter() WoFormNodeMixin child)
+        conditionnal,
     required TResult Function(
             String id,
             @DynamicInputTemplatesConverter()
@@ -1879,6 +2308,9 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id, List<Condition> conditions,
+            @InputConverter() WoFormNodeMixin child)?
+        conditionnal,
     TResult? Function(
             String id,
             @DynamicInputTemplatesConverter()
@@ -1936,6 +2368,9 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id, List<Condition> conditions,
+            @InputConverter() WoFormNodeMixin child)?
+        conditionnal,
     TResult Function(
             String id,
             @DynamicInputTemplatesConverter()
@@ -1997,6 +2432,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(ConditionnalNode value) conditionnal,
     required TResult Function(DynamicInputsNode value) dynamicInputs,
     required TResult Function(InputsNode value) inputs,
     required TResult Function(PathBuilderNode value) pathBuilder,
@@ -2011,6 +2447,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ConditionnalNode value)? conditionnal,
     TResult? Function(DynamicInputsNode value)? dynamicInputs,
     TResult? Function(InputsNode value)? inputs,
     TResult? Function(PathBuilderNode value)? pathBuilder,
@@ -2025,6 +2462,7 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(ConditionnalNode value)? conditionnal,
     TResult Function(DynamicInputsNode value)? dynamicInputs,
     TResult Function(InputsNode value)? inputs,
     TResult Function(PathBuilderNode value)? pathBuilder,
@@ -2212,6 +2650,9 @@ class _$ValuesBuilderNodeImpl extends ValuesBuilderNode {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String id, List<Condition> conditions,
+            @InputConverter() WoFormNodeMixin child)
+        conditionnal,
     required TResult Function(
             String id,
             @DynamicInputTemplatesConverter()
@@ -2269,6 +2710,9 @@ class _$ValuesBuilderNodeImpl extends ValuesBuilderNode {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id, List<Condition> conditions,
+            @InputConverter() WoFormNodeMixin child)?
+        conditionnal,
     TResult? Function(
             String id,
             @DynamicInputTemplatesConverter()
@@ -2326,6 +2770,9 @@ class _$ValuesBuilderNodeImpl extends ValuesBuilderNode {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id, List<Condition> conditions,
+            @InputConverter() WoFormNodeMixin child)?
+        conditionnal,
     TResult Function(
             String id,
             @DynamicInputTemplatesConverter()
@@ -2387,6 +2834,7 @@ class _$ValuesBuilderNodeImpl extends ValuesBuilderNode {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(ConditionnalNode value) conditionnal,
     required TResult Function(DynamicInputsNode value) dynamicInputs,
     required TResult Function(InputsNode value) inputs,
     required TResult Function(PathBuilderNode value) pathBuilder,
@@ -2401,6 +2849,7 @@ class _$ValuesBuilderNodeImpl extends ValuesBuilderNode {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ConditionnalNode value)? conditionnal,
     TResult? Function(DynamicInputsNode value)? dynamicInputs,
     TResult? Function(InputsNode value)? inputs,
     TResult? Function(PathBuilderNode value)? pathBuilder,
@@ -2415,6 +2864,7 @@ class _$ValuesBuilderNodeImpl extends ValuesBuilderNode {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(ConditionnalNode value)? conditionnal,
     TResult Function(DynamicInputsNode value)? dynamicInputs,
     TResult Function(InputsNode value)? inputs,
     TResult Function(PathBuilderNode value)? pathBuilder,
@@ -2586,6 +3036,9 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String id, List<Condition> conditions,
+            @InputConverter() WoFormNodeMixin child)
+        conditionnal,
     required TResult Function(
             String id,
             @DynamicInputTemplatesConverter()
@@ -2643,6 +3096,9 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id, List<Condition> conditions,
+            @InputConverter() WoFormNodeMixin child)?
+        conditionnal,
     TResult? Function(
             String id,
             @DynamicInputTemplatesConverter()
@@ -2700,6 +3156,9 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id, List<Condition> conditions,
+            @InputConverter() WoFormNodeMixin child)?
+        conditionnal,
     TResult Function(
             String id,
             @DynamicInputTemplatesConverter()
@@ -2761,6 +3220,7 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(ConditionnalNode value) conditionnal,
     required TResult Function(DynamicInputsNode value) dynamicInputs,
     required TResult Function(InputsNode value) inputs,
     required TResult Function(PathBuilderNode value) pathBuilder,
@@ -2775,6 +3235,7 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ConditionnalNode value)? conditionnal,
     TResult? Function(DynamicInputsNode value)? dynamicInputs,
     TResult? Function(InputsNode value)? inputs,
     TResult? Function(PathBuilderNode value)? pathBuilder,
@@ -2789,6 +3250,7 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(ConditionnalNode value)? conditionnal,
     TResult Function(DynamicInputsNode value)? dynamicInputs,
     TResult Function(InputsNode value)? inputs,
     TResult Function(PathBuilderNode value)? pathBuilder,
@@ -2937,6 +3399,9 @@ class _$WidgetNodeImpl extends WidgetNode {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String id, List<Condition> conditions,
+            @InputConverter() WoFormNodeMixin child)
+        conditionnal,
     required TResult Function(
             String id,
             @DynamicInputTemplatesConverter()
@@ -2994,6 +3459,9 @@ class _$WidgetNodeImpl extends WidgetNode {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id, List<Condition> conditions,
+            @InputConverter() WoFormNodeMixin child)?
+        conditionnal,
     TResult? Function(
             String id,
             @DynamicInputTemplatesConverter()
@@ -3051,6 +3519,9 @@ class _$WidgetNodeImpl extends WidgetNode {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id, List<Condition> conditions,
+            @InputConverter() WoFormNodeMixin child)?
+        conditionnal,
     TResult Function(
             String id,
             @DynamicInputTemplatesConverter()
@@ -3112,6 +3583,7 @@ class _$WidgetNodeImpl extends WidgetNode {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(ConditionnalNode value) conditionnal,
     required TResult Function(DynamicInputsNode value) dynamicInputs,
     required TResult Function(InputsNode value) inputs,
     required TResult Function(PathBuilderNode value) pathBuilder,
@@ -3126,6 +3598,7 @@ class _$WidgetNodeImpl extends WidgetNode {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ConditionnalNode value)? conditionnal,
     TResult? Function(DynamicInputsNode value)? dynamicInputs,
     TResult? Function(InputsNode value)? inputs,
     TResult? Function(PathBuilderNode value)? pathBuilder,
@@ -3140,6 +3613,7 @@ class _$WidgetNodeImpl extends WidgetNode {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(ConditionnalNode value)? conditionnal,
     TResult Function(DynamicInputsNode value)? dynamicInputs,
     TResult Function(InputsNode value)? inputs,
     TResult Function(PathBuilderNode value)? pathBuilder,

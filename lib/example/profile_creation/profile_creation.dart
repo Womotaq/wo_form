@@ -57,6 +57,21 @@ class ProfileCreationPage extends StatelessWidget {
                 autofillHints: [AutofillHints.givenName],
               ),
             ),
+            ConditionnalNode(
+              id: 'condition',
+              conditions: [
+                Condition(path: '/namePage/firstName', isEqualTo: 'John'),
+              ],
+              child: StringInput(
+                id: 'password',
+                isRequired: true,
+                uiSettings: StringInputUiSettings(
+                  labelText: 'Bonjour agent John.',
+                  hintText: 'Mot de passe',
+                  prefixIcon: SizedBox.square(dimension: 24),
+                ),
+              ),
+            ),
             StringInput(
               id: 'lastName',
               uiSettings: StringInputUiSettings(

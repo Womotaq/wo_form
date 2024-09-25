@@ -23,6 +23,27 @@ Map<String, dynamic> _$$DynamicInputTemplateImplToJson(
       'uiSettings': DynamicInputUiSettings.staticToJson(instance.uiSettings),
     };
 
+_$ConditionnalNodeImpl _$$ConditionnalNodeImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ConditionnalNodeImpl(
+      id: json['id'] as String,
+      conditions: (json['conditions'] as List<dynamic>)
+          .map((e) => Condition.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      child: const InputConverter()
+          .fromJson(json['child'] as Map<String, dynamic>),
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$ConditionnalNodeImplToJson(
+        _$ConditionnalNodeImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'conditions': instance.conditions,
+      'child': const InputConverter().toJson(instance.child),
+      'runtimeType': instance.$type,
+    };
+
 _$DynamicInputsNodeImpl _$$DynamicInputsNodeImplFromJson(
         Map<String, dynamic> json) =>
     _$DynamicInputsNodeImpl(

@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/src/model/json_converter/dynamic_input_templates.dart';
+import 'package:wo_form/src/model/json_converter/input.dart';
 import 'package:wo_form/src/model/json_converter/inputs_list.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -116,6 +117,12 @@ class DynamicInputTemplate with _$DynamicInputTemplate {
 
 @freezed
 sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
+  const factory WoFormNode.conditionnal({
+    required String id,
+    required List<Condition> conditions,
+    @InputConverter() required WoFormNodeMixin child,
+  }) = ConditionnalNode;
+
   const factory WoFormNode.dynamicInputs({
     required String id,
     @DynamicInputTemplatesConverter()
@@ -197,6 +204,14 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
     required String parentPath,
   }) {
     switch (this) {
+      case ConditionnalNode(conditions: final conditions, child: final child):
+        if (values.meet(conditions)) {
+          child.export(
+            into: into,
+            values: values,
+            parentPath: '$parentPath/$id',
+          );
+        }
       case DynamicInputsNode(exportSettings: final exportSettings):
       case InputsNode(exportSettings: final exportSettings):
         final children = this is InputsNode
@@ -291,6 +306,15 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
     required String parentPath,
   }) {
     switch (this) {
+      case ConditionnalNode(conditions: final conditions, child: final child):
+        return [
+          '$parentPath/$id',
+          if (values.meet(conditions))
+            ...child.getAllInputPaths(
+              values: values,
+              parentPath: '$parentPath/$id',
+            ),
+        ];
       case DynamicInputsNode():
       case InputsNode():
         final children = this is InputsNode
@@ -366,6 +390,19 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
     final secondSlashIndex = path.substring(1).indexOf('/');
 
     switch (this) {
+      case ConditionnalNode(conditions: final conditions, child: final child):
+        if (!values.meet(conditions)) return null;
+
+        // if the path ends at the child of this node
+        if (secondSlashIndex == -1) {
+          return (child.id == path.substring(1)) ? child : null;
+        }
+
+        return child.getChild(
+          path: path.substring(secondSlashIndex + 1),
+          parentPath: '$parentPath/$id',
+          values: values,
+        );
       case DynamicInputsNode():
       case InputsNode():
         final children = this is InputsNode
@@ -433,6 +470,13 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
     if (!recursive) return [];
 
     switch (this) {
+      case ConditionnalNode(conditions: final conditions, child: final child):
+        if (!values.meet(conditions)) return [];
+
+        return child.getErrors(
+          values: values,
+          parentPath: '$parentPath/$id',
+        );
       case DynamicInputsNode():
       case InputsNode():
         final children = this is InputsNode
@@ -484,6 +528,13 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
     required String parentPath,
   }) {
     switch (this) {
+      case ConditionnalNode(conditions: final conditions, child: final child):
+        if (!values.meet(conditions)) return null;
+
+        return child.getExportKey(
+          values: values,
+          parentPath: '$parentPath/$id',
+        );
       case DynamicInputsNode(exportSettings: final exportSettings):
       case InputsNode(exportSettings: final exportSettings):
         return switch (exportSettings.type) {
@@ -524,6 +575,10 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
   @override
   Map<String, dynamic> getInitialValues({required String parentPath}) {
     switch (this) {
+      case ConditionnalNode(conditions: final conditions, child: final child):
+        if (!<String, dynamic>{}.meet(conditions)) return {};
+
+        return child.getInitialValues(parentPath: '$parentPath/$id');
       case DynamicInputsNode(initialChildren: final initialChildren):
         return {
           '$parentPath/$id': initialChildren,
@@ -558,6 +613,10 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
 
   @override
   Widget toWidget({required String parentPath, Key? key}) => switch (this) {
+        ConditionnalNode() => ConditionnalNodeBuilder(
+            key: key,
+            path: '$parentPath/$id',
+          ),
         DynamicInputsNode() => DynamicInputsNodeWidgetBuilder(
             key: key,
             path: '$parentPath/$id',
