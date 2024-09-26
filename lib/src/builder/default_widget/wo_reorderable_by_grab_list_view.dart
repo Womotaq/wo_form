@@ -10,7 +10,7 @@ class WoReorderableByGrabListView extends StatefulWidget {
   });
 
   final List<Widget> children;
-  final void Function(int oldIndex, int newIndex) onReorder;
+  final void Function(int oldIndex, int newIndex)? onReorder;
 
   @override
   State<WoReorderableByGrabListView> createState() =>
@@ -61,13 +61,15 @@ class _WoReorderableByGrabListViewState
         ),
       ),
       onReorder: (oldIndex, newIndex) {
+        if (widget.onReorder == null) return;
+
         if (oldIndex < newIndex) newIndex -= 1;
 
         setState(() {
           final item = _items.removeAt(oldIndex);
           _items.insert(newIndex, item);
         });
-        widget.onReorder(oldIndex, newIndex);
+        widget.onReorder!(oldIndex, newIndex);
       },
       buildDefaultDragHandles: false,
       children: _items.indexed
@@ -77,12 +79,18 @@ class _WoReorderableByGrabListViewState
               color: e.$1.isOdd ? oddItemColor : evenItemColor,
               child: Row(
                 children: [
-                  SizedBox.square(
-                    dimension: 42,
-                    child: ReorderableDragStartListener(
-                      index: e.$1,
-                      child: const Center(
-                        child: Icon(Icons.drag_indicator),
+                  ReorderableDragStartListener(
+                    enabled: widget.onReorder != null,
+                    index: e.$1,
+                    child: SizedBox.square(
+                      dimension: 42,
+                      child: Center(
+                        child: Icon(
+                          Icons.drag_indicator,
+                          color: widget.onReorder == null
+                              ? Theme.of(context).disabledColor
+                              : null,
+                        ),
                       ),
                     ),
                   ),

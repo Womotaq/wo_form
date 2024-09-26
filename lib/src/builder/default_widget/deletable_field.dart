@@ -8,7 +8,7 @@ class DeletableField extends StatelessWidget {
   });
 
   final Widget child;
-  final VoidCallback onDelete;
+  final VoidCallback? onDelete;
 
   @override
   Widget build(BuildContext context) {

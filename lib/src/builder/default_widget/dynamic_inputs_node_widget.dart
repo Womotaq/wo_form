@@ -93,26 +93,33 @@ class DynamicInputsNodeWidget extends StatelessWidget {
         (WoFormTheme.of(context)?.inputHeaderBuilder ?? InputHeader.new)
             .call(headerData),
         WoReorderableByGrabListView(
-          onReorder: (oldIndex, newIndex) {
-            try {
-              final newValues = List<WoFormNodeMixin>.from(data.value ?? []);
-              newValues.insert(newIndex, newValues.removeAt(oldIndex));
-              data.onValueChanged?.call(newValues);
-            } catch (_) {}
-          },
+          onReorder: data.onValueChanged == null
+              ? null
+              : (oldIndex, newIndex) {
+                  try {
+                    final newValues =
+                        List<WoFormNodeMixin>.from(data.value ?? []);
+                    newValues.insert(newIndex, newValues.removeAt(oldIndex));
+                    data.onValueChanged?.call(newValues);
+                  } catch (_) {}
+                },
           children: data.value
                   ?.map(
                     (e) => DeletableField(
                       // This key avoids unnecessary rebuilds
                       key: Key('${data.path}/${e.id}'),
-                      onDelete: () {
-                        (data.uiSettings.onChildDeletion ??
-                                WoFormTheme.of(context)?.onDynamicInputDeletion)
-                            ?.call(
-                          () => data.onValueChanged?.call(data.value ?? []),
-                        );
-                        onRemoveChoice(e);
-                      },
+                      onDelete: data.onValueChanged == null
+                          ? null
+                          : () {
+                              (data.uiSettings.onChildDeletion ??
+                                      WoFormTheme.of(context)
+                                          ?.onDynamicInputDeletion)
+                                  ?.call(
+                                () =>
+                                    data.onValueChanged?.call(data.value ?? []),
+                              );
+                              onRemoveChoice(e);
+                            },
                       child: WoFormElementBuilder(
                         path: '${data.path}/${e.id}',
                         key: Key('${data.path}/${e.id}'),
