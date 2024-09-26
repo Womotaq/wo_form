@@ -37,7 +37,7 @@ class InputsNodeWidget extends StatelessWidget {
           },
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 8),
+          padding: EdgeInsets.only(bottom: woFormTheme?.verticalSpacing ?? 0),
           child: Column(children: inputWidgets),
         ),
       ],

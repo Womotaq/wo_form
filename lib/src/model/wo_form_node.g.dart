@@ -27,9 +27,7 @@ _$ConditionnalNodeImpl _$$ConditionnalNodeImplFromJson(
         Map<String, dynamic> json) =>
     _$ConditionnalNodeImpl(
       id: json['id'] as String,
-      conditions: (json['conditions'] as List<dynamic>)
-          .map((e) => Condition.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      condition: Condition.fromJson(json['condition'] as Map<String, dynamic>),
       child: const InputConverter()
           .fromJson(json['child'] as Map<String, dynamic>),
       $type: json['runtimeType'] as String?,
@@ -39,7 +37,7 @@ Map<String, dynamic> _$$ConditionnalNodeImplToJson(
         _$ConditionnalNodeImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'conditions': instance.conditions,
+      'condition': Condition.staticToJson(instance.condition),
       'child': const InputConverter().toJson(instance.child),
       'runtimeType': instance.$type,
     };

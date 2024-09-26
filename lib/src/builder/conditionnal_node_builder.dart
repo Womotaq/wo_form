@@ -27,7 +27,7 @@ class ConditionnalNodeBuilder extends StatelessWidget {
       duration: Durations.medium1,
       alignment: Alignment.topCenter,
       child: BlocSelector<WoFormValuesCubit, WoFormValues, bool>(
-        selector: (values) => values.meet(node.conditions),
+        selector: (values) => values.meet(node.condition),
         builder: (context, conditionsAreMet) {
           if (!conditionsAreMet) return const SizedBox();
 

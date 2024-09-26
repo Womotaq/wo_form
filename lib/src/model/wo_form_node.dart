@@ -119,7 +119,7 @@ class DynamicInputTemplate with _$DynamicInputTemplate {
 sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
   const factory WoFormNode.conditionnal({
     required String id,
-    required List<Condition> conditions,
+    @JsonKey(toJson: Condition.staticToJson) required Condition condition,
     @InputConverter() required WoFormNodeMixin child,
   }) = ConditionnalNode;
 
@@ -204,8 +204,8 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
     required String parentPath,
   }) {
     switch (this) {
-      case ConditionnalNode(conditions: final conditions, child: final child):
-        if (values.meet(conditions)) {
+      case ConditionnalNode(condition: final condition, child: final child):
+        if (values.meet(condition)) {
           child.export(
             into: into,
             values: values,
@@ -306,10 +306,10 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
     required String parentPath,
   }) {
     switch (this) {
-      case ConditionnalNode(conditions: final conditions, child: final child):
+      case ConditionnalNode(condition: final condition, child: final child):
         return [
           '$parentPath/$id',
-          if (values.meet(conditions))
+          if (values.meet(condition))
             ...child.getAllInputPaths(
               values: values,
               parentPath: '$parentPath/$id',
@@ -390,8 +390,8 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
     final secondSlashIndex = path.substring(1).indexOf('/');
 
     switch (this) {
-      case ConditionnalNode(conditions: final conditions, child: final child):
-        if (!values.meet(conditions)) return null;
+      case ConditionnalNode(condition: final condition, child: final child):
+        if (!values.meet(condition)) return null;
 
         // if the path ends at the child of this node
         if (secondSlashIndex == -1) {
@@ -470,8 +470,8 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
     if (!recursive) return [];
 
     switch (this) {
-      case ConditionnalNode(conditions: final conditions, child: final child):
-        if (!values.meet(conditions)) return [];
+      case ConditionnalNode(condition: final condition, child: final child):
+        if (!values.meet(condition)) return [];
 
         return child.getErrors(
           values: values,
@@ -528,8 +528,8 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
     required String parentPath,
   }) {
     switch (this) {
-      case ConditionnalNode(conditions: final conditions, child: final child):
-        if (!values.meet(conditions)) return null;
+      case ConditionnalNode(condition: final condition, child: final child):
+        if (!values.meet(condition)) return null;
 
         return child.getExportKey(
           values: values,
@@ -575,8 +575,8 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
   @override
   Map<String, dynamic> getInitialValues({required String parentPath}) {
     switch (this) {
-      case ConditionnalNode(conditions: final conditions, child: final child):
-        if (!<String, dynamic>{}.meet(conditions)) return {};
+      case ConditionnalNode(condition: final condition, child: final child):
+        if (!<String, dynamic>{}.meet(condition)) return {};
 
         return child.getInitialValues(parentPath: '$parentPath/$id');
       case DynamicInputsNode(initialChildren: final initialChildren):

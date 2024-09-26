@@ -6,16 +6,43 @@ part of 'condition.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ConditionImpl _$$ConditionImplFromJson(Map<String, dynamic> json) =>
-    _$ConditionImpl(
+_$ConditionValueImpl _$$ConditionValueImplFromJson(Map<String, dynamic> json) =>
+    _$ConditionValueImpl(
       path: json['path'] as String,
       isEqualTo: json['isEqualTo'],
       isNotEqualTo: json['isNotEqualTo'],
+      $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$ConditionImplToJson(_$ConditionImpl instance) =>
+Map<String, dynamic> _$$ConditionValueImplToJson(
+        _$ConditionValueImpl instance) =>
     <String, dynamic>{
       'path': instance.path,
       'isEqualTo': instance.isEqualTo,
       'isNotEqualTo': instance.isNotEqualTo,
+      'runtimeType': instance.$type,
+    };
+
+_$ConditionAndImpl _$$ConditionAndImplFromJson(Map<String, dynamic> json) =>
+    _$ConditionAndImpl(
+      const ConditionsListConverter().fromJson(json['conditions'] as List),
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$ConditionAndImplToJson(_$ConditionAndImpl instance) =>
+    <String, dynamic>{
+      'conditions': const ConditionsListConverter().toJson(instance.conditions),
+      'runtimeType': instance.$type,
+    };
+
+_$ConditionOrImpl _$$ConditionOrImplFromJson(Map<String, dynamic> json) =>
+    _$ConditionOrImpl(
+      const ConditionsListConverter().fromJson(json['conditions'] as List),
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$ConditionOrImplToJson(_$ConditionOrImpl instance) =>
+    <String, dynamic>{
+      'conditions': const ConditionsListConverter().toJson(instance.conditions),
+      'runtimeType': instance.$type,
     };

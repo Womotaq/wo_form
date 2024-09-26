@@ -40,13 +40,13 @@ class ProfileCreationPage extends StatelessWidget {
               ),
       ),
       children: [
-        const InputsNode(
+        InputsNode(
           id: 'namePage',
-          uiSettings: InputsNodeUiSettings(
+          uiSettings: const InputsNodeUiSettings(
             labelText: "Comment t'appelles-tu ?",
           ),
           children: [
-            StringInput(
+            const StringInput(
               id: 'firstName',
               isRequired: true,
               uiSettings: StringInputUiSettings(
@@ -59,10 +59,11 @@ class ProfileCreationPage extends StatelessWidget {
             ),
             ConditionnalNode(
               id: 'condition',
-              conditions: [
-                Condition(path: '/namePage/firstName', isEqualTo: 'John'),
-              ],
-              child: StringInput(
+              condition: ConditionValue(
+                path: '/namePage/firstName',
+                isEqualTo: 'John',
+              ),
+              child: const StringInput(
                 id: 'password',
                 isRequired: true,
                 uiSettings: StringInputUiSettings(
@@ -72,7 +73,7 @@ class ProfileCreationPage extends StatelessWidget {
                 ),
               ),
             ),
-            StringInput(
+            const StringInput(
               id: 'lastName',
               uiSettings: StringInputUiSettings(
                 labelText: 'Nom',
