@@ -22,6 +22,7 @@ Condition _$ConditionFromJson(Map<String, dynamic> json) {
 mixin _$Condition {
   String get path => throw _privateConstructorUsedError;
   Object? get isEqualTo => throw _privateConstructorUsedError;
+  Object? get isNotEqualTo => throw _privateConstructorUsedError;
 
   /// Serializes this Condition to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,7 +39,7 @@ abstract class $ConditionCopyWith<$Res> {
   factory $ConditionCopyWith(Condition value, $Res Function(Condition) then) =
       _$ConditionCopyWithImpl<$Res, Condition>;
   @useResult
-  $Res call({String path, Object? isEqualTo});
+  $Res call({String path, Object? isEqualTo, Object? isNotEqualTo});
 }
 
 /// @nodoc
@@ -58,6 +59,7 @@ class _$ConditionCopyWithImpl<$Res, $Val extends Condition>
   $Res call({
     Object? path = null,
     Object? isEqualTo = freezed,
+    Object? isNotEqualTo = freezed,
   }) {
     return _then(_value.copyWith(
       path: null == path
@@ -65,6 +67,8 @@ class _$ConditionCopyWithImpl<$Res, $Val extends Condition>
           : path // ignore: cast_nullable_to_non_nullable
               as String,
       isEqualTo: freezed == isEqualTo ? _value.isEqualTo : isEqualTo,
+      isNotEqualTo:
+          freezed == isNotEqualTo ? _value.isNotEqualTo : isNotEqualTo,
     ) as $Val);
   }
 }
@@ -77,7 +81,7 @@ abstract class _$$ConditionImplCopyWith<$Res>
       __$$ConditionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String path, Object? isEqualTo});
+  $Res call({String path, Object? isEqualTo, Object? isNotEqualTo});
 }
 
 /// @nodoc
@@ -95,6 +99,7 @@ class __$$ConditionImplCopyWithImpl<$Res>
   $Res call({
     Object? path = null,
     Object? isEqualTo = freezed,
+    Object? isNotEqualTo = freezed,
   }) {
     return _then(_$ConditionImpl(
       path: null == path
@@ -102,6 +107,8 @@ class __$$ConditionImplCopyWithImpl<$Res>
           : path // ignore: cast_nullable_to_non_nullable
               as String,
       isEqualTo: freezed == isEqualTo ? _value.isEqualTo : isEqualTo,
+      isNotEqualTo:
+          freezed == isNotEqualTo ? _value.isNotEqualTo : isNotEqualTo,
     ));
   }
 }
@@ -109,7 +116,8 @@ class __$$ConditionImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ConditionImpl extends _Condition {
-  const _$ConditionImpl({required this.path, this.isEqualTo}) : super._();
+  const _$ConditionImpl({required this.path, this.isEqualTo, this.isNotEqualTo})
+      : super._();
 
   factory _$ConditionImpl.fromJson(Map<String, dynamic> json) =>
       _$$ConditionImplFromJson(json);
@@ -118,10 +126,12 @@ class _$ConditionImpl extends _Condition {
   final String path;
   @override
   final Object? isEqualTo;
+  @override
+  final Object? isNotEqualTo;
 
   @override
   String toString() {
-    return 'Condition(path: $path, isEqualTo: $isEqualTo)';
+    return 'Condition(path: $path, isEqualTo: $isEqualTo, isNotEqualTo: $isNotEqualTo)';
   }
 
   @override
@@ -130,13 +140,18 @@ class _$ConditionImpl extends _Condition {
         (other.runtimeType == runtimeType &&
             other is _$ConditionImpl &&
             (identical(other.path, path) || other.path == path) &&
-            const DeepCollectionEquality().equals(other.isEqualTo, isEqualTo));
+            const DeepCollectionEquality().equals(other.isEqualTo, isEqualTo) &&
+            const DeepCollectionEquality()
+                .equals(other.isNotEqualTo, isNotEqualTo));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, path, const DeepCollectionEquality().hash(isEqualTo));
+      runtimeType,
+      path,
+      const DeepCollectionEquality().hash(isEqualTo),
+      const DeepCollectionEquality().hash(isNotEqualTo));
 
   /// Create a copy of Condition
   /// with the given fields replaced by the non-null parameter values.
@@ -156,7 +171,9 @@ class _$ConditionImpl extends _Condition {
 
 abstract class _Condition extends Condition {
   const factory _Condition(
-      {required final String path, final Object? isEqualTo}) = _$ConditionImpl;
+      {required final String path,
+      final Object? isEqualTo,
+      final Object? isNotEqualTo}) = _$ConditionImpl;
   const _Condition._() : super._();
 
   factory _Condition.fromJson(Map<String, dynamic> json) =
@@ -166,6 +183,8 @@ abstract class _Condition extends Condition {
   String get path;
   @override
   Object? get isEqualTo;
+  @override
+  Object? get isNotEqualTo;
 
   /// Create a copy of Condition
   /// with the given fields replaced by the non-null parameter values.
