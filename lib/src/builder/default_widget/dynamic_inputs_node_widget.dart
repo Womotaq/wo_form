@@ -49,8 +49,6 @@ class DynamicInputsNodeWidget extends StatelessWidget {
       }
     }
 
-    if (data.input.templates.isEmpty) return const SizedBox.shrink();
-
     final addButton = data.input.templates.length == 1
         ? IconButton.filled(
             onPressed: data.onValueChanged == null
@@ -88,47 +86,53 @@ class DynamicInputsNodeWidget extends StatelessWidget {
       shrinkWrap: false,
     );
 
+    final children = data.value
+            ?.map(
+              (e) => DeletableField(
+                // This key avoids unnecessary rebuilds
+                key: Key('${data.path}/${e.id}'),
+                onDelete: data.onValueChanged == null
+                    ? null
+                    : () {
+                        (data.uiSettings.onChildDeletion ??
+                                WoFormTheme.of(context)?.onDynamicInputDeletion)
+                            ?.call(
+                          () => data.onValueChanged?.call(data.value ?? []),
+                        );
+                        onRemoveChoice(e);
+                      },
+                child: WoFormElementBuilder(
+                  path: '${data.path}/${e.id}',
+                  key: Key('${data.path}/${e.id}'),
+                ),
+              ),
+            )
+            .toList() ??
+        [];
+
     return Column(
       children: [
         (WoFormTheme.of(context)?.inputHeaderBuilder ?? InputHeader.new)
             .call(headerData),
-        WoReorderableByGrabListView(
-          onReorder: data.onValueChanged == null
-              ? null
-              : (oldIndex, newIndex) {
-                  try {
-                    final newValues =
-                        List<WoFormNodeMixin>.from(data.value ?? []);
-                    newValues.insert(newIndex, newValues.removeAt(oldIndex));
-                    data.onValueChanged?.call(newValues);
-                  } catch (_) {}
-                },
-          children: data.value
-                  ?.map(
-                    (e) => DeletableField(
-                      // This key avoids unnecessary rebuilds
-                      key: Key('${data.path}/${e.id}'),
-                      onDelete: data.onValueChanged == null
-                          ? null
-                          : () {
-                              (data.uiSettings.onChildDeletion ??
-                                      WoFormTheme.of(context)
-                                          ?.onDynamicInputDeletion)
-                                  ?.call(
-                                () =>
-                                    data.onValueChanged?.call(data.value ?? []),
-                              );
-                              onRemoveChoice(e);
-                            },
-                      child: WoFormElementBuilder(
-                        path: '${data.path}/${e.id}',
-                        key: Key('${data.path}/${e.id}'),
-                      ),
-                    ),
-                  )
-                  .toList() ??
-              [],
-        ),
+        if (data.uiSettings.reorderable ?? true)
+          WoReorderableByGrabListView(
+            onReorder: data.onValueChanged == null
+                ? null
+                : (oldIndex, newIndex) {
+                    try {
+                      final newValues =
+                          List<WoFormNodeMixin>.from(data.value ?? []);
+                      newValues.insert(
+                        newIndex,
+                        newValues.removeAt(oldIndex),
+                      );
+                      data.onValueChanged?.call(newValues);
+                    } catch (_) {}
+                  },
+            children: children,
+          )
+        else
+          Column(children: children),
       ],
     );
   }

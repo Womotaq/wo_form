@@ -43,6 +43,7 @@ _$DynamicInputsNodeUiSettingsImpl _$$DynamicInputsNodeUiSettingsImplFromJson(
     _$DynamicInputsNodeUiSettingsImpl(
       labelText: json['labelText'] as String?,
       helperText: json['helperText'] as String?,
+      reorderable: json['reorderable'] as bool?,
     );
 
 Map<String, dynamic> _$$DynamicInputsNodeUiSettingsImplToJson(
@@ -50,6 +51,7 @@ Map<String, dynamic> _$$DynamicInputsNodeUiSettingsImplToJson(
     <String, dynamic>{
       'labelText': instance.labelText,
       'helperText': instance.helperText,
+      'reorderable': instance.reorderable,
     };
 
 _$DynamicInputUiSettingsImpl _$$DynamicInputUiSettingsImplFromJson(

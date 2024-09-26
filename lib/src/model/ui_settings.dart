@@ -59,6 +59,9 @@ class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
   const factory DynamicInputsNodeUiSettings({
     String? labelText,
     String? helperText,
+
+    /// Default to true
+    bool? reorderable,
     @JsonKey(includeToJson: false, includeFromJson: false)
     GenerateIdDef? generateId,
     @JsonKey(includeToJson: false, includeFromJson: false)
@@ -83,6 +86,9 @@ class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
           : DynamicInputsNodeUiSettings(
               labelText: labelText ?? other.labelText,
               helperText: helperText ?? other.helperText,
+              reorderable: reorderable ?? other.reorderable,
+              generateId: generateId ?? other.generateId,
+              onChildDeletion: onChildDeletion ?? other.onChildDeletion,
               widgetBuilder: widgetBuilder ?? other.widgetBuilder,
             );
 }

@@ -306,6 +306,7 @@ DynamicInputsNodeUiSettings _$DynamicInputsNodeUiSettingsFromJson(
 mixin _$DynamicInputsNodeUiSettings {
   String? get labelText => throw _privateConstructorUsedError;
   String? get helperText => throw _privateConstructorUsedError;
+  bool? get reorderable => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
   GenerateIdDef? get generateId => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
@@ -336,6 +337,7 @@ abstract class $DynamicInputsNodeUiSettingsCopyWith<$Res> {
   $Res call(
       {String? labelText,
       String? helperText,
+      bool? reorderable,
       @JsonKey(includeToJson: false, includeFromJson: false)
       GenerateIdDef? generateId,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -362,6 +364,7 @@ class _$DynamicInputsNodeUiSettingsCopyWithImpl<$Res,
   $Res call({
     Object? labelText = freezed,
     Object? helperText = freezed,
+    Object? reorderable = freezed,
     Object? generateId = freezed,
     Object? onChildDeletion = freezed,
     Object? widgetBuilder = freezed,
@@ -375,6 +378,10 @@ class _$DynamicInputsNodeUiSettingsCopyWithImpl<$Res,
           ? _value.helperText
           : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
+      reorderable: freezed == reorderable
+          ? _value.reorderable
+          : reorderable // ignore: cast_nullable_to_non_nullable
+              as bool?,
       generateId: freezed == generateId
           ? _value.generateId
           : generateId // ignore: cast_nullable_to_non_nullable
@@ -403,6 +410,7 @@ abstract class _$$DynamicInputsNodeUiSettingsImplCopyWith<$Res>
   $Res call(
       {String? labelText,
       String? helperText,
+      bool? reorderable,
       @JsonKey(includeToJson: false, includeFromJson: false)
       GenerateIdDef? generateId,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -428,6 +436,7 @@ class __$$DynamicInputsNodeUiSettingsImplCopyWithImpl<$Res>
   $Res call({
     Object? labelText = freezed,
     Object? helperText = freezed,
+    Object? reorderable = freezed,
     Object? generateId = freezed,
     Object? onChildDeletion = freezed,
     Object? widgetBuilder = freezed,
@@ -441,6 +450,10 @@ class __$$DynamicInputsNodeUiSettingsImplCopyWithImpl<$Res>
           ? _value.helperText
           : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
+      reorderable: freezed == reorderable
+          ? _value.reorderable
+          : reorderable // ignore: cast_nullable_to_non_nullable
+              as bool?,
       generateId: freezed == generateId
           ? _value.generateId
           : generateId // ignore: cast_nullable_to_non_nullable
@@ -463,6 +476,7 @@ class _$DynamicInputsNodeUiSettingsImpl extends _DynamicInputsNodeUiSettings {
   const _$DynamicInputsNodeUiSettingsImpl(
       {this.labelText,
       this.helperText,
+      this.reorderable,
       @JsonKey(includeToJson: false, includeFromJson: false) this.generateId,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.onChildDeletion,
@@ -479,6 +493,8 @@ class _$DynamicInputsNodeUiSettingsImpl extends _DynamicInputsNodeUiSettings {
   @override
   final String? helperText;
   @override
+  final bool? reorderable;
+  @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final GenerateIdDef? generateId;
   @override
@@ -490,7 +506,7 @@ class _$DynamicInputsNodeUiSettingsImpl extends _DynamicInputsNodeUiSettings {
 
   @override
   String toString() {
-    return 'DynamicInputsNodeUiSettings(labelText: $labelText, helperText: $helperText, generateId: $generateId, onChildDeletion: $onChildDeletion, widgetBuilder: $widgetBuilder)';
+    return 'DynamicInputsNodeUiSettings(labelText: $labelText, helperText: $helperText, reorderable: $reorderable, generateId: $generateId, onChildDeletion: $onChildDeletion, widgetBuilder: $widgetBuilder)';
   }
 
   @override
@@ -502,6 +518,8 @@ class _$DynamicInputsNodeUiSettingsImpl extends _DynamicInputsNodeUiSettings {
                 other.labelText == labelText) &&
             (identical(other.helperText, helperText) ||
                 other.helperText == helperText) &&
+            (identical(other.reorderable, reorderable) ||
+                other.reorderable == reorderable) &&
             (identical(other.generateId, generateId) ||
                 other.generateId == generateId) &&
             (identical(other.onChildDeletion, onChildDeletion) ||
@@ -513,7 +531,7 @@ class _$DynamicInputsNodeUiSettingsImpl extends _DynamicInputsNodeUiSettings {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, labelText, helperText,
-      generateId, onChildDeletion, widgetBuilder);
+      reorderable, generateId, onChildDeletion, widgetBuilder);
 
   /// Create a copy of DynamicInputsNodeUiSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -537,6 +555,7 @@ abstract class _DynamicInputsNodeUiSettings
   const factory _DynamicInputsNodeUiSettings(
           {final String? labelText,
           final String? helperText,
+          final bool? reorderable,
           @JsonKey(includeToJson: false, includeFromJson: false)
           final GenerateIdDef? generateId,
           @JsonKey(includeToJson: false, includeFromJson: false)
@@ -553,6 +572,8 @@ abstract class _DynamicInputsNodeUiSettings
   String? get labelText;
   @override
   String? get helperText;
+  @override
+  bool? get reorderable;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   GenerateIdDef? get generateId;
