@@ -11,12 +11,23 @@ import 'package:wo_form/wo_form.dart';
 class WoFormStatusCubit extends Cubit<WoFormStatus> {
   WoFormStatusCubit._(super.initialState);
 
-  void setInProgress({List<WoFormInputError> errors = const []}) =>
-      emit(InProgressStatus(errors: errors));
-  void _setSubmitting() => emit(const SubmittingStatus());
-  void _setSubmitError({Object? error, StackTrace? stackTrace}) =>
+  void setInProgress({List<WoFormInputError> errors = const []}) {
+    if (!isClosed) emit(InProgressStatus(errors: errors));
+  }
+
+  void _setSubmitting() {
+    if (!isClosed) emit(const SubmittingStatus());
+  }
+
+  void _setSubmitError({Object? error, StackTrace? stackTrace}) {
+    if (!isClosed) {
       emit(SubmitErrorStatus(error: error, stackTrace: stackTrace));
-  void _setSubmitSuccess() => emit(const SubmitSuccessStatus());
+    }
+  }
+
+  void _setSubmitSuccess() {
+    if (!isClosed) emit(const SubmitSuccessStatus());
+  }
 }
 
 class HydratedWoFormStatusCubit extends WoFormStatusCubit
@@ -50,11 +61,13 @@ class WoFormLockCubit extends Cubit<Set<String>> {
 
   bool inputIsLocked({required String path}) => state.contains(path);
 
-  void lockInput({required String path}) =>
-      emit(Set<String>.from(state)..add(path));
+  void lockInput({required String path}) {
+    if (!isClosed) emit(Set<String>.from(state)..add(path));
+  }
 
-  void unlockInput({required String path}) =>
-      emit(Set<String>.from(state)..remove(path));
+  void unlockInput({required String path}) {
+    if (!isClosed) emit(Set<String>.from(state)..remove(path));
+  }
 }
 
 class HydratedWoFormLockCubit extends WoFormLockCubit
