@@ -28,6 +28,8 @@ mixin _$BooleanInputUiSettings {
   ListTileControlAffinity? get controlAffinity =>
       throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
+  Widget? get secondary => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
   BooleanFieldBuilderDef? get widgetBuilder =>
       throw _privateConstructorUsedError;
 
@@ -52,6 +54,7 @@ abstract class $BooleanInputUiSettingsCopyWith<$Res> {
       String? helperText,
       BooleanFieldControlType? controlType,
       ListTileControlAffinity? controlAffinity,
+      @JsonKey(includeToJson: false, includeFromJson: false) Widget? secondary,
       @JsonKey(includeToJson: false, includeFromJson: false)
       BooleanFieldBuilderDef? widgetBuilder});
 }
@@ -76,6 +79,7 @@ class _$BooleanInputUiSettingsCopyWithImpl<$Res,
     Object? helperText = freezed,
     Object? controlType = freezed,
     Object? controlAffinity = freezed,
+    Object? secondary = freezed,
     Object? widgetBuilder = freezed,
   }) {
     return _then(_value.copyWith(
@@ -95,6 +99,10 @@ class _$BooleanInputUiSettingsCopyWithImpl<$Res,
           ? _value.controlAffinity
           : controlAffinity // ignore: cast_nullable_to_non_nullable
               as ListTileControlAffinity?,
+      secondary: freezed == secondary
+          ? _value.secondary
+          : secondary // ignore: cast_nullable_to_non_nullable
+              as Widget?,
       widgetBuilder: freezed == widgetBuilder
           ? _value.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
@@ -117,6 +125,7 @@ abstract class _$$BooleanInputUiSettingsImplCopyWith<$Res>
       String? helperText,
       BooleanFieldControlType? controlType,
       ListTileControlAffinity? controlAffinity,
+      @JsonKey(includeToJson: false, includeFromJson: false) Widget? secondary,
       @JsonKey(includeToJson: false, includeFromJson: false)
       BooleanFieldBuilderDef? widgetBuilder});
 }
@@ -140,6 +149,7 @@ class __$$BooleanInputUiSettingsImplCopyWithImpl<$Res>
     Object? helperText = freezed,
     Object? controlType = freezed,
     Object? controlAffinity = freezed,
+    Object? secondary = freezed,
     Object? widgetBuilder = freezed,
   }) {
     return _then(_$BooleanInputUiSettingsImpl(
@@ -159,6 +169,10 @@ class __$$BooleanInputUiSettingsImplCopyWithImpl<$Res>
           ? _value.controlAffinity
           : controlAffinity // ignore: cast_nullable_to_non_nullable
               as ListTileControlAffinity?,
+      secondary: freezed == secondary
+          ? _value.secondary
+          : secondary // ignore: cast_nullable_to_non_nullable
+              as Widget?,
       widgetBuilder: freezed == widgetBuilder
           ? _value.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
@@ -175,6 +189,7 @@ class _$BooleanInputUiSettingsImpl extends _BooleanInputUiSettings {
       this.helperText,
       this.controlType,
       this.controlAffinity,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.secondary,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.widgetBuilder})
       : super._();
@@ -192,11 +207,14 @@ class _$BooleanInputUiSettingsImpl extends _BooleanInputUiSettings {
   final ListTileControlAffinity? controlAffinity;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
+  final Widget? secondary;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
   final BooleanFieldBuilderDef? widgetBuilder;
 
   @override
   String toString() {
-    return 'BooleanInputUiSettings(labelText: $labelText, helperText: $helperText, controlType: $controlType, controlAffinity: $controlAffinity, widgetBuilder: $widgetBuilder)';
+    return 'BooleanInputUiSettings(labelText: $labelText, helperText: $helperText, controlType: $controlType, controlAffinity: $controlAffinity, secondary: $secondary, widgetBuilder: $widgetBuilder)';
   }
 
   @override
@@ -212,6 +230,8 @@ class _$BooleanInputUiSettingsImpl extends _BooleanInputUiSettings {
                 other.controlType == controlType) &&
             (identical(other.controlAffinity, controlAffinity) ||
                 other.controlAffinity == controlAffinity) &&
+            (identical(other.secondary, secondary) ||
+                other.secondary == secondary) &&
             (identical(other.widgetBuilder, widgetBuilder) ||
                 other.widgetBuilder == widgetBuilder));
   }
@@ -219,7 +239,7 @@ class _$BooleanInputUiSettingsImpl extends _BooleanInputUiSettings {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, labelText, helperText,
-      controlType, controlAffinity, widgetBuilder);
+      controlType, controlAffinity, secondary, widgetBuilder);
 
   /// Create a copy of BooleanInputUiSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -245,6 +265,8 @@ abstract class _BooleanInputUiSettings extends BooleanInputUiSettings {
           final BooleanFieldControlType? controlType,
           final ListTileControlAffinity? controlAffinity,
           @JsonKey(includeToJson: false, includeFromJson: false)
+          final Widget? secondary,
+          @JsonKey(includeToJson: false, includeFromJson: false)
           final BooleanFieldBuilderDef? widgetBuilder}) =
       _$BooleanInputUiSettingsImpl;
   const _BooleanInputUiSettings._() : super._();
@@ -260,6 +282,9 @@ abstract class _BooleanInputUiSettings extends BooleanInputUiSettings {
   BooleanFieldControlType? get controlType;
   @override
   ListTileControlAffinity? get controlAffinity;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  Widget? get secondary;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   BooleanFieldBuilderDef? get widgetBuilder;

@@ -33,6 +33,7 @@ class BooleanField extends StatelessWidget {
                       theme.textTheme.labelMedium,
                 )
               : null,
+      secondary: data.uiSettings.secondary,
     );
   }
 
@@ -41,20 +42,25 @@ class BooleanField extends StatelessWidget {
     required ListTileControlAffinity controlAffinity,
     required Widget title,
     required Widget? subtitle,
+    required Widget? secondary,
   }) =>
       switch (data.uiSettings.controlType) {
         null || BooleanFieldControlType.switchButton => SwitchListTile(
+            contentPadding: const EdgeInsets.symmetric(horizontal: 12),
             value: value,
             controlAffinity: controlAffinity,
             title: title,
             subtitle: subtitle,
+            secondary: secondary,
             onChanged: data.onValueChanged,
           ),
         BooleanFieldControlType.checkbox => CheckboxListTile(
+            contentPadding: const EdgeInsets.symmetric(horizontal: 6),
             value: value,
             controlAffinity: controlAffinity,
             title: title,
             subtitle: subtitle,
+            secondary: secondary,
             onChanged: data.onValueChanged,
           )
       };

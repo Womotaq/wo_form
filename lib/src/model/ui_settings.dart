@@ -20,6 +20,7 @@ class BooleanInputUiSettings with _$BooleanInputUiSettings {
     String? helperText,
     BooleanFieldControlType? controlType,
     ListTileControlAffinity? controlAffinity,
+    @JsonKey(includeToJson: false, includeFromJson: false) Widget? secondary,
     @JsonKey(includeToJson: false, includeFromJson: false)
     BooleanFieldBuilderDef? widgetBuilder,
   }) = _BooleanInputUiSettings;
@@ -39,6 +40,7 @@ class BooleanInputUiSettings with _$BooleanInputUiSettings {
           helperText: helperText ?? other.helperText,
           controlType: controlType ?? other.controlType,
           controlAffinity: controlAffinity ?? other.controlAffinity,
+          secondary: secondary ?? other.secondary,
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,
         );
 }
