@@ -9,7 +9,8 @@ part of 'wo_form_node.dart';
 _$DynamicInputTemplateImpl _$$DynamicInputTemplateImplFromJson(
         Map<String, dynamic> json) =>
     _$DynamicInputTemplateImpl(
-      child: WoFormNodeMixin.fromJson(json['child'] as Map<String, dynamic>),
+      child: _$JsonConverterFromJson<Map<String, dynamic>, WoFormNodeMixin?>(
+          json['child'], const InputNullableConverter().fromJson),
       uiSettings: json['uiSettings'] == null
           ? const DynamicInputUiSettings()
           : DynamicInputUiSettings.fromJson(
@@ -19,9 +20,15 @@ _$DynamicInputTemplateImpl _$$DynamicInputTemplateImplFromJson(
 Map<String, dynamic> _$$DynamicInputTemplateImplToJson(
         _$DynamicInputTemplateImpl instance) =>
     <String, dynamic>{
-      'child': WoFormNodeMixin.staticToJson(instance.child),
+      'child': const InputNullableConverter().toJson(instance.child),
       'uiSettings': DynamicInputUiSettings.staticToJson(instance.uiSettings),
     };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) =>
+    json == null ? null : fromJson(json as Json);
 
 _$ConditionnalNodeImpl _$$ConditionnalNodeImplFromJson(
         Map<String, dynamic> json) =>

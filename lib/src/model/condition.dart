@@ -4,6 +4,10 @@ import 'package:wo_form/wo_form.dart';
 part 'condition.freezed.dart';
 part 'condition.g.dart';
 
+// TODO : what if the value that the condition is depending on
+// was created by an input that doesn't exist anymore ?
+// (removed by DynamicInputsNode or hidden by ConditionnalInput)
+
 @freezed
 sealed class Condition with _$Condition {
   @Assert(

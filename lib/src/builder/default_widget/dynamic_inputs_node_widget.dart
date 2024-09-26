@@ -55,7 +55,7 @@ class DynamicInputsNodeWidget extends StatelessWidget {
                 ? null
                 : () {
                     Focus.of(context).unfocus();
-                    onAddChoice(data.input.templates.first.child);
+                    onAddChoice(data.input.templates.first.getChild());
                   },
             icon: const Icon(Icons.add),
             color: Theme.of(context).colorScheme.onPrimary,
@@ -64,7 +64,7 @@ class DynamicInputsNodeWidget extends StatelessWidget {
             values: data.input.templates,
             onSelected: data.onValueChanged == null
                 ? null
-                : (template) => onAddChoice(template.child),
+                : (template) => onAddChoice(template.getChild()),
             valueBuilder: (template) =>
                 Text(template?.uiSettings.labelText ?? ''),
             helpValueBuilder: (template) =>

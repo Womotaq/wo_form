@@ -95,12 +95,14 @@ mixin WoFormNodeMixin {
 
 @freezed
 class DynamicInputTemplate with _$DynamicInputTemplate {
-  const factory DynamicInputTemplate({
-    @JsonKey(
-      fromJson: WoFormNodeMixin.fromJson,
-      toJson: WoFormNodeMixin.staticToJson,
-    )
-    required WoFormNodeMixin child,
+  @Assert(
+    '(child == null) != (childBuilder == null)',
+    'One of child or childBuilder must be specified',
+  )
+  factory DynamicInputTemplate({
+    @InputNullableConverter() WoFormNodeMixin? child,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    WoFormNodeMixin Function()? childBuilder,
     @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
     @Default(DynamicInputUiSettings())
     DynamicInputUiSettings uiSettings,
@@ -113,6 +115,8 @@ class DynamicInputTemplate with _$DynamicInputTemplate {
 
   static Map<String, dynamic> staticToJson(DynamicInputTemplate object) =>
       object.toJson();
+
+  WoFormNodeMixin getChild() => child == null ? childBuilder!() : child!;
 }
 
 @freezed

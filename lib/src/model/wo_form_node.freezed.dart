@@ -20,9 +20,11 @@ DynamicInputTemplate _$DynamicInputTemplateFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$DynamicInputTemplate {
-  @JsonKey(
-      fromJson: WoFormNodeMixin.fromJson, toJson: WoFormNodeMixin.staticToJson)
-  WoFormNodeMixin get child => throw _privateConstructorUsedError;
+  @InputNullableConverter()
+  WoFormNodeMixin? get child => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  WoFormNodeMixin Function()? get childBuilder =>
+      throw _privateConstructorUsedError;
   @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
   DynamicInputUiSettings get uiSettings => throw _privateConstructorUsedError;
 
@@ -43,10 +45,9 @@ abstract class $DynamicInputTemplateCopyWith<$Res> {
       _$DynamicInputTemplateCopyWithImpl<$Res, DynamicInputTemplate>;
   @useResult
   $Res call(
-      {@JsonKey(
-          fromJson: WoFormNodeMixin.fromJson,
-          toJson: WoFormNodeMixin.staticToJson)
-      WoFormNodeMixin child,
+      {@InputNullableConverter() WoFormNodeMixin? child,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      WoFormNodeMixin Function()? childBuilder,
       @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
       DynamicInputUiSettings uiSettings});
 
@@ -69,14 +70,19 @@ class _$DynamicInputTemplateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? child = null,
+    Object? child = freezed,
+    Object? childBuilder = freezed,
     Object? uiSettings = null,
   }) {
     return _then(_value.copyWith(
-      child: null == child
+      child: freezed == child
           ? _value.child
           : child // ignore: cast_nullable_to_non_nullable
-              as WoFormNodeMixin,
+              as WoFormNodeMixin?,
+      childBuilder: freezed == childBuilder
+          ? _value.childBuilder
+          : childBuilder // ignore: cast_nullable_to_non_nullable
+              as WoFormNodeMixin Function()?,
       uiSettings: null == uiSettings
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
@@ -104,10 +110,9 @@ abstract class _$$DynamicInputTemplateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(
-          fromJson: WoFormNodeMixin.fromJson,
-          toJson: WoFormNodeMixin.staticToJson)
-      WoFormNodeMixin child,
+      {@InputNullableConverter() WoFormNodeMixin? child,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      WoFormNodeMixin Function()? childBuilder,
       @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
       DynamicInputUiSettings uiSettings});
 
@@ -128,14 +133,19 @@ class __$$DynamicInputTemplateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? child = null,
+    Object? child = freezed,
+    Object? childBuilder = freezed,
     Object? uiSettings = null,
   }) {
     return _then(_$DynamicInputTemplateImpl(
-      child: null == child
+      child: freezed == child
           ? _value.child
           : child // ignore: cast_nullable_to_non_nullable
-              as WoFormNodeMixin,
+              as WoFormNodeMixin?,
+      childBuilder: freezed == childBuilder
+          ? _value.childBuilder
+          : childBuilder // ignore: cast_nullable_to_non_nullable
+              as WoFormNodeMixin Function()?,
       uiSettings: null == uiSettings
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
@@ -147,29 +157,31 @@ class __$$DynamicInputTemplateImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$DynamicInputTemplateImpl extends _DynamicInputTemplate {
-  const _$DynamicInputTemplateImpl(
-      {@JsonKey(
-          fromJson: WoFormNodeMixin.fromJson,
-          toJson: WoFormNodeMixin.staticToJson)
-      required this.child,
+  _$DynamicInputTemplateImpl(
+      {@InputNullableConverter() this.child,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.childBuilder,
       @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
       this.uiSettings = const DynamicInputUiSettings()})
-      : super._();
+      : assert((child == null) != (childBuilder == null),
+            'One of child or childBuilder must be specified'),
+        super._();
 
   factory _$DynamicInputTemplateImpl.fromJson(Map<String, dynamic> json) =>
       _$$DynamicInputTemplateImplFromJson(json);
 
   @override
-  @JsonKey(
-      fromJson: WoFormNodeMixin.fromJson, toJson: WoFormNodeMixin.staticToJson)
-  final WoFormNodeMixin child;
+  @InputNullableConverter()
+  final WoFormNodeMixin? child;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final WoFormNodeMixin Function()? childBuilder;
   @override
   @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
   final DynamicInputUiSettings uiSettings;
 
   @override
   String toString() {
-    return 'DynamicInputTemplate(child: $child, uiSettings: $uiSettings)';
+    return 'DynamicInputTemplate(child: $child, childBuilder: $childBuilder, uiSettings: $uiSettings)';
   }
 
   @override
@@ -178,13 +190,15 @@ class _$DynamicInputTemplateImpl extends _DynamicInputTemplate {
         (other.runtimeType == runtimeType &&
             other is _$DynamicInputTemplateImpl &&
             (identical(other.child, child) || other.child == child) &&
+            (identical(other.childBuilder, childBuilder) ||
+                other.childBuilder == childBuilder) &&
             (identical(other.uiSettings, uiSettings) ||
                 other.uiSettings == uiSettings));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, child, uiSettings);
+  int get hashCode => Object.hash(runtimeType, child, childBuilder, uiSettings);
 
   /// Create a copy of DynamicInputTemplate
   /// with the given fields replaced by the non-null parameter values.
@@ -205,22 +219,23 @@ class _$DynamicInputTemplateImpl extends _DynamicInputTemplate {
 }
 
 abstract class _DynamicInputTemplate extends DynamicInputTemplate {
-  const factory _DynamicInputTemplate(
-      {@JsonKey(
-          fromJson: WoFormNodeMixin.fromJson,
-          toJson: WoFormNodeMixin.staticToJson)
-      required final WoFormNodeMixin child,
+  factory _DynamicInputTemplate(
+      {@InputNullableConverter() final WoFormNodeMixin? child,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final WoFormNodeMixin Function()? childBuilder,
       @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
       final DynamicInputUiSettings uiSettings}) = _$DynamicInputTemplateImpl;
-  const _DynamicInputTemplate._() : super._();
+  _DynamicInputTemplate._() : super._();
 
   factory _DynamicInputTemplate.fromJson(Map<String, dynamic> json) =
       _$DynamicInputTemplateImpl.fromJson;
 
   @override
-  @JsonKey(
-      fromJson: WoFormNodeMixin.fromJson, toJson: WoFormNodeMixin.staticToJson)
-  WoFormNodeMixin get child;
+  @InputNullableConverter()
+  WoFormNodeMixin? get child;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  WoFormNodeMixin Function()? get childBuilder;
   @override
   @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
   DynamicInputUiSettings get uiSettings;

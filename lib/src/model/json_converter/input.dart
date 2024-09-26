@@ -17,3 +17,25 @@ class InputConverter
   @override
   Map<String, dynamic> toJson(WoFormNodeMixin object) => object.toJson();
 }
+
+class InputNullableConverter
+    extends JsonConverter<WoFormNodeMixin?, Map<String, dynamic>> {
+  const InputNullableConverter();
+
+  @override
+  WoFormNodeMixin? fromJson(Map<String, dynamic> json) {
+    try {
+      try {
+        return WoFormInput.fromJson(json);
+      } on CheckedFromJsonException {
+        return WoFormNode.fromJson(json);
+      }
+    } catch (_) {
+      return null;
+    }
+  }
+
+  @override
+  Map<String, dynamic> toJson(WoFormNodeMixin? object) =>
+      object?.toJson() ?? {};
+}

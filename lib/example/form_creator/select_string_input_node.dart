@@ -101,12 +101,12 @@ WoFormNodeMixin createSelectStringInputNode() => ValueBuilderNode(
                 ),
               ],
             ),
-            const DynamicInputsNode(
+            DynamicInputsNode(
               id: 'availibleValues',
-              exportSettings: ExportSettings(type: ExportType.list),
+              exportSettings: const ExportSettings(type: ExportType.list),
               templates: [
                 DynamicInputTemplate(
-                  child: StringInput(
+                  child: const StringInput(
                     id: '', // will be overwritten
                     isRequired: true,
                     uiSettings: StringInputUiSettings(
@@ -116,7 +116,7 @@ WoFormNodeMixin createSelectStringInputNode() => ValueBuilderNode(
                   ),
                 ),
               ],
-              uiSettings: DynamicInputsNodeUiSettings(
+              uiSettings: const DynamicInputsNodeUiSettings(
                 labelText: 'Ajouter une option',
               ),
             ),

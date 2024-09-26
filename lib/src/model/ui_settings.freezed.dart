@@ -306,6 +306,8 @@ DynamicInputsNodeUiSettings _$DynamicInputsNodeUiSettingsFromJson(
 mixin _$DynamicInputsNodeUiSettings {
   String? get labelText => throw _privateConstructorUsedError;
   String? get helperText => throw _privateConstructorUsedError;
+
+  /// Default to true
   bool? get reorderable => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
   GenerateIdDef? get generateId => throw _privateConstructorUsedError;
@@ -492,6 +494,8 @@ class _$DynamicInputsNodeUiSettingsImpl extends _DynamicInputsNodeUiSettings {
   final String? labelText;
   @override
   final String? helperText;
+
+  /// Default to true
   @override
   final bool? reorderable;
   @override
@@ -572,6 +576,8 @@ abstract class _DynamicInputsNodeUiSettings
   String? get labelText;
   @override
   String? get helperText;
+
+  /// Default to true
   @override
   bool? get reorderable;
   @override
