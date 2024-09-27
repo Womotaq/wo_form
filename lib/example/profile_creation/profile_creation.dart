@@ -143,13 +143,12 @@ class ProfileCreationPage extends StatelessWidget {
                 invalidRegexMessage: 'Ne correspond pas à une adresse email',
               ),
             ),
-            const StringInput(
+            StringInput(
               id: 'phone',
-              uiSettings: StringInputUiSettings(
+              initialValue: 'nawak',
+              uiSettings: StringInputUiSettings.phone(
                 labelText: 'Numéro de téléphone',
-                prefixIcon: Icon(Icons.phone),
-                keyboardType: TextInputType.phone,
-                autofillHints: [AutofillHints.familyName],
+                prefixIcon: const Icon(Icons.phone),
               ),
             ),
           ],

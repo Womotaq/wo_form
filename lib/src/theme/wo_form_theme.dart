@@ -18,8 +18,10 @@ class WoFormTheme extends InheritedTheme {
   /// ```dart
   /// final theme = WoFormTheme.of(context);
   /// ```
-  static WoFormThemeData? of(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<WoFormTheme>()?.data;
+  static WoFormThemeData? of(BuildContext context, {bool listen = true}) =>
+      listen
+          ? context.dependOnInheritedWidgetOfExactType<WoFormTheme>()?.data
+          : context.getInheritedWidgetOfExactType<WoFormTheme>()?.data;
 
   @override
   Widget wrap(BuildContext context, Widget child) {

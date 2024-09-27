@@ -297,6 +297,7 @@ class StringInputUiSettings with _$StringInputUiSettings {
     bool? autofocus,
     TextInputAction? textInputAction,
     String? invalidRegexMessage,
+    TextStyle? style,
     StringFieldBuilderDef? widgetBuilder,
   }) =>
       StringInputUiSettings(
@@ -308,6 +309,7 @@ class StringInputUiSettings with _$StringInputUiSettings {
         autofocus: autofocus,
         textInputAction: textInputAction,
         invalidRegexMessage: invalidRegexMessage,
+        style: style,
         widgetBuilder: widgetBuilder,
         keyboardType: TextInputType.emailAddress,
         autocorrect: false,
@@ -323,6 +325,7 @@ class StringInputUiSettings with _$StringInputUiSettings {
     bool? submitFormOnFieldSubmitted,
     TextInputAction? textInputAction,
     String? invalidRegexMessage,
+    TextStyle? style,
     StringFieldBuilderDef? widgetBuilder,
   }) =>
       StringInputUiSettings(
@@ -333,6 +336,7 @@ class StringInputUiSettings with _$StringInputUiSettings {
         submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
         textInputAction: textInputAction,
         invalidRegexMessage: invalidRegexMessage,
+        style: style,
         widgetBuilder: widgetBuilder,
         action: StringFieldAction.obscure,
         keyboardType: TextInputType.visiblePassword,
@@ -342,6 +346,33 @@ class StringInputUiSettings with _$StringInputUiSettings {
           AutofillHints.password,
           AutofillHints.newPassword,
         ],
+        maxLines: 1,
+      );
+
+  factory StringInputUiSettings.phone({
+    String? labelText,
+    String? hintText,
+    String? helperText,
+    Widget? prefixIcon,
+    bool? submitFormOnFieldSubmitted,
+    bool? autofocus,
+    TextInputAction? textInputAction,
+    TextStyle? style,
+    StringFieldBuilderDef? widgetBuilder,
+  }) =>
+      StringInputUiSettings(
+        labelText: labelText,
+        hintText: hintText,
+        helperText: helperText,
+        prefixIcon: prefixIcon,
+        submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
+        autofocus: autofocus,
+        textInputAction: textInputAction,
+        style: style,
+        widgetBuilder: widgetBuilder,
+        keyboardType: TextInputType.phone,
+        autocorrect: false,
+        autofillHints: const [AutofillHints.telephoneNumber],
         maxLines: 1,
       );
 

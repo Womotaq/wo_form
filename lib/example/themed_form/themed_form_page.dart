@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:phone_form_field/phone_form_field.dart';
 import 'package:wo_form/wo_form.dart';
 
 class ShowCustomThemeCubit extends Cubit<bool> {
@@ -8,6 +9,7 @@ class ShowCustomThemeCubit extends Cubit<bool> {
   void set(bool value) => emit(value);
 
   static WoFormThemeData customTheme = WoFormThemeData(
+    defaultPhoneCoutry: IsoCode.FR,
     headerBuilder: CustomFormHeader.new,
     inputsNodeExpanderBuilder: CustomInputsNodeExpander.new,
     stringFieldBuilder: CustomStringField.new,

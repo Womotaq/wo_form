@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/wo_form.dart';
 
+export 'package:phone_form_field/phone_form_field.dart' show IsoCode;
+
 part 'wo_form_theme_data.freezed.dart';
 
 typedef WidgetBuilderDef = Widget Function(BuildContext context);
@@ -11,6 +13,7 @@ typedef ScoreWidgetBuilderDef = Widget Function({required num score});
 class WoFormThemeData with _$WoFormThemeData {
   const factory WoFormThemeData({
     BooleanFieldBuilderDef? booleanFieldBuilder,
+    IsoCode? defaultPhoneCoutry,
     DynamicInputsNodeWidgetBuilderDef? dynamicInputsNodeWidgetBuilder,
     WidgetBuilderDef? formPageBuilder,
     GenerateIdDef? generateId,
