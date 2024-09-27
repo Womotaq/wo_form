@@ -6,20 +6,16 @@ class WoFormValueBuilder<T> extends StatelessWidget {
   const WoFormValueBuilder({
     required this.path,
     required this.builder,
-    this.valuesCubit,
     super.key,
   });
 
   final String path;
   final Widget Function(BuildContext context, T? value) builder;
 
-  /// Use it if this widget's context doesn't contain the values cubit
-  final WoFormValuesCubit? valuesCubit;
-
   @override
   Widget build(BuildContext context) {
     return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, T?>(
-      bloc: valuesCubit,
+      key: Key(path),
       selector: (values) {
         final value = values[path];
         if (value is! T?) {

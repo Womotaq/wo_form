@@ -137,16 +137,16 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     required String id,
     required int? maxCount,
     @Default(0) int minCount,
-    @Default([]) List<String> initialValues,
+    List<String>? initialValues,
     @Default([]) List<String> availibleValues,
+    @Default([]) List<String> idsOfAvailibleValues,
     @JsonKey(includeToJson: false, includeFromJson: false)
     GetCustomErrorForListDef<String>? getCustomError,
     @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
     @Default(SelectInputUiSettings<String>())
     SelectInputUiSettings<String> uiSettings,
     // The correct answer is the index of availibleValues
-    @JsonKey(toJson: QuizSettingsNum.staticToJson)
-    QuizSettingsNum? quizSettings,
+    @JsonKey(toJson: QuizSettings.staticToJson) QuizSettings? quizSettings,
   }) = SelectStringInput;
 
   const factory WoFormInput.string({
@@ -330,14 +330,17 @@ class SelectInput<T> with _$SelectInput<T>, WoFormNodeMixin, WoFormInputMixin {
     required String id,
     required int? maxCount,
     @Default(0) int minCount,
-    @Default([]) List<T> initialValues,
+    List<T>? initialValues,
     @Default([]) List<T> availibleValues,
+    // idsOfAvailibleValues allows to set an identifier to each value.
+    // This way, we keep the advantage of a list : the order
+    // And we gain the advantage of a map : the identifiers
+    // While staying jsonifiable
+    @Default([]) List<String> idsOfAvailibleValues,
     @JsonKey(includeToJson: false, includeFromJson: false)
     GetCustomErrorForListDef<T>? getCustomError,
     SelectInputUiSettings<T>? uiSettings,
-    // The correct answer is the index of availibleValues
-    @JsonKey(toJson: QuizSettingsNum.staticToJson)
-    QuizSettingsNum? quizSettings,
+    @JsonKey(toJson: QuizSettings.staticToJson) QuizSettings? quizSettings,
     @JsonKey(includeToJson: false, includeFromJson: false)
     Object? Function(T)? toJsonT,
   }) = _SelectInput<T>;
@@ -461,4 +464,31 @@ Object? _defaultToJsonT<T>(T value) {
   }
 
   throw UnimplementedError('No toJsonT provided for <$T>');
+}
+
+extension SelectStringInputX on SelectStringInput {
+  String? getAvailibleValue({required String id}) {
+    final index = idsOfAvailibleValues.indexOf(id);
+    return (index < 0 || index >= availibleValues.length)
+        ? null
+        : availibleValues[index];
+  }
+
+  String? getIdOfValue({required String value}) {
+    final index = availibleValues.indexOf(value);
+    return (index < 0 || index >= idsOfAvailibleValues.length)
+        ? null
+        : idsOfAvailibleValues[index];
+  }
+}
+
+extension SelectInputX<T> on SelectInput<T> {
+  T? getAvailibleValue({required String key}) {
+    final index = idsOfAvailibleValues.indexOf(key);
+    if (index == -1) return null;
+
+    return (index < 0 || index >= availibleValues.length)
+        ? null
+        : availibleValues[index];
+  }
 }

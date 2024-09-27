@@ -132,7 +132,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
     @DynamicInputTemplatesConverter()
     @Default([])
     List<DynamicInputTemplate> templates,
-    @InputsListConverter() @Default([]) List<WoFormNodeMixin> initialChildren,
+    @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
     @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
     @Default(DynamicInputsNodeUiSettings())
     DynamicInputsNodeUiSettings uiSettings,
@@ -586,8 +586,9 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
       case DynamicInputsNode(initialChildren: final initialChildren):
         return {
           '$parentPath/$id': initialChildren,
-          for (final child in initialChildren)
-            ...child.getInitialValues(parentPath: '$parentPath/$id'),
+          if (initialChildren != null)
+            for (final child in initialChildren)
+              ...child.getInitialValues(parentPath: '$parentPath/$id'),
         };
       case InputsNode(children: final children):
         return {

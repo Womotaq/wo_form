@@ -21,19 +21,19 @@ part 'quiz_settings.g.dart';
 // }
 
 @freezed
-sealed class QuizSettingsNum with _$QuizSettingsNum {
+sealed class QuizSettings with _$QuizSettings {
   @Assert('score > 0', 'score must be positive')
-  const factory QuizSettingsNum.single({
-    required int correctAnswer,
+  const factory QuizSettings.singleString({
+    required String correctAnswer,
     @Default(1) num score,
-  }) = QuizSettingsNumSingle;
+  }) = QuizSettingsSingleString;
 
-  const QuizSettingsNum._();
+  const QuizSettings._();
 
-  factory QuizSettingsNum.fromJson(Map<String, dynamic> json) =>
-      _$QuizSettingsNumFromJson(json);
+  factory QuizSettings.fromJson(Map<String, dynamic> json) =>
+      _$QuizSettingsFromJson(json);
 
-  static Map<String, dynamic>? staticToJson(QuizSettingsNum? object) =>
+  static Map<String, dynamic>? staticToJson(QuizSettings? object) =>
       object?.toJson();
 }
 

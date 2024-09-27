@@ -15,17 +15,19 @@ SelectInput<T> _$SelectInputFromJson<T>(
       maxCount: (json['maxCount'] as num?)?.toInt(),
       minCount: (json['minCount'] as num).toInt(),
       initialValues:
-          (json['initialValues'] as List<dynamic>).map(fromJsonT).toList(),
+          (json['initialValues'] as List<dynamic>?)?.map(fromJsonT).toList(),
       availibleValues:
           (json['availibleValues'] as List<dynamic>).map(fromJsonT).toList(),
+      idsOfAvailibleValues: (json['idsOfAvailibleValues'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
       uiSettings: json['uiSettings'] == null
           ? null
           : SelectInputUiSettings<T>.fromJson(
               json['uiSettings'] as Map<String, dynamic>),
       quizSettings: json['quizSettings'] == null
           ? null
-          : QuizSettingsNum.fromJson(
-              json['quizSettings'] as Map<String, dynamic>),
+          : QuizSettings.fromJson(json['quizSettings'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$SelectInputToJson<T>(
@@ -36,10 +38,11 @@ Map<String, dynamic> _$SelectInputToJson<T>(
       'id': instance.id,
       'maxCount': instance.maxCount,
       'minCount': instance.minCount,
-      'initialValues': instance.initialValues.map(toJsonT).toList(),
+      'initialValues': instance.initialValues?.map(toJsonT).toList(),
       'availibleValues': instance.availibleValues.map(toJsonT).toList(),
+      'idsOfAvailibleValues': instance.idsOfAvailibleValues,
       'uiSettings': instance.uiSettings,
-      'quizSettings': QuizSettingsNum.staticToJson(instance.quizSettings),
+      'quizSettings': QuizSettings.staticToJson(instance.quizSettings),
     };
 
 _$BooleanInputImpl _$$BooleanInputImplFromJson(Map<String, dynamic> json) =>
@@ -95,10 +98,13 @@ _$SelectStringInputImpl _$$SelectStringInputImplFromJson(
       maxCount: (json['maxCount'] as num?)?.toInt(),
       minCount: (json['minCount'] as num?)?.toInt() ?? 0,
       initialValues: (json['initialValues'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      availibleValues: (json['availibleValues'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           const [],
-      availibleValues: (json['availibleValues'] as List<dynamic>?)
+      idsOfAvailibleValues: (json['idsOfAvailibleValues'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           const [],
@@ -108,8 +114,7 @@ _$SelectStringInputImpl _$$SelectStringInputImplFromJson(
               json['uiSettings'] as Map<String, dynamic>),
       quizSettings: json['quizSettings'] == null
           ? null
-          : QuizSettingsNum.fromJson(
-              json['quizSettings'] as Map<String, dynamic>),
+          : QuizSettings.fromJson(json['quizSettings'] as Map<String, dynamic>),
       $type: json['runtimeType'] as String?,
     );
 
@@ -121,9 +126,10 @@ Map<String, dynamic> _$$SelectStringInputImplToJson(
       'minCount': instance.minCount,
       'initialValues': instance.initialValues,
       'availibleValues': instance.availibleValues,
+      'idsOfAvailibleValues': instance.idsOfAvailibleValues,
       'uiSettings':
           _SelectInputUiSettingsX.staticToJsonString(instance.uiSettings),
-      'quizSettings': QuizSettingsNum.staticToJson(instance.quizSettings),
+      'quizSettings': QuizSettings.staticToJson(instance.quizSettings),
       'runtimeType': instance.$type,
     };
 

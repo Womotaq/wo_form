@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:popover/popover.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -96,6 +97,23 @@ class SelectField<T> extends StatelessWidget {
                   helpValueBuilder: data.uiSettings.helpValueBuilder,
                   hintText: data.uiSettings.hintText,
                   searcher: data.uiSettings.searcher,
+                  provider: ({required child}) => RepositoryProvider.value(
+                    value: context.read<RootNode>(),
+                    child: MultiBlocProvider(
+                      providers: [
+                        BlocProvider.value(
+                          value: context.read<WoFormValuesCubit>(),
+                        ),
+                        BlocProvider.value(
+                          value: context.read<WoFormStatusCubit>(),
+                        ),
+                        BlocProvider.value(
+                          value: context.read<WoFormLockCubit>(),
+                        ),
+                      ],
+                      child: child,
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -176,6 +194,24 @@ class SelectField<T> extends StatelessWidget {
                               onPressed: onPressed,
                               icon: const Icon(Icons.add),
                               color: Theme.of(context).colorScheme.onPrimary,
+                            ),
+                            provider: ({required child}) =>
+                                RepositoryProvider.value(
+                              value: context.read<RootNode>(),
+                              child: MultiBlocProvider(
+                                providers: [
+                                  BlocProvider.value(
+                                    value: context.read<WoFormValuesCubit>(),
+                                  ),
+                                  BlocProvider.value(
+                                    value: context.read<WoFormStatusCubit>(),
+                                  ),
+                                  BlocProvider.value(
+                                    value: context.read<WoFormLockCubit>(),
+                                  ),
+                                ],
+                                child: child,
+                              ),
                             ),
                           ),
                         ],

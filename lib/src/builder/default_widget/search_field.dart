@@ -14,6 +14,7 @@ class SearchField<T> extends StatelessWidget {
     this.showArrow = true,
     this.bottomChildren,
     this.searcher,
+    this.provider,
     super.key,
   })  : _builder = null,
         selectedValues = [selectedValue],
@@ -31,6 +32,7 @@ class SearchField<T> extends StatelessWidget {
     this.hintText,
     this.bottomChildren,
     this.searcher,
+    this.provider,
     super.key,
   })  : selectedBuilder = ((_) => const SizedBox.shrink()),
         _builder = builder,
@@ -47,6 +49,7 @@ class SearchField<T> extends StatelessWidget {
   final bool showArrow;
   final List<MenuItemButton>? bottomChildren;
   final double Function(String query, T value)? searcher;
+  final Widget Function({required Widget child})? provider;
 
   @override
   Widget build(BuildContext context) {
@@ -143,13 +146,15 @@ class SearchField<T> extends StatelessWidget {
 
     if (searcher != null) {
       context.pushPage(
-        Scaffold(
-          appBar: AppBar(),
-          body: SearchScreen(
-            values: values,
-            tileBuilder: tileBuilder,
-            bottomChildren: bottomChildren,
-            searcher: searcher,
+        (provider ?? ({required Widget child}) => child)(
+          child: Scaffold(
+            appBar: AppBar(),
+            body: SearchScreen(
+              values: values,
+              tileBuilder: tileBuilder,
+              bottomChildren: bottomChildren,
+              searcher: searcher,
+            ),
           ),
         ),
       );
@@ -163,11 +168,14 @@ class SearchField<T> extends StatelessWidget {
           maxHeight: 384,
           minHeight: searcher == null ? 0 : 384,
         ),
-        bodyBuilder: (popoverContext) => SearchScreen(
-          values: values,
-          tileBuilder: tileBuilder,
-          bottomChildren: bottomChildren,
-          searcher: searcher,
+        bodyBuilder: (popoverContext) =>
+            (provider ?? ({required Widget child}) => child)(
+          child: SearchScreen(
+            values: values,
+            tileBuilder: tileBuilder,
+            bottomChildren: bottomChildren,
+            searcher: searcher,
+          ),
         ),
       );
     }

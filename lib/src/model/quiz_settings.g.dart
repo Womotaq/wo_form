@@ -6,15 +6,15 @@ part of 'quiz_settings.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$QuizSettingsNumSingleImpl _$$QuizSettingsNumSingleImplFromJson(
+_$QuizSettingsSingleStringImpl _$$QuizSettingsSingleStringImplFromJson(
         Map<String, dynamic> json) =>
-    _$QuizSettingsNumSingleImpl(
-      correctAnswer: (json['correctAnswer'] as num).toInt(),
+    _$QuizSettingsSingleStringImpl(
+      correctAnswer: json['correctAnswer'] as String,
       score: json['score'] as num? ?? 1,
     );
 
-Map<String, dynamic> _$$QuizSettingsNumSingleImplToJson(
-        _$QuizSettingsNumSingleImpl instance) =>
+Map<String, dynamic> _$$QuizSettingsSingleStringImplToJson(
+        _$QuizSettingsSingleStringImpl instance) =>
     <String, dynamic>{
       'correctAnswer': instance.correctAnswer,
       'score': instance.score,

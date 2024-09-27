@@ -57,10 +57,9 @@ _$DynamicInputsNodeImpl _$$DynamicInputsNodeImplFromJson(
           ? const []
           : const DynamicInputTemplatesConverter()
               .fromJson(json['templates'] as List),
-      initialChildren: json['initialChildren'] == null
-          ? const []
-          : const InputsListConverter()
-              .fromJson(json['initialChildren'] as List),
+      initialChildren:
+          _$JsonConverterFromJson<List<dynamic>, List<WoFormNodeMixin>>(
+              json['initialChildren'], const InputsListConverter().fromJson),
       uiSettings: json['uiSettings'] == null
           ? const DynamicInputsNodeUiSettings()
           : DynamicInputsNodeUiSettings.fromJson(
@@ -79,12 +78,19 @@ Map<String, dynamic> _$$DynamicInputsNodeImplToJson(
       'templates':
           const DynamicInputTemplatesConverter().toJson(instance.templates),
       'initialChildren':
-          const InputsListConverter().toJson(instance.initialChildren),
+          _$JsonConverterToJson<List<dynamic>, List<WoFormNodeMixin>>(
+              instance.initialChildren, const InputsListConverter().toJson),
       'uiSettings':
           DynamicInputsNodeUiSettings.staticToJson(instance.uiSettings),
       'exportSettings': ExportSettings.staticToJson(instance.exportSettings),
       'runtimeType': instance.$type,
     };
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) =>
+    value == null ? null : toJson(value);
 
 _$InputsNodeImpl _$$InputsNodeImplFromJson(Map<String, dynamic> json) =>
     _$InputsNodeImpl(
