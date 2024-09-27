@@ -10,16 +10,16 @@ class SearchField<T> extends StatelessWidget {
     this.valueBuilder,
     this.helpValueBuilder,
     this.hintText,
-    Widget Function(T?)? previewBuilder,
+    Widget Function(T?)? selectedBuilder,
     this.showArrow = true,
     this.bottomChildren,
     this.searcher,
     super.key,
   })  : _builder = null,
         selectedValues = [selectedValue],
-        previewBuilder = previewBuilder == null
+        selectedBuilder = selectedBuilder == null
             ? null
-            : ((v) => previewBuilder(v.firstOrNull));
+            : ((v) => selectedBuilder(v.firstOrNull));
 
   SearchField.multipleChoices({
     required Widget Function(VoidCallback? onPressed) builder,
@@ -32,7 +32,7 @@ class SearchField<T> extends StatelessWidget {
     this.bottomChildren,
     this.searcher,
     super.key,
-  })  : previewBuilder = ((_) => const SizedBox.shrink()),
+  })  : selectedBuilder = ((_) => const SizedBox.shrink()),
         _builder = builder,
         showArrow = false;
 
@@ -43,7 +43,7 @@ class SearchField<T> extends StatelessWidget {
   final Widget Function(T? value)? valueBuilder;
   final Widget? Function(T value)? helpValueBuilder;
   final String? hintText;
-  final Widget Function(Iterable<T?> values)? previewBuilder;
+  final Widget Function(Iterable<T?> values)? selectedBuilder;
   final bool showArrow;
   final List<MenuItemButton>? bottomChildren;
   final double Function(String query, T value)? searcher;
@@ -54,7 +54,7 @@ class SearchField<T> extends StatelessWidget {
         (e) => Text(
               e == null && hintText != null ? hintText! : e.toString(),
             );
-    final previewBuilderSafe = previewBuilder ??
+    final selectedBuilderSafe = selectedBuilder ??
         (e) => Wrap(
               // mainAxisSize: MainAxisSize.min,
               spacing: 8,
@@ -103,7 +103,7 @@ class SearchField<T> extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                child: previewBuilderSafe(selectedValues),
+                child: selectedBuilderSafe(selectedValues),
               ),
               if (showArrow) const Icon(Icons.keyboard_arrow_down),
             ],
