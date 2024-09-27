@@ -999,6 +999,7 @@ mixin _$WoFormInput {
             List<String>? initialValues,
             List<String> availibleValues,
             List<String> idsOfAvailibleValues,
+            bool exportIds,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
@@ -1046,6 +1047,7 @@ mixin _$WoFormInput {
             List<String>? initialValues,
             List<String> availibleValues,
             List<String> idsOfAvailibleValues,
+            bool exportIds,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
@@ -1093,6 +1095,7 @@ mixin _$WoFormInput {
             List<String>? initialValues,
             List<String> availibleValues,
             List<String> idsOfAvailibleValues,
+            bool exportIds,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
@@ -1356,6 +1359,7 @@ class _$BooleanInputImpl extends BooleanInput {
             List<String>? initialValues,
             List<String> availibleValues,
             List<String> idsOfAvailibleValues,
+            bool exportIds,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
@@ -1406,6 +1410,7 @@ class _$BooleanInputImpl extends BooleanInput {
             List<String>? initialValues,
             List<String> availibleValues,
             List<String> idsOfAvailibleValues,
+            bool exportIds,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
@@ -1457,6 +1462,7 @@ class _$BooleanInputImpl extends BooleanInput {
             List<String>? initialValues,
             List<String> availibleValues,
             List<String> idsOfAvailibleValues,
+            bool exportIds,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
@@ -1755,6 +1761,7 @@ class _$NumInputImpl extends NumInput {
             List<String>? initialValues,
             List<String> availibleValues,
             List<String> idsOfAvailibleValues,
+            bool exportIds,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
@@ -1806,6 +1813,7 @@ class _$NumInputImpl extends NumInput {
             List<String>? initialValues,
             List<String> availibleValues,
             List<String> idsOfAvailibleValues,
+            bool exportIds,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
@@ -1857,6 +1865,7 @@ class _$NumInputImpl extends NumInput {
             List<String>? initialValues,
             List<String> availibleValues,
             List<String> idsOfAvailibleValues,
+            bool exportIds,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
@@ -1978,6 +1987,7 @@ abstract class _$$SelectStringInputImplCopyWith<$Res>
       List<String>? initialValues,
       List<String> availibleValues,
       List<String> idsOfAvailibleValues,
+      bool exportIds,
       @JsonKey(includeToJson: false, includeFromJson: false)
       GetCustomErrorForListDef<String>? getCustomError,
       @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
@@ -2007,6 +2017,7 @@ class __$$SelectStringInputImplCopyWithImpl<$Res>
     Object? initialValues = freezed,
     Object? availibleValues = null,
     Object? idsOfAvailibleValues = null,
+    Object? exportIds = null,
     Object? getCustomError = freezed,
     Object? uiSettings = null,
     Object? quizSettings = freezed,
@@ -2036,6 +2047,10 @@ class __$$SelectStringInputImplCopyWithImpl<$Res>
           ? _value._idsOfAvailibleValues
           : idsOfAvailibleValues // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      exportIds: null == exportIds
+          ? _value.exportIds
+          : exportIds // ignore: cast_nullable_to_non_nullable
+              as bool,
       getCustomError: freezed == getCustomError
           ? _value.getCustomError
           : getCustomError // ignore: cast_nullable_to_non_nullable
@@ -2087,6 +2102,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
       final List<String>? initialValues,
       final List<String> availibleValues = const [],
       final List<String> idsOfAvailibleValues = const [],
+      this.exportIds = false,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.getCustomError,
       @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
@@ -2130,7 +2146,15 @@ class _$SelectStringInputImpl extends SelectStringInput {
     return EqualUnmodifiableListView(_availibleValues);
   }
 
+// idsOfAvailibleValues allows to set an identifier to each value.
+// This way, we keep the advantage of a list : the order
+// And we gain the advantage of a map : the identifiers
+// While staying jsonifiable
   final List<String> _idsOfAvailibleValues;
+// idsOfAvailibleValues allows to set an identifier to each value.
+// This way, we keep the advantage of a list : the order
+// And we gain the advantage of a map : the identifiers
+// While staying jsonifiable
   @override
   @JsonKey()
   List<String> get idsOfAvailibleValues {
@@ -2140,6 +2164,11 @@ class _$SelectStringInputImpl extends SelectStringInput {
     return EqualUnmodifiableListView(_idsOfAvailibleValues);
   }
 
+  /// If true, export will return the ids of the selected values,
+  /// instead of the values themselves
+  @override
+  @JsonKey()
+  final bool exportIds;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final GetCustomErrorForListDef<String>? getCustomError;
@@ -2156,7 +2185,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
 
   @override
   String toString() {
-    return 'WoFormInput.selectString(id: $id, maxCount: $maxCount, minCount: $minCount, initialValues: $initialValues, availibleValues: $availibleValues, idsOfAvailibleValues: $idsOfAvailibleValues, getCustomError: $getCustomError, uiSettings: $uiSettings, quizSettings: $quizSettings)';
+    return 'WoFormInput.selectString(id: $id, maxCount: $maxCount, minCount: $minCount, initialValues: $initialValues, availibleValues: $availibleValues, idsOfAvailibleValues: $idsOfAvailibleValues, exportIds: $exportIds, getCustomError: $getCustomError, uiSettings: $uiSettings, quizSettings: $quizSettings)';
   }
 
   @override
@@ -2175,6 +2204,8 @@ class _$SelectStringInputImpl extends SelectStringInput {
                 .equals(other._availibleValues, _availibleValues) &&
             const DeepCollectionEquality()
                 .equals(other._idsOfAvailibleValues, _idsOfAvailibleValues) &&
+            (identical(other.exportIds, exportIds) ||
+                other.exportIds == exportIds) &&
             (identical(other.getCustomError, getCustomError) ||
                 other.getCustomError == getCustomError) &&
             (identical(other.uiSettings, uiSettings) ||
@@ -2193,6 +2224,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
       const DeepCollectionEquality().hash(_initialValues),
       const DeepCollectionEquality().hash(_availibleValues),
       const DeepCollectionEquality().hash(_idsOfAvailibleValues),
+      exportIds,
       getCustomError,
       uiSettings,
       quizSettings);
@@ -2235,6 +2267,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             List<String>? initialValues,
             List<String> availibleValues,
             List<String> idsOfAvailibleValues,
+            bool exportIds,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
@@ -2253,8 +2286,17 @@ class _$SelectStringInputImpl extends SelectStringInput {
             StringInputUiSettings uiSettings)
         string,
   }) {
-    return selectString(id, maxCount, minCount, initialValues, availibleValues,
-        idsOfAvailibleValues, getCustomError, uiSettings, quizSettings);
+    return selectString(
+        id,
+        maxCount,
+        minCount,
+        initialValues,
+        availibleValues,
+        idsOfAvailibleValues,
+        exportIds,
+        getCustomError,
+        uiSettings,
+        quizSettings);
   }
 
   @override
@@ -2286,6 +2328,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             List<String>? initialValues,
             List<String> availibleValues,
             List<String> idsOfAvailibleValues,
+            bool exportIds,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
@@ -2311,6 +2354,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
         initialValues,
         availibleValues,
         idsOfAvailibleValues,
+        exportIds,
         getCustomError,
         uiSettings,
         quizSettings);
@@ -2345,6 +2389,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             List<String>? initialValues,
             List<String> availibleValues,
             List<String> idsOfAvailibleValues,
+            bool exportIds,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
@@ -2372,6 +2417,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
           initialValues,
           availibleValues,
           idsOfAvailibleValues,
+          exportIds,
           getCustomError,
           uiSettings,
           quizSettings);
@@ -2432,6 +2478,7 @@ abstract class SelectStringInput extends WoFormInput {
       final List<String>? initialValues,
       final List<String> availibleValues,
       final List<String> idsOfAvailibleValues,
+      final bool exportIds,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final GetCustomErrorForListDef<String>? getCustomError,
       @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
@@ -2448,8 +2495,16 @@ abstract class SelectStringInput extends WoFormInput {
   int? get maxCount;
   int get minCount;
   List<String>? get initialValues;
-  List<String> get availibleValues;
+  List<String>
+      get availibleValues; // idsOfAvailibleValues allows to set an identifier to each value.
+// This way, we keep the advantage of a list : the order
+// And we gain the advantage of a map : the identifiers
+// While staying jsonifiable
   List<String> get idsOfAvailibleValues;
+
+  /// If true, export will return the ids of the selected values,
+  /// instead of the values themselves
+  bool get exportIds;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   GetCustomErrorForListDef<String>? get getCustomError;
@@ -2651,6 +2706,7 @@ class _$StringInputImpl extends StringInput {
             List<String>? initialValues,
             List<String> availibleValues,
             List<String> idsOfAvailibleValues,
+            bool exportIds,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
@@ -2702,6 +2758,7 @@ class _$StringInputImpl extends StringInput {
             List<String>? initialValues,
             List<String> availibleValues,
             List<String> idsOfAvailibleValues,
+            bool exportIds,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
@@ -2753,6 +2810,7 @@ class _$StringInputImpl extends StringInput {
             List<String>? initialValues,
             List<String> availibleValues,
             List<String> idsOfAvailibleValues,
+            bool exportIds,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
@@ -2871,6 +2929,10 @@ mixin _$SelectInput<T> {
 // And we gain the advantage of a map : the identifiers
 // While staying jsonifiable
   List<String> get idsOfAvailibleValues => throw _privateConstructorUsedError;
+
+  /// If true, export will return the ids of the selected values,
+  /// instead of the values themselves
+  bool get exportIds => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
   GetCustomErrorForListDef<T>? get getCustomError =>
       throw _privateConstructorUsedError;
@@ -2901,6 +2963,7 @@ abstract class $SelectInputCopyWith<T, $Res> {
       List<T>? initialValues,
       List<T> availibleValues,
       List<String> idsOfAvailibleValues,
+      bool exportIds,
       @JsonKey(includeToJson: false, includeFromJson: false)
       GetCustomErrorForListDef<T>? getCustomError,
       SelectInputUiSettings<T>? uiSettings,
@@ -2933,6 +2996,7 @@ class _$SelectInputCopyWithImpl<T, $Res, $Val extends SelectInput<T>>
     Object? initialValues = freezed,
     Object? availibleValues = null,
     Object? idsOfAvailibleValues = null,
+    Object? exportIds = null,
     Object? getCustomError = freezed,
     Object? uiSettings = freezed,
     Object? quizSettings = freezed,
@@ -2963,6 +3027,10 @@ class _$SelectInputCopyWithImpl<T, $Res, $Val extends SelectInput<T>>
           ? _value.idsOfAvailibleValues
           : idsOfAvailibleValues // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      exportIds: null == exportIds
+          ? _value.exportIds
+          : exportIds // ignore: cast_nullable_to_non_nullable
+              as bool,
       getCustomError: freezed == getCustomError
           ? _value.getCustomError
           : getCustomError // ignore: cast_nullable_to_non_nullable
@@ -3026,6 +3094,7 @@ abstract class _$$SelectInputImplCopyWith<T, $Res>
       List<T>? initialValues,
       List<T> availibleValues,
       List<String> idsOfAvailibleValues,
+      bool exportIds,
       @JsonKey(includeToJson: false, includeFromJson: false)
       GetCustomErrorForListDef<T>? getCustomError,
       SelectInputUiSettings<T>? uiSettings,
@@ -3058,6 +3127,7 @@ class __$$SelectInputImplCopyWithImpl<T, $Res>
     Object? initialValues = freezed,
     Object? availibleValues = null,
     Object? idsOfAvailibleValues = null,
+    Object? exportIds = null,
     Object? getCustomError = freezed,
     Object? uiSettings = freezed,
     Object? quizSettings = freezed,
@@ -3088,6 +3158,10 @@ class __$$SelectInputImplCopyWithImpl<T, $Res>
           ? _value._idsOfAvailibleValues
           : idsOfAvailibleValues // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      exportIds: null == exportIds
+          ? _value.exportIds
+          : exportIds // ignore: cast_nullable_to_non_nullable
+              as bool,
       getCustomError: freezed == getCustomError
           ? _value.getCustomError
           : getCustomError // ignore: cast_nullable_to_non_nullable
@@ -3118,6 +3192,7 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
       final List<T>? initialValues,
       final List<T> availibleValues = const [],
       final List<String> idsOfAvailibleValues = const [],
+      this.exportIds = false,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.getCustomError,
       this.uiSettings,
@@ -3172,6 +3247,11 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
     return EqualUnmodifiableListView(_idsOfAvailibleValues);
   }
 
+  /// If true, export will return the ids of the selected values,
+  /// instead of the values themselves
+  @override
+  @JsonKey()
+  final bool exportIds;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final GetCustomErrorForListDef<T>? getCustomError;
@@ -3186,7 +3266,7 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
 
   @override
   String toString() {
-    return 'SelectInput<$T>(id: $id, maxCount: $maxCount, minCount: $minCount, initialValues: $initialValues, availibleValues: $availibleValues, idsOfAvailibleValues: $idsOfAvailibleValues, getCustomError: $getCustomError, uiSettings: $uiSettings, quizSettings: $quizSettings, toJsonT: $toJsonT)';
+    return 'SelectInput<$T>(id: $id, maxCount: $maxCount, minCount: $minCount, initialValues: $initialValues, availibleValues: $availibleValues, idsOfAvailibleValues: $idsOfAvailibleValues, exportIds: $exportIds, getCustomError: $getCustomError, uiSettings: $uiSettings, quizSettings: $quizSettings, toJsonT: $toJsonT)';
   }
 
   @override
@@ -3205,6 +3285,8 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
                 .equals(other._availibleValues, _availibleValues) &&
             const DeepCollectionEquality()
                 .equals(other._idsOfAvailibleValues, _idsOfAvailibleValues) &&
+            (identical(other.exportIds, exportIds) ||
+                other.exportIds == exportIds) &&
             (identical(other.getCustomError, getCustomError) ||
                 other.getCustomError == getCustomError) &&
             (identical(other.uiSettings, uiSettings) ||
@@ -3223,6 +3305,7 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
       const DeepCollectionEquality().hash(_initialValues),
       const DeepCollectionEquality().hash(_availibleValues),
       const DeepCollectionEquality().hash(_idsOfAvailibleValues),
+      exportIds,
       getCustomError,
       uiSettings,
       quizSettings,
@@ -3246,6 +3329,7 @@ abstract class _SelectInput<T> extends SelectInput<T> {
       final List<T>? initialValues,
       final List<T> availibleValues,
       final List<String> idsOfAvailibleValues,
+      final bool exportIds,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final GetCustomErrorForListDef<T>? getCustomError,
       final SelectInputUiSettings<T>? uiSettings,
@@ -3271,6 +3355,11 @@ abstract class _SelectInput<T> extends SelectInput<T> {
 // While staying jsonifiable
   @override
   List<String> get idsOfAvailibleValues;
+
+  /// If true, export will return the ids of the selected values,
+  /// instead of the values themselves
+  @override
+  bool get exportIds;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   GetCustomErrorForListDef<T>? get getCustomError;

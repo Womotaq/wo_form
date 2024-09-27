@@ -21,6 +21,7 @@ SelectInput<T> _$SelectInputFromJson<T>(
       idsOfAvailibleValues: (json['idsOfAvailibleValues'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
+      exportIds: json['exportIds'] as bool,
       uiSettings: json['uiSettings'] == null
           ? null
           : SelectInputUiSettings<T>.fromJson(
@@ -41,6 +42,7 @@ Map<String, dynamic> _$SelectInputToJson<T>(
       'initialValues': instance.initialValues?.map(toJsonT).toList(),
       'availibleValues': instance.availibleValues.map(toJsonT).toList(),
       'idsOfAvailibleValues': instance.idsOfAvailibleValues,
+      'exportIds': instance.exportIds,
       'uiSettings': instance.uiSettings,
       'quizSettings': QuizSettings.staticToJson(instance.quizSettings),
     };
@@ -108,6 +110,7 @@ _$SelectStringInputImpl _$$SelectStringInputImplFromJson(
               ?.map((e) => e as String)
               .toList() ??
           const [],
+      exportIds: json['exportIds'] as bool? ?? false,
       uiSettings: json['uiSettings'] == null
           ? const SelectInputUiSettings<String>()
           : SelectInputUiSettings<String>.fromJson(
@@ -127,6 +130,7 @@ Map<String, dynamic> _$$SelectStringInputImplToJson(
       'initialValues': instance.initialValues,
       'availibleValues': instance.availibleValues,
       'idsOfAvailibleValues': instance.idsOfAvailibleValues,
+      'exportIds': instance.exportIds,
       'uiSettings':
           _SelectInputUiSettingsX.staticToJsonString(instance.uiSettings),
       'quizSettings': QuizSettings.staticToJson(instance.quizSettings),
