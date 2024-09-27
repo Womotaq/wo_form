@@ -149,6 +149,9 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   void onValueChanged({
     required String path,
     required dynamic value,
+    // Disable this if you don't want to trigger error validations
+    // or if you want to keep the initial status.
+    bool updateStatus = true,
   }) {
     // Can't edit a form while submitting it
     if (_statusCubit.state is SubmittingStatus) return;
@@ -160,7 +163,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
     emit(newMap);
 
-    _updateErrors();
+    if (updateStatus) _updateErrors();
   }
 
   void _updateErrors() => _statusCubit.setInProgress(
