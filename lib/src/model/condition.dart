@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -51,8 +52,21 @@ extension WoFormValuesX on WoFormValues {
           isEqualTo: final isEqualTo,
           isNotEqualTo: final isNotEqualTo,
         ):
-        if (isEqualTo != null) return this[path] == isEqualTo;
-        if (isNotEqualTo != null) return this[path] != isNotEqualTo;
+        final value = this[path];
+        if (isEqualTo != null) {
+          if (isEqualTo is List && value is List) {
+            return const ListEquality<dynamic>().equals(isEqualTo, value);
+          } else {
+            return isEqualTo == value;
+          }
+        }
+        if (isNotEqualTo != null) {
+          if (isNotEqualTo is List && value is List) {
+            return !const ListEquality<dynamic>().equals(isNotEqualTo, value);
+          } else {
+            return isNotEqualTo != value;
+          }
+        }
 
         throw AssertionError('Exactly one operator must be specified');
       case ConditionAnd(conditions: final conditions):
