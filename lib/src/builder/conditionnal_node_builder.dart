@@ -29,7 +29,18 @@ class ConditionnalNodeBuilder extends StatelessWidget {
       child: BlocSelector<WoFormValuesCubit, WoFormValues, bool>(
         selector: (values) => values.meet(node.condition),
         builder: (context, conditionsAreMet) {
-          if (!conditionsAreMet) return const SizedBox();
+          if (!conditionsAreMet) {
+            final valuesCubit = context.read<WoFormValuesCubit>();
+            for (final childPath in valuesCubit.state.keys
+                .where((childPath) => childPath.startsWith(path))) {
+              valuesCubit.onValueChanged(
+                path: childPath,
+                value: null,
+              );
+            }
+
+            return const SizedBox.shrink();
+          }
 
           return node.child.toWidget(parentPath: path);
         },
