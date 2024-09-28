@@ -141,13 +141,11 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     @Default([]) List<String> availibleValues,
     // idsOfAvailibleValues allows to set an identifier to each value.
     // This way, we keep the advantage of a list : the order
-    // And we gain the advantage of a map : the identifiers
-    // While staying jsonifiable
-    @Default([]) List<String> idsOfAvailibleValues,
-
-    /// If true, export will return the ids of the selected values,
-    /// instead of the values themselves
-    @Default(false) bool exportIds,
+    // and we gain the advantage of a map : the identifiers
+    // while staying jsonifiable.
+    // If set, the object stored at the path of this input in WoFormValuesCubit
+    // will be the id of the selected value.
+    List<String>? idsOfAvailibleValues,
     @JsonKey(includeToJson: false, includeFromJson: false)
     GetCustomErrorForListDef<String>? getCustomError,
     @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
@@ -196,14 +194,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
         NumInput() => value as num?,
         SelectStringInput(maxCount: final maxCount) =>
           SelectInput._selectedValuesToJson(
-            selectedValues: (this as SelectStringInput).exportIds
-                ? (value as List<String>?)
-                    ?.map(
-                      (value) => (this as SelectStringInput)
-                          .getIdOfValue(value: value),
-                    )
-                    .toList()
-                : value as List<String>?,
+            selectedValues: value as List<String>?,
             toJsonT: (value) => value,
             asList: maxCount != 1,
           ),
@@ -289,6 +280,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
       case SelectStringInput(
           id: final inputId,
           availibleValues: final availibleValues,
+          idsOfAvailibleValues: final idsOfAvailibleValues,
           minCount: final minCount,
           maxCount: final maxCount,
           getCustomError: final getCustomError,
@@ -298,6 +290,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
           parentPath: parentPath,
           selectedValues: (value as List<String>?) ?? [],
           availibleValues: availibleValues,
+          idsOfAvailibleValues: idsOfAvailibleValues,
           minCount: minCount,
           maxCount: maxCount,
           getCustomError: getCustomError,
@@ -349,13 +342,11 @@ class SelectInput<T> with _$SelectInput<T>, WoFormNodeMixin, WoFormInputMixin {
     @Default([]) List<T> availibleValues,
     // idsOfAvailibleValues allows to set an identifier to each value.
     // This way, we keep the advantage of a list : the order
-    // And we gain the advantage of a map : the identifiers
-    // While staying jsonifiable
-    @Default([]) List<String> idsOfAvailibleValues,
-
-    /// If true, export will return the ids of the selected values,
-    /// instead of the values themselves
-    @Default(false) bool exportIds,
+    // and we gain the advantage of a map : the identifiers
+    // while staying jsonifiable.
+    // If set, the object stored at the path of this input in WoFormValuesCubit
+    // will be the id of the selected value.
+    List<String>? idsOfAvailibleValues,
     @JsonKey(includeToJson: false, includeFromJson: false)
     GetCustomErrorForListDef<T>? getCustomError,
     SelectInputUiSettings<T>? uiSettings,
@@ -387,6 +378,7 @@ class SelectInput<T> with _$SelectInput<T>, WoFormNodeMixin, WoFormInputMixin {
     required String parentPath,
     required List<T> selectedValues,
     required List<T> availibleValues,
+    required List<String>? idsOfAvailibleValues,
     required int minCount,
     required int? maxCount,
     required GetCustomErrorForListDef<T>? getCustomError,
@@ -409,7 +401,15 @@ class SelectInput<T> with _$SelectInput<T>, WoFormNodeMixin, WoFormInputMixin {
       return WoFormInputError.maxBound(path: '$parentPath/$inputId');
     }
 
-    if (availibleValues.isNotEmpty) {
+    if (idsOfAvailibleValues != null) {
+      if (idsOfAvailibleValues.isNotEmpty) {
+        for (final value in selectedValues) {
+          if (!idsOfAvailibleValues.contains(value)) {
+            return WoFormInputError.invalid(path: '$parentPath/$inputId');
+          }
+        }
+      }
+    } else if (availibleValues.isNotEmpty) {
       for (final value in selectedValues) {
         if (!availibleValues.contains(value)) {
           return WoFormInputError.invalid(path: '$parentPath/$inputId');
@@ -440,19 +440,11 @@ class SelectInput<T> with _$SelectInput<T>, WoFormNodeMixin, WoFormInputMixin {
   }) {
     final selectedValues = values['$parentPath/$id'] as List<T>?;
 
-    final exportValue = exportIds
-        ? _selectedValuesToJson<String?>(
-            selectedValues: selectedValues
-                ?.map((value) => getIdOfValue(value: value))
-                .toList(),
-            toJsonT: (id) => id,
-            asList: maxCount != 1,
-          )
-        : _selectedValuesToJson<T>(
-            selectedValues: selectedValues,
-            toJsonT: toJsonT,
-            asList: maxCount != 1,
-          );
+    final exportValue = _selectedValuesToJson<T>(
+      selectedValues: selectedValues,
+      toJsonT: toJsonT,
+      asList: maxCount != 1,
+    );
 
     if (into is List) {
       into.add(exportValue);
@@ -468,6 +460,7 @@ class SelectInput<T> with _$SelectInput<T>, WoFormNodeMixin, WoFormInputMixin {
         parentPath: parentPath,
         selectedValues: (value as List<T>?) ?? [],
         availibleValues: availibleValues,
+        idsOfAvailibleValues: idsOfAvailibleValues,
         minCount: minCount,
         maxCount: maxCount,
         getCustomError: getCustomError,
@@ -497,7 +490,7 @@ Object? _defaultToJsonT<T>(T value) {
 
 extension SelectStringInputX on SelectStringInput {
   String? getAvailibleValue({required String id}) {
-    final index = idsOfAvailibleValues.indexOf(id);
+    final index = idsOfAvailibleValues?.indexOf(id) ?? -1;
     return (index < 0 || index >= availibleValues.length)
         ? null
         : availibleValues[index];
@@ -505,17 +498,15 @@ extension SelectStringInputX on SelectStringInput {
 
   String? getIdOfValue({required String value}) {
     final index = availibleValues.indexOf(value);
-    return (index < 0 || index >= idsOfAvailibleValues.length)
+    return (index < 0 || index >= (idsOfAvailibleValues?.length ?? -1))
         ? null
-        : idsOfAvailibleValues[index];
+        : idsOfAvailibleValues![index];
   }
 }
 
 extension SelectInputX<T> on SelectInput<T> {
-  T? getAvailibleValue({required String key}) {
-    final index = idsOfAvailibleValues.indexOf(key);
-    if (index == -1) return null;
-
+  T? getAvailibleValue({required String id}) {
+    final index = idsOfAvailibleValues?.indexOf(id) ?? -1;
     return (index < 0 || index >= availibleValues.length)
         ? null
         : availibleValues[index];
@@ -523,8 +514,8 @@ extension SelectInputX<T> on SelectInput<T> {
 
   String? getIdOfValue({required T value}) {
     final index = availibleValues.indexOf(value);
-    return (index < 0 || index >= idsOfAvailibleValues.length)
+    return (index < 0 || index >= (idsOfAvailibleValues?.length ?? -1))
         ? null
-        : idsOfAvailibleValues[index];
+        : idsOfAvailibleValues![index];
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:collection/collection.dart';
 import 'package:wo_form/wo_form.dart';
 
 class SelectFieldBuilder<T> extends StatelessWidget {
@@ -55,10 +56,20 @@ class SelectFieldBuilder<T> extends StatelessWidget {
         builder: (context, inputIsLocked) {
           return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
             builder: (context, status) {
-              return WoFormValueBuilder<List<T>>(
+              return WoFormValueBuilder<List<dynamic>>(
                 path: path,
                 builder: (context, selectedValues_) {
-                  final selectedValues = selectedValues_ ?? [];
+                  final selectedValues = (input.idsOfAvailibleValues != null
+                          ? selectedValues_
+                              ?.map(
+                                (valueId) => valueId is String
+                                    ? input.getAvailibleValue(id: valueId)
+                                    : null,
+                              )
+                              .whereType<T>()
+                              .toList()
+                          : selectedValues_?.cast<T>()) ??
+                      [];
 
                   final String? errorText;
                   if (status is InProgressStatus) {
@@ -82,11 +93,25 @@ class SelectFieldBuilder<T> extends StatelessWidget {
                     uiSettings: mergedSettings,
                     onValueChanged: inputIsLocked
                         ? null
-                        : (List<T>? value) {
-                            valuesCubit.onValueChanged(
-                              path: path,
-                              value: value,
-                            );
+                        : (List<T>? values) {
+                            if (input.idsOfAvailibleValues != null) {
+                              valuesCubit.onValueChanged(
+                                path: path,
+                                value: values
+                                    ?.map(
+                                      (value) =>
+                                          input.getIdOfValue(value: value),
+                                    )
+                                    .whereNotNull()
+                                    .toList(),
+                              );
+                            } else {
+                              valuesCubit.onValueChanged(
+                                path: path,
+                                value: values,
+                              );
+                            }
+
                             if (mergedSettings.submitFormOnSelect) {
                               valuesCubit.submit(context);
                             }
@@ -134,6 +159,7 @@ class SelectStringFieldBuilder extends SelectFieldBuilder<String> {
       minCount: selectStringInput.minCount,
       initialValues: selectStringInput.initialValues,
       availibleValues: selectStringInput.availibleValues,
+      idsOfAvailibleValues: selectStringInput.idsOfAvailibleValues,
       getCustomError: selectStringInput.getCustomError,
       uiSettings: selectStringInput.uiSettings,
       quizSettings: selectStringInput.quizSettings,
