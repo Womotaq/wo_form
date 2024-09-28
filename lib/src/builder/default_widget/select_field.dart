@@ -50,6 +50,10 @@ class SelectField<T> extends StatelessWidget {
                   final subtitle =
                       data.uiSettings.helpValueBuilder?.call(value);
                   return RadioListTile<T>(
+                    contentPadding: const EdgeInsets.only(
+                      left: 5,
+                      right: 16,
+                    ),
                     toggleable: true,
                     value: value,
                     groupValue: data.value?.firstOrNull,
@@ -149,6 +153,10 @@ class SelectField<T> extends StatelessWidget {
                   final subtitle =
                       data.uiSettings.helpValueBuilder?.call(value);
                   return CheckboxListTile(
+                    contentPadding: const EdgeInsets.only(
+                      left: 5,
+                      right: 16,
+                    ),
                     value: selectedValues.contains(value),
                     onChanged: data.onValueChanged == null
                         ? null
