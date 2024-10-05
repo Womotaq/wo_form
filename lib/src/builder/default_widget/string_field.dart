@@ -90,7 +90,9 @@ class _StringFieldState extends State<StringField> {
           controller: phoneController,
           onChanged: widget.data.onValueChanged == null
               ? null
-              : (number) => widget.data.onValueChanged!(number.international),
+              : (number) => widget.data.onValueChanged!(
+                    '+${number.countryCode} ${number.formatNsn()}',
+                  ),
           // TODO : replace onEditingComplete by onSubmitting
           // when https://github.com/cedvdb/phone_form_field/issues/263 will be fixed
           // onSubmitted:
