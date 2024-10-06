@@ -185,8 +185,8 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
             .toList(),
       );
 
-  Set<String> get _visitedPaths =>
-      state['__wo_reserved_visited_paths'] as Set<String>? ?? {};
+  Iterable<String> get _visitedPaths =>
+      state['__wo_reserved_visited_paths'] as Iterable<String>? ?? {};
 
   /// Marks the node at this path as visited by the user.
   /// Before submission, only visited nodes show errors.
@@ -206,9 +206,10 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   void _pathsAreVisited({required Iterable<String> paths}) {
     final newMap = Map<String, dynamic>.from(state);
     final visitedPaths = Set<String>.from(
-      newMap['__wo_reserved_visited_paths'] as Set<String>? ?? {},
+      newMap['__wo_reserved_visited_paths'] as Iterable<String>? ?? {},
     )..addAll(paths);
-    newMap['__wo_reserved_visited_paths'] = visitedPaths;
+    // Do not store a set in values, or the hydratation won't work
+    newMap['__wo_reserved_visited_paths'] = visitedPaths.toList();
     emit(newMap);
   }
 
