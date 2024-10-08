@@ -177,8 +177,8 @@ WoFormNodeMixin createStringInputNode() => ValueBuilderNode(
                       _ => null,
                     },
                   ),
-                  toJsonT: (value) =>
-                      const TextInputTypeConverter().toJson(value),
+                  toJsonT: (value) => const TextInputTypeConverter()
+                      .toJson(value as TextInputType?),
                 ),
                 const BooleanInput(
                   id: 'obscureText',

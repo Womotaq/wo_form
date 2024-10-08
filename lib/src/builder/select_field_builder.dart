@@ -1,6 +1,6 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:collection/collection.dart';
 import 'package:wo_form/wo_form.dart';
 
 class SelectFieldBuilder<T> extends StatelessWidget {
@@ -68,7 +68,7 @@ class SelectFieldBuilder<T> extends StatelessWidget {
                               )
                               .whereType<T>()
                               .toList()
-                          : selectedValues_?.cast<T>()) ??
+                          : selectedValues_?.whereType<T>().toList()) ??
                       [];
 
                   final String? errorText;

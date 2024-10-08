@@ -2900,7 +2900,10 @@ mixin _$SelectInput<T> {
   @JsonKey(toJson: QuizSettings.staticToJson)
   QuizSettings? get quizSettings => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
-  Object? Function(T)? get toJsonT => throw _privateConstructorUsedError;
+  dynamic Function(dynamic)? get toJsonT => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  dynamic Function(dynamic)? get fromJsonT =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of SelectInput
   /// with the given fields replaced by the non-null parameter values.
@@ -2927,7 +2930,9 @@ abstract class $SelectInputCopyWith<T, $Res> {
       SelectInputUiSettings<T>? uiSettings,
       @JsonKey(toJson: QuizSettings.staticToJson) QuizSettings? quizSettings,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      Object? Function(T)? toJsonT});
+      dynamic Function(dynamic)? toJsonT,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      dynamic Function(dynamic)? fromJsonT});
 
   $SelectInputUiSettingsCopyWith<T, $Res>? get uiSettings;
   $QuizSettingsCopyWith<$Res>? get quizSettings;
@@ -2958,6 +2963,7 @@ class _$SelectInputCopyWithImpl<T, $Res, $Val extends SelectInput<T>>
     Object? uiSettings = freezed,
     Object? quizSettings = freezed,
     Object? toJsonT = freezed,
+    Object? fromJsonT = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -2999,7 +3005,11 @@ class _$SelectInputCopyWithImpl<T, $Res, $Val extends SelectInput<T>>
       toJsonT: freezed == toJsonT
           ? _value.toJsonT
           : toJsonT // ignore: cast_nullable_to_non_nullable
-              as Object? Function(T)?,
+              as dynamic Function(dynamic)?,
+      fromJsonT: freezed == fromJsonT
+          ? _value.fromJsonT
+          : fromJsonT // ignore: cast_nullable_to_non_nullable
+              as dynamic Function(dynamic)?,
     ) as $Val);
   }
 
@@ -3052,7 +3062,9 @@ abstract class _$$SelectInputImplCopyWith<T, $Res>
       SelectInputUiSettings<T>? uiSettings,
       @JsonKey(toJson: QuizSettings.staticToJson) QuizSettings? quizSettings,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      Object? Function(T)? toJsonT});
+      dynamic Function(dynamic)? toJsonT,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      dynamic Function(dynamic)? fromJsonT});
 
   @override
   $SelectInputUiSettingsCopyWith<T, $Res>? get uiSettings;
@@ -3083,6 +3095,7 @@ class __$$SelectInputImplCopyWithImpl<T, $Res>
     Object? uiSettings = freezed,
     Object? quizSettings = freezed,
     Object? toJsonT = freezed,
+    Object? fromJsonT = freezed,
   }) {
     return _then(_$SelectInputImpl<T>(
       id: null == id
@@ -3124,7 +3137,11 @@ class __$$SelectInputImplCopyWithImpl<T, $Res>
       toJsonT: freezed == toJsonT
           ? _value.toJsonT
           : toJsonT // ignore: cast_nullable_to_non_nullable
-              as Object? Function(T)?,
+              as dynamic Function(dynamic)?,
+      fromJsonT: freezed == fromJsonT
+          ? _value.fromJsonT
+          : fromJsonT // ignore: cast_nullable_to_non_nullable
+              as dynamic Function(dynamic)?,
     ));
   }
 }
@@ -3143,7 +3160,8 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
       this.getCustomError,
       this.uiSettings,
       @JsonKey(toJson: QuizSettings.staticToJson) this.quizSettings,
-      @JsonKey(includeToJson: false, includeFromJson: false) this.toJsonT})
+      @JsonKey(includeToJson: false, includeFromJson: false) this.toJsonT,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.fromJsonT})
       : _initialValues = initialValues,
         _availibleValues = availibleValues,
         _idsOfAvailibleValues = idsOfAvailibleValues,
@@ -3208,11 +3226,14 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
   final QuizSettings? quizSettings;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final Object? Function(T)? toJsonT;
+  final dynamic Function(dynamic)? toJsonT;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final dynamic Function(dynamic)? fromJsonT;
 
   @override
   String toString() {
-    return 'SelectInput<$T>(id: $id, maxCount: $maxCount, minCount: $minCount, initialValues: $initialValues, availibleValues: $availibleValues, idsOfAvailibleValues: $idsOfAvailibleValues, getCustomError: $getCustomError, uiSettings: $uiSettings, quizSettings: $quizSettings, toJsonT: $toJsonT)';
+    return 'SelectInput<$T>(id: $id, maxCount: $maxCount, minCount: $minCount, initialValues: $initialValues, availibleValues: $availibleValues, idsOfAvailibleValues: $idsOfAvailibleValues, getCustomError: $getCustomError, uiSettings: $uiSettings, quizSettings: $quizSettings, toJsonT: $toJsonT, fromJsonT: $fromJsonT)';
   }
 
   @override
@@ -3237,7 +3258,9 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
                 other.uiSettings == uiSettings) &&
             (identical(other.quizSettings, quizSettings) ||
                 other.quizSettings == quizSettings) &&
-            (identical(other.toJsonT, toJsonT) || other.toJsonT == toJsonT));
+            (identical(other.toJsonT, toJsonT) || other.toJsonT == toJsonT) &&
+            (identical(other.fromJsonT, fromJsonT) ||
+                other.fromJsonT == fromJsonT));
   }
 
   @override
@@ -3252,7 +3275,8 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
       getCustomError,
       uiSettings,
       quizSettings,
-      toJsonT);
+      toJsonT,
+      fromJsonT);
 
   /// Create a copy of SelectInput
   /// with the given fields replaced by the non-null parameter values.
@@ -3278,7 +3302,9 @@ abstract class _SelectInput<T> extends SelectInput<T> {
       @JsonKey(toJson: QuizSettings.staticToJson)
       final QuizSettings? quizSettings,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      final Object? Function(T)? toJsonT}) = _$SelectInputImpl<T>;
+      final dynamic Function(dynamic)? toJsonT,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final dynamic Function(dynamic)? fromJsonT}) = _$SelectInputImpl<T>;
   const _SelectInput._() : super._();
 
   @override
@@ -3309,7 +3335,10 @@ abstract class _SelectInput<T> extends SelectInput<T> {
   QuizSettings? get quizSettings;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  Object? Function(T)? get toJsonT;
+  dynamic Function(dynamic)? get toJsonT;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  dynamic Function(dynamic)? get fromJsonT;
 
   /// Create a copy of SelectInput
   /// with the given fields replaced by the non-null parameter values.

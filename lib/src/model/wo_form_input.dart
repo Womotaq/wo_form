@@ -351,8 +351,19 @@ class SelectInput<T> with _$SelectInput<T>, WoFormNodeMixin, WoFormInputMixin {
     GetCustomErrorForListDef<T>? getCustomError,
     SelectInputUiSettings<T>? uiSettings,
     @JsonKey(toJson: QuizSettings.staticToJson) QuizSettings? quizSettings,
+
+    /// The following fields are mostly usefull for hydrataion
+    ///
+    /// Ex :
+    /// SelectInput<TimeControl>(
+    ///   toJsonT: (value) => (value as TimeControl?)?.toJson(),
+    ///   fromJsonT: (json) =>
+    ///       TimeControl.fromJson(json as Map<String, dynamic>? ?? {}),
+    /// ),
     @JsonKey(includeToJson: false, includeFromJson: false)
-    Object? Function(T)? toJsonT,
+    dynamic Function(dynamic)? toJsonT,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    dynamic Function(dynamic)? fromJsonT,
   }) = _SelectInput<T>;
 
   const SelectInput._();
@@ -422,7 +433,7 @@ class SelectInput<T> with _$SelectInput<T>, WoFormNodeMixin, WoFormInputMixin {
 
   static Object? _selectedValuesToJson<T>({
     required List<T>? selectedValues,
-    required Object? Function(T)? toJsonT,
+    required dynamic Function(dynamic)? toJsonT,
     required bool asList,
   }) {
     if (selectedValues == null) return null;
@@ -458,7 +469,7 @@ class SelectInput<T> with _$SelectInput<T>, WoFormNodeMixin, WoFormInputMixin {
       _validator<T>(
         inputId: id,
         parentPath: parentPath,
-        selectedValues: (value as List<T>?) ?? [],
+        selectedValues: (value as List?)?.whereType<T>().toList() ?? [],
         availibleValues: availibleValues,
         idsOfAvailibleValues: idsOfAvailibleValues,
         minCount: minCount,

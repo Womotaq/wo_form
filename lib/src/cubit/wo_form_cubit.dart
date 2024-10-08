@@ -299,10 +299,50 @@ class HydratedWoFormValuesCubit extends WoFormValuesCubit
   String get storagePrefix => '';
 
   @override
-  WoFormValues? fromJson(Map<String, dynamic> json) => json;
+  WoFormValues? fromJson(Map<String, dynamic> json) {
+    final jsonT = Map<String, dynamic>.from(json);
+
+    for (final entry in json.entries) {
+      if (entry.value is! List) continue; // SelectInput's value is a list
+      final values = entry.value as List;
+      if (values.firstOrNull is String) {
+        continue; // id of selected value or SelectStringInput
+      }
+
+      final path = entry.key;
+      final node = _root.getChild(path: path, values: state);
+      if (node is! SelectInput) continue;
+      final fromJsonT = node.fromJsonT;
+      if (fromJsonT == null) continue;
+
+      jsonT[path] = values.map(fromJsonT).toList();
+    }
+
+    return jsonT;
+  }
 
   @override
-  Map<String, dynamic>? toJson(WoFormValues state) => state;
+  Map<String, dynamic>? toJson(WoFormValues state) {
+    final json = Map<String, dynamic>.from(state);
+
+    for (final entry in state.entries) {
+      if (entry.value is! List) continue; // SelectInput's value is a list
+      final values = entry.value as List;
+      if (values.firstOrNull is String) {
+        continue; // id of selected value or SelectStringInput
+      }
+
+      final path = entry.key;
+      final node = _root.getChild(path: path, values: state);
+      if (node is! SelectInput) continue;
+      final toJsonT = node.toJsonT;
+      if (toJsonT == null) continue;
+
+      json[path] = values.map(toJsonT).toList();
+    }
+
+    return json;
+  }
 }
 
 typedef OnSubmitErrorDef = void Function(
