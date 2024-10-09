@@ -1,3 +1,12 @@
+## 1.2.0
+
+- Added persistence (see WoForm.hydratationId)
+- Added ConditionnalNode
+- Reworked QuizSettings
+- Added a default phone field
+- Added DynamicInputsNodeUiSettings.reorderable
+- Solved issues
+
 ## 1.1.0
 
 - BREAKING CHANGES : see RootNode
