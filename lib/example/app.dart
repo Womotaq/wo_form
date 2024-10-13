@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:phone_form_field/phone_form_field.dart';
 import 'package:wo_form/example/dynamic_form/dynamic_form_page.dart';
 import 'package:wo_form/example/edit_event/event_page.dart';
 import 'package:wo_form/example/form_creator/form_creator_page.dart';

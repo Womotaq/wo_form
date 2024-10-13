@@ -60,7 +60,7 @@ WoFormNodeMixin createStringInputNode() => ValueBuilderNode(
                   },
                 ),
               ),
-              toJsonT: (regex) => regex?.value,
+              toJsonT: (regex) => (regex as RegexPattern?)?.value,
             ),
             ValueListenerNode(
               id: 'regexPatternListener',
