@@ -1,3 +1,7 @@
+## 1.2.1
+
+- Solved minor issue with pathIsVisited
+
 ## 1.2.0
 
 - Added persistence (see WoForm.hydratationId)
