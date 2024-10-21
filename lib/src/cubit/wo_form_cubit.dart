@@ -193,7 +193,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   void pathIsVisited({required String path}) {
     final newMap = Map<String, dynamic>.from(state);
     final visitedPaths = Set<String>.from(
-      newMap['__wo_reserved_visited_paths'] as Set<String>? ?? {},
+      newMap['__wo_reserved_visited_paths'] as Iterable<String>? ?? {},
     )..add(path);
     newMap['__wo_reserved_visited_paths'] = visitedPaths;
     emit(newMap);
