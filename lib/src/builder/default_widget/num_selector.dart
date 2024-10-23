@@ -73,9 +73,9 @@ class _NumSelectorState extends State<NumSelector> {
 
     final currentValue = num.tryParse(controller.text) ?? 0;
     final nextValue = currentValue + (isPlus ? widget.step : -widget.step);
-    final disabled =
-        (widget.minCount != null && nextValue < widget.minCount!) ||
-            (widget.maxCount != null && nextValue > widget.maxCount!);
+    final disabled = isPlus
+        ? widget.maxCount != null && nextValue > widget.maxCount!
+        : widget.minCount != null && nextValue < widget.minCount!;
 
     return SizedBox(
       height: iconHeight,
@@ -91,10 +91,18 @@ class _NumSelectorState extends State<NumSelector> {
                     var newVal = num.tryParse(controller.text) ?? 0;
                     newVal += (isPlus ? widget.step : -widget.step);
                     if (widget.minCount != null && newVal < widget.minCount!) {
-                      return;
+                      if (isPlus) {
+                        newVal = widget.minCount!;
+                      } else {
+                        return;
+                      }
                     }
                     if (widget.maxCount != null && newVal > widget.maxCount!) {
-                      return;
+                      if (isPlus) {
+                        return;
+                      } else {
+                        newVal = widget.maxCount!;
+                      }
                     }
                     controller.text = newVal.toString();
                     widget.onChanged!(newVal);
