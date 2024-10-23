@@ -45,6 +45,38 @@ class BooleanInputUiSettings with _$BooleanInputUiSettings {
         );
 }
 
+typedef DateTimeFieldBuilderDef = Widget Function(
+  WoFieldData<DateTimeInput, DateTime, DateTimeInputUiSettings> data,
+);
+
+@freezed
+class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
+  const factory DateTimeInputUiSettings({
+    String? labelText,
+    String? helperText,
+    DatePickerEntryMode? initialEntryMode,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    DateTimeFieldBuilderDef? widgetBuilder,
+  }) = _DateTimeInputUiSettings;
+
+  const DateTimeInputUiSettings._();
+
+  factory DateTimeInputUiSettings.fromJson(Map<String, dynamic> json) =>
+      _$DateTimeInputUiSettingsFromJson(json);
+
+  static Map<String, dynamic> staticToJson(DateTimeInputUiSettings object) =>
+      object.toJson();
+
+  DateTimeInputUiSettings merge(DateTimeInputUiSettings? other) => other == null
+      ? this
+      : DateTimeInputUiSettings(
+          labelText: labelText ?? other.labelText,
+          helperText: helperText ?? other.helperText,
+          initialEntryMode: initialEntryMode ?? other.initialEntryMode,
+          widgetBuilder: widgetBuilder ?? other.widgetBuilder,
+        );
+}
+
 typedef DynamicInputsNodeWidgetBuilderDef = Widget Function(
   WoFieldData<DynamicInputsNode, List<WoFormNodeMixin>,
           DynamicInputsNodeUiSettings>

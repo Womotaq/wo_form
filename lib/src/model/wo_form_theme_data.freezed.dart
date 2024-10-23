@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$WoFormThemeData {
   BooleanFieldBuilderDef? get booleanFieldBuilder =>
       throw _privateConstructorUsedError;
+  DateTimeFieldBuilderDef? get dateTimeFieldBuilder =>
+      throw _privateConstructorUsedError;
   IsoCode? get defaultPhoneCoutry => throw _privateConstructorUsedError;
   DynamicInputsNodeWidgetBuilderDef? get dynamicInputsNodeWidgetBuilder =>
       throw _privateConstructorUsedError;
@@ -66,6 +68,7 @@ abstract class $WoFormThemeDataCopyWith<$Res> {
   @useResult
   $Res call(
       {BooleanFieldBuilderDef? booleanFieldBuilder,
+      DateTimeFieldBuilderDef? dateTimeFieldBuilder,
       IsoCode? defaultPhoneCoutry,
       DynamicInputsNodeWidgetBuilderDef? dynamicInputsNodeWidgetBuilder,
       WidgetBuilderDef? formPageBuilder,
@@ -102,6 +105,7 @@ class _$WoFormThemeDataCopyWithImpl<$Res, $Val extends WoFormThemeData>
   @override
   $Res call({
     Object? booleanFieldBuilder = freezed,
+    Object? dateTimeFieldBuilder = freezed,
     Object? defaultPhoneCoutry = freezed,
     Object? dynamicInputsNodeWidgetBuilder = freezed,
     Object? formPageBuilder = freezed,
@@ -126,6 +130,10 @@ class _$WoFormThemeDataCopyWithImpl<$Res, $Val extends WoFormThemeData>
           ? _value.booleanFieldBuilder
           : booleanFieldBuilder // ignore: cast_nullable_to_non_nullable
               as BooleanFieldBuilderDef?,
+      dateTimeFieldBuilder: freezed == dateTimeFieldBuilder
+          ? _value.dateTimeFieldBuilder
+          : dateTimeFieldBuilder // ignore: cast_nullable_to_non_nullable
+              as DateTimeFieldBuilderDef?,
       defaultPhoneCoutry: freezed == defaultPhoneCoutry
           ? _value.defaultPhoneCoutry
           : defaultPhoneCoutry // ignore: cast_nullable_to_non_nullable
@@ -212,6 +220,7 @@ abstract class _$$WoFormThemeDataImplCopyWith<$Res>
   @useResult
   $Res call(
       {BooleanFieldBuilderDef? booleanFieldBuilder,
+      DateTimeFieldBuilderDef? dateTimeFieldBuilder,
       IsoCode? defaultPhoneCoutry,
       DynamicInputsNodeWidgetBuilderDef? dynamicInputsNodeWidgetBuilder,
       WidgetBuilderDef? formPageBuilder,
@@ -246,6 +255,7 @@ class __$$WoFormThemeDataImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? booleanFieldBuilder = freezed,
+    Object? dateTimeFieldBuilder = freezed,
     Object? defaultPhoneCoutry = freezed,
     Object? dynamicInputsNodeWidgetBuilder = freezed,
     Object? formPageBuilder = freezed,
@@ -270,6 +280,10 @@ class __$$WoFormThemeDataImplCopyWithImpl<$Res>
           ? _value.booleanFieldBuilder
           : booleanFieldBuilder // ignore: cast_nullable_to_non_nullable
               as BooleanFieldBuilderDef?,
+      dateTimeFieldBuilder: freezed == dateTimeFieldBuilder
+          ? _value.dateTimeFieldBuilder
+          : dateTimeFieldBuilder // ignore: cast_nullable_to_non_nullable
+              as DateTimeFieldBuilderDef?,
       defaultPhoneCoutry: freezed == defaultPhoneCoutry
           ? _value.defaultPhoneCoutry
           : defaultPhoneCoutry // ignore: cast_nullable_to_non_nullable
@@ -351,6 +365,7 @@ class __$$WoFormThemeDataImplCopyWithImpl<$Res>
 class _$WoFormThemeDataImpl extends _WoFormThemeData {
   const _$WoFormThemeDataImpl(
       {this.booleanFieldBuilder,
+      this.dateTimeFieldBuilder,
       this.defaultPhoneCoutry,
       this.dynamicInputsNodeWidgetBuilder,
       this.formPageBuilder,
@@ -373,6 +388,8 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
 
   @override
   final BooleanFieldBuilderDef? booleanFieldBuilder;
+  @override
+  final DateTimeFieldBuilderDef? dateTimeFieldBuilder;
   @override
   final IsoCode? defaultPhoneCoutry;
   @override
@@ -417,7 +434,7 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
 
   @override
   String toString() {
-    return 'WoFormThemeData(booleanFieldBuilder: $booleanFieldBuilder, defaultPhoneCoutry: $defaultPhoneCoutry, dynamicInputsNodeWidgetBuilder: $dynamicInputsNodeWidgetBuilder, formPageBuilder: $formPageBuilder, generateId: $generateId, headerBuilder: $headerBuilder, inputHeaderBuilder: $inputHeaderBuilder, inputsNodeExpanderBuilder: $inputsNodeExpanderBuilder, inputsNodeWidgetBuilder: $inputsNodeWidgetBuilder, numFieldBuilder: $numFieldBuilder, scoreBuilder: $scoreBuilder, selectFieldBuilder: $selectFieldBuilder, standardScaffoldBuilder: $standardScaffoldBuilder, stringFieldBuilder: $stringFieldBuilder, submitButtonBuilder: $submitButtonBuilder, onDynamicInputDeletion: $onDynamicInputDeletion, onSubmitError: $onSubmitError, verticalSpacing: $verticalSpacing, showAsteriskIfRequired: $showAsteriskIfRequired)';
+    return 'WoFormThemeData(booleanFieldBuilder: $booleanFieldBuilder, dateTimeFieldBuilder: $dateTimeFieldBuilder, defaultPhoneCoutry: $defaultPhoneCoutry, dynamicInputsNodeWidgetBuilder: $dynamicInputsNodeWidgetBuilder, formPageBuilder: $formPageBuilder, generateId: $generateId, headerBuilder: $headerBuilder, inputHeaderBuilder: $inputHeaderBuilder, inputsNodeExpanderBuilder: $inputsNodeExpanderBuilder, inputsNodeWidgetBuilder: $inputsNodeWidgetBuilder, numFieldBuilder: $numFieldBuilder, scoreBuilder: $scoreBuilder, selectFieldBuilder: $selectFieldBuilder, standardScaffoldBuilder: $standardScaffoldBuilder, stringFieldBuilder: $stringFieldBuilder, submitButtonBuilder: $submitButtonBuilder, onDynamicInputDeletion: $onDynamicInputDeletion, onSubmitError: $onSubmitError, verticalSpacing: $verticalSpacing, showAsteriskIfRequired: $showAsteriskIfRequired)';
   }
 
   @override
@@ -427,6 +444,8 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
             other is _$WoFormThemeDataImpl &&
             (identical(other.booleanFieldBuilder, booleanFieldBuilder) ||
                 other.booleanFieldBuilder == booleanFieldBuilder) &&
+            (identical(other.dateTimeFieldBuilder, dateTimeFieldBuilder) ||
+                other.dateTimeFieldBuilder == dateTimeFieldBuilder) &&
             (identical(other.defaultPhoneCoutry, defaultPhoneCoutry) ||
                 other.defaultPhoneCoutry == defaultPhoneCoutry) &&
             (identical(other.dynamicInputsNodeWidgetBuilder,
@@ -472,6 +491,7 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
   int get hashCode => Object.hashAll([
         runtimeType,
         booleanFieldBuilder,
+        dateTimeFieldBuilder,
         defaultPhoneCoutry,
         dynamicInputsNodeWidgetBuilder,
         formPageBuilder,
@@ -505,6 +525,7 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
 abstract class _WoFormThemeData extends WoFormThemeData {
   const factory _WoFormThemeData(
       {final BooleanFieldBuilderDef? booleanFieldBuilder,
+      final DateTimeFieldBuilderDef? dateTimeFieldBuilder,
       final IsoCode? defaultPhoneCoutry,
       final DynamicInputsNodeWidgetBuilderDef? dynamicInputsNodeWidgetBuilder,
       final WidgetBuilderDef? formPageBuilder,
@@ -527,6 +548,8 @@ abstract class _WoFormThemeData extends WoFormThemeData {
 
   @override
   BooleanFieldBuilderDef? get booleanFieldBuilder;
+  @override
+  DateTimeFieldBuilderDef? get dateTimeFieldBuilder;
   @override
   IsoCode? get defaultPhoneCoutry;
   @override

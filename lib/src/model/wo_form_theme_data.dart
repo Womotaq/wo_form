@@ -13,6 +13,7 @@ typedef ScoreWidgetBuilderDef = Widget Function({required num score});
 class WoFormThemeData with _$WoFormThemeData {
   const factory WoFormThemeData({
     BooleanFieldBuilderDef? booleanFieldBuilder,
+    DateTimeFieldBuilderDef? dateTimeFieldBuilder,
     IsoCode? defaultPhoneCoutry,
     DynamicInputsNodeWidgetBuilderDef? dynamicInputsNodeWidgetBuilder,
     WidgetBuilderDef? formPageBuilder,

@@ -66,6 +66,37 @@ Map<String, dynamic> _$$BooleanInputImplToJson(_$BooleanInputImpl instance) =>
       'runtimeType': instance.$type,
     };
 
+_$DateTimeInputImpl _$$DateTimeInputImplFromJson(Map<String, dynamic> json) =>
+    _$DateTimeInputImpl(
+      id: json['id'] as String,
+      initialValue: json['initialValue'] == null
+          ? null
+          : DateTime.parse(json['initialValue'] as String),
+      isRequired: json['isRequired'] as bool? ?? false,
+      maxBound: json['maxBound'] == null
+          ? null
+          : DateTime.parse(json['maxBound'] as String),
+      minBound: json['minBound'] == null
+          ? null
+          : DateTime.parse(json['minBound'] as String),
+      uiSettings: json['uiSettings'] == null
+          ? const DateTimeInputUiSettings()
+          : DateTimeInputUiSettings.fromJson(
+              json['uiSettings'] as Map<String, dynamic>),
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$DateTimeInputImplToJson(_$DateTimeInputImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'initialValue': instance.initialValue?.toIso8601String(),
+      'isRequired': instance.isRequired,
+      'maxBound': instance.maxBound?.toIso8601String(),
+      'minBound': instance.minBound?.toIso8601String(),
+      'uiSettings': DateTimeInputUiSettings.staticToJson(instance.uiSettings),
+      'runtimeType': instance.$type,
+    };
+
 _$NumInputImpl _$$NumInputImplFromJson(Map<String, dynamic> json) =>
     _$NumInputImpl(
       id: json['id'] as String,

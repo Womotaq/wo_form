@@ -114,6 +114,19 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     BooleanInputUiSettings uiSettings,
   }) = BooleanInput;
 
+  const factory WoFormInput.dateTime({
+    required String id,
+    DateTime? initialValue,
+    @Default(false) bool isRequired,
+    DateTime? maxBound,
+    DateTime? minBound,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    GetCustomErrorDef<DateTime>? getCustomError,
+    @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+    @Default(DateTimeInputUiSettings())
+    DateTimeInputUiSettings uiSettings,
+  }) = DateTimeInput;
+
   @Assert(
     'maxBound == null || minBound <= maxBound',
     'maxBound must be higher or equal to minBound',
@@ -191,6 +204,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
 
   Object? _exportValue(dynamic value) => switch (this) {
         BooleanInput() => value as bool?,
+        DateTimeInput() => value as DateTime?,
         NumInput() => value as num?,
         SelectStringInput(maxCount: final maxCount) =>
           SelectInput._selectedValuesToJson(
@@ -219,6 +233,35 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
         return isRequired && value != true
             ? WoFormInputError.empty(path: '$parentPath/$id')
             : null;
+
+      case DateTimeInput(
+          isRequired: final isRequired,
+          minBound: final minBound,
+          maxBound: final maxBound,
+          getCustomError: final getCustomError,
+        ):
+        value as DateTime?;
+
+        final customError = getCustomError?.call(
+          value,
+          '$parentPath/$id',
+        );
+        if (customError != null) return customError;
+
+        if (value == null) {
+          return isRequired
+              ? WoFormInputError.empty(path: '$parentPath/$id')
+              : null;
+        }
+
+        if (minBound != null && value.isBefore(minBound)) {
+          return WoFormInputError.minBound(path: '$parentPath/$id');
+        }
+        if (maxBound != null && value.isAfter(maxBound)) {
+          return WoFormInputError.maxBound(path: '$parentPath/$id');
+        }
+
+        return null;
 
       case NumInput(
           isRequired: final isRequired,
@@ -303,6 +346,8 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     switch (this) {
       case BooleanInput(initialValue: final initialValue):
         return {'$parentPath/$id': initialValue};
+      case DateTimeInput(initialValue: final initialValue):
+        return {'$parentPath/$id': initialValue};
       case NumInput(initialValue: final initialValue):
         return {'$parentPath/$id': initialValue};
       case StringInput(initialValue: final initialValue):
@@ -318,6 +363,8 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     switch (this) {
       case BooleanInput():
         return BooleanFieldBuilder(key: key, path: path);
+      case DateTimeInput():
+        return DateTimeFieldBuilder(key: key, path: path);
       case NumInput():
         return NumFieldBuilder(key: key, path: path);
       case StringInput():

@@ -950,6 +950,8 @@ WoFormInput _$WoFormInputFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
     case 'boolean':
       return BooleanInput.fromJson(json);
+    case 'dateTime':
+      return DateTimeInput.fromJson(json);
     case 'num':
       return NumInput.fromJson(json);
     case 'selectString':
@@ -982,6 +984,17 @@ mixin _$WoFormInput {
             @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
             BooleanInputUiSettings uiSettings)
         boolean,
+    required TResult Function(
+            String id,
+            DateTime? initialValue,
+            bool isRequired,
+            DateTime? maxBound,
+            DateTime? minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<DateTime>? getCustomError,
+            @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+            DateTimeInputUiSettings uiSettings)
+        dateTime,
     required TResult Function(
             String id,
             num? initialValue,
@@ -1031,6 +1044,17 @@ mixin _$WoFormInput {
         boolean,
     TResult? Function(
             String id,
+            DateTime? initialValue,
+            bool isRequired,
+            DateTime? maxBound,
+            DateTime? minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<DateTime>? getCustomError,
+            @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+            DateTimeInputUiSettings uiSettings)?
+        dateTime,
+    TResult? Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -1078,6 +1102,17 @@ mixin _$WoFormInput {
         boolean,
     TResult Function(
             String id,
+            DateTime? initialValue,
+            bool isRequired,
+            DateTime? maxBound,
+            DateTime? minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<DateTime>? getCustomError,
+            @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+            DateTimeInputUiSettings uiSettings)?
+        dateTime,
+    TResult Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -1116,6 +1151,7 @@ mixin _$WoFormInput {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(BooleanInput value) boolean,
+    required TResult Function(DateTimeInput value) dateTime,
     required TResult Function(NumInput value) num,
     required TResult Function(SelectStringInput value) selectString,
     required TResult Function(StringInput value) string,
@@ -1124,6 +1160,7 @@ mixin _$WoFormInput {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BooleanInput value)? boolean,
+    TResult? Function(DateTimeInput value)? dateTime,
     TResult? Function(NumInput value)? num,
     TResult? Function(SelectStringInput value)? selectString,
     TResult? Function(StringInput value)? string,
@@ -1132,6 +1169,7 @@ mixin _$WoFormInput {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BooleanInput value)? boolean,
+    TResult Function(DateTimeInput value)? dateTime,
     TResult Function(NumInput value)? num,
     TResult Function(SelectStringInput value)? selectString,
     TResult Function(StringInput value)? string,
@@ -1341,6 +1379,17 @@ class _$BooleanInputImpl extends BooleanInput {
         boolean,
     required TResult Function(
             String id,
+            DateTime? initialValue,
+            bool isRequired,
+            DateTime? maxBound,
+            DateTime? minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<DateTime>? getCustomError,
+            @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+            DateTimeInputUiSettings uiSettings)
+        dateTime,
+    required TResult Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -1389,6 +1438,17 @@ class _$BooleanInputImpl extends BooleanInput {
             @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
             BooleanInputUiSettings uiSettings)?
         boolean,
+    TResult? Function(
+            String id,
+            DateTime? initialValue,
+            bool isRequired,
+            DateTime? maxBound,
+            DateTime? minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<DateTime>? getCustomError,
+            @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+            DateTimeInputUiSettings uiSettings)?
+        dateTime,
     TResult? Function(
             String id,
             num? initialValue,
@@ -1442,6 +1502,17 @@ class _$BooleanInputImpl extends BooleanInput {
         boolean,
     TResult Function(
             String id,
+            DateTime? initialValue,
+            bool isRequired,
+            DateTime? maxBound,
+            DateTime? minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<DateTime>? getCustomError,
+            @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+            DateTimeInputUiSettings uiSettings)?
+        dateTime,
+    TResult Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -1486,6 +1557,7 @@ class _$BooleanInputImpl extends BooleanInput {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(BooleanInput value) boolean,
+    required TResult Function(DateTimeInput value) dateTime,
     required TResult Function(NumInput value) num,
     required TResult Function(SelectStringInput value) selectString,
     required TResult Function(StringInput value) string,
@@ -1497,6 +1569,7 @@ class _$BooleanInputImpl extends BooleanInput {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BooleanInput value)? boolean,
+    TResult? Function(DateTimeInput value)? dateTime,
     TResult? Function(NumInput value)? num,
     TResult? Function(SelectStringInput value)? selectString,
     TResult? Function(StringInput value)? string,
@@ -1508,6 +1581,7 @@ class _$BooleanInputImpl extends BooleanInput {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BooleanInput value)? boolean,
+    TResult Function(DateTimeInput value)? dateTime,
     TResult Function(NumInput value)? num,
     TResult Function(SelectStringInput value)? selectString,
     TResult Function(StringInput value)? string,
@@ -1557,6 +1631,446 @@ abstract class BooleanInput extends WoFormInput {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BooleanInputImplCopyWith<_$BooleanInputImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DateTimeInputImplCopyWith<$Res>
+    implements $WoFormInputCopyWith<$Res> {
+  factory _$$DateTimeInputImplCopyWith(
+          _$DateTimeInputImpl value, $Res Function(_$DateTimeInputImpl) then) =
+      __$$DateTimeInputImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      DateTime? initialValue,
+      bool isRequired,
+      DateTime? maxBound,
+      DateTime? minBound,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      GetCustomErrorDef<DateTime>? getCustomError,
+      @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+      DateTimeInputUiSettings uiSettings});
+
+  $DateTimeInputUiSettingsCopyWith<$Res> get uiSettings;
+}
+
+/// @nodoc
+class __$$DateTimeInputImplCopyWithImpl<$Res>
+    extends _$WoFormInputCopyWithImpl<$Res, _$DateTimeInputImpl>
+    implements _$$DateTimeInputImplCopyWith<$Res> {
+  __$$DateTimeInputImplCopyWithImpl(
+      _$DateTimeInputImpl _value, $Res Function(_$DateTimeInputImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? initialValue = freezed,
+    Object? isRequired = null,
+    Object? maxBound = freezed,
+    Object? minBound = freezed,
+    Object? getCustomError = freezed,
+    Object? uiSettings = null,
+  }) {
+    return _then(_$DateTimeInputImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      initialValue: freezed == initialValue
+          ? _value.initialValue
+          : initialValue // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      isRequired: null == isRequired
+          ? _value.isRequired
+          : isRequired // ignore: cast_nullable_to_non_nullable
+              as bool,
+      maxBound: freezed == maxBound
+          ? _value.maxBound
+          : maxBound // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      minBound: freezed == minBound
+          ? _value.minBound
+          : minBound // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      getCustomError: freezed == getCustomError
+          ? _value.getCustomError
+          : getCustomError // ignore: cast_nullable_to_non_nullable
+              as GetCustomErrorDef<DateTime>?,
+      uiSettings: null == uiSettings
+          ? _value.uiSettings
+          : uiSettings // ignore: cast_nullable_to_non_nullable
+              as DateTimeInputUiSettings,
+    ));
+  }
+
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DateTimeInputUiSettingsCopyWith<$Res> get uiSettings {
+    return $DateTimeInputUiSettingsCopyWith<$Res>(_value.uiSettings, (value) {
+      return _then(_value.copyWith(uiSettings: value));
+    });
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$DateTimeInputImpl extends DateTimeInput {
+  const _$DateTimeInputImpl(
+      {required this.id,
+      this.initialValue,
+      this.isRequired = false,
+      this.maxBound,
+      this.minBound,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      this.getCustomError,
+      @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+      this.uiSettings = const DateTimeInputUiSettings(),
+      final String? $type})
+      : $type = $type ?? 'dateTime',
+        super._();
+
+  factory _$DateTimeInputImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DateTimeInputImplFromJson(json);
+
+  @override
+  final String id;
+  @override
+  final DateTime? initialValue;
+  @override
+  @JsonKey()
+  final bool isRequired;
+  @override
+  final DateTime? maxBound;
+  @override
+  final DateTime? minBound;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final GetCustomErrorDef<DateTime>? getCustomError;
+  @override
+  @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+  final DateTimeInputUiSettings uiSettings;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'WoFormInput.dateTime(id: $id, initialValue: $initialValue, isRequired: $isRequired, maxBound: $maxBound, minBound: $minBound, getCustomError: $getCustomError, uiSettings: $uiSettings)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DateTimeInputImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.initialValue, initialValue) ||
+                other.initialValue == initialValue) &&
+            (identical(other.isRequired, isRequired) ||
+                other.isRequired == isRequired) &&
+            (identical(other.maxBound, maxBound) ||
+                other.maxBound == maxBound) &&
+            (identical(other.minBound, minBound) ||
+                other.minBound == minBound) &&
+            (identical(other.getCustomError, getCustomError) ||
+                other.getCustomError == getCustomError) &&
+            (identical(other.uiSettings, uiSettings) ||
+                other.uiSettings == uiSettings));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, initialValue, isRequired,
+      maxBound, minBound, getCustomError, uiSettings);
+
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DateTimeInputImplCopyWith<_$DateTimeInputImpl> get copyWith =>
+      __$$DateTimeInputImplCopyWithImpl<_$DateTimeInputImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String id,
+            bool? initialValue,
+            bool isRequired,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<bool>? getCustomError,
+            @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+            BooleanInputUiSettings uiSettings)
+        boolean,
+    required TResult Function(
+            String id,
+            DateTime? initialValue,
+            bool isRequired,
+            DateTime? maxBound,
+            DateTime? minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<DateTime>? getCustomError,
+            @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+            DateTimeInputUiSettings uiSettings)
+        dateTime,
+    required TResult Function(
+            String id,
+            num? initialValue,
+            bool isRequired,
+            int? maxBound,
+            int minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<num>? getCustomError,
+            NumInputUiSettings uiSettings)
+        num,
+    required TResult Function(
+            String id,
+            int? maxCount,
+            int minCount,
+            List<String>? initialValues,
+            List<String> availibleValues,
+            List<String>? idsOfAvailibleValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
+            SelectInputUiSettings<String> uiSettings,
+            @JsonKey(toJson: QuizSettings.staticToJson)
+            QuizSettings? quizSettings)
+        selectString,
+    required TResult Function(
+            String id,
+            String? initialValue,
+            bool isRequired,
+            String? regexPattern,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<String>? getCustomError,
+            @JsonKey(toJson: StringInputUiSettings.staticToJson)
+            StringInputUiSettings uiSettings)
+        string,
+  }) {
+    return dateTime(id, initialValue, isRequired, maxBound, minBound,
+        getCustomError, uiSettings);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String id,
+            bool? initialValue,
+            bool isRequired,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<bool>? getCustomError,
+            @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+            BooleanInputUiSettings uiSettings)?
+        boolean,
+    TResult? Function(
+            String id,
+            DateTime? initialValue,
+            bool isRequired,
+            DateTime? maxBound,
+            DateTime? minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<DateTime>? getCustomError,
+            @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+            DateTimeInputUiSettings uiSettings)?
+        dateTime,
+    TResult? Function(
+            String id,
+            num? initialValue,
+            bool isRequired,
+            int? maxBound,
+            int minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<num>? getCustomError,
+            NumInputUiSettings uiSettings)?
+        num,
+    TResult? Function(
+            String id,
+            int? maxCount,
+            int minCount,
+            List<String>? initialValues,
+            List<String> availibleValues,
+            List<String>? idsOfAvailibleValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
+            SelectInputUiSettings<String> uiSettings,
+            @JsonKey(toJson: QuizSettings.staticToJson)
+            QuizSettings? quizSettings)?
+        selectString,
+    TResult? Function(
+            String id,
+            String? initialValue,
+            bool isRequired,
+            String? regexPattern,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<String>? getCustomError,
+            @JsonKey(toJson: StringInputUiSettings.staticToJson)
+            StringInputUiSettings uiSettings)?
+        string,
+  }) {
+    return dateTime?.call(id, initialValue, isRequired, maxBound, minBound,
+        getCustomError, uiSettings);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String id,
+            bool? initialValue,
+            bool isRequired,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<bool>? getCustomError,
+            @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+            BooleanInputUiSettings uiSettings)?
+        boolean,
+    TResult Function(
+            String id,
+            DateTime? initialValue,
+            bool isRequired,
+            DateTime? maxBound,
+            DateTime? minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<DateTime>? getCustomError,
+            @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+            DateTimeInputUiSettings uiSettings)?
+        dateTime,
+    TResult Function(
+            String id,
+            num? initialValue,
+            bool isRequired,
+            int? maxBound,
+            int minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<num>? getCustomError,
+            NumInputUiSettings uiSettings)?
+        num,
+    TResult Function(
+            String id,
+            int? maxCount,
+            int minCount,
+            List<String>? initialValues,
+            List<String> availibleValues,
+            List<String>? idsOfAvailibleValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
+            SelectInputUiSettings<String> uiSettings,
+            @JsonKey(toJson: QuizSettings.staticToJson)
+            QuizSettings? quizSettings)?
+        selectString,
+    TResult Function(
+            String id,
+            String? initialValue,
+            bool isRequired,
+            String? regexPattern,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<String>? getCustomError,
+            @JsonKey(toJson: StringInputUiSettings.staticToJson)
+            StringInputUiSettings uiSettings)?
+        string,
+    required TResult orElse(),
+  }) {
+    if (dateTime != null) {
+      return dateTime(id, initialValue, isRequired, maxBound, minBound,
+          getCustomError, uiSettings);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BooleanInput value) boolean,
+    required TResult Function(DateTimeInput value) dateTime,
+    required TResult Function(NumInput value) num,
+    required TResult Function(SelectStringInput value) selectString,
+    required TResult Function(StringInput value) string,
+  }) {
+    return dateTime(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BooleanInput value)? boolean,
+    TResult? Function(DateTimeInput value)? dateTime,
+    TResult? Function(NumInput value)? num,
+    TResult? Function(SelectStringInput value)? selectString,
+    TResult? Function(StringInput value)? string,
+  }) {
+    return dateTime?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BooleanInput value)? boolean,
+    TResult Function(DateTimeInput value)? dateTime,
+    TResult Function(NumInput value)? num,
+    TResult Function(SelectStringInput value)? selectString,
+    TResult Function(StringInput value)? string,
+    required TResult orElse(),
+  }) {
+    if (dateTime != null) {
+      return dateTime(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$DateTimeInputImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class DateTimeInput extends WoFormInput {
+  const factory DateTimeInput(
+      {required final String id,
+      final DateTime? initialValue,
+      final bool isRequired,
+      final DateTime? maxBound,
+      final DateTime? minBound,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final GetCustomErrorDef<DateTime>? getCustomError,
+      @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+      final DateTimeInputUiSettings uiSettings}) = _$DateTimeInputImpl;
+  const DateTimeInput._() : super._();
+
+  factory DateTimeInput.fromJson(Map<String, dynamic> json) =
+      _$DateTimeInputImpl.fromJson;
+
+  @override
+  String get id;
+  DateTime? get initialValue;
+  bool get isRequired;
+  DateTime? get maxBound;
+  DateTime? get minBound;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  GetCustomErrorDef<DateTime>? get getCustomError;
+  @override
+  @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+  DateTimeInputUiSettings get uiSettings;
+
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DateTimeInputImplCopyWith<_$DateTimeInputImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1740,6 +2254,17 @@ class _$NumInputImpl extends NumInput {
         boolean,
     required TResult Function(
             String id,
+            DateTime? initialValue,
+            bool isRequired,
+            DateTime? maxBound,
+            DateTime? minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<DateTime>? getCustomError,
+            @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+            DateTimeInputUiSettings uiSettings)
+        dateTime,
+    required TResult Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -1789,6 +2314,17 @@ class _$NumInputImpl extends NumInput {
             @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
             BooleanInputUiSettings uiSettings)?
         boolean,
+    TResult? Function(
+            String id,
+            DateTime? initialValue,
+            bool isRequired,
+            DateTime? maxBound,
+            DateTime? minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<DateTime>? getCustomError,
+            @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+            DateTimeInputUiSettings uiSettings)?
+        dateTime,
     TResult? Function(
             String id,
             num? initialValue,
@@ -1842,6 +2378,17 @@ class _$NumInputImpl extends NumInput {
         boolean,
     TResult Function(
             String id,
+            DateTime? initialValue,
+            bool isRequired,
+            DateTime? maxBound,
+            DateTime? minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<DateTime>? getCustomError,
+            @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+            DateTimeInputUiSettings uiSettings)?
+        dateTime,
+    TResult Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -1887,6 +2434,7 @@ class _$NumInputImpl extends NumInput {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(BooleanInput value) boolean,
+    required TResult Function(DateTimeInput value) dateTime,
     required TResult Function(NumInput value) num,
     required TResult Function(SelectStringInput value) selectString,
     required TResult Function(StringInput value) string,
@@ -1898,6 +2446,7 @@ class _$NumInputImpl extends NumInput {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BooleanInput value)? boolean,
+    TResult? Function(DateTimeInput value)? dateTime,
     TResult? Function(NumInput value)? num,
     TResult? Function(SelectStringInput value)? selectString,
     TResult? Function(StringInput value)? string,
@@ -1909,6 +2458,7 @@ class _$NumInputImpl extends NumInput {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BooleanInput value)? boolean,
+    TResult Function(DateTimeInput value)? dateTime,
     TResult Function(NumInput value)? num,
     TResult Function(SelectStringInput value)? selectString,
     TResult Function(StringInput value)? string,
@@ -2233,6 +2783,17 @@ class _$SelectStringInputImpl extends SelectStringInput {
         boolean,
     required TResult Function(
             String id,
+            DateTime? initialValue,
+            bool isRequired,
+            DateTime? maxBound,
+            DateTime? minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<DateTime>? getCustomError,
+            @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+            DateTimeInputUiSettings uiSettings)
+        dateTime,
+    required TResult Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -2282,6 +2843,17 @@ class _$SelectStringInputImpl extends SelectStringInput {
             @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
             BooleanInputUiSettings uiSettings)?
         boolean,
+    TResult? Function(
+            String id,
+            DateTime? initialValue,
+            bool isRequired,
+            DateTime? maxBound,
+            DateTime? minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<DateTime>? getCustomError,
+            @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+            DateTimeInputUiSettings uiSettings)?
+        dateTime,
     TResult? Function(
             String id,
             num? initialValue,
@@ -2343,6 +2915,17 @@ class _$SelectStringInputImpl extends SelectStringInput {
         boolean,
     TResult Function(
             String id,
+            DateTime? initialValue,
+            bool isRequired,
+            DateTime? maxBound,
+            DateTime? minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<DateTime>? getCustomError,
+            @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+            DateTimeInputUiSettings uiSettings)?
+        dateTime,
+    TResult Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -2396,6 +2979,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(BooleanInput value) boolean,
+    required TResult Function(DateTimeInput value) dateTime,
     required TResult Function(NumInput value) num,
     required TResult Function(SelectStringInput value) selectString,
     required TResult Function(StringInput value) string,
@@ -2407,6 +2991,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BooleanInput value)? boolean,
+    TResult? Function(DateTimeInput value)? dateTime,
     TResult? Function(NumInput value)? num,
     TResult? Function(SelectStringInput value)? selectString,
     TResult? Function(StringInput value)? string,
@@ -2418,6 +3003,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BooleanInput value)? boolean,
+    TResult Function(DateTimeInput value)? dateTime,
     TResult Function(NumInput value)? num,
     TResult Function(SelectStringInput value)? selectString,
     TResult Function(StringInput value)? string,
@@ -2655,6 +3241,17 @@ class _$StringInputImpl extends StringInput {
         boolean,
     required TResult Function(
             String id,
+            DateTime? initialValue,
+            bool isRequired,
+            DateTime? maxBound,
+            DateTime? minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<DateTime>? getCustomError,
+            @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+            DateTimeInputUiSettings uiSettings)
+        dateTime,
+    required TResult Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -2704,6 +3301,17 @@ class _$StringInputImpl extends StringInput {
             @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
             BooleanInputUiSettings uiSettings)?
         boolean,
+    TResult? Function(
+            String id,
+            DateTime? initialValue,
+            bool isRequired,
+            DateTime? maxBound,
+            DateTime? minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<DateTime>? getCustomError,
+            @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+            DateTimeInputUiSettings uiSettings)?
+        dateTime,
     TResult? Function(
             String id,
             num? initialValue,
@@ -2757,6 +3365,17 @@ class _$StringInputImpl extends StringInput {
         boolean,
     TResult Function(
             String id,
+            DateTime? initialValue,
+            bool isRequired,
+            DateTime? maxBound,
+            DateTime? minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<DateTime>? getCustomError,
+            @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+            DateTimeInputUiSettings uiSettings)?
+        dateTime,
+    TResult Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -2802,6 +3421,7 @@ class _$StringInputImpl extends StringInput {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(BooleanInput value) boolean,
+    required TResult Function(DateTimeInput value) dateTime,
     required TResult Function(NumInput value) num,
     required TResult Function(SelectStringInput value) selectString,
     required TResult Function(StringInput value) string,
@@ -2813,6 +3433,7 @@ class _$StringInputImpl extends StringInput {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BooleanInput value)? boolean,
+    TResult? Function(DateTimeInput value)? dateTime,
     TResult? Function(NumInput value)? num,
     TResult? Function(SelectStringInput value)? selectString,
     TResult? Function(StringInput value)? string,
@@ -2824,6 +3445,7 @@ class _$StringInputImpl extends StringInput {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BooleanInput value)? boolean,
+    TResult Function(DateTimeInput value)? dateTime,
     TResult Function(NumInput value)? num,
     TResult Function(SelectStringInput value)? selectString,
     TResult Function(StringInput value)? string,
@@ -2899,6 +3521,15 @@ mixin _$SelectInput<T> {
       throw _privateConstructorUsedError;
   @JsonKey(toJson: QuizSettings.staticToJson)
   QuizSettings? get quizSettings => throw _privateConstructorUsedError;
+
+  /// The following fields are mostly usefull for hydrataion
+  ///
+  /// Ex :
+  /// SelectInput<TimeControl>(
+  ///   toJsonT: (value) => (value as TimeControl?)?.toJson(),
+  ///   fromJsonT: (json) =>
+  ///       TimeControl.fromJson(json as Map<String, dynamic>? ?? {}),
+  /// ),
   @JsonKey(includeToJson: false, includeFromJson: false)
   dynamic Function(dynamic)? get toJsonT => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
@@ -3224,6 +3855,15 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
   @override
   @JsonKey(toJson: QuizSettings.staticToJson)
   final QuizSettings? quizSettings;
+
+  /// The following fields are mostly usefull for hydrataion
+  ///
+  /// Ex :
+  /// SelectInput<TimeControl>(
+  ///   toJsonT: (value) => (value as TimeControl?)?.toJson(),
+  ///   fromJsonT: (json) =>
+  ///       TimeControl.fromJson(json as Map<String, dynamic>? ?? {}),
+  /// ),
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final dynamic Function(dynamic)? toJsonT;
@@ -3333,6 +3973,15 @@ abstract class _SelectInput<T> extends SelectInput<T> {
   @override
   @JsonKey(toJson: QuizSettings.staticToJson)
   QuizSettings? get quizSettings;
+
+  /// The following fields are mostly usefull for hydrataion
+  ///
+  /// Ex :
+  /// SelectInput<TimeControl>(
+  ///   toJsonT: (value) => (value as TimeControl?)?.toJson(),
+  ///   fromJsonT: (json) =>
+  ///       TimeControl.fromJson(json as Map<String, dynamic>? ?? {}),
+  /// ),
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   dynamic Function(dynamic)? get toJsonT;

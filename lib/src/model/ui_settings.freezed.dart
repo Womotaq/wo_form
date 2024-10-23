@@ -297,6 +297,242 @@ abstract class _BooleanInputUiSettings extends BooleanInputUiSettings {
       get copyWith => throw _privateConstructorUsedError;
 }
 
+DateTimeInputUiSettings _$DateTimeInputUiSettingsFromJson(
+    Map<String, dynamic> json) {
+  return _DateTimeInputUiSettings.fromJson(json);
+}
+
+/// @nodoc
+mixin _$DateTimeInputUiSettings {
+  String? get labelText => throw _privateConstructorUsedError;
+  String? get helperText => throw _privateConstructorUsedError;
+  DatePickerEntryMode? get initialEntryMode =>
+      throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  DateTimeFieldBuilderDef? get widgetBuilder =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this DateTimeInputUiSettings to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of DateTimeInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $DateTimeInputUiSettingsCopyWith<DateTimeInputUiSettings> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $DateTimeInputUiSettingsCopyWith<$Res> {
+  factory $DateTimeInputUiSettingsCopyWith(DateTimeInputUiSettings value,
+          $Res Function(DateTimeInputUiSettings) then) =
+      _$DateTimeInputUiSettingsCopyWithImpl<$Res, DateTimeInputUiSettings>;
+  @useResult
+  $Res call(
+      {String? labelText,
+      String? helperText,
+      DatePickerEntryMode? initialEntryMode,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      DateTimeFieldBuilderDef? widgetBuilder});
+}
+
+/// @nodoc
+class _$DateTimeInputUiSettingsCopyWithImpl<$Res,
+        $Val extends DateTimeInputUiSettings>
+    implements $DateTimeInputUiSettingsCopyWith<$Res> {
+  _$DateTimeInputUiSettingsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of DateTimeInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? labelText = freezed,
+    Object? helperText = freezed,
+    Object? initialEntryMode = freezed,
+    Object? widgetBuilder = freezed,
+  }) {
+    return _then(_value.copyWith(
+      labelText: freezed == labelText
+          ? _value.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _value.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      initialEntryMode: freezed == initialEntryMode
+          ? _value.initialEntryMode
+          : initialEntryMode // ignore: cast_nullable_to_non_nullable
+              as DatePickerEntryMode?,
+      widgetBuilder: freezed == widgetBuilder
+          ? _value.widgetBuilder
+          : widgetBuilder // ignore: cast_nullable_to_non_nullable
+              as DateTimeFieldBuilderDef?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$DateTimeInputUiSettingsImplCopyWith<$Res>
+    implements $DateTimeInputUiSettingsCopyWith<$Res> {
+  factory _$$DateTimeInputUiSettingsImplCopyWith(
+          _$DateTimeInputUiSettingsImpl value,
+          $Res Function(_$DateTimeInputUiSettingsImpl) then) =
+      __$$DateTimeInputUiSettingsImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String? labelText,
+      String? helperText,
+      DatePickerEntryMode? initialEntryMode,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      DateTimeFieldBuilderDef? widgetBuilder});
+}
+
+/// @nodoc
+class __$$DateTimeInputUiSettingsImplCopyWithImpl<$Res>
+    extends _$DateTimeInputUiSettingsCopyWithImpl<$Res,
+        _$DateTimeInputUiSettingsImpl>
+    implements _$$DateTimeInputUiSettingsImplCopyWith<$Res> {
+  __$$DateTimeInputUiSettingsImplCopyWithImpl(
+      _$DateTimeInputUiSettingsImpl _value,
+      $Res Function(_$DateTimeInputUiSettingsImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of DateTimeInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? labelText = freezed,
+    Object? helperText = freezed,
+    Object? initialEntryMode = freezed,
+    Object? widgetBuilder = freezed,
+  }) {
+    return _then(_$DateTimeInputUiSettingsImpl(
+      labelText: freezed == labelText
+          ? _value.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _value.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      initialEntryMode: freezed == initialEntryMode
+          ? _value.initialEntryMode
+          : initialEntryMode // ignore: cast_nullable_to_non_nullable
+              as DatePickerEntryMode?,
+      widgetBuilder: freezed == widgetBuilder
+          ? _value.widgetBuilder
+          : widgetBuilder // ignore: cast_nullable_to_non_nullable
+              as DateTimeFieldBuilderDef?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
+  const _$DateTimeInputUiSettingsImpl(
+      {this.labelText,
+      this.helperText,
+      this.initialEntryMode,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      this.widgetBuilder})
+      : super._();
+
+  factory _$DateTimeInputUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DateTimeInputUiSettingsImplFromJson(json);
+
+  @override
+  final String? labelText;
+  @override
+  final String? helperText;
+  @override
+  final DatePickerEntryMode? initialEntryMode;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final DateTimeFieldBuilderDef? widgetBuilder;
+
+  @override
+  String toString() {
+    return 'DateTimeInputUiSettings(labelText: $labelText, helperText: $helperText, initialEntryMode: $initialEntryMode, widgetBuilder: $widgetBuilder)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DateTimeInputUiSettingsImpl &&
+            (identical(other.labelText, labelText) ||
+                other.labelText == labelText) &&
+            (identical(other.helperText, helperText) ||
+                other.helperText == helperText) &&
+            (identical(other.initialEntryMode, initialEntryMode) ||
+                other.initialEntryMode == initialEntryMode) &&
+            (identical(other.widgetBuilder, widgetBuilder) ||
+                other.widgetBuilder == widgetBuilder));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, labelText, helperText, initialEntryMode, widgetBuilder);
+
+  /// Create a copy of DateTimeInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DateTimeInputUiSettingsImplCopyWith<_$DateTimeInputUiSettingsImpl>
+      get copyWith => __$$DateTimeInputUiSettingsImplCopyWithImpl<
+          _$DateTimeInputUiSettingsImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$DateTimeInputUiSettingsImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
+  const factory _DateTimeInputUiSettings(
+          {final String? labelText,
+          final String? helperText,
+          final DatePickerEntryMode? initialEntryMode,
+          @JsonKey(includeToJson: false, includeFromJson: false)
+          final DateTimeFieldBuilderDef? widgetBuilder}) =
+      _$DateTimeInputUiSettingsImpl;
+  const _DateTimeInputUiSettings._() : super._();
+
+  factory _DateTimeInputUiSettings.fromJson(Map<String, dynamic> json) =
+      _$DateTimeInputUiSettingsImpl.fromJson;
+
+  @override
+  String? get labelText;
+  @override
+  String? get helperText;
+  @override
+  DatePickerEntryMode? get initialEntryMode;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  DateTimeFieldBuilderDef? get widgetBuilder;
+
+  /// Create a copy of DateTimeInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DateTimeInputUiSettingsImplCopyWith<_$DateTimeInputUiSettingsImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
 DynamicInputsNodeUiSettings _$DynamicInputsNodeUiSettingsFromJson(
     Map<String, dynamic> json) {
   return _DynamicInputsNodeUiSettings.fromJson(json);

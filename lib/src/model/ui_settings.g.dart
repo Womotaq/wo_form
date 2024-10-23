@@ -38,6 +38,31 @@ const _$ListTileControlAffinityEnumMap = {
   ListTileControlAffinity.platform: 'platform',
 };
 
+_$DateTimeInputUiSettingsImpl _$$DateTimeInputUiSettingsImplFromJson(
+        Map<String, dynamic> json) =>
+    _$DateTimeInputUiSettingsImpl(
+      labelText: json['labelText'] as String?,
+      helperText: json['helperText'] as String?,
+      initialEntryMode: $enumDecodeNullable(
+          _$DatePickerEntryModeEnumMap, json['initialEntryMode']),
+    );
+
+Map<String, dynamic> _$$DateTimeInputUiSettingsImplToJson(
+        _$DateTimeInputUiSettingsImpl instance) =>
+    <String, dynamic>{
+      'labelText': instance.labelText,
+      'helperText': instance.helperText,
+      'initialEntryMode':
+          _$DatePickerEntryModeEnumMap[instance.initialEntryMode],
+    };
+
+const _$DatePickerEntryModeEnumMap = {
+  DatePickerEntryMode.calendar: 'calendar',
+  DatePickerEntryMode.input: 'input',
+  DatePickerEntryMode.calendarOnly: 'calendarOnly',
+  DatePickerEntryMode.inputOnly: 'inputOnly',
+};
+
 _$DynamicInputsNodeUiSettingsImpl _$$DynamicInputsNodeUiSettingsImplFromJson(
         Map<String, dynamic> json) =>
     _$DynamicInputsNodeUiSettingsImpl(
