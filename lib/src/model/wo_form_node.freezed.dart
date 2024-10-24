@@ -281,7 +281,8 @@ mixin _$WoFormNode {
     required TResult Function(
             String id,
             @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child)
+            @InputConverter() WoFormNodeMixin child,
+            bool conditionIsInitiallyMet)
         conditionnal,
     required TResult Function(
             String id,
@@ -340,7 +341,8 @@ mixin _$WoFormNode {
     TResult? Function(
             String id,
             @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child)?
+            @InputConverter() WoFormNodeMixin child,
+            bool conditionIsInitiallyMet)?
         conditionnal,
     TResult? Function(
             String id,
@@ -399,7 +401,8 @@ mixin _$WoFormNode {
     TResult Function(
             String id,
             @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child)?
+            @InputConverter() WoFormNodeMixin child,
+            bool conditionIsInitiallyMet)?
         conditionnal,
     TResult Function(
             String id,
@@ -548,7 +551,8 @@ abstract class _$$ConditionnalNodeImplCopyWith<$Res>
   $Res call(
       {String id,
       @JsonKey(toJson: Condition.staticToJson) Condition condition,
-      @InputConverter() WoFormNodeMixin child});
+      @InputConverter() WoFormNodeMixin child,
+      bool conditionIsInitiallyMet});
 
   $ConditionCopyWith<$Res> get condition;
 }
@@ -569,6 +573,7 @@ class __$$ConditionnalNodeImplCopyWithImpl<$Res>
     Object? id = null,
     Object? condition = null,
     Object? child = null,
+    Object? conditionIsInitiallyMet = null,
   }) {
     return _then(_$ConditionnalNodeImpl(
       id: null == id
@@ -583,6 +588,10 @@ class __$$ConditionnalNodeImplCopyWithImpl<$Res>
           ? _value.child
           : child // ignore: cast_nullable_to_non_nullable
               as WoFormNodeMixin,
+      conditionIsInitiallyMet: null == conditionIsInitiallyMet
+          ? _value.conditionIsInitiallyMet
+          : conditionIsInitiallyMet // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -604,6 +613,7 @@ class _$ConditionnalNodeImpl extends ConditionnalNode {
       {required this.id,
       @JsonKey(toJson: Condition.staticToJson) required this.condition,
       @InputConverter() required this.child,
+      this.conditionIsInitiallyMet = false,
       final String? $type})
       : $type = $type ?? 'conditionnal',
         super._();
@@ -619,13 +629,16 @@ class _$ConditionnalNodeImpl extends ConditionnalNode {
   @override
   @InputConverter()
   final WoFormNodeMixin child;
+  @override
+  @JsonKey()
+  final bool conditionIsInitiallyMet;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'WoFormNode.conditionnal(id: $id, condition: $condition, child: $child)';
+    return 'WoFormNode.conditionnal(id: $id, condition: $condition, child: $child, conditionIsInitiallyMet: $conditionIsInitiallyMet)';
   }
 
   @override
@@ -636,12 +649,16 @@ class _$ConditionnalNodeImpl extends ConditionnalNode {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.condition, condition) ||
                 other.condition == condition) &&
-            (identical(other.child, child) || other.child == child));
+            (identical(other.child, child) || other.child == child) &&
+            (identical(
+                    other.conditionIsInitiallyMet, conditionIsInitiallyMet) ||
+                other.conditionIsInitiallyMet == conditionIsInitiallyMet));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, condition, child);
+  int get hashCode =>
+      Object.hash(runtimeType, id, condition, child, conditionIsInitiallyMet);
 
   /// Create a copy of WoFormNode
   /// with the given fields replaced by the non-null parameter values.
@@ -658,7 +675,8 @@ class _$ConditionnalNodeImpl extends ConditionnalNode {
     required TResult Function(
             String id,
             @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child)
+            @InputConverter() WoFormNodeMixin child,
+            bool conditionIsInitiallyMet)
         conditionnal,
     required TResult Function(
             String id,
@@ -711,7 +729,7 @@ class _$ConditionnalNodeImpl extends ConditionnalNode {
             Widget Function(BuildContext)? builder)
         widget,
   }) {
-    return conditionnal(id, condition, child);
+    return conditionnal(id, condition, child, conditionIsInitiallyMet);
   }
 
   @override
@@ -720,7 +738,8 @@ class _$ConditionnalNodeImpl extends ConditionnalNode {
     TResult? Function(
             String id,
             @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child)?
+            @InputConverter() WoFormNodeMixin child,
+            bool conditionIsInitiallyMet)?
         conditionnal,
     TResult? Function(
             String id,
@@ -773,7 +792,7 @@ class _$ConditionnalNodeImpl extends ConditionnalNode {
             Widget Function(BuildContext)? builder)?
         widget,
   }) {
-    return conditionnal?.call(id, condition, child);
+    return conditionnal?.call(id, condition, child, conditionIsInitiallyMet);
   }
 
   @override
@@ -782,7 +801,8 @@ class _$ConditionnalNodeImpl extends ConditionnalNode {
     TResult Function(
             String id,
             @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child)?
+            @InputConverter() WoFormNodeMixin child,
+            bool conditionIsInitiallyMet)?
         conditionnal,
     TResult Function(
             String id,
@@ -837,7 +857,7 @@ class _$ConditionnalNodeImpl extends ConditionnalNode {
     required TResult orElse(),
   }) {
     if (conditionnal != null) {
-      return conditionnal(id, condition, child);
+      return conditionnal(id, condition, child, conditionIsInitiallyMet);
     }
     return orElse();
   }
@@ -901,11 +921,11 @@ class _$ConditionnalNodeImpl extends ConditionnalNode {
 
 abstract class ConditionnalNode extends WoFormNode {
   const factory ConditionnalNode(
-          {required final String id,
-          @JsonKey(toJson: Condition.staticToJson)
-          required final Condition condition,
-          @InputConverter() required final WoFormNodeMixin child}) =
-      _$ConditionnalNodeImpl;
+      {required final String id,
+      @JsonKey(toJson: Condition.staticToJson)
+      required final Condition condition,
+      @InputConverter() required final WoFormNodeMixin child,
+      final bool conditionIsInitiallyMet}) = _$ConditionnalNodeImpl;
   const ConditionnalNode._() : super._();
 
   factory ConditionnalNode.fromJson(Map<String, dynamic> json) =
@@ -917,6 +937,7 @@ abstract class ConditionnalNode extends WoFormNode {
   Condition get condition;
   @InputConverter()
   WoFormNodeMixin get child;
+  bool get conditionIsInitiallyMet;
 
   /// Create a copy of WoFormNode
   /// with the given fields replaced by the non-null parameter values.
@@ -1112,7 +1133,8 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
     required TResult Function(
             String id,
             @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child)
+            @InputConverter() WoFormNodeMixin child,
+            bool conditionIsInitiallyMet)
         conditionnal,
     required TResult Function(
             String id,
@@ -1175,7 +1197,8 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
     TResult? Function(
             String id,
             @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child)?
+            @InputConverter() WoFormNodeMixin child,
+            bool conditionIsInitiallyMet)?
         conditionnal,
     TResult? Function(
             String id,
@@ -1238,7 +1261,8 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
     TResult Function(
             String id,
             @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child)?
+            @InputConverter() WoFormNodeMixin child,
+            bool conditionIsInitiallyMet)?
         conditionnal,
     TResult Function(
             String id,
@@ -1550,7 +1574,8 @@ class _$InputsNodeImpl extends InputsNode {
     required TResult Function(
             String id,
             @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child)
+            @InputConverter() WoFormNodeMixin child,
+            bool conditionIsInitiallyMet)
         conditionnal,
     required TResult Function(
             String id,
@@ -1612,7 +1637,8 @@ class _$InputsNodeImpl extends InputsNode {
     TResult? Function(
             String id,
             @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child)?
+            @InputConverter() WoFormNodeMixin child,
+            bool conditionIsInitiallyMet)?
         conditionnal,
     TResult? Function(
             String id,
@@ -1674,7 +1700,8 @@ class _$InputsNodeImpl extends InputsNode {
     TResult Function(
             String id,
             @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child)?
+            @InputConverter() WoFormNodeMixin child,
+            bool conditionIsInitiallyMet)?
         conditionnal,
     TResult Function(
             String id,
@@ -1920,7 +1947,8 @@ class _$PathBuilderNodeImpl extends PathBuilderNode {
     required TResult Function(
             String id,
             @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child)
+            @InputConverter() WoFormNodeMixin child,
+            bool conditionIsInitiallyMet)
         conditionnal,
     required TResult Function(
             String id,
@@ -1982,7 +2010,8 @@ class _$PathBuilderNodeImpl extends PathBuilderNode {
     TResult? Function(
             String id,
             @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child)?
+            @InputConverter() WoFormNodeMixin child,
+            bool conditionIsInitiallyMet)?
         conditionnal,
     TResult? Function(
             String id,
@@ -2044,7 +2073,8 @@ class _$PathBuilderNodeImpl extends PathBuilderNode {
     TResult Function(
             String id,
             @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child)?
+            @InputConverter() WoFormNodeMixin child,
+            bool conditionIsInitiallyMet)?
         conditionnal,
     TResult Function(
             String id,
@@ -2303,7 +2333,8 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
     required TResult Function(
             String id,
             @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child)
+            @InputConverter() WoFormNodeMixin child,
+            bool conditionIsInitiallyMet)
         conditionnal,
     required TResult Function(
             String id,
@@ -2365,7 +2396,8 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
     TResult? Function(
             String id,
             @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child)?
+            @InputConverter() WoFormNodeMixin child,
+            bool conditionIsInitiallyMet)?
         conditionnal,
     TResult? Function(
             String id,
@@ -2427,7 +2459,8 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
     TResult Function(
             String id,
             @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child)?
+            @InputConverter() WoFormNodeMixin child,
+            bool conditionIsInitiallyMet)?
         conditionnal,
     TResult Function(
             String id,
@@ -2711,7 +2744,8 @@ class _$ValuesBuilderNodeImpl extends ValuesBuilderNode {
     required TResult Function(
             String id,
             @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child)
+            @InputConverter() WoFormNodeMixin child,
+            bool conditionIsInitiallyMet)
         conditionnal,
     required TResult Function(
             String id,
@@ -2773,7 +2807,8 @@ class _$ValuesBuilderNodeImpl extends ValuesBuilderNode {
     TResult? Function(
             String id,
             @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child)?
+            @InputConverter() WoFormNodeMixin child,
+            bool conditionIsInitiallyMet)?
         conditionnal,
     TResult? Function(
             String id,
@@ -2835,7 +2870,8 @@ class _$ValuesBuilderNodeImpl extends ValuesBuilderNode {
     TResult Function(
             String id,
             @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child)?
+            @InputConverter() WoFormNodeMixin child,
+            bool conditionIsInitiallyMet)?
         conditionnal,
     TResult Function(
             String id,
@@ -3103,7 +3139,8 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
     required TResult Function(
             String id,
             @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child)
+            @InputConverter() WoFormNodeMixin child,
+            bool conditionIsInitiallyMet)
         conditionnal,
     required TResult Function(
             String id,
@@ -3165,7 +3202,8 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
     TResult? Function(
             String id,
             @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child)?
+            @InputConverter() WoFormNodeMixin child,
+            bool conditionIsInitiallyMet)?
         conditionnal,
     TResult? Function(
             String id,
@@ -3227,7 +3265,8 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
     TResult Function(
             String id,
             @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child)?
+            @InputConverter() WoFormNodeMixin child,
+            bool conditionIsInitiallyMet)?
         conditionnal,
     TResult Function(
             String id,
@@ -3472,7 +3511,8 @@ class _$WidgetNodeImpl extends WidgetNode {
     required TResult Function(
             String id,
             @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child)
+            @InputConverter() WoFormNodeMixin child,
+            bool conditionIsInitiallyMet)
         conditionnal,
     required TResult Function(
             String id,
@@ -3534,7 +3574,8 @@ class _$WidgetNodeImpl extends WidgetNode {
     TResult? Function(
             String id,
             @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child)?
+            @InputConverter() WoFormNodeMixin child,
+            bool conditionIsInitiallyMet)?
         conditionnal,
     TResult? Function(
             String id,
@@ -3596,7 +3637,8 @@ class _$WidgetNodeImpl extends WidgetNode {
     TResult Function(
             String id,
             @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child)?
+            @InputConverter() WoFormNodeMixin child,
+            bool conditionIsInitiallyMet)?
         conditionnal,
     TResult Function(
             String id,

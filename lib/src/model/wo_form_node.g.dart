@@ -37,6 +37,8 @@ _$ConditionnalNodeImpl _$$ConditionnalNodeImplFromJson(
       condition: Condition.fromJson(json['condition'] as Map<String, dynamic>),
       child: const InputConverter()
           .fromJson(json['child'] as Map<String, dynamic>),
+      conditionIsInitiallyMet:
+          json['conditionIsInitiallyMet'] as bool? ?? false,
       $type: json['runtimeType'] as String?,
     );
 
@@ -46,6 +48,7 @@ Map<String, dynamic> _$$ConditionnalNodeImplToJson(
       'id': instance.id,
       'condition': Condition.staticToJson(instance.condition),
       'child': const InputConverter().toJson(instance.child),
+      'conditionIsInitiallyMet': instance.conditionIsInitiallyMet,
       'runtimeType': instance.$type,
     };
 

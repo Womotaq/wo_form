@@ -125,6 +125,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
     required String id,
     @JsonKey(toJson: Condition.staticToJson) required Condition condition,
     @InputConverter() required WoFormNodeMixin child,
+    @Default(false) bool conditionIsInitiallyMet,
   }) = ConditionnalNode;
 
   const factory WoFormNode.dynamicInputs({
@@ -579,8 +580,11 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
   @override
   Map<String, dynamic> getInitialValues({required String parentPath}) {
     switch (this) {
-      case ConditionnalNode(condition: final condition, child: final child):
-        if (!<String, dynamic>{}.meet(condition)) return {};
+      case ConditionnalNode(
+          conditionIsInitiallyMet: final conditionIsInitiallyMet,
+          child: final child,
+        ):
+        if (!conditionIsInitiallyMet) return {};
 
         return child.getInitialValues(parentPath: '$parentPath/$id');
       case DynamicInputsNode(initialChildren: final initialChildren):
