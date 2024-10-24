@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
@@ -364,7 +365,7 @@ class WoForm extends StatelessWidget {
     this.onSubmitting,
     this.onSubmitError,
     this.onSubmitSuccess,
-    this.initialStatus = const InitialStatus(),
+    this.showInitialErrors = false,
     this.pageBuilder,
     this.hydratationId = '',
     this.rootKey,
@@ -381,7 +382,7 @@ class WoForm extends StatelessWidget {
     this.onSubmitting,
     this.onSubmitError,
     this.onSubmitSuccess,
-    this.initialStatus = const InitialStatus(),
+    this.showInitialErrors = false,
     this.pageBuilder,
     this.hydratationId = '',
     this.rootKey,
@@ -393,7 +394,7 @@ class WoForm extends StatelessWidget {
   final Future<void> Function(RootNode root, WoFormValues values)? onSubmitting;
   final OnSubmitErrorDef? onSubmitError;
   final void Function(BuildContext context)? onSubmitSuccess;
-  final WoFormStatus initialStatus;
+  final bool showInitialErrors;
   final WidgetBuilderDef? pageBuilder;
 
   /// If not empty, this form will be locally persistent, using HydratedCubit.
@@ -410,8 +411,13 @@ class WoForm extends StatelessWidget {
         providers: [
           BlocProvider(
             create: (context) => hydratationId.isEmpty
-                ? WoFormStatusCubit._(initialStatus)
-                : HydratedWoFormStatusCubit._(hydratationId, initialStatus),
+                ? WoFormStatusCubit._(
+                    const InProgressStatus(),
+                  )
+                : HydratedWoFormStatusCubit._(
+                    hydratationId,
+                    const InProgressStatus(),
+                  ),
           ),
           BlocProvider(
             create: (context) => hydratationId.isEmpty
@@ -419,22 +425,32 @@ class WoForm extends StatelessWidget {
                 : HydratedWoFormLockCubit._(hydratationId),
           ),
           BlocProvider(
-            create: (context) => hydratationId.isEmpty
-                ? WoFormValuesCubit._(
-                    context.read(),
-                    context.read(),
-                    context.read(),
-                    canSubmit ?? (_) async => true,
-                    onSubmitting: onSubmitting,
-                  )
-                : HydratedWoFormValuesCubit._(
-                    hydratationId,
-                    context.read(),
-                    context.read(),
-                    context.read(),
-                    canSubmit ?? (_) async => true,
-                    onSubmitting: onSubmitting,
-                  ),
+            create: (context) {
+              final cubit = hydratationId.isEmpty
+                  ? WoFormValuesCubit._(
+                      context.read(),
+                      context.read(),
+                      context.read(),
+                      canSubmit ?? (_) async => true,
+                      onSubmitting: onSubmitting,
+                    )
+                  : HydratedWoFormValuesCubit._(
+                      hydratationId,
+                      context.read(),
+                      context.read(),
+                      context.read(),
+                      canSubmit ?? (_) async => true,
+                      onSubmitting: onSubmitting,
+                    );
+              if (showInitialErrors) {
+                SchedulerBinding.instance.addPostFrameCallback((_) {
+                  cubit
+                    .._pathsAreVisited(paths: cubit.state.keys)
+                    .._updateErrors();
+                });
+              }
+              return cubit;
+            },
           ),
         ],
         child: BlocListener<WoFormStatusCubit, WoFormStatus>(

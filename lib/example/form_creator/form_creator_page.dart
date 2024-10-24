@@ -16,7 +16,7 @@ class FormCreatorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WoForm(
-      initialStatus: const InProgressStatus(),
+      showInitialErrors: true,
       children: [
         const InputsNode(
           id: 'uiSettings',
