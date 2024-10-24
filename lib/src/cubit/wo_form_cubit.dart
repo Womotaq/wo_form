@@ -195,17 +195,17 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
       );
 
   Iterable<String> get _visitedPaths =>
-      state['__wo_reserved_visited_paths'] as Iterable<String>? ?? {};
+      state['/__wo_reserved_visited_paths'] as Iterable<String>? ?? {};
 
   /// Marks the node at this path as visited by the user.
   /// Before submission, only visited nodes show errors.
   void markPathAsVisited({required String path}) {
     final newMap = Map<String, dynamic>.from(state);
     final visitedPaths = Set<String>.from(
-      newMap['__wo_reserved_visited_paths'] as Iterable<String>? ?? {},
+      newMap['/__wo_reserved_visited_paths'] as Iterable<String>? ?? {},
     );
     if (visitedPaths.add(path)) {
-      newMap['__wo_reserved_visited_paths'] = visitedPaths;
+      newMap['/__wo_reserved_visited_paths'] = visitedPaths;
       emit(newMap);
       _updateErrors();
     }
@@ -216,10 +216,10 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   void markPathsAsVisited({required Iterable<String> paths}) {
     final newMap = Map<String, dynamic>.from(state);
     final visitedPaths = Set<String>.from(
-      newMap['__wo_reserved_visited_paths'] as Iterable<String>? ?? {},
+      newMap['/__wo_reserved_visited_paths'] as Iterable<String>? ?? {},
     )..addAll(paths);
     // Do not store a set in values, or the hydratation won't work
-    newMap['__wo_reserved_visited_paths'] = visitedPaths.toList();
+    newMap['/__wo_reserved_visited_paths'] = visitedPaths.toList();
     emit(newMap);
   }
 
@@ -420,11 +420,11 @@ class WoForm extends StatelessWidget {
           BlocProvider(
             create: (context) => hydratationId.isEmpty
                 ? WoFormStatusCubit._(
-                    const InProgressStatus(),
+                    const InitialStatus(),
                   )
                 : HydratedWoFormStatusCubit._(
                     hydratationId,
-                    const InProgressStatus(),
+                    const InitialStatus(),
                   ),
           ),
           BlocProvider(
