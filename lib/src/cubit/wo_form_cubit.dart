@@ -362,6 +362,7 @@ class WoForm extends StatelessWidget {
     this.initialStatus = const InitialStatus(),
     this.pageBuilder,
     this.hydratationId = '',
+    this.rootKey,
     super.key,
   }) : root = RootNode(
           exportSettings: exportSettings ?? const ExportSettings(),
@@ -378,6 +379,7 @@ class WoForm extends StatelessWidget {
     this.initialStatus = const InitialStatus(),
     this.pageBuilder,
     this.hydratationId = '',
+    this.rootKey,
     super.key,
   });
 
@@ -391,6 +393,7 @@ class WoForm extends StatelessWidget {
 
   /// If not empty, this form will be locally persistent, using HydratedCubit.
   final String hydratationId;
+  final RootKey? rootKey;
 
   @override
   Widget build(BuildContext context) {
@@ -441,10 +444,20 @@ class WoForm extends StatelessWidget {
             }
           },
           child: pageBuilder == null
-              ? root.toWidget()
-              : Builder(builder: pageBuilder!),
+              ? root.toWidget(key: rootKey)
+              : Builder(key: rootKey, builder: pageBuilder!),
         ),
       ),
     );
   }
+}
+
+class RootKey<T extends State<StatefulWidget>> extends GlobalKey<T> {
+  // ignore: prefer_const_constructors_in_immutables , never use const for this class
+  RootKey() : super.constructor();
+
+  @override
+  String toString() => 'WoFormRootKey()';
+
+  WoFormValues? get values => currentContext?.read<WoFormValuesCubit>().state;
 }
