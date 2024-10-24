@@ -139,6 +139,10 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     @Default(0) int minBound,
     @JsonKey(includeToJson: false, includeFromJson: false)
     GetCustomErrorDef<num>? getCustomError,
+
+    /// An optionnal callback when the value changed
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    void Function(num? value)? onValueChanged,
     @Default(NumInputUiSettings()) NumInputUiSettings uiSettings,
   }) = NumInput;
 
@@ -161,6 +165,10 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     List<String>? idsOfAvailibleValues,
     @JsonKey(includeToJson: false, includeFromJson: false)
     GetCustomErrorForListDef<String>? getCustomError,
+
+    /// An optionnal callback when the value changed
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    void Function(List<String>? value)? onValueChanged,
     @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
     @Default(SelectInputUiSettings<String>())
     SelectInputUiSettings<String> uiSettings,
@@ -394,6 +402,10 @@ class SelectInput<T> with _$SelectInput<T>, WoFormNodeMixin, WoFormInputMixin {
     // If set, the object stored at the path of this input in WoFormValuesCubit
     // will be the id of the selected value.
     List<String>? idsOfAvailibleValues,
+
+    /// An optionnal callback when the value changed
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    void Function(List<T>? value)? onValueChanged,
     @JsonKey(includeToJson: false, includeFromJson: false)
     GetCustomErrorForListDef<T>? getCustomError,
     SelectInputUiSettings<T>? uiSettings,

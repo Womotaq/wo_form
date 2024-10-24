@@ -1003,6 +1003,8 @@ mixin _$WoFormInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<num>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(num?)? onValueChanged,
             NumInputUiSettings uiSettings)
         num,
     required TResult Function(
@@ -1014,6 +1016,8 @@ mixin _$WoFormInput {
             List<String>? idsOfAvailibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<String>?)? onValueChanged,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -1061,6 +1065,8 @@ mixin _$WoFormInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<num>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(num?)? onValueChanged,
             NumInputUiSettings uiSettings)?
         num,
     TResult? Function(
@@ -1072,6 +1078,8 @@ mixin _$WoFormInput {
             List<String>? idsOfAvailibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<String>?)? onValueChanged,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -1119,6 +1127,8 @@ mixin _$WoFormInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<num>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(num?)? onValueChanged,
             NumInputUiSettings uiSettings)?
         num,
     TResult Function(
@@ -1130,6 +1140,8 @@ mixin _$WoFormInput {
             List<String>? idsOfAvailibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<String>?)? onValueChanged,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -1396,6 +1408,8 @@ class _$BooleanInputImpl extends BooleanInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<num>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(num?)? onValueChanged,
             NumInputUiSettings uiSettings)
         num,
     required TResult Function(
@@ -1407,6 +1421,8 @@ class _$BooleanInputImpl extends BooleanInput {
             List<String>? idsOfAvailibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<String>?)? onValueChanged,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -1457,6 +1473,8 @@ class _$BooleanInputImpl extends BooleanInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<num>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(num?)? onValueChanged,
             NumInputUiSettings uiSettings)?
         num,
     TResult? Function(
@@ -1468,6 +1486,8 @@ class _$BooleanInputImpl extends BooleanInput {
             List<String>? idsOfAvailibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<String>?)? onValueChanged,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -1519,6 +1539,8 @@ class _$BooleanInputImpl extends BooleanInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<num>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(num?)? onValueChanged,
             NumInputUiSettings uiSettings)?
         num,
     TResult Function(
@@ -1530,6 +1552,8 @@ class _$BooleanInputImpl extends BooleanInput {
             List<String>? idsOfAvailibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<String>?)? onValueChanged,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -1830,6 +1854,8 @@ class _$DateTimeInputImpl extends DateTimeInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<num>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(num?)? onValueChanged,
             NumInputUiSettings uiSettings)
         num,
     required TResult Function(
@@ -1841,6 +1867,8 @@ class _$DateTimeInputImpl extends DateTimeInput {
             List<String>? idsOfAvailibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<String>?)? onValueChanged,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -1892,6 +1920,8 @@ class _$DateTimeInputImpl extends DateTimeInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<num>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(num?)? onValueChanged,
             NumInputUiSettings uiSettings)?
         num,
     TResult? Function(
@@ -1903,6 +1933,8 @@ class _$DateTimeInputImpl extends DateTimeInput {
             List<String>? idsOfAvailibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<String>?)? onValueChanged,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -1954,6 +1986,8 @@ class _$DateTimeInputImpl extends DateTimeInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<num>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(num?)? onValueChanged,
             NumInputUiSettings uiSettings)?
         num,
     TResult Function(
@@ -1965,6 +1999,8 @@ class _$DateTimeInputImpl extends DateTimeInput {
             List<String>? idsOfAvailibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<String>?)? onValueChanged,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -2090,6 +2126,8 @@ abstract class _$$NumInputImplCopyWith<$Res>
       int minBound,
       @JsonKey(includeToJson: false, includeFromJson: false)
       GetCustomErrorDef<num>? getCustomError,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      void Function(num?)? onValueChanged,
       NumInputUiSettings uiSettings});
 
   $NumInputUiSettingsCopyWith<$Res> get uiSettings;
@@ -2114,6 +2152,7 @@ class __$$NumInputImplCopyWithImpl<$Res>
     Object? maxBound = freezed,
     Object? minBound = null,
     Object? getCustomError = freezed,
+    Object? onValueChanged = freezed,
     Object? uiSettings = null,
   }) {
     return _then(_$NumInputImpl(
@@ -2141,6 +2180,10 @@ class __$$NumInputImplCopyWithImpl<$Res>
           ? _value.getCustomError
           : getCustomError // ignore: cast_nullable_to_non_nullable
               as GetCustomErrorDef<num>?,
+      onValueChanged: freezed == onValueChanged
+          ? _value.onValueChanged
+          : onValueChanged // ignore: cast_nullable_to_non_nullable
+              as void Function(num?)?,
       uiSettings: null == uiSettings
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
@@ -2170,6 +2213,8 @@ class _$NumInputImpl extends NumInput {
       this.minBound = 0,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.getCustomError,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      this.onValueChanged,
       this.uiSettings = const NumInputUiSettings(),
       final String? $type})
       : assert(maxBound == null || minBound <= maxBound,
@@ -2195,6 +2240,11 @@ class _$NumInputImpl extends NumInput {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final GetCustomErrorDef<num>? getCustomError;
+
+  /// An optionnal callback when the value changed
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final void Function(num?)? onValueChanged;
   @override
   @JsonKey()
   final NumInputUiSettings uiSettings;
@@ -2204,7 +2254,7 @@ class _$NumInputImpl extends NumInput {
 
   @override
   String toString() {
-    return 'WoFormInput.num(id: $id, initialValue: $initialValue, isRequired: $isRequired, maxBound: $maxBound, minBound: $minBound, getCustomError: $getCustomError, uiSettings: $uiSettings)';
+    return 'WoFormInput.num(id: $id, initialValue: $initialValue, isRequired: $isRequired, maxBound: $maxBound, minBound: $minBound, getCustomError: $getCustomError, onValueChanged: $onValueChanged, uiSettings: $uiSettings)';
   }
 
   @override
@@ -2223,6 +2273,8 @@ class _$NumInputImpl extends NumInput {
                 other.minBound == minBound) &&
             (identical(other.getCustomError, getCustomError) ||
                 other.getCustomError == getCustomError) &&
+            (identical(other.onValueChanged, onValueChanged) ||
+                other.onValueChanged == onValueChanged) &&
             (identical(other.uiSettings, uiSettings) ||
                 other.uiSettings == uiSettings));
   }
@@ -2230,7 +2282,7 @@ class _$NumInputImpl extends NumInput {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, initialValue, isRequired,
-      maxBound, minBound, getCustomError, uiSettings);
+      maxBound, minBound, getCustomError, onValueChanged, uiSettings);
 
   /// Create a copy of WoFormInput
   /// with the given fields replaced by the non-null parameter values.
@@ -2271,6 +2323,8 @@ class _$NumInputImpl extends NumInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<num>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(num?)? onValueChanged,
             NumInputUiSettings uiSettings)
         num,
     required TResult Function(
@@ -2282,6 +2336,8 @@ class _$NumInputImpl extends NumInput {
             List<String>? idsOfAvailibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<String>?)? onValueChanged,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -2299,7 +2355,7 @@ class _$NumInputImpl extends NumInput {
         string,
   }) {
     return num(id, initialValue, isRequired, maxBound, minBound, getCustomError,
-        uiSettings);
+        onValueChanged, uiSettings);
   }
 
   @override
@@ -2333,6 +2389,8 @@ class _$NumInputImpl extends NumInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<num>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(num?)? onValueChanged,
             NumInputUiSettings uiSettings)?
         num,
     TResult? Function(
@@ -2344,6 +2402,8 @@ class _$NumInputImpl extends NumInput {
             List<String>? idsOfAvailibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<String>?)? onValueChanged,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -2361,7 +2421,7 @@ class _$NumInputImpl extends NumInput {
         string,
   }) {
     return num?.call(id, initialValue, isRequired, maxBound, minBound,
-        getCustomError, uiSettings);
+        getCustomError, onValueChanged, uiSettings);
   }
 
   @override
@@ -2395,6 +2455,8 @@ class _$NumInputImpl extends NumInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<num>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(num?)? onValueChanged,
             NumInputUiSettings uiSettings)?
         num,
     TResult Function(
@@ -2406,6 +2468,8 @@ class _$NumInputImpl extends NumInput {
             List<String>? idsOfAvailibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<String>?)? onValueChanged,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -2425,7 +2489,7 @@ class _$NumInputImpl extends NumInput {
   }) {
     if (num != null) {
       return num(id, initialValue, isRequired, maxBound, minBound,
-          getCustomError, uiSettings);
+          getCustomError, onValueChanged, uiSettings);
     }
     return orElse();
   }
@@ -2487,6 +2551,8 @@ abstract class NumInput extends WoFormInput {
       final int minBound,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final GetCustomErrorDef<num>? getCustomError,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final void Function(num?)? onValueChanged,
       final NumInputUiSettings uiSettings}) = _$NumInputImpl;
   const NumInput._() : super._();
 
@@ -2502,6 +2568,10 @@ abstract class NumInput extends WoFormInput {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   GetCustomErrorDef<num>? get getCustomError;
+
+  /// An optionnal callback when the value changed
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  void Function(num?)? get onValueChanged;
   @override
   NumInputUiSettings get uiSettings;
 
@@ -2530,6 +2600,8 @@ abstract class _$$SelectStringInputImplCopyWith<$Res>
       List<String>? idsOfAvailibleValues,
       @JsonKey(includeToJson: false, includeFromJson: false)
       GetCustomErrorForListDef<String>? getCustomError,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      void Function(List<String>?)? onValueChanged,
       @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
       SelectInputUiSettings<String> uiSettings,
       @JsonKey(toJson: QuizSettings.staticToJson) QuizSettings? quizSettings});
@@ -2558,6 +2630,7 @@ class __$$SelectStringInputImplCopyWithImpl<$Res>
     Object? availibleValues = null,
     Object? idsOfAvailibleValues = freezed,
     Object? getCustomError = freezed,
+    Object? onValueChanged = freezed,
     Object? uiSettings = null,
     Object? quizSettings = freezed,
   }) {
@@ -2590,6 +2663,10 @@ class __$$SelectStringInputImplCopyWithImpl<$Res>
           ? _value.getCustomError
           : getCustomError // ignore: cast_nullable_to_non_nullable
               as GetCustomErrorForListDef<String>?,
+      onValueChanged: freezed == onValueChanged
+          ? _value.onValueChanged
+          : onValueChanged // ignore: cast_nullable_to_non_nullable
+              as void Function(List<String>?)?,
       uiSettings: null == uiSettings
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
@@ -2639,6 +2716,8 @@ class _$SelectStringInputImpl extends SelectStringInput {
       final List<String>? idsOfAvailibleValues,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.getCustomError,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      this.onValueChanged,
       @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
       this.uiSettings = const SelectInputUiSettings<String>(),
       @JsonKey(toJson: QuizSettings.staticToJson) this.quizSettings,
@@ -2706,6 +2785,11 @@ class _$SelectStringInputImpl extends SelectStringInput {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final GetCustomErrorForListDef<String>? getCustomError;
+
+  /// An optionnal callback when the value changed
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final void Function(List<String>?)? onValueChanged;
   @override
   @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
   final SelectInputUiSettings<String> uiSettings;
@@ -2719,7 +2803,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
 
   @override
   String toString() {
-    return 'WoFormInput.selectString(id: $id, maxCount: $maxCount, minCount: $minCount, initialValues: $initialValues, availibleValues: $availibleValues, idsOfAvailibleValues: $idsOfAvailibleValues, getCustomError: $getCustomError, uiSettings: $uiSettings, quizSettings: $quizSettings)';
+    return 'WoFormInput.selectString(id: $id, maxCount: $maxCount, minCount: $minCount, initialValues: $initialValues, availibleValues: $availibleValues, idsOfAvailibleValues: $idsOfAvailibleValues, getCustomError: $getCustomError, onValueChanged: $onValueChanged, uiSettings: $uiSettings, quizSettings: $quizSettings)';
   }
 
   @override
@@ -2740,6 +2824,8 @@ class _$SelectStringInputImpl extends SelectStringInput {
                 .equals(other._idsOfAvailibleValues, _idsOfAvailibleValues) &&
             (identical(other.getCustomError, getCustomError) ||
                 other.getCustomError == getCustomError) &&
+            (identical(other.onValueChanged, onValueChanged) ||
+                other.onValueChanged == onValueChanged) &&
             (identical(other.uiSettings, uiSettings) ||
                 other.uiSettings == uiSettings) &&
             (identical(other.quizSettings, quizSettings) ||
@@ -2757,6 +2843,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
       const DeepCollectionEquality().hash(_availibleValues),
       const DeepCollectionEquality().hash(_idsOfAvailibleValues),
       getCustomError,
+      onValueChanged,
       uiSettings,
       quizSettings);
 
@@ -2800,6 +2887,8 @@ class _$SelectStringInputImpl extends SelectStringInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<num>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(num?)? onValueChanged,
             NumInputUiSettings uiSettings)
         num,
     required TResult Function(
@@ -2811,6 +2900,8 @@ class _$SelectStringInputImpl extends SelectStringInput {
             List<String>? idsOfAvailibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<String>?)? onValueChanged,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -2827,8 +2918,17 @@ class _$SelectStringInputImpl extends SelectStringInput {
             StringInputUiSettings uiSettings)
         string,
   }) {
-    return selectString(id, maxCount, minCount, initialValues, availibleValues,
-        idsOfAvailibleValues, getCustomError, uiSettings, quizSettings);
+    return selectString(
+        id,
+        maxCount,
+        minCount,
+        initialValues,
+        availibleValues,
+        idsOfAvailibleValues,
+        getCustomError,
+        onValueChanged,
+        uiSettings,
+        quizSettings);
   }
 
   @override
@@ -2862,6 +2962,8 @@ class _$SelectStringInputImpl extends SelectStringInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<num>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(num?)? onValueChanged,
             NumInputUiSettings uiSettings)?
         num,
     TResult? Function(
@@ -2873,6 +2975,8 @@ class _$SelectStringInputImpl extends SelectStringInput {
             List<String>? idsOfAvailibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<String>?)? onValueChanged,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -2897,6 +3001,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
         availibleValues,
         idsOfAvailibleValues,
         getCustomError,
+        onValueChanged,
         uiSettings,
         quizSettings);
   }
@@ -2932,6 +3037,8 @@ class _$SelectStringInputImpl extends SelectStringInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<num>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(num?)? onValueChanged,
             NumInputUiSettings uiSettings)?
         num,
     TResult Function(
@@ -2943,6 +3050,8 @@ class _$SelectStringInputImpl extends SelectStringInput {
             List<String>? idsOfAvailibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<String>?)? onValueChanged,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -2969,6 +3078,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
           availibleValues,
           idsOfAvailibleValues,
           getCustomError,
+          onValueChanged,
           uiSettings,
           quizSettings);
     }
@@ -3033,6 +3143,8 @@ abstract class SelectStringInput extends WoFormInput {
       final List<String>? idsOfAvailibleValues,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final GetCustomErrorForListDef<String>? getCustomError,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final void Function(List<String>?)? onValueChanged,
       @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
       final SelectInputUiSettings<String> uiSettings,
       @JsonKey(toJson: QuizSettings.staticToJson)
@@ -3058,6 +3170,10 @@ abstract class SelectStringInput extends WoFormInput {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   GetCustomErrorForListDef<String>? get getCustomError;
+
+  /// An optionnal callback when the value changed
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  void Function(List<String>?)? get onValueChanged;
   @override
   @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
   SelectInputUiSettings<String>
@@ -3258,6 +3374,8 @@ class _$StringInputImpl extends StringInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<num>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(num?)? onValueChanged,
             NumInputUiSettings uiSettings)
         num,
     required TResult Function(
@@ -3269,6 +3387,8 @@ class _$StringInputImpl extends StringInput {
             List<String>? idsOfAvailibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<String>?)? onValueChanged,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -3320,6 +3440,8 @@ class _$StringInputImpl extends StringInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<num>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(num?)? onValueChanged,
             NumInputUiSettings uiSettings)?
         num,
     TResult? Function(
@@ -3331,6 +3453,8 @@ class _$StringInputImpl extends StringInput {
             List<String>? idsOfAvailibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<String>?)? onValueChanged,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -3382,6 +3506,8 @@ class _$StringInputImpl extends StringInput {
             int minBound,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<num>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(num?)? onValueChanged,
             NumInputUiSettings uiSettings)?
         num,
     TResult Function(
@@ -3393,6 +3519,8 @@ class _$StringInputImpl extends StringInput {
             List<String>? idsOfAvailibleValues,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<String>?)? onValueChanged,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -3514,6 +3642,11 @@ mixin _$SelectInput<T> {
 // If set, the object stored at the path of this input in WoFormValuesCubit
 // will be the id of the selected value.
   List<String>? get idsOfAvailibleValues => throw _privateConstructorUsedError;
+
+  /// An optionnal callback when the value changed
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  void Function(List<T>?)? get onValueChanged =>
+      throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
   GetCustomErrorForListDef<T>? get getCustomError =>
       throw _privateConstructorUsedError;
@@ -3557,6 +3690,8 @@ abstract class $SelectInputCopyWith<T, $Res> {
       List<T> availibleValues,
       List<String>? idsOfAvailibleValues,
       @JsonKey(includeToJson: false, includeFromJson: false)
+      void Function(List<T>?)? onValueChanged,
+      @JsonKey(includeToJson: false, includeFromJson: false)
       GetCustomErrorForListDef<T>? getCustomError,
       SelectInputUiSettings<T>? uiSettings,
       @JsonKey(toJson: QuizSettings.staticToJson) QuizSettings? quizSettings,
@@ -3590,6 +3725,7 @@ class _$SelectInputCopyWithImpl<T, $Res, $Val extends SelectInput<T>>
     Object? initialValues = freezed,
     Object? availibleValues = null,
     Object? idsOfAvailibleValues = freezed,
+    Object? onValueChanged = freezed,
     Object? getCustomError = freezed,
     Object? uiSettings = freezed,
     Object? quizSettings = freezed,
@@ -3621,6 +3757,10 @@ class _$SelectInputCopyWithImpl<T, $Res, $Val extends SelectInput<T>>
           ? _value.idsOfAvailibleValues
           : idsOfAvailibleValues // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      onValueChanged: freezed == onValueChanged
+          ? _value.onValueChanged
+          : onValueChanged // ignore: cast_nullable_to_non_nullable
+              as void Function(List<T>?)?,
       getCustomError: freezed == getCustomError
           ? _value.getCustomError
           : getCustomError // ignore: cast_nullable_to_non_nullable
@@ -3689,6 +3829,8 @@ abstract class _$$SelectInputImplCopyWith<T, $Res>
       List<T> availibleValues,
       List<String>? idsOfAvailibleValues,
       @JsonKey(includeToJson: false, includeFromJson: false)
+      void Function(List<T>?)? onValueChanged,
+      @JsonKey(includeToJson: false, includeFromJson: false)
       GetCustomErrorForListDef<T>? getCustomError,
       SelectInputUiSettings<T>? uiSettings,
       @JsonKey(toJson: QuizSettings.staticToJson) QuizSettings? quizSettings,
@@ -3722,6 +3864,7 @@ class __$$SelectInputImplCopyWithImpl<T, $Res>
     Object? initialValues = freezed,
     Object? availibleValues = null,
     Object? idsOfAvailibleValues = freezed,
+    Object? onValueChanged = freezed,
     Object? getCustomError = freezed,
     Object? uiSettings = freezed,
     Object? quizSettings = freezed,
@@ -3753,6 +3896,10 @@ class __$$SelectInputImplCopyWithImpl<T, $Res>
           ? _value._idsOfAvailibleValues
           : idsOfAvailibleValues // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      onValueChanged: freezed == onValueChanged
+          ? _value.onValueChanged
+          : onValueChanged // ignore: cast_nullable_to_non_nullable
+              as void Function(List<T>?)?,
       getCustomError: freezed == getCustomError
           ? _value.getCustomError
           : getCustomError // ignore: cast_nullable_to_non_nullable
@@ -3787,6 +3934,8 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
       final List<T>? initialValues,
       final List<T> availibleValues = const [],
       final List<String>? idsOfAvailibleValues,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      this.onValueChanged,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.getCustomError,
       this.uiSettings,
@@ -3847,6 +3996,10 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
     return EqualUnmodifiableListView(value);
   }
 
+  /// An optionnal callback when the value changed
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final void Function(List<T>?)? onValueChanged;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final GetCustomErrorForListDef<T>? getCustomError;
@@ -3873,7 +4026,7 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
 
   @override
   String toString() {
-    return 'SelectInput<$T>(id: $id, maxCount: $maxCount, minCount: $minCount, initialValues: $initialValues, availibleValues: $availibleValues, idsOfAvailibleValues: $idsOfAvailibleValues, getCustomError: $getCustomError, uiSettings: $uiSettings, quizSettings: $quizSettings, toJsonT: $toJsonT, fromJsonT: $fromJsonT)';
+    return 'SelectInput<$T>(id: $id, maxCount: $maxCount, minCount: $minCount, initialValues: $initialValues, availibleValues: $availibleValues, idsOfAvailibleValues: $idsOfAvailibleValues, onValueChanged: $onValueChanged, getCustomError: $getCustomError, uiSettings: $uiSettings, quizSettings: $quizSettings, toJsonT: $toJsonT, fromJsonT: $fromJsonT)';
   }
 
   @override
@@ -3892,6 +4045,8 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
                 .equals(other._availibleValues, _availibleValues) &&
             const DeepCollectionEquality()
                 .equals(other._idsOfAvailibleValues, _idsOfAvailibleValues) &&
+            (identical(other.onValueChanged, onValueChanged) ||
+                other.onValueChanged == onValueChanged) &&
             (identical(other.getCustomError, getCustomError) ||
                 other.getCustomError == getCustomError) &&
             (identical(other.uiSettings, uiSettings) ||
@@ -3912,6 +4067,7 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
       const DeepCollectionEquality().hash(_initialValues),
       const DeepCollectionEquality().hash(_availibleValues),
       const DeepCollectionEquality().hash(_idsOfAvailibleValues),
+      onValueChanged,
       getCustomError,
       uiSettings,
       quizSettings,
@@ -3936,6 +4092,8 @@ abstract class _SelectInput<T> extends SelectInput<T> {
       final List<T>? initialValues,
       final List<T> availibleValues,
       final List<String>? idsOfAvailibleValues,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final void Function(List<T>?)? onValueChanged,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final GetCustomErrorForListDef<T>? getCustomError,
       final SelectInputUiSettings<T>? uiSettings,
@@ -3965,6 +4123,11 @@ abstract class _SelectInput<T> extends SelectInput<T> {
 // will be the id of the selected value.
   @override
   List<String>? get idsOfAvailibleValues;
+
+  /// An optionnal callback when the value changed
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  void Function(List<T>?)? get onValueChanged;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   GetCustomErrorForListDef<T>? get getCustomError;

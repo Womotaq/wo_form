@@ -143,6 +143,7 @@ _$SelectInputUiSettingsImpl<T> _$$SelectInputUiSettingsImplFromJson<T>(
       hintText: json['hintText'] as String?,
       childrenVisibility: $enumDecodeNullable(
           _$ChildrenVisibilityEnumMap, json['childrenVisibility']),
+      labelFlex: (json['labelFlex'] as num?)?.toInt(),
       submitFormOnSelect: json['submitFormOnSelect'] as bool? ?? false,
     );
 
@@ -154,6 +155,7 @@ Map<String, dynamic> _$$SelectInputUiSettingsImplToJson<T>(
       'hintText': instance.hintText,
       'childrenVisibility':
           _$ChildrenVisibilityEnumMap[instance.childrenVisibility],
+      'labelFlex': instance.labelFlex,
       'submitFormOnSelect': instance.submitFormOnSelect,
     };
 

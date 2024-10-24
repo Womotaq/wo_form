@@ -250,6 +250,15 @@ class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
     String? helperText,
     String? hintText,
     ChildrenVisibility? childrenVisibility,
+
+    /// Only used when SelectInput.maxCount is 1
+    /// and childrenVisibility is whenAsked.
+    ///
+    /// If null, label will be placed above the selector.
+    /// Else, label and selector will be in a flexible row,
+    /// selector with a flex value of 10,
+    /// and label with a flex value of [labelFlex].
+    int? labelFlex,
     @JsonKey(includeFromJson: false, includeToJson: false)
     Widget Function(T?)? valueBuilder,
     @JsonKey(includeFromJson: false, includeToJson: false)

@@ -1606,6 +1606,15 @@ mixin _$SelectInputUiSettings<T> {
   String? get hintText => throw _privateConstructorUsedError;
   ChildrenVisibility? get childrenVisibility =>
       throw _privateConstructorUsedError;
+
+  /// Only used when SelectInput.maxCount is 1
+  /// and childrenVisibility is whenAsked.
+  ///
+  /// If null, label will be placed above the selector.
+  /// Else, label and selector will be in a flexible row,
+  /// selector with a flex value of 10,
+  /// and label with a flex value of [labelFlex].
+  int? get labelFlex => throw _privateConstructorUsedError;
   @JsonKey(includeFromJson: false, includeToJson: false)
   Widget Function(T?)? get valueBuilder => throw _privateConstructorUsedError;
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1647,6 +1656,7 @@ abstract class $SelectInputUiSettingsCopyWith<T, $Res> {
       String? helperText,
       String? hintText,
       ChildrenVisibility? childrenVisibility,
+      int? labelFlex,
       @JsonKey(includeFromJson: false, includeToJson: false)
       Widget Function(T?)? valueBuilder,
       @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1682,6 +1692,7 @@ class _$SelectInputUiSettingsCopyWithImpl<T, $Res,
     Object? helperText = freezed,
     Object? hintText = freezed,
     Object? childrenVisibility = freezed,
+    Object? labelFlex = freezed,
     Object? valueBuilder = freezed,
     Object? helpValueBuilder = freezed,
     Object? searcher = freezed,
@@ -1707,6 +1718,10 @@ class _$SelectInputUiSettingsCopyWithImpl<T, $Res,
           ? _value.childrenVisibility
           : childrenVisibility // ignore: cast_nullable_to_non_nullable
               as ChildrenVisibility?,
+      labelFlex: freezed == labelFlex
+          ? _value.labelFlex
+          : labelFlex // ignore: cast_nullable_to_non_nullable
+              as int?,
       valueBuilder: freezed == valueBuilder
           ? _value.valueBuilder
           : valueBuilder // ignore: cast_nullable_to_non_nullable
@@ -1753,6 +1768,7 @@ abstract class _$$SelectInputUiSettingsImplCopyWith<T, $Res>
       String? helperText,
       String? hintText,
       ChildrenVisibility? childrenVisibility,
+      int? labelFlex,
       @JsonKey(includeFromJson: false, includeToJson: false)
       Widget Function(T?)? valueBuilder,
       @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1787,6 +1803,7 @@ class __$$SelectInputUiSettingsImplCopyWithImpl<T, $Res>
     Object? helperText = freezed,
     Object? hintText = freezed,
     Object? childrenVisibility = freezed,
+    Object? labelFlex = freezed,
     Object? valueBuilder = freezed,
     Object? helpValueBuilder = freezed,
     Object? searcher = freezed,
@@ -1812,6 +1829,10 @@ class __$$SelectInputUiSettingsImplCopyWithImpl<T, $Res>
           ? _value.childrenVisibility
           : childrenVisibility // ignore: cast_nullable_to_non_nullable
               as ChildrenVisibility?,
+      labelFlex: freezed == labelFlex
+          ? _value.labelFlex
+          : labelFlex // ignore: cast_nullable_to_non_nullable
+              as int?,
       valueBuilder: freezed == valueBuilder
           ? _value.valueBuilder
           : valueBuilder // ignore: cast_nullable_to_non_nullable
@@ -1852,6 +1873,7 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
       this.helperText,
       this.hintText,
       this.childrenVisibility,
+      this.labelFlex,
       @JsonKey(includeFromJson: false, includeToJson: false) this.valueBuilder,
       @JsonKey(includeFromJson: false, includeToJson: false)
       this.helpValueBuilder,
@@ -1873,6 +1895,16 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
   final String? hintText;
   @override
   final ChildrenVisibility? childrenVisibility;
+
+  /// Only used when SelectInput.maxCount is 1
+  /// and childrenVisibility is whenAsked.
+  ///
+  /// If null, label will be placed above the selector.
+  /// Else, label and selector will be in a flexible row,
+  /// selector with a flex value of 10,
+  /// and label with a flex value of [labelFlex].
+  @override
+  final int? labelFlex;
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   final Widget Function(T?)? valueBuilder;
@@ -1899,7 +1931,7 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
 
   @override
   String toString() {
-    return 'SelectInputUiSettings<$T>(labelText: $labelText, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, valueBuilder: $valueBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder, submitFormOnSelect: $submitFormOnSelect)';
+    return 'SelectInputUiSettings<$T>(labelText: $labelText, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, labelFlex: $labelFlex, valueBuilder: $valueBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder, submitFormOnSelect: $submitFormOnSelect)';
   }
 
   @override
@@ -1915,6 +1947,8 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
                 other.hintText == hintText) &&
             (identical(other.childrenVisibility, childrenVisibility) ||
                 other.childrenVisibility == childrenVisibility) &&
+            (identical(other.labelFlex, labelFlex) ||
+                other.labelFlex == labelFlex) &&
             (identical(other.valueBuilder, valueBuilder) ||
                 other.valueBuilder == valueBuilder) &&
             (identical(other.helpValueBuilder, helpValueBuilder) ||
@@ -1939,6 +1973,7 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
       helperText,
       hintText,
       childrenVisibility,
+      labelFlex,
       valueBuilder,
       helpValueBuilder,
       searcher,
@@ -1970,6 +2005,7 @@ abstract class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
       final String? helperText,
       final String? hintText,
       final ChildrenVisibility? childrenVisibility,
+      final int? labelFlex,
       @JsonKey(includeFromJson: false, includeToJson: false)
       final Widget Function(T?)? valueBuilder,
       @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1996,6 +2032,16 @@ abstract class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
   String? get hintText;
   @override
   ChildrenVisibility? get childrenVisibility;
+
+  /// Only used when SelectInput.maxCount is 1
+  /// and childrenVisibility is whenAsked.
+  ///
+  /// If null, label will be placed above the selector.
+  /// Else, label and selector will be in a flexible row,
+  /// selector with a flex value of 10,
+  /// and label with a flex value of [labelFlex].
+  @override
+  int? get labelFlex;
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   Widget Function(T?)? get valueBuilder;

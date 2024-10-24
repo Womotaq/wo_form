@@ -21,8 +21,10 @@ class SelectField<T> extends StatelessWidget {
             .call(score: quizSettings.score);
 
     if (data.input.maxCount == 1) {
-      return switch (data.uiSettings.childrenVisibility) {
-        null || ChildrenVisibility.always => Column(
+      switch (data.uiSettings.childrenVisibility) {
+        case null:
+        case ChildrenVisibility.always:
+          return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 8),
@@ -67,62 +69,86 @@ class SelectField<T> extends StatelessWidget {
                 },
               ),
             ],
-          ),
-        ChildrenVisibility.whenAsked => Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Opacity(
-                opacity: data.onValueChanged == null ? 0.3 : 1,
-                child: Builder(
-                  builder: (context) {
-                    final headerData = WoFormInputHeaderData(
-                      path: data.path,
-                      labelText: data.uiSettings.labelText,
-                      helperText: data.uiSettings.helperText,
-                      errorText: data.errorText,
-                      trailing: scoreWidget,
-                    );
+          );
+        case ChildrenVisibility.whenAsked:
+          final label = Opacity(
+            opacity: data.onValueChanged == null ? 0.3 : 1,
+            child: Builder(
+              builder: (context) {
+                final headerData = WoFormInputHeaderData(
+                  path: data.path,
+                  labelText: data.uiSettings.labelText,
+                  helperText: data.uiSettings.helperText,
+                  errorText: data.errorText,
+                  trailing: scoreWidget,
+                );
 
-                    return (data.uiSettings.headerBuilder ??
-                            woTheme?.inputHeaderBuilder ??
-                            InputHeader.new)
-                        .call(headerData);
-                  },
-                ),
-              ),
-              ListTile(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-                title: SearchField<T>.uniqueChoice(
-                  values: data.input.availibleValues,
-                  onSelected:
-                      data.onValueChanged == null ? null : onUniqueChoice,
-                  selectedValue: selectedValues.firstOrNull,
-                  valueBuilder: data.uiSettings.valueBuilder,
-                  helpValueBuilder: data.uiSettings.helpValueBuilder,
-                  hintText: data.uiSettings.hintText,
-                  searcher: data.uiSettings.searcher,
-                  provider: ({required child}) => RepositoryProvider.value(
-                    value: context.read<RootNode>(),
-                    child: MultiBlocProvider(
-                      providers: [
-                        BlocProvider.value(
-                          value: context.read<WoFormValuesCubit>(),
-                        ),
-                        BlocProvider.value(
-                          value: context.read<WoFormStatusCubit>(),
-                        ),
-                        BlocProvider.value(
-                          value: context.read<WoFormLockCubit>(),
-                        ),
-                      ],
-                      child: child,
-                    ),
+                return (data.uiSettings.headerBuilder ??
+                        woTheme?.inputHeaderBuilder ??
+                        InputHeader.new)
+                    .call(headerData);
+              },
+            ),
+          );
+          final selector = SearchField<T>.uniqueChoice(
+            values: data.input.availibleValues,
+            onSelected: data.onValueChanged == null ? null : onUniqueChoice,
+            selectedValue: selectedValues.firstOrNull,
+            valueBuilder: data.uiSettings.valueBuilder,
+            helpValueBuilder: data.uiSettings.helpValueBuilder,
+            hintText: data.uiSettings.hintText,
+            searcher: data.uiSettings.searcher,
+            provider: ({required child}) => RepositoryProvider.value(
+              value: context.read<RootNode>(),
+              child: MultiBlocProvider(
+                providers: [
+                  BlocProvider.value(
+                    value: context.read<WoFormValuesCubit>(),
                   ),
-                ),
+                  BlocProvider.value(
+                    value: context.read<WoFormStatusCubit>(),
+                  ),
+                  BlocProvider.value(
+                    value: context.read<WoFormLockCubit>(),
+                  ),
+                ],
+                child: child,
               ),
-            ],
-          ),
-      };
+            ),
+          );
+          final labelFlex = data.uiSettings.labelFlex;
+
+          return labelFlex == null
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    label,
+                    ListTile(
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 16),
+                      title: selector,
+                    ),
+                  ],
+                )
+              : ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: Flex(
+                    direction: Axis.horizontal,
+                    children: [
+                      Expanded(
+                        flex: labelFlex,
+                        child: label,
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        flex: 10,
+                        child: selector,
+                      ),
+                      const SizedBox(width: 16),
+                    ],
+                  ),
+                );
+      }
     } else {
       return switch (data.uiSettings.childrenVisibility) {
         null || ChildrenVisibility.always => Column(

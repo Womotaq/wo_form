@@ -74,10 +74,13 @@ class NumFieldBuilder extends StatelessWidget {
                     uiSettings: mergedSettings,
                     onValueChanged: inputIsLocked
                         ? null
-                        : (num? value) => valuesCubit.onValueChanged(
+                        : (num? value) {
+                            valuesCubit.onValueChanged(
                               path: path,
                               value: value,
-                            ),
+                            );
+                            input.onValueChanged?.call(value);
+                          },
                   );
 
                   return (mergedSettings.widgetBuilder ??

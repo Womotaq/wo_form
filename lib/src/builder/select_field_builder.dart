@@ -112,6 +112,8 @@ class SelectFieldBuilder<T> extends StatelessWidget {
                               );
                             }
 
+                            input.onValueChanged?.call(values);
+
                             if (mergedSettings.submitFormOnSelect) {
                               valuesCubit.submit(context);
                             }
@@ -161,6 +163,7 @@ class SelectStringFieldBuilder extends SelectFieldBuilder<String> {
       availibleValues: selectStringInput.availibleValues,
       idsOfAvailibleValues: selectStringInput.idsOfAvailibleValues,
       getCustomError: selectStringInput.getCustomError,
+      onValueChanged: selectStringInput.onValueChanged,
       uiSettings: selectStringInput.uiSettings,
       quizSettings: selectStringInput.quizSettings,
       toJsonT: (value) => value,
