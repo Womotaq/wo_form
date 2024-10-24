@@ -13,6 +13,7 @@ class NumSelector extends StatefulWidget {
     super.key,
   }) : controller = null;
 
+  /// This constructor automatically disposes the controller
   const NumSelector.withTextController({
     required TextEditingController controller,
     required this.onChanged,

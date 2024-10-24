@@ -38,62 +38,55 @@ class BooleanFieldBuilder extends StatelessWidget {
       );
     }
 
-    return Focus(
-      onFocusChange: (value) {
-        if (value == false) {
-          context.read<WoFormValuesCubit>().pathIsVisited(path: path);
-        }
-      },
-      child: BlocSelector<WoFormLockCubit, Set<String>, bool>(
-        selector: (lockedInputs) => lockedInputs.contains(path),
-        builder: (context, inputIsLocked) {
-          return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
-            builder: (context, status) {
-              return WoFormValueBuilder<bool>(
-                path: path,
-                builder: (context, value) {
-                  final String? errorText;
-                  if (status is InProgressStatus) {
-                    final error = status.getError(path: path);
-                    if (error == null) {
-                      errorText = null;
-                    } else {
-                      errorText =
-                          context.read<WoFormL10n?>()?.translateError(error);
-                    }
-                  } else {
+    return BlocSelector<WoFormLockCubit, Set<String>, bool>(
+      selector: (lockedInputs) => lockedInputs.contains(path),
+      builder: (context, inputIsLocked) {
+        return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
+          builder: (context, status) {
+            return WoFormValueBuilder<bool>(
+              path: path,
+              builder: (context, value) {
+                final String? errorText;
+                if (status is InProgressStatus) {
+                  final error = status.getError(path: path);
+                  if (error == null) {
                     errorText = null;
+                  } else {
+                    errorText =
+                        context.read<WoFormL10n?>()?.translateError(error);
                   }
+                } else {
+                  errorText = null;
+                }
 
-                  final fieldData =
-                      WoFieldData<BooleanInput, bool, BooleanInputUiSettings>(
-                    path: path,
-                    input: input,
-                    value: value,
-                    errorText: errorText,
-                    uiSettings: mergedSettings,
-                    onValueChanged: inputIsLocked
-                        ? null
-                        : (bool? value) {
-                            valuesCubit.onValueChanged(
-                              path: path,
-                              value: value,
-                            );
+                final fieldData =
+                    WoFieldData<BooleanInput, bool, BooleanInputUiSettings>(
+                  path: path,
+                  input: input,
+                  value: value,
+                  errorText: errorText,
+                  uiSettings: mergedSettings,
+                  onValueChanged: inputIsLocked
+                      ? null
+                      : (bool? value) {
+                          valuesCubit.onValueChanged(
+                            path: path,
+                            value: value,
+                          );
 
-                            input.onValueChanged?.call(value);
-                          },
-                  );
+                          input.onValueChanged?.call(value);
+                        },
+                );
 
-                  return (mergedSettings.widgetBuilder ??
-                          WoFormTheme.of(context)?.booleanFieldBuilder ??
-                          BooleanField.new)
-                      .call(fieldData);
-                },
-              );
-            },
-          );
-        },
-      ),
+                return (mergedSettings.widgetBuilder ??
+                        WoFormTheme.of(context)?.booleanFieldBuilder ??
+                        BooleanField.new)
+                    .call(fieldData);
+              },
+            );
+          },
+        );
+      },
     );
   }
 }

@@ -149,8 +149,9 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   void onValueChanged({
     required String path,
     required dynamic value,
-    // Disable this if you don't want to trigger error validations
-    // or if you want to keep the initial status.
+
+    /// Disable this if you don't want to trigger error validations
+    /// or if you want to keep the initial status.
     bool updateStatus = true,
   }) {
     // Can't edit a form while submitting it
@@ -163,7 +164,10 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
     emit(newMap);
 
-    if (updateStatus) _updateErrors();
+    if (updateStatus) {
+      _pathIsVisited(path: path);
+      _updateErrors();
+    }
   }
 
   void _updateErrors() => _statusCubit.setInProgress(
@@ -190,15 +194,16 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   /// Marks the node at this path as visited by the user.
   /// Before submission, only visited nodes show errors.
-  void pathIsVisited({required String path}) {
+  void _pathIsVisited({required String path}) {
     final newMap = Map<String, dynamic>.from(state);
     final visitedPaths = Set<String>.from(
       newMap['__wo_reserved_visited_paths'] as Iterable<String>? ?? {},
-    )..add(path);
-    newMap['__wo_reserved_visited_paths'] = visitedPaths;
-    emit(newMap);
-
-    _updateErrors();
+    );
+    if (visitedPaths.add(path)) {
+      newMap['__wo_reserved_visited_paths'] = visitedPaths;
+      emit(newMap);
+      _updateErrors();
+    }
   }
 
   /// Marks the nodes at these paths as visited by the user.
