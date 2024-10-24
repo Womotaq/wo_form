@@ -168,7 +168,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
       UpdateStatus.yes => true,
     }) {
       if (updateStatus != UpdateStatus.ifPathAlreadyVisited) {
-        _pathIsVisited(path: path);
+        markPathAsVisited(path: path);
       }
 
       _updateErrors();
@@ -199,7 +199,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   /// Marks the node at this path as visited by the user.
   /// Before submission, only visited nodes show errors.
-  void _pathIsVisited({required String path}) {
+  void markPathAsVisited({required String path}) {
     final newMap = Map<String, dynamic>.from(state);
     final visitedPaths = Set<String>.from(
       newMap['__wo_reserved_visited_paths'] as Iterable<String>? ?? {},
@@ -213,7 +213,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   /// Marks the nodes at these paths as visited by the user.
   /// Before submission, only visited nodes show errors.
-  void _pathsAreVisited({required Iterable<String> paths}) {
+  void markPathsAsVisited({required Iterable<String> paths}) {
     final newMap = Map<String, dynamic>.from(state);
     final visitedPaths = Set<String>.from(
       newMap['__wo_reserved_visited_paths'] as Iterable<String>? ?? {},
@@ -231,7 +231,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
     final node = currentNode;
 
-    _pathsAreVisited(
+    markPathsAsVisited(
       paths: node
           .getAllInputPaths(
             values: state,
@@ -453,7 +453,7 @@ class WoForm extends StatelessWidget {
               if (showInitialErrors) {
                 SchedulerBinding.instance.addPostFrameCallback((_) {
                   cubit
-                    .._pathsAreVisited(paths: cubit.state.keys)
+                    ..markPathsAsVisited(paths: cubit.state.keys)
                     .._updateErrors();
                 });
               }

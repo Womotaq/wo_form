@@ -38,57 +38,65 @@ class StringFieldBuilder extends StatelessWidget {
       );
     }
 
-    return BlocSelector<WoFormLockCubit, Set<String>, bool>(
-      selector: (lockedInputs) => lockedInputs.contains(path),
-      builder: (context, inputIsLocked) {
-        return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
-          builder: (context, status) {
-            return WoFormValueBuilder<String>(
-              path: path,
-              builder: (context, value) {
-                final String? errorText;
-                if (status is InProgressStatus) {
-                  final error = status.getError(path: path);
-                  if (error == null) {
-                    errorText = null;
-                  } else {
-                    errorText =
-                        context.read<WoFormL10n?>()?.translateError(error);
-                  }
-                } else {
-                  errorText = null;
-                }
-
-                final fieldData =
-                    WoFieldData<StringInput, String, StringInputUiSettings>(
-                  path: path,
-                  input: input,
-                  value: value,
-                  errorText: errorText,
-                  uiSettings: mergedSettings,
-                  onValueChanged: inputIsLocked
-                      ? null
-                      : (
-                          String? value, {
-                          UpdateStatus updateStatus =
-                              UpdateStatus.ifPathAlreadyVisited,
-                        }) =>
-                          valuesCubit.onValueChanged(
-                            path: path,
-                            value: value,
-                            updateStatus: updateStatus,
-                          ),
-                );
-
-                return (mergedSettings.widgetBuilder ??
-                        WoFormTheme.of(context)?.stringFieldBuilder ??
-                        StringField.new)
-                    .call(fieldData);
-              },
-            );
-          },
-        );
+    return Focus(
+      skipTraversal: true,
+      onFocusChange: (value) {
+        if (value == false) {
+          context.read<WoFormValuesCubit>().markPathAsVisited(path: path);
+        }
       },
+      child: BlocSelector<WoFormLockCubit, Set<String>, bool>(
+        selector: (lockedInputs) => lockedInputs.contains(path),
+        builder: (context, inputIsLocked) {
+          return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
+            builder: (context, status) {
+              return WoFormValueBuilder<String>(
+                path: path,
+                builder: (context, value) {
+                  final String? errorText;
+                  if (status is InProgressStatus) {
+                    final error = status.getError(path: path);
+                    if (error == null) {
+                      errorText = null;
+                    } else {
+                      errorText =
+                          context.read<WoFormL10n?>()?.translateError(error);
+                    }
+                  } else {
+                    errorText = null;
+                  }
+
+                  final fieldData =
+                      WoFieldData<StringInput, String, StringInputUiSettings>(
+                    path: path,
+                    input: input,
+                    value: value,
+                    errorText: errorText,
+                    uiSettings: mergedSettings,
+                    onValueChanged: inputIsLocked
+                        ? null
+                        : (
+                            String? value, {
+                            UpdateStatus updateStatus =
+                                UpdateStatus.ifPathAlreadyVisited,
+                          }) =>
+                            valuesCubit.onValueChanged(
+                              path: path,
+                              value: value,
+                              updateStatus: updateStatus,
+                            ),
+                  );
+
+                  return (mergedSettings.widgetBuilder ??
+                          WoFormTheme.of(context)?.stringFieldBuilder ??
+                          StringField.new)
+                      .call(fieldData);
+                },
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }
