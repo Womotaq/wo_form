@@ -109,6 +109,10 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     @Default(false) bool isRequired,
     @JsonKey(includeToJson: false, includeFromJson: false)
     GetCustomErrorDef<bool>? getCustomError,
+
+    /// An optionnal callback when the value changed
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    void Function(bool? value)? onValueChanged,
     @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
     @Default(BooleanInputUiSettings())
     BooleanInputUiSettings uiSettings,

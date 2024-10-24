@@ -74,10 +74,14 @@ class BooleanFieldBuilder extends StatelessWidget {
                     uiSettings: mergedSettings,
                     onValueChanged: inputIsLocked
                         ? null
-                        : (bool? value) => valuesCubit.onValueChanged(
+                        : (bool? value) {
+                            valuesCubit.onValueChanged(
                               path: path,
                               value: value,
-                            ),
+                            );
+
+                            input.onValueChanged?.call(value);
+                          },
                   );
 
                   return (mergedSettings.widgetBuilder ??
