@@ -87,7 +87,10 @@ class SelectFieldBuilder<T> extends StatelessWidget {
                   uiSettings: mergedSettings,
                   onValueChanged: inputIsLocked
                       ? null
-                      : (List<T>? values) {
+                      : (
+                          List<T>? values, {
+                          UpdateStatus updateStatus = UpdateStatus.yes,
+                        }) {
                           if (input.idsOfAvailibleValues != null) {
                             valuesCubit.onValueChanged(
                               path: path,
@@ -97,6 +100,7 @@ class SelectFieldBuilder<T> extends StatelessWidget {
                                   )
                                   .whereNotNull()
                                   .toList(),
+                              updateStatus: updateStatus,
                             );
                           } else {
                             valuesCubit.onValueChanged(

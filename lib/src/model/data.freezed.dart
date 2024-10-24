@@ -435,7 +435,8 @@ mixin _$WoFieldData<I, T, U> {
   U get uiSettings => throw _privateConstructorUsedError;
 
   /// Null means locked field
-  void Function(T?)? get onValueChanged => throw _privateConstructorUsedError;
+  void Function(T?, {UpdateStatus updateStatus})? get onValueChanged =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of WoFieldData
   /// with the given fields replaced by the non-null parameter values.
@@ -456,7 +457,7 @@ abstract class $WoFieldDataCopyWith<I, T, U, $Res> {
       T? value,
       String? errorText,
       U uiSettings,
-      void Function(T?)? onValueChanged});
+      void Function(T?, {UpdateStatus updateStatus})? onValueChanged});
 }
 
 /// @nodoc
@@ -506,7 +507,7 @@ class _$WoFieldDataCopyWithImpl<I, T, U, $Res,
       onValueChanged: freezed == onValueChanged
           ? _value.onValueChanged
           : onValueChanged // ignore: cast_nullable_to_non_nullable
-              as void Function(T?)?,
+              as void Function(T?, {UpdateStatus updateStatus})?,
     ) as $Val);
   }
 }
@@ -525,7 +526,7 @@ abstract class _$$WoFieldDataImplCopyWith<I, T, U, $Res>
       T? value,
       String? errorText,
       U uiSettings,
-      void Function(T?)? onValueChanged});
+      void Function(T?, {UpdateStatus updateStatus})? onValueChanged});
 }
 
 /// @nodoc
@@ -572,7 +573,7 @@ class __$$WoFieldDataImplCopyWithImpl<I, T, U, $Res>
       onValueChanged: freezed == onValueChanged
           ? _value.onValueChanged
           : onValueChanged // ignore: cast_nullable_to_non_nullable
-              as void Function(T?)?,
+              as void Function(T?, {UpdateStatus updateStatus})?,
     ));
   }
 }
@@ -601,7 +602,7 @@ class _$WoFieldDataImpl<I, T, U> implements _WoFieldData<I, T, U> {
 
   /// Null means locked field
   @override
-  final void Function(T?)? onValueChanged;
+  final void Function(T?, {UpdateStatus updateStatus})? onValueChanged;
 
   @override
   String toString() {
@@ -647,13 +648,13 @@ class _$WoFieldDataImpl<I, T, U> implements _WoFieldData<I, T, U> {
 
 abstract class _WoFieldData<I, T, U> implements WoFieldData<I, T, U> {
   const factory _WoFieldData(
-          {required final String path,
-          required final I input,
-          required final T? value,
-          required final String? errorText,
-          required final U uiSettings,
-          required final void Function(T?)? onValueChanged}) =
-      _$WoFieldDataImpl<I, T, U>;
+      {required final String path,
+      required final I input,
+      required final T? value,
+      required final String? errorText,
+      required final U uiSettings,
+      required final void Function(T?, {UpdateStatus updateStatus})?
+          onValueChanged}) = _$WoFieldDataImpl<I, T, U>;
 
   @override
   String get path;
@@ -668,7 +669,7 @@ abstract class _WoFieldData<I, T, U> implements WoFieldData<I, T, U> {
 
   /// Null means locked field
   @override
-  void Function(T?)? get onValueChanged;
+  void Function(T?, {UpdateStatus updateStatus})? get onValueChanged;
 
   /// Create a copy of WoFieldData
   /// with the given fields replaced by the non-null parameter values.

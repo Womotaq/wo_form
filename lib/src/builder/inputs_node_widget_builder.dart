@@ -39,7 +39,10 @@ class InputsNodeWidgetBuilder extends StatelessWidget {
               value: null,
               errorText: null,
               uiSettings: mergedSettings,
-              onValueChanged: (_) {},
+              onValueChanged: (
+                _, {
+                UpdateStatus updateStatus = UpdateStatus.yes,
+              }) {},
             );
 
             return (mergedSettings.widgetBuilder ??
@@ -65,7 +68,10 @@ class InputsNodeWidgetBuilder extends StatelessWidget {
                   value: null,
                   errorText: errorText,
                   uiSettings: mergedSettings,
-                  onValueChanged: (_) {},
+                  onValueChanged: (
+                    _, {
+                    UpdateStatus updateStatus = UpdateStatus.yes,
+                  }) {},
                 );
 
                 return (mergedSettings.expanderBuilder ??

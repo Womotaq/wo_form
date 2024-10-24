@@ -150,10 +150,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   void onValueChanged({
     required String path,
     required dynamic value,
-
-    /// Disable this if you don't want to trigger error validations
-    /// or if you want to keep the initial status.
-    bool updateStatus = true,
+    UpdateStatus updateStatus = UpdateStatus.yes,
   }) {
     // Can't edit a form while submitting it
     if (_statusCubit.state is SubmittingStatus) return;
@@ -165,8 +162,15 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
     emit(newMap);
 
-    if (updateStatus) {
-      _pathIsVisited(path: path);
+    if (switch (updateStatus) {
+      UpdateStatus.no => false,
+      UpdateStatus.ifPathAlreadyVisited => _visitedPaths.contains(path),
+      UpdateStatus.yes => true,
+    }) {
+      if (updateStatus != UpdateStatus.ifPathAlreadyVisited) {
+        _pathIsVisited(path: path);
+      }
+
       _updateErrors();
     }
   }
@@ -355,6 +359,10 @@ typedef OnSubmitErrorDef = void Function(
   BuildContext context,
   SubmitErrorStatus errorStatus,
 );
+
+/// Use this if you don't want to trigger error validations
+/// or if you want to keep the previous status.
+enum UpdateStatus { no, ifPathAlreadyVisited, yes }
 
 class WoForm extends StatelessWidget {
   WoForm({

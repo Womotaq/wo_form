@@ -42,12 +42,16 @@ class DynamicInputsNodeWidgetBuilder extends StatelessWidget {
               uiSettings: mergedSettings,
               onValueChanged: inputIsLocked
                   ? null
-                  : (List<WoFormNodeMixin>? newInputs) {
+                  : (
+                      List<WoFormNodeMixin>? newInputs, {
+                      UpdateStatus updateStatus = UpdateStatus.yes,
+                    }) {
                       valuesCubit.onValueChanged(
                         path: path,
                         value: List<WoFormNodeMixin>.unmodifiable(
                           newInputs ?? [],
                         ),
+                        updateStatus: updateStatus,
                       );
                     },
             );

@@ -68,9 +68,14 @@ class DateTimeFieldBuilder extends StatelessWidget {
                   uiSettings: mergedSettings,
                   onValueChanged: inputIsLocked
                       ? null
-                      : (DateTime? value) => valuesCubit.onValueChanged(
+                      : (
+                          DateTime? value, {
+                          UpdateStatus updateStatus = UpdateStatus.yes,
+                        }) =>
+                          valuesCubit.onValueChanged(
                             path: path,
                             value: value,
+                            updateStatus: updateStatus,
                           ),
                 );
 

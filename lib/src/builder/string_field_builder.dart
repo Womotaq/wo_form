@@ -68,9 +68,15 @@ class StringFieldBuilder extends StatelessWidget {
                   uiSettings: mergedSettings,
                   onValueChanged: inputIsLocked
                       ? null
-                      : (String? value) => valuesCubit.onValueChanged(
+                      : (
+                          String? value, {
+                          UpdateStatus updateStatus =
+                              UpdateStatus.ifPathAlreadyVisited,
+                        }) =>
+                          valuesCubit.onValueChanged(
                             path: path,
                             value: value,
+                            updateStatus: updateStatus,
                           ),
                 );
 
