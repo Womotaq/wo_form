@@ -33,6 +33,7 @@ class FutureNodeBuilder<T> extends StatelessWidget {
       (snapshot) => valuesCubit.onValueChanged(
         path: childPath,
         value: snapshot,
+        updateStatus: UpdateStatus.ifPathAlreadyVisited,
       ),
     );
 
@@ -55,6 +56,7 @@ class FutureNodeBuilder<T> extends StatelessWidget {
               valuesCubit.onValueChanged(
                 path: entry.key,
                 value: entry.value,
+                updateStatus: UpdateStatus.ifPathAlreadyVisited,
               );
             }
           }
