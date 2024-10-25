@@ -107,8 +107,9 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     this._lockCubit,
     this._canSubmit, {
     required this.onSubmitting,
+    Map<String, dynamic> initialValues = const {},
   })  : _tempSubmitDatas = [],
-        super(_root.getInitialValues());
+        super(_root.getInitialValues()..addAll(initialValues));
 
   final RootNode _root;
   final WoFormStatusCubit _statusCubit;
@@ -294,6 +295,7 @@ class HydratedWoFormValuesCubit extends WoFormValuesCubit
     super._lockCubit,
     super._canSubmit, {
     required super.onSubmitting,
+    super.initialValues = const {},
   })  : assert(
           hydratationId.isNotEmpty,
           'hydratationId must not be an empty string',
@@ -375,6 +377,7 @@ class WoForm extends StatelessWidget {
     this.onSubmitSuccess,
     this.showInitialErrors = false,
     this.pageBuilder,
+    this.initialValues = const {},
     this.hydratationId = '',
     this.rootKey,
     super.key,
@@ -392,6 +395,7 @@ class WoForm extends StatelessWidget {
     this.onSubmitSuccess,
     this.showInitialErrors = false,
     this.pageBuilder,
+    this.initialValues = const {},
     this.hydratationId = '',
     this.rootKey,
     super.key,
@@ -404,6 +408,7 @@ class WoForm extends StatelessWidget {
   final void Function(BuildContext context)? onSubmitSuccess;
   final bool showInitialErrors;
   final WidgetBuilderDef? pageBuilder;
+  final Map<String, dynamic> initialValues;
 
   /// If not empty, this form will be locally persistent, using HydratedCubit.
   final String hydratationId;
@@ -441,6 +446,7 @@ class WoForm extends StatelessWidget {
                       context.read(),
                       canSubmit ?? (_) async => true,
                       onSubmitting: onSubmitting,
+                      initialValues: initialValues,
                     )
                   : HydratedWoFormValuesCubit._(
                       hydratationId,
@@ -449,6 +455,7 @@ class WoForm extends StatelessWidget {
                       context.read(),
                       canSubmit ?? (_) async => true,
                       onSubmitting: onSubmitting,
+                      initialValues: initialValues,
                     );
               if (showInitialErrors) {
                 SchedulerBinding.instance.addPostFrameCallback((_) {
