@@ -106,6 +106,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     this._statusCubit,
     this._lockCubit,
     this._canSubmit, {
+    required this.onStatusUpdate,
     required this.onSubmitting,
     Map<String, dynamic> initialValues = const {},
   })  : _tempSubmitDatas = [],
@@ -116,6 +117,10 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   final WoFormLockCubit _lockCubit;
   final Future<bool> Function(BuildContext context) _canSubmit;
   final Future<void> Function(RootNode root, WoFormValues values)? onSubmitting;
+
+  /// Called each time a value changed, accordingly to [UpdateStatus].
+  final Future<void> Function(RootNode root, WoFormValues values)?
+      onStatusUpdate;
   final List<(Future<void> Function() onSubmitting, String path)>
       _tempSubmitDatas;
 
@@ -173,6 +178,8 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
       }
 
       _updateErrors();
+
+      onStatusUpdate?.call(_root, state);
     }
   }
 
@@ -206,7 +213,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
       newMap['/__wo_reserved_visited_paths'] as Iterable<String>? ?? {},
     );
     if (visitedPaths.add(path)) {
-      newMap['/__wo_reserved_visited_paths'] = visitedPaths;
+      newMap['/__wo_reserved_visited_paths'] = visitedPaths.toList();
       emit(newMap);
       _updateErrors();
     }
@@ -294,6 +301,7 @@ class HydratedWoFormValuesCubit extends WoFormValuesCubit
     super._statusCubit,
     super._lockCubit,
     super._canSubmit, {
+    required super.onStatusUpdate,
     required super.onSubmitting,
     super.initialValues = const {},
   })  : assert(
@@ -371,6 +379,7 @@ class WoForm extends StatelessWidget {
     required List<WoFormNodeMixin> children,
     ExportSettings? exportSettings,
     WoFormUiSettings? uiSettings,
+    this.onStatusUpdate,
     this.canSubmit,
     this.onSubmitting,
     this.onSubmitError,
@@ -389,6 +398,7 @@ class WoForm extends StatelessWidget {
 
   const WoForm.root({
     required this.root,
+    this.onStatusUpdate,
     this.canSubmit,
     this.onSubmitting,
     this.onSubmitError,
@@ -402,6 +412,10 @@ class WoForm extends StatelessWidget {
   });
 
   final RootNode root;
+
+  /// Called each time a value changed, accordingly to [UpdateStatus].
+  final Future<void> Function(RootNode root, WoFormValues values)?
+      onStatusUpdate;
   final Future<bool> Function(BuildContext context)? canSubmit;
   final Future<void> Function(RootNode root, WoFormValues values)? onSubmitting;
   final OnSubmitErrorDef? onSubmitError;
@@ -445,6 +459,7 @@ class WoForm extends StatelessWidget {
                       context.read(),
                       context.read(),
                       canSubmit ?? (_) async => true,
+                      onStatusUpdate: onStatusUpdate,
                       onSubmitting: onSubmitting,
                       initialValues: initialValues,
                     )
@@ -454,6 +469,7 @@ class WoForm extends StatelessWidget {
                       context.read(),
                       context.read(),
                       canSubmit ?? (_) async => true,
+                      onStatusUpdate: onStatusUpdate,
                       onSubmitting: onSubmitting,
                       initialValues: initialValues,
                     );
