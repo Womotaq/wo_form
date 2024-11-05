@@ -44,45 +44,59 @@ class DateTimeField extends StatelessWidget {
                       theme.textTheme.labelMedium,
                 )
               : null,
-      trailing: InkWell(
-        borderRadius: themedBorder is OutlineInputBorder
-            ? themedBorder.borderRadius
-            : themedBorder is UnderlineInputBorder
-                ? themedBorder.borderRadius
-                : BorderRadius.zero,
-        onTap: data.onValueChanged == null
-            ? null
-            : () async {
-                data.onValueChanged!(
-                  await showDatePicker(
-                    context: context,
-                    initialDate: initialDate == null ||
-                            initialDate.isBefore(firstDate) ||
-                            initialDate.isAfter(lastDate)
-                        ? null
-                        : initialDate,
-                    firstDate: data.input.minBound ??
-                        DateTime(now.year - 2, now.month, now.day),
-                    lastDate: data.input.maxBound ??
-                        DateTime(now.year + 2, now.month, now.day),
-                    initialEntryMode: data.uiSettings.initialEntryMode ??
-                        DatePickerEntryMode.calendar,
-                  ),
-                );
-              },
-        child: Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: Theme.of(context).inputDecorationTheme.fillColor,
-            border: Border.all(
-              strokeAlign: BorderSide.strokeAlignOutside,
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (initialDate != null && data.input.isRequired == false)
+            IconButton(
+              onPressed: data.onValueChanged == null
+                  ? null
+                  : () => data.onValueChanged!(null),
+              icon: const Icon(Icons.close),
             ),
-            borderRadius: BorderRadius.circular(8),
+          InkWell(
+            borderRadius: themedBorder is OutlineInputBorder
+                ? themedBorder.borderRadius
+                : themedBorder is UnderlineInputBorder
+                    ? themedBorder.borderRadius
+                    : BorderRadius.zero,
+            onTap: data.onValueChanged == null
+                ? null
+                : () async {
+                    final selectedDate = await showDatePicker(
+                      context: context,
+                      initialDate: initialDate == null ||
+                              initialDate.isBefore(firstDate) ||
+                              initialDate.isAfter(lastDate)
+                          ? null
+                          : initialDate,
+                      firstDate: data.input.minBound ??
+                          DateTime(now.year - 2, now.month, now.day),
+                      lastDate: data.input.maxBound ??
+                          DateTime(now.year + 2, now.month, now.day),
+                      initialEntryMode: data.uiSettings.initialEntryMode ??
+                          DatePickerEntryMode.calendar,
+                    );
+
+                    if (selectedDate != null) {
+                      data.onValueChanged!(selectedDate);
+                    }
+                  },
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Theme.of(context).inputDecorationTheme.fillColor,
+                border: Border.all(
+                  strokeAlign: BorderSide.strokeAlignOutside,
+                ),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: initialDate == null
+                  ? const Icon(Icons.calendar_month)
+                  : Text(DateFormat.yMMMMd().format(initialDate)),
+            ),
           ),
-          child: initialDate == null
-              ? const Icon(Icons.calendar_month)
-              : Text(DateFormat.yMMMMd().format(initialDate)),
-        ),
+        ],
       ),
     );
   }
