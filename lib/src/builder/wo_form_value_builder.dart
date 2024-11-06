@@ -17,7 +17,7 @@ class WoFormValueBuilder<T> extends StatelessWidget {
     return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, T?>(
       key: Key(path),
       selector: (values) {
-        final value = values[path];
+        final value = values.getValue(path);
         if (value is! T?) {
           throw ArgumentError(
             'Expected <$T?> at inputId: "$path", '

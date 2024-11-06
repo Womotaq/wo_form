@@ -69,7 +69,7 @@ WoFormNodeMixin createStringInputNode() => ValueBuilderNode(
                 final regex = (value as List<RegexPattern?>?)?.firstOrNull;
 
                 context.read<WoFormValuesCubit>().onValueChanged(
-                      path: WoFormNodeMixin.getAbsolutePath(
+                      path: WoFormValuesX.getAbsolutePath(
                         parentPath: parentPath,
                         path: '../uiSettings/invalidRegexMessage',
                       ),

@@ -98,8 +98,6 @@ class HydratedWoFormLockCubit extends WoFormLockCubit
   Map<String, dynamic>? toJson(Set<String> state) => {'locks': state.toList()};
 }
 
-typedef WoFormValues = Map<String, dynamic>;
-
 class WoFormValuesCubit extends Cubit<WoFormValues> {
   WoFormValuesCubit._(
     this._root,
@@ -164,7 +162,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     if (_lockCubit.inputIsLocked(path: path)) return;
 
     final newMap = Map<String, dynamic>.from(state);
-    newMap[path] = value;
+    newMap[state.getKey(path)] = value;
 
     emit(newMap);
 
