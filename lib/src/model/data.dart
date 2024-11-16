@@ -38,7 +38,8 @@ class WoFieldData<I, T, U> with _$WoFieldData<I, T, U> {
     required U uiSettings,
 
     /// Null means locked field
-    required void Function(T?, {UpdateStatus updateStatus})? onValueChanged,
+    required void Function(T? value, {UpdateStatus updateStatus})?
+        onValueChanged,
   }) = _WoFieldData;
 }
 

@@ -4,9 +4,10 @@ import 'package:phone_form_field/phone_form_field.dart';
 import 'package:wo_form/wo_form.dart';
 
 class StringField extends StatefulWidget {
-  const StringField(this.data, {super.key});
+  const StringField(this.data, {this.subtitle, super.key});
 
   final WoFieldData<StringInput, String, StringInputUiSettings> data;
+  final Widget? subtitle;
 
   @override
   State<StringField> createState() => _StringFieldState();
@@ -111,6 +112,7 @@ class _StringFieldState extends State<StringField> {
           textInputAction: widget.data.uiSettings.textInputAction,
           decoration: inputDecoration,
         ),
+        subtitle: widget.subtitle,
       );
     }
 
@@ -142,6 +144,7 @@ class _StringFieldState extends State<StringField> {
         ],
         decoration: inputDecoration,
       ),
+      subtitle: widget.subtitle,
     );
   }
 }

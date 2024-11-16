@@ -34,7 +34,7 @@ class WoFormThemeData with _$WoFormThemeData {
     /// This spacing will be added at the bottom of each [WoFormNodeMixin].
     double? verticalSpacing,
 
-    /// Add the character '*' after the labelText of [WoFormInput]s.
+    /// Add the characters ' *' after the labelText of [WoFormInput]s.
     /// Default to true.
     bool? showAsteriskIfRequired,
   }) = _WoFormThemeData;

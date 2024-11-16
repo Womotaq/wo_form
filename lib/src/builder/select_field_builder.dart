@@ -41,7 +41,7 @@ class SelectFieldBuilder<T> extends StatelessWidget {
             true);
     if (showAsterisk && mergedSettings.labelText != null) {
       mergedSettings = mergedSettings.copyWith(
-        labelText: '${mergedSettings.labelText}*',
+        labelText: '${mergedSettings.labelText} *',
       );
     }
 
