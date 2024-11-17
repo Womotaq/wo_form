@@ -13,7 +13,9 @@ void showJsonDialog(BuildContext context) {
     builder: (BuildContext dialogContext) {
       return AlertDialog(
         title: const Text('JSON'),
-        content: Text(readableJson(root.exportToMap(values: values))),
+        content: Text(
+          readableJson(root.exportToMap(values: values, context: context)),
+        ),
         actions: [
           FilledButton.tonalIcon(
             onPressed: () => Navigator.of(dialogContext).pop(),

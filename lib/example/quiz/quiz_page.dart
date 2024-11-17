@@ -60,10 +60,9 @@ class QuizPage extends StatelessWidget {
                 maxCount: 1,
                 minCount: 1,
                 availibleValues: ['Bleu', 'Rouge', 'Vert', 'Jaune'],
+                submitFormOnSelect: true,
                 uiSettings: SelectInputUiSettings(
                   hintText: 'Sélectionner une réponse',
-                  // childrenVisibility: ChildrenVisibility.whenAsked,
-                  submitFormOnSelect: true,
                 ),
               ),
             ],
@@ -108,9 +107,9 @@ class QuizPage extends StatelessWidget {
                   'B',
                   'C',
                 ],
+                submitFormOnSelect: true,
                 uiSettings: SelectInputUiSettings(
                   childrenVisibility: ChildrenVisibility.always,
-                  submitFormOnSelect: true,
                   valueBuilder: (value) => Text(
                     switch (value) {
                       'A' => '√2',

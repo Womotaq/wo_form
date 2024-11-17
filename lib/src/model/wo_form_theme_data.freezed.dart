@@ -32,6 +32,8 @@ mixin _$WoFormThemeData {
       throw _privateConstructorUsedError;
   InputNodeWidgetBuilderDef? get inputsNodeWidgetBuilder =>
       throw _privateConstructorUsedError;
+  MediaFieldBuilderDef? get mediaFieldBuilder =>
+      throw _privateConstructorUsedError;
   NumFieldBuilderDef? get numFieldBuilder => throw _privateConstructorUsedError;
   ScoreWidgetBuilderDef? get scoreBuilder => throw _privateConstructorUsedError;
   SelectFieldBuilderDef<dynamic>? get selectFieldBuilder =>
@@ -49,7 +51,7 @@ mixin _$WoFormThemeData {
   /// This spacing will be added at the bottom of each [WoFormNodeMixin].
   double? get verticalSpacing => throw _privateConstructorUsedError;
 
-  /// Add the character '*' after the labelText of [WoFormInput]s.
+  /// Add the characters ' *' after the labelText of [WoFormInput]s.
   /// Default to true.
   bool? get showAsteriskIfRequired => throw _privateConstructorUsedError;
 
@@ -77,6 +79,7 @@ abstract class $WoFormThemeDataCopyWith<$Res> {
       InputHeaderBuilderDef? inputHeaderBuilder,
       InputNodeWidgetBuilderDef? inputsNodeExpanderBuilder,
       InputNodeWidgetBuilderDef? inputsNodeWidgetBuilder,
+      MediaFieldBuilderDef? mediaFieldBuilder,
       NumFieldBuilderDef? numFieldBuilder,
       ScoreWidgetBuilderDef? scoreBuilder,
       SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
@@ -114,6 +117,7 @@ class _$WoFormThemeDataCopyWithImpl<$Res, $Val extends WoFormThemeData>
     Object? inputHeaderBuilder = freezed,
     Object? inputsNodeExpanderBuilder = freezed,
     Object? inputsNodeWidgetBuilder = freezed,
+    Object? mediaFieldBuilder = freezed,
     Object? numFieldBuilder = freezed,
     Object? scoreBuilder = freezed,
     Object? selectFieldBuilder = freezed,
@@ -166,6 +170,10 @@ class _$WoFormThemeDataCopyWithImpl<$Res, $Val extends WoFormThemeData>
           ? _value.inputsNodeWidgetBuilder
           : inputsNodeWidgetBuilder // ignore: cast_nullable_to_non_nullable
               as InputNodeWidgetBuilderDef?,
+      mediaFieldBuilder: freezed == mediaFieldBuilder
+          ? _value.mediaFieldBuilder
+          : mediaFieldBuilder // ignore: cast_nullable_to_non_nullable
+              as MediaFieldBuilderDef?,
       numFieldBuilder: freezed == numFieldBuilder
           ? _value.numFieldBuilder
           : numFieldBuilder // ignore: cast_nullable_to_non_nullable
@@ -229,6 +237,7 @@ abstract class _$$WoFormThemeDataImplCopyWith<$Res>
       InputHeaderBuilderDef? inputHeaderBuilder,
       InputNodeWidgetBuilderDef? inputsNodeExpanderBuilder,
       InputNodeWidgetBuilderDef? inputsNodeWidgetBuilder,
+      MediaFieldBuilderDef? mediaFieldBuilder,
       NumFieldBuilderDef? numFieldBuilder,
       ScoreWidgetBuilderDef? scoreBuilder,
       SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
@@ -264,6 +273,7 @@ class __$$WoFormThemeDataImplCopyWithImpl<$Res>
     Object? inputHeaderBuilder = freezed,
     Object? inputsNodeExpanderBuilder = freezed,
     Object? inputsNodeWidgetBuilder = freezed,
+    Object? mediaFieldBuilder = freezed,
     Object? numFieldBuilder = freezed,
     Object? scoreBuilder = freezed,
     Object? selectFieldBuilder = freezed,
@@ -316,6 +326,10 @@ class __$$WoFormThemeDataImplCopyWithImpl<$Res>
           ? _value.inputsNodeWidgetBuilder
           : inputsNodeWidgetBuilder // ignore: cast_nullable_to_non_nullable
               as InputNodeWidgetBuilderDef?,
+      mediaFieldBuilder: freezed == mediaFieldBuilder
+          ? _value.mediaFieldBuilder
+          : mediaFieldBuilder // ignore: cast_nullable_to_non_nullable
+              as MediaFieldBuilderDef?,
       numFieldBuilder: freezed == numFieldBuilder
           ? _value.numFieldBuilder
           : numFieldBuilder // ignore: cast_nullable_to_non_nullable
@@ -374,6 +388,7 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
       this.inputHeaderBuilder,
       this.inputsNodeExpanderBuilder,
       this.inputsNodeWidgetBuilder,
+      this.mediaFieldBuilder,
       this.numFieldBuilder,
       this.scoreBuilder,
       this.selectFieldBuilder,
@@ -407,6 +422,8 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
   @override
   final InputNodeWidgetBuilderDef? inputsNodeWidgetBuilder;
   @override
+  final MediaFieldBuilderDef? mediaFieldBuilder;
+  @override
   final NumFieldBuilderDef? numFieldBuilder;
   @override
   final ScoreWidgetBuilderDef? scoreBuilder;
@@ -427,14 +444,14 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
   @override
   final double? verticalSpacing;
 
-  /// Add the character '*' after the labelText of [WoFormInput]s.
+  /// Add the characters ' *' after the labelText of [WoFormInput]s.
   /// Default to true.
   @override
   final bool? showAsteriskIfRequired;
 
   @override
   String toString() {
-    return 'WoFormThemeData(booleanFieldBuilder: $booleanFieldBuilder, dateTimeFieldBuilder: $dateTimeFieldBuilder, defaultPhoneCoutry: $defaultPhoneCoutry, dynamicInputsNodeWidgetBuilder: $dynamicInputsNodeWidgetBuilder, formPageBuilder: $formPageBuilder, generateId: $generateId, headerBuilder: $headerBuilder, inputHeaderBuilder: $inputHeaderBuilder, inputsNodeExpanderBuilder: $inputsNodeExpanderBuilder, inputsNodeWidgetBuilder: $inputsNodeWidgetBuilder, numFieldBuilder: $numFieldBuilder, scoreBuilder: $scoreBuilder, selectFieldBuilder: $selectFieldBuilder, standardScaffoldBuilder: $standardScaffoldBuilder, stringFieldBuilder: $stringFieldBuilder, submitButtonBuilder: $submitButtonBuilder, onDynamicInputDeletion: $onDynamicInputDeletion, onSubmitError: $onSubmitError, verticalSpacing: $verticalSpacing, showAsteriskIfRequired: $showAsteriskIfRequired)';
+    return 'WoFormThemeData(booleanFieldBuilder: $booleanFieldBuilder, dateTimeFieldBuilder: $dateTimeFieldBuilder, defaultPhoneCoutry: $defaultPhoneCoutry, dynamicInputsNodeWidgetBuilder: $dynamicInputsNodeWidgetBuilder, formPageBuilder: $formPageBuilder, generateId: $generateId, headerBuilder: $headerBuilder, inputHeaderBuilder: $inputHeaderBuilder, inputsNodeExpanderBuilder: $inputsNodeExpanderBuilder, inputsNodeWidgetBuilder: $inputsNodeWidgetBuilder, mediaFieldBuilder: $mediaFieldBuilder, numFieldBuilder: $numFieldBuilder, scoreBuilder: $scoreBuilder, selectFieldBuilder: $selectFieldBuilder, standardScaffoldBuilder: $standardScaffoldBuilder, stringFieldBuilder: $stringFieldBuilder, submitButtonBuilder: $submitButtonBuilder, onDynamicInputDeletion: $onDynamicInputDeletion, onSubmitError: $onSubmitError, verticalSpacing: $verticalSpacing, showAsteriskIfRequired: $showAsteriskIfRequired)';
   }
 
   @override
@@ -460,18 +477,20 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
                 other.headerBuilder == headerBuilder) &&
             (identical(other.inputHeaderBuilder, inputHeaderBuilder) ||
                 other.inputHeaderBuilder == inputHeaderBuilder) &&
-            (identical(other.inputsNodeExpanderBuilder,
-                    inputsNodeExpanderBuilder) ||
+            (identical(other.inputsNodeExpanderBuilder, inputsNodeExpanderBuilder) ||
                 other.inputsNodeExpanderBuilder == inputsNodeExpanderBuilder) &&
             (identical(other.inputsNodeWidgetBuilder, inputsNodeWidgetBuilder) ||
                 other.inputsNodeWidgetBuilder == inputsNodeWidgetBuilder) &&
+            (identical(other.mediaFieldBuilder, mediaFieldBuilder) ||
+                other.mediaFieldBuilder == mediaFieldBuilder) &&
             (identical(other.numFieldBuilder, numFieldBuilder) ||
                 other.numFieldBuilder == numFieldBuilder) &&
             (identical(other.scoreBuilder, scoreBuilder) ||
                 other.scoreBuilder == scoreBuilder) &&
             (identical(other.selectFieldBuilder, selectFieldBuilder) ||
                 other.selectFieldBuilder == selectFieldBuilder) &&
-            (identical(other.standardScaffoldBuilder, standardScaffoldBuilder) ||
+            (identical(
+                    other.standardScaffoldBuilder, standardScaffoldBuilder) ||
                 other.standardScaffoldBuilder == standardScaffoldBuilder) &&
             (identical(other.stringFieldBuilder, stringFieldBuilder) ||
                 other.stringFieldBuilder == stringFieldBuilder) &&
@@ -500,6 +519,7 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
         inputHeaderBuilder,
         inputsNodeExpanderBuilder,
         inputsNodeWidgetBuilder,
+        mediaFieldBuilder,
         numFieldBuilder,
         scoreBuilder,
         selectFieldBuilder,
@@ -534,6 +554,7 @@ abstract class _WoFormThemeData extends WoFormThemeData {
       final InputHeaderBuilderDef? inputHeaderBuilder,
       final InputNodeWidgetBuilderDef? inputsNodeExpanderBuilder,
       final InputNodeWidgetBuilderDef? inputsNodeWidgetBuilder,
+      final MediaFieldBuilderDef? mediaFieldBuilder,
       final NumFieldBuilderDef? numFieldBuilder,
       final ScoreWidgetBuilderDef? scoreBuilder,
       final SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
@@ -567,6 +588,8 @@ abstract class _WoFormThemeData extends WoFormThemeData {
   @override
   InputNodeWidgetBuilderDef? get inputsNodeWidgetBuilder;
   @override
+  MediaFieldBuilderDef? get mediaFieldBuilder;
+  @override
   NumFieldBuilderDef? get numFieldBuilder;
   @override
   ScoreWidgetBuilderDef? get scoreBuilder;
@@ -587,7 +610,7 @@ abstract class _WoFormThemeData extends WoFormThemeData {
   @override
   double? get verticalSpacing;
 
-  /// Add the character '*' after the labelText of [WoFormInput]s.
+  /// Add the characters ' *' after the labelText of [WoFormInput]s.
   /// Default to true.
   @override
   bool? get showAsteriskIfRequired;

@@ -201,6 +201,35 @@ class InputsNodeUiSettings with _$InputsNodeUiSettings {
         );
 }
 
+typedef MediaFieldBuilderDef = Widget Function(
+  WoFieldData<MediaInput, List<Media>?, MediaInputUiSettings> data,
+);
+
+@freezed
+class MediaInputUiSettings with _$MediaInputUiSettings {
+  const factory MediaInputUiSettings({
+    String? addMediaText,
+    int? fieldHeight,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    MediaFieldBuilderDef? widgetBuilder,
+  }) = _MediaInputUiSettings;
+
+  const MediaInputUiSettings._();
+
+  factory MediaInputUiSettings.fromJson(Map<String, dynamic> json) =>
+      _$MediaInputUiSettingsFromJson(json);
+
+  static Map<String, dynamic> staticToJson(MediaInputUiSettings object) =>
+      object.toJson();
+
+  MediaInputUiSettings merge(MediaInputUiSettings? other) => other == null
+      ? this
+      : MediaInputUiSettings(
+          addMediaText: addMediaText ?? other.addMediaText,
+          widgetBuilder: widgetBuilder ?? other.widgetBuilder,
+        );
+}
+
 typedef NumFieldBuilderDef = Widget Function(
   WoFieldData<NumInput, num, NumInputUiSettings> data,
 );
@@ -271,9 +300,6 @@ class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
     InputHeaderBuilderDef? headerBuilder,
     @JsonKey(includeToJson: false, includeFromJson: false)
     ScoreWidgetBuilderDef? scoreBuilder,
-
-    /// Only applies to unique choices
-    @Default(false) bool submitFormOnSelect,
   }) = _SelectInputUiSettings<T>;
 
   const SelectInputUiSettings._();
@@ -295,6 +321,7 @@ class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
               searcher: searcher ?? other.searcher,
               widgetBuilder: widgetBuilder ?? other.widgetBuilder,
               headerBuilder: headerBuilder ?? other.headerBuilder,
+              scoreBuilder: scoreBuilder ?? other.scoreBuilder,
             );
 }
 

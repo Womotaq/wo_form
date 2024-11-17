@@ -103,31 +103,36 @@ class FormCreatorPage extends StatelessWidget {
                 },
               ),
       ),
-      onSubmitSuccess: (context) {
+      onSubmitSuccess: (context) async {
         try {
           final root = RootNode.fromJson(
-            context.read<RootNode>().exportToMap(
+            await context.read<RootNode>().exportToMap(
                   values: context.read<WoFormValuesCubit>().state,
+                  context: context,
                 ),
           );
 
-          context.pushPage(
-            Hero(
-              tag: 'createdForm',
-              child: WoForm.root(
-                root: root,
-                onSubmitSuccess: showJsonDialog,
+          if (context.mounted) {
+            context.pushPage(
+              Hero(
+                tag: 'createdForm',
+                child: WoForm.root(
+                  root: root,
+                  onSubmitSuccess: showJsonDialog,
+                ),
               ),
-            ),
-          );
+            );
+          }
         } catch (e) {
-          showDialog<void>(
-            context: context,
-            builder: (context) => AlertDialog(
-              icon: const Icon(Icons.error),
-              content: Text(e.toString()),
-            ),
-          );
+          if (context.mounted) {
+            await showDialog<void>(
+              context: context,
+              builder: (context) => AlertDialog(
+                icon: const Icon(Icons.error),
+                content: Text(e.toString()),
+              ),
+            );
+          }
           return;
         }
       },
@@ -173,12 +178,15 @@ class _JsonClipboarderState extends State<JsonClipboarder> {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Builder(
-            builder: (context) {
+          child: FutureBuilder(
+            future: root.exportToMap(
+              values: values,
+              context: context,
+            ),
+            builder: (context, snapshot) {
               RootNode? createdRoot;
               try {
-                createdRoot =
-                    RootNode.fromJson(root.exportToMap(values: values));
+                createdRoot = RootNode.fromJson(snapshot.data!);
               } catch (_) {}
 
               return InputDecorator(
@@ -225,6 +233,7 @@ class _JsonClipboarderState extends State<JsonClipboarder> {
                 text: jsonEncode(
                   root.exportToMap(
                     values: context.read<WoFormValuesCubit>().state,
+                    context: context,
                   ),
                 ),
               ),
@@ -247,7 +256,14 @@ class _JsonClipboarderState extends State<JsonClipboarder> {
           children: [
             Builder(
               builder: (context) {
-                return Text(readableJson(root.exportToMap(values: values)));
+                return Text(
+                  readableJson(
+                    root.exportToMap(
+                      values: values,
+                      context: context,
+                    ),
+                  ),
+                );
               },
             ),
           ],

@@ -1,6 +1,8 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:wo_form/src/model/json_converter/media_list.dart';
 import 'package:wo_form/wo_form.dart';
 
 part 'wo_form_input.freezed.dart';
@@ -132,6 +134,35 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
   }) = DateTimeInput;
 
   @Assert(
+    'maxCount == null || minCount <= maxCount',
+    'maxCount must be higher or equal to minCount',
+  )
+  const factory WoFormInput.media({
+    required String id,
+    @JsonKey(toJson: MediaImportSettings.staticToJson)
+    required MediaImportSettings importSettings,
+    required int? maxCount,
+    @Default(0) int minCount,
+    double? aspectRatio,
+    @MediaListConverter() List<Media>? initialValues,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    GetCustomErrorForListDef<Media>? getCustomError,
+
+    /// An optionnal callback when the value changed
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    void Function(List<Media>? value)? onValueChanged,
+
+    /// Only applies if maxCount is 1
+    @Default(false) bool submitFormOnSelect,
+
+    /// Required if you use MediaInput.export()
+    String? uploadPath,
+    @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+    @Default(MediaInputUiSettings())
+    MediaInputUiSettings uiSettings,
+  }) = MediaInput;
+
+  @Assert(
     'maxBound == null || minBound <= maxBound',
     'maxBound must be higher or equal to minBound',
   )
@@ -173,6 +204,9 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     /// An optionnal callback when the value changed
     @JsonKey(includeToJson: false, includeFromJson: false)
     void Function(List<String>? value)? onValueChanged,
+
+    /// Only applies if maxCount is 1
+    @Default(false) bool submitFormOnSelect,
     @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
     @Default(SelectInputUiSettings<String>())
     SelectInputUiSettings<String> uiSettings,
@@ -200,12 +234,13 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
   // --
 
   @override
-  void export({
+  Future<void> export({
     required dynamic into,
     required WoFormValues values,
     required String parentPath,
-  }) {
-    final exportValue = _exportValue(values['$parentPath/$id']);
+    required BuildContext context,
+  }) async {
+    final exportValue = _exportValue(values['$parentPath/$id'], context);
 
     if (into is List) {
       into.add(exportValue);
@@ -214,18 +249,46 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     }
   }
 
-  Object? _exportValue(dynamic value) => switch (this) {
-        BooleanInput() => value as bool?,
-        DateTimeInput() => value as DateTime?,
-        NumInput() => value as num?,
-        SelectStringInput(maxCount: final maxCount) =>
-          SelectInput._selectedValuesToJson(
-            selectedValues: value as List<String>?,
-            toJsonT: (value) => value,
-            asList: maxCount != 1,
-          ),
-        StringInput() => value as String?,
-      };
+  Future<Object?> _exportValue(
+    dynamic value,
+    BuildContext context,
+  ) async {
+    switch (this) {
+      case BooleanInput():
+        return value as bool?;
+      case DateTimeInput():
+        return value as DateTime?;
+      case MediaInput(uploadPath: final uploadPath):
+        if (uploadPath == null) {
+          throw AssertionError(
+            'You must provide uploadPath in order to use MediaInput.export()',
+          );
+        }
+        final medias = value as List<Media>?;
+        if (medias == null) return null;
+        final mediasService = context.read<MediaService>();
+        return Future.wait(
+          medias
+              .map(
+                (media) => media.uploaded(
+                  mediaService: mediasService,
+                  path: uploadPath,
+                ),
+              )
+              .toList(),
+        );
+      case NumInput():
+        return value as num?;
+      case SelectStringInput(maxCount: final maxCount):
+        return SelectInput._selectedValuesToJson(
+          selectedValues: value as List<String>?,
+          toJsonT: (value) => value,
+          asList: maxCount != 1,
+        );
+      case StringInput():
+        return value as String?;
+    }
+  }
 
   @override
   WoFormInputError? getError(dynamic value, {required String parentPath}) {
@@ -275,6 +338,23 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
 
         return null;
 
+      case MediaInput(
+          id: final inputId,
+          minCount: final minCount,
+          maxCount: final maxCount,
+          getCustomError: final getCustomError,
+        ):
+        return SelectInput._validator<Media>(
+          inputId: inputId,
+          parentPath: parentPath,
+          selectedValues: (value as List<Media>?) ?? [],
+          availibleValues: [],
+          idsOfAvailibleValues: null,
+          minCount: minCount,
+          maxCount: maxCount,
+          getCustomError: getCustomError,
+        );
+
       case NumInput(
           isRequired: final isRequired,
           minBound: final minBound,
@@ -304,6 +384,25 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
 
         return null;
 
+      case SelectStringInput(
+          id: final inputId,
+          availibleValues: final availibleValues,
+          idsOfAvailibleValues: final idsOfAvailibleValues,
+          minCount: final minCount,
+          maxCount: final maxCount,
+          getCustomError: final getCustomError,
+        ):
+        return SelectInput._validator<String>(
+          inputId: inputId,
+          parentPath: parentPath,
+          selectedValues: (value as List<String>?) ?? [],
+          availibleValues: availibleValues,
+          idsOfAvailibleValues: idsOfAvailibleValues,
+          minCount: minCount,
+          maxCount: maxCount,
+          getCustomError: getCustomError,
+        );
+
       case StringInput(
           isRequired: final isRequired,
           regexPattern: final regexPattern,
@@ -331,25 +430,6 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
         } else {
           return null;
         }
-
-      case SelectStringInput(
-          id: final inputId,
-          availibleValues: final availibleValues,
-          idsOfAvailibleValues: final idsOfAvailibleValues,
-          minCount: final minCount,
-          maxCount: final maxCount,
-          getCustomError: final getCustomError,
-        ):
-        return SelectInput._validator<String>(
-          inputId: inputId,
-          parentPath: parentPath,
-          selectedValues: (value as List<String>?) ?? [],
-          availibleValues: availibleValues,
-          idsOfAvailibleValues: idsOfAvailibleValues,
-          minCount: minCount,
-          maxCount: maxCount,
-          getCustomError: getCustomError,
-        );
     }
   }
 
@@ -360,6 +440,8 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
         return {'$parentPath/$id': initialValue};
       case DateTimeInput(initialValue: final initialValue):
         return {'$parentPath/$id': initialValue};
+      case MediaInput(initialValues: final initialValues):
+        return {'$parentPath/$id': initialValues};
       case NumInput(initialValue: final initialValue):
         return {'$parentPath/$id': initialValue};
       case StringInput(initialValue: final initialValue):
@@ -377,6 +459,8 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
         return BooleanFieldBuilder(key: key, path: path);
       case DateTimeInput():
         return DateTimeFieldBuilder(key: key, path: path);
+      case MediaInput():
+        return MediaFieldBuilder(key: key, path: path);
       case NumInput():
         return NumFieldBuilder(key: key, path: path);
       case StringInput():
@@ -412,6 +496,9 @@ class SelectInput<T> with _$SelectInput<T>, WoFormNodeMixin, WoFormInputMixin {
     void Function(List<T>? value)? onValueChanged,
     @JsonKey(includeToJson: false, includeFromJson: false)
     GetCustomErrorForListDef<T>? getCustomError,
+
+    /// Only applies if maxCount is 1
+    @Default(false) bool submitFormOnSelect,
     SelectInputUiSettings<T>? uiSettings,
     @JsonKey(toJson: QuizSettings.staticToJson) QuizSettings? quizSettings,
 
@@ -507,11 +594,12 @@ class SelectInput<T> with _$SelectInput<T>, WoFormNodeMixin, WoFormInputMixin {
   }
 
   @override
-  void export({
+  Future<void> export({
     required dynamic into,
     required WoFormValues values,
     required String parentPath,
-  }) {
+    required BuildContext context,
+  }) async {
     final selectedValues = values['$parentPath/$id'] as List<T>?;
 
     final exportValue = _selectedValuesToJson<T>(

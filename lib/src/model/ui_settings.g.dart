@@ -121,6 +121,20 @@ const _$ChildrenVisibilityEnumMap = {
   ChildrenVisibility.whenAsked: 'whenAsked',
 };
 
+_$MediaInputUiSettingsImpl _$$MediaInputUiSettingsImplFromJson(
+        Map<String, dynamic> json) =>
+    _$MediaInputUiSettingsImpl(
+      addMediaText: json['addMediaText'] as String?,
+      fieldHeight: (json['fieldHeight'] as num?)?.toInt(),
+    );
+
+Map<String, dynamic> _$$MediaInputUiSettingsImplToJson(
+        _$MediaInputUiSettingsImpl instance) =>
+    <String, dynamic>{
+      'addMediaText': instance.addMediaText,
+      'fieldHeight': instance.fieldHeight,
+    };
+
 _$NumInputUiSettingsImpl _$$NumInputUiSettingsImplFromJson(
         Map<String, dynamic> json) =>
     _$NumInputUiSettingsImpl(
@@ -144,7 +158,6 @@ _$SelectInputUiSettingsImpl<T> _$$SelectInputUiSettingsImplFromJson<T>(
       childrenVisibility: $enumDecodeNullable(
           _$ChildrenVisibilityEnumMap, json['childrenVisibility']),
       labelFlex: (json['labelFlex'] as num?)?.toInt(),
-      submitFormOnSelect: json['submitFormOnSelect'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$SelectInputUiSettingsImplToJson<T>(
@@ -156,7 +169,6 @@ Map<String, dynamic> _$$SelectInputUiSettingsImplToJson<T>(
       'childrenVisibility':
           _$ChildrenVisibilityEnumMap[instance.childrenVisibility],
       'labelFlex': instance.labelFlex,
-      'submitFormOnSelect': instance.submitFormOnSelect,
     };
 
 _$StringInputUiSettingsImpl _$$StringInputUiSettingsImplFromJson(

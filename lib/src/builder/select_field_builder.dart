@@ -111,7 +111,7 @@ class SelectFieldBuilder<T> extends StatelessWidget {
 
                           input.onValueChanged?.call(values);
 
-                          if (mergedSettings.submitFormOnSelect) {
+                          if (input.submitFormOnSelect) {
                             valuesCubit.submit(context);
                           }
                         },

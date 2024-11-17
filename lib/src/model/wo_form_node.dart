@@ -27,10 +27,11 @@ mixin WoFormNodeMixin {
 
   // --
 
-  void export({
+  Future<void> export({
     required dynamic into,
     required WoFormValues values,
     required String parentPath,
+    required BuildContext context,
   });
 
   Iterable<String> getAllInputPaths({
@@ -172,18 +173,20 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
   // --
 
   @override
-  void export({
+  Future<void> export({
     required dynamic into,
     required WoFormValues values,
     required String parentPath,
-  }) {
+    required BuildContext context,
+  }) async {
     switch (this) {
       case ConditionnalNode(condition: final condition, child: final child):
         if (values.meet(condition)) {
-          child.export(
+          await child.export(
             into: into,
             values: values,
             parentPath: '$parentPath/$id',
+            context: context,
           );
         }
       case DynamicInputsNode(exportSettings: final exportSettings):
@@ -197,10 +200,11 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
             final data = Map<String, dynamic>.from(exportSettings.metadata);
 
             for (final child in children) {
-              child.export(
+              await child.export(
                 into: data,
                 values: values,
                 parentPath: '$parentPath/$id',
+                context: context,
               );
             }
 
@@ -213,10 +217,11 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
             final data = Map<String, dynamic>.from(exportSettings.metadata);
 
             for (final child in children) {
-              child.export(
+              await child.export(
                 into: data,
                 values: values,
                 parentPath: '$parentPath/$id',
+                context: context,
               );
             }
 
@@ -229,10 +234,11 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
             final data = List<dynamic>.from(exportSettings.metadata.values);
 
             for (final child in children) {
-              child.export(
+              await child.export(
                 into: data,
                 values: values,
                 parentPath: '$parentPath/$id',
+                context: context,
               );
             }
 
@@ -264,10 +270,11 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
                     },
                   );
 
-        child.export(
+        await child.export(
           into: into,
           values: values,
           parentPath: '$parentPath/$id',
+          context: context,
         );
       case ValueListenerNode():
       case WidgetNode():
@@ -680,11 +687,12 @@ class FutureNode<T> with _$FutureNode<T>, WoFormNodeMixin {
   // --
 
   @override
-  dynamic export({
+  Future<dynamic> export({
     required dynamic into,
     required WoFormValues values,
     required String parentPath,
-  }) {
+    required BuildContext context,
+  }) async {
     final snapshot = values['$parentPath/$id'];
 
     if (snapshot is! AsyncSnapshot<T?>) return null;
@@ -693,6 +701,7 @@ class FutureNode<T> with _$FutureNode<T>, WoFormNodeMixin {
       into: into,
       values: values,
       parentPath: '$parentPath/$id',
+      context: context,
     );
   }
 
@@ -832,30 +841,36 @@ class RootNode with _$RootNode, WoFormNodeMixin {
 
   // --
 
-  Map<String, dynamic> exportToMap({required WoFormValues values}) {
+  Future<Map<String, dynamic>> exportToMap({
+    required WoFormValues values,
+    required BuildContext context,
+  }) async {
     final map = Map<String, dynamic>.from(exportSettings.metadata);
     // ignore: deprecated_member_use_from_same_package
-    export(
+    await export(
       into: map,
       values: values,
+      context: context,
     );
     return map;
   }
 
   @override
   @Deprecated('Use exportToMap instead.')
-  void export({
+  Future<void> export({
     required dynamic into,
     required WoFormValues values,
+    required BuildContext context,
     String parentPath = '',
-  }) {
+  }) async {
     final data = Map<String, dynamic>.from(exportSettings.metadata);
 
     for (final child in children) {
-      child.export(
+      await child.export(
         into: data,
         values: values,
         parentPath: parentPath,
+        context: context,
       );
     }
 

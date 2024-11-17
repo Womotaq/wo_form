@@ -952,6 +952,8 @@ WoFormInput _$WoFormInputFromJson(Map<String, dynamic> json) {
       return BooleanInput.fromJson(json);
     case 'dateTime':
       return DateTimeInput.fromJson(json);
+    case 'media':
+      return MediaInput.fromJson(json);
     case 'num':
       return NumInput.fromJson(json);
     case 'selectString':
@@ -999,6 +1001,23 @@ mixin _$WoFormInput {
         dateTime,
     required TResult Function(
             String id,
+            @JsonKey(toJson: MediaImportSettings.staticToJson)
+            MediaImportSettings importSettings,
+            int? maxCount,
+            int minCount,
+            double? aspectRatio,
+            @MediaListConverter() List<Media>? initialValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<Media>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<Media>?)? onValueChanged,
+            bool submitFormOnSelect,
+            String? uploadPath,
+            @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+            MediaInputUiSettings uiSettings)
+        media,
+    required TResult Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -1020,6 +1039,7 @@ mixin _$WoFormInput {
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(includeToJson: false, includeFromJson: false)
             void Function(List<String>?)? onValueChanged,
+            bool submitFormOnSelect,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -1063,6 +1083,23 @@ mixin _$WoFormInput {
         dateTime,
     TResult? Function(
             String id,
+            @JsonKey(toJson: MediaImportSettings.staticToJson)
+            MediaImportSettings importSettings,
+            int? maxCount,
+            int minCount,
+            double? aspectRatio,
+            @MediaListConverter() List<Media>? initialValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<Media>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<Media>?)? onValueChanged,
+            bool submitFormOnSelect,
+            String? uploadPath,
+            @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+            MediaInputUiSettings uiSettings)?
+        media,
+    TResult? Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -1084,6 +1121,7 @@ mixin _$WoFormInput {
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(includeToJson: false, includeFromJson: false)
             void Function(List<String>?)? onValueChanged,
+            bool submitFormOnSelect,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -1127,6 +1165,23 @@ mixin _$WoFormInput {
         dateTime,
     TResult Function(
             String id,
+            @JsonKey(toJson: MediaImportSettings.staticToJson)
+            MediaImportSettings importSettings,
+            int? maxCount,
+            int minCount,
+            double? aspectRatio,
+            @MediaListConverter() List<Media>? initialValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<Media>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<Media>?)? onValueChanged,
+            bool submitFormOnSelect,
+            String? uploadPath,
+            @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+            MediaInputUiSettings uiSettings)?
+        media,
+    TResult Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -1148,6 +1203,7 @@ mixin _$WoFormInput {
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(includeToJson: false, includeFromJson: false)
             void Function(List<String>?)? onValueChanged,
+            bool submitFormOnSelect,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -1170,6 +1226,7 @@ mixin _$WoFormInput {
   TResult map<TResult extends Object?>({
     required TResult Function(BooleanInput value) boolean,
     required TResult Function(DateTimeInput value) dateTime,
+    required TResult Function(MediaInput value) media,
     required TResult Function(NumInput value) num,
     required TResult Function(SelectStringInput value) selectString,
     required TResult Function(StringInput value) string,
@@ -1179,6 +1236,7 @@ mixin _$WoFormInput {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BooleanInput value)? boolean,
     TResult? Function(DateTimeInput value)? dateTime,
+    TResult? Function(MediaInput value)? media,
     TResult? Function(NumInput value)? num,
     TResult? Function(SelectStringInput value)? selectString,
     TResult? Function(StringInput value)? string,
@@ -1188,6 +1246,7 @@ mixin _$WoFormInput {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BooleanInput value)? boolean,
     TResult Function(DateTimeInput value)? dateTime,
+    TResult Function(MediaInput value)? media,
     TResult Function(NumInput value)? num,
     TResult Function(SelectStringInput value)? selectString,
     TResult Function(StringInput value)? string,
@@ -1426,6 +1485,23 @@ class _$BooleanInputImpl extends BooleanInput {
         dateTime,
     required TResult Function(
             String id,
+            @JsonKey(toJson: MediaImportSettings.staticToJson)
+            MediaImportSettings importSettings,
+            int? maxCount,
+            int minCount,
+            double? aspectRatio,
+            @MediaListConverter() List<Media>? initialValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<Media>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<Media>?)? onValueChanged,
+            bool submitFormOnSelect,
+            String? uploadPath,
+            @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+            MediaInputUiSettings uiSettings)
+        media,
+    required TResult Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -1447,6 +1523,7 @@ class _$BooleanInputImpl extends BooleanInput {
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(includeToJson: false, includeFromJson: false)
             void Function(List<String>?)? onValueChanged,
+            bool submitFormOnSelect,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -1494,6 +1571,23 @@ class _$BooleanInputImpl extends BooleanInput {
         dateTime,
     TResult? Function(
             String id,
+            @JsonKey(toJson: MediaImportSettings.staticToJson)
+            MediaImportSettings importSettings,
+            int? maxCount,
+            int minCount,
+            double? aspectRatio,
+            @MediaListConverter() List<Media>? initialValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<Media>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<Media>?)? onValueChanged,
+            bool submitFormOnSelect,
+            String? uploadPath,
+            @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+            MediaInputUiSettings uiSettings)?
+        media,
+    TResult? Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -1515,6 +1609,7 @@ class _$BooleanInputImpl extends BooleanInput {
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(includeToJson: false, includeFromJson: false)
             void Function(List<String>?)? onValueChanged,
+            bool submitFormOnSelect,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -1562,6 +1657,23 @@ class _$BooleanInputImpl extends BooleanInput {
         dateTime,
     TResult Function(
             String id,
+            @JsonKey(toJson: MediaImportSettings.staticToJson)
+            MediaImportSettings importSettings,
+            int? maxCount,
+            int minCount,
+            double? aspectRatio,
+            @MediaListConverter() List<Media>? initialValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<Media>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<Media>?)? onValueChanged,
+            bool submitFormOnSelect,
+            String? uploadPath,
+            @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+            MediaInputUiSettings uiSettings)?
+        media,
+    TResult Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -1583,6 +1695,7 @@ class _$BooleanInputImpl extends BooleanInput {
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(includeToJson: false, includeFromJson: false)
             void Function(List<String>?)? onValueChanged,
+            bool submitFormOnSelect,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -1612,6 +1725,7 @@ class _$BooleanInputImpl extends BooleanInput {
   TResult map<TResult extends Object?>({
     required TResult Function(BooleanInput value) boolean,
     required TResult Function(DateTimeInput value) dateTime,
+    required TResult Function(MediaInput value) media,
     required TResult Function(NumInput value) num,
     required TResult Function(SelectStringInput value) selectString,
     required TResult Function(StringInput value) string,
@@ -1624,6 +1738,7 @@ class _$BooleanInputImpl extends BooleanInput {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BooleanInput value)? boolean,
     TResult? Function(DateTimeInput value)? dateTime,
+    TResult? Function(MediaInput value)? media,
     TResult? Function(NumInput value)? num,
     TResult? Function(SelectStringInput value)? selectString,
     TResult? Function(StringInput value)? string,
@@ -1636,6 +1751,7 @@ class _$BooleanInputImpl extends BooleanInput {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BooleanInput value)? boolean,
     TResult Function(DateTimeInput value)? dateTime,
+    TResult Function(MediaInput value)? media,
     TResult Function(NumInput value)? num,
     TResult Function(SelectStringInput value)? selectString,
     TResult Function(StringInput value)? string,
@@ -1886,6 +2002,23 @@ class _$DateTimeInputImpl extends DateTimeInput {
         dateTime,
     required TResult Function(
             String id,
+            @JsonKey(toJson: MediaImportSettings.staticToJson)
+            MediaImportSettings importSettings,
+            int? maxCount,
+            int minCount,
+            double? aspectRatio,
+            @MediaListConverter() List<Media>? initialValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<Media>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<Media>?)? onValueChanged,
+            bool submitFormOnSelect,
+            String? uploadPath,
+            @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+            MediaInputUiSettings uiSettings)
+        media,
+    required TResult Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -1907,6 +2040,7 @@ class _$DateTimeInputImpl extends DateTimeInput {
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(includeToJson: false, includeFromJson: false)
             void Function(List<String>?)? onValueChanged,
+            bool submitFormOnSelect,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -1954,6 +2088,23 @@ class _$DateTimeInputImpl extends DateTimeInput {
         dateTime,
     TResult? Function(
             String id,
+            @JsonKey(toJson: MediaImportSettings.staticToJson)
+            MediaImportSettings importSettings,
+            int? maxCount,
+            int minCount,
+            double? aspectRatio,
+            @MediaListConverter() List<Media>? initialValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<Media>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<Media>?)? onValueChanged,
+            bool submitFormOnSelect,
+            String? uploadPath,
+            @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+            MediaInputUiSettings uiSettings)?
+        media,
+    TResult? Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -1975,6 +2126,7 @@ class _$DateTimeInputImpl extends DateTimeInput {
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(includeToJson: false, includeFromJson: false)
             void Function(List<String>?)? onValueChanged,
+            bool submitFormOnSelect,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -2022,6 +2174,23 @@ class _$DateTimeInputImpl extends DateTimeInput {
         dateTime,
     TResult Function(
             String id,
+            @JsonKey(toJson: MediaImportSettings.staticToJson)
+            MediaImportSettings importSettings,
+            int? maxCount,
+            int minCount,
+            double? aspectRatio,
+            @MediaListConverter() List<Media>? initialValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<Media>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<Media>?)? onValueChanged,
+            bool submitFormOnSelect,
+            String? uploadPath,
+            @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+            MediaInputUiSettings uiSettings)?
+        media,
+    TResult Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -2043,6 +2212,7 @@ class _$DateTimeInputImpl extends DateTimeInput {
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(includeToJson: false, includeFromJson: false)
             void Function(List<String>?)? onValueChanged,
+            bool submitFormOnSelect,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -2072,6 +2242,7 @@ class _$DateTimeInputImpl extends DateTimeInput {
   TResult map<TResult extends Object?>({
     required TResult Function(BooleanInput value) boolean,
     required TResult Function(DateTimeInput value) dateTime,
+    required TResult Function(MediaInput value) media,
     required TResult Function(NumInput value) num,
     required TResult Function(SelectStringInput value) selectString,
     required TResult Function(StringInput value) string,
@@ -2084,6 +2255,7 @@ class _$DateTimeInputImpl extends DateTimeInput {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BooleanInput value)? boolean,
     TResult? Function(DateTimeInput value)? dateTime,
+    TResult? Function(MediaInput value)? media,
     TResult? Function(NumInput value)? num,
     TResult? Function(SelectStringInput value)? selectString,
     TResult? Function(StringInput value)? string,
@@ -2096,6 +2268,7 @@ class _$DateTimeInputImpl extends DateTimeInput {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BooleanInput value)? boolean,
     TResult Function(DateTimeInput value)? dateTime,
+    TResult Function(MediaInput value)? media,
     TResult Function(NumInput value)? num,
     TResult Function(SelectStringInput value)? selectString,
     TResult Function(StringInput value)? string,
@@ -2149,6 +2322,661 @@ abstract class DateTimeInput extends WoFormInput {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DateTimeInputImplCopyWith<_$DateTimeInputImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$MediaInputImplCopyWith<$Res>
+    implements $WoFormInputCopyWith<$Res> {
+  factory _$$MediaInputImplCopyWith(
+          _$MediaInputImpl value, $Res Function(_$MediaInputImpl) then) =
+      __$$MediaInputImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      @JsonKey(toJson: MediaImportSettings.staticToJson)
+      MediaImportSettings importSettings,
+      int? maxCount,
+      int minCount,
+      double? aspectRatio,
+      @MediaListConverter() List<Media>? initialValues,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      GetCustomErrorForListDef<Media>? getCustomError,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      void Function(List<Media>?)? onValueChanged,
+      bool submitFormOnSelect,
+      String? uploadPath,
+      @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+      MediaInputUiSettings uiSettings});
+
+  $MediaImportSettingsCopyWith<$Res> get importSettings;
+  $MediaInputUiSettingsCopyWith<$Res> get uiSettings;
+}
+
+/// @nodoc
+class __$$MediaInputImplCopyWithImpl<$Res>
+    extends _$WoFormInputCopyWithImpl<$Res, _$MediaInputImpl>
+    implements _$$MediaInputImplCopyWith<$Res> {
+  __$$MediaInputImplCopyWithImpl(
+      _$MediaInputImpl _value, $Res Function(_$MediaInputImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? importSettings = null,
+    Object? maxCount = freezed,
+    Object? minCount = null,
+    Object? aspectRatio = freezed,
+    Object? initialValues = freezed,
+    Object? getCustomError = freezed,
+    Object? onValueChanged = freezed,
+    Object? submitFormOnSelect = null,
+    Object? uploadPath = freezed,
+    Object? uiSettings = null,
+  }) {
+    return _then(_$MediaInputImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      importSettings: null == importSettings
+          ? _value.importSettings
+          : importSettings // ignore: cast_nullable_to_non_nullable
+              as MediaImportSettings,
+      maxCount: freezed == maxCount
+          ? _value.maxCount
+          : maxCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      minCount: null == minCount
+          ? _value.minCount
+          : minCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      aspectRatio: freezed == aspectRatio
+          ? _value.aspectRatio
+          : aspectRatio // ignore: cast_nullable_to_non_nullable
+              as double?,
+      initialValues: freezed == initialValues
+          ? _value._initialValues
+          : initialValues // ignore: cast_nullable_to_non_nullable
+              as List<Media>?,
+      getCustomError: freezed == getCustomError
+          ? _value.getCustomError
+          : getCustomError // ignore: cast_nullable_to_non_nullable
+              as GetCustomErrorForListDef<Media>?,
+      onValueChanged: freezed == onValueChanged
+          ? _value.onValueChanged
+          : onValueChanged // ignore: cast_nullable_to_non_nullable
+              as void Function(List<Media>?)?,
+      submitFormOnSelect: null == submitFormOnSelect
+          ? _value.submitFormOnSelect
+          : submitFormOnSelect // ignore: cast_nullable_to_non_nullable
+              as bool,
+      uploadPath: freezed == uploadPath
+          ? _value.uploadPath
+          : uploadPath // ignore: cast_nullable_to_non_nullable
+              as String?,
+      uiSettings: null == uiSettings
+          ? _value.uiSettings
+          : uiSettings // ignore: cast_nullable_to_non_nullable
+              as MediaInputUiSettings,
+    ));
+  }
+
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $MediaImportSettingsCopyWith<$Res> get importSettings {
+    return $MediaImportSettingsCopyWith<$Res>(_value.importSettings, (value) {
+      return _then(_value.copyWith(importSettings: value));
+    });
+  }
+
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $MediaInputUiSettingsCopyWith<$Res> get uiSettings {
+    return $MediaInputUiSettingsCopyWith<$Res>(_value.uiSettings, (value) {
+      return _then(_value.copyWith(uiSettings: value));
+    });
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$MediaInputImpl extends MediaInput {
+  const _$MediaInputImpl(
+      {required this.id,
+      @JsonKey(toJson: MediaImportSettings.staticToJson)
+      required this.importSettings,
+      required this.maxCount,
+      this.minCount = 0,
+      this.aspectRatio,
+      @MediaListConverter() final List<Media>? initialValues,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      this.getCustomError,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      this.onValueChanged,
+      this.submitFormOnSelect = false,
+      this.uploadPath,
+      @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+      this.uiSettings = const MediaInputUiSettings(),
+      final String? $type})
+      : assert(maxCount == null || minCount <= maxCount,
+            'maxCount must be higher or equal to minCount'),
+        _initialValues = initialValues,
+        $type = $type ?? 'media',
+        super._();
+
+  factory _$MediaInputImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MediaInputImplFromJson(json);
+
+  @override
+  final String id;
+  @override
+  @JsonKey(toJson: MediaImportSettings.staticToJson)
+  final MediaImportSettings importSettings;
+  @override
+  final int? maxCount;
+  @override
+  @JsonKey()
+  final int minCount;
+  @override
+  final double? aspectRatio;
+  final List<Media>? _initialValues;
+  @override
+  @MediaListConverter()
+  List<Media>? get initialValues {
+    final value = _initialValues;
+    if (value == null) return null;
+    if (_initialValues is EqualUnmodifiableListView) return _initialValues;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final GetCustomErrorForListDef<Media>? getCustomError;
+
+  /// An optionnal callback when the value changed
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final void Function(List<Media>?)? onValueChanged;
+
+  /// Only applies if maxCount is 1
+  @override
+  @JsonKey()
+  final bool submitFormOnSelect;
+
+  /// Required if you use MediaInput.export()
+  @override
+  final String? uploadPath;
+  @override
+  @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+  final MediaInputUiSettings uiSettings;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'WoFormInput.media(id: $id, importSettings: $importSettings, maxCount: $maxCount, minCount: $minCount, aspectRatio: $aspectRatio, initialValues: $initialValues, getCustomError: $getCustomError, onValueChanged: $onValueChanged, submitFormOnSelect: $submitFormOnSelect, uploadPath: $uploadPath, uiSettings: $uiSettings)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MediaInputImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.importSettings, importSettings) ||
+                other.importSettings == importSettings) &&
+            (identical(other.maxCount, maxCount) ||
+                other.maxCount == maxCount) &&
+            (identical(other.minCount, minCount) ||
+                other.minCount == minCount) &&
+            (identical(other.aspectRatio, aspectRatio) ||
+                other.aspectRatio == aspectRatio) &&
+            const DeepCollectionEquality()
+                .equals(other._initialValues, _initialValues) &&
+            (identical(other.getCustomError, getCustomError) ||
+                other.getCustomError == getCustomError) &&
+            (identical(other.onValueChanged, onValueChanged) ||
+                other.onValueChanged == onValueChanged) &&
+            (identical(other.submitFormOnSelect, submitFormOnSelect) ||
+                other.submitFormOnSelect == submitFormOnSelect) &&
+            (identical(other.uploadPath, uploadPath) ||
+                other.uploadPath == uploadPath) &&
+            (identical(other.uiSettings, uiSettings) ||
+                other.uiSettings == uiSettings));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      importSettings,
+      maxCount,
+      minCount,
+      aspectRatio,
+      const DeepCollectionEquality().hash(_initialValues),
+      getCustomError,
+      onValueChanged,
+      submitFormOnSelect,
+      uploadPath,
+      uiSettings);
+
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$MediaInputImplCopyWith<_$MediaInputImpl> get copyWith =>
+      __$$MediaInputImplCopyWithImpl<_$MediaInputImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String id,
+            bool? initialValue,
+            bool isRequired,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<bool>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(bool?)? onValueChanged,
+            @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+            BooleanInputUiSettings uiSettings)
+        boolean,
+    required TResult Function(
+            String id,
+            DateTime? initialValue,
+            bool isRequired,
+            DateTime? maxBound,
+            DateTime? minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<DateTime>? getCustomError,
+            @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+            DateTimeInputUiSettings uiSettings)
+        dateTime,
+    required TResult Function(
+            String id,
+            @JsonKey(toJson: MediaImportSettings.staticToJson)
+            MediaImportSettings importSettings,
+            int? maxCount,
+            int minCount,
+            double? aspectRatio,
+            @MediaListConverter() List<Media>? initialValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<Media>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<Media>?)? onValueChanged,
+            bool submitFormOnSelect,
+            String? uploadPath,
+            @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+            MediaInputUiSettings uiSettings)
+        media,
+    required TResult Function(
+            String id,
+            num? initialValue,
+            bool isRequired,
+            int? maxBound,
+            int minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<num>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(num?)? onValueChanged,
+            NumInputUiSettings uiSettings)
+        num,
+    required TResult Function(
+            String id,
+            int? maxCount,
+            int minCount,
+            List<String>? initialValues,
+            List<String> availibleValues,
+            List<String>? idsOfAvailibleValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<String>?)? onValueChanged,
+            bool submitFormOnSelect,
+            @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
+            SelectInputUiSettings<String> uiSettings,
+            @JsonKey(toJson: QuizSettings.staticToJson)
+            QuizSettings? quizSettings)
+        selectString,
+    required TResult Function(
+            String id,
+            String? initialValue,
+            bool isRequired,
+            String? regexPattern,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<String>? getCustomError,
+            @JsonKey(toJson: StringInputUiSettings.staticToJson)
+            StringInputUiSettings uiSettings)
+        string,
+  }) {
+    return media(
+        id,
+        importSettings,
+        maxCount,
+        minCount,
+        aspectRatio,
+        initialValues,
+        getCustomError,
+        onValueChanged,
+        submitFormOnSelect,
+        uploadPath,
+        uiSettings);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String id,
+            bool? initialValue,
+            bool isRequired,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<bool>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(bool?)? onValueChanged,
+            @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+            BooleanInputUiSettings uiSettings)?
+        boolean,
+    TResult? Function(
+            String id,
+            DateTime? initialValue,
+            bool isRequired,
+            DateTime? maxBound,
+            DateTime? minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<DateTime>? getCustomError,
+            @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+            DateTimeInputUiSettings uiSettings)?
+        dateTime,
+    TResult? Function(
+            String id,
+            @JsonKey(toJson: MediaImportSettings.staticToJson)
+            MediaImportSettings importSettings,
+            int? maxCount,
+            int minCount,
+            double? aspectRatio,
+            @MediaListConverter() List<Media>? initialValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<Media>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<Media>?)? onValueChanged,
+            bool submitFormOnSelect,
+            String? uploadPath,
+            @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+            MediaInputUiSettings uiSettings)?
+        media,
+    TResult? Function(
+            String id,
+            num? initialValue,
+            bool isRequired,
+            int? maxBound,
+            int minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<num>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(num?)? onValueChanged,
+            NumInputUiSettings uiSettings)?
+        num,
+    TResult? Function(
+            String id,
+            int? maxCount,
+            int minCount,
+            List<String>? initialValues,
+            List<String> availibleValues,
+            List<String>? idsOfAvailibleValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<String>?)? onValueChanged,
+            bool submitFormOnSelect,
+            @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
+            SelectInputUiSettings<String> uiSettings,
+            @JsonKey(toJson: QuizSettings.staticToJson)
+            QuizSettings? quizSettings)?
+        selectString,
+    TResult? Function(
+            String id,
+            String? initialValue,
+            bool isRequired,
+            String? regexPattern,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<String>? getCustomError,
+            @JsonKey(toJson: StringInputUiSettings.staticToJson)
+            StringInputUiSettings uiSettings)?
+        string,
+  }) {
+    return media?.call(
+        id,
+        importSettings,
+        maxCount,
+        minCount,
+        aspectRatio,
+        initialValues,
+        getCustomError,
+        onValueChanged,
+        submitFormOnSelect,
+        uploadPath,
+        uiSettings);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String id,
+            bool? initialValue,
+            bool isRequired,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<bool>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(bool?)? onValueChanged,
+            @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+            BooleanInputUiSettings uiSettings)?
+        boolean,
+    TResult Function(
+            String id,
+            DateTime? initialValue,
+            bool isRequired,
+            DateTime? maxBound,
+            DateTime? minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<DateTime>? getCustomError,
+            @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+            DateTimeInputUiSettings uiSettings)?
+        dateTime,
+    TResult Function(
+            String id,
+            @JsonKey(toJson: MediaImportSettings.staticToJson)
+            MediaImportSettings importSettings,
+            int? maxCount,
+            int minCount,
+            double? aspectRatio,
+            @MediaListConverter() List<Media>? initialValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<Media>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<Media>?)? onValueChanged,
+            bool submitFormOnSelect,
+            String? uploadPath,
+            @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+            MediaInputUiSettings uiSettings)?
+        media,
+    TResult Function(
+            String id,
+            num? initialValue,
+            bool isRequired,
+            int? maxBound,
+            int minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<num>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(num?)? onValueChanged,
+            NumInputUiSettings uiSettings)?
+        num,
+    TResult Function(
+            String id,
+            int? maxCount,
+            int minCount,
+            List<String>? initialValues,
+            List<String> availibleValues,
+            List<String>? idsOfAvailibleValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<String>?)? onValueChanged,
+            bool submitFormOnSelect,
+            @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
+            SelectInputUiSettings<String> uiSettings,
+            @JsonKey(toJson: QuizSettings.staticToJson)
+            QuizSettings? quizSettings)?
+        selectString,
+    TResult Function(
+            String id,
+            String? initialValue,
+            bool isRequired,
+            String? regexPattern,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<String>? getCustomError,
+            @JsonKey(toJson: StringInputUiSettings.staticToJson)
+            StringInputUiSettings uiSettings)?
+        string,
+    required TResult orElse(),
+  }) {
+    if (media != null) {
+      return media(
+          id,
+          importSettings,
+          maxCount,
+          minCount,
+          aspectRatio,
+          initialValues,
+          getCustomError,
+          onValueChanged,
+          submitFormOnSelect,
+          uploadPath,
+          uiSettings);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BooleanInput value) boolean,
+    required TResult Function(DateTimeInput value) dateTime,
+    required TResult Function(MediaInput value) media,
+    required TResult Function(NumInput value) num,
+    required TResult Function(SelectStringInput value) selectString,
+    required TResult Function(StringInput value) string,
+  }) {
+    return media(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BooleanInput value)? boolean,
+    TResult? Function(DateTimeInput value)? dateTime,
+    TResult? Function(MediaInput value)? media,
+    TResult? Function(NumInput value)? num,
+    TResult? Function(SelectStringInput value)? selectString,
+    TResult? Function(StringInput value)? string,
+  }) {
+    return media?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BooleanInput value)? boolean,
+    TResult Function(DateTimeInput value)? dateTime,
+    TResult Function(MediaInput value)? media,
+    TResult Function(NumInput value)? num,
+    TResult Function(SelectStringInput value)? selectString,
+    TResult Function(StringInput value)? string,
+    required TResult orElse(),
+  }) {
+    if (media != null) {
+      return media(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$MediaInputImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class MediaInput extends WoFormInput {
+  const factory MediaInput(
+      {required final String id,
+      @JsonKey(toJson: MediaImportSettings.staticToJson)
+      required final MediaImportSettings importSettings,
+      required final int? maxCount,
+      final int minCount,
+      final double? aspectRatio,
+      @MediaListConverter() final List<Media>? initialValues,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final GetCustomErrorForListDef<Media>? getCustomError,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final void Function(List<Media>?)? onValueChanged,
+      final bool submitFormOnSelect,
+      final String? uploadPath,
+      @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+      final MediaInputUiSettings uiSettings}) = _$MediaInputImpl;
+  const MediaInput._() : super._();
+
+  factory MediaInput.fromJson(Map<String, dynamic> json) =
+      _$MediaInputImpl.fromJson;
+
+  @override
+  String get id;
+  @JsonKey(toJson: MediaImportSettings.staticToJson)
+  MediaImportSettings get importSettings;
+  int? get maxCount;
+  int get minCount;
+  double? get aspectRatio;
+  @MediaListConverter()
+  List<Media>? get initialValues;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  GetCustomErrorForListDef<Media>? get getCustomError;
+
+  /// An optionnal callback when the value changed
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  void Function(List<Media>?)? get onValueChanged;
+
+  /// Only applies if maxCount is 1
+  bool get submitFormOnSelect;
+
+  /// Required if you use MediaInput.export()
+  String? get uploadPath;
+  @override
+  @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+  MediaInputUiSettings get uiSettings;
+
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$MediaInputImplCopyWith<_$MediaInputImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2361,6 +3189,23 @@ class _$NumInputImpl extends NumInput {
         dateTime,
     required TResult Function(
             String id,
+            @JsonKey(toJson: MediaImportSettings.staticToJson)
+            MediaImportSettings importSettings,
+            int? maxCount,
+            int minCount,
+            double? aspectRatio,
+            @MediaListConverter() List<Media>? initialValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<Media>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<Media>?)? onValueChanged,
+            bool submitFormOnSelect,
+            String? uploadPath,
+            @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+            MediaInputUiSettings uiSettings)
+        media,
+    required TResult Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -2382,6 +3227,7 @@ class _$NumInputImpl extends NumInput {
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(includeToJson: false, includeFromJson: false)
             void Function(List<String>?)? onValueChanged,
+            bool submitFormOnSelect,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -2429,6 +3275,23 @@ class _$NumInputImpl extends NumInput {
         dateTime,
     TResult? Function(
             String id,
+            @JsonKey(toJson: MediaImportSettings.staticToJson)
+            MediaImportSettings importSettings,
+            int? maxCount,
+            int minCount,
+            double? aspectRatio,
+            @MediaListConverter() List<Media>? initialValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<Media>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<Media>?)? onValueChanged,
+            bool submitFormOnSelect,
+            String? uploadPath,
+            @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+            MediaInputUiSettings uiSettings)?
+        media,
+    TResult? Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -2450,6 +3313,7 @@ class _$NumInputImpl extends NumInput {
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(includeToJson: false, includeFromJson: false)
             void Function(List<String>?)? onValueChanged,
+            bool submitFormOnSelect,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -2497,6 +3361,23 @@ class _$NumInputImpl extends NumInput {
         dateTime,
     TResult Function(
             String id,
+            @JsonKey(toJson: MediaImportSettings.staticToJson)
+            MediaImportSettings importSettings,
+            int? maxCount,
+            int minCount,
+            double? aspectRatio,
+            @MediaListConverter() List<Media>? initialValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<Media>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<Media>?)? onValueChanged,
+            bool submitFormOnSelect,
+            String? uploadPath,
+            @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+            MediaInputUiSettings uiSettings)?
+        media,
+    TResult Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -2518,6 +3399,7 @@ class _$NumInputImpl extends NumInput {
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(includeToJson: false, includeFromJson: false)
             void Function(List<String>?)? onValueChanged,
+            bool submitFormOnSelect,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -2547,6 +3429,7 @@ class _$NumInputImpl extends NumInput {
   TResult map<TResult extends Object?>({
     required TResult Function(BooleanInput value) boolean,
     required TResult Function(DateTimeInput value) dateTime,
+    required TResult Function(MediaInput value) media,
     required TResult Function(NumInput value) num,
     required TResult Function(SelectStringInput value) selectString,
     required TResult Function(StringInput value) string,
@@ -2559,6 +3442,7 @@ class _$NumInputImpl extends NumInput {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BooleanInput value)? boolean,
     TResult? Function(DateTimeInput value)? dateTime,
+    TResult? Function(MediaInput value)? media,
     TResult? Function(NumInput value)? num,
     TResult? Function(SelectStringInput value)? selectString,
     TResult? Function(StringInput value)? string,
@@ -2571,6 +3455,7 @@ class _$NumInputImpl extends NumInput {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BooleanInput value)? boolean,
     TResult Function(DateTimeInput value)? dateTime,
+    TResult Function(MediaInput value)? media,
     TResult Function(NumInput value)? num,
     TResult Function(SelectStringInput value)? selectString,
     TResult Function(StringInput value)? string,
@@ -2650,6 +3535,7 @@ abstract class _$$SelectStringInputImplCopyWith<$Res>
       GetCustomErrorForListDef<String>? getCustomError,
       @JsonKey(includeToJson: false, includeFromJson: false)
       void Function(List<String>?)? onValueChanged,
+      bool submitFormOnSelect,
       @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
       SelectInputUiSettings<String> uiSettings,
       @JsonKey(toJson: QuizSettings.staticToJson) QuizSettings? quizSettings});
@@ -2679,6 +3565,7 @@ class __$$SelectStringInputImplCopyWithImpl<$Res>
     Object? idsOfAvailibleValues = freezed,
     Object? getCustomError = freezed,
     Object? onValueChanged = freezed,
+    Object? submitFormOnSelect = null,
     Object? uiSettings = null,
     Object? quizSettings = freezed,
   }) {
@@ -2715,6 +3602,10 @@ class __$$SelectStringInputImplCopyWithImpl<$Res>
           ? _value.onValueChanged
           : onValueChanged // ignore: cast_nullable_to_non_nullable
               as void Function(List<String>?)?,
+      submitFormOnSelect: null == submitFormOnSelect
+          ? _value.submitFormOnSelect
+          : submitFormOnSelect // ignore: cast_nullable_to_non_nullable
+              as bool,
       uiSettings: null == uiSettings
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
@@ -2766,6 +3657,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
       this.getCustomError,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.onValueChanged,
+      this.submitFormOnSelect = false,
       @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
       this.uiSettings = const SelectInputUiSettings<String>(),
       @JsonKey(toJson: QuizSettings.staticToJson) this.quizSettings,
@@ -2838,6 +3730,11 @@ class _$SelectStringInputImpl extends SelectStringInput {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final void Function(List<String>?)? onValueChanged;
+
+  /// Only applies if maxCount is 1
+  @override
+  @JsonKey()
+  final bool submitFormOnSelect;
   @override
   @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
   final SelectInputUiSettings<String> uiSettings;
@@ -2851,7 +3748,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
 
   @override
   String toString() {
-    return 'WoFormInput.selectString(id: $id, maxCount: $maxCount, minCount: $minCount, initialValues: $initialValues, availibleValues: $availibleValues, idsOfAvailibleValues: $idsOfAvailibleValues, getCustomError: $getCustomError, onValueChanged: $onValueChanged, uiSettings: $uiSettings, quizSettings: $quizSettings)';
+    return 'WoFormInput.selectString(id: $id, maxCount: $maxCount, minCount: $minCount, initialValues: $initialValues, availibleValues: $availibleValues, idsOfAvailibleValues: $idsOfAvailibleValues, getCustomError: $getCustomError, onValueChanged: $onValueChanged, submitFormOnSelect: $submitFormOnSelect, uiSettings: $uiSettings, quizSettings: $quizSettings)';
   }
 
   @override
@@ -2874,6 +3771,8 @@ class _$SelectStringInputImpl extends SelectStringInput {
                 other.getCustomError == getCustomError) &&
             (identical(other.onValueChanged, onValueChanged) ||
                 other.onValueChanged == onValueChanged) &&
+            (identical(other.submitFormOnSelect, submitFormOnSelect) ||
+                other.submitFormOnSelect == submitFormOnSelect) &&
             (identical(other.uiSettings, uiSettings) ||
                 other.uiSettings == uiSettings) &&
             (identical(other.quizSettings, quizSettings) ||
@@ -2892,6 +3791,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
       const DeepCollectionEquality().hash(_idsOfAvailibleValues),
       getCustomError,
       onValueChanged,
+      submitFormOnSelect,
       uiSettings,
       quizSettings);
 
@@ -2931,6 +3831,23 @@ class _$SelectStringInputImpl extends SelectStringInput {
         dateTime,
     required TResult Function(
             String id,
+            @JsonKey(toJson: MediaImportSettings.staticToJson)
+            MediaImportSettings importSettings,
+            int? maxCount,
+            int minCount,
+            double? aspectRatio,
+            @MediaListConverter() List<Media>? initialValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<Media>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<Media>?)? onValueChanged,
+            bool submitFormOnSelect,
+            String? uploadPath,
+            @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+            MediaInputUiSettings uiSettings)
+        media,
+    required TResult Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -2952,6 +3869,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(includeToJson: false, includeFromJson: false)
             void Function(List<String>?)? onValueChanged,
+            bool submitFormOnSelect,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -2977,6 +3895,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
         idsOfAvailibleValues,
         getCustomError,
         onValueChanged,
+        submitFormOnSelect,
         uiSettings,
         quizSettings);
   }
@@ -3008,6 +3927,23 @@ class _$SelectStringInputImpl extends SelectStringInput {
         dateTime,
     TResult? Function(
             String id,
+            @JsonKey(toJson: MediaImportSettings.staticToJson)
+            MediaImportSettings importSettings,
+            int? maxCount,
+            int minCount,
+            double? aspectRatio,
+            @MediaListConverter() List<Media>? initialValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<Media>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<Media>?)? onValueChanged,
+            bool submitFormOnSelect,
+            String? uploadPath,
+            @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+            MediaInputUiSettings uiSettings)?
+        media,
+    TResult? Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -3029,6 +3965,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(includeToJson: false, includeFromJson: false)
             void Function(List<String>?)? onValueChanged,
+            bool submitFormOnSelect,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -3054,6 +3991,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
         idsOfAvailibleValues,
         getCustomError,
         onValueChanged,
+        submitFormOnSelect,
         uiSettings,
         quizSettings);
   }
@@ -3085,6 +4023,23 @@ class _$SelectStringInputImpl extends SelectStringInput {
         dateTime,
     TResult Function(
             String id,
+            @JsonKey(toJson: MediaImportSettings.staticToJson)
+            MediaImportSettings importSettings,
+            int? maxCount,
+            int minCount,
+            double? aspectRatio,
+            @MediaListConverter() List<Media>? initialValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<Media>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<Media>?)? onValueChanged,
+            bool submitFormOnSelect,
+            String? uploadPath,
+            @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+            MediaInputUiSettings uiSettings)?
+        media,
+    TResult Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -3106,6 +4061,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(includeToJson: false, includeFromJson: false)
             void Function(List<String>?)? onValueChanged,
+            bool submitFormOnSelect,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -3133,6 +4089,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
           idsOfAvailibleValues,
           getCustomError,
           onValueChanged,
+          submitFormOnSelect,
           uiSettings,
           quizSettings);
     }
@@ -3144,6 +4101,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
   TResult map<TResult extends Object?>({
     required TResult Function(BooleanInput value) boolean,
     required TResult Function(DateTimeInput value) dateTime,
+    required TResult Function(MediaInput value) media,
     required TResult Function(NumInput value) num,
     required TResult Function(SelectStringInput value) selectString,
     required TResult Function(StringInput value) string,
@@ -3156,6 +4114,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BooleanInput value)? boolean,
     TResult? Function(DateTimeInput value)? dateTime,
+    TResult? Function(MediaInput value)? media,
     TResult? Function(NumInput value)? num,
     TResult? Function(SelectStringInput value)? selectString,
     TResult? Function(StringInput value)? string,
@@ -3168,6 +4127,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BooleanInput value)? boolean,
     TResult Function(DateTimeInput value)? dateTime,
+    TResult Function(MediaInput value)? media,
     TResult Function(NumInput value)? num,
     TResult Function(SelectStringInput value)? selectString,
     TResult Function(StringInput value)? string,
@@ -3199,6 +4159,7 @@ abstract class SelectStringInput extends WoFormInput {
       final GetCustomErrorForListDef<String>? getCustomError,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final void Function(List<String>?)? onValueChanged,
+      final bool submitFormOnSelect,
       @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
       final SelectInputUiSettings<String> uiSettings,
       @JsonKey(toJson: QuizSettings.staticToJson)
@@ -3228,6 +4189,9 @@ abstract class SelectStringInput extends WoFormInput {
   /// An optionnal callback when the value changed
   @JsonKey(includeToJson: false, includeFromJson: false)
   void Function(List<String>?)? get onValueChanged;
+
+  /// Only applies if maxCount is 1
+  bool get submitFormOnSelect;
   @override
   @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
   SelectInputUiSettings<String>
@@ -3424,6 +4388,23 @@ class _$StringInputImpl extends StringInput {
         dateTime,
     required TResult Function(
             String id,
+            @JsonKey(toJson: MediaImportSettings.staticToJson)
+            MediaImportSettings importSettings,
+            int? maxCount,
+            int minCount,
+            double? aspectRatio,
+            @MediaListConverter() List<Media>? initialValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<Media>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<Media>?)? onValueChanged,
+            bool submitFormOnSelect,
+            String? uploadPath,
+            @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+            MediaInputUiSettings uiSettings)
+        media,
+    required TResult Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -3445,6 +4426,7 @@ class _$StringInputImpl extends StringInput {
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(includeToJson: false, includeFromJson: false)
             void Function(List<String>?)? onValueChanged,
+            bool submitFormOnSelect,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -3492,6 +4474,23 @@ class _$StringInputImpl extends StringInput {
         dateTime,
     TResult? Function(
             String id,
+            @JsonKey(toJson: MediaImportSettings.staticToJson)
+            MediaImportSettings importSettings,
+            int? maxCount,
+            int minCount,
+            double? aspectRatio,
+            @MediaListConverter() List<Media>? initialValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<Media>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<Media>?)? onValueChanged,
+            bool submitFormOnSelect,
+            String? uploadPath,
+            @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+            MediaInputUiSettings uiSettings)?
+        media,
+    TResult? Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -3513,6 +4512,7 @@ class _$StringInputImpl extends StringInput {
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(includeToJson: false, includeFromJson: false)
             void Function(List<String>?)? onValueChanged,
+            bool submitFormOnSelect,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -3560,6 +4560,23 @@ class _$StringInputImpl extends StringInput {
         dateTime,
     TResult Function(
             String id,
+            @JsonKey(toJson: MediaImportSettings.staticToJson)
+            MediaImportSettings importSettings,
+            int? maxCount,
+            int minCount,
+            double? aspectRatio,
+            @MediaListConverter() List<Media>? initialValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<Media>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<Media>?)? onValueChanged,
+            bool submitFormOnSelect,
+            String? uploadPath,
+            @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+            MediaInputUiSettings uiSettings)?
+        media,
+    TResult Function(
+            String id,
             num? initialValue,
             bool isRequired,
             int? maxBound,
@@ -3581,6 +4598,7 @@ class _$StringInputImpl extends StringInput {
             GetCustomErrorForListDef<String>? getCustomError,
             @JsonKey(includeToJson: false, includeFromJson: false)
             void Function(List<String>?)? onValueChanged,
+            bool submitFormOnSelect,
             @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
             SelectInputUiSettings<String> uiSettings,
             @JsonKey(toJson: QuizSettings.staticToJson)
@@ -3610,6 +4628,7 @@ class _$StringInputImpl extends StringInput {
   TResult map<TResult extends Object?>({
     required TResult Function(BooleanInput value) boolean,
     required TResult Function(DateTimeInput value) dateTime,
+    required TResult Function(MediaInput value) media,
     required TResult Function(NumInput value) num,
     required TResult Function(SelectStringInput value) selectString,
     required TResult Function(StringInput value) string,
@@ -3622,6 +4641,7 @@ class _$StringInputImpl extends StringInput {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BooleanInput value)? boolean,
     TResult? Function(DateTimeInput value)? dateTime,
+    TResult? Function(MediaInput value)? media,
     TResult? Function(NumInput value)? num,
     TResult? Function(SelectStringInput value)? selectString,
     TResult? Function(StringInput value)? string,
@@ -3634,6 +4654,7 @@ class _$StringInputImpl extends StringInput {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BooleanInput value)? boolean,
     TResult Function(DateTimeInput value)? dateTime,
+    TResult Function(MediaInput value)? media,
     TResult Function(NumInput value)? num,
     TResult Function(SelectStringInput value)? selectString,
     TResult Function(StringInput value)? string,
@@ -3710,6 +4731,9 @@ mixin _$SelectInput<T> {
   @JsonKey(includeToJson: false, includeFromJson: false)
   GetCustomErrorForListDef<T>? get getCustomError =>
       throw _privateConstructorUsedError;
+
+  /// Only applies if maxCount is 1
+  bool get submitFormOnSelect => throw _privateConstructorUsedError;
   SelectInputUiSettings<T>? get uiSettings =>
       throw _privateConstructorUsedError;
   @JsonKey(toJson: QuizSettings.staticToJson)
@@ -3753,6 +4777,7 @@ abstract class $SelectInputCopyWith<T, $Res> {
       void Function(List<T>?)? onValueChanged,
       @JsonKey(includeToJson: false, includeFromJson: false)
       GetCustomErrorForListDef<T>? getCustomError,
+      bool submitFormOnSelect,
       SelectInputUiSettings<T>? uiSettings,
       @JsonKey(toJson: QuizSettings.staticToJson) QuizSettings? quizSettings,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -3787,6 +4812,7 @@ class _$SelectInputCopyWithImpl<T, $Res, $Val extends SelectInput<T>>
     Object? idsOfAvailibleValues = freezed,
     Object? onValueChanged = freezed,
     Object? getCustomError = freezed,
+    Object? submitFormOnSelect = null,
     Object? uiSettings = freezed,
     Object? quizSettings = freezed,
     Object? toJsonT = freezed,
@@ -3825,6 +4851,10 @@ class _$SelectInputCopyWithImpl<T, $Res, $Val extends SelectInput<T>>
           ? _value.getCustomError
           : getCustomError // ignore: cast_nullable_to_non_nullable
               as GetCustomErrorForListDef<T>?,
+      submitFormOnSelect: null == submitFormOnSelect
+          ? _value.submitFormOnSelect
+          : submitFormOnSelect // ignore: cast_nullable_to_non_nullable
+              as bool,
       uiSettings: freezed == uiSettings
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
@@ -3892,6 +4922,7 @@ abstract class _$$SelectInputImplCopyWith<T, $Res>
       void Function(List<T>?)? onValueChanged,
       @JsonKey(includeToJson: false, includeFromJson: false)
       GetCustomErrorForListDef<T>? getCustomError,
+      bool submitFormOnSelect,
       SelectInputUiSettings<T>? uiSettings,
       @JsonKey(toJson: QuizSettings.staticToJson) QuizSettings? quizSettings,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -3926,6 +4957,7 @@ class __$$SelectInputImplCopyWithImpl<T, $Res>
     Object? idsOfAvailibleValues = freezed,
     Object? onValueChanged = freezed,
     Object? getCustomError = freezed,
+    Object? submitFormOnSelect = null,
     Object? uiSettings = freezed,
     Object? quizSettings = freezed,
     Object? toJsonT = freezed,
@@ -3964,6 +4996,10 @@ class __$$SelectInputImplCopyWithImpl<T, $Res>
           ? _value.getCustomError
           : getCustomError // ignore: cast_nullable_to_non_nullable
               as GetCustomErrorForListDef<T>?,
+      submitFormOnSelect: null == submitFormOnSelect
+          ? _value.submitFormOnSelect
+          : submitFormOnSelect // ignore: cast_nullable_to_non_nullable
+              as bool,
       uiSettings: freezed == uiSettings
           ? _value.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
@@ -3998,6 +5034,7 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
       this.onValueChanged,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.getCustomError,
+      this.submitFormOnSelect = false,
       this.uiSettings,
       @JsonKey(toJson: QuizSettings.staticToJson) this.quizSettings,
       @JsonKey(includeToJson: false, includeFromJson: false) this.toJsonT,
@@ -4063,6 +5100,11 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final GetCustomErrorForListDef<T>? getCustomError;
+
+  /// Only applies if maxCount is 1
+  @override
+  @JsonKey()
+  final bool submitFormOnSelect;
   @override
   final SelectInputUiSettings<T>? uiSettings;
   @override
@@ -4086,7 +5128,7 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
 
   @override
   String toString() {
-    return 'SelectInput<$T>(id: $id, maxCount: $maxCount, minCount: $minCount, initialValues: $initialValues, availibleValues: $availibleValues, idsOfAvailibleValues: $idsOfAvailibleValues, onValueChanged: $onValueChanged, getCustomError: $getCustomError, uiSettings: $uiSettings, quizSettings: $quizSettings, toJsonT: $toJsonT, fromJsonT: $fromJsonT)';
+    return 'SelectInput<$T>(id: $id, maxCount: $maxCount, minCount: $minCount, initialValues: $initialValues, availibleValues: $availibleValues, idsOfAvailibleValues: $idsOfAvailibleValues, onValueChanged: $onValueChanged, getCustomError: $getCustomError, submitFormOnSelect: $submitFormOnSelect, uiSettings: $uiSettings, quizSettings: $quizSettings, toJsonT: $toJsonT, fromJsonT: $fromJsonT)';
   }
 
   @override
@@ -4109,6 +5151,8 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
                 other.onValueChanged == onValueChanged) &&
             (identical(other.getCustomError, getCustomError) ||
                 other.getCustomError == getCustomError) &&
+            (identical(other.submitFormOnSelect, submitFormOnSelect) ||
+                other.submitFormOnSelect == submitFormOnSelect) &&
             (identical(other.uiSettings, uiSettings) ||
                 other.uiSettings == uiSettings) &&
             (identical(other.quizSettings, quizSettings) ||
@@ -4129,6 +5173,7 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
       const DeepCollectionEquality().hash(_idsOfAvailibleValues),
       onValueChanged,
       getCustomError,
+      submitFormOnSelect,
       uiSettings,
       quizSettings,
       toJsonT,
@@ -4156,6 +5201,7 @@ abstract class _SelectInput<T> extends SelectInput<T> {
       final void Function(List<T>?)? onValueChanged,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final GetCustomErrorForListDef<T>? getCustomError,
+      final bool submitFormOnSelect,
       final SelectInputUiSettings<T>? uiSettings,
       @JsonKey(toJson: QuizSettings.staticToJson)
       final QuizSettings? quizSettings,
@@ -4191,6 +5237,10 @@ abstract class _SelectInput<T> extends SelectInput<T> {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   GetCustomErrorForListDef<T>? get getCustomError;
+
+  /// Only applies if maxCount is 1
+  @override
+  bool get submitFormOnSelect;
   @override
   SelectInputUiSettings<T>? get uiSettings;
   @override

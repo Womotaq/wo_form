@@ -21,6 +21,7 @@ SelectInput<T> _$SelectInputFromJson<T>(
       idsOfAvailibleValues: (json['idsOfAvailibleValues'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
+      submitFormOnSelect: json['submitFormOnSelect'] as bool,
       uiSettings: json['uiSettings'] == null
           ? null
           : SelectInputUiSettings<T>.fromJson(
@@ -41,6 +42,7 @@ Map<String, dynamic> _$SelectInputToJson<T>(
       'initialValues': instance.initialValues?.map(toJsonT).toList(),
       'availibleValues': instance.availibleValues.map(toJsonT).toList(),
       'idsOfAvailibleValues': instance.idsOfAvailibleValues,
+      'submitFormOnSelect': instance.submitFormOnSelect,
       'uiSettings': instance.uiSettings,
       'quizSettings': QuizSettings.staticToJson(instance.quizSettings),
     };
@@ -97,6 +99,53 @@ Map<String, dynamic> _$$DateTimeInputImplToJson(_$DateTimeInputImpl instance) =>
       'runtimeType': instance.$type,
     };
 
+_$MediaInputImpl _$$MediaInputImplFromJson(Map<String, dynamic> json) =>
+    _$MediaInputImpl(
+      id: json['id'] as String,
+      importSettings: MediaImportSettings.fromJson(
+          json['importSettings'] as Map<String, dynamic>),
+      maxCount: (json['maxCount'] as num?)?.toInt(),
+      minCount: (json['minCount'] as num?)?.toInt() ?? 0,
+      aspectRatio: (json['aspectRatio'] as num?)?.toDouble(),
+      initialValues: _$JsonConverterFromJson<List<dynamic>, List<Media>>(
+          json['initialValues'], const MediaListConverter().fromJson),
+      submitFormOnSelect: json['submitFormOnSelect'] as bool? ?? false,
+      uploadPath: json['uploadPath'] as String?,
+      uiSettings: json['uiSettings'] == null
+          ? const MediaInputUiSettings()
+          : MediaInputUiSettings.fromJson(
+              json['uiSettings'] as Map<String, dynamic>),
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$MediaInputImplToJson(_$MediaInputImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'importSettings':
+          MediaImportSettings.staticToJson(instance.importSettings),
+      'maxCount': instance.maxCount,
+      'minCount': instance.minCount,
+      'aspectRatio': instance.aspectRatio,
+      'initialValues': _$JsonConverterToJson<List<dynamic>, List<Media>>(
+          instance.initialValues, const MediaListConverter().toJson),
+      'submitFormOnSelect': instance.submitFormOnSelect,
+      'uploadPath': instance.uploadPath,
+      'uiSettings': MediaInputUiSettings.staticToJson(instance.uiSettings),
+      'runtimeType': instance.$type,
+    };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) =>
+    json == null ? null : fromJson(json as Json);
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) =>
+    value == null ? null : toJson(value);
+
 _$NumInputImpl _$$NumInputImplFromJson(Map<String, dynamic> json) =>
     _$NumInputImpl(
       id: json['id'] as String,
@@ -138,6 +187,7 @@ _$SelectStringInputImpl _$$SelectStringInputImplFromJson(
       idsOfAvailibleValues: (json['idsOfAvailibleValues'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
+      submitFormOnSelect: json['submitFormOnSelect'] as bool? ?? false,
       uiSettings: json['uiSettings'] == null
           ? const SelectInputUiSettings<String>()
           : SelectInputUiSettings<String>.fromJson(
@@ -157,6 +207,7 @@ Map<String, dynamic> _$$SelectStringInputImplToJson(
       'initialValues': instance.initialValues,
       'availibleValues': instance.availibleValues,
       'idsOfAvailibleValues': instance.idsOfAvailibleValues,
+      'submitFormOnSelect': instance.submitFormOnSelect,
       'uiSettings':
           _SelectInputUiSettingsX.staticToJsonString(instance.uiSettings),
       'quizSettings': QuizSettings.staticToJson(instance.quizSettings),

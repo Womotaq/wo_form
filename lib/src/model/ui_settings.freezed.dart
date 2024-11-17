@@ -1364,6 +1364,215 @@ abstract class _InputsNodeUiSettings extends InputsNodeUiSettings {
       get copyWith => throw _privateConstructorUsedError;
 }
 
+MediaInputUiSettings _$MediaInputUiSettingsFromJson(Map<String, dynamic> json) {
+  return _MediaInputUiSettings.fromJson(json);
+}
+
+/// @nodoc
+mixin _$MediaInputUiSettings {
+  String? get addMediaText => throw _privateConstructorUsedError;
+  int? get fieldHeight => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  MediaFieldBuilderDef? get widgetBuilder => throw _privateConstructorUsedError;
+
+  /// Serializes this MediaInputUiSettings to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of MediaInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $MediaInputUiSettingsCopyWith<MediaInputUiSettings> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MediaInputUiSettingsCopyWith<$Res> {
+  factory $MediaInputUiSettingsCopyWith(MediaInputUiSettings value,
+          $Res Function(MediaInputUiSettings) then) =
+      _$MediaInputUiSettingsCopyWithImpl<$Res, MediaInputUiSettings>;
+  @useResult
+  $Res call(
+      {String? addMediaText,
+      int? fieldHeight,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      MediaFieldBuilderDef? widgetBuilder});
+}
+
+/// @nodoc
+class _$MediaInputUiSettingsCopyWithImpl<$Res,
+        $Val extends MediaInputUiSettings>
+    implements $MediaInputUiSettingsCopyWith<$Res> {
+  _$MediaInputUiSettingsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of MediaInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? addMediaText = freezed,
+    Object? fieldHeight = freezed,
+    Object? widgetBuilder = freezed,
+  }) {
+    return _then(_value.copyWith(
+      addMediaText: freezed == addMediaText
+          ? _value.addMediaText
+          : addMediaText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fieldHeight: freezed == fieldHeight
+          ? _value.fieldHeight
+          : fieldHeight // ignore: cast_nullable_to_non_nullable
+              as int?,
+      widgetBuilder: freezed == widgetBuilder
+          ? _value.widgetBuilder
+          : widgetBuilder // ignore: cast_nullable_to_non_nullable
+              as MediaFieldBuilderDef?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$MediaInputUiSettingsImplCopyWith<$Res>
+    implements $MediaInputUiSettingsCopyWith<$Res> {
+  factory _$$MediaInputUiSettingsImplCopyWith(_$MediaInputUiSettingsImpl value,
+          $Res Function(_$MediaInputUiSettingsImpl) then) =
+      __$$MediaInputUiSettingsImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String? addMediaText,
+      int? fieldHeight,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      MediaFieldBuilderDef? widgetBuilder});
+}
+
+/// @nodoc
+class __$$MediaInputUiSettingsImplCopyWithImpl<$Res>
+    extends _$MediaInputUiSettingsCopyWithImpl<$Res, _$MediaInputUiSettingsImpl>
+    implements _$$MediaInputUiSettingsImplCopyWith<$Res> {
+  __$$MediaInputUiSettingsImplCopyWithImpl(_$MediaInputUiSettingsImpl _value,
+      $Res Function(_$MediaInputUiSettingsImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of MediaInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? addMediaText = freezed,
+    Object? fieldHeight = freezed,
+    Object? widgetBuilder = freezed,
+  }) {
+    return _then(_$MediaInputUiSettingsImpl(
+      addMediaText: freezed == addMediaText
+          ? _value.addMediaText
+          : addMediaText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fieldHeight: freezed == fieldHeight
+          ? _value.fieldHeight
+          : fieldHeight // ignore: cast_nullable_to_non_nullable
+              as int?,
+      widgetBuilder: freezed == widgetBuilder
+          ? _value.widgetBuilder
+          : widgetBuilder // ignore: cast_nullable_to_non_nullable
+              as MediaFieldBuilderDef?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$MediaInputUiSettingsImpl extends _MediaInputUiSettings {
+  const _$MediaInputUiSettingsImpl(
+      {this.addMediaText,
+      this.fieldHeight,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      this.widgetBuilder})
+      : super._();
+
+  factory _$MediaInputUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MediaInputUiSettingsImplFromJson(json);
+
+  @override
+  final String? addMediaText;
+  @override
+  final int? fieldHeight;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final MediaFieldBuilderDef? widgetBuilder;
+
+  @override
+  String toString() {
+    return 'MediaInputUiSettings(addMediaText: $addMediaText, fieldHeight: $fieldHeight, widgetBuilder: $widgetBuilder)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MediaInputUiSettingsImpl &&
+            (identical(other.addMediaText, addMediaText) ||
+                other.addMediaText == addMediaText) &&
+            (identical(other.fieldHeight, fieldHeight) ||
+                other.fieldHeight == fieldHeight) &&
+            (identical(other.widgetBuilder, widgetBuilder) ||
+                other.widgetBuilder == widgetBuilder));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, addMediaText, fieldHeight, widgetBuilder);
+
+  /// Create a copy of MediaInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$MediaInputUiSettingsImplCopyWith<_$MediaInputUiSettingsImpl>
+      get copyWith =>
+          __$$MediaInputUiSettingsImplCopyWithImpl<_$MediaInputUiSettingsImpl>(
+              this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$MediaInputUiSettingsImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _MediaInputUiSettings extends MediaInputUiSettings {
+  const factory _MediaInputUiSettings(
+      {final String? addMediaText,
+      final int? fieldHeight,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final MediaFieldBuilderDef? widgetBuilder}) = _$MediaInputUiSettingsImpl;
+  const _MediaInputUiSettings._() : super._();
+
+  factory _MediaInputUiSettings.fromJson(Map<String, dynamic> json) =
+      _$MediaInputUiSettingsImpl.fromJson;
+
+  @override
+  String? get addMediaText;
+  @override
+  int? get fieldHeight;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  MediaFieldBuilderDef? get widgetBuilder;
+
+  /// Create a copy of MediaInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$MediaInputUiSettingsImplCopyWith<_$MediaInputUiSettingsImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
 NumInputUiSettings _$NumInputUiSettingsFromJson(Map<String, dynamic> json) {
   return _NumInputUiSettings.fromJson(json);
 }
@@ -1632,9 +1841,6 @@ mixin _$SelectInputUiSettings<T> {
   @JsonKey(includeToJson: false, includeFromJson: false)
   ScoreWidgetBuilderDef? get scoreBuilder => throw _privateConstructorUsedError;
 
-  /// Only applies to unique choices
-  bool get submitFormOnSelect => throw _privateConstructorUsedError;
-
   /// Serializes this SelectInputUiSettings to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
@@ -1668,8 +1874,7 @@ abstract class $SelectInputUiSettingsCopyWith<T, $Res> {
       @JsonKey(includeToJson: false, includeFromJson: false)
       InputHeaderBuilderDef? headerBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      ScoreWidgetBuilderDef? scoreBuilder,
-      bool submitFormOnSelect});
+      ScoreWidgetBuilderDef? scoreBuilder});
 }
 
 /// @nodoc
@@ -1699,7 +1904,6 @@ class _$SelectInputUiSettingsCopyWithImpl<T, $Res,
     Object? widgetBuilder = freezed,
     Object? headerBuilder = freezed,
     Object? scoreBuilder = freezed,
-    Object? submitFormOnSelect = null,
   }) {
     return _then(_value.copyWith(
       labelText: freezed == labelText
@@ -1746,10 +1950,6 @@ class _$SelectInputUiSettingsCopyWithImpl<T, $Res,
           ? _value.scoreBuilder
           : scoreBuilder // ignore: cast_nullable_to_non_nullable
               as ScoreWidgetBuilderDef?,
-      submitFormOnSelect: null == submitFormOnSelect
-          ? _value.submitFormOnSelect
-          : submitFormOnSelect // ignore: cast_nullable_to_non_nullable
-              as bool,
     ) as $Val);
   }
 }
@@ -1780,8 +1980,7 @@ abstract class _$$SelectInputUiSettingsImplCopyWith<T, $Res>
       @JsonKey(includeToJson: false, includeFromJson: false)
       InputHeaderBuilderDef? headerBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      ScoreWidgetBuilderDef? scoreBuilder,
-      bool submitFormOnSelect});
+      ScoreWidgetBuilderDef? scoreBuilder});
 }
 
 /// @nodoc
@@ -1810,7 +2009,6 @@ class __$$SelectInputUiSettingsImplCopyWithImpl<T, $Res>
     Object? widgetBuilder = freezed,
     Object? headerBuilder = freezed,
     Object? scoreBuilder = freezed,
-    Object? submitFormOnSelect = null,
   }) {
     return _then(_$SelectInputUiSettingsImpl<T>(
       labelText: freezed == labelText
@@ -1857,10 +2055,6 @@ class __$$SelectInputUiSettingsImplCopyWithImpl<T, $Res>
           ? _value.scoreBuilder
           : scoreBuilder // ignore: cast_nullable_to_non_nullable
               as ScoreWidgetBuilderDef?,
-      submitFormOnSelect: null == submitFormOnSelect
-          ? _value.submitFormOnSelect
-          : submitFormOnSelect // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -1880,8 +2074,7 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
       @JsonKey(includeFromJson: false, includeToJson: false) this.searcher,
       @JsonKey(includeToJson: false, includeFromJson: false) this.widgetBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false) this.headerBuilder,
-      @JsonKey(includeToJson: false, includeFromJson: false) this.scoreBuilder,
-      this.submitFormOnSelect = false})
+      @JsonKey(includeToJson: false, includeFromJson: false) this.scoreBuilder})
       : super._();
 
   factory _$SelectInputUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
@@ -1924,14 +2117,9 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
   @JsonKey(includeToJson: false, includeFromJson: false)
   final ScoreWidgetBuilderDef? scoreBuilder;
 
-  /// Only applies to unique choices
-  @override
-  @JsonKey()
-  final bool submitFormOnSelect;
-
   @override
   String toString() {
-    return 'SelectInputUiSettings<$T>(labelText: $labelText, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, labelFlex: $labelFlex, valueBuilder: $valueBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder, submitFormOnSelect: $submitFormOnSelect)';
+    return 'SelectInputUiSettings<$T>(labelText: $labelText, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, labelFlex: $labelFlex, valueBuilder: $valueBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder)';
   }
 
   @override
@@ -1960,9 +2148,7 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
             (identical(other.headerBuilder, headerBuilder) ||
                 other.headerBuilder == headerBuilder) &&
             (identical(other.scoreBuilder, scoreBuilder) ||
-                other.scoreBuilder == scoreBuilder) &&
-            (identical(other.submitFormOnSelect, submitFormOnSelect) ||
-                other.submitFormOnSelect == submitFormOnSelect));
+                other.scoreBuilder == scoreBuilder));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1979,8 +2165,7 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
       searcher,
       widgetBuilder,
       headerBuilder,
-      scoreBuilder,
-      submitFormOnSelect);
+      scoreBuilder);
 
   /// Create a copy of SelectInputUiSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -2001,24 +2186,24 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
 
 abstract class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
   const factory _SelectInputUiSettings(
-      {final String? labelText,
-      final String? helperText,
-      final String? hintText,
-      final ChildrenVisibility? childrenVisibility,
-      final int? labelFlex,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      final Widget Function(T?)? valueBuilder,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      final Widget? Function(T)? helpValueBuilder,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      final double Function(String, T)? searcher,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      final SelectFieldBuilderDef<T>? widgetBuilder,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      final InputHeaderBuilderDef? headerBuilder,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      final ScoreWidgetBuilderDef? scoreBuilder,
-      final bool submitFormOnSelect}) = _$SelectInputUiSettingsImpl<T>;
+          {final String? labelText,
+          final String? helperText,
+          final String? hintText,
+          final ChildrenVisibility? childrenVisibility,
+          final int? labelFlex,
+          @JsonKey(includeFromJson: false, includeToJson: false)
+          final Widget Function(T?)? valueBuilder,
+          @JsonKey(includeFromJson: false, includeToJson: false)
+          final Widget? Function(T)? helpValueBuilder,
+          @JsonKey(includeFromJson: false, includeToJson: false)
+          final double Function(String, T)? searcher,
+          @JsonKey(includeToJson: false, includeFromJson: false)
+          final SelectFieldBuilderDef<T>? widgetBuilder,
+          @JsonKey(includeToJson: false, includeFromJson: false)
+          final InputHeaderBuilderDef? headerBuilder,
+          @JsonKey(includeToJson: false, includeFromJson: false)
+          final ScoreWidgetBuilderDef? scoreBuilder}) =
+      _$SelectInputUiSettingsImpl<T>;
   const _SelectInputUiSettings._() : super._();
 
   factory _SelectInputUiSettings.fromJson(Map<String, dynamic> json) =
@@ -2060,10 +2245,6 @@ abstract class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   ScoreWidgetBuilderDef? get scoreBuilder;
-
-  /// Only applies to unique choices
-  @override
-  bool get submitFormOnSelect;
 
   /// Create a copy of SelectInputUiSettings
   /// with the given fields replaced by the non-null parameter values.

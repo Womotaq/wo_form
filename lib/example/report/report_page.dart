@@ -77,7 +77,11 @@ class ReportPage extends StatelessWidget {
           builder: (BuildContext dialogContext) {
             return AlertDialog(
               title: const Text("Ce json vient d'être envoyé."),
-              content: Text(readableJson(root.exportToMap(values: values))),
+              content: Text(
+                readableJson(
+                  root.exportToMap(values: values, context: context),
+                ),
+              ),
               actions: [
                 FilledButton.tonalIcon(
                   onPressed: () => Navigator.of(dialogContext).pop(),
