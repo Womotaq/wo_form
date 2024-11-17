@@ -307,6 +307,7 @@ const _$SubmitButtonPositionEnumMap = {
   SubmitButtonPosition.body: 'body',
   SubmitButtonPosition.appBar: 'appBar',
   SubmitButtonPosition.bottomBar: 'bottomBar',
+  SubmitButtonPosition.floating: 'floating',
 };
 
 _$PageByPageSubmitModeImpl _$$PageByPageSubmitModeImplFromJson(

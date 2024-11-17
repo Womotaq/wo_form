@@ -11,49 +11,51 @@ class SubmitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formStatus = context.watch<WoFormStatusCubit>().state;
+    final loadingIndicator =
+        context.select((WoFormStatusCubit c) => c.state is SubmittingStatus)
+            ? SizedBox.square(
+                dimension: 12,
+                child: CircularProgressIndicator(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                  strokeWidth: 2,
+                ),
+              )
+            : null;
 
-    final loadingIndicator = formStatus is SubmittingStatus
-        ? SizedBox.square(
-            dimension: 12,
-            child: CircularProgressIndicator(
-              color: Theme.of(context).colorScheme.onPrimary,
-              strokeWidth: 2,
-            ),
-          )
-        : null;
+    final text = data.text == null || data.text!.isEmpty || data.icon == null
+        ? null
+        : Text(
+            data.text ?? 'Submit',
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: data.onPressed == null
+                      ? Theme.of(context).disabledColor
+                      : Theme.of(context).colorScheme.onPrimary,
+                ),
+          );
 
-    final text = Text(
-      data.text ?? '',
-      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: data.onPressed == null
-                ? Theme.of(context).disabledColor
-                : Theme.of(context).colorScheme.onPrimary,
-          ),
-    );
-    final child = loadingIndicator == null
-        ? text
-        : Row(
+    final child = Stack(
+      alignment: Alignment.center,
+      children: [
+        Opacity(
+          opacity: loadingIndicator == null ? 1 : 0,
+          child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              loadingIndicator,
-              const SizedBox(width: 8),
-              text,
-              const SizedBox(width: 20),
+              if (data.icon != null) Icon(data.icon),
+              if (data.icon != null && text != null) const SizedBox(width: 8),
+              if (text != null) text,
             ],
-          );
+          ),
+        ),
+        if (loadingIndicator != null) loadingIndicator,
+      ],
+    );
 
-    final button = data.icon == null
-        ? FilledButton(
-            onPressed: data.onPressed,
-            child: child,
-          )
-        : FilledButton.icon(
-            onPressed: data.onPressed,
-            icon: Icon(data.icon),
-            label: child,
-          );
+    final button = FilledButton(
+      onPressed: data.onPressed,
+      child: child,
+    );
 
     switch (data.position) {
       case SubmitButtonPosition.appBar:
@@ -72,6 +74,20 @@ class SubmitButton extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: button,
         );
+      case SubmitButtonPosition.floating:
+        return text == null
+            ? FloatingActionButton(
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                onPressed: data.onPressed,
+                child: child,
+              )
+            : FloatingActionButton.extended(
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                onPressed: data.onPressed,
+                label: child,
+              );
     }
   }
 }

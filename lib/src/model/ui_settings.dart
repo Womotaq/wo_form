@@ -506,7 +506,7 @@ class WoFormUiSettings with _$WoFormUiSettings {
       object.toJson();
 }
 
-enum SubmitButtonPosition { body, appBar, bottomBar }
+enum SubmitButtonPosition { body, appBar, bottomBar, floating }
 
 enum DisableSubmitButton { never, whenInvalid, whenInitialOrSubmitSuccess }
 

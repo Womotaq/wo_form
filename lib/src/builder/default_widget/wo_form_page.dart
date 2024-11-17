@@ -106,6 +106,10 @@ class _StandardScaffold extends StatelessWidget {
           child: body,
         ),
       ),
+      floatingActionButton:
+          uiSettings.submitMode.buttonPosition == SubmitButtonPosition.floating
+              ? const SubmitButtonBuilder()
+              : null,
     );
   }
 }

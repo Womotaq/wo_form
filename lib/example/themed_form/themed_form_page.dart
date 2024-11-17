@@ -230,6 +230,11 @@ class CustomSubmitButton extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: button,
         );
+      case SubmitButtonPosition.floating:
+        return Padding(
+          padding: const EdgeInsets.all(16),
+          child: button,
+        );
     }
   }
 }
