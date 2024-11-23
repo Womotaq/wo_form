@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:popover/popover.dart';
-import 'package:wo_form/example/app.dart';
 
 class SearchField<T> extends StatelessWidget {
   SearchField.uniqueChoice({
@@ -145,15 +144,19 @@ class SearchField<T> extends StatelessWidget {
     }
 
     if (searcher != null) {
-      context.pushPage(
-        (provider ?? ({required Widget child}) => child)(
-          child: Scaffold(
-            appBar: AppBar(),
-            body: SearchScreen(
-              values: values,
-              tileBuilder: tileBuilder,
-              bottomChildren: bottomChildren,
-              searcher: searcher,
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          builder: (context) =>
+              (provider ?? ({required Widget child}) => child)(
+            child: Scaffold(
+              appBar: AppBar(),
+              body: SearchScreen(
+                values: values,
+                tileBuilder: tileBuilder,
+                bottomChildren: bottomChildren,
+                searcher: searcher,
+              ),
             ),
           ),
         ),

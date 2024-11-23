@@ -245,7 +245,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     required String parentPath,
     required BuildContext context,
   }) async {
-    final exportValue = _exportValue(values['$parentPath/$id'], context);
+    final exportValue = await _exportValue(values['$parentPath/$id'], context);
 
     if (into is List) {
       into.add(exportValue);

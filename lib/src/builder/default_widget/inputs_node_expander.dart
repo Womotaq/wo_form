@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wo_form/example/app.dart';
 import 'package:wo_form/wo_form.dart';
 
 class InputsNodeExpander extends StatefulWidget {
@@ -43,22 +42,25 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
   }
 
   void pushPage(BuildContext context) {
-    context.pushPage(
-      RepositoryProvider.value(
-        value: context.read<RootNode>(),
-        child: MultiBlocProvider(
-          providers: [
-            BlocProvider.value(
-              value: context.read<WoFormValuesCubit>(),
-            ),
-            BlocProvider.value(
-              value: context.read<WoFormStatusCubit>(),
-            ),
-            BlocProvider.value(
-              value: context.read<WoFormLockCubit>(),
-            ),
-          ],
-          child: _InputsNodePage(data: widget.data),
+    Navigator.push(
+      context,
+      MaterialPageRoute<void>(
+        builder: (context) => RepositoryProvider.value(
+          value: context.read<RootNode>(),
+          child: MultiBlocProvider(
+            providers: [
+              BlocProvider.value(
+                value: context.read<WoFormValuesCubit>(),
+              ),
+              BlocProvider.value(
+                value: context.read<WoFormStatusCubit>(),
+              ),
+              BlocProvider.value(
+                value: context.read<WoFormLockCubit>(),
+              ),
+            ],
+            child: _InputsNodePage(data: widget.data),
+          ),
         ),
       ),
     );

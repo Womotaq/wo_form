@@ -22,17 +22,18 @@ class SubmitButton extends StatelessWidget {
               )
             : null;
 
-    final text = data.text == null || data.text!.isEmpty || data.icon == null
-        ? null
-        : Text(
-            data.text ?? 'Submit',
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: data.onPressed == null
-                      ? Theme.of(context).disabledColor
-                      : Theme.of(context).colorScheme.onPrimary,
-                ),
-          );
+    final text =
+        (data.text != null && data.text!.isNotEmpty) || data.icon == null
+            ? Text(
+                data.text ?? 'Submit',
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: data.onPressed == null
+                          ? Theme.of(context).disabledColor
+                          : Theme.of(context).colorScheme.onPrimary,
+                    ),
+              )
+            : null;
 
     final child = Stack(
       alignment: Alignment.center,
@@ -77,13 +78,17 @@ class SubmitButton extends StatelessWidget {
       case SubmitButtonPosition.floating:
         return text == null
             ? FloatingActionButton(
-                backgroundColor: Theme.of(context).colorScheme.primary,
+                backgroundColor: data.onPressed == null
+                    ? Theme.of(context).disabledColor
+                    : Theme.of(context).colorScheme.primary,
                 foregroundColor: Theme.of(context).colorScheme.onPrimary,
                 onPressed: data.onPressed,
                 child: child,
               )
             : FloatingActionButton.extended(
-                backgroundColor: Theme.of(context).colorScheme.primary,
+                backgroundColor: data.onPressed == null
+                    ? Theme.of(context).disabledColor
+                    : Theme.of(context).colorScheme.primary,
                 foregroundColor: Theme.of(context).colorScheme.onPrimary,
                 onPressed: data.onPressed,
                 label: child,

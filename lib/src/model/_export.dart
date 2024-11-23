@@ -1,6 +1,7 @@
 export 'condition.dart';
 export 'data.dart';
 export 'export_settings.dart';
+export 'json_converter/_export.dart';
 export 'media.dart';
 export 'quiz_settings.dart';
 export 'ui_settings.dart';
