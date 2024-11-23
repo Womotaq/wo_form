@@ -133,6 +133,11 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     DateTimeInputUiSettings uiSettings,
   }) = DateTimeInput;
 
+  /// If you want to use MediaInput, provide an implementation of [MediaService]
+  /// at the top-level of your application with a [BlocProvider].
+  /// See wo_form_service for an implementation example.
+  /// Also provide a field using [MediaInputUiSettings.widgetBuilder]
+  /// or [WoFormThemeData.mediaFieldBuilder].
   @Assert(
     'maxCount == null || minCount <= maxCount',
     'maxCount must be higher or equal to minCount',
