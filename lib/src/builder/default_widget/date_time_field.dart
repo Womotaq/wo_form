@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -63,20 +64,22 @@ class DateTimeField extends StatelessWidget {
             onTap: data.onValueChanged == null
                 ? null
                 : () async {
-                    final selectedDate = await showDatePicker(
-                      context: context,
-                      initialDate: initialDate == null ||
-                              initialDate.isBefore(firstDate) ||
-                              initialDate.isAfter(lastDate)
-                          ? null
-                          : initialDate,
-                      firstDate: data.input.minBound ??
-                          DateTime(now.year - 2, now.month, now.day),
-                      lastDate: data.input.maxBound ??
-                          DateTime(now.year + 2, now.month, now.day),
-                      initialEntryMode: data.uiSettings.initialEntryMode ??
-                          DatePickerEntryMode.calendar,
-                    );
+                    final selectedDate =
+                        await context.read<DateTimeService>().pickDate(
+                              context: context,
+                              initialDate: initialDate == null ||
+                                      initialDate.isBefore(firstDate) ||
+                                      initialDate.isAfter(lastDate)
+                                  ? null
+                                  : initialDate,
+                              minBound: data.input.minBound ??
+                                  DateTime(now.year - 2, now.month, now.day),
+                              maxBound: data.input.maxBound ??
+                                  DateTime(now.year + 2, now.month, now.day),
+                              initialEntryMode:
+                                  data.uiSettings.initialEntryMode ??
+                                      DatePickerEntryMode.calendar,
+                            );
 
                     if (selectedDate != null) {
                       data.onValueChanged!(selectedDate);

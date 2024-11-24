@@ -120,6 +120,24 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     BooleanInputUiSettings uiSettings,
   }) = BooleanInput;
 
+  /// If you want to use DateTimeInput, provide an implementation of
+  /// [DateTimeService] at the top-level of your application with a
+  /// [RepositoryProvider]. See wo_form_service for an implementation example.
+  ///
+  /// You must provide DateTimeService this way :
+  /// ```dart
+  /// RepositoryProvider<DateTimeService>(
+  ///   create: (context) => const MyDateTimeService(),
+  /// ),
+  /// ```
+  ///
+  /// In order to make context.read<MyDateTimeService>() work, add :
+  /// ```dart
+  /// RepositoryProvider<MyDateTimeService>(
+  ///   create: (context) =>
+  ///       context.read<DateTimeService>() as MyDateTimeService,
+  /// ),
+  /// ```
   const factory WoFormInput.dateTime({
     required String id,
     DateTime? initialValue,
@@ -134,10 +152,25 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
   }) = DateTimeInput;
 
   /// If you want to use MediaInput, provide an implementation of [MediaService]
-  /// at the top-level of your application with a [BlocProvider].
+  /// at the top-level of your application with a [RepositoryProvider].
   /// See wo_form_service for an implementation example.
   /// Also provide a field using [MediaInputUiSettings.widgetBuilder]
   /// or [WoFormThemeData.mediaFieldBuilder].
+  ///
+  /// You must provide MediaService this way :
+  /// ```dart
+  /// RepositoryProvider<MediaService>(
+  ///   create: (context) => const MyMediaService(),
+  /// ),
+  /// ```
+  ///
+  /// In order to make context.read<MyMediaService>() work, add :
+  /// ```dart
+  /// RepositoryProvider<MyMediaService>(
+  ///   create: (context) =>
+  ///       context.read<MediaService>() as MyMediaService,
+  /// ),
+  /// ```
   @Assert(
     'maxCount == null || minCount <= maxCount',
     'maxCount must be higher or equal to minCount',
