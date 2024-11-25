@@ -72,7 +72,7 @@ class MediaImportSettings with _$MediaImportSettings {
     int? imageQuality,
     @Default(true) bool imageRequestFullMetadata,
     @DurationNullableConverter() Duration? videoMaxDuration,
-    @Default(false) bool preferRearCamera,
+    @Default(false) bool preferFrontCamera,
   }) = _MediaImportSettings;
 
   const MediaImportSettings._();

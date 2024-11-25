@@ -431,7 +431,7 @@ mixin _$MediaImportSettings {
   bool get imageRequestFullMetadata => throw _privateConstructorUsedError;
   @DurationNullableConverter()
   Duration? get videoMaxDuration => throw _privateConstructorUsedError;
-  bool get preferRearCamera => throw _privateConstructorUsedError;
+  bool get preferFrontCamera => throw _privateConstructorUsedError;
 
   /// Serializes this MediaImportSettings to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -457,7 +457,7 @@ abstract class $MediaImportSettingsCopyWith<$Res> {
       int? imageQuality,
       bool imageRequestFullMetadata,
       @DurationNullableConverter() Duration? videoMaxDuration,
-      bool preferRearCamera});
+      bool preferFrontCamera});
 }
 
 /// @nodoc
@@ -482,7 +482,7 @@ class _$MediaImportSettingsCopyWithImpl<$Res, $Val extends MediaImportSettings>
     Object? imageQuality = freezed,
     Object? imageRequestFullMetadata = null,
     Object? videoMaxDuration = freezed,
-    Object? preferRearCamera = null,
+    Object? preferFrontCamera = null,
   }) {
     return _then(_value.copyWith(
       types: null == types
@@ -513,9 +513,9 @@ class _$MediaImportSettingsCopyWithImpl<$Res, $Val extends MediaImportSettings>
           ? _value.videoMaxDuration
           : videoMaxDuration // ignore: cast_nullable_to_non_nullable
               as Duration?,
-      preferRearCamera: null == preferRearCamera
-          ? _value.preferRearCamera
-          : preferRearCamera // ignore: cast_nullable_to_non_nullable
+      preferFrontCamera: null == preferFrontCamera
+          ? _value.preferFrontCamera
+          : preferFrontCamera // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -537,7 +537,7 @@ abstract class _$$MediaImportSettingsImplCopyWith<$Res>
       int? imageQuality,
       bool imageRequestFullMetadata,
       @DurationNullableConverter() Duration? videoMaxDuration,
-      bool preferRearCamera});
+      bool preferFrontCamera});
 }
 
 /// @nodoc
@@ -560,7 +560,7 @@ class __$$MediaImportSettingsImplCopyWithImpl<$Res>
     Object? imageQuality = freezed,
     Object? imageRequestFullMetadata = null,
     Object? videoMaxDuration = freezed,
-    Object? preferRearCamera = null,
+    Object? preferFrontCamera = null,
   }) {
     return _then(_$MediaImportSettingsImpl(
       types: null == types
@@ -591,9 +591,9 @@ class __$$MediaImportSettingsImplCopyWithImpl<$Res>
           ? _value.videoMaxDuration
           : videoMaxDuration // ignore: cast_nullable_to_non_nullable
               as Duration?,
-      preferRearCamera: null == preferRearCamera
-          ? _value.preferRearCamera
-          : preferRearCamera // ignore: cast_nullable_to_non_nullable
+      preferFrontCamera: null == preferFrontCamera
+          ? _value.preferFrontCamera
+          : preferFrontCamera // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -611,7 +611,7 @@ class _$MediaImportSettingsImpl extends _MediaImportSettings {
       this.imageQuality,
       this.imageRequestFullMetadata = true,
       @DurationNullableConverter() this.videoMaxDuration,
-      this.preferRearCamera = false})
+      this.preferFrontCamera = false})
       : _types = types,
         _methods = methods,
         super._();
@@ -650,11 +650,11 @@ class _$MediaImportSettingsImpl extends _MediaImportSettings {
   final Duration? videoMaxDuration;
   @override
   @JsonKey()
-  final bool preferRearCamera;
+  final bool preferFrontCamera;
 
   @override
   String toString() {
-    return 'MediaImportSettings(types: $types, methods: $methods, imageMaxHeight: $imageMaxHeight, imageMaxWidth: $imageMaxWidth, imageQuality: $imageQuality, imageRequestFullMetadata: $imageRequestFullMetadata, videoMaxDuration: $videoMaxDuration, preferRearCamera: $preferRearCamera)';
+    return 'MediaImportSettings(types: $types, methods: $methods, imageMaxHeight: $imageMaxHeight, imageMaxWidth: $imageMaxWidth, imageQuality: $imageQuality, imageRequestFullMetadata: $imageRequestFullMetadata, videoMaxDuration: $videoMaxDuration, preferFrontCamera: $preferFrontCamera)';
   }
 
   @override
@@ -675,8 +675,8 @@ class _$MediaImportSettingsImpl extends _MediaImportSettings {
                 other.imageRequestFullMetadata == imageRequestFullMetadata) &&
             (identical(other.videoMaxDuration, videoMaxDuration) ||
                 other.videoMaxDuration == videoMaxDuration) &&
-            (identical(other.preferRearCamera, preferRearCamera) ||
-                other.preferRearCamera == preferRearCamera));
+            (identical(other.preferFrontCamera, preferFrontCamera) ||
+                other.preferFrontCamera == preferFrontCamera));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -690,7 +690,7 @@ class _$MediaImportSettingsImpl extends _MediaImportSettings {
       imageQuality,
       imageRequestFullMetadata,
       videoMaxDuration,
-      preferRearCamera);
+      preferFrontCamera);
 
   /// Create a copy of MediaImportSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -719,7 +719,7 @@ abstract class _MediaImportSettings extends MediaImportSettings {
       final int? imageQuality,
       final bool imageRequestFullMetadata,
       @DurationNullableConverter() final Duration? videoMaxDuration,
-      final bool preferRearCamera}) = _$MediaImportSettingsImpl;
+      final bool preferFrontCamera}) = _$MediaImportSettingsImpl;
   const _MediaImportSettings._() : super._();
 
   factory _MediaImportSettings.fromJson(Map<String, dynamic> json) =
@@ -742,7 +742,7 @@ abstract class _MediaImportSettings extends MediaImportSettings {
   @DurationNullableConverter()
   Duration? get videoMaxDuration;
   @override
-  bool get preferRearCamera;
+  bool get preferFrontCamera;
 
   /// Create a copy of MediaImportSettings
   /// with the given fields replaced by the non-null parameter values.

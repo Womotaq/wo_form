@@ -46,7 +46,7 @@ _$MediaImportSettingsImpl _$$MediaImportSettingsImplFromJson(
           json['imageRequestFullMetadata'] as bool? ?? true,
       videoMaxDuration: const DurationNullableConverter()
           .fromJson((json['videoMaxDuration'] as num?)?.toInt()),
-      preferRearCamera: json['preferRearCamera'] as bool? ?? false,
+      preferFrontCamera: json['preferFrontCamera'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$MediaImportSettingsImplToJson(
@@ -61,7 +61,7 @@ Map<String, dynamic> _$$MediaImportSettingsImplToJson(
       'imageRequestFullMetadata': instance.imageRequestFullMetadata,
       'videoMaxDuration':
           const DurationNullableConverter().toJson(instance.videoMaxDuration),
-      'preferRearCamera': instance.preferRearCamera,
+      'preferFrontCamera': instance.preferFrontCamera,
     };
 
 const _$MediaTypeEnumMap = {
