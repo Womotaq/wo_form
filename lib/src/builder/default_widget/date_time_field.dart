@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -15,10 +14,10 @@ class DateTimeField extends StatelessWidget {
     final themedBorder = inputDecorationTheme.border;
 
     final now = DateTime.now();
-    final firstDate =
-        data.input.minBound ?? DateTime(now.year - 2, now.month, now.day);
-    final lastDate =
-        data.input.maxBound ?? DateTime(now.year + 2, now.month, now.day);
+    final firstDate = data.input.minBound?.resolve() ??
+        DateTime(now.year - 2, now.month, now.day);
+    final lastDate = data.input.maxBound?.resolve() ??
+        DateTime(now.year + 2, now.month, now.day);
     final initialDate = data.value == null ||
             data.value!.isBefore(firstDate) ||
             data.value!.isAfter(lastDate)
@@ -64,22 +63,24 @@ class DateTimeField extends StatelessWidget {
             onTap: data.onValueChanged == null
                 ? null
                 : () async {
-                    final selectedDate =
-                        await context.read<DateTimeService>().pickDate(
-                              context: context,
-                              initialDate: initialDate == null ||
-                                      initialDate.isBefore(firstDate) ||
-                                      initialDate.isAfter(lastDate)
-                                  ? null
-                                  : initialDate,
-                              minBound: data.input.minBound ??
-                                  DateTime(now.year - 2, now.month, now.day),
-                              maxBound: data.input.maxBound ??
-                                  DateTime(now.year + 2, now.month, now.day),
-                              initialEntryMode:
-                                  data.uiSettings.initialEntryMode ??
-                                      DatePickerEntryMode.calendar,
-                            );
+                    final pickDate = data.uiSettings.pickDate ??
+                        WoFormTheme.of(context)?.pickDate ??
+                        _defaultPickDate;
+
+                    final selectedDate = await pickDate(
+                      context: context,
+                      initialDate: initialDate == null ||
+                              initialDate.isBefore(firstDate) ||
+                              initialDate.isAfter(lastDate)
+                          ? null
+                          : initialDate,
+                      minBound: data.input.minBound?.resolve() ??
+                          DateTime(now.year - 2, now.month, now.day),
+                      maxBound: data.input.maxBound?.resolve() ??
+                          DateTime(now.year + 2, now.month, now.day),
+                      initialEntryMode: data.uiSettings.initialEntryMode ??
+                          DatePickerEntryMode.calendar,
+                    );
 
                     if (selectedDate != null) {
                       data.onValueChanged!(selectedDate);
@@ -101,6 +102,24 @@ class DateTimeField extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Future<DateTime?> _defaultPickDate({
+    required BuildContext context,
+    DateTime? initialDate,
+    DateTime? maxBound,
+    DateTime? minBound,
+    DatePickerEntryMode? initialEntryMode,
+  }) {
+    final now = DateTime.now();
+
+    return showDatePicker(
+      context: context,
+      initialDate: initialDate,
+      firstDate: minBound ?? DateTime(now.year, now.month - 1),
+      lastDate: maxBound ?? DateTime(now.year + 1, now.month),
+      initialEntryMode: initialEntryMode ?? DatePickerEntryMode.calendar,
     );
   }
 }

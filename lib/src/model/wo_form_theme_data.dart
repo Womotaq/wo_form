@@ -24,6 +24,7 @@ class WoFormThemeData with _$WoFormThemeData {
     InputNodeWidgetBuilderDef? inputsNodeWidgetBuilder,
     MediaFieldBuilderDef? mediaFieldBuilder,
     NumFieldBuilderDef? numFieldBuilder,
+    PickDateDef? pickDate,
     ScoreWidgetBuilderDef? scoreBuilder,
     SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
     ScaffoldBuilderDef? standardScaffoldBuilder,

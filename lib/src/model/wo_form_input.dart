@@ -140,10 +140,11 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
   /// ```
   const factory WoFormInput.dateTime({
     required String id,
-    DateTime? initialValue,
+    @JsonKey(toJson: FlexibleDateTime.staticToJson)
+    FlexibleDateTime? initialValue,
     @Default(false) bool isRequired,
-    DateTime? maxBound,
-    DateTime? minBound,
+    @JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? maxBound,
+    @JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? minBound,
     @JsonKey(includeToJson: false, includeFromJson: false)
     GetCustomErrorDef<DateTime>? getCustomError,
     @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -367,10 +368,10 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
               : null;
         }
 
-        if (minBound != null && value.isBefore(minBound)) {
+        if (minBound != null && value.isBefore(minBound.resolve())) {
           return WoFormInputError.minBound(path: '$parentPath/$id');
         }
-        if (maxBound != null && value.isAfter(maxBound)) {
+        if (maxBound != null && value.isAfter(maxBound.resolve())) {
           return WoFormInputError.maxBound(path: '$parentPath/$id');
         }
 
@@ -477,7 +478,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
       case BooleanInput(initialValue: final initialValue):
         return {'$parentPath/$id': initialValue};
       case DateTimeInput(initialValue: final initialValue):
-        return {'$parentPath/$id': initialValue};
+        return {'$parentPath/$id': initialValue?.resolve()};
       case MediaInput(initialValues: final initialValues):
         return {'$parentPath/$id': initialValues};
       case NumInput(initialValue: final initialValue):

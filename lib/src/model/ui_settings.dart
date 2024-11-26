@@ -49,12 +49,22 @@ typedef DateTimeFieldBuilderDef = Widget Function(
   WoFieldData<DateTimeInput, DateTime, DateTimeInputUiSettings> data,
 );
 
+typedef PickDateDef = Future<DateTime?> Function({
+  required BuildContext context,
+  DateTime? initialDate,
+  DateTime? maxBound,
+  DateTime? minBound,
+  DatePickerEntryMode? initialEntryMode,
+});
+
 @freezed
 class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
   const factory DateTimeInputUiSettings({
     String? labelText,
     String? helperText,
     DatePickerEntryMode? initialEntryMode,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    PickDateDef? pickDate,
     @JsonKey(includeToJson: false, includeFromJson: false)
     DateTimeFieldBuilderDef? widgetBuilder,
   }) = _DateTimeInputUiSettings;
@@ -73,6 +83,7 @@ class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
           labelText: labelText ?? other.labelText,
           helperText: helperText ?? other.helperText,
           initialEntryMode: initialEntryMode ?? other.initialEntryMode,
+          pickDate: pickDate ?? other.pickDate,
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,
         );
 }

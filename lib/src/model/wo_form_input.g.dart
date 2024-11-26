@@ -73,14 +73,15 @@ _$DateTimeInputImpl _$$DateTimeInputImplFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       initialValue: json['initialValue'] == null
           ? null
-          : DateTime.parse(json['initialValue'] as String),
+          : FlexibleDateTime.fromJson(
+              json['initialValue'] as Map<String, dynamic>),
       isRequired: json['isRequired'] as bool? ?? false,
       maxBound: json['maxBound'] == null
           ? null
-          : DateTime.parse(json['maxBound'] as String),
+          : FlexibleDateTime.fromJson(json['maxBound'] as Map<String, dynamic>),
       minBound: json['minBound'] == null
           ? null
-          : DateTime.parse(json['minBound'] as String),
+          : FlexibleDateTime.fromJson(json['minBound'] as Map<String, dynamic>),
       uiSettings: json['uiSettings'] == null
           ? const DateTimeInputUiSettings()
           : DateTimeInputUiSettings.fromJson(
@@ -91,10 +92,10 @@ _$DateTimeInputImpl _$$DateTimeInputImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$DateTimeInputImplToJson(_$DateTimeInputImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'initialValue': instance.initialValue?.toIso8601String(),
+      'initialValue': FlexibleDateTime.staticToJson(instance.initialValue),
       'isRequired': instance.isRequired,
-      'maxBound': instance.maxBound?.toIso8601String(),
-      'minBound': instance.minBound?.toIso8601String(),
+      'maxBound': FlexibleDateTime.staticToJson(instance.maxBound),
+      'minBound': FlexibleDateTime.staticToJson(instance.minBound),
       'uiSettings': DateTimeInputUiSettings.staticToJson(instance.uiSettings),
       'runtimeType': instance.$type,
     };
