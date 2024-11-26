@@ -13,16 +13,15 @@ class DateTimeField extends StatelessWidget {
     final inputDecorationTheme = theme.inputDecorationTheme;
     final themedBorder = inputDecorationTheme.border;
 
-    final now = DateTime.now();
-    final firstDate = data.input.minBound?.resolve() ??
-        DateTime(now.year - 2, now.month, now.day);
-    final lastDate = data.input.maxBound?.resolve() ??
-        DateTime(now.year + 2, now.month, now.day);
-    final initialDate = data.value == null ||
-            data.value!.isBefore(firstDate) ||
-            data.value!.isAfter(lastDate)
+    final firstDate = data.input.minBound?.resolve();
+    final lastDate = data.input.maxBound?.resolve();
+    final initialDate = data.value == null
         ? null
-        : data.value;
+        : firstDate != null && data.value!.isBefore(firstDate)
+            ? firstDate
+            : lastDate != null && data.value!.isBefore(lastDate)
+                ? lastDate
+                : data.value;
 
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 16),
@@ -69,15 +68,9 @@ class DateTimeField extends StatelessWidget {
 
                     final selectedDate = await pickDate(
                       context: context,
-                      initialDate: initialDate == null ||
-                              initialDate.isBefore(firstDate) ||
-                              initialDate.isAfter(lastDate)
-                          ? null
-                          : initialDate,
-                      minBound: data.input.minBound?.resolve() ??
-                          DateTime(now.year - 2, now.month, now.day),
-                      maxBound: data.input.maxBound?.resolve() ??
-                          DateTime(now.year + 2, now.month, now.day),
+                      initialDate: initialDate,
+                      minBound: data.input.minBound?.resolve(),
+                      maxBound: data.input.maxBound?.resolve(),
                       initialEntryMode: data.uiSettings.initialEntryMode ??
                           DatePickerEntryMode.calendar,
                     );
