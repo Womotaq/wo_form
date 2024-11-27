@@ -18,56 +18,24 @@ Map<String, dynamic> _$$FixedDateTimeImplToJson(_$FixedDateTimeImpl instance) =>
       'runtimeType': instance.$type,
     };
 
-_$TodayDateTimeImpl _$$TodayDateTimeImplFromJson(Map<String, dynamic> json) =>
-    _$TodayDateTimeImpl(
+_$RelativeDateImpl _$$RelativeDateImplFromJson(Map<String, dynamic> json) =>
+    _$RelativeDateImpl(
+      addYears: (json['addYears'] as num?)?.toInt() ?? 0,
+      addMonths: (json['addMonths'] as num?)?.toInt() ?? 0,
+      addDays: (json['addDays'] as num?)?.toInt() ?? 0,
+      replaceYears: (json['replaceYears'] as num?)?.toInt(),
+      replaceMonths: (json['replaceMonths'] as num?)?.toInt(),
+      replaceDays: (json['replaceDays'] as num?)?.toInt(),
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$TodayDateTimeImplToJson(_$TodayDateTimeImpl instance) =>
+Map<String, dynamic> _$$RelativeDateImplToJson(_$RelativeDateImpl instance) =>
     <String, dynamic>{
-      'runtimeType': instance.$type,
-    };
-
-_$AddToTodayDateTimeImpl _$$AddToTodayDateTimeImplFromJson(
-        Map<String, dynamic> json) =>
-    _$AddToTodayDateTimeImpl(
-      years: (json['years'] as num?)?.toInt() ?? 0,
-      months: (json['months'] as num?)?.toInt() ?? 0,
-      days: (json['days'] as num?)?.toInt() ?? 0,
-      hours: (json['hours'] as num?)?.toInt() ?? 0,
-      minutes: (json['minutes'] as num?)?.toInt() ?? 0,
-      $type: json['runtimeType'] as String?,
-    );
-
-Map<String, dynamic> _$$AddToTodayDateTimeImplToJson(
-        _$AddToTodayDateTimeImpl instance) =>
-    <String, dynamic>{
-      'years': instance.years,
-      'months': instance.months,
-      'days': instance.days,
-      'hours': instance.hours,
-      'minutes': instance.minutes,
-      'runtimeType': instance.$type,
-    };
-
-_$ReplaceFromTodayDateTimeImpl _$$ReplaceFromTodayDateTimeImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ReplaceFromTodayDateTimeImpl(
-      years: (json['years'] as num?)?.toInt(),
-      months: (json['months'] as num?)?.toInt(),
-      days: (json['days'] as num?)?.toInt(),
-      hours: (json['hours'] as num?)?.toInt(),
-      minutes: (json['minutes'] as num?)?.toInt(),
-      $type: json['runtimeType'] as String?,
-    );
-
-Map<String, dynamic> _$$ReplaceFromTodayDateTimeImplToJson(
-        _$ReplaceFromTodayDateTimeImpl instance) =>
-    <String, dynamic>{
-      'years': instance.years,
-      'months': instance.months,
-      'days': instance.days,
-      'hours': instance.hours,
-      'minutes': instance.minutes,
+      'addYears': instance.addYears,
+      'addMonths': instance.addMonths,
+      'addDays': instance.addDays,
+      'replaceYears': instance.replaceYears,
+      'replaceMonths': instance.replaceMonths,
+      'replaceDays': instance.replaceDays,
       'runtimeType': instance.$type,
     };

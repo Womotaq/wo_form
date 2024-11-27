@@ -11,23 +11,14 @@ sealed class FlexibleDateTime with _$FlexibleDateTime {
     required DateTime date,
   }) = FixedDateTime;
 
-  const factory FlexibleDateTime.today() = TodayDateTime;
-
-  const factory FlexibleDateTime.add({
-    @Default(0) int years,
-    @Default(0) int months,
-    @Default(0) int days,
-    @Default(0) int hours,
-    @Default(0) int minutes,
-  }) = AddToTodayDateTime;
-
-  const factory FlexibleDateTime.replace({
-    int? years,
-    int? months,
-    int? days,
-    int? hours,
-    int? minutes,
-  }) = ReplaceFromTodayDateTime;
+  const factory FlexibleDateTime.relative({
+    @Default(0) int addYears,
+    @Default(0) int addMonths,
+    @Default(0) int addDays,
+    int? replaceYears,
+    int? replaceMonths,
+    int? replaceDays,
+  }) = RelativeDate;
 
   /// Required for the override getter
   const FlexibleDateTime._();
@@ -40,45 +31,24 @@ sealed class FlexibleDateTime with _$FlexibleDateTime {
 
   // --
 
-  DateTime get _today {
-    final now = DateTime.now();
-    return DateTime(now.year, now.month, now.day);
-  }
-
   DateTime resolve() {
     switch (this) {
       case FixedDateTime(date: final date):
         return date;
-      case TodayDateTime():
-        return _today;
-      case AddToTodayDateTime(
-          years: final years,
-          months: final months,
-          days: final days,
-          hours: final hours,
-          minutes: final minutes,
+      case RelativeDate(
+          addYears: final addYears,
+          addMonths: final addMonths,
+          addDays: final addDays,
+          replaceYears: final replaceYears,
+          replaceMonths: final replaceMonths,
+          replaceDays: final replaceDays,
         ):
-        final now = _today;
-        return now.copyWith(
-          year: now.year + years,
-          month: now.month + months,
-          day: now.day + days,
-          hour: now.hour + hours,
-          minute: now.minute + minutes,
-        );
-      case ReplaceFromTodayDateTime(
-          years: final years,
-          months: final months,
-          days: final days,
-          hours: final hours,
-          minutes: final minutes,
-        ):
-        return _today.copyWith(
-          year: years,
-          month: months,
-          day: days,
-          hour: hours,
-          minute: minutes,
+        final now = DateTime.now();
+        final today = DateTime(now.year, now.month, now.day);
+        return today.copyWith(
+          year: replaceYears ?? now.year + addYears,
+          month: replaceMonths ?? now.month + addMonths,
+          day: replaceDays ?? now.day + addDays,
         );
     }
   }
