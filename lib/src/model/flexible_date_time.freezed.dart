@@ -18,12 +18,12 @@ FlexibleDateTime _$FlexibleDateTimeFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
     case 'fixed':
       return FixedDateTime.fromJson(json);
-    case 'now':
-      return NowDateTime.fromJson(json);
+    case 'today':
+      return TodayDateTime.fromJson(json);
     case 'add':
-      return AddToNowDateTime.fromJson(json);
+      return AddToTodayDateTime.fromJson(json);
     case 'replace':
-      return ReplaceFromNowDateTime.fromJson(json);
+      return ReplaceFromTodayDateTime.fromJson(json);
 
     default:
       throw CheckedFromJsonException(json, 'runtimeType', 'FlexibleDateTime',
@@ -36,7 +36,7 @@ mixin _$FlexibleDateTime {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(DateTime date) fixed,
-    required TResult Function() now,
+    required TResult Function() today,
     required TResult Function(
             int years, int months, int days, int hours, int minutes)
         add,
@@ -48,7 +48,7 @@ mixin _$FlexibleDateTime {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(DateTime date)? fixed,
-    TResult? Function()? now,
+    TResult? Function()? today,
     TResult? Function(int years, int months, int days, int hours, int minutes)?
         add,
     TResult? Function(
@@ -59,7 +59,7 @@ mixin _$FlexibleDateTime {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(DateTime date)? fixed,
-    TResult Function()? now,
+    TResult Function()? today,
     TResult Function(int years, int months, int days, int hours, int minutes)?
         add,
     TResult Function(
@@ -71,25 +71,25 @@ mixin _$FlexibleDateTime {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(FixedDateTime value) fixed,
-    required TResult Function(NowDateTime value) now,
-    required TResult Function(AddToNowDateTime value) add,
-    required TResult Function(ReplaceFromNowDateTime value) replace,
+    required TResult Function(TodayDateTime value) today,
+    required TResult Function(AddToTodayDateTime value) add,
+    required TResult Function(ReplaceFromTodayDateTime value) replace,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(FixedDateTime value)? fixed,
-    TResult? Function(NowDateTime value)? now,
-    TResult? Function(AddToNowDateTime value)? add,
-    TResult? Function(ReplaceFromNowDateTime value)? replace,
+    TResult? Function(TodayDateTime value)? today,
+    TResult? Function(AddToTodayDateTime value)? add,
+    TResult? Function(ReplaceFromTodayDateTime value)? replace,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(FixedDateTime value)? fixed,
-    TResult Function(NowDateTime value)? now,
-    TResult Function(AddToNowDateTime value)? add,
-    TResult Function(ReplaceFromNowDateTime value)? replace,
+    TResult Function(TodayDateTime value)? today,
+    TResult Function(AddToTodayDateTime value)? add,
+    TResult Function(ReplaceFromTodayDateTime value)? replace,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -197,7 +197,7 @@ class _$FixedDateTimeImpl extends FixedDateTime {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(DateTime date) fixed,
-    required TResult Function() now,
+    required TResult Function() today,
     required TResult Function(
             int years, int months, int days, int hours, int minutes)
         add,
@@ -212,7 +212,7 @@ class _$FixedDateTimeImpl extends FixedDateTime {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(DateTime date)? fixed,
-    TResult? Function()? now,
+    TResult? Function()? today,
     TResult? Function(int years, int months, int days, int hours, int minutes)?
         add,
     TResult? Function(
@@ -226,7 +226,7 @@ class _$FixedDateTimeImpl extends FixedDateTime {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(DateTime date)? fixed,
-    TResult Function()? now,
+    TResult Function()? today,
     TResult Function(int years, int months, int days, int hours, int minutes)?
         add,
     TResult Function(
@@ -244,9 +244,9 @@ class _$FixedDateTimeImpl extends FixedDateTime {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(FixedDateTime value) fixed,
-    required TResult Function(NowDateTime value) now,
-    required TResult Function(AddToNowDateTime value) add,
-    required TResult Function(ReplaceFromNowDateTime value) replace,
+    required TResult Function(TodayDateTime value) today,
+    required TResult Function(AddToTodayDateTime value) add,
+    required TResult Function(ReplaceFromTodayDateTime value) replace,
   }) {
     return fixed(this);
   }
@@ -255,9 +255,9 @@ class _$FixedDateTimeImpl extends FixedDateTime {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(FixedDateTime value)? fixed,
-    TResult? Function(NowDateTime value)? now,
-    TResult? Function(AddToNowDateTime value)? add,
-    TResult? Function(ReplaceFromNowDateTime value)? replace,
+    TResult? Function(TodayDateTime value)? today,
+    TResult? Function(AddToTodayDateTime value)? add,
+    TResult? Function(ReplaceFromTodayDateTime value)? replace,
   }) {
     return fixed?.call(this);
   }
@@ -266,9 +266,9 @@ class _$FixedDateTimeImpl extends FixedDateTime {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(FixedDateTime value)? fixed,
-    TResult Function(NowDateTime value)? now,
-    TResult Function(AddToNowDateTime value)? add,
-    TResult Function(ReplaceFromNowDateTime value)? replace,
+    TResult Function(TodayDateTime value)? today,
+    TResult Function(AddToTodayDateTime value)? add,
+    TResult Function(ReplaceFromTodayDateTime value)? replace,
     required TResult orElse(),
   }) {
     if (fixed != null) {
@@ -303,18 +303,18 @@ abstract class FixedDateTime extends FlexibleDateTime {
 }
 
 /// @nodoc
-abstract class _$$NowDateTimeImplCopyWith<$Res> {
-  factory _$$NowDateTimeImplCopyWith(
-          _$NowDateTimeImpl value, $Res Function(_$NowDateTimeImpl) then) =
-      __$$NowDateTimeImplCopyWithImpl<$Res>;
+abstract class _$$TodayDateTimeImplCopyWith<$Res> {
+  factory _$$TodayDateTimeImplCopyWith(
+          _$TodayDateTimeImpl value, $Res Function(_$TodayDateTimeImpl) then) =
+      __$$TodayDateTimeImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$NowDateTimeImplCopyWithImpl<$Res>
-    extends _$FlexibleDateTimeCopyWithImpl<$Res, _$NowDateTimeImpl>
-    implements _$$NowDateTimeImplCopyWith<$Res> {
-  __$$NowDateTimeImplCopyWithImpl(
-      _$NowDateTimeImpl _value, $Res Function(_$NowDateTimeImpl) _then)
+class __$$TodayDateTimeImplCopyWithImpl<$Res>
+    extends _$FlexibleDateTimeCopyWithImpl<$Res, _$TodayDateTimeImpl>
+    implements _$$TodayDateTimeImplCopyWith<$Res> {
+  __$$TodayDateTimeImplCopyWithImpl(
+      _$TodayDateTimeImpl _value, $Res Function(_$TodayDateTimeImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of FlexibleDateTime
@@ -323,26 +323,26 @@ class __$$NowDateTimeImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$NowDateTimeImpl extends NowDateTime {
-  const _$NowDateTimeImpl({final String? $type})
-      : $type = $type ?? 'now',
+class _$TodayDateTimeImpl extends TodayDateTime {
+  const _$TodayDateTimeImpl({final String? $type})
+      : $type = $type ?? 'today',
         super._();
 
-  factory _$NowDateTimeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$NowDateTimeImplFromJson(json);
+  factory _$TodayDateTimeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TodayDateTimeImplFromJson(json);
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'FlexibleDateTime.now()';
+    return 'FlexibleDateTime.today()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$NowDateTimeImpl);
+        (other.runtimeType == runtimeType && other is _$TodayDateTimeImpl);
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -353,7 +353,7 @@ class _$NowDateTimeImpl extends NowDateTime {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(DateTime date) fixed,
-    required TResult Function() now,
+    required TResult Function() today,
     required TResult Function(
             int years, int months, int days, int hours, int minutes)
         add,
@@ -361,28 +361,28 @@ class _$NowDateTimeImpl extends NowDateTime {
             int? years, int? months, int? days, int? hours, int? minutes)
         replace,
   }) {
-    return now();
+    return today();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(DateTime date)? fixed,
-    TResult? Function()? now,
+    TResult? Function()? today,
     TResult? Function(int years, int months, int days, int hours, int minutes)?
         add,
     TResult? Function(
             int? years, int? months, int? days, int? hours, int? minutes)?
         replace,
   }) {
-    return now?.call();
+    return today?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(DateTime date)? fixed,
-    TResult Function()? now,
+    TResult Function()? today,
     TResult Function(int years, int months, int days, int hours, int minutes)?
         add,
     TResult Function(
@@ -390,8 +390,8 @@ class _$NowDateTimeImpl extends NowDateTime {
         replace,
     required TResult orElse(),
   }) {
-    if (now != null) {
-      return now();
+    if (today != null) {
+      return today();
     }
     return orElse();
   }
@@ -400,70 +400,70 @@ class _$NowDateTimeImpl extends NowDateTime {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(FixedDateTime value) fixed,
-    required TResult Function(NowDateTime value) now,
-    required TResult Function(AddToNowDateTime value) add,
-    required TResult Function(ReplaceFromNowDateTime value) replace,
+    required TResult Function(TodayDateTime value) today,
+    required TResult Function(AddToTodayDateTime value) add,
+    required TResult Function(ReplaceFromTodayDateTime value) replace,
   }) {
-    return now(this);
+    return today(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(FixedDateTime value)? fixed,
-    TResult? Function(NowDateTime value)? now,
-    TResult? Function(AddToNowDateTime value)? add,
-    TResult? Function(ReplaceFromNowDateTime value)? replace,
+    TResult? Function(TodayDateTime value)? today,
+    TResult? Function(AddToTodayDateTime value)? add,
+    TResult? Function(ReplaceFromTodayDateTime value)? replace,
   }) {
-    return now?.call(this);
+    return today?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(FixedDateTime value)? fixed,
-    TResult Function(NowDateTime value)? now,
-    TResult Function(AddToNowDateTime value)? add,
-    TResult Function(ReplaceFromNowDateTime value)? replace,
+    TResult Function(TodayDateTime value)? today,
+    TResult Function(AddToTodayDateTime value)? add,
+    TResult Function(ReplaceFromTodayDateTime value)? replace,
     required TResult orElse(),
   }) {
-    if (now != null) {
-      return now(this);
+    if (today != null) {
+      return today(this);
     }
     return orElse();
   }
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$NowDateTimeImplToJson(
+    return _$$TodayDateTimeImplToJson(
       this,
     );
   }
 }
 
-abstract class NowDateTime extends FlexibleDateTime {
-  const factory NowDateTime() = _$NowDateTimeImpl;
-  const NowDateTime._() : super._();
+abstract class TodayDateTime extends FlexibleDateTime {
+  const factory TodayDateTime() = _$TodayDateTimeImpl;
+  const TodayDateTime._() : super._();
 
-  factory NowDateTime.fromJson(Map<String, dynamic> json) =
-      _$NowDateTimeImpl.fromJson;
+  factory TodayDateTime.fromJson(Map<String, dynamic> json) =
+      _$TodayDateTimeImpl.fromJson;
 }
 
 /// @nodoc
-abstract class _$$AddToNowDateTimeImplCopyWith<$Res> {
-  factory _$$AddToNowDateTimeImplCopyWith(_$AddToNowDateTimeImpl value,
-          $Res Function(_$AddToNowDateTimeImpl) then) =
-      __$$AddToNowDateTimeImplCopyWithImpl<$Res>;
+abstract class _$$AddToTodayDateTimeImplCopyWith<$Res> {
+  factory _$$AddToTodayDateTimeImplCopyWith(_$AddToTodayDateTimeImpl value,
+          $Res Function(_$AddToTodayDateTimeImpl) then) =
+      __$$AddToTodayDateTimeImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int years, int months, int days, int hours, int minutes});
 }
 
 /// @nodoc
-class __$$AddToNowDateTimeImplCopyWithImpl<$Res>
-    extends _$FlexibleDateTimeCopyWithImpl<$Res, _$AddToNowDateTimeImpl>
-    implements _$$AddToNowDateTimeImplCopyWith<$Res> {
-  __$$AddToNowDateTimeImplCopyWithImpl(_$AddToNowDateTimeImpl _value,
-      $Res Function(_$AddToNowDateTimeImpl) _then)
+class __$$AddToTodayDateTimeImplCopyWithImpl<$Res>
+    extends _$FlexibleDateTimeCopyWithImpl<$Res, _$AddToTodayDateTimeImpl>
+    implements _$$AddToTodayDateTimeImplCopyWith<$Res> {
+  __$$AddToTodayDateTimeImplCopyWithImpl(_$AddToTodayDateTimeImpl _value,
+      $Res Function(_$AddToTodayDateTimeImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of FlexibleDateTime
@@ -477,7 +477,7 @@ class __$$AddToNowDateTimeImplCopyWithImpl<$Res>
     Object? hours = null,
     Object? minutes = null,
   }) {
-    return _then(_$AddToNowDateTimeImpl(
+    return _then(_$AddToTodayDateTimeImpl(
       years: null == years
           ? _value.years
           : years // ignore: cast_nullable_to_non_nullable
@@ -504,8 +504,8 @@ class __$$AddToNowDateTimeImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$AddToNowDateTimeImpl extends AddToNowDateTime {
-  const _$AddToNowDateTimeImpl(
+class _$AddToTodayDateTimeImpl extends AddToTodayDateTime {
+  const _$AddToTodayDateTimeImpl(
       {this.years = 0,
       this.months = 0,
       this.days = 0,
@@ -515,8 +515,8 @@ class _$AddToNowDateTimeImpl extends AddToNowDateTime {
       : $type = $type ?? 'add',
         super._();
 
-  factory _$AddToNowDateTimeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$AddToNowDateTimeImplFromJson(json);
+  factory _$AddToTodayDateTimeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AddToTodayDateTimeImplFromJson(json);
 
   @override
   @JsonKey()
@@ -546,7 +546,7 @@ class _$AddToNowDateTimeImpl extends AddToNowDateTime {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AddToNowDateTimeImpl &&
+            other is _$AddToTodayDateTimeImpl &&
             (identical(other.years, years) || other.years == years) &&
             (identical(other.months, months) || other.months == months) &&
             (identical(other.days, days) || other.days == days) &&
@@ -564,15 +564,15 @@ class _$AddToNowDateTimeImpl extends AddToNowDateTime {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$AddToNowDateTimeImplCopyWith<_$AddToNowDateTimeImpl> get copyWith =>
-      __$$AddToNowDateTimeImplCopyWithImpl<_$AddToNowDateTimeImpl>(
+  _$$AddToTodayDateTimeImplCopyWith<_$AddToTodayDateTimeImpl> get copyWith =>
+      __$$AddToTodayDateTimeImplCopyWithImpl<_$AddToTodayDateTimeImpl>(
           this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(DateTime date) fixed,
-    required TResult Function() now,
+    required TResult Function() today,
     required TResult Function(
             int years, int months, int days, int hours, int minutes)
         add,
@@ -587,7 +587,7 @@ class _$AddToNowDateTimeImpl extends AddToNowDateTime {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(DateTime date)? fixed,
-    TResult? Function()? now,
+    TResult? Function()? today,
     TResult? Function(int years, int months, int days, int hours, int minutes)?
         add,
     TResult? Function(
@@ -601,7 +601,7 @@ class _$AddToNowDateTimeImpl extends AddToNowDateTime {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(DateTime date)? fixed,
-    TResult Function()? now,
+    TResult Function()? today,
     TResult Function(int years, int months, int days, int hours, int minutes)?
         add,
     TResult Function(
@@ -619,9 +619,9 @@ class _$AddToNowDateTimeImpl extends AddToNowDateTime {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(FixedDateTime value) fixed,
-    required TResult Function(NowDateTime value) now,
-    required TResult Function(AddToNowDateTime value) add,
-    required TResult Function(ReplaceFromNowDateTime value) replace,
+    required TResult Function(TodayDateTime value) today,
+    required TResult Function(AddToTodayDateTime value) add,
+    required TResult Function(ReplaceFromTodayDateTime value) replace,
   }) {
     return add(this);
   }
@@ -630,9 +630,9 @@ class _$AddToNowDateTimeImpl extends AddToNowDateTime {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(FixedDateTime value)? fixed,
-    TResult? Function(NowDateTime value)? now,
-    TResult? Function(AddToNowDateTime value)? add,
-    TResult? Function(ReplaceFromNowDateTime value)? replace,
+    TResult? Function(TodayDateTime value)? today,
+    TResult? Function(AddToTodayDateTime value)? add,
+    TResult? Function(ReplaceFromTodayDateTime value)? replace,
   }) {
     return add?.call(this);
   }
@@ -641,9 +641,9 @@ class _$AddToNowDateTimeImpl extends AddToNowDateTime {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(FixedDateTime value)? fixed,
-    TResult Function(NowDateTime value)? now,
-    TResult Function(AddToNowDateTime value)? add,
-    TResult Function(ReplaceFromNowDateTime value)? replace,
+    TResult Function(TodayDateTime value)? today,
+    TResult Function(AddToTodayDateTime value)? add,
+    TResult Function(ReplaceFromTodayDateTime value)? replace,
     required TResult orElse(),
   }) {
     if (add != null) {
@@ -654,23 +654,23 @@ class _$AddToNowDateTimeImpl extends AddToNowDateTime {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AddToNowDateTimeImplToJson(
+    return _$$AddToTodayDateTimeImplToJson(
       this,
     );
   }
 }
 
-abstract class AddToNowDateTime extends FlexibleDateTime {
-  const factory AddToNowDateTime(
+abstract class AddToTodayDateTime extends FlexibleDateTime {
+  const factory AddToTodayDateTime(
       {final int years,
       final int months,
       final int days,
       final int hours,
-      final int minutes}) = _$AddToNowDateTimeImpl;
-  const AddToNowDateTime._() : super._();
+      final int minutes}) = _$AddToTodayDateTimeImpl;
+  const AddToTodayDateTime._() : super._();
 
-  factory AddToNowDateTime.fromJson(Map<String, dynamic> json) =
-      _$AddToNowDateTimeImpl.fromJson;
+  factory AddToTodayDateTime.fromJson(Map<String, dynamic> json) =
+      _$AddToTodayDateTimeImpl.fromJson;
 
   int get years;
   int get months;
@@ -681,27 +681,27 @@ abstract class AddToNowDateTime extends FlexibleDateTime {
   /// Create a copy of FlexibleDateTime
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AddToNowDateTimeImplCopyWith<_$AddToNowDateTimeImpl> get copyWith =>
+  _$$AddToTodayDateTimeImplCopyWith<_$AddToTodayDateTimeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ReplaceFromNowDateTimeImplCopyWith<$Res> {
-  factory _$$ReplaceFromNowDateTimeImplCopyWith(
-          _$ReplaceFromNowDateTimeImpl value,
-          $Res Function(_$ReplaceFromNowDateTimeImpl) then) =
-      __$$ReplaceFromNowDateTimeImplCopyWithImpl<$Res>;
+abstract class _$$ReplaceFromTodayDateTimeImplCopyWith<$Res> {
+  factory _$$ReplaceFromTodayDateTimeImplCopyWith(
+          _$ReplaceFromTodayDateTimeImpl value,
+          $Res Function(_$ReplaceFromTodayDateTimeImpl) then) =
+      __$$ReplaceFromTodayDateTimeImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int? years, int? months, int? days, int? hours, int? minutes});
 }
 
 /// @nodoc
-class __$$ReplaceFromNowDateTimeImplCopyWithImpl<$Res>
-    extends _$FlexibleDateTimeCopyWithImpl<$Res, _$ReplaceFromNowDateTimeImpl>
-    implements _$$ReplaceFromNowDateTimeImplCopyWith<$Res> {
-  __$$ReplaceFromNowDateTimeImplCopyWithImpl(
-      _$ReplaceFromNowDateTimeImpl _value,
-      $Res Function(_$ReplaceFromNowDateTimeImpl) _then)
+class __$$ReplaceFromTodayDateTimeImplCopyWithImpl<$Res>
+    extends _$FlexibleDateTimeCopyWithImpl<$Res, _$ReplaceFromTodayDateTimeImpl>
+    implements _$$ReplaceFromTodayDateTimeImplCopyWith<$Res> {
+  __$$ReplaceFromTodayDateTimeImplCopyWithImpl(
+      _$ReplaceFromTodayDateTimeImpl _value,
+      $Res Function(_$ReplaceFromTodayDateTimeImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of FlexibleDateTime
@@ -715,7 +715,7 @@ class __$$ReplaceFromNowDateTimeImplCopyWithImpl<$Res>
     Object? hours = freezed,
     Object? minutes = freezed,
   }) {
-    return _then(_$ReplaceFromNowDateTimeImpl(
+    return _then(_$ReplaceFromTodayDateTimeImpl(
       years: freezed == years
           ? _value.years
           : years // ignore: cast_nullable_to_non_nullable
@@ -742,8 +742,8 @@ class __$$ReplaceFromNowDateTimeImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ReplaceFromNowDateTimeImpl extends ReplaceFromNowDateTime {
-  const _$ReplaceFromNowDateTimeImpl(
+class _$ReplaceFromTodayDateTimeImpl extends ReplaceFromTodayDateTime {
+  const _$ReplaceFromTodayDateTimeImpl(
       {this.years,
       this.months,
       this.days,
@@ -753,8 +753,8 @@ class _$ReplaceFromNowDateTimeImpl extends ReplaceFromNowDateTime {
       : $type = $type ?? 'replace',
         super._();
 
-  factory _$ReplaceFromNowDateTimeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ReplaceFromNowDateTimeImplFromJson(json);
+  factory _$ReplaceFromTodayDateTimeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReplaceFromTodayDateTimeImplFromJson(json);
 
   @override
   final int? years;
@@ -779,7 +779,7 @@ class _$ReplaceFromNowDateTimeImpl extends ReplaceFromNowDateTime {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ReplaceFromNowDateTimeImpl &&
+            other is _$ReplaceFromTodayDateTimeImpl &&
             (identical(other.years, years) || other.years == years) &&
             (identical(other.months, months) || other.months == months) &&
             (identical(other.days, days) || other.days == days) &&
@@ -797,15 +797,15 @@ class _$ReplaceFromNowDateTimeImpl extends ReplaceFromNowDateTime {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ReplaceFromNowDateTimeImplCopyWith<_$ReplaceFromNowDateTimeImpl>
-      get copyWith => __$$ReplaceFromNowDateTimeImplCopyWithImpl<
-          _$ReplaceFromNowDateTimeImpl>(this, _$identity);
+  _$$ReplaceFromTodayDateTimeImplCopyWith<_$ReplaceFromTodayDateTimeImpl>
+      get copyWith => __$$ReplaceFromTodayDateTimeImplCopyWithImpl<
+          _$ReplaceFromTodayDateTimeImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(DateTime date) fixed,
-    required TResult Function() now,
+    required TResult Function() today,
     required TResult Function(
             int years, int months, int days, int hours, int minutes)
         add,
@@ -820,7 +820,7 @@ class _$ReplaceFromNowDateTimeImpl extends ReplaceFromNowDateTime {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(DateTime date)? fixed,
-    TResult? Function()? now,
+    TResult? Function()? today,
     TResult? Function(int years, int months, int days, int hours, int minutes)?
         add,
     TResult? Function(
@@ -834,7 +834,7 @@ class _$ReplaceFromNowDateTimeImpl extends ReplaceFromNowDateTime {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(DateTime date)? fixed,
-    TResult Function()? now,
+    TResult Function()? today,
     TResult Function(int years, int months, int days, int hours, int minutes)?
         add,
     TResult Function(
@@ -852,9 +852,9 @@ class _$ReplaceFromNowDateTimeImpl extends ReplaceFromNowDateTime {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(FixedDateTime value) fixed,
-    required TResult Function(NowDateTime value) now,
-    required TResult Function(AddToNowDateTime value) add,
-    required TResult Function(ReplaceFromNowDateTime value) replace,
+    required TResult Function(TodayDateTime value) today,
+    required TResult Function(AddToTodayDateTime value) add,
+    required TResult Function(ReplaceFromTodayDateTime value) replace,
   }) {
     return replace(this);
   }
@@ -863,9 +863,9 @@ class _$ReplaceFromNowDateTimeImpl extends ReplaceFromNowDateTime {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(FixedDateTime value)? fixed,
-    TResult? Function(NowDateTime value)? now,
-    TResult? Function(AddToNowDateTime value)? add,
-    TResult? Function(ReplaceFromNowDateTime value)? replace,
+    TResult? Function(TodayDateTime value)? today,
+    TResult? Function(AddToTodayDateTime value)? add,
+    TResult? Function(ReplaceFromTodayDateTime value)? replace,
   }) {
     return replace?.call(this);
   }
@@ -874,9 +874,9 @@ class _$ReplaceFromNowDateTimeImpl extends ReplaceFromNowDateTime {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(FixedDateTime value)? fixed,
-    TResult Function(NowDateTime value)? now,
-    TResult Function(AddToNowDateTime value)? add,
-    TResult Function(ReplaceFromNowDateTime value)? replace,
+    TResult Function(TodayDateTime value)? today,
+    TResult Function(AddToTodayDateTime value)? add,
+    TResult Function(ReplaceFromTodayDateTime value)? replace,
     required TResult orElse(),
   }) {
     if (replace != null) {
@@ -887,23 +887,23 @@ class _$ReplaceFromNowDateTimeImpl extends ReplaceFromNowDateTime {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ReplaceFromNowDateTimeImplToJson(
+    return _$$ReplaceFromTodayDateTimeImplToJson(
       this,
     );
   }
 }
 
-abstract class ReplaceFromNowDateTime extends FlexibleDateTime {
-  const factory ReplaceFromNowDateTime(
+abstract class ReplaceFromTodayDateTime extends FlexibleDateTime {
+  const factory ReplaceFromTodayDateTime(
       {final int? years,
       final int? months,
       final int? days,
       final int? hours,
-      final int? minutes}) = _$ReplaceFromNowDateTimeImpl;
-  const ReplaceFromNowDateTime._() : super._();
+      final int? minutes}) = _$ReplaceFromTodayDateTimeImpl;
+  const ReplaceFromTodayDateTime._() : super._();
 
-  factory ReplaceFromNowDateTime.fromJson(Map<String, dynamic> json) =
-      _$ReplaceFromNowDateTimeImpl.fromJson;
+  factory ReplaceFromTodayDateTime.fromJson(Map<String, dynamic> json) =
+      _$ReplaceFromTodayDateTimeImpl.fromJson;
 
   int? get years;
   int? get months;
@@ -914,6 +914,6 @@ abstract class ReplaceFromNowDateTime extends FlexibleDateTime {
   /// Create a copy of FlexibleDateTime
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ReplaceFromNowDateTimeImplCopyWith<_$ReplaceFromNowDateTimeImpl>
+  _$$ReplaceFromTodayDateTimeImplCopyWith<_$ReplaceFromTodayDateTimeImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -55,11 +55,13 @@ typedef PickDateDef = Future<DateTime?> Function({
   DateTime? maxBound,
   DateTime? minBound,
   DatePickerEntryMode? initialEntryMode,
+  String? dateFormat,
 });
 
 @freezed
 class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
   const factory DateTimeInputUiSettings({
+    String? dateFormat,
     String? labelText,
     String? helperText,
     DatePickerEntryMode? initialEntryMode,

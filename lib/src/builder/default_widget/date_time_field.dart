@@ -13,15 +13,16 @@ class DateTimeField extends StatelessWidget {
     final inputDecorationTheme = theme.inputDecorationTheme;
     final themedBorder = inputDecorationTheme.border;
 
-    final firstDate = data.input.minBound?.resolve();
-    final lastDate = data.input.maxBound?.resolve();
-    final initialDate = data.value == null
-        ? null
-        : firstDate != null && data.value!.isBefore(firstDate)
-            ? firstDate
-            : lastDate != null && data.value!.isBefore(lastDate)
-                ? lastDate
-                : data.value;
+    // final firstDate = data.input.minBound?.resolve();
+    // final lastDate = data.input.maxBound?.resolve();
+    final initialDate = data.value;
+    //  == null
+    //     ? null
+    //     : firstDate != null && data.value!.isBefore(firstDate)
+    //         ? firstDate
+    //         : lastDate != null && data.value!.isBefore(lastDate)
+    //             ? lastDate
+    //             : data.value;
 
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 16),
@@ -73,6 +74,7 @@ class DateTimeField extends StatelessWidget {
                       maxBound: data.input.maxBound?.resolve(),
                       initialEntryMode: data.uiSettings.initialEntryMode ??
                           DatePickerEntryMode.calendar,
+                      dateFormat: data.uiSettings.dateFormat,
                     );
 
                     if (selectedDate != null) {
@@ -90,7 +92,10 @@ class DateTimeField extends StatelessWidget {
               ),
               child: initialDate == null
                   ? const Icon(Icons.calendar_month)
-                  : Text(DateFormat.yMMMMd().format(initialDate)),
+                  : Text(
+                      DateFormat(data.uiSettings.dateFormat ?? 'yMMMMd')
+                          .format(initialDate),
+                    ),
             ),
           ),
         ],
@@ -104,6 +109,7 @@ class DateTimeField extends StatelessWidget {
     DateTime? maxBound,
     DateTime? minBound,
     DatePickerEntryMode? initialEntryMode,
+    String? dateFormat,
   }) {
     final now = DateTime.now();
 

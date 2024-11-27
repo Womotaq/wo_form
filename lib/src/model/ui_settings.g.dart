@@ -41,6 +41,7 @@ const _$ListTileControlAffinityEnumMap = {
 _$DateTimeInputUiSettingsImpl _$$DateTimeInputUiSettingsImplFromJson(
         Map<String, dynamic> json) =>
     _$DateTimeInputUiSettingsImpl(
+      dateFormat: json['dateFormat'] as String?,
       labelText: json['labelText'] as String?,
       helperText: json['helperText'] as String?,
       initialEntryMode: $enumDecodeNullable(
@@ -50,6 +51,7 @@ _$DateTimeInputUiSettingsImpl _$$DateTimeInputUiSettingsImplFromJson(
 Map<String, dynamic> _$$DateTimeInputUiSettingsImplToJson(
         _$DateTimeInputUiSettingsImpl instance) =>
     <String, dynamic>{
+      'dateFormat': instance.dateFormat,
       'labelText': instance.labelText,
       'helperText': instance.helperText,
       'initialEntryMode':

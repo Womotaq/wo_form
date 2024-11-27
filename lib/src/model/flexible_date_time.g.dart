@@ -18,19 +18,19 @@ Map<String, dynamic> _$$FixedDateTimeImplToJson(_$FixedDateTimeImpl instance) =>
       'runtimeType': instance.$type,
     };
 
-_$NowDateTimeImpl _$$NowDateTimeImplFromJson(Map<String, dynamic> json) =>
-    _$NowDateTimeImpl(
+_$TodayDateTimeImpl _$$TodayDateTimeImplFromJson(Map<String, dynamic> json) =>
+    _$TodayDateTimeImpl(
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$NowDateTimeImplToJson(_$NowDateTimeImpl instance) =>
+Map<String, dynamic> _$$TodayDateTimeImplToJson(_$TodayDateTimeImpl instance) =>
     <String, dynamic>{
       'runtimeType': instance.$type,
     };
 
-_$AddToNowDateTimeImpl _$$AddToNowDateTimeImplFromJson(
+_$AddToTodayDateTimeImpl _$$AddToTodayDateTimeImplFromJson(
         Map<String, dynamic> json) =>
-    _$AddToNowDateTimeImpl(
+    _$AddToTodayDateTimeImpl(
       years: (json['years'] as num?)?.toInt() ?? 0,
       months: (json['months'] as num?)?.toInt() ?? 0,
       days: (json['days'] as num?)?.toInt() ?? 0,
@@ -39,8 +39,8 @@ _$AddToNowDateTimeImpl _$$AddToNowDateTimeImplFromJson(
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$AddToNowDateTimeImplToJson(
-        _$AddToNowDateTimeImpl instance) =>
+Map<String, dynamic> _$$AddToTodayDateTimeImplToJson(
+        _$AddToTodayDateTimeImpl instance) =>
     <String, dynamic>{
       'years': instance.years,
       'months': instance.months,
@@ -50,9 +50,9 @@ Map<String, dynamic> _$$AddToNowDateTimeImplToJson(
       'runtimeType': instance.$type,
     };
 
-_$ReplaceFromNowDateTimeImpl _$$ReplaceFromNowDateTimeImplFromJson(
+_$ReplaceFromTodayDateTimeImpl _$$ReplaceFromTodayDateTimeImplFromJson(
         Map<String, dynamic> json) =>
-    _$ReplaceFromNowDateTimeImpl(
+    _$ReplaceFromTodayDateTimeImpl(
       years: (json['years'] as num?)?.toInt(),
       months: (json['months'] as num?)?.toInt(),
       days: (json['days'] as num?)?.toInt(),
@@ -61,8 +61,8 @@ _$ReplaceFromNowDateTimeImpl _$$ReplaceFromNowDateTimeImplFromJson(
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$ReplaceFromNowDateTimeImplToJson(
-        _$ReplaceFromNowDateTimeImpl instance) =>
+Map<String, dynamic> _$$ReplaceFromTodayDateTimeImplToJson(
+        _$ReplaceFromTodayDateTimeImpl instance) =>
     <String, dynamic>{
       'years': instance.years,
       'months': instance.months,
