@@ -55,10 +55,12 @@ class DateTimeSelector extends StatelessWidget {
                           dateTime == null ? DateTime.now() : dateTime!;
 
                       onChanged!(
-                        selectedDate.copyWith(
-                          hour: initialDate.hour,
-                          minute: initialDate.minute,
-                        ),
+                        settings.editMode == DateEditMode.date
+                            ? selectedDate
+                            : selectedDate.copyWith(
+                                hour: initialDate.hour,
+                                minute: initialDate.minute,
+                              ),
                       );
                     }
                   },
