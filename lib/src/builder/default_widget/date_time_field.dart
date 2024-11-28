@@ -70,7 +70,15 @@ class DateTimeField extends StatelessWidget {
                       );
 
                       if (selectedDate != null) {
-                        data.onValueChanged!(selectedDate);
+                        final initialDate =
+                            data.value == null ? DateTime.now() : data.value!;
+
+                        data.onValueChanged!(
+                          selectedDate.copyWith(
+                            hour: initialDate.hour,
+                            minute: initialDate.minute,
+                          ),
+                        );
                       }
                     },
               child: Container(
