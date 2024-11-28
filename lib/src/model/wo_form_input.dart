@@ -374,8 +374,11 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
         if (minDate != null && value.isBefore(minDate.resolve())) {
           return WoFormInputError.minBound(path: '$parentPath/$id');
         }
-        if (maxDate != null && value.isAfter(maxDate.resolve())) {
-          return WoFormInputError.maxBound(path: '$parentPath/$id');
+        if (maxDate != null) {
+          if (DateTime(value.year, value.month, value.day)
+              .isAfter(maxDate.resolve())) {
+            return WoFormInputError.maxBound(path: '$parentPath/$id');
+          }
         }
 
         return null;
