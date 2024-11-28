@@ -82,8 +82,6 @@ _$DateTimeInputImpl _$$DateTimeInputImplFromJson(Map<String, dynamic> json) =>
       minDate: json['minDate'] == null
           ? null
           : FlexibleDateTime.fromJson(json['minDate'] as Map<String, dynamic>),
-      editMode: $enumDecodeNullable(_$DateEditModeEnumMap, json['editMode']) ??
-          DateEditMode.dateAndTime,
       uiSettings: json['uiSettings'] == null
           ? const DateTimeInputUiSettings()
           : DateTimeInputUiSettings.fromJson(
@@ -98,16 +96,42 @@ Map<String, dynamic> _$$DateTimeInputImplToJson(_$DateTimeInputImpl instance) =>
       'isRequired': instance.isRequired,
       'maxDate': FlexibleDateTime.staticToJson(instance.maxDate),
       'minDate': FlexibleDateTime.staticToJson(instance.minDate),
-      'editMode': _$DateEditModeEnumMap[instance.editMode]!,
       'uiSettings': DateTimeInputUiSettings.staticToJson(instance.uiSettings),
       'runtimeType': instance.$type,
     };
 
-const _$DateEditModeEnumMap = {
-  DateEditMode.date: 'date',
-  DateEditMode.time: 'time',
-  DateEditMode.dateAndTime: 'dateAndTime',
-};
+_$DurationInputImpl _$$DurationInputImplFromJson(Map<String, dynamic> json) =>
+    _$DurationInputImpl(
+      id: json['id'] as String,
+      initialValue: const DurationNullableConverter()
+          .fromJson((json['initialValue'] as num?)?.toInt()),
+      isRequired: json['isRequired'] as bool? ?? false,
+      startDatePath: json['startDatePath'] as String?,
+      maxDuration: const DurationNullableConverter()
+          .fromJson((json['maxDuration'] as num?)?.toInt()),
+      minDuration: const DurationNullableConverter()
+          .fromJson((json['minDuration'] as num?)?.toInt()),
+      uiSettings: json['uiSettings'] == null
+          ? const DurationInputUiSettings()
+          : DurationInputUiSettings.fromJson(
+              json['uiSettings'] as Map<String, dynamic>),
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$DurationInputImplToJson(_$DurationInputImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'initialValue':
+          const DurationNullableConverter().toJson(instance.initialValue),
+      'isRequired': instance.isRequired,
+      'startDatePath': instance.startDatePath,
+      'maxDuration':
+          const DurationNullableConverter().toJson(instance.maxDuration),
+      'minDuration':
+          const DurationNullableConverter().toJson(instance.minDuration),
+      'uiSettings': DurationInputUiSettings.staticToJson(instance.uiSettings),
+      'runtimeType': instance.$type,
+    };
 
 _$MediaInputImpl _$$MediaInputImplFromJson(Map<String, dynamic> json) =>
     _$MediaInputImpl(

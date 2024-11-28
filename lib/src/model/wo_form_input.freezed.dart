@@ -952,6 +952,8 @@ WoFormInput _$WoFormInputFromJson(Map<String, dynamic> json) {
       return BooleanInput.fromJson(json);
     case 'dateTime':
       return DateTimeInput.fromJson(json);
+    case 'duration':
+      return DurationInput.fromJson(json);
     case 'media':
       return MediaInput.fromJson(json);
     case 'num':
@@ -997,12 +999,23 @@ mixin _$WoFormInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
-            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
             DateTimeInputUiSettings uiSettings)
         dateTime,
+    required TResult Function(
+            String id,
+            @DurationNullableConverter() Duration? initialValue,
+            bool isRequired,
+            String? startDatePath,
+            @DurationNullableConverter() Duration? maxDuration,
+            @DurationNullableConverter() Duration? minDuration,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<Duration>? getCustomError,
+            @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+            DurationInputUiSettings uiSettings)
+        duration,
     required TResult Function(
             String id,
             @JsonKey(toJson: MediaImportSettings.staticToJson)
@@ -1083,12 +1096,23 @@ mixin _$WoFormInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
-            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
             DateTimeInputUiSettings uiSettings)?
         dateTime,
+    TResult? Function(
+            String id,
+            @DurationNullableConverter() Duration? initialValue,
+            bool isRequired,
+            String? startDatePath,
+            @DurationNullableConverter() Duration? maxDuration,
+            @DurationNullableConverter() Duration? minDuration,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<Duration>? getCustomError,
+            @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+            DurationInputUiSettings uiSettings)?
+        duration,
     TResult? Function(
             String id,
             @JsonKey(toJson: MediaImportSettings.staticToJson)
@@ -1169,12 +1193,23 @@ mixin _$WoFormInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
-            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
             DateTimeInputUiSettings uiSettings)?
         dateTime,
+    TResult Function(
+            String id,
+            @DurationNullableConverter() Duration? initialValue,
+            bool isRequired,
+            String? startDatePath,
+            @DurationNullableConverter() Duration? maxDuration,
+            @DurationNullableConverter() Duration? minDuration,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<Duration>? getCustomError,
+            @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+            DurationInputUiSettings uiSettings)?
+        duration,
     TResult Function(
             String id,
             @JsonKey(toJson: MediaImportSettings.staticToJson)
@@ -1238,6 +1273,7 @@ mixin _$WoFormInput {
   TResult map<TResult extends Object?>({
     required TResult Function(BooleanInput value) boolean,
     required TResult Function(DateTimeInput value) dateTime,
+    required TResult Function(DurationInput value) duration,
     required TResult Function(MediaInput value) media,
     required TResult Function(NumInput value) num,
     required TResult Function(SelectStringInput value) selectString,
@@ -1248,6 +1284,7 @@ mixin _$WoFormInput {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BooleanInput value)? boolean,
     TResult? Function(DateTimeInput value)? dateTime,
+    TResult? Function(DurationInput value)? duration,
     TResult? Function(MediaInput value)? media,
     TResult? Function(NumInput value)? num,
     TResult? Function(SelectStringInput value)? selectString,
@@ -1258,6 +1295,7 @@ mixin _$WoFormInput {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BooleanInput value)? boolean,
     TResult Function(DateTimeInput value)? dateTime,
+    TResult Function(DurationInput value)? duration,
     TResult Function(MediaInput value)? media,
     TResult Function(NumInput value)? num,
     TResult Function(SelectStringInput value)? selectString,
@@ -1493,12 +1531,23 @@ class _$BooleanInputImpl extends BooleanInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
-            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
             DateTimeInputUiSettings uiSettings)
         dateTime,
+    required TResult Function(
+            String id,
+            @DurationNullableConverter() Duration? initialValue,
+            bool isRequired,
+            String? startDatePath,
+            @DurationNullableConverter() Duration? maxDuration,
+            @DurationNullableConverter() Duration? minDuration,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<Duration>? getCustomError,
+            @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+            DurationInputUiSettings uiSettings)
+        duration,
     required TResult Function(
             String id,
             @JsonKey(toJson: MediaImportSettings.staticToJson)
@@ -1583,12 +1632,23 @@ class _$BooleanInputImpl extends BooleanInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
-            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
             DateTimeInputUiSettings uiSettings)?
         dateTime,
+    TResult? Function(
+            String id,
+            @DurationNullableConverter() Duration? initialValue,
+            bool isRequired,
+            String? startDatePath,
+            @DurationNullableConverter() Duration? maxDuration,
+            @DurationNullableConverter() Duration? minDuration,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<Duration>? getCustomError,
+            @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+            DurationInputUiSettings uiSettings)?
+        duration,
     TResult? Function(
             String id,
             @JsonKey(toJson: MediaImportSettings.staticToJson)
@@ -1673,12 +1733,23 @@ class _$BooleanInputImpl extends BooleanInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
-            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
             DateTimeInputUiSettings uiSettings)?
         dateTime,
+    TResult Function(
+            String id,
+            @DurationNullableConverter() Duration? initialValue,
+            bool isRequired,
+            String? startDatePath,
+            @DurationNullableConverter() Duration? maxDuration,
+            @DurationNullableConverter() Duration? minDuration,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<Duration>? getCustomError,
+            @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+            DurationInputUiSettings uiSettings)?
+        duration,
     TResult Function(
             String id,
             @JsonKey(toJson: MediaImportSettings.staticToJson)
@@ -1749,6 +1820,7 @@ class _$BooleanInputImpl extends BooleanInput {
   TResult map<TResult extends Object?>({
     required TResult Function(BooleanInput value) boolean,
     required TResult Function(DateTimeInput value) dateTime,
+    required TResult Function(DurationInput value) duration,
     required TResult Function(MediaInput value) media,
     required TResult Function(NumInput value) num,
     required TResult Function(SelectStringInput value) selectString,
@@ -1762,6 +1834,7 @@ class _$BooleanInputImpl extends BooleanInput {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BooleanInput value)? boolean,
     TResult? Function(DateTimeInput value)? dateTime,
+    TResult? Function(DurationInput value)? duration,
     TResult? Function(MediaInput value)? media,
     TResult? Function(NumInput value)? num,
     TResult? Function(SelectStringInput value)? selectString,
@@ -1775,6 +1848,7 @@ class _$BooleanInputImpl extends BooleanInput {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BooleanInput value)? boolean,
     TResult Function(DateTimeInput value)? dateTime,
+    TResult Function(DurationInput value)? duration,
     TResult Function(MediaInput value)? media,
     TResult Function(NumInput value)? num,
     TResult Function(SelectStringInput value)? selectString,
@@ -1849,7 +1923,6 @@ abstract class _$$DateTimeInputImplCopyWith<$Res>
       bool isRequired,
       @JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? maxDate,
       @JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? minDate,
-      DateEditMode editMode,
       @JsonKey(includeToJson: false, includeFromJson: false)
       GetCustomErrorDef<DateTime>? getCustomError,
       @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -1879,7 +1952,6 @@ class __$$DateTimeInputImplCopyWithImpl<$Res>
     Object? isRequired = null,
     Object? maxDate = freezed,
     Object? minDate = freezed,
-    Object? editMode = null,
     Object? getCustomError = freezed,
     Object? uiSettings = null,
   }) {
@@ -1904,10 +1976,6 @@ class __$$DateTimeInputImplCopyWithImpl<$Res>
           ? _value.minDate
           : minDate // ignore: cast_nullable_to_non_nullable
               as FlexibleDateTime?,
-      editMode: null == editMode
-          ? _value.editMode
-          : editMode // ignore: cast_nullable_to_non_nullable
-              as DateEditMode,
       getCustomError: freezed == getCustomError
           ? _value.getCustomError
           : getCustomError // ignore: cast_nullable_to_non_nullable
@@ -1981,7 +2049,6 @@ class _$DateTimeInputImpl extends DateTimeInput {
       this.isRequired = false,
       @JsonKey(toJson: FlexibleDateTime.staticToJson) this.maxDate,
       @JsonKey(toJson: FlexibleDateTime.staticToJson) this.minDate,
-      this.editMode = DateEditMode.dateAndTime,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.getCustomError,
       @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -2008,9 +2075,6 @@ class _$DateTimeInputImpl extends DateTimeInput {
   @JsonKey(toJson: FlexibleDateTime.staticToJson)
   final FlexibleDateTime? minDate;
   @override
-  @JsonKey()
-  final DateEditMode editMode;
-  @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final GetCustomErrorDef<DateTime>? getCustomError;
   @override
@@ -2022,7 +2086,7 @@ class _$DateTimeInputImpl extends DateTimeInput {
 
   @override
   String toString() {
-    return 'WoFormInput.dateTime(id: $id, initialValue: $initialValue, isRequired: $isRequired, maxDate: $maxDate, minDate: $minDate, editMode: $editMode, getCustomError: $getCustomError, uiSettings: $uiSettings)';
+    return 'WoFormInput.dateTime(id: $id, initialValue: $initialValue, isRequired: $isRequired, maxDate: $maxDate, minDate: $minDate, getCustomError: $getCustomError, uiSettings: $uiSettings)';
   }
 
   @override
@@ -2037,8 +2101,6 @@ class _$DateTimeInputImpl extends DateTimeInput {
                 other.isRequired == isRequired) &&
             (identical(other.maxDate, maxDate) || other.maxDate == maxDate) &&
             (identical(other.minDate, minDate) || other.minDate == minDate) &&
-            (identical(other.editMode, editMode) ||
-                other.editMode == editMode) &&
             (identical(other.getCustomError, getCustomError) ||
                 other.getCustomError == getCustomError) &&
             (identical(other.uiSettings, uiSettings) ||
@@ -2048,7 +2110,7 @@ class _$DateTimeInputImpl extends DateTimeInput {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, initialValue, isRequired,
-      maxDate, minDate, editMode, getCustomError, uiSettings);
+      maxDate, minDate, getCustomError, uiSettings);
 
   /// Create a copy of WoFormInput
   /// with the given fields replaced by the non-null parameter values.
@@ -2081,12 +2143,23 @@ class _$DateTimeInputImpl extends DateTimeInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
-            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
             DateTimeInputUiSettings uiSettings)
         dateTime,
+    required TResult Function(
+            String id,
+            @DurationNullableConverter() Duration? initialValue,
+            bool isRequired,
+            String? startDatePath,
+            @DurationNullableConverter() Duration? maxDuration,
+            @DurationNullableConverter() Duration? minDuration,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<Duration>? getCustomError,
+            @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+            DurationInputUiSettings uiSettings)
+        duration,
     required TResult Function(
             String id,
             @JsonKey(toJson: MediaImportSettings.staticToJson)
@@ -2144,7 +2217,7 @@ class _$DateTimeInputImpl extends DateTimeInput {
             StringInputUiSettings uiSettings)
         string,
   }) {
-    return dateTime(id, initialValue, isRequired, maxDate, minDate, editMode,
+    return dateTime(id, initialValue, isRequired, maxDate, minDate,
         getCustomError, uiSettings);
   }
 
@@ -2171,12 +2244,23 @@ class _$DateTimeInputImpl extends DateTimeInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
-            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
             DateTimeInputUiSettings uiSettings)?
         dateTime,
+    TResult? Function(
+            String id,
+            @DurationNullableConverter() Duration? initialValue,
+            bool isRequired,
+            String? startDatePath,
+            @DurationNullableConverter() Duration? maxDuration,
+            @DurationNullableConverter() Duration? minDuration,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<Duration>? getCustomError,
+            @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+            DurationInputUiSettings uiSettings)?
+        duration,
     TResult? Function(
             String id,
             @JsonKey(toJson: MediaImportSettings.staticToJson)
@@ -2235,7 +2319,7 @@ class _$DateTimeInputImpl extends DateTimeInput {
         string,
   }) {
     return dateTime?.call(id, initialValue, isRequired, maxDate, minDate,
-        editMode, getCustomError, uiSettings);
+        getCustomError, uiSettings);
   }
 
   @override
@@ -2261,12 +2345,23 @@ class _$DateTimeInputImpl extends DateTimeInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
-            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
             DateTimeInputUiSettings uiSettings)?
         dateTime,
+    TResult Function(
+            String id,
+            @DurationNullableConverter() Duration? initialValue,
+            bool isRequired,
+            String? startDatePath,
+            @DurationNullableConverter() Duration? maxDuration,
+            @DurationNullableConverter() Duration? minDuration,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<Duration>? getCustomError,
+            @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+            DurationInputUiSettings uiSettings)?
+        duration,
     TResult Function(
             String id,
             @JsonKey(toJson: MediaImportSettings.staticToJson)
@@ -2326,7 +2421,7 @@ class _$DateTimeInputImpl extends DateTimeInput {
     required TResult orElse(),
   }) {
     if (dateTime != null) {
-      return dateTime(id, initialValue, isRequired, maxDate, minDate, editMode,
+      return dateTime(id, initialValue, isRequired, maxDate, minDate,
           getCustomError, uiSettings);
     }
     return orElse();
@@ -2337,6 +2432,7 @@ class _$DateTimeInputImpl extends DateTimeInput {
   TResult map<TResult extends Object?>({
     required TResult Function(BooleanInput value) boolean,
     required TResult Function(DateTimeInput value) dateTime,
+    required TResult Function(DurationInput value) duration,
     required TResult Function(MediaInput value) media,
     required TResult Function(NumInput value) num,
     required TResult Function(SelectStringInput value) selectString,
@@ -2350,6 +2446,7 @@ class _$DateTimeInputImpl extends DateTimeInput {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BooleanInput value)? boolean,
     TResult? Function(DateTimeInput value)? dateTime,
+    TResult? Function(DurationInput value)? duration,
     TResult? Function(MediaInput value)? media,
     TResult? Function(NumInput value)? num,
     TResult? Function(SelectStringInput value)? selectString,
@@ -2363,6 +2460,7 @@ class _$DateTimeInputImpl extends DateTimeInput {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BooleanInput value)? boolean,
     TResult Function(DateTimeInput value)? dateTime,
+    TResult Function(DurationInput value)? duration,
     TResult Function(MediaInput value)? media,
     TResult Function(NumInput value)? num,
     TResult Function(SelectStringInput value)? selectString,
@@ -2393,7 +2491,6 @@ abstract class DateTimeInput extends WoFormInput {
       final FlexibleDateTime? maxDate,
       @JsonKey(toJson: FlexibleDateTime.staticToJson)
       final FlexibleDateTime? minDate,
-      final DateEditMode editMode,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final GetCustomErrorDef<DateTime>? getCustomError,
       @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -2412,7 +2509,6 @@ abstract class DateTimeInput extends WoFormInput {
   FlexibleDateTime? get maxDate;
   @JsonKey(toJson: FlexibleDateTime.staticToJson)
   FlexibleDateTime? get minDate;
-  DateEditMode get editMode;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   GetCustomErrorDef<DateTime>? get getCustomError;
@@ -2425,6 +2521,596 @@ abstract class DateTimeInput extends WoFormInput {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DateTimeInputImplCopyWith<_$DateTimeInputImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DurationInputImplCopyWith<$Res>
+    implements $WoFormInputCopyWith<$Res> {
+  factory _$$DurationInputImplCopyWith(
+          _$DurationInputImpl value, $Res Function(_$DurationInputImpl) then) =
+      __$$DurationInputImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      @DurationNullableConverter() Duration? initialValue,
+      bool isRequired,
+      String? startDatePath,
+      @DurationNullableConverter() Duration? maxDuration,
+      @DurationNullableConverter() Duration? minDuration,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      GetCustomErrorDef<Duration>? getCustomError,
+      @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+      DurationInputUiSettings uiSettings});
+
+  $DurationInputUiSettingsCopyWith<$Res> get uiSettings;
+}
+
+/// @nodoc
+class __$$DurationInputImplCopyWithImpl<$Res>
+    extends _$WoFormInputCopyWithImpl<$Res, _$DurationInputImpl>
+    implements _$$DurationInputImplCopyWith<$Res> {
+  __$$DurationInputImplCopyWithImpl(
+      _$DurationInputImpl _value, $Res Function(_$DurationInputImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? initialValue = freezed,
+    Object? isRequired = null,
+    Object? startDatePath = freezed,
+    Object? maxDuration = freezed,
+    Object? minDuration = freezed,
+    Object? getCustomError = freezed,
+    Object? uiSettings = null,
+  }) {
+    return _then(_$DurationInputImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      initialValue: freezed == initialValue
+          ? _value.initialValue
+          : initialValue // ignore: cast_nullable_to_non_nullable
+              as Duration?,
+      isRequired: null == isRequired
+          ? _value.isRequired
+          : isRequired // ignore: cast_nullable_to_non_nullable
+              as bool,
+      startDatePath: freezed == startDatePath
+          ? _value.startDatePath
+          : startDatePath // ignore: cast_nullable_to_non_nullable
+              as String?,
+      maxDuration: freezed == maxDuration
+          ? _value.maxDuration
+          : maxDuration // ignore: cast_nullable_to_non_nullable
+              as Duration?,
+      minDuration: freezed == minDuration
+          ? _value.minDuration
+          : minDuration // ignore: cast_nullable_to_non_nullable
+              as Duration?,
+      getCustomError: freezed == getCustomError
+          ? _value.getCustomError
+          : getCustomError // ignore: cast_nullable_to_non_nullable
+              as GetCustomErrorDef<Duration>?,
+      uiSettings: null == uiSettings
+          ? _value.uiSettings
+          : uiSettings // ignore: cast_nullable_to_non_nullable
+              as DurationInputUiSettings,
+    ));
+  }
+
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DurationInputUiSettingsCopyWith<$Res> get uiSettings {
+    return $DurationInputUiSettingsCopyWith<$Res>(_value.uiSettings, (value) {
+      return _then(_value.copyWith(uiSettings: value));
+    });
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$DurationInputImpl extends DurationInput {
+  const _$DurationInputImpl(
+      {required this.id,
+      @DurationNullableConverter() this.initialValue,
+      this.isRequired = false,
+      this.startDatePath,
+      @DurationNullableConverter() this.maxDuration,
+      @DurationNullableConverter() this.minDuration,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      this.getCustomError,
+      @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+      this.uiSettings = const DurationInputUiSettings(),
+      final String? $type})
+      : $type = $type ?? 'duration',
+        super._();
+
+  factory _$DurationInputImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DurationInputImplFromJson(json);
+
+  @override
+  final String id;
+  @override
+  @DurationNullableConverter()
+  final Duration? initialValue;
+  @override
+  @JsonKey()
+  final bool isRequired;
+
+  /// If provided, this should point to a DateTime in the WoFormValuesCubit.
+  /// When provided, the user will be able to choose between
+  /// DurationEditMode.dateTime and DurationEditMode.duration.
+  @override
+  final String? startDatePath;
+  @override
+  @DurationNullableConverter()
+  final Duration? maxDuration;
+  @override
+  @DurationNullableConverter()
+  final Duration? minDuration;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final GetCustomErrorDef<Duration>? getCustomError;
+  @override
+  @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+  final DurationInputUiSettings uiSettings;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'WoFormInput.duration(id: $id, initialValue: $initialValue, isRequired: $isRequired, startDatePath: $startDatePath, maxDuration: $maxDuration, minDuration: $minDuration, getCustomError: $getCustomError, uiSettings: $uiSettings)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DurationInputImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.initialValue, initialValue) ||
+                other.initialValue == initialValue) &&
+            (identical(other.isRequired, isRequired) ||
+                other.isRequired == isRequired) &&
+            (identical(other.startDatePath, startDatePath) ||
+                other.startDatePath == startDatePath) &&
+            (identical(other.maxDuration, maxDuration) ||
+                other.maxDuration == maxDuration) &&
+            (identical(other.minDuration, minDuration) ||
+                other.minDuration == minDuration) &&
+            (identical(other.getCustomError, getCustomError) ||
+                other.getCustomError == getCustomError) &&
+            (identical(other.uiSettings, uiSettings) ||
+                other.uiSettings == uiSettings));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, initialValue, isRequired,
+      startDatePath, maxDuration, minDuration, getCustomError, uiSettings);
+
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DurationInputImplCopyWith<_$DurationInputImpl> get copyWith =>
+      __$$DurationInputImplCopyWithImpl<_$DurationInputImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String id,
+            bool? initialValue,
+            bool isRequired,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<bool>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(bool?)? onValueChanged,
+            @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+            BooleanInputUiSettings uiSettings)
+        boolean,
+    required TResult Function(
+            String id,
+            @JsonKey(toJson: FlexibleDateTime.staticToJson)
+            FlexibleDateTime? initialValue,
+            bool isRequired,
+            @JsonKey(toJson: FlexibleDateTime.staticToJson)
+            FlexibleDateTime? maxDate,
+            @JsonKey(toJson: FlexibleDateTime.staticToJson)
+            FlexibleDateTime? minDate,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<DateTime>? getCustomError,
+            @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+            DateTimeInputUiSettings uiSettings)
+        dateTime,
+    required TResult Function(
+            String id,
+            @DurationNullableConverter() Duration? initialValue,
+            bool isRequired,
+            String? startDatePath,
+            @DurationNullableConverter() Duration? maxDuration,
+            @DurationNullableConverter() Duration? minDuration,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<Duration>? getCustomError,
+            @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+            DurationInputUiSettings uiSettings)
+        duration,
+    required TResult Function(
+            String id,
+            @JsonKey(toJson: MediaImportSettings.staticToJson)
+            MediaImportSettings importSettings,
+            int? maxCount,
+            int minCount,
+            double? aspectRatio,
+            @MediaListConverter() List<Media>? initialValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<Media>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<Media>?)? onValueChanged,
+            bool submitFormOnSelect,
+            String? uploadPath,
+            @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+            MediaInputUiSettings uiSettings)
+        media,
+    required TResult Function(
+            String id,
+            num? initialValue,
+            bool isRequired,
+            int? maxBound,
+            int minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<num>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(num?)? onValueChanged,
+            NumInputUiSettings uiSettings)
+        num,
+    required TResult Function(
+            String id,
+            int? maxCount,
+            int minCount,
+            List<String>? initialValues,
+            List<String> availibleValues,
+            List<String>? idsOfAvailibleValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<String>?)? onValueChanged,
+            bool submitFormOnSelect,
+            @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
+            SelectInputUiSettings<String> uiSettings,
+            @JsonKey(toJson: QuizSettings.staticToJson)
+            QuizSettings? quizSettings)
+        selectString,
+    required TResult Function(
+            String id,
+            String? initialValue,
+            bool isRequired,
+            String? regexPattern,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<String>? getCustomError,
+            @JsonKey(toJson: StringInputUiSettings.staticToJson)
+            StringInputUiSettings uiSettings)
+        string,
+  }) {
+    return duration(id, initialValue, isRequired, startDatePath, maxDuration,
+        minDuration, getCustomError, uiSettings);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String id,
+            bool? initialValue,
+            bool isRequired,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<bool>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(bool?)? onValueChanged,
+            @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+            BooleanInputUiSettings uiSettings)?
+        boolean,
+    TResult? Function(
+            String id,
+            @JsonKey(toJson: FlexibleDateTime.staticToJson)
+            FlexibleDateTime? initialValue,
+            bool isRequired,
+            @JsonKey(toJson: FlexibleDateTime.staticToJson)
+            FlexibleDateTime? maxDate,
+            @JsonKey(toJson: FlexibleDateTime.staticToJson)
+            FlexibleDateTime? minDate,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<DateTime>? getCustomError,
+            @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+            DateTimeInputUiSettings uiSettings)?
+        dateTime,
+    TResult? Function(
+            String id,
+            @DurationNullableConverter() Duration? initialValue,
+            bool isRequired,
+            String? startDatePath,
+            @DurationNullableConverter() Duration? maxDuration,
+            @DurationNullableConverter() Duration? minDuration,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<Duration>? getCustomError,
+            @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+            DurationInputUiSettings uiSettings)?
+        duration,
+    TResult? Function(
+            String id,
+            @JsonKey(toJson: MediaImportSettings.staticToJson)
+            MediaImportSettings importSettings,
+            int? maxCount,
+            int minCount,
+            double? aspectRatio,
+            @MediaListConverter() List<Media>? initialValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<Media>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<Media>?)? onValueChanged,
+            bool submitFormOnSelect,
+            String? uploadPath,
+            @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+            MediaInputUiSettings uiSettings)?
+        media,
+    TResult? Function(
+            String id,
+            num? initialValue,
+            bool isRequired,
+            int? maxBound,
+            int minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<num>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(num?)? onValueChanged,
+            NumInputUiSettings uiSettings)?
+        num,
+    TResult? Function(
+            String id,
+            int? maxCount,
+            int minCount,
+            List<String>? initialValues,
+            List<String> availibleValues,
+            List<String>? idsOfAvailibleValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<String>?)? onValueChanged,
+            bool submitFormOnSelect,
+            @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
+            SelectInputUiSettings<String> uiSettings,
+            @JsonKey(toJson: QuizSettings.staticToJson)
+            QuizSettings? quizSettings)?
+        selectString,
+    TResult? Function(
+            String id,
+            String? initialValue,
+            bool isRequired,
+            String? regexPattern,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<String>? getCustomError,
+            @JsonKey(toJson: StringInputUiSettings.staticToJson)
+            StringInputUiSettings uiSettings)?
+        string,
+  }) {
+    return duration?.call(id, initialValue, isRequired, startDatePath,
+        maxDuration, minDuration, getCustomError, uiSettings);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String id,
+            bool? initialValue,
+            bool isRequired,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<bool>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(bool?)? onValueChanged,
+            @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
+            BooleanInputUiSettings uiSettings)?
+        boolean,
+    TResult Function(
+            String id,
+            @JsonKey(toJson: FlexibleDateTime.staticToJson)
+            FlexibleDateTime? initialValue,
+            bool isRequired,
+            @JsonKey(toJson: FlexibleDateTime.staticToJson)
+            FlexibleDateTime? maxDate,
+            @JsonKey(toJson: FlexibleDateTime.staticToJson)
+            FlexibleDateTime? minDate,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<DateTime>? getCustomError,
+            @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
+            DateTimeInputUiSettings uiSettings)?
+        dateTime,
+    TResult Function(
+            String id,
+            @DurationNullableConverter() Duration? initialValue,
+            bool isRequired,
+            String? startDatePath,
+            @DurationNullableConverter() Duration? maxDuration,
+            @DurationNullableConverter() Duration? minDuration,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<Duration>? getCustomError,
+            @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+            DurationInputUiSettings uiSettings)?
+        duration,
+    TResult Function(
+            String id,
+            @JsonKey(toJson: MediaImportSettings.staticToJson)
+            MediaImportSettings importSettings,
+            int? maxCount,
+            int minCount,
+            double? aspectRatio,
+            @MediaListConverter() List<Media>? initialValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<Media>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<Media>?)? onValueChanged,
+            bool submitFormOnSelect,
+            String? uploadPath,
+            @JsonKey(toJson: MediaInputUiSettings.staticToJson)
+            MediaInputUiSettings uiSettings)?
+        media,
+    TResult Function(
+            String id,
+            num? initialValue,
+            bool isRequired,
+            int? maxBound,
+            int minBound,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<num>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(num?)? onValueChanged,
+            NumInputUiSettings uiSettings)?
+        num,
+    TResult Function(
+            String id,
+            int? maxCount,
+            int minCount,
+            List<String>? initialValues,
+            List<String> availibleValues,
+            List<String>? idsOfAvailibleValues,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorForListDef<String>? getCustomError,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            void Function(List<String>?)? onValueChanged,
+            bool submitFormOnSelect,
+            @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
+            SelectInputUiSettings<String> uiSettings,
+            @JsonKey(toJson: QuizSettings.staticToJson)
+            QuizSettings? quizSettings)?
+        selectString,
+    TResult Function(
+            String id,
+            String? initialValue,
+            bool isRequired,
+            String? regexPattern,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<String>? getCustomError,
+            @JsonKey(toJson: StringInputUiSettings.staticToJson)
+            StringInputUiSettings uiSettings)?
+        string,
+    required TResult orElse(),
+  }) {
+    if (duration != null) {
+      return duration(id, initialValue, isRequired, startDatePath, maxDuration,
+          minDuration, getCustomError, uiSettings);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BooleanInput value) boolean,
+    required TResult Function(DateTimeInput value) dateTime,
+    required TResult Function(DurationInput value) duration,
+    required TResult Function(MediaInput value) media,
+    required TResult Function(NumInput value) num,
+    required TResult Function(SelectStringInput value) selectString,
+    required TResult Function(StringInput value) string,
+  }) {
+    return duration(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BooleanInput value)? boolean,
+    TResult? Function(DateTimeInput value)? dateTime,
+    TResult? Function(DurationInput value)? duration,
+    TResult? Function(MediaInput value)? media,
+    TResult? Function(NumInput value)? num,
+    TResult? Function(SelectStringInput value)? selectString,
+    TResult? Function(StringInput value)? string,
+  }) {
+    return duration?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BooleanInput value)? boolean,
+    TResult Function(DateTimeInput value)? dateTime,
+    TResult Function(DurationInput value)? duration,
+    TResult Function(MediaInput value)? media,
+    TResult Function(NumInput value)? num,
+    TResult Function(SelectStringInput value)? selectString,
+    TResult Function(StringInput value)? string,
+    required TResult orElse(),
+  }) {
+    if (duration != null) {
+      return duration(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$DurationInputImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class DurationInput extends WoFormInput {
+  const factory DurationInput(
+      {required final String id,
+      @DurationNullableConverter() final Duration? initialValue,
+      final bool isRequired,
+      final String? startDatePath,
+      @DurationNullableConverter() final Duration? maxDuration,
+      @DurationNullableConverter() final Duration? minDuration,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final GetCustomErrorDef<Duration>? getCustomError,
+      @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+      final DurationInputUiSettings uiSettings}) = _$DurationInputImpl;
+  const DurationInput._() : super._();
+
+  factory DurationInput.fromJson(Map<String, dynamic> json) =
+      _$DurationInputImpl.fromJson;
+
+  @override
+  String get id;
+  @DurationNullableConverter()
+  Duration? get initialValue;
+  bool get isRequired;
+
+  /// If provided, this should point to a DateTime in the WoFormValuesCubit.
+  /// When provided, the user will be able to choose between
+  /// DurationEditMode.dateTime and DurationEditMode.duration.
+  String? get startDatePath;
+  @DurationNullableConverter()
+  Duration? get maxDuration;
+  @DurationNullableConverter()
+  Duration? get minDuration;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  GetCustomErrorDef<Duration>? get getCustomError;
+  @override
+  @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+  DurationInputUiSettings get uiSettings;
+
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DurationInputImplCopyWith<_$DurationInputImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2707,12 +3393,23 @@ class _$MediaInputImpl extends MediaInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
-            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
             DateTimeInputUiSettings uiSettings)
         dateTime,
+    required TResult Function(
+            String id,
+            @DurationNullableConverter() Duration? initialValue,
+            bool isRequired,
+            String? startDatePath,
+            @DurationNullableConverter() Duration? maxDuration,
+            @DurationNullableConverter() Duration? minDuration,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<Duration>? getCustomError,
+            @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+            DurationInputUiSettings uiSettings)
+        duration,
     required TResult Function(
             String id,
             @JsonKey(toJson: MediaImportSettings.staticToJson)
@@ -2807,12 +3504,23 @@ class _$MediaInputImpl extends MediaInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
-            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
             DateTimeInputUiSettings uiSettings)?
         dateTime,
+    TResult? Function(
+            String id,
+            @DurationNullableConverter() Duration? initialValue,
+            bool isRequired,
+            String? startDatePath,
+            @DurationNullableConverter() Duration? maxDuration,
+            @DurationNullableConverter() Duration? minDuration,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<Duration>? getCustomError,
+            @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+            DurationInputUiSettings uiSettings)?
+        duration,
     TResult? Function(
             String id,
             @JsonKey(toJson: MediaImportSettings.staticToJson)
@@ -2907,12 +3615,23 @@ class _$MediaInputImpl extends MediaInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
-            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
             DateTimeInputUiSettings uiSettings)?
         dateTime,
+    TResult Function(
+            String id,
+            @DurationNullableConverter() Duration? initialValue,
+            bool isRequired,
+            String? startDatePath,
+            @DurationNullableConverter() Duration? maxDuration,
+            @DurationNullableConverter() Duration? minDuration,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<Duration>? getCustomError,
+            @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+            DurationInputUiSettings uiSettings)?
+        duration,
     TResult Function(
             String id,
             @JsonKey(toJson: MediaImportSettings.staticToJson)
@@ -2993,6 +3712,7 @@ class _$MediaInputImpl extends MediaInput {
   TResult map<TResult extends Object?>({
     required TResult Function(BooleanInput value) boolean,
     required TResult Function(DateTimeInput value) dateTime,
+    required TResult Function(DurationInput value) duration,
     required TResult Function(MediaInput value) media,
     required TResult Function(NumInput value) num,
     required TResult Function(SelectStringInput value) selectString,
@@ -3006,6 +3726,7 @@ class _$MediaInputImpl extends MediaInput {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BooleanInput value)? boolean,
     TResult? Function(DateTimeInput value)? dateTime,
+    TResult? Function(DurationInput value)? duration,
     TResult? Function(MediaInput value)? media,
     TResult? Function(NumInput value)? num,
     TResult? Function(SelectStringInput value)? selectString,
@@ -3019,6 +3740,7 @@ class _$MediaInputImpl extends MediaInput {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BooleanInput value)? boolean,
     TResult Function(DateTimeInput value)? dateTime,
+    TResult Function(DurationInput value)? duration,
     TResult Function(MediaInput value)? media,
     TResult Function(NumInput value)? num,
     TResult Function(SelectStringInput value)? selectString,
@@ -3300,12 +4022,23 @@ class _$NumInputImpl extends NumInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
-            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
             DateTimeInputUiSettings uiSettings)
         dateTime,
+    required TResult Function(
+            String id,
+            @DurationNullableConverter() Duration? initialValue,
+            bool isRequired,
+            String? startDatePath,
+            @DurationNullableConverter() Duration? maxDuration,
+            @DurationNullableConverter() Duration? minDuration,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<Duration>? getCustomError,
+            @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+            DurationInputUiSettings uiSettings)
+        duration,
     required TResult Function(
             String id,
             @JsonKey(toJson: MediaImportSettings.staticToJson)
@@ -3390,12 +4123,23 @@ class _$NumInputImpl extends NumInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
-            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
             DateTimeInputUiSettings uiSettings)?
         dateTime,
+    TResult? Function(
+            String id,
+            @DurationNullableConverter() Duration? initialValue,
+            bool isRequired,
+            String? startDatePath,
+            @DurationNullableConverter() Duration? maxDuration,
+            @DurationNullableConverter() Duration? minDuration,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<Duration>? getCustomError,
+            @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+            DurationInputUiSettings uiSettings)?
+        duration,
     TResult? Function(
             String id,
             @JsonKey(toJson: MediaImportSettings.staticToJson)
@@ -3480,12 +4224,23 @@ class _$NumInputImpl extends NumInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
-            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
             DateTimeInputUiSettings uiSettings)?
         dateTime,
+    TResult Function(
+            String id,
+            @DurationNullableConverter() Duration? initialValue,
+            bool isRequired,
+            String? startDatePath,
+            @DurationNullableConverter() Duration? maxDuration,
+            @DurationNullableConverter() Duration? minDuration,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<Duration>? getCustomError,
+            @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+            DurationInputUiSettings uiSettings)?
+        duration,
     TResult Function(
             String id,
             @JsonKey(toJson: MediaImportSettings.staticToJson)
@@ -3556,6 +4311,7 @@ class _$NumInputImpl extends NumInput {
   TResult map<TResult extends Object?>({
     required TResult Function(BooleanInput value) boolean,
     required TResult Function(DateTimeInput value) dateTime,
+    required TResult Function(DurationInput value) duration,
     required TResult Function(MediaInput value) media,
     required TResult Function(NumInput value) num,
     required TResult Function(SelectStringInput value) selectString,
@@ -3569,6 +4325,7 @@ class _$NumInputImpl extends NumInput {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BooleanInput value)? boolean,
     TResult? Function(DateTimeInput value)? dateTime,
+    TResult? Function(DurationInput value)? duration,
     TResult? Function(MediaInput value)? media,
     TResult? Function(NumInput value)? num,
     TResult? Function(SelectStringInput value)? selectString,
@@ -3582,6 +4339,7 @@ class _$NumInputImpl extends NumInput {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BooleanInput value)? boolean,
     TResult Function(DateTimeInput value)? dateTime,
+    TResult Function(DurationInput value)? duration,
     TResult Function(MediaInput value)? media,
     TResult Function(NumInput value)? num,
     TResult Function(SelectStringInput value)? selectString,
@@ -3954,12 +4712,23 @@ class _$SelectStringInputImpl extends SelectStringInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
-            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
             DateTimeInputUiSettings uiSettings)
         dateTime,
+    required TResult Function(
+            String id,
+            @DurationNullableConverter() Duration? initialValue,
+            bool isRequired,
+            String? startDatePath,
+            @DurationNullableConverter() Duration? maxDuration,
+            @DurationNullableConverter() Duration? minDuration,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<Duration>? getCustomError,
+            @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+            DurationInputUiSettings uiSettings)
+        duration,
     required TResult Function(
             String id,
             @JsonKey(toJson: MediaImportSettings.staticToJson)
@@ -4054,12 +4823,23 @@ class _$SelectStringInputImpl extends SelectStringInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
-            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
             DateTimeInputUiSettings uiSettings)?
         dateTime,
+    TResult? Function(
+            String id,
+            @DurationNullableConverter() Duration? initialValue,
+            bool isRequired,
+            String? startDatePath,
+            @DurationNullableConverter() Duration? maxDuration,
+            @DurationNullableConverter() Duration? minDuration,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<Duration>? getCustomError,
+            @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+            DurationInputUiSettings uiSettings)?
+        duration,
     TResult? Function(
             String id,
             @JsonKey(toJson: MediaImportSettings.staticToJson)
@@ -4154,12 +4934,23 @@ class _$SelectStringInputImpl extends SelectStringInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
-            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
             DateTimeInputUiSettings uiSettings)?
         dateTime,
+    TResult Function(
+            String id,
+            @DurationNullableConverter() Duration? initialValue,
+            bool isRequired,
+            String? startDatePath,
+            @DurationNullableConverter() Duration? maxDuration,
+            @DurationNullableConverter() Duration? minDuration,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<Duration>? getCustomError,
+            @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+            DurationInputUiSettings uiSettings)?
+        duration,
     TResult Function(
             String id,
             @JsonKey(toJson: MediaImportSettings.staticToJson)
@@ -4240,6 +5031,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
   TResult map<TResult extends Object?>({
     required TResult Function(BooleanInput value) boolean,
     required TResult Function(DateTimeInput value) dateTime,
+    required TResult Function(DurationInput value) duration,
     required TResult Function(MediaInput value) media,
     required TResult Function(NumInput value) num,
     required TResult Function(SelectStringInput value) selectString,
@@ -4253,6 +5045,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BooleanInput value)? boolean,
     TResult? Function(DateTimeInput value)? dateTime,
+    TResult? Function(DurationInput value)? duration,
     TResult? Function(MediaInput value)? media,
     TResult? Function(NumInput value)? num,
     TResult? Function(SelectStringInput value)? selectString,
@@ -4266,6 +5059,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BooleanInput value)? boolean,
     TResult Function(DateTimeInput value)? dateTime,
+    TResult Function(DurationInput value)? duration,
     TResult Function(MediaInput value)? media,
     TResult Function(NumInput value)? num,
     TResult Function(SelectStringInput value)? selectString,
@@ -4523,12 +5317,23 @@ class _$StringInputImpl extends StringInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
-            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
             DateTimeInputUiSettings uiSettings)
         dateTime,
+    required TResult Function(
+            String id,
+            @DurationNullableConverter() Duration? initialValue,
+            bool isRequired,
+            String? startDatePath,
+            @DurationNullableConverter() Duration? maxDuration,
+            @DurationNullableConverter() Duration? minDuration,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<Duration>? getCustomError,
+            @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+            DurationInputUiSettings uiSettings)
+        duration,
     required TResult Function(
             String id,
             @JsonKey(toJson: MediaImportSettings.staticToJson)
@@ -4613,12 +5418,23 @@ class _$StringInputImpl extends StringInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
-            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
             DateTimeInputUiSettings uiSettings)?
         dateTime,
+    TResult? Function(
+            String id,
+            @DurationNullableConverter() Duration? initialValue,
+            bool isRequired,
+            String? startDatePath,
+            @DurationNullableConverter() Duration? maxDuration,
+            @DurationNullableConverter() Duration? minDuration,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<Duration>? getCustomError,
+            @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+            DurationInputUiSettings uiSettings)?
+        duration,
     TResult? Function(
             String id,
             @JsonKey(toJson: MediaImportSettings.staticToJson)
@@ -4703,12 +5519,23 @@ class _$StringInputImpl extends StringInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
-            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
             DateTimeInputUiSettings uiSettings)?
         dateTime,
+    TResult Function(
+            String id,
+            @DurationNullableConverter() Duration? initialValue,
+            bool isRequired,
+            String? startDatePath,
+            @DurationNullableConverter() Duration? maxDuration,
+            @DurationNullableConverter() Duration? minDuration,
+            @JsonKey(includeToJson: false, includeFromJson: false)
+            GetCustomErrorDef<Duration>? getCustomError,
+            @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+            DurationInputUiSettings uiSettings)?
+        duration,
     TResult Function(
             String id,
             @JsonKey(toJson: MediaImportSettings.staticToJson)
@@ -4779,6 +5606,7 @@ class _$StringInputImpl extends StringInput {
   TResult map<TResult extends Object?>({
     required TResult Function(BooleanInput value) boolean,
     required TResult Function(DateTimeInput value) dateTime,
+    required TResult Function(DurationInput value) duration,
     required TResult Function(MediaInput value) media,
     required TResult Function(NumInput value) num,
     required TResult Function(SelectStringInput value) selectString,
@@ -4792,6 +5620,7 @@ class _$StringInputImpl extends StringInput {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BooleanInput value)? boolean,
     TResult? Function(DateTimeInput value)? dateTime,
+    TResult? Function(DurationInput value)? duration,
     TResult? Function(MediaInput value)? media,
     TResult? Function(NumInput value)? num,
     TResult? Function(SelectStringInput value)? selectString,
@@ -4805,6 +5634,7 @@ class _$StringInputImpl extends StringInput {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BooleanInput value)? boolean,
     TResult Function(DateTimeInput value)? dateTime,
+    TResult Function(DurationInput value)? duration,
     TResult Function(MediaInput value)? media,
     TResult Function(NumInput value)? num,
     TResult Function(SelectStringInput value)? selectString,

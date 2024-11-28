@@ -308,7 +308,8 @@ mixin _$DateTimeInputUiSettings {
   String? get timeFormat => throw _privateConstructorUsedError;
   String? get labelText => throw _privateConstructorUsedError;
   String? get helperText => throw _privateConstructorUsedError;
-  String? get hintText => throw _privateConstructorUsedError; // TODO
+  String? get hintText => throw _privateConstructorUsedError;
+
   /// If null, label will be placed above the date selector.
   /// Else, label and selector will be in a flexible row,
   /// selector with a flex value of 10,
@@ -318,6 +319,7 @@ mixin _$DateTimeInputUiSettings {
       throw _privateConstructorUsedError;
   DatePickerMode? get initialDatePickerMode =>
       throw _privateConstructorUsedError;
+  DateEditMode? get editMode => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
   PickDateDef? get pickDate => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
@@ -351,6 +353,7 @@ abstract class $DateTimeInputUiSettingsCopyWith<$Res> {
       int? labelFlex,
       DatePickerEntryMode? initialEntryMode,
       DatePickerMode? initialDatePickerMode,
+      DateEditMode? editMode,
       @JsonKey(includeToJson: false, includeFromJson: false)
       PickDateDef? pickDate,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -383,6 +386,7 @@ class _$DateTimeInputUiSettingsCopyWithImpl<$Res,
     Object? labelFlex = freezed,
     Object? initialEntryMode = freezed,
     Object? initialDatePickerMode = freezed,
+    Object? editMode = freezed,
     Object? pickDate = freezed,
     Object? pickTime = freezed,
     Object? widgetBuilder = freezed,
@@ -420,6 +424,10 @@ class _$DateTimeInputUiSettingsCopyWithImpl<$Res,
           ? _value.initialDatePickerMode
           : initialDatePickerMode // ignore: cast_nullable_to_non_nullable
               as DatePickerMode?,
+      editMode: freezed == editMode
+          ? _value.editMode
+          : editMode // ignore: cast_nullable_to_non_nullable
+              as DateEditMode?,
       pickDate: freezed == pickDate
           ? _value.pickDate
           : pickDate // ignore: cast_nullable_to_non_nullable
@@ -454,6 +462,7 @@ abstract class _$$DateTimeInputUiSettingsImplCopyWith<$Res>
       int? labelFlex,
       DatePickerEntryMode? initialEntryMode,
       DatePickerMode? initialDatePickerMode,
+      DateEditMode? editMode,
       @JsonKey(includeToJson: false, includeFromJson: false)
       PickDateDef? pickDate,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -485,6 +494,7 @@ class __$$DateTimeInputUiSettingsImplCopyWithImpl<$Res>
     Object? labelFlex = freezed,
     Object? initialEntryMode = freezed,
     Object? initialDatePickerMode = freezed,
+    Object? editMode = freezed,
     Object? pickDate = freezed,
     Object? pickTime = freezed,
     Object? widgetBuilder = freezed,
@@ -522,6 +532,10 @@ class __$$DateTimeInputUiSettingsImplCopyWithImpl<$Res>
           ? _value.initialDatePickerMode
           : initialDatePickerMode // ignore: cast_nullable_to_non_nullable
               as DatePickerMode?,
+      editMode: freezed == editMode
+          ? _value.editMode
+          : editMode // ignore: cast_nullable_to_non_nullable
+              as DateEditMode?,
       pickDate: freezed == pickDate
           ? _value.pickDate
           : pickDate // ignore: cast_nullable_to_non_nullable
@@ -550,6 +564,7 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
       this.labelFlex,
       this.initialEntryMode,
       this.initialDatePickerMode,
+      this.editMode,
       @JsonKey(includeToJson: false, includeFromJson: false) this.pickDate,
       @JsonKey(includeToJson: false, includeFromJson: false) this.pickTime,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -569,7 +584,7 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
   final String? helperText;
   @override
   final String? hintText;
-// TODO
+
   /// If null, label will be placed above the date selector.
   /// Else, label and selector will be in a flexible row,
   /// selector with a flex value of 10,
@@ -580,6 +595,8 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
   final DatePickerEntryMode? initialEntryMode;
   @override
   final DatePickerMode? initialDatePickerMode;
+  @override
+  final DateEditMode? editMode;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final PickDateDef? pickDate;
@@ -592,7 +609,7 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
 
   @override
   String toString() {
-    return 'DateTimeInputUiSettings(dateFormat: $dateFormat, timeFormat: $timeFormat, labelText: $labelText, helperText: $helperText, hintText: $hintText, labelFlex: $labelFlex, initialEntryMode: $initialEntryMode, initialDatePickerMode: $initialDatePickerMode, pickDate: $pickDate, pickTime: $pickTime, widgetBuilder: $widgetBuilder)';
+    return 'DateTimeInputUiSettings(dateFormat: $dateFormat, timeFormat: $timeFormat, labelText: $labelText, helperText: $helperText, hintText: $hintText, labelFlex: $labelFlex, initialEntryMode: $initialEntryMode, initialDatePickerMode: $initialDatePickerMode, editMode: $editMode, pickDate: $pickDate, pickTime: $pickTime, widgetBuilder: $widgetBuilder)';
   }
 
   @override
@@ -616,6 +633,8 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
                 other.initialEntryMode == initialEntryMode) &&
             (identical(other.initialDatePickerMode, initialDatePickerMode) ||
                 other.initialDatePickerMode == initialDatePickerMode) &&
+            (identical(other.editMode, editMode) ||
+                other.editMode == editMode) &&
             (identical(other.pickDate, pickDate) ||
                 other.pickDate == pickDate) &&
             (identical(other.pickTime, pickTime) ||
@@ -636,6 +655,7 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
       labelFlex,
       initialEntryMode,
       initialDatePickerMode,
+      editMode,
       pickDate,
       pickTime,
       widgetBuilder);
@@ -667,6 +687,7 @@ abstract class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
           final int? labelFlex,
           final DatePickerEntryMode? initialEntryMode,
           final DatePickerMode? initialDatePickerMode,
+          final DateEditMode? editMode,
           @JsonKey(includeToJson: false, includeFromJson: false)
           final PickDateDef? pickDate,
           @JsonKey(includeToJson: false, includeFromJson: false)
@@ -688,7 +709,8 @@ abstract class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
   @override
   String? get helperText;
   @override
-  String? get hintText; // TODO
+  String? get hintText;
+
   /// If null, label will be placed above the date selector.
   /// Else, label and selector will be in a flexible row,
   /// selector with a flex value of 10,
@@ -699,6 +721,8 @@ abstract class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
   DatePickerEntryMode? get initialEntryMode;
   @override
   DatePickerMode? get initialDatePickerMode;
+  @override
+  DateEditMode? get editMode;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   PickDateDef? get pickDate;
@@ -714,6 +738,559 @@ abstract class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DateTimeInputUiSettingsImplCopyWith<_$DateTimeInputUiSettingsImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+DurationInputUiSettings _$DurationInputUiSettingsFromJson(
+    Map<String, dynamic> json) {
+  return _DurationInputUiSettings.fromJson(json);
+}
+
+/// @nodoc
+mixin _$DurationInputUiSettings {
+  String? get labelText => throw _privateConstructorUsedError;
+  String? get helperText => throw _privateConstructorUsedError;
+  String? get hintText => throw _privateConstructorUsedError;
+
+  /// Only used if DurationInput.startDatePath is provided
+  DurationEditMode? get initialEditMode => throw _privateConstructorUsedError;
+
+  /// If null, label will be placed above the date selector.
+  /// Else, label and selector will be in a flexible row,
+  /// selector with a flex value of 10,
+  /// and label with a flex value of [labelFlex].
+  int? get labelFlex => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  PickDurationDef? get pickDuration => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  FormatDurationDef? get formatDuration => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  DurationFieldBuilderDef? get widgetBuilder =>
+      throw _privateConstructorUsedError;
+
+  /// The following fields are used if editMode is dateTime
+  String? get dateTimeLabelText => throw _privateConstructorUsedError;
+  String? get dateTimeHelperText => throw _privateConstructorUsedError;
+  String? get dateTimeHintText => throw _privateConstructorUsedError;
+  String? get dateFormat => throw _privateConstructorUsedError;
+  String? get timeFormat => throw _privateConstructorUsedError;
+  DateEditMode? get dateTimeEditMode => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  PickDateDef? get pickDate => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  PickTimeDef? get pickTime => throw _privateConstructorUsedError;
+
+  /// Serializes this DurationInputUiSettings to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of DurationInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $DurationInputUiSettingsCopyWith<DurationInputUiSettings> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $DurationInputUiSettingsCopyWith<$Res> {
+  factory $DurationInputUiSettingsCopyWith(DurationInputUiSettings value,
+          $Res Function(DurationInputUiSettings) then) =
+      _$DurationInputUiSettingsCopyWithImpl<$Res, DurationInputUiSettings>;
+  @useResult
+  $Res call(
+      {String? labelText,
+      String? helperText,
+      String? hintText,
+      DurationEditMode? initialEditMode,
+      int? labelFlex,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      PickDurationDef? pickDuration,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      FormatDurationDef? formatDuration,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      DurationFieldBuilderDef? widgetBuilder,
+      String? dateTimeLabelText,
+      String? dateTimeHelperText,
+      String? dateTimeHintText,
+      String? dateFormat,
+      String? timeFormat,
+      DateEditMode? dateTimeEditMode,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      PickDateDef? pickDate,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      PickTimeDef? pickTime});
+}
+
+/// @nodoc
+class _$DurationInputUiSettingsCopyWithImpl<$Res,
+        $Val extends DurationInputUiSettings>
+    implements $DurationInputUiSettingsCopyWith<$Res> {
+  _$DurationInputUiSettingsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of DurationInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? labelText = freezed,
+    Object? helperText = freezed,
+    Object? hintText = freezed,
+    Object? initialEditMode = freezed,
+    Object? labelFlex = freezed,
+    Object? pickDuration = freezed,
+    Object? formatDuration = freezed,
+    Object? widgetBuilder = freezed,
+    Object? dateTimeLabelText = freezed,
+    Object? dateTimeHelperText = freezed,
+    Object? dateTimeHintText = freezed,
+    Object? dateFormat = freezed,
+    Object? timeFormat = freezed,
+    Object? dateTimeEditMode = freezed,
+    Object? pickDate = freezed,
+    Object? pickTime = freezed,
+  }) {
+    return _then(_value.copyWith(
+      labelText: freezed == labelText
+          ? _value.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _value.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hintText: freezed == hintText
+          ? _value.hintText
+          : hintText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      initialEditMode: freezed == initialEditMode
+          ? _value.initialEditMode
+          : initialEditMode // ignore: cast_nullable_to_non_nullable
+              as DurationEditMode?,
+      labelFlex: freezed == labelFlex
+          ? _value.labelFlex
+          : labelFlex // ignore: cast_nullable_to_non_nullable
+              as int?,
+      pickDuration: freezed == pickDuration
+          ? _value.pickDuration
+          : pickDuration // ignore: cast_nullable_to_non_nullable
+              as PickDurationDef?,
+      formatDuration: freezed == formatDuration
+          ? _value.formatDuration
+          : formatDuration // ignore: cast_nullable_to_non_nullable
+              as FormatDurationDef?,
+      widgetBuilder: freezed == widgetBuilder
+          ? _value.widgetBuilder
+          : widgetBuilder // ignore: cast_nullable_to_non_nullable
+              as DurationFieldBuilderDef?,
+      dateTimeLabelText: freezed == dateTimeLabelText
+          ? _value.dateTimeLabelText
+          : dateTimeLabelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dateTimeHelperText: freezed == dateTimeHelperText
+          ? _value.dateTimeHelperText
+          : dateTimeHelperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dateTimeHintText: freezed == dateTimeHintText
+          ? _value.dateTimeHintText
+          : dateTimeHintText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dateFormat: freezed == dateFormat
+          ? _value.dateFormat
+          : dateFormat // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timeFormat: freezed == timeFormat
+          ? _value.timeFormat
+          : timeFormat // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dateTimeEditMode: freezed == dateTimeEditMode
+          ? _value.dateTimeEditMode
+          : dateTimeEditMode // ignore: cast_nullable_to_non_nullable
+              as DateEditMode?,
+      pickDate: freezed == pickDate
+          ? _value.pickDate
+          : pickDate // ignore: cast_nullable_to_non_nullable
+              as PickDateDef?,
+      pickTime: freezed == pickTime
+          ? _value.pickTime
+          : pickTime // ignore: cast_nullable_to_non_nullable
+              as PickTimeDef?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$DurationInputUiSettingsImplCopyWith<$Res>
+    implements $DurationInputUiSettingsCopyWith<$Res> {
+  factory _$$DurationInputUiSettingsImplCopyWith(
+          _$DurationInputUiSettingsImpl value,
+          $Res Function(_$DurationInputUiSettingsImpl) then) =
+      __$$DurationInputUiSettingsImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String? labelText,
+      String? helperText,
+      String? hintText,
+      DurationEditMode? initialEditMode,
+      int? labelFlex,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      PickDurationDef? pickDuration,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      FormatDurationDef? formatDuration,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      DurationFieldBuilderDef? widgetBuilder,
+      String? dateTimeLabelText,
+      String? dateTimeHelperText,
+      String? dateTimeHintText,
+      String? dateFormat,
+      String? timeFormat,
+      DateEditMode? dateTimeEditMode,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      PickDateDef? pickDate,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      PickTimeDef? pickTime});
+}
+
+/// @nodoc
+class __$$DurationInputUiSettingsImplCopyWithImpl<$Res>
+    extends _$DurationInputUiSettingsCopyWithImpl<$Res,
+        _$DurationInputUiSettingsImpl>
+    implements _$$DurationInputUiSettingsImplCopyWith<$Res> {
+  __$$DurationInputUiSettingsImplCopyWithImpl(
+      _$DurationInputUiSettingsImpl _value,
+      $Res Function(_$DurationInputUiSettingsImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of DurationInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? labelText = freezed,
+    Object? helperText = freezed,
+    Object? hintText = freezed,
+    Object? initialEditMode = freezed,
+    Object? labelFlex = freezed,
+    Object? pickDuration = freezed,
+    Object? formatDuration = freezed,
+    Object? widgetBuilder = freezed,
+    Object? dateTimeLabelText = freezed,
+    Object? dateTimeHelperText = freezed,
+    Object? dateTimeHintText = freezed,
+    Object? dateFormat = freezed,
+    Object? timeFormat = freezed,
+    Object? dateTimeEditMode = freezed,
+    Object? pickDate = freezed,
+    Object? pickTime = freezed,
+  }) {
+    return _then(_$DurationInputUiSettingsImpl(
+      labelText: freezed == labelText
+          ? _value.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _value.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hintText: freezed == hintText
+          ? _value.hintText
+          : hintText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      initialEditMode: freezed == initialEditMode
+          ? _value.initialEditMode
+          : initialEditMode // ignore: cast_nullable_to_non_nullable
+              as DurationEditMode?,
+      labelFlex: freezed == labelFlex
+          ? _value.labelFlex
+          : labelFlex // ignore: cast_nullable_to_non_nullable
+              as int?,
+      pickDuration: freezed == pickDuration
+          ? _value.pickDuration
+          : pickDuration // ignore: cast_nullable_to_non_nullable
+              as PickDurationDef?,
+      formatDuration: freezed == formatDuration
+          ? _value.formatDuration
+          : formatDuration // ignore: cast_nullable_to_non_nullable
+              as FormatDurationDef?,
+      widgetBuilder: freezed == widgetBuilder
+          ? _value.widgetBuilder
+          : widgetBuilder // ignore: cast_nullable_to_non_nullable
+              as DurationFieldBuilderDef?,
+      dateTimeLabelText: freezed == dateTimeLabelText
+          ? _value.dateTimeLabelText
+          : dateTimeLabelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dateTimeHelperText: freezed == dateTimeHelperText
+          ? _value.dateTimeHelperText
+          : dateTimeHelperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dateTimeHintText: freezed == dateTimeHintText
+          ? _value.dateTimeHintText
+          : dateTimeHintText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dateFormat: freezed == dateFormat
+          ? _value.dateFormat
+          : dateFormat // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timeFormat: freezed == timeFormat
+          ? _value.timeFormat
+          : timeFormat // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dateTimeEditMode: freezed == dateTimeEditMode
+          ? _value.dateTimeEditMode
+          : dateTimeEditMode // ignore: cast_nullable_to_non_nullable
+              as DateEditMode?,
+      pickDate: freezed == pickDate
+          ? _value.pickDate
+          : pickDate // ignore: cast_nullable_to_non_nullable
+              as PickDateDef?,
+      pickTime: freezed == pickTime
+          ? _value.pickTime
+          : pickTime // ignore: cast_nullable_to_non_nullable
+              as PickTimeDef?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$DurationInputUiSettingsImpl extends _DurationInputUiSettings {
+  const _$DurationInputUiSettingsImpl(
+      {this.labelText,
+      this.helperText,
+      this.hintText,
+      this.initialEditMode,
+      this.labelFlex,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.pickDuration,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      this.formatDuration,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.widgetBuilder,
+      this.dateTimeLabelText,
+      this.dateTimeHelperText,
+      this.dateTimeHintText,
+      this.dateFormat,
+      this.timeFormat,
+      this.dateTimeEditMode,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.pickDate,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.pickTime})
+      : super._();
+
+  factory _$DurationInputUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DurationInputUiSettingsImplFromJson(json);
+
+  @override
+  final String? labelText;
+  @override
+  final String? helperText;
+  @override
+  final String? hintText;
+
+  /// Only used if DurationInput.startDatePath is provided
+  @override
+  final DurationEditMode? initialEditMode;
+
+  /// If null, label will be placed above the date selector.
+  /// Else, label and selector will be in a flexible row,
+  /// selector with a flex value of 10,
+  /// and label with a flex value of [labelFlex].
+  @override
+  final int? labelFlex;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final PickDurationDef? pickDuration;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final FormatDurationDef? formatDuration;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final DurationFieldBuilderDef? widgetBuilder;
+
+  /// The following fields are used if editMode is dateTime
+  @override
+  final String? dateTimeLabelText;
+  @override
+  final String? dateTimeHelperText;
+  @override
+  final String? dateTimeHintText;
+  @override
+  final String? dateFormat;
+  @override
+  final String? timeFormat;
+  @override
+  final DateEditMode? dateTimeEditMode;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final PickDateDef? pickDate;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final PickTimeDef? pickTime;
+
+  @override
+  String toString() {
+    return 'DurationInputUiSettings(labelText: $labelText, helperText: $helperText, hintText: $hintText, initialEditMode: $initialEditMode, labelFlex: $labelFlex, pickDuration: $pickDuration, formatDuration: $formatDuration, widgetBuilder: $widgetBuilder, dateTimeLabelText: $dateTimeLabelText, dateTimeHelperText: $dateTimeHelperText, dateTimeHintText: $dateTimeHintText, dateFormat: $dateFormat, timeFormat: $timeFormat, dateTimeEditMode: $dateTimeEditMode, pickDate: $pickDate, pickTime: $pickTime)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DurationInputUiSettingsImpl &&
+            (identical(other.labelText, labelText) ||
+                other.labelText == labelText) &&
+            (identical(other.helperText, helperText) ||
+                other.helperText == helperText) &&
+            (identical(other.hintText, hintText) ||
+                other.hintText == hintText) &&
+            (identical(other.initialEditMode, initialEditMode) ||
+                other.initialEditMode == initialEditMode) &&
+            (identical(other.labelFlex, labelFlex) ||
+                other.labelFlex == labelFlex) &&
+            (identical(other.pickDuration, pickDuration) ||
+                other.pickDuration == pickDuration) &&
+            (identical(other.formatDuration, formatDuration) ||
+                other.formatDuration == formatDuration) &&
+            (identical(other.widgetBuilder, widgetBuilder) ||
+                other.widgetBuilder == widgetBuilder) &&
+            (identical(other.dateTimeLabelText, dateTimeLabelText) ||
+                other.dateTimeLabelText == dateTimeLabelText) &&
+            (identical(other.dateTimeHelperText, dateTimeHelperText) ||
+                other.dateTimeHelperText == dateTimeHelperText) &&
+            (identical(other.dateTimeHintText, dateTimeHintText) ||
+                other.dateTimeHintText == dateTimeHintText) &&
+            (identical(other.dateFormat, dateFormat) ||
+                other.dateFormat == dateFormat) &&
+            (identical(other.timeFormat, timeFormat) ||
+                other.timeFormat == timeFormat) &&
+            (identical(other.dateTimeEditMode, dateTimeEditMode) ||
+                other.dateTimeEditMode == dateTimeEditMode) &&
+            (identical(other.pickDate, pickDate) ||
+                other.pickDate == pickDate) &&
+            (identical(other.pickTime, pickTime) ||
+                other.pickTime == pickTime));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      labelText,
+      helperText,
+      hintText,
+      initialEditMode,
+      labelFlex,
+      pickDuration,
+      formatDuration,
+      widgetBuilder,
+      dateTimeLabelText,
+      dateTimeHelperText,
+      dateTimeHintText,
+      dateFormat,
+      timeFormat,
+      dateTimeEditMode,
+      pickDate,
+      pickTime);
+
+  /// Create a copy of DurationInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DurationInputUiSettingsImplCopyWith<_$DurationInputUiSettingsImpl>
+      get copyWith => __$$DurationInputUiSettingsImplCopyWithImpl<
+          _$DurationInputUiSettingsImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$DurationInputUiSettingsImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _DurationInputUiSettings extends DurationInputUiSettings {
+  const factory _DurationInputUiSettings(
+      {final String? labelText,
+      final String? helperText,
+      final String? hintText,
+      final DurationEditMode? initialEditMode,
+      final int? labelFlex,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final PickDurationDef? pickDuration,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final FormatDurationDef? formatDuration,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final DurationFieldBuilderDef? widgetBuilder,
+      final String? dateTimeLabelText,
+      final String? dateTimeHelperText,
+      final String? dateTimeHintText,
+      final String? dateFormat,
+      final String? timeFormat,
+      final DateEditMode? dateTimeEditMode,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final PickDateDef? pickDate,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      final PickTimeDef? pickTime}) = _$DurationInputUiSettingsImpl;
+  const _DurationInputUiSettings._() : super._();
+
+  factory _DurationInputUiSettings.fromJson(Map<String, dynamic> json) =
+      _$DurationInputUiSettingsImpl.fromJson;
+
+  @override
+  String? get labelText;
+  @override
+  String? get helperText;
+  @override
+  String? get hintText;
+
+  /// Only used if DurationInput.startDatePath is provided
+  @override
+  DurationEditMode? get initialEditMode;
+
+  /// If null, label will be placed above the date selector.
+  /// Else, label and selector will be in a flexible row,
+  /// selector with a flex value of 10,
+  /// and label with a flex value of [labelFlex].
+  @override
+  int? get labelFlex;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  PickDurationDef? get pickDuration;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  FormatDurationDef? get formatDuration;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  DurationFieldBuilderDef? get widgetBuilder;
+
+  /// The following fields are used if editMode is dateTime
+  @override
+  String? get dateTimeLabelText;
+  @override
+  String? get dateTimeHelperText;
+  @override
+  String? get dateTimeHintText;
+  @override
+  String? get dateFormat;
+  @override
+  String? get timeFormat;
+  @override
+  DateEditMode? get dateTimeEditMode;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  PickDateDef? get pickDate;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  PickTimeDef? get pickTime;
+
+  /// Create a copy of DurationInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DurationInputUiSettingsImplCopyWith<_$DurationInputUiSettingsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 

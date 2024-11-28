@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:wo_form/src/model/json_converter/duration.dart';
 import 'package:wo_form/src/model/json_converter/media_list.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -103,8 +104,6 @@ extension _SelectInputUiSettingsX<T> on SelectInputUiSettings<T> {
       object.toJson();
 }
 
-enum DateEditMode { date, time, dateAndTime }
-
 @freezed
 sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
   const factory WoFormInput.boolean({
@@ -122,24 +121,6 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     BooleanInputUiSettings uiSettings,
   }) = BooleanInput;
 
-  /// If you want to use DateTimeInput, provide an implementation of
-  /// [DateTimeService] at the top-level of your application with a
-  /// [RepositoryProvider]. See wo_form_service for an implementation example.
-  ///
-  /// You must provide DateTimeService this way :
-  /// ```dart
-  /// RepositoryProvider<DateTimeService>(
-  ///   create: (context) => const MyDateTimeService(),
-  /// ),
-  /// ```
-  ///
-  /// In order to make context.read<MyDateTimeService>() work, add :
-  /// ```dart
-  /// RepositoryProvider<MyDateTimeService>(
-  ///   create: (context) =>
-  ///       context.read<DateTimeService>() as MyDateTimeService,
-  /// ),
-  /// ```
   const factory WoFormInput.dateTime({
     required String id,
     @JsonKey(toJson: FlexibleDateTime.staticToJson)
@@ -147,13 +128,30 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     @Default(false) bool isRequired,
     @JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? maxDate,
     @JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? minDate,
-    @Default(DateEditMode.dateAndTime) DateEditMode editMode,
     @JsonKey(includeToJson: false, includeFromJson: false)
     GetCustomErrorDef<DateTime>? getCustomError,
     @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
     @Default(DateTimeInputUiSettings())
     DateTimeInputUiSettings uiSettings,
   }) = DateTimeInput;
+
+  const factory WoFormInput.duration({
+    required String id,
+    @DurationNullableConverter() Duration? initialValue,
+    @Default(false) bool isRequired,
+
+    /// If provided, this should point to a DateTime in the WoFormValuesCubit.
+    /// When provided, the user will be able to choose between
+    /// DurationEditMode.dateTime and DurationEditMode.duration.
+    String? startDatePath,
+    @DurationNullableConverter() Duration? maxDuration,
+    @DurationNullableConverter() Duration? minDuration,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    GetCustomErrorDef<Duration>? getCustomError,
+    @JsonKey(toJson: DurationInputUiSettings.staticToJson)
+    @Default(DurationInputUiSettings())
+    DurationInputUiSettings uiSettings,
+  }) = DurationInput;
 
   /// If you want to use MediaInput, provide an implementation of [MediaService]
   /// at the top-level of your application with a [RepositoryProvider].
@@ -300,6 +298,8 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
         return value as bool?;
       case DateTimeInput():
         return value as DateTime?;
+      case DurationInput():
+        return value as Duration?;
       case MediaInput(uploadPath: final uploadPath):
         if (uploadPath == null) {
           throw AssertionError(
@@ -377,6 +377,37 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
         if (maxDate != null) {
           if (DateTime(value.year, value.month, value.day)
               .isAfter(maxDate.resolve())) {
+            return WoFormInputError.maxBound(path: '$parentPath/$id');
+          }
+        }
+
+        return null;
+
+      case DurationInput(
+          isRequired: final isRequired,
+          minDuration: final minDuration,
+          maxDuration: final maxDuration,
+          getCustomError: final getCustomError,
+        ):
+        value as Duration?;
+
+        final customError = getCustomError?.call(
+          value,
+          '$parentPath/$id',
+        );
+        if (customError != null) return customError;
+
+        if (value == null) {
+          return isRequired
+              ? WoFormInputError.empty(path: '$parentPath/$id')
+              : null;
+        }
+
+        if (minDuration != null && value < minDuration) {
+          return WoFormInputError.minBound(path: '$parentPath/$id');
+        }
+        if (maxDuration != null) {
+          if (value > maxDuration) {
             return WoFormInputError.maxBound(path: '$parentPath/$id');
           }
         }
@@ -485,6 +516,8 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
         return {'$parentPath/$id': initialValue};
       case DateTimeInput(initialValue: final initialValue):
         return {'$parentPath/$id': initialValue?.resolve()};
+      case DurationInput(initialValue: final initialValue):
+        return {'$parentPath/$id': initialValue};
       case MediaInput(initialValues: final initialValues):
         return {'$parentPath/$id': initialValues};
       case NumInput(initialValue: final initialValue):
@@ -504,6 +537,8 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
         return BooleanFieldBuilder(key: key, path: path);
       case DateTimeInput():
         return DateTimeFieldBuilder(key: key, path: path);
+      case DurationInput():
+        return DurationFieldBuilder(key: key, path: path);
       case MediaInput():
         return MediaFieldBuilder(key: key, path: path);
       case NumInput():

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:popover/popover.dart';
+import 'package:wo_form/src/builder/default_widget/flex_field.dart';
 import 'package:wo_form/wo_form.dart';
 
 class SelectField<T> extends StatelessWidget {
@@ -71,25 +72,6 @@ class SelectField<T> extends StatelessWidget {
             ],
           );
         case ChildrenVisibility.whenAsked:
-          final label = Opacity(
-            opacity: data.onValueChanged == null ? 0.3 : 1,
-            child: Builder(
-              builder: (context) {
-                final headerData = WoFormInputHeaderData(
-                  path: data.path,
-                  labelText: data.uiSettings.labelText,
-                  helperText: data.uiSettings.helperText,
-                  errorText: data.errorText,
-                  trailing: scoreWidget,
-                );
-
-                return (data.uiSettings.headerBuilder ??
-                        woTheme?.inputHeaderBuilder ??
-                        InputHeader.new)
-                    .call(headerData);
-              },
-            ),
-          );
           final selector = SearchField<T>.uniqueChoice(
             values: data.input.availibleValues,
             onSelected: data.onValueChanged == null ? null : onUniqueChoice,
@@ -116,38 +98,50 @@ class SelectField<T> extends StatelessWidget {
               ),
             ),
           );
-          final labelFlex = data.uiSettings.labelFlex;
 
-          return labelFlex == null
-              ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    label,
-                    ListTile(
-                      contentPadding:
-                          const EdgeInsets.symmetric(horizontal: 16),
-                      title: selector,
-                    ),
-                  ],
-                )
-              : ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  title: Flex(
-                    direction: Axis.horizontal,
-                    children: [
-                      Expanded(
-                        flex: labelFlex,
-                        child: label,
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        flex: 10,
-                        child: selector,
-                      ),
-                      const SizedBox(width: 16),
-                    ],
-                  ),
-                );
+          return FlexField(
+            path: data.path,
+            labelFlex: data.uiSettings.labelFlex,
+            labelText: data.uiSettings.labelText,
+            helperText: data.uiSettings.helperText,
+            errorText: data.errorText,
+            trailing: scoreWidget,
+            disableMode: data.onValueChanged == null
+                ? FlexFieldDisableMode.header
+                : FlexFieldDisableMode.none,
+            child: selector,
+          );
+
+        // return labelFlex == null
+        //     ? Column(
+        //         crossAxisAlignment: CrossAxisAlignment.start,
+        //         children: [
+        //           label,
+        //           ListTile(
+        //             contentPadding:
+        //                 const EdgeInsets.symmetric(horizontal: 16),
+        //             title: selector,
+        //           ),
+        //         ],
+        //       )
+        //     : ListTile(
+        //         contentPadding: EdgeInsets.zero,
+        //         title: Flex(
+        //           direction: Axis.horizontal,
+        //           children: [
+        //             Expanded(
+        //               flex: labelFlex,
+        //               child: label,
+        //             ),
+        //             const SizedBox(width: 16),
+        //             Expanded(
+        //               flex: 10,
+        //               child: selector,
+        //             ),
+        //             const SizedBox(width: 16),
+        //           ],
+        //         ),
+        //       );
       }
     } else {
       return switch (data.uiSettings.childrenVisibility) {

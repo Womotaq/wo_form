@@ -49,6 +49,8 @@ typedef DateTimeFieldBuilderDef = Widget Function(
   WoFieldData<DateTimeInput, DateTime, DateTimeInputUiSettings> data,
 );
 
+enum DateEditMode { date, time, dateAndTime }
+
 typedef PickDateDef = Future<DateTime?> Function({
   required BuildContext context,
   DateTime? initialDate,
@@ -81,6 +83,7 @@ class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
     int? labelFlex,
     DatePickerEntryMode? initialEntryMode,
     DatePickerMode? initialDatePickerMode,
+    DateEditMode? editMode,
     @JsonKey(includeToJson: false, includeFromJson: false)
     PickDateDef? pickDate,
     @JsonKey(includeToJson: false, includeFromJson: false)
@@ -109,9 +112,93 @@ class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
           initialEntryMode: initialEntryMode ?? other.initialEntryMode,
           initialDatePickerMode:
               initialDatePickerMode ?? other.initialDatePickerMode,
+          editMode: editMode ?? other.editMode,
           pickDate: pickDate ?? other.pickDate,
           pickTime: pickTime ?? other.pickTime,
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,
+        );
+}
+
+typedef DurationFieldBuilderDef = Widget Function(
+  WoFieldData<DurationInput, Duration, DurationInputUiSettings> data,
+);
+
+typedef PickDurationDef = Future<Duration?> Function({
+  required BuildContext context,
+  Duration? initialDuration,
+  Duration? maxDuration,
+  Duration? minDuration,
+});
+
+typedef FormatDurationDef = String Function(Duration duration);
+
+enum DurationEditMode {
+  /// Only used if DurationInput.startDatePath is provided
+  dateTime,
+  duration,
+}
+
+@freezed
+class DurationInputUiSettings with _$DurationInputUiSettings {
+  const factory DurationInputUiSettings({
+    String? labelText,
+    String? helperText,
+    String? hintText,
+
+    /// Only used if DurationInput.startDatePath is provided
+    DurationEditMode? initialEditMode,
+
+    /// If null, label will be placed above the date selector.
+    /// Else, label and selector will be in a flexible row,
+    /// selector with a flex value of 10,
+    /// and label with a flex value of [labelFlex].
+    int? labelFlex,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    PickDurationDef? pickDuration,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    FormatDurationDef? formatDuration,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    DurationFieldBuilderDef? widgetBuilder,
+
+    /// The following fields are used if editMode is dateTime
+    String? dateTimeLabelText,
+    String? dateTimeHelperText,
+    String? dateTimeHintText,
+    String? dateFormat,
+    String? timeFormat,
+    DateEditMode? dateTimeEditMode,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    PickDateDef? pickDate,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    PickTimeDef? pickTime,
+  }) = _DurationInputUiSettings;
+
+  const DurationInputUiSettings._();
+
+  factory DurationInputUiSettings.fromJson(Map<String, dynamic> json) =>
+      _$DurationInputUiSettingsFromJson(json);
+
+  static Map<String, dynamic> staticToJson(DurationInputUiSettings object) =>
+      object.toJson();
+
+  DurationInputUiSettings merge(DurationInputUiSettings? other) => other == null
+      ? this
+      : DurationInputUiSettings(
+          labelText: labelText ?? other.labelText,
+          helperText: helperText ?? other.helperText,
+          hintText: hintText ?? other.hintText,
+          initialEditMode: initialEditMode ?? other.initialEditMode,
+          labelFlex: labelFlex ?? other.labelFlex,
+          pickDuration: pickDuration ?? other.pickDuration,
+          widgetBuilder: widgetBuilder ?? other.widgetBuilder,
+          dateTimeLabelText: dateTimeLabelText ?? other.dateTimeLabelText,
+          dateTimeHelperText: dateTimeHelperText ?? other.dateTimeHelperText,
+          dateTimeHintText: dateTimeHintText ?? other.dateTimeHintText,
+          dateFormat: dateFormat ?? other.dateFormat,
+          timeFormat: timeFormat ?? other.timeFormat,
+          dateTimeEditMode: dateTimeEditMode ?? other.dateTimeEditMode,
+          pickDate: pickDate ?? other.pickDate,
+          pickTime: pickTime ?? other.pickTime,
         );
 }
 

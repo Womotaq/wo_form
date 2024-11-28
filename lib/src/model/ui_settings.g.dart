@@ -51,6 +51,7 @@ _$DateTimeInputUiSettingsImpl _$$DateTimeInputUiSettingsImplFromJson(
           _$DatePickerEntryModeEnumMap, json['initialEntryMode']),
       initialDatePickerMode: $enumDecodeNullable(
           _$DatePickerModeEnumMap, json['initialDatePickerMode']),
+      editMode: $enumDecodeNullable(_$DateEditModeEnumMap, json['editMode']),
     );
 
 Map<String, dynamic> _$$DateTimeInputUiSettingsImplToJson(
@@ -66,6 +67,7 @@ Map<String, dynamic> _$$DateTimeInputUiSettingsImplToJson(
           _$DatePickerEntryModeEnumMap[instance.initialEntryMode],
       'initialDatePickerMode':
           _$DatePickerModeEnumMap[instance.initialDatePickerMode],
+      'editMode': _$DateEditModeEnumMap[instance.editMode],
     };
 
 const _$DatePickerEntryModeEnumMap = {
@@ -78,6 +80,51 @@ const _$DatePickerEntryModeEnumMap = {
 const _$DatePickerModeEnumMap = {
   DatePickerMode.day: 'day',
   DatePickerMode.year: 'year',
+};
+
+const _$DateEditModeEnumMap = {
+  DateEditMode.date: 'date',
+  DateEditMode.time: 'time',
+  DateEditMode.dateAndTime: 'dateAndTime',
+};
+
+_$DurationInputUiSettingsImpl _$$DurationInputUiSettingsImplFromJson(
+        Map<String, dynamic> json) =>
+    _$DurationInputUiSettingsImpl(
+      labelText: json['labelText'] as String?,
+      helperText: json['helperText'] as String?,
+      hintText: json['hintText'] as String?,
+      initialEditMode: $enumDecodeNullable(
+          _$DurationEditModeEnumMap, json['initialEditMode']),
+      labelFlex: (json['labelFlex'] as num?)?.toInt(),
+      dateTimeLabelText: json['dateTimeLabelText'] as String?,
+      dateTimeHelperText: json['dateTimeHelperText'] as String?,
+      dateTimeHintText: json['dateTimeHintText'] as String?,
+      dateFormat: json['dateFormat'] as String?,
+      timeFormat: json['timeFormat'] as String?,
+      dateTimeEditMode:
+          $enumDecodeNullable(_$DateEditModeEnumMap, json['dateTimeEditMode']),
+    );
+
+Map<String, dynamic> _$$DurationInputUiSettingsImplToJson(
+        _$DurationInputUiSettingsImpl instance) =>
+    <String, dynamic>{
+      'labelText': instance.labelText,
+      'helperText': instance.helperText,
+      'hintText': instance.hintText,
+      'initialEditMode': _$DurationEditModeEnumMap[instance.initialEditMode],
+      'labelFlex': instance.labelFlex,
+      'dateTimeLabelText': instance.dateTimeLabelText,
+      'dateTimeHelperText': instance.dateTimeHelperText,
+      'dateTimeHintText': instance.dateTimeHintText,
+      'dateFormat': instance.dateFormat,
+      'timeFormat': instance.timeFormat,
+      'dateTimeEditMode': _$DateEditModeEnumMap[instance.dateTimeEditMode],
+    };
+
+const _$DurationEditModeEnumMap = {
+  DurationEditMode.dateTime: 'dateTime',
+  DurationEditMode.duration: 'duration',
 };
 
 _$DynamicInputsNodeUiSettingsImpl _$$DynamicInputsNodeUiSettingsImplFromJson(

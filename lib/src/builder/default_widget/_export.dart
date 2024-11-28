@@ -1,6 +1,7 @@
 export 'boolean_field.dart';
 export 'date_time_field.dart';
 export 'deletable_field.dart';
+export 'duration_field.dart';
 export 'dynamic_inputs_node_widget.dart';
 export 'form_header.dart';
 export 'input_header.dart';

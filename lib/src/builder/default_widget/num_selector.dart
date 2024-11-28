@@ -65,8 +65,10 @@ class _NumSelectorState extends State<NumSelector> {
       size: iconHeight,
       axis == Axis.vertical
           ? isPlus
-              ? Icons.arrow_drop_up
-              : Icons.arrow_drop_down
+              ? Icons.keyboard_arrow_up
+              : Icons.keyboard_arrow_down
+          // ? Icons.arrow_drop_up
+          // : Icons.arrow_drop_down
           : isPlus
               ? Icons.add_circle
               : Icons.remove_circle,
@@ -80,6 +82,7 @@ class _NumSelectorState extends State<NumSelector> {
 
     return SizedBox(
       height: iconHeight,
+      width: 40,
       child: Builder(
         builder: (context) {
           return IconButton(
@@ -123,7 +126,7 @@ class _NumSelectorState extends State<NumSelector> {
       ),
       if (widget.controller != null)
         ConstrainedBox(
-          constraints: const BoxConstraints(minWidth: 48),
+          constraints: const BoxConstraints(minWidth: 40),
           child: IntrinsicWidth(
             child: TextField(
               enabled: widget.onChanged != null,
@@ -138,7 +141,6 @@ class _NumSelectorState extends State<NumSelector> {
               keyboardType: TextInputType.number,
               inputFormatters: <TextInputFormatter>[
                 FilteringTextInputFormatter.digitsOnly,
-                // LengthLimitingTextInputFormatter(2),
               ],
               onChanged: widget.onChanged == null
                   ? null

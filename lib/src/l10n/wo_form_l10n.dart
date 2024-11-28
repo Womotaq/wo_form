@@ -8,10 +8,16 @@ class WoFormL10n {
     required this.next,
     required this.translateError,
     required this.errors,
+    this.days,
+    this.hours,
+    this.minutes,
   });
 
   final String Function() submit;
   final String Function() next;
   final TranslateInputError translateError;
-  final String? Function(int) errors;
+  final String? Function(int count) errors;
+  final String Function(int count)? days;
+  final String Function(int count)? hours;
+  final String Function(int count)? minutes;
 }

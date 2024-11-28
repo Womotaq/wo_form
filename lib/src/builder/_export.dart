@@ -1,6 +1,7 @@
 export 'boolean_field_builder.dart';
 export 'conditionnal_node_builder.dart';
 export 'date_time_field_builder.dart';
+export 'duration_field_builder.dart';
 export 'default_widget/_export.dart';
 export 'dynamic_inputs_node_widget_builder.dart';
 export 'future_node_builder.dart';
