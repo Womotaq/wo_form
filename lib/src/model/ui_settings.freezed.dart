@@ -308,6 +308,12 @@ mixin _$DateTimeInputUiSettings {
   String? get timeFormat => throw _privateConstructorUsedError;
   String? get labelText => throw _privateConstructorUsedError;
   String? get helperText => throw _privateConstructorUsedError;
+  String? get hintText => throw _privateConstructorUsedError; // TODO
+  /// If null, label will be placed above the date selector.
+  /// Else, label and selector will be in a flexible row,
+  /// selector with a flex value of 10,
+  /// and label with a flex value of [labelFlex].
+  int? get labelFlex => throw _privateConstructorUsedError;
   DatePickerEntryMode? get initialEntryMode =>
       throw _privateConstructorUsedError;
   DatePickerMode? get initialDatePickerMode =>
@@ -341,6 +347,8 @@ abstract class $DateTimeInputUiSettingsCopyWith<$Res> {
       String? timeFormat,
       String? labelText,
       String? helperText,
+      String? hintText,
+      int? labelFlex,
       DatePickerEntryMode? initialEntryMode,
       DatePickerMode? initialDatePickerMode,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -371,6 +379,8 @@ class _$DateTimeInputUiSettingsCopyWithImpl<$Res,
     Object? timeFormat = freezed,
     Object? labelText = freezed,
     Object? helperText = freezed,
+    Object? hintText = freezed,
+    Object? labelFlex = freezed,
     Object? initialEntryMode = freezed,
     Object? initialDatePickerMode = freezed,
     Object? pickDate = freezed,
@@ -394,6 +404,14 @@ class _$DateTimeInputUiSettingsCopyWithImpl<$Res,
           ? _value.helperText
           : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
+      hintText: freezed == hintText
+          ? _value.hintText
+          : hintText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      labelFlex: freezed == labelFlex
+          ? _value.labelFlex
+          : labelFlex // ignore: cast_nullable_to_non_nullable
+              as int?,
       initialEntryMode: freezed == initialEntryMode
           ? _value.initialEntryMode
           : initialEntryMode // ignore: cast_nullable_to_non_nullable
@@ -432,6 +450,8 @@ abstract class _$$DateTimeInputUiSettingsImplCopyWith<$Res>
       String? timeFormat,
       String? labelText,
       String? helperText,
+      String? hintText,
+      int? labelFlex,
       DatePickerEntryMode? initialEntryMode,
       DatePickerMode? initialDatePickerMode,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -461,6 +481,8 @@ class __$$DateTimeInputUiSettingsImplCopyWithImpl<$Res>
     Object? timeFormat = freezed,
     Object? labelText = freezed,
     Object? helperText = freezed,
+    Object? hintText = freezed,
+    Object? labelFlex = freezed,
     Object? initialEntryMode = freezed,
     Object? initialDatePickerMode = freezed,
     Object? pickDate = freezed,
@@ -484,6 +506,14 @@ class __$$DateTimeInputUiSettingsImplCopyWithImpl<$Res>
           ? _value.helperText
           : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
+      hintText: freezed == hintText
+          ? _value.hintText
+          : hintText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      labelFlex: freezed == labelFlex
+          ? _value.labelFlex
+          : labelFlex // ignore: cast_nullable_to_non_nullable
+              as int?,
       initialEntryMode: freezed == initialEntryMode
           ? _value.initialEntryMode
           : initialEntryMode // ignore: cast_nullable_to_non_nullable
@@ -516,6 +546,8 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
       this.timeFormat,
       this.labelText,
       this.helperText,
+      this.hintText,
+      this.labelFlex,
       this.initialEntryMode,
       this.initialDatePickerMode,
       @JsonKey(includeToJson: false, includeFromJson: false) this.pickDate,
@@ -536,6 +568,15 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
   @override
   final String? helperText;
   @override
+  final String? hintText;
+// TODO
+  /// If null, label will be placed above the date selector.
+  /// Else, label and selector will be in a flexible row,
+  /// selector with a flex value of 10,
+  /// and label with a flex value of [labelFlex].
+  @override
+  final int? labelFlex;
+  @override
   final DatePickerEntryMode? initialEntryMode;
   @override
   final DatePickerMode? initialDatePickerMode;
@@ -551,7 +592,7 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
 
   @override
   String toString() {
-    return 'DateTimeInputUiSettings(dateFormat: $dateFormat, timeFormat: $timeFormat, labelText: $labelText, helperText: $helperText, initialEntryMode: $initialEntryMode, initialDatePickerMode: $initialDatePickerMode, pickDate: $pickDate, pickTime: $pickTime, widgetBuilder: $widgetBuilder)';
+    return 'DateTimeInputUiSettings(dateFormat: $dateFormat, timeFormat: $timeFormat, labelText: $labelText, helperText: $helperText, hintText: $hintText, labelFlex: $labelFlex, initialEntryMode: $initialEntryMode, initialDatePickerMode: $initialDatePickerMode, pickDate: $pickDate, pickTime: $pickTime, widgetBuilder: $widgetBuilder)';
   }
 
   @override
@@ -567,6 +608,10 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
                 other.labelText == labelText) &&
             (identical(other.helperText, helperText) ||
                 other.helperText == helperText) &&
+            (identical(other.hintText, hintText) ||
+                other.hintText == hintText) &&
+            (identical(other.labelFlex, labelFlex) ||
+                other.labelFlex == labelFlex) &&
             (identical(other.initialEntryMode, initialEntryMode) ||
                 other.initialEntryMode == initialEntryMode) &&
             (identical(other.initialDatePickerMode, initialDatePickerMode) ||
@@ -587,6 +632,8 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
       timeFormat,
       labelText,
       helperText,
+      hintText,
+      labelFlex,
       initialEntryMode,
       initialDatePickerMode,
       pickDate,
@@ -616,6 +663,8 @@ abstract class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
           final String? timeFormat,
           final String? labelText,
           final String? helperText,
+          final String? hintText,
+          final int? labelFlex,
           final DatePickerEntryMode? initialEntryMode,
           final DatePickerMode? initialDatePickerMode,
           @JsonKey(includeToJson: false, includeFromJson: false)
@@ -638,6 +687,14 @@ abstract class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
   String? get labelText;
   @override
   String? get helperText;
+  @override
+  String? get hintText; // TODO
+  /// If null, label will be placed above the date selector.
+  /// Else, label and selector will be in a flexible row,
+  /// selector with a flex value of 10,
+  /// and label with a flex value of [labelFlex].
+  @override
+  int? get labelFlex;
   @override
   DatePickerEntryMode? get initialEntryMode;
   @override

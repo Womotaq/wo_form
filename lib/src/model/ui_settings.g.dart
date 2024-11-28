@@ -45,6 +45,8 @@ _$DateTimeInputUiSettingsImpl _$$DateTimeInputUiSettingsImplFromJson(
       timeFormat: json['timeFormat'] as String?,
       labelText: json['labelText'] as String?,
       helperText: json['helperText'] as String?,
+      hintText: json['hintText'] as String?,
+      labelFlex: (json['labelFlex'] as num?)?.toInt(),
       initialEntryMode: $enumDecodeNullable(
           _$DatePickerEntryModeEnumMap, json['initialEntryMode']),
       initialDatePickerMode: $enumDecodeNullable(
@@ -58,6 +60,8 @@ Map<String, dynamic> _$$DateTimeInputUiSettingsImplToJson(
       'timeFormat': instance.timeFormat,
       'labelText': instance.labelText,
       'helperText': instance.helperText,
+      'hintText': instance.hintText,
+      'labelFlex': instance.labelFlex,
       'initialEntryMode':
           _$DatePickerEntryModeEnumMap[instance.initialEntryMode],
       'initialDatePickerMode':

@@ -72,6 +72,13 @@ class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
     String? timeFormat,
     String? labelText,
     String? helperText,
+    String? hintText,
+
+    /// If null, label will be placed above the date selector.
+    /// Else, label and selector will be in a flexible row,
+    /// selector with a flex value of 10,
+    /// and label with a flex value of [labelFlex].
+    int? labelFlex,
     DatePickerEntryMode? initialEntryMode,
     DatePickerMode? initialDatePickerMode,
     @JsonKey(includeToJson: false, includeFromJson: false)
@@ -97,6 +104,8 @@ class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
           timeFormat: timeFormat ?? other.timeFormat,
           labelText: labelText ?? other.labelText,
           helperText: helperText ?? other.helperText,
+          hintText: hintText ?? other.hintText,
+          labelFlex: labelFlex ?? other.labelFlex,
           initialEntryMode: initialEntryMode ?? other.initialEntryMode,
           initialDatePickerMode:
               initialDatePickerMode ?? other.initialDatePickerMode,
