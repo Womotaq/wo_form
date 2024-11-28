@@ -143,8 +143,8 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     @JsonKey(toJson: FlexibleDateTime.staticToJson)
     FlexibleDateTime? initialValue,
     @Default(false) bool isRequired,
-    @JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? maxBound,
-    @JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? minBound,
+    @JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? maxDate,
+    @JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? minDate,
     @JsonKey(includeToJson: false, includeFromJson: false)
     GetCustomErrorDef<DateTime>? getCustomError,
     @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -350,8 +350,8 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
 
       case DateTimeInput(
           isRequired: final isRequired,
-          minBound: final minBound,
-          maxBound: final maxBound,
+          minDate: final minDate,
+          maxDate: final maxDate,
           getCustomError: final getCustomError,
         ):
         value as DateTime?;
@@ -368,10 +368,10 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
               : null;
         }
 
-        if (minBound != null && value.isBefore(minBound.resolve())) {
+        if (minDate != null && value.isBefore(minDate.resolve())) {
           return WoFormInputError.minBound(path: '$parentPath/$id');
         }
-        if (maxBound != null && value.isAfter(maxBound.resolve())) {
+        if (maxDate != null && value.isAfter(maxDate.resolve())) {
           return WoFormInputError.maxBound(path: '$parentPath/$id');
         }
 

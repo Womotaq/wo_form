@@ -46,6 +46,8 @@ _$DateTimeInputUiSettingsImpl _$$DateTimeInputUiSettingsImplFromJson(
       helperText: json['helperText'] as String?,
       initialEntryMode: $enumDecodeNullable(
           _$DatePickerEntryModeEnumMap, json['initialEntryMode']),
+      initialDatePickerMode: $enumDecodeNullable(
+          _$DatePickerModeEnumMap, json['initialDatePickerMode']),
     );
 
 Map<String, dynamic> _$$DateTimeInputUiSettingsImplToJson(
@@ -56,6 +58,8 @@ Map<String, dynamic> _$$DateTimeInputUiSettingsImplToJson(
       'helperText': instance.helperText,
       'initialEntryMode':
           _$DatePickerEntryModeEnumMap[instance.initialEntryMode],
+      'initialDatePickerMode':
+          _$DatePickerModeEnumMap[instance.initialDatePickerMode],
     };
 
 const _$DatePickerEntryModeEnumMap = {
@@ -63,6 +67,11 @@ const _$DatePickerEntryModeEnumMap = {
   DatePickerEntryMode.input: 'input',
   DatePickerEntryMode.calendarOnly: 'calendarOnly',
   DatePickerEntryMode.inputOnly: 'inputOnly',
+};
+
+const _$DatePickerModeEnumMap = {
+  DatePickerMode.day: 'day',
+  DatePickerMode.year: 'year',
 };
 
 _$DynamicInputsNodeUiSettingsImpl _$$DynamicInputsNodeUiSettingsImplFromJson(

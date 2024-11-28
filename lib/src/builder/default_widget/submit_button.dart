@@ -67,6 +67,7 @@ class SubmitButton extends StatelessWidget {
             top: 32,
             left: 16,
             right: 16,
+            bottom: 12,
           ),
           child: button,
         );

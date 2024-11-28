@@ -52,9 +52,10 @@ typedef DateTimeFieldBuilderDef = Widget Function(
 typedef PickDateDef = Future<DateTime?> Function({
   required BuildContext context,
   DateTime? initialDate,
-  DateTime? maxBound,
-  DateTime? minBound,
+  DateTime? maxDate,
+  DateTime? minDate,
   DatePickerEntryMode? initialEntryMode,
+  DatePickerMode? initialDatePickerMode,
   String? dateFormat,
 });
 
@@ -65,6 +66,7 @@ class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
     String? labelText,
     String? helperText,
     DatePickerEntryMode? initialEntryMode,
+    DatePickerMode? initialDatePickerMode,
     @JsonKey(includeToJson: false, includeFromJson: false)
     PickDateDef? pickDate,
     @JsonKey(includeToJson: false, includeFromJson: false)
@@ -85,6 +87,8 @@ class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
           labelText: labelText ?? other.labelText,
           helperText: helperText ?? other.helperText,
           initialEntryMode: initialEntryMode ?? other.initialEntryMode,
+          initialDatePickerMode:
+              initialDatePickerMode ?? other.initialDatePickerMode,
           pickDate: pickDate ?? other.pickDate,
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,
         );

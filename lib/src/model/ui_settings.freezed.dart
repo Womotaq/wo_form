@@ -309,6 +309,8 @@ mixin _$DateTimeInputUiSettings {
   String? get helperText => throw _privateConstructorUsedError;
   DatePickerEntryMode? get initialEntryMode =>
       throw _privateConstructorUsedError;
+  DatePickerMode? get initialDatePickerMode =>
+      throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
   PickDateDef? get pickDate => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
@@ -336,6 +338,7 @@ abstract class $DateTimeInputUiSettingsCopyWith<$Res> {
       String? labelText,
       String? helperText,
       DatePickerEntryMode? initialEntryMode,
+      DatePickerMode? initialDatePickerMode,
       @JsonKey(includeToJson: false, includeFromJson: false)
       PickDateDef? pickDate,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -362,6 +365,7 @@ class _$DateTimeInputUiSettingsCopyWithImpl<$Res,
     Object? labelText = freezed,
     Object? helperText = freezed,
     Object? initialEntryMode = freezed,
+    Object? initialDatePickerMode = freezed,
     Object? pickDate = freezed,
     Object? widgetBuilder = freezed,
   }) {
@@ -382,6 +386,10 @@ class _$DateTimeInputUiSettingsCopyWithImpl<$Res,
           ? _value.initialEntryMode
           : initialEntryMode // ignore: cast_nullable_to_non_nullable
               as DatePickerEntryMode?,
+      initialDatePickerMode: freezed == initialDatePickerMode
+          ? _value.initialDatePickerMode
+          : initialDatePickerMode // ignore: cast_nullable_to_non_nullable
+              as DatePickerMode?,
       pickDate: freezed == pickDate
           ? _value.pickDate
           : pickDate // ignore: cast_nullable_to_non_nullable
@@ -408,6 +416,7 @@ abstract class _$$DateTimeInputUiSettingsImplCopyWith<$Res>
       String? labelText,
       String? helperText,
       DatePickerEntryMode? initialEntryMode,
+      DatePickerMode? initialDatePickerMode,
       @JsonKey(includeToJson: false, includeFromJson: false)
       PickDateDef? pickDate,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -433,6 +442,7 @@ class __$$DateTimeInputUiSettingsImplCopyWithImpl<$Res>
     Object? labelText = freezed,
     Object? helperText = freezed,
     Object? initialEntryMode = freezed,
+    Object? initialDatePickerMode = freezed,
     Object? pickDate = freezed,
     Object? widgetBuilder = freezed,
   }) {
@@ -453,6 +463,10 @@ class __$$DateTimeInputUiSettingsImplCopyWithImpl<$Res>
           ? _value.initialEntryMode
           : initialEntryMode // ignore: cast_nullable_to_non_nullable
               as DatePickerEntryMode?,
+      initialDatePickerMode: freezed == initialDatePickerMode
+          ? _value.initialDatePickerMode
+          : initialDatePickerMode // ignore: cast_nullable_to_non_nullable
+              as DatePickerMode?,
       pickDate: freezed == pickDate
           ? _value.pickDate
           : pickDate // ignore: cast_nullable_to_non_nullable
@@ -473,6 +487,7 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
       this.labelText,
       this.helperText,
       this.initialEntryMode,
+      this.initialDatePickerMode,
       @JsonKey(includeToJson: false, includeFromJson: false) this.pickDate,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.widgetBuilder})
@@ -490,6 +505,8 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
   @override
   final DatePickerEntryMode? initialEntryMode;
   @override
+  final DatePickerMode? initialDatePickerMode;
+  @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final PickDateDef? pickDate;
   @override
@@ -498,7 +515,7 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
 
   @override
   String toString() {
-    return 'DateTimeInputUiSettings(dateFormat: $dateFormat, labelText: $labelText, helperText: $helperText, initialEntryMode: $initialEntryMode, pickDate: $pickDate, widgetBuilder: $widgetBuilder)';
+    return 'DateTimeInputUiSettings(dateFormat: $dateFormat, labelText: $labelText, helperText: $helperText, initialEntryMode: $initialEntryMode, initialDatePickerMode: $initialDatePickerMode, pickDate: $pickDate, widgetBuilder: $widgetBuilder)';
   }
 
   @override
@@ -514,6 +531,8 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
                 other.helperText == helperText) &&
             (identical(other.initialEntryMode, initialEntryMode) ||
                 other.initialEntryMode == initialEntryMode) &&
+            (identical(other.initialDatePickerMode, initialDatePickerMode) ||
+                other.initialDatePickerMode == initialDatePickerMode) &&
             (identical(other.pickDate, pickDate) ||
                 other.pickDate == pickDate) &&
             (identical(other.widgetBuilder, widgetBuilder) ||
@@ -522,8 +541,15 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, dateFormat, labelText,
-      helperText, initialEntryMode, pickDate, widgetBuilder);
+  int get hashCode => Object.hash(
+      runtimeType,
+      dateFormat,
+      labelText,
+      helperText,
+      initialEntryMode,
+      initialDatePickerMode,
+      pickDate,
+      widgetBuilder);
 
   /// Create a copy of DateTimeInputUiSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -548,6 +574,7 @@ abstract class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
           final String? labelText,
           final String? helperText,
           final DatePickerEntryMode? initialEntryMode,
+          final DatePickerMode? initialDatePickerMode,
           @JsonKey(includeToJson: false, includeFromJson: false)
           final PickDateDef? pickDate,
           @JsonKey(includeToJson: false, includeFromJson: false)
@@ -566,6 +593,8 @@ abstract class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
   String? get helperText;
   @override
   DatePickerEntryMode? get initialEntryMode;
+  @override
+  DatePickerMode? get initialDatePickerMode;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   PickDateDef? get pickDate;

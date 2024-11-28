@@ -76,12 +76,12 @@ _$DateTimeInputImpl _$$DateTimeInputImplFromJson(Map<String, dynamic> json) =>
           : FlexibleDateTime.fromJson(
               json['initialValue'] as Map<String, dynamic>),
       isRequired: json['isRequired'] as bool? ?? false,
-      maxBound: json['maxBound'] == null
+      maxDate: json['maxDate'] == null
           ? null
-          : FlexibleDateTime.fromJson(json['maxBound'] as Map<String, dynamic>),
-      minBound: json['minBound'] == null
+          : FlexibleDateTime.fromJson(json['maxDate'] as Map<String, dynamic>),
+      minDate: json['minDate'] == null
           ? null
-          : FlexibleDateTime.fromJson(json['minBound'] as Map<String, dynamic>),
+          : FlexibleDateTime.fromJson(json['minDate'] as Map<String, dynamic>),
       uiSettings: json['uiSettings'] == null
           ? const DateTimeInputUiSettings()
           : DateTimeInputUiSettings.fromJson(
@@ -94,8 +94,8 @@ Map<String, dynamic> _$$DateTimeInputImplToJson(_$DateTimeInputImpl instance) =>
       'id': instance.id,
       'initialValue': FlexibleDateTime.staticToJson(instance.initialValue),
       'isRequired': instance.isRequired,
-      'maxBound': FlexibleDateTime.staticToJson(instance.maxBound),
-      'minBound': FlexibleDateTime.staticToJson(instance.minBound),
+      'maxDate': FlexibleDateTime.staticToJson(instance.maxDate),
+      'minDate': FlexibleDateTime.staticToJson(instance.minDate),
       'uiSettings': DateTimeInputUiSettings.staticToJson(instance.uiSettings),
       'runtimeType': instance.$type,
     };

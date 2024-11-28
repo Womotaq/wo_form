@@ -12,17 +12,7 @@ class DateTimeField extends StatelessWidget {
     final theme = Theme.of(context);
     final inputDecorationTheme = theme.inputDecorationTheme;
     final themedBorder = inputDecorationTheme.border;
-
-    // final firstDate = data.input.minBound?.resolve();
-    // final lastDate = data.input.maxBound?.resolve();
     final initialDate = data.value;
-    //  == null
-    //     ? null
-    //     : firstDate != null && data.value!.isBefore(firstDate)
-    //         ? firstDate
-    //         : lastDate != null && data.value!.isBefore(lastDate)
-    //             ? lastDate
-    //             : data.value;
 
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 16),
@@ -65,15 +55,16 @@ class DateTimeField extends StatelessWidget {
                 : () async {
                     final pickDate = data.uiSettings.pickDate ??
                         WoFormTheme.of(context)?.pickDate ??
-                        _defaultPickDate;
+                        defaultPickDate;
 
                     final selectedDate = await pickDate(
                       context: context,
                       initialDate: initialDate,
-                      minBound: data.input.minBound?.resolve(),
-                      maxBound: data.input.maxBound?.resolve(),
-                      initialEntryMode: data.uiSettings.initialEntryMode ??
-                          DatePickerEntryMode.calendar,
+                      minDate: data.input.minDate?.resolve(),
+                      maxDate: data.input.maxDate?.resolve(),
+                      initialEntryMode: data.uiSettings.initialEntryMode,
+                      initialDatePickerMode:
+                          data.uiSettings.initialDatePickerMode,
                       dateFormat: data.uiSettings.dateFormat,
                     );
 
@@ -103,12 +94,13 @@ class DateTimeField extends StatelessWidget {
     );
   }
 
-  Future<DateTime?> _defaultPickDate({
+  static Future<DateTime?> defaultPickDate({
     required BuildContext context,
     DateTime? initialDate,
-    DateTime? maxBound,
-    DateTime? minBound,
+    DateTime? maxDate,
+    DateTime? minDate,
     DatePickerEntryMode? initialEntryMode,
+    DatePickerMode? initialDatePickerMode,
     String? dateFormat,
   }) {
     final now = DateTime.now();
@@ -116,9 +108,10 @@ class DateTimeField extends StatelessWidget {
     return showDatePicker(
       context: context,
       initialDate: initialDate,
-      firstDate: minBound ?? DateTime(now.year, now.month - 1),
-      lastDate: maxBound ?? DateTime(now.year + 1, now.month),
+      firstDate: minDate ?? DateTime(now.year, now.month - 1),
+      lastDate: maxDate ?? DateTime(now.year + 1, now.month),
       initialEntryMode: initialEntryMode ?? DatePickerEntryMode.calendar,
+      initialDatePickerMode: initialDatePickerMode ?? DatePickerMode.day,
     );
   }
 }
