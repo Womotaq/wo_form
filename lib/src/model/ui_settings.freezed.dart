@@ -305,6 +305,7 @@ DateTimeInputUiSettings _$DateTimeInputUiSettingsFromJson(
 /// @nodoc
 mixin _$DateTimeInputUiSettings {
   String? get dateFormat => throw _privateConstructorUsedError;
+  String? get timeFormat => throw _privateConstructorUsedError;
   String? get labelText => throw _privateConstructorUsedError;
   String? get helperText => throw _privateConstructorUsedError;
   DatePickerEntryMode? get initialEntryMode =>
@@ -313,6 +314,8 @@ mixin _$DateTimeInputUiSettings {
       throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
   PickDateDef? get pickDate => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  PickTimeDef? get pickTime => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
   DateTimeFieldBuilderDef? get widgetBuilder =>
       throw _privateConstructorUsedError;
@@ -335,12 +338,15 @@ abstract class $DateTimeInputUiSettingsCopyWith<$Res> {
   @useResult
   $Res call(
       {String? dateFormat,
+      String? timeFormat,
       String? labelText,
       String? helperText,
       DatePickerEntryMode? initialEntryMode,
       DatePickerMode? initialDatePickerMode,
       @JsonKey(includeToJson: false, includeFromJson: false)
       PickDateDef? pickDate,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      PickTimeDef? pickTime,
       @JsonKey(includeToJson: false, includeFromJson: false)
       DateTimeFieldBuilderDef? widgetBuilder});
 }
@@ -362,17 +368,23 @@ class _$DateTimeInputUiSettingsCopyWithImpl<$Res,
   @override
   $Res call({
     Object? dateFormat = freezed,
+    Object? timeFormat = freezed,
     Object? labelText = freezed,
     Object? helperText = freezed,
     Object? initialEntryMode = freezed,
     Object? initialDatePickerMode = freezed,
     Object? pickDate = freezed,
+    Object? pickTime = freezed,
     Object? widgetBuilder = freezed,
   }) {
     return _then(_value.copyWith(
       dateFormat: freezed == dateFormat
           ? _value.dateFormat
           : dateFormat // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timeFormat: freezed == timeFormat
+          ? _value.timeFormat
+          : timeFormat // ignore: cast_nullable_to_non_nullable
               as String?,
       labelText: freezed == labelText
           ? _value.labelText
@@ -394,6 +406,10 @@ class _$DateTimeInputUiSettingsCopyWithImpl<$Res,
           ? _value.pickDate
           : pickDate // ignore: cast_nullable_to_non_nullable
               as PickDateDef?,
+      pickTime: freezed == pickTime
+          ? _value.pickTime
+          : pickTime // ignore: cast_nullable_to_non_nullable
+              as PickTimeDef?,
       widgetBuilder: freezed == widgetBuilder
           ? _value.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
@@ -413,12 +429,15 @@ abstract class _$$DateTimeInputUiSettingsImplCopyWith<$Res>
   @useResult
   $Res call(
       {String? dateFormat,
+      String? timeFormat,
       String? labelText,
       String? helperText,
       DatePickerEntryMode? initialEntryMode,
       DatePickerMode? initialDatePickerMode,
       @JsonKey(includeToJson: false, includeFromJson: false)
       PickDateDef? pickDate,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      PickTimeDef? pickTime,
       @JsonKey(includeToJson: false, includeFromJson: false)
       DateTimeFieldBuilderDef? widgetBuilder});
 }
@@ -439,17 +458,23 @@ class __$$DateTimeInputUiSettingsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? dateFormat = freezed,
+    Object? timeFormat = freezed,
     Object? labelText = freezed,
     Object? helperText = freezed,
     Object? initialEntryMode = freezed,
     Object? initialDatePickerMode = freezed,
     Object? pickDate = freezed,
+    Object? pickTime = freezed,
     Object? widgetBuilder = freezed,
   }) {
     return _then(_$DateTimeInputUiSettingsImpl(
       dateFormat: freezed == dateFormat
           ? _value.dateFormat
           : dateFormat // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timeFormat: freezed == timeFormat
+          ? _value.timeFormat
+          : timeFormat // ignore: cast_nullable_to_non_nullable
               as String?,
       labelText: freezed == labelText
           ? _value.labelText
@@ -471,6 +496,10 @@ class __$$DateTimeInputUiSettingsImplCopyWithImpl<$Res>
           ? _value.pickDate
           : pickDate // ignore: cast_nullable_to_non_nullable
               as PickDateDef?,
+      pickTime: freezed == pickTime
+          ? _value.pickTime
+          : pickTime // ignore: cast_nullable_to_non_nullable
+              as PickTimeDef?,
       widgetBuilder: freezed == widgetBuilder
           ? _value.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
@@ -484,11 +513,13 @@ class __$$DateTimeInputUiSettingsImplCopyWithImpl<$Res>
 class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
   const _$DateTimeInputUiSettingsImpl(
       {this.dateFormat,
+      this.timeFormat,
       this.labelText,
       this.helperText,
       this.initialEntryMode,
       this.initialDatePickerMode,
       @JsonKey(includeToJson: false, includeFromJson: false) this.pickDate,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.pickTime,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.widgetBuilder})
       : super._();
@@ -498,6 +529,8 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
 
   @override
   final String? dateFormat;
+  @override
+  final String? timeFormat;
   @override
   final String? labelText;
   @override
@@ -511,11 +544,14 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
   final PickDateDef? pickDate;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
+  final PickTimeDef? pickTime;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
   final DateTimeFieldBuilderDef? widgetBuilder;
 
   @override
   String toString() {
-    return 'DateTimeInputUiSettings(dateFormat: $dateFormat, labelText: $labelText, helperText: $helperText, initialEntryMode: $initialEntryMode, initialDatePickerMode: $initialDatePickerMode, pickDate: $pickDate, widgetBuilder: $widgetBuilder)';
+    return 'DateTimeInputUiSettings(dateFormat: $dateFormat, timeFormat: $timeFormat, labelText: $labelText, helperText: $helperText, initialEntryMode: $initialEntryMode, initialDatePickerMode: $initialDatePickerMode, pickDate: $pickDate, pickTime: $pickTime, widgetBuilder: $widgetBuilder)';
   }
 
   @override
@@ -525,6 +561,8 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
             other is _$DateTimeInputUiSettingsImpl &&
             (identical(other.dateFormat, dateFormat) ||
                 other.dateFormat == dateFormat) &&
+            (identical(other.timeFormat, timeFormat) ||
+                other.timeFormat == timeFormat) &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
             (identical(other.helperText, helperText) ||
@@ -535,6 +573,8 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
                 other.initialDatePickerMode == initialDatePickerMode) &&
             (identical(other.pickDate, pickDate) ||
                 other.pickDate == pickDate) &&
+            (identical(other.pickTime, pickTime) ||
+                other.pickTime == pickTime) &&
             (identical(other.widgetBuilder, widgetBuilder) ||
                 other.widgetBuilder == widgetBuilder));
   }
@@ -544,11 +584,13 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
   int get hashCode => Object.hash(
       runtimeType,
       dateFormat,
+      timeFormat,
       labelText,
       helperText,
       initialEntryMode,
       initialDatePickerMode,
       pickDate,
+      pickTime,
       widgetBuilder);
 
   /// Create a copy of DateTimeInputUiSettings
@@ -571,12 +613,15 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
 abstract class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
   const factory _DateTimeInputUiSettings(
           {final String? dateFormat,
+          final String? timeFormat,
           final String? labelText,
           final String? helperText,
           final DatePickerEntryMode? initialEntryMode,
           final DatePickerMode? initialDatePickerMode,
           @JsonKey(includeToJson: false, includeFromJson: false)
           final PickDateDef? pickDate,
+          @JsonKey(includeToJson: false, includeFromJson: false)
+          final PickTimeDef? pickTime,
           @JsonKey(includeToJson: false, includeFromJson: false)
           final DateTimeFieldBuilderDef? widgetBuilder}) =
       _$DateTimeInputUiSettingsImpl;
@@ -588,6 +633,8 @@ abstract class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
   @override
   String? get dateFormat;
   @override
+  String? get timeFormat;
+  @override
   String? get labelText;
   @override
   String? get helperText;
@@ -598,6 +645,9 @@ abstract class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   PickDateDef? get pickDate;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  PickTimeDef? get pickTime;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   DateTimeFieldBuilderDef? get widgetBuilder;

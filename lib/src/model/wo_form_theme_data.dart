@@ -25,6 +25,7 @@ class WoFormThemeData with _$WoFormThemeData {
     MediaFieldBuilderDef? mediaFieldBuilder,
     NumFieldBuilderDef? numFieldBuilder,
     PickDateDef? pickDate,
+    PickTimeDef? pickTime,
     ScoreWidgetBuilderDef? scoreBuilder,
     SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
     ScaffoldBuilderDef? standardScaffoldBuilder,

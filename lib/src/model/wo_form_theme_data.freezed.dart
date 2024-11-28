@@ -36,6 +36,7 @@ mixin _$WoFormThemeData {
       throw _privateConstructorUsedError;
   NumFieldBuilderDef? get numFieldBuilder => throw _privateConstructorUsedError;
   PickDateDef? get pickDate => throw _privateConstructorUsedError;
+  PickTimeDef? get pickTime => throw _privateConstructorUsedError;
   ScoreWidgetBuilderDef? get scoreBuilder => throw _privateConstructorUsedError;
   SelectFieldBuilderDef<dynamic>? get selectFieldBuilder =>
       throw _privateConstructorUsedError;
@@ -83,6 +84,7 @@ abstract class $WoFormThemeDataCopyWith<$Res> {
       MediaFieldBuilderDef? mediaFieldBuilder,
       NumFieldBuilderDef? numFieldBuilder,
       PickDateDef? pickDate,
+      PickTimeDef? pickTime,
       ScoreWidgetBuilderDef? scoreBuilder,
       SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
       ScaffoldBuilderDef? standardScaffoldBuilder,
@@ -122,6 +124,7 @@ class _$WoFormThemeDataCopyWithImpl<$Res, $Val extends WoFormThemeData>
     Object? mediaFieldBuilder = freezed,
     Object? numFieldBuilder = freezed,
     Object? pickDate = freezed,
+    Object? pickTime = freezed,
     Object? scoreBuilder = freezed,
     Object? selectFieldBuilder = freezed,
     Object? standardScaffoldBuilder = freezed,
@@ -185,6 +188,10 @@ class _$WoFormThemeDataCopyWithImpl<$Res, $Val extends WoFormThemeData>
           ? _value.pickDate
           : pickDate // ignore: cast_nullable_to_non_nullable
               as PickDateDef?,
+      pickTime: freezed == pickTime
+          ? _value.pickTime
+          : pickTime // ignore: cast_nullable_to_non_nullable
+              as PickTimeDef?,
       scoreBuilder: freezed == scoreBuilder
           ? _value.scoreBuilder
           : scoreBuilder // ignore: cast_nullable_to_non_nullable
@@ -247,6 +254,7 @@ abstract class _$$WoFormThemeDataImplCopyWith<$Res>
       MediaFieldBuilderDef? mediaFieldBuilder,
       NumFieldBuilderDef? numFieldBuilder,
       PickDateDef? pickDate,
+      PickTimeDef? pickTime,
       ScoreWidgetBuilderDef? scoreBuilder,
       SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
       ScaffoldBuilderDef? standardScaffoldBuilder,
@@ -284,6 +292,7 @@ class __$$WoFormThemeDataImplCopyWithImpl<$Res>
     Object? mediaFieldBuilder = freezed,
     Object? numFieldBuilder = freezed,
     Object? pickDate = freezed,
+    Object? pickTime = freezed,
     Object? scoreBuilder = freezed,
     Object? selectFieldBuilder = freezed,
     Object? standardScaffoldBuilder = freezed,
@@ -347,6 +356,10 @@ class __$$WoFormThemeDataImplCopyWithImpl<$Res>
           ? _value.pickDate
           : pickDate // ignore: cast_nullable_to_non_nullable
               as PickDateDef?,
+      pickTime: freezed == pickTime
+          ? _value.pickTime
+          : pickTime // ignore: cast_nullable_to_non_nullable
+              as PickTimeDef?,
       scoreBuilder: freezed == scoreBuilder
           ? _value.scoreBuilder
           : scoreBuilder // ignore: cast_nullable_to_non_nullable
@@ -404,6 +417,7 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
       this.mediaFieldBuilder,
       this.numFieldBuilder,
       this.pickDate,
+      this.pickTime,
       this.scoreBuilder,
       this.selectFieldBuilder,
       this.standardScaffoldBuilder,
@@ -442,6 +456,8 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
   @override
   final PickDateDef? pickDate;
   @override
+  final PickTimeDef? pickTime;
+  @override
   final ScoreWidgetBuilderDef? scoreBuilder;
   @override
   final SelectFieldBuilderDef<dynamic>? selectFieldBuilder;
@@ -467,7 +483,7 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
 
   @override
   String toString() {
-    return 'WoFormThemeData(booleanFieldBuilder: $booleanFieldBuilder, dateTimeFieldBuilder: $dateTimeFieldBuilder, defaultPhoneCoutry: $defaultPhoneCoutry, dynamicInputsNodeWidgetBuilder: $dynamicInputsNodeWidgetBuilder, formPageBuilder: $formPageBuilder, generateId: $generateId, headerBuilder: $headerBuilder, inputHeaderBuilder: $inputHeaderBuilder, inputsNodeExpanderBuilder: $inputsNodeExpanderBuilder, inputsNodeWidgetBuilder: $inputsNodeWidgetBuilder, mediaFieldBuilder: $mediaFieldBuilder, numFieldBuilder: $numFieldBuilder, pickDate: $pickDate, scoreBuilder: $scoreBuilder, selectFieldBuilder: $selectFieldBuilder, standardScaffoldBuilder: $standardScaffoldBuilder, stringFieldBuilder: $stringFieldBuilder, submitButtonBuilder: $submitButtonBuilder, onDynamicInputDeletion: $onDynamicInputDeletion, onSubmitError: $onSubmitError, verticalSpacing: $verticalSpacing, showAsteriskIfRequired: $showAsteriskIfRequired)';
+    return 'WoFormThemeData(booleanFieldBuilder: $booleanFieldBuilder, dateTimeFieldBuilder: $dateTimeFieldBuilder, defaultPhoneCoutry: $defaultPhoneCoutry, dynamicInputsNodeWidgetBuilder: $dynamicInputsNodeWidgetBuilder, formPageBuilder: $formPageBuilder, generateId: $generateId, headerBuilder: $headerBuilder, inputHeaderBuilder: $inputHeaderBuilder, inputsNodeExpanderBuilder: $inputsNodeExpanderBuilder, inputsNodeWidgetBuilder: $inputsNodeWidgetBuilder, mediaFieldBuilder: $mediaFieldBuilder, numFieldBuilder: $numFieldBuilder, pickDate: $pickDate, pickTime: $pickTime, scoreBuilder: $scoreBuilder, selectFieldBuilder: $selectFieldBuilder, standardScaffoldBuilder: $standardScaffoldBuilder, stringFieldBuilder: $stringFieldBuilder, submitButtonBuilder: $submitButtonBuilder, onDynamicInputDeletion: $onDynamicInputDeletion, onSubmitError: $onSubmitError, verticalSpacing: $verticalSpacing, showAsteriskIfRequired: $showAsteriskIfRequired)';
   }
 
   @override
@@ -503,6 +519,8 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
                 other.numFieldBuilder == numFieldBuilder) &&
             (identical(other.pickDate, pickDate) ||
                 other.pickDate == pickDate) &&
+            (identical(other.pickTime, pickTime) ||
+                other.pickTime == pickTime) &&
             (identical(other.scoreBuilder, scoreBuilder) ||
                 other.scoreBuilder == scoreBuilder) &&
             (identical(other.selectFieldBuilder, selectFieldBuilder) ||
@@ -539,6 +557,7 @@ class _$WoFormThemeDataImpl extends _WoFormThemeData {
         mediaFieldBuilder,
         numFieldBuilder,
         pickDate,
+        pickTime,
         scoreBuilder,
         selectFieldBuilder,
         standardScaffoldBuilder,
@@ -575,6 +594,7 @@ abstract class _WoFormThemeData extends WoFormThemeData {
       final MediaFieldBuilderDef? mediaFieldBuilder,
       final NumFieldBuilderDef? numFieldBuilder,
       final PickDateDef? pickDate,
+      final PickTimeDef? pickTime,
       final ScoreWidgetBuilderDef? scoreBuilder,
       final SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
       final ScaffoldBuilderDef? standardScaffoldBuilder,
@@ -612,6 +632,8 @@ abstract class _WoFormThemeData extends WoFormThemeData {
   NumFieldBuilderDef? get numFieldBuilder;
   @override
   PickDateDef? get pickDate;
+  @override
+  PickTimeDef? get pickTime;
   @override
   ScoreWidgetBuilderDef? get scoreBuilder;
   @override

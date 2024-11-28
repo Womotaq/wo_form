@@ -82,6 +82,8 @@ _$DateTimeInputImpl _$$DateTimeInputImplFromJson(Map<String, dynamic> json) =>
       minDate: json['minDate'] == null
           ? null
           : FlexibleDateTime.fromJson(json['minDate'] as Map<String, dynamic>),
+      editMode: $enumDecodeNullable(_$DateEditModeEnumMap, json['editMode']) ??
+          DateEditMode.dateAndTime,
       uiSettings: json['uiSettings'] == null
           ? const DateTimeInputUiSettings()
           : DateTimeInputUiSettings.fromJson(
@@ -96,9 +98,16 @@ Map<String, dynamic> _$$DateTimeInputImplToJson(_$DateTimeInputImpl instance) =>
       'isRequired': instance.isRequired,
       'maxDate': FlexibleDateTime.staticToJson(instance.maxDate),
       'minDate': FlexibleDateTime.staticToJson(instance.minDate),
+      'editMode': _$DateEditModeEnumMap[instance.editMode]!,
       'uiSettings': DateTimeInputUiSettings.staticToJson(instance.uiSettings),
       'runtimeType': instance.$type,
     };
+
+const _$DateEditModeEnumMap = {
+  DateEditMode.date: 'date',
+  DateEditMode.time: 'time',
+  DateEditMode.dateAndTime: 'dateAndTime',
+};
 
 _$MediaInputImpl _$$MediaInputImplFromJson(Map<String, dynamic> json) =>
     _$MediaInputImpl(

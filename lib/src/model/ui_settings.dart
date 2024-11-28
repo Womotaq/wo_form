@@ -59,16 +59,25 @@ typedef PickDateDef = Future<DateTime?> Function({
   String? dateFormat,
 });
 
+typedef PickTimeDef = Future<TimeOfDay?> Function({
+  required BuildContext context,
+  required TimeOfDay initialTime,
+  TimePickerEntryMode? initialEntryMode,
+});
+
 @freezed
 class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
   const factory DateTimeInputUiSettings({
     String? dateFormat,
+    String? timeFormat,
     String? labelText,
     String? helperText,
     DatePickerEntryMode? initialEntryMode,
     DatePickerMode? initialDatePickerMode,
     @JsonKey(includeToJson: false, includeFromJson: false)
     PickDateDef? pickDate,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    PickTimeDef? pickTime,
     @JsonKey(includeToJson: false, includeFromJson: false)
     DateTimeFieldBuilderDef? widgetBuilder,
   }) = _DateTimeInputUiSettings;
@@ -84,12 +93,15 @@ class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
   DateTimeInputUiSettings merge(DateTimeInputUiSettings? other) => other == null
       ? this
       : DateTimeInputUiSettings(
+          dateFormat: dateFormat ?? other.dateFormat,
+          timeFormat: timeFormat ?? other.timeFormat,
           labelText: labelText ?? other.labelText,
           helperText: helperText ?? other.helperText,
           initialEntryMode: initialEntryMode ?? other.initialEntryMode,
           initialDatePickerMode:
               initialDatePickerMode ?? other.initialDatePickerMode,
           pickDate: pickDate ?? other.pickDate,
+          pickTime: pickTime ?? other.pickTime,
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,
         );
 }

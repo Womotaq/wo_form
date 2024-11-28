@@ -103,6 +103,8 @@ extension _SelectInputUiSettingsX<T> on SelectInputUiSettings<T> {
       object.toJson();
 }
 
+enum DateEditMode { date, time, dateAndTime }
+
 @freezed
 sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
   const factory WoFormInput.boolean({
@@ -145,6 +147,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     @Default(false) bool isRequired,
     @JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? maxDate,
     @JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? minDate,
+    @Default(DateEditMode.dateAndTime) DateEditMode editMode,
     @JsonKey(includeToJson: false, includeFromJson: false)
     GetCustomErrorDef<DateTime>? getCustomError,
     @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)

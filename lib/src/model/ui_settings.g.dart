@@ -42,6 +42,7 @@ _$DateTimeInputUiSettingsImpl _$$DateTimeInputUiSettingsImplFromJson(
         Map<String, dynamic> json) =>
     _$DateTimeInputUiSettingsImpl(
       dateFormat: json['dateFormat'] as String?,
+      timeFormat: json['timeFormat'] as String?,
       labelText: json['labelText'] as String?,
       helperText: json['helperText'] as String?,
       initialEntryMode: $enumDecodeNullable(
@@ -54,6 +55,7 @@ Map<String, dynamic> _$$DateTimeInputUiSettingsImplToJson(
         _$DateTimeInputUiSettingsImpl instance) =>
     <String, dynamic>{
       'dateFormat': instance.dateFormat,
+      'timeFormat': instance.timeFormat,
       'labelText': instance.labelText,
       'helperText': instance.helperText,
       'initialEntryMode':

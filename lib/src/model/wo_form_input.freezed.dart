@@ -997,6 +997,7 @@ mixin _$WoFormInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
+            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -1082,6 +1083,7 @@ mixin _$WoFormInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
+            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -1167,6 +1169,7 @@ mixin _$WoFormInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
+            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -1490,6 +1493,7 @@ class _$BooleanInputImpl extends BooleanInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
+            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -1579,6 +1583,7 @@ class _$BooleanInputImpl extends BooleanInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
+            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -1668,6 +1673,7 @@ class _$BooleanInputImpl extends BooleanInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
+            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -1843,6 +1849,7 @@ abstract class _$$DateTimeInputImplCopyWith<$Res>
       bool isRequired,
       @JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? maxDate,
       @JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? minDate,
+      DateEditMode editMode,
       @JsonKey(includeToJson: false, includeFromJson: false)
       GetCustomErrorDef<DateTime>? getCustomError,
       @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -1872,6 +1879,7 @@ class __$$DateTimeInputImplCopyWithImpl<$Res>
     Object? isRequired = null,
     Object? maxDate = freezed,
     Object? minDate = freezed,
+    Object? editMode = null,
     Object? getCustomError = freezed,
     Object? uiSettings = null,
   }) {
@@ -1896,6 +1904,10 @@ class __$$DateTimeInputImplCopyWithImpl<$Res>
           ? _value.minDate
           : minDate // ignore: cast_nullable_to_non_nullable
               as FlexibleDateTime?,
+      editMode: null == editMode
+          ? _value.editMode
+          : editMode // ignore: cast_nullable_to_non_nullable
+              as DateEditMode,
       getCustomError: freezed == getCustomError
           ? _value.getCustomError
           : getCustomError // ignore: cast_nullable_to_non_nullable
@@ -1969,6 +1981,7 @@ class _$DateTimeInputImpl extends DateTimeInput {
       this.isRequired = false,
       @JsonKey(toJson: FlexibleDateTime.staticToJson) this.maxDate,
       @JsonKey(toJson: FlexibleDateTime.staticToJson) this.minDate,
+      this.editMode = DateEditMode.dateAndTime,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.getCustomError,
       @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -1995,6 +2008,9 @@ class _$DateTimeInputImpl extends DateTimeInput {
   @JsonKey(toJson: FlexibleDateTime.staticToJson)
   final FlexibleDateTime? minDate;
   @override
+  @JsonKey()
+  final DateEditMode editMode;
+  @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final GetCustomErrorDef<DateTime>? getCustomError;
   @override
@@ -2006,7 +2022,7 @@ class _$DateTimeInputImpl extends DateTimeInput {
 
   @override
   String toString() {
-    return 'WoFormInput.dateTime(id: $id, initialValue: $initialValue, isRequired: $isRequired, maxDate: $maxDate, minDate: $minDate, getCustomError: $getCustomError, uiSettings: $uiSettings)';
+    return 'WoFormInput.dateTime(id: $id, initialValue: $initialValue, isRequired: $isRequired, maxDate: $maxDate, minDate: $minDate, editMode: $editMode, getCustomError: $getCustomError, uiSettings: $uiSettings)';
   }
 
   @override
@@ -2021,6 +2037,8 @@ class _$DateTimeInputImpl extends DateTimeInput {
                 other.isRequired == isRequired) &&
             (identical(other.maxDate, maxDate) || other.maxDate == maxDate) &&
             (identical(other.minDate, minDate) || other.minDate == minDate) &&
+            (identical(other.editMode, editMode) ||
+                other.editMode == editMode) &&
             (identical(other.getCustomError, getCustomError) ||
                 other.getCustomError == getCustomError) &&
             (identical(other.uiSettings, uiSettings) ||
@@ -2030,7 +2048,7 @@ class _$DateTimeInputImpl extends DateTimeInput {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, initialValue, isRequired,
-      maxDate, minDate, getCustomError, uiSettings);
+      maxDate, minDate, editMode, getCustomError, uiSettings);
 
   /// Create a copy of WoFormInput
   /// with the given fields replaced by the non-null parameter values.
@@ -2063,6 +2081,7 @@ class _$DateTimeInputImpl extends DateTimeInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
+            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -2125,7 +2144,7 @@ class _$DateTimeInputImpl extends DateTimeInput {
             StringInputUiSettings uiSettings)
         string,
   }) {
-    return dateTime(id, initialValue, isRequired, maxDate, minDate,
+    return dateTime(id, initialValue, isRequired, maxDate, minDate, editMode,
         getCustomError, uiSettings);
   }
 
@@ -2152,6 +2171,7 @@ class _$DateTimeInputImpl extends DateTimeInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
+            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -2215,7 +2235,7 @@ class _$DateTimeInputImpl extends DateTimeInput {
         string,
   }) {
     return dateTime?.call(id, initialValue, isRequired, maxDate, minDate,
-        getCustomError, uiSettings);
+        editMode, getCustomError, uiSettings);
   }
 
   @override
@@ -2241,6 +2261,7 @@ class _$DateTimeInputImpl extends DateTimeInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
+            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -2305,7 +2326,7 @@ class _$DateTimeInputImpl extends DateTimeInput {
     required TResult orElse(),
   }) {
     if (dateTime != null) {
-      return dateTime(id, initialValue, isRequired, maxDate, minDate,
+      return dateTime(id, initialValue, isRequired, maxDate, minDate, editMode,
           getCustomError, uiSettings);
     }
     return orElse();
@@ -2372,6 +2393,7 @@ abstract class DateTimeInput extends WoFormInput {
       final FlexibleDateTime? maxDate,
       @JsonKey(toJson: FlexibleDateTime.staticToJson)
       final FlexibleDateTime? minDate,
+      final DateEditMode editMode,
       @JsonKey(includeToJson: false, includeFromJson: false)
       final GetCustomErrorDef<DateTime>? getCustomError,
       @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -2390,6 +2412,7 @@ abstract class DateTimeInput extends WoFormInput {
   FlexibleDateTime? get maxDate;
   @JsonKey(toJson: FlexibleDateTime.staticToJson)
   FlexibleDateTime? get minDate;
+  DateEditMode get editMode;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   GetCustomErrorDef<DateTime>? get getCustomError;
@@ -2684,6 +2707,7 @@ class _$MediaInputImpl extends MediaInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
+            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -2783,6 +2807,7 @@ class _$MediaInputImpl extends MediaInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
+            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -2882,6 +2907,7 @@ class _$MediaInputImpl extends MediaInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
+            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -3274,6 +3300,7 @@ class _$NumInputImpl extends NumInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
+            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -3363,6 +3390,7 @@ class _$NumInputImpl extends NumInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
+            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -3452,6 +3480,7 @@ class _$NumInputImpl extends NumInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
+            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -3925,6 +3954,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
+            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -4024,6 +4054,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
+            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -4123,6 +4154,7 @@ class _$SelectStringInputImpl extends SelectStringInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
+            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -4491,6 +4523,7 @@ class _$StringInputImpl extends StringInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
+            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -4580,6 +4613,7 @@ class _$StringInputImpl extends StringInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
+            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
@@ -4669,6 +4703,7 @@ class _$StringInputImpl extends StringInput {
             FlexibleDateTime? maxDate,
             @JsonKey(toJson: FlexibleDateTime.staticToJson)
             FlexibleDateTime? minDate,
+            DateEditMode editMode,
             @JsonKey(includeToJson: false, includeFromJson: false)
             GetCustomErrorDef<DateTime>? getCustomError,
             @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
