@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wo_form/src/builder/default_widget/date_time_selector.dart';
 import 'package:wo_form/src/builder/default_widget/duration_selector.dart';
 import 'package:wo_form/src/builder/default_widget/flex_field.dart';
 import 'package:wo_form/wo_form.dart';
@@ -76,7 +77,39 @@ class _DurationFieldState extends State<DurationField> {
         : widget.data.uiSettings.hintText;
 
     final selector = editAsDateTime
-        ? Text('yo')
+        ? WoFormValueBuilder<DateTime>(
+            path: widget.data.input.startDatePath ?? '',
+            builder: (context, start) {
+              start ??= DateTime.now();
+
+              return DateTimeSelector(
+                dateTime: widget.data.value == null
+                    ? start
+                    : start.add(widget.data.value!),
+                minDateTime: widget.data.input.minDuration == null
+                    ? start
+                    : start.add(widget.data.input.minDuration!),
+                maxDateTime: widget.data.input.maxDuration == null
+                    ? start
+                    : start.add(widget.data.input.maxDuration!),
+                onChanged: (date) {
+                  if (date == null) return;
+                },
+                showCloseButton: !widget.data.input.isRequired,
+                settings: DateTimeInputUiSettings(
+                  dateFormat: widget.data.uiSettings.dateFormat,
+                  timeFormat: widget.data.uiSettings.timeFormat,
+                  labelFlex: widget.data.uiSettings.labelFlex,
+                  labelText: widget.data.uiSettings.dateTimeLabelText,
+                  helperText: widget.data.uiSettings.dateTimeHelperText,
+                  hintText: widget.data.uiSettings.dateTimeHintText,
+                  editMode: widget.data.uiSettings.dateTimeEditMode,
+                  pickDate: widget.data.uiSettings.pickDate,
+                  pickTime: widget.data.uiSettings.pickTime,
+                ),
+              );
+            },
+          )
         : InkWell(
             borderRadius: themedBorder is OutlineInputBorder
                 ? themedBorder.borderRadius
