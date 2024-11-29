@@ -11,9 +11,9 @@ class SearchField<T> extends StatelessWidget {
     this.hintText,
     Widget Function(T?)? selectedBuilder,
     this.showArrow = true,
-    this.bottomChildren,
     this.searcher,
     this.provider,
+    this.searchScreenBuilder,
     super.key,
   })  : _builder = null,
         selectedValues = [selectedValue],
@@ -29,9 +29,9 @@ class SearchField<T> extends StatelessWidget {
     this.valueBuilder,
     this.helpValueBuilder,
     this.hintText,
-    this.bottomChildren,
     this.searcher,
     this.provider,
+    this.searchScreenBuilder,
     super.key,
   })  : selectedBuilder = ((_) => const SizedBox.shrink()),
         _builder = builder,
@@ -46,9 +46,9 @@ class SearchField<T> extends StatelessWidget {
   final String? hintText;
   final Widget Function(Iterable<T?> values)? selectedBuilder;
   final bool showArrow;
-  final List<MenuItemButton>? bottomChildren;
   final double Function(String query, T value)? searcher;
   final Widget Function({required Widget child})? provider;
+  final SearchScreenDef<T>? searchScreenBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +107,10 @@ class SearchField<T> extends StatelessWidget {
               Expanded(
                 child: selectedBuilderSafe(selectedValues),
               ),
-              if (showArrow) const Icon(Icons.keyboard_arrow_down),
+              if (showArrow)
+                searcher == null
+                    ? const Icon(Icons.keyboard_arrow_down)
+                    : const Icon(Icons.keyboard_arrow_right),
             ],
           ),
         ),
@@ -136,10 +139,6 @@ class SearchField<T> extends StatelessWidget {
         selected: selected,
         selectedColor: theme.colorScheme.onSurface,
         selectedTileColor: theme.colorScheme.primaryContainer,
-        onTap: () {
-          Navigator.of(context).pop();
-          onSelected!(e);
-        },
       );
     }
 
@@ -151,10 +150,13 @@ class SearchField<T> extends StatelessWidget {
               (provider ?? ({required Widget child}) => child)(
             child: Scaffold(
               appBar: AppBar(),
-              body: SearchScreen(
+              body: (searchScreenBuilder ?? SearchScreen.new).call(
                 values: values,
                 tileBuilder: tileBuilder,
-                bottomChildren: bottomChildren,
+                onSelect: (value) {
+                  Navigator.of(context).pop();
+                  onSelected!(value);
+                },
                 searcher: searcher,
               ),
             ),
@@ -173,10 +175,13 @@ class SearchField<T> extends StatelessWidget {
         ),
         bodyBuilder: (popoverContext) =>
             (provider ?? ({required Widget child}) => child)(
-          child: SearchScreen(
+          child: (searchScreenBuilder ?? SearchScreen.new).call(
             values: values,
             tileBuilder: tileBuilder,
-            bottomChildren: bottomChildren,
+            onSelect: (value) {
+              Navigator.of(context).pop();
+              onSelected!(value);
+            },
             searcher: searcher,
           ),
         ),
@@ -185,19 +190,31 @@ class SearchField<T> extends StatelessWidget {
   }
 }
 
+typedef SearchScreenDef<T> = Widget Function({
+  required Iterable<T> values,
+  required Widget Function(BuildContext context, T value) tileBuilder,
+  required void Function(T value) onSelect,
+  double Function(String query, T value)? searcher,
+  Key? key,
+});
+
 class SearchScreen<T> extends StatefulWidget {
   const SearchScreen({
     required this.values,
     required this.tileBuilder,
+    required this.onSelect,
     this.bottomChildren,
     this.searcher,
+    this.onNotFound,
     super.key,
   });
 
   final Iterable<T> values;
   final Widget Function(BuildContext context, T value) tileBuilder;
-  final List<MenuItemButton>? bottomChildren;
+  final void Function(T value) onSelect;
+  final List<Widget>? bottomChildren;
   final double Function(String query, T value)? searcher;
+  final List<Widget> Function(String query)? onNotFound;
 
   @override
   State<SearchScreen<T>> createState() => SearchScreenState();
@@ -208,36 +225,50 @@ class SearchScreenState<T> extends State<SearchScreen<T>> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    final searchResults = widget.searcher != null && query.isNotEmpty
+        ? (widget.values
+                .map(
+                  (value) => (value, widget.searcher!(query, value)),
+                )
+                .where((e) => e.$2 > 0)
+                .toList()
+              ..sort((e1, e2) => e2.$2.compareTo(e1.$2)))
+            .map((e) => e.$1)
+        : widget.values;
+
+    final body = ListView(
       padding: EdgeInsets.zero,
       shrinkWrap: true,
       children: [
-        if (widget.searcher != null)
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: TextField(
-              autofocus: true,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                suffixIcon: Icon(Icons.search),
-              ),
-              onChanged: (value) => setState(() => query = value),
+        if (searchResults.isEmpty)
+          ...?widget.onNotFound?.call(query)
+        else
+          ...searchResults.map(
+            (e) => InkWell(
+              onTap: () => widget.onSelect(e),
+              child: widget.tileBuilder(context, e),
             ),
           ),
-        ...((widget.searcher != null && query.isNotEmpty)
-                // LATER : sort
-                ? (widget.values
-                        .map((value) => (value, widget.searcher!(query, value)))
-                        .where((e) => e.$2 > 0)
-                        .toList()
-                      ..sort((e1, e2) => e2.$2.compareTo(e1.$2)))
-                    .map((e) => e.$1)
-                : widget.values)
-            .map<Widget>(
-          (e) => widget.tileBuilder(context, e),
-        ),
         ...?widget.bottomChildren,
       ],
     );
+
+    return widget.searcher == null
+        ? body
+        : Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              toolbarHeight: 56 + 32,
+              title: TextField(
+                autofocus: true,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  suffixIcon: Icon(Icons.search),
+                ),
+                onChanged: (value) => setState(() => query = value),
+              ),
+            ),
+            body: body,
+          );
   }
 }

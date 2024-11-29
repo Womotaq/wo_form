@@ -315,7 +315,7 @@ mixin _$DateTimeInputUiSettings {
   /// selector with a flex value of 10,
   /// and label with a flex value of [labelFlex].
   int? get labelFlex => throw _privateConstructorUsedError;
-  DatePickerEntryMode? get initialEntryMode =>
+  DatePickerEntryMode? get initialDateEntryMode =>
       throw _privateConstructorUsedError;
   DatePickerMode? get initialDatePickerMode =>
       throw _privateConstructorUsedError;
@@ -324,6 +324,8 @@ mixin _$DateTimeInputUiSettings {
   PickDateDef? get pickDate => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
   PickTimeDef? get pickTime => throw _privateConstructorUsedError;
+  TimePickerEntryMode? get initialTimeEntryMode =>
+      throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
   DateTimeFieldBuilderDef? get widgetBuilder =>
       throw _privateConstructorUsedError;
@@ -351,13 +353,14 @@ abstract class $DateTimeInputUiSettingsCopyWith<$Res> {
       String? helperText,
       String? hintText,
       int? labelFlex,
-      DatePickerEntryMode? initialEntryMode,
+      DatePickerEntryMode? initialDateEntryMode,
       DatePickerMode? initialDatePickerMode,
       DateEditMode? editMode,
       @JsonKey(includeToJson: false, includeFromJson: false)
       PickDateDef? pickDate,
       @JsonKey(includeToJson: false, includeFromJson: false)
       PickTimeDef? pickTime,
+      TimePickerEntryMode? initialTimeEntryMode,
       @JsonKey(includeToJson: false, includeFromJson: false)
       DateTimeFieldBuilderDef? widgetBuilder});
 }
@@ -384,11 +387,12 @@ class _$DateTimeInputUiSettingsCopyWithImpl<$Res,
     Object? helperText = freezed,
     Object? hintText = freezed,
     Object? labelFlex = freezed,
-    Object? initialEntryMode = freezed,
+    Object? initialDateEntryMode = freezed,
     Object? initialDatePickerMode = freezed,
     Object? editMode = freezed,
     Object? pickDate = freezed,
     Object? pickTime = freezed,
+    Object? initialTimeEntryMode = freezed,
     Object? widgetBuilder = freezed,
   }) {
     return _then(_value.copyWith(
@@ -416,9 +420,9 @@ class _$DateTimeInputUiSettingsCopyWithImpl<$Res,
           ? _value.labelFlex
           : labelFlex // ignore: cast_nullable_to_non_nullable
               as int?,
-      initialEntryMode: freezed == initialEntryMode
-          ? _value.initialEntryMode
-          : initialEntryMode // ignore: cast_nullable_to_non_nullable
+      initialDateEntryMode: freezed == initialDateEntryMode
+          ? _value.initialDateEntryMode
+          : initialDateEntryMode // ignore: cast_nullable_to_non_nullable
               as DatePickerEntryMode?,
       initialDatePickerMode: freezed == initialDatePickerMode
           ? _value.initialDatePickerMode
@@ -436,6 +440,10 @@ class _$DateTimeInputUiSettingsCopyWithImpl<$Res,
           ? _value.pickTime
           : pickTime // ignore: cast_nullable_to_non_nullable
               as PickTimeDef?,
+      initialTimeEntryMode: freezed == initialTimeEntryMode
+          ? _value.initialTimeEntryMode
+          : initialTimeEntryMode // ignore: cast_nullable_to_non_nullable
+              as TimePickerEntryMode?,
       widgetBuilder: freezed == widgetBuilder
           ? _value.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
@@ -460,13 +468,14 @@ abstract class _$$DateTimeInputUiSettingsImplCopyWith<$Res>
       String? helperText,
       String? hintText,
       int? labelFlex,
-      DatePickerEntryMode? initialEntryMode,
+      DatePickerEntryMode? initialDateEntryMode,
       DatePickerMode? initialDatePickerMode,
       DateEditMode? editMode,
       @JsonKey(includeToJson: false, includeFromJson: false)
       PickDateDef? pickDate,
       @JsonKey(includeToJson: false, includeFromJson: false)
       PickTimeDef? pickTime,
+      TimePickerEntryMode? initialTimeEntryMode,
       @JsonKey(includeToJson: false, includeFromJson: false)
       DateTimeFieldBuilderDef? widgetBuilder});
 }
@@ -492,11 +501,12 @@ class __$$DateTimeInputUiSettingsImplCopyWithImpl<$Res>
     Object? helperText = freezed,
     Object? hintText = freezed,
     Object? labelFlex = freezed,
-    Object? initialEntryMode = freezed,
+    Object? initialDateEntryMode = freezed,
     Object? initialDatePickerMode = freezed,
     Object? editMode = freezed,
     Object? pickDate = freezed,
     Object? pickTime = freezed,
+    Object? initialTimeEntryMode = freezed,
     Object? widgetBuilder = freezed,
   }) {
     return _then(_$DateTimeInputUiSettingsImpl(
@@ -524,9 +534,9 @@ class __$$DateTimeInputUiSettingsImplCopyWithImpl<$Res>
           ? _value.labelFlex
           : labelFlex // ignore: cast_nullable_to_non_nullable
               as int?,
-      initialEntryMode: freezed == initialEntryMode
-          ? _value.initialEntryMode
-          : initialEntryMode // ignore: cast_nullable_to_non_nullable
+      initialDateEntryMode: freezed == initialDateEntryMode
+          ? _value.initialDateEntryMode
+          : initialDateEntryMode // ignore: cast_nullable_to_non_nullable
               as DatePickerEntryMode?,
       initialDatePickerMode: freezed == initialDatePickerMode
           ? _value.initialDatePickerMode
@@ -544,6 +554,10 @@ class __$$DateTimeInputUiSettingsImplCopyWithImpl<$Res>
           ? _value.pickTime
           : pickTime // ignore: cast_nullable_to_non_nullable
               as PickTimeDef?,
+      initialTimeEntryMode: freezed == initialTimeEntryMode
+          ? _value.initialTimeEntryMode
+          : initialTimeEntryMode // ignore: cast_nullable_to_non_nullable
+              as TimePickerEntryMode?,
       widgetBuilder: freezed == widgetBuilder
           ? _value.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
@@ -562,11 +576,12 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
       this.helperText,
       this.hintText,
       this.labelFlex,
-      this.initialEntryMode,
+      this.initialDateEntryMode,
       this.initialDatePickerMode,
       this.editMode,
       @JsonKey(includeToJson: false, includeFromJson: false) this.pickDate,
       @JsonKey(includeToJson: false, includeFromJson: false) this.pickTime,
+      this.initialTimeEntryMode,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.widgetBuilder})
       : super._();
@@ -592,7 +607,7 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
   @override
   final int? labelFlex;
   @override
-  final DatePickerEntryMode? initialEntryMode;
+  final DatePickerEntryMode? initialDateEntryMode;
   @override
   final DatePickerMode? initialDatePickerMode;
   @override
@@ -604,12 +619,14 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
   @JsonKey(includeToJson: false, includeFromJson: false)
   final PickTimeDef? pickTime;
   @override
+  final TimePickerEntryMode? initialTimeEntryMode;
+  @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final DateTimeFieldBuilderDef? widgetBuilder;
 
   @override
   String toString() {
-    return 'DateTimeInputUiSettings(dateFormat: $dateFormat, timeFormat: $timeFormat, labelText: $labelText, helperText: $helperText, hintText: $hintText, labelFlex: $labelFlex, initialEntryMode: $initialEntryMode, initialDatePickerMode: $initialDatePickerMode, editMode: $editMode, pickDate: $pickDate, pickTime: $pickTime, widgetBuilder: $widgetBuilder)';
+    return 'DateTimeInputUiSettings(dateFormat: $dateFormat, timeFormat: $timeFormat, labelText: $labelText, helperText: $helperText, hintText: $hintText, labelFlex: $labelFlex, initialDateEntryMode: $initialDateEntryMode, initialDatePickerMode: $initialDatePickerMode, editMode: $editMode, pickDate: $pickDate, pickTime: $pickTime, initialTimeEntryMode: $initialTimeEntryMode, widgetBuilder: $widgetBuilder)';
   }
 
   @override
@@ -629,8 +646,8 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
                 other.hintText == hintText) &&
             (identical(other.labelFlex, labelFlex) ||
                 other.labelFlex == labelFlex) &&
-            (identical(other.initialEntryMode, initialEntryMode) ||
-                other.initialEntryMode == initialEntryMode) &&
+            (identical(other.initialDateEntryMode, initialDateEntryMode) ||
+                other.initialDateEntryMode == initialDateEntryMode) &&
             (identical(other.initialDatePickerMode, initialDatePickerMode) ||
                 other.initialDatePickerMode == initialDatePickerMode) &&
             (identical(other.editMode, editMode) ||
@@ -639,6 +656,8 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
                 other.pickDate == pickDate) &&
             (identical(other.pickTime, pickTime) ||
                 other.pickTime == pickTime) &&
+            (identical(other.initialTimeEntryMode, initialTimeEntryMode) ||
+                other.initialTimeEntryMode == initialTimeEntryMode) &&
             (identical(other.widgetBuilder, widgetBuilder) ||
                 other.widgetBuilder == widgetBuilder));
   }
@@ -653,11 +672,12 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
       helperText,
       hintText,
       labelFlex,
-      initialEntryMode,
+      initialDateEntryMode,
       initialDatePickerMode,
       editMode,
       pickDate,
       pickTime,
+      initialTimeEntryMode,
       widgetBuilder);
 
   /// Create a copy of DateTimeInputUiSettings
@@ -685,13 +705,14 @@ abstract class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
           final String? helperText,
           final String? hintText,
           final int? labelFlex,
-          final DatePickerEntryMode? initialEntryMode,
+          final DatePickerEntryMode? initialDateEntryMode,
           final DatePickerMode? initialDatePickerMode,
           final DateEditMode? editMode,
           @JsonKey(includeToJson: false, includeFromJson: false)
           final PickDateDef? pickDate,
           @JsonKey(includeToJson: false, includeFromJson: false)
           final PickTimeDef? pickTime,
+          final TimePickerEntryMode? initialTimeEntryMode,
           @JsonKey(includeToJson: false, includeFromJson: false)
           final DateTimeFieldBuilderDef? widgetBuilder}) =
       _$DateTimeInputUiSettingsImpl;
@@ -718,7 +739,7 @@ abstract class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
   @override
   int? get labelFlex;
   @override
-  DatePickerEntryMode? get initialEntryMode;
+  DatePickerEntryMode? get initialDateEntryMode;
   @override
   DatePickerMode? get initialDatePickerMode;
   @override
@@ -729,6 +750,8 @@ abstract class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   PickTimeDef? get pickTime;
+  @override
+  TimePickerEntryMode? get initialTimeEntryMode;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   DateTimeFieldBuilderDef? get widgetBuilder;
@@ -2593,6 +2616,9 @@ mixin _$SelectInputUiSettings<T> {
   @JsonKey(includeFromJson: false, includeToJson: false)
   double Function(String, T)? get searcher =>
       throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  SearchScreenDef<T>? get searchScreenBuilder =>
+      throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
   SelectFieldBuilderDef<T>? get widgetBuilder =>
       throw _privateConstructorUsedError;
@@ -2630,6 +2656,8 @@ abstract class $SelectInputUiSettingsCopyWith<T, $Res> {
       Widget? Function(T)? helpValueBuilder,
       @JsonKey(includeFromJson: false, includeToJson: false)
       double Function(String, T)? searcher,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      SearchScreenDef<T>? searchScreenBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false)
       SelectFieldBuilderDef<T>? widgetBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -2662,6 +2690,7 @@ class _$SelectInputUiSettingsCopyWithImpl<T, $Res,
     Object? valueBuilder = freezed,
     Object? helpValueBuilder = freezed,
     Object? searcher = freezed,
+    Object? searchScreenBuilder = freezed,
     Object? widgetBuilder = freezed,
     Object? headerBuilder = freezed,
     Object? scoreBuilder = freezed,
@@ -2699,6 +2728,10 @@ class _$SelectInputUiSettingsCopyWithImpl<T, $Res,
           ? _value.searcher
           : searcher // ignore: cast_nullable_to_non_nullable
               as double Function(String, T)?,
+      searchScreenBuilder: freezed == searchScreenBuilder
+          ? _value.searchScreenBuilder
+          : searchScreenBuilder // ignore: cast_nullable_to_non_nullable
+              as SearchScreenDef<T>?,
       widgetBuilder: freezed == widgetBuilder
           ? _value.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
@@ -2736,6 +2769,8 @@ abstract class _$$SelectInputUiSettingsImplCopyWith<T, $Res>
       Widget? Function(T)? helpValueBuilder,
       @JsonKey(includeFromJson: false, includeToJson: false)
       double Function(String, T)? searcher,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      SearchScreenDef<T>? searchScreenBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false)
       SelectFieldBuilderDef<T>? widgetBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -2767,6 +2802,7 @@ class __$$SelectInputUiSettingsImplCopyWithImpl<T, $Res>
     Object? valueBuilder = freezed,
     Object? helpValueBuilder = freezed,
     Object? searcher = freezed,
+    Object? searchScreenBuilder = freezed,
     Object? widgetBuilder = freezed,
     Object? headerBuilder = freezed,
     Object? scoreBuilder = freezed,
@@ -2804,6 +2840,10 @@ class __$$SelectInputUiSettingsImplCopyWithImpl<T, $Res>
           ? _value.searcher
           : searcher // ignore: cast_nullable_to_non_nullable
               as double Function(String, T)?,
+      searchScreenBuilder: freezed == searchScreenBuilder
+          ? _value.searchScreenBuilder
+          : searchScreenBuilder // ignore: cast_nullable_to_non_nullable
+              as SearchScreenDef<T>?,
       widgetBuilder: freezed == widgetBuilder
           ? _value.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
@@ -2833,6 +2873,8 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
       @JsonKey(includeFromJson: false, includeToJson: false)
       this.helpValueBuilder,
       @JsonKey(includeFromJson: false, includeToJson: false) this.searcher,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      this.searchScreenBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false) this.widgetBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false) this.headerBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false) this.scoreBuilder})
@@ -2869,6 +2911,9 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
   @JsonKey(includeFromJson: false, includeToJson: false)
   final double Function(String, T)? searcher;
   @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final SearchScreenDef<T>? searchScreenBuilder;
+  @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final SelectFieldBuilderDef<T>? widgetBuilder;
   @override
@@ -2880,7 +2925,7 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
 
   @override
   String toString() {
-    return 'SelectInputUiSettings<$T>(labelText: $labelText, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, labelFlex: $labelFlex, valueBuilder: $valueBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder)';
+    return 'SelectInputUiSettings<$T>(labelText: $labelText, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, labelFlex: $labelFlex, valueBuilder: $valueBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher, searchScreenBuilder: $searchScreenBuilder, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder)';
   }
 
   @override
@@ -2904,6 +2949,8 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
                 other.helpValueBuilder == helpValueBuilder) &&
             (identical(other.searcher, searcher) ||
                 other.searcher == searcher) &&
+            (identical(other.searchScreenBuilder, searchScreenBuilder) ||
+                other.searchScreenBuilder == searchScreenBuilder) &&
             (identical(other.widgetBuilder, widgetBuilder) ||
                 other.widgetBuilder == widgetBuilder) &&
             (identical(other.headerBuilder, headerBuilder) ||
@@ -2924,6 +2971,7 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
       valueBuilder,
       helpValueBuilder,
       searcher,
+      searchScreenBuilder,
       widgetBuilder,
       headerBuilder,
       scoreBuilder);
@@ -2958,6 +3006,8 @@ abstract class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
           final Widget? Function(T)? helpValueBuilder,
           @JsonKey(includeFromJson: false, includeToJson: false)
           final double Function(String, T)? searcher,
+          @JsonKey(includeFromJson: false, includeToJson: false)
+          final SearchScreenDef<T>? searchScreenBuilder,
           @JsonKey(includeToJson: false, includeFromJson: false)
           final SelectFieldBuilderDef<T>? widgetBuilder,
           @JsonKey(includeToJson: false, includeFromJson: false)
@@ -2997,6 +3047,9 @@ abstract class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   double Function(String, T)? get searcher;
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  SearchScreenDef<T>? get searchScreenBuilder;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   SelectFieldBuilderDef<T>? get widgetBuilder;

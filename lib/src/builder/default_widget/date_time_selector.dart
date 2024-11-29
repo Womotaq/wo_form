@@ -45,7 +45,7 @@ class DateTimeSelector extends StatelessWidget {
                       initialDate: dateTime,
                       minDate: minDateTime,
                       maxDate: maxDateTime,
-                      initialEntryMode: settings.initialEntryMode,
+                      initialEntryMode: settings.initialDateEntryMode,
                       initialDatePickerMode: settings.initialDatePickerMode,
                       dateFormat: settings.dateFormat,
                     );
@@ -110,13 +110,14 @@ class DateTimeSelector extends StatelessWidget {
                     final initialDate =
                         dateTime == null ? DateTime.now() : dateTime!;
 
-                    final pickDate = settings.pickTime ??
+                    final pickTime = settings.pickTime ??
                         WoFormTheme.of(context)?.pickTime ??
                         defaultPickTime;
 
-                    final selectedTime = await pickDate(
+                    final selectedTime = await pickTime(
                       context: context,
                       initialTime: TimeOfDay.fromDateTime(initialDate),
+                      initialEntryMode: settings.initialTimeEntryMode,
                     );
 
                     if (selectedTime != null) {

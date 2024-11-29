@@ -18,8 +18,8 @@ Map<String, dynamic> _$$FixedDateTimeImplToJson(_$FixedDateTimeImpl instance) =>
       'runtimeType': instance.$type,
     };
 
-_$RelativeDateImpl _$$RelativeDateImplFromJson(Map<String, dynamic> json) =>
-    _$RelativeDateImpl(
+_$TodayDateImpl _$$TodayDateImplFromJson(Map<String, dynamic> json) =>
+    _$TodayDateImpl(
       addYears: (json['addYears'] as num?)?.toInt() ?? 0,
       addMonths: (json['addMonths'] as num?)?.toInt() ?? 0,
       addDays: (json['addDays'] as num?)?.toInt() ?? 0,
@@ -29,7 +29,7 @@ _$RelativeDateImpl _$$RelativeDateImplFromJson(Map<String, dynamic> json) =>
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$RelativeDateImplToJson(_$RelativeDateImpl instance) =>
+Map<String, dynamic> _$$TodayDateImplToJson(_$TodayDateImpl instance) =>
     <String, dynamic>{
       'addYears': instance.addYears,
       'addMonths': instance.addMonths,

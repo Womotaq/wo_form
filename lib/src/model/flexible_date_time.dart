@@ -11,14 +11,14 @@ sealed class FlexibleDateTime with _$FlexibleDateTime {
     required DateTime date,
   }) = FixedDateTime;
 
-  const factory FlexibleDateTime.relative({
+  const factory FlexibleDateTime.today({
     @Default(0) int addYears,
     @Default(0) int addMonths,
     @Default(0) int addDays,
     int? replaceYears,
     int? replaceMonths,
     int? replaceDays,
-  }) = RelativeDate;
+  }) = TodayDate;
 
   /// Required for the override getter
   const FlexibleDateTime._();
@@ -35,7 +35,7 @@ sealed class FlexibleDateTime with _$FlexibleDateTime {
     switch (this) {
       case FixedDateTime(date: final date):
         return date;
-      case RelativeDate(
+      case TodayDate(
           addYears: final addYears,
           addMonths: final addMonths,
           addDays: final addDays,

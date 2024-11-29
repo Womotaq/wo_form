@@ -47,11 +47,13 @@ _$DateTimeInputUiSettingsImpl _$$DateTimeInputUiSettingsImplFromJson(
       helperText: json['helperText'] as String?,
       hintText: json['hintText'] as String?,
       labelFlex: (json['labelFlex'] as num?)?.toInt(),
-      initialEntryMode: $enumDecodeNullable(
-          _$DatePickerEntryModeEnumMap, json['initialEntryMode']),
+      initialDateEntryMode: $enumDecodeNullable(
+          _$DatePickerEntryModeEnumMap, json['initialDateEntryMode']),
       initialDatePickerMode: $enumDecodeNullable(
           _$DatePickerModeEnumMap, json['initialDatePickerMode']),
       editMode: $enumDecodeNullable(_$DateEditModeEnumMap, json['editMode']),
+      initialTimeEntryMode: $enumDecodeNullable(
+          _$TimePickerEntryModeEnumMap, json['initialTimeEntryMode']),
     );
 
 Map<String, dynamic> _$$DateTimeInputUiSettingsImplToJson(
@@ -63,11 +65,13 @@ Map<String, dynamic> _$$DateTimeInputUiSettingsImplToJson(
       'helperText': instance.helperText,
       'hintText': instance.hintText,
       'labelFlex': instance.labelFlex,
-      'initialEntryMode':
-          _$DatePickerEntryModeEnumMap[instance.initialEntryMode],
+      'initialDateEntryMode':
+          _$DatePickerEntryModeEnumMap[instance.initialDateEntryMode],
       'initialDatePickerMode':
           _$DatePickerModeEnumMap[instance.initialDatePickerMode],
       'editMode': _$DateEditModeEnumMap[instance.editMode],
+      'initialTimeEntryMode':
+          _$TimePickerEntryModeEnumMap[instance.initialTimeEntryMode],
     };
 
 const _$DatePickerEntryModeEnumMap = {
@@ -86,6 +90,13 @@ const _$DateEditModeEnumMap = {
   DateEditMode.date: 'date',
   DateEditMode.time: 'time',
   DateEditMode.dateAndTime: 'dateAndTime',
+};
+
+const _$TimePickerEntryModeEnumMap = {
+  TimePickerEntryMode.dial: 'dial',
+  TimePickerEntryMode.input: 'input',
+  TimePickerEntryMode.dialOnly: 'dialOnly',
+  TimePickerEntryMode.inputOnly: 'inputOnly',
 };
 
 _$DurationInputUiSettingsImpl _$$DurationInputUiSettingsImplFromJson(

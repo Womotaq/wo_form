@@ -80,6 +80,7 @@ class SelectField<T> extends StatelessWidget {
             helpValueBuilder: data.uiSettings.helpValueBuilder,
             hintText: data.uiSettings.hintText,
             searcher: data.uiSettings.searcher,
+            searchScreenBuilder: data.uiSettings.searchScreenBuilder,
             provider: ({required child}) => RepositoryProvider.value(
               value: context.read<RootNode>(),
               child: MultiBlocProvider(
@@ -111,37 +112,6 @@ class SelectField<T> extends StatelessWidget {
                 : FlexFieldDisableMode.none,
             child: selector,
           );
-
-        // return labelFlex == null
-        //     ? Column(
-        //         crossAxisAlignment: CrossAxisAlignment.start,
-        //         children: [
-        //           label,
-        //           ListTile(
-        //             contentPadding:
-        //                 const EdgeInsets.symmetric(horizontal: 16),
-        //             title: selector,
-        //           ),
-        //         ],
-        //       )
-        //     : ListTile(
-        //         contentPadding: EdgeInsets.zero,
-        //         title: Flex(
-        //           direction: Axis.horizontal,
-        //           children: [
-        //             Expanded(
-        //               flex: labelFlex,
-        //               child: label,
-        //             ),
-        //             const SizedBox(width: 16),
-        //             Expanded(
-        //               flex: 10,
-        //               child: selector,
-        //             ),
-        //             const SizedBox(width: 16),
-        //           ],
-        //         ),
-        //       );
       }
     } else {
       return switch (data.uiSettings.childrenVisibility) {
@@ -218,6 +188,8 @@ class SelectField<T> extends StatelessWidget {
                             helpValueBuilder: data.uiSettings.helpValueBuilder,
                             hintText: data.uiSettings.hintText,
                             searcher: data.uiSettings.searcher,
+                            searchScreenBuilder:
+                                data.uiSettings.searchScreenBuilder,
                             builder: (onPressed) => IconButton.filled(
                               onPressed: onPressed,
                               icon: const Icon(Icons.add),

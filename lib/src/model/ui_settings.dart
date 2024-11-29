@@ -81,13 +81,14 @@ class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
     /// selector with a flex value of 10,
     /// and label with a flex value of [labelFlex].
     int? labelFlex,
-    DatePickerEntryMode? initialEntryMode,
+    DatePickerEntryMode? initialDateEntryMode,
     DatePickerMode? initialDatePickerMode,
     DateEditMode? editMode,
     @JsonKey(includeToJson: false, includeFromJson: false)
     PickDateDef? pickDate,
     @JsonKey(includeToJson: false, includeFromJson: false)
     PickTimeDef? pickTime,
+    TimePickerEntryMode? initialTimeEntryMode,
     @JsonKey(includeToJson: false, includeFromJson: false)
     DateTimeFieldBuilderDef? widgetBuilder,
   }) = _DateTimeInputUiSettings;
@@ -109,12 +110,15 @@ class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
           helperText: helperText ?? other.helperText,
           hintText: hintText ?? other.hintText,
           labelFlex: labelFlex ?? other.labelFlex,
-          initialEntryMode: initialEntryMode ?? other.initialEntryMode,
+          initialDateEntryMode:
+              initialDateEntryMode ?? other.initialDateEntryMode,
           initialDatePickerMode:
               initialDatePickerMode ?? other.initialDatePickerMode,
           editMode: editMode ?? other.editMode,
           pickDate: pickDate ?? other.pickDate,
           pickTime: pickTime ?? other.pickTime,
+          initialTimeEntryMode:
+              initialTimeEntryMode ?? other.initialTimeEntryMode,
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,
         );
 }
@@ -419,6 +423,8 @@ class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
     Widget? Function(T)? helpValueBuilder,
     @JsonKey(includeFromJson: false, includeToJson: false)
     double Function(String query, T value)? searcher,
+    @JsonKey(includeFromJson: false, includeToJson: false)
+    SearchScreenDef<T>? searchScreenBuilder,
     @JsonKey(includeToJson: false, includeFromJson: false)
     SelectFieldBuilderDef<T>? widgetBuilder,
     @JsonKey(includeToJson: false, includeFromJson: false)
