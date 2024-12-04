@@ -94,15 +94,9 @@ class _StringFieldState extends State<StringField> {
               : (number) => widget.data.onValueChanged!(
                     '+${number.countryCode} ${number.formatNsn()}',
                   ),
-          // TODO : replace onEditingComplete by onSubmitting
-          // when https://github.com/cedvdb/phone_form_field/issues/263 will be fixed
-          // onSubmitted:
-          //     (widget.data.uiSettings.submitFormOnFieldSubmitted ?? true)
-          //         ? (_) => context.read<WoFormValuesCubit>().submit(context)
-          //         : null,
-          onEditingComplete:
+          onSubmitted:
               (widget.data.uiSettings.submitFormOnFieldSubmitted ?? true)
-                  ? () => context.read<WoFormValuesCubit>().submit(context)
+                  ? (_) => context.read<WoFormValuesCubit>().submit(context)
                   : null,
           style: widget.data.uiSettings.style,
           obscureText: obscureText,
