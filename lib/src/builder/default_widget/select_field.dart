@@ -110,6 +110,7 @@ class SelectField<T> extends StatelessWidget {
             disableMode: data.onValueChanged == null
                 ? FlexFieldDisableMode.header
                 : FlexFieldDisableMode.none,
+            headerBuilder: data.uiSettings.headerBuilder,
             child: selector,
           );
       }

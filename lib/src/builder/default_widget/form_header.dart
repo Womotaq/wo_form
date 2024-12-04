@@ -5,6 +5,12 @@ import 'package:wo_form/wo_form.dart';
 class FormHeader extends StatelessWidget {
   const FormHeader(this.data, {super.key});
 
+  FormHeader.fromInputHeaderData(WoFormInputHeaderData data, {super.key})
+      : data = WoFormHeaderData(
+          labelText: data.labelText,
+          helperText: data.helperText,
+        );
+
   final WoFormHeaderData data;
 
   @override

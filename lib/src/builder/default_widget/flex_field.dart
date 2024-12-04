@@ -15,6 +15,7 @@ class FlexField extends StatelessWidget {
     this.onTap,
     this.shrinkWrap = true,
     this.disableMode = FlexFieldDisableMode.none,
+    this.headerBuilder,
     super.key,
   });
 
@@ -28,11 +29,14 @@ class FlexField extends StatelessWidget {
   final VoidCallback? onTap;
   final bool shrinkWrap;
   final FlexFieldDisableMode disableMode;
+  final InputHeaderBuilderDef? headerBuilder;
 
   @override
   Widget build(BuildContext context) {
-    final header =
-        (WoFormTheme.of(context)?.inputHeaderBuilder ?? InputHeader.new).call(
+    final header = (headerBuilder ??
+            WoFormTheme.of(context)?.inputHeaderBuilder ??
+            InputHeader.new)
+        .call(
       WoFormInputHeaderData(
         path: path,
         labelText: labelText,
