@@ -186,6 +186,8 @@ class DateTimeSelector extends StatelessWidget {
     DatePickerMode? initialDatePickerMode,
     String? dateFormat,
   }) {
+    FocusScope.of(context).unfocus();
+
     final now = DateTime.now();
 
     return showDatePicker(
@@ -202,10 +204,13 @@ class DateTimeSelector extends StatelessWidget {
     required BuildContext context,
     required TimeOfDay initialTime,
     TimePickerEntryMode? initialEntryMode,
-  }) =>
-      showTimePicker(
-        context: context,
-        initialTime: initialTime,
-        initialEntryMode: initialEntryMode ?? TimePickerEntryMode.dial,
-      );
+  }) {
+    FocusScope.of(context).unfocus();
+
+    return showTimePicker(
+      context: context,
+      initialTime: initialTime,
+      initialEntryMode: initialEntryMode ?? TimePickerEntryMode.dial,
+    );
+  }
 }

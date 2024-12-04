@@ -79,6 +79,8 @@ class BooleanFieldBuilder extends StatelessWidget {
                           );
 
                           input.onValueChanged?.call(value);
+
+                          FocusScope.of(context).unfocus();
                         },
                 );
 

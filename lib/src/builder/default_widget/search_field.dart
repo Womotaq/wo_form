@@ -122,6 +122,8 @@ class SearchField<T> extends StatelessWidget {
     BuildContext context,
     Widget Function(T value) valueBuilderSafe,
   ) {
+    FocusScope.of(context).unfocus();
+
     ListTile tileBuilder(BuildContext context, T e) {
       final theme = Theme.of(context);
 

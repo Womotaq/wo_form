@@ -18,6 +18,8 @@ class DurationField extends StatefulWidget {
     Duration? minDuration,
     Duration? maxDuration,
   }) async {
+    FocusScope.of(context).unfocus();
+
     var duration = initialDuration;
 
     await showModalBottomSheet<void>(

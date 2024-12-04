@@ -428,74 +428,76 @@ class WoForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiRepositoryProvider(
-      providers: [
-        RepositoryProvider.value(value: root),
-      ],
-      child: MultiBlocProvider(
+    return FocusScope(
+      child: MultiRepositoryProvider(
         providers: [
-          BlocProvider(
-            create: (context) => hydratationId.isEmpty
-                ? WoFormStatusCubit._(
-                    const InitialStatus(),
-                  )
-                : HydratedWoFormStatusCubit._(
-                    hydratationId,
-                    const InitialStatus(),
-                  ),
-          ),
-          BlocProvider(
-            create: (context) => hydratationId.isEmpty
-                ? WoFormLockCubit._()
-                : HydratedWoFormLockCubit._(hydratationId),
-          ),
-          BlocProvider(
-            create: (context) {
-              final cubit = hydratationId.isEmpty
-                  ? WoFormValuesCubit._(
-                      context.read(),
-                      context.read(),
-                      context.read(),
-                      canSubmit ?? (_) async => true,
-                      onStatusUpdate: onStatusUpdate,
-                      onSubmitting: onSubmitting,
-                      initialValues: initialValues,
-                    )
-                  : HydratedWoFormValuesCubit._(
-                      hydratationId,
-                      context.read(),
-                      context.read(),
-                      context.read(),
-                      canSubmit ?? (_) async => true,
-                      onStatusUpdate: onStatusUpdate,
-                      onSubmitting: onSubmitting,
-                      initialValues: initialValues,
-                    );
-              if (showInitialErrors) {
-                SchedulerBinding.instance.addPostFrameCallback((_) {
-                  cubit
-                    ..markPathsAsVisited(paths: cubit.state.keys)
-                    .._updateErrors();
-                });
-              }
-              return cubit;
-            },
-          ),
+          RepositoryProvider.value(value: root),
         ],
-        child: BlocListener<WoFormStatusCubit, WoFormStatus>(
-          listener: (context, status) {
-            switch (status) {
-              case SubmitSuccessStatus():
-                onSubmitSuccess?.call(context);
-              case SubmitErrorStatus():
-                (onSubmitError ?? WoFormTheme.of(context)?.onSubmitError)
-                    ?.call(context, status);
-              default:
-            }
-          },
-          child: pageBuilder == null
-              ? root.toWidget(key: rootKey)
-              : Builder(key: rootKey, builder: pageBuilder!),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => hydratationId.isEmpty
+                  ? WoFormStatusCubit._(
+                      const InitialStatus(),
+                    )
+                  : HydratedWoFormStatusCubit._(
+                      hydratationId,
+                      const InitialStatus(),
+                    ),
+            ),
+            BlocProvider(
+              create: (context) => hydratationId.isEmpty
+                  ? WoFormLockCubit._()
+                  : HydratedWoFormLockCubit._(hydratationId),
+            ),
+            BlocProvider(
+              create: (context) {
+                final cubit = hydratationId.isEmpty
+                    ? WoFormValuesCubit._(
+                        context.read(),
+                        context.read(),
+                        context.read(),
+                        canSubmit ?? (_) async => true,
+                        onStatusUpdate: onStatusUpdate,
+                        onSubmitting: onSubmitting,
+                        initialValues: initialValues,
+                      )
+                    : HydratedWoFormValuesCubit._(
+                        hydratationId,
+                        context.read(),
+                        context.read(),
+                        context.read(),
+                        canSubmit ?? (_) async => true,
+                        onStatusUpdate: onStatusUpdate,
+                        onSubmitting: onSubmitting,
+                        initialValues: initialValues,
+                      );
+                if (showInitialErrors) {
+                  SchedulerBinding.instance.addPostFrameCallback((_) {
+                    cubit
+                      ..markPathsAsVisited(paths: cubit.state.keys)
+                      .._updateErrors();
+                  });
+                }
+                return cubit;
+              },
+            ),
+          ],
+          child: BlocListener<WoFormStatusCubit, WoFormStatus>(
+            listener: (context, status) {
+              switch (status) {
+                case SubmitSuccessStatus():
+                  onSubmitSuccess?.call(context);
+                case SubmitErrorStatus():
+                  (onSubmitError ?? WoFormTheme.of(context)?.onSubmitError)
+                      ?.call(context, status);
+                default:
+              }
+            },
+            child: pageBuilder == null
+                ? root.toWidget(key: rootKey)
+                : Builder(key: rootKey, builder: pageBuilder!),
+          ),
         ),
       ),
     );
