@@ -14,13 +14,9 @@ part 'media.g.dart';
 /// see [FileInput].
 @freezed
 sealed class Media with _$Media {
-  const factory Media.url({
-    required String url,
-  }) = MediaUrl;
+  const factory Media.url({required String url}) = MediaUrl;
 
-  const factory Media.file({
-    @XFileConverter() required XFile file,
-  }) = MediaFile;
+  const factory Media.file({@XFileConverter() required XFile file}) = MediaFile;
 
   /// Required for the override getter
   const Media._();
@@ -34,6 +30,14 @@ sealed class Media with _$Media {
   String get urlOrPath => switch (this) {
         final MediaUrl media => media.url,
         final MediaFile media => media.file.path,
+      };
+  Uri get uri => switch (this) {
+        final MediaUrl media => Uri.parse(media.url),
+        final MediaFile media => Uri.file(media.file.path),
+      };
+  String? get name => switch (this) {
+        final MediaUrl media => media.url.split('/').lastOrNull,
+        final MediaFile media => media.file.name,
       };
 
   Future<MediaType> getType(BuildContext context) async => switch (this) {
@@ -56,7 +60,20 @@ sealed class Media with _$Media {
       };
 }
 
-enum MediaType { image, video }
+enum MediaType {
+  imageOrVideo,
+  image,
+  video;
+
+  bool get includeImages => switch (this) {
+        imageOrVideo || image => true,
+        video => false,
+      };
+  bool get includeVideos => switch (this) {
+        imageOrVideo || video => true,
+        image => false,
+      };
+}
 
 @freezed
 class MediaImportSettings with _$MediaImportSettings {
@@ -65,7 +82,7 @@ class MediaImportSettings with _$MediaImportSettings {
   //   'quality must be between 0 and 100 (both included).',
   // )
   const factory MediaImportSettings({
-    required Set<MediaType> types,
+    required MediaType type,
     @MediaImportMethodListConverter() required List<MediaImportMethod> methods,
     double? imageMaxHeight,
     double? imageMaxWidth,
@@ -89,8 +106,8 @@ sealed class MediaImportMethod with _$MediaImportMethod {
   const factory MediaImportMethod.pickMedias({
     required MediaPickSource source,
 
-    /// If null, importSettings.types will be used instead
-    Set<MediaType>? types,
+    /// If null, importSettings.type will be used instead.
+    MediaType? type,
   }) = MediaImportMethodPickMedias;
 
   const factory MediaImportMethod.url() = MediaImportMethodUrl;

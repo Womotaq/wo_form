@@ -34,9 +34,7 @@ Map<String, dynamic> _$$MediaFileImplToJson(_$MediaFileImpl instance) =>
 _$MediaImportSettingsImpl _$$MediaImportSettingsImplFromJson(
         Map<String, dynamic> json) =>
     _$MediaImportSettingsImpl(
-      types: (json['types'] as List<dynamic>)
-          .map((e) => $enumDecode(_$MediaTypeEnumMap, e))
-          .toSet(),
+      type: $enumDecode(_$MediaTypeEnumMap, json['type']),
       methods: const MediaImportMethodListConverter()
           .fromJson(json['methods'] as List),
       imageMaxHeight: (json['imageMaxHeight'] as num?)?.toDouble(),
@@ -52,7 +50,7 @@ _$MediaImportSettingsImpl _$$MediaImportSettingsImplFromJson(
 Map<String, dynamic> _$$MediaImportSettingsImplToJson(
         _$MediaImportSettingsImpl instance) =>
     <String, dynamic>{
-      'types': instance.types.map((e) => _$MediaTypeEnumMap[e]!).toList(),
+      'type': _$MediaTypeEnumMap[instance.type]!,
       'methods':
           const MediaImportMethodListConverter().toJson(instance.methods),
       'imageMaxHeight': instance.imageMaxHeight,
@@ -65,6 +63,7 @@ Map<String, dynamic> _$$MediaImportSettingsImplToJson(
     };
 
 const _$MediaTypeEnumMap = {
+  MediaType.imageOrVideo: 'imageOrVideo',
   MediaType.image: 'image',
   MediaType.video: 'video',
 };
@@ -73,9 +72,7 @@ _$MediaImportMethodPickMediasImpl _$$MediaImportMethodPickMediasImplFromJson(
         Map<String, dynamic> json) =>
     _$MediaImportMethodPickMediasImpl(
       source: $enumDecode(_$MediaPickSourceEnumMap, json['source']),
-      types: (json['types'] as List<dynamic>?)
-          ?.map((e) => $enumDecode(_$MediaTypeEnumMap, e))
-          .toSet(),
+      type: $enumDecodeNullable(_$MediaTypeEnumMap, json['type']),
       $type: json['runtimeType'] as String?,
     );
 
@@ -83,7 +80,7 @@ Map<String, dynamic> _$$MediaImportMethodPickMediasImplToJson(
         _$MediaImportMethodPickMediasImpl instance) =>
     <String, dynamic>{
       'source': _$MediaPickSourceEnumMap[instance.source]!,
-      'types': instance.types?.map((e) => _$MediaTypeEnumMap[e]!).toList(),
+      'type': _$MediaTypeEnumMap[instance.type],
       'runtimeType': instance.$type,
     };
 

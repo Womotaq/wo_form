@@ -422,7 +422,7 @@ MediaImportSettings _$MediaImportSettingsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MediaImportSettings {
-  Set<MediaType> get types => throw _privateConstructorUsedError;
+  MediaType get type => throw _privateConstructorUsedError;
   @MediaImportMethodListConverter()
   List<MediaImportMethod> get methods => throw _privateConstructorUsedError;
   double? get imageMaxHeight => throw _privateConstructorUsedError;
@@ -450,7 +450,7 @@ abstract class $MediaImportSettingsCopyWith<$Res> {
       _$MediaImportSettingsCopyWithImpl<$Res, MediaImportSettings>;
   @useResult
   $Res call(
-      {Set<MediaType> types,
+      {MediaType type,
       @MediaImportMethodListConverter() List<MediaImportMethod> methods,
       double? imageMaxHeight,
       double? imageMaxWidth,
@@ -475,7 +475,7 @@ class _$MediaImportSettingsCopyWithImpl<$Res, $Val extends MediaImportSettings>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? types = null,
+    Object? type = null,
     Object? methods = null,
     Object? imageMaxHeight = freezed,
     Object? imageMaxWidth = freezed,
@@ -485,10 +485,10 @@ class _$MediaImportSettingsCopyWithImpl<$Res, $Val extends MediaImportSettings>
     Object? preferFrontCamera = null,
   }) {
     return _then(_value.copyWith(
-      types: null == types
-          ? _value.types
-          : types // ignore: cast_nullable_to_non_nullable
-              as Set<MediaType>,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as MediaType,
       methods: null == methods
           ? _value.methods
           : methods // ignore: cast_nullable_to_non_nullable
@@ -530,7 +530,7 @@ abstract class _$$MediaImportSettingsImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Set<MediaType> types,
+      {MediaType type,
       @MediaImportMethodListConverter() List<MediaImportMethod> methods,
       double? imageMaxHeight,
       double? imageMaxWidth,
@@ -553,7 +553,7 @@ class __$$MediaImportSettingsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? types = null,
+    Object? type = null,
     Object? methods = null,
     Object? imageMaxHeight = freezed,
     Object? imageMaxWidth = freezed,
@@ -563,10 +563,10 @@ class __$$MediaImportSettingsImplCopyWithImpl<$Res>
     Object? preferFrontCamera = null,
   }) {
     return _then(_$MediaImportSettingsImpl(
-      types: null == types
-          ? _value._types
-          : types // ignore: cast_nullable_to_non_nullable
-              as Set<MediaType>,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as MediaType,
       methods: null == methods
           ? _value._methods
           : methods // ignore: cast_nullable_to_non_nullable
@@ -603,7 +603,7 @@ class __$$MediaImportSettingsImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$MediaImportSettingsImpl extends _MediaImportSettings {
   const _$MediaImportSettingsImpl(
-      {required final Set<MediaType> types,
+      {required this.type,
       @MediaImportMethodListConverter()
       required final List<MediaImportMethod> methods,
       this.imageMaxHeight,
@@ -612,21 +612,14 @@ class _$MediaImportSettingsImpl extends _MediaImportSettings {
       this.imageRequestFullMetadata = true,
       @DurationNullableConverter() this.videoMaxDuration,
       this.preferFrontCamera = false})
-      : _types = types,
-        _methods = methods,
+      : _methods = methods,
         super._();
 
   factory _$MediaImportSettingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$MediaImportSettingsImplFromJson(json);
 
-  final Set<MediaType> _types;
   @override
-  Set<MediaType> get types {
-    if (_types is EqualUnmodifiableSetView) return _types;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableSetView(_types);
-  }
-
+  final MediaType type;
   final List<MediaImportMethod> _methods;
   @override
   @MediaImportMethodListConverter()
@@ -654,7 +647,7 @@ class _$MediaImportSettingsImpl extends _MediaImportSettings {
 
   @override
   String toString() {
-    return 'MediaImportSettings(types: $types, methods: $methods, imageMaxHeight: $imageMaxHeight, imageMaxWidth: $imageMaxWidth, imageQuality: $imageQuality, imageRequestFullMetadata: $imageRequestFullMetadata, videoMaxDuration: $videoMaxDuration, preferFrontCamera: $preferFrontCamera)';
+    return 'MediaImportSettings(type: $type, methods: $methods, imageMaxHeight: $imageMaxHeight, imageMaxWidth: $imageMaxWidth, imageQuality: $imageQuality, imageRequestFullMetadata: $imageRequestFullMetadata, videoMaxDuration: $videoMaxDuration, preferFrontCamera: $preferFrontCamera)';
   }
 
   @override
@@ -662,7 +655,7 @@ class _$MediaImportSettingsImpl extends _MediaImportSettings {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MediaImportSettingsImpl &&
-            const DeepCollectionEquality().equals(other._types, _types) &&
+            (identical(other.type, type) || other.type == type) &&
             const DeepCollectionEquality().equals(other._methods, _methods) &&
             (identical(other.imageMaxHeight, imageMaxHeight) ||
                 other.imageMaxHeight == imageMaxHeight) &&
@@ -683,7 +676,7 @@ class _$MediaImportSettingsImpl extends _MediaImportSettings {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(_types),
+      type,
       const DeepCollectionEquality().hash(_methods),
       imageMaxHeight,
       imageMaxWidth,
@@ -711,7 +704,7 @@ class _$MediaImportSettingsImpl extends _MediaImportSettings {
 
 abstract class _MediaImportSettings extends MediaImportSettings {
   const factory _MediaImportSettings(
-      {required final Set<MediaType> types,
+      {required final MediaType type,
       @MediaImportMethodListConverter()
       required final List<MediaImportMethod> methods,
       final double? imageMaxHeight,
@@ -726,7 +719,7 @@ abstract class _MediaImportSettings extends MediaImportSettings {
       _$MediaImportSettingsImpl.fromJson;
 
   @override
-  Set<MediaType> get types;
+  MediaType get type;
   @override
   @MediaImportMethodListConverter()
   List<MediaImportMethod> get methods;
@@ -769,21 +762,20 @@ MediaImportMethod _$MediaImportMethodFromJson(Map<String, dynamic> json) {
 mixin _$MediaImportMethod {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(MediaPickSource source, Set<MediaType>? types)
+    required TResult Function(MediaPickSource source, MediaType? type)
         pickMedias,
     required TResult Function() url,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(MediaPickSource source, Set<MediaType>? types)?
-        pickMedias,
+    TResult? Function(MediaPickSource source, MediaType? type)? pickMedias,
     TResult? Function()? url,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(MediaPickSource source, Set<MediaType>? types)? pickMedias,
+    TResult Function(MediaPickSource source, MediaType? type)? pickMedias,
     TResult Function()? url,
     required TResult orElse(),
   }) =>
@@ -840,7 +832,7 @@ abstract class _$$MediaImportMethodPickMediasImplCopyWith<$Res> {
           $Res Function(_$MediaImportMethodPickMediasImpl) then) =
       __$$MediaImportMethodPickMediasImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({MediaPickSource source, Set<MediaType>? types});
+  $Res call({MediaPickSource source, MediaType? type});
 }
 
 /// @nodoc
@@ -859,17 +851,17 @@ class __$$MediaImportMethodPickMediasImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? source = null,
-    Object? types = freezed,
+    Object? type = freezed,
   }) {
     return _then(_$MediaImportMethodPickMediasImpl(
       source: null == source
           ? _value.source
           : source // ignore: cast_nullable_to_non_nullable
               as MediaPickSource,
-      types: freezed == types
-          ? _value._types
-          : types // ignore: cast_nullable_to_non_nullable
-              as Set<MediaType>?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as MediaType?,
     ));
   }
 }
@@ -878,9 +870,8 @@ class __$$MediaImportMethodPickMediasImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$MediaImportMethodPickMediasImpl extends MediaImportMethodPickMedias {
   const _$MediaImportMethodPickMediasImpl(
-      {required this.source, final Set<MediaType>? types, final String? $type})
-      : _types = types,
-        $type = $type ?? 'pickMedias',
+      {required this.source, this.type, final String? $type})
+      : $type = $type ?? 'pickMedias',
         super._();
 
   factory _$MediaImportMethodPickMediasImpl.fromJson(
@@ -890,25 +881,16 @@ class _$MediaImportMethodPickMediasImpl extends MediaImportMethodPickMedias {
   @override
   final MediaPickSource source;
 
-  /// If null, importSettings.types will be used instead
-  final Set<MediaType>? _types;
-
-  /// If null, importSettings.types will be used instead
+  /// If null, importSettings.type will be used instead.
   @override
-  Set<MediaType>? get types {
-    final value = _types;
-    if (value == null) return null;
-    if (_types is EqualUnmodifiableSetView) return _types;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableSetView(value);
-  }
+  final MediaType? type;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'MediaImportMethod.pickMedias(source: $source, types: $types)';
+    return 'MediaImportMethod.pickMedias(source: $source, type: $type)';
   }
 
   @override
@@ -917,13 +899,12 @@ class _$MediaImportMethodPickMediasImpl extends MediaImportMethodPickMedias {
         (other.runtimeType == runtimeType &&
             other is _$MediaImportMethodPickMediasImpl &&
             (identical(other.source, source) || other.source == source) &&
-            const DeepCollectionEquality().equals(other._types, _types));
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, source, const DeepCollectionEquality().hash(_types));
+  int get hashCode => Object.hash(runtimeType, source, type);
 
   /// Create a copy of MediaImportMethod
   /// with the given fields replaced by the non-null parameter values.
@@ -937,32 +918,31 @@ class _$MediaImportMethodPickMediasImpl extends MediaImportMethodPickMedias {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(MediaPickSource source, Set<MediaType>? types)
+    required TResult Function(MediaPickSource source, MediaType? type)
         pickMedias,
     required TResult Function() url,
   }) {
-    return pickMedias(source, types);
+    return pickMedias(source, type);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(MediaPickSource source, Set<MediaType>? types)?
-        pickMedias,
+    TResult? Function(MediaPickSource source, MediaType? type)? pickMedias,
     TResult? Function()? url,
   }) {
-    return pickMedias?.call(source, types);
+    return pickMedias?.call(source, type);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(MediaPickSource source, Set<MediaType>? types)? pickMedias,
+    TResult Function(MediaPickSource source, MediaType? type)? pickMedias,
     TResult Function()? url,
     required TResult orElse(),
   }) {
     if (pickMedias != null) {
-      return pickMedias(source, types);
+      return pickMedias(source, type);
     }
     return orElse();
   }
@@ -1009,7 +989,7 @@ class _$MediaImportMethodPickMediasImpl extends MediaImportMethodPickMedias {
 abstract class MediaImportMethodPickMedias extends MediaImportMethod {
   const factory MediaImportMethodPickMedias(
       {required final MediaPickSource source,
-      final Set<MediaType>? types}) = _$MediaImportMethodPickMediasImpl;
+      final MediaType? type}) = _$MediaImportMethodPickMediasImpl;
   const MediaImportMethodPickMedias._() : super._();
 
   factory MediaImportMethodPickMedias.fromJson(Map<String, dynamic> json) =
@@ -1017,8 +997,8 @@ abstract class MediaImportMethodPickMedias extends MediaImportMethod {
 
   MediaPickSource get source;
 
-  /// If null, importSettings.types will be used instead
-  Set<MediaType>? get types;
+  /// If null, importSettings.type will be used instead.
+  MediaType? get type;
 
   /// Create a copy of MediaImportMethod
   /// with the given fields replaced by the non-null parameter values.
@@ -1078,7 +1058,7 @@ class _$MediaImportMethodUrlImpl extends MediaImportMethodUrl {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(MediaPickSource source, Set<MediaType>? types)
+    required TResult Function(MediaPickSource source, MediaType? type)
         pickMedias,
     required TResult Function() url,
   }) {
@@ -1088,8 +1068,7 @@ class _$MediaImportMethodUrlImpl extends MediaImportMethodUrl {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(MediaPickSource source, Set<MediaType>? types)?
-        pickMedias,
+    TResult? Function(MediaPickSource source, MediaType? type)? pickMedias,
     TResult? Function()? url,
   }) {
     return url?.call();
@@ -1098,7 +1077,7 @@ class _$MediaImportMethodUrlImpl extends MediaImportMethodUrl {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(MediaPickSource source, Set<MediaType>? types)? pickMedias,
+    TResult Function(MediaPickSource source, MediaType? type)? pickMedias,
     TResult Function()? url,
     required TResult orElse(),
   }) {
