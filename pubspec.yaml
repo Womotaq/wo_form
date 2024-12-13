@@ -1,7 +1,7 @@
 name: wo_form
-description: "A package made for easily creating forms, and exporting/importing them as json."
+description: "Easily create forms, and export/import them as json."
 version: 1.2.1
-repository: https://github.com/ChreSyr/wo_form
+repository: https://github.com/BudgetChess/wo_form
 funding:
   - https://ko-fi.com/chresyr
 
