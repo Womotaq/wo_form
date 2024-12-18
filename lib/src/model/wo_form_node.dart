@@ -470,7 +470,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
               values: values,
               parentPath: '$parentPath/$id',
             ),
-        ].whereNotNull();
+        ].nonNulls;
       case PathBuilderNode():
       case ValueBuilderNode():
       case ValuesBuilderNode():
@@ -909,7 +909,7 @@ class RootNode with _$RootNode, WoFormNodeMixin {
           values: values,
           parentPath: parentPath,
         ),
-    ].whereNotNull();
+    ].nonNulls;
   }
 
   @override

@@ -36,8 +36,8 @@ class _WoReorderableByGrabListViewState
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final oddItemColor = colorScheme.primary.withOpacity(0.05);
-    final evenItemColor = colorScheme.primary.withOpacity(0.2);
+    final oddItemColor = colorScheme.primary.withValues(alpha: 0.05);
+    final evenItemColor = colorScheme.primary.withValues(alpha: 0.2);
 
     final rootNode = context.read<RootNode>();
     final valuesCubit = context.read<WoFormValuesCubit>();
