@@ -42,7 +42,8 @@ class DateTimeSelector extends StatelessWidget {
 
                     final selectedDate = await pickDate(
                       context: context,
-                      initialDate: dateTime,
+                      initialDate:
+                          dateTime ?? settings.initialEditValue?.resolve(),
                       minDate: minDateTime,
                       maxDate: maxDateTime,
                       initialEntryMode: settings.initialDateEntryMode,

@@ -80,6 +80,10 @@ class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
     /// selector with a flex value of 10,
     /// and label with a flex value of [labelFlex].
     int? labelFlex,
+
+    /// If DateTimeInput.initialValue is null, this value will be used instead.
+    @JsonKey(toJson: FlexibleDateTime.staticToJson)
+    FlexibleDateTime? initialEditValue,
     DatePickerEntryMode? initialDateEntryMode,
     DatePickerMode? initialDatePickerMode,
     DateEditMode? editMode,
