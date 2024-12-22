@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/wo_form.dart';
@@ -98,7 +97,7 @@ class SelectFieldBuilder<T> extends StatelessWidget {
                                   ?.map(
                                     (value) => input.getIdOfValue(value: value),
                                   )
-                                  .whereNotNull()
+                                  .nonNulls
                                   .toList(),
                               updateStatus: updateStatus,
                             );

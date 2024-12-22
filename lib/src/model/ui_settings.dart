@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/src/_export.dart';
-import 'package:wo_form/src/model/json_converter/text_input_type.dart';
 import 'package:wo_form/wo_form.dart';
 
 part 'ui_settings.freezed.dart';
@@ -81,6 +80,10 @@ class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
     /// selector with a flex value of 10,
     /// and label with a flex value of [labelFlex].
     int? labelFlex,
+
+    /// If DateTimeInput.initialValue is null, this value will be used instead.
+    @JsonKey(toJson: FlexibleDateTime.staticToJson)
+    FlexibleDateTime? initialEditValue,
     DatePickerEntryMode? initialDateEntryMode,
     DatePickerMode? initialDatePickerMode,
     DateEditMode? editMode,

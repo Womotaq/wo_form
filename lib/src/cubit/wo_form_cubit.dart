@@ -195,7 +195,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
                     recursive: false,
                   ),
             )
-            .whereNotNull()
+            .nonNulls
             .expand((list) => list)
             .toList(),
       );

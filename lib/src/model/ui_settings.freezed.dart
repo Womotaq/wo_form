@@ -315,6 +315,10 @@ mixin _$DateTimeInputUiSettings {
   /// selector with a flex value of 10,
   /// and label with a flex value of [labelFlex].
   int? get labelFlex => throw _privateConstructorUsedError;
+
+  /// If DateTimeInput.initialValue is null, this value will be used instead.
+  @JsonKey(toJson: FlexibleDateTime.staticToJson)
+  FlexibleDateTime? get initialEditValue => throw _privateConstructorUsedError;
   DatePickerEntryMode? get initialDateEntryMode =>
       throw _privateConstructorUsedError;
   DatePickerMode? get initialDatePickerMode =>
@@ -353,6 +357,8 @@ abstract class $DateTimeInputUiSettingsCopyWith<$Res> {
       String? helperText,
       String? hintText,
       int? labelFlex,
+      @JsonKey(toJson: FlexibleDateTime.staticToJson)
+      FlexibleDateTime? initialEditValue,
       DatePickerEntryMode? initialDateEntryMode,
       DatePickerMode? initialDatePickerMode,
       DateEditMode? editMode,
@@ -363,6 +369,8 @@ abstract class $DateTimeInputUiSettingsCopyWith<$Res> {
       TimePickerEntryMode? initialTimeEntryMode,
       @JsonKey(includeToJson: false, includeFromJson: false)
       DateTimeFieldBuilderDef? widgetBuilder});
+
+  $FlexibleDateTimeCopyWith<$Res>? get initialEditValue;
 }
 
 /// @nodoc
@@ -387,6 +395,7 @@ class _$DateTimeInputUiSettingsCopyWithImpl<$Res,
     Object? helperText = freezed,
     Object? hintText = freezed,
     Object? labelFlex = freezed,
+    Object? initialEditValue = freezed,
     Object? initialDateEntryMode = freezed,
     Object? initialDatePickerMode = freezed,
     Object? editMode = freezed,
@@ -420,6 +429,10 @@ class _$DateTimeInputUiSettingsCopyWithImpl<$Res,
           ? _value.labelFlex
           : labelFlex // ignore: cast_nullable_to_non_nullable
               as int?,
+      initialEditValue: freezed == initialEditValue
+          ? _value.initialEditValue
+          : initialEditValue // ignore: cast_nullable_to_non_nullable
+              as FlexibleDateTime?,
       initialDateEntryMode: freezed == initialDateEntryMode
           ? _value.initialDateEntryMode
           : initialDateEntryMode // ignore: cast_nullable_to_non_nullable
@@ -450,6 +463,20 @@ class _$DateTimeInputUiSettingsCopyWithImpl<$Res,
               as DateTimeFieldBuilderDef?,
     ) as $Val);
   }
+
+  /// Create a copy of DateTimeInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $FlexibleDateTimeCopyWith<$Res>? get initialEditValue {
+    if (_value.initialEditValue == null) {
+      return null;
+    }
+
+    return $FlexibleDateTimeCopyWith<$Res>(_value.initialEditValue!, (value) {
+      return _then(_value.copyWith(initialEditValue: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -468,6 +495,8 @@ abstract class _$$DateTimeInputUiSettingsImplCopyWith<$Res>
       String? helperText,
       String? hintText,
       int? labelFlex,
+      @JsonKey(toJson: FlexibleDateTime.staticToJson)
+      FlexibleDateTime? initialEditValue,
       DatePickerEntryMode? initialDateEntryMode,
       DatePickerMode? initialDatePickerMode,
       DateEditMode? editMode,
@@ -478,6 +507,9 @@ abstract class _$$DateTimeInputUiSettingsImplCopyWith<$Res>
       TimePickerEntryMode? initialTimeEntryMode,
       @JsonKey(includeToJson: false, includeFromJson: false)
       DateTimeFieldBuilderDef? widgetBuilder});
+
+  @override
+  $FlexibleDateTimeCopyWith<$Res>? get initialEditValue;
 }
 
 /// @nodoc
@@ -501,6 +533,7 @@ class __$$DateTimeInputUiSettingsImplCopyWithImpl<$Res>
     Object? helperText = freezed,
     Object? hintText = freezed,
     Object? labelFlex = freezed,
+    Object? initialEditValue = freezed,
     Object? initialDateEntryMode = freezed,
     Object? initialDatePickerMode = freezed,
     Object? editMode = freezed,
@@ -534,6 +567,10 @@ class __$$DateTimeInputUiSettingsImplCopyWithImpl<$Res>
           ? _value.labelFlex
           : labelFlex // ignore: cast_nullable_to_non_nullable
               as int?,
+      initialEditValue: freezed == initialEditValue
+          ? _value.initialEditValue
+          : initialEditValue // ignore: cast_nullable_to_non_nullable
+              as FlexibleDateTime?,
       initialDateEntryMode: freezed == initialDateEntryMode
           ? _value.initialDateEntryMode
           : initialDateEntryMode // ignore: cast_nullable_to_non_nullable
@@ -576,6 +613,7 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
       this.helperText,
       this.hintText,
       this.labelFlex,
+      @JsonKey(toJson: FlexibleDateTime.staticToJson) this.initialEditValue,
       this.initialDateEntryMode,
       this.initialDatePickerMode,
       this.editMode,
@@ -606,6 +644,11 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
   /// and label with a flex value of [labelFlex].
   @override
   final int? labelFlex;
+
+  /// If DateTimeInput.initialValue is null, this value will be used instead.
+  @override
+  @JsonKey(toJson: FlexibleDateTime.staticToJson)
+  final FlexibleDateTime? initialEditValue;
   @override
   final DatePickerEntryMode? initialDateEntryMode;
   @override
@@ -626,7 +669,7 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
 
   @override
   String toString() {
-    return 'DateTimeInputUiSettings(dateFormat: $dateFormat, timeFormat: $timeFormat, labelText: $labelText, helperText: $helperText, hintText: $hintText, labelFlex: $labelFlex, initialDateEntryMode: $initialDateEntryMode, initialDatePickerMode: $initialDatePickerMode, editMode: $editMode, pickDate: $pickDate, pickTime: $pickTime, initialTimeEntryMode: $initialTimeEntryMode, widgetBuilder: $widgetBuilder)';
+    return 'DateTimeInputUiSettings(dateFormat: $dateFormat, timeFormat: $timeFormat, labelText: $labelText, helperText: $helperText, hintText: $hintText, labelFlex: $labelFlex, initialEditValue: $initialEditValue, initialDateEntryMode: $initialDateEntryMode, initialDatePickerMode: $initialDatePickerMode, editMode: $editMode, pickDate: $pickDate, pickTime: $pickTime, initialTimeEntryMode: $initialTimeEntryMode, widgetBuilder: $widgetBuilder)';
   }
 
   @override
@@ -646,6 +689,8 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
                 other.hintText == hintText) &&
             (identical(other.labelFlex, labelFlex) ||
                 other.labelFlex == labelFlex) &&
+            (identical(other.initialEditValue, initialEditValue) ||
+                other.initialEditValue == initialEditValue) &&
             (identical(other.initialDateEntryMode, initialDateEntryMode) ||
                 other.initialDateEntryMode == initialDateEntryMode) &&
             (identical(other.initialDatePickerMode, initialDatePickerMode) ||
@@ -672,6 +717,7 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
       helperText,
       hintText,
       labelFlex,
+      initialEditValue,
       initialDateEntryMode,
       initialDatePickerMode,
       editMode,
@@ -705,6 +751,8 @@ abstract class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
           final String? helperText,
           final String? hintText,
           final int? labelFlex,
+          @JsonKey(toJson: FlexibleDateTime.staticToJson)
+          final FlexibleDateTime? initialEditValue,
           final DatePickerEntryMode? initialDateEntryMode,
           final DatePickerMode? initialDatePickerMode,
           final DateEditMode? editMode,
@@ -738,6 +786,11 @@ abstract class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
   /// and label with a flex value of [labelFlex].
   @override
   int? get labelFlex;
+
+  /// If DateTimeInput.initialValue is null, this value will be used instead.
+  @override
+  @JsonKey(toJson: FlexibleDateTime.staticToJson)
+  FlexibleDateTime? get initialEditValue;
   @override
   DatePickerEntryMode? get initialDateEntryMode;
   @override

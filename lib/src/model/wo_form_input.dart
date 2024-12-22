@@ -74,8 +74,7 @@ mixin WoFormInputMixin {
     required String parentPath,
     bool recursive = true,
   }) =>
-      [getError(values['$parentPath/$id'], parentPath: parentPath)]
-          .whereNotNull();
+      [getError(values['$parentPath/$id'], parentPath: parentPath)].nonNulls;
 
   String? getExportKey({
     required WoFormValues values,
