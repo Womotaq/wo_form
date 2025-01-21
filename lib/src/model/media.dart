@@ -112,6 +112,9 @@ sealed class MediaImportMethod with _$MediaImportMethod {
 
   const factory MediaImportMethod.url() = MediaImportMethodUrl;
 
+  const factory MediaImportMethod.custom({required String id}) =
+      MediaImportMethodCustom;
+
   const MediaImportMethod._();
 
   factory MediaImportMethod.fromJson(Map<String, dynamic> json) =>

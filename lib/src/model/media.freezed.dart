@@ -751,6 +751,8 @@ MediaImportMethod _$MediaImportMethodFromJson(Map<String, dynamic> json) {
       return MediaImportMethodPickMedias.fromJson(json);
     case 'url':
       return MediaImportMethodUrl.fromJson(json);
+    case 'custom':
+      return MediaImportMethodCustom.fromJson(json);
 
     default:
       throw CheckedFromJsonException(json, 'runtimeType', 'MediaImportMethod',
@@ -765,18 +767,21 @@ mixin _$MediaImportMethod {
     required TResult Function(MediaPickSource source, MediaType? type)
         pickMedias,
     required TResult Function() url,
+    required TResult Function(String id) custom,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(MediaPickSource source, MediaType? type)? pickMedias,
     TResult? Function()? url,
+    TResult? Function(String id)? custom,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(MediaPickSource source, MediaType? type)? pickMedias,
     TResult Function()? url,
+    TResult Function(String id)? custom,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -784,18 +789,21 @@ mixin _$MediaImportMethod {
   TResult map<TResult extends Object?>({
     required TResult Function(MediaImportMethodPickMedias value) pickMedias,
     required TResult Function(MediaImportMethodUrl value) url,
+    required TResult Function(MediaImportMethodCustom value) custom,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(MediaImportMethodPickMedias value)? pickMedias,
     TResult? Function(MediaImportMethodUrl value)? url,
+    TResult? Function(MediaImportMethodCustom value)? custom,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MediaImportMethodPickMedias value)? pickMedias,
     TResult Function(MediaImportMethodUrl value)? url,
+    TResult Function(MediaImportMethodCustom value)? custom,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -921,6 +929,7 @@ class _$MediaImportMethodPickMediasImpl extends MediaImportMethodPickMedias {
     required TResult Function(MediaPickSource source, MediaType? type)
         pickMedias,
     required TResult Function() url,
+    required TResult Function(String id) custom,
   }) {
     return pickMedias(source, type);
   }
@@ -930,6 +939,7 @@ class _$MediaImportMethodPickMediasImpl extends MediaImportMethodPickMedias {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(MediaPickSource source, MediaType? type)? pickMedias,
     TResult? Function()? url,
+    TResult? Function(String id)? custom,
   }) {
     return pickMedias?.call(source, type);
   }
@@ -939,6 +949,7 @@ class _$MediaImportMethodPickMediasImpl extends MediaImportMethodPickMedias {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(MediaPickSource source, MediaType? type)? pickMedias,
     TResult Function()? url,
+    TResult Function(String id)? custom,
     required TResult orElse(),
   }) {
     if (pickMedias != null) {
@@ -952,6 +963,7 @@ class _$MediaImportMethodPickMediasImpl extends MediaImportMethodPickMedias {
   TResult map<TResult extends Object?>({
     required TResult Function(MediaImportMethodPickMedias value) pickMedias,
     required TResult Function(MediaImportMethodUrl value) url,
+    required TResult Function(MediaImportMethodCustom value) custom,
   }) {
     return pickMedias(this);
   }
@@ -961,6 +973,7 @@ class _$MediaImportMethodPickMediasImpl extends MediaImportMethodPickMedias {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(MediaImportMethodPickMedias value)? pickMedias,
     TResult? Function(MediaImportMethodUrl value)? url,
+    TResult? Function(MediaImportMethodCustom value)? custom,
   }) {
     return pickMedias?.call(this);
   }
@@ -970,6 +983,7 @@ class _$MediaImportMethodPickMediasImpl extends MediaImportMethodPickMedias {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MediaImportMethodPickMedias value)? pickMedias,
     TResult Function(MediaImportMethodUrl value)? url,
+    TResult Function(MediaImportMethodCustom value)? custom,
     required TResult orElse(),
   }) {
     if (pickMedias != null) {
@@ -1061,6 +1075,7 @@ class _$MediaImportMethodUrlImpl extends MediaImportMethodUrl {
     required TResult Function(MediaPickSource source, MediaType? type)
         pickMedias,
     required TResult Function() url,
+    required TResult Function(String id) custom,
   }) {
     return url();
   }
@@ -1070,6 +1085,7 @@ class _$MediaImportMethodUrlImpl extends MediaImportMethodUrl {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(MediaPickSource source, MediaType? type)? pickMedias,
     TResult? Function()? url,
+    TResult? Function(String id)? custom,
   }) {
     return url?.call();
   }
@@ -1079,6 +1095,7 @@ class _$MediaImportMethodUrlImpl extends MediaImportMethodUrl {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(MediaPickSource source, MediaType? type)? pickMedias,
     TResult Function()? url,
+    TResult Function(String id)? custom,
     required TResult orElse(),
   }) {
     if (url != null) {
@@ -1092,6 +1109,7 @@ class _$MediaImportMethodUrlImpl extends MediaImportMethodUrl {
   TResult map<TResult extends Object?>({
     required TResult Function(MediaImportMethodPickMedias value) pickMedias,
     required TResult Function(MediaImportMethodUrl value) url,
+    required TResult Function(MediaImportMethodCustom value) custom,
   }) {
     return url(this);
   }
@@ -1101,6 +1119,7 @@ class _$MediaImportMethodUrlImpl extends MediaImportMethodUrl {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(MediaImportMethodPickMedias value)? pickMedias,
     TResult? Function(MediaImportMethodUrl value)? url,
+    TResult? Function(MediaImportMethodCustom value)? custom,
   }) {
     return url?.call(this);
   }
@@ -1110,6 +1129,7 @@ class _$MediaImportMethodUrlImpl extends MediaImportMethodUrl {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MediaImportMethodPickMedias value)? pickMedias,
     TResult Function(MediaImportMethodUrl value)? url,
+    TResult Function(MediaImportMethodCustom value)? custom,
     required TResult orElse(),
   }) {
     if (url != null) {
@@ -1132,4 +1152,175 @@ abstract class MediaImportMethodUrl extends MediaImportMethod {
 
   factory MediaImportMethodUrl.fromJson(Map<String, dynamic> json) =
       _$MediaImportMethodUrlImpl.fromJson;
+}
+
+/// @nodoc
+abstract class _$$MediaImportMethodCustomImplCopyWith<$Res> {
+  factory _$$MediaImportMethodCustomImplCopyWith(
+          _$MediaImportMethodCustomImpl value,
+          $Res Function(_$MediaImportMethodCustomImpl) then) =
+      __$$MediaImportMethodCustomImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String id});
+}
+
+/// @nodoc
+class __$$MediaImportMethodCustomImplCopyWithImpl<$Res>
+    extends _$MediaImportMethodCopyWithImpl<$Res, _$MediaImportMethodCustomImpl>
+    implements _$$MediaImportMethodCustomImplCopyWith<$Res> {
+  __$$MediaImportMethodCustomImplCopyWithImpl(
+      _$MediaImportMethodCustomImpl _value,
+      $Res Function(_$MediaImportMethodCustomImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of MediaImportMethod
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_$MediaImportMethodCustomImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$MediaImportMethodCustomImpl extends MediaImportMethodCustom {
+  const _$MediaImportMethodCustomImpl({required this.id, final String? $type})
+      : $type = $type ?? 'custom',
+        super._();
+
+  factory _$MediaImportMethodCustomImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MediaImportMethodCustomImplFromJson(json);
+
+  @override
+  final String id;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'MediaImportMethod.custom(id: $id)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MediaImportMethodCustomImpl &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  /// Create a copy of MediaImportMethod
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$MediaImportMethodCustomImplCopyWith<_$MediaImportMethodCustomImpl>
+      get copyWith => __$$MediaImportMethodCustomImplCopyWithImpl<
+          _$MediaImportMethodCustomImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(MediaPickSource source, MediaType? type)
+        pickMedias,
+    required TResult Function() url,
+    required TResult Function(String id) custom,
+  }) {
+    return custom(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(MediaPickSource source, MediaType? type)? pickMedias,
+    TResult? Function()? url,
+    TResult? Function(String id)? custom,
+  }) {
+    return custom?.call(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(MediaPickSource source, MediaType? type)? pickMedias,
+    TResult Function()? url,
+    TResult Function(String id)? custom,
+    required TResult orElse(),
+  }) {
+    if (custom != null) {
+      return custom(id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MediaImportMethodPickMedias value) pickMedias,
+    required TResult Function(MediaImportMethodUrl value) url,
+    required TResult Function(MediaImportMethodCustom value) custom,
+  }) {
+    return custom(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(MediaImportMethodPickMedias value)? pickMedias,
+    TResult? Function(MediaImportMethodUrl value)? url,
+    TResult? Function(MediaImportMethodCustom value)? custom,
+  }) {
+    return custom?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MediaImportMethodPickMedias value)? pickMedias,
+    TResult Function(MediaImportMethodUrl value)? url,
+    TResult Function(MediaImportMethodCustom value)? custom,
+    required TResult orElse(),
+  }) {
+    if (custom != null) {
+      return custom(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$MediaImportMethodCustomImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class MediaImportMethodCustom extends MediaImportMethod {
+  const factory MediaImportMethodCustom({required final String id}) =
+      _$MediaImportMethodCustomImpl;
+  const MediaImportMethodCustom._() : super._();
+
+  factory MediaImportMethodCustom.fromJson(Map<String, dynamic> json) =
+      _$MediaImportMethodCustomImpl.fromJson;
+
+  String get id;
+
+  /// Create a copy of MediaImportMethod
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$MediaImportMethodCustomImplCopyWith<_$MediaImportMethodCustomImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
