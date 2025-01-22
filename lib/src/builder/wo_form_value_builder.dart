@@ -46,7 +46,8 @@ class WoFormValuesBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocSelector<WoFormValuesCubit, Map<String, dynamic>,
         Map<String, dynamic>>(
-      selector: (values) => {for (final path in paths) path: values[path]},
+      selector: (values) =>
+          {for (final path in paths) path: values.getValue(path)},
       builder: builder,
     );
   }

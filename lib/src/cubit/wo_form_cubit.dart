@@ -159,10 +159,12 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     // Can't edit a form while submitting it
     if (_statusCubit.state is SubmittingStatus) return;
 
+    path = state.getKey(path);
+
     if (_lockCubit.inputIsLocked(path: path)) return;
 
     final newMap = Map<String, dynamic>.from(state);
-    newMap[state.getKey(path)] = value;
+    newMap[path] = value;
 
     emit(newMap);
 
