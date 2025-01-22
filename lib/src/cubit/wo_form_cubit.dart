@@ -168,16 +168,30 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
     emit(newMap);
 
-    if (switch (updateStatus) {
-      UpdateStatus.no => false,
-      UpdateStatus.ifPathAlreadyVisited => _visitedPaths.contains(path),
-      UpdateStatus.yes => true,
-    }) {
-      if (updateStatus != UpdateStatus.ifPathAlreadyVisited) {
-        markPathAsVisited(path: path);
-      }
+    final wasVisited = _visitedPaths.contains(path);
 
-      _updateErrors();
+    final shouldUpdateErrors = switch (updateStatus) {
+      UpdateStatus.no => false,
+      UpdateStatus.ifPathAlreadyVisited ||
+      UpdateStatus.ifPathAlreadyVisitedOrElseWithoutErrorUpdate =>
+        wasVisited,
+      UpdateStatus.yes => true,
+    };
+
+    final shouldUpdateStatus = switch (updateStatus) {
+      UpdateStatus.no => false,
+      UpdateStatus.ifPathAlreadyVisited => wasVisited,
+      UpdateStatus.ifPathAlreadyVisitedOrElseWithoutErrorUpdate ||
+      UpdateStatus.yes =>
+        true,
+    };
+
+    if (shouldUpdateStatus) {
+      if (!wasVisited) {
+        markPathAsVisited(path: path, updateErrors: shouldUpdateErrors);
+      } else {
+        shouldUpdateErrors ? _updateErrors() : _statusCubit.setInProgress();
+      }
 
       onStatusUpdate?.call(_root, state);
     }
@@ -207,7 +221,9 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   /// Marks the node at this path as visited by the user.
   /// Before submission, only visited nodes show errors.
-  void markPathAsVisited({required String path}) {
+  ///
+  /// Return false if the path was already visited.
+  bool markPathAsVisited({required String path, bool updateErrors = true}) {
     final newMap = Map<String, dynamic>.from(state);
     final visitedPaths = Set<String>.from(
       newMap['/__wo_reserved_visited_paths'] as Iterable<String>? ?? {},
@@ -215,7 +231,10 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     if (visitedPaths.add(path)) {
       newMap['/__wo_reserved_visited_paths'] = visitedPaths.toList();
       emit(newMap);
-      _updateErrors();
+      updateErrors ? _updateErrors() : _statusCubit.setInProgress();
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -372,7 +391,12 @@ typedef OnSubmitErrorDef = void Function(
 
 /// Use this if you don't want to trigger error validations
 /// or if you want to keep the previous status.
-enum UpdateStatus { no, ifPathAlreadyVisited, yes }
+enum UpdateStatus {
+  no,
+  ifPathAlreadyVisited,
+  ifPathAlreadyVisitedOrElseWithoutErrorUpdate,
+  yes,
+}
 
 class WoForm extends StatelessWidget {
   WoForm({
