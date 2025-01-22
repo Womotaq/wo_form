@@ -187,10 +187,14 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     };
 
     if (shouldUpdateStatus) {
-      if (!wasVisited) {
-        markPathAsVisited(path: path, updateErrors: shouldUpdateErrors);
+      if (shouldUpdateErrors) {
+        if (!wasVisited) {
+          markPathAsVisited(path: path);
+        } else {
+          _updateErrors();
+        }
       } else {
-        shouldUpdateErrors ? _updateErrors() : _statusCubit.setInProgress();
+        _statusCubit.setInProgress();
       }
 
       onStatusUpdate?.call(_root, state);
@@ -223,7 +227,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   /// Before submission, only visited nodes show errors.
   ///
   /// Return false if the path was already visited.
-  bool markPathAsVisited({required String path, bool updateErrors = true}) {
+  bool markPathAsVisited({required String path}) {
     final newMap = Map<String, dynamic>.from(state);
     final visitedPaths = Set<String>.from(
       newMap['/__wo_reserved_visited_paths'] as Iterable<String>? ?? {},
@@ -231,7 +235,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     if (visitedPaths.add(path)) {
       newMap['/__wo_reserved_visited_paths'] = visitedPaths.toList();
       emit(newMap);
-      updateErrors ? _updateErrors() : _statusCubit.setInProgress();
+      _updateErrors();
       return true;
     } else {
       return false;
