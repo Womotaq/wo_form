@@ -423,6 +423,8 @@ class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
     @JsonKey(includeFromJson: false, includeToJson: false)
     Widget Function(T?)? valueBuilder,
     @JsonKey(includeFromJson: false, includeToJson: false)
+    Widget Function(T?)? selectedBuilder,
+    @JsonKey(includeFromJson: false, includeToJson: false)
     Widget? Function(T)? helpValueBuilder,
     @JsonKey(includeFromJson: false, includeToJson: false)
     double Function(String query, T value)? searcher,

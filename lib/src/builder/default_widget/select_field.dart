@@ -77,6 +77,7 @@ class SelectField<T> extends StatelessWidget {
             onSelected: data.onValueChanged == null ? null : onUniqueChoice,
             selectedValue: selectedValues.firstOrNull,
             valueBuilder: data.uiSettings.valueBuilder,
+            selectedBuilder: data.uiSettings.selectedBuilder,
             helpValueBuilder: data.uiSettings.helpValueBuilder,
             hintText: data.uiSettings.hintText,
             searcher: data.uiSettings.searcher,
