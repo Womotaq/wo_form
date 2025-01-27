@@ -34,7 +34,7 @@ mixin _$Condition {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            String path, Object? isEqualTo, Object? isNotEqualTo)
+            String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull)
         value,
     required TResult Function(
             @ConditionsListConverter() List<Condition> conditions)
@@ -46,7 +46,8 @@ mixin _$Condition {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String path, Object? isEqualTo, Object? isNotEqualTo)?
+    TResult? Function(
+            String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull)?
         value,
     TResult? Function(@ConditionsListConverter() List<Condition> conditions)?
         and,
@@ -56,7 +57,8 @@ mixin _$Condition {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String path, Object? isEqualTo, Object? isNotEqualTo)?
+    TResult Function(
+            String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull)?
         value,
     TResult Function(@ConditionsListConverter() List<Condition> conditions)?
         and,
@@ -117,7 +119,8 @@ abstract class _$$ConditionValueImplCopyWith<$Res> {
           $Res Function(_$ConditionValueImpl) then) =
       __$$ConditionValueImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String path, Object? isEqualTo, Object? isNotEqualTo});
+  $Res call(
+      {String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull});
 }
 
 /// @nodoc
@@ -136,6 +139,7 @@ class __$$ConditionValueImplCopyWithImpl<$Res>
     Object? path = null,
     Object? isEqualTo = freezed,
     Object? isNotEqualTo = freezed,
+    Object? isNull = freezed,
   }) {
     return _then(_$ConditionValueImpl(
       path: null == path
@@ -145,6 +149,10 @@ class __$$ConditionValueImplCopyWithImpl<$Res>
       isEqualTo: freezed == isEqualTo ? _value.isEqualTo : isEqualTo,
       isNotEqualTo:
           freezed == isNotEqualTo ? _value.isNotEqualTo : isNotEqualTo,
+      isNull: freezed == isNull
+          ? _value.isNull
+          : isNull // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -156,11 +164,13 @@ class _$ConditionValueImpl extends ConditionValue {
       {required this.path,
       this.isEqualTo,
       this.isNotEqualTo,
+      this.isNull,
       final String? $type})
       : assert(() {
           final operators = [
             isEqualTo,
             isNotEqualTo,
+            isNull,
           ];
           final operatorsUsed = operators.where((e) => e != null).length;
           return operatorsUsed == 1;
@@ -177,13 +187,15 @@ class _$ConditionValueImpl extends ConditionValue {
   final Object? isEqualTo;
   @override
   final Object? isNotEqualTo;
+  @override
+  final bool? isNull;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'Condition.value(path: $path, isEqualTo: $isEqualTo, isNotEqualTo: $isNotEqualTo)';
+    return 'Condition.value(path: $path, isEqualTo: $isEqualTo, isNotEqualTo: $isNotEqualTo, isNull: $isNull)';
   }
 
   @override
@@ -194,7 +206,8 @@ class _$ConditionValueImpl extends ConditionValue {
             (identical(other.path, path) || other.path == path) &&
             const DeepCollectionEquality().equals(other.isEqualTo, isEqualTo) &&
             const DeepCollectionEquality()
-                .equals(other.isNotEqualTo, isNotEqualTo));
+                .equals(other.isNotEqualTo, isNotEqualTo) &&
+            (identical(other.isNull, isNull) || other.isNull == isNull));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -203,7 +216,8 @@ class _$ConditionValueImpl extends ConditionValue {
       runtimeType,
       path,
       const DeepCollectionEquality().hash(isEqualTo),
-      const DeepCollectionEquality().hash(isNotEqualTo));
+      const DeepCollectionEquality().hash(isNotEqualTo),
+      isNull);
 
   /// Create a copy of Condition
   /// with the given fields replaced by the non-null parameter values.
@@ -218,7 +232,7 @@ class _$ConditionValueImpl extends ConditionValue {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            String path, Object? isEqualTo, Object? isNotEqualTo)
+            String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull)
         value,
     required TResult Function(
             @ConditionsListConverter() List<Condition> conditions)
@@ -227,26 +241,28 @@ class _$ConditionValueImpl extends ConditionValue {
             @ConditionsListConverter() List<Condition> conditions)
         or,
   }) {
-    return value(path, isEqualTo, isNotEqualTo);
+    return value(path, isEqualTo, isNotEqualTo, isNull);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String path, Object? isEqualTo, Object? isNotEqualTo)?
+    TResult? Function(
+            String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull)?
         value,
     TResult? Function(@ConditionsListConverter() List<Condition> conditions)?
         and,
     TResult? Function(@ConditionsListConverter() List<Condition> conditions)?
         or,
   }) {
-    return value?.call(path, isEqualTo, isNotEqualTo);
+    return value?.call(path, isEqualTo, isNotEqualTo, isNull);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String path, Object? isEqualTo, Object? isNotEqualTo)?
+    TResult Function(
+            String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull)?
         value,
     TResult Function(@ConditionsListConverter() List<Condition> conditions)?
         and,
@@ -254,7 +270,7 @@ class _$ConditionValueImpl extends ConditionValue {
     required TResult orElse(),
   }) {
     if (value != null) {
-      return value(path, isEqualTo, isNotEqualTo);
+      return value(path, isEqualTo, isNotEqualTo, isNull);
     }
     return orElse();
   }
@@ -305,7 +321,8 @@ abstract class ConditionValue extends Condition {
   factory ConditionValue(
       {required final String path,
       final Object? isEqualTo,
-      final Object? isNotEqualTo}) = _$ConditionValueImpl;
+      final Object? isNotEqualTo,
+      final bool? isNull}) = _$ConditionValueImpl;
   ConditionValue._() : super._();
 
   factory ConditionValue.fromJson(Map<String, dynamic> json) =
@@ -314,6 +331,7 @@ abstract class ConditionValue extends Condition {
   String get path;
   Object? get isEqualTo;
   Object? get isNotEqualTo;
+  bool? get isNull;
 
   /// Create a copy of Condition
   /// with the given fields replaced by the non-null parameter values.
@@ -411,7 +429,7 @@ class _$ConditionAndImpl extends ConditionAnd {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            String path, Object? isEqualTo, Object? isNotEqualTo)
+            String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull)
         value,
     required TResult Function(
             @ConditionsListConverter() List<Condition> conditions)
@@ -426,7 +444,8 @@ class _$ConditionAndImpl extends ConditionAnd {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String path, Object? isEqualTo, Object? isNotEqualTo)?
+    TResult? Function(
+            String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull)?
         value,
     TResult? Function(@ConditionsListConverter() List<Condition> conditions)?
         and,
@@ -439,7 +458,8 @@ class _$ConditionAndImpl extends ConditionAnd {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String path, Object? isEqualTo, Object? isNotEqualTo)?
+    TResult Function(
+            String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull)?
         value,
     TResult Function(@ConditionsListConverter() List<Condition> conditions)?
         and,
@@ -602,7 +622,7 @@ class _$ConditionOrImpl extends ConditionOr {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            String path, Object? isEqualTo, Object? isNotEqualTo)
+            String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull)
         value,
     required TResult Function(
             @ConditionsListConverter() List<Condition> conditions)
@@ -617,7 +637,8 @@ class _$ConditionOrImpl extends ConditionOr {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String path, Object? isEqualTo, Object? isNotEqualTo)?
+    TResult? Function(
+            String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull)?
         value,
     TResult? Function(@ConditionsListConverter() List<Condition> conditions)?
         and,
@@ -630,7 +651,8 @@ class _$ConditionOrImpl extends ConditionOr {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String path, Object? isEqualTo, Object? isNotEqualTo)?
+    TResult Function(
+            String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull)?
         value,
     TResult Function(@ConditionsListConverter() List<Condition> conditions)?
         and,

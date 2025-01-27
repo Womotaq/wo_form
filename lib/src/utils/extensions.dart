@@ -84,6 +84,7 @@ extension WoFormValuesX on WoFormValues {
           path: final path,
           isEqualTo: final isEqualTo,
           isNotEqualTo: final isNotEqualTo,
+          isNull: final isNull,
         ):
         final value = getValue(path);
         if (isEqualTo != null) {
@@ -99,6 +100,9 @@ extension WoFormValuesX on WoFormValues {
           } else {
             return isNotEqualTo != value;
           }
+        }
+        if (isNull != null) {
+          return (value == null) == isNull;
         }
 
         throw AssertionError('Exactly one operator must be specified');

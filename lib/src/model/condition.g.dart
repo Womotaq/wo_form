@@ -11,6 +11,7 @@ _$ConditionValueImpl _$$ConditionValueImplFromJson(Map<String, dynamic> json) =>
       path: json['path'] as String,
       isEqualTo: json['isEqualTo'],
       isNotEqualTo: json['isNotEqualTo'],
+      isNull: json['isNull'] as bool?,
       $type: json['runtimeType'] as String?,
     );
 
@@ -20,6 +21,7 @@ Map<String, dynamic> _$$ConditionValueImplToJson(
       'path': instance.path,
       'isEqualTo': instance.isEqualTo,
       'isNotEqualTo': instance.isNotEqualTo,
+      'isNull': instance.isNull,
       'runtimeType': instance.$type,
     };
 

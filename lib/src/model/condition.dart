@@ -10,6 +10,7 @@ sealed class Condition with _$Condition {
         '  final operators = ['
         '    isEqualTo,'
         '    isNotEqualTo,'
+        '    isNull,'
         '  ];'
         '  final operatorsUsed = operators.where((e) => e != null).length;'
         '  return operatorsUsed == 1; '
@@ -20,6 +21,9 @@ sealed class Condition with _$Condition {
     required String path,
     Object? isEqualTo,
     Object? isNotEqualTo,
+
+    /// The value is null even if the path is not present in the list of paths
+    bool? isNull,
   }) = ConditionValue;
 
   const factory Condition.and(
