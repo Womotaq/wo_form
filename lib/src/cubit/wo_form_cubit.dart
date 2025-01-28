@@ -133,7 +133,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
         path: tempSubmitData.$2,
         values: state,
       )!;
-    } catch (e) {
+    } on Exception catch (_) {
       throw Exception('No node found at path ${tempSubmitData.$2}');
     }
   }
@@ -302,7 +302,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
           _statusCubit.setInProgress();
         }
       }
-    } catch (e, s) {
+    } on Exception catch (e, s) {
       _statusCubit._setSubmitError(error: e, stackTrace: s);
     }
 

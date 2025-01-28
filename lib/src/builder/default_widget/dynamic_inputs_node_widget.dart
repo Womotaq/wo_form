@@ -127,7 +127,7 @@ class DynamicInputsNodeWidget extends StatelessWidget {
                         newValues.removeAt(oldIndex),
                       );
                       data.onValueChanged?.call(newValues);
-                    } catch (_) {}
+                    } on Exception catch (_) {}
                   },
             children: children,
           )
