@@ -12,7 +12,7 @@ class SubmitButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loadingIndicator =
-        context.select((WoFormStatusCubit c) => c.state is SubmittingStatus)
+        context.select((WoFormStatusCubit? c) => c?.state is SubmittingStatus)
             ? SizedBox.square(
                 dimension: 12,
                 child: CircularProgressIndicator(
