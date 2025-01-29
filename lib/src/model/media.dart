@@ -44,9 +44,7 @@ sealed class Media with _$Media {
         MediaUrl() =>
           await context.read<MediaService>().typeOfMediaUrl(this as MediaUrl),
         MediaFile(file: final file) =>
-          file.mimeType?.startsWith('video') ?? false
-              ? MediaType.video
-              : MediaType.image,
+          file.isVideo ? MediaType.video : MediaType.image,
       };
 
   Future<MediaUrl> uploaded({
@@ -112,6 +110,9 @@ sealed class MediaImportMethod with _$MediaImportMethod {
 
   const factory MediaImportMethod.url() = MediaImportMethodUrl;
 
+  const factory MediaImportMethod.custom({required String id}) =
+      MediaImportMethodCustom;
+
   const MediaImportMethod._();
 
   factory MediaImportMethod.fromJson(Map<String, dynamic> json) =>
@@ -122,3 +123,25 @@ sealed class MediaImportMethod with _$MediaImportMethod {
 }
 
 enum MediaPickSource { gallery, camera }
+
+extension XFileX on XFile {
+  bool get isVideo {
+    if (mimeType?.contains('video') ?? false) return true;
+
+    final extension = name.split('.').lastOrNull;
+    if (extension == null) return false;
+
+    return [
+      'mp4',
+      'mkv',
+      'avi',
+      'mov',
+      'wmv',
+      'flv',
+      'webm',
+      '3gp',
+      'mpeg',
+      'ogv',
+    ].contains(extension);
+  }
+}

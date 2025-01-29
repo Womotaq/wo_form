@@ -2664,6 +2664,9 @@ mixin _$SelectInputUiSettings<T> {
   @JsonKey(includeFromJson: false, includeToJson: false)
   Widget Function(T?)? get valueBuilder => throw _privateConstructorUsedError;
   @JsonKey(includeFromJson: false, includeToJson: false)
+  Widget Function(T?)? get selectedBuilder =>
+      throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
   Widget? Function(T)? get helpValueBuilder =>
       throw _privateConstructorUsedError;
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2706,6 +2709,8 @@ abstract class $SelectInputUiSettingsCopyWith<T, $Res> {
       @JsonKey(includeFromJson: false, includeToJson: false)
       Widget Function(T?)? valueBuilder,
       @JsonKey(includeFromJson: false, includeToJson: false)
+      Widget Function(T?)? selectedBuilder,
+      @JsonKey(includeFromJson: false, includeToJson: false)
       Widget? Function(T)? helpValueBuilder,
       @JsonKey(includeFromJson: false, includeToJson: false)
       double Function(String, T)? searcher,
@@ -2741,6 +2746,7 @@ class _$SelectInputUiSettingsCopyWithImpl<T, $Res,
     Object? childrenVisibility = freezed,
     Object? labelFlex = freezed,
     Object? valueBuilder = freezed,
+    Object? selectedBuilder = freezed,
     Object? helpValueBuilder = freezed,
     Object? searcher = freezed,
     Object? searchScreenBuilder = freezed,
@@ -2772,6 +2778,10 @@ class _$SelectInputUiSettingsCopyWithImpl<T, $Res,
       valueBuilder: freezed == valueBuilder
           ? _value.valueBuilder
           : valueBuilder // ignore: cast_nullable_to_non_nullable
+              as Widget Function(T?)?,
+      selectedBuilder: freezed == selectedBuilder
+          ? _value.selectedBuilder
+          : selectedBuilder // ignore: cast_nullable_to_non_nullable
               as Widget Function(T?)?,
       helpValueBuilder: freezed == helpValueBuilder
           ? _value.helpValueBuilder
@@ -2819,6 +2829,8 @@ abstract class _$$SelectInputUiSettingsImplCopyWith<T, $Res>
       @JsonKey(includeFromJson: false, includeToJson: false)
       Widget Function(T?)? valueBuilder,
       @JsonKey(includeFromJson: false, includeToJson: false)
+      Widget Function(T?)? selectedBuilder,
+      @JsonKey(includeFromJson: false, includeToJson: false)
       Widget? Function(T)? helpValueBuilder,
       @JsonKey(includeFromJson: false, includeToJson: false)
       double Function(String, T)? searcher,
@@ -2853,6 +2865,7 @@ class __$$SelectInputUiSettingsImplCopyWithImpl<T, $Res>
     Object? childrenVisibility = freezed,
     Object? labelFlex = freezed,
     Object? valueBuilder = freezed,
+    Object? selectedBuilder = freezed,
     Object? helpValueBuilder = freezed,
     Object? searcher = freezed,
     Object? searchScreenBuilder = freezed,
@@ -2884,6 +2897,10 @@ class __$$SelectInputUiSettingsImplCopyWithImpl<T, $Res>
       valueBuilder: freezed == valueBuilder
           ? _value.valueBuilder
           : valueBuilder // ignore: cast_nullable_to_non_nullable
+              as Widget Function(T?)?,
+      selectedBuilder: freezed == selectedBuilder
+          ? _value.selectedBuilder
+          : selectedBuilder // ignore: cast_nullable_to_non_nullable
               as Widget Function(T?)?,
       helpValueBuilder: freezed == helpValueBuilder
           ? _value.helpValueBuilder
@@ -2924,6 +2941,8 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
       this.labelFlex,
       @JsonKey(includeFromJson: false, includeToJson: false) this.valueBuilder,
       @JsonKey(includeFromJson: false, includeToJson: false)
+      this.selectedBuilder,
+      @JsonKey(includeFromJson: false, includeToJson: false)
       this.helpValueBuilder,
       @JsonKey(includeFromJson: false, includeToJson: false) this.searcher,
       @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2959,6 +2978,9 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
   final Widget Function(T?)? valueBuilder;
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
+  final Widget Function(T?)? selectedBuilder;
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   final Widget? Function(T)? helpValueBuilder;
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2978,7 +3000,7 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
 
   @override
   String toString() {
-    return 'SelectInputUiSettings<$T>(labelText: $labelText, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, labelFlex: $labelFlex, valueBuilder: $valueBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher, searchScreenBuilder: $searchScreenBuilder, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder)';
+    return 'SelectInputUiSettings<$T>(labelText: $labelText, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, labelFlex: $labelFlex, valueBuilder: $valueBuilder, selectedBuilder: $selectedBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher, searchScreenBuilder: $searchScreenBuilder, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder)';
   }
 
   @override
@@ -2998,6 +3020,8 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
                 other.labelFlex == labelFlex) &&
             (identical(other.valueBuilder, valueBuilder) ||
                 other.valueBuilder == valueBuilder) &&
+            (identical(other.selectedBuilder, selectedBuilder) ||
+                other.selectedBuilder == selectedBuilder) &&
             (identical(other.helpValueBuilder, helpValueBuilder) ||
                 other.helpValueBuilder == helpValueBuilder) &&
             (identical(other.searcher, searcher) ||
@@ -3022,6 +3046,7 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
       childrenVisibility,
       labelFlex,
       valueBuilder,
+      selectedBuilder,
       helpValueBuilder,
       searcher,
       searchScreenBuilder,
@@ -3055,6 +3080,8 @@ abstract class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
           final int? labelFlex,
           @JsonKey(includeFromJson: false, includeToJson: false)
           final Widget Function(T?)? valueBuilder,
+          @JsonKey(includeFromJson: false, includeToJson: false)
+          final Widget Function(T?)? selectedBuilder,
           @JsonKey(includeFromJson: false, includeToJson: false)
           final Widget? Function(T)? helpValueBuilder,
           @JsonKey(includeFromJson: false, includeToJson: false)
@@ -3094,6 +3121,9 @@ abstract class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   Widget Function(T?)? get valueBuilder;
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  Widget Function(T?)? get selectedBuilder;
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   Widget? Function(T)? get helpValueBuilder;

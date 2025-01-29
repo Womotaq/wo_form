@@ -100,3 +100,17 @@ Map<String, dynamic> _$$MediaImportMethodUrlImplToJson(
     <String, dynamic>{
       'runtimeType': instance.$type,
     };
+
+_$MediaImportMethodCustomImpl _$$MediaImportMethodCustomImplFromJson(
+        Map<String, dynamic> json) =>
+    _$MediaImportMethodCustomImpl(
+      id: json['id'] as String,
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$MediaImportMethodCustomImplToJson(
+        _$MediaImportMethodCustomImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'runtimeType': instance.$type,
+    };
