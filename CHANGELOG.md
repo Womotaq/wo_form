@@ -1,3 +1,10 @@
+## 1.3.0
+
+- Added MediaInput, DateTimeInput and DurationInput
+- Added SubmitButtonPosition.floating
+- Moved example to wo_form_example
+- Minor bug fixes and various improvements
+
 ## 1.2.1
 
 - Solved minor issue with pathIsVisited
