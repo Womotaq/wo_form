@@ -5,9 +5,10 @@ import 'package:wo_form/src/_export.dart';
 /// Default submt button. Can be overriden by submitButtonBuilder from
 /// [WoFormUiSettings] or using [WoFormTheme].
 class SubmitButton extends StatelessWidget {
-  const SubmitButton(this.data, {super.key});
+  const SubmitButton(this.data, {this.margin, super.key});
 
   final SubmitButtonData data;
+  final EdgeInsets? margin;
 
   @override
   Widget build(BuildContext context) {
@@ -63,17 +64,18 @@ class SubmitButton extends StatelessWidget {
         return button;
       case SubmitButtonPosition.body:
         return Padding(
-          padding: const EdgeInsets.only(
-            top: 32,
-            left: 16,
-            right: 16,
-            bottom: 12,
-          ),
+          padding: margin ??
+              const EdgeInsets.only(
+                top: 32,
+                left: 16,
+                right: 16,
+                bottom: 12,
+              ),
           child: button,
         );
       case SubmitButtonPosition.bottomBar:
         return Padding(
-          padding: const EdgeInsets.all(16),
+          padding: margin ?? const EdgeInsets.all(16),
           child: button,
         );
       case SubmitButtonPosition.floating:

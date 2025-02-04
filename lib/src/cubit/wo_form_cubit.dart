@@ -302,7 +302,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
           _statusCubit.setInProgress();
         }
       }
-    } on Exception catch (e, s) {
+    } catch (e, s) {
       _statusCubit._setSubmitError(error: e, stackTrace: s);
     }
 
