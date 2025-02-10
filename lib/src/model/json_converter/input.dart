@@ -30,7 +30,7 @@ class InputNullableConverter
       } on CheckedFromJsonException {
         return WoFormNode.fromJson(json);
       }
-    } on Exception catch (_) {
+    } catch (_) {
       return null;
     }
   }

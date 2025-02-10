@@ -18,7 +18,7 @@ class FutureNodeBuilder<T> extends StatelessWidget {
     try {
       final data = await child.future;
       onSnapshotChanged(AsyncSnapshot.withData(ConnectionState.done, data));
-    } on Exception catch (error) {
+    } catch (error) {
       onSnapshotChanged(AsyncSnapshot.withError(ConnectionState.done, error));
     }
   }
