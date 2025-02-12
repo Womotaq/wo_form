@@ -256,7 +256,7 @@ class SelectField<T> extends StatelessWidget {
     data.onValueChanged?.call(
       value == null
           ? <T>[]
-          : data.value?.contains(value) ?? false
+          : (data.value?.contains(value) ?? false) && (data.input.minCount < 1)
               ? <T>[]
               : [value],
     );
