@@ -50,11 +50,17 @@ sealed class Media with _$Media {
   Future<MediaUrl> uploaded({
     required MediaService mediaService,
     required String path,
+    int? maxSize,
+    bool addFileNameToPath = false,
   }) async =>
       switch (this) {
         final MediaUrl media => media,
-        final MediaFile media =>
-          await mediaService.upload(media: media, path: path),
+        final MediaFile media => await mediaService.upload(
+            media: media,
+            path: path,
+            maxSize: maxSize,
+            addFileNameToPath: addFileNameToPath,
+          ),
       };
 }
 
