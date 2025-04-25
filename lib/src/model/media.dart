@@ -1,4 +1,5 @@
 import 'package:cross_file/cross_file.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -33,7 +34,8 @@ sealed class Media with _$Media {
       };
   Uri get uri => switch (this) {
         final MediaUrl media => Uri.parse(media.url),
-        final MediaFile media => Uri.file(media.file.path),
+        final MediaFile media =>
+          kIsWeb ? Uri.parse(media.file.path) : Uri.file(media.file.path),
       };
   String? get name => switch (this) {
         final MediaUrl media => media.url.split('/').lastOrNull,
