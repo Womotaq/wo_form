@@ -45,7 +45,7 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
     Navigator.push(
       context,
       MaterialPageRoute<void>(
-        builder: (context) => RepositoryProvider.value(
+        builder: (_) => RepositoryProvider.value(
           value: context.read<RootNode>(),
           child: MultiBlocProvider(
             providers: [

@@ -181,7 +181,7 @@ class SearchField<T> extends StatelessWidget {
             values: values,
             tileBuilder: tileBuilder,
             onSelect: (value) {
-              Navigator.of(context).pop();
+              Navigator.of(popoverContext).pop();
               onSelected!(value);
             },
             searcher: searcher,
