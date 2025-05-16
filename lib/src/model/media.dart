@@ -82,7 +82,7 @@ enum MediaType {
 }
 
 @freezed
-class MediaImportSettings with _$MediaImportSettings {
+abstract class MediaImportSettings with _$MediaImportSettings {
   // @Assert(
   //   'quality >= 0 && quality <= 100',
   //   'quality must be between 0 and 100 (both included).',

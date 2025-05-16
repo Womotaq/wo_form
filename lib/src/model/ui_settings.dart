@@ -13,7 +13,7 @@ typedef BooleanFieldBuilderDef = Widget Function(
 );
 
 @freezed
-class BooleanInputUiSettings with _$BooleanInputUiSettings {
+abstract class BooleanInputUiSettings with _$BooleanInputUiSettings {
   const factory BooleanInputUiSettings({
     String? labelText,
     String? helperText,
@@ -67,7 +67,7 @@ typedef PickTimeDef = Future<TimeOfDay?> Function({
 });
 
 @freezed
-class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
+abstract class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
   const factory DateTimeInputUiSettings({
     String? dateFormat,
     String? timeFormat,
@@ -146,7 +146,7 @@ enum DurationEditMode {
 }
 
 @freezed
-class DurationInputUiSettings with _$DurationInputUiSettings {
+abstract class DurationInputUiSettings with _$DurationInputUiSettings {
   const factory DurationInputUiSettings({
     String? labelText,
     String? helperText,
@@ -219,7 +219,7 @@ typedef GenerateIdDef = String Function();
 typedef OnDynamicInputDeletionDef = void Function(VoidCallback cancel);
 
 @freezed
-class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
+abstract class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
   const factory DynamicInputsNodeUiSettings({
     String? labelText,
     String? helperText,
@@ -258,7 +258,7 @@ class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
 }
 
 @freezed
-class DynamicInputUiSettings with _$DynamicInputUiSettings {
+abstract class DynamicInputUiSettings with _$DynamicInputUiSettings {
   const factory DynamicInputUiSettings({
     String? labelText,
     String? helperText,
@@ -294,7 +294,7 @@ typedef InputNodeWidgetBuilderDef = Widget Function(
 typedef HeaderBuilderDef = Widget Function(WoFormHeaderData data);
 
 @freezed
-class InputsNodeUiSettings with _$InputsNodeUiSettings {
+abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
   const factory InputsNodeUiSettings({
     String? labelText,
     String? labelTextWhenChildrenHidden,
@@ -338,7 +338,7 @@ typedef MediaFieldBuilderDef = Widget Function(
 );
 
 @freezed
-class MediaInputUiSettings with _$MediaInputUiSettings {
+abstract class MediaInputUiSettings with _$MediaInputUiSettings {
   const factory MediaInputUiSettings({
     String? addMediaText,
     int? fieldHeight,
@@ -367,7 +367,7 @@ typedef NumFieldBuilderDef = Widget Function(
 );
 
 @freezed
-class NumInputUiSettings with _$NumInputUiSettings {
+abstract class NumInputUiSettings with _$NumInputUiSettings {
   const factory NumInputUiSettings({
     String? labelText,
     String? helperText,
@@ -401,7 +401,7 @@ typedef SelectFieldBuilderDef<T> = Widget Function(
 typedef InputHeaderBuilderDef = Widget Function(WoFormInputHeaderData data);
 
 @freezed
-class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
+abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
   /// Defines how the SelectInput should be rendered.
   ///
   /// searcher is a function that returns a double between 0 and 1,
@@ -468,7 +468,7 @@ typedef StringFieldBuilderDef = Widget Function(
 );
 
 @freezed
-class StringInputUiSettings with _$StringInputUiSettings {
+abstract class StringInputUiSettings with _$StringInputUiSettings {
   const factory StringInputUiSettings({
     String? labelText,
     String? hintText,
@@ -616,7 +616,7 @@ enum WoFormTitlePosition { header, appBar }
 typedef SubmitButtonBuilderDef = Widget Function(SubmitButtonData data);
 
 @freezed
-class WoFormUiSettings with _$WoFormUiSettings {
+abstract class WoFormUiSettings with _$WoFormUiSettings {
   const factory WoFormUiSettings({
     @Default('') String titleText,
     @Default(WoFormTitlePosition.header) WoFormTitlePosition titlePosition,

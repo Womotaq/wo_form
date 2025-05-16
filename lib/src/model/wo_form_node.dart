@@ -64,7 +64,7 @@ mixin WoFormNodeMixin {
 }
 
 @freezed
-class DynamicInputTemplate with _$DynamicInputTemplate {
+abstract class DynamicInputTemplate with _$DynamicInputTemplate {
   @Assert(
     '(child == null) != (childBuilder == null)',
     'One of child or childBuilder must be specified',
@@ -664,7 +664,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
 }
 
 @freezed
-class FutureNode<T> with _$FutureNode<T>, WoFormNodeMixin {
+abstract class FutureNode<T> with _$FutureNode<T>, WoFormNodeMixin {
   const factory FutureNode({
     required String id,
     required Future<T>? future,
@@ -822,7 +822,7 @@ class FutureNode<T> with _$FutureNode<T>, WoFormNodeMixin {
 }
 
 @freezed
-class RootNode with _$RootNode, WoFormNodeMixin {
+abstract class RootNode with _$RootNode, WoFormNodeMixin {
   const factory RootNode({
     @Default('#') String id,
     @InputsListConverter() @Default([]) List<WoFormNodeMixin> children,

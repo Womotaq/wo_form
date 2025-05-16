@@ -187,6 +187,8 @@ class _$ConditionValueImpl extends ConditionValue {
   final Object? isEqualTo;
   @override
   final Object? isNotEqualTo;
+
+  /// The value is null even if the path is not present in the list of paths
   @override
   final bool? isNull;
 
@@ -331,6 +333,8 @@ abstract class ConditionValue extends Condition {
   String get path;
   Object? get isEqualTo;
   Object? get isNotEqualTo;
+
+  /// The value is null even if the path is not present in the list of paths
   bool? get isNull;
 
   /// Create a copy of Condition

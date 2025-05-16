@@ -5696,13 +5696,14 @@ mixin _$SelectInput<T> {
   int? get maxCount => throw _privateConstructorUsedError;
   int get minCount => throw _privateConstructorUsedError;
   List<T>? get initialValues => throw _privateConstructorUsedError;
-  List<T> get availibleValues =>
-      throw _privateConstructorUsedError; // idsOfAvailibleValues allows to set an identifier to each value.
-// This way, we keep the advantage of a list : the order
-// and we gain the advantage of a map : the identifiers
-// while staying jsonifiable.
-// If set, the object stored at the path of this input in WoFormValuesCubit
-// will be the id of the selected value.
+  List<T> get availibleValues => throw _privateConstructorUsedError;
+
+  /// idsOfAvailibleValues allows to set an identifier to each value.
+  /// This way, we keep the advantage of a list : the order
+  /// and we gain the advantage of a map : the identifiers
+  /// while staying jsonifiable.
+  /// If set, the object stored at the path of this input in WoFormValuesCubit
+  /// will be the id of the selected value.
   List<String>? get idsOfAvailibleValues => throw _privateConstructorUsedError;
 
   /// An optionnal callback when the value changed
@@ -6051,19 +6052,20 @@ class _$SelectInputImpl<T> extends _SelectInput<T> {
     return EqualUnmodifiableListView(_availibleValues);
   }
 
-// idsOfAvailibleValues allows to set an identifier to each value.
-// This way, we keep the advantage of a list : the order
-// and we gain the advantage of a map : the identifiers
-// while staying jsonifiable.
-// If set, the object stored at the path of this input in WoFormValuesCubit
-// will be the id of the selected value.
+  /// idsOfAvailibleValues allows to set an identifier to each value.
+  /// This way, we keep the advantage of a list : the order
+  /// and we gain the advantage of a map : the identifiers
+  /// while staying jsonifiable.
+  /// If set, the object stored at the path of this input in WoFormValuesCubit
+  /// will be the id of the selected value.
   final List<String>? _idsOfAvailibleValues;
-// idsOfAvailibleValues allows to set an identifier to each value.
-// This way, we keep the advantage of a list : the order
-// and we gain the advantage of a map : the identifiers
-// while staying jsonifiable.
-// If set, the object stored at the path of this input in WoFormValuesCubit
-// will be the id of the selected value.
+
+  /// idsOfAvailibleValues allows to set an identifier to each value.
+  /// This way, we keep the advantage of a list : the order
+  /// and we gain the advantage of a map : the identifiers
+  /// while staying jsonifiable.
+  /// If set, the object stored at the path of this input in WoFormValuesCubit
+  /// will be the id of the selected value.
   @override
   List<String>? get idsOfAvailibleValues {
     final value = _idsOfAvailibleValues;
@@ -6201,13 +6203,14 @@ abstract class _SelectInput<T> extends SelectInput<T> {
   @override
   List<T>? get initialValues;
   @override
-  List<T>
-      get availibleValues; // idsOfAvailibleValues allows to set an identifier to each value.
-// This way, we keep the advantage of a list : the order
-// and we gain the advantage of a map : the identifiers
-// while staying jsonifiable.
-// If set, the object stored at the path of this input in WoFormValuesCubit
-// will be the id of the selected value.
+  List<T> get availibleValues;
+
+  /// idsOfAvailibleValues allows to set an identifier to each value.
+  /// This way, we keep the advantage of a list : the order
+  /// and we gain the advantage of a map : the identifiers
+  /// while staying jsonifiable.
+  /// If set, the object stored at the path of this input in WoFormValuesCubit
+  /// will be the id of the selected value.
   @override
   List<String>? get idsOfAvailibleValues;
 

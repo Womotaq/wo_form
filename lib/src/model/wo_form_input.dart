@@ -555,19 +555,21 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
 
 @freezed
 @JsonSerializable(genericArgumentFactories: true)
-class SelectInput<T> with _$SelectInput<T>, WoFormNodeMixin, WoFormInputMixin {
+abstract class SelectInput<T>
+    with _$SelectInput<T>, WoFormNodeMixin, WoFormInputMixin {
   const factory SelectInput({
     required String id,
     required int? maxCount,
     @Default(0) int minCount,
     List<T>? initialValues,
     @Default([]) List<T> availibleValues,
-    // idsOfAvailibleValues allows to set an identifier to each value.
-    // This way, we keep the advantage of a list : the order
-    // and we gain the advantage of a map : the identifiers
-    // while staying jsonifiable.
-    // If set, the object stored at the path of this input in WoFormValuesCubit
-    // will be the id of the selected value.
+
+    /// idsOfAvailibleValues allows to set an identifier to each value.
+    /// This way, we keep the advantage of a list : the order
+    /// and we gain the advantage of a map : the identifiers
+    /// while staying jsonifiable.
+    /// If set, the object stored at the path of this input in WoFormValuesCubit
+    /// will be the id of the selected value.
     List<String>? idsOfAvailibleValues,
 
     /// An optionnal callback when the value changed
@@ -601,6 +603,8 @@ class SelectInput<T> with _$SelectInput<T>, WoFormNodeMixin, WoFormInputMixin {
     Map<String, dynamic> json,
     T Function(Object? json) fromJsonT,
   ) {
+    // doesn't work on expression method
+    // https://github.com/rrousselGit/freezed/issues/463
     return _$SelectInputFromJson(json, fromJsonT);
   }
 

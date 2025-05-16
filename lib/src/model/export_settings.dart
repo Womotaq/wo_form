@@ -18,7 +18,7 @@ enum ExportType {
 }
 
 @freezed
-class ExportSettings with _$ExportSettings {
+abstract class ExportSettings with _$ExportSettings {
   const factory ExportSettings({
     @Default({}) Map<String, dynamic> metadata,
     @Default(ExportType.map) ExportType type,

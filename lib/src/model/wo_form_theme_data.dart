@@ -10,7 +10,7 @@ typedef WidgetBuilderDef = Widget Function(BuildContext context);
 typedef ScoreWidgetBuilderDef = Widget Function({required num score});
 
 @freezed
-class WoFormThemeData with _$WoFormThemeData {
+abstract class WoFormThemeData with _$WoFormThemeData {
   const factory WoFormThemeData({
     BooleanFieldBuilderDef? booleanFieldBuilder,
     DateTimeFieldBuilderDef? dateTimeFieldBuilder,

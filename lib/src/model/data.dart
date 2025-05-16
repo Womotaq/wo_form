@@ -5,7 +5,7 @@ import 'package:wo_form/wo_form.dart';
 part 'data.freezed.dart';
 
 @freezed
-class WoFormHeaderData with _$WoFormHeaderData {
+abstract class WoFormHeaderData with _$WoFormHeaderData {
   const factory WoFormHeaderData({
     String? labelText,
     String? helperText,
@@ -13,7 +13,7 @@ class WoFormHeaderData with _$WoFormHeaderData {
 }
 
 @freezed
-class WoFormInputHeaderData with _$WoFormInputHeaderData {
+abstract class WoFormInputHeaderData with _$WoFormInputHeaderData {
   const factory WoFormInputHeaderData({
     required String path,
     String? labelText,
@@ -26,7 +26,7 @@ class WoFormInputHeaderData with _$WoFormInputHeaderData {
 }
 
 @freezed
-class WoFieldData<I, T, U> with _$WoFieldData<I, T, U> {
+abstract class WoFieldData<I, T, U> with _$WoFieldData<I, T, U> {
   /// I : input
   /// T : value
   /// U : uiSettings
@@ -44,7 +44,7 @@ class WoFieldData<I, T, U> with _$WoFieldData<I, T, U> {
 }
 
 @freezed
-class SubmitButtonData with _$SubmitButtonData {
+abstract class SubmitButtonData with _$SubmitButtonData {
   const factory SubmitButtonData({
     required String? text,
     required VoidCallback? onPressed,

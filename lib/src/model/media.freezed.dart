@@ -127,7 +127,7 @@ class __$$MediaUrlImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$MediaUrlImpl extends MediaUrl {
+class _$MediaUrlImpl extends MediaUrl with DiagnosticableTreeMixin {
   const _$MediaUrlImpl({required this.url, final String? $type})
       : $type = $type ?? 'url',
         super._();
@@ -142,8 +142,16 @@ class _$MediaUrlImpl extends MediaUrl {
   final String $type;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'Media.url(url: $url)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'Media.url'))
+      ..add(DiagnosticsProperty('url', url));
   }
 
   @override
@@ -287,7 +295,7 @@ class __$$MediaFileImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$MediaFileImpl extends MediaFile {
+class _$MediaFileImpl extends MediaFile with DiagnosticableTreeMixin {
   const _$MediaFileImpl(
       {@XFileConverter() required this.file, final String? $type})
       : $type = $type ?? 'file',
@@ -304,8 +312,16 @@ class _$MediaFileImpl extends MediaFile {
   final String $type;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'Media.file(file: $file)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'Media.file'))
+      ..add(DiagnosticsProperty('file', file));
   }
 
   @override
@@ -601,7 +617,8 @@ class __$$MediaImportSettingsImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$MediaImportSettingsImpl extends _MediaImportSettings {
+class _$MediaImportSettingsImpl extends _MediaImportSettings
+    with DiagnosticableTreeMixin {
   const _$MediaImportSettingsImpl(
       {required this.type,
       @MediaImportMethodListConverter()
@@ -646,8 +663,24 @@ class _$MediaImportSettingsImpl extends _MediaImportSettings {
   final bool preferFrontCamera;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'MediaImportSettings(type: $type, methods: $methods, imageMaxHeight: $imageMaxHeight, imageMaxWidth: $imageMaxWidth, imageQuality: $imageQuality, imageRequestFullMetadata: $imageRequestFullMetadata, videoMaxDuration: $videoMaxDuration, preferFrontCamera: $preferFrontCamera)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'MediaImportSettings'))
+      ..add(DiagnosticsProperty('type', type))
+      ..add(DiagnosticsProperty('methods', methods))
+      ..add(DiagnosticsProperty('imageMaxHeight', imageMaxHeight))
+      ..add(DiagnosticsProperty('imageMaxWidth', imageMaxWidth))
+      ..add(DiagnosticsProperty('imageQuality', imageQuality))
+      ..add(DiagnosticsProperty(
+          'imageRequestFullMetadata', imageRequestFullMetadata))
+      ..add(DiagnosticsProperty('videoMaxDuration', videoMaxDuration))
+      ..add(DiagnosticsProperty('preferFrontCamera', preferFrontCamera));
   }
 
   @override
@@ -876,7 +909,8 @@ class __$$MediaImportMethodPickMediasImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$MediaImportMethodPickMediasImpl extends MediaImportMethodPickMedias {
+class _$MediaImportMethodPickMediasImpl extends MediaImportMethodPickMedias
+    with DiagnosticableTreeMixin {
   const _$MediaImportMethodPickMediasImpl(
       {required this.source, this.type, final String? $type})
       : $type = $type ?? 'pickMedias',
@@ -897,8 +931,17 @@ class _$MediaImportMethodPickMediasImpl extends MediaImportMethodPickMedias {
   final String $type;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'MediaImportMethod.pickMedias(source: $source, type: $type)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'MediaImportMethod.pickMedias'))
+      ..add(DiagnosticsProperty('source', source))
+      ..add(DiagnosticsProperty('type', type));
   }
 
   @override
@@ -1042,7 +1085,8 @@ class __$$MediaImportMethodUrlImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$MediaImportMethodUrlImpl extends MediaImportMethodUrl {
+class _$MediaImportMethodUrlImpl extends MediaImportMethodUrl
+    with DiagnosticableTreeMixin {
   const _$MediaImportMethodUrlImpl({final String? $type})
       : $type = $type ?? 'url',
         super._();
@@ -1054,8 +1098,14 @@ class _$MediaImportMethodUrlImpl extends MediaImportMethodUrl {
   final String $type;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'MediaImportMethod.url()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'MediaImportMethod.url'));
   }
 
   @override
@@ -1191,7 +1241,8 @@ class __$$MediaImportMethodCustomImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$MediaImportMethodCustomImpl extends MediaImportMethodCustom {
+class _$MediaImportMethodCustomImpl extends MediaImportMethodCustom
+    with DiagnosticableTreeMixin {
   const _$MediaImportMethodCustomImpl({required this.id, final String? $type})
       : $type = $type ?? 'custom',
         super._();
@@ -1206,8 +1257,16 @@ class _$MediaImportMethodCustomImpl extends MediaImportMethodCustom {
   final String $type;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'MediaImportMethod.custom(id: $id)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'MediaImportMethod.custom'))
+      ..add(DiagnosticsProperty('id', id));
   }
 
   @override
