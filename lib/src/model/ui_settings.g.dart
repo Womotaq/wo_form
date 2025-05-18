@@ -6,9 +6,9 @@ part of 'ui_settings.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$BooleanInputUiSettingsImpl _$$BooleanInputUiSettingsImplFromJson(
+_BooleanInputUiSettings _$BooleanInputUiSettingsFromJson(
         Map<String, dynamic> json) =>
-    _$BooleanInputUiSettingsImpl(
+    _BooleanInputUiSettings(
       labelText: json['labelText'] as String?,
       helperText: json['helperText'] as String?,
       controlType: $enumDecodeNullable(
@@ -17,8 +17,8 @@ _$BooleanInputUiSettingsImpl _$$BooleanInputUiSettingsImplFromJson(
           _$ListTileControlAffinityEnumMap, json['controlAffinity']),
     );
 
-Map<String, dynamic> _$$BooleanInputUiSettingsImplToJson(
-        _$BooleanInputUiSettingsImpl instance) =>
+Map<String, dynamic> _$BooleanInputUiSettingsToJson(
+        _BooleanInputUiSettings instance) =>
     <String, dynamic>{
       'labelText': instance.labelText,
       'helperText': instance.helperText,
@@ -38,9 +38,9 @@ const _$ListTileControlAffinityEnumMap = {
   ListTileControlAffinity.platform: 'platform',
 };
 
-_$DateTimeInputUiSettingsImpl _$$DateTimeInputUiSettingsImplFromJson(
+_DateTimeInputUiSettings _$DateTimeInputUiSettingsFromJson(
         Map<String, dynamic> json) =>
-    _$DateTimeInputUiSettingsImpl(
+    _DateTimeInputUiSettings(
       dateFormat: json['dateFormat'] as String?,
       timeFormat: json['timeFormat'] as String?,
       labelText: json['labelText'] as String?,
@@ -60,8 +60,8 @@ _$DateTimeInputUiSettingsImpl _$$DateTimeInputUiSettingsImplFromJson(
           _$TimePickerEntryModeEnumMap, json['initialTimeEntryMode']),
     );
 
-Map<String, dynamic> _$$DateTimeInputUiSettingsImplToJson(
-        _$DateTimeInputUiSettingsImpl instance) =>
+Map<String, dynamic> _$DateTimeInputUiSettingsToJson(
+        _DateTimeInputUiSettings instance) =>
     <String, dynamic>{
       'dateFormat': instance.dateFormat,
       'timeFormat': instance.timeFormat,
@@ -105,9 +105,9 @@ const _$TimePickerEntryModeEnumMap = {
   TimePickerEntryMode.inputOnly: 'inputOnly',
 };
 
-_$DurationInputUiSettingsImpl _$$DurationInputUiSettingsImplFromJson(
+_DurationInputUiSettings _$DurationInputUiSettingsFromJson(
         Map<String, dynamic> json) =>
-    _$DurationInputUiSettingsImpl(
+    _DurationInputUiSettings(
       labelText: json['labelText'] as String?,
       helperText: json['helperText'] as String?,
       hintText: json['hintText'] as String?,
@@ -123,8 +123,8 @@ _$DurationInputUiSettingsImpl _$$DurationInputUiSettingsImplFromJson(
           $enumDecodeNullable(_$DateEditModeEnumMap, json['dateTimeEditMode']),
     );
 
-Map<String, dynamic> _$$DurationInputUiSettingsImplToJson(
-        _$DurationInputUiSettingsImpl instance) =>
+Map<String, dynamic> _$DurationInputUiSettingsToJson(
+        _DurationInputUiSettings instance) =>
     <String, dynamic>{
       'labelText': instance.labelText,
       'helperText': instance.helperText,
@@ -144,39 +144,39 @@ const _$DurationEditModeEnumMap = {
   DurationEditMode.duration: 'duration',
 };
 
-_$DynamicInputsNodeUiSettingsImpl _$$DynamicInputsNodeUiSettingsImplFromJson(
+_DynamicInputsNodeUiSettings _$DynamicInputsNodeUiSettingsFromJson(
         Map<String, dynamic> json) =>
-    _$DynamicInputsNodeUiSettingsImpl(
+    _DynamicInputsNodeUiSettings(
       labelText: json['labelText'] as String?,
       helperText: json['helperText'] as String?,
       reorderable: json['reorderable'] as bool?,
     );
 
-Map<String, dynamic> _$$DynamicInputsNodeUiSettingsImplToJson(
-        _$DynamicInputsNodeUiSettingsImpl instance) =>
+Map<String, dynamic> _$DynamicInputsNodeUiSettingsToJson(
+        _DynamicInputsNodeUiSettings instance) =>
     <String, dynamic>{
       'labelText': instance.labelText,
       'helperText': instance.helperText,
       'reorderable': instance.reorderable,
     };
 
-_$DynamicInputUiSettingsImpl _$$DynamicInputUiSettingsImplFromJson(
+_DynamicInputUiSettings _$DynamicInputUiSettingsFromJson(
         Map<String, dynamic> json) =>
-    _$DynamicInputUiSettingsImpl(
+    _DynamicInputUiSettings(
       labelText: json['labelText'] as String?,
       helperText: json['helperText'] as String?,
     );
 
-Map<String, dynamic> _$$DynamicInputUiSettingsImplToJson(
-        _$DynamicInputUiSettingsImpl instance) =>
+Map<String, dynamic> _$DynamicInputUiSettingsToJson(
+        _DynamicInputUiSettings instance) =>
     <String, dynamic>{
       'labelText': instance.labelText,
       'helperText': instance.helperText,
     };
 
-_$InputsNodeUiSettingsImpl _$$InputsNodeUiSettingsImplFromJson(
+_InputsNodeUiSettings _$InputsNodeUiSettingsFromJson(
         Map<String, dynamic> json) =>
-    _$InputsNodeUiSettingsImpl(
+    _InputsNodeUiSettings(
       labelText: json['labelText'] as String?,
       labelTextWhenChildrenHidden:
           json['labelTextWhenChildrenHidden'] as String?,
@@ -186,8 +186,8 @@ _$InputsNodeUiSettingsImpl _$$InputsNodeUiSettingsImplFromJson(
       showChildrenInitially: json['showChildrenInitially'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$InputsNodeUiSettingsImplToJson(
-        _$InputsNodeUiSettingsImpl instance) =>
+Map<String, dynamic> _$InputsNodeUiSettingsToJson(
+        _InputsNodeUiSettings instance) =>
     <String, dynamic>{
       'labelText': instance.labelText,
       'labelTextWhenChildrenHidden': instance.labelTextWhenChildrenHidden,
@@ -202,37 +202,35 @@ const _$ChildrenVisibilityEnumMap = {
   ChildrenVisibility.whenAsked: 'whenAsked',
 };
 
-_$MediaInputUiSettingsImpl _$$MediaInputUiSettingsImplFromJson(
+_MediaInputUiSettings _$MediaInputUiSettingsFromJson(
         Map<String, dynamic> json) =>
-    _$MediaInputUiSettingsImpl(
+    _MediaInputUiSettings(
       addMediaText: json['addMediaText'] as String?,
       fieldHeight: (json['fieldHeight'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$MediaInputUiSettingsImplToJson(
-        _$MediaInputUiSettingsImpl instance) =>
+Map<String, dynamic> _$MediaInputUiSettingsToJson(
+        _MediaInputUiSettings instance) =>
     <String, dynamic>{
       'addMediaText': instance.addMediaText,
       'fieldHeight': instance.fieldHeight,
     };
 
-_$NumInputUiSettingsImpl _$$NumInputUiSettingsImplFromJson(
-        Map<String, dynamic> json) =>
-    _$NumInputUiSettingsImpl(
+_NumInputUiSettings _$NumInputUiSettingsFromJson(Map<String, dynamic> json) =>
+    _NumInputUiSettings(
       labelText: json['labelText'] as String?,
       helperText: json['helperText'] as String?,
     );
 
-Map<String, dynamic> _$$NumInputUiSettingsImplToJson(
-        _$NumInputUiSettingsImpl instance) =>
+Map<String, dynamic> _$NumInputUiSettingsToJson(_NumInputUiSettings instance) =>
     <String, dynamic>{
       'labelText': instance.labelText,
       'helperText': instance.helperText,
     };
 
-_$SelectInputUiSettingsImpl<T> _$$SelectInputUiSettingsImplFromJson<T>(
+_SelectInputUiSettings<T> _$SelectInputUiSettingsFromJson<T>(
         Map<String, dynamic> json) =>
-    _$SelectInputUiSettingsImpl<T>(
+    _SelectInputUiSettings<T>(
       labelText: json['labelText'] as String?,
       helperText: json['helperText'] as String?,
       hintText: json['hintText'] as String?,
@@ -241,8 +239,8 @@ _$SelectInputUiSettingsImpl<T> _$$SelectInputUiSettingsImplFromJson<T>(
       labelFlex: (json['labelFlex'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$$SelectInputUiSettingsImplToJson<T>(
-        _$SelectInputUiSettingsImpl<T> instance) =>
+Map<String, dynamic> _$SelectInputUiSettingsToJson<T>(
+        _SelectInputUiSettings<T> instance) =>
     <String, dynamic>{
       'labelText': instance.labelText,
       'helperText': instance.helperText,
@@ -252,9 +250,9 @@ Map<String, dynamic> _$$SelectInputUiSettingsImplToJson<T>(
       'labelFlex': instance.labelFlex,
     };
 
-_$StringInputUiSettingsImpl _$$StringInputUiSettingsImplFromJson(
+_StringInputUiSettings _$StringInputUiSettingsFromJson(
         Map<String, dynamic> json) =>
-    _$StringInputUiSettingsImpl(
+    _StringInputUiSettings(
       labelText: json['labelText'] as String?,
       hintText: json['hintText'] as String?,
       helperText: json['helperText'] as String?,
@@ -276,8 +274,8 @@ _$StringInputUiSettingsImpl _$$StringInputUiSettingsImplFromJson(
       invalidRegexMessage: json['invalidRegexMessage'] as String?,
     );
 
-Map<String, dynamic> _$$StringInputUiSettingsImplToJson(
-        _$StringInputUiSettingsImpl instance) =>
+Map<String, dynamic> _$StringInputUiSettingsToJson(
+        _StringInputUiSettings instance) =>
     <String, dynamic>{
       'labelText': instance.labelText,
       'hintText': instance.hintText,
@@ -325,9 +323,8 @@ const _$TextCapitalizationEnumMap = {
   TextCapitalization.none: 'none',
 };
 
-_$WoFormUiSettingsImpl _$$WoFormUiSettingsImplFromJson(
-        Map<String, dynamic> json) =>
-    _$WoFormUiSettingsImpl(
+_WoFormUiSettings _$WoFormUiSettingsFromJson(Map<String, dynamic> json) =>
+    _WoFormUiSettings(
       titleText: json['titleText'] as String? ?? '',
       titlePosition: $enumDecodeNullable(
               _$WoFormTitlePositionEnumMap, json['titlePosition']) ??
@@ -340,8 +337,7 @@ _$WoFormUiSettingsImpl _$$WoFormUiSettingsImplFromJson(
       canModifySubmittedValues: json['canModifySubmittedValues'] as bool?,
     );
 
-Map<String, dynamic> _$$WoFormUiSettingsImplToJson(
-        _$WoFormUiSettingsImpl instance) =>
+Map<String, dynamic> _$WoFormUiSettingsToJson(_WoFormUiSettings instance) =>
     <String, dynamic>{
       'titleText': instance.titleText,
       'titlePosition': _$WoFormTitlePositionEnumMap[instance.titlePosition]!,
@@ -355,9 +351,8 @@ const _$WoFormTitlePositionEnumMap = {
   WoFormTitlePosition.appBar: 'appBar',
 };
 
-_$StandardSubmitModeImpl _$$StandardSubmitModeImplFromJson(
-        Map<String, dynamic> json) =>
-    _$StandardSubmitModeImpl(
+StandardSubmitMode _$StandardSubmitModeFromJson(Map<String, dynamic> json) =>
+    StandardSubmitMode(
       submitText: json['submitText'] as String?,
       disableSubmitMode: $enumDecodeNullable(
               _$DisableSubmitButtonEnumMap, json['disableSubmitMode']) ??
@@ -368,8 +363,7 @@ _$StandardSubmitModeImpl _$$StandardSubmitModeImplFromJson(
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$StandardSubmitModeImplToJson(
-        _$StandardSubmitModeImpl instance) =>
+Map<String, dynamic> _$StandardSubmitModeToJson(StandardSubmitMode instance) =>
     <String, dynamic>{
       'submitText': instance.submitText,
       'disableSubmitMode':
@@ -391,9 +385,9 @@ const _$SubmitButtonPositionEnumMap = {
   SubmitButtonPosition.floating: 'floating',
 };
 
-_$PageByPageSubmitModeImpl _$$PageByPageSubmitModeImplFromJson(
+PageByPageSubmitMode _$PageByPageSubmitModeFromJson(
         Map<String, dynamic> json) =>
-    _$PageByPageSubmitModeImpl(
+    PageByPageSubmitMode(
       submitText: json['submitText'] as String?,
       nextText: json['nextText'] as String?,
       disableSubmitMode: $enumDecodeNullable(
@@ -403,8 +397,8 @@ _$PageByPageSubmitModeImpl _$$PageByPageSubmitModeImplFromJson(
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$PageByPageSubmitModeImplToJson(
-        _$PageByPageSubmitModeImpl instance) =>
+Map<String, dynamic> _$PageByPageSubmitModeToJson(
+        PageByPageSubmitMode instance) =>
     <String, dynamic>{
       'submitText': instance.submitText,
       'nextText': instance.nextText,

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,219 +10,36 @@ part of 'ui_settings.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-BooleanInputUiSettings _$BooleanInputUiSettingsFromJson(
-    Map<String, dynamic> json) {
-  return _BooleanInputUiSettings.fromJson(json);
-}
 
 /// @nodoc
 mixin _$BooleanInputUiSettings {
-  String? get labelText => throw _privateConstructorUsedError;
-  String? get helperText => throw _privateConstructorUsedError;
-  BooleanFieldControlType? get controlType =>
-      throw _privateConstructorUsedError;
-  ListTileControlAffinity? get controlAffinity =>
-      throw _privateConstructorUsedError;
+  String? get labelText;
+  String? get helperText;
+  BooleanFieldControlType? get controlType;
+  ListTileControlAffinity? get controlAffinity;
   @JsonKey(includeToJson: false, includeFromJson: false)
-  Widget? get secondary => throw _privateConstructorUsedError;
+  Widget? get secondary;
   @JsonKey(includeToJson: false, includeFromJson: false)
-  BooleanFieldBuilderDef? get widgetBuilder =>
-      throw _privateConstructorUsedError;
-
-  /// Serializes this BooleanInputUiSettings to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  BooleanFieldBuilderDef? get widgetBuilder;
 
   /// Create a copy of BooleanInputUiSettings
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $BooleanInputUiSettingsCopyWith<BooleanInputUiSettings> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$BooleanInputUiSettingsCopyWithImpl<BooleanInputUiSettings>(
+          this as BooleanInputUiSettings, _$identity);
 
-/// @nodoc
-abstract class $BooleanInputUiSettingsCopyWith<$Res> {
-  factory $BooleanInputUiSettingsCopyWith(BooleanInputUiSettings value,
-          $Res Function(BooleanInputUiSettings) then) =
-      _$BooleanInputUiSettingsCopyWithImpl<$Res, BooleanInputUiSettings>;
-  @useResult
-  $Res call(
-      {String? labelText,
-      String? helperText,
-      BooleanFieldControlType? controlType,
-      ListTileControlAffinity? controlAffinity,
-      @JsonKey(includeToJson: false, includeFromJson: false) Widget? secondary,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      BooleanFieldBuilderDef? widgetBuilder});
-}
-
-/// @nodoc
-class _$BooleanInputUiSettingsCopyWithImpl<$Res,
-        $Val extends BooleanInputUiSettings>
-    implements $BooleanInputUiSettingsCopyWith<$Res> {
-  _$BooleanInputUiSettingsCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of BooleanInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? labelText = freezed,
-    Object? helperText = freezed,
-    Object? controlType = freezed,
-    Object? controlAffinity = freezed,
-    Object? secondary = freezed,
-    Object? widgetBuilder = freezed,
-  }) {
-    return _then(_value.copyWith(
-      labelText: freezed == labelText
-          ? _value.labelText
-          : labelText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      helperText: freezed == helperText
-          ? _value.helperText
-          : helperText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      controlType: freezed == controlType
-          ? _value.controlType
-          : controlType // ignore: cast_nullable_to_non_nullable
-              as BooleanFieldControlType?,
-      controlAffinity: freezed == controlAffinity
-          ? _value.controlAffinity
-          : controlAffinity // ignore: cast_nullable_to_non_nullable
-              as ListTileControlAffinity?,
-      secondary: freezed == secondary
-          ? _value.secondary
-          : secondary // ignore: cast_nullable_to_non_nullable
-              as Widget?,
-      widgetBuilder: freezed == widgetBuilder
-          ? _value.widgetBuilder
-          : widgetBuilder // ignore: cast_nullable_to_non_nullable
-              as BooleanFieldBuilderDef?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$BooleanInputUiSettingsImplCopyWith<$Res>
-    implements $BooleanInputUiSettingsCopyWith<$Res> {
-  factory _$$BooleanInputUiSettingsImplCopyWith(
-          _$BooleanInputUiSettingsImpl value,
-          $Res Function(_$BooleanInputUiSettingsImpl) then) =
-      __$$BooleanInputUiSettingsImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String? labelText,
-      String? helperText,
-      BooleanFieldControlType? controlType,
-      ListTileControlAffinity? controlAffinity,
-      @JsonKey(includeToJson: false, includeFromJson: false) Widget? secondary,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      BooleanFieldBuilderDef? widgetBuilder});
-}
-
-/// @nodoc
-class __$$BooleanInputUiSettingsImplCopyWithImpl<$Res>
-    extends _$BooleanInputUiSettingsCopyWithImpl<$Res,
-        _$BooleanInputUiSettingsImpl>
-    implements _$$BooleanInputUiSettingsImplCopyWith<$Res> {
-  __$$BooleanInputUiSettingsImplCopyWithImpl(
-      _$BooleanInputUiSettingsImpl _value,
-      $Res Function(_$BooleanInputUiSettingsImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of BooleanInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? labelText = freezed,
-    Object? helperText = freezed,
-    Object? controlType = freezed,
-    Object? controlAffinity = freezed,
-    Object? secondary = freezed,
-    Object? widgetBuilder = freezed,
-  }) {
-    return _then(_$BooleanInputUiSettingsImpl(
-      labelText: freezed == labelText
-          ? _value.labelText
-          : labelText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      helperText: freezed == helperText
-          ? _value.helperText
-          : helperText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      controlType: freezed == controlType
-          ? _value.controlType
-          : controlType // ignore: cast_nullable_to_non_nullable
-              as BooleanFieldControlType?,
-      controlAffinity: freezed == controlAffinity
-          ? _value.controlAffinity
-          : controlAffinity // ignore: cast_nullable_to_non_nullable
-              as ListTileControlAffinity?,
-      secondary: freezed == secondary
-          ? _value.secondary
-          : secondary // ignore: cast_nullable_to_non_nullable
-              as Widget?,
-      widgetBuilder: freezed == widgetBuilder
-          ? _value.widgetBuilder
-          : widgetBuilder // ignore: cast_nullable_to_non_nullable
-              as BooleanFieldBuilderDef?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$BooleanInputUiSettingsImpl extends _BooleanInputUiSettings {
-  const _$BooleanInputUiSettingsImpl(
-      {this.labelText,
-      this.helperText,
-      this.controlType,
-      this.controlAffinity,
-      @JsonKey(includeToJson: false, includeFromJson: false) this.secondary,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      this.widgetBuilder})
-      : super._();
-
-  factory _$BooleanInputUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$BooleanInputUiSettingsImplFromJson(json);
-
-  @override
-  final String? labelText;
-  @override
-  final String? helperText;
-  @override
-  final BooleanFieldControlType? controlType;
-  @override
-  final ListTileControlAffinity? controlAffinity;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  final Widget? secondary;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  final BooleanFieldBuilderDef? widgetBuilder;
-
-  @override
-  String toString() {
-    return 'BooleanInputUiSettings(labelText: $labelText, helperText: $helperText, controlType: $controlType, controlAffinity: $controlAffinity, secondary: $secondary, widgetBuilder: $widgetBuilder)';
-  }
+  /// Serializes this BooleanInputUiSettings to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BooleanInputUiSettingsImpl &&
+            other is BooleanInputUiSettings &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
             (identical(other.helperText, helperText) ||
@@ -241,442 +59,264 @@ class _$BooleanInputUiSettingsImpl extends _BooleanInputUiSettings {
   int get hashCode => Object.hash(runtimeType, labelText, helperText,
       controlType, controlAffinity, secondary, widgetBuilder);
 
-  /// Create a copy of BooleanInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$BooleanInputUiSettingsImplCopyWith<_$BooleanInputUiSettingsImpl>
-      get copyWith => __$$BooleanInputUiSettingsImplCopyWithImpl<
-          _$BooleanInputUiSettingsImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$BooleanInputUiSettingsImplToJson(
-      this,
-    );
+  String toString() {
+    return 'BooleanInputUiSettings(labelText: $labelText, helperText: $helperText, controlType: $controlType, controlAffinity: $controlAffinity, secondary: $secondary, widgetBuilder: $widgetBuilder)';
   }
 }
 
-abstract class _BooleanInputUiSettings extends BooleanInputUiSettings {
-  const factory _BooleanInputUiSettings(
-          {final String? labelText,
-          final String? helperText,
-          final BooleanFieldControlType? controlType,
-          final ListTileControlAffinity? controlAffinity,
-          @JsonKey(includeToJson: false, includeFromJson: false)
-          final Widget? secondary,
-          @JsonKey(includeToJson: false, includeFromJson: false)
-          final BooleanFieldBuilderDef? widgetBuilder}) =
-      _$BooleanInputUiSettingsImpl;
-  const _BooleanInputUiSettings._() : super._();
-
-  factory _BooleanInputUiSettings.fromJson(Map<String, dynamic> json) =
-      _$BooleanInputUiSettingsImpl.fromJson;
-
-  @override
-  String? get labelText;
-  @override
-  String? get helperText;
-  @override
-  BooleanFieldControlType? get controlType;
-  @override
-  ListTileControlAffinity? get controlAffinity;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  Widget? get secondary;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  BooleanFieldBuilderDef? get widgetBuilder;
-
-  /// Create a copy of BooleanInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$BooleanInputUiSettingsImplCopyWith<_$BooleanInputUiSettingsImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-DateTimeInputUiSettings _$DateTimeInputUiSettingsFromJson(
-    Map<String, dynamic> json) {
-  return _DateTimeInputUiSettings.fromJson(json);
-}
-
 /// @nodoc
-mixin _$DateTimeInputUiSettings {
-  String? get dateFormat => throw _privateConstructorUsedError;
-  String? get timeFormat => throw _privateConstructorUsedError;
-  String? get labelText => throw _privateConstructorUsedError;
-  String? get helperText => throw _privateConstructorUsedError;
-  String? get hintText => throw _privateConstructorUsedError;
-
-  /// If null, label will be placed above the date selector.
-  /// Else, label and selector will be in a flexible row,
-  /// selector with a flex value of 10,
-  /// and label with a flex value of [labelFlex].
-  int? get labelFlex => throw _privateConstructorUsedError;
-
-  /// If DateTimeInput.initialValue is null, this value will be used instead.
-  @JsonKey(toJson: FlexibleDateTime.staticToJson)
-  FlexibleDateTime? get initialEditValue => throw _privateConstructorUsedError;
-  DatePickerEntryMode? get initialDateEntryMode =>
-      throw _privateConstructorUsedError;
-  DatePickerMode? get initialDatePickerMode =>
-      throw _privateConstructorUsedError;
-  DateEditMode? get editMode => throw _privateConstructorUsedError;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  PickDateDef? get pickDate => throw _privateConstructorUsedError;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  PickTimeDef? get pickTime => throw _privateConstructorUsedError;
-  TimePickerEntryMode? get initialTimeEntryMode =>
-      throw _privateConstructorUsedError;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  DateTimeFieldBuilderDef? get widgetBuilder =>
-      throw _privateConstructorUsedError;
-
-  /// Serializes this DateTimeInputUiSettings to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of DateTimeInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $DateTimeInputUiSettingsCopyWith<DateTimeInputUiSettings> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $DateTimeInputUiSettingsCopyWith<$Res> {
-  factory $DateTimeInputUiSettingsCopyWith(DateTimeInputUiSettings value,
-          $Res Function(DateTimeInputUiSettings) then) =
-      _$DateTimeInputUiSettingsCopyWithImpl<$Res, DateTimeInputUiSettings>;
+abstract mixin class $BooleanInputUiSettingsCopyWith<$Res> {
+  factory $BooleanInputUiSettingsCopyWith(BooleanInputUiSettings value,
+          $Res Function(BooleanInputUiSettings) _then) =
+      _$BooleanInputUiSettingsCopyWithImpl;
   @useResult
   $Res call(
-      {String? dateFormat,
-      String? timeFormat,
-      String? labelText,
+      {String? labelText,
       String? helperText,
-      String? hintText,
-      int? labelFlex,
-      @JsonKey(toJson: FlexibleDateTime.staticToJson)
-      FlexibleDateTime? initialEditValue,
-      DatePickerEntryMode? initialDateEntryMode,
-      DatePickerMode? initialDatePickerMode,
-      DateEditMode? editMode,
+      BooleanFieldControlType? controlType,
+      ListTileControlAffinity? controlAffinity,
+      @JsonKey(includeToJson: false, includeFromJson: false) Widget? secondary,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      PickDateDef? pickDate,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      PickTimeDef? pickTime,
-      TimePickerEntryMode? initialTimeEntryMode,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      DateTimeFieldBuilderDef? widgetBuilder});
-
-  $FlexibleDateTimeCopyWith<$Res>? get initialEditValue;
+      BooleanFieldBuilderDef? widgetBuilder});
 }
 
 /// @nodoc
-class _$DateTimeInputUiSettingsCopyWithImpl<$Res,
-        $Val extends DateTimeInputUiSettings>
-    implements $DateTimeInputUiSettingsCopyWith<$Res> {
-  _$DateTimeInputUiSettingsCopyWithImpl(this._value, this._then);
+class _$BooleanInputUiSettingsCopyWithImpl<$Res>
+    implements $BooleanInputUiSettingsCopyWith<$Res> {
+  _$BooleanInputUiSettingsCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final BooleanInputUiSettings _self;
+  final $Res Function(BooleanInputUiSettings) _then;
 
-  /// Create a copy of DateTimeInputUiSettings
+  /// Create a copy of BooleanInputUiSettings
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? dateFormat = freezed,
-    Object? timeFormat = freezed,
     Object? labelText = freezed,
     Object? helperText = freezed,
-    Object? hintText = freezed,
-    Object? labelFlex = freezed,
-    Object? initialEditValue = freezed,
-    Object? initialDateEntryMode = freezed,
-    Object? initialDatePickerMode = freezed,
-    Object? editMode = freezed,
-    Object? pickDate = freezed,
-    Object? pickTime = freezed,
-    Object? initialTimeEntryMode = freezed,
+    Object? controlType = freezed,
+    Object? controlAffinity = freezed,
+    Object? secondary = freezed,
     Object? widgetBuilder = freezed,
   }) {
-    return _then(_value.copyWith(
-      dateFormat: freezed == dateFormat
-          ? _value.dateFormat
-          : dateFormat // ignore: cast_nullable_to_non_nullable
-              as String?,
-      timeFormat: freezed == timeFormat
-          ? _value.timeFormat
-          : timeFormat // ignore: cast_nullable_to_non_nullable
-              as String?,
+    return _then(_self.copyWith(
       labelText: freezed == labelText
-          ? _value.labelText
+          ? _self.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
               as String?,
       helperText: freezed == helperText
-          ? _value.helperText
+          ? _self.helperText
           : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
-      hintText: freezed == hintText
-          ? _value.hintText
-          : hintText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      labelFlex: freezed == labelFlex
-          ? _value.labelFlex
-          : labelFlex // ignore: cast_nullable_to_non_nullable
-              as int?,
-      initialEditValue: freezed == initialEditValue
-          ? _value.initialEditValue
-          : initialEditValue // ignore: cast_nullable_to_non_nullable
-              as FlexibleDateTime?,
-      initialDateEntryMode: freezed == initialDateEntryMode
-          ? _value.initialDateEntryMode
-          : initialDateEntryMode // ignore: cast_nullable_to_non_nullable
-              as DatePickerEntryMode?,
-      initialDatePickerMode: freezed == initialDatePickerMode
-          ? _value.initialDatePickerMode
-          : initialDatePickerMode // ignore: cast_nullable_to_non_nullable
-              as DatePickerMode?,
-      editMode: freezed == editMode
-          ? _value.editMode
-          : editMode // ignore: cast_nullable_to_non_nullable
-              as DateEditMode?,
-      pickDate: freezed == pickDate
-          ? _value.pickDate
-          : pickDate // ignore: cast_nullable_to_non_nullable
-              as PickDateDef?,
-      pickTime: freezed == pickTime
-          ? _value.pickTime
-          : pickTime // ignore: cast_nullable_to_non_nullable
-              as PickTimeDef?,
-      initialTimeEntryMode: freezed == initialTimeEntryMode
-          ? _value.initialTimeEntryMode
-          : initialTimeEntryMode // ignore: cast_nullable_to_non_nullable
-              as TimePickerEntryMode?,
+      controlType: freezed == controlType
+          ? _self.controlType
+          : controlType // ignore: cast_nullable_to_non_nullable
+              as BooleanFieldControlType?,
+      controlAffinity: freezed == controlAffinity
+          ? _self.controlAffinity
+          : controlAffinity // ignore: cast_nullable_to_non_nullable
+              as ListTileControlAffinity?,
+      secondary: freezed == secondary
+          ? _self.secondary
+          : secondary // ignore: cast_nullable_to_non_nullable
+              as Widget?,
       widgetBuilder: freezed == widgetBuilder
-          ? _value.widgetBuilder
+          ? _self.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
-              as DateTimeFieldBuilderDef?,
-    ) as $Val);
-  }
-
-  /// Create a copy of DateTimeInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $FlexibleDateTimeCopyWith<$Res>? get initialEditValue {
-    if (_value.initialEditValue == null) {
-      return null;
-    }
-
-    return $FlexibleDateTimeCopyWith<$Res>(_value.initialEditValue!, (value) {
-      return _then(_value.copyWith(initialEditValue: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$DateTimeInputUiSettingsImplCopyWith<$Res>
-    implements $DateTimeInputUiSettingsCopyWith<$Res> {
-  factory _$$DateTimeInputUiSettingsImplCopyWith(
-          _$DateTimeInputUiSettingsImpl value,
-          $Res Function(_$DateTimeInputUiSettingsImpl) then) =
-      __$$DateTimeInputUiSettingsImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String? dateFormat,
-      String? timeFormat,
-      String? labelText,
-      String? helperText,
-      String? hintText,
-      int? labelFlex,
-      @JsonKey(toJson: FlexibleDateTime.staticToJson)
-      FlexibleDateTime? initialEditValue,
-      DatePickerEntryMode? initialDateEntryMode,
-      DatePickerMode? initialDatePickerMode,
-      DateEditMode? editMode,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      PickDateDef? pickDate,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      PickTimeDef? pickTime,
-      TimePickerEntryMode? initialTimeEntryMode,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      DateTimeFieldBuilderDef? widgetBuilder});
-
-  @override
-  $FlexibleDateTimeCopyWith<$Res>? get initialEditValue;
-}
-
-/// @nodoc
-class __$$DateTimeInputUiSettingsImplCopyWithImpl<$Res>
-    extends _$DateTimeInputUiSettingsCopyWithImpl<$Res,
-        _$DateTimeInputUiSettingsImpl>
-    implements _$$DateTimeInputUiSettingsImplCopyWith<$Res> {
-  __$$DateTimeInputUiSettingsImplCopyWithImpl(
-      _$DateTimeInputUiSettingsImpl _value,
-      $Res Function(_$DateTimeInputUiSettingsImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of DateTimeInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? dateFormat = freezed,
-    Object? timeFormat = freezed,
-    Object? labelText = freezed,
-    Object? helperText = freezed,
-    Object? hintText = freezed,
-    Object? labelFlex = freezed,
-    Object? initialEditValue = freezed,
-    Object? initialDateEntryMode = freezed,
-    Object? initialDatePickerMode = freezed,
-    Object? editMode = freezed,
-    Object? pickDate = freezed,
-    Object? pickTime = freezed,
-    Object? initialTimeEntryMode = freezed,
-    Object? widgetBuilder = freezed,
-  }) {
-    return _then(_$DateTimeInputUiSettingsImpl(
-      dateFormat: freezed == dateFormat
-          ? _value.dateFormat
-          : dateFormat // ignore: cast_nullable_to_non_nullable
-              as String?,
-      timeFormat: freezed == timeFormat
-          ? _value.timeFormat
-          : timeFormat // ignore: cast_nullable_to_non_nullable
-              as String?,
-      labelText: freezed == labelText
-          ? _value.labelText
-          : labelText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      helperText: freezed == helperText
-          ? _value.helperText
-          : helperText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      hintText: freezed == hintText
-          ? _value.hintText
-          : hintText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      labelFlex: freezed == labelFlex
-          ? _value.labelFlex
-          : labelFlex // ignore: cast_nullable_to_non_nullable
-              as int?,
-      initialEditValue: freezed == initialEditValue
-          ? _value.initialEditValue
-          : initialEditValue // ignore: cast_nullable_to_non_nullable
-              as FlexibleDateTime?,
-      initialDateEntryMode: freezed == initialDateEntryMode
-          ? _value.initialDateEntryMode
-          : initialDateEntryMode // ignore: cast_nullable_to_non_nullable
-              as DatePickerEntryMode?,
-      initialDatePickerMode: freezed == initialDatePickerMode
-          ? _value.initialDatePickerMode
-          : initialDatePickerMode // ignore: cast_nullable_to_non_nullable
-              as DatePickerMode?,
-      editMode: freezed == editMode
-          ? _value.editMode
-          : editMode // ignore: cast_nullable_to_non_nullable
-              as DateEditMode?,
-      pickDate: freezed == pickDate
-          ? _value.pickDate
-          : pickDate // ignore: cast_nullable_to_non_nullable
-              as PickDateDef?,
-      pickTime: freezed == pickTime
-          ? _value.pickTime
-          : pickTime // ignore: cast_nullable_to_non_nullable
-              as PickTimeDef?,
-      initialTimeEntryMode: freezed == initialTimeEntryMode
-          ? _value.initialTimeEntryMode
-          : initialTimeEntryMode // ignore: cast_nullable_to_non_nullable
-              as TimePickerEntryMode?,
-      widgetBuilder: freezed == widgetBuilder
-          ? _value.widgetBuilder
-          : widgetBuilder // ignore: cast_nullable_to_non_nullable
-              as DateTimeFieldBuilderDef?,
+              as BooleanFieldBuilderDef?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
-  const _$DateTimeInputUiSettingsImpl(
-      {this.dateFormat,
-      this.timeFormat,
-      this.labelText,
+class _BooleanInputUiSettings extends BooleanInputUiSettings {
+  const _BooleanInputUiSettings(
+      {this.labelText,
       this.helperText,
-      this.hintText,
-      this.labelFlex,
-      @JsonKey(toJson: FlexibleDateTime.staticToJson) this.initialEditValue,
-      this.initialDateEntryMode,
-      this.initialDatePickerMode,
-      this.editMode,
-      @JsonKey(includeToJson: false, includeFromJson: false) this.pickDate,
-      @JsonKey(includeToJson: false, includeFromJson: false) this.pickTime,
-      this.initialTimeEntryMode,
+      this.controlType,
+      this.controlAffinity,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.secondary,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.widgetBuilder})
       : super._();
+  factory _BooleanInputUiSettings.fromJson(Map<String, dynamic> json) =>
+      _$BooleanInputUiSettingsFromJson(json);
 
-  factory _$DateTimeInputUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DateTimeInputUiSettingsImplFromJson(json);
-
-  @override
-  final String? dateFormat;
-  @override
-  final String? timeFormat;
   @override
   final String? labelText;
   @override
   final String? helperText;
   @override
-  final String? hintText;
-
-  /// If null, label will be placed above the date selector.
-  /// Else, label and selector will be in a flexible row,
-  /// selector with a flex value of 10,
-  /// and label with a flex value of [labelFlex].
+  final BooleanFieldControlType? controlType;
   @override
-  final int? labelFlex;
-
-  /// If DateTimeInput.initialValue is null, this value will be used instead.
-  @override
-  @JsonKey(toJson: FlexibleDateTime.staticToJson)
-  final FlexibleDateTime? initialEditValue;
-  @override
-  final DatePickerEntryMode? initialDateEntryMode;
-  @override
-  final DatePickerMode? initialDatePickerMode;
-  @override
-  final DateEditMode? editMode;
+  final ListTileControlAffinity? controlAffinity;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final PickDateDef? pickDate;
+  final Widget? secondary;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final PickTimeDef? pickTime;
+  final BooleanFieldBuilderDef? widgetBuilder;
+
+  /// Create a copy of BooleanInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  final TimePickerEntryMode? initialTimeEntryMode;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  final DateTimeFieldBuilderDef? widgetBuilder;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$BooleanInputUiSettingsCopyWith<_BooleanInputUiSettings> get copyWith =>
+      __$BooleanInputUiSettingsCopyWithImpl<_BooleanInputUiSettings>(
+          this, _$identity);
 
   @override
-  String toString() {
-    return 'DateTimeInputUiSettings(dateFormat: $dateFormat, timeFormat: $timeFormat, labelText: $labelText, helperText: $helperText, hintText: $hintText, labelFlex: $labelFlex, initialEditValue: $initialEditValue, initialDateEntryMode: $initialDateEntryMode, initialDatePickerMode: $initialDatePickerMode, editMode: $editMode, pickDate: $pickDate, pickTime: $pickTime, initialTimeEntryMode: $initialTimeEntryMode, widgetBuilder: $widgetBuilder)';
+  Map<String, dynamic> toJson() {
+    return _$BooleanInputUiSettingsToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DateTimeInputUiSettingsImpl &&
+            other is _BooleanInputUiSettings &&
+            (identical(other.labelText, labelText) ||
+                other.labelText == labelText) &&
+            (identical(other.helperText, helperText) ||
+                other.helperText == helperText) &&
+            (identical(other.controlType, controlType) ||
+                other.controlType == controlType) &&
+            (identical(other.controlAffinity, controlAffinity) ||
+                other.controlAffinity == controlAffinity) &&
+            (identical(other.secondary, secondary) ||
+                other.secondary == secondary) &&
+            (identical(other.widgetBuilder, widgetBuilder) ||
+                other.widgetBuilder == widgetBuilder));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, labelText, helperText,
+      controlType, controlAffinity, secondary, widgetBuilder);
+
+  @override
+  String toString() {
+    return 'BooleanInputUiSettings(labelText: $labelText, helperText: $helperText, controlType: $controlType, controlAffinity: $controlAffinity, secondary: $secondary, widgetBuilder: $widgetBuilder)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$BooleanInputUiSettingsCopyWith<$Res>
+    implements $BooleanInputUiSettingsCopyWith<$Res> {
+  factory _$BooleanInputUiSettingsCopyWith(_BooleanInputUiSettings value,
+          $Res Function(_BooleanInputUiSettings) _then) =
+      __$BooleanInputUiSettingsCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String? labelText,
+      String? helperText,
+      BooleanFieldControlType? controlType,
+      ListTileControlAffinity? controlAffinity,
+      @JsonKey(includeToJson: false, includeFromJson: false) Widget? secondary,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      BooleanFieldBuilderDef? widgetBuilder});
+}
+
+/// @nodoc
+class __$BooleanInputUiSettingsCopyWithImpl<$Res>
+    implements _$BooleanInputUiSettingsCopyWith<$Res> {
+  __$BooleanInputUiSettingsCopyWithImpl(this._self, this._then);
+
+  final _BooleanInputUiSettings _self;
+  final $Res Function(_BooleanInputUiSettings) _then;
+
+  /// Create a copy of BooleanInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? labelText = freezed,
+    Object? helperText = freezed,
+    Object? controlType = freezed,
+    Object? controlAffinity = freezed,
+    Object? secondary = freezed,
+    Object? widgetBuilder = freezed,
+  }) {
+    return _then(_BooleanInputUiSettings(
+      labelText: freezed == labelText
+          ? _self.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _self.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      controlType: freezed == controlType
+          ? _self.controlType
+          : controlType // ignore: cast_nullable_to_non_nullable
+              as BooleanFieldControlType?,
+      controlAffinity: freezed == controlAffinity
+          ? _self.controlAffinity
+          : controlAffinity // ignore: cast_nullable_to_non_nullable
+              as ListTileControlAffinity?,
+      secondary: freezed == secondary
+          ? _self.secondary
+          : secondary // ignore: cast_nullable_to_non_nullable
+              as Widget?,
+      widgetBuilder: freezed == widgetBuilder
+          ? _self.widgetBuilder
+          : widgetBuilder // ignore: cast_nullable_to_non_nullable
+              as BooleanFieldBuilderDef?,
+    ));
+  }
+}
+
+/// @nodoc
+mixin _$DateTimeInputUiSettings {
+  String? get dateFormat;
+  String? get timeFormat;
+  String? get labelText;
+  String? get helperText;
+  String? get hintText;
+
+  /// If null, label will be placed above the date selector.
+  /// Else, label and selector will be in a flexible row,
+  /// selector with a flex value of 10,
+  /// and label with a flex value of [labelFlex].
+  int? get labelFlex;
+
+  /// If DateTimeInput.initialValue is null, this value will be used instead.
+  @JsonKey(toJson: FlexibleDateTime.staticToJson)
+  FlexibleDateTime? get initialEditValue;
+  DatePickerEntryMode? get initialDateEntryMode;
+  DatePickerMode? get initialDatePickerMode;
+  DateEditMode? get editMode;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  PickDateDef? get pickDate;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  PickTimeDef? get pickTime;
+  TimePickerEntryMode? get initialTimeEntryMode;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  DateTimeFieldBuilderDef? get widgetBuilder;
+
+  /// Create a copy of DateTimeInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $DateTimeInputUiSettingsCopyWith<DateTimeInputUiSettings> get copyWith =>
+      _$DateTimeInputUiSettingsCopyWithImpl<DateTimeInputUiSettings>(
+          this as DateTimeInputUiSettings, _$identity);
+
+  /// Serializes this DateTimeInputUiSettings to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is DateTimeInputUiSettings &&
             (identical(other.dateFormat, dateFormat) ||
                 other.dateFormat == dateFormat) &&
             (identical(other.timeFormat, timeFormat) ||
@@ -726,438 +366,171 @@ class _$DateTimeInputUiSettingsImpl extends _DateTimeInputUiSettings {
       initialTimeEntryMode,
       widgetBuilder);
 
-  /// Create a copy of DateTimeInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$DateTimeInputUiSettingsImplCopyWith<_$DateTimeInputUiSettingsImpl>
-      get copyWith => __$$DateTimeInputUiSettingsImplCopyWithImpl<
-          _$DateTimeInputUiSettingsImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$DateTimeInputUiSettingsImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
-  const factory _DateTimeInputUiSettings(
-          {final String? dateFormat,
-          final String? timeFormat,
-          final String? labelText,
-          final String? helperText,
-          final String? hintText,
-          final int? labelFlex,
-          @JsonKey(toJson: FlexibleDateTime.staticToJson)
-          final FlexibleDateTime? initialEditValue,
-          final DatePickerEntryMode? initialDateEntryMode,
-          final DatePickerMode? initialDatePickerMode,
-          final DateEditMode? editMode,
-          @JsonKey(includeToJson: false, includeFromJson: false)
-          final PickDateDef? pickDate,
-          @JsonKey(includeToJson: false, includeFromJson: false)
-          final PickTimeDef? pickTime,
-          final TimePickerEntryMode? initialTimeEntryMode,
-          @JsonKey(includeToJson: false, includeFromJson: false)
-          final DateTimeFieldBuilderDef? widgetBuilder}) =
-      _$DateTimeInputUiSettingsImpl;
-  const _DateTimeInputUiSettings._() : super._();
-
-  factory _DateTimeInputUiSettings.fromJson(Map<String, dynamic> json) =
-      _$DateTimeInputUiSettingsImpl.fromJson;
-
-  @override
-  String? get dateFormat;
-  @override
-  String? get timeFormat;
-  @override
-  String? get labelText;
-  @override
-  String? get helperText;
-  @override
-  String? get hintText;
-
-  /// If null, label will be placed above the date selector.
-  /// Else, label and selector will be in a flexible row,
-  /// selector with a flex value of 10,
-  /// and label with a flex value of [labelFlex].
-  @override
-  int? get labelFlex;
-
-  /// If DateTimeInput.initialValue is null, this value will be used instead.
-  @override
-  @JsonKey(toJson: FlexibleDateTime.staticToJson)
-  FlexibleDateTime? get initialEditValue;
-  @override
-  DatePickerEntryMode? get initialDateEntryMode;
-  @override
-  DatePickerMode? get initialDatePickerMode;
-  @override
-  DateEditMode? get editMode;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  PickDateDef? get pickDate;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  PickTimeDef? get pickTime;
-  @override
-  TimePickerEntryMode? get initialTimeEntryMode;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  DateTimeFieldBuilderDef? get widgetBuilder;
-
-  /// Create a copy of DateTimeInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DateTimeInputUiSettingsImplCopyWith<_$DateTimeInputUiSettingsImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-DurationInputUiSettings _$DurationInputUiSettingsFromJson(
-    Map<String, dynamic> json) {
-  return _DurationInputUiSettings.fromJson(json);
-}
-
-/// @nodoc
-mixin _$DurationInputUiSettings {
-  String? get labelText => throw _privateConstructorUsedError;
-  String? get helperText => throw _privateConstructorUsedError;
-  String? get hintText => throw _privateConstructorUsedError;
-
-  /// Only used if DurationInput.startDatePath is provided
-  DurationEditMode? get initialEditMode => throw _privateConstructorUsedError;
-
-  /// If null, label will be placed above the date selector.
-  /// Else, label and selector will be in a flexible row,
-  /// selector with a flex value of 10,
-  /// and label with a flex value of [labelFlex].
-  int? get labelFlex => throw _privateConstructorUsedError;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  PickDurationDef? get pickDuration => throw _privateConstructorUsedError;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  FormatDurationDef? get formatDuration => throw _privateConstructorUsedError;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  DurationFieldBuilderDef? get widgetBuilder =>
-      throw _privateConstructorUsedError;
-
-  /// The following fields are used if editMode is dateTime
-  String? get dateTimeLabelText => throw _privateConstructorUsedError;
-  String? get dateTimeHelperText => throw _privateConstructorUsedError;
-  String? get dateTimeHintText => throw _privateConstructorUsedError;
-  String? get dateFormat => throw _privateConstructorUsedError;
-  String? get timeFormat => throw _privateConstructorUsedError;
-  DateEditMode? get dateTimeEditMode => throw _privateConstructorUsedError;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  PickDateDef? get pickDate => throw _privateConstructorUsedError;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  PickTimeDef? get pickTime => throw _privateConstructorUsedError;
-
-  /// Serializes this DurationInputUiSettings to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of DurationInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $DurationInputUiSettingsCopyWith<DurationInputUiSettings> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $DurationInputUiSettingsCopyWith<$Res> {
-  factory $DurationInputUiSettingsCopyWith(DurationInputUiSettings value,
-          $Res Function(DurationInputUiSettings) then) =
-      _$DurationInputUiSettingsCopyWithImpl<$Res, DurationInputUiSettings>;
-  @useResult
-  $Res call(
-      {String? labelText,
-      String? helperText,
-      String? hintText,
-      DurationEditMode? initialEditMode,
-      int? labelFlex,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      PickDurationDef? pickDuration,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      FormatDurationDef? formatDuration,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      DurationFieldBuilderDef? widgetBuilder,
-      String? dateTimeLabelText,
-      String? dateTimeHelperText,
-      String? dateTimeHintText,
-      String? dateFormat,
-      String? timeFormat,
-      DateEditMode? dateTimeEditMode,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      PickDateDef? pickDate,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      PickTimeDef? pickTime});
-}
-
-/// @nodoc
-class _$DurationInputUiSettingsCopyWithImpl<$Res,
-        $Val extends DurationInputUiSettings>
-    implements $DurationInputUiSettingsCopyWith<$Res> {
-  _$DurationInputUiSettingsCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of DurationInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? labelText = freezed,
-    Object? helperText = freezed,
-    Object? hintText = freezed,
-    Object? initialEditMode = freezed,
-    Object? labelFlex = freezed,
-    Object? pickDuration = freezed,
-    Object? formatDuration = freezed,
-    Object? widgetBuilder = freezed,
-    Object? dateTimeLabelText = freezed,
-    Object? dateTimeHelperText = freezed,
-    Object? dateTimeHintText = freezed,
-    Object? dateFormat = freezed,
-    Object? timeFormat = freezed,
-    Object? dateTimeEditMode = freezed,
-    Object? pickDate = freezed,
-    Object? pickTime = freezed,
-  }) {
-    return _then(_value.copyWith(
-      labelText: freezed == labelText
-          ? _value.labelText
-          : labelText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      helperText: freezed == helperText
-          ? _value.helperText
-          : helperText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      hintText: freezed == hintText
-          ? _value.hintText
-          : hintText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      initialEditMode: freezed == initialEditMode
-          ? _value.initialEditMode
-          : initialEditMode // ignore: cast_nullable_to_non_nullable
-              as DurationEditMode?,
-      labelFlex: freezed == labelFlex
-          ? _value.labelFlex
-          : labelFlex // ignore: cast_nullable_to_non_nullable
-              as int?,
-      pickDuration: freezed == pickDuration
-          ? _value.pickDuration
-          : pickDuration // ignore: cast_nullable_to_non_nullable
-              as PickDurationDef?,
-      formatDuration: freezed == formatDuration
-          ? _value.formatDuration
-          : formatDuration // ignore: cast_nullable_to_non_nullable
-              as FormatDurationDef?,
-      widgetBuilder: freezed == widgetBuilder
-          ? _value.widgetBuilder
-          : widgetBuilder // ignore: cast_nullable_to_non_nullable
-              as DurationFieldBuilderDef?,
-      dateTimeLabelText: freezed == dateTimeLabelText
-          ? _value.dateTimeLabelText
-          : dateTimeLabelText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      dateTimeHelperText: freezed == dateTimeHelperText
-          ? _value.dateTimeHelperText
-          : dateTimeHelperText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      dateTimeHintText: freezed == dateTimeHintText
-          ? _value.dateTimeHintText
-          : dateTimeHintText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      dateFormat: freezed == dateFormat
-          ? _value.dateFormat
-          : dateFormat // ignore: cast_nullable_to_non_nullable
-              as String?,
-      timeFormat: freezed == timeFormat
-          ? _value.timeFormat
-          : timeFormat // ignore: cast_nullable_to_non_nullable
-              as String?,
-      dateTimeEditMode: freezed == dateTimeEditMode
-          ? _value.dateTimeEditMode
-          : dateTimeEditMode // ignore: cast_nullable_to_non_nullable
-              as DateEditMode?,
-      pickDate: freezed == pickDate
-          ? _value.pickDate
-          : pickDate // ignore: cast_nullable_to_non_nullable
-              as PickDateDef?,
-      pickTime: freezed == pickTime
-          ? _value.pickTime
-          : pickTime // ignore: cast_nullable_to_non_nullable
-              as PickTimeDef?,
-    ) as $Val);
+  String toString() {
+    return 'DateTimeInputUiSettings(dateFormat: $dateFormat, timeFormat: $timeFormat, labelText: $labelText, helperText: $helperText, hintText: $hintText, labelFlex: $labelFlex, initialEditValue: $initialEditValue, initialDateEntryMode: $initialDateEntryMode, initialDatePickerMode: $initialDatePickerMode, editMode: $editMode, pickDate: $pickDate, pickTime: $pickTime, initialTimeEntryMode: $initialTimeEntryMode, widgetBuilder: $widgetBuilder)';
   }
 }
 
 /// @nodoc
-abstract class _$$DurationInputUiSettingsImplCopyWith<$Res>
-    implements $DurationInputUiSettingsCopyWith<$Res> {
-  factory _$$DurationInputUiSettingsImplCopyWith(
-          _$DurationInputUiSettingsImpl value,
-          $Res Function(_$DurationInputUiSettingsImpl) then) =
-      __$$DurationInputUiSettingsImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $DateTimeInputUiSettingsCopyWith<$Res> {
+  factory $DateTimeInputUiSettingsCopyWith(DateTimeInputUiSettings value,
+          $Res Function(DateTimeInputUiSettings) _then) =
+      _$DateTimeInputUiSettingsCopyWithImpl;
   @useResult
   $Res call(
-      {String? labelText,
+      {String? dateFormat,
+      String? timeFormat,
+      String? labelText,
       String? helperText,
       String? hintText,
-      DurationEditMode? initialEditMode,
       int? labelFlex,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      PickDurationDef? pickDuration,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      FormatDurationDef? formatDuration,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      DurationFieldBuilderDef? widgetBuilder,
-      String? dateTimeLabelText,
-      String? dateTimeHelperText,
-      String? dateTimeHintText,
-      String? dateFormat,
-      String? timeFormat,
-      DateEditMode? dateTimeEditMode,
+      @JsonKey(toJson: FlexibleDateTime.staticToJson)
+      FlexibleDateTime? initialEditValue,
+      DatePickerEntryMode? initialDateEntryMode,
+      DatePickerMode? initialDatePickerMode,
+      DateEditMode? editMode,
       @JsonKey(includeToJson: false, includeFromJson: false)
       PickDateDef? pickDate,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      PickTimeDef? pickTime});
+      PickTimeDef? pickTime,
+      TimePickerEntryMode? initialTimeEntryMode,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      DateTimeFieldBuilderDef? widgetBuilder});
+
+  $FlexibleDateTimeCopyWith<$Res>? get initialEditValue;
 }
 
 /// @nodoc
-class __$$DurationInputUiSettingsImplCopyWithImpl<$Res>
-    extends _$DurationInputUiSettingsCopyWithImpl<$Res,
-        _$DurationInputUiSettingsImpl>
-    implements _$$DurationInputUiSettingsImplCopyWith<$Res> {
-  __$$DurationInputUiSettingsImplCopyWithImpl(
-      _$DurationInputUiSettingsImpl _value,
-      $Res Function(_$DurationInputUiSettingsImpl) _then)
-      : super(_value, _then);
+class _$DateTimeInputUiSettingsCopyWithImpl<$Res>
+    implements $DateTimeInputUiSettingsCopyWith<$Res> {
+  _$DateTimeInputUiSettingsCopyWithImpl(this._self, this._then);
 
-  /// Create a copy of DurationInputUiSettings
+  final DateTimeInputUiSettings _self;
+  final $Res Function(DateTimeInputUiSettings) _then;
+
+  /// Create a copy of DateTimeInputUiSettings
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? dateFormat = freezed,
+    Object? timeFormat = freezed,
     Object? labelText = freezed,
     Object? helperText = freezed,
     Object? hintText = freezed,
-    Object? initialEditMode = freezed,
     Object? labelFlex = freezed,
-    Object? pickDuration = freezed,
-    Object? formatDuration = freezed,
-    Object? widgetBuilder = freezed,
-    Object? dateTimeLabelText = freezed,
-    Object? dateTimeHelperText = freezed,
-    Object? dateTimeHintText = freezed,
-    Object? dateFormat = freezed,
-    Object? timeFormat = freezed,
-    Object? dateTimeEditMode = freezed,
+    Object? initialEditValue = freezed,
+    Object? initialDateEntryMode = freezed,
+    Object? initialDatePickerMode = freezed,
+    Object? editMode = freezed,
     Object? pickDate = freezed,
     Object? pickTime = freezed,
+    Object? initialTimeEntryMode = freezed,
+    Object? widgetBuilder = freezed,
   }) {
-    return _then(_$DurationInputUiSettingsImpl(
-      labelText: freezed == labelText
-          ? _value.labelText
-          : labelText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      helperText: freezed == helperText
-          ? _value.helperText
-          : helperText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      hintText: freezed == hintText
-          ? _value.hintText
-          : hintText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      initialEditMode: freezed == initialEditMode
-          ? _value.initialEditMode
-          : initialEditMode // ignore: cast_nullable_to_non_nullable
-              as DurationEditMode?,
-      labelFlex: freezed == labelFlex
-          ? _value.labelFlex
-          : labelFlex // ignore: cast_nullable_to_non_nullable
-              as int?,
-      pickDuration: freezed == pickDuration
-          ? _value.pickDuration
-          : pickDuration // ignore: cast_nullable_to_non_nullable
-              as PickDurationDef?,
-      formatDuration: freezed == formatDuration
-          ? _value.formatDuration
-          : formatDuration // ignore: cast_nullable_to_non_nullable
-              as FormatDurationDef?,
-      widgetBuilder: freezed == widgetBuilder
-          ? _value.widgetBuilder
-          : widgetBuilder // ignore: cast_nullable_to_non_nullable
-              as DurationFieldBuilderDef?,
-      dateTimeLabelText: freezed == dateTimeLabelText
-          ? _value.dateTimeLabelText
-          : dateTimeLabelText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      dateTimeHelperText: freezed == dateTimeHelperText
-          ? _value.dateTimeHelperText
-          : dateTimeHelperText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      dateTimeHintText: freezed == dateTimeHintText
-          ? _value.dateTimeHintText
-          : dateTimeHintText // ignore: cast_nullable_to_non_nullable
-              as String?,
+    return _then(_self.copyWith(
       dateFormat: freezed == dateFormat
-          ? _value.dateFormat
+          ? _self.dateFormat
           : dateFormat // ignore: cast_nullable_to_non_nullable
               as String?,
       timeFormat: freezed == timeFormat
-          ? _value.timeFormat
+          ? _self.timeFormat
           : timeFormat // ignore: cast_nullable_to_non_nullable
               as String?,
-      dateTimeEditMode: freezed == dateTimeEditMode
-          ? _value.dateTimeEditMode
-          : dateTimeEditMode // ignore: cast_nullable_to_non_nullable
+      labelText: freezed == labelText
+          ? _self.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _self.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hintText: freezed == hintText
+          ? _self.hintText
+          : hintText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      labelFlex: freezed == labelFlex
+          ? _self.labelFlex
+          : labelFlex // ignore: cast_nullable_to_non_nullable
+              as int?,
+      initialEditValue: freezed == initialEditValue
+          ? _self.initialEditValue
+          : initialEditValue // ignore: cast_nullable_to_non_nullable
+              as FlexibleDateTime?,
+      initialDateEntryMode: freezed == initialDateEntryMode
+          ? _self.initialDateEntryMode
+          : initialDateEntryMode // ignore: cast_nullable_to_non_nullable
+              as DatePickerEntryMode?,
+      initialDatePickerMode: freezed == initialDatePickerMode
+          ? _self.initialDatePickerMode
+          : initialDatePickerMode // ignore: cast_nullable_to_non_nullable
+              as DatePickerMode?,
+      editMode: freezed == editMode
+          ? _self.editMode
+          : editMode // ignore: cast_nullable_to_non_nullable
               as DateEditMode?,
       pickDate: freezed == pickDate
-          ? _value.pickDate
+          ? _self.pickDate
           : pickDate // ignore: cast_nullable_to_non_nullable
               as PickDateDef?,
       pickTime: freezed == pickTime
-          ? _value.pickTime
+          ? _self.pickTime
           : pickTime // ignore: cast_nullable_to_non_nullable
               as PickTimeDef?,
+      initialTimeEntryMode: freezed == initialTimeEntryMode
+          ? _self.initialTimeEntryMode
+          : initialTimeEntryMode // ignore: cast_nullable_to_non_nullable
+              as TimePickerEntryMode?,
+      widgetBuilder: freezed == widgetBuilder
+          ? _self.widgetBuilder
+          : widgetBuilder // ignore: cast_nullable_to_non_nullable
+              as DateTimeFieldBuilderDef?,
     ));
+  }
+
+  /// Create a copy of DateTimeInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $FlexibleDateTimeCopyWith<$Res>? get initialEditValue {
+    if (_self.initialEditValue == null) {
+      return null;
+    }
+
+    return $FlexibleDateTimeCopyWith<$Res>(_self.initialEditValue!, (value) {
+      return _then(_self.copyWith(initialEditValue: value));
+    });
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$DurationInputUiSettingsImpl extends _DurationInputUiSettings {
-  const _$DurationInputUiSettingsImpl(
-      {this.labelText,
+class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
+  const _DateTimeInputUiSettings(
+      {this.dateFormat,
+      this.timeFormat,
+      this.labelText,
       this.helperText,
       this.hintText,
-      this.initialEditMode,
       this.labelFlex,
-      @JsonKey(includeToJson: false, includeFromJson: false) this.pickDuration,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      this.formatDuration,
-      @JsonKey(includeToJson: false, includeFromJson: false) this.widgetBuilder,
-      this.dateTimeLabelText,
-      this.dateTimeHelperText,
-      this.dateTimeHintText,
-      this.dateFormat,
-      this.timeFormat,
-      this.dateTimeEditMode,
+      @JsonKey(toJson: FlexibleDateTime.staticToJson) this.initialEditValue,
+      this.initialDateEntryMode,
+      this.initialDatePickerMode,
+      this.editMode,
       @JsonKey(includeToJson: false, includeFromJson: false) this.pickDate,
-      @JsonKey(includeToJson: false, includeFromJson: false) this.pickTime})
+      @JsonKey(includeToJson: false, includeFromJson: false) this.pickTime,
+      this.initialTimeEntryMode,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      this.widgetBuilder})
       : super._();
+  factory _DateTimeInputUiSettings.fromJson(Map<String, dynamic> json) =>
+      _$DateTimeInputUiSettingsFromJson(json);
 
-  factory _$DurationInputUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DurationInputUiSettingsImplFromJson(json);
-
+  @override
+  final String? dateFormat;
+  @override
+  final String? timeFormat;
   @override
   final String? labelText;
   @override
@@ -1165,56 +538,295 @@ class _$DurationInputUiSettingsImpl extends _DurationInputUiSettings {
   @override
   final String? hintText;
 
-  /// Only used if DurationInput.startDatePath is provided
-  @override
-  final DurationEditMode? initialEditMode;
-
   /// If null, label will be placed above the date selector.
   /// Else, label and selector will be in a flexible row,
   /// selector with a flex value of 10,
   /// and label with a flex value of [labelFlex].
   @override
   final int? labelFlex;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  final PickDurationDef? pickDuration;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  final FormatDurationDef? formatDuration;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  final DurationFieldBuilderDef? widgetBuilder;
 
-  /// The following fields are used if editMode is dateTime
+  /// If DateTimeInput.initialValue is null, this value will be used instead.
   @override
-  final String? dateTimeLabelText;
+  @JsonKey(toJson: FlexibleDateTime.staticToJson)
+  final FlexibleDateTime? initialEditValue;
   @override
-  final String? dateTimeHelperText;
+  final DatePickerEntryMode? initialDateEntryMode;
   @override
-  final String? dateTimeHintText;
+  final DatePickerMode? initialDatePickerMode;
   @override
-  final String? dateFormat;
-  @override
-  final String? timeFormat;
-  @override
-  final DateEditMode? dateTimeEditMode;
+  final DateEditMode? editMode;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final PickDateDef? pickDate;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final PickTimeDef? pickTime;
+  @override
+  final TimePickerEntryMode? initialTimeEntryMode;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final DateTimeFieldBuilderDef? widgetBuilder;
+
+  /// Create a copy of DateTimeInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$DateTimeInputUiSettingsCopyWith<_DateTimeInputUiSettings> get copyWith =>
+      __$DateTimeInputUiSettingsCopyWithImpl<_DateTimeInputUiSettings>(
+          this, _$identity);
 
   @override
-  String toString() {
-    return 'DurationInputUiSettings(labelText: $labelText, helperText: $helperText, hintText: $hintText, initialEditMode: $initialEditMode, labelFlex: $labelFlex, pickDuration: $pickDuration, formatDuration: $formatDuration, widgetBuilder: $widgetBuilder, dateTimeLabelText: $dateTimeLabelText, dateTimeHelperText: $dateTimeHelperText, dateTimeHintText: $dateTimeHintText, dateFormat: $dateFormat, timeFormat: $timeFormat, dateTimeEditMode: $dateTimeEditMode, pickDate: $pickDate, pickTime: $pickTime)';
+  Map<String, dynamic> toJson() {
+    return _$DateTimeInputUiSettingsToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DurationInputUiSettingsImpl &&
+            other is _DateTimeInputUiSettings &&
+            (identical(other.dateFormat, dateFormat) ||
+                other.dateFormat == dateFormat) &&
+            (identical(other.timeFormat, timeFormat) ||
+                other.timeFormat == timeFormat) &&
+            (identical(other.labelText, labelText) ||
+                other.labelText == labelText) &&
+            (identical(other.helperText, helperText) ||
+                other.helperText == helperText) &&
+            (identical(other.hintText, hintText) ||
+                other.hintText == hintText) &&
+            (identical(other.labelFlex, labelFlex) ||
+                other.labelFlex == labelFlex) &&
+            (identical(other.initialEditValue, initialEditValue) ||
+                other.initialEditValue == initialEditValue) &&
+            (identical(other.initialDateEntryMode, initialDateEntryMode) ||
+                other.initialDateEntryMode == initialDateEntryMode) &&
+            (identical(other.initialDatePickerMode, initialDatePickerMode) ||
+                other.initialDatePickerMode == initialDatePickerMode) &&
+            (identical(other.editMode, editMode) ||
+                other.editMode == editMode) &&
+            (identical(other.pickDate, pickDate) ||
+                other.pickDate == pickDate) &&
+            (identical(other.pickTime, pickTime) ||
+                other.pickTime == pickTime) &&
+            (identical(other.initialTimeEntryMode, initialTimeEntryMode) ||
+                other.initialTimeEntryMode == initialTimeEntryMode) &&
+            (identical(other.widgetBuilder, widgetBuilder) ||
+                other.widgetBuilder == widgetBuilder));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      dateFormat,
+      timeFormat,
+      labelText,
+      helperText,
+      hintText,
+      labelFlex,
+      initialEditValue,
+      initialDateEntryMode,
+      initialDatePickerMode,
+      editMode,
+      pickDate,
+      pickTime,
+      initialTimeEntryMode,
+      widgetBuilder);
+
+  @override
+  String toString() {
+    return 'DateTimeInputUiSettings(dateFormat: $dateFormat, timeFormat: $timeFormat, labelText: $labelText, helperText: $helperText, hintText: $hintText, labelFlex: $labelFlex, initialEditValue: $initialEditValue, initialDateEntryMode: $initialDateEntryMode, initialDatePickerMode: $initialDatePickerMode, editMode: $editMode, pickDate: $pickDate, pickTime: $pickTime, initialTimeEntryMode: $initialTimeEntryMode, widgetBuilder: $widgetBuilder)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$DateTimeInputUiSettingsCopyWith<$Res>
+    implements $DateTimeInputUiSettingsCopyWith<$Res> {
+  factory _$DateTimeInputUiSettingsCopyWith(_DateTimeInputUiSettings value,
+          $Res Function(_DateTimeInputUiSettings) _then) =
+      __$DateTimeInputUiSettingsCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String? dateFormat,
+      String? timeFormat,
+      String? labelText,
+      String? helperText,
+      String? hintText,
+      int? labelFlex,
+      @JsonKey(toJson: FlexibleDateTime.staticToJson)
+      FlexibleDateTime? initialEditValue,
+      DatePickerEntryMode? initialDateEntryMode,
+      DatePickerMode? initialDatePickerMode,
+      DateEditMode? editMode,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      PickDateDef? pickDate,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      PickTimeDef? pickTime,
+      TimePickerEntryMode? initialTimeEntryMode,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      DateTimeFieldBuilderDef? widgetBuilder});
+
+  @override
+  $FlexibleDateTimeCopyWith<$Res>? get initialEditValue;
+}
+
+/// @nodoc
+class __$DateTimeInputUiSettingsCopyWithImpl<$Res>
+    implements _$DateTimeInputUiSettingsCopyWith<$Res> {
+  __$DateTimeInputUiSettingsCopyWithImpl(this._self, this._then);
+
+  final _DateTimeInputUiSettings _self;
+  final $Res Function(_DateTimeInputUiSettings) _then;
+
+  /// Create a copy of DateTimeInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? dateFormat = freezed,
+    Object? timeFormat = freezed,
+    Object? labelText = freezed,
+    Object? helperText = freezed,
+    Object? hintText = freezed,
+    Object? labelFlex = freezed,
+    Object? initialEditValue = freezed,
+    Object? initialDateEntryMode = freezed,
+    Object? initialDatePickerMode = freezed,
+    Object? editMode = freezed,
+    Object? pickDate = freezed,
+    Object? pickTime = freezed,
+    Object? initialTimeEntryMode = freezed,
+    Object? widgetBuilder = freezed,
+  }) {
+    return _then(_DateTimeInputUiSettings(
+      dateFormat: freezed == dateFormat
+          ? _self.dateFormat
+          : dateFormat // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timeFormat: freezed == timeFormat
+          ? _self.timeFormat
+          : timeFormat // ignore: cast_nullable_to_non_nullable
+              as String?,
+      labelText: freezed == labelText
+          ? _self.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _self.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hintText: freezed == hintText
+          ? _self.hintText
+          : hintText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      labelFlex: freezed == labelFlex
+          ? _self.labelFlex
+          : labelFlex // ignore: cast_nullable_to_non_nullable
+              as int?,
+      initialEditValue: freezed == initialEditValue
+          ? _self.initialEditValue
+          : initialEditValue // ignore: cast_nullable_to_non_nullable
+              as FlexibleDateTime?,
+      initialDateEntryMode: freezed == initialDateEntryMode
+          ? _self.initialDateEntryMode
+          : initialDateEntryMode // ignore: cast_nullable_to_non_nullable
+              as DatePickerEntryMode?,
+      initialDatePickerMode: freezed == initialDatePickerMode
+          ? _self.initialDatePickerMode
+          : initialDatePickerMode // ignore: cast_nullable_to_non_nullable
+              as DatePickerMode?,
+      editMode: freezed == editMode
+          ? _self.editMode
+          : editMode // ignore: cast_nullable_to_non_nullable
+              as DateEditMode?,
+      pickDate: freezed == pickDate
+          ? _self.pickDate
+          : pickDate // ignore: cast_nullable_to_non_nullable
+              as PickDateDef?,
+      pickTime: freezed == pickTime
+          ? _self.pickTime
+          : pickTime // ignore: cast_nullable_to_non_nullable
+              as PickTimeDef?,
+      initialTimeEntryMode: freezed == initialTimeEntryMode
+          ? _self.initialTimeEntryMode
+          : initialTimeEntryMode // ignore: cast_nullable_to_non_nullable
+              as TimePickerEntryMode?,
+      widgetBuilder: freezed == widgetBuilder
+          ? _self.widgetBuilder
+          : widgetBuilder // ignore: cast_nullable_to_non_nullable
+              as DateTimeFieldBuilderDef?,
+    ));
+  }
+
+  /// Create a copy of DateTimeInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $FlexibleDateTimeCopyWith<$Res>? get initialEditValue {
+    if (_self.initialEditValue == null) {
+      return null;
+    }
+
+    return $FlexibleDateTimeCopyWith<$Res>(_self.initialEditValue!, (value) {
+      return _then(_self.copyWith(initialEditValue: value));
+    });
+  }
+}
+
+/// @nodoc
+mixin _$DurationInputUiSettings {
+  String? get labelText;
+  String? get helperText;
+  String? get hintText;
+
+  /// Only used if DurationInput.startDatePath is provided
+  DurationEditMode? get initialEditMode;
+
+  /// If null, label will be placed above the date selector.
+  /// Else, label and selector will be in a flexible row,
+  /// selector with a flex value of 10,
+  /// and label with a flex value of [labelFlex].
+  int? get labelFlex;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  PickDurationDef? get pickDuration;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  FormatDurationDef? get formatDuration;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  DurationFieldBuilderDef? get widgetBuilder;
+
+  /// The following fields are used if editMode is dateTime
+  String? get dateTimeLabelText;
+  String? get dateTimeHelperText;
+  String? get dateTimeHintText;
+  String? get dateFormat;
+  String? get timeFormat;
+  DateEditMode? get dateTimeEditMode;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  PickDateDef? get pickDate;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  PickTimeDef? get pickTime;
+
+  /// Create a copy of DurationInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $DurationInputUiSettingsCopyWith<DurationInputUiSettings> get copyWith =>
+      _$DurationInputUiSettingsCopyWithImpl<DurationInputUiSettings>(
+          this as DurationInputUiSettings, _$identity);
+
+  /// Serializes this DurationInputUiSettings to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is DurationInputUiSettings &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
             (identical(other.helperText, helperText) ||
@@ -1270,327 +882,457 @@ class _$DurationInputUiSettingsImpl extends _DurationInputUiSettings {
       pickDate,
       pickTime);
 
-  /// Create a copy of DurationInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$DurationInputUiSettingsImplCopyWith<_$DurationInputUiSettingsImpl>
-      get copyWith => __$$DurationInputUiSettingsImplCopyWithImpl<
-          _$DurationInputUiSettingsImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$DurationInputUiSettingsImplToJson(
-      this,
-    );
+  String toString() {
+    return 'DurationInputUiSettings(labelText: $labelText, helperText: $helperText, hintText: $hintText, initialEditMode: $initialEditMode, labelFlex: $labelFlex, pickDuration: $pickDuration, formatDuration: $formatDuration, widgetBuilder: $widgetBuilder, dateTimeLabelText: $dateTimeLabelText, dateTimeHelperText: $dateTimeHelperText, dateTimeHintText: $dateTimeHintText, dateFormat: $dateFormat, timeFormat: $timeFormat, dateTimeEditMode: $dateTimeEditMode, pickDate: $pickDate, pickTime: $pickTime)';
   }
 }
 
-abstract class _DurationInputUiSettings extends DurationInputUiSettings {
-  const factory _DurationInputUiSettings(
-      {final String? labelText,
-      final String? helperText,
-      final String? hintText,
-      final DurationEditMode? initialEditMode,
-      final int? labelFlex,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      final PickDurationDef? pickDuration,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      final FormatDurationDef? formatDuration,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      final DurationFieldBuilderDef? widgetBuilder,
-      final String? dateTimeLabelText,
-      final String? dateTimeHelperText,
-      final String? dateTimeHintText,
-      final String? dateFormat,
-      final String? timeFormat,
-      final DateEditMode? dateTimeEditMode,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      final PickDateDef? pickDate,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      final PickTimeDef? pickTime}) = _$DurationInputUiSettingsImpl;
-  const _DurationInputUiSettings._() : super._();
-
-  factory _DurationInputUiSettings.fromJson(Map<String, dynamic> json) =
-      _$DurationInputUiSettingsImpl.fromJson;
-
-  @override
-  String? get labelText;
-  @override
-  String? get helperText;
-  @override
-  String? get hintText;
-
-  /// Only used if DurationInput.startDatePath is provided
-  @override
-  DurationEditMode? get initialEditMode;
-
-  /// If null, label will be placed above the date selector.
-  /// Else, label and selector will be in a flexible row,
-  /// selector with a flex value of 10,
-  /// and label with a flex value of [labelFlex].
-  @override
-  int? get labelFlex;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  PickDurationDef? get pickDuration;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  FormatDurationDef? get formatDuration;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  DurationFieldBuilderDef? get widgetBuilder;
-
-  /// The following fields are used if editMode is dateTime
-  @override
-  String? get dateTimeLabelText;
-  @override
-  String? get dateTimeHelperText;
-  @override
-  String? get dateTimeHintText;
-  @override
-  String? get dateFormat;
-  @override
-  String? get timeFormat;
-  @override
-  DateEditMode? get dateTimeEditMode;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  PickDateDef? get pickDate;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  PickTimeDef? get pickTime;
-
-  /// Create a copy of DurationInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DurationInputUiSettingsImplCopyWith<_$DurationInputUiSettingsImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-DynamicInputsNodeUiSettings _$DynamicInputsNodeUiSettingsFromJson(
-    Map<String, dynamic> json) {
-  return _DynamicInputsNodeUiSettings.fromJson(json);
-}
-
 /// @nodoc
-mixin _$DynamicInputsNodeUiSettings {
-  String? get labelText => throw _privateConstructorUsedError;
-  String? get helperText => throw _privateConstructorUsedError;
-
-  /// Default to true
-  bool? get reorderable => throw _privateConstructorUsedError;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  GenerateIdDef? get generateId => throw _privateConstructorUsedError;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  OnDynamicInputDeletionDef? get onChildDeletion =>
-      throw _privateConstructorUsedError;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  DynamicInputsNodeWidgetBuilderDef? get widgetBuilder =>
-      throw _privateConstructorUsedError;
-
-  /// Serializes this DynamicInputsNodeUiSettings to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of DynamicInputsNodeUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $DynamicInputsNodeUiSettingsCopyWith<DynamicInputsNodeUiSettings>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $DynamicInputsNodeUiSettingsCopyWith<$Res> {
-  factory $DynamicInputsNodeUiSettingsCopyWith(
-          DynamicInputsNodeUiSettings value,
-          $Res Function(DynamicInputsNodeUiSettings) then) =
-      _$DynamicInputsNodeUiSettingsCopyWithImpl<$Res,
-          DynamicInputsNodeUiSettings>;
+abstract mixin class $DurationInputUiSettingsCopyWith<$Res> {
+  factory $DurationInputUiSettingsCopyWith(DurationInputUiSettings value,
+          $Res Function(DurationInputUiSettings) _then) =
+      _$DurationInputUiSettingsCopyWithImpl;
   @useResult
   $Res call(
       {String? labelText,
       String? helperText,
-      bool? reorderable,
+      String? hintText,
+      DurationEditMode? initialEditMode,
+      int? labelFlex,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      GenerateIdDef? generateId,
+      PickDurationDef? pickDuration,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      OnDynamicInputDeletionDef? onChildDeletion,
+      FormatDurationDef? formatDuration,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      DynamicInputsNodeWidgetBuilderDef? widgetBuilder});
+      DurationFieldBuilderDef? widgetBuilder,
+      String? dateTimeLabelText,
+      String? dateTimeHelperText,
+      String? dateTimeHintText,
+      String? dateFormat,
+      String? timeFormat,
+      DateEditMode? dateTimeEditMode,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      PickDateDef? pickDate,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      PickTimeDef? pickTime});
 }
 
 /// @nodoc
-class _$DynamicInputsNodeUiSettingsCopyWithImpl<$Res,
-        $Val extends DynamicInputsNodeUiSettings>
-    implements $DynamicInputsNodeUiSettingsCopyWith<$Res> {
-  _$DynamicInputsNodeUiSettingsCopyWithImpl(this._value, this._then);
+class _$DurationInputUiSettingsCopyWithImpl<$Res>
+    implements $DurationInputUiSettingsCopyWith<$Res> {
+  _$DurationInputUiSettingsCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final DurationInputUiSettings _self;
+  final $Res Function(DurationInputUiSettings) _then;
 
-  /// Create a copy of DynamicInputsNodeUiSettings
+  /// Create a copy of DurationInputUiSettings
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? labelText = freezed,
     Object? helperText = freezed,
-    Object? reorderable = freezed,
-    Object? generateId = freezed,
-    Object? onChildDeletion = freezed,
+    Object? hintText = freezed,
+    Object? initialEditMode = freezed,
+    Object? labelFlex = freezed,
+    Object? pickDuration = freezed,
+    Object? formatDuration = freezed,
     Object? widgetBuilder = freezed,
+    Object? dateTimeLabelText = freezed,
+    Object? dateTimeHelperText = freezed,
+    Object? dateTimeHintText = freezed,
+    Object? dateFormat = freezed,
+    Object? timeFormat = freezed,
+    Object? dateTimeEditMode = freezed,
+    Object? pickDate = freezed,
+    Object? pickTime = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       labelText: freezed == labelText
-          ? _value.labelText
+          ? _self.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
               as String?,
       helperText: freezed == helperText
-          ? _value.helperText
+          ? _self.helperText
           : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
-      reorderable: freezed == reorderable
-          ? _value.reorderable
-          : reorderable // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      generateId: freezed == generateId
-          ? _value.generateId
-          : generateId // ignore: cast_nullable_to_non_nullable
-              as GenerateIdDef?,
-      onChildDeletion: freezed == onChildDeletion
-          ? _value.onChildDeletion
-          : onChildDeletion // ignore: cast_nullable_to_non_nullable
-              as OnDynamicInputDeletionDef?,
-      widgetBuilder: freezed == widgetBuilder
-          ? _value.widgetBuilder
-          : widgetBuilder // ignore: cast_nullable_to_non_nullable
-              as DynamicInputsNodeWidgetBuilderDef?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$DynamicInputsNodeUiSettingsImplCopyWith<$Res>
-    implements $DynamicInputsNodeUiSettingsCopyWith<$Res> {
-  factory _$$DynamicInputsNodeUiSettingsImplCopyWith(
-          _$DynamicInputsNodeUiSettingsImpl value,
-          $Res Function(_$DynamicInputsNodeUiSettingsImpl) then) =
-      __$$DynamicInputsNodeUiSettingsImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String? labelText,
-      String? helperText,
-      bool? reorderable,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      GenerateIdDef? generateId,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      OnDynamicInputDeletionDef? onChildDeletion,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      DynamicInputsNodeWidgetBuilderDef? widgetBuilder});
-}
-
-/// @nodoc
-class __$$DynamicInputsNodeUiSettingsImplCopyWithImpl<$Res>
-    extends _$DynamicInputsNodeUiSettingsCopyWithImpl<$Res,
-        _$DynamicInputsNodeUiSettingsImpl>
-    implements _$$DynamicInputsNodeUiSettingsImplCopyWith<$Res> {
-  __$$DynamicInputsNodeUiSettingsImplCopyWithImpl(
-      _$DynamicInputsNodeUiSettingsImpl _value,
-      $Res Function(_$DynamicInputsNodeUiSettingsImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of DynamicInputsNodeUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? labelText = freezed,
-    Object? helperText = freezed,
-    Object? reorderable = freezed,
-    Object? generateId = freezed,
-    Object? onChildDeletion = freezed,
-    Object? widgetBuilder = freezed,
-  }) {
-    return _then(_$DynamicInputsNodeUiSettingsImpl(
-      labelText: freezed == labelText
-          ? _value.labelText
-          : labelText // ignore: cast_nullable_to_non_nullable
+      hintText: freezed == hintText
+          ? _self.hintText
+          : hintText // ignore: cast_nullable_to_non_nullable
               as String?,
-      helperText: freezed == helperText
-          ? _value.helperText
-          : helperText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      reorderable: freezed == reorderable
-          ? _value.reorderable
-          : reorderable // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      generateId: freezed == generateId
-          ? _value.generateId
-          : generateId // ignore: cast_nullable_to_non_nullable
-              as GenerateIdDef?,
-      onChildDeletion: freezed == onChildDeletion
-          ? _value.onChildDeletion
-          : onChildDeletion // ignore: cast_nullable_to_non_nullable
-              as OnDynamicInputDeletionDef?,
+      initialEditMode: freezed == initialEditMode
+          ? _self.initialEditMode
+          : initialEditMode // ignore: cast_nullable_to_non_nullable
+              as DurationEditMode?,
+      labelFlex: freezed == labelFlex
+          ? _self.labelFlex
+          : labelFlex // ignore: cast_nullable_to_non_nullable
+              as int?,
+      pickDuration: freezed == pickDuration
+          ? _self.pickDuration
+          : pickDuration // ignore: cast_nullable_to_non_nullable
+              as PickDurationDef?,
+      formatDuration: freezed == formatDuration
+          ? _self.formatDuration
+          : formatDuration // ignore: cast_nullable_to_non_nullable
+              as FormatDurationDef?,
       widgetBuilder: freezed == widgetBuilder
-          ? _value.widgetBuilder
+          ? _self.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
-              as DynamicInputsNodeWidgetBuilderDef?,
+              as DurationFieldBuilderDef?,
+      dateTimeLabelText: freezed == dateTimeLabelText
+          ? _self.dateTimeLabelText
+          : dateTimeLabelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dateTimeHelperText: freezed == dateTimeHelperText
+          ? _self.dateTimeHelperText
+          : dateTimeHelperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dateTimeHintText: freezed == dateTimeHintText
+          ? _self.dateTimeHintText
+          : dateTimeHintText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dateFormat: freezed == dateFormat
+          ? _self.dateFormat
+          : dateFormat // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timeFormat: freezed == timeFormat
+          ? _self.timeFormat
+          : timeFormat // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dateTimeEditMode: freezed == dateTimeEditMode
+          ? _self.dateTimeEditMode
+          : dateTimeEditMode // ignore: cast_nullable_to_non_nullable
+              as DateEditMode?,
+      pickDate: freezed == pickDate
+          ? _self.pickDate
+          : pickDate // ignore: cast_nullable_to_non_nullable
+              as PickDateDef?,
+      pickTime: freezed == pickTime
+          ? _self.pickTime
+          : pickTime // ignore: cast_nullable_to_non_nullable
+              as PickTimeDef?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$DynamicInputsNodeUiSettingsImpl extends _DynamicInputsNodeUiSettings {
-  const _$DynamicInputsNodeUiSettingsImpl(
+class _DurationInputUiSettings extends DurationInputUiSettings {
+  const _DurationInputUiSettings(
       {this.labelText,
       this.helperText,
-      this.reorderable,
-      @JsonKey(includeToJson: false, includeFromJson: false) this.generateId,
+      this.hintText,
+      this.initialEditMode,
+      this.labelFlex,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.pickDuration,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      this.onChildDeletion,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      this.widgetBuilder})
+      this.formatDuration,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.widgetBuilder,
+      this.dateTimeLabelText,
+      this.dateTimeHelperText,
+      this.dateTimeHintText,
+      this.dateFormat,
+      this.timeFormat,
+      this.dateTimeEditMode,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.pickDate,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.pickTime})
       : super._();
-
-  factory _$DynamicInputsNodeUiSettingsImpl.fromJson(
-          Map<String, dynamic> json) =>
-      _$$DynamicInputsNodeUiSettingsImplFromJson(json);
+  factory _DurationInputUiSettings.fromJson(Map<String, dynamic> json) =>
+      _$DurationInputUiSettingsFromJson(json);
 
   @override
   final String? labelText;
   @override
   final String? helperText;
+  @override
+  final String? hintText;
 
-  /// Default to true
+  /// Only used if DurationInput.startDatePath is provided
   @override
-  final bool? reorderable;
+  final DurationEditMode? initialEditMode;
+
+  /// If null, label will be placed above the date selector.
+  /// Else, label and selector will be in a flexible row,
+  /// selector with a flex value of 10,
+  /// and label with a flex value of [labelFlex].
+  @override
+  final int? labelFlex;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final GenerateIdDef? generateId;
+  final PickDurationDef? pickDuration;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final OnDynamicInputDeletionDef? onChildDeletion;
+  final FormatDurationDef? formatDuration;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final DynamicInputsNodeWidgetBuilderDef? widgetBuilder;
+  final DurationFieldBuilderDef? widgetBuilder;
+
+  /// The following fields are used if editMode is dateTime
+  @override
+  final String? dateTimeLabelText;
+  @override
+  final String? dateTimeHelperText;
+  @override
+  final String? dateTimeHintText;
+  @override
+  final String? dateFormat;
+  @override
+  final String? timeFormat;
+  @override
+  final DateEditMode? dateTimeEditMode;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final PickDateDef? pickDate;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final PickTimeDef? pickTime;
+
+  /// Create a copy of DurationInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$DurationInputUiSettingsCopyWith<_DurationInputUiSettings> get copyWith =>
+      __$DurationInputUiSettingsCopyWithImpl<_DurationInputUiSettings>(
+          this, _$identity);
 
   @override
-  String toString() {
-    return 'DynamicInputsNodeUiSettings(labelText: $labelText, helperText: $helperText, reorderable: $reorderable, generateId: $generateId, onChildDeletion: $onChildDeletion, widgetBuilder: $widgetBuilder)';
+  Map<String, dynamic> toJson() {
+    return _$DurationInputUiSettingsToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DynamicInputsNodeUiSettingsImpl &&
+            other is _DurationInputUiSettings &&
+            (identical(other.labelText, labelText) ||
+                other.labelText == labelText) &&
+            (identical(other.helperText, helperText) ||
+                other.helperText == helperText) &&
+            (identical(other.hintText, hintText) ||
+                other.hintText == hintText) &&
+            (identical(other.initialEditMode, initialEditMode) ||
+                other.initialEditMode == initialEditMode) &&
+            (identical(other.labelFlex, labelFlex) ||
+                other.labelFlex == labelFlex) &&
+            (identical(other.pickDuration, pickDuration) ||
+                other.pickDuration == pickDuration) &&
+            (identical(other.formatDuration, formatDuration) ||
+                other.formatDuration == formatDuration) &&
+            (identical(other.widgetBuilder, widgetBuilder) ||
+                other.widgetBuilder == widgetBuilder) &&
+            (identical(other.dateTimeLabelText, dateTimeLabelText) ||
+                other.dateTimeLabelText == dateTimeLabelText) &&
+            (identical(other.dateTimeHelperText, dateTimeHelperText) ||
+                other.dateTimeHelperText == dateTimeHelperText) &&
+            (identical(other.dateTimeHintText, dateTimeHintText) ||
+                other.dateTimeHintText == dateTimeHintText) &&
+            (identical(other.dateFormat, dateFormat) ||
+                other.dateFormat == dateFormat) &&
+            (identical(other.timeFormat, timeFormat) ||
+                other.timeFormat == timeFormat) &&
+            (identical(other.dateTimeEditMode, dateTimeEditMode) ||
+                other.dateTimeEditMode == dateTimeEditMode) &&
+            (identical(other.pickDate, pickDate) ||
+                other.pickDate == pickDate) &&
+            (identical(other.pickTime, pickTime) ||
+                other.pickTime == pickTime));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      labelText,
+      helperText,
+      hintText,
+      initialEditMode,
+      labelFlex,
+      pickDuration,
+      formatDuration,
+      widgetBuilder,
+      dateTimeLabelText,
+      dateTimeHelperText,
+      dateTimeHintText,
+      dateFormat,
+      timeFormat,
+      dateTimeEditMode,
+      pickDate,
+      pickTime);
+
+  @override
+  String toString() {
+    return 'DurationInputUiSettings(labelText: $labelText, helperText: $helperText, hintText: $hintText, initialEditMode: $initialEditMode, labelFlex: $labelFlex, pickDuration: $pickDuration, formatDuration: $formatDuration, widgetBuilder: $widgetBuilder, dateTimeLabelText: $dateTimeLabelText, dateTimeHelperText: $dateTimeHelperText, dateTimeHintText: $dateTimeHintText, dateFormat: $dateFormat, timeFormat: $timeFormat, dateTimeEditMode: $dateTimeEditMode, pickDate: $pickDate, pickTime: $pickTime)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$DurationInputUiSettingsCopyWith<$Res>
+    implements $DurationInputUiSettingsCopyWith<$Res> {
+  factory _$DurationInputUiSettingsCopyWith(_DurationInputUiSettings value,
+          $Res Function(_DurationInputUiSettings) _then) =
+      __$DurationInputUiSettingsCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String? labelText,
+      String? helperText,
+      String? hintText,
+      DurationEditMode? initialEditMode,
+      int? labelFlex,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      PickDurationDef? pickDuration,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      FormatDurationDef? formatDuration,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      DurationFieldBuilderDef? widgetBuilder,
+      String? dateTimeLabelText,
+      String? dateTimeHelperText,
+      String? dateTimeHintText,
+      String? dateFormat,
+      String? timeFormat,
+      DateEditMode? dateTimeEditMode,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      PickDateDef? pickDate,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      PickTimeDef? pickTime});
+}
+
+/// @nodoc
+class __$DurationInputUiSettingsCopyWithImpl<$Res>
+    implements _$DurationInputUiSettingsCopyWith<$Res> {
+  __$DurationInputUiSettingsCopyWithImpl(this._self, this._then);
+
+  final _DurationInputUiSettings _self;
+  final $Res Function(_DurationInputUiSettings) _then;
+
+  /// Create a copy of DurationInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? labelText = freezed,
+    Object? helperText = freezed,
+    Object? hintText = freezed,
+    Object? initialEditMode = freezed,
+    Object? labelFlex = freezed,
+    Object? pickDuration = freezed,
+    Object? formatDuration = freezed,
+    Object? widgetBuilder = freezed,
+    Object? dateTimeLabelText = freezed,
+    Object? dateTimeHelperText = freezed,
+    Object? dateTimeHintText = freezed,
+    Object? dateFormat = freezed,
+    Object? timeFormat = freezed,
+    Object? dateTimeEditMode = freezed,
+    Object? pickDate = freezed,
+    Object? pickTime = freezed,
+  }) {
+    return _then(_DurationInputUiSettings(
+      labelText: freezed == labelText
+          ? _self.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _self.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hintText: freezed == hintText
+          ? _self.hintText
+          : hintText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      initialEditMode: freezed == initialEditMode
+          ? _self.initialEditMode
+          : initialEditMode // ignore: cast_nullable_to_non_nullable
+              as DurationEditMode?,
+      labelFlex: freezed == labelFlex
+          ? _self.labelFlex
+          : labelFlex // ignore: cast_nullable_to_non_nullable
+              as int?,
+      pickDuration: freezed == pickDuration
+          ? _self.pickDuration
+          : pickDuration // ignore: cast_nullable_to_non_nullable
+              as PickDurationDef?,
+      formatDuration: freezed == formatDuration
+          ? _self.formatDuration
+          : formatDuration // ignore: cast_nullable_to_non_nullable
+              as FormatDurationDef?,
+      widgetBuilder: freezed == widgetBuilder
+          ? _self.widgetBuilder
+          : widgetBuilder // ignore: cast_nullable_to_non_nullable
+              as DurationFieldBuilderDef?,
+      dateTimeLabelText: freezed == dateTimeLabelText
+          ? _self.dateTimeLabelText
+          : dateTimeLabelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dateTimeHelperText: freezed == dateTimeHelperText
+          ? _self.dateTimeHelperText
+          : dateTimeHelperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dateTimeHintText: freezed == dateTimeHintText
+          ? _self.dateTimeHintText
+          : dateTimeHintText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dateFormat: freezed == dateFormat
+          ? _self.dateFormat
+          : dateFormat // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timeFormat: freezed == timeFormat
+          ? _self.timeFormat
+          : timeFormat // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dateTimeEditMode: freezed == dateTimeEditMode
+          ? _self.dateTimeEditMode
+          : dateTimeEditMode // ignore: cast_nullable_to_non_nullable
+              as DateEditMode?,
+      pickDate: freezed == pickDate
+          ? _self.pickDate
+          : pickDate // ignore: cast_nullable_to_non_nullable
+              as PickDateDef?,
+      pickTime: freezed == pickTime
+          ? _self.pickTime
+          : pickTime // ignore: cast_nullable_to_non_nullable
+              as PickTimeDef?,
+    ));
+  }
+}
+
+/// @nodoc
+mixin _$DynamicInputsNodeUiSettings {
+  String? get labelText;
+  String? get helperText;
+
+  /// Default to true
+  bool? get reorderable;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  GenerateIdDef? get generateId;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  OnDynamicInputDeletionDef? get onChildDeletion;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  DynamicInputsNodeWidgetBuilderDef? get widgetBuilder;
+
+  /// Create a copy of DynamicInputsNodeUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $DynamicInputsNodeUiSettingsCopyWith<DynamicInputsNodeUiSettings>
+      get copyWith => _$DynamicInputsNodeUiSettingsCopyWithImpl<
+              DynamicInputsNodeUiSettings>(
+          this as DynamicInputsNodeUiSettings, _$identity);
+
+  /// Serializes this DynamicInputsNodeUiSettings to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is DynamicInputsNodeUiSettings &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
             (identical(other.helperText, helperText) ||
@@ -1610,195 +1352,251 @@ class _$DynamicInputsNodeUiSettingsImpl extends _DynamicInputsNodeUiSettings {
   int get hashCode => Object.hash(runtimeType, labelText, helperText,
       reorderable, generateId, onChildDeletion, widgetBuilder);
 
-  /// Create a copy of DynamicInputsNodeUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$DynamicInputsNodeUiSettingsImplCopyWith<_$DynamicInputsNodeUiSettingsImpl>
-      get copyWith => __$$DynamicInputsNodeUiSettingsImplCopyWithImpl<
-          _$DynamicInputsNodeUiSettingsImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$DynamicInputsNodeUiSettingsImplToJson(
-      this,
-    );
+  String toString() {
+    return 'DynamicInputsNodeUiSettings(labelText: $labelText, helperText: $helperText, reorderable: $reorderable, generateId: $generateId, onChildDeletion: $onChildDeletion, widgetBuilder: $widgetBuilder)';
   }
 }
 
-abstract class _DynamicInputsNodeUiSettings
-    extends DynamicInputsNodeUiSettings {
-  const factory _DynamicInputsNodeUiSettings(
-          {final String? labelText,
-          final String? helperText,
-          final bool? reorderable,
-          @JsonKey(includeToJson: false, includeFromJson: false)
-          final GenerateIdDef? generateId,
-          @JsonKey(includeToJson: false, includeFromJson: false)
-          final OnDynamicInputDeletionDef? onChildDeletion,
-          @JsonKey(includeToJson: false, includeFromJson: false)
-          final DynamicInputsNodeWidgetBuilderDef? widgetBuilder}) =
-      _$DynamicInputsNodeUiSettingsImpl;
-  const _DynamicInputsNodeUiSettings._() : super._();
+/// @nodoc
+abstract mixin class $DynamicInputsNodeUiSettingsCopyWith<$Res> {
+  factory $DynamicInputsNodeUiSettingsCopyWith(
+          DynamicInputsNodeUiSettings value,
+          $Res Function(DynamicInputsNodeUiSettings) _then) =
+      _$DynamicInputsNodeUiSettingsCopyWithImpl;
+  @useResult
+  $Res call(
+      {String? labelText,
+      String? helperText,
+      bool? reorderable,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      GenerateIdDef? generateId,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      OnDynamicInputDeletionDef? onChildDeletion,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      DynamicInputsNodeWidgetBuilderDef? widgetBuilder});
+}
 
-  factory _DynamicInputsNodeUiSettings.fromJson(Map<String, dynamic> json) =
-      _$DynamicInputsNodeUiSettingsImpl.fromJson;
+/// @nodoc
+class _$DynamicInputsNodeUiSettingsCopyWithImpl<$Res>
+    implements $DynamicInputsNodeUiSettingsCopyWith<$Res> {
+  _$DynamicInputsNodeUiSettingsCopyWithImpl(this._self, this._then);
 
-  @override
-  String? get labelText;
-  @override
-  String? get helperText;
-
-  /// Default to true
-  @override
-  bool? get reorderable;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  GenerateIdDef? get generateId;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  OnDynamicInputDeletionDef? get onChildDeletion;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  DynamicInputsNodeWidgetBuilderDef? get widgetBuilder;
+  final DynamicInputsNodeUiSettings _self;
+  final $Res Function(DynamicInputsNodeUiSettings) _then;
 
   /// Create a copy of DynamicInputsNodeUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DynamicInputsNodeUiSettingsImplCopyWith<_$DynamicInputsNodeUiSettingsImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-DynamicInputUiSettings _$DynamicInputUiSettingsFromJson(
-    Map<String, dynamic> json) {
-  return _DynamicInputUiSettings.fromJson(json);
-}
-
-/// @nodoc
-mixin _$DynamicInputUiSettings {
-  String? get labelText => throw _privateConstructorUsedError;
-  String? get helperText => throw _privateConstructorUsedError;
-
-  /// Serializes this DynamicInputUiSettings to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of DynamicInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $DynamicInputUiSettingsCopyWith<DynamicInputUiSettings> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $DynamicInputUiSettingsCopyWith<$Res> {
-  factory $DynamicInputUiSettingsCopyWith(DynamicInputUiSettings value,
-          $Res Function(DynamicInputUiSettings) then) =
-      _$DynamicInputUiSettingsCopyWithImpl<$Res, DynamicInputUiSettings>;
-  @useResult
-  $Res call({String? labelText, String? helperText});
-}
-
-/// @nodoc
-class _$DynamicInputUiSettingsCopyWithImpl<$Res,
-        $Val extends DynamicInputUiSettings>
-    implements $DynamicInputUiSettingsCopyWith<$Res> {
-  _$DynamicInputUiSettingsCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of DynamicInputUiSettings
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? labelText = freezed,
     Object? helperText = freezed,
+    Object? reorderable = freezed,
+    Object? generateId = freezed,
+    Object? onChildDeletion = freezed,
+    Object? widgetBuilder = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       labelText: freezed == labelText
-          ? _value.labelText
+          ? _self.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
               as String?,
       helperText: freezed == helperText
-          ? _value.helperText
+          ? _self.helperText
           : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$DynamicInputUiSettingsImplCopyWith<$Res>
-    implements $DynamicInputUiSettingsCopyWith<$Res> {
-  factory _$$DynamicInputUiSettingsImplCopyWith(
-          _$DynamicInputUiSettingsImpl value,
-          $Res Function(_$DynamicInputUiSettingsImpl) then) =
-      __$$DynamicInputUiSettingsImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String? labelText, String? helperText});
-}
-
-/// @nodoc
-class __$$DynamicInputUiSettingsImplCopyWithImpl<$Res>
-    extends _$DynamicInputUiSettingsCopyWithImpl<$Res,
-        _$DynamicInputUiSettingsImpl>
-    implements _$$DynamicInputUiSettingsImplCopyWith<$Res> {
-  __$$DynamicInputUiSettingsImplCopyWithImpl(
-      _$DynamicInputUiSettingsImpl _value,
-      $Res Function(_$DynamicInputUiSettingsImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of DynamicInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? labelText = freezed,
-    Object? helperText = freezed,
-  }) {
-    return _then(_$DynamicInputUiSettingsImpl(
-      labelText: freezed == labelText
-          ? _value.labelText
-          : labelText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      helperText: freezed == helperText
-          ? _value.helperText
-          : helperText // ignore: cast_nullable_to_non_nullable
-              as String?,
+      reorderable: freezed == reorderable
+          ? _self.reorderable
+          : reorderable // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      generateId: freezed == generateId
+          ? _self.generateId
+          : generateId // ignore: cast_nullable_to_non_nullable
+              as GenerateIdDef?,
+      onChildDeletion: freezed == onChildDeletion
+          ? _self.onChildDeletion
+          : onChildDeletion // ignore: cast_nullable_to_non_nullable
+              as OnDynamicInputDeletionDef?,
+      widgetBuilder: freezed == widgetBuilder
+          ? _self.widgetBuilder
+          : widgetBuilder // ignore: cast_nullable_to_non_nullable
+              as DynamicInputsNodeWidgetBuilderDef?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$DynamicInputUiSettingsImpl extends _DynamicInputUiSettings {
-  const _$DynamicInputUiSettingsImpl({this.labelText, this.helperText})
+class _DynamicInputsNodeUiSettings extends DynamicInputsNodeUiSettings {
+  const _DynamicInputsNodeUiSettings(
+      {this.labelText,
+      this.helperText,
+      this.reorderable,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.generateId,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      this.onChildDeletion,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      this.widgetBuilder})
       : super._();
-
-  factory _$DynamicInputUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DynamicInputUiSettingsImplFromJson(json);
+  factory _DynamicInputsNodeUiSettings.fromJson(Map<String, dynamic> json) =>
+      _$DynamicInputsNodeUiSettingsFromJson(json);
 
   @override
   final String? labelText;
   @override
   final String? helperText;
 
+  /// Default to true
   @override
-  String toString() {
-    return 'DynamicInputUiSettings(labelText: $labelText, helperText: $helperText)';
+  final bool? reorderable;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final GenerateIdDef? generateId;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final OnDynamicInputDeletionDef? onChildDeletion;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final DynamicInputsNodeWidgetBuilderDef? widgetBuilder;
+
+  /// Create a copy of DynamicInputsNodeUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$DynamicInputsNodeUiSettingsCopyWith<_DynamicInputsNodeUiSettings>
+      get copyWith => __$DynamicInputsNodeUiSettingsCopyWithImpl<
+          _DynamicInputsNodeUiSettings>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$DynamicInputsNodeUiSettingsToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DynamicInputUiSettingsImpl &&
+            other is _DynamicInputsNodeUiSettings &&
+            (identical(other.labelText, labelText) ||
+                other.labelText == labelText) &&
+            (identical(other.helperText, helperText) ||
+                other.helperText == helperText) &&
+            (identical(other.reorderable, reorderable) ||
+                other.reorderable == reorderable) &&
+            (identical(other.generateId, generateId) ||
+                other.generateId == generateId) &&
+            (identical(other.onChildDeletion, onChildDeletion) ||
+                other.onChildDeletion == onChildDeletion) &&
+            (identical(other.widgetBuilder, widgetBuilder) ||
+                other.widgetBuilder == widgetBuilder));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, labelText, helperText,
+      reorderable, generateId, onChildDeletion, widgetBuilder);
+
+  @override
+  String toString() {
+    return 'DynamicInputsNodeUiSettings(labelText: $labelText, helperText: $helperText, reorderable: $reorderable, generateId: $generateId, onChildDeletion: $onChildDeletion, widgetBuilder: $widgetBuilder)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$DynamicInputsNodeUiSettingsCopyWith<$Res>
+    implements $DynamicInputsNodeUiSettingsCopyWith<$Res> {
+  factory _$DynamicInputsNodeUiSettingsCopyWith(
+          _DynamicInputsNodeUiSettings value,
+          $Res Function(_DynamicInputsNodeUiSettings) _then) =
+      __$DynamicInputsNodeUiSettingsCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String? labelText,
+      String? helperText,
+      bool? reorderable,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      GenerateIdDef? generateId,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      OnDynamicInputDeletionDef? onChildDeletion,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      DynamicInputsNodeWidgetBuilderDef? widgetBuilder});
+}
+
+/// @nodoc
+class __$DynamicInputsNodeUiSettingsCopyWithImpl<$Res>
+    implements _$DynamicInputsNodeUiSettingsCopyWith<$Res> {
+  __$DynamicInputsNodeUiSettingsCopyWithImpl(this._self, this._then);
+
+  final _DynamicInputsNodeUiSettings _self;
+  final $Res Function(_DynamicInputsNodeUiSettings) _then;
+
+  /// Create a copy of DynamicInputsNodeUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? labelText = freezed,
+    Object? helperText = freezed,
+    Object? reorderable = freezed,
+    Object? generateId = freezed,
+    Object? onChildDeletion = freezed,
+    Object? widgetBuilder = freezed,
+  }) {
+    return _then(_DynamicInputsNodeUiSettings(
+      labelText: freezed == labelText
+          ? _self.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _self.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      reorderable: freezed == reorderable
+          ? _self.reorderable
+          : reorderable // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      generateId: freezed == generateId
+          ? _self.generateId
+          : generateId // ignore: cast_nullable_to_non_nullable
+              as GenerateIdDef?,
+      onChildDeletion: freezed == onChildDeletion
+          ? _self.onChildDeletion
+          : onChildDeletion // ignore: cast_nullable_to_non_nullable
+              as OnDynamicInputDeletionDef?,
+      widgetBuilder: freezed == widgetBuilder
+          ? _self.widgetBuilder
+          : widgetBuilder // ignore: cast_nullable_to_non_nullable
+              as DynamicInputsNodeWidgetBuilderDef?,
+    ));
+  }
+}
+
+/// @nodoc
+mixin _$DynamicInputUiSettings {
+  String? get labelText;
+  String? get helperText;
+
+  /// Create a copy of DynamicInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $DynamicInputUiSettingsCopyWith<DynamicInputUiSettings> get copyWith =>
+      _$DynamicInputUiSettingsCopyWithImpl<DynamicInputUiSettings>(
+          this as DynamicInputUiSettings, _$identity);
+
+  /// Serializes this DynamicInputUiSettings to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is DynamicInputUiSettings &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
             (identical(other.helperText, helperText) ||
@@ -1809,296 +1607,173 @@ class _$DynamicInputUiSettingsImpl extends _DynamicInputUiSettings {
   @override
   int get hashCode => Object.hash(runtimeType, labelText, helperText);
 
-  /// Create a copy of DynamicInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$DynamicInputUiSettingsImplCopyWith<_$DynamicInputUiSettingsImpl>
-      get copyWith => __$$DynamicInputUiSettingsImplCopyWithImpl<
-          _$DynamicInputUiSettingsImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$DynamicInputUiSettingsImplToJson(
-      this,
-    );
+  String toString() {
+    return 'DynamicInputUiSettings(labelText: $labelText, helperText: $helperText)';
   }
 }
 
-abstract class _DynamicInputUiSettings extends DynamicInputUiSettings {
-  const factory _DynamicInputUiSettings(
-      {final String? labelText,
-      final String? helperText}) = _$DynamicInputUiSettingsImpl;
-  const _DynamicInputUiSettings._() : super._();
+/// @nodoc
+abstract mixin class $DynamicInputUiSettingsCopyWith<$Res> {
+  factory $DynamicInputUiSettingsCopyWith(DynamicInputUiSettings value,
+          $Res Function(DynamicInputUiSettings) _then) =
+      _$DynamicInputUiSettingsCopyWithImpl;
+  @useResult
+  $Res call({String? labelText, String? helperText});
+}
 
-  factory _DynamicInputUiSettings.fromJson(Map<String, dynamic> json) =
-      _$DynamicInputUiSettingsImpl.fromJson;
+/// @nodoc
+class _$DynamicInputUiSettingsCopyWithImpl<$Res>
+    implements $DynamicInputUiSettingsCopyWith<$Res> {
+  _$DynamicInputUiSettingsCopyWithImpl(this._self, this._then);
 
-  @override
-  String? get labelText;
-  @override
-  String? get helperText;
+  final DynamicInputUiSettings _self;
+  final $Res Function(DynamicInputUiSettings) _then;
 
   /// Create a copy of DynamicInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DynamicInputUiSettingsImplCopyWith<_$DynamicInputUiSettingsImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-InputsNodeUiSettings _$InputsNodeUiSettingsFromJson(Map<String, dynamic> json) {
-  return _InputsNodeUiSettings.fromJson(json);
-}
-
-/// @nodoc
-mixin _$InputsNodeUiSettings {
-  String? get labelText => throw _privateConstructorUsedError;
-  String? get labelTextWhenChildrenHidden => throw _privateConstructorUsedError;
-  String? get helperText => throw _privateConstructorUsedError;
-  ChildrenVisibility? get childrenVisibility =>
-      throw _privateConstructorUsedError;
-
-  /// Only used by [ChildrenVisibility.whenAsked].
-  /// If true, when the widget will be rendered,
-  /// the children's visibility will be asked.
-  bool get showChildrenInitially => throw _privateConstructorUsedError;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  InputNodeWidgetBuilderDef? get widgetBuilder =>
-      throw _privateConstructorUsedError;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  HeaderBuilderDef? get headerBuilder => throw _privateConstructorUsedError;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  InputNodeWidgetBuilderDef? get expanderBuilder =>
-      throw _privateConstructorUsedError;
-
-  /// Serializes this InputsNodeUiSettings to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of InputsNodeUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $InputsNodeUiSettingsCopyWith<InputsNodeUiSettings> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $InputsNodeUiSettingsCopyWith<$Res> {
-  factory $InputsNodeUiSettingsCopyWith(InputsNodeUiSettings value,
-          $Res Function(InputsNodeUiSettings) then) =
-      _$InputsNodeUiSettingsCopyWithImpl<$Res, InputsNodeUiSettings>;
-  @useResult
-  $Res call(
-      {String? labelText,
-      String? labelTextWhenChildrenHidden,
-      String? helperText,
-      ChildrenVisibility? childrenVisibility,
-      bool showChildrenInitially,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      InputNodeWidgetBuilderDef? widgetBuilder,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      HeaderBuilderDef? headerBuilder,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      InputNodeWidgetBuilderDef? expanderBuilder});
-}
-
-/// @nodoc
-class _$InputsNodeUiSettingsCopyWithImpl<$Res,
-        $Val extends InputsNodeUiSettings>
-    implements $InputsNodeUiSettingsCopyWith<$Res> {
-  _$InputsNodeUiSettingsCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of InputsNodeUiSettings
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? labelText = freezed,
-    Object? labelTextWhenChildrenHidden = freezed,
     Object? helperText = freezed,
-    Object? childrenVisibility = freezed,
-    Object? showChildrenInitially = null,
-    Object? widgetBuilder = freezed,
-    Object? headerBuilder = freezed,
-    Object? expanderBuilder = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       labelText: freezed == labelText
-          ? _value.labelText
+          ? _self.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
               as String?,
-      labelTextWhenChildrenHidden: freezed == labelTextWhenChildrenHidden
-          ? _value.labelTextWhenChildrenHidden
-          : labelTextWhenChildrenHidden // ignore: cast_nullable_to_non_nullable
-              as String?,
       helperText: freezed == helperText
-          ? _value.helperText
+          ? _self.helperText
           : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
-      childrenVisibility: freezed == childrenVisibility
-          ? _value.childrenVisibility
-          : childrenVisibility // ignore: cast_nullable_to_non_nullable
-              as ChildrenVisibility?,
-      showChildrenInitially: null == showChildrenInitially
-          ? _value.showChildrenInitially
-          : showChildrenInitially // ignore: cast_nullable_to_non_nullable
-              as bool,
-      widgetBuilder: freezed == widgetBuilder
-          ? _value.widgetBuilder
-          : widgetBuilder // ignore: cast_nullable_to_non_nullable
-              as InputNodeWidgetBuilderDef?,
-      headerBuilder: freezed == headerBuilder
-          ? _value.headerBuilder
-          : headerBuilder // ignore: cast_nullable_to_non_nullable
-              as HeaderBuilderDef?,
-      expanderBuilder: freezed == expanderBuilder
-          ? _value.expanderBuilder
-          : expanderBuilder // ignore: cast_nullable_to_non_nullable
-              as InputNodeWidgetBuilderDef?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$InputsNodeUiSettingsImplCopyWith<$Res>
-    implements $InputsNodeUiSettingsCopyWith<$Res> {
-  factory _$$InputsNodeUiSettingsImplCopyWith(_$InputsNodeUiSettingsImpl value,
-          $Res Function(_$InputsNodeUiSettingsImpl) then) =
-      __$$InputsNodeUiSettingsImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String? labelText,
-      String? labelTextWhenChildrenHidden,
-      String? helperText,
-      ChildrenVisibility? childrenVisibility,
-      bool showChildrenInitially,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      InputNodeWidgetBuilderDef? widgetBuilder,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      HeaderBuilderDef? headerBuilder,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      InputNodeWidgetBuilderDef? expanderBuilder});
-}
-
-/// @nodoc
-class __$$InputsNodeUiSettingsImplCopyWithImpl<$Res>
-    extends _$InputsNodeUiSettingsCopyWithImpl<$Res, _$InputsNodeUiSettingsImpl>
-    implements _$$InputsNodeUiSettingsImplCopyWith<$Res> {
-  __$$InputsNodeUiSettingsImplCopyWithImpl(_$InputsNodeUiSettingsImpl _value,
-      $Res Function(_$InputsNodeUiSettingsImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of InputsNodeUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? labelText = freezed,
-    Object? labelTextWhenChildrenHidden = freezed,
-    Object? helperText = freezed,
-    Object? childrenVisibility = freezed,
-    Object? showChildrenInitially = null,
-    Object? widgetBuilder = freezed,
-    Object? headerBuilder = freezed,
-    Object? expanderBuilder = freezed,
-  }) {
-    return _then(_$InputsNodeUiSettingsImpl(
-      labelText: freezed == labelText
-          ? _value.labelText
-          : labelText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      labelTextWhenChildrenHidden: freezed == labelTextWhenChildrenHidden
-          ? _value.labelTextWhenChildrenHidden
-          : labelTextWhenChildrenHidden // ignore: cast_nullable_to_non_nullable
-              as String?,
-      helperText: freezed == helperText
-          ? _value.helperText
-          : helperText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      childrenVisibility: freezed == childrenVisibility
-          ? _value.childrenVisibility
-          : childrenVisibility // ignore: cast_nullable_to_non_nullable
-              as ChildrenVisibility?,
-      showChildrenInitially: null == showChildrenInitially
-          ? _value.showChildrenInitially
-          : showChildrenInitially // ignore: cast_nullable_to_non_nullable
-              as bool,
-      widgetBuilder: freezed == widgetBuilder
-          ? _value.widgetBuilder
-          : widgetBuilder // ignore: cast_nullable_to_non_nullable
-              as InputNodeWidgetBuilderDef?,
-      headerBuilder: freezed == headerBuilder
-          ? _value.headerBuilder
-          : headerBuilder // ignore: cast_nullable_to_non_nullable
-              as HeaderBuilderDef?,
-      expanderBuilder: freezed == expanderBuilder
-          ? _value.expanderBuilder
-          : expanderBuilder // ignore: cast_nullable_to_non_nullable
-              as InputNodeWidgetBuilderDef?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
-  const _$InputsNodeUiSettingsImpl(
-      {this.labelText,
-      this.labelTextWhenChildrenHidden,
-      this.helperText,
-      this.childrenVisibility,
-      this.showChildrenInitially = false,
-      @JsonKey(includeToJson: false, includeFromJson: false) this.widgetBuilder,
-      @JsonKey(includeToJson: false, includeFromJson: false) this.headerBuilder,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      this.expanderBuilder})
-      : super._();
-
-  factory _$InputsNodeUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$InputsNodeUiSettingsImplFromJson(json);
+class _DynamicInputUiSettings extends DynamicInputUiSettings {
+  const _DynamicInputUiSettings({this.labelText, this.helperText}) : super._();
+  factory _DynamicInputUiSettings.fromJson(Map<String, dynamic> json) =>
+      _$DynamicInputUiSettingsFromJson(json);
 
   @override
   final String? labelText;
   @override
-  final String? labelTextWhenChildrenHidden;
-  @override
   final String? helperText;
-  @override
-  final ChildrenVisibility? childrenVisibility;
 
-  /// Only used by [ChildrenVisibility.whenAsked].
-  /// If true, when the widget will be rendered,
-  /// the children's visibility will be asked.
+  /// Create a copy of DynamicInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey()
-  final bool showChildrenInitially;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  final InputNodeWidgetBuilderDef? widgetBuilder;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  final HeaderBuilderDef? headerBuilder;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  final InputNodeWidgetBuilderDef? expanderBuilder;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$DynamicInputUiSettingsCopyWith<_DynamicInputUiSettings> get copyWith =>
+      __$DynamicInputUiSettingsCopyWithImpl<_DynamicInputUiSettings>(
+          this, _$identity);
 
   @override
-  String toString() {
-    return 'InputsNodeUiSettings(labelText: $labelText, labelTextWhenChildrenHidden: $labelTextWhenChildrenHidden, helperText: $helperText, childrenVisibility: $childrenVisibility, showChildrenInitially: $showChildrenInitially, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, expanderBuilder: $expanderBuilder)';
+  Map<String, dynamic> toJson() {
+    return _$DynamicInputUiSettingsToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$InputsNodeUiSettingsImpl &&
+            other is _DynamicInputUiSettings &&
+            (identical(other.labelText, labelText) ||
+                other.labelText == labelText) &&
+            (identical(other.helperText, helperText) ||
+                other.helperText == helperText));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, labelText, helperText);
+
+  @override
+  String toString() {
+    return 'DynamicInputUiSettings(labelText: $labelText, helperText: $helperText)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$DynamicInputUiSettingsCopyWith<$Res>
+    implements $DynamicInputUiSettingsCopyWith<$Res> {
+  factory _$DynamicInputUiSettingsCopyWith(_DynamicInputUiSettings value,
+          $Res Function(_DynamicInputUiSettings) _then) =
+      __$DynamicInputUiSettingsCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String? labelText, String? helperText});
+}
+
+/// @nodoc
+class __$DynamicInputUiSettingsCopyWithImpl<$Res>
+    implements _$DynamicInputUiSettingsCopyWith<$Res> {
+  __$DynamicInputUiSettingsCopyWithImpl(this._self, this._then);
+
+  final _DynamicInputUiSettings _self;
+  final $Res Function(_DynamicInputUiSettings) _then;
+
+  /// Create a copy of DynamicInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? labelText = freezed,
+    Object? helperText = freezed,
+  }) {
+    return _then(_DynamicInputUiSettings(
+      labelText: freezed == labelText
+          ? _self.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _self.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+mixin _$InputsNodeUiSettings {
+  String? get labelText;
+  String? get labelTextWhenChildrenHidden;
+  String? get helperText;
+  ChildrenVisibility? get childrenVisibility;
+
+  /// Only used by [ChildrenVisibility.whenAsked].
+  /// If true, when the widget will be rendered,
+  /// the children's visibility will be asked.
+  bool get showChildrenInitially;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  InputNodeWidgetBuilderDef? get widgetBuilder;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  HeaderBuilderDef? get headerBuilder;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  InputNodeWidgetBuilderDef? get expanderBuilder;
+
+  /// Create a copy of InputsNodeUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $InputsNodeUiSettingsCopyWith<InputsNodeUiSettings> get copyWith =>
+      _$InputsNodeUiSettingsCopyWithImpl<InputsNodeUiSettings>(
+          this as InputsNodeUiSettings, _$identity);
+
+  /// Serializes this InputsNodeUiSettings to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is InputsNodeUiSettings &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
             (identical(other.labelTextWhenChildrenHidden,
@@ -2132,226 +1807,297 @@ class _$InputsNodeUiSettingsImpl extends _InputsNodeUiSettings {
       headerBuilder,
       expanderBuilder);
 
-  /// Create a copy of InputsNodeUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$InputsNodeUiSettingsImplCopyWith<_$InputsNodeUiSettingsImpl>
-      get copyWith =>
-          __$$InputsNodeUiSettingsImplCopyWithImpl<_$InputsNodeUiSettingsImpl>(
-              this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$InputsNodeUiSettingsImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _InputsNodeUiSettings extends InputsNodeUiSettings {
-  const factory _InputsNodeUiSettings(
-          {final String? labelText,
-          final String? labelTextWhenChildrenHidden,
-          final String? helperText,
-          final ChildrenVisibility? childrenVisibility,
-          final bool showChildrenInitially,
-          @JsonKey(includeToJson: false, includeFromJson: false)
-          final InputNodeWidgetBuilderDef? widgetBuilder,
-          @JsonKey(includeToJson: false, includeFromJson: false)
-          final HeaderBuilderDef? headerBuilder,
-          @JsonKey(includeToJson: false, includeFromJson: false)
-          final InputNodeWidgetBuilderDef? expanderBuilder}) =
-      _$InputsNodeUiSettingsImpl;
-  const _InputsNodeUiSettings._() : super._();
-
-  factory _InputsNodeUiSettings.fromJson(Map<String, dynamic> json) =
-      _$InputsNodeUiSettingsImpl.fromJson;
-
-  @override
-  String? get labelText;
-  @override
-  String? get labelTextWhenChildrenHidden;
-  @override
-  String? get helperText;
-  @override
-  ChildrenVisibility? get childrenVisibility;
-
-  /// Only used by [ChildrenVisibility.whenAsked].
-  /// If true, when the widget will be rendered,
-  /// the children's visibility will be asked.
-  @override
-  bool get showChildrenInitially;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  InputNodeWidgetBuilderDef? get widgetBuilder;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  HeaderBuilderDef? get headerBuilder;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  InputNodeWidgetBuilderDef? get expanderBuilder;
-
-  /// Create a copy of InputsNodeUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$InputsNodeUiSettingsImplCopyWith<_$InputsNodeUiSettingsImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-MediaInputUiSettings _$MediaInputUiSettingsFromJson(Map<String, dynamic> json) {
-  return _MediaInputUiSettings.fromJson(json);
-}
-
-/// @nodoc
-mixin _$MediaInputUiSettings {
-  String? get addMediaText => throw _privateConstructorUsedError;
-  int? get fieldHeight => throw _privateConstructorUsedError;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  MediaFieldBuilderDef? get widgetBuilder => throw _privateConstructorUsedError;
-
-  /// Serializes this MediaInputUiSettings to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of MediaInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $MediaInputUiSettingsCopyWith<MediaInputUiSettings> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $MediaInputUiSettingsCopyWith<$Res> {
-  factory $MediaInputUiSettingsCopyWith(MediaInputUiSettings value,
-          $Res Function(MediaInputUiSettings) then) =
-      _$MediaInputUiSettingsCopyWithImpl<$Res, MediaInputUiSettings>;
-  @useResult
-  $Res call(
-      {String? addMediaText,
-      int? fieldHeight,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      MediaFieldBuilderDef? widgetBuilder});
-}
-
-/// @nodoc
-class _$MediaInputUiSettingsCopyWithImpl<$Res,
-        $Val extends MediaInputUiSettings>
-    implements $MediaInputUiSettingsCopyWith<$Res> {
-  _$MediaInputUiSettingsCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of MediaInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? addMediaText = freezed,
-    Object? fieldHeight = freezed,
-    Object? widgetBuilder = freezed,
-  }) {
-    return _then(_value.copyWith(
-      addMediaText: freezed == addMediaText
-          ? _value.addMediaText
-          : addMediaText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      fieldHeight: freezed == fieldHeight
-          ? _value.fieldHeight
-          : fieldHeight // ignore: cast_nullable_to_non_nullable
-              as int?,
-      widgetBuilder: freezed == widgetBuilder
-          ? _value.widgetBuilder
-          : widgetBuilder // ignore: cast_nullable_to_non_nullable
-              as MediaFieldBuilderDef?,
-    ) as $Val);
+  String toString() {
+    return 'InputsNodeUiSettings(labelText: $labelText, labelTextWhenChildrenHidden: $labelTextWhenChildrenHidden, helperText: $helperText, childrenVisibility: $childrenVisibility, showChildrenInitially: $showChildrenInitially, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, expanderBuilder: $expanderBuilder)';
   }
 }
 
 /// @nodoc
-abstract class _$$MediaInputUiSettingsImplCopyWith<$Res>
-    implements $MediaInputUiSettingsCopyWith<$Res> {
-  factory _$$MediaInputUiSettingsImplCopyWith(_$MediaInputUiSettingsImpl value,
-          $Res Function(_$MediaInputUiSettingsImpl) then) =
-      __$$MediaInputUiSettingsImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $InputsNodeUiSettingsCopyWith<$Res> {
+  factory $InputsNodeUiSettingsCopyWith(InputsNodeUiSettings value,
+          $Res Function(InputsNodeUiSettings) _then) =
+      _$InputsNodeUiSettingsCopyWithImpl;
   @useResult
   $Res call(
-      {String? addMediaText,
-      int? fieldHeight,
+      {String? labelText,
+      String? labelTextWhenChildrenHidden,
+      String? helperText,
+      ChildrenVisibility? childrenVisibility,
+      bool showChildrenInitially,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      MediaFieldBuilderDef? widgetBuilder});
+      InputNodeWidgetBuilderDef? widgetBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      HeaderBuilderDef? headerBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      InputNodeWidgetBuilderDef? expanderBuilder});
 }
 
 /// @nodoc
-class __$$MediaInputUiSettingsImplCopyWithImpl<$Res>
-    extends _$MediaInputUiSettingsCopyWithImpl<$Res, _$MediaInputUiSettingsImpl>
-    implements _$$MediaInputUiSettingsImplCopyWith<$Res> {
-  __$$MediaInputUiSettingsImplCopyWithImpl(_$MediaInputUiSettingsImpl _value,
-      $Res Function(_$MediaInputUiSettingsImpl) _then)
-      : super(_value, _then);
+class _$InputsNodeUiSettingsCopyWithImpl<$Res>
+    implements $InputsNodeUiSettingsCopyWith<$Res> {
+  _$InputsNodeUiSettingsCopyWithImpl(this._self, this._then);
 
-  /// Create a copy of MediaInputUiSettings
+  final InputsNodeUiSettings _self;
+  final $Res Function(InputsNodeUiSettings) _then;
+
+  /// Create a copy of InputsNodeUiSettings
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? addMediaText = freezed,
-    Object? fieldHeight = freezed,
+    Object? labelText = freezed,
+    Object? labelTextWhenChildrenHidden = freezed,
+    Object? helperText = freezed,
+    Object? childrenVisibility = freezed,
+    Object? showChildrenInitially = null,
     Object? widgetBuilder = freezed,
+    Object? headerBuilder = freezed,
+    Object? expanderBuilder = freezed,
   }) {
-    return _then(_$MediaInputUiSettingsImpl(
-      addMediaText: freezed == addMediaText
-          ? _value.addMediaText
-          : addMediaText // ignore: cast_nullable_to_non_nullable
+    return _then(_self.copyWith(
+      labelText: freezed == labelText
+          ? _self.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
               as String?,
-      fieldHeight: freezed == fieldHeight
-          ? _value.fieldHeight
-          : fieldHeight // ignore: cast_nullable_to_non_nullable
-              as int?,
+      labelTextWhenChildrenHidden: freezed == labelTextWhenChildrenHidden
+          ? _self.labelTextWhenChildrenHidden
+          : labelTextWhenChildrenHidden // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _self.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      childrenVisibility: freezed == childrenVisibility
+          ? _self.childrenVisibility
+          : childrenVisibility // ignore: cast_nullable_to_non_nullable
+              as ChildrenVisibility?,
+      showChildrenInitially: null == showChildrenInitially
+          ? _self.showChildrenInitially
+          : showChildrenInitially // ignore: cast_nullable_to_non_nullable
+              as bool,
       widgetBuilder: freezed == widgetBuilder
-          ? _value.widgetBuilder
+          ? _self.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
-              as MediaFieldBuilderDef?,
+              as InputNodeWidgetBuilderDef?,
+      headerBuilder: freezed == headerBuilder
+          ? _self.headerBuilder
+          : headerBuilder // ignore: cast_nullable_to_non_nullable
+              as HeaderBuilderDef?,
+      expanderBuilder: freezed == expanderBuilder
+          ? _self.expanderBuilder
+          : expanderBuilder // ignore: cast_nullable_to_non_nullable
+              as InputNodeWidgetBuilderDef?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$MediaInputUiSettingsImpl extends _MediaInputUiSettings {
-  const _$MediaInputUiSettingsImpl(
-      {this.addMediaText,
-      this.fieldHeight,
+class _InputsNodeUiSettings extends InputsNodeUiSettings {
+  const _InputsNodeUiSettings(
+      {this.labelText,
+      this.labelTextWhenChildrenHidden,
+      this.helperText,
+      this.childrenVisibility,
+      this.showChildrenInitially = false,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.widgetBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.headerBuilder,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      this.widgetBuilder})
+      this.expanderBuilder})
       : super._();
-
-  factory _$MediaInputUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$MediaInputUiSettingsImplFromJson(json);
+  factory _InputsNodeUiSettings.fromJson(Map<String, dynamic> json) =>
+      _$InputsNodeUiSettingsFromJson(json);
 
   @override
-  final String? addMediaText;
+  final String? labelText;
   @override
-  final int? fieldHeight;
+  final String? labelTextWhenChildrenHidden;
+  @override
+  final String? helperText;
+  @override
+  final ChildrenVisibility? childrenVisibility;
+
+  /// Only used by [ChildrenVisibility.whenAsked].
+  /// If true, when the widget will be rendered,
+  /// the children's visibility will be asked.
+  @override
+  @JsonKey()
+  final bool showChildrenInitially;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final MediaFieldBuilderDef? widgetBuilder;
+  final InputNodeWidgetBuilderDef? widgetBuilder;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final HeaderBuilderDef? headerBuilder;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final InputNodeWidgetBuilderDef? expanderBuilder;
+
+  /// Create a copy of InputsNodeUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$InputsNodeUiSettingsCopyWith<_InputsNodeUiSettings> get copyWith =>
+      __$InputsNodeUiSettingsCopyWithImpl<_InputsNodeUiSettings>(
+          this, _$identity);
 
   @override
-  String toString() {
-    return 'MediaInputUiSettings(addMediaText: $addMediaText, fieldHeight: $fieldHeight, widgetBuilder: $widgetBuilder)';
+  Map<String, dynamic> toJson() {
+    return _$InputsNodeUiSettingsToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MediaInputUiSettingsImpl &&
+            other is _InputsNodeUiSettings &&
+            (identical(other.labelText, labelText) ||
+                other.labelText == labelText) &&
+            (identical(other.labelTextWhenChildrenHidden,
+                    labelTextWhenChildrenHidden) ||
+                other.labelTextWhenChildrenHidden ==
+                    labelTextWhenChildrenHidden) &&
+            (identical(other.helperText, helperText) ||
+                other.helperText == helperText) &&
+            (identical(other.childrenVisibility, childrenVisibility) ||
+                other.childrenVisibility == childrenVisibility) &&
+            (identical(other.showChildrenInitially, showChildrenInitially) ||
+                other.showChildrenInitially == showChildrenInitially) &&
+            (identical(other.widgetBuilder, widgetBuilder) ||
+                other.widgetBuilder == widgetBuilder) &&
+            (identical(other.headerBuilder, headerBuilder) ||
+                other.headerBuilder == headerBuilder) &&
+            (identical(other.expanderBuilder, expanderBuilder) ||
+                other.expanderBuilder == expanderBuilder));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      labelText,
+      labelTextWhenChildrenHidden,
+      helperText,
+      childrenVisibility,
+      showChildrenInitially,
+      widgetBuilder,
+      headerBuilder,
+      expanderBuilder);
+
+  @override
+  String toString() {
+    return 'InputsNodeUiSettings(labelText: $labelText, labelTextWhenChildrenHidden: $labelTextWhenChildrenHidden, helperText: $helperText, childrenVisibility: $childrenVisibility, showChildrenInitially: $showChildrenInitially, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, expanderBuilder: $expanderBuilder)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$InputsNodeUiSettingsCopyWith<$Res>
+    implements $InputsNodeUiSettingsCopyWith<$Res> {
+  factory _$InputsNodeUiSettingsCopyWith(_InputsNodeUiSettings value,
+          $Res Function(_InputsNodeUiSettings) _then) =
+      __$InputsNodeUiSettingsCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String? labelText,
+      String? labelTextWhenChildrenHidden,
+      String? helperText,
+      ChildrenVisibility? childrenVisibility,
+      bool showChildrenInitially,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      InputNodeWidgetBuilderDef? widgetBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      HeaderBuilderDef? headerBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      InputNodeWidgetBuilderDef? expanderBuilder});
+}
+
+/// @nodoc
+class __$InputsNodeUiSettingsCopyWithImpl<$Res>
+    implements _$InputsNodeUiSettingsCopyWith<$Res> {
+  __$InputsNodeUiSettingsCopyWithImpl(this._self, this._then);
+
+  final _InputsNodeUiSettings _self;
+  final $Res Function(_InputsNodeUiSettings) _then;
+
+  /// Create a copy of InputsNodeUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? labelText = freezed,
+    Object? labelTextWhenChildrenHidden = freezed,
+    Object? helperText = freezed,
+    Object? childrenVisibility = freezed,
+    Object? showChildrenInitially = null,
+    Object? widgetBuilder = freezed,
+    Object? headerBuilder = freezed,
+    Object? expanderBuilder = freezed,
+  }) {
+    return _then(_InputsNodeUiSettings(
+      labelText: freezed == labelText
+          ? _self.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      labelTextWhenChildrenHidden: freezed == labelTextWhenChildrenHidden
+          ? _self.labelTextWhenChildrenHidden
+          : labelTextWhenChildrenHidden // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _self.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      childrenVisibility: freezed == childrenVisibility
+          ? _self.childrenVisibility
+          : childrenVisibility // ignore: cast_nullable_to_non_nullable
+              as ChildrenVisibility?,
+      showChildrenInitially: null == showChildrenInitially
+          ? _self.showChildrenInitially
+          : showChildrenInitially // ignore: cast_nullable_to_non_nullable
+              as bool,
+      widgetBuilder: freezed == widgetBuilder
+          ? _self.widgetBuilder
+          : widgetBuilder // ignore: cast_nullable_to_non_nullable
+              as InputNodeWidgetBuilderDef?,
+      headerBuilder: freezed == headerBuilder
+          ? _self.headerBuilder
+          : headerBuilder // ignore: cast_nullable_to_non_nullable
+              as HeaderBuilderDef?,
+      expanderBuilder: freezed == expanderBuilder
+          ? _self.expanderBuilder
+          : expanderBuilder // ignore: cast_nullable_to_non_nullable
+              as InputNodeWidgetBuilderDef?,
+    ));
+  }
+}
+
+/// @nodoc
+mixin _$MediaInputUiSettings {
+  String? get addMediaText;
+  int? get fieldHeight;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  MediaFieldBuilderDef? get widgetBuilder;
+
+  /// Create a copy of MediaInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $MediaInputUiSettingsCopyWith<MediaInputUiSettings> get copyWith =>
+      _$MediaInputUiSettingsCopyWithImpl<MediaInputUiSettings>(
+          this as MediaInputUiSettings, _$identity);
+
+  /// Serializes this MediaInputUiSettings to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is MediaInputUiSettings &&
             (identical(other.addMediaText, addMediaText) ||
                 other.addMediaText == addMediaText) &&
             (identical(other.fieldHeight, fieldHeight) ||
@@ -2365,219 +2111,193 @@ class _$MediaInputUiSettingsImpl extends _MediaInputUiSettings {
   int get hashCode =>
       Object.hash(runtimeType, addMediaText, fieldHeight, widgetBuilder);
 
-  /// Create a copy of MediaInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$MediaInputUiSettingsImplCopyWith<_$MediaInputUiSettingsImpl>
-      get copyWith =>
-          __$$MediaInputUiSettingsImplCopyWithImpl<_$MediaInputUiSettingsImpl>(
-              this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$MediaInputUiSettingsImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _MediaInputUiSettings extends MediaInputUiSettings {
-  const factory _MediaInputUiSettings(
-      {final String? addMediaText,
-      final int? fieldHeight,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      final MediaFieldBuilderDef? widgetBuilder}) = _$MediaInputUiSettingsImpl;
-  const _MediaInputUiSettings._() : super._();
-
-  factory _MediaInputUiSettings.fromJson(Map<String, dynamic> json) =
-      _$MediaInputUiSettingsImpl.fromJson;
-
-  @override
-  String? get addMediaText;
-  @override
-  int? get fieldHeight;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  MediaFieldBuilderDef? get widgetBuilder;
-
-  /// Create a copy of MediaInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MediaInputUiSettingsImplCopyWith<_$MediaInputUiSettingsImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-NumInputUiSettings _$NumInputUiSettingsFromJson(Map<String, dynamic> json) {
-  return _NumInputUiSettings.fromJson(json);
-}
-
-/// @nodoc
-mixin _$NumInputUiSettings {
-  String? get labelText => throw _privateConstructorUsedError;
-  String? get helperText => throw _privateConstructorUsedError;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  Widget? get unit => throw _privateConstructorUsedError;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  NumFieldBuilderDef? get widgetBuilder => throw _privateConstructorUsedError;
-
-  /// Serializes this NumInputUiSettings to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of NumInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $NumInputUiSettingsCopyWith<NumInputUiSettings> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $NumInputUiSettingsCopyWith<$Res> {
-  factory $NumInputUiSettingsCopyWith(
-          NumInputUiSettings value, $Res Function(NumInputUiSettings) then) =
-      _$NumInputUiSettingsCopyWithImpl<$Res, NumInputUiSettings>;
-  @useResult
-  $Res call(
-      {String? labelText,
-      String? helperText,
-      @JsonKey(includeToJson: false, includeFromJson: false) Widget? unit,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      NumFieldBuilderDef? widgetBuilder});
-}
-
-/// @nodoc
-class _$NumInputUiSettingsCopyWithImpl<$Res, $Val extends NumInputUiSettings>
-    implements $NumInputUiSettingsCopyWith<$Res> {
-  _$NumInputUiSettingsCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of NumInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? labelText = freezed,
-    Object? helperText = freezed,
-    Object? unit = freezed,
-    Object? widgetBuilder = freezed,
-  }) {
-    return _then(_value.copyWith(
-      labelText: freezed == labelText
-          ? _value.labelText
-          : labelText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      helperText: freezed == helperText
-          ? _value.helperText
-          : helperText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      unit: freezed == unit
-          ? _value.unit
-          : unit // ignore: cast_nullable_to_non_nullable
-              as Widget?,
-      widgetBuilder: freezed == widgetBuilder
-          ? _value.widgetBuilder
-          : widgetBuilder // ignore: cast_nullable_to_non_nullable
-              as NumFieldBuilderDef?,
-    ) as $Val);
+  String toString() {
+    return 'MediaInputUiSettings(addMediaText: $addMediaText, fieldHeight: $fieldHeight, widgetBuilder: $widgetBuilder)';
   }
 }
 
 /// @nodoc
-abstract class _$$NumInputUiSettingsImplCopyWith<$Res>
-    implements $NumInputUiSettingsCopyWith<$Res> {
-  factory _$$NumInputUiSettingsImplCopyWith(_$NumInputUiSettingsImpl value,
-          $Res Function(_$NumInputUiSettingsImpl) then) =
-      __$$NumInputUiSettingsImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $MediaInputUiSettingsCopyWith<$Res> {
+  factory $MediaInputUiSettingsCopyWith(MediaInputUiSettings value,
+          $Res Function(MediaInputUiSettings) _then) =
+      _$MediaInputUiSettingsCopyWithImpl;
   @useResult
   $Res call(
-      {String? labelText,
-      String? helperText,
-      @JsonKey(includeToJson: false, includeFromJson: false) Widget? unit,
+      {String? addMediaText,
+      int? fieldHeight,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      NumFieldBuilderDef? widgetBuilder});
+      MediaFieldBuilderDef? widgetBuilder});
 }
 
 /// @nodoc
-class __$$NumInputUiSettingsImplCopyWithImpl<$Res>
-    extends _$NumInputUiSettingsCopyWithImpl<$Res, _$NumInputUiSettingsImpl>
-    implements _$$NumInputUiSettingsImplCopyWith<$Res> {
-  __$$NumInputUiSettingsImplCopyWithImpl(_$NumInputUiSettingsImpl _value,
-      $Res Function(_$NumInputUiSettingsImpl) _then)
-      : super(_value, _then);
+class _$MediaInputUiSettingsCopyWithImpl<$Res>
+    implements $MediaInputUiSettingsCopyWith<$Res> {
+  _$MediaInputUiSettingsCopyWithImpl(this._self, this._then);
 
-  /// Create a copy of NumInputUiSettings
+  final MediaInputUiSettings _self;
+  final $Res Function(MediaInputUiSettings) _then;
+
+  /// Create a copy of MediaInputUiSettings
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? labelText = freezed,
-    Object? helperText = freezed,
-    Object? unit = freezed,
+    Object? addMediaText = freezed,
+    Object? fieldHeight = freezed,
     Object? widgetBuilder = freezed,
   }) {
-    return _then(_$NumInputUiSettingsImpl(
-      labelText: freezed == labelText
-          ? _value.labelText
-          : labelText // ignore: cast_nullable_to_non_nullable
+    return _then(_self.copyWith(
+      addMediaText: freezed == addMediaText
+          ? _self.addMediaText
+          : addMediaText // ignore: cast_nullable_to_non_nullable
               as String?,
-      helperText: freezed == helperText
-          ? _value.helperText
-          : helperText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      unit: freezed == unit
-          ? _value.unit
-          : unit // ignore: cast_nullable_to_non_nullable
-              as Widget?,
+      fieldHeight: freezed == fieldHeight
+          ? _self.fieldHeight
+          : fieldHeight // ignore: cast_nullable_to_non_nullable
+              as int?,
       widgetBuilder: freezed == widgetBuilder
-          ? _value.widgetBuilder
+          ? _self.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
-              as NumFieldBuilderDef?,
+              as MediaFieldBuilderDef?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$NumInputUiSettingsImpl extends _NumInputUiSettings {
-  const _$NumInputUiSettingsImpl(
-      {this.labelText,
-      this.helperText,
-      @JsonKey(includeToJson: false, includeFromJson: false) this.unit,
+class _MediaInputUiSettings extends MediaInputUiSettings {
+  const _MediaInputUiSettings(
+      {this.addMediaText,
+      this.fieldHeight,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.widgetBuilder})
       : super._();
-
-  factory _$NumInputUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$NumInputUiSettingsImplFromJson(json);
+  factory _MediaInputUiSettings.fromJson(Map<String, dynamic> json) =>
+      _$MediaInputUiSettingsFromJson(json);
 
   @override
-  final String? labelText;
+  final String? addMediaText;
   @override
-  final String? helperText;
+  final int? fieldHeight;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final Widget? unit;
+  final MediaFieldBuilderDef? widgetBuilder;
+
+  /// Create a copy of MediaInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  final NumFieldBuilderDef? widgetBuilder;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$MediaInputUiSettingsCopyWith<_MediaInputUiSettings> get copyWith =>
+      __$MediaInputUiSettingsCopyWithImpl<_MediaInputUiSettings>(
+          this, _$identity);
 
   @override
-  String toString() {
-    return 'NumInputUiSettings(labelText: $labelText, helperText: $helperText, unit: $unit, widgetBuilder: $widgetBuilder)';
+  Map<String, dynamic> toJson() {
+    return _$MediaInputUiSettingsToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NumInputUiSettingsImpl &&
+            other is _MediaInputUiSettings &&
+            (identical(other.addMediaText, addMediaText) ||
+                other.addMediaText == addMediaText) &&
+            (identical(other.fieldHeight, fieldHeight) ||
+                other.fieldHeight == fieldHeight) &&
+            (identical(other.widgetBuilder, widgetBuilder) ||
+                other.widgetBuilder == widgetBuilder));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, addMediaText, fieldHeight, widgetBuilder);
+
+  @override
+  String toString() {
+    return 'MediaInputUiSettings(addMediaText: $addMediaText, fieldHeight: $fieldHeight, widgetBuilder: $widgetBuilder)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$MediaInputUiSettingsCopyWith<$Res>
+    implements $MediaInputUiSettingsCopyWith<$Res> {
+  factory _$MediaInputUiSettingsCopyWith(_MediaInputUiSettings value,
+          $Res Function(_MediaInputUiSettings) _then) =
+      __$MediaInputUiSettingsCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String? addMediaText,
+      int? fieldHeight,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      MediaFieldBuilderDef? widgetBuilder});
+}
+
+/// @nodoc
+class __$MediaInputUiSettingsCopyWithImpl<$Res>
+    implements _$MediaInputUiSettingsCopyWith<$Res> {
+  __$MediaInputUiSettingsCopyWithImpl(this._self, this._then);
+
+  final _MediaInputUiSettings _self;
+  final $Res Function(_MediaInputUiSettings) _then;
+
+  /// Create a copy of MediaInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? addMediaText = freezed,
+    Object? fieldHeight = freezed,
+    Object? widgetBuilder = freezed,
+  }) {
+    return _then(_MediaInputUiSettings(
+      addMediaText: freezed == addMediaText
+          ? _self.addMediaText
+          : addMediaText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fieldHeight: freezed == fieldHeight
+          ? _self.fieldHeight
+          : fieldHeight // ignore: cast_nullable_to_non_nullable
+              as int?,
+      widgetBuilder: freezed == widgetBuilder
+          ? _self.widgetBuilder
+          : widgetBuilder // ignore: cast_nullable_to_non_nullable
+              as MediaFieldBuilderDef?,
+    ));
+  }
+}
+
+/// @nodoc
+mixin _$NumInputUiSettings {
+  String? get labelText;
+  String? get helperText;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  Widget? get unit;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  NumFieldBuilderDef? get widgetBuilder;
+
+  /// Create a copy of NumInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $NumInputUiSettingsCopyWith<NumInputUiSettings> get copyWith =>
+      _$NumInputUiSettingsCopyWithImpl<NumInputUiSettings>(
+          this as NumInputUiSettings, _$identity);
+
+  /// Serializes this NumInputUiSettings to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is NumInputUiSettings &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
             (identical(other.helperText, helperText) ||
@@ -2592,377 +2312,190 @@ class _$NumInputUiSettingsImpl extends _NumInputUiSettings {
   int get hashCode =>
       Object.hash(runtimeType, labelText, helperText, unit, widgetBuilder);
 
-  /// Create a copy of NumInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$NumInputUiSettingsImplCopyWith<_$NumInputUiSettingsImpl> get copyWith =>
-      __$$NumInputUiSettingsImplCopyWithImpl<_$NumInputUiSettingsImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$NumInputUiSettingsImplToJson(
-      this,
-    );
+  String toString() {
+    return 'NumInputUiSettings(labelText: $labelText, helperText: $helperText, unit: $unit, widgetBuilder: $widgetBuilder)';
   }
 }
 
-abstract class _NumInputUiSettings extends NumInputUiSettings {
-  const factory _NumInputUiSettings(
-      {final String? labelText,
-      final String? helperText,
-      @JsonKey(includeToJson: false, includeFromJson: false) final Widget? unit,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      final NumFieldBuilderDef? widgetBuilder}) = _$NumInputUiSettingsImpl;
-  const _NumInputUiSettings._() : super._();
-
-  factory _NumInputUiSettings.fromJson(Map<String, dynamic> json) =
-      _$NumInputUiSettingsImpl.fromJson;
-
-  @override
-  String? get labelText;
-  @override
-  String? get helperText;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  Widget? get unit;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  NumFieldBuilderDef? get widgetBuilder;
-
-  /// Create a copy of NumInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$NumInputUiSettingsImplCopyWith<_$NumInputUiSettingsImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-SelectInputUiSettings<T> _$SelectInputUiSettingsFromJson<T>(
-    Map<String, dynamic> json) {
-  return _SelectInputUiSettings<T>.fromJson(json);
-}
-
 /// @nodoc
-mixin _$SelectInputUiSettings<T> {
-  String? get labelText => throw _privateConstructorUsedError;
-  String? get helperText => throw _privateConstructorUsedError;
-  String? get hintText => throw _privateConstructorUsedError;
-  ChildrenVisibility? get childrenVisibility =>
-      throw _privateConstructorUsedError;
-
-  /// Only used when SelectInput.maxCount is 1
-  /// and childrenVisibility is whenAsked.
-  ///
-  /// If null, label will be placed above the selector.
-  /// Else, label and selector will be in a flexible row,
-  /// selector with a flex value of 10,
-  /// and label with a flex value of [labelFlex].
-  int? get labelFlex => throw _privateConstructorUsedError;
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  Widget Function(T?)? get valueBuilder => throw _privateConstructorUsedError;
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  Widget Function(T?)? get selectedBuilder =>
-      throw _privateConstructorUsedError;
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  Widget? Function(T)? get helpValueBuilder =>
-      throw _privateConstructorUsedError;
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  double Function(String, T)? get searcher =>
-      throw _privateConstructorUsedError;
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  SearchScreenDef<T>? get searchScreenBuilder =>
-      throw _privateConstructorUsedError;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  SelectFieldBuilderDef<T>? get widgetBuilder =>
-      throw _privateConstructorUsedError;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  InputHeaderBuilderDef? get headerBuilder =>
-      throw _privateConstructorUsedError;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  ScoreWidgetBuilderDef? get scoreBuilder => throw _privateConstructorUsedError;
-
-  /// Serializes this SelectInputUiSettings to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of SelectInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $SelectInputUiSettingsCopyWith<T, SelectInputUiSettings<T>> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $SelectInputUiSettingsCopyWith<T, $Res> {
-  factory $SelectInputUiSettingsCopyWith(SelectInputUiSettings<T> value,
-          $Res Function(SelectInputUiSettings<T>) then) =
-      _$SelectInputUiSettingsCopyWithImpl<T, $Res, SelectInputUiSettings<T>>;
+abstract mixin class $NumInputUiSettingsCopyWith<$Res> {
+  factory $NumInputUiSettingsCopyWith(
+          NumInputUiSettings value, $Res Function(NumInputUiSettings) _then) =
+      _$NumInputUiSettingsCopyWithImpl;
   @useResult
   $Res call(
       {String? labelText,
       String? helperText,
-      String? hintText,
-      ChildrenVisibility? childrenVisibility,
-      int? labelFlex,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      Widget Function(T?)? valueBuilder,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      Widget Function(T?)? selectedBuilder,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      Widget? Function(T)? helpValueBuilder,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      double Function(String, T)? searcher,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      SearchScreenDef<T>? searchScreenBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false) Widget? unit,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      SelectFieldBuilderDef<T>? widgetBuilder,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      InputHeaderBuilderDef? headerBuilder,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      ScoreWidgetBuilderDef? scoreBuilder});
+      NumFieldBuilderDef? widgetBuilder});
 }
 
 /// @nodoc
-class _$SelectInputUiSettingsCopyWithImpl<T, $Res,
-        $Val extends SelectInputUiSettings<T>>
-    implements $SelectInputUiSettingsCopyWith<T, $Res> {
-  _$SelectInputUiSettingsCopyWithImpl(this._value, this._then);
+class _$NumInputUiSettingsCopyWithImpl<$Res>
+    implements $NumInputUiSettingsCopyWith<$Res> {
+  _$NumInputUiSettingsCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final NumInputUiSettings _self;
+  final $Res Function(NumInputUiSettings) _then;
 
-  /// Create a copy of SelectInputUiSettings
+  /// Create a copy of NumInputUiSettings
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? labelText = freezed,
     Object? helperText = freezed,
-    Object? hintText = freezed,
-    Object? childrenVisibility = freezed,
-    Object? labelFlex = freezed,
-    Object? valueBuilder = freezed,
-    Object? selectedBuilder = freezed,
-    Object? helpValueBuilder = freezed,
-    Object? searcher = freezed,
-    Object? searchScreenBuilder = freezed,
+    Object? unit = freezed,
     Object? widgetBuilder = freezed,
-    Object? headerBuilder = freezed,
-    Object? scoreBuilder = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       labelText: freezed == labelText
-          ? _value.labelText
+          ? _self.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
               as String?,
       helperText: freezed == helperText
-          ? _value.helperText
+          ? _self.helperText
           : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
-      hintText: freezed == hintText
-          ? _value.hintText
-          : hintText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      childrenVisibility: freezed == childrenVisibility
-          ? _value.childrenVisibility
-          : childrenVisibility // ignore: cast_nullable_to_non_nullable
-              as ChildrenVisibility?,
-      labelFlex: freezed == labelFlex
-          ? _value.labelFlex
-          : labelFlex // ignore: cast_nullable_to_non_nullable
-              as int?,
-      valueBuilder: freezed == valueBuilder
-          ? _value.valueBuilder
-          : valueBuilder // ignore: cast_nullable_to_non_nullable
-              as Widget Function(T?)?,
-      selectedBuilder: freezed == selectedBuilder
-          ? _value.selectedBuilder
-          : selectedBuilder // ignore: cast_nullable_to_non_nullable
-              as Widget Function(T?)?,
-      helpValueBuilder: freezed == helpValueBuilder
-          ? _value.helpValueBuilder
-          : helpValueBuilder // ignore: cast_nullable_to_non_nullable
-              as Widget? Function(T)?,
-      searcher: freezed == searcher
-          ? _value.searcher
-          : searcher // ignore: cast_nullable_to_non_nullable
-              as double Function(String, T)?,
-      searchScreenBuilder: freezed == searchScreenBuilder
-          ? _value.searchScreenBuilder
-          : searchScreenBuilder // ignore: cast_nullable_to_non_nullable
-              as SearchScreenDef<T>?,
+      unit: freezed == unit
+          ? _self.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as Widget?,
       widgetBuilder: freezed == widgetBuilder
-          ? _value.widgetBuilder
+          ? _self.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
-              as SelectFieldBuilderDef<T>?,
-      headerBuilder: freezed == headerBuilder
-          ? _value.headerBuilder
-          : headerBuilder // ignore: cast_nullable_to_non_nullable
-              as InputHeaderBuilderDef?,
-      scoreBuilder: freezed == scoreBuilder
-          ? _value.scoreBuilder
-          : scoreBuilder // ignore: cast_nullable_to_non_nullable
-              as ScoreWidgetBuilderDef?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$SelectInputUiSettingsImplCopyWith<T, $Res>
-    implements $SelectInputUiSettingsCopyWith<T, $Res> {
-  factory _$$SelectInputUiSettingsImplCopyWith(
-          _$SelectInputUiSettingsImpl<T> value,
-          $Res Function(_$SelectInputUiSettingsImpl<T>) then) =
-      __$$SelectInputUiSettingsImplCopyWithImpl<T, $Res>;
-  @override
-  @useResult
-  $Res call(
-      {String? labelText,
-      String? helperText,
-      String? hintText,
-      ChildrenVisibility? childrenVisibility,
-      int? labelFlex,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      Widget Function(T?)? valueBuilder,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      Widget Function(T?)? selectedBuilder,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      Widget? Function(T)? helpValueBuilder,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      double Function(String, T)? searcher,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      SearchScreenDef<T>? searchScreenBuilder,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      SelectFieldBuilderDef<T>? widgetBuilder,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      InputHeaderBuilderDef? headerBuilder,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      ScoreWidgetBuilderDef? scoreBuilder});
-}
-
-/// @nodoc
-class __$$SelectInputUiSettingsImplCopyWithImpl<T, $Res>
-    extends _$SelectInputUiSettingsCopyWithImpl<T, $Res,
-        _$SelectInputUiSettingsImpl<T>>
-    implements _$$SelectInputUiSettingsImplCopyWith<T, $Res> {
-  __$$SelectInputUiSettingsImplCopyWithImpl(
-      _$SelectInputUiSettingsImpl<T> _value,
-      $Res Function(_$SelectInputUiSettingsImpl<T>) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SelectInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? labelText = freezed,
-    Object? helperText = freezed,
-    Object? hintText = freezed,
-    Object? childrenVisibility = freezed,
-    Object? labelFlex = freezed,
-    Object? valueBuilder = freezed,
-    Object? selectedBuilder = freezed,
-    Object? helpValueBuilder = freezed,
-    Object? searcher = freezed,
-    Object? searchScreenBuilder = freezed,
-    Object? widgetBuilder = freezed,
-    Object? headerBuilder = freezed,
-    Object? scoreBuilder = freezed,
-  }) {
-    return _then(_$SelectInputUiSettingsImpl<T>(
-      labelText: freezed == labelText
-          ? _value.labelText
-          : labelText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      helperText: freezed == helperText
-          ? _value.helperText
-          : helperText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      hintText: freezed == hintText
-          ? _value.hintText
-          : hintText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      childrenVisibility: freezed == childrenVisibility
-          ? _value.childrenVisibility
-          : childrenVisibility // ignore: cast_nullable_to_non_nullable
-              as ChildrenVisibility?,
-      labelFlex: freezed == labelFlex
-          ? _value.labelFlex
-          : labelFlex // ignore: cast_nullable_to_non_nullable
-              as int?,
-      valueBuilder: freezed == valueBuilder
-          ? _value.valueBuilder
-          : valueBuilder // ignore: cast_nullable_to_non_nullable
-              as Widget Function(T?)?,
-      selectedBuilder: freezed == selectedBuilder
-          ? _value.selectedBuilder
-          : selectedBuilder // ignore: cast_nullable_to_non_nullable
-              as Widget Function(T?)?,
-      helpValueBuilder: freezed == helpValueBuilder
-          ? _value.helpValueBuilder
-          : helpValueBuilder // ignore: cast_nullable_to_non_nullable
-              as Widget? Function(T)?,
-      searcher: freezed == searcher
-          ? _value.searcher
-          : searcher // ignore: cast_nullable_to_non_nullable
-              as double Function(String, T)?,
-      searchScreenBuilder: freezed == searchScreenBuilder
-          ? _value.searchScreenBuilder
-          : searchScreenBuilder // ignore: cast_nullable_to_non_nullable
-              as SearchScreenDef<T>?,
-      widgetBuilder: freezed == widgetBuilder
-          ? _value.widgetBuilder
-          : widgetBuilder // ignore: cast_nullable_to_non_nullable
-              as SelectFieldBuilderDef<T>?,
-      headerBuilder: freezed == headerBuilder
-          ? _value.headerBuilder
-          : headerBuilder // ignore: cast_nullable_to_non_nullable
-              as InputHeaderBuilderDef?,
-      scoreBuilder: freezed == scoreBuilder
-          ? _value.scoreBuilder
-          : scoreBuilder // ignore: cast_nullable_to_non_nullable
-              as ScoreWidgetBuilderDef?,
+              as NumFieldBuilderDef?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
-  const _$SelectInputUiSettingsImpl(
+class _NumInputUiSettings extends NumInputUiSettings {
+  const _NumInputUiSettings(
       {this.labelText,
       this.helperText,
-      this.hintText,
-      this.childrenVisibility,
-      this.labelFlex,
-      @JsonKey(includeFromJson: false, includeToJson: false) this.valueBuilder,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      this.selectedBuilder,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      this.helpValueBuilder,
-      @JsonKey(includeFromJson: false, includeToJson: false) this.searcher,
-      @JsonKey(includeFromJson: false, includeToJson: false)
-      this.searchScreenBuilder,
-      @JsonKey(includeToJson: false, includeFromJson: false) this.widgetBuilder,
-      @JsonKey(includeToJson: false, includeFromJson: false) this.headerBuilder,
-      @JsonKey(includeToJson: false, includeFromJson: false) this.scoreBuilder})
+      @JsonKey(includeToJson: false, includeFromJson: false) this.unit,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      this.widgetBuilder})
       : super._();
-
-  factory _$SelectInputUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SelectInputUiSettingsImplFromJson(json);
+  factory _NumInputUiSettings.fromJson(Map<String, dynamic> json) =>
+      _$NumInputUiSettingsFromJson(json);
 
   @override
   final String? labelText;
   @override
   final String? helperText;
   @override
-  final String? hintText;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final Widget? unit;
   @override
-  final ChildrenVisibility? childrenVisibility;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final NumFieldBuilderDef? widgetBuilder;
+
+  /// Create a copy of NumInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$NumInputUiSettingsCopyWith<_NumInputUiSettings> get copyWith =>
+      __$NumInputUiSettingsCopyWithImpl<_NumInputUiSettings>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$NumInputUiSettingsToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _NumInputUiSettings &&
+            (identical(other.labelText, labelText) ||
+                other.labelText == labelText) &&
+            (identical(other.helperText, helperText) ||
+                other.helperText == helperText) &&
+            (identical(other.unit, unit) || other.unit == unit) &&
+            (identical(other.widgetBuilder, widgetBuilder) ||
+                other.widgetBuilder == widgetBuilder));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, labelText, helperText, unit, widgetBuilder);
+
+  @override
+  String toString() {
+    return 'NumInputUiSettings(labelText: $labelText, helperText: $helperText, unit: $unit, widgetBuilder: $widgetBuilder)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$NumInputUiSettingsCopyWith<$Res>
+    implements $NumInputUiSettingsCopyWith<$Res> {
+  factory _$NumInputUiSettingsCopyWith(
+          _NumInputUiSettings value, $Res Function(_NumInputUiSettings) _then) =
+      __$NumInputUiSettingsCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String? labelText,
+      String? helperText,
+      @JsonKey(includeToJson: false, includeFromJson: false) Widget? unit,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      NumFieldBuilderDef? widgetBuilder});
+}
+
+/// @nodoc
+class __$NumInputUiSettingsCopyWithImpl<$Res>
+    implements _$NumInputUiSettingsCopyWith<$Res> {
+  __$NumInputUiSettingsCopyWithImpl(this._self, this._then);
+
+  final _NumInputUiSettings _self;
+  final $Res Function(_NumInputUiSettings) _then;
+
+  /// Create a copy of NumInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? labelText = freezed,
+    Object? helperText = freezed,
+    Object? unit = freezed,
+    Object? widgetBuilder = freezed,
+  }) {
+    return _then(_NumInputUiSettings(
+      labelText: freezed == labelText
+          ? _self.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _self.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      unit: freezed == unit
+          ? _self.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as Widget?,
+      widgetBuilder: freezed == widgetBuilder
+          ? _self.widgetBuilder
+          : widgetBuilder // ignore: cast_nullable_to_non_nullable
+              as NumFieldBuilderDef?,
+    ));
+  }
+}
+
+/// @nodoc
+mixin _$SelectInputUiSettings<T> {
+  String? get labelText;
+  String? get helperText;
+  String? get hintText;
+  ChildrenVisibility? get childrenVisibility;
 
   /// Only used when SelectInput.maxCount is 1
   /// and childrenVisibility is whenAsked.
@@ -2971,43 +2504,40 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
   /// Else, label and selector will be in a flexible row,
   /// selector with a flex value of 10,
   /// and label with a flex value of [labelFlex].
-  @override
-  final int? labelFlex;
-  @override
+  int? get labelFlex;
   @JsonKey(includeFromJson: false, includeToJson: false)
-  final Widget Function(T?)? valueBuilder;
-  @override
+  Widget Function(T?)? get valueBuilder;
   @JsonKey(includeFromJson: false, includeToJson: false)
-  final Widget Function(T?)? selectedBuilder;
-  @override
+  Widget Function(T?)? get selectedBuilder;
   @JsonKey(includeFromJson: false, includeToJson: false)
-  final Widget? Function(T)? helpValueBuilder;
-  @override
+  Widget? Function(T)? get helpValueBuilder;
   @JsonKey(includeFromJson: false, includeToJson: false)
-  final double Function(String, T)? searcher;
-  @override
+  double Function(String query, T value)? get searcher;
   @JsonKey(includeFromJson: false, includeToJson: false)
-  final SearchScreenDef<T>? searchScreenBuilder;
-  @override
+  SearchScreenDef<T>? get searchScreenBuilder;
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final SelectFieldBuilderDef<T>? widgetBuilder;
-  @override
+  SelectFieldBuilderDef<T>? get widgetBuilder;
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final InputHeaderBuilderDef? headerBuilder;
-  @override
+  InputHeaderBuilderDef? get headerBuilder;
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final ScoreWidgetBuilderDef? scoreBuilder;
+  ScoreWidgetBuilderDef? get scoreBuilder;
 
-  @override
-  String toString() {
-    return 'SelectInputUiSettings<$T>(labelText: $labelText, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, labelFlex: $labelFlex, valueBuilder: $valueBuilder, selectedBuilder: $selectedBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher, searchScreenBuilder: $searchScreenBuilder, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder)';
-  }
+  /// Create a copy of SelectInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $SelectInputUiSettingsCopyWith<T, SelectInputUiSettings<T>> get copyWith =>
+      _$SelectInputUiSettingsCopyWithImpl<T, SelectInputUiSettings<T>>(
+          this as SelectInputUiSettings<T>, _$identity);
+
+  /// Serializes this SelectInputUiSettings to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SelectInputUiSettingsImpl<T> &&
+            other is SelectInputUiSettings<T> &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
             (identical(other.helperText, helperText) ||
@@ -3054,60 +2584,158 @@ class _$SelectInputUiSettingsImpl<T> extends _SelectInputUiSettings<T> {
       headerBuilder,
       scoreBuilder);
 
-  /// Create a copy of SelectInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$SelectInputUiSettingsImplCopyWith<T, _$SelectInputUiSettingsImpl<T>>
-      get copyWith => __$$SelectInputUiSettingsImplCopyWithImpl<T,
-          _$SelectInputUiSettingsImpl<T>>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SelectInputUiSettingsImplToJson<T>(
-      this,
-    );
+  String toString() {
+    return 'SelectInputUiSettings<$T>(labelText: $labelText, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, labelFlex: $labelFlex, valueBuilder: $valueBuilder, selectedBuilder: $selectedBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher, searchScreenBuilder: $searchScreenBuilder, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder)';
   }
 }
 
-abstract class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
-  const factory _SelectInputUiSettings(
-          {final String? labelText,
-          final String? helperText,
-          final String? hintText,
-          final ChildrenVisibility? childrenVisibility,
-          final int? labelFlex,
-          @JsonKey(includeFromJson: false, includeToJson: false)
-          final Widget Function(T?)? valueBuilder,
-          @JsonKey(includeFromJson: false, includeToJson: false)
-          final Widget Function(T?)? selectedBuilder,
-          @JsonKey(includeFromJson: false, includeToJson: false)
-          final Widget? Function(T)? helpValueBuilder,
-          @JsonKey(includeFromJson: false, includeToJson: false)
-          final double Function(String, T)? searcher,
-          @JsonKey(includeFromJson: false, includeToJson: false)
-          final SearchScreenDef<T>? searchScreenBuilder,
-          @JsonKey(includeToJson: false, includeFromJson: false)
-          final SelectFieldBuilderDef<T>? widgetBuilder,
-          @JsonKey(includeToJson: false, includeFromJson: false)
-          final InputHeaderBuilderDef? headerBuilder,
-          @JsonKey(includeToJson: false, includeFromJson: false)
-          final ScoreWidgetBuilderDef? scoreBuilder}) =
-      _$SelectInputUiSettingsImpl<T>;
-  const _SelectInputUiSettings._() : super._();
+/// @nodoc
+abstract mixin class $SelectInputUiSettingsCopyWith<T, $Res> {
+  factory $SelectInputUiSettingsCopyWith(SelectInputUiSettings<T> value,
+          $Res Function(SelectInputUiSettings<T>) _then) =
+      _$SelectInputUiSettingsCopyWithImpl;
+  @useResult
+  $Res call(
+      {String? labelText,
+      String? helperText,
+      String? hintText,
+      ChildrenVisibility? childrenVisibility,
+      int? labelFlex,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      Widget Function(T?)? valueBuilder,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      Widget Function(T?)? selectedBuilder,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      Widget? Function(T)? helpValueBuilder,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      double Function(String query, T value)? searcher,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      SearchScreenDef<T>? searchScreenBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      SelectFieldBuilderDef<T>? widgetBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      InputHeaderBuilderDef? headerBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      ScoreWidgetBuilderDef? scoreBuilder});
+}
 
-  factory _SelectInputUiSettings.fromJson(Map<String, dynamic> json) =
-      _$SelectInputUiSettingsImpl<T>.fromJson;
+/// @nodoc
+class _$SelectInputUiSettingsCopyWithImpl<T, $Res>
+    implements $SelectInputUiSettingsCopyWith<T, $Res> {
+  _$SelectInputUiSettingsCopyWithImpl(this._self, this._then);
+
+  final SelectInputUiSettings<T> _self;
+  final $Res Function(SelectInputUiSettings<T>) _then;
+
+  /// Create a copy of SelectInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? labelText = freezed,
+    Object? helperText = freezed,
+    Object? hintText = freezed,
+    Object? childrenVisibility = freezed,
+    Object? labelFlex = freezed,
+    Object? valueBuilder = freezed,
+    Object? selectedBuilder = freezed,
+    Object? helpValueBuilder = freezed,
+    Object? searcher = freezed,
+    Object? searchScreenBuilder = freezed,
+    Object? widgetBuilder = freezed,
+    Object? headerBuilder = freezed,
+    Object? scoreBuilder = freezed,
+  }) {
+    return _then(_self.copyWith(
+      labelText: freezed == labelText
+          ? _self.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _self.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hintText: freezed == hintText
+          ? _self.hintText
+          : hintText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      childrenVisibility: freezed == childrenVisibility
+          ? _self.childrenVisibility
+          : childrenVisibility // ignore: cast_nullable_to_non_nullable
+              as ChildrenVisibility?,
+      labelFlex: freezed == labelFlex
+          ? _self.labelFlex
+          : labelFlex // ignore: cast_nullable_to_non_nullable
+              as int?,
+      valueBuilder: freezed == valueBuilder
+          ? _self.valueBuilder
+          : valueBuilder // ignore: cast_nullable_to_non_nullable
+              as Widget Function(T?)?,
+      selectedBuilder: freezed == selectedBuilder
+          ? _self.selectedBuilder
+          : selectedBuilder // ignore: cast_nullable_to_non_nullable
+              as Widget Function(T?)?,
+      helpValueBuilder: freezed == helpValueBuilder
+          ? _self.helpValueBuilder
+          : helpValueBuilder // ignore: cast_nullable_to_non_nullable
+              as Widget? Function(T)?,
+      searcher: freezed == searcher
+          ? _self.searcher
+          : searcher // ignore: cast_nullable_to_non_nullable
+              as double Function(String query, T value)?,
+      searchScreenBuilder: freezed == searchScreenBuilder
+          ? _self.searchScreenBuilder
+          : searchScreenBuilder // ignore: cast_nullable_to_non_nullable
+              as SearchScreenDef<T>?,
+      widgetBuilder: freezed == widgetBuilder
+          ? _self.widgetBuilder
+          : widgetBuilder // ignore: cast_nullable_to_non_nullable
+              as SelectFieldBuilderDef<T>?,
+      headerBuilder: freezed == headerBuilder
+          ? _self.headerBuilder
+          : headerBuilder // ignore: cast_nullable_to_non_nullable
+              as InputHeaderBuilderDef?,
+      scoreBuilder: freezed == scoreBuilder
+          ? _self.scoreBuilder
+          : scoreBuilder // ignore: cast_nullable_to_non_nullable
+              as ScoreWidgetBuilderDef?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
+  const _SelectInputUiSettings(
+      {this.labelText,
+      this.helperText,
+      this.hintText,
+      this.childrenVisibility,
+      this.labelFlex,
+      @JsonKey(includeFromJson: false, includeToJson: false) this.valueBuilder,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      this.selectedBuilder,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      this.helpValueBuilder,
+      @JsonKey(includeFromJson: false, includeToJson: false) this.searcher,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      this.searchScreenBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.widgetBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.headerBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.scoreBuilder})
+      : super._();
+  factory _SelectInputUiSettings.fromJson(Map<String, dynamic> json) =>
+      _$SelectInputUiSettingsFromJson(json);
 
   @override
-  String? get labelText;
+  final String? labelText;
   @override
-  String? get helperText;
+  final String? helperText;
   @override
-  String? get hintText;
+  final String? hintText;
   @override
-  ChildrenVisibility? get childrenVisibility;
+  final ChildrenVisibility? childrenVisibility;
 
   /// Only used when SelectInput.maxCount is 1
   /// and childrenVisibility is whenAsked.
@@ -3117,225 +2745,332 @@ abstract class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
   /// selector with a flex value of 10,
   /// and label with a flex value of [labelFlex].
   @override
-  int? get labelFlex;
+  final int? labelFlex;
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  Widget Function(T?)? get valueBuilder;
+  final Widget Function(T?)? valueBuilder;
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  Widget Function(T?)? get selectedBuilder;
+  final Widget Function(T?)? selectedBuilder;
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  Widget? Function(T)? get helpValueBuilder;
+  final Widget? Function(T)? helpValueBuilder;
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  double Function(String, T)? get searcher;
+  final double Function(String query, T value)? searcher;
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  SearchScreenDef<T>? get searchScreenBuilder;
+  final SearchScreenDef<T>? searchScreenBuilder;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  SelectFieldBuilderDef<T>? get widgetBuilder;
+  final SelectFieldBuilderDef<T>? widgetBuilder;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  InputHeaderBuilderDef? get headerBuilder;
+  final InputHeaderBuilderDef? headerBuilder;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  ScoreWidgetBuilderDef? get scoreBuilder;
+  final ScoreWidgetBuilderDef? scoreBuilder;
 
   /// Create a copy of SelectInputUiSettings
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SelectInputUiSettingsImplCopyWith<T, _$SelectInputUiSettingsImpl<T>>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-StringInputUiSettings _$StringInputUiSettingsFromJson(
-    Map<String, dynamic> json) {
-  return _StringInputUiSettings.fromJson(json);
-}
-
-/// @nodoc
-mixin _$StringInputUiSettings {
-  String? get labelText => throw _privateConstructorUsedError;
-  String? get hintText => throw _privateConstructorUsedError;
-  String? get helperText => throw _privateConstructorUsedError;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  Widget? get prefixIcon => throw _privateConstructorUsedError;
-  StringFieldAction? get action => throw _privateConstructorUsedError;
-  bool? get submitFormOnFieldSubmitted => throw _privateConstructorUsedError;
-  @TextInputTypeConverter()
-  TextInputType? get keyboardType => throw _privateConstructorUsedError;
-  bool? get obscureText => throw _privateConstructorUsedError;
-  bool? get autocorrect => throw _privateConstructorUsedError;
-  List<String>? get autofillHints => throw _privateConstructorUsedError;
-  bool? get autofocus => throw _privateConstructorUsedError;
-  TextInputAction? get textInputAction => throw _privateConstructorUsedError;
-  TextCapitalization? get textCapitalization =>
-      throw _privateConstructorUsedError;
-
-  /// Defaults to 1. If you want to set it to null, enter 0.
-  int? get maxLines => throw _privateConstructorUsedError;
-  String? get invalidRegexMessage => throw _privateConstructorUsedError;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  TextStyle? get style => throw _privateConstructorUsedError;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  StringFieldBuilderDef? get widgetBuilder =>
-      throw _privateConstructorUsedError;
-
-  /// Serializes this StringInputUiSettings to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of StringInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $StringInputUiSettingsCopyWith<StringInputUiSettings> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $StringInputUiSettingsCopyWith<$Res> {
-  factory $StringInputUiSettingsCopyWith(StringInputUiSettings value,
-          $Res Function(StringInputUiSettings) then) =
-      _$StringInputUiSettingsCopyWithImpl<$Res, StringInputUiSettings>;
-  @useResult
-  $Res call(
-      {String? labelText,
-      String? hintText,
-      String? helperText,
-      @JsonKey(includeToJson: false, includeFromJson: false) Widget? prefixIcon,
-      StringFieldAction? action,
-      bool? submitFormOnFieldSubmitted,
-      @TextInputTypeConverter() TextInputType? keyboardType,
-      bool? obscureText,
-      bool? autocorrect,
-      List<String>? autofillHints,
-      bool? autofocus,
-      TextInputAction? textInputAction,
-      TextCapitalization? textCapitalization,
-      int? maxLines,
-      String? invalidRegexMessage,
-      @JsonKey(includeToJson: false, includeFromJson: false) TextStyle? style,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      StringFieldBuilderDef? widgetBuilder});
-}
-
-/// @nodoc
-class _$StringInputUiSettingsCopyWithImpl<$Res,
-        $Val extends StringInputUiSettings>
-    implements $StringInputUiSettingsCopyWith<$Res> {
-  _$StringInputUiSettingsCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of StringInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  _$SelectInputUiSettingsCopyWith<T, _SelectInputUiSettings<T>> get copyWith =>
+      __$SelectInputUiSettingsCopyWithImpl<T, _SelectInputUiSettings<T>>(
+          this, _$identity);
+
   @override
-  $Res call({
-    Object? labelText = freezed,
-    Object? hintText = freezed,
-    Object? helperText = freezed,
-    Object? prefixIcon = freezed,
-    Object? action = freezed,
-    Object? submitFormOnFieldSubmitted = freezed,
-    Object? keyboardType = freezed,
-    Object? obscureText = freezed,
-    Object? autocorrect = freezed,
-    Object? autofillHints = freezed,
-    Object? autofocus = freezed,
-    Object? textInputAction = freezed,
-    Object? textCapitalization = freezed,
-    Object? maxLines = freezed,
-    Object? invalidRegexMessage = freezed,
-    Object? style = freezed,
-    Object? widgetBuilder = freezed,
-  }) {
-    return _then(_value.copyWith(
-      labelText: freezed == labelText
-          ? _value.labelText
-          : labelText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      hintText: freezed == hintText
-          ? _value.hintText
-          : hintText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      helperText: freezed == helperText
-          ? _value.helperText
-          : helperText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      prefixIcon: freezed == prefixIcon
-          ? _value.prefixIcon
-          : prefixIcon // ignore: cast_nullable_to_non_nullable
-              as Widget?,
-      action: freezed == action
-          ? _value.action
-          : action // ignore: cast_nullable_to_non_nullable
-              as StringFieldAction?,
-      submitFormOnFieldSubmitted: freezed == submitFormOnFieldSubmitted
-          ? _value.submitFormOnFieldSubmitted
-          : submitFormOnFieldSubmitted // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      keyboardType: freezed == keyboardType
-          ? _value.keyboardType
-          : keyboardType // ignore: cast_nullable_to_non_nullable
-              as TextInputType?,
-      obscureText: freezed == obscureText
-          ? _value.obscureText
-          : obscureText // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      autocorrect: freezed == autocorrect
-          ? _value.autocorrect
-          : autocorrect // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      autofillHints: freezed == autofillHints
-          ? _value.autofillHints
-          : autofillHints // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-      autofocus: freezed == autofocus
-          ? _value.autofocus
-          : autofocus // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      textInputAction: freezed == textInputAction
-          ? _value.textInputAction
-          : textInputAction // ignore: cast_nullable_to_non_nullable
-              as TextInputAction?,
-      textCapitalization: freezed == textCapitalization
-          ? _value.textCapitalization
-          : textCapitalization // ignore: cast_nullable_to_non_nullable
-              as TextCapitalization?,
-      maxLines: freezed == maxLines
-          ? _value.maxLines
-          : maxLines // ignore: cast_nullable_to_non_nullable
-              as int?,
-      invalidRegexMessage: freezed == invalidRegexMessage
-          ? _value.invalidRegexMessage
-          : invalidRegexMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
-      style: freezed == style
-          ? _value.style
-          : style // ignore: cast_nullable_to_non_nullable
-              as TextStyle?,
-      widgetBuilder: freezed == widgetBuilder
-          ? _value.widgetBuilder
-          : widgetBuilder // ignore: cast_nullable_to_non_nullable
-              as StringFieldBuilderDef?,
-    ) as $Val);
+  Map<String, dynamic> toJson() {
+    return _$SelectInputUiSettingsToJson<T>(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _SelectInputUiSettings<T> &&
+            (identical(other.labelText, labelText) ||
+                other.labelText == labelText) &&
+            (identical(other.helperText, helperText) ||
+                other.helperText == helperText) &&
+            (identical(other.hintText, hintText) ||
+                other.hintText == hintText) &&
+            (identical(other.childrenVisibility, childrenVisibility) ||
+                other.childrenVisibility == childrenVisibility) &&
+            (identical(other.labelFlex, labelFlex) ||
+                other.labelFlex == labelFlex) &&
+            (identical(other.valueBuilder, valueBuilder) ||
+                other.valueBuilder == valueBuilder) &&
+            (identical(other.selectedBuilder, selectedBuilder) ||
+                other.selectedBuilder == selectedBuilder) &&
+            (identical(other.helpValueBuilder, helpValueBuilder) ||
+                other.helpValueBuilder == helpValueBuilder) &&
+            (identical(other.searcher, searcher) ||
+                other.searcher == searcher) &&
+            (identical(other.searchScreenBuilder, searchScreenBuilder) ||
+                other.searchScreenBuilder == searchScreenBuilder) &&
+            (identical(other.widgetBuilder, widgetBuilder) ||
+                other.widgetBuilder == widgetBuilder) &&
+            (identical(other.headerBuilder, headerBuilder) ||
+                other.headerBuilder == headerBuilder) &&
+            (identical(other.scoreBuilder, scoreBuilder) ||
+                other.scoreBuilder == scoreBuilder));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      labelText,
+      helperText,
+      hintText,
+      childrenVisibility,
+      labelFlex,
+      valueBuilder,
+      selectedBuilder,
+      helpValueBuilder,
+      searcher,
+      searchScreenBuilder,
+      widgetBuilder,
+      headerBuilder,
+      scoreBuilder);
+
+  @override
+  String toString() {
+    return 'SelectInputUiSettings<$T>(labelText: $labelText, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, labelFlex: $labelFlex, valueBuilder: $valueBuilder, selectedBuilder: $selectedBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher, searchScreenBuilder: $searchScreenBuilder, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder)';
   }
 }
 
 /// @nodoc
-abstract class _$$StringInputUiSettingsImplCopyWith<$Res>
-    implements $StringInputUiSettingsCopyWith<$Res> {
-  factory _$$StringInputUiSettingsImplCopyWith(
-          _$StringInputUiSettingsImpl value,
-          $Res Function(_$StringInputUiSettingsImpl) then) =
-      __$$StringInputUiSettingsImplCopyWithImpl<$Res>;
+abstract mixin class _$SelectInputUiSettingsCopyWith<T, $Res>
+    implements $SelectInputUiSettingsCopyWith<T, $Res> {
+  factory _$SelectInputUiSettingsCopyWith(_SelectInputUiSettings<T> value,
+          $Res Function(_SelectInputUiSettings<T>) _then) =
+      __$SelectInputUiSettingsCopyWithImpl;
   @override
+  @useResult
+  $Res call(
+      {String? labelText,
+      String? helperText,
+      String? hintText,
+      ChildrenVisibility? childrenVisibility,
+      int? labelFlex,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      Widget Function(T?)? valueBuilder,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      Widget Function(T?)? selectedBuilder,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      Widget? Function(T)? helpValueBuilder,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      double Function(String query, T value)? searcher,
+      @JsonKey(includeFromJson: false, includeToJson: false)
+      SearchScreenDef<T>? searchScreenBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      SelectFieldBuilderDef<T>? widgetBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      InputHeaderBuilderDef? headerBuilder,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      ScoreWidgetBuilderDef? scoreBuilder});
+}
+
+/// @nodoc
+class __$SelectInputUiSettingsCopyWithImpl<T, $Res>
+    implements _$SelectInputUiSettingsCopyWith<T, $Res> {
+  __$SelectInputUiSettingsCopyWithImpl(this._self, this._then);
+
+  final _SelectInputUiSettings<T> _self;
+  final $Res Function(_SelectInputUiSettings<T>) _then;
+
+  /// Create a copy of SelectInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? labelText = freezed,
+    Object? helperText = freezed,
+    Object? hintText = freezed,
+    Object? childrenVisibility = freezed,
+    Object? labelFlex = freezed,
+    Object? valueBuilder = freezed,
+    Object? selectedBuilder = freezed,
+    Object? helpValueBuilder = freezed,
+    Object? searcher = freezed,
+    Object? searchScreenBuilder = freezed,
+    Object? widgetBuilder = freezed,
+    Object? headerBuilder = freezed,
+    Object? scoreBuilder = freezed,
+  }) {
+    return _then(_SelectInputUiSettings<T>(
+      labelText: freezed == labelText
+          ? _self.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _self.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hintText: freezed == hintText
+          ? _self.hintText
+          : hintText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      childrenVisibility: freezed == childrenVisibility
+          ? _self.childrenVisibility
+          : childrenVisibility // ignore: cast_nullable_to_non_nullable
+              as ChildrenVisibility?,
+      labelFlex: freezed == labelFlex
+          ? _self.labelFlex
+          : labelFlex // ignore: cast_nullable_to_non_nullable
+              as int?,
+      valueBuilder: freezed == valueBuilder
+          ? _self.valueBuilder
+          : valueBuilder // ignore: cast_nullable_to_non_nullable
+              as Widget Function(T?)?,
+      selectedBuilder: freezed == selectedBuilder
+          ? _self.selectedBuilder
+          : selectedBuilder // ignore: cast_nullable_to_non_nullable
+              as Widget Function(T?)?,
+      helpValueBuilder: freezed == helpValueBuilder
+          ? _self.helpValueBuilder
+          : helpValueBuilder // ignore: cast_nullable_to_non_nullable
+              as Widget? Function(T)?,
+      searcher: freezed == searcher
+          ? _self.searcher
+          : searcher // ignore: cast_nullable_to_non_nullable
+              as double Function(String query, T value)?,
+      searchScreenBuilder: freezed == searchScreenBuilder
+          ? _self.searchScreenBuilder
+          : searchScreenBuilder // ignore: cast_nullable_to_non_nullable
+              as SearchScreenDef<T>?,
+      widgetBuilder: freezed == widgetBuilder
+          ? _self.widgetBuilder
+          : widgetBuilder // ignore: cast_nullable_to_non_nullable
+              as SelectFieldBuilderDef<T>?,
+      headerBuilder: freezed == headerBuilder
+          ? _self.headerBuilder
+          : headerBuilder // ignore: cast_nullable_to_non_nullable
+              as InputHeaderBuilderDef?,
+      scoreBuilder: freezed == scoreBuilder
+          ? _self.scoreBuilder
+          : scoreBuilder // ignore: cast_nullable_to_non_nullable
+              as ScoreWidgetBuilderDef?,
+    ));
+  }
+}
+
+/// @nodoc
+mixin _$StringInputUiSettings {
+  String? get labelText;
+  String? get hintText;
+  String? get helperText;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  Widget? get prefixIcon;
+  StringFieldAction? get action;
+  bool? get submitFormOnFieldSubmitted;
+  @TextInputTypeConverter()
+  TextInputType? get keyboardType;
+  bool? get obscureText;
+  bool? get autocorrect;
+  List<String>? get autofillHints;
+  bool? get autofocus;
+  TextInputAction? get textInputAction;
+  TextCapitalization? get textCapitalization;
+
+  /// Defaults to 1. If you want to set it to null, enter 0.
+  int? get maxLines;
+  String? get invalidRegexMessage;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  TextStyle? get style;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  StringFieldBuilderDef? get widgetBuilder;
+
+  /// Create a copy of StringInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $StringInputUiSettingsCopyWith<StringInputUiSettings> get copyWith =>
+      _$StringInputUiSettingsCopyWithImpl<StringInputUiSettings>(
+          this as StringInputUiSettings, _$identity);
+
+  /// Serializes this StringInputUiSettings to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is StringInputUiSettings &&
+            (identical(other.labelText, labelText) ||
+                other.labelText == labelText) &&
+            (identical(other.hintText, hintText) ||
+                other.hintText == hintText) &&
+            (identical(other.helperText, helperText) ||
+                other.helperText == helperText) &&
+            (identical(other.prefixIcon, prefixIcon) ||
+                other.prefixIcon == prefixIcon) &&
+            (identical(other.action, action) || other.action == action) &&
+            (identical(other.submitFormOnFieldSubmitted,
+                    submitFormOnFieldSubmitted) ||
+                other.submitFormOnFieldSubmitted ==
+                    submitFormOnFieldSubmitted) &&
+            (identical(other.keyboardType, keyboardType) ||
+                other.keyboardType == keyboardType) &&
+            (identical(other.obscureText, obscureText) ||
+                other.obscureText == obscureText) &&
+            (identical(other.autocorrect, autocorrect) ||
+                other.autocorrect == autocorrect) &&
+            const DeepCollectionEquality()
+                .equals(other.autofillHints, autofillHints) &&
+            (identical(other.autofocus, autofocus) ||
+                other.autofocus == autofocus) &&
+            (identical(other.textInputAction, textInputAction) ||
+                other.textInputAction == textInputAction) &&
+            (identical(other.textCapitalization, textCapitalization) ||
+                other.textCapitalization == textCapitalization) &&
+            (identical(other.maxLines, maxLines) ||
+                other.maxLines == maxLines) &&
+            (identical(other.invalidRegexMessage, invalidRegexMessage) ||
+                other.invalidRegexMessage == invalidRegexMessage) &&
+            (identical(other.style, style) || other.style == style) &&
+            (identical(other.widgetBuilder, widgetBuilder) ||
+                other.widgetBuilder == widgetBuilder));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      labelText,
+      hintText,
+      helperText,
+      prefixIcon,
+      action,
+      submitFormOnFieldSubmitted,
+      keyboardType,
+      obscureText,
+      autocorrect,
+      const DeepCollectionEquality().hash(autofillHints),
+      autofocus,
+      textInputAction,
+      textCapitalization,
+      maxLines,
+      invalidRegexMessage,
+      style,
+      widgetBuilder);
+
+  @override
+  String toString() {
+    return 'StringInputUiSettings(labelText: $labelText, hintText: $hintText, helperText: $helperText, prefixIcon: $prefixIcon, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage, style: $style, widgetBuilder: $widgetBuilder)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $StringInputUiSettingsCopyWith<$Res> {
+  factory $StringInputUiSettingsCopyWith(StringInputUiSettings value,
+          $Res Function(StringInputUiSettings) _then) =
+      _$StringInputUiSettingsCopyWithImpl;
   @useResult
   $Res call(
       {String? labelText,
@@ -3359,13 +3094,12 @@ abstract class _$$StringInputUiSettingsImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$StringInputUiSettingsImplCopyWithImpl<$Res>
-    extends _$StringInputUiSettingsCopyWithImpl<$Res,
-        _$StringInputUiSettingsImpl>
-    implements _$$StringInputUiSettingsImplCopyWith<$Res> {
-  __$$StringInputUiSettingsImplCopyWithImpl(_$StringInputUiSettingsImpl _value,
-      $Res Function(_$StringInputUiSettingsImpl) _then)
-      : super(_value, _then);
+class _$StringInputUiSettingsCopyWithImpl<$Res>
+    implements $StringInputUiSettingsCopyWith<$Res> {
+  _$StringInputUiSettingsCopyWithImpl(this._self, this._then);
+
+  final StringInputUiSettings _self;
+  final $Res Function(StringInputUiSettings) _then;
 
   /// Create a copy of StringInputUiSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -3390,73 +3124,73 @@ class __$$StringInputUiSettingsImplCopyWithImpl<$Res>
     Object? style = freezed,
     Object? widgetBuilder = freezed,
   }) {
-    return _then(_$StringInputUiSettingsImpl(
+    return _then(_self.copyWith(
       labelText: freezed == labelText
-          ? _value.labelText
+          ? _self.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
               as String?,
       hintText: freezed == hintText
-          ? _value.hintText
+          ? _self.hintText
           : hintText // ignore: cast_nullable_to_non_nullable
               as String?,
       helperText: freezed == helperText
-          ? _value.helperText
+          ? _self.helperText
           : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
       prefixIcon: freezed == prefixIcon
-          ? _value.prefixIcon
+          ? _self.prefixIcon
           : prefixIcon // ignore: cast_nullable_to_non_nullable
               as Widget?,
       action: freezed == action
-          ? _value.action
+          ? _self.action
           : action // ignore: cast_nullable_to_non_nullable
               as StringFieldAction?,
       submitFormOnFieldSubmitted: freezed == submitFormOnFieldSubmitted
-          ? _value.submitFormOnFieldSubmitted
+          ? _self.submitFormOnFieldSubmitted
           : submitFormOnFieldSubmitted // ignore: cast_nullable_to_non_nullable
               as bool?,
       keyboardType: freezed == keyboardType
-          ? _value.keyboardType
+          ? _self.keyboardType
           : keyboardType // ignore: cast_nullable_to_non_nullable
               as TextInputType?,
       obscureText: freezed == obscureText
-          ? _value.obscureText
+          ? _self.obscureText
           : obscureText // ignore: cast_nullable_to_non_nullable
               as bool?,
       autocorrect: freezed == autocorrect
-          ? _value.autocorrect
+          ? _self.autocorrect
           : autocorrect // ignore: cast_nullable_to_non_nullable
               as bool?,
       autofillHints: freezed == autofillHints
-          ? _value._autofillHints
+          ? _self.autofillHints
           : autofillHints // ignore: cast_nullable_to_non_nullable
               as List<String>?,
       autofocus: freezed == autofocus
-          ? _value.autofocus
+          ? _self.autofocus
           : autofocus // ignore: cast_nullable_to_non_nullable
               as bool?,
       textInputAction: freezed == textInputAction
-          ? _value.textInputAction
+          ? _self.textInputAction
           : textInputAction // ignore: cast_nullable_to_non_nullable
               as TextInputAction?,
       textCapitalization: freezed == textCapitalization
-          ? _value.textCapitalization
+          ? _self.textCapitalization
           : textCapitalization // ignore: cast_nullable_to_non_nullable
               as TextCapitalization?,
       maxLines: freezed == maxLines
-          ? _value.maxLines
+          ? _self.maxLines
           : maxLines // ignore: cast_nullable_to_non_nullable
               as int?,
       invalidRegexMessage: freezed == invalidRegexMessage
-          ? _value.invalidRegexMessage
+          ? _self.invalidRegexMessage
           : invalidRegexMessage // ignore: cast_nullable_to_non_nullable
               as String?,
       style: freezed == style
-          ? _value.style
+          ? _self.style
           : style // ignore: cast_nullable_to_non_nullable
               as TextStyle?,
       widgetBuilder: freezed == widgetBuilder
-          ? _value.widgetBuilder
+          ? _self.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
               as StringFieldBuilderDef?,
     ));
@@ -3465,8 +3199,8 @@ class __$$StringInputUiSettingsImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$StringInputUiSettingsImpl extends _StringInputUiSettings {
-  const _$StringInputUiSettingsImpl(
+class _StringInputUiSettings extends StringInputUiSettings {
+  const _StringInputUiSettings(
       {this.labelText,
       this.hintText,
       this.helperText,
@@ -3487,9 +3221,8 @@ class _$StringInputUiSettingsImpl extends _StringInputUiSettings {
       this.widgetBuilder})
       : _autofillHints = autofillHints,
         super._();
-
-  factory _$StringInputUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$StringInputUiSettingsImplFromJson(json);
+  factory _StringInputUiSettings.fromJson(Map<String, dynamic> json) =>
+      _$StringInputUiSettingsFromJson(json);
 
   @override
   final String? labelText;
@@ -3540,16 +3273,27 @@ class _$StringInputUiSettingsImpl extends _StringInputUiSettings {
   @JsonKey(includeToJson: false, includeFromJson: false)
   final StringFieldBuilderDef? widgetBuilder;
 
+  /// Create a copy of StringInputUiSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'StringInputUiSettings(labelText: $labelText, hintText: $hintText, helperText: $helperText, prefixIcon: $prefixIcon, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage, style: $style, widgetBuilder: $widgetBuilder)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$StringInputUiSettingsCopyWith<_StringInputUiSettings> get copyWith =>
+      __$StringInputUiSettingsCopyWithImpl<_StringInputUiSettings>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$StringInputUiSettingsToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$StringInputUiSettingsImpl &&
+            other is _StringInputUiSettings &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
             (identical(other.hintText, hintText) ||
@@ -3608,362 +3352,176 @@ class _$StringInputUiSettingsImpl extends _StringInputUiSettings {
       style,
       widgetBuilder);
 
-  /// Create a copy of StringInputUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$StringInputUiSettingsImplCopyWith<_$StringInputUiSettingsImpl>
-      get copyWith => __$$StringInputUiSettingsImplCopyWithImpl<
-          _$StringInputUiSettingsImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$StringInputUiSettingsImplToJson(
-      this,
-    );
+  String toString() {
+    return 'StringInputUiSettings(labelText: $labelText, hintText: $hintText, helperText: $helperText, prefixIcon: $prefixIcon, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage, style: $style, widgetBuilder: $widgetBuilder)';
   }
 }
 
-abstract class _StringInputUiSettings extends StringInputUiSettings {
-  const factory _StringInputUiSettings(
-          {final String? labelText,
-          final String? hintText,
-          final String? helperText,
-          @JsonKey(includeToJson: false, includeFromJson: false)
-          final Widget? prefixIcon,
-          final StringFieldAction? action,
-          final bool? submitFormOnFieldSubmitted,
-          @TextInputTypeConverter() final TextInputType? keyboardType,
-          final bool? obscureText,
-          final bool? autocorrect,
-          final List<String>? autofillHints,
-          final bool? autofocus,
-          final TextInputAction? textInputAction,
-          final TextCapitalization? textCapitalization,
-          final int? maxLines,
-          final String? invalidRegexMessage,
-          @JsonKey(includeToJson: false, includeFromJson: false)
-          final TextStyle? style,
-          @JsonKey(includeToJson: false, includeFromJson: false)
-          final StringFieldBuilderDef? widgetBuilder}) =
-      _$StringInputUiSettingsImpl;
-  const _StringInputUiSettings._() : super._();
+/// @nodoc
+abstract mixin class _$StringInputUiSettingsCopyWith<$Res>
+    implements $StringInputUiSettingsCopyWith<$Res> {
+  factory _$StringInputUiSettingsCopyWith(_StringInputUiSettings value,
+          $Res Function(_StringInputUiSettings) _then) =
+      __$StringInputUiSettingsCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String? labelText,
+      String? hintText,
+      String? helperText,
+      @JsonKey(includeToJson: false, includeFromJson: false) Widget? prefixIcon,
+      StringFieldAction? action,
+      bool? submitFormOnFieldSubmitted,
+      @TextInputTypeConverter() TextInputType? keyboardType,
+      bool? obscureText,
+      bool? autocorrect,
+      List<String>? autofillHints,
+      bool? autofocus,
+      TextInputAction? textInputAction,
+      TextCapitalization? textCapitalization,
+      int? maxLines,
+      String? invalidRegexMessage,
+      @JsonKey(includeToJson: false, includeFromJson: false) TextStyle? style,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      StringFieldBuilderDef? widgetBuilder});
+}
 
-  factory _StringInputUiSettings.fromJson(Map<String, dynamic> json) =
-      _$StringInputUiSettingsImpl.fromJson;
+/// @nodoc
+class __$StringInputUiSettingsCopyWithImpl<$Res>
+    implements _$StringInputUiSettingsCopyWith<$Res> {
+  __$StringInputUiSettingsCopyWithImpl(this._self, this._then);
 
-  @override
-  String? get labelText;
-  @override
-  String? get hintText;
-  @override
-  String? get helperText;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  Widget? get prefixIcon;
-  @override
-  StringFieldAction? get action;
-  @override
-  bool? get submitFormOnFieldSubmitted;
-  @override
-  @TextInputTypeConverter()
-  TextInputType? get keyboardType;
-  @override
-  bool? get obscureText;
-  @override
-  bool? get autocorrect;
-  @override
-  List<String>? get autofillHints;
-  @override
-  bool? get autofocus;
-  @override
-  TextInputAction? get textInputAction;
-  @override
-  TextCapitalization? get textCapitalization;
-
-  /// Defaults to 1. If you want to set it to null, enter 0.
-  @override
-  int? get maxLines;
-  @override
-  String? get invalidRegexMessage;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  TextStyle? get style;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  StringFieldBuilderDef? get widgetBuilder;
+  final _StringInputUiSettings _self;
+  final $Res Function(_StringInputUiSettings) _then;
 
   /// Create a copy of StringInputUiSettings
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$StringInputUiSettingsImplCopyWith<_$StringInputUiSettingsImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-WoFormUiSettings _$WoFormUiSettingsFromJson(Map<String, dynamic> json) {
-  return _WoFormUiSettings.fromJson(json);
-}
-
-/// @nodoc
-mixin _$WoFormUiSettings {
-  String get titleText => throw _privateConstructorUsedError;
-  WoFormTitlePosition get titlePosition => throw _privateConstructorUsedError;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  HeaderBuilderDef? get headerBuilder => throw _privateConstructorUsedError;
-  @JsonKey(toJson: WoFormSubmitMode.staticToJson)
-  WoFormSubmitMode get submitMode => throw _privateConstructorUsedError;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  SubmitButtonBuilderDef? get submitButtonBuilder =>
-      throw _privateConstructorUsedError;
-  bool? get showAsteriskIfRequired => throw _privateConstructorUsedError;
-  bool? get canModifySubmittedValues => throw _privateConstructorUsedError;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  Future<bool?> Function(BuildContext)? get canQuit =>
-      throw _privateConstructorUsedError;
-
-  /// Serializes this WoFormUiSettings to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of WoFormUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $WoFormUiSettingsCopyWith<WoFormUiSettings> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $WoFormUiSettingsCopyWith<$Res> {
-  factory $WoFormUiSettingsCopyWith(
-          WoFormUiSettings value, $Res Function(WoFormUiSettings) then) =
-      _$WoFormUiSettingsCopyWithImpl<$Res, WoFormUiSettings>;
-  @useResult
-  $Res call(
-      {String titleText,
-      WoFormTitlePosition titlePosition,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      HeaderBuilderDef? headerBuilder,
-      @JsonKey(toJson: WoFormSubmitMode.staticToJson)
-      WoFormSubmitMode submitMode,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      SubmitButtonBuilderDef? submitButtonBuilder,
-      bool? showAsteriskIfRequired,
-      bool? canModifySubmittedValues,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      Future<bool?> Function(BuildContext)? canQuit});
-
-  $WoFormSubmitModeCopyWith<$Res> get submitMode;
-}
-
-/// @nodoc
-class _$WoFormUiSettingsCopyWithImpl<$Res, $Val extends WoFormUiSettings>
-    implements $WoFormUiSettingsCopyWith<$Res> {
-  _$WoFormUiSettingsCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of WoFormUiSettings
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
-    Object? titleText = null,
-    Object? titlePosition = null,
-    Object? headerBuilder = freezed,
-    Object? submitMode = null,
-    Object? submitButtonBuilder = freezed,
-    Object? showAsteriskIfRequired = freezed,
-    Object? canModifySubmittedValues = freezed,
-    Object? canQuit = freezed,
+    Object? labelText = freezed,
+    Object? hintText = freezed,
+    Object? helperText = freezed,
+    Object? prefixIcon = freezed,
+    Object? action = freezed,
+    Object? submitFormOnFieldSubmitted = freezed,
+    Object? keyboardType = freezed,
+    Object? obscureText = freezed,
+    Object? autocorrect = freezed,
+    Object? autofillHints = freezed,
+    Object? autofocus = freezed,
+    Object? textInputAction = freezed,
+    Object? textCapitalization = freezed,
+    Object? maxLines = freezed,
+    Object? invalidRegexMessage = freezed,
+    Object? style = freezed,
+    Object? widgetBuilder = freezed,
   }) {
-    return _then(_value.copyWith(
-      titleText: null == titleText
-          ? _value.titleText
-          : titleText // ignore: cast_nullable_to_non_nullable
-              as String,
-      titlePosition: null == titlePosition
-          ? _value.titlePosition
-          : titlePosition // ignore: cast_nullable_to_non_nullable
-              as WoFormTitlePosition,
-      headerBuilder: freezed == headerBuilder
-          ? _value.headerBuilder
-          : headerBuilder // ignore: cast_nullable_to_non_nullable
-              as HeaderBuilderDef?,
-      submitMode: null == submitMode
-          ? _value.submitMode
-          : submitMode // ignore: cast_nullable_to_non_nullable
-              as WoFormSubmitMode,
-      submitButtonBuilder: freezed == submitButtonBuilder
-          ? _value.submitButtonBuilder
-          : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
-              as SubmitButtonBuilderDef?,
-      showAsteriskIfRequired: freezed == showAsteriskIfRequired
-          ? _value.showAsteriskIfRequired
-          : showAsteriskIfRequired // ignore: cast_nullable_to_non_nullable
+    return _then(_StringInputUiSettings(
+      labelText: freezed == labelText
+          ? _self.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hintText: freezed == hintText
+          ? _self.hintText
+          : hintText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _self.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      prefixIcon: freezed == prefixIcon
+          ? _self.prefixIcon
+          : prefixIcon // ignore: cast_nullable_to_non_nullable
+              as Widget?,
+      action: freezed == action
+          ? _self.action
+          : action // ignore: cast_nullable_to_non_nullable
+              as StringFieldAction?,
+      submitFormOnFieldSubmitted: freezed == submitFormOnFieldSubmitted
+          ? _self.submitFormOnFieldSubmitted
+          : submitFormOnFieldSubmitted // ignore: cast_nullable_to_non_nullable
               as bool?,
-      canModifySubmittedValues: freezed == canModifySubmittedValues
-          ? _value.canModifySubmittedValues
-          : canModifySubmittedValues // ignore: cast_nullable_to_non_nullable
+      keyboardType: freezed == keyboardType
+          ? _self.keyboardType
+          : keyboardType // ignore: cast_nullable_to_non_nullable
+              as TextInputType?,
+      obscureText: freezed == obscureText
+          ? _self.obscureText
+          : obscureText // ignore: cast_nullable_to_non_nullable
               as bool?,
-      canQuit: freezed == canQuit
-          ? _value.canQuit
-          : canQuit // ignore: cast_nullable_to_non_nullable
-              as Future<bool?> Function(BuildContext)?,
-    ) as $Val);
-  }
-
-  /// Create a copy of WoFormUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $WoFormSubmitModeCopyWith<$Res> get submitMode {
-    return $WoFormSubmitModeCopyWith<$Res>(_value.submitMode, (value) {
-      return _then(_value.copyWith(submitMode: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$WoFormUiSettingsImplCopyWith<$Res>
-    implements $WoFormUiSettingsCopyWith<$Res> {
-  factory _$$WoFormUiSettingsImplCopyWith(_$WoFormUiSettingsImpl value,
-          $Res Function(_$WoFormUiSettingsImpl) then) =
-      __$$WoFormUiSettingsImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String titleText,
-      WoFormTitlePosition titlePosition,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      HeaderBuilderDef? headerBuilder,
-      @JsonKey(toJson: WoFormSubmitMode.staticToJson)
-      WoFormSubmitMode submitMode,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      SubmitButtonBuilderDef? submitButtonBuilder,
-      bool? showAsteriskIfRequired,
-      bool? canModifySubmittedValues,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      Future<bool?> Function(BuildContext)? canQuit});
-
-  @override
-  $WoFormSubmitModeCopyWith<$Res> get submitMode;
-}
-
-/// @nodoc
-class __$$WoFormUiSettingsImplCopyWithImpl<$Res>
-    extends _$WoFormUiSettingsCopyWithImpl<$Res, _$WoFormUiSettingsImpl>
-    implements _$$WoFormUiSettingsImplCopyWith<$Res> {
-  __$$WoFormUiSettingsImplCopyWithImpl(_$WoFormUiSettingsImpl _value,
-      $Res Function(_$WoFormUiSettingsImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of WoFormUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? titleText = null,
-    Object? titlePosition = null,
-    Object? headerBuilder = freezed,
-    Object? submitMode = null,
-    Object? submitButtonBuilder = freezed,
-    Object? showAsteriskIfRequired = freezed,
-    Object? canModifySubmittedValues = freezed,
-    Object? canQuit = freezed,
-  }) {
-    return _then(_$WoFormUiSettingsImpl(
-      titleText: null == titleText
-          ? _value.titleText
-          : titleText // ignore: cast_nullable_to_non_nullable
-              as String,
-      titlePosition: null == titlePosition
-          ? _value.titlePosition
-          : titlePosition // ignore: cast_nullable_to_non_nullable
-              as WoFormTitlePosition,
-      headerBuilder: freezed == headerBuilder
-          ? _value.headerBuilder
-          : headerBuilder // ignore: cast_nullable_to_non_nullable
-              as HeaderBuilderDef?,
-      submitMode: null == submitMode
-          ? _value.submitMode
-          : submitMode // ignore: cast_nullable_to_non_nullable
-              as WoFormSubmitMode,
-      submitButtonBuilder: freezed == submitButtonBuilder
-          ? _value.submitButtonBuilder
-          : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
-              as SubmitButtonBuilderDef?,
-      showAsteriskIfRequired: freezed == showAsteriskIfRequired
-          ? _value.showAsteriskIfRequired
-          : showAsteriskIfRequired // ignore: cast_nullable_to_non_nullable
+      autocorrect: freezed == autocorrect
+          ? _self.autocorrect
+          : autocorrect // ignore: cast_nullable_to_non_nullable
               as bool?,
-      canModifySubmittedValues: freezed == canModifySubmittedValues
-          ? _value.canModifySubmittedValues
-          : canModifySubmittedValues // ignore: cast_nullable_to_non_nullable
+      autofillHints: freezed == autofillHints
+          ? _self._autofillHints
+          : autofillHints // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      autofocus: freezed == autofocus
+          ? _self.autofocus
+          : autofocus // ignore: cast_nullable_to_non_nullable
               as bool?,
-      canQuit: freezed == canQuit
-          ? _value.canQuit
-          : canQuit // ignore: cast_nullable_to_non_nullable
-              as Future<bool?> Function(BuildContext)?,
+      textInputAction: freezed == textInputAction
+          ? _self.textInputAction
+          : textInputAction // ignore: cast_nullable_to_non_nullable
+              as TextInputAction?,
+      textCapitalization: freezed == textCapitalization
+          ? _self.textCapitalization
+          : textCapitalization // ignore: cast_nullable_to_non_nullable
+              as TextCapitalization?,
+      maxLines: freezed == maxLines
+          ? _self.maxLines
+          : maxLines // ignore: cast_nullable_to_non_nullable
+              as int?,
+      invalidRegexMessage: freezed == invalidRegexMessage
+          ? _self.invalidRegexMessage
+          : invalidRegexMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      style: freezed == style
+          ? _self.style
+          : style // ignore: cast_nullable_to_non_nullable
+              as TextStyle?,
+      widgetBuilder: freezed == widgetBuilder
+          ? _self.widgetBuilder
+          : widgetBuilder // ignore: cast_nullable_to_non_nullable
+              as StringFieldBuilderDef?,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$WoFormUiSettingsImpl extends _WoFormUiSettings {
-  const _$WoFormUiSettingsImpl(
-      {this.titleText = '',
-      this.titlePosition = WoFormTitlePosition.header,
-      @JsonKey(includeToJson: false, includeFromJson: false) this.headerBuilder,
-      @JsonKey(toJson: WoFormSubmitMode.staticToJson)
-      this.submitMode = const WoFormSubmitMode.standard(),
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      this.submitButtonBuilder,
-      this.showAsteriskIfRequired,
-      this.canModifySubmittedValues,
-      @JsonKey(includeToJson: false, includeFromJson: false) this.canQuit})
-      : super._();
-
-  factory _$WoFormUiSettingsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$WoFormUiSettingsImplFromJson(json);
-
-  @override
-  @JsonKey()
-  final String titleText;
-  @override
-  @JsonKey()
-  final WoFormTitlePosition titlePosition;
-  @override
+mixin _$WoFormUiSettings {
+  String get titleText;
+  WoFormTitlePosition get titlePosition;
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final HeaderBuilderDef? headerBuilder;
-  @override
+  HeaderBuilderDef? get headerBuilder;
   @JsonKey(toJson: WoFormSubmitMode.staticToJson)
-  final WoFormSubmitMode submitMode;
-  @override
+  WoFormSubmitMode get submitMode;
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final SubmitButtonBuilderDef? submitButtonBuilder;
-  @override
-  final bool? showAsteriskIfRequired;
-  @override
-  final bool? canModifySubmittedValues;
-  @override
+  SubmitButtonBuilderDef? get submitButtonBuilder;
+  bool? get showAsteriskIfRequired;
+  bool? get canModifySubmittedValues;
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final Future<bool?> Function(BuildContext)? canQuit;
+  Future<bool?> Function(BuildContext context)? get canQuit;
 
-  @override
-  String toString() {
-    return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, submitButtonBuilder: $submitButtonBuilder, showAsteriskIfRequired: $showAsteriskIfRequired, canModifySubmittedValues: $canModifySubmittedValues, canQuit: $canQuit)';
-  }
+  /// Create a copy of WoFormUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $WoFormUiSettingsCopyWith<WoFormUiSettings> get copyWith =>
+      _$WoFormUiSettingsCopyWithImpl<WoFormUiSettings>(
+          this as WoFormUiSettings, _$identity);
+
+  /// Serializes this WoFormUiSettings to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$WoFormUiSettingsImpl &&
+            other is WoFormUiSettings &&
             (identical(other.titleText, titleText) ||
                 other.titleText == titleText) &&
             (identical(other.titlePosition, titlePosition) ||
@@ -3995,70 +3553,295 @@ class _$WoFormUiSettingsImpl extends _WoFormUiSettings {
       canModifySubmittedValues,
       canQuit);
 
-  /// Create a copy of WoFormUiSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$WoFormUiSettingsImplCopyWith<_$WoFormUiSettingsImpl> get copyWith =>
-      __$$WoFormUiSettingsImplCopyWithImpl<_$WoFormUiSettingsImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$WoFormUiSettingsImplToJson(
-      this,
-    );
+  String toString() {
+    return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, submitButtonBuilder: $submitButtonBuilder, showAsteriskIfRequired: $showAsteriskIfRequired, canModifySubmittedValues: $canModifySubmittedValues, canQuit: $canQuit)';
   }
 }
 
-abstract class _WoFormUiSettings extends WoFormUiSettings {
-  const factory _WoFormUiSettings(
-          {final String titleText,
-          final WoFormTitlePosition titlePosition,
-          @JsonKey(includeToJson: false, includeFromJson: false)
-          final HeaderBuilderDef? headerBuilder,
-          @JsonKey(toJson: WoFormSubmitMode.staticToJson)
-          final WoFormSubmitMode submitMode,
-          @JsonKey(includeToJson: false, includeFromJson: false)
-          final SubmitButtonBuilderDef? submitButtonBuilder,
-          final bool? showAsteriskIfRequired,
-          final bool? canModifySubmittedValues,
-          @JsonKey(includeToJson: false, includeFromJson: false)
-          final Future<bool?> Function(BuildContext)? canQuit}) =
-      _$WoFormUiSettingsImpl;
-  const _WoFormUiSettings._() : super._();
+/// @nodoc
+abstract mixin class $WoFormUiSettingsCopyWith<$Res> {
+  factory $WoFormUiSettingsCopyWith(
+          WoFormUiSettings value, $Res Function(WoFormUiSettings) _then) =
+      _$WoFormUiSettingsCopyWithImpl;
+  @useResult
+  $Res call(
+      {String titleText,
+      WoFormTitlePosition titlePosition,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      HeaderBuilderDef? headerBuilder,
+      @JsonKey(toJson: WoFormSubmitMode.staticToJson)
+      WoFormSubmitMode submitMode,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      SubmitButtonBuilderDef? submitButtonBuilder,
+      bool? showAsteriskIfRequired,
+      bool? canModifySubmittedValues,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      Future<bool?> Function(BuildContext context)? canQuit});
 
-  factory _WoFormUiSettings.fromJson(Map<String, dynamic> json) =
-      _$WoFormUiSettingsImpl.fromJson;
+  $WoFormSubmitModeCopyWith<$Res> get submitMode;
+}
+
+/// @nodoc
+class _$WoFormUiSettingsCopyWithImpl<$Res>
+    implements $WoFormUiSettingsCopyWith<$Res> {
+  _$WoFormUiSettingsCopyWithImpl(this._self, this._then);
+
+  final WoFormUiSettings _self;
+  final $Res Function(WoFormUiSettings) _then;
+
+  /// Create a copy of WoFormUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? titleText = null,
+    Object? titlePosition = null,
+    Object? headerBuilder = freezed,
+    Object? submitMode = null,
+    Object? submitButtonBuilder = freezed,
+    Object? showAsteriskIfRequired = freezed,
+    Object? canModifySubmittedValues = freezed,
+    Object? canQuit = freezed,
+  }) {
+    return _then(_self.copyWith(
+      titleText: null == titleText
+          ? _self.titleText
+          : titleText // ignore: cast_nullable_to_non_nullable
+              as String,
+      titlePosition: null == titlePosition
+          ? _self.titlePosition
+          : titlePosition // ignore: cast_nullable_to_non_nullable
+              as WoFormTitlePosition,
+      headerBuilder: freezed == headerBuilder
+          ? _self.headerBuilder
+          : headerBuilder // ignore: cast_nullable_to_non_nullable
+              as HeaderBuilderDef?,
+      submitMode: null == submitMode
+          ? _self.submitMode
+          : submitMode // ignore: cast_nullable_to_non_nullable
+              as WoFormSubmitMode,
+      submitButtonBuilder: freezed == submitButtonBuilder
+          ? _self.submitButtonBuilder
+          : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
+              as SubmitButtonBuilderDef?,
+      showAsteriskIfRequired: freezed == showAsteriskIfRequired
+          ? _self.showAsteriskIfRequired
+          : showAsteriskIfRequired // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      canModifySubmittedValues: freezed == canModifySubmittedValues
+          ? _self.canModifySubmittedValues
+          : canModifySubmittedValues // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      canQuit: freezed == canQuit
+          ? _self.canQuit
+          : canQuit // ignore: cast_nullable_to_non_nullable
+              as Future<bool?> Function(BuildContext context)?,
+    ));
+  }
+
+  /// Create a copy of WoFormUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $WoFormSubmitModeCopyWith<$Res> get submitMode {
+    return $WoFormSubmitModeCopyWith<$Res>(_self.submitMode, (value) {
+      return _then(_self.copyWith(submitMode: value));
+    });
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _WoFormUiSettings extends WoFormUiSettings {
+  const _WoFormUiSettings(
+      {this.titleText = '',
+      this.titlePosition = WoFormTitlePosition.header,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.headerBuilder,
+      @JsonKey(toJson: WoFormSubmitMode.staticToJson)
+      this.submitMode = const WoFormSubmitMode.standard(),
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      this.submitButtonBuilder,
+      this.showAsteriskIfRequired,
+      this.canModifySubmittedValues,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.canQuit})
+      : super._();
+  factory _WoFormUiSettings.fromJson(Map<String, dynamic> json) =>
+      _$WoFormUiSettingsFromJson(json);
 
   @override
-  String get titleText;
+  @JsonKey()
+  final String titleText;
   @override
-  WoFormTitlePosition get titlePosition;
+  @JsonKey()
+  final WoFormTitlePosition titlePosition;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  HeaderBuilderDef? get headerBuilder;
+  final HeaderBuilderDef? headerBuilder;
   @override
   @JsonKey(toJson: WoFormSubmitMode.staticToJson)
-  WoFormSubmitMode get submitMode;
+  final WoFormSubmitMode submitMode;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  SubmitButtonBuilderDef? get submitButtonBuilder;
+  final SubmitButtonBuilderDef? submitButtonBuilder;
   @override
-  bool? get showAsteriskIfRequired;
+  final bool? showAsteriskIfRequired;
   @override
-  bool? get canModifySubmittedValues;
+  final bool? canModifySubmittedValues;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  Future<bool?> Function(BuildContext)? get canQuit;
+  final Future<bool?> Function(BuildContext context)? canQuit;
 
   /// Create a copy of WoFormUiSettings
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$WoFormUiSettingsImplCopyWith<_$WoFormUiSettingsImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$WoFormUiSettingsCopyWith<_WoFormUiSettings> get copyWith =>
+      __$WoFormUiSettingsCopyWithImpl<_WoFormUiSettings>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$WoFormUiSettingsToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _WoFormUiSettings &&
+            (identical(other.titleText, titleText) ||
+                other.titleText == titleText) &&
+            (identical(other.titlePosition, titlePosition) ||
+                other.titlePosition == titlePosition) &&
+            (identical(other.headerBuilder, headerBuilder) ||
+                other.headerBuilder == headerBuilder) &&
+            (identical(other.submitMode, submitMode) ||
+                other.submitMode == submitMode) &&
+            (identical(other.submitButtonBuilder, submitButtonBuilder) ||
+                other.submitButtonBuilder == submitButtonBuilder) &&
+            (identical(other.showAsteriskIfRequired, showAsteriskIfRequired) ||
+                other.showAsteriskIfRequired == showAsteriskIfRequired) &&
+            (identical(
+                    other.canModifySubmittedValues, canModifySubmittedValues) ||
+                other.canModifySubmittedValues == canModifySubmittedValues) &&
+            (identical(other.canQuit, canQuit) || other.canQuit == canQuit));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      titleText,
+      titlePosition,
+      headerBuilder,
+      submitMode,
+      submitButtonBuilder,
+      showAsteriskIfRequired,
+      canModifySubmittedValues,
+      canQuit);
+
+  @override
+  String toString() {
+    return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, submitButtonBuilder: $submitButtonBuilder, showAsteriskIfRequired: $showAsteriskIfRequired, canModifySubmittedValues: $canModifySubmittedValues, canQuit: $canQuit)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$WoFormUiSettingsCopyWith<$Res>
+    implements $WoFormUiSettingsCopyWith<$Res> {
+  factory _$WoFormUiSettingsCopyWith(
+          _WoFormUiSettings value, $Res Function(_WoFormUiSettings) _then) =
+      __$WoFormUiSettingsCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String titleText,
+      WoFormTitlePosition titlePosition,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      HeaderBuilderDef? headerBuilder,
+      @JsonKey(toJson: WoFormSubmitMode.staticToJson)
+      WoFormSubmitMode submitMode,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      SubmitButtonBuilderDef? submitButtonBuilder,
+      bool? showAsteriskIfRequired,
+      bool? canModifySubmittedValues,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      Future<bool?> Function(BuildContext context)? canQuit});
+
+  @override
+  $WoFormSubmitModeCopyWith<$Res> get submitMode;
+}
+
+/// @nodoc
+class __$WoFormUiSettingsCopyWithImpl<$Res>
+    implements _$WoFormUiSettingsCopyWith<$Res> {
+  __$WoFormUiSettingsCopyWithImpl(this._self, this._then);
+
+  final _WoFormUiSettings _self;
+  final $Res Function(_WoFormUiSettings) _then;
+
+  /// Create a copy of WoFormUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? titleText = null,
+    Object? titlePosition = null,
+    Object? headerBuilder = freezed,
+    Object? submitMode = null,
+    Object? submitButtonBuilder = freezed,
+    Object? showAsteriskIfRequired = freezed,
+    Object? canModifySubmittedValues = freezed,
+    Object? canQuit = freezed,
+  }) {
+    return _then(_WoFormUiSettings(
+      titleText: null == titleText
+          ? _self.titleText
+          : titleText // ignore: cast_nullable_to_non_nullable
+              as String,
+      titlePosition: null == titlePosition
+          ? _self.titlePosition
+          : titlePosition // ignore: cast_nullable_to_non_nullable
+              as WoFormTitlePosition,
+      headerBuilder: freezed == headerBuilder
+          ? _self.headerBuilder
+          : headerBuilder // ignore: cast_nullable_to_non_nullable
+              as HeaderBuilderDef?,
+      submitMode: null == submitMode
+          ? _self.submitMode
+          : submitMode // ignore: cast_nullable_to_non_nullable
+              as WoFormSubmitMode,
+      submitButtonBuilder: freezed == submitButtonBuilder
+          ? _self.submitButtonBuilder
+          : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
+              as SubmitButtonBuilderDef?,
+      showAsteriskIfRequired: freezed == showAsteriskIfRequired
+          ? _self.showAsteriskIfRequired
+          : showAsteriskIfRequired // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      canModifySubmittedValues: freezed == canModifySubmittedValues
+          ? _self.canModifySubmittedValues
+          : canModifySubmittedValues // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      canQuit: freezed == canQuit
+          ? _self.canQuit
+          : canQuit // ignore: cast_nullable_to_non_nullable
+              as Future<bool?> Function(BuildContext context)?,
+    ));
+  }
+
+  /// Create a copy of WoFormUiSettings
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $WoFormSubmitModeCopyWith<$Res> get submitMode {
+    return $WoFormSubmitModeCopyWith<$Res>(_self.submitMode, (value) {
+      return _then(_self.copyWith(submitMode: value));
+    });
+  }
 }
 
 WoFormSubmitMode _$WoFormSubmitModeFromJson(Map<String, dynamic> json) {
@@ -4076,110 +3859,51 @@ WoFormSubmitMode _$WoFormSubmitModeFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WoFormSubmitMode {
-  String? get submitText => throw _privateConstructorUsedError;
+  String? get submitText;
   @JsonKey(includeToJson: false, includeFromJson: false)
-  IconData? get submitIcon => throw _privateConstructorUsedError;
-  DisableSubmitButton get disableSubmitMode =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String? submitText,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            IconData? submitIcon,
-            DisableSubmitButton disableSubmitMode,
-            SubmitButtonPosition buttonPosition,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            ScaffoldBuilderDef? scaffoldBuilder)
-        standard,
-    required TResult Function(
-            String? submitText,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            IconData? submitIcon,
-            String? nextText,
-            DisableSubmitButton disableSubmitMode,
-            bool showProgressIndicator)
-        pageByPage,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String? submitText,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            IconData? submitIcon,
-            DisableSubmitButton disableSubmitMode,
-            SubmitButtonPosition buttonPosition,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            ScaffoldBuilderDef? scaffoldBuilder)?
-        standard,
-    TResult? Function(
-            String? submitText,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            IconData? submitIcon,
-            String? nextText,
-            DisableSubmitButton disableSubmitMode,
-            bool showProgressIndicator)?
-        pageByPage,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String? submitText,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            IconData? submitIcon,
-            DisableSubmitButton disableSubmitMode,
-            SubmitButtonPosition buttonPosition,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            ScaffoldBuilderDef? scaffoldBuilder)?
-        standard,
-    TResult Function(
-            String? submitText,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            IconData? submitIcon,
-            String? nextText,
-            DisableSubmitButton disableSubmitMode,
-            bool showProgressIndicator)?
-        pageByPage,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(StandardSubmitMode value) standard,
-    required TResult Function(PageByPageSubmitMode value) pageByPage,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(StandardSubmitMode value)? standard,
-    TResult? Function(PageByPageSubmitMode value)? pageByPage,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(StandardSubmitMode value)? standard,
-    TResult Function(PageByPageSubmitMode value)? pageByPage,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-
-  /// Serializes this WoFormSubmitMode to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  IconData? get submitIcon;
+  DisableSubmitButton get disableSubmitMode;
 
   /// Create a copy of WoFormSubmitMode
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $WoFormSubmitModeCopyWith<WoFormSubmitMode> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$WoFormSubmitModeCopyWithImpl<WoFormSubmitMode>(
+          this as WoFormSubmitMode, _$identity);
+
+  /// Serializes this WoFormSubmitMode to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is WoFormSubmitMode &&
+            (identical(other.submitText, submitText) ||
+                other.submitText == submitText) &&
+            (identical(other.submitIcon, submitIcon) ||
+                other.submitIcon == submitIcon) &&
+            (identical(other.disableSubmitMode, disableSubmitMode) ||
+                other.disableSubmitMode == disableSubmitMode));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, submitText, submitIcon, disableSubmitMode);
+
+  @override
+  String toString() {
+    return 'WoFormSubmitMode(submitText: $submitText, submitIcon: $submitIcon, disableSubmitMode: $disableSubmitMode)';
+  }
 }
 
 /// @nodoc
-abstract class $WoFormSubmitModeCopyWith<$Res> {
+abstract mixin class $WoFormSubmitModeCopyWith<$Res> {
   factory $WoFormSubmitModeCopyWith(
-          WoFormSubmitMode value, $Res Function(WoFormSubmitMode) then) =
-      _$WoFormSubmitModeCopyWithImpl<$Res, WoFormSubmitMode>;
+          WoFormSubmitMode value, $Res Function(WoFormSubmitMode) _then) =
+      _$WoFormSubmitModeCopyWithImpl;
   @useResult
   $Res call(
       {String? submitText,
@@ -4189,14 +3913,12 @@ abstract class $WoFormSubmitModeCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$WoFormSubmitModeCopyWithImpl<$Res, $Val extends WoFormSubmitMode>
+class _$WoFormSubmitModeCopyWithImpl<$Res>
     implements $WoFormSubmitModeCopyWith<$Res> {
-  _$WoFormSubmitModeCopyWithImpl(this._value, this._then);
+  _$WoFormSubmitModeCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final WoFormSubmitMode _self;
+  final $Res Function(WoFormSubmitMode) _then;
 
   /// Create a copy of WoFormSubmitMode
   /// with the given fields replaced by the non-null parameter values.
@@ -4207,89 +3929,27 @@ class _$WoFormSubmitModeCopyWithImpl<$Res, $Val extends WoFormSubmitMode>
     Object? submitIcon = freezed,
     Object? disableSubmitMode = null,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       submitText: freezed == submitText
-          ? _value.submitText
+          ? _self.submitText
           : submitText // ignore: cast_nullable_to_non_nullable
               as String?,
       submitIcon: freezed == submitIcon
-          ? _value.submitIcon
+          ? _self.submitIcon
           : submitIcon // ignore: cast_nullable_to_non_nullable
               as IconData?,
       disableSubmitMode: null == disableSubmitMode
-          ? _value.disableSubmitMode
+          ? _self.disableSubmitMode
           : disableSubmitMode // ignore: cast_nullable_to_non_nullable
               as DisableSubmitButton,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$StandardSubmitModeImplCopyWith<$Res>
-    implements $WoFormSubmitModeCopyWith<$Res> {
-  factory _$$StandardSubmitModeImplCopyWith(_$StandardSubmitModeImpl value,
-          $Res Function(_$StandardSubmitModeImpl) then) =
-      __$$StandardSubmitModeImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String? submitText,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      IconData? submitIcon,
-      DisableSubmitButton disableSubmitMode,
-      SubmitButtonPosition buttonPosition,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      ScaffoldBuilderDef? scaffoldBuilder});
-}
-
-/// @nodoc
-class __$$StandardSubmitModeImplCopyWithImpl<$Res>
-    extends _$WoFormSubmitModeCopyWithImpl<$Res, _$StandardSubmitModeImpl>
-    implements _$$StandardSubmitModeImplCopyWith<$Res> {
-  __$$StandardSubmitModeImplCopyWithImpl(_$StandardSubmitModeImpl _value,
-      $Res Function(_$StandardSubmitModeImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of WoFormSubmitMode
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? submitText = freezed,
-    Object? submitIcon = freezed,
-    Object? disableSubmitMode = null,
-    Object? buttonPosition = null,
-    Object? scaffoldBuilder = freezed,
-  }) {
-    return _then(_$StandardSubmitModeImpl(
-      submitText: freezed == submitText
-          ? _value.submitText
-          : submitText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      submitIcon: freezed == submitIcon
-          ? _value.submitIcon
-          : submitIcon // ignore: cast_nullable_to_non_nullable
-              as IconData?,
-      disableSubmitMode: null == disableSubmitMode
-          ? _value.disableSubmitMode
-          : disableSubmitMode // ignore: cast_nullable_to_non_nullable
-              as DisableSubmitButton,
-      buttonPosition: null == buttonPosition
-          ? _value.buttonPosition
-          : buttonPosition // ignore: cast_nullable_to_non_nullable
-              as SubmitButtonPosition,
-      scaffoldBuilder: freezed == scaffoldBuilder
-          ? _value.scaffoldBuilder
-          : scaffoldBuilder // ignore: cast_nullable_to_non_nullable
-              as ScaffoldBuilderDef?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$StandardSubmitModeImpl extends StandardSubmitMode {
-  const _$StandardSubmitModeImpl(
+class StandardSubmitMode extends WoFormSubmitMode {
+  const StandardSubmitMode(
       {this.submitText,
       @JsonKey(includeToJson: false, includeFromJson: false) this.submitIcon,
       this.disableSubmitMode = DisableSubmitButton.never,
@@ -4299,9 +3959,8 @@ class _$StandardSubmitModeImpl extends StandardSubmitMode {
       final String? $type})
       : $type = $type ?? 'standard',
         super._();
-
-  factory _$StandardSubmitModeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$StandardSubmitModeImplFromJson(json);
+  factory StandardSubmitMode.fromJson(Map<String, dynamic> json) =>
+      _$StandardSubmitModeFromJson(json);
 
   @override
   final String? submitText;
@@ -4311,26 +3970,34 @@ class _$StandardSubmitModeImpl extends StandardSubmitMode {
   @override
   @JsonKey()
   final DisableSubmitButton disableSubmitMode;
-  @override
   @JsonKey()
   final SubmitButtonPosition buttonPosition;
-  @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final ScaffoldBuilderDef? scaffoldBuilder;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
+  /// Create a copy of WoFormSubmitMode
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'WoFormSubmitMode.standard(submitText: $submitText, submitIcon: $submitIcon, disableSubmitMode: $disableSubmitMode, buttonPosition: $buttonPosition, scaffoldBuilder: $scaffoldBuilder)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $StandardSubmitModeCopyWith<StandardSubmitMode> get copyWith =>
+      _$StandardSubmitModeCopyWithImpl<StandardSubmitMode>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$StandardSubmitModeToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$StandardSubmitModeImpl &&
+            other is StandardSubmitMode &&
             (identical(other.submitText, submitText) ||
                 other.submitText == submitText) &&
             (identical(other.submitIcon, submitIcon) ||
@@ -4348,231 +4015,78 @@ class _$StandardSubmitModeImpl extends StandardSubmitMode {
   int get hashCode => Object.hash(runtimeType, submitText, submitIcon,
       disableSubmitMode, buttonPosition, scaffoldBuilder);
 
-  /// Create a copy of WoFormSubmitMode
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$StandardSubmitModeImplCopyWith<_$StandardSubmitModeImpl> get copyWith =>
-      __$$StandardSubmitModeImplCopyWithImpl<_$StandardSubmitModeImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String? submitText,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            IconData? submitIcon,
-            DisableSubmitButton disableSubmitMode,
-            SubmitButtonPosition buttonPosition,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            ScaffoldBuilderDef? scaffoldBuilder)
-        standard,
-    required TResult Function(
-            String? submitText,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            IconData? submitIcon,
-            String? nextText,
-            DisableSubmitButton disableSubmitMode,
-            bool showProgressIndicator)
-        pageByPage,
-  }) {
-    return standard(submitText, submitIcon, disableSubmitMode, buttonPosition,
-        scaffoldBuilder);
+  String toString() {
+    return 'WoFormSubmitMode.standard(submitText: $submitText, submitIcon: $submitIcon, disableSubmitMode: $disableSubmitMode, buttonPosition: $buttonPosition, scaffoldBuilder: $scaffoldBuilder)';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String? submitText,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            IconData? submitIcon,
-            DisableSubmitButton disableSubmitMode,
-            SubmitButtonPosition buttonPosition,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            ScaffoldBuilderDef? scaffoldBuilder)?
-        standard,
-    TResult? Function(
-            String? submitText,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            IconData? submitIcon,
-            String? nextText,
-            DisableSubmitButton disableSubmitMode,
-            bool showProgressIndicator)?
-        pageByPage,
-  }) {
-    return standard?.call(submitText, submitIcon, disableSubmitMode,
-        buttonPosition, scaffoldBuilder);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String? submitText,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            IconData? submitIcon,
-            DisableSubmitButton disableSubmitMode,
-            SubmitButtonPosition buttonPosition,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            ScaffoldBuilderDef? scaffoldBuilder)?
-        standard,
-    TResult Function(
-            String? submitText,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            IconData? submitIcon,
-            String? nextText,
-            DisableSubmitButton disableSubmitMode,
-            bool showProgressIndicator)?
-        pageByPage,
-    required TResult orElse(),
-  }) {
-    if (standard != null) {
-      return standard(submitText, submitIcon, disableSubmitMode, buttonPosition,
-          scaffoldBuilder);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(StandardSubmitMode value) standard,
-    required TResult Function(PageByPageSubmitMode value) pageByPage,
-  }) {
-    return standard(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(StandardSubmitMode value)? standard,
-    TResult? Function(PageByPageSubmitMode value)? pageByPage,
-  }) {
-    return standard?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(StandardSubmitMode value)? standard,
-    TResult Function(PageByPageSubmitMode value)? pageByPage,
-    required TResult orElse(),
-  }) {
-    if (standard != null) {
-      return standard(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$StandardSubmitModeImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class StandardSubmitMode extends WoFormSubmitMode {
-  const factory StandardSubmitMode(
-      {final String? submitText,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      final IconData? submitIcon,
-      final DisableSubmitButton disableSubmitMode,
-      final SubmitButtonPosition buttonPosition,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      final ScaffoldBuilderDef? scaffoldBuilder}) = _$StandardSubmitModeImpl;
-  const StandardSubmitMode._() : super._();
-
-  factory StandardSubmitMode.fromJson(Map<String, dynamic> json) =
-      _$StandardSubmitModeImpl.fromJson;
-
-  @override
-  String? get submitText;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  IconData? get submitIcon;
-  @override
-  DisableSubmitButton get disableSubmitMode;
-  SubmitButtonPosition get buttonPosition;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  ScaffoldBuilderDef? get scaffoldBuilder;
-
-  /// Create a copy of WoFormSubmitMode
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$StandardSubmitModeImplCopyWith<_$StandardSubmitModeImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$PageByPageSubmitModeImplCopyWith<$Res>
+abstract mixin class $StandardSubmitModeCopyWith<$Res>
     implements $WoFormSubmitModeCopyWith<$Res> {
-  factory _$$PageByPageSubmitModeImplCopyWith(_$PageByPageSubmitModeImpl value,
-          $Res Function(_$PageByPageSubmitModeImpl) then) =
-      __$$PageByPageSubmitModeImplCopyWithImpl<$Res>;
+  factory $StandardSubmitModeCopyWith(
+          StandardSubmitMode value, $Res Function(StandardSubmitMode) _then) =
+      _$StandardSubmitModeCopyWithImpl;
   @override
   @useResult
   $Res call(
       {String? submitText,
       @JsonKey(includeToJson: false, includeFromJson: false)
       IconData? submitIcon,
-      String? nextText,
       DisableSubmitButton disableSubmitMode,
-      bool showProgressIndicator});
+      SubmitButtonPosition buttonPosition,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      ScaffoldBuilderDef? scaffoldBuilder});
 }
 
 /// @nodoc
-class __$$PageByPageSubmitModeImplCopyWithImpl<$Res>
-    extends _$WoFormSubmitModeCopyWithImpl<$Res, _$PageByPageSubmitModeImpl>
-    implements _$$PageByPageSubmitModeImplCopyWith<$Res> {
-  __$$PageByPageSubmitModeImplCopyWithImpl(_$PageByPageSubmitModeImpl _value,
-      $Res Function(_$PageByPageSubmitModeImpl) _then)
-      : super(_value, _then);
+class _$StandardSubmitModeCopyWithImpl<$Res>
+    implements $StandardSubmitModeCopyWith<$Res> {
+  _$StandardSubmitModeCopyWithImpl(this._self, this._then);
+
+  final StandardSubmitMode _self;
+  final $Res Function(StandardSubmitMode) _then;
 
   /// Create a copy of WoFormSubmitMode
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
   @override
+  @pragma('vm:prefer-inline')
   $Res call({
     Object? submitText = freezed,
     Object? submitIcon = freezed,
-    Object? nextText = freezed,
     Object? disableSubmitMode = null,
-    Object? showProgressIndicator = null,
+    Object? buttonPosition = null,
+    Object? scaffoldBuilder = freezed,
   }) {
-    return _then(_$PageByPageSubmitModeImpl(
+    return _then(StandardSubmitMode(
       submitText: freezed == submitText
-          ? _value.submitText
+          ? _self.submitText
           : submitText // ignore: cast_nullable_to_non_nullable
               as String?,
       submitIcon: freezed == submitIcon
-          ? _value.submitIcon
+          ? _self.submitIcon
           : submitIcon // ignore: cast_nullable_to_non_nullable
               as IconData?,
-      nextText: freezed == nextText
-          ? _value.nextText
-          : nextText // ignore: cast_nullable_to_non_nullable
-              as String?,
       disableSubmitMode: null == disableSubmitMode
-          ? _value.disableSubmitMode
+          ? _self.disableSubmitMode
           : disableSubmitMode // ignore: cast_nullable_to_non_nullable
               as DisableSubmitButton,
-      showProgressIndicator: null == showProgressIndicator
-          ? _value.showProgressIndicator
-          : showProgressIndicator // ignore: cast_nullable_to_non_nullable
-              as bool,
+      buttonPosition: null == buttonPosition
+          ? _self.buttonPosition
+          : buttonPosition // ignore: cast_nullable_to_non_nullable
+              as SubmitButtonPosition,
+      scaffoldBuilder: freezed == scaffoldBuilder
+          ? _self.scaffoldBuilder
+          : scaffoldBuilder // ignore: cast_nullable_to_non_nullable
+              as ScaffoldBuilderDef?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$PageByPageSubmitModeImpl extends PageByPageSubmitMode {
-  const _$PageByPageSubmitModeImpl(
+class PageByPageSubmitMode extends WoFormSubmitMode {
+  const PageByPageSubmitMode(
       {this.submitText,
       @JsonKey(includeToJson: false, includeFromJson: false) this.submitIcon,
       this.nextText,
@@ -4581,37 +4095,45 @@ class _$PageByPageSubmitModeImpl extends PageByPageSubmitMode {
       final String? $type})
       : $type = $type ?? 'pageByPage',
         super._();
-
-  factory _$PageByPageSubmitModeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PageByPageSubmitModeImplFromJson(json);
+  factory PageByPageSubmitMode.fromJson(Map<String, dynamic> json) =>
+      _$PageByPageSubmitModeFromJson(json);
 
   @override
   final String? submitText;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final IconData? submitIcon;
-  @override
   final String? nextText;
   @override
   @JsonKey()
   final DisableSubmitButton disableSubmitMode;
-  @override
   @JsonKey()
   final bool showProgressIndicator;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
+  /// Create a copy of WoFormSubmitMode
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'WoFormSubmitMode.pageByPage(submitText: $submitText, submitIcon: $submitIcon, nextText: $nextText, disableSubmitMode: $disableSubmitMode, showProgressIndicator: $showProgressIndicator)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $PageByPageSubmitModeCopyWith<PageByPageSubmitMode> get copyWith =>
+      _$PageByPageSubmitModeCopyWithImpl<PageByPageSubmitMode>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$PageByPageSubmitModeToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PageByPageSubmitModeImpl &&
+            other is PageByPageSubmitMode &&
             (identical(other.submitText, submitText) ||
                 other.submitText == submitText) &&
             (identical(other.submitIcon, submitIcon) ||
@@ -4629,161 +4151,71 @@ class _$PageByPageSubmitModeImpl extends PageByPageSubmitMode {
   int get hashCode => Object.hash(runtimeType, submitText, submitIcon, nextText,
       disableSubmitMode, showProgressIndicator);
 
+  @override
+  String toString() {
+    return 'WoFormSubmitMode.pageByPage(submitText: $submitText, submitIcon: $submitIcon, nextText: $nextText, disableSubmitMode: $disableSubmitMode, showProgressIndicator: $showProgressIndicator)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $PageByPageSubmitModeCopyWith<$Res>
+    implements $WoFormSubmitModeCopyWith<$Res> {
+  factory $PageByPageSubmitModeCopyWith(PageByPageSubmitMode value,
+          $Res Function(PageByPageSubmitMode) _then) =
+      _$PageByPageSubmitModeCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String? submitText,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      IconData? submitIcon,
+      String? nextText,
+      DisableSubmitButton disableSubmitMode,
+      bool showProgressIndicator});
+}
+
+/// @nodoc
+class _$PageByPageSubmitModeCopyWithImpl<$Res>
+    implements $PageByPageSubmitModeCopyWith<$Res> {
+  _$PageByPageSubmitModeCopyWithImpl(this._self, this._then);
+
+  final PageByPageSubmitMode _self;
+  final $Res Function(PageByPageSubmitMode) _then;
+
   /// Create a copy of WoFormSubmitMode
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$PageByPageSubmitModeImplCopyWith<_$PageByPageSubmitModeImpl>
-      get copyWith =>
-          __$$PageByPageSubmitModeImplCopyWithImpl<_$PageByPageSubmitModeImpl>(
-              this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String? submitText,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            IconData? submitIcon,
-            DisableSubmitButton disableSubmitMode,
-            SubmitButtonPosition buttonPosition,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            ScaffoldBuilderDef? scaffoldBuilder)
-        standard,
-    required TResult Function(
-            String? submitText,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            IconData? submitIcon,
-            String? nextText,
-            DisableSubmitButton disableSubmitMode,
-            bool showProgressIndicator)
-        pageByPage,
+  $Res call({
+    Object? submitText = freezed,
+    Object? submitIcon = freezed,
+    Object? nextText = freezed,
+    Object? disableSubmitMode = null,
+    Object? showProgressIndicator = null,
   }) {
-    return pageByPage(submitText, submitIcon, nextText, disableSubmitMode,
-        showProgressIndicator);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String? submitText,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            IconData? submitIcon,
-            DisableSubmitButton disableSubmitMode,
-            SubmitButtonPosition buttonPosition,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            ScaffoldBuilderDef? scaffoldBuilder)?
-        standard,
-    TResult? Function(
-            String? submitText,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            IconData? submitIcon,
-            String? nextText,
-            DisableSubmitButton disableSubmitMode,
-            bool showProgressIndicator)?
-        pageByPage,
-  }) {
-    return pageByPage?.call(submitText, submitIcon, nextText, disableSubmitMode,
-        showProgressIndicator);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String? submitText,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            IconData? submitIcon,
-            DisableSubmitButton disableSubmitMode,
-            SubmitButtonPosition buttonPosition,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            ScaffoldBuilderDef? scaffoldBuilder)?
-        standard,
-    TResult Function(
-            String? submitText,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            IconData? submitIcon,
-            String? nextText,
-            DisableSubmitButton disableSubmitMode,
-            bool showProgressIndicator)?
-        pageByPage,
-    required TResult orElse(),
-  }) {
-    if (pageByPage != null) {
-      return pageByPage(submitText, submitIcon, nextText, disableSubmitMode,
-          showProgressIndicator);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(StandardSubmitMode value) standard,
-    required TResult Function(PageByPageSubmitMode value) pageByPage,
-  }) {
-    return pageByPage(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(StandardSubmitMode value)? standard,
-    TResult? Function(PageByPageSubmitMode value)? pageByPage,
-  }) {
-    return pageByPage?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(StandardSubmitMode value)? standard,
-    TResult Function(PageByPageSubmitMode value)? pageByPage,
-    required TResult orElse(),
-  }) {
-    if (pageByPage != null) {
-      return pageByPage(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PageByPageSubmitModeImplToJson(
-      this,
-    );
+    return _then(PageByPageSubmitMode(
+      submitText: freezed == submitText
+          ? _self.submitText
+          : submitText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      submitIcon: freezed == submitIcon
+          ? _self.submitIcon
+          : submitIcon // ignore: cast_nullable_to_non_nullable
+              as IconData?,
+      nextText: freezed == nextText
+          ? _self.nextText
+          : nextText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      disableSubmitMode: null == disableSubmitMode
+          ? _self.disableSubmitMode
+          : disableSubmitMode // ignore: cast_nullable_to_non_nullable
+              as DisableSubmitButton,
+      showProgressIndicator: null == showProgressIndicator
+          ? _self.showProgressIndicator
+          : showProgressIndicator // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
   }
 }
 
-abstract class PageByPageSubmitMode extends WoFormSubmitMode {
-  const factory PageByPageSubmitMode(
-      {final String? submitText,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      final IconData? submitIcon,
-      final String? nextText,
-      final DisableSubmitButton disableSubmitMode,
-      final bool showProgressIndicator}) = _$PageByPageSubmitModeImpl;
-  const PageByPageSubmitMode._() : super._();
-
-  factory PageByPageSubmitMode.fromJson(Map<String, dynamic> json) =
-      _$PageByPageSubmitModeImpl.fromJson;
-
-  @override
-  String? get submitText;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  IconData? get submitIcon;
-  String? get nextText;
-  @override
-  DisableSubmitButton get disableSubmitMode;
-  bool get showProgressIndicator;
-
-  /// Create a copy of WoFormSubmitMode
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PageByPageSubmitModeImplCopyWith<_$PageByPageSubmitModeImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
+// dart format on

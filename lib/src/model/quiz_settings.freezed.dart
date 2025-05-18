@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,171 +10,33 @@ part of 'quiz_settings.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 QuizSettings _$QuizSettingsFromJson(Map<String, dynamic> json) {
   return QuizSettingsSingleString.fromJson(json);
 }
 
 /// @nodoc
 mixin _$QuizSettings {
-  String get correctAnswer => throw _privateConstructorUsedError;
-  num get score => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String correctAnswer, num score) singleString,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String correctAnswer, num score)? singleString,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String correctAnswer, num score)? singleString,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(QuizSettingsSingleString value) singleString,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(QuizSettingsSingleString value)? singleString,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(QuizSettingsSingleString value)? singleString,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-
-  /// Serializes this QuizSettings to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get correctAnswer;
+  num get score;
 
   /// Create a copy of QuizSettings
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $QuizSettingsCopyWith<QuizSettings> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$QuizSettingsCopyWithImpl<QuizSettings>(
+          this as QuizSettings, _$identity);
 
-/// @nodoc
-abstract class $QuizSettingsCopyWith<$Res> {
-  factory $QuizSettingsCopyWith(
-          QuizSettings value, $Res Function(QuizSettings) then) =
-      _$QuizSettingsCopyWithImpl<$Res, QuizSettings>;
-  @useResult
-  $Res call({String correctAnswer, num score});
-}
-
-/// @nodoc
-class _$QuizSettingsCopyWithImpl<$Res, $Val extends QuizSettings>
-    implements $QuizSettingsCopyWith<$Res> {
-  _$QuizSettingsCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of QuizSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? correctAnswer = null,
-    Object? score = null,
-  }) {
-    return _then(_value.copyWith(
-      correctAnswer: null == correctAnswer
-          ? _value.correctAnswer
-          : correctAnswer // ignore: cast_nullable_to_non_nullable
-              as String,
-      score: null == score
-          ? _value.score
-          : score // ignore: cast_nullable_to_non_nullable
-              as num,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$QuizSettingsSingleStringImplCopyWith<$Res>
-    implements $QuizSettingsCopyWith<$Res> {
-  factory _$$QuizSettingsSingleStringImplCopyWith(
-          _$QuizSettingsSingleStringImpl value,
-          $Res Function(_$QuizSettingsSingleStringImpl) then) =
-      __$$QuizSettingsSingleStringImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String correctAnswer, num score});
-}
-
-/// @nodoc
-class __$$QuizSettingsSingleStringImplCopyWithImpl<$Res>
-    extends _$QuizSettingsCopyWithImpl<$Res, _$QuizSettingsSingleStringImpl>
-    implements _$$QuizSettingsSingleStringImplCopyWith<$Res> {
-  __$$QuizSettingsSingleStringImplCopyWithImpl(
-      _$QuizSettingsSingleStringImpl _value,
-      $Res Function(_$QuizSettingsSingleStringImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of QuizSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? correctAnswer = null,
-    Object? score = null,
-  }) {
-    return _then(_$QuizSettingsSingleStringImpl(
-      correctAnswer: null == correctAnswer
-          ? _value.correctAnswer
-          : correctAnswer // ignore: cast_nullable_to_non_nullable
-              as String,
-      score: null == score
-          ? _value.score
-          : score // ignore: cast_nullable_to_non_nullable
-              as num,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$QuizSettingsSingleStringImpl extends QuizSettingsSingleString {
-  const _$QuizSettingsSingleStringImpl(
-      {required this.correctAnswer, this.score = 1})
-      : assert(score > 0, 'score must be positive'),
-        super._();
-
-  factory _$QuizSettingsSingleStringImpl.fromJson(Map<String, dynamic> json) =>
-      _$$QuizSettingsSingleStringImplFromJson(json);
-
-  @override
-  final String correctAnswer;
-  @override
-  @JsonKey()
-  final num score;
-
-  @override
-  String toString() {
-    return 'QuizSettings.singleString(correctAnswer: $correctAnswer, score: $score)';
-  }
+  /// Serializes this QuizSettings to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$QuizSettingsSingleStringImpl &&
+            other is QuizSettings &&
             (identical(other.correctAnswer, correctAnswer) ||
                 other.correctAnswer == correctAnswer) &&
             (identical(other.score, score) || other.score == score));
@@ -183,97 +46,138 @@ class _$QuizSettingsSingleStringImpl extends QuizSettingsSingleString {
   @override
   int get hashCode => Object.hash(runtimeType, correctAnswer, score);
 
+  @override
+  String toString() {
+    return 'QuizSettings(correctAnswer: $correctAnswer, score: $score)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $QuizSettingsCopyWith<$Res> {
+  factory $QuizSettingsCopyWith(
+          QuizSettings value, $Res Function(QuizSettings) _then) =
+      _$QuizSettingsCopyWithImpl;
+  @useResult
+  $Res call({String correctAnswer, num score});
+}
+
+/// @nodoc
+class _$QuizSettingsCopyWithImpl<$Res> implements $QuizSettingsCopyWith<$Res> {
+  _$QuizSettingsCopyWithImpl(this._self, this._then);
+
+  final QuizSettings _self;
+  final $Res Function(QuizSettings) _then;
+
   /// Create a copy of QuizSettings
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
   @pragma('vm:prefer-inline')
-  _$$QuizSettingsSingleStringImplCopyWith<_$QuizSettingsSingleStringImpl>
-      get copyWith => __$$QuizSettingsSingleStringImplCopyWithImpl<
-          _$QuizSettingsSingleStringImpl>(this, _$identity);
+  @override
+  $Res call({
+    Object? correctAnswer = null,
+    Object? score = null,
+  }) {
+    return _then(_self.copyWith(
+      correctAnswer: null == correctAnswer
+          ? _self.correctAnswer
+          : correctAnswer // ignore: cast_nullable_to_non_nullable
+              as String,
+      score: null == score
+          ? _self.score
+          : score // ignore: cast_nullable_to_non_nullable
+              as num,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class QuizSettingsSingleString extends QuizSettings {
+  const QuizSettingsSingleString({required this.correctAnswer, this.score = 1})
+      : assert(score > 0, 'score must be positive'),
+        super._();
+  factory QuizSettingsSingleString.fromJson(Map<String, dynamic> json) =>
+      _$QuizSettingsSingleStringFromJson(json);
 
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String correctAnswer, num score) singleString,
-  }) {
-    return singleString(correctAnswer, score);
-  }
-
+  final String correctAnswer;
   @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String correctAnswer, num score)? singleString,
-  }) {
-    return singleString?.call(correctAnswer, score);
-  }
+  @JsonKey()
+  final num score;
 
+  /// Create a copy of QuizSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String correctAnswer, num score)? singleString,
-    required TResult orElse(),
-  }) {
-    if (singleString != null) {
-      return singleString(correctAnswer, score);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(QuizSettingsSingleString value) singleString,
-  }) {
-    return singleString(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(QuizSettingsSingleString value)? singleString,
-  }) {
-    return singleString?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(QuizSettingsSingleString value)? singleString,
-    required TResult orElse(),
-  }) {
-    if (singleString != null) {
-      return singleString(this);
-    }
-    return orElse();
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $QuizSettingsSingleStringCopyWith<QuizSettingsSingleString> get copyWith =>
+      _$QuizSettingsSingleStringCopyWithImpl<QuizSettingsSingleString>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$QuizSettingsSingleStringImplToJson(
+    return _$QuizSettingsSingleStringToJson(
       this,
     );
   }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is QuizSettingsSingleString &&
+            (identical(other.correctAnswer, correctAnswer) ||
+                other.correctAnswer == correctAnswer) &&
+            (identical(other.score, score) || other.score == score));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, correctAnswer, score);
+
+  @override
+  String toString() {
+    return 'QuizSettings.singleString(correctAnswer: $correctAnswer, score: $score)';
+  }
 }
 
-abstract class QuizSettingsSingleString extends QuizSettings {
-  const factory QuizSettingsSingleString(
-      {required final String correctAnswer,
-      final num score}) = _$QuizSettingsSingleStringImpl;
-  const QuizSettingsSingleString._() : super._();
-
-  factory QuizSettingsSingleString.fromJson(Map<String, dynamic> json) =
-      _$QuizSettingsSingleStringImpl.fromJson;
-
+/// @nodoc
+abstract mixin class $QuizSettingsSingleStringCopyWith<$Res>
+    implements $QuizSettingsCopyWith<$Res> {
+  factory $QuizSettingsSingleStringCopyWith(QuizSettingsSingleString value,
+          $Res Function(QuizSettingsSingleString) _then) =
+      _$QuizSettingsSingleStringCopyWithImpl;
   @override
-  String get correctAnswer;
-  @override
-  num get score;
+  @useResult
+  $Res call({String correctAnswer, num score});
+}
+
+/// @nodoc
+class _$QuizSettingsSingleStringCopyWithImpl<$Res>
+    implements $QuizSettingsSingleStringCopyWith<$Res> {
+  _$QuizSettingsSingleStringCopyWithImpl(this._self, this._then);
+
+  final QuizSettingsSingleString _self;
+  final $Res Function(QuizSettingsSingleString) _then;
 
   /// Create a copy of QuizSettings
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$QuizSettingsSingleStringImplCopyWith<_$QuizSettingsSingleStringImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? correctAnswer = null,
+    Object? score = null,
+  }) {
+    return _then(QuizSettingsSingleString(
+      correctAnswer: null == correctAnswer
+          ? _self.correctAnswer
+          : correctAnswer // ignore: cast_nullable_to_non_nullable
+              as String,
+      score: null == score
+          ? _self.score
+          : score // ignore: cast_nullable_to_non_nullable
+              as num,
+    ));
+  }
 }
+
+// dart format on

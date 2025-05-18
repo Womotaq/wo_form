@@ -6,49 +6,7 @@ part of 'wo_form_input.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SelectInput<T> _$SelectInputFromJson<T>(
-  Map<String, dynamic> json,
-  T Function(Object? json) fromJsonT,
-) =>
-    SelectInput<T>(
-      id: json['id'] as String,
-      maxCount: (json['maxCount'] as num?)?.toInt(),
-      minCount: (json['minCount'] as num).toInt(),
-      initialValues:
-          (json['initialValues'] as List<dynamic>?)?.map(fromJsonT).toList(),
-      availibleValues:
-          (json['availibleValues'] as List<dynamic>).map(fromJsonT).toList(),
-      idsOfAvailibleValues: (json['idsOfAvailibleValues'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
-      submitFormOnSelect: json['submitFormOnSelect'] as bool,
-      uiSettings: json['uiSettings'] == null
-          ? null
-          : SelectInputUiSettings<T>.fromJson(
-              json['uiSettings'] as Map<String, dynamic>),
-      quizSettings: json['quizSettings'] == null
-          ? null
-          : QuizSettings.fromJson(json['quizSettings'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$SelectInputToJson<T>(
-  SelectInput<T> instance,
-  Object? Function(T value) toJsonT,
-) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'maxCount': instance.maxCount,
-      'minCount': instance.minCount,
-      'initialValues': instance.initialValues?.map(toJsonT).toList(),
-      'availibleValues': instance.availibleValues.map(toJsonT).toList(),
-      'idsOfAvailibleValues': instance.idsOfAvailibleValues,
-      'submitFormOnSelect': instance.submitFormOnSelect,
-      'uiSettings': instance.uiSettings,
-      'quizSettings': QuizSettings.staticToJson(instance.quizSettings),
-    };
-
-_$BooleanInputImpl _$$BooleanInputImplFromJson(Map<String, dynamic> json) =>
-    _$BooleanInputImpl(
+BooleanInput _$BooleanInputFromJson(Map<String, dynamic> json) => BooleanInput(
       id: json['id'] as String,
       initialValue: json['initialValue'] as bool?,
       isRequired: json['isRequired'] as bool? ?? false,
@@ -59,7 +17,7 @@ _$BooleanInputImpl _$$BooleanInputImplFromJson(Map<String, dynamic> json) =>
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$BooleanInputImplToJson(_$BooleanInputImpl instance) =>
+Map<String, dynamic> _$BooleanInputToJson(BooleanInput instance) =>
     <String, dynamic>{
       'id': instance.id,
       'initialValue': instance.initialValue,
@@ -68,8 +26,8 @@ Map<String, dynamic> _$$BooleanInputImplToJson(_$BooleanInputImpl instance) =>
       'runtimeType': instance.$type,
     };
 
-_$DateTimeInputImpl _$$DateTimeInputImplFromJson(Map<String, dynamic> json) =>
-    _$DateTimeInputImpl(
+DateTimeInput _$DateTimeInputFromJson(Map<String, dynamic> json) =>
+    DateTimeInput(
       id: json['id'] as String,
       initialValue: json['initialValue'] == null
           ? null
@@ -89,7 +47,7 @@ _$DateTimeInputImpl _$$DateTimeInputImplFromJson(Map<String, dynamic> json) =>
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$DateTimeInputImplToJson(_$DateTimeInputImpl instance) =>
+Map<String, dynamic> _$DateTimeInputToJson(DateTimeInput instance) =>
     <String, dynamic>{
       'id': instance.id,
       'initialValue': FlexibleDateTime.staticToJson(instance.initialValue),
@@ -100,8 +58,8 @@ Map<String, dynamic> _$$DateTimeInputImplToJson(_$DateTimeInputImpl instance) =>
       'runtimeType': instance.$type,
     };
 
-_$DurationInputImpl _$$DurationInputImplFromJson(Map<String, dynamic> json) =>
-    _$DurationInputImpl(
+DurationInput _$DurationInputFromJson(Map<String, dynamic> json) =>
+    DurationInput(
       id: json['id'] as String,
       initialValue: const DurationNullableConverter()
           .fromJson((json['initialValue'] as num?)?.toInt()),
@@ -118,7 +76,7 @@ _$DurationInputImpl _$$DurationInputImplFromJson(Map<String, dynamic> json) =>
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$DurationInputImplToJson(_$DurationInputImpl instance) =>
+Map<String, dynamic> _$DurationInputToJson(DurationInput instance) =>
     <String, dynamic>{
       'id': instance.id,
       'initialValue':
@@ -133,8 +91,7 @@ Map<String, dynamic> _$$DurationInputImplToJson(_$DurationInputImpl instance) =>
       'runtimeType': instance.$type,
     };
 
-_$MediaInputImpl _$$MediaInputImplFromJson(Map<String, dynamic> json) =>
-    _$MediaInputImpl(
+MediaInput _$MediaInputFromJson(Map<String, dynamic> json) => MediaInput(
       id: json['id'] as String,
       importSettings: MediaImportSettings.fromJson(
           json['importSettings'] as Map<String, dynamic>),
@@ -152,7 +109,7 @@ _$MediaInputImpl _$$MediaInputImplFromJson(Map<String, dynamic> json) =>
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$MediaInputImplToJson(_$MediaInputImpl instance) =>
+Map<String, dynamic> _$MediaInputToJson(MediaInput instance) =>
     <String, dynamic>{
       'id': instance.id,
       'importSettings':
@@ -180,8 +137,7 @@ Json? _$JsonConverterToJson<Json, Value>(
 ) =>
     value == null ? null : toJson(value);
 
-_$NumInputImpl _$$NumInputImplFromJson(Map<String, dynamic> json) =>
-    _$NumInputImpl(
+NumInput _$NumInputFromJson(Map<String, dynamic> json) => NumInput(
       id: json['id'] as String,
       initialValue: json['initialValue'] as num?,
       isRequired: json['isRequired'] as bool? ?? false,
@@ -194,8 +150,7 @@ _$NumInputImpl _$$NumInputImplFromJson(Map<String, dynamic> json) =>
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$NumInputImplToJson(_$NumInputImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$NumInputToJson(NumInput instance) => <String, dynamic>{
       'id': instance.id,
       'initialValue': instance.initialValue,
       'isRequired': instance.isRequired,
@@ -205,9 +160,8 @@ Map<String, dynamic> _$$NumInputImplToJson(_$NumInputImpl instance) =>
       'runtimeType': instance.$type,
     };
 
-_$SelectStringInputImpl _$$SelectStringInputImplFromJson(
-        Map<String, dynamic> json) =>
-    _$SelectStringInputImpl(
+SelectStringInput _$SelectStringInputFromJson(Map<String, dynamic> json) =>
+    SelectStringInput(
       id: json['id'] as String,
       maxCount: (json['maxCount'] as num?)?.toInt(),
       minCount: (json['minCount'] as num?)?.toInt() ?? 0,
@@ -232,8 +186,7 @@ _$SelectStringInputImpl _$$SelectStringInputImplFromJson(
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$SelectStringInputImplToJson(
-        _$SelectStringInputImpl instance) =>
+Map<String, dynamic> _$SelectStringInputToJson(SelectStringInput instance) =>
     <String, dynamic>{
       'id': instance.id,
       'maxCount': instance.maxCount,
@@ -248,8 +201,7 @@ Map<String, dynamic> _$$SelectStringInputImplToJson(
       'runtimeType': instance.$type,
     };
 
-_$StringInputImpl _$$StringInputImplFromJson(Map<String, dynamic> json) =>
-    _$StringInputImpl(
+StringInput _$StringInputFromJson(Map<String, dynamic> json) => StringInput(
       id: json['id'] as String,
       initialValue: json['initialValue'] as String?,
       isRequired: json['isRequired'] as bool? ?? false,
@@ -261,7 +213,7 @@ _$StringInputImpl _$$StringInputImplFromJson(Map<String, dynamic> json) =>
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$StringInputImplToJson(_$StringInputImpl instance) =>
+Map<String, dynamic> _$StringInputToJson(StringInput instance) =>
     <String, dynamic>{
       'id': instance.id,
       'initialValue': instance.initialValue,
@@ -269,4 +221,47 @@ Map<String, dynamic> _$$StringInputImplToJson(_$StringInputImpl instance) =>
       'regexPattern': instance.regexPattern,
       'uiSettings': StringInputUiSettings.staticToJson(instance.uiSettings),
       'runtimeType': instance.$type,
+    };
+
+_SelectInput<T> _$SelectInputFromJson<T>(
+  Map<String, dynamic> json,
+  T Function(Object? json) fromJsonT,
+) =>
+    _SelectInput<T>(
+      id: json['id'] as String,
+      maxCount: (json['maxCount'] as num?)?.toInt(),
+      minCount: (json['minCount'] as num?)?.toInt() ?? 0,
+      initialValues:
+          (json['initialValues'] as List<dynamic>?)?.map(fromJsonT).toList(),
+      availibleValues: (json['availibleValues'] as List<dynamic>?)
+              ?.map(fromJsonT)
+              .toList() ??
+          const [],
+      idsOfAvailibleValues: (json['idsOfAvailibleValues'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      submitFormOnSelect: json['submitFormOnSelect'] as bool? ?? false,
+      uiSettings: json['uiSettings'] == null
+          ? null
+          : SelectInputUiSettings<T>.fromJson(
+              json['uiSettings'] as Map<String, dynamic>),
+      quizSettings: json['quizSettings'] == null
+          ? null
+          : QuizSettings.fromJson(json['quizSettings'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$SelectInputToJson<T>(
+  _SelectInput<T> instance,
+  Object? Function(T value) toJsonT,
+) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'maxCount': instance.maxCount,
+      'minCount': instance.minCount,
+      'initialValues': instance.initialValues?.map(toJsonT).toList(),
+      'availibleValues': instance.availibleValues.map(toJsonT).toList(),
+      'idsOfAvailibleValues': instance.idsOfAvailibleValues,
+      'submitFormOnSelect': instance.submitFormOnSelect,
+      'uiSettings': instance.uiSettings,
+      'quizSettings': QuizSettings.staticToJson(instance.quizSettings),
     };

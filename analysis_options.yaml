@@ -8,6 +8,7 @@ analyzer:
     - "**localizations**.dart"
   errors:
     invalid_annotation_target: ignore
+    document_ignores: ignore
 
 linter:
   rules:

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,186 +10,34 @@ part of 'wo_form_node.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-DynamicInputTemplate _$DynamicInputTemplateFromJson(Map<String, dynamic> json) {
-  return _DynamicInputTemplate.fromJson(json);
-}
 
 /// @nodoc
 mixin _$DynamicInputTemplate {
   @InputNullableConverter()
-  WoFormNodeMixin? get child => throw _privateConstructorUsedError;
+  WoFormNodeMixin? get child;
   @JsonKey(includeToJson: false, includeFromJson: false)
-  WoFormNodeMixin Function()? get childBuilder =>
-      throw _privateConstructorUsedError;
+  WoFormNodeMixin Function()? get childBuilder;
   @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
-  DynamicInputUiSettings get uiSettings => throw _privateConstructorUsedError;
-
-  /// Serializes this DynamicInputTemplate to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  DynamicInputUiSettings get uiSettings;
 
   /// Create a copy of DynamicInputTemplate
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $DynamicInputTemplateCopyWith<DynamicInputTemplate> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$DynamicInputTemplateCopyWithImpl<DynamicInputTemplate>(
+          this as DynamicInputTemplate, _$identity);
 
-/// @nodoc
-abstract class $DynamicInputTemplateCopyWith<$Res> {
-  factory $DynamicInputTemplateCopyWith(DynamicInputTemplate value,
-          $Res Function(DynamicInputTemplate) then) =
-      _$DynamicInputTemplateCopyWithImpl<$Res, DynamicInputTemplate>;
-  @useResult
-  $Res call(
-      {@InputNullableConverter() WoFormNodeMixin? child,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      WoFormNodeMixin Function()? childBuilder,
-      @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
-      DynamicInputUiSettings uiSettings});
-
-  $DynamicInputUiSettingsCopyWith<$Res> get uiSettings;
-}
-
-/// @nodoc
-class _$DynamicInputTemplateCopyWithImpl<$Res,
-        $Val extends DynamicInputTemplate>
-    implements $DynamicInputTemplateCopyWith<$Res> {
-  _$DynamicInputTemplateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of DynamicInputTemplate
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? child = freezed,
-    Object? childBuilder = freezed,
-    Object? uiSettings = null,
-  }) {
-    return _then(_value.copyWith(
-      child: freezed == child
-          ? _value.child
-          : child // ignore: cast_nullable_to_non_nullable
-              as WoFormNodeMixin?,
-      childBuilder: freezed == childBuilder
-          ? _value.childBuilder
-          : childBuilder // ignore: cast_nullable_to_non_nullable
-              as WoFormNodeMixin Function()?,
-      uiSettings: null == uiSettings
-          ? _value.uiSettings
-          : uiSettings // ignore: cast_nullable_to_non_nullable
-              as DynamicInputUiSettings,
-    ) as $Val);
-  }
-
-  /// Create a copy of DynamicInputTemplate
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $DynamicInputUiSettingsCopyWith<$Res> get uiSettings {
-    return $DynamicInputUiSettingsCopyWith<$Res>(_value.uiSettings, (value) {
-      return _then(_value.copyWith(uiSettings: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$DynamicInputTemplateImplCopyWith<$Res>
-    implements $DynamicInputTemplateCopyWith<$Res> {
-  factory _$$DynamicInputTemplateImplCopyWith(_$DynamicInputTemplateImpl value,
-          $Res Function(_$DynamicInputTemplateImpl) then) =
-      __$$DynamicInputTemplateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {@InputNullableConverter() WoFormNodeMixin? child,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      WoFormNodeMixin Function()? childBuilder,
-      @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
-      DynamicInputUiSettings uiSettings});
-
-  @override
-  $DynamicInputUiSettingsCopyWith<$Res> get uiSettings;
-}
-
-/// @nodoc
-class __$$DynamicInputTemplateImplCopyWithImpl<$Res>
-    extends _$DynamicInputTemplateCopyWithImpl<$Res, _$DynamicInputTemplateImpl>
-    implements _$$DynamicInputTemplateImplCopyWith<$Res> {
-  __$$DynamicInputTemplateImplCopyWithImpl(_$DynamicInputTemplateImpl _value,
-      $Res Function(_$DynamicInputTemplateImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of DynamicInputTemplate
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? child = freezed,
-    Object? childBuilder = freezed,
-    Object? uiSettings = null,
-  }) {
-    return _then(_$DynamicInputTemplateImpl(
-      child: freezed == child
-          ? _value.child
-          : child // ignore: cast_nullable_to_non_nullable
-              as WoFormNodeMixin?,
-      childBuilder: freezed == childBuilder
-          ? _value.childBuilder
-          : childBuilder // ignore: cast_nullable_to_non_nullable
-              as WoFormNodeMixin Function()?,
-      uiSettings: null == uiSettings
-          ? _value.uiSettings
-          : uiSettings // ignore: cast_nullable_to_non_nullable
-              as DynamicInputUiSettings,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$DynamicInputTemplateImpl extends _DynamicInputTemplate {
-  _$DynamicInputTemplateImpl(
-      {@InputNullableConverter() this.child,
-      @JsonKey(includeToJson: false, includeFromJson: false) this.childBuilder,
-      @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
-      this.uiSettings = const DynamicInputUiSettings()})
-      : assert((child == null) != (childBuilder == null),
-            'One of child or childBuilder must be specified'),
-        super._();
-
-  factory _$DynamicInputTemplateImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DynamicInputTemplateImplFromJson(json);
-
-  @override
-  @InputNullableConverter()
-  final WoFormNodeMixin? child;
-  @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  final WoFormNodeMixin Function()? childBuilder;
-  @override
-  @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
-  final DynamicInputUiSettings uiSettings;
-
-  @override
-  String toString() {
-    return 'DynamicInputTemplate(child: $child, childBuilder: $childBuilder, uiSettings: $uiSettings)';
-  }
+  /// Serializes this DynamicInputTemplate to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DynamicInputTemplateImpl &&
+            other is DynamicInputTemplate &&
             (identical(other.child, child) || other.child == child) &&
             (identical(other.childBuilder, childBuilder) ||
                 other.childBuilder == childBuilder) &&
@@ -200,52 +49,195 @@ class _$DynamicInputTemplateImpl extends _DynamicInputTemplate {
   @override
   int get hashCode => Object.hash(runtimeType, child, childBuilder, uiSettings);
 
-  /// Create a copy of DynamicInputTemplate
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$DynamicInputTemplateImplCopyWith<_$DynamicInputTemplateImpl>
-      get copyWith =>
-          __$$DynamicInputTemplateImplCopyWithImpl<_$DynamicInputTemplateImpl>(
-              this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$DynamicInputTemplateImplToJson(
-      this,
-    );
+  String toString() {
+    return 'DynamicInputTemplate(child: $child, childBuilder: $childBuilder, uiSettings: $uiSettings)';
   }
 }
 
-abstract class _DynamicInputTemplate extends DynamicInputTemplate {
-  factory _DynamicInputTemplate(
-      {@InputNullableConverter() final WoFormNodeMixin? child,
+/// @nodoc
+abstract mixin class $DynamicInputTemplateCopyWith<$Res> {
+  factory $DynamicInputTemplateCopyWith(DynamicInputTemplate value,
+          $Res Function(DynamicInputTemplate) _then) =
+      _$DynamicInputTemplateCopyWithImpl;
+  @useResult
+  $Res call(
+      {@InputNullableConverter() WoFormNodeMixin? child,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      final WoFormNodeMixin Function()? childBuilder,
+      WoFormNodeMixin Function()? childBuilder,
       @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
-      final DynamicInputUiSettings uiSettings}) = _$DynamicInputTemplateImpl;
-  _DynamicInputTemplate._() : super._();
+      DynamicInputUiSettings uiSettings});
 
-  factory _DynamicInputTemplate.fromJson(Map<String, dynamic> json) =
-      _$DynamicInputTemplateImpl.fromJson;
+  $DynamicInputUiSettingsCopyWith<$Res> get uiSettings;
+}
+
+/// @nodoc
+class _$DynamicInputTemplateCopyWithImpl<$Res>
+    implements $DynamicInputTemplateCopyWith<$Res> {
+  _$DynamicInputTemplateCopyWithImpl(this._self, this._then);
+
+  final DynamicInputTemplate _self;
+  final $Res Function(DynamicInputTemplate) _then;
+
+  /// Create a copy of DynamicInputTemplate
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? child = freezed,
+    Object? childBuilder = freezed,
+    Object? uiSettings = null,
+  }) {
+    return _then(_self.copyWith(
+      child: freezed == child
+          ? _self.child
+          : child // ignore: cast_nullable_to_non_nullable
+              as WoFormNodeMixin?,
+      childBuilder: freezed == childBuilder
+          ? _self.childBuilder
+          : childBuilder // ignore: cast_nullable_to_non_nullable
+              as WoFormNodeMixin Function()?,
+      uiSettings: null == uiSettings
+          ? _self.uiSettings
+          : uiSettings // ignore: cast_nullable_to_non_nullable
+              as DynamicInputUiSettings,
+    ));
+  }
+
+  /// Create a copy of DynamicInputTemplate
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DynamicInputUiSettingsCopyWith<$Res> get uiSettings {
+    return $DynamicInputUiSettingsCopyWith<$Res>(_self.uiSettings, (value) {
+      return _then(_self.copyWith(uiSettings: value));
+    });
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _DynamicInputTemplate extends DynamicInputTemplate {
+  _DynamicInputTemplate(
+      {@InputNullableConverter() this.child,
+      @JsonKey(includeToJson: false, includeFromJson: false) this.childBuilder,
+      @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
+      this.uiSettings = const DynamicInputUiSettings()})
+      : assert((child == null) != (childBuilder == null),
+            'One of child or childBuilder must be specified'),
+        super._();
+  factory _DynamicInputTemplate.fromJson(Map<String, dynamic> json) =>
+      _$DynamicInputTemplateFromJson(json);
 
   @override
   @InputNullableConverter()
-  WoFormNodeMixin? get child;
+  final WoFormNodeMixin? child;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  WoFormNodeMixin Function()? get childBuilder;
+  final WoFormNodeMixin Function()? childBuilder;
   @override
   @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
-  DynamicInputUiSettings get uiSettings;
+  final DynamicInputUiSettings uiSettings;
 
   /// Create a copy of DynamicInputTemplate
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DynamicInputTemplateImplCopyWith<_$DynamicInputTemplateImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$DynamicInputTemplateCopyWith<_DynamicInputTemplate> get copyWith =>
+      __$DynamicInputTemplateCopyWithImpl<_DynamicInputTemplate>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$DynamicInputTemplateToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _DynamicInputTemplate &&
+            (identical(other.child, child) || other.child == child) &&
+            (identical(other.childBuilder, childBuilder) ||
+                other.childBuilder == childBuilder) &&
+            (identical(other.uiSettings, uiSettings) ||
+                other.uiSettings == uiSettings));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, child, childBuilder, uiSettings);
+
+  @override
+  String toString() {
+    return 'DynamicInputTemplate(child: $child, childBuilder: $childBuilder, uiSettings: $uiSettings)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$DynamicInputTemplateCopyWith<$Res>
+    implements $DynamicInputTemplateCopyWith<$Res> {
+  factory _$DynamicInputTemplateCopyWith(_DynamicInputTemplate value,
+          $Res Function(_DynamicInputTemplate) _then) =
+      __$DynamicInputTemplateCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {@InputNullableConverter() WoFormNodeMixin? child,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      WoFormNodeMixin Function()? childBuilder,
+      @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
+      DynamicInputUiSettings uiSettings});
+
+  @override
+  $DynamicInputUiSettingsCopyWith<$Res> get uiSettings;
+}
+
+/// @nodoc
+class __$DynamicInputTemplateCopyWithImpl<$Res>
+    implements _$DynamicInputTemplateCopyWith<$Res> {
+  __$DynamicInputTemplateCopyWithImpl(this._self, this._then);
+
+  final _DynamicInputTemplate _self;
+  final $Res Function(_DynamicInputTemplate) _then;
+
+  /// Create a copy of DynamicInputTemplate
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? child = freezed,
+    Object? childBuilder = freezed,
+    Object? uiSettings = null,
+  }) {
+    return _then(_DynamicInputTemplate(
+      child: freezed == child
+          ? _self.child
+          : child // ignore: cast_nullable_to_non_nullable
+              as WoFormNodeMixin?,
+      childBuilder: freezed == childBuilder
+          ? _self.childBuilder
+          : childBuilder // ignore: cast_nullable_to_non_nullable
+              as WoFormNodeMixin Function()?,
+      uiSettings: null == uiSettings
+          ? _self.uiSettings
+          : uiSettings // ignore: cast_nullable_to_non_nullable
+              as DynamicInputUiSettings,
+    ));
+  }
+
+  /// Create a copy of DynamicInputTemplate
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DynamicInputUiSettingsCopyWith<$Res> get uiSettings {
+    return $DynamicInputUiSettingsCopyWith<$Res>(_self.uiSettings, (value) {
+      return _then(_self.copyWith(uiSettings: value));
+    });
+  }
 }
 
 WoFormNode _$WoFormNodeFromJson(Map<String, dynamic> json) {
@@ -275,254 +267,51 @@ WoFormNode _$WoFormNodeFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WoFormNode {
-  String get id => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String id,
-            @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child,
-            bool conditionIsInitiallyMet)
-        conditionnal,
-    required TResult Function(
-            String id,
-            @DynamicInputTemplatesConverter()
-            List<DynamicInputTemplate> templates,
-            @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-            DynamicInputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)
-        dynamicInputs,
-    required TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormNodeMixin> children,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)
-        inputs,
-    required TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(String)? builder)
-        pathBuilder,
-    required TResult Function(
-            String id,
-            String path,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Object?)? builder,
-            Object? initialValue)
-        valueBuilder,
-    required TResult Function(
-            String id,
-            List<String> paths,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Map<String, Object?>)? builder,
-            Map<String, Object?>? initialValues)
-        valuesBuilder,
-    required TResult Function(
-            String path,
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)
-        valueListener,
-    required TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)
-        widget,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String id,
-            @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child,
-            bool conditionIsInitiallyMet)?
-        conditionnal,
-    TResult? Function(
-            String id,
-            @DynamicInputTemplatesConverter()
-            List<DynamicInputTemplate> templates,
-            @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-            DynamicInputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        dynamicInputs,
-    TResult? Function(
-            String id,
-            @InputsListConverter() List<WoFormNodeMixin> children,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        inputs,
-    TResult? Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(String)? builder)?
-        pathBuilder,
-    TResult? Function(
-            String id,
-            String path,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Object?)? builder,
-            Object? initialValue)?
-        valueBuilder,
-    TResult? Function(
-            String id,
-            List<String> paths,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Map<String, Object?>)? builder,
-            Map<String, Object?>? initialValues)?
-        valuesBuilder,
-    TResult? Function(
-            String path,
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)?
-        valueListener,
-    TResult? Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
-        widget,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String id,
-            @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child,
-            bool conditionIsInitiallyMet)?
-        conditionnal,
-    TResult Function(
-            String id,
-            @DynamicInputTemplatesConverter()
-            List<DynamicInputTemplate> templates,
-            @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-            DynamicInputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        dynamicInputs,
-    TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormNodeMixin> children,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        inputs,
-    TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(String)? builder)?
-        pathBuilder,
-    TResult Function(
-            String id,
-            String path,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Object?)? builder,
-            Object? initialValue)?
-        valueBuilder,
-    TResult Function(
-            String id,
-            List<String> paths,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Map<String, Object?>)? builder,
-            Map<String, Object?>? initialValues)?
-        valuesBuilder,
-    TResult Function(
-            String path,
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)?
-        valueListener,
-    TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
-        widget,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ConditionnalNode value) conditionnal,
-    required TResult Function(DynamicInputsNode value) dynamicInputs,
-    required TResult Function(InputsNode value) inputs,
-    required TResult Function(PathBuilderNode value) pathBuilder,
-    required TResult Function(ValueBuilderNode value) valueBuilder,
-    required TResult Function(ValuesBuilderNode value) valuesBuilder,
-    required TResult Function(ValueListenerNode value) valueListener,
-    required TResult Function(WidgetNode value) widget,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ConditionnalNode value)? conditionnal,
-    TResult? Function(DynamicInputsNode value)? dynamicInputs,
-    TResult? Function(InputsNode value)? inputs,
-    TResult? Function(PathBuilderNode value)? pathBuilder,
-    TResult? Function(ValueBuilderNode value)? valueBuilder,
-    TResult? Function(ValuesBuilderNode value)? valuesBuilder,
-    TResult? Function(ValueListenerNode value)? valueListener,
-    TResult? Function(WidgetNode value)? widget,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ConditionnalNode value)? conditionnal,
-    TResult Function(DynamicInputsNode value)? dynamicInputs,
-    TResult Function(InputsNode value)? inputs,
-    TResult Function(PathBuilderNode value)? pathBuilder,
-    TResult Function(ValueBuilderNode value)? valueBuilder,
-    TResult Function(ValuesBuilderNode value)? valuesBuilder,
-    TResult Function(ValueListenerNode value)? valueListener,
-    TResult Function(WidgetNode value)? widget,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-
-  /// Serializes this WoFormNode to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get id;
 
   /// Create a copy of WoFormNode
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $WoFormNodeCopyWith<WoFormNode> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$WoFormNodeCopyWithImpl<WoFormNode>(this as WoFormNode, _$identity);
+
+  /// Serializes this WoFormNode to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is WoFormNode &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  @override
+  String toString() {
+    return 'WoFormNode(id: $id)';
+  }
 }
 
 /// @nodoc
-abstract class $WoFormNodeCopyWith<$Res> {
+abstract mixin class $WoFormNodeCopyWith<$Res> {
   factory $WoFormNodeCopyWith(
-          WoFormNode value, $Res Function(WoFormNode) then) =
-      _$WoFormNodeCopyWithImpl<$Res, WoFormNode>;
+          WoFormNode value, $Res Function(WoFormNode) _then) =
+      _$WoFormNodeCopyWithImpl;
   @useResult
   $Res call({String id});
 }
 
 /// @nodoc
-class _$WoFormNodeCopyWithImpl<$Res, $Val extends WoFormNode>
-    implements $WoFormNodeCopyWith<$Res> {
-  _$WoFormNodeCopyWithImpl(this._value, this._then);
+class _$WoFormNodeCopyWithImpl<$Res> implements $WoFormNodeCopyWith<$Res> {
+  _$WoFormNodeCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final WoFormNode _self;
+  final $Res Function(WoFormNode) _then;
 
   /// Create a copy of WoFormNode
   /// with the given fields replaced by the non-null parameter values.
@@ -531,85 +320,19 @@ class _$WoFormNodeCopyWithImpl<$Res, $Val extends WoFormNode>
   $Res call({
     Object? id = null,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$ConditionnalNodeImplCopyWith<$Res>
-    implements $WoFormNodeCopyWith<$Res> {
-  factory _$$ConditionnalNodeImplCopyWith(_$ConditionnalNodeImpl value,
-          $Res Function(_$ConditionnalNodeImpl) then) =
-      __$$ConditionnalNodeImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      @JsonKey(toJson: Condition.staticToJson) Condition condition,
-      @InputConverter() WoFormNodeMixin child,
-      bool conditionIsInitiallyMet});
-
-  $ConditionCopyWith<$Res> get condition;
-}
-
-/// @nodoc
-class __$$ConditionnalNodeImplCopyWithImpl<$Res>
-    extends _$WoFormNodeCopyWithImpl<$Res, _$ConditionnalNodeImpl>
-    implements _$$ConditionnalNodeImplCopyWith<$Res> {
-  __$$ConditionnalNodeImplCopyWithImpl(_$ConditionnalNodeImpl _value,
-      $Res Function(_$ConditionnalNodeImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of WoFormNode
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? condition = null,
-    Object? child = null,
-    Object? conditionIsInitiallyMet = null,
-  }) {
-    return _then(_$ConditionnalNodeImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      condition: null == condition
-          ? _value.condition
-          : condition // ignore: cast_nullable_to_non_nullable
-              as Condition,
-      child: null == child
-          ? _value.child
-          : child // ignore: cast_nullable_to_non_nullable
-              as WoFormNodeMixin,
-      conditionIsInitiallyMet: null == conditionIsInitiallyMet
-          ? _value.conditionIsInitiallyMet
-          : conditionIsInitiallyMet // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
-  }
-
-  /// Create a copy of WoFormNode
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ConditionCopyWith<$Res> get condition {
-    return $ConditionCopyWith<$Res>(_value.condition, (value) {
-      return _then(_value.copyWith(condition: value));
-    });
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$ConditionnalNodeImpl extends ConditionnalNode {
-  const _$ConditionnalNodeImpl(
+class ConditionnalNode extends WoFormNode {
+  const ConditionnalNode(
       {required this.id,
       @JsonKey(toJson: Condition.staticToJson) required this.condition,
       @InputConverter() required this.child,
@@ -617,35 +340,41 @@ class _$ConditionnalNodeImpl extends ConditionnalNode {
       final String? $type})
       : $type = $type ?? 'conditionnal',
         super._();
-
-  factory _$ConditionnalNodeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ConditionnalNodeImplFromJson(json);
+  factory ConditionnalNode.fromJson(Map<String, dynamic> json) =>
+      _$ConditionnalNodeFromJson(json);
 
   @override
   final String id;
-  @override
   @JsonKey(toJson: Condition.staticToJson)
   final Condition condition;
-  @override
   @InputConverter()
   final WoFormNodeMixin child;
-  @override
   @JsonKey()
   final bool conditionIsInitiallyMet;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'WoFormNode.conditionnal(id: $id, condition: $condition, child: $child, conditionIsInitiallyMet: $conditionIsInitiallyMet)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $ConditionnalNodeCopyWith<ConditionnalNode> get copyWith =>
+      _$ConditionnalNodeCopyWithImpl<ConditionnalNode>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$ConditionnalNodeToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ConditionnalNodeImpl &&
+            other is ConditionnalNode &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.condition, condition) ||
                 other.condition == condition) &&
@@ -660,354 +389,64 @@ class _$ConditionnalNodeImpl extends ConditionnalNode {
   int get hashCode =>
       Object.hash(runtimeType, id, condition, child, conditionIsInitiallyMet);
 
-  /// Create a copy of WoFormNode
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ConditionnalNodeImplCopyWith<_$ConditionnalNodeImpl> get copyWith =>
-      __$$ConditionnalNodeImplCopyWithImpl<_$ConditionnalNodeImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String id,
-            @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child,
-            bool conditionIsInitiallyMet)
-        conditionnal,
-    required TResult Function(
-            String id,
-            @DynamicInputTemplatesConverter()
-            List<DynamicInputTemplate> templates,
-            @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-            DynamicInputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)
-        dynamicInputs,
-    required TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormNodeMixin> children,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)
-        inputs,
-    required TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(String)? builder)
-        pathBuilder,
-    required TResult Function(
-            String id,
-            String path,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Object?)? builder,
-            Object? initialValue)
-        valueBuilder,
-    required TResult Function(
-            String id,
-            List<String> paths,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Map<String, Object?>)? builder,
-            Map<String, Object?>? initialValues)
-        valuesBuilder,
-    required TResult Function(
-            String path,
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)
-        valueListener,
-    required TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)
-        widget,
-  }) {
-    return conditionnal(id, condition, child, conditionIsInitiallyMet);
+  String toString() {
+    return 'WoFormNode.conditionnal(id: $id, condition: $condition, child: $child, conditionIsInitiallyMet: $conditionIsInitiallyMet)';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String id,
-            @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child,
-            bool conditionIsInitiallyMet)?
-        conditionnal,
-    TResult? Function(
-            String id,
-            @DynamicInputTemplatesConverter()
-            List<DynamicInputTemplate> templates,
-            @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-            DynamicInputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        dynamicInputs,
-    TResult? Function(
-            String id,
-            @InputsListConverter() List<WoFormNodeMixin> children,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        inputs,
-    TResult? Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(String)? builder)?
-        pathBuilder,
-    TResult? Function(
-            String id,
-            String path,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Object?)? builder,
-            Object? initialValue)?
-        valueBuilder,
-    TResult? Function(
-            String id,
-            List<String> paths,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Map<String, Object?>)? builder,
-            Map<String, Object?>? initialValues)?
-        valuesBuilder,
-    TResult? Function(
-            String path,
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)?
-        valueListener,
-    TResult? Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
-        widget,
-  }) {
-    return conditionnal?.call(id, condition, child, conditionIsInitiallyMet);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String id,
-            @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child,
-            bool conditionIsInitiallyMet)?
-        conditionnal,
-    TResult Function(
-            String id,
-            @DynamicInputTemplatesConverter()
-            List<DynamicInputTemplate> templates,
-            @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-            DynamicInputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        dynamicInputs,
-    TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormNodeMixin> children,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        inputs,
-    TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(String)? builder)?
-        pathBuilder,
-    TResult Function(
-            String id,
-            String path,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Object?)? builder,
-            Object? initialValue)?
-        valueBuilder,
-    TResult Function(
-            String id,
-            List<String> paths,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Map<String, Object?>)? builder,
-            Map<String, Object?>? initialValues)?
-        valuesBuilder,
-    TResult Function(
-            String path,
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)?
-        valueListener,
-    TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
-        widget,
-    required TResult orElse(),
-  }) {
-    if (conditionnal != null) {
-      return conditionnal(id, condition, child, conditionIsInitiallyMet);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ConditionnalNode value) conditionnal,
-    required TResult Function(DynamicInputsNode value) dynamicInputs,
-    required TResult Function(InputsNode value) inputs,
-    required TResult Function(PathBuilderNode value) pathBuilder,
-    required TResult Function(ValueBuilderNode value) valueBuilder,
-    required TResult Function(ValuesBuilderNode value) valuesBuilder,
-    required TResult Function(ValueListenerNode value) valueListener,
-    required TResult Function(WidgetNode value) widget,
-  }) {
-    return conditionnal(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ConditionnalNode value)? conditionnal,
-    TResult? Function(DynamicInputsNode value)? dynamicInputs,
-    TResult? Function(InputsNode value)? inputs,
-    TResult? Function(PathBuilderNode value)? pathBuilder,
-    TResult? Function(ValueBuilderNode value)? valueBuilder,
-    TResult? Function(ValuesBuilderNode value)? valuesBuilder,
-    TResult? Function(ValueListenerNode value)? valueListener,
-    TResult? Function(WidgetNode value)? widget,
-  }) {
-    return conditionnal?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ConditionnalNode value)? conditionnal,
-    TResult Function(DynamicInputsNode value)? dynamicInputs,
-    TResult Function(InputsNode value)? inputs,
-    TResult Function(PathBuilderNode value)? pathBuilder,
-    TResult Function(ValueBuilderNode value)? valueBuilder,
-    TResult Function(ValuesBuilderNode value)? valuesBuilder,
-    TResult Function(ValueListenerNode value)? valueListener,
-    TResult Function(WidgetNode value)? widget,
-    required TResult orElse(),
-  }) {
-    if (conditionnal != null) {
-      return conditionnal(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ConditionnalNodeImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class ConditionnalNode extends WoFormNode {
-  const factory ConditionnalNode(
-      {required final String id,
-      @JsonKey(toJson: Condition.staticToJson)
-      required final Condition condition,
-      @InputConverter() required final WoFormNodeMixin child,
-      final bool conditionIsInitiallyMet}) = _$ConditionnalNodeImpl;
-  const ConditionnalNode._() : super._();
-
-  factory ConditionnalNode.fromJson(Map<String, dynamic> json) =
-      _$ConditionnalNodeImpl.fromJson;
-
-  @override
-  String get id;
-  @JsonKey(toJson: Condition.staticToJson)
-  Condition get condition;
-  @InputConverter()
-  WoFormNodeMixin get child;
-  bool get conditionIsInitiallyMet;
-
-  /// Create a copy of WoFormNode
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ConditionnalNodeImplCopyWith<_$ConditionnalNodeImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$DynamicInputsNodeImplCopyWith<$Res>
+abstract mixin class $ConditionnalNodeCopyWith<$Res>
     implements $WoFormNodeCopyWith<$Res> {
-  factory _$$DynamicInputsNodeImplCopyWith(_$DynamicInputsNodeImpl value,
-          $Res Function(_$DynamicInputsNodeImpl) then) =
-      __$$DynamicInputsNodeImplCopyWithImpl<$Res>;
+  factory $ConditionnalNodeCopyWith(
+          ConditionnalNode value, $Res Function(ConditionnalNode) _then) =
+      _$ConditionnalNodeCopyWithImpl;
   @override
   @useResult
   $Res call(
       {String id,
-      @DynamicInputTemplatesConverter() List<DynamicInputTemplate> templates,
-      @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-      @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-      DynamicInputsNodeUiSettings uiSettings,
-      @JsonKey(toJson: ExportSettings.staticToJson)
-      ExportSettings exportSettings});
+      @JsonKey(toJson: Condition.staticToJson) Condition condition,
+      @InputConverter() WoFormNodeMixin child,
+      bool conditionIsInitiallyMet});
 
-  $DynamicInputsNodeUiSettingsCopyWith<$Res> get uiSettings;
-  $ExportSettingsCopyWith<$Res> get exportSettings;
+  $ConditionCopyWith<$Res> get condition;
 }
 
 /// @nodoc
-class __$$DynamicInputsNodeImplCopyWithImpl<$Res>
-    extends _$WoFormNodeCopyWithImpl<$Res, _$DynamicInputsNodeImpl>
-    implements _$$DynamicInputsNodeImplCopyWith<$Res> {
-  __$$DynamicInputsNodeImplCopyWithImpl(_$DynamicInputsNodeImpl _value,
-      $Res Function(_$DynamicInputsNodeImpl) _then)
-      : super(_value, _then);
+class _$ConditionnalNodeCopyWithImpl<$Res>
+    implements $ConditionnalNodeCopyWith<$Res> {
+  _$ConditionnalNodeCopyWithImpl(this._self, this._then);
+
+  final ConditionnalNode _self;
+  final $Res Function(ConditionnalNode) _then;
 
   /// Create a copy of WoFormNode
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
   @override
+  @pragma('vm:prefer-inline')
   $Res call({
     Object? id = null,
-    Object? templates = null,
-    Object? initialChildren = freezed,
-    Object? uiSettings = null,
-    Object? exportSettings = null,
+    Object? condition = null,
+    Object? child = null,
+    Object? conditionIsInitiallyMet = null,
   }) {
-    return _then(_$DynamicInputsNodeImpl(
+    return _then(ConditionnalNode(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      templates: null == templates
-          ? _value._templates
-          : templates // ignore: cast_nullable_to_non_nullable
-              as List<DynamicInputTemplate>,
-      initialChildren: freezed == initialChildren
-          ? _value._initialChildren
-          : initialChildren // ignore: cast_nullable_to_non_nullable
-              as List<WoFormNodeMixin>?,
-      uiSettings: null == uiSettings
-          ? _value.uiSettings
-          : uiSettings // ignore: cast_nullable_to_non_nullable
-              as DynamicInputsNodeUiSettings,
-      exportSettings: null == exportSettings
-          ? _value.exportSettings
-          : exportSettings // ignore: cast_nullable_to_non_nullable
-              as ExportSettings,
+      condition: null == condition
+          ? _self.condition
+          : condition // ignore: cast_nullable_to_non_nullable
+              as Condition,
+      child: null == child
+          ? _self.child
+          : child // ignore: cast_nullable_to_non_nullable
+              as WoFormNodeMixin,
+      conditionIsInitiallyMet: null == conditionIsInitiallyMet
+          ? _self.conditionIsInitiallyMet
+          : conditionIsInitiallyMet // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -1015,28 +454,17 @@ class __$$DynamicInputsNodeImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $DynamicInputsNodeUiSettingsCopyWith<$Res> get uiSettings {
-    return $DynamicInputsNodeUiSettingsCopyWith<$Res>(_value.uiSettings,
-        (value) {
-      return _then(_value.copyWith(uiSettings: value));
-    });
-  }
-
-  /// Create a copy of WoFormNode
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ExportSettingsCopyWith<$Res> get exportSettings {
-    return $ExportSettingsCopyWith<$Res>(_value.exportSettings, (value) {
-      return _then(_value.copyWith(exportSettings: value));
+  $ConditionCopyWith<$Res> get condition {
+    return $ConditionCopyWith<$Res>(_self.condition, (value) {
+      return _then(_self.copyWith(condition: value));
     });
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$DynamicInputsNodeImpl extends DynamicInputsNode {
-  const _$DynamicInputsNodeImpl(
+class DynamicInputsNode extends WoFormNode {
+  const DynamicInputsNode(
       {required this.id,
       @DynamicInputTemplatesConverter()
       final List<DynamicInputTemplate> templates = const [],
@@ -1050,14 +478,12 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
         _initialChildren = initialChildren,
         $type = $type ?? 'dynamicInputs',
         super._();
-
-  factory _$DynamicInputsNodeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DynamicInputsNodeImplFromJson(json);
+  factory DynamicInputsNode.fromJson(Map<String, dynamic> json) =>
+      _$DynamicInputsNodeFromJson(json);
 
   @override
   final String id;
   final List<DynamicInputTemplate> _templates;
-  @override
   @JsonKey()
   @DynamicInputTemplatesConverter()
   List<DynamicInputTemplate> get templates {
@@ -1067,7 +493,6 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
   }
 
   final List<WoFormNodeMixin>? _initialChildren;
-  @override
   @InputsListConverter()
   List<WoFormNodeMixin>? get initialChildren {
     final value = _initialChildren;
@@ -1077,26 +502,34 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
     return EqualUnmodifiableListView(value);
   }
 
-  @override
   @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
   final DynamicInputsNodeUiSettings uiSettings;
-  @override
   @JsonKey(toJson: ExportSettings.staticToJson)
   final ExportSettings exportSettings;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'WoFormNode.dynamicInputs(id: $id, templates: $templates, initialChildren: $initialChildren, uiSettings: $uiSettings, exportSettings: $exportSettings)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $DynamicInputsNodeCopyWith<DynamicInputsNode> get copyWith =>
+      _$DynamicInputsNodeCopyWithImpl<DynamicInputsNode>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$DynamicInputsNodeToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DynamicInputsNodeImpl &&
+            other is DynamicInputsNode &&
             (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality()
                 .equals(other._templates, _templates) &&
@@ -1118,355 +551,71 @@ class _$DynamicInputsNodeImpl extends DynamicInputsNode {
       uiSettings,
       exportSettings);
 
-  /// Create a copy of WoFormNode
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$DynamicInputsNodeImplCopyWith<_$DynamicInputsNodeImpl> get copyWith =>
-      __$$DynamicInputsNodeImplCopyWithImpl<_$DynamicInputsNodeImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String id,
-            @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child,
-            bool conditionIsInitiallyMet)
-        conditionnal,
-    required TResult Function(
-            String id,
-            @DynamicInputTemplatesConverter()
-            List<DynamicInputTemplate> templates,
-            @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-            DynamicInputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)
-        dynamicInputs,
-    required TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormNodeMixin> children,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)
-        inputs,
-    required TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(String)? builder)
-        pathBuilder,
-    required TResult Function(
-            String id,
-            String path,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Object?)? builder,
-            Object? initialValue)
-        valueBuilder,
-    required TResult Function(
-            String id,
-            List<String> paths,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Map<String, Object?>)? builder,
-            Map<String, Object?>? initialValues)
-        valuesBuilder,
-    required TResult Function(
-            String path,
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)
-        valueListener,
-    required TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)
-        widget,
-  }) {
-    return dynamicInputs(
-        id, templates, initialChildren, uiSettings, exportSettings);
+  String toString() {
+    return 'WoFormNode.dynamicInputs(id: $id, templates: $templates, initialChildren: $initialChildren, uiSettings: $uiSettings, exportSettings: $exportSettings)';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String id,
-            @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child,
-            bool conditionIsInitiallyMet)?
-        conditionnal,
-    TResult? Function(
-            String id,
-            @DynamicInputTemplatesConverter()
-            List<DynamicInputTemplate> templates,
-            @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-            DynamicInputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        dynamicInputs,
-    TResult? Function(
-            String id,
-            @InputsListConverter() List<WoFormNodeMixin> children,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        inputs,
-    TResult? Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(String)? builder)?
-        pathBuilder,
-    TResult? Function(
-            String id,
-            String path,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Object?)? builder,
-            Object? initialValue)?
-        valueBuilder,
-    TResult? Function(
-            String id,
-            List<String> paths,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Map<String, Object?>)? builder,
-            Map<String, Object?>? initialValues)?
-        valuesBuilder,
-    TResult? Function(
-            String path,
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)?
-        valueListener,
-    TResult? Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
-        widget,
-  }) {
-    return dynamicInputs?.call(
-        id, templates, initialChildren, uiSettings, exportSettings);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String id,
-            @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child,
-            bool conditionIsInitiallyMet)?
-        conditionnal,
-    TResult Function(
-            String id,
-            @DynamicInputTemplatesConverter()
-            List<DynamicInputTemplate> templates,
-            @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-            DynamicInputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        dynamicInputs,
-    TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormNodeMixin> children,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        inputs,
-    TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(String)? builder)?
-        pathBuilder,
-    TResult Function(
-            String id,
-            String path,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Object?)? builder,
-            Object? initialValue)?
-        valueBuilder,
-    TResult Function(
-            String id,
-            List<String> paths,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Map<String, Object?>)? builder,
-            Map<String, Object?>? initialValues)?
-        valuesBuilder,
-    TResult Function(
-            String path,
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)?
-        valueListener,
-    TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
-        widget,
-    required TResult orElse(),
-  }) {
-    if (dynamicInputs != null) {
-      return dynamicInputs(
-          id, templates, initialChildren, uiSettings, exportSettings);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ConditionnalNode value) conditionnal,
-    required TResult Function(DynamicInputsNode value) dynamicInputs,
-    required TResult Function(InputsNode value) inputs,
-    required TResult Function(PathBuilderNode value) pathBuilder,
-    required TResult Function(ValueBuilderNode value) valueBuilder,
-    required TResult Function(ValuesBuilderNode value) valuesBuilder,
-    required TResult Function(ValueListenerNode value) valueListener,
-    required TResult Function(WidgetNode value) widget,
-  }) {
-    return dynamicInputs(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ConditionnalNode value)? conditionnal,
-    TResult? Function(DynamicInputsNode value)? dynamicInputs,
-    TResult? Function(InputsNode value)? inputs,
-    TResult? Function(PathBuilderNode value)? pathBuilder,
-    TResult? Function(ValueBuilderNode value)? valueBuilder,
-    TResult? Function(ValuesBuilderNode value)? valuesBuilder,
-    TResult? Function(ValueListenerNode value)? valueListener,
-    TResult? Function(WidgetNode value)? widget,
-  }) {
-    return dynamicInputs?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ConditionnalNode value)? conditionnal,
-    TResult Function(DynamicInputsNode value)? dynamicInputs,
-    TResult Function(InputsNode value)? inputs,
-    TResult Function(PathBuilderNode value)? pathBuilder,
-    TResult Function(ValueBuilderNode value)? valueBuilder,
-    TResult Function(ValuesBuilderNode value)? valuesBuilder,
-    TResult Function(ValueListenerNode value)? valueListener,
-    TResult Function(WidgetNode value)? widget,
-    required TResult orElse(),
-  }) {
-    if (dynamicInputs != null) {
-      return dynamicInputs(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$DynamicInputsNodeImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class DynamicInputsNode extends WoFormNode {
-  const factory DynamicInputsNode(
-      {required final String id,
-      @DynamicInputTemplatesConverter()
-      final List<DynamicInputTemplate> templates,
-      @InputsListConverter() final List<WoFormNodeMixin>? initialChildren,
-      @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-      final DynamicInputsNodeUiSettings uiSettings,
-      @JsonKey(toJson: ExportSettings.staticToJson)
-      final ExportSettings exportSettings}) = _$DynamicInputsNodeImpl;
-  const DynamicInputsNode._() : super._();
-
-  factory DynamicInputsNode.fromJson(Map<String, dynamic> json) =
-      _$DynamicInputsNodeImpl.fromJson;
-
-  @override
-  String get id;
-  @DynamicInputTemplatesConverter()
-  List<DynamicInputTemplate> get templates;
-  @InputsListConverter()
-  List<WoFormNodeMixin>? get initialChildren;
-  @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-  DynamicInputsNodeUiSettings get uiSettings;
-  @JsonKey(toJson: ExportSettings.staticToJson)
-  ExportSettings get exportSettings;
-
-  /// Create a copy of WoFormNode
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DynamicInputsNodeImplCopyWith<_$DynamicInputsNodeImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$InputsNodeImplCopyWith<$Res>
+abstract mixin class $DynamicInputsNodeCopyWith<$Res>
     implements $WoFormNodeCopyWith<$Res> {
-  factory _$$InputsNodeImplCopyWith(
-          _$InputsNodeImpl value, $Res Function(_$InputsNodeImpl) then) =
-      __$$InputsNodeImplCopyWithImpl<$Res>;
+  factory $DynamicInputsNodeCopyWith(
+          DynamicInputsNode value, $Res Function(DynamicInputsNode) _then) =
+      _$DynamicInputsNodeCopyWithImpl;
   @override
   @useResult
   $Res call(
       {String id,
-      @InputsListConverter() List<WoFormNodeMixin> children,
-      @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-      InputsNodeUiSettings uiSettings,
+      @DynamicInputTemplatesConverter() List<DynamicInputTemplate> templates,
+      @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
+      @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
+      DynamicInputsNodeUiSettings uiSettings,
       @JsonKey(toJson: ExportSettings.staticToJson)
       ExportSettings exportSettings});
 
-  $InputsNodeUiSettingsCopyWith<$Res> get uiSettings;
+  $DynamicInputsNodeUiSettingsCopyWith<$Res> get uiSettings;
   $ExportSettingsCopyWith<$Res> get exportSettings;
 }
 
 /// @nodoc
-class __$$InputsNodeImplCopyWithImpl<$Res>
-    extends _$WoFormNodeCopyWithImpl<$Res, _$InputsNodeImpl>
-    implements _$$InputsNodeImplCopyWith<$Res> {
-  __$$InputsNodeImplCopyWithImpl(
-      _$InputsNodeImpl _value, $Res Function(_$InputsNodeImpl) _then)
-      : super(_value, _then);
+class _$DynamicInputsNodeCopyWithImpl<$Res>
+    implements $DynamicInputsNodeCopyWith<$Res> {
+  _$DynamicInputsNodeCopyWithImpl(this._self, this._then);
+
+  final DynamicInputsNode _self;
+  final $Res Function(DynamicInputsNode) _then;
 
   /// Create a copy of WoFormNode
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
   @override
+  @pragma('vm:prefer-inline')
   $Res call({
     Object? id = null,
-    Object? children = null,
+    Object? templates = null,
+    Object? initialChildren = freezed,
     Object? uiSettings = null,
     Object? exportSettings = null,
   }) {
-    return _then(_$InputsNodeImpl(
+    return _then(DynamicInputsNode(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      children: null == children
-          ? _value._children
-          : children // ignore: cast_nullable_to_non_nullable
-              as List<WoFormNodeMixin>,
+      templates: null == templates
+          ? _self._templates
+          : templates // ignore: cast_nullable_to_non_nullable
+              as List<DynamicInputTemplate>,
+      initialChildren: freezed == initialChildren
+          ? _self._initialChildren
+          : initialChildren // ignore: cast_nullable_to_non_nullable
+              as List<WoFormNodeMixin>?,
       uiSettings: null == uiSettings
-          ? _value.uiSettings
+          ? _self.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
-              as InputsNodeUiSettings,
+              as DynamicInputsNodeUiSettings,
       exportSettings: null == exportSettings
-          ? _value.exportSettings
+          ? _self.exportSettings
           : exportSettings // ignore: cast_nullable_to_non_nullable
               as ExportSettings,
     ));
@@ -1476,9 +625,10 @@ class __$$InputsNodeImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $InputsNodeUiSettingsCopyWith<$Res> get uiSettings {
-    return $InputsNodeUiSettingsCopyWith<$Res>(_value.uiSettings, (value) {
-      return _then(_value.copyWith(uiSettings: value));
+  $DynamicInputsNodeUiSettingsCopyWith<$Res> get uiSettings {
+    return $DynamicInputsNodeUiSettingsCopyWith<$Res>(_self.uiSettings,
+        (value) {
+      return _then(_self.copyWith(uiSettings: value));
     });
   }
 
@@ -1487,16 +637,16 @@ class __$$InputsNodeImplCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $ExportSettingsCopyWith<$Res> get exportSettings {
-    return $ExportSettingsCopyWith<$Res>(_value.exportSettings, (value) {
-      return _then(_value.copyWith(exportSettings: value));
+    return $ExportSettingsCopyWith<$Res>(_self.exportSettings, (value) {
+      return _then(_self.copyWith(exportSettings: value));
     });
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$InputsNodeImpl extends InputsNode {
-  const _$InputsNodeImpl(
+class InputsNode extends WoFormNode {
+  const InputsNode(
       {required this.id,
       @InputsListConverter() final List<WoFormNodeMixin> children = const [],
       @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
@@ -1507,14 +657,12 @@ class _$InputsNodeImpl extends InputsNode {
       : _children = children,
         $type = $type ?? 'inputs',
         super._();
-
-  factory _$InputsNodeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$InputsNodeImplFromJson(json);
+  factory InputsNode.fromJson(Map<String, dynamic> json) =>
+      _$InputsNodeFromJson(json);
 
   @override
   final String id;
   final List<WoFormNodeMixin> _children;
-  @override
   @JsonKey()
   @InputsListConverter()
   List<WoFormNodeMixin> get children {
@@ -1523,26 +671,34 @@ class _$InputsNodeImpl extends InputsNode {
     return EqualUnmodifiableListView(_children);
   }
 
-  @override
   @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
   final InputsNodeUiSettings uiSettings;
-  @override
   @JsonKey(toJson: ExportSettings.staticToJson)
   final ExportSettings exportSettings;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'WoFormNode.inputs(id: $id, children: $children, uiSettings: $uiSettings, exportSettings: $exportSettings)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $InputsNodeCopyWith<InputsNode> get copyWith =>
+      _$InputsNodeCopyWithImpl<InputsNode>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$InputsNodeToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$InputsNodeImpl &&
+            other is InputsNode &&
             (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality().equals(other._children, _children) &&
             (identical(other.uiSettings, uiSettings) ||
@@ -1560,370 +716,131 @@ class _$InputsNodeImpl extends InputsNode {
       uiSettings,
       exportSettings);
 
-  /// Create a copy of WoFormNode
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$InputsNodeImplCopyWith<_$InputsNodeImpl> get copyWith =>
-      __$$InputsNodeImplCopyWithImpl<_$InputsNodeImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String id,
-            @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child,
-            bool conditionIsInitiallyMet)
-        conditionnal,
-    required TResult Function(
-            String id,
-            @DynamicInputTemplatesConverter()
-            List<DynamicInputTemplate> templates,
-            @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-            DynamicInputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)
-        dynamicInputs,
-    required TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormNodeMixin> children,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)
-        inputs,
-    required TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(String)? builder)
-        pathBuilder,
-    required TResult Function(
-            String id,
-            String path,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Object?)? builder,
-            Object? initialValue)
-        valueBuilder,
-    required TResult Function(
-            String id,
-            List<String> paths,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Map<String, Object?>)? builder,
-            Map<String, Object?>? initialValues)
-        valuesBuilder,
-    required TResult Function(
-            String path,
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)
-        valueListener,
-    required TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)
-        widget,
-  }) {
-    return inputs(id, children, uiSettings, exportSettings);
+  String toString() {
+    return 'WoFormNode.inputs(id: $id, children: $children, uiSettings: $uiSettings, exportSettings: $exportSettings)';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String id,
-            @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child,
-            bool conditionIsInitiallyMet)?
-        conditionnal,
-    TResult? Function(
-            String id,
-            @DynamicInputTemplatesConverter()
-            List<DynamicInputTemplate> templates,
-            @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-            DynamicInputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        dynamicInputs,
-    TResult? Function(
-            String id,
-            @InputsListConverter() List<WoFormNodeMixin> children,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        inputs,
-    TResult? Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(String)? builder)?
-        pathBuilder,
-    TResult? Function(
-            String id,
-            String path,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Object?)? builder,
-            Object? initialValue)?
-        valueBuilder,
-    TResult? Function(
-            String id,
-            List<String> paths,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Map<String, Object?>)? builder,
-            Map<String, Object?>? initialValues)?
-        valuesBuilder,
-    TResult? Function(
-            String path,
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)?
-        valueListener,
-    TResult? Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
-        widget,
-  }) {
-    return inputs?.call(id, children, uiSettings, exportSettings);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String id,
-            @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child,
-            bool conditionIsInitiallyMet)?
-        conditionnal,
-    TResult Function(
-            String id,
-            @DynamicInputTemplatesConverter()
-            List<DynamicInputTemplate> templates,
-            @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-            DynamicInputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        dynamicInputs,
-    TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormNodeMixin> children,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        inputs,
-    TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(String)? builder)?
-        pathBuilder,
-    TResult Function(
-            String id,
-            String path,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Object?)? builder,
-            Object? initialValue)?
-        valueBuilder,
-    TResult Function(
-            String id,
-            List<String> paths,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Map<String, Object?>)? builder,
-            Map<String, Object?>? initialValues)?
-        valuesBuilder,
-    TResult Function(
-            String path,
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)?
-        valueListener,
-    TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
-        widget,
-    required TResult orElse(),
-  }) {
-    if (inputs != null) {
-      return inputs(id, children, uiSettings, exportSettings);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ConditionnalNode value) conditionnal,
-    required TResult Function(DynamicInputsNode value) dynamicInputs,
-    required TResult Function(InputsNode value) inputs,
-    required TResult Function(PathBuilderNode value) pathBuilder,
-    required TResult Function(ValueBuilderNode value) valueBuilder,
-    required TResult Function(ValuesBuilderNode value) valuesBuilder,
-    required TResult Function(ValueListenerNode value) valueListener,
-    required TResult Function(WidgetNode value) widget,
-  }) {
-    return inputs(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ConditionnalNode value)? conditionnal,
-    TResult? Function(DynamicInputsNode value)? dynamicInputs,
-    TResult? Function(InputsNode value)? inputs,
-    TResult? Function(PathBuilderNode value)? pathBuilder,
-    TResult? Function(ValueBuilderNode value)? valueBuilder,
-    TResult? Function(ValuesBuilderNode value)? valuesBuilder,
-    TResult? Function(ValueListenerNode value)? valueListener,
-    TResult? Function(WidgetNode value)? widget,
-  }) {
-    return inputs?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ConditionnalNode value)? conditionnal,
-    TResult Function(DynamicInputsNode value)? dynamicInputs,
-    TResult Function(InputsNode value)? inputs,
-    TResult Function(PathBuilderNode value)? pathBuilder,
-    TResult Function(ValueBuilderNode value)? valueBuilder,
-    TResult Function(ValuesBuilderNode value)? valuesBuilder,
-    TResult Function(ValueListenerNode value)? valueListener,
-    TResult Function(WidgetNode value)? widget,
-    required TResult orElse(),
-  }) {
-    if (inputs != null) {
-      return inputs(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$InputsNodeImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class InputsNode extends WoFormNode {
-  const factory InputsNode(
-      {required final String id,
-      @InputsListConverter() final List<WoFormNodeMixin> children,
-      @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-      final InputsNodeUiSettings uiSettings,
-      @JsonKey(toJson: ExportSettings.staticToJson)
-      final ExportSettings exportSettings}) = _$InputsNodeImpl;
-  const InputsNode._() : super._();
-
-  factory InputsNode.fromJson(Map<String, dynamic> json) =
-      _$InputsNodeImpl.fromJson;
-
-  @override
-  String get id;
-  @InputsListConverter()
-  List<WoFormNodeMixin> get children;
-  @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-  InputsNodeUiSettings get uiSettings;
-  @JsonKey(toJson: ExportSettings.staticToJson)
-  ExportSettings get exportSettings;
-
-  /// Create a copy of WoFormNode
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$InputsNodeImplCopyWith<_$InputsNodeImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$PathBuilderNodeImplCopyWith<$Res>
+abstract mixin class $InputsNodeCopyWith<$Res>
     implements $WoFormNodeCopyWith<$Res> {
-  factory _$$PathBuilderNodeImplCopyWith(_$PathBuilderNodeImpl value,
-          $Res Function(_$PathBuilderNodeImpl) then) =
-      __$$PathBuilderNodeImplCopyWithImpl<$Res>;
+  factory $InputsNodeCopyWith(
+          InputsNode value, $Res Function(InputsNode) _then) =
+      _$InputsNodeCopyWithImpl;
   @override
   @useResult
   $Res call(
       {String id,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      WoFormNodeMixin Function(String)? builder});
+      @InputsListConverter() List<WoFormNodeMixin> children,
+      @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
+      InputsNodeUiSettings uiSettings,
+      @JsonKey(toJson: ExportSettings.staticToJson)
+      ExportSettings exportSettings});
+
+  $InputsNodeUiSettingsCopyWith<$Res> get uiSettings;
+  $ExportSettingsCopyWith<$Res> get exportSettings;
 }
 
 /// @nodoc
-class __$$PathBuilderNodeImplCopyWithImpl<$Res>
-    extends _$WoFormNodeCopyWithImpl<$Res, _$PathBuilderNodeImpl>
-    implements _$$PathBuilderNodeImplCopyWith<$Res> {
-  __$$PathBuilderNodeImplCopyWithImpl(
-      _$PathBuilderNodeImpl _value, $Res Function(_$PathBuilderNodeImpl) _then)
-      : super(_value, _then);
+class _$InputsNodeCopyWithImpl<$Res> implements $InputsNodeCopyWith<$Res> {
+  _$InputsNodeCopyWithImpl(this._self, this._then);
+
+  final InputsNode _self;
+  final $Res Function(InputsNode) _then;
 
   /// Create a copy of WoFormNode
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
   @override
+  @pragma('vm:prefer-inline')
   $Res call({
     Object? id = null,
-    Object? builder = freezed,
+    Object? children = null,
+    Object? uiSettings = null,
+    Object? exportSettings = null,
   }) {
-    return _then(_$PathBuilderNodeImpl(
+    return _then(InputsNode(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      builder: freezed == builder
-          ? _value.builder
-          : builder // ignore: cast_nullable_to_non_nullable
-              as WoFormNodeMixin Function(String)?,
+      children: null == children
+          ? _self._children
+          : children // ignore: cast_nullable_to_non_nullable
+              as List<WoFormNodeMixin>,
+      uiSettings: null == uiSettings
+          ? _self.uiSettings
+          : uiSettings // ignore: cast_nullable_to_non_nullable
+              as InputsNodeUiSettings,
+      exportSettings: null == exportSettings
+          ? _self.exportSettings
+          : exportSettings // ignore: cast_nullable_to_non_nullable
+              as ExportSettings,
     ));
+  }
+
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $InputsNodeUiSettingsCopyWith<$Res> get uiSettings {
+    return $InputsNodeUiSettingsCopyWith<$Res>(_self.uiSettings, (value) {
+      return _then(_self.copyWith(uiSettings: value));
+    });
+  }
+
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ExportSettingsCopyWith<$Res> get exportSettings {
+    return $ExportSettingsCopyWith<$Res>(_self.exportSettings, (value) {
+      return _then(_self.copyWith(exportSettings: value));
+    });
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$PathBuilderNodeImpl extends PathBuilderNode {
-  const _$PathBuilderNodeImpl(
+class PathBuilderNode extends WoFormNode {
+  const PathBuilderNode(
       {required this.id,
       @JsonKey(includeToJson: false, includeFromJson: false) this.builder,
       final String? $type})
       : assert(builder != null, 'PathBuilderNode.builder cannot be null'),
         $type = $type ?? 'pathBuilder',
         super._();
-
-  factory _$PathBuilderNodeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PathBuilderNodeImplFromJson(json);
+  factory PathBuilderNode.fromJson(Map<String, dynamic> json) =>
+      _$PathBuilderNodeFromJson(json);
 
   @override
   final String id;
-  @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final WoFormNodeMixin Function(String)? builder;
+  final WoFormNodeMixin Function(String path)? builder;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'WoFormNode.pathBuilder(id: $id, builder: $builder)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $PathBuilderNodeCopyWith<PathBuilderNode> get copyWith =>
+      _$PathBuilderNodeCopyWithImpl<PathBuilderNode>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$PathBuilderNodeToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PathBuilderNodeImpl &&
+            other is PathBuilderNode &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.builder, builder) || other.builder == builder));
   }
@@ -1932,345 +849,59 @@ class _$PathBuilderNodeImpl extends PathBuilderNode {
   @override
   int get hashCode => Object.hash(runtimeType, id, builder);
 
-  /// Create a copy of WoFormNode
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$PathBuilderNodeImplCopyWith<_$PathBuilderNodeImpl> get copyWith =>
-      __$$PathBuilderNodeImplCopyWithImpl<_$PathBuilderNodeImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String id,
-            @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child,
-            bool conditionIsInitiallyMet)
-        conditionnal,
-    required TResult Function(
-            String id,
-            @DynamicInputTemplatesConverter()
-            List<DynamicInputTemplate> templates,
-            @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-            DynamicInputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)
-        dynamicInputs,
-    required TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormNodeMixin> children,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)
-        inputs,
-    required TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(String)? builder)
-        pathBuilder,
-    required TResult Function(
-            String id,
-            String path,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Object?)? builder,
-            Object? initialValue)
-        valueBuilder,
-    required TResult Function(
-            String id,
-            List<String> paths,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Map<String, Object?>)? builder,
-            Map<String, Object?>? initialValues)
-        valuesBuilder,
-    required TResult Function(
-            String path,
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)
-        valueListener,
-    required TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)
-        widget,
-  }) {
-    return pathBuilder(id, builder);
+  String toString() {
+    return 'WoFormNode.pathBuilder(id: $id, builder: $builder)';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String id,
-            @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child,
-            bool conditionIsInitiallyMet)?
-        conditionnal,
-    TResult? Function(
-            String id,
-            @DynamicInputTemplatesConverter()
-            List<DynamicInputTemplate> templates,
-            @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-            DynamicInputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        dynamicInputs,
-    TResult? Function(
-            String id,
-            @InputsListConverter() List<WoFormNodeMixin> children,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        inputs,
-    TResult? Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(String)? builder)?
-        pathBuilder,
-    TResult? Function(
-            String id,
-            String path,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Object?)? builder,
-            Object? initialValue)?
-        valueBuilder,
-    TResult? Function(
-            String id,
-            List<String> paths,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Map<String, Object?>)? builder,
-            Map<String, Object?>? initialValues)?
-        valuesBuilder,
-    TResult? Function(
-            String path,
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)?
-        valueListener,
-    TResult? Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
-        widget,
-  }) {
-    return pathBuilder?.call(id, builder);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String id,
-            @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child,
-            bool conditionIsInitiallyMet)?
-        conditionnal,
-    TResult Function(
-            String id,
-            @DynamicInputTemplatesConverter()
-            List<DynamicInputTemplate> templates,
-            @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-            DynamicInputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        dynamicInputs,
-    TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormNodeMixin> children,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        inputs,
-    TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(String)? builder)?
-        pathBuilder,
-    TResult Function(
-            String id,
-            String path,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Object?)? builder,
-            Object? initialValue)?
-        valueBuilder,
-    TResult Function(
-            String id,
-            List<String> paths,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Map<String, Object?>)? builder,
-            Map<String, Object?>? initialValues)?
-        valuesBuilder,
-    TResult Function(
-            String path,
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)?
-        valueListener,
-    TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
-        widget,
-    required TResult orElse(),
-  }) {
-    if (pathBuilder != null) {
-      return pathBuilder(id, builder);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ConditionnalNode value) conditionnal,
-    required TResult Function(DynamicInputsNode value) dynamicInputs,
-    required TResult Function(InputsNode value) inputs,
-    required TResult Function(PathBuilderNode value) pathBuilder,
-    required TResult Function(ValueBuilderNode value) valueBuilder,
-    required TResult Function(ValuesBuilderNode value) valuesBuilder,
-    required TResult Function(ValueListenerNode value) valueListener,
-    required TResult Function(WidgetNode value) widget,
-  }) {
-    return pathBuilder(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ConditionnalNode value)? conditionnal,
-    TResult? Function(DynamicInputsNode value)? dynamicInputs,
-    TResult? Function(InputsNode value)? inputs,
-    TResult? Function(PathBuilderNode value)? pathBuilder,
-    TResult? Function(ValueBuilderNode value)? valueBuilder,
-    TResult? Function(ValuesBuilderNode value)? valuesBuilder,
-    TResult? Function(ValueListenerNode value)? valueListener,
-    TResult? Function(WidgetNode value)? widget,
-  }) {
-    return pathBuilder?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ConditionnalNode value)? conditionnal,
-    TResult Function(DynamicInputsNode value)? dynamicInputs,
-    TResult Function(InputsNode value)? inputs,
-    TResult Function(PathBuilderNode value)? pathBuilder,
-    TResult Function(ValueBuilderNode value)? valueBuilder,
-    TResult Function(ValuesBuilderNode value)? valuesBuilder,
-    TResult Function(ValueListenerNode value)? valueListener,
-    TResult Function(WidgetNode value)? widget,
-    required TResult orElse(),
-  }) {
-    if (pathBuilder != null) {
-      return pathBuilder(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PathBuilderNodeImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class PathBuilderNode extends WoFormNode {
-  const factory PathBuilderNode(
-      {required final String id,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      final WoFormNodeMixin Function(String)? builder}) = _$PathBuilderNodeImpl;
-  const PathBuilderNode._() : super._();
-
-  factory PathBuilderNode.fromJson(Map<String, dynamic> json) =
-      _$PathBuilderNodeImpl.fromJson;
-
-  @override
-  String get id;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  WoFormNodeMixin Function(String)? get builder;
-
-  /// Create a copy of WoFormNode
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PathBuilderNodeImplCopyWith<_$PathBuilderNodeImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ValueBuilderNodeImplCopyWith<$Res>
+abstract mixin class $PathBuilderNodeCopyWith<$Res>
     implements $WoFormNodeCopyWith<$Res> {
-  factory _$$ValueBuilderNodeImplCopyWith(_$ValueBuilderNodeImpl value,
-          $Res Function(_$ValueBuilderNodeImpl) then) =
-      __$$ValueBuilderNodeImplCopyWithImpl<$Res>;
+  factory $PathBuilderNodeCopyWith(
+          PathBuilderNode value, $Res Function(PathBuilderNode) _then) =
+      _$PathBuilderNodeCopyWithImpl;
   @override
   @useResult
   $Res call(
       {String id,
-      String path,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      WoFormNodeMixin Function(Object?)? builder,
-      Object? initialValue});
+      WoFormNodeMixin Function(String path)? builder});
 }
 
 /// @nodoc
-class __$$ValueBuilderNodeImplCopyWithImpl<$Res>
-    extends _$WoFormNodeCopyWithImpl<$Res, _$ValueBuilderNodeImpl>
-    implements _$$ValueBuilderNodeImplCopyWith<$Res> {
-  __$$ValueBuilderNodeImplCopyWithImpl(_$ValueBuilderNodeImpl _value,
-      $Res Function(_$ValueBuilderNodeImpl) _then)
-      : super(_value, _then);
+class _$PathBuilderNodeCopyWithImpl<$Res>
+    implements $PathBuilderNodeCopyWith<$Res> {
+  _$PathBuilderNodeCopyWithImpl(this._self, this._then);
+
+  final PathBuilderNode _self;
+  final $Res Function(PathBuilderNode) _then;
 
   /// Create a copy of WoFormNode
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
   @override
+  @pragma('vm:prefer-inline')
   $Res call({
     Object? id = null,
-    Object? path = null,
     Object? builder = freezed,
-    Object? initialValue = freezed,
   }) {
-    return _then(_$ValueBuilderNodeImpl(
+    return _then(PathBuilderNode(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      path: null == path
-          ? _value.path
-          : path // ignore: cast_nullable_to_non_nullable
-              as String,
       builder: freezed == builder
-          ? _value.builder
+          ? _self.builder
           : builder // ignore: cast_nullable_to_non_nullable
-              as WoFormNodeMixin Function(Object?)?,
-      initialValue:
-          freezed == initialValue ? _value.initialValue : initialValue,
+              as WoFormNodeMixin Function(String path)?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$ValueBuilderNodeImpl extends ValueBuilderNode {
-  const _$ValueBuilderNodeImpl(
+class ValueBuilderNode extends WoFormNode {
+  const ValueBuilderNode(
       {required this.id,
       required this.path,
       @JsonKey(includeToJson: false, includeFromJson: false) this.builder,
@@ -2279,33 +910,39 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
       : assert(builder != null, 'ValueBuilderNode.builder cannot be null'),
         $type = $type ?? 'valueBuilder',
         super._();
-
-  factory _$ValueBuilderNodeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ValueBuilderNodeImplFromJson(json);
+  factory ValueBuilderNode.fromJson(Map<String, dynamic> json) =>
+      _$ValueBuilderNodeFromJson(json);
 
   @override
   final String id;
-  @override
   final String path;
-  @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final WoFormNodeMixin Function(Object?)? builder;
-  @override
+  final WoFormNodeMixin Function(Object? value)? builder;
   final Object? initialValue;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'WoFormNode.valueBuilder(id: $id, path: $path, builder: $builder, initialValue: $initialValue)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $ValueBuilderNodeCopyWith<ValueBuilderNode> get copyWith =>
+      _$ValueBuilderNodeCopyWithImpl<ValueBuilderNode>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$ValueBuilderNodeToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ValueBuilderNodeImpl &&
+            other is ValueBuilderNode &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.path, path) || other.path == path) &&
             (identical(other.builder, builder) || other.builder == builder) &&
@@ -2318,351 +955,68 @@ class _$ValueBuilderNodeImpl extends ValueBuilderNode {
   int get hashCode => Object.hash(runtimeType, id, path, builder,
       const DeepCollectionEquality().hash(initialValue));
 
-  /// Create a copy of WoFormNode
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ValueBuilderNodeImplCopyWith<_$ValueBuilderNodeImpl> get copyWith =>
-      __$$ValueBuilderNodeImplCopyWithImpl<_$ValueBuilderNodeImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String id,
-            @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child,
-            bool conditionIsInitiallyMet)
-        conditionnal,
-    required TResult Function(
-            String id,
-            @DynamicInputTemplatesConverter()
-            List<DynamicInputTemplate> templates,
-            @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-            DynamicInputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)
-        dynamicInputs,
-    required TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormNodeMixin> children,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)
-        inputs,
-    required TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(String)? builder)
-        pathBuilder,
-    required TResult Function(
-            String id,
-            String path,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Object?)? builder,
-            Object? initialValue)
-        valueBuilder,
-    required TResult Function(
-            String id,
-            List<String> paths,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Map<String, Object?>)? builder,
-            Map<String, Object?>? initialValues)
-        valuesBuilder,
-    required TResult Function(
-            String path,
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)
-        valueListener,
-    required TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)
-        widget,
-  }) {
-    return valueBuilder(id, path, builder, initialValue);
+  String toString() {
+    return 'WoFormNode.valueBuilder(id: $id, path: $path, builder: $builder, initialValue: $initialValue)';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String id,
-            @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child,
-            bool conditionIsInitiallyMet)?
-        conditionnal,
-    TResult? Function(
-            String id,
-            @DynamicInputTemplatesConverter()
-            List<DynamicInputTemplate> templates,
-            @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-            DynamicInputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        dynamicInputs,
-    TResult? Function(
-            String id,
-            @InputsListConverter() List<WoFormNodeMixin> children,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        inputs,
-    TResult? Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(String)? builder)?
-        pathBuilder,
-    TResult? Function(
-            String id,
-            String path,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Object?)? builder,
-            Object? initialValue)?
-        valueBuilder,
-    TResult? Function(
-            String id,
-            List<String> paths,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Map<String, Object?>)? builder,
-            Map<String, Object?>? initialValues)?
-        valuesBuilder,
-    TResult? Function(
-            String path,
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)?
-        valueListener,
-    TResult? Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
-        widget,
-  }) {
-    return valueBuilder?.call(id, path, builder, initialValue);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String id,
-            @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child,
-            bool conditionIsInitiallyMet)?
-        conditionnal,
-    TResult Function(
-            String id,
-            @DynamicInputTemplatesConverter()
-            List<DynamicInputTemplate> templates,
-            @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-            DynamicInputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        dynamicInputs,
-    TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormNodeMixin> children,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        inputs,
-    TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(String)? builder)?
-        pathBuilder,
-    TResult Function(
-            String id,
-            String path,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Object?)? builder,
-            Object? initialValue)?
-        valueBuilder,
-    TResult Function(
-            String id,
-            List<String> paths,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Map<String, Object?>)? builder,
-            Map<String, Object?>? initialValues)?
-        valuesBuilder,
-    TResult Function(
-            String path,
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)?
-        valueListener,
-    TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
-        widget,
-    required TResult orElse(),
-  }) {
-    if (valueBuilder != null) {
-      return valueBuilder(id, path, builder, initialValue);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ConditionnalNode value) conditionnal,
-    required TResult Function(DynamicInputsNode value) dynamicInputs,
-    required TResult Function(InputsNode value) inputs,
-    required TResult Function(PathBuilderNode value) pathBuilder,
-    required TResult Function(ValueBuilderNode value) valueBuilder,
-    required TResult Function(ValuesBuilderNode value) valuesBuilder,
-    required TResult Function(ValueListenerNode value) valueListener,
-    required TResult Function(WidgetNode value) widget,
-  }) {
-    return valueBuilder(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ConditionnalNode value)? conditionnal,
-    TResult? Function(DynamicInputsNode value)? dynamicInputs,
-    TResult? Function(InputsNode value)? inputs,
-    TResult? Function(PathBuilderNode value)? pathBuilder,
-    TResult? Function(ValueBuilderNode value)? valueBuilder,
-    TResult? Function(ValuesBuilderNode value)? valuesBuilder,
-    TResult? Function(ValueListenerNode value)? valueListener,
-    TResult? Function(WidgetNode value)? widget,
-  }) {
-    return valueBuilder?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ConditionnalNode value)? conditionnal,
-    TResult Function(DynamicInputsNode value)? dynamicInputs,
-    TResult Function(InputsNode value)? inputs,
-    TResult Function(PathBuilderNode value)? pathBuilder,
-    TResult Function(ValueBuilderNode value)? valueBuilder,
-    TResult Function(ValuesBuilderNode value)? valuesBuilder,
-    TResult Function(ValueListenerNode value)? valueListener,
-    TResult Function(WidgetNode value)? widget,
-    required TResult orElse(),
-  }) {
-    if (valueBuilder != null) {
-      return valueBuilder(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ValueBuilderNodeImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class ValueBuilderNode extends WoFormNode {
-  const factory ValueBuilderNode(
-      {required final String id,
-      required final String path,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      final WoFormNodeMixin Function(Object?)? builder,
-      final Object? initialValue}) = _$ValueBuilderNodeImpl;
-  const ValueBuilderNode._() : super._();
-
-  factory ValueBuilderNode.fromJson(Map<String, dynamic> json) =
-      _$ValueBuilderNodeImpl.fromJson;
-
-  @override
-  String get id;
-  String get path;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  WoFormNodeMixin Function(Object?)? get builder;
-  Object? get initialValue;
-
-  /// Create a copy of WoFormNode
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ValueBuilderNodeImplCopyWith<_$ValueBuilderNodeImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ValuesBuilderNodeImplCopyWith<$Res>
+abstract mixin class $ValueBuilderNodeCopyWith<$Res>
     implements $WoFormNodeCopyWith<$Res> {
-  factory _$$ValuesBuilderNodeImplCopyWith(_$ValuesBuilderNodeImpl value,
-          $Res Function(_$ValuesBuilderNodeImpl) then) =
-      __$$ValuesBuilderNodeImplCopyWithImpl<$Res>;
+  factory $ValueBuilderNodeCopyWith(
+          ValueBuilderNode value, $Res Function(ValueBuilderNode) _then) =
+      _$ValueBuilderNodeCopyWithImpl;
   @override
   @useResult
   $Res call(
       {String id,
-      List<String> paths,
+      String path,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      WoFormNodeMixin Function(Map<String, Object?>)? builder,
-      Map<String, Object?>? initialValues});
+      WoFormNodeMixin Function(Object? value)? builder,
+      Object? initialValue});
 }
 
 /// @nodoc
-class __$$ValuesBuilderNodeImplCopyWithImpl<$Res>
-    extends _$WoFormNodeCopyWithImpl<$Res, _$ValuesBuilderNodeImpl>
-    implements _$$ValuesBuilderNodeImplCopyWith<$Res> {
-  __$$ValuesBuilderNodeImplCopyWithImpl(_$ValuesBuilderNodeImpl _value,
-      $Res Function(_$ValuesBuilderNodeImpl) _then)
-      : super(_value, _then);
+class _$ValueBuilderNodeCopyWithImpl<$Res>
+    implements $ValueBuilderNodeCopyWith<$Res> {
+  _$ValueBuilderNodeCopyWithImpl(this._self, this._then);
+
+  final ValueBuilderNode _self;
+  final $Res Function(ValueBuilderNode) _then;
 
   /// Create a copy of WoFormNode
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
   @override
+  @pragma('vm:prefer-inline')
   $Res call({
     Object? id = null,
-    Object? paths = null,
+    Object? path = null,
     Object? builder = freezed,
-    Object? initialValues = freezed,
+    Object? initialValue = freezed,
   }) {
-    return _then(_$ValuesBuilderNodeImpl(
+    return _then(ValueBuilderNode(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      paths: null == paths
-          ? _value._paths
-          : paths // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      path: null == path
+          ? _self.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String,
       builder: freezed == builder
-          ? _value.builder
+          ? _self.builder
           : builder // ignore: cast_nullable_to_non_nullable
-              as WoFormNodeMixin Function(Map<String, Object?>)?,
-      initialValues: freezed == initialValues
-          ? _value._initialValues
-          : initialValues // ignore: cast_nullable_to_non_nullable
-              as Map<String, Object?>?,
+              as WoFormNodeMixin Function(Object? value)?,
+      initialValue: freezed == initialValue ? _self.initialValue : initialValue,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$ValuesBuilderNodeImpl extends ValuesBuilderNode {
-  const _$ValuesBuilderNodeImpl(
+class ValuesBuilderNode extends WoFormNode {
+  const ValuesBuilderNode(
       {required this.id,
       required final List<String> paths,
       @JsonKey(includeToJson: false, includeFromJson: false) this.builder,
@@ -2673,25 +1027,21 @@ class _$ValuesBuilderNodeImpl extends ValuesBuilderNode {
         _initialValues = initialValues,
         $type = $type ?? 'valuesBuilder',
         super._();
-
-  factory _$ValuesBuilderNodeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ValuesBuilderNodeImplFromJson(json);
+  factory ValuesBuilderNode.fromJson(Map<String, dynamic> json) =>
+      _$ValuesBuilderNodeFromJson(json);
 
   @override
   final String id;
   final List<String> _paths;
-  @override
   List<String> get paths {
     if (_paths is EqualUnmodifiableListView) return _paths;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_paths);
   }
 
-  @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final WoFormNodeMixin Function(Map<String, Object?>)? builder;
+  final WoFormNodeMixin Function(Map<String, Object?> values)? builder;
   final Map<String, Object?>? _initialValues;
-  @override
   Map<String, Object?>? get initialValues {
     final value = _initialValues;
     if (value == null) return null;
@@ -2703,16 +1053,26 @@ class _$ValuesBuilderNodeImpl extends ValuesBuilderNode {
   @JsonKey(name: 'runtimeType')
   final String $type;
 
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'WoFormNode.valuesBuilder(id: $id, paths: $paths, builder: $builder, initialValues: $initialValues)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $ValuesBuilderNodeCopyWith<ValuesBuilderNode> get copyWith =>
+      _$ValuesBuilderNodeCopyWithImpl<ValuesBuilderNode>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$ValuesBuilderNodeToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ValuesBuilderNodeImpl &&
+            other is ValuesBuilderNode &&
             (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality().equals(other._paths, _paths) &&
             (identical(other.builder, builder) || other.builder == builder) &&
@@ -2729,352 +1089,71 @@ class _$ValuesBuilderNodeImpl extends ValuesBuilderNode {
       builder,
       const DeepCollectionEquality().hash(_initialValues));
 
-  /// Create a copy of WoFormNode
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ValuesBuilderNodeImplCopyWith<_$ValuesBuilderNodeImpl> get copyWith =>
-      __$$ValuesBuilderNodeImplCopyWithImpl<_$ValuesBuilderNodeImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String id,
-            @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child,
-            bool conditionIsInitiallyMet)
-        conditionnal,
-    required TResult Function(
-            String id,
-            @DynamicInputTemplatesConverter()
-            List<DynamicInputTemplate> templates,
-            @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-            DynamicInputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)
-        dynamicInputs,
-    required TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormNodeMixin> children,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)
-        inputs,
-    required TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(String)? builder)
-        pathBuilder,
-    required TResult Function(
-            String id,
-            String path,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Object?)? builder,
-            Object? initialValue)
-        valueBuilder,
-    required TResult Function(
-            String id,
-            List<String> paths,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Map<String, Object?>)? builder,
-            Map<String, Object?>? initialValues)
-        valuesBuilder,
-    required TResult Function(
-            String path,
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)
-        valueListener,
-    required TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)
-        widget,
-  }) {
-    return valuesBuilder(id, paths, builder, initialValues);
+  String toString() {
+    return 'WoFormNode.valuesBuilder(id: $id, paths: $paths, builder: $builder, initialValues: $initialValues)';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String id,
-            @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child,
-            bool conditionIsInitiallyMet)?
-        conditionnal,
-    TResult? Function(
-            String id,
-            @DynamicInputTemplatesConverter()
-            List<DynamicInputTemplate> templates,
-            @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-            DynamicInputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        dynamicInputs,
-    TResult? Function(
-            String id,
-            @InputsListConverter() List<WoFormNodeMixin> children,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        inputs,
-    TResult? Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(String)? builder)?
-        pathBuilder,
-    TResult? Function(
-            String id,
-            String path,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Object?)? builder,
-            Object? initialValue)?
-        valueBuilder,
-    TResult? Function(
-            String id,
-            List<String> paths,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Map<String, Object?>)? builder,
-            Map<String, Object?>? initialValues)?
-        valuesBuilder,
-    TResult? Function(
-            String path,
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)?
-        valueListener,
-    TResult? Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
-        widget,
-  }) {
-    return valuesBuilder?.call(id, paths, builder, initialValues);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String id,
-            @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child,
-            bool conditionIsInitiallyMet)?
-        conditionnal,
-    TResult Function(
-            String id,
-            @DynamicInputTemplatesConverter()
-            List<DynamicInputTemplate> templates,
-            @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-            DynamicInputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        dynamicInputs,
-    TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormNodeMixin> children,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        inputs,
-    TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(String)? builder)?
-        pathBuilder,
-    TResult Function(
-            String id,
-            String path,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Object?)? builder,
-            Object? initialValue)?
-        valueBuilder,
-    TResult Function(
-            String id,
-            List<String> paths,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Map<String, Object?>)? builder,
-            Map<String, Object?>? initialValues)?
-        valuesBuilder,
-    TResult Function(
-            String path,
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)?
-        valueListener,
-    TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
-        widget,
-    required TResult orElse(),
-  }) {
-    if (valuesBuilder != null) {
-      return valuesBuilder(id, paths, builder, initialValues);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ConditionnalNode value) conditionnal,
-    required TResult Function(DynamicInputsNode value) dynamicInputs,
-    required TResult Function(InputsNode value) inputs,
-    required TResult Function(PathBuilderNode value) pathBuilder,
-    required TResult Function(ValueBuilderNode value) valueBuilder,
-    required TResult Function(ValuesBuilderNode value) valuesBuilder,
-    required TResult Function(ValueListenerNode value) valueListener,
-    required TResult Function(WidgetNode value) widget,
-  }) {
-    return valuesBuilder(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ConditionnalNode value)? conditionnal,
-    TResult? Function(DynamicInputsNode value)? dynamicInputs,
-    TResult? Function(InputsNode value)? inputs,
-    TResult? Function(PathBuilderNode value)? pathBuilder,
-    TResult? Function(ValueBuilderNode value)? valueBuilder,
-    TResult? Function(ValuesBuilderNode value)? valuesBuilder,
-    TResult? Function(ValueListenerNode value)? valueListener,
-    TResult? Function(WidgetNode value)? widget,
-  }) {
-    return valuesBuilder?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ConditionnalNode value)? conditionnal,
-    TResult Function(DynamicInputsNode value)? dynamicInputs,
-    TResult Function(InputsNode value)? inputs,
-    TResult Function(PathBuilderNode value)? pathBuilder,
-    TResult Function(ValueBuilderNode value)? valueBuilder,
-    TResult Function(ValuesBuilderNode value)? valuesBuilder,
-    TResult Function(ValueListenerNode value)? valueListener,
-    TResult Function(WidgetNode value)? widget,
-    required TResult orElse(),
-  }) {
-    if (valuesBuilder != null) {
-      return valuesBuilder(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ValuesBuilderNodeImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class ValuesBuilderNode extends WoFormNode {
-  const factory ValuesBuilderNode(
-      {required final String id,
-      required final List<String> paths,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      final WoFormNodeMixin Function(Map<String, Object?>)? builder,
-      final Map<String, Object?>? initialValues}) = _$ValuesBuilderNodeImpl;
-  const ValuesBuilderNode._() : super._();
-
-  factory ValuesBuilderNode.fromJson(Map<String, dynamic> json) =
-      _$ValuesBuilderNodeImpl.fromJson;
-
-  @override
-  String get id;
-  List<String> get paths;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  WoFormNodeMixin Function(Map<String, Object?>)? get builder;
-  Map<String, Object?>? get initialValues;
-
-  /// Create a copy of WoFormNode
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ValuesBuilderNodeImplCopyWith<_$ValuesBuilderNodeImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ValueListenerNodeImplCopyWith<$Res>
+abstract mixin class $ValuesBuilderNodeCopyWith<$Res>
     implements $WoFormNodeCopyWith<$Res> {
-  factory _$$ValueListenerNodeImplCopyWith(_$ValueListenerNodeImpl value,
-          $Res Function(_$ValueListenerNodeImpl) then) =
-      __$$ValueListenerNodeImplCopyWithImpl<$Res>;
+  factory $ValuesBuilderNodeCopyWith(
+          ValuesBuilderNode value, $Res Function(ValuesBuilderNode) _then) =
+      _$ValuesBuilderNodeCopyWithImpl;
   @override
   @useResult
   $Res call(
-      {String path,
-      String id,
+      {String id,
+      List<String> paths,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      bool Function(Object?, Object?)? listenWhen,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      void Function(BuildContext, String, Object?)? listener});
+      WoFormNodeMixin Function(Map<String, Object?> values)? builder,
+      Map<String, Object?>? initialValues});
 }
 
 /// @nodoc
-class __$$ValueListenerNodeImplCopyWithImpl<$Res>
-    extends _$WoFormNodeCopyWithImpl<$Res, _$ValueListenerNodeImpl>
-    implements _$$ValueListenerNodeImplCopyWith<$Res> {
-  __$$ValueListenerNodeImplCopyWithImpl(_$ValueListenerNodeImpl _value,
-      $Res Function(_$ValueListenerNodeImpl) _then)
-      : super(_value, _then);
+class _$ValuesBuilderNodeCopyWithImpl<$Res>
+    implements $ValuesBuilderNodeCopyWith<$Res> {
+  _$ValuesBuilderNodeCopyWithImpl(this._self, this._then);
+
+  final ValuesBuilderNode _self;
+  final $Res Function(ValuesBuilderNode) _then;
 
   /// Create a copy of WoFormNode
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
   @override
+  @pragma('vm:prefer-inline')
   $Res call({
-    Object? path = null,
     Object? id = null,
-    Object? listenWhen = freezed,
-    Object? listener = freezed,
+    Object? paths = null,
+    Object? builder = freezed,
+    Object? initialValues = freezed,
   }) {
-    return _then(_$ValueListenerNodeImpl(
-      path: null == path
-          ? _value.path
-          : path // ignore: cast_nullable_to_non_nullable
-              as String,
+    return _then(ValuesBuilderNode(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      listenWhen: freezed == listenWhen
-          ? _value.listenWhen
-          : listenWhen // ignore: cast_nullable_to_non_nullable
-              as bool Function(Object?, Object?)?,
-      listener: freezed == listener
-          ? _value.listener
-          : listener // ignore: cast_nullable_to_non_nullable
-              as void Function(BuildContext, String, Object?)?,
+      paths: null == paths
+          ? _self._paths
+          : paths // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      builder: freezed == builder
+          ? _self.builder
+          : builder // ignore: cast_nullable_to_non_nullable
+              as WoFormNodeMixin Function(Map<String, Object?> values)?,
+      initialValues: freezed == initialValues
+          ? _self._initialValues
+          : initialValues // ignore: cast_nullable_to_non_nullable
+              as Map<String, Object?>?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$ValueListenerNodeImpl extends ValueListenerNode {
-  const _$ValueListenerNodeImpl(
+class ValueListenerNode extends WoFormNode {
+  const ValueListenerNode(
       {required this.path,
       this.id = 'ValueListenerNode',
       @JsonKey(includeToJson: false, includeFromJson: false) this.listenWhen,
@@ -3083,35 +1162,42 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
       : assert(listener != null, 'ValueListenerNode.listener cannot be null'),
         $type = $type ?? 'valueListener',
         super._();
+  factory ValueListenerNode.fromJson(Map<String, dynamic> json) =>
+      _$ValueListenerNodeFromJson(json);
 
-  factory _$ValueListenerNodeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ValueListenerNodeImplFromJson(json);
-
-  @override
   final String path;
   @override
   @JsonKey()
   final String id;
-  @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final bool Function(Object?, Object?)? listenWhen;
-  @override
+  final bool Function(Object? previous, Object? current)? listenWhen;
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final void Function(BuildContext, String, Object?)? listener;
+  final void Function(BuildContext context, String parentPath, Object? value)?
+      listener;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'WoFormNode.valueListener(path: $path, id: $id, listenWhen: $listenWhen, listener: $listener)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $ValueListenerNodeCopyWith<ValueListenerNode> get copyWith =>
+      _$ValueListenerNodeCopyWithImpl<ValueListenerNode>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$ValueListenerNodeToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ValueListenerNodeImpl &&
+            other is ValueListenerNode &&
             (identical(other.path, path) || other.path == path) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.listenWhen, listenWhen) ||
@@ -3124,371 +1210,111 @@ class _$ValueListenerNodeImpl extends ValueListenerNode {
   @override
   int get hashCode => Object.hash(runtimeType, path, id, listenWhen, listener);
 
-  /// Create a copy of WoFormNode
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ValueListenerNodeImplCopyWith<_$ValueListenerNodeImpl> get copyWith =>
-      __$$ValueListenerNodeImplCopyWithImpl<_$ValueListenerNodeImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String id,
-            @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child,
-            bool conditionIsInitiallyMet)
-        conditionnal,
-    required TResult Function(
-            String id,
-            @DynamicInputTemplatesConverter()
-            List<DynamicInputTemplate> templates,
-            @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-            DynamicInputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)
-        dynamicInputs,
-    required TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormNodeMixin> children,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)
-        inputs,
-    required TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(String)? builder)
-        pathBuilder,
-    required TResult Function(
-            String id,
-            String path,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Object?)? builder,
-            Object? initialValue)
-        valueBuilder,
-    required TResult Function(
-            String id,
-            List<String> paths,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Map<String, Object?>)? builder,
-            Map<String, Object?>? initialValues)
-        valuesBuilder,
-    required TResult Function(
-            String path,
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)
-        valueListener,
-    required TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)
-        widget,
-  }) {
-    return valueListener(path, id, listenWhen, listener);
+  String toString() {
+    return 'WoFormNode.valueListener(path: $path, id: $id, listenWhen: $listenWhen, listener: $listener)';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String id,
-            @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child,
-            bool conditionIsInitiallyMet)?
-        conditionnal,
-    TResult? Function(
-            String id,
-            @DynamicInputTemplatesConverter()
-            List<DynamicInputTemplate> templates,
-            @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-            DynamicInputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        dynamicInputs,
-    TResult? Function(
-            String id,
-            @InputsListConverter() List<WoFormNodeMixin> children,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        inputs,
-    TResult? Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(String)? builder)?
-        pathBuilder,
-    TResult? Function(
-            String id,
-            String path,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Object?)? builder,
-            Object? initialValue)?
-        valueBuilder,
-    TResult? Function(
-            String id,
-            List<String> paths,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Map<String, Object?>)? builder,
-            Map<String, Object?>? initialValues)?
-        valuesBuilder,
-    TResult? Function(
-            String path,
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)?
-        valueListener,
-    TResult? Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
-        widget,
-  }) {
-    return valueListener?.call(path, id, listenWhen, listener);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String id,
-            @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child,
-            bool conditionIsInitiallyMet)?
-        conditionnal,
-    TResult Function(
-            String id,
-            @DynamicInputTemplatesConverter()
-            List<DynamicInputTemplate> templates,
-            @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-            DynamicInputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        dynamicInputs,
-    TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormNodeMixin> children,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        inputs,
-    TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(String)? builder)?
-        pathBuilder,
-    TResult Function(
-            String id,
-            String path,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Object?)? builder,
-            Object? initialValue)?
-        valueBuilder,
-    TResult Function(
-            String id,
-            List<String> paths,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Map<String, Object?>)? builder,
-            Map<String, Object?>? initialValues)?
-        valuesBuilder,
-    TResult Function(
-            String path,
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)?
-        valueListener,
-    TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
-        widget,
-    required TResult orElse(),
-  }) {
-    if (valueListener != null) {
-      return valueListener(path, id, listenWhen, listener);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ConditionnalNode value) conditionnal,
-    required TResult Function(DynamicInputsNode value) dynamicInputs,
-    required TResult Function(InputsNode value) inputs,
-    required TResult Function(PathBuilderNode value) pathBuilder,
-    required TResult Function(ValueBuilderNode value) valueBuilder,
-    required TResult Function(ValuesBuilderNode value) valuesBuilder,
-    required TResult Function(ValueListenerNode value) valueListener,
-    required TResult Function(WidgetNode value) widget,
-  }) {
-    return valueListener(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ConditionnalNode value)? conditionnal,
-    TResult? Function(DynamicInputsNode value)? dynamicInputs,
-    TResult? Function(InputsNode value)? inputs,
-    TResult? Function(PathBuilderNode value)? pathBuilder,
-    TResult? Function(ValueBuilderNode value)? valueBuilder,
-    TResult? Function(ValuesBuilderNode value)? valuesBuilder,
-    TResult? Function(ValueListenerNode value)? valueListener,
-    TResult? Function(WidgetNode value)? widget,
-  }) {
-    return valueListener?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ConditionnalNode value)? conditionnal,
-    TResult Function(DynamicInputsNode value)? dynamicInputs,
-    TResult Function(InputsNode value)? inputs,
-    TResult Function(PathBuilderNode value)? pathBuilder,
-    TResult Function(ValueBuilderNode value)? valueBuilder,
-    TResult Function(ValuesBuilderNode value)? valuesBuilder,
-    TResult Function(ValueListenerNode value)? valueListener,
-    TResult Function(WidgetNode value)? widget,
-    required TResult orElse(),
-  }) {
-    if (valueListener != null) {
-      return valueListener(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ValueListenerNodeImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class ValueListenerNode extends WoFormNode {
-  const factory ValueListenerNode(
-          {required final String path,
-          final String id,
-          @JsonKey(includeToJson: false, includeFromJson: false)
-          final bool Function(Object?, Object?)? listenWhen,
-          @JsonKey(includeToJson: false, includeFromJson: false)
-          final void Function(BuildContext, String, Object?)? listener}) =
-      _$ValueListenerNodeImpl;
-  const ValueListenerNode._() : super._();
-
-  factory ValueListenerNode.fromJson(Map<String, dynamic> json) =
-      _$ValueListenerNodeImpl.fromJson;
-
-  String get path;
-  @override
-  String get id;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  bool Function(Object?, Object?)? get listenWhen;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  void Function(BuildContext, String, Object?)? get listener;
-
-  /// Create a copy of WoFormNode
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ValueListenerNodeImplCopyWith<_$ValueListenerNodeImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$WidgetNodeImplCopyWith<$Res>
+abstract mixin class $ValueListenerNodeCopyWith<$Res>
     implements $WoFormNodeCopyWith<$Res> {
-  factory _$$WidgetNodeImplCopyWith(
-          _$WidgetNodeImpl value, $Res Function(_$WidgetNodeImpl) then) =
-      __$$WidgetNodeImplCopyWithImpl<$Res>;
+  factory $ValueListenerNodeCopyWith(
+          ValueListenerNode value, $Res Function(ValueListenerNode) _then) =
+      _$ValueListenerNodeCopyWithImpl;
   @override
   @useResult
   $Res call(
-      {String id,
+      {String path,
+      String id,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      Widget Function(BuildContext)? builder});
+      bool Function(Object? previous, Object? current)? listenWhen,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      void Function(BuildContext context, String parentPath, Object? value)?
+          listener});
 }
 
 /// @nodoc
-class __$$WidgetNodeImplCopyWithImpl<$Res>
-    extends _$WoFormNodeCopyWithImpl<$Res, _$WidgetNodeImpl>
-    implements _$$WidgetNodeImplCopyWith<$Res> {
-  __$$WidgetNodeImplCopyWithImpl(
-      _$WidgetNodeImpl _value, $Res Function(_$WidgetNodeImpl) _then)
-      : super(_value, _then);
+class _$ValueListenerNodeCopyWithImpl<$Res>
+    implements $ValueListenerNodeCopyWith<$Res> {
+  _$ValueListenerNodeCopyWithImpl(this._self, this._then);
+
+  final ValueListenerNode _self;
+  final $Res Function(ValueListenerNode) _then;
 
   /// Create a copy of WoFormNode
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
   @override
+  @pragma('vm:prefer-inline')
   $Res call({
+    Object? path = null,
     Object? id = null,
-    Object? builder = freezed,
+    Object? listenWhen = freezed,
+    Object? listener = freezed,
   }) {
-    return _then(_$WidgetNodeImpl(
+    return _then(ValueListenerNode(
+      path: null == path
+          ? _self.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String,
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      builder: freezed == builder
-          ? _value.builder
-          : builder // ignore: cast_nullable_to_non_nullable
-              as Widget Function(BuildContext)?,
+      listenWhen: freezed == listenWhen
+          ? _self.listenWhen
+          : listenWhen // ignore: cast_nullable_to_non_nullable
+              as bool Function(Object? previous, Object? current)?,
+      listener: freezed == listener
+          ? _self.listener
+          : listener // ignore: cast_nullable_to_non_nullable
+              as void Function(
+                  BuildContext context, String parentPath, Object? value)?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$WidgetNodeImpl extends WidgetNode {
-  const _$WidgetNodeImpl(
+class WidgetNode extends WoFormNode {
+  const WidgetNode(
       {this.id = 'WidgetNode',
       @JsonKey(includeToJson: false, includeFromJson: false) this.builder,
       final String? $type})
       : $type = $type ?? 'widget',
         super._();
-
-  factory _$WidgetNodeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$WidgetNodeImplFromJson(json);
+  factory WidgetNode.fromJson(Map<String, dynamic> json) =>
+      _$WidgetNodeFromJson(json);
 
   @override
   @JsonKey()
   final String id;
-  @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final Widget Function(BuildContext)? builder;
+  final Widget Function(BuildContext context)? builder;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
+  /// Create a copy of WoFormNode
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'WoFormNode.widget(id: $id, builder: $builder)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $WidgetNodeCopyWith<WidgetNode> get copyWith =>
+      _$WidgetNodeCopyWithImpl<WidgetNode>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$WidgetNodeToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$WidgetNodeImpl &&
+            other is WidgetNode &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.builder, builder) || other.builder == builder));
   }
@@ -3497,462 +1323,79 @@ class _$WidgetNodeImpl extends WidgetNode {
   @override
   int get hashCode => Object.hash(runtimeType, id, builder);
 
-  /// Create a copy of WoFormNode
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$WidgetNodeImplCopyWith<_$WidgetNodeImpl> get copyWith =>
-      __$$WidgetNodeImplCopyWithImpl<_$WidgetNodeImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String id,
-            @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child,
-            bool conditionIsInitiallyMet)
-        conditionnal,
-    required TResult Function(
-            String id,
-            @DynamicInputTemplatesConverter()
-            List<DynamicInputTemplate> templates,
-            @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-            DynamicInputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)
-        dynamicInputs,
-    required TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormNodeMixin> children,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)
-        inputs,
-    required TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(String)? builder)
-        pathBuilder,
-    required TResult Function(
-            String id,
-            String path,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Object?)? builder,
-            Object? initialValue)
-        valueBuilder,
-    required TResult Function(
-            String id,
-            List<String> paths,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Map<String, Object?>)? builder,
-            Map<String, Object?>? initialValues)
-        valuesBuilder,
-    required TResult Function(
-            String path,
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)
-        valueListener,
-    required TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)
-        widget,
-  }) {
-    return widget(id, builder);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String id,
-            @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child,
-            bool conditionIsInitiallyMet)?
-        conditionnal,
-    TResult? Function(
-            String id,
-            @DynamicInputTemplatesConverter()
-            List<DynamicInputTemplate> templates,
-            @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-            DynamicInputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        dynamicInputs,
-    TResult? Function(
-            String id,
-            @InputsListConverter() List<WoFormNodeMixin> children,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        inputs,
-    TResult? Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(String)? builder)?
-        pathBuilder,
-    TResult? Function(
-            String id,
-            String path,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Object?)? builder,
-            Object? initialValue)?
-        valueBuilder,
-    TResult? Function(
-            String id,
-            List<String> paths,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Map<String, Object?>)? builder,
-            Map<String, Object?>? initialValues)?
-        valuesBuilder,
-    TResult? Function(
-            String path,
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)?
-        valueListener,
-    TResult? Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
-        widget,
-  }) {
-    return widget?.call(id, builder);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String id,
-            @JsonKey(toJson: Condition.staticToJson) Condition condition,
-            @InputConverter() WoFormNodeMixin child,
-            bool conditionIsInitiallyMet)?
-        conditionnal,
-    TResult Function(
-            String id,
-            @DynamicInputTemplatesConverter()
-            List<DynamicInputTemplate> templates,
-            @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-            @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
-            DynamicInputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        dynamicInputs,
-    TResult Function(
-            String id,
-            @InputsListConverter() List<WoFormNodeMixin> children,
-            @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-            InputsNodeUiSettings uiSettings,
-            @JsonKey(toJson: ExportSettings.staticToJson)
-            ExportSettings exportSettings)?
-        inputs,
-    TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(String)? builder)?
-        pathBuilder,
-    TResult Function(
-            String id,
-            String path,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Object?)? builder,
-            Object? initialValue)?
-        valueBuilder,
-    TResult Function(
-            String id,
-            List<String> paths,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            WoFormNodeMixin Function(Map<String, Object?>)? builder,
-            Map<String, Object?>? initialValues)?
-        valuesBuilder,
-    TResult Function(
-            String path,
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            bool Function(Object?, Object?)? listenWhen,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            void Function(BuildContext, String, Object?)? listener)?
-        valueListener,
-    TResult Function(
-            String id,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Widget Function(BuildContext)? builder)?
-        widget,
-    required TResult orElse(),
-  }) {
-    if (widget != null) {
-      return widget(id, builder);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ConditionnalNode value) conditionnal,
-    required TResult Function(DynamicInputsNode value) dynamicInputs,
-    required TResult Function(InputsNode value) inputs,
-    required TResult Function(PathBuilderNode value) pathBuilder,
-    required TResult Function(ValueBuilderNode value) valueBuilder,
-    required TResult Function(ValuesBuilderNode value) valuesBuilder,
-    required TResult Function(ValueListenerNode value) valueListener,
-    required TResult Function(WidgetNode value) widget,
-  }) {
-    return widget(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ConditionnalNode value)? conditionnal,
-    TResult? Function(DynamicInputsNode value)? dynamicInputs,
-    TResult? Function(InputsNode value)? inputs,
-    TResult? Function(PathBuilderNode value)? pathBuilder,
-    TResult? Function(ValueBuilderNode value)? valueBuilder,
-    TResult? Function(ValuesBuilderNode value)? valuesBuilder,
-    TResult? Function(ValueListenerNode value)? valueListener,
-    TResult? Function(WidgetNode value)? widget,
-  }) {
-    return widget?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ConditionnalNode value)? conditionnal,
-    TResult Function(DynamicInputsNode value)? dynamicInputs,
-    TResult Function(InputsNode value)? inputs,
-    TResult Function(PathBuilderNode value)? pathBuilder,
-    TResult Function(ValueBuilderNode value)? valueBuilder,
-    TResult Function(ValuesBuilderNode value)? valuesBuilder,
-    TResult Function(ValueListenerNode value)? valueListener,
-    TResult Function(WidgetNode value)? widget,
-    required TResult orElse(),
-  }) {
-    if (widget != null) {
-      return widget(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$WidgetNodeImplToJson(
-      this,
-    );
+  String toString() {
+    return 'WoFormNode.widget(id: $id, builder: $builder)';
   }
 }
 
-abstract class WidgetNode extends WoFormNode {
-  const factory WidgetNode(
-      {final String id,
+/// @nodoc
+abstract mixin class $WidgetNodeCopyWith<$Res>
+    implements $WoFormNodeCopyWith<$Res> {
+  factory $WidgetNodeCopyWith(
+          WidgetNode value, $Res Function(WidgetNode) _then) =
+      _$WidgetNodeCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      final Widget Function(BuildContext)? builder}) = _$WidgetNodeImpl;
-  const WidgetNode._() : super._();
+      Widget Function(BuildContext context)? builder});
+}
 
-  factory WidgetNode.fromJson(Map<String, dynamic> json) =
-      _$WidgetNodeImpl.fromJson;
+/// @nodoc
+class _$WidgetNodeCopyWithImpl<$Res> implements $WidgetNodeCopyWith<$Res> {
+  _$WidgetNodeCopyWithImpl(this._self, this._then);
 
-  @override
-  String get id;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  Widget Function(BuildContext)? get builder;
+  final WidgetNode _self;
+  final $Res Function(WidgetNode) _then;
 
   /// Create a copy of WoFormNode
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$WidgetNodeImplCopyWith<_$WidgetNodeImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-mixin _$FutureNode<T> {
-  String get id => throw _privateConstructorUsedError;
-  Future<T>? get future => throw _privateConstructorUsedError;
-  WoFormNodeMixin Function(String, AsyncSnapshot<T?>) get builder =>
-      throw _privateConstructorUsedError;
-  T? get initialData => throw _privateConstructorUsedError;
-
-  /// If true, when the future will be completed, the values of
-  /// the children inputs will be reseted to their getInitialValues.
-  bool get willResetToInitialValues => throw _privateConstructorUsedError;
-
-  /// Create a copy of FutureNode
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $FutureNodeCopyWith<T, FutureNode<T>> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $FutureNodeCopyWith<T, $Res> {
-  factory $FutureNodeCopyWith(
-          FutureNode<T> value, $Res Function(FutureNode<T>) then) =
-      _$FutureNodeCopyWithImpl<T, $Res, FutureNode<T>>;
-  @useResult
-  $Res call(
-      {String id,
-      Future<T>? future,
-      WoFormNodeMixin Function(String, AsyncSnapshot<T?>) builder,
-      T? initialData,
-      bool willResetToInitialValues});
-}
-
-/// @nodoc
-class _$FutureNodeCopyWithImpl<T, $Res, $Val extends FutureNode<T>>
-    implements $FutureNodeCopyWith<T, $Res> {
-  _$FutureNodeCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of FutureNode
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
     Object? id = null,
-    Object? future = freezed,
-    Object? builder = null,
-    Object? initialData = freezed,
-    Object? willResetToInitialValues = null,
+    Object? builder = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(WidgetNode(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      future: freezed == future
-          ? _value.future
-          : future // ignore: cast_nullable_to_non_nullable
-              as Future<T>?,
-      builder: null == builder
-          ? _value.builder
+      builder: freezed == builder
+          ? _self.builder
           : builder // ignore: cast_nullable_to_non_nullable
-              as WoFormNodeMixin Function(String, AsyncSnapshot<T?>),
-      initialData: freezed == initialData
-          ? _value.initialData
-          : initialData // ignore: cast_nullable_to_non_nullable
-              as T?,
-      willResetToInitialValues: null == willResetToInitialValues
-          ? _value.willResetToInitialValues
-          : willResetToInitialValues // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$FutureNodeImplCopyWith<T, $Res>
-    implements $FutureNodeCopyWith<T, $Res> {
-  factory _$$FutureNodeImplCopyWith(
-          _$FutureNodeImpl<T> value, $Res Function(_$FutureNodeImpl<T>) then) =
-      __$$FutureNodeImplCopyWithImpl<T, $Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      Future<T>? future,
-      WoFormNodeMixin Function(String, AsyncSnapshot<T?>) builder,
-      T? initialData,
-      bool willResetToInitialValues});
-}
-
-/// @nodoc
-class __$$FutureNodeImplCopyWithImpl<T, $Res>
-    extends _$FutureNodeCopyWithImpl<T, $Res, _$FutureNodeImpl<T>>
-    implements _$$FutureNodeImplCopyWith<T, $Res> {
-  __$$FutureNodeImplCopyWithImpl(
-      _$FutureNodeImpl<T> _value, $Res Function(_$FutureNodeImpl<T>) _then)
-      : super(_value, _then);
-
-  /// Create a copy of FutureNode
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? future = freezed,
-    Object? builder = null,
-    Object? initialData = freezed,
-    Object? willResetToInitialValues = null,
-  }) {
-    return _then(_$FutureNodeImpl<T>(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      future: freezed == future
-          ? _value.future
-          : future // ignore: cast_nullable_to_non_nullable
-              as Future<T>?,
-      builder: null == builder
-          ? _value.builder
-          : builder // ignore: cast_nullable_to_non_nullable
-              as WoFormNodeMixin Function(String, AsyncSnapshot<T?>),
-      initialData: freezed == initialData
-          ? _value.initialData
-          : initialData // ignore: cast_nullable_to_non_nullable
-              as T?,
-      willResetToInitialValues: null == willResetToInitialValues
-          ? _value.willResetToInitialValues
-          : willResetToInitialValues // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as Widget Function(BuildContext context)?,
     ));
   }
 }
 
 /// @nodoc
-
-class _$FutureNodeImpl<T> extends _FutureNode<T> {
-  const _$FutureNodeImpl(
-      {required this.id,
-      required this.future,
-      required this.builder,
-      this.initialData,
-      this.willResetToInitialValues = true})
-      : super._();
-
-  @override
-  final String id;
-  @override
-  final Future<T>? future;
-  @override
-  final WoFormNodeMixin Function(String, AsyncSnapshot<T?>) builder;
-  @override
-  final T? initialData;
+mixin _$FutureNode<T> {
+  String get id;
+  Future<T>? get future;
+  WoFormNodeMixin Function(String parentPath, AsyncSnapshot<T?> snapshot)
+      get builder;
+  T? get initialData;
 
   /// If true, when the future will be completed, the values of
   /// the children inputs will be reseted to their getInitialValues.
-  @override
-  @JsonKey()
-  final bool willResetToInitialValues;
+  bool get willResetToInitialValues;
 
-  @override
-  String toString() {
-    return 'FutureNode<$T>(id: $id, future: $future, builder: $builder, initialData: $initialData, willResetToInitialValues: $willResetToInitialValues)';
-  }
+  /// Create a copy of FutureNode
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $FutureNodeCopyWith<T, FutureNode<T>> get copyWith =>
+      _$FutureNodeCopyWithImpl<T, FutureNode<T>>(
+          this as FutureNode<T>, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FutureNodeImpl<T> &&
+            other is FutureNode<T> &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.future, future) || other.future == future) &&
             (identical(other.builder, builder) || other.builder == builder) &&
@@ -3972,75 +1415,251 @@ class _$FutureNodeImpl<T> extends _FutureNode<T> {
       const DeepCollectionEquality().hash(initialData),
       willResetToInitialValues);
 
-  /// Create a copy of FutureNode
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$FutureNodeImplCopyWith<T, _$FutureNodeImpl<T>> get copyWith =>
-      __$$FutureNodeImplCopyWithImpl<T, _$FutureNodeImpl<T>>(this, _$identity);
+  String toString() {
+    return 'FutureNode<$T>(id: $id, future: $future, builder: $builder, initialData: $initialData, willResetToInitialValues: $willResetToInitialValues)';
+  }
 }
 
-abstract class _FutureNode<T> extends FutureNode<T> {
-  const factory _FutureNode(
-      {required final String id,
-      required final Future<T>? future,
-      required final WoFormNodeMixin Function(String, AsyncSnapshot<T?>)
+/// @nodoc
+abstract mixin class $FutureNodeCopyWith<T, $Res> {
+  factory $FutureNodeCopyWith(
+          FutureNode<T> value, $Res Function(FutureNode<T>) _then) =
+      _$FutureNodeCopyWithImpl;
+  @useResult
+  $Res call(
+      {String id,
+      Future<T>? future,
+      WoFormNodeMixin Function(String parentPath, AsyncSnapshot<T?> snapshot)
           builder,
-      final T? initialData,
-      final bool willResetToInitialValues}) = _$FutureNodeImpl<T>;
-  const _FutureNode._() : super._();
+      T? initialData,
+      bool willResetToInitialValues});
+}
+
+/// @nodoc
+class _$FutureNodeCopyWithImpl<T, $Res>
+    implements $FutureNodeCopyWith<T, $Res> {
+  _$FutureNodeCopyWithImpl(this._self, this._then);
+
+  final FutureNode<T> _self;
+  final $Res Function(FutureNode<T>) _then;
+
+  /// Create a copy of FutureNode
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? future = freezed,
+    Object? builder = null,
+    Object? initialData = freezed,
+    Object? willResetToInitialValues = null,
+  }) {
+    return _then(_self.copyWith(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      future: freezed == future
+          ? _self.future
+          : future // ignore: cast_nullable_to_non_nullable
+              as Future<T>?,
+      builder: null == builder
+          ? _self.builder
+          : builder // ignore: cast_nullable_to_non_nullable
+              as WoFormNodeMixin Function(
+                  String parentPath, AsyncSnapshot<T?> snapshot),
+      initialData: freezed == initialData
+          ? _self.initialData
+          : initialData // ignore: cast_nullable_to_non_nullable
+              as T?,
+      willResetToInitialValues: null == willResetToInitialValues
+          ? _self.willResetToInitialValues
+          : willResetToInitialValues // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _FutureNode<T> extends FutureNode<T> {
+  const _FutureNode(
+      {required this.id,
+      required this.future,
+      required this.builder,
+      this.initialData,
+      this.willResetToInitialValues = true})
+      : super._();
 
   @override
-  String get id;
+  final String id;
   @override
-  Future<T>? get future;
+  final Future<T>? future;
   @override
-  WoFormNodeMixin Function(String, AsyncSnapshot<T?>) get builder;
+  final WoFormNodeMixin Function(String parentPath, AsyncSnapshot<T?> snapshot)
+      builder;
   @override
-  T? get initialData;
+  final T? initialData;
 
   /// If true, when the future will be completed, the values of
   /// the children inputs will be reseted to their getInitialValues.
   @override
-  bool get willResetToInitialValues;
+  @JsonKey()
+  final bool willResetToInitialValues;
 
   /// Create a copy of FutureNode
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FutureNodeImplCopyWith<T, _$FutureNodeImpl<T>> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$FutureNodeCopyWith<T, _FutureNode<T>> get copyWith =>
+      __$FutureNodeCopyWithImpl<T, _FutureNode<T>>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _FutureNode<T> &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.future, future) || other.future == future) &&
+            (identical(other.builder, builder) || other.builder == builder) &&
+            const DeepCollectionEquality()
+                .equals(other.initialData, initialData) &&
+            (identical(
+                    other.willResetToInitialValues, willResetToInitialValues) ||
+                other.willResetToInitialValues == willResetToInitialValues));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      future,
+      builder,
+      const DeepCollectionEquality().hash(initialData),
+      willResetToInitialValues);
+
+  @override
+  String toString() {
+    return 'FutureNode<$T>(id: $id, future: $future, builder: $builder, initialData: $initialData, willResetToInitialValues: $willResetToInitialValues)';
+  }
 }
 
-RootNode _$RootNodeFromJson(Map<String, dynamic> json) {
-  return _RootNode.fromJson(json);
+/// @nodoc
+abstract mixin class _$FutureNodeCopyWith<T, $Res>
+    implements $FutureNodeCopyWith<T, $Res> {
+  factory _$FutureNodeCopyWith(
+          _FutureNode<T> value, $Res Function(_FutureNode<T>) _then) =
+      __$FutureNodeCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      Future<T>? future,
+      WoFormNodeMixin Function(String parentPath, AsyncSnapshot<T?> snapshot)
+          builder,
+      T? initialData,
+      bool willResetToInitialValues});
+}
+
+/// @nodoc
+class __$FutureNodeCopyWithImpl<T, $Res>
+    implements _$FutureNodeCopyWith<T, $Res> {
+  __$FutureNodeCopyWithImpl(this._self, this._then);
+
+  final _FutureNode<T> _self;
+  final $Res Function(_FutureNode<T>) _then;
+
+  /// Create a copy of FutureNode
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? future = freezed,
+    Object? builder = null,
+    Object? initialData = freezed,
+    Object? willResetToInitialValues = null,
+  }) {
+    return _then(_FutureNode<T>(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      future: freezed == future
+          ? _self.future
+          : future // ignore: cast_nullable_to_non_nullable
+              as Future<T>?,
+      builder: null == builder
+          ? _self.builder
+          : builder // ignore: cast_nullable_to_non_nullable
+              as WoFormNodeMixin Function(
+                  String parentPath, AsyncSnapshot<T?> snapshot),
+      initialData: freezed == initialData
+          ? _self.initialData
+          : initialData // ignore: cast_nullable_to_non_nullable
+              as T?,
+      willResetToInitialValues: null == willResetToInitialValues
+          ? _self.willResetToInitialValues
+          : willResetToInitialValues // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 mixin _$RootNode {
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @InputsListConverter()
-  List<WoFormNodeMixin> get children => throw _privateConstructorUsedError;
+  List<WoFormNodeMixin> get children;
   @JsonKey(toJson: WoFormUiSettings.staticToJson)
-  WoFormUiSettings get uiSettings => throw _privateConstructorUsedError;
+  WoFormUiSettings get uiSettings;
   @JsonKey(toJson: ExportSettings.staticToJson)
-  ExportSettings get exportSettings => throw _privateConstructorUsedError;
-
-  /// Serializes this RootNode to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  ExportSettings get exportSettings;
 
   /// Create a copy of RootNode
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $RootNodeCopyWith<RootNode> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$RootNodeCopyWithImpl<RootNode>(this as RootNode, _$identity);
+
+  /// Serializes this RootNode to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is RootNode &&
+            (identical(other.id, id) || other.id == id) &&
+            const DeepCollectionEquality().equals(other.children, children) &&
+            (identical(other.uiSettings, uiSettings) ||
+                other.uiSettings == uiSettings) &&
+            (identical(other.exportSettings, exportSettings) ||
+                other.exportSettings == exportSettings));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      const DeepCollectionEquality().hash(children),
+      uiSettings,
+      exportSettings);
+
+  @override
+  String toString() {
+    return 'RootNode(id: $id, children: $children, uiSettings: $uiSettings, exportSettings: $exportSettings)';
+  }
 }
 
 /// @nodoc
-abstract class $RootNodeCopyWith<$Res> {
-  factory $RootNodeCopyWith(RootNode value, $Res Function(RootNode) then) =
-      _$RootNodeCopyWithImpl<$Res, RootNode>;
+abstract mixin class $RootNodeCopyWith<$Res> {
+  factory $RootNodeCopyWith(RootNode value, $Res Function(RootNode) _then) =
+      _$RootNodeCopyWithImpl;
   @useResult
   $Res call(
       {String id,
@@ -4055,14 +1674,11 @@ abstract class $RootNodeCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$RootNodeCopyWithImpl<$Res, $Val extends RootNode>
-    implements $RootNodeCopyWith<$Res> {
-  _$RootNodeCopyWithImpl(this._value, this._then);
+class _$RootNodeCopyWithImpl<$Res> implements $RootNodeCopyWith<$Res> {
+  _$RootNodeCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final RootNode _self;
+  final $Res Function(RootNode) _then;
 
   /// Create a copy of RootNode
   /// with the given fields replaced by the non-null parameter values.
@@ -4074,24 +1690,24 @@ class _$RootNodeCopyWithImpl<$Res, $Val extends RootNode>
     Object? uiSettings = null,
     Object? exportSettings = null,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       children: null == children
-          ? _value.children
+          ? _self.children
           : children // ignore: cast_nullable_to_non_nullable
               as List<WoFormNodeMixin>,
       uiSettings: null == uiSettings
-          ? _value.uiSettings
+          ? _self.uiSettings
           : uiSettings // ignore: cast_nullable_to_non_nullable
               as WoFormUiSettings,
       exportSettings: null == exportSettings
-          ? _value.exportSettings
+          ? _self.exportSettings
           : exportSettings // ignore: cast_nullable_to_non_nullable
               as ExportSettings,
-    ) as $Val);
+    ));
   }
 
   /// Create a copy of RootNode
@@ -4099,8 +1715,8 @@ class _$RootNodeCopyWithImpl<$Res, $Val extends RootNode>
   @override
   @pragma('vm:prefer-inline')
   $WoFormUiSettingsCopyWith<$Res> get uiSettings {
-    return $WoFormUiSettingsCopyWith<$Res>(_value.uiSettings, (value) {
-      return _then(_value.copyWith(uiSettings: value) as $Val);
+    return $WoFormUiSettingsCopyWith<$Res>(_self.uiSettings, (value) {
+      return _then(_self.copyWith(uiSettings: value));
     });
   }
 
@@ -4109,77 +1725,16 @@ class _$RootNodeCopyWithImpl<$Res, $Val extends RootNode>
   @override
   @pragma('vm:prefer-inline')
   $ExportSettingsCopyWith<$Res> get exportSettings {
-    return $ExportSettingsCopyWith<$Res>(_value.exportSettings, (value) {
-      return _then(_value.copyWith(exportSettings: value) as $Val);
+    return $ExportSettingsCopyWith<$Res>(_self.exportSettings, (value) {
+      return _then(_self.copyWith(exportSettings: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$$RootNodeImplCopyWith<$Res>
-    implements $RootNodeCopyWith<$Res> {
-  factory _$$RootNodeImplCopyWith(
-          _$RootNodeImpl value, $Res Function(_$RootNodeImpl) then) =
-      __$$RootNodeImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      @InputsListConverter() List<WoFormNodeMixin> children,
-      @JsonKey(toJson: WoFormUiSettings.staticToJson)
-      WoFormUiSettings uiSettings,
-      @JsonKey(toJson: ExportSettings.staticToJson)
-      ExportSettings exportSettings});
-
-  @override
-  $WoFormUiSettingsCopyWith<$Res> get uiSettings;
-  @override
-  $ExportSettingsCopyWith<$Res> get exportSettings;
-}
-
-/// @nodoc
-class __$$RootNodeImplCopyWithImpl<$Res>
-    extends _$RootNodeCopyWithImpl<$Res, _$RootNodeImpl>
-    implements _$$RootNodeImplCopyWith<$Res> {
-  __$$RootNodeImplCopyWithImpl(
-      _$RootNodeImpl _value, $Res Function(_$RootNodeImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of RootNode
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? children = null,
-    Object? uiSettings = null,
-    Object? exportSettings = null,
-  }) {
-    return _then(_$RootNodeImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      children: null == children
-          ? _value._children
-          : children // ignore: cast_nullable_to_non_nullable
-              as List<WoFormNodeMixin>,
-      uiSettings: null == uiSettings
-          ? _value.uiSettings
-          : uiSettings // ignore: cast_nullable_to_non_nullable
-              as WoFormUiSettings,
-      exportSettings: null == exportSettings
-          ? _value.exportSettings
-          : exportSettings // ignore: cast_nullable_to_non_nullable
-              as ExportSettings,
-    ));
-  }
-}
-
-/// @nodoc
 @JsonSerializable()
-class _$RootNodeImpl extends _RootNode {
-  const _$RootNodeImpl(
+class _RootNode extends RootNode {
+  const _RootNode(
       {this.id = '#',
       @InputsListConverter() final List<WoFormNodeMixin> children = const [],
       @JsonKey(toJson: WoFormUiSettings.staticToJson)
@@ -4188,9 +1743,8 @@ class _$RootNodeImpl extends _RootNode {
       this.exportSettings = const ExportSettings()})
       : _children = children,
         super._();
-
-  factory _$RootNodeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$RootNodeImplFromJson(json);
+  factory _RootNode.fromJson(Map<String, dynamic> json) =>
+      _$RootNodeFromJson(json);
 
   @override
   @JsonKey()
@@ -4212,16 +1766,26 @@ class _$RootNodeImpl extends _RootNode {
   @JsonKey(toJson: ExportSettings.staticToJson)
   final ExportSettings exportSettings;
 
+  /// Create a copy of RootNode
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'RootNode(id: $id, children: $children, uiSettings: $uiSettings, exportSettings: $exportSettings)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$RootNodeCopyWith<_RootNode> get copyWith =>
+      __$RootNodeCopyWithImpl<_RootNode>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$RootNodeToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RootNodeImpl &&
+            other is _RootNode &&
             (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality().equals(other._children, _children) &&
             (identical(other.uiSettings, uiSettings) ||
@@ -4239,51 +1803,89 @@ class _$RootNodeImpl extends _RootNode {
       uiSettings,
       exportSettings);
 
-  /// Create a copy of RootNode
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$RootNodeImplCopyWith<_$RootNodeImpl> get copyWith =>
-      __$$RootNodeImplCopyWithImpl<_$RootNodeImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$RootNodeImplToJson(
-      this,
-    );
+  String toString() {
+    return 'RootNode(id: $id, children: $children, uiSettings: $uiSettings, exportSettings: $exportSettings)';
   }
 }
 
-abstract class _RootNode extends RootNode {
-  const factory _RootNode(
-      {final String id,
-      @InputsListConverter() final List<WoFormNodeMixin> children,
+/// @nodoc
+abstract mixin class _$RootNodeCopyWith<$Res>
+    implements $RootNodeCopyWith<$Res> {
+  factory _$RootNodeCopyWith(_RootNode value, $Res Function(_RootNode) _then) =
+      __$RootNodeCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      @InputsListConverter() List<WoFormNodeMixin> children,
       @JsonKey(toJson: WoFormUiSettings.staticToJson)
-      final WoFormUiSettings uiSettings,
+      WoFormUiSettings uiSettings,
       @JsonKey(toJson: ExportSettings.staticToJson)
-      final ExportSettings exportSettings}) = _$RootNodeImpl;
-  const _RootNode._() : super._();
-
-  factory _RootNode.fromJson(Map<String, dynamic> json) =
-      _$RootNodeImpl.fromJson;
+      ExportSettings exportSettings});
 
   @override
-  String get id;
+  $WoFormUiSettingsCopyWith<$Res> get uiSettings;
   @override
-  @InputsListConverter()
-  List<WoFormNodeMixin> get children;
-  @override
-  @JsonKey(toJson: WoFormUiSettings.staticToJson)
-  WoFormUiSettings get uiSettings;
-  @override
-  @JsonKey(toJson: ExportSettings.staticToJson)
-  ExportSettings get exportSettings;
+  $ExportSettingsCopyWith<$Res> get exportSettings;
+}
+
+/// @nodoc
+class __$RootNodeCopyWithImpl<$Res> implements _$RootNodeCopyWith<$Res> {
+  __$RootNodeCopyWithImpl(this._self, this._then);
+
+  final _RootNode _self;
+  final $Res Function(_RootNode) _then;
 
   /// Create a copy of RootNode
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$RootNodeImplCopyWith<_$RootNodeImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? children = null,
+    Object? uiSettings = null,
+    Object? exportSettings = null,
+  }) {
+    return _then(_RootNode(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      children: null == children
+          ? _self._children
+          : children // ignore: cast_nullable_to_non_nullable
+              as List<WoFormNodeMixin>,
+      uiSettings: null == uiSettings
+          ? _self.uiSettings
+          : uiSettings // ignore: cast_nullable_to_non_nullable
+              as WoFormUiSettings,
+      exportSettings: null == exportSettings
+          ? _self.exportSettings
+          : exportSettings // ignore: cast_nullable_to_non_nullable
+              as ExportSettings,
+    ));
+  }
+
+  /// Create a copy of RootNode
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $WoFormUiSettingsCopyWith<$Res> get uiSettings {
+    return $WoFormUiSettingsCopyWith<$Res>(_self.uiSettings, (value) {
+      return _then(_self.copyWith(uiSettings: value));
+    });
+  }
+
+  /// Create a copy of RootNode
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ExportSettingsCopyWith<$Res> get exportSettings {
+    return $ExportSettingsCopyWith<$Res>(_self.exportSettings, (value) {
+      return _then(_self.copyWith(exportSettings: value));
+    });
+  }
 }
+
+// dart format on

@@ -553,11 +553,10 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
   WoFormInput withId({required String id}) => copyWith(id: id);
 }
 
-@freezed
-@JsonSerializable(genericArgumentFactories: true)
+@Freezed(genericArgumentFactories: true)
 abstract class SelectInput<T>
     with _$SelectInput<T>, WoFormNodeMixin, WoFormInputMixin {
-  const factory SelectInput({
+  factory SelectInput({
     required String id,
     required int? maxCount,
     @Default(0) int minCount,
@@ -602,18 +601,17 @@ abstract class SelectInput<T>
   factory SelectInput.fromJson(
     Map<String, dynamic> json,
     T Function(Object? json) fromJsonT,
-  ) {
-    // doesn't work on expression method
-    // https://github.com/rrousselGit/freezed/issues/463
-    return _$SelectInputFromJson(json, fromJsonT);
-  }
+  ) =>
+      _$SelectInputFromJson(json, fromJsonT);
 
   @override
-  Map<String, dynamic> toJson() {
-    if (toJsonT == null) return _$SelectInputToJson(this, _defaultToJsonT<T>);
-
-    return _$SelectInputToJson(this, toJsonT!);
-  }
+  // If the override is invalid, go in :
+  // wo_form_input.freezed.dart -> mixin _$SelectInput<T>
+  // Comment the toJson() method.
+  Map<String, dynamic> toJson() => _$SelectInputToJson(
+        this as _SelectInput<T>,
+        toJsonT ?? _defaultToJsonT<T>,
+      );
 
   // --
 

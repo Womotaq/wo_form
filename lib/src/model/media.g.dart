@@ -6,34 +6,29 @@ part of 'media.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$MediaUrlImpl _$$MediaUrlImplFromJson(Map<String, dynamic> json) =>
-    _$MediaUrlImpl(
+MediaUrl _$MediaUrlFromJson(Map<String, dynamic> json) => MediaUrl(
       url: json['url'] as String,
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$MediaUrlImplToJson(_$MediaUrlImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$MediaUrlToJson(MediaUrl instance) => <String, dynamic>{
       'url': instance.url,
       'runtimeType': instance.$type,
     };
 
-_$MediaFileImpl _$$MediaFileImplFromJson(Map<String, dynamic> json) =>
-    _$MediaFileImpl(
+MediaFile _$MediaFileFromJson(Map<String, dynamic> json) => MediaFile(
       file:
           const XFileConverter().fromJson(json['file'] as Map<String, dynamic>),
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$MediaFileImplToJson(_$MediaFileImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$MediaFileToJson(MediaFile instance) => <String, dynamic>{
       'file': const XFileConverter().toJson(instance.file),
       'runtimeType': instance.$type,
     };
 
-_$MediaImportSettingsImpl _$$MediaImportSettingsImplFromJson(
-        Map<String, dynamic> json) =>
-    _$MediaImportSettingsImpl(
+_MediaImportSettings _$MediaImportSettingsFromJson(Map<String, dynamic> json) =>
+    _MediaImportSettings(
       type: $enumDecode(_$MediaTypeEnumMap, json['type']),
       methods: const MediaImportMethodListConverter()
           .fromJson(json['methods'] as List),
@@ -47,8 +42,8 @@ _$MediaImportSettingsImpl _$$MediaImportSettingsImplFromJson(
       preferFrontCamera: json['preferFrontCamera'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$MediaImportSettingsImplToJson(
-        _$MediaImportSettingsImpl instance) =>
+Map<String, dynamic> _$MediaImportSettingsToJson(
+        _MediaImportSettings instance) =>
     <String, dynamic>{
       'type': _$MediaTypeEnumMap[instance.type]!,
       'methods':
@@ -68,16 +63,16 @@ const _$MediaTypeEnumMap = {
   MediaType.video: 'video',
 };
 
-_$MediaImportMethodPickMediasImpl _$$MediaImportMethodPickMediasImplFromJson(
+MediaImportMethodPickMedias _$MediaImportMethodPickMediasFromJson(
         Map<String, dynamic> json) =>
-    _$MediaImportMethodPickMediasImpl(
+    MediaImportMethodPickMedias(
       source: $enumDecode(_$MediaPickSourceEnumMap, json['source']),
       type: $enumDecodeNullable(_$MediaTypeEnumMap, json['type']),
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$MediaImportMethodPickMediasImplToJson(
-        _$MediaImportMethodPickMediasImpl instance) =>
+Map<String, dynamic> _$MediaImportMethodPickMediasToJson(
+        MediaImportMethodPickMedias instance) =>
     <String, dynamic>{
       'source': _$MediaPickSourceEnumMap[instance.source]!,
       'type': _$MediaTypeEnumMap[instance.type],
@@ -89,27 +84,27 @@ const _$MediaPickSourceEnumMap = {
   MediaPickSource.camera: 'camera',
 };
 
-_$MediaImportMethodUrlImpl _$$MediaImportMethodUrlImplFromJson(
+MediaImportMethodUrl _$MediaImportMethodUrlFromJson(
         Map<String, dynamic> json) =>
-    _$MediaImportMethodUrlImpl(
+    MediaImportMethodUrl(
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$MediaImportMethodUrlImplToJson(
-        _$MediaImportMethodUrlImpl instance) =>
+Map<String, dynamic> _$MediaImportMethodUrlToJson(
+        MediaImportMethodUrl instance) =>
     <String, dynamic>{
       'runtimeType': instance.$type,
     };
 
-_$MediaImportMethodCustomImpl _$$MediaImportMethodCustomImplFromJson(
+MediaImportMethodCustom _$MediaImportMethodCustomFromJson(
         Map<String, dynamic> json) =>
-    _$MediaImportMethodCustomImpl(
+    MediaImportMethodCustom(
       id: json['id'] as String,
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$MediaImportMethodCustomImplToJson(
-        _$MediaImportMethodCustomImpl instance) =>
+Map<String, dynamic> _$MediaImportMethodCustomToJson(
+        MediaImportMethodCustom instance) =>
     <String, dynamic>{
       'id': instance.id,
       'runtimeType': instance.$type,

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,11 +10,8 @@ part of 'flexible_date_time.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 FlexibleDateTime _$FlexibleDateTimeFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
     case 'fixed':
@@ -29,103 +27,104 @@ FlexibleDateTime _$FlexibleDateTimeFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$FlexibleDateTime {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(DateTime date) fixed,
-    required TResult Function(int addYears, int addMonths, int addDays,
-            int? replaceYears, int? replaceMonths, int? replaceDays)
-        today,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DateTime date)? fixed,
-    TResult? Function(int addYears, int addMonths, int addDays,
-            int? replaceYears, int? replaceMonths, int? replaceDays)?
-        today,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DateTime date)? fixed,
-    TResult Function(int addYears, int addMonths, int addDays,
-            int? replaceYears, int? replaceMonths, int? replaceDays)?
-        today,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(FixedDateTime value) fixed,
-    required TResult Function(TodayDate value) today,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FixedDateTime value)? fixed,
-    TResult? Function(TodayDate value)? today,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(FixedDateTime value)? fixed,
-    TResult Function(TodayDate value)? today,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-
   /// Serializes this FlexibleDateTime to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is FlexibleDateTime);
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'FlexibleDateTime()';
+  }
 }
 
 /// @nodoc
-abstract class $FlexibleDateTimeCopyWith<$Res> {
-  factory $FlexibleDateTimeCopyWith(
-          FlexibleDateTime value, $Res Function(FlexibleDateTime) then) =
-      _$FlexibleDateTimeCopyWithImpl<$Res, FlexibleDateTime>;
+class $FlexibleDateTimeCopyWith<$Res> {
+  $FlexibleDateTimeCopyWith(
+      FlexibleDateTime _, $Res Function(FlexibleDateTime) __);
 }
 
 /// @nodoc
-class _$FlexibleDateTimeCopyWithImpl<$Res, $Val extends FlexibleDateTime>
-    implements $FlexibleDateTimeCopyWith<$Res> {
-  _$FlexibleDateTimeCopyWithImpl(this._value, this._then);
+@JsonSerializable()
+class FixedDateTime extends FlexibleDateTime {
+  const FixedDateTime({required this.date, final String? $type})
+      : $type = $type ?? 'fixed',
+        super._();
+  factory FixedDateTime.fromJson(Map<String, dynamic> json) =>
+      _$FixedDateTimeFromJson(json);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final DateTime date;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
 
   /// Create a copy of FlexibleDateTime
   /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $FixedDateTimeCopyWith<FixedDateTime> get copyWith =>
+      _$FixedDateTimeCopyWithImpl<FixedDateTime>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$FixedDateTimeToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is FixedDateTime &&
+            (identical(other.date, date) || other.date == date));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, date);
+
+  @override
+  String toString() {
+    return 'FlexibleDateTime.fixed(date: $date)';
+  }
 }
 
 /// @nodoc
-abstract class _$$FixedDateTimeImplCopyWith<$Res> {
-  factory _$$FixedDateTimeImplCopyWith(
-          _$FixedDateTimeImpl value, $Res Function(_$FixedDateTimeImpl) then) =
-      __$$FixedDateTimeImplCopyWithImpl<$Res>;
+abstract mixin class $FixedDateTimeCopyWith<$Res>
+    implements $FlexibleDateTimeCopyWith<$Res> {
+  factory $FixedDateTimeCopyWith(
+          FixedDateTime value, $Res Function(FixedDateTime) _then) =
+      _$FixedDateTimeCopyWithImpl;
   @useResult
   $Res call({DateTime date});
 }
 
 /// @nodoc
-class __$$FixedDateTimeImplCopyWithImpl<$Res>
-    extends _$FlexibleDateTimeCopyWithImpl<$Res, _$FixedDateTimeImpl>
-    implements _$$FixedDateTimeImplCopyWith<$Res> {
-  __$$FixedDateTimeImplCopyWithImpl(
-      _$FixedDateTimeImpl _value, $Res Function(_$FixedDateTimeImpl) _then)
-      : super(_value, _then);
+class _$FixedDateTimeCopyWithImpl<$Res>
+    implements $FixedDateTimeCopyWith<$Res> {
+  _$FixedDateTimeCopyWithImpl(this._self, this._then);
+
+  final FixedDateTime _self;
+  final $Res Function(FixedDateTime) _then;
 
   /// Create a copy of FlexibleDateTime
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
     Object? date = null,
   }) {
-    return _then(_$FixedDateTimeImpl(
+    return _then(FixedDateTime(
       date: null == date
-          ? _value.date
+          ? _self.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
@@ -134,206 +133,8 @@ class __$$FixedDateTimeImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$FixedDateTimeImpl extends FixedDateTime {
-  const _$FixedDateTimeImpl({required this.date, final String? $type})
-      : $type = $type ?? 'fixed',
-        super._();
-
-  factory _$FixedDateTimeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$FixedDateTimeImplFromJson(json);
-
-  @override
-  final DateTime date;
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
-
-  @override
-  String toString() {
-    return 'FlexibleDateTime.fixed(date: $date)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$FixedDateTimeImpl &&
-            (identical(other.date, date) || other.date == date));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, date);
-
-  /// Create a copy of FlexibleDateTime
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$FixedDateTimeImplCopyWith<_$FixedDateTimeImpl> get copyWith =>
-      __$$FixedDateTimeImplCopyWithImpl<_$FixedDateTimeImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(DateTime date) fixed,
-    required TResult Function(int addYears, int addMonths, int addDays,
-            int? replaceYears, int? replaceMonths, int? replaceDays)
-        today,
-  }) {
-    return fixed(date);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DateTime date)? fixed,
-    TResult? Function(int addYears, int addMonths, int addDays,
-            int? replaceYears, int? replaceMonths, int? replaceDays)?
-        today,
-  }) {
-    return fixed?.call(date);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DateTime date)? fixed,
-    TResult Function(int addYears, int addMonths, int addDays,
-            int? replaceYears, int? replaceMonths, int? replaceDays)?
-        today,
-    required TResult orElse(),
-  }) {
-    if (fixed != null) {
-      return fixed(date);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(FixedDateTime value) fixed,
-    required TResult Function(TodayDate value) today,
-  }) {
-    return fixed(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FixedDateTime value)? fixed,
-    TResult? Function(TodayDate value)? today,
-  }) {
-    return fixed?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(FixedDateTime value)? fixed,
-    TResult Function(TodayDate value)? today,
-    required TResult orElse(),
-  }) {
-    if (fixed != null) {
-      return fixed(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$FixedDateTimeImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class FixedDateTime extends FlexibleDateTime {
-  const factory FixedDateTime({required final DateTime date}) =
-      _$FixedDateTimeImpl;
-  const FixedDateTime._() : super._();
-
-  factory FixedDateTime.fromJson(Map<String, dynamic> json) =
-      _$FixedDateTimeImpl.fromJson;
-
-  DateTime get date;
-
-  /// Create a copy of FlexibleDateTime
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FixedDateTimeImplCopyWith<_$FixedDateTimeImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$TodayDateImplCopyWith<$Res> {
-  factory _$$TodayDateImplCopyWith(
-          _$TodayDateImpl value, $Res Function(_$TodayDateImpl) then) =
-      __$$TodayDateImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {int addYears,
-      int addMonths,
-      int addDays,
-      int? replaceYears,
-      int? replaceMonths,
-      int? replaceDays});
-}
-
-/// @nodoc
-class __$$TodayDateImplCopyWithImpl<$Res>
-    extends _$FlexibleDateTimeCopyWithImpl<$Res, _$TodayDateImpl>
-    implements _$$TodayDateImplCopyWith<$Res> {
-  __$$TodayDateImplCopyWithImpl(
-      _$TodayDateImpl _value, $Res Function(_$TodayDateImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of FlexibleDateTime
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? addYears = null,
-    Object? addMonths = null,
-    Object? addDays = null,
-    Object? replaceYears = freezed,
-    Object? replaceMonths = freezed,
-    Object? replaceDays = freezed,
-  }) {
-    return _then(_$TodayDateImpl(
-      addYears: null == addYears
-          ? _value.addYears
-          : addYears // ignore: cast_nullable_to_non_nullable
-              as int,
-      addMonths: null == addMonths
-          ? _value.addMonths
-          : addMonths // ignore: cast_nullable_to_non_nullable
-              as int,
-      addDays: null == addDays
-          ? _value.addDays
-          : addDays // ignore: cast_nullable_to_non_nullable
-              as int,
-      replaceYears: freezed == replaceYears
-          ? _value.replaceYears
-          : replaceYears // ignore: cast_nullable_to_non_nullable
-              as int?,
-      replaceMonths: freezed == replaceMonths
-          ? _value.replaceMonths
-          : replaceMonths // ignore: cast_nullable_to_non_nullable
-              as int?,
-      replaceDays: freezed == replaceDays
-          ? _value.replaceDays
-          : replaceDays // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$TodayDateImpl extends TodayDate {
-  const _$TodayDateImpl(
+class TodayDate extends FlexibleDateTime {
+  const TodayDate(
       {this.addYears = 0,
       this.addMonths = 0,
       this.addDays = 0,
@@ -343,39 +144,41 @@ class _$TodayDateImpl extends TodayDate {
       final String? $type})
       : $type = $type ?? 'today',
         super._();
+  factory TodayDate.fromJson(Map<String, dynamic> json) =>
+      _$TodayDateFromJson(json);
 
-  factory _$TodayDateImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TodayDateImplFromJson(json);
-
-  @override
   @JsonKey()
   final int addYears;
-  @override
   @JsonKey()
   final int addMonths;
-  @override
   @JsonKey()
   final int addDays;
-  @override
   final int? replaceYears;
-  @override
   final int? replaceMonths;
-  @override
   final int? replaceDays;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
+  /// Create a copy of FlexibleDateTime
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $TodayDateCopyWith<TodayDate> get copyWith =>
+      _$TodayDateCopyWithImpl<TodayDate>(this, _$identity);
+
   @override
-  String toString() {
-    return 'FlexibleDateTime.today(addYears: $addYears, addMonths: $addMonths, addDays: $addDays, replaceYears: $replaceYears, replaceMonths: $replaceMonths, replaceDays: $replaceDays)';
+  Map<String, dynamic> toJson() {
+    return _$TodayDateToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TodayDateImpl &&
+            other is TodayDate &&
             (identical(other.addYears, addYears) ||
                 other.addYears == addYears) &&
             (identical(other.addMonths, addMonths) ||
@@ -394,116 +197,72 @@ class _$TodayDateImpl extends TodayDate {
   int get hashCode => Object.hash(runtimeType, addYears, addMonths, addDays,
       replaceYears, replaceMonths, replaceDays);
 
+  @override
+  String toString() {
+    return 'FlexibleDateTime.today(addYears: $addYears, addMonths: $addMonths, addDays: $addDays, replaceYears: $replaceYears, replaceMonths: $replaceMonths, replaceDays: $replaceDays)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $TodayDateCopyWith<$Res>
+    implements $FlexibleDateTimeCopyWith<$Res> {
+  factory $TodayDateCopyWith(TodayDate value, $Res Function(TodayDate) _then) =
+      _$TodayDateCopyWithImpl;
+  @useResult
+  $Res call(
+      {int addYears,
+      int addMonths,
+      int addDays,
+      int? replaceYears,
+      int? replaceMonths,
+      int? replaceDays});
+}
+
+/// @nodoc
+class _$TodayDateCopyWithImpl<$Res> implements $TodayDateCopyWith<$Res> {
+  _$TodayDateCopyWithImpl(this._self, this._then);
+
+  final TodayDate _self;
+  final $Res Function(TodayDate) _then;
+
   /// Create a copy of FlexibleDateTime
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
   @pragma('vm:prefer-inline')
-  _$$TodayDateImplCopyWith<_$TodayDateImpl> get copyWith =>
-      __$$TodayDateImplCopyWithImpl<_$TodayDateImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(DateTime date) fixed,
-    required TResult Function(int addYears, int addMonths, int addDays,
-            int? replaceYears, int? replaceMonths, int? replaceDays)
-        today,
+  $Res call({
+    Object? addYears = null,
+    Object? addMonths = null,
+    Object? addDays = null,
+    Object? replaceYears = freezed,
+    Object? replaceMonths = freezed,
+    Object? replaceDays = freezed,
   }) {
-    return today(
-        addYears, addMonths, addDays, replaceYears, replaceMonths, replaceDays);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(DateTime date)? fixed,
-    TResult? Function(int addYears, int addMonths, int addDays,
-            int? replaceYears, int? replaceMonths, int? replaceDays)?
-        today,
-  }) {
-    return today?.call(
-        addYears, addMonths, addDays, replaceYears, replaceMonths, replaceDays);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DateTime date)? fixed,
-    TResult Function(int addYears, int addMonths, int addDays,
-            int? replaceYears, int? replaceMonths, int? replaceDays)?
-        today,
-    required TResult orElse(),
-  }) {
-    if (today != null) {
-      return today(addYears, addMonths, addDays, replaceYears, replaceMonths,
-          replaceDays);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(FixedDateTime value) fixed,
-    required TResult Function(TodayDate value) today,
-  }) {
-    return today(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(FixedDateTime value)? fixed,
-    TResult? Function(TodayDate value)? today,
-  }) {
-    return today?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(FixedDateTime value)? fixed,
-    TResult Function(TodayDate value)? today,
-    required TResult orElse(),
-  }) {
-    if (today != null) {
-      return today(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$TodayDateImplToJson(
-      this,
-    );
+    return _then(TodayDate(
+      addYears: null == addYears
+          ? _self.addYears
+          : addYears // ignore: cast_nullable_to_non_nullable
+              as int,
+      addMonths: null == addMonths
+          ? _self.addMonths
+          : addMonths // ignore: cast_nullable_to_non_nullable
+              as int,
+      addDays: null == addDays
+          ? _self.addDays
+          : addDays // ignore: cast_nullable_to_non_nullable
+              as int,
+      replaceYears: freezed == replaceYears
+          ? _self.replaceYears
+          : replaceYears // ignore: cast_nullable_to_non_nullable
+              as int?,
+      replaceMonths: freezed == replaceMonths
+          ? _self.replaceMonths
+          : replaceMonths // ignore: cast_nullable_to_non_nullable
+              as int?,
+      replaceDays: freezed == replaceDays
+          ? _self.replaceDays
+          : replaceDays // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
   }
 }
 
-abstract class TodayDate extends FlexibleDateTime {
-  const factory TodayDate(
-      {final int addYears,
-      final int addMonths,
-      final int addDays,
-      final int? replaceYears,
-      final int? replaceMonths,
-      final int? replaceDays}) = _$TodayDateImpl;
-  const TodayDate._() : super._();
-
-  factory TodayDate.fromJson(Map<String, dynamic> json) =
-      _$TodayDateImpl.fromJson;
-
-  int get addYears;
-  int get addMonths;
-  int get addDays;
-  int? get replaceYears;
-  int? get replaceMonths;
-  int? get replaceDays;
-
-  /// Create a copy of FlexibleDateTime
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TodayDateImplCopyWith<_$TodayDateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

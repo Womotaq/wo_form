@@ -6,60 +6,53 @@ part of 'wo_form_status.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$InitialStatusImpl _$$InitialStatusImplFromJson(Map<String, dynamic> json) =>
-    _$InitialStatusImpl(
+InitialStatus _$InitialStatusFromJson(Map<String, dynamic> json) =>
+    InitialStatus(
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$InitialStatusImplToJson(_$InitialStatusImpl instance) =>
+Map<String, dynamic> _$InitialStatusToJson(InitialStatus instance) =>
     <String, dynamic>{
       'runtimeType': instance.$type,
     };
 
-_$InProgressStatusImpl _$$InProgressStatusImplFromJson(
-        Map<String, dynamic> json) =>
-    _$InProgressStatusImpl(
+InProgressStatus _$InProgressStatusFromJson(Map<String, dynamic> json) =>
+    InProgressStatus(
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$InProgressStatusImplToJson(
-        _$InProgressStatusImpl instance) =>
+Map<String, dynamic> _$InProgressStatusToJson(InProgressStatus instance) =>
     <String, dynamic>{
       'runtimeType': instance.$type,
     };
 
-_$SubmittingStatusImpl _$$SubmittingStatusImplFromJson(
-        Map<String, dynamic> json) =>
-    _$SubmittingStatusImpl(
+SubmittingStatus _$SubmittingStatusFromJson(Map<String, dynamic> json) =>
+    SubmittingStatus(
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$SubmittingStatusImplToJson(
-        _$SubmittingStatusImpl instance) =>
+Map<String, dynamic> _$SubmittingStatusToJson(SubmittingStatus instance) =>
     <String, dynamic>{
       'runtimeType': instance.$type,
     };
 
-_$SubmitErrorStatusImpl _$$SubmitErrorStatusImplFromJson(
-        Map<String, dynamic> json) =>
-    _$SubmitErrorStatusImpl(
+SubmitErrorStatus _$SubmitErrorStatusFromJson(Map<String, dynamic> json) =>
+    SubmitErrorStatus(
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$SubmitErrorStatusImplToJson(
-        _$SubmitErrorStatusImpl instance) =>
+Map<String, dynamic> _$SubmitErrorStatusToJson(SubmitErrorStatus instance) =>
     <String, dynamic>{
       'runtimeType': instance.$type,
     };
 
-_$SubmitSuccessStatusImpl _$$SubmitSuccessStatusImplFromJson(
-        Map<String, dynamic> json) =>
-    _$SubmitSuccessStatusImpl(
+SubmitSuccessStatus _$SubmitSuccessStatusFromJson(Map<String, dynamic> json) =>
+    SubmitSuccessStatus(
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$SubmitSuccessStatusImplToJson(
-        _$SubmitSuccessStatusImpl instance) =>
+Map<String, dynamic> _$SubmitSuccessStatusToJson(
+        SubmitSuccessStatus instance) =>
     <String, dynamic>{
       'runtimeType': instance.$type,
     };

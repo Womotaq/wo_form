@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,11 +10,8 @@ part of 'wo_form_status.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 WoFormStatus _$WoFormStatusFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
     case 'initial':
@@ -35,151 +33,13 @@ WoFormStatus _$WoFormStatusFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WoFormStatus {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            List<WoFormInputError> errors)
-        inProgress,
-    required TResult Function() submitting,
-    required TResult Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Object? error,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            StackTrace? stackTrace)
-        submitError,
-    required TResult Function() submitSuccess,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            List<WoFormInputError> errors)?
-        inProgress,
-    TResult? Function()? submitting,
-    TResult? Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Object? error,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            StackTrace? stackTrace)?
-        submitError,
-    TResult? Function()? submitSuccess,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            List<WoFormInputError> errors)?
-        inProgress,
-    TResult Function()? submitting,
-    TResult Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Object? error,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            StackTrace? stackTrace)?
-        submitError,
-    TResult Function()? submitSuccess,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(InitialStatus value) initial,
-    required TResult Function(InProgressStatus value) inProgress,
-    required TResult Function(SubmittingStatus value) submitting,
-    required TResult Function(SubmitErrorStatus value) submitError,
-    required TResult Function(SubmitSuccessStatus value) submitSuccess,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(InitialStatus value)? initial,
-    TResult? Function(InProgressStatus value)? inProgress,
-    TResult? Function(SubmittingStatus value)? submitting,
-    TResult? Function(SubmitErrorStatus value)? submitError,
-    TResult? Function(SubmitSuccessStatus value)? submitSuccess,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(InitialStatus value)? initial,
-    TResult Function(InProgressStatus value)? inProgress,
-    TResult Function(SubmittingStatus value)? submitting,
-    TResult Function(SubmitErrorStatus value)? submitError,
-    TResult Function(SubmitSuccessStatus value)? submitSuccess,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-
   /// Serializes this WoFormStatus to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $WoFormStatusCopyWith<$Res> {
-  factory $WoFormStatusCopyWith(
-          WoFormStatus value, $Res Function(WoFormStatus) then) =
-      _$WoFormStatusCopyWithImpl<$Res, WoFormStatus>;
-}
-
-/// @nodoc
-class _$WoFormStatusCopyWithImpl<$Res, $Val extends WoFormStatus>
-    implements $WoFormStatusCopyWith<$Res> {
-  _$WoFormStatusCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of WoFormStatus
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-abstract class _$$InitialStatusImplCopyWith<$Res> {
-  factory _$$InitialStatusImplCopyWith(
-          _$InitialStatusImpl value, $Res Function(_$InitialStatusImpl) then) =
-      __$$InitialStatusImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$InitialStatusImplCopyWithImpl<$Res>
-    extends _$WoFormStatusCopyWithImpl<$Res, _$InitialStatusImpl>
-    implements _$$InitialStatusImplCopyWith<$Res> {
-  __$$InitialStatusImplCopyWithImpl(
-      _$InitialStatusImpl _value, $Res Function(_$InitialStatusImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of WoFormStatus
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$InitialStatusImpl implements InitialStatus {
-  const _$InitialStatusImpl({final String? $type}) : $type = $type ?? 'initial';
-
-  factory _$InitialStatusImpl.fromJson(Map<String, dynamic> json) =>
-      _$$InitialStatusImplFromJson(json);
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
-
-  @override
-  String toString() {
-    return 'WoFormStatus.initial()';
-  }
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitialStatusImpl);
+        (other.runtimeType == runtimeType && other is WoFormStatus);
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -187,174 +47,62 @@ class _$InitialStatusImpl implements InitialStatus {
   int get hashCode => runtimeType.hashCode;
 
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            List<WoFormInputError> errors)
-        inProgress,
-    required TResult Function() submitting,
-    required TResult Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Object? error,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            StackTrace? stackTrace)
-        submitError,
-    required TResult Function() submitSuccess,
-  }) {
-    return initial();
+  String toString() {
+    return 'WoFormStatus()';
   }
+}
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            List<WoFormInputError> errors)?
-        inProgress,
-    TResult? Function()? submitting,
-    TResult? Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Object? error,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            StackTrace? stackTrace)?
-        submitError,
-    TResult? Function()? submitSuccess,
-  }) {
-    return initial?.call();
-  }
+/// @nodoc
+class $WoFormStatusCopyWith<$Res> {
+  $WoFormStatusCopyWith(WoFormStatus _, $Res Function(WoFormStatus) __);
+}
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            List<WoFormInputError> errors)?
-        inProgress,
-    TResult Function()? submitting,
-    TResult Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Object? error,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            StackTrace? stackTrace)?
-        submitError,
-    TResult Function()? submitSuccess,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
+/// @nodoc
+@JsonSerializable()
+class InitialStatus implements WoFormStatus {
+  const InitialStatus({final String? $type}) : $type = $type ?? 'initial';
+  factory InitialStatus.fromJson(Map<String, dynamic> json) =>
+      _$InitialStatusFromJson(json);
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(InitialStatus value) initial,
-    required TResult Function(InProgressStatus value) inProgress,
-    required TResult Function(SubmittingStatus value) submitting,
-    required TResult Function(SubmitErrorStatus value) submitError,
-    required TResult Function(SubmitSuccessStatus value) submitSuccess,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(InitialStatus value)? initial,
-    TResult? Function(InProgressStatus value)? inProgress,
-    TResult? Function(SubmittingStatus value)? submitting,
-    TResult? Function(SubmitErrorStatus value)? submitError,
-    TResult? Function(SubmitSuccessStatus value)? submitSuccess,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(InitialStatus value)? initial,
-    TResult Function(InProgressStatus value)? inProgress,
-    TResult Function(SubmittingStatus value)? submitting,
-    TResult Function(SubmitErrorStatus value)? submitError,
-    TResult Function(SubmitSuccessStatus value)? submitSuccess,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
+  @JsonKey(name: 'runtimeType')
+  final String $type;
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$InitialStatusImplToJson(
+    return _$InitialStatusToJson(
       this,
     );
   }
-}
 
-abstract class InitialStatus implements WoFormStatus {
-  const factory InitialStatus() = _$InitialStatusImpl;
-
-  factory InitialStatus.fromJson(Map<String, dynamic> json) =
-      _$InitialStatusImpl.fromJson;
-}
-
-/// @nodoc
-abstract class _$$InProgressStatusImplCopyWith<$Res> {
-  factory _$$InProgressStatusImplCopyWith(_$InProgressStatusImpl value,
-          $Res Function(_$InProgressStatusImpl) then) =
-      __$$InProgressStatusImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {@JsonKey(includeToJson: false, includeFromJson: false)
-      List<WoFormInputError> errors});
-}
-
-/// @nodoc
-class __$$InProgressStatusImplCopyWithImpl<$Res>
-    extends _$WoFormStatusCopyWithImpl<$Res, _$InProgressStatusImpl>
-    implements _$$InProgressStatusImplCopyWith<$Res> {
-  __$$InProgressStatusImplCopyWithImpl(_$InProgressStatusImpl _value,
-      $Res Function(_$InProgressStatusImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of WoFormStatus
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? errors = null,
-  }) {
-    return _then(_$InProgressStatusImpl(
-      errors: null == errors
-          ? _value._errors
-          : errors // ignore: cast_nullable_to_non_nullable
-              as List<WoFormInputError>,
-    ));
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is InitialStatus);
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'WoFormStatus.initial()';
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$InProgressStatusImpl implements InProgressStatus {
-  const _$InProgressStatusImpl(
+class InProgressStatus implements WoFormStatus {
+  const InProgressStatus(
       {@JsonKey(includeToJson: false, includeFromJson: false)
       final List<WoFormInputError> errors = const [],
       final String? $type})
       : _errors = errors,
         $type = $type ?? 'inProgress';
-
-  factory _$InProgressStatusImpl.fromJson(Map<String, dynamic> json) =>
-      _$$InProgressStatusImplFromJson(json);
+  factory InProgressStatus.fromJson(Map<String, dynamic> json) =>
+      _$InProgressStatusFromJson(json);
 
   final List<WoFormInputError> _errors;
-  @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   List<WoFormInputError> get errors {
     if (_errors is EqualUnmodifiableListView) return _errors;
@@ -365,16 +113,25 @@ class _$InProgressStatusImpl implements InProgressStatus {
   @JsonKey(name: 'runtimeType')
   final String $type;
 
+  /// Create a copy of WoFormStatus
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $InProgressStatusCopyWith<InProgressStatus> get copyWith =>
+      _$InProgressStatusCopyWithImpl<InProgressStatus>(this, _$identity);
+
   @override
-  String toString() {
-    return 'WoFormStatus.inProgress(errors: $errors)';
+  Map<String, dynamic> toJson() {
+    return _$InProgressStatusToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$InProgressStatusImpl &&
+            other is InProgressStatus &&
             const DeepCollectionEquality().equals(other._errors, _errors));
   }
 
@@ -383,185 +140,68 @@ class _$InProgressStatusImpl implements InProgressStatus {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_errors));
 
-  /// Create a copy of WoFormStatus
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$InProgressStatusImplCopyWith<_$InProgressStatusImpl> get copyWith =>
-      __$$InProgressStatusImplCopyWithImpl<_$InProgressStatusImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            List<WoFormInputError> errors)
-        inProgress,
-    required TResult Function() submitting,
-    required TResult Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Object? error,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            StackTrace? stackTrace)
-        submitError,
-    required TResult Function() submitSuccess,
-  }) {
-    return inProgress(errors);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            List<WoFormInputError> errors)?
-        inProgress,
-    TResult? Function()? submitting,
-    TResult? Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Object? error,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            StackTrace? stackTrace)?
-        submitError,
-    TResult? Function()? submitSuccess,
-  }) {
-    return inProgress?.call(errors);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            List<WoFormInputError> errors)?
-        inProgress,
-    TResult Function()? submitting,
-    TResult Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Object? error,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            StackTrace? stackTrace)?
-        submitError,
-    TResult Function()? submitSuccess,
-    required TResult orElse(),
-  }) {
-    if (inProgress != null) {
-      return inProgress(errors);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(InitialStatus value) initial,
-    required TResult Function(InProgressStatus value) inProgress,
-    required TResult Function(SubmittingStatus value) submitting,
-    required TResult Function(SubmitErrorStatus value) submitError,
-    required TResult Function(SubmitSuccessStatus value) submitSuccess,
-  }) {
-    return inProgress(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(InitialStatus value)? initial,
-    TResult? Function(InProgressStatus value)? inProgress,
-    TResult? Function(SubmittingStatus value)? submitting,
-    TResult? Function(SubmitErrorStatus value)? submitError,
-    TResult? Function(SubmitSuccessStatus value)? submitSuccess,
-  }) {
-    return inProgress?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(InitialStatus value)? initial,
-    TResult Function(InProgressStatus value)? inProgress,
-    TResult Function(SubmittingStatus value)? submitting,
-    TResult Function(SubmitErrorStatus value)? submitError,
-    TResult Function(SubmitSuccessStatus value)? submitSuccess,
-    required TResult orElse(),
-  }) {
-    if (inProgress != null) {
-      return inProgress(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$InProgressStatusImplToJson(
-      this,
-    );
+  String toString() {
+    return 'WoFormStatus.inProgress(errors: $errors)';
   }
 }
 
-abstract class InProgressStatus implements WoFormStatus {
-  const factory InProgressStatus(
+/// @nodoc
+abstract mixin class $InProgressStatusCopyWith<$Res>
+    implements $WoFormStatusCopyWith<$Res> {
+  factory $InProgressStatusCopyWith(
+          InProgressStatus value, $Res Function(InProgressStatus) _then) =
+      _$InProgressStatusCopyWithImpl;
+  @useResult
+  $Res call(
       {@JsonKey(includeToJson: false, includeFromJson: false)
-      final List<WoFormInputError> errors}) = _$InProgressStatusImpl;
-
-  factory InProgressStatus.fromJson(Map<String, dynamic> json) =
-      _$InProgressStatusImpl.fromJson;
-
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  List<WoFormInputError> get errors;
-
-  /// Create a copy of WoFormStatus
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$InProgressStatusImplCopyWith<_$InProgressStatusImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+      List<WoFormInputError> errors});
 }
 
 /// @nodoc
-abstract class _$$SubmittingStatusImplCopyWith<$Res> {
-  factory _$$SubmittingStatusImplCopyWith(_$SubmittingStatusImpl value,
-          $Res Function(_$SubmittingStatusImpl) then) =
-      __$$SubmittingStatusImplCopyWithImpl<$Res>;
-}
+class _$InProgressStatusCopyWithImpl<$Res>
+    implements $InProgressStatusCopyWith<$Res> {
+  _$InProgressStatusCopyWithImpl(this._self, this._then);
 
-/// @nodoc
-class __$$SubmittingStatusImplCopyWithImpl<$Res>
-    extends _$WoFormStatusCopyWithImpl<$Res, _$SubmittingStatusImpl>
-    implements _$$SubmittingStatusImplCopyWith<$Res> {
-  __$$SubmittingStatusImplCopyWithImpl(_$SubmittingStatusImpl _value,
-      $Res Function(_$SubmittingStatusImpl) _then)
-      : super(_value, _then);
+  final InProgressStatus _self;
+  final $Res Function(InProgressStatus) _then;
 
   /// Create a copy of WoFormStatus
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? errors = null,
+  }) {
+    return _then(InProgressStatus(
+      errors: null == errors
+          ? _self._errors
+          : errors // ignore: cast_nullable_to_non_nullable
+              as List<WoFormInputError>,
+    ));
+  }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$SubmittingStatusImpl implements SubmittingStatus {
-  const _$SubmittingStatusImpl({final String? $type})
-      : $type = $type ?? 'submitting';
-
-  factory _$SubmittingStatusImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SubmittingStatusImplFromJson(json);
+class SubmittingStatus implements WoFormStatus {
+  const SubmittingStatus({final String? $type}) : $type = $type ?? 'submitting';
+  factory SubmittingStatus.fromJson(Map<String, dynamic> json) =>
+      _$SubmittingStatusFromJson(json);
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
-  String toString() {
-    return 'WoFormStatus.submitting()';
+  Map<String, dynamic> toJson() {
+    return _$SubmittingStatusToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SubmittingStatusImpl);
+        (other.runtimeType == runtimeType && other is SubmittingStatus);
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -569,194 +209,49 @@ class _$SubmittingStatusImpl implements SubmittingStatus {
   int get hashCode => runtimeType.hashCode;
 
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            List<WoFormInputError> errors)
-        inProgress,
-    required TResult Function() submitting,
-    required TResult Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Object? error,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            StackTrace? stackTrace)
-        submitError,
-    required TResult Function() submitSuccess,
-  }) {
-    return submitting();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            List<WoFormInputError> errors)?
-        inProgress,
-    TResult? Function()? submitting,
-    TResult? Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Object? error,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            StackTrace? stackTrace)?
-        submitError,
-    TResult? Function()? submitSuccess,
-  }) {
-    return submitting?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            List<WoFormInputError> errors)?
-        inProgress,
-    TResult Function()? submitting,
-    TResult Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Object? error,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            StackTrace? stackTrace)?
-        submitError,
-    TResult Function()? submitSuccess,
-    required TResult orElse(),
-  }) {
-    if (submitting != null) {
-      return submitting();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(InitialStatus value) initial,
-    required TResult Function(InProgressStatus value) inProgress,
-    required TResult Function(SubmittingStatus value) submitting,
-    required TResult Function(SubmitErrorStatus value) submitError,
-    required TResult Function(SubmitSuccessStatus value) submitSuccess,
-  }) {
-    return submitting(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(InitialStatus value)? initial,
-    TResult? Function(InProgressStatus value)? inProgress,
-    TResult? Function(SubmittingStatus value)? submitting,
-    TResult? Function(SubmitErrorStatus value)? submitError,
-    TResult? Function(SubmitSuccessStatus value)? submitSuccess,
-  }) {
-    return submitting?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(InitialStatus value)? initial,
-    TResult Function(InProgressStatus value)? inProgress,
-    TResult Function(SubmittingStatus value)? submitting,
-    TResult Function(SubmitErrorStatus value)? submitError,
-    TResult Function(SubmitSuccessStatus value)? submitSuccess,
-    required TResult orElse(),
-  }) {
-    if (submitting != null) {
-      return submitting(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SubmittingStatusImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class SubmittingStatus implements WoFormStatus {
-  const factory SubmittingStatus() = _$SubmittingStatusImpl;
-
-  factory SubmittingStatus.fromJson(Map<String, dynamic> json) =
-      _$SubmittingStatusImpl.fromJson;
-}
-
-/// @nodoc
-abstract class _$$SubmitErrorStatusImplCopyWith<$Res> {
-  factory _$$SubmitErrorStatusImplCopyWith(_$SubmitErrorStatusImpl value,
-          $Res Function(_$SubmitErrorStatusImpl) then) =
-      __$$SubmitErrorStatusImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {@JsonKey(includeToJson: false, includeFromJson: false) Object? error,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      StackTrace? stackTrace});
-}
-
-/// @nodoc
-class __$$SubmitErrorStatusImplCopyWithImpl<$Res>
-    extends _$WoFormStatusCopyWithImpl<$Res, _$SubmitErrorStatusImpl>
-    implements _$$SubmitErrorStatusImplCopyWith<$Res> {
-  __$$SubmitErrorStatusImplCopyWithImpl(_$SubmitErrorStatusImpl _value,
-      $Res Function(_$SubmitErrorStatusImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of WoFormStatus
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? error = freezed,
-    Object? stackTrace = freezed,
-  }) {
-    return _then(_$SubmitErrorStatusImpl(
-      error: freezed == error ? _value.error : error,
-      stackTrace: freezed == stackTrace
-          ? _value.stackTrace
-          : stackTrace // ignore: cast_nullable_to_non_nullable
-              as StackTrace?,
-    ));
+  String toString() {
+    return 'WoFormStatus.submitting()';
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$SubmitErrorStatusImpl implements SubmitErrorStatus {
-  const _$SubmitErrorStatusImpl(
+class SubmitErrorStatus implements WoFormStatus {
+  const SubmitErrorStatus(
       {@JsonKey(includeToJson: false, includeFromJson: false) this.error,
       @JsonKey(includeToJson: false, includeFromJson: false) this.stackTrace,
       final String? $type})
       : $type = $type ?? 'submitError';
+  factory SubmitErrorStatus.fromJson(Map<String, dynamic> json) =>
+      _$SubmitErrorStatusFromJson(json);
 
-  factory _$SubmitErrorStatusImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SubmitErrorStatusImplFromJson(json);
-
-  @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final Object? error;
-  @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final StackTrace? stackTrace;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
+  /// Create a copy of WoFormStatus
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $SubmitErrorStatusCopyWith<SubmitErrorStatus> get copyWith =>
+      _$SubmitErrorStatusCopyWithImpl<SubmitErrorStatus>(this, _$identity);
+
   @override
-  String toString() {
-    return 'WoFormStatus.submitError(error: $error, stackTrace: $stackTrace)';
+  Map<String, dynamic> toJson() {
+    return _$SubmitErrorStatusToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SubmitErrorStatusImpl &&
+            other is SubmitErrorStatus &&
             const DeepCollectionEquality().equals(other.error, error) &&
             (identical(other.stackTrace, stackTrace) ||
                 other.stackTrace == stackTrace));
@@ -767,190 +262,72 @@ class _$SubmitErrorStatusImpl implements SubmitErrorStatus {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(error), stackTrace);
 
-  /// Create a copy of WoFormStatus
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$SubmitErrorStatusImplCopyWith<_$SubmitErrorStatusImpl> get copyWith =>
-      __$$SubmitErrorStatusImplCopyWithImpl<_$SubmitErrorStatusImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            List<WoFormInputError> errors)
-        inProgress,
-    required TResult Function() submitting,
-    required TResult Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Object? error,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            StackTrace? stackTrace)
-        submitError,
-    required TResult Function() submitSuccess,
-  }) {
-    return submitError(error, stackTrace);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            List<WoFormInputError> errors)?
-        inProgress,
-    TResult? Function()? submitting,
-    TResult? Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Object? error,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            StackTrace? stackTrace)?
-        submitError,
-    TResult? Function()? submitSuccess,
-  }) {
-    return submitError?.call(error, stackTrace);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            List<WoFormInputError> errors)?
-        inProgress,
-    TResult Function()? submitting,
-    TResult Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Object? error,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            StackTrace? stackTrace)?
-        submitError,
-    TResult Function()? submitSuccess,
-    required TResult orElse(),
-  }) {
-    if (submitError != null) {
-      return submitError(error, stackTrace);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(InitialStatus value) initial,
-    required TResult Function(InProgressStatus value) inProgress,
-    required TResult Function(SubmittingStatus value) submitting,
-    required TResult Function(SubmitErrorStatus value) submitError,
-    required TResult Function(SubmitSuccessStatus value) submitSuccess,
-  }) {
-    return submitError(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(InitialStatus value)? initial,
-    TResult? Function(InProgressStatus value)? inProgress,
-    TResult? Function(SubmittingStatus value)? submitting,
-    TResult? Function(SubmitErrorStatus value)? submitError,
-    TResult? Function(SubmitSuccessStatus value)? submitSuccess,
-  }) {
-    return submitError?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(InitialStatus value)? initial,
-    TResult Function(InProgressStatus value)? inProgress,
-    TResult Function(SubmittingStatus value)? submitting,
-    TResult Function(SubmitErrorStatus value)? submitError,
-    TResult Function(SubmitSuccessStatus value)? submitSuccess,
-    required TResult orElse(),
-  }) {
-    if (submitError != null) {
-      return submitError(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SubmitErrorStatusImplToJson(
-      this,
-    );
+  String toString() {
+    return 'WoFormStatus.submitError(error: $error, stackTrace: $stackTrace)';
   }
 }
 
-abstract class SubmitErrorStatus implements WoFormStatus {
-  const factory SubmitErrorStatus(
-      {@JsonKey(includeToJson: false, includeFromJson: false)
-      final Object? error,
+/// @nodoc
+abstract mixin class $SubmitErrorStatusCopyWith<$Res>
+    implements $WoFormStatusCopyWith<$Res> {
+  factory $SubmitErrorStatusCopyWith(
+          SubmitErrorStatus value, $Res Function(SubmitErrorStatus) _then) =
+      _$SubmitErrorStatusCopyWithImpl;
+  @useResult
+  $Res call(
+      {@JsonKey(includeToJson: false, includeFromJson: false) Object? error,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      final StackTrace? stackTrace}) = _$SubmitErrorStatusImpl;
-
-  factory SubmitErrorStatus.fromJson(Map<String, dynamic> json) =
-      _$SubmitErrorStatusImpl.fromJson;
-
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  Object? get error;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  StackTrace? get stackTrace;
-
-  /// Create a copy of WoFormStatus
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SubmitErrorStatusImplCopyWith<_$SubmitErrorStatusImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+      StackTrace? stackTrace});
 }
 
 /// @nodoc
-abstract class _$$SubmitSuccessStatusImplCopyWith<$Res> {
-  factory _$$SubmitSuccessStatusImplCopyWith(_$SubmitSuccessStatusImpl value,
-          $Res Function(_$SubmitSuccessStatusImpl) then) =
-      __$$SubmitSuccessStatusImplCopyWithImpl<$Res>;
-}
+class _$SubmitErrorStatusCopyWithImpl<$Res>
+    implements $SubmitErrorStatusCopyWith<$Res> {
+  _$SubmitErrorStatusCopyWithImpl(this._self, this._then);
 
-/// @nodoc
-class __$$SubmitSuccessStatusImplCopyWithImpl<$Res>
-    extends _$WoFormStatusCopyWithImpl<$Res, _$SubmitSuccessStatusImpl>
-    implements _$$SubmitSuccessStatusImplCopyWith<$Res> {
-  __$$SubmitSuccessStatusImplCopyWithImpl(_$SubmitSuccessStatusImpl _value,
-      $Res Function(_$SubmitSuccessStatusImpl) _then)
-      : super(_value, _then);
+  final SubmitErrorStatus _self;
+  final $Res Function(SubmitErrorStatus) _then;
 
   /// Create a copy of WoFormStatus
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? error = freezed,
+    Object? stackTrace = freezed,
+  }) {
+    return _then(SubmitErrorStatus(
+      error: freezed == error ? _self.error : error,
+      stackTrace: freezed == stackTrace
+          ? _self.stackTrace
+          : stackTrace // ignore: cast_nullable_to_non_nullable
+              as StackTrace?,
+    ));
+  }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$SubmitSuccessStatusImpl implements SubmitSuccessStatus {
-  const _$SubmitSuccessStatusImpl({final String? $type})
+class SubmitSuccessStatus implements WoFormStatus {
+  const SubmitSuccessStatus({final String? $type})
       : $type = $type ?? 'submitSuccess';
-
-  factory _$SubmitSuccessStatusImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SubmitSuccessStatusImplFromJson(json);
+  factory SubmitSuccessStatus.fromJson(Map<String, dynamic> json) =>
+      _$SubmitSuccessStatusFromJson(json);
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
-  String toString() {
-    return 'WoFormStatus.submitSuccess()';
+  Map<String, dynamic> toJson() {
+    return _$SubmitSuccessStatusToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SubmitSuccessStatusImpl);
+        (other.runtimeType == runtimeType && other is SubmitSuccessStatus);
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -958,120 +335,9 @@ class _$SubmitSuccessStatusImpl implements SubmitSuccessStatus {
   int get hashCode => runtimeType.hashCode;
 
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            List<WoFormInputError> errors)
-        inProgress,
-    required TResult Function() submitting,
-    required TResult Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Object? error,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            StackTrace? stackTrace)
-        submitError,
-    required TResult Function() submitSuccess,
-  }) {
-    return submitSuccess();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            List<WoFormInputError> errors)?
-        inProgress,
-    TResult? Function()? submitting,
-    TResult? Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Object? error,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            StackTrace? stackTrace)?
-        submitError,
-    TResult? Function()? submitSuccess,
-  }) {
-    return submitSuccess?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            List<WoFormInputError> errors)?
-        inProgress,
-    TResult Function()? submitting,
-    TResult Function(
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            Object? error,
-            @JsonKey(includeToJson: false, includeFromJson: false)
-            StackTrace? stackTrace)?
-        submitError,
-    TResult Function()? submitSuccess,
-    required TResult orElse(),
-  }) {
-    if (submitSuccess != null) {
-      return submitSuccess();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(InitialStatus value) initial,
-    required TResult Function(InProgressStatus value) inProgress,
-    required TResult Function(SubmittingStatus value) submitting,
-    required TResult Function(SubmitErrorStatus value) submitError,
-    required TResult Function(SubmitSuccessStatus value) submitSuccess,
-  }) {
-    return submitSuccess(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(InitialStatus value)? initial,
-    TResult? Function(InProgressStatus value)? inProgress,
-    TResult? Function(SubmittingStatus value)? submitting,
-    TResult? Function(SubmitErrorStatus value)? submitError,
-    TResult? Function(SubmitSuccessStatus value)? submitSuccess,
-  }) {
-    return submitSuccess?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(InitialStatus value)? initial,
-    TResult Function(InProgressStatus value)? inProgress,
-    TResult Function(SubmittingStatus value)? submitting,
-    TResult Function(SubmitErrorStatus value)? submitError,
-    TResult Function(SubmitSuccessStatus value)? submitSuccess,
-    required TResult orElse(),
-  }) {
-    if (submitSuccess != null) {
-      return submitSuccess(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SubmitSuccessStatusImplToJson(
-      this,
-    );
+  String toString() {
+    return 'WoFormStatus.submitSuccess()';
   }
 }
 
-abstract class SubmitSuccessStatus implements WoFormStatus {
-  const factory SubmitSuccessStatus() = _$SubmitSuccessStatusImpl;
-
-  factory SubmitSuccessStatus.fromJson(Map<String, dynamic> json) =
-      _$SubmitSuccessStatusImpl.fromJson;
-}
+// dart format on

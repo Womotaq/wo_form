@@ -54,7 +54,8 @@ class DynamicInputsNodeWidget extends StatelessWidget {
             onPressed: data.onValueChanged == null
                 ? null
                 : () {
-                    Focus.of(context).unfocus();
+                    // Maybe this line is outdated 😜
+                    Focus.maybeOf(context)?.unfocus();
                     onAddChoice(data.input.templates.first.getChild());
                   },
             icon: const Icon(Icons.add),

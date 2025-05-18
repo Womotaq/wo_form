@@ -6,9 +6,9 @@ part of 'wo_form_node.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$DynamicInputTemplateImpl _$$DynamicInputTemplateImplFromJson(
+_DynamicInputTemplate _$DynamicInputTemplateFromJson(
         Map<String, dynamic> json) =>
-    _$DynamicInputTemplateImpl(
+    _DynamicInputTemplate(
       child: _$JsonConverterFromJson<Map<String, dynamic>, WoFormNodeMixin?>(
           json['child'], const InputNullableConverter().fromJson),
       uiSettings: json['uiSettings'] == null
@@ -17,8 +17,8 @@ _$DynamicInputTemplateImpl _$$DynamicInputTemplateImplFromJson(
               json['uiSettings'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$DynamicInputTemplateImplToJson(
-        _$DynamicInputTemplateImpl instance) =>
+Map<String, dynamic> _$DynamicInputTemplateToJson(
+        _DynamicInputTemplate instance) =>
     <String, dynamic>{
       'child': const InputNullableConverter().toJson(instance.child),
       'uiSettings': DynamicInputUiSettings.staticToJson(instance.uiSettings),
@@ -30,9 +30,8 @@ Value? _$JsonConverterFromJson<Json, Value>(
 ) =>
     json == null ? null : fromJson(json as Json);
 
-_$ConditionnalNodeImpl _$$ConditionnalNodeImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ConditionnalNodeImpl(
+ConditionnalNode _$ConditionnalNodeFromJson(Map<String, dynamic> json) =>
+    ConditionnalNode(
       id: json['id'] as String,
       condition: Condition.fromJson(json['condition'] as Map<String, dynamic>),
       child: const InputConverter()
@@ -42,8 +41,7 @@ _$ConditionnalNodeImpl _$$ConditionnalNodeImplFromJson(
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$ConditionnalNodeImplToJson(
-        _$ConditionnalNodeImpl instance) =>
+Map<String, dynamic> _$ConditionnalNodeToJson(ConditionnalNode instance) =>
     <String, dynamic>{
       'id': instance.id,
       'condition': Condition.staticToJson(instance.condition),
@@ -52,9 +50,8 @@ Map<String, dynamic> _$$ConditionnalNodeImplToJson(
       'runtimeType': instance.$type,
     };
 
-_$DynamicInputsNodeImpl _$$DynamicInputsNodeImplFromJson(
-        Map<String, dynamic> json) =>
-    _$DynamicInputsNodeImpl(
+DynamicInputsNode _$DynamicInputsNodeFromJson(Map<String, dynamic> json) =>
+    DynamicInputsNode(
       id: json['id'] as String,
       templates: json['templates'] == null
           ? const []
@@ -74,8 +71,7 @@ _$DynamicInputsNodeImpl _$$DynamicInputsNodeImplFromJson(
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$DynamicInputsNodeImplToJson(
-        _$DynamicInputsNodeImpl instance) =>
+Map<String, dynamic> _$DynamicInputsNodeToJson(DynamicInputsNode instance) =>
     <String, dynamic>{
       'id': instance.id,
       'templates':
@@ -95,8 +91,7 @@ Json? _$JsonConverterToJson<Json, Value>(
 ) =>
     value == null ? null : toJson(value);
 
-_$InputsNodeImpl _$$InputsNodeImplFromJson(Map<String, dynamic> json) =>
-    _$InputsNodeImpl(
+InputsNode _$InputsNodeFromJson(Map<String, dynamic> json) => InputsNode(
       id: json['id'] as String,
       children: json['children'] == null
           ? const []
@@ -112,7 +107,7 @@ _$InputsNodeImpl _$$InputsNodeImplFromJson(Map<String, dynamic> json) =>
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$InputsNodeImplToJson(_$InputsNodeImpl instance) =>
+Map<String, dynamic> _$InputsNodeToJson(InputsNode instance) =>
     <String, dynamic>{
       'id': instance.id,
       'children': const InputsListConverter().toJson(instance.children),
@@ -121,31 +116,27 @@ Map<String, dynamic> _$$InputsNodeImplToJson(_$InputsNodeImpl instance) =>
       'runtimeType': instance.$type,
     };
 
-_$PathBuilderNodeImpl _$$PathBuilderNodeImplFromJson(
-        Map<String, dynamic> json) =>
-    _$PathBuilderNodeImpl(
+PathBuilderNode _$PathBuilderNodeFromJson(Map<String, dynamic> json) =>
+    PathBuilderNode(
       id: json['id'] as String,
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$PathBuilderNodeImplToJson(
-        _$PathBuilderNodeImpl instance) =>
+Map<String, dynamic> _$PathBuilderNodeToJson(PathBuilderNode instance) =>
     <String, dynamic>{
       'id': instance.id,
       'runtimeType': instance.$type,
     };
 
-_$ValueBuilderNodeImpl _$$ValueBuilderNodeImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ValueBuilderNodeImpl(
+ValueBuilderNode _$ValueBuilderNodeFromJson(Map<String, dynamic> json) =>
+    ValueBuilderNode(
       id: json['id'] as String,
       path: json['path'] as String,
       initialValue: json['initialValue'],
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$ValueBuilderNodeImplToJson(
-        _$ValueBuilderNodeImpl instance) =>
+Map<String, dynamic> _$ValueBuilderNodeToJson(ValueBuilderNode instance) =>
     <String, dynamic>{
       'id': instance.id,
       'path': instance.path,
@@ -153,17 +144,15 @@ Map<String, dynamic> _$$ValueBuilderNodeImplToJson(
       'runtimeType': instance.$type,
     };
 
-_$ValuesBuilderNodeImpl _$$ValuesBuilderNodeImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ValuesBuilderNodeImpl(
+ValuesBuilderNode _$ValuesBuilderNodeFromJson(Map<String, dynamic> json) =>
+    ValuesBuilderNode(
       id: json['id'] as String,
       paths: (json['paths'] as List<dynamic>).map((e) => e as String).toList(),
       initialValues: json['initialValues'] as Map<String, dynamic>?,
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$ValuesBuilderNodeImplToJson(
-        _$ValuesBuilderNodeImpl instance) =>
+Map<String, dynamic> _$ValuesBuilderNodeToJson(ValuesBuilderNode instance) =>
     <String, dynamic>{
       'id': instance.id,
       'paths': instance.paths,
@@ -171,36 +160,32 @@ Map<String, dynamic> _$$ValuesBuilderNodeImplToJson(
       'runtimeType': instance.$type,
     };
 
-_$ValueListenerNodeImpl _$$ValueListenerNodeImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ValueListenerNodeImpl(
+ValueListenerNode _$ValueListenerNodeFromJson(Map<String, dynamic> json) =>
+    ValueListenerNode(
       path: json['path'] as String,
       id: json['id'] as String? ?? 'ValueListenerNode',
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$ValueListenerNodeImplToJson(
-        _$ValueListenerNodeImpl instance) =>
+Map<String, dynamic> _$ValueListenerNodeToJson(ValueListenerNode instance) =>
     <String, dynamic>{
       'path': instance.path,
       'id': instance.id,
       'runtimeType': instance.$type,
     };
 
-_$WidgetNodeImpl _$$WidgetNodeImplFromJson(Map<String, dynamic> json) =>
-    _$WidgetNodeImpl(
+WidgetNode _$WidgetNodeFromJson(Map<String, dynamic> json) => WidgetNode(
       id: json['id'] as String? ?? 'WidgetNode',
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$WidgetNodeImplToJson(_$WidgetNodeImpl instance) =>
+Map<String, dynamic> _$WidgetNodeToJson(WidgetNode instance) =>
     <String, dynamic>{
       'id': instance.id,
       'runtimeType': instance.$type,
     };
 
-_$RootNodeImpl _$$RootNodeImplFromJson(Map<String, dynamic> json) =>
-    _$RootNodeImpl(
+_RootNode _$RootNodeFromJson(Map<String, dynamic> json) => _RootNode(
       id: json['id'] as String? ?? '#',
       children: json['children'] == null
           ? const []
@@ -215,8 +200,7 @@ _$RootNodeImpl _$$RootNodeImplFromJson(Map<String, dynamic> json) =>
               json['exportSettings'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$RootNodeImplToJson(_$RootNodeImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$RootNodeToJson(_RootNode instance) => <String, dynamic>{
       'id': instance.id,
       'children': const InputsListConverter().toJson(instance.children),
       'uiSettings': WoFormUiSettings.staticToJson(instance.uiSettings),

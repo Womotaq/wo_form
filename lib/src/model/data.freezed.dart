@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,123 +10,27 @@ part of 'data.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$WoFormHeaderData {
-  String? get labelText => throw _privateConstructorUsedError;
-  String? get helperText => throw _privateConstructorUsedError;
+  String? get labelText;
+  String? get helperText;
 
   /// Create a copy of WoFormHeaderData
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $WoFormHeaderDataCopyWith<WoFormHeaderData> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $WoFormHeaderDataCopyWith<$Res> {
-  factory $WoFormHeaderDataCopyWith(
-          WoFormHeaderData value, $Res Function(WoFormHeaderData) then) =
-      _$WoFormHeaderDataCopyWithImpl<$Res, WoFormHeaderData>;
-  @useResult
-  $Res call({String? labelText, String? helperText});
-}
-
-/// @nodoc
-class _$WoFormHeaderDataCopyWithImpl<$Res, $Val extends WoFormHeaderData>
-    implements $WoFormHeaderDataCopyWith<$Res> {
-  _$WoFormHeaderDataCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of WoFormHeaderData
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? labelText = freezed,
-    Object? helperText = freezed,
-  }) {
-    return _then(_value.copyWith(
-      labelText: freezed == labelText
-          ? _value.labelText
-          : labelText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      helperText: freezed == helperText
-          ? _value.helperText
-          : helperText // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$WoFormHeaderDataImplCopyWith<$Res>
-    implements $WoFormHeaderDataCopyWith<$Res> {
-  factory _$$WoFormHeaderDataImplCopyWith(_$WoFormHeaderDataImpl value,
-          $Res Function(_$WoFormHeaderDataImpl) then) =
-      __$$WoFormHeaderDataImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String? labelText, String? helperText});
-}
-
-/// @nodoc
-class __$$WoFormHeaderDataImplCopyWithImpl<$Res>
-    extends _$WoFormHeaderDataCopyWithImpl<$Res, _$WoFormHeaderDataImpl>
-    implements _$$WoFormHeaderDataImplCopyWith<$Res> {
-  __$$WoFormHeaderDataImplCopyWithImpl(_$WoFormHeaderDataImpl _value,
-      $Res Function(_$WoFormHeaderDataImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of WoFormHeaderData
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? labelText = freezed,
-    Object? helperText = freezed,
-  }) {
-    return _then(_$WoFormHeaderDataImpl(
-      labelText: freezed == labelText
-          ? _value.labelText
-          : labelText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      helperText: freezed == helperText
-          ? _value.helperText
-          : helperText // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$WoFormHeaderDataImpl implements _WoFormHeaderData {
-  const _$WoFormHeaderDataImpl({this.labelText, this.helperText});
-
-  @override
-  final String? labelText;
-  @override
-  final String? helperText;
-
-  @override
-  String toString() {
-    return 'WoFormHeaderData(labelText: $labelText, helperText: $helperText)';
-  }
+      _$WoFormHeaderDataCopyWithImpl<WoFormHeaderData>(
+          this as WoFormHeaderData, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$WoFormHeaderDataImpl &&
+            other is WoFormHeaderData &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
             (identical(other.helperText, helperText) ||
@@ -135,132 +40,180 @@ class _$WoFormHeaderDataImpl implements _WoFormHeaderData {
   @override
   int get hashCode => Object.hash(runtimeType, labelText, helperText);
 
-  /// Create a copy of WoFormHeaderData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$WoFormHeaderDataImplCopyWith<_$WoFormHeaderDataImpl> get copyWith =>
-      __$$WoFormHeaderDataImplCopyWithImpl<_$WoFormHeaderDataImpl>(
-          this, _$identity);
-}
-
-abstract class _WoFormHeaderData implements WoFormHeaderData {
-  const factory _WoFormHeaderData(
-      {final String? labelText,
-      final String? helperText}) = _$WoFormHeaderDataImpl;
-
-  @override
-  String? get labelText;
-  @override
-  String? get helperText;
-
-  /// Create a copy of WoFormHeaderData
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$WoFormHeaderDataImplCopyWith<_$WoFormHeaderDataImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-mixin _$WoFormInputHeaderData {
-  String get path => throw _privateConstructorUsedError;
-  String? get labelText => throw _privateConstructorUsedError;
-  String? get helperText => throw _privateConstructorUsedError;
-  String? get errorText => throw _privateConstructorUsedError;
-  Widget? get trailing => throw _privateConstructorUsedError;
-  VoidCallback? get onTap => throw _privateConstructorUsedError;
-  bool get shrinkWrap => throw _privateConstructorUsedError;
-
-  /// Create a copy of WoFormInputHeaderData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $WoFormInputHeaderDataCopyWith<WoFormInputHeaderData> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $WoFormInputHeaderDataCopyWith<$Res> {
-  factory $WoFormInputHeaderDataCopyWith(WoFormInputHeaderData value,
-          $Res Function(WoFormInputHeaderData) then) =
-      _$WoFormInputHeaderDataCopyWithImpl<$Res, WoFormInputHeaderData>;
-  @useResult
-  $Res call(
-      {String path,
-      String? labelText,
-      String? helperText,
-      String? errorText,
-      Widget? trailing,
-      VoidCallback? onTap,
-      bool shrinkWrap});
-}
-
-/// @nodoc
-class _$WoFormInputHeaderDataCopyWithImpl<$Res,
-        $Val extends WoFormInputHeaderData>
-    implements $WoFormInputHeaderDataCopyWith<$Res> {
-  _$WoFormInputHeaderDataCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of WoFormInputHeaderData
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? path = null,
-    Object? labelText = freezed,
-    Object? helperText = freezed,
-    Object? errorText = freezed,
-    Object? trailing = freezed,
-    Object? onTap = freezed,
-    Object? shrinkWrap = null,
-  }) {
-    return _then(_value.copyWith(
-      path: null == path
-          ? _value.path
-          : path // ignore: cast_nullable_to_non_nullable
-              as String,
-      labelText: freezed == labelText
-          ? _value.labelText
-          : labelText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      helperText: freezed == helperText
-          ? _value.helperText
-          : helperText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      errorText: freezed == errorText
-          ? _value.errorText
-          : errorText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      trailing: freezed == trailing
-          ? _value.trailing
-          : trailing // ignore: cast_nullable_to_non_nullable
-              as Widget?,
-      onTap: freezed == onTap
-          ? _value.onTap
-          : onTap // ignore: cast_nullable_to_non_nullable
-              as VoidCallback?,
-      shrinkWrap: null == shrinkWrap
-          ? _value.shrinkWrap
-          : shrinkWrap // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+  String toString() {
+    return 'WoFormHeaderData(labelText: $labelText, helperText: $helperText)';
   }
 }
 
 /// @nodoc
-abstract class _$$WoFormInputHeaderDataImplCopyWith<$Res>
-    implements $WoFormInputHeaderDataCopyWith<$Res> {
-  factory _$$WoFormInputHeaderDataImplCopyWith(
-          _$WoFormInputHeaderDataImpl value,
-          $Res Function(_$WoFormInputHeaderDataImpl) then) =
-      __$$WoFormInputHeaderDataImplCopyWithImpl<$Res>;
+abstract mixin class $WoFormHeaderDataCopyWith<$Res> {
+  factory $WoFormHeaderDataCopyWith(
+          WoFormHeaderData value, $Res Function(WoFormHeaderData) _then) =
+      _$WoFormHeaderDataCopyWithImpl;
+  @useResult
+  $Res call({String? labelText, String? helperText});
+}
+
+/// @nodoc
+class _$WoFormHeaderDataCopyWithImpl<$Res>
+    implements $WoFormHeaderDataCopyWith<$Res> {
+  _$WoFormHeaderDataCopyWithImpl(this._self, this._then);
+
+  final WoFormHeaderData _self;
+  final $Res Function(WoFormHeaderData) _then;
+
+  /// Create a copy of WoFormHeaderData
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
+  $Res call({
+    Object? labelText = freezed,
+    Object? helperText = freezed,
+  }) {
+    return _then(_self.copyWith(
+      labelText: freezed == labelText
+          ? _self.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _self.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _WoFormHeaderData implements WoFormHeaderData {
+  const _WoFormHeaderData({this.labelText, this.helperText});
+
+  @override
+  final String? labelText;
+  @override
+  final String? helperText;
+
+  /// Create a copy of WoFormHeaderData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$WoFormHeaderDataCopyWith<_WoFormHeaderData> get copyWith =>
+      __$WoFormHeaderDataCopyWithImpl<_WoFormHeaderData>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _WoFormHeaderData &&
+            (identical(other.labelText, labelText) ||
+                other.labelText == labelText) &&
+            (identical(other.helperText, helperText) ||
+                other.helperText == helperText));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, labelText, helperText);
+
+  @override
+  String toString() {
+    return 'WoFormHeaderData(labelText: $labelText, helperText: $helperText)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$WoFormHeaderDataCopyWith<$Res>
+    implements $WoFormHeaderDataCopyWith<$Res> {
+  factory _$WoFormHeaderDataCopyWith(
+          _WoFormHeaderData value, $Res Function(_WoFormHeaderData) _then) =
+      __$WoFormHeaderDataCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String? labelText, String? helperText});
+}
+
+/// @nodoc
+class __$WoFormHeaderDataCopyWithImpl<$Res>
+    implements _$WoFormHeaderDataCopyWith<$Res> {
+  __$WoFormHeaderDataCopyWithImpl(this._self, this._then);
+
+  final _WoFormHeaderData _self;
+  final $Res Function(_WoFormHeaderData) _then;
+
+  /// Create a copy of WoFormHeaderData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? labelText = freezed,
+    Object? helperText = freezed,
+  }) {
+    return _then(_WoFormHeaderData(
+      labelText: freezed == labelText
+          ? _self.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _self.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+mixin _$WoFormInputHeaderData {
+  String get path;
+  String? get labelText;
+  String? get helperText;
+  String? get errorText;
+  Widget? get trailing;
+  VoidCallback? get onTap;
+  bool get shrinkWrap;
+
+  /// Create a copy of WoFormInputHeaderData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $WoFormInputHeaderDataCopyWith<WoFormInputHeaderData> get copyWith =>
+      _$WoFormInputHeaderDataCopyWithImpl<WoFormInputHeaderData>(
+          this as WoFormInputHeaderData, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is WoFormInputHeaderData &&
+            (identical(other.path, path) || other.path == path) &&
+            (identical(other.labelText, labelText) ||
+                other.labelText == labelText) &&
+            (identical(other.helperText, helperText) ||
+                other.helperText == helperText) &&
+            (identical(other.errorText, errorText) ||
+                other.errorText == errorText) &&
+            (identical(other.trailing, trailing) ||
+                other.trailing == trailing) &&
+            (identical(other.onTap, onTap) || other.onTap == onTap) &&
+            (identical(other.shrinkWrap, shrinkWrap) ||
+                other.shrinkWrap == shrinkWrap));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, path, labelText, helperText,
+      errorText, trailing, onTap, shrinkWrap);
+
+  @override
+  String toString() {
+    return 'WoFormInputHeaderData(path: $path, labelText: $labelText, helperText: $helperText, errorText: $errorText, trailing: $trailing, onTap: $onTap, shrinkWrap: $shrinkWrap)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $WoFormInputHeaderDataCopyWith<$Res> {
+  factory $WoFormInputHeaderDataCopyWith(WoFormInputHeaderData value,
+          $Res Function(WoFormInputHeaderData) _then) =
+      _$WoFormInputHeaderDataCopyWithImpl;
   @useResult
   $Res call(
       {String path,
@@ -273,13 +226,12 @@ abstract class _$$WoFormInputHeaderDataImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$WoFormInputHeaderDataImplCopyWithImpl<$Res>
-    extends _$WoFormInputHeaderDataCopyWithImpl<$Res,
-        _$WoFormInputHeaderDataImpl>
-    implements _$$WoFormInputHeaderDataImplCopyWith<$Res> {
-  __$$WoFormInputHeaderDataImplCopyWithImpl(_$WoFormInputHeaderDataImpl _value,
-      $Res Function(_$WoFormInputHeaderDataImpl) _then)
-      : super(_value, _then);
+class _$WoFormInputHeaderDataCopyWithImpl<$Res>
+    implements $WoFormInputHeaderDataCopyWith<$Res> {
+  _$WoFormInputHeaderDataCopyWithImpl(this._self, this._then);
+
+  final WoFormInputHeaderData _self;
+  final $Res Function(WoFormInputHeaderData) _then;
 
   /// Create a copy of WoFormInputHeaderData
   /// with the given fields replaced by the non-null parameter values.
@@ -294,33 +246,33 @@ class __$$WoFormInputHeaderDataImplCopyWithImpl<$Res>
     Object? onTap = freezed,
     Object? shrinkWrap = null,
   }) {
-    return _then(_$WoFormInputHeaderDataImpl(
+    return _then(_self.copyWith(
       path: null == path
-          ? _value.path
+          ? _self.path
           : path // ignore: cast_nullable_to_non_nullable
               as String,
       labelText: freezed == labelText
-          ? _value.labelText
+          ? _self.labelText
           : labelText // ignore: cast_nullable_to_non_nullable
               as String?,
       helperText: freezed == helperText
-          ? _value.helperText
+          ? _self.helperText
           : helperText // ignore: cast_nullable_to_non_nullable
               as String?,
       errorText: freezed == errorText
-          ? _value.errorText
+          ? _self.errorText
           : errorText // ignore: cast_nullable_to_non_nullable
               as String?,
       trailing: freezed == trailing
-          ? _value.trailing
+          ? _self.trailing
           : trailing // ignore: cast_nullable_to_non_nullable
               as Widget?,
       onTap: freezed == onTap
-          ? _value.onTap
+          ? _self.onTap
           : onTap // ignore: cast_nullable_to_non_nullable
               as VoidCallback?,
       shrinkWrap: null == shrinkWrap
-          ? _value.shrinkWrap
+          ? _self.shrinkWrap
           : shrinkWrap // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
@@ -329,8 +281,8 @@ class __$$WoFormInputHeaderDataImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$WoFormInputHeaderDataImpl implements _WoFormInputHeaderData {
-  const _$WoFormInputHeaderDataImpl(
+class _WoFormInputHeaderData implements WoFormInputHeaderData {
+  const _WoFormInputHeaderData(
       {required this.path,
       this.labelText,
       this.helperText,
@@ -355,16 +307,20 @@ class _$WoFormInputHeaderDataImpl implements _WoFormInputHeaderData {
   @JsonKey()
   final bool shrinkWrap;
 
+  /// Create a copy of WoFormInputHeaderData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'WoFormInputHeaderData(path: $path, labelText: $labelText, helperText: $helperText, errorText: $errorText, trailing: $trailing, onTap: $onTap, shrinkWrap: $shrinkWrap)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$WoFormInputHeaderDataCopyWith<_WoFormInputHeaderData> get copyWith =>
+      __$WoFormInputHeaderDataCopyWithImpl<_WoFormInputHeaderData>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$WoFormInputHeaderDataImpl &&
+            other is _WoFormInputHeaderData &&
             (identical(other.path, path) || other.path == path) &&
             (identical(other.labelText, labelText) ||
                 other.labelText == labelText) &&
@@ -383,237 +339,108 @@ class _$WoFormInputHeaderDataImpl implements _WoFormInputHeaderData {
   int get hashCode => Object.hash(runtimeType, path, labelText, helperText,
       errorText, trailing, onTap, shrinkWrap);
 
-  /// Create a copy of WoFormInputHeaderData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$WoFormInputHeaderDataImplCopyWith<_$WoFormInputHeaderDataImpl>
-      get copyWith => __$$WoFormInputHeaderDataImplCopyWithImpl<
-          _$WoFormInputHeaderDataImpl>(this, _$identity);
-}
-
-abstract class _WoFormInputHeaderData implements WoFormInputHeaderData {
-  const factory _WoFormInputHeaderData(
-      {required final String path,
-      final String? labelText,
-      final String? helperText,
-      final String? errorText,
-      final Widget? trailing,
-      final VoidCallback? onTap,
-      final bool shrinkWrap}) = _$WoFormInputHeaderDataImpl;
-
-  @override
-  String get path;
-  @override
-  String? get labelText;
-  @override
-  String? get helperText;
-  @override
-  String? get errorText;
-  @override
-  Widget? get trailing;
-  @override
-  VoidCallback? get onTap;
-  @override
-  bool get shrinkWrap;
-
-  /// Create a copy of WoFormInputHeaderData
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$WoFormInputHeaderDataImplCopyWith<_$WoFormInputHeaderDataImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-mixin _$WoFieldData<I, T, U> {
-  String get path => throw _privateConstructorUsedError;
-  I get input => throw _privateConstructorUsedError;
-  T? get value => throw _privateConstructorUsedError;
-  String? get errorText => throw _privateConstructorUsedError;
-  U get uiSettings => throw _privateConstructorUsedError;
-
-  /// Null means locked field
-  void Function(T?, {UpdateStatus updateStatus})? get onValueChanged =>
-      throw _privateConstructorUsedError;
-
-  /// Create a copy of WoFieldData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $WoFieldDataCopyWith<I, T, U, WoFieldData<I, T, U>> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $WoFieldDataCopyWith<I, T, U, $Res> {
-  factory $WoFieldDataCopyWith(WoFieldData<I, T, U> value,
-          $Res Function(WoFieldData<I, T, U>) then) =
-      _$WoFieldDataCopyWithImpl<I, T, U, $Res, WoFieldData<I, T, U>>;
-  @useResult
-  $Res call(
-      {String path,
-      I input,
-      T? value,
-      String? errorText,
-      U uiSettings,
-      void Function(T?, {UpdateStatus updateStatus})? onValueChanged});
-}
-
-/// @nodoc
-class _$WoFieldDataCopyWithImpl<I, T, U, $Res,
-        $Val extends WoFieldData<I, T, U>>
-    implements $WoFieldDataCopyWith<I, T, U, $Res> {
-  _$WoFieldDataCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of WoFieldData
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? path = null,
-    Object? input = freezed,
-    Object? value = freezed,
-    Object? errorText = freezed,
-    Object? uiSettings = freezed,
-    Object? onValueChanged = freezed,
-  }) {
-    return _then(_value.copyWith(
-      path: null == path
-          ? _value.path
-          : path // ignore: cast_nullable_to_non_nullable
-              as String,
-      input: freezed == input
-          ? _value.input
-          : input // ignore: cast_nullable_to_non_nullable
-              as I,
-      value: freezed == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as T?,
-      errorText: freezed == errorText
-          ? _value.errorText
-          : errorText // ignore: cast_nullable_to_non_nullable
-              as String?,
-      uiSettings: freezed == uiSettings
-          ? _value.uiSettings
-          : uiSettings // ignore: cast_nullable_to_non_nullable
-              as U,
-      onValueChanged: freezed == onValueChanged
-          ? _value.onValueChanged
-          : onValueChanged // ignore: cast_nullable_to_non_nullable
-              as void Function(T?, {UpdateStatus updateStatus})?,
-    ) as $Val);
+  String toString() {
+    return 'WoFormInputHeaderData(path: $path, labelText: $labelText, helperText: $helperText, errorText: $errorText, trailing: $trailing, onTap: $onTap, shrinkWrap: $shrinkWrap)';
   }
 }
 
 /// @nodoc
-abstract class _$$WoFieldDataImplCopyWith<I, T, U, $Res>
-    implements $WoFieldDataCopyWith<I, T, U, $Res> {
-  factory _$$WoFieldDataImplCopyWith(_$WoFieldDataImpl<I, T, U> value,
-          $Res Function(_$WoFieldDataImpl<I, T, U>) then) =
-      __$$WoFieldDataImplCopyWithImpl<I, T, U, $Res>;
+abstract mixin class _$WoFormInputHeaderDataCopyWith<$Res>
+    implements $WoFormInputHeaderDataCopyWith<$Res> {
+  factory _$WoFormInputHeaderDataCopyWith(_WoFormInputHeaderData value,
+          $Res Function(_WoFormInputHeaderData) _then) =
+      __$WoFormInputHeaderDataCopyWithImpl;
   @override
   @useResult
   $Res call(
       {String path,
-      I input,
-      T? value,
+      String? labelText,
+      String? helperText,
       String? errorText,
-      U uiSettings,
-      void Function(T?, {UpdateStatus updateStatus})? onValueChanged});
+      Widget? trailing,
+      VoidCallback? onTap,
+      bool shrinkWrap});
 }
 
 /// @nodoc
-class __$$WoFieldDataImplCopyWithImpl<I, T, U, $Res>
-    extends _$WoFieldDataCopyWithImpl<I, T, U, $Res, _$WoFieldDataImpl<I, T, U>>
-    implements _$$WoFieldDataImplCopyWith<I, T, U, $Res> {
-  __$$WoFieldDataImplCopyWithImpl(_$WoFieldDataImpl<I, T, U> _value,
-      $Res Function(_$WoFieldDataImpl<I, T, U>) _then)
-      : super(_value, _then);
+class __$WoFormInputHeaderDataCopyWithImpl<$Res>
+    implements _$WoFormInputHeaderDataCopyWith<$Res> {
+  __$WoFormInputHeaderDataCopyWithImpl(this._self, this._then);
 
-  /// Create a copy of WoFieldData
+  final _WoFormInputHeaderData _self;
+  final $Res Function(_WoFormInputHeaderData) _then;
+
+  /// Create a copy of WoFormInputHeaderData
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
   @override
+  @pragma('vm:prefer-inline')
   $Res call({
     Object? path = null,
-    Object? input = freezed,
-    Object? value = freezed,
+    Object? labelText = freezed,
+    Object? helperText = freezed,
     Object? errorText = freezed,
-    Object? uiSettings = freezed,
-    Object? onValueChanged = freezed,
+    Object? trailing = freezed,
+    Object? onTap = freezed,
+    Object? shrinkWrap = null,
   }) {
-    return _then(_$WoFieldDataImpl<I, T, U>(
+    return _then(_WoFormInputHeaderData(
       path: null == path
-          ? _value.path
+          ? _self.path
           : path // ignore: cast_nullable_to_non_nullable
               as String,
-      input: freezed == input
-          ? _value.input
-          : input // ignore: cast_nullable_to_non_nullable
-              as I,
-      value: freezed == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as T?,
+      labelText: freezed == labelText
+          ? _self.labelText
+          : labelText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      helperText: freezed == helperText
+          ? _self.helperText
+          : helperText // ignore: cast_nullable_to_non_nullable
+              as String?,
       errorText: freezed == errorText
-          ? _value.errorText
+          ? _self.errorText
           : errorText // ignore: cast_nullable_to_non_nullable
               as String?,
-      uiSettings: freezed == uiSettings
-          ? _value.uiSettings
-          : uiSettings // ignore: cast_nullable_to_non_nullable
-              as U,
-      onValueChanged: freezed == onValueChanged
-          ? _value.onValueChanged
-          : onValueChanged // ignore: cast_nullable_to_non_nullable
-              as void Function(T?, {UpdateStatus updateStatus})?,
+      trailing: freezed == trailing
+          ? _self.trailing
+          : trailing // ignore: cast_nullable_to_non_nullable
+              as Widget?,
+      onTap: freezed == onTap
+          ? _self.onTap
+          : onTap // ignore: cast_nullable_to_non_nullable
+              as VoidCallback?,
+      shrinkWrap: null == shrinkWrap
+          ? _self.shrinkWrap
+          : shrinkWrap // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
-
-class _$WoFieldDataImpl<I, T, U> implements _WoFieldData<I, T, U> {
-  const _$WoFieldDataImpl(
-      {required this.path,
-      required this.input,
-      required this.value,
-      required this.errorText,
-      required this.uiSettings,
-      required this.onValueChanged});
-
-  @override
-  final String path;
-  @override
-  final I input;
-  @override
-  final T? value;
-  @override
-  final String? errorText;
-  @override
-  final U uiSettings;
+mixin _$WoFieldData<I, T, U> {
+  String get path;
+  I get input;
+  T? get value;
+  String? get errorText;
+  U get uiSettings;
 
   /// Null means locked field
-  @override
-  final void Function(T?, {UpdateStatus updateStatus})? onValueChanged;
+  void Function(T? value, {UpdateStatus updateStatus})? get onValueChanged;
 
-  @override
-  String toString() {
-    return 'WoFieldData<$I, $T, $U>(path: $path, input: $input, value: $value, errorText: $errorText, uiSettings: $uiSettings, onValueChanged: $onValueChanged)';
-  }
+  /// Create a copy of WoFieldData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $WoFieldDataCopyWith<I, T, U, WoFieldData<I, T, U>> get copyWith =>
+      _$WoFieldDataCopyWithImpl<I, T, U, WoFieldData<I, T, U>>(
+          this as WoFieldData<I, T, U>, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$WoFieldDataImpl<I, T, U> &&
+            other is WoFieldData<I, T, U> &&
             (identical(other.path, path) || other.path == path) &&
             const DeepCollectionEquality().equals(other.input, input) &&
             const DeepCollectionEquality().equals(other.value, value) &&
@@ -635,132 +462,253 @@ class _$WoFieldDataImpl<I, T, U> implements _WoFieldData<I, T, U> {
       const DeepCollectionEquality().hash(uiSettings),
       onValueChanged);
 
-  /// Create a copy of WoFieldData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$WoFieldDataImplCopyWith<I, T, U, _$WoFieldDataImpl<I, T, U>>
-      get copyWith =>
-          __$$WoFieldDataImplCopyWithImpl<I, T, U, _$WoFieldDataImpl<I, T, U>>(
-              this, _$identity);
-}
-
-abstract class _WoFieldData<I, T, U> implements WoFieldData<I, T, U> {
-  const factory _WoFieldData(
-      {required final String path,
-      required final I input,
-      required final T? value,
-      required final String? errorText,
-      required final U uiSettings,
-      required final void Function(T?, {UpdateStatus updateStatus})?
-          onValueChanged}) = _$WoFieldDataImpl<I, T, U>;
-
-  @override
-  String get path;
-  @override
-  I get input;
-  @override
-  T? get value;
-  @override
-  String? get errorText;
-  @override
-  U get uiSettings;
-
-  /// Null means locked field
-  @override
-  void Function(T?, {UpdateStatus updateStatus})? get onValueChanged;
-
-  /// Create a copy of WoFieldData
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$WoFieldDataImplCopyWith<I, T, U, _$WoFieldDataImpl<I, T, U>>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-mixin _$SubmitButtonData {
-  String? get text => throw _privateConstructorUsedError;
-  VoidCallback? get onPressed => throw _privateConstructorUsedError;
-  SubmitButtonPosition get position => throw _privateConstructorUsedError;
-  int get pageIndex => throw _privateConstructorUsedError;
-  IconData? get icon => throw _privateConstructorUsedError;
-
-  /// Create a copy of SubmitButtonData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $SubmitButtonDataCopyWith<SubmitButtonData> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $SubmitButtonDataCopyWith<$Res> {
-  factory $SubmitButtonDataCopyWith(
-          SubmitButtonData value, $Res Function(SubmitButtonData) then) =
-      _$SubmitButtonDataCopyWithImpl<$Res, SubmitButtonData>;
-  @useResult
-  $Res call(
-      {String? text,
-      VoidCallback? onPressed,
-      SubmitButtonPosition position,
-      int pageIndex,
-      IconData? icon});
-}
-
-/// @nodoc
-class _$SubmitButtonDataCopyWithImpl<$Res, $Val extends SubmitButtonData>
-    implements $SubmitButtonDataCopyWith<$Res> {
-  _$SubmitButtonDataCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of SubmitButtonData
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? text = freezed,
-    Object? onPressed = freezed,
-    Object? position = null,
-    Object? pageIndex = null,
-    Object? icon = freezed,
-  }) {
-    return _then(_value.copyWith(
-      text: freezed == text
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
-              as String?,
-      onPressed: freezed == onPressed
-          ? _value.onPressed
-          : onPressed // ignore: cast_nullable_to_non_nullable
-              as VoidCallback?,
-      position: null == position
-          ? _value.position
-          : position // ignore: cast_nullable_to_non_nullable
-              as SubmitButtonPosition,
-      pageIndex: null == pageIndex
-          ? _value.pageIndex
-          : pageIndex // ignore: cast_nullable_to_non_nullable
-              as int,
-      icon: freezed == icon
-          ? _value.icon
-          : icon // ignore: cast_nullable_to_non_nullable
-              as IconData?,
-    ) as $Val);
+  String toString() {
+    return 'WoFieldData<$I, $T, $U>(path: $path, input: $input, value: $value, errorText: $errorText, uiSettings: $uiSettings, onValueChanged: $onValueChanged)';
   }
 }
 
 /// @nodoc
-abstract class _$$SubmitButtonDataImplCopyWith<$Res>
-    implements $SubmitButtonDataCopyWith<$Res> {
-  factory _$$SubmitButtonDataImplCopyWith(_$SubmitButtonDataImpl value,
-          $Res Function(_$SubmitButtonDataImpl) then) =
-      __$$SubmitButtonDataImplCopyWithImpl<$Res>;
+abstract mixin class $WoFieldDataCopyWith<I, T, U, $Res> {
+  factory $WoFieldDataCopyWith(WoFieldData<I, T, U> value,
+      $Res Function(WoFieldData<I, T, U>) _then) = _$WoFieldDataCopyWithImpl;
+  @useResult
+  $Res call(
+      {String path,
+      I input,
+      T? value,
+      String? errorText,
+      U uiSettings,
+      void Function(T? value, {UpdateStatus updateStatus})? onValueChanged});
+}
+
+/// @nodoc
+class _$WoFieldDataCopyWithImpl<I, T, U, $Res>
+    implements $WoFieldDataCopyWith<I, T, U, $Res> {
+  _$WoFieldDataCopyWithImpl(this._self, this._then);
+
+  final WoFieldData<I, T, U> _self;
+  final $Res Function(WoFieldData<I, T, U>) _then;
+
+  /// Create a copy of WoFieldData
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
+  $Res call({
+    Object? path = null,
+    Object? input = freezed,
+    Object? value = freezed,
+    Object? errorText = freezed,
+    Object? uiSettings = freezed,
+    Object? onValueChanged = freezed,
+  }) {
+    return _then(_self.copyWith(
+      path: null == path
+          ? _self.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String,
+      input: freezed == input
+          ? _self.input
+          : input // ignore: cast_nullable_to_non_nullable
+              as I,
+      value: freezed == value
+          ? _self.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as T?,
+      errorText: freezed == errorText
+          ? _self.errorText
+          : errorText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      uiSettings: freezed == uiSettings
+          ? _self.uiSettings
+          : uiSettings // ignore: cast_nullable_to_non_nullable
+              as U,
+      onValueChanged: freezed == onValueChanged
+          ? _self.onValueChanged
+          : onValueChanged // ignore: cast_nullable_to_non_nullable
+              as void Function(T? value, {UpdateStatus updateStatus})?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _WoFieldData<I, T, U> implements WoFieldData<I, T, U> {
+  const _WoFieldData(
+      {required this.path,
+      required this.input,
+      required this.value,
+      required this.errorText,
+      required this.uiSettings,
+      required this.onValueChanged});
+
+  @override
+  final String path;
+  @override
+  final I input;
+  @override
+  final T? value;
+  @override
+  final String? errorText;
+  @override
+  final U uiSettings;
+
+  /// Null means locked field
+  @override
+  final void Function(T? value, {UpdateStatus updateStatus})? onValueChanged;
+
+  /// Create a copy of WoFieldData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$WoFieldDataCopyWith<I, T, U, _WoFieldData<I, T, U>> get copyWith =>
+      __$WoFieldDataCopyWithImpl<I, T, U, _WoFieldData<I, T, U>>(
+          this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _WoFieldData<I, T, U> &&
+            (identical(other.path, path) || other.path == path) &&
+            const DeepCollectionEquality().equals(other.input, input) &&
+            const DeepCollectionEquality().equals(other.value, value) &&
+            (identical(other.errorText, errorText) ||
+                other.errorText == errorText) &&
+            const DeepCollectionEquality()
+                .equals(other.uiSettings, uiSettings) &&
+            (identical(other.onValueChanged, onValueChanged) ||
+                other.onValueChanged == onValueChanged));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      path,
+      const DeepCollectionEquality().hash(input),
+      const DeepCollectionEquality().hash(value),
+      errorText,
+      const DeepCollectionEquality().hash(uiSettings),
+      onValueChanged);
+
+  @override
+  String toString() {
+    return 'WoFieldData<$I, $T, $U>(path: $path, input: $input, value: $value, errorText: $errorText, uiSettings: $uiSettings, onValueChanged: $onValueChanged)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$WoFieldDataCopyWith<I, T, U, $Res>
+    implements $WoFieldDataCopyWith<I, T, U, $Res> {
+  factory _$WoFieldDataCopyWith(_WoFieldData<I, T, U> value,
+      $Res Function(_WoFieldData<I, T, U>) _then) = __$WoFieldDataCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String path,
+      I input,
+      T? value,
+      String? errorText,
+      U uiSettings,
+      void Function(T? value, {UpdateStatus updateStatus})? onValueChanged});
+}
+
+/// @nodoc
+class __$WoFieldDataCopyWithImpl<I, T, U, $Res>
+    implements _$WoFieldDataCopyWith<I, T, U, $Res> {
+  __$WoFieldDataCopyWithImpl(this._self, this._then);
+
+  final _WoFieldData<I, T, U> _self;
+  final $Res Function(_WoFieldData<I, T, U>) _then;
+
+  /// Create a copy of WoFieldData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? path = null,
+    Object? input = freezed,
+    Object? value = freezed,
+    Object? errorText = freezed,
+    Object? uiSettings = freezed,
+    Object? onValueChanged = freezed,
+  }) {
+    return _then(_WoFieldData<I, T, U>(
+      path: null == path
+          ? _self.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String,
+      input: freezed == input
+          ? _self.input
+          : input // ignore: cast_nullable_to_non_nullable
+              as I,
+      value: freezed == value
+          ? _self.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as T?,
+      errorText: freezed == errorText
+          ? _self.errorText
+          : errorText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      uiSettings: freezed == uiSettings
+          ? _self.uiSettings
+          : uiSettings // ignore: cast_nullable_to_non_nullable
+              as U,
+      onValueChanged: freezed == onValueChanged
+          ? _self.onValueChanged
+          : onValueChanged // ignore: cast_nullable_to_non_nullable
+              as void Function(T? value, {UpdateStatus updateStatus})?,
+    ));
+  }
+}
+
+/// @nodoc
+mixin _$SubmitButtonData {
+  String? get text;
+  VoidCallback? get onPressed;
+  SubmitButtonPosition get position;
+  int get pageIndex;
+  IconData? get icon;
+
+  /// Create a copy of SubmitButtonData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $SubmitButtonDataCopyWith<SubmitButtonData> get copyWith =>
+      _$SubmitButtonDataCopyWithImpl<SubmitButtonData>(
+          this as SubmitButtonData, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is SubmitButtonData &&
+            (identical(other.text, text) || other.text == text) &&
+            (identical(other.onPressed, onPressed) ||
+                other.onPressed == onPressed) &&
+            (identical(other.position, position) ||
+                other.position == position) &&
+            (identical(other.pageIndex, pageIndex) ||
+                other.pageIndex == pageIndex) &&
+            (identical(other.icon, icon) || other.icon == icon));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, text, onPressed, position, pageIndex, icon);
+
+  @override
+  String toString() {
+    return 'SubmitButtonData(text: $text, onPressed: $onPressed, position: $position, pageIndex: $pageIndex, icon: $icon)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $SubmitButtonDataCopyWith<$Res> {
+  factory $SubmitButtonDataCopyWith(
+          SubmitButtonData value, $Res Function(SubmitButtonData) _then) =
+      _$SubmitButtonDataCopyWithImpl;
   @useResult
   $Res call(
       {String? text,
@@ -771,12 +719,12 @@ abstract class _$$SubmitButtonDataImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$SubmitButtonDataImplCopyWithImpl<$Res>
-    extends _$SubmitButtonDataCopyWithImpl<$Res, _$SubmitButtonDataImpl>
-    implements _$$SubmitButtonDataImplCopyWith<$Res> {
-  __$$SubmitButtonDataImplCopyWithImpl(_$SubmitButtonDataImpl _value,
-      $Res Function(_$SubmitButtonDataImpl) _then)
-      : super(_value, _then);
+class _$SubmitButtonDataCopyWithImpl<$Res>
+    implements $SubmitButtonDataCopyWith<$Res> {
+  _$SubmitButtonDataCopyWithImpl(this._self, this._then);
+
+  final SubmitButtonData _self;
+  final $Res Function(SubmitButtonData) _then;
 
   /// Create a copy of SubmitButtonData
   /// with the given fields replaced by the non-null parameter values.
@@ -789,25 +737,25 @@ class __$$SubmitButtonDataImplCopyWithImpl<$Res>
     Object? pageIndex = null,
     Object? icon = freezed,
   }) {
-    return _then(_$SubmitButtonDataImpl(
+    return _then(_self.copyWith(
       text: freezed == text
-          ? _value.text
+          ? _self.text
           : text // ignore: cast_nullable_to_non_nullable
               as String?,
       onPressed: freezed == onPressed
-          ? _value.onPressed
+          ? _self.onPressed
           : onPressed // ignore: cast_nullable_to_non_nullable
               as VoidCallback?,
       position: null == position
-          ? _value.position
+          ? _self.position
           : position // ignore: cast_nullable_to_non_nullable
               as SubmitButtonPosition,
       pageIndex: null == pageIndex
-          ? _value.pageIndex
+          ? _self.pageIndex
           : pageIndex // ignore: cast_nullable_to_non_nullable
               as int,
       icon: freezed == icon
-          ? _value.icon
+          ? _self.icon
           : icon // ignore: cast_nullable_to_non_nullable
               as IconData?,
     ));
@@ -816,8 +764,8 @@ class __$$SubmitButtonDataImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SubmitButtonDataImpl implements _SubmitButtonData {
-  const _$SubmitButtonDataImpl(
+class _SubmitButtonData implements SubmitButtonData {
+  const _SubmitButtonData(
       {required this.text,
       required this.onPressed,
       required this.position,
@@ -835,16 +783,19 @@ class _$SubmitButtonDataImpl implements _SubmitButtonData {
   @override
   final IconData? icon;
 
+  /// Create a copy of SubmitButtonData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'SubmitButtonData(text: $text, onPressed: $onPressed, position: $position, pageIndex: $pageIndex, icon: $icon)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$SubmitButtonDataCopyWith<_SubmitButtonData> get copyWith =>
+      __$SubmitButtonDataCopyWithImpl<_SubmitButtonData>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SubmitButtonDataImpl &&
+            other is _SubmitButtonData &&
             (identical(other.text, text) || other.text == text) &&
             (identical(other.onPressed, onPressed) ||
                 other.onPressed == onPressed) &&
@@ -859,39 +810,70 @@ class _$SubmitButtonDataImpl implements _SubmitButtonData {
   int get hashCode =>
       Object.hash(runtimeType, text, onPressed, position, pageIndex, icon);
 
+  @override
+  String toString() {
+    return 'SubmitButtonData(text: $text, onPressed: $onPressed, position: $position, pageIndex: $pageIndex, icon: $icon)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$SubmitButtonDataCopyWith<$Res>
+    implements $SubmitButtonDataCopyWith<$Res> {
+  factory _$SubmitButtonDataCopyWith(
+          _SubmitButtonData value, $Res Function(_SubmitButtonData) _then) =
+      __$SubmitButtonDataCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String? text,
+      VoidCallback? onPressed,
+      SubmitButtonPosition position,
+      int pageIndex,
+      IconData? icon});
+}
+
+/// @nodoc
+class __$SubmitButtonDataCopyWithImpl<$Res>
+    implements _$SubmitButtonDataCopyWith<$Res> {
+  __$SubmitButtonDataCopyWithImpl(this._self, this._then);
+
+  final _SubmitButtonData _self;
+  final $Res Function(_SubmitButtonData) _then;
+
   /// Create a copy of SubmitButtonData
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$SubmitButtonDataImplCopyWith<_$SubmitButtonDataImpl> get copyWith =>
-      __$$SubmitButtonDataImplCopyWithImpl<_$SubmitButtonDataImpl>(
-          this, _$identity);
+  $Res call({
+    Object? text = freezed,
+    Object? onPressed = freezed,
+    Object? position = null,
+    Object? pageIndex = null,
+    Object? icon = freezed,
+  }) {
+    return _then(_SubmitButtonData(
+      text: freezed == text
+          ? _self.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String?,
+      onPressed: freezed == onPressed
+          ? _self.onPressed
+          : onPressed // ignore: cast_nullable_to_non_nullable
+              as VoidCallback?,
+      position: null == position
+          ? _self.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as SubmitButtonPosition,
+      pageIndex: null == pageIndex
+          ? _self.pageIndex
+          : pageIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      icon: freezed == icon
+          ? _self.icon
+          : icon // ignore: cast_nullable_to_non_nullable
+              as IconData?,
+    ));
+  }
 }
 
-abstract class _SubmitButtonData implements SubmitButtonData {
-  const factory _SubmitButtonData(
-      {required final String? text,
-      required final VoidCallback? onPressed,
-      required final SubmitButtonPosition position,
-      required final int pageIndex,
-      final IconData? icon}) = _$SubmitButtonDataImpl;
-
-  @override
-  String? get text;
-  @override
-  VoidCallback? get onPressed;
-  @override
-  SubmitButtonPosition get position;
-  @override
-  int get pageIndex;
-  @override
-  IconData? get icon;
-
-  /// Create a copy of SubmitButtonData
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SubmitButtonDataImplCopyWith<_$SubmitButtonDataImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

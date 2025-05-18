@@ -843,6 +843,8 @@ abstract class RootNode with _$RootNode, WoFormNodeMixin {
 
   Future<Map<String, dynamic>> exportToMap({
     required WoFormValues values,
+
+    /// context allows access to services, like MediaService
     required BuildContext context,
   }) async {
     final map = Map<String, dynamic>.from(exportSettings.metadata);

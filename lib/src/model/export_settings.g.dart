@@ -6,15 +6,14 @@ part of 'export_settings.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ExportSettingsImpl _$$ExportSettingsImplFromJson(Map<String, dynamic> json) =>
-    _$ExportSettingsImpl(
+_ExportSettings _$ExportSettingsFromJson(Map<String, dynamic> json) =>
+    _ExportSettings(
       metadata: json['metadata'] as Map<String, dynamic>? ?? const {},
       type: $enumDecodeNullable(_$ExportTypeEnumMap, json['type']) ??
           ExportType.map,
     );
 
-Map<String, dynamic> _$$ExportSettingsImplToJson(
-        _$ExportSettingsImpl instance) =>
+Map<String, dynamic> _$ExportSettingsToJson(_ExportSettings instance) =>
     <String, dynamic>{
       'metadata': instance.metadata,
       'type': _$ExportTypeEnumMap[instance.type]!,

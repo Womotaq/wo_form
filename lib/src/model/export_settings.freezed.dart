@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,88 +10,61 @@ part of 'export_settings.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-ExportSettings _$ExportSettingsFromJson(Map<String, dynamic> json) {
-  return _ExportSettings.fromJson(json);
-}
 
 /// @nodoc
 mixin _$ExportSettings {
-  Map<String, dynamic> get metadata => throw _privateConstructorUsedError;
-  ExportType get type => throw _privateConstructorUsedError;
-
-  /// Serializes this ExportSettings to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> get metadata;
+  ExportType get type;
 
   /// Create a copy of ExportSettings
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $ExportSettingsCopyWith<ExportSettings> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ExportSettingsCopyWith<$Res> {
-  factory $ExportSettingsCopyWith(
-          ExportSettings value, $Res Function(ExportSettings) then) =
-      _$ExportSettingsCopyWithImpl<$Res, ExportSettings>;
-  @useResult
-  $Res call({Map<String, dynamic> metadata, ExportType type});
-}
-
-/// @nodoc
-class _$ExportSettingsCopyWithImpl<$Res, $Val extends ExportSettings>
-    implements $ExportSettingsCopyWith<$Res> {
-  _$ExportSettingsCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of ExportSettings
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $ExportSettingsCopyWith<ExportSettings> get copyWith =>
+      _$ExportSettingsCopyWithImpl<ExportSettings>(
+          this as ExportSettings, _$identity);
+
+  /// Serializes this ExportSettings to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? metadata = null,
-    Object? type = null,
-  }) {
-    return _then(_value.copyWith(
-      metadata: null == metadata
-          ? _value.metadata
-          : metadata // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as ExportType,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ExportSettings &&
+            const DeepCollectionEquality().equals(other.metadata, metadata) &&
+            (identical(other.type, type) || other.type == type));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(metadata), type);
+
+  @override
+  String toString() {
+    return 'ExportSettings(metadata: $metadata, type: $type)';
   }
 }
 
 /// @nodoc
-abstract class _$$ExportSettingsImplCopyWith<$Res>
-    implements $ExportSettingsCopyWith<$Res> {
-  factory _$$ExportSettingsImplCopyWith(_$ExportSettingsImpl value,
-          $Res Function(_$ExportSettingsImpl) then) =
-      __$$ExportSettingsImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $ExportSettingsCopyWith<$Res> {
+  factory $ExportSettingsCopyWith(
+          ExportSettings value, $Res Function(ExportSettings) _then) =
+      _$ExportSettingsCopyWithImpl;
   @useResult
   $Res call({Map<String, dynamic> metadata, ExportType type});
 }
 
 /// @nodoc
-class __$$ExportSettingsImplCopyWithImpl<$Res>
-    extends _$ExportSettingsCopyWithImpl<$Res, _$ExportSettingsImpl>
-    implements _$$ExportSettingsImplCopyWith<$Res> {
-  __$$ExportSettingsImplCopyWithImpl(
-      _$ExportSettingsImpl _value, $Res Function(_$ExportSettingsImpl) _then)
-      : super(_value, _then);
+class _$ExportSettingsCopyWithImpl<$Res>
+    implements $ExportSettingsCopyWith<$Res> {
+  _$ExportSettingsCopyWithImpl(this._self, this._then);
+
+  final ExportSettings _self;
+  final $Res Function(ExportSettings) _then;
 
   /// Create a copy of ExportSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -100,13 +74,13 @@ class __$$ExportSettingsImplCopyWithImpl<$Res>
     Object? metadata = null,
     Object? type = null,
   }) {
-    return _then(_$ExportSettingsImpl(
+    return _then(_self.copyWith(
       metadata: null == metadata
-          ? _value._metadata
+          ? _self.metadata
           : metadata // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
       type: null == type
-          ? _value.type
+          ? _self.type
           : type // ignore: cast_nullable_to_non_nullable
               as ExportType,
     ));
@@ -115,15 +89,14 @@ class __$$ExportSettingsImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ExportSettingsImpl extends _ExportSettings {
-  const _$ExportSettingsImpl(
+class _ExportSettings extends ExportSettings {
+  const _ExportSettings(
       {final Map<String, dynamic> metadata = const {},
       this.type = ExportType.map})
       : _metadata = metadata,
         super._();
-
-  factory _$ExportSettingsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ExportSettingsImplFromJson(json);
+  factory _ExportSettings.fromJson(Map<String, dynamic> json) =>
+      _$ExportSettingsFromJson(json);
 
   final Map<String, dynamic> _metadata;
   @override
@@ -138,16 +111,26 @@ class _$ExportSettingsImpl extends _ExportSettings {
   @JsonKey()
   final ExportType type;
 
+  /// Create a copy of ExportSettings
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'ExportSettings(metadata: $metadata, type: $type)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ExportSettingsCopyWith<_ExportSettings> get copyWith =>
+      __$ExportSettingsCopyWithImpl<_ExportSettings>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$ExportSettingsToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ExportSettingsImpl &&
+            other is _ExportSettings &&
             const DeepCollectionEquality().equals(other._metadata, _metadata) &&
             (identical(other.type, type) || other.type == type));
   }
@@ -157,41 +140,50 @@ class _$ExportSettingsImpl extends _ExportSettings {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_metadata), type);
 
-  /// Create a copy of ExportSettings
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ExportSettingsImplCopyWith<_$ExportSettingsImpl> get copyWith =>
-      __$$ExportSettingsImplCopyWithImpl<_$ExportSettingsImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ExportSettingsImplToJson(
-      this,
-    );
+  String toString() {
+    return 'ExportSettings(metadata: $metadata, type: $type)';
   }
 }
 
-abstract class _ExportSettings extends ExportSettings {
-  const factory _ExportSettings(
-      {final Map<String, dynamic> metadata,
-      final ExportType type}) = _$ExportSettingsImpl;
-  const _ExportSettings._() : super._();
-
-  factory _ExportSettings.fromJson(Map<String, dynamic> json) =
-      _$ExportSettingsImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$ExportSettingsCopyWith<$Res>
+    implements $ExportSettingsCopyWith<$Res> {
+  factory _$ExportSettingsCopyWith(
+          _ExportSettings value, $Res Function(_ExportSettings) _then) =
+      __$ExportSettingsCopyWithImpl;
   @override
-  Map<String, dynamic> get metadata;
-  @override
-  ExportType get type;
+  @useResult
+  $Res call({Map<String, dynamic> metadata, ExportType type});
+}
+
+/// @nodoc
+class __$ExportSettingsCopyWithImpl<$Res>
+    implements _$ExportSettingsCopyWith<$Res> {
+  __$ExportSettingsCopyWithImpl(this._self, this._then);
+
+  final _ExportSettings _self;
+  final $Res Function(_ExportSettings) _then;
 
   /// Create a copy of ExportSettings
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ExportSettingsImplCopyWith<_$ExportSettingsImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? metadata = null,
+    Object? type = null,
+  }) {
+    return _then(_ExportSettings(
+      metadata: null == metadata
+          ? _self._metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      type: null == type
+          ? _self.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as ExportType,
+    ));
+  }
 }
+
+// dart format on

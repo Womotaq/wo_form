@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,11 +10,8 @@ part of 'condition.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 Condition _$ConditionFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
     case 'value':
@@ -31,136 +29,34 @@ Condition _$ConditionFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Condition {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull)
-        value,
-    required TResult Function(
-            @ConditionsListConverter() List<Condition> conditions)
-        and,
-    required TResult Function(
-            @ConditionsListConverter() List<Condition> conditions)
-        or,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull)?
-        value,
-    TResult? Function(@ConditionsListConverter() List<Condition> conditions)?
-        and,
-    TResult? Function(@ConditionsListConverter() List<Condition> conditions)?
-        or,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull)?
-        value,
-    TResult Function(@ConditionsListConverter() List<Condition> conditions)?
-        and,
-    TResult Function(@ConditionsListConverter() List<Condition> conditions)? or,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ConditionValue value) value,
-    required TResult Function(ConditionAnd value) and,
-    required TResult Function(ConditionOr value) or,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ConditionValue value)? value,
-    TResult? Function(ConditionAnd value)? and,
-    TResult? Function(ConditionOr value)? or,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ConditionValue value)? value,
-    TResult Function(ConditionAnd value)? and,
-    TResult Function(ConditionOr value)? or,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-
   /// Serializes this Condition to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-}
+  Map<String, dynamic> toJson();
 
-/// @nodoc
-abstract class $ConditionCopyWith<$Res> {
-  factory $ConditionCopyWith(Condition value, $Res Function(Condition) then) =
-      _$ConditionCopyWithImpl<$Res, Condition>;
-}
-
-/// @nodoc
-class _$ConditionCopyWithImpl<$Res, $Val extends Condition>
-    implements $ConditionCopyWith<$Res> {
-  _$ConditionCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of Condition
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-abstract class _$$ConditionValueImplCopyWith<$Res> {
-  factory _$$ConditionValueImplCopyWith(_$ConditionValueImpl value,
-          $Res Function(_$ConditionValueImpl) then) =
-      __$$ConditionValueImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull});
-}
-
-/// @nodoc
-class __$$ConditionValueImplCopyWithImpl<$Res>
-    extends _$ConditionCopyWithImpl<$Res, _$ConditionValueImpl>
-    implements _$$ConditionValueImplCopyWith<$Res> {
-  __$$ConditionValueImplCopyWithImpl(
-      _$ConditionValueImpl _value, $Res Function(_$ConditionValueImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of Condition
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? path = null,
-    Object? isEqualTo = freezed,
-    Object? isNotEqualTo = freezed,
-    Object? isNull = freezed,
-  }) {
-    return _then(_$ConditionValueImpl(
-      path: null == path
-          ? _value.path
-          : path // ignore: cast_nullable_to_non_nullable
-              as String,
-      isEqualTo: freezed == isEqualTo ? _value.isEqualTo : isEqualTo,
-      isNotEqualTo:
-          freezed == isNotEqualTo ? _value.isNotEqualTo : isNotEqualTo,
-      isNull: freezed == isNull
-          ? _value.isNull
-          : isNull // ignore: cast_nullable_to_non_nullable
-              as bool?,
-    ));
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is Condition);
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'Condition()';
   }
 }
 
 /// @nodoc
+class $ConditionCopyWith<$Res> {
+  $ConditionCopyWith(Condition _, $Res Function(Condition) __);
+}
+
+/// @nodoc
 @JsonSerializable()
-class _$ConditionValueImpl extends ConditionValue {
-  _$ConditionValueImpl(
+class ConditionValue extends Condition {
+  ConditionValue(
       {required this.path,
       this.isEqualTo,
       this.isNotEqualTo,
@@ -177,34 +73,38 @@ class _$ConditionValueImpl extends ConditionValue {
         }(), 'Exactly one operator must be specified'),
         $type = $type ?? 'value',
         super._();
+  factory ConditionValue.fromJson(Map<String, dynamic> json) =>
+      _$ConditionValueFromJson(json);
 
-  factory _$ConditionValueImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ConditionValueImplFromJson(json);
-
-  @override
   final String path;
-  @override
   final Object? isEqualTo;
-  @override
   final Object? isNotEqualTo;
 
   /// The value is null even if the path is not present in the list of paths
-  @override
   final bool? isNull;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
+  /// Create a copy of Condition
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $ConditionValueCopyWith<ConditionValue> get copyWith =>
+      _$ConditionValueCopyWithImpl<ConditionValue>(this, _$identity);
+
   @override
-  String toString() {
-    return 'Condition.value(path: $path, isEqualTo: $isEqualTo, isNotEqualTo: $isNotEqualTo, isNull: $isNull)';
+  Map<String, dynamic> toJson() {
+    return _$ConditionValueToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ConditionValueImpl &&
+            other is ConditionValue &&
             (identical(other.path, path) || other.path == path) &&
             const DeepCollectionEquality().equals(other.isEqualTo, isEqualTo) &&
             const DeepCollectionEquality()
@@ -221,177 +121,68 @@ class _$ConditionValueImpl extends ConditionValue {
       const DeepCollectionEquality().hash(isNotEqualTo),
       isNull);
 
-  /// Create a copy of Condition
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ConditionValueImplCopyWith<_$ConditionValueImpl> get copyWith =>
-      __$$ConditionValueImplCopyWithImpl<_$ConditionValueImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull)
-        value,
-    required TResult Function(
-            @ConditionsListConverter() List<Condition> conditions)
-        and,
-    required TResult Function(
-            @ConditionsListConverter() List<Condition> conditions)
-        or,
-  }) {
-    return value(path, isEqualTo, isNotEqualTo, isNull);
+  String toString() {
+    return 'Condition.value(path: $path, isEqualTo: $isEqualTo, isNotEqualTo: $isNotEqualTo, isNull: $isNull)';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull)?
-        value,
-    TResult? Function(@ConditionsListConverter() List<Condition> conditions)?
-        and,
-    TResult? Function(@ConditionsListConverter() List<Condition> conditions)?
-        or,
-  }) {
-    return value?.call(path, isEqualTo, isNotEqualTo, isNull);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull)?
-        value,
-    TResult Function(@ConditionsListConverter() List<Condition> conditions)?
-        and,
-    TResult Function(@ConditionsListConverter() List<Condition> conditions)? or,
-    required TResult orElse(),
-  }) {
-    if (value != null) {
-      return value(path, isEqualTo, isNotEqualTo, isNull);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ConditionValue value) value,
-    required TResult Function(ConditionAnd value) and,
-    required TResult Function(ConditionOr value) or,
-  }) {
-    return value(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ConditionValue value)? value,
-    TResult? Function(ConditionAnd value)? and,
-    TResult? Function(ConditionOr value)? or,
-  }) {
-    return value?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ConditionValue value)? value,
-    TResult Function(ConditionAnd value)? and,
-    TResult Function(ConditionOr value)? or,
-    required TResult orElse(),
-  }) {
-    if (value != null) {
-      return value(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ConditionValueImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class ConditionValue extends Condition {
-  factory ConditionValue(
-      {required final String path,
-      final Object? isEqualTo,
-      final Object? isNotEqualTo,
-      final bool? isNull}) = _$ConditionValueImpl;
-  ConditionValue._() : super._();
-
-  factory ConditionValue.fromJson(Map<String, dynamic> json) =
-      _$ConditionValueImpl.fromJson;
-
-  String get path;
-  Object? get isEqualTo;
-  Object? get isNotEqualTo;
-
-  /// The value is null even if the path is not present in the list of paths
-  bool? get isNull;
-
-  /// Create a copy of Condition
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ConditionValueImplCopyWith<_$ConditionValueImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ConditionAndImplCopyWith<$Res> {
-  factory _$$ConditionAndImplCopyWith(
-          _$ConditionAndImpl value, $Res Function(_$ConditionAndImpl) then) =
-      __$$ConditionAndImplCopyWithImpl<$Res>;
+abstract mixin class $ConditionValueCopyWith<$Res>
+    implements $ConditionCopyWith<$Res> {
+  factory $ConditionValueCopyWith(
+          ConditionValue value, $Res Function(ConditionValue) _then) =
+      _$ConditionValueCopyWithImpl;
   @useResult
-  $Res call({@ConditionsListConverter() List<Condition> conditions});
+  $Res call(
+      {String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull});
 }
 
 /// @nodoc
-class __$$ConditionAndImplCopyWithImpl<$Res>
-    extends _$ConditionCopyWithImpl<$Res, _$ConditionAndImpl>
-    implements _$$ConditionAndImplCopyWith<$Res> {
-  __$$ConditionAndImplCopyWithImpl(
-      _$ConditionAndImpl _value, $Res Function(_$ConditionAndImpl) _then)
-      : super(_value, _then);
+class _$ConditionValueCopyWithImpl<$Res>
+    implements $ConditionValueCopyWith<$Res> {
+  _$ConditionValueCopyWithImpl(this._self, this._then);
+
+  final ConditionValue _self;
+  final $Res Function(ConditionValue) _then;
 
   /// Create a copy of Condition
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
-    Object? conditions = null,
+    Object? path = null,
+    Object? isEqualTo = freezed,
+    Object? isNotEqualTo = freezed,
+    Object? isNull = freezed,
   }) {
-    return _then(_$ConditionAndImpl(
-      null == conditions
-          ? _value._conditions
-          : conditions // ignore: cast_nullable_to_non_nullable
-              as List<Condition>,
+    return _then(ConditionValue(
+      path: null == path
+          ? _self.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String,
+      isEqualTo: freezed == isEqualTo ? _self.isEqualTo : isEqualTo,
+      isNotEqualTo: freezed == isNotEqualTo ? _self.isNotEqualTo : isNotEqualTo,
+      isNull: freezed == isNull
+          ? _self.isNull
+          : isNull // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$ConditionAndImpl extends ConditionAnd {
-  const _$ConditionAndImpl(
+class ConditionAnd extends Condition {
+  const ConditionAnd(
       @ConditionsListConverter() final List<Condition> conditions,
       {final String? $type})
       : _conditions = conditions,
         $type = $type ?? 'and',
         super._();
-
-  factory _$ConditionAndImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ConditionAndImplFromJson(json);
+  factory ConditionAnd.fromJson(Map<String, dynamic> json) =>
+      _$ConditionAndFromJson(json);
 
   final List<Condition> _conditions;
-  @override
   @ConditionsListConverter()
   List<Condition> get conditions {
     if (_conditions is EqualUnmodifiableListView) return _conditions;
@@ -402,16 +193,25 @@ class _$ConditionAndImpl extends ConditionAnd {
   @JsonKey(name: 'runtimeType')
   final String $type;
 
+  /// Create a copy of Condition
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $ConditionAndCopyWith<ConditionAnd> get copyWith =>
+      _$ConditionAndCopyWithImpl<ConditionAnd>(this, _$identity);
+
   @override
-  String toString() {
-    return 'Condition.and(conditions: $conditions)';
+  Map<String, dynamic> toJson() {
+    return _$ConditionAndToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ConditionAndImpl &&
+            other is ConditionAnd &&
             const DeepCollectionEquality()
                 .equals(other._conditions, _conditions));
   }
@@ -421,149 +221,38 @@ class _$ConditionAndImpl extends ConditionAnd {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_conditions));
 
-  /// Create a copy of Condition
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ConditionAndImplCopyWith<_$ConditionAndImpl> get copyWith =>
-      __$$ConditionAndImplCopyWithImpl<_$ConditionAndImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull)
-        value,
-    required TResult Function(
-            @ConditionsListConverter() List<Condition> conditions)
-        and,
-    required TResult Function(
-            @ConditionsListConverter() List<Condition> conditions)
-        or,
-  }) {
-    return and(conditions);
+  String toString() {
+    return 'Condition.and(conditions: $conditions)';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull)?
-        value,
-    TResult? Function(@ConditionsListConverter() List<Condition> conditions)?
-        and,
-    TResult? Function(@ConditionsListConverter() List<Condition> conditions)?
-        or,
-  }) {
-    return and?.call(conditions);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull)?
-        value,
-    TResult Function(@ConditionsListConverter() List<Condition> conditions)?
-        and,
-    TResult Function(@ConditionsListConverter() List<Condition> conditions)? or,
-    required TResult orElse(),
-  }) {
-    if (and != null) {
-      return and(conditions);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ConditionValue value) value,
-    required TResult Function(ConditionAnd value) and,
-    required TResult Function(ConditionOr value) or,
-  }) {
-    return and(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ConditionValue value)? value,
-    TResult? Function(ConditionAnd value)? and,
-    TResult? Function(ConditionOr value)? or,
-  }) {
-    return and?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ConditionValue value)? value,
-    TResult Function(ConditionAnd value)? and,
-    TResult Function(ConditionOr value)? or,
-    required TResult orElse(),
-  }) {
-    if (and != null) {
-      return and(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ConditionAndImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class ConditionAnd extends Condition {
-  const factory ConditionAnd(
-          @ConditionsListConverter() final List<Condition> conditions) =
-      _$ConditionAndImpl;
-  const ConditionAnd._() : super._();
-
-  factory ConditionAnd.fromJson(Map<String, dynamic> json) =
-      _$ConditionAndImpl.fromJson;
-
-  @ConditionsListConverter()
-  List<Condition> get conditions;
-
-  /// Create a copy of Condition
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ConditionAndImplCopyWith<_$ConditionAndImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ConditionOrImplCopyWith<$Res> {
-  factory _$$ConditionOrImplCopyWith(
-          _$ConditionOrImpl value, $Res Function(_$ConditionOrImpl) then) =
-      __$$ConditionOrImplCopyWithImpl<$Res>;
+abstract mixin class $ConditionAndCopyWith<$Res>
+    implements $ConditionCopyWith<$Res> {
+  factory $ConditionAndCopyWith(
+          ConditionAnd value, $Res Function(ConditionAnd) _then) =
+      _$ConditionAndCopyWithImpl;
   @useResult
   $Res call({@ConditionsListConverter() List<Condition> conditions});
 }
 
 /// @nodoc
-class __$$ConditionOrImplCopyWithImpl<$Res>
-    extends _$ConditionCopyWithImpl<$Res, _$ConditionOrImpl>
-    implements _$$ConditionOrImplCopyWith<$Res> {
-  __$$ConditionOrImplCopyWithImpl(
-      _$ConditionOrImpl _value, $Res Function(_$ConditionOrImpl) _then)
-      : super(_value, _then);
+class _$ConditionAndCopyWithImpl<$Res> implements $ConditionAndCopyWith<$Res> {
+  _$ConditionAndCopyWithImpl(this._self, this._then);
+
+  final ConditionAnd _self;
+  final $Res Function(ConditionAnd) _then;
 
   /// Create a copy of Condition
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
     Object? conditions = null,
   }) {
-    return _then(_$ConditionOrImpl(
+    return _then(ConditionAnd(
       null == conditions
-          ? _value._conditions
+          ? _self._conditions
           : conditions // ignore: cast_nullable_to_non_nullable
               as List<Condition>,
     ));
@@ -572,19 +261,16 @@ class __$$ConditionOrImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ConditionOrImpl extends ConditionOr {
-  const _$ConditionOrImpl(
-      @ConditionsListConverter() final List<Condition> conditions,
+class ConditionOr extends Condition {
+  const ConditionOr(@ConditionsListConverter() final List<Condition> conditions,
       {final String? $type})
       : _conditions = conditions,
         $type = $type ?? 'or',
         super._();
-
-  factory _$ConditionOrImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ConditionOrImplFromJson(json);
+  factory ConditionOr.fromJson(Map<String, dynamic> json) =>
+      _$ConditionOrFromJson(json);
 
   final List<Condition> _conditions;
-  @override
   @ConditionsListConverter()
   List<Condition> get conditions {
     if (_conditions is EqualUnmodifiableListView) return _conditions;
@@ -595,16 +281,25 @@ class _$ConditionOrImpl extends ConditionOr {
   @JsonKey(name: 'runtimeType')
   final String $type;
 
+  /// Create a copy of Condition
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $ConditionOrCopyWith<ConditionOr> get copyWith =>
+      _$ConditionOrCopyWithImpl<ConditionOr>(this, _$identity);
+
   @override
-  String toString() {
-    return 'Condition.or(conditions: $conditions)';
+  Map<String, dynamic> toJson() {
+    return _$ConditionOrToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ConditionOrImpl &&
+            other is ConditionOr &&
             const DeepCollectionEquality()
                 .equals(other._conditions, _conditions));
   }
@@ -614,118 +309,42 @@ class _$ConditionOrImpl extends ConditionOr {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_conditions));
 
+  @override
+  String toString() {
+    return 'Condition.or(conditions: $conditions)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $ConditionOrCopyWith<$Res>
+    implements $ConditionCopyWith<$Res> {
+  factory $ConditionOrCopyWith(
+          ConditionOr value, $Res Function(ConditionOr) _then) =
+      _$ConditionOrCopyWithImpl;
+  @useResult
+  $Res call({@ConditionsListConverter() List<Condition> conditions});
+}
+
+/// @nodoc
+class _$ConditionOrCopyWithImpl<$Res> implements $ConditionOrCopyWith<$Res> {
+  _$ConditionOrCopyWithImpl(this._self, this._then);
+
+  final ConditionOr _self;
+  final $Res Function(ConditionOr) _then;
+
   /// Create a copy of Condition
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
   @pragma('vm:prefer-inline')
-  _$$ConditionOrImplCopyWith<_$ConditionOrImpl> get copyWith =>
-      __$$ConditionOrImplCopyWithImpl<_$ConditionOrImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull)
-        value,
-    required TResult Function(
-            @ConditionsListConverter() List<Condition> conditions)
-        and,
-    required TResult Function(
-            @ConditionsListConverter() List<Condition> conditions)
-        or,
+  $Res call({
+    Object? conditions = null,
   }) {
-    return or(conditions);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull)?
-        value,
-    TResult? Function(@ConditionsListConverter() List<Condition> conditions)?
-        and,
-    TResult? Function(@ConditionsListConverter() List<Condition> conditions)?
-        or,
-  }) {
-    return or?.call(conditions);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull)?
-        value,
-    TResult Function(@ConditionsListConverter() List<Condition> conditions)?
-        and,
-    TResult Function(@ConditionsListConverter() List<Condition> conditions)? or,
-    required TResult orElse(),
-  }) {
-    if (or != null) {
-      return or(conditions);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ConditionValue value) value,
-    required TResult Function(ConditionAnd value) and,
-    required TResult Function(ConditionOr value) or,
-  }) {
-    return or(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ConditionValue value)? value,
-    TResult? Function(ConditionAnd value)? and,
-    TResult? Function(ConditionOr value)? or,
-  }) {
-    return or?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ConditionValue value)? value,
-    TResult Function(ConditionAnd value)? and,
-    TResult Function(ConditionOr value)? or,
-    required TResult orElse(),
-  }) {
-    if (or != null) {
-      return or(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ConditionOrImplToJson(
-      this,
-    );
+    return _then(ConditionOr(
+      null == conditions
+          ? _self._conditions
+          : conditions // ignore: cast_nullable_to_non_nullable
+              as List<Condition>,
+    ));
   }
 }
 
-abstract class ConditionOr extends Condition {
-  const factory ConditionOr(
-          @ConditionsListConverter() final List<Condition> conditions) =
-      _$ConditionOrImpl;
-  const ConditionOr._() : super._();
-
-  factory ConditionOr.fromJson(Map<String, dynamic> json) =
-      _$ConditionOrImpl.fromJson;
-
-  @ConditionsListConverter()
-  List<Condition> get conditions;
-
-  /// Create a copy of Condition
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ConditionOrImplCopyWith<_$ConditionOrImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on
