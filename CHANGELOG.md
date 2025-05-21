@@ -1,3 +1,7 @@
+## 1.3.1
+
+- Solved issues
+
 ## 1.3.0
 
 - Added MediaInput, DateTimeInput and DurationInput
