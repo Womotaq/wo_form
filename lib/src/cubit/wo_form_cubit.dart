@@ -453,6 +453,7 @@ class WoForm extends StatelessWidget {
   final Map<String, dynamic> initialValues;
 
   /// If not empty, this form will be locally persistent, using HydratedCubit.
+  /// LATER : issue, how to modify an in-production corrupted data ?
   final String hydratationId;
   final RootKey? rootKey;
 
