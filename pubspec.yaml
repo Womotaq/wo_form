@@ -1,6 +1,6 @@
 name: wo_form
 description: "Easily create forms, and export/import them as json."
-version: 1.3.1
+version: 1.3.2
 repository: https://github.com/Womotaq/wo_form
 funding:
   - https://ko-fi.com/chresyr
@@ -16,7 +16,7 @@ dependencies:
   flutter_bloc: ^9.0.0
   freezed_annotation: ^3.0.0
   hydrated_bloc: ^10.0.0
-  intl: ^0.20.0
+  intl: any
   json_annotation: ^4.9.0
   phone_form_field: ^10.0.2
   popover: ^0.3.0+1
@@ -26,7 +26,7 @@ dev_dependencies:
   freezed: ^3.0.0
   json_serializable: ^6.7.1
   test: ^1.25.2
-  very_good_analysis: ^7.0.0
+  very_good_analysis: ^8.0.0
 
 flutter:
   uses-material-design: true
