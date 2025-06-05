@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:collection/collection.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
@@ -108,19 +109,28 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     required this.onSubmitting,
     Map<String, dynamic> initialValues = const {},
   })  : _tempSubmitDatas = [],
-        super(_root.getInitialValues()..addAll(initialValues));
+        super(_root.getInitialValues()..addAll(initialValues)) {
+    _initialValues = Map.from(state);
+  }
 
   final RootNode _root;
   final WoFormStatusCubit _statusCubit;
   final WoFormLockCubit _lockCubit;
   final Future<bool> Function(BuildContext context) _canSubmit;
   final Future<void> Function(RootNode root, WoFormValues values)? onSubmitting;
+  late Map<String, dynamic> _initialValues;
 
   /// Called each time a value changed, accordingly to [UpdateStatus].
   final Future<void> Function(RootNode root, WoFormValues values)?
       onStatusUpdate;
   final List<(Future<void> Function() onSubmitting, String path)>
       _tempSubmitDatas;
+
+  /// Return true if the current state is equal to the initial state.
+  bool get isPure => mapEquals(
+        _initialValues..remove(_visitedPathsKey),
+        state..remove(_visitedPathsKey),
+      );
 
   String get currentPath => _tempSubmitDatas.lastOrNull?.$2 ?? '';
 
@@ -163,20 +173,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
     if (_lockCubit.inputIsLocked(path: path)) return;
 
-    final newMap = Map<String, dynamic>.from(state);
-    newMap[path] = value;
-
-    emit(newMap);
-
     final wasVisited = _visitedPaths.contains(path);
-
-    final shouldUpdateErrors = switch (updateStatus) {
-      UpdateStatus.no => false,
-      UpdateStatus.ifPathAlreadyVisited ||
-      UpdateStatus.ifPathAlreadyVisitedOrElseWithoutErrorUpdate =>
-        wasVisited,
-      UpdateStatus.yes => true,
-    };
 
     final shouldUpdateStatus = switch (updateStatus) {
       UpdateStatus.no => false,
@@ -186,7 +183,27 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
         true,
     };
 
+    final newMap = Map<String, dynamic>.from(state);
+    newMap[path] = value;
+
+    // If the status isn't updated and we are still at initial state, then the
+    // initial state should be updated to match the current state.
+    // This allows a FutureNode to update its value without changing isPure.
+    if (!shouldUpdateStatus && isPure) {
+      _initialValues = Map.from(newMap);
+    }
+
+    emit(newMap);
+
     if (shouldUpdateStatus) {
+      final shouldUpdateErrors = switch (updateStatus) {
+        UpdateStatus.no => false,
+        UpdateStatus.ifPathAlreadyVisited ||
+        UpdateStatus.ifPathAlreadyVisitedOrElseWithoutErrorUpdate =>
+          wasVisited,
+        UpdateStatus.yes => true,
+      };
+
       if (shouldUpdateErrors) {
         if (!wasVisited) {
           markPathAsVisited(path: path);
@@ -201,6 +218,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     }
   }
 
+  /// Update errors of visited paths
   void _updateErrors() => _statusCubit.setInProgress(
         errors: _visitedPaths
             .map(
@@ -220,8 +238,9 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
             .toList(),
       );
 
+  static const _visitedPathsKey = '/__wo_reserved_visited_paths';
   Iterable<String> get _visitedPaths =>
-      state['/__wo_reserved_visited_paths'] as Iterable<String>? ?? {};
+      state[_visitedPathsKey] as Iterable<String>? ?? {};
 
   /// Marks the node at this path as visited by the user.
   /// Before submission, only visited nodes show errors.
@@ -230,10 +249,10 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   bool markPathAsVisited({required String path}) {
     final newMap = Map<String, dynamic>.from(state);
     final visitedPaths = Set<String>.from(
-      newMap['/__wo_reserved_visited_paths'] as Iterable<String>? ?? {},
+      newMap[_visitedPathsKey] as Iterable<String>? ?? {},
     );
     if (visitedPaths.add(path)) {
-      newMap['/__wo_reserved_visited_paths'] = visitedPaths.toList();
+      newMap[_visitedPathsKey] = visitedPaths.toList();
       emit(newMap);
       _updateErrors();
       return true;
@@ -247,10 +266,10 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   void markPathsAsVisited({required Iterable<String> paths}) {
     final newMap = Map<String, dynamic>.from(state);
     final visitedPaths = Set<String>.from(
-      newMap['/__wo_reserved_visited_paths'] as Iterable<String>? ?? {},
+      newMap[_visitedPathsKey] as Iterable<String>? ?? {},
     )..addAll(paths);
     // Do not store a set in values, or the hydratation won't work
-    newMap['/__wo_reserved_visited_paths'] = visitedPaths.toList();
+    newMap[_visitedPathsKey] = visitedPaths.toList();
     emit(newMap);
   }
 
@@ -395,11 +414,24 @@ typedef OnSubmitErrorDef = void Function(
 
 /// Use this if you don't want to trigger error validations
 /// or if you want to keep the previous status.
+/// TODO : documentation
 enum UpdateStatus {
   no,
   ifPathAlreadyVisited,
   ifPathAlreadyVisitedOrElseWithoutErrorUpdate,
   yes,
+}
+
+enum ShowErrors {
+  /// Always show errors.
+  ///
+  /// TODO : change ?
+  /// Concretely, this marks all the paths as visited, right from the start.
+  always,
+
+  /// Only show errors of visited paths. Note that, after the user submits the
+  /// form, all paths become visited, revealing all the errors.
+  progressively,
 }
 
 class WoForm extends StatelessWidget {
@@ -412,7 +444,7 @@ class WoForm extends StatelessWidget {
     this.onSubmitting,
     this.onSubmitError,
     this.onSubmitSuccess,
-    this.showInitialErrors = false,
+    this.showErrors = ShowErrors.progressively,
     this.pageBuilder,
     this.initialValues = const {},
     this.hydratationId = '',
@@ -431,7 +463,7 @@ class WoForm extends StatelessWidget {
     this.onSubmitting,
     this.onSubmitError,
     this.onSubmitSuccess,
-    this.showInitialErrors = false,
+    this.showErrors = ShowErrors.progressively,
     this.pageBuilder,
     this.initialValues = const {},
     this.hydratationId = '',
@@ -448,7 +480,10 @@ class WoForm extends StatelessWidget {
   final Future<void> Function(RootNode root, WoFormValues values)? onSubmitting;
   final OnSubmitErrorDef? onSubmitError;
   final void Function(BuildContext context)? onSubmitSuccess;
-  final bool showInitialErrors;
+
+  /// By default, errors will only be shown after the user visited a node or
+  /// tried to submit the form.
+  final ShowErrors showErrors;
   final WidgetBuilderDef? pageBuilder;
   final Map<String, dynamic> initialValues;
 
@@ -503,10 +538,12 @@ class WoForm extends StatelessWidget {
                         onSubmitting: onSubmitting,
                         initialValues: initialValues,
                       );
-                if (showInitialErrors) {
+                if (showErrors == ShowErrors.always) {
                   SchedulerBinding.instance.addPostFrameCallback((_) {
                     cubit
+                      // Mark all paths as visited
                       ..markPathsAsVisited(paths: cubit.state.keys)
+                      // Then update the errors of all visited paths
                       .._updateErrors();
                   });
                 }

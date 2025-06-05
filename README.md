@@ -15,6 +15,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/wo_form.dart';
+import 'package:wo_form_example/utils/readable_json.dart';
 
 enum ReportType {
   verbalAbuse,
@@ -29,34 +30,35 @@ class ReportPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WoForm(
+      uiSettings: const WoFormUiSettings(
+        titleText: 'Signaler un utilisateur',
+        submitMode: StandardSubmitMode(
+          submitText: 'Envoyer',
+          disableSubmitMode: DisableSubmitButton.whenInvalid,
+          buttonPosition: SubmitButtonPosition.floating,
+        ),
+      ),
       exportSettings: const ExportSettings(
         metadata: {
           'reporterId': 'me',
           'reportedId': 'him',
         },
       ),
-      uiSettings: const WoFormUiSettings(
-        titleText: 'Report a user',
-        submitMode: StandardSubmitMode(
-          submitText: 'Send',
-          disableSubmitMode: DisableSubmitButton.whenInvalid,
-        ),
-      ),
-      inputs: [
+      children: [
         SelectInput<ReportType>(
           id: 'type',
           availibleValues: ReportType.values,
           minCount: 1,
           maxCount: 1,
           uiSettings: SelectInputUiSettings(
-            labelText: 'Reason',
+            labelText: 'Motif',
             valueBuilder: (type) => Text(
               switch (type) {
-                null => 'Select a reason',
-                ReportType.cheating => 'Cheating',
+                null => 'Sélectionnez un motif',
+                ReportType.cheating => 'Triche',
                 ReportType.fairPlay => 'Fair play',
-                ReportType.verbalAbuse => 'Verbal abuse',
-                ReportType.other => 'Other',
+                ReportType.verbalAbuse => 'Violence verbale',
+                ReportType.other => 'Autre',
               },
             ),
           ),
@@ -64,7 +66,7 @@ class ReportPage extends StatelessWidget {
         const StringInput(
           id: 'message',
           uiSettings: StringInputUiSettings(
-            hintText: 'Tell us more !',
+            hintText: 'Dites-en plus !',
             textCapitalization: TextCapitalization.sentences,
             maxLines: 5,
           ),
@@ -72,20 +74,20 @@ class ReportPage extends StatelessWidget {
         const BooleanInput(
           id: 'block',
           uiSettings: BooleanInputUiSettings(
-            labelText: 'Block this user ?',
+            labelText: 'Bloquer cette raclure ?',
             controlType: BooleanFieldControlType.checkbox,
             controlAffinity: ListTileControlAffinity.leading,
           ),
         ),
+        WidgetNode(builder: (_) => const SizedBox(height: 64)),
       ],
-      onSubmitting: (_, __) async {
-        await Future<void>.delayed(const Duration(seconds: 3));
-        // Do your stuff here
+      onSubmitting: (root, values) async {
+        // Save the values here
       },
-      onSubmitSuccess: (context) {
-        // Close the page here
+      onSubmitSuccess: (context) async {
+        // You can pop the context here, or push a new page...
       },
-    ).toPage();
+    );
   }
 }
 
