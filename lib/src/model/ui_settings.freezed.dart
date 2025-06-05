@@ -783,9 +783,7 @@ mixin _$DurationInputUiSettings {
   String? get labelText;
   String? get helperText;
   String? get hintText;
-
-  /// Only used if DurationInput.startDatePath is provided
-  DurationEditMode? get initialEditMode;
+  DurationEditMode? get editMode;
 
   /// If null, label will be placed above the date selector.
   /// Else, label and selector will be in a flexible row,
@@ -833,8 +831,8 @@ mixin _$DurationInputUiSettings {
                 other.helperText == helperText) &&
             (identical(other.hintText, hintText) ||
                 other.hintText == hintText) &&
-            (identical(other.initialEditMode, initialEditMode) ||
-                other.initialEditMode == initialEditMode) &&
+            (identical(other.editMode, editMode) ||
+                other.editMode == editMode) &&
             (identical(other.labelFlex, labelFlex) ||
                 other.labelFlex == labelFlex) &&
             (identical(other.pickDuration, pickDuration) ||
@@ -868,7 +866,7 @@ mixin _$DurationInputUiSettings {
       labelText,
       helperText,
       hintText,
-      initialEditMode,
+      editMode,
       labelFlex,
       pickDuration,
       formatDuration,
@@ -884,7 +882,7 @@ mixin _$DurationInputUiSettings {
 
   @override
   String toString() {
-    return 'DurationInputUiSettings(labelText: $labelText, helperText: $helperText, hintText: $hintText, initialEditMode: $initialEditMode, labelFlex: $labelFlex, pickDuration: $pickDuration, formatDuration: $formatDuration, widgetBuilder: $widgetBuilder, dateTimeLabelText: $dateTimeLabelText, dateTimeHelperText: $dateTimeHelperText, dateTimeHintText: $dateTimeHintText, dateFormat: $dateFormat, timeFormat: $timeFormat, dateTimeEditMode: $dateTimeEditMode, pickDate: $pickDate, pickTime: $pickTime)';
+    return 'DurationInputUiSettings(labelText: $labelText, helperText: $helperText, hintText: $hintText, editMode: $editMode, labelFlex: $labelFlex, pickDuration: $pickDuration, formatDuration: $formatDuration, widgetBuilder: $widgetBuilder, dateTimeLabelText: $dateTimeLabelText, dateTimeHelperText: $dateTimeHelperText, dateTimeHintText: $dateTimeHintText, dateFormat: $dateFormat, timeFormat: $timeFormat, dateTimeEditMode: $dateTimeEditMode, pickDate: $pickDate, pickTime: $pickTime)';
   }
 }
 
@@ -898,7 +896,7 @@ abstract mixin class $DurationInputUiSettingsCopyWith<$Res> {
       {String? labelText,
       String? helperText,
       String? hintText,
-      DurationEditMode? initialEditMode,
+      DurationEditMode? editMode,
       int? labelFlex,
       @JsonKey(includeToJson: false, includeFromJson: false)
       PickDurationDef? pickDuration,
@@ -934,7 +932,7 @@ class _$DurationInputUiSettingsCopyWithImpl<$Res>
     Object? labelText = freezed,
     Object? helperText = freezed,
     Object? hintText = freezed,
-    Object? initialEditMode = freezed,
+    Object? editMode = freezed,
     Object? labelFlex = freezed,
     Object? pickDuration = freezed,
     Object? formatDuration = freezed,
@@ -961,9 +959,9 @@ class _$DurationInputUiSettingsCopyWithImpl<$Res>
           ? _self.hintText
           : hintText // ignore: cast_nullable_to_non_nullable
               as String?,
-      initialEditMode: freezed == initialEditMode
-          ? _self.initialEditMode
-          : initialEditMode // ignore: cast_nullable_to_non_nullable
+      editMode: freezed == editMode
+          ? _self.editMode
+          : editMode // ignore: cast_nullable_to_non_nullable
               as DurationEditMode?,
       labelFlex: freezed == labelFlex
           ? _self.labelFlex
@@ -1024,7 +1022,7 @@ class _DurationInputUiSettings extends DurationInputUiSettings {
       {this.labelText,
       this.helperText,
       this.hintText,
-      this.initialEditMode,
+      this.editMode,
       this.labelFlex,
       @JsonKey(includeToJson: false, includeFromJson: false) this.pickDuration,
       @JsonKey(includeToJson: false, includeFromJson: false)
@@ -1048,10 +1046,8 @@ class _DurationInputUiSettings extends DurationInputUiSettings {
   final String? helperText;
   @override
   final String? hintText;
-
-  /// Only used if DurationInput.startDatePath is provided
   @override
-  final DurationEditMode? initialEditMode;
+  final DurationEditMode? editMode;
 
   /// If null, label will be placed above the date selector.
   /// Else, label and selector will be in a flexible row,
@@ -1116,8 +1112,8 @@ class _DurationInputUiSettings extends DurationInputUiSettings {
                 other.helperText == helperText) &&
             (identical(other.hintText, hintText) ||
                 other.hintText == hintText) &&
-            (identical(other.initialEditMode, initialEditMode) ||
-                other.initialEditMode == initialEditMode) &&
+            (identical(other.editMode, editMode) ||
+                other.editMode == editMode) &&
             (identical(other.labelFlex, labelFlex) ||
                 other.labelFlex == labelFlex) &&
             (identical(other.pickDuration, pickDuration) ||
@@ -1151,7 +1147,7 @@ class _DurationInputUiSettings extends DurationInputUiSettings {
       labelText,
       helperText,
       hintText,
-      initialEditMode,
+      editMode,
       labelFlex,
       pickDuration,
       formatDuration,
@@ -1167,7 +1163,7 @@ class _DurationInputUiSettings extends DurationInputUiSettings {
 
   @override
   String toString() {
-    return 'DurationInputUiSettings(labelText: $labelText, helperText: $helperText, hintText: $hintText, initialEditMode: $initialEditMode, labelFlex: $labelFlex, pickDuration: $pickDuration, formatDuration: $formatDuration, widgetBuilder: $widgetBuilder, dateTimeLabelText: $dateTimeLabelText, dateTimeHelperText: $dateTimeHelperText, dateTimeHintText: $dateTimeHintText, dateFormat: $dateFormat, timeFormat: $timeFormat, dateTimeEditMode: $dateTimeEditMode, pickDate: $pickDate, pickTime: $pickTime)';
+    return 'DurationInputUiSettings(labelText: $labelText, helperText: $helperText, hintText: $hintText, editMode: $editMode, labelFlex: $labelFlex, pickDuration: $pickDuration, formatDuration: $formatDuration, widgetBuilder: $widgetBuilder, dateTimeLabelText: $dateTimeLabelText, dateTimeHelperText: $dateTimeHelperText, dateTimeHintText: $dateTimeHintText, dateFormat: $dateFormat, timeFormat: $timeFormat, dateTimeEditMode: $dateTimeEditMode, pickDate: $pickDate, pickTime: $pickTime)';
   }
 }
 
@@ -1183,7 +1179,7 @@ abstract mixin class _$DurationInputUiSettingsCopyWith<$Res>
       {String? labelText,
       String? helperText,
       String? hintText,
-      DurationEditMode? initialEditMode,
+      DurationEditMode? editMode,
       int? labelFlex,
       @JsonKey(includeToJson: false, includeFromJson: false)
       PickDurationDef? pickDuration,
@@ -1219,7 +1215,7 @@ class __$DurationInputUiSettingsCopyWithImpl<$Res>
     Object? labelText = freezed,
     Object? helperText = freezed,
     Object? hintText = freezed,
-    Object? initialEditMode = freezed,
+    Object? editMode = freezed,
     Object? labelFlex = freezed,
     Object? pickDuration = freezed,
     Object? formatDuration = freezed,
@@ -1246,9 +1242,9 @@ class __$DurationInputUiSettingsCopyWithImpl<$Res>
           ? _self.hintText
           : hintText // ignore: cast_nullable_to_non_nullable
               as String?,
-      initialEditMode: freezed == initialEditMode
-          ? _self.initialEditMode
-          : initialEditMode // ignore: cast_nullable_to_non_nullable
+      editMode: freezed == editMode
+          ? _self.editMode
+          : editMode // ignore: cast_nullable_to_non_nullable
               as DurationEditMode?,
       labelFlex: freezed == labelFlex
           ? _self.labelFlex

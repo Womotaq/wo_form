@@ -111,8 +111,8 @@ _DurationInputUiSettings _$DurationInputUiSettingsFromJson(
       labelText: json['labelText'] as String?,
       helperText: json['helperText'] as String?,
       hintText: json['hintText'] as String?,
-      initialEditMode: $enumDecodeNullable(
-          _$DurationEditModeEnumMap, json['initialEditMode']),
+      editMode:
+          $enumDecodeNullable(_$DurationEditModeEnumMap, json['editMode']),
       labelFlex: (json['labelFlex'] as num?)?.toInt(),
       dateTimeLabelText: json['dateTimeLabelText'] as String?,
       dateTimeHelperText: json['dateTimeHelperText'] as String?,
@@ -129,7 +129,7 @@ Map<String, dynamic> _$DurationInputUiSettingsToJson(
       'labelText': instance.labelText,
       'helperText': instance.helperText,
       'hintText': instance.hintText,
-      'initialEditMode': _$DurationEditModeEnumMap[instance.initialEditMode],
+      'editMode': _$DurationEditModeEnumMap[instance.editMode],
       'labelFlex': instance.labelFlex,
       'dateTimeLabelText': instance.dateTimeLabelText,
       'dateTimeHelperText': instance.dateTimeHelperText,

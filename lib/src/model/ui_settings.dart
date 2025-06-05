@@ -140,7 +140,7 @@ typedef PickDurationDef = Future<Duration?> Function({
 typedef FormatDurationDef = String Function(Duration duration);
 
 enum DurationEditMode {
-  /// Only used if DurationInput.startDatePath is provided
+  /// Only possible if DurationInput.startDatePath is provided.
   dateTime,
   duration,
 }
@@ -151,9 +151,7 @@ abstract class DurationInputUiSettings with _$DurationInputUiSettings {
     String? labelText,
     String? helperText,
     String? hintText,
-
-    /// Only used if DurationInput.startDatePath is provided
-    DurationEditMode? initialEditMode,
+    DurationEditMode? editMode,
 
     /// If null, label will be placed above the date selector.
     /// Else, label and selector will be in a flexible row,
@@ -194,7 +192,7 @@ abstract class DurationInputUiSettings with _$DurationInputUiSettings {
           labelText: labelText ?? other.labelText,
           helperText: helperText ?? other.helperText,
           hintText: hintText ?? other.hintText,
-          initialEditMode: initialEditMode ?? other.initialEditMode,
+          editMode: editMode ?? other.editMode,
           labelFlex: labelFlex ?? other.labelFlex,
           pickDuration: pickDuration ?? other.pickDuration,
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,

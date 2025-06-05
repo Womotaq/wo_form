@@ -2013,9 +2013,6 @@ mixin _$SelectInput<T> {
       _$SelectInputCopyWithImpl<T, SelectInput<T>>(
           this as SelectInput<T>, _$identity);
 
-  /// Serializes this SelectInput to a JSON map.
-  // Map<String, dynamic> toJson(Object? Function(T) toJsonT);
-
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
@@ -2329,11 +2326,6 @@ class _SelectInput<T> extends SelectInput<T> {
   @pragma('vm:prefer-inline')
   _$SelectInputCopyWith<T, _SelectInput<T>> get copyWith =>
       __$SelectInputCopyWithImpl<T, _SelectInput<T>>(this, _$identity);
-
-  // @override
-  // Map<String, dynamic> toJson(Object? Function(T) toJsonT) {
-  //   return _$SelectInputToJson<T>(this, toJsonT);
-  // }
 
   @override
   bool operator ==(Object other) {
