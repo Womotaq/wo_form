@@ -21,12 +21,13 @@ class WoFormValueListener<T> extends StatelessWidget {
     return BlocListener<WoFormValuesCubit, Map<String, dynamic>>(
       listenWhen: (previous, current) {
         return listenWhen?.call(
-              previous[path] as T?,
-              current[path] as T?,
+              previous.getValue(path) as T?,
+              current.getValue(path) as T?,
             ) ??
-            previous[path] != current[path];
+            previous.getValue(path) != current.getValue(path);
       },
-      listener: (context, values) => listener(context, values[path] as T?),
+      listener: (context, values) =>
+          listener(context, values.getValue(path) as T?),
       child: child,
     );
   }
