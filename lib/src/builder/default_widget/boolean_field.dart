@@ -62,6 +62,6 @@ class BooleanField extends StatelessWidget {
             subtitle: subtitle,
             secondary: secondary,
             onChanged: data.onValueChanged,
-          )
+          ),
       };
 }

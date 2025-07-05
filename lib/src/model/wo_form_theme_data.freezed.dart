@@ -47,6 +47,9 @@ mixin _$WoFormThemeData {
   /// Default to true.
   bool? get showAsteriskIfRequired;
 
+  /// Your Google API key for addresses autocompletion in string fields.
+  String? get googleAPIKey;
+
   /// Create a copy of WoFormThemeData
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -112,7 +115,9 @@ mixin _$WoFormThemeData {
             (identical(other.verticalSpacing, verticalSpacing) ||
                 other.verticalSpacing == verticalSpacing) &&
             (identical(other.showAsteriskIfRequired, showAsteriskIfRequired) ||
-                other.showAsteriskIfRequired == showAsteriskIfRequired));
+                other.showAsteriskIfRequired == showAsteriskIfRequired) &&
+            (identical(other.googleAPIKey, googleAPIKey) ||
+                other.googleAPIKey == googleAPIKey));
   }
 
   @override
@@ -143,12 +148,13 @@ mixin _$WoFormThemeData {
         onDynamicInputDeletion,
         onSubmitError,
         verticalSpacing,
-        showAsteriskIfRequired
+        showAsteriskIfRequired,
+        googleAPIKey
       ]);
 
   @override
   String toString() {
-    return 'WoFormThemeData(booleanFieldBuilder: $booleanFieldBuilder, dateTimeFieldBuilder: $dateTimeFieldBuilder, defaultPhoneCoutry: $defaultPhoneCoutry, durationFieldBuilder: $durationFieldBuilder, dynamicInputsNodeWidgetBuilder: $dynamicInputsNodeWidgetBuilder, formatDuration: $formatDuration, formPageBuilder: $formPageBuilder, generateId: $generateId, headerBuilder: $headerBuilder, inputHeaderBuilder: $inputHeaderBuilder, inputsNodeExpanderBuilder: $inputsNodeExpanderBuilder, inputsNodeWidgetBuilder: $inputsNodeWidgetBuilder, mediaFieldBuilder: $mediaFieldBuilder, numFieldBuilder: $numFieldBuilder, pickDate: $pickDate, pickDuration: $pickDuration, pickTime: $pickTime, scoreBuilder: $scoreBuilder, selectFieldBuilder: $selectFieldBuilder, standardScaffoldBuilder: $standardScaffoldBuilder, stringFieldBuilder: $stringFieldBuilder, submitButtonBuilder: $submitButtonBuilder, onDynamicInputDeletion: $onDynamicInputDeletion, onSubmitError: $onSubmitError, verticalSpacing: $verticalSpacing, showAsteriskIfRequired: $showAsteriskIfRequired)';
+    return 'WoFormThemeData(booleanFieldBuilder: $booleanFieldBuilder, dateTimeFieldBuilder: $dateTimeFieldBuilder, defaultPhoneCoutry: $defaultPhoneCoutry, durationFieldBuilder: $durationFieldBuilder, dynamicInputsNodeWidgetBuilder: $dynamicInputsNodeWidgetBuilder, formatDuration: $formatDuration, formPageBuilder: $formPageBuilder, generateId: $generateId, headerBuilder: $headerBuilder, inputHeaderBuilder: $inputHeaderBuilder, inputsNodeExpanderBuilder: $inputsNodeExpanderBuilder, inputsNodeWidgetBuilder: $inputsNodeWidgetBuilder, mediaFieldBuilder: $mediaFieldBuilder, numFieldBuilder: $numFieldBuilder, pickDate: $pickDate, pickDuration: $pickDuration, pickTime: $pickTime, scoreBuilder: $scoreBuilder, selectFieldBuilder: $selectFieldBuilder, standardScaffoldBuilder: $standardScaffoldBuilder, stringFieldBuilder: $stringFieldBuilder, submitButtonBuilder: $submitButtonBuilder, onDynamicInputDeletion: $onDynamicInputDeletion, onSubmitError: $onSubmitError, verticalSpacing: $verticalSpacing, showAsteriskIfRequired: $showAsteriskIfRequired, googleAPIKey: $googleAPIKey)';
   }
 }
 
@@ -184,7 +190,8 @@ abstract mixin class $WoFormThemeDataCopyWith<$Res> {
       OnDynamicInputDeletionDef? onDynamicInputDeletion,
       OnSubmitErrorDef? onSubmitError,
       double? verticalSpacing,
-      bool? showAsteriskIfRequired});
+      bool? showAsteriskIfRequired,
+      String? googleAPIKey});
 }
 
 /// @nodoc
@@ -226,6 +233,7 @@ class _$WoFormThemeDataCopyWithImpl<$Res>
     Object? onSubmitError = freezed,
     Object? verticalSpacing = freezed,
     Object? showAsteriskIfRequired = freezed,
+    Object? googleAPIKey = freezed,
   }) {
     return _then(_self.copyWith(
       booleanFieldBuilder: freezed == booleanFieldBuilder
@@ -332,6 +340,10 @@ class _$WoFormThemeDataCopyWithImpl<$Res>
           ? _self.showAsteriskIfRequired
           : showAsteriskIfRequired // ignore: cast_nullable_to_non_nullable
               as bool?,
+      googleAPIKey: freezed == googleAPIKey
+          ? _self.googleAPIKey
+          : googleAPIKey // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -365,7 +377,8 @@ class _WoFormThemeData extends WoFormThemeData {
       this.onDynamicInputDeletion,
       this.onSubmitError,
       this.verticalSpacing,
-      this.showAsteriskIfRequired})
+      this.showAsteriskIfRequired,
+      this.googleAPIKey})
       : super._();
 
   @override
@@ -425,6 +438,10 @@ class _WoFormThemeData extends WoFormThemeData {
   /// Default to true.
   @override
   final bool? showAsteriskIfRequired;
+
+  /// Your Google API key for addresses autocompletion in string fields.
+  @override
+  final String? googleAPIKey;
 
   /// Create a copy of WoFormThemeData
   /// with the given fields replaced by the non-null parameter values.
@@ -491,7 +508,9 @@ class _WoFormThemeData extends WoFormThemeData {
             (identical(other.verticalSpacing, verticalSpacing) ||
                 other.verticalSpacing == verticalSpacing) &&
             (identical(other.showAsteriskIfRequired, showAsteriskIfRequired) ||
-                other.showAsteriskIfRequired == showAsteriskIfRequired));
+                other.showAsteriskIfRequired == showAsteriskIfRequired) &&
+            (identical(other.googleAPIKey, googleAPIKey) ||
+                other.googleAPIKey == googleAPIKey));
   }
 
   @override
@@ -522,12 +541,13 @@ class _WoFormThemeData extends WoFormThemeData {
         onDynamicInputDeletion,
         onSubmitError,
         verticalSpacing,
-        showAsteriskIfRequired
+        showAsteriskIfRequired,
+        googleAPIKey
       ]);
 
   @override
   String toString() {
-    return 'WoFormThemeData(booleanFieldBuilder: $booleanFieldBuilder, dateTimeFieldBuilder: $dateTimeFieldBuilder, defaultPhoneCoutry: $defaultPhoneCoutry, durationFieldBuilder: $durationFieldBuilder, dynamicInputsNodeWidgetBuilder: $dynamicInputsNodeWidgetBuilder, formatDuration: $formatDuration, formPageBuilder: $formPageBuilder, generateId: $generateId, headerBuilder: $headerBuilder, inputHeaderBuilder: $inputHeaderBuilder, inputsNodeExpanderBuilder: $inputsNodeExpanderBuilder, inputsNodeWidgetBuilder: $inputsNodeWidgetBuilder, mediaFieldBuilder: $mediaFieldBuilder, numFieldBuilder: $numFieldBuilder, pickDate: $pickDate, pickDuration: $pickDuration, pickTime: $pickTime, scoreBuilder: $scoreBuilder, selectFieldBuilder: $selectFieldBuilder, standardScaffoldBuilder: $standardScaffoldBuilder, stringFieldBuilder: $stringFieldBuilder, submitButtonBuilder: $submitButtonBuilder, onDynamicInputDeletion: $onDynamicInputDeletion, onSubmitError: $onSubmitError, verticalSpacing: $verticalSpacing, showAsteriskIfRequired: $showAsteriskIfRequired)';
+    return 'WoFormThemeData(booleanFieldBuilder: $booleanFieldBuilder, dateTimeFieldBuilder: $dateTimeFieldBuilder, defaultPhoneCoutry: $defaultPhoneCoutry, durationFieldBuilder: $durationFieldBuilder, dynamicInputsNodeWidgetBuilder: $dynamicInputsNodeWidgetBuilder, formatDuration: $formatDuration, formPageBuilder: $formPageBuilder, generateId: $generateId, headerBuilder: $headerBuilder, inputHeaderBuilder: $inputHeaderBuilder, inputsNodeExpanderBuilder: $inputsNodeExpanderBuilder, inputsNodeWidgetBuilder: $inputsNodeWidgetBuilder, mediaFieldBuilder: $mediaFieldBuilder, numFieldBuilder: $numFieldBuilder, pickDate: $pickDate, pickDuration: $pickDuration, pickTime: $pickTime, scoreBuilder: $scoreBuilder, selectFieldBuilder: $selectFieldBuilder, standardScaffoldBuilder: $standardScaffoldBuilder, stringFieldBuilder: $stringFieldBuilder, submitButtonBuilder: $submitButtonBuilder, onDynamicInputDeletion: $onDynamicInputDeletion, onSubmitError: $onSubmitError, verticalSpacing: $verticalSpacing, showAsteriskIfRequired: $showAsteriskIfRequired, googleAPIKey: $googleAPIKey)';
   }
 }
 
@@ -565,7 +585,8 @@ abstract mixin class _$WoFormThemeDataCopyWith<$Res>
       OnDynamicInputDeletionDef? onDynamicInputDeletion,
       OnSubmitErrorDef? onSubmitError,
       double? verticalSpacing,
-      bool? showAsteriskIfRequired});
+      bool? showAsteriskIfRequired,
+      String? googleAPIKey});
 }
 
 /// @nodoc
@@ -607,6 +628,7 @@ class __$WoFormThemeDataCopyWithImpl<$Res>
     Object? onSubmitError = freezed,
     Object? verticalSpacing = freezed,
     Object? showAsteriskIfRequired = freezed,
+    Object? googleAPIKey = freezed,
   }) {
     return _then(_WoFormThemeData(
       booleanFieldBuilder: freezed == booleanFieldBuilder
@@ -713,6 +735,10 @@ class __$WoFormThemeDataCopyWithImpl<$Res>
           ? _self.showAsteriskIfRequired
           : showAsteriskIfRequired // ignore: cast_nullable_to_non_nullable
               as bool?,
+      googleAPIKey: freezed == googleAPIKey
+          ? _self.googleAPIKey
+          : googleAPIKey // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }

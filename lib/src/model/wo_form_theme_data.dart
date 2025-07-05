@@ -43,6 +43,9 @@ abstract class WoFormThemeData with _$WoFormThemeData {
     /// Add the characters ' *' after the labelText of [WoFormInput]s.
     /// Default to true.
     bool? showAsteriskIfRequired,
+
+    /// Your Google API key for addresses autocompletion in string fields.
+    String? googleAPIKey,
   }) = _WoFormThemeData;
 
   const WoFormThemeData._();

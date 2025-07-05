@@ -1741,6 +1741,8 @@ mixin _$InputsNodeUiSettings {
   String? get labelText;
   String? get labelTextWhenChildrenHidden;
   String? get helperText;
+
+  /// Default to always.
   ChildrenVisibility? get childrenVisibility;
 
   /// Only used by [ChildrenVisibility.whenAsked].
@@ -1911,6 +1913,8 @@ class _InputsNodeUiSettings extends InputsNodeUiSettings {
   final String? labelTextWhenChildrenHidden;
   @override
   final String? helperText;
+
+  /// Default to always.
   @override
   final ChildrenVisibility? childrenVisibility;
 
@@ -2973,6 +2977,7 @@ mixin _$StringInputUiSettings {
   bool? get autofocus;
   TextInputAction? get textInputAction;
   TextCapitalization? get textCapitalization;
+  List<String>? get addressAutocompleteCountries;
 
   /// Defaults to 1. If you want to set it to null, enter 0.
   int? get maxLines;
@@ -3025,6 +3030,9 @@ mixin _$StringInputUiSettings {
                 other.textInputAction == textInputAction) &&
             (identical(other.textCapitalization, textCapitalization) ||
                 other.textCapitalization == textCapitalization) &&
+            const DeepCollectionEquality().equals(
+                other.addressAutocompleteCountries,
+                addressAutocompleteCountries) &&
             (identical(other.maxLines, maxLines) ||
                 other.maxLines == maxLines) &&
             (identical(other.invalidRegexMessage, invalidRegexMessage) ||
@@ -3051,6 +3059,7 @@ mixin _$StringInputUiSettings {
       autofocus,
       textInputAction,
       textCapitalization,
+      const DeepCollectionEquality().hash(addressAutocompleteCountries),
       maxLines,
       invalidRegexMessage,
       style,
@@ -3058,7 +3067,7 @@ mixin _$StringInputUiSettings {
 
   @override
   String toString() {
-    return 'StringInputUiSettings(labelText: $labelText, hintText: $hintText, helperText: $helperText, prefixIcon: $prefixIcon, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage, style: $style, widgetBuilder: $widgetBuilder)';
+    return 'StringInputUiSettings(labelText: $labelText, hintText: $hintText, helperText: $helperText, prefixIcon: $prefixIcon, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, addressAutocompleteCountries: $addressAutocompleteCountries, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage, style: $style, widgetBuilder: $widgetBuilder)';
   }
 }
 
@@ -3082,6 +3091,7 @@ abstract mixin class $StringInputUiSettingsCopyWith<$Res> {
       bool? autofocus,
       TextInputAction? textInputAction,
       TextCapitalization? textCapitalization,
+      List<String>? addressAutocompleteCountries,
       int? maxLines,
       String? invalidRegexMessage,
       @JsonKey(includeToJson: false, includeFromJson: false) TextStyle? style,
@@ -3115,6 +3125,7 @@ class _$StringInputUiSettingsCopyWithImpl<$Res>
     Object? autofocus = freezed,
     Object? textInputAction = freezed,
     Object? textCapitalization = freezed,
+    Object? addressAutocompleteCountries = freezed,
     Object? maxLines = freezed,
     Object? invalidRegexMessage = freezed,
     Object? style = freezed,
@@ -3173,6 +3184,10 @@ class _$StringInputUiSettingsCopyWithImpl<$Res>
           ? _self.textCapitalization
           : textCapitalization // ignore: cast_nullable_to_non_nullable
               as TextCapitalization?,
+      addressAutocompleteCountries: freezed == addressAutocompleteCountries
+          ? _self.addressAutocompleteCountries
+          : addressAutocompleteCountries // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       maxLines: freezed == maxLines
           ? _self.maxLines
           : maxLines // ignore: cast_nullable_to_non_nullable
@@ -3210,12 +3225,14 @@ class _StringInputUiSettings extends StringInputUiSettings {
       this.autofocus,
       this.textInputAction,
       this.textCapitalization,
+      final List<String>? addressAutocompleteCountries,
       this.maxLines,
       this.invalidRegexMessage,
       @JsonKey(includeToJson: false, includeFromJson: false) this.style,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.widgetBuilder})
       : _autofillHints = autofillHints,
+        _addressAutocompleteCountries = addressAutocompleteCountries,
         super._();
   factory _StringInputUiSettings.fromJson(Map<String, dynamic> json) =>
       _$StringInputUiSettingsFromJson(json);
@@ -3256,6 +3273,16 @@ class _StringInputUiSettings extends StringInputUiSettings {
   final TextInputAction? textInputAction;
   @override
   final TextCapitalization? textCapitalization;
+  final List<String>? _addressAutocompleteCountries;
+  @override
+  List<String>? get addressAutocompleteCountries {
+    final value = _addressAutocompleteCountries;
+    if (value == null) return null;
+    if (_addressAutocompleteCountries is EqualUnmodifiableListView)
+      return _addressAutocompleteCountries;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   /// Defaults to 1. If you want to set it to null, enter 0.
   @override
@@ -3317,6 +3344,9 @@ class _StringInputUiSettings extends StringInputUiSettings {
                 other.textInputAction == textInputAction) &&
             (identical(other.textCapitalization, textCapitalization) ||
                 other.textCapitalization == textCapitalization) &&
+            const DeepCollectionEquality().equals(
+                other._addressAutocompleteCountries,
+                _addressAutocompleteCountries) &&
             (identical(other.maxLines, maxLines) ||
                 other.maxLines == maxLines) &&
             (identical(other.invalidRegexMessage, invalidRegexMessage) ||
@@ -3343,6 +3373,7 @@ class _StringInputUiSettings extends StringInputUiSettings {
       autofocus,
       textInputAction,
       textCapitalization,
+      const DeepCollectionEquality().hash(_addressAutocompleteCountries),
       maxLines,
       invalidRegexMessage,
       style,
@@ -3350,7 +3381,7 @@ class _StringInputUiSettings extends StringInputUiSettings {
 
   @override
   String toString() {
-    return 'StringInputUiSettings(labelText: $labelText, hintText: $hintText, helperText: $helperText, prefixIcon: $prefixIcon, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage, style: $style, widgetBuilder: $widgetBuilder)';
+    return 'StringInputUiSettings(labelText: $labelText, hintText: $hintText, helperText: $helperText, prefixIcon: $prefixIcon, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, addressAutocompleteCountries: $addressAutocompleteCountries, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage, style: $style, widgetBuilder: $widgetBuilder)';
   }
 }
 
@@ -3376,6 +3407,7 @@ abstract mixin class _$StringInputUiSettingsCopyWith<$Res>
       bool? autofocus,
       TextInputAction? textInputAction,
       TextCapitalization? textCapitalization,
+      List<String>? addressAutocompleteCountries,
       int? maxLines,
       String? invalidRegexMessage,
       @JsonKey(includeToJson: false, includeFromJson: false) TextStyle? style,
@@ -3409,6 +3441,7 @@ class __$StringInputUiSettingsCopyWithImpl<$Res>
     Object? autofocus = freezed,
     Object? textInputAction = freezed,
     Object? textCapitalization = freezed,
+    Object? addressAutocompleteCountries = freezed,
     Object? maxLines = freezed,
     Object? invalidRegexMessage = freezed,
     Object? style = freezed,
@@ -3467,6 +3500,10 @@ class __$StringInputUiSettingsCopyWithImpl<$Res>
           ? _self.textCapitalization
           : textCapitalization // ignore: cast_nullable_to_non_nullable
               as TextCapitalization?,
+      addressAutocompleteCountries: freezed == addressAutocompleteCountries
+          ? _self._addressAutocompleteCountries
+          : addressAutocompleteCountries // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       maxLines: freezed == maxLines
           ? _self.maxLines
           : maxLines // ignore: cast_nullable_to_non_nullable

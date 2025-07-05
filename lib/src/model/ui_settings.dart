@@ -297,6 +297,8 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
     String? labelText,
     String? labelTextWhenChildrenHidden,
     String? helperText,
+
+    /// Default to always.
     ChildrenVisibility? childrenVisibility,
 
     /// Only used by [ChildrenVisibility.whenAsked].
@@ -481,6 +483,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     bool? autofocus,
     TextInputAction? textInputAction,
     TextCapitalization? textCapitalization,
+    List<String>? addressAutocompleteCountries,
 
     /// Defaults to 1. If you want to set it to null, enter 0.
     int? maxLines,

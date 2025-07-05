@@ -270,6 +270,10 @@ _StringInputUiSettings _$StringInputUiSettingsFromJson(
           _$TextInputActionEnumMap, json['textInputAction']),
       textCapitalization: $enumDecodeNullable(
           _$TextCapitalizationEnumMap, json['textCapitalization']),
+      addressAutocompleteCountries:
+          (json['addressAutocompleteCountries'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList(),
       maxLines: (json['maxLines'] as num?)?.toInt(),
       invalidRegexMessage: json['invalidRegexMessage'] as String?,
     );
@@ -291,6 +295,7 @@ Map<String, dynamic> _$StringInputUiSettingsToJson(
       'textInputAction': _$TextInputActionEnumMap[instance.textInputAction],
       'textCapitalization':
           _$TextCapitalizationEnumMap[instance.textCapitalization],
+      'addressAutocompleteCountries': instance.addressAutocompleteCountries,
       'maxLines': instance.maxLines,
       'invalidRegexMessage': instance.invalidRegexMessage,
     };

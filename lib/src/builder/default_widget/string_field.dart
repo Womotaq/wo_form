@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_places_flutter/google_places_flutter.dart';
+import 'package:google_places_flutter/model/place_type.dart';
+import 'package:google_places_flutter/model/prediction.dart';
 import 'package:phone_form_field/phone_form_field.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -72,15 +75,51 @@ class _StringFieldState extends State<StringField> {
             icon: const Icon(Icons.clear),
           ),
         StringFieldAction.obscure => IconButton(
-            onPressed: () => setState(() {
-              obscureText = !obscureText;
-            }),
+            onPressed: () => setState(() => obscureText = !obscureText),
             icon: obscureText
                 ? const Icon(Icons.visibility_off_outlined)
                 : const Icon(Icons.visibility_outlined),
           ),
       },
     );
+
+    if (widget.data.uiSettings.keyboardType == TextInputType.streetAddress) {
+      final googleAPIKey = WoFormTheme.of(context, listen: false)?.googleAPIKey;
+      if (googleAPIKey != null) {
+        return GooglePlaceAutoCompleteTextField(
+          textEditingController: textEditingController!,
+          inputDecoration: inputDecoration,
+          textInputAction: widget.data.uiSettings.textInputAction,
+          googleAPIKey: googleAPIKey,
+          debounceTime: 300, // TODO : customizable
+          countries: widget.data.uiSettings.addressAutocompleteCountries,
+          onSelected: (prediction) {
+            textEditingController!.text = prediction.description ?? '';
+            textEditingController!.selection = TextSelection.fromPosition(
+              TextPosition(offset: (prediction.description ?? '').length),
+            );
+          },
+          itemBuilder: (context, index, Prediction prediction) => Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Row(
+              children: [
+                const Icon(Icons.location_on),
+                const SizedBox(width: 7),
+                Expanded(
+                  child: Text(
+                    prediction.description ?? '',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                )
+              ],
+            ),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          placeType: PlaceType.address, // TODO : customizable
+        );
+      }
+    }
 
     if (widget.data.uiSettings.keyboardType == TextInputType.phone) {
       return ListTile(
