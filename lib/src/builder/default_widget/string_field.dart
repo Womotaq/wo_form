@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_places_flutter/google_places_flutter.dart';
-import 'package:google_places_flutter/model/prediction.dart';
 import 'package:phone_form_field/phone_form_field.dart';
+import 'package:wo_form/src/builder/default_widget/place_autocomplete/_export.dart';
+import 'package:wo_form/src/builder/default_widget/place_autocomplete/google_places_flutter.dart';
 import 'package:wo_form/wo_form.dart';
 
 class StringField extends StatefulWidget {
@@ -85,7 +85,7 @@ class _StringFieldState extends State<StringField> {
     if (widget.data.uiSettings.placeAutocompleteType != null) {
       final googleAPIKey = WoFormTheme.of(context, listen: false)?.googleAPIKey;
       if (googleAPIKey != null) {
-        return GooglePlaceAutoCompleteTextField(
+        return PlaceAutoCompleteTextField(
           textEditingController: textEditingController!,
           inputDecoration: inputDecoration,
           textInputAction: widget.data.uiSettings.textInputAction,
@@ -93,6 +93,10 @@ class _StringFieldState extends State<StringField> {
           debounceTime: 300, // TODO : customizable
           countries: widget.data.uiSettings.placeAutocompleteCountries,
           onChanged: widget.data.onValueChanged,
+          onFieldSubmitted:
+              (widget.data.uiSettings.submitFormOnFieldSubmitted ?? true)
+                  ? (_) => context.read<WoFormValuesCubit>().submit(context)
+                  : null,
           itemBuilder: (context, index, Prediction prediction) => Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Row(

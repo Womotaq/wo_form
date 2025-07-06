@@ -3,8 +3,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/src/_export.dart';
 import 'package:wo_form/wo_form.dart';
 
-export 'package:google_places_flutter/model/place_type.dart';
-
 part 'ui_settings.freezed.dart';
 part 'ui_settings.g.dart';
 
