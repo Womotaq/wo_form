@@ -376,7 +376,7 @@ class _SelectableIndex extends StatelessWidget {
       style: index == selectedIndex
           ? theme.textTheme.bodyLarge!.copyWith(
               fontWeight: FontWeight.bold,
-              color: theme.colorScheme.onPrimary,
+              color: theme.colorScheme.onPrimaryContainer,
             )
           : TextStyle(color: theme.disabledColor),
       child: Center(
@@ -386,7 +386,7 @@ class _SelectableIndex extends StatelessWidget {
           child: index == selectedIndex
               ? Container(
                   decoration: BoxDecoration(
-                    color: theme.colorScheme.primary,
+                    color: theme.colorScheme.primaryContainer,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: yearWidget,
@@ -493,7 +493,9 @@ class MonthlyCalendar extends StatelessWidget {
                     ? Container(
                         decoration: selectedDay == day
                             ? BoxDecoration(
-                                color: Theme.of(context).colorScheme.primary,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primaryContainer,
                                 shape: BoxShape.circle,
                               )
                             : null,
@@ -501,7 +503,9 @@ class MonthlyCalendar extends StatelessWidget {
                           child: Text(
                             day.toString(),
                             style: TextStyle(
-                              color: Theme.of(context).colorScheme.onPrimary,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onPrimaryContainer,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -561,9 +565,9 @@ class DaysOfWeek extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 512),
+        constraints: const BoxConstraints(maxWidth: 512 - 32),
         child: GridView.builder(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          // padding: const EdgeInsets.symmetric(horizontal: 16),
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

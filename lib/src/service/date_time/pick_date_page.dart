@@ -185,8 +185,3 @@ class _SelectedDateCubit extends Cubit<DateTime?> {
 extension on DateTime {
   int get fullMonth => year * 12 + month;
 }
-
-extension on String {
-  String capitalized() =>
-      '${this[0].toUpperCase()}${substring(1).toLowerCase()}';
-}

@@ -16,8 +16,7 @@ class DateTimeService {
   }) {
     FocusScope.of(context).unfocus();
 
-    final now = DateTime.now();
-    final ref = initialDate ?? now;
+    final ref = initialDate ?? DateTime.now();
 
     return showDatePicker(
       context: context,
@@ -51,12 +50,14 @@ class DateTimeService {
 
     FocusScope.of(context).unfocus();
 
+    final woFormStatusCubit = context.read<WoFormStatusCubit>();
+
     return Navigator.push(
       context,
       MaterialPageRoute<DateTime>(
         builder: (_) => minDate == null
             ? PickDatePageWithYear(
-                woFormStatusCubit: context.read(),
+                woFormStatusCubit: woFormStatusCubit,
                 minDate: minDate,
                 maxDate: maxDate,
                 initialDate: initialDate,
@@ -64,14 +65,14 @@ class DateTimeService {
               )
             : switch (initialDatePickerMode) {
                 DatePickerMode.year => PickDatePageWithYear(
-                    woFormStatusCubit: context.read(),
+                    woFormStatusCubit: woFormStatusCubit,
                     minDate: minDate,
                     maxDate: maxDate,
                     initialDate: initialDate,
                     dateFormat: dateFormat,
                   ),
                 DatePickerMode.day || null => PickDatePage(
-                    woFormStatusCubit: context.read(),
+                    woFormStatusCubit: woFormStatusCubit,
                     minDate: minDate,
                     maxDate: maxDate,
                     initialDate: initialDate,
