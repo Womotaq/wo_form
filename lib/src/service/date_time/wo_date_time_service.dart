@@ -55,30 +55,22 @@ class DateTimeService {
     return Navigator.push(
       context,
       MaterialPageRoute<DateTime>(
-        builder: (_) => minDate == null
-            ? PickDatePageWithYear(
-                woFormStatusCubit: woFormStatusCubit,
-                minDate: minDate,
-                maxDate: maxDate,
-                initialDate: initialDate,
-                dateFormat: dateFormat,
-              )
-            : switch (initialDatePickerMode) {
-                DatePickerMode.year => PickDatePageWithYear(
-                    woFormStatusCubit: woFormStatusCubit,
-                    minDate: minDate,
-                    maxDate: maxDate,
-                    initialDate: initialDate,
-                    dateFormat: dateFormat,
-                  ),
-                DatePickerMode.day || null => PickDatePage(
-                    woFormStatusCubit: woFormStatusCubit,
-                    minDate: minDate,
-                    maxDate: maxDate,
-                    initialDate: initialDate,
-                    dateFormat: dateFormat,
-                  ),
-              },
+        builder: (_) => switch (initialDatePickerMode) {
+          DatePickerMode.year => PickDatePageWithYear(
+              woFormStatusCubit: woFormStatusCubit,
+              minDate: minDate,
+              maxDate: maxDate,
+              initialDate: initialDate,
+              dateFormat: dateFormat,
+            ),
+          DatePickerMode.day || null => PickDatePage(
+              woFormStatusCubit: woFormStatusCubit,
+              minDate: minDate,
+              maxDate: maxDate,
+              initialDate: initialDate,
+              dateFormat: dateFormat,
+            ),
+        },
       ),
     );
   }

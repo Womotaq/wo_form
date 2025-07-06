@@ -1,3 +1,8 @@
+## 1.4.0
+
+- Merged wo_form & wo_form_service
+- Improved date selection
+
 ## 1.3.2
 
 - Upgraded dependencies

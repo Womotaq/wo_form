@@ -1,6 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:wo_form/wo_form.dart';
@@ -16,7 +15,7 @@ class PickDatePage extends StatelessWidget {
   });
 
   final WoFormStatusCubit? woFormStatusCubit;
-  final DateTime minDate;
+  final DateTime? minDate;
   final DateTime? maxDate;
   final DateTime? initialDate;
   final String? dateFormat;
@@ -24,7 +23,9 @@ class PickDatePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var initialDate = this.initialDate;
-    if (initialDate != null && initialDate.isBefore(minDate)) {
+    if (initialDate != null &&
+        minDate != null &&
+        initialDate.isBefore(minDate!)) {
       initialDate = null;
     } else if (initialDate != null &&
         maxDate != null &&
@@ -53,63 +54,54 @@ class PickDatePage extends StatelessWidget {
             final sideOverflow = constraints.maxWidth - 512;
             final sidePadding = sideOverflow > 0 ? sideOverflow / 2 : .0;
 
-            final maxWidth = min(constraints.maxWidth, 512);
+            // final maxWidth = min(constraints.maxWidth, 512);
+            // final cellWidth = (maxWidth - 32) / 7;
+            // var initialScrollOffset = 0.0;
+            // if (initialDate != null) {
+            //   for (var i = 0;
+            //       i < initialDate.fullMonth - minDate.fullMonth;
+            //       i++) {
+            //     final fullMonth = i + minDate.fullMonth;
+            //     initialScrollOffset +=
+            //         32 + cellWidth * weeksInMonth(fullMonth) + 16;
+            //   }
+            // }
 
-            final cellWidth = (maxWidth - 32) / 7;
-            var initialScrollOffset = 0.0;
-            if (initialDate != null) {
-              for (var i = 0;
-                  i < initialDate.fullMonth - minDate.fullMonth;
-                  i++) {
-                final fullMonth = i + minDate.fullMonth;
-                initialScrollOffset +=
-                    32 + cellWidth * weeksInMonth(fullMonth) + 16;
-              }
-            }
-            return ListView.builder(
-              controller: initialDate == null
-                  ? null
-                  : ScrollController(initialScrollOffset: initialScrollOffset),
-              padding: EdgeInsets.symmetric(
-                vertical: 16,
-                horizontal: 16 + sidePadding,
-              ),
-              itemCount: maxDate == null
-                  ? null
-                  : maxDate!.fullMonth - minDate.fullMonth + 1,
-              itemBuilder: (context, index) {
-                final fullMonth = index + minDate.fullMonth;
+            final ref = initialDate ?? DateTime.now();
 
-                return BlocBuilder<_SelectedDateCubit, DateTime?>(
-                  builder: (context, date) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 32,
-                          child: Text(
-                            DateFormat.yMMMM()
-                                .format(DateTime(0, fullMonth))
-                                .capitalized(),
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyLarge
-                                ?.copyWith(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        MonthlyCalendar(
-                          fullMonth: fullMonth,
-                          selectedDate: date,
-                          minDate: minDate,
-                          maxDate: maxDate,
-                          onSelect: (day) => context
-                              .read<_SelectedDateCubit>()
-                              .setDay(day, fullMonth),
-                        ),
-                        const SizedBox(height: 16),
-                      ],
-                    );
-                  },
+            return InfiniteListView(
+              padding: EdgeInsets.symmetric(horizontal: 16 + sidePadding),
+              centerIndex: ref.fullMonth,
+              minIndex: minDate?.fullMonth,
+              maxIndex: maxDate?.fullMonth,
+              itemBuilder: (context, fullMonth) {
+                final selectedDate = context.watch<_SelectedDateCubit>().state;
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      height: 32,
+                      child: Text(
+                        DateFormat.yMMMM()
+                            .format(DateTime(0, fullMonth))
+                            .capitalized(),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge
+                            ?.copyWith(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    MonthlyCalendar(
+                      fullMonth: fullMonth,
+                      selectedDate: selectedDate,
+                      minDate: minDate,
+                      maxDate: maxDate,
+                      onSelect: (day) => context
+                          .read<_SelectedDateCubit>()
+                          .setDay(day, fullMonth),
+                    ),
+                  ],
                 );
               },
             );
@@ -179,6 +171,94 @@ class _SelectedDateCubit extends Cubit<DateTime?> {
   void setDay(int day, int fullMonth) {
     final newDate = DateTime(0, fullMonth, day);
     if (_clamp(newDate) == newDate) emit(newDate);
+  }
+}
+
+class InfiniteListView extends StatelessWidget {
+  const InfiniteListView({
+    required this.itemBuilder,
+    this.scrollDirection = Axis.vertical,
+    this.centerIndex = 0,
+    this.minIndex,
+    this.maxIndex,
+    this.padding,
+    super.key,
+  });
+
+  final Widget? Function(BuildContext context, int index) itemBuilder;
+  final Axis scrollDirection;
+
+  /// Will start at this index
+  final int centerIndex;
+  final int? minIndex;
+  final int? maxIndex;
+  final EdgeInsetsGeometry? padding;
+
+  @override
+  Widget build(BuildContext context) {
+    if (scrollDirection != Axis.vertical) throw UnimplementedError();
+
+    if (maxIndex != null && centerIndex > maxIndex!) {
+      throw AssertionError(
+        'centerIndex ($centerIndex) must be lower or equal to '
+        'maxIndex ($maxIndex)',
+      );
+    }
+    if (minIndex != null && centerIndex < minIndex!) {
+      throw AssertionError(
+        'centerIndex ($centerIndex) must be higher or equal to '
+        'minIndex ($minIndex)',
+      );
+    }
+
+    final Key forwardListKey = UniqueKey();
+    return Scrollable(
+      viewportBuilder: (BuildContext context, ViewportOffset offset) {
+        return Padding(
+          padding: padding ?? EdgeInsets.zero,
+          child: Viewport(
+            offset: offset,
+            center: forwardListKey,
+            slivers: [
+              // reverse
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  childCount: minIndex == null ? null : centerIndex - minIndex!,
+                  (BuildContext context, int index) {
+                    final movedIndex = centerIndex - index - 1;
+                    final child = itemBuilder(context, movedIndex);
+                    if (child == null) {
+                      if (minIndex != null && movedIndex > minIndex!) {
+                        return const SizedBox.shrink();
+                      }
+                    }
+                    return child;
+                  },
+                ),
+              ),
+              // forward
+              SliverList(
+                key: forwardListKey,
+                delegate: SliverChildBuilderDelegate(
+                  childCount:
+                      maxIndex == null ? null : maxIndex! - centerIndex + 1,
+                  (BuildContext context, int index) {
+                    final movedIndex = centerIndex + index;
+                    final child = itemBuilder(context, movedIndex);
+                    if (child == null) {
+                      if (maxIndex != null && movedIndex < maxIndex!) {
+                        return const SizedBox.shrink();
+                      }
+                    }
+                    return child;
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }
 
