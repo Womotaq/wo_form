@@ -52,26 +52,53 @@ class DateTimeService {
 
     final woFormStatusCubit = context.read<WoFormStatusCubit>();
 
-    return Navigator.push(
-      context,
-      MaterialPageRoute<DateTime>(
-        builder: (_) => switch (initialDatePickerMode) {
-          DatePickerMode.year => PickDatePageWithYear(
+    switch (initialDatePickerMode) {
+      case null:
+      case DatePickerMode.day:
+        return Navigator.push(
+          context,
+          MaterialPageRoute<DateTime>(
+            builder: (_) => PickDatePage(
               woFormStatusCubit: woFormStatusCubit,
               minDate: minDate,
               maxDate: maxDate,
               initialDate: initialDate,
               dateFormat: dateFormat,
             ),
-          DatePickerMode.day || null => PickDatePage(
+          ),
+        );
+      case DatePickerMode.year:
+        final screenSize = MediaQuery.of(context).size;
+        if (screenSize.width > 500 && screenSize.height > 700) {
+          return showDialog(
+            context: context,
+            builder: (context) => Dialog(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: PickDatePageWithYear.inModal(
+                  woFormStatusCubit: woFormStatusCubit,
+                  minDate: minDate,
+                  maxDate: maxDate,
+                  initialDate: initialDate,
+                  dateFormat: dateFormat,
+                ),
+              ),
+            ),
+          );
+        }
+
+        return Navigator.push(
+          context,
+          MaterialPageRoute<DateTime>(
+            builder: (_) => PickDatePageWithYear(
               woFormStatusCubit: woFormStatusCubit,
               minDate: minDate,
               maxDate: maxDate,
               initialDate: initialDate,
               dateFormat: dateFormat,
             ),
-        },
-      ),
-    );
+          ),
+        );
+    }
   }
 }

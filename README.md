@@ -92,7 +92,3 @@ class ReportPage extends StatelessWidget {
 }
 
 ```
-
-Upcoming :
-
-- Better date selection for large screens

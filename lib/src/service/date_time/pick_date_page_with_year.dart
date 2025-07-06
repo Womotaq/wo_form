@@ -11,13 +11,23 @@ class PickDatePageWithYear extends StatefulWidget {
     this.initialDate,
     this.dateFormat,
     super.key,
-  });
+  }) : _displayMode = _DisplayMode.page;
+
+  const PickDatePageWithYear.inModal({
+    required this.woFormStatusCubit,
+    this.minDate,
+    this.maxDate,
+    this.initialDate,
+    this.dateFormat,
+    super.key,
+  }) : _displayMode = _DisplayMode.modal;
 
   final WoFormStatusCubit? woFormStatusCubit;
   final DateTime? minDate;
   final DateTime? maxDate;
   final DateTime? initialDate;
   final String? dateFormat;
+  final _DisplayMode _displayMode;
 
   @override
   State<PickDatePageWithYear> createState() => _PickDatePageWithYearState();
@@ -81,7 +91,7 @@ class _PickDatePageWithYearState extends State<PickDatePageWithYear> {
       initialDate = null;
     }
 
-    return MultiBlocProvider(
+    final picker = MultiBlocProvider(
       providers: [
         BlocProvider(
           create: (context) => _FullMonthCubit(
@@ -102,69 +112,75 @@ class _PickDatePageWithYearState extends State<PickDatePageWithYear> {
           ),
         ),
       ],
-      child: Scaffold(
-        appBar: AppBar(),
-        body: ListView(
-          children: [
-            SizedBox(
-              height: 64,
-              child: InfinitePageView(
-                controller: yearScrollController,
-                itemBuilder: (context, index) => _YearWidget(year: index),
-                pageSnapping: false,
-              ),
+      child: ListView(
+        children: [
+          SizedBox(
+            height: 64,
+            child: InfinitePageView(
+              controller: yearScrollController,
+              itemBuilder: (context, index) => _YearWidget(year: index),
+              pageSnapping: false,
             ),
-            SizedBox(
-              height: 64,
-              child: InfinitePageView(
-                controller: monthScrollController,
-                itemBuilder: (context, index) => _MonthWidget(fullMonth: index),
-                pageSnapping: false,
-              ),
+          ),
+          SizedBox(
+            height: 64,
+            child: InfinitePageView(
+              controller: monthScrollController,
+              itemBuilder: (context, index) => _MonthWidget(fullMonth: index),
+              pageSnapping: false,
             ),
-            const SizedBox(height: 16),
-            Center(
-              child: SizedBox(
-                width: _DateWidget.cellWidth * 7,
-                height: _DateWidget.cellWidth * 7,
-                child: _DateWidget(controller: dayScrollController),
-              ),
+          ),
+          const SizedBox(height: 16),
+          Center(
+            child: SizedBox(
+              width: _DateWidget.cellWidth * 7,
+              height: _DateWidget.cellWidth * 7,
+              child: _DateWidget(controller: dayScrollController),
             ),
-            RepositoryProvider.value(
-              value: widget.woFormStatusCubit,
-              child: BlocBuilder<_SelectedDateCubit, DateTime?>(
-                builder: (context, date) {
-                  if (date == null) return const SizedBox.shrink();
+          ),
+          RepositoryProvider.value(
+            value: widget.woFormStatusCubit,
+            child: BlocBuilder<_SelectedDateCubit, DateTime?>(
+              builder: (context, date) {
+                if (date == null) return const SizedBox.shrink();
 
-                  return BlocBuilder<_FullMonthCubit, int>(
-                    builder: (context, fullMonth) {
-                      if (fullMonth != date.fullMonth) {
-                        return const SizedBox.shrink();
-                      }
+                return BlocBuilder<_FullMonthCubit, int>(
+                  builder: (context, fullMonth) {
+                    if (fullMonth != date.fullMonth) {
+                      return const SizedBox.shrink();
+                    }
 
-                      return SubmitButton(
-                        SubmitButtonData(
-                          text: DateFormat(widget.dateFormat ?? 'yMMMMd')
-                              // DateFormat('EEEE d MMMM y')
-                              .format(date),
-                          // MaterialLocalizations.of(context)
-                          //     .keyboardKeySelect,
-                          onPressed: () => Navigator.of(context).pop(
-                            context.read<_SelectedDateCubit>().state,
-                          ),
-                          position: SubmitButtonPosition.body,
-                          pageIndex: 0,
+                    return SubmitButton(
+                      SubmitButtonData(
+                        text: DateFormat(widget.dateFormat ?? 'yMMMMd')
+                            .format(date),
+                        onPressed: () => Navigator.of(context).pop(
+                          context.read<_SelectedDateCubit>().state,
                         ),
-                      );
-                    },
-                  );
-                },
-              ),
+                        position: SubmitButtonPosition.body,
+                        pageIndex: 0,
+                      ),
+                    );
+                  },
+                );
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
+
+    return switch (widget._displayMode) {
+      _DisplayMode.page => Scaffold(
+          appBar: AppBar(),
+          body: picker,
+        ),
+      _DisplayMode.modal => SizedBox(
+          width: 332,
+          height: 556,
+          child: picker,
+        ),
+    };
   }
 
   @override
@@ -174,6 +190,8 @@ class _PickDatePageWithYearState extends State<PickDatePageWithYear> {
     super.dispose();
   }
 }
+
+enum _DisplayMode { page, modal }
 
 class _SelectedDateCubit extends Cubit<DateTime?> {
   _SelectedDateCubit(
