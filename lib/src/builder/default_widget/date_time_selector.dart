@@ -190,12 +190,14 @@ class DateTimeSelector extends StatelessWidget {
     FocusScope.of(context).unfocus();
 
     final now = DateTime.now();
+    final ref = initialDate ?? now;
 
+    // TODO : Replace by DateTimeService.pickDate
     return showDatePicker(
       context: context,
       initialDate: initialDate,
-      firstDate: minDate ?? DateTime(now.year, now.month - 1),
-      lastDate: maxDate ?? DateTime(now.year + 1, now.month),
+      firstDate: minDate ?? DateTime(ref.year - 100),
+      lastDate: maxDate ?? DateTime(ref.year + 100, 12),
       initialEntryMode: initialEntryMode ?? DatePickerEntryMode.calendar,
       initialDatePickerMode: initialDatePickerMode ?? DatePickerMode.day,
     );
