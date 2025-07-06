@@ -14,7 +14,6 @@ abstract class WoFormThemeData with _$WoFormThemeData {
   const factory WoFormThemeData({
     BooleanFieldBuilderDef? booleanFieldBuilder,
     DateTimeFieldBuilderDef? dateTimeFieldBuilder,
-    // TODO : default to intl if not set
     IsoCode? defaultPhoneCoutry,
     DurationFieldBuilderDef? durationFieldBuilder,
     DynamicInputsNodeWidgetBuilderDef? dynamicInputsNodeWidgetBuilder,

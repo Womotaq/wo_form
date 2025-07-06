@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:phone_form_field/phone_form_field.dart';
@@ -24,12 +27,17 @@ class _StringFieldState extends State<StringField> {
     super.initState();
     obscureText = widget.data.uiSettings.obscureText ?? false;
     if (widget.data.uiSettings.keyboardType == TextInputType.phone) {
+      var isoCode = WoFormTheme.of(context, listen: false)?.defaultPhoneCoutry;
+      if (isoCode == null) {
+        final countryCode = PlatformDispatcher.instance.locale.countryCode ??
+            Platform.localeName.split('_').last;
+        isoCode = IsoCode.fromJson(countryCode);
+      }
+
       phoneController = PhoneController(
         initialValue: PhoneNumber.parse(
           widget.data.value ?? '',
-          callerCountry:
-              WoFormTheme.of(context, listen: false)?.defaultPhoneCoutry ??
-                  IsoCode.US,
+          callerCountry: isoCode,
         ),
       );
     } else {
