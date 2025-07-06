@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -38,7 +39,7 @@ class DateTimeSelector extends StatelessWidget {
                 : () async {
                     final pickDate = settings.pickDate ??
                         WoFormTheme.of(context)?.pickDate ??
-                        defaultPickDate;
+                        context.read<DateTimeService>().pickDate;
 
                     final selectedDate = await pickDate(
                       context: context,
@@ -175,31 +176,6 @@ class DateTimeSelector extends StatelessWidget {
         if (timeSelector != null)
           dateSelector == null ? Expanded(child: timeSelector) : timeSelector,
       ],
-    );
-  }
-
-  static Future<DateTime?> defaultPickDate({
-    required BuildContext context,
-    DateTime? initialDate,
-    DateTime? maxDate,
-    DateTime? minDate,
-    DatePickerEntryMode? initialEntryMode,
-    DatePickerMode? initialDatePickerMode,
-    String? dateFormat,
-  }) {
-    FocusScope.of(context).unfocus();
-
-    final now = DateTime.now();
-    final ref = initialDate ?? now;
-
-    // TODO : Replace by DateTimeService.pickDate
-    return showDatePicker(
-      context: context,
-      initialDate: initialDate,
-      firstDate: minDate ?? DateTime(ref.year - 100),
-      lastDate: maxDate ?? DateTime(ref.year + 100, 12),
-      initialEntryMode: initialEntryMode ?? DatePickerEntryMode.calendar,
-      initialDatePickerMode: initialDatePickerMode ?? DatePickerMode.day,
     );
   }
 

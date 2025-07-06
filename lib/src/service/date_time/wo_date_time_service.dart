@@ -5,6 +5,30 @@ import 'package:wo_form/wo_form.dart';
 class DateTimeService {
   const DateTimeService();
 
+  static Future<DateTime?> materialPickDate({
+    required BuildContext context,
+    DateTime? initialDate,
+    DateTime? maxDate,
+    DateTime? minDate,
+    DatePickerEntryMode? initialEntryMode,
+    DatePickerMode? initialDatePickerMode,
+    String? dateFormat,
+  }) {
+    FocusScope.of(context).unfocus();
+
+    final now = DateTime.now();
+    final ref = initialDate ?? now;
+
+    return showDatePicker(
+      context: context,
+      initialDate: initialDate,
+      firstDate: minDate ?? DateTime(ref.year - 100),
+      lastDate: maxDate ?? DateTime(ref.year + 100, 12),
+      initialEntryMode: initialEntryMode ?? DatePickerEntryMode.calendar,
+      initialDatePickerMode: initialDatePickerMode ?? DatePickerMode.day,
+    );
+  }
+
   Future<DateTime?> pickDate({
     required BuildContext context,
     DateTime? initialDate,
@@ -22,7 +46,7 @@ class DateTimeService {
     }
 
     if (minDate != null && maxDate != null && minDate.isAfter(maxDate)) {
-      throw AssertionError('minBound must be before maxBound');
+      throw AssertionError('minDate must be before maxDate');
     }
 
     FocusScope.of(context).unfocus();
