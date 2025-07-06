@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide FocusManager;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -38,13 +38,8 @@ class StringFieldBuilder extends StatelessWidget {
       );
     }
 
-    return Focus(
-      skipTraversal: true,
-      onFocusChange: (value) {
-        if (value == false) {
-          context.read<WoFormValuesCubit>().markPathAsVisited(path: path);
-        }
-      },
+    return WoFormNodeFocusManager(
+      path: path,
       child: BlocSelector<WoFormLockCubit, Set<String>, bool>(
         selector: (lockedInputs) => lockedInputs.contains(path),
         builder: (context, inputIsLocked) {

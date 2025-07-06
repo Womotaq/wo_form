@@ -13,8 +13,16 @@ import 'package:wo_form/wo_form.dart';
 class WoFormStatusCubit extends Cubit<WoFormStatus> {
   WoFormStatusCubit._(super.initialState);
 
-  void setInProgress({List<WoFormInputError> errors = const []}) {
-    if (!isClosed) emit(InProgressStatus(errors: errors));
+  void setInProgress({
+    List<WoFormInputError> errors = const [],
+    String? firstInvalidInputPath,
+  }) {
+    if (!isClosed) {
+      emit(InProgressStatus(
+        errors: errors,
+        firstInvalidInputPath: firstInvalidInputPath,
+      ));
+    }
   }
 
   void _setSubmitting() {
@@ -119,6 +127,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   final Future<bool> Function(BuildContext context) _canSubmit;
   final Future<void> Function(RootNode root, WoFormValues values)? onSubmitting;
   late Map<String, dynamic> _initialValues;
+  final Map<String, FocusNode> _focusNodes = {};
 
   /// Called each time a value changed, accordingly to [UpdateStatus].
   final Future<void> Function(RootNode root, WoFormValues values)?
@@ -159,6 +168,16 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   void clearValues() => emit(_root.getInitialValues());
 
   void clearTemporarySubmitData() => _tempSubmitDatas.clear();
+
+  FocusNode _createFocusNode(String path) {
+    _focusNodes[path] ??= FocusNode();
+    return _focusNodes[path]!;
+  }
+
+  void _disposeFocusNode(String path) {
+    final focusNode = _focusNodes.remove(path);
+    if (focusNode != null) focusNode.dispose();
+  }
 
   /// **Use this method precautiously since there is no type checking !**
   void onValueChanged({
@@ -294,7 +313,17 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     final errors =
         node.getErrors(values: state, parentPath: currentPath.parentPath);
     if (errors.isNotEmpty) {
-      return _statusCubit.setInProgress(errors: errors.toList());
+      final nodeToFocus = _focusNodes[errors.first.path];
+      if (nodeToFocus != null) {
+        nodeToFocus
+          ..requestFocus()
+          ..nextFocus();
+      }
+
+      return _statusCubit.setInProgress(
+        errors: errors.toList(),
+        firstInvalidInputPath: errors.first.path,
+      );
     }
 
     _statusCubit._setSubmitting();
@@ -580,4 +609,59 @@ class RootKey<T extends State<StatefulWidget>> extends GlobalKey<T> {
   String toString() => 'WoFormRootKey()';
 
   WoFormValues? get values => currentContext?.read<WoFormValuesCubit>().state;
+}
+
+class WoFormNodeFocusManager extends StatefulWidget {
+  const WoFormNodeFocusManager({
+    required this.path,
+    required this.child,
+    super.key,
+  });
+
+  final String path;
+  final Widget child;
+
+  @override
+  State<WoFormNodeFocusManager> createState() => _WoFormNodeFocusManagerState();
+}
+
+class _WoFormNodeFocusManagerState extends State<WoFormNodeFocusManager> {
+  late FocusNode focusNode;
+  // Can't read it in dispose() because the context is not available anymore
+  late WoFormValuesCubit valuesCubit;
+
+  @override
+  void initState() {
+    super.initState();
+
+    valuesCubit = context.read<WoFormValuesCubit>();
+    focusNode = valuesCubit._createFocusNode(widget.path);
+  }
+
+  @override
+  void dispose() {
+    valuesCubit._disposeFocusNode(widget.path);
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // FocusTraversalGroup allows to WoFormValuesCubit to focus the Focus widget
+    // and the switch to the next focusable widget availible.
+    return FocusTraversalGroup(
+      child: Focus(
+        focusNode: focusNode,
+        skipTraversal: true,
+        onFocusChange: (value) {
+          if (value == false) {
+            context
+                .read<WoFormValuesCubit>()
+                .markPathAsVisited(path: widget.path);
+          }
+        },
+        child: widget.child,
+      ),
+    );
+  }
 }

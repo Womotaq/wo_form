@@ -95,6 +95,7 @@ class InProgressStatus implements WoFormStatus {
   const InProgressStatus(
       {@JsonKey(includeToJson: false, includeFromJson: false)
       final List<WoFormInputError> errors = const [],
+      this.firstInvalidInputPath,
       final String? $type})
       : _errors = errors,
         $type = $type ?? 'inProgress';
@@ -108,6 +109,8 @@ class InProgressStatus implements WoFormStatus {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_errors);
   }
+
+  final String? firstInvalidInputPath;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
@@ -131,17 +134,19 @@ class InProgressStatus implements WoFormStatus {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is InProgressStatus &&
-            const DeepCollectionEquality().equals(other._errors, _errors));
+            const DeepCollectionEquality().equals(other._errors, _errors) &&
+            (identical(other.firstInvalidInputPath, firstInvalidInputPath) ||
+                other.firstInvalidInputPath == firstInvalidInputPath));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_errors));
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_errors), firstInvalidInputPath);
 
   @override
   String toString() {
-    return 'WoFormStatus.inProgress(errors: $errors)';
+    return 'WoFormStatus.inProgress(errors: $errors, firstInvalidInputPath: $firstInvalidInputPath)';
   }
 }
 
@@ -154,7 +159,8 @@ abstract mixin class $InProgressStatusCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(includeToJson: false, includeFromJson: false)
-      List<WoFormInputError> errors});
+      List<WoFormInputError> errors,
+      String? firstInvalidInputPath});
 }
 
 /// @nodoc
@@ -170,12 +176,17 @@ class _$InProgressStatusCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? errors = null,
+    Object? firstInvalidInputPath = freezed,
   }) {
     return _then(InProgressStatus(
       errors: null == errors
           ? _self._errors
           : errors // ignore: cast_nullable_to_non_nullable
               as List<WoFormInputError>,
+      firstInvalidInputPath: freezed == firstInvalidInputPath
+          ? _self.firstInvalidInputPath
+          : firstInvalidInputPath // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }

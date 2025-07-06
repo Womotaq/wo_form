@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:phone_form_field/phone_form_field.dart';
 import 'package:wo_form/src/builder/default_widget/place_autocomplete/_export.dart';
-import 'package:wo_form/src/builder/default_widget/place_autocomplete/google_places_flutter.dart';
 import 'package:wo_form/wo_form.dart';
 
 class StringField extends StatefulWidget {

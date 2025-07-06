@@ -12,6 +12,7 @@ sealed class WoFormStatus with _$WoFormStatus {
     @JsonKey(includeToJson: false, includeFromJson: false)
     @Default([])
     List<WoFormInputError> errors,
+    String? firstInvalidInputPath,
   }) = InProgressStatus;
   const factory WoFormStatus.submitting() = SubmittingStatus;
   const factory WoFormStatus.submitError({

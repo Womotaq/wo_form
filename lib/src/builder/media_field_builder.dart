@@ -28,73 +28,76 @@ class MediaFieldBuilder extends StatelessWidget {
     final mergedSettings =
         uiSettings?.merge(input.uiSettings) ?? input.uiSettings;
 
-    return BlocSelector<WoFormLockCubit, Set<String>, bool>(
-      selector: (lockedInputs) => lockedInputs.contains(path),
-      builder: (context, inputIsLocked) {
-        return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
-          builder: (context, status) {
-            return WoFormValueBuilder<List<dynamic>>(
-              path: path,
-              builder: (context, selectedValues_) {
-                final selectedValues =
-                    selectedValues_?.whereType<Media>().toList() ?? [];
+    return WoFormNodeFocusManager(
+      path: path,
+      child: BlocSelector<WoFormLockCubit, Set<String>, bool>(
+        selector: (lockedInputs) => lockedInputs.contains(path),
+        builder: (context, inputIsLocked) {
+          return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
+            builder: (context, status) {
+              return WoFormValueBuilder<List<dynamic>>(
+                path: path,
+                builder: (context, selectedValues_) {
+                  final selectedValues =
+                      selectedValues_?.whereType<Media>().toList() ?? [];
 
-                final String? errorText;
-                if (status is InProgressStatus) {
-                  final error = status.getError(path: path);
-                  if (error == null) {
-                    errorText = null;
+                  final String? errorText;
+                  if (status is InProgressStatus) {
+                    final error = status.getError(path: path);
+                    if (error == null) {
+                      errorText = null;
+                    } else {
+                      errorText =
+                          context.read<WoFormL10n?>()?.translateError(error);
+                    }
                   } else {
-                    errorText =
-                        context.read<WoFormL10n?>()?.translateError(error);
+                    errorText = null;
                   }
-                } else {
-                  errorText = null;
-                }
 
-                final fieldData =
-                    WoFieldData<MediaInput, List<Media>, MediaInputUiSettings>(
-                  path: path,
-                  input: input,
-                  value: selectedValues,
-                  errorText: errorText,
-                  uiSettings: mergedSettings,
-                  onValueChanged: inputIsLocked
-                      ? null
-                      : (
-                          List<Media>? values, {
-                          UpdateStatus updateStatus = UpdateStatus.yes,
-                        }) {
-                          valuesCubit.onValueChanged(
-                            path: path,
-                            value: values,
-                          );
+                  final fieldData = WoFieldData<MediaInput, List<Media>,
+                      MediaInputUiSettings>(
+                    path: path,
+                    input: input,
+                    value: selectedValues,
+                    errorText: errorText,
+                    uiSettings: mergedSettings,
+                    onValueChanged: inputIsLocked
+                        ? null
+                        : (
+                            List<Media>? values, {
+                            UpdateStatus updateStatus = UpdateStatus.yes,
+                          }) {
+                            valuesCubit.onValueChanged(
+                              path: path,
+                              value: values,
+                            );
 
-                          input.onValueChanged?.call(values);
+                            input.onValueChanged?.call(values);
 
-                          if (input.submitFormOnSelect) {
-                            valuesCubit.submit(context);
-                          }
-                        },
-                );
-
-                final mediaFieldBuilder = mergedSettings.widgetBuilder ??
-                    WoFormTheme.of(context)?.mediaFieldBuilder;
-
-                if (mediaFieldBuilder == null) {
-                  throw UnimplementedError(
-                    'MediaInput has no default field. '
-                    'Either create your own or use MediaField '
-                    'from wo_form_service.',
+                            if (input.submitFormOnSelect) {
+                              valuesCubit.submit(context);
+                            }
+                          },
                   );
-                }
 
-                return mediaFieldBuilder(fieldData);
-              },
-            );
-          },
-        );
-      },
+                  final mediaFieldBuilder = mergedSettings.widgetBuilder ??
+                      WoFormTheme.of(context)?.mediaFieldBuilder;
+
+                  if (mediaFieldBuilder == null) {
+                    throw UnimplementedError(
+                      'MediaInput has no default field. '
+                      'Either create your own or use MediaField '
+                      'from wo_form_service.',
+                    );
+                  }
+
+                  return mediaFieldBuilder(fieldData);
+                },
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }

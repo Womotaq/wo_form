@@ -38,56 +38,59 @@ class DurationFieldBuilder extends StatelessWidget {
       );
     }
 
-    return BlocSelector<WoFormLockCubit, Set<String>, bool>(
-      selector: (lockedInputs) => lockedInputs.contains(path),
-      builder: (context, inputIsLocked) {
-        return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
-          builder: (context, status) {
-            return WoFormValueBuilder<Duration>(
-              path: path,
-              builder: (context, value) {
-                final String? errorText;
-                if (status is InProgressStatus) {
-                  final error = status.getError(path: path);
-                  if (error == null) {
-                    errorText = null;
+    return WoFormNodeFocusManager(
+      path: path,
+      child: BlocSelector<WoFormLockCubit, Set<String>, bool>(
+        selector: (lockedInputs) => lockedInputs.contains(path),
+        builder: (context, inputIsLocked) {
+          return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
+            builder: (context, status) {
+              return WoFormValueBuilder<Duration>(
+                path: path,
+                builder: (context, value) {
+                  final String? errorText;
+                  if (status is InProgressStatus) {
+                    final error = status.getError(path: path);
+                    if (error == null) {
+                      errorText = null;
+                    } else {
+                      errorText =
+                          context.read<WoFormL10n?>()?.translateError(error);
+                    }
                   } else {
-                    errorText =
-                        context.read<WoFormL10n?>()?.translateError(error);
+                    errorText = null;
                   }
-                } else {
-                  errorText = null;
-                }
 
-                final fieldData = WoFieldData<DurationInput, Duration,
-                    DurationInputUiSettings>(
-                  path: path,
-                  input: input,
-                  value: value,
-                  errorText: errorText,
-                  uiSettings: mergedSettings,
-                  onValueChanged: inputIsLocked
-                      ? null
-                      : (
-                          Duration? value, {
-                          UpdateStatus updateStatus = UpdateStatus.yes,
-                        }) =>
-                          valuesCubit.onValueChanged(
-                            path: path,
-                            value: value,
-                            updateStatus: updateStatus,
-                          ),
-                );
+                  final fieldData = WoFieldData<DurationInput, Duration,
+                      DurationInputUiSettings>(
+                    path: path,
+                    input: input,
+                    value: value,
+                    errorText: errorText,
+                    uiSettings: mergedSettings,
+                    onValueChanged: inputIsLocked
+                        ? null
+                        : (
+                            Duration? value, {
+                            UpdateStatus updateStatus = UpdateStatus.yes,
+                          }) =>
+                            valuesCubit.onValueChanged(
+                              path: path,
+                              value: value,
+                              updateStatus: updateStatus,
+                            ),
+                  );
 
-                return (mergedSettings.widgetBuilder ??
-                        WoFormTheme.of(context)?.durationFieldBuilder ??
-                        DurationField.new)
-                    .call(fieldData);
-              },
-            );
-          },
-        );
-      },
+                  return (mergedSettings.widgetBuilder ??
+                          WoFormTheme.of(context)?.durationFieldBuilder ??
+                          DurationField.new)
+                      .call(fieldData);
+                },
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }

@@ -38,13 +38,8 @@ class NumFieldBuilder extends StatelessWidget {
       );
     }
 
-    return Focus(
-      skipTraversal: true,
-      onFocusChange: (value) {
-        if (value == false) {
-          context.read<WoFormValuesCubit>().markPathAsVisited(path: path);
-        }
-      },
+    return WoFormNodeFocusManager(
+      path: path,
       child: BlocSelector<WoFormLockCubit, Set<String>, bool>(
         selector: (lockedInputs) => lockedInputs.contains(path),
         builder: (context, inputIsLocked) {
