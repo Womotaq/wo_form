@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_places_flutter/google_places_flutter.dart';
-import 'package:google_places_flutter/model/place_type.dart';
 import 'package:google_places_flutter/model/prediction.dart';
 import 'package:phone_form_field/phone_form_field.dart';
 import 'package:wo_form/wo_form.dart';
@@ -83,7 +82,7 @@ class _StringFieldState extends State<StringField> {
       },
     );
 
-    if (widget.data.uiSettings.keyboardType == TextInputType.streetAddress) {
+    if (widget.data.uiSettings.placeAutocompleteType != null) {
       final googleAPIKey = WoFormTheme.of(context, listen: false)?.googleAPIKey;
       if (googleAPIKey != null) {
         return GooglePlaceAutoCompleteTextField(
@@ -92,7 +91,7 @@ class _StringFieldState extends State<StringField> {
           textInputAction: widget.data.uiSettings.textInputAction,
           googleAPIKey: googleAPIKey,
           debounceTime: 300, // TODO : customizable
-          countries: widget.data.uiSettings.addressAutocompleteCountries,
+          countries: widget.data.uiSettings.placeAutocompleteCountries,
           onChanged: widget.data.onValueChanged,
           itemBuilder: (context, index, Prediction prediction) => Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -111,7 +110,7 @@ class _StringFieldState extends State<StringField> {
             ),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          placeType: PlaceType.address, // TODO : customizable
+          placeType: widget.data.uiSettings.placeAutocompleteType,
         );
       }
     }
