@@ -93,12 +93,7 @@ class _StringFieldState extends State<StringField> {
           googleAPIKey: googleAPIKey,
           debounceTime: 300, // TODO : customizable
           countries: widget.data.uiSettings.addressAutocompleteCountries,
-          onSelected: (prediction) {
-            textEditingController!.text = prediction.description ?? '';
-            textEditingController!.selection = TextSelection.fromPosition(
-              TextPosition(offset: (prediction.description ?? '').length),
-            );
-          },
+          onChanged: widget.data.onValueChanged,
           itemBuilder: (context, index, Prediction prediction) => Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Row(

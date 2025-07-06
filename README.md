@@ -97,3 +97,5 @@ Upcoming :
 
 - Possibility for the submit button to stand at the bottom, above the form, if this one is too big for the screen
 - Focus and scroll to the first invalid field when submitting
+- Merge wo_form & wo_form_service
+- Better date selection for large screens
