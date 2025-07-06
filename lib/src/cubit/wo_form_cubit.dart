@@ -586,8 +586,10 @@ class WoForm extends StatelessWidget {
                 case SubmitSuccessStatus():
                   onSubmitSuccess?.call(context);
                 case SubmitErrorStatus():
-                  (onSubmitError ?? WoFormTheme.of(context)?.onSubmitError)
-                      ?.call(context, status);
+                  (onSubmitError ??
+                          WoFormTheme.of(context)?.onSubmitError ??
+                          _defaultOnSubmitError)
+                      .call(context, status);
                 default:
               }
             },
@@ -599,6 +601,14 @@ class WoForm extends StatelessWidget {
       ),
     );
   }
+
+  static void _defaultOnSubmitError(
+    BuildContext context,
+    SubmitErrorStatus status,
+  ) =>
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('${status.error}')),
+      );
 }
 
 class RootKey<T extends State<StatefulWidget>> extends GlobalKey<T> {
