@@ -142,30 +142,28 @@ class SelectStringFieldBuilder extends SelectFieldBuilder<String> {
 
   @override
   SelectInput<String> getChild(WoFormNodeMixin form, WoFormValues values) {
-    final selectStringInput = form.getChild(
-      path: path,
-      parentPath: '',
-      values: values,
-    );
-    if (selectStringInput is! SelectStringInput) {
+    final input = form.getChild(path: path, parentPath: '', values: values);
+    if (input is! SelectStringInput) {
       throw ArgumentError(
         'Wrong input at path "$path". '
-        'Expected SelectStringInput, got ${selectStringInput.runtimeType}',
+        'Expected SelectStringInput, got ${input.runtimeType}',
       );
     }
 
     return SelectInput<String>(
-      id: selectStringInput.id,
-      maxCount: selectStringInput.maxCount,
-      minCount: selectStringInput.minCount,
-      initialValues: selectStringInput.initialValues,
-      availibleValues: selectStringInput.availibleValues,
-      idsOfAvailibleValues: selectStringInput.idsOfAvailibleValues,
-      getCustomError: selectStringInput.getCustomError,
-      onValueChanged: selectStringInput.onValueChanged,
-      uiSettings: selectStringInput.uiSettings,
-      quizSettings: selectStringInput.quizSettings,
+      id: input.id,
+      maxCount: input.maxCount,
+      minCount: input.minCount,
+      initialValues: input.initialValues,
+      availibleValues: input.availibleValues,
+      idsOfAvailibleValues: input.idsOfAvailibleValues,
+      onValueChanged: input.onValueChanged,
+      getCustomError: input.getCustomError,
+      submitFormOnSelect: input.submitFormOnSelect,
+      uiSettings: input.uiSettings,
+      quizSettings: input.quizSettings,
       toJsonT: (value) => value,
+      fromJsonT: (value) => value as String?,
     );
   }
 }

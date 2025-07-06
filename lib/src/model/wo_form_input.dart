@@ -553,6 +553,8 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
   WoFormInput withId({required String id}) => copyWith(id: id);
 }
 
+// Note : when adding a new parameter, make sure to update
+// SelectStringFieldBuilder.
 @Freezed(genericArgumentFactories: true)
 abstract class SelectInput<T>
     with _$SelectInput<T>, WoFormNodeMixin, WoFormInputMixin {
