@@ -295,7 +295,6 @@ abstract class MediaService {
     );
   }
 
-  // TODO : replace by importMedias
   /// It is recommended to crop an image when uploading.
   Future<MediaFile?> _pickAndCropLocalImage({
     required ImageSource source,
