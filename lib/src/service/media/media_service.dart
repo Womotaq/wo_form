@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'dart:math';
+import 'dart:math' hide log;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -74,12 +74,19 @@ abstract class MediaService {
     required MediaImportSettings importSettings,
   });
   BuildContext getAppContext();
-  (String title, String cancel, String save) getCropLocalizations(
-    BuildContext context,
-  );
+  CropLocalizations getCropLocalizations(BuildContext context);
   Future<MediaImportMethod?> selectImportMethod(
     MediaImportSettings importSettings,
   );
+
+  /// Used by MediaField to display a media
+  Widget mediaWidgetBuilder({
+    required Media media,
+    BoxFit? fit,
+    Alignment alignment,
+    String? package,
+    Key? key,
+  });
 
   Future<MediaFile?> _cropImage({
     required String sourcePath,
@@ -92,10 +99,9 @@ abstract class MediaService {
     final screenSize = MediaQuery.sizeOf(context);
     final cropBoundarySize = min(
       screenSize.width - 128,
-      screenSize.height - 256,
+      screenSize.height - 298,
     ).toInt();
 
-    // final woL10n = context.woL10n;
     final localizations = getCropLocalizations(context);
 
     final croppedFile = await ImageCropper().cropImage(
@@ -112,7 +118,7 @@ abstract class MediaService {
       uiSettings: [
         AndroidUiSettings(
           // TODO : aspectRatio
-          toolbarTitle: localizations.$1,
+          toolbarTitle: localizations.title,
           toolbarColor: Theme.of(context).colorScheme.primary,
           toolbarWidgetColor: Theme.of(context).colorScheme.surface,
         ),
@@ -121,7 +127,9 @@ abstract class MediaService {
         ),
         WebUiSettings(
           context: context,
-          presentStyle: WebPresentStyle.page,
+          presentStyle: screenSize.width > 500 && screenSize.height > 500
+              ? WebPresentStyle.dialog
+              : WebPresentStyle.page,
           size: CropperSize(
             width: cropBoundarySize,
             height: cropBoundarySize,
@@ -130,11 +138,11 @@ abstract class MediaService {
           zoomOnWheel: false,
           dragMode: WebDragMode.move,
           translations: WebTranslations(
-            title: localizations.$1,
-            rotateLeftTooltip: '',
-            rotateRightTooltip: '',
-            cancelButton: localizations.$2,
-            cropButton: localizations.$3,
+            title: localizations.title,
+            rotateLeftTooltip: localizations.rotateLeftTooltip ?? '',
+            rotateRightTooltip: localizations.rotateRightTooltip ?? '',
+            cancelButton: localizations.cancel,
+            cropButton: localizations.save,
           ),
           themeData: const WebThemeData(
             rotateLeftIcon: Icons.rotate_left,
@@ -349,6 +357,14 @@ abstract class MediaService {
         maxWidth: maxWidth,
       );
 }
+
+typedef CropLocalizations = ({
+  String title,
+  String cancel,
+  String save,
+  String? rotateLeftTooltip,
+  String? rotateRightTooltip,
+});
 
 extension on MediaPickSource {
   ImageSource toImageSource() => switch (this) {

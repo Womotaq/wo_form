@@ -81,15 +81,8 @@ class MediaFieldBuilder extends StatelessWidget {
                   );
 
                   final mediaFieldBuilder = mergedSettings.widgetBuilder ??
-                      WoFormTheme.of(context)?.mediaFieldBuilder;
-
-                  if (mediaFieldBuilder == null) {
-                    throw UnimplementedError(
-                      'MediaInput has no default field. '
-                      'Either create your own or use MediaField '
-                      'from wo_form_service.',
-                    );
-                  }
+                      WoFormTheme.of(context)?.mediaFieldBuilder ??
+                      MediaField.new;
 
                   return mediaFieldBuilder(fieldData);
                 },

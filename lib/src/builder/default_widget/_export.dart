@@ -7,6 +7,7 @@ export 'form_header.dart';
 export 'input_header.dart';
 export 'inputs_node_expander.dart';
 export 'inputs_node_widget.dart';
+export 'media_field.dart';
 export 'num_field.dart';
 export 'num_selector.dart';
 export 'place_autocomplete/model/place_type.dart';

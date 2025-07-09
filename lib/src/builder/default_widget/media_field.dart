@@ -89,16 +89,9 @@ import 'package:wo_form/wo_form.dart';
 ///     - context.read<MediaService>().upload(medias, node.uploadFolderPath)
 
 class MediaField extends StatelessWidget {
-  const MediaField({required this.data, required this.mediaViewer, super.key});
+  const MediaField(this.data, {super.key});
 
   final WoFieldData<MediaInput, List<Media>?, MediaInputUiSettings> data;
-  final Widget Function({
-    required Media media,
-    BoxFit? fit,
-    Alignment alignment,
-    String? package,
-    Key? key,
-  }) mediaViewer;
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +117,9 @@ class MediaField extends StatelessWidget {
                                   data.input.aspectRatio == 0
                               ? null
                               : fieldHeight * data.input.aspectRatio!,
-                          child: mediaViewer(media: media),
+                          child: context
+                              .read<MediaService>()
+                              .mediaWidgetBuilder(media: media),
                         ),
                       ),
                     ),
@@ -246,7 +241,8 @@ class MediaField extends StatelessWidget {
           GestureDetector(
             onTap: onChanged == null ? null : () => edit(context, media),
             child: Center(
-              child: mediaViewer(media: media),
+              child:
+                  context.read<MediaService>().mediaWidgetBuilder(media: media),
             ),
           ),
           _MediaActions(media: media, data: data),
