@@ -99,6 +99,7 @@ class MediaField extends StatelessWidget {
     final media = medias.firstOrNull;
     final onChanged = data.onValueChanged;
     final fieldHeight = data.uiSettings.fieldHeight ?? 160;
+    final aspectRatio = data.input.aspectRatio;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -113,10 +114,9 @@ class MediaField extends StatelessWidget {
                             : () => edit(context, media),
                         child: SizedBox(
                           height: fieldHeight.toDouble(),
-                          width: data.input.aspectRatio == null ||
-                                  data.input.aspectRatio == 0
+                          width: aspectRatio == null || aspectRatio == 0
                               ? null
-                              : fieldHeight * data.input.aspectRatio!,
+                              : fieldHeight * aspectRatio,
                           child: context
                               .read<MediaService>()
                               .mediaWidgetBuilder(media: media),
@@ -168,14 +168,13 @@ class MediaField extends StatelessWidget {
                     Center(
                       child: SizedBox(
                         height: fieldHeight.toDouble(),
-                        width: data.input.aspectRatio == null ||
-                                data.input.aspectRatio == 0
+                        width: aspectRatio == null || aspectRatio == 0
                             ? null
-                            : fieldHeight * data.input.aspectRatio!,
+                            : fieldHeight * aspectRatio,
                         child: AddMediaButon(
                           addMediaText: data.uiSettings.addMediaText,
                           onChanged: onChanged,
-                          aspectRatio: data.input.aspectRatio,
+                          aspectRatioOrCircle: data.input.aspectRatioOrCircle,
                           limit: 1,
                           importSettings: data.input.importSettings,
                         ),
@@ -223,7 +222,7 @@ class MediaField extends StatelessWidget {
             onChanged: onChanged == null
                 ? null
                 : (newMedias) => onChanged([...medias, ...newMedias]),
-            aspectRatio: data.input.aspectRatio,
+            aspectRatioOrCircle: data.input.aspectRatioOrCircle,
             limit: limit,
             importSettings: data.input.importSettings,
           ),
@@ -257,7 +256,7 @@ class MediaField extends StatelessWidget {
   ) async {
     final cropped = (await context.read<MediaService>().edit(
       medias: [media],
-      aspectRatio: data.input.aspectRatio,
+      aspectRatioOrCircle: data.input.aspectRatioOrCircle,
       maxHeight: data.input.importSettings.imageMaxHeight,
       maxWidth: data.input.importSettings.imageMaxWidth,
     ))
@@ -332,7 +331,7 @@ class _MediaActions extends StatelessWidget {
                   : () async {
                       final cropped = (await context.read<MediaService>().edit(
                         medias: [media],
-                        aspectRatio: data.input.aspectRatio,
+                        aspectRatioOrCircle: data.input.aspectRatioOrCircle,
                         maxHeight: data.input.importSettings.imageMaxHeight,
                         maxWidth: data.input.importSettings.imageMaxWidth,
                       ))
@@ -361,7 +360,7 @@ class AddMediaButon extends StatelessWidget {
   const AddMediaButon({
     required this.addMediaText,
     required this.onChanged,
-    required this.aspectRatio,
+    required this.aspectRatioOrCircle,
     required this.limit,
     required this.importSettings,
     super.key,
@@ -369,7 +368,7 @@ class AddMediaButon extends StatelessWidget {
 
   final String? addMediaText;
   final void Function(List<Media>)? onChanged;
-  final double? aspectRatio;
+  final double? aspectRatioOrCircle;
   final int? limit;
   final MediaImportSettings importSettings;
 
@@ -389,10 +388,10 @@ class AddMediaButon extends StatelessWidget {
                 );
                 if (newMedias.isEmpty) return;
 
-                if (aspectRatio != null) {
+                if (aspectRatioOrCircle != null) {
                   final croppedMedias = await mediaService.edit(
                     medias: newMedias,
-                    aspectRatio: aspectRatio,
+                    aspectRatioOrCircle: aspectRatioOrCircle,
                     maxHeight: importSettings.imageMaxHeight,
                     maxWidth: importSettings.imageMaxWidth,
                   );

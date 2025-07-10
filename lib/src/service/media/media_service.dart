@@ -1,12 +1,11 @@
 import 'dart:io';
 import 'dart:math' hide log;
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:wo_form/src/service/media/image_cropper.dart';
 import 'package:wo_form/wo_form.dart';
 
 /// If you want to use MediaInput,
@@ -29,6 +28,7 @@ abstract class MediaService {
 
   final PermissionService permissionService;
 
+  static const circleAspectRatio = -1.0;
   static const avatarImportSettings = MediaImportSettings(
     imageMaxHeight: 512,
     imageMaxWidth: 512,
@@ -163,45 +163,30 @@ abstract class MediaService {
 
   Future<List<MediaFile>?> edit({
     required List<Media> medias,
-    required double? aspectRatio,
+    required double? aspectRatioOrCircle,
     double? maxHeight,
     double? maxWidth,
   }) async {
     final result = <MediaFile>[];
 
     for (final media in medias) {
-      final String sourcePath;
-      switch (media) {
-        case MediaFile(file: final file):
-          sourcePath = file.path;
-        case MediaUrl(url: final url):
-          if (kIsWeb) {
-            sourcePath = url;
-          } else {
-            final responseData = await http.get(Uri.parse(url));
-            final buffer = responseData.bodyBytes.buffer;
-            final byteData = ByteData.view(buffer);
-            final tempDir = await getTemporaryDirectory();
-            final file = await File('${tempDir.path}/img').writeAsBytes(
-              buffer.asUint8List(
-                  byteData.offsetInBytes, byteData.lengthInBytes),
-            );
-            sourcePath = file.path;
-          }
-      }
-
-      final cropped = await _cropImage(
-        sourcePath: sourcePath,
-        aspectRatio: aspectRatio,
-        maxHeight: maxHeight?.toInt(),
-        maxWidth: maxWidth?.toInt(),
+      final bytes = await Cropper.cropInDialog(
+        context: getAppContext(),
+        image: media,
+        aspectRatioOrCircle: aspectRatioOrCircle,
       );
-      if (cropped == null) return null;
-      result.add(cropped);
+      if (bytes == null) continue;
+
+      final tempDir = await getTemporaryDirectory();
+      final random = Random();
+      final uid = List<int>.generate(4, (_) => random.nextInt(10))
+          .reduce((a, b) => a * 10 + b);
+      final filePath = '${tempDir.path}/cropped$uid-${media.name}';
+      await File(filePath).writeAsBytes(bytes);
+      result.add(MediaFile(file: XFile(filePath)));
     }
 
-    assert(medias.length == result.length);
-    return result;
+    return medias.length == result.length ? result : null;
   }
 
   Future<List<Media>> _importMedias({

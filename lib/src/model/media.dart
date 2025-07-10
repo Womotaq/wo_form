@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:http/http.dart' as http;
 import 'package:wo_form/src/model/json_converter/duration.dart';
 import 'package:wo_form/src/model/json_converter/media_list.dart';
 import 'package:wo_form/src/model/json_converter/xfile.dart';
@@ -40,6 +41,11 @@ sealed class Media with _$Media {
   String? get name => switch (this) {
         final MediaUrl media => media.url.split('/').lastOrNull,
         final MediaFile media => media.file.name,
+      };
+  Future<Uint8List> get bytes => switch (this) {
+        MediaFile(file: final file) => file.readAsBytes(),
+        MediaUrl(uri: final uri) =>
+          http.get(uri).then((response) => response.bodyBytes),
       };
 
   Future<MediaType> getType(BuildContext context) async => switch (this) {

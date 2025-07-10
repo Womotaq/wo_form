@@ -4,7 +4,6 @@ import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:wo_form/src/_export.dart';
@@ -589,7 +588,7 @@ class WoForm extends StatelessWidget {
                 case SubmitErrorStatus():
                   (onSubmitError ??
                           WoFormTheme.of(context)?.onSubmitError ??
-                          _defaultOnSubmitError)
+                          defaultOnSubmitError)
                       .call(context, status);
                 default:
               }
@@ -603,7 +602,7 @@ class WoForm extends StatelessWidget {
     );
   }
 
-  static void _defaultOnSubmitError(
+  static void defaultOnSubmitError(
     BuildContext context,
     SubmitErrorStatus status,
   ) =>

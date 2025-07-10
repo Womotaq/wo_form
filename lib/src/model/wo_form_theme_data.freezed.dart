@@ -15,8 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$WoFormThemeData {
   BooleanFieldBuilderDef? get booleanFieldBuilder;
-  DateTimeFieldBuilderDef?
-      get dateTimeFieldBuilder; // TODO : default to intl if not set
+  DateTimeFieldBuilderDef? get dateTimeFieldBuilder;
   IsoCode? get defaultPhoneCoutry;
   DurationFieldBuilderDef? get durationFieldBuilder;
   DynamicInputsNodeWidgetBuilderDef? get dynamicInputsNodeWidgetBuilder;
@@ -385,7 +384,6 @@ class _WoFormThemeData extends WoFormThemeData {
   final BooleanFieldBuilderDef? booleanFieldBuilder;
   @override
   final DateTimeFieldBuilderDef? dateTimeFieldBuilder;
-// TODO : default to intl if not set
   @override
   final IsoCode? defaultPhoneCoutry;
   @override
