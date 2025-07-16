@@ -1,12 +1,14 @@
 import 'dart:io';
 import 'dart:math' hide log;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:wo_form/src/service/media/image_cropper.dart';
 import 'package:wo_form/wo_form.dart';
+import 'package:path/path.dart';
 
 /// If you want to use MediaInput,
 /// provide an implementation of this class at the top-level of your application
@@ -175,15 +177,45 @@ abstract class MediaService {
         image: media,
         aspectRatioOrCircle: aspectRatioOrCircle,
       );
+
       if (bytes == null) continue;
 
-      final tempDir = await getTemporaryDirectory();
+      // Replace the extension of the original image by png,
+      // since Cropper produces bytes in PNG format.
+      var filename = '${withoutExtension(media.name ?? 'image')}.png';
+      // Remove potential old prefix 'croppedXXXX-'
+      filename = filename.replaceFirst(RegExp(r'^cropped\d{4}-'), '');
+      // Add a new prefix. This prefix ensures the image is considered
+      // a new one, so the old cached image is not reused.
       final random = Random();
-      final uid = List<int>.generate(4, (_) => random.nextInt(10))
-          .reduce((a, b) => a * 10 + b);
-      final filePath = '${tempDir.path}/cropped$uid-${media.name}';
-      await File(filePath).writeAsBytes(bytes);
-      result.add(MediaFile(file: XFile(filePath)));
+      final uid = List.generate(4, (_) => random.nextInt(10).toString())
+          .reduce((a, b) => a + b);
+      filename = 'cropped$uid-$filename';
+
+      if (kIsWeb) {
+        result.add(
+          MediaFile(
+            file: XFile.fromData(
+              bytes,
+              name: filename,
+              mimeType: 'image/png',
+            ),
+          ),
+        );
+      } else {
+        final tempDir = await getTemporaryDirectory();
+        final filePath = '${tempDir.path}/$filename';
+        await File(filePath).writeAsBytes(bytes);
+        result.add(
+          MediaFile(
+            file: XFile(
+              filePath,
+              name: filename,
+              mimeType: 'image/png',
+            ),
+          ),
+        );
+      }
     }
 
     return medias.length == result.length ? result : null;
