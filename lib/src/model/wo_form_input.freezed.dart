@@ -2213,7 +2213,7 @@ class _$SelectInputCopyWithImpl<T, $Res>
 /// @nodoc
 @JsonSerializable(genericArgumentFactories: true)
 class _SelectInput<T> extends SelectInput<T> {
-  _SelectInput(
+  const _SelectInput(
       {required this.id,
       required this.maxCount,
       this.minCount = 0,

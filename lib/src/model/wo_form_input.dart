@@ -567,7 +567,7 @@ extension MediaInputX on MediaInput {
 @Freezed(genericArgumentFactories: true)
 abstract class SelectInput<T>
     with _$SelectInput<T>, WoFormNodeMixin, WoFormInputMixin {
-  factory SelectInput({
+  const factory SelectInput({
     required String id,
     required int? maxCount,
     @Default(0) int minCount,
