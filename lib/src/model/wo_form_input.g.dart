@@ -97,7 +97,6 @@ MediaInput _$MediaInputFromJson(Map<String, dynamic> json) => MediaInput(
           json['importSettings'] as Map<String, dynamic>),
       maxCount: (json['maxCount'] as num?)?.toInt(),
       minCount: (json['minCount'] as num?)?.toInt() ?? 0,
-      aspectRatioOrCircle: (json['aspectRatioOrCircle'] as num?)?.toDouble(),
       initialValues: _$JsonConverterFromJson<List<dynamic>, List<Media>>(
           json['initialValues'], const MediaListConverter().fromJson),
       submitFormOnSelect: json['submitFormOnSelect'] as bool? ?? false,
@@ -116,7 +115,6 @@ Map<String, dynamic> _$MediaInputToJson(MediaInput instance) =>
           MediaImportSettings.staticToJson(instance.importSettings),
       'maxCount': instance.maxCount,
       'minCount': instance.minCount,
-      'aspectRatioOrCircle': instance.aspectRatioOrCircle,
       'initialValues': _$JsonConverterToJson<List<dynamic>, List<Media>>(
           instance.initialValues, const MediaListConverter().toJson),
       'submitFormOnSelect': instance.submitFormOnSelect,

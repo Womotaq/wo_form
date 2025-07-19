@@ -342,7 +342,10 @@ abstract class MediaInputUiSettings with _$MediaInputUiSettings {
   const factory MediaInputUiSettings({
     String? addMediaText,
     int? fieldHeight,
-    @Default(false) bool showGrid,
+
+    /// For a circle cropping, use MediaService.circleAspectRatio
+    double? cropAspectRatioOrCircle,
+    @Default(false) bool cropShowGrid,
     @JsonKey(includeToJson: false, includeFromJson: false)
     MediaFieldBuilderDef? widgetBuilder,
   }) = _MediaInputUiSettings;

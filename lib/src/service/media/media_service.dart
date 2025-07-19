@@ -161,9 +161,9 @@ abstract class MediaService {
           );
   }
 
-  Future<List<MediaFile>?> edit({
+  Future<List<MediaFile>?> crop({
     required List<Media> medias,
-    required double? aspectRatioOrCircle,
+    required double? cropAspectRatioOrCircle,
     bool showGrid = false,
     double? maxHeight,
     double? maxWidth,
@@ -174,7 +174,7 @@ abstract class MediaService {
       final bytes = await Cropper.cropInDialog(
         context: getAppContext(),
         image: media,
-        aspectRatioOrCircle: aspectRatioOrCircle,
+        cropAspectRatioOrCircle: cropAspectRatioOrCircle,
         showGrid: showGrid,
       );
 

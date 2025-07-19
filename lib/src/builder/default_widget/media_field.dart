@@ -98,8 +98,11 @@ class MediaField extends StatelessWidget {
     final medias = data.value ?? [];
     final media = medias.firstOrNull;
     final onChanged = data.onValueChanged;
-    final fieldHeight = data.uiSettings.fieldHeight ?? 160;
-    final aspectRatio = data.input.aspectRatio;
+    final fieldHeight = data.uiSettings.fieldHeight?.toDouble() ?? 160;
+    final aspectRatio = data.uiSettings.cropAspectRatioOrCircle ==
+            MediaService.circleAspectRatio
+        ? 1.0
+        : data.uiSettings.cropAspectRatioOrCircle;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -113,7 +116,7 @@ class MediaField extends StatelessWidget {
                             ? null
                             : () => edit(context, media),
                         child: SizedBox(
-                          height: fieldHeight.toDouble(),
+                          height: fieldHeight,
                           width: aspectRatio == null || aspectRatio == 0
                               ? null
                               : fieldHeight * aspectRatio,
@@ -126,7 +129,7 @@ class MediaField extends StatelessWidget {
                     Positioned(
                       right: 0,
                       child: Container(
-                        height: fieldHeight.toDouble(),
+                        height: fieldHeight,
                         color: Theme.of(context)
                             .colorScheme
                             .surfaceContainerLowest
@@ -167,15 +170,16 @@ class MediaField extends StatelessWidget {
                   children: [
                     Center(
                       child: SizedBox(
-                        height: fieldHeight.toDouble(),
+                        height: fieldHeight,
                         width: aspectRatio == null || aspectRatio == 0
                             ? null
                             : fieldHeight * aspectRatio,
                         child: AddMediaButon(
                           addMediaText: data.uiSettings.addMediaText,
                           onChanged: onChanged,
-                          aspectRatioOrCircle: data.input.aspectRatioOrCircle,
-                          showGrid: data.uiSettings.showGrid,
+                          cropAspectRatioOrCircle:
+                              data.uiSettings.cropAspectRatioOrCircle,
+                          cropShowGrid: data.uiSettings.cropShowGrid,
                           limit: 1,
                           importSettings: data.input.importSettings,
                         ),
@@ -184,7 +188,7 @@ class MediaField extends StatelessWidget {
                   ],
                 )
           : SizedBox(
-              height: fieldHeight.toDouble(),
+              height: fieldHeight,
               child: ListView.separated(
                 // shrinkWrap: true,
                 // physics: const NeverScrollableScrollPhysics(),
@@ -208,7 +212,7 @@ class MediaField extends StatelessWidget {
   Widget? _itemBuilder(BuildContext context, int index) {
     final medias = data.value ?? [];
     final onChanged = data.onValueChanged;
-    final fieldHeight = data.uiSettings.fieldHeight ?? 160;
+    final fieldHeight = data.uiSettings.fieldHeight?.toDouble() ?? 160;
 
     if (index == medias.length) {
       final limit = data.input.maxCount == null
@@ -217,14 +221,14 @@ class MediaField extends StatelessWidget {
 
       if (limit == null || limit > 0) {
         return SizedBox(
-          width: fieldHeight.toDouble(),
+          width: fieldHeight,
           child: AddMediaButon(
             addMediaText: data.uiSettings.addMediaText,
             onChanged: onChanged == null
                 ? null
                 : (newMedias) => onChanged([...medias, ...newMedias]),
-            aspectRatioOrCircle: data.input.aspectRatioOrCircle,
-            showGrid: data.uiSettings.showGrid,
+            cropAspectRatioOrCircle: data.uiSettings.cropAspectRatioOrCircle,
+            cropShowGrid: data.uiSettings.cropShowGrid,
             limit: limit,
             importSettings: data.input.importSettings,
           ),
@@ -236,7 +240,7 @@ class MediaField extends StatelessWidget {
     final media = medias[index];
 
     return SizedBox(
-      width: fieldHeight.toDouble(),
+      width: fieldHeight,
       child: Stack(
         children: [
           GestureDetector(
@@ -256,10 +260,10 @@ class MediaField extends StatelessWidget {
     BuildContext context,
     Media media,
   ) async {
-    final cropped = (await context.read<MediaService>().edit(
+    final cropped = (await context.read<MediaService>().crop(
       medias: [media],
-      aspectRatioOrCircle: data.input.aspectRatioOrCircle,
-      showGrid: data.uiSettings.showGrid,
+      cropAspectRatioOrCircle: data.uiSettings.cropAspectRatioOrCircle,
+      showGrid: data.uiSettings.cropShowGrid,
       maxHeight: data.input.importSettings.imageMaxHeight,
       maxWidth: data.input.importSettings.imageMaxWidth,
     ))
@@ -332,10 +336,11 @@ class _MediaActions extends StatelessWidget {
               onPressed: onChanged == null
                   ? null
                   : () async {
-                      final cropped = (await context.read<MediaService>().edit(
+                      final cropped = (await context.read<MediaService>().crop(
                         medias: [media],
-                        aspectRatioOrCircle: data.input.aspectRatioOrCircle,
-                        showGrid: data.uiSettings.showGrid,
+                        cropAspectRatioOrCircle:
+                            data.uiSettings.cropAspectRatioOrCircle,
+                        showGrid: data.uiSettings.cropShowGrid,
                         maxHeight: data.input.importSettings.imageMaxHeight,
                         maxWidth: data.input.importSettings.imageMaxWidth,
                       ))
@@ -364,8 +369,8 @@ class AddMediaButon extends StatefulWidget {
   const AddMediaButon({
     required this.addMediaText,
     required this.onChanged,
-    required this.aspectRatioOrCircle,
-    required this.showGrid,
+    required this.cropAspectRatioOrCircle,
+    required this.cropShowGrid,
     required this.limit,
     required this.importSettings,
     super.key,
@@ -373,8 +378,8 @@ class AddMediaButon extends StatefulWidget {
 
   final String? addMediaText;
   final void Function(List<Media>)? onChanged;
-  final double? aspectRatioOrCircle;
-  final bool showGrid;
+  final double? cropAspectRatioOrCircle;
+  final bool cropShowGrid;
   final int? limit;
   final MediaImportSettings importSettings;
 
@@ -404,11 +409,11 @@ class _AddMediaButonState extends State<AddMediaButon> {
                   );
                   if (newMedias.isEmpty) return;
 
-                  if (widget.aspectRatioOrCircle != null) {
-                    final croppedMedias = await mediaService.edit(
+                  if (widget.cropAspectRatioOrCircle != null) {
+                    final croppedMedias = await mediaService.crop(
                       medias: newMedias,
-                      aspectRatioOrCircle: widget.aspectRatioOrCircle,
-                      showGrid: widget.showGrid,
+                      cropAspectRatioOrCircle: widget.cropAspectRatioOrCircle,
+                      showGrid: widget.cropShowGrid,
                       maxHeight: widget.importSettings.imageMaxHeight,
                       maxWidth: widget.importSettings.imageMaxWidth,
                     );

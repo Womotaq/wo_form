@@ -182,9 +182,6 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     required MediaImportSettings importSettings,
     required int? maxCount,
     @Default(0) int minCount,
-
-    /// For a circle cropping, use MediaService.circleAspectRatio
-    double? aspectRatioOrCircle,
     @MediaListConverter() List<Media>? initialValues,
     @JsonKey(includeToJson: false, includeFromJson: false)
     GetCustomErrorForListDef<Media>? getCustomError,
@@ -553,13 +550,6 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
 
   @override
   WoFormInput withId({required String id}) => copyWith(id: id);
-}
-
-extension MediaInputX on MediaInput {
-  double? get aspectRatio =>
-      aspectRatioOrCircle == MediaService.circleAspectRatio
-          ? 1
-          : aspectRatioOrCircle;
 }
 
 // Note : when adding a new parameter, make sure to update

@@ -2078,7 +2078,10 @@ class __$InputsNodeUiSettingsCopyWithImpl<$Res>
 mixin _$MediaInputUiSettings {
   String? get addMediaText;
   int? get fieldHeight;
-  bool get showGrid;
+
+  /// For a circle cropping, use MediaService.circleAspectRatio
+  double? get cropAspectRatioOrCircle;
+  bool get cropShowGrid;
   @JsonKey(includeToJson: false, includeFromJson: false)
   MediaFieldBuilderDef? get widgetBuilder;
 
@@ -2102,20 +2105,23 @@ mixin _$MediaInputUiSettings {
                 other.addMediaText == addMediaText) &&
             (identical(other.fieldHeight, fieldHeight) ||
                 other.fieldHeight == fieldHeight) &&
-            (identical(other.showGrid, showGrid) ||
-                other.showGrid == showGrid) &&
+            (identical(
+                    other.cropAspectRatioOrCircle, cropAspectRatioOrCircle) ||
+                other.cropAspectRatioOrCircle == cropAspectRatioOrCircle) &&
+            (identical(other.cropShowGrid, cropShowGrid) ||
+                other.cropShowGrid == cropShowGrid) &&
             (identical(other.widgetBuilder, widgetBuilder) ||
                 other.widgetBuilder == widgetBuilder));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, addMediaText, fieldHeight, showGrid, widgetBuilder);
+  int get hashCode => Object.hash(runtimeType, addMediaText, fieldHeight,
+      cropAspectRatioOrCircle, cropShowGrid, widgetBuilder);
 
   @override
   String toString() {
-    return 'MediaInputUiSettings(addMediaText: $addMediaText, fieldHeight: $fieldHeight, showGrid: $showGrid, widgetBuilder: $widgetBuilder)';
+    return 'MediaInputUiSettings(addMediaText: $addMediaText, fieldHeight: $fieldHeight, cropAspectRatioOrCircle: $cropAspectRatioOrCircle, cropShowGrid: $cropShowGrid, widgetBuilder: $widgetBuilder)';
   }
 }
 
@@ -2128,7 +2134,8 @@ abstract mixin class $MediaInputUiSettingsCopyWith<$Res> {
   $Res call(
       {String? addMediaText,
       int? fieldHeight,
-      bool showGrid,
+      double? cropAspectRatioOrCircle,
+      bool cropShowGrid,
       @JsonKey(includeToJson: false, includeFromJson: false)
       MediaFieldBuilderDef? widgetBuilder});
 }
@@ -2148,7 +2155,8 @@ class _$MediaInputUiSettingsCopyWithImpl<$Res>
   $Res call({
     Object? addMediaText = freezed,
     Object? fieldHeight = freezed,
-    Object? showGrid = null,
+    Object? cropAspectRatioOrCircle = freezed,
+    Object? cropShowGrid = null,
     Object? widgetBuilder = freezed,
   }) {
     return _then(_self.copyWith(
@@ -2160,9 +2168,13 @@ class _$MediaInputUiSettingsCopyWithImpl<$Res>
           ? _self.fieldHeight
           : fieldHeight // ignore: cast_nullable_to_non_nullable
               as int?,
-      showGrid: null == showGrid
-          ? _self.showGrid
-          : showGrid // ignore: cast_nullable_to_non_nullable
+      cropAspectRatioOrCircle: freezed == cropAspectRatioOrCircle
+          ? _self.cropAspectRatioOrCircle
+          : cropAspectRatioOrCircle // ignore: cast_nullable_to_non_nullable
+              as double?,
+      cropShowGrid: null == cropShowGrid
+          ? _self.cropShowGrid
+          : cropShowGrid // ignore: cast_nullable_to_non_nullable
               as bool,
       widgetBuilder: freezed == widgetBuilder
           ? _self.widgetBuilder
@@ -2178,7 +2190,8 @@ class _MediaInputUiSettings extends MediaInputUiSettings {
   const _MediaInputUiSettings(
       {this.addMediaText,
       this.fieldHeight,
-      this.showGrid = false,
+      this.cropAspectRatioOrCircle,
+      this.cropShowGrid = false,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.widgetBuilder})
       : super._();
@@ -2189,9 +2202,13 @@ class _MediaInputUiSettings extends MediaInputUiSettings {
   final String? addMediaText;
   @override
   final int? fieldHeight;
+
+  /// For a circle cropping, use MediaService.circleAspectRatio
+  @override
+  final double? cropAspectRatioOrCircle;
   @override
   @JsonKey()
-  final bool showGrid;
+  final bool cropShowGrid;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final MediaFieldBuilderDef? widgetBuilder;
@@ -2221,20 +2238,23 @@ class _MediaInputUiSettings extends MediaInputUiSettings {
                 other.addMediaText == addMediaText) &&
             (identical(other.fieldHeight, fieldHeight) ||
                 other.fieldHeight == fieldHeight) &&
-            (identical(other.showGrid, showGrid) ||
-                other.showGrid == showGrid) &&
+            (identical(
+                    other.cropAspectRatioOrCircle, cropAspectRatioOrCircle) ||
+                other.cropAspectRatioOrCircle == cropAspectRatioOrCircle) &&
+            (identical(other.cropShowGrid, cropShowGrid) ||
+                other.cropShowGrid == cropShowGrid) &&
             (identical(other.widgetBuilder, widgetBuilder) ||
                 other.widgetBuilder == widgetBuilder));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, addMediaText, fieldHeight, showGrid, widgetBuilder);
+  int get hashCode => Object.hash(runtimeType, addMediaText, fieldHeight,
+      cropAspectRatioOrCircle, cropShowGrid, widgetBuilder);
 
   @override
   String toString() {
-    return 'MediaInputUiSettings(addMediaText: $addMediaText, fieldHeight: $fieldHeight, showGrid: $showGrid, widgetBuilder: $widgetBuilder)';
+    return 'MediaInputUiSettings(addMediaText: $addMediaText, fieldHeight: $fieldHeight, cropAspectRatioOrCircle: $cropAspectRatioOrCircle, cropShowGrid: $cropShowGrid, widgetBuilder: $widgetBuilder)';
   }
 }
 
@@ -2249,7 +2269,8 @@ abstract mixin class _$MediaInputUiSettingsCopyWith<$Res>
   $Res call(
       {String? addMediaText,
       int? fieldHeight,
-      bool showGrid,
+      double? cropAspectRatioOrCircle,
+      bool cropShowGrid,
       @JsonKey(includeToJson: false, includeFromJson: false)
       MediaFieldBuilderDef? widgetBuilder});
 }
@@ -2269,7 +2290,8 @@ class __$MediaInputUiSettingsCopyWithImpl<$Res>
   $Res call({
     Object? addMediaText = freezed,
     Object? fieldHeight = freezed,
-    Object? showGrid = null,
+    Object? cropAspectRatioOrCircle = freezed,
+    Object? cropShowGrid = null,
     Object? widgetBuilder = freezed,
   }) {
     return _then(_MediaInputUiSettings(
@@ -2281,9 +2303,13 @@ class __$MediaInputUiSettingsCopyWithImpl<$Res>
           ? _self.fieldHeight
           : fieldHeight // ignore: cast_nullable_to_non_nullable
               as int?,
-      showGrid: null == showGrid
-          ? _self.showGrid
-          : showGrid // ignore: cast_nullable_to_non_nullable
+      cropAspectRatioOrCircle: freezed == cropAspectRatioOrCircle
+          ? _self.cropAspectRatioOrCircle
+          : cropAspectRatioOrCircle // ignore: cast_nullable_to_non_nullable
+              as double?,
+      cropShowGrid: null == cropShowGrid
+          ? _self.cropShowGrid
+          : cropShowGrid // ignore: cast_nullable_to_non_nullable
               as bool,
       widgetBuilder: freezed == widgetBuilder
           ? _self.widgetBuilder

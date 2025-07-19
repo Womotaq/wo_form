@@ -207,7 +207,9 @@ _MediaInputUiSettings _$MediaInputUiSettingsFromJson(
     _MediaInputUiSettings(
       addMediaText: json['addMediaText'] as String?,
       fieldHeight: (json['fieldHeight'] as num?)?.toInt(),
-      showGrid: json['showGrid'] as bool? ?? false,
+      cropAspectRatioOrCircle:
+          (json['cropAspectRatioOrCircle'] as num?)?.toDouble(),
+      cropShowGrid: json['cropShowGrid'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$MediaInputUiSettingsToJson(
@@ -215,7 +217,8 @@ Map<String, dynamic> _$MediaInputUiSettingsToJson(
     <String, dynamic>{
       'addMediaText': instance.addMediaText,
       'fieldHeight': instance.fieldHeight,
-      'showGrid': instance.showGrid,
+      'cropAspectRatioOrCircle': instance.cropAspectRatioOrCircle,
+      'cropShowGrid': instance.cropShowGrid,
     };
 
 _NumInputUiSettings _$NumInputUiSettingsFromJson(Map<String, dynamic> json) =>

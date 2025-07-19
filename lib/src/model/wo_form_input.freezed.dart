@@ -1093,7 +1093,6 @@ class MediaInput extends WoFormInput {
       required this.importSettings,
       required this.maxCount,
       this.minCount = 0,
-      this.aspectRatioOrCircle,
       @MediaListConverter() final List<Media>? initialValues,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.getCustomError,
@@ -1119,9 +1118,6 @@ class MediaInput extends WoFormInput {
   final int? maxCount;
   @JsonKey()
   final int minCount;
-
-  /// For a circle cropping, use MediaService.circleAspectRatio
-  final double? aspectRatioOrCircle;
   final List<Media>? _initialValues;
   @MediaListConverter()
   List<Media>? get initialValues {
@@ -1180,8 +1176,6 @@ class MediaInput extends WoFormInput {
                 other.maxCount == maxCount) &&
             (identical(other.minCount, minCount) ||
                 other.minCount == minCount) &&
-            (identical(other.aspectRatioOrCircle, aspectRatioOrCircle) ||
-                other.aspectRatioOrCircle == aspectRatioOrCircle) &&
             const DeepCollectionEquality()
                 .equals(other._initialValues, _initialValues) &&
             (identical(other.getCustomError, getCustomError) ||
@@ -1204,7 +1198,6 @@ class MediaInput extends WoFormInput {
       importSettings,
       maxCount,
       minCount,
-      aspectRatioOrCircle,
       const DeepCollectionEquality().hash(_initialValues),
       getCustomError,
       onValueChanged,
@@ -1214,7 +1207,7 @@ class MediaInput extends WoFormInput {
 
   @override
   String toString() {
-    return 'WoFormInput.media(id: $id, importSettings: $importSettings, maxCount: $maxCount, minCount: $minCount, aspectRatioOrCircle: $aspectRatioOrCircle, initialValues: $initialValues, getCustomError: $getCustomError, onValueChanged: $onValueChanged, submitFormOnSelect: $submitFormOnSelect, uploadPath: $uploadPath, uiSettings: $uiSettings)';
+    return 'WoFormInput.media(id: $id, importSettings: $importSettings, maxCount: $maxCount, minCount: $minCount, initialValues: $initialValues, getCustomError: $getCustomError, onValueChanged: $onValueChanged, submitFormOnSelect: $submitFormOnSelect, uploadPath: $uploadPath, uiSettings: $uiSettings)';
   }
 }
 
@@ -1232,7 +1225,6 @@ abstract mixin class $MediaInputCopyWith<$Res>
       MediaImportSettings importSettings,
       int? maxCount,
       int minCount,
-      double? aspectRatioOrCircle,
       @MediaListConverter() List<Media>? initialValues,
       @JsonKey(includeToJson: false, includeFromJson: false)
       GetCustomErrorForListDef<Media>? getCustomError,
@@ -1263,7 +1255,6 @@ class _$MediaInputCopyWithImpl<$Res> implements $MediaInputCopyWith<$Res> {
     Object? importSettings = null,
     Object? maxCount = freezed,
     Object? minCount = null,
-    Object? aspectRatioOrCircle = freezed,
     Object? initialValues = freezed,
     Object? getCustomError = freezed,
     Object? onValueChanged = freezed,
@@ -1288,10 +1279,6 @@ class _$MediaInputCopyWithImpl<$Res> implements $MediaInputCopyWith<$Res> {
           ? _self.minCount
           : minCount // ignore: cast_nullable_to_non_nullable
               as int,
-      aspectRatioOrCircle: freezed == aspectRatioOrCircle
-          ? _self.aspectRatioOrCircle
-          : aspectRatioOrCircle // ignore: cast_nullable_to_non_nullable
-              as double?,
       initialValues: freezed == initialValues
           ? _self._initialValues
           : initialValues // ignore: cast_nullable_to_non_nullable
