@@ -342,6 +342,7 @@ abstract class MediaInputUiSettings with _$MediaInputUiSettings {
   const factory MediaInputUiSettings({
     String? addMediaText,
     int? fieldHeight,
+    @Default(false) bool showGrid,
     @JsonKey(includeToJson: false, includeFromJson: false)
     MediaFieldBuilderDef? widgetBuilder,
   }) = _MediaInputUiSettings;

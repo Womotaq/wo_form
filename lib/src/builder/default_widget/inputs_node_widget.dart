@@ -15,6 +15,7 @@ class InputsNodeWidget extends StatelessWidget {
     final inputWidgets = node.children
         .map(
           (i) => Padding(
+            // TODO : use verticalSpacing in Column.spacing
             padding: EdgeInsets.only(bottom: woFormTheme?.verticalSpacing ?? 0),
             child: i.toWidget(parentPath: data.path),
           ),

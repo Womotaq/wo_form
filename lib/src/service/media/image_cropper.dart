@@ -1,25 +1,27 @@
-import 'dart:typed_data';
-
 import 'package:crop_your_image/crop_your_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image/image.dart' as img;
+import 'package:wo_form/src/service/media/download_button.dart';
 import 'package:wo_form/wo_form.dart';
 
 class Cropper extends StatefulWidget {
   const Cropper({
     required this.image,
     this.aspectRatioOrCircle,
+    this.showGrid = false,
     super.key,
   });
 
   final Media image;
   final double? aspectRatioOrCircle;
+  final bool showGrid;
 
   static Future<Uint8List?> cropInDialog({
     required BuildContext context,
     required Media image,
     double? aspectRatioOrCircle,
+    bool showGrid = false,
   }) =>
       showDialog(
         context: context,
@@ -27,6 +29,7 @@ class Cropper extends StatefulWidget {
           child: Cropper(
             image: image,
             aspectRatioOrCircle: aspectRatioOrCircle,
+            showGrid: showGrid,
           ),
         ),
       );
@@ -48,8 +51,7 @@ class _CropperState extends State<Cropper> {
 
   Future<void> _init() async {
     final bytes_ = await widget.image.bytes;
-    final image = img.decodeImage(bytes_);
-    if (image == null) return;
+    final image = await decodeImageFromList(await widget.image.bytes);
     final originalAspectRatio_ = image.width / image.height;
 
     setState(() {
@@ -72,8 +74,6 @@ class _CropperState extends State<Cropper> {
               builder: (context) {
                 final crop = Crop(
                   image: bytes!,
-                  interactive: true,
-                  fixCropRect: true,
                   controller: controller,
                   aspectRatio: cropCircle ? 1 : widget.aspectRatioOrCircle,
                   onCropped: (result) async {
@@ -89,23 +89,17 @@ class _CropperState extends State<Cropper> {
                   willUpdateScale: (newScale) => newScale < 5,
                   progressIndicator: const CircularProgressIndicator(),
                   withCircleUi: cropCircle,
-                  // overlayBuilder: true
-                  //     ? (context, rect) {
-                  //         final overlay = CustomPaint(
-                  //           painter: GridPainter(),
-                  //         );
-                  //         return true
-                  //             ? ClipOval(
-                  //                 child: overlay,
-                  //               )
-                  //             : overlay;
-                  //       }
-                  //     : null,
+                  overlayBuilder: widget.showGrid
+                      ? (context, rect) => ClipOval(
+                            child: CustomPaint(
+                              painter: GridPainter(),
+                            ),
+                          )
+                      : null,
                   baseColor: Colors.transparent,
                   maskColor: Colors.black.withAlpha(128),
-                  initialRectBuilder: cropCircle
-                      ? null
-                      : InitialRectBuilder.withBuilder(
+                  initialRectBuilder: widget.aspectRatioOrCircle == null
+                      ? InitialRectBuilder.withBuilder(
                           (viewportRect, imageRect) {
                           return Rect.fromLTRB(
                             viewportRect.left + 24,
@@ -113,7 +107,8 @@ class _CropperState extends State<Cropper> {
                             viewportRect.right - 24,
                             viewportRect.bottom - 24,
                           );
-                        }),
+                        })
+                      : null,
                 );
 
                 return originalAspectRatio == null
@@ -131,6 +126,7 @@ class _CropperState extends State<Cropper> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          DownloadButton(image: widget.image),
           const SizedBox(height: 8),
           Align(
             alignment: Alignment.centerLeft,

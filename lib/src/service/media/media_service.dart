@@ -43,7 +43,6 @@ abstract class MediaService {
       MediaImportMethodPickMedias(
         source: MediaPickSource.camera,
       ),
-      MediaImportMethodUrl(),
     ],
   );
   static const imageImportSettings = MediaImportSettings(
@@ -55,7 +54,6 @@ abstract class MediaService {
       MediaImportMethodPickMedias(
         source: MediaPickSource.camera,
       ),
-      MediaImportMethodUrl(),
     ],
   );
 
@@ -166,6 +164,7 @@ abstract class MediaService {
   Future<List<MediaFile>?> edit({
     required List<Media> medias,
     required double? aspectRatioOrCircle,
+    bool showGrid = false,
     double? maxHeight,
     double? maxWidth,
   }) async {
@@ -176,6 +175,7 @@ abstract class MediaService {
         context: getAppContext(),
         image: media,
         aspectRatioOrCircle: aspectRatioOrCircle,
+        showGrid: showGrid,
       );
 
       if (bytes == null) continue;

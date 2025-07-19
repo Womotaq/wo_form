@@ -207,6 +207,7 @@ _MediaInputUiSettings _$MediaInputUiSettingsFromJson(
     _MediaInputUiSettings(
       addMediaText: json['addMediaText'] as String?,
       fieldHeight: (json['fieldHeight'] as num?)?.toInt(),
+      showGrid: json['showGrid'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$MediaInputUiSettingsToJson(
@@ -214,6 +215,7 @@ Map<String, dynamic> _$MediaInputUiSettingsToJson(
     <String, dynamic>{
       'addMediaText': instance.addMediaText,
       'fieldHeight': instance.fieldHeight,
+      'showGrid': instance.showGrid,
     };
 
 _NumInputUiSettings _$NumInputUiSettingsFromJson(Map<String, dynamic> json) =>

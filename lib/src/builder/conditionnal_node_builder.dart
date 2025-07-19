@@ -29,10 +29,13 @@ class ConditionnalNodeBuilder extends StatelessWidget {
       child: BlocSelector<WoFormValuesCubit, WoFormValues, bool>(
         selector: (values) => values.meet(node.condition),
         builder: (context, conditionsAreMet) {
+          // TODO : improve
+          // TODO ConditionnalNode.clearChildrenWhenHidden
           if (!conditionsAreMet) {
             final valuesCubit = context.read<WoFormValuesCubit>();
             for (final childPath in valuesCubit.state.keys
                 .where((childPath) => childPath.startsWith(path))) {
+              // TODO onValuesChanged
               valuesCubit.onValueChanged(
                 path: childPath,
                 value: null,

@@ -2078,6 +2078,7 @@ class __$InputsNodeUiSettingsCopyWithImpl<$Res>
 mixin _$MediaInputUiSettings {
   String? get addMediaText;
   int? get fieldHeight;
+  bool get showGrid;
   @JsonKey(includeToJson: false, includeFromJson: false)
   MediaFieldBuilderDef? get widgetBuilder;
 
@@ -2101,18 +2102,20 @@ mixin _$MediaInputUiSettings {
                 other.addMediaText == addMediaText) &&
             (identical(other.fieldHeight, fieldHeight) ||
                 other.fieldHeight == fieldHeight) &&
+            (identical(other.showGrid, showGrid) ||
+                other.showGrid == showGrid) &&
             (identical(other.widgetBuilder, widgetBuilder) ||
                 other.widgetBuilder == widgetBuilder));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, addMediaText, fieldHeight, widgetBuilder);
+  int get hashCode => Object.hash(
+      runtimeType, addMediaText, fieldHeight, showGrid, widgetBuilder);
 
   @override
   String toString() {
-    return 'MediaInputUiSettings(addMediaText: $addMediaText, fieldHeight: $fieldHeight, widgetBuilder: $widgetBuilder)';
+    return 'MediaInputUiSettings(addMediaText: $addMediaText, fieldHeight: $fieldHeight, showGrid: $showGrid, widgetBuilder: $widgetBuilder)';
   }
 }
 
@@ -2125,6 +2128,7 @@ abstract mixin class $MediaInputUiSettingsCopyWith<$Res> {
   $Res call(
       {String? addMediaText,
       int? fieldHeight,
+      bool showGrid,
       @JsonKey(includeToJson: false, includeFromJson: false)
       MediaFieldBuilderDef? widgetBuilder});
 }
@@ -2144,6 +2148,7 @@ class _$MediaInputUiSettingsCopyWithImpl<$Res>
   $Res call({
     Object? addMediaText = freezed,
     Object? fieldHeight = freezed,
+    Object? showGrid = null,
     Object? widgetBuilder = freezed,
   }) {
     return _then(_self.copyWith(
@@ -2155,6 +2160,10 @@ class _$MediaInputUiSettingsCopyWithImpl<$Res>
           ? _self.fieldHeight
           : fieldHeight // ignore: cast_nullable_to_non_nullable
               as int?,
+      showGrid: null == showGrid
+          ? _self.showGrid
+          : showGrid // ignore: cast_nullable_to_non_nullable
+              as bool,
       widgetBuilder: freezed == widgetBuilder
           ? _self.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable
@@ -2169,6 +2178,7 @@ class _MediaInputUiSettings extends MediaInputUiSettings {
   const _MediaInputUiSettings(
       {this.addMediaText,
       this.fieldHeight,
+      this.showGrid = false,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.widgetBuilder})
       : super._();
@@ -2179,6 +2189,9 @@ class _MediaInputUiSettings extends MediaInputUiSettings {
   final String? addMediaText;
   @override
   final int? fieldHeight;
+  @override
+  @JsonKey()
+  final bool showGrid;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final MediaFieldBuilderDef? widgetBuilder;
@@ -2208,18 +2221,20 @@ class _MediaInputUiSettings extends MediaInputUiSettings {
                 other.addMediaText == addMediaText) &&
             (identical(other.fieldHeight, fieldHeight) ||
                 other.fieldHeight == fieldHeight) &&
+            (identical(other.showGrid, showGrid) ||
+                other.showGrid == showGrid) &&
             (identical(other.widgetBuilder, widgetBuilder) ||
                 other.widgetBuilder == widgetBuilder));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, addMediaText, fieldHeight, widgetBuilder);
+  int get hashCode => Object.hash(
+      runtimeType, addMediaText, fieldHeight, showGrid, widgetBuilder);
 
   @override
   String toString() {
-    return 'MediaInputUiSettings(addMediaText: $addMediaText, fieldHeight: $fieldHeight, widgetBuilder: $widgetBuilder)';
+    return 'MediaInputUiSettings(addMediaText: $addMediaText, fieldHeight: $fieldHeight, showGrid: $showGrid, widgetBuilder: $widgetBuilder)';
   }
 }
 
@@ -2234,6 +2249,7 @@ abstract mixin class _$MediaInputUiSettingsCopyWith<$Res>
   $Res call(
       {String? addMediaText,
       int? fieldHeight,
+      bool showGrid,
       @JsonKey(includeToJson: false, includeFromJson: false)
       MediaFieldBuilderDef? widgetBuilder});
 }
@@ -2253,6 +2269,7 @@ class __$MediaInputUiSettingsCopyWithImpl<$Res>
   $Res call({
     Object? addMediaText = freezed,
     Object? fieldHeight = freezed,
+    Object? showGrid = null,
     Object? widgetBuilder = freezed,
   }) {
     return _then(_MediaInputUiSettings(
@@ -2264,6 +2281,10 @@ class __$MediaInputUiSettingsCopyWithImpl<$Res>
           ? _self.fieldHeight
           : fieldHeight // ignore: cast_nullable_to_non_nullable
               as int?,
+      showGrid: null == showGrid
+          ? _self.showGrid
+          : showGrid // ignore: cast_nullable_to_non_nullable
+              as bool,
       widgetBuilder: freezed == widgetBuilder
           ? _self.widgetBuilder
           : widgetBuilder // ignore: cast_nullable_to_non_nullable

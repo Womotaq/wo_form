@@ -175,6 +175,7 @@ class MediaField extends StatelessWidget {
                           addMediaText: data.uiSettings.addMediaText,
                           onChanged: onChanged,
                           aspectRatioOrCircle: data.input.aspectRatioOrCircle,
+                          showGrid: data.uiSettings.showGrid,
                           limit: 1,
                           importSettings: data.input.importSettings,
                         ),
@@ -223,6 +224,7 @@ class MediaField extends StatelessWidget {
                 ? null
                 : (newMedias) => onChanged([...medias, ...newMedias]),
             aspectRatioOrCircle: data.input.aspectRatioOrCircle,
+            showGrid: data.uiSettings.showGrid,
             limit: limit,
             importSettings: data.input.importSettings,
           ),
@@ -257,6 +259,7 @@ class MediaField extends StatelessWidget {
     final cropped = (await context.read<MediaService>().edit(
       medias: [media],
       aspectRatioOrCircle: data.input.aspectRatioOrCircle,
+      showGrid: data.uiSettings.showGrid,
       maxHeight: data.input.importSettings.imageMaxHeight,
       maxWidth: data.input.importSettings.imageMaxWidth,
     ))
@@ -332,6 +335,7 @@ class _MediaActions extends StatelessWidget {
                       final cropped = (await context.read<MediaService>().edit(
                         medias: [media],
                         aspectRatioOrCircle: data.input.aspectRatioOrCircle,
+                        showGrid: data.uiSettings.showGrid,
                         maxHeight: data.input.importSettings.imageMaxHeight,
                         maxWidth: data.input.importSettings.imageMaxWidth,
                       ))
@@ -361,6 +365,7 @@ class AddMediaButon extends StatelessWidget {
     required this.addMediaText,
     required this.onChanged,
     required this.aspectRatioOrCircle,
+    required this.showGrid,
     required this.limit,
     required this.importSettings,
     super.key,
@@ -369,6 +374,7 @@ class AddMediaButon extends StatelessWidget {
   final String? addMediaText;
   final void Function(List<Media>)? onChanged;
   final double? aspectRatioOrCircle;
+  final bool showGrid;
   final int? limit;
   final MediaImportSettings importSettings;
 
@@ -392,6 +398,7 @@ class AddMediaButon extends StatelessWidget {
                   final croppedMedias = await mediaService.edit(
                     medias: newMedias,
                     aspectRatioOrCircle: aspectRatioOrCircle,
+                    showGrid: showGrid,
                     maxHeight: importSettings.imageMaxHeight,
                     maxWidth: importSettings.imageMaxWidth,
                   );
@@ -421,6 +428,7 @@ class AddMediaButon extends StatelessWidget {
                   if (addMediaText != '') ...[
                     const SizedBox(height: 8),
                     Text(
+                      // LATER : woForm.l10n
                       addMediaText ?? 'Ajouter une image',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             fontWeight: FontWeight.bold,
