@@ -42,6 +42,7 @@ class _CropperState extends State<Cropper> {
   final controller = CropController();
   Uint8List? bytes;
   double? originalAspectRatio;
+  bool cropping = false;
 
   @override
   void initState() {
@@ -81,6 +82,7 @@ class _CropperState extends State<Cropper> {
                       case CropSuccess(:final croppedImage):
                         Navigator.of(context).pop(croppedImage);
                       case CropFailure(:final cause):
+                        setState(() => cropping = false);
                         (WoFormTheme.of(context)?.onSubmitError ??
                                 WoForm.defaultOnSubmitError)
                             .call(context, SubmitErrorStatus(error: cause));
@@ -124,16 +126,14 @@ class _CropperState extends State<Cropper> {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
           DownloadButton(image: widget.image),
           const SizedBox(height: 8),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              localizations.title,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
+          Text(
+            localizations.title,
+            style: Theme.of(context).textTheme.titleLarge,
           ),
           const SizedBox(height: 24),
           if (originalAspectRatio != null && originalAspectRatio! < .75)
@@ -141,27 +141,38 @@ class _CropperState extends State<Cropper> {
           else
             crop,
           const SizedBox(height: 16),
-          Row(
-            children: [
-              // IconButton(
-              //   onPressed: controller.undo,
-              //   icon: const Icon(Icons.undo),
-              // ),
-              // IconButton(
-              //   onPressed: controller.redo,
-              //   icon: const Icon(Icons.redo),
-              // ),
-              const Spacer(),
-              TextButton(
-                onPressed: Navigator.of(context).pop,
-                child: Text(localizations.cancel),
-              ),
-              const SizedBox(width: 8),
-              FilledButton(
-                onPressed: cropCircle ? controller.cropCircle : controller.crop,
-                child: Text(localizations.save),
-              ),
-            ],
+          Align(
+            alignment: Alignment.centerRight,
+            child: Wrap(
+              spacing: 8,
+              alignment: WrapAlignment.end,
+              children: [
+                TextButton(
+                  onPressed: Navigator.of(context).pop,
+                  child: Text(localizations.cancel),
+                ),
+                FilledButton(
+                  onPressed: () {
+                    if (cropping) return;
+                    setState(() => cropping = true);
+                    if (cropCircle) {
+                      controller.cropCircle();
+                    } else {
+                      controller.crop();
+                    }
+                  },
+                  child: cropping
+                      ? SizedBox.square(
+                          dimension: 16,
+                          child: CircularProgressIndicator(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                            strokeWidth: 2,
+                          ),
+                        )
+                      : Text(localizations.save),
+                ),
+              ],
+            ),
           ),
         ],
       ),

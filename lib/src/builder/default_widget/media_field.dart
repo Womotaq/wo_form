@@ -360,7 +360,7 @@ class _MediaActions extends StatelessWidget {
   }
 }
 
-class AddMediaButon extends StatelessWidget {
+class AddMediaButon extends StatefulWidget {
   const AddMediaButon({
     required this.addMediaText,
     required this.onChanged,
@@ -379,34 +379,47 @@ class AddMediaButon extends StatelessWidget {
   final MediaImportSettings importSettings;
 
   @override
+  State<AddMediaButon> createState() => _AddMediaButonState();
+}
+
+class _AddMediaButonState extends State<AddMediaButon> {
+  bool waiting = false;
+
+  @override
   Widget build(BuildContext context) {
     return Material(
       child: InkWell(
-        onTap: onChanged == null
+        onTap: widget.onChanged == null
             ? null
             : () async {
                 FocusScope.of(context).unfocus();
 
-                final mediaService = context.read<MediaService>();
-                var newMedias = await mediaService.importMedias(
-                  limit: limit,
-                  importSettings: importSettings,
-                );
-                if (newMedias.isEmpty) return;
+                try {
+                  setState(() => waiting = true);
 
-                if (aspectRatioOrCircle != null) {
-                  final croppedMedias = await mediaService.edit(
-                    medias: newMedias,
-                    aspectRatioOrCircle: aspectRatioOrCircle,
-                    showGrid: showGrid,
-                    maxHeight: importSettings.imageMaxHeight,
-                    maxWidth: importSettings.imageMaxWidth,
+                  final mediaService = context.read<MediaService>();
+                  var newMedias = await mediaService.importMedias(
+                    limit: widget.limit,
+                    importSettings: widget.importSettings,
                   );
-                  if (croppedMedias == null) return;
-                  newMedias = croppedMedias;
-                }
+                  if (newMedias.isEmpty) return;
 
-                onChanged!(newMedias);
+                  if (widget.aspectRatioOrCircle != null) {
+                    final croppedMedias = await mediaService.edit(
+                      medias: newMedias,
+                      aspectRatioOrCircle: widget.aspectRatioOrCircle,
+                      showGrid: widget.showGrid,
+                      maxHeight: widget.importSettings.imageMaxHeight,
+                      maxWidth: widget.importSettings.imageMaxWidth,
+                    );
+                    if (croppedMedias == null) return;
+                    newMedias = croppedMedias;
+                  }
+
+                  widget.onChanged!(newMedias);
+                } finally {
+                  setState(() => waiting = false);
+                }
               },
         child: DottedBorder(
           options: RectDottedBorderOptions(
@@ -420,16 +433,28 @@ class AddMediaButon extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(
-                    Icons.add,
-                    color: Theme.of(context).colorScheme.outlineVariant,
-                    size: 48,
+                  ColoredBox(
+                    color: Colors.transparent,
+                    child: waiting
+                        ? SizedBox.square(
+                            dimension: 48,
+                            child: CircularProgressIndicator(
+                              color:
+                                  Theme.of(context).colorScheme.outlineVariant,
+                              padding: const EdgeInsets.all(8),
+                            ),
+                          )
+                        : Icon(
+                            Icons.add,
+                            color: Theme.of(context).colorScheme.outlineVariant,
+                            size: 48,
+                          ),
                   ),
-                  if (addMediaText != '') ...[
+                  if (widget.addMediaText != '') ...[
                     const SizedBox(height: 8),
                     Text(
                       // LATER : woForm.l10n
-                      addMediaText ?? 'Ajouter une image',
+                      widget.addMediaText ?? 'Ajouter une image',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
