@@ -18,7 +18,13 @@ class SubmitButtonBuilder extends StatelessWidget {
           _ => false,
         },
       DisableSubmitButton.whenInvalid => context.select(
-          (WoFormValuesCubit c) => root.getErrors(values: c.state).isNotEmpty,
+          (WoFormValuesCubit c) => c.currentNode
+              // TODO : currentErrors ?
+              .getErrors(
+                values: c.state,
+                parentPath: c.currentPath.parentPath,
+              )
+              .isNotEmpty,
         ),
       DisableSubmitButton.never => false,
     };
