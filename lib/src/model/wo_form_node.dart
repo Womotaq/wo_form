@@ -96,6 +96,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
     @JsonKey(toJson: Condition.staticToJson) required Condition condition,
     @InputConverter() required WoFormNodeMixin child,
     @Default(false) bool conditionIsInitiallyMet,
+    @Default(true) bool clearChildrenWhenHidden,
   }) = ConditionnalNode;
 
   const factory WoFormNode.dynamicInputs({

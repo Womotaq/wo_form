@@ -336,6 +336,7 @@ class ConditionnalNode extends WoFormNode {
       @JsonKey(toJson: Condition.staticToJson) required this.condition,
       @InputConverter() required this.child,
       this.conditionIsInitiallyMet = false,
+      this.clearChildrenWhenHidden = true,
       final String? $type})
       : $type = $type ?? 'conditionnal',
         super._();
@@ -350,6 +351,8 @@ class ConditionnalNode extends WoFormNode {
   final WoFormNodeMixin child;
   @JsonKey()
   final bool conditionIsInitiallyMet;
+  @JsonKey()
+  final bool clearChildrenWhenHidden;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
@@ -380,17 +383,20 @@ class ConditionnalNode extends WoFormNode {
             (identical(other.child, child) || other.child == child) &&
             (identical(
                     other.conditionIsInitiallyMet, conditionIsInitiallyMet) ||
-                other.conditionIsInitiallyMet == conditionIsInitiallyMet));
+                other.conditionIsInitiallyMet == conditionIsInitiallyMet) &&
+            (identical(
+                    other.clearChildrenWhenHidden, clearChildrenWhenHidden) ||
+                other.clearChildrenWhenHidden == clearChildrenWhenHidden));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, condition, child, conditionIsInitiallyMet);
+  int get hashCode => Object.hash(runtimeType, id, condition, child,
+      conditionIsInitiallyMet, clearChildrenWhenHidden);
 
   @override
   String toString() {
-    return 'WoFormNode.conditionnal(id: $id, condition: $condition, child: $child, conditionIsInitiallyMet: $conditionIsInitiallyMet)';
+    return 'WoFormNode.conditionnal(id: $id, condition: $condition, child: $child, conditionIsInitiallyMet: $conditionIsInitiallyMet, clearChildrenWhenHidden: $clearChildrenWhenHidden)';
   }
 }
 
@@ -406,7 +412,8 @@ abstract mixin class $ConditionnalNodeCopyWith<$Res>
       {String id,
       @JsonKey(toJson: Condition.staticToJson) Condition condition,
       @InputConverter() WoFormNodeMixin child,
-      bool conditionIsInitiallyMet});
+      bool conditionIsInitiallyMet,
+      bool clearChildrenWhenHidden});
 
   $ConditionCopyWith<$Res> get condition;
 }
@@ -428,6 +435,7 @@ class _$ConditionnalNodeCopyWithImpl<$Res>
     Object? condition = null,
     Object? child = null,
     Object? conditionIsInitiallyMet = null,
+    Object? clearChildrenWhenHidden = null,
   }) {
     return _then(ConditionnalNode(
       id: null == id
@@ -445,6 +453,10 @@ class _$ConditionnalNodeCopyWithImpl<$Res>
       conditionIsInitiallyMet: null == conditionIsInitiallyMet
           ? _self.conditionIsInitiallyMet
           : conditionIsInitiallyMet // ignore: cast_nullable_to_non_nullable
+              as bool,
+      clearChildrenWhenHidden: null == clearChildrenWhenHidden
+          ? _self.clearChildrenWhenHidden
+          : clearChildrenWhenHidden // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
