@@ -9,11 +9,8 @@ abstract class PlaceAutocompleteSettings with _$PlaceAutocompleteSettings {
   const factory PlaceAutocompleteSettings({
     PlaceType? type,
 
-    /// If empty, uses intl package to get the device's locale.
-    /// TODO : true ? why ? not useful ??
-    ///
-    /// Format : 2 letters, uppercase. Ex : FR
-    List<String>? countries, // TODO : IsoCode ?
+    /// The list of countries in which restrict the research.
+    List<IsoCode>? countries,
 
     /// Longitude & latitude can be found at
     /// '{pinputPath}+longitude' and '{pinputPath}+latitude'.

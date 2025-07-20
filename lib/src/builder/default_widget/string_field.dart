@@ -100,7 +100,9 @@ class _StringFieldState extends State<StringField> {
           textInputAction: widget.data.uiSettings.textInputAction,
           googleAPIKey: googleAPIKey,
           debounceTime: 300, // TODO : customizable
-          countries: placeAutocompleteSettings.countries,
+          countries: placeAutocompleteSettings.countries
+              ?.map((isoCode) => isoCode.name)
+              .toList(),
           onChanged: widget.data.onValueChanged,
           onSelectedWithLatLng: placeAutocompleteSettings.includeLatLng &&
                   widget.data.onValueChanged != null

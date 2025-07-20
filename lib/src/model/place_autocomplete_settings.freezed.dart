@@ -16,11 +16,9 @@ T _$identity<T>(T value) => value;
 mixin _$PlaceAutocompleteSettings {
   PlaceType? get type;
 
-  /// If empty, uses intl package to get the device's locale.
-  /// TODO : true ? why ? not useful ??
-  ///
-  /// Format : 2 letters, uppercase. Ex : FR
-  List<String>? get countries; // TODO : IsoCode ?
+  /// The list of countries in which restrict the research.
+  List<IsoCode>? get countries;
+
   /// Longitude & latitude can be found at
   /// '{pinputPath}+longitude' and '{pinputPath}+latitude'.
   /// Extra data are also availible at '{pinputPath}+prediction'.
@@ -65,7 +63,7 @@ abstract mixin class $PlaceAutocompleteSettingsCopyWith<$Res> {
           $Res Function(PlaceAutocompleteSettings) _then) =
       _$PlaceAutocompleteSettingsCopyWithImpl;
   @useResult
-  $Res call({PlaceType? type, List<String>? countries, bool includeLatLng});
+  $Res call({PlaceType? type, List<IsoCode>? countries, bool includeLatLng});
 }
 
 /// @nodoc
@@ -93,7 +91,7 @@ class _$PlaceAutocompleteSettingsCopyWithImpl<$Res>
       countries: freezed == countries
           ? _self.countries
           : countries // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<IsoCode>?,
       includeLatLng: null == includeLatLng
           ? _self.includeLatLng
           : includeLatLng // ignore: cast_nullable_to_non_nullable
@@ -106,7 +104,7 @@ class _$PlaceAutocompleteSettingsCopyWithImpl<$Res>
 @JsonSerializable()
 class _PlaceAutocompleteSettings extends PlaceAutocompleteSettings {
   const _PlaceAutocompleteSettings(
-      {this.type, final List<String>? countries, this.includeLatLng = true})
+      {this.type, final List<IsoCode>? countries, this.includeLatLng = true})
       : _countries = countries,
         super._();
   factory _PlaceAutocompleteSettings.fromJson(Map<String, dynamic> json) =>
@@ -115,18 +113,12 @@ class _PlaceAutocompleteSettings extends PlaceAutocompleteSettings {
   @override
   final PlaceType? type;
 
-  /// If empty, uses intl package to get the device's locale.
-  /// TODO : true ? why ? not useful ??
-  ///
-  /// Format : 2 letters, uppercase. Ex : FR
-  final List<String>? _countries;
+  /// The list of countries in which restrict the research.
+  final List<IsoCode>? _countries;
 
-  /// If empty, uses intl package to get the device's locale.
-  /// TODO : true ? why ? not useful ??
-  ///
-  /// Format : 2 letters, uppercase. Ex : FR
+  /// The list of countries in which restrict the research.
   @override
-  List<String>? get countries {
+  List<IsoCode>? get countries {
     final value = _countries;
     if (value == null) return null;
     if (_countries is EqualUnmodifiableListView) return _countries;
@@ -134,7 +126,6 @@ class _PlaceAutocompleteSettings extends PlaceAutocompleteSettings {
     return EqualUnmodifiableListView(value);
   }
 
-// TODO : IsoCode ?
   /// Longitude & latitude can be found at
   /// '{pinputPath}+longitude' and '{pinputPath}+latitude'.
   /// Extra data are also availible at '{pinputPath}+prediction'.
@@ -190,7 +181,7 @@ abstract mixin class _$PlaceAutocompleteSettingsCopyWith<$Res>
       __$PlaceAutocompleteSettingsCopyWithImpl;
   @override
   @useResult
-  $Res call({PlaceType? type, List<String>? countries, bool includeLatLng});
+  $Res call({PlaceType? type, List<IsoCode>? countries, bool includeLatLng});
 }
 
 /// @nodoc
@@ -218,7 +209,7 @@ class __$PlaceAutocompleteSettingsCopyWithImpl<$Res>
       countries: freezed == countries
           ? _self._countries
           : countries // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<IsoCode>?,
       includeLatLng: null == includeLatLng
           ? _self.includeLatLng
           : includeLatLng // ignore: cast_nullable_to_non_nullable
