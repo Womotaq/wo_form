@@ -187,30 +187,37 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   }
 
   /// **Use this method precautiously since there is no type checking !**
-  void onValueChanged({
-    required String path,
-    required dynamic value,
+  void onValuesChanged(
+    WoFormValues values, {
     UpdateStatus updateStatus = UpdateStatus.yes,
   }) {
     // Can't edit a form while submitting it
     if (_statusCubit.state is SubmittingStatus) return;
 
-    path = state.getKey(path);
+    // Remove paths of locked inputs and transform any #path
+    // ignore: parameter_assignments
+    values = {
+      for (final entry in values.entries)
+        if (!_lockCubit.inputIsLocked(path: state.getKey(entry.key)))
+          state.getKey(entry.key): entry.value,
+    };
+    if (values.isEmpty) return;
 
-    if (_lockCubit.inputIsLocked(path: path)) return;
-
-    final wasVisited = _visitedPaths.contains(path);
+    final atLeastOnePathWasVisited = values.keys.any(_visitedPaths.contains);
+    final allPathsWereVisited = values.keys.every(_visitedPaths.contains);
 
     final shouldUpdateStatus = switch (updateStatus) {
       UpdateStatus.no => false,
-      UpdateStatus.ifPathAlreadyVisited => wasVisited,
+      UpdateStatus.ifPathAlreadyVisited => atLeastOnePathWasVisited,
       UpdateStatus.ifPathAlreadyVisitedOrElseWithoutErrorUpdate ||
       UpdateStatus.yes =>
         true,
     };
 
     final newMap = Map<String, dynamic>.from(state);
-    newMap[path] = value;
+    for (final entry in values.entries) {
+      newMap[entry.key] = entry.value;
+    }
 
     // If the status isn't updated and we are still at initial state, then the
     // initial state should be updated to match the current state.
@@ -226,13 +233,13 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
         UpdateStatus.no => false,
         UpdateStatus.ifPathAlreadyVisited ||
         UpdateStatus.ifPathAlreadyVisitedOrElseWithoutErrorUpdate =>
-          wasVisited,
+          atLeastOnePathWasVisited,
         UpdateStatus.yes => true,
       };
 
       if (shouldUpdateErrors) {
-        if (!wasVisited) {
-          markPathAsVisited(path: path);
+        if (!allPathsWereVisited) {
+          markPathsAsVisited(paths: values.keys);
         } else {
           _updateErrors();
         }
@@ -243,6 +250,67 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
       onStatusUpdate?.call(_root, state);
     }
   }
+
+  /// **Use this method precautiously since there is no type checking !**
+  void onValueChanged({
+    required String path,
+    required dynamic value,
+    UpdateStatus updateStatus = UpdateStatus.yes,
+  }) =>
+      onValuesChanged({path: value}, updateStatus: updateStatus);
+
+  // {
+  //   // Can't edit a form while submitting it
+  //   if (_statusCubit.state is SubmittingStatus) return;
+
+  //   path = state.getKey(path);
+
+  //   if (_lockCubit.inputIsLocked(path: path)) return;
+
+  //   final wasVisited = _visitedPaths.contains(path);
+
+  //   final shouldUpdateStatus = switch (updateStatus) {
+  //     UpdateStatus.no => false,
+  //     UpdateStatus.ifPathAlreadyVisited => wasVisited,
+  //     UpdateStatus.ifPathAlreadyVisitedOrElseWithoutErrorUpdate ||
+  //     UpdateStatus.yes =>
+  //       true,
+  //   };
+
+  //   final newMap = Map<String, dynamic>.from(state);
+  //   newMap[path] = value;
+
+  //   // If the status isn't updated and we are still at initial state, then the
+  //   // initial state should be updated to match the current state.
+  //   // This allows a FutureNode to update its value without changing isPure.
+  //   if (!shouldUpdateStatus && isPure) {
+  //     _initialValues = Map.from(newMap);
+  //   }
+
+  //   emit(newMap);
+
+  //   if (shouldUpdateStatus) {
+  //     final shouldUpdateErrors = switch (updateStatus) {
+  //       UpdateStatus.no => false,
+  //       UpdateStatus.ifPathAlreadyVisited ||
+  //       UpdateStatus.ifPathAlreadyVisitedOrElseWithoutErrorUpdate =>
+  //         wasVisited,
+  //       UpdateStatus.yes => true,
+  //     };
+
+  //     if (shouldUpdateErrors) {
+  //       if (!wasVisited) {
+  //         markPathAsVisited(path: path);
+  //       } else {
+  //         _updateErrors();
+  //       }
+  //     } else {
+  //       _statusCubit.setInProgress();
+  //     }
+
+  //     onStatusUpdate?.call(_root, state);
+  //   }
+  // }
 
   /// Update errors of visited paths
   void _updateErrors() => _statusCubit.setInProgress(

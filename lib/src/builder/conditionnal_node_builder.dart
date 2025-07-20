@@ -33,13 +33,18 @@ class ConditionnalNodeBuilder extends StatelessWidget {
           if (!conditionsAreMet) {
             if (node.clearChildrenWhenHidden) {
               final valuesCubit = context.read<WoFormValuesCubit>();
-              for (final childPath in valuesCubit.state.keys
-                  .where((childPath) => childPath.startsWith(path))) {
-                valuesCubit.onValueChanged(
-                  path: childPath,
-                  value: null,
-                );
-              }
+              valuesCubit.onValuesChanged({
+                for (final children in valuesCubit.state.keys
+                    .where((childPath) => childPath.startsWith(path)))
+                  children: null,
+              });
+              // for (final childPath in valuesCubit.state.keys
+              //     .where((childPath) => childPath.startsWith(path))) {
+              //   valuesCubit.onValueChanged(
+              //     path: childPath,
+              //     value: null,
+              //   );
+              // }
             }
             return const SizedBox.shrink();
           }
