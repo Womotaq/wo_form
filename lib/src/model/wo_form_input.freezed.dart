@@ -1803,6 +1803,8 @@ class StringInput extends WoFormInput {
       this.initialValue,
       this.isRequired = false,
       this.regexPattern,
+      @JsonKey(toJson: PlaceAutocompleteSettings.staticToJson)
+      this.placeAutocompleteSettings,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.getCustomError,
       @JsonKey(toJson: StringInputUiSettings.staticToJson)
@@ -1819,6 +1821,10 @@ class StringInput extends WoFormInput {
   @JsonKey()
   final bool isRequired;
   final String? regexPattern;
+
+  /// If set, the field will be a place autocomplete.
+  @JsonKey(toJson: PlaceAutocompleteSettings.staticToJson)
+  final PlaceAutocompleteSettings? placeAutocompleteSettings;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   final GetCustomErrorDef<String>? getCustomError;
@@ -1856,6 +1862,9 @@ class StringInput extends WoFormInput {
                 other.isRequired == isRequired) &&
             (identical(other.regexPattern, regexPattern) ||
                 other.regexPattern == regexPattern) &&
+            (identical(other.placeAutocompleteSettings,
+                    placeAutocompleteSettings) ||
+                other.placeAutocompleteSettings == placeAutocompleteSettings) &&
             (identical(other.getCustomError, getCustomError) ||
                 other.getCustomError == getCustomError) &&
             (identical(other.uiSettings, uiSettings) ||
@@ -1865,11 +1874,11 @@ class StringInput extends WoFormInput {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, initialValue, isRequired,
-      regexPattern, getCustomError, uiSettings);
+      regexPattern, placeAutocompleteSettings, getCustomError, uiSettings);
 
   @override
   String toString() {
-    return 'WoFormInput.string(id: $id, initialValue: $initialValue, isRequired: $isRequired, regexPattern: $regexPattern, getCustomError: $getCustomError, uiSettings: $uiSettings)';
+    return 'WoFormInput.string(id: $id, initialValue: $initialValue, isRequired: $isRequired, regexPattern: $regexPattern, placeAutocompleteSettings: $placeAutocompleteSettings, getCustomError: $getCustomError, uiSettings: $uiSettings)';
   }
 }
 
@@ -1886,11 +1895,14 @@ abstract mixin class $StringInputCopyWith<$Res>
       String? initialValue,
       bool isRequired,
       String? regexPattern,
+      @JsonKey(toJson: PlaceAutocompleteSettings.staticToJson)
+      PlaceAutocompleteSettings? placeAutocompleteSettings,
       @JsonKey(includeToJson: false, includeFromJson: false)
       GetCustomErrorDef<String>? getCustomError,
       @JsonKey(toJson: StringInputUiSettings.staticToJson)
       StringInputUiSettings uiSettings});
 
+  $PlaceAutocompleteSettingsCopyWith<$Res>? get placeAutocompleteSettings;
   $StringInputUiSettingsCopyWith<$Res> get uiSettings;
 }
 
@@ -1910,6 +1922,7 @@ class _$StringInputCopyWithImpl<$Res> implements $StringInputCopyWith<$Res> {
     Object? initialValue = freezed,
     Object? isRequired = null,
     Object? regexPattern = freezed,
+    Object? placeAutocompleteSettings = freezed,
     Object? getCustomError = freezed,
     Object? uiSettings = null,
   }) {
@@ -1930,6 +1943,10 @@ class _$StringInputCopyWithImpl<$Res> implements $StringInputCopyWith<$Res> {
           ? _self.regexPattern
           : regexPattern // ignore: cast_nullable_to_non_nullable
               as String?,
+      placeAutocompleteSettings: freezed == placeAutocompleteSettings
+          ? _self.placeAutocompleteSettings
+          : placeAutocompleteSettings // ignore: cast_nullable_to_non_nullable
+              as PlaceAutocompleteSettings?,
       getCustomError: freezed == getCustomError
           ? _self.getCustomError
           : getCustomError // ignore: cast_nullable_to_non_nullable
@@ -1939,6 +1956,21 @@ class _$StringInputCopyWithImpl<$Res> implements $StringInputCopyWith<$Res> {
           : uiSettings // ignore: cast_nullable_to_non_nullable
               as StringInputUiSettings,
     ));
+  }
+
+  /// Create a copy of WoFormInput
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PlaceAutocompleteSettingsCopyWith<$Res>? get placeAutocompleteSettings {
+    if (_self.placeAutocompleteSettings == null) {
+      return null;
+    }
+
+    return $PlaceAutocompleteSettingsCopyWith<$Res>(
+        _self.placeAutocompleteSettings!, (value) {
+      return _then(_self.copyWith(placeAutocompleteSettings: value));
+    });
   }
 
   /// Create a copy of WoFormInput

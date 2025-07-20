@@ -89,7 +89,9 @@ class _StringFieldState extends State<StringField> {
       },
     );
 
-    if (widget.data.uiSettings.placeAutocompleteType != null) {
+    if (widget.data.input.placeAutocompleteSettings != null) {
+      final placeAutocompleteSettings =
+          widget.data.input.placeAutocompleteSettings!;
       final googleAPIKey = WoFormTheme.of(context, listen: false)?.googleAPIKey;
       if (googleAPIKey != null) {
         return PlaceAutoCompleteTextField(
@@ -98,8 +100,19 @@ class _StringFieldState extends State<StringField> {
           textInputAction: widget.data.uiSettings.textInputAction,
           googleAPIKey: googleAPIKey,
           debounceTime: 300, // TODO : customizable
-          countries: widget.data.uiSettings.placeAutocompleteCountries,
+          countries: placeAutocompleteSettings.countries,
           onChanged: widget.data.onValueChanged,
+          onSelectedWithLatLng: placeAutocompleteSettings.includeLatLng &&
+                  widget.data.onValueChanged != null
+              ? (Prediction prediction) =>
+                  context.read<WoFormValuesCubit>().onValuesChanged({
+                    '${widget.data.path}+longitude':
+                        double.tryParse(prediction.lng ?? ''),
+                    '${widget.data.path}+latitude':
+                        double.tryParse(prediction.lat ?? ''),
+                    '${widget.data.path}+prediction': prediction,
+                  })
+              : null,
           onFieldSubmitted:
               (widget.data.uiSettings.submitFormOnFieldSubmitted ?? true)
                   ? (_) => context.read<WoFormValuesCubit>().submit(context)
@@ -121,7 +134,7 @@ class _StringFieldState extends State<StringField> {
             ),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          placeType: widget.data.uiSettings.placeAutocompleteType,
+          placeType: placeAutocompleteSettings.type,
         );
       }
     }

@@ -4,6 +4,7 @@ export 'export_settings.dart';
 export 'flexible_date_time.dart';
 export 'json_converter/_export.dart';
 export 'media.dart';
+export 'place_autocomplete_settings.dart';
 export 'quiz_settings.dart';
 export 'ui_settings.dart';
 export 'wo_form_input.dart';

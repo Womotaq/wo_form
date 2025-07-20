@@ -3024,12 +3024,6 @@ mixin _$StringInputUiSettings {
   TextInputAction? get textInputAction;
   TextCapitalization? get textCapitalization;
 
-  /// If set, the field will be a place autocomplete.
-  PlaceType? get placeAutocompleteType;
-
-  /// If empty, uses intl package to get the device's locale.
-  List<String>? get placeAutocompleteCountries;
-
   /// Defaults to 1. If you want to set it to null, enter 0.
   int? get maxLines;
   String? get invalidRegexMessage;
@@ -3081,10 +3075,6 @@ mixin _$StringInputUiSettings {
                 other.textInputAction == textInputAction) &&
             (identical(other.textCapitalization, textCapitalization) ||
                 other.textCapitalization == textCapitalization) &&
-            (identical(other.placeAutocompleteType, placeAutocompleteType) ||
-                other.placeAutocompleteType == placeAutocompleteType) &&
-            const DeepCollectionEquality().equals(
-                other.placeAutocompleteCountries, placeAutocompleteCountries) &&
             (identical(other.maxLines, maxLines) ||
                 other.maxLines == maxLines) &&
             (identical(other.invalidRegexMessage, invalidRegexMessage) ||
@@ -3096,32 +3086,29 @@ mixin _$StringInputUiSettings {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hashAll([
-        runtimeType,
-        labelText,
-        hintText,
-        helperText,
-        prefixIcon,
-        action,
-        submitFormOnFieldSubmitted,
-        keyboardType,
-        obscureText,
-        autocorrect,
-        const DeepCollectionEquality().hash(autofillHints),
-        autofocus,
-        textInputAction,
-        textCapitalization,
-        placeAutocompleteType,
-        const DeepCollectionEquality().hash(placeAutocompleteCountries),
-        maxLines,
-        invalidRegexMessage,
-        style,
-        widgetBuilder
-      ]);
+  int get hashCode => Object.hash(
+      runtimeType,
+      labelText,
+      hintText,
+      helperText,
+      prefixIcon,
+      action,
+      submitFormOnFieldSubmitted,
+      keyboardType,
+      obscureText,
+      autocorrect,
+      const DeepCollectionEquality().hash(autofillHints),
+      autofocus,
+      textInputAction,
+      textCapitalization,
+      maxLines,
+      invalidRegexMessage,
+      style,
+      widgetBuilder);
 
   @override
   String toString() {
-    return 'StringInputUiSettings(labelText: $labelText, hintText: $hintText, helperText: $helperText, prefixIcon: $prefixIcon, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, placeAutocompleteType: $placeAutocompleteType, placeAutocompleteCountries: $placeAutocompleteCountries, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage, style: $style, widgetBuilder: $widgetBuilder)';
+    return 'StringInputUiSettings(labelText: $labelText, hintText: $hintText, helperText: $helperText, prefixIcon: $prefixIcon, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage, style: $style, widgetBuilder: $widgetBuilder)';
   }
 }
 
@@ -3145,8 +3132,6 @@ abstract mixin class $StringInputUiSettingsCopyWith<$Res> {
       bool? autofocus,
       TextInputAction? textInputAction,
       TextCapitalization? textCapitalization,
-      PlaceType? placeAutocompleteType,
-      List<String>? placeAutocompleteCountries,
       int? maxLines,
       String? invalidRegexMessage,
       @JsonKey(includeToJson: false, includeFromJson: false) TextStyle? style,
@@ -3180,8 +3165,6 @@ class _$StringInputUiSettingsCopyWithImpl<$Res>
     Object? autofocus = freezed,
     Object? textInputAction = freezed,
     Object? textCapitalization = freezed,
-    Object? placeAutocompleteType = freezed,
-    Object? placeAutocompleteCountries = freezed,
     Object? maxLines = freezed,
     Object? invalidRegexMessage = freezed,
     Object? style = freezed,
@@ -3240,14 +3223,6 @@ class _$StringInputUiSettingsCopyWithImpl<$Res>
           ? _self.textCapitalization
           : textCapitalization // ignore: cast_nullable_to_non_nullable
               as TextCapitalization?,
-      placeAutocompleteType: freezed == placeAutocompleteType
-          ? _self.placeAutocompleteType
-          : placeAutocompleteType // ignore: cast_nullable_to_non_nullable
-              as PlaceType?,
-      placeAutocompleteCountries: freezed == placeAutocompleteCountries
-          ? _self.placeAutocompleteCountries
-          : placeAutocompleteCountries // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
       maxLines: freezed == maxLines
           ? _self.maxLines
           : maxLines // ignore: cast_nullable_to_non_nullable
@@ -3285,15 +3260,12 @@ class _StringInputUiSettings extends StringInputUiSettings {
       this.autofocus,
       this.textInputAction,
       this.textCapitalization,
-      this.placeAutocompleteType,
-      final List<String>? placeAutocompleteCountries,
       this.maxLines,
       this.invalidRegexMessage,
       @JsonKey(includeToJson: false, includeFromJson: false) this.style,
       @JsonKey(includeToJson: false, includeFromJson: false)
       this.widgetBuilder})
       : _autofillHints = autofillHints,
-        _placeAutocompleteCountries = placeAutocompleteCountries,
         super._();
   factory _StringInputUiSettings.fromJson(Map<String, dynamic> json) =>
       _$StringInputUiSettingsFromJson(json);
@@ -3334,24 +3306,6 @@ class _StringInputUiSettings extends StringInputUiSettings {
   final TextInputAction? textInputAction;
   @override
   final TextCapitalization? textCapitalization;
-
-  /// If set, the field will be a place autocomplete.
-  @override
-  final PlaceType? placeAutocompleteType;
-
-  /// If empty, uses intl package to get the device's locale.
-  final List<String>? _placeAutocompleteCountries;
-
-  /// If empty, uses intl package to get the device's locale.
-  @override
-  List<String>? get placeAutocompleteCountries {
-    final value = _placeAutocompleteCountries;
-    if (value == null) return null;
-    if (_placeAutocompleteCountries is EqualUnmodifiableListView)
-      return _placeAutocompleteCountries;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
 
   /// Defaults to 1. If you want to set it to null, enter 0.
   @override
@@ -3413,11 +3367,6 @@ class _StringInputUiSettings extends StringInputUiSettings {
                 other.textInputAction == textInputAction) &&
             (identical(other.textCapitalization, textCapitalization) ||
                 other.textCapitalization == textCapitalization) &&
-            (identical(other.placeAutocompleteType, placeAutocompleteType) ||
-                other.placeAutocompleteType == placeAutocompleteType) &&
-            const DeepCollectionEquality().equals(
-                other._placeAutocompleteCountries,
-                _placeAutocompleteCountries) &&
             (identical(other.maxLines, maxLines) ||
                 other.maxLines == maxLines) &&
             (identical(other.invalidRegexMessage, invalidRegexMessage) ||
@@ -3429,32 +3378,29 @@ class _StringInputUiSettings extends StringInputUiSettings {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hashAll([
-        runtimeType,
-        labelText,
-        hintText,
-        helperText,
-        prefixIcon,
-        action,
-        submitFormOnFieldSubmitted,
-        keyboardType,
-        obscureText,
-        autocorrect,
-        const DeepCollectionEquality().hash(_autofillHints),
-        autofocus,
-        textInputAction,
-        textCapitalization,
-        placeAutocompleteType,
-        const DeepCollectionEquality().hash(_placeAutocompleteCountries),
-        maxLines,
-        invalidRegexMessage,
-        style,
-        widgetBuilder
-      ]);
+  int get hashCode => Object.hash(
+      runtimeType,
+      labelText,
+      hintText,
+      helperText,
+      prefixIcon,
+      action,
+      submitFormOnFieldSubmitted,
+      keyboardType,
+      obscureText,
+      autocorrect,
+      const DeepCollectionEquality().hash(_autofillHints),
+      autofocus,
+      textInputAction,
+      textCapitalization,
+      maxLines,
+      invalidRegexMessage,
+      style,
+      widgetBuilder);
 
   @override
   String toString() {
-    return 'StringInputUiSettings(labelText: $labelText, hintText: $hintText, helperText: $helperText, prefixIcon: $prefixIcon, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, placeAutocompleteType: $placeAutocompleteType, placeAutocompleteCountries: $placeAutocompleteCountries, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage, style: $style, widgetBuilder: $widgetBuilder)';
+    return 'StringInputUiSettings(labelText: $labelText, hintText: $hintText, helperText: $helperText, prefixIcon: $prefixIcon, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage, style: $style, widgetBuilder: $widgetBuilder)';
   }
 }
 
@@ -3480,8 +3426,6 @@ abstract mixin class _$StringInputUiSettingsCopyWith<$Res>
       bool? autofocus,
       TextInputAction? textInputAction,
       TextCapitalization? textCapitalization,
-      PlaceType? placeAutocompleteType,
-      List<String>? placeAutocompleteCountries,
       int? maxLines,
       String? invalidRegexMessage,
       @JsonKey(includeToJson: false, includeFromJson: false) TextStyle? style,
@@ -3515,8 +3459,6 @@ class __$StringInputUiSettingsCopyWithImpl<$Res>
     Object? autofocus = freezed,
     Object? textInputAction = freezed,
     Object? textCapitalization = freezed,
-    Object? placeAutocompleteType = freezed,
-    Object? placeAutocompleteCountries = freezed,
     Object? maxLines = freezed,
     Object? invalidRegexMessage = freezed,
     Object? style = freezed,
@@ -3575,14 +3517,6 @@ class __$StringInputUiSettingsCopyWithImpl<$Res>
           ? _self.textCapitalization
           : textCapitalization // ignore: cast_nullable_to_non_nullable
               as TextCapitalization?,
-      placeAutocompleteType: freezed == placeAutocompleteType
-          ? _self.placeAutocompleteType
-          : placeAutocompleteType // ignore: cast_nullable_to_non_nullable
-              as PlaceType?,
-      placeAutocompleteCountries: freezed == placeAutocompleteCountries
-          ? _self._placeAutocompleteCountries
-          : placeAutocompleteCountries // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
       maxLines: freezed == maxLines
           ? _self.maxLines
           : maxLines // ignore: cast_nullable_to_non_nullable

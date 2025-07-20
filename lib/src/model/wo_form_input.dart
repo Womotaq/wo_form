@@ -257,6 +257,10 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     String? initialValue,
     @Default(false) bool isRequired,
     String? regexPattern,
+
+    /// If set, the field will be a place autocomplete.
+    @JsonKey(toJson: PlaceAutocompleteSettings.staticToJson)
+    PlaceAutocompleteSettings? placeAutocompleteSettings,
     @JsonKey(includeToJson: false, includeFromJson: false)
     GetCustomErrorDef<String>? getCustomError,
     @JsonKey(toJson: StringInputUiSettings.staticToJson)

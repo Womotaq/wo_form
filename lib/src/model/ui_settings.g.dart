@@ -275,12 +275,6 @@ _StringInputUiSettings _$StringInputUiSettingsFromJson(
           _$TextInputActionEnumMap, json['textInputAction']),
       textCapitalization: $enumDecodeNullable(
           _$TextCapitalizationEnumMap, json['textCapitalization']),
-      placeAutocompleteType: $enumDecodeNullable(
-          _$PlaceTypeEnumMap, json['placeAutocompleteType']),
-      placeAutocompleteCountries:
-          (json['placeAutocompleteCountries'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList(),
       maxLines: (json['maxLines'] as num?)?.toInt(),
       invalidRegexMessage: json['invalidRegexMessage'] as String?,
     );
@@ -302,9 +296,6 @@ Map<String, dynamic> _$StringInputUiSettingsToJson(
       'textInputAction': _$TextInputActionEnumMap[instance.textInputAction],
       'textCapitalization':
           _$TextCapitalizationEnumMap[instance.textCapitalization],
-      'placeAutocompleteType':
-          _$PlaceTypeEnumMap[instance.placeAutocompleteType],
-      'placeAutocompleteCountries': instance.placeAutocompleteCountries,
       'maxLines': instance.maxLines,
       'invalidRegexMessage': instance.invalidRegexMessage,
     };
@@ -335,14 +326,6 @@ const _$TextCapitalizationEnumMap = {
   TextCapitalization.sentences: 'sentences',
   TextCapitalization.characters: 'characters',
   TextCapitalization.none: 'none',
-};
-
-const _$PlaceTypeEnumMap = {
-  PlaceType.geocode: 'geocode',
-  PlaceType.address: 'address',
-  PlaceType.establishment: 'establishment',
-  PlaceType.region: 'region',
-  PlaceType.cities: 'cities',
 };
 
 _WoFormUiSettings _$WoFormUiSettingsFromJson(Map<String, dynamic> json) =>

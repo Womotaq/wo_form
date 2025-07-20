@@ -204,6 +204,10 @@ StringInput _$StringInputFromJson(Map<String, dynamic> json) => StringInput(
       initialValue: json['initialValue'] as String?,
       isRequired: json['isRequired'] as bool? ?? false,
       regexPattern: json['regexPattern'] as String?,
+      placeAutocompleteSettings: json['placeAutocompleteSettings'] == null
+          ? null
+          : PlaceAutocompleteSettings.fromJson(
+              json['placeAutocompleteSettings'] as Map<String, dynamic>),
       uiSettings: json['uiSettings'] == null
           ? const StringInputUiSettings()
           : StringInputUiSettings.fromJson(
@@ -217,6 +221,8 @@ Map<String, dynamic> _$StringInputToJson(StringInput instance) =>
       'initialValue': instance.initialValue,
       'isRequired': instance.isRequired,
       'regexPattern': instance.regexPattern,
+      'placeAutocompleteSettings': PlaceAutocompleteSettings.staticToJson(
+          instance.placeAutocompleteSettings),
       'uiSettings': StringInputUiSettings.staticToJson(instance.uiSettings),
       'runtimeType': instance.$type,
     };

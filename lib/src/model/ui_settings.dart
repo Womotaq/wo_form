@@ -488,12 +488,6 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     TextInputAction? textInputAction,
     TextCapitalization? textCapitalization,
 
-    /// If set, the field will be a place autocomplete.
-    PlaceType? placeAutocompleteType,
-
-    /// If empty, uses intl package to get the device's locale.
-    List<String>? placeAutocompleteCountries,
-
     /// Defaults to 1. If you want to set it to null, enter 0.
     int? maxLines,
     String? invalidRegexMessage,
@@ -615,10 +609,6 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
           autofocus: autofocus ?? other.autofocus,
           textInputAction: textInputAction ?? other.textInputAction,
           textCapitalization: textCapitalization ?? other.textCapitalization,
-          placeAutocompleteType:
-              placeAutocompleteType ?? other.placeAutocompleteType,
-          placeAutocompleteCountries:
-              placeAutocompleteCountries ?? other.placeAutocompleteCountries,
           maxLines: maxLines ?? other.maxLines,
           invalidRegexMessage: invalidRegexMessage ?? other.invalidRegexMessage,
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,
