@@ -5,6 +5,7 @@ targets:
         generate_for:
           include:
             - lib/src/model/**.dart
+            - lib/src/service/google_place/**.dart
         options:
           map:
             map: false

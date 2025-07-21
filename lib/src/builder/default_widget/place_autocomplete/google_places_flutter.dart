@@ -1,15 +1,13 @@
 // Credits : https://pub.dev/packages/google_places_flutter
 
-import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart'; // TODO : remove this dependency
 import 'package:wo_form/src/builder/default_widget/place_autocomplete/_export.dart';
+import 'package:wo_form/wo_form.dart';
 
 class PlaceAutoCompleteTextField extends StatefulWidget {
   const PlaceAutoCompleteTextField({
     required this.textEditingController,
-    required this.googleAPIKey,
     required this.onChanged,
     this.onSelectedWithLatLng,
     this.debounceTime = 600,
@@ -41,7 +39,6 @@ class PlaceAutoCompleteTextField extends StatefulWidget {
   final void Function(Prediction prediction)? onSelectedWithLatLng;
 
   final TextStyle textStyle;
-  final String googleAPIKey;
   final int debounceTime;
   final List<String>? countries;
   final TextEditingController textEditingController;
@@ -78,9 +75,6 @@ class _PlaceAutoCompleteTextFieldState
 
   final LayerLink _layerLink = LayerLink();
 
-  final _dio = Dio();
-  CancelToken? _cancelToken = CancelToken();
-
   @override
   void initState() {
     super.initState();
@@ -99,7 +93,6 @@ class _PlaceAutoCompleteTextFieldState
   @override
   void dispose() {
     subject.close();
-    _cancelToken?.cancel();
     removeOverlay();
     super.dispose();
   }
@@ -137,48 +130,52 @@ class _PlaceAutoCompleteTextFieldState
   Future<void> getLocation(String text) async {
     if (text.isEmpty) return removeOverlay();
 
-    var apiURL =
-        'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$text&key=${widget.googleAPIKey}&language=${widget.language}';
+    var input = '$text&language=${widget.language}';
 
     if (widget.countries != null) {
       for (var i = 0; i < widget.countries!.length; i++) {
         final country = widget.countries![i];
 
         if (i == 0) {
-          apiURL = '$apiURL&components=country:$country';
+          input = '$input&components=country:$country';
         } else {
-          apiURL = '$apiURL|country:$country';
+          input = '$input|country:$country';
         }
       }
     }
     if (widget.placeType != null) {
-      apiURL += '&types=${widget.placeType?.apiString}';
+      input += '&types=${widget.placeType?.apiString}';
     }
 
     if (widget.latitude != null &&
         widget.longitude != null &&
         widget.radius != null) {
-      apiURL = '$apiURL&location=${widget.latitude},${widget.longitude}'
+      input = '$input&location=${widget.latitude},${widget.longitude}'
           '&radius=${widget.radius}';
     }
 
-    if (_cancelToken?.isCancelled == false) {
-      _cancelToken?.cancel();
-      _cancelToken = CancelToken();
-    }
-
-    // print("urlll $apiURL");
     try {
-      const proxyURL = 'https://cors-anywhere.herokuapp.com/';
-      final url = kIsWeb ? proxyURL + apiURL : apiURL;
-      final response = await _dio.get<Map<String, dynamic>>(url);
+      /// 'https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${widget.googleAPIKey}&input=' + input
+      final getPlacePredictions =
+          WoFormTheme.of(context, listen: false)?.getPlacePredictions;
+      if (getPlacePredictions == null) {
+        throw UnimplementedError(
+          'You need to provide a WoFormThemeData.getPlacePredictions '
+          'for address autocompletion.',
+        );
+      }
+      // const proxyURL = 'https://cors-anywhere.herokuapp.com/';
+      // final url = kIsWeb ? proxyURL + apiURL : apiURL;
+      // final response = await _dio.get<Map<String, dynamic>>(proxy(input));
+      // final map = response.data ?? {};
+
+      final map = await getPlacePredictions(input);
 
       if (widget.showError && context.mounted) {
         // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
       }
 
-      final map = response.data ?? {};
       if (map.containsKey('error_message')) {
         // ignore: only_throw_errors
         throw map;
@@ -269,19 +266,33 @@ class _PlaceAutoCompleteTextFieldState
     predictions.clear();
     _overlayEntry?.remove();
     _overlayEntry = null;
-
-    if (_cancelToken?.isCancelled == false) {
-      _cancelToken?.cancel();
-    }
   }
 
   Future<void> completeWithLatLng(Prediction prediction) async {
-    final url =
-        'https://maps.googleapis.com/maps/api/place/details/json?placeid=${prediction.placeId}&key=${widget.googleAPIKey}';
-    try {
-      final response = await _dio.get<Map<String, dynamic>>(url);
+    final placeId = prediction.placeId;
+    if (placeId == null) return;
 
-      final placeDetails = PlaceDetails.fromJson(response.data ?? {});
+    // 'https://maps.googleapis.com/maps/api/place/details/json?placeid=${prediction.placeId}&key=${widget.googleAPIKey}';
+    /// 'https://maps.googleapis.com/maps/api/place/details/json?key=${widget.googleAPIKey}&placeid=' + placeId
+    try {
+      final getPlaceDetails =
+          WoFormTheme.of(context, listen: false)?.getPlaceDetails;
+      if (getPlaceDetails == null) {
+        throw UnimplementedError(
+          'You need to provide a WoFormThemeData.getPlaceDetails '
+          'for more details in autocompleted addresses.',
+        );
+      }
+      // final response = await _dio.get<Map<String, dynamic>>(proxy(placeId));
+
+      final map = await getPlaceDetails(placeId);
+
+      if (map.containsKey('error_message')) {
+        // ignore: only_throw_errors
+        throw map;
+      }
+
+      final placeDetails = PlaceDetails.fromJson(map);
 
       prediction
         ..lat = placeDetails.result!.geometry!.location!.lat.toString()

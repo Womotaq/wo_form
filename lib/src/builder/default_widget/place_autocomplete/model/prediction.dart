@@ -6,7 +6,7 @@ class PlacesAutocompleteResponse {
     if (predictionsJson is List) {
       predictions = [];
       for (final v in predictionsJson) {
-        predictions!.add(Prediction.fromJson(v as Map<String, dynamic>));
+        predictions!.add(Prediction.fromJson((v as Map).cast()));
       }
     }
     status = json['status'] as String?;

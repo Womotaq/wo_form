@@ -92,53 +92,49 @@ class _StringFieldState extends State<StringField> {
     if (widget.data.input.placeAutocompleteSettings != null) {
       final placeAutocompleteSettings =
           widget.data.input.placeAutocompleteSettings!;
-      final googleAPIKey = WoFormTheme.of(context, listen: false)?.googleAPIKey;
-      if (googleAPIKey != null) {
-        return PlaceAutoCompleteTextField(
-          textEditingController: textEditingController!,
-          inputDecoration: inputDecoration,
-          textInputAction: widget.data.uiSettings.textInputAction,
-          googleAPIKey: googleAPIKey,
-          debounceTime: 300, // TODO : customizable
-          countries: placeAutocompleteSettings.countries
-              ?.map((isoCode) => isoCode.name)
-              .toList(),
-          onChanged: widget.data.onValueChanged,
-          onSelectedWithLatLng: placeAutocompleteSettings.includeLatLng &&
-                  widget.data.onValueChanged != null
-              ? (Prediction prediction) =>
-                  context.read<WoFormValuesCubit>().onValuesChanged({
-                    '${widget.data.path}+longitude':
-                        double.tryParse(prediction.lng ?? ''),
-                    '${widget.data.path}+latitude':
-                        double.tryParse(prediction.lat ?? ''),
-                    '${widget.data.path}+prediction': prediction,
-                  })
-              : null,
-          onFieldSubmitted:
-              (widget.data.uiSettings.submitFormOnFieldSubmitted ?? true)
-                  ? (_) => context.read<WoFormValuesCubit>().submit(context)
-                  : null,
-          itemBuilder: (context, index, Prediction prediction) => Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Row(
-              children: [
-                const Icon(Icons.location_on),
-                const SizedBox(width: 7),
-                Expanded(
-                  child: Text(
-                    prediction.description ?? '',
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                )
-              ],
-            ),
+      return PlaceAutoCompleteTextField(
+        textEditingController: textEditingController!,
+        inputDecoration: inputDecoration,
+        textInputAction: widget.data.uiSettings.textInputAction,
+        debounceTime: 300, // TODO : customizable
+        countries: placeAutocompleteSettings.countries
+            ?.map((isoCode) => isoCode.name)
+            .toList(),
+        onChanged: widget.data.onValueChanged,
+        onSelectedWithLatLng: placeAutocompleteSettings.includeLatLng &&
+                widget.data.onValueChanged != null
+            ? (Prediction prediction) =>
+                context.read<WoFormValuesCubit>().onValuesChanged({
+                  '${widget.data.path}+longitude':
+                      double.tryParse(prediction.lng ?? ''),
+                  '${widget.data.path}+latitude':
+                      double.tryParse(prediction.lat ?? ''),
+                  '${widget.data.path}+prediction': prediction,
+                })
+            : null,
+        onFieldSubmitted:
+            (widget.data.uiSettings.submitFormOnFieldSubmitted ?? true)
+                ? (_) => context.read<WoFormValuesCubit>().submit(context)
+                : null,
+        itemBuilder: (context, index, Prediction prediction) => Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: Row(
+            children: [
+              const Icon(Icons.location_on),
+              const SizedBox(width: 7),
+              Expanded(
+                child: Text(
+                  prediction.description ?? '',
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              )
+            ],
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          placeType: placeAutocompleteSettings.type,
-        );
-      }
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        placeType: placeAutocompleteSettings.type,
+      );
     }
 
     if (widget.data.uiSettings.keyboardType == TextInputType.phone) {
