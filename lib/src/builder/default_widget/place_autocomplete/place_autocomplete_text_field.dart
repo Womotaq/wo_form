@@ -1,15 +1,16 @@
 // Credits : https://pub.dev/packages/google_places_flutter
 
 import 'package:flutter/material.dart';
-import 'package:rxdart/rxdart.dart'; // TODO : remove this dependency
-import 'package:wo_form/src/builder/default_widget/place_autocomplete/_export.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rxdart/rxdart.dart'; // TODO : remove this dependency ?
+import 'package:wo_form/src/builder/default_widget/place_autocomplete/error_handler.dart';
 import 'package:wo_form/wo_form.dart';
 
-class PlaceAutoCompleteTextField extends StatefulWidget {
-  const PlaceAutoCompleteTextField({
+class PlaceAutocompleteTextField extends StatefulWidget {
+  const PlaceAutocompleteTextField({
     required this.textEditingController,
     required this.onChanged,
-    this.onSelectedWithLatLng,
+    this.onSelectedWithDetails,
     this.debounceTime = 600,
     this.inputDecoration = const InputDecoration(),
     this.textStyle = const TextStyle(),
@@ -34,9 +35,9 @@ class PlaceAutoCompleteTextField extends StatefulWidget {
   final InputDecoration inputDecoration;
   final void Function(String? text)? onChanged;
 
-  /// If provided, will be called right after [onChanged],
-  /// with a Prediction where the latitude and longitude are provided.
-  final void Function(Prediction prediction)? onSelectedWithLatLng;
+  /// If provided, will be called when a prediction is selected,
+  /// right after [onChanged].
+  final void Function(PlaceDetails details)? onSelectedWithDetails;
 
   final TextStyle textStyle;
   final int debounceTime;
@@ -62,16 +63,17 @@ class PlaceAutoCompleteTextField extends StatefulWidget {
   final int? radius;
 
   @override
-  State<PlaceAutoCompleteTextField> createState() =>
+  State<PlaceAutocompleteTextField> createState() =>
       _PlaceAutoCompleteTextFieldState();
 }
 
 class _PlaceAutoCompleteTextFieldState
-    extends State<PlaceAutoCompleteTextField> {
+    extends State<PlaceAutocompleteTextField> {
   final subject = PublishSubject<String>();
   late final FocusNode _focusNode;
+  bool _overlayIsFocused = false;
   OverlayEntry? _overlayEntry;
-  List<Prediction> predictions = [];
+  List<PlacePrediction> predictions = [];
 
   final LayerLink _layerLink = LayerLink();
 
@@ -86,7 +88,9 @@ class _PlaceAutoCompleteTextFieldState
     // Add focus listener
     _focusNode = widget.focusNode ?? FocusNode();
     _focusNode.addListener(() {
-      if (!_focusNode.hasFocus) removeOverlay();
+      if (!_focusNode.hasFocus && !_overlayIsFocused) {
+        removeOverlay();
+      }
     });
   }
 
@@ -127,7 +131,16 @@ class _PlaceAutoCompleteTextFieldState
     );
   }
 
-  Future<void> getLocation(String text) async {
+  void textChanged(String text) {
+    if (text.isNotEmpty) {
+      updatePredictions(text);
+    } else {
+      removeOverlay();
+    }
+    widget.onChanged?.call(text);
+  }
+
+  Future<void> updatePredictions(String text) async {
     if (text.isEmpty) return removeOverlay();
 
     var input = '$text&language=${widget.language}';
@@ -157,11 +170,10 @@ class _PlaceAutoCompleteTextFieldState
     try {
       /// 'https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${widget.googleAPIKey}&input=' + input
       final getPlacePredictions =
-          WoFormTheme.of(context, listen: false)?.getPlacePredictions;
+          context.read<PlaceRepository?>()?.getPlacePredictions;
       if (getPlacePredictions == null) {
         throw UnimplementedError(
-          'You need to provide a WoFormThemeData.getPlacePredictions '
-          'for address autocompletion.',
+          'You need to provide a PlaceRepository for address autocompletion.',
         );
       }
       // const proxyURL = 'https://cors-anywhere.herokuapp.com/';
@@ -169,25 +181,21 @@ class _PlaceAutoCompleteTextFieldState
       // final response = await _dio.get<Map<String, dynamic>>(proxy(input));
       // final map = response.data ?? {};
 
-      final map = await getPlacePredictions(input);
+      final response = await getPlacePredictions(input);
 
       if (widget.showError && context.mounted) {
         // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
       }
 
-      if (map.containsKey('error_message')) {
+      if (response.errorMessage != null) {
         // ignore: only_throw_errors
-        throw map;
+        throw response;
       }
 
-      final subscriptionResponse = PlacesAutocompleteResponse.fromJson(map);
-
-      predictions.clear();
-      if (subscriptionResponse.predictions!.isNotEmpty &&
-          widget.textEditingController.text.trim().isNotEmpty) {
-        predictions.addAll(subscriptionResponse.predictions!);
-      }
+      predictions
+        ..clear()
+        ..addAll(response.predictions);
 
       _overlayEntry?.remove();
       _overlayEntry = _createOverlayEntry();
@@ -199,15 +207,6 @@ class _PlaceAutoCompleteTextFieldState
       final errorHandler = ErrorHandler.internal().handleError(e);
       _showSnackBar('${errorHandler.message}');
     }
-  }
-
-  Future<void> textChanged(String text) async {
-    if (text.isNotEmpty) {
-      await getLocation(text);
-    } else {
-      removeOverlay();
-    }
-    widget.onChanged?.call(text);
   }
 
   OverlayEntry? _createOverlayEntry() {
@@ -225,36 +224,39 @@ class _PlaceAutoCompleteTextFieldState
           showWhenUnlinked: false,
           link: _layerLink,
           offset: Offset(0, size.height + 5.0),
-          child: Material(
-            elevation: 4,
-            child: ListView.separated(
-              padding: EdgeInsets.zero,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: predictions.length,
-              separatorBuilder: (context, pos) =>
-                  widget.seperatedBuilder ?? const SizedBox(),
-              itemBuilder: (BuildContext context, int index) {
-                return InkWell(
-                  onTap: () {
-                    final selectedData = predictions[index];
-                    if (index < predictions.length) {
-                      widget.onChanged?.call(selectedData.description);
+          child: GestureDetector(
+            onPanDown: (_) => _overlayIsFocused = true,
+            onPanEnd: (_) => _overlayIsFocused = false,
+            onPanCancel: () => _overlayIsFocused = false,
+            child: Material(
+              elevation: 4,
+              child: ListView.separated(
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: predictions.length,
+                separatorBuilder: (context, pos) =>
+                    widget.seperatedBuilder ?? const SizedBox(),
+                itemBuilder: (BuildContext context, int index) {
+                  final prediction = predictions[index];
+                  return InkWell(
+                    onTap: () {
+                      widget.onChanged?.call(prediction.description);
 
-                      if (widget.onSelectedWithLatLng != null) {
-                        completeWithLatLng(selectedData);
+                      if (widget.onSelectedWithDetails != null) {
+                        completeWithDetails(prediction);
                       }
                       removeOverlay();
-                    }
-                  },
-                  child: widget.itemBuilder != null
-                      ? widget.itemBuilder!(context, index, predictions[index])
-                      : Container(
-                          padding: const EdgeInsets.all(10),
-                          child: Text(predictions[index].description!),
-                        ),
-                );
-              },
+                    },
+                    child: widget.itemBuilder != null
+                        ? widget.itemBuilder!(context, index, prediction)
+                        : Container(
+                            padding: const EdgeInsets.all(10),
+                            child: Text(prediction.description),
+                          ),
+                  );
+                },
+              ),
             ),
           ),
         ),
@@ -266,39 +268,28 @@ class _PlaceAutoCompleteTextFieldState
     predictions.clear();
     _overlayEntry?.remove();
     _overlayEntry = null;
+    _overlayIsFocused = false;
   }
 
-  Future<void> completeWithLatLng(Prediction prediction) async {
+  Future<void> completeWithDetails(PlacePrediction prediction) async {
     final placeId = prediction.placeId;
     if (placeId == null) return;
 
     // 'https://maps.googleapis.com/maps/api/place/details/json?placeid=${prediction.placeId}&key=${widget.googleAPIKey}';
     /// 'https://maps.googleapis.com/maps/api/place/details/json?key=${widget.googleAPIKey}&placeid=' + placeId
     try {
-      final getPlaceDetails =
-          WoFormTheme.of(context, listen: false)?.getPlaceDetails;
+      final getPlaceDetails = context.read<PlaceRepository?>()?.getPlaceDetails;
       if (getPlaceDetails == null) {
         throw UnimplementedError(
-          'You need to provide a WoFormThemeData.getPlaceDetails '
-          'for more details in autocompleted addresses.',
+          'You need to provide a PlaceRepository for address autocompletion.',
         );
       }
-      // final response = await _dio.get<Map<String, dynamic>>(proxy(placeId));
 
-      final map = await getPlaceDetails(placeId);
-
-      if (map.containsKey('error_message')) {
-        // ignore: only_throw_errors
-        throw map;
+      final response = await getPlaceDetails(placeId);
+      if (response.status == PlacesDetailsStatus.OK) {
+        widget.onSelectedWithDetails?.call(response.result);
       }
-
-      final placeDetails = PlaceDetails.fromJson(map);
-
-      prediction
-        ..lat = placeDetails.result!.geometry!.location!.lat.toString()
-        ..lng = placeDetails.result!.geometry!.location!.lng.toString();
-
-      widget.onSelectedWithLatLng?.call(prediction);
+      // TODO : communicate in case of error
     } catch (e) {
       final errorHandler = ErrorHandler.internal().handleError(e);
       _showSnackBar('${errorHandler.message}');
@@ -314,4 +305,7 @@ class _PlaceAutoCompleteTextFieldState
 }
 
 typedef ListItemBuilder = Widget Function(
-    BuildContext context, int index, Prediction prediction);
+  BuildContext context,
+  int index,
+  PlacePrediction prediction,
+);

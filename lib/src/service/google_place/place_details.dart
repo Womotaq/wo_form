@@ -7,6 +7,7 @@ part 'place_details.g.dart';
 
 @freezed
 abstract class PlaceDetailsResponse with _$PlaceDetailsResponse {
+  @JsonSerializable(explicitToJson: true)
   const factory PlaceDetailsResponse({
     /// May contain a set of attributions about this listing which must be
     /// displayed to the user (some listings may not have attribution).
@@ -67,6 +68,7 @@ enum PlacesDetailsStatus {
 
 @freezed
 abstract class PlaceDetails with _$PlaceDetails {
+  @JsonSerializable(explicitToJson: true)
   const factory PlaceDetails({
     /// An array containing the separate components applicable to this address.
     @JsonKey(name: 'address_components')
@@ -278,8 +280,16 @@ abstract class PlaceDetails with _$PlaceDetails {
   /// Required for the override getter
   const PlaceDetails._();
 
-  factory PlaceDetails.fromJson(Map<String, dynamic> json) =>
-      _$PlaceDetailsFromJson(json);
+  factory PlaceDetails.fromJson(dynamic json) =>
+      _$PlaceDetailsFromJson((json as Map).cast());
+
+  // --
+
+  /// Latitude in decimal degrees.
+  double? get latitude => geometry?.location.latitude;
+
+  /// Longitude in decimal degrees.
+  double? get longitude => geometry?.location.longitude;
 }
 
 @freezed
@@ -303,8 +313,8 @@ abstract class PlaceAddressComponent with _$PlaceAddressComponent {
   /// Required for the override getter
   const PlaceAddressComponent._();
 
-  factory PlaceAddressComponent.fromJson(Map<String, dynamic> json) =>
-      _$PlaceAddressComponentFromJson(json);
+  factory PlaceAddressComponent.fromJson(dynamic json) =>
+      _$PlaceAddressComponentFromJson((json as Map).cast());
 }
 
 @freezed
@@ -320,12 +330,13 @@ abstract class PlaceEditorialSummary with _$PlaceEditorialSummary {
   /// Required for the override getter
   const PlaceEditorialSummary._();
 
-  factory PlaceEditorialSummary.fromJson(Map<String, dynamic> json) =>
-      _$PlaceEditorialSummaryFromJson(json);
+  factory PlaceEditorialSummary.fromJson(dynamic json) =>
+      _$PlaceEditorialSummaryFromJson((json as Map).cast());
 }
 
 @freezed
 abstract class Geometry with _$Geometry {
+  @JsonSerializable(explicitToJson: true)
   const factory Geometry({
     /// An object describing a specific location with Latitude and Longitude in
     /// decimal degrees.
@@ -339,8 +350,8 @@ abstract class Geometry with _$Geometry {
   /// Required for the override getter
   const Geometry._();
 
-  factory Geometry.fromJson(Map<String, dynamic> json) =>
-      _$GeometryFromJson(json);
+  factory Geometry.fromJson(dynamic json) =>
+      _$GeometryFromJson((json as Map).cast());
 }
 
 @freezed
@@ -356,12 +367,13 @@ abstract class LatLngLiteral with _$LatLngLiteral {
   /// Required for the override getter
   const LatLngLiteral._();
 
-  factory LatLngLiteral.fromJson(Map<String, dynamic> json) =>
-      _$LatLngLiteralFromJson(json);
+  factory LatLngLiteral.fromJson(dynamic json) =>
+      _$LatLngLiteralFromJson((json as Map).cast());
 }
 
 @freezed
 abstract class Bounds with _$Bounds {
+  @JsonSerializable(explicitToJson: true)
   const factory Bounds({
     required LatLngLiteral northeast,
     required LatLngLiteral southwest,
@@ -370,11 +382,13 @@ abstract class Bounds with _$Bounds {
   /// Required for the override getter
   const Bounds._();
 
-  factory Bounds.fromJson(Map<String, dynamic> json) => _$BoundsFromJson(json);
+  factory Bounds.fromJson(dynamic json) =>
+      _$BoundsFromJson((json as Map).cast());
 }
 
 @freezed
 abstract class PlaceOpeningHours with _$PlaceOpeningHours {
+  @JsonSerializable(explicitToJson: true)
   const factory PlaceOpeningHours({
     /// A boolean value indicating if the place is open at the current time.
     @JsonKey(name: 'open_now') bool? openNow,
@@ -400,12 +414,13 @@ abstract class PlaceOpeningHours with _$PlaceOpeningHours {
   /// Required for the override getter
   const PlaceOpeningHours._();
 
-  factory PlaceOpeningHours.fromJson(Map<String, dynamic> json) =>
-      _$PlaceOpeningHoursFromJson(json);
+  factory PlaceOpeningHours.fromJson(dynamic json) =>
+      _$PlaceOpeningHoursFromJson((json as Map).cast());
 }
 
 @freezed
 abstract class PlaceOpeningHoursPeriod with _$PlaceOpeningHoursPeriod {
+  @JsonSerializable(explicitToJson: true)
   const factory PlaceOpeningHoursPeriod({
     /// Contains a pair of day and time objects describing when the place opens.
     required PlaceOpeningHoursPeriodDetail open,
@@ -421,8 +436,8 @@ abstract class PlaceOpeningHoursPeriod with _$PlaceOpeningHoursPeriod {
   /// Required for the override getter
   const PlaceOpeningHoursPeriod._();
 
-  factory PlaceOpeningHoursPeriod.fromJson(Map<String, dynamic> json) =>
-      _$PlaceOpeningHoursPeriodFromJson(json);
+  factory PlaceOpeningHoursPeriod.fromJson(dynamic json) =>
+      _$PlaceOpeningHoursPeriodFromJson((json as Map).cast());
 }
 
 @freezed
@@ -444,8 +459,8 @@ abstract class PlaceSpecialDay with _$PlaceSpecialDay {
   /// Required for the override getter
   const PlaceSpecialDay._();
 
-  factory PlaceSpecialDay.fromJson(Map<String, dynamic> json) =>
-      _$PlaceSpecialDayFromJson(json);
+  factory PlaceSpecialDay.fromJson(dynamic json) =>
+      _$PlaceSpecialDayFromJson((json as Map).cast());
 }
 
 @freezed
@@ -474,8 +489,8 @@ abstract class PlaceOpeningHoursPeriodDetail
   /// Required for the override getter
   const PlaceOpeningHoursPeriodDetail._();
 
-  factory PlaceOpeningHoursPeriodDetail.fromJson(Map<String, dynamic> json) =>
-      _$PlaceOpeningHoursPeriodDetailFromJson(json);
+  factory PlaceOpeningHoursPeriodDetail.fromJson(dynamic json) =>
+      _$PlaceOpeningHoursPeriodDetailFromJson((json as Map).cast());
 }
 
 @freezed
@@ -497,8 +512,8 @@ abstract class PlacePhoto with _$PlacePhoto {
   /// Required for the override getter
   const PlacePhoto._();
 
-  factory PlacePhoto.fromJson(Map<String, dynamic> json) =>
-      _$PlacePhotoFromJson(json);
+  factory PlacePhoto.fromJson(dynamic json) =>
+      _$PlacePhotoFromJson((json as Map).cast());
 }
 
 @freezed
@@ -517,8 +532,8 @@ abstract class PlusCode with _$PlusCode {
   /// Required for the override getter
   const PlusCode._();
 
-  factory PlusCode.fromJson(Map<String, dynamic> json) =>
-      _$PlusCodeFromJson(json);
+  factory PlusCode.fromJson(dynamic json) =>
+      _$PlusCodeFromJson((json as Map).cast());
 }
 
 @freezed
@@ -579,6 +594,6 @@ abstract class PlaceReview with _$PlaceReview {
   /// Required for the override getter
   const PlaceReview._();
 
-  factory PlaceReview.fromJson(Map<String, dynamic> json) =>
-      _$PlaceReviewFromJson(json);
+  factory PlaceReview.fromJson(dynamic json) =>
+      _$PlaceReviewFromJson((json as Map).cast());
 }

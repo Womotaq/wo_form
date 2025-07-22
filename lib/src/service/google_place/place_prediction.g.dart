@@ -10,7 +10,7 @@ _PlacesAutocompleteResponse _$PlacesAutocompleteResponseFromJson(
         Map<String, dynamic> json) =>
     _PlacesAutocompleteResponse(
       predictions: (json['predictions'] as List<dynamic>)
-          .map((e) => PlacePrediction.fromJson(e as Map<String, dynamic>))
+          .map(PlacePrediction.fromJson)
           .toList(),
       status: $enumDecode(_$PlacesAutocompleteStatusEnumMap, json['status']),
       errorMessage: json['error_message'] as String?,
@@ -22,7 +22,7 @@ _PlacesAutocompleteResponse _$PlacesAutocompleteResponseFromJson(
 Map<String, dynamic> _$PlacesAutocompleteResponseToJson(
         _PlacesAutocompleteResponse instance) =>
     <String, dynamic>{
-      'predictions': instance.predictions,
+      'predictions': instance.predictions.map((e) => e.toJson()).toList(),
       'status': _$PlacesAutocompleteStatusEnumMap[instance.status]!,
       'error_message': instance.errorMessage,
       'info_messages': instance.infoMessages,
@@ -41,13 +41,11 @@ _PlacePrediction _$PlacePredictionFromJson(Map<String, dynamic> json) =>
     _PlacePrediction(
       description: json['description'] as String,
       matchedSubstrings: (json['matched_substrings'] as List<dynamic>)
-          .map((e) => MatchedSubstrings.fromJson(e as Map<String, dynamic>))
+          .map(MatchedSubstrings.fromJson)
           .toList(),
-      structuredFormatting: StructuredFormatting.fromJson(
-          json['structured_formatting'] as Map<String, dynamic>),
-      terms: (json['terms'] as List<dynamic>)
-          .map((e) => Term.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      structuredFormatting:
+          StructuredFormatting.fromJson(json['structured_formatting']),
+      terms: (json['terms'] as List<dynamic>).map(Term.fromJson).toList(),
       distanceMeters: (json['distance_meters'] as num?)?.toInt(),
       placeId: json['place_id'] as String?,
       types:
@@ -57,9 +55,10 @@ _PlacePrediction _$PlacePredictionFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$PlacePredictionToJson(_PlacePrediction instance) =>
     <String, dynamic>{
       'description': instance.description,
-      'matched_substrings': instance.matchedSubstrings,
-      'structured_formatting': instance.structuredFormatting,
-      'terms': instance.terms,
+      'matched_substrings':
+          instance.matchedSubstrings.map((e) => e.toJson()).toList(),
+      'structured_formatting': instance.structuredFormatting.toJson(),
+      'terms': instance.terms.map((e) => e.toJson()).toList(),
       'distance_meters': instance.distanceMeters,
       'place_id': instance.placeId,
       'types': instance.types,
@@ -68,13 +67,13 @@ Map<String, dynamic> _$PlacePredictionToJson(_PlacePrediction instance) =>
 _MatchedSubstrings _$MatchedSubstringsFromJson(Map<String, dynamic> json) =>
     _MatchedSubstrings(
       length: (json['length'] as num).toInt(),
-      offest: (json['offest'] as num).toInt(),
+      offset: (json['offset'] as num).toInt(),
     );
 
 Map<String, dynamic> _$MatchedSubstringsToJson(_MatchedSubstrings instance) =>
     <String, dynamic>{
       'length': instance.length,
-      'offest': instance.offest,
+      'offset': instance.offset,
     };
 
 _StructuredFormatting _$StructuredFormattingFromJson(
@@ -83,31 +82,34 @@ _StructuredFormatting _$StructuredFormattingFromJson(
       mainText: json['main_text'] as String,
       mainTextMatchedSubstrings:
           (json['main_text_matched_substrings'] as List<dynamic>)
-              .map((e) => MatchedSubstrings.fromJson(e as Map<String, dynamic>))
+              .map(MatchedSubstrings.fromJson)
               .toList(),
       secondaryText: json['secondary_text'] as String?,
-      secondaryTextMatchedSubstrings: (json['secondary_text_matched_substrings']
-              as List<dynamic>?)
-          ?.map((e) => MatchedSubstrings.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      secondaryTextMatchedSubstrings:
+          (json['secondary_text_matched_substrings'] as List<dynamic>?)
+              ?.map(MatchedSubstrings.fromJson)
+              .toList(),
     );
 
 Map<String, dynamic> _$StructuredFormattingToJson(
         _StructuredFormatting instance) =>
     <String, dynamic>{
       'main_text': instance.mainText,
-      'main_text_matched_substrings': instance.mainTextMatchedSubstrings,
+      'main_text_matched_substrings':
+          instance.mainTextMatchedSubstrings.map((e) => e.toJson()).toList(),
       'secondary_text': instance.secondaryText,
-      'secondary_text_matched_substrings':
-          instance.secondaryTextMatchedSubstrings,
+      'secondary_text_matched_substrings': instance
+          .secondaryTextMatchedSubstrings
+          ?.map((e) => e.toJson())
+          .toList(),
     };
 
 _Term _$TermFromJson(Map<String, dynamic> json) => _Term(
-      offest: (json['offest'] as num).toInt(),
+      offset: (json['offset'] as num).toInt(),
       value: json['value'] as String,
     );
 
 Map<String, dynamic> _$TermToJson(_Term instance) => <String, dynamic>{
-      'offest': instance.offest,
+      'offset': instance.offset,
       'value': instance.value,
     };

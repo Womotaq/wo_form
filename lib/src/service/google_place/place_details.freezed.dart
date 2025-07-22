@@ -136,7 +136,8 @@ class _$PlaceDetailsResponseCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _PlaceDetailsResponse extends PlaceDetailsResponse {
   const _PlaceDetailsResponse(
       {@JsonKey(name: 'html_attributions')
@@ -1027,7 +1028,8 @@ class _$PlaceDetailsCopyWithImpl<$Res> implements $PlaceDetailsCopyWith<$Res> {
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _PlaceDetails extends PlaceDetails {
   const _PlaceDetails(
       {@JsonKey(name: 'address_components')
@@ -2419,7 +2421,8 @@ class _$GeometryCopyWithImpl<$Res> implements $GeometryCopyWith<$Res> {
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _Geometry extends Geometry {
   const _Geometry({required this.location, required this.viewport}) : super._();
   factory _Geometry.fromJson(Map<String, dynamic> json) =>
@@ -2810,7 +2813,8 @@ class _$BoundsCopyWithImpl<$Res> implements $BoundsCopyWith<$Res> {
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _Bounds extends Bounds {
   const _Bounds({required this.northeast, required this.southwest}) : super._();
   factory _Bounds.fromJson(Map<String, dynamic> json) => _$BoundsFromJson(json);
@@ -3043,7 +3047,8 @@ class _$PlaceOpeningHoursCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _PlaceOpeningHours extends PlaceOpeningHours {
   const _PlaceOpeningHours(
       {@JsonKey(name: 'open_now') this.openNow,
@@ -3319,7 +3324,8 @@ class _$PlaceOpeningHoursPeriodCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _PlaceOpeningHoursPeriod extends PlaceOpeningHoursPeriod {
   const _PlaceOpeningHoursPeriod({required this.open, this.close}) : super._();
   factory _PlaceOpeningHoursPeriod.fromJson(Map<String, dynamic> json) =>

@@ -19,10 +19,9 @@ mixin _$PlaceAutocompleteSettings {
   /// The list of countries in which restrict the research.
   List<IsoCode>? get countries;
 
-  /// Longitude & latitude can be found at
-  /// '{pinputPath}+longitude' and '{pinputPath}+latitude'.
-  /// Extra data are also availible at '{pinputPath}+prediction'.
-  bool get includeLatLng;
+  /// If true, extra data, like latitude & latitude,
+  /// will be availible at '{pinputPath}+details'.
+  bool get includeDetails;
 
   /// Create a copy of PlaceAutocompleteSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -42,18 +41,18 @@ mixin _$PlaceAutocompleteSettings {
             other is PlaceAutocompleteSettings &&
             (identical(other.type, type) || other.type == type) &&
             const DeepCollectionEquality().equals(other.countries, countries) &&
-            (identical(other.includeLatLng, includeLatLng) ||
-                other.includeLatLng == includeLatLng));
+            (identical(other.includeDetails, includeDetails) ||
+                other.includeDetails == includeDetails));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, type,
-      const DeepCollectionEquality().hash(countries), includeLatLng);
+      const DeepCollectionEquality().hash(countries), includeDetails);
 
   @override
   String toString() {
-    return 'PlaceAutocompleteSettings(type: $type, countries: $countries, includeLatLng: $includeLatLng)';
+    return 'PlaceAutocompleteSettings(type: $type, countries: $countries, includeDetails: $includeDetails)';
   }
 }
 
@@ -63,7 +62,7 @@ abstract mixin class $PlaceAutocompleteSettingsCopyWith<$Res> {
           $Res Function(PlaceAutocompleteSettings) _then) =
       _$PlaceAutocompleteSettingsCopyWithImpl;
   @useResult
-  $Res call({PlaceType? type, List<IsoCode>? countries, bool includeLatLng});
+  $Res call({PlaceType? type, List<IsoCode>? countries, bool includeDetails});
 }
 
 /// @nodoc
@@ -81,7 +80,7 @@ class _$PlaceAutocompleteSettingsCopyWithImpl<$Res>
   $Res call({
     Object? type = freezed,
     Object? countries = freezed,
-    Object? includeLatLng = null,
+    Object? includeDetails = null,
   }) {
     return _then(_self.copyWith(
       type: freezed == type
@@ -92,9 +91,9 @@ class _$PlaceAutocompleteSettingsCopyWithImpl<$Res>
           ? _self.countries
           : countries // ignore: cast_nullable_to_non_nullable
               as List<IsoCode>?,
-      includeLatLng: null == includeLatLng
-          ? _self.includeLatLng
-          : includeLatLng // ignore: cast_nullable_to_non_nullable
+      includeDetails: null == includeDetails
+          ? _self.includeDetails
+          : includeDetails // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -104,7 +103,7 @@ class _$PlaceAutocompleteSettingsCopyWithImpl<$Res>
 @JsonSerializable()
 class _PlaceAutocompleteSettings extends PlaceAutocompleteSettings {
   const _PlaceAutocompleteSettings(
-      {this.type, final List<IsoCode>? countries, this.includeLatLng = true})
+      {this.type, final List<IsoCode>? countries, this.includeDetails = true})
       : _countries = countries,
         super._();
   factory _PlaceAutocompleteSettings.fromJson(Map<String, dynamic> json) =>
@@ -126,12 +125,11 @@ class _PlaceAutocompleteSettings extends PlaceAutocompleteSettings {
     return EqualUnmodifiableListView(value);
   }
 
-  /// Longitude & latitude can be found at
-  /// '{pinputPath}+longitude' and '{pinputPath}+latitude'.
-  /// Extra data are also availible at '{pinputPath}+prediction'.
+  /// If true, extra data, like latitude & latitude,
+  /// will be availible at '{pinputPath}+details'.
   @override
   @JsonKey()
-  final bool includeLatLng;
+  final bool includeDetails;
 
   /// Create a copy of PlaceAutocompleteSettings
   /// with the given fields replaced by the non-null parameter values.
@@ -158,18 +156,18 @@ class _PlaceAutocompleteSettings extends PlaceAutocompleteSettings {
             (identical(other.type, type) || other.type == type) &&
             const DeepCollectionEquality()
                 .equals(other._countries, _countries) &&
-            (identical(other.includeLatLng, includeLatLng) ||
-                other.includeLatLng == includeLatLng));
+            (identical(other.includeDetails, includeDetails) ||
+                other.includeDetails == includeDetails));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, type,
-      const DeepCollectionEquality().hash(_countries), includeLatLng);
+      const DeepCollectionEquality().hash(_countries), includeDetails);
 
   @override
   String toString() {
-    return 'PlaceAutocompleteSettings(type: $type, countries: $countries, includeLatLng: $includeLatLng)';
+    return 'PlaceAutocompleteSettings(type: $type, countries: $countries, includeDetails: $includeDetails)';
   }
 }
 
@@ -181,7 +179,7 @@ abstract mixin class _$PlaceAutocompleteSettingsCopyWith<$Res>
       __$PlaceAutocompleteSettingsCopyWithImpl;
   @override
   @useResult
-  $Res call({PlaceType? type, List<IsoCode>? countries, bool includeLatLng});
+  $Res call({PlaceType? type, List<IsoCode>? countries, bool includeDetails});
 }
 
 /// @nodoc
@@ -199,7 +197,7 @@ class __$PlaceAutocompleteSettingsCopyWithImpl<$Res>
   $Res call({
     Object? type = freezed,
     Object? countries = freezed,
-    Object? includeLatLng = null,
+    Object? includeDetails = null,
   }) {
     return _then(_PlaceAutocompleteSettings(
       type: freezed == type
@@ -210,9 +208,9 @@ class __$PlaceAutocompleteSettingsCopyWithImpl<$Res>
           ? _self._countries
           : countries // ignore: cast_nullable_to_non_nullable
               as List<IsoCode>?,
-      includeLatLng: null == includeLatLng
-          ? _self.includeLatLng
-          : includeLatLng // ignore: cast_nullable_to_non_nullable
+      includeDetails: null == includeDetails
+          ? _self.includeDetails
+          : includeDetails // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }

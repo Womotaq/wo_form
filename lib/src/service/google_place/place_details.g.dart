@@ -12,7 +12,7 @@ _PlaceDetailsResponse _$PlaceDetailsResponseFromJson(
       htmlAttributions: (json['html_attributions'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
-      result: PlaceDetails.fromJson(json['result'] as Map<String, dynamic>),
+      result: PlaceDetails.fromJson(json['result']),
       status: $enumDecode(_$PlacesDetailsStatusEnumMap, json['status']),
       infoMessages: (json['info_messages'] as List<dynamic>?)
           ?.map((e) => e as String)
@@ -23,7 +23,7 @@ Map<String, dynamic> _$PlaceDetailsResponseToJson(
         _PlaceDetailsResponse instance) =>
     <String, dynamic>{
       'html_attributions': instance.htmlAttributions,
-      'result': instance.result,
+      'result': instance.result.toJson(),
       'status': _$PlacesDetailsStatusEnumMap[instance.status]!,
       'info_messages': instance.infoMessages,
     };
@@ -41,27 +41,23 @@ const _$PlacesDetailsStatusEnumMap = {
 _PlaceDetails _$PlaceDetailsFromJson(Map<String, dynamic> json) =>
     _PlaceDetails(
       addressComponents: (json['address_components'] as List<dynamic>?)
-          ?.map(
-              (e) => PlaceAddressComponent.fromJson(e as Map<String, dynamic>))
+          ?.map(PlaceAddressComponent.fromJson)
           .toList(),
       adrAddress: json['adr_address'] as String?,
       businessStatus: json['business_status'] as String?,
       curbsidePickup: json['curbside_pickup'] as bool?,
       currentOpeningHours: json['current_opening_hours'] == null
           ? null
-          : PlaceOpeningHours.fromJson(
-              json['current_opening_hours'] as Map<String, dynamic>),
+          : PlaceOpeningHours.fromJson(json['current_opening_hours']),
       delivery: json['delivery'] as bool?,
       dineIn: json['dine_in'] as bool?,
       editorialSummary: json['editorial_summary'] == null
           ? null
-          : PlaceEditorialSummary.fromJson(
-              json['editorial_summary'] as Map<String, dynamic>),
+          : PlaceEditorialSummary.fromJson(json['editorial_summary']),
       formattedAddress: json['formatted_address'] as String?,
       formattedPhoneNumber: json['formatted_phone_number'] as String?,
-      geometry: json['geometry'] == null
-          ? null
-          : Geometry.fromJson(json['geometry'] as Map<String, dynamic>),
+      geometry:
+          json['geometry'] == null ? null : Geometry.fromJson(json['geometry']),
       icon: json['icon'] as String?,
       iconBackgroundColor: json['icon_background_color'] as String?,
       iconMaskBaseUri: json['icon_mask_base_uri'] as String?,
@@ -69,23 +65,21 @@ _PlaceDetails _$PlaceDetailsFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String?,
       openingHours: json['opening_hours'] == null
           ? null
-          : PlaceOpeningHours.fromJson(
-              json['opening_hours'] as Map<String, dynamic>),
-      photos: (json['photos'] as List<dynamic>?)
-          ?.map((e) => PlacePhoto.fromJson(e as Map<String, dynamic>))
-          .toList(),
+          : PlaceOpeningHours.fromJson(json['opening_hours']),
+      photos:
+          (json['photos'] as List<dynamic>?)?.map(PlacePhoto.fromJson).toList(),
       placeId: json['place_id'] as String?,
       plusCode: json['plus_code'] == null
           ? null
-          : PlusCode.fromJson(json['plus_code'] as Map<String, dynamic>),
+          : PlusCode.fromJson(json['plus_code']),
       priceLevel: (json['price_level'] as num?)?.toInt(),
       rating: (json['rating'] as num?)?.toDouble(),
       reservable: json['reservable'] as bool?,
       reviews: (json['reviews'] as List<dynamic>?)
-          ?.map((e) => PlaceReview.fromJson(e as Map<String, dynamic>))
+          ?.map(PlaceReview.fromJson)
           .toList(),
       secondaryOpeningHours: (json['secondary_opening_hours'] as List<dynamic>?)
-          ?.map((e) => PlaceOpeningHours.fromJson(e as Map<String, dynamic>))
+          ?.map(PlaceOpeningHours.fromJson)
           .toList(),
       servesBeer: json['serves_beer'] as bool?,
       servesBreakfast: json['serves_breakfast'] as bool?,
@@ -108,31 +102,33 @@ _PlaceDetails _$PlaceDetailsFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$PlaceDetailsToJson(_PlaceDetails instance) =>
     <String, dynamic>{
-      'address_components': instance.addressComponents,
+      'address_components':
+          instance.addressComponents?.map((e) => e.toJson()).toList(),
       'adr_address': instance.adrAddress,
       'business_status': instance.businessStatus,
       'curbside_pickup': instance.curbsidePickup,
-      'current_opening_hours': instance.currentOpeningHours,
+      'current_opening_hours': instance.currentOpeningHours?.toJson(),
       'delivery': instance.delivery,
       'dine_in': instance.dineIn,
-      'editorial_summary': instance.editorialSummary,
+      'editorial_summary': instance.editorialSummary?.toJson(),
       'formatted_address': instance.formattedAddress,
       'formatted_phone_number': instance.formattedPhoneNumber,
-      'geometry': instance.geometry,
+      'geometry': instance.geometry?.toJson(),
       'icon': instance.icon,
       'icon_background_color': instance.iconBackgroundColor,
       'icon_mask_base_uri': instance.iconMaskBaseUri,
       'international_phone_number': instance.internationalPhoneNumber,
       'name': instance.name,
-      'opening_hours': instance.openingHours,
-      'photos': instance.photos,
+      'opening_hours': instance.openingHours?.toJson(),
+      'photos': instance.photos?.map((e) => e.toJson()).toList(),
       'place_id': instance.placeId,
-      'plus_code': instance.plusCode,
+      'plus_code': instance.plusCode?.toJson(),
       'price_level': instance.priceLevel,
       'rating': instance.rating,
       'reservable': instance.reservable,
-      'reviews': instance.reviews,
-      'secondary_opening_hours': instance.secondaryOpeningHours,
+      'reviews': instance.reviews?.map((e) => e.toJson()).toList(),
+      'secondary_opening_hours':
+          instance.secondaryOpeningHours?.map((e) => e.toJson()).toList(),
       'serves_beer': instance.servesBeer,
       'serves_breakfast': instance.servesBreakfast,
       'serves_brunch': instance.servesBrunch,
@@ -181,14 +177,13 @@ Map<String, dynamic> _$PlaceEditorialSummaryToJson(
     };
 
 _Geometry _$GeometryFromJson(Map<String, dynamic> json) => _Geometry(
-      location:
-          LatLngLiteral.fromJson(json['location'] as Map<String, dynamic>),
-      viewport: Bounds.fromJson(json['viewport'] as Map<String, dynamic>),
+      location: LatLngLiteral.fromJson(json['location']),
+      viewport: Bounds.fromJson(json['viewport']),
     );
 
 Map<String, dynamic> _$GeometryToJson(_Geometry instance) => <String, dynamic>{
-      'location': instance.location,
-      'viewport': instance.viewport,
+      'location': instance.location.toJson(),
+      'viewport': instance.viewport.toJson(),
     };
 
 _LatLngLiteral _$LatLngLiteralFromJson(Map<String, dynamic> json) =>
@@ -204,26 +199,23 @@ Map<String, dynamic> _$LatLngLiteralToJson(_LatLngLiteral instance) =>
     };
 
 _Bounds _$BoundsFromJson(Map<String, dynamic> json) => _Bounds(
-      northeast:
-          LatLngLiteral.fromJson(json['northeast'] as Map<String, dynamic>),
-      southwest:
-          LatLngLiteral.fromJson(json['southwest'] as Map<String, dynamic>),
+      northeast: LatLngLiteral.fromJson(json['northeast']),
+      southwest: LatLngLiteral.fromJson(json['southwest']),
     );
 
 Map<String, dynamic> _$BoundsToJson(_Bounds instance) => <String, dynamic>{
-      'northeast': instance.northeast,
-      'southwest': instance.southwest,
+      'northeast': instance.northeast.toJson(),
+      'southwest': instance.southwest.toJson(),
     };
 
 _PlaceOpeningHours _$PlaceOpeningHoursFromJson(Map<String, dynamic> json) =>
     _PlaceOpeningHours(
       openNow: json['open_now'] as bool?,
       periods: (json['periods'] as List<dynamic>?)
-          ?.map((e) =>
-              PlaceOpeningHoursPeriod.fromJson(e as Map<String, dynamic>))
+          ?.map(PlaceOpeningHoursPeriod.fromJson)
           .toList(),
       specialDays: (json['special_days'] as List<dynamic>?)
-          ?.map((e) => PlaceSpecialDay.fromJson(e as Map<String, dynamic>))
+          ?.map(PlaceSpecialDay.fromJson)
           .toList(),
       type: json['type'] as String?,
       weekdayText: json['weekday_text'] as String?,
@@ -232,8 +224,8 @@ _PlaceOpeningHours _$PlaceOpeningHoursFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$PlaceOpeningHoursToJson(_PlaceOpeningHours instance) =>
     <String, dynamic>{
       'open_now': instance.openNow,
-      'periods': instance.periods,
-      'special_days': instance.specialDays,
+      'periods': instance.periods?.map((e) => e.toJson()).toList(),
+      'special_days': instance.specialDays?.map((e) => e.toJson()).toList(),
       'type': instance.type,
       'weekday_text': instance.weekdayText,
     };
@@ -241,19 +233,17 @@ Map<String, dynamic> _$PlaceOpeningHoursToJson(_PlaceOpeningHours instance) =>
 _PlaceOpeningHoursPeriod _$PlaceOpeningHoursPeriodFromJson(
         Map<String, dynamic> json) =>
     _PlaceOpeningHoursPeriod(
-      open: PlaceOpeningHoursPeriodDetail.fromJson(
-          json['open'] as Map<String, dynamic>),
+      open: PlaceOpeningHoursPeriodDetail.fromJson(json['open']),
       close: json['close'] == null
           ? null
-          : PlaceOpeningHoursPeriodDetail.fromJson(
-              json['close'] as Map<String, dynamic>),
+          : PlaceOpeningHoursPeriodDetail.fromJson(json['close']),
     );
 
 Map<String, dynamic> _$PlaceOpeningHoursPeriodToJson(
         _PlaceOpeningHoursPeriod instance) =>
     <String, dynamic>{
-      'open': instance.open,
-      'close': instance.close,
+      'open': instance.open.toJson(),
+      'close': instance.close?.toJson(),
     };
 
 _PlaceSpecialDay _$PlaceSpecialDayFromJson(Map<String, dynamic> json) =>

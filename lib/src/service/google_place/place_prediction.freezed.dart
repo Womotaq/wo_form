@@ -129,7 +129,8 @@ class _$PlacesAutocompleteResponseCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _PlacesAutocompleteResponse extends PlacesAutocompleteResponse {
   const _PlacesAutocompleteResponse(
       {required final List<PlacePrediction> predictions,
@@ -460,7 +461,8 @@ class _$PlacePredictionCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _PlacePrediction extends PlacePrediction {
   const _PlacePrediction(
       {required this.description,
@@ -704,7 +706,7 @@ mixin _$MatchedSubstrings {
   int get length;
 
   /// Start location of the matched substring in the prediction result text.
-  int get offest;
+  int get offset;
 
   /// Create a copy of MatchedSubstrings
   /// with the given fields replaced by the non-null parameter values.
@@ -723,16 +725,16 @@ mixin _$MatchedSubstrings {
         (other.runtimeType == runtimeType &&
             other is MatchedSubstrings &&
             (identical(other.length, length) || other.length == length) &&
-            (identical(other.offest, offest) || other.offest == offest));
+            (identical(other.offset, offset) || other.offset == offset));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, length, offest);
+  int get hashCode => Object.hash(runtimeType, length, offset);
 
   @override
   String toString() {
-    return 'MatchedSubstrings(length: $length, offest: $offest)';
+    return 'MatchedSubstrings(length: $length, offset: $offset)';
   }
 }
 
@@ -742,7 +744,7 @@ abstract mixin class $MatchedSubstringsCopyWith<$Res> {
           MatchedSubstrings value, $Res Function(MatchedSubstrings) _then) =
       _$MatchedSubstringsCopyWithImpl;
   @useResult
-  $Res call({int length, int offest});
+  $Res call({int length, int offset});
 }
 
 /// @nodoc
@@ -759,16 +761,16 @@ class _$MatchedSubstringsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? length = null,
-    Object? offest = null,
+    Object? offset = null,
   }) {
     return _then(_self.copyWith(
       length: null == length
           ? _self.length
           : length // ignore: cast_nullable_to_non_nullable
               as int,
-      offest: null == offest
-          ? _self.offest
-          : offest // ignore: cast_nullable_to_non_nullable
+      offset: null == offset
+          ? _self.offset
+          : offset // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -777,7 +779,7 @@ class _$MatchedSubstringsCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _MatchedSubstrings extends MatchedSubstrings {
-  const _MatchedSubstrings({required this.length, required this.offest})
+  const _MatchedSubstrings({required this.length, required this.offset})
       : super._();
   factory _MatchedSubstrings.fromJson(Map<String, dynamic> json) =>
       _$MatchedSubstringsFromJson(json);
@@ -788,7 +790,7 @@ class _MatchedSubstrings extends MatchedSubstrings {
 
   /// Start location of the matched substring in the prediction result text.
   @override
-  final int offest;
+  final int offset;
 
   /// Create a copy of MatchedSubstrings
   /// with the given fields replaced by the non-null parameter values.
@@ -811,16 +813,16 @@ class _MatchedSubstrings extends MatchedSubstrings {
         (other.runtimeType == runtimeType &&
             other is _MatchedSubstrings &&
             (identical(other.length, length) || other.length == length) &&
-            (identical(other.offest, offest) || other.offest == offest));
+            (identical(other.offset, offset) || other.offset == offset));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, length, offest);
+  int get hashCode => Object.hash(runtimeType, length, offset);
 
   @override
   String toString() {
-    return 'MatchedSubstrings(length: $length, offest: $offest)';
+    return 'MatchedSubstrings(length: $length, offset: $offset)';
   }
 }
 
@@ -832,7 +834,7 @@ abstract mixin class _$MatchedSubstringsCopyWith<$Res>
       __$MatchedSubstringsCopyWithImpl;
   @override
   @useResult
-  $Res call({int length, int offest});
+  $Res call({int length, int offset});
 }
 
 /// @nodoc
@@ -849,16 +851,16 @@ class __$MatchedSubstringsCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? length = null,
-    Object? offest = null,
+    Object? offset = null,
   }) {
     return _then(_MatchedSubstrings(
       length: null == length
           ? _self.length
           : length // ignore: cast_nullable_to_non_nullable
               as int,
-      offest: null == offest
-          ? _self.offest
-          : offest // ignore: cast_nullable_to_non_nullable
+      offset: null == offset
+          ? _self.offset
+          : offset // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -982,7 +984,8 @@ class _$StructuredFormattingCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _StructuredFormatting extends StructuredFormatting {
   const _StructuredFormatting(
       {@JsonKey(name: 'main_text') required this.mainText,
@@ -1147,7 +1150,7 @@ class __$StructuredFormattingCopyWithImpl<$Res>
 mixin _$Term {
 // Defines the start position of this term in the description,
 // measured in Unicode characters.
-  int get offest; // The text of the term.
+  int get offset; // The text of the term.
   String get value;
 
   /// Create a copy of Term
@@ -1165,17 +1168,17 @@ mixin _$Term {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is Term &&
-            (identical(other.offest, offest) || other.offest == offest) &&
+            (identical(other.offset, offset) || other.offset == offset) &&
             (identical(other.value, value) || other.value == value));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, offest, value);
+  int get hashCode => Object.hash(runtimeType, offset, value);
 
   @override
   String toString() {
-    return 'Term(offest: $offest, value: $value)';
+    return 'Term(offset: $offset, value: $value)';
   }
 }
 
@@ -1184,7 +1187,7 @@ abstract mixin class $TermCopyWith<$Res> {
   factory $TermCopyWith(Term value, $Res Function(Term) _then) =
       _$TermCopyWithImpl;
   @useResult
-  $Res call({int offest, String value});
+  $Res call({int offset, String value});
 }
 
 /// @nodoc
@@ -1199,13 +1202,13 @@ class _$TermCopyWithImpl<$Res> implements $TermCopyWith<$Res> {
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? offest = null,
+    Object? offset = null,
     Object? value = null,
   }) {
     return _then(_self.copyWith(
-      offest: null == offest
-          ? _self.offest
-          : offest // ignore: cast_nullable_to_non_nullable
+      offset: null == offset
+          ? _self.offset
+          : offset // ignore: cast_nullable_to_non_nullable
               as int,
       value: null == value
           ? _self.value
@@ -1218,13 +1221,13 @@ class _$TermCopyWithImpl<$Res> implements $TermCopyWith<$Res> {
 /// @nodoc
 @JsonSerializable()
 class _Term extends Term {
-  const _Term({required this.offest, required this.value}) : super._();
+  const _Term({required this.offset, required this.value}) : super._();
   factory _Term.fromJson(Map<String, dynamic> json) => _$TermFromJson(json);
 
 // Defines the start position of this term in the description,
 // measured in Unicode characters.
   @override
-  final int offest;
+  final int offset;
 // The text of the term.
   @override
   final String value;
@@ -1249,17 +1252,17 @@ class _Term extends Term {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Term &&
-            (identical(other.offest, offest) || other.offest == offest) &&
+            (identical(other.offset, offset) || other.offset == offset) &&
             (identical(other.value, value) || other.value == value));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, offest, value);
+  int get hashCode => Object.hash(runtimeType, offset, value);
 
   @override
   String toString() {
-    return 'Term(offest: $offest, value: $value)';
+    return 'Term(offset: $offset, value: $value)';
   }
 }
 
@@ -1269,7 +1272,7 @@ abstract mixin class _$TermCopyWith<$Res> implements $TermCopyWith<$Res> {
       __$TermCopyWithImpl;
   @override
   @useResult
-  $Res call({int offest, String value});
+  $Res call({int offset, String value});
 }
 
 /// @nodoc
@@ -1284,13 +1287,13 @@ class __$TermCopyWithImpl<$Res> implements _$TermCopyWith<$Res> {
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? offest = null,
+    Object? offset = null,
     Object? value = null,
   }) {
     return _then(_Term(
-      offest: null == offest
-          ? _self.offest
-          : offest // ignore: cast_nullable_to_non_nullable
+      offset: null == offset
+          ? _self.offset
+          : offset // ignore: cast_nullable_to_non_nullable
               as int,
       value: null == value
           ? _self.value

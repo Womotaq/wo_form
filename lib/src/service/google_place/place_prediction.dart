@@ -7,6 +7,7 @@ part 'place_prediction.g.dart';
 
 @freezed
 abstract class PlacesAutocompleteResponse with _$PlacesAutocompleteResponse {
+  @JsonSerializable(explicitToJson: true)
   const factory PlacesAutocompleteResponse({
     // Contains an array of predictions.
     required List<PlacePrediction> predictions,
@@ -67,6 +68,7 @@ enum PlacesAutocompleteStatus {
 
 @freezed
 abstract class PlacePrediction with _$PlacePrediction {
+  @JsonSerializable(explicitToJson: true)
   const factory PlacePrediction({
     /// Contains the human-readable name for the returned result.
     /// For establishment results, this is usually the business name.
@@ -110,8 +112,8 @@ abstract class PlacePrediction with _$PlacePrediction {
   /// Required for the override getter
   const PlacePrediction._();
 
-  factory PlacePrediction.fromJson(Map<String, dynamic> json) =>
-      _$PlacePredictionFromJson(json);
+  factory PlacePrediction.fromJson(dynamic json) =>
+      _$PlacePredictionFromJson((json as Map).cast());
 }
 
 @freezed
@@ -121,18 +123,19 @@ abstract class MatchedSubstrings with _$MatchedSubstrings {
     required int length,
 
     /// Start location of the matched substring in the prediction result text.
-    required int offest,
+    required int offset,
   }) = _MatchedSubstrings;
 
   /// Required for the override getter
   const MatchedSubstrings._();
 
-  factory MatchedSubstrings.fromJson(Map<String, dynamic> json) =>
-      _$MatchedSubstringsFromJson(json);
+  factory MatchedSubstrings.fromJson(dynamic json) =>
+      _$MatchedSubstringsFromJson((json as Map).cast());
 }
 
 @freezed
 abstract class StructuredFormatting with _$StructuredFormatting {
+  @JsonSerializable(explicitToJson: true)
   const factory StructuredFormatting({
     // Contains the main text of a prediction, usually the name of the place.
     @JsonKey(name: 'main_text') required String mainText,
@@ -157,8 +160,8 @@ abstract class StructuredFormatting with _$StructuredFormatting {
   /// Required for the override getter
   const StructuredFormatting._();
 
-  factory StructuredFormatting.fromJson(Map<String, dynamic> json) =>
-      _$StructuredFormattingFromJson(json);
+  factory StructuredFormatting.fromJson(dynamic json) =>
+      _$StructuredFormattingFromJson((json as Map).cast());
 }
 
 @freezed
@@ -166,7 +169,7 @@ abstract class Term with _$Term {
   const factory Term({
     // Defines the start position of this term in the description,
     // measured in Unicode characters.
-    required int offest,
+    required int offset,
 
     // The text of the term.
     required String value,
@@ -175,5 +178,5 @@ abstract class Term with _$Term {
   /// Required for the override getter
   const Term._();
 
-  factory Term.fromJson(Map<String, dynamic> json) => _$TermFromJson(json);
+  factory Term.fromJson(dynamic json) => _$TermFromJson((json as Map).cast());
 }

@@ -43,21 +43,6 @@ abstract class WoFormThemeData with _$WoFormThemeData {
     /// Add the characters ' *' after the labelText of [WoFormInput]s.
     /// Default to true.
     bool? showAsteriskIfRequired,
-
-    // TODO : PlaceRepository
-    /// Your proxy for addresses autocompletion in string fields.
-    ///
-    /// The provided [input] is a string to add in the body. You also need
-    /// to add you own google api key. Exemple :
-    /// 'https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${widget.googleAPIKey}&input=' + input
-    Future<Map<String, dynamic>> Function(String input)? getPlacePredictions,
-
-    /// Your proxy for longitude and latitude of addresses.
-    ///
-    /// The provided [placeId] is a string to add in the body. You also need
-    /// to add you own google api key. Exemple :
-    /// 'https://maps.googleapis.com/maps/api/place/details/json?key=${widget.googleAPIKey}&placeid=' + placeId
-    Future<Map<String, dynamic>> Function(String placeId)? getPlaceDetails,
   }) = _WoFormThemeData;
 
   const WoFormThemeData._();

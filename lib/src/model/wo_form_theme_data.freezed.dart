@@ -44,20 +44,7 @@ mixin _$WoFormThemeData {
 
   /// Add the characters ' *' after the labelText of [WoFormInput]s.
   /// Default to true.
-  bool? get showAsteriskIfRequired; // TODO : PlaceRepository
-  /// Your proxy for addresses autocompletion in string fields.
-  ///
-  /// The provided [input] is a string to add in the body. You also need
-  /// to add you own google api key. Exemple :
-  /// 'https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${widget.googleAPIKey}&input=' + input
-  Future<Map<String, dynamic>> Function(String input)? get getPlacePredictions;
-
-  /// Your proxy for longitude and latitude of addresses.
-  ///
-  /// The provided [placeId] is a string to add in the body. You also need
-  /// to add you own google api key. Exemple :
-  /// 'https://maps.googleapis.com/maps/api/place/details/json?key=${widget.googleAPIKey}&placeid=' + placeId
-  Future<Map<String, dynamic>> Function(String placeId)? get getPlaceDetails;
+  bool? get showAsteriskIfRequired;
 
   /// Create a copy of WoFormThemeData
   /// with the given fields replaced by the non-null parameter values.
@@ -124,10 +111,7 @@ mixin _$WoFormThemeData {
             (identical(other.verticalSpacing, verticalSpacing) ||
                 other.verticalSpacing == verticalSpacing) &&
             (identical(other.showAsteriskIfRequired, showAsteriskIfRequired) ||
-                other.showAsteriskIfRequired == showAsteriskIfRequired) &&
-            (identical(other.getPlacePredictions, getPlacePredictions) ||
-                other.getPlacePredictions == getPlacePredictions) &&
-            (identical(other.getPlaceDetails, getPlaceDetails) || other.getPlaceDetails == getPlaceDetails));
+                other.showAsteriskIfRequired == showAsteriskIfRequired));
   }
 
   @override
@@ -158,14 +142,12 @@ mixin _$WoFormThemeData {
         onDynamicInputDeletion,
         onSubmitError,
         verticalSpacing,
-        showAsteriskIfRequired,
-        getPlacePredictions,
-        getPlaceDetails
+        showAsteriskIfRequired
       ]);
 
   @override
   String toString() {
-    return 'WoFormThemeData(booleanFieldBuilder: $booleanFieldBuilder, dateTimeFieldBuilder: $dateTimeFieldBuilder, defaultPhoneCoutry: $defaultPhoneCoutry, durationFieldBuilder: $durationFieldBuilder, dynamicInputsNodeWidgetBuilder: $dynamicInputsNodeWidgetBuilder, formatDuration: $formatDuration, formPageBuilder: $formPageBuilder, generateId: $generateId, headerBuilder: $headerBuilder, inputHeaderBuilder: $inputHeaderBuilder, inputsNodeExpanderBuilder: $inputsNodeExpanderBuilder, inputsNodeWidgetBuilder: $inputsNodeWidgetBuilder, mediaFieldBuilder: $mediaFieldBuilder, numFieldBuilder: $numFieldBuilder, pickDate: $pickDate, pickDuration: $pickDuration, pickTime: $pickTime, scoreBuilder: $scoreBuilder, selectFieldBuilder: $selectFieldBuilder, standardScaffoldBuilder: $standardScaffoldBuilder, stringFieldBuilder: $stringFieldBuilder, submitButtonBuilder: $submitButtonBuilder, onDynamicInputDeletion: $onDynamicInputDeletion, onSubmitError: $onSubmitError, verticalSpacing: $verticalSpacing, showAsteriskIfRequired: $showAsteriskIfRequired, getPlacePredictions: $getPlacePredictions, getPlaceDetails: $getPlaceDetails)';
+    return 'WoFormThemeData(booleanFieldBuilder: $booleanFieldBuilder, dateTimeFieldBuilder: $dateTimeFieldBuilder, defaultPhoneCoutry: $defaultPhoneCoutry, durationFieldBuilder: $durationFieldBuilder, dynamicInputsNodeWidgetBuilder: $dynamicInputsNodeWidgetBuilder, formatDuration: $formatDuration, formPageBuilder: $formPageBuilder, generateId: $generateId, headerBuilder: $headerBuilder, inputHeaderBuilder: $inputHeaderBuilder, inputsNodeExpanderBuilder: $inputsNodeExpanderBuilder, inputsNodeWidgetBuilder: $inputsNodeWidgetBuilder, mediaFieldBuilder: $mediaFieldBuilder, numFieldBuilder: $numFieldBuilder, pickDate: $pickDate, pickDuration: $pickDuration, pickTime: $pickTime, scoreBuilder: $scoreBuilder, selectFieldBuilder: $selectFieldBuilder, standardScaffoldBuilder: $standardScaffoldBuilder, stringFieldBuilder: $stringFieldBuilder, submitButtonBuilder: $submitButtonBuilder, onDynamicInputDeletion: $onDynamicInputDeletion, onSubmitError: $onSubmitError, verticalSpacing: $verticalSpacing, showAsteriskIfRequired: $showAsteriskIfRequired)';
   }
 }
 
@@ -201,9 +183,7 @@ abstract mixin class $WoFormThemeDataCopyWith<$Res> {
       OnDynamicInputDeletionDef? onDynamicInputDeletion,
       OnSubmitErrorDef? onSubmitError,
       double? verticalSpacing,
-      bool? showAsteriskIfRequired,
-      Future<Map<String, dynamic>> Function(String input)? getPlacePredictions,
-      Future<Map<String, dynamic>> Function(String placeId)? getPlaceDetails});
+      bool? showAsteriskIfRequired});
 }
 
 /// @nodoc
@@ -245,8 +225,6 @@ class _$WoFormThemeDataCopyWithImpl<$Res>
     Object? onSubmitError = freezed,
     Object? verticalSpacing = freezed,
     Object? showAsteriskIfRequired = freezed,
-    Object? getPlacePredictions = freezed,
-    Object? getPlaceDetails = freezed,
   }) {
     return _then(_self.copyWith(
       booleanFieldBuilder: freezed == booleanFieldBuilder
@@ -353,14 +331,6 @@ class _$WoFormThemeDataCopyWithImpl<$Res>
           ? _self.showAsteriskIfRequired
           : showAsteriskIfRequired // ignore: cast_nullable_to_non_nullable
               as bool?,
-      getPlacePredictions: freezed == getPlacePredictions
-          ? _self.getPlacePredictions
-          : getPlacePredictions // ignore: cast_nullable_to_non_nullable
-              as Future<Map<String, dynamic>> Function(String input)?,
-      getPlaceDetails: freezed == getPlaceDetails
-          ? _self.getPlaceDetails
-          : getPlaceDetails // ignore: cast_nullable_to_non_nullable
-              as Future<Map<String, dynamic>> Function(String placeId)?,
     ));
   }
 }
@@ -394,9 +364,7 @@ class _WoFormThemeData extends WoFormThemeData {
       this.onDynamicInputDeletion,
       this.onSubmitError,
       this.verticalSpacing,
-      this.showAsteriskIfRequired,
-      this.getPlacePredictions,
-      this.getPlaceDetails})
+      this.showAsteriskIfRequired})
       : super._();
 
   @override
@@ -456,23 +424,6 @@ class _WoFormThemeData extends WoFormThemeData {
   /// Default to true.
   @override
   final bool? showAsteriskIfRequired;
-// TODO : PlaceRepository
-  /// Your proxy for addresses autocompletion in string fields.
-  ///
-  /// The provided [input] is a string to add in the body. You also need
-  /// to add you own google api key. Exemple :
-  /// 'https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${widget.googleAPIKey}&input=' + input
-  @override
-  final Future<Map<String, dynamic>> Function(String input)?
-      getPlacePredictions;
-
-  /// Your proxy for longitude and latitude of addresses.
-  ///
-  /// The provided [placeId] is a string to add in the body. You also need
-  /// to add you own google api key. Exemple :
-  /// 'https://maps.googleapis.com/maps/api/place/details/json?key=${widget.googleAPIKey}&placeid=' + placeId
-  @override
-  final Future<Map<String, dynamic>> Function(String placeId)? getPlaceDetails;
 
   /// Create a copy of WoFormThemeData
   /// with the given fields replaced by the non-null parameter values.
@@ -539,10 +490,7 @@ class _WoFormThemeData extends WoFormThemeData {
             (identical(other.verticalSpacing, verticalSpacing) ||
                 other.verticalSpacing == verticalSpacing) &&
             (identical(other.showAsteriskIfRequired, showAsteriskIfRequired) ||
-                other.showAsteriskIfRequired == showAsteriskIfRequired) &&
-            (identical(other.getPlacePredictions, getPlacePredictions) ||
-                other.getPlacePredictions == getPlacePredictions) &&
-            (identical(other.getPlaceDetails, getPlaceDetails) || other.getPlaceDetails == getPlaceDetails));
+                other.showAsteriskIfRequired == showAsteriskIfRequired));
   }
 
   @override
@@ -573,14 +521,12 @@ class _WoFormThemeData extends WoFormThemeData {
         onDynamicInputDeletion,
         onSubmitError,
         verticalSpacing,
-        showAsteriskIfRequired,
-        getPlacePredictions,
-        getPlaceDetails
+        showAsteriskIfRequired
       ]);
 
   @override
   String toString() {
-    return 'WoFormThemeData(booleanFieldBuilder: $booleanFieldBuilder, dateTimeFieldBuilder: $dateTimeFieldBuilder, defaultPhoneCoutry: $defaultPhoneCoutry, durationFieldBuilder: $durationFieldBuilder, dynamicInputsNodeWidgetBuilder: $dynamicInputsNodeWidgetBuilder, formatDuration: $formatDuration, formPageBuilder: $formPageBuilder, generateId: $generateId, headerBuilder: $headerBuilder, inputHeaderBuilder: $inputHeaderBuilder, inputsNodeExpanderBuilder: $inputsNodeExpanderBuilder, inputsNodeWidgetBuilder: $inputsNodeWidgetBuilder, mediaFieldBuilder: $mediaFieldBuilder, numFieldBuilder: $numFieldBuilder, pickDate: $pickDate, pickDuration: $pickDuration, pickTime: $pickTime, scoreBuilder: $scoreBuilder, selectFieldBuilder: $selectFieldBuilder, standardScaffoldBuilder: $standardScaffoldBuilder, stringFieldBuilder: $stringFieldBuilder, submitButtonBuilder: $submitButtonBuilder, onDynamicInputDeletion: $onDynamicInputDeletion, onSubmitError: $onSubmitError, verticalSpacing: $verticalSpacing, showAsteriskIfRequired: $showAsteriskIfRequired, getPlacePredictions: $getPlacePredictions, getPlaceDetails: $getPlaceDetails)';
+    return 'WoFormThemeData(booleanFieldBuilder: $booleanFieldBuilder, dateTimeFieldBuilder: $dateTimeFieldBuilder, defaultPhoneCoutry: $defaultPhoneCoutry, durationFieldBuilder: $durationFieldBuilder, dynamicInputsNodeWidgetBuilder: $dynamicInputsNodeWidgetBuilder, formatDuration: $formatDuration, formPageBuilder: $formPageBuilder, generateId: $generateId, headerBuilder: $headerBuilder, inputHeaderBuilder: $inputHeaderBuilder, inputsNodeExpanderBuilder: $inputsNodeExpanderBuilder, inputsNodeWidgetBuilder: $inputsNodeWidgetBuilder, mediaFieldBuilder: $mediaFieldBuilder, numFieldBuilder: $numFieldBuilder, pickDate: $pickDate, pickDuration: $pickDuration, pickTime: $pickTime, scoreBuilder: $scoreBuilder, selectFieldBuilder: $selectFieldBuilder, standardScaffoldBuilder: $standardScaffoldBuilder, stringFieldBuilder: $stringFieldBuilder, submitButtonBuilder: $submitButtonBuilder, onDynamicInputDeletion: $onDynamicInputDeletion, onSubmitError: $onSubmitError, verticalSpacing: $verticalSpacing, showAsteriskIfRequired: $showAsteriskIfRequired)';
   }
 }
 
@@ -618,9 +564,7 @@ abstract mixin class _$WoFormThemeDataCopyWith<$Res>
       OnDynamicInputDeletionDef? onDynamicInputDeletion,
       OnSubmitErrorDef? onSubmitError,
       double? verticalSpacing,
-      bool? showAsteriskIfRequired,
-      Future<Map<String, dynamic>> Function(String input)? getPlacePredictions,
-      Future<Map<String, dynamic>> Function(String placeId)? getPlaceDetails});
+      bool? showAsteriskIfRequired});
 }
 
 /// @nodoc
@@ -662,8 +606,6 @@ class __$WoFormThemeDataCopyWithImpl<$Res>
     Object? onSubmitError = freezed,
     Object? verticalSpacing = freezed,
     Object? showAsteriskIfRequired = freezed,
-    Object? getPlacePredictions = freezed,
-    Object? getPlaceDetails = freezed,
   }) {
     return _then(_WoFormThemeData(
       booleanFieldBuilder: freezed == booleanFieldBuilder
@@ -770,14 +712,6 @@ class __$WoFormThemeDataCopyWithImpl<$Res>
           ? _self.showAsteriskIfRequired
           : showAsteriskIfRequired // ignore: cast_nullable_to_non_nullable
               as bool?,
-      getPlacePredictions: freezed == getPlacePredictions
-          ? _self.getPlacePredictions
-          : getPlacePredictions // ignore: cast_nullable_to_non_nullable
-              as Future<Map<String, dynamic>> Function(String input)?,
-      getPlaceDetails: freezed == getPlaceDetails
-          ? _self.getPlaceDetails
-          : getPlaceDetails // ignore: cast_nullable_to_non_nullable
-              as Future<Map<String, dynamic>> Function(String placeId)?,
     ));
   }
 }

@@ -92,7 +92,7 @@ class _StringFieldState extends State<StringField> {
     if (widget.data.input.placeAutocompleteSettings != null) {
       final placeAutocompleteSettings =
           widget.data.input.placeAutocompleteSettings!;
-      return PlaceAutoCompleteTextField(
+      return PlaceAutocompleteTextField(
         textEditingController: textEditingController!,
         inputDecoration: inputDecoration,
         textInputAction: widget.data.uiSettings.textInputAction,
@@ -101,22 +101,31 @@ class _StringFieldState extends State<StringField> {
             ?.map((isoCode) => isoCode.name)
             .toList(),
         onChanged: widget.data.onValueChanged,
-        onSelectedWithLatLng: placeAutocompleteSettings.includeLatLng &&
+        onSelectedWithDetails: placeAutocompleteSettings.includeDetails &&
                 widget.data.onValueChanged != null
-            ? (Prediction prediction) =>
-                context.read<WoFormValuesCubit>().onValuesChanged({
-                  '${widget.data.path}+longitude':
-                      double.tryParse(prediction.lng ?? ''),
-                  '${widget.data.path}+latitude':
-                      double.tryParse(prediction.lat ?? ''),
-                  '${widget.data.path}+prediction': prediction,
-                })
+            ? (PlaceDetails details) =>
+                context.read<WoFormValuesCubit>().onValueChanged(
+                      path: '${widget.data.path}+details',
+                      value: details,
+                      // '${widget.data.path}+longitude':
+                      //     double.tryParse(details.longitude ?? ''),
+                      // '${widget.data.path}+latitude':
+                      //     double.tryParse(details.latitude ?? ''),
+                      // '${widget.data.path}+details': details,
+                    )
+            // context.read<WoFormValuesCubit>().onValuesChanged({
+            //   '${widget.data.path}+longitude':
+            //       double.tryParse(details.longitude ?? ''),
+            //   '${widget.data.path}+latitude':
+            //       double.tryParse(details.latitude ?? ''),
+            //   '${widget.data.path}+details': details,
+            // })
             : null,
         onFieldSubmitted:
             (widget.data.uiSettings.submitFormOnFieldSubmitted ?? true)
                 ? (_) => context.read<WoFormValuesCubit>().submit(context)
                 : null,
-        itemBuilder: (context, index, Prediction prediction) => Padding(
+        itemBuilder: (context, index, PlacePrediction prediction) => Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Row(
             children: [
@@ -124,7 +133,7 @@ class _StringFieldState extends State<StringField> {
               const SizedBox(width: 7),
               Expanded(
                 child: Text(
-                  prediction.description ?? '',
+                  prediction.description,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
