@@ -9,28 +9,25 @@ class ImageCropper extends StatefulWidget {
     required this.image,
     this.cropAspectRatioOrCircle,
     this.showGrid = false,
+    this.onCropSuccess = _defaultOnCropSuccess,
     super.key,
   });
 
   final Media image;
   final double? cropAspectRatioOrCircle;
   final bool showGrid;
+  final void Function(BuildContext context, Uint8List croppedImage)
+      onCropSuccess;
 
-  static Future<Uint8List?> cropInDialog({
-    required BuildContext context,
-    required Media image,
-    double? cropAspectRatioOrCircle,
-    bool showGrid = false,
-  }) =>
-      showDialog(
+  static void _defaultOnCropSuccess(
+    BuildContext context,
+    Uint8List croppedImage,
+  ) =>
+      Navigator.of(context).pop(croppedImage);
+
+  Future<Uint8List?> showInDialog(BuildContext context) => showDialog(
         context: context,
-        builder: (context) => Dialog(
-          child: ImageCropper(
-            image: image,
-            cropAspectRatioOrCircle: cropAspectRatioOrCircle,
-            showGrid: showGrid,
-          ),
-        ),
+        builder: (context) => Dialog(child: this),
       );
 
   @override
@@ -79,7 +76,7 @@ class _ImageCropperState extends State<ImageCropper> {
                   onCropped: (result) async {
                     switch (result) {
                       case CropSuccess(:final croppedImage):
-                        Navigator.of(context).pop(croppedImage);
+                        widget.onCropSuccess(context, croppedImage);
                       case CropFailure(:final cause):
                         setState(() => cropping = false);
                         (WoFormTheme.of(context)?.onSubmitError ??

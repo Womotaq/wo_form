@@ -84,12 +84,11 @@ abstract class MediaService {
     final result = <MediaFile>[];
 
     for (final media in medias) {
-      final bytes = await ImageCropper.cropInDialog(
-        context: getAppContext(),
+      final bytes = await ImageCropper(
         image: media,
         cropAspectRatioOrCircle: cropAspectRatioOrCircle,
         showGrid: showGrid,
-      );
+      ).showInDialog(getAppContext());
 
       if (bytes == null) continue;
 
