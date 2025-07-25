@@ -1,10 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:wo_form/wo_form.dart';
 
-class NumField extends StatelessWidget {
+class NumField extends StatefulWidget {
   const NumField(this.data, {super.key});
 
   final WoFieldData<NumInput, num?, NumInputUiSettings> data;
+
+  @override
+  State<NumField> createState() => _NumFieldState();
+}
+
+class _NumFieldState extends State<NumField> {
+  late final TextEditingController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = TextEditingController(
+      text: widget.data.value?.toString() ?? '',
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,32 +38,30 @@ class NumField extends StatelessWidget {
         right: 4,
       ),
       title: Text(
-        data.uiSettings.labelText ?? '',
+        widget.data.uiSettings.labelText ?? '',
         style: inputDecorationTheme.labelStyle,
       ),
-      subtitle: data.errorText != null
+      subtitle: widget.data.errorText != null
           ? Text(
-              data.errorText!,
+              widget.data.errorText!,
               style: inputDecorationTheme.errorStyle ??
                   theme.textTheme.labelMedium
                       ?.copyWith(color: theme.colorScheme.error),
             )
-          : (data.uiSettings.helperText ?? '').isNotEmpty
+          : (widget.data.uiSettings.helperText ?? '').isNotEmpty
               ? Text(
-                  data.uiSettings.helperText ?? '',
+                  widget.data.uiSettings.helperText ?? '',
                   style: inputDecorationTheme.helperStyle ??
                       theme.textTheme.labelMedium,
                 )
               : null,
-      trailing: NumSelector.withTextController(
-        controller: TextEditingController(
-          text: data.value?.toString() ?? '',
-        ),
-        onChanged: data.onValueChanged,
+      trailing: NumSelector(
+        controller: controller,
+        onChanged: widget.data.onValueChanged,
         axis: Axis.horizontal,
-        minCount: data.input.minBound,
-        maxCount: data.input.maxBound,
-        unit: data.uiSettings.unit,
+        minCount: widget.data.input.minBound,
+        maxCount: widget.data.input.maxBound,
+        unit: widget.data.uiSettings.unit,
       ),
     );
   }

@@ -22,12 +22,21 @@ class DurationSelector extends StatefulWidget {
 
 class _DurationSelectorState extends State<DurationSelector> {
   Duration duration = Duration.zero;
+  late final TextEditingController daysController;
+  late final TextEditingController hoursController;
+  late final TextEditingController minutesController;
 
   @override
   void initState() {
     super.initState();
 
     duration = widget.initialDuration ?? Duration.zero;
+
+    daysController = TextEditingController(text: duration.inDays.toString());
+    hoursController =
+        TextEditingController(text: (duration.inHours % 24).toString());
+    minutesController =
+        TextEditingController(text: (duration.inMinutes % 60).toString());
   }
 
   void _onValueChanged(Duration newDuration) {
@@ -53,10 +62,8 @@ class _DurationSelectorState extends State<DurationSelector> {
         Expanded(
           child: Row(
             children: [
-              NumSelector.withTextController(
-                controller: TextEditingController(
-                  text: duration.inDays.toString(),
-                ),
+              NumSelector(
+                controller: daysController,
                 onChanged: (value) => _onValueChanged(
                   duration +
                       Duration(days: (value ?? 0).toInt() - duration.inDays),
@@ -74,10 +81,8 @@ class _DurationSelectorState extends State<DurationSelector> {
         Expanded(
           child: Row(
             children: [
-              NumSelector.withTextController(
-                controller: TextEditingController(
-                  text: (duration.inHours % 24).toString(),
-                ),
+              NumSelector(
+                controller: hoursController,
                 onChanged: (value) => _onValueChanged(
                   duration +
                       Duration(
@@ -98,10 +103,8 @@ class _DurationSelectorState extends State<DurationSelector> {
         Expanded(
           child: Row(
             children: [
-              NumSelector.withTextController(
-                controller: TextEditingController(
-                  text: (duration.inMinutes % 60).toString(),
-                ),
+              NumSelector(
+                controller: minutesController,
                 onChanged: (value) => _onValueChanged(
                   duration +
                       Duration(

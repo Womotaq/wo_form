@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 class NumSelector extends StatefulWidget {
   const NumSelector({
     required this.onChanged,
+    this.controller,
     this.initialValue,
     this.axis = Axis.vertical,
     this.step = 1,
@@ -11,23 +12,12 @@ class NumSelector extends StatefulWidget {
     this.maxCount,
     this.unit,
     super.key,
-  }) : controller = null;
+  }) : assert(
+          (initialValue == null) != (controller == null),
+          'Only one of initialValue or controller must be set.',
+        );
 
-  /// This constructor automatically disposes the controller
-  /// TODO : probably a terrible idea, rework
-  const NumSelector.withTextController({
-    required TextEditingController controller,
-    required this.onChanged,
-    this.axis = Axis.vertical,
-    this.step = 1,
-    this.minCount = 0,
-    this.maxCount,
-    this.unit,
-    super.key,
-    // ignore: prefer_initializing_formals
-  })  : controller = controller,
-        initialValue = null;
-
+  /// If you give a controller, it is you responsibility to dispose it.
   final TextEditingController? controller;
   final int? initialValue;
   final void Function(num? value)? onChanged;
@@ -53,8 +43,8 @@ class _NumSelectorState extends State<NumSelector> {
 
   @override
   void dispose() {
-    controller.dispose();
     super.dispose();
+    if (widget.controller == null) controller.dispose();
   }
 
   Widget getSideButton({
