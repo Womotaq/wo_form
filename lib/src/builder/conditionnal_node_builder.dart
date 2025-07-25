@@ -38,13 +38,6 @@ class ConditionnalNodeBuilder extends StatelessWidget {
                     .where((childPath) => childPath.startsWith(path)))
                   children: null,
               });
-              // for (final childPath in valuesCubit.state.keys
-              //     .where((childPath) => childPath.startsWith(path))) {
-              //   valuesCubit.onValueChanged(
-              //     path: childPath,
-              //     value: null,
-              //   );
-              // }
             }
             return const SizedBox.shrink();
           }
