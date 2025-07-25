@@ -53,13 +53,12 @@ class WoFormStandardPage extends StatelessWidget {
                   .call(headerData);
             },
           ),
-        ...root.children.map(
-          (child) => Padding(
-            padding: EdgeInsets.only(
-              bottom: woFormTheme?.verticalSpacing ?? 0,
-            ),
-            child: child.toWidget(parentPath: ''),
-          ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          spacing: woFormTheme?.verticalSpacing ?? 0,
+          children: root.children
+              .map((child) => child.toWidget(parentPath: ''))
+              .toList(),
         ),
         if (root.uiSettings.submitMode.buttonPosition ==
             SubmitButtonPosition.body)

@@ -37,7 +37,7 @@ abstract class WoFormThemeData with _$WoFormThemeData {
     OnDynamicInputDeletionDef? onDynamicInputDeletion,
     OnSubmitErrorDef? onSubmitError,
 
-    /// This spacing will be added at the bottom of each [WoFormNodeMixin].
+    /// This spacing will be placed between each [WoFormNodeMixin].
     double? verticalSpacing,
 
     /// Add the characters ' *' after the labelText of [WoFormInput]s.

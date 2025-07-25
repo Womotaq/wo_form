@@ -39,7 +39,7 @@ mixin _$WoFormThemeData {
   OnDynamicInputDeletionDef? get onDynamicInputDeletion;
   OnSubmitErrorDef? get onSubmitError;
 
-  /// This spacing will be added at the bottom of each [WoFormNodeMixin].
+  /// This spacing will be placed between each [WoFormNodeMixin].
   double? get verticalSpacing;
 
   /// Add the characters ' *' after the labelText of [WoFormInput]s.
@@ -416,7 +416,7 @@ class _WoFormThemeData extends WoFormThemeData {
   @override
   final OnSubmitErrorDef? onSubmitError;
 
-  /// This spacing will be added at the bottom of each [WoFormNodeMixin].
+  /// This spacing will be placed between each [WoFormNodeMixin].
   @override
   final double? verticalSpacing;
 

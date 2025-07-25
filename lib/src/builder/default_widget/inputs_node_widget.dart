@@ -12,16 +12,6 @@ class InputsNodeWidget extends StatelessWidget {
 
     final woFormTheme = WoFormTheme.of(context);
 
-    final inputWidgets = node.children
-        .map(
-          (i) => Padding(
-            // TODO : use verticalSpacing in Column.spacing
-            padding: EdgeInsets.only(bottom: woFormTheme?.verticalSpacing ?? 0),
-            child: i.toWidget(parentPath: data.path),
-          ),
-        )
-        .toList();
-
     return Column(
       children: [
         Builder(
@@ -37,9 +27,11 @@ class InputsNodeWidget extends StatelessWidget {
                 .call(headerData);
           },
         ),
-        Padding(
-          padding: EdgeInsets.only(bottom: woFormTheme?.verticalSpacing ?? 0),
-          child: Column(children: inputWidgets),
+        Column(
+          spacing: woFormTheme?.verticalSpacing ?? 0,
+          children: node.children
+              .map((i) => i.toWidget(parentPath: data.path))
+              .toList(),
         ),
       ],
     );

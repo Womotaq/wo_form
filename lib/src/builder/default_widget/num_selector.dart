@@ -14,6 +14,7 @@ class NumSelector extends StatefulWidget {
   }) : controller = null;
 
   /// This constructor automatically disposes the controller
+  /// TODO : probably a terrible idea, rework
   const NumSelector.withTextController({
     required TextEditingController controller,
     required this.onChanged,
