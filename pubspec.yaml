@@ -12,23 +12,21 @@ dependencies:
   collection: ^1.18.0
   crop_your_image: ^2.0.0
   cross_file: ^0.3.4+2
-  dio: ^5.8.0+1
   dotted_border: ^3.1.0
   flutter:
     sdk: flutter
   flutter_bloc: ^9.0.0
   freezed_annotation: ^3.0.0
-  gal: ^2.3.1
   http: ^1.4.0
   hydrated_bloc: ^10.0.0
-  image_cropper: ^9.1.0
   image_picker: ^1.1.2
   intl: ^0.20.2
   json_annotation: ^4.9.0
+  path: ^1.9.1
   path_provider: ^2.1.5
   phone_form_field: ^10.0.2
   popover: ^0.3.0+1
-  rxdart: ^0.27.7
+  rxdart: ^0.28.0
   universal_html: ^2.2.4
 
 dev_dependencies:

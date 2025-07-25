@@ -176,10 +176,6 @@ class _PlaceAutoCompleteTextFieldState
           'You need to provide a PlaceRepository for address autocompletion.',
         );
       }
-      // const proxyURL = 'https://cors-anywhere.herokuapp.com/';
-      // final url = kIsWeb ? proxyURL + apiURL : apiURL;
-      // final response = await _dio.get<Map<String, dynamic>>(proxy(input));
-      // final map = response.data ?? {};
 
       final response = await getPlacePredictions(input);
 
@@ -275,7 +271,6 @@ class _PlaceAutoCompleteTextFieldState
     final placeId = prediction.placeId;
     if (placeId == null) return;
 
-    // 'https://maps.googleapis.com/maps/api/place/details/json?placeid=${prediction.placeId}&key=${widget.googleAPIKey}';
     /// 'https://maps.googleapis.com/maps/api/place/details/json?key=${widget.googleAPIKey}&placeid=' + placeId
     try {
       final getPlaceDetails = context.read<PlaceRepository?>()?.getPlaceDetails;

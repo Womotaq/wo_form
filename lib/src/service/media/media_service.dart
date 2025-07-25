@@ -3,28 +3,15 @@ import 'dart:math' hide log;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:wo_form/src/service/media/image_cropper.dart';
 import 'package:wo_form/wo_form.dart';
-import 'package:path/path.dart';
 
 /// If you want to use MediaInput,
 /// provide an implementation of this class at the top-level of your application
 /// with a BlocProvider.
-///
-/// SETUP :
-///
-/// iOS :
-///
-/// <!-- Image Picker Permissions -->
-/// <key>NSCameraUsageDescription</key>
-/// <string>Allow access to take photos.</string>
-/// <key>NSPhotoLibraryUsageDescription</key>
-/// <string>Allow access to select photos.</string>
-/// <key>NSMicrophoneUsageDescription</key>
-/// <string>Allow access to record videos.</string>
 abstract class MediaService {
   const MediaService({required this.permissionService});
 
@@ -88,79 +75,6 @@ abstract class MediaService {
     Key? key,
   });
 
-  Future<MediaFile?> _cropImage({
-    required String sourcePath,
-    double? aspectRatio,
-    int? maxHeight,
-    int? maxWidth,
-  }) async {
-    final context = getAppContext();
-
-    final screenSize = MediaQuery.sizeOf(context);
-    final cropBoundarySize = min(
-      screenSize.width - 128,
-      screenSize.height - 298,
-    ).toInt();
-
-    final localizations = getCropLocalizations(context);
-
-    final croppedFile = await ImageCropper().cropImage(
-      sourcePath: sourcePath,
-      maxHeight: maxHeight,
-      maxWidth: maxWidth,
-      // Designed for profile photos
-      aspectRatio: aspectRatio == null
-          ? null
-          : CropAspectRatio(
-              ratioX: 1 * aspectRatio,
-              ratioY: 1,
-            ),
-      uiSettings: [
-        AndroidUiSettings(
-          // TODO : aspectRatio
-          toolbarTitle: localizations.title,
-          toolbarColor: Theme.of(context).colorScheme.primary,
-          toolbarWidgetColor: Theme.of(context).colorScheme.surface,
-        ),
-        IOSUiSettings(
-          minimumAspectRatio: aspectRatio,
-        ),
-        WebUiSettings(
-          context: context,
-          presentStyle: screenSize.width > 500 && screenSize.height > 500
-              ? WebPresentStyle.dialog
-              : WebPresentStyle.page,
-          size: CropperSize(
-            width: cropBoundarySize,
-            height: cropBoundarySize,
-          ),
-          minContainerHeight: 100,
-          zoomOnWheel: false,
-          dragMode: WebDragMode.move,
-          translations: WebTranslations(
-            title: localizations.title,
-            rotateLeftTooltip: localizations.rotateLeftTooltip ?? '',
-            rotateRightTooltip: localizations.rotateRightTooltip ?? '',
-            cancelButton: localizations.cancel,
-            cropButton: localizations.save,
-          ),
-          themeData: const WebThemeData(
-            rotateLeftIcon: Icons.rotate_left,
-            rotateRightIcon: Icons.rotate_right,
-          ),
-        ),
-      ],
-    );
-    return croppedFile == null
-        ? null
-        : MediaFile(
-            file: XFile(
-              croppedFile.path,
-              mimeType: 'image/${sourcePath.split('.').last}',
-            ),
-          );
-  }
-
   Future<List<MediaFile>?> crop({
     required List<Media> medias,
     required double? cropAspectRatioOrCircle,
@@ -171,7 +85,7 @@ abstract class MediaService {
     final result = <MediaFile>[];
 
     for (final media in medias) {
-      final bytes = await Cropper.cropInDialog(
+      final bytes = await ImageCropper.cropInDialog(
         context: getAppContext(),
         image: media,
         cropAspectRatioOrCircle: cropAspectRatioOrCircle,
@@ -325,31 +239,31 @@ abstract class MediaService {
     required ImageSource source,
     required BuildContext context,
     double? aspectRatio,
-    int? maxHeight,
-    int? maxWidth,
+    double? maxHeight,
+    double? maxWidth,
   }) async {
     final picked = await ImagePicker().pickImage(
       source: source,
-      maxHeight: maxHeight?.toDouble(),
-      maxWidth: maxWidth?.toDouble(),
+      maxHeight: maxHeight,
+      maxWidth: maxWidth,
     );
+    if (picked == null) return null;
 
-    return picked == null
-        ? null
-        : _cropImage(
-            sourcePath: picked.path,
-            aspectRatio: aspectRatio,
-            maxHeight: maxHeight,
-            maxWidth: maxWidth,
-          );
+    final croppedMedias = await crop(
+      medias: [MediaFile(file: picked)],
+      cropAspectRatioOrCircle: aspectRatio,
+      maxHeight: maxHeight,
+      maxWidth: maxWidth,
+    );
+    return croppedMedias?.firstOrNull;
   }
 
   /// It is recommended to crop an image when uploading.
   Future<MediaFile?> importImageAndCrop({
     required BuildContext context,
     double? aspectRatio,
-    int? maxHeight,
-    int? maxWidth,
+    double? maxHeight,
+    double? maxWidth,
   }) =>
       _pickAndCropLocalImage(
         source: ImageSource.gallery,
@@ -363,8 +277,8 @@ abstract class MediaService {
   Future<MediaFile?> takePhotoAndCrop({
     required BuildContext context,
     double? aspectRatio,
-    int? maxHeight,
-    int? maxWidth,
+    double? maxHeight,
+    double? maxWidth,
   }) =>
       _pickAndCropLocalImage(
         source: ImageSource.camera,

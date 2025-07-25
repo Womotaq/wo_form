@@ -2,11 +2,10 @@ import 'package:crop_your_image/crop_your_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wo_form/src/service/media/download_button.dart';
 import 'package:wo_form/wo_form.dart';
 
-class Cropper extends StatefulWidget {
-  const Cropper({
+class ImageCropper extends StatefulWidget {
+  const ImageCropper({
     required this.image,
     this.cropAspectRatioOrCircle,
     this.showGrid = false,
@@ -26,7 +25,7 @@ class Cropper extends StatefulWidget {
       showDialog(
         context: context,
         builder: (context) => Dialog(
-          child: Cropper(
+          child: ImageCropper(
             image: image,
             cropAspectRatioOrCircle: cropAspectRatioOrCircle,
             showGrid: showGrid,
@@ -35,10 +34,10 @@ class Cropper extends StatefulWidget {
       );
 
   @override
-  State<Cropper> createState() => _CropperState();
+  State<ImageCropper> createState() => _ImageCropperState();
 }
 
-class _CropperState extends State<Cropper> {
+class _ImageCropperState extends State<ImageCropper> {
   final controller = CropController();
   Uint8List? bytes;
   double? originalAspectRatio;
@@ -129,8 +128,6 @@ class _CropperState extends State<Cropper> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          DownloadButton(image: widget.image),
-          const SizedBox(height: 8),
           Text(
             localizations.title,
             style: Theme.of(context).textTheme.titleLarge,
