@@ -1,13 +1,15 @@
-import 'package:cross_file/cross_file.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 import 'package:wo_form/src/model/json_converter/duration.dart';
 import 'package:wo_form/src/model/json_converter/media_list.dart';
 import 'package:wo_form/src/model/json_converter/xfile.dart';
 import 'package:wo_form/wo_form.dart';
+
+export 'package:image_picker/image_picker.dart' show ImageSource;
 
 part 'media.freezed.dart';
 part 'media.g.dart';
@@ -30,46 +32,46 @@ sealed class Media with _$Media {
   // --
 
   String get urlOrPath => switch (this) {
-        final MediaUrl media => media.url,
-        final MediaFile media => media.file.path,
-      };
+    final MediaUrl media => media.url,
+    final MediaFile media => media.file.path,
+  };
   Uri get uri => switch (this) {
-        final MediaUrl media => Uri.parse(media.url),
-        final MediaFile media =>
-          kIsWeb ? Uri.parse(media.file.path) : Uri.file(media.file.path),
-      };
+    final MediaUrl media => Uri.parse(media.url),
+    final MediaFile media =>
+      kIsWeb ? Uri.parse(media.file.path) : Uri.file(media.file.path),
+  };
   String? get name => switch (this) {
-        final MediaUrl media => media.url.split('/').lastOrNull,
-        final MediaFile media => media.file.name,
-      };
+    final MediaUrl media => media.url.split('/').lastOrNull,
+    final MediaFile media => media.file.name,
+  };
   Future<Uint8List> get bytes => switch (this) {
-        MediaFile(file: final file) => file.readAsBytes(),
-        MediaUrl(uri: final uri) =>
-          http.get(uri).then((response) => response.bodyBytes),
-      };
+    MediaFile(file: final file) => file.readAsBytes(),
+    MediaUrl(uri: final uri) =>
+      http.get(uri).then((response) => response.bodyBytes),
+  };
 
   Future<MediaType> getType(BuildContext context) async => switch (this) {
-        MediaUrl() =>
-          await context.read<MediaService>().typeOfMediaUrl(this as MediaUrl),
-        MediaFile(file: final file) =>
-          file.isVideo ? MediaType.video : MediaType.image,
-      };
+    MediaUrl() => await context.read<MediaService>().typeOfMediaUrl(
+      this as MediaUrl,
+    ),
+    MediaFile(file: final file) =>
+      file.isVideo ? MediaType.video : MediaType.image,
+  };
 
   Future<MediaUrl> uploaded({
     required MediaService mediaService,
     required String path,
     int? maxSize,
     bool addFileNameToPath = false,
-  }) async =>
-      switch (this) {
-        final MediaUrl media => media,
-        final MediaFile media => await mediaService.upload(
-            media: media,
-            path: path,
-            maxSize: maxSize,
-            addFileNameToPath: addFileNameToPath,
-          ),
-      };
+  }) async => switch (this) {
+    final MediaUrl media => media,
+    final MediaFile media => await mediaService.upload(
+      media: media,
+      path: path,
+      maxSize: maxSize,
+      addFileNameToPath: addFileNameToPath,
+    ),
+  };
 }
 
 enum MediaType {
@@ -78,13 +80,13 @@ enum MediaType {
   video;
 
   bool get includeImages => switch (this) {
-        imageOrVideo || image => true,
-        video => false,
-      };
+    imageOrVideo || image => true,
+    video => false,
+  };
   bool get includeVideos => switch (this) {
-        imageOrVideo || video => true,
-        image => false,
-      };
+    imageOrVideo || video => true,
+    image => false,
+  };
 }
 
 @freezed
@@ -116,7 +118,7 @@ abstract class MediaImportSettings with _$MediaImportSettings {
 @freezed
 sealed class MediaImportMethod with _$MediaImportMethod {
   const factory MediaImportMethod.pickMedias({
-    required MediaPickSource source,
+    required ImageSource source,
 
     /// If null, importSettings.type will be used instead.
     MediaType? type,
@@ -135,8 +137,6 @@ sealed class MediaImportMethod with _$MediaImportMethod {
   static Map<String, dynamic> staticToJson(MediaImportMethod object) =>
       object.toJson();
 }
-
-enum MediaPickSource { gallery, camera }
 
 extension XFileX on XFile {
   bool get isVideo {

@@ -11,158 +11,174 @@ part of 'wo_form_status.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-WoFormStatus _$WoFormStatusFromJson(Map<String, dynamic> json) {
-  switch (json['runtimeType']) {
-    case 'initial':
-      return InitialStatus.fromJson(json);
-    case 'inProgress':
-      return InProgressStatus.fromJson(json);
-    case 'submitting':
-      return SubmittingStatus.fromJson(json);
-    case 'submitError':
-      return SubmitErrorStatus.fromJson(json);
-    case 'submitSuccess':
-      return SubmitSuccessStatus.fromJson(json);
-
-    default:
-      throw CheckedFromJsonException(json, 'runtimeType', 'WoFormStatus',
-          'Invalid union type "${json['runtimeType']}"!');
-  }
+WoFormStatus _$WoFormStatusFromJson(
+  Map<String, dynamic> json
+) {
+        switch (json['runtimeType']) {
+                  case 'initial':
+          return InitialStatus.fromJson(
+            json
+          );
+                case 'inProgress':
+          return InProgressStatus.fromJson(
+            json
+          );
+                case 'submitting':
+          return SubmittingStatus.fromJson(
+            json
+          );
+                case 'submitError':
+          return SubmitErrorStatus.fromJson(
+            json
+          );
+                case 'submitSuccess':
+          return SubmitSuccessStatus.fromJson(
+            json
+          );
+        
+          default:
+            throw CheckedFromJsonException(
+  json,
+  'runtimeType',
+  'WoFormStatus',
+  'Invalid union type "${json['runtimeType']}"!'
+);
+        }
+      
 }
 
 /// @nodoc
 mixin _$WoFormStatus {
+
+
+
   /// Serializes this WoFormStatus to a JSON map.
   Map<String, dynamic> toJson();
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is WoFormStatus);
-  }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => runtimeType.hashCode;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WoFormStatus);
+}
 
-  @override
-  String toString() {
-    return 'WoFormStatus()';
-  }
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'WoFormStatus()';
+}
+
+
 }
 
 /// @nodoc
-class $WoFormStatusCopyWith<$Res> {
-  $WoFormStatusCopyWith(WoFormStatus _, $Res Function(WoFormStatus) __);
+class $WoFormStatusCopyWith<$Res>  {
+$WoFormStatusCopyWith(WoFormStatus _, $Res Function(WoFormStatus) __);
 }
+
+
 
 /// @nodoc
 @JsonSerializable()
+
 class InitialStatus implements WoFormStatus {
-  const InitialStatus({final String? $type}) : $type = $type ?? 'initial';
-  factory InitialStatus.fromJson(Map<String, dynamic> json) =>
-      _$InitialStatusFromJson(json);
+  const InitialStatus({final  String? $type}): $type = $type ?? 'initial';
+  factory InitialStatus.fromJson(Map<String, dynamic> json) => _$InitialStatusFromJson(json);
 
-  @JsonKey(name: 'runtimeType')
-  final String $type;
 
-  @override
-  Map<String, dynamic> toJson() {
-    return _$InitialStatusToJson(
-      this,
-    );
-  }
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is InitialStatus);
-  }
+@JsonKey(name: 'runtimeType')
+final String $type;
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => runtimeType.hashCode;
 
-  @override
-  String toString() {
-    return 'WoFormStatus.initial()';
-  }
+
+@override
+Map<String, dynamic> toJson() {
+  return _$InitialStatusToJson(this, );
 }
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is InitialStatus);
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'WoFormStatus.initial()';
+}
+
+
+}
+
+
+
 
 /// @nodoc
 @JsonSerializable()
+
 class InProgressStatus implements WoFormStatus {
-  const InProgressStatus(
-      {@JsonKey(includeToJson: false, includeFromJson: false)
-      final List<WoFormInputError> errors = const [],
-      this.firstInvalidInputPath,
-      final String? $type})
-      : _errors = errors,
-        $type = $type ?? 'inProgress';
-  factory InProgressStatus.fromJson(Map<String, dynamic> json) =>
-      _$InProgressStatusFromJson(json);
+  const InProgressStatus({@JsonKey(includeToJson: false, includeFromJson: false) final  List<WoFormInputError> errors = const [], this.firstInvalidInputPath, final  String? $type}): _errors = errors,$type = $type ?? 'inProgress';
+  factory InProgressStatus.fromJson(Map<String, dynamic> json) => _$InProgressStatusFromJson(json);
 
-  final List<WoFormInputError> _errors;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  List<WoFormInputError> get errors {
-    if (_errors is EqualUnmodifiableListView) return _errors;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_errors);
-  }
+ final  List<WoFormInputError> _errors;
+@JsonKey(includeToJson: false, includeFromJson: false) List<WoFormInputError> get errors {
+  if (_errors is EqualUnmodifiableListView) return _errors;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_errors);
+}
 
-  final String? firstInvalidInputPath;
+ final  String? firstInvalidInputPath;
 
-  @JsonKey(name: 'runtimeType')
-  final String $type;
+@JsonKey(name: 'runtimeType')
+final String $type;
 
-  /// Create a copy of WoFormStatus
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $InProgressStatusCopyWith<InProgressStatus> get copyWith =>
-      _$InProgressStatusCopyWithImpl<InProgressStatus>(this, _$identity);
 
-  @override
-  Map<String, dynamic> toJson() {
-    return _$InProgressStatusToJson(
-      this,
-    );
-  }
+/// Create a copy of WoFormStatus
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$InProgressStatusCopyWith<InProgressStatus> get copyWith => _$InProgressStatusCopyWithImpl<InProgressStatus>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is InProgressStatus &&
-            const DeepCollectionEquality().equals(other._errors, _errors) &&
-            (identical(other.firstInvalidInputPath, firstInvalidInputPath) ||
-                other.firstInvalidInputPath == firstInvalidInputPath));
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$InProgressStatusToJson(this, );
+}
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_errors), firstInvalidInputPath);
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is InProgressStatus&&const DeepCollectionEquality().equals(other._errors, _errors)&&(identical(other.firstInvalidInputPath, firstInvalidInputPath) || other.firstInvalidInputPath == firstInvalidInputPath));
+}
 
-  @override
-  String toString() {
-    return 'WoFormStatus.inProgress(errors: $errors, firstInvalidInputPath: $firstInvalidInputPath)';
-  }
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_errors),firstInvalidInputPath);
+
+@override
+String toString() {
+  return 'WoFormStatus.inProgress(errors: $errors, firstInvalidInputPath: $firstInvalidInputPath)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $InProgressStatusCopyWith<$Res>
-    implements $WoFormStatusCopyWith<$Res> {
-  factory $InProgressStatusCopyWith(
-          InProgressStatus value, $Res Function(InProgressStatus) _then) =
-      _$InProgressStatusCopyWithImpl;
-  @useResult
-  $Res call(
-      {@JsonKey(includeToJson: false, includeFromJson: false)
-      List<WoFormInputError> errors,
-      String? firstInvalidInputPath});
-}
+abstract mixin class $InProgressStatusCopyWith<$Res> implements $WoFormStatusCopyWith<$Res> {
+  factory $InProgressStatusCopyWith(InProgressStatus value, $Res Function(InProgressStatus) _then) = _$InProgressStatusCopyWithImpl;
+@useResult
+$Res call({
+@JsonKey(includeToJson: false, includeFromJson: false) List<WoFormInputError> errors, String? firstInvalidInputPath
+});
 
+
+
+
+}
 /// @nodoc
 class _$InProgressStatusCopyWithImpl<$Res>
     implements $InProgressStatusCopyWith<$Res> {
@@ -171,126 +187,112 @@ class _$InProgressStatusCopyWithImpl<$Res>
   final InProgressStatus _self;
   final $Res Function(InProgressStatus) _then;
 
-  /// Create a copy of WoFormStatus
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? errors = null,
-    Object? firstInvalidInputPath = freezed,
-  }) {
-    return _then(InProgressStatus(
-      errors: null == errors
-          ? _self._errors
-          : errors // ignore: cast_nullable_to_non_nullable
-              as List<WoFormInputError>,
-      firstInvalidInputPath: freezed == firstInvalidInputPath
-          ? _self.firstInvalidInputPath
-          : firstInvalidInputPath // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
+/// Create a copy of WoFormStatus
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? errors = null,Object? firstInvalidInputPath = freezed,}) {
+  return _then(InProgressStatus(
+errors: null == errors ? _self._errors : errors // ignore: cast_nullable_to_non_nullable
+as List<WoFormInputError>,firstInvalidInputPath: freezed == firstInvalidInputPath ? _self.firstInvalidInputPath : firstInvalidInputPath // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+
 }
 
 /// @nodoc
 @JsonSerializable()
+
 class SubmittingStatus implements WoFormStatus {
-  const SubmittingStatus({final String? $type}) : $type = $type ?? 'submitting';
-  factory SubmittingStatus.fromJson(Map<String, dynamic> json) =>
-      _$SubmittingStatusFromJson(json);
+  const SubmittingStatus({final  String? $type}): $type = $type ?? 'submitting';
+  factory SubmittingStatus.fromJson(Map<String, dynamic> json) => _$SubmittingStatusFromJson(json);
 
-  @JsonKey(name: 'runtimeType')
-  final String $type;
 
-  @override
-  Map<String, dynamic> toJson() {
-    return _$SubmittingStatusToJson(
-      this,
-    );
-  }
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is SubmittingStatus);
-  }
+@JsonKey(name: 'runtimeType')
+final String $type;
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => runtimeType.hashCode;
 
-  @override
-  String toString() {
-    return 'WoFormStatus.submitting()';
-  }
+
+@override
+Map<String, dynamic> toJson() {
+  return _$SubmittingStatusToJson(this, );
 }
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SubmittingStatus);
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'WoFormStatus.submitting()';
+}
+
+
+}
+
+
+
 
 /// @nodoc
 @JsonSerializable()
+
 class SubmitErrorStatus implements WoFormStatus {
-  const SubmitErrorStatus(
-      {@JsonKey(includeToJson: false, includeFromJson: false) this.error,
-      @JsonKey(includeToJson: false, includeFromJson: false) this.stackTrace,
-      final String? $type})
-      : $type = $type ?? 'submitError';
-  factory SubmitErrorStatus.fromJson(Map<String, dynamic> json) =>
-      _$SubmitErrorStatusFromJson(json);
+  const SubmitErrorStatus({@JsonKey(includeToJson: false, includeFromJson: false) this.error, @JsonKey(includeToJson: false, includeFromJson: false) this.stackTrace, final  String? $type}): $type = $type ?? 'submitError';
+  factory SubmitErrorStatus.fromJson(Map<String, dynamic> json) => _$SubmitErrorStatusFromJson(json);
 
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  final Object? error;
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  final StackTrace? stackTrace;
+@JsonKey(includeToJson: false, includeFromJson: false) final  Object? error;
+@JsonKey(includeToJson: false, includeFromJson: false) final  StackTrace? stackTrace;
 
-  @JsonKey(name: 'runtimeType')
-  final String $type;
+@JsonKey(name: 'runtimeType')
+final String $type;
 
-  /// Create a copy of WoFormStatus
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $SubmitErrorStatusCopyWith<SubmitErrorStatus> get copyWith =>
-      _$SubmitErrorStatusCopyWithImpl<SubmitErrorStatus>(this, _$identity);
 
-  @override
-  Map<String, dynamic> toJson() {
-    return _$SubmitErrorStatusToJson(
-      this,
-    );
-  }
+/// Create a copy of WoFormStatus
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SubmitErrorStatusCopyWith<SubmitErrorStatus> get copyWith => _$SubmitErrorStatusCopyWithImpl<SubmitErrorStatus>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is SubmitErrorStatus &&
-            const DeepCollectionEquality().equals(other.error, error) &&
-            (identical(other.stackTrace, stackTrace) ||
-                other.stackTrace == stackTrace));
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$SubmitErrorStatusToJson(this, );
+}
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(error), stackTrace);
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SubmitErrorStatus&&const DeepCollectionEquality().equals(other.error, error)&&(identical(other.stackTrace, stackTrace) || other.stackTrace == stackTrace));
+}
 
-  @override
-  String toString() {
-    return 'WoFormStatus.submitError(error: $error, stackTrace: $stackTrace)';
-  }
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(error),stackTrace);
+
+@override
+String toString() {
+  return 'WoFormStatus.submitError(error: $error, stackTrace: $stackTrace)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $SubmitErrorStatusCopyWith<$Res>
-    implements $WoFormStatusCopyWith<$Res> {
-  factory $SubmitErrorStatusCopyWith(
-          SubmitErrorStatus value, $Res Function(SubmitErrorStatus) _then) =
-      _$SubmitErrorStatusCopyWithImpl;
-  @useResult
-  $Res call(
-      {@JsonKey(includeToJson: false, includeFromJson: false) Object? error,
-      @JsonKey(includeToJson: false, includeFromJson: false)
-      StackTrace? stackTrace});
-}
+abstract mixin class $SubmitErrorStatusCopyWith<$Res> implements $WoFormStatusCopyWith<$Res> {
+  factory $SubmitErrorStatusCopyWith(SubmitErrorStatus value, $Res Function(SubmitErrorStatus) _then) = _$SubmitErrorStatusCopyWithImpl;
+@useResult
+$Res call({
+@JsonKey(includeToJson: false, includeFromJson: false) Object? error,@JsonKey(includeToJson: false, includeFromJson: false) StackTrace? stackTrace
+});
 
+
+
+
+}
 /// @nodoc
 class _$SubmitErrorStatusCopyWithImpl<$Res>
     implements $SubmitErrorStatusCopyWith<$Res> {
@@ -299,55 +301,55 @@ class _$SubmitErrorStatusCopyWithImpl<$Res>
   final SubmitErrorStatus _self;
   final $Res Function(SubmitErrorStatus) _then;
 
-  /// Create a copy of WoFormStatus
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? error = freezed,
-    Object? stackTrace = freezed,
-  }) {
-    return _then(SubmitErrorStatus(
-      error: freezed == error ? _self.error : error,
-      stackTrace: freezed == stackTrace
-          ? _self.stackTrace
-          : stackTrace // ignore: cast_nullable_to_non_nullable
-              as StackTrace?,
-    ));
-  }
+/// Create a copy of WoFormStatus
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? error = freezed,Object? stackTrace = freezed,}) {
+  return _then(SubmitErrorStatus(
+error: freezed == error ? _self.error : error ,stackTrace: freezed == stackTrace ? _self.stackTrace : stackTrace // ignore: cast_nullable_to_non_nullable
+as StackTrace?,
+  ));
+}
+
+
 }
 
 /// @nodoc
 @JsonSerializable()
+
 class SubmitSuccessStatus implements WoFormStatus {
-  const SubmitSuccessStatus({final String? $type})
-      : $type = $type ?? 'submitSuccess';
-  factory SubmitSuccessStatus.fromJson(Map<String, dynamic> json) =>
-      _$SubmitSuccessStatusFromJson(json);
+  const SubmitSuccessStatus({final  String? $type}): $type = $type ?? 'submitSuccess';
+  factory SubmitSuccessStatus.fromJson(Map<String, dynamic> json) => _$SubmitSuccessStatusFromJson(json);
 
-  @JsonKey(name: 'runtimeType')
-  final String $type;
 
-  @override
-  Map<String, dynamic> toJson() {
-    return _$SubmitSuccessStatusToJson(
-      this,
-    );
-  }
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is SubmitSuccessStatus);
-  }
+@JsonKey(name: 'runtimeType')
+final String $type;
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => runtimeType.hashCode;
 
-  @override
-  String toString() {
-    return 'WoFormStatus.submitSuccess()';
-  }
+
+@override
+Map<String, dynamic> toJson() {
+  return _$SubmitSuccessStatusToJson(this, );
 }
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SubmitSuccessStatus);
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'WoFormStatus.submitSuccess()';
+}
+
+
+}
+
+
+
 
 // dart format on

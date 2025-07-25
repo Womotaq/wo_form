@@ -7,7 +7,8 @@ part of 'place_prediction.dart';
 // **************************************************************************
 
 _PlacesAutocompleteResponse _$PlacesAutocompleteResponseFromJson(
-        Map<String, dynamic> json) =>
+  Map<String, dynamic> json,
+) =>
     _PlacesAutocompleteResponse(
       predictions: (json['predictions'] as List<dynamic>)
           .map(PlacePrediction.fromJson)
@@ -20,7 +21,8 @@ _PlacesAutocompleteResponse _$PlacesAutocompleteResponseFromJson(
     );
 
 Map<String, dynamic> _$PlacesAutocompleteResponseToJson(
-        _PlacesAutocompleteResponse instance) =>
+  _PlacesAutocompleteResponse instance,
+) =>
     <String, dynamic>{
       'predictions': instance.predictions.map((e) => e.toJson()).toList(),
       'status': _$PlacesAutocompleteStatusEnumMap[instance.status]!,
@@ -43,8 +45,9 @@ _PlacePrediction _$PlacePredictionFromJson(Map<String, dynamic> json) =>
       matchedSubstrings: (json['matched_substrings'] as List<dynamic>)
           .map(MatchedSubstrings.fromJson)
           .toList(),
-      structuredFormatting:
-          StructuredFormatting.fromJson(json['structured_formatting']),
+      structuredFormatting: StructuredFormatting.fromJson(
+        json['structured_formatting'],
+      ),
       terms: (json['terms'] as List<dynamic>).map(Term.fromJson).toList(),
       distanceMeters: (json['distance_meters'] as num?)?.toInt(),
       placeId: json['place_id'] as String?,
@@ -71,13 +74,11 @@ _MatchedSubstrings _$MatchedSubstringsFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$MatchedSubstringsToJson(_MatchedSubstrings instance) =>
-    <String, dynamic>{
-      'length': instance.length,
-      'offset': instance.offset,
-    };
+    <String, dynamic>{'length': instance.length, 'offset': instance.offset};
 
 _StructuredFormatting _$StructuredFormattingFromJson(
-        Map<String, dynamic> json) =>
+  Map<String, dynamic> json,
+) =>
     _StructuredFormatting(
       mainText: json['main_text'] as String,
       mainTextMatchedSubstrings:
@@ -92,7 +93,8 @@ _StructuredFormatting _$StructuredFormattingFromJson(
     );
 
 Map<String, dynamic> _$StructuredFormattingToJson(
-        _StructuredFormatting instance) =>
+  _StructuredFormatting instance,
+) =>
     <String, dynamic>{
       'main_text': instance.mainText,
       'main_text_matched_substrings':

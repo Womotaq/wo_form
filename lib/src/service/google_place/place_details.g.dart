@@ -7,7 +7,8 @@ part of 'place_details.dart';
 // **************************************************************************
 
 _PlaceDetailsResponse _$PlaceDetailsResponseFromJson(
-        Map<String, dynamic> json) =>
+  Map<String, dynamic> json,
+) =>
     _PlaceDetailsResponse(
       htmlAttributions: (json['html_attributions'] as List<dynamic>)
           .map((e) => e as String)
@@ -20,7 +21,8 @@ _PlaceDetailsResponse _$PlaceDetailsResponseFromJson(
     );
 
 Map<String, dynamic> _$PlaceDetailsResponseToJson(
-        _PlaceDetailsResponse instance) =>
+  _PlaceDetailsResponse instance,
+) =>
     <String, dynamic>{
       'html_attributions': instance.htmlAttributions,
       'result': instance.result.toJson(),
@@ -38,7 +40,9 @@ const _$PlacesDetailsStatusEnumMap = {
   PlacesDetailsStatus.UNKNOWN_ERROR: 'UNKNOWN_ERROR',
 };
 
-_PlaceDetails _$PlaceDetailsFromJson(Map<String, dynamic> json) =>
+_PlaceDetails _$PlaceDetailsFromJson(
+  Map<String, dynamic> json,
+) =>
     _PlaceDetails(
       addressComponents: (json['address_components'] as List<dynamic>?)
           ?.map(PlaceAddressComponent.fromJson)
@@ -147,7 +151,8 @@ Map<String, dynamic> _$PlaceDetailsToJson(_PlaceDetails instance) =>
     };
 
 _PlaceAddressComponent _$PlaceAddressComponentFromJson(
-        Map<String, dynamic> json) =>
+  Map<String, dynamic> json,
+) =>
     _PlaceAddressComponent(
       longName: json['long_name'] as String,
       shortName: json['short_name'] as String,
@@ -155,7 +160,8 @@ _PlaceAddressComponent _$PlaceAddressComponentFromJson(
     );
 
 Map<String, dynamic> _$PlaceAddressComponentToJson(
-        _PlaceAddressComponent instance) =>
+  _PlaceAddressComponent instance,
+) =>
     <String, dynamic>{
       'long_name': instance.longName,
       'short_name': instance.shortName,
@@ -163,14 +169,16 @@ Map<String, dynamic> _$PlaceAddressComponentToJson(
     };
 
 _PlaceEditorialSummary _$PlaceEditorialSummaryFromJson(
-        Map<String, dynamic> json) =>
+  Map<String, dynamic> json,
+) =>
     _PlaceEditorialSummary(
       language: json['language'] as String?,
       overview: json['overview'] as String?,
     );
 
 Map<String, dynamic> _$PlaceEditorialSummaryToJson(
-        _PlaceEditorialSummary instance) =>
+  _PlaceEditorialSummary instance,
+) =>
     <String, dynamic>{
       'language': instance.language,
       'overview': instance.overview,
@@ -193,10 +201,7 @@ _LatLngLiteral _$LatLngLiteralFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$LatLngLiteralToJson(_LatLngLiteral instance) =>
-    <String, dynamic>{
-      'lat': instance.latitude,
-      'lng': instance.longitude,
-    };
+    <String, dynamic>{'lat': instance.latitude, 'lng': instance.longitude};
 
 _Bounds _$BoundsFromJson(Map<String, dynamic> json) => _Bounds(
       northeast: LatLngLiteral.fromJson(json['northeast']),
@@ -231,7 +236,8 @@ Map<String, dynamic> _$PlaceOpeningHoursToJson(_PlaceOpeningHours instance) =>
     };
 
 _PlaceOpeningHoursPeriod _$PlaceOpeningHoursPeriodFromJson(
-        Map<String, dynamic> json) =>
+  Map<String, dynamic> json,
+) =>
     _PlaceOpeningHoursPeriod(
       open: PlaceOpeningHoursPeriodDetail.fromJson(json['open']),
       close: json['close'] == null
@@ -240,7 +246,8 @@ _PlaceOpeningHoursPeriod _$PlaceOpeningHoursPeriodFromJson(
     );
 
 Map<String, dynamic> _$PlaceOpeningHoursPeriodToJson(
-        _PlaceOpeningHoursPeriod instance) =>
+  _PlaceOpeningHoursPeriod instance,
+) =>
     <String, dynamic>{
       'open': instance.open.toJson(),
       'close': instance.close?.toJson(),
@@ -259,7 +266,8 @@ Map<String, dynamic> _$PlaceSpecialDayToJson(_PlaceSpecialDay instance) =>
     };
 
 _PlaceOpeningHoursPeriodDetail _$PlaceOpeningHoursPeriodDetailFromJson(
-        Map<String, dynamic> json) =>
+  Map<String, dynamic> json,
+) =>
     _PlaceOpeningHoursPeriodDetail(
       day: (json['day'] as num).toInt(),
       time: json['time'] as String,
@@ -268,7 +276,8 @@ _PlaceOpeningHoursPeriodDetail _$PlaceOpeningHoursPeriodDetailFromJson(
     );
 
 Map<String, dynamic> _$PlaceOpeningHoursPeriodDetailToJson(
-        _PlaceOpeningHoursPeriodDetail instance) =>
+  _PlaceOpeningHoursPeriodDetail instance,
+) =>
     <String, dynamic>{
       'day': instance.day,
       'time': instance.time,

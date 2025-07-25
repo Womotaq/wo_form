@@ -23,23 +23,15 @@ abstract class MediaService {
     preferFrontCamera: true,
     type: MediaType.image,
     methods: [
-      MediaImportMethodPickMedias(
-        source: MediaPickSource.gallery,
-      ),
-      MediaImportMethodPickMedias(
-        source: MediaPickSource.camera,
-      ),
+      MediaImportMethodPickMedias(source: ImageSource.gallery),
+      MediaImportMethodPickMedias(source: ImageSource.camera),
     ],
   );
   static const imageImportSettings = MediaImportSettings(
     type: MediaType.image,
     methods: [
-      MediaImportMethodPickMedias(
-        source: MediaPickSource.gallery,
-      ),
-      MediaImportMethodPickMedias(
-        source: MediaPickSource.camera,
-      ),
+      MediaImportMethodPickMedias(source: ImageSource.gallery),
+      MediaImportMethodPickMedias(source: ImageSource.camera),
     ],
   );
 
@@ -100,8 +92,10 @@ abstract class MediaService {
       // Add a new prefix. This prefix ensures the image is considered
       // a new one, so the old cached image is not reused.
       final random = Random();
-      final uid = List.generate(4, (_) => random.nextInt(10).toString())
-          .reduce((a, b) => a + b);
+      final uid = List.generate(
+        4,
+        (_) => random.nextInt(10).toString(),
+      ).reduce((a, b) => a + b);
       filename = 'cropped$uid-$filename';
 
       if (kIsWeb) {
@@ -149,31 +143,30 @@ abstract class MediaService {
         final media = await enterMediaUrl();
         return media == null ? [] : [media];
       case MediaImportMethodPickMedias(
-          source: final source,
-          type: final type,
-        ):
+        source: final source,
+        type: final type,
+      ):
         final includeImages = (type ?? importSettings.type).includeImages;
         final includeVideos = (type ?? importSettings.type).includeVideos;
 
         if (!includeImages && !includeVideos) {
           throw AssertionError('No type is specified');
         }
-        final imageSource = source.toImageSource();
 
         if (!includeImages) {
           assert(includeVideos);
           // NOTE : cannot import multiple videos using this method
           final video = await ImagePicker().pickVideo(
-            source: imageSource,
+            source: source,
             preferredCameraDevice: importSettings.preferredCameraDevice,
             maxDuration: importSettings.videoMaxDuration,
           );
           return video == null ? [] : [MediaFile(file: video)];
         } else if (!includeVideos) {
           // NOTE : can't take multiple photos with camera
-          if (limit == 1 || imageSource == ImageSource.camera) {
+          if (limit == 1 || source == ImageSource.camera) {
             final image = await ImagePicker().pickImage(
-              source: imageSource,
+              source: source,
               preferredCameraDevice: importSettings.preferredCameraDevice,
               maxHeight: importSettings.imageMaxHeight,
               maxWidth: importSettings.imageMaxWidth,
@@ -192,7 +185,7 @@ abstract class MediaService {
             return images.map((image) => MediaFile(file: image)).toList();
           }
         } else {
-          if (imageSource == ImageSource.camera) {
+          if (source == ImageSource.camera) {
             throw UnimplementedError(
               "ImagePicker's camera can't take a photo and a video "
               'at the same time.',
@@ -231,60 +224,6 @@ abstract class MediaService {
       importMethod: selectedImportMethod,
     );
   }
-
-  /// It is recommended to crop an image when uploading.
-  Future<MediaFile?> _pickAndCropLocalImage({
-    required ImageSource source,
-    required BuildContext context,
-    double? aspectRatio,
-    double? maxHeight,
-    double? maxWidth,
-  }) async {
-    final picked = await ImagePicker().pickImage(
-      source: source,
-      maxHeight: maxHeight,
-      maxWidth: maxWidth,
-    );
-    if (picked == null) return null;
-
-    final croppedMedias = await crop(
-      medias: [MediaFile(file: picked)],
-      cropAspectRatioOrCircle: aspectRatio,
-      maxHeight: maxHeight,
-      maxWidth: maxWidth,
-    );
-    return croppedMedias?.firstOrNull;
-  }
-
-  /// It is recommended to crop an image when uploading.
-  Future<MediaFile?> importImageAndCrop({
-    required BuildContext context,
-    double? aspectRatio,
-    double? maxHeight,
-    double? maxWidth,
-  }) =>
-      _pickAndCropLocalImage(
-        source: ImageSource.gallery,
-        context: context,
-        aspectRatio: aspectRatio,
-        maxHeight: maxHeight,
-        maxWidth: maxWidth,
-      );
-
-  /// It is recommended to crop an image when uploading.
-  Future<MediaFile?> takePhotoAndCrop({
-    required BuildContext context,
-    double? aspectRatio,
-    double? maxHeight,
-    double? maxWidth,
-  }) =>
-      _pickAndCropLocalImage(
-        source: ImageSource.camera,
-        context: context,
-        aspectRatio: aspectRatio,
-        maxHeight: maxHeight,
-        maxWidth: maxWidth,
-      );
 }
 
 typedef CropLocalizations = ({
@@ -294,13 +233,6 @@ typedef CropLocalizations = ({
   String? rotateLeftTooltip,
   String? rotateRightTooltip,
 });
-
-extension on MediaPickSource {
-  ImageSource toImageSource() => switch (this) {
-        MediaPickSource.camera => ImageSource.camera,
-        MediaPickSource.gallery => ImageSource.gallery,
-      };
-}
 
 extension on MediaImportSettings {
   CameraDevice get preferredCameraDevice =>

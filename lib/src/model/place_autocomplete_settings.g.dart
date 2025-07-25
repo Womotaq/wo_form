@@ -7,22 +7,22 @@ part of 'place_autocomplete_settings.dart';
 // **************************************************************************
 
 _PlaceAutocompleteSettings _$PlaceAutocompleteSettingsFromJson(
-        Map<String, dynamic> json) =>
-    _PlaceAutocompleteSettings(
-      type: $enumDecodeNullable(_$PlaceTypeEnumMap, json['type']),
-      countries: (json['countries'] as List<dynamic>?)
-          ?.map((e) => $enumDecode(_$IsoCodeEnumMap, e))
-          .toList(),
-      includeDetails: json['includeDetails'] as bool? ?? true,
-    );
+  Map<String, dynamic> json,
+) => _PlaceAutocompleteSettings(
+  type: $enumDecodeNullable(_$PlaceTypeEnumMap, json['type']),
+  countries: (json['countries'] as List<dynamic>?)
+      ?.map((e) => $enumDecode(_$IsoCodeEnumMap, e))
+      .toList(),
+  includeDetails: json['includeDetails'] as bool? ?? true,
+);
 
 Map<String, dynamic> _$PlaceAutocompleteSettingsToJson(
-        _PlaceAutocompleteSettings instance) =>
-    <String, dynamic>{
-      'type': _$PlaceTypeEnumMap[instance.type],
-      'countries': instance.countries,
-      'includeDetails': instance.includeDetails,
-    };
+  _PlaceAutocompleteSettings instance,
+) => <String, dynamic>{
+  'type': _$PlaceTypeEnumMap[instance.type],
+  'countries': instance.countries,
+  'includeDetails': instance.includeDetails,
+};
 
 const _$PlaceTypeEnumMap = {
   PlaceType.geocode: 'geocode',
