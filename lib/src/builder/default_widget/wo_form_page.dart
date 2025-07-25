@@ -102,7 +102,14 @@ class _StandardScaffold extends StatelessWidget {
               : null,
       body: SingleChildScrollView(
         child: SafeArea(
-          child: body,
+          child: Center(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: WoFormTheme.of(context)?.maxWidth ?? double.infinity,
+              ),
+              child: body,
+            ),
+          ),
         ),
       ),
       floatingActionButton:
@@ -168,16 +175,6 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    // final pageController = context.read<WoFormValuesCubit>().pageController;
-    // pageController.addListener(
-    //   () => setState(() => pageIndex = pageController.page!),
-    // );
-  }
-
-  @override
   void dispose() {
     pageController.dispose();
     super.dispose();
@@ -215,7 +212,8 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
               controller: pageController,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: widget.root.children.length,
-              itemBuilder: (context, index) => ListView(
+              itemBuilder: (context, index) => ConstrainedListView(
+                maxWidth: WoFormTheme.of(context)?.maxWidth ?? double.infinity,
                 children: [
                   const SizedBox(height: 16),
                   widget.root.children[index].toWidget(parentPath: ''),

@@ -37,6 +37,9 @@ abstract class WoFormThemeData with _$WoFormThemeData {
     OnDynamicInputDeletionDef? onDynamicInputDeletion,
     OnSubmitErrorDef? onSubmitError,
 
+    /// If set, the form's entire width won't exceed this value
+    @Default(512) double? maxWidth,
+
     /// This spacing will be placed between each [WoFormNodeMixin].
     double? verticalSpacing,
 

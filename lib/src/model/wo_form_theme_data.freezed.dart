@@ -39,6 +39,9 @@ mixin _$WoFormThemeData {
   OnDynamicInputDeletionDef? get onDynamicInputDeletion;
   OnSubmitErrorDef? get onSubmitError;
 
+  /// If set, the form's entire width won't exceed this value
+  double? get maxWidth;
+
   /// This spacing will be placed between each [WoFormNodeMixin].
   double? get verticalSpacing;
 
@@ -108,6 +111,8 @@ mixin _$WoFormThemeData {
                 other.onDynamicInputDeletion == onDynamicInputDeletion) &&
             (identical(other.onSubmitError, onSubmitError) ||
                 other.onSubmitError == onSubmitError) &&
+            (identical(other.maxWidth, maxWidth) ||
+                other.maxWidth == maxWidth) &&
             (identical(other.verticalSpacing, verticalSpacing) ||
                 other.verticalSpacing == verticalSpacing) &&
             (identical(other.showAsteriskIfRequired, showAsteriskIfRequired) ||
@@ -141,13 +146,14 @@ mixin _$WoFormThemeData {
         submitButtonBuilder,
         onDynamicInputDeletion,
         onSubmitError,
+        maxWidth,
         verticalSpacing,
         showAsteriskIfRequired
       ]);
 
   @override
   String toString() {
-    return 'WoFormThemeData(booleanFieldBuilder: $booleanFieldBuilder, dateTimeFieldBuilder: $dateTimeFieldBuilder, defaultPhoneCoutry: $defaultPhoneCoutry, durationFieldBuilder: $durationFieldBuilder, dynamicInputsNodeWidgetBuilder: $dynamicInputsNodeWidgetBuilder, formatDuration: $formatDuration, formPageBuilder: $formPageBuilder, generateId: $generateId, headerBuilder: $headerBuilder, inputHeaderBuilder: $inputHeaderBuilder, inputsNodeExpanderBuilder: $inputsNodeExpanderBuilder, inputsNodeWidgetBuilder: $inputsNodeWidgetBuilder, mediaFieldBuilder: $mediaFieldBuilder, numFieldBuilder: $numFieldBuilder, pickDate: $pickDate, pickDuration: $pickDuration, pickTime: $pickTime, scoreBuilder: $scoreBuilder, selectFieldBuilder: $selectFieldBuilder, standardScaffoldBuilder: $standardScaffoldBuilder, stringFieldBuilder: $stringFieldBuilder, submitButtonBuilder: $submitButtonBuilder, onDynamicInputDeletion: $onDynamicInputDeletion, onSubmitError: $onSubmitError, verticalSpacing: $verticalSpacing, showAsteriskIfRequired: $showAsteriskIfRequired)';
+    return 'WoFormThemeData(booleanFieldBuilder: $booleanFieldBuilder, dateTimeFieldBuilder: $dateTimeFieldBuilder, defaultPhoneCoutry: $defaultPhoneCoutry, durationFieldBuilder: $durationFieldBuilder, dynamicInputsNodeWidgetBuilder: $dynamicInputsNodeWidgetBuilder, formatDuration: $formatDuration, formPageBuilder: $formPageBuilder, generateId: $generateId, headerBuilder: $headerBuilder, inputHeaderBuilder: $inputHeaderBuilder, inputsNodeExpanderBuilder: $inputsNodeExpanderBuilder, inputsNodeWidgetBuilder: $inputsNodeWidgetBuilder, mediaFieldBuilder: $mediaFieldBuilder, numFieldBuilder: $numFieldBuilder, pickDate: $pickDate, pickDuration: $pickDuration, pickTime: $pickTime, scoreBuilder: $scoreBuilder, selectFieldBuilder: $selectFieldBuilder, standardScaffoldBuilder: $standardScaffoldBuilder, stringFieldBuilder: $stringFieldBuilder, submitButtonBuilder: $submitButtonBuilder, onDynamicInputDeletion: $onDynamicInputDeletion, onSubmitError: $onSubmitError, maxWidth: $maxWidth, verticalSpacing: $verticalSpacing, showAsteriskIfRequired: $showAsteriskIfRequired)';
   }
 }
 
@@ -182,6 +188,7 @@ abstract mixin class $WoFormThemeDataCopyWith<$Res> {
       SubmitButtonBuilderDef? submitButtonBuilder,
       OnDynamicInputDeletionDef? onDynamicInputDeletion,
       OnSubmitErrorDef? onSubmitError,
+      double? maxWidth,
       double? verticalSpacing,
       bool? showAsteriskIfRequired});
 }
@@ -223,6 +230,7 @@ class _$WoFormThemeDataCopyWithImpl<$Res>
     Object? submitButtonBuilder = freezed,
     Object? onDynamicInputDeletion = freezed,
     Object? onSubmitError = freezed,
+    Object? maxWidth = freezed,
     Object? verticalSpacing = freezed,
     Object? showAsteriskIfRequired = freezed,
   }) {
@@ -323,6 +331,10 @@ class _$WoFormThemeDataCopyWithImpl<$Res>
           ? _self.onSubmitError
           : onSubmitError // ignore: cast_nullable_to_non_nullable
               as OnSubmitErrorDef?,
+      maxWidth: freezed == maxWidth
+          ? _self.maxWidth
+          : maxWidth // ignore: cast_nullable_to_non_nullable
+              as double?,
       verticalSpacing: freezed == verticalSpacing
           ? _self.verticalSpacing
           : verticalSpacing // ignore: cast_nullable_to_non_nullable
@@ -363,6 +375,7 @@ class _WoFormThemeData extends WoFormThemeData {
       this.submitButtonBuilder,
       this.onDynamicInputDeletion,
       this.onSubmitError,
+      this.maxWidth = 512,
       this.verticalSpacing,
       this.showAsteriskIfRequired})
       : super._();
@@ -415,6 +428,11 @@ class _WoFormThemeData extends WoFormThemeData {
   final OnDynamicInputDeletionDef? onDynamicInputDeletion;
   @override
   final OnSubmitErrorDef? onSubmitError;
+
+  /// If set, the form's entire width won't exceed this value
+  @override
+  @JsonKey()
+  final double? maxWidth;
 
   /// This spacing will be placed between each [WoFormNodeMixin].
   @override
@@ -487,6 +505,8 @@ class _WoFormThemeData extends WoFormThemeData {
                 other.onDynamicInputDeletion == onDynamicInputDeletion) &&
             (identical(other.onSubmitError, onSubmitError) ||
                 other.onSubmitError == onSubmitError) &&
+            (identical(other.maxWidth, maxWidth) ||
+                other.maxWidth == maxWidth) &&
             (identical(other.verticalSpacing, verticalSpacing) ||
                 other.verticalSpacing == verticalSpacing) &&
             (identical(other.showAsteriskIfRequired, showAsteriskIfRequired) ||
@@ -520,13 +540,14 @@ class _WoFormThemeData extends WoFormThemeData {
         submitButtonBuilder,
         onDynamicInputDeletion,
         onSubmitError,
+        maxWidth,
         verticalSpacing,
         showAsteriskIfRequired
       ]);
 
   @override
   String toString() {
-    return 'WoFormThemeData(booleanFieldBuilder: $booleanFieldBuilder, dateTimeFieldBuilder: $dateTimeFieldBuilder, defaultPhoneCoutry: $defaultPhoneCoutry, durationFieldBuilder: $durationFieldBuilder, dynamicInputsNodeWidgetBuilder: $dynamicInputsNodeWidgetBuilder, formatDuration: $formatDuration, formPageBuilder: $formPageBuilder, generateId: $generateId, headerBuilder: $headerBuilder, inputHeaderBuilder: $inputHeaderBuilder, inputsNodeExpanderBuilder: $inputsNodeExpanderBuilder, inputsNodeWidgetBuilder: $inputsNodeWidgetBuilder, mediaFieldBuilder: $mediaFieldBuilder, numFieldBuilder: $numFieldBuilder, pickDate: $pickDate, pickDuration: $pickDuration, pickTime: $pickTime, scoreBuilder: $scoreBuilder, selectFieldBuilder: $selectFieldBuilder, standardScaffoldBuilder: $standardScaffoldBuilder, stringFieldBuilder: $stringFieldBuilder, submitButtonBuilder: $submitButtonBuilder, onDynamicInputDeletion: $onDynamicInputDeletion, onSubmitError: $onSubmitError, verticalSpacing: $verticalSpacing, showAsteriskIfRequired: $showAsteriskIfRequired)';
+    return 'WoFormThemeData(booleanFieldBuilder: $booleanFieldBuilder, dateTimeFieldBuilder: $dateTimeFieldBuilder, defaultPhoneCoutry: $defaultPhoneCoutry, durationFieldBuilder: $durationFieldBuilder, dynamicInputsNodeWidgetBuilder: $dynamicInputsNodeWidgetBuilder, formatDuration: $formatDuration, formPageBuilder: $formPageBuilder, generateId: $generateId, headerBuilder: $headerBuilder, inputHeaderBuilder: $inputHeaderBuilder, inputsNodeExpanderBuilder: $inputsNodeExpanderBuilder, inputsNodeWidgetBuilder: $inputsNodeWidgetBuilder, mediaFieldBuilder: $mediaFieldBuilder, numFieldBuilder: $numFieldBuilder, pickDate: $pickDate, pickDuration: $pickDuration, pickTime: $pickTime, scoreBuilder: $scoreBuilder, selectFieldBuilder: $selectFieldBuilder, standardScaffoldBuilder: $standardScaffoldBuilder, stringFieldBuilder: $stringFieldBuilder, submitButtonBuilder: $submitButtonBuilder, onDynamicInputDeletion: $onDynamicInputDeletion, onSubmitError: $onSubmitError, maxWidth: $maxWidth, verticalSpacing: $verticalSpacing, showAsteriskIfRequired: $showAsteriskIfRequired)';
   }
 }
 
@@ -563,6 +584,7 @@ abstract mixin class _$WoFormThemeDataCopyWith<$Res>
       SubmitButtonBuilderDef? submitButtonBuilder,
       OnDynamicInputDeletionDef? onDynamicInputDeletion,
       OnSubmitErrorDef? onSubmitError,
+      double? maxWidth,
       double? verticalSpacing,
       bool? showAsteriskIfRequired});
 }
@@ -604,6 +626,7 @@ class __$WoFormThemeDataCopyWithImpl<$Res>
     Object? submitButtonBuilder = freezed,
     Object? onDynamicInputDeletion = freezed,
     Object? onSubmitError = freezed,
+    Object? maxWidth = freezed,
     Object? verticalSpacing = freezed,
     Object? showAsteriskIfRequired = freezed,
   }) {
@@ -704,6 +727,10 @@ class __$WoFormThemeDataCopyWithImpl<$Res>
           ? _self.onSubmitError
           : onSubmitError // ignore: cast_nullable_to_non_nullable
               as OnSubmitErrorDef?,
+      maxWidth: freezed == maxWidth
+          ? _self.maxWidth
+          : maxWidth // ignore: cast_nullable_to_non_nullable
+              as double?,
       verticalSpacing: freezed == verticalSpacing
           ? _self.verticalSpacing
           : verticalSpacing // ignore: cast_nullable_to_non_nullable
