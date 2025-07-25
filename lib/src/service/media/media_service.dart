@@ -51,7 +51,6 @@ abstract class MediaService {
     required int? limit,
     required MediaImportSettings importSettings,
   });
-  BuildContext getAppContext();
   CropLocalizations getCropLocalizations(BuildContext context);
   Future<MediaImportMethod?> selectImportMethod(
     MediaImportSettings importSettings,
@@ -67,6 +66,7 @@ abstract class MediaService {
   });
 
   Future<List<MediaFile>?> crop({
+    required BuildContext context,
     required List<Media> medias,
     required double? cropAspectRatioOrCircle,
     bool showGrid = false,
@@ -76,11 +76,12 @@ abstract class MediaService {
     final result = <MediaFile>[];
 
     for (final media in medias) {
+      if (!context.mounted) return result;
       final bytes = await ImageCropper(
         image: media,
         cropAspectRatioOrCircle: cropAspectRatioOrCircle,
         showGrid: showGrid,
-      ).showInDialog(getAppContext());
+      ).showInDialog(context);
 
       if (bytes == null) continue;
 
@@ -124,7 +125,7 @@ abstract class MediaService {
       }
     }
 
-    return medias.length == result.length ? result : null;
+    return result;
   }
 
   Future<List<Media>> _importMedias({

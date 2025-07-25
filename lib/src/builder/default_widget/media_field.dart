@@ -99,7 +99,8 @@ class MediaField extends StatelessWidget {
     final media = medias.firstOrNull;
     final onChanged = data.onValueChanged;
     final fieldHeight = data.uiSettings.fieldHeight?.toDouble() ?? 160;
-    final aspectRatio = data.uiSettings.cropAspectRatioOrCircle ==
+    final aspectRatio =
+        data.uiSettings.cropAspectRatioOrCircle ==
             MediaService.circleAspectRatio
         ? 1.0
         : data.uiSettings.cropAspectRatioOrCircle;
@@ -108,85 +109,84 @@ class MediaField extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: data.input.maxCount == 1
           ? media != null
-              ? Stack(
-                  children: [
-                    Center(
-                      child: GestureDetector(
-                        onTap: onChanged == null
-                            ? null
-                            : () => edit(context, media),
+                ? Stack(
+                    children: [
+                      Center(
+                        child: GestureDetector(
+                          onTap: onChanged == null
+                              ? null
+                              : () => edit(context, media),
+                          child: SizedBox(
+                            height: fieldHeight,
+                            width: aspectRatio == null || aspectRatio == 0
+                                ? null
+                                : fieldHeight * aspectRatio,
+                            child: context
+                                .read<MediaService>()
+                                .mediaWidgetBuilder(media: media),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        right: 0,
+                        child: Container(
+                          height: fieldHeight,
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.surfaceContainerLowest.withAlpha(160),
+                          child: Column(
+                            children: [
+                              IconButton(
+                                // style: IconButton.styleFrom(
+                                //   backgroundColor: Theme.of(context)
+                                //       .colorScheme
+                                //       .surfaceContainerLowest
+                                //       .withAlpha(160),
+                                // ),
+                                onPressed: onChanged == null
+                                    ? null
+                                    : () => onChanged.call([]),
+                                icon: const Icon(Icons.close),
+                              ),
+                              IconButton(
+                                // style: IconButton.styleFrom(
+                                //   backgroundColor: Theme.of(context)
+                                //       .colorScheme
+                                //       .surfaceContainerLowest
+                                //       .withAlpha(160),
+                                // ),
+                                icon: const Icon(Icons.edit),
+                                onPressed: onChanged == null
+                                    ? null
+                                    : () => edit(context, media),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                : Column(
+                    children: [
+                      Center(
                         child: SizedBox(
                           height: fieldHeight,
                           width: aspectRatio == null || aspectRatio == 0
                               ? null
                               : fieldHeight * aspectRatio,
-                          child: context
-                              .read<MediaService>()
-                              .mediaWidgetBuilder(media: media),
+                          child: AddMediaButon(
+                            addMediaText: data.uiSettings.addMediaText,
+                            onChanged: onChanged,
+                            cropAspectRatioOrCircle:
+                                data.uiSettings.cropAspectRatioOrCircle,
+                            cropShowGrid: data.uiSettings.cropShowGrid,
+                            limit: 1,
+                            importSettings: data.input.importSettings,
+                          ),
                         ),
                       ),
-                    ),
-                    Positioned(
-                      right: 0,
-                      child: Container(
-                        height: fieldHeight,
-                        color: Theme.of(context)
-                            .colorScheme
-                            .surfaceContainerLowest
-                            .withAlpha(160),
-                        child: Column(
-                          children: [
-                            IconButton(
-                              // style: IconButton.styleFrom(
-                              //   backgroundColor: Theme.of(context)
-                              //       .colorScheme
-                              //       .surfaceContainerLowest
-                              //       .withAlpha(160),
-                              // ),
-                              onPressed: onChanged == null
-                                  ? null
-                                  : () => onChanged.call([]),
-                              icon: const Icon(Icons.close),
-                            ),
-                            IconButton(
-                              // style: IconButton.styleFrom(
-                              //   backgroundColor: Theme.of(context)
-                              //       .colorScheme
-                              //       .surfaceContainerLowest
-                              //       .withAlpha(160),
-                              // ),
-                              icon: const Icon(Icons.edit),
-                              onPressed: onChanged == null
-                                  ? null
-                                  : () => edit(context, media),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              : Column(
-                  children: [
-                    Center(
-                      child: SizedBox(
-                        height: fieldHeight,
-                        width: aspectRatio == null || aspectRatio == 0
-                            ? null
-                            : fieldHeight * aspectRatio,
-                        child: AddMediaButon(
-                          addMediaText: data.uiSettings.addMediaText,
-                          onChanged: onChanged,
-                          cropAspectRatioOrCircle:
-                              data.uiSettings.cropAspectRatioOrCircle,
-                          cropShowGrid: data.uiSettings.cropShowGrid,
-                          limit: 1,
-                          importSettings: data.input.importSettings,
-                        ),
-                      ),
-                    ),
-                  ],
-                )
+                    ],
+                  )
           : SizedBox(
               height: fieldHeight,
               child: ListView.separated(
@@ -246,8 +246,9 @@ class MediaField extends StatelessWidget {
           GestureDetector(
             onTap: onChanged == null ? null : () => edit(context, media),
             child: Center(
-              child:
-                  context.read<MediaService>().mediaWidgetBuilder(media: media),
+              child: context.read<MediaService>().mediaWidgetBuilder(
+                media: media,
+              ),
             ),
           ),
           _MediaActions(media: media, data: data),
@@ -261,13 +262,13 @@ class MediaField extends StatelessWidget {
     Media media,
   ) async {
     final cropped = (await context.read<MediaService>().crop(
+      context: context,
       medias: [media],
       cropAspectRatioOrCircle: data.uiSettings.cropAspectRatioOrCircle,
       showGrid: data.uiSettings.cropShowGrid,
       maxHeight: data.input.importSettings.imageMaxHeight,
       maxWidth: data.input.importSettings.imageMaxWidth,
-    ))
-        ?.firstOrNull;
+    ))?.firstOrNull;
     if (cropped == null) return;
 
     final medias = data.value ?? [];
@@ -295,8 +296,9 @@ class _MediaActions extends StatelessWidget {
 
     return Container(
       height: 32,
-      color:
-          Theme.of(context).colorScheme.surfaceContainerLowest.withAlpha(160),
+      color: Theme.of(
+        context,
+      ).colorScheme.surfaceContainerLowest.withAlpha(160),
       child: IconButtonTheme(
         data: IconButtonThemeData(
           style: IconButton.styleFrom(
@@ -310,24 +312,25 @@ class _MediaActions extends StatelessWidget {
             IconButton(
               onPressed:
                   data.onValueChanged == null || index == -1 || index == 0
-                      ? null
-                      : () => data.onValueChanged!(
-                            List<Media>.from(medias)
-                              ..removeAt(index)
-                              ..insert(index - 1, media),
-                          ),
+                  ? null
+                  : () => data.onValueChanged!(
+                      List<Media>.from(medias)
+                        ..removeAt(index)
+                        ..insert(index - 1, media),
+                    ),
               icon: const Icon(Icons.keyboard_arrow_left),
             ),
             IconButton(
-              onPressed: data.onValueChanged == null ||
+              onPressed:
+                  data.onValueChanged == null ||
                       index == -1 ||
                       index == medias.length - 1
                   ? null
                   : () => data.onValueChanged!(
-                        List<Media>.from(medias)
-                          ..removeAt(index)
-                          ..insert(index + 1, media),
-                      ),
+                      List<Media>.from(medias)
+                        ..removeAt(index)
+                        ..insert(index + 1, media),
+                    ),
               icon: const Icon(Icons.keyboard_arrow_right),
             ),
             const Expanded(child: SizedBox.shrink()),
@@ -337,14 +340,14 @@ class _MediaActions extends StatelessWidget {
                   ? null
                   : () async {
                       final cropped = (await context.read<MediaService>().crop(
+                        context: context,
                         medias: [media],
                         cropAspectRatioOrCircle:
                             data.uiSettings.cropAspectRatioOrCircle,
                         showGrid: data.uiSettings.cropShowGrid,
                         maxHeight: data.input.importSettings.imageMaxHeight,
                         maxWidth: data.input.importSettings.imageMaxWidth,
-                      ))
-                          ?.firstOrNull;
+                      ))?.firstOrNull;
                       if (cropped == null) return;
 
                       final newMedias = List<Media>.from(medias);
@@ -410,7 +413,9 @@ class _AddMediaButonState extends State<AddMediaButon> {
                   if (newMedias.isEmpty) return;
 
                   if (widget.cropAspectRatioOrCircle != null) {
+                    if (!context.mounted) return;
                     final croppedMedias = await mediaService.crop(
+                      context: context,
                       medias: newMedias,
                       cropAspectRatioOrCircle: widget.cropAspectRatioOrCircle,
                       showGrid: widget.cropShowGrid,
@@ -444,8 +449,9 @@ class _AddMediaButonState extends State<AddMediaButon> {
                         ? SizedBox.square(
                             dimension: 48,
                             child: CircularProgressIndicator(
-                              color:
-                                  Theme.of(context).colorScheme.outlineVariant,
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.outlineVariant,
                               padding: const EdgeInsets.all(8),
                             ),
                           )
@@ -461,8 +467,8 @@ class _AddMediaButonState extends State<AddMediaButon> {
                       // LATER : woForm.l10n
                       widget.addMediaText ?? 'Ajouter une image',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                        fontWeight: FontWeight.bold,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                   ],
