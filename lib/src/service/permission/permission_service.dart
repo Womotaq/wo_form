@@ -12,9 +12,7 @@
 /// <string>Allow access to select photos.</string>
 /// <key>NSMicrophoneUsageDescription</key>
 /// <string>Allow access to record videos.</string>
-abstract class PermissionService {
-  const PermissionService();
-
+mixin PermissionServiceMixin {
   Future<bool> requireCamera();
   Future<bool> requirePhotos();
 }

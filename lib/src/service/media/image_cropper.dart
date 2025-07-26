@@ -1,43 +1,51 @@
+import 'dart:math';
+
 import 'package:crop_your_image/crop_your_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/wo_form.dart';
 
-class ImageCropper extends StatefulWidget {
-  const ImageCropper({
+Future<Uint8List?> showImageCropperDialog({
+  required BuildContext context,
+  required Media image,
+
+  /// For a circle cropping, use MediaService.circleAspectRatio
+  double? cropAspectRatioOrCircle,
+  bool showGrid = false,
+  void Function(BuildContext context, Uint8List croppedImage)? onCropSuccess,
+}) => showDialog(
+  context: context,
+  builder: (context) => _ImageCropperDialog(
+    image: image,
+    cropAspectRatioOrCircle: cropAspectRatioOrCircle,
+    showGrid: showGrid,
+  ),
+);
+
+class _ImageCropperDialog extends StatefulWidget {
+  const _ImageCropperDialog({
     required this.image,
     this.cropAspectRatioOrCircle,
     this.showGrid = false,
-    this.onCropSuccess = _defaultOnCropSuccess,
-    super.key,
   });
 
   final Media image;
+
+  /// For a circle cropping, use MediaService.circleAspectRatio
   final double? cropAspectRatioOrCircle;
   final bool showGrid;
-  final void Function(BuildContext context, Uint8List croppedImage)
-      onCropSuccess;
-
-  static void _defaultOnCropSuccess(
-    BuildContext context,
-    Uint8List croppedImage,
-  ) =>
-      Navigator.of(context).pop(croppedImage);
-
-  Future<Uint8List?> showInDialog(BuildContext context) => showDialog(
-        context: context,
-        builder: (context) => Dialog(child: this),
-      );
 
   @override
-  State<ImageCropper> createState() => _ImageCropperState();
+  State<_ImageCropperDialog> createState() => __ImageCropperDialogState();
 }
 
-class _ImageCropperState extends State<ImageCropper> {
+class __ImageCropperDialogState extends State<_ImageCropperDialog> {
   final controller = CropController();
   Uint8List? bytes;
   double? originalAspectRatio;
+  int? imageHeight;
+  int? imageWidth;
   bool cropping = false;
 
   @override
@@ -49,6 +57,8 @@ class _ImageCropperState extends State<ImageCropper> {
   Future<void> _init() async {
     final bytes_ = await widget.image.bytes;
     final image = await decodeImageFromList(await widget.image.bytes);
+    imageHeight = image.height;
+    imageWidth = image.width;
     final originalAspectRatio_ = image.width / image.height;
 
     setState(() {
@@ -59,117 +69,101 @@ class _ImageCropperState extends State<ImageCropper> {
 
   @override
   Widget build(BuildContext context) {
+    if (bytes == null) {
+      return const Dialog(
+        backgroundColor: Colors.transparent,
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
+    final woFormTheme = WoFormTheme.of(context);
+
     final cropCircle =
         widget.cropAspectRatioOrCircle == MediaService.circleAspectRatio;
-    final localizations =
-        context.read<MediaService>().getCropLocalizations(context);
-
-    final crop = Center(
-      child: bytes == null
-          ? const CircularProgressIndicator()
-          : Builder(
-              builder: (context) {
-                final crop = Crop(
-                  image: bytes!,
-                  controller: controller,
-                  aspectRatio: cropCircle ? 1 : widget.cropAspectRatioOrCircle,
-                  onCropped: (result) async {
-                    switch (result) {
-                      case CropSuccess(:final croppedImage):
-                        widget.onCropSuccess(context, croppedImage);
-                      case CropFailure(:final cause):
-                        setState(() => cropping = false);
-                        (WoFormTheme.of(context)?.onSubmitError ??
-                                WoForm.defaultOnSubmitError)
-                            .call(context, SubmitErrorStatus(error: cause));
-                    }
-                  },
-                  willUpdateScale: (newScale) => newScale < 5,
-                  progressIndicator: const CircularProgressIndicator(),
-                  withCircleUi: cropCircle,
-                  overlayBuilder: widget.showGrid
-                      ? (context, rect) => ClipOval(
-                            child: CustomPaint(
-                              painter: _GridPainter(),
-                            ),
-                          )
-                      : null,
-                  baseColor: Colors.transparent,
-                  maskColor: Colors.black.withAlpha(128),
-                  initialRectBuilder: widget.cropAspectRatioOrCircle == null
-                      ? InitialRectBuilder.withBuilder(
-                          (viewportRect, imageRect) {
-                          return Rect.fromLTRB(
-                            viewportRect.left + 24,
-                            viewportRect.top + 24,
-                            viewportRect.right - 24,
-                            viewportRect.bottom - 24,
-                          );
-                        })
-                      : null,
-                );
-
-                return originalAspectRatio == null
-                    ? crop
-                    : AspectRatio(
-                        aspectRatio: originalAspectRatio!,
-                        child: crop,
-                      );
-              },
-            ),
+    final localizations = context.read<MediaService>().getCropLocalizations(
+      context,
     );
 
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            localizations.title,
-            style: Theme.of(context).textTheme.titleLarge,
+    return AlertDialog(
+      title: Text(localizations.title),
+      content: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: woFormTheme?.maxWidth ?? double.infinity,
+        ),
+        child: AspectRatio(
+          aspectRatio: originalAspectRatio!,
+          child: Crop(
+            image: bytes!,
+            controller: controller,
+            aspectRatio: cropCircle ? 1 : widget.cropAspectRatioOrCircle,
+            onCropped: (result) async {
+              switch (result) {
+                case CropSuccess(:final croppedImage):
+                  Navigator.of(context).pop(croppedImage);
+                case CropFailure(:final cause):
+                  setState(() => cropping = false);
+                  (woFormTheme?.onSubmitError ?? WoForm.defaultOnSubmitError)
+                      .call(context, SubmitErrorStatus(error: cause));
+              }
+            },
+            willUpdateScale: (newScale) => newScale < 5,
+            progressIndicator: const CircularProgressIndicator(),
+            withCircleUi: cropCircle,
+            overlayBuilder: widget.showGrid
+                ? (context, rect) => ClipOval(
+                    child: CustomPaint(
+                      painter: _GridPainter(),
+                    ),
+                  )
+                : null,
+            baseColor: Colors.transparent,
+            maskColor: Colors.black.withAlpha(128),
+            initialRectBuilder: widget.cropAspectRatioOrCircle == null
+                ? InitialRectBuilder.withBuilder((
+                    viewportRect,
+                    imageRect,
+                  ) {
+                    final marginX = min(24, max(imageWidth! - 48, 0) / 2);
+                    final marginY = min(24, max(imageHeight! - 48, 0) / 2);
+                    return Rect.fromLTRB(
+                      viewportRect.left + marginX,
+                      viewportRect.top + marginY,
+                      viewportRect.right - marginX,
+                      viewportRect.bottom - marginY,
+                    );
+                  })
+                : null,
           ),
-          const SizedBox(height: 24),
-          if (originalAspectRatio != null && originalAspectRatio! < .75)
-            Flexible(child: crop)
-          else
-            crop,
-          const SizedBox(height: 16),
-          Align(
-            alignment: Alignment.centerRight,
-            child: Wrap(
-              spacing: 8,
-              alignment: WrapAlignment.end,
-              children: [
-                TextButton(
-                  onPressed: Navigator.of(context).pop,
-                  child: Text(localizations.cancel),
-                ),
-                FilledButton(
-                  onPressed: () {
-                    if (cropping) return;
-                    setState(() => cropping = true);
-                    if (cropCircle) {
-                      controller.cropCircle();
-                    } else {
-                      controller.crop();
-                    }
-                  },
-                  child: cropping
-                      ? SizedBox.square(
-                          dimension: 16,
-                          child: CircularProgressIndicator(
-                            color: Theme.of(context).colorScheme.onPrimary,
-                            strokeWidth: 2,
-                          ),
-                        )
-                      : Text(localizations.save),
-                ),
-              ],
-            ),
-          ),
-        ],
+        ),
       ),
+      actions: [
+        TextButton(
+          onPressed: Navigator.of(context).pop,
+          child: Text(localizations.cancel),
+        ),
+        FilledButton(
+          onPressed: () {
+            if (cropping) return;
+            setState(() => cropping = true);
+            if (cropCircle) {
+              controller.cropCircle();
+            } else {
+              controller.crop();
+            }
+          },
+          child: cropping
+              ? SizedBox.square(
+                  dimension: 16,
+                  child: CircularProgressIndicator(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                    strokeWidth: 2,
+                  ),
+                )
+              : Text(localizations.save),
+        ),
+      ],
     );
   }
 }

@@ -14,7 +14,7 @@ import 'package:wo_form/wo_form.dart';
 abstract class MediaService {
   const MediaService({required this.permissionService});
 
-  final PermissionService permissionService;
+  final PermissionServiceMixin permissionService;
 
   static const circleAspectRatio = -1.0;
   static const avatarImportSettings = MediaImportSettings(
@@ -77,11 +77,12 @@ abstract class MediaService {
 
     for (final media in medias) {
       if (!context.mounted) return result;
-      final bytes = await ImageCropper(
+      final bytes = await showImageCropperDialog(
+        context: context,
         image: media,
         cropAspectRatioOrCircle: cropAspectRatioOrCircle,
         showGrid: showGrid,
-      ).showInDialog(context);
+      );
 
       if (bytes == null) continue;
 
@@ -147,15 +148,17 @@ abstract class MediaService {
         source: final source,
         type: final type,
       ):
+        final granted = await switch (source) {
+          ImageSource.camera => permissionService.requireCamera(),
+          ImageSource.gallery => permissionService.requirePhotos(),
+        };
+        if (!granted) return [];
+
+        // It is impossible that includeImages and includeVideos are false.
         final includeImages = (type ?? importSettings.type).includeImages;
         final includeVideos = (type ?? importSettings.type).includeVideos;
 
-        if (!includeImages && !includeVideos) {
-          throw AssertionError('No type is specified');
-        }
-
         if (!includeImages) {
-          assert(includeVideos);
           // NOTE : cannot import multiple videos using this method
           final video = await ImagePicker().pickVideo(
             source: source,
@@ -187,11 +190,13 @@ abstract class MediaService {
           }
         } else {
           if (source == ImageSource.camera) {
-            throw UnimplementedError(
+            throw ArgumentError(
               "ImagePicker's camera can't take a photo and a video "
               'at the same time.',
             );
-          } else if (limit == 1) {
+          }
+
+          if (limit == 1) {
             final image = await ImagePicker().pickMedia(
               maxHeight: importSettings.imageMaxHeight,
               maxWidth: importSettings.imageMaxWidth,
