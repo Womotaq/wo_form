@@ -86,10 +86,9 @@ class PickDatePage extends StatelessWidget {
                         DateFormat.yMMMM()
                             .format(DateTime(0, fullMonth))
                             .capitalized(),
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge
-                            ?.copyWith(fontWeight: FontWeight.bold),
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     MonthlyCalendar(
@@ -122,7 +121,7 @@ class PickDatePage extends StatelessWidget {
                     context.read<_SelectedDateCubit>().state,
                   ),
                   position: SubmitButtonPosition.body,
-                  pageIndex: 0,
+                  path: '',
                 ),
               );
             },
@@ -136,8 +135,11 @@ class PickDatePage extends StatelessWidget {
   int weeksInMonth(int fullMonth) {
     // Get the first and last days of the month.
     final firstDayOfMonth = DateTime(0, fullMonth);
-    final lastDayOfMonth =
-        DateTime(0, fullMonth + 1, 0); // 0 gives the last day of the month.
+    final lastDayOfMonth = DateTime(
+      0,
+      fullMonth + 1,
+      0,
+    ); // 0 gives the last day of the month.
 
     // Calculate the weekday of the first and last day.
     final firstWeekday = firstDayOfMonth.weekday; // 1 (Monday) to 7 (Sunday)
@@ -240,8 +242,9 @@ class InfiniteListView extends StatelessWidget {
               SliverList(
                 key: forwardListKey,
                 delegate: SliverChildBuilderDelegate(
-                  childCount:
-                      maxIndex == null ? null : maxIndex! - centerIndex + 1,
+                  childCount: maxIndex == null
+                      ? null
+                      : maxIndex! - centerIndex + 1,
                   (BuildContext context, int index) {
                     final movedIndex = centerIndex + index;
                     final child = itemBuilder(context, movedIndex);

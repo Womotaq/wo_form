@@ -108,29 +108,7 @@ class HydratedWoFormLockCubit extends WoFormLockCubit
   Map<String, dynamic>? toJson(Set<String> state) => {'locks': state.toList()};
 }
 
-enum SubmitType {
-  /// Submission will check for errors in a portion of this form. The portion is
-  /// likely in a different context than the form (a secondary page or a modal).
-  /// If no error is detected, the context will probably be popped, going back
-  /// to the form's main page.
-  partial,
-
-  /// Submission will check for errors in a portion of this form.
-  /// If no error is detected, a new part of the form is likely to be focused.
-  /// While the form is in this state, the submit button will display
-  /// [PageByPageSubmitMode.nextText].
-  step,
-
-  /// Submission will check for errors in the whole form.
-  /// If no error is detected, [WoForm.onSubmitting] will be called.
-  complete,
-}
-
-typedef _TempSubmitData = ({
-  Future<void> Function() onSubmitting,
-  String path,
-  SubmitType type,
-});
+typedef _TempSubmitData = ({Future<void> Function() onSubmitting, String path});
 
 class WoFormValuesCubit extends Cubit<WoFormValues> {
   WoFormValuesCubit._(
@@ -167,9 +145,6 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   String get currentPath => _tempSubmitDatas.lastOrNull?.path ?? '';
 
-  SubmitType get currentSubmitType =>
-      _tempSubmitDatas.lastOrNull?.type ?? SubmitType.complete;
-
   WoFormNodeMixin get currentNode {
     final tempSubmitData = _tempSubmitDatas.lastOrNull;
     if (tempSubmitData == null) return _root;
@@ -197,20 +172,10 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   void addTemporarySubmitData({
     required Future<void> Function() onSubmitting,
     required String path,
-    SubmitType type = SubmitType.partial,
-  }) {
-    if (type == SubmitType.complete) {
-      throw ArgumentError(
-        'SubmitType.complete cannot be the type of a TemporarySubmitData',
-      );
-    }
-
-    _tempSubmitDatas.add((
-      onSubmitting: onSubmitting,
-      path: path,
-      type: type,
-    ));
-  }
+  }) => _tempSubmitDatas.add((
+    onSubmitting: onSubmitting,
+    path: path,
+  ));
 
   void clearValues() => emit(_root.getInitialValues());
 

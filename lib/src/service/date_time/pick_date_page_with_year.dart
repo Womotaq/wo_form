@@ -61,8 +61,10 @@ class _PickDatePageWithYearState extends State<PickDatePageWithYear> {
       viewportFraction: .25,
     );
     monthScrollController = InfinitePageController(
-      initialIndex: yearMonthCenter.fullMonth
-          ._clamp(widget.minDate?.fullMonth, widget.maxDate?.fullMonth),
+      initialIndex: yearMonthCenter.fullMonth._clamp(
+        widget.minDate?.fullMonth,
+        widget.maxDate?.fullMonth,
+      ),
       minIndex: widget.minDate?.fullMonth,
       maxIndex: widget.maxDate?.fullMonth,
       viewportFraction: .32,
@@ -152,13 +154,14 @@ class _PickDatePageWithYearState extends State<PickDatePageWithYear> {
 
                     return SubmitButton(
                       SubmitButtonData(
-                        text: DateFormat(widget.dateFormat ?? 'yMMMMd')
-                            .format(date),
+                        text: DateFormat(
+                          widget.dateFormat ?? 'yMMMMd',
+                        ).format(date),
                         onPressed: () => Navigator.of(context).pop(
                           context.read<_SelectedDateCubit>().state,
                         ),
                         position: SubmitButtonPosition.body,
-                        pageIndex: 0,
+                        path: '',
                       ),
                     );
                   },
@@ -172,14 +175,14 @@ class _PickDatePageWithYearState extends State<PickDatePageWithYear> {
 
     return switch (widget._displayMode) {
       _DisplayMode.page => Scaffold(
-          appBar: AppBar(),
-          body: picker,
-        ),
+        appBar: AppBar(),
+        body: picker,
+      ),
       _DisplayMode.modal => SizedBox(
-          width: 332,
-          height: 556,
-          child: picker,
-        ),
+        width: 332,
+        height: 556,
+        child: picker,
+      ),
     };
   }
 
@@ -262,8 +265,10 @@ class _FullMonthCubit extends Cubit<int> {
   Future<void> setYear(int year) async {
     if (_locked) return;
 
-    final fullMonth = _FullMonth.build(year: year, month: state.month)
-        ._clamp(minDate, maxDate);
+    final fullMonth = _FullMonth.build(
+      year: year,
+      month: state.month,
+    )._clamp(minDate, maxDate);
 
     if (fullMonth == state) return;
     _locked = true;
@@ -356,9 +361,10 @@ class _MonthWidget extends StatelessWidget {
           index: fullMonth,
           selectedIndex: currentFullMonth,
           child: Text(DateFormat.MMMM().format(DateTime(1, month))),
-          onSelect: () => context
-              .read<_FullMonthCubit>()
-              .setFullMonth(fullMonth, fromMonths: true),
+          onSelect: () => context.read<_FullMonthCubit>().setFullMonth(
+            fullMonth,
+            fromMonths: true,
+          ),
         );
       },
     );
@@ -472,21 +478,22 @@ class MonthlyCalendar extends StatelessWidget {
     // Generate the calendar grid for the given month
     final days = _generateCalendar(fullMonth.year, fullMonth.month);
 
-    final selectedDay =
-        fullMonth == selectedDate?.fullMonth ? selectedDate!.day : null;
+    final selectedDay = fullMonth == selectedDate?.fullMonth
+        ? selectedDate!.day
+        : null;
     final minDay = minDate != null
         ? minDate!.fullMonth == fullMonth
-            ? minDate!.day
-            : minDate!.fullMonth > fullMonth
-                ? 32
-                : null
+              ? minDate!.day
+              : minDate!.fullMonth > fullMonth
+              ? 32
+              : null
         : null;
     final maxDay = maxDate != null
         ? maxDate!.fullMonth == fullMonth
-            ? maxDate!.day
-            : maxDate!.fullMonth < fullMonth
-                ? -1
-                : null
+              ? maxDate!.day
+              : maxDate!.fullMonth < fullMonth
+              ? -1
+              : null
         : null;
 
     return GridView.builder(
@@ -498,7 +505,8 @@ class MonthlyCalendar extends StatelessWidget {
       itemCount: days.length,
       itemBuilder: (context, index) {
         final day = days[index];
-        final selectable = day != null &&
+        final selectable =
+            day != null &&
             !((minDay != null && day < minDay) ||
                 (maxDay != null && day > maxDay));
 
@@ -508,45 +516,45 @@ class MonthlyCalendar extends StatelessWidget {
             height: 40,
             child: day != null
                 ? selectedDay == day
-                    ? Container(
-                        decoration: selectedDay == day
-                            ? BoxDecoration(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .primaryContainer,
-                                shape: BoxShape.circle,
-                              )
-                            : null,
-                        child: Center(
-                          child: Text(
-                            day.toString(),
-                            style: TextStyle(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onPrimaryContainer,
-                              fontWeight: FontWeight.bold,
+                      ? Container(
+                          decoration: selectedDay == day
+                              ? BoxDecoration(
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.primaryContainer,
+                                  shape: BoxShape.circle,
+                                )
+                              : null,
+                          child: Center(
+                            child: Text(
+                              day.toString(),
+                              style: TextStyle(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onPrimaryContainer,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
-                        ),
-                      )
-                    : InkWell(
-                        borderRadius: BorderRadius.circular(40),
-                        onTap: onSelect == null
-                            ? null
-                            : selectable
-                                ? () => onSelect!(day)
-                                : null,
-                        child: Center(
-                          child: Text(
-                            day.toString(),
-                            style: selectable
-                                ? null
-                                : TextStyle(
-                                    color: Theme.of(context).disabledColor,
-                                  ),
+                        )
+                      : InkWell(
+                          borderRadius: BorderRadius.circular(40),
+                          onTap: onSelect == null
+                              ? null
+                              : selectable
+                              ? () => onSelect!(day)
+                              : null,
+                          child: Center(
+                            child: Text(
+                              day.toString(),
+                              style: selectable
+                                  ? null
+                                  : TextStyle(
+                                      color: Theme.of(context).disabledColor,
+                                    ),
+                            ),
                           ),
-                        ),
-                      )
+                        )
                 : const SizedBox.shrink(),
           ),
         );
@@ -595,9 +603,9 @@ class DaysOfWeek extends StatelessWidget {
           itemBuilder: (context, index) {
             return Center(
               child: Text(
-                DateFormat(DateFormat.ABBR_WEEKDAY)
-                    .format(DateTime(1, 1, 1 + index))[0]
-                    .toUpperCase(),
+                DateFormat(
+                  DateFormat.ABBR_WEEKDAY,
+                ).format(DateTime(1, 1, 1 + index))[0].toUpperCase(),
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
             );
@@ -618,12 +626,12 @@ class InfinitePageController extends PageController {
     super.onAttach,
     super.onDetach,
   }) : super(
-          initialPage: _processInitialIndex(
-            initialIndex,
-            minIndex: minIndex,
-            maxIndex: maxIndex,
-          ),
-        ) {
+         initialPage: _processInitialIndex(
+           initialIndex,
+           minIndex: minIndex,
+           maxIndex: maxIndex,
+         ),
+       ) {
     if (maxIndex != null && initialIndex > maxIndex!) {
       throw AssertionError(
         'initialIndex ($initialIndex) must be lower or equal to '
@@ -681,9 +689,11 @@ class InfinitePageController extends PageController {
     return index;
   }
 
-  int processIndex(int index) =>
-      _processIndex(index.toDouble(), minIndex: minIndex, maxIndex: maxIndex)
-          .toInt();
+  int processIndex(int index) => _processIndex(
+    index.toDouble(),
+    minIndex: minIndex,
+    maxIndex: maxIndex,
+  ).toInt();
 
   bool get _reverse => minIndex == null && maxIndex != null;
   int? get _itemCount =>

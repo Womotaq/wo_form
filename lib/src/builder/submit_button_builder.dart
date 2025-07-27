@@ -3,9 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/wo_form.dart';
 
 class SubmitButtonBuilder extends StatelessWidget {
-  const SubmitButtonBuilder({this.pageIndex = 0, super.key});
+  const SubmitButtonBuilder({
+    this.submitButtonBuilder,
+    super.key,
+  });
 
-  final int pageIndex;
+  final SubmitButtonBuilderDef? submitButtonBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -26,23 +29,22 @@ class SubmitButtonBuilder extends StatelessWidget {
 
     final submitMode = root.uiSettings.submitMode;
 
-    final textIsNext =
-        submitMode is PageByPageSubmitMode &&
-        context.read<WoFormValuesCubit>().currentSubmitType == SubmitType.step;
+    // final textIsNext =
+    //     submitMode is PageByPageSubmitMode &&
+    //     context.read<WoFormValuesCubit>().currentSubmitType == SubmitType.step;
 
     final submitButtonData = SubmitButtonData(
-      pageIndex: pageIndex,
-      text: textIsNext
-          ? submitMode.nextText ?? context.read<WoFormL10n?>()?.next()
-          : submitMode.submitText ?? context.read<WoFormL10n?>()?.submit(),
-      icon: textIsNext ? null : submitMode.submitIcon,
+      text: submitMode.submitText ?? context.read<WoFormL10n?>()?.submit(),
+      icon: submitMode.submitIcon,
       onPressed: disabled
           ? null
           : () => context.read<WoFormValuesCubit>().submit(context),
       position: submitMode.buttonPosition,
+      path: context.read<WoFormValuesCubit>().currentPath,
     );
 
-    return (root.uiSettings.submitButtonBuilder ??
+    return (submitButtonBuilder ??
+            root.uiSettings.submitButtonBuilder ??
             WoFormTheme.of(context)?.submitButtonBuilder ??
             SubmitButton.new)
         .call(submitButtonData);

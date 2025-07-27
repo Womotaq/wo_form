@@ -47,9 +47,17 @@ abstract class WoFieldData<I, T, U> with _$WoFieldData<I, T, U> {
 abstract class SubmitButtonData with _$SubmitButtonData {
   const factory SubmitButtonData({
     required String? text,
+
+    /// Callback invoked when the form (or a part of it) is submitted. This is
+    /// triggered by the [SubmitButton] or any field configured to submit.
     required VoidCallback? onPressed,
+
+    /// If not empty, submission validation will be scoped to form nodes
+    /// whose paths start with this value.
+    ///
+    /// This is useful for validating only a specific section of a larger form.
+    required String path,
     required SubmitButtonPosition position,
-    required int pageIndex, // TODO : remove
     IconData? icon,
   }) = _SubmitButtonData;
 }

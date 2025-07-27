@@ -14,11 +14,7 @@ class WoFormPage extends StatelessWidget {
 
     final submitMode = root.uiSettings.submitMode;
     return submitMode is PageByPageSubmitMode
-        ? WoFormPageByPage(
-            root: root,
-            titleText: root.uiSettings.titleText,
-            nextText: submitMode.nextText,
-          )
+        ? WoFormPageByPage(submitMode: submitMode)
         : WoFormStandardPage(root: root);
   }
 }
@@ -123,16 +119,9 @@ class _StandardScaffold extends StatelessWidget {
 }
 
 class WoFormPageByPage extends StatefulWidget {
-  const WoFormPageByPage({
-    required this.root,
-    required this.titleText,
-    required this.nextText,
-    super.key,
-  });
+  const WoFormPageByPage({required this.submitMode, super.key});
 
-  final RootNode root;
-  final String titleText;
-  final String? nextText;
+  final PageByPageSubmitMode submitMode;
 
   @override
   State<WoFormPageByPage> createState() => WoFormPageByPageState();
@@ -144,6 +133,7 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
 
   @override
   void initState() {
+    final root = context.read<RootNode>();
     pageController = PageController();
 
     context.read<WoFormValuesCubit>().addTemporarySubmitData(
@@ -151,8 +141,7 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeIn,
       ),
-      path: '/${widget.root.children[0].id}',
-      type: SubmitType.step,
+      path: '/${root.children[0].id}',
     );
 
     pageController.addListener(
@@ -160,7 +149,7 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
         final newPageIndex = pageController.page!;
         setState(() => pageIndex = newPageIndex);
 
-        if (newPageIndex == widget.root.children.length - 1) {
+        if (newPageIndex == root.children.length - 1) {
           context.read<WoFormValuesCubit>().clearTemporarySubmitData();
         } else {
           context.read<WoFormValuesCubit>().addTemporarySubmitData(
@@ -168,8 +157,7 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeIn,
             ),
-            path: '/${widget.root.children[newPageIndex.toInt()].id}',
-            type: SubmitType.step,
+            path: '/${root.children[newPageIndex.toInt()].id}',
           );
         }
       },
@@ -186,7 +174,8 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
 
   @override
   Widget build(BuildContext context) {
-    final uiSettings = context.read<RootNode>().uiSettings;
+    final root = context.read<RootNode>();
+    final woFormTheme = WoFormTheme.of(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -200,11 +189,11 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
               );
               return false;
             } else {
-              return uiSettings.canQuit?.call(context) ?? true;
+              return root.uiSettings.canQuit?.call(context) ?? true;
             }
           },
         ),
-        title: Text(widget.titleText),
+        title: Text(root.uiSettings.titleText),
       ),
       body: SafeArea(
         child: Stack(
@@ -213,21 +202,35 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
             PageView.builder(
               controller: pageController,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: widget.root.children.length,
+              itemCount: root.children.length,
               itemBuilder: (context, index) => ConstrainedListView(
                 maxWidth:
-                    WoFormTheme.of(context)?.maxWidth ??
-                    WoFormThemeData.DEFAULT_MAX_WIDTH,
+                    woFormTheme?.maxWidth ?? WoFormThemeData.DEFAULT_MAX_WIDTH,
                 children: [
                   const SizedBox(height: 16),
-                  widget.root.children[index].toWidget(parentPath: ''),
+                  root.children[index].toWidget(parentPath: ''),
                   const SizedBox(height: 32),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        SubmitButtonBuilder(pageIndex: index),
+                        SubmitButtonBuilder(
+                          submitButtonBuilder: index == root.children.length - 1
+                              ? null
+                              : (data) =>
+                                    (root.uiSettings.submitButtonBuilder ??
+                                    woFormTheme?.submitButtonBuilder ??
+                                    SubmitButton.new)(
+                                      data.copyWith(
+                                        text:
+                                            widget.submitMode.nextText ??
+                                            context.read<WoFormL10n?>()?.next(),
+                                        icon: null,
+                                        path: '/${root.children[index].id}',
+                                      ),
+                                    ),
+                        ),
                       ],
                     ),
                   ),
@@ -235,8 +238,7 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
                 ],
               ),
             ),
-            if ((uiSettings.submitMode as PageByPageSubmitMode)
-                .showProgressIndicator)
+            if (widget.submitMode.showProgressIndicator)
               TweenAnimationBuilder<double>(
                 duration: const Duration(milliseconds: 250),
                 curve: Curves.easeInOut,
@@ -246,7 +248,7 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
                 ),
                 builder: (context, value, _) {
                   return LinearProgressIndicator(
-                    value: value / max(1, widget.root.children.length),
+                    value: value / max(1, root.children.length),
                   );
                 },
               ),
