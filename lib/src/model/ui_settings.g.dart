@@ -361,6 +361,9 @@ _WoFormUiSettings _$WoFormUiSettingsFromJson(Map<String, dynamic> json) =>
             ),
       showAsteriskIfRequired: json['showAsteriskIfRequired'] as bool?,
       canModifySubmittedValues: json['canModifySubmittedValues'] as bool?,
+      showErrors:
+          $enumDecodeNullable(_$ShowErrorsEnumMap, json['showErrors']) ??
+          ShowErrors.progressively,
     );
 
 Map<String, dynamic> _$WoFormUiSettingsToJson(_WoFormUiSettings instance) =>
@@ -370,11 +373,17 @@ Map<String, dynamic> _$WoFormUiSettingsToJson(_WoFormUiSettings instance) =>
       'submitMode': WoFormSubmitMode.staticToJson(instance.submitMode),
       'showAsteriskIfRequired': instance.showAsteriskIfRequired,
       'canModifySubmittedValues': instance.canModifySubmittedValues,
+      'showErrors': _$ShowErrorsEnumMap[instance.showErrors]!,
     };
 
 const _$WoFormTitlePositionEnumMap = {
   WoFormTitlePosition.header: 'header',
   WoFormTitlePosition.appBar: 'appBar',
+};
+
+const _$ShowErrorsEnumMap = {
+  ShowErrors.always: 'always',
+  ShowErrors.progressively: 'progressively',
 };
 
 StandardSubmitMode _$StandardSubmitModeFromJson(Map<String, dynamic> json) =>

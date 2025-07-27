@@ -1678,7 +1678,9 @@ as StringFieldBuilderDef?,
 /// @nodoc
 mixin _$WoFormUiSettings {
 
- String get titleText; WoFormTitlePosition get titlePosition;@JsonKey(includeToJson: false, includeFromJson: false) HeaderBuilderDef? get headerBuilder;@JsonKey(toJson: WoFormSubmitMode.staticToJson) WoFormSubmitMode get submitMode;@JsonKey(includeToJson: false, includeFromJson: false) SubmitButtonBuilderDef? get submitButtonBuilder; bool? get showAsteriskIfRequired; bool? get canModifySubmittedValues;@JsonKey(includeToJson: false, includeFromJson: false) Future<bool?> Function(BuildContext context)? get canQuit;
+ String get titleText; WoFormTitlePosition get titlePosition;@JsonKey(includeToJson: false, includeFromJson: false) HeaderBuilderDef? get headerBuilder;@JsonKey(toJson: WoFormSubmitMode.staticToJson) WoFormSubmitMode get submitMode;@JsonKey(includeToJson: false, includeFromJson: false) SubmitButtonBuilderDef? get submitButtonBuilder; bool? get showAsteriskIfRequired; bool? get canModifySubmittedValues;/// By default, errors will only be shown after the user visited a node or
+/// tried to submit the form.
+ ShowErrors get showErrors;@JsonKey(includeToJson: false, includeFromJson: false) Future<bool?> Function(BuildContext context)? get canQuit;
 /// Create a copy of WoFormUiSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1691,16 +1693,16 @@ $WoFormUiSettingsCopyWith<WoFormUiSettings> get copyWith => _$WoFormUiSettingsCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WoFormUiSettings&&(identical(other.titleText, titleText) || other.titleText == titleText)&&(identical(other.titlePosition, titlePosition) || other.titlePosition == titlePosition)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.submitMode, submitMode) || other.submitMode == submitMode)&&(identical(other.submitButtonBuilder, submitButtonBuilder) || other.submitButtonBuilder == submitButtonBuilder)&&(identical(other.showAsteriskIfRequired, showAsteriskIfRequired) || other.showAsteriskIfRequired == showAsteriskIfRequired)&&(identical(other.canModifySubmittedValues, canModifySubmittedValues) || other.canModifySubmittedValues == canModifySubmittedValues)&&(identical(other.canQuit, canQuit) || other.canQuit == canQuit));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WoFormUiSettings&&(identical(other.titleText, titleText) || other.titleText == titleText)&&(identical(other.titlePosition, titlePosition) || other.titlePosition == titlePosition)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.submitMode, submitMode) || other.submitMode == submitMode)&&(identical(other.submitButtonBuilder, submitButtonBuilder) || other.submitButtonBuilder == submitButtonBuilder)&&(identical(other.showAsteriskIfRequired, showAsteriskIfRequired) || other.showAsteriskIfRequired == showAsteriskIfRequired)&&(identical(other.canModifySubmittedValues, canModifySubmittedValues) || other.canModifySubmittedValues == canModifySubmittedValues)&&(identical(other.showErrors, showErrors) || other.showErrors == showErrors)&&(identical(other.canQuit, canQuit) || other.canQuit == canQuit));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,titleText,titlePosition,headerBuilder,submitMode,submitButtonBuilder,showAsteriskIfRequired,canModifySubmittedValues,canQuit);
+int get hashCode => Object.hash(runtimeType,titleText,titlePosition,headerBuilder,submitMode,submitButtonBuilder,showAsteriskIfRequired,canModifySubmittedValues,showErrors,canQuit);
 
 @override
 String toString() {
-  return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, submitButtonBuilder: $submitButtonBuilder, showAsteriskIfRequired: $showAsteriskIfRequired, canModifySubmittedValues: $canModifySubmittedValues, canQuit: $canQuit)';
+  return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, submitButtonBuilder: $submitButtonBuilder, showAsteriskIfRequired: $showAsteriskIfRequired, canModifySubmittedValues: $canModifySubmittedValues, showErrors: $showErrors, canQuit: $canQuit)';
 }
 
 
@@ -1711,7 +1713,7 @@ abstract mixin class $WoFormUiSettingsCopyWith<$Res>  {
   factory $WoFormUiSettingsCopyWith(WoFormUiSettings value, $Res Function(WoFormUiSettings) _then) = _$WoFormUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String titleText, WoFormTitlePosition titlePosition,@JsonKey(includeToJson: false, includeFromJson: false) HeaderBuilderDef? headerBuilder,@JsonKey(toJson: WoFormSubmitMode.staticToJson) WoFormSubmitMode submitMode,@JsonKey(includeToJson: false, includeFromJson: false) SubmitButtonBuilderDef? submitButtonBuilder, bool? showAsteriskIfRequired, bool? canModifySubmittedValues,@JsonKey(includeToJson: false, includeFromJson: false) Future<bool?> Function(BuildContext context)? canQuit
+ String titleText, WoFormTitlePosition titlePosition,@JsonKey(includeToJson: false, includeFromJson: false) HeaderBuilderDef? headerBuilder,@JsonKey(toJson: WoFormSubmitMode.staticToJson) WoFormSubmitMode submitMode,@JsonKey(includeToJson: false, includeFromJson: false) SubmitButtonBuilderDef? submitButtonBuilder, bool? showAsteriskIfRequired, bool? canModifySubmittedValues, ShowErrors showErrors,@JsonKey(includeToJson: false, includeFromJson: false) Future<bool?> Function(BuildContext context)? canQuit
 });
 
 
@@ -1728,7 +1730,7 @@ class _$WoFormUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of WoFormUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? titleText = null,Object? titlePosition = null,Object? headerBuilder = freezed,Object? submitMode = null,Object? submitButtonBuilder = freezed,Object? showAsteriskIfRequired = freezed,Object? canModifySubmittedValues = freezed,Object? canQuit = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? titleText = null,Object? titlePosition = null,Object? headerBuilder = freezed,Object? submitMode = null,Object? submitButtonBuilder = freezed,Object? showAsteriskIfRequired = freezed,Object? canModifySubmittedValues = freezed,Object? showErrors = null,Object? canQuit = freezed,}) {
   return _then(_self.copyWith(
 titleText: null == titleText ? _self.titleText : titleText // ignore: cast_nullable_to_non_nullable
 as String,titlePosition: null == titlePosition ? _self.titlePosition : titlePosition // ignore: cast_nullable_to_non_nullable
@@ -1737,7 +1739,8 @@ as HeaderBuilderDef?,submitMode: null == submitMode ? _self.submitMode : submitM
 as WoFormSubmitMode,submitButtonBuilder: freezed == submitButtonBuilder ? _self.submitButtonBuilder : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
 as SubmitButtonBuilderDef?,showAsteriskIfRequired: freezed == showAsteriskIfRequired ? _self.showAsteriskIfRequired : showAsteriskIfRequired // ignore: cast_nullable_to_non_nullable
 as bool?,canModifySubmittedValues: freezed == canModifySubmittedValues ? _self.canModifySubmittedValues : canModifySubmittedValues // ignore: cast_nullable_to_non_nullable
-as bool?,canQuit: freezed == canQuit ? _self.canQuit : canQuit // ignore: cast_nullable_to_non_nullable
+as bool?,showErrors: null == showErrors ? _self.showErrors : showErrors // ignore: cast_nullable_to_non_nullable
+as ShowErrors,canQuit: freezed == canQuit ? _self.canQuit : canQuit // ignore: cast_nullable_to_non_nullable
 as Future<bool?> Function(BuildContext context)?,
   ));
 }
@@ -1759,7 +1762,7 @@ $WoFormSubmitModeCopyWith<$Res> get submitMode {
 @JsonSerializable()
 
 class _WoFormUiSettings extends WoFormUiSettings {
-  const _WoFormUiSettings({this.titleText = '', this.titlePosition = WoFormTitlePosition.header, @JsonKey(includeToJson: false, includeFromJson: false) this.headerBuilder, @JsonKey(toJson: WoFormSubmitMode.staticToJson) this.submitMode = const WoFormSubmitMode.standard(), @JsonKey(includeToJson: false, includeFromJson: false) this.submitButtonBuilder, this.showAsteriskIfRequired, this.canModifySubmittedValues, @JsonKey(includeToJson: false, includeFromJson: false) this.canQuit}): super._();
+  const _WoFormUiSettings({this.titleText = '', this.titlePosition = WoFormTitlePosition.header, @JsonKey(includeToJson: false, includeFromJson: false) this.headerBuilder, @JsonKey(toJson: WoFormSubmitMode.staticToJson) this.submitMode = const WoFormSubmitMode.standard(), @JsonKey(includeToJson: false, includeFromJson: false) this.submitButtonBuilder, this.showAsteriskIfRequired, this.canModifySubmittedValues, this.showErrors = ShowErrors.progressively, @JsonKey(includeToJson: false, includeFromJson: false) this.canQuit}): super._();
   factory _WoFormUiSettings.fromJson(Map<String, dynamic> json) => _$WoFormUiSettingsFromJson(json);
 
 @override@JsonKey() final  String titleText;
@@ -1769,6 +1772,9 @@ class _WoFormUiSettings extends WoFormUiSettings {
 @override@JsonKey(includeToJson: false, includeFromJson: false) final  SubmitButtonBuilderDef? submitButtonBuilder;
 @override final  bool? showAsteriskIfRequired;
 @override final  bool? canModifySubmittedValues;
+/// By default, errors will only be shown after the user visited a node or
+/// tried to submit the form.
+@override@JsonKey() final  ShowErrors showErrors;
 @override@JsonKey(includeToJson: false, includeFromJson: false) final  Future<bool?> Function(BuildContext context)? canQuit;
 
 /// Create a copy of WoFormUiSettings
@@ -1784,16 +1790,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WoFormUiSettings&&(identical(other.titleText, titleText) || other.titleText == titleText)&&(identical(other.titlePosition, titlePosition) || other.titlePosition == titlePosition)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.submitMode, submitMode) || other.submitMode == submitMode)&&(identical(other.submitButtonBuilder, submitButtonBuilder) || other.submitButtonBuilder == submitButtonBuilder)&&(identical(other.showAsteriskIfRequired, showAsteriskIfRequired) || other.showAsteriskIfRequired == showAsteriskIfRequired)&&(identical(other.canModifySubmittedValues, canModifySubmittedValues) || other.canModifySubmittedValues == canModifySubmittedValues)&&(identical(other.canQuit, canQuit) || other.canQuit == canQuit));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WoFormUiSettings&&(identical(other.titleText, titleText) || other.titleText == titleText)&&(identical(other.titlePosition, titlePosition) || other.titlePosition == titlePosition)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.submitMode, submitMode) || other.submitMode == submitMode)&&(identical(other.submitButtonBuilder, submitButtonBuilder) || other.submitButtonBuilder == submitButtonBuilder)&&(identical(other.showAsteriskIfRequired, showAsteriskIfRequired) || other.showAsteriskIfRequired == showAsteriskIfRequired)&&(identical(other.canModifySubmittedValues, canModifySubmittedValues) || other.canModifySubmittedValues == canModifySubmittedValues)&&(identical(other.showErrors, showErrors) || other.showErrors == showErrors)&&(identical(other.canQuit, canQuit) || other.canQuit == canQuit));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,titleText,titlePosition,headerBuilder,submitMode,submitButtonBuilder,showAsteriskIfRequired,canModifySubmittedValues,canQuit);
+int get hashCode => Object.hash(runtimeType,titleText,titlePosition,headerBuilder,submitMode,submitButtonBuilder,showAsteriskIfRequired,canModifySubmittedValues,showErrors,canQuit);
 
 @override
 String toString() {
-  return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, submitButtonBuilder: $submitButtonBuilder, showAsteriskIfRequired: $showAsteriskIfRequired, canModifySubmittedValues: $canModifySubmittedValues, canQuit: $canQuit)';
+  return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, submitButtonBuilder: $submitButtonBuilder, showAsteriskIfRequired: $showAsteriskIfRequired, canModifySubmittedValues: $canModifySubmittedValues, showErrors: $showErrors, canQuit: $canQuit)';
 }
 
 
@@ -1804,7 +1810,7 @@ abstract mixin class _$WoFormUiSettingsCopyWith<$Res> implements $WoFormUiSettin
   factory _$WoFormUiSettingsCopyWith(_WoFormUiSettings value, $Res Function(_WoFormUiSettings) _then) = __$WoFormUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String titleText, WoFormTitlePosition titlePosition,@JsonKey(includeToJson: false, includeFromJson: false) HeaderBuilderDef? headerBuilder,@JsonKey(toJson: WoFormSubmitMode.staticToJson) WoFormSubmitMode submitMode,@JsonKey(includeToJson: false, includeFromJson: false) SubmitButtonBuilderDef? submitButtonBuilder, bool? showAsteriskIfRequired, bool? canModifySubmittedValues,@JsonKey(includeToJson: false, includeFromJson: false) Future<bool?> Function(BuildContext context)? canQuit
+ String titleText, WoFormTitlePosition titlePosition,@JsonKey(includeToJson: false, includeFromJson: false) HeaderBuilderDef? headerBuilder,@JsonKey(toJson: WoFormSubmitMode.staticToJson) WoFormSubmitMode submitMode,@JsonKey(includeToJson: false, includeFromJson: false) SubmitButtonBuilderDef? submitButtonBuilder, bool? showAsteriskIfRequired, bool? canModifySubmittedValues, ShowErrors showErrors,@JsonKey(includeToJson: false, includeFromJson: false) Future<bool?> Function(BuildContext context)? canQuit
 });
 
 
@@ -1821,7 +1827,7 @@ class __$WoFormUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of WoFormUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? titleText = null,Object? titlePosition = null,Object? headerBuilder = freezed,Object? submitMode = null,Object? submitButtonBuilder = freezed,Object? showAsteriskIfRequired = freezed,Object? canModifySubmittedValues = freezed,Object? canQuit = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? titleText = null,Object? titlePosition = null,Object? headerBuilder = freezed,Object? submitMode = null,Object? submitButtonBuilder = freezed,Object? showAsteriskIfRequired = freezed,Object? canModifySubmittedValues = freezed,Object? showErrors = null,Object? canQuit = freezed,}) {
   return _then(_WoFormUiSettings(
 titleText: null == titleText ? _self.titleText : titleText // ignore: cast_nullable_to_non_nullable
 as String,titlePosition: null == titlePosition ? _self.titlePosition : titlePosition // ignore: cast_nullable_to_non_nullable
@@ -1830,7 +1836,8 @@ as HeaderBuilderDef?,submitMode: null == submitMode ? _self.submitMode : submitM
 as WoFormSubmitMode,submitButtonBuilder: freezed == submitButtonBuilder ? _self.submitButtonBuilder : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
 as SubmitButtonBuilderDef?,showAsteriskIfRequired: freezed == showAsteriskIfRequired ? _self.showAsteriskIfRequired : showAsteriskIfRequired // ignore: cast_nullable_to_non_nullable
 as bool?,canModifySubmittedValues: freezed == canModifySubmittedValues ? _self.canModifySubmittedValues : canModifySubmittedValues // ignore: cast_nullable_to_non_nullable
-as bool?,canQuit: freezed == canQuit ? _self.canQuit : canQuit // ignore: cast_nullable_to_non_nullable
+as bool?,showErrors: null == showErrors ? _self.showErrors : showErrors // ignore: cast_nullable_to_non_nullable
+as ShowErrors,canQuit: freezed == canQuit ? _self.canQuit : canQuit // ignore: cast_nullable_to_non_nullable
 as Future<bool?> Function(BuildContext context)?,
   ));
 }
@@ -2027,6 +2034,8 @@ class PageByPageSubmitMode extends WoFormSubmitMode {
 
 @override final  String? submitText;
 @override@JsonKey(includeToJson: false, includeFromJson: false) final  IconData? submitIcon;
+/// Text for the submit button if it navigates to the next form page.
+/// Falls back to submitText if not provided.
  final  String? nextText;
 @override@JsonKey() final  DisableSubmitButton disableSubmitMode;
 @JsonKey() final  bool showProgressIndicator;

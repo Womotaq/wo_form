@@ -17,10 +17,12 @@ class WoFormStatusCubit extends Cubit<WoFormStatus> {
     String? firstInvalidInputPath,
   }) {
     if (!isClosed) {
-      emit(InProgressStatus(
-        errors: errors,
-        firstInvalidInputPath: firstInvalidInputPath,
-      ));
+      emit(
+        InProgressStatus(
+          errors: errors,
+          firstInvalidInputPath: firstInvalidInputPath,
+        ),
+      );
     }
   }
 
@@ -42,12 +44,12 @@ class WoFormStatusCubit extends Cubit<WoFormStatus> {
 class HydratedWoFormStatusCubit extends WoFormStatusCubit
     with HydratedMixin<WoFormStatus> {
   HydratedWoFormStatusCubit._(String hydratationId, super.initialState)
-      : assert(
-          hydratationId.isNotEmpty,
-          'hydratationId must not be an empty string',
-        ),
-        id = '$hydratationId-WoFormStatusCubit',
-        super._() {
+    : assert(
+        hydratationId.isNotEmpty,
+        'hydratationId must not be an empty string',
+      ),
+      id = '$hydratationId-WoFormStatusCubit',
+      super._() {
     hydrate();
   }
 
@@ -82,12 +84,12 @@ class WoFormLockCubit extends Cubit<Set<String>> {
 class HydratedWoFormLockCubit extends WoFormLockCubit
     with HydratedMixin<Set<String>> {
   HydratedWoFormLockCubit._(String hydratationId)
-      : assert(
-          hydratationId.isNotEmpty,
-          'hydratationId must not be an empty string',
-        ),
-        id = '$hydratationId-WoFormLockCubit',
-        super._() {
+    : assert(
+        hydratationId.isNotEmpty,
+        'hydratationId must not be an empty string',
+      ),
+      id = '$hydratationId-WoFormLockCubit',
+      super._() {
     hydrate();
   }
 
@@ -115,8 +117,8 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     required this.onStatusUpdate,
     required this.onSubmitting,
     Map<String, dynamic> initialValues = const {},
-  })  : _tempSubmitDatas = [],
-        super(_root.getInitialValues()..addAll(initialValues)) {
+  }) : _tempSubmitDatas = [],
+       super(_root.getInitialValues()..addAll(initialValues)) {
     _initialValues = Map.from(state);
   }
 
@@ -130,15 +132,15 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   /// Called each time a value changed, accordingly to [UpdateStatus].
   final Future<void> Function(RootNode root, WoFormValues values)?
-      onStatusUpdate;
+  onStatusUpdate;
   final List<(Future<void> Function() onSubmitting, String path)>
-      _tempSubmitDatas;
+  _tempSubmitDatas;
 
   /// Return true if the current state is equal to the initial state.
   bool get isPure => mapEquals(
-        _initialValues..remove(_visitedPathsKey),
-        state..remove(_visitedPathsKey),
-      );
+    _initialValues..remove(_visitedPathsKey),
+    state..remove(_visitedPathsKey),
+  );
 
   String get currentPath => _tempSubmitDatas.lastOrNull?.$2 ?? '';
 
@@ -160,17 +162,16 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   ///
   /// For exapmle, in a PageByPageSubmitMode, the errors are page-specific.
   Iterable<WoFormInputError> get currentErrors => currentNode.getErrors(
-        values: state,
-        parentPath: currentPath.parentPath,
-      );
+    values: state,
+    parentPath: currentPath.parentPath,
+  );
 
   // --
 
   void addTemporarySubmitData({
     required Future<void> Function() onSubmitting,
     required String path,
-  }) =>
-      _tempSubmitDatas.add((onSubmitting, path));
+  }) => _tempSubmitDatas.add((onSubmitting, path));
 
   void clearValues() => emit(_root.getInitialValues());
 
@@ -210,8 +211,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
       UpdateStatus.no => false,
       UpdateStatus.ifPathAlreadyVisited => atLeastOnePathWasVisited,
       UpdateStatus.ifPathAlreadyVisitedOrElseWithoutErrorUpdate ||
-      UpdateStatus.yes =>
-        true,
+      UpdateStatus.yes => true,
     };
 
     final newMap = Map<String, dynamic>.from(state);
@@ -256,8 +256,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     required String path,
     required dynamic value,
     UpdateStatus updateStatus = UpdateStatus.yes,
-  }) =>
-      onValuesChanged({path: value}, updateStatus: updateStatus);
+  }) => onValuesChanged({path: value}, updateStatus: updateStatus);
 
   // {
   //   // Can't edit a form while submitting it
@@ -314,23 +313,23 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   /// Update errors of visited paths
   void _updateErrors() => _statusCubit.setInProgress(
-        errors: _visitedPaths
-            .map(
-              (path) => _root
-                  .getChild(
-                    path: path,
-                    values: state,
-                  )
-                  ?.getErrors(
-                    values: state,
-                    parentPath: path.parentPath,
-                    recursive: false,
-                  ),
-            )
-            .nonNulls
-            .expand((list) => list)
-            .toList(),
-      );
+    errors: _visitedPaths
+        .map(
+          (path) => _root
+              .getChild(
+                path: path,
+                values: state,
+              )
+              ?.getErrors(
+                values: state,
+                parentPath: path.parentPath,
+                recursive: false,
+              ),
+        )
+        .nonNulls
+        .expand((list) => list)
+        .toList(),
+  );
 
   static const _visitedPathsKey = '/__wo_reserved_visited_paths';
   Iterable<String> get _visitedPaths =>
@@ -385,8 +384,10 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
           .whereNot((path) => path.isEmpty),
     );
 
-    final errors =
-        node.getErrors(values: state, parentPath: currentPath.parentPath);
+    final errors = node.getErrors(
+      values: state,
+      parentPath: currentPath.parentPath,
+    );
     if (errors.isNotEmpty) {
       final nodeToFocus = _focusNodes[errors.first.path];
       if (nodeToFocus != null) {
@@ -450,12 +451,12 @@ class HydratedWoFormValuesCubit extends WoFormValuesCubit
     required super.onStatusUpdate,
     required super.onSubmitting,
     super.initialValues = const {},
-  })  : assert(
-          hydratationId.isNotEmpty,
-          'hydratationId must not be an empty string',
-        ),
-        id = '$hydratationId-WoFormValuesCubit',
-        super._() {
+  }) : assert(
+         hydratationId.isNotEmpty,
+         'hydratationId must not be an empty string',
+       ),
+       id = '$hydratationId-WoFormValuesCubit',
+       super._() {
     hydrate();
   }
 
@@ -511,10 +512,11 @@ class HydratedWoFormValuesCubit extends WoFormValuesCubit
   }
 }
 
-typedef OnSubmitErrorDef = void Function(
-  BuildContext context,
-  SubmitErrorStatus errorStatus,
-);
+typedef OnSubmitErrorDef =
+    void Function(
+      BuildContext context,
+      SubmitErrorStatus errorStatus,
+    );
 
 /// Use this if you don't want to trigger error validations
 /// or if you want to keep the previous status.
@@ -524,19 +526,6 @@ enum UpdateStatus {
   ifPathAlreadyVisited,
   ifPathAlreadyVisitedOrElseWithoutErrorUpdate,
   yes,
-}
-
-// TODO : ShowErrors.afterSubmission
-enum ShowErrors {
-  /// Always show errors.
-  ///
-  /// TODO : change ?
-  /// Concretely, this marks all the paths as visited, right from the start.
-  always,
-
-  /// Only show errors of visited paths. Note that, after the user submits the
-  /// form, all paths become visited, revealing all the errors.
-  progressively,
 }
 
 class WoForm extends StatelessWidget {
@@ -549,17 +538,16 @@ class WoForm extends StatelessWidget {
     this.onSubmitting,
     this.onSubmitError,
     this.onSubmitSuccess,
-    this.showErrors = ShowErrors.progressively,
     this.pageBuilder,
     this.initialValues = const {},
     this.hydratationId = '',
     this.rootKey,
     super.key,
   }) : root = RootNode(
-          exportSettings: exportSettings ?? const ExportSettings(),
-          uiSettings: uiSettings ?? const WoFormUiSettings(),
-          children: children,
-        );
+         exportSettings: exportSettings ?? const ExportSettings(),
+         uiSettings: uiSettings ?? const WoFormUiSettings(),
+         children: children,
+       );
 
   const WoForm.root({
     required this.root,
@@ -568,7 +556,6 @@ class WoForm extends StatelessWidget {
     this.onSubmitting,
     this.onSubmitError,
     this.onSubmitSuccess,
-    this.showErrors = ShowErrors.progressively,
     this.pageBuilder,
     this.initialValues = const {},
     this.hydratationId = '',
@@ -580,15 +567,11 @@ class WoForm extends StatelessWidget {
 
   /// Called each time a value changed, accordingly to [UpdateStatus].
   final Future<void> Function(RootNode root, WoFormValues values)?
-      onStatusUpdate;
+  onStatusUpdate;
   final Future<bool> Function(BuildContext context)? canSubmit;
   final Future<void> Function(RootNode root, WoFormValues values)? onSubmitting;
   final OnSubmitErrorDef? onSubmitError;
   final void Function(BuildContext context)? onSubmitSuccess;
-
-  /// By default, errors will only be shown after the user visited a node or
-  /// tried to submit the form.
-  final ShowErrors showErrors;
   final WidgetBuilderDef? pageBuilder;
   final Map<String, dynamic> initialValues;
 
@@ -643,7 +626,7 @@ class WoForm extends StatelessWidget {
                         onSubmitting: onSubmitting,
                         initialValues: initialValues,
                       );
-                if (showErrors == ShowErrors.always) {
+                if (root.uiSettings.showErrors == ShowErrors.always) {
                   SchedulerBinding.instance.addPostFrameCallback((_) {
                     cubit
                       // Mark all paths as visited
@@ -681,10 +664,9 @@ class WoForm extends StatelessWidget {
   static void defaultOnSubmitError(
     BuildContext context,
     SubmitErrorStatus status,
-  ) =>
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('${status.error}')),
-      );
+  ) => ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(content: Text('${status.error}')),
+  );
 }
 
 class RootKey<T extends State<StatefulWidget>> extends GlobalKey<T> {
@@ -741,9 +723,9 @@ class _WoFormNodeFocusManagerState extends State<WoFormNodeFocusManager> {
         skipTraversal: true,
         onFocusChange: (value) {
           if (value == false) {
-            context
-                .read<WoFormValuesCubit>()
-                .markPathAsVisited(path: widget.path);
+            context.read<WoFormValuesCubit>().markPathAsVisited(
+              path: widget.path,
+            );
           }
         },
         child: widget.child,

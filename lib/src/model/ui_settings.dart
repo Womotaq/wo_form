@@ -8,9 +8,10 @@ part 'ui_settings.g.dart';
 
 enum BooleanFieldControlType { checkbox, switchButton }
 
-typedef BooleanFieldBuilderDef = Widget Function(
-  WoFieldData<BooleanInput, bool, BooleanInputUiSettings> data,
-);
+typedef BooleanFieldBuilderDef =
+    Widget Function(
+      WoFieldData<BooleanInput, bool, BooleanInputUiSettings> data,
+    );
 
 @freezed
 abstract class BooleanInputUiSettings with _$BooleanInputUiSettings {
@@ -44,27 +45,30 @@ abstract class BooleanInputUiSettings with _$BooleanInputUiSettings {
         );
 }
 
-typedef DateTimeFieldBuilderDef = Widget Function(
-  WoFieldData<DateTimeInput, DateTime, DateTimeInputUiSettings> data,
-);
+typedef DateTimeFieldBuilderDef =
+    Widget Function(
+      WoFieldData<DateTimeInput, DateTime, DateTimeInputUiSettings> data,
+    );
 
 enum DateEditMode { date, time, dateAndTime }
 
-typedef PickDateDef = Future<DateTime?> Function({
-  required BuildContext context,
-  DateTime? initialDate,
-  DateTime? maxDate,
-  DateTime? minDate,
-  DatePickerEntryMode? initialEntryMode,
-  DatePickerMode? initialDatePickerMode,
-  String? dateFormat,
-});
+typedef PickDateDef =
+    Future<DateTime?> Function({
+      required BuildContext context,
+      DateTime? initialDate,
+      DateTime? maxDate,
+      DateTime? minDate,
+      DatePickerEntryMode? initialEntryMode,
+      DatePickerMode? initialDatePickerMode,
+      String? dateFormat,
+    });
 
-typedef PickTimeDef = Future<TimeOfDay?> Function({
-  required BuildContext context,
-  required TimeOfDay initialTime,
-  TimePickerEntryMode? initialEntryMode,
-});
+typedef PickTimeDef =
+    Future<TimeOfDay?> Function({
+      required BuildContext context,
+      required TimeOfDay initialTime,
+      TimePickerEntryMode? initialEntryMode,
+    });
 
 @freezed
 abstract class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
@@ -126,16 +130,18 @@ abstract class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
         );
 }
 
-typedef DurationFieldBuilderDef = Widget Function(
-  WoFieldData<DurationInput, Duration, DurationInputUiSettings> data,
-);
+typedef DurationFieldBuilderDef =
+    Widget Function(
+      WoFieldData<DurationInput, Duration, DurationInputUiSettings> data,
+    );
 
-typedef PickDurationDef = Future<Duration?> Function({
-  required BuildContext context,
-  Duration? initialDuration,
-  Duration? maxDuration,
-  Duration? minDuration,
-});
+typedef PickDurationDef =
+    Future<Duration?> Function({
+      required BuildContext context,
+      Duration? initialDuration,
+      Duration? maxDuration,
+      Duration? minDuration,
+    });
 
 typedef FormatDurationDef = String Function(Duration duration);
 
@@ -207,11 +213,15 @@ abstract class DurationInputUiSettings with _$DurationInputUiSettings {
         );
 }
 
-typedef DynamicInputsNodeWidgetBuilderDef = Widget Function(
-  WoFieldData<DynamicInputsNode, List<WoFormNodeMixin>,
-          DynamicInputsNodeUiSettings>
+typedef DynamicInputsNodeWidgetBuilderDef =
+    Widget Function(
+      WoFieldData<
+        DynamicInputsNode,
+        List<WoFormNodeMixin>,
+        DynamicInputsNodeUiSettings
+      >
       data,
-);
+    );
 
 typedef GenerateIdDef = String Function();
 typedef OnDynamicInputDeletionDef = void Function(VoidCallback cancel);
@@ -239,20 +249,19 @@ abstract class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
 
   static Map<String, dynamic> staticToJson(
     DynamicInputsNodeUiSettings object,
-  ) =>
-      object.toJson();
+  ) => object.toJson();
 
   DynamicInputsNodeUiSettings merge(DynamicInputsNodeUiSettings? other) =>
       other == null
-          ? this
-          : DynamicInputsNodeUiSettings(
-              labelText: labelText ?? other.labelText,
-              helperText: helperText ?? other.helperText,
-              reorderable: reorderable ?? other.reorderable,
-              generateId: generateId ?? other.generateId,
-              onChildDeletion: onChildDeletion ?? other.onChildDeletion,
-              widgetBuilder: widgetBuilder ?? other.widgetBuilder,
-            );
+      ? this
+      : DynamicInputsNodeUiSettings(
+          labelText: labelText ?? other.labelText,
+          helperText: helperText ?? other.helperText,
+          reorderable: reorderable ?? other.reorderable,
+          generateId: generateId ?? other.generateId,
+          onChildDeletion: onChildDeletion ?? other.onChildDeletion,
+          widgetBuilder: widgetBuilder ?? other.widgetBuilder,
+        );
 }
 
 @freezed
@@ -269,8 +278,7 @@ abstract class DynamicInputUiSettings with _$DynamicInputUiSettings {
 
   static Map<String, dynamic> staticToJson(
     DynamicInputUiSettings object,
-  ) =>
-      object.toJson();
+  ) => object.toJson();
 
   DynamicInputUiSettings merge(DynamicInputUiSettings? other) => other == null
       ? this
@@ -285,9 +293,10 @@ enum ChildrenVisibility { always, whenAsked }
 // LATER : when submitting a field from an opened page, only submit this page,
 //  and let custom functions be launched at submitting, error, and success.
 
-typedef InputNodeWidgetBuilderDef = Widget Function(
-  WoFieldData<InputsNode, void, InputsNodeUiSettings> data,
-);
+typedef InputNodeWidgetBuilderDef =
+    Widget Function(
+      WoFieldData<InputsNode, void, InputsNodeUiSettings> data,
+    );
 
 typedef HeaderBuilderDef = Widget Function(WoFormHeaderData data);
 
@@ -333,9 +342,10 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
         );
 }
 
-typedef MediaFieldBuilderDef = Widget Function(
-  WoFieldData<MediaInput, List<Media>?, MediaInputUiSettings> data,
-);
+typedef MediaFieldBuilderDef =
+    Widget Function(
+      WoFieldData<MediaInput, List<Media>?, MediaInputUiSettings> data,
+    );
 
 @freezed
 abstract class MediaInputUiSettings with _$MediaInputUiSettings {
@@ -366,9 +376,10 @@ abstract class MediaInputUiSettings with _$MediaInputUiSettings {
         );
 }
 
-typedef NumFieldBuilderDef = Widget Function(
-  WoFieldData<NumInput, num, NumInputUiSettings> data,
-);
+typedef NumFieldBuilderDef =
+    Widget Function(
+      WoFieldData<NumInput, num, NumInputUiSettings> data,
+    );
 
 @freezed
 abstract class NumInputUiSettings with _$NumInputUiSettings {
@@ -398,9 +409,10 @@ abstract class NumInputUiSettings with _$NumInputUiSettings {
         );
 }
 
-typedef SelectFieldBuilderDef<T> = Widget Function(
-  WoFieldData<SelectInput<T>, List<T>, SelectInputUiSettings<T>> data,
-);
+typedef SelectFieldBuilderDef<T> =
+    Widget Function(
+      WoFieldData<SelectInput<T>, List<T>, SelectInputUiSettings<T>> data,
+    );
 
 typedef InputHeaderBuilderDef = Widget Function(WoFormInputHeaderData data);
 
@@ -449,27 +461,27 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
 
   SelectInputUiSettings<T> merge(SelectInputUiSettings<T>? other) =>
       other == null
-          ? this
-          : SelectInputUiSettings(
-              labelText: labelText ?? other.labelText,
-              helperText: helperText ?? other.helperText,
-              hintText: hintText ?? other.hintText,
-              childrenVisibility:
-                  childrenVisibility ?? other.childrenVisibility,
-              valueBuilder: valueBuilder ?? other.valueBuilder,
-              helpValueBuilder: helpValueBuilder ?? other.helpValueBuilder,
-              searcher: searcher ?? other.searcher,
-              widgetBuilder: widgetBuilder ?? other.widgetBuilder,
-              headerBuilder: headerBuilder ?? other.headerBuilder,
-              scoreBuilder: scoreBuilder ?? other.scoreBuilder,
-            );
+      ? this
+      : SelectInputUiSettings(
+          labelText: labelText ?? other.labelText,
+          helperText: helperText ?? other.helperText,
+          hintText: hintText ?? other.hintText,
+          childrenVisibility: childrenVisibility ?? other.childrenVisibility,
+          valueBuilder: valueBuilder ?? other.valueBuilder,
+          helpValueBuilder: helpValueBuilder ?? other.helpValueBuilder,
+          searcher: searcher ?? other.searcher,
+          widgetBuilder: widgetBuilder ?? other.widgetBuilder,
+          headerBuilder: headerBuilder ?? other.headerBuilder,
+          scoreBuilder: scoreBuilder ?? other.scoreBuilder,
+        );
 }
 
 enum StringFieldAction { clear, obscure }
 
-typedef StringFieldBuilderDef = Widget Function(
-  WoFieldData<StringInput, String, StringInputUiSettings> data,
-);
+typedef StringFieldBuilderDef =
+    Widget Function(
+      WoFieldData<StringInput, String, StringInputUiSettings> data,
+    );
 
 @freezed
 abstract class StringInputUiSettings with _$StringInputUiSettings {
@@ -507,23 +519,22 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     String? invalidRegexMessage,
     TextStyle? style,
     StringFieldBuilderDef? widgetBuilder,
-  }) =>
-      StringInputUiSettings(
-        labelText: labelText,
-        hintText: hintText,
-        helperText: helperText,
-        prefixIcon: prefixIcon,
-        submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
-        autofocus: autofocus,
-        textInputAction: textInputAction,
-        invalidRegexMessage: invalidRegexMessage,
-        style: style,
-        widgetBuilder: widgetBuilder,
-        keyboardType: TextInputType.emailAddress,
-        autocorrect: false,
-        autofillHints: const [AutofillHints.email],
-        maxLines: 1,
-      );
+  }) => StringInputUiSettings(
+    labelText: labelText,
+    hintText: hintText,
+    helperText: helperText,
+    prefixIcon: prefixIcon,
+    submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
+    autofocus: autofocus,
+    textInputAction: textInputAction,
+    invalidRegexMessage: invalidRegexMessage,
+    style: style,
+    widgetBuilder: widgetBuilder,
+    keyboardType: TextInputType.emailAddress,
+    autocorrect: false,
+    autofillHints: const [AutofillHints.email],
+    maxLines: 1,
+  );
 
   factory StringInputUiSettings.password({
     String? labelText,
@@ -535,27 +546,26 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     String? invalidRegexMessage,
     TextStyle? style,
     StringFieldBuilderDef? widgetBuilder,
-  }) =>
-      StringInputUiSettings(
-        labelText: labelText,
-        hintText: hintText,
-        helperText: helperText,
-        prefixIcon: prefixIcon,
-        submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
-        textInputAction: textInputAction,
-        invalidRegexMessage: invalidRegexMessage,
-        style: style,
-        widgetBuilder: widgetBuilder,
-        action: StringFieldAction.obscure,
-        keyboardType: TextInputType.visiblePassword,
-        obscureText: true,
-        autocorrect: false,
-        autofillHints: const [
-          AutofillHints.password,
-          AutofillHints.newPassword,
-        ],
-        maxLines: 1,
-      );
+  }) => StringInputUiSettings(
+    labelText: labelText,
+    hintText: hintText,
+    helperText: helperText,
+    prefixIcon: prefixIcon,
+    submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
+    textInputAction: textInputAction,
+    invalidRegexMessage: invalidRegexMessage,
+    style: style,
+    widgetBuilder: widgetBuilder,
+    action: StringFieldAction.obscure,
+    keyboardType: TextInputType.visiblePassword,
+    obscureText: true,
+    autocorrect: false,
+    autofillHints: const [
+      AutofillHints.password,
+      AutofillHints.newPassword,
+    ],
+    maxLines: 1,
+  );
 
   factory StringInputUiSettings.phone({
     String? labelText,
@@ -567,22 +577,21 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     TextInputAction? textInputAction,
     TextStyle? style,
     StringFieldBuilderDef? widgetBuilder,
-  }) =>
-      StringInputUiSettings(
-        labelText: labelText,
-        hintText: hintText,
-        helperText: helperText,
-        prefixIcon: prefixIcon,
-        submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
-        autofocus: autofocus,
-        textInputAction: textInputAction,
-        style: style,
-        widgetBuilder: widgetBuilder,
-        keyboardType: TextInputType.phone,
-        autocorrect: false,
-        autofillHints: const [AutofillHints.telephoneNumber],
-        maxLines: 1,
-      );
+  }) => StringInputUiSettings(
+    labelText: labelText,
+    hintText: hintText,
+    helperText: helperText,
+    prefixIcon: prefixIcon,
+    submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
+    autofocus: autofocus,
+    textInputAction: textInputAction,
+    style: style,
+    widgetBuilder: widgetBuilder,
+    keyboardType: TextInputType.phone,
+    autocorrect: false,
+    autofillHints: const [AutofillHints.telephoneNumber],
+    maxLines: 1,
+  );
 
   const StringInputUiSettings._();
 
@@ -633,6 +642,10 @@ abstract class WoFormUiSettings with _$WoFormUiSettings {
     SubmitButtonBuilderDef? submitButtonBuilder,
     bool? showAsteriskIfRequired,
     bool? canModifySubmittedValues,
+
+    /// By default, errors will only be shown after the user visited a node or
+    /// tried to submit the form.
+    @Default(ShowErrors.progressively) ShowErrors showErrors,
     @JsonKey(includeToJson: false, includeFromJson: false)
     Future<bool?> Function(BuildContext context)? canQuit,
   }) = _WoFormUiSettings;
@@ -652,6 +665,18 @@ enum DisableSubmitButton { never, whenInvalid, whenInitialOrSubmitSuccess }
 
 typedef ScaffoldBuilderDef = Widget Function(Widget body);
 
+// TODO : ShowErrors.afterSubmission
+enum ShowErrors {
+  /// Always show errors.
+  ///
+  /// Concretely, this marks all the paths as visited, right from the start.
+  always,
+
+  /// Only show errors of visited paths. Note that, after the user submits the
+  /// form, all paths become visited, revealing all the errors.
+  progressively,
+}
+
 @freezed
 sealed class WoFormSubmitMode with _$WoFormSubmitMode {
   const factory WoFormSubmitMode.standard({
@@ -666,6 +691,9 @@ sealed class WoFormSubmitMode with _$WoFormSubmitMode {
   const factory WoFormSubmitMode.pageByPage({
     String? submitText,
     @JsonKey(includeToJson: false, includeFromJson: false) IconData? submitIcon,
+
+    /// Text for the submit button if it navigates to the next form page.
+    /// Falls back to submitText if not provided.
     String? nextText,
     @Default(DisableSubmitButton.never) DisableSubmitButton disableSubmitMode,
     @Default(true) bool showProgressIndicator,
@@ -682,7 +710,7 @@ sealed class WoFormSubmitMode with _$WoFormSubmitMode {
   // --
 
   SubmitButtonPosition get buttonPosition => switch (this) {
-        StandardSubmitMode(buttonPosition: final p) => p,
-        PageByPageSubmitMode() => SubmitButtonPosition.bottomBar,
-      };
+    StandardSubmitMode(buttonPosition: final p) => p,
+    PageByPageSubmitMode() => SubmitButtonPosition.bottomBar,
+  };
 }
