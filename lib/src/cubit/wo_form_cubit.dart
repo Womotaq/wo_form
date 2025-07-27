@@ -533,19 +533,20 @@ class WoForm extends StatelessWidget {
     required List<WoFormNodeMixin> children,
     ExportSettings? exportSettings,
     WoFormUiSettings? uiSettings,
+    WoFormValues? initialValues,
     this.onStatusUpdate,
     this.canSubmit,
     this.onSubmitting,
     this.onSubmitError,
     this.onSubmitSuccess,
     this.pageBuilder,
-    this.initialValues = const {},
     this.hydratationId = '',
     this.rootKey,
     super.key,
   }) : root = RootNode(
          exportSettings: exportSettings ?? const ExportSettings(),
          uiSettings: uiSettings ?? const WoFormUiSettings(),
+         initialValues: initialValues ?? const {},
          children: children,
        );
 
@@ -557,7 +558,6 @@ class WoForm extends StatelessWidget {
     this.onSubmitError,
     this.onSubmitSuccess,
     this.pageBuilder,
-    this.initialValues = const {},
     this.hydratationId = '',
     this.rootKey,
     super.key,
@@ -573,7 +573,6 @@ class WoForm extends StatelessWidget {
   final OnSubmitErrorDef? onSubmitError;
   final void Function(BuildContext context)? onSubmitSuccess;
   final WidgetBuilderDef? pageBuilder;
-  final Map<String, dynamic> initialValues;
 
   /// If not empty, this form will be locally persistent, using HydratedCubit.
   /// LATER : issue, how to modify an in-production corrupted data ?
@@ -614,7 +613,7 @@ class WoForm extends StatelessWidget {
                         canSubmit ?? (_) async => true,
                         onStatusUpdate: onStatusUpdate,
                         onSubmitting: onSubmitting,
-                        initialValues: initialValues,
+                        initialValues: root.initialValues,
                       )
                     : HydratedWoFormValuesCubit._(
                         hydratationId,
@@ -624,7 +623,7 @@ class WoForm extends StatelessWidget {
                         canSubmit ?? (_) async => true,
                         onStatusUpdate: onStatusUpdate,
                         onSubmitting: onSubmitting,
-                        initialValues: initialValues,
+                        initialValues: root.initialValues,
                       );
                 if (root.uiSettings.showErrors == ShowErrors.always) {
                   SchedulerBinding.instance.addPostFrameCallback((_) {

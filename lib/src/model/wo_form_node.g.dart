@@ -191,6 +191,7 @@ Map<String, dynamic> _$WidgetNodeToJson(WidgetNode instance) =>
 
 _RootNode _$RootNodeFromJson(Map<String, dynamic> json) => _RootNode(
   id: json['id'] as String? ?? '#',
+  initialValues: json['initialValues'] as Map<String, dynamic>? ?? const {},
   children: json['children'] == null
       ? const []
       : const InputsListConverter().fromJson(json['children'] as List),
@@ -204,6 +205,7 @@ _RootNode _$RootNodeFromJson(Map<String, dynamic> json) => _RootNode(
 
 Map<String, dynamic> _$RootNodeToJson(_RootNode instance) => <String, dynamic>{
   'id': instance.id,
+  'initialValues': instance.initialValues,
   'children': const InputsListConverter().toJson(instance.children),
   'uiSettings': WoFormUiSettings.staticToJson(instance.uiSettings),
   'exportSettings': ExportSettings.staticToJson(instance.exportSettings),

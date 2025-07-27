@@ -1135,7 +1135,7 @@ as bool,
 /// @nodoc
 mixin _$RootNode {
 
- String get id;@InputsListConverter() List<WoFormNodeMixin> get children;@JsonKey(toJson: WoFormUiSettings.staticToJson) WoFormUiSettings get uiSettings;@JsonKey(toJson: ExportSettings.staticToJson) ExportSettings get exportSettings;
+ String get id; WoFormValues get initialValues;@InputsListConverter() List<WoFormNodeMixin> get children;@JsonKey(toJson: WoFormUiSettings.staticToJson) WoFormUiSettings get uiSettings;@JsonKey(toJson: ExportSettings.staticToJson) ExportSettings get exportSettings;
 /// Create a copy of RootNode
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1148,16 +1148,16 @@ $RootNodeCopyWith<RootNode> get copyWith => _$RootNodeCopyWithImpl<RootNode>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RootNode&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.children, children)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings)&&(identical(other.exportSettings, exportSettings) || other.exportSettings == exportSettings));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RootNode&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.initialValues, initialValues)&&const DeepCollectionEquality().equals(other.children, children)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings)&&(identical(other.exportSettings, exportSettings) || other.exportSettings == exportSettings));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(children),uiSettings,exportSettings);
+int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(initialValues),const DeepCollectionEquality().hash(children),uiSettings,exportSettings);
 
 @override
 String toString() {
-  return 'RootNode(id: $id, children: $children, uiSettings: $uiSettings, exportSettings: $exportSettings)';
+  return 'RootNode(id: $id, initialValues: $initialValues, children: $children, uiSettings: $uiSettings, exportSettings: $exportSettings)';
 }
 
 
@@ -1168,7 +1168,7 @@ abstract mixin class $RootNodeCopyWith<$Res>  {
   factory $RootNodeCopyWith(RootNode value, $Res Function(RootNode) _then) = _$RootNodeCopyWithImpl;
 @useResult
 $Res call({
- String id,@InputsListConverter() List<WoFormNodeMixin> children,@JsonKey(toJson: WoFormUiSettings.staticToJson) WoFormUiSettings uiSettings,@JsonKey(toJson: ExportSettings.staticToJson) ExportSettings exportSettings
+ String id, WoFormValues initialValues,@InputsListConverter() List<WoFormNodeMixin> children,@JsonKey(toJson: WoFormUiSettings.staticToJson) WoFormUiSettings uiSettings,@JsonKey(toJson: ExportSettings.staticToJson) ExportSettings exportSettings
 });
 
 
@@ -1185,10 +1185,11 @@ class _$RootNodeCopyWithImpl<$Res>
 
 /// Create a copy of RootNode
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? children = null,Object? uiSettings = null,Object? exportSettings = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? initialValues = null,Object? children = null,Object? uiSettings = null,Object? exportSettings = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,children: null == children ? _self.children : children // ignore: cast_nullable_to_non_nullable
+as String,initialValues: null == initialValues ? _self.initialValues : initialValues // ignore: cast_nullable_to_non_nullable
+as WoFormValues,children: null == children ? _self.children : children // ignore: cast_nullable_to_non_nullable
 as List<WoFormNodeMixin>,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
 as WoFormUiSettings,exportSettings: null == exportSettings ? _self.exportSettings : exportSettings // ignore: cast_nullable_to_non_nullable
 as ExportSettings,
@@ -1221,10 +1222,17 @@ $ExportSettingsCopyWith<$Res> get exportSettings {
 @JsonSerializable()
 
 class _RootNode extends RootNode {
-  const _RootNode({this.id = '#', @InputsListConverter() final  List<WoFormNodeMixin> children = const [], @JsonKey(toJson: WoFormUiSettings.staticToJson) this.uiSettings = const WoFormUiSettings(), @JsonKey(toJson: ExportSettings.staticToJson) this.exportSettings = const ExportSettings()}): _children = children,super._();
+  const _RootNode({this.id = '#', final  WoFormValues initialValues = const {}, @InputsListConverter() final  List<WoFormNodeMixin> children = const [], @JsonKey(toJson: WoFormUiSettings.staticToJson) this.uiSettings = const WoFormUiSettings(), @JsonKey(toJson: ExportSettings.staticToJson) this.exportSettings = const ExportSettings()}): _initialValues = initialValues,_children = children,super._();
   factory _RootNode.fromJson(Map<String, dynamic> json) => _$RootNodeFromJson(json);
 
 @override@JsonKey() final  String id;
+ final  WoFormValues _initialValues;
+@override@JsonKey() WoFormValues get initialValues {
+  if (_initialValues is EqualUnmodifiableMapView) return _initialValues;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(_initialValues);
+}
+
  final  List<WoFormNodeMixin> _children;
 @override@JsonKey()@InputsListConverter() List<WoFormNodeMixin> get children {
   if (_children is EqualUnmodifiableListView) return _children;
@@ -1248,16 +1256,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RootNode&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other._children, _children)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings)&&(identical(other.exportSettings, exportSettings) || other.exportSettings == exportSettings));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RootNode&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other._initialValues, _initialValues)&&const DeepCollectionEquality().equals(other._children, _children)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings)&&(identical(other.exportSettings, exportSettings) || other.exportSettings == exportSettings));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_children),uiSettings,exportSettings);
+int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_initialValues),const DeepCollectionEquality().hash(_children),uiSettings,exportSettings);
 
 @override
 String toString() {
-  return 'RootNode(id: $id, children: $children, uiSettings: $uiSettings, exportSettings: $exportSettings)';
+  return 'RootNode(id: $id, initialValues: $initialValues, children: $children, uiSettings: $uiSettings, exportSettings: $exportSettings)';
 }
 
 
@@ -1268,7 +1276,7 @@ abstract mixin class _$RootNodeCopyWith<$Res> implements $RootNodeCopyWith<$Res>
   factory _$RootNodeCopyWith(_RootNode value, $Res Function(_RootNode) _then) = __$RootNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id,@InputsListConverter() List<WoFormNodeMixin> children,@JsonKey(toJson: WoFormUiSettings.staticToJson) WoFormUiSettings uiSettings,@JsonKey(toJson: ExportSettings.staticToJson) ExportSettings exportSettings
+ String id, WoFormValues initialValues,@InputsListConverter() List<WoFormNodeMixin> children,@JsonKey(toJson: WoFormUiSettings.staticToJson) WoFormUiSettings uiSettings,@JsonKey(toJson: ExportSettings.staticToJson) ExportSettings exportSettings
 });
 
 
@@ -1285,10 +1293,11 @@ class __$RootNodeCopyWithImpl<$Res>
 
 /// Create a copy of RootNode
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? children = null,Object? uiSettings = null,Object? exportSettings = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? initialValues = null,Object? children = null,Object? uiSettings = null,Object? exportSettings = null,}) {
   return _then(_RootNode(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,children: null == children ? _self._children : children // ignore: cast_nullable_to_non_nullable
+as String,initialValues: null == initialValues ? _self._initialValues : initialValues // ignore: cast_nullable_to_non_nullable
+as WoFormValues,children: null == children ? _self._children : children // ignore: cast_nullable_to_non_nullable
 as List<WoFormNodeMixin>,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
 as WoFormUiSettings,exportSettings: null == exportSettings ? _self.exportSettings : exportSettings // ignore: cast_nullable_to_non_nullable
 as ExportSettings,
