@@ -28,7 +28,8 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
   Widget build(BuildContext context) {
     final headerData = WoFormInputHeaderData(
       path: widget.data.path,
-      labelText: widget.data.uiSettings.labelTextWhenChildrenHidden ??
+      labelText:
+          widget.data.uiSettings.labelTextWhenChildrenHidden ??
           widget.data.uiSettings.labelText,
       helperText: widget.data.uiSettings.helperText,
       errorText: widget.data.errorText,
@@ -75,16 +76,16 @@ class _InputsNodePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<WoFormValuesCubit>().addTemporarySubmitData(
-          onSubmitting: () async => Navigator.pop(context),
-          path: data.path,
-        );
+      onSubmitting: () async => Navigator.pop(context),
+      path: data.path,
+    );
 
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
         if (didPop) {
-          context
-              .read<WoFormValuesCubit>()
-              .removeTemporarySubmitData(path: data.path);
+          context.read<WoFormValuesCubit>().removeTemporarySubmitData(
+            path: data.path,
+          );
         }
       },
       child: Scaffold(
@@ -104,10 +105,11 @@ class _InputsNodePage extends StatelessWidget {
                   value: null,
                   errorText: null,
                   uiSettings: data.uiSettings,
-                  onValueChanged: (
-                    _, {
-                    UpdateStatus updateStatus = UpdateStatus.yes,
-                  }) {},
+                  onValueChanged:
+                      (
+                        _, {
+                        UpdateStatus updateStatus = UpdateStatus.yes,
+                      }) {},
                 );
 
                 return (data.uiSettings.widgetBuilder ??

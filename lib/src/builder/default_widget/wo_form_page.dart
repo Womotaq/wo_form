@@ -152,6 +152,7 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
         curve: Curves.easeIn,
       ),
       path: '/${widget.root.children[0].id}',
+      type: SubmitType.step,
     );
 
     pageController.addListener(
@@ -168,6 +169,7 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
               curve: Curves.easeIn,
             ),
             path: '/${widget.root.children[newPageIndex.toInt()].id}',
+            type: SubmitType.step,
           );
         }
       },
@@ -185,8 +187,6 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
   @override
   Widget build(BuildContext context) {
     final uiSettings = context.read<RootNode>().uiSettings;
-    // final pageController = context.read<WoFormValuesCubit>().pageController;
-    // final pageController = PageController();
 
     return Scaffold(
       appBar: AppBar(

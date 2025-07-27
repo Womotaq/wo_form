@@ -39,7 +39,7 @@ abstract class WoFieldData<I, T, U> with _$WoFieldData<I, T, U> {
 
     /// Null means locked field
     required void Function(T? value, {UpdateStatus updateStatus})?
-        onValueChanged,
+    onValueChanged,
   }) = _WoFieldData;
 }
 
@@ -49,7 +49,7 @@ abstract class SubmitButtonData with _$SubmitButtonData {
     required String? text,
     required VoidCallback? onPressed,
     required SubmitButtonPosition position,
-    required int pageIndex,
+    required int pageIndex, // TODO : remove
     IconData? icon,
   }) = _SubmitButtonData;
 }

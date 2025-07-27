@@ -108,6 +108,30 @@ class HydratedWoFormLockCubit extends WoFormLockCubit
   Map<String, dynamic>? toJson(Set<String> state) => {'locks': state.toList()};
 }
 
+enum SubmitType {
+  /// Submission will check for errors in a portion of this form. The portion is
+  /// likely in a different context than the form (a secondary page or a modal).
+  /// If no error is detected, the context will probably be popped, going back
+  /// to the form's main page.
+  partial,
+
+  /// Submission will check for errors in a portion of this form.
+  /// If no error is detected, a new part of the form is likely to be focused.
+  /// While the form is in this state, the submit button will display
+  /// [PageByPageSubmitMode.nextText].
+  step,
+
+  /// Submission will check for errors in the whole form.
+  /// If no error is detected, [WoForm.onSubmitting] will be called.
+  complete,
+}
+
+typedef _TempSubmitData = ({
+  Future<void> Function() onSubmitting,
+  String path,
+  SubmitType type,
+});
+
 class WoFormValuesCubit extends Cubit<WoFormValues> {
   WoFormValuesCubit._(
     this._root,
@@ -133,8 +157,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   /// Called each time a value changed, accordingly to [UpdateStatus].
   final Future<void> Function(RootNode root, WoFormValues values)?
   onStatusUpdate;
-  final List<(Future<void> Function() onSubmitting, String path)>
-  _tempSubmitDatas;
+  final List<_TempSubmitData> _tempSubmitDatas;
 
   /// Return true if the current state is equal to the initial state.
   bool get isPure => mapEquals(
@@ -142,7 +165,10 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     state..remove(_visitedPathsKey),
   );
 
-  String get currentPath => _tempSubmitDatas.lastOrNull?.$2 ?? '';
+  String get currentPath => _tempSubmitDatas.lastOrNull?.path ?? '';
+
+  SubmitType get currentSubmitType =>
+      _tempSubmitDatas.lastOrNull?.type ?? SubmitType.complete;
 
   WoFormNodeMixin get currentNode {
     final tempSubmitData = _tempSubmitDatas.lastOrNull;
@@ -150,11 +176,11 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
     try {
       return _root.getChild(
-        path: tempSubmitData.$2,
+        path: tempSubmitData.path,
         values: state,
       )!;
     } catch (_) {
-      throw Exception('No node found at path ${tempSubmitData.$2}');
+      throw Exception('No node found at path ${tempSubmitData.path}');
     }
   }
 
@@ -171,7 +197,20 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   void addTemporarySubmitData({
     required Future<void> Function() onSubmitting,
     required String path,
-  }) => _tempSubmitDatas.add((onSubmitting, path));
+    SubmitType type = SubmitType.partial,
+  }) {
+    if (type == SubmitType.complete) {
+      throw ArgumentError(
+        'SubmitType.complete cannot be the type of a TemporarySubmitData',
+      );
+    }
+
+    _tempSubmitDatas.add((
+      onSubmitting: onSubmitting,
+      path: path,
+      type: type,
+    ));
+  }
 
   void clearValues() => emit(_root.getInitialValues());
 
@@ -258,59 +297,6 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     UpdateStatus updateStatus = UpdateStatus.yes,
   }) => onValuesChanged({path: value}, updateStatus: updateStatus);
 
-  // {
-  //   // Can't edit a form while submitting it
-  //   if (_statusCubit.state is SubmittingStatus) return;
-
-  //   path = state.getKey(path);
-
-  //   if (_lockCubit.inputIsLocked(path: path)) return;
-
-  //   final wasVisited = _visitedPaths.contains(path);
-
-  //   final shouldUpdateStatus = switch (updateStatus) {
-  //     UpdateStatus.no => false,
-  //     UpdateStatus.ifPathAlreadyVisited => wasVisited,
-  //     UpdateStatus.ifPathAlreadyVisitedOrElseWithoutErrorUpdate ||
-  //     UpdateStatus.yes =>
-  //       true,
-  //   };
-
-  //   final newMap = Map<String, dynamic>.from(state);
-  //   newMap[path] = value;
-
-  //   // If the status isn't updated and we are still at initial state, then the
-  //   // initial state should be updated to match the current state.
-  //   // This allows a FutureNode to update its value without changing isPure.
-  //   if (!shouldUpdateStatus && isPure) {
-  //     _initialValues = Map.from(newMap);
-  //   }
-
-  //   emit(newMap);
-
-  //   if (shouldUpdateStatus) {
-  //     final shouldUpdateErrors = switch (updateStatus) {
-  //       UpdateStatus.no => false,
-  //       UpdateStatus.ifPathAlreadyVisited ||
-  //       UpdateStatus.ifPathAlreadyVisitedOrElseWithoutErrorUpdate =>
-  //         wasVisited,
-  //       UpdateStatus.yes => true,
-  //     };
-
-  //     if (shouldUpdateErrors) {
-  //       if (!wasVisited) {
-  //         markPathAsVisited(path: path);
-  //       } else {
-  //         _updateErrors();
-  //       }
-  //     } else {
-  //       _statusCubit.setInProgress();
-  //     }
-
-  //     onStatusUpdate?.call(_root, state);
-  //   }
-  // }
-
   /// Update errors of visited paths
   void _updateErrors() => _statusCubit.setInProgress(
     errors: _visitedPaths
@@ -367,7 +353,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   }
 
   void removeTemporarySubmitData({required String path}) =>
-      _tempSubmitDatas.removeWhere((data) => data.$2 == path);
+      _tempSubmitDatas.removeWhere((data) => data.path == path);
 
   Future<void> submit(BuildContext context) async {
     FocusScope.of(context).unfocus();
@@ -416,7 +402,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     try {
       final tempSubmitData = _tempSubmitDatas.lastOrNull;
       if (tempSubmitData != null) {
-        await tempSubmitData.$1();
+        await tempSubmitData.onSubmitting();
         _statusCubit.setInProgress();
       } else {
         if (await _canSubmit(context)) {

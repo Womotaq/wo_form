@@ -12,28 +12,33 @@ class SubmitButtonBuilder extends StatelessWidget {
     final root = context.read<RootNode>();
 
     final disabled = switch (root.uiSettings.submitMode.disableSubmitMode) {
-      DisableSubmitButton.whenInitialOrSubmitSuccess => switch (
-            context.watch<WoFormStatusCubit>().state) {
-          InitialStatus() || SubmitSuccessStatus() => true,
-          _ => false,
-        },
+      DisableSubmitButton.whenInitialOrSubmitSuccess => switch (context
+          .watch<WoFormStatusCubit>()
+          .state) {
+        InitialStatus() || SubmitSuccessStatus() => true,
+        _ => false,
+      },
       DisableSubmitButton.whenInvalid => context.select(
-          (WoFormValuesCubit c) => c.currentErrors.isNotEmpty,
-        ),
+        (WoFormValuesCubit c) => c.currentErrors.isNotEmpty,
+      ),
       DisableSubmitButton.never => false,
     };
 
     final submitMode = root.uiSettings.submitMode;
 
+    final textIsNext =
+        submitMode is PageByPageSubmitMode &&
+        context.read<WoFormValuesCubit>().currentSubmitType == SubmitType.step;
+
     final submitButtonData = SubmitButtonData(
       pageIndex: pageIndex,
-      text: submitMode.submitText ?? context.read<WoFormL10n?>()?.submit(),
-      icon: submitMode.submitIcon,
+      text: textIsNext
+          ? submitMode.nextText ?? context.read<WoFormL10n?>()?.next()
+          : submitMode.submitText ?? context.read<WoFormL10n?>()?.submit(),
+      icon: textIsNext ? null : submitMode.submitIcon,
       onPressed: disabled
           ? null
-          : () {
-              context.read<WoFormValuesCubit>().submit(context);
-            },
+          : () => context.read<WoFormValuesCubit>().submit(context),
       position: submitMode.buttonPosition,
     );
 
