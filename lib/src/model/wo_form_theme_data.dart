@@ -27,6 +27,8 @@ abstract class WoFormThemeData with _$WoFormThemeData {
     @notSerializable InputNodeWidgetBuilderDef? inputsNodeExpanderBuilder,
     @notSerializable InputNodeWidgetBuilderDef? inputsNodeWidgetBuilder,
     @notSerializable MediaFieldBuilderDef? mediaFieldBuilder,
+    @notSerializable
+    MultiStepProgressIndicatorBuilderDef? multiStepProgressIndicatorBuilder,
     @notSerializable NumFieldBuilderDef? numFieldBuilder,
     @notSerializable PickDateDef? pickDate,
     @notSerializable PickDurationDef? pickDuration,

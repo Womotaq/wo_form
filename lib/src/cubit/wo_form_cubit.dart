@@ -161,7 +161,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   /// The list of validation errors in the current context.
   ///
-  /// For exapmle, in a PageByPageSubmitMode, the errors are page-specific.
+  /// For exapmle, in a MultiStepSubmitMode, the errors are page-specific.
   Iterable<WoFormInputError> get currentErrors => currentNode.getErrors(
     values: state,
     parentPath: currentPath.parentPath,

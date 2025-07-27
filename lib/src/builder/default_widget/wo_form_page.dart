@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/src/_export.dart';
@@ -13,8 +11,8 @@ class WoFormPage extends StatelessWidget {
     final root = context.read<RootNode>();
 
     final submitMode = root.uiSettings.submitMode;
-    return submitMode is PageByPageSubmitMode
-        ? WoFormPageByPage(submitMode: submitMode)
+    return submitMode is MultiStepSubmitMode
+        ? WoFormMultiStepPage(submitMode: submitMode)
         : WoFormStandardPage(root: root);
   }
 }
@@ -118,16 +116,19 @@ class _StandardScaffold extends StatelessWidget {
   }
 }
 
-class WoFormPageByPage extends StatefulWidget {
-  const WoFormPageByPage({required this.submitMode, super.key});
+class WoFormMultiStepPage extends StatefulWidget {
+  const WoFormMultiStepPage({required this.submitMode, super.key});
 
-  final PageByPageSubmitMode submitMode;
+  final MultiStepSubmitMode submitMode;
+
+  // ignore: constant_identifier_names
+  static const Duration TRANSITION_DURATION = Durations.short4;
 
   @override
-  State<WoFormPageByPage> createState() => WoFormPageByPageState();
+  State<WoFormMultiStepPage> createState() => WoFormMultiStepPageState();
 }
 
-class WoFormPageByPageState extends State<WoFormPageByPage> {
+class WoFormMultiStepPageState extends State<WoFormMultiStepPage> {
   late PageController pageController;
   double pageIndex = 0;
 
@@ -138,7 +139,7 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
 
     context.read<WoFormValuesCubit>().addTemporarySubmitData(
       onSubmitting: () => pageController.nextPage(
-        duration: const Duration(milliseconds: 300),
+        duration: WoFormMultiStepPage.TRANSITION_DURATION,
         curve: Curves.easeIn,
       ),
       path: '/${root.children[0].id}',
@@ -154,7 +155,7 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
         } else {
           context.read<WoFormValuesCubit>().addTemporarySubmitData(
             onSubmitting: () => pageController.nextPage(
-              duration: const Duration(milliseconds: 300),
+              duration: WoFormMultiStepPage.TRANSITION_DURATION,
               curve: Curves.easeIn,
             ),
             path: '/${root.children[newPageIndex.toInt()].id}',
@@ -184,7 +185,7 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
             if (pageController.page != null && pageController.page! > 0) {
               FocusScope.of(context).unfocus();
               await pageController.previousPage(
-                duration: const Duration(milliseconds: 300),
+                duration: WoFormMultiStepPage.TRANSITION_DURATION,
                 curve: Curves.easeIn,
               );
               return false;
@@ -196,62 +197,60 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
         title: Text(root.uiSettings.titleText),
       ),
       body: SafeArea(
-        child: Stack(
+        child: Column(
           children: [
-            // TODO : new way
-            PageView.builder(
-              controller: pageController,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: root.children.length,
-              itemBuilder: (context, index) => ConstrainedListView(
-                maxWidth:
-                    woFormTheme?.maxWidth ?? WoFormThemeData.DEFAULT_MAX_WIDTH,
-                children: [
-                  const SizedBox(height: 16),
-                  root.children[index].toWidget(parentPath: ''),
-                  const SizedBox(height: 32),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        SubmitButtonBuilder(
-                          submitButtonBuilder: index == root.children.length - 1
-                              ? null
-                              : (data) =>
-                                    (root.uiSettings.submitButtonBuilder ??
-                                    woFormTheme?.submitButtonBuilder ??
-                                    SubmitButton.new)(
-                                      data.copyWith(
-                                        text:
-                                            widget.submitMode.nextText ??
-                                            context.read<WoFormL10n?>()?.next(),
-                                        icon: null,
-                                        path: '/${root.children[index].id}',
+            if (widget.submitMode.showProgressIndicator)
+              (widget.submitMode.progressIndicatorBuilder ??
+                  woFormTheme?.multiStepProgressIndicatorBuilder ??
+                  MultiStepProgressIndicator.new)(
+                index: pageIndex.toInt(),
+                maxIndex: root.children.length - 1,
+              ),
+            Expanded(
+              child: PageView.builder(
+                controller: pageController,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: root.children.length,
+                itemBuilder: (context, index) => ConstrainedListView(
+                  maxWidth:
+                      woFormTheme?.maxWidth ??
+                      WoFormThemeData.DEFAULT_MAX_WIDTH,
+                  children: [
+                    const SizedBox(height: 16),
+                    root.children[index].toWidget(parentPath: ''),
+                    const SizedBox(height: 32),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          SubmitButtonBuilder(
+                            submitButtonBuilder:
+                                index == root.children.length - 1
+                                ? null
+                                : (data) =>
+                                      (root.uiSettings.submitButtonBuilder ??
+                                      woFormTheme?.submitButtonBuilder ??
+                                      SubmitButton.new)(
+                                        data.copyWith(
+                                          text:
+                                              widget.submitMode.nextText ??
+                                              context
+                                                  .read<WoFormL10n?>()
+                                                  ?.next(),
+                                          icon: null,
+                                          path: '/${root.children[index].id}',
+                                        ),
                                       ),
-                                    ),
-                        ),
-                      ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 16),
-                ],
+                    const SizedBox(height: 16),
+                  ],
+                ),
               ),
             ),
-            if (widget.submitMode.showProgressIndicator)
-              TweenAnimationBuilder<double>(
-                duration: const Duration(milliseconds: 250),
-                curve: Curves.easeInOut,
-                tween: Tween<double>(
-                  begin: 1,
-                  end: pageIndex + 1,
-                ),
-                builder: (context, value, _) {
-                  return LinearProgressIndicator(
-                    value: value / max(1, root.children.length),
-                  );
-                },
-              ),
           ],
         ),
       ),

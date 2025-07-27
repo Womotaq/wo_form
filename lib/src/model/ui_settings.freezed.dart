@@ -1896,8 +1896,8 @@ WoFormSubmitMode _$WoFormSubmitModeFromJson(
           return StandardSubmitMode.fromJson(
             json
           );
-                case 'pageByPage':
-          return PageByPageSubmitMode.fromJson(
+                case 'multiStep':
+          return MultiStepSubmitMode.fromJson(
             json
           );
         
@@ -2062,9 +2062,9 @@ as ScaffoldBuilderDef?,
 /// @nodoc
 @JsonSerializable()
 
-class PageByPageSubmitMode extends WoFormSubmitMode {
-  const PageByPageSubmitMode({this.submitText, @notSerializable this.submitIcon, this.nextText, this.disableSubmitMode = DisableSubmitButton.never, this.showProgressIndicator = true, final  String? $type}): $type = $type ?? 'pageByPage',super._();
-  factory PageByPageSubmitMode.fromJson(Map<String, dynamic> json) => _$PageByPageSubmitModeFromJson(json);
+class MultiStepSubmitMode extends WoFormSubmitMode {
+  const MultiStepSubmitMode({this.submitText, @notSerializable this.submitIcon, this.nextText, this.disableSubmitMode = DisableSubmitButton.never, this.showProgressIndicator = true, @notSerializable this.progressIndicatorBuilder, final  String? $type}): $type = $type ?? 'multiStep',super._();
+  factory MultiStepSubmitMode.fromJson(Map<String, dynamic> json) => _$MultiStepSubmitModeFromJson(json);
 
 @override final  String? submitText;
 @override@notSerializable final  IconData? submitIcon;
@@ -2073,6 +2073,7 @@ class PageByPageSubmitMode extends WoFormSubmitMode {
  final  String? nextText;
 @override@JsonKey() final  DisableSubmitButton disableSubmitMode;
 @JsonKey() final  bool showProgressIndicator;
+@notSerializable final  MultiStepProgressIndicatorBuilderDef? progressIndicatorBuilder;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -2082,36 +2083,36 @@ final String $type;
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$PageByPageSubmitModeCopyWith<PageByPageSubmitMode> get copyWith => _$PageByPageSubmitModeCopyWithImpl<PageByPageSubmitMode>(this, _$identity);
+$MultiStepSubmitModeCopyWith<MultiStepSubmitMode> get copyWith => _$MultiStepSubmitModeCopyWithImpl<MultiStepSubmitMode>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$PageByPageSubmitModeToJson(this, );
+  return _$MultiStepSubmitModeToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PageByPageSubmitMode&&(identical(other.submitText, submitText) || other.submitText == submitText)&&(identical(other.submitIcon, submitIcon) || other.submitIcon == submitIcon)&&(identical(other.nextText, nextText) || other.nextText == nextText)&&(identical(other.disableSubmitMode, disableSubmitMode) || other.disableSubmitMode == disableSubmitMode)&&(identical(other.showProgressIndicator, showProgressIndicator) || other.showProgressIndicator == showProgressIndicator));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MultiStepSubmitMode&&(identical(other.submitText, submitText) || other.submitText == submitText)&&(identical(other.submitIcon, submitIcon) || other.submitIcon == submitIcon)&&(identical(other.nextText, nextText) || other.nextText == nextText)&&(identical(other.disableSubmitMode, disableSubmitMode) || other.disableSubmitMode == disableSubmitMode)&&(identical(other.showProgressIndicator, showProgressIndicator) || other.showProgressIndicator == showProgressIndicator)&&(identical(other.progressIndicatorBuilder, progressIndicatorBuilder) || other.progressIndicatorBuilder == progressIndicatorBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,submitText,submitIcon,nextText,disableSubmitMode,showProgressIndicator);
+int get hashCode => Object.hash(runtimeType,submitText,submitIcon,nextText,disableSubmitMode,showProgressIndicator,progressIndicatorBuilder);
 
 @override
 String toString() {
-  return 'WoFormSubmitMode.pageByPage(submitText: $submitText, submitIcon: $submitIcon, nextText: $nextText, disableSubmitMode: $disableSubmitMode, showProgressIndicator: $showProgressIndicator)';
+  return 'WoFormSubmitMode.multiStep(submitText: $submitText, submitIcon: $submitIcon, nextText: $nextText, disableSubmitMode: $disableSubmitMode, showProgressIndicator: $showProgressIndicator, progressIndicatorBuilder: $progressIndicatorBuilder)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $PageByPageSubmitModeCopyWith<$Res> implements $WoFormSubmitModeCopyWith<$Res> {
-  factory $PageByPageSubmitModeCopyWith(PageByPageSubmitMode value, $Res Function(PageByPageSubmitMode) _then) = _$PageByPageSubmitModeCopyWithImpl;
+abstract mixin class $MultiStepSubmitModeCopyWith<$Res> implements $WoFormSubmitModeCopyWith<$Res> {
+  factory $MultiStepSubmitModeCopyWith(MultiStepSubmitMode value, $Res Function(MultiStepSubmitMode) _then) = _$MultiStepSubmitModeCopyWithImpl;
 @override @useResult
 $Res call({
- String? submitText,@notSerializable IconData? submitIcon, String? nextText, DisableSubmitButton disableSubmitMode, bool showProgressIndicator
+ String? submitText,@notSerializable IconData? submitIcon, String? nextText, DisableSubmitButton disableSubmitMode, bool showProgressIndicator,@notSerializable MultiStepProgressIndicatorBuilderDef? progressIndicatorBuilder
 });
 
 
@@ -2119,23 +2120,24 @@ $Res call({
 
 }
 /// @nodoc
-class _$PageByPageSubmitModeCopyWithImpl<$Res>
-    implements $PageByPageSubmitModeCopyWith<$Res> {
-  _$PageByPageSubmitModeCopyWithImpl(this._self, this._then);
+class _$MultiStepSubmitModeCopyWithImpl<$Res>
+    implements $MultiStepSubmitModeCopyWith<$Res> {
+  _$MultiStepSubmitModeCopyWithImpl(this._self, this._then);
 
-  final PageByPageSubmitMode _self;
-  final $Res Function(PageByPageSubmitMode) _then;
+  final MultiStepSubmitMode _self;
+  final $Res Function(MultiStepSubmitMode) _then;
 
 /// Create a copy of WoFormSubmitMode
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? submitText = freezed,Object? submitIcon = freezed,Object? nextText = freezed,Object? disableSubmitMode = null,Object? showProgressIndicator = null,}) {
-  return _then(PageByPageSubmitMode(
+@override @pragma('vm:prefer-inline') $Res call({Object? submitText = freezed,Object? submitIcon = freezed,Object? nextText = freezed,Object? disableSubmitMode = null,Object? showProgressIndicator = null,Object? progressIndicatorBuilder = freezed,}) {
+  return _then(MultiStepSubmitMode(
 submitText: freezed == submitText ? _self.submitText : submitText // ignore: cast_nullable_to_non_nullable
 as String?,submitIcon: freezed == submitIcon ? _self.submitIcon : submitIcon // ignore: cast_nullable_to_non_nullable
 as IconData?,nextText: freezed == nextText ? _self.nextText : nextText // ignore: cast_nullable_to_non_nullable
 as String?,disableSubmitMode: null == disableSubmitMode ? _self.disableSubmitMode : disableSubmitMode // ignore: cast_nullable_to_non_nullable
 as DisableSubmitButton,showProgressIndicator: null == showProgressIndicator ? _self.showProgressIndicator : showProgressIndicator // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,progressIndicatorBuilder: freezed == progressIndicatorBuilder ? _self.progressIndicatorBuilder : progressIndicatorBuilder // ignore: cast_nullable_to_non_nullable
+as MultiStepProgressIndicatorBuilderDef?,
   ));
 }
 

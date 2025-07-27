@@ -30,7 +30,7 @@ class SubmitButtonBuilder extends StatelessWidget {
     final submitMode = root.uiSettings.submitMode;
 
     // final textIsNext =
-    //     submitMode is PageByPageSubmitMode &&
+    //     submitMode is MultiStepSubmitMode &&
     //     context.read<WoFormValuesCubit>().currentSubmitType == SubmitType.step;
 
     final submitButtonData = SubmitButtonData(

@@ -428,23 +428,22 @@ const _$SubmitButtonPositionEnumMap = {
   SubmitButtonPosition.floating: 'floating',
 };
 
-PageByPageSubmitMode _$PageByPageSubmitModeFromJson(
-  Map<String, dynamic> json,
-) => PageByPageSubmitMode(
-  submitText: json['submitText'] as String?,
-  nextText: json['nextText'] as String?,
-  disableSubmitMode:
-      $enumDecodeNullable(
-        _$DisableSubmitButtonEnumMap,
-        json['disableSubmitMode'],
-      ) ??
-      DisableSubmitButton.never,
-  showProgressIndicator: json['showProgressIndicator'] as bool? ?? true,
-  $type: json['runtimeType'] as String?,
-);
+MultiStepSubmitMode _$MultiStepSubmitModeFromJson(Map<String, dynamic> json) =>
+    MultiStepSubmitMode(
+      submitText: json['submitText'] as String?,
+      nextText: json['nextText'] as String?,
+      disableSubmitMode:
+          $enumDecodeNullable(
+            _$DisableSubmitButtonEnumMap,
+            json['disableSubmitMode'],
+          ) ??
+          DisableSubmitButton.never,
+      showProgressIndicator: json['showProgressIndicator'] as bool? ?? true,
+      $type: json['runtimeType'] as String?,
+    );
 
-Map<String, dynamic> _$PageByPageSubmitModeToJson(
-  PageByPageSubmitMode instance,
+Map<String, dynamic> _$MultiStepSubmitModeToJson(
+  MultiStepSubmitMode instance,
 ) => <String, dynamic>{
   'submitText': instance.submitText,
   'nextText': instance.nextText,

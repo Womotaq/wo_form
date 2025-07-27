@@ -656,6 +656,9 @@ enum ShowErrors {
   progressively,
 }
 
+typedef MultiStepProgressIndicatorBuilderDef =
+    Widget Function({required int index, required int maxIndex});
+
 @freezed
 sealed class WoFormSubmitMode with _$WoFormSubmitMode {
   const factory WoFormSubmitMode.standard({
@@ -666,7 +669,7 @@ sealed class WoFormSubmitMode with _$WoFormSubmitMode {
     @notSerializable ScaffoldBuilderDef? scaffoldBuilder,
   }) = StandardSubmitMode;
 
-  const factory WoFormSubmitMode.pageByPage({
+  const factory WoFormSubmitMode.multiStep({
     String? submitText,
     @notSerializable IconData? submitIcon,
 
@@ -675,7 +678,10 @@ sealed class WoFormSubmitMode with _$WoFormSubmitMode {
     String? nextText,
     @Default(DisableSubmitButton.never) DisableSubmitButton disableSubmitMode,
     @Default(true) bool showProgressIndicator,
-  }) = PageByPageSubmitMode;
+
+    @notSerializable
+    MultiStepProgressIndicatorBuilderDef? progressIndicatorBuilder,
+  }) = MultiStepSubmitMode;
 
   const WoFormSubmitMode._();
 
@@ -689,6 +695,6 @@ sealed class WoFormSubmitMode with _$WoFormSubmitMode {
 
   SubmitButtonPosition get buttonPosition => switch (this) {
     StandardSubmitMode(buttonPosition: final p) => p,
-    PageByPageSubmitMode() => SubmitButtonPosition.bottomBar,
+    MultiStepSubmitMode() => SubmitButtonPosition.bottomBar,
   };
 }

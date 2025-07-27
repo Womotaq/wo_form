@@ -438,11 +438,11 @@ mixin _$SubmitButtonData {
 
  String? get text;/// Callback invoked when the form (or a part of it) is submitted. This is
 /// triggered by the [SubmitButton] or any field configured to submit.
- VoidCallback? get onPressed; SubmitButtonPosition get position; IconData? get icon;/// If provided, submission validation will be scoped to form nodes
+ VoidCallback? get onPressed;/// If not empty, submission validation will be scoped to form nodes
 /// whose paths start with this value.
 ///
 /// This is useful for validating only a specific section of a larger form.
- String? get path;
+ String get path; SubmitButtonPosition get position; IconData? get icon;
 /// Create a copy of SubmitButtonData
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -453,16 +453,16 @@ $SubmitButtonDataCopyWith<SubmitButtonData> get copyWith => _$SubmitButtonDataCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SubmitButtonData&&(identical(other.text, text) || other.text == text)&&(identical(other.onPressed, onPressed) || other.onPressed == onPressed)&&(identical(other.position, position) || other.position == position)&&(identical(other.icon, icon) || other.icon == icon)&&(identical(other.path, path) || other.path == path));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SubmitButtonData&&(identical(other.text, text) || other.text == text)&&(identical(other.onPressed, onPressed) || other.onPressed == onPressed)&&(identical(other.path, path) || other.path == path)&&(identical(other.position, position) || other.position == position)&&(identical(other.icon, icon) || other.icon == icon));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,text,onPressed,position,icon,path);
+int get hashCode => Object.hash(runtimeType,text,onPressed,path,position,icon);
 
 @override
 String toString() {
-  return 'SubmitButtonData(text: $text, onPressed: $onPressed, position: $position, icon: $icon, path: $path)';
+  return 'SubmitButtonData(text: $text, onPressed: $onPressed, path: $path, position: $position, icon: $icon)';
 }
 
 
@@ -473,7 +473,7 @@ abstract mixin class $SubmitButtonDataCopyWith<$Res>  {
   factory $SubmitButtonDataCopyWith(SubmitButtonData value, $Res Function(SubmitButtonData) _then) = _$SubmitButtonDataCopyWithImpl;
 @useResult
 $Res call({
- String? text, VoidCallback? onPressed, SubmitButtonPosition position, IconData? icon, String? path
+ String? text, VoidCallback? onPressed, String path, SubmitButtonPosition position, IconData? icon
 });
 
 
@@ -490,14 +490,14 @@ class _$SubmitButtonDataCopyWithImpl<$Res>
 
 /// Create a copy of SubmitButtonData
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? text = freezed,Object? onPressed = freezed,Object? position = null,Object? icon = freezed,Object? path = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? text = freezed,Object? onPressed = freezed,Object? path = null,Object? position = null,Object? icon = freezed,}) {
   return _then(_self.copyWith(
 text: freezed == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
 as String?,onPressed: freezed == onPressed ? _self.onPressed : onPressed // ignore: cast_nullable_to_non_nullable
-as VoidCallback?,position: null == position ? _self.position : position // ignore: cast_nullable_to_non_nullable
+as VoidCallback?,path: null == path ? _self.path : path // ignore: cast_nullable_to_non_nullable
+as String,position: null == position ? _self.position : position // ignore: cast_nullable_to_non_nullable
 as SubmitButtonPosition,icon: freezed == icon ? _self.icon : icon // ignore: cast_nullable_to_non_nullable
-as IconData?,path: freezed == path ? _self.path : path // ignore: cast_nullable_to_non_nullable
-as String?,
+as IconData?,
   ));
 }
 
@@ -509,20 +509,20 @@ as String?,
 
 
 class _SubmitButtonData implements SubmitButtonData {
-  const _SubmitButtonData({required this.text, required this.onPressed, required this.position, this.icon, this.path});
+  const _SubmitButtonData({required this.text, required this.onPressed, required this.path, required this.position, this.icon});
   
 
 @override final  String? text;
 /// Callback invoked when the form (or a part of it) is submitted. This is
 /// triggered by the [SubmitButton] or any field configured to submit.
 @override final  VoidCallback? onPressed;
-@override final  SubmitButtonPosition position;
-@override final  IconData? icon;
-/// If provided, submission validation will be scoped to form nodes
+/// If not empty, submission validation will be scoped to form nodes
 /// whose paths start with this value.
 ///
 /// This is useful for validating only a specific section of a larger form.
-@override final  String? path;
+@override final  String path;
+@override final  SubmitButtonPosition position;
+@override final  IconData? icon;
 
 /// Create a copy of SubmitButtonData
 /// with the given fields replaced by the non-null parameter values.
@@ -534,16 +534,16 @@ _$SubmitButtonDataCopyWith<_SubmitButtonData> get copyWith => __$SubmitButtonDat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SubmitButtonData&&(identical(other.text, text) || other.text == text)&&(identical(other.onPressed, onPressed) || other.onPressed == onPressed)&&(identical(other.position, position) || other.position == position)&&(identical(other.icon, icon) || other.icon == icon)&&(identical(other.path, path) || other.path == path));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SubmitButtonData&&(identical(other.text, text) || other.text == text)&&(identical(other.onPressed, onPressed) || other.onPressed == onPressed)&&(identical(other.path, path) || other.path == path)&&(identical(other.position, position) || other.position == position)&&(identical(other.icon, icon) || other.icon == icon));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,text,onPressed,position,icon,path);
+int get hashCode => Object.hash(runtimeType,text,onPressed,path,position,icon);
 
 @override
 String toString() {
-  return 'SubmitButtonData(text: $text, onPressed: $onPressed, position: $position, icon: $icon, path: $path)';
+  return 'SubmitButtonData(text: $text, onPressed: $onPressed, path: $path, position: $position, icon: $icon)';
 }
 
 
@@ -554,7 +554,7 @@ abstract mixin class _$SubmitButtonDataCopyWith<$Res> implements $SubmitButtonDa
   factory _$SubmitButtonDataCopyWith(_SubmitButtonData value, $Res Function(_SubmitButtonData) _then) = __$SubmitButtonDataCopyWithImpl;
 @override @useResult
 $Res call({
- String? text, VoidCallback? onPressed, SubmitButtonPosition position, IconData? icon, String? path
+ String? text, VoidCallback? onPressed, String path, SubmitButtonPosition position, IconData? icon
 });
 
 
@@ -571,14 +571,14 @@ class __$SubmitButtonDataCopyWithImpl<$Res>
 
 /// Create a copy of SubmitButtonData
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? text = freezed,Object? onPressed = freezed,Object? position = null,Object? icon = freezed,Object? path = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? text = freezed,Object? onPressed = freezed,Object? path = null,Object? position = null,Object? icon = freezed,}) {
   return _then(_SubmitButtonData(
 text: freezed == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
 as String?,onPressed: freezed == onPressed ? _self.onPressed : onPressed // ignore: cast_nullable_to_non_nullable
-as VoidCallback?,position: null == position ? _self.position : position // ignore: cast_nullable_to_non_nullable
+as VoidCallback?,path: null == path ? _self.path : path // ignore: cast_nullable_to_non_nullable
+as String,position: null == position ? _self.position : position // ignore: cast_nullable_to_non_nullable
 as SubmitButtonPosition,icon: freezed == icon ? _self.icon : icon // ignore: cast_nullable_to_non_nullable
-as IconData?,path: freezed == path ? _self.path : path // ignore: cast_nullable_to_non_nullable
-as String?,
+as IconData?,
   ));
 }
 
