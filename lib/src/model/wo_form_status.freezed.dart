@@ -123,11 +123,11 @@ String toString() {
 @JsonSerializable()
 
 class InProgressStatus implements WoFormStatus {
-  const InProgressStatus({@JsonKey(includeToJson: false, includeFromJson: false) final  List<WoFormInputError> errors = const [], this.firstInvalidInputPath, final  String? $type}): _errors = errors,$type = $type ?? 'inProgress';
+  const InProgressStatus({@notSerializable final  List<WoFormInputError> errors = const [], this.firstInvalidInputPath, final  String? $type}): _errors = errors,$type = $type ?? 'inProgress';
   factory InProgressStatus.fromJson(Map<String, dynamic> json) => _$InProgressStatusFromJson(json);
 
  final  List<WoFormInputError> _errors;
-@JsonKey(includeToJson: false, includeFromJson: false) List<WoFormInputError> get errors {
+@notSerializable List<WoFormInputError> get errors {
   if (_errors is EqualUnmodifiableListView) return _errors;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_errors);
@@ -172,7 +172,7 @@ abstract mixin class $InProgressStatusCopyWith<$Res> implements $WoFormStatusCop
   factory $InProgressStatusCopyWith(InProgressStatus value, $Res Function(InProgressStatus) _then) = _$InProgressStatusCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(includeToJson: false, includeFromJson: false) List<WoFormInputError> errors, String? firstInvalidInputPath
+@notSerializable List<WoFormInputError> errors, String? firstInvalidInputPath
 });
 
 
@@ -243,11 +243,11 @@ String toString() {
 @JsonSerializable()
 
 class SubmitErrorStatus implements WoFormStatus {
-  const SubmitErrorStatus({@JsonKey(includeToJson: false, includeFromJson: false) this.error, @JsonKey(includeToJson: false, includeFromJson: false) this.stackTrace, final  String? $type}): $type = $type ?? 'submitError';
+  const SubmitErrorStatus({@notSerializable this.error, @notSerializable this.stackTrace, final  String? $type}): $type = $type ?? 'submitError';
   factory SubmitErrorStatus.fromJson(Map<String, dynamic> json) => _$SubmitErrorStatusFromJson(json);
 
-@JsonKey(includeToJson: false, includeFromJson: false) final  Object? error;
-@JsonKey(includeToJson: false, includeFromJson: false) final  StackTrace? stackTrace;
+@notSerializable final  Object? error;
+@notSerializable final  StackTrace? stackTrace;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -286,7 +286,7 @@ abstract mixin class $SubmitErrorStatusCopyWith<$Res> implements $WoFormStatusCo
   factory $SubmitErrorStatusCopyWith(SubmitErrorStatus value, $Res Function(SubmitErrorStatus) _then) = _$SubmitErrorStatusCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(includeToJson: false, includeFromJson: false) Object? error,@JsonKey(includeToJson: false, includeFromJson: false) StackTrace? stackTrace
+@notSerializable Object? error,@notSerializable StackTrace? stackTrace
 });
 
 

@@ -39,8 +39,7 @@ mixin WoFormInputMixin {
     required String path,
     required String parentPath,
     required Map<String, dynamic> values,
-  }) =>
-      null;
+  }) => null;
 
   String? getInvalidExplanation(
     dynamic value,
@@ -66,41 +65,39 @@ mixin WoFormInputMixin {
   Iterable<String> getAllInputPaths({
     required WoFormValues values,
     required String parentPath,
-  }) =>
-      ['$parentPath/$id'];
+  }) => ['$parentPath/$id'];
 
   Iterable<WoFormInputError> getErrors({
     required WoFormValues values,
     required String parentPath,
     bool recursive = true,
-  }) =>
-      [getError(values['$parentPath/$id'], parentPath: parentPath)].nonNulls;
+  }) => [getError(values['$parentPath/$id'], parentPath: parentPath)].nonNulls;
 
   String? getExportKey({
     required WoFormValues values,
     required String parentPath,
-  }) =>
-      id;
+  }) => id;
 
   Map<String, dynamic> toJson();
 
   Widget toWidget({required String parentPath, Key? key});
 }
 
-typedef GetCustomErrorDef<T> = WoFormInputError? Function(
-  T? value,
-  String path,
-);
-typedef GetCustomErrorForListDef<T> = WoFormInputError? Function(
-  List<T> value,
-  String path,
-);
+typedef GetCustomErrorDef<T> =
+    WoFormInputError? Function(
+      T? value,
+      String path,
+    );
+typedef GetCustomErrorForListDef<T> =
+    WoFormInputError? Function(
+      List<T> value,
+      String path,
+    );
 
 extension _SelectInputUiSettingsX<T> on SelectInputUiSettings<T> {
   static Map<String, dynamic> staticToJsonString(
     SelectInputUiSettings<String> object,
-  ) =>
-      object.toJson();
+  ) => object.toJson();
 }
 
 @freezed
@@ -109,12 +106,10 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     required String id,
     bool? initialValue,
     @Default(false) bool isRequired,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    GetCustomErrorDef<bool>? getCustomError,
+    @notSerializable GetCustomErrorDef<bool>? getCustomError,
 
     /// An optionnal callback when the value changed
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    void Function(bool? value)? onValueChanged,
+    @notSerializable void Function(bool? value)? onValueChanged,
     @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
     @Default(BooleanInputUiSettings())
     BooleanInputUiSettings uiSettings,
@@ -127,8 +122,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     @Default(false) bool isRequired,
     @JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? maxDate,
     @JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? minDate,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    GetCustomErrorDef<DateTime>? getCustomError,
+    @notSerializable GetCustomErrorDef<DateTime>? getCustomError,
     @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
     @Default(DateTimeInputUiSettings())
     DateTimeInputUiSettings uiSettings,
@@ -145,8 +139,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     String? startDatePath,
     @DurationNullableConverter() Duration? maxDuration,
     @DurationNullableConverter() Duration? minDuration,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    GetCustomErrorDef<Duration>? getCustomError,
+    @notSerializable GetCustomErrorDef<Duration>? getCustomError,
     @JsonKey(toJson: DurationInputUiSettings.staticToJson)
     @Default(DurationInputUiSettings())
     DurationInputUiSettings uiSettings,
@@ -183,12 +176,10 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     required int? maxCount,
     @Default(0) int minCount,
     @MediaListConverter() List<Media>? initialValues,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    GetCustomErrorForListDef<Media>? getCustomError,
+    @notSerializable GetCustomErrorForListDef<Media>? getCustomError,
 
     /// An optionnal callback when the value changed
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    void Function(List<Media>? value)? onValueChanged,
+    @notSerializable void Function(List<Media>? value)? onValueChanged,
 
     /// Only applies if maxCount is 1
     @Default(false) bool submitFormOnSelect,
@@ -210,12 +201,10 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     @Default(false) bool isRequired,
     int? maxBound,
     @Default(0) int minBound,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    GetCustomErrorDef<num>? getCustomError,
+    @notSerializable GetCustomErrorDef<num>? getCustomError,
 
     /// An optionnal callback when the value changed
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    void Function(num? value)? onValueChanged,
+    @notSerializable void Function(num? value)? onValueChanged,
     @Default(NumInputUiSettings()) NumInputUiSettings uiSettings,
   }) = NumInput;
 
@@ -236,12 +225,10 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     // If set, the object stored at the path of this input in WoFormValuesCubit
     // will be the id of the selected value.
     List<String>? idsOfAvailibleValues,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    GetCustomErrorForListDef<String>? getCustomError,
+    @notSerializable GetCustomErrorForListDef<String>? getCustomError,
 
     /// An optionnal callback when the value changed
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    void Function(List<String>? value)? onValueChanged,
+    @notSerializable void Function(List<String>? value)? onValueChanged,
 
     /// Only applies if maxCount is 1
     @Default(false) bool submitFormOnSelect,
@@ -261,8 +248,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     /// If set, the field will be a place autocomplete.
     @JsonKey(toJson: PlaceAutocompleteSettings.staticToJson)
     PlaceAutocompleteSettings? placeAutocompleteSettings,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    GetCustomErrorDef<String>? getCustomError,
+    @notSerializable GetCustomErrorDef<String>? getCustomError,
     @JsonKey(toJson: StringInputUiSettings.staticToJson)
     @Default(StringInputUiSettings())
     StringInputUiSettings uiSettings,
@@ -338,9 +324,9 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
   WoFormInputError? getError(dynamic value, {required String parentPath}) {
     switch (this) {
       case BooleanInput(
-          isRequired: final isRequired,
-          getCustomError: final getCustomError,
-        ):
+        isRequired: final isRequired,
+        getCustomError: final getCustomError,
+      ):
         value as bool?;
 
         final customError = getCustomError?.call(
@@ -354,11 +340,11 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
             : null;
 
       case DateTimeInput(
-          isRequired: final isRequired,
-          minDate: final minDate,
-          maxDate: final maxDate,
-          getCustomError: final getCustomError,
-        ):
+        isRequired: final isRequired,
+        minDate: final minDate,
+        maxDate: final maxDate,
+        getCustomError: final getCustomError,
+      ):
         value as DateTime?;
 
         final customError = getCustomError?.call(
@@ -377,8 +363,11 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
           return WoFormInputError.minBound(path: '$parentPath/$id');
         }
         if (maxDate != null) {
-          if (DateTime(value.year, value.month, value.day)
-              .isAfter(maxDate.resolve())) {
+          if (DateTime(
+            value.year,
+            value.month,
+            value.day,
+          ).isAfter(maxDate.resolve())) {
             return WoFormInputError.maxBound(path: '$parentPath/$id');
           }
         }
@@ -386,11 +375,11 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
         return null;
 
       case DurationInput(
-          isRequired: final isRequired,
-          minDuration: final minDuration,
-          maxDuration: final maxDuration,
-          getCustomError: final getCustomError,
-        ):
+        isRequired: final isRequired,
+        minDuration: final minDuration,
+        maxDuration: final maxDuration,
+        getCustomError: final getCustomError,
+      ):
         value as Duration?;
 
         final customError = getCustomError?.call(
@@ -417,11 +406,11 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
         return null;
 
       case MediaInput(
-          id: final inputId,
-          minCount: final minCount,
-          maxCount: final maxCount,
-          getCustomError: final getCustomError,
-        ):
+        id: final inputId,
+        minCount: final minCount,
+        maxCount: final maxCount,
+        getCustomError: final getCustomError,
+      ):
         return SelectInput._validator<Media>(
           inputId: inputId,
           parentPath: parentPath,
@@ -434,11 +423,11 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
         );
 
       case NumInput(
-          isRequired: final isRequired,
-          minBound: final minBound,
-          maxBound: final maxBound,
-          getCustomError: final getCustomError,
-        ):
+        isRequired: final isRequired,
+        minBound: final minBound,
+        maxBound: final maxBound,
+        getCustomError: final getCustomError,
+      ):
         value as num?;
 
         final customError = getCustomError?.call(
@@ -463,13 +452,13 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
         return null;
 
       case SelectStringInput(
-          id: final inputId,
-          availibleValues: final availibleValues,
-          idsOfAvailibleValues: final idsOfAvailibleValues,
-          minCount: final minCount,
-          maxCount: final maxCount,
-          getCustomError: final getCustomError,
-        ):
+        id: final inputId,
+        availibleValues: final availibleValues,
+        idsOfAvailibleValues: final idsOfAvailibleValues,
+        minCount: final minCount,
+        maxCount: final maxCount,
+        getCustomError: final getCustomError,
+      ):
         return SelectInput._validator<String>(
           inputId: inputId,
           parentPath: parentPath,
@@ -482,11 +471,11 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
         );
 
       case StringInput(
-          isRequired: final isRequired,
-          regexPattern: final regexPattern,
-          getCustomError: final getCustomError,
-          uiSettings: final uiSettings,
-        ):
+        isRequired: final isRequired,
+        regexPattern: final regexPattern,
+        getCustomError: final getCustomError,
+        uiSettings: final uiSettings,
+      ):
         value as String?;
 
         final customError = getCustomError?.call(
@@ -577,10 +566,8 @@ abstract class SelectInput<T>
     List<String>? idsOfAvailibleValues,
 
     /// An optionnal callback when the value changed
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    void Function(List<T>? value)? onValueChanged,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    GetCustomErrorForListDef<T>? getCustomError,
+    @notSerializable void Function(List<T>? value)? onValueChanged,
+    @notSerializable GetCustomErrorForListDef<T>? getCustomError,
 
     /// Only applies if maxCount is 1
     @Default(false) bool submitFormOnSelect,
@@ -595,10 +582,8 @@ abstract class SelectInput<T>
     ///   fromJsonT: (json) =>
     ///       TimeControl.fromJson(json as Map<String, dynamic>? ?? {}),
     /// ),
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    dynamic Function(dynamic)? toJsonT,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    dynamic Function(dynamic)? fromJsonT,
+    @notSerializable dynamic Function(dynamic)? toJsonT,
+    @notSerializable dynamic Function(dynamic)? fromJsonT,
   }) = _SelectInput<T>;
 
   const SelectInput._();
@@ -606,17 +591,16 @@ abstract class SelectInput<T>
   factory SelectInput.fromJson(
     Map<String, dynamic> json,
     T Function(Object? json) fromJsonT,
-  ) =>
-      _$SelectInputFromJson(json, fromJsonT);
+  ) => _$SelectInputFromJson(json, fromJsonT);
 
   @override
   // If the override is invalid, go in :
   // wo_form_input.freezed.dart -> mixin _$SelectInput<T>
   // Comment the toJson() method.
   Map<String, dynamic> toJson() => _$SelectInputToJson(
-        this as _SelectInput<T>,
-        toJsonT ?? _defaultToJsonT<T>,
-      );
+    this as _SelectInput<T>,
+    toJsonT ?? _defaultToJsonT<T>,
+  );
 
   // --
 
@@ -715,8 +699,9 @@ abstract class SelectInput<T>
       );
 
   @override
-  Map<String, dynamic> getInitialValues({required String parentPath}) =>
-      {'$parentPath/$id': initialValues};
+  Map<String, dynamic> getInitialValues({required String parentPath}) => {
+    '$parentPath/$id': initialValues,
+  };
 
   @override
   Widget toWidget({required String parentPath, Key? key}) =>

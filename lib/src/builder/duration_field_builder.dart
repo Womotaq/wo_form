@@ -27,11 +27,10 @@ class DurationFieldBuilder extends StatelessWidget {
 
     final inputSettings = input.uiSettings;
     var mergedSettings = uiSettings?.merge(inputSettings) ?? inputSettings;
+    final woFormTheme = WoFormTheme.of(context);
 
-    final showAsterisk = input.isRequired &&
-        (root.uiSettings.showAsteriskIfRequired ??
-            WoFormTheme.of(context)?.showAsteriskIfRequired ??
-            true);
+    final showAsterisk =
+        input.isRequired && (woFormTheme?.showAsteriskIfRequired ?? true);
     if (showAsterisk && mergedSettings.labelText != null) {
       mergedSettings = mergedSettings.copyWith(
         labelText: '${mergedSettings.labelText} *',
@@ -54,35 +53,39 @@ class DurationFieldBuilder extends StatelessWidget {
                     if (error == null) {
                       errorText = null;
                     } else {
-                      errorText =
-                          context.read<WoFormL10n?>()?.translateError(error);
+                      errorText = context.read<WoFormL10n?>()?.translateError(
+                        error,
+                      );
                     }
                   } else {
                     errorText = null;
                   }
 
-                  final fieldData = WoFieldData<DurationInput, Duration,
-                      DurationInputUiSettings>(
-                    path: path,
-                    input: input,
-                    value: value,
-                    errorText: errorText,
-                    uiSettings: mergedSettings,
-                    onValueChanged: inputIsLocked
-                        ? null
-                        : (
-                            Duration? value, {
-                            UpdateStatus updateStatus = UpdateStatus.yes,
-                          }) =>
-                            valuesCubit.onValueChanged(
-                              path: path,
-                              value: value,
-                              updateStatus: updateStatus,
-                            ),
-                  );
+                  final fieldData =
+                      WoFieldData<
+                        DurationInput,
+                        Duration,
+                        DurationInputUiSettings
+                      >(
+                        path: path,
+                        input: input,
+                        value: value,
+                        errorText: errorText,
+                        uiSettings: mergedSettings,
+                        onValueChanged: inputIsLocked
+                            ? null
+                            : (
+                                Duration? value, {
+                                UpdateStatus updateStatus = UpdateStatus.yes,
+                              }) => valuesCubit.onValueChanged(
+                                path: path,
+                                value: value,
+                                updateStatus: updateStatus,
+                              ),
+                      );
 
                   return (mergedSettings.widgetBuilder ??
-                          WoFormTheme.of(context)?.durationFieldBuilder ??
+                          woFormTheme?.durationFieldBuilder ??
                           DurationField.new)
                       .call(fieldData);
                 },

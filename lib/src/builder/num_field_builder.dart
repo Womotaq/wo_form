@@ -27,11 +27,10 @@ class NumFieldBuilder extends StatelessWidget {
 
     final inputSettings = input.uiSettings;
     var mergedSettings = uiSettings?.merge(inputSettings) ?? inputSettings;
+    final woFormTheme = WoFormTheme.of(context);
 
-    final showAsterisk = input.isRequired &&
-        (root.uiSettings.showAsteriskIfRequired ??
-            WoFormTheme.of(context)?.showAsteriskIfRequired ??
-            true);
+    final showAsterisk =
+        input.isRequired && (woFormTheme?.showAsteriskIfRequired ?? true);
     if (showAsterisk && mergedSettings.labelText != null) {
       mergedSettings = mergedSettings.copyWith(
         labelText: '${mergedSettings.labelText} *',
@@ -54,8 +53,9 @@ class NumFieldBuilder extends StatelessWidget {
                     if (error == null) {
                       errorText = null;
                     } else {
-                      errorText =
-                          context.read<WoFormL10n?>()?.translateError(error);
+                      errorText = context.read<WoFormL10n?>()?.translateError(
+                        error,
+                      );
                     }
                   } else {
                     errorText = null;
@@ -63,28 +63,28 @@ class NumFieldBuilder extends StatelessWidget {
 
                   final fieldData =
                       WoFieldData<NumInput, num, NumInputUiSettings>(
-                    path: path,
-                    input: input,
-                    value: value,
-                    errorText: errorText,
-                    uiSettings: mergedSettings,
-                    onValueChanged: inputIsLocked
-                        ? null
-                        : (
-                            num? value, {
-                            UpdateStatus updateStatus = UpdateStatus.yes,
-                          }) {
-                            valuesCubit.onValueChanged(
-                              path: path,
-                              value: value,
-                              updateStatus: updateStatus,
-                            );
-                            input.onValueChanged?.call(value);
-                          },
-                  );
+                        path: path,
+                        input: input,
+                        value: value,
+                        errorText: errorText,
+                        uiSettings: mergedSettings,
+                        onValueChanged: inputIsLocked
+                            ? null
+                            : (
+                                num? value, {
+                                UpdateStatus updateStatus = UpdateStatus.yes,
+                              }) {
+                                valuesCubit.onValueChanged(
+                                  path: path,
+                                  value: value,
+                                  updateStatus: updateStatus,
+                                );
+                                input.onValueChanged?.call(value);
+                              },
+                      );
 
                   return (mergedSettings.widgetBuilder ??
-                          WoFormTheme.of(context)?.numFieldBuilder ??
+                          woFormTheme?.numFieldBuilder ??
                           NumField.new)
                       .call(fieldData);
                 },

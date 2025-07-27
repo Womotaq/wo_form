@@ -98,14 +98,16 @@ class _StandardScaffold extends StatelessWidget {
       ),
       bottomNavigationBar:
           uiSettings.submitMode.buttonPosition == SubmitButtonPosition.bottomBar
-              ? const SubmitButtonBuilder()
-              : null,
+          ? const SubmitButtonBuilder()
+          : null,
       body: SingleChildScrollView(
         child: SafeArea(
           child: Center(
             child: ConstrainedBox(
               constraints: BoxConstraints(
-                maxWidth: WoFormTheme.of(context)?.maxWidth ?? double.infinity,
+                maxWidth:
+                    WoFormTheme.of(context)?.maxWidth ??
+                    WoFormThemeData.DEFAULT_MAX_WIDTH,
               ),
               child: body,
             ),
@@ -114,8 +116,8 @@ class _StandardScaffold extends StatelessWidget {
       ),
       floatingActionButton:
           uiSettings.submitMode.buttonPosition == SubmitButtonPosition.floating
-              ? const SubmitButtonBuilder()
-              : null,
+          ? const SubmitButtonBuilder()
+          : null,
     );
   }
 }
@@ -145,12 +147,12 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
     pageController = PageController();
 
     context.read<WoFormValuesCubit>().addTemporarySubmitData(
-          onSubmitting: () => pageController.nextPage(
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.easeIn,
-          ),
-          path: '/${widget.root.children[0].id}',
-        );
+      onSubmitting: () => pageController.nextPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeIn,
+      ),
+      path: '/${widget.root.children[0].id}',
+    );
 
     pageController.addListener(
       () {
@@ -161,12 +163,12 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
           context.read<WoFormValuesCubit>().clearTemporarySubmitData();
         } else {
           context.read<WoFormValuesCubit>().addTemporarySubmitData(
-                onSubmitting: () => pageController.nextPage(
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeIn,
-                ),
-                path: '/${widget.root.children[newPageIndex.toInt()].id}',
-              );
+            onSubmitting: () => pageController.nextPage(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeIn,
+            ),
+            path: '/${widget.root.children[newPageIndex.toInt()].id}',
+          );
         }
       },
     );
@@ -213,7 +215,9 @@ class WoFormPageByPageState extends State<WoFormPageByPage> {
               physics: const NeverScrollableScrollPhysics(),
               itemCount: widget.root.children.length,
               itemBuilder: (context, index) => ConstrainedListView(
-                maxWidth: WoFormTheme.of(context)?.maxWidth ?? double.infinity,
+                maxWidth:
+                    WoFormTheme.of(context)?.maxWidth ??
+                    WoFormThemeData.DEFAULT_MAX_WIDTH,
                 children: [
                   const SizedBox(height: 16),
                   widget.root.children[index].toWidget(parentPath: ''),

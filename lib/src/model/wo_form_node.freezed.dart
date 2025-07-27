@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$DynamicInputTemplate {
 
-@InputNullableConverter() WoFormNodeMixin? get child;@JsonKey(includeToJson: false, includeFromJson: false) WoFormNodeMixin Function()? get childBuilder;@JsonKey(toJson: DynamicInputUiSettings.staticToJson) DynamicInputUiSettings get uiSettings;
+@InputNullableConverter() WoFormNodeMixin? get child;@notSerializable WoFormNodeMixin Function()? get childBuilder;@JsonKey(toJson: DynamicInputUiSettings.staticToJson) DynamicInputUiSettings get uiSettings;
 /// Create a copy of DynamicInputTemplate
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $DynamicInputTemplateCopyWith<$Res>  {
   factory $DynamicInputTemplateCopyWith(DynamicInputTemplate value, $Res Function(DynamicInputTemplate) _then) = _$DynamicInputTemplateCopyWithImpl;
 @useResult
 $Res call({
-@InputNullableConverter() WoFormNodeMixin? child,@JsonKey(includeToJson: false, includeFromJson: false) WoFormNodeMixin Function()? childBuilder,@JsonKey(toJson: DynamicInputUiSettings.staticToJson) DynamicInputUiSettings uiSettings
+@InputNullableConverter() WoFormNodeMixin? child,@notSerializable WoFormNodeMixin Function()? childBuilder,@JsonKey(toJson: DynamicInputUiSettings.staticToJson) DynamicInputUiSettings uiSettings
 });
 
 
@@ -91,11 +91,11 @@ $DynamicInputUiSettingsCopyWith<$Res> get uiSettings {
 @JsonSerializable()
 
 class _DynamicInputTemplate extends DynamicInputTemplate {
-   _DynamicInputTemplate({@InputNullableConverter() this.child, @JsonKey(includeToJson: false, includeFromJson: false) this.childBuilder, @JsonKey(toJson: DynamicInputUiSettings.staticToJson) this.uiSettings = const DynamicInputUiSettings()}): assert((child == null) != (childBuilder == null), 'One of child or childBuilder must be specified'),super._();
+   _DynamicInputTemplate({@InputNullableConverter() this.child, @notSerializable this.childBuilder, @JsonKey(toJson: DynamicInputUiSettings.staticToJson) this.uiSettings = const DynamicInputUiSettings()}): assert((child == null) != (childBuilder == null), 'One of child or childBuilder must be specified'),super._();
   factory _DynamicInputTemplate.fromJson(Map<String, dynamic> json) => _$DynamicInputTemplateFromJson(json);
 
 @override@InputNullableConverter() final  WoFormNodeMixin? child;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  WoFormNodeMixin Function()? childBuilder;
+@override@notSerializable final  WoFormNodeMixin Function()? childBuilder;
 @override@JsonKey(toJson: DynamicInputUiSettings.staticToJson) final  DynamicInputUiSettings uiSettings;
 
 /// Create a copy of DynamicInputTemplate
@@ -131,7 +131,7 @@ abstract mixin class _$DynamicInputTemplateCopyWith<$Res> implements $DynamicInp
   factory _$DynamicInputTemplateCopyWith(_DynamicInputTemplate value, $Res Function(_DynamicInputTemplate) _then) = __$DynamicInputTemplateCopyWithImpl;
 @override @useResult
 $Res call({
-@InputNullableConverter() WoFormNodeMixin? child,@JsonKey(includeToJson: false, includeFromJson: false) WoFormNodeMixin Function()? childBuilder,@JsonKey(toJson: DynamicInputUiSettings.staticToJson) DynamicInputUiSettings uiSettings
+@InputNullableConverter() WoFormNodeMixin? child,@notSerializable WoFormNodeMixin Function()? childBuilder,@JsonKey(toJson: DynamicInputUiSettings.staticToJson) DynamicInputUiSettings uiSettings
 });
 
 
@@ -591,11 +591,11 @@ $ExportSettingsCopyWith<$Res> get exportSettings {
 @JsonSerializable()
 
 class PathBuilderNode extends WoFormNode {
-  const PathBuilderNode({required this.id, @JsonKey(includeToJson: false, includeFromJson: false) this.builder, final  String? $type}): assert(builder != null, 'PathBuilderNode.builder cannot be null'),$type = $type ?? 'pathBuilder',super._();
+  const PathBuilderNode({required this.id, @notSerializable this.builder, final  String? $type}): assert(builder != null, 'PathBuilderNode.builder cannot be null'),$type = $type ?? 'pathBuilder',super._();
   factory PathBuilderNode.fromJson(Map<String, dynamic> json) => _$PathBuilderNodeFromJson(json);
 
 @override final  String id;
-@JsonKey(includeToJson: false, includeFromJson: false) final  WoFormNodeMixin Function(String path)? builder;
+@notSerializable final  WoFormNodeMixin Function(String path)? builder;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -634,7 +634,7 @@ abstract mixin class $PathBuilderNodeCopyWith<$Res> implements $WoFormNodeCopyWi
   factory $PathBuilderNodeCopyWith(PathBuilderNode value, $Res Function(PathBuilderNode) _then) = _$PathBuilderNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id,@JsonKey(includeToJson: false, includeFromJson: false) WoFormNodeMixin Function(String path)? builder
+ String id,@notSerializable WoFormNodeMixin Function(String path)? builder
 });
 
 
@@ -666,12 +666,12 @@ as WoFormNodeMixin Function(String path)?,
 @JsonSerializable()
 
 class ValueBuilderNode extends WoFormNode {
-  const ValueBuilderNode({required this.id, required this.path, @JsonKey(includeToJson: false, includeFromJson: false) this.builder, this.initialValue, final  String? $type}): assert(builder != null, 'ValueBuilderNode.builder cannot be null'),$type = $type ?? 'valueBuilder',super._();
+  const ValueBuilderNode({required this.id, required this.path, @notSerializable this.builder, this.initialValue, final  String? $type}): assert(builder != null, 'ValueBuilderNode.builder cannot be null'),$type = $type ?? 'valueBuilder',super._();
   factory ValueBuilderNode.fromJson(Map<String, dynamic> json) => _$ValueBuilderNodeFromJson(json);
 
 @override final  String id;
  final  String path;
-@JsonKey(includeToJson: false, includeFromJson: false) final  WoFormNodeMixin Function(Object? value)? builder;
+@notSerializable final  WoFormNodeMixin Function(Object? value)? builder;
  final  Object? initialValue;
 
 @JsonKey(name: 'runtimeType')
@@ -711,7 +711,7 @@ abstract mixin class $ValueBuilderNodeCopyWith<$Res> implements $WoFormNodeCopyW
   factory $ValueBuilderNodeCopyWith(ValueBuilderNode value, $Res Function(ValueBuilderNode) _then) = _$ValueBuilderNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String path,@JsonKey(includeToJson: false, includeFromJson: false) WoFormNodeMixin Function(Object? value)? builder, Object? initialValue
+ String id, String path,@notSerializable WoFormNodeMixin Function(Object? value)? builder, Object? initialValue
 });
 
 
@@ -744,7 +744,7 @@ as WoFormNodeMixin Function(Object? value)?,initialValue: freezed == initialValu
 @JsonSerializable()
 
 class ValuesBuilderNode extends WoFormNode {
-  const ValuesBuilderNode({required this.id, required final  List<String> paths, @JsonKey(includeToJson: false, includeFromJson: false) this.builder, final  Map<String, Object?>? initialValues, final  String? $type}): assert(builder != null, 'ValuesBuilderNode.builder cannot be null'),_paths = paths,_initialValues = initialValues,$type = $type ?? 'valuesBuilder',super._();
+  const ValuesBuilderNode({required this.id, required final  List<String> paths, @notSerializable this.builder, final  Map<String, Object?>? initialValues, final  String? $type}): assert(builder != null, 'ValuesBuilderNode.builder cannot be null'),_paths = paths,_initialValues = initialValues,$type = $type ?? 'valuesBuilder',super._();
   factory ValuesBuilderNode.fromJson(Map<String, dynamic> json) => _$ValuesBuilderNodeFromJson(json);
 
 @override final  String id;
@@ -755,7 +755,7 @@ class ValuesBuilderNode extends WoFormNode {
   return EqualUnmodifiableListView(_paths);
 }
 
-@JsonKey(includeToJson: false, includeFromJson: false) final  WoFormNodeMixin Function(Map<String, Object?> values)? builder;
+@notSerializable final  WoFormNodeMixin Function(Map<String, Object?> values)? builder;
  final  Map<String, Object?>? _initialValues;
  Map<String, Object?>? get initialValues {
   final value = _initialValues;
@@ -803,7 +803,7 @@ abstract mixin class $ValuesBuilderNodeCopyWith<$Res> implements $WoFormNodeCopy
   factory $ValuesBuilderNodeCopyWith(ValuesBuilderNode value, $Res Function(ValuesBuilderNode) _then) = _$ValuesBuilderNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id, List<String> paths,@JsonKey(includeToJson: false, includeFromJson: false) WoFormNodeMixin Function(Map<String, Object?> values)? builder, Map<String, Object?>? initialValues
+ String id, List<String> paths,@notSerializable WoFormNodeMixin Function(Map<String, Object?> values)? builder, Map<String, Object?>? initialValues
 });
 
 
@@ -837,13 +837,13 @@ as Map<String, Object?>?,
 @JsonSerializable()
 
 class ValueListenerNode extends WoFormNode {
-  const ValueListenerNode({required this.path, this.id = 'ValueListenerNode', @JsonKey(includeToJson: false, includeFromJson: false) this.listenWhen, @JsonKey(includeToJson: false, includeFromJson: false) this.listener, final  String? $type}): assert(listener != null, 'ValueListenerNode.listener cannot be null'),$type = $type ?? 'valueListener',super._();
+  const ValueListenerNode({required this.path, this.id = 'ValueListenerNode', @notSerializable this.listenWhen, @notSerializable this.listener, final  String? $type}): assert(listener != null, 'ValueListenerNode.listener cannot be null'),$type = $type ?? 'valueListener',super._();
   factory ValueListenerNode.fromJson(Map<String, dynamic> json) => _$ValueListenerNodeFromJson(json);
 
  final  String path;
 @override@JsonKey() final  String id;
-@JsonKey(includeToJson: false, includeFromJson: false) final  bool Function(Object? previous, Object? current)? listenWhen;
-@JsonKey(includeToJson: false, includeFromJson: false) final  void Function(BuildContext context, String parentPath, Object? value)? listener;
+@notSerializable final  bool Function(Object? previous, Object? current)? listenWhen;
+@notSerializable final  void Function(BuildContext context, String parentPath, Object? value)? listener;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -882,7 +882,7 @@ abstract mixin class $ValueListenerNodeCopyWith<$Res> implements $WoFormNodeCopy
   factory $ValueListenerNodeCopyWith(ValueListenerNode value, $Res Function(ValueListenerNode) _then) = _$ValueListenerNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String path, String id,@JsonKey(includeToJson: false, includeFromJson: false) bool Function(Object? previous, Object? current)? listenWhen,@JsonKey(includeToJson: false, includeFromJson: false) void Function(BuildContext context, String parentPath, Object? value)? listener
+ String path, String id,@notSerializable bool Function(Object? previous, Object? current)? listenWhen,@notSerializable void Function(BuildContext context, String parentPath, Object? value)? listener
 });
 
 
@@ -916,11 +916,11 @@ as void Function(BuildContext context, String parentPath, Object? value)?,
 @JsonSerializable()
 
 class WidgetNode extends WoFormNode {
-  const WidgetNode({this.id = 'WidgetNode', @JsonKey(includeToJson: false, includeFromJson: false) this.builder, final  String? $type}): $type = $type ?? 'widget',super._();
+  const WidgetNode({this.id = 'WidgetNode', @notSerializable this.builder, final  String? $type}): $type = $type ?? 'widget',super._();
   factory WidgetNode.fromJson(Map<String, dynamic> json) => _$WidgetNodeFromJson(json);
 
 @override@JsonKey() final  String id;
-@JsonKey(includeToJson: false, includeFromJson: false) final  Widget Function(BuildContext context)? builder;
+@notSerializable final  Widget Function(BuildContext context)? builder;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -959,7 +959,7 @@ abstract mixin class $WidgetNodeCopyWith<$Res> implements $WoFormNodeCopyWith<$R
   factory $WidgetNodeCopyWith(WidgetNode value, $Res Function(WidgetNode) _then) = _$WidgetNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id,@JsonKey(includeToJson: false, includeFromJson: false) Widget Function(BuildContext context)? builder
+ String id,@notSerializable Widget Function(BuildContext context)? builder
 });
 
 

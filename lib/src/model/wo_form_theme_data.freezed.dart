@@ -11,10 +11,11 @@ part of 'wo_form_theme_data.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
+
 /// @nodoc
 mixin _$WoFormThemeData {
 
- BooleanFieldBuilderDef? get booleanFieldBuilder; DateTimeFieldBuilderDef? get dateTimeFieldBuilder; IsoCode? get defaultPhoneCoutry; DurationFieldBuilderDef? get durationFieldBuilder; DynamicInputsNodeWidgetBuilderDef? get dynamicInputsNodeWidgetBuilder; FormatDurationDef? get formatDuration; WidgetBuilderDef? get formPageBuilder; GenerateIdDef? get generateId; HeaderBuilderDef? get headerBuilder; InputHeaderBuilderDef? get inputHeaderBuilder; InputNodeWidgetBuilderDef? get inputsNodeExpanderBuilder; InputNodeWidgetBuilderDef? get inputsNodeWidgetBuilder; MediaFieldBuilderDef? get mediaFieldBuilder; NumFieldBuilderDef? get numFieldBuilder; PickDateDef? get pickDate; PickDurationDef? get pickDuration; PickTimeDef? get pickTime; ScoreWidgetBuilderDef? get scoreBuilder; SelectFieldBuilderDef<dynamic>? get selectFieldBuilder; ScaffoldBuilderDef? get standardScaffoldBuilder; StringFieldBuilderDef? get stringFieldBuilder; SubmitButtonBuilderDef? get submitButtonBuilder; OnDynamicInputDeletionDef? get onDynamicInputDeletion; OnSubmitErrorDef? get onSubmitError;/// If set, the form's entire width won't exceed this value.
+@notSerializable BooleanFieldBuilderDef? get booleanFieldBuilder;@notSerializable DateTimeFieldBuilderDef? get dateTimeFieldBuilder;@notSerializable IsoCode? get defaultPhoneCoutry;@notSerializable DurationFieldBuilderDef? get durationFieldBuilder;@notSerializable DynamicInputsNodeWidgetBuilderDef? get dynamicInputsNodeWidgetBuilder;@notSerializable FormatDurationDef? get formatDuration;@notSerializable WidgetBuilderDef? get formPageBuilder;@notSerializable GenerateIdDef? get generateId;@notSerializable HeaderBuilderDef? get headerBuilder;@notSerializable InputHeaderBuilderDef? get inputHeaderBuilder;@notSerializable InputNodeWidgetBuilderDef? get inputsNodeExpanderBuilder;@notSerializable InputNodeWidgetBuilderDef? get inputsNodeWidgetBuilder;@notSerializable MediaFieldBuilderDef? get mediaFieldBuilder;@notSerializable NumFieldBuilderDef? get numFieldBuilder;@notSerializable PickDateDef? get pickDate;@notSerializable PickDurationDef? get pickDuration;@notSerializable PickTimeDef? get pickTime;@notSerializable ScoreWidgetBuilderDef? get scoreBuilder;@notSerializable SelectFieldBuilderDef<dynamic>? get selectFieldBuilder;@notSerializable ScaffoldBuilderDef? get standardScaffoldBuilder;@notSerializable StringFieldBuilderDef? get stringFieldBuilder;@notSerializable SubmitButtonBuilderDef? get submitButtonBuilder;@notSerializable OnDynamicInputDeletionDef? get onDynamicInputDeletion;@notSerializable OnSubmitErrorDef? get onSubmitError;/// The form's entire width won't exceed this value. Defaults to 512.
  double? get maxWidth;/// This spacing will be placed between each [WoFormNodeMixin].
  double? get verticalSpacing;/// Add the characters ' *' after the labelText of [WoFormInput]s.
 /// Default to true.
@@ -25,6 +26,8 @@ mixin _$WoFormThemeData {
 @pragma('vm:prefer-inline')
 $WoFormThemeDataCopyWith<WoFormThemeData> get copyWith => _$WoFormThemeDataCopyWithImpl<WoFormThemeData>(this as WoFormThemeData, _$identity);
 
+  /// Serializes this WoFormThemeData to a JSON map.
+  Map<String, dynamic> toJson();
 
 
 @override
@@ -32,7 +35,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is WoFormThemeData&&(identical(other.booleanFieldBuilder, booleanFieldBuilder) || other.booleanFieldBuilder == booleanFieldBuilder)&&(identical(other.dateTimeFieldBuilder, dateTimeFieldBuilder) || other.dateTimeFieldBuilder == dateTimeFieldBuilder)&&(identical(other.defaultPhoneCoutry, defaultPhoneCoutry) || other.defaultPhoneCoutry == defaultPhoneCoutry)&&(identical(other.durationFieldBuilder, durationFieldBuilder) || other.durationFieldBuilder == durationFieldBuilder)&&(identical(other.dynamicInputsNodeWidgetBuilder, dynamicInputsNodeWidgetBuilder) || other.dynamicInputsNodeWidgetBuilder == dynamicInputsNodeWidgetBuilder)&&(identical(other.formatDuration, formatDuration) || other.formatDuration == formatDuration)&&(identical(other.formPageBuilder, formPageBuilder) || other.formPageBuilder == formPageBuilder)&&(identical(other.generateId, generateId) || other.generateId == generateId)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.inputHeaderBuilder, inputHeaderBuilder) || other.inputHeaderBuilder == inputHeaderBuilder)&&(identical(other.inputsNodeExpanderBuilder, inputsNodeExpanderBuilder) || other.inputsNodeExpanderBuilder == inputsNodeExpanderBuilder)&&(identical(other.inputsNodeWidgetBuilder, inputsNodeWidgetBuilder) || other.inputsNodeWidgetBuilder == inputsNodeWidgetBuilder)&&(identical(other.mediaFieldBuilder, mediaFieldBuilder) || other.mediaFieldBuilder == mediaFieldBuilder)&&(identical(other.numFieldBuilder, numFieldBuilder) || other.numFieldBuilder == numFieldBuilder)&&(identical(other.pickDate, pickDate) || other.pickDate == pickDate)&&(identical(other.pickDuration, pickDuration) || other.pickDuration == pickDuration)&&(identical(other.pickTime, pickTime) || other.pickTime == pickTime)&&(identical(other.scoreBuilder, scoreBuilder) || other.scoreBuilder == scoreBuilder)&&(identical(other.selectFieldBuilder, selectFieldBuilder) || other.selectFieldBuilder == selectFieldBuilder)&&(identical(other.standardScaffoldBuilder, standardScaffoldBuilder) || other.standardScaffoldBuilder == standardScaffoldBuilder)&&(identical(other.stringFieldBuilder, stringFieldBuilder) || other.stringFieldBuilder == stringFieldBuilder)&&(identical(other.submitButtonBuilder, submitButtonBuilder) || other.submitButtonBuilder == submitButtonBuilder)&&(identical(other.onDynamicInputDeletion, onDynamicInputDeletion) || other.onDynamicInputDeletion == onDynamicInputDeletion)&&(identical(other.onSubmitError, onSubmitError) || other.onSubmitError == onSubmitError)&&(identical(other.maxWidth, maxWidth) || other.maxWidth == maxWidth)&&(identical(other.verticalSpacing, verticalSpacing) || other.verticalSpacing == verticalSpacing)&&(identical(other.showAsteriskIfRequired, showAsteriskIfRequired) || other.showAsteriskIfRequired == showAsteriskIfRequired));
 }
 
-
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hashAll([runtimeType,booleanFieldBuilder,dateTimeFieldBuilder,defaultPhoneCoutry,durationFieldBuilder,dynamicInputsNodeWidgetBuilder,formatDuration,formPageBuilder,generateId,headerBuilder,inputHeaderBuilder,inputsNodeExpanderBuilder,inputsNodeWidgetBuilder,mediaFieldBuilder,numFieldBuilder,pickDate,pickDuration,pickTime,scoreBuilder,selectFieldBuilder,standardScaffoldBuilder,stringFieldBuilder,submitButtonBuilder,onDynamicInputDeletion,onSubmitError,maxWidth,verticalSpacing,showAsteriskIfRequired]);
 
@@ -49,7 +52,7 @@ abstract mixin class $WoFormThemeDataCopyWith<$Res>  {
   factory $WoFormThemeDataCopyWith(WoFormThemeData value, $Res Function(WoFormThemeData) _then) = _$WoFormThemeDataCopyWithImpl;
 @useResult
 $Res call({
- BooleanFieldBuilderDef? booleanFieldBuilder, DateTimeFieldBuilderDef? dateTimeFieldBuilder, IsoCode? defaultPhoneCoutry, DurationFieldBuilderDef? durationFieldBuilder, DynamicInputsNodeWidgetBuilderDef? dynamicInputsNodeWidgetBuilder, FormatDurationDef? formatDuration, WidgetBuilderDef? formPageBuilder, GenerateIdDef? generateId, HeaderBuilderDef? headerBuilder, InputHeaderBuilderDef? inputHeaderBuilder, InputNodeWidgetBuilderDef? inputsNodeExpanderBuilder, InputNodeWidgetBuilderDef? inputsNodeWidgetBuilder, MediaFieldBuilderDef? mediaFieldBuilder, NumFieldBuilderDef? numFieldBuilder, PickDateDef? pickDate, PickDurationDef? pickDuration, PickTimeDef? pickTime, ScoreWidgetBuilderDef? scoreBuilder, SelectFieldBuilderDef<dynamic>? selectFieldBuilder, ScaffoldBuilderDef? standardScaffoldBuilder, StringFieldBuilderDef? stringFieldBuilder, SubmitButtonBuilderDef? submitButtonBuilder, OnDynamicInputDeletionDef? onDynamicInputDeletion, OnSubmitErrorDef? onSubmitError, double? maxWidth, double? verticalSpacing, bool? showAsteriskIfRequired
+@notSerializable BooleanFieldBuilderDef? booleanFieldBuilder,@notSerializable DateTimeFieldBuilderDef? dateTimeFieldBuilder,@notSerializable IsoCode? defaultPhoneCoutry,@notSerializable DurationFieldBuilderDef? durationFieldBuilder,@notSerializable DynamicInputsNodeWidgetBuilderDef? dynamicInputsNodeWidgetBuilder,@notSerializable FormatDurationDef? formatDuration,@notSerializable WidgetBuilderDef? formPageBuilder,@notSerializable GenerateIdDef? generateId,@notSerializable HeaderBuilderDef? headerBuilder,@notSerializable InputHeaderBuilderDef? inputHeaderBuilder,@notSerializable InputNodeWidgetBuilderDef? inputsNodeExpanderBuilder,@notSerializable InputNodeWidgetBuilderDef? inputsNodeWidgetBuilder,@notSerializable MediaFieldBuilderDef? mediaFieldBuilder,@notSerializable NumFieldBuilderDef? numFieldBuilder,@notSerializable PickDateDef? pickDate,@notSerializable PickDurationDef? pickDuration,@notSerializable PickTimeDef? pickTime,@notSerializable ScoreWidgetBuilderDef? scoreBuilder,@notSerializable SelectFieldBuilderDef<dynamic>? selectFieldBuilder,@notSerializable ScaffoldBuilderDef? standardScaffoldBuilder,@notSerializable StringFieldBuilderDef? stringFieldBuilder,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder,@notSerializable OnDynamicInputDeletionDef? onDynamicInputDeletion,@notSerializable OnSubmitErrorDef? onSubmitError, double? maxWidth, double? verticalSpacing, bool? showAsteriskIfRequired
 });
 
 
@@ -104,38 +107,38 @@ as bool?,
 
 
 /// @nodoc
-
+@JsonSerializable()
 
 class _WoFormThemeData extends WoFormThemeData {
-  const _WoFormThemeData({this.booleanFieldBuilder, this.dateTimeFieldBuilder, this.defaultPhoneCoutry, this.durationFieldBuilder, this.dynamicInputsNodeWidgetBuilder, this.formatDuration, this.formPageBuilder, this.generateId, this.headerBuilder, this.inputHeaderBuilder, this.inputsNodeExpanderBuilder, this.inputsNodeWidgetBuilder, this.mediaFieldBuilder, this.numFieldBuilder, this.pickDate, this.pickDuration, this.pickTime, this.scoreBuilder, this.selectFieldBuilder, this.standardScaffoldBuilder, this.stringFieldBuilder, this.submitButtonBuilder, this.onDynamicInputDeletion, this.onSubmitError, this.maxWidth = 512, this.verticalSpacing, this.showAsteriskIfRequired}): super._();
-  
+  const _WoFormThemeData({@notSerializable this.booleanFieldBuilder, @notSerializable this.dateTimeFieldBuilder, @notSerializable this.defaultPhoneCoutry, @notSerializable this.durationFieldBuilder, @notSerializable this.dynamicInputsNodeWidgetBuilder, @notSerializable this.formatDuration, @notSerializable this.formPageBuilder, @notSerializable this.generateId, @notSerializable this.headerBuilder, @notSerializable this.inputHeaderBuilder, @notSerializable this.inputsNodeExpanderBuilder, @notSerializable this.inputsNodeWidgetBuilder, @notSerializable this.mediaFieldBuilder, @notSerializable this.numFieldBuilder, @notSerializable this.pickDate, @notSerializable this.pickDuration, @notSerializable this.pickTime, @notSerializable this.scoreBuilder, @notSerializable this.selectFieldBuilder, @notSerializable this.standardScaffoldBuilder, @notSerializable this.stringFieldBuilder, @notSerializable this.submitButtonBuilder, @notSerializable this.onDynamicInputDeletion, @notSerializable this.onSubmitError, this.maxWidth, this.verticalSpacing, this.showAsteriskIfRequired}): super._();
+  factory _WoFormThemeData.fromJson(Map<String, dynamic> json) => _$WoFormThemeDataFromJson(json);
 
-@override final  BooleanFieldBuilderDef? booleanFieldBuilder;
-@override final  DateTimeFieldBuilderDef? dateTimeFieldBuilder;
-@override final  IsoCode? defaultPhoneCoutry;
-@override final  DurationFieldBuilderDef? durationFieldBuilder;
-@override final  DynamicInputsNodeWidgetBuilderDef? dynamicInputsNodeWidgetBuilder;
-@override final  FormatDurationDef? formatDuration;
-@override final  WidgetBuilderDef? formPageBuilder;
-@override final  GenerateIdDef? generateId;
-@override final  HeaderBuilderDef? headerBuilder;
-@override final  InputHeaderBuilderDef? inputHeaderBuilder;
-@override final  InputNodeWidgetBuilderDef? inputsNodeExpanderBuilder;
-@override final  InputNodeWidgetBuilderDef? inputsNodeWidgetBuilder;
-@override final  MediaFieldBuilderDef? mediaFieldBuilder;
-@override final  NumFieldBuilderDef? numFieldBuilder;
-@override final  PickDateDef? pickDate;
-@override final  PickDurationDef? pickDuration;
-@override final  PickTimeDef? pickTime;
-@override final  ScoreWidgetBuilderDef? scoreBuilder;
-@override final  SelectFieldBuilderDef<dynamic>? selectFieldBuilder;
-@override final  ScaffoldBuilderDef? standardScaffoldBuilder;
-@override final  StringFieldBuilderDef? stringFieldBuilder;
-@override final  SubmitButtonBuilderDef? submitButtonBuilder;
-@override final  OnDynamicInputDeletionDef? onDynamicInputDeletion;
-@override final  OnSubmitErrorDef? onSubmitError;
-/// If set, the form's entire width won't exceed this value.
-@override@JsonKey() final  double? maxWidth;
+@override@notSerializable final  BooleanFieldBuilderDef? booleanFieldBuilder;
+@override@notSerializable final  DateTimeFieldBuilderDef? dateTimeFieldBuilder;
+@override@notSerializable final  IsoCode? defaultPhoneCoutry;
+@override@notSerializable final  DurationFieldBuilderDef? durationFieldBuilder;
+@override@notSerializable final  DynamicInputsNodeWidgetBuilderDef? dynamicInputsNodeWidgetBuilder;
+@override@notSerializable final  FormatDurationDef? formatDuration;
+@override@notSerializable final  WidgetBuilderDef? formPageBuilder;
+@override@notSerializable final  GenerateIdDef? generateId;
+@override@notSerializable final  HeaderBuilderDef? headerBuilder;
+@override@notSerializable final  InputHeaderBuilderDef? inputHeaderBuilder;
+@override@notSerializable final  InputNodeWidgetBuilderDef? inputsNodeExpanderBuilder;
+@override@notSerializable final  InputNodeWidgetBuilderDef? inputsNodeWidgetBuilder;
+@override@notSerializable final  MediaFieldBuilderDef? mediaFieldBuilder;
+@override@notSerializable final  NumFieldBuilderDef? numFieldBuilder;
+@override@notSerializable final  PickDateDef? pickDate;
+@override@notSerializable final  PickDurationDef? pickDuration;
+@override@notSerializable final  PickTimeDef? pickTime;
+@override@notSerializable final  ScoreWidgetBuilderDef? scoreBuilder;
+@override@notSerializable final  SelectFieldBuilderDef<dynamic>? selectFieldBuilder;
+@override@notSerializable final  ScaffoldBuilderDef? standardScaffoldBuilder;
+@override@notSerializable final  StringFieldBuilderDef? stringFieldBuilder;
+@override@notSerializable final  SubmitButtonBuilderDef? submitButtonBuilder;
+@override@notSerializable final  OnDynamicInputDeletionDef? onDynamicInputDeletion;
+@override@notSerializable final  OnSubmitErrorDef? onSubmitError;
+/// The form's entire width won't exceed this value. Defaults to 512.
+@override final  double? maxWidth;
 /// This spacing will be placed between each [WoFormNodeMixin].
 @override final  double? verticalSpacing;
 /// Add the characters ' *' after the labelText of [WoFormInput]s.
@@ -148,14 +151,17 @@ class _WoFormThemeData extends WoFormThemeData {
 @pragma('vm:prefer-inline')
 _$WoFormThemeDataCopyWith<_WoFormThemeData> get copyWith => __$WoFormThemeDataCopyWithImpl<_WoFormThemeData>(this, _$identity);
 
-
+@override
+Map<String, dynamic> toJson() {
+  return _$WoFormThemeDataToJson(this, );
+}
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _WoFormThemeData&&(identical(other.booleanFieldBuilder, booleanFieldBuilder) || other.booleanFieldBuilder == booleanFieldBuilder)&&(identical(other.dateTimeFieldBuilder, dateTimeFieldBuilder) || other.dateTimeFieldBuilder == dateTimeFieldBuilder)&&(identical(other.defaultPhoneCoutry, defaultPhoneCoutry) || other.defaultPhoneCoutry == defaultPhoneCoutry)&&(identical(other.durationFieldBuilder, durationFieldBuilder) || other.durationFieldBuilder == durationFieldBuilder)&&(identical(other.dynamicInputsNodeWidgetBuilder, dynamicInputsNodeWidgetBuilder) || other.dynamicInputsNodeWidgetBuilder == dynamicInputsNodeWidgetBuilder)&&(identical(other.formatDuration, formatDuration) || other.formatDuration == formatDuration)&&(identical(other.formPageBuilder, formPageBuilder) || other.formPageBuilder == formPageBuilder)&&(identical(other.generateId, generateId) || other.generateId == generateId)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.inputHeaderBuilder, inputHeaderBuilder) || other.inputHeaderBuilder == inputHeaderBuilder)&&(identical(other.inputsNodeExpanderBuilder, inputsNodeExpanderBuilder) || other.inputsNodeExpanderBuilder == inputsNodeExpanderBuilder)&&(identical(other.inputsNodeWidgetBuilder, inputsNodeWidgetBuilder) || other.inputsNodeWidgetBuilder == inputsNodeWidgetBuilder)&&(identical(other.mediaFieldBuilder, mediaFieldBuilder) || other.mediaFieldBuilder == mediaFieldBuilder)&&(identical(other.numFieldBuilder, numFieldBuilder) || other.numFieldBuilder == numFieldBuilder)&&(identical(other.pickDate, pickDate) || other.pickDate == pickDate)&&(identical(other.pickDuration, pickDuration) || other.pickDuration == pickDuration)&&(identical(other.pickTime, pickTime) || other.pickTime == pickTime)&&(identical(other.scoreBuilder, scoreBuilder) || other.scoreBuilder == scoreBuilder)&&(identical(other.selectFieldBuilder, selectFieldBuilder) || other.selectFieldBuilder == selectFieldBuilder)&&(identical(other.standardScaffoldBuilder, standardScaffoldBuilder) || other.standardScaffoldBuilder == standardScaffoldBuilder)&&(identical(other.stringFieldBuilder, stringFieldBuilder) || other.stringFieldBuilder == stringFieldBuilder)&&(identical(other.submitButtonBuilder, submitButtonBuilder) || other.submitButtonBuilder == submitButtonBuilder)&&(identical(other.onDynamicInputDeletion, onDynamicInputDeletion) || other.onDynamicInputDeletion == onDynamicInputDeletion)&&(identical(other.onSubmitError, onSubmitError) || other.onSubmitError == onSubmitError)&&(identical(other.maxWidth, maxWidth) || other.maxWidth == maxWidth)&&(identical(other.verticalSpacing, verticalSpacing) || other.verticalSpacing == verticalSpacing)&&(identical(other.showAsteriskIfRequired, showAsteriskIfRequired) || other.showAsteriskIfRequired == showAsteriskIfRequired));
 }
 
-
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hashAll([runtimeType,booleanFieldBuilder,dateTimeFieldBuilder,defaultPhoneCoutry,durationFieldBuilder,dynamicInputsNodeWidgetBuilder,formatDuration,formPageBuilder,generateId,headerBuilder,inputHeaderBuilder,inputsNodeExpanderBuilder,inputsNodeWidgetBuilder,mediaFieldBuilder,numFieldBuilder,pickDate,pickDuration,pickTime,scoreBuilder,selectFieldBuilder,standardScaffoldBuilder,stringFieldBuilder,submitButtonBuilder,onDynamicInputDeletion,onSubmitError,maxWidth,verticalSpacing,showAsteriskIfRequired]);
 
@@ -172,7 +178,7 @@ abstract mixin class _$WoFormThemeDataCopyWith<$Res> implements $WoFormThemeData
   factory _$WoFormThemeDataCopyWith(_WoFormThemeData value, $Res Function(_WoFormThemeData) _then) = __$WoFormThemeDataCopyWithImpl;
 @override @useResult
 $Res call({
- BooleanFieldBuilderDef? booleanFieldBuilder, DateTimeFieldBuilderDef? dateTimeFieldBuilder, IsoCode? defaultPhoneCoutry, DurationFieldBuilderDef? durationFieldBuilder, DynamicInputsNodeWidgetBuilderDef? dynamicInputsNodeWidgetBuilder, FormatDurationDef? formatDuration, WidgetBuilderDef? formPageBuilder, GenerateIdDef? generateId, HeaderBuilderDef? headerBuilder, InputHeaderBuilderDef? inputHeaderBuilder, InputNodeWidgetBuilderDef? inputsNodeExpanderBuilder, InputNodeWidgetBuilderDef? inputsNodeWidgetBuilder, MediaFieldBuilderDef? mediaFieldBuilder, NumFieldBuilderDef? numFieldBuilder, PickDateDef? pickDate, PickDurationDef? pickDuration, PickTimeDef? pickTime, ScoreWidgetBuilderDef? scoreBuilder, SelectFieldBuilderDef<dynamic>? selectFieldBuilder, ScaffoldBuilderDef? standardScaffoldBuilder, StringFieldBuilderDef? stringFieldBuilder, SubmitButtonBuilderDef? submitButtonBuilder, OnDynamicInputDeletionDef? onDynamicInputDeletion, OnSubmitErrorDef? onSubmitError, double? maxWidth, double? verticalSpacing, bool? showAsteriskIfRequired
+@notSerializable BooleanFieldBuilderDef? booleanFieldBuilder,@notSerializable DateTimeFieldBuilderDef? dateTimeFieldBuilder,@notSerializable IsoCode? defaultPhoneCoutry,@notSerializable DurationFieldBuilderDef? durationFieldBuilder,@notSerializable DynamicInputsNodeWidgetBuilderDef? dynamicInputsNodeWidgetBuilder,@notSerializable FormatDurationDef? formatDuration,@notSerializable WidgetBuilderDef? formPageBuilder,@notSerializable GenerateIdDef? generateId,@notSerializable HeaderBuilderDef? headerBuilder,@notSerializable InputHeaderBuilderDef? inputHeaderBuilder,@notSerializable InputNodeWidgetBuilderDef? inputsNodeExpanderBuilder,@notSerializable InputNodeWidgetBuilderDef? inputsNodeWidgetBuilder,@notSerializable MediaFieldBuilderDef? mediaFieldBuilder,@notSerializable NumFieldBuilderDef? numFieldBuilder,@notSerializable PickDateDef? pickDate,@notSerializable PickDurationDef? pickDuration,@notSerializable PickTimeDef? pickTime,@notSerializable ScoreWidgetBuilderDef? scoreBuilder,@notSerializable SelectFieldBuilderDef<dynamic>? selectFieldBuilder,@notSerializable ScaffoldBuilderDef? standardScaffoldBuilder,@notSerializable StringFieldBuilderDef? stringFieldBuilder,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder,@notSerializable OnDynamicInputDeletionDef? onDynamicInputDeletion,@notSerializable OnSubmitErrorDef? onSubmitError, double? maxWidth, double? verticalSpacing, bool? showAsteriskIfRequired
 });
 
 

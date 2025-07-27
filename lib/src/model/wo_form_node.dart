@@ -71,8 +71,7 @@ abstract class DynamicInputTemplate with _$DynamicInputTemplate {
   )
   factory DynamicInputTemplate({
     @InputNullableConverter() WoFormNodeMixin? child,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    WoFormNodeMixin Function()? childBuilder,
+    @notSerializable WoFormNodeMixin Function()? childBuilder,
     @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
     @Default(DynamicInputUiSettings())
     DynamicInputUiSettings uiSettings,
@@ -127,16 +126,14 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
   @Assert('builder != null', 'PathBuilderNode.builder cannot be null')
   const factory WoFormNode.pathBuilder({
     required String id,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    WoFormNodeMixin Function(String path)? builder,
+    @notSerializable WoFormNodeMixin Function(String path)? builder,
   }) = PathBuilderNode;
 
   @Assert('builder != null', 'ValueBuilderNode.builder cannot be null')
   const factory WoFormNode.valueBuilder({
     required String id,
     required String path,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    WoFormNodeMixin Function(Object? value)? builder,
+    @notSerializable WoFormNodeMixin Function(Object? value)? builder,
     Object? initialValue,
   }) = ValueBuilderNode;
 
@@ -144,7 +141,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
   const factory WoFormNode.valuesBuilder({
     required String id,
     required List<String> paths,
-    @JsonKey(includeToJson: false, includeFromJson: false)
+    @notSerializable
     WoFormNodeMixin Function(Map<String, Object?> values)? builder,
     Map<String, Object?>? initialValues,
   }) = ValuesBuilderNode;
@@ -153,17 +150,16 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
   const factory WoFormNode.valueListener({
     required String path,
     @Default('ValueListenerNode') String id,
-    @JsonKey(includeToJson: false, includeFromJson: false)
+    @notSerializable
     bool Function(Object? previous, Object? current)? listenWhen,
-    @JsonKey(includeToJson: false, includeFromJson: false)
+    @notSerializable
     void Function(BuildContext context, String parentPath, Object? value)?
     listener,
   }) = ValueListenerNode;
 
   const factory WoFormNode.widget({
     @Default('WidgetNode') String id,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    Widget Function(BuildContext context)? builder,
+    @notSerializable Widget Function(BuildContext context)? builder,
   }) = WidgetNode;
 
   const WoFormNode._();

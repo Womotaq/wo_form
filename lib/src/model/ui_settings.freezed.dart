@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$BooleanInputUiSettings {
 
- String? get labelText; String? get helperText; BooleanFieldControlType? get controlType; ListTileControlAffinity? get controlAffinity;@JsonKey(includeToJson: false, includeFromJson: false) Widget? get secondary;@JsonKey(includeToJson: false, includeFromJson: false) BooleanFieldBuilderDef? get widgetBuilder;
+ String? get labelText; String? get helperText; BooleanFieldControlType? get controlType; ListTileControlAffinity? get controlAffinity;@notSerializable Widget? get secondary;@notSerializable BooleanFieldBuilderDef? get widgetBuilder;
 /// Create a copy of BooleanInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $BooleanInputUiSettingsCopyWith<$Res>  {
   factory $BooleanInputUiSettingsCopyWith(BooleanInputUiSettings value, $Res Function(BooleanInputUiSettings) _then) = _$BooleanInputUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String? labelText, String? helperText, BooleanFieldControlType? controlType, ListTileControlAffinity? controlAffinity,@JsonKey(includeToJson: false, includeFromJson: false) Widget? secondary,@JsonKey(includeToJson: false, includeFromJson: false) BooleanFieldBuilderDef? widgetBuilder
+ String? labelText, String? helperText, BooleanFieldControlType? controlType, ListTileControlAffinity? controlAffinity,@notSerializable Widget? secondary,@notSerializable BooleanFieldBuilderDef? widgetBuilder
 });
 
 
@@ -85,15 +85,15 @@ as BooleanFieldBuilderDef?,
 @JsonSerializable()
 
 class _BooleanInputUiSettings extends BooleanInputUiSettings {
-  const _BooleanInputUiSettings({this.labelText, this.helperText, this.controlType, this.controlAffinity, @JsonKey(includeToJson: false, includeFromJson: false) this.secondary, @JsonKey(includeToJson: false, includeFromJson: false) this.widgetBuilder}): super._();
+  const _BooleanInputUiSettings({this.labelText, this.helperText, this.controlType, this.controlAffinity, @notSerializable this.secondary, @notSerializable this.widgetBuilder}): super._();
   factory _BooleanInputUiSettings.fromJson(Map<String, dynamic> json) => _$BooleanInputUiSettingsFromJson(json);
 
 @override final  String? labelText;
 @override final  String? helperText;
 @override final  BooleanFieldControlType? controlType;
 @override final  ListTileControlAffinity? controlAffinity;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  Widget? secondary;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  BooleanFieldBuilderDef? widgetBuilder;
+@override@notSerializable final  Widget? secondary;
+@override@notSerializable final  BooleanFieldBuilderDef? widgetBuilder;
 
 /// Create a copy of BooleanInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -128,7 +128,7 @@ abstract mixin class _$BooleanInputUiSettingsCopyWith<$Res> implements $BooleanI
   factory _$BooleanInputUiSettingsCopyWith(_BooleanInputUiSettings value, $Res Function(_BooleanInputUiSettings) _then) = __$BooleanInputUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String? labelText, String? helperText, BooleanFieldControlType? controlType, ListTileControlAffinity? controlAffinity,@JsonKey(includeToJson: false, includeFromJson: false) Widget? secondary,@JsonKey(includeToJson: false, includeFromJson: false) BooleanFieldBuilderDef? widgetBuilder
+ String? labelText, String? helperText, BooleanFieldControlType? controlType, ListTileControlAffinity? controlAffinity,@notSerializable Widget? secondary,@notSerializable BooleanFieldBuilderDef? widgetBuilder
 });
 
 
@@ -169,7 +169,7 @@ mixin _$DateTimeInputUiSettings {
 /// selector with a flex value of 10,
 /// and label with a flex value of [labelFlex].
  int? get labelFlex;/// If DateTimeInput.initialValue is null, this value will be used instead.
-@JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? get initialEditValue; DatePickerEntryMode? get initialDateEntryMode; DatePickerMode? get initialDatePickerMode; DateEditMode? get editMode;@JsonKey(includeToJson: false, includeFromJson: false) PickDateDef? get pickDate;@JsonKey(includeToJson: false, includeFromJson: false) PickTimeDef? get pickTime; TimePickerEntryMode? get initialTimeEntryMode;@JsonKey(includeToJson: false, includeFromJson: false) DateTimeFieldBuilderDef? get widgetBuilder;
+@JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? get initialEditValue; DatePickerEntryMode? get initialDateEntryMode; DatePickerMode? get initialDatePickerMode; DateEditMode? get editMode;@notSerializable PickDateDef? get pickDate;@notSerializable PickTimeDef? get pickTime; TimePickerEntryMode? get initialTimeEntryMode;@notSerializable DateTimeFieldBuilderDef? get widgetBuilder;
 /// Create a copy of DateTimeInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -202,7 +202,7 @@ abstract mixin class $DateTimeInputUiSettingsCopyWith<$Res>  {
   factory $DateTimeInputUiSettingsCopyWith(DateTimeInputUiSettings value, $Res Function(DateTimeInputUiSettings) _then) = _$DateTimeInputUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String? dateFormat, String? timeFormat, String? labelText, String? helperText, String? hintText, int? labelFlex,@JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? initialEditValue, DatePickerEntryMode? initialDateEntryMode, DatePickerMode? initialDatePickerMode, DateEditMode? editMode,@JsonKey(includeToJson: false, includeFromJson: false) PickDateDef? pickDate,@JsonKey(includeToJson: false, includeFromJson: false) PickTimeDef? pickTime, TimePickerEntryMode? initialTimeEntryMode,@JsonKey(includeToJson: false, includeFromJson: false) DateTimeFieldBuilderDef? widgetBuilder
+ String? dateFormat, String? timeFormat, String? labelText, String? helperText, String? hintText, int? labelFlex,@JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? initialEditValue, DatePickerEntryMode? initialDateEntryMode, DatePickerMode? initialDatePickerMode, DateEditMode? editMode,@notSerializable PickDateDef? pickDate,@notSerializable PickTimeDef? pickTime, TimePickerEntryMode? initialTimeEntryMode,@notSerializable DateTimeFieldBuilderDef? widgetBuilder
 });
 
 
@@ -259,7 +259,7 @@ $FlexibleDateTimeCopyWith<$Res>? get initialEditValue {
 @JsonSerializable()
 
 class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
-  const _DateTimeInputUiSettings({this.dateFormat, this.timeFormat, this.labelText, this.helperText, this.hintText, this.labelFlex, @JsonKey(toJson: FlexibleDateTime.staticToJson) this.initialEditValue, this.initialDateEntryMode, this.initialDatePickerMode, this.editMode, @JsonKey(includeToJson: false, includeFromJson: false) this.pickDate, @JsonKey(includeToJson: false, includeFromJson: false) this.pickTime, this.initialTimeEntryMode, @JsonKey(includeToJson: false, includeFromJson: false) this.widgetBuilder}): super._();
+  const _DateTimeInputUiSettings({this.dateFormat, this.timeFormat, this.labelText, this.helperText, this.hintText, this.labelFlex, @JsonKey(toJson: FlexibleDateTime.staticToJson) this.initialEditValue, this.initialDateEntryMode, this.initialDatePickerMode, this.editMode, @notSerializable this.pickDate, @notSerializable this.pickTime, this.initialTimeEntryMode, @notSerializable this.widgetBuilder}): super._();
   factory _DateTimeInputUiSettings.fromJson(Map<String, dynamic> json) => _$DateTimeInputUiSettingsFromJson(json);
 
 @override final  String? dateFormat;
@@ -277,10 +277,10 @@ class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
 @override final  DatePickerEntryMode? initialDateEntryMode;
 @override final  DatePickerMode? initialDatePickerMode;
 @override final  DateEditMode? editMode;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  PickDateDef? pickDate;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  PickTimeDef? pickTime;
+@override@notSerializable final  PickDateDef? pickDate;
+@override@notSerializable final  PickTimeDef? pickTime;
 @override final  TimePickerEntryMode? initialTimeEntryMode;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  DateTimeFieldBuilderDef? widgetBuilder;
+@override@notSerializable final  DateTimeFieldBuilderDef? widgetBuilder;
 
 /// Create a copy of DateTimeInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -315,7 +315,7 @@ abstract mixin class _$DateTimeInputUiSettingsCopyWith<$Res> implements $DateTim
   factory _$DateTimeInputUiSettingsCopyWith(_DateTimeInputUiSettings value, $Res Function(_DateTimeInputUiSettings) _then) = __$DateTimeInputUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String? dateFormat, String? timeFormat, String? labelText, String? helperText, String? hintText, int? labelFlex,@JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? initialEditValue, DatePickerEntryMode? initialDateEntryMode, DatePickerMode? initialDatePickerMode, DateEditMode? editMode,@JsonKey(includeToJson: false, includeFromJson: false) PickDateDef? pickDate,@JsonKey(includeToJson: false, includeFromJson: false) PickTimeDef? pickTime, TimePickerEntryMode? initialTimeEntryMode,@JsonKey(includeToJson: false, includeFromJson: false) DateTimeFieldBuilderDef? widgetBuilder
+ String? dateFormat, String? timeFormat, String? labelText, String? helperText, String? hintText, int? labelFlex,@JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? initialEditValue, DatePickerEntryMode? initialDateEntryMode, DatePickerMode? initialDatePickerMode, DateEditMode? editMode,@notSerializable PickDateDef? pickDate,@notSerializable PickTimeDef? pickTime, TimePickerEntryMode? initialTimeEntryMode,@notSerializable DateTimeFieldBuilderDef? widgetBuilder
 });
 
 
@@ -375,8 +375,8 @@ mixin _$DurationInputUiSettings {
 /// Else, label and selector will be in a flexible row,
 /// selector with a flex value of 10,
 /// and label with a flex value of [labelFlex].
- int? get labelFlex;@JsonKey(includeToJson: false, includeFromJson: false) PickDurationDef? get pickDuration;@JsonKey(includeToJson: false, includeFromJson: false) FormatDurationDef? get formatDuration;@JsonKey(includeToJson: false, includeFromJson: false) DurationFieldBuilderDef? get widgetBuilder;/// The following fields are used if editMode is dateTime
- String? get dateTimeLabelText; String? get dateTimeHelperText; String? get dateTimeHintText; String? get dateFormat; String? get timeFormat; DateEditMode? get dateTimeEditMode;@JsonKey(includeToJson: false, includeFromJson: false) PickDateDef? get pickDate;@JsonKey(includeToJson: false, includeFromJson: false) PickTimeDef? get pickTime;
+ int? get labelFlex;@notSerializable PickDurationDef? get pickDuration;@notSerializable FormatDurationDef? get formatDuration;@notSerializable DurationFieldBuilderDef? get widgetBuilder;/// The following fields are used if editMode is dateTime
+ String? get dateTimeLabelText; String? get dateTimeHelperText; String? get dateTimeHintText; String? get dateFormat; String? get timeFormat; DateEditMode? get dateTimeEditMode;@notSerializable PickDateDef? get pickDate;@notSerializable PickTimeDef? get pickTime;
 /// Create a copy of DurationInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -409,7 +409,7 @@ abstract mixin class $DurationInputUiSettingsCopyWith<$Res>  {
   factory $DurationInputUiSettingsCopyWith(DurationInputUiSettings value, $Res Function(DurationInputUiSettings) _then) = _$DurationInputUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String? labelText, String? helperText, String? hintText, DurationEditMode? editMode, int? labelFlex,@JsonKey(includeToJson: false, includeFromJson: false) PickDurationDef? pickDuration,@JsonKey(includeToJson: false, includeFromJson: false) FormatDurationDef? formatDuration,@JsonKey(includeToJson: false, includeFromJson: false) DurationFieldBuilderDef? widgetBuilder, String? dateTimeLabelText, String? dateTimeHelperText, String? dateTimeHintText, String? dateFormat, String? timeFormat, DateEditMode? dateTimeEditMode,@JsonKey(includeToJson: false, includeFromJson: false) PickDateDef? pickDate,@JsonKey(includeToJson: false, includeFromJson: false) PickTimeDef? pickTime
+ String? labelText, String? helperText, String? hintText, DurationEditMode? editMode, int? labelFlex,@notSerializable PickDurationDef? pickDuration,@notSerializable FormatDurationDef? formatDuration,@notSerializable DurationFieldBuilderDef? widgetBuilder, String? dateTimeLabelText, String? dateTimeHelperText, String? dateTimeHintText, String? dateFormat, String? timeFormat, DateEditMode? dateTimeEditMode,@notSerializable PickDateDef? pickDate,@notSerializable PickTimeDef? pickTime
 });
 
 
@@ -456,7 +456,7 @@ as PickTimeDef?,
 @JsonSerializable()
 
 class _DurationInputUiSettings extends DurationInputUiSettings {
-  const _DurationInputUiSettings({this.labelText, this.helperText, this.hintText, this.editMode, this.labelFlex, @JsonKey(includeToJson: false, includeFromJson: false) this.pickDuration, @JsonKey(includeToJson: false, includeFromJson: false) this.formatDuration, @JsonKey(includeToJson: false, includeFromJson: false) this.widgetBuilder, this.dateTimeLabelText, this.dateTimeHelperText, this.dateTimeHintText, this.dateFormat, this.timeFormat, this.dateTimeEditMode, @JsonKey(includeToJson: false, includeFromJson: false) this.pickDate, @JsonKey(includeToJson: false, includeFromJson: false) this.pickTime}): super._();
+  const _DurationInputUiSettings({this.labelText, this.helperText, this.hintText, this.editMode, this.labelFlex, @notSerializable this.pickDuration, @notSerializable this.formatDuration, @notSerializable this.widgetBuilder, this.dateTimeLabelText, this.dateTimeHelperText, this.dateTimeHintText, this.dateFormat, this.timeFormat, this.dateTimeEditMode, @notSerializable this.pickDate, @notSerializable this.pickTime}): super._();
   factory _DurationInputUiSettings.fromJson(Map<String, dynamic> json) => _$DurationInputUiSettingsFromJson(json);
 
 @override final  String? labelText;
@@ -468,9 +468,9 @@ class _DurationInputUiSettings extends DurationInputUiSettings {
 /// selector with a flex value of 10,
 /// and label with a flex value of [labelFlex].
 @override final  int? labelFlex;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  PickDurationDef? pickDuration;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  FormatDurationDef? formatDuration;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  DurationFieldBuilderDef? widgetBuilder;
+@override@notSerializable final  PickDurationDef? pickDuration;
+@override@notSerializable final  FormatDurationDef? formatDuration;
+@override@notSerializable final  DurationFieldBuilderDef? widgetBuilder;
 /// The following fields are used if editMode is dateTime
 @override final  String? dateTimeLabelText;
 @override final  String? dateTimeHelperText;
@@ -478,8 +478,8 @@ class _DurationInputUiSettings extends DurationInputUiSettings {
 @override final  String? dateFormat;
 @override final  String? timeFormat;
 @override final  DateEditMode? dateTimeEditMode;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  PickDateDef? pickDate;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  PickTimeDef? pickTime;
+@override@notSerializable final  PickDateDef? pickDate;
+@override@notSerializable final  PickTimeDef? pickTime;
 
 /// Create a copy of DurationInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -514,7 +514,7 @@ abstract mixin class _$DurationInputUiSettingsCopyWith<$Res> implements $Duratio
   factory _$DurationInputUiSettingsCopyWith(_DurationInputUiSettings value, $Res Function(_DurationInputUiSettings) _then) = __$DurationInputUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String? labelText, String? helperText, String? hintText, DurationEditMode? editMode, int? labelFlex,@JsonKey(includeToJson: false, includeFromJson: false) PickDurationDef? pickDuration,@JsonKey(includeToJson: false, includeFromJson: false) FormatDurationDef? formatDuration,@JsonKey(includeToJson: false, includeFromJson: false) DurationFieldBuilderDef? widgetBuilder, String? dateTimeLabelText, String? dateTimeHelperText, String? dateTimeHintText, String? dateFormat, String? timeFormat, DateEditMode? dateTimeEditMode,@JsonKey(includeToJson: false, includeFromJson: false) PickDateDef? pickDate,@JsonKey(includeToJson: false, includeFromJson: false) PickTimeDef? pickTime
+ String? labelText, String? helperText, String? hintText, DurationEditMode? editMode, int? labelFlex,@notSerializable PickDurationDef? pickDuration,@notSerializable FormatDurationDef? formatDuration,@notSerializable DurationFieldBuilderDef? widgetBuilder, String? dateTimeLabelText, String? dateTimeHelperText, String? dateTimeHintText, String? dateFormat, String? timeFormat, DateEditMode? dateTimeEditMode,@notSerializable PickDateDef? pickDate,@notSerializable PickTimeDef? pickTime
 });
 
 
@@ -561,7 +561,7 @@ as PickTimeDef?,
 mixin _$DynamicInputsNodeUiSettings {
 
  String? get labelText; String? get helperText;/// Default to true
- bool? get reorderable;@JsonKey(includeToJson: false, includeFromJson: false) GenerateIdDef? get generateId;@JsonKey(includeToJson: false, includeFromJson: false) OnDynamicInputDeletionDef? get onChildDeletion;@JsonKey(includeToJson: false, includeFromJson: false) DynamicInputsNodeWidgetBuilderDef? get widgetBuilder;
+ bool? get reorderable;@notSerializable GenerateIdDef? get generateId;@notSerializable OnDynamicInputDeletionDef? get onChildDeletion;@notSerializable DynamicInputsNodeWidgetBuilderDef? get widgetBuilder;
 /// Create a copy of DynamicInputsNodeUiSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -594,7 +594,7 @@ abstract mixin class $DynamicInputsNodeUiSettingsCopyWith<$Res>  {
   factory $DynamicInputsNodeUiSettingsCopyWith(DynamicInputsNodeUiSettings value, $Res Function(DynamicInputsNodeUiSettings) _then) = _$DynamicInputsNodeUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String? labelText, String? helperText, bool? reorderable,@JsonKey(includeToJson: false, includeFromJson: false) GenerateIdDef? generateId,@JsonKey(includeToJson: false, includeFromJson: false) OnDynamicInputDeletionDef? onChildDeletion,@JsonKey(includeToJson: false, includeFromJson: false) DynamicInputsNodeWidgetBuilderDef? widgetBuilder
+ String? labelText, String? helperText, bool? reorderable,@notSerializable GenerateIdDef? generateId,@notSerializable OnDynamicInputDeletionDef? onChildDeletion,@notSerializable DynamicInputsNodeWidgetBuilderDef? widgetBuilder
 });
 
 
@@ -631,16 +631,16 @@ as DynamicInputsNodeWidgetBuilderDef?,
 @JsonSerializable()
 
 class _DynamicInputsNodeUiSettings extends DynamicInputsNodeUiSettings {
-  const _DynamicInputsNodeUiSettings({this.labelText, this.helperText, this.reorderable, @JsonKey(includeToJson: false, includeFromJson: false) this.generateId, @JsonKey(includeToJson: false, includeFromJson: false) this.onChildDeletion, @JsonKey(includeToJson: false, includeFromJson: false) this.widgetBuilder}): super._();
+  const _DynamicInputsNodeUiSettings({this.labelText, this.helperText, this.reorderable, @notSerializable this.generateId, @notSerializable this.onChildDeletion, @notSerializable this.widgetBuilder}): super._();
   factory _DynamicInputsNodeUiSettings.fromJson(Map<String, dynamic> json) => _$DynamicInputsNodeUiSettingsFromJson(json);
 
 @override final  String? labelText;
 @override final  String? helperText;
 /// Default to true
 @override final  bool? reorderable;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  GenerateIdDef? generateId;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  OnDynamicInputDeletionDef? onChildDeletion;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  DynamicInputsNodeWidgetBuilderDef? widgetBuilder;
+@override@notSerializable final  GenerateIdDef? generateId;
+@override@notSerializable final  OnDynamicInputDeletionDef? onChildDeletion;
+@override@notSerializable final  DynamicInputsNodeWidgetBuilderDef? widgetBuilder;
 
 /// Create a copy of DynamicInputsNodeUiSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -675,7 +675,7 @@ abstract mixin class _$DynamicInputsNodeUiSettingsCopyWith<$Res> implements $Dyn
   factory _$DynamicInputsNodeUiSettingsCopyWith(_DynamicInputsNodeUiSettings value, $Res Function(_DynamicInputsNodeUiSettings) _then) = __$DynamicInputsNodeUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String? labelText, String? helperText, bool? reorderable,@JsonKey(includeToJson: false, includeFromJson: false) GenerateIdDef? generateId,@JsonKey(includeToJson: false, includeFromJson: false) OnDynamicInputDeletionDef? onChildDeletion,@JsonKey(includeToJson: false, includeFromJson: false) DynamicInputsNodeWidgetBuilderDef? widgetBuilder
+ String? labelText, String? helperText, bool? reorderable,@notSerializable GenerateIdDef? generateId,@notSerializable OnDynamicInputDeletionDef? onChildDeletion,@notSerializable DynamicInputsNodeWidgetBuilderDef? widgetBuilder
 });
 
 
@@ -852,7 +852,7 @@ mixin _$InputsNodeUiSettings {
  ChildrenVisibility? get childrenVisibility;/// Only used by [ChildrenVisibility.whenAsked].
 /// If true, when the widget will be rendered,
 /// the children's visibility will be asked.
- bool get showChildrenInitially;@JsonKey(includeToJson: false, includeFromJson: false) InputNodeWidgetBuilderDef? get widgetBuilder;@JsonKey(includeToJson: false, includeFromJson: false) HeaderBuilderDef? get headerBuilder;@JsonKey(includeToJson: false, includeFromJson: false) InputNodeWidgetBuilderDef? get expanderBuilder;
+ bool get showChildrenInitially;@notSerializable InputNodeWidgetBuilderDef? get widgetBuilder;@notSerializable HeaderBuilderDef? get headerBuilder;@notSerializable InputNodeWidgetBuilderDef? get expanderBuilder;
 /// Create a copy of InputsNodeUiSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -885,7 +885,7 @@ abstract mixin class $InputsNodeUiSettingsCopyWith<$Res>  {
   factory $InputsNodeUiSettingsCopyWith(InputsNodeUiSettings value, $Res Function(InputsNodeUiSettings) _then) = _$InputsNodeUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String? labelText, String? labelTextWhenChildrenHidden, String? helperText, ChildrenVisibility? childrenVisibility, bool showChildrenInitially,@JsonKey(includeToJson: false, includeFromJson: false) InputNodeWidgetBuilderDef? widgetBuilder,@JsonKey(includeToJson: false, includeFromJson: false) HeaderBuilderDef? headerBuilder,@JsonKey(includeToJson: false, includeFromJson: false) InputNodeWidgetBuilderDef? expanderBuilder
+ String? labelText, String? labelTextWhenChildrenHidden, String? helperText, ChildrenVisibility? childrenVisibility, bool showChildrenInitially,@notSerializable InputNodeWidgetBuilderDef? widgetBuilder,@notSerializable HeaderBuilderDef? headerBuilder,@notSerializable InputNodeWidgetBuilderDef? expanderBuilder
 });
 
 
@@ -924,7 +924,7 @@ as InputNodeWidgetBuilderDef?,
 @JsonSerializable()
 
 class _InputsNodeUiSettings extends InputsNodeUiSettings {
-  const _InputsNodeUiSettings({this.labelText, this.labelTextWhenChildrenHidden, this.helperText, this.childrenVisibility, this.showChildrenInitially = false, @JsonKey(includeToJson: false, includeFromJson: false) this.widgetBuilder, @JsonKey(includeToJson: false, includeFromJson: false) this.headerBuilder, @JsonKey(includeToJson: false, includeFromJson: false) this.expanderBuilder}): super._();
+  const _InputsNodeUiSettings({this.labelText, this.labelTextWhenChildrenHidden, this.helperText, this.childrenVisibility, this.showChildrenInitially = false, @notSerializable this.widgetBuilder, @notSerializable this.headerBuilder, @notSerializable this.expanderBuilder}): super._();
   factory _InputsNodeUiSettings.fromJson(Map<String, dynamic> json) => _$InputsNodeUiSettingsFromJson(json);
 
 @override final  String? labelText;
@@ -936,9 +936,9 @@ class _InputsNodeUiSettings extends InputsNodeUiSettings {
 /// If true, when the widget will be rendered,
 /// the children's visibility will be asked.
 @override@JsonKey() final  bool showChildrenInitially;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  InputNodeWidgetBuilderDef? widgetBuilder;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  HeaderBuilderDef? headerBuilder;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  InputNodeWidgetBuilderDef? expanderBuilder;
+@override@notSerializable final  InputNodeWidgetBuilderDef? widgetBuilder;
+@override@notSerializable final  HeaderBuilderDef? headerBuilder;
+@override@notSerializable final  InputNodeWidgetBuilderDef? expanderBuilder;
 
 /// Create a copy of InputsNodeUiSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -973,7 +973,7 @@ abstract mixin class _$InputsNodeUiSettingsCopyWith<$Res> implements $InputsNode
   factory _$InputsNodeUiSettingsCopyWith(_InputsNodeUiSettings value, $Res Function(_InputsNodeUiSettings) _then) = __$InputsNodeUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String? labelText, String? labelTextWhenChildrenHidden, String? helperText, ChildrenVisibility? childrenVisibility, bool showChildrenInitially,@JsonKey(includeToJson: false, includeFromJson: false) InputNodeWidgetBuilderDef? widgetBuilder,@JsonKey(includeToJson: false, includeFromJson: false) HeaderBuilderDef? headerBuilder,@JsonKey(includeToJson: false, includeFromJson: false) InputNodeWidgetBuilderDef? expanderBuilder
+ String? labelText, String? labelTextWhenChildrenHidden, String? helperText, ChildrenVisibility? childrenVisibility, bool showChildrenInitially,@notSerializable InputNodeWidgetBuilderDef? widgetBuilder,@notSerializable HeaderBuilderDef? headerBuilder,@notSerializable InputNodeWidgetBuilderDef? expanderBuilder
 });
 
 
@@ -1012,7 +1012,7 @@ as InputNodeWidgetBuilderDef?,
 mixin _$MediaInputUiSettings {
 
  String? get addMediaText; int? get fieldHeight;/// For a circle cropping, use MediaService.circleAspectRatio
- double? get cropAspectRatioOrCircle; bool get cropShowGrid;@JsonKey(includeToJson: false, includeFromJson: false) MediaFieldBuilderDef? get widgetBuilder;
+ double? get cropAspectRatioOrCircle; bool get cropShowGrid;@notSerializable MediaFieldBuilderDef? get widgetBuilder;
 /// Create a copy of MediaInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1045,7 +1045,7 @@ abstract mixin class $MediaInputUiSettingsCopyWith<$Res>  {
   factory $MediaInputUiSettingsCopyWith(MediaInputUiSettings value, $Res Function(MediaInputUiSettings) _then) = _$MediaInputUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String? addMediaText, int? fieldHeight, double? cropAspectRatioOrCircle, bool cropShowGrid,@JsonKey(includeToJson: false, includeFromJson: false) MediaFieldBuilderDef? widgetBuilder
+ String? addMediaText, int? fieldHeight, double? cropAspectRatioOrCircle, bool cropShowGrid,@notSerializable MediaFieldBuilderDef? widgetBuilder
 });
 
 
@@ -1081,7 +1081,7 @@ as MediaFieldBuilderDef?,
 @JsonSerializable()
 
 class _MediaInputUiSettings extends MediaInputUiSettings {
-  const _MediaInputUiSettings({this.addMediaText, this.fieldHeight, this.cropAspectRatioOrCircle, this.cropShowGrid = false, @JsonKey(includeToJson: false, includeFromJson: false) this.widgetBuilder}): super._();
+  const _MediaInputUiSettings({this.addMediaText, this.fieldHeight, this.cropAspectRatioOrCircle, this.cropShowGrid = false, @notSerializable this.widgetBuilder}): super._();
   factory _MediaInputUiSettings.fromJson(Map<String, dynamic> json) => _$MediaInputUiSettingsFromJson(json);
 
 @override final  String? addMediaText;
@@ -1089,7 +1089,7 @@ class _MediaInputUiSettings extends MediaInputUiSettings {
 /// For a circle cropping, use MediaService.circleAspectRatio
 @override final  double? cropAspectRatioOrCircle;
 @override@JsonKey() final  bool cropShowGrid;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  MediaFieldBuilderDef? widgetBuilder;
+@override@notSerializable final  MediaFieldBuilderDef? widgetBuilder;
 
 /// Create a copy of MediaInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -1124,7 +1124,7 @@ abstract mixin class _$MediaInputUiSettingsCopyWith<$Res> implements $MediaInput
   factory _$MediaInputUiSettingsCopyWith(_MediaInputUiSettings value, $Res Function(_MediaInputUiSettings) _then) = __$MediaInputUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String? addMediaText, int? fieldHeight, double? cropAspectRatioOrCircle, bool cropShowGrid,@JsonKey(includeToJson: false, includeFromJson: false) MediaFieldBuilderDef? widgetBuilder
+ String? addMediaText, int? fieldHeight, double? cropAspectRatioOrCircle, bool cropShowGrid,@notSerializable MediaFieldBuilderDef? widgetBuilder
 });
 
 
@@ -1159,7 +1159,7 @@ as MediaFieldBuilderDef?,
 /// @nodoc
 mixin _$NumInputUiSettings {
 
- String? get labelText; String? get helperText;@JsonKey(includeToJson: false, includeFromJson: false) Widget? get unit;@JsonKey(includeToJson: false, includeFromJson: false) NumFieldBuilderDef? get widgetBuilder;
+ String? get labelText; String? get helperText;@notSerializable Widget? get unit;@notSerializable NumFieldBuilderDef? get widgetBuilder;
 /// Create a copy of NumInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1192,7 +1192,7 @@ abstract mixin class $NumInputUiSettingsCopyWith<$Res>  {
   factory $NumInputUiSettingsCopyWith(NumInputUiSettings value, $Res Function(NumInputUiSettings) _then) = _$NumInputUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String? labelText, String? helperText,@JsonKey(includeToJson: false, includeFromJson: false) Widget? unit,@JsonKey(includeToJson: false, includeFromJson: false) NumFieldBuilderDef? widgetBuilder
+ String? labelText, String? helperText,@notSerializable Widget? unit,@notSerializable NumFieldBuilderDef? widgetBuilder
 });
 
 
@@ -1227,13 +1227,13 @@ as NumFieldBuilderDef?,
 @JsonSerializable()
 
 class _NumInputUiSettings extends NumInputUiSettings {
-  const _NumInputUiSettings({this.labelText, this.helperText, @JsonKey(includeToJson: false, includeFromJson: false) this.unit, @JsonKey(includeToJson: false, includeFromJson: false) this.widgetBuilder}): super._();
+  const _NumInputUiSettings({this.labelText, this.helperText, @notSerializable this.unit, @notSerializable this.widgetBuilder}): super._();
   factory _NumInputUiSettings.fromJson(Map<String, dynamic> json) => _$NumInputUiSettingsFromJson(json);
 
 @override final  String? labelText;
 @override final  String? helperText;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  Widget? unit;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  NumFieldBuilderDef? widgetBuilder;
+@override@notSerializable final  Widget? unit;
+@override@notSerializable final  NumFieldBuilderDef? widgetBuilder;
 
 /// Create a copy of NumInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -1268,7 +1268,7 @@ abstract mixin class _$NumInputUiSettingsCopyWith<$Res> implements $NumInputUiSe
   factory _$NumInputUiSettingsCopyWith(_NumInputUiSettings value, $Res Function(_NumInputUiSettings) _then) = __$NumInputUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String? labelText, String? helperText,@JsonKey(includeToJson: false, includeFromJson: false) Widget? unit,@JsonKey(includeToJson: false, includeFromJson: false) NumFieldBuilderDef? widgetBuilder
+ String? labelText, String? helperText,@notSerializable Widget? unit,@notSerializable NumFieldBuilderDef? widgetBuilder
 });
 
 
@@ -1309,7 +1309,7 @@ mixin _$SelectInputUiSettings<T> {
 /// Else, label and selector will be in a flexible row,
 /// selector with a flex value of 10,
 /// and label with a flex value of [labelFlex].
- int? get labelFlex;@JsonKey(includeFromJson: false, includeToJson: false) Widget Function(T?)? get valueBuilder;@JsonKey(includeFromJson: false, includeToJson: false) Widget Function(T?)? get selectedBuilder;@JsonKey(includeFromJson: false, includeToJson: false) Widget? Function(T)? get helpValueBuilder;@JsonKey(includeFromJson: false, includeToJson: false) double Function(String query, T value)? get searcher;@JsonKey(includeFromJson: false, includeToJson: false) SearchScreenDef<T>? get searchScreenBuilder;@JsonKey(includeToJson: false, includeFromJson: false) SelectFieldBuilderDef<T>? get widgetBuilder;@JsonKey(includeToJson: false, includeFromJson: false) InputHeaderBuilderDef? get headerBuilder;@JsonKey(includeToJson: false, includeFromJson: false) ScoreWidgetBuilderDef? get scoreBuilder;
+ int? get labelFlex;@notSerializable Widget Function(T?)? get valueBuilder;@notSerializable Widget Function(T?)? get selectedBuilder;@notSerializable Widget? Function(T)? get helpValueBuilder;@notSerializable double Function(String query, T value)? get searcher;@notSerializable SearchScreenDef<T>? get searchScreenBuilder;@notSerializable SelectFieldBuilderDef<T>? get widgetBuilder;@notSerializable InputHeaderBuilderDef? get headerBuilder;@notSerializable ScoreWidgetBuilderDef? get scoreBuilder;
 /// Create a copy of SelectInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1342,7 +1342,7 @@ abstract mixin class $SelectInputUiSettingsCopyWith<T,$Res>  {
   factory $SelectInputUiSettingsCopyWith(SelectInputUiSettings<T> value, $Res Function(SelectInputUiSettings<T>) _then) = _$SelectInputUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String? labelText, String? helperText, String? hintText, ChildrenVisibility? childrenVisibility, int? labelFlex,@JsonKey(includeFromJson: false, includeToJson: false) Widget Function(T?)? valueBuilder,@JsonKey(includeFromJson: false, includeToJson: false) Widget Function(T?)? selectedBuilder,@JsonKey(includeFromJson: false, includeToJson: false) Widget? Function(T)? helpValueBuilder,@JsonKey(includeFromJson: false, includeToJson: false) double Function(String query, T value)? searcher,@JsonKey(includeFromJson: false, includeToJson: false) SearchScreenDef<T>? searchScreenBuilder,@JsonKey(includeToJson: false, includeFromJson: false) SelectFieldBuilderDef<T>? widgetBuilder,@JsonKey(includeToJson: false, includeFromJson: false) InputHeaderBuilderDef? headerBuilder,@JsonKey(includeToJson: false, includeFromJson: false) ScoreWidgetBuilderDef? scoreBuilder
+ String? labelText, String? helperText, String? hintText, ChildrenVisibility? childrenVisibility, int? labelFlex,@notSerializable Widget Function(T?)? valueBuilder,@notSerializable Widget Function(T?)? selectedBuilder,@notSerializable Widget? Function(T)? helpValueBuilder,@notSerializable double Function(String query, T value)? searcher,@notSerializable SearchScreenDef<T>? searchScreenBuilder,@notSerializable SelectFieldBuilderDef<T>? widgetBuilder,@notSerializable InputHeaderBuilderDef? headerBuilder,@notSerializable ScoreWidgetBuilderDef? scoreBuilder
 });
 
 
@@ -1386,7 +1386,7 @@ as ScoreWidgetBuilderDef?,
 @JsonSerializable()
 
 class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
-  const _SelectInputUiSettings({this.labelText, this.helperText, this.hintText, this.childrenVisibility, this.labelFlex, @JsonKey(includeFromJson: false, includeToJson: false) this.valueBuilder, @JsonKey(includeFromJson: false, includeToJson: false) this.selectedBuilder, @JsonKey(includeFromJson: false, includeToJson: false) this.helpValueBuilder, @JsonKey(includeFromJson: false, includeToJson: false) this.searcher, @JsonKey(includeFromJson: false, includeToJson: false) this.searchScreenBuilder, @JsonKey(includeToJson: false, includeFromJson: false) this.widgetBuilder, @JsonKey(includeToJson: false, includeFromJson: false) this.headerBuilder, @JsonKey(includeToJson: false, includeFromJson: false) this.scoreBuilder}): super._();
+  const _SelectInputUiSettings({this.labelText, this.helperText, this.hintText, this.childrenVisibility, this.labelFlex, @notSerializable this.valueBuilder, @notSerializable this.selectedBuilder, @notSerializable this.helpValueBuilder, @notSerializable this.searcher, @notSerializable this.searchScreenBuilder, @notSerializable this.widgetBuilder, @notSerializable this.headerBuilder, @notSerializable this.scoreBuilder}): super._();
   factory _SelectInputUiSettings.fromJson(Map<String, dynamic> json) => _$SelectInputUiSettingsFromJson(json);
 
 @override final  String? labelText;
@@ -1401,14 +1401,14 @@ class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
 /// selector with a flex value of 10,
 /// and label with a flex value of [labelFlex].
 @override final  int? labelFlex;
-@override@JsonKey(includeFromJson: false, includeToJson: false) final  Widget Function(T?)? valueBuilder;
-@override@JsonKey(includeFromJson: false, includeToJson: false) final  Widget Function(T?)? selectedBuilder;
-@override@JsonKey(includeFromJson: false, includeToJson: false) final  Widget? Function(T)? helpValueBuilder;
-@override@JsonKey(includeFromJson: false, includeToJson: false) final  double Function(String query, T value)? searcher;
-@override@JsonKey(includeFromJson: false, includeToJson: false) final  SearchScreenDef<T>? searchScreenBuilder;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  SelectFieldBuilderDef<T>? widgetBuilder;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  InputHeaderBuilderDef? headerBuilder;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  ScoreWidgetBuilderDef? scoreBuilder;
+@override@notSerializable final  Widget Function(T?)? valueBuilder;
+@override@notSerializable final  Widget Function(T?)? selectedBuilder;
+@override@notSerializable final  Widget? Function(T)? helpValueBuilder;
+@override@notSerializable final  double Function(String query, T value)? searcher;
+@override@notSerializable final  SearchScreenDef<T>? searchScreenBuilder;
+@override@notSerializable final  SelectFieldBuilderDef<T>? widgetBuilder;
+@override@notSerializable final  InputHeaderBuilderDef? headerBuilder;
+@override@notSerializable final  ScoreWidgetBuilderDef? scoreBuilder;
 
 /// Create a copy of SelectInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -1443,7 +1443,7 @@ abstract mixin class _$SelectInputUiSettingsCopyWith<T,$Res> implements $SelectI
   factory _$SelectInputUiSettingsCopyWith(_SelectInputUiSettings<T> value, $Res Function(_SelectInputUiSettings<T>) _then) = __$SelectInputUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String? labelText, String? helperText, String? hintText, ChildrenVisibility? childrenVisibility, int? labelFlex,@JsonKey(includeFromJson: false, includeToJson: false) Widget Function(T?)? valueBuilder,@JsonKey(includeFromJson: false, includeToJson: false) Widget Function(T?)? selectedBuilder,@JsonKey(includeFromJson: false, includeToJson: false) Widget? Function(T)? helpValueBuilder,@JsonKey(includeFromJson: false, includeToJson: false) double Function(String query, T value)? searcher,@JsonKey(includeFromJson: false, includeToJson: false) SearchScreenDef<T>? searchScreenBuilder,@JsonKey(includeToJson: false, includeFromJson: false) SelectFieldBuilderDef<T>? widgetBuilder,@JsonKey(includeToJson: false, includeFromJson: false) InputHeaderBuilderDef? headerBuilder,@JsonKey(includeToJson: false, includeFromJson: false) ScoreWidgetBuilderDef? scoreBuilder
+ String? labelText, String? helperText, String? hintText, ChildrenVisibility? childrenVisibility, int? labelFlex,@notSerializable Widget Function(T?)? valueBuilder,@notSerializable Widget Function(T?)? selectedBuilder,@notSerializable Widget? Function(T)? helpValueBuilder,@notSerializable double Function(String query, T value)? searcher,@notSerializable SearchScreenDef<T>? searchScreenBuilder,@notSerializable SelectFieldBuilderDef<T>? widgetBuilder,@notSerializable InputHeaderBuilderDef? headerBuilder,@notSerializable ScoreWidgetBuilderDef? scoreBuilder
 });
 
 
@@ -1486,8 +1486,8 @@ as ScoreWidgetBuilderDef?,
 /// @nodoc
 mixin _$StringInputUiSettings {
 
- String? get labelText; String? get hintText; String? get helperText;@JsonKey(includeToJson: false, includeFromJson: false) Widget? get prefixIcon; StringFieldAction? get action; bool? get submitFormOnFieldSubmitted;@TextInputTypeConverter() TextInputType? get keyboardType; bool? get obscureText; bool? get autocorrect; List<String>? get autofillHints; bool? get autofocus; TextInputAction? get textInputAction; TextCapitalization? get textCapitalization;/// Defaults to 1. If you want to set it to null, enter 0.
- int? get maxLines; String? get invalidRegexMessage;@JsonKey(includeToJson: false, includeFromJson: false) TextStyle? get style;@JsonKey(includeToJson: false, includeFromJson: false) StringFieldBuilderDef? get widgetBuilder;
+ String? get labelText; String? get hintText; String? get helperText;@notSerializable Widget? get prefixIcon; StringFieldAction? get action; bool? get submitFormOnFieldSubmitted;@TextInputTypeConverter() TextInputType? get keyboardType; bool? get obscureText; bool? get autocorrect; List<String>? get autofillHints; bool? get autofocus; TextInputAction? get textInputAction; TextCapitalization? get textCapitalization;/// Defaults to 1. If you want to set it to null, enter 0.
+ int? get maxLines; String? get invalidRegexMessage;@notSerializable TextStyle? get style;@notSerializable StringFieldBuilderDef? get widgetBuilder;
 /// Create a copy of StringInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1520,7 +1520,7 @@ abstract mixin class $StringInputUiSettingsCopyWith<$Res>  {
   factory $StringInputUiSettingsCopyWith(StringInputUiSettings value, $Res Function(StringInputUiSettings) _then) = _$StringInputUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String? labelText, String? hintText, String? helperText,@JsonKey(includeToJson: false, includeFromJson: false) Widget? prefixIcon, StringFieldAction? action, bool? submitFormOnFieldSubmitted,@TextInputTypeConverter() TextInputType? keyboardType, bool? obscureText, bool? autocorrect, List<String>? autofillHints, bool? autofocus, TextInputAction? textInputAction, TextCapitalization? textCapitalization, int? maxLines, String? invalidRegexMessage,@JsonKey(includeToJson: false, includeFromJson: false) TextStyle? style,@JsonKey(includeToJson: false, includeFromJson: false) StringFieldBuilderDef? widgetBuilder
+ String? labelText, String? hintText, String? helperText,@notSerializable Widget? prefixIcon, StringFieldAction? action, bool? submitFormOnFieldSubmitted,@TextInputTypeConverter() TextInputType? keyboardType, bool? obscureText, bool? autocorrect, List<String>? autofillHints, bool? autofocus, TextInputAction? textInputAction, TextCapitalization? textCapitalization, int? maxLines, String? invalidRegexMessage,@notSerializable TextStyle? style,@notSerializable StringFieldBuilderDef? widgetBuilder
 });
 
 
@@ -1568,13 +1568,13 @@ as StringFieldBuilderDef?,
 @JsonSerializable()
 
 class _StringInputUiSettings extends StringInputUiSettings {
-  const _StringInputUiSettings({this.labelText, this.hintText, this.helperText, @JsonKey(includeToJson: false, includeFromJson: false) this.prefixIcon, this.action, this.submitFormOnFieldSubmitted, @TextInputTypeConverter() this.keyboardType, this.obscureText, this.autocorrect, final  List<String>? autofillHints, this.autofocus, this.textInputAction, this.textCapitalization, this.maxLines, this.invalidRegexMessage, @JsonKey(includeToJson: false, includeFromJson: false) this.style, @JsonKey(includeToJson: false, includeFromJson: false) this.widgetBuilder}): _autofillHints = autofillHints,super._();
+  const _StringInputUiSettings({this.labelText, this.hintText, this.helperText, @notSerializable this.prefixIcon, this.action, this.submitFormOnFieldSubmitted, @TextInputTypeConverter() this.keyboardType, this.obscureText, this.autocorrect, final  List<String>? autofillHints, this.autofocus, this.textInputAction, this.textCapitalization, this.maxLines, this.invalidRegexMessage, @notSerializable this.style, @notSerializable this.widgetBuilder}): _autofillHints = autofillHints,super._();
   factory _StringInputUiSettings.fromJson(Map<String, dynamic> json) => _$StringInputUiSettingsFromJson(json);
 
 @override final  String? labelText;
 @override final  String? hintText;
 @override final  String? helperText;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  Widget? prefixIcon;
+@override@notSerializable final  Widget? prefixIcon;
 @override final  StringFieldAction? action;
 @override final  bool? submitFormOnFieldSubmitted;
 @override@TextInputTypeConverter() final  TextInputType? keyboardType;
@@ -1595,8 +1595,8 @@ class _StringInputUiSettings extends StringInputUiSettings {
 /// Defaults to 1. If you want to set it to null, enter 0.
 @override final  int? maxLines;
 @override final  String? invalidRegexMessage;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  TextStyle? style;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  StringFieldBuilderDef? widgetBuilder;
+@override@notSerializable final  TextStyle? style;
+@override@notSerializable final  StringFieldBuilderDef? widgetBuilder;
 
 /// Create a copy of StringInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -1631,7 +1631,7 @@ abstract mixin class _$StringInputUiSettingsCopyWith<$Res> implements $StringInp
   factory _$StringInputUiSettingsCopyWith(_StringInputUiSettings value, $Res Function(_StringInputUiSettings) _then) = __$StringInputUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String? labelText, String? hintText, String? helperText,@JsonKey(includeToJson: false, includeFromJson: false) Widget? prefixIcon, StringFieldAction? action, bool? submitFormOnFieldSubmitted,@TextInputTypeConverter() TextInputType? keyboardType, bool? obscureText, bool? autocorrect, List<String>? autofillHints, bool? autofocus, TextInputAction? textInputAction, TextCapitalization? textCapitalization, int? maxLines, String? invalidRegexMessage,@JsonKey(includeToJson: false, includeFromJson: false) TextStyle? style,@JsonKey(includeToJson: false, includeFromJson: false) StringFieldBuilderDef? widgetBuilder
+ String? labelText, String? hintText, String? helperText,@notSerializable Widget? prefixIcon, StringFieldAction? action, bool? submitFormOnFieldSubmitted,@TextInputTypeConverter() TextInputType? keyboardType, bool? obscureText, bool? autocorrect, List<String>? autofillHints, bool? autofocus, TextInputAction? textInputAction, TextCapitalization? textCapitalization, int? maxLines, String? invalidRegexMessage,@notSerializable TextStyle? style,@notSerializable StringFieldBuilderDef? widgetBuilder
 });
 
 
@@ -1678,9 +1678,14 @@ as StringFieldBuilderDef?,
 /// @nodoc
 mixin _$WoFormUiSettings {
 
- String get titleText; WoFormTitlePosition get titlePosition;@JsonKey(includeToJson: false, includeFromJson: false) HeaderBuilderDef? get headerBuilder;@JsonKey(toJson: WoFormSubmitMode.staticToJson) WoFormSubmitMode get submitMode;@JsonKey(includeToJson: false, includeFromJson: false) SubmitButtonBuilderDef? get submitButtonBuilder; bool? get showAsteriskIfRequired; bool? get canModifySubmittedValues;/// By default, errors will only be shown after the user visited a node or
+ String get titleText; WoFormTitlePosition get titlePosition;@notSerializable HeaderBuilderDef? get headerBuilder;@JsonKey(toJson: WoFormSubmitMode.staticToJson) WoFormSubmitMode get submitMode;@notSerializable SubmitButtonBuilderDef? get submitButtonBuilder;/// If true, after the form is successfully submitted, it will be locked.
+ bool? get canModifySubmittedValues;/// By default, errors will only be shown after the user visited a node or
 /// tried to submit the form.
- ShowErrors get showErrors;@JsonKey(includeToJson: false, includeFromJson: false) Future<bool?> Function(BuildContext context)? get canQuit;
+ ShowErrors get showErrors;/// Called when the users tries to quit the form, for exapmle by pressing
+/// the back button in the app bar. If the method returns false, the form
+/// won't be quitted.
+@notSerializable Future<bool?> Function(BuildContext context)? get canQuit;/// Will be merged with context theme.
+ WoFormThemeData? get theme;
 /// Create a copy of WoFormUiSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1693,16 +1698,16 @@ $WoFormUiSettingsCopyWith<WoFormUiSettings> get copyWith => _$WoFormUiSettingsCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WoFormUiSettings&&(identical(other.titleText, titleText) || other.titleText == titleText)&&(identical(other.titlePosition, titlePosition) || other.titlePosition == titlePosition)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.submitMode, submitMode) || other.submitMode == submitMode)&&(identical(other.submitButtonBuilder, submitButtonBuilder) || other.submitButtonBuilder == submitButtonBuilder)&&(identical(other.showAsteriskIfRequired, showAsteriskIfRequired) || other.showAsteriskIfRequired == showAsteriskIfRequired)&&(identical(other.canModifySubmittedValues, canModifySubmittedValues) || other.canModifySubmittedValues == canModifySubmittedValues)&&(identical(other.showErrors, showErrors) || other.showErrors == showErrors)&&(identical(other.canQuit, canQuit) || other.canQuit == canQuit));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WoFormUiSettings&&(identical(other.titleText, titleText) || other.titleText == titleText)&&(identical(other.titlePosition, titlePosition) || other.titlePosition == titlePosition)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.submitMode, submitMode) || other.submitMode == submitMode)&&(identical(other.submitButtonBuilder, submitButtonBuilder) || other.submitButtonBuilder == submitButtonBuilder)&&(identical(other.canModifySubmittedValues, canModifySubmittedValues) || other.canModifySubmittedValues == canModifySubmittedValues)&&(identical(other.showErrors, showErrors) || other.showErrors == showErrors)&&(identical(other.canQuit, canQuit) || other.canQuit == canQuit)&&(identical(other.theme, theme) || other.theme == theme));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,titleText,titlePosition,headerBuilder,submitMode,submitButtonBuilder,showAsteriskIfRequired,canModifySubmittedValues,showErrors,canQuit);
+int get hashCode => Object.hash(runtimeType,titleText,titlePosition,headerBuilder,submitMode,submitButtonBuilder,canModifySubmittedValues,showErrors,canQuit,theme);
 
 @override
 String toString() {
-  return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, submitButtonBuilder: $submitButtonBuilder, showAsteriskIfRequired: $showAsteriskIfRequired, canModifySubmittedValues: $canModifySubmittedValues, showErrors: $showErrors, canQuit: $canQuit)';
+  return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, submitButtonBuilder: $submitButtonBuilder, canModifySubmittedValues: $canModifySubmittedValues, showErrors: $showErrors, canQuit: $canQuit, theme: $theme)';
 }
 
 
@@ -1713,11 +1718,11 @@ abstract mixin class $WoFormUiSettingsCopyWith<$Res>  {
   factory $WoFormUiSettingsCopyWith(WoFormUiSettings value, $Res Function(WoFormUiSettings) _then) = _$WoFormUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String titleText, WoFormTitlePosition titlePosition,@JsonKey(includeToJson: false, includeFromJson: false) HeaderBuilderDef? headerBuilder,@JsonKey(toJson: WoFormSubmitMode.staticToJson) WoFormSubmitMode submitMode,@JsonKey(includeToJson: false, includeFromJson: false) SubmitButtonBuilderDef? submitButtonBuilder, bool? showAsteriskIfRequired, bool? canModifySubmittedValues, ShowErrors showErrors,@JsonKey(includeToJson: false, includeFromJson: false) Future<bool?> Function(BuildContext context)? canQuit
+ String titleText, WoFormTitlePosition titlePosition,@notSerializable HeaderBuilderDef? headerBuilder,@JsonKey(toJson: WoFormSubmitMode.staticToJson) WoFormSubmitMode submitMode,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder, bool? canModifySubmittedValues, ShowErrors showErrors,@notSerializable Future<bool?> Function(BuildContext context)? canQuit, WoFormThemeData? theme
 });
 
 
-$WoFormSubmitModeCopyWith<$Res> get submitMode;
+$WoFormSubmitModeCopyWith<$Res> get submitMode;$WoFormThemeDataCopyWith<$Res>? get theme;
 
 }
 /// @nodoc
@@ -1730,18 +1735,18 @@ class _$WoFormUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of WoFormUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? titleText = null,Object? titlePosition = null,Object? headerBuilder = freezed,Object? submitMode = null,Object? submitButtonBuilder = freezed,Object? showAsteriskIfRequired = freezed,Object? canModifySubmittedValues = freezed,Object? showErrors = null,Object? canQuit = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? titleText = null,Object? titlePosition = null,Object? headerBuilder = freezed,Object? submitMode = null,Object? submitButtonBuilder = freezed,Object? canModifySubmittedValues = freezed,Object? showErrors = null,Object? canQuit = freezed,Object? theme = freezed,}) {
   return _then(_self.copyWith(
 titleText: null == titleText ? _self.titleText : titleText // ignore: cast_nullable_to_non_nullable
 as String,titlePosition: null == titlePosition ? _self.titlePosition : titlePosition // ignore: cast_nullable_to_non_nullable
 as WoFormTitlePosition,headerBuilder: freezed == headerBuilder ? _self.headerBuilder : headerBuilder // ignore: cast_nullable_to_non_nullable
 as HeaderBuilderDef?,submitMode: null == submitMode ? _self.submitMode : submitMode // ignore: cast_nullable_to_non_nullable
 as WoFormSubmitMode,submitButtonBuilder: freezed == submitButtonBuilder ? _self.submitButtonBuilder : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
-as SubmitButtonBuilderDef?,showAsteriskIfRequired: freezed == showAsteriskIfRequired ? _self.showAsteriskIfRequired : showAsteriskIfRequired // ignore: cast_nullable_to_non_nullable
-as bool?,canModifySubmittedValues: freezed == canModifySubmittedValues ? _self.canModifySubmittedValues : canModifySubmittedValues // ignore: cast_nullable_to_non_nullable
+as SubmitButtonBuilderDef?,canModifySubmittedValues: freezed == canModifySubmittedValues ? _self.canModifySubmittedValues : canModifySubmittedValues // ignore: cast_nullable_to_non_nullable
 as bool?,showErrors: null == showErrors ? _self.showErrors : showErrors // ignore: cast_nullable_to_non_nullable
 as ShowErrors,canQuit: freezed == canQuit ? _self.canQuit : canQuit // ignore: cast_nullable_to_non_nullable
-as Future<bool?> Function(BuildContext context)?,
+as Future<bool?> Function(BuildContext context)?,theme: freezed == theme ? _self.theme : theme // ignore: cast_nullable_to_non_nullable
+as WoFormThemeData?,
   ));
 }
 /// Create a copy of WoFormUiSettings
@@ -1753,6 +1758,18 @@ $WoFormSubmitModeCopyWith<$Res> get submitMode {
   return $WoFormSubmitModeCopyWith<$Res>(_self.submitMode, (value) {
     return _then(_self.copyWith(submitMode: value));
   });
+}/// Create a copy of WoFormUiSettings
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$WoFormThemeDataCopyWith<$Res>? get theme {
+    if (_self.theme == null) {
+    return null;
+  }
+
+  return $WoFormThemeDataCopyWith<$Res>(_self.theme!, (value) {
+    return _then(_self.copyWith(theme: value));
+  });
 }
 }
 
@@ -1762,20 +1779,25 @@ $WoFormSubmitModeCopyWith<$Res> get submitMode {
 @JsonSerializable()
 
 class _WoFormUiSettings extends WoFormUiSettings {
-  const _WoFormUiSettings({this.titleText = '', this.titlePosition = WoFormTitlePosition.header, @JsonKey(includeToJson: false, includeFromJson: false) this.headerBuilder, @JsonKey(toJson: WoFormSubmitMode.staticToJson) this.submitMode = const WoFormSubmitMode.standard(), @JsonKey(includeToJson: false, includeFromJson: false) this.submitButtonBuilder, this.showAsteriskIfRequired, this.canModifySubmittedValues, this.showErrors = ShowErrors.progressively, @JsonKey(includeToJson: false, includeFromJson: false) this.canQuit}): super._();
+  const _WoFormUiSettings({this.titleText = '', this.titlePosition = WoFormTitlePosition.header, @notSerializable this.headerBuilder, @JsonKey(toJson: WoFormSubmitMode.staticToJson) this.submitMode = const WoFormSubmitMode.standard(), @notSerializable this.submitButtonBuilder, this.canModifySubmittedValues, this.showErrors = ShowErrors.progressively, @notSerializable this.canQuit, this.theme}): super._();
   factory _WoFormUiSettings.fromJson(Map<String, dynamic> json) => _$WoFormUiSettingsFromJson(json);
 
 @override@JsonKey() final  String titleText;
 @override@JsonKey() final  WoFormTitlePosition titlePosition;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  HeaderBuilderDef? headerBuilder;
+@override@notSerializable final  HeaderBuilderDef? headerBuilder;
 @override@JsonKey(toJson: WoFormSubmitMode.staticToJson) final  WoFormSubmitMode submitMode;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  SubmitButtonBuilderDef? submitButtonBuilder;
-@override final  bool? showAsteriskIfRequired;
+@override@notSerializable final  SubmitButtonBuilderDef? submitButtonBuilder;
+/// If true, after the form is successfully submitted, it will be locked.
 @override final  bool? canModifySubmittedValues;
 /// By default, errors will only be shown after the user visited a node or
 /// tried to submit the form.
 @override@JsonKey() final  ShowErrors showErrors;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  Future<bool?> Function(BuildContext context)? canQuit;
+/// Called when the users tries to quit the form, for exapmle by pressing
+/// the back button in the app bar. If the method returns false, the form
+/// won't be quitted.
+@override@notSerializable final  Future<bool?> Function(BuildContext context)? canQuit;
+/// Will be merged with context theme.
+@override final  WoFormThemeData? theme;
 
 /// Create a copy of WoFormUiSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -1790,16 +1812,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WoFormUiSettings&&(identical(other.titleText, titleText) || other.titleText == titleText)&&(identical(other.titlePosition, titlePosition) || other.titlePosition == titlePosition)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.submitMode, submitMode) || other.submitMode == submitMode)&&(identical(other.submitButtonBuilder, submitButtonBuilder) || other.submitButtonBuilder == submitButtonBuilder)&&(identical(other.showAsteriskIfRequired, showAsteriskIfRequired) || other.showAsteriskIfRequired == showAsteriskIfRequired)&&(identical(other.canModifySubmittedValues, canModifySubmittedValues) || other.canModifySubmittedValues == canModifySubmittedValues)&&(identical(other.showErrors, showErrors) || other.showErrors == showErrors)&&(identical(other.canQuit, canQuit) || other.canQuit == canQuit));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WoFormUiSettings&&(identical(other.titleText, titleText) || other.titleText == titleText)&&(identical(other.titlePosition, titlePosition) || other.titlePosition == titlePosition)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.submitMode, submitMode) || other.submitMode == submitMode)&&(identical(other.submitButtonBuilder, submitButtonBuilder) || other.submitButtonBuilder == submitButtonBuilder)&&(identical(other.canModifySubmittedValues, canModifySubmittedValues) || other.canModifySubmittedValues == canModifySubmittedValues)&&(identical(other.showErrors, showErrors) || other.showErrors == showErrors)&&(identical(other.canQuit, canQuit) || other.canQuit == canQuit)&&(identical(other.theme, theme) || other.theme == theme));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,titleText,titlePosition,headerBuilder,submitMode,submitButtonBuilder,showAsteriskIfRequired,canModifySubmittedValues,showErrors,canQuit);
+int get hashCode => Object.hash(runtimeType,titleText,titlePosition,headerBuilder,submitMode,submitButtonBuilder,canModifySubmittedValues,showErrors,canQuit,theme);
 
 @override
 String toString() {
-  return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, submitButtonBuilder: $submitButtonBuilder, showAsteriskIfRequired: $showAsteriskIfRequired, canModifySubmittedValues: $canModifySubmittedValues, showErrors: $showErrors, canQuit: $canQuit)';
+  return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, submitButtonBuilder: $submitButtonBuilder, canModifySubmittedValues: $canModifySubmittedValues, showErrors: $showErrors, canQuit: $canQuit, theme: $theme)';
 }
 
 
@@ -1810,11 +1832,11 @@ abstract mixin class _$WoFormUiSettingsCopyWith<$Res> implements $WoFormUiSettin
   factory _$WoFormUiSettingsCopyWith(_WoFormUiSettings value, $Res Function(_WoFormUiSettings) _then) = __$WoFormUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String titleText, WoFormTitlePosition titlePosition,@JsonKey(includeToJson: false, includeFromJson: false) HeaderBuilderDef? headerBuilder,@JsonKey(toJson: WoFormSubmitMode.staticToJson) WoFormSubmitMode submitMode,@JsonKey(includeToJson: false, includeFromJson: false) SubmitButtonBuilderDef? submitButtonBuilder, bool? showAsteriskIfRequired, bool? canModifySubmittedValues, ShowErrors showErrors,@JsonKey(includeToJson: false, includeFromJson: false) Future<bool?> Function(BuildContext context)? canQuit
+ String titleText, WoFormTitlePosition titlePosition,@notSerializable HeaderBuilderDef? headerBuilder,@JsonKey(toJson: WoFormSubmitMode.staticToJson) WoFormSubmitMode submitMode,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder, bool? canModifySubmittedValues, ShowErrors showErrors,@notSerializable Future<bool?> Function(BuildContext context)? canQuit, WoFormThemeData? theme
 });
 
 
-@override $WoFormSubmitModeCopyWith<$Res> get submitMode;
+@override $WoFormSubmitModeCopyWith<$Res> get submitMode;@override $WoFormThemeDataCopyWith<$Res>? get theme;
 
 }
 /// @nodoc
@@ -1827,18 +1849,18 @@ class __$WoFormUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of WoFormUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? titleText = null,Object? titlePosition = null,Object? headerBuilder = freezed,Object? submitMode = null,Object? submitButtonBuilder = freezed,Object? showAsteriskIfRequired = freezed,Object? canModifySubmittedValues = freezed,Object? showErrors = null,Object? canQuit = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? titleText = null,Object? titlePosition = null,Object? headerBuilder = freezed,Object? submitMode = null,Object? submitButtonBuilder = freezed,Object? canModifySubmittedValues = freezed,Object? showErrors = null,Object? canQuit = freezed,Object? theme = freezed,}) {
   return _then(_WoFormUiSettings(
 titleText: null == titleText ? _self.titleText : titleText // ignore: cast_nullable_to_non_nullable
 as String,titlePosition: null == titlePosition ? _self.titlePosition : titlePosition // ignore: cast_nullable_to_non_nullable
 as WoFormTitlePosition,headerBuilder: freezed == headerBuilder ? _self.headerBuilder : headerBuilder // ignore: cast_nullable_to_non_nullable
 as HeaderBuilderDef?,submitMode: null == submitMode ? _self.submitMode : submitMode // ignore: cast_nullable_to_non_nullable
 as WoFormSubmitMode,submitButtonBuilder: freezed == submitButtonBuilder ? _self.submitButtonBuilder : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
-as SubmitButtonBuilderDef?,showAsteriskIfRequired: freezed == showAsteriskIfRequired ? _self.showAsteriskIfRequired : showAsteriskIfRequired // ignore: cast_nullable_to_non_nullable
-as bool?,canModifySubmittedValues: freezed == canModifySubmittedValues ? _self.canModifySubmittedValues : canModifySubmittedValues // ignore: cast_nullable_to_non_nullable
+as SubmitButtonBuilderDef?,canModifySubmittedValues: freezed == canModifySubmittedValues ? _self.canModifySubmittedValues : canModifySubmittedValues // ignore: cast_nullable_to_non_nullable
 as bool?,showErrors: null == showErrors ? _self.showErrors : showErrors // ignore: cast_nullable_to_non_nullable
 as ShowErrors,canQuit: freezed == canQuit ? _self.canQuit : canQuit // ignore: cast_nullable_to_non_nullable
-as Future<bool?> Function(BuildContext context)?,
+as Future<bool?> Function(BuildContext context)?,theme: freezed == theme ? _self.theme : theme // ignore: cast_nullable_to_non_nullable
+as WoFormThemeData?,
   ));
 }
 
@@ -1850,6 +1872,18 @@ $WoFormSubmitModeCopyWith<$Res> get submitMode {
   
   return $WoFormSubmitModeCopyWith<$Res>(_self.submitMode, (value) {
     return _then(_self.copyWith(submitMode: value));
+  });
+}/// Create a copy of WoFormUiSettings
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$WoFormThemeDataCopyWith<$Res>? get theme {
+    if (_self.theme == null) {
+    return null;
+  }
+
+  return $WoFormThemeDataCopyWith<$Res>(_self.theme!, (value) {
+    return _then(_self.copyWith(theme: value));
   });
 }
 }
@@ -1881,7 +1915,7 @@ WoFormSubmitMode _$WoFormSubmitModeFromJson(
 /// @nodoc
 mixin _$WoFormSubmitMode {
 
- String? get submitText;@JsonKey(includeToJson: false, includeFromJson: false) IconData? get submitIcon; DisableSubmitButton get disableSubmitMode;
+ String? get submitText;@notSerializable IconData? get submitIcon; DisableSubmitButton get disableSubmitMode;
 /// Create a copy of WoFormSubmitMode
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1914,7 +1948,7 @@ abstract mixin class $WoFormSubmitModeCopyWith<$Res>  {
   factory $WoFormSubmitModeCopyWith(WoFormSubmitMode value, $Res Function(WoFormSubmitMode) _then) = _$WoFormSubmitModeCopyWithImpl;
 @useResult
 $Res call({
- String? submitText,@JsonKey(includeToJson: false, includeFromJson: false) IconData? submitIcon, DisableSubmitButton disableSubmitMode
+ String? submitText,@notSerializable IconData? submitIcon, DisableSubmitButton disableSubmitMode
 });
 
 
@@ -1948,14 +1982,14 @@ as DisableSubmitButton,
 @JsonSerializable()
 
 class StandardSubmitMode extends WoFormSubmitMode {
-  const StandardSubmitMode({this.submitText, @JsonKey(includeToJson: false, includeFromJson: false) this.submitIcon, this.disableSubmitMode = DisableSubmitButton.never, this.buttonPosition = SubmitButtonPosition.body, @JsonKey(includeToJson: false, includeFromJson: false) this.scaffoldBuilder, final  String? $type}): $type = $type ?? 'standard',super._();
+  const StandardSubmitMode({this.submitText, @notSerializable this.submitIcon, this.disableSubmitMode = DisableSubmitButton.never, this.buttonPosition = SubmitButtonPosition.body, @notSerializable this.scaffoldBuilder, final  String? $type}): $type = $type ?? 'standard',super._();
   factory StandardSubmitMode.fromJson(Map<String, dynamic> json) => _$StandardSubmitModeFromJson(json);
 
 @override final  String? submitText;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  IconData? submitIcon;
+@override@notSerializable final  IconData? submitIcon;
 @override@JsonKey() final  DisableSubmitButton disableSubmitMode;
 @JsonKey() final  SubmitButtonPosition buttonPosition;
-@JsonKey(includeToJson: false, includeFromJson: false) final  ScaffoldBuilderDef? scaffoldBuilder;
+@notSerializable final  ScaffoldBuilderDef? scaffoldBuilder;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -1994,7 +2028,7 @@ abstract mixin class $StandardSubmitModeCopyWith<$Res> implements $WoFormSubmitM
   factory $StandardSubmitModeCopyWith(StandardSubmitMode value, $Res Function(StandardSubmitMode) _then) = _$StandardSubmitModeCopyWithImpl;
 @override @useResult
 $Res call({
- String? submitText,@JsonKey(includeToJson: false, includeFromJson: false) IconData? submitIcon, DisableSubmitButton disableSubmitMode, SubmitButtonPosition buttonPosition,@JsonKey(includeToJson: false, includeFromJson: false) ScaffoldBuilderDef? scaffoldBuilder
+ String? submitText,@notSerializable IconData? submitIcon, DisableSubmitButton disableSubmitMode, SubmitButtonPosition buttonPosition,@notSerializable ScaffoldBuilderDef? scaffoldBuilder
 });
 
 
@@ -2029,11 +2063,11 @@ as ScaffoldBuilderDef?,
 @JsonSerializable()
 
 class PageByPageSubmitMode extends WoFormSubmitMode {
-  const PageByPageSubmitMode({this.submitText, @JsonKey(includeToJson: false, includeFromJson: false) this.submitIcon, this.nextText, this.disableSubmitMode = DisableSubmitButton.never, this.showProgressIndicator = true, final  String? $type}): $type = $type ?? 'pageByPage',super._();
+  const PageByPageSubmitMode({this.submitText, @notSerializable this.submitIcon, this.nextText, this.disableSubmitMode = DisableSubmitButton.never, this.showProgressIndicator = true, final  String? $type}): $type = $type ?? 'pageByPage',super._();
   factory PageByPageSubmitMode.fromJson(Map<String, dynamic> json) => _$PageByPageSubmitModeFromJson(json);
 
 @override final  String? submitText;
-@override@JsonKey(includeToJson: false, includeFromJson: false) final  IconData? submitIcon;
+@override@notSerializable final  IconData? submitIcon;
 /// Text for the submit button if it navigates to the next form page.
 /// Falls back to submitText if not provided.
  final  String? nextText;
@@ -2077,7 +2111,7 @@ abstract mixin class $PageByPageSubmitModeCopyWith<$Res> implements $WoFormSubmi
   factory $PageByPageSubmitModeCopyWith(PageByPageSubmitMode value, $Res Function(PageByPageSubmitMode) _then) = _$PageByPageSubmitModeCopyWithImpl;
 @override @useResult
 $Res call({
- String? submitText,@JsonKey(includeToJson: false, includeFromJson: false) IconData? submitIcon, String? nextText, DisableSubmitButton disableSubmitMode, bool showProgressIndicator
+ String? submitText,@notSerializable IconData? submitIcon, String? nextText, DisableSubmitButton disableSubmitMode, bool showProgressIndicator
 });
 
 

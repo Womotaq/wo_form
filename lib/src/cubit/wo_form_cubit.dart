@@ -577,11 +577,9 @@ class WoForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FocusScope(
+    final form = FocusScope(
       child: MultiRepositoryProvider(
-        providers: [
-          RepositoryProvider.value(value: root),
-        ],
+        providers: [RepositoryProvider.value(value: root)],
         child: MultiBlocProvider(
           providers: [
             BlocProvider(
@@ -654,6 +652,17 @@ class WoForm extends StatelessWidget {
         ),
       ),
     );
+
+    if (root.uiSettings.theme != null) {
+      return WoFormTheme(
+        data: (WoFormTheme.of(context) ?? const WoFormThemeData()).merge(
+          root.uiSettings.theme,
+        ),
+        child: form,
+      );
+    } else {
+      return form;
+    }
   }
 
   static void defaultOnSubmitError(

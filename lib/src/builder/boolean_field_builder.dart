@@ -27,11 +27,10 @@ class BooleanFieldBuilder extends StatelessWidget {
 
     final inputSettings = input.uiSettings;
     var mergedSettings = uiSettings?.merge(inputSettings) ?? inputSettings;
+    final woFormTheme = WoFormTheme.of(context);
 
-    final showAsterisk = input.isRequired &&
-        (root.uiSettings.showAsteriskIfRequired ??
-            WoFormTheme.of(context)?.showAsteriskIfRequired ??
-            true);
+    final showAsterisk =
+        input.isRequired && (woFormTheme?.showAsteriskIfRequired ?? true);
     if (showAsterisk && mergedSettings.labelText != null) {
       mergedSettings = mergedSettings.copyWith(
         labelText: '${mergedSettings.labelText ?? ''} *',
@@ -54,8 +53,9 @@ class BooleanFieldBuilder extends StatelessWidget {
                     if (error == null) {
                       errorText = null;
                     } else {
-                      errorText =
-                          context.read<WoFormL10n?>()?.translateError(error);
+                      errorText = context.read<WoFormL10n?>()?.translateError(
+                        error,
+                      );
                     }
                   } else {
                     errorText = null;
@@ -63,31 +63,31 @@ class BooleanFieldBuilder extends StatelessWidget {
 
                   final fieldData =
                       WoFieldData<BooleanInput, bool, BooleanInputUiSettings>(
-                    path: path,
-                    input: input,
-                    value: value,
-                    errorText: errorText,
-                    uiSettings: mergedSettings,
-                    onValueChanged: inputIsLocked
-                        ? null
-                        : (
-                            bool? value, {
-                            UpdateStatus updateStatus = UpdateStatus.yes,
-                          }) {
-                            valuesCubit.onValueChanged(
-                              path: path,
-                              value: value,
-                              updateStatus: updateStatus,
-                            );
+                        path: path,
+                        input: input,
+                        value: value,
+                        errorText: errorText,
+                        uiSettings: mergedSettings,
+                        onValueChanged: inputIsLocked
+                            ? null
+                            : (
+                                bool? value, {
+                                UpdateStatus updateStatus = UpdateStatus.yes,
+                              }) {
+                                valuesCubit.onValueChanged(
+                                  path: path,
+                                  value: value,
+                                  updateStatus: updateStatus,
+                                );
 
-                            input.onValueChanged?.call(value);
+                                input.onValueChanged?.call(value);
 
-                            FocusScope.of(context).unfocus();
-                          },
-                  );
+                                FocusScope.of(context).unfocus();
+                              },
+                      );
 
                   return (mergedSettings.widgetBuilder ??
-                          WoFormTheme.of(context)?.booleanFieldBuilder ??
+                          woFormTheme?.booleanFieldBuilder ??
                           BooleanField.new)
                       .call(fieldData);
                 },

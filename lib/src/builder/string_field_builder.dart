@@ -27,11 +27,10 @@ class StringFieldBuilder extends StatelessWidget {
 
     final inputSettings = input.uiSettings;
     var mergedSettings = uiSettings?.merge(inputSettings) ?? inputSettings;
+    final woFormTheme = WoFormTheme.of(context);
 
-    final showAsterisk = input.isRequired &&
-        (root.uiSettings.showAsteriskIfRequired ??
-            WoFormTheme.of(context)?.showAsteriskIfRequired ??
-            true);
+    final showAsterisk =
+        input.isRequired && (woFormTheme?.showAsteriskIfRequired ?? true);
     if (showAsterisk && mergedSettings.labelText != null) {
       mergedSettings = mergedSettings.copyWith(
         labelText: '${mergedSettings.labelText} *',
@@ -54,8 +53,9 @@ class StringFieldBuilder extends StatelessWidget {
                     if (error == null) {
                       errorText = null;
                     } else {
-                      errorText =
-                          context.read<WoFormL10n?>()?.translateError(error);
+                      errorText = context.read<WoFormL10n?>()?.translateError(
+                        error,
+                      );
                     }
                   } else {
                     errorText = null;
@@ -63,27 +63,26 @@ class StringFieldBuilder extends StatelessWidget {
 
                   final fieldData =
                       WoFieldData<StringInput, String, StringInputUiSettings>(
-                    path: path,
-                    input: input,
-                    value: value,
-                    errorText: errorText,
-                    uiSettings: mergedSettings,
-                    onValueChanged: inputIsLocked
-                        ? null
-                        : (
-                            String? value, {
-                            UpdateStatus updateStatus = UpdateStatus
-                                .ifPathAlreadyVisitedOrElseWithoutErrorUpdate,
-                          }) =>
-                            valuesCubit.onValueChanged(
-                              path: path,
-                              value: value,
-                              updateStatus: updateStatus,
-                            ),
-                  );
+                        path: path,
+                        input: input,
+                        value: value,
+                        errorText: errorText,
+                        uiSettings: mergedSettings,
+                        onValueChanged: inputIsLocked
+                            ? null
+                            : (
+                                String? value, {
+                                UpdateStatus updateStatus = UpdateStatus
+                                    .ifPathAlreadyVisitedOrElseWithoutErrorUpdate,
+                              }) => valuesCubit.onValueChanged(
+                                path: path,
+                                value: value,
+                                updateStatus: updateStatus,
+                              ),
+                      );
 
                   return (mergedSettings.widgetBuilder ??
-                          WoFormTheme.of(context)?.stringFieldBuilder ??
+                          woFormTheme?.stringFieldBuilder ??
                           StringField.new)
                       .call(fieldData);
                 },

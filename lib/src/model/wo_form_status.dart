@@ -9,16 +9,13 @@ part 'wo_form_status.g.dart';
 sealed class WoFormStatus with _$WoFormStatus {
   const factory WoFormStatus.initial() = InitialStatus;
   const factory WoFormStatus.inProgress({
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    @Default([])
-    List<WoFormInputError> errors,
+    @notSerializable @Default([]) List<WoFormInputError> errors,
     String? firstInvalidInputPath,
   }) = InProgressStatus;
   const factory WoFormStatus.submitting() = SubmittingStatus;
   const factory WoFormStatus.submitError({
-    @JsonKey(includeToJson: false, includeFromJson: false) Object? error,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    StackTrace? stackTrace,
+    @notSerializable Object? error,
+    @notSerializable StackTrace? stackTrace,
   }) = SubmitErrorStatus;
   const factory WoFormStatus.submitSuccess() = SubmitSuccessStatus;
 

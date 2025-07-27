@@ -20,9 +20,8 @@ abstract class BooleanInputUiSettings with _$BooleanInputUiSettings {
     String? helperText,
     BooleanFieldControlType? controlType,
     ListTileControlAffinity? controlAffinity,
-    @JsonKey(includeToJson: false, includeFromJson: false) Widget? secondary,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    BooleanFieldBuilderDef? widgetBuilder,
+    @notSerializable Widget? secondary,
+    @notSerializable BooleanFieldBuilderDef? widgetBuilder,
   }) = _BooleanInputUiSettings;
 
   const BooleanInputUiSettings._();
@@ -91,13 +90,10 @@ abstract class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
     DatePickerEntryMode? initialDateEntryMode,
     DatePickerMode? initialDatePickerMode,
     DateEditMode? editMode,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    PickDateDef? pickDate,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    PickTimeDef? pickTime,
+    @notSerializable PickDateDef? pickDate,
+    @notSerializable PickTimeDef? pickTime,
     TimePickerEntryMode? initialTimeEntryMode,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    DateTimeFieldBuilderDef? widgetBuilder,
+    @notSerializable DateTimeFieldBuilderDef? widgetBuilder,
   }) = _DateTimeInputUiSettings;
 
   const DateTimeInputUiSettings._();
@@ -164,12 +160,9 @@ abstract class DurationInputUiSettings with _$DurationInputUiSettings {
     /// selector with a flex value of 10,
     /// and label with a flex value of [labelFlex].
     int? labelFlex,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    PickDurationDef? pickDuration,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    FormatDurationDef? formatDuration,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    DurationFieldBuilderDef? widgetBuilder,
+    @notSerializable PickDurationDef? pickDuration,
+    @notSerializable FormatDurationDef? formatDuration,
+    @notSerializable DurationFieldBuilderDef? widgetBuilder,
 
     /// The following fields are used if editMode is dateTime
     String? dateTimeLabelText,
@@ -178,10 +171,8 @@ abstract class DurationInputUiSettings with _$DurationInputUiSettings {
     String? dateFormat,
     String? timeFormat,
     DateEditMode? dateTimeEditMode,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    PickDateDef? pickDate,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    PickTimeDef? pickTime,
+    @notSerializable PickDateDef? pickDate,
+    @notSerializable PickTimeDef? pickTime,
   }) = _DurationInputUiSettings;
 
   const DurationInputUiSettings._();
@@ -234,12 +225,9 @@ abstract class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
 
     /// Default to true
     bool? reorderable,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    GenerateIdDef? generateId,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    OnDynamicInputDeletionDef? onChildDeletion,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    DynamicInputsNodeWidgetBuilderDef? widgetBuilder,
+    @notSerializable GenerateIdDef? generateId,
+    @notSerializable OnDynamicInputDeletionDef? onChildDeletion,
+    @notSerializable DynamicInputsNodeWidgetBuilderDef? widgetBuilder,
   }) = _DynamicInputsNodeUiSettings;
 
   const DynamicInputsNodeUiSettings._();
@@ -314,12 +302,9 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
     /// If true, when the widget will be rendered,
     /// the children's visibility will be asked.
     @Default(false) bool showChildrenInitially,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    InputNodeWidgetBuilderDef? widgetBuilder,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    HeaderBuilderDef? headerBuilder,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    InputNodeWidgetBuilderDef? expanderBuilder,
+    @notSerializable InputNodeWidgetBuilderDef? widgetBuilder,
+    @notSerializable HeaderBuilderDef? headerBuilder,
+    @notSerializable InputNodeWidgetBuilderDef? expanderBuilder,
   }) = _InputsNodeUiSettings;
 
   const InputsNodeUiSettings._();
@@ -356,8 +341,7 @@ abstract class MediaInputUiSettings with _$MediaInputUiSettings {
     /// For a circle cropping, use MediaService.circleAspectRatio
     double? cropAspectRatioOrCircle,
     @Default(false) bool cropShowGrid,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    MediaFieldBuilderDef? widgetBuilder,
+    @notSerializable MediaFieldBuilderDef? widgetBuilder,
   }) = _MediaInputUiSettings;
 
   const MediaInputUiSettings._();
@@ -386,9 +370,8 @@ abstract class NumInputUiSettings with _$NumInputUiSettings {
   const factory NumInputUiSettings({
     String? labelText,
     String? helperText,
-    @JsonKey(includeToJson: false, includeFromJson: false) Widget? unit,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    NumFieldBuilderDef? widgetBuilder,
+    @notSerializable Widget? unit,
+    @notSerializable NumFieldBuilderDef? widgetBuilder,
   }) = _NumInputUiSettings;
 
   const NumInputUiSettings._();
@@ -436,22 +419,14 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
     /// selector with a flex value of 10,
     /// and label with a flex value of [labelFlex].
     int? labelFlex,
-    @JsonKey(includeFromJson: false, includeToJson: false)
-    Widget Function(T?)? valueBuilder,
-    @JsonKey(includeFromJson: false, includeToJson: false)
-    Widget Function(T?)? selectedBuilder,
-    @JsonKey(includeFromJson: false, includeToJson: false)
-    Widget? Function(T)? helpValueBuilder,
-    @JsonKey(includeFromJson: false, includeToJson: false)
-    double Function(String query, T value)? searcher,
-    @JsonKey(includeFromJson: false, includeToJson: false)
-    SearchScreenDef<T>? searchScreenBuilder,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    SelectFieldBuilderDef<T>? widgetBuilder,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    InputHeaderBuilderDef? headerBuilder,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    ScoreWidgetBuilderDef? scoreBuilder,
+    @notSerializable Widget Function(T?)? valueBuilder,
+    @notSerializable Widget Function(T?)? selectedBuilder,
+    @notSerializable Widget? Function(T)? helpValueBuilder,
+    @notSerializable double Function(String query, T value)? searcher,
+    @notSerializable SearchScreenDef<T>? searchScreenBuilder,
+    @notSerializable SelectFieldBuilderDef<T>? widgetBuilder,
+    @notSerializable InputHeaderBuilderDef? headerBuilder,
+    @notSerializable ScoreWidgetBuilderDef? scoreBuilder,
   }) = _SelectInputUiSettings<T>;
 
   const SelectInputUiSettings._();
@@ -489,7 +464,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     String? labelText,
     String? hintText,
     String? helperText,
-    @JsonKey(includeToJson: false, includeFromJson: false) Widget? prefixIcon,
+    @notSerializable Widget? prefixIcon,
     StringFieldAction? action,
     bool? submitFormOnFieldSubmitted,
     @TextInputTypeConverter() TextInputType? keyboardType,
@@ -503,9 +478,8 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     /// Defaults to 1. If you want to set it to null, enter 0.
     int? maxLines,
     String? invalidRegexMessage,
-    @JsonKey(includeToJson: false, includeFromJson: false) TextStyle? style,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    StringFieldBuilderDef? widgetBuilder,
+    @notSerializable TextStyle? style,
+    @notSerializable StringFieldBuilderDef? widgetBuilder,
   }) = _StringInputUiSettings;
 
   factory StringInputUiSettings.email({
@@ -633,21 +607,26 @@ abstract class WoFormUiSettings with _$WoFormUiSettings {
   const factory WoFormUiSettings({
     @Default('') String titleText,
     @Default(WoFormTitlePosition.header) WoFormTitlePosition titlePosition,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    HeaderBuilderDef? headerBuilder,
+    @notSerializable HeaderBuilderDef? headerBuilder,
     @JsonKey(toJson: WoFormSubmitMode.staticToJson)
     @Default(WoFormSubmitMode.standard())
     WoFormSubmitMode submitMode,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    SubmitButtonBuilderDef? submitButtonBuilder,
-    bool? showAsteriskIfRequired,
+    @notSerializable SubmitButtonBuilderDef? submitButtonBuilder,
+
+    /// If true, after the form is successfully submitted, it will be locked.
     bool? canModifySubmittedValues,
 
     /// By default, errors will only be shown after the user visited a node or
     /// tried to submit the form.
     @Default(ShowErrors.progressively) ShowErrors showErrors,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    Future<bool?> Function(BuildContext context)? canQuit,
+
+    /// Called when the users tries to quit the form, for exapmle by pressing
+    /// the back button in the app bar. If the method returns false, the form
+    /// won't be quitted.
+    @notSerializable Future<bool?> Function(BuildContext context)? canQuit,
+
+    /// Will be merged with context theme.
+    WoFormThemeData? theme,
   }) = _WoFormUiSettings;
 
   const WoFormUiSettings._();
@@ -681,16 +660,15 @@ enum ShowErrors {
 sealed class WoFormSubmitMode with _$WoFormSubmitMode {
   const factory WoFormSubmitMode.standard({
     String? submitText,
-    @JsonKey(includeToJson: false, includeFromJson: false) IconData? submitIcon,
+    @notSerializable IconData? submitIcon,
     @Default(DisableSubmitButton.never) DisableSubmitButton disableSubmitMode,
     @Default(SubmitButtonPosition.body) SubmitButtonPosition buttonPosition,
-    @JsonKey(includeToJson: false, includeFromJson: false)
-    ScaffoldBuilderDef? scaffoldBuilder,
+    @notSerializable ScaffoldBuilderDef? scaffoldBuilder,
   }) = StandardSubmitMode;
 
   const factory WoFormSubmitMode.pageByPage({
     String? submitText,
-    @JsonKey(includeToJson: false, includeFromJson: false) IconData? submitIcon,
+    @notSerializable IconData? submitIcon,
 
     /// Text for the submit button if it navigates to the next form page.
     /// Falls back to submitText if not provided.

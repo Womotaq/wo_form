@@ -30,14 +30,14 @@ class SelectFieldBuilder<T> extends StatelessWidget {
     final valuesCubit = context.read<WoFormValuesCubit>();
 
     final input = getChild(root, valuesCubit.state);
-    var mergedSettings = uiSettings?.merge(input.uiSettings) ??
+    var mergedSettings =
+        uiSettings?.merge(input.uiSettings) ??
         input.uiSettings ??
         const SelectInputUiSettings();
+    final woFormTheme = WoFormTheme.of(context);
 
-    final showAsterisk = input.minCount > 0 &&
-        (root.uiSettings.showAsteriskIfRequired ??
-            WoFormTheme.of(context)?.showAsteriskIfRequired ??
-            true);
+    final showAsterisk =
+        input.minCount > 0 && (woFormTheme?.showAsteriskIfRequired ?? true);
     if (showAsterisk && mergedSettings.labelText != null) {
       mergedSettings = mergedSettings.copyWith(
         labelText: '${mergedSettings.labelText} *',
@@ -54,15 +54,16 @@ class SelectFieldBuilder<T> extends StatelessWidget {
               return WoFormValueBuilder<List<dynamic>>(
                 path: path,
                 builder: (context, selectedValues_) {
-                  final selectedValues = (input.idsOfAvailibleValues != null
+                  final selectedValues =
+                      (input.idsOfAvailibleValues != null
                           ? selectedValues_
-                              ?.map(
-                                (valueId) => valueId is String
-                                    ? input.getAvailibleValue(id: valueId)
-                                    : null,
-                              )
-                              .whereType<T>()
-                              .toList()
+                                ?.map(
+                                  (valueId) => valueId is String
+                                      ? input.getAvailibleValue(id: valueId)
+                                      : null,
+                                )
+                                .whereType<T>()
+                                .toList()
                           : selectedValues_?.whereType<T>().toList()) ??
                       [];
 
@@ -72,55 +73,60 @@ class SelectFieldBuilder<T> extends StatelessWidget {
                     if (error == null) {
                       errorText = null;
                     } else {
-                      errorText =
-                          context.read<WoFormL10n?>()?.translateError(error);
+                      errorText = context.read<WoFormL10n?>()?.translateError(
+                        error,
+                      );
                     }
                   } else {
                     errorText = null;
                   }
 
-                  final fieldData = WoFieldData<SelectInput<T>, List<T>,
-                      SelectInputUiSettings<T>>(
-                    path: path,
-                    input: input,
-                    value: selectedValues,
-                    errorText: errorText,
-                    uiSettings: mergedSettings,
-                    onValueChanged: inputIsLocked
-                        ? null
-                        : (
-                            List<T>? values, {
-                            UpdateStatus updateStatus = UpdateStatus.yes,
-                          }) {
-                            if (input.idsOfAvailibleValues != null) {
-                              valuesCubit.onValueChanged(
-                                path: path,
-                                value: values
-                                    ?.map(
-                                      (value) =>
-                                          input.getIdOfValue(value: value),
-                                    )
-                                    .nonNulls
-                                    .toList(),
-                                updateStatus: updateStatus,
-                              );
-                            } else {
-                              valuesCubit.onValueChanged(
-                                path: path,
-                                value: values,
-                              );
-                            }
+                  final fieldData =
+                      WoFieldData<
+                        SelectInput<T>,
+                        List<T>,
+                        SelectInputUiSettings<T>
+                      >(
+                        path: path,
+                        input: input,
+                        value: selectedValues,
+                        errorText: errorText,
+                        uiSettings: mergedSettings,
+                        onValueChanged: inputIsLocked
+                            ? null
+                            : (
+                                List<T>? values, {
+                                UpdateStatus updateStatus = UpdateStatus.yes,
+                              }) {
+                                if (input.idsOfAvailibleValues != null) {
+                                  valuesCubit.onValueChanged(
+                                    path: path,
+                                    value: values
+                                        ?.map(
+                                          (value) =>
+                                              input.getIdOfValue(value: value),
+                                        )
+                                        .nonNulls
+                                        .toList(),
+                                    updateStatus: updateStatus,
+                                  );
+                                } else {
+                                  valuesCubit.onValueChanged(
+                                    path: path,
+                                    value: values,
+                                  );
+                                }
 
-                            input.onValueChanged?.call(values);
+                                input.onValueChanged?.call(values);
 
-                            if (input.submitFormOnSelect) {
-                              valuesCubit.submit(context);
-                            }
-                          },
-                  );
+                                if (input.submitFormOnSelect) {
+                                  valuesCubit.submit(context);
+                                }
+                              },
+                      );
 
                   return (mergedSettings.widgetBuilder ??
-                          WoFormTheme.of(context)?.selectFieldBuilder ??
+                          woFormTheme?.selectFieldBuilder ??
                           SelectField.new)
                       .call(fieldData);
                 },
