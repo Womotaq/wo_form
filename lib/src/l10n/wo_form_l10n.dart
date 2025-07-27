@@ -11,6 +11,8 @@ class WoFormL10n {
     this.days,
     this.hours,
     this.minutes,
+    this.addDate,
+    this.addTime,
   });
 
   final String Function() submit;
@@ -20,4 +22,6 @@ class WoFormL10n {
   final String Function(int count)? days;
   final String Function(int count)? hours;
   final String Function(int count)? minutes;
+  final String Function()? addDate;
+  final String Function()? addTime;
 }

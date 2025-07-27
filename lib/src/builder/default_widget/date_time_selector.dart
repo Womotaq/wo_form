@@ -21,162 +21,184 @@ class DateTimeSelector extends StatelessWidget {
   final DateTimeInputUiSettings settings;
   final bool showCloseButton;
 
+  Future<void> pickDate(BuildContext context) async {
+    final pickDate =
+        settings.pickDate ??
+        WoFormTheme.of(context)?.pickDate ??
+        context.read<DateTimeService>().pickDate;
+
+    final selectedDate = await pickDate(
+      context: context,
+      initialDate: dateTime ?? settings.initialEditValue?.resolve(),
+      minDate: minDateTime,
+      maxDate: maxDateTime,
+      initialEntryMode: settings.initialDateEntryMode,
+      initialDatePickerMode: settings.initialDatePickerMode,
+      dateFormat: settings.dateFormat,
+    );
+
+    if (selectedDate != null) {
+      final initialDate = dateTime == null ? DateTime.now() : dateTime!;
+
+      onChanged!(
+        settings.editMode == DateEditMode.date
+            ? selectedDate
+            : selectedDate.copyWith(
+                hour: initialDate.hour,
+                minute: initialDate.minute,
+              ),
+      );
+    }
+  }
+
+  Future<void> pickTime(BuildContext context) async {
+    final initialDate = dateTime == null ? DateTime.now() : dateTime!;
+
+    final pickTime =
+        settings.pickTime ??
+        WoFormTheme.of(context)?.pickTime ??
+        defaultPickTime;
+
+    final selectedTime = await pickTime(
+      context: context,
+      initialTime: TimeOfDay.fromDateTime(initialDate),
+      initialEntryMode: settings.initialTimeEntryMode,
+    );
+
+    if (selectedTime != null) {
+      onChanged!(
+        initialDate.copyWith(
+          hour: selectedTime.hour,
+          minute: selectedTime.minute,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final inputDecorationTheme = theme.inputDecorationTheme;
-    final themedBorder = inputDecorationTheme.border;
 
-    final dateSelector = settings.editMode != DateEditMode.time
-        ? InkWell(
-            borderRadius: themedBorder is OutlineInputBorder
-                ? themedBorder.borderRadius
-                : themedBorder is UnderlineInputBorder
-                    ? themedBorder.borderRadius
-                    : BorderRadius.zero,
-            onTap: onChanged == null
+    switch (settings.editMode) {
+      case DateEditMode.date:
+        return ClickableInputField(
+          onTap: onChanged == null ? null : () => pickDate(context),
+          decoration: InputDecoration(
+            prefixIcon: settings.prefixIcon,
+            suffixIcon: dateTime == null || !showCloseButton
                 ? null
-                : () async {
-                    final pickDate = settings.pickDate ??
-                        WoFormTheme.of(context)?.pickDate ??
-                        context.read<DateTimeService>().pickDate;
-
-                    final selectedDate = await pickDate(
-                      context: context,
-                      initialDate:
-                          dateTime ?? settings.initialEditValue?.resolve(),
-                      minDate: minDateTime,
-                      maxDate: maxDateTime,
-                      initialEntryMode: settings.initialDateEntryMode,
-                      initialDatePickerMode: settings.initialDatePickerMode,
-                      dateFormat: settings.dateFormat,
-                    );
-
-                    if (selectedDate != null) {
-                      final initialDate =
-                          dateTime == null ? DateTime.now() : dateTime!;
-
-                      onChanged!(
-                        settings.editMode == DateEditMode.date
-                            ? selectedDate
-                            : selectedDate.copyWith(
-                                hour: initialDate.hour,
-                                minute: initialDate.minute,
-                              ),
-                      );
-                    }
-                  },
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: inputDecorationTheme.fillColor,
-                border: Border.all(
-                  strokeAlign: BorderSide.strokeAlignOutside,
-                  color: theme.colorScheme.onSurface,
-                  width: .6,
-                ),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Center(
-                child: dateTime == null
-                    ? settings.hintText == null
-                        ? const Icon(Icons.calendar_month)
-                        : Text(
-                            settings.hintText!,
-                            style: theme.textTheme.bodyMedium,
-                          )
-                    : Text(
-                        DateFormat(settings.dateFormat ?? 'yMMMMd')
-                            .format(dateTime!),
-                        style: theme.textTheme.bodyMedium,
-                      ),
-              ),
-            ),
-          )
-        : null;
-
-    final timeSelector = switch (settings.editMode) {
-      DateEditMode.date => false,
-      DateEditMode.dateAndTime || null => dateTime != null,
-      DateEditMode.time => true,
-    }
-        ? InkWell(
-            borderRadius: themedBorder is OutlineInputBorder
-                ? themedBorder.borderRadius
-                : themedBorder is UnderlineInputBorder
-                    ? themedBorder.borderRadius
-                    : BorderRadius.zero,
-            onTap: onChanged == null
-                ? null
-                : () async {
-                    final initialDate =
-                        dateTime == null ? DateTime.now() : dateTime!;
-
-                    final pickTime = settings.pickTime ??
-                        WoFormTheme.of(context)?.pickTime ??
-                        defaultPickTime;
-
-                    final selectedTime = await pickTime(
-                      context: context,
-                      initialTime: TimeOfDay.fromDateTime(initialDate),
-                      initialEntryMode: settings.initialTimeEntryMode,
-                    );
-
-                    if (selectedTime != null) {
-                      onChanged!(
-                        initialDate.copyWith(
-                          hour: selectedTime.hour,
-                          minute: selectedTime.minute,
-                        ),
-                      );
-                    }
-                  },
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Theme.of(context).inputDecorationTheme.fillColor,
-                border: Border.all(
-                  strokeAlign: BorderSide.strokeAlignOutside,
-                  color: Theme.of(context).colorScheme.onSurface,
-                  width: .6,
-                ),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Center(
-                child: dateTime == null
-                    ? settings.hintText == null
-                        ? const Icon(Icons.calendar_month)
-                        : Text(
-                            settings.hintText!,
-                            style: theme.textTheme.bodyMedium,
-                          )
-                    : Text(
-                        DateFormat(
-                          settings.timeFormat ?? 'HH:mm',
-                        ).format(dateTime!),
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-              ),
-            ),
-          )
-        : null;
-
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        if (dateTime != null && showCloseButton)
-          IconButton(
-            onPressed: onChanged == null ? null : () => onChanged!(null),
-            icon: const Icon(Icons.close),
+                : IconButton(
+                    onPressed: onChanged == null
+                        ? null
+                        : () => onChanged!(null),
+                    icon: const Icon(Icons.close),
+                  ),
           ),
-        if (dateSelector != null)
-          timeSelector == null ? Expanded(child: dateSelector) : dateSelector,
-        if (dateSelector != null && timeSelector != null)
-          const Expanded(child: SizedBox(width: 16)),
-        if (timeSelector != null)
-          dateSelector == null ? Expanded(child: timeSelector) : timeSelector,
-      ],
-    );
+          child: dateTime == null
+              ? Text(
+                  settings.addDateText ??
+                      context.read<WoFormL10n?>()?.addDate?.call() ??
+                      'Select a date',
+                )
+              : Text(
+                  DateFormat(
+                    settings.dateFormat ?? 'yMMMMd',
+                  ).format(dateTime!),
+                ),
+        );
+      case DateEditMode.time:
+        return ClickableInputField(
+          onTap: onChanged == null ? null : () => pickTime(context),
+          decoration: InputDecoration(
+            prefixIcon: settings.prefixIcon,
+            suffixIcon: dateTime == null || !showCloseButton
+                ? null
+                : IconButton(
+                    onPressed: onChanged == null
+                        ? null
+                        : () => onChanged!(null),
+                    icon: const Icon(Icons.close),
+                  ),
+          ),
+          child: dateTime == null
+              ? Text(
+                  settings.addTimeText ??
+                      context.read<WoFormL10n?>()?.addTime?.call() ??
+                      'Select a time',
+                )
+              : Text(
+                  DateFormat(
+                    settings.dateFormat ?? 'HH:mm',
+                  ).format(dateTime!),
+                ),
+        );
+      case null:
+      case DateEditMode.dateAndTime:
+        return ClickableInputField(
+          onTap: onChanged == null ? null : () => pickDate(context),
+          decoration: InputDecoration(
+            prefixIcon: settings.prefixIcon,
+            suffixIcon: dateTime == null
+                ? null
+                : DecoratedBox(
+                    decoration: BoxDecoration(
+                      border: Border(
+                        left: BorderSide(
+                          color: theme.colorScheme.onSurface.withAlpha(128),
+                        ),
+                      ),
+                    ),
+                    child: IntrinsicHeight(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          InkWell(
+                            onTap: onChanged == null
+                                ? null
+                                : () => pickTime(context),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Center(
+                                child: Text(
+                                  DateFormat(
+                                    settings.timeFormat ?? 'HH:mm',
+                                  ).format(dateTime!),
+                                ),
+                              ),
+                            ),
+                          ),
+                          VerticalDivider(
+                            width: 1,
+                            color: theme.colorScheme.onSurface.withAlpha(
+                              128,
+                            ),
+                          ),
+                          if (showCloseButton)
+                            IconButton(
+                              onPressed: onChanged == null
+                                  ? null
+                                  : () => onChanged!(null),
+                              icon: const Icon(Icons.close),
+                            ),
+                        ],
+                      ),
+                    ),
+                  ),
+          ),
+          child: dateTime == null
+              ? Text(
+                  settings.addDateText ??
+                      context.read<WoFormL10n?>()?.addDate?.call() ??
+                      'Select a date',
+                )
+              : Text(
+                  DateFormat(
+                    settings.dateFormat ?? 'yMMMMd',
+                  ).format(dateTime!),
+                ),
+        );
+    }
   }
 
   static Future<TimeOfDay?> defaultPickTime({
@@ -190,6 +212,47 @@ class DateTimeSelector extends StatelessWidget {
       context: context,
       initialTime: initialTime,
       initialEntryMode: initialEntryMode ?? TimePickerEntryMode.dial,
+    );
+  }
+}
+
+class ClickableInputField extends StatelessWidget {
+  const ClickableInputField({
+    required this.child,
+    required this.onTap,
+    this.decoration = const InputDecoration(),
+    super.key,
+  });
+
+  final Widget child;
+  final VoidCallback? onTap;
+  final InputDecoration decoration;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final inputDecorationTheme = theme.inputDecorationTheme;
+    final themedBorder = inputDecorationTheme.border;
+
+    return ClipRRect(
+      borderRadius: themedBorder is OutlineInputBorder
+          ? themedBorder.borderRadius
+          : themedBorder is UnderlineInputBorder
+          ? themedBorder.borderRadius
+          : BorderRadius.zero,
+      clipBehavior: Clip.hardEdge,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: themedBorder is OutlineInputBorder
+            ? themedBorder.borderRadius
+            : themedBorder is UnderlineInputBorder
+            ? themedBorder.borderRadius
+            : BorderRadius.zero,
+        child: InputDecorator(
+          decoration: decoration,
+          child: child,
+        ),
+      ),
     );
   }
 }

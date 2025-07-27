@@ -168,7 +168,7 @@ mixin _$DateTimeInputUiSettings {
 /// Else, label and selector will be in a flexible row,
 /// selector with a flex value of 10,
 /// and label with a flex value of [labelFlex].
- int? get labelFlex;/// If DateTimeInput.initialValue is null, this value will be used instead.
+ int? get labelFlex;@notSerializable Widget? get prefixIcon; String? get addDateText; String? get addTimeText;/// If DateTimeInput.initialValue is null, this value will be used instead.
 @JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? get initialEditValue; DatePickerEntryMode? get initialDateEntryMode; DatePickerMode? get initialDatePickerMode; DateEditMode? get editMode;@notSerializable PickDateDef? get pickDate;@notSerializable PickTimeDef? get pickTime; TimePickerEntryMode? get initialTimeEntryMode;@notSerializable DateTimeFieldBuilderDef? get widgetBuilder;
 /// Create a copy of DateTimeInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -182,16 +182,16 @@ $DateTimeInputUiSettingsCopyWith<DateTimeInputUiSettings> get copyWith => _$Date
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DateTimeInputUiSettings&&(identical(other.dateFormat, dateFormat) || other.dateFormat == dateFormat)&&(identical(other.timeFormat, timeFormat) || other.timeFormat == timeFormat)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.labelFlex, labelFlex) || other.labelFlex == labelFlex)&&(identical(other.initialEditValue, initialEditValue) || other.initialEditValue == initialEditValue)&&(identical(other.initialDateEntryMode, initialDateEntryMode) || other.initialDateEntryMode == initialDateEntryMode)&&(identical(other.initialDatePickerMode, initialDatePickerMode) || other.initialDatePickerMode == initialDatePickerMode)&&(identical(other.editMode, editMode) || other.editMode == editMode)&&(identical(other.pickDate, pickDate) || other.pickDate == pickDate)&&(identical(other.pickTime, pickTime) || other.pickTime == pickTime)&&(identical(other.initialTimeEntryMode, initialTimeEntryMode) || other.initialTimeEntryMode == initialTimeEntryMode)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DateTimeInputUiSettings&&(identical(other.dateFormat, dateFormat) || other.dateFormat == dateFormat)&&(identical(other.timeFormat, timeFormat) || other.timeFormat == timeFormat)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.labelFlex, labelFlex) || other.labelFlex == labelFlex)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.addDateText, addDateText) || other.addDateText == addDateText)&&(identical(other.addTimeText, addTimeText) || other.addTimeText == addTimeText)&&(identical(other.initialEditValue, initialEditValue) || other.initialEditValue == initialEditValue)&&(identical(other.initialDateEntryMode, initialDateEntryMode) || other.initialDateEntryMode == initialDateEntryMode)&&(identical(other.initialDatePickerMode, initialDatePickerMode) || other.initialDatePickerMode == initialDatePickerMode)&&(identical(other.editMode, editMode) || other.editMode == editMode)&&(identical(other.pickDate, pickDate) || other.pickDate == pickDate)&&(identical(other.pickTime, pickTime) || other.pickTime == pickTime)&&(identical(other.initialTimeEntryMode, initialTimeEntryMode) || other.initialTimeEntryMode == initialTimeEntryMode)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,dateFormat,timeFormat,labelText,helperText,hintText,labelFlex,initialEditValue,initialDateEntryMode,initialDatePickerMode,editMode,pickDate,pickTime,initialTimeEntryMode,widgetBuilder);
+int get hashCode => Object.hash(runtimeType,dateFormat,timeFormat,labelText,helperText,hintText,labelFlex,prefixIcon,addDateText,addTimeText,initialEditValue,initialDateEntryMode,initialDatePickerMode,editMode,pickDate,pickTime,initialTimeEntryMode,widgetBuilder);
 
 @override
 String toString() {
-  return 'DateTimeInputUiSettings(dateFormat: $dateFormat, timeFormat: $timeFormat, labelText: $labelText, helperText: $helperText, hintText: $hintText, labelFlex: $labelFlex, initialEditValue: $initialEditValue, initialDateEntryMode: $initialDateEntryMode, initialDatePickerMode: $initialDatePickerMode, editMode: $editMode, pickDate: $pickDate, pickTime: $pickTime, initialTimeEntryMode: $initialTimeEntryMode, widgetBuilder: $widgetBuilder)';
+  return 'DateTimeInputUiSettings(dateFormat: $dateFormat, timeFormat: $timeFormat, labelText: $labelText, helperText: $helperText, hintText: $hintText, labelFlex: $labelFlex, prefixIcon: $prefixIcon, addDateText: $addDateText, addTimeText: $addTimeText, initialEditValue: $initialEditValue, initialDateEntryMode: $initialDateEntryMode, initialDatePickerMode: $initialDatePickerMode, editMode: $editMode, pickDate: $pickDate, pickTime: $pickTime, initialTimeEntryMode: $initialTimeEntryMode, widgetBuilder: $widgetBuilder)';
 }
 
 
@@ -202,7 +202,7 @@ abstract mixin class $DateTimeInputUiSettingsCopyWith<$Res>  {
   factory $DateTimeInputUiSettingsCopyWith(DateTimeInputUiSettings value, $Res Function(DateTimeInputUiSettings) _then) = _$DateTimeInputUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String? dateFormat, String? timeFormat, String? labelText, String? helperText, String? hintText, int? labelFlex,@JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? initialEditValue, DatePickerEntryMode? initialDateEntryMode, DatePickerMode? initialDatePickerMode, DateEditMode? editMode,@notSerializable PickDateDef? pickDate,@notSerializable PickTimeDef? pickTime, TimePickerEntryMode? initialTimeEntryMode,@notSerializable DateTimeFieldBuilderDef? widgetBuilder
+ String? dateFormat, String? timeFormat, String? labelText, String? helperText, String? hintText, int? labelFlex,@notSerializable Widget? prefixIcon, String? addDateText, String? addTimeText,@JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? initialEditValue, DatePickerEntryMode? initialDateEntryMode, DatePickerMode? initialDatePickerMode, DateEditMode? editMode,@notSerializable PickDateDef? pickDate,@notSerializable PickTimeDef? pickTime, TimePickerEntryMode? initialTimeEntryMode,@notSerializable DateTimeFieldBuilderDef? widgetBuilder
 });
 
 
@@ -219,7 +219,7 @@ class _$DateTimeInputUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of DateTimeInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? dateFormat = freezed,Object? timeFormat = freezed,Object? labelText = freezed,Object? helperText = freezed,Object? hintText = freezed,Object? labelFlex = freezed,Object? initialEditValue = freezed,Object? initialDateEntryMode = freezed,Object? initialDatePickerMode = freezed,Object? editMode = freezed,Object? pickDate = freezed,Object? pickTime = freezed,Object? initialTimeEntryMode = freezed,Object? widgetBuilder = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? dateFormat = freezed,Object? timeFormat = freezed,Object? labelText = freezed,Object? helperText = freezed,Object? hintText = freezed,Object? labelFlex = freezed,Object? prefixIcon = freezed,Object? addDateText = freezed,Object? addTimeText = freezed,Object? initialEditValue = freezed,Object? initialDateEntryMode = freezed,Object? initialDatePickerMode = freezed,Object? editMode = freezed,Object? pickDate = freezed,Object? pickTime = freezed,Object? initialTimeEntryMode = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_self.copyWith(
 dateFormat: freezed == dateFormat ? _self.dateFormat : dateFormat // ignore: cast_nullable_to_non_nullable
 as String?,timeFormat: freezed == timeFormat ? _self.timeFormat : timeFormat // ignore: cast_nullable_to_non_nullable
@@ -227,7 +227,10 @@ as String?,labelText: freezed == labelText ? _self.labelText : labelText // igno
 as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
 as String?,hintText: freezed == hintText ? _self.hintText : hintText // ignore: cast_nullable_to_non_nullable
 as String?,labelFlex: freezed == labelFlex ? _self.labelFlex : labelFlex // ignore: cast_nullable_to_non_nullable
-as int?,initialEditValue: freezed == initialEditValue ? _self.initialEditValue : initialEditValue // ignore: cast_nullable_to_non_nullable
+as int?,prefixIcon: freezed == prefixIcon ? _self.prefixIcon : prefixIcon // ignore: cast_nullable_to_non_nullable
+as Widget?,addDateText: freezed == addDateText ? _self.addDateText : addDateText // ignore: cast_nullable_to_non_nullable
+as String?,addTimeText: freezed == addTimeText ? _self.addTimeText : addTimeText // ignore: cast_nullable_to_non_nullable
+as String?,initialEditValue: freezed == initialEditValue ? _self.initialEditValue : initialEditValue // ignore: cast_nullable_to_non_nullable
 as FlexibleDateTime?,initialDateEntryMode: freezed == initialDateEntryMode ? _self.initialDateEntryMode : initialDateEntryMode // ignore: cast_nullable_to_non_nullable
 as DatePickerEntryMode?,initialDatePickerMode: freezed == initialDatePickerMode ? _self.initialDatePickerMode : initialDatePickerMode // ignore: cast_nullable_to_non_nullable
 as DatePickerMode?,editMode: freezed == editMode ? _self.editMode : editMode // ignore: cast_nullable_to_non_nullable
@@ -259,7 +262,7 @@ $FlexibleDateTimeCopyWith<$Res>? get initialEditValue {
 @JsonSerializable()
 
 class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
-  const _DateTimeInputUiSettings({this.dateFormat, this.timeFormat, this.labelText, this.helperText, this.hintText, this.labelFlex, @JsonKey(toJson: FlexibleDateTime.staticToJson) this.initialEditValue, this.initialDateEntryMode, this.initialDatePickerMode, this.editMode, @notSerializable this.pickDate, @notSerializable this.pickTime, this.initialTimeEntryMode, @notSerializable this.widgetBuilder}): super._();
+  const _DateTimeInputUiSettings({this.dateFormat, this.timeFormat, this.labelText, this.helperText, this.hintText, this.labelFlex, @notSerializable this.prefixIcon, this.addDateText, this.addTimeText, @JsonKey(toJson: FlexibleDateTime.staticToJson) this.initialEditValue, this.initialDateEntryMode, this.initialDatePickerMode, this.editMode, @notSerializable this.pickDate, @notSerializable this.pickTime, this.initialTimeEntryMode, @notSerializable this.widgetBuilder}): super._();
   factory _DateTimeInputUiSettings.fromJson(Map<String, dynamic> json) => _$DateTimeInputUiSettingsFromJson(json);
 
 @override final  String? dateFormat;
@@ -272,6 +275,9 @@ class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
 /// selector with a flex value of 10,
 /// and label with a flex value of [labelFlex].
 @override final  int? labelFlex;
+@override@notSerializable final  Widget? prefixIcon;
+@override final  String? addDateText;
+@override final  String? addTimeText;
 /// If DateTimeInput.initialValue is null, this value will be used instead.
 @override@JsonKey(toJson: FlexibleDateTime.staticToJson) final  FlexibleDateTime? initialEditValue;
 @override final  DatePickerEntryMode? initialDateEntryMode;
@@ -295,16 +301,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DateTimeInputUiSettings&&(identical(other.dateFormat, dateFormat) || other.dateFormat == dateFormat)&&(identical(other.timeFormat, timeFormat) || other.timeFormat == timeFormat)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.labelFlex, labelFlex) || other.labelFlex == labelFlex)&&(identical(other.initialEditValue, initialEditValue) || other.initialEditValue == initialEditValue)&&(identical(other.initialDateEntryMode, initialDateEntryMode) || other.initialDateEntryMode == initialDateEntryMode)&&(identical(other.initialDatePickerMode, initialDatePickerMode) || other.initialDatePickerMode == initialDatePickerMode)&&(identical(other.editMode, editMode) || other.editMode == editMode)&&(identical(other.pickDate, pickDate) || other.pickDate == pickDate)&&(identical(other.pickTime, pickTime) || other.pickTime == pickTime)&&(identical(other.initialTimeEntryMode, initialTimeEntryMode) || other.initialTimeEntryMode == initialTimeEntryMode)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DateTimeInputUiSettings&&(identical(other.dateFormat, dateFormat) || other.dateFormat == dateFormat)&&(identical(other.timeFormat, timeFormat) || other.timeFormat == timeFormat)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.labelFlex, labelFlex) || other.labelFlex == labelFlex)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.addDateText, addDateText) || other.addDateText == addDateText)&&(identical(other.addTimeText, addTimeText) || other.addTimeText == addTimeText)&&(identical(other.initialEditValue, initialEditValue) || other.initialEditValue == initialEditValue)&&(identical(other.initialDateEntryMode, initialDateEntryMode) || other.initialDateEntryMode == initialDateEntryMode)&&(identical(other.initialDatePickerMode, initialDatePickerMode) || other.initialDatePickerMode == initialDatePickerMode)&&(identical(other.editMode, editMode) || other.editMode == editMode)&&(identical(other.pickDate, pickDate) || other.pickDate == pickDate)&&(identical(other.pickTime, pickTime) || other.pickTime == pickTime)&&(identical(other.initialTimeEntryMode, initialTimeEntryMode) || other.initialTimeEntryMode == initialTimeEntryMode)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,dateFormat,timeFormat,labelText,helperText,hintText,labelFlex,initialEditValue,initialDateEntryMode,initialDatePickerMode,editMode,pickDate,pickTime,initialTimeEntryMode,widgetBuilder);
+int get hashCode => Object.hash(runtimeType,dateFormat,timeFormat,labelText,helperText,hintText,labelFlex,prefixIcon,addDateText,addTimeText,initialEditValue,initialDateEntryMode,initialDatePickerMode,editMode,pickDate,pickTime,initialTimeEntryMode,widgetBuilder);
 
 @override
 String toString() {
-  return 'DateTimeInputUiSettings(dateFormat: $dateFormat, timeFormat: $timeFormat, labelText: $labelText, helperText: $helperText, hintText: $hintText, labelFlex: $labelFlex, initialEditValue: $initialEditValue, initialDateEntryMode: $initialDateEntryMode, initialDatePickerMode: $initialDatePickerMode, editMode: $editMode, pickDate: $pickDate, pickTime: $pickTime, initialTimeEntryMode: $initialTimeEntryMode, widgetBuilder: $widgetBuilder)';
+  return 'DateTimeInputUiSettings(dateFormat: $dateFormat, timeFormat: $timeFormat, labelText: $labelText, helperText: $helperText, hintText: $hintText, labelFlex: $labelFlex, prefixIcon: $prefixIcon, addDateText: $addDateText, addTimeText: $addTimeText, initialEditValue: $initialEditValue, initialDateEntryMode: $initialDateEntryMode, initialDatePickerMode: $initialDatePickerMode, editMode: $editMode, pickDate: $pickDate, pickTime: $pickTime, initialTimeEntryMode: $initialTimeEntryMode, widgetBuilder: $widgetBuilder)';
 }
 
 
@@ -315,7 +321,7 @@ abstract mixin class _$DateTimeInputUiSettingsCopyWith<$Res> implements $DateTim
   factory _$DateTimeInputUiSettingsCopyWith(_DateTimeInputUiSettings value, $Res Function(_DateTimeInputUiSettings) _then) = __$DateTimeInputUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String? dateFormat, String? timeFormat, String? labelText, String? helperText, String? hintText, int? labelFlex,@JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? initialEditValue, DatePickerEntryMode? initialDateEntryMode, DatePickerMode? initialDatePickerMode, DateEditMode? editMode,@notSerializable PickDateDef? pickDate,@notSerializable PickTimeDef? pickTime, TimePickerEntryMode? initialTimeEntryMode,@notSerializable DateTimeFieldBuilderDef? widgetBuilder
+ String? dateFormat, String? timeFormat, String? labelText, String? helperText, String? hintText, int? labelFlex,@notSerializable Widget? prefixIcon, String? addDateText, String? addTimeText,@JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? initialEditValue, DatePickerEntryMode? initialDateEntryMode, DatePickerMode? initialDatePickerMode, DateEditMode? editMode,@notSerializable PickDateDef? pickDate,@notSerializable PickTimeDef? pickTime, TimePickerEntryMode? initialTimeEntryMode,@notSerializable DateTimeFieldBuilderDef? widgetBuilder
 });
 
 
@@ -332,7 +338,7 @@ class __$DateTimeInputUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of DateTimeInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? dateFormat = freezed,Object? timeFormat = freezed,Object? labelText = freezed,Object? helperText = freezed,Object? hintText = freezed,Object? labelFlex = freezed,Object? initialEditValue = freezed,Object? initialDateEntryMode = freezed,Object? initialDatePickerMode = freezed,Object? editMode = freezed,Object? pickDate = freezed,Object? pickTime = freezed,Object? initialTimeEntryMode = freezed,Object? widgetBuilder = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? dateFormat = freezed,Object? timeFormat = freezed,Object? labelText = freezed,Object? helperText = freezed,Object? hintText = freezed,Object? labelFlex = freezed,Object? prefixIcon = freezed,Object? addDateText = freezed,Object? addTimeText = freezed,Object? initialEditValue = freezed,Object? initialDateEntryMode = freezed,Object? initialDatePickerMode = freezed,Object? editMode = freezed,Object? pickDate = freezed,Object? pickTime = freezed,Object? initialTimeEntryMode = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_DateTimeInputUiSettings(
 dateFormat: freezed == dateFormat ? _self.dateFormat : dateFormat // ignore: cast_nullable_to_non_nullable
 as String?,timeFormat: freezed == timeFormat ? _self.timeFormat : timeFormat // ignore: cast_nullable_to_non_nullable
@@ -340,7 +346,10 @@ as String?,labelText: freezed == labelText ? _self.labelText : labelText // igno
 as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
 as String?,hintText: freezed == hintText ? _self.hintText : hintText // ignore: cast_nullable_to_non_nullable
 as String?,labelFlex: freezed == labelFlex ? _self.labelFlex : labelFlex // ignore: cast_nullable_to_non_nullable
-as int?,initialEditValue: freezed == initialEditValue ? _self.initialEditValue : initialEditValue // ignore: cast_nullable_to_non_nullable
+as int?,prefixIcon: freezed == prefixIcon ? _self.prefixIcon : prefixIcon // ignore: cast_nullable_to_non_nullable
+as Widget?,addDateText: freezed == addDateText ? _self.addDateText : addDateText // ignore: cast_nullable_to_non_nullable
+as String?,addTimeText: freezed == addTimeText ? _self.addTimeText : addTimeText // ignore: cast_nullable_to_non_nullable
+as String?,initialEditValue: freezed == initialEditValue ? _self.initialEditValue : initialEditValue // ignore: cast_nullable_to_non_nullable
 as FlexibleDateTime?,initialDateEntryMode: freezed == initialDateEntryMode ? _self.initialDateEntryMode : initialDateEntryMode // ignore: cast_nullable_to_non_nullable
 as DatePickerEntryMode?,initialDatePickerMode: freezed == initialDatePickerMode ? _self.initialDatePickerMode : initialDatePickerMode // ignore: cast_nullable_to_non_nullable
 as DatePickerMode?,editMode: freezed == editMode ? _self.editMode : editMode // ignore: cast_nullable_to_non_nullable

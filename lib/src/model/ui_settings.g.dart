@@ -50,6 +50,8 @@ _DateTimeInputUiSettings _$DateTimeInputUiSettingsFromJson(
   helperText: json['helperText'] as String?,
   hintText: json['hintText'] as String?,
   labelFlex: (json['labelFlex'] as num?)?.toInt(),
+  addDateText: json['addDateText'] as String?,
+  addTimeText: json['addTimeText'] as String?,
   initialEditValue: json['initialEditValue'] == null
       ? null
       : FlexibleDateTime.fromJson(
@@ -79,6 +81,8 @@ Map<String, dynamic> _$DateTimeInputUiSettingsToJson(
   'helperText': instance.helperText,
   'hintText': instance.hintText,
   'labelFlex': instance.labelFlex,
+  'addDateText': instance.addDateText,
+  'addTimeText': instance.addTimeText,
   'initialEditValue': FlexibleDateTime.staticToJson(instance.initialEditValue),
   'initialDateEntryMode':
       _$DatePickerEntryModeEnumMap[instance.initialDateEntryMode],

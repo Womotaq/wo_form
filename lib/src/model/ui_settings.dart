@@ -83,6 +83,9 @@ abstract class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
     /// selector with a flex value of 10,
     /// and label with a flex value of [labelFlex].
     int? labelFlex,
+    @notSerializable Widget? prefixIcon,
+    String? addDateText,
+    String? addTimeText,
 
     /// If DateTimeInput.initialValue is null, this value will be used instead.
     @JsonKey(toJson: FlexibleDateTime.staticToJson)
@@ -113,6 +116,9 @@ abstract class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
           helperText: helperText ?? other.helperText,
           hintText: hintText ?? other.hintText,
           labelFlex: labelFlex ?? other.labelFlex,
+          prefixIcon: prefixIcon ?? other.prefixIcon,
+          addDateText: addDateText ?? other.addDateText,
+          addTimeText: addTimeText ?? other.addTimeText,
           initialDateEntryMode:
               initialDateEntryMode ?? other.initialDateEntryMode,
           initialDatePickerMode:
