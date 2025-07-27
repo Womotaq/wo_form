@@ -534,19 +534,20 @@ class WoForm extends StatelessWidget {
     ExportSettings? exportSettings,
     WoFormUiSettings? uiSettings,
     WoFormValues? initialValues,
+    String hydratationId = '',
     this.onStatusUpdate,
     this.canSubmit,
     this.onSubmitting,
     this.onSubmitError,
     this.onSubmitSuccess,
     this.pageBuilder,
-    this.hydratationId = '',
     this.rootKey,
     super.key,
   }) : root = RootNode(
          exportSettings: exportSettings ?? const ExportSettings(),
          uiSettings: uiSettings ?? const WoFormUiSettings(),
          initialValues: initialValues ?? const {},
+         hydratationId: hydratationId,
          children: children,
        );
 
@@ -558,7 +559,6 @@ class WoForm extends StatelessWidget {
     this.onSubmitError,
     this.onSubmitSuccess,
     this.pageBuilder,
-    this.hydratationId = '',
     this.rootKey,
     super.key,
   });
@@ -573,10 +573,6 @@ class WoForm extends StatelessWidget {
   final OnSubmitErrorDef? onSubmitError;
   final void Function(BuildContext context)? onSubmitSuccess;
   final WidgetBuilderDef? pageBuilder;
-
-  /// If not empty, this form will be locally persistent, using HydratedCubit.
-  /// LATER : issue, how to modify an in-production corrupted data ?
-  final String hydratationId;
   final RootKey? rootKey;
 
   @override
@@ -589,23 +585,23 @@ class WoForm extends StatelessWidget {
         child: MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (context) => hydratationId.isEmpty
+              create: (context) => root.hydratationId.isEmpty
                   ? WoFormStatusCubit._(
                       const InitialStatus(),
                     )
                   : HydratedWoFormStatusCubit._(
-                      hydratationId,
+                      root.hydratationId,
                       const InitialStatus(),
                     ),
             ),
             BlocProvider(
-              create: (context) => hydratationId.isEmpty
+              create: (context) => root.hydratationId.isEmpty
                   ? WoFormLockCubit._()
-                  : HydratedWoFormLockCubit._(hydratationId),
+                  : HydratedWoFormLockCubit._(root.hydratationId),
             ),
             BlocProvider(
               create: (context) {
-                final cubit = hydratationId.isEmpty
+                final cubit = root.hydratationId.isEmpty
                     ? WoFormValuesCubit._(
                         context.read(),
                         context.read(),
@@ -616,7 +612,7 @@ class WoForm extends StatelessWidget {
                         initialValues: root.initialValues,
                       )
                     : HydratedWoFormValuesCubit._(
-                        hydratationId,
+                        root.hydratationId,
                         context.read(),
                         context.read(),
                         context.read(),

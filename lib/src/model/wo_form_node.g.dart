@@ -201,6 +201,7 @@ _RootNode _$RootNodeFromJson(Map<String, dynamic> json) => _RootNode(
   exportSettings: json['exportSettings'] == null
       ? const ExportSettings()
       : ExportSettings.fromJson(json['exportSettings'] as Map<String, dynamic>),
+  hydratationId: json['hydratationId'] as String? ?? '',
 );
 
 Map<String, dynamic> _$RootNodeToJson(_RootNode instance) => <String, dynamic>{
@@ -209,4 +210,5 @@ Map<String, dynamic> _$RootNodeToJson(_RootNode instance) => <String, dynamic>{
   'children': const InputsListConverter().toJson(instance.children),
   'uiSettings': WoFormUiSettings.staticToJson(instance.uiSettings),
   'exportSettings': ExportSettings.staticToJson(instance.exportSettings),
+  'hydratationId': instance.hydratationId,
 };

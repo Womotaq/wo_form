@@ -838,6 +838,12 @@ abstract class RootNode with _$RootNode, WoFormNodeMixin {
     @JsonKey(toJson: ExportSettings.staticToJson)
     @Default(ExportSettings())
     ExportSettings exportSettings,
+
+    // LATER : issue, how to modify an in-production corrupted data ?
+    // give a way to override it ?
+    //
+    /// If not empty, this form will be locally persistent, using HydratedCubit.
+    @Default('') String hydratationId,
   }) = _RootNode;
 
   const RootNode._();
