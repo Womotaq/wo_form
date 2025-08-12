@@ -197,6 +197,7 @@ Map<String, dynamic> _$DynamicInputUiSettingsToJson(
 _InputsNodeUiSettings _$InputsNodeUiSettingsFromJson(
   Map<String, dynamic> json,
 ) => _InputsNodeUiSettings(
+  flex: (json['flex'] as num?)?.toInt(),
   labelText: json['labelText'] as String?,
   labelTextWhenChildrenHidden: json['labelTextWhenChildrenHidden'] as String?,
   helperText: json['helperText'] as String?,
@@ -210,6 +211,7 @@ _InputsNodeUiSettings _$InputsNodeUiSettingsFromJson(
 Map<String, dynamic> _$InputsNodeUiSettingsToJson(
   _InputsNodeUiSettings instance,
 ) => <String, dynamic>{
+  'flex': instance.flex,
   'labelText': instance.labelText,
   'labelTextWhenChildrenHidden': instance.labelTextWhenChildrenHidden,
   'helperText': instance.helperText,
@@ -390,6 +392,7 @@ _WoFormUiSettings _$WoFormUiSettingsFromJson(Map<String, dynamic> json) =>
       padding: const EdgeInsetsNullableConverter().fromJson(
         json['padding'] as Map<String, dynamic>?,
       ),
+      scrollable: json['scrollable'] as bool? ?? true,
     );
 
 Map<String, dynamic> _$WoFormUiSettingsToJson(_WoFormUiSettings instance) =>
@@ -401,6 +404,7 @@ Map<String, dynamic> _$WoFormUiSettingsToJson(_WoFormUiSettings instance) =>
       'showErrors': _$ShowErrorsEnumMap[instance.showErrors]!,
       'theme': instance.theme?.toJson(),
       'padding': const EdgeInsetsNullableConverter().toJson(instance.padding),
+      'scrollable': instance.scrollable,
     };
 
 const _$WoFormTitlePositionEnumMap = {

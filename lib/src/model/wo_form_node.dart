@@ -57,6 +57,9 @@ mixin WoFormNodeMixin {
   Widget toWidget({required String parentPath, Key? key});
 
   WoFormNodeMixin withId({required String id});
+
+  /// Used when OFormUiSettings.scrollable is false
+  int get flex => 0;
 }
 
 @freezed
@@ -643,6 +646,14 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
 
   @override
   WoFormNode withId({required String id}) => copyWith(id: id);
+
+  /// Used when OFormUiSettings.scrollable is false
+  @override
+  int get flex => switch (this) {
+    InputsNode(uiSettings: final uiSettings) => uiSettings.flex ?? 0,
+    ValueBuilderNode(uiSettings: final uiSettings) => uiSettings.flex ?? 0,
+    _ => 0,
+  };
 }
 
 @freezed

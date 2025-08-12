@@ -298,6 +298,7 @@ typedef HeaderBuilderDef = Widget Function(WoFormHeaderData data);
 @freezed
 abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
   const factory InputsNodeUiSettings({
+    int? flex,
     String? labelText,
     String? labelTextWhenChildrenHidden,
     String? helperText,
@@ -322,6 +323,7 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
   InputsNodeUiSettings merge(InputsNodeUiSettings? other) => other == null
       ? this
       : InputsNodeUiSettings(
+          flex: flex ?? other.flex,
           labelText: labelText ?? other.labelText,
           helperText: helperText ?? other.helperText,
           childrenVisibility: childrenVisibility ?? other.childrenVisibility,
@@ -639,6 +641,9 @@ abstract class WoFormUiSettings with _$WoFormUiSettings {
     /// Padding applied around all the widgets inside this form, except for
     /// the app bar, the bottom bar and the floating widgets.
     @EdgeInsetsNullableConverter() EdgeInsets? padding,
+
+    /// If true, the inputs will be wrapped inside a SingleChildScrollView.
+    @Default(true) bool scrollable,
   }) = _WoFormUiSettings;
 
   const WoFormUiSettings._();
