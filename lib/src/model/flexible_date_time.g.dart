@@ -19,21 +19,23 @@ Map<String, dynamic> _$FixedDateTimeToJson(FixedDateTime instance) =>
     };
 
 TodayDate _$TodayDateFromJson(Map<String, dynamic> json) => TodayDate(
-      addYears: (json['addYears'] as num?)?.toInt() ?? 0,
-      addMonths: (json['addMonths'] as num?)?.toInt() ?? 0,
-      addDays: (json['addDays'] as num?)?.toInt() ?? 0,
-      replaceYears: (json['replaceYears'] as num?)?.toInt(),
-      replaceMonths: (json['replaceMonths'] as num?)?.toInt(),
-      replaceDays: (json['replaceDays'] as num?)?.toInt(),
-      $type: json['runtimeType'] as String?,
-    );
+  addYears: (json['addYears'] as num?)?.toInt() ?? 0,
+  addMonths: (json['addMonths'] as num?)?.toInt() ?? 0,
+  addDays: (json['addDays'] as num?)?.toInt() ?? 0,
+  replaceYears: (json['replaceYears'] as num?)?.toInt(),
+  replaceMonths: (json['replaceMonths'] as num?)?.toInt(),
+  replaceDays: (json['replaceDays'] as num?)?.toInt(),
+  replaceWeekday: (json['replaceWeekday'] as num?)?.toInt(),
+  $type: json['runtimeType'] as String?,
+);
 
 Map<String, dynamic> _$TodayDateToJson(TodayDate instance) => <String, dynamic>{
-      'addYears': instance.addYears,
-      'addMonths': instance.addMonths,
-      'addDays': instance.addDays,
-      'replaceYears': instance.replaceYears,
-      'replaceMonths': instance.replaceMonths,
-      'replaceDays': instance.replaceDays,
-      'runtimeType': instance.$type,
-    };
+  'addYears': instance.addYears,
+  'addMonths': instance.addMonths,
+  'addDays': instance.addDays,
+  'replaceYears': instance.replaceYears,
+  'replaceMonths': instance.replaceMonths,
+  'replaceDays': instance.replaceDays,
+  'replaceWeekday': instance.replaceWeekday,
+  'runtimeType': instance.$type,
+};

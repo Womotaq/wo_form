@@ -3,8 +3,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'flexible_date_time.freezed.dart';
 part 'flexible_date_time.g.dart';
 
-/// A media is either an image or a video. For audio and other files,
-/// see [FileInput].
 @freezed
 sealed class FlexibleDateTime with _$FlexibleDateTime {
   const factory FlexibleDateTime.fixed({
@@ -18,6 +16,10 @@ sealed class FlexibleDateTime with _$FlexibleDateTime {
     int? replaceYears,
     int? replaceMonths,
     int? replaceDays,
+
+    /// A number from 1 (Monday) to 7 (Sunday). In accordance with ISO 8601.
+    /// Applied after [replaceDays].
+    int? replaceWeekday,
   }) = TodayDate;
 
   /// Required for the override getter
@@ -36,20 +38,26 @@ sealed class FlexibleDateTime with _$FlexibleDateTime {
       case FixedDateTime(date: final date):
         return date;
       case TodayDate(
-          addYears: final addYears,
-          addMonths: final addMonths,
-          addDays: final addDays,
-          replaceYears: final replaceYears,
-          replaceMonths: final replaceMonths,
-          replaceDays: final replaceDays,
-        ):
+        addYears: final addYears,
+        addMonths: final addMonths,
+        addDays: final addDays,
+        replaceYears: final replaceYears,
+        replaceMonths: final replaceMonths,
+        replaceDays: final replaceDays,
+        replaceWeekday: final replaceWeekday,
+      ):
         final now = DateTime.now();
-        final today = DateTime(now.year, now.month, now.day);
-        return today.copyWith(
-          year: replaceYears ?? now.year + addYears,
-          month: replaceMonths ?? now.month + addMonths,
-          day: replaceDays ?? now.day + addDays,
+        final date = DateTime(
+          replaceYears ?? now.year + addYears,
+          replaceMonths ?? now.month + addMonths,
+          replaceDays ?? now.day + addDays,
         );
+
+        if (replaceWeekday != null) {
+          return date.copyWith(day: date.day + replaceWeekday - date.weekday);
+        } else {
+          return date;
+        }
     }
   }
 }
