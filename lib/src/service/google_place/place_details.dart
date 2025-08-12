@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:wo_form/wo_form.dart';
 
 part 'place_details.freezed.dart';
 part 'place_details.g.dart';
@@ -30,7 +31,7 @@ abstract class PlaceDetailsResponse with _$PlaceDetailsResponse {
   /// Required for the override getter
   const PlaceDetailsResponse._();
 
-  factory PlaceDetailsResponse.fromJson(Map<String, dynamic> json) =>
+  factory PlaceDetailsResponse.fromJson(Json json) =>
       _$PlaceDetailsResponseFromJson(json);
 }
 

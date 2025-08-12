@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:wo_form/wo_form.dart';
 
 part 'export_settings.freezed.dart';
 part 'export_settings.g.dart';
@@ -20,12 +21,11 @@ enum ExportType {
 @freezed
 abstract class ExportSettings with _$ExportSettings {
   const factory ExportSettings({
-    @Default({}) Map<String, dynamic> metadata,
+    @Default({}) Json metadata,
     @Default(ExportType.map) ExportType type,
   }) = _ExportSettings;
 
   const ExportSettings._();
 
-  factory ExportSettings.fromJson(Map<String, dynamic> json) =>
-      _$ExportSettingsFromJson(json);
+  factory ExportSettings.fromJson(Json json) => _$ExportSettingsFromJson(json);
 }

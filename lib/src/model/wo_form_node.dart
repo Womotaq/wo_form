@@ -11,7 +11,7 @@ part 'wo_form_node.g.dart';
 mixin WoFormNodeMixin {
   String get id;
 
-  static WoFormNodeMixin fromJson(Map<String, dynamic> json) {
+  static WoFormNodeMixin fromJson(Json json) {
     try {
       return WoFormInput.fromJson(json);
     } on CheckedFromJsonException {
@@ -19,7 +19,7 @@ mixin WoFormNodeMixin {
     }
   }
 
-  Map<String, dynamic> toJson();
+  Json toJson();
 
   // --
 
@@ -38,7 +38,7 @@ mixin WoFormNodeMixin {
   WoFormNodeMixin? getChild({
     required String path,
     required String parentPath,
-    required Map<String, dynamic> values,
+    required WoFormValues values,
   });
 
   Iterable<WoFormInputError> getErrors({
@@ -52,7 +52,7 @@ mixin WoFormNodeMixin {
     required String parentPath,
   });
 
-  Map<String, dynamic> getInitialValues({required String parentPath});
+  WoFormValues getInitialValues({required String parentPath});
 
   Widget toWidget({required String parentPath, Key? key});
 
@@ -73,7 +73,7 @@ abstract class DynamicInputTemplate with _$DynamicInputTemplate {
 
   const DynamicInputTemplate._();
 
-  factory DynamicInputTemplate.fromJson(Map<String, dynamic> json) =>
+  factory DynamicInputTemplate.fromJson(Json json) =>
       _$DynamicInputTemplateFromJson(json);
 
   WoFormNodeMixin getChild() => child == null ? childBuilder!() : child!;
@@ -118,6 +118,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
     required String path,
     @notSerializable WoFormNodeMixin Function(Object? value)? builder,
     Object? initialValue,
+    @Default(InputUiSettings()) InputUiSettings uiSettings,
   }) = ValueBuilderNode;
 
   @Assert('builder != null', 'ValuesBuilderNode.builder cannot be null')
@@ -147,8 +148,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
 
   const WoFormNode._();
 
-  factory WoFormNode.fromJson(Map<String, dynamic> json) =>
-      _$WoFormNodeFromJson(json);
+  factory WoFormNode.fromJson(Json json) => _$WoFormNodeFromJson(json);
 
   // --
 
@@ -177,7 +177,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
 
         switch (exportSettings.type) {
           case ExportType.mergeWithParent:
-            final data = Map<String, dynamic>.from(exportSettings.metadata);
+            final data = Json.from(exportSettings.metadata);
 
             for (final child in children) {
               await child.export(
@@ -194,7 +194,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
               into.addAll(data);
             }
           case ExportType.map:
-            final data = Map<String, dynamic>.from(exportSettings.metadata);
+            final data = Json.from(exportSettings.metadata);
 
             for (final child in children) {
               await child.export(
@@ -342,7 +342,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
   WoFormNodeMixin? getChild({
     required String path,
     required String parentPath,
-    required Map<String, dynamic> values,
+    required WoFormValues values,
   }) {
     if (!path.startsWith('/')) {
       throw ArgumentError('An input path must start with character "/".');
@@ -534,7 +534,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
   }
 
   @override
-  Map<String, dynamic> getInitialValues({required String parentPath}) {
+  WoFormValues getInitialValues({required String parentPath}) {
     switch (this) {
       case ConditionnalNode(
         conditionIsInitiallyMet: final conditionIsInitiallyMet,
@@ -665,7 +665,7 @@ abstract class FutureNode<T> with _$FutureNode<T>, WoFormNodeMixin {
   const FutureNode._();
 
   @override
-  Map<String, dynamic> toJson() => {};
+  Json toJson() => {};
 
   // --
 
@@ -755,7 +755,7 @@ abstract class FutureNode<T> with _$FutureNode<T>, WoFormNodeMixin {
   WoFormNodeMixin? getChild({
     required String path,
     required String parentPath,
-    required Map<String, dynamic> values,
+    required WoFormValues values,
   }) {
     final snapshot = values['$parentPath/$id'];
 
@@ -778,7 +778,7 @@ abstract class FutureNode<T> with _$FutureNode<T>, WoFormNodeMixin {
   }
 
   @override
-  Map<String, dynamic> getInitialValues({
+  WoFormValues getInitialValues({
     required String parentPath,
     AsyncSnapshot<T?>? initialSnapshot,
   }) {
@@ -823,18 +823,17 @@ abstract class RootNode with _$RootNode, WoFormNodeMixin {
 
   const RootNode._();
 
-  factory RootNode.fromJson(Map<String, dynamic> json) =>
-      _$RootNodeFromJson(json);
+  factory RootNode.fromJson(Json json) => _$RootNodeFromJson(json);
 
   // --
 
-  Future<Map<String, dynamic>> exportToMap({
+  Future<Json> exportToMap({
     required WoFormValues values,
 
     /// context allows access to services, like MediaService
     required BuildContext context,
   }) async {
-    final map = Map<String, dynamic>.from(exportSettings.metadata);
+    final map = Json.from(exportSettings.metadata);
     // ignore: deprecated_member_use_from_same_package
     await export(
       into: map,
@@ -852,7 +851,7 @@ abstract class RootNode with _$RootNode, WoFormNodeMixin {
     required BuildContext context,
     String parentPath = '',
   }) async {
-    final data = Map<String, dynamic>.from(exportSettings.metadata);
+    final data = Json.from(exportSettings.metadata);
 
     for (final child in children) {
       await child.export(
@@ -909,7 +908,7 @@ abstract class RootNode with _$RootNode, WoFormNodeMixin {
   @override
   WoFormNodeMixin? getChild({
     required String path,
-    required Map<String, dynamic> values,
+    required WoFormValues values,
     String parentPath = '',
   }) {
     if (!path.startsWith('/')) {
@@ -941,7 +940,7 @@ abstract class RootNode with _$RootNode, WoFormNodeMixin {
   }
 
   @override
-  Map<String, dynamic> getInitialValues({String parentPath = ''}) => {
+  WoFormValues getInitialValues({String parentPath = ''}) => {
     for (final child in children)
       ...child.getInitialValues(parentPath: parentPath),
   };

@@ -24,7 +24,7 @@ sealed class Media with _$Media {
   /// Required for the override getter
   const Media._();
 
-  factory Media.fromJson(Map<String, dynamic> json) => _$MediaFromJson(json);
+  factory Media.fromJson(Json json) => _$MediaFromJson(json);
 
   // --
 
@@ -105,7 +105,7 @@ abstract class MediaImportSettings with _$MediaImportSettings {
 
   const MediaImportSettings._();
 
-  factory MediaImportSettings.fromJson(Map<String, dynamic> json) =>
+  factory MediaImportSettings.fromJson(Json json) =>
       _$MediaImportSettingsFromJson(json);
 }
 
@@ -125,7 +125,7 @@ sealed class MediaImportMethod with _$MediaImportMethod {
 
   const MediaImportMethod._();
 
-  factory MediaImportMethod.fromJson(Map<String, dynamic> json) =>
+  factory MediaImportMethod.fromJson(Json json) =>
       _$MediaImportMethodFromJson(json);
 }
 

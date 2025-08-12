@@ -6,6 +6,12 @@ part of 'ui_settings.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+_InputUiSettings _$InputUiSettingsFromJson(Map<String, dynamic> json) =>
+    _InputUiSettings(flex: (json['flex'] as num?)?.toInt());
+
+Map<String, dynamic> _$InputUiSettingsToJson(_InputUiSettings instance) =>
+    <String, dynamic>{'flex': instance.flex};
+
 _BooleanInputUiSettings _$BooleanInputUiSettingsFromJson(
   Map<String, dynamic> json,
 ) => _BooleanInputUiSettings(
@@ -239,18 +245,28 @@ Map<String, dynamic> _$MediaInputUiSettingsToJson(
 _NumInputUiSettings _$NumInputUiSettingsFromJson(Map<String, dynamic> json) =>
     _NumInputUiSettings(
       labelText: json['labelText'] as String?,
+      labelFlex: (json['labelFlex'] as num?)?.toInt(),
       helperText: json['helperText'] as String?,
+      style: $enumDecodeNullable(_$NumInputStyleEnumMap, json['style']),
     );
 
 Map<String, dynamic> _$NumInputUiSettingsToJson(_NumInputUiSettings instance) =>
     <String, dynamic>{
       'labelText': instance.labelText,
+      'labelFlex': instance.labelFlex,
       'helperText': instance.helperText,
+      'style': _$NumInputStyleEnumMap[instance.style],
     };
+
+const _$NumInputStyleEnumMap = {
+  NumInputStyle.selector: 'selector',
+  NumInputStyle.slider: 'slider',
+};
 
 _SelectInputUiSettings<T> _$SelectInputUiSettingsFromJson<T>(
   Map<String, dynamic> json,
 ) => _SelectInputUiSettings<T>(
+  flex: (json['flex'] as num?)?.toInt(),
   labelText: json['labelText'] as String?,
   helperText: json['helperText'] as String?,
   hintText: json['hintText'] as String?,
@@ -264,6 +280,7 @@ _SelectInputUiSettings<T> _$SelectInputUiSettingsFromJson<T>(
 Map<String, dynamic> _$SelectInputUiSettingsToJson<T>(
   _SelectInputUiSettings<T> instance,
 ) => <String, dynamic>{
+  'flex': instance.flex,
   'labelText': instance.labelText,
   'helperText': instance.helperText,
   'hintText': instance.hintText,
@@ -370,6 +387,9 @@ _WoFormUiSettings _$WoFormUiSettingsFromJson(Map<String, dynamic> json) =>
       theme: json['theme'] == null
           ? null
           : WoFormThemeData.fromJson(json['theme'] as Map<String, dynamic>),
+      padding: const EdgeInsetsNullableConverter().fromJson(
+        json['padding'] as Map<String, dynamic>?,
+      ),
     );
 
 Map<String, dynamic> _$WoFormUiSettingsToJson(_WoFormUiSettings instance) =>
@@ -380,6 +400,7 @@ Map<String, dynamic> _$WoFormUiSettingsToJson(_WoFormUiSettings instance) =>
       'canModifySubmittedValues': instance.canModifySubmittedValues,
       'showErrors': _$ShowErrorsEnumMap[instance.showErrors]!,
       'theme': instance.theme?.toJson(),
+      'padding': const EdgeInsetsNullableConverter().toJson(instance.padding),
     };
 
 const _$WoFormTitlePositionEnumMap = {

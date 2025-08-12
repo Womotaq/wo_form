@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ExportSettings {
 
- Map<String, dynamic> get metadata; ExportType get type;
+ Json get metadata; ExportType get type;
 /// Create a copy of ExportSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $ExportSettingsCopyWith<$Res>  {
   factory $ExportSettingsCopyWith(ExportSettings value, $Res Function(ExportSettings) _then) = _$ExportSettingsCopyWithImpl;
 @useResult
 $Res call({
- Map<String, dynamic> metadata, ExportType type
+ Json metadata, ExportType type
 });
 
 
@@ -68,7 +68,7 @@ class _$ExportSettingsCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? metadata = null,Object? type = null,}) {
   return _then(_self.copyWith(
 metadata: null == metadata ? _self.metadata : metadata // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as Json,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as ExportType,
   ));
 }
@@ -81,11 +81,11 @@ as ExportType,
 @JsonSerializable()
 
 class _ExportSettings extends ExportSettings {
-  const _ExportSettings({final  Map<String, dynamic> metadata = const {}, this.type = ExportType.map}): _metadata = metadata,super._();
+  const _ExportSettings({final  Json metadata = const {}, this.type = ExportType.map}): _metadata = metadata,super._();
   factory _ExportSettings.fromJson(Map<String, dynamic> json) => _$ExportSettingsFromJson(json);
 
- final  Map<String, dynamic> _metadata;
-@override@JsonKey() Map<String, dynamic> get metadata {
+ final  Json _metadata;
+@override@JsonKey() Json get metadata {
   if (_metadata is EqualUnmodifiableMapView) return _metadata;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableMapView(_metadata);
@@ -126,7 +126,7 @@ abstract mixin class _$ExportSettingsCopyWith<$Res> implements $ExportSettingsCo
   factory _$ExportSettingsCopyWith(_ExportSettings value, $Res Function(_ExportSettings) _then) = __$ExportSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- Map<String, dynamic> metadata, ExportType type
+ Json metadata, ExportType type
 });
 
 
@@ -146,7 +146,7 @@ class __$ExportSettingsCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? metadata = null,Object? type = null,}) {
   return _then(_ExportSettings(
 metadata: null == metadata ? _self._metadata : metadata // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as Json,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as ExportType,
   ));
 }

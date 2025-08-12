@@ -13,6 +13,140 @@ part of 'ui_settings.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
+mixin _$InputUiSettings {
+
+ int? get flex;
+/// Create a copy of InputUiSettings
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$InputUiSettingsCopyWith<InputUiSettings> get copyWith => _$InputUiSettingsCopyWithImpl<InputUiSettings>(this as InputUiSettings, _$identity);
+
+  /// Serializes this InputUiSettings to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is InputUiSettings&&(identical(other.flex, flex) || other.flex == flex));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,flex);
+
+@override
+String toString() {
+  return 'InputUiSettings(flex: $flex)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $InputUiSettingsCopyWith<$Res>  {
+  factory $InputUiSettingsCopyWith(InputUiSettings value, $Res Function(InputUiSettings) _then) = _$InputUiSettingsCopyWithImpl;
+@useResult
+$Res call({
+ int? flex
+});
+
+
+
+
+}
+/// @nodoc
+class _$InputUiSettingsCopyWithImpl<$Res>
+    implements $InputUiSettingsCopyWith<$Res> {
+  _$InputUiSettingsCopyWithImpl(this._self, this._then);
+
+  final InputUiSettings _self;
+  final $Res Function(InputUiSettings) _then;
+
+/// Create a copy of InputUiSettings
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? flex = freezed,}) {
+  return _then(_self.copyWith(
+flex: freezed == flex ? _self.flex : flex // ignore: cast_nullable_to_non_nullable
+as int?,
+  ));
+}
+
+}
+
+
+
+/// @nodoc
+@JsonSerializable()
+
+class _InputUiSettings extends InputUiSettings {
+  const _InputUiSettings({this.flex}): super._();
+  factory _InputUiSettings.fromJson(Map<String, dynamic> json) => _$InputUiSettingsFromJson(json);
+
+@override final  int? flex;
+
+/// Create a copy of InputUiSettings
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$InputUiSettingsCopyWith<_InputUiSettings> get copyWith => __$InputUiSettingsCopyWithImpl<_InputUiSettings>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$InputUiSettingsToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _InputUiSettings&&(identical(other.flex, flex) || other.flex == flex));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,flex);
+
+@override
+String toString() {
+  return 'InputUiSettings(flex: $flex)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$InputUiSettingsCopyWith<$Res> implements $InputUiSettingsCopyWith<$Res> {
+  factory _$InputUiSettingsCopyWith(_InputUiSettings value, $Res Function(_InputUiSettings) _then) = __$InputUiSettingsCopyWithImpl;
+@override @useResult
+$Res call({
+ int? flex
+});
+
+
+
+
+}
+/// @nodoc
+class __$InputUiSettingsCopyWithImpl<$Res>
+    implements _$InputUiSettingsCopyWith<$Res> {
+  __$InputUiSettingsCopyWithImpl(this._self, this._then);
+
+  final _InputUiSettings _self;
+  final $Res Function(_InputUiSettings) _then;
+
+/// Create a copy of InputUiSettings
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? flex = freezed,}) {
+  return _then(_InputUiSettings(
+flex: freezed == flex ? _self.flex : flex // ignore: cast_nullable_to_non_nullable
+as int?,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
 mixin _$BooleanInputUiSettings {
 
  String? get labelText; String? get helperText; BooleanFieldControlType? get controlType; ListTileControlAffinity? get controlAffinity;@notSerializable Widget? get secondary;@notSerializable BooleanFieldBuilderDef? get widgetBuilder;
@@ -1168,7 +1302,13 @@ as MediaFieldBuilderDef?,
 /// @nodoc
 mixin _$NumInputUiSettings {
 
- String? get labelText; String? get helperText;@notSerializable Widget? get unit;@notSerializable NumFieldBuilderDef? get widgetBuilder;
+ String? get labelText;/// If null, label will be placed above the date selector.
+/// Else, label and selector will be in a flexible row,
+/// selector with a flex value of 10,
+/// and label with a flex value of [labelFlex].
+///
+/// Only with [NumInputStyle.slider].
+ int? get labelFlex; String? get helperText; NumInputStyle? get style;@notSerializable Widget? get unit;@notSerializable NumFieldBuilderDef? get widgetBuilder;
 /// Create a copy of NumInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1181,16 +1321,16 @@ $NumInputUiSettingsCopyWith<NumInputUiSettings> get copyWith => _$NumInputUiSett
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NumInputUiSettings&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.unit, unit) || other.unit == unit)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NumInputUiSettings&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelFlex, labelFlex) || other.labelFlex == labelFlex)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.style, style) || other.style == style)&&(identical(other.unit, unit) || other.unit == unit)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,labelText,helperText,unit,widgetBuilder);
+int get hashCode => Object.hash(runtimeType,labelText,labelFlex,helperText,style,unit,widgetBuilder);
 
 @override
 String toString() {
-  return 'NumInputUiSettings(labelText: $labelText, helperText: $helperText, unit: $unit, widgetBuilder: $widgetBuilder)';
+  return 'NumInputUiSettings(labelText: $labelText, labelFlex: $labelFlex, helperText: $helperText, style: $style, unit: $unit, widgetBuilder: $widgetBuilder)';
 }
 
 
@@ -1201,7 +1341,7 @@ abstract mixin class $NumInputUiSettingsCopyWith<$Res>  {
   factory $NumInputUiSettingsCopyWith(NumInputUiSettings value, $Res Function(NumInputUiSettings) _then) = _$NumInputUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String? labelText, String? helperText,@notSerializable Widget? unit,@notSerializable NumFieldBuilderDef? widgetBuilder
+ String? labelText, int? labelFlex, String? helperText, NumInputStyle? style,@notSerializable Widget? unit,@notSerializable NumFieldBuilderDef? widgetBuilder
 });
 
 
@@ -1218,11 +1358,13 @@ class _$NumInputUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of NumInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? labelText = freezed,Object? helperText = freezed,Object? unit = freezed,Object? widgetBuilder = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? labelText = freezed,Object? labelFlex = freezed,Object? helperText = freezed,Object? style = freezed,Object? unit = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_self.copyWith(
 labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
-as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
-as String?,unit: freezed == unit ? _self.unit : unit // ignore: cast_nullable_to_non_nullable
+as String?,labelFlex: freezed == labelFlex ? _self.labelFlex : labelFlex // ignore: cast_nullable_to_non_nullable
+as int?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
+as String?,style: freezed == style ? _self.style : style // ignore: cast_nullable_to_non_nullable
+as NumInputStyle?,unit: freezed == unit ? _self.unit : unit // ignore: cast_nullable_to_non_nullable
 as Widget?,widgetBuilder: freezed == widgetBuilder ? _self.widgetBuilder : widgetBuilder // ignore: cast_nullable_to_non_nullable
 as NumFieldBuilderDef?,
   ));
@@ -1236,11 +1378,19 @@ as NumFieldBuilderDef?,
 @JsonSerializable()
 
 class _NumInputUiSettings extends NumInputUiSettings {
-  const _NumInputUiSettings({this.labelText, this.helperText, @notSerializable this.unit, @notSerializable this.widgetBuilder}): super._();
+  const _NumInputUiSettings({this.labelText, this.labelFlex, this.helperText, this.style, @notSerializable this.unit, @notSerializable this.widgetBuilder}): super._();
   factory _NumInputUiSettings.fromJson(Map<String, dynamic> json) => _$NumInputUiSettingsFromJson(json);
 
 @override final  String? labelText;
+/// If null, label will be placed above the date selector.
+/// Else, label and selector will be in a flexible row,
+/// selector with a flex value of 10,
+/// and label with a flex value of [labelFlex].
+///
+/// Only with [NumInputStyle.slider].
+@override final  int? labelFlex;
 @override final  String? helperText;
+@override final  NumInputStyle? style;
 @override@notSerializable final  Widget? unit;
 @override@notSerializable final  NumFieldBuilderDef? widgetBuilder;
 
@@ -1257,16 +1407,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NumInputUiSettings&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.unit, unit) || other.unit == unit)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NumInputUiSettings&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelFlex, labelFlex) || other.labelFlex == labelFlex)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.style, style) || other.style == style)&&(identical(other.unit, unit) || other.unit == unit)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,labelText,helperText,unit,widgetBuilder);
+int get hashCode => Object.hash(runtimeType,labelText,labelFlex,helperText,style,unit,widgetBuilder);
 
 @override
 String toString() {
-  return 'NumInputUiSettings(labelText: $labelText, helperText: $helperText, unit: $unit, widgetBuilder: $widgetBuilder)';
+  return 'NumInputUiSettings(labelText: $labelText, labelFlex: $labelFlex, helperText: $helperText, style: $style, unit: $unit, widgetBuilder: $widgetBuilder)';
 }
 
 
@@ -1277,7 +1427,7 @@ abstract mixin class _$NumInputUiSettingsCopyWith<$Res> implements $NumInputUiSe
   factory _$NumInputUiSettingsCopyWith(_NumInputUiSettings value, $Res Function(_NumInputUiSettings) _then) = __$NumInputUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String? labelText, String? helperText,@notSerializable Widget? unit,@notSerializable NumFieldBuilderDef? widgetBuilder
+ String? labelText, int? labelFlex, String? helperText, NumInputStyle? style,@notSerializable Widget? unit,@notSerializable NumFieldBuilderDef? widgetBuilder
 });
 
 
@@ -1294,11 +1444,13 @@ class __$NumInputUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of NumInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? labelText = freezed,Object? helperText = freezed,Object? unit = freezed,Object? widgetBuilder = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? labelText = freezed,Object? labelFlex = freezed,Object? helperText = freezed,Object? style = freezed,Object? unit = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_NumInputUiSettings(
 labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
-as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
-as String?,unit: freezed == unit ? _self.unit : unit // ignore: cast_nullable_to_non_nullable
+as String?,labelFlex: freezed == labelFlex ? _self.labelFlex : labelFlex // ignore: cast_nullable_to_non_nullable
+as int?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
+as String?,style: freezed == style ? _self.style : style // ignore: cast_nullable_to_non_nullable
+as NumInputStyle?,unit: freezed == unit ? _self.unit : unit // ignore: cast_nullable_to_non_nullable
 as Widget?,widgetBuilder: freezed == widgetBuilder ? _self.widgetBuilder : widgetBuilder // ignore: cast_nullable_to_non_nullable
 as NumFieldBuilderDef?,
   ));
@@ -1311,7 +1463,7 @@ as NumFieldBuilderDef?,
 /// @nodoc
 mixin _$SelectInputUiSettings<T> {
 
- String? get labelText; String? get helperText; String? get hintText; ChildrenVisibility? get childrenVisibility;/// Only used when SelectInput.maxCount is 1
+ int? get flex; String? get labelText; String? get helperText; String? get hintText; ChildrenVisibility? get childrenVisibility;/// Only used when SelectInput.maxCount is 1
 /// and childrenVisibility is whenAsked.
 ///
 /// If null, label will be placed above the selector.
@@ -1331,16 +1483,16 @@ $SelectInputUiSettingsCopyWith<T, SelectInputUiSettings<T>> get copyWith => _$Se
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SelectInputUiSettings<T>&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.labelFlex, labelFlex) || other.labelFlex == labelFlex)&&(identical(other.valueBuilder, valueBuilder) || other.valueBuilder == valueBuilder)&&(identical(other.selectedBuilder, selectedBuilder) || other.selectedBuilder == selectedBuilder)&&(identical(other.helpValueBuilder, helpValueBuilder) || other.helpValueBuilder == helpValueBuilder)&&(identical(other.searcher, searcher) || other.searcher == searcher)&&(identical(other.searchScreenBuilder, searchScreenBuilder) || other.searchScreenBuilder == searchScreenBuilder)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.scoreBuilder, scoreBuilder) || other.scoreBuilder == scoreBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SelectInputUiSettings<T>&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.labelFlex, labelFlex) || other.labelFlex == labelFlex)&&(identical(other.valueBuilder, valueBuilder) || other.valueBuilder == valueBuilder)&&(identical(other.selectedBuilder, selectedBuilder) || other.selectedBuilder == selectedBuilder)&&(identical(other.helpValueBuilder, helpValueBuilder) || other.helpValueBuilder == helpValueBuilder)&&(identical(other.searcher, searcher) || other.searcher == searcher)&&(identical(other.searchScreenBuilder, searchScreenBuilder) || other.searchScreenBuilder == searchScreenBuilder)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.scoreBuilder, scoreBuilder) || other.scoreBuilder == scoreBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,labelText,helperText,hintText,childrenVisibility,labelFlex,valueBuilder,selectedBuilder,helpValueBuilder,searcher,searchScreenBuilder,widgetBuilder,headerBuilder,scoreBuilder);
+int get hashCode => Object.hash(runtimeType,flex,labelText,helperText,hintText,childrenVisibility,labelFlex,valueBuilder,selectedBuilder,helpValueBuilder,searcher,searchScreenBuilder,widgetBuilder,headerBuilder,scoreBuilder);
 
 @override
 String toString() {
-  return 'SelectInputUiSettings<$T>(labelText: $labelText, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, labelFlex: $labelFlex, valueBuilder: $valueBuilder, selectedBuilder: $selectedBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher, searchScreenBuilder: $searchScreenBuilder, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder)';
+  return 'SelectInputUiSettings<$T>(flex: $flex, labelText: $labelText, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, labelFlex: $labelFlex, valueBuilder: $valueBuilder, selectedBuilder: $selectedBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher, searchScreenBuilder: $searchScreenBuilder, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder)';
 }
 
 
@@ -1351,7 +1503,7 @@ abstract mixin class $SelectInputUiSettingsCopyWith<T,$Res>  {
   factory $SelectInputUiSettingsCopyWith(SelectInputUiSettings<T> value, $Res Function(SelectInputUiSettings<T>) _then) = _$SelectInputUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String? labelText, String? helperText, String? hintText, ChildrenVisibility? childrenVisibility, int? labelFlex,@notSerializable Widget Function(T?)? valueBuilder,@notSerializable Widget Function(T?)? selectedBuilder,@notSerializable Widget? Function(T)? helpValueBuilder,@notSerializable double Function(String query, T value)? searcher,@notSerializable SearchScreenDef<T>? searchScreenBuilder,@notSerializable SelectFieldBuilderDef<T>? widgetBuilder,@notSerializable InputHeaderBuilderDef? headerBuilder,@notSerializable ScoreWidgetBuilderDef? scoreBuilder
+ int? flex, String? labelText, String? helperText, String? hintText, ChildrenVisibility? childrenVisibility, int? labelFlex,@notSerializable Widget Function(T?)? valueBuilder,@notSerializable Widget Function(T?)? selectedBuilder,@notSerializable Widget? Function(T)? helpValueBuilder,@notSerializable double Function(String query, T value)? searcher,@notSerializable SearchScreenDef<T>? searchScreenBuilder,@notSerializable SelectFieldBuilderDef<T>? widgetBuilder,@notSerializable InputHeaderBuilderDef? headerBuilder,@notSerializable ScoreWidgetBuilderDef? scoreBuilder
 });
 
 
@@ -1368,9 +1520,10 @@ class _$SelectInputUiSettingsCopyWithImpl<T,$Res>
 
 /// Create a copy of SelectInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? labelText = freezed,Object? helperText = freezed,Object? hintText = freezed,Object? childrenVisibility = freezed,Object? labelFlex = freezed,Object? valueBuilder = freezed,Object? selectedBuilder = freezed,Object? helpValueBuilder = freezed,Object? searcher = freezed,Object? searchScreenBuilder = freezed,Object? widgetBuilder = freezed,Object? headerBuilder = freezed,Object? scoreBuilder = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? flex = freezed,Object? labelText = freezed,Object? helperText = freezed,Object? hintText = freezed,Object? childrenVisibility = freezed,Object? labelFlex = freezed,Object? valueBuilder = freezed,Object? selectedBuilder = freezed,Object? helpValueBuilder = freezed,Object? searcher = freezed,Object? searchScreenBuilder = freezed,Object? widgetBuilder = freezed,Object? headerBuilder = freezed,Object? scoreBuilder = freezed,}) {
   return _then(_self.copyWith(
-labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
+flex: freezed == flex ? _self.flex : flex // ignore: cast_nullable_to_non_nullable
+as int?,labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
 as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
 as String?,hintText: freezed == hintText ? _self.hintText : hintText // ignore: cast_nullable_to_non_nullable
 as String?,childrenVisibility: freezed == childrenVisibility ? _self.childrenVisibility : childrenVisibility // ignore: cast_nullable_to_non_nullable
@@ -1395,9 +1548,10 @@ as ScoreWidgetBuilderDef?,
 @JsonSerializable()
 
 class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
-  const _SelectInputUiSettings({this.labelText, this.helperText, this.hintText, this.childrenVisibility, this.labelFlex, @notSerializable this.valueBuilder, @notSerializable this.selectedBuilder, @notSerializable this.helpValueBuilder, @notSerializable this.searcher, @notSerializable this.searchScreenBuilder, @notSerializable this.widgetBuilder, @notSerializable this.headerBuilder, @notSerializable this.scoreBuilder}): super._();
+  const _SelectInputUiSettings({this.flex, this.labelText, this.helperText, this.hintText, this.childrenVisibility, this.labelFlex, @notSerializable this.valueBuilder, @notSerializable this.selectedBuilder, @notSerializable this.helpValueBuilder, @notSerializable this.searcher, @notSerializable this.searchScreenBuilder, @notSerializable this.widgetBuilder, @notSerializable this.headerBuilder, @notSerializable this.scoreBuilder}): super._();
   factory _SelectInputUiSettings.fromJson(Map<String, dynamic> json) => _$SelectInputUiSettingsFromJson(json);
 
+@override final  int? flex;
 @override final  String? labelText;
 @override final  String? helperText;
 @override final  String? hintText;
@@ -1432,16 +1586,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SelectInputUiSettings<T>&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.labelFlex, labelFlex) || other.labelFlex == labelFlex)&&(identical(other.valueBuilder, valueBuilder) || other.valueBuilder == valueBuilder)&&(identical(other.selectedBuilder, selectedBuilder) || other.selectedBuilder == selectedBuilder)&&(identical(other.helpValueBuilder, helpValueBuilder) || other.helpValueBuilder == helpValueBuilder)&&(identical(other.searcher, searcher) || other.searcher == searcher)&&(identical(other.searchScreenBuilder, searchScreenBuilder) || other.searchScreenBuilder == searchScreenBuilder)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.scoreBuilder, scoreBuilder) || other.scoreBuilder == scoreBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SelectInputUiSettings<T>&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.labelFlex, labelFlex) || other.labelFlex == labelFlex)&&(identical(other.valueBuilder, valueBuilder) || other.valueBuilder == valueBuilder)&&(identical(other.selectedBuilder, selectedBuilder) || other.selectedBuilder == selectedBuilder)&&(identical(other.helpValueBuilder, helpValueBuilder) || other.helpValueBuilder == helpValueBuilder)&&(identical(other.searcher, searcher) || other.searcher == searcher)&&(identical(other.searchScreenBuilder, searchScreenBuilder) || other.searchScreenBuilder == searchScreenBuilder)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.scoreBuilder, scoreBuilder) || other.scoreBuilder == scoreBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,labelText,helperText,hintText,childrenVisibility,labelFlex,valueBuilder,selectedBuilder,helpValueBuilder,searcher,searchScreenBuilder,widgetBuilder,headerBuilder,scoreBuilder);
+int get hashCode => Object.hash(runtimeType,flex,labelText,helperText,hintText,childrenVisibility,labelFlex,valueBuilder,selectedBuilder,helpValueBuilder,searcher,searchScreenBuilder,widgetBuilder,headerBuilder,scoreBuilder);
 
 @override
 String toString() {
-  return 'SelectInputUiSettings<$T>(labelText: $labelText, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, labelFlex: $labelFlex, valueBuilder: $valueBuilder, selectedBuilder: $selectedBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher, searchScreenBuilder: $searchScreenBuilder, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder)';
+  return 'SelectInputUiSettings<$T>(flex: $flex, labelText: $labelText, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, labelFlex: $labelFlex, valueBuilder: $valueBuilder, selectedBuilder: $selectedBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher, searchScreenBuilder: $searchScreenBuilder, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder)';
 }
 
 
@@ -1452,7 +1606,7 @@ abstract mixin class _$SelectInputUiSettingsCopyWith<T,$Res> implements $SelectI
   factory _$SelectInputUiSettingsCopyWith(_SelectInputUiSettings<T> value, $Res Function(_SelectInputUiSettings<T>) _then) = __$SelectInputUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String? labelText, String? helperText, String? hintText, ChildrenVisibility? childrenVisibility, int? labelFlex,@notSerializable Widget Function(T?)? valueBuilder,@notSerializable Widget Function(T?)? selectedBuilder,@notSerializable Widget? Function(T)? helpValueBuilder,@notSerializable double Function(String query, T value)? searcher,@notSerializable SearchScreenDef<T>? searchScreenBuilder,@notSerializable SelectFieldBuilderDef<T>? widgetBuilder,@notSerializable InputHeaderBuilderDef? headerBuilder,@notSerializable ScoreWidgetBuilderDef? scoreBuilder
+ int? flex, String? labelText, String? helperText, String? hintText, ChildrenVisibility? childrenVisibility, int? labelFlex,@notSerializable Widget Function(T?)? valueBuilder,@notSerializable Widget Function(T?)? selectedBuilder,@notSerializable Widget? Function(T)? helpValueBuilder,@notSerializable double Function(String query, T value)? searcher,@notSerializable SearchScreenDef<T>? searchScreenBuilder,@notSerializable SelectFieldBuilderDef<T>? widgetBuilder,@notSerializable InputHeaderBuilderDef? headerBuilder,@notSerializable ScoreWidgetBuilderDef? scoreBuilder
 });
 
 
@@ -1469,9 +1623,10 @@ class __$SelectInputUiSettingsCopyWithImpl<T,$Res>
 
 /// Create a copy of SelectInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? labelText = freezed,Object? helperText = freezed,Object? hintText = freezed,Object? childrenVisibility = freezed,Object? labelFlex = freezed,Object? valueBuilder = freezed,Object? selectedBuilder = freezed,Object? helpValueBuilder = freezed,Object? searcher = freezed,Object? searchScreenBuilder = freezed,Object? widgetBuilder = freezed,Object? headerBuilder = freezed,Object? scoreBuilder = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? flex = freezed,Object? labelText = freezed,Object? helperText = freezed,Object? hintText = freezed,Object? childrenVisibility = freezed,Object? labelFlex = freezed,Object? valueBuilder = freezed,Object? selectedBuilder = freezed,Object? helpValueBuilder = freezed,Object? searcher = freezed,Object? searchScreenBuilder = freezed,Object? widgetBuilder = freezed,Object? headerBuilder = freezed,Object? scoreBuilder = freezed,}) {
   return _then(_SelectInputUiSettings<T>(
-labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
+flex: freezed == flex ? _self.flex : flex // ignore: cast_nullable_to_non_nullable
+as int?,labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
 as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
 as String?,hintText: freezed == hintText ? _self.hintText : hintText // ignore: cast_nullable_to_non_nullable
 as String?,childrenVisibility: freezed == childrenVisibility ? _self.childrenVisibility : childrenVisibility // ignore: cast_nullable_to_non_nullable
@@ -1694,7 +1849,9 @@ mixin _$WoFormUiSettings {
 /// the back button in the app bar. If the method returns false, the form
 /// won't be quitted.
 @notSerializable Future<bool?> Function(BuildContext context)? get canQuit;/// Will be merged with context theme.
- WoFormThemeData? get theme;
+ WoFormThemeData? get theme;/// Padding applied around all the widgets inside this form, except for
+/// the app bar, the bottom bar and the floating widgets.
+@EdgeInsetsNullableConverter() EdgeInsets? get padding;
 /// Create a copy of WoFormUiSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1707,16 +1864,16 @@ $WoFormUiSettingsCopyWith<WoFormUiSettings> get copyWith => _$WoFormUiSettingsCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WoFormUiSettings&&(identical(other.titleText, titleText) || other.titleText == titleText)&&(identical(other.titlePosition, titlePosition) || other.titlePosition == titlePosition)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.submitMode, submitMode) || other.submitMode == submitMode)&&(identical(other.submitButtonBuilder, submitButtonBuilder) || other.submitButtonBuilder == submitButtonBuilder)&&(identical(other.canModifySubmittedValues, canModifySubmittedValues) || other.canModifySubmittedValues == canModifySubmittedValues)&&(identical(other.showErrors, showErrors) || other.showErrors == showErrors)&&(identical(other.canQuit, canQuit) || other.canQuit == canQuit)&&(identical(other.theme, theme) || other.theme == theme));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WoFormUiSettings&&(identical(other.titleText, titleText) || other.titleText == titleText)&&(identical(other.titlePosition, titlePosition) || other.titlePosition == titlePosition)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.submitMode, submitMode) || other.submitMode == submitMode)&&(identical(other.submitButtonBuilder, submitButtonBuilder) || other.submitButtonBuilder == submitButtonBuilder)&&(identical(other.canModifySubmittedValues, canModifySubmittedValues) || other.canModifySubmittedValues == canModifySubmittedValues)&&(identical(other.showErrors, showErrors) || other.showErrors == showErrors)&&(identical(other.canQuit, canQuit) || other.canQuit == canQuit)&&(identical(other.theme, theme) || other.theme == theme)&&(identical(other.padding, padding) || other.padding == padding));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,titleText,titlePosition,headerBuilder,submitMode,submitButtonBuilder,canModifySubmittedValues,showErrors,canQuit,theme);
+int get hashCode => Object.hash(runtimeType,titleText,titlePosition,headerBuilder,submitMode,submitButtonBuilder,canModifySubmittedValues,showErrors,canQuit,theme,padding);
 
 @override
 String toString() {
-  return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, submitButtonBuilder: $submitButtonBuilder, canModifySubmittedValues: $canModifySubmittedValues, showErrors: $showErrors, canQuit: $canQuit, theme: $theme)';
+  return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, submitButtonBuilder: $submitButtonBuilder, canModifySubmittedValues: $canModifySubmittedValues, showErrors: $showErrors, canQuit: $canQuit, theme: $theme, padding: $padding)';
 }
 
 
@@ -1727,7 +1884,7 @@ abstract mixin class $WoFormUiSettingsCopyWith<$Res>  {
   factory $WoFormUiSettingsCopyWith(WoFormUiSettings value, $Res Function(WoFormUiSettings) _then) = _$WoFormUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String titleText, WoFormTitlePosition titlePosition,@notSerializable HeaderBuilderDef? headerBuilder, WoFormSubmitMode submitMode,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder, bool? canModifySubmittedValues, ShowErrors showErrors,@notSerializable Future<bool?> Function(BuildContext context)? canQuit, WoFormThemeData? theme
+ String titleText, WoFormTitlePosition titlePosition,@notSerializable HeaderBuilderDef? headerBuilder, WoFormSubmitMode submitMode,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder, bool? canModifySubmittedValues, ShowErrors showErrors,@notSerializable Future<bool?> Function(BuildContext context)? canQuit, WoFormThemeData? theme,@EdgeInsetsNullableConverter() EdgeInsets? padding
 });
 
 
@@ -1744,7 +1901,7 @@ class _$WoFormUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of WoFormUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? titleText = null,Object? titlePosition = null,Object? headerBuilder = freezed,Object? submitMode = null,Object? submitButtonBuilder = freezed,Object? canModifySubmittedValues = freezed,Object? showErrors = null,Object? canQuit = freezed,Object? theme = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? titleText = null,Object? titlePosition = null,Object? headerBuilder = freezed,Object? submitMode = null,Object? submitButtonBuilder = freezed,Object? canModifySubmittedValues = freezed,Object? showErrors = null,Object? canQuit = freezed,Object? theme = freezed,Object? padding = freezed,}) {
   return _then(_self.copyWith(
 titleText: null == titleText ? _self.titleText : titleText // ignore: cast_nullable_to_non_nullable
 as String,titlePosition: null == titlePosition ? _self.titlePosition : titlePosition // ignore: cast_nullable_to_non_nullable
@@ -1755,7 +1912,8 @@ as SubmitButtonBuilderDef?,canModifySubmittedValues: freezed == canModifySubmitt
 as bool?,showErrors: null == showErrors ? _self.showErrors : showErrors // ignore: cast_nullable_to_non_nullable
 as ShowErrors,canQuit: freezed == canQuit ? _self.canQuit : canQuit // ignore: cast_nullable_to_non_nullable
 as Future<bool?> Function(BuildContext context)?,theme: freezed == theme ? _self.theme : theme // ignore: cast_nullable_to_non_nullable
-as WoFormThemeData?,
+as WoFormThemeData?,padding: freezed == padding ? _self.padding : padding // ignore: cast_nullable_to_non_nullable
+as EdgeInsets?,
   ));
 }
 /// Create a copy of WoFormUiSettings
@@ -1788,7 +1946,7 @@ $WoFormThemeDataCopyWith<$Res>? get theme {
 @JsonSerializable()
 
 class _WoFormUiSettings extends WoFormUiSettings {
-  const _WoFormUiSettings({this.titleText = '', this.titlePosition = WoFormTitlePosition.header, @notSerializable this.headerBuilder, this.submitMode = const WoFormSubmitMode.standard(), @notSerializable this.submitButtonBuilder, this.canModifySubmittedValues, this.showErrors = ShowErrors.progressively, @notSerializable this.canQuit, this.theme}): super._();
+  const _WoFormUiSettings({this.titleText = '', this.titlePosition = WoFormTitlePosition.header, @notSerializable this.headerBuilder, this.submitMode = const WoFormSubmitMode.standard(), @notSerializable this.submitButtonBuilder, this.canModifySubmittedValues, this.showErrors = ShowErrors.progressively, @notSerializable this.canQuit, this.theme, @EdgeInsetsNullableConverter() this.padding}): super._();
   factory _WoFormUiSettings.fromJson(Map<String, dynamic> json) => _$WoFormUiSettingsFromJson(json);
 
 @override@JsonKey() final  String titleText;
@@ -1807,6 +1965,9 @@ class _WoFormUiSettings extends WoFormUiSettings {
 @override@notSerializable final  Future<bool?> Function(BuildContext context)? canQuit;
 /// Will be merged with context theme.
 @override final  WoFormThemeData? theme;
+/// Padding applied around all the widgets inside this form, except for
+/// the app bar, the bottom bar and the floating widgets.
+@override@EdgeInsetsNullableConverter() final  EdgeInsets? padding;
 
 /// Create a copy of WoFormUiSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -1821,16 +1982,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WoFormUiSettings&&(identical(other.titleText, titleText) || other.titleText == titleText)&&(identical(other.titlePosition, titlePosition) || other.titlePosition == titlePosition)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.submitMode, submitMode) || other.submitMode == submitMode)&&(identical(other.submitButtonBuilder, submitButtonBuilder) || other.submitButtonBuilder == submitButtonBuilder)&&(identical(other.canModifySubmittedValues, canModifySubmittedValues) || other.canModifySubmittedValues == canModifySubmittedValues)&&(identical(other.showErrors, showErrors) || other.showErrors == showErrors)&&(identical(other.canQuit, canQuit) || other.canQuit == canQuit)&&(identical(other.theme, theme) || other.theme == theme));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WoFormUiSettings&&(identical(other.titleText, titleText) || other.titleText == titleText)&&(identical(other.titlePosition, titlePosition) || other.titlePosition == titlePosition)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.submitMode, submitMode) || other.submitMode == submitMode)&&(identical(other.submitButtonBuilder, submitButtonBuilder) || other.submitButtonBuilder == submitButtonBuilder)&&(identical(other.canModifySubmittedValues, canModifySubmittedValues) || other.canModifySubmittedValues == canModifySubmittedValues)&&(identical(other.showErrors, showErrors) || other.showErrors == showErrors)&&(identical(other.canQuit, canQuit) || other.canQuit == canQuit)&&(identical(other.theme, theme) || other.theme == theme)&&(identical(other.padding, padding) || other.padding == padding));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,titleText,titlePosition,headerBuilder,submitMode,submitButtonBuilder,canModifySubmittedValues,showErrors,canQuit,theme);
+int get hashCode => Object.hash(runtimeType,titleText,titlePosition,headerBuilder,submitMode,submitButtonBuilder,canModifySubmittedValues,showErrors,canQuit,theme,padding);
 
 @override
 String toString() {
-  return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, submitButtonBuilder: $submitButtonBuilder, canModifySubmittedValues: $canModifySubmittedValues, showErrors: $showErrors, canQuit: $canQuit, theme: $theme)';
+  return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, submitButtonBuilder: $submitButtonBuilder, canModifySubmittedValues: $canModifySubmittedValues, showErrors: $showErrors, canQuit: $canQuit, theme: $theme, padding: $padding)';
 }
 
 
@@ -1841,7 +2002,7 @@ abstract mixin class _$WoFormUiSettingsCopyWith<$Res> implements $WoFormUiSettin
   factory _$WoFormUiSettingsCopyWith(_WoFormUiSettings value, $Res Function(_WoFormUiSettings) _then) = __$WoFormUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String titleText, WoFormTitlePosition titlePosition,@notSerializable HeaderBuilderDef? headerBuilder, WoFormSubmitMode submitMode,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder, bool? canModifySubmittedValues, ShowErrors showErrors,@notSerializable Future<bool?> Function(BuildContext context)? canQuit, WoFormThemeData? theme
+ String titleText, WoFormTitlePosition titlePosition,@notSerializable HeaderBuilderDef? headerBuilder, WoFormSubmitMode submitMode,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder, bool? canModifySubmittedValues, ShowErrors showErrors,@notSerializable Future<bool?> Function(BuildContext context)? canQuit, WoFormThemeData? theme,@EdgeInsetsNullableConverter() EdgeInsets? padding
 });
 
 
@@ -1858,7 +2019,7 @@ class __$WoFormUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of WoFormUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? titleText = null,Object? titlePosition = null,Object? headerBuilder = freezed,Object? submitMode = null,Object? submitButtonBuilder = freezed,Object? canModifySubmittedValues = freezed,Object? showErrors = null,Object? canQuit = freezed,Object? theme = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? titleText = null,Object? titlePosition = null,Object? headerBuilder = freezed,Object? submitMode = null,Object? submitButtonBuilder = freezed,Object? canModifySubmittedValues = freezed,Object? showErrors = null,Object? canQuit = freezed,Object? theme = freezed,Object? padding = freezed,}) {
   return _then(_WoFormUiSettings(
 titleText: null == titleText ? _self.titleText : titleText // ignore: cast_nullable_to_non_nullable
 as String,titlePosition: null == titlePosition ? _self.titlePosition : titlePosition // ignore: cast_nullable_to_non_nullable
@@ -1869,7 +2030,8 @@ as SubmitButtonBuilderDef?,canModifySubmittedValues: freezed == canModifySubmitt
 as bool?,showErrors: null == showErrors ? _self.showErrors : showErrors // ignore: cast_nullable_to_non_nullable
 as ShowErrors,canQuit: freezed == canQuit ? _self.canQuit : canQuit // ignore: cast_nullable_to_non_nullable
 as Future<bool?> Function(BuildContext context)?,theme: freezed == theme ? _self.theme : theme // ignore: cast_nullable_to_non_nullable
-as WoFormThemeData?,
+as WoFormThemeData?,padding: freezed == padding ? _self.padding : padding // ignore: cast_nullable_to_non_nullable
+as EdgeInsets?,
   ));
 }
 

@@ -1,7 +1,9 @@
+import 'package:wo_form/wo_form.dart';
+
 class ErrorResponse {
   ErrorResponse({this.message, this.status});
 
-  ErrorResponse.fromJson(Map<String, dynamic> json) {
+  ErrorResponse.fromJson(Json json) {
     message = json['message'] as String?;
     status = json['status'] as int?;
   }
@@ -9,7 +11,7 @@ class ErrorResponse {
   String? message;
   int? status;
 
-  Map<String, dynamic> toJson() {
+  Json toJson() {
     final data = <String, dynamic>{};
     data['message'] = message;
     data['status'] = status;

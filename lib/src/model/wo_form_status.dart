@@ -19,8 +19,7 @@ sealed class WoFormStatus with _$WoFormStatus {
   }) = SubmitErrorStatus;
   const factory WoFormStatus.submitSuccess() = SubmitSuccessStatus;
 
-  factory WoFormStatus.fromJson(Map<String, dynamic> json) =>
-      _$WoFormStatusFromJson(json);
+  factory WoFormStatus.fromJson(Json json) => _$WoFormStatusFromJson(json);
 }
 
 extension InProgressStatusX on InProgressStatus {

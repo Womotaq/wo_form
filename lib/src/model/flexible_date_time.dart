@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:wo_form/wo_form.dart';
 
 part 'flexible_date_time.freezed.dart';
 part 'flexible_date_time.g.dart';
@@ -25,7 +26,7 @@ sealed class FlexibleDateTime with _$FlexibleDateTime {
   /// Required for the override getter
   const FlexibleDateTime._();
 
-  factory FlexibleDateTime.fromJson(Map<String, dynamic> json) =>
+  factory FlexibleDateTime.fromJson(Json json) =>
       _$FlexibleDateTimeFromJson(json);
 
   // --

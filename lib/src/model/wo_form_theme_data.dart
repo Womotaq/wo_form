@@ -54,7 +54,7 @@ abstract class WoFormThemeData with _$WoFormThemeData {
 
   const WoFormThemeData._();
 
-  factory WoFormThemeData.fromJson(Map<String, dynamic> json) =>
+  factory WoFormThemeData.fromJson(Json json) =>
       _$WoFormThemeDataFromJson(json);
 
   // --

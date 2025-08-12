@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:wo_form/wo_form.dart';
 
 part 'quiz_settings.freezed.dart';
 part 'quiz_settings.g.dart';
@@ -13,7 +14,7 @@ part 'quiz_settings.g.dart';
 
 //   const QuizSettingsString._();
 
-//   factory QuizSettingsString.fromJson(Map<String, dynamic> json) =>
+//   factory QuizSettingsString.fromJson(Json json) =>
 //       _$QuizSettingsStringFromJson(json);
 
 // }
@@ -28,8 +29,7 @@ sealed class QuizSettings with _$QuizSettings {
 
   const QuizSettings._();
 
-  factory QuizSettings.fromJson(Map<String, dynamic> json) =>
-      _$QuizSettingsFromJson(json);
+  factory QuizSettings.fromJson(Json json) => _$QuizSettingsFromJson(json);
 }
 
 // @freezed

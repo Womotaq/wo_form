@@ -1,16 +1,18 @@
+import 'package:wo_form/wo_form.dart';
+
 class PlaceDetails {
   PlaceDetails({this.result, this.status});
 
-  PlaceDetails.fromJson(Map<String, dynamic> json) {
+  PlaceDetails.fromJson(Json json) {
     result = json['result'] != null
-        ? Result.fromJson(json['result'] as Map<String, dynamic>)
+        ? Result.fromJson(json['result'] as Json)
         : null;
     status = json['status'] as String?;
   }
   Result? result;
   String? status;
 
-  Map<String, dynamic> toJson() {
+  Json toJson() {
     final data = <String, dynamic>{};
 
     if (result != null) {
@@ -40,19 +42,18 @@ class Result {
     this.website,
   });
 
-  Result.fromJson(Map<String, dynamic> json) {
+  Result.fromJson(Json json) {
     final addressComponentsJson = json['address_components'];
     if (addressComponentsJson is List) {
       addressComponents = [];
       for (final v in addressComponentsJson) {
-        addressComponents!
-            .add(AddressComponents.fromJson(v as Map<String, dynamic>));
+        addressComponents!.add(AddressComponents.fromJson(v as Json));
       }
     }
     adrAddress = json['adr_address'] as String?;
     formattedAddress = json['formatted_address'] as String?;
     geometry = json['geometry'] != null
-        ? Geometry.fromJson(json['geometry'] as Map<String, dynamic>)
+        ? Geometry.fromJson(json['geometry'] as Json)
         : null;
     icon = json['icon'] as String?;
     name = json['name'] as String?;
@@ -60,7 +61,7 @@ class Result {
     if (photosJson is List) {
       photos = [];
       for (final v in photosJson) {
-        photos!.add(Photos.fromJson(v as Map<String, dynamic>));
+        photos!.add(Photos.fromJson(v as Json));
       }
     }
     placeId = json['place_id'] as String?;
@@ -88,11 +89,12 @@ class Result {
   String? vicinity;
   String? website;
 
-  Map<String, dynamic> toJson() {
+  Json toJson() {
     final data = <String, dynamic>{};
     if (addressComponents != null) {
-      data['address_components'] =
-          addressComponents!.map((v) => v.toJson()).toList();
+      data['address_components'] = addressComponents!
+          .map((v) => v.toJson())
+          .toList();
     }
     data['adr_address'] = adrAddress;
     data['formatted_address'] = formattedAddress;
@@ -119,7 +121,7 @@ class Result {
 class AddressComponents {
   AddressComponents({this.longName, this.shortName, this.types});
 
-  AddressComponents.fromJson(Map<String, dynamic> json) {
+  AddressComponents.fromJson(Json json) {
     longName = json['long_name'] as String?;
     shortName = json['short_name'] as String?;
     types = (json['types'] as List).cast<String>();
@@ -128,7 +130,7 @@ class AddressComponents {
   String? shortName;
   List<String>? types;
 
-  Map<String, dynamic> toJson() {
+  Json toJson() {
     final data = <String, dynamic>{};
     data['long_name'] = longName;
     data['short_name'] = shortName;
@@ -140,18 +142,18 @@ class AddressComponents {
 class Geometry {
   Geometry({this.location, this.viewport});
 
-  Geometry.fromJson(Map<String, dynamic> json) {
+  Geometry.fromJson(Json json) {
     location = json['location'] != null
-        ? Location.fromJson(json['location'] as Map<String, dynamic>)
+        ? Location.fromJson(json['location'] as Json)
         : null;
     viewport = json['viewport'] != null
-        ? Viewport.fromJson(json['viewport'] as Map<String, dynamic>)
+        ? Viewport.fromJson(json['viewport'] as Json)
         : null;
   }
   Location? location;
   Viewport? viewport;
 
-  Map<String, dynamic> toJson() {
+  Json toJson() {
     final data = <String, dynamic>{};
     if (location != null) {
       data['location'] = location!.toJson();
@@ -166,7 +168,7 @@ class Geometry {
 class Location {
   Location({this.lat, this.lng});
 
-  Location.fromJson(Map<String, dynamic> json) {
+  Location.fromJson(Json json) {
     if (json['lat'] != null) {
       lat = double.parse(json['lat'].toString());
     }
@@ -177,7 +179,7 @@ class Location {
   double? lat;
   double? lng;
 
-  Map<String, dynamic> toJson() {
+  Json toJson() {
     final data = <String, dynamic>{};
     data['lat'] = lat;
     data['lng'] = lng;
@@ -188,18 +190,18 @@ class Location {
 class Viewport {
   Viewport({this.northeast, this.southwest});
 
-  Viewport.fromJson(Map<String, dynamic> json) {
+  Viewport.fromJson(Json json) {
     northeast = json['northeast'] != null
-        ? Location.fromJson(json['northeast'] as Map<String, dynamic>)
+        ? Location.fromJson(json['northeast'] as Json)
         : null;
     southwest = json['southwest'] != null
-        ? Location.fromJson(json['southwest'] as Map<String, dynamic>)
+        ? Location.fromJson(json['southwest'] as Json)
         : null;
   }
   Location? northeast;
   Location? southwest;
 
-  Map<String, dynamic> toJson() {
+  Json toJson() {
     final data = <String, dynamic>{};
     if (northeast != null) {
       data['northeast'] = northeast!.toJson();
@@ -214,7 +216,7 @@ class Viewport {
 class Photos {
   Photos({this.height, this.htmlAttributions, this.photoReference, this.width});
 
-  Photos.fromJson(Map<String, dynamic> json) {
+  Photos.fromJson(Json json) {
     height = json['height'] as int?;
     htmlAttributions = (json['html_attributions'] as List).cast<String>();
     photoReference = json['photo_reference'] as String?;
@@ -225,7 +227,7 @@ class Photos {
   String? photoReference;
   int? width;
 
-  Map<String, dynamic> toJson() {
+  Json toJson() {
     final data = <String, dynamic>{};
     data['height'] = height;
     data['html_attributions'] = htmlAttributions;

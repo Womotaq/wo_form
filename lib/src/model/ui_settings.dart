@@ -1,10 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/src/_export.dart';
+import 'package:wo_form/src/model/json_converter/edge_insets.dart';
 import 'package:wo_form/wo_form.dart';
 
 part 'ui_settings.freezed.dart';
 part 'ui_settings.g.dart';
+
+@freezed
+abstract class InputUiSettings with _$InputUiSettings {
+  const factory InputUiSettings({
+    int? flex,
+  }) = _InputUiSettings;
+
+  const InputUiSettings._();
+
+  factory InputUiSettings.fromJson(Json json) =>
+      _$InputUiSettingsFromJson(json);
+
+  InputUiSettings merge(InputUiSettings? other) => other == null
+      ? this
+      : InputUiSettings(
+          flex: flex ?? other.flex,
+        );
+}
 
 enum BooleanFieldControlType { checkbox, switchButton }
 
@@ -26,7 +45,7 @@ abstract class BooleanInputUiSettings with _$BooleanInputUiSettings {
 
   const BooleanInputUiSettings._();
 
-  factory BooleanInputUiSettings.fromJson(Map<String, dynamic> json) =>
+  factory BooleanInputUiSettings.fromJson(Json json) =>
       _$BooleanInputUiSettingsFromJson(json);
 
   BooleanInputUiSettings merge(BooleanInputUiSettings? other) => other == null
@@ -97,7 +116,7 @@ abstract class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
 
   const DateTimeInputUiSettings._();
 
-  factory DateTimeInputUiSettings.fromJson(Map<String, dynamic> json) =>
+  factory DateTimeInputUiSettings.fromJson(Json json) =>
       _$DateTimeInputUiSettingsFromJson(json);
 
   DateTimeInputUiSettings merge(DateTimeInputUiSettings? other) => other == null
@@ -176,7 +195,7 @@ abstract class DurationInputUiSettings with _$DurationInputUiSettings {
 
   const DurationInputUiSettings._();
 
-  factory DurationInputUiSettings.fromJson(Map<String, dynamic> json) =>
+  factory DurationInputUiSettings.fromJson(Json json) =>
       _$DurationInputUiSettingsFromJson(json);
 
   DurationInputUiSettings merge(DurationInputUiSettings? other) => other == null
@@ -228,7 +247,7 @@ abstract class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
 
   const DynamicInputsNodeUiSettings._();
 
-  factory DynamicInputsNodeUiSettings.fromJson(Map<String, dynamic> json) =>
+  factory DynamicInputsNodeUiSettings.fromJson(Json json) =>
       _$DynamicInputsNodeUiSettingsFromJson(json);
 
   DynamicInputsNodeUiSettings merge(DynamicInputsNodeUiSettings? other) =>
@@ -253,7 +272,7 @@ abstract class DynamicInputUiSettings with _$DynamicInputUiSettings {
 
   const DynamicInputUiSettings._();
 
-  factory DynamicInputUiSettings.fromJson(Map<String, dynamic> json) =>
+  factory DynamicInputUiSettings.fromJson(Json json) =>
       _$DynamicInputUiSettingsFromJson(json);
 
   DynamicInputUiSettings merge(DynamicInputUiSettings? other) => other == null
@@ -297,7 +316,7 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
 
   const InputsNodeUiSettings._();
 
-  factory InputsNodeUiSettings.fromJson(Map<String, dynamic> json) =>
+  factory InputsNodeUiSettings.fromJson(Json json) =>
       _$InputsNodeUiSettingsFromJson(json);
 
   InputsNodeUiSettings merge(InputsNodeUiSettings? other) => other == null
@@ -331,7 +350,7 @@ abstract class MediaInputUiSettings with _$MediaInputUiSettings {
 
   const MediaInputUiSettings._();
 
-  factory MediaInputUiSettings.fromJson(Map<String, dynamic> json) =>
+  factory MediaInputUiSettings.fromJson(Json json) =>
       _$MediaInputUiSettingsFromJson(json);
 
   MediaInputUiSettings merge(MediaInputUiSettings? other) => other == null
@@ -347,25 +366,38 @@ typedef NumFieldBuilderDef =
       WoFieldData<NumInput, num, NumInputUiSettings> data,
     );
 
+enum NumInputStyle { selector, slider }
+
 @freezed
 abstract class NumInputUiSettings with _$NumInputUiSettings {
   const factory NumInputUiSettings({
     String? labelText,
+
+    /// If null, label will be placed above the date selector.
+    /// Else, label and selector will be in a flexible row,
+    /// selector with a flex value of 10,
+    /// and label with a flex value of [labelFlex].
+    ///
+    /// Only with [NumInputStyle.slider].
+    int? labelFlex,
     String? helperText,
+    NumInputStyle? style,
     @notSerializable Widget? unit,
     @notSerializable NumFieldBuilderDef? widgetBuilder,
   }) = _NumInputUiSettings;
 
   const NumInputUiSettings._();
 
-  factory NumInputUiSettings.fromJson(Map<String, dynamic> json) =>
+  factory NumInputUiSettings.fromJson(Json json) =>
       _$NumInputUiSettingsFromJson(json);
 
   NumInputUiSettings merge(NumInputUiSettings? other) => other == null
       ? this
       : NumInputUiSettings(
           labelText: labelText ?? other.labelText,
+          labelFlex: labelFlex ?? other.labelFlex,
           helperText: helperText ?? other.helperText,
+          style: style ?? other.style,
           unit: unit ?? other.unit,
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,
         );
@@ -385,6 +417,7 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
   /// searcher is a function that returns a double between 0 and 1,
   /// depending on how much the query is close to a value. 1 is the closest.
   const factory SelectInputUiSettings({
+    int? flex,
     String? labelText,
     String? helperText,
     String? hintText,
@@ -410,13 +443,14 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
 
   const SelectInputUiSettings._();
 
-  factory SelectInputUiSettings.fromJson(Map<String, dynamic> json) =>
+  factory SelectInputUiSettings.fromJson(Json json) =>
       _$SelectInputUiSettingsFromJson(json);
 
   SelectInputUiSettings<T> merge(SelectInputUiSettings<T>? other) =>
       other == null
       ? this
       : SelectInputUiSettings(
+          flex: flex ?? other.flex,
           labelText: labelText ?? other.labelText,
           helperText: helperText ?? other.helperText,
           hintText: hintText ?? other.hintText,
@@ -548,7 +582,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
 
   const StringInputUiSettings._();
 
-  factory StringInputUiSettings.fromJson(Map<String, dynamic> json) =>
+  factory StringInputUiSettings.fromJson(Json json) =>
       _$StringInputUiSettingsFromJson(json);
 
   StringInputUiSettings merge(StringInputUiSettings? other) => other == null
@@ -601,11 +635,15 @@ abstract class WoFormUiSettings with _$WoFormUiSettings {
 
     /// Will be merged with context theme.
     WoFormThemeData? theme,
+
+    /// Padding applied around all the widgets inside this form, except for
+    /// the app bar, the bottom bar and the floating widgets.
+    @EdgeInsetsNullableConverter() EdgeInsets? padding,
   }) = _WoFormUiSettings;
 
   const WoFormUiSettings._();
 
-  factory WoFormUiSettings.fromJson(Map<String, dynamic> json) =>
+  factory WoFormUiSettings.fromJson(Json json) =>
       _$WoFormUiSettingsFromJson(json);
 }
 
@@ -656,7 +694,7 @@ sealed class WoFormSubmitMode with _$WoFormSubmitMode {
 
   const WoFormSubmitMode._();
 
-  factory WoFormSubmitMode.fromJson(Map<String, dynamic> json) =>
+  factory WoFormSubmitMode.fromJson(Json json) =>
       _$WoFormSubmitModeFromJson(json);
 
   // --

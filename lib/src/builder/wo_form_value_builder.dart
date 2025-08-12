@@ -14,7 +14,7 @@ class WoFormValueBuilder<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocSelector<WoFormValuesCubit, Map<String, dynamic>, T?>(
+    return BlocSelector<WoFormValuesCubit, WoFormValues, T?>(
       key: Key(path),
       selector: (values) {
         final value = values.getValue(path);
@@ -39,15 +39,14 @@ class WoFormValuesBuilder extends StatelessWidget {
   });
 
   final Iterable<String> paths;
-  final Widget Function(BuildContext context, Map<String, dynamic> values)
-      builder;
+  final Widget Function(BuildContext context, WoFormValues values) builder;
 
   @override
   Widget build(BuildContext context) {
-    return BlocSelector<WoFormValuesCubit, Map<String, dynamic>,
-        Map<String, dynamic>>(
-      selector: (values) =>
-          {for (final path in paths) path: values.getValue(path)},
+    return BlocSelector<WoFormValuesCubit, WoFormValues, WoFormValues>(
+      selector: (values) => {
+        for (final path in paths) path: values.getValue(path),
+      },
       builder: builder,
     );
   }

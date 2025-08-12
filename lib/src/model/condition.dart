@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:wo_form/wo_form.dart';
 
 part 'condition.freezed.dart';
 part 'condition.g.dart';
@@ -36,8 +37,7 @@ sealed class Condition with _$Condition {
 
   const Condition._();
 
-  factory Condition.fromJson(Map<String, dynamic> json) =>
-      _$ConditionFromJson(json);
+  factory Condition.fromJson(Json json) => _$ConditionFromJson(json);
 }
 
 class ConditionsListConverter
@@ -45,9 +45,8 @@ class ConditionsListConverter
   const ConditionsListConverter();
 
   @override
-  List<Condition> fromJson(List<dynamic> json) => json
-      .map((map) => Condition.fromJson(map as Map<String, dynamic>))
-      .toList();
+  List<Condition> fromJson(List<dynamic> json) =>
+      json.map((map) => Condition.fromJson(map as Json)).toList();
 
   @override
   List<dynamic> toJson(List<Condition> object) =>
