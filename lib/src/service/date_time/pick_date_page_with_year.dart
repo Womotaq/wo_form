@@ -5,7 +5,6 @@ import 'package:wo_form/wo_form.dart';
 
 class PickDatePageWithYear extends StatefulWidget {
   const PickDatePageWithYear({
-    required this.woFormStatusCubit,
     this.minDate,
     this.maxDate,
     this.initialDate,
@@ -14,7 +13,6 @@ class PickDatePageWithYear extends StatefulWidget {
   }) : _displayMode = _DisplayMode.page;
 
   const PickDatePageWithYear.inModal({
-    required this.woFormStatusCubit,
     this.minDate,
     this.maxDate,
     this.initialDate,
@@ -22,7 +20,6 @@ class PickDatePageWithYear extends StatefulWidget {
     super.key,
   }) : _displayMode = _DisplayMode.modal;
 
-  final WoFormStatusCubit? woFormStatusCubit;
   final DateTime? minDate;
   final DateTime? maxDate;
   final DateTime? initialDate;
@@ -140,8 +137,8 @@ class _PickDatePageWithYearState extends State<PickDatePageWithYear> {
               child: _DateWidget(controller: dayScrollController),
             ),
           ),
-          RepositoryProvider.value(
-            value: widget.woFormStatusCubit,
+          RepositoryProvider(
+            create: (context) => WoFormStatusCubit(const InitialStatus()),
             child: BlocBuilder<_SelectedDateCubit, DateTime?>(
               builder: (context, date) {
                 if (date == null) return const SizedBox.shrink();
@@ -178,10 +175,13 @@ class _PickDatePageWithYearState extends State<PickDatePageWithYear> {
         appBar: AppBar(),
         body: picker,
       ),
-      _DisplayMode.modal => SizedBox(
-        width: 332,
-        height: 556,
-        child: picker,
+      _DisplayMode.modal => Padding(
+        padding: const EdgeInsets.all(16),
+        child: SizedBox(
+          width: 332,
+          height: 556,
+          child: picker,
+        ),
       ),
     };
   }
@@ -400,7 +400,7 @@ class _SelectableIndex extends StatelessWidget {
       style: index == selectedIndex
           ? theme.textTheme.bodyLarge!.copyWith(
               fontWeight: FontWeight.bold,
-              color: theme.colorScheme.onPrimaryContainer,
+              color: theme.colorScheme.onSecondaryContainer,
             )
           : TextStyle(color: theme.disabledColor),
       child: Center(
@@ -410,7 +410,7 @@ class _SelectableIndex extends StatelessWidget {
           child: index == selectedIndex
               ? Container(
                   decoration: BoxDecoration(
-                    color: theme.colorScheme.primaryContainer,
+                    color: theme.colorScheme.secondaryContainer,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: yearWidget,
@@ -521,7 +521,7 @@ class MonthlyCalendar extends StatelessWidget {
                               ? BoxDecoration(
                                   color: Theme.of(
                                     context,
-                                  ).colorScheme.primaryContainer,
+                                  ).colorScheme.secondaryContainer,
                                   shape: BoxShape.circle,
                                 )
                               : null,
@@ -531,7 +531,7 @@ class MonthlyCalendar extends StatelessWidget {
                               style: TextStyle(
                                 color: Theme.of(
                                   context,
-                                ).colorScheme.onPrimaryContainer,
+                                ).colorScheme.onSecondaryContainer,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),

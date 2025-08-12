@@ -10,7 +10,7 @@ import 'package:wo_form/src/_export.dart';
 import 'package:wo_form/wo_form.dart';
 
 class WoFormStatusCubit extends Cubit<WoFormStatus> {
-  WoFormStatusCubit._(super.initialState);
+  WoFormStatusCubit(super.initialState);
 
   void setInProgress({
     List<WoFormInputError> errors = const [],
@@ -49,7 +49,7 @@ class HydratedWoFormStatusCubit extends WoFormStatusCubit
         'hydratationId must not be an empty string',
       ),
       id = '$hydratationId-WoFormStatusCubit',
-      super._() {
+      super() {
     hydrate();
   }
 
@@ -534,7 +534,7 @@ class WoForm extends StatelessWidget {
           providers: [
             BlocProvider(
               create: (context) => root.hydratationId.isEmpty
-                  ? WoFormStatusCubit._(
+                  ? WoFormStatusCubit(
                       const InitialStatus(),
                     )
                   : HydratedWoFormStatusCubit._(
