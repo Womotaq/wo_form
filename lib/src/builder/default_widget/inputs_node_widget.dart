@@ -28,25 +28,22 @@ class InputsNodeWidget extends StatelessWidget {
             ),
         Flexible(
           flex: !formUiSettings.scrollable && node.flex != 0 ? 1 : 0,
-          child: Padding(
-            padding: EdgeInsets.only(bottom: oFormTheme?.verticalSpacing ?? 0),
-            child: Column(
-              children: node.children
-                  .map(
-                    (i) => Flexible(
-                      flex: !formUiSettings.scrollable && i.flex != 0
-                          ? i.flex
-                          : 0,
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          bottom: oFormTheme?.verticalSpacing ?? 0,
-                        ),
-                        child: i.toWidget(parentPath: data.path),
-                      ),
-                    ),
-                  )
-                  .toList(),
-            ),
+          child: Flex(
+            direction: data.uiSettings.direction ?? Axis.vertical,
+            spacing: data.uiSettings.spacing ?? oFormTheme?.spacing ?? 0,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: node.children
+                .map(
+                  (i) => Flexible(
+                    flex: !formUiSettings.scrollable && i.flex != 0
+                        ? i.flex
+                        : data.uiSettings.direction == Axis.horizontal
+                        ? 1
+                        : 0,
+                    child: i.toWidget(parentPath: data.path),
+                  ),
+                )
+                .toList(),
           ),
         ),
       ],

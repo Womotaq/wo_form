@@ -15,7 +15,7 @@ class InputsNodeExpander extends StatefulWidget {
 class _InputsNodeExpanderState extends State<InputsNodeExpander> {
   @override
   void initState() {
-    if (widget.data.uiSettings.showChildrenInitially) {
+    if (widget.data.uiSettings.showChildrenInitially ?? false) {
       SchedulerBinding.instance.addPostFrameCallback(
         (_) => mounted ? pushPage(context) : null,
       );

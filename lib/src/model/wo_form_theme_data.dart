@@ -45,7 +45,7 @@ abstract class WoFormThemeData with _$WoFormThemeData {
     double? maxWidth,
 
     /// This spacing will be placed between each [WoFormNodeMixin].
-    double? verticalSpacing,
+    double? spacing,
 
     /// Add the characters ' *' after the labelText of [WoFormInput]s.
     /// Default to true.
@@ -98,7 +98,7 @@ abstract class WoFormThemeData with _$WoFormThemeData {
               onDynamicInputDeletion ?? other.onDynamicInputDeletion,
           onSubmitError: onSubmitError ?? other.onSubmitError,
           maxWidth: maxWidth ?? other.maxWidth,
-          verticalSpacing: verticalSpacing ?? other.verticalSpacing,
+          spacing: spacing ?? other.spacing,
           showAsteriskIfRequired:
               showAsteriskIfRequired ?? other.showAsteriskIfRequired,
         );

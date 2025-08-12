@@ -205,7 +205,9 @@ _InputsNodeUiSettings _$InputsNodeUiSettingsFromJson(
     _$ChildrenVisibilityEnumMap,
     json['childrenVisibility'],
   ),
-  showChildrenInitially: json['showChildrenInitially'] as bool? ?? false,
+  showChildrenInitially: json['showChildrenInitially'] as bool?,
+  direction: $enumDecodeNullable(_$AxisEnumMap, json['direction']),
+  spacing: (json['spacing'] as num?)?.toDouble(),
 );
 
 Map<String, dynamic> _$InputsNodeUiSettingsToJson(
@@ -218,11 +220,18 @@ Map<String, dynamic> _$InputsNodeUiSettingsToJson(
   'childrenVisibility':
       _$ChildrenVisibilityEnumMap[instance.childrenVisibility],
   'showChildrenInitially': instance.showChildrenInitially,
+  'direction': _$AxisEnumMap[instance.direction],
+  'spacing': instance.spacing,
 };
 
 const _$ChildrenVisibilityEnumMap = {
   ChildrenVisibility.always: 'always',
   ChildrenVisibility.whenAsked: 'whenAsked',
+};
+
+const _$AxisEnumMap = {
+  Axis.horizontal: 'horizontal',
+  Axis.vertical: 'vertical',
 };
 
 _MediaInputUiSettings _$MediaInputUiSettingsFromJson(

@@ -50,7 +50,7 @@ class WoFormStandardPage extends StatelessWidget {
           ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          spacing: woFormTheme?.verticalSpacing ?? 0,
+          spacing: woFormTheme?.spacing ?? 0,
           children: root.children
               .map((child) => child.toWidget(parentPath: ''))
               .toList(),

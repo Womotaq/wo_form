@@ -995,7 +995,13 @@ mixin _$InputsNodeUiSettings {
  ChildrenVisibility? get childrenVisibility;/// Only used by [ChildrenVisibility.whenAsked].
 /// If true, when the widget will be rendered,
 /// the children's visibility will be asked.
- bool get showChildrenInitially;@notSerializable InputNodeWidgetBuilderDef? get widgetBuilder;@notSerializable HeaderBuilderDef? get headerBuilder;@notSerializable InputNodeWidgetBuilderDef? get expanderBuilder;
+///
+/// Default to false.
+ bool? get showChildrenInitially;/// Only used when ChildrenVisibility.always.
+///
+/// Default to Axis.vertical
+ Axis? get direction;/// This spacing will be placed between each [WoFormNodeMixin].
+ double? get spacing;@notSerializable InputNodeWidgetBuilderDef? get widgetBuilder;@notSerializable HeaderBuilderDef? get headerBuilder;@notSerializable InputNodeWidgetBuilderDef? get expanderBuilder;
 /// Create a copy of InputsNodeUiSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1008,16 +1014,16 @@ $InputsNodeUiSettingsCopyWith<InputsNodeUiSettings> get copyWith => _$InputsNode
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is InputsNodeUiSettings&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelTextWhenChildrenHidden, labelTextWhenChildrenHidden) || other.labelTextWhenChildrenHidden == labelTextWhenChildrenHidden)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.showChildrenInitially, showChildrenInitially) || other.showChildrenInitially == showChildrenInitially)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.expanderBuilder, expanderBuilder) || other.expanderBuilder == expanderBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is InputsNodeUiSettings&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelTextWhenChildrenHidden, labelTextWhenChildrenHidden) || other.labelTextWhenChildrenHidden == labelTextWhenChildrenHidden)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.showChildrenInitially, showChildrenInitially) || other.showChildrenInitially == showChildrenInitially)&&(identical(other.direction, direction) || other.direction == direction)&&(identical(other.spacing, spacing) || other.spacing == spacing)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.expanderBuilder, expanderBuilder) || other.expanderBuilder == expanderBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,flex,labelText,labelTextWhenChildrenHidden,helperText,childrenVisibility,showChildrenInitially,widgetBuilder,headerBuilder,expanderBuilder);
+int get hashCode => Object.hash(runtimeType,flex,labelText,labelTextWhenChildrenHidden,helperText,childrenVisibility,showChildrenInitially,direction,spacing,widgetBuilder,headerBuilder,expanderBuilder);
 
 @override
 String toString() {
-  return 'InputsNodeUiSettings(flex: $flex, labelText: $labelText, labelTextWhenChildrenHidden: $labelTextWhenChildrenHidden, helperText: $helperText, childrenVisibility: $childrenVisibility, showChildrenInitially: $showChildrenInitially, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, expanderBuilder: $expanderBuilder)';
+  return 'InputsNodeUiSettings(flex: $flex, labelText: $labelText, labelTextWhenChildrenHidden: $labelTextWhenChildrenHidden, helperText: $helperText, childrenVisibility: $childrenVisibility, showChildrenInitially: $showChildrenInitially, direction: $direction, spacing: $spacing, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, expanderBuilder: $expanderBuilder)';
 }
 
 
@@ -1028,7 +1034,7 @@ abstract mixin class $InputsNodeUiSettingsCopyWith<$Res>  {
   factory $InputsNodeUiSettingsCopyWith(InputsNodeUiSettings value, $Res Function(InputsNodeUiSettings) _then) = _$InputsNodeUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- int? flex, String? labelText, String? labelTextWhenChildrenHidden, String? helperText, ChildrenVisibility? childrenVisibility, bool showChildrenInitially,@notSerializable InputNodeWidgetBuilderDef? widgetBuilder,@notSerializable HeaderBuilderDef? headerBuilder,@notSerializable InputNodeWidgetBuilderDef? expanderBuilder
+ int? flex, String? labelText, String? labelTextWhenChildrenHidden, String? helperText, ChildrenVisibility? childrenVisibility, bool? showChildrenInitially, Axis? direction, double? spacing,@notSerializable InputNodeWidgetBuilderDef? widgetBuilder,@notSerializable HeaderBuilderDef? headerBuilder,@notSerializable InputNodeWidgetBuilderDef? expanderBuilder
 });
 
 
@@ -1045,15 +1051,17 @@ class _$InputsNodeUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of InputsNodeUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? flex = freezed,Object? labelText = freezed,Object? labelTextWhenChildrenHidden = freezed,Object? helperText = freezed,Object? childrenVisibility = freezed,Object? showChildrenInitially = null,Object? widgetBuilder = freezed,Object? headerBuilder = freezed,Object? expanderBuilder = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? flex = freezed,Object? labelText = freezed,Object? labelTextWhenChildrenHidden = freezed,Object? helperText = freezed,Object? childrenVisibility = freezed,Object? showChildrenInitially = freezed,Object? direction = freezed,Object? spacing = freezed,Object? widgetBuilder = freezed,Object? headerBuilder = freezed,Object? expanderBuilder = freezed,}) {
   return _then(_self.copyWith(
 flex: freezed == flex ? _self.flex : flex // ignore: cast_nullable_to_non_nullable
 as int?,labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
 as String?,labelTextWhenChildrenHidden: freezed == labelTextWhenChildrenHidden ? _self.labelTextWhenChildrenHidden : labelTextWhenChildrenHidden // ignore: cast_nullable_to_non_nullable
 as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
 as String?,childrenVisibility: freezed == childrenVisibility ? _self.childrenVisibility : childrenVisibility // ignore: cast_nullable_to_non_nullable
-as ChildrenVisibility?,showChildrenInitially: null == showChildrenInitially ? _self.showChildrenInitially : showChildrenInitially // ignore: cast_nullable_to_non_nullable
-as bool,widgetBuilder: freezed == widgetBuilder ? _self.widgetBuilder : widgetBuilder // ignore: cast_nullable_to_non_nullable
+as ChildrenVisibility?,showChildrenInitially: freezed == showChildrenInitially ? _self.showChildrenInitially : showChildrenInitially // ignore: cast_nullable_to_non_nullable
+as bool?,direction: freezed == direction ? _self.direction : direction // ignore: cast_nullable_to_non_nullable
+as Axis?,spacing: freezed == spacing ? _self.spacing : spacing // ignore: cast_nullable_to_non_nullable
+as double?,widgetBuilder: freezed == widgetBuilder ? _self.widgetBuilder : widgetBuilder // ignore: cast_nullable_to_non_nullable
 as InputNodeWidgetBuilderDef?,headerBuilder: freezed == headerBuilder ? _self.headerBuilder : headerBuilder // ignore: cast_nullable_to_non_nullable
 as HeaderBuilderDef?,expanderBuilder: freezed == expanderBuilder ? _self.expanderBuilder : expanderBuilder // ignore: cast_nullable_to_non_nullable
 as InputNodeWidgetBuilderDef?,
@@ -1068,7 +1076,7 @@ as InputNodeWidgetBuilderDef?,
 @JsonSerializable()
 
 class _InputsNodeUiSettings extends InputsNodeUiSettings {
-  const _InputsNodeUiSettings({this.flex, this.labelText, this.labelTextWhenChildrenHidden, this.helperText, this.childrenVisibility, this.showChildrenInitially = false, @notSerializable this.widgetBuilder, @notSerializable this.headerBuilder, @notSerializable this.expanderBuilder}): super._();
+  const _InputsNodeUiSettings({this.flex, this.labelText, this.labelTextWhenChildrenHidden, this.helperText, this.childrenVisibility, this.showChildrenInitially, this.direction, this.spacing, @notSerializable this.widgetBuilder, @notSerializable this.headerBuilder, @notSerializable this.expanderBuilder}): super._();
   factory _InputsNodeUiSettings.fromJson(Map<String, dynamic> json) => _$InputsNodeUiSettingsFromJson(json);
 
 @override final  int? flex;
@@ -1080,7 +1088,15 @@ class _InputsNodeUiSettings extends InputsNodeUiSettings {
 /// Only used by [ChildrenVisibility.whenAsked].
 /// If true, when the widget will be rendered,
 /// the children's visibility will be asked.
-@override@JsonKey() final  bool showChildrenInitially;
+///
+/// Default to false.
+@override final  bool? showChildrenInitially;
+/// Only used when ChildrenVisibility.always.
+///
+/// Default to Axis.vertical
+@override final  Axis? direction;
+/// This spacing will be placed between each [WoFormNodeMixin].
+@override final  double? spacing;
 @override@notSerializable final  InputNodeWidgetBuilderDef? widgetBuilder;
 @override@notSerializable final  HeaderBuilderDef? headerBuilder;
 @override@notSerializable final  InputNodeWidgetBuilderDef? expanderBuilder;
@@ -1098,16 +1114,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _InputsNodeUiSettings&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelTextWhenChildrenHidden, labelTextWhenChildrenHidden) || other.labelTextWhenChildrenHidden == labelTextWhenChildrenHidden)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.showChildrenInitially, showChildrenInitially) || other.showChildrenInitially == showChildrenInitially)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.expanderBuilder, expanderBuilder) || other.expanderBuilder == expanderBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _InputsNodeUiSettings&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelTextWhenChildrenHidden, labelTextWhenChildrenHidden) || other.labelTextWhenChildrenHidden == labelTextWhenChildrenHidden)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.showChildrenInitially, showChildrenInitially) || other.showChildrenInitially == showChildrenInitially)&&(identical(other.direction, direction) || other.direction == direction)&&(identical(other.spacing, spacing) || other.spacing == spacing)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.expanderBuilder, expanderBuilder) || other.expanderBuilder == expanderBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,flex,labelText,labelTextWhenChildrenHidden,helperText,childrenVisibility,showChildrenInitially,widgetBuilder,headerBuilder,expanderBuilder);
+int get hashCode => Object.hash(runtimeType,flex,labelText,labelTextWhenChildrenHidden,helperText,childrenVisibility,showChildrenInitially,direction,spacing,widgetBuilder,headerBuilder,expanderBuilder);
 
 @override
 String toString() {
-  return 'InputsNodeUiSettings(flex: $flex, labelText: $labelText, labelTextWhenChildrenHidden: $labelTextWhenChildrenHidden, helperText: $helperText, childrenVisibility: $childrenVisibility, showChildrenInitially: $showChildrenInitially, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, expanderBuilder: $expanderBuilder)';
+  return 'InputsNodeUiSettings(flex: $flex, labelText: $labelText, labelTextWhenChildrenHidden: $labelTextWhenChildrenHidden, helperText: $helperText, childrenVisibility: $childrenVisibility, showChildrenInitially: $showChildrenInitially, direction: $direction, spacing: $spacing, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, expanderBuilder: $expanderBuilder)';
 }
 
 
@@ -1118,7 +1134,7 @@ abstract mixin class _$InputsNodeUiSettingsCopyWith<$Res> implements $InputsNode
   factory _$InputsNodeUiSettingsCopyWith(_InputsNodeUiSettings value, $Res Function(_InputsNodeUiSettings) _then) = __$InputsNodeUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- int? flex, String? labelText, String? labelTextWhenChildrenHidden, String? helperText, ChildrenVisibility? childrenVisibility, bool showChildrenInitially,@notSerializable InputNodeWidgetBuilderDef? widgetBuilder,@notSerializable HeaderBuilderDef? headerBuilder,@notSerializable InputNodeWidgetBuilderDef? expanderBuilder
+ int? flex, String? labelText, String? labelTextWhenChildrenHidden, String? helperText, ChildrenVisibility? childrenVisibility, bool? showChildrenInitially, Axis? direction, double? spacing,@notSerializable InputNodeWidgetBuilderDef? widgetBuilder,@notSerializable HeaderBuilderDef? headerBuilder,@notSerializable InputNodeWidgetBuilderDef? expanderBuilder
 });
 
 
@@ -1135,15 +1151,17 @@ class __$InputsNodeUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of InputsNodeUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? flex = freezed,Object? labelText = freezed,Object? labelTextWhenChildrenHidden = freezed,Object? helperText = freezed,Object? childrenVisibility = freezed,Object? showChildrenInitially = null,Object? widgetBuilder = freezed,Object? headerBuilder = freezed,Object? expanderBuilder = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? flex = freezed,Object? labelText = freezed,Object? labelTextWhenChildrenHidden = freezed,Object? helperText = freezed,Object? childrenVisibility = freezed,Object? showChildrenInitially = freezed,Object? direction = freezed,Object? spacing = freezed,Object? widgetBuilder = freezed,Object? headerBuilder = freezed,Object? expanderBuilder = freezed,}) {
   return _then(_InputsNodeUiSettings(
 flex: freezed == flex ? _self.flex : flex // ignore: cast_nullable_to_non_nullable
 as int?,labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
 as String?,labelTextWhenChildrenHidden: freezed == labelTextWhenChildrenHidden ? _self.labelTextWhenChildrenHidden : labelTextWhenChildrenHidden // ignore: cast_nullable_to_non_nullable
 as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
 as String?,childrenVisibility: freezed == childrenVisibility ? _self.childrenVisibility : childrenVisibility // ignore: cast_nullable_to_non_nullable
-as ChildrenVisibility?,showChildrenInitially: null == showChildrenInitially ? _self.showChildrenInitially : showChildrenInitially // ignore: cast_nullable_to_non_nullable
-as bool,widgetBuilder: freezed == widgetBuilder ? _self.widgetBuilder : widgetBuilder // ignore: cast_nullable_to_non_nullable
+as ChildrenVisibility?,showChildrenInitially: freezed == showChildrenInitially ? _self.showChildrenInitially : showChildrenInitially // ignore: cast_nullable_to_non_nullable
+as bool?,direction: freezed == direction ? _self.direction : direction // ignore: cast_nullable_to_non_nullable
+as Axis?,spacing: freezed == spacing ? _self.spacing : spacing // ignore: cast_nullable_to_non_nullable
+as double?,widgetBuilder: freezed == widgetBuilder ? _self.widgetBuilder : widgetBuilder // ignore: cast_nullable_to_non_nullable
 as InputNodeWidgetBuilderDef?,headerBuilder: freezed == headerBuilder ? _self.headerBuilder : headerBuilder // ignore: cast_nullable_to_non_nullable
 as HeaderBuilderDef?,expanderBuilder: freezed == expanderBuilder ? _self.expanderBuilder : expanderBuilder // ignore: cast_nullable_to_non_nullable
 as InputNodeWidgetBuilderDef?,

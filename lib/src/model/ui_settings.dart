@@ -309,7 +309,17 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
     /// Only used by [ChildrenVisibility.whenAsked].
     /// If true, when the widget will be rendered,
     /// the children's visibility will be asked.
-    @Default(false) bool showChildrenInitially,
+    ///
+    /// Default to false.
+    bool? showChildrenInitially,
+
+    /// Only used when ChildrenVisibility.always.
+    ///
+    /// Default to Axis.vertical
+    Axis? direction,
+
+    /// This spacing will be placed between each [WoFormNodeMixin].
+    double? spacing,
     @notSerializable InputNodeWidgetBuilderDef? widgetBuilder,
     @notSerializable HeaderBuilderDef? headerBuilder,
     @notSerializable InputNodeWidgetBuilderDef? expanderBuilder,
@@ -327,6 +337,10 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
           labelText: labelText ?? other.labelText,
           helperText: helperText ?? other.helperText,
           childrenVisibility: childrenVisibility ?? other.childrenVisibility,
+          showChildrenInitially:
+              showChildrenInitially ?? other.showChildrenInitially,
+          direction: direction ?? other.direction,
+          spacing: spacing ?? other.spacing,
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,
           headerBuilder: headerBuilder ?? other.headerBuilder,
           expanderBuilder: expanderBuilder ?? other.expanderBuilder,
