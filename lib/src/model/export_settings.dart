@@ -14,7 +14,7 @@ enum ExportType {
 
   /// If the parent node is The node will export its first exportable child's
   /// exported data.
-  mergeWithParent;
+  mergeWithParent,
 }
 
 @freezed
@@ -28,7 +28,4 @@ abstract class ExportSettings with _$ExportSettings {
 
   factory ExportSettings.fromJson(Map<String, dynamic> json) =>
       _$ExportSettingsFromJson(json);
-
-  static Map<String, dynamic> staticToJson(ExportSettings object) =>
-      object.toJson();
 }

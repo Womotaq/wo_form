@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/src/model/json_converter/duration.dart';
-import 'package:wo_form/src/model/json_converter/media_list.dart';
 import 'package:wo_form/wo_form.dart';
 
 part 'wo_form_input.freezed.dart';
@@ -110,22 +109,17 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
 
     /// An optionnal callback when the value changed
     @notSerializable void Function(bool? value)? onValueChanged,
-    @JsonKey(toJson: BooleanInputUiSettings.staticToJson)
-    @Default(BooleanInputUiSettings())
-    BooleanInputUiSettings uiSettings,
+    @Default(BooleanInputUiSettings()) BooleanInputUiSettings uiSettings,
   }) = BooleanInput;
 
   const factory WoFormInput.dateTime({
     required String id,
-    @JsonKey(toJson: FlexibleDateTime.staticToJson)
     FlexibleDateTime? initialValue,
     @Default(false) bool isRequired,
-    @JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? maxDate,
-    @JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? minDate,
+    FlexibleDateTime? maxDate,
+    FlexibleDateTime? minDate,
     @notSerializable GetCustomErrorDef<DateTime>? getCustomError,
-    @JsonKey(toJson: DateTimeInputUiSettings.staticToJson)
-    @Default(DateTimeInputUiSettings())
-    DateTimeInputUiSettings uiSettings,
+    @Default(DateTimeInputUiSettings()) DateTimeInputUiSettings uiSettings,
   }) = DateTimeInput;
 
   const factory WoFormInput.duration({
@@ -140,9 +134,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     @DurationNullableConverter() Duration? maxDuration,
     @DurationNullableConverter() Duration? minDuration,
     @notSerializable GetCustomErrorDef<Duration>? getCustomError,
-    @JsonKey(toJson: DurationInputUiSettings.staticToJson)
-    @Default(DurationInputUiSettings())
-    DurationInputUiSettings uiSettings,
+    @Default(DurationInputUiSettings()) DurationInputUiSettings uiSettings,
   }) = DurationInput;
 
   /// If you want to use MediaInput, provide an implementation of [MediaService]
@@ -171,11 +163,10 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
   )
   const factory WoFormInput.media({
     required String id,
-    @JsonKey(toJson: MediaImportSettings.staticToJson)
     required MediaImportSettings importSettings,
     required int? maxCount,
     @Default(0) int minCount,
-    @MediaListConverter() List<Media>? initialValues,
+    List<Media>? initialValues,
     @notSerializable GetCustomErrorForListDef<Media>? getCustomError,
 
     /// An optionnal callback when the value changed
@@ -186,9 +177,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
 
     /// Required if you use MediaInput.export()
     String? uploadPath,
-    @JsonKey(toJson: MediaInputUiSettings.staticToJson)
-    @Default(MediaInputUiSettings())
-    MediaInputUiSettings uiSettings,
+    @Default(MediaInputUiSettings()) MediaInputUiSettings uiSettings,
   }) = MediaInput;
 
   @Assert(
@@ -236,7 +225,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     @Default(SelectInputUiSettings<String>())
     SelectInputUiSettings<String> uiSettings,
     // The correct answer is the index of availibleValues
-    @JsonKey(toJson: QuizSettings.staticToJson) QuizSettings? quizSettings,
+    QuizSettings? quizSettings,
   }) = SelectStringInput;
 
   const factory WoFormInput.string({
@@ -246,12 +235,9 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     String? regexPattern,
 
     /// If set, the field will be a place autocomplete.
-    @JsonKey(toJson: PlaceAutocompleteSettings.staticToJson)
     PlaceAutocompleteSettings? placeAutocompleteSettings,
     @notSerializable GetCustomErrorDef<String>? getCustomError,
-    @JsonKey(toJson: StringInputUiSettings.staticToJson)
-    @Default(StringInputUiSettings())
-    StringInputUiSettings uiSettings,
+    @Default(StringInputUiSettings()) StringInputUiSettings uiSettings,
   }) = StringInput;
 
   const WoFormInput._();
@@ -572,7 +558,7 @@ abstract class SelectInput<T>
     /// Only applies if maxCount is 1
     @Default(false) bool submitFormOnSelect,
     SelectInputUiSettings<T>? uiSettings,
-    @JsonKey(toJson: QuizSettings.staticToJson) QuizSettings? quizSettings,
+    QuizSettings? quizSettings,
 
     /// The following fields are mostly usefull for hydrataion
     ///

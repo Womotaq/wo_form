@@ -9,7 +9,8 @@ part of 'export_settings.dart';
 _ExportSettings _$ExportSettingsFromJson(Map<String, dynamic> json) =>
     _ExportSettings(
       metadata: json['metadata'] as Map<String, dynamic>? ?? const {},
-      type: $enumDecodeNullable(_$ExportTypeEnumMap, json['type']) ??
+      type:
+          $enumDecodeNullable(_$ExportTypeEnumMap, json['type']) ??
           ExportType.map,
     );
 

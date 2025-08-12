@@ -24,7 +24,7 @@ Map<String, dynamic> _$DynamicInputTemplateToJson(
   _DynamicInputTemplate instance,
 ) => <String, dynamic>{
   'child': const InputNullableConverter().toJson(instance.child),
-  'uiSettings': DynamicInputUiSettings.staticToJson(instance.uiSettings),
+  'uiSettings': instance.uiSettings.toJson(),
 };
 
 Value? _$JsonConverterFromJson<Json, Value>(
@@ -46,55 +46,51 @@ ConditionnalNode _$ConditionnalNodeFromJson(
 Map<String, dynamic> _$ConditionnalNodeToJson(ConditionnalNode instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'condition': Condition.staticToJson(instance.condition),
+      'condition': instance.condition.toJson(),
       'child': const InputConverter().toJson(instance.child),
       'conditionIsInitiallyMet': instance.conditionIsInitiallyMet,
       'clearChildrenWhenHidden': instance.clearChildrenWhenHidden,
       'runtimeType': instance.$type,
     };
 
-DynamicInputsNode _$DynamicInputsNodeFromJson(Map<String, dynamic> json) =>
-    DynamicInputsNode(
-      id: json['id'] as String,
-      templates: json['templates'] == null
-          ? const []
-          : const DynamicInputTemplatesConverter().fromJson(
-              json['templates'] as List,
-            ),
-      initialChildren:
-          _$JsonConverterFromJson<List<dynamic>, List<WoFormNodeMixin>>(
-            json['initialChildren'],
-            const InputsListConverter().fromJson,
-          ),
-      uiSettings: json['uiSettings'] == null
-          ? const DynamicInputsNodeUiSettings()
-          : DynamicInputsNodeUiSettings.fromJson(
-              json['uiSettings'] as Map<String, dynamic>,
-            ),
-      exportSettings: json['exportSettings'] == null
-          ? const ExportSettings()
-          : ExportSettings.fromJson(
-              json['exportSettings'] as Map<String, dynamic>,
-            ),
-      $type: json['runtimeType'] as String?,
-    );
-
-Map<String, dynamic> _$DynamicInputsNodeToJson(
-  DynamicInputsNode instance,
-) => <String, dynamic>{
-  'id': instance.id,
-  'templates': const DynamicInputTemplatesConverter().toJson(
-    instance.templates,
-  ),
-  'initialChildren':
-      _$JsonConverterToJson<List<dynamic>, List<WoFormNodeMixin>>(
-        instance.initialChildren,
-        const InputsListConverter().toJson,
+DynamicInputsNode _$DynamicInputsNodeFromJson(
+  Map<String, dynamic> json,
+) => DynamicInputsNode(
+  id: json['id'] as String,
+  templates:
+      (json['templates'] as List<dynamic>?)
+          ?.map((e) => DynamicInputTemplate.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const [],
+  initialChildren:
+      _$JsonConverterFromJson<List<dynamic>, List<WoFormNodeMixin>>(
+        json['initialChildren'],
+        const InputsListConverter().fromJson,
       ),
-  'uiSettings': DynamicInputsNodeUiSettings.staticToJson(instance.uiSettings),
-  'exportSettings': ExportSettings.staticToJson(instance.exportSettings),
-  'runtimeType': instance.$type,
-};
+  uiSettings: json['uiSettings'] == null
+      ? const DynamicInputsNodeUiSettings()
+      : DynamicInputsNodeUiSettings.fromJson(
+          json['uiSettings'] as Map<String, dynamic>,
+        ),
+  exportSettings: json['exportSettings'] == null
+      ? const ExportSettings()
+      : ExportSettings.fromJson(json['exportSettings'] as Map<String, dynamic>),
+  $type: json['runtimeType'] as String?,
+);
+
+Map<String, dynamic> _$DynamicInputsNodeToJson(DynamicInputsNode instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'templates': instance.templates.map((e) => e.toJson()).toList(),
+      'initialChildren':
+          _$JsonConverterToJson<List<dynamic>, List<WoFormNodeMixin>>(
+            instance.initialChildren,
+            const InputsListConverter().toJson,
+          ),
+      'uiSettings': instance.uiSettings.toJson(),
+      'exportSettings': instance.exportSettings.toJson(),
+      'runtimeType': instance.$type,
+    };
 
 Json? _$JsonConverterToJson<Json, Value>(
   Value? value,
@@ -121,8 +117,8 @@ Map<String, dynamic> _$InputsNodeToJson(InputsNode instance) =>
     <String, dynamic>{
       'id': instance.id,
       'children': const InputsListConverter().toJson(instance.children),
-      'uiSettings': InputsNodeUiSettings.staticToJson(instance.uiSettings),
-      'exportSettings': ExportSettings.staticToJson(instance.exportSettings),
+      'uiSettings': instance.uiSettings.toJson(),
+      'exportSettings': instance.exportSettings.toJson(),
       'runtimeType': instance.$type,
     };
 
@@ -208,7 +204,7 @@ Map<String, dynamic> _$RootNodeToJson(_RootNode instance) => <String, dynamic>{
   'id': instance.id,
   'initialValues': instance.initialValues,
   'children': const InputsListConverter().toJson(instance.children),
-  'uiSettings': WoFormUiSettings.staticToJson(instance.uiSettings),
-  'exportSettings': ExportSettings.staticToJson(instance.exportSettings),
+  'uiSettings': instance.uiSettings.toJson(),
+  'exportSettings': instance.exportSettings.toJson(),
   'hydratationId': instance.hydratationId,
 };

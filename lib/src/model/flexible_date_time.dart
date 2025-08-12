@@ -28,9 +28,6 @@ sealed class FlexibleDateTime with _$FlexibleDateTime {
   factory FlexibleDateTime.fromJson(Map<String, dynamic> json) =>
       _$FlexibleDateTimeFromJson(json);
 
-  static Map<String, dynamic>? staticToJson(FlexibleDateTime? object) =>
-      object?.toJson();
-
   // --
 
   DateTime resolve() {

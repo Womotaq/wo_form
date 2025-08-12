@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:wo_form/src/model/json_converter/dynamic_input_templates.dart';
 import 'package:wo_form/src/model/json_converter/input.dart';
 import 'package:wo_form/src/model/json_converter/inputs_list.dart';
 import 'package:wo_form/wo_form.dart';
@@ -19,9 +18,6 @@ mixin WoFormNodeMixin {
       return WoFormNode.fromJson(json);
     }
   }
-
-  static Map<String, dynamic> staticToJson(WoFormNodeMixin object) =>
-      object.toJson();
 
   Map<String, dynamic> toJson();
 
@@ -72,18 +68,13 @@ abstract class DynamicInputTemplate with _$DynamicInputTemplate {
   factory DynamicInputTemplate({
     @InputNullableConverter() WoFormNodeMixin? child,
     @notSerializable WoFormNodeMixin Function()? childBuilder,
-    @JsonKey(toJson: DynamicInputUiSettings.staticToJson)
-    @Default(DynamicInputUiSettings())
-    DynamicInputUiSettings uiSettings,
+    @Default(DynamicInputUiSettings()) DynamicInputUiSettings uiSettings,
   }) = _DynamicInputTemplate;
 
   const DynamicInputTemplate._();
 
   factory DynamicInputTemplate.fromJson(Map<String, dynamic> json) =>
       _$DynamicInputTemplateFromJson(json);
-
-  static Map<String, dynamic> staticToJson(DynamicInputTemplate object) =>
-      object.toJson();
 
   WoFormNodeMixin getChild() => child == null ? childBuilder!() : child!;
 }
@@ -92,7 +83,7 @@ abstract class DynamicInputTemplate with _$DynamicInputTemplate {
 sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
   const factory WoFormNode.conditionnal({
     required String id,
-    @JsonKey(toJson: Condition.staticToJson) required Condition condition,
+    required Condition condition,
     @InputConverter() required WoFormNodeMixin child,
     @Default(false) bool conditionIsInitiallyMet,
     @Default(true) bool clearChildrenWhenHidden,
@@ -100,27 +91,19 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
 
   const factory WoFormNode.dynamicInputs({
     required String id,
-    @DynamicInputTemplatesConverter()
-    @Default([])
-    List<DynamicInputTemplate> templates,
+    // @DynamicInputTemplatesConverter()
+    @Default([]) List<DynamicInputTemplate> templates,
     @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
-    @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson)
     @Default(DynamicInputsNodeUiSettings())
     DynamicInputsNodeUiSettings uiSettings,
-    @JsonKey(toJson: ExportSettings.staticToJson)
-    @Default(ExportSettings())
-    ExportSettings exportSettings,
+    @Default(ExportSettings()) ExportSettings exportSettings,
   }) = DynamicInputsNode;
 
   const factory WoFormNode.inputs({
     required String id,
     @InputsListConverter() @Default([]) List<WoFormNodeMixin> children,
-    @JsonKey(toJson: InputsNodeUiSettings.staticToJson)
-    @Default(InputsNodeUiSettings())
-    InputsNodeUiSettings uiSettings,
-    @JsonKey(toJson: ExportSettings.staticToJson)
-    @Default(ExportSettings())
-    ExportSettings exportSettings,
+    @Default(InputsNodeUiSettings()) InputsNodeUiSettings uiSettings,
+    @Default(ExportSettings()) ExportSettings exportSettings,
   }) = InputsNode;
 
   @Assert('builder != null', 'PathBuilderNode.builder cannot be null')
@@ -828,12 +811,8 @@ abstract class RootNode with _$RootNode, WoFormNodeMixin {
     @Default('#') String id,
     @Default({}) WoFormValues initialValues,
     @InputsListConverter() @Default([]) List<WoFormNodeMixin> children,
-    @JsonKey(toJson: WoFormUiSettings.staticToJson)
-    @Default(WoFormUiSettings())
-    WoFormUiSettings uiSettings,
-    @JsonKey(toJson: ExportSettings.staticToJson)
-    @Default(ExportSettings())
-    ExportSettings exportSettings,
+    @Default(WoFormUiSettings()) WoFormUiSettings uiSettings,
+    @Default(ExportSettings()) ExportSettings exportSettings,
 
     // LATER : issue, how to modify an in-production corrupted data ?
     // give a way to override it ?

@@ -169,7 +169,7 @@ mixin _$DateTimeInputUiSettings {
 /// selector with a flex value of 10,
 /// and label with a flex value of [labelFlex].
  int? get labelFlex;@notSerializable Widget? get prefixIcon; String? get addDateText; String? get addTimeText;/// If DateTimeInput.initialValue is null, this value will be used instead.
-@JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? get initialEditValue; DatePickerEntryMode? get initialDateEntryMode; DatePickerMode? get initialDatePickerMode; DateEditMode? get editMode;@notSerializable PickDateDef? get pickDate;@notSerializable PickTimeDef? get pickTime; TimePickerEntryMode? get initialTimeEntryMode;@notSerializable DateTimeFieldBuilderDef? get widgetBuilder;
+ FlexibleDateTime? get initialEditValue; DatePickerEntryMode? get initialDateEntryMode; DatePickerMode? get initialDatePickerMode; DateEditMode? get editMode;@notSerializable PickDateDef? get pickDate;@notSerializable PickTimeDef? get pickTime; TimePickerEntryMode? get initialTimeEntryMode;@notSerializable DateTimeFieldBuilderDef? get widgetBuilder;
 /// Create a copy of DateTimeInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -202,7 +202,7 @@ abstract mixin class $DateTimeInputUiSettingsCopyWith<$Res>  {
   factory $DateTimeInputUiSettingsCopyWith(DateTimeInputUiSettings value, $Res Function(DateTimeInputUiSettings) _then) = _$DateTimeInputUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String? dateFormat, String? timeFormat, String? labelText, String? helperText, String? hintText, int? labelFlex,@notSerializable Widget? prefixIcon, String? addDateText, String? addTimeText,@JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? initialEditValue, DatePickerEntryMode? initialDateEntryMode, DatePickerMode? initialDatePickerMode, DateEditMode? editMode,@notSerializable PickDateDef? pickDate,@notSerializable PickTimeDef? pickTime, TimePickerEntryMode? initialTimeEntryMode,@notSerializable DateTimeFieldBuilderDef? widgetBuilder
+ String? dateFormat, String? timeFormat, String? labelText, String? helperText, String? hintText, int? labelFlex,@notSerializable Widget? prefixIcon, String? addDateText, String? addTimeText, FlexibleDateTime? initialEditValue, DatePickerEntryMode? initialDateEntryMode, DatePickerMode? initialDatePickerMode, DateEditMode? editMode,@notSerializable PickDateDef? pickDate,@notSerializable PickTimeDef? pickTime, TimePickerEntryMode? initialTimeEntryMode,@notSerializable DateTimeFieldBuilderDef? widgetBuilder
 });
 
 
@@ -262,7 +262,7 @@ $FlexibleDateTimeCopyWith<$Res>? get initialEditValue {
 @JsonSerializable()
 
 class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
-  const _DateTimeInputUiSettings({this.dateFormat, this.timeFormat, this.labelText, this.helperText, this.hintText, this.labelFlex, @notSerializable this.prefixIcon, this.addDateText, this.addTimeText, @JsonKey(toJson: FlexibleDateTime.staticToJson) this.initialEditValue, this.initialDateEntryMode, this.initialDatePickerMode, this.editMode, @notSerializable this.pickDate, @notSerializable this.pickTime, this.initialTimeEntryMode, @notSerializable this.widgetBuilder}): super._();
+  const _DateTimeInputUiSettings({this.dateFormat, this.timeFormat, this.labelText, this.helperText, this.hintText, this.labelFlex, @notSerializable this.prefixIcon, this.addDateText, this.addTimeText, this.initialEditValue, this.initialDateEntryMode, this.initialDatePickerMode, this.editMode, @notSerializable this.pickDate, @notSerializable this.pickTime, this.initialTimeEntryMode, @notSerializable this.widgetBuilder}): super._();
   factory _DateTimeInputUiSettings.fromJson(Map<String, dynamic> json) => _$DateTimeInputUiSettingsFromJson(json);
 
 @override final  String? dateFormat;
@@ -279,7 +279,7 @@ class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
 @override final  String? addDateText;
 @override final  String? addTimeText;
 /// If DateTimeInput.initialValue is null, this value will be used instead.
-@override@JsonKey(toJson: FlexibleDateTime.staticToJson) final  FlexibleDateTime? initialEditValue;
+@override final  FlexibleDateTime? initialEditValue;
 @override final  DatePickerEntryMode? initialDateEntryMode;
 @override final  DatePickerMode? initialDatePickerMode;
 @override final  DateEditMode? editMode;
@@ -321,7 +321,7 @@ abstract mixin class _$DateTimeInputUiSettingsCopyWith<$Res> implements $DateTim
   factory _$DateTimeInputUiSettingsCopyWith(_DateTimeInputUiSettings value, $Res Function(_DateTimeInputUiSettings) _then) = __$DateTimeInputUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String? dateFormat, String? timeFormat, String? labelText, String? helperText, String? hintText, int? labelFlex,@notSerializable Widget? prefixIcon, String? addDateText, String? addTimeText,@JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? initialEditValue, DatePickerEntryMode? initialDateEntryMode, DatePickerMode? initialDatePickerMode, DateEditMode? editMode,@notSerializable PickDateDef? pickDate,@notSerializable PickTimeDef? pickTime, TimePickerEntryMode? initialTimeEntryMode,@notSerializable DateTimeFieldBuilderDef? widgetBuilder
+ String? dateFormat, String? timeFormat, String? labelText, String? helperText, String? hintText, int? labelFlex,@notSerializable Widget? prefixIcon, String? addDateText, String? addTimeText, FlexibleDateTime? initialEditValue, DatePickerEntryMode? initialDateEntryMode, DatePickerMode? initialDatePickerMode, DateEditMode? editMode,@notSerializable PickDateDef? pickDate,@notSerializable PickTimeDef? pickTime, TimePickerEntryMode? initialTimeEntryMode,@notSerializable DateTimeFieldBuilderDef? widgetBuilder
 });
 
 
@@ -1687,7 +1687,7 @@ as StringFieldBuilderDef?,
 /// @nodoc
 mixin _$WoFormUiSettings {
 
- String get titleText; WoFormTitlePosition get titlePosition;@notSerializable HeaderBuilderDef? get headerBuilder;@JsonKey(toJson: WoFormSubmitMode.staticToJson) WoFormSubmitMode get submitMode;@notSerializable SubmitButtonBuilderDef? get submitButtonBuilder;/// If true, after the form is successfully submitted, it will be locked.
+ String get titleText; WoFormTitlePosition get titlePosition;@notSerializable HeaderBuilderDef? get headerBuilder; WoFormSubmitMode get submitMode;@notSerializable SubmitButtonBuilderDef? get submitButtonBuilder;/// If true, after the form is successfully submitted, it will be locked.
  bool? get canModifySubmittedValues;/// By default, errors will only be shown after the user visited a node or
 /// tried to submit the form.
  ShowErrors get showErrors;/// Called when the users tries to quit the form, for exapmle by pressing
@@ -1727,7 +1727,7 @@ abstract mixin class $WoFormUiSettingsCopyWith<$Res>  {
   factory $WoFormUiSettingsCopyWith(WoFormUiSettings value, $Res Function(WoFormUiSettings) _then) = _$WoFormUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String titleText, WoFormTitlePosition titlePosition,@notSerializable HeaderBuilderDef? headerBuilder,@JsonKey(toJson: WoFormSubmitMode.staticToJson) WoFormSubmitMode submitMode,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder, bool? canModifySubmittedValues, ShowErrors showErrors,@notSerializable Future<bool?> Function(BuildContext context)? canQuit, WoFormThemeData? theme
+ String titleText, WoFormTitlePosition titlePosition,@notSerializable HeaderBuilderDef? headerBuilder, WoFormSubmitMode submitMode,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder, bool? canModifySubmittedValues, ShowErrors showErrors,@notSerializable Future<bool?> Function(BuildContext context)? canQuit, WoFormThemeData? theme
 });
 
 
@@ -1788,13 +1788,13 @@ $WoFormThemeDataCopyWith<$Res>? get theme {
 @JsonSerializable()
 
 class _WoFormUiSettings extends WoFormUiSettings {
-  const _WoFormUiSettings({this.titleText = '', this.titlePosition = WoFormTitlePosition.header, @notSerializable this.headerBuilder, @JsonKey(toJson: WoFormSubmitMode.staticToJson) this.submitMode = const WoFormSubmitMode.standard(), @notSerializable this.submitButtonBuilder, this.canModifySubmittedValues, this.showErrors = ShowErrors.progressively, @notSerializable this.canQuit, this.theme}): super._();
+  const _WoFormUiSettings({this.titleText = '', this.titlePosition = WoFormTitlePosition.header, @notSerializable this.headerBuilder, this.submitMode = const WoFormSubmitMode.standard(), @notSerializable this.submitButtonBuilder, this.canModifySubmittedValues, this.showErrors = ShowErrors.progressively, @notSerializable this.canQuit, this.theme}): super._();
   factory _WoFormUiSettings.fromJson(Map<String, dynamic> json) => _$WoFormUiSettingsFromJson(json);
 
 @override@JsonKey() final  String titleText;
 @override@JsonKey() final  WoFormTitlePosition titlePosition;
 @override@notSerializable final  HeaderBuilderDef? headerBuilder;
-@override@JsonKey(toJson: WoFormSubmitMode.staticToJson) final  WoFormSubmitMode submitMode;
+@override@JsonKey() final  WoFormSubmitMode submitMode;
 @override@notSerializable final  SubmitButtonBuilderDef? submitButtonBuilder;
 /// If true, after the form is successfully submitted, it will be locked.
 @override final  bool? canModifySubmittedValues;
@@ -1841,7 +1841,7 @@ abstract mixin class _$WoFormUiSettingsCopyWith<$Res> implements $WoFormUiSettin
   factory _$WoFormUiSettingsCopyWith(_WoFormUiSettings value, $Res Function(_WoFormUiSettings) _then) = __$WoFormUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String titleText, WoFormTitlePosition titlePosition,@notSerializable HeaderBuilderDef? headerBuilder,@JsonKey(toJson: WoFormSubmitMode.staticToJson) WoFormSubmitMode submitMode,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder, bool? canModifySubmittedValues, ShowErrors showErrors,@notSerializable Future<bool?> Function(BuildContext context)? canQuit, WoFormThemeData? theme
+ String titleText, WoFormTitlePosition titlePosition,@notSerializable HeaderBuilderDef? headerBuilder, WoFormSubmitMode submitMode,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder, bool? canModifySubmittedValues, ShowErrors showErrors,@notSerializable Future<bool?> Function(BuildContext context)? canQuit, WoFormThemeData? theme
 });
 
 

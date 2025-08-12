@@ -83,7 +83,7 @@ Map<String, dynamic> _$DateTimeInputUiSettingsToJson(
   'labelFlex': instance.labelFlex,
   'addDateText': instance.addDateText,
   'addTimeText': instance.addTimeText,
-  'initialEditValue': FlexibleDateTime.staticToJson(instance.initialEditValue),
+  'initialEditValue': instance.initialEditValue?.toJson(),
   'initialDateEntryMode':
       _$DatePickerEntryModeEnumMap[instance.initialDateEntryMode],
   'initialDatePickerMode':
@@ -376,10 +376,10 @@ Map<String, dynamic> _$WoFormUiSettingsToJson(_WoFormUiSettings instance) =>
     <String, dynamic>{
       'titleText': instance.titleText,
       'titlePosition': _$WoFormTitlePositionEnumMap[instance.titlePosition]!,
-      'submitMode': WoFormSubmitMode.staticToJson(instance.submitMode),
+      'submitMode': instance.submitMode.toJson(),
       'canModifySubmittedValues': instance.canModifySubmittedValues,
       'showErrors': _$ShowErrorsEnumMap[instance.showErrors]!,
-      'theme': instance.theme,
+      'theme': instance.theme?.toJson(),
     };
 
 const _$WoFormTitlePositionEnumMap = {

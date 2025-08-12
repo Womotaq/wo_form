@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$DynamicInputTemplate {
 
-@InputNullableConverter() WoFormNodeMixin? get child;@notSerializable WoFormNodeMixin Function()? get childBuilder;@JsonKey(toJson: DynamicInputUiSettings.staticToJson) DynamicInputUiSettings get uiSettings;
+@InputNullableConverter() WoFormNodeMixin? get child;@notSerializable WoFormNodeMixin Function()? get childBuilder; DynamicInputUiSettings get uiSettings;
 /// Create a copy of DynamicInputTemplate
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $DynamicInputTemplateCopyWith<$Res>  {
   factory $DynamicInputTemplateCopyWith(DynamicInputTemplate value, $Res Function(DynamicInputTemplate) _then) = _$DynamicInputTemplateCopyWithImpl;
 @useResult
 $Res call({
-@InputNullableConverter() WoFormNodeMixin? child,@notSerializable WoFormNodeMixin Function()? childBuilder,@JsonKey(toJson: DynamicInputUiSettings.staticToJson) DynamicInputUiSettings uiSettings
+@InputNullableConverter() WoFormNodeMixin? child,@notSerializable WoFormNodeMixin Function()? childBuilder, DynamicInputUiSettings uiSettings
 });
 
 
@@ -91,12 +91,12 @@ $DynamicInputUiSettingsCopyWith<$Res> get uiSettings {
 @JsonSerializable()
 
 class _DynamicInputTemplate extends DynamicInputTemplate {
-   _DynamicInputTemplate({@InputNullableConverter() this.child, @notSerializable this.childBuilder, @JsonKey(toJson: DynamicInputUiSettings.staticToJson) this.uiSettings = const DynamicInputUiSettings()}): assert((child == null) != (childBuilder == null), 'One of child or childBuilder must be specified'),super._();
+   _DynamicInputTemplate({@InputNullableConverter() this.child, @notSerializable this.childBuilder, this.uiSettings = const DynamicInputUiSettings()}): assert((child == null) != (childBuilder == null), 'One of child or childBuilder must be specified'),super._();
   factory _DynamicInputTemplate.fromJson(Map<String, dynamic> json) => _$DynamicInputTemplateFromJson(json);
 
 @override@InputNullableConverter() final  WoFormNodeMixin? child;
 @override@notSerializable final  WoFormNodeMixin Function()? childBuilder;
-@override@JsonKey(toJson: DynamicInputUiSettings.staticToJson) final  DynamicInputUiSettings uiSettings;
+@override@JsonKey() final  DynamicInputUiSettings uiSettings;
 
 /// Create a copy of DynamicInputTemplate
 /// with the given fields replaced by the non-null parameter values.
@@ -131,7 +131,7 @@ abstract mixin class _$DynamicInputTemplateCopyWith<$Res> implements $DynamicInp
   factory _$DynamicInputTemplateCopyWith(_DynamicInputTemplate value, $Res Function(_DynamicInputTemplate) _then) = __$DynamicInputTemplateCopyWithImpl;
 @override @useResult
 $Res call({
-@InputNullableConverter() WoFormNodeMixin? child,@notSerializable WoFormNodeMixin Function()? childBuilder,@JsonKey(toJson: DynamicInputUiSettings.staticToJson) DynamicInputUiSettings uiSettings
+@InputNullableConverter() WoFormNodeMixin? child,@notSerializable WoFormNodeMixin Function()? childBuilder, DynamicInputUiSettings uiSettings
 });
 
 
@@ -285,11 +285,11 @@ as String,
 @JsonSerializable()
 
 class ConditionnalNode extends WoFormNode {
-  const ConditionnalNode({required this.id, @JsonKey(toJson: Condition.staticToJson) required this.condition, @InputConverter() required this.child, this.conditionIsInitiallyMet = false, this.clearChildrenWhenHidden = true, final  String? $type}): $type = $type ?? 'conditionnal',super._();
+  const ConditionnalNode({required this.id, required this.condition, @InputConverter() required this.child, this.conditionIsInitiallyMet = false, this.clearChildrenWhenHidden = true, final  String? $type}): $type = $type ?? 'conditionnal',super._();
   factory ConditionnalNode.fromJson(Map<String, dynamic> json) => _$ConditionnalNodeFromJson(json);
 
 @override final  String id;
-@JsonKey(toJson: Condition.staticToJson) final  Condition condition;
+ final  Condition condition;
 @InputConverter() final  WoFormNodeMixin child;
 @JsonKey() final  bool conditionIsInitiallyMet;
 @JsonKey() final  bool clearChildrenWhenHidden;
@@ -331,7 +331,7 @@ abstract mixin class $ConditionnalNodeCopyWith<$Res> implements $WoFormNodeCopyW
   factory $ConditionnalNodeCopyWith(ConditionnalNode value, $Res Function(ConditionnalNode) _then) = _$ConditionnalNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id,@JsonKey(toJson: Condition.staticToJson) Condition condition,@InputConverter() WoFormNodeMixin child, bool conditionIsInitiallyMet, bool clearChildrenWhenHidden
+ String id, Condition condition,@InputConverter() WoFormNodeMixin child, bool conditionIsInitiallyMet, bool clearChildrenWhenHidden
 });
 
 
@@ -375,12 +375,14 @@ $ConditionCopyWith<$Res> get condition {
 @JsonSerializable()
 
 class DynamicInputsNode extends WoFormNode {
-  const DynamicInputsNode({required this.id, @DynamicInputTemplatesConverter() final  List<DynamicInputTemplate> templates = const [], @InputsListConverter() final  List<WoFormNodeMixin>? initialChildren, @JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson) this.uiSettings = const DynamicInputsNodeUiSettings(), @JsonKey(toJson: ExportSettings.staticToJson) this.exportSettings = const ExportSettings(), final  String? $type}): _templates = templates,_initialChildren = initialChildren,$type = $type ?? 'dynamicInputs',super._();
+  const DynamicInputsNode({required this.id, final  List<DynamicInputTemplate> templates = const [], @InputsListConverter() final  List<WoFormNodeMixin>? initialChildren, this.uiSettings = const DynamicInputsNodeUiSettings(), this.exportSettings = const ExportSettings(), final  String? $type}): _templates = templates,_initialChildren = initialChildren,$type = $type ?? 'dynamicInputs',super._();
   factory DynamicInputsNode.fromJson(Map<String, dynamic> json) => _$DynamicInputsNodeFromJson(json);
 
 @override final  String id;
+// @DynamicInputTemplatesConverter()
  final  List<DynamicInputTemplate> _templates;
-@JsonKey()@DynamicInputTemplatesConverter() List<DynamicInputTemplate> get templates {
+// @DynamicInputTemplatesConverter()
+@JsonKey() List<DynamicInputTemplate> get templates {
   if (_templates is EqualUnmodifiableListView) return _templates;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_templates);
@@ -395,8 +397,8 @@ class DynamicInputsNode extends WoFormNode {
   return EqualUnmodifiableListView(value);
 }
 
-@JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson) final  DynamicInputsNodeUiSettings uiSettings;
-@JsonKey(toJson: ExportSettings.staticToJson) final  ExportSettings exportSettings;
+@JsonKey() final  DynamicInputsNodeUiSettings uiSettings;
+@JsonKey() final  ExportSettings exportSettings;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -435,7 +437,7 @@ abstract mixin class $DynamicInputsNodeCopyWith<$Res> implements $WoFormNodeCopy
   factory $DynamicInputsNodeCopyWith(DynamicInputsNode value, $Res Function(DynamicInputsNode) _then) = _$DynamicInputsNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id,@DynamicInputTemplatesConverter() List<DynamicInputTemplate> templates,@InputsListConverter() List<WoFormNodeMixin>? initialChildren,@JsonKey(toJson: DynamicInputsNodeUiSettings.staticToJson) DynamicInputsNodeUiSettings uiSettings,@JsonKey(toJson: ExportSettings.staticToJson) ExportSettings exportSettings
+ String id, List<DynamicInputTemplate> templates,@InputsListConverter() List<WoFormNodeMixin>? initialChildren, DynamicInputsNodeUiSettings uiSettings, ExportSettings exportSettings
 });
 
 
@@ -488,7 +490,7 @@ $ExportSettingsCopyWith<$Res> get exportSettings {
 @JsonSerializable()
 
 class InputsNode extends WoFormNode {
-  const InputsNode({required this.id, @InputsListConverter() final  List<WoFormNodeMixin> children = const [], @JsonKey(toJson: InputsNodeUiSettings.staticToJson) this.uiSettings = const InputsNodeUiSettings(), @JsonKey(toJson: ExportSettings.staticToJson) this.exportSettings = const ExportSettings(), final  String? $type}): _children = children,$type = $type ?? 'inputs',super._();
+  const InputsNode({required this.id, @InputsListConverter() final  List<WoFormNodeMixin> children = const [], this.uiSettings = const InputsNodeUiSettings(), this.exportSettings = const ExportSettings(), final  String? $type}): _children = children,$type = $type ?? 'inputs',super._();
   factory InputsNode.fromJson(Map<String, dynamic> json) => _$InputsNodeFromJson(json);
 
 @override final  String id;
@@ -499,8 +501,8 @@ class InputsNode extends WoFormNode {
   return EqualUnmodifiableListView(_children);
 }
 
-@JsonKey(toJson: InputsNodeUiSettings.staticToJson) final  InputsNodeUiSettings uiSettings;
-@JsonKey(toJson: ExportSettings.staticToJson) final  ExportSettings exportSettings;
+@JsonKey() final  InputsNodeUiSettings uiSettings;
+@JsonKey() final  ExportSettings exportSettings;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -539,7 +541,7 @@ abstract mixin class $InputsNodeCopyWith<$Res> implements $WoFormNodeCopyWith<$R
   factory $InputsNodeCopyWith(InputsNode value, $Res Function(InputsNode) _then) = _$InputsNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id,@InputsListConverter() List<WoFormNodeMixin> children,@JsonKey(toJson: InputsNodeUiSettings.staticToJson) InputsNodeUiSettings uiSettings,@JsonKey(toJson: ExportSettings.staticToJson) ExportSettings exportSettings
+ String id,@InputsListConverter() List<WoFormNodeMixin> children, InputsNodeUiSettings uiSettings, ExportSettings exportSettings
 });
 
 
@@ -1135,7 +1137,7 @@ as bool,
 /// @nodoc
 mixin _$RootNode {
 
- String get id; WoFormValues get initialValues;@InputsListConverter() List<WoFormNodeMixin> get children;@JsonKey(toJson: WoFormUiSettings.staticToJson) WoFormUiSettings get uiSettings;@JsonKey(toJson: ExportSettings.staticToJson) ExportSettings get exportSettings;// LATER : issue, how to modify an in-production corrupted data ?
+ String get id; WoFormValues get initialValues;@InputsListConverter() List<WoFormNodeMixin> get children; WoFormUiSettings get uiSettings; ExportSettings get exportSettings;// LATER : issue, how to modify an in-production corrupted data ?
 // give a way to override it ?
 //
 /// If not empty, this form will be locally persistent, using HydratedCubit.
@@ -1172,7 +1174,7 @@ abstract mixin class $RootNodeCopyWith<$Res>  {
   factory $RootNodeCopyWith(RootNode value, $Res Function(RootNode) _then) = _$RootNodeCopyWithImpl;
 @useResult
 $Res call({
- String id, WoFormValues initialValues,@InputsListConverter() List<WoFormNodeMixin> children,@JsonKey(toJson: WoFormUiSettings.staticToJson) WoFormUiSettings uiSettings,@JsonKey(toJson: ExportSettings.staticToJson) ExportSettings exportSettings, String hydratationId
+ String id, WoFormValues initialValues,@InputsListConverter() List<WoFormNodeMixin> children, WoFormUiSettings uiSettings, ExportSettings exportSettings, String hydratationId
 });
 
 
@@ -1227,7 +1229,7 @@ $ExportSettingsCopyWith<$Res> get exportSettings {
 @JsonSerializable()
 
 class _RootNode extends RootNode {
-  const _RootNode({this.id = '#', final  WoFormValues initialValues = const {}, @InputsListConverter() final  List<WoFormNodeMixin> children = const [], @JsonKey(toJson: WoFormUiSettings.staticToJson) this.uiSettings = const WoFormUiSettings(), @JsonKey(toJson: ExportSettings.staticToJson) this.exportSettings = const ExportSettings(), this.hydratationId = ''}): _initialValues = initialValues,_children = children,super._();
+  const _RootNode({this.id = '#', final  WoFormValues initialValues = const {}, @InputsListConverter() final  List<WoFormNodeMixin> children = const [], this.uiSettings = const WoFormUiSettings(), this.exportSettings = const ExportSettings(), this.hydratationId = ''}): _initialValues = initialValues,_children = children,super._();
   factory _RootNode.fromJson(Map<String, dynamic> json) => _$RootNodeFromJson(json);
 
 @override@JsonKey() final  String id;
@@ -1245,8 +1247,8 @@ class _RootNode extends RootNode {
   return EqualUnmodifiableListView(_children);
 }
 
-@override@JsonKey(toJson: WoFormUiSettings.staticToJson) final  WoFormUiSettings uiSettings;
-@override@JsonKey(toJson: ExportSettings.staticToJson) final  ExportSettings exportSettings;
+@override@JsonKey() final  WoFormUiSettings uiSettings;
+@override@JsonKey() final  ExportSettings exportSettings;
 // LATER : issue, how to modify an in-production corrupted data ?
 // give a way to override it ?
 //
@@ -1286,7 +1288,7 @@ abstract mixin class _$RootNodeCopyWith<$Res> implements $RootNodeCopyWith<$Res>
   factory _$RootNodeCopyWith(_RootNode value, $Res Function(_RootNode) _then) = __$RootNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id, WoFormValues initialValues,@InputsListConverter() List<WoFormNodeMixin> children,@JsonKey(toJson: WoFormUiSettings.staticToJson) WoFormUiSettings uiSettings,@JsonKey(toJson: ExportSettings.staticToJson) ExportSettings exportSettings, String hydratationId
+ String id, WoFormValues initialValues,@InputsListConverter() List<WoFormNodeMixin> children, WoFormUiSettings uiSettings, ExportSettings exportSettings, String hydratationId
 });
 
 

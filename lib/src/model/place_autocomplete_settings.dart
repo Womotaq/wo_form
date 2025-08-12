@@ -22,8 +22,4 @@ abstract class PlaceAutocompleteSettings with _$PlaceAutocompleteSettings {
 
   factory PlaceAutocompleteSettings.fromJson(Map<String, dynamic> json) =>
       _$PlaceAutocompleteSettingsFromJson(json);
-
-  static Map<String, dynamic>? staticToJson(
-          PlaceAutocompleteSettings? object) =>
-      object?.toJson();
 }

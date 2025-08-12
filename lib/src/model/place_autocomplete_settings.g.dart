@@ -20,7 +20,7 @@ Map<String, dynamic> _$PlaceAutocompleteSettingsToJson(
   _PlaceAutocompleteSettings instance,
 ) => <String, dynamic>{
   'type': _$PlaceTypeEnumMap[instance.type],
-  'countries': instance.countries,
+  'countries': instance.countries?.map((e) => e.toJson()).toList(),
   'includeDetails': instance.includeDetails,
 };
 

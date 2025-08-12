@@ -5,7 +5,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:wo_form/src/model/json_converter/duration.dart';
-import 'package:wo_form/src/model/json_converter/media_list.dart';
 import 'package:wo_form/src/model/json_converter/xfile.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -26,8 +25,6 @@ sealed class Media with _$Media {
   const Media._();
 
   factory Media.fromJson(Map<String, dynamic> json) => _$MediaFromJson(json);
-
-  static Map<String, dynamic> staticToJson(Media object) => object.toJson();
 
   // --
 
@@ -97,7 +94,7 @@ abstract class MediaImportSettings with _$MediaImportSettings {
   // )
   const factory MediaImportSettings({
     required MediaType type,
-    @MediaImportMethodListConverter() required List<MediaImportMethod> methods,
+    required List<MediaImportMethod> methods,
     double? imageMaxHeight,
     double? imageMaxWidth,
     int? imageQuality,
@@ -110,9 +107,6 @@ abstract class MediaImportSettings with _$MediaImportSettings {
 
   factory MediaImportSettings.fromJson(Map<String, dynamic> json) =>
       _$MediaImportSettingsFromJson(json);
-
-  static Map<String, dynamic>? staticToJson(MediaImportSettings object) =>
-      object.toJson();
 }
 
 @freezed
@@ -133,9 +127,6 @@ sealed class MediaImportMethod with _$MediaImportMethod {
 
   factory MediaImportMethod.fromJson(Map<String, dynamic> json) =>
       _$MediaImportMethodFromJson(json);
-
-  static Map<String, dynamic> staticToJson(MediaImportMethod object) =>
-      object.toJson();
 }
 
 extension XFileX on XFile {

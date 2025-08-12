@@ -29,10 +29,6 @@ class SubmitButtonBuilder extends StatelessWidget {
 
     final submitMode = root.uiSettings.submitMode;
 
-    // final textIsNext =
-    //     submitMode is MultiStepSubmitMode &&
-    //     context.read<WoFormValuesCubit>().currentSubmitType == SubmitType.step;
-
     final submitButtonData = SubmitButtonData(
       text: submitMode.submitText ?? context.read<WoFormL10n?>()?.submit(),
       icon: submitMode.submitIcon,

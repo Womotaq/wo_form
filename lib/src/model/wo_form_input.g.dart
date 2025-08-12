@@ -23,7 +23,7 @@ Map<String, dynamic> _$BooleanInputToJson(BooleanInput instance) =>
       'id': instance.id,
       'initialValue': instance.initialValue,
       'isRequired': instance.isRequired,
-      'uiSettings': BooleanInputUiSettings.staticToJson(instance.uiSettings),
+      'uiSettings': instance.uiSettings.toJson(),
       'runtimeType': instance.$type,
     };
 
@@ -53,11 +53,11 @@ DateTimeInput _$DateTimeInputFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$DateTimeInputToJson(DateTimeInput instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'initialValue': FlexibleDateTime.staticToJson(instance.initialValue),
+      'initialValue': instance.initialValue?.toJson(),
       'isRequired': instance.isRequired,
-      'maxDate': FlexibleDateTime.staticToJson(instance.maxDate),
-      'minDate': FlexibleDateTime.staticToJson(instance.minDate),
-      'uiSettings': DateTimeInputUiSettings.staticToJson(instance.uiSettings),
+      'maxDate': instance.maxDate?.toJson(),
+      'minDate': instance.minDate?.toJson(),
+      'uiSettings': instance.uiSettings.toJson(),
       'runtimeType': instance.$type,
     };
 
@@ -94,7 +94,7 @@ Map<String, dynamic> _$DurationInputToJson(
   'startDatePath': instance.startDatePath,
   'maxDuration': const DurationNullableConverter().toJson(instance.maxDuration),
   'minDuration': const DurationNullableConverter().toJson(instance.minDuration),
-  'uiSettings': DurationInputUiSettings.staticToJson(instance.uiSettings),
+  'uiSettings': instance.uiSettings.toJson(),
   'runtimeType': instance.$type,
 };
 
@@ -105,10 +105,9 @@ MediaInput _$MediaInputFromJson(Map<String, dynamic> json) => MediaInput(
   ),
   maxCount: (json['maxCount'] as num?)?.toInt(),
   minCount: (json['minCount'] as num?)?.toInt() ?? 0,
-  initialValues: _$JsonConverterFromJson<List<dynamic>, List<Media>>(
-    json['initialValues'],
-    const MediaListConverter().fromJson,
-  ),
+  initialValues: (json['initialValues'] as List<dynamic>?)
+      ?.map((e) => Media.fromJson(e as Map<String, dynamic>))
+      .toList(),
   submitFormOnSelect: json['submitFormOnSelect'] as bool? ?? false,
   uploadPath: json['uploadPath'] as String?,
   uiSettings: json['uiSettings'] == null
@@ -119,32 +118,18 @@ MediaInput _$MediaInputFromJson(Map<String, dynamic> json) => MediaInput(
   $type: json['runtimeType'] as String?,
 );
 
-Map<String, dynamic> _$MediaInputToJson(
-  MediaInput instance,
-) => <String, dynamic>{
-  'id': instance.id,
-  'importSettings': MediaImportSettings.staticToJson(instance.importSettings),
-  'maxCount': instance.maxCount,
-  'minCount': instance.minCount,
-  'initialValues': _$JsonConverterToJson<List<dynamic>, List<Media>>(
-    instance.initialValues,
-    const MediaListConverter().toJson,
-  ),
-  'submitFormOnSelect': instance.submitFormOnSelect,
-  'uploadPath': instance.uploadPath,
-  'uiSettings': MediaInputUiSettings.staticToJson(instance.uiSettings),
-  'runtimeType': instance.$type,
-};
-
-Value? _$JsonConverterFromJson<Json, Value>(
-  Object? json,
-  Value? Function(Json json) fromJson,
-) => json == null ? null : fromJson(json as Json);
-
-Json? _$JsonConverterToJson<Json, Value>(
-  Value? value,
-  Json? Function(Value value) toJson,
-) => value == null ? null : toJson(value);
+Map<String, dynamic> _$MediaInputToJson(MediaInput instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'importSettings': instance.importSettings.toJson(),
+      'maxCount': instance.maxCount,
+      'minCount': instance.minCount,
+      'initialValues': instance.initialValues?.map((e) => e.toJson()).toList(),
+      'submitFormOnSelect': instance.submitFormOnSelect,
+      'uploadPath': instance.uploadPath,
+      'uiSettings': instance.uiSettings.toJson(),
+      'runtimeType': instance.$type,
+    };
 
 NumInput _$NumInputFromJson(Map<String, dynamic> json) => NumInput(
   id: json['id'] as String,
@@ -164,7 +149,7 @@ Map<String, dynamic> _$NumInputToJson(NumInput instance) => <String, dynamic>{
   'isRequired': instance.isRequired,
   'maxBound': instance.maxBound,
   'minBound': instance.minBound,
-  'uiSettings': instance.uiSettings,
+  'uiSettings': instance.uiSettings.toJson(),
   'runtimeType': instance.$type,
 };
 
@@ -207,7 +192,7 @@ Map<String, dynamic> _$SelectStringInputToJson(
   'idsOfAvailibleValues': instance.idsOfAvailibleValues,
   'submitFormOnSelect': instance.submitFormOnSelect,
   'uiSettings': _SelectInputUiSettingsX.staticToJsonString(instance.uiSettings),
-  'quizSettings': QuizSettings.staticToJson(instance.quizSettings),
+  'quizSettings': instance.quizSettings?.toJson(),
   'runtimeType': instance.$type,
 };
 
@@ -235,10 +220,8 @@ Map<String, dynamic> _$StringInputToJson(StringInput instance) =>
       'initialValue': instance.initialValue,
       'isRequired': instance.isRequired,
       'regexPattern': instance.regexPattern,
-      'placeAutocompleteSettings': PlaceAutocompleteSettings.staticToJson(
-        instance.placeAutocompleteSettings,
-      ),
-      'uiSettings': StringInputUiSettings.staticToJson(instance.uiSettings),
+      'placeAutocompleteSettings': instance.placeAutocompleteSettings?.toJson(),
+      'uiSettings': instance.uiSettings.toJson(),
       'runtimeType': instance.$type,
     };
 
@@ -280,6 +263,6 @@ Map<String, dynamic> _$SelectInputToJson<T>(
   'availibleValues': instance.availibleValues.map(toJsonT).toList(),
   'idsOfAvailibleValues': instance.idsOfAvailibleValues,
   'submitFormOnSelect': instance.submitFormOnSelect,
-  'uiSettings': instance.uiSettings,
-  'quizSettings': QuizSettings.staticToJson(instance.quizSettings),
+  'uiSettings': instance.uiSettings?.toJson(),
+  'quizSettings': instance.quizSettings?.toJson(),
 };

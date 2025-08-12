@@ -236,7 +236,7 @@ as XFile,
 /// @nodoc
 mixin _$MediaImportSettings implements DiagnosticableTreeMixin {
 
- MediaType get type;@MediaImportMethodListConverter() List<MediaImportMethod> get methods; double? get imageMaxHeight; double? get imageMaxWidth; int? get imageQuality; bool get imageRequestFullMetadata;@DurationNullableConverter() Duration? get videoMaxDuration; bool get preferFrontCamera;
+ MediaType get type; List<MediaImportMethod> get methods; double? get imageMaxHeight; double? get imageMaxWidth; int? get imageQuality; bool get imageRequestFullMetadata;@DurationNullableConverter() Duration? get videoMaxDuration; bool get preferFrontCamera;
 /// Create a copy of MediaImportSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -275,7 +275,7 @@ abstract mixin class $MediaImportSettingsCopyWith<$Res>  {
   factory $MediaImportSettingsCopyWith(MediaImportSettings value, $Res Function(MediaImportSettings) _then) = _$MediaImportSettingsCopyWithImpl;
 @useResult
 $Res call({
- MediaType type,@MediaImportMethodListConverter() List<MediaImportMethod> methods, double? imageMaxHeight, double? imageMaxWidth, int? imageQuality, bool imageRequestFullMetadata,@DurationNullableConverter() Duration? videoMaxDuration, bool preferFrontCamera
+ MediaType type, List<MediaImportMethod> methods, double? imageMaxHeight, double? imageMaxWidth, int? imageQuality, bool imageRequestFullMetadata,@DurationNullableConverter() Duration? videoMaxDuration, bool preferFrontCamera
 });
 
 
@@ -314,12 +314,12 @@ as bool,
 @JsonSerializable()
 
 class _MediaImportSettings extends MediaImportSettings with DiagnosticableTreeMixin {
-  const _MediaImportSettings({required this.type, @MediaImportMethodListConverter() required final  List<MediaImportMethod> methods, this.imageMaxHeight, this.imageMaxWidth, this.imageQuality, this.imageRequestFullMetadata = true, @DurationNullableConverter() this.videoMaxDuration, this.preferFrontCamera = false}): _methods = methods,super._();
+  const _MediaImportSettings({required this.type, required final  List<MediaImportMethod> methods, this.imageMaxHeight, this.imageMaxWidth, this.imageQuality, this.imageRequestFullMetadata = true, @DurationNullableConverter() this.videoMaxDuration, this.preferFrontCamera = false}): _methods = methods,super._();
   factory _MediaImportSettings.fromJson(Map<String, dynamic> json) => _$MediaImportSettingsFromJson(json);
 
 @override final  MediaType type;
  final  List<MediaImportMethod> _methods;
-@override@MediaImportMethodListConverter() List<MediaImportMethod> get methods {
+@override List<MediaImportMethod> get methods {
   if (_methods is EqualUnmodifiableListView) return _methods;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_methods);
@@ -371,7 +371,7 @@ abstract mixin class _$MediaImportSettingsCopyWith<$Res> implements $MediaImport
   factory _$MediaImportSettingsCopyWith(_MediaImportSettings value, $Res Function(_MediaImportSettings) _then) = __$MediaImportSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- MediaType type,@MediaImportMethodListConverter() List<MediaImportMethod> methods, double? imageMaxHeight, double? imageMaxWidth, int? imageQuality, bool imageRequestFullMetadata,@DurationNullableConverter() Duration? videoMaxDuration, bool preferFrontCamera
+ MediaType type, List<MediaImportMethod> methods, double? imageMaxHeight, double? imageMaxWidth, int? imageQuality, bool imageRequestFullMetadata,@DurationNullableConverter() Duration? videoMaxDuration, bool preferFrontCamera
 });
 
 

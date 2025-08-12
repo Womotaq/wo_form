@@ -29,9 +29,6 @@ abstract class BooleanInputUiSettings with _$BooleanInputUiSettings {
   factory BooleanInputUiSettings.fromJson(Map<String, dynamic> json) =>
       _$BooleanInputUiSettingsFromJson(json);
 
-  static Map<String, dynamic> staticToJson(BooleanInputUiSettings object) =>
-      object.toJson();
-
   BooleanInputUiSettings merge(BooleanInputUiSettings? other) => other == null
       ? this
       : BooleanInputUiSettings(
@@ -88,7 +85,6 @@ abstract class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
     String? addTimeText,
 
     /// If DateTimeInput.initialValue is null, this value will be used instead.
-    @JsonKey(toJson: FlexibleDateTime.staticToJson)
     FlexibleDateTime? initialEditValue,
     DatePickerEntryMode? initialDateEntryMode,
     DatePickerMode? initialDatePickerMode,
@@ -103,9 +99,6 @@ abstract class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
 
   factory DateTimeInputUiSettings.fromJson(Map<String, dynamic> json) =>
       _$DateTimeInputUiSettingsFromJson(json);
-
-  static Map<String, dynamic> staticToJson(DateTimeInputUiSettings object) =>
-      object.toJson();
 
   DateTimeInputUiSettings merge(DateTimeInputUiSettings? other) => other == null
       ? this
@@ -186,9 +179,6 @@ abstract class DurationInputUiSettings with _$DurationInputUiSettings {
   factory DurationInputUiSettings.fromJson(Map<String, dynamic> json) =>
       _$DurationInputUiSettingsFromJson(json);
 
-  static Map<String, dynamic> staticToJson(DurationInputUiSettings object) =>
-      object.toJson();
-
   DurationInputUiSettings merge(DurationInputUiSettings? other) => other == null
       ? this
       : DurationInputUiSettings(
@@ -241,10 +231,6 @@ abstract class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
   factory DynamicInputsNodeUiSettings.fromJson(Map<String, dynamic> json) =>
       _$DynamicInputsNodeUiSettingsFromJson(json);
 
-  static Map<String, dynamic> staticToJson(
-    DynamicInputsNodeUiSettings object,
-  ) => object.toJson();
-
   DynamicInputsNodeUiSettings merge(DynamicInputsNodeUiSettings? other) =>
       other == null
       ? this
@@ -269,10 +255,6 @@ abstract class DynamicInputUiSettings with _$DynamicInputUiSettings {
 
   factory DynamicInputUiSettings.fromJson(Map<String, dynamic> json) =>
       _$DynamicInputUiSettingsFromJson(json);
-
-  static Map<String, dynamic> staticToJson(
-    DynamicInputUiSettings object,
-  ) => object.toJson();
 
   DynamicInputUiSettings merge(DynamicInputUiSettings? other) => other == null
       ? this
@@ -318,9 +300,6 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
   factory InputsNodeUiSettings.fromJson(Map<String, dynamic> json) =>
       _$InputsNodeUiSettingsFromJson(json);
 
-  static Map<String, dynamic> staticToJson(InputsNodeUiSettings object) =>
-      object.toJson();
-
   InputsNodeUiSettings merge(InputsNodeUiSettings? other) => other == null
       ? this
       : InputsNodeUiSettings(
@@ -355,9 +334,6 @@ abstract class MediaInputUiSettings with _$MediaInputUiSettings {
   factory MediaInputUiSettings.fromJson(Map<String, dynamic> json) =>
       _$MediaInputUiSettingsFromJson(json);
 
-  static Map<String, dynamic> staticToJson(MediaInputUiSettings object) =>
-      object.toJson();
-
   MediaInputUiSettings merge(MediaInputUiSettings? other) => other == null
       ? this
       : MediaInputUiSettings(
@@ -384,9 +360,6 @@ abstract class NumInputUiSettings with _$NumInputUiSettings {
 
   factory NumInputUiSettings.fromJson(Map<String, dynamic> json) =>
       _$NumInputUiSettingsFromJson(json);
-
-  static Map<String, dynamic> staticToJson(NumInputUiSettings object) =>
-      object.toJson();
 
   NumInputUiSettings merge(NumInputUiSettings? other) => other == null
       ? this
@@ -578,9 +551,6 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
   factory StringInputUiSettings.fromJson(Map<String, dynamic> json) =>
       _$StringInputUiSettingsFromJson(json);
 
-  static Map<String, dynamic> staticToJson(StringInputUiSettings object) =>
-      object.toJson();
-
   StringInputUiSettings merge(StringInputUiSettings? other) => other == null
       ? this
       : StringInputUiSettings(
@@ -614,9 +584,7 @@ abstract class WoFormUiSettings with _$WoFormUiSettings {
     @Default('') String titleText,
     @Default(WoFormTitlePosition.header) WoFormTitlePosition titlePosition,
     @notSerializable HeaderBuilderDef? headerBuilder,
-    @JsonKey(toJson: WoFormSubmitMode.staticToJson)
-    @Default(WoFormSubmitMode.standard())
-    WoFormSubmitMode submitMode,
+    @Default(WoFormSubmitMode.standard()) WoFormSubmitMode submitMode,
     @notSerializable SubmitButtonBuilderDef? submitButtonBuilder,
 
     /// If true, after the form is successfully submitted, it will be locked.
@@ -639,9 +607,6 @@ abstract class WoFormUiSettings with _$WoFormUiSettings {
 
   factory WoFormUiSettings.fromJson(Map<String, dynamic> json) =>
       _$WoFormUiSettingsFromJson(json);
-
-  static Map<String, dynamic> staticToJson(WoFormUiSettings object) =>
-      object.toJson();
 }
 
 enum SubmitButtonPosition { body, appBar, bottomBar, floating }
@@ -693,9 +658,6 @@ sealed class WoFormSubmitMode with _$WoFormSubmitMode {
 
   factory WoFormSubmitMode.fromJson(Map<String, dynamic> json) =>
       _$WoFormSubmitModeFromJson(json);
-
-  static Map<String, dynamic> staticToJson(WoFormSubmitMode object) =>
-      object.toJson();
 
   // --
 

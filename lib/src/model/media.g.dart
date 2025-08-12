@@ -27,9 +27,9 @@ Map<String, dynamic> _$MediaFileToJson(MediaFile instance) => <String, dynamic>{
 _MediaImportSettings _$MediaImportSettingsFromJson(Map<String, dynamic> json) =>
     _MediaImportSettings(
       type: $enumDecode(_$MediaTypeEnumMap, json['type']),
-      methods: const MediaImportMethodListConverter().fromJson(
-        json['methods'] as List,
-      ),
+      methods: (json['methods'] as List<dynamic>)
+          .map((e) => MediaImportMethod.fromJson(e as Map<String, dynamic>))
+          .toList(),
       imageMaxHeight: (json['imageMaxHeight'] as num?)?.toDouble(),
       imageMaxWidth: (json['imageMaxWidth'] as num?)?.toDouble(),
       imageQuality: (json['imageQuality'] as num?)?.toInt(),
@@ -45,7 +45,7 @@ Map<String, dynamic> _$MediaImportSettingsToJson(
   _MediaImportSettings instance,
 ) => <String, dynamic>{
   'type': _$MediaTypeEnumMap[instance.type]!,
-  'methods': const MediaImportMethodListConverter().toJson(instance.methods),
+  'methods': instance.methods.map((e) => e.toJson()).toList(),
   'imageMaxHeight': instance.imageMaxHeight,
   'imageMaxWidth': instance.imageMaxWidth,
   'imageQuality': instance.imageQuality,

@@ -452,7 +452,7 @@ WoFormInput _$WoFormInputFromJson(
 /// @nodoc
 mixin _$WoFormInput {
 
- String get id;@notSerializable WoFormInputError? Function(Never, String)? get getCustomError;@JsonKey(toJson: BooleanInputUiSettings.staticToJson)@JsonKey(toJson: DateTimeInputUiSettings.staticToJson)@JsonKey(toJson: DurationInputUiSettings.staticToJson)@JsonKey(toJson: MediaInputUiSettings.staticToJson)@JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)@JsonKey(toJson: StringInputUiSettings.staticToJson) Object get uiSettings;
+ String get id;@notSerializable WoFormInputError? Function(Never, String)? get getCustomError;@JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString) Object get uiSettings;
 /// Create a copy of WoFormInput
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -517,7 +517,7 @@ as String,
 @JsonSerializable()
 
 class BooleanInput extends WoFormInput {
-  const BooleanInput({required this.id, this.initialValue, this.isRequired = false, @notSerializable this.getCustomError, @notSerializable this.onValueChanged, @JsonKey(toJson: BooleanInputUiSettings.staticToJson) this.uiSettings = const BooleanInputUiSettings(), final  String? $type}): $type = $type ?? 'boolean',super._();
+  const BooleanInput({required this.id, this.initialValue, this.isRequired = false, @notSerializable this.getCustomError, @notSerializable this.onValueChanged, this.uiSettings = const BooleanInputUiSettings(), final  String? $type}): $type = $type ?? 'boolean',super._();
   factory BooleanInput.fromJson(Map<String, dynamic> json) => _$BooleanInputFromJson(json);
 
 @override final  String id;
@@ -526,7 +526,7 @@ class BooleanInput extends WoFormInput {
 @override@notSerializable final  GetCustomErrorDef<bool>? getCustomError;
 /// An optionnal callback when the value changed
 @notSerializable final  void Function(bool? value)? onValueChanged;
-@override@JsonKey(toJson: BooleanInputUiSettings.staticToJson) final  BooleanInputUiSettings uiSettings;
+@override@JsonKey() final  BooleanInputUiSettings uiSettings;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -565,7 +565,7 @@ abstract mixin class $BooleanInputCopyWith<$Res> implements $WoFormInputCopyWith
   factory $BooleanInputCopyWith(BooleanInput value, $Res Function(BooleanInput) _then) = _$BooleanInputCopyWithImpl;
 @override @useResult
 $Res call({
- String id, bool? initialValue, bool isRequired,@notSerializable GetCustomErrorDef<bool>? getCustomError,@notSerializable void Function(bool? value)? onValueChanged,@JsonKey(toJson: BooleanInputUiSettings.staticToJson) BooleanInputUiSettings uiSettings
+ String id, bool? initialValue, bool isRequired,@notSerializable GetCustomErrorDef<bool>? getCustomError,@notSerializable void Function(bool? value)? onValueChanged, BooleanInputUiSettings uiSettings
 });
 
 
@@ -610,16 +610,16 @@ $BooleanInputUiSettingsCopyWith<$Res> get uiSettings {
 @JsonSerializable()
 
 class DateTimeInput extends WoFormInput {
-  const DateTimeInput({required this.id, @JsonKey(toJson: FlexibleDateTime.staticToJson) this.initialValue, this.isRequired = false, @JsonKey(toJson: FlexibleDateTime.staticToJson) this.maxDate, @JsonKey(toJson: FlexibleDateTime.staticToJson) this.minDate, @notSerializable this.getCustomError, @JsonKey(toJson: DateTimeInputUiSettings.staticToJson) this.uiSettings = const DateTimeInputUiSettings(), final  String? $type}): $type = $type ?? 'dateTime',super._();
+  const DateTimeInput({required this.id, this.initialValue, this.isRequired = false, this.maxDate, this.minDate, @notSerializable this.getCustomError, this.uiSettings = const DateTimeInputUiSettings(), final  String? $type}): $type = $type ?? 'dateTime',super._();
   factory DateTimeInput.fromJson(Map<String, dynamic> json) => _$DateTimeInputFromJson(json);
 
 @override final  String id;
-@JsonKey(toJson: FlexibleDateTime.staticToJson) final  FlexibleDateTime? initialValue;
+ final  FlexibleDateTime? initialValue;
 @JsonKey() final  bool isRequired;
-@JsonKey(toJson: FlexibleDateTime.staticToJson) final  FlexibleDateTime? maxDate;
-@JsonKey(toJson: FlexibleDateTime.staticToJson) final  FlexibleDateTime? minDate;
+ final  FlexibleDateTime? maxDate;
+ final  FlexibleDateTime? minDate;
 @override@notSerializable final  GetCustomErrorDef<DateTime>? getCustomError;
-@override@JsonKey(toJson: DateTimeInputUiSettings.staticToJson) final  DateTimeInputUiSettings uiSettings;
+@override@JsonKey() final  DateTimeInputUiSettings uiSettings;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -658,7 +658,7 @@ abstract mixin class $DateTimeInputCopyWith<$Res> implements $WoFormInputCopyWit
   factory $DateTimeInputCopyWith(DateTimeInput value, $Res Function(DateTimeInput) _then) = _$DateTimeInputCopyWithImpl;
 @override @useResult
 $Res call({
- String id,@JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? initialValue, bool isRequired,@JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? maxDate,@JsonKey(toJson: FlexibleDateTime.staticToJson) FlexibleDateTime? minDate,@notSerializable GetCustomErrorDef<DateTime>? getCustomError,@JsonKey(toJson: DateTimeInputUiSettings.staticToJson) DateTimeInputUiSettings uiSettings
+ String id, FlexibleDateTime? initialValue, bool isRequired, FlexibleDateTime? maxDate, FlexibleDateTime? minDate,@notSerializable GetCustomErrorDef<DateTime>? getCustomError, DateTimeInputUiSettings uiSettings
 });
 
 
@@ -740,7 +740,7 @@ $DateTimeInputUiSettingsCopyWith<$Res> get uiSettings {
 @JsonSerializable()
 
 class DurationInput extends WoFormInput {
-  const DurationInput({required this.id, @DurationNullableConverter() this.initialValue, this.isRequired = false, this.startDatePath, @DurationNullableConverter() this.maxDuration, @DurationNullableConverter() this.minDuration, @notSerializable this.getCustomError, @JsonKey(toJson: DurationInputUiSettings.staticToJson) this.uiSettings = const DurationInputUiSettings(), final  String? $type}): $type = $type ?? 'duration',super._();
+  const DurationInput({required this.id, @DurationNullableConverter() this.initialValue, this.isRequired = false, this.startDatePath, @DurationNullableConverter() this.maxDuration, @DurationNullableConverter() this.minDuration, @notSerializable this.getCustomError, this.uiSettings = const DurationInputUiSettings(), final  String? $type}): $type = $type ?? 'duration',super._();
   factory DurationInput.fromJson(Map<String, dynamic> json) => _$DurationInputFromJson(json);
 
 @override final  String id;
@@ -753,7 +753,7 @@ class DurationInput extends WoFormInput {
 @DurationNullableConverter() final  Duration? maxDuration;
 @DurationNullableConverter() final  Duration? minDuration;
 @override@notSerializable final  GetCustomErrorDef<Duration>? getCustomError;
-@override@JsonKey(toJson: DurationInputUiSettings.staticToJson) final  DurationInputUiSettings uiSettings;
+@override@JsonKey() final  DurationInputUiSettings uiSettings;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -792,7 +792,7 @@ abstract mixin class $DurationInputCopyWith<$Res> implements $WoFormInputCopyWit
   factory $DurationInputCopyWith(DurationInput value, $Res Function(DurationInput) _then) = _$DurationInputCopyWithImpl;
 @override @useResult
 $Res call({
- String id,@DurationNullableConverter() Duration? initialValue, bool isRequired, String? startDatePath,@DurationNullableConverter() Duration? maxDuration,@DurationNullableConverter() Duration? minDuration,@notSerializable GetCustomErrorDef<Duration>? getCustomError,@JsonKey(toJson: DurationInputUiSettings.staticToJson) DurationInputUiSettings uiSettings
+ String id,@DurationNullableConverter() Duration? initialValue, bool isRequired, String? startDatePath,@DurationNullableConverter() Duration? maxDuration,@DurationNullableConverter() Duration? minDuration,@notSerializable GetCustomErrorDef<Duration>? getCustomError, DurationInputUiSettings uiSettings
 });
 
 
@@ -839,15 +839,15 @@ $DurationInputUiSettingsCopyWith<$Res> get uiSettings {
 @JsonSerializable()
 
 class MediaInput extends WoFormInput {
-  const MediaInput({required this.id, @JsonKey(toJson: MediaImportSettings.staticToJson) required this.importSettings, required this.maxCount, this.minCount = 0, @MediaListConverter() final  List<Media>? initialValues, @notSerializable this.getCustomError, @notSerializable this.onValueChanged, this.submitFormOnSelect = false, this.uploadPath, @JsonKey(toJson: MediaInputUiSettings.staticToJson) this.uiSettings = const MediaInputUiSettings(), final  String? $type}): assert(maxCount == null || minCount <= maxCount, 'maxCount must be higher or equal to minCount'),_initialValues = initialValues,$type = $type ?? 'media',super._();
+  const MediaInput({required this.id, required this.importSettings, required this.maxCount, this.minCount = 0, final  List<Media>? initialValues, @notSerializable this.getCustomError, @notSerializable this.onValueChanged, this.submitFormOnSelect = false, this.uploadPath, this.uiSettings = const MediaInputUiSettings(), final  String? $type}): assert(maxCount == null || minCount <= maxCount, 'maxCount must be higher or equal to minCount'),_initialValues = initialValues,$type = $type ?? 'media',super._();
   factory MediaInput.fromJson(Map<String, dynamic> json) => _$MediaInputFromJson(json);
 
 @override final  String id;
-@JsonKey(toJson: MediaImportSettings.staticToJson) final  MediaImportSettings importSettings;
+ final  MediaImportSettings importSettings;
  final  int? maxCount;
 @JsonKey() final  int minCount;
  final  List<Media>? _initialValues;
-@MediaListConverter() List<Media>? get initialValues {
+ List<Media>? get initialValues {
   final value = _initialValues;
   if (value == null) return null;
   if (_initialValues is EqualUnmodifiableListView) return _initialValues;
@@ -862,7 +862,7 @@ class MediaInput extends WoFormInput {
 @JsonKey() final  bool submitFormOnSelect;
 /// Required if you use MediaInput.export()
  final  String? uploadPath;
-@override@JsonKey(toJson: MediaInputUiSettings.staticToJson) final  MediaInputUiSettings uiSettings;
+@override@JsonKey() final  MediaInputUiSettings uiSettings;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -901,7 +901,7 @@ abstract mixin class $MediaInputCopyWith<$Res> implements $WoFormInputCopyWith<$
   factory $MediaInputCopyWith(MediaInput value, $Res Function(MediaInput) _then) = _$MediaInputCopyWithImpl;
 @override @useResult
 $Res call({
- String id,@JsonKey(toJson: MediaImportSettings.staticToJson) MediaImportSettings importSettings, int? maxCount, int minCount,@MediaListConverter() List<Media>? initialValues,@notSerializable GetCustomErrorForListDef<Media>? getCustomError,@notSerializable void Function(List<Media>? value)? onValueChanged, bool submitFormOnSelect, String? uploadPath,@JsonKey(toJson: MediaInputUiSettings.staticToJson) MediaInputUiSettings uiSettings
+ String id, MediaImportSettings importSettings, int? maxCount, int minCount, List<Media>? initialValues,@notSerializable GetCustomErrorForListDef<Media>? getCustomError,@notSerializable void Function(List<Media>? value)? onValueChanged, bool submitFormOnSelect, String? uploadPath, MediaInputUiSettings uiSettings
 });
 
 
@@ -1056,7 +1056,7 @@ $NumInputUiSettingsCopyWith<$Res> get uiSettings {
 @JsonSerializable()
 
 class SelectStringInput extends WoFormInput {
-  const SelectStringInput({required this.id, required this.maxCount, this.minCount = 0, final  List<String>? initialValues, final  List<String> availibleValues = const [], final  List<String>? idsOfAvailibleValues, @notSerializable this.getCustomError, @notSerializable this.onValueChanged, this.submitFormOnSelect = false, @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString) this.uiSettings = const SelectInputUiSettings<String>(), @JsonKey(toJson: QuizSettings.staticToJson) this.quizSettings, final  String? $type}): assert(maxCount == null || minCount <= maxCount, 'maxCount must be higher or equal to minCount'),_initialValues = initialValues,_availibleValues = availibleValues,_idsOfAvailibleValues = idsOfAvailibleValues,$type = $type ?? 'selectString',super._();
+  const SelectStringInput({required this.id, required this.maxCount, this.minCount = 0, final  List<String>? initialValues, final  List<String> availibleValues = const [], final  List<String>? idsOfAvailibleValues, @notSerializable this.getCustomError, @notSerializable this.onValueChanged, this.submitFormOnSelect = false, @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString) this.uiSettings = const SelectInputUiSettings<String>(), this.quizSettings, final  String? $type}): assert(maxCount == null || minCount <= maxCount, 'maxCount must be higher or equal to minCount'),_initialValues = initialValues,_availibleValues = availibleValues,_idsOfAvailibleValues = idsOfAvailibleValues,$type = $type ?? 'selectString',super._();
   factory SelectStringInput.fromJson(Map<String, dynamic> json) => _$SelectStringInputFromJson(json);
 
 @override final  String id;
@@ -1106,7 +1106,7 @@ class SelectStringInput extends WoFormInput {
 @JsonKey() final  bool submitFormOnSelect;
 @override@JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString) final  SelectInputUiSettings<String> uiSettings;
 // The correct answer is the index of availibleValues
-@JsonKey(toJson: QuizSettings.staticToJson) final  QuizSettings? quizSettings;
+ final  QuizSettings? quizSettings;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -1145,7 +1145,7 @@ abstract mixin class $SelectStringInputCopyWith<$Res> implements $WoFormInputCop
   factory $SelectStringInputCopyWith(SelectStringInput value, $Res Function(SelectStringInput) _then) = _$SelectStringInputCopyWithImpl;
 @override @useResult
 $Res call({
- String id, int? maxCount, int minCount, List<String>? initialValues, List<String> availibleValues, List<String>? idsOfAvailibleValues,@notSerializable GetCustomErrorForListDef<String>? getCustomError,@notSerializable void Function(List<String>? value)? onValueChanged, bool submitFormOnSelect,@JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString) SelectInputUiSettings<String> uiSettings,@JsonKey(toJson: QuizSettings.staticToJson) QuizSettings? quizSettings
+ String id, int? maxCount, int minCount, List<String>? initialValues, List<String> availibleValues, List<String>? idsOfAvailibleValues,@notSerializable GetCustomErrorForListDef<String>? getCustomError,@notSerializable void Function(List<String>? value)? onValueChanged, bool submitFormOnSelect,@JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString) SelectInputUiSettings<String> uiSettings, QuizSettings? quizSettings
 });
 
 
@@ -1207,7 +1207,7 @@ $QuizSettingsCopyWith<$Res>? get quizSettings {
 @JsonSerializable()
 
 class StringInput extends WoFormInput {
-  const StringInput({required this.id, this.initialValue, this.isRequired = false, this.regexPattern, @JsonKey(toJson: PlaceAutocompleteSettings.staticToJson) this.placeAutocompleteSettings, @notSerializable this.getCustomError, @JsonKey(toJson: StringInputUiSettings.staticToJson) this.uiSettings = const StringInputUiSettings(), final  String? $type}): $type = $type ?? 'string',super._();
+  const StringInput({required this.id, this.initialValue, this.isRequired = false, this.regexPattern, this.placeAutocompleteSettings, @notSerializable this.getCustomError, this.uiSettings = const StringInputUiSettings(), final  String? $type}): $type = $type ?? 'string',super._();
   factory StringInput.fromJson(Map<String, dynamic> json) => _$StringInputFromJson(json);
 
 @override final  String id;
@@ -1215,9 +1215,9 @@ class StringInput extends WoFormInput {
 @JsonKey() final  bool isRequired;
  final  String? regexPattern;
 /// If set, the field will be a place autocomplete.
-@JsonKey(toJson: PlaceAutocompleteSettings.staticToJson) final  PlaceAutocompleteSettings? placeAutocompleteSettings;
+ final  PlaceAutocompleteSettings? placeAutocompleteSettings;
 @override@notSerializable final  GetCustomErrorDef<String>? getCustomError;
-@override@JsonKey(toJson: StringInputUiSettings.staticToJson) final  StringInputUiSettings uiSettings;
+@override@JsonKey() final  StringInputUiSettings uiSettings;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -1256,7 +1256,7 @@ abstract mixin class $StringInputCopyWith<$Res> implements $WoFormInputCopyWith<
   factory $StringInputCopyWith(StringInput value, $Res Function(StringInput) _then) = _$StringInputCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String? initialValue, bool isRequired, String? regexPattern,@JsonKey(toJson: PlaceAutocompleteSettings.staticToJson) PlaceAutocompleteSettings? placeAutocompleteSettings,@notSerializable GetCustomErrorDef<String>? getCustomError,@JsonKey(toJson: StringInputUiSettings.staticToJson) StringInputUiSettings uiSettings
+ String id, String? initialValue, bool isRequired, String? regexPattern, PlaceAutocompleteSettings? placeAutocompleteSettings,@notSerializable GetCustomErrorDef<String>? getCustomError, StringInputUiSettings uiSettings
 });
 
 
@@ -1322,7 +1322,7 @@ mixin _$SelectInput<T> {
 /// will be the id of the selected value.
  List<String>? get idsOfAvailibleValues;/// An optionnal callback when the value changed
 @notSerializable void Function(List<T>? value)? get onValueChanged;@notSerializable GetCustomErrorForListDef<T>? get getCustomError;/// Only applies if maxCount is 1
- bool get submitFormOnSelect; SelectInputUiSettings<T>? get uiSettings;@JsonKey(toJson: QuizSettings.staticToJson) QuizSettings? get quizSettings;/// The following fields are mostly usefull for hydrataion
+ bool get submitFormOnSelect; SelectInputUiSettings<T>? get uiSettings; QuizSettings? get quizSettings;/// The following fields are mostly usefull for hydrataion
 ///
 /// Ex :
 /// SelectInput<TimeControl>(
@@ -1336,6 +1336,7 @@ mixin _$SelectInput<T> {
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $SelectInputCopyWith<T, SelectInput<T>> get copyWith => _$SelectInputCopyWithImpl<T, SelectInput<T>>(this as SelectInput<T>, _$identity);
+
 
 @override
 bool operator ==(Object other) {
@@ -1359,7 +1360,7 @@ abstract mixin class $SelectInputCopyWith<T,$Res>  {
   factory $SelectInputCopyWith(SelectInput<T> value, $Res Function(SelectInput<T>) _then) = _$SelectInputCopyWithImpl;
 @useResult
 $Res call({
- String id, int? maxCount, int minCount, List<T>? initialValues, List<T> availibleValues, List<String>? idsOfAvailibleValues,@notSerializable void Function(List<T>? value)? onValueChanged,@notSerializable GetCustomErrorForListDef<T>? getCustomError, bool submitFormOnSelect, SelectInputUiSettings<T>? uiSettings,@JsonKey(toJson: QuizSettings.staticToJson) QuizSettings? quizSettings,@notSerializable dynamic Function(dynamic)? toJsonT,@notSerializable dynamic Function(dynamic)? fromJsonT
+ String id, int? maxCount, int minCount, List<T>? initialValues, List<T> availibleValues, List<String>? idsOfAvailibleValues,@notSerializable void Function(List<T>? value)? onValueChanged,@notSerializable GetCustomErrorForListDef<T>? getCustomError, bool submitFormOnSelect, SelectInputUiSettings<T>? uiSettings, QuizSettings? quizSettings,@notSerializable dynamic Function(dynamic)? toJsonT,@notSerializable dynamic Function(dynamic)? fromJsonT
 });
 
 
@@ -1427,7 +1428,7 @@ $QuizSettingsCopyWith<$Res>? get quizSettings {
 @JsonSerializable(genericArgumentFactories: true)
 
 class _SelectInput<T> extends SelectInput<T> {
-  const _SelectInput({required this.id, required this.maxCount, this.minCount = 0, final  List<T>? initialValues, final  List<T> availibleValues = const [], final  List<String>? idsOfAvailibleValues, @notSerializable this.onValueChanged, @notSerializable this.getCustomError, this.submitFormOnSelect = false, this.uiSettings, @JsonKey(toJson: QuizSettings.staticToJson) this.quizSettings, @notSerializable this.toJsonT, @notSerializable this.fromJsonT}): _initialValues = initialValues,_availibleValues = availibleValues,_idsOfAvailibleValues = idsOfAvailibleValues,super._();
+  const _SelectInput({required this.id, required this.maxCount, this.minCount = 0, final  List<T>? initialValues, final  List<T> availibleValues = const [], final  List<String>? idsOfAvailibleValues, @notSerializable this.onValueChanged, @notSerializable this.getCustomError, this.submitFormOnSelect = false, this.uiSettings, this.quizSettings, @notSerializable this.toJsonT, @notSerializable this.fromJsonT}): _initialValues = initialValues,_availibleValues = availibleValues,_idsOfAvailibleValues = idsOfAvailibleValues,super._();
   factory _SelectInput.fromJson(Map<String, dynamic> json,T Function(Object?) fromJsonT) => _$SelectInputFromJson(json,fromJsonT);
 
 @override final  String id;
@@ -1476,7 +1477,7 @@ class _SelectInput<T> extends SelectInput<T> {
 /// Only applies if maxCount is 1
 @override@JsonKey() final  bool submitFormOnSelect;
 @override final  SelectInputUiSettings<T>? uiSettings;
-@override@JsonKey(toJson: QuizSettings.staticToJson) final  QuizSettings? quizSettings;
+@override final  QuizSettings? quizSettings;
 /// The following fields are mostly usefull for hydrataion
 ///
 /// Ex :
@@ -1516,7 +1517,7 @@ abstract mixin class _$SelectInputCopyWith<T,$Res> implements $SelectInputCopyWi
   factory _$SelectInputCopyWith(_SelectInput<T> value, $Res Function(_SelectInput<T>) _then) = __$SelectInputCopyWithImpl;
 @override @useResult
 $Res call({
- String id, int? maxCount, int minCount, List<T>? initialValues, List<T> availibleValues, List<String>? idsOfAvailibleValues,@notSerializable void Function(List<T>? value)? onValueChanged,@notSerializable GetCustomErrorForListDef<T>? getCustomError, bool submitFormOnSelect, SelectInputUiSettings<T>? uiSettings,@JsonKey(toJson: QuizSettings.staticToJson) QuizSettings? quizSettings,@notSerializable dynamic Function(dynamic)? toJsonT,@notSerializable dynamic Function(dynamic)? fromJsonT
+ String id, int? maxCount, int minCount, List<T>? initialValues, List<T> availibleValues, List<String>? idsOfAvailibleValues,@notSerializable void Function(List<T>? value)? onValueChanged,@notSerializable GetCustomErrorForListDef<T>? getCustomError, bool submitFormOnSelect, SelectInputUiSettings<T>? uiSettings, QuizSettings? quizSettings,@notSerializable dynamic Function(dynamic)? toJsonT,@notSerializable dynamic Function(dynamic)? fromJsonT
 });
 
 

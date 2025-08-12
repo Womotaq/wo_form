@@ -25,9 +25,9 @@ Map<String, dynamic> _$ConditionValueToJson(ConditionValue instance) =>
     };
 
 ConditionAnd _$ConditionAndFromJson(Map<String, dynamic> json) => ConditionAnd(
-      const ConditionsListConverter().fromJson(json['conditions'] as List),
-      $type: json['runtimeType'] as String?,
-    );
+  const ConditionsListConverter().fromJson(json['conditions'] as List),
+  $type: json['runtimeType'] as String?,
+);
 
 Map<String, dynamic> _$ConditionAndToJson(ConditionAnd instance) =>
     <String, dynamic>{
@@ -36,9 +36,9 @@ Map<String, dynamic> _$ConditionAndToJson(ConditionAnd instance) =>
     };
 
 ConditionOr _$ConditionOrFromJson(Map<String, dynamic> json) => ConditionOr(
-      const ConditionsListConverter().fromJson(json['conditions'] as List),
-      $type: json['runtimeType'] as String?,
-    );
+  const ConditionsListConverter().fromJson(json['conditions'] as List),
+  $type: json['runtimeType'] as String?,
+);
 
 Map<String, dynamic> _$ConditionOrToJson(ConditionOr instance) =>
     <String, dynamic>{

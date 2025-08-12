@@ -16,8 +16,6 @@ part 'quiz_settings.g.dart';
 //   factory QuizSettingsString.fromJson(Map<String, dynamic> json) =>
 //       _$QuizSettingsStringFromJson(json);
 
-//   static Map<String, dynamic>? staticToJson(QuizSettingsString? object) =>
-//       object?.toJson();
 // }
 
 @freezed
@@ -32,9 +30,6 @@ sealed class QuizSettings with _$QuizSettings {
 
   factory QuizSettings.fromJson(Map<String, dynamic> json) =>
       _$QuizSettingsFromJson(json);
-
-  static Map<String, dynamic>? staticToJson(QuizSettings? object) =>
-      object?.toJson();
 }
 
 // @freezed

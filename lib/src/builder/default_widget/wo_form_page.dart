@@ -196,63 +196,57 @@ class WoFormMultiStepPageState extends State<WoFormMultiStepPage> {
         ),
         title: Text(root.uiSettings.titleText),
       ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            if (widget.submitMode.showProgressIndicator)
-              (widget.submitMode.progressIndicatorBuilder ??
-                  woFormTheme?.multiStepProgressIndicatorBuilder ??
-                  MultiStepProgressIndicator.new)(
-                index: pageIndex.toInt(),
-                maxIndex: root.children.length - 1,
-              ),
-            Expanded(
-              child: PageView.builder(
-                controller: pageController,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: root.children.length,
-                itemBuilder: (context, index) => ConstrainedListView(
-                  maxWidth:
-                      woFormTheme?.maxWidth ??
-                      WoFormThemeData.DEFAULT_MAX_WIDTH,
-                  children: [
-                    const SizedBox(height: 16),
-                    root.children[index].toWidget(parentPath: ''),
-                    const SizedBox(height: 32),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          SubmitButtonBuilder(
-                            submitButtonBuilder:
-                                index == root.children.length - 1
-                                ? null
-                                : (data) =>
-                                      (root.uiSettings.submitButtonBuilder ??
-                                      woFormTheme?.submitButtonBuilder ??
-                                      SubmitButton.new)(
-                                        data.copyWith(
-                                          text:
-                                              widget.submitMode.nextText ??
-                                              context
-                                                  .read<WoFormL10n?>()
-                                                  ?.next(),
-                                          icon: null,
-                                          path: '/${root.children[index].id}',
-                                        ),
+      body: Column(
+        children: [
+          if (widget.submitMode.showProgressIndicator)
+            (widget.submitMode.progressIndicatorBuilder ??
+                woFormTheme?.multiStepProgressIndicatorBuilder ??
+                MultiStepProgressIndicator.new)(
+              index: pageIndex.toInt(),
+              maxIndex: root.children.length - 1,
+            ),
+          Expanded(
+            child: PageView.builder(
+              controller: pageController,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: root.children.length,
+              itemBuilder: (context, index) => ConstrainedListView(
+                maxWidth:
+                    woFormTheme?.maxWidth ?? WoFormThemeData.DEFAULT_MAX_WIDTH,
+                children: [
+                  const SizedBox(height: 16),
+                  root.children[index].toWidget(parentPath: ''),
+                  const SizedBox(height: 32),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        SubmitButtonBuilder(
+                          submitButtonBuilder: index == root.children.length - 1
+                              ? null
+                              : (data) =>
+                                    (root.uiSettings.submitButtonBuilder ??
+                                    woFormTheme?.submitButtonBuilder ??
+                                    SubmitButton.new)(
+                                      data.copyWith(
+                                        text:
+                                            widget.submitMode.nextText ??
+                                            context.read<WoFormL10n?>()?.next(),
+                                        icon: null,
+                                        path: '/${root.children[index].id}',
                                       ),
-                          ),
-                        ],
-                      ),
+                                    ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 16),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 16),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

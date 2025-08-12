@@ -38,8 +38,6 @@ sealed class Condition with _$Condition {
 
   factory Condition.fromJson(Map<String, dynamic> json) =>
       _$ConditionFromJson(json);
-
-  static Map<String, dynamic> staticToJson(Condition object) => object.toJson();
 }
 
 class ConditionsListConverter
