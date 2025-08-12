@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -8,14 +9,15 @@ class NumSelector extends StatefulWidget {
     this.initialValue,
     this.axis = Axis.vertical,
     this.step = 1,
+    this.steps,
     this.minCount = 0,
     this.maxCount,
     this.unit,
     super.key,
   }) : assert(
-          (initialValue == null) != (controller == null),
-          'Only one of initialValue or controller must be set.',
-        );
+         (initialValue == null) != (controller == null),
+         'Only one of initialValue or controller must be set.',
+       );
 
   /// If you give a controller, it is you responsibility to dispose it.
   final TextEditingController? controller;
@@ -23,6 +25,7 @@ class NumSelector extends StatefulWidget {
   final void Function(num? value)? onChanged;
   final Axis axis;
   final int step;
+  final List<num>? steps;
   final num? minCount;
   final num? maxCount;
   final Widget? unit;
@@ -36,7 +39,8 @@ class _NumSelectorState extends State<NumSelector> {
 
   @override
   void initState() {
-    controller = widget.controller ??
+    controller =
+        widget.controller ??
         TextEditingController(text: (widget.initialValue ?? 0).toString());
     super.initState();
   }
@@ -56,17 +60,17 @@ class _NumSelectorState extends State<NumSelector> {
       size: iconHeight,
       axis == Axis.vertical
           ? isPlus
-              ? Icons.keyboard_arrow_up
-              : Icons.keyboard_arrow_down
+                ? Icons.keyboard_arrow_up
+                : Icons.keyboard_arrow_down
           // ? Icons.arrow_drop_up
           // : Icons.arrow_drop_down
           : isPlus
-              ? Icons.add_circle
-              : Icons.remove_circle,
+          ? Icons.add_circle
+          : Icons.remove_circle,
     );
 
     final currentValue = num.tryParse(controller.text) ?? 0;
-    final nextValue = currentValue + (isPlus ? widget.step : -widget.step);
+    final nextValue = _findNextStep(currentValue, isPlus: isPlus);
     final disabled = isPlus
         ? widget.maxCount != null && nextValue > widget.maxCount!
         : widget.minCount != null && nextValue < widget.minCount!;
@@ -84,7 +88,7 @@ class _NumSelectorState extends State<NumSelector> {
                 ? null
                 : () {
                     var newVal = num.tryParse(controller.text) ?? 0;
-                    newVal += (isPlus ? widget.step : -widget.step);
+                    newVal = _findNextStep(newVal, isPlus: isPlus);
                     if (widget.minCount != null && newVal < widget.minCount!) {
                       if (isPlus) {
                         newVal = widget.minCount!;
@@ -109,6 +113,23 @@ class _NumSelectorState extends State<NumSelector> {
         },
       ),
     );
+  }
+
+  num _findNextStep(num current, {required bool isPlus}) {
+    final validSteps = widget.steps?.where((step) {
+      if (widget.maxCount != null && step > widget.maxCount!) return false;
+      if (widget.minCount != null && step < widget.minCount!) return false;
+      return true;
+    }).sorted();
+
+    if (validSteps == null || validSteps.isEmpty) {
+      return current + (isPlus ? widget.step : -widget.step);
+    }
+
+    return (isPlus
+            ? validSteps.firstWhereOrNull((step) => step > current)
+            : validSteps.lastWhereOrNull((step) => step < current)) ??
+        current;
   }
 
   @override
