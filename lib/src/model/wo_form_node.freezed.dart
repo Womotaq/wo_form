@@ -929,11 +929,12 @@ as void Function(BuildContext context, String parentPath, Object? value)?,
 @JsonSerializable()
 
 class WidgetNode extends WoFormNode {
-  const WidgetNode({this.id = 'WidgetNode', @notSerializable this.builder, final  String? $type}): $type = $type ?? 'widget',super._();
+  const WidgetNode({this.id = 'WidgetNode', @notSerializable this.builder, this.uiSettings = const InputUiSettings(), final  String? $type}): $type = $type ?? 'widget',super._();
   factory WidgetNode.fromJson(Map<String, dynamic> json) => _$WidgetNodeFromJson(json);
 
 @override@JsonKey() final  String id;
 @notSerializable final  Widget Function(BuildContext context)? builder;
+@JsonKey() final  InputUiSettings uiSettings;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -952,16 +953,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WidgetNode&&(identical(other.id, id) || other.id == id)&&(identical(other.builder, builder) || other.builder == builder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WidgetNode&&(identical(other.id, id) || other.id == id)&&(identical(other.builder, builder) || other.builder == builder)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,builder);
+int get hashCode => Object.hash(runtimeType,id,builder,uiSettings);
 
 @override
 String toString() {
-  return 'WoFormNode.widget(id: $id, builder: $builder)';
+  return 'WoFormNode.widget(id: $id, builder: $builder, uiSettings: $uiSettings)';
 }
 
 
@@ -972,11 +973,11 @@ abstract mixin class $WidgetNodeCopyWith<$Res> implements $WoFormNodeCopyWith<$R
   factory $WidgetNodeCopyWith(WidgetNode value, $Res Function(WidgetNode) _then) = _$WidgetNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id,@notSerializable Widget Function(BuildContext context)? builder
+ String id,@notSerializable Widget Function(BuildContext context)? builder, InputUiSettings uiSettings
 });
 
 
-
+$InputUiSettingsCopyWith<$Res> get uiSettings;
 
 }
 /// @nodoc
@@ -989,15 +990,25 @@ class _$WidgetNodeCopyWithImpl<$Res>
 
 /// Create a copy of WoFormNode
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? builder = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? builder = freezed,Object? uiSettings = null,}) {
   return _then(WidgetNode(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,builder: freezed == builder ? _self.builder : builder // ignore: cast_nullable_to_non_nullable
-as Widget Function(BuildContext context)?,
+as Widget Function(BuildContext context)?,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
+as InputUiSettings,
   ));
 }
 
-
+/// Create a copy of WoFormNode
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$InputUiSettingsCopyWith<$Res> get uiSettings {
+  
+  return $InputUiSettingsCopyWith<$Res>(_self.uiSettings, (value) {
+    return _then(_self.copyWith(uiSettings: value));
+  });
+}
 }
 
 /// @nodoc

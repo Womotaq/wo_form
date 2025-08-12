@@ -185,11 +185,18 @@ Map<String, dynamic> _$ValueListenerNodeToJson(ValueListenerNode instance) =>
 
 WidgetNode _$WidgetNodeFromJson(Map<String, dynamic> json) => WidgetNode(
   id: json['id'] as String? ?? 'WidgetNode',
+  uiSettings: json['uiSettings'] == null
+      ? const InputUiSettings()
+      : InputUiSettings.fromJson(json['uiSettings'] as Map<String, dynamic>),
   $type: json['runtimeType'] as String?,
 );
 
 Map<String, dynamic> _$WidgetNodeToJson(WidgetNode instance) =>
-    <String, dynamic>{'id': instance.id, 'runtimeType': instance.$type};
+    <String, dynamic>{
+      'id': instance.id,
+      'uiSettings': instance.uiSettings.toJson(),
+      'runtimeType': instance.$type,
+    };
 
 _RootNode _$RootNodeFromJson(Map<String, dynamic> json) => _RootNode(
   id: json['id'] as String? ?? '#',

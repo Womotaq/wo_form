@@ -59,7 +59,7 @@ mixin WoFormNodeMixin {
   WoFormNodeMixin withId({required String id});
 
   /// Used when OFormUiSettings.scrollable is false
-  int get flex => 0;
+  int? get flex => null;
 }
 
 @freezed
@@ -147,6 +147,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
   const factory WoFormNode.widget({
     @Default('WidgetNode') String id,
     @notSerializable Widget Function(BuildContext context)? builder,
+    @Default(InputUiSettings()) InputUiSettings uiSettings,
   }) = WidgetNode;
 
   const WoFormNode._();
@@ -649,10 +650,11 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
 
   /// Used when OFormUiSettings.scrollable is false
   @override
-  int get flex => switch (this) {
-    InputsNode(uiSettings: final uiSettings) => uiSettings.flex ?? 0,
-    ValueBuilderNode(uiSettings: final uiSettings) => uiSettings.flex ?? 0,
-    _ => 0,
+  int? get flex => switch (this) {
+    InputsNode(uiSettings: final uiSettings) => uiSettings.flex,
+    ValueBuilderNode(uiSettings: final uiSettings) ||
+    WidgetNode(uiSettings: final uiSettings) => uiSettings.flex,
+    _ => null,
   };
 }
 

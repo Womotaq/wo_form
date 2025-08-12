@@ -318,6 +318,11 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
     /// Default to Axis.vertical
     Axis? direction,
 
+    /// Only used when ChildrenVisibility.always.
+    ///
+    /// Default to CrossAxisAlignment.start
+    CrossAxisAlignment? crossAxisAlignment,
+
     /// This spacing will be placed between each [WoFormNodeMixin].
     double? spacing,
     @notSerializable InputNodeWidgetBuilderDef? widgetBuilder,
@@ -340,6 +345,7 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
           showChildrenInitially:
               showChildrenInitially ?? other.showChildrenInitially,
           direction: direction ?? other.direction,
+          crossAxisAlignment: crossAxisAlignment ?? other.crossAxisAlignment,
           spacing: spacing ?? other.spacing,
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,
           headerBuilder: headerBuilder ?? other.headerBuilder,

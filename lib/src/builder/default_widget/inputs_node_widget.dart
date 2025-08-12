@@ -31,14 +31,15 @@ class InputsNodeWidget extends StatelessWidget {
           child: Flex(
             direction: data.uiSettings.direction ?? Axis.vertical,
             spacing: data.uiSettings.spacing ?? oFormTheme?.spacing ?? 0,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment:
+                data.uiSettings.crossAxisAlignment ?? CrossAxisAlignment.start,
             children: node.children
                 .map(
                   (i) => Flexible(
                     flex: !formUiSettings.scrollable && i.flex != 0
-                        ? i.flex
+                        ? i.flex ?? 0
                         : data.uiSettings.direction == Axis.horizontal
-                        ? 1
+                        ? i.flex ?? 1
                         : 0,
                     child: i.toWidget(parentPath: data.path),
                   ),

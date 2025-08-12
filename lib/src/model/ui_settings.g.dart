@@ -207,6 +207,10 @@ _InputsNodeUiSettings _$InputsNodeUiSettingsFromJson(
   ),
   showChildrenInitially: json['showChildrenInitially'] as bool?,
   direction: $enumDecodeNullable(_$AxisEnumMap, json['direction']),
+  crossAxisAlignment: $enumDecodeNullable(
+    _$CrossAxisAlignmentEnumMap,
+    json['crossAxisAlignment'],
+  ),
   spacing: (json['spacing'] as num?)?.toDouble(),
 );
 
@@ -221,6 +225,8 @@ Map<String, dynamic> _$InputsNodeUiSettingsToJson(
       _$ChildrenVisibilityEnumMap[instance.childrenVisibility],
   'showChildrenInitially': instance.showChildrenInitially,
   'direction': _$AxisEnumMap[instance.direction],
+  'crossAxisAlignment':
+      _$CrossAxisAlignmentEnumMap[instance.crossAxisAlignment],
   'spacing': instance.spacing,
 };
 
@@ -232,6 +238,14 @@ const _$ChildrenVisibilityEnumMap = {
 const _$AxisEnumMap = {
   Axis.horizontal: 'horizontal',
   Axis.vertical: 'vertical',
+};
+
+const _$CrossAxisAlignmentEnumMap = {
+  CrossAxisAlignment.start: 'start',
+  CrossAxisAlignment.end: 'end',
+  CrossAxisAlignment.center: 'center',
+  CrossAxisAlignment.stretch: 'stretch',
+  CrossAxisAlignment.baseline: 'baseline',
 };
 
 _MediaInputUiSettings _$MediaInputUiSettingsFromJson(
