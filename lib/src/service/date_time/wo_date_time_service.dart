@@ -59,7 +59,6 @@ class DateTimeService {
           context,
           MaterialPageRoute<DateTime>(
             builder: (_) => PickDatePage(
-              woFormStatusCubit: woFormStatusCubit,
               minDate: minDate,
               maxDate: maxDate,
               initialDate: initialDate,
