@@ -687,6 +687,7 @@ abstract class FutureNode<T> with _$FutureNode<T>, WoFormNodeMixin {
     /// If true, when the future will be completed, the values of
     /// the children inputs will be reseted to their getInitialValues.
     @Default(true) bool willResetToInitialValues,
+    @Default(InputUiSettings()) InputUiSettings uiSettings,
   }) = _FutureNode<T>;
 
   const FutureNode._();
@@ -830,6 +831,9 @@ abstract class FutureNode<T> with _$FutureNode<T>, WoFormNodeMixin {
 
   @override
   FutureNode<T> withId({required String id}) => copyWith(id: id);
+
+  @override
+  int? get flex => uiSettings.flex;
 }
 
 @freezed
