@@ -826,7 +826,7 @@ abstract class FutureNode<T> with _$FutureNode<T>, WoFormNodeMixin {
       FutureNodeBuilder<T>(
         key: key,
         parentPath: parentPath,
-        child: this,
+        node: this,
       );
 
   @override
