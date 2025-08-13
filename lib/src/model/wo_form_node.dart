@@ -102,6 +102,10 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
     @Default(ExportSettings()) ExportSettings exportSettings,
   }) = DynamicInputsNode;
 
+  const factory WoFormNode.empty({
+    @Default('EmptyNode') String id,
+  }) = EmptyNode;
+
   const factory WoFormNode.inputs({
     required String id,
     @InputsListConverter() @Default([]) List<WoFormNodeMixin> children,
@@ -262,6 +266,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
         );
       case ValueListenerNode():
       case WidgetNode():
+      case EmptyNode():
     }
   }
 
@@ -325,6 +330,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
         ];
       case ValueListenerNode():
       case WidgetNode():
+      case EmptyNode():
         return ['$parentPath/$id'];
     }
   }
@@ -422,6 +428,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
         );
       case ValueListenerNode():
       case WidgetNode():
+      case EmptyNode():
         return null;
     }
   }
@@ -483,6 +490,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
         );
       case ValueListenerNode():
       case WidgetNode():
+      case EmptyNode():
         return [];
     }
   }
@@ -532,7 +540,9 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
           values: values,
           parentPath: '$parentPath/$id',
         );
-      case ValueListenerNode() || WidgetNode():
+      case ValueListenerNode():
+      case WidgetNode():
+      case EmptyNode():
         return null;
     }
   }
@@ -576,6 +586,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
         return child.getInitialValues(parentPath: '$parentPath/$id');
       case ValueListenerNode():
       case WidgetNode():
+      case EmptyNode():
         return {};
     }
   }
@@ -643,6 +654,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
       builder == null
           ? SizedBox.shrink(key: key)
           : Builder(key: key, builder: builder),
+    EmptyNode() => SizedBox.shrink(key: key),
   };
 
   @override

@@ -97,6 +97,16 @@ Json? _$JsonConverterToJson<Json, Value>(
   Json? Function(Value value) toJson,
 ) => value == null ? null : toJson(value);
 
+EmptyNode _$EmptyNodeFromJson(Map<String, dynamic> json) => EmptyNode(
+  id: json['id'] as String? ?? 'EmptyNode',
+  $type: json['runtimeType'] as String?,
+);
+
+Map<String, dynamic> _$EmptyNodeToJson(EmptyNode instance) => <String, dynamic>{
+  'id': instance.id,
+  'runtimeType': instance.$type,
+};
+
 InputsNode _$InputsNodeFromJson(Map<String, dynamic> json) => InputsNode(
   id: json['id'] as String,
   children: json['children'] == null

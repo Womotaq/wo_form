@@ -181,6 +181,10 @@ WoFormNode _$WoFormNodeFromJson(
           return DynamicInputsNode.fromJson(
             json
           );
+                case 'empty':
+          return EmptyNode.fromJson(
+            json
+          );
                 case 'inputs':
           return InputsNode.fromJson(
             json
@@ -484,6 +488,79 @@ $ExportSettingsCopyWith<$Res> get exportSettings {
     return _then(_self.copyWith(exportSettings: value));
   });
 }
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class EmptyNode extends WoFormNode {
+  const EmptyNode({this.id = 'EmptyNode', final  String? $type}): $type = $type ?? 'empty',super._();
+  factory EmptyNode.fromJson(Map<String, dynamic> json) => _$EmptyNodeFromJson(json);
+
+@override@JsonKey() final  String id;
+
+@JsonKey(name: 'runtimeType')
+final String $type;
+
+
+/// Create a copy of WoFormNode
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$EmptyNodeCopyWith<EmptyNode> get copyWith => _$EmptyNodeCopyWithImpl<EmptyNode>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$EmptyNodeToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is EmptyNode&&(identical(other.id, id) || other.id == id));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id);
+
+@override
+String toString() {
+  return 'WoFormNode.empty(id: $id)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $EmptyNodeCopyWith<$Res> implements $WoFormNodeCopyWith<$Res> {
+  factory $EmptyNodeCopyWith(EmptyNode value, $Res Function(EmptyNode) _then) = _$EmptyNodeCopyWithImpl;
+@override @useResult
+$Res call({
+ String id
+});
+
+
+
+
+}
+/// @nodoc
+class _$EmptyNodeCopyWithImpl<$Res>
+    implements $EmptyNodeCopyWith<$Res> {
+  _$EmptyNodeCopyWithImpl(this._self, this._then);
+
+  final EmptyNode _self;
+  final $Res Function(EmptyNode) _then;
+
+/// Create a copy of WoFormNode
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,}) {
+  return _then(EmptyNode(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
 }
 
 /// @nodoc
