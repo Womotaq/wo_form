@@ -605,9 +605,7 @@ class WoForm extends StatelessWidget {
 
     if (root.uiSettings.theme != null) {
       return WoFormTheme(
-        data: (WoFormTheme.of(context) ?? const WoFormThemeData()).merge(
-          root.uiSettings.theme,
-        ),
+        data: root.uiSettings.theme!.merge(WoFormTheme.of(context)),
         child: form,
       );
     } else {
