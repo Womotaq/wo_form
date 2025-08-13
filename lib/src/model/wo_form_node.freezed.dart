@@ -834,7 +834,7 @@ $InputUiSettingsCopyWith<$Res> get uiSettings {
 @JsonSerializable()
 
 class ValuesBuilderNode extends WoFormNode {
-  const ValuesBuilderNode({required this.id, required final  List<String> paths, @notSerializable this.builder, final  Map<String, Object?>? initialValues, final  String? $type}): assert(builder != null, 'ValuesBuilderNode.builder cannot be null'),_paths = paths,_initialValues = initialValues,$type = $type ?? 'valuesBuilder',super._();
+  const ValuesBuilderNode({required this.id, required final  List<String> paths, @notSerializable this.builder, final  Map<String, Object?>? initialValues, this.uiSettings = const InputUiSettings(), final  String? $type}): assert(builder != null, 'ValuesBuilderNode.builder cannot be null'),_paths = paths,_initialValues = initialValues,$type = $type ?? 'valuesBuilder',super._();
   factory ValuesBuilderNode.fromJson(Map<String, dynamic> json) => _$ValuesBuilderNodeFromJson(json);
 
 @override final  String id;
@@ -855,6 +855,7 @@ class ValuesBuilderNode extends WoFormNode {
   return EqualUnmodifiableMapView(value);
 }
 
+@JsonKey() final  InputUiSettings uiSettings;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -873,16 +874,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ValuesBuilderNode&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other._paths, _paths)&&(identical(other.builder, builder) || other.builder == builder)&&const DeepCollectionEquality().equals(other._initialValues, _initialValues));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ValuesBuilderNode&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other._paths, _paths)&&(identical(other.builder, builder) || other.builder == builder)&&const DeepCollectionEquality().equals(other._initialValues, _initialValues)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_paths),builder,const DeepCollectionEquality().hash(_initialValues));
+int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_paths),builder,const DeepCollectionEquality().hash(_initialValues),uiSettings);
 
 @override
 String toString() {
-  return 'WoFormNode.valuesBuilder(id: $id, paths: $paths, builder: $builder, initialValues: $initialValues)';
+  return 'WoFormNode.valuesBuilder(id: $id, paths: $paths, builder: $builder, initialValues: $initialValues, uiSettings: $uiSettings)';
 }
 
 
@@ -893,11 +894,11 @@ abstract mixin class $ValuesBuilderNodeCopyWith<$Res> implements $WoFormNodeCopy
   factory $ValuesBuilderNodeCopyWith(ValuesBuilderNode value, $Res Function(ValuesBuilderNode) _then) = _$ValuesBuilderNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id, List<String> paths,@notSerializable WoFormNodeMixin Function(Map<String, Object?> values)? builder, Map<String, Object?>? initialValues
+ String id, List<String> paths,@notSerializable WoFormNodeMixin Function(Map<String, Object?> values)? builder, Map<String, Object?>? initialValues, InputUiSettings uiSettings
 });
 
 
-
+$InputUiSettingsCopyWith<$Res> get uiSettings;
 
 }
 /// @nodoc
@@ -910,17 +911,27 @@ class _$ValuesBuilderNodeCopyWithImpl<$Res>
 
 /// Create a copy of WoFormNode
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? paths = null,Object? builder = freezed,Object? initialValues = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? paths = null,Object? builder = freezed,Object? initialValues = freezed,Object? uiSettings = null,}) {
   return _then(ValuesBuilderNode(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,paths: null == paths ? _self._paths : paths // ignore: cast_nullable_to_non_nullable
 as List<String>,builder: freezed == builder ? _self.builder : builder // ignore: cast_nullable_to_non_nullable
 as WoFormNodeMixin Function(Map<String, Object?> values)?,initialValues: freezed == initialValues ? _self._initialValues : initialValues // ignore: cast_nullable_to_non_nullable
-as Map<String, Object?>?,
+as Map<String, Object?>?,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
+as InputUiSettings,
   ));
 }
 
-
+/// Create a copy of WoFormNode
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$InputUiSettingsCopyWith<$Res> get uiSettings {
+  
+  return $InputUiSettingsCopyWith<$Res>(_self.uiSettings, (value) {
+    return _then(_self.copyWith(uiSettings: value));
+  });
+}
 }
 
 /// @nodoc

@@ -135,6 +135,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
     @notSerializable
     WoFormNodeMixin Function(Map<String, Object?> values)? builder,
     Map<String, Object?>? initialValues,
+    @Default(InputUiSettings()) InputUiSettings uiSettings,
   }) = ValuesBuilderNode;
 
   @Assert('listener != null', 'ValueListenerNode.listener cannot be null')
@@ -665,6 +666,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
   int? get flex => switch (this) {
     InputsNode(uiSettings: final uiSettings) => uiSettings.flex,
     ValueBuilderNode(uiSettings: final uiSettings) ||
+    ValuesBuilderNode(uiSettings: final uiSettings) ||
     WidgetNode(uiSettings: final uiSettings) => uiSettings.flex,
     _ => null,
   };

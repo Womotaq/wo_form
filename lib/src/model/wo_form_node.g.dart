@@ -168,6 +168,11 @@ ValuesBuilderNode _$ValuesBuilderNodeFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       paths: (json['paths'] as List<dynamic>).map((e) => e as String).toList(),
       initialValues: json['initialValues'] as Map<String, dynamic>?,
+      uiSettings: json['uiSettings'] == null
+          ? const InputUiSettings()
+          : InputUiSettings.fromJson(
+              json['uiSettings'] as Map<String, dynamic>,
+            ),
       $type: json['runtimeType'] as String?,
     );
 
@@ -176,6 +181,7 @@ Map<String, dynamic> _$ValuesBuilderNodeToJson(ValuesBuilderNode instance) =>
       'id': instance.id,
       'paths': instance.paths,
       'initialValues': instance.initialValues,
+      'uiSettings': instance.uiSettings.toJson(),
       'runtimeType': instance.$type,
     };
 

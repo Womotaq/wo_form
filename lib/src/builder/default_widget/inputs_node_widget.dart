@@ -36,8 +36,8 @@ class InputsNodeWidget extends StatelessWidget {
             children: node.children
                 .map(
                   (i) => Flexible(
-                    flex: !formUiSettings.scrollable && i.flex != 0
-                        ? i.flex ?? 0
+                    flex: !formUiSettings.scrollable && i.flex != null
+                        ? i.flex!
                         : data.uiSettings.direction == Axis.horizontal
                         ? i.flex ?? 1
                         : 0,
