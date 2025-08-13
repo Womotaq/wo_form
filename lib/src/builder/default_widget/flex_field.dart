@@ -33,26 +33,24 @@ class FlexField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final header = (headerBuilder ??
-            WoFormTheme.of(context)?.inputHeaderBuilder ??
-            InputHeader.new)
-        .call(
-      WoFormInputHeaderData(
-        path: path,
-        labelText: labelText,
-        helperText: helperText,
-        errorText: errorText,
-        trailing: trailing,
-        onTap: onTap,
-        shrinkWrap: shrinkWrap,
-      ),
-    );
+    final header =
+        (headerBuilder ??
+                WoFormTheme.of(context)?.inputHeaderBuilder ??
+                InputHeader.new)
+            .call(
+              WoFormInputHeaderData(
+                path: path,
+                labelText: labelText,
+                helperText: helperText,
+                errorText: errorText,
+                trailing: trailing,
+                onTap: onTap,
+                shrinkWrap: shrinkWrap,
+              ),
+            );
 
     final headerDisabled = disableMode == FlexFieldDisableMode.header
-        ? Opacity(
-            opacity: 0.3,
-            child: header,
-          )
+        ? Opacity(opacity: 0.3, child: header)
         : header;
 
     return Opacity(
