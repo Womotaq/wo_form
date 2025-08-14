@@ -17,7 +17,8 @@ class _NumFieldState extends State<NumField> {
   @override
   void initState() {
     super.initState();
-    if (widget.data.uiSettings.style == NumInputStyle.selector) {
+    if (widget.data.uiSettings.style == null ||
+        widget.data.uiSettings.style == NumInputStyle.selector) {
       controller = TextEditingController(
         text: widget.data.value?.toString() ?? '',
       );
