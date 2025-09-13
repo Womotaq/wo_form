@@ -1,13 +1,13 @@
-# wo_form
+![wo_form Powerful. Serializable. Customizable. The next-generation form toolkit.](https://firebasestorage.googleapis.com/v0/b/womotaq-f.appspot.com/o/womotaq%2Fwo_form%2Fwo_form-banner-dark.jpg?alt=media&token=97cf88c5-35cd-4d1e-8418-16bb43b12750)
 
-`wo_form` is a feature-rich Dart package designed to make form handling easier and more efficient. With `wo_form`, you can seamlessly jsonify and unjsonify forms, gain complete control over form rendering, and utilize a collection of prebuilt advanced widgets for basic inputs.
+wo_form is a powerful Dart package that takes the pain out of form creation and management. It provides a clean API for working with forms, rich customization options, and ready-to-use input widgets.
 
 ## Features
 
-- **Jsonify/Unjsonify Forms**: Easily convert your forms to and from JSON for effortless data handling.
-- **Customizable Rendering**: Take full control over how your forms are rendered, enabling a highly customizable user experience.
-- **Prebuilt Advanced Widgets**: Access a variety of advanced widgets for common input types, saving you time and effort in form creation.
-- **Easy Integration**: Quickly integrate `wo_form` into your projects and streamline your form management processes.
+- **Effortless Serialization** – Convert forms to and from JSON for smooth data handling.
+- **Flexible Rendering** – Fully control how forms are displayed, or plug into your existing UI.
+- **Rich Widget Library** – Leverage advanced, prebuilt input widgets for common use cases.
+- **Seamless Integration** – Drop into new or existing projects without boilerplate.
 
 ## Example
 
