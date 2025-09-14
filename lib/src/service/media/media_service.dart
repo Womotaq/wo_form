@@ -234,13 +234,7 @@ abstract class MediaService {
   }
 }
 
-typedef CropLocalizations = ({
-  String title,
-  String cancel,
-  String save,
-  String? rotateLeftTooltip,
-  String? rotateRightTooltip,
-});
+typedef CropLocalizations = ({String title, String cancel, String save});
 
 extension on MediaImportSettings {
   CameraDevice get preferredCameraDevice =>
