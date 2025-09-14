@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:http/http.dart' as http;
-import 'package:image_picker/image_picker.dart';
 import 'package:wo_form/src/model/json_converter/duration.dart';
 import 'package:wo_form/src/model/json_converter/xfile.dart';
 import 'package:wo_form/wo_form.dart';
 
+export 'package:cross_file/cross_file.dart' show XFile;
 export 'package:image_picker/image_picker.dart' show ImageSource;
 
 part 'media.freezed.dart';
