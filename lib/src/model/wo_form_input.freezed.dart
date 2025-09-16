@@ -1328,7 +1328,7 @@ mixin _$SelectInput<T> {
 /// SelectInput<TimeControl>(
 ///   toJsonT: (value) => (value as TimeControl?)?.toJson(),
 ///   fromJsonT: (json) =>
-///       TimeControl.fromJson(json as Map<String, dynamic>? ?? {}),
+///       TimeControl.fromJson(json as Json? ?? {}),
 /// ),
 @notSerializable dynamic Function(dynamic)? get toJsonT;@notSerializable dynamic Function(dynamic)? get fromJsonT;
 /// Create a copy of SelectInput
@@ -1484,7 +1484,7 @@ class _SelectInput<T> extends SelectInput<T> {
 /// SelectInput<TimeControl>(
 ///   toJsonT: (value) => (value as TimeControl?)?.toJson(),
 ///   fromJsonT: (json) =>
-///       TimeControl.fromJson(json as Map<String, dynamic>? ?? {}),
+///       TimeControl.fromJson(json as Json? ?? {}),
 /// ),
 @override@notSerializable final  dynamic Function(dynamic)? toJsonT;
 @override@notSerializable final  dynamic Function(dynamic)? fromJsonT;

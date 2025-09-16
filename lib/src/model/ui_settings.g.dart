@@ -6,6 +6,12 @@ part of 'ui_settings.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+_InputUiSettings _$InputUiSettingsFromJson(Map<String, dynamic> json) =>
+    _InputUiSettings(flex: (json['flex'] as num?)?.toInt());
+
+Map<String, dynamic> _$InputUiSettingsToJson(_InputUiSettings instance) =>
+    <String, dynamic>{'flex': instance.flex};
+
 _BooleanInputUiSettings _$BooleanInputUiSettingsFromJson(
   Map<String, dynamic> json,
 ) => _BooleanInputUiSettings(
@@ -191,6 +197,7 @@ Map<String, dynamic> _$DynamicInputUiSettingsToJson(
 _InputsNodeUiSettings _$InputsNodeUiSettingsFromJson(
   Map<String, dynamic> json,
 ) => _InputsNodeUiSettings(
+  flex: (json['flex'] as num?)?.toInt(),
   labelText: json['labelText'] as String?,
   labelTextWhenChildrenHidden: json['labelTextWhenChildrenHidden'] as String?,
   helperText: json['helperText'] as String?,
@@ -198,23 +205,47 @@ _InputsNodeUiSettings _$InputsNodeUiSettingsFromJson(
     _$ChildrenVisibilityEnumMap,
     json['childrenVisibility'],
   ),
-  showChildrenInitially: json['showChildrenInitially'] as bool? ?? false,
+  showChildrenInitially: json['showChildrenInitially'] as bool?,
+  direction: $enumDecodeNullable(_$AxisEnumMap, json['direction']),
+  crossAxisAlignment: $enumDecodeNullable(
+    _$CrossAxisAlignmentEnumMap,
+    json['crossAxisAlignment'],
+  ),
+  spacing: (json['spacing'] as num?)?.toDouble(),
 );
 
 Map<String, dynamic> _$InputsNodeUiSettingsToJson(
   _InputsNodeUiSettings instance,
 ) => <String, dynamic>{
+  'flex': instance.flex,
   'labelText': instance.labelText,
   'labelTextWhenChildrenHidden': instance.labelTextWhenChildrenHidden,
   'helperText': instance.helperText,
   'childrenVisibility':
       _$ChildrenVisibilityEnumMap[instance.childrenVisibility],
   'showChildrenInitially': instance.showChildrenInitially,
+  'direction': _$AxisEnumMap[instance.direction],
+  'crossAxisAlignment':
+      _$CrossAxisAlignmentEnumMap[instance.crossAxisAlignment],
+  'spacing': instance.spacing,
 };
 
 const _$ChildrenVisibilityEnumMap = {
   ChildrenVisibility.always: 'always',
   ChildrenVisibility.whenAsked: 'whenAsked',
+};
+
+const _$AxisEnumMap = {
+  Axis.horizontal: 'horizontal',
+  Axis.vertical: 'vertical',
+};
+
+const _$CrossAxisAlignmentEnumMap = {
+  CrossAxisAlignment.start: 'start',
+  CrossAxisAlignment.end: 'end',
+  CrossAxisAlignment.center: 'center',
+  CrossAxisAlignment.stretch: 'stretch',
+  CrossAxisAlignment.baseline: 'baseline',
 };
 
 _MediaInputUiSettings _$MediaInputUiSettingsFromJson(
@@ -239,18 +270,28 @@ Map<String, dynamic> _$MediaInputUiSettingsToJson(
 _NumInputUiSettings _$NumInputUiSettingsFromJson(Map<String, dynamic> json) =>
     _NumInputUiSettings(
       labelText: json['labelText'] as String?,
+      labelFlex: (json['labelFlex'] as num?)?.toInt(),
       helperText: json['helperText'] as String?,
+      style: $enumDecodeNullable(_$NumInputStyleEnumMap, json['style']),
     );
 
 Map<String, dynamic> _$NumInputUiSettingsToJson(_NumInputUiSettings instance) =>
     <String, dynamic>{
       'labelText': instance.labelText,
+      'labelFlex': instance.labelFlex,
       'helperText': instance.helperText,
+      'style': _$NumInputStyleEnumMap[instance.style],
     };
+
+const _$NumInputStyleEnumMap = {
+  NumInputStyle.selector: 'selector',
+  NumInputStyle.slider: 'slider',
+};
 
 _SelectInputUiSettings<T> _$SelectInputUiSettingsFromJson<T>(
   Map<String, dynamic> json,
 ) => _SelectInputUiSettings<T>(
+  flex: (json['flex'] as num?)?.toInt(),
   labelText: json['labelText'] as String?,
   helperText: json['helperText'] as String?,
   hintText: json['hintText'] as String?,
@@ -264,6 +305,7 @@ _SelectInputUiSettings<T> _$SelectInputUiSettingsFromJson<T>(
 Map<String, dynamic> _$SelectInputUiSettingsToJson<T>(
   _SelectInputUiSettings<T> instance,
 ) => <String, dynamic>{
+  'flex': instance.flex,
   'labelText': instance.labelText,
   'helperText': instance.helperText,
   'hintText': instance.hintText,
@@ -370,6 +412,10 @@ _WoFormUiSettings _$WoFormUiSettingsFromJson(Map<String, dynamic> json) =>
       theme: json['theme'] == null
           ? null
           : WoFormThemeData.fromJson(json['theme'] as Map<String, dynamic>),
+      padding: const EdgeInsetsNullableConverter().fromJson(
+        json['padding'] as Map<String, dynamic>?,
+      ),
+      scrollable: json['scrollable'] as bool? ?? true,
     );
 
 Map<String, dynamic> _$WoFormUiSettingsToJson(_WoFormUiSettings instance) =>
@@ -380,6 +426,8 @@ Map<String, dynamic> _$WoFormUiSettingsToJson(_WoFormUiSettings instance) =>
       'canModifySubmittedValues': instance.canModifySubmittedValues,
       'showErrors': _$ShowErrorsEnumMap[instance.showErrors]!,
       'theme': instance.theme?.toJson(),
+      'padding': const EdgeInsetsNullableConverter().toJson(instance.padding),
+      'scrollable': instance.scrollable,
     };
 
 const _$WoFormTitlePositionEnumMap = {

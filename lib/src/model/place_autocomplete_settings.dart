@@ -20,6 +20,6 @@ abstract class PlaceAutocompleteSettings with _$PlaceAutocompleteSettings {
   /// Required for the override getter
   const PlaceAutocompleteSettings._();
 
-  factory PlaceAutocompleteSettings.fromJson(Map<String, dynamic> json) =>
+  factory PlaceAutocompleteSettings.fromJson(Json json) =>
       _$PlaceAutocompleteSettingsFromJson(json);
 }

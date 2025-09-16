@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:wo_form/wo_form.dart';
 
 part 'place_prediction.freezed.dart';
 part 'place_prediction.g.dart';
@@ -33,7 +34,7 @@ abstract class PlacesAutocompleteResponse with _$PlacesAutocompleteResponse {
   /// Required for the override getter
   const PlacesAutocompleteResponse._();
 
-  factory PlacesAutocompleteResponse.fromJson(Map<String, dynamic> json) =>
+  factory PlacesAutocompleteResponse.fromJson(Json json) =>
       _$PlacesAutocompleteResponseFromJson(json);
 }
 

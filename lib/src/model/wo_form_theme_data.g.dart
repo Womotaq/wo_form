@@ -9,13 +9,13 @@ part of 'wo_form_theme_data.dart';
 _WoFormThemeData _$WoFormThemeDataFromJson(Map<String, dynamic> json) =>
     _WoFormThemeData(
       maxWidth: (json['maxWidth'] as num?)?.toDouble(),
-      verticalSpacing: (json['verticalSpacing'] as num?)?.toDouble(),
+      spacing: (json['spacing'] as num?)?.toDouble(),
       showAsteriskIfRequired: json['showAsteriskIfRequired'] as bool?,
     );
 
 Map<String, dynamic> _$WoFormThemeDataToJson(_WoFormThemeData instance) =>
     <String, dynamic>{
       'maxWidth': instance.maxWidth,
-      'verticalSpacing': instance.verticalSpacing,
+      'spacing': instance.spacing,
       'showAsteriskIfRequired': instance.showAsteriskIfRequired,
     };

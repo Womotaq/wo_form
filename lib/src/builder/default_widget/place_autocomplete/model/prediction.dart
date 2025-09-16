@@ -1,7 +1,9 @@
+import 'package:wo_form/wo_form.dart';
+
 class PlacesAutocompleteResponse {
   PlacesAutocompleteResponse({this.predictions, this.status});
 
-  PlacesAutocompleteResponse.fromJson(Map<String, dynamic> json) {
+  PlacesAutocompleteResponse.fromJson(Json json) {
     final predictionsJson = json['predictions'];
     if (predictionsJson is List) {
       predictions = [];
@@ -15,7 +17,7 @@ class PlacesAutocompleteResponse {
   List<Prediction>? predictions;
   String? status;
 
-  Map<String, dynamic> toJson() {
+  Json toJson() {
     final data = <String, dynamic>{};
     if (predictions != null) {
       data['predictions'] = predictions!.map((v) => v.toJson()).toList();
@@ -39,28 +41,26 @@ class Prediction {
     this.lng,
   });
 
-  Prediction.fromJson(Map<String, dynamic> json) {
+  Prediction.fromJson(Json json) {
     description = json['description'] as String?;
     id = json['id'] as String?;
     final matchedSubstringsJson = json['matched_substrings'];
     if (matchedSubstringsJson is List) {
       matchedSubstrings = [];
       for (final v in matchedSubstringsJson) {
-        matchedSubstrings!
-            .add(MatchedSubstrings.fromJson(v as Map<String, dynamic>));
+        matchedSubstrings!.add(MatchedSubstrings.fromJson(v as Json));
       }
     }
     placeId = json['place_id'] as String?;
     reference = json['reference'] as String?;
     structuredFormatting = json['structured_formatting'] != null
-        ? StructuredFormatting.fromJson(
-            json['structured_formatting'] as Map<String, dynamic>)
+        ? StructuredFormatting.fromJson(json['structured_formatting'] as Json)
         : null;
     final termsJson = json['terms'];
     if (termsJson is List) {
       terms = [];
       for (final v in termsJson) {
-        terms!.add(Terms.fromJson(v as Map<String, dynamic>));
+        terms!.add(Terms.fromJson(v as Json));
       }
     }
     types = (json['types'] as List).cast<String>();
@@ -78,13 +78,14 @@ class Prediction {
   String? lat;
   String? lng;
 
-  Map<String, dynamic> toJson() {
+  Json toJson() {
     final data = <String, dynamic>{};
     data['description'] = description;
     data['id'] = id;
     if (matchedSubstrings != null) {
-      data['matched_substrings'] =
-          matchedSubstrings!.map((v) => v.toJson()).toList();
+      data['matched_substrings'] = matchedSubstrings!
+          .map((v) => v.toJson())
+          .toList();
     }
     data['place_id'] = placeId;
     data['reference'] = reference;
@@ -105,14 +106,14 @@ class Prediction {
 class MatchedSubstrings {
   MatchedSubstrings({this.length, this.offset});
 
-  MatchedSubstrings.fromJson(Map<String, dynamic> json) {
+  MatchedSubstrings.fromJson(Json json) {
     length = json['length'] as int?;
     offset = json['offset'] as int?;
   }
   int? length;
   int? offset;
 
-  Map<String, dynamic> toJson() {
+  Json toJson() {
     final data = <String, dynamic>{};
     data['length'] = length;
     data['offset'] = offset;
@@ -123,7 +124,7 @@ class MatchedSubstrings {
 class StructuredFormatting {
   StructuredFormatting({this.mainText, this.secondaryText});
 
-  StructuredFormatting.fromJson(Map<String, dynamic> json) {
+  StructuredFormatting.fromJson(Json json) {
     mainText = json['main_text'] as String?;
 
     secondaryText = json['secondary_text'] as String?;
@@ -132,7 +133,7 @@ class StructuredFormatting {
 
   String? secondaryText;
 
-  Map<String, dynamic> toJson() {
+  Json toJson() {
     final data = <String, dynamic>{};
     data['main_text'] = mainText;
     data['secondary_text'] = secondaryText;
@@ -143,14 +144,14 @@ class StructuredFormatting {
 class Terms {
   Terms({this.offset, this.value});
 
-  Terms.fromJson(Map<String, dynamic> json) {
+  Terms.fromJson(Json json) {
     offset = json['offset'] as int?;
     value = json['value'] as String?;
   }
   int? offset;
   String? value;
 
-  Map<String, dynamic> toJson() {
+  Json toJson() {
     final data = <String, dynamic>{};
     data['offset'] = offset;
     data['value'] = value;

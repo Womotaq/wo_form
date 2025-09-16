@@ -14,12 +14,14 @@ class SearchField<T> extends StatelessWidget {
     this.searcher,
     this.provider,
     this.searchScreenBuilder,
+    this.overlayMaxWidth = 256,
+    this.overlayMaxHeight = 384,
     super.key,
-  })  : _builder = null,
-        selectedValues = [selectedValue],
-        selectedBuilder = selectedBuilder == null
-            ? null
-            : ((v) => selectedBuilder(v.firstOrNull));
+  }) : _builder = null,
+       selectedValues = [selectedValue],
+       selectedBuilder = selectedBuilder == null
+           ? null
+           : ((v) => selectedBuilder(v.firstOrNull));
 
   SearchField.multipleChoices({
     required Widget Function(VoidCallback? onPressed) builder,
@@ -32,10 +34,12 @@ class SearchField<T> extends StatelessWidget {
     this.searcher,
     this.provider,
     this.searchScreenBuilder,
+    this.overlayMaxWidth = 256,
+    this.overlayMaxHeight = 384,
     super.key,
-  })  : selectedBuilder = ((_) => const SizedBox.shrink()),
-        _builder = builder,
-        showArrow = false;
+  }) : selectedBuilder = ((_) => const SizedBox.shrink()),
+       _builder = builder,
+       showArrow = false;
 
   final Widget Function(VoidCallback? onPressed)? _builder;
   final Iterable<T> values;
@@ -49,29 +53,33 @@ class SearchField<T> extends StatelessWidget {
   final double Function(String query, T value)? searcher;
   final Widget Function({required Widget child})? provider;
   final SearchScreenDef<T>? searchScreenBuilder;
+  final double overlayMaxWidth;
+  final double overlayMaxHeight;
 
   @override
   Widget build(BuildContext context) {
-    final valueBuilderSafe = valueBuilder ??
+    final valueBuilderSafe =
+        valueBuilder ??
         (e) => Text(
-              e == null && hintText != null ? hintText! : e.toString(),
-            );
-    final selectedBuilderSafe = selectedBuilder ??
+          e == null && hintText != null ? hintText! : e.toString(),
+        );
+    final selectedBuilderSafe =
+        selectedBuilder ??
         (e) => Wrap(
-              // mainAxisSize: MainAxisSize.min,
-              spacing: 8,
-              runSpacing: 8,
-              children: e.map(valueBuilderSafe).toList(),
-            );
+          // mainAxisSize: MainAxisSize.min,
+          spacing: 8,
+          runSpacing: 8,
+          children: e.map(valueBuilderSafe).toList(),
+        );
 
     if (_builder != null) {
       return _builder(
         onSelected == null
             ? null
             : () => onPressed(
-                  context,
-                  valueBuilderSafe,
-                ),
+                context,
+                valueBuilderSafe,
+              ),
       );
     }
 
@@ -83,14 +91,14 @@ class SearchField<T> extends StatelessWidget {
         borderRadius: themedBorder is OutlineInputBorder
             ? themedBorder.borderRadius
             : themedBorder is UnderlineInputBorder
-                ? themedBorder.borderRadius
-                : BorderRadius.zero,
+            ? themedBorder.borderRadius
+            : BorderRadius.zero,
         onTap: onSelected == null
             ? null
             : () => onPressed(
-                  context,
-                  valueBuilderSafe,
-                ),
+                context,
+                valueBuilderSafe,
+              ),
         child: Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
@@ -134,8 +142,9 @@ class SearchField<T> extends StatelessWidget {
         subtitle: subtitle == null
             ? null
             : DefaultTextStyle(
-                style: theme.textTheme.labelMedium!
-                    .copyWith(color: theme.disabledColor),
+                style: theme.textTheme.labelMedium!.copyWith(
+                  color: theme.disabledColor,
+                ),
                 child: subtitle,
               ),
         selected: selected,
@@ -150,19 +159,19 @@ class SearchField<T> extends StatelessWidget {
         MaterialPageRoute<void>(
           builder: (context) =>
               (provider ?? ({required Widget child}) => child)(
-            child: Scaffold(
-              appBar: AppBar(),
-              body: (searchScreenBuilder ?? SearchScreen.new).call(
-                values: values,
-                tileBuilder: tileBuilder,
-                onSelect: (value) {
-                  Navigator.of(context).pop();
-                  onSelected!(value);
-                },
-                searcher: searcher,
+                child: Scaffold(
+                  appBar: AppBar(),
+                  body: (searchScreenBuilder ?? SearchScreen.new).call(
+                    values: values,
+                    tileBuilder: tileBuilder,
+                    onSelect: (value) {
+                      Navigator.of(context).pop();
+                      onSelected!(value);
+                    },
+                    searcher: searcher,
+                  ),
+                ),
               ),
-            ),
-          ),
         ),
       );
     } else {
@@ -170,35 +179,36 @@ class SearchField<T> extends StatelessWidget {
         context: context,
         backgroundColor: Theme.of(context).colorScheme.surfaceBright,
         constraints: BoxConstraints(
-          maxWidth: 256,
-          minWidth: searcher == null ? 0 : 256,
-          maxHeight: 384,
-          minHeight: searcher == null ? 0 : 384,
+          maxWidth: overlayMaxWidth,
+          minWidth: searcher == null ? 0 : overlayMaxWidth,
+          maxHeight: overlayMaxHeight,
+          minHeight: searcher == null ? 0 : overlayMaxHeight,
         ),
         bodyBuilder: (popoverContext) =>
             (provider ?? ({required Widget child}) => child)(
-          child: (searchScreenBuilder ?? SearchScreen.new).call(
-            values: values,
-            tileBuilder: tileBuilder,
-            onSelect: (value) {
-              Navigator.of(popoverContext).pop();
-              onSelected!(value);
-            },
-            searcher: searcher,
-          ),
-        ),
+              child: (searchScreenBuilder ?? SearchScreen.new).call(
+                values: values,
+                tileBuilder: tileBuilder,
+                onSelect: (value) {
+                  Navigator.of(popoverContext).pop();
+                  onSelected!(value);
+                },
+                searcher: searcher,
+              ),
+            ),
       );
     }
   }
 }
 
-typedef SearchScreenDef<T> = Widget Function({
-  required Iterable<T> values,
-  required Widget Function(BuildContext context, T value) tileBuilder,
-  required void Function(T value) onSelect,
-  double Function(String query, T value)? searcher,
-  Key? key,
-});
+typedef SearchScreenDef<T> =
+    Widget Function({
+      required Iterable<T> values,
+      required Widget Function(BuildContext context, T value) tileBuilder,
+      required void Function(T value) onSelect,
+      double Function(String query, T value)? searcher,
+      Key? key,
+    });
 
 class SearchScreen<T> extends StatefulWidget {
   const SearchScreen({
@@ -229,13 +239,13 @@ class SearchScreenState<T> extends State<SearchScreen<T>> {
   Widget build(BuildContext context) {
     final searchResults = widget.searcher != null && query.isNotEmpty
         ? (widget.values
-                .map(
-                  (value) => (value, widget.searcher!(query, value)),
-                )
-                .where((e) => e.$2 > 0)
-                .toList()
-              ..sort((e1, e2) => e2.$2.compareTo(e1.$2)))
-            .map((e) => e.$1)
+                  .map(
+                    (value) => (value, widget.searcher!(query, value)),
+                  )
+                  .where((e) => e.$2 > 0)
+                  .toList()
+                ..sort((e1, e2) => e2.$2.compareTo(e1.$2)))
+              .map((e) => e.$1)
         : widget.values;
 
     final body = ListView(

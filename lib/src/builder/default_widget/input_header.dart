@@ -13,9 +13,7 @@ class InputHeader extends StatelessWidget {
     final helperText = data.helperText ?? '';
     final errorText = data.errorText ?? '';
 
-    final theme = Theme.of(context);
-    final inputDecorationTheme = theme.inputDecorationTheme;
-
+    // If there's truly nothing to show beyond the main child or its layout hints, shrink.
     if (labelText.isEmpty &&
         errorText.isEmpty &&
         helperText.isEmpty &&
@@ -23,27 +21,68 @@ class InputHeader extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
-    return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-      title: Text(labelText),
-      subtitle: errorText.isNotEmpty
-          ? Text(
-              errorText,
-              style: inputDecorationTheme.errorStyle ??
-                  theme.textTheme.labelMedium
-                      ?.copyWith(color: theme.colorScheme.error),
-            )
-          : helperText.isNotEmpty
-              ? Text(
-                  helperText,
-                  style: inputDecorationTheme.helperStyle ??
-                      theme.textTheme.labelMedium,
-                )
-              : null,
-      trailing: data.trailing,
+    final theme = Theme.of(context);
+    final inputDecorationTheme = theme.inputDecorationTheme;
+
+    final subtitleWidget = errorText.isNotEmpty
+        ? Text(
+            errorText,
+            style:
+                inputDecorationTheme.errorStyle ??
+                theme.textTheme.labelMedium?.copyWith(
+                  color: theme.colorScheme.error,
+                ),
+          )
+        : helperText.isNotEmpty
+        ? Text(
+            helperText,
+            style:
+                inputDecorationTheme.helperStyle ?? theme.textTheme.labelMedium,
+          )
+        : null;
+
+    return InkWell(
       onTap: data.onTap,
-      minTileHeight: data.shrinkWrap ? 0 : null,
-      minVerticalPadding: data.shrinkWrap ? 0 : null,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: data.shrinkWrap
+              ? 0
+              : theme.listTileTheme.minVerticalPadding ?? 4,
+        ),
+        child: Row(
+          crossAxisAlignment:
+              CrossAxisAlignment.start, // Align subtitle/trailing at top
+          children: [
+            Expanded(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: data.shrinkWrap ? 0 : 56,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (labelText.isNotEmpty)
+                      Text(
+                        labelText,
+                        style:
+                            theme.inputDecorationTheme.labelStyle ??
+                            theme.textTheme.bodyLarge,
+                      ),
+                    if (subtitleWidget != null) subtitleWidget,
+                  ],
+                ),
+              ),
+            ),
+            if (data.trailing != null)
+              Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: data.trailing,
+              ),
+          ],
+        ),
+      ),
     );
   }
 }

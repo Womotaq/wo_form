@@ -37,7 +37,7 @@ mixin WoFormInputMixin {
   WoFormNodeMixin? getChild({
     required String path,
     required String parentPath,
-    required Map<String, dynamic> values,
+    required WoFormValues values,
   }) => null;
 
   String? getInvalidExplanation(
@@ -77,7 +77,7 @@ mixin WoFormInputMixin {
     required String parentPath,
   }) => id;
 
-  Map<String, dynamic> toJson();
+  Json toJson();
 
   Widget toWidget({required String parentPath, Key? key});
 }
@@ -94,7 +94,7 @@ typedef GetCustomErrorForListDef<T> =
     );
 
 extension _SelectInputUiSettingsX<T> on SelectInputUiSettings<T> {
-  static Map<String, dynamic> staticToJsonString(
+  static Json staticToJsonString(
     SelectInputUiSettings<String> object,
   ) => object.toJson();
 }
@@ -242,8 +242,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
 
   const WoFormInput._();
 
-  factory WoFormInput.fromJson(Map<String, dynamic> json) =>
-      _$WoFormInputFromJson(json);
+  factory WoFormInput.fromJson(Json json) => _$WoFormInputFromJson(json);
 
   // --
 
@@ -487,7 +486,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
   }
 
   @override
-  Map<String, dynamic> getInitialValues({required String parentPath}) {
+  WoFormValues getInitialValues({required String parentPath}) {
     switch (this) {
       case BooleanInput(initialValue: final initialValue):
         return {'$parentPath/$id': initialValue};
@@ -566,7 +565,7 @@ abstract class SelectInput<T>
     /// SelectInput<TimeControl>(
     ///   toJsonT: (value) => (value as TimeControl?)?.toJson(),
     ///   fromJsonT: (json) =>
-    ///       TimeControl.fromJson(json as Map<String, dynamic>? ?? {}),
+    ///       TimeControl.fromJson(json as Json? ?? {}),
     /// ),
     @notSerializable dynamic Function(dynamic)? toJsonT,
     @notSerializable dynamic Function(dynamic)? fromJsonT,
@@ -575,7 +574,7 @@ abstract class SelectInput<T>
   const SelectInput._();
 
   factory SelectInput.fromJson(
-    Map<String, dynamic> json,
+    Json json,
     T Function(Object? json) fromJsonT,
   ) => _$SelectInputFromJson(json, fromJsonT);
 
@@ -583,7 +582,7 @@ abstract class SelectInput<T>
   // If the override is invalid, go in :
   // wo_form_input.freezed.dart -> mixin _$SelectInput<T>
   // Comment the toJson() method.
-  Map<String, dynamic> toJson() => _$SelectInputToJson(
+  Json toJson() => _$SelectInputToJson(
     this as _SelectInput<T>,
     toJsonT ?? _defaultToJsonT<T>,
   );
@@ -685,7 +684,7 @@ abstract class SelectInput<T>
       );
 
   @override
-  Map<String, dynamic> getInitialValues({required String parentPath}) => {
+  WoFormValues getInitialValues({required String parentPath}) => {
     '$parentPath/$id': initialValues,
   };
 
@@ -695,6 +694,9 @@ abstract class SelectInput<T>
 
   @override
   SelectInput<T> withId({required String id}) => copyWith(id: id);
+
+  @override
+  int? get flex => uiSettings?.flex;
 }
 
 Object? _defaultToJsonT<T>(T value) {

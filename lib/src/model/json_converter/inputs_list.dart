@@ -7,12 +7,12 @@ class InputsListConverter
 
   @override
   List<WoFormNodeMixin> fromJson(List<dynamic> json) => json.map((inputJson) {
-        try {
-          return WoFormInput.fromJson(inputJson as Map<String, dynamic>);
-        } on CheckedFromJsonException {
-          return WoFormNode.fromJson(inputJson as Map<String, dynamic>);
-        }
-      }).toList();
+    try {
+      return WoFormInput.fromJson(inputJson as Json);
+    } on CheckedFromJsonException {
+      return WoFormNode.fromJson(inputJson as Json);
+    }
+  }).toList();
 
   @override
   List<dynamic> toJson(List<WoFormNodeMixin> object) =>

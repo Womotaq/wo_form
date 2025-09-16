@@ -9,6 +9,7 @@ extension StringX on String {
 }
 
 typedef WoFormValues = Map<String, dynamic>;
+typedef Json = Map<String, dynamic>;
 
 extension WoFormValuesX on WoFormValues {
   static String getAbsolutePath({
@@ -84,11 +85,11 @@ extension WoFormValuesX on WoFormValues {
   bool meet(Condition condition) {
     switch (condition) {
       case ConditionValue(
-          path: final path,
-          isEqualTo: final isEqualTo,
-          isNotEqualTo: final isNotEqualTo,
-          isNull: final isNull,
-        ):
+        path: final path,
+        isEqualTo: final isEqualTo,
+        isNotEqualTo: final isNotEqualTo,
+        isNull: final isNull,
+      ):
         final value = getValue(path);
         if (isEqualTo != null) {
           if (isEqualTo is List && value is List) {

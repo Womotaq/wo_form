@@ -10,7 +10,7 @@ import 'package:wo_form/src/_export.dart';
 import 'package:wo_form/wo_form.dart';
 
 class WoFormStatusCubit extends Cubit<WoFormStatus> {
-  WoFormStatusCubit._(super.initialState);
+  WoFormStatusCubit(super.initialState);
 
   void setInProgress({
     List<WoFormInputError> errors = const [],
@@ -49,7 +49,7 @@ class HydratedWoFormStatusCubit extends WoFormStatusCubit
         'hydratationId must not be an empty string',
       ),
       id = '$hydratationId-WoFormStatusCubit',
-      super._() {
+      super() {
     hydrate();
   }
 
@@ -59,11 +59,10 @@ class HydratedWoFormStatusCubit extends WoFormStatusCubit
   String get storagePrefix => '';
 
   @override
-  WoFormStatus? fromJson(Map<String, dynamic> json) =>
-      WoFormStatus.fromJson(json);
+  WoFormStatus? fromJson(Json json) => WoFormStatus.fromJson(json);
 
   @override
-  Map<String, dynamic>? toJson(WoFormStatus state) => state.toJson();
+  Json? toJson(WoFormStatus state) => state.toJson();
 }
 
 /// This cubit references the paths of all the locked inputs.
@@ -99,13 +98,13 @@ class HydratedWoFormLockCubit extends WoFormLockCubit
   String get storagePrefix => '';
 
   @override
-  Set<String>? fromJson(Map<String, dynamic> json) {
+  Set<String>? fromJson(Json json) {
     final data = json['locks'];
     return data is Iterable<String> ? data.toSet() : null;
   }
 
   @override
-  Map<String, dynamic>? toJson(Set<String> state) => {'locks': state.toList()};
+  Json? toJson(Set<String> state) => {'locks': state.toList()};
 }
 
 typedef _TempSubmitData = ({Future<void> Function() onSubmitting, String path});
@@ -118,7 +117,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     this._canSubmit, {
     required this.onStatusUpdate,
     required this.onSubmitting,
-    Map<String, dynamic> initialValues = const {},
+    WoFormValues initialValues = const {},
   }) : _tempSubmitDatas = [],
        super(_root.getInitialValues()..addAll(initialValues)) {
     _initialValues = Map.from(state);
@@ -129,7 +128,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   final WoFormLockCubit _lockCubit;
   final Future<bool> Function(BuildContext context) _canSubmit;
   final Future<void> Function(RootNode root, WoFormValues values)? onSubmitting;
-  late Map<String, dynamic> _initialValues;
+  late WoFormValues _initialValues;
   final Map<String, FocusNode> _focusNodes = {};
 
   /// Called each time a value changed, accordingly to [UpdateStatus].
@@ -196,9 +195,6 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     WoFormValues values, {
     UpdateStatus updateStatus = UpdateStatus.yes,
   }) {
-    // Can't edit a form while submitting it
-    if (_statusCubit.state is SubmittingStatus) return;
-
     // Remove paths of locked inputs and transform any #path
     // ignore: parameter_assignments
     values = {
@@ -218,7 +214,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
       UpdateStatus.yes => true,
     };
 
-    final newMap = Map<String, dynamic>.from(state);
+    final newMap = WoFormValues.from(state);
     for (final entry in values.entries) {
       newMap[entry.key] = entry.value;
     }
@@ -231,6 +227,9 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     }
 
     emit(newMap);
+
+    // Only WoFormValues can be updated while submitting
+    if (_statusCubit.state is SubmittingStatus) return;
 
     if (shouldUpdateStatus) {
       final shouldUpdateErrors = switch (updateStatus) {
@@ -291,7 +290,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   ///
   /// Return false if the path was already visited.
   bool markPathAsVisited({required String path}) {
-    final newMap = Map<String, dynamic>.from(state);
+    final newMap = WoFormValues.from(state);
     final visitedPaths = Set<String>.from(
       newMap[_visitedPathsKey] as Iterable<String>? ?? {},
     );
@@ -308,7 +307,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   /// Marks the nodes at these paths as visited by the user.
   /// Before submission, only visited nodes show errors.
   void _markPathsAsVisited({required Iterable<String> paths}) {
-    final newMap = Map<String, dynamic>.from(state);
+    final newMap = WoFormValues.from(state);
     final visitedPaths = Set<String>.from(
       newMap[_visitedPathsKey] as Iterable<String>? ?? {},
     )..addAll(paths);
@@ -417,8 +416,8 @@ class HydratedWoFormValuesCubit extends WoFormValuesCubit
   String get storagePrefix => '';
 
   @override
-  WoFormValues? fromJson(Map<String, dynamic> json) {
-    final jsonT = Map<String, dynamic>.from(json);
+  WoFormValues? fromJson(Json json) {
+    final jsonT = Json.from(json);
 
     for (final entry in json.entries) {
       if (entry.value is! List) continue; // SelectInput's value is a list
@@ -440,8 +439,8 @@ class HydratedWoFormValuesCubit extends WoFormValuesCubit
   }
 
   @override
-  Map<String, dynamic>? toJson(WoFormValues state) {
-    final json = Map<String, dynamic>.from(state);
+  Json? toJson(WoFormValues state) {
+    final json = Json.from(state);
 
     for (final entry in state.entries) {
       if (entry.value is! List) continue; // SelectInput's value is a list
@@ -535,7 +534,7 @@ class WoForm extends StatelessWidget {
           providers: [
             BlocProvider(
               create: (context) => root.hydratationId.isEmpty
-                  ? WoFormStatusCubit._(
+                  ? WoFormStatusCubit(
                       const InitialStatus(),
                     )
                   : HydratedWoFormStatusCubit._(
@@ -606,9 +605,7 @@ class WoForm extends StatelessWidget {
 
     if (root.uiSettings.theme != null) {
       return WoFormTheme(
-        data: (WoFormTheme.of(context) ?? const WoFormThemeData()).merge(
-          root.uiSettings.theme,
-        ),
+        data: root.uiSettings.theme!.merge(WoFormTheme.of(context)),
         child: form,
       );
     } else {

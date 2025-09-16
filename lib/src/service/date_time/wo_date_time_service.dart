@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/wo_form.dart';
 
 class DateTimeService {
@@ -50,55 +49,48 @@ class DateTimeService {
 
     FocusScope.of(context).unfocus();
 
-    final woFormStatusCubit = context.read<WoFormStatusCubit>();
-
-    switch (initialDatePickerMode) {
-      case null:
-      case DatePickerMode.day:
-        return Navigator.push(
-          context,
-          MaterialPageRoute<DateTime>(
-            builder: (_) => PickDatePage(
-              woFormStatusCubit: woFormStatusCubit,
+    final screenSize = MediaQuery.of(context).size;
+    if (screenSize.width > 500 && screenSize.height > 700) {
+      return showDialog(
+        context: context,
+        builder: (context) => Dialog(
+          clipBehavior: Clip.hardEdge,
+          child: switch (initialDatePickerMode) {
+            null || DatePickerMode.day => PickDatePage.inModal(
               minDate: minDate,
               maxDate: maxDate,
               initialDate: initialDate,
               dateFormat: dateFormat,
             ),
-          ),
-        );
-      case DatePickerMode.year:
-        final screenSize = MediaQuery.of(context).size;
-        if (screenSize.width > 500 && screenSize.height > 700) {
-          return showDialog(
-            context: context,
-            builder: (context) => Dialog(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: PickDatePageWithYear.inModal(
-                  woFormStatusCubit: woFormStatusCubit,
-                  minDate: minDate,
-                  maxDate: maxDate,
-                  initialDate: initialDate,
-                  dateFormat: dateFormat,
-                ),
-              ),
-            ),
-          );
-        }
-
-        return Navigator.push(
-          context,
-          MaterialPageRoute<DateTime>(
-            builder: (_) => PickDatePageWithYear(
-              woFormStatusCubit: woFormStatusCubit,
+            DatePickerMode.year => PickDatePageWithYear.inModal(
               minDate: minDate,
               maxDate: maxDate,
               initialDate: initialDate,
               dateFormat: dateFormat,
             ),
-          ),
-        );
+          },
+        ),
+      );
     }
+
+    return Navigator.push(
+      context,
+      MaterialPageRoute<DateTime>(
+        builder: (_) => switch (initialDatePickerMode) {
+          null || DatePickerMode.day => PickDatePage(
+            minDate: minDate,
+            maxDate: maxDate,
+            initialDate: initialDate,
+            dateFormat: dateFormat,
+          ),
+          DatePickerMode.year => PickDatePageWithYear(
+            minDate: minDate,
+            maxDate: maxDate,
+            initialDate: initialDate,
+            dateFormat: dateFormat,
+          ),
+        },
+      ),
+    );
   }
 }

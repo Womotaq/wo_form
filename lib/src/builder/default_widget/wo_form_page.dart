@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/src/_export.dart';
+import 'package:wo_form/src/utils/constrained_column.dart';
 import 'package:wo_form/wo_form.dart';
 
 class WoFormPage extends StatelessWidget {
@@ -49,7 +50,7 @@ class WoFormStandardPage extends StatelessWidget {
           ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          spacing: woFormTheme?.verticalSpacing ?? 0,
+          spacing: woFormTheme?.spacing ?? 0,
           children: root.children
               .map((child) => child.toWidget(parentPath: ''))
               .toList(),
@@ -210,40 +211,54 @@ class WoFormMultiStepPageState extends State<WoFormMultiStepPage> {
               controller: pageController,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: root.children.length,
-              itemBuilder: (context, index) => ConstrainedListView(
-                maxWidth:
-                    woFormTheme?.maxWidth ?? WoFormThemeData.DEFAULT_MAX_WIDTH,
-                children: [
-                  const SizedBox(height: 16),
-                  root.children[index].toWidget(parentPath: ''),
-                  const SizedBox(height: 32),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        SubmitButtonBuilder(
-                          submitButtonBuilder: index == root.children.length - 1
-                              ? null
-                              : (data) =>
-                                    (root.uiSettings.submitButtonBuilder ??
-                                    woFormTheme?.submitButtonBuilder ??
-                                    SubmitButton.new)(
-                                      data.copyWith(
-                                        text:
-                                            widget.submitMode.nextText ??
-                                            context.read<WoFormL10n?>()?.next(),
-                                        icon: null,
-                                        path: '/${root.children[index].id}',
-                                      ),
-                                    ),
-                        ),
-                      ],
-                    ),
+              itemBuilder: (context, index) {
+                final body = Padding(
+                  padding: const EdgeInsets.only(top: 16, bottom: 32),
+                  child: root.children[index].toWidget(
+                    parentPath: '',
                   ),
-                  const SizedBox(height: 16),
-                ],
-              ),
+                );
+                return ConstrainedColumn(
+                  maxWidth:
+                      woFormTheme?.maxWidth ??
+                      WoFormThemeData.DEFAULT_MAX_WIDTH,
+                  children: [
+                    Flexible(
+                      child: root.uiSettings.scrollable
+                          ? SingleChildScrollView(child: body)
+                          : body,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          SubmitButtonBuilder(
+                            submitButtonBuilder:
+                                index == root.children.length - 1
+                                ? null
+                                : (data) =>
+                                      (root.uiSettings.submitButtonBuilder ??
+                                      woFormTheme?.submitButtonBuilder ??
+                                      SubmitButton.new)(
+                                        data.copyWith(
+                                          text:
+                                              widget.submitMode.nextText ??
+                                              context
+                                                  .read<WoFormL10n?>()
+                                                  ?.next(),
+                                          icon: null,
+                                          path: '/${root.children[index].id}',
+                                        ),
+                                      ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                  ],
+                );
+              },
             ),
           ),
         ],
