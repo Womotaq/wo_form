@@ -11,14 +11,14 @@ class InputsNodeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final node = data.input;
 
-    final oFormTheme = WoFormTheme.of(context);
+    final woFormTheme = WoFormTheme.of(context);
     final formUiSettings = context.read<RootNode>().uiSettings;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         (data.uiSettings.headerBuilder ??
-                oFormTheme?.headerBuilder ??
+                woFormTheme?.headerBuilder ??
                 FormHeader.new)
             .call(
               WoFormHeaderData(
@@ -30,7 +30,7 @@ class InputsNodeWidget extends StatelessWidget {
           flex: !formUiSettings.scrollable && node.flex != 0 ? 1 : 0,
           child: Flex(
             direction: data.uiSettings.direction ?? Axis.vertical,
-            spacing: data.uiSettings.spacing ?? oFormTheme?.spacing ?? 0,
+            spacing: data.uiSettings.spacing ?? woFormTheme?.spacing ?? 0,
             crossAxisAlignment:
                 data.uiSettings.crossAxisAlignment ?? CrossAxisAlignment.start,
             children: node.children
