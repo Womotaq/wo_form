@@ -29,7 +29,8 @@ class _StringFieldState extends State<StringField> {
     if (widget.data.uiSettings.keyboardType == TextInputType.phone) {
       var isoCode = WoFormTheme.of(context, listen: false)?.defaultPhoneCoutry;
       if (isoCode == null) {
-        final countryCode = PlatformDispatcher.instance.locale.countryCode ??
+        final countryCode =
+            PlatformDispatcher.instance.locale.countryCode ??
             Platform.localeName.split('_').last;
         isoCode = IsoCode.fromJson(countryCode);
       }
@@ -41,8 +42,9 @@ class _StringFieldState extends State<StringField> {
         ),
       );
     } else {
-      textEditingController =
-          TextEditingController(text: widget.data.value ?? '');
+      textEditingController = TextEditingController(
+        text: widget.data.value ?? '',
+      );
     }
   }
 
@@ -75,17 +77,17 @@ class _StringFieldState extends State<StringField> {
       suffixIcon: switch (widget.data.uiSettings.action) {
         null => null,
         StringFieldAction.clear => IconButton(
-            onPressed: widget.data.onValueChanged == null
-                ? null
-                : () => widget.data.onValueChanged!(null),
-            icon: const Icon(Icons.clear),
-          ),
+          onPressed: widget.data.onValueChanged == null
+              ? null
+              : () => widget.data.onValueChanged!(null),
+          icon: const Icon(Icons.clear),
+        ),
         StringFieldAction.obscure => IconButton(
-            onPressed: () => setState(() => obscureText = !obscureText),
-            icon: obscureText
-                ? const Icon(Icons.visibility_off_outlined)
-                : const Icon(Icons.visibility_outlined),
-          ),
+          onPressed: () => setState(() => obscureText = !obscureText),
+          icon: obscureText
+              ? const Icon(Icons.visibility_off_outlined)
+              : const Icon(Icons.visibility_outlined),
+        ),
       },
     );
 
@@ -101,18 +103,19 @@ class _StringFieldState extends State<StringField> {
             ?.map((isoCode) => isoCode.name)
             .toList(),
         onChanged: widget.data.onValueChanged,
-        onSelectedWithDetails: placeAutocompleteSettings.includeDetails &&
+        onSelectedWithDetails:
+            placeAutocompleteSettings.includeDetails &&
                 widget.data.onValueChanged != null
             ? (PlaceDetails details) =>
-                context.read<WoFormValuesCubit>().onValueChanged(
-                      path: '${widget.data.path}+details',
-                      value: details,
-                      // '${widget.data.path}+longitude':
-                      //     double.tryParse(details.longitude ?? ''),
-                      // '${widget.data.path}+latitude':
-                      //     double.tryParse(details.latitude ?? ''),
-                      // '${widget.data.path}+details': details,
-                    )
+                  context.read<WoFormValuesCubit>().onValueChanged(
+                    path: '${widget.data.path}+details',
+                    value: details,
+                    // '${widget.data.path}+longitude':
+                    //     double.tryParse(details.longitude ?? ''),
+                    // '${widget.data.path}+latitude':
+                    //     double.tryParse(details.latitude ?? ''),
+                    // '${widget.data.path}+details': details,
+                  )
             // context.read<WoFormValuesCubit>().onValuesChanged({
             //   '${widget.data.path}+longitude':
             //       double.tryParse(details.longitude ?? ''),
@@ -123,8 +126,9 @@ class _StringFieldState extends State<StringField> {
             : null,
         onFieldSubmitted:
             (widget.data.uiSettings.submitFormOnFieldSubmitted ?? true)
-                ? (_) => context.read<WoFormValuesCubit>().submit(context)
-                : null,
+            ? (_) => context.read<WoFormValuesCubit>().submit(context)
+            : null,
+        onTapOutside: (event) => FocusScope.of(context).unfocus(),
         itemBuilder: (context, index, PlacePrediction prediction) => Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Row(
@@ -137,7 +141,7 @@ class _StringFieldState extends State<StringField> {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -156,12 +160,13 @@ class _StringFieldState extends State<StringField> {
           onChanged: widget.data.onValueChanged == null
               ? null
               : (number) => widget.data.onValueChanged!(
-                    '+${number.countryCode} ${number.formatNsn()}',
-                  ),
+                  '+${number.countryCode} ${number.formatNsn()}',
+                ),
           onSubmitted:
               (widget.data.uiSettings.submitFormOnFieldSubmitted ?? true)
-                  ? (_) => context.read<WoFormValuesCubit>().submit(context)
-                  : null,
+              ? (_) => context.read<WoFormValuesCubit>().submit(context)
+              : null,
+          onTapOutside: (event) => FocusScope.of(context).unfocus(),
           style: widget.data.uiSettings.style,
           obscureText: obscureText,
           autocorrect: widget.data.uiSettings.autocorrect ?? true,
@@ -183,8 +188,9 @@ class _StringFieldState extends State<StringField> {
         onChanged: widget.data.onValueChanged,
         onFieldSubmitted:
             (widget.data.uiSettings.submitFormOnFieldSubmitted ?? true)
-                ? (_) => context.read<WoFormValuesCubit>().submit(context)
-                : null,
+            ? (_) => context.read<WoFormValuesCubit>().submit(context)
+            : null,
+        onTapOutside: (event) => FocusScope.of(context).unfocus(),
         style: widget.data.uiSettings.style,
         keyboardType: widget.data.uiSettings.keyboardType,
         obscureText: obscureText,
@@ -192,7 +198,8 @@ class _StringFieldState extends State<StringField> {
         autofillHints: widget.data.uiSettings.autofillHints,
         autofocus: widget.data.uiSettings.autofocus ?? false,
         textInputAction: widget.data.uiSettings.textInputAction,
-        textCapitalization: widget.data.uiSettings.textCapitalization ??
+        textCapitalization:
+            widget.data.uiSettings.textCapitalization ??
             TextCapitalization.none,
         maxLines: widget.data.uiSettings.maxLines == 0
             ? null

@@ -12,29 +12,45 @@ class SubmitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loadingIndicator =
-        context.select((WoFormStatusCubit? c) => c?.state is SubmittingStatus)
-            ? SizedBox.square(
-                dimension: 12,
-                child: CircularProgressIndicator(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                  strokeWidth: 2,
-                ),
-              )
-            : null;
+    final submitting = context.select(
+      (WoFormStatusCubit? c) => c?.state is SubmittingStatus,
+    );
+
+    final style = FilledButtonTheme.of(context).style;
+
+    final backgroundColor = submitting || data.onPressed != null
+        ? style?.backgroundColor?.resolve({}) ??
+              Theme.of(context).colorScheme.onPrimary
+        : style?.backgroundColor?.resolve({WidgetState.disabled}) ??
+              Theme.of(context).disabledColor;
+    final foregroundColor = submitting || data.onPressed != null
+        ? style?.foregroundColor?.resolve({}) ??
+              Theme.of(context).colorScheme.onPrimary
+        : style?.foregroundColor?.resolve({WidgetState.disabled}) ??
+              Theme.of(context).disabledColor;
+
+    final loadingIndicator = submitting
+        ? SizedBox.square(
+            dimension: 12,
+            child: CircularProgressIndicator(
+              color: foregroundColor,
+              strokeWidth: 2,
+            ),
+          )
+        : null;
 
     final text =
         (data.text != null && data.text!.isNotEmpty) || data.icon == null
-            ? Text(
-                data.text ?? 'Submit',
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: data.onPressed == null
-                          ? Theme.of(context).disabledColor
-                          : Theme.of(context).colorScheme.onPrimary,
-                    ),
-              )
-            : null;
+        ? Text(
+            data.text ?? 'Submit',
+            style:
+                style?.textStyle?.resolve({}) ??
+                Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: foregroundColor,
+                ),
+          )
+        : null;
 
     final child = Stack(
       alignment: Alignment.center,
@@ -58,13 +74,21 @@ class SubmitButton extends StatelessWidget {
       onPressed: data.onPressed,
       child: child,
     );
+    final woTheme = WoFormTheme.of(context);
+    final margin =
+        this.margin ??
+        woTheme?.submitButtonMargin
+                ?.call(data.position)
+                .add(const EdgeInsets.symmetric(horizontal: 16))
+            as EdgeInsets?;
 
     switch (data.position) {
       case SubmitButtonPosition.appBar:
         return button;
       case SubmitButtonPosition.body:
         return Padding(
-          padding: margin ??
+          padding:
+              margin ??
               const EdgeInsets.only(
                 top: 32,
                 left: 16,
@@ -81,18 +105,14 @@ class SubmitButton extends StatelessWidget {
       case SubmitButtonPosition.floating:
         return text == null
             ? FloatingActionButton(
-                backgroundColor: data.onPressed == null
-                    ? Theme.of(context).disabledColor
-                    : Theme.of(context).colorScheme.primary,
-                foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                backgroundColor: backgroundColor,
+                foregroundColor: foregroundColor,
                 onPressed: data.onPressed,
                 child: child,
               )
             : FloatingActionButton.extended(
-                backgroundColor: data.onPressed == null
-                    ? Theme.of(context).disabledColor
-                    : Theme.of(context).colorScheme.primary,
-                foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                backgroundColor: backgroundColor,
+                foregroundColor: foregroundColor,
                 onPressed: data.onPressed,
                 label: child,
               );

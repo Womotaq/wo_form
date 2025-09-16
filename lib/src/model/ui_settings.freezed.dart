@@ -1680,7 +1680,8 @@ as ScoreWidgetBuilderDef?,
 /// @nodoc
 mixin _$StringInputUiSettings {
 
- String? get labelText; String? get hintText; String? get helperText;@notSerializable Widget? get prefixIcon; StringFieldAction? get action; bool? get submitFormOnFieldSubmitted;@TextInputTypeConverter() TextInputType? get keyboardType; bool? get obscureText; bool? get autocorrect; List<String>? get autofillHints; bool? get autofocus; TextInputAction? get textInputAction; TextCapitalization? get textCapitalization;/// Defaults to 1. If you want to set it to null, enter 0.
+ String? get labelText; String? get hintText; String? get helperText;@notSerializable Widget? get prefixIcon; StringFieldAction? get action; bool? get submitFormOnFieldSubmitted;@TextInputTypeConverter() TextInputType? get keyboardType; bool? get obscureText; bool? get autocorrect; List<String>? get autofillHints; bool? get autofocus; TextInputAction? get textInputAction;/// Defaults to TextCapitalization.none.
+ TextCapitalization? get textCapitalization;/// Defaults to 1. If you want to set it to null, enter 0.
  int? get maxLines; String? get invalidRegexMessage;@notSerializable TextStyle? get style;@notSerializable StringFieldBuilderDef? get widgetBuilder;
 /// Create a copy of StringInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -1785,6 +1786,7 @@ class _StringInputUiSettings extends StringInputUiSettings {
 
 @override final  bool? autofocus;
 @override final  TextInputAction? textInputAction;
+/// Defaults to TextCapitalization.none.
 @override final  TextCapitalization? textCapitalization;
 /// Defaults to 1. If you want to set it to null, enter 0.
 @override final  int? maxLines;

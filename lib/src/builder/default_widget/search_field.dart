@@ -278,6 +278,7 @@ class SearchScreenState<T> extends State<SearchScreen<T>> {
                   suffixIcon: Icon(Icons.search),
                 ),
                 onChanged: (value) => setState(() => query = value),
+                onTapOutside: (event) => FocusScope.of(context).unfocus(),
               ),
             ),
             body: body,

@@ -289,7 +289,7 @@ as String,
 @JsonSerializable()
 
 class ConditionnalNode extends WoFormNode {
-  const ConditionnalNode({required this.id, required this.condition, @InputConverter() required this.child, this.conditionIsInitiallyMet = false, this.clearChildrenWhenHidden = true, final  String? $type}): $type = $type ?? 'conditionnal',super._();
+  const ConditionnalNode({required this.id, required this.condition, @InputConverter() required this.child, this.conditionIsInitiallyMet = false, this.clearChildrenWhenHidden = true, this.uiSettings = const InputUiSettings(), final  String? $type}): $type = $type ?? 'conditionnal',super._();
   factory ConditionnalNode.fromJson(Map<String, dynamic> json) => _$ConditionnalNodeFromJson(json);
 
 @override final  String id;
@@ -297,6 +297,7 @@ class ConditionnalNode extends WoFormNode {
 @InputConverter() final  WoFormNodeMixin child;
 @JsonKey() final  bool conditionIsInitiallyMet;
 @JsonKey() final  bool clearChildrenWhenHidden;
+@JsonKey() final  InputUiSettings uiSettings;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -315,16 +316,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ConditionnalNode&&(identical(other.id, id) || other.id == id)&&(identical(other.condition, condition) || other.condition == condition)&&(identical(other.child, child) || other.child == child)&&(identical(other.conditionIsInitiallyMet, conditionIsInitiallyMet) || other.conditionIsInitiallyMet == conditionIsInitiallyMet)&&(identical(other.clearChildrenWhenHidden, clearChildrenWhenHidden) || other.clearChildrenWhenHidden == clearChildrenWhenHidden));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ConditionnalNode&&(identical(other.id, id) || other.id == id)&&(identical(other.condition, condition) || other.condition == condition)&&(identical(other.child, child) || other.child == child)&&(identical(other.conditionIsInitiallyMet, conditionIsInitiallyMet) || other.conditionIsInitiallyMet == conditionIsInitiallyMet)&&(identical(other.clearChildrenWhenHidden, clearChildrenWhenHidden) || other.clearChildrenWhenHidden == clearChildrenWhenHidden)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,condition,child,conditionIsInitiallyMet,clearChildrenWhenHidden);
+int get hashCode => Object.hash(runtimeType,id,condition,child,conditionIsInitiallyMet,clearChildrenWhenHidden,uiSettings);
 
 @override
 String toString() {
-  return 'WoFormNode.conditionnal(id: $id, condition: $condition, child: $child, conditionIsInitiallyMet: $conditionIsInitiallyMet, clearChildrenWhenHidden: $clearChildrenWhenHidden)';
+  return 'WoFormNode.conditionnal(id: $id, condition: $condition, child: $child, conditionIsInitiallyMet: $conditionIsInitiallyMet, clearChildrenWhenHidden: $clearChildrenWhenHidden, uiSettings: $uiSettings)';
 }
 
 
@@ -335,11 +336,11 @@ abstract mixin class $ConditionnalNodeCopyWith<$Res> implements $WoFormNodeCopyW
   factory $ConditionnalNodeCopyWith(ConditionnalNode value, $Res Function(ConditionnalNode) _then) = _$ConditionnalNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id, Condition condition,@InputConverter() WoFormNodeMixin child, bool conditionIsInitiallyMet, bool clearChildrenWhenHidden
+ String id, Condition condition,@InputConverter() WoFormNodeMixin child, bool conditionIsInitiallyMet, bool clearChildrenWhenHidden, InputUiSettings uiSettings
 });
 
 
-$ConditionCopyWith<$Res> get condition;
+$ConditionCopyWith<$Res> get condition;$InputUiSettingsCopyWith<$Res> get uiSettings;
 
 }
 /// @nodoc
@@ -352,14 +353,15 @@ class _$ConditionnalNodeCopyWithImpl<$Res>
 
 /// Create a copy of WoFormNode
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? condition = null,Object? child = null,Object? conditionIsInitiallyMet = null,Object? clearChildrenWhenHidden = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? condition = null,Object? child = null,Object? conditionIsInitiallyMet = null,Object? clearChildrenWhenHidden = null,Object? uiSettings = null,}) {
   return _then(ConditionnalNode(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,condition: null == condition ? _self.condition : condition // ignore: cast_nullable_to_non_nullable
 as Condition,child: null == child ? _self.child : child // ignore: cast_nullable_to_non_nullable
 as WoFormNodeMixin,conditionIsInitiallyMet: null == conditionIsInitiallyMet ? _self.conditionIsInitiallyMet : conditionIsInitiallyMet // ignore: cast_nullable_to_non_nullable
 as bool,clearChildrenWhenHidden: null == clearChildrenWhenHidden ? _self.clearChildrenWhenHidden : clearChildrenWhenHidden // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
+as InputUiSettings,
   ));
 }
 
@@ -371,6 +373,15 @@ $ConditionCopyWith<$Res> get condition {
   
   return $ConditionCopyWith<$Res>(_self.condition, (value) {
     return _then(_self.copyWith(condition: value));
+  });
+}/// Create a copy of WoFormNode
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$InputUiSettingsCopyWith<$Res> get uiSettings {
+  
+  return $InputUiSettingsCopyWith<$Res>(_self.uiSettings, (value) {
+    return _then(_self.copyWith(uiSettings: value));
   });
 }
 }

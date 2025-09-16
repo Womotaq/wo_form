@@ -40,6 +40,9 @@ ConditionnalNode _$ConditionnalNodeFromJson(
   child: const InputConverter().fromJson(json['child'] as Map<String, dynamic>),
   conditionIsInitiallyMet: json['conditionIsInitiallyMet'] as bool? ?? false,
   clearChildrenWhenHidden: json['clearChildrenWhenHidden'] as bool? ?? true,
+  uiSettings: json['uiSettings'] == null
+      ? const InputUiSettings()
+      : InputUiSettings.fromJson(json['uiSettings'] as Map<String, dynamic>),
   $type: json['runtimeType'] as String?,
 );
 
@@ -50,6 +53,7 @@ Map<String, dynamic> _$ConditionnalNodeToJson(ConditionnalNode instance) =>
       'child': const InputConverter().toJson(instance.child),
       'conditionIsInitiallyMet': instance.conditionIsInitiallyMet,
       'clearChildrenWhenHidden': instance.clearChildrenWhenHidden,
+      'uiSettings': instance.uiSettings.toJson(),
       'runtimeType': instance.$type,
     };
 

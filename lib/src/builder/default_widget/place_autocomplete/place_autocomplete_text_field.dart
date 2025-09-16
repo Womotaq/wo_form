@@ -28,6 +28,7 @@ class PlaceAutocompleteTextField extends StatefulWidget {
     this.longitude,
     this.radius,
     this.onFieldSubmitted,
+    this.onTapOutside,
     this.textInputAction,
     super.key,
   });
@@ -53,6 +54,7 @@ class PlaceAutocompleteTextField extends StatefulWidget {
   final String? language;
   final TextInputAction? textInputAction;
   final ValueChanged<String>? onFieldSubmitted;
+  final ValueChanged<PointerDownEvent>? onTapOutside;
 
   final String? Function(String?, BuildContext)? validator;
 
@@ -123,6 +125,7 @@ class _PlaceAutoCompleteTextFieldState
                   return widget.validator?.call(inputString, context);
                 },
                 onChanged: subject.add,
+                onTapOutside: widget.onTapOutside,
               ),
             ),
           ],
@@ -163,14 +166,16 @@ class _PlaceAutoCompleteTextFieldState
     if (widget.latitude != null &&
         widget.longitude != null &&
         widget.radius != null) {
-      input = '$input&location=${widget.latitude},${widget.longitude}'
+      input =
+          '$input&location=${widget.latitude},${widget.longitude}'
           '&radius=${widget.radius}';
     }
 
     try {
       /// 'https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${widget.googleAPIKey}&input=' + input
-      final getPlacePredictions =
-          context.read<PlaceRepository?>()?.getPlacePredictions;
+      final getPlacePredictions = context
+          .read<PlaceRepository?>()
+          ?.getPlacePredictions;
       if (getPlacePredictions == null) {
         throw UnimplementedError(
           'You need to provide a PlaceRepository for address autocompletion.',
@@ -293,14 +298,16 @@ class _PlaceAutoCompleteTextFieldState
 
   void _showSnackBar(String errorData) {
     if (widget.showError) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(errorData)));
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(errorData)));
     }
   }
 }
 
-typedef ListItemBuilder = Widget Function(
-  BuildContext context,
-  int index,
-  PlacePrediction prediction,
-);
+typedef ListItemBuilder =
+    Widget Function(
+      BuildContext context,
+      int index,
+      PlacePrediction prediction,
+    );

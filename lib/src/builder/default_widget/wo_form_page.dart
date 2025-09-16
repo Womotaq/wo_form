@@ -33,9 +33,6 @@ class WoFormStandardPage extends StatelessWidget {
     final woFormTheme = WoFormTheme.of(context);
 
     final column = Column(
-      mainAxisSize: root.uiSettings.scrollable
-          ? MainAxisSize.max
-          : MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         if (root.uiSettings.titlePosition == WoFormTitlePosition.header)
@@ -51,12 +48,20 @@ class WoFormStandardPage extends StatelessWidget {
                   .call(headerData);
             },
           ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          spacing: woFormTheme?.spacing ?? 0,
-          children: root.children
-              .map((child) => child.toWidget(parentPath: ''))
-              .toList(),
+        Flexible(
+          flex: root.uiSettings.scrollable ? 0 : 1,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            spacing: woFormTheme?.spacing ?? 0,
+            children: root.children
+                .map(
+                  (child) => Flexible(
+                    flex: root.uiSettings.scrollable ? 0 : child.flex ?? 0,
+                    child: child.toWidget(parentPath: ''),
+                  ),
+                )
+                .toList(),
+          ),
         ),
         if (root.uiSettings.submitMode.buttonPosition ==
             SubmitButtonPosition.body)

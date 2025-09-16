@@ -9,6 +9,8 @@ part 'wo_form_theme_data.g.dart';
 
 typedef WidgetBuilderDef = Widget Function(BuildContext context);
 typedef ScoreWidgetBuilderDef = Widget Function({required num score});
+typedef SubmitButtonMarginDef =
+    EdgeInsets Function(SubmitButtonPosition position);
 
 @freezed
 abstract class WoFormThemeData with _$WoFormThemeData {
@@ -38,6 +40,13 @@ abstract class WoFormThemeData with _$WoFormThemeData {
     @notSerializable ScaffoldBuilderDef? standardScaffoldBuilder,
     @notSerializable StringFieldBuilderDef? stringFieldBuilder,
     @notSerializable SubmitButtonBuilderDef? submitButtonBuilder,
+
+    /// Default values :
+    /// - SubmitButtonPosition.body: EdgeInsets.only(top: 32, bottom: 12)
+    /// - SubmitButtonPosition.bottomBar : EdgeInsets.symmetric(vertical: 16)
+    ///
+    /// For appBar and floating, the margin is not implemented yet.
+    @notSerializable SubmitButtonMarginDef? submitButtonMargin,
     @notSerializable OnDynamicInputDeletionDef? onDynamicInputDeletion,
     @notSerializable OnSubmitErrorDef? onSubmitError,
 
@@ -94,6 +103,7 @@ abstract class WoFormThemeData with _$WoFormThemeData {
               standardScaffoldBuilder ?? other.standardScaffoldBuilder,
           stringFieldBuilder: stringFieldBuilder ?? other.stringFieldBuilder,
           submitButtonBuilder: submitButtonBuilder ?? other.submitButtonBuilder,
+          submitButtonMargin: submitButtonMargin ?? other.submitButtonMargin,
           onDynamicInputDeletion:
               onDynamicInputDeletion ?? other.onDynamicInputDeletion,
           onSubmitError: onSubmitError ?? other.onSubmitError,

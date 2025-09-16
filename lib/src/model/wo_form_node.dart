@@ -90,6 +90,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
     @InputConverter() required WoFormNodeMixin child,
     @Default(false) bool conditionIsInitiallyMet,
     @Default(true) bool clearChildrenWhenHidden,
+    @Default(InputUiSettings()) InputUiSettings uiSettings,
   }) = ConditionnalNode;
 
   const factory WoFormNode.dynamicInputs({
@@ -664,6 +665,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
   /// Used when OFormUiSettings.scrollable is false
   @override
   int? get flex => switch (this) {
+    ConditionnalNode(uiSettings: final uiSettings) => uiSettings.flex,
     InputsNode(uiSettings: final uiSettings) => uiSettings.flex,
     ValueBuilderNode(uiSettings: final uiSettings) ||
     ValuesBuilderNode(uiSettings: final uiSettings) ||

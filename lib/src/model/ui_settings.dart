@@ -508,6 +508,8 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     List<String>? autofillHints,
     bool? autofocus,
     TextInputAction? textInputAction,
+
+    /// Defaults to TextCapitalization.none.
     TextCapitalization? textCapitalization,
 
     /// Defaults to 1. If you want to set it to null, enter 0.
