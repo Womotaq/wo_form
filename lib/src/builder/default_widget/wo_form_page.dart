@@ -33,6 +33,9 @@ class WoFormStandardPage extends StatelessWidget {
     final woFormTheme = WoFormTheme.of(context);
 
     final column = Column(
+      mainAxisSize: root.uiSettings.scrollable
+          ? MainAxisSize.max
+          : MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         if (root.uiSettings.titlePosition == WoFormTitlePosition.header)
@@ -76,6 +79,16 @@ class _StandardScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final uiSettings = context.read<RootNode>().uiSettings;
+    final constrainedBody = Center(
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth:
+              WoFormTheme.of(context)?.maxWidth ??
+              WoFormThemeData.DEFAULT_MAX_WIDTH,
+        ),
+        child: body,
+      ),
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -95,20 +108,9 @@ class _StandardScaffold extends StatelessWidget {
           uiSettings.submitMode.buttonPosition == SubmitButtonPosition.bottomBar
           ? const SubmitButtonBuilder()
           : null,
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Center(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                maxWidth:
-                    WoFormTheme.of(context)?.maxWidth ??
-                    WoFormThemeData.DEFAULT_MAX_WIDTH,
-              ),
-              child: body,
-            ),
-          ),
-        ),
-      ),
+      body: uiSettings.scrollable
+          ? SingleChildScrollView(child: constrainedBody)
+          : constrainedBody,
       floatingActionButton:
           uiSettings.submitMode.buttonPosition == SubmitButtonPosition.floating
           ? const SubmitButtonBuilder()
