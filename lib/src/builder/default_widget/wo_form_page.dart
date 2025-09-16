@@ -51,7 +51,9 @@ class WoFormStandardPage extends StatelessWidget {
         Flexible(
           flex:
               root.uiSettings.scrollable ||
-                  root.children.every((child) => (child.flex ?? 0) == 0)
+                  root.children.every(
+                    (child) => (child.flex(context) ?? 0) == 0,
+                  )
               ? 0
               : 1,
           child: Column(
@@ -60,7 +62,9 @@ class WoFormStandardPage extends StatelessWidget {
             children: root.children
                 .map(
                   (child) => Flexible(
-                    flex: root.uiSettings.scrollable ? 0 : child.flex ?? 0,
+                    flex: root.uiSettings.scrollable
+                        ? 0
+                        : child.flex(context) ?? 0,
                     child: child.toWidget(parentPath: ''),
                   ),
                 )

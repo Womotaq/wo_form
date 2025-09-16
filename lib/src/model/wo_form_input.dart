@@ -696,7 +696,7 @@ abstract class SelectInput<T>
   SelectInput<T> withId({required String id}) => copyWith(id: id);
 
   @override
-  int? get flex => uiSettings?.flex;
+  int? flex(BuildContext context) => uiSettings?.flex;
 }
 
 Object? _defaultToJsonT<T>(T value) {

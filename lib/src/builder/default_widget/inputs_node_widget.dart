@@ -27,24 +27,31 @@ class InputsNodeWidget extends StatelessWidget {
               ),
             ),
         Flexible(
-          flex: !formUiSettings.scrollable && node.flex != 0 ? 1 : 0,
+          flex: !formUiSettings.scrollable && node.flex(context) != 0 ? 1 : 0,
           child: Flex(
             direction: data.uiSettings.direction ?? Axis.vertical,
             spacing: data.uiSettings.spacing ?? woFormTheme?.spacing ?? 0,
             crossAxisAlignment:
                 data.uiSettings.crossAxisAlignment ?? CrossAxisAlignment.start,
-            children: node.children
-                .map(
-                  (i) => Flexible(
-                    flex: !formUiSettings.scrollable && i.flex != null
-                        ? i.flex!
-                        : data.uiSettings.direction == Axis.horizontal
-                        ? i.flex ?? 1
-                        : 0,
-                    child: i.toWidget(parentPath: data.path),
-                  ),
-                )
-                .toList(),
+            children: node.children.map(
+              (i) {
+                // This is just a way to prevent useless call to i.flex
+                if (formUiSettings.scrollable &&
+                    data.uiSettings.direction == Axis.vertical) {
+                  return i.toWidget(parentPath: data.path);
+                }
+
+                final flex = i.flex(context);
+                return Flexible(
+                  flex: !formUiSettings.scrollable && flex != null
+                      ? flex
+                      : data.uiSettings.direction == Axis.horizontal
+                      ? flex ?? 1
+                      : 0,
+                  child: i.toWidget(parentPath: data.path),
+                );
+              },
+            ).toList(),
           ),
         ),
       ],

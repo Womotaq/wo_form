@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/src/model/json_converter/input.dart';
 import 'package:wo_form/src/model/json_converter/inputs_list.dart';
@@ -59,7 +60,7 @@ mixin WoFormNodeMixin {
   WoFormNodeMixin withId({required String id});
 
   /// Used when OFormUiSettings.scrollable is false
-  int? get flex => null;
+  int? flex(BuildContext context) => null;
 }
 
 @freezed
@@ -664,8 +665,16 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
 
   /// Used when OFormUiSettings.scrollable is false
   @override
-  int? get flex => switch (this) {
-    ConditionnalNode(uiSettings: final uiSettings) => uiSettings.flex,
+  int? flex(BuildContext context) => switch (this) {
+    ConditionnalNode(
+      condition: final condition,
+      uiSettings: final uiSettings,
+    ) =>
+      (uiSettings.flex ?? 0) != 0
+          ? context.select((WoFormValuesCubit c) => c.state.meet(condition))
+                ? uiSettings.flex
+                : 0
+          : uiSettings.flex,
     InputsNode(uiSettings: final uiSettings) => uiSettings.flex,
     ValueBuilderNode(uiSettings: final uiSettings) ||
     ValuesBuilderNode(uiSettings: final uiSettings) ||
@@ -835,7 +844,7 @@ abstract class FutureNode<T> with _$FutureNode<T>, WoFormNodeMixin {
   FutureNode<T> withId({required String id}) => copyWith(id: id);
 
   @override
-  int? get flex => uiSettings.flex;
+  int? flex(BuildContext context) => uiSettings.flex;
 }
 
 @freezed
