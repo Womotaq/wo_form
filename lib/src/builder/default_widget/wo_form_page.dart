@@ -49,7 +49,11 @@ class WoFormStandardPage extends StatelessWidget {
             },
           ),
         Flexible(
-          flex: root.uiSettings.scrollable ? 0 : 1,
+          flex:
+              root.uiSettings.scrollable ||
+                  root.children.every((child) => (child.flex ?? 0) == 0)
+              ? 0
+              : 1,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             spacing: woFormTheme?.spacing ?? 0,
@@ -109,13 +113,13 @@ class _StandardScaffold extends StatelessWidget {
           ],
         ],
       ),
+      body: uiSettings.scrollable
+          ? SingleChildScrollView(child: constrainedBody)
+          : constrainedBody,
       bottomNavigationBar:
           uiSettings.submitMode.buttonPosition == SubmitButtonPosition.bottomBar
           ? const SubmitButtonBuilder()
           : null,
-      body: uiSettings.scrollable
-          ? SingleChildScrollView(child: constrainedBody)
-          : constrainedBody,
       floatingActionButton:
           uiSettings.submitMode.buttonPosition == SubmitButtonPosition.floating
           ? const SubmitButtonBuilder()
