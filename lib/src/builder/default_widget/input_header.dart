@@ -13,6 +13,14 @@ class InputHeader extends StatelessWidget {
     final helperText = data.helperText ?? '';
     final errorText = data.errorText ?? '';
 
+    // If there's truly nothing to show beyond the main child or its layout hints, shrink.
+    if (labelText.isEmpty &&
+        errorText.isEmpty &&
+        helperText.isEmpty &&
+        data.trailing == null) {
+      return const SizedBox.shrink();
+    }
+
     final theme = Theme.of(context);
     final inputDecorationTheme = theme.inputDecorationTheme;
 
@@ -32,14 +40,6 @@ class InputHeader extends StatelessWidget {
                 inputDecorationTheme.helperStyle ?? theme.textTheme.labelMedium,
           )
         : null;
-
-    // If there's truly nothing to show beyond the main child or its layout hints, shrink.
-    if (labelText.isEmpty &&
-        errorText.isEmpty &&
-        helperText.isEmpty &&
-        data.trailing == null) {
-      return const SizedBox.shrink();
-    }
 
     return InkWell(
       onTap: data.onTap,
