@@ -138,8 +138,12 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   /// Return true if the current state is equal to the initial state.
   bool get isPure => mapEquals(
-    _initialValues..remove(_visitedPathsKey),
-    state..remove(_visitedPathsKey),
+    _initialValues
+      ..remove(_visitedPathsKey)
+      ..remove(focusedPathKey),
+    state
+      ..remove(_visitedPathsKey)
+      ..remove(focusedPathKey),
   );
 
   String get currentPath => _tempSubmitDatas.lastOrNull?.path ?? '';
@@ -180,15 +184,41 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   void clearTemporarySubmitData() => _tempSubmitDatas.clear();
 
+  // --- FOCUS ---
+  static const focusedPathKey = '/__wo_reserved_focused_path';
+
+  // Called by WoFormNodeFocusManager
   FocusNode _createFocusNode(String path) {
     _focusNodes[path] ??= FocusNode();
     return _focusNodes[path]!;
   }
 
+  // Called by WoFormNodeFocusManager
   void _disposeFocusNode(String path) {
     final focusNode = _focusNodes.remove(path);
     if (focusNode != null) focusNode.dispose();
   }
+
+  void _onFocusChange(String path, {required bool isFocused}) {
+    final oldFocusedPath = focusedPath;
+
+    if (isFocused && oldFocusedPath != path) {
+      final newMap = WoFormValues.from(state);
+      newMap[focusedPathKey] = path;
+      emit(newMap);
+    } else if (!isFocused && oldFocusedPath == path) {
+      final newMap = WoFormValues.from(state);
+      newMap[focusedPathKey] = null;
+      emit(newMap);
+    }
+
+    if (!isFocused) _markPathAsVisited(path: path);
+  }
+
+  String? get focusedPath => state[focusedPathKey] as String?;
+
+  // bool isFocused(String path) => _focusNodes[path]?.hasFocus ?? false;
+  bool isFocused(String path) => focusedPath == path;
 
   /// **Use this method precautiously since there is no type checking !**
   void onValuesChanged(
@@ -289,7 +319,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   /// Before submission, only visited nodes show errors.
   ///
   /// Return false if the path was already visited.
-  bool markPathAsVisited({required String path}) {
+  bool _markPathAsVisited({required String path}) {
     final newMap = WoFormValues.from(state);
     final visitedPaths = Set<String>.from(
       newMap[_visitedPathsKey] as Iterable<String>? ?? {},
@@ -647,7 +677,9 @@ class WoFormNodeFocusManager extends StatefulWidget {
 
 class _WoFormNodeFocusManagerState extends State<WoFormNodeFocusManager> {
   late FocusNode focusNode;
-  // Can't read it in dispose() because the context is not available anymore
+
+  // We need to store a reference to valuesCubit, because in dispose(),
+  // the context is not available anymore.
   late WoFormValuesCubit valuesCubit;
 
   @override
@@ -667,19 +699,14 @@ class _WoFormNodeFocusManagerState extends State<WoFormNodeFocusManager> {
 
   @override
   Widget build(BuildContext context) {
-    // FocusTraversalGroup allows to WoFormValuesCubit to focus the Focus widget
-    // and the switch to the next focusable widget availible.
+    // FocusTraversalGroup allows WoFormValuesCubit to focus the Focus widget
+    // and then switch to the next focusable widget availible.
     return FocusTraversalGroup(
       child: Focus(
         focusNode: focusNode,
         skipTraversal: true,
-        onFocusChange: (value) {
-          if (value == false) {
-            context.read<WoFormValuesCubit>().markPathAsVisited(
-              path: widget.path,
-            );
-          }
-        },
+        onFocusChange: (value) =>
+            valuesCubit._onFocusChange(widget.path, isFocused: value),
         child: widget.child,
       ),
     );

@@ -12,6 +12,7 @@ ConditionValue _$ConditionValueFromJson(Map<String, dynamic> json) =>
       isEqualTo: json['isEqualTo'],
       isNotEqualTo: json['isNotEqualTo'],
       isNull: json['isNull'] as bool?,
+      isFocused: json['isFocused'] as bool?,
       $type: json['runtimeType'] as String?,
     );
 
@@ -21,27 +22,43 @@ Map<String, dynamic> _$ConditionValueToJson(ConditionValue instance) =>
       'isEqualTo': instance.isEqualTo,
       'isNotEqualTo': instance.isNotEqualTo,
       'isNull': instance.isNull,
+      'isFocused': instance.isFocused,
       'runtimeType': instance.$type,
     };
 
 ConditionAnd _$ConditionAndFromJson(Map<String, dynamic> json) => ConditionAnd(
-  const ConditionsListConverter().fromJson(json['conditions'] as List),
+  (json['conditions'] as List<dynamic>)
+      .map((e) => Condition.fromJson(e as Map<String, dynamic>))
+      .toList(),
   $type: json['runtimeType'] as String?,
 );
 
 Map<String, dynamic> _$ConditionAndToJson(ConditionAnd instance) =>
     <String, dynamic>{
-      'conditions': const ConditionsListConverter().toJson(instance.conditions),
+      'conditions': instance.conditions.map((e) => e.toJson()).toList(),
       'runtimeType': instance.$type,
     };
 
 ConditionOr _$ConditionOrFromJson(Map<String, dynamic> json) => ConditionOr(
-  const ConditionsListConverter().fromJson(json['conditions'] as List),
+  (json['conditions'] as List<dynamic>)
+      .map((e) => Condition.fromJson(e as Map<String, dynamic>))
+      .toList(),
   $type: json['runtimeType'] as String?,
 );
 
 Map<String, dynamic> _$ConditionOrToJson(ConditionOr instance) =>
     <String, dynamic>{
-      'conditions': const ConditionsListConverter().toJson(instance.conditions),
+      'conditions': instance.conditions.map((e) => e.toJson()).toList(),
+      'runtimeType': instance.$type,
+    };
+
+ConditionNot _$ConditionNotFromJson(Map<String, dynamic> json) => ConditionNot(
+  Condition.fromJson(json['condition'] as Map<String, dynamic>),
+  $type: json['runtimeType'] as String?,
+);
+
+Map<String, dynamic> _$ConditionNotToJson(ConditionNot instance) =>
+    <String, dynamic>{
+      'condition': instance.condition.toJson(),
       'runtimeType': instance.$type,
     };

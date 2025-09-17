@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:wo_form/wo_form.dart';
 
 extension StringX on String {
@@ -80,46 +79,5 @@ extension WoFormValuesX on WoFormValues {
     }
 
     return null;
-  }
-
-  bool meet(Condition condition) {
-    switch (condition) {
-      case ConditionValue(
-        path: final path,
-        isEqualTo: final isEqualTo,
-        isNotEqualTo: final isNotEqualTo,
-        isNull: final isNull,
-      ):
-        final value = getValue(path);
-        if (isEqualTo != null) {
-          if (isEqualTo is List && value is List) {
-            return const ListEquality<dynamic>().equals(isEqualTo, value);
-          } else {
-            return isEqualTo == value;
-          }
-        }
-        if (isNotEqualTo != null) {
-          if (isNotEqualTo is List && value is List) {
-            return !const ListEquality<dynamic>().equals(isNotEqualTo, value);
-          } else {
-            return isNotEqualTo != value;
-          }
-        }
-        if (isNull != null) {
-          return (value == null) == isNull;
-        }
-
-        throw AssertionError('Exactly one operator must be specified');
-      case ConditionAnd(conditions: final conditions):
-        for (final condition in conditions) {
-          if (!meet(condition)) return false;
-        }
-        return true;
-      case ConditionOr(conditions: final conditions):
-        for (final condition in conditions) {
-          if (meet(condition)) return true;
-        }
-        return false;
-    }
   }
 }

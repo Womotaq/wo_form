@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -12,6 +13,7 @@ sealed class Condition with _$Condition {
         '    isEqualTo,'
         '    isNotEqualTo,'
         '    isNull,'
+        '    isFocused,'
         '  ];'
         '  final operatorsUsed = operators.where((e) => e != null).length;'
         '  return operatorsUsed == 1; '
@@ -25,30 +27,75 @@ sealed class Condition with _$Condition {
 
     /// The value is null even if the path is not present in the list of paths
     bool? isNull,
+    bool? isFocused,
   }) = ConditionValue;
 
   const factory Condition.and(
-    @ConditionsListConverter() List<Condition> conditions,
+    List<Condition> conditions,
   ) = ConditionAnd;
 
   const factory Condition.or(
-    @ConditionsListConverter() List<Condition> conditions,
+    List<Condition> conditions,
   ) = ConditionOr;
+
+  const factory Condition.not(
+    Condition condition,
+  ) = ConditionNot;
 
   const Condition._();
 
   factory Condition.fromJson(Json json) => _$ConditionFromJson(json);
+
+  // --
+
+  bool isMet(WoFormValues values) => values.meet(this);
 }
 
-class ConditionsListConverter
-    extends JsonConverter<List<Condition>, List<dynamic>> {
-  const ConditionsListConverter();
+extension ConditionMeeter on WoFormValues {
+  bool meet(Condition condition) {
+    switch (condition) {
+      case ConditionValue(
+        path: final path,
+        isEqualTo: final isEqualTo,
+        isNotEqualTo: final isNotEqualTo,
+        isNull: final isNull,
+        isFocused: final isFocused,
+      ):
+        final value = getValue(path);
+        if (isEqualTo != null) {
+          if (isEqualTo is List && value is List) {
+            return const ListEquality<dynamic>().equals(isEqualTo, value);
+          } else {
+            return isEqualTo == value;
+          }
+        }
+        if (isNotEqualTo != null) {
+          if (isNotEqualTo is List && value is List) {
+            return !const ListEquality<dynamic>().equals(isNotEqualTo, value);
+          } else {
+            return isNotEqualTo != value;
+          }
+        }
+        if (isNull != null) {
+          return (value == null) == isNull;
+        }
+        if (isFocused != null) {
+          return this[WoFormValuesCubit.focusedPathKey] == path;
+        }
 
-  @override
-  List<Condition> fromJson(List<dynamic> json) =>
-      json.map((map) => Condition.fromJson(map as Json)).toList();
-
-  @override
-  List<dynamic> toJson(List<Condition> object) =>
-      object.map((condition) => condition.toJson()).toList();
+        throw AssertionError('Exactly one operator must be specified');
+      case ConditionAnd(conditions: final conditions):
+        for (final condition in conditions) {
+          if (!meet(condition)) return false;
+        }
+        return true;
+      case ConditionOr(conditions: final conditions):
+        for (final condition in conditions) {
+          if (meet(condition)) return true;
+        }
+        return false;
+      case ConditionNot(condition: final condition):
+        return !meet(condition);
+    }
+  }
 }

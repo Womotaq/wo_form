@@ -27,6 +27,10 @@ Condition _$ConditionFromJson(
           return ConditionOr.fromJson(
             json
           );
+                case 'not':
+          return ConditionNot.fromJson(
+            json
+          );
         
           default:
             throw CheckedFromJsonException(
@@ -76,7 +80,7 @@ $ConditionCopyWith(Condition _, $Res Function(Condition) __);
 @JsonSerializable()
 
 class ConditionValue extends Condition {
-   ConditionValue({required this.path, this.isEqualTo, this.isNotEqualTo, this.isNull, final  String? $type}): assert(    () {  final operators = [    isEqualTo,    isNotEqualTo,    isNull,  ];  final operatorsUsed = operators.where((e) => e != null).length;  return operatorsUsed == 1; }(), 'Exactly one operator must be specified'),$type = $type ?? 'value',super._();
+   ConditionValue({required this.path, this.isEqualTo, this.isNotEqualTo, this.isNull, this.isFocused, final  String? $type}): assert(    () {  final operators = [    isEqualTo,    isNotEqualTo,    isNull,    isFocused,  ];  final operatorsUsed = operators.where((e) => e != null).length;  return operatorsUsed == 1; }(), 'Exactly one operator must be specified'),$type = $type ?? 'value',super._();
   factory ConditionValue.fromJson(Map<String, dynamic> json) => _$ConditionValueFromJson(json);
 
  final  String path;
@@ -84,6 +88,7 @@ class ConditionValue extends Condition {
  final  Object? isNotEqualTo;
 /// The value is null even if the path is not present in the list of paths
  final  bool? isNull;
+ final  bool? isFocused;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -102,16 +107,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ConditionValue&&(identical(other.path, path) || other.path == path)&&const DeepCollectionEquality().equals(other.isEqualTo, isEqualTo)&&const DeepCollectionEquality().equals(other.isNotEqualTo, isNotEqualTo)&&(identical(other.isNull, isNull) || other.isNull == isNull));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ConditionValue&&(identical(other.path, path) || other.path == path)&&const DeepCollectionEquality().equals(other.isEqualTo, isEqualTo)&&const DeepCollectionEquality().equals(other.isNotEqualTo, isNotEqualTo)&&(identical(other.isNull, isNull) || other.isNull == isNull)&&(identical(other.isFocused, isFocused) || other.isFocused == isFocused));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,path,const DeepCollectionEquality().hash(isEqualTo),const DeepCollectionEquality().hash(isNotEqualTo),isNull);
+int get hashCode => Object.hash(runtimeType,path,const DeepCollectionEquality().hash(isEqualTo),const DeepCollectionEquality().hash(isNotEqualTo),isNull,isFocused);
 
 @override
 String toString() {
-  return 'Condition.value(path: $path, isEqualTo: $isEqualTo, isNotEqualTo: $isNotEqualTo, isNull: $isNull)';
+  return 'Condition.value(path: $path, isEqualTo: $isEqualTo, isNotEqualTo: $isNotEqualTo, isNull: $isNull, isFocused: $isFocused)';
 }
 
 
@@ -122,7 +127,7 @@ abstract mixin class $ConditionValueCopyWith<$Res> implements $ConditionCopyWith
   factory $ConditionValueCopyWith(ConditionValue value, $Res Function(ConditionValue) _then) = _$ConditionValueCopyWithImpl;
 @useResult
 $Res call({
- String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull
+ String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull, bool? isFocused
 });
 
 
@@ -139,10 +144,11 @@ class _$ConditionValueCopyWithImpl<$Res>
 
 /// Create a copy of Condition
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? path = null,Object? isEqualTo = freezed,Object? isNotEqualTo = freezed,Object? isNull = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? path = null,Object? isEqualTo = freezed,Object? isNotEqualTo = freezed,Object? isNull = freezed,Object? isFocused = freezed,}) {
   return _then(ConditionValue(
 path: null == path ? _self.path : path // ignore: cast_nullable_to_non_nullable
 as String,isEqualTo: freezed == isEqualTo ? _self.isEqualTo : isEqualTo ,isNotEqualTo: freezed == isNotEqualTo ? _self.isNotEqualTo : isNotEqualTo ,isNull: freezed == isNull ? _self.isNull : isNull // ignore: cast_nullable_to_non_nullable
+as bool?,isFocused: freezed == isFocused ? _self.isFocused : isFocused // ignore: cast_nullable_to_non_nullable
 as bool?,
   ));
 }
@@ -154,11 +160,11 @@ as bool?,
 @JsonSerializable()
 
 class ConditionAnd extends Condition {
-  const ConditionAnd(@ConditionsListConverter() final  List<Condition> conditions, {final  String? $type}): _conditions = conditions,$type = $type ?? 'and',super._();
+  const ConditionAnd(final  List<Condition> conditions, {final  String? $type}): _conditions = conditions,$type = $type ?? 'and',super._();
   factory ConditionAnd.fromJson(Map<String, dynamic> json) => _$ConditionAndFromJson(json);
 
  final  List<Condition> _conditions;
-@ConditionsListConverter() List<Condition> get conditions {
+ List<Condition> get conditions {
   if (_conditions is EqualUnmodifiableListView) return _conditions;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_conditions);
@@ -202,7 +208,7 @@ abstract mixin class $ConditionAndCopyWith<$Res> implements $ConditionCopyWith<$
   factory $ConditionAndCopyWith(ConditionAnd value, $Res Function(ConditionAnd) _then) = _$ConditionAndCopyWithImpl;
 @useResult
 $Res call({
-@ConditionsListConverter() List<Condition> conditions
+ List<Condition> conditions
 });
 
 
@@ -233,11 +239,11 @@ as List<Condition>,
 @JsonSerializable()
 
 class ConditionOr extends Condition {
-  const ConditionOr(@ConditionsListConverter() final  List<Condition> conditions, {final  String? $type}): _conditions = conditions,$type = $type ?? 'or',super._();
+  const ConditionOr(final  List<Condition> conditions, {final  String? $type}): _conditions = conditions,$type = $type ?? 'or',super._();
   factory ConditionOr.fromJson(Map<String, dynamic> json) => _$ConditionOrFromJson(json);
 
  final  List<Condition> _conditions;
-@ConditionsListConverter() List<Condition> get conditions {
+ List<Condition> get conditions {
   if (_conditions is EqualUnmodifiableListView) return _conditions;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_conditions);
@@ -281,7 +287,7 @@ abstract mixin class $ConditionOrCopyWith<$Res> implements $ConditionCopyWith<$R
   factory $ConditionOrCopyWith(ConditionOr value, $Res Function(ConditionOr) _then) = _$ConditionOrCopyWithImpl;
 @useResult
 $Res call({
-@ConditionsListConverter() List<Condition> conditions
+ List<Condition> conditions
 });
 
 
@@ -306,6 +312,88 @@ as List<Condition>,
 }
 
 
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class ConditionNot extends Condition {
+  const ConditionNot(this.condition, {final  String? $type}): $type = $type ?? 'not',super._();
+  factory ConditionNot.fromJson(Map<String, dynamic> json) => _$ConditionNotFromJson(json);
+
+ final  Condition condition;
+
+@JsonKey(name: 'runtimeType')
+final String $type;
+
+
+/// Create a copy of Condition
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ConditionNotCopyWith<ConditionNot> get copyWith => _$ConditionNotCopyWithImpl<ConditionNot>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$ConditionNotToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ConditionNot&&(identical(other.condition, condition) || other.condition == condition));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,condition);
+
+@override
+String toString() {
+  return 'Condition.not(condition: $condition)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ConditionNotCopyWith<$Res> implements $ConditionCopyWith<$Res> {
+  factory $ConditionNotCopyWith(ConditionNot value, $Res Function(ConditionNot) _then) = _$ConditionNotCopyWithImpl;
+@useResult
+$Res call({
+ Condition condition
+});
+
+
+$ConditionCopyWith<$Res> get condition;
+
+}
+/// @nodoc
+class _$ConditionNotCopyWithImpl<$Res>
+    implements $ConditionNotCopyWith<$Res> {
+  _$ConditionNotCopyWithImpl(this._self, this._then);
+
+  final ConditionNot _self;
+  final $Res Function(ConditionNot) _then;
+
+/// Create a copy of Condition
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? condition = null,}) {
+  return _then(ConditionNot(
+null == condition ? _self.condition : condition // ignore: cast_nullable_to_non_nullable
+as Condition,
+  ));
+}
+
+/// Create a copy of Condition
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ConditionCopyWith<$Res> get condition {
+  
+  return $ConditionCopyWith<$Res>(_self.condition, (value) {
+    return _then(_self.copyWith(condition: value));
+  });
+}
 }
 
 // dart format on
