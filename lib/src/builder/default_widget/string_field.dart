@@ -118,7 +118,8 @@ class _StringFieldState extends State<StringField> {
                   )
             : null,
         onFieldSubmitted:
-            (widget.data.uiSettings.submitFormOnFieldSubmitted ?? true)
+            (widget.data.uiSettings.submitFormOnFieldSubmitted ??
+                defaultSubmitFormOnFieldSubmitted())
             ? (_) => context.read<WoFormValuesCubit>().submit(context)
             : null,
         onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
@@ -156,7 +157,8 @@ class _StringFieldState extends State<StringField> {
                   '+${number.countryCode} ${number.formatNsn()}',
                 ),
           onSubmitted:
-              (widget.data.uiSettings.submitFormOnFieldSubmitted ?? true)
+              (widget.data.uiSettings.submitFormOnFieldSubmitted ??
+                  defaultSubmitFormOnFieldSubmitted())
               ? (_) => context.read<WoFormValuesCubit>().submit(context)
               : null,
           onTapOutside: (event) => FocusScope.of(context).unfocus(),
@@ -180,7 +182,8 @@ class _StringFieldState extends State<StringField> {
         controller: textEditingController,
         onChanged: widget.data.onValueChanged,
         onFieldSubmitted:
-            (widget.data.uiSettings.submitFormOnFieldSubmitted ?? true)
+            (widget.data.uiSettings.submitFormOnFieldSubmitted ??
+                defaultSubmitFormOnFieldSubmitted())
             ? (_) => context.read<WoFormValuesCubit>().submit(context)
             : null,
         onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
@@ -205,4 +208,13 @@ class _StringFieldState extends State<StringField> {
       subtitle: widget.subtitle,
     );
   }
+
+  bool defaultSubmitFormOnFieldSubmitted() =>
+      switch (widget.data.uiSettings.textInputAction) {
+        TextInputAction.next ||
+        TextInputAction.previous ||
+        TextInputAction.continueAction ||
+        TextInputAction.newline => false,
+        _ => true,
+      };
 }
