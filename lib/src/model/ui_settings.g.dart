@@ -436,6 +436,7 @@ const _$WoFormTitlePositionEnumMap = {
 };
 
 const _$ShowErrorsEnumMap = {
+  ShowErrors.afterSubmission: 'afterSubmission',
   ShowErrors.always: 'always',
   ShowErrors.progressively: 'progressively',
 };

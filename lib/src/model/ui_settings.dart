@@ -680,8 +680,10 @@ enum DisableSubmitButton { never, whenInvalid, whenInitialOrSubmitSuccess }
 
 typedef ScaffoldBuilderDef = Widget Function(Widget body);
 
-// TODO : ShowErrors.afterSubmission
 enum ShowErrors {
+  /// Only show errors after the form was submitted at least once.
+  afterSubmission,
+
   /// Always show errors.
   ///
   /// Concretely, this marks all the paths as visited, right from the start.
@@ -689,6 +691,8 @@ enum ShowErrors {
 
   /// Only show errors of visited paths. Note that, after the user submits the
   /// form, all paths become visited, revealing all the errors.
+  ///
+  /// The default value.
   progressively,
 }
 

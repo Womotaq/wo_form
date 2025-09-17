@@ -73,7 +73,7 @@ class StringFieldBuilder extends StatelessWidget {
                             : (
                                 String? value, {
                                 UpdateStatus updateStatus = UpdateStatus
-                                    .ifPathAlreadyVisitedOrElseWithoutErrorUpdate,
+                                    .yesWithoutErrorUpdateIfPathNotVisited,
                               }) => valuesCubit.onValueChanged(
                                 path: path,
                                 value: value,

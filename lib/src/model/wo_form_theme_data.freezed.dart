@@ -20,7 +20,8 @@ mixin _$WoFormThemeData {
 /// - SubmitButtonPosition.bottomBar : EdgeInsets.symmetric(vertical: 16)
 ///
 /// For appBar and floating, the margin is not implemented yet.
-@notSerializable SubmitButtonMarginDef? get submitButtonMargin;@notSerializable SubmitButtonStyleDef? get submitButtonStyle;@notSerializable OnDynamicInputDeletionDef? get onDynamicInputDeletion;@notSerializable OnSubmitErrorDef? get onSubmitError;/// The form's entire width won't exceed this value. Defaults to 512.
+@notSerializable SubmitButtonMarginDef? get submitButtonMargin;/// Not compatible with SubmitButtonPosition.floating.
+@notSerializable SubmitButtonStyleDef? get submitButtonStyle;@notSerializable OnDynamicInputDeletionDef? get onDynamicInputDeletion;@notSerializable OnSubmitErrorDef? get onSubmitError;/// The form's entire width won't exceed this value. Defaults to 512.
  double? get maxWidth;/// This spacing will be placed between each [WoFormNodeMixin].
  double? get spacing;/// Add the characters ' *' after the labelText of [WoFormInput]s.
 /// Default to true.
@@ -150,6 +151,7 @@ class _WoFormThemeData extends WoFormThemeData {
 ///
 /// For appBar and floating, the margin is not implemented yet.
 @override@notSerializable final  SubmitButtonMarginDef? submitButtonMargin;
+/// Not compatible with SubmitButtonPosition.floating.
 @override@notSerializable final  SubmitButtonStyleDef? submitButtonStyle;
 @override@notSerializable final  OnDynamicInputDeletionDef? onDynamicInputDeletion;
 @override@notSerializable final  OnSubmitErrorDef? onSubmitError;

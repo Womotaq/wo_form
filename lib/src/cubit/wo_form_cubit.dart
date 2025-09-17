@@ -117,10 +117,19 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     this._canSubmit, {
     required this.onStatusUpdate,
     required this.onSubmitting,
+    required this.showErrors,
     WoFormValues initialValues = const {},
   }) : _tempSubmitDatas = [],
        super(_root.getInitialValues()..addAll(initialValues)) {
     _initialValues = Map.from(state);
+    if (showErrors == ShowErrors.always) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        // Mark all paths as visited
+        _markPathsAsVisited(paths: state.keys);
+        // Then update the errors of all visited paths
+        _updateErrors();
+      });
+    }
   }
 
   final RootNode _root;
@@ -128,6 +137,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   final WoFormLockCubit _lockCubit;
   final Future<bool> Function(BuildContext context) _canSubmit;
   final Future<void> Function(RootNode root, WoFormValues values)? onSubmitting;
+  final ShowErrors showErrors;
   late WoFormValues _initialValues;
   final Map<String, FocusNode> _focusNodes = {};
 
@@ -135,6 +145,12 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   final Future<void> Function(RootNode root, WoFormValues values)?
   onStatusUpdate;
   final List<_TempSubmitData> _tempSubmitDatas;
+
+  /// List of paths in which the user has attempted a submission.
+  ///
+  /// '' means the main submission has been attempted. The other paths are
+  /// temporary submissions.
+  final Set<String> _submittedPaths = {};
 
   /// Return true if the current state is equal to the initial state.
   bool get isPure => mapEquals(
@@ -184,7 +200,11 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   void clearTemporarySubmitData() => _tempSubmitDatas.clear();
 
+  void removeTemporarySubmitData({required String path}) =>
+      _tempSubmitDatas.removeWhere((data) => data.path == path);
+
   // --- FOCUS ---
+
   static const focusedPathKey = '/__wo_reserved_focused_path';
 
   // Called by WoFormNodeFocusManager
@@ -224,6 +244,13 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   void clearValues() => emit(_root.getInitialValues());
 
   /// **Use this method precautiously since there is no type checking !**
+  void onValueChanged({
+    required String path,
+    required dynamic value,
+    UpdateStatus updateStatus = UpdateStatus.yes,
+  }) => onValuesChanged({path: value}, updateStatus: updateStatus);
+
+  /// **Use this method precautiously since there is no type checking !**
   void onValuesChanged(
     WoFormValues values, {
     UpdateStatus updateStatus = UpdateStatus.yes,
@@ -238,12 +265,10 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     if (values.isEmpty) return;
 
     final atLeastOnePathWasVisited = values.keys.any(_visitedPaths.contains);
-    final allPathsWereVisited = values.keys.every(_visitedPaths.contains);
 
     final shouldUpdateStatus = switch (updateStatus) {
-      UpdateStatus.no => false,
       UpdateStatus.ifPathAlreadyVisited => atLeastOnePathWasVisited,
-      UpdateStatus.ifPathAlreadyVisitedOrElseWithoutErrorUpdate ||
+      UpdateStatus.yesWithoutErrorUpdateIfPathNotVisited ||
       UpdateStatus.yes => true,
     };
 
@@ -266,14 +291,17 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
     if (shouldUpdateStatus) {
       final shouldUpdateErrors = switch (updateStatus) {
-        UpdateStatus.no => false,
+        // if one of the paths were already visited,
+        // then we update the errors of all the paths
         UpdateStatus.ifPathAlreadyVisited ||
-        UpdateStatus.ifPathAlreadyVisitedOrElseWithoutErrorUpdate =>
+        UpdateStatus.yesWithoutErrorUpdateIfPathNotVisited =>
           atLeastOnePathWasVisited,
+        // we update the errors
         UpdateStatus.yes => true,
       };
 
       if (shouldUpdateErrors) {
+        final allPathsWereVisited = values.keys.every(_visitedPaths.contains);
         if (!allPathsWereVisited) {
           _markPathsAsVisited(paths: values.keys);
         }
@@ -286,13 +314,6 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
       onStatusUpdate?.call(_root, state);
     }
   }
-
-  /// **Use this method precautiously since there is no type checking !**
-  void onValueChanged({
-    required String path,
-    required dynamic value,
-    UpdateStatus updateStatus = UpdateStatus.yes,
-  }) => onValuesChanged({path: value}, updateStatus: updateStatus);
 
   /// Update errors of visited paths
   void _updateErrors() => _statusCubit.setInProgress(
@@ -324,7 +345,15 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   /// Before submission, only visited nodes show errors.
   ///
   /// Return false if the path was already visited.
-  bool _markPathAsVisited({required String path}) {
+  void _markPathAsVisited({required String path}) {
+    if (showErrors == ShowErrors.afterSubmission) {
+      if (!_submittedPaths.any(
+        (submittedPath) => path.startsWith(submittedPath),
+      )) {
+        return;
+      }
+    }
+
     final newMap = WoFormValues.from(state);
     final visitedPaths = Set<String>.from(
       newMap[_visitedPathsKey] as Iterable<String>? ?? {},
@@ -333,15 +362,21 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
       newMap[_visitedPathsKey] = visitedPaths.toList();
       emit(newMap);
       _updateErrors();
-      return true;
-    } else {
-      return false;
+      return;
     }
   }
 
   /// Marks the nodes at these paths as visited by the user.
   /// Before submission, only visited nodes show errors.
   void _markPathsAsVisited({required Iterable<String> paths}) {
+    if (showErrors == ShowErrors.afterSubmission) {
+      paths = paths.where(
+        (path) => _submittedPaths.any(
+          (submittedPath) => path.startsWith(submittedPath),
+        ),
+      );
+    }
+
     final newMap = WoFormValues.from(state);
     final visitedPaths = Set<String>.from(
       newMap[_visitedPathsKey] as Iterable<String>? ?? {},
@@ -351,13 +386,12 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     emit(newMap);
   }
 
-  void removeTemporarySubmitData({required String path}) =>
-      _tempSubmitDatas.removeWhere((data) => data.path == path);
-
   Future<void> submit(BuildContext context) async {
     FocusScope.of(context).unfocus();
 
     final node = currentNode;
+
+    _submittedPaths.add(currentPath);
 
     _markPathsAsVisited(
       paths: node
@@ -435,6 +469,7 @@ class HydratedWoFormValuesCubit extends WoFormValuesCubit
     super._canSubmit, {
     required super.onStatusUpdate,
     required super.onSubmitting,
+    required super.showErrors,
     super.initialValues = const {},
   }) : assert(
          hydratationId.isNotEmpty,
@@ -507,9 +542,22 @@ typedef OnSubmitErrorDef =
 /// or if you want to keep the previous status.
 /// TODO : documentation
 enum UpdateStatus {
-  no,
+  /// When updating the value of this path, update the status of the form
+  /// only if the user already visited the path.
+  ///
+  /// Used by fields like FutureNode, who update the values of the form
+  /// without any user interaction, so we don't want the form to think a
+  /// modification has been made. But if the path was visited, the user
+  /// should be warned of the new changes and the errors should be re-evaluated,
+  /// so we want an update.
   ifPathAlreadyVisited,
-  ifPathAlreadyVisitedOrElseWithoutErrorUpdate,
+
+  /// When updating the value of this path, update the status of the form,
+  /// and update the errors only if the user already visited the path.
+  yesWithoutErrorUpdateIfPathNotVisited,
+
+  /// When updating the value of this path, update the status of the form
+  /// and mark the path as visited.
   yes,
 }
 
@@ -592,6 +640,7 @@ class WoForm extends StatelessWidget {
                         canSubmit ?? (_) async => true,
                         onStatusUpdate: onStatusUpdate,
                         onSubmitting: onSubmitting,
+                        showErrors: root.uiSettings.showErrors,
                         initialValues: root.initialValues,
                       )
                     : HydratedWoFormValuesCubit._(
@@ -602,17 +651,10 @@ class WoForm extends StatelessWidget {
                         canSubmit ?? (_) async => true,
                         onStatusUpdate: onStatusUpdate,
                         onSubmitting: onSubmitting,
+                        showErrors: root.uiSettings.showErrors,
                         initialValues: root.initialValues,
                       );
-                if (root.uiSettings.showErrors == ShowErrors.always) {
-                  SchedulerBinding.instance.addPostFrameCallback((_) {
-                    cubit
-                      // Mark all paths as visited
-                      .._markPathsAsVisited(paths: cubit.state.keys)
-                      // Then update the errors of all visited paths
-                      .._updateErrors();
-                  });
-                }
+
                 return cubit;
               },
             ),
