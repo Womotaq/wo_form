@@ -32,7 +32,8 @@ class InputsNodeWidget extends StatelessWidget {
             direction: data.uiSettings.direction ?? Axis.vertical,
             spacing: data.uiSettings.spacing ?? woFormTheme?.spacing ?? 0,
             crossAxisAlignment:
-                data.uiSettings.crossAxisAlignment ?? CrossAxisAlignment.start,
+                data.uiSettings.crossAxisAlignment ??
+                CrossAxisAlignment.stretch,
             children: node.children.map(
               (i) {
                 // This is just a way to prevent useless call to i.flex

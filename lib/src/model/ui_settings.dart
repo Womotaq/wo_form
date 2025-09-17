@@ -320,7 +320,7 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
 
     /// Only used when ChildrenVisibility.always.
     ///
-    /// Default to CrossAxisAlignment.start
+    /// Default to CrossAxisAlignment.stretch
     CrossAxisAlignment? crossAxisAlignment,
 
     /// This spacing will be placed between each [WoFormNodeMixin].
