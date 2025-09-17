@@ -144,61 +144,57 @@ class WoFormMultiStepPage extends StatefulWidget {
 }
 
 class WoFormMultiStepPageState extends State<WoFormMultiStepPage> {
-  late PageController pageController;
-  double pageIndex = 0;
+  late MultistepController controller;
 
   @override
   void initState() {
-    final root = context.read<RootNode>();
-
-    final submitMode = root.uiSettings.submitMode;
-    if (submitMode is! MultiStepSubmitMode) {
-      throw ArgumentError('submitMode must be MultiStepSubmitMode');
-    }
-
-    pageController = PageController();
-
-    context.read<WoFormValuesCubit>().addTemporarySubmitData(
-      onSubmitting: () => pageController.nextPage(
-        duration: WoFormMultiStepPage.TRANSITION_DURATION,
-        curve: Curves.easeIn,
-      ),
-      path: '/${root.children[0].id}',
-    );
-
-    pageController.addListener(
-      () {
-        final newPageIndex = pageController.page!;
-        setState(() => pageIndex = newPageIndex);
-
-        if (newPageIndex == root.children.length - 1) {
-          context.read<WoFormValuesCubit>().clearTemporarySubmitData();
-        } else {
-          final nextPageNode = root.children[newPageIndex.toInt()];
-          context.read<WoFormValuesCubit>().addTemporarySubmitData(
-            onSubmitting: () async {
-              FocusScope.of(context).unfocus();
-              await submitMode.onTemporarySubmitting?.call(
-                context,
-                nextPageNode,
-              );
-              return pageController.nextPage(
-                duration: WoFormMultiStepPage.TRANSITION_DURATION,
-                curve: Curves.easeIn,
-              );
-            },
-            path: '/${nextPageNode.id}',
-          );
-        }
-      },
-    );
-
     super.initState();
+
+    controller = MultistepController(context.read<WoFormValuesCubit>());
+    addTemporarySubmitData();
+  }
+
+  /// Adds temporary submit data to the submit button of the current page,
+  /// so that, instead of submitting the form, it submits only the page,
+  /// and then navigates to the next page.
+  VoidCallback addTemporarySubmitData() => () async {
+    if (!mounted) return;
+
+    final root = context.read<RootNode>();
+    final valuesCubit = context.read<WoFormValuesCubit>();
+    final multistepIndex = valuesCubit.readMultistepIndex() ?? 0;
+    final node = root.children[multistepIndex];
+
+    // If node is the last page, we shouldn't add temporary submit data.
+    if (multistepIndex + 1 == root.children.length) return;
+
+    valuesCubit.addTemporarySubmitData(
+      onSubmitting: () async {
+        FocusScope.of(context).unfocus();
+
+        await widget.submitMode.onTemporarySubmitting?.call(context, node);
+
+        return controller.nextPage(
+          duration: WoFormMultiStepPage.TRANSITION_DURATION,
+          curve: Curves.easeIn,
+        );
+      },
+      path: '/${node.id}',
+    );
+  };
+
+  /// Usually called at the start of a transition animation
+  void onNewPageIndex(int newPageIndex) {
+    if (newPageIndex == context.read<RootNode>().children.length - 1) {
+      context.read<WoFormValuesCubit>().clearTemporarySubmitData();
+    } else {
+      addTemporarySubmitData();
+    }
   }
 
   @override
   void dispose() {
-    pageController.dispose();
+    controller.dispose();
     super.dispose();
   }
 
@@ -207,20 +203,15 @@ class WoFormMultiStepPageState extends State<WoFormMultiStepPage> {
     final root = context.read<RootNode>();
     final woFormTheme = WoFormTheme.of(context);
 
-    final submitMode = root.uiSettings.submitMode as MultiStepSubmitMode;
-
     final body = Column(
       children: [
-        if (submitMode.showProgressIndicator)
-          (submitMode.progressIndicatorBuilder ??
+        if (widget.submitMode.showProgressIndicator)
+          (widget.submitMode.progressIndicatorBuilder ??
               woFormTheme?.multiStepProgressIndicatorBuilder ??
-              MultiStepProgressIndicator.new)(
-            index: pageIndex.toInt(),
-            maxIndex: root.children.length - 1,
-          ),
+              MultiStepProgressIndicator.new)(),
         Expanded(
           child: PageView.builder(
-            controller: pageController,
+            controller: controller,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: root.children.length,
             itemBuilder: (context, index) {
@@ -228,7 +219,7 @@ class WoFormMultiStepPageState extends State<WoFormMultiStepPage> {
               final body = Padding(
                 padding:
                     // TODO : rework fieldsPadding
-                    submitMode.fieldsPadding ??
+                    widget.submitMode.fieldsPadding ??
                     const EdgeInsets.only(top: 16, bottom: 32),
                 child: node.toWidget(parentPath: ''),
               );
@@ -261,7 +252,7 @@ class WoFormMultiStepPageState extends State<WoFormMultiStepPage> {
                             ? data.copyWith(path: '')
                             : data.copyWith(
                                 text:
-                                    submitMode.nextText ??
+                                    widget.submitMode.nextText ??
                                     context.read<WoFormL10n?>()?.next(),
                                 // ignores submitIcon
                                 icon: null,
@@ -278,32 +269,36 @@ class WoFormMultiStepPageState extends State<WoFormMultiStepPage> {
       ],
     );
 
-    return PageControllerProvider(
-      controller: pageController,
-      child:
-          (root.uiSettings.scaffoldBuilder ??
-                  // TODO : woFormTheme?.multistepScaffoldBuilder ??
-                  _MultistepScaffold.new)
-              .call(body),
+    return BlocListener<WoFormValuesCubit, WoFormValues>(
+      listenWhen: (previous, current) =>
+          previous[WoFormValuesCubit.MULTISTEP_INDEX_KEY] !=
+          current[WoFormValuesCubit.MULTISTEP_INDEX_KEY],
+      listener: (context, state) => onNewPageIndex(
+        state[WoFormValuesCubit.MULTISTEP_INDEX_KEY] as int? ?? 0,
+      ),
+      child: MultistepControllerProvider(
+        controller: controller,
+        child:
+            (root.uiSettings.scaffoldBuilder ??
+                    // TODO : woFormTheme?.multistepScaffoldBuilder ??
+                    _MultistepScaffold.new)
+                .call(body),
+      ),
     );
   }
 }
 
-class PageControllerProvider extends InheritedWidget {
-  const PageControllerProvider({
+class MultistepControllerProvider extends InheritedWidget {
+  const MultistepControllerProvider({
     required this.controller,
     required super.child,
     super.key,
   });
 
-  final PageController controller;
-
-  static PageController of(BuildContext context) => context
-      .dependOnInheritedWidgetOfExactType<PageControllerProvider>()!
-      .controller;
+  final MultistepController controller;
 
   @override
-  bool updateShouldNotify(PageControllerProvider oldWidget) =>
+  bool updateShouldNotify(MultistepControllerProvider oldWidget) =>
       controller != oldWidget.controller;
 }
 
@@ -316,7 +311,7 @@ class _MultistepScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const MultistepPageBackButton(),
+        leading: const MultistepBackButton(),
         title: Text(context.read<RootNode>().uiSettings.titleText),
       ),
       body: body,
@@ -324,18 +319,18 @@ class _MultistepScaffold extends StatelessWidget {
   }
 }
 
-class MultistepPageBackButton extends StatelessWidget {
-  const MultistepPageBackButton({super.key});
+class MultistepBackButton extends StatelessWidget {
+  const MultistepBackButton({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final pageController = PageControllerProvider.of(context);
+    final controller = MultistepController.of(context);
 
     return QuitPageButton(
       canQuit: (context) async {
-        if (pageController.page != null && pageController.page! > 0) {
+        if (controller.page != null && controller.page! > 0) {
           FocusScope.of(context).unfocus();
-          await pageController.previousPage(
+          await controller.previousPage(
             duration: WoFormMultiStepPage.TRANSITION_DURATION,
             curve: Curves.easeIn,
           );

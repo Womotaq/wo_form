@@ -154,13 +154,23 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   /// Return true if the current state is equal to the initial state.
   bool get isPure => mapEquals(
-    _initialValues
-      ..remove(_visitedPathsKey)
-      ..remove(focusedPathKey),
-    state
-      ..remove(_visitedPathsKey)
-      ..remove(focusedPathKey),
+    _initialValues,
+    // ..removeWhere((path, _) => path.startsWith('/__wo_reserved')),
+    state..removeWhere((path, _) => path.startsWith('/__wo_reserved')),
   );
+
+  // --- MULTI STEP ---
+
+  // ignore: constant_identifier_names
+  static const MULTISTEP_INDEX_KEY = '/__wo_reserved_page_index';
+
+  void _setMultistepIndex(int multistepIndex) {
+    final newMap = WoFormValues.from(state);
+    newMap[MULTISTEP_INDEX_KEY] = multistepIndex;
+    emit(newMap);
+  }
+
+  int? readMultistepIndex() => state[MULTISTEP_INDEX_KEY] as int?;
 
   // --- CURRENT STATE ---
 
@@ -205,7 +215,8 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   // --- FOCUS ---
 
-  static const focusedPathKey = '/__wo_reserved_focused_path';
+  // ignore: constant_identifier_names
+  static const FOCUSED_PATH_KEY = '/__wo_reserved_focused_path';
 
   // Called by WoFormNodeFocusManager
   FocusNode _createFocusNode(String path) {
@@ -224,18 +235,18 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
     if (isFocused && oldFocusedPath != path) {
       final newMap = WoFormValues.from(state);
-      newMap[focusedPathKey] = path;
+      newMap[FOCUSED_PATH_KEY] = path;
       emit(newMap);
     } else if (!isFocused && oldFocusedPath == path) {
       final newMap = WoFormValues.from(state);
-      newMap[focusedPathKey] = null;
+      newMap[FOCUSED_PATH_KEY] = null;
       emit(newMap);
     }
 
     if (!isFocused) _markPathAsVisited(path: path);
   }
 
-  String? get focusedPath => state[focusedPathKey] as String?;
+  String? get focusedPath => state[FOCUSED_PATH_KEY] as String?;
 
   bool isFocused(String path) => focusedPath == path;
 
@@ -337,9 +348,10 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   // --- VISITED PATHS ---
 
-  static const _visitedPathsKey = '/__wo_reserved_visited_paths';
+  // ignore: constant_identifier_names
+  static const _VISITED_PATHS_KEY = '/__wo_reserved_visited_paths';
   Iterable<String> get _visitedPaths =>
-      state[_visitedPathsKey] as Iterable<String>? ?? {};
+      state[_VISITED_PATHS_KEY] as Iterable<String>? ?? {};
 
   /// Marks the node at this path as visited by the user.
   /// Before submission, only visited nodes show errors.
@@ -356,10 +368,10 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
     final newMap = WoFormValues.from(state);
     final visitedPaths = Set<String>.from(
-      newMap[_visitedPathsKey] as Iterable<String>? ?? {},
+      newMap[_VISITED_PATHS_KEY] as Iterable<String>? ?? {},
     );
     if (visitedPaths.add(path)) {
-      newMap[_visitedPathsKey] = visitedPaths.toList();
+      newMap[_VISITED_PATHS_KEY] = visitedPaths.toList();
       emit(newMap);
       _updateErrors();
       return;
@@ -379,10 +391,10 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
     final newMap = WoFormValues.from(state);
     final visitedPaths = Set<String>.from(
-      newMap[_visitedPathsKey] as Iterable<String>? ?? {},
+      newMap[_VISITED_PATHS_KEY] as Iterable<String>? ?? {},
     )..addAll(paths);
     // Do not store a set in values, or the hydratation won't work
-    newMap[_visitedPathsKey] = visitedPaths.toList();
+    newMap[_VISITED_PATHS_KEY] = visitedPaths.toList();
     emit(newMap);
   }
 
@@ -758,4 +770,56 @@ class _WoFormNodeFocusManagerState extends State<WoFormNodeFocusManager> {
       ),
     );
   }
+}
+
+class MultistepController extends PageController {
+  MultistepController(
+    this.valuesCubit, {
+    super.initialPage = 0,
+    super.keepPage = true,
+    super.viewportFraction = 1.0,
+    super.onAttach,
+    super.onDetach,
+  }) {
+    valuesCubit._setMultistepIndex(initialPage);
+  }
+
+  final WoFormValuesCubit valuesCubit;
+
+  static MultistepController of(BuildContext context) => context
+      .dependOnInheritedWidgetOfExactType<MultistepControllerProvider>()!
+      .controller;
+
+  @override
+  Future<void> animateToPage(
+    int page, {
+    required Duration duration,
+    required Curve curve,
+  }) {
+    valuesCubit._setMultistepIndex(page);
+    return super.animateToPage(page, duration: duration, curve: curve);
+  }
+
+  @override
+  void jumpToPage(int page) {
+    valuesCubit._setMultistepIndex(page);
+    return super.jumpToPage(page);
+  }
+
+  @override
+  Future<void> nextPage({required Duration duration, required Curve curve}) {
+    valuesCubit._setMultistepIndex((page?.toInt() ?? 0) + 1);
+    return super.nextPage(duration: duration, curve: curve);
+  }
+
+  @override
+  Future<void> previousPage({
+    required Duration duration,
+    required Curve curve,
+  }) {
+    valuesCubit._setMultistepIndex((page?.toInt() ?? 0) - 1);
+    return super.previousPage(duration: duration, curve: curve);
+  }
+
+  void addMultistepIndexListener() {}
 }

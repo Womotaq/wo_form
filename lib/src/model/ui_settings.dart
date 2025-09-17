@@ -723,8 +723,7 @@ enum ShowErrors {
   progressively,
 }
 
-typedef MultiStepProgressIndicatorBuilderDef =
-    Widget Function({required int index, required int maxIndex});
+typedef MultiStepProgressIndicatorBuilderDef = Widget Function();
 
 @freezed
 sealed class WoFormSubmitMode with _$WoFormSubmitMode {
