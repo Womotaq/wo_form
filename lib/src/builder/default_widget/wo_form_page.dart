@@ -71,13 +71,12 @@ class WoFormStandardPage extends StatelessWidget {
                 .toList(),
           ),
         ),
-        if (root.uiSettings.submitMode.buttonPosition ==
-            SubmitButtonPosition.body)
+        if (submitMode.buttonPosition == SubmitButtonPosition.body)
           const SubmitButtonBuilder(),
       ],
     );
 
-    return (submitMode.scaffoldBuilder ??
+    return (root.uiSettings.scaffoldBuilder ??
             woFormTheme?.standardScaffoldBuilder ??
             _StandardScaffold.new)
         .call(column);
@@ -170,10 +169,13 @@ class WoFormMultiStepPageState extends State<WoFormMultiStepPage> {
           context.read<WoFormValuesCubit>().clearTemporarySubmitData();
         } else {
           context.read<WoFormValuesCubit>().addTemporarySubmitData(
-            onSubmitting: () => pageController.nextPage(
-              duration: WoFormMultiStepPage.TRANSITION_DURATION,
-              curve: Curves.easeIn,
-            ),
+            onSubmitting: () {
+              FocusScope.of(context).unfocus();
+              return pageController.nextPage(
+                duration: WoFormMultiStepPage.TRANSITION_DURATION,
+                curve: Curves.easeIn,
+              );
+            },
             path: '/${root.children[newPageIndex.toInt()].id}',
           );
         }
@@ -194,90 +196,149 @@ class WoFormMultiStepPageState extends State<WoFormMultiStepPage> {
     final root = context.read<RootNode>();
     final woFormTheme = WoFormTheme.of(context);
 
+    final submitMode = root.uiSettings.submitMode;
+    if (submitMode is! MultiStepSubmitMode) {
+      throw ArgumentError('submitMode must be MultiStepSubmitMode');
+    }
+
+    final body = Column(
+      children: [
+        if (submitMode.showProgressIndicator)
+          (submitMode.progressIndicatorBuilder ??
+              woFormTheme?.multiStepProgressIndicatorBuilder ??
+              MultiStepProgressIndicator.new)(
+            index: pageIndex.toInt(),
+            maxIndex: root.children.length - 1,
+          ),
+        Expanded(
+          child: PageView.builder(
+            controller: pageController,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: root.children.length,
+            itemBuilder: (context, index) {
+              final node = root.children[index];
+              final body = Padding(
+                padding:
+                    // TODO : rework fieldsPadding
+                    submitMode.fieldsPadding ??
+                    const EdgeInsets.only(top: 16, bottom: 32),
+                child: node.toWidget(parentPath: ''),
+              );
+              return ConstrainedColumn(
+                maxWidth:
+                    woFormTheme?.maxWidth ?? WoFormThemeData.DEFAULT_MAX_WIDTH,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Flexible(
+                    flex:
+                        root.uiSettings.scrollable ||
+                            (node.flex(context) ?? 0) == 0
+                        ? 0
+                        : 1,
+                    child: root.uiSettings.scrollable
+                        ? SingleChildScrollView(child: body)
+                        : body,
+                  ),
+                  SubmitButtonBuilder(
+                    submitButtonBuilder: (data) {
+                      final submitButtonBuilder =
+                          root.uiSettings.submitButtonBuilder ??
+                          woFormTheme?.submitButtonBuilder ??
+                          SubmitButton.new;
+                      final isLastPage = index == root.children.length - 1;
+
+                      return submitButtonBuilder(
+                        isLastPage
+                            // This line ensures a smooth transition
+                            ? data.copyWith(path: '')
+                            : data.copyWith(
+                                text:
+                                    submitMode.nextText ??
+                                    context.read<WoFormL10n?>()?.next(),
+                                // ignores submitIcon
+                                icon: null,
+                                path: '/${node.id}',
+                              ),
+                      );
+                    },
+                  ),
+                ],
+              );
+            },
+          ),
+        ),
+      ],
+    );
+
+    return PageControllerProvider(
+      controller: pageController,
+      child:
+          (root.uiSettings.scaffoldBuilder ??
+                  //       woFormTheme?.multistepScaffoldBuilder ??
+                  _MultistepScaffold.new)
+              .call(body),
+    );
+  }
+}
+
+class PageControllerProvider extends InheritedWidget {
+  const PageControllerProvider({
+    required this.controller,
+    required super.child,
+    super.key,
+  });
+
+  final PageController controller;
+
+  static PageController of(BuildContext context) {
+    return context
+        .dependOnInheritedWidgetOfExactType<PageControllerProvider>()!
+        .controller;
+  }
+
+  @override
+  bool updateShouldNotify(PageControllerProvider oldWidget) =>
+      controller != oldWidget.controller;
+}
+
+class _MultistepScaffold extends StatelessWidget {
+  const _MultistepScaffold(this.body);
+
+  final Widget body;
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: QuitPageButton(
-          canQuit: (context) async {
-            if (pageController.page != null && pageController.page! > 0) {
-              FocusScope.of(context).unfocus();
-              await pageController.previousPage(
-                duration: WoFormMultiStepPage.TRANSITION_DURATION,
-                curve: Curves.easeIn,
-              );
-              return false;
-            } else {
-              return root.uiSettings.canQuit?.call(context) ?? true;
-            }
-          },
-        ),
-        title: Text(root.uiSettings.titleText),
+        leading: const MultistepPageBackButton(),
+        title: Text(context.read<RootNode>().uiSettings.titleText),
       ),
-      body: Column(
-        children: [
-          if (widget.submitMode.showProgressIndicator)
-            (widget.submitMode.progressIndicatorBuilder ??
-                woFormTheme?.multiStepProgressIndicatorBuilder ??
-                MultiStepProgressIndicator.new)(
-              index: pageIndex.toInt(),
-              maxIndex: root.children.length - 1,
-            ),
-          Expanded(
-            child: PageView.builder(
-              controller: pageController,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: root.children.length,
-              itemBuilder: (context, index) {
-                final body = Padding(
-                  padding: const EdgeInsets.only(top: 16, bottom: 32),
-                  child: root.children[index].toWidget(
-                    parentPath: '',
-                  ),
-                );
-                return ConstrainedColumn(
-                  maxWidth:
-                      woFormTheme?.maxWidth ??
-                      WoFormThemeData.DEFAULT_MAX_WIDTH,
-                  children: [
-                    Flexible(
-                      child: root.uiSettings.scrollable
-                          ? SingleChildScrollView(child: body)
-                          : body,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          SubmitButtonBuilder(
-                            submitButtonBuilder:
-                                index == root.children.length - 1
-                                ? null
-                                : (data) =>
-                                      (root.uiSettings.submitButtonBuilder ??
-                                      woFormTheme?.submitButtonBuilder ??
-                                      SubmitButton.new)(
-                                        data.copyWith(
-                                          text:
-                                              widget.submitMode.nextText ??
-                                              context
-                                                  .read<WoFormL10n?>()
-                                                  ?.next(),
-                                          icon: null,
-                                          path: '/${root.children[index].id}',
-                                        ),
-                                      ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                  ],
-                );
-              },
-            ),
-          ),
-        ],
-      ),
+      body: body,
+    );
+  }
+}
+
+class MultistepPageBackButton extends StatelessWidget {
+  const MultistepPageBackButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final pageController = PageControllerProvider.of(context);
+
+    return QuitPageButton(
+      canQuit: (context) async {
+        if (pageController.page != null && pageController.page! > 0) {
+          FocusScope.of(context).unfocus();
+          await pageController.previousPage(
+            duration: WoFormMultiStepPage.TRANSITION_DURATION,
+            curve: Curves.easeIn,
+          );
+          return false;
+        } else {
+          return context.read<RootNode>().uiSettings.canQuit?.call(context) ??
+              true;
+        }
+      },
     );
   }
 }

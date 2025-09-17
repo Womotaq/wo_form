@@ -1680,7 +1680,7 @@ as ScoreWidgetBuilderDef?,
 /// @nodoc
 mixin _$StringInputUiSettings {
 
- String? get labelText; String? get hintText; String? get helperText;@notSerializable Widget? get prefixIcon; StringFieldAction? get action; bool? get submitFormOnFieldSubmitted;@TextInputTypeConverter() TextInputType? get keyboardType; bool? get obscureText; bool? get autocorrect; List<String>? get autofillHints; bool? get autofocus; TextInputAction? get textInputAction;/// Defaults to TextCapitalization.none.
+ String? get labelText; String? get hintText; String? get helperText; int? get helperMaxLines;@notSerializable Widget? get prefixIcon; StringFieldAction? get action; bool? get submitFormOnFieldSubmitted;@TextInputTypeConverter() TextInputType? get keyboardType; bool? get obscureText; bool? get autocorrect; List<String>? get autofillHints; bool? get autofocus; TextInputAction? get textInputAction;/// Defaults to TextCapitalization.none.
  TextCapitalization? get textCapitalization;/// Defaults to 1. If you want to set it to null, enter 0.
  int? get maxLines; String? get invalidRegexMessage;@notSerializable TextStyle? get style;@notSerializable StringFieldBuilderDef? get widgetBuilder;
 /// Create a copy of StringInputUiSettings
@@ -1695,16 +1695,16 @@ $StringInputUiSettingsCopyWith<StringInputUiSettings> get copyWith => _$StringIn
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StringInputUiSettings&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.action, action) || other.action == action)&&(identical(other.submitFormOnFieldSubmitted, submitFormOnFieldSubmitted) || other.submitFormOnFieldSubmitted == submitFormOnFieldSubmitted)&&(identical(other.keyboardType, keyboardType) || other.keyboardType == keyboardType)&&(identical(other.obscureText, obscureText) || other.obscureText == obscureText)&&(identical(other.autocorrect, autocorrect) || other.autocorrect == autocorrect)&&const DeepCollectionEquality().equals(other.autofillHints, autofillHints)&&(identical(other.autofocus, autofocus) || other.autofocus == autofocus)&&(identical(other.textInputAction, textInputAction) || other.textInputAction == textInputAction)&&(identical(other.textCapitalization, textCapitalization) || other.textCapitalization == textCapitalization)&&(identical(other.maxLines, maxLines) || other.maxLines == maxLines)&&(identical(other.invalidRegexMessage, invalidRegexMessage) || other.invalidRegexMessage == invalidRegexMessage)&&(identical(other.style, style) || other.style == style)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StringInputUiSettings&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.helperMaxLines, helperMaxLines) || other.helperMaxLines == helperMaxLines)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.action, action) || other.action == action)&&(identical(other.submitFormOnFieldSubmitted, submitFormOnFieldSubmitted) || other.submitFormOnFieldSubmitted == submitFormOnFieldSubmitted)&&(identical(other.keyboardType, keyboardType) || other.keyboardType == keyboardType)&&(identical(other.obscureText, obscureText) || other.obscureText == obscureText)&&(identical(other.autocorrect, autocorrect) || other.autocorrect == autocorrect)&&const DeepCollectionEquality().equals(other.autofillHints, autofillHints)&&(identical(other.autofocus, autofocus) || other.autofocus == autofocus)&&(identical(other.textInputAction, textInputAction) || other.textInputAction == textInputAction)&&(identical(other.textCapitalization, textCapitalization) || other.textCapitalization == textCapitalization)&&(identical(other.maxLines, maxLines) || other.maxLines == maxLines)&&(identical(other.invalidRegexMessage, invalidRegexMessage) || other.invalidRegexMessage == invalidRegexMessage)&&(identical(other.style, style) || other.style == style)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,labelText,hintText,helperText,prefixIcon,action,submitFormOnFieldSubmitted,keyboardType,obscureText,autocorrect,const DeepCollectionEquality().hash(autofillHints),autofocus,textInputAction,textCapitalization,maxLines,invalidRegexMessage,style,widgetBuilder);
+int get hashCode => Object.hash(runtimeType,labelText,hintText,helperText,helperMaxLines,prefixIcon,action,submitFormOnFieldSubmitted,keyboardType,obscureText,autocorrect,const DeepCollectionEquality().hash(autofillHints),autofocus,textInputAction,textCapitalization,maxLines,invalidRegexMessage,style,widgetBuilder);
 
 @override
 String toString() {
-  return 'StringInputUiSettings(labelText: $labelText, hintText: $hintText, helperText: $helperText, prefixIcon: $prefixIcon, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage, style: $style, widgetBuilder: $widgetBuilder)';
+  return 'StringInputUiSettings(labelText: $labelText, hintText: $hintText, helperText: $helperText, helperMaxLines: $helperMaxLines, prefixIcon: $prefixIcon, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage, style: $style, widgetBuilder: $widgetBuilder)';
 }
 
 
@@ -1715,7 +1715,7 @@ abstract mixin class $StringInputUiSettingsCopyWith<$Res>  {
   factory $StringInputUiSettingsCopyWith(StringInputUiSettings value, $Res Function(StringInputUiSettings) _then) = _$StringInputUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String? labelText, String? hintText, String? helperText,@notSerializable Widget? prefixIcon, StringFieldAction? action, bool? submitFormOnFieldSubmitted,@TextInputTypeConverter() TextInputType? keyboardType, bool? obscureText, bool? autocorrect, List<String>? autofillHints, bool? autofocus, TextInputAction? textInputAction, TextCapitalization? textCapitalization, int? maxLines, String? invalidRegexMessage,@notSerializable TextStyle? style,@notSerializable StringFieldBuilderDef? widgetBuilder
+ String? labelText, String? hintText, String? helperText, int? helperMaxLines,@notSerializable Widget? prefixIcon, StringFieldAction? action, bool? submitFormOnFieldSubmitted,@TextInputTypeConverter() TextInputType? keyboardType, bool? obscureText, bool? autocorrect, List<String>? autofillHints, bool? autofocus, TextInputAction? textInputAction, TextCapitalization? textCapitalization, int? maxLines, String? invalidRegexMessage,@notSerializable TextStyle? style,@notSerializable StringFieldBuilderDef? widgetBuilder
 });
 
 
@@ -1732,12 +1732,13 @@ class _$StringInputUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of StringInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? labelText = freezed,Object? hintText = freezed,Object? helperText = freezed,Object? prefixIcon = freezed,Object? action = freezed,Object? submitFormOnFieldSubmitted = freezed,Object? keyboardType = freezed,Object? obscureText = freezed,Object? autocorrect = freezed,Object? autofillHints = freezed,Object? autofocus = freezed,Object? textInputAction = freezed,Object? textCapitalization = freezed,Object? maxLines = freezed,Object? invalidRegexMessage = freezed,Object? style = freezed,Object? widgetBuilder = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? labelText = freezed,Object? hintText = freezed,Object? helperText = freezed,Object? helperMaxLines = freezed,Object? prefixIcon = freezed,Object? action = freezed,Object? submitFormOnFieldSubmitted = freezed,Object? keyboardType = freezed,Object? obscureText = freezed,Object? autocorrect = freezed,Object? autofillHints = freezed,Object? autofocus = freezed,Object? textInputAction = freezed,Object? textCapitalization = freezed,Object? maxLines = freezed,Object? invalidRegexMessage = freezed,Object? style = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_self.copyWith(
 labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
 as String?,hintText: freezed == hintText ? _self.hintText : hintText // ignore: cast_nullable_to_non_nullable
 as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
-as String?,prefixIcon: freezed == prefixIcon ? _self.prefixIcon : prefixIcon // ignore: cast_nullable_to_non_nullable
+as String?,helperMaxLines: freezed == helperMaxLines ? _self.helperMaxLines : helperMaxLines // ignore: cast_nullable_to_non_nullable
+as int?,prefixIcon: freezed == prefixIcon ? _self.prefixIcon : prefixIcon // ignore: cast_nullable_to_non_nullable
 as Widget?,action: freezed == action ? _self.action : action // ignore: cast_nullable_to_non_nullable
 as StringFieldAction?,submitFormOnFieldSubmitted: freezed == submitFormOnFieldSubmitted ? _self.submitFormOnFieldSubmitted : submitFormOnFieldSubmitted // ignore: cast_nullable_to_non_nullable
 as bool?,keyboardType: freezed == keyboardType ? _self.keyboardType : keyboardType // ignore: cast_nullable_to_non_nullable
@@ -1763,12 +1764,13 @@ as StringFieldBuilderDef?,
 @JsonSerializable()
 
 class _StringInputUiSettings extends StringInputUiSettings {
-  const _StringInputUiSettings({this.labelText, this.hintText, this.helperText, @notSerializable this.prefixIcon, this.action, this.submitFormOnFieldSubmitted, @TextInputTypeConverter() this.keyboardType, this.obscureText, this.autocorrect, final  List<String>? autofillHints, this.autofocus, this.textInputAction, this.textCapitalization, this.maxLines, this.invalidRegexMessage, @notSerializable this.style, @notSerializable this.widgetBuilder}): _autofillHints = autofillHints,super._();
+  const _StringInputUiSettings({this.labelText, this.hintText, this.helperText, this.helperMaxLines, @notSerializable this.prefixIcon, this.action, this.submitFormOnFieldSubmitted, @TextInputTypeConverter() this.keyboardType, this.obscureText, this.autocorrect, final  List<String>? autofillHints, this.autofocus, this.textInputAction, this.textCapitalization, this.maxLines, this.invalidRegexMessage, @notSerializable this.style, @notSerializable this.widgetBuilder}): _autofillHints = autofillHints,super._();
   factory _StringInputUiSettings.fromJson(Map<String, dynamic> json) => _$StringInputUiSettingsFromJson(json);
 
 @override final  String? labelText;
 @override final  String? hintText;
 @override final  String? helperText;
+@override final  int? helperMaxLines;
 @override@notSerializable final  Widget? prefixIcon;
 @override final  StringFieldAction? action;
 @override final  bool? submitFormOnFieldSubmitted;
@@ -1807,16 +1809,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StringInputUiSettings&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.action, action) || other.action == action)&&(identical(other.submitFormOnFieldSubmitted, submitFormOnFieldSubmitted) || other.submitFormOnFieldSubmitted == submitFormOnFieldSubmitted)&&(identical(other.keyboardType, keyboardType) || other.keyboardType == keyboardType)&&(identical(other.obscureText, obscureText) || other.obscureText == obscureText)&&(identical(other.autocorrect, autocorrect) || other.autocorrect == autocorrect)&&const DeepCollectionEquality().equals(other._autofillHints, _autofillHints)&&(identical(other.autofocus, autofocus) || other.autofocus == autofocus)&&(identical(other.textInputAction, textInputAction) || other.textInputAction == textInputAction)&&(identical(other.textCapitalization, textCapitalization) || other.textCapitalization == textCapitalization)&&(identical(other.maxLines, maxLines) || other.maxLines == maxLines)&&(identical(other.invalidRegexMessage, invalidRegexMessage) || other.invalidRegexMessage == invalidRegexMessage)&&(identical(other.style, style) || other.style == style)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StringInputUiSettings&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.helperMaxLines, helperMaxLines) || other.helperMaxLines == helperMaxLines)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.action, action) || other.action == action)&&(identical(other.submitFormOnFieldSubmitted, submitFormOnFieldSubmitted) || other.submitFormOnFieldSubmitted == submitFormOnFieldSubmitted)&&(identical(other.keyboardType, keyboardType) || other.keyboardType == keyboardType)&&(identical(other.obscureText, obscureText) || other.obscureText == obscureText)&&(identical(other.autocorrect, autocorrect) || other.autocorrect == autocorrect)&&const DeepCollectionEquality().equals(other._autofillHints, _autofillHints)&&(identical(other.autofocus, autofocus) || other.autofocus == autofocus)&&(identical(other.textInputAction, textInputAction) || other.textInputAction == textInputAction)&&(identical(other.textCapitalization, textCapitalization) || other.textCapitalization == textCapitalization)&&(identical(other.maxLines, maxLines) || other.maxLines == maxLines)&&(identical(other.invalidRegexMessage, invalidRegexMessage) || other.invalidRegexMessage == invalidRegexMessage)&&(identical(other.style, style) || other.style == style)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,labelText,hintText,helperText,prefixIcon,action,submitFormOnFieldSubmitted,keyboardType,obscureText,autocorrect,const DeepCollectionEquality().hash(_autofillHints),autofocus,textInputAction,textCapitalization,maxLines,invalidRegexMessage,style,widgetBuilder);
+int get hashCode => Object.hash(runtimeType,labelText,hintText,helperText,helperMaxLines,prefixIcon,action,submitFormOnFieldSubmitted,keyboardType,obscureText,autocorrect,const DeepCollectionEquality().hash(_autofillHints),autofocus,textInputAction,textCapitalization,maxLines,invalidRegexMessage,style,widgetBuilder);
 
 @override
 String toString() {
-  return 'StringInputUiSettings(labelText: $labelText, hintText: $hintText, helperText: $helperText, prefixIcon: $prefixIcon, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage, style: $style, widgetBuilder: $widgetBuilder)';
+  return 'StringInputUiSettings(labelText: $labelText, hintText: $hintText, helperText: $helperText, helperMaxLines: $helperMaxLines, prefixIcon: $prefixIcon, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage, style: $style, widgetBuilder: $widgetBuilder)';
 }
 
 
@@ -1827,7 +1829,7 @@ abstract mixin class _$StringInputUiSettingsCopyWith<$Res> implements $StringInp
   factory _$StringInputUiSettingsCopyWith(_StringInputUiSettings value, $Res Function(_StringInputUiSettings) _then) = __$StringInputUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String? labelText, String? hintText, String? helperText,@notSerializable Widget? prefixIcon, StringFieldAction? action, bool? submitFormOnFieldSubmitted,@TextInputTypeConverter() TextInputType? keyboardType, bool? obscureText, bool? autocorrect, List<String>? autofillHints, bool? autofocus, TextInputAction? textInputAction, TextCapitalization? textCapitalization, int? maxLines, String? invalidRegexMessage,@notSerializable TextStyle? style,@notSerializable StringFieldBuilderDef? widgetBuilder
+ String? labelText, String? hintText, String? helperText, int? helperMaxLines,@notSerializable Widget? prefixIcon, StringFieldAction? action, bool? submitFormOnFieldSubmitted,@TextInputTypeConverter() TextInputType? keyboardType, bool? obscureText, bool? autocorrect, List<String>? autofillHints, bool? autofocus, TextInputAction? textInputAction, TextCapitalization? textCapitalization, int? maxLines, String? invalidRegexMessage,@notSerializable TextStyle? style,@notSerializable StringFieldBuilderDef? widgetBuilder
 });
 
 
@@ -1844,12 +1846,13 @@ class __$StringInputUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of StringInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? labelText = freezed,Object? hintText = freezed,Object? helperText = freezed,Object? prefixIcon = freezed,Object? action = freezed,Object? submitFormOnFieldSubmitted = freezed,Object? keyboardType = freezed,Object? obscureText = freezed,Object? autocorrect = freezed,Object? autofillHints = freezed,Object? autofocus = freezed,Object? textInputAction = freezed,Object? textCapitalization = freezed,Object? maxLines = freezed,Object? invalidRegexMessage = freezed,Object? style = freezed,Object? widgetBuilder = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? labelText = freezed,Object? hintText = freezed,Object? helperText = freezed,Object? helperMaxLines = freezed,Object? prefixIcon = freezed,Object? action = freezed,Object? submitFormOnFieldSubmitted = freezed,Object? keyboardType = freezed,Object? obscureText = freezed,Object? autocorrect = freezed,Object? autofillHints = freezed,Object? autofocus = freezed,Object? textInputAction = freezed,Object? textCapitalization = freezed,Object? maxLines = freezed,Object? invalidRegexMessage = freezed,Object? style = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_StringInputUiSettings(
 labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
 as String?,hintText: freezed == hintText ? _self.hintText : hintText // ignore: cast_nullable_to_non_nullable
 as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
-as String?,prefixIcon: freezed == prefixIcon ? _self.prefixIcon : prefixIcon // ignore: cast_nullable_to_non_nullable
+as String?,helperMaxLines: freezed == helperMaxLines ? _self.helperMaxLines : helperMaxLines // ignore: cast_nullable_to_non_nullable
+as int?,prefixIcon: freezed == prefixIcon ? _self.prefixIcon : prefixIcon // ignore: cast_nullable_to_non_nullable
 as Widget?,action: freezed == action ? _self.action : action // ignore: cast_nullable_to_non_nullable
 as StringFieldAction?,submitFormOnFieldSubmitted: freezed == submitFormOnFieldSubmitted ? _self.submitFormOnFieldSubmitted : submitFormOnFieldSubmitted // ignore: cast_nullable_to_non_nullable
 as bool?,keyboardType: freezed == keyboardType ? _self.keyboardType : keyboardType // ignore: cast_nullable_to_non_nullable
@@ -1874,7 +1877,7 @@ as StringFieldBuilderDef?,
 /// @nodoc
 mixin _$WoFormUiSettings {
 
- String get titleText; WoFormTitlePosition get titlePosition;@notSerializable HeaderBuilderDef? get headerBuilder; WoFormSubmitMode get submitMode;@notSerializable SubmitButtonBuilderDef? get submitButtonBuilder;/// If true, after the form is successfully submitted, it will be locked.
+ String get titleText; WoFormTitlePosition get titlePosition;@notSerializable HeaderBuilderDef? get headerBuilder; WoFormSubmitMode get submitMode; DisableSubmitButton get disableSubmitMode;@notSerializable SubmitButtonBuilderDef? get submitButtonBuilder;@notSerializable ScaffoldBuilderDef? get scaffoldBuilder;/// If true, after the form is successfully submitted, it will be locked.
  bool? get canModifySubmittedValues;/// By default, errors will only be shown after the user visited a node or
 /// tried to submit the form.
  ShowErrors get showErrors;/// Called when the users tries to quit the form, for exapmle by pressing
@@ -1897,16 +1900,16 @@ $WoFormUiSettingsCopyWith<WoFormUiSettings> get copyWith => _$WoFormUiSettingsCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WoFormUiSettings&&(identical(other.titleText, titleText) || other.titleText == titleText)&&(identical(other.titlePosition, titlePosition) || other.titlePosition == titlePosition)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.submitMode, submitMode) || other.submitMode == submitMode)&&(identical(other.submitButtonBuilder, submitButtonBuilder) || other.submitButtonBuilder == submitButtonBuilder)&&(identical(other.canModifySubmittedValues, canModifySubmittedValues) || other.canModifySubmittedValues == canModifySubmittedValues)&&(identical(other.showErrors, showErrors) || other.showErrors == showErrors)&&(identical(other.canQuit, canQuit) || other.canQuit == canQuit)&&(identical(other.theme, theme) || other.theme == theme)&&(identical(other.padding, padding) || other.padding == padding)&&(identical(other.scrollable, scrollable) || other.scrollable == scrollable));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WoFormUiSettings&&(identical(other.titleText, titleText) || other.titleText == titleText)&&(identical(other.titlePosition, titlePosition) || other.titlePosition == titlePosition)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.submitMode, submitMode) || other.submitMode == submitMode)&&(identical(other.disableSubmitMode, disableSubmitMode) || other.disableSubmitMode == disableSubmitMode)&&(identical(other.submitButtonBuilder, submitButtonBuilder) || other.submitButtonBuilder == submitButtonBuilder)&&(identical(other.scaffoldBuilder, scaffoldBuilder) || other.scaffoldBuilder == scaffoldBuilder)&&(identical(other.canModifySubmittedValues, canModifySubmittedValues) || other.canModifySubmittedValues == canModifySubmittedValues)&&(identical(other.showErrors, showErrors) || other.showErrors == showErrors)&&(identical(other.canQuit, canQuit) || other.canQuit == canQuit)&&(identical(other.theme, theme) || other.theme == theme)&&(identical(other.padding, padding) || other.padding == padding)&&(identical(other.scrollable, scrollable) || other.scrollable == scrollable));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,titleText,titlePosition,headerBuilder,submitMode,submitButtonBuilder,canModifySubmittedValues,showErrors,canQuit,theme,padding,scrollable);
+int get hashCode => Object.hash(runtimeType,titleText,titlePosition,headerBuilder,submitMode,disableSubmitMode,submitButtonBuilder,scaffoldBuilder,canModifySubmittedValues,showErrors,canQuit,theme,padding,scrollable);
 
 @override
 String toString() {
-  return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, submitButtonBuilder: $submitButtonBuilder, canModifySubmittedValues: $canModifySubmittedValues, showErrors: $showErrors, canQuit: $canQuit, theme: $theme, padding: $padding, scrollable: $scrollable)';
+  return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, disableSubmitMode: $disableSubmitMode, submitButtonBuilder: $submitButtonBuilder, scaffoldBuilder: $scaffoldBuilder, canModifySubmittedValues: $canModifySubmittedValues, showErrors: $showErrors, canQuit: $canQuit, theme: $theme, padding: $padding, scrollable: $scrollable)';
 }
 
 
@@ -1917,7 +1920,7 @@ abstract mixin class $WoFormUiSettingsCopyWith<$Res>  {
   factory $WoFormUiSettingsCopyWith(WoFormUiSettings value, $Res Function(WoFormUiSettings) _then) = _$WoFormUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String titleText, WoFormTitlePosition titlePosition,@notSerializable HeaderBuilderDef? headerBuilder, WoFormSubmitMode submitMode,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder, bool? canModifySubmittedValues, ShowErrors showErrors,@notSerializable Future<bool?> Function(BuildContext context)? canQuit, WoFormThemeData? theme,@EdgeInsetsNullableConverter() EdgeInsets? padding, bool scrollable
+ String titleText, WoFormTitlePosition titlePosition,@notSerializable HeaderBuilderDef? headerBuilder, WoFormSubmitMode submitMode, DisableSubmitButton disableSubmitMode,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder,@notSerializable ScaffoldBuilderDef? scaffoldBuilder, bool? canModifySubmittedValues, ShowErrors showErrors,@notSerializable Future<bool?> Function(BuildContext context)? canQuit, WoFormThemeData? theme,@EdgeInsetsNullableConverter() EdgeInsets? padding, bool scrollable
 });
 
 
@@ -1934,14 +1937,16 @@ class _$WoFormUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of WoFormUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? titleText = null,Object? titlePosition = null,Object? headerBuilder = freezed,Object? submitMode = null,Object? submitButtonBuilder = freezed,Object? canModifySubmittedValues = freezed,Object? showErrors = null,Object? canQuit = freezed,Object? theme = freezed,Object? padding = freezed,Object? scrollable = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? titleText = null,Object? titlePosition = null,Object? headerBuilder = freezed,Object? submitMode = null,Object? disableSubmitMode = null,Object? submitButtonBuilder = freezed,Object? scaffoldBuilder = freezed,Object? canModifySubmittedValues = freezed,Object? showErrors = null,Object? canQuit = freezed,Object? theme = freezed,Object? padding = freezed,Object? scrollable = null,}) {
   return _then(_self.copyWith(
 titleText: null == titleText ? _self.titleText : titleText // ignore: cast_nullable_to_non_nullable
 as String,titlePosition: null == titlePosition ? _self.titlePosition : titlePosition // ignore: cast_nullable_to_non_nullable
 as WoFormTitlePosition,headerBuilder: freezed == headerBuilder ? _self.headerBuilder : headerBuilder // ignore: cast_nullable_to_non_nullable
 as HeaderBuilderDef?,submitMode: null == submitMode ? _self.submitMode : submitMode // ignore: cast_nullable_to_non_nullable
-as WoFormSubmitMode,submitButtonBuilder: freezed == submitButtonBuilder ? _self.submitButtonBuilder : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
-as SubmitButtonBuilderDef?,canModifySubmittedValues: freezed == canModifySubmittedValues ? _self.canModifySubmittedValues : canModifySubmittedValues // ignore: cast_nullable_to_non_nullable
+as WoFormSubmitMode,disableSubmitMode: null == disableSubmitMode ? _self.disableSubmitMode : disableSubmitMode // ignore: cast_nullable_to_non_nullable
+as DisableSubmitButton,submitButtonBuilder: freezed == submitButtonBuilder ? _self.submitButtonBuilder : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
+as SubmitButtonBuilderDef?,scaffoldBuilder: freezed == scaffoldBuilder ? _self.scaffoldBuilder : scaffoldBuilder // ignore: cast_nullable_to_non_nullable
+as ScaffoldBuilderDef?,canModifySubmittedValues: freezed == canModifySubmittedValues ? _self.canModifySubmittedValues : canModifySubmittedValues // ignore: cast_nullable_to_non_nullable
 as bool?,showErrors: null == showErrors ? _self.showErrors : showErrors // ignore: cast_nullable_to_non_nullable
 as ShowErrors,canQuit: freezed == canQuit ? _self.canQuit : canQuit // ignore: cast_nullable_to_non_nullable
 as Future<bool?> Function(BuildContext context)?,theme: freezed == theme ? _self.theme : theme // ignore: cast_nullable_to_non_nullable
@@ -1980,14 +1985,16 @@ $WoFormThemeDataCopyWith<$Res>? get theme {
 @JsonSerializable()
 
 class _WoFormUiSettings extends WoFormUiSettings {
-  const _WoFormUiSettings({this.titleText = '', this.titlePosition = WoFormTitlePosition.header, @notSerializable this.headerBuilder, this.submitMode = const WoFormSubmitMode.standard(), @notSerializable this.submitButtonBuilder, this.canModifySubmittedValues, this.showErrors = ShowErrors.progressively, @notSerializable this.canQuit, this.theme, @EdgeInsetsNullableConverter() this.padding, this.scrollable = true}): super._();
+  const _WoFormUiSettings({this.titleText = '', this.titlePosition = WoFormTitlePosition.header, @notSerializable this.headerBuilder, this.submitMode = const WoFormSubmitMode.standard(), this.disableSubmitMode = DisableSubmitButton.never, @notSerializable this.submitButtonBuilder, @notSerializable this.scaffoldBuilder, this.canModifySubmittedValues, this.showErrors = ShowErrors.progressively, @notSerializable this.canQuit, this.theme, @EdgeInsetsNullableConverter() this.padding, this.scrollable = true}): super._();
   factory _WoFormUiSettings.fromJson(Map<String, dynamic> json) => _$WoFormUiSettingsFromJson(json);
 
 @override@JsonKey() final  String titleText;
 @override@JsonKey() final  WoFormTitlePosition titlePosition;
 @override@notSerializable final  HeaderBuilderDef? headerBuilder;
 @override@JsonKey() final  WoFormSubmitMode submitMode;
+@override@JsonKey() final  DisableSubmitButton disableSubmitMode;
 @override@notSerializable final  SubmitButtonBuilderDef? submitButtonBuilder;
+@override@notSerializable final  ScaffoldBuilderDef? scaffoldBuilder;
 /// If true, after the form is successfully submitted, it will be locked.
 @override final  bool? canModifySubmittedValues;
 /// By default, errors will only be shown after the user visited a node or
@@ -2018,16 +2025,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WoFormUiSettings&&(identical(other.titleText, titleText) || other.titleText == titleText)&&(identical(other.titlePosition, titlePosition) || other.titlePosition == titlePosition)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.submitMode, submitMode) || other.submitMode == submitMode)&&(identical(other.submitButtonBuilder, submitButtonBuilder) || other.submitButtonBuilder == submitButtonBuilder)&&(identical(other.canModifySubmittedValues, canModifySubmittedValues) || other.canModifySubmittedValues == canModifySubmittedValues)&&(identical(other.showErrors, showErrors) || other.showErrors == showErrors)&&(identical(other.canQuit, canQuit) || other.canQuit == canQuit)&&(identical(other.theme, theme) || other.theme == theme)&&(identical(other.padding, padding) || other.padding == padding)&&(identical(other.scrollable, scrollable) || other.scrollable == scrollable));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WoFormUiSettings&&(identical(other.titleText, titleText) || other.titleText == titleText)&&(identical(other.titlePosition, titlePosition) || other.titlePosition == titlePosition)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.submitMode, submitMode) || other.submitMode == submitMode)&&(identical(other.disableSubmitMode, disableSubmitMode) || other.disableSubmitMode == disableSubmitMode)&&(identical(other.submitButtonBuilder, submitButtonBuilder) || other.submitButtonBuilder == submitButtonBuilder)&&(identical(other.scaffoldBuilder, scaffoldBuilder) || other.scaffoldBuilder == scaffoldBuilder)&&(identical(other.canModifySubmittedValues, canModifySubmittedValues) || other.canModifySubmittedValues == canModifySubmittedValues)&&(identical(other.showErrors, showErrors) || other.showErrors == showErrors)&&(identical(other.canQuit, canQuit) || other.canQuit == canQuit)&&(identical(other.theme, theme) || other.theme == theme)&&(identical(other.padding, padding) || other.padding == padding)&&(identical(other.scrollable, scrollable) || other.scrollable == scrollable));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,titleText,titlePosition,headerBuilder,submitMode,submitButtonBuilder,canModifySubmittedValues,showErrors,canQuit,theme,padding,scrollable);
+int get hashCode => Object.hash(runtimeType,titleText,titlePosition,headerBuilder,submitMode,disableSubmitMode,submitButtonBuilder,scaffoldBuilder,canModifySubmittedValues,showErrors,canQuit,theme,padding,scrollable);
 
 @override
 String toString() {
-  return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, submitButtonBuilder: $submitButtonBuilder, canModifySubmittedValues: $canModifySubmittedValues, showErrors: $showErrors, canQuit: $canQuit, theme: $theme, padding: $padding, scrollable: $scrollable)';
+  return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, disableSubmitMode: $disableSubmitMode, submitButtonBuilder: $submitButtonBuilder, scaffoldBuilder: $scaffoldBuilder, canModifySubmittedValues: $canModifySubmittedValues, showErrors: $showErrors, canQuit: $canQuit, theme: $theme, padding: $padding, scrollable: $scrollable)';
 }
 
 
@@ -2038,7 +2045,7 @@ abstract mixin class _$WoFormUiSettingsCopyWith<$Res> implements $WoFormUiSettin
   factory _$WoFormUiSettingsCopyWith(_WoFormUiSettings value, $Res Function(_WoFormUiSettings) _then) = __$WoFormUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String titleText, WoFormTitlePosition titlePosition,@notSerializable HeaderBuilderDef? headerBuilder, WoFormSubmitMode submitMode,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder, bool? canModifySubmittedValues, ShowErrors showErrors,@notSerializable Future<bool?> Function(BuildContext context)? canQuit, WoFormThemeData? theme,@EdgeInsetsNullableConverter() EdgeInsets? padding, bool scrollable
+ String titleText, WoFormTitlePosition titlePosition,@notSerializable HeaderBuilderDef? headerBuilder, WoFormSubmitMode submitMode, DisableSubmitButton disableSubmitMode,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder,@notSerializable ScaffoldBuilderDef? scaffoldBuilder, bool? canModifySubmittedValues, ShowErrors showErrors,@notSerializable Future<bool?> Function(BuildContext context)? canQuit, WoFormThemeData? theme,@EdgeInsetsNullableConverter() EdgeInsets? padding, bool scrollable
 });
 
 
@@ -2055,14 +2062,16 @@ class __$WoFormUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of WoFormUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? titleText = null,Object? titlePosition = null,Object? headerBuilder = freezed,Object? submitMode = null,Object? submitButtonBuilder = freezed,Object? canModifySubmittedValues = freezed,Object? showErrors = null,Object? canQuit = freezed,Object? theme = freezed,Object? padding = freezed,Object? scrollable = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? titleText = null,Object? titlePosition = null,Object? headerBuilder = freezed,Object? submitMode = null,Object? disableSubmitMode = null,Object? submitButtonBuilder = freezed,Object? scaffoldBuilder = freezed,Object? canModifySubmittedValues = freezed,Object? showErrors = null,Object? canQuit = freezed,Object? theme = freezed,Object? padding = freezed,Object? scrollable = null,}) {
   return _then(_WoFormUiSettings(
 titleText: null == titleText ? _self.titleText : titleText // ignore: cast_nullable_to_non_nullable
 as String,titlePosition: null == titlePosition ? _self.titlePosition : titlePosition // ignore: cast_nullable_to_non_nullable
 as WoFormTitlePosition,headerBuilder: freezed == headerBuilder ? _self.headerBuilder : headerBuilder // ignore: cast_nullable_to_non_nullable
 as HeaderBuilderDef?,submitMode: null == submitMode ? _self.submitMode : submitMode // ignore: cast_nullable_to_non_nullable
-as WoFormSubmitMode,submitButtonBuilder: freezed == submitButtonBuilder ? _self.submitButtonBuilder : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
-as SubmitButtonBuilderDef?,canModifySubmittedValues: freezed == canModifySubmittedValues ? _self.canModifySubmittedValues : canModifySubmittedValues // ignore: cast_nullable_to_non_nullable
+as WoFormSubmitMode,disableSubmitMode: null == disableSubmitMode ? _self.disableSubmitMode : disableSubmitMode // ignore: cast_nullable_to_non_nullable
+as DisableSubmitButton,submitButtonBuilder: freezed == submitButtonBuilder ? _self.submitButtonBuilder : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
+as SubmitButtonBuilderDef?,scaffoldBuilder: freezed == scaffoldBuilder ? _self.scaffoldBuilder : scaffoldBuilder // ignore: cast_nullable_to_non_nullable
+as ScaffoldBuilderDef?,canModifySubmittedValues: freezed == canModifySubmittedValues ? _self.canModifySubmittedValues : canModifySubmittedValues // ignore: cast_nullable_to_non_nullable
 as bool?,showErrors: null == showErrors ? _self.showErrors : showErrors // ignore: cast_nullable_to_non_nullable
 as ShowErrors,canQuit: freezed == canQuit ? _self.canQuit : canQuit // ignore: cast_nullable_to_non_nullable
 as Future<bool?> Function(BuildContext context)?,theme: freezed == theme ? _self.theme : theme // ignore: cast_nullable_to_non_nullable
@@ -2123,7 +2132,7 @@ WoFormSubmitMode _$WoFormSubmitModeFromJson(
 /// @nodoc
 mixin _$WoFormSubmitMode {
 
- String? get submitText;@notSerializable IconData? get submitIcon; DisableSubmitButton get disableSubmitMode;
+ String? get submitText;@notSerializable IconData? get submitIcon;
 /// Create a copy of WoFormSubmitMode
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2136,16 +2145,16 @@ $WoFormSubmitModeCopyWith<WoFormSubmitMode> get copyWith => _$WoFormSubmitModeCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WoFormSubmitMode&&(identical(other.submitText, submitText) || other.submitText == submitText)&&(identical(other.submitIcon, submitIcon) || other.submitIcon == submitIcon)&&(identical(other.disableSubmitMode, disableSubmitMode) || other.disableSubmitMode == disableSubmitMode));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WoFormSubmitMode&&(identical(other.submitText, submitText) || other.submitText == submitText)&&(identical(other.submitIcon, submitIcon) || other.submitIcon == submitIcon));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,submitText,submitIcon,disableSubmitMode);
+int get hashCode => Object.hash(runtimeType,submitText,submitIcon);
 
 @override
 String toString() {
-  return 'WoFormSubmitMode(submitText: $submitText, submitIcon: $submitIcon, disableSubmitMode: $disableSubmitMode)';
+  return 'WoFormSubmitMode(submitText: $submitText, submitIcon: $submitIcon)';
 }
 
 
@@ -2156,7 +2165,7 @@ abstract mixin class $WoFormSubmitModeCopyWith<$Res>  {
   factory $WoFormSubmitModeCopyWith(WoFormSubmitMode value, $Res Function(WoFormSubmitMode) _then) = _$WoFormSubmitModeCopyWithImpl;
 @useResult
 $Res call({
- String? submitText,@notSerializable IconData? submitIcon, DisableSubmitButton disableSubmitMode
+ String? submitText,@notSerializable IconData? submitIcon
 });
 
 
@@ -2173,12 +2182,11 @@ class _$WoFormSubmitModeCopyWithImpl<$Res>
 
 /// Create a copy of WoFormSubmitMode
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? submitText = freezed,Object? submitIcon = freezed,Object? disableSubmitMode = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? submitText = freezed,Object? submitIcon = freezed,}) {
   return _then(_self.copyWith(
 submitText: freezed == submitText ? _self.submitText : submitText // ignore: cast_nullable_to_non_nullable
 as String?,submitIcon: freezed == submitIcon ? _self.submitIcon : submitIcon // ignore: cast_nullable_to_non_nullable
-as IconData?,disableSubmitMode: null == disableSubmitMode ? _self.disableSubmitMode : disableSubmitMode // ignore: cast_nullable_to_non_nullable
-as DisableSubmitButton,
+as IconData?,
   ));
 }
 
@@ -2190,14 +2198,12 @@ as DisableSubmitButton,
 @JsonSerializable()
 
 class StandardSubmitMode extends WoFormSubmitMode {
-  const StandardSubmitMode({this.submitText, @notSerializable this.submitIcon, this.disableSubmitMode = DisableSubmitButton.never, this.buttonPosition = SubmitButtonPosition.body, @notSerializable this.scaffoldBuilder, final  String? $type}): $type = $type ?? 'standard',super._();
+  const StandardSubmitMode({this.submitText, @notSerializable this.submitIcon, this.buttonPosition = SubmitButtonPosition.body, final  String? $type}): $type = $type ?? 'standard',super._();
   factory StandardSubmitMode.fromJson(Map<String, dynamic> json) => _$StandardSubmitModeFromJson(json);
 
 @override final  String? submitText;
 @override@notSerializable final  IconData? submitIcon;
-@override@JsonKey() final  DisableSubmitButton disableSubmitMode;
 @JsonKey() final  SubmitButtonPosition buttonPosition;
-@notSerializable final  ScaffoldBuilderDef? scaffoldBuilder;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -2216,16 +2222,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StandardSubmitMode&&(identical(other.submitText, submitText) || other.submitText == submitText)&&(identical(other.submitIcon, submitIcon) || other.submitIcon == submitIcon)&&(identical(other.disableSubmitMode, disableSubmitMode) || other.disableSubmitMode == disableSubmitMode)&&(identical(other.buttonPosition, buttonPosition) || other.buttonPosition == buttonPosition)&&(identical(other.scaffoldBuilder, scaffoldBuilder) || other.scaffoldBuilder == scaffoldBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StandardSubmitMode&&(identical(other.submitText, submitText) || other.submitText == submitText)&&(identical(other.submitIcon, submitIcon) || other.submitIcon == submitIcon)&&(identical(other.buttonPosition, buttonPosition) || other.buttonPosition == buttonPosition));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,submitText,submitIcon,disableSubmitMode,buttonPosition,scaffoldBuilder);
+int get hashCode => Object.hash(runtimeType,submitText,submitIcon,buttonPosition);
 
 @override
 String toString() {
-  return 'WoFormSubmitMode.standard(submitText: $submitText, submitIcon: $submitIcon, disableSubmitMode: $disableSubmitMode, buttonPosition: $buttonPosition, scaffoldBuilder: $scaffoldBuilder)';
+  return 'WoFormSubmitMode.standard(submitText: $submitText, submitIcon: $submitIcon, buttonPosition: $buttonPosition)';
 }
 
 
@@ -2236,7 +2242,7 @@ abstract mixin class $StandardSubmitModeCopyWith<$Res> implements $WoFormSubmitM
   factory $StandardSubmitModeCopyWith(StandardSubmitMode value, $Res Function(StandardSubmitMode) _then) = _$StandardSubmitModeCopyWithImpl;
 @override @useResult
 $Res call({
- String? submitText,@notSerializable IconData? submitIcon, DisableSubmitButton disableSubmitMode, SubmitButtonPosition buttonPosition,@notSerializable ScaffoldBuilderDef? scaffoldBuilder
+ String? submitText,@notSerializable IconData? submitIcon, SubmitButtonPosition buttonPosition
 });
 
 
@@ -2253,14 +2259,12 @@ class _$StandardSubmitModeCopyWithImpl<$Res>
 
 /// Create a copy of WoFormSubmitMode
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? submitText = freezed,Object? submitIcon = freezed,Object? disableSubmitMode = null,Object? buttonPosition = null,Object? scaffoldBuilder = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? submitText = freezed,Object? submitIcon = freezed,Object? buttonPosition = null,}) {
   return _then(StandardSubmitMode(
 submitText: freezed == submitText ? _self.submitText : submitText // ignore: cast_nullable_to_non_nullable
 as String?,submitIcon: freezed == submitIcon ? _self.submitIcon : submitIcon // ignore: cast_nullable_to_non_nullable
-as IconData?,disableSubmitMode: null == disableSubmitMode ? _self.disableSubmitMode : disableSubmitMode // ignore: cast_nullable_to_non_nullable
-as DisableSubmitButton,buttonPosition: null == buttonPosition ? _self.buttonPosition : buttonPosition // ignore: cast_nullable_to_non_nullable
-as SubmitButtonPosition,scaffoldBuilder: freezed == scaffoldBuilder ? _self.scaffoldBuilder : scaffoldBuilder // ignore: cast_nullable_to_non_nullable
-as ScaffoldBuilderDef?,
+as IconData?,buttonPosition: null == buttonPosition ? _self.buttonPosition : buttonPosition // ignore: cast_nullable_to_non_nullable
+as SubmitButtonPosition,
   ));
 }
 
@@ -2271,7 +2275,7 @@ as ScaffoldBuilderDef?,
 @JsonSerializable()
 
 class MultiStepSubmitMode extends WoFormSubmitMode {
-  const MultiStepSubmitMode({this.submitText, @notSerializable this.submitIcon, this.nextText, this.disableSubmitMode = DisableSubmitButton.never, this.showProgressIndicator = true, @notSerializable this.progressIndicatorBuilder, final  String? $type}): $type = $type ?? 'multiStep',super._();
+  const MultiStepSubmitMode({this.submitText, @notSerializable this.submitIcon, this.nextText, this.showProgressIndicator = true, @notSerializable this.progressIndicatorBuilder, @EdgeInsetsNullableConverter() this.fieldsPadding, final  String? $type}): $type = $type ?? 'multiStep',super._();
   factory MultiStepSubmitMode.fromJson(Map<String, dynamic> json) => _$MultiStepSubmitModeFromJson(json);
 
 @override final  String? submitText;
@@ -2279,9 +2283,13 @@ class MultiStepSubmitMode extends WoFormSubmitMode {
 /// Text for the submit button if it navigates to the next form page.
 /// Falls back to submitText if not provided.
  final  String? nextText;
-@override@JsonKey() final  DisableSubmitButton disableSubmitMode;
 @JsonKey() final  bool showProgressIndicator;
 @notSerializable final  MultiStepProgressIndicatorBuilderDef? progressIndicatorBuilder;
+/// Applied around the fields, not the progress indicator,
+/// nor the submit button.
+///
+/// Defaults to EdgeInsets.only(top: 16, bottom: 32).
+@EdgeInsetsNullableConverter() final  EdgeInsets? fieldsPadding;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -2300,16 +2308,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MultiStepSubmitMode&&(identical(other.submitText, submitText) || other.submitText == submitText)&&(identical(other.submitIcon, submitIcon) || other.submitIcon == submitIcon)&&(identical(other.nextText, nextText) || other.nextText == nextText)&&(identical(other.disableSubmitMode, disableSubmitMode) || other.disableSubmitMode == disableSubmitMode)&&(identical(other.showProgressIndicator, showProgressIndicator) || other.showProgressIndicator == showProgressIndicator)&&(identical(other.progressIndicatorBuilder, progressIndicatorBuilder) || other.progressIndicatorBuilder == progressIndicatorBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MultiStepSubmitMode&&(identical(other.submitText, submitText) || other.submitText == submitText)&&(identical(other.submitIcon, submitIcon) || other.submitIcon == submitIcon)&&(identical(other.nextText, nextText) || other.nextText == nextText)&&(identical(other.showProgressIndicator, showProgressIndicator) || other.showProgressIndicator == showProgressIndicator)&&(identical(other.progressIndicatorBuilder, progressIndicatorBuilder) || other.progressIndicatorBuilder == progressIndicatorBuilder)&&(identical(other.fieldsPadding, fieldsPadding) || other.fieldsPadding == fieldsPadding));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,submitText,submitIcon,nextText,disableSubmitMode,showProgressIndicator,progressIndicatorBuilder);
+int get hashCode => Object.hash(runtimeType,submitText,submitIcon,nextText,showProgressIndicator,progressIndicatorBuilder,fieldsPadding);
 
 @override
 String toString() {
-  return 'WoFormSubmitMode.multiStep(submitText: $submitText, submitIcon: $submitIcon, nextText: $nextText, disableSubmitMode: $disableSubmitMode, showProgressIndicator: $showProgressIndicator, progressIndicatorBuilder: $progressIndicatorBuilder)';
+  return 'WoFormSubmitMode.multiStep(submitText: $submitText, submitIcon: $submitIcon, nextText: $nextText, showProgressIndicator: $showProgressIndicator, progressIndicatorBuilder: $progressIndicatorBuilder, fieldsPadding: $fieldsPadding)';
 }
 
 
@@ -2320,7 +2328,7 @@ abstract mixin class $MultiStepSubmitModeCopyWith<$Res> implements $WoFormSubmit
   factory $MultiStepSubmitModeCopyWith(MultiStepSubmitMode value, $Res Function(MultiStepSubmitMode) _then) = _$MultiStepSubmitModeCopyWithImpl;
 @override @useResult
 $Res call({
- String? submitText,@notSerializable IconData? submitIcon, String? nextText, DisableSubmitButton disableSubmitMode, bool showProgressIndicator,@notSerializable MultiStepProgressIndicatorBuilderDef? progressIndicatorBuilder
+ String? submitText,@notSerializable IconData? submitIcon, String? nextText, bool showProgressIndicator,@notSerializable MultiStepProgressIndicatorBuilderDef? progressIndicatorBuilder,@EdgeInsetsNullableConverter() EdgeInsets? fieldsPadding
 });
 
 
@@ -2337,15 +2345,15 @@ class _$MultiStepSubmitModeCopyWithImpl<$Res>
 
 /// Create a copy of WoFormSubmitMode
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? submitText = freezed,Object? submitIcon = freezed,Object? nextText = freezed,Object? disableSubmitMode = null,Object? showProgressIndicator = null,Object? progressIndicatorBuilder = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? submitText = freezed,Object? submitIcon = freezed,Object? nextText = freezed,Object? showProgressIndicator = null,Object? progressIndicatorBuilder = freezed,Object? fieldsPadding = freezed,}) {
   return _then(MultiStepSubmitMode(
 submitText: freezed == submitText ? _self.submitText : submitText // ignore: cast_nullable_to_non_nullable
 as String?,submitIcon: freezed == submitIcon ? _self.submitIcon : submitIcon // ignore: cast_nullable_to_non_nullable
 as IconData?,nextText: freezed == nextText ? _self.nextText : nextText // ignore: cast_nullable_to_non_nullable
-as String?,disableSubmitMode: null == disableSubmitMode ? _self.disableSubmitMode : disableSubmitMode // ignore: cast_nullable_to_non_nullable
-as DisableSubmitButton,showProgressIndicator: null == showProgressIndicator ? _self.showProgressIndicator : showProgressIndicator // ignore: cast_nullable_to_non_nullable
+as String?,showProgressIndicator: null == showProgressIndicator ? _self.showProgressIndicator : showProgressIndicator // ignore: cast_nullable_to_non_nullable
 as bool,progressIndicatorBuilder: freezed == progressIndicatorBuilder ? _self.progressIndicatorBuilder : progressIndicatorBuilder // ignore: cast_nullable_to_non_nullable
-as MultiStepProgressIndicatorBuilderDef?,
+as MultiStepProgressIndicatorBuilderDef?,fieldsPadding: freezed == fieldsPadding ? _self.fieldsPadding : fieldsPadding // ignore: cast_nullable_to_non_nullable
+as EdgeInsets?,
   ));
 }
 

@@ -499,6 +499,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     String? labelText,
     String? hintText,
     String? helperText,
+    int? helperMaxLines,
     @notSerializable Widget? prefixIcon,
     StringFieldAction? action,
     bool? submitFormOnFieldSubmitted,
@@ -523,6 +524,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     String? labelText,
     String? hintText,
     String? helperText,
+    int? helperMaxLines,
     Widget? prefixIcon,
     bool? submitFormOnFieldSubmitted,
     bool? autofocus,
@@ -534,6 +536,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     labelText: labelText,
     hintText: hintText,
     helperText: helperText,
+    helperMaxLines: helperMaxLines,
     prefixIcon: prefixIcon,
     submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
     autofocus: autofocus,
@@ -551,6 +554,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     String? labelText,
     String? hintText,
     String? helperText,
+    int? helperMaxLines,
     Widget? prefixIcon,
     bool? submitFormOnFieldSubmitted,
     TextInputAction? textInputAction,
@@ -561,6 +565,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     labelText: labelText,
     hintText: hintText,
     helperText: helperText,
+    helperMaxLines: helperMaxLines,
     prefixIcon: prefixIcon,
     submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
     textInputAction: textInputAction,
@@ -582,6 +587,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     String? labelText,
     String? hintText,
     String? helperText,
+    int? helperMaxLines,
     Widget? prefixIcon,
     bool? submitFormOnFieldSubmitted,
     bool? autofocus,
@@ -592,6 +598,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     labelText: labelText,
     hintText: hintText,
     helperText: helperText,
+    helperMaxLines: helperMaxLines,
     prefixIcon: prefixIcon,
     submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
     autofocus: autofocus,
@@ -615,6 +622,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
           labelText: labelText ?? other.labelText,
           hintText: hintText ?? other.hintText,
           helperText: helperText ?? other.helperText,
+          helperMaxLines: helperMaxLines ?? other.helperMaxLines,
           prefixIcon: prefixIcon ?? other.prefixIcon,
           action: action ?? other.action,
           submitFormOnFieldSubmitted:
@@ -643,7 +651,9 @@ abstract class WoFormUiSettings with _$WoFormUiSettings {
     @Default(WoFormTitlePosition.header) WoFormTitlePosition titlePosition,
     @notSerializable HeaderBuilderDef? headerBuilder,
     @Default(WoFormSubmitMode.standard()) WoFormSubmitMode submitMode,
+    @Default(DisableSubmitButton.never) DisableSubmitButton disableSubmitMode,
     @notSerializable SubmitButtonBuilderDef? submitButtonBuilder,
+    @notSerializable ScaffoldBuilderDef? scaffoldBuilder,
 
     /// If true, after the form is successfully submitted, it will be locked.
     bool? canModifySubmittedValues,
@@ -704,9 +714,7 @@ sealed class WoFormSubmitMode with _$WoFormSubmitMode {
   const factory WoFormSubmitMode.standard({
     String? submitText,
     @notSerializable IconData? submitIcon,
-    @Default(DisableSubmitButton.never) DisableSubmitButton disableSubmitMode,
     @Default(SubmitButtonPosition.body) SubmitButtonPosition buttonPosition,
-    @notSerializable ScaffoldBuilderDef? scaffoldBuilder,
   }) = StandardSubmitMode;
 
   const factory WoFormSubmitMode.multiStep({
@@ -716,11 +724,16 @@ sealed class WoFormSubmitMode with _$WoFormSubmitMode {
     /// Text for the submit button if it navigates to the next form page.
     /// Falls back to submitText if not provided.
     String? nextText,
-    @Default(DisableSubmitButton.never) DisableSubmitButton disableSubmitMode,
     @Default(true) bool showProgressIndicator,
 
     @notSerializable
     MultiStepProgressIndicatorBuilderDef? progressIndicatorBuilder,
+
+    /// Applied around the fields, not the progress indicator,
+    /// nor the submit button.
+    ///
+    /// Defaults to EdgeInsets.only(top: 16, bottom: 32).
+    @EdgeInsetsNullableConverter() EdgeInsets? fieldsPadding,
   }) = MultiStepSubmitMode;
 
   const WoFormSubmitMode._();

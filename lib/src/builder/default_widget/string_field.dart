@@ -71,6 +71,7 @@ class _StringFieldState extends State<StringField> {
     final inputDecoration = InputDecoration(
       labelText: widget.data.uiSettings.labelText,
       helperText: widget.data.uiSettings.helperText,
+      helperMaxLines: widget.data.uiSettings.helperMaxLines,
       hintText: widget.data.uiSettings.hintText,
       hintStyle: widget.data.uiSettings.style,
       errorText: widget.data.errorText,
@@ -110,19 +111,7 @@ class _StringFieldState extends State<StringField> {
                   context.read<WoFormValuesCubit>().onValueChanged(
                     path: '${widget.data.path}+details',
                     value: details,
-                    // '${widget.data.path}+longitude':
-                    //     double.tryParse(details.longitude ?? ''),
-                    // '${widget.data.path}+latitude':
-                    //     double.tryParse(details.latitude ?? ''),
-                    // '${widget.data.path}+details': details,
                   )
-            // context.read<WoFormValuesCubit>().onValuesChanged({
-            //   '${widget.data.path}+longitude':
-            //       double.tryParse(details.longitude ?? ''),
-            //   '${widget.data.path}+latitude':
-            //       double.tryParse(details.latitude ?? ''),
-            //   '${widget.data.path}+details': details,
-            // })
             : null,
         onFieldSubmitted:
             (widget.data.uiSettings.submitFormOnFieldSubmitted ?? true)

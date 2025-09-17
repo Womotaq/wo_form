@@ -14,7 +14,7 @@ class SubmitButtonBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     final root = context.read<RootNode>();
 
-    final disabled = switch (root.uiSettings.submitMode.disableSubmitMode) {
+    final disabled = switch (root.uiSettings.disableSubmitMode) {
       DisableSubmitButton.whenInitialOrSubmitSuccess => switch (context
           .watch<WoFormStatusCubit>()
           .state) {
