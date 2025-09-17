@@ -801,10 +801,22 @@ class MultistepController extends PageController {
   }
 
   @override
+  @protected
+  Future<void> animateTo(
+    double offset, {
+    required Duration duration,
+    required Curve curve,
+  }) async => super.animateTo(offset, duration: duration, curve: curve);
+
+  @override
   void jumpToPage(int page) {
     valuesCubit._setMultistepIndex(page);
     return super.jumpToPage(page);
   }
+
+  @override
+  @protected
+  void jumpTo(double value) => super.jumpTo(value);
 
   @override
   Future<void> nextPage({required Duration duration, required Curve curve}) {
