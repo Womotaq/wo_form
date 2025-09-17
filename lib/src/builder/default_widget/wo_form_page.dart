@@ -150,6 +150,12 @@ class WoFormMultiStepPageState extends State<WoFormMultiStepPage> {
   @override
   void initState() {
     final root = context.read<RootNode>();
+
+    final submitMode = root.uiSettings.submitMode;
+    if (submitMode is! MultiStepSubmitMode) {
+      throw ArgumentError('submitMode must be MultiStepSubmitMode');
+    }
+
     pageController = PageController();
 
     context.read<WoFormValuesCubit>().addTemporarySubmitData(
@@ -168,15 +174,20 @@ class WoFormMultiStepPageState extends State<WoFormMultiStepPage> {
         if (newPageIndex == root.children.length - 1) {
           context.read<WoFormValuesCubit>().clearTemporarySubmitData();
         } else {
+          final nextPageNode = root.children[newPageIndex.toInt()];
           context.read<WoFormValuesCubit>().addTemporarySubmitData(
-            onSubmitting: () {
+            onSubmitting: () async {
               FocusScope.of(context).unfocus();
+              await submitMode.onTemporarySubmitting?.call(
+                context,
+                nextPageNode,
+              );
               return pageController.nextPage(
                 duration: WoFormMultiStepPage.TRANSITION_DURATION,
                 curve: Curves.easeIn,
               );
             },
-            path: '/${root.children[newPageIndex.toInt()].id}',
+            path: '/${nextPageNode.id}',
           );
         }
       },
@@ -196,10 +207,7 @@ class WoFormMultiStepPageState extends State<WoFormMultiStepPage> {
     final root = context.read<RootNode>();
     final woFormTheme = WoFormTheme.of(context);
 
-    final submitMode = root.uiSettings.submitMode;
-    if (submitMode is! MultiStepSubmitMode) {
-      throw ArgumentError('submitMode must be MultiStepSubmitMode');
-    }
+    final submitMode = root.uiSettings.submitMode as MultiStepSubmitMode;
 
     final body = Column(
       children: [
@@ -274,7 +282,7 @@ class WoFormMultiStepPageState extends State<WoFormMultiStepPage> {
       controller: pageController,
       child:
           (root.uiSettings.scaffoldBuilder ??
-                  //       woFormTheme?.multistepScaffoldBuilder ??
+                  // TODO : woFormTheme?.multistepScaffoldBuilder ??
                   _MultistepScaffold.new)
               .call(body),
     );

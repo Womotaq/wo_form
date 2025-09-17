@@ -729,6 +729,10 @@ sealed class WoFormSubmitMode with _$WoFormSubmitMode {
     @notSerializable
     MultiStepProgressIndicatorBuilderDef? progressIndicatorBuilder,
 
+    /// Called when a page (not the last page) is submited.
+    /// [node] is the node of the submitted page.
+    @notSerializable OnTemporarySubmittingDef? onTemporarySubmitting,
+
     /// Applied around the fields, not the progress indicator,
     /// nor the submit button.
     ///
@@ -748,3 +752,6 @@ sealed class WoFormSubmitMode with _$WoFormSubmitMode {
     MultiStepSubmitMode() => SubmitButtonPosition.bottomBar,
   };
 }
+
+typedef OnTemporarySubmittingDef =
+    Future<void> Function(BuildContext context, WoFormNodeMixin node);
