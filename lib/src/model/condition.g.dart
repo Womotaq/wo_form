@@ -13,6 +13,7 @@ ConditionValue _$ConditionValueFromJson(Map<String, dynamic> json) =>
       isNotEqualTo: json['isNotEqualTo'],
       isNull: json['isNull'] as bool?,
       isFocused: json['isFocused'] as bool?,
+      matchesRegex: json['matchesRegex'] as String?,
       $type: json['runtimeType'] as String?,
     );
 
@@ -23,6 +24,7 @@ Map<String, dynamic> _$ConditionValueToJson(ConditionValue instance) =>
       'isNotEqualTo': instance.isNotEqualTo,
       'isNull': instance.isNull,
       'isFocused': instance.isFocused,
+      'matchesRegex': instance.matchesRegex,
       'runtimeType': instance.$type,
     };
 

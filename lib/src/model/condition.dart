@@ -14,6 +14,7 @@ sealed class Condition with _$Condition {
         '    isNotEqualTo,'
         '    isNull,'
         '    isFocused,'
+        '    matchesRegex,'
         '  ];'
         '  final operatorsUsed = operators.where((e) => e != null).length;'
         '  return operatorsUsed == 1; '
@@ -25,9 +26,12 @@ sealed class Condition with _$Condition {
     Object? isEqualTo,
     Object? isNotEqualTo,
 
-    /// The value is null even if the path is not present in the list of paths
+    /// The value is null even if the path is not present in the list of paths.
     bool? isNull,
     bool? isFocused,
+
+    /// If the value at path is not a string, the condition cannot be met.
+    String? matchesRegex,
   }) = ConditionValue;
 
   const factory Condition.and(
@@ -60,6 +64,7 @@ extension ConditionMeeter on WoFormValues {
         isNotEqualTo: final isNotEqualTo,
         isNull: final isNull,
         isFocused: final isFocused,
+        matchesRegex: final matchesRegex,
       ):
         final value = getValue(path);
         if (isEqualTo != null) {
@@ -81,6 +86,10 @@ extension ConditionMeeter on WoFormValues {
         }
         if (isFocused != null) {
           return this[WoFormValuesCubit.focusedPathKey] == getKey(path);
+        }
+        if (matchesRegex != null) {
+          if (value is! String) return false;
+          return RegExp(matchesRegex).hasMatch(value);
         }
 
         throw AssertionError('Exactly one operator must be specified');

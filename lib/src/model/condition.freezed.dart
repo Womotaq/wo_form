@@ -80,15 +80,17 @@ $ConditionCopyWith(Condition _, $Res Function(Condition) __);
 @JsonSerializable()
 
 class ConditionValue extends Condition {
-   ConditionValue({required this.path, this.isEqualTo, this.isNotEqualTo, this.isNull, this.isFocused, final  String? $type}): assert(    () {  final operators = [    isEqualTo,    isNotEqualTo,    isNull,    isFocused,  ];  final operatorsUsed = operators.where((e) => e != null).length;  return operatorsUsed == 1; }(), 'Exactly one operator must be specified'),$type = $type ?? 'value',super._();
+   ConditionValue({required this.path, this.isEqualTo, this.isNotEqualTo, this.isNull, this.isFocused, this.matchesRegex, final  String? $type}): assert(    () {  final operators = [    isEqualTo,    isNotEqualTo,    isNull,    isFocused,    matchesRegex,  ];  final operatorsUsed = operators.where((e) => e != null).length;  return operatorsUsed == 1; }(), 'Exactly one operator must be specified'),$type = $type ?? 'value',super._();
   factory ConditionValue.fromJson(Map<String, dynamic> json) => _$ConditionValueFromJson(json);
 
  final  String path;
  final  Object? isEqualTo;
  final  Object? isNotEqualTo;
-/// The value is null even if the path is not present in the list of paths
+/// The value is null even if the path is not present in the list of paths.
  final  bool? isNull;
  final  bool? isFocused;
+/// If the value at path is not a string, the condition cannot be met.
+ final  String? matchesRegex;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -107,16 +109,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ConditionValue&&(identical(other.path, path) || other.path == path)&&const DeepCollectionEquality().equals(other.isEqualTo, isEqualTo)&&const DeepCollectionEquality().equals(other.isNotEqualTo, isNotEqualTo)&&(identical(other.isNull, isNull) || other.isNull == isNull)&&(identical(other.isFocused, isFocused) || other.isFocused == isFocused));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ConditionValue&&(identical(other.path, path) || other.path == path)&&const DeepCollectionEquality().equals(other.isEqualTo, isEqualTo)&&const DeepCollectionEquality().equals(other.isNotEqualTo, isNotEqualTo)&&(identical(other.isNull, isNull) || other.isNull == isNull)&&(identical(other.isFocused, isFocused) || other.isFocused == isFocused)&&(identical(other.matchesRegex, matchesRegex) || other.matchesRegex == matchesRegex));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,path,const DeepCollectionEquality().hash(isEqualTo),const DeepCollectionEquality().hash(isNotEqualTo),isNull,isFocused);
+int get hashCode => Object.hash(runtimeType,path,const DeepCollectionEquality().hash(isEqualTo),const DeepCollectionEquality().hash(isNotEqualTo),isNull,isFocused,matchesRegex);
 
 @override
 String toString() {
-  return 'Condition.value(path: $path, isEqualTo: $isEqualTo, isNotEqualTo: $isNotEqualTo, isNull: $isNull, isFocused: $isFocused)';
+  return 'Condition.value(path: $path, isEqualTo: $isEqualTo, isNotEqualTo: $isNotEqualTo, isNull: $isNull, isFocused: $isFocused, matchesRegex: $matchesRegex)';
 }
 
 
@@ -127,7 +129,7 @@ abstract mixin class $ConditionValueCopyWith<$Res> implements $ConditionCopyWith
   factory $ConditionValueCopyWith(ConditionValue value, $Res Function(ConditionValue) _then) = _$ConditionValueCopyWithImpl;
 @useResult
 $Res call({
- String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull, bool? isFocused
+ String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull, bool? isFocused, String? matchesRegex
 });
 
 
@@ -144,12 +146,13 @@ class _$ConditionValueCopyWithImpl<$Res>
 
 /// Create a copy of Condition
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? path = null,Object? isEqualTo = freezed,Object? isNotEqualTo = freezed,Object? isNull = freezed,Object? isFocused = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? path = null,Object? isEqualTo = freezed,Object? isNotEqualTo = freezed,Object? isNull = freezed,Object? isFocused = freezed,Object? matchesRegex = freezed,}) {
   return _then(ConditionValue(
 path: null == path ? _self.path : path // ignore: cast_nullable_to_non_nullable
 as String,isEqualTo: freezed == isEqualTo ? _self.isEqualTo : isEqualTo ,isNotEqualTo: freezed == isNotEqualTo ? _self.isNotEqualTo : isNotEqualTo ,isNull: freezed == isNull ? _self.isNull : isNull // ignore: cast_nullable_to_non_nullable
 as bool?,isFocused: freezed == isFocused ? _self.isFocused : isFocused // ignore: cast_nullable_to_non_nullable
-as bool?,
+as bool?,matchesRegex: freezed == matchesRegex ? _self.matchesRegex : matchesRegex // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
