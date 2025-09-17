@@ -157,7 +157,7 @@ class WoFormMultiStepPageState extends State<WoFormMultiStepPage> {
   /// Adds temporary submit data to the submit button of the current page,
   /// so that, instead of submitting the form, it submits only the page,
   /// and then navigates to the next page.
-  VoidCallback addTemporarySubmitData() => () async {
+  Future<void> addTemporarySubmitData() async {
     if (!mounted) return;
 
     final root = context.read<RootNode>();
@@ -181,7 +181,7 @@ class WoFormMultiStepPageState extends State<WoFormMultiStepPage> {
       },
       path: '/${node.id}',
     );
-  };
+  }
 
   /// Usually called at the start of a transition animation
   void onNewPageIndex(int newPageIndex) {
