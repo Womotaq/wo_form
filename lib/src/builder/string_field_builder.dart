@@ -47,18 +47,19 @@ class StringFieldBuilder extends StatelessWidget {
               return WoFormValueBuilder<String>(
                 path: path,
                 builder: (context, value) {
-                  final String? errorText;
+                  String? errorText;
+                  Widget? errorWidget;
                   if (status is InProgressStatus) {
                     final error = status.getError(path: path);
-                    if (error == null) {
-                      errorText = null;
-                    } else {
-                      errorText = context.read<WoFormL10n?>()?.translateError(
-                        error,
-                      );
+                    if (error != null) {
+                      if (mergedSettings.errorBuilder != null) {
+                        errorWidget = mergedSettings.errorBuilder!(error);
+                      } else {
+                        errorText = context.read<WoFormL10n?>()?.translateError(
+                          error,
+                        );
+                      }
                     }
-                  } else {
-                    errorText = null;
                   }
 
                   final fieldData =
@@ -67,6 +68,7 @@ class StringFieldBuilder extends StatelessWidget {
                         input: input,
                         value: value,
                         errorText: errorText,
+                        errorWidget: errorWidget,
                         uiSettings: mergedSettings,
                         onValueChanged: inputIsLocked
                             ? null

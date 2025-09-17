@@ -298,11 +298,9 @@ class PageControllerProvider extends InheritedWidget {
 
   final PageController controller;
 
-  static PageController of(BuildContext context) {
-    return context
-        .dependOnInheritedWidgetOfExactType<PageControllerProvider>()!
-        .controller;
-  }
+  static PageController of(BuildContext context) => context
+      .dependOnInheritedWidgetOfExactType<PageControllerProvider>()!
+      .controller;
 
   @override
   bool updateShouldNotify(PageControllerProvider oldWidget) =>

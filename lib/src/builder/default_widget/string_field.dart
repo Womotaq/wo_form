@@ -70,11 +70,15 @@ class _StringFieldState extends State<StringField> {
 
     final inputDecoration = InputDecoration(
       labelText: widget.data.uiSettings.labelText,
-      helperText: widget.data.uiSettings.helperText,
+      helperText: widget.data.uiSettings.helper == null
+          ? widget.data.uiSettings.helperText
+          : null,
       helperMaxLines: widget.data.uiSettings.helperMaxLines,
+      helper: widget.data.uiSettings.helper,
       hintText: widget.data.uiSettings.hintText,
       hintStyle: widget.data.uiSettings.style,
       errorText: widget.data.errorText,
+      error: widget.data.errorWidget,
       suffixIcon: switch (widget.data.uiSettings.action) {
         null => null,
         StringFieldAction.clear => IconButton(

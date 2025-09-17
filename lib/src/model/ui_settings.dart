@@ -492,6 +492,7 @@ typedef StringFieldBuilderDef =
     Widget Function(
       WoFieldData<StringInput, String, StringInputUiSettings> data,
     );
+typedef ErrorBuilderDef = Widget Function(WoFormInputError error);
 
 @freezed
 abstract class StringInputUiSettings with _$StringInputUiSettings {
@@ -500,6 +501,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     String? hintText,
     String? helperText,
     int? helperMaxLines,
+    @notSerializable Widget? helper,
     @notSerializable Widget? prefixIcon,
     StringFieldAction? action,
     bool? submitFormOnFieldSubmitted,
@@ -518,6 +520,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     String? invalidRegexMessage,
     @notSerializable TextStyle? style,
     @notSerializable StringFieldBuilderDef? widgetBuilder,
+    @notSerializable ErrorBuilderDef? errorBuilder,
   }) = _StringInputUiSettings;
 
   factory StringInputUiSettings.email({
@@ -525,6 +528,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     String? hintText,
     String? helperText,
     int? helperMaxLines,
+    Widget? helper,
     Widget? prefixIcon,
     bool? submitFormOnFieldSubmitted,
     bool? autofocus,
@@ -532,11 +536,13 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     String? invalidRegexMessage,
     TextStyle? style,
     StringFieldBuilderDef? widgetBuilder,
+    ErrorBuilderDef? errorBuilder,
   }) => StringInputUiSettings(
     labelText: labelText,
     hintText: hintText,
     helperText: helperText,
     helperMaxLines: helperMaxLines,
+    helper: helper,
     prefixIcon: prefixIcon,
     submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
     autofocus: autofocus,
@@ -544,6 +550,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     invalidRegexMessage: invalidRegexMessage,
     style: style,
     widgetBuilder: widgetBuilder,
+    errorBuilder: errorBuilder,
     keyboardType: TextInputType.emailAddress,
     autocorrect: false,
     autofillHints: const [AutofillHints.email],
@@ -555,23 +562,27 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     String? hintText,
     String? helperText,
     int? helperMaxLines,
+    Widget? helper,
     Widget? prefixIcon,
     bool? submitFormOnFieldSubmitted,
     TextInputAction? textInputAction,
     String? invalidRegexMessage,
     TextStyle? style,
     StringFieldBuilderDef? widgetBuilder,
+    ErrorBuilderDef? errorBuilder,
   }) => StringInputUiSettings(
     labelText: labelText,
     hintText: hintText,
     helperText: helperText,
     helperMaxLines: helperMaxLines,
+    helper: helper,
     prefixIcon: prefixIcon,
     submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
     textInputAction: textInputAction,
     invalidRegexMessage: invalidRegexMessage,
     style: style,
     widgetBuilder: widgetBuilder,
+    errorBuilder: errorBuilder,
     action: StringFieldAction.obscure,
     keyboardType: TextInputType.visiblePassword,
     obscureText: true,
@@ -588,23 +599,27 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     String? hintText,
     String? helperText,
     int? helperMaxLines,
+    Widget? helper,
     Widget? prefixIcon,
     bool? submitFormOnFieldSubmitted,
     bool? autofocus,
     TextInputAction? textInputAction,
     TextStyle? style,
     StringFieldBuilderDef? widgetBuilder,
+    ErrorBuilderDef? errorBuilder,
   }) => StringInputUiSettings(
     labelText: labelText,
     hintText: hintText,
     helperText: helperText,
     helperMaxLines: helperMaxLines,
+    helper: helper,
     prefixIcon: prefixIcon,
     submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
     autofocus: autofocus,
     textInputAction: textInputAction,
     style: style,
     widgetBuilder: widgetBuilder,
+    errorBuilder: errorBuilder,
     keyboardType: TextInputType.phone,
     autocorrect: false,
     autofillHints: const [AutofillHints.telephoneNumber],
@@ -623,6 +638,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
           hintText: hintText ?? other.hintText,
           helperText: helperText ?? other.helperText,
           helperMaxLines: helperMaxLines ?? other.helperMaxLines,
+          helper: helper ?? other.helper,
           prefixIcon: prefixIcon ?? other.prefixIcon,
           action: action ?? other.action,
           submitFormOnFieldSubmitted:
@@ -637,6 +653,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
           maxLines: maxLines ?? other.maxLines,
           invalidRegexMessage: invalidRegexMessage ?? other.invalidRegexMessage,
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,
+          errorBuilder: errorBuilder ?? other.errorBuilder,
         );
 }
 

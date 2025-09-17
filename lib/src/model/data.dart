@@ -30,16 +30,22 @@ abstract class WoFieldData<I, T, U> with _$WoFieldData<I, T, U> {
   /// I : input
   /// T : value
   /// U : uiSettings
+  @Assert(
+    'errorText == null || errorWidget == null',
+    'Only one of errorWidget and errorText can be specified.',
+  )
   const factory WoFieldData({
     required String path,
     required I input,
     required T? value,
-    required String? errorText,
     required U uiSettings,
 
     /// Null means locked field
     required void Function(T? value, {UpdateStatus updateStatus})?
     onValueChanged,
+
+    String? errorText,
+    Widget? errorWidget,
   }) = _WoFieldData;
 }
 
