@@ -80,7 +80,7 @@ extension ConditionMeeter on WoFormValues {
           return (value == null) == isNull;
         }
         if (isFocused != null) {
-          return this[WoFormValuesCubit.focusedPathKey] == path;
+          return this[WoFormValuesCubit.focusedPathKey] == getKey(path);
         }
 
         throw AssertionError('Exactly one operator must be specified');

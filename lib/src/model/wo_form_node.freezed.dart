@@ -193,6 +193,10 @@ WoFormNode _$WoFormNodeFromJson(
           return PathBuilderNode.fromJson(
             json
           );
+                case 'selector':
+          return SelectorNode.fromJson(
+            json
+          );
                 case 'valueBuilder':
           return ValueBuilderNode.fromJson(
             json
@@ -750,6 +754,95 @@ as WoFormNodeMixin Function(String path)?,
 }
 
 
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class SelectorNode extends WoFormNode {
+  const SelectorNode({required this.id, @notSerializable this.selector, @notSerializable this.builder, this.initialValue, this.uiSettings = const InputUiSettings(), final  String? $type}): assert(selector != null, 'SelectorNode.selector cannot be null'),assert(builder != null, 'SelectorNode.builder cannot be null'),$type = $type ?? 'selector',super._();
+  factory SelectorNode.fromJson(Map<String, dynamic> json) => _$SelectorNodeFromJson(json);
+
+@override final  String id;
+@notSerializable final  Object? Function(WoFormValues values)? selector;
+@notSerializable final  WoFormNodeMixin Function(Object? value)? builder;
+ final  Object? initialValue;
+@JsonKey() final  InputUiSettings uiSettings;
+
+@JsonKey(name: 'runtimeType')
+final String $type;
+
+
+/// Create a copy of WoFormNode
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SelectorNodeCopyWith<SelectorNode> get copyWith => _$SelectorNodeCopyWithImpl<SelectorNode>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$SelectorNodeToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SelectorNode&&(identical(other.id, id) || other.id == id)&&(identical(other.selector, selector) || other.selector == selector)&&(identical(other.builder, builder) || other.builder == builder)&&const DeepCollectionEquality().equals(other.initialValue, initialValue)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,selector,builder,const DeepCollectionEquality().hash(initialValue),uiSettings);
+
+@override
+String toString() {
+  return 'WoFormNode.selector(id: $id, selector: $selector, builder: $builder, initialValue: $initialValue, uiSettings: $uiSettings)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SelectorNodeCopyWith<$Res> implements $WoFormNodeCopyWith<$Res> {
+  factory $SelectorNodeCopyWith(SelectorNode value, $Res Function(SelectorNode) _then) = _$SelectorNodeCopyWithImpl;
+@override @useResult
+$Res call({
+ String id,@notSerializable Object? Function(WoFormValues values)? selector,@notSerializable WoFormNodeMixin Function(Object? value)? builder, Object? initialValue, InputUiSettings uiSettings
+});
+
+
+$InputUiSettingsCopyWith<$Res> get uiSettings;
+
+}
+/// @nodoc
+class _$SelectorNodeCopyWithImpl<$Res>
+    implements $SelectorNodeCopyWith<$Res> {
+  _$SelectorNodeCopyWithImpl(this._self, this._then);
+
+  final SelectorNode _self;
+  final $Res Function(SelectorNode) _then;
+
+/// Create a copy of WoFormNode
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? selector = freezed,Object? builder = freezed,Object? initialValue = freezed,Object? uiSettings = null,}) {
+  return _then(SelectorNode(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,selector: freezed == selector ? _self.selector : selector // ignore: cast_nullable_to_non_nullable
+as Object? Function(WoFormValues values)?,builder: freezed == builder ? _self.builder : builder // ignore: cast_nullable_to_non_nullable
+as WoFormNodeMixin Function(Object? value)?,initialValue: freezed == initialValue ? _self.initialValue : initialValue ,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
+as InputUiSettings,
+  ));
+}
+
+/// Create a copy of WoFormNode
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$InputUiSettingsCopyWith<$Res> get uiSettings {
+  
+  return $InputUiSettingsCopyWith<$Res>(_self.uiSettings, (value) {
+    return _then(_self.copyWith(uiSettings: value));
+  });
+}
 }
 
 /// @nodoc

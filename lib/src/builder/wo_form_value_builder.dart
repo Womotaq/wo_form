@@ -13,22 +13,20 @@ class WoFormValueBuilder<T> extends StatelessWidget {
   final Widget Function(BuildContext context, T? value) builder;
 
   @override
-  Widget build(BuildContext context) {
-    return BlocSelector<WoFormValuesCubit, WoFormValues, T?>(
-      key: Key(path),
-      selector: (values) {
-        final value = values.getValue(path);
-        if (value is! T?) {
-          throw ArgumentError(
-            'Expected <$T?> at inputId: "$path", '
-            'found: <${value.runtimeType}>',
-          );
-        }
-        return value;
-      },
-      builder: builder,
-    );
-  }
+  Widget build(BuildContext context) => WoFormValueSelector<T?>(
+    key: Key(path),
+    selector: (values) {
+      final value = values.getValue(path);
+      if (value is! T?) {
+        throw ArgumentError(
+          'Expected <$T?> at inputId: "$path", '
+          'found: <${value.runtimeType}>',
+        );
+      }
+      return value;
+    },
+    builder: builder,
+  );
 }
 
 class WoFormValuesBuilder extends StatelessWidget {
@@ -42,12 +40,28 @@ class WoFormValuesBuilder extends StatelessWidget {
   final Widget Function(BuildContext context, WoFormValues values) builder;
 
   @override
-  Widget build(BuildContext context) {
-    return BlocSelector<WoFormValuesCubit, WoFormValues, WoFormValues>(
-      selector: (values) => {
-        for (final path in paths) path: values.getValue(path),
-      },
-      builder: builder,
-    );
-  }
+  Widget build(BuildContext context) => WoFormValueSelector<WoFormValues>(
+    selector: (values) => {
+      for (final path in paths) path: values.getValue(path),
+    },
+    builder: builder,
+  );
+}
+
+class WoFormValueSelector<T> extends StatelessWidget {
+  const WoFormValueSelector({
+    required this.selector,
+    required this.builder,
+    super.key,
+  });
+
+  final T Function(WoFormValues values) selector;
+  final Widget Function(BuildContext context, T value) builder;
+
+  @override
+  Widget build(BuildContext context) =>
+      BlocSelector<WoFormValuesCubit, WoFormValues, T>(
+        selector: selector,
+        builder: builder,
+      );
 }

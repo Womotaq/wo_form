@@ -121,6 +121,16 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
     @notSerializable WoFormNodeMixin Function(String path)? builder,
   }) = PathBuilderNode;
 
+  @Assert('selector != null', 'SelectorNode.selector cannot be null')
+  @Assert('builder != null', 'SelectorNode.builder cannot be null')
+  const factory WoFormNode.selector({
+    required String id,
+    @notSerializable Object? Function(WoFormValues values)? selector,
+    @notSerializable WoFormNodeMixin Function(Object? value)? builder,
+    Object? initialValue,
+    @Default(InputUiSettings()) InputUiSettings uiSettings,
+  }) = SelectorNode;
+
   @Assert('builder != null', 'ValueBuilderNode.builder cannot be null')
   const factory WoFormNode.valueBuilder({
     required String id,
@@ -240,26 +250,26 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
             }
         }
       case PathBuilderNode():
+      case SelectorNode():
       case ValueBuilderNode():
       case ValuesBuilderNode():
-        final child = this is PathBuilderNode
-            ? (this as PathBuilderNode).builder!('$parentPath/$id')
-            : this is ValueBuilderNode
-            ? (this as ValueBuilderNode).builder!(
-                values.getValue(
-                  (this as ValueBuilderNode).path,
-                  parentPath: '$parentPath/$id',
-                ),
-              )
-            : (this as ValuesBuilderNode).builder!(
-                {
-                  for (final path in (this as ValuesBuilderNode).paths)
-                    path: values.getValue(
-                      path,
-                      parentPath: '$parentPath/$id',
-                    ),
-                },
-              );
+        final child = switch (this) {
+          PathBuilderNode(builder: final builder) => builder!(
+            '$parentPath/$id',
+          ),
+          SelectorNode(selector: final selector, builder: final builder) =>
+            builder!(selector!(values)),
+          ValueBuilderNode(path: final path, builder: final builder) =>
+            builder!(values.getValue(path, parentPath: '$parentPath/$id')),
+          ValuesBuilderNode(paths: final paths, builder: final builder) =>
+            builder!(
+              {
+                for (final path in paths)
+                  path: values.getValue(path, parentPath: '$parentPath/$id'),
+              },
+            ),
+          _ => throw AssertionError(),
+        };
 
         await child.export(
           into: into,
@@ -303,26 +313,26 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
             ),
         ];
       case PathBuilderNode():
+      case SelectorNode():
       case ValueBuilderNode():
       case ValuesBuilderNode():
-        final child = this is PathBuilderNode
-            ? (this as PathBuilderNode).builder!('$parentPath/$id')
-            : this is ValueBuilderNode
-            ? (this as ValueBuilderNode).builder!(
-                values.getValue(
-                  (this as ValueBuilderNode).path,
-                  parentPath: '$parentPath/$id',
-                ),
-              )
-            : (this as ValuesBuilderNode).builder!(
-                {
-                  for (final path in (this as ValuesBuilderNode).paths)
-                    path: values.getValue(
-                      path,
-                      parentPath: '$parentPath/$id',
-                    ),
-                },
-              );
+        final child = switch (this) {
+          PathBuilderNode(builder: final builder) => builder!(
+            '$parentPath/$id',
+          ),
+          SelectorNode(selector: final selector, builder: final builder) =>
+            builder!(selector!(values)),
+          ValueBuilderNode(path: final path, builder: final builder) =>
+            builder!(values.getValue(path, parentPath: '$parentPath/$id')),
+          ValuesBuilderNode(paths: final paths, builder: final builder) =>
+            builder!(
+              {
+                for (final path in paths)
+                  path: values.getValue(path, parentPath: '$parentPath/$id'),
+              },
+            ),
+          _ => throw AssertionError(),
+        };
 
         return [
           '$parentPath/$id',
@@ -397,27 +407,28 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
               parentPath: '$parentPath/$id',
               values: values,
             );
+
       case PathBuilderNode():
+      case SelectorNode():
       case ValueBuilderNode():
       case ValuesBuilderNode():
-        final child = this is PathBuilderNode
-            ? (this as PathBuilderNode).builder!('$parentPath/$id')
-            : this is ValueBuilderNode
-            ? (this as ValueBuilderNode).builder!(
-                values.getValue(
-                  (this as ValueBuilderNode).path,
-                  parentPath: '$parentPath/$id',
-                ),
-              )
-            : (this as ValuesBuilderNode).builder!(
-                {
-                  for (final path in (this as ValuesBuilderNode).paths)
-                    path: values.getValue(
-                      path,
-                      parentPath: '$parentPath/$id',
-                    ),
-                },
-              );
+        final child = switch (this) {
+          PathBuilderNode(builder: final builder) => builder!(
+            '$parentPath/$id',
+          ),
+          SelectorNode(selector: final selector, builder: final builder) =>
+            builder!(selector!(values)),
+          ValueBuilderNode(path: final path, builder: final builder) =>
+            builder!(values.getValue(path, parentPath: '$parentPath/$id')),
+          ValuesBuilderNode(paths: final paths, builder: final builder) =>
+            builder!(
+              {
+                for (final path in paths)
+                  path: values.getValue(path, parentPath: '$parentPath/$id'),
+              },
+            ),
+          _ => throw AssertionError(),
+        };
 
         // if the path ends at the child of this node
         if (secondSlashIndex == -1) {
@@ -465,27 +476,28 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
               parentPath: '$parentPath/$id',
             ),
         ].nonNulls;
+
       case PathBuilderNode():
+      case SelectorNode():
       case ValueBuilderNode():
       case ValuesBuilderNode():
-        final child = this is PathBuilderNode
-            ? (this as PathBuilderNode).builder!('$parentPath/$id')
-            : this is ValueBuilderNode
-            ? (this as ValueBuilderNode).builder!(
-                values.getValue(
-                  (this as ValueBuilderNode).path,
-                  parentPath: '$parentPath/$id',
-                ),
-              )
-            : (this as ValuesBuilderNode).builder!(
-                {
-                  for (final path in (this as ValuesBuilderNode).paths)
-                    path: values.getValue(
-                      path,
-                      parentPath: '$parentPath/$id',
-                    ),
-                },
-              );
+        final child = switch (this) {
+          PathBuilderNode(builder: final builder) => builder!(
+            '$parentPath/$id',
+          ),
+          SelectorNode(selector: final selector, builder: final builder) =>
+            builder!(selector!(values)),
+          ValueBuilderNode(path: final path, builder: final builder) =>
+            builder!(values.getValue(path, parentPath: '$parentPath/$id')),
+          ValuesBuilderNode(paths: final paths, builder: final builder) =>
+            builder!(
+              {
+                for (final path in paths)
+                  path: values.getValue(path, parentPath: '$parentPath/$id'),
+              },
+            ),
+          _ => throw AssertionError(),
+        };
 
         return child.getErrors(
           values: values,
@@ -517,27 +529,28 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
           ExportType.map || ExportType.list => id,
           ExportType.mergeWithParent => null,
         };
+
       case PathBuilderNode():
+      case SelectorNode():
       case ValueBuilderNode():
       case ValuesBuilderNode():
-        final child = this is PathBuilderNode
-            ? (this as PathBuilderNode).builder!('$parentPath/$id')
-            : this is ValueBuilderNode
-            ? (this as ValueBuilderNode).builder!(
-                values.getValue(
-                  (this as ValueBuilderNode).path,
-                  parentPath: '$parentPath/$id',
-                ),
-              )
-            : (this as ValuesBuilderNode).builder!(
-                {
-                  for (final path in (this as ValuesBuilderNode).paths)
-                    path: values.getValue(
-                      path,
-                      parentPath: '$parentPath/$id',
-                    ),
-                },
-              );
+        final child = switch (this) {
+          PathBuilderNode(builder: final builder) => builder!(
+            '$parentPath/$id',
+          ),
+          SelectorNode(selector: final selector, builder: final builder) =>
+            builder!(selector!(values)),
+          ValueBuilderNode(path: final path, builder: final builder) =>
+            builder!(values.getValue(path, parentPath: '$parentPath/$id')),
+          ValuesBuilderNode(paths: final paths, builder: final builder) =>
+            builder!(
+              {
+                for (final path in paths)
+                  path: values.getValue(path, parentPath: '$parentPath/$id'),
+              },
+            ),
+          _ => throw AssertionError(),
+        };
 
         return child.getExportKey(
           values: values,
@@ -560,6 +573,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
         if (!conditionIsInitiallyMet) return {};
 
         return child.getInitialValues(parentPath: '$parentPath/$id');
+
       case DynamicInputsNode(initialChildren: final initialChildren):
         return {
           '$parentPath/$id': initialChildren,
@@ -567,26 +581,35 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
             for (final child in initialChildren)
               ...child.getInitialValues(parentPath: '$parentPath/$id'),
         };
+
       case InputsNode(children: final children):
         return {
           for (final child in children)
             ...child.getInitialValues(parentPath: '$parentPath/$id'),
         };
+
       case PathBuilderNode(builder: final builder):
         final child = builder!('$parentPath/$id');
         return child.getInitialValues(parentPath: '$parentPath/$id');
+
+      case SelectorNode(
+        builder: final builder,
+        initialValue: final initialValue,
+      ):
       case ValueBuilderNode(
         builder: final builder,
         initialValue: final initialValue,
       ):
         final child = builder!(initialValue);
         return child.getInitialValues(parentPath: '$parentPath/$id');
+
       case ValuesBuilderNode(
         builder: final builder,
         initialValues: final initialValues,
       ):
         final child = builder!(initialValues ?? {});
         return child.getInitialValues(parentPath: '$parentPath/$id');
+
       case ValueListenerNode():
       case WidgetNode():
       case EmptyNode():
@@ -611,6 +634,16 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
     PathBuilderNode(builder: final builder) => builder!(
       '$parentPath/$id',
     ).toWidget(parentPath: '$parentPath/$id'),
+    SelectorNode(
+      selector: final selector,
+      builder: final builder,
+    ) =>
+      WoFormValueSelector(
+        key: key,
+        selector: selector!,
+        builder: (context, value) =>
+            builder!(value).toWidget(parentPath: '$parentPath/$id'),
+      ),
     ValueBuilderNode(
       path: final path,
       builder: final builder,
@@ -676,6 +709,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
                 : 0
           : uiSettings.flex,
     InputsNode(uiSettings: final uiSettings) => uiSettings.flex,
+    SelectorNode(uiSettings: final uiSettings) ||
     ValueBuilderNode(uiSettings: final uiSettings) ||
     ValuesBuilderNode(uiSettings: final uiSettings) ||
     WidgetNode(uiSettings: final uiSettings) => uiSettings.flex,

@@ -145,6 +145,23 @@ PathBuilderNode _$PathBuilderNodeFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$PathBuilderNodeToJson(PathBuilderNode instance) =>
     <String, dynamic>{'id': instance.id, 'runtimeType': instance.$type};
 
+SelectorNode _$SelectorNodeFromJson(Map<String, dynamic> json) => SelectorNode(
+  id: json['id'] as String,
+  initialValue: json['initialValue'],
+  uiSettings: json['uiSettings'] == null
+      ? const InputUiSettings()
+      : InputUiSettings.fromJson(json['uiSettings'] as Map<String, dynamic>),
+  $type: json['runtimeType'] as String?,
+);
+
+Map<String, dynamic> _$SelectorNodeToJson(SelectorNode instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'initialValue': instance.initialValue,
+      'uiSettings': instance.uiSettings.toJson(),
+      'runtimeType': instance.$type,
+    };
+
 ValueBuilderNode _$ValueBuilderNodeFromJson(Map<String, dynamic> json) =>
     ValueBuilderNode(
       id: json['id'] as String,
