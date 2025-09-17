@@ -16,7 +16,11 @@ class SubmitButton extends StatelessWidget {
       (WoFormStatusCubit? c) => c?.state is SubmittingStatus,
     );
 
-    final style = FilledButtonTheme.of(context).style;
+    final woTheme = WoFormTheme.of(context);
+
+    final style =
+        woTheme?.submitButtonStyle?.call(context) ??
+        FilledButtonTheme.of(context).style;
 
     final backgroundColor = submitting || data.onPressed != null
         ? style?.backgroundColor?.resolve({}) ??
@@ -70,17 +74,18 @@ class SubmitButton extends StatelessWidget {
       ],
     );
 
-    final button = FilledButton(
-      onPressed: data.onPressed,
-      child: child,
-    );
-    final woTheme = WoFormTheme.of(context);
     final margin =
         this.margin ??
         woTheme?.submitButtonMargin
                 ?.call(data.position)
                 .add(const EdgeInsets.symmetric(horizontal: 16))
             as EdgeInsets?;
+
+    final button = FilledButton(
+      style: style,
+      onPressed: data.onPressed,
+      child: child,
+    );
 
     switch (data.position) {
       case SubmitButtonPosition.appBar:

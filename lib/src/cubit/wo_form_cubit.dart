@@ -146,6 +146,8 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
       ..remove(focusedPathKey),
   );
 
+  // --- CURRENT STATE ---
+
   String get currentPath => _tempSubmitDatas.lastOrNull?.path ?? '';
 
   WoFormNodeMixin get currentNode {
@@ -170,7 +172,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     parentPath: currentPath.parentPath,
   );
 
-  // --
+  // --- TEMPORARY SUBMIT DATA ---
 
   void addTemporarySubmitData({
     required Future<void> Function() onSubmitting,
@@ -179,8 +181,6 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     onSubmitting: onSubmitting,
     path: path,
   ));
-
-  void clearValues() => emit(_root.getInitialValues());
 
   void clearTemporarySubmitData() => _tempSubmitDatas.clear();
 
@@ -217,8 +217,11 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   String? get focusedPath => state[focusedPathKey] as String?;
 
-  // bool isFocused(String path) => _focusNodes[path]?.hasFocus ?? false;
   bool isFocused(String path) => focusedPath == path;
+
+  // --- VALUES ---
+
+  void clearValues() => emit(_root.getInitialValues());
 
   /// **Use this method precautiously since there is no type checking !**
   void onValuesChanged(
@@ -310,6 +313,8 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
         .expand((list) => list)
         .toList(),
   );
+
+  // --- VISITED PATHS ---
 
   static const _visitedPathsKey = '/__wo_reserved_visited_paths';
   Iterable<String> get _visitedPaths =>

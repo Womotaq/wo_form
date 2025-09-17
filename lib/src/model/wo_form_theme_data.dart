@@ -11,6 +11,7 @@ typedef WidgetBuilderDef = Widget Function(BuildContext context);
 typedef ScoreWidgetBuilderDef = Widget Function({required num score});
 typedef SubmitButtonMarginDef =
     EdgeInsets Function(SubmitButtonPosition position);
+typedef SubmitButtonStyleDef = ButtonStyle Function(BuildContext context);
 
 @freezed
 abstract class WoFormThemeData with _$WoFormThemeData {
@@ -47,6 +48,9 @@ abstract class WoFormThemeData with _$WoFormThemeData {
     ///
     /// For appBar and floating, the margin is not implemented yet.
     @notSerializable SubmitButtonMarginDef? submitButtonMargin,
+
+    /// Not compatible with SubmitButtonPosition.floating.
+    @notSerializable SubmitButtonStyleDef? submitButtonStyle,
     @notSerializable OnDynamicInputDeletionDef? onDynamicInputDeletion,
     @notSerializable OnSubmitErrorDef? onSubmitError,
 
@@ -103,6 +107,7 @@ abstract class WoFormThemeData with _$WoFormThemeData {
               standardScaffoldBuilder ?? other.standardScaffoldBuilder,
           stringFieldBuilder: stringFieldBuilder ?? other.stringFieldBuilder,
           submitButtonBuilder: submitButtonBuilder ?? other.submitButtonBuilder,
+          submitButtonStyle: submitButtonStyle ?? other.submitButtonStyle,
           submitButtonMargin: submitButtonMargin ?? other.submitButtonMargin,
           onDynamicInputDeletion:
               onDynamicInputDeletion ?? other.onDynamicInputDeletion,
