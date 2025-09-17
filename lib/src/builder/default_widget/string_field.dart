@@ -117,7 +117,7 @@ class _StringFieldState extends State<StringField> {
             (widget.data.uiSettings.submitFormOnFieldSubmitted ?? true)
             ? (_) => context.read<WoFormValuesCubit>().submit(context)
             : null,
-        onTapOutside: (event) => FocusScope.of(context).unfocus(),
+        onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
         itemBuilder: (context, index, PlacePrediction prediction) => Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Row(
@@ -179,7 +179,7 @@ class _StringFieldState extends State<StringField> {
             (widget.data.uiSettings.submitFormOnFieldSubmitted ?? true)
             ? (_) => context.read<WoFormValuesCubit>().submit(context)
             : null,
-        onTapOutside: (event) => FocusScope.of(context).unfocus(),
+        onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
         style: widget.data.uiSettings.style,
         keyboardType: widget.data.uiSettings.keyboardType,
         obscureText: obscureText,

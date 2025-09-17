@@ -160,7 +160,7 @@ class _NumSelectorState extends State<NumSelector> {
               onChanged: widget.onChanged == null
                   ? null
                   : (string) => widget.onChanged!(num.tryParse(string)),
-              onTapOutside: (event) => FocusScope.of(context).unfocus(),
+              onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
             ),
           ),
         )
