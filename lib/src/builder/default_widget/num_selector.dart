@@ -160,6 +160,12 @@ class _NumSelectorState extends State<NumSelector> {
               onChanged: widget.onChanged == null
                   ? null
                   : (string) => widget.onChanged!(num.tryParse(string)),
+              // Flutter's default behaviour :
+              // - web : tapping outside instantly unfocuses the field.
+              // - mobile : tapping outside does nothing.
+              // For better consistency across all plateforms, wo_form decided
+              // to unfocus text fields on tap up.
+              onTapOutside: (_) {},
               onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
             ),
           ),

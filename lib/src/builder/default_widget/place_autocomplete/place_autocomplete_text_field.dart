@@ -28,6 +28,7 @@ class PlaceAutocompleteTextField extends StatefulWidget {
     this.longitude,
     this.radius,
     this.onFieldSubmitted,
+    this.onTapOutside,
     this.onTapUpOutside,
     this.textInputAction,
     super.key,
@@ -54,6 +55,7 @@ class PlaceAutocompleteTextField extends StatefulWidget {
   final String? language;
   final TextInputAction? textInputAction;
   final ValueChanged<String>? onFieldSubmitted;
+  final ValueChanged<PointerEvent>? onTapOutside;
   final ValueChanged<PointerUpEvent>? onTapUpOutside;
 
   final String? Function(String?, BuildContext)? validator;
@@ -125,6 +127,7 @@ class _PlaceAutoCompleteTextFieldState
                   return widget.validator?.call(inputString, context);
                 },
                 onChanged: subject.add,
+                onTapOutside: widget.onTapOutside,
                 onTapUpOutside: widget.onTapUpOutside,
               ),
             ),

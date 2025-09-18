@@ -55,6 +55,22 @@ class _StringFieldState extends State<StringField> {
     super.dispose();
   }
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return GestureDetector(
+  //     // behavior: HitTestBehavior.translucent,
+  //     // onTapUp: (details) {
+  //     //   final renderBox = context.findRenderObject() as RenderBox;
+  //     //   final localPos = renderBox.globalToLocal(details.globalPosition);
+
+  //     //   if (!renderBox.paintBounds.contains(localPos)) {
+  //     //     FocusScope.of(context).unfocus();
+  //     //   }
+  //     // },
+  //     child: build2(context),
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
     if (textEditingController != null) {
@@ -122,6 +138,12 @@ class _StringFieldState extends State<StringField> {
                 defaultSubmitFormOnFieldSubmitted())
             ? (_) => context.read<WoFormValuesCubit>().submit(context)
             : null,
+        // Flutter's default behaviour :
+        // - web : tapping outside instantly unfocuses the field.
+        // - mobile : tapping outside does nothing.
+        // For better consistency across all plateforms, wo_form decided to
+        // unfocus text fields on tap up.
+        onTapOutside: (_) {},
         onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
         itemBuilder: (context, index, PlacePrediction prediction) => Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -161,6 +183,7 @@ class _StringFieldState extends State<StringField> {
                   defaultSubmitFormOnFieldSubmitted())
               ? (_) => context.read<WoFormValuesCubit>().submit(context)
               : null,
+          // TODO : onTapUpOutside
           onTapOutside: (event) => FocusScope.of(context).unfocus(),
           style: widget.data.uiSettings.style,
           obscureText: obscureText,
@@ -186,6 +209,12 @@ class _StringFieldState extends State<StringField> {
                 defaultSubmitFormOnFieldSubmitted())
             ? (_) => context.read<WoFormValuesCubit>().submit(context)
             : null,
+        // Flutter's default behaviour :
+        // - web : tapping outside instantly unfocuses the field.
+        // - mobile : tapping outside does nothing.
+        // For better consistency across all plateforms, wo_form decided to
+        // unfocus text fields on tap up.
+        onTapOutside: (_) {},
         onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
         style: widget.data.uiSettings.style,
         keyboardType: widget.data.uiSettings.keyboardType,
