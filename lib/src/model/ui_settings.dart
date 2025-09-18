@@ -429,8 +429,11 @@ typedef SelectFieldBuilderDef<T> =
     Widget Function(
       WoFieldData<SelectInput<T>, List<T>, SelectInputUiSettings<T>> data,
     );
+typedef SelectFieldTileBuilderDef<T> =
+    Widget Function(T value, VoidCallback onTap, bool isSelected);
 
 typedef InputHeaderBuilderDef = Widget Function(WoFormInputHeaderData data);
+typedef ValueBuilderDef<T> = Widget Function(T? value);
 
 @freezed
 abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
@@ -439,6 +442,7 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
   /// searcher is a function that returns a double between 0 and 1,
   /// depending on how much the query is close to a value. 1 is the closest.
   const factory SelectInputUiSettings({
+    /// If flex is higher than 0, the default widget will use ListView.builder.
     int? flex,
     String? labelText,
     String? helperText,
@@ -453,14 +457,17 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
     /// selector with a flex value of 10,
     /// and label with a flex value of [labelFlex].
     int? labelFlex,
-    @notSerializable Widget Function(T?)? valueBuilder,
-    @notSerializable Widget Function(T?)? selectedBuilder,
-    @notSerializable Widget? Function(T)? helpValueBuilder,
+    @notSerializable ValueBuilderDef<T>? valueBuilder,
+    @notSerializable ValueBuilderDef<T>? selectedBuilder,
+    @notSerializable Widget? Function(T value)? helpValueBuilder,
     @notSerializable double Function(String query, T value)? searcher,
     @notSerializable SearchScreenDef<T>? searchScreenBuilder,
-    @notSerializable SelectFieldBuilderDef<T>? widgetBuilder,
     @notSerializable InputHeaderBuilderDef? headerBuilder,
     @notSerializable ScoreWidgetBuilderDef? scoreBuilder,
+
+    /// Only used when childrenVisibility is always.
+    @notSerializable SelectFieldTileBuilderDef<T>? tileBuilder,
+    @notSerializable SelectFieldBuilderDef<T>? widgetBuilder,
   }) = _SelectInputUiSettings<T>;
 
   const SelectInputUiSettings._();
@@ -480,9 +487,10 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
           valueBuilder: valueBuilder ?? other.valueBuilder,
           helpValueBuilder: helpValueBuilder ?? other.helpValueBuilder,
           searcher: searcher ?? other.searcher,
-          widgetBuilder: widgetBuilder ?? other.widgetBuilder,
           headerBuilder: headerBuilder ?? other.headerBuilder,
           scoreBuilder: scoreBuilder ?? other.scoreBuilder,
+          tileBuilder: tileBuilder ?? other.tileBuilder,
+          widgetBuilder: widgetBuilder ?? other.widgetBuilder,
         );
 }
 

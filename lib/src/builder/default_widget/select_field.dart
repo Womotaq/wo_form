@@ -17,61 +17,49 @@ class SelectField<T> extends StatelessWidget {
     final scoreWidget = quizSettings == null
         ? null
         : (data.uiSettings.scoreBuilder ??
-                woTheme?.scoreBuilder ??
-                ScoreWidget.new)
-            .call(score: quizSettings.score);
+                  woTheme?.scoreBuilder ??
+                  ScoreWidget.new)
+              .call(score: quizSettings.score);
 
-    if (data.input.maxCount == 1) {
-      switch (data.uiSettings.childrenVisibility) {
-        case null:
-        case ChildrenVisibility.always:
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 8),
-              Opacity(
-                opacity: data.onValueChanged == null ? 0.3 : 1,
-                child: Builder(
-                  builder: (context) {
-                    final headerData = WoFormInputHeaderData(
-                      path: data.path,
-                      labelText: data.uiSettings.labelText,
-                      helperText: data.uiSettings.helperText,
-                      errorText: data.errorText,
-                      trailing: scoreWidget,
-                    );
+    switch (data.uiSettings.childrenVisibility) {
+      case null:
+      case ChildrenVisibility.always:
+        final header = Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: Opacity(
+            opacity: data.onValueChanged == null ? 0.3 : 1,
+            child: Builder(
+              builder: (context) {
+                final headerData = WoFormInputHeaderData(
+                  path: data.path,
+                  labelText: data.uiSettings.labelText,
+                  helperText: data.uiSettings.helperText,
+                  errorText: data.errorText,
+                  trailing: scoreWidget,
+                );
 
-                    return (data.uiSettings.headerBuilder ??
-                            woTheme?.inputHeaderBuilder ??
-                            InputHeader.new)
-                        .call(headerData);
-                  },
-                ),
-              ),
-              ...data.input.availibleValues.map(
-                (value) {
-                  final subtitle =
-                      data.uiSettings.helpValueBuilder?.call(value);
-                  return RadioListTile<T>(
-                    contentPadding: const EdgeInsets.only(
-                      left: 5,
-                      right: 16,
-                    ),
-                    toggleable: true,
-                    value: value,
-                    groupValue: data.value?.firstOrNull,
-                    onChanged: data.onValueChanged == null
-                        ? null
-                        : (_) => onUniqueChoice(value),
-                    title: data.uiSettings.valueBuilder?.call(value) ??
-                        Text(value.toString()),
-                    subtitle: subtitle,
-                  );
-                },
-              ),
-            ],
-          );
-        case ChildrenVisibility.whenAsked:
+                return (data.uiSettings.headerBuilder ??
+                        woTheme?.inputHeaderBuilder ??
+                        InputHeader.new)
+                    .call(headerData);
+              },
+            ),
+          ),
+        );
+        return _AlwaysVisibleSelectField(
+          data: data,
+          onChanged: (value) {
+            if (data.input.maxCount == 1) {
+              onUniqueChoice(value);
+            } else {
+              onMultipleChoice(value);
+            }
+          },
+          header: header,
+          tileBuilder: data.uiSettings.tileBuilder,
+        );
+      case ChildrenVisibility.whenAsked:
+        if (data.input.maxCount == 1) {
           final selector = SearchField<T>.uniqueChoice(
             values: data.input.availibleValues,
             onSelected: data.onValueChanged == null ? null : onUniqueChoice,
@@ -114,119 +102,66 @@ class SelectField<T> extends StatelessWidget {
             headerBuilder: data.uiSettings.headerBuilder,
             child: selector,
           );
-      }
-    } else {
-      return switch (data.uiSettings.childrenVisibility) {
-        null || ChildrenVisibility.always => Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 8),
-              Opacity(
-                opacity: data.onValueChanged == null ? 0.3 : 1,
-                child: Builder(
-                  builder: (context) {
-                    final headerData = WoFormInputHeaderData(
-                      path: data.path,
-                      labelText: data.uiSettings.labelText,
-                      helperText: data.uiSettings.helperText,
-                      errorText: data.errorText,
-                      trailing: scoreWidget,
-                    );
-
-                    return (data.uiSettings.headerBuilder ??
-                            woTheme?.inputHeaderBuilder ??
-                            InputHeader.new)
-                        .call(headerData);
-                  },
-                ),
-              ),
-              ...data.input.availibleValues.map(
-                (value) {
-                  final subtitle =
-                      data.uiSettings.helpValueBuilder?.call(value);
-                  return CheckboxListTile(
-                    contentPadding: const EdgeInsets.only(
-                      left: 5,
-                      right: 16,
+        } else {
+          final headerData = WoFormInputHeaderData(
+            path: data.path,
+            labelText: data.uiSettings.labelText,
+            helperText: data.uiSettings.helperText,
+            errorText: data.errorText,
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (scoreWidget != null) ...[
+                  scoreWidget,
+                  const SizedBox(width: 8),
+                ],
+                SearchField<T>.multipleChoices(
+                  values: data.input.availibleValues,
+                  onSelected: data.onValueChanged == null
+                      ? null
+                      : onMultipleChoice,
+                  selectedValues: selectedValues,
+                  valueBuilder: data.uiSettings.valueBuilder,
+                  helpValueBuilder: data.uiSettings.helpValueBuilder,
+                  hintText: data.uiSettings.hintText,
+                  searcher: data.uiSettings.searcher,
+                  searchScreenBuilder: data.uiSettings.searchScreenBuilder,
+                  builder: (onPressed) => IconButton.filled(
+                    onPressed: onPressed,
+                    icon: const Icon(Icons.add),
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                  provider: ({required child}) => RepositoryProvider.value(
+                    value: context.read<RootNode>(),
+                    child: MultiBlocProvider(
+                      providers: [
+                        BlocProvider.value(
+                          value: context.read<WoFormValuesCubit>(),
+                        ),
+                        BlocProvider.value(
+                          value: context.read<WoFormStatusCubit>(),
+                        ),
+                        BlocProvider.value(
+                          value: context.read<WoFormLockCubit>(),
+                        ),
+                      ],
+                      child: child,
                     ),
-                    value: selectedValues.contains(value),
-                    onChanged: data.onValueChanged == null
-                        ? null
-                        : (_) => onMultipleChoice(value),
-                    title: data.uiSettings.valueBuilder?.call(value) ??
-                        Text(value.toString()),
-                    subtitle: subtitle,
-                    controlAffinity: ListTileControlAffinity.leading,
-                  );
-                },
-              ),
-            ],
-          ),
-        ChildrenVisibility.whenAsked => Opacity(
+                  ),
+                ),
+              ],
+            ),
+            shrinkWrap: false,
+          );
+
+          return Opacity(
             opacity: data.onValueChanged == null ? 0.3 : 1,
             child: Column(
               children: [
-                Builder(
-                  builder: (context) {
-                    final headerData = WoFormInputHeaderData(
-                      path: data.path,
-                      labelText: data.uiSettings.labelText,
-                      helperText: data.uiSettings.helperText,
-                      errorText: data.errorText,
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          if (scoreWidget != null) ...[
-                            scoreWidget,
-                            const SizedBox(width: 8),
-                          ],
-                          SearchField<T>.multipleChoices(
-                            values: data.input.availibleValues,
-                            onSelected: data.onValueChanged == null
-                                ? null
-                                : onMultipleChoice,
-                            selectedValues: selectedValues,
-                            valueBuilder: data.uiSettings.valueBuilder,
-                            helpValueBuilder: data.uiSettings.helpValueBuilder,
-                            hintText: data.uiSettings.hintText,
-                            searcher: data.uiSettings.searcher,
-                            searchScreenBuilder:
-                                data.uiSettings.searchScreenBuilder,
-                            builder: (onPressed) => IconButton.filled(
-                              onPressed: onPressed,
-                              icon: const Icon(Icons.add),
-                              color: Theme.of(context).colorScheme.onPrimary,
-                            ),
-                            provider: ({required child}) =>
-                                RepositoryProvider.value(
-                              value: context.read<RootNode>(),
-                              child: MultiBlocProvider(
-                                providers: [
-                                  BlocProvider.value(
-                                    value: context.read<WoFormValuesCubit>(),
-                                  ),
-                                  BlocProvider.value(
-                                    value: context.read<WoFormStatusCubit>(),
-                                  ),
-                                  BlocProvider.value(
-                                    value: context.read<WoFormLockCubit>(),
-                                  ),
-                                ],
-                                child: child,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      shrinkWrap: false,
-                    );
-
-                    return (data.uiSettings.headerBuilder ??
-                            woTheme?.inputHeaderBuilder ??
-                            InputHeader.new)
-                        .call(headerData);
-                  },
-                ),
+                (data.uiSettings.headerBuilder ??
+                        woTheme?.inputHeaderBuilder ??
+                        InputHeader.new)
+                    .call(headerData),
                 if (selectedValues.isNotEmpty)
                   ListTile(
                     title: Wrap(
@@ -238,7 +173,8 @@ class SelectField<T> extends StatelessWidget {
                             onDeleted: data.onValueChanged == null
                                 ? null
                                 : () => onMultipleChoice(v),
-                            label: data.uiSettings.valueBuilder?.call(v) ??
+                            label:
+                                data.uiSettings.valueBuilder?.call(v) ??
                                 Text(v.toString()),
                           ),
                         ),
@@ -247,8 +183,8 @@ class SelectField<T> extends StatelessWidget {
                   ),
               ],
             ),
-          ),
-      };
+          );
+        }
     }
   }
 
@@ -257,8 +193,8 @@ class SelectField<T> extends StatelessWidget {
       value == null
           ? <T>[]
           : (data.value?.contains(value) ?? false) && (data.input.minCount < 1)
-              ? <T>[]
-              : [value],
+          ? <T>[]
+          : [value],
     );
   }
 
@@ -267,6 +203,77 @@ class SelectField<T> extends StatelessWidget {
     if (!selectedSet.add(value)) selectedSet.remove(value);
     data.onValueChanged?.call(selectedSet.toList());
   }
+}
+
+class _AlwaysVisibleSelectField<T> extends StatelessWidget {
+  const _AlwaysVisibleSelectField({
+    required this.data,
+    required this.onChanged,
+    required this.header,
+    this.tileBuilder,
+  });
+
+  final WoFieldData<SelectInput<T>, List<T>, SelectInputUiSettings<T>> data;
+  final void Function(T) onChanged;
+  final Widget header;
+  final Widget Function(T value, VoidCallback onTap, bool isSelected)?
+  tileBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: (data.uiSettings.flex ?? 0) > 0
+          ? ListView.builder(
+              physics: const ClampingScrollPhysics(),
+              itemCount: data.input.availibleValues.length + 1,
+              itemBuilder: (_, index) => index == 0
+                  ? header
+                  : valueBuilder(data.input.availibleValues[index - 1]),
+            )
+          : Column(
+              children: [
+                header,
+                ...data.input.availibleValues.map(valueBuilder),
+              ],
+            ),
+    );
+  }
+
+  Widget valueBuilder(T value) =>
+      tileBuilder?.call(
+        value,
+        () => onChanged(value),
+        data.value?.contains(value) ?? false,
+      ) ??
+      (data.input.maxCount == 1 ? radioBuilder(value) : checkboxBuilder(value));
+
+  Widget radioBuilder(T value) => RadioGroup(
+    groupValue: data.value?.firstOrNull,
+    onChanged: (_) => data.onValueChanged == null ? null : onChanged(value),
+    child: RadioListTile<T>(
+      contentPadding: const EdgeInsets.only(left: 5, right: 16),
+      toggleable: true,
+      value: value,
+      title:
+          data.uiSettings.valueBuilder?.call(value) ?? Text(value.toString()),
+      subtitle: data.uiSettings.helpValueBuilder?.call(value),
+    ),
+  );
+
+  Widget checkboxBuilder(T value) => CheckboxListTile(
+    contentPadding: const EdgeInsets.only(
+      left: 5,
+      right: 16,
+    ),
+    value: data.value?.contains(value) ?? false,
+    onChanged: data.onValueChanged == null ? null : (_) => onChanged(value),
+    title: data.uiSettings.valueBuilder?.call(value) ?? Text(value.toString()),
+    subtitle: data.uiSettings.helpValueBuilder?.call(
+      value,
+    ),
+    controlAffinity: ListTileControlAffinity.leading,
+  );
 }
 
 class _MultipleSelectChip extends StatelessWidget {
@@ -292,13 +299,13 @@ class _MultipleSelectChip extends StatelessWidget {
       onPressed: helper == null
           ? null
           : () => showPopover(
-                context: context,
-                backgroundColor: Theme.of(context).colorScheme.surfaceBright,
-                bodyBuilder: (popoverContext) => Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: helper,
-                ),
+              context: context,
+              backgroundColor: Theme.of(context).colorScheme.surfaceBright,
+              bodyBuilder: (popoverContext) => Padding(
+                padding: const EdgeInsets.all(16),
+                child: helper,
               ),
+            ),
     );
   }
 }
