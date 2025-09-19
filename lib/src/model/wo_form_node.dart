@@ -61,6 +61,13 @@ mixin WoFormNodeMixin {
 
   /// Used when OFormUiSettings.scrollable is false
   int? flex(BuildContext context) => null;
+
+  /// If uiSettings.flex is set to flexDeferToChild, the flex will be based on
+  /// the child's flex.
+  ///
+  /// Works with [ConditionnalNode], [SelectorNode], [ValueBuilderNode] and
+  /// [ValuesBuilderNode].
+  static const int flexDeferToChild = -1;
 }
 
 @freezed
@@ -699,19 +706,50 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
   /// Used when OFormUiSettings.scrollable is false
   @override
   int? flex(BuildContext context) => switch (this) {
-    ConditionnalNode(
-      condition: final condition,
-      uiSettings: final uiSettings,
-    ) =>
-      (uiSettings.flex ?? 0) != 0
-          ? context.select((WoFormValuesCubit c) => c.state.meet(condition))
-                ? uiSettings.flex
-                : 0
-          : uiSettings.flex,
+    final ConditionnalNode node =>
+      node.uiSettings.flex == null || node.uiSettings.flex! == 0
+          ? node.uiSettings.flex
+          : !context.select(
+              (WoFormValuesCubit c) => c.state.meet(node.condition),
+            )
+          ? 0
+          : node.uiSettings.flex == WoFormNodeMixin.flexDeferToChild
+          ? node.child.flex(context)
+          : node.uiSettings.flex,
+    final SelectorNode node =>
+      node.uiSettings.flex == WoFormNodeMixin.flexDeferToChild
+          ? node
+                .builder!(
+                  context.select(
+                    (WoFormValuesCubit c) => node.selector!(c.state),
+                  ),
+                )
+                .flex(context)
+          : node.uiSettings.flex,
+    final ValueBuilderNode node =>
+      node.uiSettings.flex == WoFormNodeMixin.flexDeferToChild
+          ? node
+                .builder!(
+                  context.select(
+                    (WoFormValuesCubit c) => c.state.getValue(node.path),
+                  ),
+                )
+                .flex(context)
+          : node.uiSettings.flex,
+    final ValuesBuilderNode node =>
+      node.uiSettings.flex == WoFormNodeMixin.flexDeferToChild
+          ? node
+                .builder!(
+                  context.select(
+                    (WoFormValuesCubit c) => {
+                      for (final path in node.paths)
+                        path: c.state.getValue(path),
+                    },
+                  ),
+                )
+                .flex(context)
+          : node.uiSettings.flex,
     InputsNode(uiSettings: final uiSettings) => uiSettings.flex,
-    SelectorNode(uiSettings: final uiSettings) ||
-    ValueBuilderNode(uiSettings: final uiSettings) ||
-    ValuesBuilderNode(uiSettings: final uiSettings) ||
     WidgetNode(uiSettings: final uiSettings) => uiSettings.flex,
     _ => null,
   };

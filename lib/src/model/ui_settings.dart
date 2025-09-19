@@ -299,6 +299,11 @@ typedef HeaderBuilderDef = Widget Function(WoFormHeaderData data);
 abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
   const factory InputsNodeUiSettings({
     int? flex,
+
+    /// If flex is higher than 0, the default widget will use ListView.builder.
+    ///
+    /// Defaults to false.
+    bool? scrollable,
     String? labelText,
     String? labelTextWhenChildrenHidden,
     String? helperText,

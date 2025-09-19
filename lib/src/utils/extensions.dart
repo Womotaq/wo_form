@@ -64,6 +64,7 @@ extension WoFormValuesX on WoFormValues {
   /// that ends with path.
   dynamic getValue(
     String path, {
+    // TODO : deprecate relative paths, encourage #
     String? parentPath,
   }) {
     if (parentPath != null) {

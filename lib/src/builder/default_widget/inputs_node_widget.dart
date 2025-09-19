@@ -9,14 +9,10 @@ class InputsNodeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final node = data.input;
-
     final woFormTheme = WoFormTheme.of(context);
     final formUiSettings = context.read<RootNode>().uiSettings;
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
+    final header =
         (data.uiSettings.headerBuilder ??
                 woFormTheme?.headerBuilder ??
                 FormHeader.new)
@@ -25,37 +21,79 @@ class InputsNodeWidget extends StatelessWidget {
                 labelText: data.uiSettings.labelText,
                 helperText: data.uiSettings.helperText,
               ),
-            ),
-        Flexible(
-          flex: !formUiSettings.scrollable && node.flex(context) != 0 ? 1 : 0,
-          child: Flex(
-            direction: data.uiSettings.direction ?? Axis.vertical,
-            spacing: data.uiSettings.spacing ?? woFormTheme?.spacing ?? 0,
-            crossAxisAlignment:
-                data.uiSettings.crossAxisAlignment ??
-                CrossAxisAlignment.stretch,
-            children: node.children.map(
-              (i) {
-                // This is just a way to prevent useless call to i.flex
-                if (formUiSettings.scrollable &&
-                    data.uiSettings.direction == Axis.vertical) {
-                  return i.toWidget(parentPath: data.path);
-                }
+            );
 
-                final flex = i.flex(context);
-                return Flexible(
-                  flex: !formUiSettings.scrollable && flex != null
-                      ? flex
-                      : data.uiSettings.direction == Axis.horizontal
-                      ? flex ?? 1
+    final childBuilder =
+        formUiSettings.scrollable && data.uiSettings.direction == Axis.vertical
+        ? standardChildBuilder
+        : flexibleChildBuilder;
+
+    final direction = data.uiSettings.direction ?? Axis.vertical;
+    final spacing = data.uiSettings.spacing ?? woFormTheme?.spacing ?? 0;
+
+    return (data.uiSettings.flex ?? 0) > 0 &&
+            (data.uiSettings.scrollable ?? false)
+        ? ListView.builder(
+            physics: const ClampingScrollPhysics(),
+            scrollDirection: direction,
+            padding: EdgeInsets.zero,
+            itemCount: data.input.children.length + 1,
+            itemBuilder: (_, index) => index == 0
+                ? header
+                : Padding(
+                    padding: EdgeInsets.only(
+                      bottom: index == data.input.children.length ? 0 : spacing,
+                    ),
+                    child: standardChildBuilder(
+                      data.input.children[index - 1],
+                      formUiSettings,
+                    ),
+                  ),
+          )
+        : Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              header,
+              Builder(
+                builder: (context) => Flexible(
+                  flex:
+                      !formUiSettings.scrollable &&
+                          data.input.flex(context) != 0
+                      ? 1
                       : 0,
-                  child: i.toWidget(parentPath: data.path),
-                );
-              },
-            ).toList(),
-          ),
-        ),
-      ],
-    );
+                  child: Flex(
+                    direction: direction,
+                    spacing: spacing,
+                    crossAxisAlignment:
+                        data.uiSettings.crossAxisAlignment ??
+                        CrossAxisAlignment.stretch,
+                    children: data.input.children
+                        .map((child) => childBuilder(child, formUiSettings))
+                        .toList(),
+                  ),
+                ),
+              ),
+            ],
+          );
   }
+
+  Widget standardChildBuilder(WoFormNodeMixin child, _) =>
+      child.toWidget(parentPath: data.path);
+
+  Widget flexibleChildBuilder(
+    WoFormNodeMixin child,
+    WoFormUiSettings formUiSettings,
+  ) => Builder(
+    builder: (context) {
+      final flex = child.flex(context);
+      return Flexible(
+        flex: !formUiSettings.scrollable && flex != null
+            ? flex
+            : data.uiSettings.direction == Axis.horizontal
+            ? flex ?? 1
+            : 0,
+        child: standardChildBuilder(child, formUiSettings),
+      );
+    },
+  );
 }

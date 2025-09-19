@@ -991,7 +991,10 @@ as String?,
 /// @nodoc
 mixin _$InputsNodeUiSettings {
 
- int? get flex; String? get labelText; String? get labelTextWhenChildrenHidden; String? get helperText;/// Default to always.
+ int? get flex;/// If flex is higher than 0, the default widget will use ListView.builder.
+///
+/// Defaults to false.
+ bool? get scrollable; String? get labelText; String? get labelTextWhenChildrenHidden; String? get helperText;/// Default to always.
  ChildrenVisibility? get childrenVisibility;/// Only used by [ChildrenVisibility.whenAsked].
 /// If true, when the widget will be rendered,
 /// the children's visibility will be asked.
@@ -1017,16 +1020,16 @@ $InputsNodeUiSettingsCopyWith<InputsNodeUiSettings> get copyWith => _$InputsNode
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is InputsNodeUiSettings&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelTextWhenChildrenHidden, labelTextWhenChildrenHidden) || other.labelTextWhenChildrenHidden == labelTextWhenChildrenHidden)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.showChildrenInitially, showChildrenInitially) || other.showChildrenInitially == showChildrenInitially)&&(identical(other.direction, direction) || other.direction == direction)&&(identical(other.crossAxisAlignment, crossAxisAlignment) || other.crossAxisAlignment == crossAxisAlignment)&&(identical(other.spacing, spacing) || other.spacing == spacing)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.expanderBuilder, expanderBuilder) || other.expanderBuilder == expanderBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is InputsNodeUiSettings&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.scrollable, scrollable) || other.scrollable == scrollable)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelTextWhenChildrenHidden, labelTextWhenChildrenHidden) || other.labelTextWhenChildrenHidden == labelTextWhenChildrenHidden)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.showChildrenInitially, showChildrenInitially) || other.showChildrenInitially == showChildrenInitially)&&(identical(other.direction, direction) || other.direction == direction)&&(identical(other.crossAxisAlignment, crossAxisAlignment) || other.crossAxisAlignment == crossAxisAlignment)&&(identical(other.spacing, spacing) || other.spacing == spacing)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.expanderBuilder, expanderBuilder) || other.expanderBuilder == expanderBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,flex,labelText,labelTextWhenChildrenHidden,helperText,childrenVisibility,showChildrenInitially,direction,crossAxisAlignment,spacing,widgetBuilder,headerBuilder,expanderBuilder);
+int get hashCode => Object.hash(runtimeType,flex,scrollable,labelText,labelTextWhenChildrenHidden,helperText,childrenVisibility,showChildrenInitially,direction,crossAxisAlignment,spacing,widgetBuilder,headerBuilder,expanderBuilder);
 
 @override
 String toString() {
-  return 'InputsNodeUiSettings(flex: $flex, labelText: $labelText, labelTextWhenChildrenHidden: $labelTextWhenChildrenHidden, helperText: $helperText, childrenVisibility: $childrenVisibility, showChildrenInitially: $showChildrenInitially, direction: $direction, crossAxisAlignment: $crossAxisAlignment, spacing: $spacing, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, expanderBuilder: $expanderBuilder)';
+  return 'InputsNodeUiSettings(flex: $flex, scrollable: $scrollable, labelText: $labelText, labelTextWhenChildrenHidden: $labelTextWhenChildrenHidden, helperText: $helperText, childrenVisibility: $childrenVisibility, showChildrenInitially: $showChildrenInitially, direction: $direction, crossAxisAlignment: $crossAxisAlignment, spacing: $spacing, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, expanderBuilder: $expanderBuilder)';
 }
 
 
@@ -1037,7 +1040,7 @@ abstract mixin class $InputsNodeUiSettingsCopyWith<$Res>  {
   factory $InputsNodeUiSettingsCopyWith(InputsNodeUiSettings value, $Res Function(InputsNodeUiSettings) _then) = _$InputsNodeUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- int? flex, String? labelText, String? labelTextWhenChildrenHidden, String? helperText, ChildrenVisibility? childrenVisibility, bool? showChildrenInitially, Axis? direction, CrossAxisAlignment? crossAxisAlignment, double? spacing,@notSerializable InputNodeWidgetBuilderDef? widgetBuilder,@notSerializable HeaderBuilderDef? headerBuilder,@notSerializable InputNodeWidgetBuilderDef? expanderBuilder
+ int? flex, bool? scrollable, String? labelText, String? labelTextWhenChildrenHidden, String? helperText, ChildrenVisibility? childrenVisibility, bool? showChildrenInitially, Axis? direction, CrossAxisAlignment? crossAxisAlignment, double? spacing,@notSerializable InputNodeWidgetBuilderDef? widgetBuilder,@notSerializable HeaderBuilderDef? headerBuilder,@notSerializable InputNodeWidgetBuilderDef? expanderBuilder
 });
 
 
@@ -1054,10 +1057,11 @@ class _$InputsNodeUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of InputsNodeUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? flex = freezed,Object? labelText = freezed,Object? labelTextWhenChildrenHidden = freezed,Object? helperText = freezed,Object? childrenVisibility = freezed,Object? showChildrenInitially = freezed,Object? direction = freezed,Object? crossAxisAlignment = freezed,Object? spacing = freezed,Object? widgetBuilder = freezed,Object? headerBuilder = freezed,Object? expanderBuilder = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? flex = freezed,Object? scrollable = freezed,Object? labelText = freezed,Object? labelTextWhenChildrenHidden = freezed,Object? helperText = freezed,Object? childrenVisibility = freezed,Object? showChildrenInitially = freezed,Object? direction = freezed,Object? crossAxisAlignment = freezed,Object? spacing = freezed,Object? widgetBuilder = freezed,Object? headerBuilder = freezed,Object? expanderBuilder = freezed,}) {
   return _then(_self.copyWith(
 flex: freezed == flex ? _self.flex : flex // ignore: cast_nullable_to_non_nullable
-as int?,labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
+as int?,scrollable: freezed == scrollable ? _self.scrollable : scrollable // ignore: cast_nullable_to_non_nullable
+as bool?,labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
 as String?,labelTextWhenChildrenHidden: freezed == labelTextWhenChildrenHidden ? _self.labelTextWhenChildrenHidden : labelTextWhenChildrenHidden // ignore: cast_nullable_to_non_nullable
 as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
 as String?,childrenVisibility: freezed == childrenVisibility ? _self.childrenVisibility : childrenVisibility // ignore: cast_nullable_to_non_nullable
@@ -1080,10 +1084,14 @@ as InputNodeWidgetBuilderDef?,
 @JsonSerializable()
 
 class _InputsNodeUiSettings extends InputsNodeUiSettings {
-  const _InputsNodeUiSettings({this.flex, this.labelText, this.labelTextWhenChildrenHidden, this.helperText, this.childrenVisibility, this.showChildrenInitially, this.direction, this.crossAxisAlignment, this.spacing, @notSerializable this.widgetBuilder, @notSerializable this.headerBuilder, @notSerializable this.expanderBuilder}): super._();
+  const _InputsNodeUiSettings({this.flex, this.scrollable, this.labelText, this.labelTextWhenChildrenHidden, this.helperText, this.childrenVisibility, this.showChildrenInitially, this.direction, this.crossAxisAlignment, this.spacing, @notSerializable this.widgetBuilder, @notSerializable this.headerBuilder, @notSerializable this.expanderBuilder}): super._();
   factory _InputsNodeUiSettings.fromJson(Map<String, dynamic> json) => _$InputsNodeUiSettingsFromJson(json);
 
 @override final  int? flex;
+/// If flex is higher than 0, the default widget will use ListView.builder.
+///
+/// Defaults to false.
+@override final  bool? scrollable;
 @override final  String? labelText;
 @override final  String? labelTextWhenChildrenHidden;
 @override final  String? helperText;
@@ -1122,16 +1130,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _InputsNodeUiSettings&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelTextWhenChildrenHidden, labelTextWhenChildrenHidden) || other.labelTextWhenChildrenHidden == labelTextWhenChildrenHidden)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.showChildrenInitially, showChildrenInitially) || other.showChildrenInitially == showChildrenInitially)&&(identical(other.direction, direction) || other.direction == direction)&&(identical(other.crossAxisAlignment, crossAxisAlignment) || other.crossAxisAlignment == crossAxisAlignment)&&(identical(other.spacing, spacing) || other.spacing == spacing)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.expanderBuilder, expanderBuilder) || other.expanderBuilder == expanderBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _InputsNodeUiSettings&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.scrollable, scrollable) || other.scrollable == scrollable)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelTextWhenChildrenHidden, labelTextWhenChildrenHidden) || other.labelTextWhenChildrenHidden == labelTextWhenChildrenHidden)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.showChildrenInitially, showChildrenInitially) || other.showChildrenInitially == showChildrenInitially)&&(identical(other.direction, direction) || other.direction == direction)&&(identical(other.crossAxisAlignment, crossAxisAlignment) || other.crossAxisAlignment == crossAxisAlignment)&&(identical(other.spacing, spacing) || other.spacing == spacing)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.expanderBuilder, expanderBuilder) || other.expanderBuilder == expanderBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,flex,labelText,labelTextWhenChildrenHidden,helperText,childrenVisibility,showChildrenInitially,direction,crossAxisAlignment,spacing,widgetBuilder,headerBuilder,expanderBuilder);
+int get hashCode => Object.hash(runtimeType,flex,scrollable,labelText,labelTextWhenChildrenHidden,helperText,childrenVisibility,showChildrenInitially,direction,crossAxisAlignment,spacing,widgetBuilder,headerBuilder,expanderBuilder);
 
 @override
 String toString() {
-  return 'InputsNodeUiSettings(flex: $flex, labelText: $labelText, labelTextWhenChildrenHidden: $labelTextWhenChildrenHidden, helperText: $helperText, childrenVisibility: $childrenVisibility, showChildrenInitially: $showChildrenInitially, direction: $direction, crossAxisAlignment: $crossAxisAlignment, spacing: $spacing, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, expanderBuilder: $expanderBuilder)';
+  return 'InputsNodeUiSettings(flex: $flex, scrollable: $scrollable, labelText: $labelText, labelTextWhenChildrenHidden: $labelTextWhenChildrenHidden, helperText: $helperText, childrenVisibility: $childrenVisibility, showChildrenInitially: $showChildrenInitially, direction: $direction, crossAxisAlignment: $crossAxisAlignment, spacing: $spacing, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, expanderBuilder: $expanderBuilder)';
 }
 
 
@@ -1142,7 +1150,7 @@ abstract mixin class _$InputsNodeUiSettingsCopyWith<$Res> implements $InputsNode
   factory _$InputsNodeUiSettingsCopyWith(_InputsNodeUiSettings value, $Res Function(_InputsNodeUiSettings) _then) = __$InputsNodeUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- int? flex, String? labelText, String? labelTextWhenChildrenHidden, String? helperText, ChildrenVisibility? childrenVisibility, bool? showChildrenInitially, Axis? direction, CrossAxisAlignment? crossAxisAlignment, double? spacing,@notSerializable InputNodeWidgetBuilderDef? widgetBuilder,@notSerializable HeaderBuilderDef? headerBuilder,@notSerializable InputNodeWidgetBuilderDef? expanderBuilder
+ int? flex, bool? scrollable, String? labelText, String? labelTextWhenChildrenHidden, String? helperText, ChildrenVisibility? childrenVisibility, bool? showChildrenInitially, Axis? direction, CrossAxisAlignment? crossAxisAlignment, double? spacing,@notSerializable InputNodeWidgetBuilderDef? widgetBuilder,@notSerializable HeaderBuilderDef? headerBuilder,@notSerializable InputNodeWidgetBuilderDef? expanderBuilder
 });
 
 
@@ -1159,10 +1167,11 @@ class __$InputsNodeUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of InputsNodeUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? flex = freezed,Object? labelText = freezed,Object? labelTextWhenChildrenHidden = freezed,Object? helperText = freezed,Object? childrenVisibility = freezed,Object? showChildrenInitially = freezed,Object? direction = freezed,Object? crossAxisAlignment = freezed,Object? spacing = freezed,Object? widgetBuilder = freezed,Object? headerBuilder = freezed,Object? expanderBuilder = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? flex = freezed,Object? scrollable = freezed,Object? labelText = freezed,Object? labelTextWhenChildrenHidden = freezed,Object? helperText = freezed,Object? childrenVisibility = freezed,Object? showChildrenInitially = freezed,Object? direction = freezed,Object? crossAxisAlignment = freezed,Object? spacing = freezed,Object? widgetBuilder = freezed,Object? headerBuilder = freezed,Object? expanderBuilder = freezed,}) {
   return _then(_InputsNodeUiSettings(
 flex: freezed == flex ? _self.flex : flex // ignore: cast_nullable_to_non_nullable
-as int?,labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
+as int?,scrollable: freezed == scrollable ? _self.scrollable : scrollable // ignore: cast_nullable_to_non_nullable
+as bool?,labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
 as String?,labelTextWhenChildrenHidden: freezed == labelTextWhenChildrenHidden ? _self.labelTextWhenChildrenHidden : labelTextWhenChildrenHidden // ignore: cast_nullable_to_non_nullable
 as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
 as String?,childrenVisibility: freezed == childrenVisibility ? _self.childrenVisibility : childrenVisibility // ignore: cast_nullable_to_non_nullable
@@ -1501,7 +1510,7 @@ mixin _$SelectInputUiSettings<T> {
 /// Else, label and selector will be in a flexible row,
 /// selector with a flex value of 10,
 /// and label with a flex value of [labelFlex].
- int? get labelFlex;@notSerializable ValueBuilderDef<T>? get valueBuilder;@notSerializable ValueBuilderDef<T>? get selectedBuilder;@notSerializable Widget? Function(T)? get helpValueBuilder;@notSerializable double Function(String query, T value)? get searcher;@notSerializable SearchScreenDef<T>? get searchScreenBuilder;@notSerializable InputHeaderBuilderDef? get headerBuilder;@notSerializable ScoreWidgetBuilderDef? get scoreBuilder;/// Only used when childrenVisibility is always.
+ int? get labelFlex;@notSerializable ValueBuilderDef<T>? get valueBuilder;@notSerializable ValueBuilderDef<T>? get selectedBuilder;@notSerializable Widget? Function(T value)? get helpValueBuilder;@notSerializable double Function(String query, T value)? get searcher;@notSerializable SearchScreenDef<T>? get searchScreenBuilder;@notSerializable InputHeaderBuilderDef? get headerBuilder;@notSerializable ScoreWidgetBuilderDef? get scoreBuilder;/// Only used when childrenVisibility is always.
 @notSerializable SelectFieldTileBuilderDef<T>? get tileBuilder;@notSerializable SelectFieldBuilderDef<T>? get widgetBuilder;
 /// Create a copy of SelectInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -1535,7 +1544,7 @@ abstract mixin class $SelectInputUiSettingsCopyWith<T,$Res>  {
   factory $SelectInputUiSettingsCopyWith(SelectInputUiSettings<T> value, $Res Function(SelectInputUiSettings<T>) _then) = _$SelectInputUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- int? flex, String? labelText, String? helperText, String? hintText, ChildrenVisibility? childrenVisibility, int? labelFlex,@notSerializable ValueBuilderDef<T>? valueBuilder,@notSerializable ValueBuilderDef<T>? selectedBuilder,@notSerializable Widget? Function(T)? helpValueBuilder,@notSerializable double Function(String query, T value)? searcher,@notSerializable SearchScreenDef<T>? searchScreenBuilder,@notSerializable InputHeaderBuilderDef? headerBuilder,@notSerializable ScoreWidgetBuilderDef? scoreBuilder,@notSerializable SelectFieldTileBuilderDef<T>? tileBuilder,@notSerializable SelectFieldBuilderDef<T>? widgetBuilder
+ int? flex, String? labelText, String? helperText, String? hintText, ChildrenVisibility? childrenVisibility, int? labelFlex,@notSerializable ValueBuilderDef<T>? valueBuilder,@notSerializable ValueBuilderDef<T>? selectedBuilder,@notSerializable Widget? Function(T value)? helpValueBuilder,@notSerializable double Function(String query, T value)? searcher,@notSerializable SearchScreenDef<T>? searchScreenBuilder,@notSerializable InputHeaderBuilderDef? headerBuilder,@notSerializable ScoreWidgetBuilderDef? scoreBuilder,@notSerializable SelectFieldTileBuilderDef<T>? tileBuilder,@notSerializable SelectFieldBuilderDef<T>? widgetBuilder
 });
 
 
@@ -1563,7 +1572,7 @@ as ChildrenVisibility?,labelFlex: freezed == labelFlex ? _self.labelFlex : label
 as int?,valueBuilder: freezed == valueBuilder ? _self.valueBuilder : valueBuilder // ignore: cast_nullable_to_non_nullable
 as ValueBuilderDef<T>?,selectedBuilder: freezed == selectedBuilder ? _self.selectedBuilder : selectedBuilder // ignore: cast_nullable_to_non_nullable
 as ValueBuilderDef<T>?,helpValueBuilder: freezed == helpValueBuilder ? _self.helpValueBuilder : helpValueBuilder // ignore: cast_nullable_to_non_nullable
-as Widget? Function(T)?,searcher: freezed == searcher ? _self.searcher : searcher // ignore: cast_nullable_to_non_nullable
+as Widget? Function(T value)?,searcher: freezed == searcher ? _self.searcher : searcher // ignore: cast_nullable_to_non_nullable
 as double Function(String query, T value)?,searchScreenBuilder: freezed == searchScreenBuilder ? _self.searchScreenBuilder : searchScreenBuilder // ignore: cast_nullable_to_non_nullable
 as SearchScreenDef<T>?,headerBuilder: freezed == headerBuilder ? _self.headerBuilder : headerBuilder // ignore: cast_nullable_to_non_nullable
 as InputHeaderBuilderDef?,scoreBuilder: freezed == scoreBuilder ? _self.scoreBuilder : scoreBuilder // ignore: cast_nullable_to_non_nullable
@@ -1600,7 +1609,7 @@ class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
 @override final  int? labelFlex;
 @override@notSerializable final  ValueBuilderDef<T>? valueBuilder;
 @override@notSerializable final  ValueBuilderDef<T>? selectedBuilder;
-@override@notSerializable final  Widget? Function(T)? helpValueBuilder;
+@override@notSerializable final  Widget? Function(T value)? helpValueBuilder;
 @override@notSerializable final  double Function(String query, T value)? searcher;
 @override@notSerializable final  SearchScreenDef<T>? searchScreenBuilder;
 @override@notSerializable final  InputHeaderBuilderDef? headerBuilder;
@@ -1642,7 +1651,7 @@ abstract mixin class _$SelectInputUiSettingsCopyWith<T,$Res> implements $SelectI
   factory _$SelectInputUiSettingsCopyWith(_SelectInputUiSettings<T> value, $Res Function(_SelectInputUiSettings<T>) _then) = __$SelectInputUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- int? flex, String? labelText, String? helperText, String? hintText, ChildrenVisibility? childrenVisibility, int? labelFlex,@notSerializable ValueBuilderDef<T>? valueBuilder,@notSerializable ValueBuilderDef<T>? selectedBuilder,@notSerializable Widget? Function(T)? helpValueBuilder,@notSerializable double Function(String query, T value)? searcher,@notSerializable SearchScreenDef<T>? searchScreenBuilder,@notSerializable InputHeaderBuilderDef? headerBuilder,@notSerializable ScoreWidgetBuilderDef? scoreBuilder,@notSerializable SelectFieldTileBuilderDef<T>? tileBuilder,@notSerializable SelectFieldBuilderDef<T>? widgetBuilder
+ int? flex, String? labelText, String? helperText, String? hintText, ChildrenVisibility? childrenVisibility, int? labelFlex,@notSerializable ValueBuilderDef<T>? valueBuilder,@notSerializable ValueBuilderDef<T>? selectedBuilder,@notSerializable Widget? Function(T value)? helpValueBuilder,@notSerializable double Function(String query, T value)? searcher,@notSerializable SearchScreenDef<T>? searchScreenBuilder,@notSerializable InputHeaderBuilderDef? headerBuilder,@notSerializable ScoreWidgetBuilderDef? scoreBuilder,@notSerializable SelectFieldTileBuilderDef<T>? tileBuilder,@notSerializable SelectFieldBuilderDef<T>? widgetBuilder
 });
 
 
@@ -1670,7 +1679,7 @@ as ChildrenVisibility?,labelFlex: freezed == labelFlex ? _self.labelFlex : label
 as int?,valueBuilder: freezed == valueBuilder ? _self.valueBuilder : valueBuilder // ignore: cast_nullable_to_non_nullable
 as ValueBuilderDef<T>?,selectedBuilder: freezed == selectedBuilder ? _self.selectedBuilder : selectedBuilder // ignore: cast_nullable_to_non_nullable
 as ValueBuilderDef<T>?,helpValueBuilder: freezed == helpValueBuilder ? _self.helpValueBuilder : helpValueBuilder // ignore: cast_nullable_to_non_nullable
-as Widget? Function(T)?,searcher: freezed == searcher ? _self.searcher : searcher // ignore: cast_nullable_to_non_nullable
+as Widget? Function(T value)?,searcher: freezed == searcher ? _self.searcher : searcher // ignore: cast_nullable_to_non_nullable
 as double Function(String query, T value)?,searchScreenBuilder: freezed == searchScreenBuilder ? _self.searchScreenBuilder : searchScreenBuilder // ignore: cast_nullable_to_non_nullable
 as SearchScreenDef<T>?,headerBuilder: freezed == headerBuilder ? _self.headerBuilder : headerBuilder // ignore: cast_nullable_to_non_nullable
 as InputHeaderBuilderDef?,scoreBuilder: freezed == scoreBuilder ? _self.scoreBuilder : scoreBuilder // ignore: cast_nullable_to_non_nullable
