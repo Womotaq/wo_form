@@ -30,10 +30,12 @@ class InputsNodeWidget extends StatelessWidget {
 
     final direction = data.uiSettings.direction ?? Axis.vertical;
     final spacing = data.uiSettings.spacing ?? woFormTheme?.spacing ?? 0;
+    final reverse = data.uiSettings.reverse ?? false;
 
     return (data.uiSettings.flex ?? 0) > 0 &&
             (data.uiSettings.scrollable ?? false)
         ? ListView.builder(
+            reverse: reverse,
             physics: const ClampingScrollPhysics(),
             scrollDirection: direction,
             padding: EdgeInsets.zero,

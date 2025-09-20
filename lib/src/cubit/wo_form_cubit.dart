@@ -721,11 +721,10 @@ class RootKey<T extends State<StatefulWidget>> extends GlobalKey<T> {
 }
 
 class WoFormNodeFocusManager extends StatefulWidget {
-  const WoFormNodeFocusManager({
+  WoFormNodeFocusManager({
     required this.path,
     required this.child,
-    super.key,
-  });
+  }) : super(key: Key('WoFormNodeFocusManager-$path'));
 
   final String path;
   final Widget child;

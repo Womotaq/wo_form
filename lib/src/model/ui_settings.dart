@@ -304,6 +304,12 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
     ///
     /// Defaults to false.
     bool? scrollable,
+
+    /// If scollable is true, the children order will be inverted,
+    /// including the header.
+    ///
+    /// Defaults to false.
+    bool? reverse,
     String? labelText,
     String? labelTextWhenChildrenHidden,
     String? helperText,

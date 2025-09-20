@@ -61,13 +61,6 @@ mixin WoFormNodeMixin {
 
   /// Used when OFormUiSettings.scrollable is false
   int? flex(BuildContext context) => null;
-
-  /// If uiSettings.flex is set to flexDeferToChild, the flex will be based on
-  /// the child's flex.
-  ///
-  /// Works with [ConditionnalNode], [SelectorNode], [ValueBuilderNode] and
-  /// [ValuesBuilderNode].
-  static const int flexDeferToChild = -1;
 }
 
 @freezed
@@ -713,11 +706,11 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
               (WoFormValuesCubit c) => c.state.meet(node.condition),
             )
           ? 0
-          : node.uiSettings.flex == WoFormNodeMixin.flexDeferToChild
+          : node.uiSettings.flex == WoFormNode.flexDeferToChild
           ? node.child.flex(context)
           : node.uiSettings.flex,
     final SelectorNode node =>
-      node.uiSettings.flex == WoFormNodeMixin.flexDeferToChild
+      node.uiSettings.flex == WoFormNode.flexDeferToChild
           ? node
                 .builder!(
                   context.select(
@@ -727,7 +720,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
                 .flex(context)
           : node.uiSettings.flex,
     final ValueBuilderNode node =>
-      node.uiSettings.flex == WoFormNodeMixin.flexDeferToChild
+      node.uiSettings.flex == WoFormNode.flexDeferToChild
           ? node
                 .builder!(
                   context.select(
@@ -737,7 +730,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
                 .flex(context)
           : node.uiSettings.flex,
     final ValuesBuilderNode node =>
-      node.uiSettings.flex == WoFormNodeMixin.flexDeferToChild
+      node.uiSettings.flex == WoFormNode.flexDeferToChild
           ? node
                 .builder!(
                   context.select(
@@ -753,6 +746,13 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
     WidgetNode(uiSettings: final uiSettings) => uiSettings.flex,
     _ => null,
   };
+
+  /// If uiSettings.flex is set to flexDeferToChild, the flex will be based on
+  /// the child's flex.
+  ///
+  /// Works with [ConditionnalNode], [SelectorNode], [ValueBuilderNode] and
+  /// [ValuesBuilderNode].
+  static const int flexDeferToChild = -1;
 }
 
 @freezed
