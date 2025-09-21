@@ -528,6 +528,12 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
 
   @override
   WoFormInput withId({required String id}) => copyWith(id: id);
+
+  @override
+  int? flex(BuildContext context) => switch (this) {
+    final SelectStringInput input => input.uiSettings.flex,
+    _ => null,
+  };
 }
 
 // Note : when adding a new parameter, make sure to update
