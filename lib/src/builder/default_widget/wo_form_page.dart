@@ -228,15 +228,17 @@ class WoFormMultiStepPageState extends State<WoFormMultiStepPage> {
                     woFormTheme?.maxWidth ?? WoFormThemeData.DEFAULT_MAX_WIDTH,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Flexible(
-                    flex:
-                        root.uiSettings.scrollable ||
-                            (node.flex(context) ?? 0) == 0
-                        ? 0
-                        : 1,
-                    child: root.uiSettings.scrollable
-                        ? SingleChildScrollView(child: body)
-                        : body,
+                  Builder(
+                    builder: (context) => Flexible(
+                      flex:
+                          root.uiSettings.scrollable ||
+                              (node.flex(context) ?? 0) == 0
+                          ? 0
+                          : 1,
+                      child: root.uiSettings.scrollable
+                          ? SingleChildScrollView(child: body)
+                          : body,
+                    ),
                   ),
                   SubmitButtonBuilder(
                     submitButtonBuilder: (data) {
