@@ -137,7 +137,6 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
     required String path,
     @notSerializable WoFormNodeMixin Function(Object? value)? builder,
     Object? initialValue,
-    @Default(InputUiSettings()) InputUiSettings uiSettings,
   }) = ValueBuilderNode;
 
   @Assert('builder != null', 'ValuesBuilderNode.builder cannot be null')
@@ -147,7 +146,6 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
     @notSerializable
     WoFormNodeMixin Function(Map<String, Object?> values)? builder,
     Map<String, Object?>? initialValues,
-    @Default(InputUiSettings()) InputUiSettings uiSettings,
   }) = ValuesBuilderNode;
 
   @Assert('listener != null', 'ValueListenerNode.listener cannot be null')
@@ -710,38 +708,31 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
           ? node.child.flex(context)
           : node.uiSettings.flex,
     final SelectorNode node =>
-      node.uiSettings.flex == WoFormNode.flexDeferToChild
-          ? node
-                .builder!(
-                  context.select(
-                    (WoFormValuesCubit c) => node.selector!(c.state),
-                  ),
-                )
-                .flex(context)
-          : node.uiSettings.flex,
+      node
+          .builder!(
+            context.select(
+              (WoFormValuesCubit c) => node.selector!(c.state),
+            ),
+          )
+          .flex(context),
     final ValueBuilderNode node =>
-      node.uiSettings.flex == WoFormNode.flexDeferToChild
-          ? node
-                .builder!(
-                  context.select(
-                    (WoFormValuesCubit c) => c.state.getValue(node.path),
-                  ),
-                )
-                .flex(context)
-          : node.uiSettings.flex,
+      node
+          .builder!(
+            context.select(
+              (WoFormValuesCubit c) => c.state.getValue(node.path),
+            ),
+          )
+          .flex(context),
     final ValuesBuilderNode node =>
-      node.uiSettings.flex == WoFormNode.flexDeferToChild
-          ? node
-                .builder!(
-                  context.select(
-                    (WoFormValuesCubit c) => {
-                      for (final path in node.paths)
-                        path: c.state.getValue(path),
-                    },
-                  ),
-                )
-                .flex(context)
-          : node.uiSettings.flex,
+      node
+          .builder!(
+            context.select(
+              (WoFormValuesCubit c) => {
+                for (final path in node.paths) path: c.state.getValue(path),
+              },
+            ),
+          )
+          .flex(context),
     InputsNode(uiSettings: final uiSettings) => uiSettings.flex,
     WidgetNode(uiSettings: final uiSettings) => uiSettings.flex,
     _ => null,
