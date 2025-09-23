@@ -107,7 +107,11 @@ class HydratedWoFormLockCubit extends WoFormLockCubit
   Json? toJson(Set<String> state) => {'locks': state.toList()};
 }
 
-typedef _TempSubmitData = ({Future<void> Function() onSubmitting, String path});
+typedef _TempSubmitData = ({
+  /// If [true] is returned, the whole form will be submitted right after.
+  Future<bool?> Function() onSubmitting,
+  String path,
+});
 
 class WoFormValuesCubit extends Cubit<WoFormValues> {
   WoFormValuesCubit._(
@@ -120,15 +124,11 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     required this.showErrors,
     WoFormValues initialValues = const {},
   }) : _tempSubmitDatas = [],
-       super(_root.getInitialValues()..addAll(initialValues)) {
+       super(_calculateInitialState(_root, initialValues, showErrors)) {
     _initialValues = Map.from(state);
     if (showErrors == ShowErrors.always) {
-      SchedulerBinding.instance.addPostFrameCallback((_) {
-        // Mark all paths as visited
-        _markPathsAsVisited(paths: state.keys);
-        // Then update the errors of all visited paths
-        _updateErrors();
-      });
+      // Update the errors of all visited paths
+      SchedulerBinding.instance.addPostFrameCallback((_) => _updateErrors());
     }
   }
 
@@ -152,6 +152,31 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   /// temporary submissions.
   final Set<String> _submittedPaths = {};
 
+  // A helper method to compute the initial state cleanly.
+  static WoFormValues _calculateInitialState(
+    RootNode root,
+    WoFormValues initialValues,
+    ShowErrors showErrors,
+  ) {
+    // Start with the root's initial values
+    final values = root.getInitialValues()..addAll(initialValues);
+
+    if (showErrors == ShowErrors.always) {
+      // Mark all paths as visited, this way the errors will always appear
+      final visitedPaths = Set<String>.from(
+        values[_VISITED_PATHS_KEY] as Iterable<String>? ?? {},
+      )..addAll(values.keys);
+      // Cannot store a set in values, or the hydratation won't work
+      values[_VISITED_PATHS_KEY] = visitedPaths.toList();
+    }
+
+    if (root.uiSettings.submitMode.generatingSteps) {
+      values[GENERATED_STEPS_KEY] = [root.children.first.id];
+    }
+
+    return values;
+  }
+
   /// Return true if the current state is equal to the initial state.
   bool get isPure => mapEquals(
     _initialValues,
@@ -161,15 +186,60 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   // --- MULTI STEP ---
 
+  /// Only used with MultiStepSubmitMode
   // ignore: constant_identifier_names
-  static const MULTISTEP_INDEX_KEY = '/__wo_reserved_page_index';
+  static const MULTISTEP_INDEX_KEY = '/__wo_reserved_step_index';
 
-  void _setMultistepIndex(int multistepIndex) {
+  /// Only used if MultiStepSubmitMode.nextStep is set
+  // ignore: constant_identifier_names
+  static const GENERATED_STEPS_KEY = '/__wo_reserved_generated_steps';
+
+  // If false i returned, the new index is rejected
+  bool _onMultistepControllerUpdate(int multistepIndex) {
     final newMap = WoFormValues.from(state);
+
+    if (_root.uiSettings.submitMode is MultiStepSubmitMode) {
+      final getNextStep =
+          (_root.uiSettings.submitMode as MultiStepSubmitMode).getNextStep;
+      final currentIndex = readMultistepIndex() ?? 0;
+      if (getNextStep != null && multistepIndex > currentIndex) {
+        final generatedSteps = newMap[GENERATED_STEPS_KEY] as List<String>;
+        final nextStepId = getNextStep(generatedSteps[currentIndex], newMap);
+
+        if (multistepIndex == generatedSteps.length) {
+          // There is no further step, can't increase the index
+          if (nextStepId == null) {
+            // Reject the MultistepController's update,
+            // will probably submit the entire form as soon as possible
+            return false;
+          }
+
+          newMap[GENERATED_STEPS_KEY] = [...generatedSteps, nextStepId];
+        } else if (multistepIndex < generatedSteps.length) {
+          final naturalNextStepId = generatedSteps[multistepIndex];
+          if (nextStepId != naturalNextStepId) {
+            // There is no further step, can't increase the index
+            if (nextStepId == null) {
+              // Reject the MultistepController's update,
+              // will probably submit the entire form as soon as possible
+              return false;
+            }
+
+            newMap[GENERATED_STEPS_KEY] = [
+              ...generatedSteps.take(multistepIndex),
+              nextStepId,
+            ];
+          }
+        }
+      }
+    }
+
     newMap[MULTISTEP_INDEX_KEY] = multistepIndex;
     emit(newMap);
+    return true;
   }
 
+  // TODO : WoFormValues.multistepIndex
   int? readMultistepIndex() => state[MULTISTEP_INDEX_KEY] as int?;
 
   // --- CURRENT STATE ---
@@ -192,7 +262,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   /// The list of validation errors in the current context.
   ///
-  /// For exapmle, in a MultiStepSubmitMode, the errors are page-specific.
+  /// For exapmle, in a MultiStepSubmitMode, the errors are step-specific.
   Iterable<WoFormInputError> get currentErrors => currentNode.getErrors(
     values: state,
     parentPath: currentPath.parentPath,
@@ -201,7 +271,8 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   // --- TEMPORARY SUBMIT DATA ---
 
   void addTemporarySubmitData({
-    required Future<void> Function() onSubmitting,
+    /// If [true] is returned, the whole form will be submitted right after.
+    required Future<bool?> Function() onSubmitting,
     required String path,
   }) => _tempSubmitDatas.add((
     onSubmitting: onSubmitting,
@@ -398,7 +469,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     emit(newMap);
   }
 
-  Future<void> submit(BuildContext context) async {
+  Future<void> submit(BuildContext context, {bool skipErrors = false}) async {
     FocusScope.of(context).unfocus();
 
     final node = currentNode;
@@ -415,22 +486,25 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
           .whereNot((path) => path.isEmpty),
     );
 
-    final errors = node.getErrors(
-      values: state,
-      parentPath: currentPath.parentPath,
-    );
-    if (errors.isNotEmpty) {
-      final nodeToFocus = _focusNodes[errors.first.path];
-      if (nodeToFocus != null) {
-        nodeToFocus
-          ..requestFocus()
-          ..nextFocus();
-      }
-
-      return _statusCubit.setInProgress(
-        errors: errors.toList(),
-        firstInvalidInputPath: errors.first.path,
+    if (!skipErrors) {
+      final errors = node.getErrors(
+        values: state,
+        parentPath: currentPath.parentPath,
       );
+
+      if (errors.isNotEmpty) {
+        final nodeToFocus = _focusNodes[errors.first.path];
+        if (nodeToFocus != null) {
+          nodeToFocus
+            ..requestFocus()
+            ..nextFocus();
+        }
+
+        return _statusCubit.setInProgress(
+          errors: errors.toList(),
+          firstInvalidInputPath: errors.first.path,
+        );
+      }
     }
 
     _statusCubit._setSubmitting();
@@ -446,10 +520,14 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
     try {
       final tempSubmitData = _tempSubmitDatas.lastOrNull;
+      var submitWholeForm = tempSubmitData == null;
+
       if (tempSubmitData != null) {
-        await tempSubmitData.onSubmitting();
+        submitWholeForm = await tempSubmitData.onSubmitting() ?? false;
         _statusCubit.setInProgress();
-      } else {
+      }
+
+      if (submitWholeForm && context.mounted) {
         if (await _canSubmit(context)) {
           await onSubmitting?.call(_root, state);
           _statusCubit._setSubmitSuccess();
@@ -552,7 +630,6 @@ typedef OnSubmitErrorDef =
 
 /// Use this if you don't want to trigger error validations
 /// or if you want to keep the previous status.
-/// TODO : documentation
 enum UpdateStatus {
   /// When updating the value of this path, update the status of the form
   /// only if the user already visited the path.
@@ -771,66 +848,68 @@ class _WoFormNodeFocusManagerState extends State<WoFormNodeFocusManager> {
   }
 }
 
-class MultistepController extends PageController {
-  MultistepController(
-    this.valuesCubit, {
-    super.initialPage = 0,
-    super.keepPage = true,
-    super.viewportFraction = 1.0,
-    super.onAttach,
-    super.onDetach,
-  }) {
-    valuesCubit._setMultistepIndex(initialPage);
-  }
+// TODO : private or rework
+enum AbortReason { error, endOfForm }
 
+class MultistepController {
+  MultistepController(this.valuesCubit) : controller = PageController();
+
+  // TODO : library private ?
+  final PageController controller;
   final WoFormValuesCubit valuesCubit;
 
-  static MultistepController of(BuildContext context) => context
-      .dependOnInheritedWidgetOfExactType<MultistepControllerProvider>()!
-      .controller;
+  static MultistepController? of(BuildContext context, {bool listen = true}) =>
+      listen
+      ? context
+            .dependOnInheritedWidgetOfExactType<MultistepControllerProvider>()
+            ?.controller
+      : context
+            .getInheritedWidgetOfExactType<MultistepControllerProvider>()
+            ?.controller;
 
-  @override
-  Future<void> animateToPage(
-    int page, {
-    required Duration duration,
-    required Curve curve,
-  }) {
-    valuesCubit._setMultistepIndex(page);
-    return super.animateToPage(page, duration: duration, curve: curve);
+  AbortReason? nextStep() {
+    final page = controller.page;
+
+    // Can't go next step if already transiting
+    if (page == null || page.toInt() != page) return AbortReason.error;
+
+    final nextPage = (page.toInt()) + 1;
+    final canAnimate = valuesCubit._onMultistepControllerUpdate(nextPage);
+
+    if (canAnimate) {
+      unawaited(
+        controller.animateToPage(
+          nextPage,
+          duration: WoFormTheme.STEP_TRANSITION_DURATION,
+          curve: Curves.easeIn,
+        ),
+      );
+    }
+
+    return canAnimate ? null : AbortReason.endOfForm;
   }
 
-  @override
-  @protected
-  Future<void> animateTo(
-    double offset, {
-    required Duration duration,
-    required Curve curve,
-  }) async => super.animateTo(offset, duration: duration, curve: curve);
+  AbortReason? previousStep() {
+    final page = controller.page;
 
-  @override
-  void jumpToPage(int page) {
-    valuesCubit._setMultistepIndex(page);
-    return super.jumpToPage(page);
+    // Can't go next step if already transiting
+    if (page == null || page.toInt() != page) return AbortReason.error;
+
+    final nextPage = (page.toInt()) - 1;
+    final canAnimate = valuesCubit._onMultistepControllerUpdate(nextPage);
+
+    if (canAnimate) {
+      unawaited(
+        controller.animateToPage(
+          nextPage,
+          duration: WoFormTheme.STEP_TRANSITION_DURATION,
+          curve: Curves.easeIn,
+        ),
+      );
+    }
+
+    return canAnimate ? null : AbortReason.endOfForm;
   }
 
-  @override
-  @protected
-  void jumpTo(double value) => super.jumpTo(value);
-
-  @override
-  Future<void> nextPage({required Duration duration, required Curve curve}) {
-    valuesCubit._setMultistepIndex((page?.toInt() ?? 0) + 1);
-    return super.nextPage(duration: duration, curve: curve);
-  }
-
-  @override
-  Future<void> previousPage({
-    required Duration duration,
-    required Curve curve,
-  }) {
-    valuesCubit._setMultistepIndex((page?.toInt() ?? 0) - 1);
-    return super.previousPage(duration: duration, curve: curve);
-  }
-
-  void addMultistepIndexListener() {}
+  void dispose() => controller.dispose();
 }

@@ -6,10 +6,10 @@ class FormHeader extends StatelessWidget {
   const FormHeader(this.data, {super.key});
 
   FormHeader.fromInputHeaderData(WoFormInputHeaderData data, {super.key})
-      : data = WoFormHeaderData(
-          labelText: data.labelText,
-          helperText: data.helperText,
-        );
+    : data = WoFormHeaderData(
+        labelText: data.labelText,
+        helperText: data.helperText,
+      );
 
   final WoFormHeaderData data;
 
@@ -32,10 +32,9 @@ class FormHeader extends StatelessWidget {
           const SizedBox(height: 32),
           Text(
             labelText,
-            style: Theme.of(context)
-                .textTheme
-                .titleLarge
-                ?.copyWith(fontWeight: FontWeight.bold),
+            style: Theme.of(
+              context,
+            ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
           ),
           Divider(color: Theme.of(context).colorScheme.primary),
           if (helperText.isNotEmpty) ...[

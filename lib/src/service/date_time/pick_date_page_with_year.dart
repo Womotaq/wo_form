@@ -255,7 +255,7 @@ class _FullMonthCubit extends Cubit<int> {
     // Let the widgets update their sizes before srolling to their hitbox
     await monthScrollController.animateToPage(
       state,
-      duration: Durations.medium1,
+      duration: WoFormTheme.ANIMATION_DURATION,
       curve: Curves.easeInOut,
     );
 
@@ -274,11 +274,7 @@ class _FullMonthCubit extends Cubit<int> {
     _locked = true;
     emit(fullMonth);
 
-    dayPageController.jumpToPage(
-      fullMonth,
-      // duration: Durations.medium1,
-      // curve: Curves.easeInOut,
-    );
+    dayPageController.jumpToPage(fullMonth);
 
     // Let the _MonthWidgets apply year delta before srolling to their index
     monthScrollController.jumpToPage(
@@ -288,7 +284,7 @@ class _FullMonthCubit extends Cubit<int> {
     // Let the widgets update their sizes before srolling to their hitbox
     await yearScrollController.animateToPage(
       state.year,
-      duration: Durations.medium1,
+      duration: WoFormTheme.ANIMATION_DURATION,
       curve: Curves.easeInOut,
     );
 

@@ -1051,7 +1051,8 @@ abstract class RootNode with _$RootNode, WoFormNodeMixin {
   };
 
   @override
-  Widget toWidget({String parentPath = '', Key? key}) => WoFormPage(key: key);
+  Widget toWidget({String parentPath = '', Key? key}) =>
+      WoFormPageBuilder(key: key);
 
   @override
   RootNode withId({required String id}) => copyWith(id: id);

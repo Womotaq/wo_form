@@ -17,5 +17,5 @@ export 'search_field.dart';
 export 'select_field.dart';
 export 'string_field.dart';
 export 'submit_button.dart';
-export 'wo_form_page.dart';
+export 'wo_form_scaffold.dart';
 export 'wo_reorderable_by_grab_list_view.dart';

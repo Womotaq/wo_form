@@ -2308,7 +2308,7 @@ as SubmitButtonPosition,
 @JsonSerializable()
 
 class MultiStepSubmitMode extends WoFormSubmitMode {
-  const MultiStepSubmitMode({this.submitText, @notSerializable this.submitIcon, this.nextText, this.showProgressIndicator = true, @notSerializable this.progressIndicatorBuilder, @notSerializable this.onTemporarySubmitting, @EdgeInsetsNullableConverter() this.fieldsPadding, final  String? $type}): $type = $type ?? 'multiStep',super._();
+  const MultiStepSubmitMode({this.submitText, @notSerializable this.submitIcon, this.nextText, this.showProgressIndicator = true, @notSerializable this.progressIndicatorBuilder, @notSerializable this.onTemporarySubmitting, @notSerializable this.getNextStep, @EdgeInsetsNullableConverter() this.fieldsPadding, final  String? $type}): $type = $type ?? 'multiStep',super._();
   factory MultiStepSubmitMode.fromJson(Map<String, dynamic> json) => _$MultiStepSubmitModeFromJson(json);
 
 @override final  String? submitText;
@@ -2318,9 +2318,13 @@ class MultiStepSubmitMode extends WoFormSubmitMode {
  final  String? nextText;
 @JsonKey() final  bool showProgressIndicator;
 @notSerializable final  MultiStepProgressIndicatorBuilderDef? progressIndicatorBuilder;
-/// Called when a page (not the last page) is submited.
-/// [node] is the node of the submitted page.
+/// Called when a step (not the last step) is submited (optionnal).
+/// [step] is the node of the submitted step.
 @notSerializable final  OnTemporarySubmittingDef? onTemporarySubmitting;
+/// Called when a step (not the last step) was successfully submitted.
+/// If the result is a string, the step with this id will be the next step.
+/// [stepId] is the id of the submitted step.
+@notSerializable final  NextStepDef? getNextStep;
 /// Applied around the fields, not the progress indicator,
 /// nor the submit button.
 ///
@@ -2344,16 +2348,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MultiStepSubmitMode&&(identical(other.submitText, submitText) || other.submitText == submitText)&&(identical(other.submitIcon, submitIcon) || other.submitIcon == submitIcon)&&(identical(other.nextText, nextText) || other.nextText == nextText)&&(identical(other.showProgressIndicator, showProgressIndicator) || other.showProgressIndicator == showProgressIndicator)&&(identical(other.progressIndicatorBuilder, progressIndicatorBuilder) || other.progressIndicatorBuilder == progressIndicatorBuilder)&&(identical(other.onTemporarySubmitting, onTemporarySubmitting) || other.onTemporarySubmitting == onTemporarySubmitting)&&(identical(other.fieldsPadding, fieldsPadding) || other.fieldsPadding == fieldsPadding));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MultiStepSubmitMode&&(identical(other.submitText, submitText) || other.submitText == submitText)&&(identical(other.submitIcon, submitIcon) || other.submitIcon == submitIcon)&&(identical(other.nextText, nextText) || other.nextText == nextText)&&(identical(other.showProgressIndicator, showProgressIndicator) || other.showProgressIndicator == showProgressIndicator)&&(identical(other.progressIndicatorBuilder, progressIndicatorBuilder) || other.progressIndicatorBuilder == progressIndicatorBuilder)&&(identical(other.onTemporarySubmitting, onTemporarySubmitting) || other.onTemporarySubmitting == onTemporarySubmitting)&&(identical(other.getNextStep, getNextStep) || other.getNextStep == getNextStep)&&(identical(other.fieldsPadding, fieldsPadding) || other.fieldsPadding == fieldsPadding));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,submitText,submitIcon,nextText,showProgressIndicator,progressIndicatorBuilder,onTemporarySubmitting,fieldsPadding);
+int get hashCode => Object.hash(runtimeType,submitText,submitIcon,nextText,showProgressIndicator,progressIndicatorBuilder,onTemporarySubmitting,getNextStep,fieldsPadding);
 
 @override
 String toString() {
-  return 'WoFormSubmitMode.multiStep(submitText: $submitText, submitIcon: $submitIcon, nextText: $nextText, showProgressIndicator: $showProgressIndicator, progressIndicatorBuilder: $progressIndicatorBuilder, onTemporarySubmitting: $onTemporarySubmitting, fieldsPadding: $fieldsPadding)';
+  return 'WoFormSubmitMode.multiStep(submitText: $submitText, submitIcon: $submitIcon, nextText: $nextText, showProgressIndicator: $showProgressIndicator, progressIndicatorBuilder: $progressIndicatorBuilder, onTemporarySubmitting: $onTemporarySubmitting, getNextStep: $getNextStep, fieldsPadding: $fieldsPadding)';
 }
 
 
@@ -2364,7 +2368,7 @@ abstract mixin class $MultiStepSubmitModeCopyWith<$Res> implements $WoFormSubmit
   factory $MultiStepSubmitModeCopyWith(MultiStepSubmitMode value, $Res Function(MultiStepSubmitMode) _then) = _$MultiStepSubmitModeCopyWithImpl;
 @override @useResult
 $Res call({
- String? submitText,@notSerializable IconData? submitIcon, String? nextText, bool showProgressIndicator,@notSerializable MultiStepProgressIndicatorBuilderDef? progressIndicatorBuilder,@notSerializable OnTemporarySubmittingDef? onTemporarySubmitting,@EdgeInsetsNullableConverter() EdgeInsets? fieldsPadding
+ String? submitText,@notSerializable IconData? submitIcon, String? nextText, bool showProgressIndicator,@notSerializable MultiStepProgressIndicatorBuilderDef? progressIndicatorBuilder,@notSerializable OnTemporarySubmittingDef? onTemporarySubmitting,@notSerializable NextStepDef? getNextStep,@EdgeInsetsNullableConverter() EdgeInsets? fieldsPadding
 });
 
 
@@ -2381,7 +2385,7 @@ class _$MultiStepSubmitModeCopyWithImpl<$Res>
 
 /// Create a copy of WoFormSubmitMode
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? submitText = freezed,Object? submitIcon = freezed,Object? nextText = freezed,Object? showProgressIndicator = null,Object? progressIndicatorBuilder = freezed,Object? onTemporarySubmitting = freezed,Object? fieldsPadding = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? submitText = freezed,Object? submitIcon = freezed,Object? nextText = freezed,Object? showProgressIndicator = null,Object? progressIndicatorBuilder = freezed,Object? onTemporarySubmitting = freezed,Object? getNextStep = freezed,Object? fieldsPadding = freezed,}) {
   return _then(MultiStepSubmitMode(
 submitText: freezed == submitText ? _self.submitText : submitText // ignore: cast_nullable_to_non_nullable
 as String?,submitIcon: freezed == submitIcon ? _self.submitIcon : submitIcon // ignore: cast_nullable_to_non_nullable
@@ -2389,7 +2393,8 @@ as IconData?,nextText: freezed == nextText ? _self.nextText : nextText // ignore
 as String?,showProgressIndicator: null == showProgressIndicator ? _self.showProgressIndicator : showProgressIndicator // ignore: cast_nullable_to_non_nullable
 as bool,progressIndicatorBuilder: freezed == progressIndicatorBuilder ? _self.progressIndicatorBuilder : progressIndicatorBuilder // ignore: cast_nullable_to_non_nullable
 as MultiStepProgressIndicatorBuilderDef?,onTemporarySubmitting: freezed == onTemporarySubmitting ? _self.onTemporarySubmitting : onTemporarySubmitting // ignore: cast_nullable_to_non_nullable
-as OnTemporarySubmittingDef?,fieldsPadding: freezed == fieldsPadding ? _self.fieldsPadding : fieldsPadding // ignore: cast_nullable_to_non_nullable
+as OnTemporarySubmittingDef?,getNextStep: freezed == getNextStep ? _self.getNextStep : getNextStep // ignore: cast_nullable_to_non_nullable
+as NextStepDef?,fieldsPadding: freezed == fieldsPadding ? _self.fieldsPadding : fieldsPadding // ignore: cast_nullable_to_non_nullable
 as EdgeInsets?,
   ));
 }

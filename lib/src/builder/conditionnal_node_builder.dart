@@ -24,7 +24,7 @@ class ConditionnalNodeBuilder extends StatelessWidget {
     }
 
     return AnimatedSize(
-      duration: Durations.medium1,
+      duration: WoFormTheme.ANIMATION_DURATION,
       alignment: Alignment.topCenter,
       child: BlocSelector<WoFormValuesCubit, WoFormValues, bool>(
         selector: (values) => values.meet(node.condition),

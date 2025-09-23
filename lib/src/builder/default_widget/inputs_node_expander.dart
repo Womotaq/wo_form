@@ -76,7 +76,10 @@ class _InputsNodePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<WoFormValuesCubit>().addTemporarySubmitData(
-      onSubmitting: () async => Navigator.pop(context),
+      onSubmitting: () async {
+        Navigator.pop(context);
+        return null;
+      },
       path: data.path,
     );
 

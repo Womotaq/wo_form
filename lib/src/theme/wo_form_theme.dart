@@ -11,6 +11,11 @@ class WoFormTheme extends InheritedTheme {
   /// The configuration of this theme.
   final WoFormThemeData data;
 
+  // ignore: constant_identifier_names
+  static const Duration STEP_TRANSITION_DURATION = Durations.short4;
+  // ignore: constant_identifier_names
+  static const Duration ANIMATION_DURATION = Durations.medium1;
+
   /// The closest instance of this class that encloses the given context.
   ///
   /// Typical usage is as follows:
@@ -20,13 +25,12 @@ class WoFormTheme extends InheritedTheme {
   /// ```
   static WoFormThemeData? of(BuildContext context, {bool listen = true}) =>
       listen
-          ? context.dependOnInheritedWidgetOfExactType<WoFormTheme>()?.data
-          : context.getInheritedWidgetOfExactType<WoFormTheme>()?.data;
+      ? context.dependOnInheritedWidgetOfExactType<WoFormTheme>()?.data
+      : context.getInheritedWidgetOfExactType<WoFormTheme>()?.data;
 
   @override
-  Widget wrap(BuildContext context, Widget child) {
-    return WoFormTheme(data: data, child: child);
-  }
+  Widget wrap(BuildContext context, Widget child) =>
+      WoFormTheme(data: data, child: child);
 
   @override
   bool updateShouldNotify(WoFormTheme oldWidget) => data != oldWidget.data;

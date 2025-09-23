@@ -755,6 +755,8 @@ sealed class WoFormSubmitMode with _$WoFormSubmitMode {
     @Default(SubmitButtonPosition.body) SubmitButtonPosition buttonPosition,
   }) = StandardSubmitMode;
 
+  /// The form's direct children will be considered as steps, shown one by one
+  /// in pages.
   const factory WoFormSubmitMode.multiStep({
     String? submitText,
     @notSerializable IconData? submitIcon,
@@ -767,9 +769,14 @@ sealed class WoFormSubmitMode with _$WoFormSubmitMode {
     @notSerializable
     MultiStepProgressIndicatorBuilderDef? progressIndicatorBuilder,
 
-    /// Called when a page (not the last page) is submited.
-    /// [node] is the node of the submitted page.
+    /// Called when a step (not the last step) is submited (optionnal).
+    /// [step] is the node of the submitted step.
     @notSerializable OnTemporarySubmittingDef? onTemporarySubmitting,
+
+    /// Called when a step (not the last step) was successfully submitted.
+    /// If the result is a string, the step with this id will be the next step.
+    /// [stepId] is the id of the submitted step.
+    @notSerializable NextStepDef? getNextStep,
 
     /// Applied around the fields, not the progress indicator,
     /// nor the submit button.
@@ -789,7 +796,12 @@ sealed class WoFormSubmitMode with _$WoFormSubmitMode {
     StandardSubmitMode(buttonPosition: final p) => p,
     MultiStepSubmitMode() => SubmitButtonPosition.bottomBar,
   };
+
+  bool get generatingSteps => switch (this) {
+    StandardSubmitMode() => false,
+    MultiStepSubmitMode(getNextStep: final getNextStep) => getNextStep != null,
+  };
 }
 
-typedef OnTemporarySubmittingDef =
-    Future<void> Function(BuildContext context, WoFormNodeMixin node);
+typedef OnTemporarySubmittingDef = Future<void> Function(BuildContext context);
+typedef NextStepDef = String? Function(String stepId, WoFormValues values);
