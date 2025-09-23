@@ -51,8 +51,6 @@ class InputHeader extends StatelessWidget {
               : theme.listTileTheme.minVerticalPadding ?? 4,
         ),
         child: Row(
-          crossAxisAlignment:
-              CrossAxisAlignment.start, // Align subtitle/trailing at top
           children: [
             Expanded(
               child: ConstrainedBox(

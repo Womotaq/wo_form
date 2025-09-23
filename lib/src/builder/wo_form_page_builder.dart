@@ -217,16 +217,17 @@ class _WoFormMultiStepPageState extends State<_WoFormMultiStepPage> {
                         const EdgeInsets.only(top: 16, bottom: 32),
                     child: step.toWidget(parentPath: ''),
                   );
-                  return ConstrainedColumn(
-                    maxWidth:
-                        woFormTheme?.maxWidth ??
-                        WoFormThemeData.DEFAULT_MAX_WIDTH,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Builder(
-                        builder: (context) => Flexible(
+
+                  return Builder(
+                    builder: (context) => ConstrainedColumn(
+                      maxWidth:
+                          woFormTheme?.maxWidth ??
+                          WoFormThemeData.DEFAULT_MAX_WIDTH,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Expanded(
                           flex:
-                              root.uiSettings.scrollable ||
+                              !root.uiSettings.scrollable &&
                                   (step.flex(context) ?? 0) == 0
                               ? 0
                               : 1,
@@ -234,31 +235,32 @@ class _WoFormMultiStepPageState extends State<_WoFormMultiStepPage> {
                               ? SingleChildScrollView(child: body)
                               : body,
                         ),
-                      ),
-                      SubmitButtonBuilder(
-                        submitButtonBuilder: (data) {
-                          final submitButtonBuilder =
-                              root.uiSettings.submitButtonBuilder ??
-                              woFormTheme?.submitButtonBuilder ??
-                              SubmitButton.new;
-                          final isLastPage = index == root.children.length - 1;
+                        SubmitButtonBuilder(
+                          submitButtonBuilder: (data) {
+                            final submitButtonBuilder =
+                                root.uiSettings.submitButtonBuilder ??
+                                woFormTheme?.submitButtonBuilder ??
+                                SubmitButton.new;
+                            final isLastPage =
+                                index == root.children.length - 1;
 
-                          return submitButtonBuilder(
-                            isLastPage
-                                // This line ensures a smooth transition
-                                ? data.copyWith(path: '')
-                                : data.copyWith(
-                                    text:
-                                        widget.submitMode.nextText ??
-                                        context.read<WoFormL10n?>()?.next(),
-                                    // ignores submitIcon
-                                    icon: null,
-                                    path: '/${step.id}',
-                                  ),
-                          );
-                        },
-                      ),
-                    ],
+                            return submitButtonBuilder(
+                              isLastPage
+                                  // This line ensures a smooth transition
+                                  ? data.copyWith(path: '')
+                                  : data.copyWith(
+                                      text:
+                                          widget.submitMode.nextText ??
+                                          context.read<WoFormL10n?>()?.next(),
+                                      // ignores submitIcon
+                                      icon: null,
+                                      path: '/${step.id}',
+                                    ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
                   );
                 },
               );

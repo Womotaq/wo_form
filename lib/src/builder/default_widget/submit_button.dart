@@ -24,7 +24,7 @@ class SubmitButton extends StatelessWidget {
 
     final backgroundColor = submitting || data.onPressed != null
         ? style?.backgroundColor?.resolve({}) ??
-              Theme.of(context).colorScheme.onPrimary
+              Theme.of(context).colorScheme.primary
         : style?.backgroundColor?.resolve({WidgetState.disabled}) ??
               Theme.of(context).disabledColor;
     final foregroundColor = submitting || data.onPressed != null

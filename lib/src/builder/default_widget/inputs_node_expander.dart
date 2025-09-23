@@ -106,7 +106,6 @@ class _InputsNodePage extends StatelessWidget {
                   path: data.path,
                   input: data.input,
                   value: null,
-                  errorText: null,
                   uiSettings: data.uiSettings,
                   onValueChanged:
                       (
