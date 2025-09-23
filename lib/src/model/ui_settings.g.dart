@@ -346,6 +346,7 @@ _StringInputUiSettings _$StringInputUiSettingsFromJson(
   ),
   maxLines: (json['maxLines'] as num?)?.toInt(),
   invalidRegexMessage: json['invalidRegexMessage'] as String?,
+  collapsed: json['collapsed'] as bool?,
 );
 
 Map<String, dynamic> _$StringInputUiSettingsToJson(
@@ -367,6 +368,7 @@ Map<String, dynamic> _$StringInputUiSettingsToJson(
       _$TextCapitalizationEnumMap[instance.textCapitalization],
   'maxLines': instance.maxLines,
   'invalidRegexMessage': instance.invalidRegexMessage,
+  'collapsed': instance.collapsed,
 };
 
 const _$StringFieldActionEnumMap = {

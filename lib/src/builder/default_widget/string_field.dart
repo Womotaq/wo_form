@@ -55,22 +55,6 @@ class _StringFieldState extends State<StringField> {
     super.dispose();
   }
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   return GestureDetector(
-  //     // behavior: HitTestBehavior.translucent,
-  //     // onTapUp: (details) {
-  //     //   final renderBox = context.findRenderObject() as RenderBox;
-  //     //   final localPos = renderBox.globalToLocal(details.globalPosition);
-
-  //     //   if (!renderBox.paintBounds.contains(localPos)) {
-  //     //     FocusScope.of(context).unfocus();
-  //     //   }
-  //     // },
-  //     child: build2(context),
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     if (textEditingController != null) {
@@ -84,33 +68,38 @@ class _StringFieldState extends State<StringField> {
       }
     }
 
-    final inputDecoration = InputDecoration(
-      labelText: widget.data.uiSettings.labelText,
-      helperText: widget.data.uiSettings.helper == null
-          ? widget.data.uiSettings.helperText
-          : null,
-      helperMaxLines: widget.data.uiSettings.helperMaxLines,
-      helper: widget.data.uiSettings.helper,
-      hintText: widget.data.uiSettings.hintText,
-      hintStyle: widget.data.uiSettings.style,
-      errorText: widget.data.errorText,
-      error: widget.data.errorWidget,
-      suffixIcon: switch (widget.data.uiSettings.action) {
-        null => null,
-        StringFieldAction.clear => IconButton(
-          onPressed: widget.data.onValueChanged == null
-              ? null
-              : () => widget.data.onValueChanged!(null),
-          icon: const Icon(Icons.clear),
-        ),
-        StringFieldAction.obscure => IconButton(
-          onPressed: () => setState(() => obscureText = !obscureText),
-          icon: obscureText
-              ? const Icon(Icons.visibility_off_outlined)
-              : const Icon(Icons.visibility_outlined),
-        ),
-      },
-    );
+    final collapsed = widget.data.uiSettings.collapsed ?? false;
+
+    final inputDecoration = collapsed
+        ? InputDecoration.collapsed(
+            hintText: widget.data.uiSettings.hintText,
+          )
+        : InputDecoration(
+            labelText: widget.data.uiSettings.labelText,
+            helperText: widget.data.uiSettings.helper == null
+                ? widget.data.uiSettings.helperText
+                : null,
+            helperMaxLines: widget.data.uiSettings.helperMaxLines,
+            helper: widget.data.uiSettings.helper,
+            hintText: widget.data.uiSettings.hintText,
+            errorText: widget.data.errorText,
+            error: widget.data.errorWidget,
+            suffixIcon: switch (widget.data.uiSettings.action) {
+              null => null,
+              StringFieldAction.clear => IconButton(
+                onPressed: widget.data.onValueChanged == null
+                    ? null
+                    : () => widget.data.onValueChanged!(null),
+                icon: const Icon(Icons.clear),
+              ),
+              StringFieldAction.obscure => IconButton(
+                onPressed: () => setState(() => obscureText = !obscureText),
+                icon: obscureText
+                    ? const Icon(Icons.visibility_off_outlined)
+                    : const Icon(Icons.visibility_outlined),
+              ),
+            },
+          );
 
     if (widget.data.input.placeAutocompleteSettings != null) {
       final placeAutocompleteSettings =
@@ -198,7 +187,12 @@ class _StringFieldState extends State<StringField> {
     }
 
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+      contentPadding: collapsed
+          ? EdgeInsets.zero
+          : const EdgeInsets.symmetric(horizontal: 16),
+      visualDensity: collapsed ? VisualDensity.compact : null,
+      minVerticalPadding: collapsed ? 0 : null,
+      minTileHeight: collapsed ? 0 : null,
       leading: widget.data.uiSettings.prefixIcon,
       title: TextFormField(
         enabled: widget.data.onValueChanged != null,

@@ -1709,7 +1709,8 @@ mixin _$StringInputUiSettings {
 
  String? get labelText; String? get hintText; String? get helperText; int? get helperMaxLines;@notSerializable Widget? get helper;@notSerializable Widget? get prefixIcon; StringFieldAction? get action; bool? get submitFormOnFieldSubmitted;@TextInputTypeConverter() TextInputType? get keyboardType; bool? get obscureText; bool? get autocorrect; List<String>? get autofillHints; bool? get autofocus; TextInputAction? get textInputAction;/// Defaults to TextCapitalization.none.
  TextCapitalization? get textCapitalization;/// Defaults to 1. If you want to set it to null, enter 0.
- int? get maxLines; String? get invalidRegexMessage;@notSerializable TextStyle? get style;@notSerializable StringFieldBuilderDef? get widgetBuilder;@notSerializable ErrorBuilderDef? get errorBuilder;
+ int? get maxLines; String? get invalidRegexMessage;// If true, InputDecoration.collapsed will be used.
+ bool? get collapsed;@notSerializable TextStyle? get style;@notSerializable StringFieldBuilderDef? get widgetBuilder;@notSerializable ErrorBuilderDef? get errorBuilder;
 /// Create a copy of StringInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1722,16 +1723,16 @@ $StringInputUiSettingsCopyWith<StringInputUiSettings> get copyWith => _$StringIn
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StringInputUiSettings&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.helperMaxLines, helperMaxLines) || other.helperMaxLines == helperMaxLines)&&(identical(other.helper, helper) || other.helper == helper)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.action, action) || other.action == action)&&(identical(other.submitFormOnFieldSubmitted, submitFormOnFieldSubmitted) || other.submitFormOnFieldSubmitted == submitFormOnFieldSubmitted)&&(identical(other.keyboardType, keyboardType) || other.keyboardType == keyboardType)&&(identical(other.obscureText, obscureText) || other.obscureText == obscureText)&&(identical(other.autocorrect, autocorrect) || other.autocorrect == autocorrect)&&const DeepCollectionEquality().equals(other.autofillHints, autofillHints)&&(identical(other.autofocus, autofocus) || other.autofocus == autofocus)&&(identical(other.textInputAction, textInputAction) || other.textInputAction == textInputAction)&&(identical(other.textCapitalization, textCapitalization) || other.textCapitalization == textCapitalization)&&(identical(other.maxLines, maxLines) || other.maxLines == maxLines)&&(identical(other.invalidRegexMessage, invalidRegexMessage) || other.invalidRegexMessage == invalidRegexMessage)&&(identical(other.style, style) || other.style == style)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.errorBuilder, errorBuilder) || other.errorBuilder == errorBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StringInputUiSettings&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.helperMaxLines, helperMaxLines) || other.helperMaxLines == helperMaxLines)&&(identical(other.helper, helper) || other.helper == helper)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.action, action) || other.action == action)&&(identical(other.submitFormOnFieldSubmitted, submitFormOnFieldSubmitted) || other.submitFormOnFieldSubmitted == submitFormOnFieldSubmitted)&&(identical(other.keyboardType, keyboardType) || other.keyboardType == keyboardType)&&(identical(other.obscureText, obscureText) || other.obscureText == obscureText)&&(identical(other.autocorrect, autocorrect) || other.autocorrect == autocorrect)&&const DeepCollectionEquality().equals(other.autofillHints, autofillHints)&&(identical(other.autofocus, autofocus) || other.autofocus == autofocus)&&(identical(other.textInputAction, textInputAction) || other.textInputAction == textInputAction)&&(identical(other.textCapitalization, textCapitalization) || other.textCapitalization == textCapitalization)&&(identical(other.maxLines, maxLines) || other.maxLines == maxLines)&&(identical(other.invalidRegexMessage, invalidRegexMessage) || other.invalidRegexMessage == invalidRegexMessage)&&(identical(other.collapsed, collapsed) || other.collapsed == collapsed)&&(identical(other.style, style) || other.style == style)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.errorBuilder, errorBuilder) || other.errorBuilder == errorBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,labelText,hintText,helperText,helperMaxLines,helper,prefixIcon,action,submitFormOnFieldSubmitted,keyboardType,obscureText,autocorrect,const DeepCollectionEquality().hash(autofillHints),autofocus,textInputAction,textCapitalization,maxLines,invalidRegexMessage,style,widgetBuilder,errorBuilder]);
+int get hashCode => Object.hashAll([runtimeType,labelText,hintText,helperText,helperMaxLines,helper,prefixIcon,action,submitFormOnFieldSubmitted,keyboardType,obscureText,autocorrect,const DeepCollectionEquality().hash(autofillHints),autofocus,textInputAction,textCapitalization,maxLines,invalidRegexMessage,collapsed,style,widgetBuilder,errorBuilder]);
 
 @override
 String toString() {
-  return 'StringInputUiSettings(labelText: $labelText, hintText: $hintText, helperText: $helperText, helperMaxLines: $helperMaxLines, helper: $helper, prefixIcon: $prefixIcon, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage, style: $style, widgetBuilder: $widgetBuilder, errorBuilder: $errorBuilder)';
+  return 'StringInputUiSettings(labelText: $labelText, hintText: $hintText, helperText: $helperText, helperMaxLines: $helperMaxLines, helper: $helper, prefixIcon: $prefixIcon, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage, collapsed: $collapsed, style: $style, widgetBuilder: $widgetBuilder, errorBuilder: $errorBuilder)';
 }
 
 
@@ -1742,7 +1743,7 @@ abstract mixin class $StringInputUiSettingsCopyWith<$Res>  {
   factory $StringInputUiSettingsCopyWith(StringInputUiSettings value, $Res Function(StringInputUiSettings) _then) = _$StringInputUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String? labelText, String? hintText, String? helperText, int? helperMaxLines,@notSerializable Widget? helper,@notSerializable Widget? prefixIcon, StringFieldAction? action, bool? submitFormOnFieldSubmitted,@TextInputTypeConverter() TextInputType? keyboardType, bool? obscureText, bool? autocorrect, List<String>? autofillHints, bool? autofocus, TextInputAction? textInputAction, TextCapitalization? textCapitalization, int? maxLines, String? invalidRegexMessage,@notSerializable TextStyle? style,@notSerializable StringFieldBuilderDef? widgetBuilder,@notSerializable ErrorBuilderDef? errorBuilder
+ String? labelText, String? hintText, String? helperText, int? helperMaxLines,@notSerializable Widget? helper,@notSerializable Widget? prefixIcon, StringFieldAction? action, bool? submitFormOnFieldSubmitted,@TextInputTypeConverter() TextInputType? keyboardType, bool? obscureText, bool? autocorrect, List<String>? autofillHints, bool? autofocus, TextInputAction? textInputAction, TextCapitalization? textCapitalization, int? maxLines, String? invalidRegexMessage, bool? collapsed,@notSerializable TextStyle? style,@notSerializable StringFieldBuilderDef? widgetBuilder,@notSerializable ErrorBuilderDef? errorBuilder
 });
 
 
@@ -1759,7 +1760,7 @@ class _$StringInputUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of StringInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? labelText = freezed,Object? hintText = freezed,Object? helperText = freezed,Object? helperMaxLines = freezed,Object? helper = freezed,Object? prefixIcon = freezed,Object? action = freezed,Object? submitFormOnFieldSubmitted = freezed,Object? keyboardType = freezed,Object? obscureText = freezed,Object? autocorrect = freezed,Object? autofillHints = freezed,Object? autofocus = freezed,Object? textInputAction = freezed,Object? textCapitalization = freezed,Object? maxLines = freezed,Object? invalidRegexMessage = freezed,Object? style = freezed,Object? widgetBuilder = freezed,Object? errorBuilder = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? labelText = freezed,Object? hintText = freezed,Object? helperText = freezed,Object? helperMaxLines = freezed,Object? helper = freezed,Object? prefixIcon = freezed,Object? action = freezed,Object? submitFormOnFieldSubmitted = freezed,Object? keyboardType = freezed,Object? obscureText = freezed,Object? autocorrect = freezed,Object? autofillHints = freezed,Object? autofocus = freezed,Object? textInputAction = freezed,Object? textCapitalization = freezed,Object? maxLines = freezed,Object? invalidRegexMessage = freezed,Object? collapsed = freezed,Object? style = freezed,Object? widgetBuilder = freezed,Object? errorBuilder = freezed,}) {
   return _then(_self.copyWith(
 labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
 as String?,hintText: freezed == hintText ? _self.hintText : hintText // ignore: cast_nullable_to_non_nullable
@@ -1778,7 +1779,8 @@ as bool?,textInputAction: freezed == textInputAction ? _self.textInputAction : t
 as TextInputAction?,textCapitalization: freezed == textCapitalization ? _self.textCapitalization : textCapitalization // ignore: cast_nullable_to_non_nullable
 as TextCapitalization?,maxLines: freezed == maxLines ? _self.maxLines : maxLines // ignore: cast_nullable_to_non_nullable
 as int?,invalidRegexMessage: freezed == invalidRegexMessage ? _self.invalidRegexMessage : invalidRegexMessage // ignore: cast_nullable_to_non_nullable
-as String?,style: freezed == style ? _self.style : style // ignore: cast_nullable_to_non_nullable
+as String?,collapsed: freezed == collapsed ? _self.collapsed : collapsed // ignore: cast_nullable_to_non_nullable
+as bool?,style: freezed == style ? _self.style : style // ignore: cast_nullable_to_non_nullable
 as TextStyle?,widgetBuilder: freezed == widgetBuilder ? _self.widgetBuilder : widgetBuilder // ignore: cast_nullable_to_non_nullable
 as StringFieldBuilderDef?,errorBuilder: freezed == errorBuilder ? _self.errorBuilder : errorBuilder // ignore: cast_nullable_to_non_nullable
 as ErrorBuilderDef?,
@@ -1793,7 +1795,7 @@ as ErrorBuilderDef?,
 @JsonSerializable()
 
 class _StringInputUiSettings extends StringInputUiSettings {
-  const _StringInputUiSettings({this.labelText, this.hintText, this.helperText, this.helperMaxLines, @notSerializable this.helper, @notSerializable this.prefixIcon, this.action, this.submitFormOnFieldSubmitted, @TextInputTypeConverter() this.keyboardType, this.obscureText, this.autocorrect, final  List<String>? autofillHints, this.autofocus, this.textInputAction, this.textCapitalization, this.maxLines, this.invalidRegexMessage, @notSerializable this.style, @notSerializable this.widgetBuilder, @notSerializable this.errorBuilder}): _autofillHints = autofillHints,super._();
+  const _StringInputUiSettings({this.labelText, this.hintText, this.helperText, this.helperMaxLines, @notSerializable this.helper, @notSerializable this.prefixIcon, this.action, this.submitFormOnFieldSubmitted, @TextInputTypeConverter() this.keyboardType, this.obscureText, this.autocorrect, final  List<String>? autofillHints, this.autofocus, this.textInputAction, this.textCapitalization, this.maxLines, this.invalidRegexMessage, this.collapsed, @notSerializable this.style, @notSerializable this.widgetBuilder, @notSerializable this.errorBuilder}): _autofillHints = autofillHints,super._();
   factory _StringInputUiSettings.fromJson(Map<String, dynamic> json) => _$StringInputUiSettingsFromJson(json);
 
 @override final  String? labelText;
@@ -1823,6 +1825,8 @@ class _StringInputUiSettings extends StringInputUiSettings {
 /// Defaults to 1. If you want to set it to null, enter 0.
 @override final  int? maxLines;
 @override final  String? invalidRegexMessage;
+// If true, InputDecoration.collapsed will be used.
+@override final  bool? collapsed;
 @override@notSerializable final  TextStyle? style;
 @override@notSerializable final  StringFieldBuilderDef? widgetBuilder;
 @override@notSerializable final  ErrorBuilderDef? errorBuilder;
@@ -1840,16 +1844,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StringInputUiSettings&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.helperMaxLines, helperMaxLines) || other.helperMaxLines == helperMaxLines)&&(identical(other.helper, helper) || other.helper == helper)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.action, action) || other.action == action)&&(identical(other.submitFormOnFieldSubmitted, submitFormOnFieldSubmitted) || other.submitFormOnFieldSubmitted == submitFormOnFieldSubmitted)&&(identical(other.keyboardType, keyboardType) || other.keyboardType == keyboardType)&&(identical(other.obscureText, obscureText) || other.obscureText == obscureText)&&(identical(other.autocorrect, autocorrect) || other.autocorrect == autocorrect)&&const DeepCollectionEquality().equals(other._autofillHints, _autofillHints)&&(identical(other.autofocus, autofocus) || other.autofocus == autofocus)&&(identical(other.textInputAction, textInputAction) || other.textInputAction == textInputAction)&&(identical(other.textCapitalization, textCapitalization) || other.textCapitalization == textCapitalization)&&(identical(other.maxLines, maxLines) || other.maxLines == maxLines)&&(identical(other.invalidRegexMessage, invalidRegexMessage) || other.invalidRegexMessage == invalidRegexMessage)&&(identical(other.style, style) || other.style == style)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.errorBuilder, errorBuilder) || other.errorBuilder == errorBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StringInputUiSettings&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.helperMaxLines, helperMaxLines) || other.helperMaxLines == helperMaxLines)&&(identical(other.helper, helper) || other.helper == helper)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.action, action) || other.action == action)&&(identical(other.submitFormOnFieldSubmitted, submitFormOnFieldSubmitted) || other.submitFormOnFieldSubmitted == submitFormOnFieldSubmitted)&&(identical(other.keyboardType, keyboardType) || other.keyboardType == keyboardType)&&(identical(other.obscureText, obscureText) || other.obscureText == obscureText)&&(identical(other.autocorrect, autocorrect) || other.autocorrect == autocorrect)&&const DeepCollectionEquality().equals(other._autofillHints, _autofillHints)&&(identical(other.autofocus, autofocus) || other.autofocus == autofocus)&&(identical(other.textInputAction, textInputAction) || other.textInputAction == textInputAction)&&(identical(other.textCapitalization, textCapitalization) || other.textCapitalization == textCapitalization)&&(identical(other.maxLines, maxLines) || other.maxLines == maxLines)&&(identical(other.invalidRegexMessage, invalidRegexMessage) || other.invalidRegexMessage == invalidRegexMessage)&&(identical(other.collapsed, collapsed) || other.collapsed == collapsed)&&(identical(other.style, style) || other.style == style)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.errorBuilder, errorBuilder) || other.errorBuilder == errorBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,labelText,hintText,helperText,helperMaxLines,helper,prefixIcon,action,submitFormOnFieldSubmitted,keyboardType,obscureText,autocorrect,const DeepCollectionEquality().hash(_autofillHints),autofocus,textInputAction,textCapitalization,maxLines,invalidRegexMessage,style,widgetBuilder,errorBuilder]);
+int get hashCode => Object.hashAll([runtimeType,labelText,hintText,helperText,helperMaxLines,helper,prefixIcon,action,submitFormOnFieldSubmitted,keyboardType,obscureText,autocorrect,const DeepCollectionEquality().hash(_autofillHints),autofocus,textInputAction,textCapitalization,maxLines,invalidRegexMessage,collapsed,style,widgetBuilder,errorBuilder]);
 
 @override
 String toString() {
-  return 'StringInputUiSettings(labelText: $labelText, hintText: $hintText, helperText: $helperText, helperMaxLines: $helperMaxLines, helper: $helper, prefixIcon: $prefixIcon, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage, style: $style, widgetBuilder: $widgetBuilder, errorBuilder: $errorBuilder)';
+  return 'StringInputUiSettings(labelText: $labelText, hintText: $hintText, helperText: $helperText, helperMaxLines: $helperMaxLines, helper: $helper, prefixIcon: $prefixIcon, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage, collapsed: $collapsed, style: $style, widgetBuilder: $widgetBuilder, errorBuilder: $errorBuilder)';
 }
 
 
@@ -1860,7 +1864,7 @@ abstract mixin class _$StringInputUiSettingsCopyWith<$Res> implements $StringInp
   factory _$StringInputUiSettingsCopyWith(_StringInputUiSettings value, $Res Function(_StringInputUiSettings) _then) = __$StringInputUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String? labelText, String? hintText, String? helperText, int? helperMaxLines,@notSerializable Widget? helper,@notSerializable Widget? prefixIcon, StringFieldAction? action, bool? submitFormOnFieldSubmitted,@TextInputTypeConverter() TextInputType? keyboardType, bool? obscureText, bool? autocorrect, List<String>? autofillHints, bool? autofocus, TextInputAction? textInputAction, TextCapitalization? textCapitalization, int? maxLines, String? invalidRegexMessage,@notSerializable TextStyle? style,@notSerializable StringFieldBuilderDef? widgetBuilder,@notSerializable ErrorBuilderDef? errorBuilder
+ String? labelText, String? hintText, String? helperText, int? helperMaxLines,@notSerializable Widget? helper,@notSerializable Widget? prefixIcon, StringFieldAction? action, bool? submitFormOnFieldSubmitted,@TextInputTypeConverter() TextInputType? keyboardType, bool? obscureText, bool? autocorrect, List<String>? autofillHints, bool? autofocus, TextInputAction? textInputAction, TextCapitalization? textCapitalization, int? maxLines, String? invalidRegexMessage, bool? collapsed,@notSerializable TextStyle? style,@notSerializable StringFieldBuilderDef? widgetBuilder,@notSerializable ErrorBuilderDef? errorBuilder
 });
 
 
@@ -1877,7 +1881,7 @@ class __$StringInputUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of StringInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? labelText = freezed,Object? hintText = freezed,Object? helperText = freezed,Object? helperMaxLines = freezed,Object? helper = freezed,Object? prefixIcon = freezed,Object? action = freezed,Object? submitFormOnFieldSubmitted = freezed,Object? keyboardType = freezed,Object? obscureText = freezed,Object? autocorrect = freezed,Object? autofillHints = freezed,Object? autofocus = freezed,Object? textInputAction = freezed,Object? textCapitalization = freezed,Object? maxLines = freezed,Object? invalidRegexMessage = freezed,Object? style = freezed,Object? widgetBuilder = freezed,Object? errorBuilder = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? labelText = freezed,Object? hintText = freezed,Object? helperText = freezed,Object? helperMaxLines = freezed,Object? helper = freezed,Object? prefixIcon = freezed,Object? action = freezed,Object? submitFormOnFieldSubmitted = freezed,Object? keyboardType = freezed,Object? obscureText = freezed,Object? autocorrect = freezed,Object? autofillHints = freezed,Object? autofocus = freezed,Object? textInputAction = freezed,Object? textCapitalization = freezed,Object? maxLines = freezed,Object? invalidRegexMessage = freezed,Object? collapsed = freezed,Object? style = freezed,Object? widgetBuilder = freezed,Object? errorBuilder = freezed,}) {
   return _then(_StringInputUiSettings(
 labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
 as String?,hintText: freezed == hintText ? _self.hintText : hintText // ignore: cast_nullable_to_non_nullable
@@ -1896,7 +1900,8 @@ as bool?,textInputAction: freezed == textInputAction ? _self.textInputAction : t
 as TextInputAction?,textCapitalization: freezed == textCapitalization ? _self.textCapitalization : textCapitalization // ignore: cast_nullable_to_non_nullable
 as TextCapitalization?,maxLines: freezed == maxLines ? _self.maxLines : maxLines // ignore: cast_nullable_to_non_nullable
 as int?,invalidRegexMessage: freezed == invalidRegexMessage ? _self.invalidRegexMessage : invalidRegexMessage // ignore: cast_nullable_to_non_nullable
-as String?,style: freezed == style ? _self.style : style // ignore: cast_nullable_to_non_nullable
+as String?,collapsed: freezed == collapsed ? _self.collapsed : collapsed // ignore: cast_nullable_to_non_nullable
+as bool?,style: freezed == style ? _self.style : style // ignore: cast_nullable_to_non_nullable
 as TextStyle?,widgetBuilder: freezed == widgetBuilder ? _self.widgetBuilder : widgetBuilder // ignore: cast_nullable_to_non_nullable
 as StringFieldBuilderDef?,errorBuilder: freezed == errorBuilder ? _self.errorBuilder : errorBuilder // ignore: cast_nullable_to_non_nullable
 as ErrorBuilderDef?,

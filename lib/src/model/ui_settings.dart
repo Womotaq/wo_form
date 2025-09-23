@@ -540,6 +540,9 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     /// Defaults to 1. If you want to set it to null, enter 0.
     int? maxLines,
     String? invalidRegexMessage,
+
+    // If true, InputDecoration.collapsed will be used.
+    bool? collapsed,
     @notSerializable TextStyle? style,
     @notSerializable StringFieldBuilderDef? widgetBuilder,
     @notSerializable ErrorBuilderDef? errorBuilder,
@@ -674,6 +677,8 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
           textCapitalization: textCapitalization ?? other.textCapitalization,
           maxLines: maxLines ?? other.maxLines,
           invalidRegexMessage: invalidRegexMessage ?? other.invalidRegexMessage,
+          collapsed: collapsed ?? other.collapsed,
+          style: style ?? other.style,
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,
           errorBuilder: errorBuilder ?? other.errorBuilder,
         );
