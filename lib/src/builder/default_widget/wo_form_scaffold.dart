@@ -78,8 +78,8 @@ class MultistepBackButton extends StatelessWidget {
     return QuitPageButton(
       canQuit: (context) async {
         if (controller != null &&
-            controller.controller.page != null &&
-            controller.controller.page! > 0) {
+            controller.page != null &&
+            controller.page! > 0) {
           FocusScope.of(context).unfocus();
           controller.previousStep();
           return false;

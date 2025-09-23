@@ -1,8 +1,4 @@
-import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wo_form/src/_export.dart';
-import 'package:wo_form/src/utils/constrained_column.dart';
+part of '../core/wo_form.dart';
 
 class WoFormPageBuilder extends StatelessWidget {
   const WoFormPageBuilder({super.key});
@@ -104,7 +100,7 @@ class _WoFormMultiStepPageState extends State<_WoFormMultiStepPage> {
 
     valuesCubit = context.read<WoFormValuesCubit>();
     generatingSteps = widget.submitMode.generatingSteps;
-    controller = MultistepController(valuesCubit);
+    controller = MultistepController._(valuesCubit);
     addTemporarySubmitData();
   }
 
@@ -112,9 +108,7 @@ class _WoFormMultiStepPageState extends State<_WoFormMultiStepPage> {
     final rootChildren = context.read<RootNode>().children;
 
     if (generatingSteps) {
-      final generatedSteps =
-          valuesCubit.state[WoFormValuesCubit.GENERATED_STEPS_KEY]
-              as List<String>;
+      final generatedSteps = valuesCubit.state.generatedSteps;
 
       // happens when nextStep() returned null, wich means the end of the form
       if (index > generatedSteps.length - 1) return null;
@@ -141,7 +135,7 @@ class _WoFormMultiStepPageState extends State<_WoFormMultiStepPage> {
   Future<void> addTemporarySubmitData() async {
     if (!mounted) return;
 
-    final multistepIndex = valuesCubit.readMultistepIndex() ?? 0;
+    final multistepIndex = valuesCubit.state.multistepIndex;
 
     // If node is the last page, we shouldn't add temporary submit data.
     if (!generatingSteps &&
@@ -161,7 +155,7 @@ class _WoFormMultiStepPageState extends State<_WoFormMultiStepPage> {
         await widget.submitMode.onTemporarySubmitting?.call(context);
 
         final abortReason = controller.nextStep();
-        return abortReason == AbortReason.endOfForm;
+        return abortReason == 'end-of-form';
       },
       path: '/${step.id}',
     );
@@ -189,14 +183,12 @@ class _WoFormMultiStepPageState extends State<_WoFormMultiStepPage> {
             builder: (context) {
               final generatedSteps = generatingSteps
                   ? context.select(
-                          (WoFormValuesCubit c) =>
-                              c.state[WoFormValuesCubit.GENERATED_STEPS_KEY],
-                        )
-                        as List<String>
+                      (WoFormValuesCubit c) => c.state.generatedSteps,
+                    )
                   : null;
 
               return PageView.builder(
-                controller: controller.controller,
+                controller: controller._controller,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: generatedSteps == null ? root.children.length : null,
                 itemBuilder: (context, index) {
@@ -278,8 +270,7 @@ class _WoFormMultiStepPageState extends State<_WoFormMultiStepPage> {
 
     return BlocListener<WoFormValuesCubit, WoFormValues>(
       listenWhen: (previous, current) =>
-          previous[WoFormValuesCubit.MULTISTEP_INDEX_KEY] !=
-          current[WoFormValuesCubit.MULTISTEP_INDEX_KEY],
+          previous.multistepIndex != current.multistepIndex,
       listener: (context, state) => addTemporarySubmitData(),
       child: MultistepControllerProvider(
         controller: controller,
@@ -291,6 +282,117 @@ class _WoFormMultiStepPageState extends State<_WoFormMultiStepPage> {
       ),
     );
   }
+}
+
+class MultistepController {
+  MultistepController._(this.valuesCubit) : _controller = PageController();
+
+  final PageController _controller;
+  final WoFormValuesCubit valuesCubit;
+
+  static MultistepController? of(BuildContext context, {bool listen = true}) =>
+      listen
+      ? context
+            .dependOnInheritedWidgetOfExactType<MultistepControllerProvider>()
+            ?.controller
+      : context
+            .getInheritedWidgetOfExactType<MultistepControllerProvider>()
+            ?.controller;
+
+  /// The current page displayed in the controlled [PageView].
+  ///
+  /// There are circumstances that this [PageController] can't know the current
+  /// page.
+  /// Reading [page] will throw an [AssertionError] in the following cases:
+  ///
+  /// 1. No [PageView] is currently using this [PageController]. Once a
+  /// [PageView] starts using this [PageController], the new [page]
+  /// position will be derived:
+  ///
+  ///   * First, based on the attached [PageView]'s [BuildContext] and the
+  ///     position saved at that context's [PageStorage] if [keepPage] is true.
+  ///   * Second, from the [PageController]'s [initialPage].
+  ///
+  /// 2. More than one [PageView] using the same [PageController].
+  ///
+  /// The [hasClients] property can be used to check if a [PageView] is attached
+  /// prior to accessing [page].
+  double? get page => _controller.page;
+
+  /// Possible return values :
+  /// - 'end-of-form' : there is no further step.
+  /// - 'error' : an error occured
+  /// - null : success
+  String? nextStep() {
+    final page = _controller.page;
+
+    // Can't move if already moving
+    if (page == null || page.toInt() != page) return 'error';
+
+    final nextPage = (page.toInt()) + 1;
+    final canAnimate = valuesCubit._onMultistepControllerUpdate(nextPage);
+
+    if (canAnimate) {
+      unawaited(
+        _controller.animateToPage(
+          nextPage,
+          duration: WoFormTheme.STEP_TRANSITION_DURATION,
+          curve: Curves.easeIn,
+        ),
+      );
+    }
+
+    return canAnimate ? null : 'end-of-form';
+  }
+
+  /// Possible return values :
+  /// - 'end-of-form' : there is no further step.
+  /// - 'error' : an error occured
+  /// - null : success
+  String? previousStep() {
+    final page = _controller.page;
+
+    // Can't move if already moving
+    if (page == null || page.toInt() != page) return 'error';
+
+    final nextPage = (page.toInt()) - 1;
+    final canAnimate = valuesCubit._onMultistepControllerUpdate(nextPage);
+
+    if (canAnimate) {
+      unawaited(
+        _controller.animateToPage(
+          nextPage,
+          duration: WoFormTheme.STEP_TRANSITION_DURATION,
+          curve: Curves.easeIn,
+        ),
+      );
+    }
+
+    return canAnimate ? null : 'end-of-form';
+  }
+
+  void backToStep(int step) {
+    final page = _controller.page;
+
+    // Can't move if already moving
+    if (page == null || page.toInt() != page) return;
+
+    // Can only go back
+    if (page < step) return;
+    final canAnimate = valuesCubit._onMultistepControllerUpdate(step);
+
+    if (canAnimate) {
+      unawaited(
+        _controller.animateToPage(
+          step,
+          duration: WoFormTheme.STEP_TRANSITION_DURATION,
+          curve: Curves.easeIn,
+        ),
+      );
+    }
+  }
+
+  void dispose() => _controller.dispose();
 }
 
 class MultistepControllerProvider extends InheritedWidget {

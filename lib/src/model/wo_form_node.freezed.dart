@@ -1350,7 +1350,7 @@ $InputUiSettingsCopyWith<$Res> get uiSettings {
 /// @nodoc
 mixin _$RootNode {
 
- String get id; WoFormValues get initialValues;@InputsListConverter() List<WoFormNodeMixin> get children; WoFormUiSettings get uiSettings; ExportSettings get exportSettings;// LATER : issue, how to modify an in-production corrupted data ?
+ String get id; Json get initialValues;@InputsListConverter() List<WoFormNodeMixin> get children; WoFormUiSettings get uiSettings; ExportSettings get exportSettings;// LATER : issue, how to modify an in-production corrupted data ?
 // give a way to override it ?
 //
 /// If not empty, this form will be locally persistent, using HydratedCubit.
@@ -1387,7 +1387,7 @@ abstract mixin class $RootNodeCopyWith<$Res>  {
   factory $RootNodeCopyWith(RootNode value, $Res Function(RootNode) _then) = _$RootNodeCopyWithImpl;
 @useResult
 $Res call({
- String id, WoFormValues initialValues,@InputsListConverter() List<WoFormNodeMixin> children, WoFormUiSettings uiSettings, ExportSettings exportSettings, String hydratationId
+ String id, Json initialValues,@InputsListConverter() List<WoFormNodeMixin> children, WoFormUiSettings uiSettings, ExportSettings exportSettings, String hydratationId
 });
 
 
@@ -1408,7 +1408,7 @@ class _$RootNodeCopyWithImpl<$Res>
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,initialValues: null == initialValues ? _self.initialValues : initialValues // ignore: cast_nullable_to_non_nullable
-as WoFormValues,children: null == children ? _self.children : children // ignore: cast_nullable_to_non_nullable
+as Json,children: null == children ? _self.children : children // ignore: cast_nullable_to_non_nullable
 as List<WoFormNodeMixin>,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
 as WoFormUiSettings,exportSettings: null == exportSettings ? _self.exportSettings : exportSettings // ignore: cast_nullable_to_non_nullable
 as ExportSettings,hydratationId: null == hydratationId ? _self.hydratationId : hydratationId // ignore: cast_nullable_to_non_nullable
@@ -1442,12 +1442,12 @@ $ExportSettingsCopyWith<$Res> get exportSettings {
 @JsonSerializable()
 
 class _RootNode extends RootNode {
-  const _RootNode({this.id = '#', final  WoFormValues initialValues = const {}, @InputsListConverter() final  List<WoFormNodeMixin> children = const [], this.uiSettings = const WoFormUiSettings(), this.exportSettings = const ExportSettings(), this.hydratationId = ''}): _initialValues = initialValues,_children = children,super._();
+  const _RootNode({this.id = '#', final  Json initialValues = const {}, @InputsListConverter() final  List<WoFormNodeMixin> children = const [], this.uiSettings = const WoFormUiSettings(), this.exportSettings = const ExportSettings(), this.hydratationId = ''}): _initialValues = initialValues,_children = children,super._();
   factory _RootNode.fromJson(Map<String, dynamic> json) => _$RootNodeFromJson(json);
 
 @override@JsonKey() final  String id;
- final  WoFormValues _initialValues;
-@override@JsonKey() WoFormValues get initialValues {
+ final  Json _initialValues;
+@override@JsonKey() Json get initialValues {
   if (_initialValues is EqualUnmodifiableMapView) return _initialValues;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableMapView(_initialValues);
@@ -1501,7 +1501,7 @@ abstract mixin class _$RootNodeCopyWith<$Res> implements $RootNodeCopyWith<$Res>
   factory _$RootNodeCopyWith(_RootNode value, $Res Function(_RootNode) _then) = __$RootNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id, WoFormValues initialValues,@InputsListConverter() List<WoFormNodeMixin> children, WoFormUiSettings uiSettings, ExportSettings exportSettings, String hydratationId
+ String id, Json initialValues,@InputsListConverter() List<WoFormNodeMixin> children, WoFormUiSettings uiSettings, ExportSettings exportSettings, String hydratationId
 });
 
 
@@ -1522,7 +1522,7 @@ class __$RootNodeCopyWithImpl<$Res>
   return _then(_RootNode(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,initialValues: null == initialValues ? _self._initialValues : initialValues // ignore: cast_nullable_to_non_nullable
-as WoFormValues,children: null == children ? _self._children : children // ignore: cast_nullable_to_non_nullable
+as Json,children: null == children ? _self._children : children // ignore: cast_nullable_to_non_nullable
 as List<WoFormNodeMixin>,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
 as WoFormUiSettings,exportSettings: null == exportSettings ? _self.exportSettings : exportSettings // ignore: cast_nullable_to_non_nullable
 as ExportSettings,hydratationId: null == hydratationId ? _self.hydratationId : hydratationId // ignore: cast_nullable_to_non_nullable

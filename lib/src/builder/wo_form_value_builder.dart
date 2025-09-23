@@ -37,10 +37,10 @@ class WoFormValuesBuilder extends StatelessWidget {
   });
 
   final Iterable<String> paths;
-  final Widget Function(BuildContext context, WoFormValues values) builder;
+  final Widget Function(BuildContext context, Json values) builder;
 
   @override
-  Widget build(BuildContext context) => WoFormValueSelector<WoFormValues>(
+  Widget build(BuildContext context) => WoFormValueSelector<Json>(
     selector: (values) => {
       for (final path in paths) path: values.getValue(path),
     },

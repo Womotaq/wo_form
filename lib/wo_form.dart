@@ -1,4 +1,4 @@
 /// A package made for easily creating forms, with Womotaq's identity
-library wo_form;
+library;
 
 export 'src/_export.dart';

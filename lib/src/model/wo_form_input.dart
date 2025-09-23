@@ -486,7 +486,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
   }
 
   @override
-  WoFormValues getInitialValues({required String parentPath}) {
+  Json getInitialValues({required String parentPath}) {
     switch (this) {
       case BooleanInput(initialValue: final initialValue):
         return {'$parentPath/$id': initialValue};
@@ -690,7 +690,7 @@ abstract class SelectInput<T>
       );
 
   @override
-  WoFormValues getInitialValues({required String parentPath}) => {
+  Json getInitialValues({required String parentPath}) => {
     '$parentPath/$id': initialValues,
   };
 

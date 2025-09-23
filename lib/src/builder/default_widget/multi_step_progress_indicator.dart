@@ -13,7 +13,7 @@ class MultiStepProgressIndicator extends StatelessWidget {
     }
 
     final multistepIndex = context.select(
-      (WoFormValuesCubit c) => c.readMultistepIndex() ?? 0,
+      (WoFormValuesCubit c) => c.state.multistepIndex,
     );
     final maxIndex = context.read<RootNode>().children.length - 1;
 

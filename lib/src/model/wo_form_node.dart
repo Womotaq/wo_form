@@ -53,7 +53,7 @@ mixin WoFormNodeMixin {
     required String parentPath,
   });
 
-  WoFormValues getInitialValues({required String parentPath});
+  Json getInitialValues({required String parentPath});
 
   Widget toWidget({required String parentPath, Key? key});
 
@@ -562,7 +562,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
   }
 
   @override
-  WoFormValues getInitialValues({required String parentPath}) {
+  Json getInitialValues({required String parentPath}) {
     switch (this) {
       case ConditionnalNode(
         conditionIsInitiallyMet: final conditionIsInitiallyMet,
@@ -648,7 +648,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
     ) =>
       WoFormValueBuilder<dynamic>(
         key: key,
-        path: WoFormValuesX.getAbsolutePath(
+        path: WoFormValues.getAbsolutePath(
           path: path,
           parentPath: '$parentPath/$id',
         ),
@@ -672,7 +672,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
     ) =>
       WoFormValueListener<dynamic>(
         key: key,
-        path: WoFormValuesX.getAbsolutePath(
+        path: WoFormValues.getAbsolutePath(
           path: path,
           parentPath: '$parentPath/$id',
         ),
@@ -880,7 +880,7 @@ abstract class FutureNode<T> with _$FutureNode<T>, WoFormNodeMixin {
   }
 
   @override
-  WoFormValues getInitialValues({
+  Json getInitialValues({
     required String parentPath,
     AsyncSnapshot<T?>? initialSnapshot,
   }) {
@@ -914,7 +914,7 @@ abstract class FutureNode<T> with _$FutureNode<T>, WoFormNodeMixin {
 abstract class RootNode with _$RootNode, WoFormNodeMixin {
   const factory RootNode({
     @Default('#') String id,
-    @Default({}) WoFormValues initialValues,
+    @Default({}) Json initialValues,
     @InputsListConverter() @Default([]) List<WoFormNodeMixin> children,
     @Default(WoFormUiSettings()) WoFormUiSettings uiSettings,
     @Default(ExportSettings()) ExportSettings exportSettings,
@@ -1045,7 +1045,7 @@ abstract class RootNode with _$RootNode, WoFormNodeMixin {
   }
 
   @override
-  WoFormValues getInitialValues({String parentPath = ''}) => {
+  Json getInitialValues({String parentPath = ''}) => {
     for (final child in children)
       ...child.getInitialValues(parentPath: parentPath),
   };
