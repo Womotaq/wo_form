@@ -97,11 +97,10 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
     if (showErrors == ShowErrors.always) {
       // Mark all paths as visited, this way the errors will always appear
-      final visitedPaths = Set<String>.from(
-        values[_VISITED_PATHS_KEY] as Iterable<String>? ?? {},
-      )..addAll(values.keys);
+      final visitedPaths = Set<String>.from(values._visitedPaths)
+        ..addAll(values.keys);
       // Cannot store a set in values, or the hydratation won't work
-      values[_VISITED_PATHS_KEY] = visitedPaths.toList();
+      values._visitedPaths = visitedPaths.toList();
     }
 
     if (root.uiSettings.multistepSettings != null) {
@@ -230,9 +229,6 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   // --- FOCUS ---
 
-  // ignore: constant_identifier_names
-  static const FOCUSED_PATH_KEY = '/__wo_reserved_focused_path';
-
   // Called by WoFormNodeFocusManager
   FocusNode _createFocusNode(String path) {
     _focusNodes[path] ??= FocusNode();
@@ -246,24 +242,16 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   }
 
   void _onFocusChange(String path, {required bool isFocused}) {
-    final oldFocusedPath = focusedPath;
+    final oldFocusedPath = state._focusedPath;
 
     if (isFocused && oldFocusedPath != path) {
-      final newValues = state.copy();
-      newValues[FOCUSED_PATH_KEY] = path;
-      emit(newValues);
+      emit(state.copy().._focusedPath = path);
     } else if (!isFocused && oldFocusedPath == path) {
-      final newValues = state.copy();
-      newValues[FOCUSED_PATH_KEY] = null;
-      emit(newValues);
+      emit(state.copy().._focusedPath = null);
     }
 
     if (!isFocused) _markPathAsVisited(path: path);
   }
-
-  String? get focusedPath => state[FOCUSED_PATH_KEY] as String?;
-
-  bool isFocused(String path) => focusedPath == path;
 
   // --- VALUES ---
 
@@ -290,7 +278,9 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     };
     if (values.isEmpty) return;
 
-    final atLeastOnePathWasVisited = values.keys.any(_visitedPaths.contains);
+    final atLeastOnePathWasVisited = values.keys.any(
+      state._visitedPaths.contains,
+    );
 
     final shouldUpdateStatus = switch (updateStatus) {
       UpdateStatus.ifPathAlreadyVisited => atLeastOnePathWasVisited,
@@ -325,7 +315,9 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
       };
 
       if (shouldUpdateErrors) {
-        final allPathsWereVisited = values.keys.every(_visitedPaths.contains);
+        final allPathsWereVisited = values.keys.every(
+          state._visitedPaths.contains,
+        );
         if (!allPathsWereVisited) {
           _markPathsAsVisited(paths: values.keys);
         }
@@ -341,7 +333,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   /// Update errors of visited paths
   void _updateErrors() => _statusCubit.setInProgress(
-    errors: _visitedPaths
+    errors: state._visitedPaths
         .map(
           (path) => _root
               .getChild(
@@ -361,11 +353,6 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   // --- VISITED PATHS ---
 
-  // ignore: constant_identifier_names
-  static const _VISITED_PATHS_KEY = '/__wo_reserved_visited_paths';
-  Iterable<String> get _visitedPaths =>
-      state[_VISITED_PATHS_KEY] as Iterable<String>? ?? {};
-
   /// Marks the node at this path as visited by the user.
   /// Before submission, only visited nodes show errors.
   ///
@@ -380,11 +367,9 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     }
 
     final newValues = state.copy();
-    final visitedPaths = Set<String>.from(
-      newValues[_VISITED_PATHS_KEY] as Iterable<String>? ?? {},
-    );
+    final visitedPaths = Set<String>.from(newValues._visitedPaths);
     if (visitedPaths.add(path)) {
-      newValues[_VISITED_PATHS_KEY] = visitedPaths.toList();
+      newValues._visitedPaths = visitedPaths.toList();
       emit(newValues);
       _updateErrors();
       return;
@@ -403,11 +388,10 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     }
 
     final newValues = state.copy();
-    final visitedPaths = Set<String>.from(
-      newValues[_VISITED_PATHS_KEY] as Iterable<String>? ?? {},
-    )..addAll(paths);
+    final visitedPaths = Set<String>.from(newValues._visitedPaths)
+      ..addAll(paths);
     // Do not store a set in values, or the hydratation won't work
-    newValues[_VISITED_PATHS_KEY] = visitedPaths.toList();
+    newValues._visitedPaths = visitedPaths.toList();
     emit(newValues);
   }
 
@@ -610,6 +594,23 @@ class WoFormValues {
       _values[_GENERATED_STEPS_KEY] as List<String>? ?? [];
   set generatedSteps(List<String> steps) =>
       _values[_GENERATED_STEPS_KEY] = steps;
+
+  // --- FOCUS ---
+
+  // ignore: constant_identifier_names
+  static const _FOCUSED_PATH_KEY = '/__wo_reserved_focused_path';
+  String? get _focusedPath => this[_FOCUSED_PATH_KEY] as String?;
+  set _focusedPath(String? path) => _values[_FOCUSED_PATH_KEY] = path;
+  bool isFocused(String path) => _focusedPath == getValue(path);
+
+  // --- VISITED PATHS ---
+
+  // ignore: constant_identifier_names
+  static const _VISITED_PATHS_KEY = '/__wo_reserved_visited_paths';
+  Iterable<String> get _visitedPaths =>
+      this[_VISITED_PATHS_KEY] as Iterable<String>? ?? {};
+  set _visitedPaths(Iterable<String> paths) =>
+      _values[_VISITED_PATHS_KEY] = paths;
 }
 
 typedef _TempSubmitData = ({
