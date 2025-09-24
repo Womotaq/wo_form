@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:wo_form/wo_form.dart';
+import 'package:wo_form/src/utils/extensions.dart';
 
 class EdgeInsetsNullableConverter extends JsonConverter<EdgeInsets?, Json?> {
   const EdgeInsetsNullableConverter();

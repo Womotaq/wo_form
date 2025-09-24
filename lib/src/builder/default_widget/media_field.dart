@@ -86,7 +86,7 @@ import 'package:wo_form/wo_form.dart';
 ///     - aspectRatio
 ///   - When exporting a WoForm containing a MediaNode :
 ///     -
-///     - context.read<MediaService>().upload(medias, node.uploadFolderPath)
+///     - context.read-MediaService>().upload(medias, node.uploadFolderPath)
 
 class MediaField extends StatelessWidget {
   const MediaField(this.data, {super.key});

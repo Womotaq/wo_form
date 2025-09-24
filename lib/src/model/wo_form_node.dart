@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/src/model/json_converter/input.dart';
 import 'package:wo_form/src/model/json_converter/inputs_list.dart';
+import 'package:wo_form/src/utils/extensions.dart';
+import 'package:wo_form/src/utils/json_annotation.dart';
 import 'package:wo_form/wo_form.dart';
 
 part 'wo_form_node.freezed.dart';

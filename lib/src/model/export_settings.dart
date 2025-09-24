@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:wo_form/wo_form.dart';
+import 'package:wo_form/src/utils/extensions.dart';
 
 part 'export_settings.freezed.dart';
 part 'export_settings.g.dart';

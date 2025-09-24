@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/src/model/json_converter/duration.dart';
+import 'package:wo_form/src/utils/extensions.dart';
+import 'package:wo_form/src/utils/json_annotation.dart';
 import 'package:wo_form/wo_form.dart';
 
 part 'wo_form_input.freezed.dart';
@@ -150,7 +152,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
   /// ),
   /// ```
   ///
-  /// In order to make context.read<MyMediaService>() work, add :
+  /// In order to make context.read&lt;MyMediaService&gt;() work, add :
   /// ```dart
   /// RepositoryProvider<MyMediaService>(
   ///   create: (context) =>
@@ -568,7 +570,7 @@ abstract class SelectInput<T>
     /// The following fields are mostly usefull for hydrataion
     ///
     /// Ex :
-    /// SelectInput<TimeControl>(
+    /// SelectInput&lt;TimeControl&gt;(
     ///   toJsonT: (value) => (value as TimeControl?)?.toJson(),
     ///   fromJsonT: (json) =>
     ///       TimeControl.fromJson(json as Json? ?? {}),

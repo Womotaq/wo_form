@@ -1,4 +1,4 @@
-import 'package:wo_form/wo_form.dart';
+import 'package:wo_form/src/utils/extensions.dart';
 
 class PlaceDetails {
   PlaceDetails({this.result, this.status});

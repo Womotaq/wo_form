@@ -218,7 +218,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   }
 
   void removeTemporarySubmitData({required String path}) {
-    for (final data in _tempSubmitDatas) {
+    for (final data in _tempSubmitDatas.toList()) {
       if (data.path == path) {
         _tempSubmitDatas.remove(data);
         if (state.submitPath == data.path) {

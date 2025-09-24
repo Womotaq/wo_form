@@ -30,6 +30,7 @@ class _WoFormStandardBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final root = context.read<RootNode>();
     final woFormTheme = WoFormTheme.of(context);
+    final scrollController = ScrollControllerProvider.of(context);
 
     final column = Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -76,7 +77,10 @@ class _WoFormStandardBody extends StatelessWidget {
     );
 
     return root.uiSettings.bodyLayout.isScrollable
-        ? SingleChildScrollView(child: column)
+        ? SingleChildScrollView(
+            controller: scrollController,
+            child: column,
+          )
         : column;
   }
 }
@@ -91,13 +95,13 @@ class _WoFormMultistepBody extends StatefulWidget {
 }
 
 class _WoFormMultistepBodyState extends State<_WoFormMultistepBody> {
-  late MultistepController controller;
+  late MultistepController pageController;
 
   @override
   void initState() {
     super.initState();
 
-    controller = MultistepController.of(context, listen: false)!;
+    pageController = MultistepController.of(context, listen: false)!;
     addTemporarySubmitData();
   }
 
@@ -157,7 +161,7 @@ class _WoFormMultistepBodyState extends State<_WoFormMultistepBody> {
 
         await widget.multistepSettings.onTemporarySubmitting?.call(context);
 
-        final abortReason = controller.nextStep();
+        final abortReason = pageController.nextStep();
         return abortReason == 'end-of-form';
       },
       path: '/${step.id}',
@@ -172,13 +176,11 @@ class _WoFormMultistepBodyState extends State<_WoFormMultistepBody> {
     final pageView = Builder(
       builder: (context) {
         final generatedSteps = generatingSteps
-            ? context.select(
-                (WoFormValuesCubit c) => c.state.generatedSteps,
-              )
+            ? context.select((WoFormValuesCubit c) => c.state.generatedSteps)
             : null;
 
         return PageView.builder(
-          controller: controller._controller,
+          controller: pageController._controller,
           physics: const NeverScrollableScrollPhysics(),
           itemCount: generatedSteps == null ? root.children.length : null,
           itemBuilder: (context, index) {

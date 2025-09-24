@@ -1,5 +1,6 @@
 import 'package:cross_file/cross_file.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:wo_form/src/utils/extensions.dart';
 import 'package:wo_form/wo_form.dart';
 
 class XFileConverter extends JsonConverter<XFile, Json> {

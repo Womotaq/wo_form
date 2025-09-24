@@ -10,18 +10,6 @@ class WoFormScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final body = Column(
-    //   children: [
-    //     Expanded(
-    //       // flex: 0,
-    //       child: Container(
-    //         color: Colors.red,
-    //         width: 100,
-    //         height: 100,
-    //       ),
-    //     ),
-    //   ],
-    // );
     final uiSettings = context.read<RootNode>().uiSettings;
 
     switch (uiSettings.presentation) {
@@ -33,15 +21,11 @@ class WoFormScaffold extends StatelessWidget {
             uiSettings.submitButtonPosition == SubmitButtonPosition.appBar;
         final showCloseButton =
             uiSettings.presentation == WoFormPresentation.dialog;
-        final supportFlex =
-            uiSettings.bodyLayout.supportFlex ||
-            (uiSettings.multistepSettings != null);
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Flexible(
-              flex: supportFlex ? 1 : 0,
+            Expanded(
               child: Stack(
                 children: [
                   Column(
@@ -65,10 +49,7 @@ class WoFormScaffold extends StatelessWidget {
                             ],
                           ],
                         ),
-                      Flexible(
-                        flex: supportFlex ? 1 : 0,
-                        child: body,
-                      ),
+                      Expanded(child: body),
                     ],
                   ),
                   if (uiSettings.submitButtonPosition ==
@@ -102,7 +83,8 @@ class WoFormScaffold extends StatelessWidget {
               ],
             ],
           ),
-          body: Center(
+          body: Align(
+            alignment: Alignment.topCenter,
             child: ConstrainedBox(
               constraints: BoxConstraints(
                 maxWidth:

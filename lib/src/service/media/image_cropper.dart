@@ -181,19 +181,19 @@ class _GridPainter extends CustomPainter {
 
     final spacing = size / (divisions + 1);
     for (var i = 1; i < divisions + 1; i++) {
-      // draw vertical line
-      canvas.drawLine(
-        Offset(spacing.width * i, 0),
-        Offset(spacing.width * i, size.height),
-        paint,
-      );
-
-      // draw horizontal line
-      canvas.drawLine(
-        Offset(0, spacing.height * i),
-        Offset(size.width, spacing.height * i),
-        paint,
-      );
+      canvas
+        // draw vertical line
+        ..drawLine(
+          Offset(spacing.width * i, 0),
+          Offset(spacing.width * i, size.height),
+          paint,
+        )
+        // draw horizontal line
+        ..drawLine(
+          Offset(0, spacing.height * i),
+          Offset(size.width, spacing.height * i),
+          paint,
+        );
     }
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wo_form/src/utils/extensions.dart';
 import 'package:wo_form/wo_form.dart';
 
 class WoFormElementBuilder extends StatelessWidget {
@@ -10,9 +11,9 @@ class WoFormElementBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final input = context.read<RootNode>().getChild(
-          path: path,
-          values: context.read<WoFormValuesCubit>().state,
-        );
+      path: path,
+      values: context.read<WoFormValuesCubit>().state,
+    );
 
     if (input == null) {
       throw ArgumentError(

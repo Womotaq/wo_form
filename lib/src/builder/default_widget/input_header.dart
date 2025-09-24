@@ -13,7 +13,8 @@ class InputHeader extends StatelessWidget {
     final helperText = data.helperText ?? '';
     final errorText = data.errorText ?? '';
 
-    // If there's truly nothing to show beyond the main child or its layout hints, shrink.
+    // If there's truly nothing to show beyond the main child or
+    // its layout hints, shrink.
     if (labelText.isEmpty &&
         errorText.isEmpty &&
         helperText.isEmpty &&

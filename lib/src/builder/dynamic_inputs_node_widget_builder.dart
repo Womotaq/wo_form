@@ -38,7 +38,6 @@ class DynamicInputsNodeWidgetBuilder extends StatelessWidget {
               path: path,
               input: node,
               value: inputs,
-              errorText: null,
               uiSettings: mergedSettings,
               onValueChanged: inputIsLocked
                   ? null

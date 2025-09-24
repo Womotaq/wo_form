@@ -1,7 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:wo_form/wo_form.dart';
+import 'package:wo_form/src/utils/extensions.dart';
 
 part 'place_details.freezed.dart';
 part 'place_details.g.dart';
@@ -82,7 +82,8 @@ abstract class PlaceDetails with _$PlaceDetails {
     /// Indicates the operational status of the place, if it is a business.
     /// If no data exists, business_status is not returned.
     ///
-    /// The allowed values include: OPERATIONAL, CLOSED_TEMPORARILY, and CLOSED_PERMANENTLY
+    /// The allowed values include: OPERATIONAL, CLOSED_TEMPORARILY, and
+    /// CLOSED_PERMANENTLY
     @JsonKey(name: 'business_status') String? businessStatus,
 
     /// Specifies if the business supports curbside pickup.

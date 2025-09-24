@@ -281,8 +281,8 @@ class SearchScreenState<T> extends State<SearchScreen<T>> {
                 // Flutter's default behaviour :
                 // - web : tapping outside instantly unfocuses the field.
                 // - mobile : tapping outside does nothing.
-                // For better consistency across all plateforms, wo_form decided to
-                // unfocus text fields on tap up.
+                // For better consistency across all plateforms, wo_form
+                // decided to unfocus text fields on tap up.
                 onTapOutside: (_) {},
                 onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
               ),

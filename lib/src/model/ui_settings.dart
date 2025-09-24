@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/src/_export.dart';
 import 'package:wo_form/src/model/json_converter/edge_insets.dart';
+import 'package:wo_form/src/utils/extensions.dart';
+import 'package:wo_form/src/utils/json_annotation.dart';
 import 'package:wo_form/wo_form.dart';
 
 part 'ui_settings.freezed.dart';
@@ -742,7 +744,7 @@ abstract class WoFormUiSettings with _$WoFormUiSettings {
     /// [WoFormBodyLayout.flexible] if you want to use `uiSettings.flex`.
     ///
     /// The body consists of your inputs and potentially the submit button,
-    /// if [StandardSubmitMode.buttonPosition] is SubmitButtonPosition.body
+    /// if [WoFormUiSettings.submitButtonPosition] is SubmitButtonPosition.body
     /// (wich is the default value).
     @Default(WoFormBodyLayout.scrollable) WoFormBodyLayout bodyLayout,
 
@@ -757,6 +759,16 @@ abstract class WoFormUiSettings with _$WoFormUiSettings {
 
   factory WoFormUiSettings.fromJson(Json json) =>
       _$WoFormUiSettingsFromJson(json);
+
+  // --
+
+  /// True when providing a ScrollProvider with ScrollControllerProvider will
+  /// have an effect.
+  ///
+  /// When a form uses multisteps, since it means using PageView,
+  /// it needs a fixed height.
+  bool get acceptScrollController =>
+      bodyLayout.isScrollable && multistepSettings == null;
 }
 
 enum SubmitButtonPosition { body, appBar, bottomBar, floating }
