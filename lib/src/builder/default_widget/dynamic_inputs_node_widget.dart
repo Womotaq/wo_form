@@ -6,28 +6,36 @@ import 'package:wo_form/wo_form.dart';
 
 extension RandomX on Random {
   String _generateUid({int length = 6}) {
-    const chars = '0123456789'
+    const chars =
+        '0123456789'
         'abcdefghijklmnopqrstuvwxyz'
         'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    return List<String>.generate(length, (_) => chars[nextInt(chars.length)])
-        .join();
+    return List<String>.generate(
+      length,
+      (_) => chars[nextInt(chars.length)],
+    ).join();
   }
 }
 
 class DynamicInputsNodeWidget extends StatelessWidget {
   const DynamicInputsNodeWidget(this.data, {super.key});
 
-  final WoFieldData<DynamicInputsNode, List<WoFormNodeMixin>,
-      DynamicInputsNodeUiSettings> data;
+  final WoFieldData<
+    DynamicInputsNode,
+    List<WoFormNodeMixin>,
+    DynamicInputsNodeUiSettings
+  >
+  data;
 
   @override
   Widget build(BuildContext context) {
     void onAddChoice(WoFormNodeMixin inputFromTemplate) {
       final input = inputFromTemplate.withId(
-        id: (data.uiSettings.generateId ??
-                WoFormTheme.of(context)?.generateId ??
-                Random()._generateUid)
-            .call(),
+        id:
+            (data.uiSettings.generateId ??
+                    WoFormTheme.of(context)?.generateId ??
+                    Random()._generateUid)
+                .call(),
       );
 
       data.onValueChanged?.call(List.from(data.value ?? [])..add(input));
@@ -70,8 +78,8 @@ class DynamicInputsNodeWidget extends StatelessWidget {
                 Text(template?.uiSettings.labelText ?? ''),
             helpValueBuilder: (template) =>
                 (template.uiSettings.helperText ?? '').isEmpty
-                    ? null
-                    : Text(template.uiSettings.helperText ?? ''),
+                ? null
+                : Text(template.uiSettings.helperText ?? ''),
             builder: (onPressed) => IconButton.filled(
               onPressed: onPressed,
               icon: const Icon(Icons.add),
@@ -87,7 +95,8 @@ class DynamicInputsNodeWidget extends StatelessWidget {
       shrinkWrap: false,
     );
 
-    final children = data.value
+    final children =
+        data.value
             ?.map(
               (e) => DeletableField(
                 // This key avoids unnecessary rebuilds
@@ -98,8 +107,8 @@ class DynamicInputsNodeWidget extends StatelessWidget {
                         (data.uiSettings.onChildDeletion ??
                                 WoFormTheme.of(context)?.onDynamicInputDeletion)
                             ?.call(
-                          () => data.onValueChanged?.call(data.value ?? []),
-                        );
+                              () => data.onValueChanged?.call(data.value ?? []),
+                            );
                         onRemoveChoice(e);
                       },
                 child: WoFormElementBuilder(
@@ -113,16 +122,18 @@ class DynamicInputsNodeWidget extends StatelessWidget {
 
     return Column(
       children: [
-        (WoFormTheme.of(context)?.inputHeaderBuilder ?? InputHeader.new)
-            .call(headerData),
+        (WoFormTheme.of(context)?.inputHeaderBuilder ?? InputHeader.new).call(
+          headerData,
+        ),
         if (data.uiSettings.reorderable ?? true)
           WoReorderableByGrabListView(
             onReorder: data.onValueChanged == null
                 ? null
                 : (oldIndex, newIndex) {
                     try {
-                      final newValues =
-                          List<WoFormNodeMixin>.from(data.value ?? []);
+                      final newValues = List<WoFormNodeMixin>.from(
+                        data.value ?? [],
+                      );
                       newValues.insert(
                         newIndex,
                         newValues.removeAt(oldIndex),

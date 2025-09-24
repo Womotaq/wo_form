@@ -37,7 +37,8 @@ class InputsNodeWidget extends StatelessWidget {
             (data.uiSettings.scrollable ?? false)
         ? ListView.builder(
             reverse: reverse,
-            physics: const ClampingScrollPhysics(),
+            // TODO : uiSettings.physics
+            // physics: const ClampingScrollPhysics(),
             scrollDirection: direction,
             padding: EdgeInsets.zero,
             itemCount: data.input.children.length + 1,

@@ -225,7 +225,8 @@ class _AlwaysVisibleSelectField<T> extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: (data.uiSettings.flex ?? 0) > 0
           ? ListView.builder(
-              physics: const ClampingScrollPhysics(),
+              // TODO : uiSettings.physics
+              // physics: const ClampingScrollPhysics(),
               itemCount: data.input.availibleValues.length + 1,
               itemBuilder: (_, index) => index == 0
                   ? header

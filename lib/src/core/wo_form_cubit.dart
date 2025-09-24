@@ -176,8 +176,6 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   // --- CURRENT STATE ---
 
-  String get currentPath => _tempSubmitDatas.lastOrNull?.path ?? '';
-
   WoFormNodeMixin get currentNode {
     final tempSubmitData = _tempSubmitDatas.lastOrNull;
     if (tempSubmitData == null) return _root;
@@ -197,7 +195,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   /// For exapmle, in a MultiStepSubmitMode, the errors are step-specific.
   Iterable<WoFormInputError> get currentErrors => currentNode.getErrors(
     values: state,
-    parentPath: currentPath.parentPath,
+    parentPath: state.submitPath.parentPath,
   );
 
   // --- TEMPORARY SUBMIT DATA ---
@@ -206,15 +204,29 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     /// If [true] is returned, the whole form will be submitted right after.
     required Future<bool?> Function() onSubmitting,
     required String path,
-  }) => _tempSubmitDatas.add((
-    onSubmitting: onSubmitting,
-    path: path,
-  ));
+  }) {
+    _tempSubmitDatas.add((
+      onSubmitting: onSubmitting,
+      path: path,
+    ));
+    state._setSubmitPath(path);
+  }
 
-  void clearTemporarySubmitData() => _tempSubmitDatas.clear();
+  void clearTemporarySubmitData() {
+    _tempSubmitDatas.clear();
+    state._clearSubmitPath();
+  }
 
-  void removeTemporarySubmitData({required String path}) =>
-      _tempSubmitDatas.removeWhere((data) => data.path == path);
+  void removeTemporarySubmitData({required String path}) {
+    for (final data in _tempSubmitDatas) {
+      if (data.path == path) {
+        _tempSubmitDatas.remove(data);
+        if (state.submitPath == data.path) {
+          state._clearSubmitPath();
+        }
+      }
+    }
+  }
 
   // --- FOCUS ---
 
@@ -403,14 +415,15 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     FocusScope.of(context).unfocus();
 
     final node = currentNode;
+    final submitPath = state.submitPath;
 
-    _submittedPaths.add(currentPath);
+    _submittedPaths.add(submitPath);
 
     _markPathsAsVisited(
       paths: node
           .getAllInputPaths(
             values: state,
-            parentPath: currentPath.parentPath,
+            parentPath: submitPath.parentPath,
           )
           // Remove root path
           .whereNot((path) => path.isEmpty),
@@ -419,7 +432,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     if (!skipErrors) {
       final errors = node.getErrors(
         values: state,
-        parentPath: currentPath.parentPath,
+        parentPath: submitPath.parentPath,
       );
 
       if (errors.isNotEmpty) {
@@ -443,7 +456,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
     for (final path in currentNode.getAllInputPaths(
       values: state,
-      parentPath: currentPath.parentPath,
+      parentPath: submitPath.parentPath,
     )) {
       _lockCubit.lockInput(path: path);
     }
@@ -571,6 +584,14 @@ class WoFormValues {
     _values..removeWhere((path, _) => path.startsWith('/__wo_reserved')),
     initialValues,
   );
+
+  // --- CURRENT STATE ---
+
+  // ignore: constant_identifier_names
+  static const _SUBMIT_PATH_KEY = '/__wo_reserved_submit_path';
+  String get submitPath => _values[_SUBMIT_PATH_KEY] as String? ?? '';
+  void _setSubmitPath(String path) => _values[_SUBMIT_PATH_KEY] = path;
+  void _clearSubmitPath() => _values[_SUBMIT_PATH_KEY] = '';
 
   // --- MULTISTEP ---
 

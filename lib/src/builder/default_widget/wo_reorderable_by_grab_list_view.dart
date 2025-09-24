@@ -49,15 +49,17 @@ class _WoReorderableByGrabListViewState
       physics: const NeverScrollableScrollPhysics(),
       // Because the dragged widget is not in the page's context,
       // we need to provide the following
-      proxyDecorator: (child, index, animation) => RepositoryProvider.value(
-        value: rootNode,
-        child: MultiBlocProvider(
-          providers: [
-            BlocProvider.value(value: valuesCubit),
-            BlocProvider.value(value: statusCubit),
-            BlocProvider.value(value: lockCubit),
-          ],
-          child: child,
+      proxyDecorator: (child, index, animation) => Material(
+        child: RepositoryProvider.value(
+          value: rootNode,
+          child: MultiBlocProvider(
+            providers: [
+              BlocProvider.value(value: valuesCubit),
+              BlocProvider.value(value: statusCubit),
+              BlocProvider.value(value: lockCubit),
+            ],
+            child: child,
+          ),
         ),
       ),
       onReorder: (oldIndex, newIndex) {
@@ -74,8 +76,9 @@ class _WoReorderableByGrabListViewState
       buildDefaultDragHandles: false,
       children: _items.indexed
           .map(
-            (e) => ColoredBox(
+            (e) => AnimatedContainer(
               key: e.$2.key ?? ValueKey(e.$2),
+              duration: WoFormTheme.ANIMATION_DURATION,
               color: e.$1.isOdd ? oddItemColor : evenItemColor,
               child: Row(
                 children: [

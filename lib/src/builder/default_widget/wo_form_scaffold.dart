@@ -3,13 +3,25 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/src/_export.dart';
 import 'package:wo_form/wo_form.dart';
 
-class WoFormStandardScaffold extends StatelessWidget {
-  const WoFormStandardScaffold(this.body, {super.key});
+class WoFormScaffold extends StatelessWidget {
+  const WoFormScaffold(this.body, {super.key});
 
   final Widget body;
 
   @override
   Widget build(BuildContext context) {
+    // final body = Column(
+    //   children: [
+    //     Expanded(
+    //       // flex: 0,
+    //       child: Container(
+    //         color: Colors.red,
+    //         width: 100,
+    //         height: 100,
+    //       ),
+    //     ),
+    //   ],
+    // );
     final uiSettings = context.read<RootNode>().uiSettings;
 
     switch (uiSettings.presentation) {
@@ -21,12 +33,15 @@ class WoFormStandardScaffold extends StatelessWidget {
             uiSettings.submitButtonPosition == SubmitButtonPosition.appBar;
         final showCloseButton =
             uiSettings.presentation == WoFormPresentation.dialog;
+        final supportFlex =
+            uiSettings.bodyLayout.supportFlex ||
+            (uiSettings.multistepSettings != null);
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Flexible(
-              flex: uiSettings.bodyLayout.supportFlex ? 1 : 0,
+              flex: supportFlex ? 1 : 0,
               child: Stack(
                 children: [
                   Column(
@@ -51,7 +66,7 @@ class WoFormStandardScaffold extends StatelessWidget {
                           ],
                         ),
                       Flexible(
-                        flex: uiSettings.bodyLayout.supportFlex ? 1 : 0,
+                        flex: supportFlex ? 1 : 0,
                         child: body,
                       ),
                     ],
@@ -67,25 +82,12 @@ class WoFormStandardScaffold extends StatelessWidget {
               ),
             ),
             if (uiSettings.submitButtonPosition ==
-                SubmitButtonPosition.bottomBar) ...[
+                SubmitButtonPosition.bottomBar)
               const SubmitButtonBuilder(),
-              // const SizedBox(width: 8),
-            ],
           ],
         );
 
       case WoFormPresentation.page:
-        final constrainedBody = Center(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth:
-                  WoFormTheme.of(context)?.maxWidth ??
-                  WoFormThemeData.DEFAULT_MAX_WIDTH,
-            ),
-            child: body,
-          ),
-        );
-
         return Scaffold(
           appBar: AppBar(
             leading: const QuitWoFormButton(),
@@ -100,9 +102,16 @@ class WoFormStandardScaffold extends StatelessWidget {
               ],
             ],
           ),
-          body: uiSettings.bodyLayout.isScrollable
-              ? SingleChildScrollView(child: constrainedBody)
-              : constrainedBody,
+          body: Center(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth:
+                    WoFormTheme.of(context)?.maxWidth ??
+                    WoFormThemeData.DEFAULT_MAX_WIDTH,
+              ),
+              child: body,
+            ),
+          ),
           bottomNavigationBar:
               uiSettings.submitButtonPosition == SubmitButtonPosition.bottomBar
               ? const SubmitButtonBuilder()
@@ -113,23 +122,5 @@ class WoFormStandardScaffold extends StatelessWidget {
               : null,
         );
     }
-  }
-}
-
-// TODO : remove
-class WoFormMultistepScaffold extends StatelessWidget {
-  const WoFormMultistepScaffold(this.body, {super.key});
-
-  final Widget body;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: const QuitWoFormButton(),
-        title: Text(context.read<RootNode>().uiSettings.titleText),
-      ),
-      body: body,
-    );
   }
 }

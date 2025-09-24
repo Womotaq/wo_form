@@ -24,7 +24,7 @@ class QuitWoFormButton extends StatelessWidget {
     final formUiSettings = context.read<RootNode>().uiSettings;
     final close = formUiSettings.presentation.isModal;
 
-    final canQuit = formUiSettings.submitMode is MultiStepSubmitMode
+    final canQuit = formUiSettings.multistepSettings != null
         ? canQuitMultistep
         : formUiSettings.canQuit;
 

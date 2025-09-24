@@ -716,7 +716,7 @@ abstract class WoFormUiSettings with _$WoFormUiSettings {
     @Default(SubmitButtonPosition.body)
     SubmitButtonPosition submitButtonPosition,
 
-    /// TODO : deprecate
+    /// TODO : deprecate, replace by WoFormPresentation.simple
     @notSerializable ScaffoldBuilderDef? scaffoldBuilder,
 
     /// If true, after the form is successfully submitted, it will be locked.

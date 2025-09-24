@@ -5,18 +5,26 @@ class WoFormPageBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final multistepSettings = context
-        .read<RootNode>()
-        .uiSettings
-        .multistepSettings;
-    return multistepSettings == null
-        ? const _WoFormStandardPage()
-        : _WoFormMultiStepPage(multistepSettings: multistepSettings);
+    final root = context.read<RootNode>();
+    final woFormTheme = WoFormTheme.of(context);
+
+    final multistepSettings = root.uiSettings.multistepSettings;
+    final body = multistepSettings == null
+        ? const _WoFormStandardBody()
+        : _WoFormMultistepBody(multistepSettings: multistepSettings);
+
+    return MultistepManager(
+      child:
+          (root.uiSettings.scaffoldBuilder ??
+                  woFormTheme?.standardScaffoldBuilder ??
+                  WoFormScaffold.new)
+              .call(body),
+    );
   }
 }
 
-class _WoFormStandardPage extends StatelessWidget {
-  const _WoFormStandardPage();
+class _WoFormStandardBody extends StatelessWidget {
+  const _WoFormStandardBody();
 
   @override
   Widget build(BuildContext context) {
@@ -67,43 +75,42 @@ class _WoFormStandardPage extends StatelessWidget {
       ],
     );
 
-    return (root.uiSettings.scaffoldBuilder ??
-            woFormTheme?.standardScaffoldBuilder ??
-            WoFormStandardScaffold.new)
-        .call(column);
+    return root.uiSettings.bodyLayout.isScrollable
+        ? SingleChildScrollView(child: column)
+        : column;
   }
 }
 
-class _WoFormMultiStepPage extends StatefulWidget {
-  const _WoFormMultiStepPage({required this.multistepSettings});
+class _WoFormMultistepBody extends StatefulWidget {
+  const _WoFormMultistepBody({required this.multistepSettings});
 
   final MultistepSettings multistepSettings;
 
   @override
-  State<_WoFormMultiStepPage> createState() => _WoFormMultiStepPageState();
+  State<_WoFormMultistepBody> createState() => _WoFormMultistepBodyState();
 }
 
-class _WoFormMultiStepPageState extends State<_WoFormMultiStepPage> {
+class _WoFormMultistepBodyState extends State<_WoFormMultistepBody> {
   late MultistepController controller;
-  late bool generatingSteps;
-  // Convenient
-  late WoFormValuesCubit valuesCubit;
 
   @override
   void initState() {
     super.initState();
 
-    valuesCubit = context.read<WoFormValuesCubit>();
-    generatingSteps = widget.multistepSettings.generatingSteps;
-    controller = MultistepController._(valuesCubit);
+    controller = MultistepController.of(context, listen: false)!;
     addTemporarySubmitData();
   }
+
+  bool get generatingSteps => widget.multistepSettings.generatingSteps;
 
   WoFormNodeMixin? _stepAtIndex(int index) {
     final rootChildren = context.read<RootNode>().children;
 
     if (generatingSteps) {
-      final generatedSteps = valuesCubit.state.generatedSteps;
+      final generatedSteps = context
+          .read<WoFormValuesCubit>()
+          .state
+          .generatedSteps;
 
       // happens when nextStep() returned null, wich means the end of the form
       if (index > generatedSteps.length - 1) return null;
@@ -130,6 +137,7 @@ class _WoFormMultiStepPageState extends State<_WoFormMultiStepPage> {
   Future<void> addTemporarySubmitData() async {
     if (!mounted) return;
 
+    final valuesCubit = context.read<WoFormValuesCubit>();
     final multistepIndex = valuesCubit.state.multistepIndex;
 
     // If node is the last page, we shouldn't add temporary submit data.
@@ -157,127 +165,101 @@ class _WoFormMultiStepPageState extends State<_WoFormMultiStepPage> {
   }
 
   @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final root = context.read<RootNode>();
     final woFormTheme = WoFormTheme.of(context);
 
-    final body = Column(
-      children: [
-        if (widget.multistepSettings.showProgressIndicator)
-          (widget.multistepSettings.progressIndicatorBuilder ??
-              woFormTheme?.multiStepProgressIndicatorBuilder ??
-              MultiStepProgressIndicator.new)(),
-        Expanded(
-          child: Builder(
-            builder: (context) {
-              final generatedSteps = generatingSteps
-                  ? context.select(
-                      (WoFormValuesCubit c) => c.state.generatedSteps,
-                    )
-                  : null;
+    final pageView = Builder(
+      builder: (context) {
+        final generatedSteps = generatingSteps
+            ? context.select(
+                (WoFormValuesCubit c) => c.state.generatedSteps,
+              )
+            : null;
 
-              return PageView.builder(
-                controller: controller._controller,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: generatedSteps == null ? root.children.length : null,
-                itemBuilder: (context, index) {
-                  final WoFormNodeMixin step;
+        return PageView.builder(
+          controller: controller._controller,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: generatedSteps == null ? root.children.length : null,
+          itemBuilder: (context, index) {
+            final WoFormNodeMixin step;
 
-                  if (generatedSteps != null) {
-                    if (index > generatedSteps.length - 1) return null;
-                    final stepId = generatedSteps[index];
-                    final stepOrNull = root.children.firstWhereOrNull(
-                      (step) => step.id == stepId,
-                    );
-
-                    if (stepOrNull == null) {
-                      throw ArgumentError('No step found with id $stepId');
-                    } else {
-                      step = stepOrNull;
-                    }
-                  } else {
-                    step = root.children[index];
-                  }
-
-                  final body = Padding(
-                    padding:
-                        // TODO : rework fieldsPadding
-                        widget.multistepSettings.fieldsPadding ??
-                        const EdgeInsets.only(top: 16, bottom: 32),
-                    child: step.toWidget(parentPath: ''),
-                  );
-
-                  return Builder(
-                    builder: (context) => ConstrainedColumn(
-                      maxWidth:
-                          woFormTheme?.maxWidth ??
-                          WoFormThemeData.DEFAULT_MAX_WIDTH,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Expanded(
-                          flex:
-                              root.uiSettings.bodyLayout.supportFlex &&
-                                  (step.flex(context) ?? 0) == 0
-                              ? 0
-                              : 1,
-                          child: root.uiSettings.bodyLayout.isScrollable
-                              ? SingleChildScrollView(child: body)
-                              : body,
-                        ),
-                        if (root.uiSettings.submitButtonPosition ==
-                            SubmitButtonPosition.body)
-                          SubmitButtonBuilder(
-                            submitButtonBuilder: (data) {
-                              final submitButtonBuilder =
-                                  root.uiSettings.submitButtonBuilder ??
-                                  woFormTheme?.submitButtonBuilder ??
-                                  SubmitButton.new;
-                              final isLastPage =
-                                  index == root.children.length - 1;
-
-                              return submitButtonBuilder(
-                                isLastPage
-                                    // This line ensures a smooth transition
-                                    ? data.copyWith(path: '')
-                                    : data.copyWith(
-                                        text:
-                                            widget.multistepSettings.nextText ??
-                                            context.read<WoFormL10n?>()?.next(),
-                                        // ignores submitIcon
-                                        icon: null,
-                                        path: '/${step.id}',
-                                      ),
-                              );
-                            },
-                          ),
-                      ],
-                    ),
-                  );
-                },
+            if (generatedSteps != null) {
+              if (index > generatedSteps.length - 1) return null;
+              final stepId = generatedSteps[index];
+              final stepOrNull = root.children.firstWhereOrNull(
+                (step) => step.id == stepId,
               );
-            },
-          ),
-        ),
-      ],
+
+              if (stepOrNull == null) {
+                throw ArgumentError('No step found with id $stepId');
+              } else {
+                step = stepOrNull;
+              }
+            } else {
+              step = root.children[index];
+            }
+
+            final stepWidget = Padding(
+              padding:
+                  // TODO : rework fieldsPadding
+                  widget.multistepSettings.fieldsPadding ??
+                  const EdgeInsets.only(top: 16, bottom: 32),
+              child: step.toWidget(parentPath: ''),
+            );
+
+            return Builder(
+              builder: (context) => ConstrainedColumn(
+                maxWidth:
+                    woFormTheme?.maxWidth ?? WoFormThemeData.DEFAULT_MAX_WIDTH,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(
+                    flex:
+                        root.uiSettings.bodyLayout.supportFlex &&
+                            (step.flex(context) ?? 0) == 0
+                        ? 0
+                        : 1,
+                    child: root.uiSettings.bodyLayout.isScrollable
+                        ? SingleChildScrollView(child: stepWidget)
+                        : stepWidget,
+                  ),
+                  if (root.uiSettings.submitButtonPosition ==
+                      SubmitButtonPosition.body)
+                    SubmitButtonBuilder(path: '/${step.id}'),
+                ],
+              ),
+            );
+          },
+        );
+      },
     );
 
     return BlocListener<WoFormValuesCubit, WoFormValues>(
       listenWhen: (previous, current) =>
           previous.multistepIndex != current.multistepIndex,
       listener: (context, state) => addTemporarySubmitData(),
-      child: MultistepControllerProvider(
-        controller: controller,
-        child:
-            (root.uiSettings.scaffoldBuilder ??
-                    // TODO : woFormTheme?.multistepScaffoldBuilder ??
-                    WoFormStandardScaffold.new)
-                .call(body),
+      child: Column(
+        children: [
+          if (root.uiSettings.titlePosition == WoFormTitlePosition.header)
+            Builder(
+              builder: (context) {
+                final headerData = WoFormHeaderData(
+                  labelText: root.uiSettings.titleText,
+                );
+
+                return (root.uiSettings.headerBuilder ??
+                        woFormTheme?.headerBuilder ??
+                        FormHeader.new)
+                    .call(headerData);
+              },
+            ),
+          if (widget.multistepSettings.showProgressIndicator)
+            (widget.multistepSettings.progressIndicatorBuilder ??
+                woFormTheme?.multiStepProgressIndicatorBuilder ??
+                MultiStepProgressIndicator.new)(),
+          Expanded(child: pageView),
+        ],
       ),
     );
   }
@@ -292,10 +274,10 @@ class MultistepController {
   static MultistepController? of(BuildContext context, {bool listen = true}) =>
       listen
       ? context
-            .dependOnInheritedWidgetOfExactType<MultistepControllerProvider>()
+            .dependOnInheritedWidgetOfExactType<_MultistepControllerProvider>()
             ?.controller
       : context
-            .getInheritedWidgetOfExactType<MultistepControllerProvider>()
+            .getInheritedWidgetOfExactType<_MultistepControllerProvider>()
             ?.controller;
 
   /// The current page displayed in the controlled [PageView].
@@ -394,16 +376,53 @@ class MultistepController {
   void dispose() => _controller.dispose();
 }
 
-class MultistepControllerProvider extends InheritedWidget {
-  const MultistepControllerProvider({
+class MultistepManager extends StatefulWidget {
+  const MultistepManager({required this.child, super.key});
+
+  final Widget child;
+
+  @override
+  State<MultistepManager> createState() => _MultistepManagerState();
+}
+
+class _MultistepManagerState extends State<MultistepManager> {
+  late final MultistepController? controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (context.read<RootNode>().uiSettings.multistepSettings != null) {
+      controller = MultistepController._(context.read<WoFormValuesCubit>());
+    } else {
+      controller = null;
+    }
+  }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => controller == null
+      ? widget.child
+      : _MultistepControllerProvider(
+          controller: controller!,
+          child: widget.child,
+        );
+}
+
+class _MultistepControllerProvider extends InheritedWidget {
+  const _MultistepControllerProvider({
     required this.controller,
     required super.child,
-    super.key,
   });
 
   final MultistepController controller;
 
   @override
-  bool updateShouldNotify(MultistepControllerProvider oldWidget) =>
+  bool updateShouldNotify(_MultistepControllerProvider oldWidget) =>
       controller != oldWidget.controller;
 }
