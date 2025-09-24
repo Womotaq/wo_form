@@ -408,10 +408,10 @@ _WoFormUiSettings _$WoFormUiSettingsFromJson(Map<String, dynamic> json) =>
             json['titlePosition'],
           ) ??
           WoFormTitlePosition.header,
-      submitMode: json['submitMode'] == null
-          ? const WoFormSubmitMode.standard()
-          : WoFormSubmitMode.fromJson(
-              json['submitMode'] as Map<String, dynamic>,
+      multistepSettings: json['multistepSettings'] == null
+          ? null
+          : MultistepSettings.fromJson(
+              json['multistepSettings'] as Map<String, dynamic>,
             ),
       disableSubmitMode:
           $enumDecodeNullable(
@@ -419,6 +419,13 @@ _WoFormUiSettings _$WoFormUiSettingsFromJson(Map<String, dynamic> json) =>
             json['disableSubmitMode'],
           ) ??
           DisableSubmitButton.never,
+      submitText: json['submitText'] as String?,
+      submitButtonPosition:
+          $enumDecodeNullable(
+            _$SubmitButtonPositionEnumMap,
+            json['submitButtonPosition'],
+          ) ??
+          SubmitButtonPosition.body,
       canModifySubmittedValues: json['canModifySubmittedValues'] as bool?,
       showErrors:
           $enumDecodeNullable(_$ShowErrorsEnumMap, json['showErrors']) ??
@@ -432,20 +439,30 @@ _WoFormUiSettings _$WoFormUiSettingsFromJson(Map<String, dynamic> json) =>
       bodyLayout:
           $enumDecodeNullable(_$WoFormBodyLayoutEnumMap, json['bodyLayout']) ??
           WoFormBodyLayout.scrollable,
+      presentation:
+          $enumDecodeNullable(
+            _$WoFormPresentationEnumMap,
+            json['presentation'],
+          ) ??
+          WoFormPresentation.page,
     );
 
 Map<String, dynamic> _$WoFormUiSettingsToJson(_WoFormUiSettings instance) =>
     <String, dynamic>{
       'titleText': instance.titleText,
       'titlePosition': _$WoFormTitlePositionEnumMap[instance.titlePosition]!,
-      'submitMode': instance.submitMode.toJson(),
+      'multistepSettings': instance.multistepSettings?.toJson(),
       'disableSubmitMode':
           _$DisableSubmitButtonEnumMap[instance.disableSubmitMode]!,
+      'submitText': instance.submitText,
+      'submitButtonPosition':
+          _$SubmitButtonPositionEnumMap[instance.submitButtonPosition]!,
       'canModifySubmittedValues': instance.canModifySubmittedValues,
       'showErrors': _$ShowErrorsEnumMap[instance.showErrors]!,
       'theme': instance.theme?.toJson(),
       'padding': const EdgeInsetsNullableConverter().toJson(instance.padding),
       'bodyLayout': _$WoFormBodyLayoutEnumMap[instance.bodyLayout]!,
+      'presentation': _$WoFormPresentationEnumMap[instance.presentation]!,
     };
 
 const _$WoFormTitlePositionEnumMap = {
@@ -459,6 +476,13 @@ const _$DisableSubmitButtonEnumMap = {
   DisableSubmitButton.whenInitialOrSubmitSuccess: 'whenInitialOrSubmitSuccess',
 };
 
+const _$SubmitButtonPositionEnumMap = {
+  SubmitButtonPosition.body: 'body',
+  SubmitButtonPosition.appBar: 'appBar',
+  SubmitButtonPosition.bottomBar: 'bottomBar',
+  SubmitButtonPosition.floating: 'floating',
+};
+
 const _$ShowErrorsEnumMap = {
   ShowErrors.afterSubmission: 'afterSubmission',
   ShowErrors.always: 'always',
@@ -470,51 +494,26 @@ const _$WoFormBodyLayoutEnumMap = {
   WoFormBodyLayout.flexible: 'flexible',
 };
 
-StandardSubmitMode _$StandardSubmitModeFromJson(Map<String, dynamic> json) =>
-    StandardSubmitMode(
-      submitText: json['submitText'] as String?,
-      buttonPosition:
-          $enumDecodeNullable(
-            _$SubmitButtonPositionEnumMap,
-            json['buttonPosition'],
-          ) ??
-          SubmitButtonPosition.body,
-      $type: json['runtimeType'] as String?,
-    );
-
-Map<String, dynamic> _$StandardSubmitModeToJson(StandardSubmitMode instance) =>
-    <String, dynamic>{
-      'submitText': instance.submitText,
-      'buttonPosition': _$SubmitButtonPositionEnumMap[instance.buttonPosition]!,
-      'runtimeType': instance.$type,
-    };
-
-const _$SubmitButtonPositionEnumMap = {
-  SubmitButtonPosition.body: 'body',
-  SubmitButtonPosition.appBar: 'appBar',
-  SubmitButtonPosition.bottomBar: 'bottomBar',
-  SubmitButtonPosition.floating: 'floating',
+const _$WoFormPresentationEnumMap = {
+  WoFormPresentation.page: 'page',
+  WoFormPresentation.dialog: 'dialog',
+  WoFormPresentation.bottomSheet: 'bottomSheet',
 };
 
-MultiStepSubmitMode _$MultiStepSubmitModeFromJson(Map<String, dynamic> json) =>
-    MultiStepSubmitMode(
-      submitText: json['submitText'] as String?,
+_MultistepSettings _$MultistepSettingsFromJson(Map<String, dynamic> json) =>
+    _MultistepSettings(
       nextText: json['nextText'] as String?,
       showProgressIndicator: json['showProgressIndicator'] as bool? ?? true,
       fieldsPadding: const EdgeInsetsNullableConverter().fromJson(
         json['fieldsPadding'] as Map<String, dynamic>?,
       ),
-      $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$MultiStepSubmitModeToJson(
-  MultiStepSubmitMode instance,
-) => <String, dynamic>{
-  'submitText': instance.submitText,
-  'nextText': instance.nextText,
-  'showProgressIndicator': instance.showProgressIndicator,
-  'fieldsPadding': const EdgeInsetsNullableConverter().toJson(
-    instance.fieldsPadding,
-  ),
-  'runtimeType': instance.$type,
-};
+Map<String, dynamic> _$MultistepSettingsToJson(_MultistepSettings instance) =>
+    <String, dynamic>{
+      'nextText': instance.nextText,
+      'showProgressIndicator': instance.showProgressIndicator,
+      'fieldsPadding': const EdgeInsetsNullableConverter().toJson(
+        instance.fieldsPadding,
+      ),
+    };

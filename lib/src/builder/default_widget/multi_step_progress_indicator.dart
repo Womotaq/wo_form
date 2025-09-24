@@ -8,7 +8,12 @@ class MultiStepProgressIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (context.read<RootNode>().uiSettings.submitMode.generatingSteps) {
+    if (context
+            .read<RootNode>()
+            .uiSettings
+            .multistepSettings
+            ?.generatingSteps ??
+        false) {
       return const SizedBox.shrink();
     }
 

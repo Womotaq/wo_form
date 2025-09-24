@@ -5,27 +5,22 @@ class WoFormPageBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final root = context.read<RootNode>();
-
-    final submitMode = root.uiSettings.submitMode;
-    return submitMode is MultiStepSubmitMode
-        ? _WoFormMultiStepPage(submitMode: submitMode)
-        : _WoFormStandardPage(root: root);
+    final multistepSettings = context
+        .read<RootNode>()
+        .uiSettings
+        .multistepSettings;
+    return multistepSettings == null
+        ? const _WoFormStandardPage()
+        : _WoFormMultiStepPage(multistepSettings: multistepSettings);
   }
 }
 
 class _WoFormStandardPage extends StatelessWidget {
-  const _WoFormStandardPage({required this.root});
-
-  final RootNode root;
+  const _WoFormStandardPage();
 
   @override
   Widget build(BuildContext context) {
-    final submitMode = root.uiSettings.submitMode;
-    if (submitMode is! StandardSubmitMode) {
-      throw ArgumentError('submitMode must be StandardSubmitMode');
-    }
-
+    final root = context.read<RootNode>();
     final woFormTheme = WoFormTheme.of(context);
 
     final column = Column(
@@ -67,7 +62,7 @@ class _WoFormStandardPage extends StatelessWidget {
                 .toList(),
           ),
         ),
-        if (submitMode.buttonPosition == SubmitButtonPosition.body)
+        if (root.uiSettings.submitButtonPosition == SubmitButtonPosition.body)
           const SubmitButtonBuilder(),
       ],
     );
@@ -80,9 +75,9 @@ class _WoFormStandardPage extends StatelessWidget {
 }
 
 class _WoFormMultiStepPage extends StatefulWidget {
-  const _WoFormMultiStepPage({required this.submitMode});
+  const _WoFormMultiStepPage({required this.multistepSettings});
 
-  final MultiStepSubmitMode submitMode;
+  final MultistepSettings multistepSettings;
 
   @override
   State<_WoFormMultiStepPage> createState() => _WoFormMultiStepPageState();
@@ -99,7 +94,7 @@ class _WoFormMultiStepPageState extends State<_WoFormMultiStepPage> {
     super.initState();
 
     valuesCubit = context.read<WoFormValuesCubit>();
-    generatingSteps = widget.submitMode.generatingSteps;
+    generatingSteps = widget.multistepSettings.generatingSteps;
     controller = MultistepController._(valuesCubit);
     addTemporarySubmitData();
   }
@@ -152,7 +147,7 @@ class _WoFormMultiStepPageState extends State<_WoFormMultiStepPage> {
       onSubmitting: () async {
         FocusScope.of(context).unfocus();
 
-        await widget.submitMode.onTemporarySubmitting?.call(context);
+        await widget.multistepSettings.onTemporarySubmitting?.call(context);
 
         final abortReason = controller.nextStep();
         return abortReason == 'end-of-form';
@@ -174,8 +169,8 @@ class _WoFormMultiStepPageState extends State<_WoFormMultiStepPage> {
 
     final body = Column(
       children: [
-        if (widget.submitMode.showProgressIndicator)
-          (widget.submitMode.progressIndicatorBuilder ??
+        if (widget.multistepSettings.showProgressIndicator)
+          (widget.multistepSettings.progressIndicatorBuilder ??
               woFormTheme?.multiStepProgressIndicatorBuilder ??
               MultiStepProgressIndicator.new)(),
         Expanded(
@@ -213,7 +208,7 @@ class _WoFormMultiStepPageState extends State<_WoFormMultiStepPage> {
                   final body = Padding(
                     padding:
                         // TODO : rework fieldsPadding
-                        widget.submitMode.fieldsPadding ??
+                        widget.multistepSettings.fieldsPadding ??
                         const EdgeInsets.only(top: 16, bottom: 32),
                     child: step.toWidget(parentPath: ''),
                   );
@@ -235,30 +230,32 @@ class _WoFormMultiStepPageState extends State<_WoFormMultiStepPage> {
                               ? SingleChildScrollView(child: body)
                               : body,
                         ),
-                        SubmitButtonBuilder(
-                          submitButtonBuilder: (data) {
-                            final submitButtonBuilder =
-                                root.uiSettings.submitButtonBuilder ??
-                                woFormTheme?.submitButtonBuilder ??
-                                SubmitButton.new;
-                            final isLastPage =
-                                index == root.children.length - 1;
+                        if (root.uiSettings.submitButtonPosition ==
+                            SubmitButtonPosition.body)
+                          SubmitButtonBuilder(
+                            submitButtonBuilder: (data) {
+                              final submitButtonBuilder =
+                                  root.uiSettings.submitButtonBuilder ??
+                                  woFormTheme?.submitButtonBuilder ??
+                                  SubmitButton.new;
+                              final isLastPage =
+                                  index == root.children.length - 1;
 
-                            return submitButtonBuilder(
-                              isLastPage
-                                  // This line ensures a smooth transition
-                                  ? data.copyWith(path: '')
-                                  : data.copyWith(
-                                      text:
-                                          widget.submitMode.nextText ??
-                                          context.read<WoFormL10n?>()?.next(),
-                                      // ignores submitIcon
-                                      icon: null,
-                                      path: '/${step.id}',
-                                    ),
-                            );
-                          },
-                        ),
+                              return submitButtonBuilder(
+                                isLastPage
+                                    // This line ensures a smooth transition
+                                    ? data.copyWith(path: '')
+                                    : data.copyWith(
+                                        text:
+                                            widget.multistepSettings.nextText ??
+                                            context.read<WoFormL10n?>()?.next(),
+                                        // ignores submitIcon
+                                        icon: null,
+                                        path: '/${step.id}',
+                                      ),
+                              );
+                            },
+                          ),
                       ],
                     ),
                   );
@@ -279,7 +276,7 @@ class _WoFormMultiStepPageState extends State<_WoFormMultiStepPage> {
         child:
             (root.uiSettings.scaffoldBuilder ??
                     // TODO : woFormTheme?.multistepScaffoldBuilder ??
-                    WoFormMultistepScaffold.new)
+                    WoFormStandardScaffold.new)
                 .call(body),
       ),
     );
@@ -322,7 +319,7 @@ class MultistepController {
   double? get page => _controller.page;
 
   /// Possible return values :
-  /// - 'end-of-form' : there is no further step.
+  /// - 'end-of-form' : there is no next step.
   /// - 'error' : an error occured
   /// - null : success
   String? nextStep() {
@@ -348,7 +345,7 @@ class MultistepController {
   }
 
   /// Possible return values :
-  /// - 'end-of-form' : there is no further step.
+  /// - 'start-of-form' : there is no previous step.
   /// - 'error' : an error occured
   /// - null : success
   String? previousStep() {
@@ -370,7 +367,7 @@ class MultistepController {
       );
     }
 
-    return canAnimate ? null : 'end-of-form';
+    return canAnimate ? null : 'start-of-form';
   }
 
   void backToStep(int step) {

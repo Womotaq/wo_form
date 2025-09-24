@@ -1923,7 +1923,12 @@ as ErrorBuilderDef?,
 /// @nodoc
 mixin _$WoFormUiSettings {
 
- String get titleText; WoFormTitlePosition get titlePosition;@notSerializable HeaderBuilderDef? get headerBuilder; WoFormSubmitMode get submitMode; DisableSubmitButton get disableSubmitMode;@notSerializable SubmitButtonBuilderDef? get submitButtonBuilder;@notSerializable ScaffoldBuilderDef? get scaffoldBuilder;/// If true, after the form is successfully submitted, it will be locked.
+ String get titleText; WoFormTitlePosition get titlePosition;@notSerializable HeaderBuilderDef? get headerBuilder;// TODO : replace by multistepSettings
+ MultistepSettings? get multistepSettings; DisableSubmitButton get disableSubmitMode;/// The text of the submit button. Falls back to [WoFormL10n.submitText].
+ String? get submitText;/// The icon of the submit button.
+@notSerializable IconData? get submitIcon;@notSerializable SubmitButtonBuilderDef? get submitButtonBuilder;/// The position of the submit button in the form.
+ SubmitButtonPosition get submitButtonPosition;/// TODO : deprecate
+@notSerializable ScaffoldBuilderDef? get scaffoldBuilder;/// If true, after the form is successfully submitted, it will be locked.
  bool? get canModifySubmittedValues;/// By default, errors will only be shown after the user visited a node or
 /// tried to submit the form.
  ShowErrors get showErrors;/// Called when the users tries to quit the form, for exapmle by pressing
@@ -1938,7 +1943,11 @@ mixin _$WoFormUiSettings {
 /// The body consists of your inputs and potentially the submit button,
 /// if [StandardSubmitMode.buttonPosition] is SubmitButtonPosition.body
 /// (wich is the default value).
- WoFormBodyLayout get bodyLayout;
+ WoFormBodyLayout get bodyLayout;/// Controls how the form is presented to the user.
+///
+/// This determines whether the form is displayed as a full-page screen or
+/// as a modal overlay. It affects the title and navigation controls.
+ WoFormPresentation get presentation;
 /// Create a copy of WoFormUiSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1951,16 +1960,16 @@ $WoFormUiSettingsCopyWith<WoFormUiSettings> get copyWith => _$WoFormUiSettingsCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WoFormUiSettings&&(identical(other.titleText, titleText) || other.titleText == titleText)&&(identical(other.titlePosition, titlePosition) || other.titlePosition == titlePosition)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.submitMode, submitMode) || other.submitMode == submitMode)&&(identical(other.disableSubmitMode, disableSubmitMode) || other.disableSubmitMode == disableSubmitMode)&&(identical(other.submitButtonBuilder, submitButtonBuilder) || other.submitButtonBuilder == submitButtonBuilder)&&(identical(other.scaffoldBuilder, scaffoldBuilder) || other.scaffoldBuilder == scaffoldBuilder)&&(identical(other.canModifySubmittedValues, canModifySubmittedValues) || other.canModifySubmittedValues == canModifySubmittedValues)&&(identical(other.showErrors, showErrors) || other.showErrors == showErrors)&&(identical(other.canQuit, canQuit) || other.canQuit == canQuit)&&(identical(other.theme, theme) || other.theme == theme)&&(identical(other.padding, padding) || other.padding == padding)&&(identical(other.bodyLayout, bodyLayout) || other.bodyLayout == bodyLayout));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WoFormUiSettings&&(identical(other.titleText, titleText) || other.titleText == titleText)&&(identical(other.titlePosition, titlePosition) || other.titlePosition == titlePosition)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.multistepSettings, multistepSettings) || other.multistepSettings == multistepSettings)&&(identical(other.disableSubmitMode, disableSubmitMode) || other.disableSubmitMode == disableSubmitMode)&&(identical(other.submitText, submitText) || other.submitText == submitText)&&(identical(other.submitIcon, submitIcon) || other.submitIcon == submitIcon)&&(identical(other.submitButtonBuilder, submitButtonBuilder) || other.submitButtonBuilder == submitButtonBuilder)&&(identical(other.submitButtonPosition, submitButtonPosition) || other.submitButtonPosition == submitButtonPosition)&&(identical(other.scaffoldBuilder, scaffoldBuilder) || other.scaffoldBuilder == scaffoldBuilder)&&(identical(other.canModifySubmittedValues, canModifySubmittedValues) || other.canModifySubmittedValues == canModifySubmittedValues)&&(identical(other.showErrors, showErrors) || other.showErrors == showErrors)&&(identical(other.canQuit, canQuit) || other.canQuit == canQuit)&&(identical(other.theme, theme) || other.theme == theme)&&(identical(other.padding, padding) || other.padding == padding)&&(identical(other.bodyLayout, bodyLayout) || other.bodyLayout == bodyLayout)&&(identical(other.presentation, presentation) || other.presentation == presentation));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,titleText,titlePosition,headerBuilder,submitMode,disableSubmitMode,submitButtonBuilder,scaffoldBuilder,canModifySubmittedValues,showErrors,canQuit,theme,padding,bodyLayout);
+int get hashCode => Object.hash(runtimeType,titleText,titlePosition,headerBuilder,multistepSettings,disableSubmitMode,submitText,submitIcon,submitButtonBuilder,submitButtonPosition,scaffoldBuilder,canModifySubmittedValues,showErrors,canQuit,theme,padding,bodyLayout,presentation);
 
 @override
 String toString() {
-  return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, disableSubmitMode: $disableSubmitMode, submitButtonBuilder: $submitButtonBuilder, scaffoldBuilder: $scaffoldBuilder, canModifySubmittedValues: $canModifySubmittedValues, showErrors: $showErrors, canQuit: $canQuit, theme: $theme, padding: $padding, bodyLayout: $bodyLayout)';
+  return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, multistepSettings: $multistepSettings, disableSubmitMode: $disableSubmitMode, submitText: $submitText, submitIcon: $submitIcon, submitButtonBuilder: $submitButtonBuilder, submitButtonPosition: $submitButtonPosition, scaffoldBuilder: $scaffoldBuilder, canModifySubmittedValues: $canModifySubmittedValues, showErrors: $showErrors, canQuit: $canQuit, theme: $theme, padding: $padding, bodyLayout: $bodyLayout, presentation: $presentation)';
 }
 
 
@@ -1971,11 +1980,11 @@ abstract mixin class $WoFormUiSettingsCopyWith<$Res>  {
   factory $WoFormUiSettingsCopyWith(WoFormUiSettings value, $Res Function(WoFormUiSettings) _then) = _$WoFormUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String titleText, WoFormTitlePosition titlePosition,@notSerializable HeaderBuilderDef? headerBuilder, WoFormSubmitMode submitMode, DisableSubmitButton disableSubmitMode,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder,@notSerializable ScaffoldBuilderDef? scaffoldBuilder, bool? canModifySubmittedValues, ShowErrors showErrors,@notSerializable Future<bool?> Function(BuildContext context)? canQuit, WoFormThemeData? theme,@EdgeInsetsNullableConverter() EdgeInsets? padding, WoFormBodyLayout bodyLayout
+ String titleText, WoFormTitlePosition titlePosition,@notSerializable HeaderBuilderDef? headerBuilder, MultistepSettings? multistepSettings, DisableSubmitButton disableSubmitMode, String? submitText,@notSerializable IconData? submitIcon,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder, SubmitButtonPosition submitButtonPosition,@notSerializable ScaffoldBuilderDef? scaffoldBuilder, bool? canModifySubmittedValues, ShowErrors showErrors,@notSerializable Future<bool?> Function(BuildContext context)? canQuit, WoFormThemeData? theme,@EdgeInsetsNullableConverter() EdgeInsets? padding, WoFormBodyLayout bodyLayout, WoFormPresentation presentation
 });
 
 
-$WoFormSubmitModeCopyWith<$Res> get submitMode;$WoFormThemeDataCopyWith<$Res>? get theme;
+$MultistepSettingsCopyWith<$Res>? get multistepSettings;$WoFormThemeDataCopyWith<$Res>? get theme;
 
 }
 /// @nodoc
@@ -1988,32 +1997,39 @@ class _$WoFormUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of WoFormUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? titleText = null,Object? titlePosition = null,Object? headerBuilder = freezed,Object? submitMode = null,Object? disableSubmitMode = null,Object? submitButtonBuilder = freezed,Object? scaffoldBuilder = freezed,Object? canModifySubmittedValues = freezed,Object? showErrors = null,Object? canQuit = freezed,Object? theme = freezed,Object? padding = freezed,Object? bodyLayout = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? titleText = null,Object? titlePosition = null,Object? headerBuilder = freezed,Object? multistepSettings = freezed,Object? disableSubmitMode = null,Object? submitText = freezed,Object? submitIcon = freezed,Object? submitButtonBuilder = freezed,Object? submitButtonPosition = null,Object? scaffoldBuilder = freezed,Object? canModifySubmittedValues = freezed,Object? showErrors = null,Object? canQuit = freezed,Object? theme = freezed,Object? padding = freezed,Object? bodyLayout = null,Object? presentation = null,}) {
   return _then(_self.copyWith(
 titleText: null == titleText ? _self.titleText : titleText // ignore: cast_nullable_to_non_nullable
 as String,titlePosition: null == titlePosition ? _self.titlePosition : titlePosition // ignore: cast_nullable_to_non_nullable
 as WoFormTitlePosition,headerBuilder: freezed == headerBuilder ? _self.headerBuilder : headerBuilder // ignore: cast_nullable_to_non_nullable
-as HeaderBuilderDef?,submitMode: null == submitMode ? _self.submitMode : submitMode // ignore: cast_nullable_to_non_nullable
-as WoFormSubmitMode,disableSubmitMode: null == disableSubmitMode ? _self.disableSubmitMode : disableSubmitMode // ignore: cast_nullable_to_non_nullable
-as DisableSubmitButton,submitButtonBuilder: freezed == submitButtonBuilder ? _self.submitButtonBuilder : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
-as SubmitButtonBuilderDef?,scaffoldBuilder: freezed == scaffoldBuilder ? _self.scaffoldBuilder : scaffoldBuilder // ignore: cast_nullable_to_non_nullable
+as HeaderBuilderDef?,multistepSettings: freezed == multistepSettings ? _self.multistepSettings : multistepSettings // ignore: cast_nullable_to_non_nullable
+as MultistepSettings?,disableSubmitMode: null == disableSubmitMode ? _self.disableSubmitMode : disableSubmitMode // ignore: cast_nullable_to_non_nullable
+as DisableSubmitButton,submitText: freezed == submitText ? _self.submitText : submitText // ignore: cast_nullable_to_non_nullable
+as String?,submitIcon: freezed == submitIcon ? _self.submitIcon : submitIcon // ignore: cast_nullable_to_non_nullable
+as IconData?,submitButtonBuilder: freezed == submitButtonBuilder ? _self.submitButtonBuilder : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
+as SubmitButtonBuilderDef?,submitButtonPosition: null == submitButtonPosition ? _self.submitButtonPosition : submitButtonPosition // ignore: cast_nullable_to_non_nullable
+as SubmitButtonPosition,scaffoldBuilder: freezed == scaffoldBuilder ? _self.scaffoldBuilder : scaffoldBuilder // ignore: cast_nullable_to_non_nullable
 as ScaffoldBuilderDef?,canModifySubmittedValues: freezed == canModifySubmittedValues ? _self.canModifySubmittedValues : canModifySubmittedValues // ignore: cast_nullable_to_non_nullable
 as bool?,showErrors: null == showErrors ? _self.showErrors : showErrors // ignore: cast_nullable_to_non_nullable
 as ShowErrors,canQuit: freezed == canQuit ? _self.canQuit : canQuit // ignore: cast_nullable_to_non_nullable
 as Future<bool?> Function(BuildContext context)?,theme: freezed == theme ? _self.theme : theme // ignore: cast_nullable_to_non_nullable
 as WoFormThemeData?,padding: freezed == padding ? _self.padding : padding // ignore: cast_nullable_to_non_nullable
 as EdgeInsets?,bodyLayout: null == bodyLayout ? _self.bodyLayout : bodyLayout // ignore: cast_nullable_to_non_nullable
-as WoFormBodyLayout,
+as WoFormBodyLayout,presentation: null == presentation ? _self.presentation : presentation // ignore: cast_nullable_to_non_nullable
+as WoFormPresentation,
   ));
 }
 /// Create a copy of WoFormUiSettings
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$WoFormSubmitModeCopyWith<$Res> get submitMode {
-  
-  return $WoFormSubmitModeCopyWith<$Res>(_self.submitMode, (value) {
-    return _then(_self.copyWith(submitMode: value));
+$MultistepSettingsCopyWith<$Res>? get multistepSettings {
+    if (_self.multistepSettings == null) {
+    return null;
+  }
+
+  return $MultistepSettingsCopyWith<$Res>(_self.multistepSettings!, (value) {
+    return _then(_self.copyWith(multistepSettings: value));
   });
 }/// Create a copy of WoFormUiSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -2036,15 +2052,23 @@ $WoFormThemeDataCopyWith<$Res>? get theme {
 @JsonSerializable()
 
 class _WoFormUiSettings extends WoFormUiSettings {
-  const _WoFormUiSettings({this.titleText = '', this.titlePosition = WoFormTitlePosition.header, @notSerializable this.headerBuilder, this.submitMode = const WoFormSubmitMode.standard(), this.disableSubmitMode = DisableSubmitButton.never, @notSerializable this.submitButtonBuilder, @notSerializable this.scaffoldBuilder, this.canModifySubmittedValues, this.showErrors = ShowErrors.progressively, @notSerializable this.canQuit, this.theme, @EdgeInsetsNullableConverter() this.padding, this.bodyLayout = WoFormBodyLayout.scrollable}): super._();
+  const _WoFormUiSettings({this.titleText = '', this.titlePosition = WoFormTitlePosition.header, @notSerializable this.headerBuilder, this.multistepSettings, this.disableSubmitMode = DisableSubmitButton.never, this.submitText, @notSerializable this.submitIcon, @notSerializable this.submitButtonBuilder, this.submitButtonPosition = SubmitButtonPosition.body, @notSerializable this.scaffoldBuilder, this.canModifySubmittedValues, this.showErrors = ShowErrors.progressively, @notSerializable this.canQuit, this.theme, @EdgeInsetsNullableConverter() this.padding, this.bodyLayout = WoFormBodyLayout.scrollable, this.presentation = WoFormPresentation.page}): super._();
   factory _WoFormUiSettings.fromJson(Map<String, dynamic> json) => _$WoFormUiSettingsFromJson(json);
 
 @override@JsonKey() final  String titleText;
 @override@JsonKey() final  WoFormTitlePosition titlePosition;
 @override@notSerializable final  HeaderBuilderDef? headerBuilder;
-@override@JsonKey() final  WoFormSubmitMode submitMode;
+// TODO : replace by multistepSettings
+@override final  MultistepSettings? multistepSettings;
 @override@JsonKey() final  DisableSubmitButton disableSubmitMode;
+/// The text of the submit button. Falls back to [WoFormL10n.submitText].
+@override final  String? submitText;
+/// The icon of the submit button.
+@override@notSerializable final  IconData? submitIcon;
 @override@notSerializable final  SubmitButtonBuilderDef? submitButtonBuilder;
+/// The position of the submit button in the form.
+@override@JsonKey() final  SubmitButtonPosition submitButtonPosition;
+/// TODO : deprecate
 @override@notSerializable final  ScaffoldBuilderDef? scaffoldBuilder;
 /// If true, after the form is successfully submitted, it will be locked.
 @override final  bool? canModifySubmittedValues;
@@ -2067,6 +2091,11 @@ class _WoFormUiSettings extends WoFormUiSettings {
 /// if [StandardSubmitMode.buttonPosition] is SubmitButtonPosition.body
 /// (wich is the default value).
 @override@JsonKey() final  WoFormBodyLayout bodyLayout;
+/// Controls how the form is presented to the user.
+///
+/// This determines whether the form is displayed as a full-page screen or
+/// as a modal overlay. It affects the title and navigation controls.
+@override@JsonKey() final  WoFormPresentation presentation;
 
 /// Create a copy of WoFormUiSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -2081,16 +2110,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WoFormUiSettings&&(identical(other.titleText, titleText) || other.titleText == titleText)&&(identical(other.titlePosition, titlePosition) || other.titlePosition == titlePosition)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.submitMode, submitMode) || other.submitMode == submitMode)&&(identical(other.disableSubmitMode, disableSubmitMode) || other.disableSubmitMode == disableSubmitMode)&&(identical(other.submitButtonBuilder, submitButtonBuilder) || other.submitButtonBuilder == submitButtonBuilder)&&(identical(other.scaffoldBuilder, scaffoldBuilder) || other.scaffoldBuilder == scaffoldBuilder)&&(identical(other.canModifySubmittedValues, canModifySubmittedValues) || other.canModifySubmittedValues == canModifySubmittedValues)&&(identical(other.showErrors, showErrors) || other.showErrors == showErrors)&&(identical(other.canQuit, canQuit) || other.canQuit == canQuit)&&(identical(other.theme, theme) || other.theme == theme)&&(identical(other.padding, padding) || other.padding == padding)&&(identical(other.bodyLayout, bodyLayout) || other.bodyLayout == bodyLayout));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WoFormUiSettings&&(identical(other.titleText, titleText) || other.titleText == titleText)&&(identical(other.titlePosition, titlePosition) || other.titlePosition == titlePosition)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.multistepSettings, multistepSettings) || other.multistepSettings == multistepSettings)&&(identical(other.disableSubmitMode, disableSubmitMode) || other.disableSubmitMode == disableSubmitMode)&&(identical(other.submitText, submitText) || other.submitText == submitText)&&(identical(other.submitIcon, submitIcon) || other.submitIcon == submitIcon)&&(identical(other.submitButtonBuilder, submitButtonBuilder) || other.submitButtonBuilder == submitButtonBuilder)&&(identical(other.submitButtonPosition, submitButtonPosition) || other.submitButtonPosition == submitButtonPosition)&&(identical(other.scaffoldBuilder, scaffoldBuilder) || other.scaffoldBuilder == scaffoldBuilder)&&(identical(other.canModifySubmittedValues, canModifySubmittedValues) || other.canModifySubmittedValues == canModifySubmittedValues)&&(identical(other.showErrors, showErrors) || other.showErrors == showErrors)&&(identical(other.canQuit, canQuit) || other.canQuit == canQuit)&&(identical(other.theme, theme) || other.theme == theme)&&(identical(other.padding, padding) || other.padding == padding)&&(identical(other.bodyLayout, bodyLayout) || other.bodyLayout == bodyLayout)&&(identical(other.presentation, presentation) || other.presentation == presentation));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,titleText,titlePosition,headerBuilder,submitMode,disableSubmitMode,submitButtonBuilder,scaffoldBuilder,canModifySubmittedValues,showErrors,canQuit,theme,padding,bodyLayout);
+int get hashCode => Object.hash(runtimeType,titleText,titlePosition,headerBuilder,multistepSettings,disableSubmitMode,submitText,submitIcon,submitButtonBuilder,submitButtonPosition,scaffoldBuilder,canModifySubmittedValues,showErrors,canQuit,theme,padding,bodyLayout,presentation);
 
 @override
 String toString() {
-  return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, disableSubmitMode: $disableSubmitMode, submitButtonBuilder: $submitButtonBuilder, scaffoldBuilder: $scaffoldBuilder, canModifySubmittedValues: $canModifySubmittedValues, showErrors: $showErrors, canQuit: $canQuit, theme: $theme, padding: $padding, bodyLayout: $bodyLayout)';
+  return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, multistepSettings: $multistepSettings, disableSubmitMode: $disableSubmitMode, submitText: $submitText, submitIcon: $submitIcon, submitButtonBuilder: $submitButtonBuilder, submitButtonPosition: $submitButtonPosition, scaffoldBuilder: $scaffoldBuilder, canModifySubmittedValues: $canModifySubmittedValues, showErrors: $showErrors, canQuit: $canQuit, theme: $theme, padding: $padding, bodyLayout: $bodyLayout, presentation: $presentation)';
 }
 
 
@@ -2101,11 +2130,11 @@ abstract mixin class _$WoFormUiSettingsCopyWith<$Res> implements $WoFormUiSettin
   factory _$WoFormUiSettingsCopyWith(_WoFormUiSettings value, $Res Function(_WoFormUiSettings) _then) = __$WoFormUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String titleText, WoFormTitlePosition titlePosition,@notSerializable HeaderBuilderDef? headerBuilder, WoFormSubmitMode submitMode, DisableSubmitButton disableSubmitMode,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder,@notSerializable ScaffoldBuilderDef? scaffoldBuilder, bool? canModifySubmittedValues, ShowErrors showErrors,@notSerializable Future<bool?> Function(BuildContext context)? canQuit, WoFormThemeData? theme,@EdgeInsetsNullableConverter() EdgeInsets? padding, WoFormBodyLayout bodyLayout
+ String titleText, WoFormTitlePosition titlePosition,@notSerializable HeaderBuilderDef? headerBuilder, MultistepSettings? multistepSettings, DisableSubmitButton disableSubmitMode, String? submitText,@notSerializable IconData? submitIcon,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder, SubmitButtonPosition submitButtonPosition,@notSerializable ScaffoldBuilderDef? scaffoldBuilder, bool? canModifySubmittedValues, ShowErrors showErrors,@notSerializable Future<bool?> Function(BuildContext context)? canQuit, WoFormThemeData? theme,@EdgeInsetsNullableConverter() EdgeInsets? padding, WoFormBodyLayout bodyLayout, WoFormPresentation presentation
 });
 
 
-@override $WoFormSubmitModeCopyWith<$Res> get submitMode;@override $WoFormThemeDataCopyWith<$Res>? get theme;
+@override $MultistepSettingsCopyWith<$Res>? get multistepSettings;@override $WoFormThemeDataCopyWith<$Res>? get theme;
 
 }
 /// @nodoc
@@ -2118,22 +2147,26 @@ class __$WoFormUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of WoFormUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? titleText = null,Object? titlePosition = null,Object? headerBuilder = freezed,Object? submitMode = null,Object? disableSubmitMode = null,Object? submitButtonBuilder = freezed,Object? scaffoldBuilder = freezed,Object? canModifySubmittedValues = freezed,Object? showErrors = null,Object? canQuit = freezed,Object? theme = freezed,Object? padding = freezed,Object? bodyLayout = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? titleText = null,Object? titlePosition = null,Object? headerBuilder = freezed,Object? multistepSettings = freezed,Object? disableSubmitMode = null,Object? submitText = freezed,Object? submitIcon = freezed,Object? submitButtonBuilder = freezed,Object? submitButtonPosition = null,Object? scaffoldBuilder = freezed,Object? canModifySubmittedValues = freezed,Object? showErrors = null,Object? canQuit = freezed,Object? theme = freezed,Object? padding = freezed,Object? bodyLayout = null,Object? presentation = null,}) {
   return _then(_WoFormUiSettings(
 titleText: null == titleText ? _self.titleText : titleText // ignore: cast_nullable_to_non_nullable
 as String,titlePosition: null == titlePosition ? _self.titlePosition : titlePosition // ignore: cast_nullable_to_non_nullable
 as WoFormTitlePosition,headerBuilder: freezed == headerBuilder ? _self.headerBuilder : headerBuilder // ignore: cast_nullable_to_non_nullable
-as HeaderBuilderDef?,submitMode: null == submitMode ? _self.submitMode : submitMode // ignore: cast_nullable_to_non_nullable
-as WoFormSubmitMode,disableSubmitMode: null == disableSubmitMode ? _self.disableSubmitMode : disableSubmitMode // ignore: cast_nullable_to_non_nullable
-as DisableSubmitButton,submitButtonBuilder: freezed == submitButtonBuilder ? _self.submitButtonBuilder : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
-as SubmitButtonBuilderDef?,scaffoldBuilder: freezed == scaffoldBuilder ? _self.scaffoldBuilder : scaffoldBuilder // ignore: cast_nullable_to_non_nullable
+as HeaderBuilderDef?,multistepSettings: freezed == multistepSettings ? _self.multistepSettings : multistepSettings // ignore: cast_nullable_to_non_nullable
+as MultistepSettings?,disableSubmitMode: null == disableSubmitMode ? _self.disableSubmitMode : disableSubmitMode // ignore: cast_nullable_to_non_nullable
+as DisableSubmitButton,submitText: freezed == submitText ? _self.submitText : submitText // ignore: cast_nullable_to_non_nullable
+as String?,submitIcon: freezed == submitIcon ? _self.submitIcon : submitIcon // ignore: cast_nullable_to_non_nullable
+as IconData?,submitButtonBuilder: freezed == submitButtonBuilder ? _self.submitButtonBuilder : submitButtonBuilder // ignore: cast_nullable_to_non_nullable
+as SubmitButtonBuilderDef?,submitButtonPosition: null == submitButtonPosition ? _self.submitButtonPosition : submitButtonPosition // ignore: cast_nullable_to_non_nullable
+as SubmitButtonPosition,scaffoldBuilder: freezed == scaffoldBuilder ? _self.scaffoldBuilder : scaffoldBuilder // ignore: cast_nullable_to_non_nullable
 as ScaffoldBuilderDef?,canModifySubmittedValues: freezed == canModifySubmittedValues ? _self.canModifySubmittedValues : canModifySubmittedValues // ignore: cast_nullable_to_non_nullable
 as bool?,showErrors: null == showErrors ? _self.showErrors : showErrors // ignore: cast_nullable_to_non_nullable
 as ShowErrors,canQuit: freezed == canQuit ? _self.canQuit : canQuit // ignore: cast_nullable_to_non_nullable
 as Future<bool?> Function(BuildContext context)?,theme: freezed == theme ? _self.theme : theme // ignore: cast_nullable_to_non_nullable
 as WoFormThemeData?,padding: freezed == padding ? _self.padding : padding // ignore: cast_nullable_to_non_nullable
 as EdgeInsets?,bodyLayout: null == bodyLayout ? _self.bodyLayout : bodyLayout // ignore: cast_nullable_to_non_nullable
-as WoFormBodyLayout,
+as WoFormBodyLayout,presentation: null == presentation ? _self.presentation : presentation // ignore: cast_nullable_to_non_nullable
+as WoFormPresentation,
   ));
 }
 
@@ -2141,10 +2174,13 @@ as WoFormBodyLayout,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$WoFormSubmitModeCopyWith<$Res> get submitMode {
-  
-  return $WoFormSubmitModeCopyWith<$Res>(_self.submitMode, (value) {
-    return _then(_self.copyWith(submitMode: value));
+$MultistepSettingsCopyWith<$Res>? get multistepSettings {
+    if (_self.multistepSettings == null) {
+    return null;
+  }
+
+  return $MultistepSettingsCopyWith<$Res>(_self.multistepSettings!, (value) {
+    return _then(_self.copyWith(multistepSettings: value));
   });
 }/// Create a copy of WoFormUiSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -2161,67 +2197,55 @@ $WoFormThemeDataCopyWith<$Res>? get theme {
 }
 }
 
-WoFormSubmitMode _$WoFormSubmitModeFromJson(
-  Map<String, dynamic> json
-) {
-        switch (json['runtimeType']) {
-                  case 'standard':
-          return StandardSubmitMode.fromJson(
-            json
-          );
-                case 'multiStep':
-          return MultiStepSubmitMode.fromJson(
-            json
-          );
-        
-          default:
-            throw CheckedFromJsonException(
-  json,
-  'runtimeType',
-  'WoFormSubmitMode',
-  'Invalid union type "${json['runtimeType']}"!'
-);
-        }
-      
-}
 
 /// @nodoc
-mixin _$WoFormSubmitMode {
+mixin _$MultistepSettings {
 
- String? get submitText;@notSerializable IconData? get submitIcon;
-/// Create a copy of WoFormSubmitMode
+/// Text for the submit button if it navigates to the next form page.
+/// Falls back to submitText if not provided.
+ String? get nextText; bool get showProgressIndicator;@notSerializable MultiStepProgressIndicatorBuilderDef? get progressIndicatorBuilder;/// Called when a step (not the last step) is submited (optionnal).
+/// [step] is the node of the submitted step.
+@notSerializable OnTemporarySubmittingDef? get onTemporarySubmitting;/// Called when a step (not the last step) was successfully submitted.
+/// If the result is a string, the step with this id will be the next step.
+/// [stepId] is the id of the submitted step.
+@notSerializable NextStepDef? get getNextStep;/// Applied around the fields, not the progress indicator,
+/// nor the submit button.
+///
+/// Defaults to EdgeInsets.only(top: 16, bottom: 32).
+@EdgeInsetsNullableConverter() EdgeInsets? get fieldsPadding;
+/// Create a copy of MultistepSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$WoFormSubmitModeCopyWith<WoFormSubmitMode> get copyWith => _$WoFormSubmitModeCopyWithImpl<WoFormSubmitMode>(this as WoFormSubmitMode, _$identity);
+$MultistepSettingsCopyWith<MultistepSettings> get copyWith => _$MultistepSettingsCopyWithImpl<MultistepSettings>(this as MultistepSettings, _$identity);
 
-  /// Serializes this WoFormSubmitMode to a JSON map.
+  /// Serializes this MultistepSettings to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WoFormSubmitMode&&(identical(other.submitText, submitText) || other.submitText == submitText)&&(identical(other.submitIcon, submitIcon) || other.submitIcon == submitIcon));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MultistepSettings&&(identical(other.nextText, nextText) || other.nextText == nextText)&&(identical(other.showProgressIndicator, showProgressIndicator) || other.showProgressIndicator == showProgressIndicator)&&(identical(other.progressIndicatorBuilder, progressIndicatorBuilder) || other.progressIndicatorBuilder == progressIndicatorBuilder)&&(identical(other.onTemporarySubmitting, onTemporarySubmitting) || other.onTemporarySubmitting == onTemporarySubmitting)&&(identical(other.getNextStep, getNextStep) || other.getNextStep == getNextStep)&&(identical(other.fieldsPadding, fieldsPadding) || other.fieldsPadding == fieldsPadding));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,submitText,submitIcon);
+int get hashCode => Object.hash(runtimeType,nextText,showProgressIndicator,progressIndicatorBuilder,onTemporarySubmitting,getNextStep,fieldsPadding);
 
 @override
 String toString() {
-  return 'WoFormSubmitMode(submitText: $submitText, submitIcon: $submitIcon)';
+  return 'MultistepSettings(nextText: $nextText, showProgressIndicator: $showProgressIndicator, progressIndicatorBuilder: $progressIndicatorBuilder, onTemporarySubmitting: $onTemporarySubmitting, getNextStep: $getNextStep, fieldsPadding: $fieldsPadding)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $WoFormSubmitModeCopyWith<$Res>  {
-  factory $WoFormSubmitModeCopyWith(WoFormSubmitMode value, $Res Function(WoFormSubmitMode) _then) = _$WoFormSubmitModeCopyWithImpl;
+abstract mixin class $MultistepSettingsCopyWith<$Res>  {
+  factory $MultistepSettingsCopyWith(MultistepSettings value, $Res Function(MultistepSettings) _then) = _$MultistepSettingsCopyWithImpl;
 @useResult
 $Res call({
- String? submitText,@notSerializable IconData? submitIcon
+ String? nextText, bool showProgressIndicator,@notSerializable MultiStepProgressIndicatorBuilderDef? progressIndicatorBuilder,@notSerializable OnTemporarySubmittingDef? onTemporarySubmitting,@notSerializable NextStepDef? getNextStep,@EdgeInsetsNullableConverter() EdgeInsets? fieldsPadding
 });
 
 
@@ -2229,20 +2253,24 @@ $Res call({
 
 }
 /// @nodoc
-class _$WoFormSubmitModeCopyWithImpl<$Res>
-    implements $WoFormSubmitModeCopyWith<$Res> {
-  _$WoFormSubmitModeCopyWithImpl(this._self, this._then);
+class _$MultistepSettingsCopyWithImpl<$Res>
+    implements $MultistepSettingsCopyWith<$Res> {
+  _$MultistepSettingsCopyWithImpl(this._self, this._then);
 
-  final WoFormSubmitMode _self;
-  final $Res Function(WoFormSubmitMode) _then;
+  final MultistepSettings _self;
+  final $Res Function(MultistepSettings) _then;
 
-/// Create a copy of WoFormSubmitMode
+/// Create a copy of MultistepSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? submitText = freezed,Object? submitIcon = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? nextText = freezed,Object? showProgressIndicator = null,Object? progressIndicatorBuilder = freezed,Object? onTemporarySubmitting = freezed,Object? getNextStep = freezed,Object? fieldsPadding = freezed,}) {
   return _then(_self.copyWith(
-submitText: freezed == submitText ? _self.submitText : submitText // ignore: cast_nullable_to_non_nullable
-as String?,submitIcon: freezed == submitIcon ? _self.submitIcon : submitIcon // ignore: cast_nullable_to_non_nullable
-as IconData?,
+nextText: freezed == nextText ? _self.nextText : nextText // ignore: cast_nullable_to_non_nullable
+as String?,showProgressIndicator: null == showProgressIndicator ? _self.showProgressIndicator : showProgressIndicator // ignore: cast_nullable_to_non_nullable
+as bool,progressIndicatorBuilder: freezed == progressIndicatorBuilder ? _self.progressIndicatorBuilder : progressIndicatorBuilder // ignore: cast_nullable_to_non_nullable
+as MultiStepProgressIndicatorBuilderDef?,onTemporarySubmitting: freezed == onTemporarySubmitting ? _self.onTemporarySubmitting : onTemporarySubmitting // ignore: cast_nullable_to_non_nullable
+as OnTemporarySubmittingDef?,getNextStep: freezed == getNextStep ? _self.getNextStep : getNextStep // ignore: cast_nullable_to_non_nullable
+as NextStepDef?,fieldsPadding: freezed == fieldsPadding ? _self.fieldsPadding : fieldsPadding // ignore: cast_nullable_to_non_nullable
+as EdgeInsets?,
   ));
 }
 
@@ -2253,145 +2281,62 @@ as IconData?,
 /// @nodoc
 @JsonSerializable()
 
-class StandardSubmitMode extends WoFormSubmitMode {
-  const StandardSubmitMode({this.submitText, @notSerializable this.submitIcon, this.buttonPosition = SubmitButtonPosition.body, final  String? $type}): $type = $type ?? 'standard',super._();
-  factory StandardSubmitMode.fromJson(Map<String, dynamic> json) => _$StandardSubmitModeFromJson(json);
+class _MultistepSettings extends MultistepSettings {
+  const _MultistepSettings({this.nextText, this.showProgressIndicator = true, @notSerializable this.progressIndicatorBuilder, @notSerializable this.onTemporarySubmitting, @notSerializable this.getNextStep, @EdgeInsetsNullableConverter() this.fieldsPadding}): super._();
+  factory _MultistepSettings.fromJson(Map<String, dynamic> json) => _$MultistepSettingsFromJson(json);
 
-@override final  String? submitText;
-@override@notSerializable final  IconData? submitIcon;
-@JsonKey() final  SubmitButtonPosition buttonPosition;
-
-@JsonKey(name: 'runtimeType')
-final String $type;
-
-
-/// Create a copy of WoFormSubmitMode
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$StandardSubmitModeCopyWith<StandardSubmitMode> get copyWith => _$StandardSubmitModeCopyWithImpl<StandardSubmitMode>(this, _$identity);
-
-@override
-Map<String, dynamic> toJson() {
-  return _$StandardSubmitModeToJson(this, );
-}
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StandardSubmitMode&&(identical(other.submitText, submitText) || other.submitText == submitText)&&(identical(other.submitIcon, submitIcon) || other.submitIcon == submitIcon)&&(identical(other.buttonPosition, buttonPosition) || other.buttonPosition == buttonPosition));
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,submitText,submitIcon,buttonPosition);
-
-@override
-String toString() {
-  return 'WoFormSubmitMode.standard(submitText: $submitText, submitIcon: $submitIcon, buttonPosition: $buttonPosition)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $StandardSubmitModeCopyWith<$Res> implements $WoFormSubmitModeCopyWith<$Res> {
-  factory $StandardSubmitModeCopyWith(StandardSubmitMode value, $Res Function(StandardSubmitMode) _then) = _$StandardSubmitModeCopyWithImpl;
-@override @useResult
-$Res call({
- String? submitText,@notSerializable IconData? submitIcon, SubmitButtonPosition buttonPosition
-});
-
-
-
-
-}
-/// @nodoc
-class _$StandardSubmitModeCopyWithImpl<$Res>
-    implements $StandardSubmitModeCopyWith<$Res> {
-  _$StandardSubmitModeCopyWithImpl(this._self, this._then);
-
-  final StandardSubmitMode _self;
-  final $Res Function(StandardSubmitMode) _then;
-
-/// Create a copy of WoFormSubmitMode
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? submitText = freezed,Object? submitIcon = freezed,Object? buttonPosition = null,}) {
-  return _then(StandardSubmitMode(
-submitText: freezed == submitText ? _self.submitText : submitText // ignore: cast_nullable_to_non_nullable
-as String?,submitIcon: freezed == submitIcon ? _self.submitIcon : submitIcon // ignore: cast_nullable_to_non_nullable
-as IconData?,buttonPosition: null == buttonPosition ? _self.buttonPosition : buttonPosition // ignore: cast_nullable_to_non_nullable
-as SubmitButtonPosition,
-  ));
-}
-
-
-}
-
-/// @nodoc
-@JsonSerializable()
-
-class MultiStepSubmitMode extends WoFormSubmitMode {
-  const MultiStepSubmitMode({this.submitText, @notSerializable this.submitIcon, this.nextText, this.showProgressIndicator = true, @notSerializable this.progressIndicatorBuilder, @notSerializable this.onTemporarySubmitting, @notSerializable this.getNextStep, @EdgeInsetsNullableConverter() this.fieldsPadding, final  String? $type}): $type = $type ?? 'multiStep',super._();
-  factory MultiStepSubmitMode.fromJson(Map<String, dynamic> json) => _$MultiStepSubmitModeFromJson(json);
-
-@override final  String? submitText;
-@override@notSerializable final  IconData? submitIcon;
 /// Text for the submit button if it navigates to the next form page.
 /// Falls back to submitText if not provided.
- final  String? nextText;
-@JsonKey() final  bool showProgressIndicator;
-@notSerializable final  MultiStepProgressIndicatorBuilderDef? progressIndicatorBuilder;
+@override final  String? nextText;
+@override@JsonKey() final  bool showProgressIndicator;
+@override@notSerializable final  MultiStepProgressIndicatorBuilderDef? progressIndicatorBuilder;
 /// Called when a step (not the last step) is submited (optionnal).
 /// [step] is the node of the submitted step.
-@notSerializable final  OnTemporarySubmittingDef? onTemporarySubmitting;
+@override@notSerializable final  OnTemporarySubmittingDef? onTemporarySubmitting;
 /// Called when a step (not the last step) was successfully submitted.
 /// If the result is a string, the step with this id will be the next step.
 /// [stepId] is the id of the submitted step.
-@notSerializable final  NextStepDef? getNextStep;
+@override@notSerializable final  NextStepDef? getNextStep;
 /// Applied around the fields, not the progress indicator,
 /// nor the submit button.
 ///
 /// Defaults to EdgeInsets.only(top: 16, bottom: 32).
-@EdgeInsetsNullableConverter() final  EdgeInsets? fieldsPadding;
+@override@EdgeInsetsNullableConverter() final  EdgeInsets? fieldsPadding;
 
-@JsonKey(name: 'runtimeType')
-final String $type;
-
-
-/// Create a copy of WoFormSubmitMode
+/// Create a copy of MultistepSettings
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$MultiStepSubmitModeCopyWith<MultiStepSubmitMode> get copyWith => _$MultiStepSubmitModeCopyWithImpl<MultiStepSubmitMode>(this, _$identity);
+_$MultistepSettingsCopyWith<_MultistepSettings> get copyWith => __$MultistepSettingsCopyWithImpl<_MultistepSettings>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$MultiStepSubmitModeToJson(this, );
+  return _$MultistepSettingsToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MultiStepSubmitMode&&(identical(other.submitText, submitText) || other.submitText == submitText)&&(identical(other.submitIcon, submitIcon) || other.submitIcon == submitIcon)&&(identical(other.nextText, nextText) || other.nextText == nextText)&&(identical(other.showProgressIndicator, showProgressIndicator) || other.showProgressIndicator == showProgressIndicator)&&(identical(other.progressIndicatorBuilder, progressIndicatorBuilder) || other.progressIndicatorBuilder == progressIndicatorBuilder)&&(identical(other.onTemporarySubmitting, onTemporarySubmitting) || other.onTemporarySubmitting == onTemporarySubmitting)&&(identical(other.getNextStep, getNextStep) || other.getNextStep == getNextStep)&&(identical(other.fieldsPadding, fieldsPadding) || other.fieldsPadding == fieldsPadding));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MultistepSettings&&(identical(other.nextText, nextText) || other.nextText == nextText)&&(identical(other.showProgressIndicator, showProgressIndicator) || other.showProgressIndicator == showProgressIndicator)&&(identical(other.progressIndicatorBuilder, progressIndicatorBuilder) || other.progressIndicatorBuilder == progressIndicatorBuilder)&&(identical(other.onTemporarySubmitting, onTemporarySubmitting) || other.onTemporarySubmitting == onTemporarySubmitting)&&(identical(other.getNextStep, getNextStep) || other.getNextStep == getNextStep)&&(identical(other.fieldsPadding, fieldsPadding) || other.fieldsPadding == fieldsPadding));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,submitText,submitIcon,nextText,showProgressIndicator,progressIndicatorBuilder,onTemporarySubmitting,getNextStep,fieldsPadding);
+int get hashCode => Object.hash(runtimeType,nextText,showProgressIndicator,progressIndicatorBuilder,onTemporarySubmitting,getNextStep,fieldsPadding);
 
 @override
 String toString() {
-  return 'WoFormSubmitMode.multiStep(submitText: $submitText, submitIcon: $submitIcon, nextText: $nextText, showProgressIndicator: $showProgressIndicator, progressIndicatorBuilder: $progressIndicatorBuilder, onTemporarySubmitting: $onTemporarySubmitting, getNextStep: $getNextStep, fieldsPadding: $fieldsPadding)';
+  return 'MultistepSettings(nextText: $nextText, showProgressIndicator: $showProgressIndicator, progressIndicatorBuilder: $progressIndicatorBuilder, onTemporarySubmitting: $onTemporarySubmitting, getNextStep: $getNextStep, fieldsPadding: $fieldsPadding)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $MultiStepSubmitModeCopyWith<$Res> implements $WoFormSubmitModeCopyWith<$Res> {
-  factory $MultiStepSubmitModeCopyWith(MultiStepSubmitMode value, $Res Function(MultiStepSubmitMode) _then) = _$MultiStepSubmitModeCopyWithImpl;
+abstract mixin class _$MultistepSettingsCopyWith<$Res> implements $MultistepSettingsCopyWith<$Res> {
+  factory _$MultistepSettingsCopyWith(_MultistepSettings value, $Res Function(_MultistepSettings) _then) = __$MultistepSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String? submitText,@notSerializable IconData? submitIcon, String? nextText, bool showProgressIndicator,@notSerializable MultiStepProgressIndicatorBuilderDef? progressIndicatorBuilder,@notSerializable OnTemporarySubmittingDef? onTemporarySubmitting,@notSerializable NextStepDef? getNextStep,@EdgeInsetsNullableConverter() EdgeInsets? fieldsPadding
+ String? nextText, bool showProgressIndicator,@notSerializable MultiStepProgressIndicatorBuilderDef? progressIndicatorBuilder,@notSerializable OnTemporarySubmittingDef? onTemporarySubmitting,@notSerializable NextStepDef? getNextStep,@EdgeInsetsNullableConverter() EdgeInsets? fieldsPadding
 });
 
 
@@ -2399,20 +2344,18 @@ $Res call({
 
 }
 /// @nodoc
-class _$MultiStepSubmitModeCopyWithImpl<$Res>
-    implements $MultiStepSubmitModeCopyWith<$Res> {
-  _$MultiStepSubmitModeCopyWithImpl(this._self, this._then);
+class __$MultistepSettingsCopyWithImpl<$Res>
+    implements _$MultistepSettingsCopyWith<$Res> {
+  __$MultistepSettingsCopyWithImpl(this._self, this._then);
 
-  final MultiStepSubmitMode _self;
-  final $Res Function(MultiStepSubmitMode) _then;
+  final _MultistepSettings _self;
+  final $Res Function(_MultistepSettings) _then;
 
-/// Create a copy of WoFormSubmitMode
+/// Create a copy of MultistepSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? submitText = freezed,Object? submitIcon = freezed,Object? nextText = freezed,Object? showProgressIndicator = null,Object? progressIndicatorBuilder = freezed,Object? onTemporarySubmitting = freezed,Object? getNextStep = freezed,Object? fieldsPadding = freezed,}) {
-  return _then(MultiStepSubmitMode(
-submitText: freezed == submitText ? _self.submitText : submitText // ignore: cast_nullable_to_non_nullable
-as String?,submitIcon: freezed == submitIcon ? _self.submitIcon : submitIcon // ignore: cast_nullable_to_non_nullable
-as IconData?,nextText: freezed == nextText ? _self.nextText : nextText // ignore: cast_nullable_to_non_nullable
+@override @pragma('vm:prefer-inline') $Res call({Object? nextText = freezed,Object? showProgressIndicator = null,Object? progressIndicatorBuilder = freezed,Object? onTemporarySubmitting = freezed,Object? getNextStep = freezed,Object? fieldsPadding = freezed,}) {
+  return _then(_MultistepSettings(
+nextText: freezed == nextText ? _self.nextText : nextText // ignore: cast_nullable_to_non_nullable
 as String?,showProgressIndicator: null == showProgressIndicator ? _self.showProgressIndicator : showProgressIndicator // ignore: cast_nullable_to_non_nullable
 as bool,progressIndicatorBuilder: freezed == progressIndicatorBuilder ? _self.progressIndicatorBuilder : progressIndicatorBuilder // ignore: cast_nullable_to_non_nullable
 as MultiStepProgressIndicatorBuilderDef?,onTemporarySubmitting: freezed == onTemporarySubmitting ? _self.onTemporarySubmitting : onTemporarySubmitting // ignore: cast_nullable_to_non_nullable

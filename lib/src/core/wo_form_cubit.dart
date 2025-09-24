@@ -104,11 +104,11 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
       values[_VISITED_PATHS_KEY] = visitedPaths.toList();
     }
 
-    if (root.uiSettings.submitMode is MultiStepSubmitMode) {
+    if (root.uiSettings.multistepSettings != null) {
       values.multistepIndex = 0;
-    }
-    if (root.uiSettings.submitMode.generatingSteps) {
-      values.generatedSteps = [root.children.first.id];
+      if (root.uiSettings.multistepSettings!.generatingSteps) {
+        values.generatedSteps = [root.children.first.id];
+      }
     }
 
     return values;
@@ -121,17 +121,28 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   // If false i returned, the new index is rejected
   bool _onMultistepControllerUpdate(int multistepIndex) {
+    if (multistepIndex < 0) return false;
+
     final newValues = state.copy();
 
-    if (_root.uiSettings.submitMode is MultiStepSubmitMode) {
-      final getNextStep =
-          (_root.uiSettings.submitMode as MultiStepSubmitMode).getNextStep;
-      final currentIndex = state.multistepIndex;
-      if (getNextStep != null && multistepIndex > currentIndex) {
-        final generatedSteps = newValues.generatedSteps;
-        final nextStepId = getNextStep(generatedSteps[currentIndex], newValues);
+    final getNextStep = _root.uiSettings.multistepSettings?.getNextStep;
+    final currentIndex = state.multistepIndex;
+    if (getNextStep != null && multistepIndex > currentIndex) {
+      final generatedSteps = newValues.generatedSteps;
+      final nextStepId = getNextStep(generatedSteps[currentIndex], newValues);
 
-        if (multistepIndex == generatedSteps.length) {
+      if (multistepIndex == generatedSteps.length) {
+        // There is no further step, can't increase the index
+        if (nextStepId == null) {
+          // Reject the MultistepController's update,
+          // will probably submit the entire form as soon as possible
+          return false;
+        }
+
+        newValues.generatedSteps = [...generatedSteps, nextStepId];
+      } else if (multistepIndex < generatedSteps.length) {
+        final naturalNextStepId = generatedSteps[multistepIndex];
+        if (nextStepId != naturalNextStepId) {
           // There is no further step, can't increase the index
           if (nextStepId == null) {
             // Reject the MultistepController's update,
@@ -139,33 +150,21 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
             return false;
           }
 
-          newValues.generatedSteps = [...generatedSteps, nextStepId];
-        } else if (multistepIndex < generatedSteps.length) {
-          final naturalNextStepId = generatedSteps[multistepIndex];
-          if (nextStepId != naturalNextStepId) {
-            // There is no further step, can't increase the index
-            if (nextStepId == null) {
-              // Reject the MultistepController's update,
-              // will probably submit the entire form as soon as possible
-              return false;
-            }
+          // Reset steps generated after multistepIndex
+          for (final stepIdToReset in generatedSteps.skip(multistepIndex)) {
+            final stepToReset = _root.children.firstWhereOrNull(
+              (step) => step.id == stepIdToReset,
+            );
 
-            // Reset steps generated after multistepIndex
-            for (final stepIdToReset in generatedSteps.skip(multistepIndex)) {
-              final stepToReset = _root.children.firstWhereOrNull(
-                (step) => step.id == stepIdToReset,
-              );
-
-              newValues._values
-                ..removeWhere((key, value) => key.startsWith('/$stepIdToReset'))
-                ..addAll(stepToReset?.getInitialValues(parentPath: '') ?? {});
-            }
-
-            newValues.generatedSteps = [
-              ...generatedSteps.take(multistepIndex),
-              nextStepId,
-            ];
+            newValues._values
+              ..removeWhere((key, value) => key.startsWith('/$stepIdToReset'))
+              ..addAll(stepToReset?.getInitialValues(parentPath: '') ?? {});
           }
+
+          newValues.generatedSteps = [
+            ...generatedSteps.take(multistepIndex),
+            nextStepId,
+          ];
         }
       }
     }

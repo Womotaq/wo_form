@@ -698,9 +698,25 @@ abstract class WoFormUiSettings with _$WoFormUiSettings {
     @Default('') String titleText,
     @Default(WoFormTitlePosition.header) WoFormTitlePosition titlePosition,
     @notSerializable HeaderBuilderDef? headerBuilder,
-    @Default(WoFormSubmitMode.standard()) WoFormSubmitMode submitMode,
+
+    /// If set, the form's direct children will be considered as steps,
+    /// each shown in a dedicated pages.
+    MultistepSettings? multistepSettings,
     @Default(DisableSubmitButton.never) DisableSubmitButton disableSubmitMode,
+
+    /// The text of the submit button. Falls back to [WoFormL10n.submitText].
+    String? submitText,
+
+    /// The icon of the submit button.
+    @notSerializable IconData? submitIcon,
+
     @notSerializable SubmitButtonBuilderDef? submitButtonBuilder,
+
+    /// The position of the submit button in the form.
+    @Default(SubmitButtonPosition.body)
+    SubmitButtonPosition submitButtonPosition,
+
+    /// TODO : deprecate
     @notSerializable ScaffoldBuilderDef? scaffoldBuilder,
 
     /// If true, after the form is successfully submitted, it will be locked.
@@ -729,6 +745,12 @@ abstract class WoFormUiSettings with _$WoFormUiSettings {
     /// if [StandardSubmitMode.buttonPosition] is SubmitButtonPosition.body
     /// (wich is the default value).
     @Default(WoFormBodyLayout.scrollable) WoFormBodyLayout bodyLayout,
+
+    /// Controls how the form is presented to the user.
+    ///
+    /// This determines whether the form is displayed as a full-page screen or
+    /// as a modal overlay. It affects the title and navigation controls.
+    @Default(WoFormPresentation.page) WoFormPresentation presentation,
   }) = _WoFormUiSettings;
 
   const WoFormUiSettings._();
@@ -762,7 +784,7 @@ enum ShowErrors {
 /// Controls the layout behavior of the body.
 ///
 /// The body consists of your inputs and potentially the submit button,
-/// if [StandardSubmitMode.buttonPosition] is SubmitButtonPosition.body
+/// if [WoFormUiSettings.submitButtonPosition] is SubmitButtonPosition.body
 /// (wich is the default value).
 enum WoFormBodyLayout {
   /// The body will be wrapped in a SingleChildScrollView, allowing content
@@ -778,22 +800,56 @@ enum WoFormBodyLayout {
   bool get supportFlex => this == WoFormBodyLayout.flexible;
 }
 
+/// Controls how the form is presented to the user.
+///
+/// This determines whether the form is displayed as a full-page screen or as
+/// a modal overlay. It affects the title and navigation controls.
+enum WoFormPresentation {
+  /// The form is displayed on a full-screen page, typically within a
+  /// `Scaffold`.
+  ///
+  /// This mode is suitable for long forms or as a dedicated screen in your app.
+  /// It can use a standard `AppBar` with a back button for navigation.
+  page,
+
+  // TODO : update doc
+  /// The form is displayed as a modal, such as a `showModalBottomSheet` or
+  /// `Dialog`.
+  ///
+  /// This mode is ideal for short, contextual forms that appear on top of
+  /// existing content. It may use a dismissible button (e.g., a "close" icon)
+  /// instead of a back button.
+  ///
+  /// Example:
+  /// ````dart
+  /// showDialog(
+  ///   context: context,
+  ///   builder: (context) => Dialog(
+  ///     child: WoForm(
+  ///       uiSettings: WoFormUiSettings(
+  ///         presentation: WoFormPresentation.modal,
+  ///       ),
+  ///       ...
+  ///     ),
+  ///   ),
+  /// );
+  /// ```
+  ///
+  dialog,
+  bottomSheet;
+
+  bool get isModal => this != page;
+}
+
 typedef MultiStepProgressIndicatorBuilderDef = Widget Function();
 
+/// The form's direct children will be considered as steps, shown one by one
+/// in pages.
 @freezed
-sealed class WoFormSubmitMode with _$WoFormSubmitMode {
-  const factory WoFormSubmitMode.standard({
-    String? submitText,
-    @notSerializable IconData? submitIcon,
-    @Default(SubmitButtonPosition.body) SubmitButtonPosition buttonPosition,
-  }) = StandardSubmitMode;
-
+sealed class MultistepSettings with _$MultistepSettings {
   /// The form's direct children will be considered as steps, shown one by one
   /// in pages.
-  const factory WoFormSubmitMode.multiStep({
-    String? submitText,
-    @notSerializable IconData? submitIcon,
-
+  const factory MultistepSettings({
     /// Text for the submit button if it navigates to the next form page.
     /// Falls back to submitText if not provided.
     String? nextText,
@@ -816,24 +872,16 @@ sealed class WoFormSubmitMode with _$WoFormSubmitMode {
     ///
     /// Defaults to EdgeInsets.only(top: 16, bottom: 32).
     @EdgeInsetsNullableConverter() EdgeInsets? fieldsPadding,
-  }) = MultiStepSubmitMode;
+  }) = _MultistepSettings;
 
-  const WoFormSubmitMode._();
+  const MultistepSettings._();
 
-  factory WoFormSubmitMode.fromJson(Json json) =>
-      _$WoFormSubmitModeFromJson(json);
+  factory MultistepSettings.fromJson(Json json) =>
+      _$MultistepSettingsFromJson(json);
 
   // --
 
-  SubmitButtonPosition get buttonPosition => switch (this) {
-    StandardSubmitMode(buttonPosition: final p) => p,
-    MultiStepSubmitMode() => SubmitButtonPosition.bottomBar,
-  };
-
-  bool get generatingSteps => switch (this) {
-    StandardSubmitMode() => false,
-    MultiStepSubmitMode(getNextStep: final getNextStep) => getNextStep != null,
-  };
+  bool get generatingSteps => getNextStep != null;
 }
 
 typedef OnTemporarySubmittingDef = Future<void> Function(BuildContext context);

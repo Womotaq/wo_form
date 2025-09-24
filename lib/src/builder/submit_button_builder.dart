@@ -27,15 +27,15 @@ class SubmitButtonBuilder extends StatelessWidget {
       DisableSubmitButton.never => false,
     };
 
-    final submitMode = root.uiSettings.submitMode;
+    final formUiSettings = root.uiSettings;
 
     final submitButtonData = SubmitButtonData(
-      text: submitMode.submitText ?? context.read<WoFormL10n?>()?.submit(),
-      icon: submitMode.submitIcon,
+      text: formUiSettings.submitText ?? context.read<WoFormL10n?>()?.submit(),
+      icon: formUiSettings.submitIcon,
       onPressed: disabled
           ? null
           : () => context.read<WoFormValuesCubit>().submit(context),
-      position: submitMode.buttonPosition,
+      position: formUiSettings.submitButtonPosition,
       path: context.read<WoFormValuesCubit>().currentPath,
     );
 
