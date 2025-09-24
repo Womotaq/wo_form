@@ -15,6 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$InputUiSettings {
 
+/// Requires [WoFormUiSettings.bodyLayout] at [WoFormBodyLayout.flexible].
  int? get flex;
 /// Create a copy of InputUiSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -83,6 +84,7 @@ class _InputUiSettings extends InputUiSettings {
   const _InputUiSettings({this.flex}): super._();
   factory _InputUiSettings.fromJson(Map<String, dynamic> json) => _$InputUiSettingsFromJson(json);
 
+/// Requires [WoFormUiSettings.bodyLayout] at [WoFormBodyLayout.flexible].
 @override final  int? flex;
 
 /// Create a copy of InputUiSettings
@@ -991,6 +993,7 @@ as String?,
 /// @nodoc
 mixin _$InputsNodeUiSettings {
 
+/// Requires [WoFormUiSettings.bodyLayout] at [WoFormBodyLayout.flexible].
  int? get flex;/// If flex is higher than 0, the default widget will use ListView.builder.
 ///
 /// Defaults to false.
@@ -1092,6 +1095,7 @@ class _InputsNodeUiSettings extends InputsNodeUiSettings {
   const _InputsNodeUiSettings({this.flex, this.scrollable, this.reverse, this.labelText, this.labelTextWhenChildrenHidden, this.helperText, this.childrenVisibility, this.showChildrenInitially, this.direction, this.crossAxisAlignment, this.spacing, @notSerializable this.widgetBuilder, @notSerializable this.headerBuilder, @notSerializable this.expanderBuilder}): super._();
   factory _InputsNodeUiSettings.fromJson(Map<String, dynamic> json) => _$InputsNodeUiSettingsFromJson(json);
 
+/// Requires [WoFormUiSettings.bodyLayout] at [WoFormBodyLayout.flexible].
 @override final  int? flex;
 /// If flex is higher than 0, the default widget will use ListView.builder.
 ///
@@ -1514,6 +1518,8 @@ as NumFieldBuilderDef?,
 mixin _$SelectInputUiSettings<T> {
 
 /// If flex is higher than 0, the default widget will use ListView.builder.
+///
+/// Requires [WoFormUiSettings.bodyLayout] at [WoFormBodyLayout.flexible].
  int? get flex; String? get labelText; String? get helperText; String? get hintText; ChildrenVisibility? get childrenVisibility;/// Only used when SelectInput.maxCount is 1
 /// and childrenVisibility is whenAsked.
 ///
@@ -1605,6 +1611,8 @@ class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
   factory _SelectInputUiSettings.fromJson(Map<String, dynamic> json) => _$SelectInputUiSettingsFromJson(json);
 
 /// If flex is higher than 0, the default widget will use ListView.builder.
+///
+/// Requires [WoFormUiSettings.bodyLayout] at [WoFormBodyLayout.flexible].
 @override final  int? flex;
 @override final  String? labelText;
 @override final  String? helperText;
@@ -1924,8 +1932,13 @@ mixin _$WoFormUiSettings {
 @notSerializable Future<bool?> Function(BuildContext context)? get canQuit;/// Will be merged with context theme.
  WoFormThemeData? get theme;/// Padding applied around all the widgets inside this form, except for
 /// the app bar, the bottom bar and the floating widgets.
-@EdgeInsetsNullableConverter() EdgeInsets? get padding;/// If true, the inputs will be wrapped inside a SingleChildScrollView.
- bool get scrollable;
+@EdgeInsetsNullableConverter() EdgeInsets? get padding;/// Controls the layout behavior of the body. Switch to
+/// [WoFormBodyLayout.flexible] if you want to use `uiSettings.flex`.
+///
+/// The body consists of your inputs and potentially the submit button,
+/// if [StandardSubmitMode.buttonPosition] is SubmitButtonPosition.body
+/// (wich is the default value).
+ WoFormBodyLayout get bodyLayout;
 /// Create a copy of WoFormUiSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1938,16 +1951,16 @@ $WoFormUiSettingsCopyWith<WoFormUiSettings> get copyWith => _$WoFormUiSettingsCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WoFormUiSettings&&(identical(other.titleText, titleText) || other.titleText == titleText)&&(identical(other.titlePosition, titlePosition) || other.titlePosition == titlePosition)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.submitMode, submitMode) || other.submitMode == submitMode)&&(identical(other.disableSubmitMode, disableSubmitMode) || other.disableSubmitMode == disableSubmitMode)&&(identical(other.submitButtonBuilder, submitButtonBuilder) || other.submitButtonBuilder == submitButtonBuilder)&&(identical(other.scaffoldBuilder, scaffoldBuilder) || other.scaffoldBuilder == scaffoldBuilder)&&(identical(other.canModifySubmittedValues, canModifySubmittedValues) || other.canModifySubmittedValues == canModifySubmittedValues)&&(identical(other.showErrors, showErrors) || other.showErrors == showErrors)&&(identical(other.canQuit, canQuit) || other.canQuit == canQuit)&&(identical(other.theme, theme) || other.theme == theme)&&(identical(other.padding, padding) || other.padding == padding)&&(identical(other.scrollable, scrollable) || other.scrollable == scrollable));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WoFormUiSettings&&(identical(other.titleText, titleText) || other.titleText == titleText)&&(identical(other.titlePosition, titlePosition) || other.titlePosition == titlePosition)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.submitMode, submitMode) || other.submitMode == submitMode)&&(identical(other.disableSubmitMode, disableSubmitMode) || other.disableSubmitMode == disableSubmitMode)&&(identical(other.submitButtonBuilder, submitButtonBuilder) || other.submitButtonBuilder == submitButtonBuilder)&&(identical(other.scaffoldBuilder, scaffoldBuilder) || other.scaffoldBuilder == scaffoldBuilder)&&(identical(other.canModifySubmittedValues, canModifySubmittedValues) || other.canModifySubmittedValues == canModifySubmittedValues)&&(identical(other.showErrors, showErrors) || other.showErrors == showErrors)&&(identical(other.canQuit, canQuit) || other.canQuit == canQuit)&&(identical(other.theme, theme) || other.theme == theme)&&(identical(other.padding, padding) || other.padding == padding)&&(identical(other.bodyLayout, bodyLayout) || other.bodyLayout == bodyLayout));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,titleText,titlePosition,headerBuilder,submitMode,disableSubmitMode,submitButtonBuilder,scaffoldBuilder,canModifySubmittedValues,showErrors,canQuit,theme,padding,scrollable);
+int get hashCode => Object.hash(runtimeType,titleText,titlePosition,headerBuilder,submitMode,disableSubmitMode,submitButtonBuilder,scaffoldBuilder,canModifySubmittedValues,showErrors,canQuit,theme,padding,bodyLayout);
 
 @override
 String toString() {
-  return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, disableSubmitMode: $disableSubmitMode, submitButtonBuilder: $submitButtonBuilder, scaffoldBuilder: $scaffoldBuilder, canModifySubmittedValues: $canModifySubmittedValues, showErrors: $showErrors, canQuit: $canQuit, theme: $theme, padding: $padding, scrollable: $scrollable)';
+  return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, disableSubmitMode: $disableSubmitMode, submitButtonBuilder: $submitButtonBuilder, scaffoldBuilder: $scaffoldBuilder, canModifySubmittedValues: $canModifySubmittedValues, showErrors: $showErrors, canQuit: $canQuit, theme: $theme, padding: $padding, bodyLayout: $bodyLayout)';
 }
 
 
@@ -1958,7 +1971,7 @@ abstract mixin class $WoFormUiSettingsCopyWith<$Res>  {
   factory $WoFormUiSettingsCopyWith(WoFormUiSettings value, $Res Function(WoFormUiSettings) _then) = _$WoFormUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String titleText, WoFormTitlePosition titlePosition,@notSerializable HeaderBuilderDef? headerBuilder, WoFormSubmitMode submitMode, DisableSubmitButton disableSubmitMode,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder,@notSerializable ScaffoldBuilderDef? scaffoldBuilder, bool? canModifySubmittedValues, ShowErrors showErrors,@notSerializable Future<bool?> Function(BuildContext context)? canQuit, WoFormThemeData? theme,@EdgeInsetsNullableConverter() EdgeInsets? padding, bool scrollable
+ String titleText, WoFormTitlePosition titlePosition,@notSerializable HeaderBuilderDef? headerBuilder, WoFormSubmitMode submitMode, DisableSubmitButton disableSubmitMode,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder,@notSerializable ScaffoldBuilderDef? scaffoldBuilder, bool? canModifySubmittedValues, ShowErrors showErrors,@notSerializable Future<bool?> Function(BuildContext context)? canQuit, WoFormThemeData? theme,@EdgeInsetsNullableConverter() EdgeInsets? padding, WoFormBodyLayout bodyLayout
 });
 
 
@@ -1975,7 +1988,7 @@ class _$WoFormUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of WoFormUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? titleText = null,Object? titlePosition = null,Object? headerBuilder = freezed,Object? submitMode = null,Object? disableSubmitMode = null,Object? submitButtonBuilder = freezed,Object? scaffoldBuilder = freezed,Object? canModifySubmittedValues = freezed,Object? showErrors = null,Object? canQuit = freezed,Object? theme = freezed,Object? padding = freezed,Object? scrollable = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? titleText = null,Object? titlePosition = null,Object? headerBuilder = freezed,Object? submitMode = null,Object? disableSubmitMode = null,Object? submitButtonBuilder = freezed,Object? scaffoldBuilder = freezed,Object? canModifySubmittedValues = freezed,Object? showErrors = null,Object? canQuit = freezed,Object? theme = freezed,Object? padding = freezed,Object? bodyLayout = null,}) {
   return _then(_self.copyWith(
 titleText: null == titleText ? _self.titleText : titleText // ignore: cast_nullable_to_non_nullable
 as String,titlePosition: null == titlePosition ? _self.titlePosition : titlePosition // ignore: cast_nullable_to_non_nullable
@@ -1989,8 +2002,8 @@ as bool?,showErrors: null == showErrors ? _self.showErrors : showErrors // ignor
 as ShowErrors,canQuit: freezed == canQuit ? _self.canQuit : canQuit // ignore: cast_nullable_to_non_nullable
 as Future<bool?> Function(BuildContext context)?,theme: freezed == theme ? _self.theme : theme // ignore: cast_nullable_to_non_nullable
 as WoFormThemeData?,padding: freezed == padding ? _self.padding : padding // ignore: cast_nullable_to_non_nullable
-as EdgeInsets?,scrollable: null == scrollable ? _self.scrollable : scrollable // ignore: cast_nullable_to_non_nullable
-as bool,
+as EdgeInsets?,bodyLayout: null == bodyLayout ? _self.bodyLayout : bodyLayout // ignore: cast_nullable_to_non_nullable
+as WoFormBodyLayout,
   ));
 }
 /// Create a copy of WoFormUiSettings
@@ -2023,7 +2036,7 @@ $WoFormThemeDataCopyWith<$Res>? get theme {
 @JsonSerializable()
 
 class _WoFormUiSettings extends WoFormUiSettings {
-  const _WoFormUiSettings({this.titleText = '', this.titlePosition = WoFormTitlePosition.header, @notSerializable this.headerBuilder, this.submitMode = const WoFormSubmitMode.standard(), this.disableSubmitMode = DisableSubmitButton.never, @notSerializable this.submitButtonBuilder, @notSerializable this.scaffoldBuilder, this.canModifySubmittedValues, this.showErrors = ShowErrors.progressively, @notSerializable this.canQuit, this.theme, @EdgeInsetsNullableConverter() this.padding, this.scrollable = true}): super._();
+  const _WoFormUiSettings({this.titleText = '', this.titlePosition = WoFormTitlePosition.header, @notSerializable this.headerBuilder, this.submitMode = const WoFormSubmitMode.standard(), this.disableSubmitMode = DisableSubmitButton.never, @notSerializable this.submitButtonBuilder, @notSerializable this.scaffoldBuilder, this.canModifySubmittedValues, this.showErrors = ShowErrors.progressively, @notSerializable this.canQuit, this.theme, @EdgeInsetsNullableConverter() this.padding, this.bodyLayout = WoFormBodyLayout.scrollable}): super._();
   factory _WoFormUiSettings.fromJson(Map<String, dynamic> json) => _$WoFormUiSettingsFromJson(json);
 
 @override@JsonKey() final  String titleText;
@@ -2047,8 +2060,13 @@ class _WoFormUiSettings extends WoFormUiSettings {
 /// Padding applied around all the widgets inside this form, except for
 /// the app bar, the bottom bar and the floating widgets.
 @override@EdgeInsetsNullableConverter() final  EdgeInsets? padding;
-/// If true, the inputs will be wrapped inside a SingleChildScrollView.
-@override@JsonKey() final  bool scrollable;
+/// Controls the layout behavior of the body. Switch to
+/// [WoFormBodyLayout.flexible] if you want to use `uiSettings.flex`.
+///
+/// The body consists of your inputs and potentially the submit button,
+/// if [StandardSubmitMode.buttonPosition] is SubmitButtonPosition.body
+/// (wich is the default value).
+@override@JsonKey() final  WoFormBodyLayout bodyLayout;
 
 /// Create a copy of WoFormUiSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -2063,16 +2081,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WoFormUiSettings&&(identical(other.titleText, titleText) || other.titleText == titleText)&&(identical(other.titlePosition, titlePosition) || other.titlePosition == titlePosition)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.submitMode, submitMode) || other.submitMode == submitMode)&&(identical(other.disableSubmitMode, disableSubmitMode) || other.disableSubmitMode == disableSubmitMode)&&(identical(other.submitButtonBuilder, submitButtonBuilder) || other.submitButtonBuilder == submitButtonBuilder)&&(identical(other.scaffoldBuilder, scaffoldBuilder) || other.scaffoldBuilder == scaffoldBuilder)&&(identical(other.canModifySubmittedValues, canModifySubmittedValues) || other.canModifySubmittedValues == canModifySubmittedValues)&&(identical(other.showErrors, showErrors) || other.showErrors == showErrors)&&(identical(other.canQuit, canQuit) || other.canQuit == canQuit)&&(identical(other.theme, theme) || other.theme == theme)&&(identical(other.padding, padding) || other.padding == padding)&&(identical(other.scrollable, scrollable) || other.scrollable == scrollable));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WoFormUiSettings&&(identical(other.titleText, titleText) || other.titleText == titleText)&&(identical(other.titlePosition, titlePosition) || other.titlePosition == titlePosition)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.submitMode, submitMode) || other.submitMode == submitMode)&&(identical(other.disableSubmitMode, disableSubmitMode) || other.disableSubmitMode == disableSubmitMode)&&(identical(other.submitButtonBuilder, submitButtonBuilder) || other.submitButtonBuilder == submitButtonBuilder)&&(identical(other.scaffoldBuilder, scaffoldBuilder) || other.scaffoldBuilder == scaffoldBuilder)&&(identical(other.canModifySubmittedValues, canModifySubmittedValues) || other.canModifySubmittedValues == canModifySubmittedValues)&&(identical(other.showErrors, showErrors) || other.showErrors == showErrors)&&(identical(other.canQuit, canQuit) || other.canQuit == canQuit)&&(identical(other.theme, theme) || other.theme == theme)&&(identical(other.padding, padding) || other.padding == padding)&&(identical(other.bodyLayout, bodyLayout) || other.bodyLayout == bodyLayout));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,titleText,titlePosition,headerBuilder,submitMode,disableSubmitMode,submitButtonBuilder,scaffoldBuilder,canModifySubmittedValues,showErrors,canQuit,theme,padding,scrollable);
+int get hashCode => Object.hash(runtimeType,titleText,titlePosition,headerBuilder,submitMode,disableSubmitMode,submitButtonBuilder,scaffoldBuilder,canModifySubmittedValues,showErrors,canQuit,theme,padding,bodyLayout);
 
 @override
 String toString() {
-  return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, disableSubmitMode: $disableSubmitMode, submitButtonBuilder: $submitButtonBuilder, scaffoldBuilder: $scaffoldBuilder, canModifySubmittedValues: $canModifySubmittedValues, showErrors: $showErrors, canQuit: $canQuit, theme: $theme, padding: $padding, scrollable: $scrollable)';
+  return 'WoFormUiSettings(titleText: $titleText, titlePosition: $titlePosition, headerBuilder: $headerBuilder, submitMode: $submitMode, disableSubmitMode: $disableSubmitMode, submitButtonBuilder: $submitButtonBuilder, scaffoldBuilder: $scaffoldBuilder, canModifySubmittedValues: $canModifySubmittedValues, showErrors: $showErrors, canQuit: $canQuit, theme: $theme, padding: $padding, bodyLayout: $bodyLayout)';
 }
 
 
@@ -2083,7 +2101,7 @@ abstract mixin class _$WoFormUiSettingsCopyWith<$Res> implements $WoFormUiSettin
   factory _$WoFormUiSettingsCopyWith(_WoFormUiSettings value, $Res Function(_WoFormUiSettings) _then) = __$WoFormUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String titleText, WoFormTitlePosition titlePosition,@notSerializable HeaderBuilderDef? headerBuilder, WoFormSubmitMode submitMode, DisableSubmitButton disableSubmitMode,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder,@notSerializable ScaffoldBuilderDef? scaffoldBuilder, bool? canModifySubmittedValues, ShowErrors showErrors,@notSerializable Future<bool?> Function(BuildContext context)? canQuit, WoFormThemeData? theme,@EdgeInsetsNullableConverter() EdgeInsets? padding, bool scrollable
+ String titleText, WoFormTitlePosition titlePosition,@notSerializable HeaderBuilderDef? headerBuilder, WoFormSubmitMode submitMode, DisableSubmitButton disableSubmitMode,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder,@notSerializable ScaffoldBuilderDef? scaffoldBuilder, bool? canModifySubmittedValues, ShowErrors showErrors,@notSerializable Future<bool?> Function(BuildContext context)? canQuit, WoFormThemeData? theme,@EdgeInsetsNullableConverter() EdgeInsets? padding, WoFormBodyLayout bodyLayout
 });
 
 
@@ -2100,7 +2118,7 @@ class __$WoFormUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of WoFormUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? titleText = null,Object? titlePosition = null,Object? headerBuilder = freezed,Object? submitMode = null,Object? disableSubmitMode = null,Object? submitButtonBuilder = freezed,Object? scaffoldBuilder = freezed,Object? canModifySubmittedValues = freezed,Object? showErrors = null,Object? canQuit = freezed,Object? theme = freezed,Object? padding = freezed,Object? scrollable = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? titleText = null,Object? titlePosition = null,Object? headerBuilder = freezed,Object? submitMode = null,Object? disableSubmitMode = null,Object? submitButtonBuilder = freezed,Object? scaffoldBuilder = freezed,Object? canModifySubmittedValues = freezed,Object? showErrors = null,Object? canQuit = freezed,Object? theme = freezed,Object? padding = freezed,Object? bodyLayout = null,}) {
   return _then(_WoFormUiSettings(
 titleText: null == titleText ? _self.titleText : titleText // ignore: cast_nullable_to_non_nullable
 as String,titlePosition: null == titlePosition ? _self.titlePosition : titlePosition // ignore: cast_nullable_to_non_nullable
@@ -2114,8 +2132,8 @@ as bool?,showErrors: null == showErrors ? _self.showErrors : showErrors // ignor
 as ShowErrors,canQuit: freezed == canQuit ? _self.canQuit : canQuit // ignore: cast_nullable_to_non_nullable
 as Future<bool?> Function(BuildContext context)?,theme: freezed == theme ? _self.theme : theme // ignore: cast_nullable_to_non_nullable
 as WoFormThemeData?,padding: freezed == padding ? _self.padding : padding // ignore: cast_nullable_to_non_nullable
-as EdgeInsets?,scrollable: null == scrollable ? _self.scrollable : scrollable // ignore: cast_nullable_to_non_nullable
-as bool,
+as EdgeInsets?,bodyLayout: null == bodyLayout ? _self.bodyLayout : bodyLayout // ignore: cast_nullable_to_non_nullable
+as WoFormBodyLayout,
   ));
 }
 

@@ -24,7 +24,8 @@ class InputsNodeWidget extends StatelessWidget {
             );
 
     final childBuilder =
-        formUiSettings.scrollable && data.uiSettings.direction == Axis.vertical
+        formUiSettings.bodyLayout.isScrollable &&
+            data.uiSettings.direction == Axis.vertical
         ? standardChildBuilder
         : flexibleChildBuilder;
 
@@ -59,7 +60,7 @@ class InputsNodeWidget extends StatelessWidget {
               Builder(
                 builder: (context) => Flexible(
                   flex:
-                      !formUiSettings.scrollable &&
+                      formUiSettings.bodyLayout.supportFlex &&
                           data.input.flex(context) != 0
                       ? 1
                       : 0,
@@ -89,7 +90,7 @@ class InputsNodeWidget extends StatelessWidget {
     builder: (context) {
       final flex = child.flex(context);
       return Flexible(
-        flex: !formUiSettings.scrollable && flex != null
+        flex: formUiSettings.bodyLayout.supportFlex && flex != null
             ? flex
             : data.uiSettings.direction == Axis.horizontal
             ? flex ?? 1

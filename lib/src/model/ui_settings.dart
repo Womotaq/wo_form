@@ -10,6 +10,7 @@ part 'ui_settings.g.dart';
 @freezed
 abstract class InputUiSettings with _$InputUiSettings {
   const factory InputUiSettings({
+    /// Requires [WoFormUiSettings.bodyLayout] at [WoFormBodyLayout.flexible].
     int? flex,
   }) = _InputUiSettings;
 
@@ -298,6 +299,7 @@ typedef HeaderBuilderDef = Widget Function(WoFormHeaderData data);
 @freezed
 abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
   const factory InputsNodeUiSettings({
+    /// Requires [WoFormUiSettings.bodyLayout] at [WoFormBodyLayout.flexible].
     int? flex,
 
     /// If flex is higher than 0, the default widget will use ListView.builder.
@@ -454,6 +456,8 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
   /// depending on how much the query is close to a value. 1 is the closest.
   const factory SelectInputUiSettings({
     /// If flex is higher than 0, the default widget will use ListView.builder.
+    ///
+    /// Requires [WoFormUiSettings.bodyLayout] at [WoFormBodyLayout.flexible].
     int? flex,
     String? labelText,
     String? helperText,
@@ -718,8 +722,13 @@ abstract class WoFormUiSettings with _$WoFormUiSettings {
     /// the app bar, the bottom bar and the floating widgets.
     @EdgeInsetsNullableConverter() EdgeInsets? padding,
 
-    /// If true, the inputs will be wrapped inside a SingleChildScrollView.
-    @Default(true) bool scrollable,
+    /// Controls the layout behavior of the body. Switch to
+    /// [WoFormBodyLayout.flexible] if you want to use `uiSettings.flex`.
+    ///
+    /// The body consists of your inputs and potentially the submit button,
+    /// if [StandardSubmitMode.buttonPosition] is SubmitButtonPosition.body
+    /// (wich is the default value).
+    @Default(WoFormBodyLayout.scrollable) WoFormBodyLayout bodyLayout,
   }) = _WoFormUiSettings;
 
   const WoFormUiSettings._();
@@ -748,6 +757,25 @@ enum ShowErrors {
   ///
   /// The default value.
   progressively,
+}
+
+/// Controls the layout behavior of the body.
+///
+/// The body consists of your inputs and potentially the submit button,
+/// if [StandardSubmitMode.buttonPosition] is SubmitButtonPosition.body
+/// (wich is the default value).
+enum WoFormBodyLayout {
+  /// The body will be wrapped in a SingleChildScrollView, allowing content
+  /// that overflows the screen to be scrolled. In this mode, `uiSettings.flex`
+  /// will have no effect.
+  scrollable,
+
+  /// The body will use a flexible layout, allowing its children to be sized
+  /// using `uiSettings.flex` and expand to fill the available screen space.
+  flexible;
+
+  bool get isScrollable => this == WoFormBodyLayout.scrollable;
+  bool get supportFlex => this == WoFormBodyLayout.flexible;
 }
 
 typedef MultiStepProgressIndicatorBuilderDef = Widget Function();

@@ -36,7 +36,7 @@ class WoFormStandardScaffold extends StatelessWidget {
           ],
         ],
       ),
-      body: uiSettings.scrollable
+      body: uiSettings.bodyLayout.isScrollable
           ? SingleChildScrollView(child: constrainedBody)
           : constrainedBody,
       bottomNavigationBar:

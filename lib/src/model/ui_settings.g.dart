@@ -429,7 +429,9 @@ _WoFormUiSettings _$WoFormUiSettingsFromJson(Map<String, dynamic> json) =>
       padding: const EdgeInsetsNullableConverter().fromJson(
         json['padding'] as Map<String, dynamic>?,
       ),
-      scrollable: json['scrollable'] as bool? ?? true,
+      bodyLayout:
+          $enumDecodeNullable(_$WoFormBodyLayoutEnumMap, json['bodyLayout']) ??
+          WoFormBodyLayout.scrollable,
     );
 
 Map<String, dynamic> _$WoFormUiSettingsToJson(_WoFormUiSettings instance) =>
@@ -443,7 +445,7 @@ Map<String, dynamic> _$WoFormUiSettingsToJson(_WoFormUiSettings instance) =>
       'showErrors': _$ShowErrorsEnumMap[instance.showErrors]!,
       'theme': instance.theme?.toJson(),
       'padding': const EdgeInsetsNullableConverter().toJson(instance.padding),
-      'scrollable': instance.scrollable,
+      'bodyLayout': _$WoFormBodyLayoutEnumMap[instance.bodyLayout]!,
     };
 
 const _$WoFormTitlePositionEnumMap = {
@@ -461,6 +463,11 @@ const _$ShowErrorsEnumMap = {
   ShowErrors.afterSubmission: 'afterSubmission',
   ShowErrors.always: 'always',
   ShowErrors.progressively: 'progressively',
+};
+
+const _$WoFormBodyLayoutEnumMap = {
+  WoFormBodyLayout.scrollable: 'scrollable',
+  WoFormBodyLayout.flexible: 'flexible',
 };
 
 StandardSubmitMode _$StandardSubmitModeFromJson(Map<String, dynamic> json) =>
