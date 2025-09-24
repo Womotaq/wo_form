@@ -24,7 +24,7 @@ class _FutureNodeBuilderState<T> extends State<FutureNodeBuilder<T>> {
     final valuesCubit = context.read<WoFormValuesCubit>();
     final childPath = '${widget.parentPath}/${widget.node.id}';
 
-    final snapshot = valuesCubit.state.getValue(childPath) as AsyncSnapshot?;
+    final snapshot = valuesCubit.state[childPath] as AsyncSnapshot?;
     if (snapshot != null) {
       final initialSnapshot = AsyncSnapshot.withData(
         ConnectionState.waiting,

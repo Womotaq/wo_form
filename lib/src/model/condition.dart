@@ -66,7 +66,7 @@ extension ConditionMeeter on WoFormValues {
         isFocused: final isFocused,
         matchesRegex: final matchesRegex,
       ):
-        final value = getValue(path);
+        final value = this[path];
         if (isEqualTo != null) {
           if (isEqualTo is List && value is List) {
             return const ListEquality<dynamic>().equals(isEqualTo, value);

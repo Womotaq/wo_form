@@ -16,7 +16,7 @@ class WoFormValueBuilder<T> extends StatelessWidget {
   Widget build(BuildContext context) => WoFormValueSelector<T?>(
     key: Key(path),
     selector: (values) {
-      final value = values.getValue(path);
+      final value = values[path];
       if (value is! T?) {
         throw ArgumentError(
           'Expected <$T?> at inputId: "$path", '
@@ -42,7 +42,7 @@ class WoFormValuesBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) => WoFormValueSelector<Json>(
     selector: (values) => {
-      for (final path in paths) path: values.getValue(path),
+      for (final path in paths) path: values[path],
     },
     builder: builder,
   );

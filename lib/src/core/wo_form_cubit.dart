@@ -521,8 +521,8 @@ class WoFormValues {
     return getAbsolutePath(parentPath: newParentPath, path: relativePath);
   }
 
-  dynamic operator [](String key) => _values[key];
-  void operator []=(String key, dynamic value) => _values[key] = value;
+  dynamic operator [](String key) => getValue(key);
+  void operator []=(String key, dynamic value) => _values[getKey(key)] = value;
 
   Iterable<MapEntry<String, dynamic>> get entries => _values.entries;
   Iterable<String> get keys => _values.keys;

@@ -716,19 +716,14 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
           )
           .flex(context),
     final ValueBuilderNode node =>
-      node
-          .builder!(
-            context.select(
-              (WoFormValuesCubit c) => c.state.getValue(node.path),
-            ),
-          )
+      node.builder!(context.select((WoFormValuesCubit c) => c.state[node.path]))
           .flex(context),
     final ValuesBuilderNode node =>
       node
           .builder!(
             context.select(
               (WoFormValuesCubit c) => {
-                for (final path in node.paths) path: c.state.getValue(path),
+                for (final path in node.paths) path: c.state[path],
               },
             ),
           )

@@ -19,15 +19,10 @@ class WoFormValueListener<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<WoFormValuesCubit, WoFormValues>(
-      listenWhen: (previous, current) {
-        return listenWhen?.call(
-              previous.getValue(path) as T?,
-              current.getValue(path) as T?,
-            ) ??
-            previous.getValue(path) != current.getValue(path);
-      },
-      listener: (context, values) =>
-          listener(context, values.getValue(path) as T?),
+      listenWhen: (previous, current) =>
+          listenWhen?.call(previous[path] as T?, current[path] as T?) ??
+          previous[path] != current[path],
+      listener: (context, values) => listener(context, values[path] as T?),
       child: child,
     );
   }
