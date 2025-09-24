@@ -118,7 +118,7 @@ class _WoFormMultiStepPageState extends State<_WoFormMultiStepPage> {
       );
 
       if (stepOrNull == null) {
-        throw ArgumentError('No step found with id {stepId}');
+        throw ArgumentError('No step found with id $stepId');
       } else {
         return stepOrNull;
       }
@@ -202,7 +202,7 @@ class _WoFormMultiStepPageState extends State<_WoFormMultiStepPage> {
                     );
 
                     if (stepOrNull == null) {
-                      throw ArgumentError('No step found with id {stepId}');
+                      throw ArgumentError('No step found with id $stepId');
                     } else {
                       step = stepOrNull;
                     }
