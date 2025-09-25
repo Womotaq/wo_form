@@ -23,8 +23,6 @@ class PlaceAutocompleteTextField extends StatefulWidget {
     // Ui
     this.itemBuilder,
     this.seperatedBuilder,
-    this.padding,
-    this.showError = true,
 
     // TextField parameters
     this.inputDecoration,
@@ -59,8 +57,6 @@ class PlaceAutocompleteTextField extends StatefulWidget {
   /// --- UI ---
   final ListItemBuilder? itemBuilder;
   final Widget? seperatedBuilder;
-  final EdgeInsets? padding;
-  final bool showError;
 
   /// --- TEXT FIELD ---
   final InputDecoration? inputDecoration;
@@ -116,8 +112,7 @@ class _PlaceAutoCompleteTextFieldState
   Widget build(BuildContext context) {
     return CompositedTransformTarget(
       link: _layerLink,
-      child: Container(
-        padding: widget.padding,
+      child: Align(
         alignment: Alignment.centerLeft,
         child: Row(
           children: [
@@ -198,7 +193,7 @@ class _PlaceAutoCompleteTextFieldState
     try {
       final response = await getPlacePredictions(input);
 
-      if (widget.showError && context.mounted) {
+      if (kDebugMode && context.mounted) {
         // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
       }
@@ -317,10 +312,10 @@ class _PlaceAutoCompleteTextFieldState
   }
 
   void _showSnackBar(String errorData) {
-    if (widget.showError) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(errorData)));
+    if (kDebugMode) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(errorData)),
+      );
     }
   }
 }

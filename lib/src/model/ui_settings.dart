@@ -97,10 +97,12 @@ abstract class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
     String? helperText,
     String? hintText,
 
-    /// If null, header will be placed above the date selector.
-    /// Else, header and selector will be in a flexible row,
-    /// selector with a flex value of 10,
-    /// and header with a flex value of [headerFlex].
+    /// If null or O, header will be placed above the field.
+    /// Else, header and selector will be in a the same row.
+    /// If -1, the field will take as much space as he wants
+    /// (might not work with all fields).
+    /// Else, the field will be wrapped in a Flexible with a flex value of 10,
+    /// and the header with a flex value of [headerFlex].
     int? headerFlex,
     @notSerializable Widget? prefixIcon,
     String? addDateText,
@@ -176,10 +178,12 @@ abstract class DurationInputUiSettings with _$DurationInputUiSettings {
     String? hintText,
     DurationEditMode? editMode,
 
-    /// If null, header will be placed above the date selector.
-    /// Else, header and selector will be in a flexible row,
-    /// selector with a flex value of 10,
-    /// and header with a flex value of [headerFlex].
+    /// If null or O, header will be placed above the field.
+    /// Else, header and selector will be in a the same row.
+    /// If -1, the field will take as much space as he wants
+    /// (might not work with all fields).
+    /// Else, the field will be wrapped in a Flexible with a flex value of 10,
+    /// and the header with a flex value of [headerFlex].
     int? headerFlex,
     @notSerializable PickDurationDef? pickDuration,
     @notSerializable FormatDurationDef? formatDuration,
@@ -408,10 +412,12 @@ enum NumInputStyle { selector, slider }
 @freezed
 abstract class NumInputUiSettings with _$NumInputUiSettings {
   const factory NumInputUiSettings({
-    /// If null, header will be placed above the date selector.
-    /// Else, header and selector will be in a flexible row,
-    /// selector with a flex value of 10,
-    /// and header with a flex value of [headerFlex].
+    /// If null or O, header will be placed above the field.
+    /// Else, header and selector will be in a the same row.
+    /// If -1, the field will take as much space as he wants
+    /// (might not work with all fields).
+    /// Else, the field will be wrapped in a Flexible with a flex value of 10,
+    /// and the header with a flex value of [headerFlex].
     ///
     /// Only with [NumInputStyle.slider].
     int? headerFlex,
@@ -468,10 +474,12 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
     /// Only used when [SelectInput.maxCount] is 1
     /// and childrenVisibility is [ChildrenVisibility.whenAsked].
     ///
-    /// If null, header will be placed above the selector.
-    /// Else, header and selector will be in a flexible row,
-    /// selector with a flex value of 10,
-    /// and header with a flex value of [headerFlex].
+    /// If null or O, header will be placed above the field.
+    /// Else, header and selector will be in a the same row.
+    /// If -1, the field will take as much space as he wants
+    /// (might not work with all fields).
+    /// Else, the field will be wrapped in a Flexible with a flex value of 10,
+    /// and the header with a flex value of [headerFlex].
     int? headerFlex,
     @notSerializable ValueBuilderDef<T>? valueBuilder,
     @notSerializable ValueBuilderDef<T>? selectedBuilder,
@@ -532,10 +540,12 @@ typedef ErrorBuilderDef = Widget Function(WoFormInputError error);
 @freezed
 abstract class StringInputUiSettings with _$StringInputUiSettings {
   const factory StringInputUiSettings({
-    /// If null, header will be placed above the field.
-    /// Else, header and field will be in a flexible row,
-    /// selector with a flex value of 10,
-    /// and header with a flex value of [headerFlex].
+    /// If null or O, header will be placed above the field.
+    /// Else, header and selector will be in a the same row.
+    /// If -1, the field will take as much space as he wants
+    /// (might not work with all fields).
+    /// Else, the field will be wrapped in a Flexible with a flex value of 10,
+    /// and the header with a flex value of [headerFlex].
     ///
     /// Only used when [labelLocation] is [StringFieldLocation.outside].
     int? headerFlex,

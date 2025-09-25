@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:phone_form_field/phone_form_field.dart';
@@ -126,64 +127,65 @@ class _StringFieldState extends State<StringField> {
             },
           );
 
-    // TODO : remove all padding from it ? look like TextFormField ? use FlexField
-    if (widget.data.input.placeAutocompleteSettings != null) {
-      final placeAutocompleteSettings =
-          widget.data.input.placeAutocompleteSettings!;
-      return PlaceAutocompleteTextField(
-        textEditingController: textEditingController!,
-        inputDecoration: inputDecoration,
-        textInputAction: uiSettings.textInputAction,
-        debounceTime: 300, // TODO : customizable
-        countries: placeAutocompleteSettings.countries
-            ?.map((isoCode) => isoCode.name)
-            .toList(),
-        onChanged: widget.data.onValueChanged,
-        onSelectedWithDetails:
-            placeAutocompleteSettings.includeDetails &&
-                widget.data.onValueChanged != null
-            ? (PlaceDetails details) =>
-                  context.read<WoFormValuesCubit>().onValueChanged(
-                    path: '${widget.data.path}+details',
-                    value: details,
-                  )
-            : null,
-        onFieldSubmitted:
-            (uiSettings.submitFormOnFieldSubmitted ??
-                defaultSubmitFormOnFieldSubmitted())
-            ? (_) => context.read<WoFormValuesCubit>().submit(context)
-            : null,
-        textCapitalization:
-            uiSettings.textCapitalization ?? TextCapitalization.none,
-        // Flutter's default behaviour :
-        // - web : tapping outside instantly unfocuses the field.
-        // - mobile : tapping outside does nothing.
-        // For better consistency across all plateforms, wo_form decided to
-        // unfocus text fields on tap up.
-        onTapOutside: (_) {},
-        onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
-        itemBuilder: (context, index, PlacePrediction prediction) => Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: Row(
-            children: [
-              const Icon(Icons.location_on),
-              const SizedBox(width: 7),
-              Expanded(
-                child: Text(
-                  prediction.description,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          ),
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        placeType: placeAutocompleteSettings.type,
-      );
-    }
+    final placeAutocompleteSettings =
+        widget.data.input.placeAutocompleteSettings;
 
-    final textField = uiSettings.keyboardType == TextInputType.phone
+    final textField = placeAutocompleteSettings != null
+        ? PlaceAutocompleteTextField(
+            textEditingController: textEditingController!,
+            inputDecoration: inputDecoration,
+            textInputAction: uiSettings.textInputAction,
+            debounceTime: 300, // TODO : customizable
+            countries: placeAutocompleteSettings.countries
+                ?.map((isoCode) => isoCode.name)
+                .toList(),
+            onChanged: widget.data.onValueChanged,
+            onSelectedWithDetails:
+                placeAutocompleteSettings.includeDetails &&
+                    widget.data.onValueChanged != null
+                ? (PlaceDetails details) =>
+                      context.read<WoFormValuesCubit>().onValueChanged(
+                        path: '${widget.data.path}+details',
+                        value: details,
+                      )
+                : null,
+            onFieldSubmitted:
+                (uiSettings.submitFormOnFieldSubmitted ??
+                    defaultSubmitFormOnFieldSubmitted())
+                ? (_) => context.read<WoFormValuesCubit>().submit(context)
+                : null,
+            textCapitalization:
+                uiSettings.textCapitalization ?? TextCapitalization.none,
+            // Flutter's default behaviour :
+            // - web : tapping outside instantly unfocuses the field.
+            // - mobile : tapping outside does nothing.
+            // For better consistency across all plateforms, wo_form decided to
+            // unfocus text fields on tap up.
+            onTapOutside: (_) {},
+            onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
+            itemBuilder: (context, index, PlacePrediction prediction) =>
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.location_on),
+                      const SizedBox(width: 7),
+                      Expanded(
+                        child: Text(
+                          prediction.description,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+            placeType: placeAutocompleteSettings.type,
+          )
+        : uiSettings.keyboardType == TextInputType.phone
         ? PhoneFormField(
             enabled: widget.data.onValueChanged != null,
             controller: phoneController,

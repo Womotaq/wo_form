@@ -79,38 +79,36 @@ class _NumSelectorState extends State<NumSelector> {
       height: iconHeight,
       width: 40,
       child: Builder(
-        builder: (context) {
-          return IconButton(
-            padding: EdgeInsets.zero,
-            icon: icon,
-            color: Theme.of(context).colorScheme.primary,
-            onPressed: disabled || widget.onChanged == null
-                ? null
-                : () {
-                    var newVal = num.tryParse(controller.text) ?? 0;
-                    newVal = _findNextStep(newVal, isPlus: isPlus);
-                    if (widget.minCount != null && newVal < widget.minCount!) {
-                      if (isPlus) {
-                        newVal = widget.minCount!;
-                      } else {
-                        return;
-                      }
+        builder: (context) => IconButton(
+          padding: EdgeInsets.zero,
+          icon: icon,
+          color: Theme.of(context).colorScheme.primary,
+          onPressed: disabled || widget.onChanged == null
+              ? null
+              : () {
+                  var newVal = num.tryParse(controller.text) ?? 0;
+                  newVal = _findNextStep(newVal, isPlus: isPlus);
+                  if (widget.minCount != null && newVal < widget.minCount!) {
+                    if (isPlus) {
+                      newVal = widget.minCount!;
+                    } else {
+                      return;
                     }
-                    if (widget.maxCount != null && newVal > widget.maxCount!) {
-                      if (isPlus) {
-                        return;
-                      } else {
-                        newVal = widget.maxCount!;
-                      }
+                  }
+                  if (widget.maxCount != null && newVal > widget.maxCount!) {
+                    if (isPlus) {
+                      return;
+                    } else {
+                      newVal = widget.maxCount!;
                     }
+                  }
 
-                    FocusScope.of(context).unfocus();
+                  FocusScope.of(context).unfocus();
 
-                    controller.text = newVal.toString();
-                    widget.onChanged!(newVal);
-                  },
-          );
-        },
+                  controller.text = newVal.toString();
+                  widget.onChanged!(newVal);
+                },
+        ),
       ),
     );
   }
@@ -135,10 +133,11 @@ class _NumSelectorState extends State<NumSelector> {
   @override
   Widget build(BuildContext context) {
     final children = [
-      getSideButton(
-        axis: widget.axis,
-        isPlus: false,
-      ),
+      if (!(widget.controller != null && widget.axis == Axis.horizontal))
+        getSideButton(
+          axis: widget.axis,
+          isPlus: false,
+        ),
       if (widget.controller != null)
         ConstrainedBox(
           constraints: const BoxConstraints(minWidth: 40),
@@ -151,6 +150,10 @@ class _NumSelectorState extends State<NumSelector> {
                 isDense: true,
                 contentPadding: const EdgeInsets.all(8),
                 suffix: widget.unit,
+                prefixIcon: getSideButton(axis: widget.axis, isPlus: false),
+                prefixIconConstraints: const BoxConstraints(),
+                suffixIcon: getSideButton(axis: widget.axis, isPlus: true),
+                suffixIconConstraints: const BoxConstraints(),
               ),
               textAlign: TextAlign.center,
               keyboardType: TextInputType.number,
@@ -172,20 +175,18 @@ class _NumSelectorState extends State<NumSelector> {
         )
       else
         Text(controller.text),
-      getSideButton(
-        axis: widget.axis,
-        isPlus: true,
-      ),
+      if (!(widget.controller != null && widget.axis == Axis.horizontal))
+        getSideButton(
+          axis: widget.axis,
+          isPlus: true,
+        ),
     ];
 
     return widget.axis == Axis.horizontal
-        ? Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: children,
-            ),
+        ? Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: children,
           )
         : Column(
             mainAxisAlignment: MainAxisAlignment.center,
