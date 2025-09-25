@@ -69,6 +69,8 @@ class _StringFieldState extends State<StringField> {
     }
 
     final collapsed = widget.data.uiSettings.collapsed ?? false;
+    final prefixIconLocation =
+        widget.data.uiSettings.prefixIconLocation ?? FieldIconLocation.outside;
 
     final inputDecoration = collapsed
         ? InputDecoration.collapsed(
@@ -84,9 +86,7 @@ class _StringFieldState extends State<StringField> {
             hintText: widget.data.uiSettings.hintText,
             errorText: widget.data.errorText,
             error: widget.data.errorWidget,
-            prefixIcon:
-                widget.data.uiSettings.prefixIconLocation ==
-                    FieldIconLocation.inside
+            prefixIcon: prefixIconLocation == FieldIconLocation.inside
                 ? widget.data.uiSettings.prefixIcon
                 : null,
             suffixIcon: switch (widget.data.uiSettings.action) {
@@ -171,9 +171,7 @@ class _StringFieldState extends State<StringField> {
         visualDensity: collapsed ? VisualDensity.compact : null,
         minVerticalPadding: collapsed ? 0 : null,
         minTileHeight: collapsed ? 0 : null,
-        leading:
-            widget.data.uiSettings.prefixIconLocation ==
-                FieldIconLocation.outside
+        leading: prefixIconLocation == FieldIconLocation.outside
             ? widget.data.uiSettings.prefixIcon
             : null,
         title: PhoneFormField(
@@ -210,8 +208,7 @@ class _StringFieldState extends State<StringField> {
       visualDensity: collapsed ? VisualDensity.compact : null,
       minVerticalPadding: collapsed ? 0 : null,
       minTileHeight: collapsed ? 0 : null,
-      leading:
-          widget.data.uiSettings.prefixIconLocation == FieldIconLocation.outside
+      leading: prefixIconLocation == FieldIconLocation.outside
           ? widget.data.uiSettings.prefixIcon
           : null,
       title: TextFormField(

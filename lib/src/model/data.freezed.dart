@@ -145,7 +145,7 @@ as String?,
 /// @nodoc
 mixin _$WoFormInputHeaderData {
 
- String get path; String? get labelText; String? get helperText; String? get errorText; Widget? get trailing; VoidCallback? get onTap; bool get shrinkWrap;
+ String? get labelText; String? get helperText; String? get errorText; Widget? get trailing; VoidCallback? get onTap; bool get shrinkWrap;
 /// Create a copy of WoFormInputHeaderData
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -156,16 +156,16 @@ $WoFormInputHeaderDataCopyWith<WoFormInputHeaderData> get copyWith => _$WoFormIn
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WoFormInputHeaderData&&(identical(other.path, path) || other.path == path)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.errorText, errorText) || other.errorText == errorText)&&(identical(other.trailing, trailing) || other.trailing == trailing)&&(identical(other.onTap, onTap) || other.onTap == onTap)&&(identical(other.shrinkWrap, shrinkWrap) || other.shrinkWrap == shrinkWrap));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WoFormInputHeaderData&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.errorText, errorText) || other.errorText == errorText)&&(identical(other.trailing, trailing) || other.trailing == trailing)&&(identical(other.onTap, onTap) || other.onTap == onTap)&&(identical(other.shrinkWrap, shrinkWrap) || other.shrinkWrap == shrinkWrap));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,path,labelText,helperText,errorText,trailing,onTap,shrinkWrap);
+int get hashCode => Object.hash(runtimeType,labelText,helperText,errorText,trailing,onTap,shrinkWrap);
 
 @override
 String toString() {
-  return 'WoFormInputHeaderData(path: $path, labelText: $labelText, helperText: $helperText, errorText: $errorText, trailing: $trailing, onTap: $onTap, shrinkWrap: $shrinkWrap)';
+  return 'WoFormInputHeaderData(labelText: $labelText, helperText: $helperText, errorText: $errorText, trailing: $trailing, onTap: $onTap, shrinkWrap: $shrinkWrap)';
 }
 
 
@@ -176,7 +176,7 @@ abstract mixin class $WoFormInputHeaderDataCopyWith<$Res>  {
   factory $WoFormInputHeaderDataCopyWith(WoFormInputHeaderData value, $Res Function(WoFormInputHeaderData) _then) = _$WoFormInputHeaderDataCopyWithImpl;
 @useResult
 $Res call({
- String path, String? labelText, String? helperText, String? errorText, Widget? trailing, VoidCallback? onTap, bool shrinkWrap
+ String? labelText, String? helperText, String? errorText, Widget? trailing, VoidCallback? onTap, bool shrinkWrap
 });
 
 
@@ -193,10 +193,9 @@ class _$WoFormInputHeaderDataCopyWithImpl<$Res>
 
 /// Create a copy of WoFormInputHeaderData
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? path = null,Object? labelText = freezed,Object? helperText = freezed,Object? errorText = freezed,Object? trailing = freezed,Object? onTap = freezed,Object? shrinkWrap = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? labelText = freezed,Object? helperText = freezed,Object? errorText = freezed,Object? trailing = freezed,Object? onTap = freezed,Object? shrinkWrap = null,}) {
   return _then(_self.copyWith(
-path: null == path ? _self.path : path // ignore: cast_nullable_to_non_nullable
-as String,labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
+labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
 as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
 as String?,errorText: freezed == errorText ? _self.errorText : errorText // ignore: cast_nullable_to_non_nullable
 as String?,trailing: freezed == trailing ? _self.trailing : trailing // ignore: cast_nullable_to_non_nullable
@@ -214,10 +213,9 @@ as bool,
 
 
 class _WoFormInputHeaderData implements WoFormInputHeaderData {
-  const _WoFormInputHeaderData({required this.path, this.labelText, this.helperText, this.errorText, this.trailing, this.onTap, this.shrinkWrap = true});
+  const _WoFormInputHeaderData({this.labelText, this.helperText, this.errorText, this.trailing, this.onTap, this.shrinkWrap = true});
   
 
-@override final  String path;
 @override final  String? labelText;
 @override final  String? helperText;
 @override final  String? errorText;
@@ -235,16 +233,16 @@ _$WoFormInputHeaderDataCopyWith<_WoFormInputHeaderData> get copyWith => __$WoFor
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WoFormInputHeaderData&&(identical(other.path, path) || other.path == path)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.errorText, errorText) || other.errorText == errorText)&&(identical(other.trailing, trailing) || other.trailing == trailing)&&(identical(other.onTap, onTap) || other.onTap == onTap)&&(identical(other.shrinkWrap, shrinkWrap) || other.shrinkWrap == shrinkWrap));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WoFormInputHeaderData&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.errorText, errorText) || other.errorText == errorText)&&(identical(other.trailing, trailing) || other.trailing == trailing)&&(identical(other.onTap, onTap) || other.onTap == onTap)&&(identical(other.shrinkWrap, shrinkWrap) || other.shrinkWrap == shrinkWrap));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,path,labelText,helperText,errorText,trailing,onTap,shrinkWrap);
+int get hashCode => Object.hash(runtimeType,labelText,helperText,errorText,trailing,onTap,shrinkWrap);
 
 @override
 String toString() {
-  return 'WoFormInputHeaderData(path: $path, labelText: $labelText, helperText: $helperText, errorText: $errorText, trailing: $trailing, onTap: $onTap, shrinkWrap: $shrinkWrap)';
+  return 'WoFormInputHeaderData(labelText: $labelText, helperText: $helperText, errorText: $errorText, trailing: $trailing, onTap: $onTap, shrinkWrap: $shrinkWrap)';
 }
 
 
@@ -255,7 +253,7 @@ abstract mixin class _$WoFormInputHeaderDataCopyWith<$Res> implements $WoFormInp
   factory _$WoFormInputHeaderDataCopyWith(_WoFormInputHeaderData value, $Res Function(_WoFormInputHeaderData) _then) = __$WoFormInputHeaderDataCopyWithImpl;
 @override @useResult
 $Res call({
- String path, String? labelText, String? helperText, String? errorText, Widget? trailing, VoidCallback? onTap, bool shrinkWrap
+ String? labelText, String? helperText, String? errorText, Widget? trailing, VoidCallback? onTap, bool shrinkWrap
 });
 
 
@@ -272,10 +270,9 @@ class __$WoFormInputHeaderDataCopyWithImpl<$Res>
 
 /// Create a copy of WoFormInputHeaderData
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? path = null,Object? labelText = freezed,Object? helperText = freezed,Object? errorText = freezed,Object? trailing = freezed,Object? onTap = freezed,Object? shrinkWrap = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? labelText = freezed,Object? helperText = freezed,Object? errorText = freezed,Object? trailing = freezed,Object? onTap = freezed,Object? shrinkWrap = null,}) {
   return _then(_WoFormInputHeaderData(
-path: null == path ? _self.path : path // ignore: cast_nullable_to_non_nullable
-as String,labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
+labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
 as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
 as String?,errorText: freezed == errorText ? _self.errorText : errorText // ignore: cast_nullable_to_non_nullable
 as String?,trailing: freezed == trailing ? _self.trailing : trailing // ignore: cast_nullable_to_non_nullable

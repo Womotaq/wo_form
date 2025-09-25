@@ -88,7 +88,6 @@ class DynamicInputsNodeWidget extends StatelessWidget {
           );
 
     final headerData = WoFormInputHeaderData(
-      path: data.path,
       labelText: data.uiSettings.labelText,
       helperText: data.uiSettings.helperText,
       trailing: addButton,

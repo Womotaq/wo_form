@@ -15,7 +15,6 @@ abstract class WoFormHeaderData with _$WoFormHeaderData {
 @freezed
 abstract class WoFormInputHeaderData with _$WoFormInputHeaderData {
   const factory WoFormInputHeaderData({
-    required String path,
     String? labelText,
     String? helperText,
     String? errorText,

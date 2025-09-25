@@ -1,6 +1,6 @@
 import 'package:wo_form/wo_form.dart';
 
-abstract class PlaceRepository {
+mixin PlaceRepositoryMixin {
   /// Your proxy for addresses autocompletion in string fields.
   ///
   /// The provided [input] is a string to add in the body. You also need

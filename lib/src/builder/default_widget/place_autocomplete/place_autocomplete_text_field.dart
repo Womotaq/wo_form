@@ -1,10 +1,10 @@
 // Credits : https://pub.dev/packages/google_places_flutter
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:rxdart/rxdart.dart'; // TODO : remove this dependency ?
-import 'package:wo_form/src/builder/default_widget/place_autocomplete/error_handler.dart';
 import 'package:wo_form/wo_form.dart';
 
 class PlaceAutocompleteTextField extends StatefulWidget {
@@ -180,17 +180,22 @@ class _PlaceAutoCompleteTextFieldState
           '&radius=${widget.radius}';
     }
 
-    try {
-      /// 'https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${widget.googleAPIKey}&input=' + input
-      final getPlacePredictions = context
-          .read<PlaceRepository?>()
-          ?.getPlacePredictions;
-      if (getPlacePredictions == null) {
-        throw UnimplementedError(
-          'You need to provide a PlaceRepository for address autocompletion.',
-        );
-      }
+    /// 'https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${widget.googleAPIKey}&input=' + input
+    final getPlacePredictions = context
+        .read<PlaceRepositoryMixin?>()
+        ?.getPlacePredictions;
+    if (getPlacePredictions == null) {
+      throw UnimplementedError(
+        'You need to provide a PlaceRepository for address autocompletion : \n'
+        '```\n'
+        'RepositoryProvider<PlaceRepositoryMixin>(\n'
+        '  create: (context) => YourPlaceRepository(),\n'
+        '),\n'
+        '```',
+      );
+    }
 
+    try {
       final response = await getPlacePredictions(input);
 
       if (widget.showError && context.mounted) {
@@ -214,8 +219,7 @@ class _PlaceAutoCompleteTextFieldState
         Overlay.of(context).insert(_overlayEntry!);
       }
     } catch (e) {
-      final errorHandler = ErrorHandler.internal().handleError(e);
-      _showSnackBar('${errorHandler.message}');
+      if (kDebugMode) _showSnackBar('An error occured : $e');
     }
   }
 
@@ -287,10 +291,18 @@ class _PlaceAutoCompleteTextFieldState
 
     /// 'https://maps.googleapis.com/maps/api/place/details/json?key=${widget.googleAPIKey}&placeid=' + placeId
     try {
-      final getPlaceDetails = context.read<PlaceRepository?>()?.getPlaceDetails;
+      final getPlaceDetails = context
+          .read<PlaceRepositoryMixin?>()
+          ?.getPlaceDetails;
       if (getPlaceDetails == null) {
         throw UnimplementedError(
-          'You need to provide a PlaceRepository for address autocompletion.',
+          'You need to provide a PlaceRepository for '
+          'address autocompletion : \n'
+          '```\n'
+          'RepositoryProvider<PlaceRepositoryMixin>(\n'
+          '  create: (context) => YourPlaceRepository(),\n'
+          '),\n'
+          '```',
         );
       }
 
@@ -300,8 +312,7 @@ class _PlaceAutoCompleteTextFieldState
       }
       // TODO : communicate in case of error
     } catch (e) {
-      final errorHandler = ErrorHandler.internal().handleError(e);
-      _showSnackBar('${errorHandler.message}');
+      if (kDebugMode) _showSnackBar('An error occured : $e');
     }
   }
 

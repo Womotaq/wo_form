@@ -31,7 +31,6 @@ class SelectField<T> extends StatelessWidget {
             child: Builder(
               builder: (context) {
                 final headerData = WoFormInputHeaderData(
-                  path: data.path,
                   labelText: data.uiSettings.labelText,
                   helperText: data.uiSettings.helperText,
                   errorText: data.errorText,
@@ -104,7 +103,6 @@ class SelectField<T> extends StatelessWidget {
           );
         } else {
           final headerData = WoFormInputHeaderData(
-            path: data.path,
             labelText: data.uiSettings.labelText,
             helperText: data.uiSettings.helperText,
             errorText: data.errorText,

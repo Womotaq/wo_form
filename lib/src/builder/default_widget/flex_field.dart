@@ -39,7 +39,6 @@ class FlexField extends StatelessWidget {
                 InputHeader.new)
             .call(
               WoFormInputHeaderData(
-                path: path,
                 labelText: labelText,
                 helperText: helperText,
                 errorText: errorText,

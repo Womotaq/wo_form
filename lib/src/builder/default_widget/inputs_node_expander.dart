@@ -27,7 +27,6 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
   @override
   Widget build(BuildContext context) {
     final headerData = WoFormInputHeaderData(
-      path: widget.data.path,
       labelText:
           widget.data.uiSettings.labelTextWhenChildrenHidden ??
           widget.data.uiSettings.labelText,
