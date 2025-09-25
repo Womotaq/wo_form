@@ -325,6 +325,10 @@ _StringInputUiSettings _$StringInputUiSettingsFromJson(
   hintText: json['hintText'] as String?,
   helperText: json['helperText'] as String?,
   helperMaxLines: (json['helperMaxLines'] as num?)?.toInt(),
+  prefixIconLocation: $enumDecodeNullable(
+    _$FieldIconLocationEnumMap,
+    json['prefixIconLocation'],
+  ),
   action: $enumDecodeNullable(_$StringFieldActionEnumMap, json['action']),
   submitFormOnFieldSubmitted: json['submitFormOnFieldSubmitted'] as bool?,
   keyboardType: const TextInputTypeConverter().fromJson(
@@ -356,6 +360,7 @@ Map<String, dynamic> _$StringInputUiSettingsToJson(
   'hintText': instance.hintText,
   'helperText': instance.helperText,
   'helperMaxLines': instance.helperMaxLines,
+  'prefixIconLocation': _$FieldIconLocationEnumMap[instance.prefixIconLocation],
   'action': _$StringFieldActionEnumMap[instance.action],
   'submitFormOnFieldSubmitted': instance.submitFormOnFieldSubmitted,
   'keyboardType': const TextInputTypeConverter().toJson(instance.keyboardType),
@@ -369,6 +374,11 @@ Map<String, dynamic> _$StringInputUiSettingsToJson(
   'maxLines': instance.maxLines,
   'invalidRegexMessage': instance.invalidRegexMessage,
   'collapsed': instance.collapsed,
+};
+
+const _$FieldIconLocationEnumMap = {
+  FieldIconLocation.inside: 'inside',
+  FieldIconLocation.outside: 'outside',
 };
 
 const _$StringFieldActionEnumMap = {

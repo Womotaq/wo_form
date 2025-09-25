@@ -86,7 +86,6 @@ extension ConditionMeeter on WoFormValues {
           return (value == null) == isNull;
         }
         if (isFocused != null) {
-          print(this.isFocused(path));
           return this.isFocused(path);
         }
         if (matchesRegex != null) {

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:rxdart/rxdart.dart'; // TODO : remove this dependency ?
 import 'package:wo_form/src/builder/default_widget/place_autocomplete/error_handler.dart';
 import 'package:wo_form/wo_form.dart';
@@ -12,59 +13,65 @@ class PlaceAutocompleteTextField extends StatefulWidget {
     required this.onChanged,
     this.onSelectedWithDetails,
     this.debounceTime = 600,
-    this.inputDecoration = const InputDecoration(),
-    this.textStyle = const TextStyle(),
-    this.itemBuilder,
-    this.boxDecoration,
-    this.seperatedBuilder,
-    this.padding,
-    this.showError = true,
-    this.focusNode,
     this.placeType,
-    this.language = 'en',
-    this.validator,
+    this.language,
     this.countries = const [],
     this.latitude,
     this.longitude,
     this.radius,
+
+    // Ui
+    this.itemBuilder,
+    this.seperatedBuilder,
+    this.padding,
+    this.showError = true,
+
+    // TextField parameters
+    this.inputDecoration,
+    this.textStyle,
+    this.focusNode,
+    this.textInputAction,
+    this.textCapitalization,
     this.onFieldSubmitted,
     this.onTapOutside,
     this.onTapUpOutside,
-    this.textInputAction,
     super.key,
   });
 
-  final InputDecoration inputDecoration;
   final void Function(String? text)? onChanged;
 
   /// If provided, will be called when a prediction is selected,
   /// right after [onChanged].
   final void Function(PlaceDetails details)? onSelectedWithDetails;
 
-  final TextStyle textStyle;
+  /// --- API ---
+
   final int debounceTime;
-  final List<String>? countries;
-  final TextEditingController textEditingController;
-  final ListItemBuilder? itemBuilder;
-  final Widget? seperatedBuilder;
-  final BoxDecoration? boxDecoration;
-  final bool showError;
-  final EdgeInsets? padding;
-  final FocusNode? focusNode;
   final PlaceType? placeType;
   final String? language;
-  final TextInputAction? textInputAction;
-  final ValueChanged<String>? onFieldSubmitted;
-  final ValueChanged<PointerEvent>? onTapOutside;
-  final ValueChanged<PointerUpEvent>? onTapUpOutside;
-
-  final String? Function(String?, BuildContext)? validator;
-
+  final List<String>? countries;
   final double? latitude;
   final double? longitude;
 
   /// This is expressed in **meters**
   final int? radius;
+
+  /// --- UI ---
+  final ListItemBuilder? itemBuilder;
+  final Widget? seperatedBuilder;
+  final EdgeInsets? padding;
+  final bool showError;
+
+  /// --- TEXT FIELD ---
+  final InputDecoration? inputDecoration;
+  final TextStyle? textStyle;
+  final TextEditingController textEditingController;
+  final FocusNode? focusNode;
+  final TextInputAction? textInputAction;
+  final TextCapitalization? textCapitalization;
+  final ValueChanged<String>? onFieldSubmitted;
+  final ValueChanged<PointerEvent>? onTapOutside;
+  final ValueChanged<PointerUpEvent>? onTapUpOutside;
 
   @override
   State<PlaceAutocompleteTextField> createState() =>
@@ -112,7 +119,6 @@ class _PlaceAutoCompleteTextFieldState
       child: Container(
         padding: widget.padding,
         alignment: Alignment.centerLeft,
-        decoration: widget.boxDecoration,
         child: Row(
           children: [
             Expanded(
@@ -122,10 +128,9 @@ class _PlaceAutoCompleteTextFieldState
                 controller: widget.textEditingController,
                 focusNode: _focusNode,
                 textInputAction: widget.textInputAction ?? TextInputAction.done,
+                textCapitalization:
+                    widget.textCapitalization ?? TextCapitalization.none,
                 onFieldSubmitted: widget.onFieldSubmitted,
-                validator: (inputString) {
-                  return widget.validator?.call(inputString, context);
-                },
                 onChanged: subject.add,
                 onTapOutside: widget.onTapOutside,
                 onTapUpOutside: widget.onTapUpOutside,
@@ -149,7 +154,8 @@ class _PlaceAutoCompleteTextFieldState
   Future<void> updatePredictions(String text) async {
     if (text.isEmpty) return removeOverlay();
 
-    var input = '$text&language=${widget.language}';
+    final language = widget.language ?? Intl.defaultLocale;
+    var input = '$text&language=$language';
 
     if (widget.countries != null) {
       for (var i = 0; i < widget.countries!.length; i++) {

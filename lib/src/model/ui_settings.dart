@@ -516,6 +516,8 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
 
 enum StringFieldAction { clear, obscure }
 
+enum FieldIconLocation { inside, outside }
+
 typedef StringFieldBuilderDef =
     Widget Function(
       WoFieldData<StringInput, String, StringInputUiSettings> data,
@@ -531,6 +533,9 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     int? helperMaxLines,
     @notSerializable Widget? helper,
     @notSerializable Widget? prefixIcon,
+
+    /// Default to FieldIconLocation.outside
+    FieldIconLocation? prefixIconLocation,
     StringFieldAction? action,
     bool? submitFormOnFieldSubmitted,
     @TextInputTypeConverter() TextInputType? keyboardType,
@@ -561,6 +566,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     int? helperMaxLines,
     Widget? helper,
     Widget? prefixIcon,
+    FieldIconLocation? prefixIconLocation,
     bool? submitFormOnFieldSubmitted,
     bool? autofocus,
     TextInputAction? textInputAction,
@@ -575,6 +581,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     helperMaxLines: helperMaxLines,
     helper: helper,
     prefixIcon: prefixIcon,
+    prefixIconLocation: prefixIconLocation,
     submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
     autofocus: autofocus,
     textInputAction: textInputAction,
@@ -595,6 +602,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     int? helperMaxLines,
     Widget? helper,
     Widget? prefixIcon,
+    FieldIconLocation? prefixIconLocation,
     bool? submitFormOnFieldSubmitted,
     TextInputAction? textInputAction,
     String? invalidRegexMessage,
@@ -608,6 +616,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     helperMaxLines: helperMaxLines,
     helper: helper,
     prefixIcon: prefixIcon,
+    prefixIconLocation: prefixIconLocation,
     submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
     textInputAction: textInputAction,
     invalidRegexMessage: invalidRegexMessage,
@@ -632,6 +641,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     int? helperMaxLines,
     Widget? helper,
     Widget? prefixIcon,
+    FieldIconLocation? prefixIconLocation,
     bool? submitFormOnFieldSubmitted,
     bool? autofocus,
     TextInputAction? textInputAction,
@@ -645,6 +655,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     helperMaxLines: helperMaxLines,
     helper: helper,
     prefixIcon: prefixIcon,
+    prefixIconLocation: prefixIconLocation,
     submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
     autofocus: autofocus,
     textInputAction: textInputAction,
@@ -671,6 +682,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
           helperMaxLines: helperMaxLines ?? other.helperMaxLines,
           helper: helper ?? other.helper,
           prefixIcon: prefixIcon ?? other.prefixIcon,
+          prefixIconLocation: prefixIconLocation ?? other.prefixIconLocation,
           action: action ?? other.action,
           submitFormOnFieldSubmitted:
               submitFormOnFieldSubmitted ?? other.submitFormOnFieldSubmitted,

@@ -84,6 +84,11 @@ class _StringFieldState extends State<StringField> {
             hintText: widget.data.uiSettings.hintText,
             errorText: widget.data.errorText,
             error: widget.data.errorWidget,
+            prefixIcon:
+                widget.data.uiSettings.prefixIconLocation ==
+                    FieldIconLocation.inside
+                ? widget.data.uiSettings.prefixIcon
+                : null,
             suffixIcon: switch (widget.data.uiSettings.action) {
               null => null,
               StringFieldAction.clear => IconButton(
@@ -127,6 +132,9 @@ class _StringFieldState extends State<StringField> {
                 defaultSubmitFormOnFieldSubmitted())
             ? (_) => context.read<WoFormValuesCubit>().submit(context)
             : null,
+        textCapitalization:
+            widget.data.uiSettings.textCapitalization ??
+            TextCapitalization.none,
         // Flutter's default behaviour :
         // - web : tapping outside instantly unfocuses the field.
         // - mobile : tapping outside does nothing.
@@ -157,8 +165,17 @@ class _StringFieldState extends State<StringField> {
 
     if (widget.data.uiSettings.keyboardType == TextInputType.phone) {
       return ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-        leading: widget.data.uiSettings.prefixIcon,
+        contentPadding: collapsed
+            ? EdgeInsets.zero
+            : const EdgeInsets.symmetric(horizontal: 16),
+        visualDensity: collapsed ? VisualDensity.compact : null,
+        minVerticalPadding: collapsed ? 0 : null,
+        minTileHeight: collapsed ? 0 : null,
+        leading:
+            widget.data.uiSettings.prefixIconLocation ==
+                FieldIconLocation.outside
+            ? widget.data.uiSettings.prefixIcon
+            : null,
         title: PhoneFormField(
           enabled: widget.data.onValueChanged != null,
           controller: phoneController,
@@ -193,7 +210,10 @@ class _StringFieldState extends State<StringField> {
       visualDensity: collapsed ? VisualDensity.compact : null,
       minVerticalPadding: collapsed ? 0 : null,
       minTileHeight: collapsed ? 0 : null,
-      leading: widget.data.uiSettings.prefixIcon,
+      leading:
+          widget.data.uiSettings.prefixIconLocation == FieldIconLocation.outside
+          ? widget.data.uiSettings.prefixIcon
+          : null,
       title: TextFormField(
         enabled: widget.data.onValueChanged != null,
         controller: textEditingController,
