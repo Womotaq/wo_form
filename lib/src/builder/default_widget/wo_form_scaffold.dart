@@ -12,97 +12,139 @@ class WoFormScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     final uiSettings = context.read<RootNode>().uiSettings;
 
-    switch (uiSettings.presentation) {
-      case WoFormPresentation.bottomSheet:
-      case WoFormPresentation.dialog:
-        final titleInAppBar =
-            uiSettings.titlePosition == WoFormTitlePosition.appBar;
-        final submitButtonInAppBar =
-            uiSettings.submitButtonPosition == SubmitButtonPosition.appBar;
-        final showCloseButton =
-            uiSettings.presentation == WoFormPresentation.dialog;
+    return _ShrinkableScaffold(
+      shrinkWrap: false,
+      appBarLeading: uiSettings.presentation == WoFormPresentation.page
+          ? const QuitWoFormButton()
+          : null,
+      appBarTitle: uiSettings.titlePosition == WoFormTitlePosition.appBar
+          ? Text(uiSettings.titleText)
+          : null,
+      appBarActions: [
+        if (uiSettings.submitButtonPosition == SubmitButtonPosition.appBar) ...[
+          const SubmitButtonBuilder(),
+          const SizedBox(width: 8),
+        ],
+        if (uiSettings.presentation == WoFormPresentation.dialog) ...[
+          const QuitWoFormButton(),
+          const SizedBox(width: 8),
+        ],
+      ],
+      body: body,
+      bottomNavigationBar:
+          uiSettings.submitButtonPosition == SubmitButtonPosition.bottomBar
+          ? const SubmitButtonBuilder()
+          : null,
+      floatingActionButton:
+          uiSettings.submitButtonPosition == SubmitButtonPosition.floating
+          ? const SubmitButtonBuilder()
+          : null,
+    );
+  }
+}
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-              child: Stack(
-                children: [
-                  Column(
-                    children: [
-                      if (titleInAppBar ||
-                          submitButtonInAppBar ||
-                          showCloseButton)
-                        AppBar(
-                          automaticallyImplyLeading: false,
-                          title: titleInAppBar
-                              ? Text(uiSettings.titleText)
-                              : null,
-                          actions: [
-                            if (submitButtonInAppBar) ...[
-                              const SubmitButtonBuilder(),
-                              const SizedBox(width: 8),
-                            ],
-                            if (showCloseButton) ...[
-                              const QuitWoFormButton(),
-                              const SizedBox(width: 8),
-                            ],
-                          ],
-                        ),
-                      Expanded(child: body),
-                    ],
+class _ShrinkableScaffold extends StatefulWidget {
+  const _ShrinkableScaffold({
+    required this.body,
+    required this.shrinkWrap,
+    this.appBarLeading,
+    this.appBarTitle,
+    this.appBarActions = const [],
+    this.bottomNavigationBar,
+    this.floatingActionButton,
+  });
+
+  final Widget body;
+  final bool shrinkWrap;
+  final Widget? appBarLeading;
+  final Widget? appBarTitle;
+  final List<Widget> appBarActions;
+  final Widget? bottomNavigationBar;
+  final Widget? floatingActionButton;
+
+  @override
+  State<_ShrinkableScaffold> createState() => _ShrinkableScaffoldState();
+}
+
+class _ShrinkableScaffoldState extends State<_ShrinkableScaffold> {
+  ScrollController? scrollController;
+  double elevation = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    scrollController = ScrollControllerProvider.of(context);
+    scrollController?.addListener(_handleScroll);
+  }
+
+  void _handleScroll() {
+    if (scrollController == null) return;
+
+    final newElevation = scrollController!.offset > 0
+        ? Theme.of(context).appBarTheme.scrolledUnderElevation ?? 4
+        : 0.0;
+    if (newElevation != elevation) setState(() => elevation = newElevation);
+  }
+
+  @override
+  void dispose() {
+    scrollController?.removeListener(_handleScroll);
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // return Scaffold(
+    //   appBar:
+    //       widget.appBarLeading != null ||
+    //           widget.appBarTitle != null ||
+    //           widget.appBarActions.isNotEmpty
+    //       ? AppBar(
+    //           leading: widget.appBarLeading,
+    //           title: widget.appBarTitle,
+    //           actions: widget.appBarActions,
+    //           elevation: _elevation,
+    //         )
+    //       : null,
+    //   body: widget.body,
+    //   bottomNavigationBar: widget.bottomNavigationBar,
+    //   floatingActionButton: widget.floatingActionButton,
+    // );
+
+    return Material(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: Stack(
+              children: [
+                Column(
+                  children: [
+                    if (widget.appBarLeading != null ||
+                        widget.appBarTitle != null ||
+                        widget.appBarActions.isNotEmpty)
+                      AppBar(
+                        leading: widget.appBarLeading,
+                        title: widget.appBarTitle,
+                        actions: widget.appBarActions,
+                        elevation: elevation,
+                      ),
+                    Expanded(child: widget.body),
+                  ],
+                ),
+                if (widget.floatingActionButton != null)
+                  Positioned(
+                    bottom: 16,
+                    right: 16,
+                    child: widget.floatingActionButton!,
                   ),
-                  if (uiSettings.submitButtonPosition ==
-                      SubmitButtonPosition.floating)
-                    const Positioned(
-                      right: 16,
-                      bottom: 16,
-                      child: SubmitButtonBuilder(),
-                    ),
-                ],
-              ),
-            ),
-            if (uiSettings.submitButtonPosition ==
-                SubmitButtonPosition.bottomBar)
-              const SubmitButtonBuilder(),
-          ],
-        );
-
-      case WoFormPresentation.page:
-        return Scaffold(
-          appBar: AppBar(
-            leading: const QuitWoFormButton(),
-            title: uiSettings.titlePosition == WoFormTitlePosition.appBar
-                ? Text(uiSettings.titleText)
-                : null,
-            actions: [
-              if (uiSettings.submitButtonPosition ==
-                  SubmitButtonPosition.appBar) ...[
-                const SubmitButtonBuilder(),
-                const SizedBox(width: 8),
               ],
-            ],
-          ),
-          body: Align(
-            alignment: Alignment.topCenter,
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                maxWidth:
-                    WoFormTheme.of(context)?.maxWidth ??
-                    WoFormThemeData.DEFAULT_MAX_WIDTH,
-              ),
-              child: body,
             ),
           ),
-          bottomNavigationBar:
-              uiSettings.submitButtonPosition == SubmitButtonPosition.bottomBar
-              ? const SubmitButtonBuilder()
-              : null,
-          floatingActionButton:
-              uiSettings.submitButtonPosition == SubmitButtonPosition.floating
-              ? const SubmitButtonBuilder()
-              : null,
-        );
-    }
+          ?widget.bottomNavigationBar,
+        ],
+      ),
+    );
   }
 }

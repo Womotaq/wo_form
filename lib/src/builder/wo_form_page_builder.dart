@@ -13,7 +13,7 @@ class WoFormPageBuilder extends StatelessWidget {
         ? const _WoFormStandardBody()
         : _WoFormMultistepBody(multistepSettings: multistepSettings);
 
-    return MultistepManager(
+    return _ControllersManager(
       child:
           (root.uiSettings.scaffoldBuilder ??
                   woFormTheme?.standardScaffoldBuilder ??
@@ -76,12 +76,20 @@ class _WoFormStandardBody extends StatelessWidget {
       ],
     );
 
-    return root.uiSettings.bodyLayout.isScrollable
-        ? SingleChildScrollView(
-            controller: scrollController,
-            child: column,
-          )
-        : column;
+    return Align(
+      alignment: Alignment.topCenter,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: woFormTheme?.maxWidth ?? WoFormThemeData.DEFAULT_MAX_WIDTH,
+        ),
+        child: root.uiSettings.bodyLayout.isScrollable
+            ? SingleChildScrollView(
+                controller: scrollController,
+                child: column,
+              )
+            : column,
+      ),
+    );
   }
 }
 
@@ -95,13 +103,16 @@ class _WoFormMultistepBody extends StatefulWidget {
 }
 
 class _WoFormMultistepBodyState extends State<_WoFormMultistepBody> {
-  late MultistepController pageController;
+  late final MultistepController stepController;
+  late final ScrollController scrollController;
 
   @override
   void initState() {
     super.initState();
 
-    pageController = MultistepController.of(context, listen: false)!;
+    stepController = MultistepController.of(context, listen: false)!;
+    scrollController = ScrollControllerProvider.of(context)!;
+
     addTemporarySubmitData();
   }
 
@@ -161,7 +172,7 @@ class _WoFormMultistepBodyState extends State<_WoFormMultistepBody> {
 
         await widget.multistepSettings.onTemporarySubmitting?.call(context);
 
-        final abortReason = pageController.nextStep();
+        final abortReason = stepController.nextStep();
         return abortReason == 'end-of-form';
       },
       path: '/${step.id}',
@@ -180,7 +191,7 @@ class _WoFormMultistepBodyState extends State<_WoFormMultistepBody> {
             : null;
 
         return PageView.builder(
-          controller: pageController._controller,
+          controller: stepController._controller,
           physics: const NeverScrollableScrollPhysics(),
           itemCount: generatedSteps == null ? root.children.length : null,
           itemBuilder: (context, index) {
@@ -223,7 +234,10 @@ class _WoFormMultistepBodyState extends State<_WoFormMultistepBody> {
                         ? 0
                         : 1,
                     child: root.uiSettings.bodyLayout.isScrollable
-                        ? SingleChildScrollView(child: stepWidget)
+                        ? SingleChildScrollView(
+                            controller: scrollController,
+                            child: stepWidget,
+                          )
                         : stepWidget,
                   ),
                   if (root.uiSettings.submitButtonPosition ==
@@ -378,42 +392,60 @@ class MultistepController {
   void dispose() => _controller.dispose();
 }
 
-class MultistepManager extends StatefulWidget {
-  const MultistepManager({required this.child, super.key});
+class _ControllersManager extends StatefulWidget {
+  const _ControllersManager({required this.child});
 
   final Widget child;
 
   @override
-  State<MultistepManager> createState() => _MultistepManagerState();
+  State<_ControllersManager> createState() => _ControllersManagerState();
 }
 
-class _MultistepManagerState extends State<MultistepManager> {
-  late final MultistepController? controller;
+class _ControllersManagerState extends State<_ControllersManager> {
+  late final MultistepController? stepController;
+  late final ScrollController scrollController;
+  late final bool inheritedScrollController;
 
   @override
   void initState() {
     super.initState();
 
     if (context.read<RootNode>().uiSettings.multistepSettings != null) {
-      controller = MultistepController._(context.read<WoFormValuesCubit>());
+      stepController = MultistepController._(context.read<WoFormValuesCubit>());
     } else {
-      controller = null;
+      stepController = null;
     }
+
+    final inherited = ScrollControllerProvider.of(context);
+    inheritedScrollController = inherited != null;
+    scrollController = inherited ?? ScrollController();
   }
 
   @override
   void dispose() {
-    controller?.dispose();
+    stepController?.dispose();
+    scrollController.dispose();
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) => controller == null
-      ? widget.child
-      : _MultistepControllerProvider(
-          controller: controller!,
-          child: widget.child,
-        );
+  Widget build(BuildContext context) {
+    final multistepProvided = stepController == null
+        ? widget.child
+        : _MultistepControllerProvider(
+            controller: stepController!,
+            child: widget.child,
+          );
+
+    return inheritedScrollController
+        ? multistepProvided
+        // This provider makes the scrollController accessible
+        // to _ShrinkableScaffold, so the appBar can react to scroll.
+        : ScrollControllerProvider(
+            controller: scrollController,
+            child: multistepProvided,
+          );
+  }
 }
 
 class _MultistepControllerProvider extends InheritedWidget {
