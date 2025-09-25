@@ -557,8 +557,8 @@ class WoFormValues {
     if (!path.startsWith('#')) return _values[path];
 
     final lastSection = '/${path.substring(1)}';
-    for (final key in _values.keys) {
-      if (key.endsWith(lastSection)) return _values[key];
+    for (final entry in _values.entries) {
+      if (entry.key.endsWith(lastSection)) return entry.value;
     }
 
     return null;
@@ -601,7 +601,8 @@ class WoFormValues {
   static const _FOCUSED_PATH_KEY = '/__wo_reserved_focused_path';
   String? get _focusedPath => this[_FOCUSED_PATH_KEY] as String?;
   set _focusedPath(String? path) => _values[_FOCUSED_PATH_KEY] = path;
-  bool isFocused(String path) => _focusedPath == getValue(path);
+  bool isFocused(String path) =>
+      this[_FOCUSED_PATH_KEY] != null && _focusedPath == getKey(path);
 
   // --- VISITED PATHS ---
 

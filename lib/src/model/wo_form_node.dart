@@ -932,7 +932,8 @@ abstract class RootNode with _$RootNode, WoFormNodeMixin {
   Future<Json> exportToMap({
     required WoFormValues values,
 
-    /// context allows access to services, like MediaService
+    /// This context allows access to services, like MediaService.
+    /// It is not required to be the form's context.
     required BuildContext context,
   }) async {
     final map = Json.from(exportSettings.metadata);
