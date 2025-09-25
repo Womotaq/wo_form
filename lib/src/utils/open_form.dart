@@ -42,7 +42,8 @@ Future<T?> _showWoFormModal<T extends Object?>({
 
   Widget buildForm(BuildContext context) {
     final double? height;
-    if (acceptScrollController) {
+    if (acceptScrollController ||
+        form.root.uiSettings.bodyLayout == WoFormBodyLayout.shrinkWrap) {
       height = null;
     } else {
       final mediaQuery = MediaQuery.of(context);

@@ -23,7 +23,9 @@ class WoFormScaffold extends StatelessWidget {
       appBarLeading: uiSettings.presentation == WoFormPresentation.page
           ? quitButton
           : null,
-      appBarTitle: uiSettings.titlePosition == WoFormTitlePosition.appBar
+      appBarTitle:
+          uiSettings.titlePosition == WoFormTitlePosition.appBar &&
+              uiSettings.titleText.isNotEmpty
           ? Text(uiSettings.titleText)
           : null,
       appBarActions: [
@@ -104,6 +106,7 @@ class _ShrinkableScaffoldState extends State<_ShrinkableScaffold> {
   Widget build(BuildContext context) {
     return Material(
       child: Column(
+        mainAxisSize: widget.shrinkWrap ? MainAxisSize.min : MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
