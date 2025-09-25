@@ -1325,7 +1325,7 @@ mixin _$SelectInput<T> {
  bool get submitFormOnSelect; SelectInputUiSettings<T>? get uiSettings; QuizSettings? get quizSettings;/// The following fields are mostly usefull for hydrataion
 ///
 /// Ex :
-/// SelectInput<TimeControl>(
+/// SelectInput&lt;TimeControl&gt;(
 ///   toJsonT: (value) => (value as TimeControl?)?.toJson(),
 ///   fromJsonT: (json) =>
 ///       TimeControl.fromJson(json as Json? ?? {}),
@@ -1481,7 +1481,7 @@ class _SelectInput<T> extends SelectInput<T> {
 /// The following fields are mostly usefull for hydrataion
 ///
 /// Ex :
-/// SelectInput<TimeControl>(
+/// SelectInput&lt;TimeControl&gt;(
 ///   toJsonT: (value) => (value as TimeControl?)?.toJson(),
 ///   fromJsonT: (json) =>
 ///       TimeControl.fromJson(json as Json? ?? {}),

@@ -491,6 +491,7 @@ const _$ShowErrorsEnumMap = {
 
 const _$WoFormBodyLayoutEnumMap = {
   WoFormBodyLayout.scrollable: 'scrollable',
+  WoFormBodyLayout.shrinkWrap: 'shrinkWrap',
   WoFormBodyLayout.flexible: 'flexible',
 };
 

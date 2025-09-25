@@ -10,12 +10,18 @@ class WoFormScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final woFormTheme = WoFormTheme.of(context);
     final uiSettings = context.read<RootNode>().uiSettings;
 
+    final quitButton =
+        (uiSettings.quitButtonBuilder ??
+        woFormTheme?.quitButtonBuilder ??
+        QuitWoFormButton.new)();
+
     return _ShrinkableScaffold(
-      shrinkWrap: false,
+      shrinkWrap: uiSettings.bodyLayout == WoFormBodyLayout.shrinkWrap,
       appBarLeading: uiSettings.presentation == WoFormPresentation.page
-          ? const QuitWoFormButton()
+          ? quitButton
           : null,
       appBarTitle: uiSettings.titlePosition == WoFormTitlePosition.appBar
           ? Text(uiSettings.titleText)
@@ -25,8 +31,9 @@ class WoFormScaffold extends StatelessWidget {
           const SubmitButtonBuilder(),
           const SizedBox(width: 8),
         ],
-        if (uiSettings.presentation == WoFormPresentation.dialog) ...[
-          const QuitWoFormButton(),
+        if (quitButton != null &&
+            uiSettings.presentation == WoFormPresentation.dialog) ...[
+          quitButton,
           const SizedBox(width: 8),
         ],
       ],
@@ -95,28 +102,12 @@ class _ShrinkableScaffoldState extends State<_ShrinkableScaffold> {
 
   @override
   Widget build(BuildContext context) {
-    // return Scaffold(
-    //   appBar:
-    //       widget.appBarLeading != null ||
-    //           widget.appBarTitle != null ||
-    //           widget.appBarActions.isNotEmpty
-    //       ? AppBar(
-    //           leading: widget.appBarLeading,
-    //           title: widget.appBarTitle,
-    //           actions: widget.appBarActions,
-    //           elevation: _elevation,
-    //         )
-    //       : null,
-    //   body: widget.body,
-    //   bottomNavigationBar: widget.bottomNavigationBar,
-    //   floatingActionButton: widget.floatingActionButton,
-    // );
-
     return Material(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
+            flex: widget.shrinkWrap ? 0 : 1,
             child: Stack(
               children: [
                 Column(
@@ -126,11 +117,15 @@ class _ShrinkableScaffoldState extends State<_ShrinkableScaffold> {
                         widget.appBarActions.isNotEmpty)
                       AppBar(
                         leading: widget.appBarLeading,
+                        automaticallyImplyLeading: false,
                         title: widget.appBarTitle,
                         actions: widget.appBarActions,
                         elevation: elevation,
                       ),
-                    Expanded(child: widget.body),
+                    Expanded(
+                      flex: widget.shrinkWrap ? 0 : 1,
+                      child: widget.body,
+                    ),
                   ],
                 ),
                 if (widget.floatingActionButton != null)

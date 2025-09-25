@@ -220,7 +220,8 @@ mixin _$PlaceDetails {
 @JsonKey(name: 'adr_address') String? get adrAddress;/// Indicates the operational status of the place, if it is a business.
 /// If no data exists, business_status is not returned.
 ///
-/// The allowed values include: OPERATIONAL, CLOSED_TEMPORARILY, and CLOSED_PERMANENTLY
+/// The allowed values include: OPERATIONAL, CLOSED_TEMPORARILY, and
+/// CLOSED_PERMANENTLY
 @JsonKey(name: 'business_status') String? get businessStatus;/// Specifies if the business supports curbside pickup.
 @JsonKey(name: 'curbside_pickup') bool? get curbsidePickup;/// Contains the hours of operation for the next seven days (including
 /// today). The time period starts at midnight on the date of the request
@@ -519,7 +520,8 @@ class _PlaceDetails extends PlaceDetails {
 /// Indicates the operational status of the place, if it is a business.
 /// If no data exists, business_status is not returned.
 ///
-/// The allowed values include: OPERATIONAL, CLOSED_TEMPORARILY, and CLOSED_PERMANENTLY
+/// The allowed values include: OPERATIONAL, CLOSED_TEMPORARILY, and
+/// CLOSED_PERMANENTLY
 @override@JsonKey(name: 'business_status') final  String? businessStatus;
 /// Specifies if the business supports curbside pickup.
 @override@JsonKey(name: 'curbside_pickup') final  bool? curbsidePickup;

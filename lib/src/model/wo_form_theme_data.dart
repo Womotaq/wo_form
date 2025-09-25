@@ -38,6 +38,9 @@ abstract class WoFormThemeData with _$WoFormThemeData {
     @notSerializable PickDateDef? pickDate,
     @notSerializable PickDurationDef? pickDuration,
     @notSerializable PickTimeDef? pickTime,
+
+    /// If this is set and returns null, there won't be a quit button.
+    @notSerializable QuitButtonBuilderDef? quitButtonBuilder,
     @notSerializable ScoreWidgetBuilderDef? scoreBuilder,
     @notSerializable SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
     @notSerializable ScaffoldBuilderDef? standardScaffoldBuilder,
@@ -103,6 +106,7 @@ abstract class WoFormThemeData with _$WoFormThemeData {
           pickDate: pickDate ?? other.pickDate,
           pickDuration: pickDuration ?? other.pickDuration,
           pickTime: pickTime ?? other.pickTime,
+          quitButtonBuilder: quitButtonBuilder ?? other.quitButtonBuilder,
           scoreBuilder: scoreBuilder ?? other.scoreBuilder,
           selectFieldBuilder: selectFieldBuilder ?? other.selectFieldBuilder,
           standardScaffoldBuilder:

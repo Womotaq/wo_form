@@ -6,7 +6,6 @@ class WoFormPageBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final root = context.read<RootNode>();
-    final woFormTheme = WoFormTheme.of(context);
 
     final multistepSettings = root.uiSettings.multistepSettings;
     final body = multistepSettings == null
@@ -14,11 +13,13 @@ class WoFormPageBuilder extends StatelessWidget {
         : _WoFormMultistepBody(multistepSettings: multistepSettings);
 
     return _ControllersManager(
-      child:
-          (root.uiSettings.scaffoldBuilder ??
-                  woFormTheme?.standardScaffoldBuilder ??
-                  WoFormScaffold.new)
-              .call(body),
+      child: Builder(
+        builder: (context) =>
+            (root.uiSettings.scaffoldBuilder ??
+                    WoFormTheme.of(context)?.standardScaffoldBuilder ??
+                    WoFormScaffold.new)
+                .call(body),
+      ),
     );
   }
 }
@@ -424,7 +425,7 @@ class _ControllersManagerState extends State<_ControllersManager> {
   @override
   void dispose() {
     stepController?.dispose();
-    scrollController.dispose();
+    if (!inheritedScrollController) scrollController.dispose();
     super.dispose();
   }
 

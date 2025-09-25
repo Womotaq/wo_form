@@ -693,6 +693,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
 enum WoFormTitlePosition { header, appBar }
 
 typedef SubmitButtonBuilderDef = Widget Function(SubmitButtonData data);
+typedef QuitButtonBuilderDef = Widget? Function();
 
 @freezed
 abstract class WoFormUiSettings with _$WoFormUiSettings {
@@ -700,6 +701,9 @@ abstract class WoFormUiSettings with _$WoFormUiSettings {
     @Default('') String titleText,
     @Default(WoFormTitlePosition.header) WoFormTitlePosition titlePosition,
     @notSerializable HeaderBuilderDef? headerBuilder,
+
+    /// If this is set and returns null, there won't be a quit button.
+    @notSerializable QuitButtonBuilderDef? quitButtonBuilder,
 
     /// If set, the form's direct children will be considered as steps,
     /// each shown in a dedicated pages.
@@ -718,8 +722,9 @@ abstract class WoFormUiSettings with _$WoFormUiSettings {
     @Default(SubmitButtonPosition.body)
     SubmitButtonPosition submitButtonPosition,
 
-    /// TODO : deprecate, replace by WoFormPresentation.simple
-    @notSerializable ScaffoldBuilderDef? scaffoldBuilder,
+    @Deprecated('Use WoFormBodyLayout.shrinkWrap instead')
+    @notSerializable
+    ScaffoldBuilderDef? scaffoldBuilder,
 
     /// If true, after the form is successfully submitted, it will be locked.
     bool? canModifySubmittedValues,
@@ -800,9 +805,16 @@ enum ShowErrors {
 /// (wich is the default value).
 enum WoFormBodyLayout {
   /// The body will be wrapped in a SingleChildScrollView, allowing content
-  /// that overflows the screen to be scrolled. In this mode, `uiSettings.flex`
-  /// will have no effect.
+  /// that overflows the screen to be scrolled.
+  ///
+  /// In this mode, `uiSettings.flex` will have no effect.
   scrollable,
+
+  /// The body will take the least space possible. The entire form will fit
+  /// to the size of the body.
+  ///
+  /// In this mode, `uiSettings.flex` will have no effect.
+  shrinkWrap,
 
   /// The body will use a flexible layout, allowing its children to be sized
   /// using `uiSettings.flex` and expand to fill the available screen space.
@@ -812,42 +824,45 @@ enum WoFormBodyLayout {
   bool get supportFlex => this == WoFormBodyLayout.flexible;
 }
 
-/// Controls how the form is presented to the user.
+/// This mode only affects the navigation controls.
 ///
-/// This determines whether the form is displayed as a full-page screen or as
-/// a modal overlay. It affects the title and navigation controls.
+/// You may use the default method to open a form:
+/// ```dart
+/// /// Opens the form in a page, a bottom sheet or a dialog,
+/// /// depending on [WoFormUiSettings.presentation].
+/// context.openForm(
+///   WoForm(...),
+/// );
+/// ```
+///
+/// Or use your own:
+/// ```dart
+/// showDialog(
+///   context: context,
+///   builder: (context) => Dialog(
+///     child: WoForm(
+///       uiSettings: WoFormUiSettings(
+///         presentation: WoFormPresentation.dialog,
+///       ),
+///       ...
+///     ),
+///   ),
+/// );
+/// ```
 enum WoFormPresentation {
-  /// The form is displayed on a full-screen page, typically within a
-  /// `Scaffold`.
+  /// Suitable for forms with a dedicated screen in your app.
   ///
-  /// This mode is suitable for long forms or as a dedicated screen in your app.
-  /// It can use a standard `AppBar` with a back button for navigation.
+  /// By default, the quit button is an < at the top-left of the form.
   page,
 
-  // TODO : update doc
-  /// The form is displayed as a modal, such as a `showModalBottomSheet` or
-  /// `Dialog`.
+  /// Suitable for forms that you will display in a dialog.
   ///
-  /// This mode is ideal for short, contextual forms that appear on top of
-  /// existing content. It may use a dismissible button (e.g., a "close" icon)
-  /// instead of a back button.
-  ///
-  /// Example:
-  /// ````dart
-  /// showDialog(
-  ///   context: context,
-  ///   builder: (context) => Dialog(
-  ///     child: WoForm(
-  ///       uiSettings: WoFormUiSettings(
-  ///         presentation: WoFormPresentation.modal,
-  ///       ),
-  ///       ...
-  ///     ),
-  ///   ),
-  /// );
-  /// ```
-  ///
+  /// By default, the quit button is an X at the top-right of the form.
   dialog,
+
+  /// Suitable for forms that you will display in a bottom sheet.
+  ///
+  /// By default, there is no quit button.
   bottomSheet;
 
   bool get isModal => this != page;
