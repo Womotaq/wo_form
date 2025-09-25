@@ -55,7 +55,7 @@ _DateTimeInputUiSettings _$DateTimeInputUiSettingsFromJson(
   labelText: json['labelText'] as String?,
   helperText: json['helperText'] as String?,
   hintText: json['hintText'] as String?,
-  labelFlex: (json['labelFlex'] as num?)?.toInt(),
+  headerFlex: (json['headerFlex'] as num?)?.toInt(),
   addDateText: json['addDateText'] as String?,
   addTimeText: json['addTimeText'] as String?,
   initialEditValue: json['initialEditValue'] == null
@@ -86,7 +86,7 @@ Map<String, dynamic> _$DateTimeInputUiSettingsToJson(
   'labelText': instance.labelText,
   'helperText': instance.helperText,
   'hintText': instance.hintText,
-  'labelFlex': instance.labelFlex,
+  'headerFlex': instance.headerFlex,
   'addDateText': instance.addDateText,
   'addTimeText': instance.addTimeText,
   'initialEditValue': instance.initialEditValue?.toJson(),
@@ -131,7 +131,7 @@ _DurationInputUiSettings _$DurationInputUiSettingsFromJson(
   helperText: json['helperText'] as String?,
   hintText: json['hintText'] as String?,
   editMode: $enumDecodeNullable(_$DurationEditModeEnumMap, json['editMode']),
-  labelFlex: (json['labelFlex'] as num?)?.toInt(),
+  headerFlex: (json['headerFlex'] as num?)?.toInt(),
   dateTimeLabelText: json['dateTimeLabelText'] as String?,
   dateTimeHelperText: json['dateTimeHelperText'] as String?,
   dateTimeHintText: json['dateTimeHintText'] as String?,
@@ -150,7 +150,7 @@ Map<String, dynamic> _$DurationInputUiSettingsToJson(
   'helperText': instance.helperText,
   'hintText': instance.hintText,
   'editMode': _$DurationEditModeEnumMap[instance.editMode],
-  'labelFlex': instance.labelFlex,
+  'headerFlex': instance.headerFlex,
   'dateTimeLabelText': instance.dateTimeLabelText,
   'dateTimeHelperText': instance.dateTimeHelperText,
   'dateTimeHintText': instance.dateTimeHintText,
@@ -273,16 +273,16 @@ Map<String, dynamic> _$MediaInputUiSettingsToJson(
 
 _NumInputUiSettings _$NumInputUiSettingsFromJson(Map<String, dynamic> json) =>
     _NumInputUiSettings(
+      headerFlex: (json['headerFlex'] as num?)?.toInt(),
       labelText: json['labelText'] as String?,
-      labelFlex: (json['labelFlex'] as num?)?.toInt(),
       helperText: json['helperText'] as String?,
       style: $enumDecodeNullable(_$NumInputStyleEnumMap, json['style']),
     );
 
 Map<String, dynamic> _$NumInputUiSettingsToJson(_NumInputUiSettings instance) =>
     <String, dynamic>{
+      'headerFlex': instance.headerFlex,
       'labelText': instance.labelText,
-      'labelFlex': instance.labelFlex,
       'helperText': instance.helperText,
       'style': _$NumInputStyleEnumMap[instance.style],
     };
@@ -303,7 +303,7 @@ _SelectInputUiSettings<T> _$SelectInputUiSettingsFromJson<T>(
     _$ChildrenVisibilityEnumMap,
     json['childrenVisibility'],
   ),
-  labelFlex: (json['labelFlex'] as num?)?.toInt(),
+  headerFlex: (json['headerFlex'] as num?)?.toInt(),
 );
 
 Map<String, dynamic> _$SelectInputUiSettingsToJson<T>(
@@ -315,19 +315,32 @@ Map<String, dynamic> _$SelectInputUiSettingsToJson<T>(
   'hintText': instance.hintText,
   'childrenVisibility':
       _$ChildrenVisibilityEnumMap[instance.childrenVisibility],
-  'labelFlex': instance.labelFlex,
+  'headerFlex': instance.headerFlex,
 };
 
 _StringInputUiSettings _$StringInputUiSettingsFromJson(
   Map<String, dynamic> json,
 ) => _StringInputUiSettings(
+  headerFlex: (json['headerFlex'] as num?)?.toInt(),
   labelText: json['labelText'] as String?,
+  labelLocation: $enumDecodeNullable(
+    _$StringFieldLocationEnumMap,
+    json['labelLocation'],
+  ),
   hintText: json['hintText'] as String?,
   helperText: json['helperText'] as String?,
   helperMaxLines: (json['helperMaxLines'] as num?)?.toInt(),
+  helperLocation: $enumDecodeNullable(
+    _$StringFieldLocationEnumMap,
+    json['helperLocation'],
+  ),
   prefixIconLocation: $enumDecodeNullable(
-    _$FieldIconLocationEnumMap,
+    _$StringFieldLocationEnumMap,
     json['prefixIconLocation'],
+  ),
+  errorLocation: $enumDecodeNullable(
+    _$StringFieldLocationEnumMap,
+    json['errorLocation'],
   ),
   action: $enumDecodeNullable(_$StringFieldActionEnumMap, json['action']),
   submitFormOnFieldSubmitted: json['submitFormOnFieldSubmitted'] as bool?,
@@ -356,11 +369,16 @@ _StringInputUiSettings _$StringInputUiSettingsFromJson(
 Map<String, dynamic> _$StringInputUiSettingsToJson(
   _StringInputUiSettings instance,
 ) => <String, dynamic>{
+  'headerFlex': instance.headerFlex,
   'labelText': instance.labelText,
+  'labelLocation': _$StringFieldLocationEnumMap[instance.labelLocation],
   'hintText': instance.hintText,
   'helperText': instance.helperText,
   'helperMaxLines': instance.helperMaxLines,
-  'prefixIconLocation': _$FieldIconLocationEnumMap[instance.prefixIconLocation],
+  'helperLocation': _$StringFieldLocationEnumMap[instance.helperLocation],
+  'prefixIconLocation':
+      _$StringFieldLocationEnumMap[instance.prefixIconLocation],
+  'errorLocation': _$StringFieldLocationEnumMap[instance.errorLocation],
   'action': _$StringFieldActionEnumMap[instance.action],
   'submitFormOnFieldSubmitted': instance.submitFormOnFieldSubmitted,
   'keyboardType': const TextInputTypeConverter().toJson(instance.keyboardType),
@@ -376,9 +394,9 @@ Map<String, dynamic> _$StringInputUiSettingsToJson(
   'collapsed': instance.collapsed,
 };
 
-const _$FieldIconLocationEnumMap = {
-  FieldIconLocation.inside: 'inside',
-  FieldIconLocation.outside: 'outside',
+const _$StringFieldLocationEnumMap = {
+  StringFieldLocation.inside: 'inside',
+  StringFieldLocation.outside: 'outside',
 };
 
 const _$StringFieldActionEnumMap = {

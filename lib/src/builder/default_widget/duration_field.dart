@@ -25,8 +25,9 @@ class DurationField extends StatelessWidget {
       isScrollControlled: true,
       builder: (context) => Padding(
         // This padding ensures the modal is always above the keyboard
-        padding:
-            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
         child: SizedBox(
           height: 128,
           child: DurationSelector(
@@ -54,7 +55,8 @@ class DurationField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final editAsDateTime = data.input.startDatePath != null &&
+    final editAsDateTime =
+        data.input.startDatePath != null &&
         data.uiSettings.editMode == DurationEditMode.dateTime;
     final theme = Theme.of(context);
     final inputDecorationTheme = theme.inputDecorationTheme;
@@ -87,7 +89,7 @@ class DurationField extends StatelessWidget {
                 settings: DateTimeInputUiSettings(
                   dateFormat: data.uiSettings.dateFormat,
                   timeFormat: data.uiSettings.timeFormat,
-                  labelFlex: data.uiSettings.labelFlex,
+                  headerFlex: data.uiSettings.headerFlex,
                   labelText: data.uiSettings.dateTimeLabelText,
                   helperText: data.uiSettings.dateTimeHelperText,
                   hintText: data.uiSettings.dateTimeHintText,
@@ -102,12 +104,13 @@ class DurationField extends StatelessWidget {
             borderRadius: themedBorder is OutlineInputBorder
                 ? themedBorder.borderRadius
                 : themedBorder is UnderlineInputBorder
-                    ? themedBorder.borderRadius
-                    : BorderRadius.zero,
+                ? themedBorder.borderRadius
+                : BorderRadius.zero,
             onTap: data.onValueChanged == null
                 ? null
                 : () async {
-                    final pickDuration = data.uiSettings.pickDuration ??
+                    final pickDuration =
+                        data.uiSettings.pickDuration ??
                         WoFormTheme.of(context)?.pickDuration ??
                         DurationField.defaultPickDuration;
 
@@ -136,11 +139,11 @@ class DurationField extends StatelessWidget {
               child: Center(
                 child: initialDuration == null
                     ? hintText == null
-                        ? const Icon(Icons.timer)
-                        : Text(
-                            hintText,
-                            style: theme.textTheme.bodyMedium,
-                          )
+                          ? const Icon(Icons.timer)
+                          : Text(
+                              hintText,
+                              style: theme.textTheme.bodyMedium,
+                            )
                     : Text(
                         (data.uiSettings.formatDuration ??
                                 WoFormTheme.of(context)?.formatDuration ??
@@ -163,8 +166,7 @@ class DurationField extends StatelessWidget {
     // }
 
     return FlexField(
-      path: data.path,
-      labelFlex: data.uiSettings.labelFlex,
+      headerFlex: data.uiSettings.headerFlex,
       labelText: editAsDateTime
           ? data.uiSettings.dateTimeLabelText
           : data.uiSettings.labelText,

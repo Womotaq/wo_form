@@ -53,8 +53,7 @@ class _NumFieldState extends State<NumField> {
       final max = widget.data.input.maxBound!;
 
       return FlexField(
-        path: widget.data.path,
-        labelFlex: widget.data.uiSettings.labelFlex,
+        headerFlex: widget.data.uiSettings.headerFlex,
         labelText: widget.data.uiSettings.labelText,
         helperText: widget.data.uiSettings.helperText,
         errorText: widget.data.errorText,

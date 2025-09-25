@@ -11,8 +11,7 @@ class DateTimeField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlexField(
-      path: data.path,
-      labelFlex: data.uiSettings.labelFlex,
+      headerFlex: data.uiSettings.headerFlex,
       labelText: data.uiSettings.labelText,
       helperText: data.uiSettings.helperText,
       errorText: data.errorText,

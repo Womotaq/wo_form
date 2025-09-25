@@ -97,11 +97,11 @@ abstract class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
     String? helperText,
     String? hintText,
 
-    /// If null, label will be placed above the date selector.
-    /// Else, label and selector will be in a flexible row,
+    /// If null, header will be placed above the date selector.
+    /// Else, header and selector will be in a flexible row,
     /// selector with a flex value of 10,
-    /// and label with a flex value of [labelFlex].
-    int? labelFlex,
+    /// and header with a flex value of [headerFlex].
+    int? headerFlex,
     @notSerializable Widget? prefixIcon,
     String? addDateText,
     String? addTimeText,
@@ -130,7 +130,7 @@ abstract class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
           labelText: labelText ?? other.labelText,
           helperText: helperText ?? other.helperText,
           hintText: hintText ?? other.hintText,
-          labelFlex: labelFlex ?? other.labelFlex,
+          headerFlex: headerFlex ?? other.headerFlex,
           prefixIcon: prefixIcon ?? other.prefixIcon,
           addDateText: addDateText ?? other.addDateText,
           addTimeText: addTimeText ?? other.addTimeText,
@@ -176,11 +176,11 @@ abstract class DurationInputUiSettings with _$DurationInputUiSettings {
     String? hintText,
     DurationEditMode? editMode,
 
-    /// If null, label will be placed above the date selector.
-    /// Else, label and selector will be in a flexible row,
+    /// If null, header will be placed above the date selector.
+    /// Else, header and selector will be in a flexible row,
     /// selector with a flex value of 10,
-    /// and label with a flex value of [labelFlex].
-    int? labelFlex,
+    /// and header with a flex value of [headerFlex].
+    int? headerFlex,
     @notSerializable PickDurationDef? pickDuration,
     @notSerializable FormatDurationDef? formatDuration,
     @notSerializable DurationFieldBuilderDef? widgetBuilder,
@@ -208,7 +208,7 @@ abstract class DurationInputUiSettings with _$DurationInputUiSettings {
           helperText: helperText ?? other.helperText,
           hintText: hintText ?? other.hintText,
           editMode: editMode ?? other.editMode,
-          labelFlex: labelFlex ?? other.labelFlex,
+          headerFlex: headerFlex ?? other.headerFlex,
           pickDuration: pickDuration ?? other.pickDuration,
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,
           dateTimeLabelText: dateTimeLabelText ?? other.dateTimeLabelText,
@@ -408,15 +408,14 @@ enum NumInputStyle { selector, slider }
 @freezed
 abstract class NumInputUiSettings with _$NumInputUiSettings {
   const factory NumInputUiSettings({
-    String? labelText,
-
-    /// If null, label will be placed above the date selector.
-    /// Else, label and selector will be in a flexible row,
+    /// If null, header will be placed above the date selector.
+    /// Else, header and selector will be in a flexible row,
     /// selector with a flex value of 10,
-    /// and label with a flex value of [labelFlex].
+    /// and header with a flex value of [headerFlex].
     ///
     /// Only with [NumInputStyle.slider].
-    int? labelFlex,
+    int? headerFlex,
+    String? labelText,
     String? helperText,
     NumInputStyle? style,
     @notSerializable Widget? unit,
@@ -431,8 +430,8 @@ abstract class NumInputUiSettings with _$NumInputUiSettings {
   NumInputUiSettings merge(NumInputUiSettings? other) => other == null
       ? this
       : NumInputUiSettings(
+          headerFlex: headerFlex ?? other.headerFlex,
           labelText: labelText ?? other.labelText,
-          labelFlex: labelFlex ?? other.labelFlex,
           helperText: helperText ?? other.helperText,
           style: style ?? other.style,
           unit: unit ?? other.unit,
@@ -466,14 +465,14 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
     String? hintText,
     ChildrenVisibility? childrenVisibility,
 
-    /// Only used when SelectInput.maxCount is 1
-    /// and childrenVisibility is whenAsked.
+    /// Only used when [SelectInput.maxCount] is 1
+    /// and childrenVisibility is [ChildrenVisibility.whenAsked].
     ///
-    /// If null, label will be placed above the selector.
-    /// Else, label and selector will be in a flexible row,
+    /// If null, header will be placed above the selector.
+    /// Else, header and selector will be in a flexible row,
     /// selector with a flex value of 10,
-    /// and label with a flex value of [labelFlex].
-    int? labelFlex,
+    /// and header with a flex value of [headerFlex].
+    int? headerFlex,
     @notSerializable ValueBuilderDef<T>? valueBuilder,
     @notSerializable ValueBuilderDef<T>? selectedBuilder,
     @notSerializable Widget? Function(T value)? helpValueBuilder,
@@ -501,7 +500,7 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
           helperText: helperText ?? other.helperText,
           hintText: hintText ?? other.hintText,
           childrenVisibility: childrenVisibility ?? other.childrenVisibility,
-          labelFlex: labelFlex ?? other.labelFlex,
+          headerFlex: headerFlex ?? other.headerFlex,
           valueBuilder: valueBuilder ?? other.valueBuilder,
           selectedBuilder: selectedBuilder ?? other.selectedBuilder,
           helpValueBuilder: helpValueBuilder ?? other.helpValueBuilder,
@@ -516,7 +515,13 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
 
 enum StringFieldAction { clear, obscure }
 
-enum FieldIconLocation { inside, outside }
+enum StringFieldLocation {
+  inside,
+  outside;
+
+  bool get isInside => this == inside;
+  bool get isOutside => this == outside;
+}
 
 typedef StringFieldBuilderDef =
     Widget Function(
@@ -527,15 +532,32 @@ typedef ErrorBuilderDef = Widget Function(WoFormInputError error);
 @freezed
 abstract class StringInputUiSettings with _$StringInputUiSettings {
   const factory StringInputUiSettings({
+    /// If null, header will be placed above the field.
+    /// Else, header and field will be in a flexible row,
+    /// selector with a flex value of 10,
+    /// and header with a flex value of [headerFlex].
+    ///
+    /// Only used when [labelLocation] is [StringFieldLocation.outside].
+    int? headerFlex,
+
     String? labelText,
+
+    /// Default to StringFieldLocation.inside
+    StringFieldLocation? labelLocation,
     String? hintText,
     String? helperText,
     int? helperMaxLines,
     @notSerializable Widget? helper,
+
+    /// Default to StringFieldLocation.inside
+    StringFieldLocation? helperLocation,
     @notSerializable Widget? prefixIcon,
 
-    /// Default to FieldIconLocation.outside
-    FieldIconLocation? prefixIconLocation,
+    /// Default to StringFieldLocation.outside
+    StringFieldLocation? prefixIconLocation,
+
+    /// Default to StringFieldLocation.inside
+    StringFieldLocation? errorLocation,
     StringFieldAction? action,
     bool? submitFormOnFieldSubmitted,
     @TextInputTypeConverter() TextInputType? keyboardType,
@@ -560,13 +582,14 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
   }) = _StringInputUiSettings;
 
   factory StringInputUiSettings.email({
+    int? headerFlex,
     String? labelText,
     String? hintText,
     String? helperText,
     int? helperMaxLines,
     Widget? helper,
     Widget? prefixIcon,
-    FieldIconLocation? prefixIconLocation,
+    StringFieldLocation? prefixIconLocation,
     bool? submitFormOnFieldSubmitted,
     bool? autofocus,
     TextInputAction? textInputAction,
@@ -575,6 +598,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     StringFieldBuilderDef? widgetBuilder,
     ErrorBuilderDef? errorBuilder,
   }) => StringInputUiSettings(
+    headerFlex: headerFlex,
     labelText: labelText,
     hintText: hintText,
     helperText: helperText,
@@ -596,13 +620,14 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
   );
 
   factory StringInputUiSettings.password({
+    int? headerFlex,
     String? labelText,
     String? hintText,
     String? helperText,
     int? helperMaxLines,
     Widget? helper,
     Widget? prefixIcon,
-    FieldIconLocation? prefixIconLocation,
+    StringFieldLocation? prefixIconLocation,
     bool? submitFormOnFieldSubmitted,
     TextInputAction? textInputAction,
     String? invalidRegexMessage,
@@ -610,6 +635,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     StringFieldBuilderDef? widgetBuilder,
     ErrorBuilderDef? errorBuilder,
   }) => StringInputUiSettings(
+    headerFlex: headerFlex,
     labelText: labelText,
     hintText: hintText,
     helperText: helperText,
@@ -635,13 +661,14 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
   );
 
   factory StringInputUiSettings.phone({
+    int? headerFlex,
     String? labelText,
     String? hintText,
     String? helperText,
     int? helperMaxLines,
     Widget? helper,
     Widget? prefixIcon,
-    FieldIconLocation? prefixIconLocation,
+    StringFieldLocation? prefixIconLocation,
     bool? submitFormOnFieldSubmitted,
     bool? autofocus,
     TextInputAction? textInputAction,
@@ -649,6 +676,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     StringFieldBuilderDef? widgetBuilder,
     ErrorBuilderDef? errorBuilder,
   }) => StringInputUiSettings(
+    headerFlex: headerFlex,
     labelText: labelText,
     hintText: hintText,
     helperText: helperText,
@@ -676,13 +704,17 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
   StringInputUiSettings merge(StringInputUiSettings? other) => other == null
       ? this
       : StringInputUiSettings(
+          headerFlex: headerFlex ?? other.headerFlex,
           labelText: labelText ?? other.labelText,
+          labelLocation: labelLocation ?? other.labelLocation,
           hintText: hintText ?? other.hintText,
           helperText: helperText ?? other.helperText,
           helperMaxLines: helperMaxLines ?? other.helperMaxLines,
           helper: helper ?? other.helper,
+          helperLocation: helperLocation ?? other.helperLocation,
           prefixIcon: prefixIcon ?? other.prefixIcon,
           prefixIconLocation: prefixIconLocation ?? other.prefixIconLocation,
+          errorLocation: errorLocation ?? other.errorLocation,
           action: action ?? other.action,
           submitFormOnFieldSubmitted:
               submitFormOnFieldSubmitted ?? other.submitFormOnFieldSubmitted,

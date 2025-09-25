@@ -4,14 +4,14 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:phone_form_field/phone_form_field.dart';
+import 'package:wo_form/src/builder/default_widget/flex_field.dart';
 import 'package:wo_form/src/builder/default_widget/place_autocomplete/_export.dart';
 import 'package:wo_form/wo_form.dart';
 
 class StringField extends StatefulWidget {
-  const StringField(this.data, {this.subtitle, super.key});
+  const StringField(this.data, {super.key});
 
   final WoFieldData<StringInput, String, StringInputUiSettings> data;
-  final Widget? subtitle;
 
   @override
   State<StringField> createState() => _StringFieldState();
@@ -68,28 +68,39 @@ class _StringFieldState extends State<StringField> {
       }
     }
 
-    final collapsed = widget.data.uiSettings.collapsed ?? false;
+    final uiSettings = widget.data.uiSettings;
+    final collapsed = uiSettings.collapsed ?? false;
+    final labelLocation =
+        uiSettings.labelLocation ?? StringFieldLocation.inside;
+    final helperLocation =
+        uiSettings.helperLocation ?? StringFieldLocation.inside;
+    final errorLocation =
+        uiSettings.errorLocation ?? StringFieldLocation.inside;
     final prefixIconLocation =
-        widget.data.uiSettings.prefixIconLocation ?? FieldIconLocation.outside;
+        uiSettings.prefixIconLocation ?? StringFieldLocation.outside;
 
     final inputDecoration = collapsed
         ? InputDecoration.collapsed(
-            hintText: widget.data.uiSettings.hintText,
+            hintText: uiSettings.hintText,
           )
         : InputDecoration(
-            labelText: widget.data.uiSettings.labelText,
-            helperText: widget.data.uiSettings.helper == null
-                ? widget.data.uiSettings.helperText
+            labelText: labelLocation.isInside ? uiSettings.labelText : null,
+            helperText: helperLocation.isInside && uiSettings.helper == null
+                ? uiSettings.helperText
                 : null,
-            helperMaxLines: widget.data.uiSettings.helperMaxLines,
-            helper: widget.data.uiSettings.helper,
-            hintText: widget.data.uiSettings.hintText,
-            errorText: widget.data.errorText,
+            helperMaxLines: uiSettings.helperMaxLines,
+            helper: helperLocation.isInside ? uiSettings.helper : null,
+            hintText: uiSettings.hintText,
+            errorText: errorLocation.isInside
+                ? widget.data.errorText
+                : widget.data.errorText?.isNotEmpty ?? false
+                ? ''
+                : null,
             error: widget.data.errorWidget,
-            prefixIcon: prefixIconLocation == FieldIconLocation.inside
-                ? widget.data.uiSettings.prefixIcon
+            prefixIcon: prefixIconLocation.isInside
+                ? uiSettings.prefixIcon
                 : null,
-            suffixIcon: switch (widget.data.uiSettings.action) {
+            suffixIcon: switch (uiSettings.action) {
               null => null,
               StringFieldAction.clear => IconButton(
                 onPressed: widget.data.onValueChanged == null
@@ -106,13 +117,14 @@ class _StringFieldState extends State<StringField> {
             },
           );
 
+    // TODO : remove all padding from it ? look like TextFormField ? use FlexField
     if (widget.data.input.placeAutocompleteSettings != null) {
       final placeAutocompleteSettings =
           widget.data.input.placeAutocompleteSettings!;
       return PlaceAutocompleteTextField(
         textEditingController: textEditingController!,
         inputDecoration: inputDecoration,
-        textInputAction: widget.data.uiSettings.textInputAction,
+        textInputAction: uiSettings.textInputAction,
         debounceTime: 300, // TODO : customizable
         countries: placeAutocompleteSettings.countries
             ?.map((isoCode) => isoCode.name)
@@ -128,13 +140,12 @@ class _StringFieldState extends State<StringField> {
                   )
             : null,
         onFieldSubmitted:
-            (widget.data.uiSettings.submitFormOnFieldSubmitted ??
+            (uiSettings.submitFormOnFieldSubmitted ??
                 defaultSubmitFormOnFieldSubmitted())
             ? (_) => context.read<WoFormValuesCubit>().submit(context)
             : null,
         textCapitalization:
-            widget.data.uiSettings.textCapitalization ??
-            TextCapitalization.none,
+            uiSettings.textCapitalization ?? TextCapitalization.none,
         // Flutter's default behaviour :
         // - web : tapping outside instantly unfocuses the field.
         // - mobile : tapping outside does nothing.
@@ -163,89 +174,73 @@ class _StringFieldState extends State<StringField> {
       );
     }
 
-    if (widget.data.uiSettings.keyboardType == TextInputType.phone) {
-      return ListTile(
-        contentPadding: collapsed
-            ? EdgeInsets.zero
-            : const EdgeInsets.symmetric(horizontal: 16),
-        visualDensity: collapsed ? VisualDensity.compact : null,
-        minVerticalPadding: collapsed ? 0 : null,
-        minTileHeight: collapsed ? 0 : null,
-        leading: prefixIconLocation == FieldIconLocation.outside
-            ? widget.data.uiSettings.prefixIcon
-            : null,
-        title: PhoneFormField(
-          enabled: widget.data.onValueChanged != null,
-          controller: phoneController,
-          onChanged: widget.data.onValueChanged == null
-              ? null
-              : (number) => widget.data.onValueChanged!(
-                  '+${number.countryCode} ${number.formatNsn()}',
-                ),
-          onSubmitted:
-              (widget.data.uiSettings.submitFormOnFieldSubmitted ??
-                  defaultSubmitFormOnFieldSubmitted())
-              ? (_) => context.read<WoFormValuesCubit>().submit(context)
-              : null,
-          // TODO : onTapUpOutside
-          onTapOutside: (event) => FocusScope.of(context).unfocus(),
-          style: widget.data.uiSettings.style,
-          obscureText: obscureText,
-          autocorrect: widget.data.uiSettings.autocorrect ?? true,
-          autofillHints: widget.data.uiSettings.autofillHints,
-          autofocus: widget.data.uiSettings.autofocus ?? false,
-          textInputAction: widget.data.uiSettings.textInputAction,
-          decoration: inputDecoration,
-        ),
-        subtitle: widget.subtitle,
-      );
-    }
+    final textField = uiSettings.keyboardType == TextInputType.phone
+        ? PhoneFormField(
+            enabled: widget.data.onValueChanged != null,
+            controller: phoneController,
+            onChanged: widget.data.onValueChanged == null
+                ? null
+                : (number) => widget.data.onValueChanged!(
+                    '+${number.countryCode} ${number.formatNsn()}',
+                  ),
+            onSubmitted:
+                (uiSettings.submitFormOnFieldSubmitted ??
+                    defaultSubmitFormOnFieldSubmitted())
+                ? (_) => context.read<WoFormValuesCubit>().submit(context)
+                : null,
+            // TODO : onTapUpOutside
+            onTapOutside: (event) => FocusScope.of(context).unfocus(),
+            style: uiSettings.style,
+            obscureText: obscureText,
+            autocorrect: uiSettings.autocorrect ?? true,
+            autofillHints: uiSettings.autofillHints,
+            autofocus: uiSettings.autofocus ?? false,
+            textInputAction: uiSettings.textInputAction,
+            decoration: inputDecoration,
+          )
+        : TextFormField(
+            enabled: widget.data.onValueChanged != null,
+            controller: textEditingController,
+            onChanged: widget.data.onValueChanged,
+            onFieldSubmitted:
+                (uiSettings.submitFormOnFieldSubmitted ??
+                    defaultSubmitFormOnFieldSubmitted())
+                ? (_) => context.read<WoFormValuesCubit>().submit(context)
+                : null,
+            // Flutter's default behaviour :
+            // - web : tapping outside instantly unfocuses the field.
+            // - mobile : tapping outside does nothing.
+            // For better consistency across all plateforms, wo_form decided to
+            // unfocus text fields on tap up.
+            onTapOutside: (_) {},
+            onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
+            style: uiSettings.style,
+            keyboardType: uiSettings.keyboardType,
+            obscureText: obscureText,
+            autocorrect: uiSettings.autocorrect ?? true,
+            autofillHints: uiSettings.autofillHints,
+            autofocus: uiSettings.autofocus ?? false,
+            textInputAction: uiSettings.textInputAction,
+            textCapitalization:
+                uiSettings.textCapitalization ?? TextCapitalization.none,
+            maxLines: uiSettings.maxLines == 0
+                ? null
+                : uiSettings.maxLines ?? 1,
+            inputFormatters: const [
+              // LATER : LengthLimitingTextInputFormatter
+            ],
+            decoration: inputDecoration,
+          );
 
-    return ListTile(
-      contentPadding: collapsed
-          ? EdgeInsets.zero
-          : const EdgeInsets.symmetric(horizontal: 16),
-      visualDensity: collapsed ? VisualDensity.compact : null,
-      minVerticalPadding: collapsed ? 0 : null,
-      minTileHeight: collapsed ? 0 : null,
-      leading: prefixIconLocation == FieldIconLocation.outside
-          ? widget.data.uiSettings.prefixIcon
-          : null,
-      title: TextFormField(
-        enabled: widget.data.onValueChanged != null,
-        controller: textEditingController,
-        onChanged: widget.data.onValueChanged,
-        onFieldSubmitted:
-            (widget.data.uiSettings.submitFormOnFieldSubmitted ??
-                defaultSubmitFormOnFieldSubmitted())
-            ? (_) => context.read<WoFormValuesCubit>().submit(context)
-            : null,
-        // Flutter's default behaviour :
-        // - web : tapping outside instantly unfocuses the field.
-        // - mobile : tapping outside does nothing.
-        // For better consistency across all plateforms, wo_form decided to
-        // unfocus text fields on tap up.
-        onTapOutside: (_) {},
-        onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
-        style: widget.data.uiSettings.style,
-        keyboardType: widget.data.uiSettings.keyboardType,
-        obscureText: obscureText,
-        autocorrect: widget.data.uiSettings.autocorrect ?? true,
-        autofillHints: widget.data.uiSettings.autofillHints,
-        autofocus: widget.data.uiSettings.autofocus ?? false,
-        textInputAction: widget.data.uiSettings.textInputAction,
-        textCapitalization:
-            widget.data.uiSettings.textCapitalization ??
-            TextCapitalization.none,
-        maxLines: widget.data.uiSettings.maxLines == 0
-            ? null
-            : widget.data.uiSettings.maxLines ?? 1,
-        inputFormatters: const [
-          // LATER : LengthLimitingTextInputFormatter
-        ],
-        decoration: inputDecoration,
-      ),
-      subtitle: widget.subtitle,
+    if (collapsed) return textField;
+
+    return FlexField(
+      headerFlex: uiSettings.headerFlex,
+      labelText: labelLocation.isOutside ? uiSettings.labelText : null,
+      helperText: helperLocation.isOutside ? uiSettings.helperText : null,
+      errorText: errorLocation.isOutside ? widget.data.errorText : null,
+      prefixIcon: prefixIconLocation.isOutside ? uiSettings.prefixIcon : null,
+      child: textField,
     );
   }
 

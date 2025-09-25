@@ -5,13 +5,13 @@ enum FlexFieldDisableMode { none, header, all }
 
 class FlexField extends StatelessWidget {
   const FlexField({
-    required this.path,
     required this.child,
-    required this.labelFlex,
+    required this.headerFlex,
     this.labelText,
     this.helperText,
     this.errorText,
     this.trailing,
+    this.prefixIcon,
     this.onTap,
     this.shrinkWrap = true,
     this.disableMode = FlexFieldDisableMode.none,
@@ -19,13 +19,13 @@ class FlexField extends StatelessWidget {
     super.key,
   });
 
-  final String path;
   final Widget child;
-  final int? labelFlex;
+  final int? headerFlex;
   final String? labelText;
   final String? helperText;
   final String? errorText;
   final Widget? trailing;
+  final Widget? prefixIcon;
   final VoidCallback? onTap;
   final bool shrinkWrap;
   final FlexFieldDisableMode disableMode;
@@ -54,35 +54,48 @@ class FlexField extends StatelessWidget {
 
     return Opacity(
       opacity: disableMode == FlexFieldDisableMode.all ? 0.3 : 1,
-      child: labelFlex == null
-          ? Column(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (headerFlex == null) headerDisabled,
+          // ListTile(
+          //   contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+          //   leading: prefixIcon,
+          //   title: child,
+          // ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 8,
+            ),
+            child: Flex(
+              direction: Axis.horizontal,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                headerDisabled,
-                ListTile(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-                  title: child,
-                ),
-              ],
-            )
-          : ListTile(
-              contentPadding: EdgeInsets.zero,
-              title: Flex(
-                direction: Axis.horizontal,
-                children: [
+                if (prefixIcon != null)
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 16,
+                      right: 16,
+                    ),
+                    child: prefixIcon,
+                  ),
+                if (headerFlex != null) ...[
                   Expanded(
-                    flex: labelFlex!,
+                    flex: headerFlex!,
                     child: headerDisabled,
                   ),
                   const SizedBox(width: 16),
-                  Expanded(
-                    flex: 10,
-                    child: child,
-                  ),
-                  const SizedBox(width: 16),
                 ],
-              ),
+                Expanded(
+                  flex: 10,
+                  child: child,
+                ),
+              ],
             ),
+          ),
+        ],
+      ),
     );
   }
 }
