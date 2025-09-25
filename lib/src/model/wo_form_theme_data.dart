@@ -45,6 +45,10 @@ abstract class WoFormThemeData with _$WoFormThemeData {
     @notSerializable SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
     @notSerializable ScaffoldBuilderDef? standardScaffoldBuilder,
     @notSerializable StringFieldBuilderDef? stringFieldBuilder,
+    StringFieldLocation? stringFieldErrorLocation,
+    StringFieldLocation? stringFieldHelperLocation,
+    StringFieldLocation? stringFieldLabelLocation,
+    StringFieldLocation? stringFieldPrefixIconLocation,
     @notSerializable SubmitButtonBuilderDef? submitButtonBuilder,
 
     /// Default values :
@@ -112,6 +116,15 @@ abstract class WoFormThemeData with _$WoFormThemeData {
           standardScaffoldBuilder:
               standardScaffoldBuilder ?? other.standardScaffoldBuilder,
           stringFieldBuilder: stringFieldBuilder ?? other.stringFieldBuilder,
+          stringFieldErrorLocation:
+              stringFieldErrorLocation ?? other.stringFieldErrorLocation,
+          stringFieldHelperLocation:
+              stringFieldHelperLocation ?? other.stringFieldHelperLocation,
+          stringFieldLabelLocation:
+              stringFieldLabelLocation ?? other.stringFieldLabelLocation,
+          stringFieldPrefixIconLocation:
+              stringFieldPrefixIconLocation ??
+              other.stringFieldPrefixIconLocation,
           submitButtonBuilder: submitButtonBuilder ?? other.submitButtonBuilder,
           submitButtonStyle: submitButtonStyle ?? other.submitButtonStyle,
           submitButtonMargin: submitButtonMargin ?? other.submitButtonMargin,

@@ -68,16 +68,25 @@ class _StringFieldState extends State<StringField> {
       }
     }
 
+    final woFormTheme = WoFormTheme.of(context);
     final uiSettings = widget.data.uiSettings;
     final collapsed = uiSettings.collapsed ?? false;
     final labelLocation =
-        uiSettings.labelLocation ?? StringFieldLocation.inside;
+        uiSettings.labelLocation ??
+        woFormTheme?.stringFieldLabelLocation ??
+        StringFieldLocation.inside;
     final helperLocation =
-        uiSettings.helperLocation ?? StringFieldLocation.inside;
+        uiSettings.helperLocation ??
+        woFormTheme?.stringFieldHelperLocation ??
+        StringFieldLocation.inside;
     final errorLocation =
-        uiSettings.errorLocation ?? StringFieldLocation.inside;
+        uiSettings.errorLocation ??
+        woFormTheme?.stringFieldErrorLocation ??
+        StringFieldLocation.inside;
     final prefixIconLocation =
-        uiSettings.prefixIconLocation ?? StringFieldLocation.outside;
+        uiSettings.prefixIconLocation ??
+        woFormTheme?.stringFieldPrefixIconLocation ??
+        StringFieldLocation.outside;
 
     final inputDecoration = collapsed
         ? InputDecoration.collapsed(

@@ -57,17 +57,19 @@ class FlexField extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (headerFlex == null) headerDisabled,
+          const SizedBox(height: 8),
+          if (headerFlex == null)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 4),
+              child: headerDisabled,
+            ),
           // ListTile(
           //   contentPadding: const EdgeInsets.symmetric(horizontal: 16),
           //   leading: prefixIcon,
           //   title: child,
           // ),
           Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 8,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Flex(
               direction: Axis.horizontal,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,6 +96,7 @@ class FlexField extends StatelessWidget {
               ],
             ),
           ),
+          const SizedBox(height: 8),
         ],
       ),
     );
