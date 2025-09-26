@@ -535,6 +535,24 @@ enum StringFieldLocation {
   bool get isOutside => this == outside;
 }
 
+/// Whether this text field should focus itself if nothing else is already
+/// focused.
+///
+/// If true, the keyboard will open as soon as this text field obtains focus.
+/// Otherwise, the keyboard is only shown after the user taps the text field.
+///
+/// Applies to [TextFormField.autofocus].
+enum WoFormAutofocus {
+  /// The field will require focus at its creation.
+  yes,
+
+  /// If the initial value is null or empty, the field will require focus
+  /// at its creation.
+  ifEmpty,
+
+  no,
+}
+
 typedef StringFieldBuilderDef =
     Widget Function(
       WoFieldData<StringInput, String, StringInputUiSettings> data,
@@ -578,7 +596,12 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     bool? obscureText,
     bool? autocorrect,
     List<String>? autofillHints,
-    bool? autofocus,
+
+    /// If [WoFormAutofocus.true], or [WoFormAutofocus.ifEmpty] and the initial
+    /// value is empty, the field will request focus at its creation.
+    ///
+    /// Defaults to WoFormAutofocus.false
+    WoFormAutofocus? autofocus,
     TextInputAction? textInputAction,
 
     /// Defaults to TextCapitalization.none.
@@ -608,7 +631,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     StringFieldLocation? prefixIconLocation,
     StringFieldLocation? errorLocation,
     bool? submitFormOnFieldSubmitted,
-    bool? autofocus,
+    WoFormAutofocus? autofocus,
     TextInputAction? textInputAction,
     String? invalidRegexMessage,
     TextStyle? style,
@@ -699,7 +722,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     StringFieldLocation? prefixIconLocation,
     StringFieldLocation? errorLocation,
     bool? submitFormOnFieldSubmitted,
-    bool? autofocus,
+    WoFormAutofocus? autofocus,
     TextInputAction? textInputAction,
     TextStyle? style,
     StringFieldBuilderDef? widgetBuilder,
@@ -798,9 +821,7 @@ abstract class WoFormUiSettings with _$WoFormUiSettings {
     @Default(SubmitButtonPosition.body)
     SubmitButtonPosition submitButtonPosition,
 
-    @Deprecated('Use WoFormBodyLayout.shrinkWrap instead')
-    @notSerializable
-    ScaffoldBuilderDef? scaffoldBuilder,
+    @notSerializable ScaffoldBuilderDef? scaffoldBuilder,
 
     /// If true, after the form is successfully submitted, it will be locked.
     bool? canModifySubmittedValues,

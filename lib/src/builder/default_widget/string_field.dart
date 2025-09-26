@@ -21,11 +21,19 @@ class StringField extends StatefulWidget {
 class _StringFieldState extends State<StringField> {
   TextEditingController? textEditingController;
   PhoneController? phoneController;
+  late final bool autofocus;
   bool obscureText = false;
 
   @override
   void initState() {
     super.initState();
+
+    autofocus = switch (widget.data.uiSettings.autofocus) {
+      WoFormAutofocus.yes => true,
+      WoFormAutofocus.ifEmpty =>
+        widget.data.value == null || widget.data.value == '',
+      null || WoFormAutofocus.no => false,
+    };
     obscureText = widget.data.uiSettings.obscureText ?? false;
     if (widget.data.uiSettings.keyboardType == TextInputType.phone) {
       var isoCode = WoFormTheme.of(context, listen: false)?.defaultPhoneCoutry;
@@ -154,6 +162,7 @@ class _StringFieldState extends State<StringField> {
                     defaultSubmitFormOnFieldSubmitted())
                 ? (_) => context.read<WoFormValuesCubit>().submit(context)
                 : null,
+            autofocus: autofocus,
             textCapitalization:
                 uiSettings.textCapitalization ?? TextCapitalization.none,
             // Flutter's default behaviour :
@@ -205,9 +214,11 @@ class _StringFieldState extends State<StringField> {
             obscureText: obscureText,
             autocorrect: uiSettings.autocorrect ?? true,
             autofillHints: uiSettings.autofillHints,
-            autofocus: uiSettings.autofocus ?? false,
+            autofocus: autofocus,
             textInputAction: uiSettings.textInputAction,
             decoration: inputDecoration,
+            countrySelectorNavigator:
+                const CountrySelectorNavigator.draggableBottomSheet(),
           )
         : TextFormField(
             enabled: widget.data.onValueChanged != null,
@@ -230,7 +241,7 @@ class _StringFieldState extends State<StringField> {
             obscureText: obscureText,
             autocorrect: uiSettings.autocorrect ?? true,
             autofillHints: uiSettings.autofillHints,
-            autofocus: uiSettings.autofocus ?? false,
+            autofocus: autofocus,
             textInputAction: uiSettings.textInputAction,
             textCapitalization:
                 uiSettings.textCapitalization ?? TextCapitalization.none,

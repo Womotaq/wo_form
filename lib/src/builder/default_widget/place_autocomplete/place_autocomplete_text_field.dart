@@ -29,6 +29,7 @@ class PlaceAutocompleteTextField extends StatefulWidget {
     this.textStyle,
     this.focusNode,
     this.textInputAction,
+    this.autofocus = false,
     this.textCapitalization,
     this.onFieldSubmitted,
     this.onTapOutside,
@@ -64,6 +65,7 @@ class PlaceAutocompleteTextField extends StatefulWidget {
   final TextEditingController textEditingController;
   final FocusNode? focusNode;
   final TextInputAction? textInputAction;
+  final bool autofocus;
   final TextCapitalization? textCapitalization;
   final ValueChanged<String>? onFieldSubmitted;
   final ValueChanged<PointerEvent>? onTapOutside;
@@ -122,6 +124,7 @@ class _PlaceAutoCompleteTextFieldState
                 style: widget.textStyle,
                 controller: widget.textEditingController,
                 focusNode: _focusNode,
+                autofocus: widget.autofocus,
                 textInputAction: widget.textInputAction ?? TextInputAction.done,
                 textCapitalization:
                     widget.textCapitalization ?? TextCapitalization.none,

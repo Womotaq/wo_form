@@ -129,8 +129,11 @@ class _ScoredItem<T> {
 }
 
 class WoFormQuery {
-  WoFormQuery(this.raw) : clean = removeDiacritics(raw.toLowerCase());
+  WoFormQuery(this.raw) : clean = toQuery(raw);
 
   final String raw;
   final String clean;
+
+  /// Return a string adapted to querying
+  static String toQuery(String str) => removeDiacritics(str.toLowerCase());
 }

@@ -352,7 +352,7 @@ _StringInputUiSettings _$StringInputUiSettingsFromJson(
   autofillHints: (json['autofillHints'] as List<dynamic>?)
       ?.map((e) => e as String)
       .toList(),
-  autofocus: json['autofocus'] as bool?,
+  autofocus: $enumDecodeNullable(_$WoFormAutofocusEnumMap, json['autofocus']),
   textInputAction: $enumDecodeNullable(
     _$TextInputActionEnumMap,
     json['textInputAction'],
@@ -385,7 +385,7 @@ Map<String, dynamic> _$StringInputUiSettingsToJson(
   'obscureText': instance.obscureText,
   'autocorrect': instance.autocorrect,
   'autofillHints': instance.autofillHints,
-  'autofocus': instance.autofocus,
+  'autofocus': _$WoFormAutofocusEnumMap[instance.autofocus],
   'textInputAction': _$TextInputActionEnumMap[instance.textInputAction],
   'textCapitalization':
       _$TextCapitalizationEnumMap[instance.textCapitalization],
@@ -402,6 +402,12 @@ const _$StringFieldLocationEnumMap = {
 const _$StringFieldActionEnumMap = {
   StringFieldAction.clear: 'clear',
   StringFieldAction.obscure: 'obscure',
+};
+
+const _$WoFormAutofocusEnumMap = {
+  WoFormAutofocus.yes: 'yes',
+  WoFormAutofocus.ifEmpty: 'ifEmpty',
+  WoFormAutofocus.no: 'no',
 };
 
 const _$TextInputActionEnumMap = {

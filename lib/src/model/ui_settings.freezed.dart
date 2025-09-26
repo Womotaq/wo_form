@@ -1757,7 +1757,11 @@ mixin _$StringInputUiSettings {
  StringFieldLocation? get labelLocation; String? get hintText; String? get helperText; int? get helperMaxLines;@notSerializable Widget? get helper;/// Default to StringFieldLocation.inside
  StringFieldLocation? get helperLocation;@notSerializable Widget? get prefixIcon;/// Default to StringFieldLocation.outside
  StringFieldLocation? get prefixIconLocation;/// Default to StringFieldLocation.inside
- StringFieldLocation? get errorLocation; StringFieldAction? get action; bool? get submitFormOnFieldSubmitted;@TextInputTypeConverter() TextInputType? get keyboardType; bool? get obscureText; bool? get autocorrect; List<String>? get autofillHints; bool? get autofocus; TextInputAction? get textInputAction;/// Defaults to TextCapitalization.none.
+ StringFieldLocation? get errorLocation; StringFieldAction? get action; bool? get submitFormOnFieldSubmitted;@TextInputTypeConverter() TextInputType? get keyboardType; bool? get obscureText; bool? get autocorrect; List<String>? get autofillHints;/// If [WoFormAutofocus.true], or [WoFormAutofocus.ifEmpty] and the initial
+/// value is empty, the field will request focus at its creation.
+///
+/// Defaults to WoFormAutofocus.false
+ WoFormAutofocus? get autofocus; TextInputAction? get textInputAction;/// Defaults to TextCapitalization.none.
  TextCapitalization? get textCapitalization;/// Defaults to 1. If you want to set it to null, enter 0.
  int? get maxLines; String? get invalidRegexMessage;// If true, InputDecoration.collapsed will be used.
  bool? get collapsed;@notSerializable TextStyle? get style;@notSerializable StringFieldBuilderDef? get widgetBuilder;@notSerializable ErrorBuilderDef? get errorBuilder;
@@ -1793,7 +1797,7 @@ abstract mixin class $StringInputUiSettingsCopyWith<$Res>  {
   factory $StringInputUiSettingsCopyWith(StringInputUiSettings value, $Res Function(StringInputUiSettings) _then) = _$StringInputUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- int? headerFlex, String? labelText, StringFieldLocation? labelLocation, String? hintText, String? helperText, int? helperMaxLines,@notSerializable Widget? helper, StringFieldLocation? helperLocation,@notSerializable Widget? prefixIcon, StringFieldLocation? prefixIconLocation, StringFieldLocation? errorLocation, StringFieldAction? action, bool? submitFormOnFieldSubmitted,@TextInputTypeConverter() TextInputType? keyboardType, bool? obscureText, bool? autocorrect, List<String>? autofillHints, bool? autofocus, TextInputAction? textInputAction, TextCapitalization? textCapitalization, int? maxLines, String? invalidRegexMessage, bool? collapsed,@notSerializable TextStyle? style,@notSerializable StringFieldBuilderDef? widgetBuilder,@notSerializable ErrorBuilderDef? errorBuilder
+ int? headerFlex, String? labelText, StringFieldLocation? labelLocation, String? hintText, String? helperText, int? helperMaxLines,@notSerializable Widget? helper, StringFieldLocation? helperLocation,@notSerializable Widget? prefixIcon, StringFieldLocation? prefixIconLocation, StringFieldLocation? errorLocation, StringFieldAction? action, bool? submitFormOnFieldSubmitted,@TextInputTypeConverter() TextInputType? keyboardType, bool? obscureText, bool? autocorrect, List<String>? autofillHints, WoFormAutofocus? autofocus, TextInputAction? textInputAction, TextCapitalization? textCapitalization, int? maxLines, String? invalidRegexMessage, bool? collapsed,@notSerializable TextStyle? style,@notSerializable StringFieldBuilderDef? widgetBuilder,@notSerializable ErrorBuilderDef? errorBuilder
 });
 
 
@@ -1830,7 +1834,7 @@ as TextInputType?,obscureText: freezed == obscureText ? _self.obscureText : obsc
 as bool?,autocorrect: freezed == autocorrect ? _self.autocorrect : autocorrect // ignore: cast_nullable_to_non_nullable
 as bool?,autofillHints: freezed == autofillHints ? _self.autofillHints : autofillHints // ignore: cast_nullable_to_non_nullable
 as List<String>?,autofocus: freezed == autofocus ? _self.autofocus : autofocus // ignore: cast_nullable_to_non_nullable
-as bool?,textInputAction: freezed == textInputAction ? _self.textInputAction : textInputAction // ignore: cast_nullable_to_non_nullable
+as WoFormAutofocus?,textInputAction: freezed == textInputAction ? _self.textInputAction : textInputAction // ignore: cast_nullable_to_non_nullable
 as TextInputAction?,textCapitalization: freezed == textCapitalization ? _self.textCapitalization : textCapitalization // ignore: cast_nullable_to_non_nullable
 as TextCapitalization?,maxLines: freezed == maxLines ? _self.maxLines : maxLines // ignore: cast_nullable_to_non_nullable
 as int?,invalidRegexMessage: freezed == invalidRegexMessage ? _self.invalidRegexMessage : invalidRegexMessage // ignore: cast_nullable_to_non_nullable
@@ -1890,7 +1894,11 @@ class _StringInputUiSettings extends StringInputUiSettings {
   return EqualUnmodifiableListView(value);
 }
 
-@override final  bool? autofocus;
+/// If [WoFormAutofocus.true], or [WoFormAutofocus.ifEmpty] and the initial
+/// value is empty, the field will request focus at its creation.
+///
+/// Defaults to WoFormAutofocus.false
+@override final  WoFormAutofocus? autofocus;
 @override final  TextInputAction? textInputAction;
 /// Defaults to TextCapitalization.none.
 @override final  TextCapitalization? textCapitalization;
@@ -1936,7 +1944,7 @@ abstract mixin class _$StringInputUiSettingsCopyWith<$Res> implements $StringInp
   factory _$StringInputUiSettingsCopyWith(_StringInputUiSettings value, $Res Function(_StringInputUiSettings) _then) = __$StringInputUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- int? headerFlex, String? labelText, StringFieldLocation? labelLocation, String? hintText, String? helperText, int? helperMaxLines,@notSerializable Widget? helper, StringFieldLocation? helperLocation,@notSerializable Widget? prefixIcon, StringFieldLocation? prefixIconLocation, StringFieldLocation? errorLocation, StringFieldAction? action, bool? submitFormOnFieldSubmitted,@TextInputTypeConverter() TextInputType? keyboardType, bool? obscureText, bool? autocorrect, List<String>? autofillHints, bool? autofocus, TextInputAction? textInputAction, TextCapitalization? textCapitalization, int? maxLines, String? invalidRegexMessage, bool? collapsed,@notSerializable TextStyle? style,@notSerializable StringFieldBuilderDef? widgetBuilder,@notSerializable ErrorBuilderDef? errorBuilder
+ int? headerFlex, String? labelText, StringFieldLocation? labelLocation, String? hintText, String? helperText, int? helperMaxLines,@notSerializable Widget? helper, StringFieldLocation? helperLocation,@notSerializable Widget? prefixIcon, StringFieldLocation? prefixIconLocation, StringFieldLocation? errorLocation, StringFieldAction? action, bool? submitFormOnFieldSubmitted,@TextInputTypeConverter() TextInputType? keyboardType, bool? obscureText, bool? autocorrect, List<String>? autofillHints, WoFormAutofocus? autofocus, TextInputAction? textInputAction, TextCapitalization? textCapitalization, int? maxLines, String? invalidRegexMessage, bool? collapsed,@notSerializable TextStyle? style,@notSerializable StringFieldBuilderDef? widgetBuilder,@notSerializable ErrorBuilderDef? errorBuilder
 });
 
 
@@ -1973,7 +1981,7 @@ as TextInputType?,obscureText: freezed == obscureText ? _self.obscureText : obsc
 as bool?,autocorrect: freezed == autocorrect ? _self.autocorrect : autocorrect // ignore: cast_nullable_to_non_nullable
 as bool?,autofillHints: freezed == autofillHints ? _self._autofillHints : autofillHints // ignore: cast_nullable_to_non_nullable
 as List<String>?,autofocus: freezed == autofocus ? _self.autofocus : autofocus // ignore: cast_nullable_to_non_nullable
-as bool?,textInputAction: freezed == textInputAction ? _self.textInputAction : textInputAction // ignore: cast_nullable_to_non_nullable
+as WoFormAutofocus?,textInputAction: freezed == textInputAction ? _self.textInputAction : textInputAction // ignore: cast_nullable_to_non_nullable
 as TextInputAction?,textCapitalization: freezed == textCapitalization ? _self.textCapitalization : textCapitalization // ignore: cast_nullable_to_non_nullable
 as TextCapitalization?,maxLines: freezed == maxLines ? _self.maxLines : maxLines // ignore: cast_nullable_to_non_nullable
 as int?,invalidRegexMessage: freezed == invalidRegexMessage ? _self.invalidRegexMessage : invalidRegexMessage // ignore: cast_nullable_to_non_nullable
@@ -1998,7 +2006,7 @@ mixin _$WoFormUiSettings {
  MultistepSettings? get multistepSettings; DisableSubmitButton get disableSubmitMode;/// The text of the submit button. Falls back to [WoFormL10n.submitText].
  String? get submitText;/// The icon of the submit button.
 @notSerializable IconData? get submitIcon;@notSerializable SubmitButtonBuilderDef? get submitButtonBuilder;/// The position of the submit button in the form.
- SubmitButtonPosition get submitButtonPosition;@Deprecated('Use WoFormBodyLayout.shrinkWrap instead')@notSerializable ScaffoldBuilderDef? get scaffoldBuilder;/// If true, after the form is successfully submitted, it will be locked.
+ SubmitButtonPosition get submitButtonPosition;@notSerializable ScaffoldBuilderDef? get scaffoldBuilder;/// If true, after the form is successfully submitted, it will be locked.
  bool? get canModifySubmittedValues;/// By default, errors will only be shown after the user visited a node or
 /// tried to submit the form.
  ShowErrors get showErrors;/// Called when the users tries to quit the form, for exapmle by pressing
@@ -2050,7 +2058,7 @@ abstract mixin class $WoFormUiSettingsCopyWith<$Res>  {
   factory $WoFormUiSettingsCopyWith(WoFormUiSettings value, $Res Function(WoFormUiSettings) _then) = _$WoFormUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String titleText, WoFormTitlePosition titlePosition,@notSerializable HeaderBuilderDef? headerBuilder,@notSerializable QuitButtonBuilderDef? quitButtonBuilder, MultistepSettings? multistepSettings, DisableSubmitButton disableSubmitMode, String? submitText,@notSerializable IconData? submitIcon,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder, SubmitButtonPosition submitButtonPosition,@Deprecated('Use WoFormBodyLayout.shrinkWrap instead')@notSerializable ScaffoldBuilderDef? scaffoldBuilder, bool? canModifySubmittedValues, ShowErrors showErrors,@notSerializable Future<bool?> Function(BuildContext context)? canQuit, WoFormThemeData? theme,@EdgeInsetsNullableConverter() EdgeInsets? padding, WoFormBodyLayout bodyLayout, WoFormPresentation presentation
+ String titleText, WoFormTitlePosition titlePosition,@notSerializable HeaderBuilderDef? headerBuilder,@notSerializable QuitButtonBuilderDef? quitButtonBuilder, MultistepSettings? multistepSettings, DisableSubmitButton disableSubmitMode, String? submitText,@notSerializable IconData? submitIcon,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder, SubmitButtonPosition submitButtonPosition,@notSerializable ScaffoldBuilderDef? scaffoldBuilder, bool? canModifySubmittedValues, ShowErrors showErrors,@notSerializable Future<bool?> Function(BuildContext context)? canQuit, WoFormThemeData? theme,@EdgeInsetsNullableConverter() EdgeInsets? padding, WoFormBodyLayout bodyLayout, WoFormPresentation presentation
 });
 
 
@@ -2123,7 +2131,7 @@ $WoFormThemeDataCopyWith<$Res>? get theme {
 @JsonSerializable()
 
 class _WoFormUiSettings extends WoFormUiSettings {
-  const _WoFormUiSettings({this.titleText = '', this.titlePosition = WoFormTitlePosition.header, @notSerializable this.headerBuilder, @notSerializable this.quitButtonBuilder, this.multistepSettings, this.disableSubmitMode = DisableSubmitButton.never, this.submitText, @notSerializable this.submitIcon, @notSerializable this.submitButtonBuilder, this.submitButtonPosition = SubmitButtonPosition.body, @Deprecated('Use WoFormBodyLayout.shrinkWrap instead')@notSerializable this.scaffoldBuilder, this.canModifySubmittedValues, this.showErrors = ShowErrors.progressively, @notSerializable this.canQuit, this.theme, @EdgeInsetsNullableConverter() this.padding, this.bodyLayout = WoFormBodyLayout.scrollable, this.presentation = WoFormPresentation.page}): super._();
+  const _WoFormUiSettings({this.titleText = '', this.titlePosition = WoFormTitlePosition.header, @notSerializable this.headerBuilder, @notSerializable this.quitButtonBuilder, this.multistepSettings, this.disableSubmitMode = DisableSubmitButton.never, this.submitText, @notSerializable this.submitIcon, @notSerializable this.submitButtonBuilder, this.submitButtonPosition = SubmitButtonPosition.body, @notSerializable this.scaffoldBuilder, this.canModifySubmittedValues, this.showErrors = ShowErrors.progressively, @notSerializable this.canQuit, this.theme, @EdgeInsetsNullableConverter() this.padding, this.bodyLayout = WoFormBodyLayout.scrollable, this.presentation = WoFormPresentation.page}): super._();
   factory _WoFormUiSettings.fromJson(Map<String, dynamic> json) => _$WoFormUiSettingsFromJson(json);
 
 @override@JsonKey() final  String titleText;
@@ -2142,7 +2150,7 @@ class _WoFormUiSettings extends WoFormUiSettings {
 @override@notSerializable final  SubmitButtonBuilderDef? submitButtonBuilder;
 /// The position of the submit button in the form.
 @override@JsonKey() final  SubmitButtonPosition submitButtonPosition;
-@override@Deprecated('Use WoFormBodyLayout.shrinkWrap instead')@notSerializable final  ScaffoldBuilderDef? scaffoldBuilder;
+@override@notSerializable final  ScaffoldBuilderDef? scaffoldBuilder;
 /// If true, after the form is successfully submitted, it will be locked.
 @override final  bool? canModifySubmittedValues;
 /// By default, errors will only be shown after the user visited a node or
@@ -2203,7 +2211,7 @@ abstract mixin class _$WoFormUiSettingsCopyWith<$Res> implements $WoFormUiSettin
   factory _$WoFormUiSettingsCopyWith(_WoFormUiSettings value, $Res Function(_WoFormUiSettings) _then) = __$WoFormUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String titleText, WoFormTitlePosition titlePosition,@notSerializable HeaderBuilderDef? headerBuilder,@notSerializable QuitButtonBuilderDef? quitButtonBuilder, MultistepSettings? multistepSettings, DisableSubmitButton disableSubmitMode, String? submitText,@notSerializable IconData? submitIcon,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder, SubmitButtonPosition submitButtonPosition,@Deprecated('Use WoFormBodyLayout.shrinkWrap instead')@notSerializable ScaffoldBuilderDef? scaffoldBuilder, bool? canModifySubmittedValues, ShowErrors showErrors,@notSerializable Future<bool?> Function(BuildContext context)? canQuit, WoFormThemeData? theme,@EdgeInsetsNullableConverter() EdgeInsets? padding, WoFormBodyLayout bodyLayout, WoFormPresentation presentation
+ String titleText, WoFormTitlePosition titlePosition,@notSerializable HeaderBuilderDef? headerBuilder,@notSerializable QuitButtonBuilderDef? quitButtonBuilder, MultistepSettings? multistepSettings, DisableSubmitButton disableSubmitMode, String? submitText,@notSerializable IconData? submitIcon,@notSerializable SubmitButtonBuilderDef? submitButtonBuilder, SubmitButtonPosition submitButtonPosition,@notSerializable ScaffoldBuilderDef? scaffoldBuilder, bool? canModifySubmittedValues, ShowErrors showErrors,@notSerializable Future<bool?> Function(BuildContext context)? canQuit, WoFormThemeData? theme,@EdgeInsetsNullableConverter() EdgeInsets? padding, WoFormBodyLayout bodyLayout, WoFormPresentation presentation
 });
 
 

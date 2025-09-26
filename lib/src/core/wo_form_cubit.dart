@@ -483,7 +483,6 @@ class WoFormValues {
   // bool _locked = false;
   final Map<String, dynamic> _values;
 
-  // TODO : deprecate, encourage #
   static String getAbsolutePath({
     required String parentPath,
     required String path,
@@ -544,11 +543,7 @@ class WoFormValues {
   /// path can be a key, or a string starting with #, like #endsAt.
   /// Then, the result is the value corresponding to the first key
   /// that ends with path.
-  dynamic getValue(
-    String path, {
-    // TODO : deprecate relative paths, encourage #
-    String? parentPath,
-  }) {
+  dynamic getValue(String path, {String? parentPath}) {
     if (parentPath != null) {
       // ignore: parameter_assignments
       path = getAbsolutePath(parentPath: parentPath, path: path);
