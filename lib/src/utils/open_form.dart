@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wo_form/src/utils/show_modal.dart';
 import 'package:wo_form/wo_form.dart';
 
 extension OpenForm on BuildContext {
@@ -40,7 +41,7 @@ Future<T?> _showWoFormModal<T extends Object?>({
   final isDialog =
       form.root.uiSettings.presentation == WoFormPresentation.dialog;
 
-  Widget buildForm(BuildContext context) {
+  Widget buildForm(BuildContext context, [ScrollController? _]) {
     final double? height;
     if (acceptScrollController ||
         form.root.uiSettings.bodyLayout == WoFormBodyLayout.shrinkWrap) {
@@ -58,13 +59,6 @@ Future<T?> _showWoFormModal<T extends Object?>({
     );
   }
 
-  Widget buildContent(BuildContext context) => isDialog || !showDragHandle
-      ? buildForm(context)
-      : _BottomSheetDragHandle(
-          flex: acceptScrollController ? 1 : 0,
-          child: buildForm(context),
-        );
-
   if (isDialog) {
     return showDialog(
       context: context,
@@ -72,78 +66,18 @@ Future<T?> _showWoFormModal<T extends Object?>({
         children: [
           SizedBox(
             width: 512, // TODO : WoForm.MAX_WIDTH ?
-            child: buildContent(dialogContext),
+            child: buildForm(context),
           ),
         ],
       ),
     );
   } else {
-    return showModalBottomSheet(
+    return showModal(
       context: context,
-      isScrollControlled: true,
-      useSafeArea: true,
-      clipBehavior: Clip.hardEdge,
-      builder: (context) => Padding(
-        // This padding allows the modal to adjust to the keyboard
-        // See : https://stackoverflow.com/questions/53869078/how-to-move-bottomsheet-along-with-keyboard-which-has-textfieldautofocused-is-t
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-        ),
-        child: acceptScrollController
-            ? DraggableScrollableSheet(
-                expand: false,
-                initialChildSize: initialBottomSheetSize,
-                minChildSize: initialBottomSheetSize * 2 / 3,
-                builder: (context, scrollController) =>
-                    ScrollControllerProvider(
-                      controller: scrollController,
-                      child: buildContent(context),
-                    ),
-              )
-            : buildContent(context),
-      ),
-    );
-  }
-}
-
-class _BottomSheetDragHandle extends StatelessWidget {
-  const _BottomSheetDragHandle({
-    required this.child,
-    required this.flex,
-  });
-
-  final Widget child;
-  final int flex;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Expanded(
-          flex: flex,
-          child: Stack(
-            children: [
-              child,
-              Align(
-                alignment: Alignment.topCenter,
-                child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                      borderRadius: const BorderRadius.all(Radius.circular(8)),
-                    ),
-                    width: 48,
-                    height: 6,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
+      builder: buildForm,
+      acceptScrollController: acceptScrollController,
+      initialBottomSheetSize: initialBottomSheetSize,
+      showDragHandle: showDragHandle,
     );
   }
 }

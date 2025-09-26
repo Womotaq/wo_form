@@ -1,0 +1,89 @@
+import 'package:flutter/material.dart';
+import 'package:wo_form/wo_form.dart';
+
+Future<T?> showModal<T extends Object?>({
+  required BuildContext context,
+  required Widget Function(BuildContext context) builder,
+  bool acceptScrollController = true,
+  double initialBottomSheetSize = .7,
+  bool showDragHandle = false,
+}) {
+  return showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    useSafeArea: true,
+    clipBehavior: Clip.hardEdge,
+    builder: (context) => Padding(
+      // This padding allows the modal to adjust to the keyboard
+      // See : https://stackoverflow.com/questions/53869078/how-to-move-bottomsheet-along-with-keyboard-which-has-textfieldautofocused-is-t
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
+      child: acceptScrollController
+          ? DraggableScrollableSheet(
+              expand: false,
+              initialChildSize: initialBottomSheetSize,
+              minChildSize: initialBottomSheetSize * 2 / 3,
+              builder: (context, scrollController) => ScrollControllerProvider(
+                controller: scrollController,
+                child: _BottomSheetDragHandle(
+                  flex: acceptScrollController ? 1 : 0,
+                  showDragHandle: showDragHandle,
+                  child: builder(context),
+                ),
+              ),
+            )
+          : _BottomSheetDragHandle(
+              flex: acceptScrollController ? 1 : 0,
+              showDragHandle: showDragHandle,
+              child: builder(context),
+            ),
+    ),
+  );
+}
+
+class _BottomSheetDragHandle extends StatelessWidget {
+  const _BottomSheetDragHandle({
+    required this.child,
+    required this.flex,
+    this.showDragHandle = true,
+  });
+
+  final Widget child;
+  final int flex;
+  final bool showDragHandle;
+
+  @override
+  Widget build(BuildContext context) {
+    if (!showDragHandle) return child;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Expanded(
+          flex: flex,
+          child: Stack(
+            children: [
+              child,
+              Align(
+                alignment: Alignment.topCenter,
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      borderRadius: const BorderRadius.all(Radius.circular(8)),
+                    ),
+                    width: 48,
+                    height: 6,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
