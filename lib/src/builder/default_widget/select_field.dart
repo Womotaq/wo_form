@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:popover/popover.dart';
 import 'package:wo_form/src/builder/default_widget/flex_field.dart';
-import 'package:wo_form/src/utils/search_builder.dart';
 import 'package:wo_form/wo_form.dart';
 
 class SelectField<T> extends StatelessWidget {
@@ -218,15 +217,24 @@ class _AlwaysVisibleSelectField<T> extends StatelessWidget {
   final Widget header;
   final Widget Function(T value, VoidCallback onTap, bool isSelected)?
   tileBuilder;
-  final double Function(String query, T value)? searchScore;
+  final double Function(WoFormQuery query, T value)? searchScore;
 
   @override
   Widget build(BuildContext context) {
     return searchScore == null
         ? layout(context, data.input.availibleValues)
         : SearchBuilder(
+            key: Key('${data.path}-SearchBuilder'),
             data: data.input.availibleValues,
             searchScore: searchScore!,
+            initialQuery: context.read<WoFormValuesCubit>().state.queryOf(
+              selectInputPath: data.path,
+            ),
+            onQueryChanged: (query) =>
+                context.read<WoFormValuesCubit>().onValueChanged(
+                  path: '${data.path}-query',
+                  value: query,
+                ),
             builder: layout,
           );
   }

@@ -13,6 +13,8 @@ class SearchBuilder<T> extends StatefulWidget {
     required this.data,
     required this.searchScore,
     required this.builder,
+    this.initialQuery,
+    this.onQueryChanged,
     super.key,
   });
 
@@ -26,7 +28,7 @@ class SearchBuilder<T> extends StatefulWidget {
   ///
   /// The [query] passed to this function is guaranteed to be lowercase and
   /// without diacritics (e.g., accents, umlauts).
-  final double Function(String query, T value) searchScore;
+  final double Function(WoFormQuery query, T value) searchScore;
 
   /// The widget builder used to render the search interface and results.
   ///
@@ -45,6 +47,9 @@ class SearchBuilder<T> extends StatefulWidget {
   )
   builder;
 
+  final WoFormQuery? initialQuery;
+  final ValueChanged<WoFormQuery>? onQueryChanged;
+
   @override
   State<SearchBuilder<T>> createState() => _SearchBuilderState<T>();
 }
@@ -57,17 +62,23 @@ class _SearchBuilderState<T> extends State<SearchBuilder<T>> {
   void initState() {
     super.initState();
 
-    _textController = TextEditingController()..addListener(_filterData);
+    _textController = TextEditingController(text: widget.initialQuery?.raw)
+      ..addListener(_filterData);
     _results = widget.data.toList();
+
+    if (widget.initialQuery != null) {
+      _filterData();
+    }
   }
 
   // Search, scoring, and filtering logic
   void _filterData() {
-    final query = removeDiacritics(_textController.text.toLowerCase());
+    final query = WoFormQuery(_textController.text);
 
-    if (query.isEmpty) {
+    if (query.clean.isEmpty) {
       // If the query is empty, return all data
       setState(() => _results = widget.data.toList());
+      widget.onQueryChanged?.call(query);
       return;
     }
 
@@ -83,6 +94,7 @@ class _SearchBuilderState<T> extends State<SearchBuilder<T>> {
     setState(
       () => _results = scoredItems.map((s) => s.value).toList(),
     );
+    widget.onQueryChanged?.call(query);
   }
 
   @override
@@ -114,4 +126,11 @@ class _ScoredItem<T> {
 
   final T value;
   final double score;
+}
+
+class WoFormQuery {
+  WoFormQuery(this.raw) : clean = removeDiacritics(raw.toLowerCase());
+
+  final String raw;
+  final String clean;
 }

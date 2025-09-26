@@ -488,7 +488,7 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
     ///
     /// The [query] passed to this function is guaranteed to be lowercase and
     /// without diacritics (e.g., accents, umlauts).
-    @notSerializable double Function(String query, T value)? searchScore,
+    @notSerializable double Function(WoFormQuery query, T value)? searchScore,
     @notSerializable SearchScreenDef<T>? searchScreenBuilder,
     @notSerializable InputHeaderBuilderDef? headerBuilder,
     @notSerializable ScoreWidgetBuilderDef? scoreBuilder,

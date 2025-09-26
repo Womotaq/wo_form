@@ -612,6 +612,11 @@ class WoFormValues {
       this[_VISITED_PATHS_KEY] as Iterable<String>? ?? {};
   set _visitedPaths(Iterable<String> paths) =>
       _values[_VISITED_PATHS_KEY] = paths;
+
+  // --- SELECT INPUT QUERY ---
+
+  WoFormQuery? queryOf({required String selectInputPath}) =>
+      this['$selectInputPath-query'] as WoFormQuery?;
 }
 
 typedef _TempSubmitData = ({

@@ -1,6 +1,6 @@
-import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
 import 'package:popover/popover.dart';
+import 'package:wo_form/wo_form.dart';
 
 // TODO : use SearchBuilder
 
@@ -53,7 +53,7 @@ class SearchField<T> extends StatelessWidget {
   final String? hintText;
   final Widget Function(Iterable<T?> values)? selectedBuilder;
   final bool showArrow;
-  final double Function(String query, T value)? searchScore;
+  final double Function(WoFormQuery query, T value)? searchScore;
   final Widget Function({required Widget child})? provider;
   final SearchScreenDef<T>? searchScreenBuilder;
   final double overlayMaxWidth;
@@ -209,7 +209,7 @@ typedef SearchScreenDef<T> =
       required Iterable<T> values,
       required Widget Function(BuildContext context, T value) tileBuilder,
       required void Function(T value) onSelect,
-      double Function(String query, T value)? searchScore,
+      double Function(WoFormQuery query, T value)? searchScore,
       Key? key,
     });
 
@@ -228,23 +228,22 @@ class SearchScreen<T> extends StatefulWidget {
   final Widget Function(BuildContext context, T value) tileBuilder;
   final void Function(T value) onSelect;
   final List<Widget>? bottomChildren;
-  final double Function(String query, T value)? searchScore;
-  final List<Widget> Function(String query)? onNotFound;
+  final double Function(WoFormQuery query, T value)? searchScore;
+  final List<Widget> Function(WoFormQuery query)? onNotFound;
 
   @override
   State<SearchScreen<T>> createState() => SearchScreenState();
 }
 
 class SearchScreenState<T> extends State<SearchScreen<T>> {
-  String rawQuery = '';
-  String cleanQuery = '';
+  WoFormQuery query = WoFormQuery('');
 
   @override
   Widget build(BuildContext context) {
-    final searchResults = widget.searchScore != null && cleanQuery.isNotEmpty
+    final searchResults = widget.searchScore != null && query.clean.isNotEmpty
         ? (widget.values
                   .map(
-                    (value) => (value, widget.searchScore!(cleanQuery, value)),
+                    (value) => (value, widget.searchScore!(query, value)),
                   )
                   .where((e) => e.$2 > 0)
                   .toList()
@@ -257,7 +256,7 @@ class SearchScreenState<T> extends State<SearchScreen<T>> {
       shrinkWrap: true,
       children: [
         if (searchResults.isEmpty)
-          ...?widget.onNotFound?.call(cleanQuery)
+          ...?widget.onNotFound?.call(query)
         else
           ...searchResults.map(
             (e) => InkWell(
@@ -280,10 +279,8 @@ class SearchScreenState<T> extends State<SearchScreen<T>> {
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.search),
                 ),
-                onChanged: (value) => setState(() {
-                  rawQuery = value;
-                  cleanQuery = removeDiacritics(value.toLowerCase());
-                }),
+                onChanged: (value) =>
+                    setState(() => query = WoFormQuery(value)),
                 // Flutter's default behaviour :
                 // - web : tapping outside instantly unfocuses the field.
                 // - mobile : tapping outside does nothing.

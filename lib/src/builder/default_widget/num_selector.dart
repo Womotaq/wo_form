@@ -146,7 +146,6 @@ class _NumSelectorState extends State<NumSelector> {
               enabled: widget.onChanged != null,
               controller: controller,
               decoration: InputDecoration(
-                border: const OutlineInputBorder(),
                 isDense: true,
                 contentPadding: const EdgeInsets.all(8),
                 suffix: widget.unit,
