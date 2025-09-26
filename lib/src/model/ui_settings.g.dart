@@ -170,6 +170,7 @@ _DynamicInputsNodeUiSettings _$DynamicInputsNodeUiSettingsFromJson(
   labelText: json['labelText'] as String?,
   helperText: json['helperText'] as String?,
   reorderable: json['reorderable'] as bool?,
+  oddEvenRowColors: json['oddEvenRowColors'] as bool?,
 );
 
 Map<String, dynamic> _$DynamicInputsNodeUiSettingsToJson(
@@ -178,6 +179,7 @@ Map<String, dynamic> _$DynamicInputsNodeUiSettingsToJson(
   'labelText': instance.labelText,
   'helperText': instance.helperText,
   'reorderable': instance.reorderable,
+  'oddEvenRowColors': instance.oddEvenRowColors,
 };
 
 _DynamicInputUiSettings _$DynamicInputUiSettingsFromJson(
@@ -202,6 +204,7 @@ _InputsNodeUiSettings _$InputsNodeUiSettingsFromJson(
   reverse: json['reverse'] as bool?,
   labelText: json['labelText'] as String?,
   labelTextWhenChildrenHidden: json['labelTextWhenChildrenHidden'] as String?,
+  labelMaxLines: (json['labelMaxLines'] as num?)?.toInt(),
   helperText: json['helperText'] as String?,
   childrenVisibility: $enumDecodeNullable(
     _$ChildrenVisibilityEnumMap,
@@ -224,6 +227,7 @@ Map<String, dynamic> _$InputsNodeUiSettingsToJson(
   'reverse': instance.reverse,
   'labelText': instance.labelText,
   'labelTextWhenChildrenHidden': instance.labelTextWhenChildrenHidden,
+  'labelMaxLines': instance.labelMaxLines,
   'helperText': instance.helperText,
   'childrenVisibility':
       _$ChildrenVisibilityEnumMap[instance.childrenVisibility],

@@ -124,26 +124,28 @@ class DynamicInputsNodeWidget extends StatelessWidget {
         (WoFormTheme.of(context)?.inputHeaderBuilder ?? InputHeader.new).call(
           headerData,
         ),
-        if (data.uiSettings.reorderable ?? true)
-          WoReorderableByGrabListView(
-            onReorder: data.onValueChanged == null
-                ? null
-                : (oldIndex, newIndex) {
-                    try {
-                      final newValues = List<WoFormNodeMixin>.from(
-                        data.value ?? [],
-                      );
-                      newValues.insert(
-                        newIndex,
-                        newValues.removeAt(oldIndex),
-                      );
-                      data.onValueChanged?.call(newValues);
-                    } catch (_) {}
-                  },
-            children: children,
-          )
-        else
-          Column(children: children),
+        WoReorderableByGrabListView(
+          onReorder: data.onValueChanged == null
+              ? null
+              : (oldIndex, newIndex) {
+                  try {
+                    final newValues = List<WoFormNodeMixin>.from(
+                      data.value ?? [],
+                    );
+                    newValues.insert(
+                      newIndex,
+                      newValues.removeAt(oldIndex),
+                    );
+                    data.onValueChanged?.call(newValues);
+                  } catch (_) {}
+                },
+          reorderable: data.uiSettings.reorderable ?? true,
+          oddEvenRowColors:
+              data.uiSettings.oddEvenRowColors ??
+              data.uiSettings.reorderable ??
+              true,
+          children: children,
+        ),
       ],
     );
   }

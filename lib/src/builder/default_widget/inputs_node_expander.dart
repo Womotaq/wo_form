@@ -34,6 +34,7 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
       labelText:
           widget.data.uiSettings.labelTextWhenChildrenHidden ??
           widget.data.uiSettings.labelText,
+      labelMaxLines: widget.data.uiSettings.labelMaxLines,
       helperText: widget.data.uiSettings.helperText,
       errorText: widget.data.errorText,
       trailing: widget.isModal
@@ -43,7 +44,9 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
       shrinkWrap: false,
     );
 
-    return (WoFormTheme.of(context)?.inputHeaderBuilder ?? InputHeader.new)
+    return (widget.data.uiSettings.inputHeaderBuilder ??
+            WoFormTheme.of(context)?.inputHeaderBuilder ??
+            InputHeader.new)
         .call(headerData);
   }
 

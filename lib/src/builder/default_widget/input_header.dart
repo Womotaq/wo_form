@@ -68,6 +68,8 @@ class InputHeader extends StatelessWidget {
                         style:
                             theme.inputDecorationTheme.labelStyle ??
                             theme.textTheme.bodyLarge,
+                        maxLines: data.labelMaxLines,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     if (subtitleWidget != null) subtitleWidget,
                   ],

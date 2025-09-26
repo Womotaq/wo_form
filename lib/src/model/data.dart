@@ -16,6 +16,7 @@ abstract class WoFormHeaderData with _$WoFormHeaderData {
 abstract class WoFormInputHeaderData with _$WoFormInputHeaderData {
   const factory WoFormInputHeaderData({
     String? labelText,
+    int? labelMaxLines,
     String? helperText,
     String? errorText,
     Widget? trailing,

@@ -6,11 +6,15 @@ class WoReorderableByGrabListView extends StatefulWidget {
   const WoReorderableByGrabListView({
     required this.children,
     required this.onReorder,
+    this.reorderable = true,
+    this.oddEvenRowColors = true,
     super.key,
   });
 
   final List<Widget> children;
   final void Function(int oldIndex, int newIndex)? onReorder;
+  final bool reorderable;
+  final bool oddEvenRowColors;
 
   @override
   State<WoReorderableByGrabListView> createState() =>
@@ -35,9 +39,13 @@ class _WoReorderableByGrabListViewState
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final oddItemColor = colorScheme.primary.withValues(alpha: 0.05);
-    final evenItemColor = colorScheme.primary.withValues(alpha: 0.2);
+    final theme = Theme.of(context);
+    final oddItemColor = widget.oddEvenRowColors
+        ? theme.colorScheme.primary.withValues(alpha: 0.05)
+        : null;
+    final evenItemColor = widget.oddEvenRowColors
+        ? theme.colorScheme.primary.withValues(alpha: 0.2)
+        : null;
 
     final rootNode = context.read<RootNode>();
     final valuesCubit = context.read<WoFormValuesCubit>();
@@ -82,21 +90,22 @@ class _WoReorderableByGrabListViewState
               color: e.$1.isOdd ? oddItemColor : evenItemColor,
               child: Row(
                 children: [
-                  ReorderableDragStartListener(
-                    enabled: widget.onReorder != null,
-                    index: e.$1,
-                    child: SizedBox.square(
-                      dimension: 42,
-                      child: Center(
-                        child: Icon(
-                          Icons.drag_indicator,
-                          color: widget.onReorder == null
-                              ? Theme.of(context).disabledColor
-                              : null,
+                  if (widget.reorderable)
+                    ReorderableDragStartListener(
+                      enabled: widget.onReorder != null,
+                      index: e.$1,
+                      child: SizedBox.square(
+                        dimension: 42,
+                        child: Center(
+                          child: Icon(
+                            Icons.drag_indicator,
+                            color: widget.onReorder == null
+                                ? theme.disabledColor
+                                : null,
+                          ),
                         ),
                       ),
                     ),
-                  ),
                   Expanded(child: e.$2),
                 ],
               ),

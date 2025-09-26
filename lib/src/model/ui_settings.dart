@@ -247,6 +247,10 @@ abstract class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
 
     /// Default to true
     bool? reorderable,
+
+    /// Default to [reorderable].
+    bool? oddEvenRowColors,
+
     @notSerializable GenerateIdDef? generateId,
     @notSerializable OnDynamicInputDeletionDef? onChildDeletion,
     @notSerializable DynamicInputsNodeWidgetBuilderDef? widgetBuilder,
@@ -320,12 +324,13 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
     bool? reverse,
     String? labelText,
     String? labelTextWhenChildrenHidden,
+    int? labelMaxLines,
     String? helperText,
 
     /// Default to always.
     ChildrenVisibility? childrenVisibility,
 
-    /// Only used by [ChildrenVisibility.whenAsked].
+    /// Only used when [ChildrenVisibility.whenAsked].
     /// If true, when the widget will be rendered,
     /// the children's visibility will be asked.
     ///
@@ -344,9 +349,18 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
 
     /// This spacing will be placed between each [WoFormNodeMixin].
     double? spacing,
+
+    /// Only used when [ChildrenVisibility.always].
     @notSerializable InputNodeWidgetBuilderDef? widgetBuilder,
+
+    /// Only used when [ChildrenVisibility.always].
     @notSerializable HeaderBuilderDef? headerBuilder,
+
+    /// Only used when [ChildrenVisibility.whenAsked].
     @notSerializable InputNodeWidgetBuilderDef? expanderBuilder,
+
+    /// Only used when [ChildrenVisibility.whenAsked].
+    @notSerializable InputHeaderBuilderDef? inputHeaderBuilder,
   }) = _InputsNodeUiSettings;
 
   const InputsNodeUiSettings._();
@@ -359,6 +373,9 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
       : InputsNodeUiSettings(
           flex: flex ?? other.flex,
           labelText: labelText ?? other.labelText,
+          labelTextWhenChildrenHidden:
+              labelTextWhenChildrenHidden ?? other.labelTextWhenChildrenHidden,
+          labelMaxLines: labelMaxLines ?? other.labelMaxLines,
           helperText: helperText ?? other.helperText,
           childrenVisibility: childrenVisibility ?? other.childrenVisibility,
           showChildrenInitially:
@@ -369,6 +386,7 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,
           headerBuilder: headerBuilder ?? other.headerBuilder,
           expanderBuilder: expanderBuilder ?? other.expanderBuilder,
+          inputHeaderBuilder: inputHeaderBuilder ?? other.inputHeaderBuilder,
         );
 }
 
