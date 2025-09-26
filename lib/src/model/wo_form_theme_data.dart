@@ -29,6 +29,11 @@ abstract class WoFormThemeData with _$WoFormThemeData {
     @notSerializable GenerateIdDef? generateId,
     @notSerializable HeaderBuilderDef? headerBuilder,
     @notSerializable InputHeaderBuilderDef? inputHeaderBuilder,
+
+    /// Only used when [ChildrenVisibility.whenAsked].
+    ///
+    /// Default to [InputsNodeExpander.page].
+    /// An alternative is [InputsNodeExpander.modal].
     @notSerializable InputNodeWidgetBuilderDef? inputsNodeExpanderBuilder,
     @notSerializable InputNodeWidgetBuilderDef? inputsNodeWidgetBuilder,
     @notSerializable MediaFieldBuilderDef? mediaFieldBuilder,

@@ -349,14 +349,15 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
 
     /// This spacing will be placed between each [WoFormNodeMixin].
     double? spacing,
-
-    /// Only used when [ChildrenVisibility.always].
     @notSerializable InputNodeWidgetBuilderDef? widgetBuilder,
 
     /// Only used when [ChildrenVisibility.always].
     @notSerializable HeaderBuilderDef? headerBuilder,
 
     /// Only used when [ChildrenVisibility.whenAsked].
+    ///
+    /// Default to [InputsNodeExpander.page].
+    /// An alternative is [InputsNodeExpander.modal].
     @notSerializable InputNodeWidgetBuilderDef? expanderBuilder,
 
     /// Only used when [ChildrenVisibility.whenAsked].

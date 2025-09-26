@@ -301,7 +301,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
     final newValues = state.copy();
     for (final entry in values.entries) {
-      newValues[entry.key] = entry.value;
+      newValues._set(entry.key, entry.value);
     }
 
     // If the status isn't updated and we are still at initial state, then the
@@ -528,7 +528,7 @@ class WoFormValues {
   }
 
   dynamic operator [](String key) => getValue(key);
-  void operator []=(String key, dynamic value) => _values[getKey(key)] = value;
+  void _set(String key, dynamic value) => _values[getKey(key)] = value;
 
   Iterable<MapEntry<String, dynamic>> get entries => _values.entries;
   Iterable<String> get keys => _values.keys;
