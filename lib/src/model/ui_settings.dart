@@ -457,10 +457,6 @@ typedef ValueBuilderDef<T> = Widget Function(T? value);
 
 @freezed
 abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
-  /// Defines how the SelectInput should be rendered.
-  ///
-  /// searcher is a function that returns a double between 0 and 1,
-  /// depending on how much the query is close to a value. 1 is the closest.
   const factory SelectInputUiSettings({
     /// If flex is higher than 0, the default widget will use ListView.builder.
     ///
@@ -484,7 +480,15 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
     @notSerializable ValueBuilderDef<T>? valueBuilder,
     @notSerializable ValueBuilderDef<T>? selectedBuilder,
     @notSerializable Widget? Function(T value)? helpValueBuilder,
-    @notSerializable double Function(String query, T value)? searcher,
+
+    /// A function that calculates how well a [value] matches the search.
+    ///
+    /// This function must return a score between 0.0 (no match) and 1.0
+    /// (perfect match).
+    ///
+    /// The [query] passed to this function is guaranteed to be lowercase and
+    /// without diacritics (e.g., accents, umlauts).
+    @notSerializable double Function(String query, T value)? searchScore,
     @notSerializable SearchScreenDef<T>? searchScreenBuilder,
     @notSerializable InputHeaderBuilderDef? headerBuilder,
     @notSerializable ScoreWidgetBuilderDef? scoreBuilder,
@@ -512,7 +516,7 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
           valueBuilder: valueBuilder ?? other.valueBuilder,
           selectedBuilder: selectedBuilder ?? other.selectedBuilder,
           helpValueBuilder: helpValueBuilder ?? other.helpValueBuilder,
-          searcher: searcher ?? other.searcher,
+          searchScore: searchScore ?? other.searchScore,
           searchScreenBuilder: searchScreenBuilder ?? other.searchScreenBuilder,
           headerBuilder: headerBuilder ?? other.headerBuilder,
           scoreBuilder: scoreBuilder ?? other.scoreBuilder,

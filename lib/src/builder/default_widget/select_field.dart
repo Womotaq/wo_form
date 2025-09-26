@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:popover/popover.dart';
 import 'package:wo_form/src/builder/default_widget/flex_field.dart';
+import 'package:wo_form/src/utils/search_builder.dart';
 import 'package:wo_form/wo_form.dart';
 
 class SelectField<T> extends StatelessWidget {
@@ -56,6 +57,7 @@ class SelectField<T> extends StatelessWidget {
           },
           header: header,
           tileBuilder: data.uiSettings.tileBuilder,
+          searchScore: data.uiSettings.searchScore,
         );
       case ChildrenVisibility.whenAsked:
         if (data.input.maxCount == 1) {
@@ -67,7 +69,7 @@ class SelectField<T> extends StatelessWidget {
             selectedBuilder: data.uiSettings.selectedBuilder,
             helpValueBuilder: data.uiSettings.helpValueBuilder,
             hintText: data.uiSettings.hintText,
-            searcher: data.uiSettings.searcher,
+            searchScore: data.uiSettings.searchScore,
             searchScreenBuilder: data.uiSettings.searchScreenBuilder,
             provider: ({required child}) => RepositoryProvider.value(
               value: context.read<RootNode>(),
@@ -121,7 +123,7 @@ class SelectField<T> extends StatelessWidget {
                   valueBuilder: data.uiSettings.valueBuilder,
                   helpValueBuilder: data.uiSettings.helpValueBuilder,
                   hintText: data.uiSettings.hintText,
-                  searcher: data.uiSettings.searcher,
+                  searchScore: data.uiSettings.searchScore,
                   searchScreenBuilder: data.uiSettings.searchScreenBuilder,
                   builder: (onPressed) => IconButton.filled(
                     onPressed: onPressed,
@@ -208,6 +210,7 @@ class _AlwaysVisibleSelectField<T> extends StatelessWidget {
     required this.onChanged,
     required this.header,
     this.tileBuilder,
+    this.searchScore,
   });
 
   final WoFieldData<SelectInput<T>, List<T>, SelectInputUiSettings<T>> data;
@@ -215,28 +218,58 @@ class _AlwaysVisibleSelectField<T> extends StatelessWidget {
   final Widget header;
   final Widget Function(T value, VoidCallback onTap, bool isSelected)?
   tileBuilder;
+  final double Function(String query, T value)? searchScore;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: (data.uiSettings.flex ?? 0) > 0
-          ? ListView.builder(
-              // TODO : uiSettings.physics
-              // physics: const ClampingScrollPhysics(),
-              itemCount: data.input.availibleValues.length + 1,
-              itemBuilder: (_, index) => index == 0
-                  ? header
-                  : valueBuilder(data.input.availibleValues[index - 1]),
-            )
-          : Column(
-              children: [
-                header,
-                ...data.input.availibleValues.map(valueBuilder),
-              ],
-            ),
-    );
+    return searchScore == null
+        ? layout(context, data.input.availibleValues)
+        : SearchBuilder(
+            data: data.input.availibleValues,
+            searchScore: searchScore!,
+            builder: layout,
+          );
   }
+
+  Widget layout(
+    BuildContext context,
+    List<T> values, [
+    TextEditingController? queryController,
+  ]) => Column(
+    children: [
+      header,
+      if (queryController != null)
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 4,
+          ),
+          child: TextField(
+            controller: queryController,
+            decoration: const InputDecoration(
+              prefixIcon: Icon(Icons.search),
+            ),
+            autocorrect: false,
+            // Flutter's default behaviour :
+            // - web : tapping outside instantly unfocuses the field.
+            // - mobile : tapping outside does nothing.
+            // For better consistency across all plateforms, wo_form
+            // decided to unfocus text fields on tap up.
+            onTapOutside: (_) {},
+            onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
+          ),
+        ),
+      if ((data.uiSettings.flex ?? 0) > 0)
+        Expanded(
+          child: ListView.builder(
+            itemCount: values.length,
+            itemBuilder: (_, index) => valueBuilder(values[index]),
+          ),
+        )
+      else
+        ...values.map(valueBuilder),
+    ],
+  );
 
   Widget valueBuilder(T value) =>
       tileBuilder?.call(
@@ -250,7 +283,7 @@ class _AlwaysVisibleSelectField<T> extends StatelessWidget {
     groupValue: data.value?.firstOrNull,
     onChanged: (_) => data.onValueChanged == null ? null : onChanged(value),
     child: RadioListTile<T>(
-      contentPadding: const EdgeInsets.only(left: 5, right: 16),
+      contentPadding: const EdgeInsets.only(left: 6, right: 16),
       toggleable: true,
       value: value,
       title:
@@ -260,10 +293,7 @@ class _AlwaysVisibleSelectField<T> extends StatelessWidget {
   );
 
   Widget checkboxBuilder(T value) => CheckboxListTile(
-    contentPadding: const EdgeInsets.only(
-      left: 5,
-      right: 16,
-    ),
+    contentPadding: const EdgeInsets.only(left: 6, right: 16),
     value: data.value?.contains(value) ?? false,
     onChanged: data.onValueChanged == null ? null : (_) => onChanged(value),
     title: data.uiSettings.valueBuilder?.call(value) ?? Text(value.toString()),

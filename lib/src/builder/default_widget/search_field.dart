@@ -1,5 +1,8 @@
+import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
 import 'package:popover/popover.dart';
+
+// TODO : use SearchBuilder
 
 class SearchField<T> extends StatelessWidget {
   SearchField.uniqueChoice({
@@ -11,7 +14,7 @@ class SearchField<T> extends StatelessWidget {
     this.hintText,
     Widget Function(T?)? selectedBuilder,
     this.showArrow = true,
-    this.searcher,
+    this.searchScore,
     this.provider,
     this.searchScreenBuilder,
     this.overlayMaxWidth = 256,
@@ -31,7 +34,7 @@ class SearchField<T> extends StatelessWidget {
     this.valueBuilder,
     this.helpValueBuilder,
     this.hintText,
-    this.searcher,
+    this.searchScore,
     this.provider,
     this.searchScreenBuilder,
     this.overlayMaxWidth = 256,
@@ -50,7 +53,7 @@ class SearchField<T> extends StatelessWidget {
   final String? hintText;
   final Widget Function(Iterable<T?> values)? selectedBuilder;
   final bool showArrow;
-  final double Function(String query, T value)? searcher;
+  final double Function(String query, T value)? searchScore;
   final Widget Function({required Widget child})? provider;
   final SearchScreenDef<T>? searchScreenBuilder;
   final double overlayMaxWidth;
@@ -116,7 +119,7 @@ class SearchField<T> extends StatelessWidget {
                 child: selectedBuilderSafe(selectedValues),
               ),
               if (showArrow)
-                searcher == null
+                searchScore == null
                     ? const Icon(Icons.keyboard_arrow_down)
                     : const Icon(Icons.keyboard_arrow_right),
             ],
@@ -153,7 +156,7 @@ class SearchField<T> extends StatelessWidget {
       );
     }
 
-    if (searcher != null) {
+    if (searchScore != null) {
       Navigator.push(
         context,
         MaterialPageRoute<void>(
@@ -168,7 +171,7 @@ class SearchField<T> extends StatelessWidget {
                       Navigator.of(context).pop();
                       onSelected!(value);
                     },
-                    searcher: searcher,
+                    searchScore: searchScore,
                   ),
                 ),
               ),
@@ -180,9 +183,9 @@ class SearchField<T> extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.surfaceBright,
         constraints: BoxConstraints(
           maxWidth: overlayMaxWidth,
-          minWidth: searcher == null ? 0 : overlayMaxWidth,
+          minWidth: searchScore == null ? 0 : overlayMaxWidth,
           maxHeight: overlayMaxHeight,
-          minHeight: searcher == null ? 0 : overlayMaxHeight,
+          minHeight: searchScore == null ? 0 : overlayMaxHeight,
         ),
         bodyBuilder: (popoverContext) =>
             (provider ?? ({required Widget child}) => child)(
@@ -193,7 +196,7 @@ class SearchField<T> extends StatelessWidget {
                   Navigator.of(popoverContext).pop();
                   onSelected!(value);
                 },
-                searcher: searcher,
+                searchScore: searchScore,
               ),
             ),
       );
@@ -206,7 +209,7 @@ typedef SearchScreenDef<T> =
       required Iterable<T> values,
       required Widget Function(BuildContext context, T value) tileBuilder,
       required void Function(T value) onSelect,
-      double Function(String query, T value)? searcher,
+      double Function(String query, T value)? searchScore,
       Key? key,
     });
 
@@ -216,7 +219,7 @@ class SearchScreen<T> extends StatefulWidget {
     required this.tileBuilder,
     required this.onSelect,
     this.bottomChildren,
-    this.searcher,
+    this.searchScore,
     this.onNotFound,
     super.key,
   });
@@ -225,7 +228,7 @@ class SearchScreen<T> extends StatefulWidget {
   final Widget Function(BuildContext context, T value) tileBuilder;
   final void Function(T value) onSelect;
   final List<Widget>? bottomChildren;
-  final double Function(String query, T value)? searcher;
+  final double Function(String query, T value)? searchScore;
   final List<Widget> Function(String query)? onNotFound;
 
   @override
@@ -233,14 +236,15 @@ class SearchScreen<T> extends StatefulWidget {
 }
 
 class SearchScreenState<T> extends State<SearchScreen<T>> {
-  String query = '';
+  String rawQuery = '';
+  String cleanQuery = '';
 
   @override
   Widget build(BuildContext context) {
-    final searchResults = widget.searcher != null && query.isNotEmpty
+    final searchResults = widget.searchScore != null && cleanQuery.isNotEmpty
         ? (widget.values
                   .map(
-                    (value) => (value, widget.searcher!(query, value)),
+                    (value) => (value, widget.searchScore!(cleanQuery, value)),
                   )
                   .where((e) => e.$2 > 0)
                   .toList()
@@ -253,7 +257,7 @@ class SearchScreenState<T> extends State<SearchScreen<T>> {
       shrinkWrap: true,
       children: [
         if (searchResults.isEmpty)
-          ...?widget.onNotFound?.call(query)
+          ...?widget.onNotFound?.call(cleanQuery)
         else
           ...searchResults.map(
             (e) => InkWell(
@@ -265,7 +269,7 @@ class SearchScreenState<T> extends State<SearchScreen<T>> {
       ],
     );
 
-    return widget.searcher == null
+    return widget.searchScore == null
         ? body
         : Scaffold(
             appBar: AppBar(
@@ -274,10 +278,12 @@ class SearchScreenState<T> extends State<SearchScreen<T>> {
               title: TextField(
                 autofocus: true,
                 decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  suffixIcon: Icon(Icons.search),
+                  prefixIcon: Icon(Icons.search),
                 ),
-                onChanged: (value) => setState(() => query = value),
+                onChanged: (value) => setState(() {
+                  rawQuery = value;
+                  cleanQuery = removeDiacritics(value.toLowerCase());
+                }),
                 // Flutter's default behaviour :
                 // - web : tapping outside instantly unfocuses the field.
                 // - mobile : tapping outside does nothing.

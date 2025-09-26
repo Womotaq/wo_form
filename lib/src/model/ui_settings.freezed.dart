@@ -300,10 +300,12 @@ as BooleanFieldBuilderDef?,
 /// @nodoc
 mixin _$DateTimeInputUiSettings {
 
- String? get dateFormat; String? get timeFormat; String? get labelText; String? get helperText; String? get hintText;/// If null, header will be placed above the date selector.
-/// Else, header and selector will be in a flexible row,
-/// selector with a flex value of 10,
-/// and header with a flex value of [headerFlex].
+ String? get dateFormat; String? get timeFormat; String? get labelText; String? get helperText; String? get hintText;/// If null or O, header will be placed above the field.
+/// Else, header and selector will be in a the same row.
+/// If -1, the field will take as much space as he wants
+/// (might not work with all fields).
+/// Else, the field will be wrapped in a Flexible with a flex value of 10,
+/// and the header with a flex value of [headerFlex].
  int? get headerFlex;@notSerializable Widget? get prefixIcon; String? get addDateText; String? get addTimeText;/// If DateTimeInput.initialValue is null, this value will be used instead.
  FlexibleDateTime? get initialEditValue; DatePickerEntryMode? get initialDateEntryMode; DatePickerMode? get initialDatePickerMode; DateEditMode? get editMode;@notSerializable PickDateDef? get pickDate;@notSerializable PickTimeDef? get pickTime; TimePickerEntryMode? get initialTimeEntryMode;@notSerializable DateTimeFieldBuilderDef? get widgetBuilder;
 /// Create a copy of DateTimeInputUiSettings
@@ -406,10 +408,12 @@ class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
 @override final  String? labelText;
 @override final  String? helperText;
 @override final  String? hintText;
-/// If null, header will be placed above the date selector.
-/// Else, header and selector will be in a flexible row,
-/// selector with a flex value of 10,
-/// and header with a flex value of [headerFlex].
+/// If null or O, header will be placed above the field.
+/// Else, header and selector will be in a the same row.
+/// If -1, the field will take as much space as he wants
+/// (might not work with all fields).
+/// Else, the field will be wrapped in a Flexible with a flex value of 10,
+/// and the header with a flex value of [headerFlex].
 @override final  int? headerFlex;
 @override@notSerializable final  Widget? prefixIcon;
 @override final  String? addDateText;
@@ -516,10 +520,12 @@ $FlexibleDateTimeCopyWith<$Res>? get initialEditValue {
 /// @nodoc
 mixin _$DurationInputUiSettings {
 
- String? get labelText; String? get helperText; String? get hintText; DurationEditMode? get editMode;/// If null, header will be placed above the date selector.
-/// Else, header and selector will be in a flexible row,
-/// selector with a flex value of 10,
-/// and header with a flex value of [headerFlex].
+ String? get labelText; String? get helperText; String? get hintText; DurationEditMode? get editMode;/// If null or O, header will be placed above the field.
+/// Else, header and selector will be in a the same row.
+/// If -1, the field will take as much space as he wants
+/// (might not work with all fields).
+/// Else, the field will be wrapped in a Flexible with a flex value of 10,
+/// and the header with a flex value of [headerFlex].
  int? get headerFlex;@notSerializable PickDurationDef? get pickDuration;@notSerializable FormatDurationDef? get formatDuration;@notSerializable DurationFieldBuilderDef? get widgetBuilder;/// The following fields are used if editMode is dateTime
  String? get dateTimeLabelText; String? get dateTimeHelperText; String? get dateTimeHintText; String? get dateFormat; String? get timeFormat; DateEditMode? get dateTimeEditMode;@notSerializable PickDateDef? get pickDate;@notSerializable PickTimeDef? get pickTime;
 /// Create a copy of DurationInputUiSettings
@@ -608,10 +614,12 @@ class _DurationInputUiSettings extends DurationInputUiSettings {
 @override final  String? helperText;
 @override final  String? hintText;
 @override final  DurationEditMode? editMode;
-/// If null, header will be placed above the date selector.
-/// Else, header and selector will be in a flexible row,
-/// selector with a flex value of 10,
-/// and header with a flex value of [headerFlex].
+/// If null or O, header will be placed above the field.
+/// Else, header and selector will be in a the same row.
+/// If -1, the field will take as much space as he wants
+/// (might not work with all fields).
+/// Else, the field will be wrapped in a Flexible with a flex value of 10,
+/// and the header with a flex value of [headerFlex].
 @override final  int? headerFlex;
 @override@notSerializable final  PickDurationDef? pickDuration;
 @override@notSerializable final  FormatDurationDef? formatDuration;
@@ -1356,10 +1364,12 @@ as MediaFieldBuilderDef?,
 /// @nodoc
 mixin _$NumInputUiSettings {
 
-/// If null, header will be placed above the date selector.
-/// Else, header and selector will be in a flexible row,
-/// selector with a flex value of 10,
-/// and header with a flex value of [headerFlex].
+/// If null or O, header will be placed above the field.
+/// Else, header and selector will be in a the same row.
+/// If -1, the field will take as much space as he wants
+/// (might not work with all fields).
+/// Else, the field will be wrapped in a Flexible with a flex value of 10,
+/// and the header with a flex value of [headerFlex].
 ///
 /// Only with [NumInputStyle.slider].
  int? get headerFlex; String? get labelText; String? get helperText; NumInputStyle? get style;@notSerializable Widget? get unit;@notSerializable NumFieldBuilderDef? get widgetBuilder;
@@ -1435,10 +1445,12 @@ class _NumInputUiSettings extends NumInputUiSettings {
   const _NumInputUiSettings({this.headerFlex, this.labelText, this.helperText, this.style, @notSerializable this.unit, @notSerializable this.widgetBuilder}): super._();
   factory _NumInputUiSettings.fromJson(Map<String, dynamic> json) => _$NumInputUiSettingsFromJson(json);
 
-/// If null, header will be placed above the date selector.
-/// Else, header and selector will be in a flexible row,
-/// selector with a flex value of 10,
-/// and header with a flex value of [headerFlex].
+/// If null or O, header will be placed above the field.
+/// Else, header and selector will be in a the same row.
+/// If -1, the field will take as much space as he wants
+/// (might not work with all fields).
+/// Else, the field will be wrapped in a Flexible with a flex value of 10,
+/// and the header with a flex value of [headerFlex].
 ///
 /// Only with [NumInputStyle.slider].
 @override final  int? headerFlex;
@@ -1523,11 +1535,20 @@ mixin _$SelectInputUiSettings<T> {
  int? get flex; String? get labelText; String? get helperText; String? get hintText; ChildrenVisibility? get childrenVisibility;/// Only used when [SelectInput.maxCount] is 1
 /// and childrenVisibility is [ChildrenVisibility.whenAsked].
 ///
-/// If null, header will be placed above the selector.
-/// Else, header and selector will be in a flexible row,
-/// selector with a flex value of 10,
-/// and header with a flex value of [headerFlex].
- int? get headerFlex;@notSerializable ValueBuilderDef<T>? get valueBuilder;@notSerializable ValueBuilderDef<T>? get selectedBuilder;@notSerializable Widget? Function(T value)? get helpValueBuilder;@notSerializable double Function(String query, T value)? get searcher;@notSerializable SearchScreenDef<T>? get searchScreenBuilder;@notSerializable InputHeaderBuilderDef? get headerBuilder;@notSerializable ScoreWidgetBuilderDef? get scoreBuilder;/// Only used when childrenVisibility is always.
+/// If null or O, header will be placed above the field.
+/// Else, header and selector will be in a the same row.
+/// If -1, the field will take as much space as he wants
+/// (might not work with all fields).
+/// Else, the field will be wrapped in a Flexible with a flex value of 10,
+/// and the header with a flex value of [headerFlex].
+ int? get headerFlex;@notSerializable ValueBuilderDef<T>? get valueBuilder;@notSerializable ValueBuilderDef<T>? get selectedBuilder;@notSerializable Widget? Function(T value)? get helpValueBuilder;/// A function that calculates how well a [value] matches the search.
+///
+/// This function must return a score between 0.0 (no match) and 1.0
+/// (perfect match).
+///
+/// The [query] passed to this function is guaranteed to be lowercase and
+/// without diacritics (e.g., accents, umlauts).
+@notSerializable double Function(String query, T value)? get searchScore;@notSerializable SearchScreenDef<T>? get searchScreenBuilder;@notSerializable InputHeaderBuilderDef? get headerBuilder;@notSerializable ScoreWidgetBuilderDef? get scoreBuilder;/// Only used when childrenVisibility is always.
 @notSerializable SelectFieldTileBuilderDef<T>? get tileBuilder;@notSerializable SelectFieldBuilderDef<T>? get widgetBuilder;
 /// Create a copy of SelectInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -1541,16 +1562,16 @@ $SelectInputUiSettingsCopyWith<T, SelectInputUiSettings<T>> get copyWith => _$Se
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SelectInputUiSettings<T>&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.valueBuilder, valueBuilder) || other.valueBuilder == valueBuilder)&&(identical(other.selectedBuilder, selectedBuilder) || other.selectedBuilder == selectedBuilder)&&(identical(other.helpValueBuilder, helpValueBuilder) || other.helpValueBuilder == helpValueBuilder)&&(identical(other.searcher, searcher) || other.searcher == searcher)&&(identical(other.searchScreenBuilder, searchScreenBuilder) || other.searchScreenBuilder == searchScreenBuilder)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.scoreBuilder, scoreBuilder) || other.scoreBuilder == scoreBuilder)&&(identical(other.tileBuilder, tileBuilder) || other.tileBuilder == tileBuilder)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SelectInputUiSettings<T>&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.valueBuilder, valueBuilder) || other.valueBuilder == valueBuilder)&&(identical(other.selectedBuilder, selectedBuilder) || other.selectedBuilder == selectedBuilder)&&(identical(other.helpValueBuilder, helpValueBuilder) || other.helpValueBuilder == helpValueBuilder)&&(identical(other.searchScore, searchScore) || other.searchScore == searchScore)&&(identical(other.searchScreenBuilder, searchScreenBuilder) || other.searchScreenBuilder == searchScreenBuilder)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.scoreBuilder, scoreBuilder) || other.scoreBuilder == scoreBuilder)&&(identical(other.tileBuilder, tileBuilder) || other.tileBuilder == tileBuilder)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,flex,labelText,helperText,hintText,childrenVisibility,headerFlex,valueBuilder,selectedBuilder,helpValueBuilder,searcher,searchScreenBuilder,headerBuilder,scoreBuilder,tileBuilder,widgetBuilder);
+int get hashCode => Object.hash(runtimeType,flex,labelText,helperText,hintText,childrenVisibility,headerFlex,valueBuilder,selectedBuilder,helpValueBuilder,searchScore,searchScreenBuilder,headerBuilder,scoreBuilder,tileBuilder,widgetBuilder);
 
 @override
 String toString() {
-  return 'SelectInputUiSettings<$T>(flex: $flex, labelText: $labelText, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, headerFlex: $headerFlex, valueBuilder: $valueBuilder, selectedBuilder: $selectedBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher, searchScreenBuilder: $searchScreenBuilder, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder, tileBuilder: $tileBuilder, widgetBuilder: $widgetBuilder)';
+  return 'SelectInputUiSettings<$T>(flex: $flex, labelText: $labelText, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, headerFlex: $headerFlex, valueBuilder: $valueBuilder, selectedBuilder: $selectedBuilder, helpValueBuilder: $helpValueBuilder, searchScore: $searchScore, searchScreenBuilder: $searchScreenBuilder, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder, tileBuilder: $tileBuilder, widgetBuilder: $widgetBuilder)';
 }
 
 
@@ -1561,7 +1582,7 @@ abstract mixin class $SelectInputUiSettingsCopyWith<T,$Res>  {
   factory $SelectInputUiSettingsCopyWith(SelectInputUiSettings<T> value, $Res Function(SelectInputUiSettings<T>) _then) = _$SelectInputUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- int? flex, String? labelText, String? helperText, String? hintText, ChildrenVisibility? childrenVisibility, int? headerFlex,@notSerializable ValueBuilderDef<T>? valueBuilder,@notSerializable ValueBuilderDef<T>? selectedBuilder,@notSerializable Widget? Function(T value)? helpValueBuilder,@notSerializable double Function(String query, T value)? searcher,@notSerializable SearchScreenDef<T>? searchScreenBuilder,@notSerializable InputHeaderBuilderDef? headerBuilder,@notSerializable ScoreWidgetBuilderDef? scoreBuilder,@notSerializable SelectFieldTileBuilderDef<T>? tileBuilder,@notSerializable SelectFieldBuilderDef<T>? widgetBuilder
+ int? flex, String? labelText, String? helperText, String? hintText, ChildrenVisibility? childrenVisibility, int? headerFlex,@notSerializable ValueBuilderDef<T>? valueBuilder,@notSerializable ValueBuilderDef<T>? selectedBuilder,@notSerializable Widget? Function(T value)? helpValueBuilder,@notSerializable double Function(String query, T value)? searchScore,@notSerializable SearchScreenDef<T>? searchScreenBuilder,@notSerializable InputHeaderBuilderDef? headerBuilder,@notSerializable ScoreWidgetBuilderDef? scoreBuilder,@notSerializable SelectFieldTileBuilderDef<T>? tileBuilder,@notSerializable SelectFieldBuilderDef<T>? widgetBuilder
 });
 
 
@@ -1578,7 +1599,7 @@ class _$SelectInputUiSettingsCopyWithImpl<T,$Res>
 
 /// Create a copy of SelectInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? flex = freezed,Object? labelText = freezed,Object? helperText = freezed,Object? hintText = freezed,Object? childrenVisibility = freezed,Object? headerFlex = freezed,Object? valueBuilder = freezed,Object? selectedBuilder = freezed,Object? helpValueBuilder = freezed,Object? searcher = freezed,Object? searchScreenBuilder = freezed,Object? headerBuilder = freezed,Object? scoreBuilder = freezed,Object? tileBuilder = freezed,Object? widgetBuilder = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? flex = freezed,Object? labelText = freezed,Object? helperText = freezed,Object? hintText = freezed,Object? childrenVisibility = freezed,Object? headerFlex = freezed,Object? valueBuilder = freezed,Object? selectedBuilder = freezed,Object? helpValueBuilder = freezed,Object? searchScore = freezed,Object? searchScreenBuilder = freezed,Object? headerBuilder = freezed,Object? scoreBuilder = freezed,Object? tileBuilder = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_self.copyWith(
 flex: freezed == flex ? _self.flex : flex // ignore: cast_nullable_to_non_nullable
 as int?,labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
@@ -1589,7 +1610,7 @@ as ChildrenVisibility?,headerFlex: freezed == headerFlex ? _self.headerFlex : he
 as int?,valueBuilder: freezed == valueBuilder ? _self.valueBuilder : valueBuilder // ignore: cast_nullable_to_non_nullable
 as ValueBuilderDef<T>?,selectedBuilder: freezed == selectedBuilder ? _self.selectedBuilder : selectedBuilder // ignore: cast_nullable_to_non_nullable
 as ValueBuilderDef<T>?,helpValueBuilder: freezed == helpValueBuilder ? _self.helpValueBuilder : helpValueBuilder // ignore: cast_nullable_to_non_nullable
-as Widget? Function(T value)?,searcher: freezed == searcher ? _self.searcher : searcher // ignore: cast_nullable_to_non_nullable
+as Widget? Function(T value)?,searchScore: freezed == searchScore ? _self.searchScore : searchScore // ignore: cast_nullable_to_non_nullable
 as double Function(String query, T value)?,searchScreenBuilder: freezed == searchScreenBuilder ? _self.searchScreenBuilder : searchScreenBuilder // ignore: cast_nullable_to_non_nullable
 as SearchScreenDef<T>?,headerBuilder: freezed == headerBuilder ? _self.headerBuilder : headerBuilder // ignore: cast_nullable_to_non_nullable
 as InputHeaderBuilderDef?,scoreBuilder: freezed == scoreBuilder ? _self.scoreBuilder : scoreBuilder // ignore: cast_nullable_to_non_nullable
@@ -1607,7 +1628,7 @@ as SelectFieldBuilderDef<T>?,
 @JsonSerializable()
 
 class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
-  const _SelectInputUiSettings({this.flex, this.labelText, this.helperText, this.hintText, this.childrenVisibility, this.headerFlex, @notSerializable this.valueBuilder, @notSerializable this.selectedBuilder, @notSerializable this.helpValueBuilder, @notSerializable this.searcher, @notSerializable this.searchScreenBuilder, @notSerializable this.headerBuilder, @notSerializable this.scoreBuilder, @notSerializable this.tileBuilder, @notSerializable this.widgetBuilder}): super._();
+  const _SelectInputUiSettings({this.flex, this.labelText, this.helperText, this.hintText, this.childrenVisibility, this.headerFlex, @notSerializable this.valueBuilder, @notSerializable this.selectedBuilder, @notSerializable this.helpValueBuilder, @notSerializable this.searchScore, @notSerializable this.searchScreenBuilder, @notSerializable this.headerBuilder, @notSerializable this.scoreBuilder, @notSerializable this.tileBuilder, @notSerializable this.widgetBuilder}): super._();
   factory _SelectInputUiSettings.fromJson(Map<String, dynamic> json) => _$SelectInputUiSettingsFromJson(json);
 
 /// If flex is higher than 0, the default widget will use ListView.builder.
@@ -1621,15 +1642,24 @@ class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
 /// Only used when [SelectInput.maxCount] is 1
 /// and childrenVisibility is [ChildrenVisibility.whenAsked].
 ///
-/// If null, header will be placed above the selector.
-/// Else, header and selector will be in a flexible row,
-/// selector with a flex value of 10,
-/// and header with a flex value of [headerFlex].
+/// If null or O, header will be placed above the field.
+/// Else, header and selector will be in a the same row.
+/// If -1, the field will take as much space as he wants
+/// (might not work with all fields).
+/// Else, the field will be wrapped in a Flexible with a flex value of 10,
+/// and the header with a flex value of [headerFlex].
 @override final  int? headerFlex;
 @override@notSerializable final  ValueBuilderDef<T>? valueBuilder;
 @override@notSerializable final  ValueBuilderDef<T>? selectedBuilder;
 @override@notSerializable final  Widget? Function(T value)? helpValueBuilder;
-@override@notSerializable final  double Function(String query, T value)? searcher;
+/// A function that calculates how well a [value] matches the search.
+///
+/// This function must return a score between 0.0 (no match) and 1.0
+/// (perfect match).
+///
+/// The [query] passed to this function is guaranteed to be lowercase and
+/// without diacritics (e.g., accents, umlauts).
+@override@notSerializable final  double Function(String query, T value)? searchScore;
 @override@notSerializable final  SearchScreenDef<T>? searchScreenBuilder;
 @override@notSerializable final  InputHeaderBuilderDef? headerBuilder;
 @override@notSerializable final  ScoreWidgetBuilderDef? scoreBuilder;
@@ -1650,16 +1680,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SelectInputUiSettings<T>&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.valueBuilder, valueBuilder) || other.valueBuilder == valueBuilder)&&(identical(other.selectedBuilder, selectedBuilder) || other.selectedBuilder == selectedBuilder)&&(identical(other.helpValueBuilder, helpValueBuilder) || other.helpValueBuilder == helpValueBuilder)&&(identical(other.searcher, searcher) || other.searcher == searcher)&&(identical(other.searchScreenBuilder, searchScreenBuilder) || other.searchScreenBuilder == searchScreenBuilder)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.scoreBuilder, scoreBuilder) || other.scoreBuilder == scoreBuilder)&&(identical(other.tileBuilder, tileBuilder) || other.tileBuilder == tileBuilder)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SelectInputUiSettings<T>&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.valueBuilder, valueBuilder) || other.valueBuilder == valueBuilder)&&(identical(other.selectedBuilder, selectedBuilder) || other.selectedBuilder == selectedBuilder)&&(identical(other.helpValueBuilder, helpValueBuilder) || other.helpValueBuilder == helpValueBuilder)&&(identical(other.searchScore, searchScore) || other.searchScore == searchScore)&&(identical(other.searchScreenBuilder, searchScreenBuilder) || other.searchScreenBuilder == searchScreenBuilder)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.scoreBuilder, scoreBuilder) || other.scoreBuilder == scoreBuilder)&&(identical(other.tileBuilder, tileBuilder) || other.tileBuilder == tileBuilder)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,flex,labelText,helperText,hintText,childrenVisibility,headerFlex,valueBuilder,selectedBuilder,helpValueBuilder,searcher,searchScreenBuilder,headerBuilder,scoreBuilder,tileBuilder,widgetBuilder);
+int get hashCode => Object.hash(runtimeType,flex,labelText,helperText,hintText,childrenVisibility,headerFlex,valueBuilder,selectedBuilder,helpValueBuilder,searchScore,searchScreenBuilder,headerBuilder,scoreBuilder,tileBuilder,widgetBuilder);
 
 @override
 String toString() {
-  return 'SelectInputUiSettings<$T>(flex: $flex, labelText: $labelText, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, headerFlex: $headerFlex, valueBuilder: $valueBuilder, selectedBuilder: $selectedBuilder, helpValueBuilder: $helpValueBuilder, searcher: $searcher, searchScreenBuilder: $searchScreenBuilder, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder, tileBuilder: $tileBuilder, widgetBuilder: $widgetBuilder)';
+  return 'SelectInputUiSettings<$T>(flex: $flex, labelText: $labelText, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, headerFlex: $headerFlex, valueBuilder: $valueBuilder, selectedBuilder: $selectedBuilder, helpValueBuilder: $helpValueBuilder, searchScore: $searchScore, searchScreenBuilder: $searchScreenBuilder, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder, tileBuilder: $tileBuilder, widgetBuilder: $widgetBuilder)';
 }
 
 
@@ -1670,7 +1700,7 @@ abstract mixin class _$SelectInputUiSettingsCopyWith<T,$Res> implements $SelectI
   factory _$SelectInputUiSettingsCopyWith(_SelectInputUiSettings<T> value, $Res Function(_SelectInputUiSettings<T>) _then) = __$SelectInputUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- int? flex, String? labelText, String? helperText, String? hintText, ChildrenVisibility? childrenVisibility, int? headerFlex,@notSerializable ValueBuilderDef<T>? valueBuilder,@notSerializable ValueBuilderDef<T>? selectedBuilder,@notSerializable Widget? Function(T value)? helpValueBuilder,@notSerializable double Function(String query, T value)? searcher,@notSerializable SearchScreenDef<T>? searchScreenBuilder,@notSerializable InputHeaderBuilderDef? headerBuilder,@notSerializable ScoreWidgetBuilderDef? scoreBuilder,@notSerializable SelectFieldTileBuilderDef<T>? tileBuilder,@notSerializable SelectFieldBuilderDef<T>? widgetBuilder
+ int? flex, String? labelText, String? helperText, String? hintText, ChildrenVisibility? childrenVisibility, int? headerFlex,@notSerializable ValueBuilderDef<T>? valueBuilder,@notSerializable ValueBuilderDef<T>? selectedBuilder,@notSerializable Widget? Function(T value)? helpValueBuilder,@notSerializable double Function(String query, T value)? searchScore,@notSerializable SearchScreenDef<T>? searchScreenBuilder,@notSerializable InputHeaderBuilderDef? headerBuilder,@notSerializable ScoreWidgetBuilderDef? scoreBuilder,@notSerializable SelectFieldTileBuilderDef<T>? tileBuilder,@notSerializable SelectFieldBuilderDef<T>? widgetBuilder
 });
 
 
@@ -1687,7 +1717,7 @@ class __$SelectInputUiSettingsCopyWithImpl<T,$Res>
 
 /// Create a copy of SelectInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? flex = freezed,Object? labelText = freezed,Object? helperText = freezed,Object? hintText = freezed,Object? childrenVisibility = freezed,Object? headerFlex = freezed,Object? valueBuilder = freezed,Object? selectedBuilder = freezed,Object? helpValueBuilder = freezed,Object? searcher = freezed,Object? searchScreenBuilder = freezed,Object? headerBuilder = freezed,Object? scoreBuilder = freezed,Object? tileBuilder = freezed,Object? widgetBuilder = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? flex = freezed,Object? labelText = freezed,Object? helperText = freezed,Object? hintText = freezed,Object? childrenVisibility = freezed,Object? headerFlex = freezed,Object? valueBuilder = freezed,Object? selectedBuilder = freezed,Object? helpValueBuilder = freezed,Object? searchScore = freezed,Object? searchScreenBuilder = freezed,Object? headerBuilder = freezed,Object? scoreBuilder = freezed,Object? tileBuilder = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_SelectInputUiSettings<T>(
 flex: freezed == flex ? _self.flex : flex // ignore: cast_nullable_to_non_nullable
 as int?,labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
@@ -1698,7 +1728,7 @@ as ChildrenVisibility?,headerFlex: freezed == headerFlex ? _self.headerFlex : he
 as int?,valueBuilder: freezed == valueBuilder ? _self.valueBuilder : valueBuilder // ignore: cast_nullable_to_non_nullable
 as ValueBuilderDef<T>?,selectedBuilder: freezed == selectedBuilder ? _self.selectedBuilder : selectedBuilder // ignore: cast_nullable_to_non_nullable
 as ValueBuilderDef<T>?,helpValueBuilder: freezed == helpValueBuilder ? _self.helpValueBuilder : helpValueBuilder // ignore: cast_nullable_to_non_nullable
-as Widget? Function(T value)?,searcher: freezed == searcher ? _self.searcher : searcher // ignore: cast_nullable_to_non_nullable
+as Widget? Function(T value)?,searchScore: freezed == searchScore ? _self.searchScore : searchScore // ignore: cast_nullable_to_non_nullable
 as double Function(String query, T value)?,searchScreenBuilder: freezed == searchScreenBuilder ? _self.searchScreenBuilder : searchScreenBuilder // ignore: cast_nullable_to_non_nullable
 as SearchScreenDef<T>?,headerBuilder: freezed == headerBuilder ? _self.headerBuilder : headerBuilder // ignore: cast_nullable_to_non_nullable
 as InputHeaderBuilderDef?,scoreBuilder: freezed == scoreBuilder ? _self.scoreBuilder : scoreBuilder // ignore: cast_nullable_to_non_nullable
@@ -1715,10 +1745,12 @@ as SelectFieldBuilderDef<T>?,
 /// @nodoc
 mixin _$StringInputUiSettings {
 
-/// If null, header will be placed above the field.
-/// Else, header and field will be in a flexible row,
-/// selector with a flex value of 10,
-/// and header with a flex value of [headerFlex].
+/// If null or O, header will be placed above the field.
+/// Else, header and selector will be in a the same row.
+/// If -1, the field will take as much space as he wants
+/// (might not work with all fields).
+/// Else, the field will be wrapped in a Flexible with a flex value of 10,
+/// and the header with a flex value of [headerFlex].
 ///
 /// Only used when [labelLocation] is [StringFieldLocation.outside].
  int? get headerFlex; String? get labelText;/// Default to StringFieldLocation.inside
@@ -1821,10 +1853,12 @@ class _StringInputUiSettings extends StringInputUiSettings {
   const _StringInputUiSettings({this.headerFlex, this.labelText, this.labelLocation, this.hintText, this.helperText, this.helperMaxLines, @notSerializable this.helper, this.helperLocation, @notSerializable this.prefixIcon, this.prefixIconLocation, this.errorLocation, this.action, this.submitFormOnFieldSubmitted, @TextInputTypeConverter() this.keyboardType, this.obscureText, this.autocorrect, final  List<String>? autofillHints, this.autofocus, this.textInputAction, this.textCapitalization, this.maxLines, this.invalidRegexMessage, this.collapsed, @notSerializable this.style, @notSerializable this.widgetBuilder, @notSerializable this.errorBuilder}): _autofillHints = autofillHints,super._();
   factory _StringInputUiSettings.fromJson(Map<String, dynamic> json) => _$StringInputUiSettingsFromJson(json);
 
-/// If null, header will be placed above the field.
-/// Else, header and field will be in a flexible row,
-/// selector with a flex value of 10,
-/// and header with a flex value of [headerFlex].
+/// If null or O, header will be placed above the field.
+/// Else, header and selector will be in a the same row.
+/// If -1, the field will take as much space as he wants
+/// (might not work with all fields).
+/// Else, the field will be wrapped in a Flexible with a flex value of 10,
+/// and the header with a flex value of [headerFlex].
 ///
 /// Only used when [labelLocation] is [StringFieldLocation.outside].
 @override final  int? headerFlex;
