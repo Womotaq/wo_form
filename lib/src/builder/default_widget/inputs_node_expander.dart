@@ -20,9 +20,17 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
   @override
   void initState() {
     if (widget.data.uiSettings.showChildrenInitially ?? false) {
-      SchedulerBinding.instance.addPostFrameCallback(
-        (_) => mounted ? openChildren(context) : null,
-      );
+      final valuesCubit = context.read<WoFormValuesCubit>();
+      if (!valuesCubit.state.inputsNodeShownChildrenInitially(
+        widget.data.path,
+      )) {
+        /// Registering prevents nwanted reopenings, like when the context
+        /// containing the InputsNode is popped and then rebuilt.
+        valuesCubit.inputsNodeShowingChildrenInitially(widget.data.path);
+        SchedulerBinding.instance.addPostFrameCallback(
+          (_) => mounted ? openChildren(context) : null,
+        );
+      }
     }
 
     super.initState();
@@ -55,15 +63,9 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
       value: context.read<RootNode>(),
       child: MultiBlocProvider(
         providers: [
-          BlocProvider.value(
-            value: context.read<WoFormValuesCubit>(),
-          ),
-          BlocProvider.value(
-            value: context.read<WoFormStatusCubit>(),
-          ),
-          BlocProvider.value(
-            value: context.read<WoFormLockCubit>(),
-          ),
+          BlocProvider.value(value: context.read<WoFormValuesCubit>()),
+          BlocProvider.value(value: context.read<WoFormStatusCubit>()),
+          BlocProvider.value(value: context.read<WoFormLockCubit>()),
         ],
         child: _InputsNodePage(
           data: widget.data,
