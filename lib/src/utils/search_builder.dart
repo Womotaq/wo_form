@@ -136,4 +136,20 @@ class WoFormQuery {
 
   /// Return a string adapted to querying
   static String toQuery(String str) => removeDiacritics(str.toLowerCase());
+
+  /// Default method that returns a search score for a given [text].
+  double searchScore(String? text) {
+    if (text == null) return 0;
+    final cleanText = WoFormQuery.toQuery(text);
+
+    if (cleanText == clean) return 1;
+    if (cleanText.startsWith(clean)) return .9;
+    if (cleanText.contains(clean)) return .8;
+
+    for (final queryWord in clean.split(' ')) {
+      if (cleanText.contains(queryWord)) return .7;
+    }
+
+    return 0;
+  }
 }

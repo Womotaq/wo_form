@@ -487,9 +487,9 @@ _WoFormUiSettings _$WoFormUiSettingsFromJson(Map<String, dynamic> json) =>
       padding: const EdgeInsetsNullableConverter().fromJson(
         json['padding'] as Map<String, dynamic>?,
       ),
-      bodyLayout:
-          $enumDecodeNullable(_$WoFormBodyLayoutEnumMap, json['bodyLayout']) ??
-          WoFormBodyLayout.scrollable,
+      layout:
+          $enumDecodeNullable(_$LayoutMethodEnumMap, json['layout']) ??
+          LayoutMethod.scrollable,
       presentation:
           $enumDecodeNullable(
             _$WoFormPresentationEnumMap,
@@ -512,7 +512,7 @@ Map<String, dynamic> _$WoFormUiSettingsToJson(_WoFormUiSettings instance) =>
       'showErrors': _$ShowErrorsEnumMap[instance.showErrors]!,
       'theme': instance.theme?.toJson(),
       'padding': const EdgeInsetsNullableConverter().toJson(instance.padding),
-      'bodyLayout': _$WoFormBodyLayoutEnumMap[instance.bodyLayout]!,
+      'layout': _$LayoutMethodEnumMap[instance.layout]!,
       'presentation': _$WoFormPresentationEnumMap[instance.presentation]!,
     };
 
@@ -540,10 +540,10 @@ const _$ShowErrorsEnumMap = {
   ShowErrors.progressively: 'progressively',
 };
 
-const _$WoFormBodyLayoutEnumMap = {
-  WoFormBodyLayout.scrollable: 'scrollable',
-  WoFormBodyLayout.shrinkWrap: 'shrinkWrap',
-  WoFormBodyLayout.flexible: 'flexible',
+const _$LayoutMethodEnumMap = {
+  LayoutMethod.scrollable: 'scrollable',
+  LayoutMethod.shrinkWrap: 'shrinkWrap',
+  LayoutMethod.flexible: 'flexible',
 };
 
 const _$WoFormPresentationEnumMap = {

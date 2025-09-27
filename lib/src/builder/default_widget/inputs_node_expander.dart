@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wo_form/src/utils/show_modal.dart';
 import 'package:wo_form/wo_form.dart';
 
 class InputsNodeExpander extends StatefulWidget {
@@ -9,6 +8,7 @@ class InputsNodeExpander extends StatefulWidget {
 
   const InputsNodeExpander.modal(this.data, {super.key}) : isModal = true;
 
+  // TODO InputsNodeUiSettings.openChildren
   final WoFieldData<InputsNode, void, InputsNodeUiSettings> data;
   final bool isModal;
 
@@ -62,10 +62,10 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
     final root = context.read<RootNode>();
     final tweakedRoot = root.copyWith(
       uiSettings: root.uiSettings.copyWith(
-        bodyLayout: switch (widget.data.uiSettings.flex) {
-          null => WoFormBodyLayout.scrollable,
-          0 => WoFormBodyLayout.shrinkWrap,
-          _ => WoFormBodyLayout.flexible,
+        layout: switch (widget.data.uiSettings.flex) {
+          null => LayoutMethod.scrollable,
+          0 => LayoutMethod.shrinkWrap,
+          _ => LayoutMethod.flexible,
         },
       ),
     );
@@ -86,16 +86,16 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
     );
 
     if (widget.isModal) {
-      return showModal(
+      return Push.modalBottomSheet(
         context: context,
         child: childrenWidget,
-        layout: tweakedRoot.uiSettings.bodyLayout,
+        layout: tweakedRoot.uiSettings.layout,
         // (widget.data.uiSettings.flex ?? 0) == 0,
       );
     } else {
-      return Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => childrenWidget),
+      return Push.page(
+        context: context,
+        child: childrenWidget,
       );
     }
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:popover/popover.dart';
+import 'package:wo_form/src/utils/shrinkable_scaffold.dart';
 import 'package:wo_form/wo_form.dart';
 
 // TODO : use SearchBuilder
@@ -16,9 +16,9 @@ class SearchField<T> extends StatelessWidget {
     this.showArrow = true,
     this.searchScore,
     this.provider,
+    this.searchScreenLayout = LayoutMethod.scrollable,
     this.searchScreenBuilder,
-    this.overlayMaxWidth = 256,
-    this.overlayMaxHeight = 384,
+    this.openSearchScreen,
     super.key,
   }) : _builder = null,
        selectedValues = [selectedValue],
@@ -36,9 +36,9 @@ class SearchField<T> extends StatelessWidget {
     this.hintText,
     this.searchScore,
     this.provider,
+    this.searchScreenLayout = LayoutMethod.scrollable,
     this.searchScreenBuilder,
-    this.overlayMaxWidth = 256,
-    this.overlayMaxHeight = 384,
+    this.openSearchScreen,
     super.key,
   }) : selectedBuilder = ((_) => const SizedBox.shrink()),
        _builder = builder,
@@ -55,9 +55,9 @@ class SearchField<T> extends StatelessWidget {
   final bool showArrow;
   final double Function(WoFormQuery query, T value)? searchScore;
   final Widget Function({required Widget child})? provider;
+  final LayoutMethod searchScreenLayout;
   final SearchScreenDef<T>? searchScreenBuilder;
-  final double overlayMaxWidth;
-  final double overlayMaxHeight;
+  final PushDef? openSearchScreen;
 
   @override
   Widget build(BuildContext context) {
@@ -118,10 +118,7 @@ class SearchField<T> extends StatelessWidget {
               Expanded(
                 child: selectedBuilderSafe(selectedValues),
               ),
-              if (showArrow)
-                searchScore == null
-                    ? const Icon(Icons.keyboard_arrow_down)
-                    : const Icon(Icons.keyboard_arrow_right),
+              if (showArrow) const Icon(Icons.keyboard_arrow_down),
             ],
           ),
         ),
@@ -156,52 +153,39 @@ class SearchField<T> extends StatelessWidget {
       );
     }
 
-    if (searchScore != null) {
-      Navigator.push(
-        context,
-        MaterialPageRoute<void>(
-          builder: (context) =>
-              (provider ?? ({required Widget child}) => child)(
-                child: Scaffold(
-                  appBar: AppBar(),
-                  body: (searchScreenBuilder ?? SearchScreen.new).call(
-                    values: values,
-                    tileBuilder: tileBuilder,
-                    onSelect: (value) {
-                      Navigator.of(context).pop();
-                      onSelected!(value);
-                    },
-                    searchScore: searchScore,
-                  ),
-                ),
-              ),
+    final searchScreen = Builder(
+      builder: (context) => (provider ?? ({required Widget child}) => child)(
+        child: (searchScreenBuilder ?? SearchScreen.new).call(
+          values: values,
+          tileBuilder: tileBuilder,
+          onSelect: (value) {
+            Navigator.of(context).pop();
+            onSelected!(value);
+          },
+          searchScore: searchScore,
+          layout: searchScreenLayout,
         ),
-      );
-    } else {
-      showPopover(
-        context: context,
-        backgroundColor: Theme.of(context).colorScheme.surfaceBright,
-        constraints: BoxConstraints(
-          maxWidth: overlayMaxWidth,
-          minWidth: searchScore == null ? 0 : overlayMaxWidth,
-          maxHeight: overlayMaxHeight,
-          minHeight: searchScore == null ? 0 : overlayMaxHeight,
-        ),
-        bodyBuilder: (popoverContext) =>
-            (provider ?? ({required Widget child}) => child)(
-              child: (searchScreenBuilder ?? SearchScreen.new).call(
-                values: values,
-                tileBuilder: tileBuilder,
-                onSelect: (value) {
-                  Navigator.of(popoverContext).pop();
-                  onSelected!(value);
-                },
-                searchScore: searchScore,
-              ),
-            ),
-      );
-    }
+      ),
+    );
+
+    (openSearchScreen ??
+        (searchScore == null ? Push.menu : _fullscreenModalBottomSheet))(
+      context: context,
+      child: searchScreen,
+      layout: searchScreenLayout,
+    );
   }
+
+  Future<V?> _fullscreenModalBottomSheet<V extends Object?>({
+    required BuildContext context,
+    required Widget child,
+    LayoutMethod layout = LayoutMethod.scrollable,
+  }) => Push.modalBottomSheet(
+    context: context,
+    child: child,
+    layout: layout,
+    initialBottomSheetSize: .9,
+  );
 }
 
 typedef SearchScreenDef<T> =
@@ -210,6 +194,7 @@ typedef SearchScreenDef<T> =
       required Widget Function(BuildContext context, T value) tileBuilder,
       required void Function(T value) onSelect,
       double Function(WoFormQuery query, T value)? searchScore,
+      LayoutMethod layout,
       Key? key,
     });
 
@@ -220,6 +205,7 @@ class SearchScreen<T> extends StatefulWidget {
     required this.onSelect,
     this.bottomChildren,
     this.searchScore,
+    this.layout = LayoutMethod.scrollable,
     this.onNotFound,
     super.key,
   });
@@ -229,6 +215,7 @@ class SearchScreen<T> extends StatefulWidget {
   final void Function(T value) onSelect;
   final List<Widget>? bottomChildren;
   final double Function(WoFormQuery query, T value)? searchScore;
+  final LayoutMethod layout;
   final List<Widget> Function(WoFormQuery query)? onNotFound;
 
   @override
@@ -236,24 +223,26 @@ class SearchScreen<T> extends StatefulWidget {
 }
 
 class SearchScreenState<T> extends State<SearchScreen<T>> {
+  // TODO : clear query button
   WoFormQuery query = WoFormQuery('');
 
   @override
   Widget build(BuildContext context) {
     final searchResults = widget.searchScore != null && query.clean.isNotEmpty
         ? (widget.values
-                  .map(
-                    (value) => (value, widget.searchScore!(query, value)),
-                  )
+                  .map((value) => (value, widget.searchScore!(query, value)))
                   .where((e) => e.$2 > 0)
                   .toList()
                 ..sort((e1, e2) => e2.$2.compareTo(e1.$2)))
               .map((e) => e.$1)
         : widget.values;
 
+    final scrollController = ScrollControllerProvider.of(context);
+
     final body = ListView(
       padding: EdgeInsets.zero,
-      shrinkWrap: true,
+      controller: scrollController,
+      shrinkWrap: widget.layout == LayoutMethod.shrinkWrap,
       children: [
         if (searchResults.isEmpty)
           ...?widget.onNotFound?.call(query)
@@ -270,23 +259,20 @@ class SearchScreenState<T> extends State<SearchScreen<T>> {
 
     return widget.searchScore == null
         ? body
-        : Scaffold(
-            appBar: AppBar(
-              automaticallyImplyLeading: false,
-              toolbarHeight: 56 + 32,
-              title: TextField(
-                autofocus: true,
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.search),
-                ),
-                onChanged: (value) =>
-                    setState(() => query = WoFormQuery(value)),
-                // Flutter's default behaviour :
-                // - web : tapping outside instantly unfocuses the field.
-                // - mobile : tapping outside does nothing.
-                // wo_form decided to unfocus search fields on tap down.
-                onTapOutside: (event) => FocusScope.of(context).unfocus(),
+        : ShrinkableScaffold(
+            shrinkWrap: widget.layout == LayoutMethod.shrinkWrap,
+            appBarHeight: 56 + 32,
+            appBarTitle: TextField(
+              autofocus: true,
+              decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.search),
               ),
+              onChanged: (value) => setState(() => query = WoFormQuery(value)),
+              // Flutter's default behaviour :
+              // - web : tapping outside instantly unfocuses the field.
+              // - mobile : tapping outside does nothing.
+              // wo_form decided to unfocus search fields on tap down.
+              onTapOutside: (event) => FocusScope.of(context).unfocus(),
             ),
             body: body,
           );

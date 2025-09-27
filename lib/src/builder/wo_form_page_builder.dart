@@ -51,7 +51,7 @@ class _WoFormStandardBody extends StatelessWidget {
           ),
         Flexible(
           flex:
-              !root.uiSettings.bodyLayout.supportFlex ||
+              !root.uiSettings.layout.supportFlex ||
                   root.children.every(
                     (child) => (child.flex(context) ?? 0) == 0,
                   )
@@ -63,7 +63,7 @@ class _WoFormStandardBody extends StatelessWidget {
             children: root.children
                 .map(
                   (child) => Flexible(
-                    flex: root.uiSettings.bodyLayout.supportFlex
+                    flex: root.uiSettings.layout.supportFlex
                         ? child.flex(context) ?? 0
                         : 0,
                     child: child.toWidget(parentPath: ''),
@@ -83,7 +83,7 @@ class _WoFormStandardBody extends StatelessWidget {
         constraints: BoxConstraints(
           maxWidth: woFormTheme?.maxWidth ?? WoFormThemeData.DEFAULT_MAX_WIDTH,
         ),
-        child: root.uiSettings.bodyLayout.isScrollable
+        child: root.uiSettings.layout.isScrollable
             ? SingleChildScrollView(
                 controller: scrollController,
                 child: column,
@@ -230,11 +230,11 @@ class _WoFormMultistepBodyState extends State<_WoFormMultistepBody> {
                 children: [
                   Expanded(
                     flex:
-                        root.uiSettings.bodyLayout.supportFlex &&
+                        root.uiSettings.layout.supportFlex &&
                             (step.flex(context) ?? 0) == 0
                         ? 0
                         : 1,
-                    child: root.uiSettings.bodyLayout.isScrollable
+                    child: root.uiSettings.layout.isScrollable
                         ? SingleChildScrollView(
                             controller: scrollController,
                             child: stepWidget,

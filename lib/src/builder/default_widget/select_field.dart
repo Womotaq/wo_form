@@ -69,7 +69,9 @@ class SelectField<T> extends StatelessWidget {
             helpValueBuilder: data.uiSettings.helpValueBuilder,
             hintText: data.uiSettings.hintText,
             searchScore: data.uiSettings.searchScore,
+            searchScreenLayout: LayoutMethod.fromFlex(data.uiSettings.flex),
             searchScreenBuilder: data.uiSettings.searchScreenBuilder,
+            openSearchScreen: data.uiSettings.openChildren,
             provider: ({required child}) => RepositoryProvider.value(
               value: context.read<RootNode>(),
               child: MultiBlocProvider(
@@ -123,7 +125,11 @@ class SelectField<T> extends StatelessWidget {
                   helpValueBuilder: data.uiSettings.helpValueBuilder,
                   hintText: data.uiSettings.hintText,
                   searchScore: data.uiSettings.searchScore,
+                  searchScreenLayout: LayoutMethod.fromFlex(
+                    data.uiSettings.flex,
+                  ),
                   searchScreenBuilder: data.uiSettings.searchScreenBuilder,
+                  openSearchScreen: data.uiSettings.openChildren,
                   builder: (onPressed) => IconButton.filled(
                     onPressed: onPressed,
                     icon: const Icon(Icons.add),

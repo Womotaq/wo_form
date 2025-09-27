@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wo_form/src/utils/show_modal.dart';
+import 'package:wo_form/src/utils/extensions.dart';
 import 'package:wo_form/wo_form.dart';
 
 extension OpenForm on BuildContext {
@@ -8,7 +8,7 @@ extension OpenForm on BuildContext {
     double initialBottomSheetSize = .7,
     bool showDragHandle = false,
   }) => switch (form.root.uiSettings.presentation) {
-    WoFormPresentation.page => _pushPage(form),
+    WoFormPresentation.page => pushPage(form),
     WoFormPresentation.dialog ||
     WoFormPresentation.bottomSheet => _showWoFormModal(
       context: this,
@@ -17,11 +17,6 @@ extension OpenForm on BuildContext {
       showDragHandle: showDragHandle,
     ),
   };
-
-  Future<T?> _pushPage<T extends Object?>(Widget page) => Navigator.push(
-    this,
-    MaterialPageRoute<T>(builder: (_) => page),
-  );
 }
 
 /// TODO : implement dialog support
@@ -49,12 +44,12 @@ Future<T?> _showWoFormModal<T extends Object?>({
       ),
     );
   } else {
-    return showModal(
+    return Push.modalBottomSheet(
       context: context,
       child: form,
       layout: form.root.uiSettings.multistepSettings != null
-          ? WoFormBodyLayout.flexible
-          : form.root.uiSettings.bodyLayout,
+          ? LayoutMethod.flexible
+          : form.root.uiSettings.layout,
       initialBottomSheetSize: initialBottomSheetSize,
       showDragHandle: showDragHandle,
     );

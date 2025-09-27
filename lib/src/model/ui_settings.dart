@@ -12,7 +12,7 @@ part 'ui_settings.g.dart';
 @freezed
 abstract class InputUiSettings with _$InputUiSettings {
   const factory InputUiSettings({
-    /// Requires [WoFormUiSettings.bodyLayout] at [WoFormBodyLayout.flexible].
+    /// Requires [WoFormUiSettings.layout] at [LayoutMethod.flexible].
     int? flex,
   }) = _InputUiSettings;
 
@@ -321,13 +321,13 @@ typedef HeaderBuilderDef = Widget Function(WoFormHeaderData data);
 @freezed
 abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
   const factory InputsNodeUiSettings({
-    /// Requires [WoFormUiSettings.bodyLayout] at [WoFormBodyLayout.flexible].
+    /// Requires [WoFormUiSettings.layout] at [LayoutMethod.flexible].
     ///
     /// When [ChildrenVisibility.whenAsked], this field determines the layout
     /// of the new context :
-    /// - null : [WoFormBodyLayout.scrollable]
-    /// - 0 : [WoFormBodyLayout.shrinkWrap]
-    /// - 1 and more : [WoFormBodyLayout.flexible]
+    /// - null : [LayoutMethod.scrollable]
+    /// - 0 : [LayoutMethod.shrinkWrap]
+    /// - 1 and more : [LayoutMethod.flexible]
     int? flex,
 
     /// If flex is higher than 0, the default widget will use ListView.builder.
@@ -495,9 +495,13 @@ typedef ValueBuilderDef<T> = Widget Function(T? value);
 @freezed
 abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
   const factory SelectInputUiSettings({
-    /// If flex is higher than 0, the default widget will use ListView.builder.
+    /// When [childrenVisibility] is [ChildrenVisibility.always] or null, if
+    /// flex is higher than 0, the default widget will use ListView.builder.
+    /// Requires [WoFormUiSettings.layout] at [LayoutMethod.flexible].
     ///
-    /// Requires [WoFormUiSettings.bodyLayout] at [WoFormBodyLayout.flexible].
+    /// When [childrenVisibility] is [ChildrenVisibility.whenAsked],
+    /// if flex is 0, the items will be shrinkWrap-ed. Else, they will be in
+    /// a scrollable context.
     int? flex,
     String? labelText,
     String? helperText,
@@ -527,6 +531,7 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
     /// without diacritics (e.g., accents, umlauts).
     @notSerializable double Function(WoFormQuery query, T value)? searchScore,
     @notSerializable SearchScreenDef<T>? searchScreenBuilder,
+    @notSerializable PushDef? openChildren,
     @notSerializable InputHeaderBuilderDef? headerBuilder,
     @notSerializable ScoreWidgetBuilderDef? scoreBuilder,
 
@@ -555,6 +560,7 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
           helpValueBuilder: helpValueBuilder ?? other.helpValueBuilder,
           searchScore: searchScore ?? other.searchScore,
           searchScreenBuilder: searchScreenBuilder ?? other.searchScreenBuilder,
+          openChildren: openChildren ?? other.openChildren,
           headerBuilder: headerBuilder ?? other.headerBuilder,
           scoreBuilder: scoreBuilder ?? other.scoreBuilder,
           tileBuilder: tileBuilder ?? other.tileBuilder,
@@ -880,12 +886,12 @@ abstract class WoFormUiSettings with _$WoFormUiSettings {
     @EdgeInsetsNullableConverter() EdgeInsets? padding,
 
     /// Controls the layout behavior of the body. Switch to
-    /// [WoFormBodyLayout.flexible] if you want to use `uiSettings.flex`.
+    /// [LayoutMethod.flexible] if you want to use `uiSettings.flex`.
     ///
     /// The body consists of your inputs and potentially the submit button,
     /// if [WoFormUiSettings.submitButtonPosition] is SubmitButtonPosition.body
     /// (wich is the default value).
-    @Default(WoFormBodyLayout.scrollable) WoFormBodyLayout bodyLayout,
+    @Default(LayoutMethod.scrollable) LayoutMethod layout,
 
     /// Controls how the form is presented to the user.
     ///
@@ -907,7 +913,7 @@ abstract class WoFormUiSettings with _$WoFormUiSettings {
   /// When a form uses multisteps, since it means using PageView,
   /// it needs a fixed height.
   bool get acceptScrollController =>
-      bodyLayout.isScrollable && multistepSettings == null;
+      layout.isScrollable && multistepSettings == null;
 }
 
 enum SubmitButtonPosition { body, appBar, bottomBar, floating }
@@ -937,7 +943,7 @@ enum ShowErrors {
 /// The body consists of your inputs and potentially the submit button,
 /// if [WoFormUiSettings.submitButtonPosition] is SubmitButtonPosition.body
 /// (wich is the default value).
-enum WoFormBodyLayout {
+enum LayoutMethod {
   /// The body will be wrapped in a SingleChildScrollView, allowing content
   /// that overflows the screen to be scrolled.
   ///
@@ -954,8 +960,18 @@ enum WoFormBodyLayout {
   /// using `uiSettings.flex` and expand to fill the available screen space.
   flexible;
 
-  bool get isScrollable => this == WoFormBodyLayout.scrollable;
-  bool get supportFlex => this == WoFormBodyLayout.flexible;
+  bool get isScrollable => this == LayoutMethod.scrollable;
+  bool get supportFlex => this == LayoutMethod.flexible;
+
+  /// Transforms a flex value into a layout method. Possible values :
+  /// - `null` or `-1` : scrollable
+  /// - `0` : shrinkWrap
+  /// - `>= 1` : flexible
+  static LayoutMethod fromFlex(int? flex) => flex == null || flex == -1
+      ? LayoutMethod.scrollable
+      : flex == 0
+      ? LayoutMethod.shrinkWrap
+      : LayoutMethod.flexible;
 }
 
 /// This mode only affects the navigation controls.
