@@ -36,6 +36,7 @@ class NumSelector extends StatefulWidget {
 
 class _NumSelectorState extends State<NumSelector> {
   late TextEditingController controller;
+  Offset? tapPosition;
 
   @override
   void initState() {
@@ -167,8 +168,13 @@ class _NumSelectorState extends State<NumSelector> {
               // - mobile : tapping outside does nothing.
               // For better consistency across all plateforms, wo_form decided
               // to unfocus text fields on tap up.
-              onTapOutside: (_) {},
-              onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
+              onTapOutside: (event) => tapPosition = event.position,
+              onTapUpOutside: (event) {
+                if (event.position == tapPosition) {
+                  FocusScope.of(context).unfocus();
+                }
+                tapPosition = null;
+              },
             ),
           ),
         )

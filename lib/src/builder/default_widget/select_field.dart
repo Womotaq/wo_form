@@ -261,10 +261,8 @@ class _AlwaysVisibleSelectField<T> extends StatelessWidget {
             // Flutter's default behaviour :
             // - web : tapping outside instantly unfocuses the field.
             // - mobile : tapping outside does nothing.
-            // For better consistency across all plateforms, wo_form
-            // decided to unfocus text fields on tap up.
-            onTapOutside: (_) {},
-            onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
+            // wo_form decided to unfocus search fields on tap down.
+            onTapOutside: (event) => FocusScope.of(context).unfocus(),
           ),
         ),
       if ((data.uiSettings.flex ?? 0) > 0)

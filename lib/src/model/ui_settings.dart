@@ -310,6 +310,12 @@ typedef HeaderBuilderDef = Widget Function(WoFormHeaderData data);
 abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
   const factory InputsNodeUiSettings({
     /// Requires [WoFormUiSettings.bodyLayout] at [WoFormBodyLayout.flexible].
+    ///
+    /// When [ChildrenVisibility.whenAsked], this field determines the layout
+    /// of the new context :
+    /// - null : [WoFormBodyLayout.scrollable]
+    /// - 0 : [WoFormBodyLayout.shrinkWrap]
+    /// - 1 and more : [WoFormBodyLayout.flexible]
     int? flex,
 
     /// If flex is higher than 0, the default widget will use ListView.builder.

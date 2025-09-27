@@ -31,33 +31,10 @@ Future<T?> _showWoFormModal<T extends Object?>({
   required double initialBottomSheetSize,
   required bool showDragHandle,
 }) {
-  /// If true, the child is wrapped inside a DraggableScrollableSheet.
-  /// The modal starts at .7% of the screen height.
-  ///
-  // If false, the modal does the same size as its child.
-  final acceptScrollController = form.root.uiSettings.acceptScrollController;
   // final size =
   //     acceptScrollController ? ModalSize.flexible : ModalSize.fitContent;
   final isDialog =
       form.root.uiSettings.presentation == WoFormPresentation.dialog;
-
-  Widget buildForm(BuildContext context, [ScrollController? _]) {
-    final double? height;
-    if (acceptScrollController ||
-        form.root.uiSettings.bodyLayout == WoFormBodyLayout.shrinkWrap) {
-      height = null;
-    } else {
-      final mediaQuery = MediaQuery.of(context);
-      height =
-          (mediaQuery.size.height - mediaQuery.viewInsets.bottom) *
-          initialBottomSheetSize;
-    }
-
-    return SizedBox(
-      height: height,
-      child: form,
-    );
-  }
 
   if (isDialog) {
     return showDialog(
@@ -66,7 +43,7 @@ Future<T?> _showWoFormModal<T extends Object?>({
         children: [
           SizedBox(
             width: 512, // TODO : WoForm.MAX_WIDTH ?
-            child: buildForm(context),
+            child: form,
           ),
         ],
       ),
@@ -74,8 +51,10 @@ Future<T?> _showWoFormModal<T extends Object?>({
   } else {
     return showModal(
       context: context,
-      builder: buildForm,
-      acceptScrollController: acceptScrollController,
+      child: form,
+      layout: form.root.uiSettings.multistepSettings != null
+          ? WoFormBodyLayout.flexible
+          : form.root.uiSettings.bodyLayout,
       initialBottomSheetSize: initialBottomSheetSize,
       showDragHandle: showDragHandle,
     );

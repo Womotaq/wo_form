@@ -3,11 +3,32 @@ import 'package:wo_form/wo_form.dart';
 
 Future<T?> showModal<T extends Object?>({
   required BuildContext context,
-  required Widget Function(BuildContext context) builder,
-  bool acceptScrollController = true,
+  required Widget child,
+
+  /// If scrollable, the child is wrapped inside a DraggableScrollableSheet.
+  /// The modal starts at .7% of the screen height.
+  ///
+  // If shrinkWrap, the modal does the same size as its child.
+
+  // If flexible, the modal does the same size as initialBottomSheetSize.
+  WoFormBodyLayout layout = WoFormBodyLayout.scrollable,
   double initialBottomSheetSize = .7,
   bool showDragHandle = false,
 }) {
+  final wrapped = _BottomSheetDragHandle(
+    flex: layout.isScrollable ? 1 : 0,
+    showDragHandle: showDragHandle,
+    child: Builder(
+      builder: (context) => SizedBox(
+        height: layout == WoFormBodyLayout.flexible
+            ? MediaQuery.of(context).heightWithoutKeyboard *
+                  initialBottomSheetSize
+            : null,
+        child: child,
+      ),
+    ),
+  );
+
   return showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -19,27 +40,23 @@ Future<T?> showModal<T extends Object?>({
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom,
       ),
-      child: acceptScrollController
+      child: layout.isScrollable
           ? DraggableScrollableSheet(
               expand: false,
               initialChildSize: initialBottomSheetSize,
               minChildSize: initialBottomSheetSize * 2 / 3,
               builder: (context, scrollController) => ScrollControllerProvider(
                 controller: scrollController,
-                child: _BottomSheetDragHandle(
-                  flex: acceptScrollController ? 1 : 0,
-                  showDragHandle: showDragHandle,
-                  child: builder(context),
-                ),
+                child: wrapped,
               ),
             )
-          : _BottomSheetDragHandle(
-              flex: acceptScrollController ? 1 : 0,
-              showDragHandle: showDragHandle,
-              child: builder(context),
-            ),
+          : wrapped,
     ),
   );
+}
+
+extension on MediaQueryData {
+  double get heightWithoutKeyboard => size.height - viewInsets.bottom;
 }
 
 class _BottomSheetDragHandle extends StatelessWidget {

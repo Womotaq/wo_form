@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:phone_form_field/phone_form_field.dart';
@@ -23,6 +22,7 @@ class _StringFieldState extends State<StringField> {
   PhoneController? phoneController;
   late final bool autofocus;
   bool obscureText = false;
+  Offset? tapPosition;
 
   @override
   void initState() {
@@ -170,8 +170,13 @@ class _StringFieldState extends State<StringField> {
             // - mobile : tapping outside does nothing.
             // For better consistency across all plateforms, wo_form decided to
             // unfocus text fields on tap up.
-            onTapOutside: (_) {},
-            onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
+            onTapOutside: (event) => tapPosition = event.position,
+            onTapUpOutside: (event) {
+              if (event.position == tapPosition) {
+                FocusScope.of(context).unfocus();
+              }
+              tapPosition = null;
+            },
             itemBuilder: (context, index, PlacePrediction prediction) =>
                 Padding(
                   padding: const EdgeInsets.symmetric(
@@ -234,8 +239,13 @@ class _StringFieldState extends State<StringField> {
             // - mobile : tapping outside does nothing.
             // For better consistency across all plateforms, wo_form decided to
             // unfocus text fields on tap up.
-            onTapOutside: (_) {},
-            onTapUpOutside: (event) => FocusScope.of(context).unfocus(),
+            onTapOutside: (event) => tapPosition = event.position,
+            onTapUpOutside: (event) {
+              if (event.position == tapPosition) {
+                FocusScope.of(context).unfocus();
+              }
+              tapPosition = null;
+            },
             style: uiSettings.style,
             keyboardType: uiSettings.keyboardType,
             obscureText: obscureText,

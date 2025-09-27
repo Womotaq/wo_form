@@ -59,8 +59,19 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
   }
 
   Future<void> openChildren(BuildContext context) {
+    final root = context.read<RootNode>();
+    final tweakedRoot = root.copyWith(
+      uiSettings: root.uiSettings.copyWith(
+        bodyLayout: switch (widget.data.uiSettings.flex) {
+          null => WoFormBodyLayout.scrollable,
+          0 => WoFormBodyLayout.shrinkWrap,
+          _ => WoFormBodyLayout.flexible,
+        },
+      ),
+    );
+
     final childrenWidget = RepositoryProvider.value(
-      value: context.read<RootNode>(),
+      value: tweakedRoot,
       child: MultiBlocProvider(
         providers: [
           BlocProvider.value(value: context.read<WoFormValuesCubit>()),
@@ -77,7 +88,9 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
     if (widget.isModal) {
       return showModal(
         context: context,
-        builder: (_) => childrenWidget,
+        child: childrenWidget,
+        layout: tweakedRoot.uiSettings.bodyLayout,
+        // (widget.data.uiSettings.flex ?? 0) == 0,
       );
     } else {
       return Navigator.push(
@@ -125,7 +138,12 @@ class _InputsNodePage extends StatelessWidget {
                 InputsNodeWidget.new)
             .call(fieldData);
 
-    final scrollController = ScrollControllerProvider.of(context);
+    final wrapped = data.uiSettings.flex == null
+        ? SingleChildScrollView(
+            controller: ScrollControllerProvider.of(context),
+            child: inputsNodeWidget,
+          )
+        : inputsNodeWidget;
 
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
@@ -136,10 +154,7 @@ class _InputsNodePage extends StatelessWidget {
         }
       },
       child: isModal
-          ? SingleChildScrollView(
-              controller: scrollController,
-              child: inputsNodeWidget,
-            )
+          ? wrapped
           : Scaffold(
               appBar: AppBar(
                 actions: const [
@@ -147,12 +162,7 @@ class _InputsNodePage extends StatelessWidget {
                   SizedBox(width: 8),
                 ],
               ),
-              body: SingleChildScrollView(
-                controller: scrollController,
-                child: SafeArea(
-                  child: inputsNodeWidget,
-                ),
-              ),
+              body: inputsNodeWidget,
             ),
     );
   }
