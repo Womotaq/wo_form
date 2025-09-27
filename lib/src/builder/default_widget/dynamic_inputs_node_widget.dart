@@ -29,68 +29,20 @@ class DynamicInputsNodeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void onAddChoice(WoFormNodeMixin inputFromTemplate) {
-      final input = inputFromTemplate.withId(
-        id:
-            (data.uiSettings.generateId ??
-                    WoFormTheme.of(context)?.generateId ??
-                    Random()._generateUid)
-                .call(),
-      );
-
-      data.onValueChanged?.call(List.from(data.value ?? [])..add(input));
-
-      final form = context.read<RootNode>();
-      final valuesCubit = context.read<WoFormValuesCubit>();
-      final values = valuesCubit.state;
-      for (final path in input.getAllInputPaths(
-        values: values,
-        parentPath: data.path,
-      )) {
-        final input = form.getChild(path: path, values: values);
-        if (input is WoFormInputMixin) {
-          valuesCubit.onValueChanged(
-            path: path,
-            value: input!.getInitialValues(parentPath: '').values.firstOrNull,
-          );
-        }
-      }
-    }
-
-    final addButton = data.input.templates.length == 1
-        ? IconButton.filled(
-            onPressed: data.onValueChanged == null
-                ? null
-                : () {
-                    // Maybe this line is outdated 😜
-                    Focus.maybeOf(context)?.unfocus();
-                    onAddChoice(data.input.templates.first.getChild());
-                  },
-            icon: const Icon(Icons.add),
-            color: Theme.of(context).colorScheme.onPrimary,
-          )
-        : SearchField<DynamicInputTemplate>.multipleChoices(
-            values: data.input.templates,
-            onSelected: data.onValueChanged == null
-                ? null
-                : (template) => onAddChoice(template.getChild()),
-            valueBuilder: (template) =>
-                Text(template?.uiSettings.labelText ?? ''),
-            helpValueBuilder: (template) =>
-                (template.uiSettings.helperText ?? '').isEmpty
-                ? null
-                : Text(template.uiSettings.helperText ?? ''),
-            builder: (onPressed) => IconButton.filled(
-              onPressed: onPressed,
-              icon: const Icon(Icons.add),
-              color: Theme.of(context).colorScheme.onPrimary,
-            ),
-          );
+    final addButton =
+        (data.uiSettings.addButtonBuilder ?? DynamicInputsNodeAddButton.new)(
+          data,
+        );
+    final addButtonPosition =
+        data.uiSettings.addButtonPosition ??
+        DynamicInputsNodeAddButtonPosition.header;
 
     final headerData = WoFormInputHeaderData(
       labelText: data.uiSettings.labelText,
       helperText: data.uiSettings.helperText,
-      trailing: addButton,
+      trailing: addButtonPosition == DynamicInputsNodeAddButtonPosition.header
+          ? addButton
+          : null,
       shrinkWrap: false,
     );
 
@@ -146,10 +98,120 @@ class DynamicInputsNodeWidget extends StatelessWidget {
               true,
           children: children,
         ),
+        if (addButtonPosition == DynamicInputsNodeAddButtonPosition.footer)
+          addButton,
       ],
     );
   }
 
   void onRemoveChoice(WoFormNodeMixin input) =>
       data.onValueChanged?.call(List.from(data.value ?? [])..remove(input));
+}
+
+class DynamicInputsNodeAddButton extends StatelessWidget {
+  const DynamicInputsNodeAddButton(this.data, {super.key});
+
+  final WoFieldData<
+    DynamicInputsNode,
+    List<WoFormNodeMixin>,
+    DynamicInputsNodeUiSettings
+  >
+  data;
+
+  @override
+  Widget build(BuildContext context) {
+    final label = (data.uiSettings.addButtonText ?? '') == ''
+        ? null
+        : Text(data.uiSettings.addButtonText ?? '');
+    final onTap = data.onValueChanged == null
+        ? null
+        : () {
+            addTemplate(
+              context,
+              data.input.templates.first.getChild(),
+            );
+          };
+
+    switch (data.uiSettings.addButtonPosition) {
+      case null:
+      case DynamicInputsNodeAddButtonPosition.header:
+        Widget headerBuiler(VoidCallback? onPressed) => label == null
+            ? IconButton.filled(
+                onPressed: onPressed,
+                icon: const Icon(Icons.add),
+                color: Theme.of(context).colorScheme.onPrimary,
+              )
+            : FilledButton.icon(
+                onPressed: onPressed,
+                label: label,
+                icon: const Icon(Icons.add),
+              );
+
+        return data.input.templates.length == 1
+            ? headerBuiler(onTap)
+            : SearchField<DynamicInputTemplate>.multipleChoices(
+                values: data.input.templates,
+                onSelected: data.onValueChanged == null
+                    ? null
+                    : (template) => addTemplate(context, template.getChild()),
+                valueBuilder: (template) =>
+                    Text(template?.uiSettings.labelText ?? ''),
+                helpValueBuilder: (template) =>
+                    (template.uiSettings.helperText ?? '').isEmpty
+                    ? null
+                    : Text(template.uiSettings.helperText ?? ''),
+                builder: headerBuiler,
+              );
+      case DynamicInputsNodeAddButtonPosition.footer:
+        Widget footerBuilder(VoidCallback? onPressed) => ListTile(
+          leading: const Icon(Icons.add),
+          title: label,
+          onTap: onPressed,
+        );
+
+        return data.input.templates.length == 1
+            ? footerBuilder(onTap)
+            : SearchField<DynamicInputTemplate>.multipleChoices(
+                values: data.input.templates,
+                onSelected: data.onValueChanged == null
+                    ? null
+                    : (template) => addTemplate(context, template.getChild()),
+                valueBuilder: (template) =>
+                    Text(template?.uiSettings.labelText ?? ''),
+                helpValueBuilder: (template) =>
+                    (template.uiSettings.helperText ?? '').isEmpty
+                    ? null
+                    : Text(template.uiSettings.helperText ?? ''),
+                builder: footerBuilder,
+              );
+    }
+  }
+
+  void addTemplate(BuildContext context, WoFormNodeMixin inputFromTemplate) {
+    final input = inputFromTemplate.withId(
+      id:
+          (data.uiSettings.generateId ??
+                  WoFormTheme.of(context)?.generateId ??
+                  Random()._generateUid)
+              .call(),
+    );
+
+    data.onValueChanged?.call(List.from(data.value ?? [])..add(input));
+
+    final form = context.read<RootNode>();
+    final valuesCubit = context.read<WoFormValuesCubit>();
+    final values = valuesCubit.state;
+    for (final path in input.getAllInputPaths(
+      values: values,
+      parentPath: data.path,
+    )) {
+      final input = form.getChild(path: path, values: values);
+      if (input is WoFormInputMixin) {
+        valuesCubit.onValueChanged(
+          path: path,
+          value: input!.getInitialValues(parentPath: '').values.firstOrNull,
+        );
+      }
+    }
+  }
 }

@@ -715,7 +715,8 @@ mixin _$DynamicInputsNodeUiSettings {
 
  String? get labelText; String? get helperText;/// Default to true
  bool? get reorderable;/// Default to [reorderable].
- bool? get oddEvenRowColors;@notSerializable GenerateIdDef? get generateId;@notSerializable OnDynamicInputDeletionDef? get onChildDeletion;@notSerializable DynamicInputsNodeWidgetBuilderDef? get widgetBuilder;
+ bool? get oddEvenRowColors;/// if null, the add button will be an IconButton with a '+'.
+ String? get addButtonText; DynamicInputsNodeAddButtonPosition? get addButtonPosition;@notSerializable DynamicInputsNodeWidgetBuilderDef? get addButtonBuilder;@notSerializable GenerateIdDef? get generateId;@notSerializable OnDynamicInputDeletionDef? get onChildDeletion;@notSerializable DynamicInputsNodeWidgetBuilderDef? get widgetBuilder;
 /// Create a copy of DynamicInputsNodeUiSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -728,16 +729,16 @@ $DynamicInputsNodeUiSettingsCopyWith<DynamicInputsNodeUiSettings> get copyWith =
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DynamicInputsNodeUiSettings&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.reorderable, reorderable) || other.reorderable == reorderable)&&(identical(other.oddEvenRowColors, oddEvenRowColors) || other.oddEvenRowColors == oddEvenRowColors)&&(identical(other.generateId, generateId) || other.generateId == generateId)&&(identical(other.onChildDeletion, onChildDeletion) || other.onChildDeletion == onChildDeletion)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DynamicInputsNodeUiSettings&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.reorderable, reorderable) || other.reorderable == reorderable)&&(identical(other.oddEvenRowColors, oddEvenRowColors) || other.oddEvenRowColors == oddEvenRowColors)&&(identical(other.addButtonText, addButtonText) || other.addButtonText == addButtonText)&&(identical(other.addButtonPosition, addButtonPosition) || other.addButtonPosition == addButtonPosition)&&(identical(other.addButtonBuilder, addButtonBuilder) || other.addButtonBuilder == addButtonBuilder)&&(identical(other.generateId, generateId) || other.generateId == generateId)&&(identical(other.onChildDeletion, onChildDeletion) || other.onChildDeletion == onChildDeletion)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,labelText,helperText,reorderable,oddEvenRowColors,generateId,onChildDeletion,widgetBuilder);
+int get hashCode => Object.hash(runtimeType,labelText,helperText,reorderable,oddEvenRowColors,addButtonText,addButtonPosition,addButtonBuilder,generateId,onChildDeletion,widgetBuilder);
 
 @override
 String toString() {
-  return 'DynamicInputsNodeUiSettings(labelText: $labelText, helperText: $helperText, reorderable: $reorderable, oddEvenRowColors: $oddEvenRowColors, generateId: $generateId, onChildDeletion: $onChildDeletion, widgetBuilder: $widgetBuilder)';
+  return 'DynamicInputsNodeUiSettings(labelText: $labelText, helperText: $helperText, reorderable: $reorderable, oddEvenRowColors: $oddEvenRowColors, addButtonText: $addButtonText, addButtonPosition: $addButtonPosition, addButtonBuilder: $addButtonBuilder, generateId: $generateId, onChildDeletion: $onChildDeletion, widgetBuilder: $widgetBuilder)';
 }
 
 
@@ -748,7 +749,7 @@ abstract mixin class $DynamicInputsNodeUiSettingsCopyWith<$Res>  {
   factory $DynamicInputsNodeUiSettingsCopyWith(DynamicInputsNodeUiSettings value, $Res Function(DynamicInputsNodeUiSettings) _then) = _$DynamicInputsNodeUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String? labelText, String? helperText, bool? reorderable, bool? oddEvenRowColors,@notSerializable GenerateIdDef? generateId,@notSerializable OnDynamicInputDeletionDef? onChildDeletion,@notSerializable DynamicInputsNodeWidgetBuilderDef? widgetBuilder
+ String? labelText, String? helperText, bool? reorderable, bool? oddEvenRowColors, String? addButtonText, DynamicInputsNodeAddButtonPosition? addButtonPosition,@notSerializable DynamicInputsNodeWidgetBuilderDef? addButtonBuilder,@notSerializable GenerateIdDef? generateId,@notSerializable OnDynamicInputDeletionDef? onChildDeletion,@notSerializable DynamicInputsNodeWidgetBuilderDef? widgetBuilder
 });
 
 
@@ -765,13 +766,16 @@ class _$DynamicInputsNodeUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of DynamicInputsNodeUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? labelText = freezed,Object? helperText = freezed,Object? reorderable = freezed,Object? oddEvenRowColors = freezed,Object? generateId = freezed,Object? onChildDeletion = freezed,Object? widgetBuilder = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? labelText = freezed,Object? helperText = freezed,Object? reorderable = freezed,Object? oddEvenRowColors = freezed,Object? addButtonText = freezed,Object? addButtonPosition = freezed,Object? addButtonBuilder = freezed,Object? generateId = freezed,Object? onChildDeletion = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_self.copyWith(
 labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
 as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
 as String?,reorderable: freezed == reorderable ? _self.reorderable : reorderable // ignore: cast_nullable_to_non_nullable
 as bool?,oddEvenRowColors: freezed == oddEvenRowColors ? _self.oddEvenRowColors : oddEvenRowColors // ignore: cast_nullable_to_non_nullable
-as bool?,generateId: freezed == generateId ? _self.generateId : generateId // ignore: cast_nullable_to_non_nullable
+as bool?,addButtonText: freezed == addButtonText ? _self.addButtonText : addButtonText // ignore: cast_nullable_to_non_nullable
+as String?,addButtonPosition: freezed == addButtonPosition ? _self.addButtonPosition : addButtonPosition // ignore: cast_nullable_to_non_nullable
+as DynamicInputsNodeAddButtonPosition?,addButtonBuilder: freezed == addButtonBuilder ? _self.addButtonBuilder : addButtonBuilder // ignore: cast_nullable_to_non_nullable
+as DynamicInputsNodeWidgetBuilderDef?,generateId: freezed == generateId ? _self.generateId : generateId // ignore: cast_nullable_to_non_nullable
 as GenerateIdDef?,onChildDeletion: freezed == onChildDeletion ? _self.onChildDeletion : onChildDeletion // ignore: cast_nullable_to_non_nullable
 as OnDynamicInputDeletionDef?,widgetBuilder: freezed == widgetBuilder ? _self.widgetBuilder : widgetBuilder // ignore: cast_nullable_to_non_nullable
 as DynamicInputsNodeWidgetBuilderDef?,
@@ -786,7 +790,7 @@ as DynamicInputsNodeWidgetBuilderDef?,
 @JsonSerializable()
 
 class _DynamicInputsNodeUiSettings extends DynamicInputsNodeUiSettings {
-  const _DynamicInputsNodeUiSettings({this.labelText, this.helperText, this.reorderable, this.oddEvenRowColors, @notSerializable this.generateId, @notSerializable this.onChildDeletion, @notSerializable this.widgetBuilder}): super._();
+  const _DynamicInputsNodeUiSettings({this.labelText, this.helperText, this.reorderable, this.oddEvenRowColors, this.addButtonText, this.addButtonPosition, @notSerializable this.addButtonBuilder, @notSerializable this.generateId, @notSerializable this.onChildDeletion, @notSerializable this.widgetBuilder}): super._();
   factory _DynamicInputsNodeUiSettings.fromJson(Map<String, dynamic> json) => _$DynamicInputsNodeUiSettingsFromJson(json);
 
 @override final  String? labelText;
@@ -795,6 +799,10 @@ class _DynamicInputsNodeUiSettings extends DynamicInputsNodeUiSettings {
 @override final  bool? reorderable;
 /// Default to [reorderable].
 @override final  bool? oddEvenRowColors;
+/// if null, the add button will be an IconButton with a '+'.
+@override final  String? addButtonText;
+@override final  DynamicInputsNodeAddButtonPosition? addButtonPosition;
+@override@notSerializable final  DynamicInputsNodeWidgetBuilderDef? addButtonBuilder;
 @override@notSerializable final  GenerateIdDef? generateId;
 @override@notSerializable final  OnDynamicInputDeletionDef? onChildDeletion;
 @override@notSerializable final  DynamicInputsNodeWidgetBuilderDef? widgetBuilder;
@@ -812,16 +820,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DynamicInputsNodeUiSettings&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.reorderable, reorderable) || other.reorderable == reorderable)&&(identical(other.oddEvenRowColors, oddEvenRowColors) || other.oddEvenRowColors == oddEvenRowColors)&&(identical(other.generateId, generateId) || other.generateId == generateId)&&(identical(other.onChildDeletion, onChildDeletion) || other.onChildDeletion == onChildDeletion)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DynamicInputsNodeUiSettings&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.reorderable, reorderable) || other.reorderable == reorderable)&&(identical(other.oddEvenRowColors, oddEvenRowColors) || other.oddEvenRowColors == oddEvenRowColors)&&(identical(other.addButtonText, addButtonText) || other.addButtonText == addButtonText)&&(identical(other.addButtonPosition, addButtonPosition) || other.addButtonPosition == addButtonPosition)&&(identical(other.addButtonBuilder, addButtonBuilder) || other.addButtonBuilder == addButtonBuilder)&&(identical(other.generateId, generateId) || other.generateId == generateId)&&(identical(other.onChildDeletion, onChildDeletion) || other.onChildDeletion == onChildDeletion)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,labelText,helperText,reorderable,oddEvenRowColors,generateId,onChildDeletion,widgetBuilder);
+int get hashCode => Object.hash(runtimeType,labelText,helperText,reorderable,oddEvenRowColors,addButtonText,addButtonPosition,addButtonBuilder,generateId,onChildDeletion,widgetBuilder);
 
 @override
 String toString() {
-  return 'DynamicInputsNodeUiSettings(labelText: $labelText, helperText: $helperText, reorderable: $reorderable, oddEvenRowColors: $oddEvenRowColors, generateId: $generateId, onChildDeletion: $onChildDeletion, widgetBuilder: $widgetBuilder)';
+  return 'DynamicInputsNodeUiSettings(labelText: $labelText, helperText: $helperText, reorderable: $reorderable, oddEvenRowColors: $oddEvenRowColors, addButtonText: $addButtonText, addButtonPosition: $addButtonPosition, addButtonBuilder: $addButtonBuilder, generateId: $generateId, onChildDeletion: $onChildDeletion, widgetBuilder: $widgetBuilder)';
 }
 
 
@@ -832,7 +840,7 @@ abstract mixin class _$DynamicInputsNodeUiSettingsCopyWith<$Res> implements $Dyn
   factory _$DynamicInputsNodeUiSettingsCopyWith(_DynamicInputsNodeUiSettings value, $Res Function(_DynamicInputsNodeUiSettings) _then) = __$DynamicInputsNodeUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String? labelText, String? helperText, bool? reorderable, bool? oddEvenRowColors,@notSerializable GenerateIdDef? generateId,@notSerializable OnDynamicInputDeletionDef? onChildDeletion,@notSerializable DynamicInputsNodeWidgetBuilderDef? widgetBuilder
+ String? labelText, String? helperText, bool? reorderable, bool? oddEvenRowColors, String? addButtonText, DynamicInputsNodeAddButtonPosition? addButtonPosition,@notSerializable DynamicInputsNodeWidgetBuilderDef? addButtonBuilder,@notSerializable GenerateIdDef? generateId,@notSerializable OnDynamicInputDeletionDef? onChildDeletion,@notSerializable DynamicInputsNodeWidgetBuilderDef? widgetBuilder
 });
 
 
@@ -849,13 +857,16 @@ class __$DynamicInputsNodeUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of DynamicInputsNodeUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? labelText = freezed,Object? helperText = freezed,Object? reorderable = freezed,Object? oddEvenRowColors = freezed,Object? generateId = freezed,Object? onChildDeletion = freezed,Object? widgetBuilder = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? labelText = freezed,Object? helperText = freezed,Object? reorderable = freezed,Object? oddEvenRowColors = freezed,Object? addButtonText = freezed,Object? addButtonPosition = freezed,Object? addButtonBuilder = freezed,Object? generateId = freezed,Object? onChildDeletion = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_DynamicInputsNodeUiSettings(
 labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
 as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
 as String?,reorderable: freezed == reorderable ? _self.reorderable : reorderable // ignore: cast_nullable_to_non_nullable
 as bool?,oddEvenRowColors: freezed == oddEvenRowColors ? _self.oddEvenRowColors : oddEvenRowColors // ignore: cast_nullable_to_non_nullable
-as bool?,generateId: freezed == generateId ? _self.generateId : generateId // ignore: cast_nullable_to_non_nullable
+as bool?,addButtonText: freezed == addButtonText ? _self.addButtonText : addButtonText // ignore: cast_nullable_to_non_nullable
+as String?,addButtonPosition: freezed == addButtonPosition ? _self.addButtonPosition : addButtonPosition // ignore: cast_nullable_to_non_nullable
+as DynamicInputsNodeAddButtonPosition?,addButtonBuilder: freezed == addButtonBuilder ? _self.addButtonBuilder : addButtonBuilder // ignore: cast_nullable_to_non_nullable
+as DynamicInputsNodeWidgetBuilderDef?,generateId: freezed == generateId ? _self.generateId : generateId // ignore: cast_nullable_to_non_nullable
 as GenerateIdDef?,onChildDeletion: freezed == onChildDeletion ? _self.onChildDeletion : onChildDeletion // ignore: cast_nullable_to_non_nullable
 as OnDynamicInputDeletionDef?,widgetBuilder: freezed == widgetBuilder ? _self.widgetBuilder : widgetBuilder // ignore: cast_nullable_to_non_nullable
 as DynamicInputsNodeWidgetBuilderDef?,
@@ -1007,6 +1018,12 @@ as String?,
 mixin _$InputsNodeUiSettings {
 
 /// Requires [WoFormUiSettings.bodyLayout] at [WoFormBodyLayout.flexible].
+///
+/// When [ChildrenVisibility.whenAsked], this field determines the layout
+/// of the new context :
+/// - null : [WoFormBodyLayout.scrollable]
+/// - 0 : [WoFormBodyLayout.shrinkWrap]
+/// - 1 and more : [WoFormBodyLayout.flexible]
  int? get flex;/// If flex is higher than 0, the default widget will use ListView.builder.
 ///
 /// Defaults to false.
@@ -1027,9 +1044,11 @@ mixin _$InputsNodeUiSettings {
 ///
 /// Default to CrossAxisAlignment.stretch
  CrossAxisAlignment? get crossAxisAlignment;/// This spacing will be placed between each [WoFormNodeMixin].
- double? get spacing;/// Only used when [ChildrenVisibility.always].
-@notSerializable InputNodeWidgetBuilderDef? get widgetBuilder;/// Only used when [ChildrenVisibility.always].
+ double? get spacing;@notSerializable InputNodeWidgetBuilderDef? get widgetBuilder;/// Only used when [ChildrenVisibility.always].
 @notSerializable HeaderBuilderDef? get headerBuilder;/// Only used when [ChildrenVisibility.whenAsked].
+///
+/// Default to [InputsNodeExpander.page].
+/// An alternative is [InputsNodeExpander.modal].
 @notSerializable InputNodeWidgetBuilderDef? get expanderBuilder;/// Only used when [ChildrenVisibility.whenAsked].
 @notSerializable InputHeaderBuilderDef? get inputHeaderBuilder;
 /// Create a copy of InputsNodeUiSettings
@@ -1115,6 +1134,12 @@ class _InputsNodeUiSettings extends InputsNodeUiSettings {
   factory _InputsNodeUiSettings.fromJson(Map<String, dynamic> json) => _$InputsNodeUiSettingsFromJson(json);
 
 /// Requires [WoFormUiSettings.bodyLayout] at [WoFormBodyLayout.flexible].
+///
+/// When [ChildrenVisibility.whenAsked], this field determines the layout
+/// of the new context :
+/// - null : [WoFormBodyLayout.scrollable]
+/// - 0 : [WoFormBodyLayout.shrinkWrap]
+/// - 1 and more : [WoFormBodyLayout.flexible]
 @override final  int? flex;
 /// If flex is higher than 0, the default widget will use ListView.builder.
 ///
@@ -1147,11 +1172,13 @@ class _InputsNodeUiSettings extends InputsNodeUiSettings {
 @override final  CrossAxisAlignment? crossAxisAlignment;
 /// This spacing will be placed between each [WoFormNodeMixin].
 @override final  double? spacing;
-/// Only used when [ChildrenVisibility.always].
 @override@notSerializable final  InputNodeWidgetBuilderDef? widgetBuilder;
 /// Only used when [ChildrenVisibility.always].
 @override@notSerializable final  HeaderBuilderDef? headerBuilder;
 /// Only used when [ChildrenVisibility.whenAsked].
+///
+/// Default to [InputsNodeExpander.page].
+/// An alternative is [InputsNodeExpander.modal].
 @override@notSerializable final  InputNodeWidgetBuilderDef? expanderBuilder;
 /// Only used when [ChildrenVisibility.whenAsked].
 @override@notSerializable final  InputHeaderBuilderDef? inputHeaderBuilder;

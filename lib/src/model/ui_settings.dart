@@ -226,6 +226,14 @@ abstract class DurationInputUiSettings with _$DurationInputUiSettings {
         );
 }
 
+enum DynamicInputsNodeAddButtonPosition {
+  /// Will be set at the trailing location of the header.
+  header,
+  footer,
+}
+
+typedef GenerateIdDef = String Function();
+typedef OnDynamicInputDeletionDef = void Function(VoidCallback cancel);
 typedef DynamicInputsNodeWidgetBuilderDef =
     Widget Function(
       WoFieldData<
@@ -235,9 +243,6 @@ typedef DynamicInputsNodeWidgetBuilderDef =
       >
       data,
     );
-
-typedef GenerateIdDef = String Function();
-typedef OnDynamicInputDeletionDef = void Function(VoidCallback cancel);
 
 @freezed
 abstract class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
@@ -250,6 +255,13 @@ abstract class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
 
     /// Default to [reorderable].
     bool? oddEvenRowColors,
+
+    /// if null, the add button will be an IconButton with a '+'.
+    String? addButtonText,
+
+    /// Defaults to [DynamicInputsNodeAddButtonPosition.header].
+    DynamicInputsNodeAddButtonPosition? addButtonPosition,
+    @notSerializable DynamicInputsNodeWidgetBuilderDef? addButtonBuilder,
 
     @notSerializable GenerateIdDef? generateId,
     @notSerializable OnDynamicInputDeletionDef? onChildDeletion,

@@ -575,6 +575,12 @@ class WoFormValues {
     initialValues,
   );
 
+  T? get<T>(String path) {
+    final value = getValue(path);
+    if (value is T) return value;
+    return null;
+  }
+
   // --- CURRENT STATE ---
 
   // ignore: constant_identifier_names

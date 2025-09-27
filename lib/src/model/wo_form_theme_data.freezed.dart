@@ -15,7 +15,11 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$WoFormThemeData {
 
-@notSerializable BooleanFieldBuilderDef? get booleanFieldBuilder;@notSerializable DateTimeFieldBuilderDef? get dateTimeFieldBuilder;@notSerializable IsoCode? get defaultPhoneCoutry;@notSerializable DurationFieldBuilderDef? get durationFieldBuilder;@notSerializable DynamicInputsNodeWidgetBuilderDef? get dynamicInputsNodeWidgetBuilder;@notSerializable FormatDurationDef? get formatDuration;@notSerializable WidgetBuilderDef? get formPageBuilder;@notSerializable GenerateIdDef? get generateId;@notSerializable HeaderBuilderDef? get headerBuilder;@notSerializable InputHeaderBuilderDef? get inputHeaderBuilder;@notSerializable InputNodeWidgetBuilderDef? get inputsNodeExpanderBuilder;@notSerializable InputNodeWidgetBuilderDef? get inputsNodeWidgetBuilder;@notSerializable MediaFieldBuilderDef? get mediaFieldBuilder;@notSerializable MultiStepProgressIndicatorBuilderDef? get multiStepProgressIndicatorBuilder;@notSerializable NumFieldBuilderDef? get numFieldBuilder;@notSerializable PickDateDef? get pickDate;@notSerializable PickDurationDef? get pickDuration;@notSerializable PickTimeDef? get pickTime;/// If this is set and returns null, there won't be a quit button.
+@notSerializable BooleanFieldBuilderDef? get booleanFieldBuilder;@notSerializable DateTimeFieldBuilderDef? get dateTimeFieldBuilder;@notSerializable IsoCode? get defaultPhoneCoutry;@notSerializable DurationFieldBuilderDef? get durationFieldBuilder;@notSerializable DynamicInputsNodeWidgetBuilderDef? get dynamicInputsNodeWidgetBuilder;@notSerializable FormatDurationDef? get formatDuration;@notSerializable WidgetBuilderDef? get formPageBuilder;@notSerializable GenerateIdDef? get generateId;@notSerializable HeaderBuilderDef? get headerBuilder;@notSerializable InputHeaderBuilderDef? get inputHeaderBuilder;/// Only used when [ChildrenVisibility.whenAsked].
+///
+/// Default to [InputsNodeExpander.page].
+/// An alternative is [InputsNodeExpander.modal].
+@notSerializable InputNodeWidgetBuilderDef? get inputsNodeExpanderBuilder;@notSerializable InputNodeWidgetBuilderDef? get inputsNodeWidgetBuilder;@notSerializable MediaFieldBuilderDef? get mediaFieldBuilder;@notSerializable MultiStepProgressIndicatorBuilderDef? get multiStepProgressIndicatorBuilder;@notSerializable NumFieldBuilderDef? get numFieldBuilder;@notSerializable PickDateDef? get pickDate;@notSerializable PickDurationDef? get pickDuration;@notSerializable PickTimeDef? get pickTime;/// If this is set and returns null, there won't be a quit button.
 @notSerializable QuitButtonBuilderDef? get quitButtonBuilder;@notSerializable ScoreWidgetBuilderDef? get scoreBuilder;@notSerializable SelectFieldBuilderDef<dynamic>? get selectFieldBuilder;@notSerializable ScaffoldBuilderDef? get standardScaffoldBuilder;@notSerializable StringFieldBuilderDef? get stringFieldBuilder; StringFieldLocation? get stringFieldErrorLocation; StringFieldLocation? get stringFieldHelperLocation; StringFieldLocation? get stringFieldLabelLocation; StringFieldLocation? get stringFieldPrefixIconLocation;@notSerializable SubmitButtonBuilderDef? get submitButtonBuilder;/// Default values :
 /// - SubmitButtonPosition.body: EdgeInsets.only(top: 32, bottom: 12)
 /// - SubmitButtonPosition.bottomBar : EdgeInsets.symmetric(vertical: 16)
@@ -138,6 +142,10 @@ class _WoFormThemeData extends WoFormThemeData {
 @override@notSerializable final  GenerateIdDef? generateId;
 @override@notSerializable final  HeaderBuilderDef? headerBuilder;
 @override@notSerializable final  InputHeaderBuilderDef? inputHeaderBuilder;
+/// Only used when [ChildrenVisibility.whenAsked].
+///
+/// Default to [InputsNodeExpander.page].
+/// An alternative is [InputsNodeExpander.modal].
 @override@notSerializable final  InputNodeWidgetBuilderDef? inputsNodeExpanderBuilder;
 @override@notSerializable final  InputNodeWidgetBuilderDef? inputsNodeWidgetBuilder;
 @override@notSerializable final  MediaFieldBuilderDef? mediaFieldBuilder;

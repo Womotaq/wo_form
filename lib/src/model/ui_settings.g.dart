@@ -171,6 +171,11 @@ _DynamicInputsNodeUiSettings _$DynamicInputsNodeUiSettingsFromJson(
   helperText: json['helperText'] as String?,
   reorderable: json['reorderable'] as bool?,
   oddEvenRowColors: json['oddEvenRowColors'] as bool?,
+  addButtonText: json['addButtonText'] as String?,
+  addButtonPosition: $enumDecodeNullable(
+    _$DynamicInputsNodeAddButtonPositionEnumMap,
+    json['addButtonPosition'],
+  ),
 );
 
 Map<String, dynamic> _$DynamicInputsNodeUiSettingsToJson(
@@ -180,6 +185,14 @@ Map<String, dynamic> _$DynamicInputsNodeUiSettingsToJson(
   'helperText': instance.helperText,
   'reorderable': instance.reorderable,
   'oddEvenRowColors': instance.oddEvenRowColors,
+  'addButtonText': instance.addButtonText,
+  'addButtonPosition':
+      _$DynamicInputsNodeAddButtonPositionEnumMap[instance.addButtonPosition],
+};
+
+const _$DynamicInputsNodeAddButtonPositionEnumMap = {
+  DynamicInputsNodeAddButtonPosition.header: 'header',
+  DynamicInputsNodeAddButtonPosition.footer: 'footer',
 };
 
 _DynamicInputUiSettings _$DynamicInputUiSettingsFromJson(
