@@ -11,7 +11,7 @@ class QuitWoFormButton extends StatelessWidget {
     final controller = MultistepController.of(context);
     if (controller == null) {
       return true;
-    } else if (controller.previousStep() == 'start-of-form') {
+    } else if (controller.previousStep() == MultistepFailure.startOfForm) {
       return context.read<RootNode>().uiSettings.canQuit?.call(context) ?? true;
     } else {
       return false;

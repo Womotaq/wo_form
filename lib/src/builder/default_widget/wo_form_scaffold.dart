@@ -20,7 +20,7 @@ class WoFormScaffold extends StatelessWidget {
         QuitWoFormButton.new)();
 
     return ShrinkableScaffold(
-      shrinkWrap: uiSettings.layout == LayoutMethod.shrinkWrap,
+      shrinkWrap: uiSettings.layout.shrinks,
       appBarLeading: uiSettings.presentation == WoFormPresentation.page
           ? quitButton
           : null,

@@ -119,58 +119,66 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   // --- MULTI STEP ---
 
   // If false i returned, the new index is rejected
-  bool _onMultistepControllerUpdate(int multistepIndex) {
-    if (multistepIndex < 0) return false;
+  MultistepFailure? _onMultistepControllerUpdate(int multistepIndex) {
+    if (multistepIndex < 0) return MultistepFailure.startOfForm;
 
     final newValues = state.copy();
 
     final getNextStep = _root.uiSettings.multistepSettings?.getNextStep;
     final currentIndex = state.multistepIndex;
-    if (getNextStep != null && multistepIndex > currentIndex) {
-      final generatedSteps = newValues.generatedSteps;
-      final nextStepId = getNextStep(generatedSteps[currentIndex], newValues);
+    if (multistepIndex > currentIndex) {
+      if (getNextStep != null) {
+        final generatedSteps = newValues.generatedSteps;
 
-      if (multistepIndex == generatedSteps.length) {
-        // There is no further step, can't increase the index
-        if (nextStepId == null) {
-          // Reject the MultistepController's update,
-          // will probably submit the entire form as soon as possible
-          return false;
+        final currentStepId = generatedSteps[currentIndex];
+        final nextStepId = getNextStep(currentStepId, newValues);
+
+        if (currentStepId == nextStepId) {
+          return MultistepFailure.stayInPlace;
         }
 
-        newValues._generatedSteps = [...generatedSteps, nextStepId];
-      } else if (multistepIndex < generatedSteps.length) {
-        final naturalNextStepId = generatedSteps[multistepIndex];
-        if (nextStepId != naturalNextStepId) {
+        if (multistepIndex == generatedSteps.length) {
           // There is no further step, can't increase the index
           if (nextStepId == null) {
             // Reject the MultistepController's update,
             // will probably submit the entire form as soon as possible
-            return false;
+            return MultistepFailure.endOfForm;
           }
 
-          // Reset steps generated after multistepIndex
-          for (final stepIdToReset in generatedSteps.skip(multistepIndex)) {
-            final stepToReset = _root.children.firstWhereOrNull(
-              (step) => step.id == stepIdToReset,
-            );
+          newValues._generatedSteps = [...generatedSteps, nextStepId];
+        } else if (multistepIndex < generatedSteps.length) {
+          final naturalNextStepId = generatedSteps[multistepIndex];
+          if (nextStepId != naturalNextStepId) {
+            // There is no further step, can't increase the index
+            if (nextStepId == null) {
+              // Reject the MultistepController's update,
+              // will probably submit the entire form as soon as possible
+              return MultistepFailure.endOfForm;
+            }
 
-            newValues._values
-              ..removeWhere((key, value) => key.startsWith('/$stepIdToReset'))
-              ..addAll(stepToReset?.getInitialValues(parentPath: '') ?? {});
+            // Reset steps generated after multistepIndex
+            for (final stepIdToReset in generatedSteps.skip(multistepIndex)) {
+              final stepToReset = _root.children.firstWhereOrNull(
+                (step) => step.id == stepIdToReset,
+              );
+
+              newValues._values
+                ..removeWhere((key, value) => key.startsWith('/$stepIdToReset'))
+                ..addAll(stepToReset?.getInitialValues(parentPath: '') ?? {});
+            }
+
+            newValues._generatedSteps = [
+              ...generatedSteps.take(multistepIndex),
+              nextStepId,
+            ];
           }
-
-          newValues._generatedSteps = [
-            ...generatedSteps.take(multistepIndex),
-            nextStepId,
-          ];
         }
       }
     }
 
     newValues._multistepIndex = multistepIndex;
     emit(newValues);
-    return true;
+    return null;
   }
 
   // --- INPUTS NODE ---
@@ -276,10 +284,10 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   }) => onValuesChanged({path: value}, updateStatus: updateStatus);
 
   /// **Use this method precautiously since there is no type checking !**
-  void onValuesChanged(
+  Future<void> onValuesChanged(
     Json values, {
     UpdateStatus updateStatus = UpdateStatus.yes,
-  }) {
+  }) async {
     // Remove paths of locked inputs and transform any #path
     // ignore: parameter_assignments
     values = {
@@ -294,6 +302,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     );
 
     final shouldUpdateStatus = switch (updateStatus) {
+      UpdateStatus.no => false,
       UpdateStatus.ifPathAlreadyVisited => atLeastOnePathWasVisited,
       UpdateStatus.yesWithoutErrorUpdateIfPathNotVisited ||
       UpdateStatus.yes => true,
@@ -316,6 +325,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
     if (shouldUpdateStatus) {
       final shouldUpdateErrors = switch (updateStatus) {
+        UpdateStatus.no => false,
         // if one of the paths were already visited,
         // then we update the errors of all the paths
         UpdateStatus.ifPathAlreadyVisited ||
@@ -338,7 +348,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
         _statusCubit.setInProgress();
       }
 
-      onStatusUpdate?.call(_root, state);
+      await onStatusUpdate?.call(_root, state);
     }
   }
 
@@ -609,6 +619,16 @@ class WoFormValues {
   set _generatedSteps(List<String> steps) =>
       _values[_GENERATED_STEPS_KEY] = steps;
 
+  /// The id of the step that the form is currently
+  String? get currentStepId {
+    final generatedStepsOrNull = _values[_GENERATED_STEPS_KEY] as List<String>?;
+    if (generatedStepsOrNull == null) return null;
+    final multistepIndexOrNull = _values[MULTISTEP_INDEX_KEY] as int?;
+    if (multistepIndexOrNull == null) return null;
+    if (multistepIndexOrNull > generatedStepsOrNull.length - 1) return null;
+    return generatedStepsOrNull[multistepIndex];
+  }
+
   // --- FOCUS ---
 
   // ignore: constant_identifier_names
@@ -679,4 +699,8 @@ enum UpdateStatus {
   /// When updating the value of this path, update the status of the form
   /// and mark the path as visited.
   yes,
+
+  /// Do not update the status of the form. Only use for internal data
+  /// that should not trigger anything in your form.
+  no,
 }

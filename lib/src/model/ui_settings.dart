@@ -634,6 +634,12 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     /// Default to StringFieldLocation.inside
     StringFieldLocation? errorLocation,
     StringFieldAction? action,
+
+    /// By default, this is determined by [textInputAction]:
+    ///
+    /// - **`false`** if the action is navigational or internal
+    /// (`.next`, `.previous`, `.continueAction`, or `.newline`).
+    /// - **`true`** for any other action.
     bool? submitFormOnFieldSubmitted,
     @TextInputTypeConverter() TextInputType? keyboardType,
     bool? obscureText,
@@ -718,6 +724,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     StringFieldLocation? prefixIconLocation,
     StringFieldLocation? errorLocation,
     bool? submitFormOnFieldSubmitted,
+    WoFormAutofocus? autofocus = WoFormAutofocus.no,
     TextInputAction? textInputAction,
     String? invalidRegexMessage,
     TextStyle? style,
@@ -749,6 +756,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
       AutofillHints.password,
       AutofillHints.newPassword,
     ],
+    autofocus: autofocus,
     maxLines: 1,
   );
 
@@ -891,6 +899,9 @@ abstract class WoFormUiSettings with _$WoFormUiSettings {
     /// The body consists of your inputs and potentially the submit button,
     /// if [WoFormUiSettings.submitButtonPosition] is SubmitButtonPosition.body
     /// (wich is the default value).
+    ///
+    /// Due to PageView restrictions, [LayoutMethod.shrinkWrap] is incompatible
+    /// with [multistepSettings].
     @Default(LayoutMethod.scrollable) LayoutMethod layout,
 
     /// Controls how the form is presented to the user.
@@ -961,6 +972,7 @@ enum LayoutMethod {
   flexible;
 
   bool get isScrollable => this == LayoutMethod.scrollable;
+  bool get shrinks => this == LayoutMethod.shrinkWrap;
   bool get supportFlex => this == LayoutMethod.flexible;
 
   /// Transforms a flex value into a layout method. Possible values :
@@ -1037,10 +1049,13 @@ sealed class MultistepSettings with _$MultistepSettings {
 
     /// Called when a step (not the last step) is submited (optionnal).
     /// [step] is the node of the submitted step.
-    @notSerializable OnTemporarySubmittingDef? onTemporarySubmitting,
+    @notSerializable OnStepSubmittingDef? onStepSubmitting,
 
     /// Called when a step (not the last step) was successfully submitted.
-    /// If the result is a string, the step with this id will be the next step.
+    /// If `null` is returned, the entire form will be submitted right after.
+    /// Otherwise, the step with the returned id will be the next step.
+    /// You can return the current step id if you want to stay in place.
+    ///
     /// [stepId] is the id of the submitted step.
     @notSerializable NextStepDef? getNextStep,
 
@@ -1061,5 +1076,5 @@ sealed class MultistepSettings with _$MultistepSettings {
   bool get generatingSteps => getNextStep != null;
 }
 
-typedef OnTemporarySubmittingDef = Future<void> Function(BuildContext context);
+typedef OnStepSubmittingDef = Future<void> Function(BuildContext context);
 typedef NextStepDef = String? Function(String stepId, WoFormValues values);

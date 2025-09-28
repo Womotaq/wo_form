@@ -242,7 +242,7 @@ class SearchScreenState<T> extends State<SearchScreen<T>> {
     final body = ListView(
       padding: EdgeInsets.zero,
       controller: scrollController,
-      shrinkWrap: widget.layout == LayoutMethod.shrinkWrap,
+      shrinkWrap: widget.layout.shrinks,
       children: [
         if (searchResults.isEmpty)
           ...?widget.onNotFound?.call(query)
@@ -260,7 +260,7 @@ class SearchScreenState<T> extends State<SearchScreen<T>> {
     return widget.searchScore == null
         ? body
         : ShrinkableScaffold(
-            shrinkWrap: widget.layout == LayoutMethod.shrinkWrap,
+            shrinkWrap: widget.layout.shrinks,
             appBarHeight: 56 + 32,
             appBarTitle: TextField(
               autofocus: true,

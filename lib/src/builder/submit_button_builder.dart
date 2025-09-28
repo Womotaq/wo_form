@@ -4,10 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/wo_form.dart';
 
 class SubmitButtonBuilder extends StatelessWidget {
-  const SubmitButtonBuilder({this.path, super.key});
+  const SubmitButtonBuilder({this.path, this.builder, super.key});
 
   /// Provide a path if this button can only submit the node at this path.
   final String? path;
+  final SubmitButtonBuilderDef? builder;
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +65,8 @@ class SubmitButtonBuilder extends StatelessWidget {
               path: submitPath,
             );
 
-            return (root.uiSettings.submitButtonBuilder ??
+            return (builder ??
+                    root.uiSettings.submitButtonBuilder ??
                     WoFormTheme.of(context)?.submitButtonBuilder ??
                     SubmitButton.new)
                 .call(submitButtonData);

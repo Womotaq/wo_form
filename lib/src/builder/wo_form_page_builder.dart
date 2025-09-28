@@ -150,7 +150,7 @@ class _WoFormMultistepBodyState extends State<_WoFormMultistepBody> {
   /// and then navigates to the next step.
   ///
   /// Usually called at the start of a transition animation
-  Future<void> addTemporarySubmitData() async {
+  void addTemporarySubmitData() {
     if (!mounted) return;
 
     final valuesCubit = context.read<WoFormValuesCubit>();
@@ -171,10 +171,10 @@ class _WoFormMultistepBodyState extends State<_WoFormMultistepBody> {
       onSubmitting: () async {
         FocusScope.of(context).unfocus();
 
-        await widget.multistepSettings.onTemporarySubmitting?.call(context);
+        await widget.multistepSettings.onStepSubmitting?.call(context);
 
-        final abortReason = stepController.nextStep();
-        return abortReason == 'end-of-form';
+        final failure = stepController.nextStep();
+        return failure == MultistepFailure.endOfForm;
       },
       path: '/${step.id}',
     );
@@ -317,20 +317,18 @@ class MultistepController {
   /// prior to accessing [page].
   double? get page => _controller.page;
 
-  /// Possible return values :
-  /// - 'end-of-form' : there is no next step.
-  /// - 'error' : an error occured
-  /// - null : success
-  String? nextStep() {
+  MultistepFailure? nextStep() {
     final page = _controller.page;
 
     // Can't move if already moving
-    if (page == null || page.toInt() != page) return 'error';
+    if (page == null || page.toInt() != page) {
+      return MultistepFailure.error;
+    }
 
     final nextPage = (page.toInt()) + 1;
-    final canAnimate = valuesCubit._onMultistepControllerUpdate(nextPage);
+    final failure = valuesCubit._onMultistepControllerUpdate(nextPage);
 
-    if (canAnimate) {
+    if (failure == null) {
       unawaited(
         _controller.animateToPage(
           nextPage,
@@ -340,23 +338,21 @@ class MultistepController {
       );
     }
 
-    return canAnimate ? null : 'end-of-form';
+    return failure;
   }
 
-  /// Possible return values :
-  /// - 'start-of-form' : there is no previous step.
-  /// - 'error' : an error occured
-  /// - null : success
-  String? previousStep() {
+  MultistepFailure? previousStep() {
     final page = _controller.page;
 
     // Can't move if already moving
-    if (page == null || page.toInt() != page) return 'error';
+    if (page == null || page.toInt() != page) {
+      return MultistepFailure.error;
+    }
 
     final nextPage = (page.toInt()) - 1;
-    final canAnimate = valuesCubit._onMultistepControllerUpdate(nextPage);
+    final failure = valuesCubit._onMultistepControllerUpdate(nextPage);
 
-    if (canAnimate) {
+    if (failure == null) {
       unawaited(
         _controller.animateToPage(
           nextPage,
@@ -366,20 +362,22 @@ class MultistepController {
       );
     }
 
-    return canAnimate ? null : 'start-of-form';
+    return failure;
   }
 
-  void backToStep(int step) {
+  MultistepFailure? backToStep(int step) {
     final page = _controller.page;
 
     // Can't move if already moving
-    if (page == null || page.toInt() != page) return;
+    if (page == null || page.toInt() != page) {
+      return MultistepFailure.error;
+    }
 
     // Can only go back
-    if (page < step) return;
-    final canAnimate = valuesCubit._onMultistepControllerUpdate(step);
+    if (page < step) return MultistepFailure.error;
+    final failure = valuesCubit._onMultistepControllerUpdate(step);
 
-    if (canAnimate) {
+    if (failure == null) {
       unawaited(
         _controller.animateToPage(
           step,
@@ -388,10 +386,13 @@ class MultistepController {
         ),
       );
     }
+    return failure;
   }
 
   void dispose() => _controller.dispose();
 }
+
+enum MultistepFailure { error, endOfForm, startOfForm, stayInPlace }
 
 class _ControllersManager extends StatefulWidget {
   const _ControllersManager({required this.child});

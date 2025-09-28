@@ -93,9 +93,9 @@ class Push {
     backgroundColor: Theme.of(context).colorScheme.surfaceBright,
     constraints: BoxConstraints(
       maxWidth: overlayMaxWidth,
-      minWidth: layout == LayoutMethod.shrinkWrap ? 0 : overlayMaxWidth,
+      minWidth: layout.shrinks ? 0 : overlayMaxWidth,
       maxHeight: overlayMaxHeight,
-      minHeight: layout == LayoutMethod.shrinkWrap ? 0 : overlayMaxHeight,
+      minHeight: layout.shrinks ? 0 : overlayMaxHeight,
     ),
     bodyBuilder: (_) => child,
   );
