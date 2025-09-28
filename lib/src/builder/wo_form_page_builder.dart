@@ -239,28 +239,38 @@ class MultistepController {
   /// prior to accessing [page].
   double? get page => _controller.page;
 
-  MultistepFailure? animateToStep(int step) {
+  MultistepFailure? jumpToStep(int step) {
     final page = _controller.page;
     // Can't move if already moving
     if (page == null || page.toInt() != page) return MultistepFailure.error;
 
     final failure = valuesCubit._onMultistepControllerUpdate(step);
     if (failure == null) {
-      unawaited(
-        _controller.animateToPage(
-          step,
-          duration: WoFormTheme.STEP_TRANSITION_DURATION,
-          curve: Curves.easeIn,
-        ),
+      _controller.jumpToPage(step);
+    }
+    return failure;
+  }
+
+  Future<MultistepFailure?> animateToStep(int step) async {
+    final page = _controller.page;
+    // Can't move if already moving
+    if (page == null || page.toInt() != page) return MultistepFailure.error;
+
+    final failure = valuesCubit._onMultistepControllerUpdate(step);
+    if (failure == null) {
+      await _controller.animateToPage(
+        step,
+        duration: WoFormTheme.STEP_TRANSITION_DURATION,
+        curve: Curves.easeIn,
       );
     }
     return failure;
   }
 
-  MultistepFailure? nextStep() =>
+  Future<MultistepFailure?> nextStep() =>
       animateToStep((_controller.page?.toInt() ?? 0) + 1);
 
-  MultistepFailure? previousStep() =>
+  Future<MultistepFailure?> previousStep() =>
       animateToStep((_controller.page?.toInt() ?? 0) - 1);
 
   void dispose() => _controller.dispose();

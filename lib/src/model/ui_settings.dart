@@ -1085,21 +1085,34 @@ sealed class MultistepAction with _$MultistepAction {
   /// if [MultistepSettings.onStepSubmitting] != null.
   const factory MultistepAction.next() = MultistepActionNext;
 
+  /// Will pop all the steps until [predicate] returns true.
+  /// If provided, [then] will be executed next.
+  ///
+  /// Cannot pop the form, will at most pop until the first step.
+  const factory MultistepAction.popUntil(
+    bool Function(String stepId) predicate, {
+
+    /// If provided, this step will be pushed, and when the animation  ends,
+    /// the other steps will be popped, depending on [predicate].
+    String? replacementStepId,
+  }) = MultistepActionPopUntil;
+
+  /// Will push the step that has the id [stepId]. If there is generated steps
+  /// after the one that is being submitted, and the next generated step has a
+  /// different id, then all the next steps will be cleared.
+  const factory MultistepAction.push({required String stepId}) =
+      MultistepActionPush;
+
   /// Will submit the form, calling [WoForm.onSubmitting].
   ///
   /// WARNING : [WoForm.onSubmitting] will be called even if other steps
   /// contain errors.
   const factory MultistepAction.submitForm() = MultistepActionSubmitForm;
 
-  /// Will push the step that has the id [stepId]. If there is generated steps
-  /// after the one that is being submitted, and the next generated step has a
-  /// different id, then all the next steps will be cleared.
-  const factory MultistepAction.push({
-    required String stepId,
-  }) = MultistepActionPush;
-
   /// Required for the override getter
   const MultistepAction._();
 
   // --
 }
+
+// typedef PredicateDef = bool Function(String stepId);

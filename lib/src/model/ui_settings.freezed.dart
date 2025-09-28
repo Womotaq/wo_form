@@ -2582,34 +2582,72 @@ String toString() {
 /// @nodoc
 
 
-class MultistepActionSubmitForm extends MultistepAction {
-  const MultistepActionSubmitForm(): super._();
+class MultistepActionPopUntil extends MultistepAction {
+  const MultistepActionPopUntil(this.predicate, {this.replacementStepId}): super._();
   
 
+ final  bool Function(String stepId) predicate;
+/// If provided, this step will be pushed, and when the animation  ends,
+/// the other steps will be popped, depending on [predicate].
+ final  String? replacementStepId;
 
-
+/// Create a copy of MultistepAction
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$MultistepActionPopUntilCopyWith<MultistepActionPopUntil> get copyWith => _$MultistepActionPopUntilCopyWithImpl<MultistepActionPopUntil>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MultistepActionSubmitForm);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MultistepActionPopUntil&&(identical(other.predicate, predicate) || other.predicate == predicate)&&(identical(other.replacementStepId, replacementStepId) || other.replacementStepId == replacementStepId));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,predicate,replacementStepId);
 
 @override
 String toString() {
-  return 'MultistepAction.submitForm()';
+  return 'MultistepAction.popUntil(predicate: $predicate, replacementStepId: $replacementStepId)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class $MultistepActionPopUntilCopyWith<$Res> implements $MultistepActionCopyWith<$Res> {
+  factory $MultistepActionPopUntilCopyWith(MultistepActionPopUntil value, $Res Function(MultistepActionPopUntil) _then) = _$MultistepActionPopUntilCopyWithImpl;
+@useResult
+$Res call({
+ bool Function(String stepId) predicate, String? replacementStepId
+});
 
 
+
+
+}
+/// @nodoc
+class _$MultistepActionPopUntilCopyWithImpl<$Res>
+    implements $MultistepActionPopUntilCopyWith<$Res> {
+  _$MultistepActionPopUntilCopyWithImpl(this._self, this._then);
+
+  final MultistepActionPopUntil _self;
+  final $Res Function(MultistepActionPopUntil) _then;
+
+/// Create a copy of MultistepAction
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? predicate = null,Object? replacementStepId = freezed,}) {
+  return _then(MultistepActionPopUntil(
+null == predicate ? _self.predicate : predicate // ignore: cast_nullable_to_non_nullable
+as bool Function(String stepId),replacementStepId: freezed == replacementStepId ? _self.replacementStepId : replacementStepId // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+
+}
 
 /// @nodoc
 
@@ -2676,5 +2714,37 @@ as String,
 
 
 }
+
+/// @nodoc
+
+
+class MultistepActionSubmitForm extends MultistepAction {
+  const MultistepActionSubmitForm(): super._();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MultistepActionSubmitForm);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'MultistepAction.submitForm()';
+}
+
+
+}
+
+
+
 
 // dart format on
