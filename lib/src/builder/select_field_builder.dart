@@ -97,7 +97,7 @@ class SelectFieldBuilder<T> extends StatelessWidget {
                             : (
                                 List<T>? values, {
                                 UpdateStatus updateStatus = UpdateStatus.yes,
-                              }) {
+                              }) async {
                                 if (input.idsOfAvailibleValues != null) {
                                   valuesCubit.onValueChanged(
                                     path: path,
@@ -120,7 +120,7 @@ class SelectFieldBuilder<T> extends StatelessWidget {
                                 input.onValueChanged?.call(values);
 
                                 if (input.submitFormOnSelect) {
-                                  valuesCubit.submit(context);
+                                  await valuesCubit.submit(context);
                                 }
                               },
                       );

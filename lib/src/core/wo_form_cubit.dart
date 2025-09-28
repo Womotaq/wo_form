@@ -118,62 +118,19 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   // --- MULTI STEP ---
 
-  // If false i returned, the new index is rejected
   MultistepFailure? _onMultistepControllerUpdate(int multistepIndex) {
     if (multistepIndex < 0) return MultistepFailure.startOfForm;
 
     final newValues = state.copy();
 
-    final getNextStep = _root.uiSettings.multistepSettings?.getNextStep;
-    final currentIndex = state.multistepIndex;
-    if (multistepIndex > currentIndex) {
-      if (getNextStep != null) {
-        final generatedSteps = newValues.generatedSteps;
+    final generatingSteps =
+        _root.uiSettings.multistepSettings?.generatingSteps ?? false;
+    final steps = generatingSteps
+        ? state.generatedSteps
+        : _root.children.map((step) => step.id).toList();
 
-        final currentStepId = generatedSteps[currentIndex];
-        final nextStepId = getNextStep(currentStepId, newValues);
-
-        if (currentStepId == nextStepId) {
-          return MultistepFailure.stayInPlace;
-        }
-
-        if (multistepIndex == generatedSteps.length) {
-          // There is no further step, can't increase the index
-          if (nextStepId == null) {
-            // Reject the MultistepController's update,
-            // will probably submit the entire form as soon as possible
-            return MultistepFailure.endOfForm;
-          }
-
-          newValues._generatedSteps = [...generatedSteps, nextStepId];
-        } else if (multistepIndex < generatedSteps.length) {
-          final naturalNextStepId = generatedSteps[multistepIndex];
-          if (nextStepId != naturalNextStepId) {
-            // There is no further step, can't increase the index
-            if (nextStepId == null) {
-              // Reject the MultistepController's update,
-              // will probably submit the entire form as soon as possible
-              return MultistepFailure.endOfForm;
-            }
-
-            // Reset steps generated after multistepIndex
-            for (final stepIdToReset in generatedSteps.skip(multistepIndex)) {
-              final stepToReset = _root.children.firstWhereOrNull(
-                (step) => step.id == stepIdToReset,
-              );
-
-              newValues._values
-                ..removeWhere((key, value) => key.startsWith('/$stepIdToReset'))
-                ..addAll(stepToReset?.getInitialValues(parentPath: '') ?? {});
-            }
-
-            newValues._generatedSteps = [
-              ...generatedSteps.take(multistepIndex),
-              nextStepId,
-            ];
-          }
-        }
-      }
+    if (multistepIndex >= steps.length) {
+      return MultistepFailure.endOfForm;
     }
 
     newValues._multistepIndex = multistepIndex;
@@ -196,21 +153,35 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   WoFormNodeMixin get currentNode {
     final tempSubmitData = _tempSubmitDatas.lastOrNull;
-    if (tempSubmitData == null) return _root;
-
-    try {
-      return _root.getChild(
-        path: tempSubmitData.path,
-        values: state,
-      )!;
-    } catch (_) {
-      throw Exception('No node found at path ${tempSubmitData.path}');
+    if (tempSubmitData != null) {
+      try {
+        return _root.getChild(
+          path: tempSubmitData.path,
+          values: state,
+        )!;
+      } catch (_) {
+        throw Exception('No node found at path ${tempSubmitData.path}');
+      }
     }
+
+    if (_root.uiSettings.multistepSettings != null) {
+      if (_root.uiSettings.multistepSettings!.generatingSteps) {
+        final currentStepId = state.currentStepId;
+        return _root.children.firstWhereOrNull(
+              (step) => step.id == currentStepId,
+            ) ??
+            _root;
+      } else {
+        return _root.children[state.multistepIndex];
+      }
+    }
+
+    return _root;
   }
 
   /// The list of validation errors in the current context.
   ///
-  /// For exapmle, in a MultiStepSubmitMode, the errors are step-specific.
+  /// For exapmle, when multistepping, the errors are step-specific.
   Iterable<WoFormInputError> get currentErrors => currentNode.getErrors(
     values: state,
     parentPath: state.submitPath.parentPath,
@@ -468,11 +439,15 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
     try {
       final tempSubmitData = _tempSubmitDatas.lastOrNull;
-      var submitWholeForm = tempSubmitData == null;
+      final bool submitWholeForm;
 
       if (tempSubmitData != null) {
         submitWholeForm = await tempSubmitData.onSubmitting() ?? false;
         _statusCubit.setInProgress();
+      } else if (_root.uiSettings.multistepSettings != null) {
+        submitWholeForm = await _onStepSubmitting(context);
+      } else {
+        submitWholeForm = true;
       }
 
       if (submitWholeForm && context.mounted) {
@@ -482,6 +457,8 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
         } else {
           _statusCubit.setInProgress();
         }
+      } else {
+        _statusCubit.setInProgress();
       }
     } catch (e, s) {
       _statusCubit._setSubmitError(error: e, stackTrace: s);
@@ -493,6 +470,82 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
           _lockCubit.unlockInput(path: path);
         }
       }
+    }
+  }
+
+  /// Return true if [WoForm.onSubmitting] should be called afterward.
+  Future<bool> _onStepSubmitting(BuildContext context) async {
+    final multistepController = MultistepController.of(context);
+    if (multistepController == null) {
+      throw AssertionError(
+        'When MultistepSettings are set, the context provided to '
+        'WoFormValuesCubit.submit() should always have a '
+        'MultistepControllerProvider above.',
+      );
+    }
+    final onStepSubmitting =
+        _root.uiSettings.multistepSettings?.onStepSubmitting;
+    final action = onStepSubmitting == null
+        ? const MultistepActionNext()
+        : await onStepSubmitting.call(context);
+
+    switch (action) {
+      case null:
+        return false;
+      case MultistepActionSubmitForm():
+        return true;
+      case MultistepActionNext():
+        final currentIndex = state.multistepIndex;
+        final steps = onStepSubmitting == null
+            ? _root.children.map((step) => step.id).toList()
+            : state.generatedSteps;
+        if (currentIndex == steps.length - 1) {
+          return true;
+        } else {
+          multistepController.animateToStep(currentIndex + 1);
+          return false;
+        }
+      case MultistepActionPush(stepId: final nextStepId):
+        final currentIndex = state.multistepIndex;
+        final generatedSteps = state.generatedSteps;
+
+        if (currentIndex == generatedSteps.length - 1) {
+          // Currently at the last generated step of the pile.
+          //
+          // Add the step
+          state._generatedSteps = [...generatedSteps, nextStepId];
+        } else if (nextStepId != generatedSteps[currentIndex + 1]) {
+          // Currently before the last generated step of the pile, and
+          // the id of the next step is not the same as the next already
+          // generated step.
+          //
+          // Reset all the steps generated after currentIndex,
+          // then add the step.
+          for (final stepIdToReset in generatedSteps.skip(currentIndex + 1)) {
+            final stepToReset = _root.children.firstWhereOrNull(
+              (step) => step.id == stepIdToReset,
+            );
+
+            state._values
+              ..removeWhere(
+                (key, value) => key.startsWith('/$stepIdToReset'),
+              )
+              ..addAll(
+                stepToReset?.getInitialValues(parentPath: '') ?? {},
+              );
+          }
+
+          state._generatedSteps = [
+            ...generatedSteps.take(currentIndex + 1),
+            nextStepId,
+          ];
+        }
+        // Else, the next generated step is the same as the required one,
+        // we don't need to modify the generated steps.
+
+        // Then, we move on to the next step.
+        multistepController.nextStep();
+        return false;
     }
   }
 }
@@ -581,7 +634,7 @@ class WoFormValues {
   }
 
   bool isPure({required Json initialValues}) => mapEquals(
-    _values..removeWhere((path, _) => path.startsWith('/__wo_reserved')),
+    asMap()..removeWhere((path, _) => path.startsWith('/__wo_reserved')),
     initialValues,
   );
 
@@ -601,18 +654,19 @@ class WoFormValues {
 
   // --- MULTISTEP ---
 
-  /// Only used with MultiStepSubmitMode
+  /// Only used with [MultistepSettings].
   // ignore: constant_identifier_names
   static const MULTISTEP_INDEX_KEY = '/__wo_reserved_step_index';
   int get multistepIndex => _values[MULTISTEP_INDEX_KEY] as int? ?? 0;
   // ignore: avoid_setters_without_getters
   set _multistepIndex(int index) => _values[MULTISTEP_INDEX_KEY] = index;
 
-  /// Only used if MultiStepSubmitMode.nextStep is set
+  /// Only used when [MultistepSettings.onStepSubmitting] != null.
   // ignore: constant_identifier_names
   static const _GENERATED_STEPS_KEY = '/__wo_reserved_generated_steps';
 
-  /// The id of the steps generated by MultiStepSubmitMode.nextStep so far.
+  /// The id of the steps generated by [MultistepSettings.onStepSubmitting]
+  /// so far.
   List<String> get generatedSteps =>
       _values[_GENERATED_STEPS_KEY] as List<String>? ?? [];
   // ignore: avoid_setters_without_getters

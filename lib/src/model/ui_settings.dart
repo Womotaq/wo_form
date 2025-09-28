@@ -1047,17 +1047,9 @@ sealed class MultistepSettings with _$MultistepSettings {
     @notSerializable
     MultiStepProgressIndicatorBuilderDef? progressIndicatorBuilder,
 
-    /// Called when a step (not the last step) is submited (optionnal).
-    /// [step] is the node of the submitted step.
+    /// Called when a step is submited (optionnal). By default, the performed
+    /// action is [MultistepAction.next].
     @notSerializable OnStepSubmittingDef? onStepSubmitting,
-
-    /// Called when a step (not the last step) was successfully submitted.
-    /// If `null` is returned, the entire form will be submitted right after.
-    /// Otherwise, the step with the returned id will be the next step.
-    /// You can return the current step id if you want to stay in place.
-    ///
-    /// [stepId] is the id of the submitted step.
-    @notSerializable NextStepDef? getNextStep,
 
     /// Applied around the fields, not the progress indicator,
     /// nor the submit button.
@@ -1073,8 +1065,41 @@ sealed class MultistepSettings with _$MultistepSettings {
 
   // --
 
-  bool get generatingSteps => getNextStep != null;
+  bool get generatingSteps => onStepSubmitting != null;
 }
 
-typedef OnStepSubmittingDef = Future<void> Function(BuildContext context);
+typedef OnStepSubmittingDef =
+    Future<MultistepAction?> Function(BuildContext context);
 typedef NextStepDef = String? Function(String stepId, WoFormValues values);
+
+@freezed
+sealed class MultistepAction with _$MultistepAction {
+  /// Will find the current step in the steps, and push the step
+  /// that is right after. If the current step is the last one, the form
+  /// will be submitted, calling [WoForm.onSubmitting].
+  ///
+  /// WARNING : [WoForm.onSubmitting] will be called even if other steps
+  /// contain errors.
+  ///
+  /// The steps can be [RootNode.children], or [WoFormValues.generatedSteps]
+  /// if [MultistepSettings.onStepSubmitting] != null.
+  const factory MultistepAction.next() = MultistepActionNext;
+
+  /// Will submit the form, calling [WoForm.onSubmitting].
+  ///
+  /// WARNING : [WoForm.onSubmitting] will be called even if other steps
+  /// contain errors.
+  const factory MultistepAction.submitForm() = MultistepActionSubmitForm;
+
+  /// Will push the step that has the id [stepId]. If there is generated steps
+  /// after the one that is being submitted, and the next generated step has a
+  /// different id, then all the next steps will be cleared.
+  const factory MultistepAction.push({
+    required String stepId,
+  }) = MultistepActionPush;
+
+  /// Required for the override getter
+  const MultistepAction._();
+
+  // --
+}

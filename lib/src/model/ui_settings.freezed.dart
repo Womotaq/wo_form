@@ -2360,15 +2360,9 @@ mixin _$MultistepSettings {
 
 /// Text for the submit button if it navigates to the next form page.
 /// Falls back to submitText if not provided.
- String? get nextText; bool get showProgressIndicator;@notSerializable MultiStepProgressIndicatorBuilderDef? get progressIndicatorBuilder;/// Called when a step (not the last step) is submited (optionnal).
-/// [step] is the node of the submitted step.
-@notSerializable OnStepSubmittingDef? get onStepSubmitting;/// Called when a step (not the last step) was successfully submitted.
-/// If `null` is returned, the entire form will be submitted right after.
-/// Otherwise, the step with the returned id will be the next step.
-/// You can return the current step id if you want to stay in place.
-///
-/// [stepId] is the id of the submitted step.
-@notSerializable NextStepDef? get getNextStep;/// Applied around the fields, not the progress indicator,
+ String? get nextText; bool get showProgressIndicator;@notSerializable MultiStepProgressIndicatorBuilderDef? get progressIndicatorBuilder;/// Called when a step is submited (optionnal). By default, the performed
+/// action is [MultistepAction.next].
+@notSerializable OnStepSubmittingDef? get onStepSubmitting;/// Applied around the fields, not the progress indicator,
 /// nor the submit button.
 ///
 /// Defaults to EdgeInsets.only(top: 16, bottom: 32).
@@ -2385,16 +2379,16 @@ $MultistepSettingsCopyWith<MultistepSettings> get copyWith => _$MultistepSetting
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MultistepSettings&&(identical(other.nextText, nextText) || other.nextText == nextText)&&(identical(other.showProgressIndicator, showProgressIndicator) || other.showProgressIndicator == showProgressIndicator)&&(identical(other.progressIndicatorBuilder, progressIndicatorBuilder) || other.progressIndicatorBuilder == progressIndicatorBuilder)&&(identical(other.onStepSubmitting, onStepSubmitting) || other.onStepSubmitting == onStepSubmitting)&&(identical(other.getNextStep, getNextStep) || other.getNextStep == getNextStep)&&(identical(other.fieldsPadding, fieldsPadding) || other.fieldsPadding == fieldsPadding));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MultistepSettings&&(identical(other.nextText, nextText) || other.nextText == nextText)&&(identical(other.showProgressIndicator, showProgressIndicator) || other.showProgressIndicator == showProgressIndicator)&&(identical(other.progressIndicatorBuilder, progressIndicatorBuilder) || other.progressIndicatorBuilder == progressIndicatorBuilder)&&(identical(other.onStepSubmitting, onStepSubmitting) || other.onStepSubmitting == onStepSubmitting)&&(identical(other.fieldsPadding, fieldsPadding) || other.fieldsPadding == fieldsPadding));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,nextText,showProgressIndicator,progressIndicatorBuilder,onStepSubmitting,getNextStep,fieldsPadding);
+int get hashCode => Object.hash(runtimeType,nextText,showProgressIndicator,progressIndicatorBuilder,onStepSubmitting,fieldsPadding);
 
 @override
 String toString() {
-  return 'MultistepSettings(nextText: $nextText, showProgressIndicator: $showProgressIndicator, progressIndicatorBuilder: $progressIndicatorBuilder, onStepSubmitting: $onStepSubmitting, getNextStep: $getNextStep, fieldsPadding: $fieldsPadding)';
+  return 'MultistepSettings(nextText: $nextText, showProgressIndicator: $showProgressIndicator, progressIndicatorBuilder: $progressIndicatorBuilder, onStepSubmitting: $onStepSubmitting, fieldsPadding: $fieldsPadding)';
 }
 
 
@@ -2405,7 +2399,7 @@ abstract mixin class $MultistepSettingsCopyWith<$Res>  {
   factory $MultistepSettingsCopyWith(MultistepSettings value, $Res Function(MultistepSettings) _then) = _$MultistepSettingsCopyWithImpl;
 @useResult
 $Res call({
- String? nextText, bool showProgressIndicator,@notSerializable MultiStepProgressIndicatorBuilderDef? progressIndicatorBuilder,@notSerializable OnStepSubmittingDef? onStepSubmitting,@notSerializable NextStepDef? getNextStep,@EdgeInsetsNullableConverter() EdgeInsets? fieldsPadding
+ String? nextText, bool showProgressIndicator,@notSerializable MultiStepProgressIndicatorBuilderDef? progressIndicatorBuilder,@notSerializable OnStepSubmittingDef? onStepSubmitting,@EdgeInsetsNullableConverter() EdgeInsets? fieldsPadding
 });
 
 
@@ -2422,14 +2416,13 @@ class _$MultistepSettingsCopyWithImpl<$Res>
 
 /// Create a copy of MultistepSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? nextText = freezed,Object? showProgressIndicator = null,Object? progressIndicatorBuilder = freezed,Object? onStepSubmitting = freezed,Object? getNextStep = freezed,Object? fieldsPadding = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? nextText = freezed,Object? showProgressIndicator = null,Object? progressIndicatorBuilder = freezed,Object? onStepSubmitting = freezed,Object? fieldsPadding = freezed,}) {
   return _then(_self.copyWith(
 nextText: freezed == nextText ? _self.nextText : nextText // ignore: cast_nullable_to_non_nullable
 as String?,showProgressIndicator: null == showProgressIndicator ? _self.showProgressIndicator : showProgressIndicator // ignore: cast_nullable_to_non_nullable
 as bool,progressIndicatorBuilder: freezed == progressIndicatorBuilder ? _self.progressIndicatorBuilder : progressIndicatorBuilder // ignore: cast_nullable_to_non_nullable
 as MultiStepProgressIndicatorBuilderDef?,onStepSubmitting: freezed == onStepSubmitting ? _self.onStepSubmitting : onStepSubmitting // ignore: cast_nullable_to_non_nullable
-as OnStepSubmittingDef?,getNextStep: freezed == getNextStep ? _self.getNextStep : getNextStep // ignore: cast_nullable_to_non_nullable
-as NextStepDef?,fieldsPadding: freezed == fieldsPadding ? _self.fieldsPadding : fieldsPadding // ignore: cast_nullable_to_non_nullable
+as OnStepSubmittingDef?,fieldsPadding: freezed == fieldsPadding ? _self.fieldsPadding : fieldsPadding // ignore: cast_nullable_to_non_nullable
 as EdgeInsets?,
   ));
 }
@@ -2442,7 +2435,7 @@ as EdgeInsets?,
 @JsonSerializable()
 
 class _MultistepSettings extends MultistepSettings {
-  const _MultistepSettings({this.nextText, this.showProgressIndicator = true, @notSerializable this.progressIndicatorBuilder, @notSerializable this.onStepSubmitting, @notSerializable this.getNextStep, @EdgeInsetsNullableConverter() this.fieldsPadding}): super._();
+  const _MultistepSettings({this.nextText, this.showProgressIndicator = true, @notSerializable this.progressIndicatorBuilder, @notSerializable this.onStepSubmitting, @EdgeInsetsNullableConverter() this.fieldsPadding}): super._();
   factory _MultistepSettings.fromJson(Map<String, dynamic> json) => _$MultistepSettingsFromJson(json);
 
 /// Text for the submit button if it navigates to the next form page.
@@ -2450,16 +2443,9 @@ class _MultistepSettings extends MultistepSettings {
 @override final  String? nextText;
 @override@JsonKey() final  bool showProgressIndicator;
 @override@notSerializable final  MultiStepProgressIndicatorBuilderDef? progressIndicatorBuilder;
-/// Called when a step (not the last step) is submited (optionnal).
-/// [step] is the node of the submitted step.
+/// Called when a step is submited (optionnal). By default, the performed
+/// action is [MultistepAction.next].
 @override@notSerializable final  OnStepSubmittingDef? onStepSubmitting;
-/// Called when a step (not the last step) was successfully submitted.
-/// If `null` is returned, the entire form will be submitted right after.
-/// Otherwise, the step with the returned id will be the next step.
-/// You can return the current step id if you want to stay in place.
-///
-/// [stepId] is the id of the submitted step.
-@override@notSerializable final  NextStepDef? getNextStep;
 /// Applied around the fields, not the progress indicator,
 /// nor the submit button.
 ///
@@ -2479,16 +2465,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MultistepSettings&&(identical(other.nextText, nextText) || other.nextText == nextText)&&(identical(other.showProgressIndicator, showProgressIndicator) || other.showProgressIndicator == showProgressIndicator)&&(identical(other.progressIndicatorBuilder, progressIndicatorBuilder) || other.progressIndicatorBuilder == progressIndicatorBuilder)&&(identical(other.onStepSubmitting, onStepSubmitting) || other.onStepSubmitting == onStepSubmitting)&&(identical(other.getNextStep, getNextStep) || other.getNextStep == getNextStep)&&(identical(other.fieldsPadding, fieldsPadding) || other.fieldsPadding == fieldsPadding));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MultistepSettings&&(identical(other.nextText, nextText) || other.nextText == nextText)&&(identical(other.showProgressIndicator, showProgressIndicator) || other.showProgressIndicator == showProgressIndicator)&&(identical(other.progressIndicatorBuilder, progressIndicatorBuilder) || other.progressIndicatorBuilder == progressIndicatorBuilder)&&(identical(other.onStepSubmitting, onStepSubmitting) || other.onStepSubmitting == onStepSubmitting)&&(identical(other.fieldsPadding, fieldsPadding) || other.fieldsPadding == fieldsPadding));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,nextText,showProgressIndicator,progressIndicatorBuilder,onStepSubmitting,getNextStep,fieldsPadding);
+int get hashCode => Object.hash(runtimeType,nextText,showProgressIndicator,progressIndicatorBuilder,onStepSubmitting,fieldsPadding);
 
 @override
 String toString() {
-  return 'MultistepSettings(nextText: $nextText, showProgressIndicator: $showProgressIndicator, progressIndicatorBuilder: $progressIndicatorBuilder, onStepSubmitting: $onStepSubmitting, getNextStep: $getNextStep, fieldsPadding: $fieldsPadding)';
+  return 'MultistepSettings(nextText: $nextText, showProgressIndicator: $showProgressIndicator, progressIndicatorBuilder: $progressIndicatorBuilder, onStepSubmitting: $onStepSubmitting, fieldsPadding: $fieldsPadding)';
 }
 
 
@@ -2499,7 +2485,7 @@ abstract mixin class _$MultistepSettingsCopyWith<$Res> implements $MultistepSett
   factory _$MultistepSettingsCopyWith(_MultistepSettings value, $Res Function(_MultistepSettings) _then) = __$MultistepSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String? nextText, bool showProgressIndicator,@notSerializable MultiStepProgressIndicatorBuilderDef? progressIndicatorBuilder,@notSerializable OnStepSubmittingDef? onStepSubmitting,@notSerializable NextStepDef? getNextStep,@EdgeInsetsNullableConverter() EdgeInsets? fieldsPadding
+ String? nextText, bool showProgressIndicator,@notSerializable MultiStepProgressIndicatorBuilderDef? progressIndicatorBuilder,@notSerializable OnStepSubmittingDef? onStepSubmitting,@EdgeInsetsNullableConverter() EdgeInsets? fieldsPadding
 });
 
 
@@ -2516,15 +2502,175 @@ class __$MultistepSettingsCopyWithImpl<$Res>
 
 /// Create a copy of MultistepSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? nextText = freezed,Object? showProgressIndicator = null,Object? progressIndicatorBuilder = freezed,Object? onStepSubmitting = freezed,Object? getNextStep = freezed,Object? fieldsPadding = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? nextText = freezed,Object? showProgressIndicator = null,Object? progressIndicatorBuilder = freezed,Object? onStepSubmitting = freezed,Object? fieldsPadding = freezed,}) {
   return _then(_MultistepSettings(
 nextText: freezed == nextText ? _self.nextText : nextText // ignore: cast_nullable_to_non_nullable
 as String?,showProgressIndicator: null == showProgressIndicator ? _self.showProgressIndicator : showProgressIndicator // ignore: cast_nullable_to_non_nullable
 as bool,progressIndicatorBuilder: freezed == progressIndicatorBuilder ? _self.progressIndicatorBuilder : progressIndicatorBuilder // ignore: cast_nullable_to_non_nullable
 as MultiStepProgressIndicatorBuilderDef?,onStepSubmitting: freezed == onStepSubmitting ? _self.onStepSubmitting : onStepSubmitting // ignore: cast_nullable_to_non_nullable
-as OnStepSubmittingDef?,getNextStep: freezed == getNextStep ? _self.getNextStep : getNextStep // ignore: cast_nullable_to_non_nullable
-as NextStepDef?,fieldsPadding: freezed == fieldsPadding ? _self.fieldsPadding : fieldsPadding // ignore: cast_nullable_to_non_nullable
+as OnStepSubmittingDef?,fieldsPadding: freezed == fieldsPadding ? _self.fieldsPadding : fieldsPadding // ignore: cast_nullable_to_non_nullable
 as EdgeInsets?,
+  ));
+}
+
+
+}
+
+/// @nodoc
+mixin _$MultistepAction {
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MultistepAction);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'MultistepAction()';
+}
+
+
+}
+
+/// @nodoc
+class $MultistepActionCopyWith<$Res>  {
+$MultistepActionCopyWith(MultistepAction _, $Res Function(MultistepAction) __);
+}
+
+
+
+/// @nodoc
+
+
+class MultistepActionNext extends MultistepAction {
+  const MultistepActionNext(): super._();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MultistepActionNext);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'MultistepAction.next()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class MultistepActionSubmitForm extends MultistepAction {
+  const MultistepActionSubmitForm(): super._();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MultistepActionSubmitForm);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'MultistepAction.submitForm()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class MultistepActionPush extends MultistepAction {
+  const MultistepActionPush({required this.stepId}): super._();
+  
+
+ final  String stepId;
+
+/// Create a copy of MultistepAction
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$MultistepActionPushCopyWith<MultistepActionPush> get copyWith => _$MultistepActionPushCopyWithImpl<MultistepActionPush>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MultistepActionPush&&(identical(other.stepId, stepId) || other.stepId == stepId));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,stepId);
+
+@override
+String toString() {
+  return 'MultistepAction.push(stepId: $stepId)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $MultistepActionPushCopyWith<$Res> implements $MultistepActionCopyWith<$Res> {
+  factory $MultistepActionPushCopyWith(MultistepActionPush value, $Res Function(MultistepActionPush) _then) = _$MultistepActionPushCopyWithImpl;
+@useResult
+$Res call({
+ String stepId
+});
+
+
+
+
+}
+/// @nodoc
+class _$MultistepActionPushCopyWithImpl<$Res>
+    implements $MultistepActionPushCopyWith<$Res> {
+  _$MultistepActionPushCopyWithImpl(this._self, this._then);
+
+  final MultistepActionPush _self;
+  final $Res Function(MultistepActionPush) _then;
+
+/// Create a copy of MultistepAction
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? stepId = null,}) {
+  return _then(MultistepActionPush(
+stepId: null == stepId ? _self.stepId : stepId // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 

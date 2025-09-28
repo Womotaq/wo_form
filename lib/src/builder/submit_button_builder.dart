@@ -38,8 +38,8 @@ class SubmitButtonBuilder extends StatelessWidget {
             // Probably means submitPath == ''
             if (!submitPath.startsWith('/')) return false;
 
-            // When generating steps, it is impossible to predict
-            // when they will end, so we consider they never do.
+            // With dynamic routing, it is impossible to predict
+            // when the the form ends, so we consider it never does.
             if (multistepSettings.generatingSteps) return true;
 
             final submitStepId = submitPath.substring(1);

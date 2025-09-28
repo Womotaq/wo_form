@@ -94,96 +94,19 @@ class _WoFormStandardBody extends StatelessWidget {
   }
 }
 
-class _WoFormMultistepBody extends StatefulWidget {
+class _WoFormMultistepBody extends StatelessWidget {
   const _WoFormMultistepBody({required this.multistepSettings});
 
   final MultistepSettings multistepSettings;
 
-  @override
-  State<_WoFormMultistepBody> createState() => _WoFormMultistepBodyState();
-}
-
-class _WoFormMultistepBodyState extends State<_WoFormMultistepBody> {
-  late final MultistepController stepController;
-  late final ScrollController scrollController;
-
-  @override
-  void initState() {
-    super.initState();
-
-    stepController = MultistepController.of(context, listen: false)!;
-    scrollController = ScrollControllerProvider.of(context)!;
-
-    addTemporarySubmitData();
-  }
-
-  bool get generatingSteps => widget.multistepSettings.generatingSteps;
-
-  WoFormNodeMixin? _stepAtIndex(int index) {
-    final rootChildren = context.read<RootNode>().children;
-
-    if (generatingSteps) {
-      final generatedSteps = context
-          .read<WoFormValuesCubit>()
-          .state
-          .generatedSteps;
-
-      // happens when nextStep() returned null, wich means the end of the form
-      if (index > generatedSteps.length - 1) return null;
-      final stepId = generatedSteps[index];
-      final stepOrNull = rootChildren.firstWhereOrNull(
-        (step) => step.id == stepId,
-      );
-
-      if (stepOrNull == null) {
-        throw ArgumentError('No step found with id $stepId');
-      } else {
-        return stepOrNull;
-      }
-    } else {
-      return rootChildren[index];
-    }
-  }
-
-  /// Adds temporary submit data to the submit button of the current step,
-  /// so that, instead of submitting the form, it submits only the step,
-  /// and then navigates to the next step.
-  ///
-  /// Usually called at the start of a transition animation
-  void addTemporarySubmitData() {
-    if (!mounted) return;
-
-    final valuesCubit = context.read<WoFormValuesCubit>();
-    final multistepIndex = valuesCubit.state.multistepIndex;
-
-    // If node is the last page, we shouldn't add temporary submit data.
-    if (!generatingSteps &&
-        multistepIndex == context.read<RootNode>().children.length - 1) {
-      return valuesCubit.clearTemporarySubmitData();
-    }
-
-    final step = _stepAtIndex(multistepIndex);
-    if (step == null) {
-      return valuesCubit.clearTemporarySubmitData();
-    }
-
-    valuesCubit.addTemporarySubmitData(
-      onSubmitting: () async {
-        FocusScope.of(context).unfocus();
-
-        await widget.multistepSettings.onStepSubmitting?.call(context);
-
-        final failure = stepController.nextStep();
-        return failure == MultistepFailure.endOfForm;
-      },
-      path: '/${step.id}',
-    );
-  }
+  bool get generatingSteps => multistepSettings.generatingSteps;
 
   @override
   Widget build(BuildContext context) {
     final root = context.read<RootNode>();
     final woFormTheme = WoFormTheme.of(context);
+    final stepController = MultistepController.of(context);
+    final scrollController = ScrollControllerProvider.of(context);
 
     final pageView = Builder(
       builder: (context) {
@@ -192,14 +115,14 @@ class _WoFormMultistepBodyState extends State<_WoFormMultistepBody> {
             : null;
 
         return PageView.builder(
-          controller: stepController._controller,
+          controller: stepController?._controller,
           physics: const NeverScrollableScrollPhysics(),
           itemCount: generatedSteps == null ? root.children.length : null,
           itemBuilder: (context, index) {
             final WoFormNodeMixin step;
 
             if (generatedSteps != null) {
-              if (index > generatedSteps.length - 1) return null;
+              if (index >= generatedSteps.length) return null;
               final stepId = generatedSteps[index];
               final stepOrNull = root.children.firstWhereOrNull(
                 (step) => step.id == stepId,
@@ -217,7 +140,7 @@ class _WoFormMultistepBodyState extends State<_WoFormMultistepBody> {
             final stepWidget = Padding(
               padding:
                   // TODO : rework fieldsPadding
-                  widget.multistepSettings.fieldsPadding ??
+                  multistepSettings.fieldsPadding ??
                   const EdgeInsets.only(top: 16, bottom: 32),
               child: step.toWidget(parentPath: ''),
             );
@@ -252,32 +175,27 @@ class _WoFormMultistepBodyState extends State<_WoFormMultistepBody> {
       },
     );
 
-    return BlocListener<WoFormValuesCubit, WoFormValues>(
-      listenWhen: (previous, current) =>
-          previous.multistepIndex != current.multistepIndex,
-      listener: (context, state) => addTemporarySubmitData(),
-      child: Column(
-        children: [
-          if (root.uiSettings.titlePosition == WoFormTitlePosition.header)
-            Builder(
-              builder: (context) {
-                final headerData = WoFormHeaderData(
-                  labelText: root.uiSettings.titleText,
-                );
+    return Column(
+      children: [
+        if (root.uiSettings.titlePosition == WoFormTitlePosition.header)
+          Builder(
+            builder: (context) {
+              final headerData = WoFormHeaderData(
+                labelText: root.uiSettings.titleText,
+              );
 
-                return (root.uiSettings.headerBuilder ??
-                        woFormTheme?.headerBuilder ??
-                        FormHeader.new)
-                    .call(headerData);
-              },
-            ),
-          if (widget.multistepSettings.showProgressIndicator)
-            (widget.multistepSettings.progressIndicatorBuilder ??
-                woFormTheme?.multiStepProgressIndicatorBuilder ??
-                MultiStepProgressIndicator.new)(),
-          Expanded(child: pageView),
-        ],
-      ),
+              return (root.uiSettings.headerBuilder ??
+                      woFormTheme?.headerBuilder ??
+                      FormHeader.new)
+                  .call(headerData);
+            },
+          ),
+        if (multistepSettings.showProgressIndicator)
+          (multistepSettings.progressIndicatorBuilder ??
+              woFormTheme?.multiStepProgressIndicatorBuilder ??
+              MultiStepProgressIndicator.new)(),
+        Expanded(child: pageView),
+      ],
     );
   }
 }
@@ -288,14 +206,18 @@ class MultistepController {
   final PageController _controller;
   final WoFormValuesCubit valuesCubit;
 
-  static MultistepController? of(BuildContext context, {bool listen = true}) =>
-      listen
-      ? context
-            .dependOnInheritedWidgetOfExactType<_MultistepControllerProvider>()
-            ?.controller
-      : context
-            .getInheritedWidgetOfExactType<_MultistepControllerProvider>()
-            ?.controller;
+  // static MultistepController? of(BuildContext context, {bool listen = true}) =>
+  //     listen
+  //     ? context
+  //           .dependOnInheritedWidgetOfExactType<_MultistepControllerProvider>()
+  //           ?.controller
+  //     : context
+  //           .getInheritedWidgetOfExactType<_MultistepControllerProvider>()
+  //           ?.controller;
+
+  static MultistepController? of(BuildContext context) => context
+      .getInheritedWidgetOfExactType<_MultistepControllerProvider>()
+      ?.controller;
 
   /// The current page displayed in the controlled [PageView].
   ///
@@ -317,66 +239,12 @@ class MultistepController {
   /// prior to accessing [page].
   double? get page => _controller.page;
 
-  MultistepFailure? nextStep() {
+  MultistepFailure? animateToStep(int step) {
     final page = _controller.page;
-
     // Can't move if already moving
-    if (page == null || page.toInt() != page) {
-      return MultistepFailure.error;
-    }
+    if (page == null || page.toInt() != page) return MultistepFailure.error;
 
-    final nextPage = (page.toInt()) + 1;
-    final failure = valuesCubit._onMultistepControllerUpdate(nextPage);
-
-    if (failure == null) {
-      unawaited(
-        _controller.animateToPage(
-          nextPage,
-          duration: WoFormTheme.STEP_TRANSITION_DURATION,
-          curve: Curves.easeIn,
-        ),
-      );
-    }
-
-    return failure;
-  }
-
-  MultistepFailure? previousStep() {
-    final page = _controller.page;
-
-    // Can't move if already moving
-    if (page == null || page.toInt() != page) {
-      return MultistepFailure.error;
-    }
-
-    final nextPage = (page.toInt()) - 1;
-    final failure = valuesCubit._onMultistepControllerUpdate(nextPage);
-
-    if (failure == null) {
-      unawaited(
-        _controller.animateToPage(
-          nextPage,
-          duration: WoFormTheme.STEP_TRANSITION_DURATION,
-          curve: Curves.easeIn,
-        ),
-      );
-    }
-
-    return failure;
-  }
-
-  MultistepFailure? backToStep(int step) {
-    final page = _controller.page;
-
-    // Can't move if already moving
-    if (page == null || page.toInt() != page) {
-      return MultistepFailure.error;
-    }
-
-    // Can only go back
-    if (page < step) return MultistepFailure.error;
     final failure = valuesCubit._onMultistepControllerUpdate(step);
-
     if (failure == null) {
       unawaited(
         _controller.animateToPage(
@@ -389,10 +257,16 @@ class MultistepController {
     return failure;
   }
 
+  MultistepFailure? nextStep() =>
+      animateToStep((_controller.page?.toInt() ?? 0) + 1);
+
+  MultistepFailure? previousStep() =>
+      animateToStep((_controller.page?.toInt() ?? 0) - 1);
+
   void dispose() => _controller.dispose();
 }
 
-enum MultistepFailure { error, endOfForm, startOfForm, stayInPlace }
+enum MultistepFailure { error, endOfForm, startOfForm }
 
 class _ControllersManager extends StatefulWidget {
   const _ControllersManager({required this.child});
