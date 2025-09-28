@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:popover/popover.dart';
 import 'package:wo_form/src/utils/extensions.dart';
 import 'package:wo_form/wo_form.dart';
-
-typedef PushDef =
-    Future<T?> Function<T extends Object?>({
-      required BuildContext context,
-      required Widget child,
-      LayoutMethod layout,
-    });
 
 /// All the methods in this class follow the PushContextDef signature.
 class Push {
@@ -155,4 +149,35 @@ class _BottomSheetDragHandle extends StatelessWidget {
       ],
     );
   }
+}
+
+typedef PushDef =
+    Future<T?> Function<T extends Object?>({
+      required BuildContext context,
+      required Widget child,
+      LayoutMethod layout,
+    });
+
+class PushDefNullableConverter extends JsonConverter<PushDef?, String?> {
+  const PushDefNullableConverter();
+
+  @override
+  PushDef? fromJson(String? json) => switch (json) {
+    null => null,
+    'page' => Push.page,
+    'screen' => Push.screen,
+    'modalBottomSheet' => Push.modalBottomSheet,
+    'menu' => Push.menu,
+    _ => null,
+  };
+
+  @override
+  String? toJson(PushDef? object) => switch (object) {
+    null => null,
+    Push.page => 'page',
+    Push.screen => 'screen',
+    Push.modalBottomSheet => 'modalBottomSheet',
+    Push.menu => 'menu',
+    _ => null,
+  };
 }

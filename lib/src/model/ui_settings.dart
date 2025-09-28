@@ -531,7 +531,7 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
     /// without diacritics (e.g., accents, umlauts).
     @notSerializable double Function(WoFormQuery query, T value)? searchScore,
     @notSerializable SearchScreenDef<T>? searchScreenBuilder,
-    @notSerializable PushDef? openChildren,
+    @PushDefNullableConverter() PushDef? openChildren,
     @notSerializable InputHeaderBuilderDef? headerBuilder,
     @notSerializable ScoreWidgetBuilderDef? scoreBuilder,
 
