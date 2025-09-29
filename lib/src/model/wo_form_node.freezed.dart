@@ -689,6 +689,7 @@ class PathBuilderNode extends WoFormNode {
   factory PathBuilderNode.fromJson(Map<String, dynamic> json) => _$PathBuilderNodeFromJson(json);
 
 @override final  String id;
+/// [path] is the path of this node, wich includes its own id.
 @notSerializable final  WoFormNodeMixin Function(String path)? builder;
 
 @JsonKey(name: 'runtimeType')

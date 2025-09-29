@@ -154,13 +154,24 @@ class DynamicInputsNodeAddButton extends StatelessWidget {
                 onSelected: data.onValueChanged == null
                     ? null
                     : (template) => addTemplate(context, template.getChild()),
-                valueBuilder: (template) =>
-                    Text(template?.uiSettings.labelText ?? ''),
+                valueBuilder: (template) => Row(
+                  children: [
+                    if (template?.uiSettings.prefixIcon != null) ...[
+                      ?template?.uiSettings.prefixIcon,
+                      const SizedBox(width: 16),
+                    ],
+                    Expanded(
+                      child: Text(template?.uiSettings.labelText ?? ''),
+                    ),
+                  ],
+                ),
                 helpValueBuilder: (template) =>
                     (template.uiSettings.helperText ?? '').isEmpty
                     ? null
                     : Text(template.uiSettings.helperText ?? ''),
                 builder: headerBuiler,
+                searchScreenLayout: LayoutMethod.shrinkWrap,
+                openSearchScreen: data.uiSettings.openTemplates,
               );
       case DynamicInputsNodeAddButtonPosition.footer:
         Widget footerBuilder(VoidCallback? onPressed) => ListTile(
@@ -176,13 +187,24 @@ class DynamicInputsNodeAddButton extends StatelessWidget {
                 onSelected: data.onValueChanged == null
                     ? null
                     : (template) => addTemplate(context, template.getChild()),
-                valueBuilder: (template) =>
-                    Text(template?.uiSettings.labelText ?? ''),
+                valueBuilder: (template) => Row(
+                  children: [
+                    if (template?.uiSettings.prefixIcon != null) ...[
+                      ?template?.uiSettings.prefixIcon,
+                      const SizedBox(width: 16),
+                    ],
+                    Expanded(
+                      child: Text(template?.uiSettings.labelText ?? ''),
+                    ),
+                  ],
+                ),
                 helpValueBuilder: (template) =>
                     (template.uiSettings.helperText ?? '').isEmpty
                     ? null
                     : Text(template.uiSettings.helperText ?? ''),
                 builder: footerBuilder,
+                searchScreenLayout: LayoutMethod.shrinkWrap,
+                openSearchScreen: data.uiSettings.openTemplates,
               );
     }
   }

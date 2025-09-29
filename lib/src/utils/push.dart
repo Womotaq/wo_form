@@ -27,6 +27,18 @@ class Push {
     layout: layout,
   );
 
+  static Future<V?> dialog<V extends Object?>({
+    required Widget child,
+    required BuildContext context,
+    LayoutMethod layout = LayoutMethod.scrollable,
+  }) => showDialog(
+    context: context,
+    builder: (context) => Dialog(
+      clipBehavior: Clip.hardEdge,
+      child: child,
+    ),
+  );
+
   static Future<T?> modalBottomSheet<T extends Object?>({
     required BuildContext context,
     required Widget child,
@@ -166,6 +178,7 @@ class PushDefNullableConverter extends JsonConverter<PushDef?, String?> {
     null => null,
     'page' => Push.page,
     'screen' => Push.screen,
+    'dialog' => Push.dialog,
     'modalBottomSheet' => Push.modalBottomSheet,
     'menu' => Push.menu,
     _ => null,
@@ -176,6 +189,7 @@ class PushDefNullableConverter extends JsonConverter<PushDef?, String?> {
     null => null,
     Push.page => 'page',
     Push.screen => 'screen',
+    Push.dialog => 'dialog',
     Push.modalBottomSheet => 'modalBottomSheet',
     Push.menu => 'menu',
     _ => null,

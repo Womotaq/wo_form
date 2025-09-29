@@ -262,6 +262,7 @@ abstract class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
     /// Defaults to [DynamicInputsNodeAddButtonPosition.header].
     DynamicInputsNodeAddButtonPosition? addButtonPosition,
     @notSerializable DynamicInputsNodeWidgetBuilderDef? addButtonBuilder,
+    @PushDefNullableConverter() PushDef? openTemplates,
 
     @notSerializable GenerateIdDef? generateId,
     @notSerializable OnDynamicInputDeletionDef? onChildDeletion,
@@ -280,6 +281,11 @@ abstract class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
           labelText: labelText ?? other.labelText,
           helperText: helperText ?? other.helperText,
           reorderable: reorderable ?? other.reorderable,
+          oddEvenRowColors: oddEvenRowColors ?? other.oddEvenRowColors,
+          addButtonText: addButtonText ?? other.addButtonText,
+          addButtonPosition: addButtonPosition ?? other.addButtonPosition,
+          addButtonBuilder: addButtonBuilder ?? other.addButtonBuilder,
+          openTemplates: openTemplates ?? other.openTemplates,
           generateId: generateId ?? other.generateId,
           onChildDeletion: onChildDeletion ?? other.onChildDeletion,
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,
@@ -291,6 +297,7 @@ abstract class DynamicInputUiSettings with _$DynamicInputUiSettings {
   const factory DynamicInputUiSettings({
     String? labelText,
     String? helperText,
+    @notSerializable Widget? prefixIcon,
   }) = _DynamicInputUiSettings;
 
   const DynamicInputUiSettings._();
@@ -303,6 +310,7 @@ abstract class DynamicInputUiSettings with _$DynamicInputUiSettings {
       : DynamicInputUiSettings(
           labelText: labelText ?? other.labelText,
           helperText: helperText ?? other.helperText,
+          prefixIcon: prefixIcon ?? other.prefixIcon,
         );
 }
 

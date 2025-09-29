@@ -176,6 +176,9 @@ _DynamicInputsNodeUiSettings _$DynamicInputsNodeUiSettingsFromJson(
     _$DynamicInputsNodeAddButtonPositionEnumMap,
     json['addButtonPosition'],
   ),
+  openTemplates: const PushDefNullableConverter().fromJson(
+    json['openTemplates'] as String?,
+  ),
 );
 
 Map<String, dynamic> _$DynamicInputsNodeUiSettingsToJson(
@@ -188,6 +191,9 @@ Map<String, dynamic> _$DynamicInputsNodeUiSettingsToJson(
   'addButtonText': instance.addButtonText,
   'addButtonPosition':
       _$DynamicInputsNodeAddButtonPositionEnumMap[instance.addButtonPosition],
+  'openTemplates': const PushDefNullableConverter().toJson(
+    instance.openTemplates,
+  ),
 };
 
 const _$DynamicInputsNodeAddButtonPositionEnumMap = {
