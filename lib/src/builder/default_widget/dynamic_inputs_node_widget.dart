@@ -198,21 +198,8 @@ class DynamicInputsNodeAddButton extends StatelessWidget {
 
     data.onValueChanged?.call(List.from(data.value ?? [])..add(input));
 
-    final form = context.read<RootNode>();
-    final valuesCubit = context.read<WoFormValuesCubit>();
-    final values = valuesCubit.state;
-    for (final path in input.getAllInputPaths(
-      values: values,
-      parentPath: data.path,
-    )) {
-      // TODO valuesChanged
-      final input = form.getChild(path: path, values: values);
-      if (input is WoFormInputMixin) {
-        valuesCubit.onValueChanged(
-          path: path,
-          value: input!.getInitialValues(parentPath: '').values.firstOrNull,
-        );
-      }
-    }
+    context.read<WoFormValuesCubit>().onValuesChanged(
+      input.getInitialValues(parentPath: data.path),
+    );
   }
 }
