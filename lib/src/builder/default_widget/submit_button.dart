@@ -16,22 +16,28 @@ class SubmitButton extends StatelessWidget {
       (WoFormStatusCubit? c) => c?.state is SubmittingStatus,
     );
 
+    final theme = Theme.of(context);
     final woTheme = WoFormTheme.of(context);
 
-    final style =
-        woTheme?.submitButtonStyle?.call(context) ??
-        FilledButtonTheme.of(context).style;
+    final inheritedFormStyle = woTheme?.submitButtonStyle?.call(context);
+    final inheritedAppStyle = theme.filledButtonTheme.style;
+
+    final backgroundColorProperty =
+        inheritedFormStyle?.backgroundColor ??
+        inheritedAppStyle?.backgroundColor;
+    final foregroundColorProperty =
+        inheritedFormStyle?.foregroundColor ??
+        inheritedAppStyle?.backgroundColor;
 
     final backgroundColor = submitting || data.onPressed != null
-        ? style?.backgroundColor?.resolve({}) ??
-              Theme.of(context).colorScheme.primary
-        : style?.backgroundColor?.resolve({WidgetState.disabled}) ??
-              Theme.of(context).disabledColor;
+        ? backgroundColorProperty?.resolve({}) ?? theme.colorScheme.primary
+        : backgroundColorProperty?.resolve({WidgetState.disabled}) ??
+              theme.disabledColor;
     final foregroundColor = submitting || data.onPressed != null
-        ? style?.foregroundColor?.resolve({}) ??
-              Theme.of(context).colorScheme.onPrimary
-        : style?.foregroundColor?.resolve({WidgetState.disabled}) ??
-              Theme.of(context).disabledColor;
+        ? foregroundColorProperty?.resolve({}) ?? theme.colorScheme.onPrimary
+        : foregroundColorProperty?.resolve({WidgetState.disabled}) ??
+              inheritedAppStyle?.backgroundColor?.resolve({}) ??
+              theme.disabledColor;
 
     final loadingIndicator = submitting
         ? SizedBox.square(
@@ -48,7 +54,9 @@ class SubmitButton extends StatelessWidget {
         ? Text(
             data.text ?? 'Submit',
             style:
-                style?.textStyle?.resolve({}) ??
+                (inheritedFormStyle?.textStyle ?? inheritedAppStyle?.textStyle)
+                    ?.resolve({})
+                    ?.copyWith(color: foregroundColor) ??
                 TextStyle(
                   fontWeight: FontWeight.bold,
                   color: foregroundColor,
@@ -66,11 +74,11 @@ class SubmitButton extends StatelessWidget {
             children: [
               if (data.icon != null) Icon(data.icon),
               if (data.icon != null && text != null) const SizedBox(width: 8),
-              if (text != null) text,
+              ?text,
             ],
           ),
         ),
-        if (loadingIndicator != null) loadingIndicator,
+        ?loadingIndicator,
       ],
     );
 
@@ -82,7 +90,7 @@ class SubmitButton extends StatelessWidget {
             as EdgeInsets?;
 
     final button = FilledButton(
-      style: style,
+      style: inheritedFormStyle ?? inheritedAppStyle,
       onPressed: data.onPressed,
       child: child,
     );
