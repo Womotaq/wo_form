@@ -518,6 +518,7 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
     /// Else, the field will be wrapped in a Flexible with a flex value of 10,
     /// and the header with a flex value of [headerFlex].
     int? headerFlex,
+    @notSerializable Widget? prefixIcon,
     @notSerializable ValueBuilderDef<T>? valueBuilder,
     @notSerializable ValueBuilderDef<T>? selectedBuilder,
     @notSerializable Widget? Function(T value)? helpValueBuilder,

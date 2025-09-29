@@ -271,7 +271,19 @@ class _StringFieldState extends State<StringField> {
       labelText: labelLocation.isOutside ? uiSettings.labelText : null,
       helperText: helperLocation.isOutside ? uiSettings.helperText : null,
       errorText: errorLocation.isOutside ? widget.data.errorText : null,
-      prefixIcon: prefixIconLocation.isOutside ? uiSettings.prefixIcon : null,
+      prefixIcon: prefixIconLocation.isOutside && uiSettings.prefixIcon != null
+          ? Padding(
+              padding: EdgeInsets.only(
+                top:
+                    (Theme.of(
+                          context,
+                        ).inputDecorationTheme.contentPadding?.vertical ??
+                        32) /
+                    2,
+              ),
+              child: uiSettings.prefixIcon,
+            )
+          : null,
       child: textField,
     );
   }

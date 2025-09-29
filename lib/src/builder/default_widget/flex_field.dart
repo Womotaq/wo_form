@@ -80,15 +80,7 @@ class FlexField extends StatelessWidget {
             children: [
               if (prefixIcon != null)
                 Padding(
-                  padding: EdgeInsets.only(
-                    top:
-                        (Theme.of(
-                              context,
-                            ).inputDecorationTheme.contentPadding?.vertical ??
-                            32) /
-                        2,
-                    left: 16,
-                  ),
+                  padding: const EdgeInsets.only(left: 16),
                   child: prefixIcon,
                 ),
               Expanded(

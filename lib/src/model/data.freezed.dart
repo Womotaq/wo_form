@@ -441,10 +441,10 @@ mixin _$SubmitButtonData {
 
  String? get text;/// Callback invoked when the form (or a part of it) is submitted. This is
 /// triggered by the [SubmitButton] or any field configured to submit.
- VoidCallback? get onPressed;/// If not empty, submission validation will be scoped to form nodes
-/// whose paths start with this value.
+ VoidCallback? get onPressed;/// If not empty, submission validation will be scoped to the node at
+/// this path, and its children.
 ///
-/// This is useful for validating only a specific section of a larger form.
+/// This is used for validating only a specific section of a larger form.
  String get path; SubmitButtonPosition get position; IconData? get icon;
 /// Create a copy of SubmitButtonData
 /// with the given fields replaced by the non-null parameter values.
@@ -519,10 +519,10 @@ class _SubmitButtonData implements SubmitButtonData {
 /// Callback invoked when the form (or a part of it) is submitted. This is
 /// triggered by the [SubmitButton] or any field configured to submit.
 @override final  VoidCallback? onPressed;
-/// If not empty, submission validation will be scoped to form nodes
-/// whose paths start with this value.
+/// If not empty, submission validation will be scoped to the node at
+/// this path, and its children.
 ///
-/// This is useful for validating only a specific section of a larger form.
+/// This is used for validating only a specific section of a larger form.
 @override final  String path;
 @override final  SubmitButtonPosition position;
 @override final  IconData? icon;

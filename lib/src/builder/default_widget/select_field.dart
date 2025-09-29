@@ -70,6 +70,14 @@ class SelectField<T> extends StatelessWidget {
             hintText: data.uiSettings.hintText,
             searchScore: data.uiSettings.searchScore,
             searchScreenLayout: LayoutMethod.fromFlex(data.uiSettings.flex),
+            initialQuery: context.read<WoFormValuesCubit>().state.queryOf(
+              selectInputPath: data.path,
+            ),
+            onQueryChanged: (query) =>
+                context.read<WoFormValuesCubit>().onValueChanged(
+                  path: '${data.path}-query',
+                  value: query,
+                ),
             searchScreenBuilder: data.uiSettings.searchScreenBuilder,
             openSearchScreen: data.uiSettings.openChildren,
             provider: ({required child}) => RepositoryProvider.value(
@@ -97,6 +105,12 @@ class SelectField<T> extends StatelessWidget {
             helperText: data.uiSettings.helperText,
             errorText: data.errorText,
             trailing: scoreWidget,
+            prefixIcon: data.uiSettings.prefixIcon == null
+                ? null
+                : Padding(
+                    padding: const EdgeInsets.only(top: 8),
+                    child: data.uiSettings.prefixIcon,
+                  ),
             disableMode: data.onValueChanged == null
                 ? FlexFieldDisableMode.header
                 : FlexFieldDisableMode.none,
@@ -128,6 +142,14 @@ class SelectField<T> extends StatelessWidget {
                   searchScreenLayout: LayoutMethod.fromFlex(
                     data.uiSettings.flex,
                   ),
+                  initialQuery: context.read<WoFormValuesCubit>().state.queryOf(
+                    selectInputPath: data.path,
+                  ),
+                  onQueryChanged: (query) =>
+                      context.read<WoFormValuesCubit>().onValueChanged(
+                        path: '${data.path}-query',
+                        value: query,
+                      ),
                   searchScreenBuilder: data.uiSettings.searchScreenBuilder,
                   openSearchScreen: data.uiSettings.openChildren,
                   builder: (onPressed) => IconButton.filled(

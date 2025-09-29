@@ -120,6 +120,8 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
   @Assert('builder != null', 'PathBuilderNode.builder cannot be null')
   const factory WoFormNode.pathBuilder({
     required String id,
+
+    /// [path] is the path of this node, wich includes its own id.
     @notSerializable WoFormNodeMixin Function(String path)? builder,
   }) = PathBuilderNode;
 

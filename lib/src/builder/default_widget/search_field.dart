@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:wo_form/src/utils/shrinkable_scaffold.dart';
 import 'package:wo_form/wo_form.dart';
 
-// TODO : use SearchBuilder
-
 class SearchField<T> extends StatelessWidget {
   SearchField.uniqueChoice({
     required this.values,
@@ -15,6 +13,8 @@ class SearchField<T> extends StatelessWidget {
     Widget Function(T?)? selectedBuilder,
     this.showArrow = true,
     this.searchScore,
+    this.initialQuery,
+    this.onQueryChanged,
     this.provider,
     this.searchScreenLayout = LayoutMethod.scrollable,
     this.searchScreenBuilder,
@@ -35,6 +35,8 @@ class SearchField<T> extends StatelessWidget {
     this.helpValueBuilder,
     this.hintText,
     this.searchScore,
+    this.initialQuery,
+    this.onQueryChanged,
     this.provider,
     this.searchScreenLayout = LayoutMethod.scrollable,
     this.searchScreenBuilder,
@@ -54,6 +56,8 @@ class SearchField<T> extends StatelessWidget {
   final Widget Function(Iterable<T?> values)? selectedBuilder;
   final bool showArrow;
   final double Function(WoFormQuery query, T value)? searchScore;
+  final WoFormQuery? initialQuery;
+  final void Function(WoFormQuery query)? onQueryChanged;
   final Widget Function({required Widget child})? provider;
   final LayoutMethod searchScreenLayout;
   final SearchScreenDef<T>? searchScreenBuilder;
@@ -86,50 +90,57 @@ class SearchField<T> extends StatelessWidget {
       );
     }
 
-    final themedBorder = Theme.of(context).inputDecorationTheme.border;
+    final theme = Theme.of(context);
+    final themedBorder = theme.inputDecorationTheme.border;
+    final borderRadius = themedBorder is OutlineInputBorder
+        ? themedBorder.borderRadius
+        : themedBorder is UnderlineInputBorder
+        ? themedBorder.borderRadius
+        : BorderRadius.zero;
 
     return Opacity(
       opacity: onSelected == null ? 0.3 : 1,
-      child: InkWell(
-        borderRadius: themedBorder is OutlineInputBorder
-            ? themedBorder.borderRadius
-            : themedBorder is UnderlineInputBorder
-            ? themedBorder.borderRadius
-            : BorderRadius.zero,
-        onTap: onSelected == null
-            ? null
-            : () => onPressed(
-                context,
-                valueBuilderSafe,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: theme.inputDecorationTheme.fillColor,
+          border: themedBorder == null
+              ? Border.all()
+              : Border.fromBorderSide(themedBorder.borderSide),
+          borderRadius: borderRadius,
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: borderRadius,
+            onTap: onSelected == null
+                ? null
+                : () => onPressed(
+                    context,
+                    valueBuilderSafe,
+                  ),
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: selectedBuilderSafe(selectedValues),
+                  ),
+                  if (showArrow) const Icon(Icons.keyboard_arrow_down),
+                ],
               ),
-        child: Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: Theme.of(context).inputDecorationTheme.fillColor,
-            border: Border.all(
-              strokeAlign: BorderSide.strokeAlignOutside,
             ),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: selectedBuilderSafe(selectedValues),
-              ),
-              if (showArrow) const Icon(Icons.keyboard_arrow_down),
-            ],
           ),
         ),
       ),
     );
   }
 
-  void onPressed(
+  Future<void> onPressed(
     BuildContext context,
     Widget Function(T value) valueBuilderSafe,
-  ) {
+  ) async {
     FocusScope.of(context).unfocus();
 
     ListTile tileBuilder(BuildContext context, T e) {
@@ -163,12 +174,14 @@ class SearchField<T> extends StatelessWidget {
             onSelected!(value);
           },
           searchScore: searchScore,
+          initialQuery: initialQuery,
+          onQueryChanged: onQueryChanged,
           layout: searchScreenLayout,
         ),
       ),
     );
 
-    (openSearchScreen ??
+    await (openSearchScreen ??
         (searchScore == null ? Push.menu : _fullscreenModalBottomSheet))(
       context: context,
       child: searchScreen,
@@ -194,17 +207,21 @@ typedef SearchScreenDef<T> =
       required Widget Function(BuildContext context, T value) tileBuilder,
       required void Function(T value) onSelect,
       double Function(WoFormQuery query, T value)? searchScore,
+      WoFormQuery? initialQuery,
+      void Function(WoFormQuery query)? onQueryChanged,
       LayoutMethod layout,
       Key? key,
     });
 
-class SearchScreen<T> extends StatefulWidget {
+class SearchScreen<T> extends StatelessWidget {
   const SearchScreen({
     required this.values,
     required this.tileBuilder,
     required this.onSelect,
     this.bottomChildren,
     this.searchScore,
+    this.onQueryChanged,
+    this.initialQuery,
     this.layout = LayoutMethod.scrollable,
     this.onNotFound,
     super.key,
@@ -215,66 +232,57 @@ class SearchScreen<T> extends StatefulWidget {
   final void Function(T value) onSelect;
   final List<Widget>? bottomChildren;
   final double Function(WoFormQuery query, T value)? searchScore;
+  final void Function(WoFormQuery query)? onQueryChanged;
+  final WoFormQuery? initialQuery;
   final LayoutMethod layout;
-  final List<Widget> Function(WoFormQuery query)? onNotFound;
-
-  @override
-  State<SearchScreen<T>> createState() => SearchScreenState();
-}
-
-class SearchScreenState<T> extends State<SearchScreen<T>> {
-  // TODO : clear query button
-  WoFormQuery query = WoFormQuery('');
+  final Widget? onNotFound;
 
   @override
   Widget build(BuildContext context) {
-    final searchResults = widget.searchScore != null && query.clean.isNotEmpty
-        ? (widget.values
-                  .map((value) => (value, widget.searchScore!(query, value)))
-                  .where((e) => e.$2 > 0)
-                  .toList()
-                ..sort((e1, e2) => e2.$2.compareTo(e1.$2)))
-              .map((e) => e.$1)
-        : widget.values;
-
-    final scrollController = ScrollControllerProvider.of(context);
-
-    final body = ListView(
-      padding: EdgeInsets.zero,
-      controller: scrollController,
-      shrinkWrap: widget.layout.shrinks,
-      children: [
-        if (searchResults.isEmpty)
-          ...?widget.onNotFound?.call(query)
-        else
-          ...searchResults.map(
-            (e) => InkWell(
-              onTap: () => widget.onSelect(e),
-              child: widget.tileBuilder(context, e),
+    if (searchScore != null) {
+      return SearchBuilder(
+        data: values,
+        searchScore: searchScore!,
+        initialQuery: initialQuery,
+        onQueryChanged: onQueryChanged,
+        builder: (context, results, textController) => ShrinkableScaffold(
+          shrinkWrap: layout.shrinks,
+          appBarHeight: 56 + 32,
+          appBarTitle: TextField(
+            controller: textController,
+            autofocus: true,
+            decoration: const InputDecoration(
+              prefixIcon: Icon(Icons.search),
             ),
+            // Flutter's default behaviour :
+            // - web : tapping outside instantly unfocuses the field.
+            // - mobile : tapping outside does nothing.
+            // wo_form decided to unfocus search fields on tap down.
+            onTapOutside: (event) => FocusScope.of(context).unfocus(),
           ),
-        ...?widget.bottomChildren,
-      ],
-    );
-
-    return widget.searchScore == null
-        ? body
-        : ShrinkableScaffold(
-            shrinkWrap: widget.layout.shrinks,
-            appBarHeight: 56 + 32,
-            appBarTitle: TextField(
-              autofocus: true,
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.search),
-              ),
-              onChanged: (value) => setState(() => query = WoFormQuery(value)),
-              // Flutter's default behaviour :
-              // - web : tapping outside instantly unfocuses the field.
-              // - mobile : tapping outside does nothing.
-              // wo_form decided to unfocus search fields on tap down.
-              onTapOutside: (event) => FocusScope.of(context).unfocus(),
-            ),
-            body: body,
-          );
+          body: body(context, results),
+        ),
+      );
+    } else {
+      return body(context, values);
+    }
   }
+
+  Widget body(BuildContext context, Iterable<T> results) => ListView(
+    padding: EdgeInsets.zero,
+    controller: ScrollControllerProvider.of(context),
+    shrinkWrap: layout.shrinks,
+    children: [
+      if (results.isEmpty)
+        ?onNotFound
+      else
+        ...results.map(
+          (e) => InkWell(
+            onTap: () => onSelect(e),
+            child: tileBuilder(context, e),
+          ),
+        ),
+      ...?bottomChildren,
+    ],
+  );
 }
