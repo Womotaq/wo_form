@@ -106,7 +106,9 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     }
 
     if (root.uiSettings.multistepSettings != null) {
-      values._multistepIndex = 0;
+      values
+        .._multistepIndex = 0
+        .._setSubmitPath('/${root.children.firstOrNull?.id}');
       if (root.uiSettings.multistepSettings!.generatingSteps) {
         values._generatedSteps = [root.children.first.id];
       }
@@ -135,7 +137,10 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
       return MultistepFailure.endOfForm;
     }
 
-    newValues._multistepIndex = multistepIndex;
+    newValues
+      .._multistepIndex = multistepIndex
+      .._setSubmitPath('/${steps[multistepIndex]}');
+
     emit(newValues);
     return null;
   }
@@ -148,7 +153,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   /// is popped and then rebuilt.
   void inputsNodeShowingChildrenInitially(String path) {
     if (state.inputsNodeShownChildrenInitially(path)) return;
-    state._inputsNodeShowingChildrenInitially(path);
+    emit(state.copy().._inputsNodeShowingChildrenInitially(path));
   }
 
   // --- CURRENT STATE ---
@@ -200,23 +205,25 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
       onSubmitting: onSubmitting,
       path: path,
     ));
-    state._setSubmitPath(path);
+    emit(state.copy().._setSubmitPath(path));
   }
 
   void clearTemporarySubmitData() {
     _tempSubmitDatas.clear();
-    state._clearSubmitPath();
+    emit(state.copy().._clearSubmitPath());
   }
 
   void removeTemporarySubmitData({required String path}) {
+    final newValues = state.copy();
     for (final data in _tempSubmitDatas.toList()) {
       if (data.path == path) {
         _tempSubmitDatas.remove(data);
         if (state.submitPath == data.path) {
-          state._clearSubmitPath();
+          newValues._clearSubmitPath();
         }
       }
     }
+    emit(newValues);
   }
 
   // --- FOCUS ---
@@ -402,6 +409,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     FocusScope.of(context).unfocus();
 
     final node = currentNode;
+
     final submitPath = state.submitPath;
 
     _submittedPaths.add(submitPath);
@@ -520,56 +528,51 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
           state.multistepIndex + 1,
         );
         return failure == MultistepFailure.endOfForm;
-
-      // final currentIndex = state.multistepIndex;
-      // final steps =
-      //     _root.uiSettings.multistepSettings?.onStepSubmitting == null
-      //     ? _root.children.map((step) => step.id).toList()
-      //     : state.generatedSteps;
-      // if (currentIndex == steps.length - 1) {
-      //   return true;
-      // } else {
-      //   multistepController.animateToStep(currentIndex + 1);
-      //   return false;
-      // }
       case MultistepActionPopUntil(
         predicate: final predicate,
         replacementStepId: final replacementStepId,
       ):
         final generatedSteps = state.generatedSteps;
         final currentIndex = state.multistepIndex;
-        var index = currentIndex;
-        while (index > 0 && !predicate(generatedSteps[index])) {
-          index--;
+        var keepUntilIndex = currentIndex;
+        while (keepUntilIndex > 0 &&
+            !predicate(generatedSteps[keepUntilIndex])) {
+          keepUntilIndex--;
         }
 
         final newValues = state.copy();
-        _resetSteps(values: newValues, keepUntilIndex: index);
+        _resetSteps(values: newValues, keepUntilIndex: keepUntilIndex);
 
         MultistepFailure? failure;
 
         if (replacementStepId != null) {
           final newSteps = [
-            ...generatedSteps.take(index + 1),
+            ...generatedSteps.take(keepUntilIndex + 1),
             replacementStepId,
           ];
 
-          newValues._generatedSteps = [
-            ...generatedSteps.take(currentIndex + 1),
-            replacementStepId,
-          ];
+          emit(
+            state.copy()
+              .._generatedSteps = [
+                ...generatedSteps.take(currentIndex + 1),
+                replacementStepId,
+              ],
+          );
           failure = await multistepController.animateToStep(
             currentIndex + 1,
           );
           if (failure != null) return false;
-          newValues._generatedSteps = newSteps;
-          failure = multistepController.jumpToStep(index + 1);
+          emit(state.copy().._generatedSteps = newSteps);
+          multistepController.jumpToStep(keepUntilIndex + 1);
         } else {
-          newValues._generatedSteps = [...generatedSteps.take(index + 1)];
-          failure = await multistepController.animateToStep(index);
+          emit(
+            state.copy()
+              .._generatedSteps = [
+                ...generatedSteps.take(keepUntilIndex + 1),
+              ],
+          );
+          await multistepController.animateToStep(keepUntilIndex);
         }
-
-        if (failure != null) emit(newValues);
         return false;
       case MultistepActionPush(stepId: final nextStepId):
         final currentIndex = state.multistepIndex;

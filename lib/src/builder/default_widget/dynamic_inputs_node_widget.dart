@@ -205,6 +205,7 @@ class DynamicInputsNodeAddButton extends StatelessWidget {
       values: values,
       parentPath: data.path,
     )) {
+      // TODO valuesChanged
       final input = form.getChild(path: path, values: values);
       if (input is WoFormInputMixin) {
         valuesCubit.onValueChanged(

@@ -58,10 +58,10 @@ abstract class SubmitButtonData with _$SubmitButtonData {
     /// triggered by the [SubmitButton] or any field configured to submit.
     required VoidCallback? onPressed,
 
-    /// If not empty, submission validation will be scoped to form nodes
-    /// whose paths start with this value.
+    /// If not empty, submission validation will be scoped to the node at
+    /// this path, and its children.
     ///
-    /// This is useful for validating only a specific section of a larger form.
+    /// This is used for validating only a specific section of a larger form.
     required String path,
     required SubmitButtonPosition position,
     IconData? icon,

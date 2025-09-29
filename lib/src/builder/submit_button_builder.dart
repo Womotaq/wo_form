@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/wo_form.dart';
@@ -27,52 +26,48 @@ class SubmitButtonBuilder extends StatelessWidget {
 
     final formUiSettings = root.uiSettings;
 
+    // If multisteping, use nextText :
+    //    If submitPath != ''
+    //    If !generating steps & atLastStep
+
     return WoFormValueSelector<String>(
       selector: (values) => path ?? values.submitPath,
-      builder: (context, submitPath) {
-        return WoFormValueSelector<bool>(
-          selector: (values) {
-            final multistepSettings = formUiSettings.multistepSettings;
-            if (multistepSettings == null) return false;
+      builder: (context, submitPath) => WoFormValueSelector<bool>(
+        selector: (values) {
+          final multistepSettings = formUiSettings.multistepSettings;
+          if (multistepSettings == null) return false;
 
-            // Probably means submitPath == ''
-            if (!submitPath.startsWith('/')) return false;
+          // Probably means submitPath == ''
+          if (!submitPath.startsWith('/')) return false;
 
-            // With dynamic routing, it is impossible to predict
-            // when the the form ends, so we consider it never does.
-            if (multistepSettings.generatingSteps) return true;
+          // With generating steps, it is impossible to predict
+          // when the the form ends, so we consider it never does.
+          if (multistepSettings.generatingSteps) return true;
 
-            final submitStepId = submitPath.substring(1);
+          return values.multistepIndex != root.children.length - 1;
+        },
+        builder: (context, isTemporarySubmit) {
+          final submitButtonData = SubmitButtonData(
+            text: isTemporarySubmit
+                ? formUiSettings.multistepSettings?.nextText ??
+                      context.read<WoFormL10n?>()?.next()
+                : formUiSettings.submitText ??
+                      context.read<WoFormL10n?>()?.submit(),
+            icon: isTemporarySubmit ? null : formUiSettings.submitIcon,
+            onPressed: disabled
+                ? null
+                : () => context.read<WoFormValuesCubit>().submit(context),
+            position: formUiSettings.submitButtonPosition,
+            path: submitPath,
+          );
 
-            final index = root.children.indexed
-                .firstWhereOrNull((data) => data.$2.id == submitStepId)
-                ?.$1;
-            if (index == null) return false;
-            return index != root.children.length - 1;
-          },
-          builder: (context, isTemporaryStep) {
-            final submitButtonData = SubmitButtonData(
-              text: isTemporaryStep
-                  ? formUiSettings.multistepSettings?.nextText ??
-                        context.read<WoFormL10n?>()?.next()
-                  : formUiSettings.submitText ??
-                        context.read<WoFormL10n?>()?.submit(),
-              icon: isTemporaryStep ? null : formUiSettings.submitIcon,
-              onPressed: disabled
-                  ? null
-                  : () => context.read<WoFormValuesCubit>().submit(context),
-              position: formUiSettings.submitButtonPosition,
-              path: submitPath,
-            );
-
-            return (builder ??
-                    root.uiSettings.submitButtonBuilder ??
-                    WoFormTheme.of(context)?.submitButtonBuilder ??
-                    SubmitButton.new)
-                .call(submitButtonData);
-          },
-        );
-      },
+          return (builder ??
+                  root.uiSettings.submitButtonBuilder ??
+                  WoFormTheme.of(context)?.submitButtonBuilder ??
+                  SubmitButton.new)
+              .call(submitButtonData);
+        },
+      ),
     );
   }
 }
