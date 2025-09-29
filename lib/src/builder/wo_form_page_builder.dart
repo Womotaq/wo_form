@@ -252,10 +252,6 @@ class MultistepController {
   }
 
   Future<MultistepFailure?> animateToStep(int step) async {
-    final page = _controller.page;
-    // Can't move if already moving
-    if (page == null || page.toInt() != page) return MultistepFailure.error;
-
     final failure = valuesCubit._onMultistepControllerUpdate(step);
     if (failure == null) {
       await _controller.animateToPage(

@@ -86,6 +86,8 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   /// temporary submissions.
   final Set<String> _submittedPaths = {};
 
+  bool _skipErrorsOfNextSubmit = false;
+
   // A helper method to compute the initial state cleanly.
   static WoFormValues _calculateInitialState(
     RootNode root,
@@ -243,6 +245,11 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     if (!isFocused) _markPathAsVisited(path: path);
   }
 
+  /// Request the focus on the input at [path].
+  void requestFocus(String path) => _focusNodes[state.getKey(path)]
+    ?..requestFocus()
+    ..nextFocus();
+
   // --- VALUES ---
 
   void clearValues() => emit(WoFormValues(_root.getInitialValues()));
@@ -255,10 +262,10 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   }) => onValuesChanged({path: value}, updateStatus: updateStatus);
 
   /// **Use this method precautiously since there is no type checking !**
-  Future<void> onValuesChanged(
+  void onValuesChanged(
     Json values, {
     UpdateStatus updateStatus = UpdateStatus.yes,
-  }) async {
+  }) {
     // Remove paths of locked inputs and transform any #path
     // ignore: parameter_assignments
     values = {
@@ -319,7 +326,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
         _statusCubit.setInProgress();
       }
 
-      await onStatusUpdate?.call(_root, state);
+      unawaited(onStatusUpdate?.call(_root, state));
     }
   }
 
@@ -387,7 +394,11 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     emit(newValues);
   }
 
-  Future<void> submit(BuildContext context, {bool skipErrors = false}) async {
+  void skipErrorsOfNextSubmit() {
+    _skipErrorsOfNextSubmit = true;
+  }
+
+  Future<void> submit(BuildContext context) async {
     FocusScope.of(context).unfocus();
 
     final node = currentNode;
@@ -405,7 +416,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
           .whereNot((path) => path.isEmpty),
     );
 
-    if (!skipErrors) {
+    if (!_skipErrorsOfNextSubmit) {
       final errors = node.getErrors(
         values: state,
         parentPath: submitPath.parentPath,
@@ -424,6 +435,8 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
           firstInvalidInputPath: errors.first.path,
         );
       }
+    } else {
+      _skipErrorsOfNextSubmit = false;
     }
 
     _statusCubit._setSubmitting();
@@ -485,6 +498,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     return executeAction(action, context);
   }
 
+  /// Return true if [WoForm.onSubmitting] should be called afterward.
   Future<bool> executeAction(
     MultistepAction? action,
     BuildContext context,
@@ -528,7 +542,9 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
         while (index > 0 && !predicate(generatedSteps[index])) {
           index--;
         }
-        _resetSteps(keepUntilIndex: index);
+
+        final newValues = state.copy();
+        _resetSteps(values: newValues, keepUntilIndex: index);
 
         MultistepFailure? failure;
 
@@ -538,7 +554,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
             replacementStepId,
           ];
 
-          state._generatedSteps = [
+          newValues._generatedSteps = [
             ...generatedSteps.take(currentIndex + 1),
             replacementStepId,
           ];
@@ -546,23 +562,26 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
             currentIndex + 1,
           );
           if (failure != null) return false;
-          state._generatedSteps = newSteps;
+          newValues._generatedSteps = newSteps;
           failure = multistepController.jumpToStep(index + 1);
         } else {
-          state._generatedSteps = [...generatedSteps.take(index + 1)];
+          newValues._generatedSteps = [...generatedSteps.take(index + 1)];
           failure = await multistepController.animateToStep(index);
         }
 
-        return failure != null;
+        if (failure != null) emit(newValues);
+        return false;
       case MultistepActionPush(stepId: final nextStepId):
         final currentIndex = state.multistepIndex;
         final generatedSteps = state.generatedSteps;
 
+        final newValues = state.copy();
         if (currentIndex == generatedSteps.length - 1) {
           // Currently at the last generated step of the pile.
           //
           // Add the step
-          state._generatedSteps = [...generatedSteps, nextStepId];
+          newValues._generatedSteps = [...generatedSteps, nextStepId];
+          emit(newValues);
         } else if (nextStepId != generatedSteps[currentIndex + 1]) {
           // Currently before the last generated step of the pile, and
           // the id of the next step is not the same as the next already
@@ -570,13 +589,15 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
           //
           // Reset all the steps generated after currentIndex,
           // then add the step.
-          _resetSteps(keepUntilIndex: currentIndex);
+          _resetSteps(values: newValues, keepUntilIndex: currentIndex);
 
-          state._generatedSteps = [
+          newValues._generatedSteps = [
             ...generatedSteps.take(currentIndex + 1),
             nextStepId,
           ];
         }
+        emit(newValues);
+
         // Else, the next generated step is the same as the required one,
         // we don't need to modify the generated steps.
 
@@ -589,29 +610,33 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   }
 
   // Reset all the steps generated after currentIndex,
-  void _resetSteps({required int keepUntilIndex}) {
+  void _resetSteps({
+    required WoFormValues values,
+    required int keepUntilIndex,
+  }) {
     for (final stepIdToReset in state.generatedSteps.skip(keepUntilIndex + 1)) {
       final stepToReset = _root.children.firstWhereOrNull(
         (step) => step.id == stepIdToReset,
       );
 
-      state._values
-        ..removeWhere(
-          (key, value) => key.startsWith('/$stepIdToReset'),
-        )
-        ..addAll(
-          stepToReset?.getInitialValues(parentPath: '') ?? {},
-        );
+      values._values
+        ..removeWhere((key, value) => key.startsWith('/$stepIdToReset'))
+        ..addAll(stepToReset?.getInitialValues(parentPath: '') ?? {});
     }
+  }
+
+  @override
+  void emit(WoFormValues state) {
+    super.emit(WoFormValues._locked(state._values));
   }
 }
 
-// TODO : can't modify WoFormValuesCubit's state, only copy then modify
 class WoFormValues {
   const WoFormValues(this._values);
+  WoFormValues._locked(Json values) : _values = Map.unmodifiable(values);
 
   // bool _locked = false;
-  final Map<String, dynamic> _values;
+  final Json _values;
 
   static String getAbsolutePath({
     required String parentPath,
