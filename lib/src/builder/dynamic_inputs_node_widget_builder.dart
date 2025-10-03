@@ -31,7 +31,7 @@ class DynamicInputsNodeWidgetBuilder extends StatelessWidget {
     return BlocSelector<WoFormLockCubit, Set<String>, bool>(
       selector: (lockedInputs) => lockedInputs.contains(path),
       builder: (context, inputIsLocked) {
-        return WoFormValueBuilder<List<WoFormElement>>(
+        return WoFormValueBuilder<List<WoFormNode>>(
           path: path,
           builder: (context, inputs) {
             final fieldData = WoFieldData(
@@ -42,12 +42,12 @@ class DynamicInputsNodeWidgetBuilder extends StatelessWidget {
               onValueChanged: inputIsLocked
                   ? null
                   : (
-                      List<WoFormElement>? newInputs, {
+                      List<WoFormNode>? newInputs, {
                       UpdateStatus updateStatus = UpdateStatus.yes,
                     }) {
                       valuesCubit.onValueChanged(
                         path: path,
-                        value: List<WoFormElement>.unmodifiable(
+                        value: List<WoFormNode>.unmodifiable(
                           newInputs ?? [],
                         ),
                         updateStatus: updateStatus,

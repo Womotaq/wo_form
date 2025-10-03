@@ -8,7 +8,7 @@ class DynamicInputsNodeWidget extends StatelessWidget {
 
   final WoFieldData<
     DynamicInputsNode,
-    List<WoFormElement>,
+    List<WoFormNode>,
     DynamicInputsNodeUiSettings
   >
   data;
@@ -67,7 +67,7 @@ class DynamicInputsNodeWidget extends StatelessWidget {
               ? null
               : (oldIndex, newIndex) {
                   try {
-                    final newValues = List<WoFormElement>.from(
+                    final newValues = List<WoFormNode>.from(
                       data.value ?? [],
                     );
                     newValues.insert(
@@ -90,7 +90,7 @@ class DynamicInputsNodeWidget extends StatelessWidget {
     );
   }
 
-  void onRemoveChoice(WoFormElement input) =>
+  void onRemoveChoice(WoFormNode input) =>
       data.onValueChanged?.call(List.from(data.value ?? [])..remove(input));
 }
 
@@ -99,7 +99,7 @@ class DynamicInputsNodeAddButton extends StatelessWidget {
 
   final WoFieldData<
     DynamicInputsNode,
-    List<WoFormElement>,
+    List<WoFormNode>,
     DynamicInputsNodeUiSettings
   >
   data;
@@ -195,7 +195,7 @@ class DynamicInputsNodeAddButton extends StatelessWidget {
     }
   }
 
-  void addTemplate(BuildContext context, WoFormElement inputFromTemplate) {
+  void addTemplate(BuildContext context, WoFormNode inputFromTemplate) {
     final input = inputFromTemplate.withId(
       id:
           (data.uiSettings.generateId ??

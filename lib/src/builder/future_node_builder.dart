@@ -1,34 +1,50 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wo_form/src/utils/extensions.dart';
 import 'package:wo_form/wo_form.dart';
 
 class FutureNodeBuilder<T> extends StatefulWidget {
   const FutureNodeBuilder({
-    required this.parentPath,
-    required this.node,
+    required this.path,
     super.key,
   });
 
-  final String parentPath;
-  final FutureNode<T> node;
+  final String path;
 
   @override
   State<FutureNodeBuilder<T>> createState() => _FutureNodeBuilderState<T>();
 }
 
 class _FutureNodeBuilderState<T> extends State<FutureNodeBuilder<T>> {
+  late final FutureNode<T> node;
+
   @override
   void initState() {
     super.initState();
 
+    final root = context.read<RootNode>();
     final valuesCubit = context.read<WoFormValuesCubit>();
-    final childPath = '${widget.parentPath}/${widget.node.id}';
 
-    final snapshot = valuesCubit.state[childPath] as AsyncSnapshot?;
+    final nodeAtPath = root.getChild(
+      path: widget.path,
+      parentPath: '',
+      values: valuesCubit.state,
+    );
+    if (nodeAtPath is! FutureNode<T>) {
+      throw ArgumentError(
+        'Expected <FutureNode<$T>> at path: "${widget.path}", '
+        'found: <${nodeAtPath.runtimeType}>',
+      );
+    }
+    node = nodeAtPath;
+
+    final snapshot = valuesCubit.state[widget.path] as AsyncSnapshot?;
     if (snapshot != null) {
       final initialSnapshot = AsyncSnapshot.withData(
         ConnectionState.waiting,
-        widget.node.initialData,
+        node.initialData,
       );
 
       if (snapshot != initialSnapshot) {
@@ -37,11 +53,13 @@ class _FutureNodeBuilderState<T> extends State<FutureNodeBuilder<T>> {
       }
     }
 
-    getData(
-      (snapshot) => valuesCubit.onValueChanged(
-        path: childPath,
-        value: snapshot,
-        updateStatus: UpdateStatus.ifPathAlreadyVisited,
+    unawaited(
+      getData(
+        (snapshot) => valuesCubit.onValueChanged(
+          path: widget.path,
+          value: snapshot,
+          updateStatus: UpdateStatus.ifPathAlreadyVisited,
+        ),
       ),
     );
   }
@@ -51,27 +69,28 @@ class _FutureNodeBuilderState<T> extends State<FutureNodeBuilder<T>> {
   ) async {
     try {
       onSnapshotChanged(AsyncSnapshot.waiting());
-      final data = await widget.node.future;
+      final data = await node.future;
 
       if (!mounted) return;
 
       final snapshot = AsyncSnapshot.withData(ConnectionState.done, data);
       onSnapshotChanged(snapshot);
 
-      if (widget.node.willResetToInitialValues) {
+      if (node.willResetToInitialValues) {
         final valuesCubit = context.read<WoFormValuesCubit>();
 
-        final newInitialValues = widget.node.getInitialValues(
-          parentPath: widget.parentPath,
-          initialSnapshot: snapshot,
+        final newInitialValues = node.getInitialValues(
+          parentPath: widget.path.parentPath,
         );
-        for (final entry in newInitialValues.entries) {
-          valuesCubit.onValueChanged(
-            path: entry.key,
-            value: entry.value,
-            updateStatus: UpdateStatus.ifPathAlreadyVisited,
-          );
-        }
+
+        // Overrides the initial snapshot as the one with provided data.
+        // It may keep the form pure if none of the paths were visited.
+        newInitialValues[widget.path] = snapshot;
+
+        valuesCubit.onValuesChanged(
+          newInitialValues,
+          updateStatus: UpdateStatus.ifPathAlreadyVisited,
+        );
       }
     } catch (error) {
       onSnapshotChanged(AsyncSnapshot.withError(ConnectionState.done, error));
@@ -80,19 +99,14 @@ class _FutureNodeBuilderState<T> extends State<FutureNodeBuilder<T>> {
 
   @override
   Widget build(BuildContext context) {
-    final childPath = '${widget.parentPath}/${widget.node.id}';
-
     return WoFormValueBuilder<AsyncSnapshot<T?>>(
-      path: childPath,
+      path: widget.path,
       builder: (context, snapshot) {
-        final input = widget.node.builder(
-          childPath,
-          snapshot ?? const AsyncSnapshot.nothing(),
-        );
+        final input = node.builder!(snapshot ?? const AsyncSnapshot.nothing());
 
         return input.toWidget(
           key: Key(snapshot?.connectionState.name ?? 'none'),
-          parentPath: childPath,
+          parentPath: widget.path,
         );
       },
     );

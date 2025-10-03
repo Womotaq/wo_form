@@ -1,100 +1,25 @@
-import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:wo_form/src/model/json_converter/duration.dart';
-import 'package:wo_form/src/utils/extensions.dart';
-import 'package:wo_form/src/utils/json_annotation.dart';
-import 'package:wo_form/wo_form.dart';
+part of 'wo_form_node.dart';
 
-part 'wo_form_input.freezed.dart';
-part 'wo_form_input.g.dart';
+// abstract class TestBase {
+//   TestBase() : uid = generateUid();
+//   final String uid;
+// }
 
-@freezed
-sealed class WoFormInputError with _$WoFormInputError {
-  const factory WoFormInputError.empty({
-    required String path,
-  }) = EmptyInputError;
-  const factory WoFormInputError.invalid({
-    required String path,
-  }) = InvalidInputError;
-  const factory WoFormInputError.maxBound({
-    required String path,
-  }) = MaxBoundInputError;
-  const factory WoFormInputError.minBound({
-    required String path,
-  }) = MinBoundInputError;
-  const factory WoFormInputError.custom({
-    required String path,
-    required String message,
-  }) = CustomInputError;
-}
+// @freezed
+// sealed class Test<T extends Object?> extends WoFormNode<T> with _$Test {
+//   factory Test.empty() = EmptyTest;
+//   Test._() : super._();
+// }
 
-abstract class WoFormInputBase extends WoFormElement {
-  WoFormInputError? getError(
-    Object? value, {
-    required String parentPath,
-  });
-
-  String? getInvalidExplanation(
-    dynamic value,
-    String parentPath,
-    TranslateInputError? translateError,
-  ) {
-    final error = getError(
-      value,
-      parentPath: parentPath,
-    );
-
-    if (error == null) return null;
-
-    if (error is CustomInputError) return error.message;
-
-    return translateError?.call(error) ?? error.toString();
-  }
-
-  // WoFormElement
-
-  @override
-  Iterable<String> getAllInputPaths({
-    required WoFormValues values,
-    required String parentPath,
-  }) => ['$parentPath/$id'];
-
-  @override
-  Iterable<WoFormInputError> getErrors({
-    required WoFormValues values,
-    required String parentPath,
-    bool recursive = true,
-  }) => [getError(values['$parentPath/$id'], parentPath: parentPath)].nonNulls;
-
-  @override
-  String? getExportKey({
-    required WoFormValues values,
-    required String parentPath,
-  }) => id;
-}
-
-typedef GetCustomErrorDef<T> =
-    WoFormInputError? Function(
-      T? value,
-      String path,
-    );
-typedef GetCustomErrorForListDef<T> =
-    WoFormInputError? Function(
-      List<T> value,
-      String path,
-    );
-
-extension _SelectInputUiSettingsX<T> on SelectInputUiSettings<T> {
-  static Json staticToJsonString(
-    SelectInputUiSettings<String> object,
-  ) => object.toJson();
-}
-
-@freezed
-sealed class WoFormInput extends WoFormInputBase with _$WoFormInput {
-  const factory WoFormInput.boolean({
+// `fromJson: true` is required because instead of the synatx
+// `factory WoFormInput.fromJson`, wich implies T, we use the syntax
+// `static WoFormInput fromJson`, wich deduces T.
+/// [T] is an optionnal type used by fields like :
+/// - [SelectInput] : [T] is the type of the values to choose from
+@Freezed(fromJson: true, toJson: true)
+sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
+    with _$WoFormInput {
+  factory WoFormInput.boolean({
     required String id,
     bool? initialValue,
     @Default(false) bool isRequired,
@@ -102,20 +27,20 @@ sealed class WoFormInput extends WoFormInputBase with _$WoFormInput {
 
     /// An optionnal callback when the value changed
     @notSerializable void Function(bool? value)? onValueChanged,
-    @Default(BooleanInputUiSettings()) BooleanInputUiSettings uiSettings,
+    BooleanInputUiSettings? uiSettings,
   }) = BooleanInput;
 
-  const factory WoFormInput.dateTime({
+  factory WoFormInput.dateTime({
     required String id,
     FlexibleDateTime? initialValue,
     @Default(false) bool isRequired,
     FlexibleDateTime? maxDate,
     FlexibleDateTime? minDate,
     @notSerializable GetCustomErrorDef<DateTime>? getCustomError,
-    @Default(DateTimeInputUiSettings()) DateTimeInputUiSettings uiSettings,
+    DateTimeInputUiSettings? uiSettings,
   }) = DateTimeInput;
 
-  const factory WoFormInput.duration({
+  factory WoFormInput.duration({
     required String id,
     @DurationNullableConverter() Duration? initialValue,
     @Default(false) bool isRequired,
@@ -127,7 +52,7 @@ sealed class WoFormInput extends WoFormInputBase with _$WoFormInput {
     @DurationNullableConverter() Duration? maxDuration,
     @DurationNullableConverter() Duration? minDuration,
     @notSerializable GetCustomErrorDef<Duration>? getCustomError,
-    @Default(DurationInputUiSettings()) DurationInputUiSettings uiSettings,
+    DurationInputUiSettings? uiSettings,
   }) = DurationInput;
 
   /// If you want to use MediaInput, provide an implementation of [MediaService]
@@ -154,7 +79,7 @@ sealed class WoFormInput extends WoFormInputBase with _$WoFormInput {
     'maxCount == null || minCount <= maxCount',
     'maxCount must be higher or equal to minCount',
   )
-  const factory WoFormInput.media({
+  factory WoFormInput.media({
     required String id,
     required MediaImportSettings importSettings,
     required int? maxCount,
@@ -170,14 +95,14 @@ sealed class WoFormInput extends WoFormInputBase with _$WoFormInput {
 
     /// Required if you use MediaInput.export()
     String? uploadPath,
-    @Default(MediaInputUiSettings()) MediaInputUiSettings uiSettings,
+    MediaInputUiSettings? uiSettings,
   }) = MediaInput;
 
   @Assert(
     'maxBound == null || minBound <= maxBound',
     'maxBound must be higher or equal to minBound',
   )
-  const factory WoFormInput.num({
+  factory WoFormInput.num({
     required String id,
     num? initialValue,
     @Default(false) bool isRequired,
@@ -187,41 +112,41 @@ sealed class WoFormInput extends WoFormInputBase with _$WoFormInput {
 
     /// An optionnal callback when the value changed
     @notSerializable void Function(num? value)? onValueChanged,
-    @Default(NumInputUiSettings()) NumInputUiSettings uiSettings,
+    NumInputUiSettings? uiSettings,
   }) = NumInput;
 
-  @Assert(
-    'maxCount == null || minCount <= maxCount',
-    'maxCount must be higher or equal to minCount',
-  )
-  const factory WoFormInput.selectString({
-    required String id,
-    required int? maxCount,
-    @Default(0) int minCount,
-    List<String>? initialValues,
-    @Default([]) List<String> availibleValues,
-    // idsOfAvailibleValues allows to set an identifier to each value.
-    // This way, we keep the advantage of a list : the order
-    // and we gain the advantage of a map : the identifiers
-    // while staying jsonifiable.
-    // If set, the object stored at the path of this input in WoFormValuesCubit
-    // will be the id of the selected value.
-    List<String>? idsOfAvailibleValues,
-    @notSerializable GetCustomErrorForListDef<String>? getCustomError,
+  // TODO : delete
+  // @Assert(
+  //   'maxCount == null || minCount <= maxCount',
+  //   'maxCount must be higher or equal to minCount',
+  // )
+  // factory WoFormInput.selectString({
+  //   required String id,
+  //   required int? maxCount,
+  //   @Default(0) int minCount,
+  //   List<String>? initialValues,
+  //   @Default([]) List<String> availibleValues,
+  //   // idsOfAvailibleValues allows to set an identifier to each value.
+  //   // This way, we keep the advantage of a list : the order
+  //   // and we gain the advantage of a map : the identifiers
+  //   // while staying jsonifiable.
+  //   // If set, the object stored at the path of this input in WoFormValuesCubit
+  //   // will be the id of the selected value.
+  //   List<String>? idsOfAvailibleValues,
+  //   @notSerializable GetCustomErrorForListDef<String>? getCustomError,
 
-    /// An optionnal callback when the value changed
-    @notSerializable void Function(List<String>? value)? onValueChanged,
+  //   /// An optionnal callback when the value changed
+  //   @notSerializable void Function(List<String>? value)? onValueChanged,
 
-    /// Only applies if maxCount is 1
-    @Default(false) bool submitFormOnSelect,
-    @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
-    @Default(SelectInputUiSettings<String>())
-    SelectInputUiSettings<String> uiSettings,
-    // The correct answer is the index of availibleValues
-    QuizSettings? quizSettings,
-  }) = SelectStringInput;
+  //   /// Only applies if maxCount is 1
+  //   @Default(false) bool submitFormOnSelect,
+  //   @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
+  //   SelectInputUiSettings<String>? uiSettings,
+  //   // The correct answer is the index of availibleValues
+  //   QuizSettings? quizSettings,
+  // }) = SelectStringInput;
 
-  const factory WoFormInput.string({
+  factory WoFormInput.string({
     required String id,
     String? initialValue,
     @Default(false) bool isRequired,
@@ -233,9 +158,41 @@ sealed class WoFormInput extends WoFormInputBase with _$WoFormInput {
     @Default(StringInputUiSettings()) StringInputUiSettings uiSettings,
   }) = StringInput;
 
-  WoFormInput._();
+  WoFormInput._() : super._();
 
-  factory WoFormInput.fromJson(Json json) => _$WoFormInputFromJson(json);
+  static WoFormInput fromJson(Json json) => _fromJson(json);
+  static WoFormInput _fromJson(Json json) {
+    try {
+      return _$WoFormInputFromJson(json);
+    } on CheckedFromJsonException catch (error) {
+      if (error.key == 'runtimeType') {
+        return SelectInput.fromJson(json);
+      } else {
+        rethrow;
+      }
+    }
+  }
+
+  // WoFormNode TODO : sort
+
+  @override
+  Iterable<String> getAllInputPaths({
+    required WoFormValues values,
+    required String parentPath,
+  }) => ['$parentPath/$id'];
+
+  @override
+  Iterable<WoFormInputError> getErrors({
+    required WoFormValues values,
+    required String parentPath,
+    bool recursive = true,
+  }) => [getError(values['$parentPath/$id'], parentPath: parentPath)].nonNulls;
+
+  @override
+  String? getExportKey({
+    required WoFormValues values,
+    required String parentPath,
+  }) => id;
 
   // --
 
@@ -287,18 +244,23 @@ sealed class WoFormInput extends WoFormInputBase with _$WoFormInput {
         );
       case NumInput():
         return value as num?;
-      case SelectStringInput(maxCount: final maxCount):
-        return SelectInput._selectedValuesToJson(
-          selectedValues: value as List<String>?,
-          toJsonT: (value) => value,
+      case SelectInput(maxCount: final maxCount, toJsonT: final toJsonT):
+        return SelectInput._selectedValuesToJson<T>(
+          selectedValues: value as List<T>?,
+          toJsonT: toJsonT,
           asList: maxCount != 1,
         );
+      // case SelectStringInput(maxCount: final maxCount):
+      //   return SelectInput._selectedValuesToJson(
+      //     selectedValues: value as List<String>?,
+      //     toJsonT: (value) => value,
+      //     asList: maxCount != 1,
+      //   );
       case StringInput():
         return value as String?;
     }
   }
 
-  @override
   WoFormInputError? getError(dynamic value, {required String parentPath}) {
     switch (this) {
       case BooleanInput(
@@ -429,24 +391,42 @@ sealed class WoFormInput extends WoFormInputBase with _$WoFormInput {
 
         return null;
 
-      case SelectStringInput(
-        id: final inputId,
+      case SelectInput(
         availibleValues: final availibleValues,
         idsOfAvailibleValues: final idsOfAvailibleValues,
         minCount: final minCount,
         maxCount: final maxCount,
         getCustomError: final getCustomError,
       ):
-        return SelectInput._validator<String>(
-          inputId: inputId,
+        return SelectInput._validator<T>(
+          inputId: id,
           parentPath: parentPath,
-          selectedValues: (value as List<String>?) ?? [],
+          selectedValues: (value as List?)?.whereType<T>().toList() ?? [],
           availibleValues: availibleValues,
           idsOfAvailibleValues: idsOfAvailibleValues,
           minCount: minCount,
           maxCount: maxCount,
           getCustomError: getCustomError,
         );
+
+      // case SelectStringInput(
+      //   id: final inputId,
+      //   availibleValues: final availibleValues,
+      //   idsOfAvailibleValues: final idsOfAvailibleValues,
+      //   minCount: final minCount,
+      //   maxCount: final maxCount,
+      //   getCustomError: final getCustomError,
+      // ):
+      //   return SelectInput._validator<String>(
+      //     inputId: inputId,
+      //     parentPath: parentPath,
+      //     selectedValues: (value as List<String>?) ?? [],
+      //     availibleValues: availibleValues,
+      //     idsOfAvailibleValues: idsOfAvailibleValues,
+      //     minCount: minCount,
+      //     maxCount: maxCount,
+      //     getCustomError: getCustomError,
+      //   );
 
       case StringInput(
         isRequired: final isRequired,
@@ -493,8 +473,10 @@ sealed class WoFormInput extends WoFormInputBase with _$WoFormInput {
         return {'$parentPath/$id': initialValue};
       case StringInput(initialValue: final initialValue):
         return {'$parentPath/$id': initialValue};
-      case SelectStringInput(initialValues: final initialValues):
+      case SelectInput(initialValues: final initialValues):
         return {'$parentPath/$id': initialValues};
+      // case SelectStringInput(initialValues: final initialValues):
+      //   return {'$parentPath/$id': initialValues};
     }
   }
 
@@ -514,25 +496,30 @@ sealed class WoFormInput extends WoFormInputBase with _$WoFormInput {
         return NumFieldBuilder(key: key, path: path);
       case StringInput():
         return StringFieldBuilder(key: key, path: path);
-      case SelectStringInput():
-        return SelectStringFieldBuilder(key: key, path: path);
+      case SelectInput():
+        return SelectFieldBuilder<T>(key: key, path: path);
+      // case SelectStringInput():
+      //   return SelectStringFieldBuilder(key: key, path: path);
     }
   }
 
   @override
-  WoFormInput withId({required String id}) => copyWith(id: id);
-
-  @override
   int? flex(BuildContext context) => switch (this) {
-    final SelectStringInput input => input.uiSettings.flex,
+    final SelectInput<T> input => input.uiSettings?.flex,
+    // final SelectStringInput input => input.uiSettings?.flex,
     _ => null,
   };
 }
 
 // Note : when adding a new parameter, make sure to update
-// SelectStringFieldBuilder.
-@Freezed(genericArgumentFactories: true)
-abstract class SelectInput<T> extends WoFormInputBase with _$SelectInput<T> {
+// SelectInput.fromJson() & SelectInput.toJson(), since they are not generated,
+// due to typed-fields like availibleValues.
+@Freezed(toJson: false, fromJson: false)
+abstract class SelectInput<T> extends WoFormInput<T> with _$SelectInput<T> {
+  @Assert(
+    'maxCount == null || minCount <= maxCount',
+    'maxCount must be higher or equal to minCount',
+  )
   const factory SelectInput({
     required String id,
     required int? maxCount,
@@ -561,32 +548,73 @@ abstract class SelectInput<T> extends WoFormInputBase with _$SelectInput<T> {
     ///
     /// Ex :
     /// SelectInput&lt;TimeControl&gt;(
-    ///   toJsonT: (value) => (value as TimeControl?)?.toJson(),
-    ///   fromJsonT: (json) =>
-    ///       TimeControl.fromJson(json as Json? ?? {}),
+    ///   toJsonT: (value) => value.toJson(),
+    ///   fromJsonT: (json) => TimeControl.fromJson(json as Json),
     /// ),
-    @notSerializable dynamic Function(dynamic)? toJsonT,
-    @notSerializable dynamic Function(dynamic)? fromJsonT,
+    @notSerializable Object? Function(T)? toJsonT,
+    @notSerializable T Function(Object?)? fromJsonT,
   }) = _SelectInput<T>;
 
-  SelectInput._();
+  SelectInput._() : super._();
 
-  factory SelectInput.fromJson(
-    Json json,
-    T Function(Object? json) fromJsonT,
-  ) => _$SelectInputFromJson(json, fromJsonT);
+  static SelectInput<Object?> fromJson(Json json) {
+    final availibleValues = json['availibleValues'];
+    if (availibleValues is! Iterable || availibleValues.isEmpty) {
+      throw ArgumentError("Couldn't infer type based on availibleValues");
+    }
+    final valueExample = availibleValues.first;
+    if (valueExample is String) {
+      return _fromJson<String>(json, (data) => data! as String);
+    } else if (valueExample is num) {
+      return _fromJson<num>(json, (data) => data! as num);
+    } else if (valueExample is bool) {
+      return _fromJson<bool>(json, (data) => data! as bool);
+    }
+    throw ArgumentError("Couldn't infer type based on availibleValues");
+  }
 
-  @override
-  // If the override is invalid, go in :
-  // wo_form_input.freezed.dart -> mixin _$SelectInput<T>
-  // Comment the toJson() method.
-  Json toJson() => _$SelectInputToJson(
-    this as _SelectInput<T>,
-    toJsonT ?? _defaultToJsonT<T>,
+  static _SelectInput<V> _fromJson<V>(
+    Map<String, dynamic> json,
+    V Function(Object? json) fromJsonT,
+  ) => _SelectInput<V>(
+    id: json['id'] as String,
+    maxCount: (json['maxCount'] as num?)?.toInt(),
+    minCount: (json['minCount'] as num?)?.toInt() ?? 0,
+    initialValues: (json['initialValues'] as List<dynamic>?)
+        ?.map(fromJsonT)
+        .toList(),
+    availibleValues:
+        (json['availibleValues'] as List<dynamic>?)?.map(fromJsonT).toList() ??
+        const [],
+    idsOfAvailibleValues: (json['idsOfAvailibleValues'] as List<dynamic>?)
+        ?.map((e) => e as String)
+        .toList(),
+    submitFormOnSelect: json['submitFormOnSelect'] as bool? ?? false,
+    uiSettings: json['uiSettings'] == null
+        ? null
+        : SelectInputUiSettings<V>.fromJson(
+            json['uiSettings'] as Map<String, dynamic>,
+          ),
+    quizSettings: json['quizSettings'] == null
+        ? null
+        : QuizSettings.fromJson(json['quizSettings'] as Map<String, dynamic>),
   );
+
+  Json toJson() => <String, dynamic>{
+    'id': id,
+    'maxCount': maxCount,
+    'minCount': minCount,
+    'initialValues': initialValues?.map(toJsonT ?? _defaultToJsonT).toList(),
+    'availibleValues': availibleValues.map(toJsonT ?? _defaultToJsonT).toList(),
+    'idsOfAvailibleValues': idsOfAvailibleValues,
+    'submitFormOnSelect': submitFormOnSelect,
+    'uiSettings': uiSettings?.toJson(),
+    'quizSettings': quizSettings?.toJson(),
+  };
 
   // --
 
+  // TODO : if selectString deleted, move in WoFormInput
   static WoFormInputError? _validator<T>({
     required String inputId,
     required String parentPath,
@@ -634,9 +662,10 @@ abstract class SelectInput<T> extends WoFormInputBase with _$SelectInput<T> {
     return null;
   }
 
+  // TODO : if selectString deleted, move in WoFormInput
   static Object? _selectedValuesToJson<T>({
     required List<T>? selectedValues,
-    required dynamic Function(dynamic)? toJsonT,
+    required Object? Function(T)? toJsonT,
     required bool asList,
   }) {
     if (selectedValues == null) return null;
@@ -645,60 +674,10 @@ abstract class SelectInput<T> extends WoFormInputBase with _$SelectInput<T> {
 
     return asList ? valuesToJson.toList() : valuesToJson.firstOrNull;
   }
-
-  @override
-  Future<void> export({
-    required dynamic into,
-    required WoFormValues values,
-    required String parentPath,
-    required BuildContext context,
-  }) async {
-    final selectedValues = values['$parentPath/$id'] as List<T>?;
-
-    final exportValue = _selectedValuesToJson<T>(
-      selectedValues: selectedValues,
-      toJsonT: toJsonT,
-      asList: maxCount != 1,
-    );
-
-    if (into is List) {
-      into.add(exportValue);
-    } else if (into is Map) {
-      into[getExportKey(values: values, parentPath: parentPath)] = exportValue;
-    }
-  }
-
-  @override
-  WoFormInputError? getError(dynamic value, {required String parentPath}) =>
-      _validator<T>(
-        inputId: id,
-        parentPath: parentPath,
-        selectedValues: (value as List?)?.whereType<T>().toList() ?? [],
-        availibleValues: availibleValues,
-        idsOfAvailibleValues: idsOfAvailibleValues,
-        minCount: minCount,
-        maxCount: maxCount,
-        getCustomError: getCustomError,
-      );
-
-  @override
-  Json getInitialValues({required String parentPath}) => {
-    '$parentPath/$id': initialValues,
-  };
-
-  @override
-  Widget toWidget({required String parentPath, Key? key}) =>
-      SelectFieldBuilder<T>(key: key, path: '$parentPath/$id');
-
-  @override
-  SelectInput<T> withId({required String id}) => copyWith(id: id);
-
-  @override
-  int? flex(BuildContext context) => uiSettings?.flex;
 }
 
 Object? _defaultToJsonT<T>(T value) {
-  if (value is String || value is bool || value is num) {
+  if (value is String || value is bool || value is num || value == null) {
     return value;
   } else if (value is Enum) {
     return (value as Enum).name;
@@ -707,21 +686,52 @@ Object? _defaultToJsonT<T>(T value) {
   throw UnimplementedError('No toJsonT provided for <$T>');
 }
 
-extension SelectStringInputX on SelectStringInput {
-  String? getAvailibleValue({required String id}) {
-    final index = idsOfAvailibleValues?.indexOf(id) ?? -1;
-    return (index < 0 || index >= availibleValues.length)
-        ? null
-        : availibleValues[index];
-  }
-
-  String? getIdOfValue({required String value}) {
-    final index = availibleValues.indexOf(value);
-    return (index < 0 || index >= (idsOfAvailibleValues?.length ?? -1))
-        ? null
-        : idsOfAvailibleValues![index];
-  }
+@freezed
+sealed class WoFormInputError with _$WoFormInputError {
+  const factory WoFormInputError.empty({
+    required String path,
+  }) = EmptyInputError;
+  const factory WoFormInputError.invalid({
+    required String path,
+  }) = InvalidInputError;
+  const factory WoFormInputError.maxBound({
+    required String path,
+  }) = MaxBoundInputError;
+  const factory WoFormInputError.minBound({
+    required String path,
+  }) = MinBoundInputError;
+  const factory WoFormInputError.custom({
+    required String path,
+    required String message,
+  }) = CustomInputError;
 }
+
+typedef GetCustomErrorDef<T> =
+    WoFormInputError? Function(
+      T? value,
+      String path,
+    );
+typedef GetCustomErrorForListDef<T> =
+    WoFormInputError? Function(
+      List<T> value,
+      String path,
+    );
+
+// extension SelectStringInputX on SelectStringInput {
+//   String? getAvailibleValue({required String id}) {
+//     final index = idsOfAvailibleValues?.indexOf(id) ?? -1;
+//     return (index < 0 || index >= availibleValues.length)
+//         ? null
+//         : availibleValues[index];
+//   }
+
+//   String? getIdOfValue({required String value}) {
+//     final index = availibleValues.indexOf(value);
+//     return (index < 0 || index >= (idsOfAvailibleValues?.length ?? -1))
+//         ? null
+//         : idsOfAvailibleValues![index];
+//   }
+// }
 
 extension SelectInputX<T> on SelectInput<T> {
   T? getAvailibleValue({required String id}) {
@@ -738,3 +748,10 @@ extension SelectInputX<T> on SelectInput<T> {
         : idsOfAvailibleValues![index];
   }
 }
+
+// extension _SelectInputUiSettingsX<T> on SelectInputUiSettings<T> {
+//   static Json staticToJsonString(
+//     // TODO : remove
+//     SelectInputUiSettings<String> object,
+//   ) => object.toJson();
+// }

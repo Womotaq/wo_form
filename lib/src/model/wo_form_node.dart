@@ -2,78 +2,35 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:wo_form/src/model/json_converter/duration.dart';
 import 'package:wo_form/src/model/json_converter/input.dart';
 import 'package:wo_form/src/model/json_converter/inputs_list.dart';
 import 'package:wo_form/src/utils/extensions.dart';
 import 'package:wo_form/src/utils/json_annotation.dart';
 import 'package:wo_form/wo_form.dart';
 
+part 'wo_form_input.dart';
 part 'wo_form_node.freezed.dart';
 part 'wo_form_node.g.dart';
 
-abstract class WoFormElement {
-  WoFormElement() : uid = generateUid();
-
+abstract class Base {
+  Base() : uid = generateUid();
   final String uid;
-  String get id;
-
-  static WoFormElement fromJson(Json json) {
-    try {
-      return WoFormInput.fromJson(json);
-    } on CheckedFromJsonException {
-      return WoFormNode.fromJson(json);
-    }
-  }
-
-  Json toJson();
-
-  // --
-
-  Future<void> export({
-    required dynamic into,
-    required WoFormValues values,
-    required String parentPath,
-    required BuildContext context,
-  });
-
-  Iterable<String> getAllInputPaths({
-    required WoFormValues values,
-    required String parentPath,
-  });
-
-  WoFormElement? getChild({
-    required String path,
-    required String parentPath,
-    required WoFormValues values,
-  });
-
-  Iterable<WoFormInputError> getErrors({
-    required WoFormValues values,
-    required String parentPath,
-    bool recursive = true,
-  });
-
-  String? getExportKey({
-    required WoFormValues values,
-    required String parentPath,
-  });
-
-  Json getInitialValues({required String parentPath});
-
-  Widget toWidget({required String parentPath, Key? key});
-
-  WoFormElement withId({required String id});
-
-  /// Used when OFormUiSettings.scrollable is false
-  int? flex(BuildContext context) => null;
+  Object? uiSettings;
 }
 
-@freezed
-sealed class WoFormNode extends WoFormElement with _$WoFormNode {
+// `fromJson: true` is required because instead of the synatx
+// `factory WoFormInput.fromJson`, wich implies T, we use the syntax
+// `static WoFormInput fromJson`, wich deduces T.
+/// [T] is an optionnal type used by fields like :
+/// - [FutureNode] : [T] is the type of the data returned by [FutureNode.future]
+/// - [SelectInput] : [T] is the type of the values to choose from
+@Freezed(fromJson: true, toJson: true)
+sealed class WoFormNode<T extends Object?> extends Base with _$WoFormNode {
   factory WoFormNode.conditionnal({
     required String id,
     required Condition condition,
-    @InputConverter() required WoFormElement child,
+    @InputConverter() required WoFormNode child,
     @Default(false) bool conditionIsInitiallyMet,
     @Default(true) bool clearChildrenWhenHidden,
     @Default(InputUiSettings()) InputUiSettings uiSettings,
@@ -83,7 +40,7 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
     required String id,
     // @DynamicInputTemplatesConverter()
     @Default([]) List<DynamicInputTemplate> templates,
-    @InputsListConverter() List<WoFormElement>? initialChildren,
+    @InputsListConverter() List<WoFormNode>? initialChildren,
     @Default(DynamicInputsNodeUiSettings())
     DynamicInputsNodeUiSettings uiSettings,
     @Default(ExportSettings()) ExportSettings exportSettings,
@@ -93,9 +50,23 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
     @Default('EmptyNode') String id,
   }) = EmptyNode;
 
+  @Assert('future != null', 'FutureNode.future cannot be null')
+  @Assert('builder != null', 'FutureNode.builder cannot be null')
+  factory WoFormNode.future({
+    required String id,
+    @notSerializable Future<T>? future,
+    @notSerializable WoFormNode Function(AsyncSnapshot<T?> snapshot)? builder,
+    @notSerializable T? initialData,
+
+    /// If true, when the future will be completed, the values of
+    /// the children inputs will be reseted to their getInitialValues.
+    @Default(true) bool willResetToInitialValues,
+    @Default(InputUiSettings()) InputUiSettings uiSettings,
+  }) = FutureNode<T>;
+
   factory WoFormNode.inputs({
     required String id,
-    @InputsListConverter() @Default([]) List<WoFormElement> children,
+    @InputsListConverter() @Default([]) List<WoFormNode> children,
     @Default(InputsNodeUiSettings()) InputsNodeUiSettings uiSettings,
     @Default(ExportSettings()) ExportSettings exportSettings,
   }) = InputsNode;
@@ -105,15 +76,30 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
     required String id,
 
     /// [path] is the path of this node, wich includes its own id.
-    @notSerializable WoFormElement Function(String path)? builder,
+    @notSerializable WoFormNode Function(String path)? builder,
   }) = PathBuilderNode;
+
+  factory WoFormNode.root({
+    // The root's id should never be used
+    @Default('root') String id,
+    @Default({}) Json initialValues,
+    @InputsListConverter() @Default([]) List<WoFormNode> children,
+    @Default(WoFormUiSettings()) WoFormUiSettings uiSettings,
+    @Default(ExportSettings()) ExportSettings exportSettings,
+
+    // LATER : issue, how to modify an in-production corrupted data ?
+    // give a way to override it ?
+    //
+    /// If not empty, this form will be locally persistent, using HydratedCubit.
+    @Default('') String hydratationId,
+  }) = RootNode;
 
   @Assert('selector != null', 'SelectorNode.selector cannot be null')
   @Assert('builder != null', 'SelectorNode.builder cannot be null')
   factory WoFormNode.selector({
     required String id,
     @notSerializable Object? Function(WoFormValues values)? selector,
-    @notSerializable WoFormElement Function(Object? value)? builder,
+    @notSerializable WoFormNode Function(Object? value)? builder,
     Object? initialValue,
     @Default(InputUiSettings()) InputUiSettings uiSettings,
   }) = SelectorNode;
@@ -122,7 +108,7 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
   factory WoFormNode.valueBuilder({
     required String id,
     required String path,
-    @notSerializable WoFormElement Function(Object? value)? builder,
+    @notSerializable WoFormNode Function(Object? value)? builder,
     Object? initialValue,
   }) = ValueBuilderNode;
 
@@ -130,8 +116,7 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
   factory WoFormNode.valuesBuilder({
     required String id,
     required List<String> paths,
-    @notSerializable
-    WoFormElement Function(Map<String, Object?> values)? builder,
+    @notSerializable WoFormNode Function(Map<String, Object?> values)? builder,
     Map<String, Object?>? initialValues,
   }) = ValuesBuilderNode;
 
@@ -154,11 +139,21 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
 
   WoFormNode._();
 
-  factory WoFormNode.fromJson(Json json) => _$WoFormNodeFromJson(json);
+  static WoFormNode fromJson(Json json) => _fromJson(json);
+  static WoFormNode _fromJson(Json json) {
+    try {
+      return _$WoFormNodeFromJson(json);
+    } on CheckedFromJsonException catch (error) {
+      if (error.key == 'runtimeType') {
+        return WoFormInput.fromJson(json);
+      } else {
+        rethrow;
+      }
+    }
+  }
 
   // --
 
-  @override
   Future<void> export({
     required dynamic into,
     required WoFormValues values,
@@ -175,11 +170,21 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
             context: context,
           );
         }
+      case FutureNode(builder: final builder):
+        final snapshot = values.get<AsyncSnapshot<T?>>('$parentPath/$id');
+        if (snapshot == null) return;
+
+        return builder!(snapshot).export(
+          into: into,
+          values: values,
+          parentPath: '$parentPath/$id',
+          context: context,
+        );
       case DynamicInputsNode(exportSettings: final exportSettings):
       case InputsNode(exportSettings: final exportSettings):
         final children = this is InputsNode
             ? (this as InputsNode).children
-            : (values['$parentPath/$id'] as List<WoFormElement>?) ?? [];
+            : (values['$parentPath/$id'] as List<WoFormNode>?) ?? [];
 
         switch (exportSettings.type) {
           case ExportType.mergeWithParent:
@@ -234,6 +239,33 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
               into[getExportKey(values: values, parentPath: parentPath)] = data;
             }
         }
+
+      case RootNode(
+        children: final children,
+        exportSettings: final exportSettings,
+      ):
+        assert(
+          parentPath == '',
+          'The parentPath of RootNode must always be an empty string.',
+        );
+
+        final data = Json.from(exportSettings.metadata);
+
+        for (final child in children) {
+          await child.export(
+            into: data,
+            values: values,
+            parentPath: parentPath,
+            context: context,
+          );
+        }
+
+        if (into is List) {
+          into.addAll(data.values);
+        } else if (into is Map) {
+          into.addAll(data);
+        }
+
       case PathBuilderNode():
       case SelectorNode():
       case ValueBuilderNode():
@@ -265,10 +297,13 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
       case ValueListenerNode():
       case WidgetNode():
       case EmptyNode():
+
+      // WoFormInput overrides this method
+      case WoFormInput():
+        throw UnimplementedError();
     }
   }
 
-  @override
   Iterable<String> getAllInputPaths({
     required WoFormValues values,
     required String parentPath,
@@ -283,11 +318,22 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
               parentPath: '$parentPath/$id',
             ),
         ];
+      case FutureNode(builder: final builder):
+        final snapshot = values.get<AsyncSnapshot<T?>>('$parentPath/$id');
+
+        return [
+          '$parentPath/$id',
+          if (snapshot != null)
+            ...builder!(snapshot).getAllInputPaths(
+              values: values,
+              parentPath: '$parentPath/$id',
+            ),
+        ];
       case DynamicInputsNode():
       case InputsNode():
         final children = this is InputsNode
             ? (this as InputsNode).children
-            : (values['$parentPath/$id'] as List<WoFormElement>?) ?? [];
+            : (values['$parentPath/$id'] as List<WoFormNode>?) ?? [];
 
         return [
           '$parentPath/$id',
@@ -297,6 +343,22 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
               parentPath: '$parentPath/$id',
             ),
         ];
+
+      case RootNode(children: final children):
+        assert(
+          parentPath == '',
+          'The parentPath of RootNode must always be an empty string.',
+        );
+
+        return [
+          parentPath,
+          for (final child in children)
+            ...child.getAllInputPaths(
+              values: values,
+              parentPath: parentPath,
+            ),
+        ];
+
       case PathBuilderNode():
       case SelectorNode():
       case ValueBuilderNode():
@@ -330,6 +392,10 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
       case WidgetNode():
       case EmptyNode():
         return ['$parentPath/$id'];
+
+      // WoFormInput overrides this method
+      case WoFormInput():
+        throw UnimplementedError();
     }
   }
 
@@ -346,9 +412,11 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
   ///       ...
   ///
   /// The path of the input with id 'name' is '/profile/name'.
-  @override
-  WoFormElement? getChild({
+  WoFormNode? getChild({
+    /// The path of the child, relative to this node (contains this node's id)
     required String path,
+
+    /// The path until this node
     required String parentPath,
     required WoFormValues values,
   }) {
@@ -372,11 +440,28 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
           parentPath: '$parentPath/$id',
           values: values,
         );
+      case FutureNode(builder: final builder):
+        final snapshot = values.get<AsyncSnapshot<T?>>('$parentPath/$id');
+        if (snapshot == null) return null;
+
+        final child = builder!(snapshot);
+        final secondSlashIndex = path.substring(1).indexOf('/');
+
+        // if the path ends at the child of this node
+        if (secondSlashIndex == -1) {
+          return (child.id == path.substring(1)) ? child : null;
+        }
+
+        return child.getChild(
+          path: path.substring(secondSlashIndex + 1),
+          parentPath: '$parentPath/$id',
+          values: values,
+        );
       case DynamicInputsNode():
       case InputsNode():
         final children = this is InputsNode
             ? (this as InputsNode).children
-            : (values['$parentPath/$id'] as List<WoFormElement>?) ?? [];
+            : (values['$parentPath/$id'] as List<WoFormNode>?) ?? [];
 
         // if the path ends at the children of this node
         if (secondSlashIndex == -1) {
@@ -390,6 +475,40 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
             ?.getChild(
               path: path.substring(secondSlashIndex + 1),
               parentPath: '$parentPath/$id',
+              values: values,
+            );
+
+      case RootNode(children: final children):
+        assert(
+          parentPath == '',
+          'The parentPath of RootNode must always be an empty string.',
+        );
+
+        if (!path.startsWith('/')) {
+          throw ArgumentError(
+            'An input path must start with character "/" : $path',
+          );
+        }
+
+        final secondSlashIndex = path.substring(1).indexOf('/');
+
+        // if the path ends at the children of this node
+        if (secondSlashIndex == -1) {
+          return children.firstWhereOrNull((i) => i.id == path.substring(1));
+        }
+
+        final firstPathId = path.substring(1, secondSlashIndex + 1);
+
+        return children
+            .firstWhereOrNull(
+              (
+                child,
+              ) => child.id == firstPathId,
+            )
+            ?.getChild(
+              path: path.substring(secondSlashIndex + 1),
+              // skip root's id
+              parentPath: parentPath,
               values: values,
             );
 
@@ -429,10 +548,13 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
       case WidgetNode():
       case EmptyNode():
         return null;
+
+      // WoFormInput overrides this method
+      case WoFormInput():
+        throw UnimplementedError();
     }
   }
 
-  @override
   Iterable<WoFormInputError> getErrors({
     required WoFormValues values,
     required String parentPath,
@@ -448,17 +570,41 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
           values: values,
           parentPath: '$parentPath/$id',
         );
+      case FutureNode(builder: final builder):
+        final snapshot = values.get<AsyncSnapshot<T?>>('$parentPath/$id');
+        if (snapshot == null) return [];
+
+        return builder!(snapshot).getErrors(
+          values: values,
+          parentPath: '$parentPath/$id',
+        );
+
       case DynamicInputsNode():
       case InputsNode():
         final children = this is InputsNode
             ? (this as InputsNode).children
-            : (values['$parentPath/$id'] as List<WoFormElement>?) ?? [];
+            : values.get<List<WoFormNode>>('$parentPath/$id') ?? [];
 
         return [
           for (final child in children)
             ...child.getErrors(
               values: values,
               parentPath: '$parentPath/$id',
+            ),
+        ].nonNulls;
+
+      case RootNode(children: final children):
+        assert(
+          parentPath == '',
+          'The parentPath of RootNode must always be an empty string.',
+        );
+
+        return [
+          for (final child in children)
+            ...child.getErrors(
+              values: values,
+              // skip root's id
+              parentPath: parentPath,
             ),
         ].nonNulls;
 
@@ -492,10 +638,13 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
       case WidgetNode():
       case EmptyNode():
         return [];
+
+      // WoFormInput overrides this method
+      case WoFormInput():
+        throw UnimplementedError();
     }
   }
 
-  @override
   String? getExportKey({
     required WoFormValues values,
     required String parentPath,
@@ -508,12 +657,28 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
           values: values,
           parentPath: '$parentPath/$id',
         );
+      case FutureNode(builder: final builder):
+        final snapshot = values.get<AsyncSnapshot<T?>>('$parentPath/$id');
+        if (snapshot == null) return null;
+
+        return builder!(snapshot).getExportKey(
+          values: values,
+          parentPath: '$parentPath/$id',
+        );
       case DynamicInputsNode(exportSettings: final exportSettings):
       case InputsNode(exportSettings: final exportSettings):
         return switch (exportSettings.type) {
           ExportType.map || ExportType.list => id,
           ExportType.mergeWithParent => null,
         };
+
+      case RootNode():
+        assert(
+          parentPath == '',
+          'The parentPath of RootNode must always be an empty string.',
+        );
+
+        return null;
 
       case PathBuilderNode():
       case SelectorNode():
@@ -545,10 +710,13 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
       case WidgetNode():
       case EmptyNode():
         return null;
+
+      // WoFormInput overrides this method
+      case WoFormInput():
+        throw UnimplementedError();
     }
   }
 
-  @override
   Json getInitialValues({required String parentPath}) {
     switch (this) {
       case ConditionnalNode(
@@ -558,7 +726,20 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
         if (!conditionIsInitiallyMet) return {};
 
         return child.getInitialValues(parentPath: '$parentPath/$id');
+      case FutureNode(
+        initialData: final initialData,
+        builder: final builder,
+      ):
+        final initialSnapshot = AsyncSnapshot.withData(
+          ConnectionState.waiting,
+          initialData,
+        );
+        final child = builder!(initialSnapshot);
 
+        return {
+          '$parentPath/$id': initialSnapshot,
+          ...child.getInitialValues(parentPath: '$parentPath/$id'),
+        };
       case DynamicInputsNode(initialChildren: final initialChildren):
         return {
           '$parentPath/$id': initialChildren,
@@ -576,6 +757,17 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
       case PathBuilderNode(builder: final builder):
         final child = builder!('$parentPath/$id');
         return child.getInitialValues(parentPath: '$parentPath/$id');
+
+      case RootNode(children: final children):
+        assert(
+          parentPath == '',
+          'The parentPath of RootNode must always be an empty string.',
+        );
+
+        return {
+          for (final child in children)
+            ...child.getInitialValues(parentPath: parentPath),
+        };
 
       case SelectorNode(
         builder: final builder,
@@ -599,16 +791,23 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
       case WidgetNode():
       case EmptyNode():
         return {};
+
+      // WoFormInput overrides this method
+      case WoFormInput():
+        throw UnimplementedError();
     }
   }
 
-  @override
   Widget toWidget({required String parentPath, Key? key}) => switch (this) {
     ConditionnalNode() => ConditionnalNodeBuilder(
       key: key,
       path: '$parentPath/$id',
     ),
     DynamicInputsNode() => DynamicInputsNodeWidgetBuilder(
+      key: key,
+      path: '$parentPath/$id',
+    ),
+    FutureNode() => FutureNodeBuilder<T>(
       key: key,
       path: '$parentPath/$id',
     ),
@@ -619,6 +818,9 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
     PathBuilderNode(builder: final builder) => builder!(
       '$parentPath/$id',
     ).toWidget(parentPath: '$parentPath/$id'),
+    RootNode() => WoFormPageBuilder(
+      key: key,
+    ),
     SelectorNode(
       selector: final selector,
       builder: final builder,
@@ -675,14 +877,17 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
       builder == null
           ? SizedBox.shrink(key: key)
           : Builder(key: key, builder: builder),
-    EmptyNode() => SizedBox.shrink(key: key),
+    EmptyNode() => SizedBox.shrink(
+      key: key,
+    ),
+
+    // WoFormInput overrides this method
+    WoFormInput() => throw UnimplementedError(),
   };
 
-  @override
   WoFormNode withId({required String id}) => copyWith(id: id);
 
   /// Used when OFormUiSettings.scrollable is false
-  @override
   int? flex(BuildContext context) => switch (this) {
     final ConditionnalNode node =>
       node.uiSettings.flex == null || node.uiSettings.flex! == 0
@@ -694,6 +899,8 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
           : node.uiSettings.flex == WoFormNode.flexDeferToChild
           ? node.child.flex(context)
           : node.uiSettings.flex,
+    DynamicInputsNode _ || EmptyNode _ => null,
+    final FutureNode node => node.uiSettings.flex,
     final PathBuilderNode node =>
       node
           .builder!(
@@ -701,6 +908,7 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
             // context.read<RootNode>().getPath(nodeUid: uid),
           )
           .flex(context),
+    RootNode _ => null,
     final SelectorNode node =>
       node
           .builder!(
@@ -725,9 +933,12 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
             ),
           )
           .flex(context),
+    ValueListenerNode _ => null,
     InputsNode(uiSettings: final uiSettings) => uiSettings.flex,
     WidgetNode(uiSettings: final uiSettings) => uiSettings.flex,
-    _ => null,
+
+    // WoFormInput overrides this method
+    WoFormInput() => throw UnimplementedError(),
   };
 
   /// If uiSettings.flex is set to flexDeferToChild, the flex will be based on
@@ -738,192 +949,7 @@ sealed class WoFormNode extends WoFormElement with _$WoFormNode {
   static const int flexDeferToChild = -1;
 }
 
-@freezed
-abstract class FutureNode<T> extends WoFormElement with _$FutureNode<T> {
-  const factory FutureNode({
-    required String id,
-    required Future<T>? future,
-    required WoFormElement Function(
-      String parentPath,
-      AsyncSnapshot<T?> snapshot,
-    )
-    builder,
-    T? initialData,
-
-    /// If true, when the future will be completed, the values of
-    /// the children inputs will be reseted to their getInitialValues.
-    @Default(true) bool willResetToInitialValues,
-    @Default(InputUiSettings()) InputUiSettings uiSettings,
-  }) = _FutureNode<T>;
-
-  FutureNode._();
-
-  @override
-  Json toJson() => {};
-
-  // --
-
-  @override
-  Future<dynamic> export({
-    required dynamic into,
-    required WoFormValues values,
-    required String parentPath,
-    required BuildContext context,
-  }) async {
-    final snapshot = values['$parentPath/$id'];
-
-    if (snapshot is! AsyncSnapshot<T?>) return null;
-
-    return builder(parentPath, snapshot).export(
-      into: into,
-      values: values,
-      parentPath: '$parentPath/$id',
-      context: context,
-    );
-  }
-
-  @override
-  Iterable<String> getAllInputPaths({
-    required WoFormValues values,
-    required String parentPath,
-  }) {
-    final snapshot = values['$parentPath/$id'];
-
-    return [
-      '$parentPath/$id',
-      if (snapshot is AsyncSnapshot<T?>)
-        ...builder(parentPath, snapshot).getAllInputPaths(
-          values: values,
-          parentPath: '$parentPath/$id',
-        ),
-    ];
-  }
-
-  @override
-  Iterable<WoFormInputError> getErrors({
-    required WoFormValues values,
-    required String parentPath,
-    bool recursive = true,
-  }) {
-    if (!recursive) return [];
-
-    final snapshot = values['$parentPath/$id'];
-
-    if (snapshot is! AsyncSnapshot<T?>) return [];
-
-    return builder(parentPath, snapshot).getErrors(
-      values: values,
-      parentPath: '$parentPath/$id',
-    );
-  }
-
-  @override
-  String? getExportKey({
-    required WoFormValues values,
-    required String parentPath,
-  }) {
-    final snapshot = values['$parentPath/$id'];
-
-    if (snapshot is! AsyncSnapshot<T?>) return null;
-
-    return builder(parentPath, snapshot).getExportKey(
-      values: values,
-      parentPath: '$parentPath/$id',
-    );
-  }
-
-  /// The path of an input is the ids of it and its parents, separated by the
-  /// character '/'.
-  ///
-  /// Exemple :
-  ///
-  /// InputsNode(
-  ///   id: 'profile',
-  ///   inputs: [
-  ///     StringInput(
-  ///       id: 'name',
-  ///       ...
-  ///
-  /// The path of the input with id 'name' is '/profile/name'.
-  @override
-  WoFormElement? getChild({
-    required String path,
-    required String parentPath,
-    required WoFormValues values,
-  }) {
-    final snapshot = values['$parentPath/$id'];
-
-    if (snapshot is! AsyncSnapshot<T?>) return null;
-
-    final child = builder('$parentPath/$id', snapshot);
-
-    final secondSlashIndex = path.substring(1).indexOf('/');
-
-    // if the path ends at the child of this node
-    if (secondSlashIndex == -1) {
-      return (child.id == path.substring(1)) ? child : null;
-    }
-
-    return child.getChild(
-      path: path.substring(secondSlashIndex + 1),
-      parentPath: '$parentPath/$id',
-      values: values,
-    );
-  }
-
-  @override
-  Json getInitialValues({
-    required String parentPath,
-    AsyncSnapshot<T?>? initialSnapshot,
-  }) {
-    final snapshot =
-        initialSnapshot ??
-        AsyncSnapshot.withData(ConnectionState.waiting, initialData);
-    final child = builder('$parentPath/$id', snapshot);
-
-    return {
-      '$parentPath/$id': snapshot,
-      ...child.getInitialValues(parentPath: '$parentPath/$id'),
-    };
-  }
-
-  @override
-  Widget toWidget({required String parentPath, Key? key}) =>
-      FutureNodeBuilder<T>(
-        key: key,
-        parentPath: parentPath,
-        node: this,
-      );
-
-  @override
-  FutureNode<T> withId({required String id}) => copyWith(id: id);
-
-  @override
-  int? flex(BuildContext context) => uiSettings.flex;
-}
-
-@freezed
-abstract class RootNode extends WoFormElement with _$RootNode {
-  const factory RootNode({
-    @Default('#') String id,
-    @Default({}) Json initialValues,
-    @InputsListConverter() @Default([]) List<WoFormElement> children,
-    @Default(WoFormUiSettings()) WoFormUiSettings uiSettings,
-    @Default(ExportSettings()) ExportSettings exportSettings,
-
-    // LATER : issue, how to modify an in-production corrupted data ?
-    // give a way to override it ?
-    //
-    /// If not empty, this form will be locally persistent, using HydratedCubit.
-    @Default('') String hydratationId,
-  }) = _RootNode;
-
-  RootNode._();
-
-  factory RootNode.fromJson(Json json) => _$RootNodeFromJson(json);
-
-  // --
-
+extension RootNodeX on RootNode {
   Future<Json> exportToMap({
     required WoFormValues values,
 
@@ -932,123 +958,14 @@ abstract class RootNode extends WoFormElement with _$RootNode {
     required BuildContext context,
   }) async {
     final map = Json.from(exportSettings.metadata);
-    // ignore: deprecated_member_use_from_same_package
     await export(
       into: map,
       values: values,
       context: context,
+      parentPath: '',
     );
     return map;
   }
-
-  @override
-  @Deprecated('Use exportToMap instead.')
-  Future<void> export({
-    required dynamic into,
-    required WoFormValues values,
-    required BuildContext context,
-    String parentPath = '',
-  }) async {
-    final data = Json.from(exportSettings.metadata);
-
-    for (final child in children) {
-      await child.export(
-        into: data,
-        values: values,
-        parentPath: parentPath,
-        context: context,
-      );
-    }
-
-    if (into is List) {
-      into.addAll(data.values);
-    } else if (into is Map) {
-      into.addAll(data);
-    }
-  }
-
-  @override
-  Iterable<String> getAllInputPaths({
-    required WoFormValues values,
-    String parentPath = '',
-  }) => [
-    parentPath,
-    for (final child in children)
-      ...child.getAllInputPaths(
-        values: values,
-        parentPath: parentPath,
-      ),
-  ];
-
-  @override
-  Iterable<WoFormInputError> getErrors({
-    required WoFormValues values,
-    String parentPath = '',
-    bool recursive = true,
-  }) {
-    if (!recursive) return [];
-
-    return [
-      for (final child in children)
-        ...child.getErrors(
-          values: values,
-          parentPath: parentPath,
-        ),
-    ].nonNulls;
-  }
-
-  @override
-  String? getExportKey({
-    required WoFormValues values,
-    String parentPath = '',
-  }) => null;
-
-  @override
-  WoFormElement? getChild({
-    required String path,
-    required WoFormValues values,
-    String parentPath = '',
-  }) {
-    if (!path.startsWith('/')) {
-      throw ArgumentError(
-        'An input path must start with character "/" : $path',
-      );
-    }
-
-    final secondSlashIndex = path.substring(1).indexOf('/');
-
-    // if the path ends at the children of this node
-    if (secondSlashIndex == -1) {
-      return children.firstWhereOrNull((i) => i.id == path.substring(1));
-    }
-
-    final firstPathId = path.substring(1, secondSlashIndex + 1);
-
-    return children
-        .firstWhereOrNull(
-          (
-            child,
-          ) => child.id == firstPathId,
-        )
-        ?.getChild(
-          path: path.substring(secondSlashIndex + 1),
-          parentPath: parentPath,
-          values: values,
-        );
-  }
-
-  @override
-  Json getInitialValues({String parentPath = ''}) => {
-    for (final child in children)
-      ...child.getInitialValues(parentPath: parentPath),
-  };
-
-  @override
-  Widget toWidget({String parentPath = '', Key? key}) =>
-      WoFormPageBuilder(key: key);
-
-  @override
-  RootNode withId({required String id}) => copyWith(id: id);
 }
 
 @freezed
@@ -1058,8 +975,8 @@ abstract class DynamicInputTemplate with _$DynamicInputTemplate {
     'One of child or childBuilder must be specified',
   )
   factory DynamicInputTemplate({
-    @InputNullableConverter() WoFormElement? child,
-    @notSerializable WoFormElement Function()? childBuilder,
+    @InputNullableConverter() WoFormNode? child,
+    @notSerializable WoFormNode Function()? childBuilder,
     @Default(DynamicInputUiSettings()) DynamicInputUiSettings uiSettings,
   }) = _DynamicInputTemplate;
 
@@ -1068,5 +985,5 @@ abstract class DynamicInputTemplate with _$DynamicInputTemplate {
   factory DynamicInputTemplate.fromJson(Json json) =>
       _$DynamicInputTemplateFromJson(json);
 
-  WoFormElement getChild() => child == null ? childBuilder!() : child!;
+  WoFormNode getChild() => child == null ? childBuilder!() : child!;
 }

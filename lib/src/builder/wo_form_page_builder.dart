@@ -119,7 +119,7 @@ class _WoFormMultistepBody extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           itemCount: generatedSteps == null ? root.children.length : null,
           itemBuilder: (context, index) {
-            final WoFormElement step;
+            final WoFormNode step;
 
             if (generatedSteps != null) {
               if (index >= generatedSteps.length) return null;

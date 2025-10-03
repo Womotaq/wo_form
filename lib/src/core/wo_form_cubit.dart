@@ -167,7 +167,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   // --- CURRENT STATE ---
 
-  WoFormElement get currentNode {
+  WoFormNode get currentNode {
     final tempSubmitData = _tempSubmitDatas.lastOrNull;
     if (tempSubmitData != null) {
       try {
@@ -744,6 +744,8 @@ class WoFormValues {
     initialValues,
   );
 
+  /// If the value at [path] is [T], then the value is returned, casted.
+  /// Else, null is returned.
   T? get<T>(String path) {
     final value = getValue(path);
     if (value is T) return value;

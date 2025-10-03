@@ -238,7 +238,7 @@ typedef DynamicInputsNodeWidgetBuilderDef =
     Widget Function(
       WoFieldData<
         DynamicInputsNode,
-        List<WoFormElement>,
+        List<WoFormNode>,
         DynamicInputsNodeUiSettings
       >
       data,
@@ -380,7 +380,7 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
     /// Default to CrossAxisAlignment.stretch
     CrossAxisAlignment? crossAxisAlignment,
 
-    /// This spacing will be placed between each [WoFormElement].
+    /// This spacing will be placed between each [WoFormNode].
     double? spacing,
     @notSerializable InputNodeWidgetBuilderDef? widgetBuilder,
 

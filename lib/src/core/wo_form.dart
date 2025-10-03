@@ -18,10 +18,12 @@ part '../builder/wo_form_page_builder.dart';
 
 class WoForm extends StatelessWidget {
   WoForm({
-    required List<WoFormElement> children,
+    required List<WoFormNode> children,
     ExportSettings? exportSettings,
     WoFormUiSettings? uiSettings,
     Json? initialValues,
+
+    /// If not empty, this form will be locally persistent, using HydratedCubit.
     String hydratationId = '',
     this.onStatusUpdate,
     this.canSubmit,

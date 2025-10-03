@@ -1057,7 +1057,7 @@ mixin _$InputsNodeUiSettings {
  Axis? get direction;/// Only used when ChildrenVisibility.always.
 ///
 /// Default to CrossAxisAlignment.stretch
- CrossAxisAlignment? get crossAxisAlignment;/// This spacing will be placed between each [WoFormElement].
+ CrossAxisAlignment? get crossAxisAlignment;/// This spacing will be placed between each [WoFormNode].
  double? get spacing;@notSerializable InputNodeWidgetBuilderDef? get widgetBuilder;/// Only used when [ChildrenVisibility.always].
 @notSerializable HeaderBuilderDef? get headerBuilder;/// Only used when [ChildrenVisibility.whenAsked].
 ///
@@ -1188,7 +1188,7 @@ class _InputsNodeUiSettings extends InputsNodeUiSettings {
 ///
 /// Default to CrossAxisAlignment.stretch
 @override final  CrossAxisAlignment? crossAxisAlignment;
-/// This spacing will be placed between each [WoFormElement].
+/// This spacing will be placed between each [WoFormNode].
 @override final  double? spacing;
 @override@notSerializable final  InputNodeWidgetBuilderDef? widgetBuilder;
 /// Only used when [ChildrenVisibility.always].
