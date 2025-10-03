@@ -44,7 +44,7 @@ class SubmitButtonBuilder extends StatelessWidget {
           // when the the form ends, so we consider it never does.
           if (multistepSettings.generatingSteps) return true;
 
-          return values.multistepIndex != root.children.length - 1;
+          return values.currentStepIndex != root.children.length - 1;
         },
         builder: (context, isTemporarySubmit) {
           final submitButtonData = SubmitButtonData(

@@ -230,6 +230,9 @@ _InputsNodeUiSettings _$InputsNodeUiSettingsFromJson(
     json['childrenVisibility'],
   ),
   showChildrenInitially: json['showChildrenInitially'] as bool?,
+  openChildren: const PushDefNullableConverter().fromJson(
+    json['openChildren'] as String?,
+  ),
   direction: $enumDecodeNullable(_$AxisEnumMap, json['direction']),
   crossAxisAlignment: $enumDecodeNullable(
     _$CrossAxisAlignmentEnumMap,
@@ -251,6 +254,9 @@ Map<String, dynamic> _$InputsNodeUiSettingsToJson(
   'childrenVisibility':
       _$ChildrenVisibilityEnumMap[instance.childrenVisibility],
   'showChildrenInitially': instance.showChildrenInitially,
+  'openChildren': const PushDefNullableConverter().toJson(
+    instance.openChildren,
+  ),
   'direction': _$AxisEnumMap[instance.direction],
   'crossAxisAlignment':
       _$CrossAxisAlignmentEnumMap[instance.crossAxisAlignment],

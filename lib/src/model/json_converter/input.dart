@@ -2,11 +2,11 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/src/utils/extensions.dart';
 import 'package:wo_form/wo_form.dart';
 
-class InputConverter extends JsonConverter<WoFormNodeMixin, Json> {
+class InputConverter extends JsonConverter<WoFormElement, Json> {
   const InputConverter();
 
   @override
-  WoFormNodeMixin fromJson(Json json) {
+  WoFormElement fromJson(Json json) {
     try {
       return WoFormInput.fromJson(json);
     } on CheckedFromJsonException {
@@ -15,14 +15,14 @@ class InputConverter extends JsonConverter<WoFormNodeMixin, Json> {
   }
 
   @override
-  Json toJson(WoFormNodeMixin object) => object.toJson();
+  Json toJson(WoFormElement object) => object.toJson();
 }
 
-class InputNullableConverter extends JsonConverter<WoFormNodeMixin?, Json> {
+class InputNullableConverter extends JsonConverter<WoFormElement?, Json> {
   const InputNullableConverter();
 
   @override
-  WoFormNodeMixin? fromJson(Json json) {
+  WoFormElement? fromJson(Json json) {
     try {
       try {
         return WoFormInput.fromJson(json);
@@ -35,5 +35,5 @@ class InputNullableConverter extends JsonConverter<WoFormNodeMixin?, Json> {
   }
 
   @override
-  Json toJson(WoFormNodeMixin? object) => object?.toJson() ?? {};
+  Json toJson(WoFormElement? object) => object?.toJson() ?? {};
 }

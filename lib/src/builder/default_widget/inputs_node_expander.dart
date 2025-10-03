@@ -4,13 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/wo_form.dart';
 
 class InputsNodeExpander extends StatefulWidget {
-  const InputsNodeExpander.page(this.data, {super.key}) : isModal = false;
+  const InputsNodeExpander(this.data, {super.key});
 
-  const InputsNodeExpander.modal(this.data, {super.key}) : isModal = true;
-
-  // TODO InputsNodeUiSettings.openChildren
   final WoFieldData<InputsNode, void, InputsNodeUiSettings> data;
-  final bool isModal;
 
   @override
   State<InputsNodeExpander> createState() => _InputsNodeExpanderState();
@@ -45,9 +41,7 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
       labelMaxLines: widget.data.uiSettings.labelMaxLines,
       helperText: widget.data.uiSettings.helperText,
       errorText: widget.data.errorText,
-      trailing: widget.isModal
-          ? const Icon(Icons.keyboard_arrow_down)
-          : const Icon(Icons.chevron_right),
+      trailing: const Icon(Icons.chevron_right),
       onTap: () => openChildren(context),
       shrinkWrap: false,
     );
@@ -60,55 +54,32 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
 
   Future<void> openChildren(BuildContext context) {
     final root = context.read<RootNode>();
-    final tweakedRoot = root.copyWith(
-      uiSettings: root.uiSettings.copyWith(
-        layout: switch (widget.data.uiSettings.flex) {
-          null => LayoutMethod.scrollable,
-          0 => LayoutMethod.shrinkWrap,
-          _ => LayoutMethod.flexible,
-        },
-      ),
-    );
 
-    final childrenWidget = RepositoryProvider.value(
-      value: tweakedRoot,
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider.value(value: context.read<WoFormValuesCubit>()),
-          BlocProvider.value(value: context.read<WoFormStatusCubit>()),
-          BlocProvider.value(value: context.read<WoFormLockCubit>()),
-        ],
-        child: _InputsNodePage(
-          data: widget.data,
-          isModal: widget.isModal,
+    return (widget.data.uiSettings.openChildren ?? Push.page)(
+      context: context,
+      child: RepositoryProvider.value(
+        value: root.copyWith(
+          uiSettings: root.uiSettings.copyWith(
+            layout: LayoutMethod.fromFlex(widget.data.uiSettings.flex),
+          ),
+        ),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider.value(value: context.read<WoFormValuesCubit>()),
+            BlocProvider.value(value: context.read<WoFormStatusCubit>()),
+            BlocProvider.value(value: context.read<WoFormLockCubit>()),
+          ],
+          child: _InputsNodePage(widget.data),
         ),
       ),
     );
-
-    if (widget.isModal) {
-      return Push.modalBottomSheet(
-        context: context,
-        child: childrenWidget,
-        layout: tweakedRoot.uiSettings.layout,
-        // (widget.data.uiSettings.flex ?? 0) == 0,
-      );
-    } else {
-      return Push.page(
-        context: context,
-        child: childrenWidget,
-      );
-    }
   }
 }
 
 class _InputsNodePage extends StatelessWidget {
-  const _InputsNodePage({
-    required this.data,
-    required this.isModal,
-  });
+  const _InputsNodePage(this.data);
 
   final WoFieldData<InputsNode, void, InputsNodeUiSettings> data;
-  final bool isModal;
 
   @override
   Widget build(BuildContext context) {
@@ -153,7 +124,7 @@ class _InputsNodePage extends StatelessWidget {
           );
         }
       },
-      child: isModal
+      child: true
           ? wrapped
           : Scaffold(
               appBar: AppBar(

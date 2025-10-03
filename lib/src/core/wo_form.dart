@@ -18,7 +18,7 @@ part '../builder/wo_form_page_builder.dart';
 
 class WoForm extends StatelessWidget {
   WoForm({
-    required List<WoFormNodeMixin> children,
+    required List<WoFormElement> children,
     ExportSettings? exportSettings,
     WoFormUiSettings? uiSettings,
     Json? initialValues,

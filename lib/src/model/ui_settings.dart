@@ -238,7 +238,7 @@ typedef DynamicInputsNodeWidgetBuilderDef =
     Widget Function(
       WoFieldData<
         DynamicInputsNode,
-        List<WoFormNodeMixin>,
+        List<WoFormElement>,
         DynamicInputsNodeUiSettings
       >
       data,
@@ -262,6 +262,9 @@ abstract class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
     /// Defaults to [DynamicInputsNodeAddButtonPosition.header].
     DynamicInputsNodeAddButtonPosition? addButtonPosition,
     @notSerializable DynamicInputsNodeWidgetBuilderDef? addButtonBuilder,
+
+    /// Defaults to [Push.modalBottomSheet] with initialBottomSheetSize at 0.9.
+    /// Serializable if you use on of Push's default methods.
     @PushDefNullableConverter() PushDef? openTemplates,
 
     @notSerializable GenerateIdDef? generateId,
@@ -363,6 +366,10 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
     /// Default to false.
     bool? showChildrenInitially,
 
+    /// Defaults to [Push.page].
+    /// Serializable if you use on of Push's default methods.
+    @PushDefNullableConverter() PushDef? openChildren,
+
     /// Only used when ChildrenVisibility.always.
     ///
     /// Default to Axis.vertical
@@ -373,7 +380,7 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
     /// Default to CrossAxisAlignment.stretch
     CrossAxisAlignment? crossAxisAlignment,
 
-    /// This spacing will be placed between each [WoFormNodeMixin].
+    /// This spacing will be placed between each [WoFormElement].
     double? spacing,
     @notSerializable InputNodeWidgetBuilderDef? widgetBuilder,
 
@@ -407,6 +414,7 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
           childrenVisibility: childrenVisibility ?? other.childrenVisibility,
           showChildrenInitially:
               showChildrenInitially ?? other.showChildrenInitially,
+          openChildren: openChildren ?? other.openChildren,
           direction: direction ?? other.direction,
           crossAxisAlignment: crossAxisAlignment ?? other.crossAxisAlignment,
           spacing: spacing ?? other.spacing,
@@ -540,6 +548,9 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
     /// without diacritics (e.g., accents, umlauts).
     @notSerializable double Function(WoFormQuery query, T value)? searchScore,
     @notSerializable SearchScreenDef<T>? searchScreenBuilder,
+
+    /// Defaults to [Push.menu].
+    /// Serializable if you use on of Push's default methods.
     @PushDefNullableConverter() PushDef? openChildren,
     @notSerializable InputHeaderBuilderDef? headerBuilder,
     @notSerializable ScoreWidgetBuilderDef? scoreBuilder,

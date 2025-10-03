@@ -78,6 +78,8 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   /// Called each time a value changed, accordingly to [UpdateStatus].
   final Future<void> Function(RootNode root, WoFormValues values)?
   onStatusUpdate;
+
+  /// Behaves like a stack, the current submit data is the last one.
   final List<_TempSubmitData> _tempSubmitDatas;
 
   /// List of paths in which the user has attempted a submission.
@@ -106,11 +108,13 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     }
 
     if (root.uiSettings.multistepSettings != null) {
+      final currentStepId = root.children.firstOrNull?.id ?? '';
       values
-        .._multistepIndex = 0
-        .._setSubmitPath('/${root.children.firstOrNull?.id}');
+        .._currentStepId = currentStepId
+        .._currentStepIndex = 0
+        .._setSubmitPath('/$currentStepId');
       if (root.uiSettings.multistepSettings!.generatingSteps) {
-        values._generatedSteps = [root.children.first.id];
+        values._generatedSteps = [currentStepId];
       }
     }
 
@@ -138,8 +142,13 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     }
 
     newValues
-      .._multistepIndex = multistepIndex
-      .._setSubmitPath('/${steps[multistepIndex]}');
+      .._currentStepId = steps[multistepIndex]
+      .._currentStepIndex = multistepIndex;
+
+    // ignore: cascade_invocations
+    newValues._setSubmitPath(
+      _tempSubmitDatas.lastOrNull?.path ?? newValues.currentStepPath ?? '',
+    );
 
     emit(newValues);
     return null;
@@ -158,7 +167,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   // --- CURRENT STATE ---
 
-  WoFormNodeMixin get currentNode {
+  WoFormElement get currentNode {
     final tempSubmitData = _tempSubmitDatas.lastOrNull;
     if (tempSubmitData != null) {
       try {
@@ -179,7 +188,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
             ) ??
             _root;
       } else {
-        return _root.children[state.multistepIndex];
+        return _root.children[state.currentStepIndex ?? 0];
       }
     }
 
@@ -196,33 +205,45 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   // --- TEMPORARY SUBMIT DATA ---
 
+  /// The next time [WoFormValuesCubit.submit] will be called, instead of
+  /// calling [WoForm.onSubmitting] or [MultistepSettings.onStepSubmitting],
+  /// it's [onSubmitting] who will be submitted.
+  /// Before calling [onSubmitting], will be verified the errors of
+  /// the node at [path] and its children.
+  ///
+  /// If path is the same as the current temporary submit data,
+  /// then the onSubmitting will be updated.
   void addTemporarySubmitData({
     /// If [true] is returned, the whole form will be submitted right after.
     required Future<bool?> Function() onSubmitting,
     required String path,
   }) {
-    _tempSubmitDatas.add((
-      onSubmitting: onSubmitting,
-      path: path,
-    ));
+    if (_tempSubmitDatas.lastOrNull?.path == path) {
+      _tempSubmitDatas.last = (
+        onSubmitting: onSubmitting,
+        path: path,
+      );
+    } else {
+      _tempSubmitDatas.add((
+        onSubmitting: onSubmitting,
+        path: path,
+      ));
+    }
     emit(state.copy().._setSubmitPath(path));
   }
 
-  void clearTemporarySubmitData() {
-    _tempSubmitDatas.clear();
-    emit(state.copy().._clearSubmitPath());
-  }
-
+  /// Removed the last temporary onSubmitting attached to [path].
   void removeTemporarySubmitData({required String path}) {
     final newValues = state.copy();
-    for (final data in _tempSubmitDatas.toList()) {
+    for (final data in _tempSubmitDatas.reversed) {
       if (data.path == path) {
         _tempSubmitDatas.remove(data);
-        if (state.submitPath == data.path) {
-          newValues._clearSubmitPath();
-        }
+        break;
       }
     }
+    newValues._setSubmitPath(
+      _tempSubmitDatas.lastOrNull?.path ?? newValues.currentStepPath ?? '',
+    );
     emit(newValues);
   }
 
@@ -464,6 +485,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
       if (tempSubmitData != null) {
         submitWholeForm = await tempSubmitData.onSubmitting() ?? false;
+        removeTemporarySubmitData(path: tempSubmitData.path);
         _statusCubit.setInProgress();
       } else if (_root.uiSettings.multistepSettings != null) {
         submitWholeForm = await _onStepSubmitting(context);
@@ -525,7 +547,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
         return false;
       case MultistepActionNext():
         final failure = await multistepController.animateToStep(
-          state.multistepIndex + 1,
+          (state.currentStepIndex ?? 0) + 1,
         );
         return failure == MultistepFailure.endOfForm;
       case MultistepActionPopUntil(
@@ -533,7 +555,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
         replacementStepId: final replacementStepId,
       ):
         final generatedSteps = state.generatedSteps;
-        final currentIndex = state.multistepIndex;
+        final currentIndex = state.currentStepIndex ?? 0;
         var keepUntilIndex = currentIndex;
         while (keepUntilIndex > 0 &&
             !predicate(generatedSteps[keepUntilIndex])) {
@@ -575,7 +597,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
         }
         return false;
       case MultistepActionPush(stepId: final nextStepId):
-        final currentIndex = state.multistepIndex;
+        final currentIndex = state.currentStepIndex ?? 0;
         final generatedSteps = state.generatedSteps;
 
         final newValues = state.copy();
@@ -732,18 +754,41 @@ class WoFormValues {
 
   // ignore: constant_identifier_names
   static const _SUBMIT_PATH_KEY = '/__wo_reserved_submit_path';
+
+  /// Return the path of the node who will be submitted at the next
+  /// [WoFormValuesCubit.submit]. Can be :
+  /// - The whole form (empty path), triggers [WoForm.onSubmitting].
+  /// - A step ('/stepId'), triggers [MultistepSettings.onStepSubmitting],
+  ///   falls back to [MultistepActionNext].
+  /// - A temporary submission
+  ///   (the path of the last element in [WoFormValuesCubit._tempSubmitDatas]),
+  ///   triggers the associated [_TempSubmitData.onSubmitting].
   String get submitPath => _values[_SUBMIT_PATH_KEY] as String? ?? '';
   void _setSubmitPath(String path) => _values[_SUBMIT_PATH_KEY] = path;
-  void _clearSubmitPath() => _values[_SUBMIT_PATH_KEY] = '';
 
   // --- MULTISTEP ---
 
   /// Only used with [MultistepSettings].
   // ignore: constant_identifier_names
-  static const MULTISTEP_INDEX_KEY = '/__wo_reserved_step_index';
-  int get multistepIndex => _values[MULTISTEP_INDEX_KEY] as int? ?? 0;
+  static const CURRENT_STEP_PATH_KEY = '/__wo_reserved_currrent_step_path';
+
+  /// Null when [MultistepSettings] is not specified.
+  String? get currentStepPath => _values[CURRENT_STEP_PATH_KEY] as String?;
   // ignore: avoid_setters_without_getters
-  set _multistepIndex(int index) => _values[MULTISTEP_INDEX_KEY] = index;
+  set _currentStepId(String stepId) =>
+      _values[CURRENT_STEP_PATH_KEY] = '/$stepId';
+
+  /// Null when [MultistepSettings] is not specified.
+  String? get currentStepId => currentStepPath?.substring(1);
+
+  /// Only used with [MultistepSettings].
+  // ignore: constant_identifier_names
+  static const CURRENT_STEP_INDEX_KEY = '/__wo_reserved_current_step_index';
+
+  /// Null when [MultistepSettings] is not specified.
+  int? get currentStepIndex => _values[CURRENT_STEP_INDEX_KEY] as int?;
+  // ignore: avoid_setters_without_getters
+  set _currentStepIndex(int index) => _values[CURRENT_STEP_INDEX_KEY] = index;
 
   /// Only used when [MultistepSettings.onStepSubmitting] != null.
   // ignore: constant_identifier_names
@@ -756,16 +801,6 @@ class WoFormValues {
   // ignore: avoid_setters_without_getters
   set _generatedSteps(List<String> steps) =>
       _values[_GENERATED_STEPS_KEY] = steps;
-
-  /// The id of the step that the form is currently
-  String? get currentStepId {
-    final generatedStepsOrNull = _values[_GENERATED_STEPS_KEY] as List<String>?;
-    if (generatedStepsOrNull == null) return null;
-    final multistepIndexOrNull = _values[MULTISTEP_INDEX_KEY] as int?;
-    if (multistepIndexOrNull == null) return null;
-    if (multistepIndexOrNull > generatedStepsOrNull.length - 1) return null;
-    return generatedStepsOrNull[multistepIndex];
-  }
 
   // --- FOCUS ---
 

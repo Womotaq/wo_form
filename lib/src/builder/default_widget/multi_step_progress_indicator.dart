@@ -17,15 +17,15 @@ class MultiStepProgressIndicator extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
-    final multistepIndex = context.select(
-      (WoFormValuesCubit c) => c.state.multistepIndex,
+    final currentStepIndex = context.select(
+      (WoFormValuesCubit c) => c.state.currentStepIndex ?? 0,
     );
     final maxIndex = context.read<RootNode>().children.length - 1;
 
     return TweenAnimationBuilder<double>(
       duration: const Duration(milliseconds: 250),
       curve: Curves.easeInOut,
-      tween: Tween<double>(begin: 1, end: multistepIndex + 1),
+      tween: Tween<double>(begin: 1, end: currentStepIndex + 1),
       builder: (context, value, _) => LinearProgressIndicator(
         value: value / max(1, maxIndex + 1),
       ),

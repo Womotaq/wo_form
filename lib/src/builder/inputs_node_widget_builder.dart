@@ -82,7 +82,7 @@ class InputsNodeWidgetBuilder extends StatelessWidget {
 
                 return (mergedSettings.expanderBuilder ??
                         WoFormTheme.of(context)?.inputsNodeExpanderBuilder ??
-                        InputsNodeExpander.page)
+                        InputsNodeExpander.new)
                     .call(expanderData);
               },
             );

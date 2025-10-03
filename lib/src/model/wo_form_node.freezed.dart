@@ -11,164 +11,6 @@ part of 'wo_form_node.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
-/// @nodoc
-mixin _$DynamicInputTemplate {
-
-@InputNullableConverter() WoFormNodeMixin? get child;@notSerializable WoFormNodeMixin Function()? get childBuilder; DynamicInputUiSettings get uiSettings;
-/// Create a copy of DynamicInputTemplate
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$DynamicInputTemplateCopyWith<DynamicInputTemplate> get copyWith => _$DynamicInputTemplateCopyWithImpl<DynamicInputTemplate>(this as DynamicInputTemplate, _$identity);
-
-  /// Serializes this DynamicInputTemplate to a JSON map.
-  Map<String, dynamic> toJson();
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DynamicInputTemplate&&(identical(other.child, child) || other.child == child)&&(identical(other.childBuilder, childBuilder) || other.childBuilder == childBuilder)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings));
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,child,childBuilder,uiSettings);
-
-@override
-String toString() {
-  return 'DynamicInputTemplate(child: $child, childBuilder: $childBuilder, uiSettings: $uiSettings)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $DynamicInputTemplateCopyWith<$Res>  {
-  factory $DynamicInputTemplateCopyWith(DynamicInputTemplate value, $Res Function(DynamicInputTemplate) _then) = _$DynamicInputTemplateCopyWithImpl;
-@useResult
-$Res call({
-@InputNullableConverter() WoFormNodeMixin? child,@notSerializable WoFormNodeMixin Function()? childBuilder, DynamicInputUiSettings uiSettings
-});
-
-
-$DynamicInputUiSettingsCopyWith<$Res> get uiSettings;
-
-}
-/// @nodoc
-class _$DynamicInputTemplateCopyWithImpl<$Res>
-    implements $DynamicInputTemplateCopyWith<$Res> {
-  _$DynamicInputTemplateCopyWithImpl(this._self, this._then);
-
-  final DynamicInputTemplate _self;
-  final $Res Function(DynamicInputTemplate) _then;
-
-/// Create a copy of DynamicInputTemplate
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? child = freezed,Object? childBuilder = freezed,Object? uiSettings = null,}) {
-  return _then(_self.copyWith(
-child: freezed == child ? _self.child : child // ignore: cast_nullable_to_non_nullable
-as WoFormNodeMixin?,childBuilder: freezed == childBuilder ? _self.childBuilder : childBuilder // ignore: cast_nullable_to_non_nullable
-as WoFormNodeMixin Function()?,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
-as DynamicInputUiSettings,
-  ));
-}
-/// Create a copy of DynamicInputTemplate
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$DynamicInputUiSettingsCopyWith<$Res> get uiSettings {
-  
-  return $DynamicInputUiSettingsCopyWith<$Res>(_self.uiSettings, (value) {
-    return _then(_self.copyWith(uiSettings: value));
-  });
-}
-}
-
-
-
-/// @nodoc
-@JsonSerializable()
-
-class _DynamicInputTemplate extends DynamicInputTemplate {
-   _DynamicInputTemplate({@InputNullableConverter() this.child, @notSerializable this.childBuilder, this.uiSettings = const DynamicInputUiSettings()}): assert((child == null) != (childBuilder == null), 'One of child or childBuilder must be specified'),super._();
-  factory _DynamicInputTemplate.fromJson(Map<String, dynamic> json) => _$DynamicInputTemplateFromJson(json);
-
-@override@InputNullableConverter() final  WoFormNodeMixin? child;
-@override@notSerializable final  WoFormNodeMixin Function()? childBuilder;
-@override@JsonKey() final  DynamicInputUiSettings uiSettings;
-
-/// Create a copy of DynamicInputTemplate
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$DynamicInputTemplateCopyWith<_DynamicInputTemplate> get copyWith => __$DynamicInputTemplateCopyWithImpl<_DynamicInputTemplate>(this, _$identity);
-
-@override
-Map<String, dynamic> toJson() {
-  return _$DynamicInputTemplateToJson(this, );
-}
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DynamicInputTemplate&&(identical(other.child, child) || other.child == child)&&(identical(other.childBuilder, childBuilder) || other.childBuilder == childBuilder)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings));
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,child,childBuilder,uiSettings);
-
-@override
-String toString() {
-  return 'DynamicInputTemplate(child: $child, childBuilder: $childBuilder, uiSettings: $uiSettings)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class _$DynamicInputTemplateCopyWith<$Res> implements $DynamicInputTemplateCopyWith<$Res> {
-  factory _$DynamicInputTemplateCopyWith(_DynamicInputTemplate value, $Res Function(_DynamicInputTemplate) _then) = __$DynamicInputTemplateCopyWithImpl;
-@override @useResult
-$Res call({
-@InputNullableConverter() WoFormNodeMixin? child,@notSerializable WoFormNodeMixin Function()? childBuilder, DynamicInputUiSettings uiSettings
-});
-
-
-@override $DynamicInputUiSettingsCopyWith<$Res> get uiSettings;
-
-}
-/// @nodoc
-class __$DynamicInputTemplateCopyWithImpl<$Res>
-    implements _$DynamicInputTemplateCopyWith<$Res> {
-  __$DynamicInputTemplateCopyWithImpl(this._self, this._then);
-
-  final _DynamicInputTemplate _self;
-  final $Res Function(_DynamicInputTemplate) _then;
-
-/// Create a copy of DynamicInputTemplate
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? child = freezed,Object? childBuilder = freezed,Object? uiSettings = null,}) {
-  return _then(_DynamicInputTemplate(
-child: freezed == child ? _self.child : child // ignore: cast_nullable_to_non_nullable
-as WoFormNodeMixin?,childBuilder: freezed == childBuilder ? _self.childBuilder : childBuilder // ignore: cast_nullable_to_non_nullable
-as WoFormNodeMixin Function()?,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
-as DynamicInputUiSettings,
-  ));
-}
-
-/// Create a copy of DynamicInputTemplate
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$DynamicInputUiSettingsCopyWith<$Res> get uiSettings {
-  
-  return $DynamicInputUiSettingsCopyWith<$Res>(_self.uiSettings, (value) {
-    return _then(_self.copyWith(uiSettings: value));
-  });
-}
-}
-
 WoFormNode _$WoFormNodeFromJson(
   Map<String, dynamic> json
 ) {
@@ -293,12 +135,12 @@ as String,
 @JsonSerializable()
 
 class ConditionnalNode extends WoFormNode {
-  const ConditionnalNode({required this.id, required this.condition, @InputConverter() required this.child, this.conditionIsInitiallyMet = false, this.clearChildrenWhenHidden = true, this.uiSettings = const InputUiSettings(), final  String? $type}): $type = $type ?? 'conditionnal',super._();
+   ConditionnalNode({required this.id, required this.condition, @InputConverter() required this.child, this.conditionIsInitiallyMet = false, this.clearChildrenWhenHidden = true, this.uiSettings = const InputUiSettings(), final  String? $type}): $type = $type ?? 'conditionnal',super._();
   factory ConditionnalNode.fromJson(Map<String, dynamic> json) => _$ConditionnalNodeFromJson(json);
 
 @override final  String id;
  final  Condition condition;
-@InputConverter() final  WoFormNodeMixin child;
+@InputConverter() final  WoFormElement child;
 @JsonKey() final  bool conditionIsInitiallyMet;
 @JsonKey() final  bool clearChildrenWhenHidden;
 @JsonKey() final  InputUiSettings uiSettings;
@@ -340,7 +182,7 @@ abstract mixin class $ConditionnalNodeCopyWith<$Res> implements $WoFormNodeCopyW
   factory $ConditionnalNodeCopyWith(ConditionnalNode value, $Res Function(ConditionnalNode) _then) = _$ConditionnalNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id, Condition condition,@InputConverter() WoFormNodeMixin child, bool conditionIsInitiallyMet, bool clearChildrenWhenHidden, InputUiSettings uiSettings
+ String id, Condition condition,@InputConverter() WoFormElement child, bool conditionIsInitiallyMet, bool clearChildrenWhenHidden, InputUiSettings uiSettings
 });
 
 
@@ -362,7 +204,7 @@ class _$ConditionnalNodeCopyWithImpl<$Res>
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,condition: null == condition ? _self.condition : condition // ignore: cast_nullable_to_non_nullable
 as Condition,child: null == child ? _self.child : child // ignore: cast_nullable_to_non_nullable
-as WoFormNodeMixin,conditionIsInitiallyMet: null == conditionIsInitiallyMet ? _self.conditionIsInitiallyMet : conditionIsInitiallyMet // ignore: cast_nullable_to_non_nullable
+as WoFormElement,conditionIsInitiallyMet: null == conditionIsInitiallyMet ? _self.conditionIsInitiallyMet : conditionIsInitiallyMet // ignore: cast_nullable_to_non_nullable
 as bool,clearChildrenWhenHidden: null == clearChildrenWhenHidden ? _self.clearChildrenWhenHidden : clearChildrenWhenHidden // ignore: cast_nullable_to_non_nullable
 as bool,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
 as InputUiSettings,
@@ -394,7 +236,7 @@ $InputUiSettingsCopyWith<$Res> get uiSettings {
 @JsonSerializable()
 
 class DynamicInputsNode extends WoFormNode {
-  const DynamicInputsNode({required this.id, final  List<DynamicInputTemplate> templates = const [], @InputsListConverter() final  List<WoFormNodeMixin>? initialChildren, this.uiSettings = const DynamicInputsNodeUiSettings(), this.exportSettings = const ExportSettings(), final  String? $type}): _templates = templates,_initialChildren = initialChildren,$type = $type ?? 'dynamicInputs',super._();
+   DynamicInputsNode({required this.id, final  List<DynamicInputTemplate> templates = const [], @InputsListConverter() final  List<WoFormElement>? initialChildren, this.uiSettings = const DynamicInputsNodeUiSettings(), this.exportSettings = const ExportSettings(), final  String? $type}): _templates = templates,_initialChildren = initialChildren,$type = $type ?? 'dynamicInputs',super._();
   factory DynamicInputsNode.fromJson(Map<String, dynamic> json) => _$DynamicInputsNodeFromJson(json);
 
 @override final  String id;
@@ -407,8 +249,8 @@ class DynamicInputsNode extends WoFormNode {
   return EqualUnmodifiableListView(_templates);
 }
 
- final  List<WoFormNodeMixin>? _initialChildren;
-@InputsListConverter() List<WoFormNodeMixin>? get initialChildren {
+ final  List<WoFormElement>? _initialChildren;
+@InputsListConverter() List<WoFormElement>? get initialChildren {
   final value = _initialChildren;
   if (value == null) return null;
   if (_initialChildren is EqualUnmodifiableListView) return _initialChildren;
@@ -456,7 +298,7 @@ abstract mixin class $DynamicInputsNodeCopyWith<$Res> implements $WoFormNodeCopy
   factory $DynamicInputsNodeCopyWith(DynamicInputsNode value, $Res Function(DynamicInputsNode) _then) = _$DynamicInputsNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id, List<DynamicInputTemplate> templates,@InputsListConverter() List<WoFormNodeMixin>? initialChildren, DynamicInputsNodeUiSettings uiSettings, ExportSettings exportSettings
+ String id, List<DynamicInputTemplate> templates,@InputsListConverter() List<WoFormElement>? initialChildren, DynamicInputsNodeUiSettings uiSettings, ExportSettings exportSettings
 });
 
 
@@ -478,7 +320,7 @@ class _$DynamicInputsNodeCopyWithImpl<$Res>
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,templates: null == templates ? _self._templates : templates // ignore: cast_nullable_to_non_nullable
 as List<DynamicInputTemplate>,initialChildren: freezed == initialChildren ? _self._initialChildren : initialChildren // ignore: cast_nullable_to_non_nullable
-as List<WoFormNodeMixin>?,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
+as List<WoFormElement>?,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
 as DynamicInputsNodeUiSettings,exportSettings: null == exportSettings ? _self.exportSettings : exportSettings // ignore: cast_nullable_to_non_nullable
 as ExportSettings,
   ));
@@ -509,7 +351,7 @@ $ExportSettingsCopyWith<$Res> get exportSettings {
 @JsonSerializable()
 
 class EmptyNode extends WoFormNode {
-  const EmptyNode({this.id = 'EmptyNode', final  String? $type}): $type = $type ?? 'empty',super._();
+   EmptyNode({this.id = 'EmptyNode', final  String? $type}): $type = $type ?? 'empty',super._();
   factory EmptyNode.fromJson(Map<String, dynamic> json) => _$EmptyNodeFromJson(json);
 
 @override@JsonKey() final  String id;
@@ -582,12 +424,12 @@ as String,
 @JsonSerializable()
 
 class InputsNode extends WoFormNode {
-  const InputsNode({required this.id, @InputsListConverter() final  List<WoFormNodeMixin> children = const [], this.uiSettings = const InputsNodeUiSettings(), this.exportSettings = const ExportSettings(), final  String? $type}): _children = children,$type = $type ?? 'inputs',super._();
+   InputsNode({required this.id, @InputsListConverter() final  List<WoFormElement> children = const [], this.uiSettings = const InputsNodeUiSettings(), this.exportSettings = const ExportSettings(), final  String? $type}): _children = children,$type = $type ?? 'inputs',super._();
   factory InputsNode.fromJson(Map<String, dynamic> json) => _$InputsNodeFromJson(json);
 
 @override final  String id;
- final  List<WoFormNodeMixin> _children;
-@JsonKey()@InputsListConverter() List<WoFormNodeMixin> get children {
+ final  List<WoFormElement> _children;
+@JsonKey()@InputsListConverter() List<WoFormElement> get children {
   if (_children is EqualUnmodifiableListView) return _children;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_children);
@@ -633,7 +475,7 @@ abstract mixin class $InputsNodeCopyWith<$Res> implements $WoFormNodeCopyWith<$R
   factory $InputsNodeCopyWith(InputsNode value, $Res Function(InputsNode) _then) = _$InputsNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id,@InputsListConverter() List<WoFormNodeMixin> children, InputsNodeUiSettings uiSettings, ExportSettings exportSettings
+ String id,@InputsListConverter() List<WoFormElement> children, InputsNodeUiSettings uiSettings, ExportSettings exportSettings
 });
 
 
@@ -654,7 +496,7 @@ class _$InputsNodeCopyWithImpl<$Res>
   return _then(InputsNode(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,children: null == children ? _self._children : children // ignore: cast_nullable_to_non_nullable
-as List<WoFormNodeMixin>,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
+as List<WoFormElement>,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
 as InputsNodeUiSettings,exportSettings: null == exportSettings ? _self.exportSettings : exportSettings // ignore: cast_nullable_to_non_nullable
 as ExportSettings,
   ));
@@ -685,12 +527,12 @@ $ExportSettingsCopyWith<$Res> get exportSettings {
 @JsonSerializable()
 
 class PathBuilderNode extends WoFormNode {
-  const PathBuilderNode({required this.id, @notSerializable this.builder, final  String? $type}): assert(builder != null, 'PathBuilderNode.builder cannot be null'),$type = $type ?? 'pathBuilder',super._();
+   PathBuilderNode({required this.id, @notSerializable this.builder, final  String? $type}): assert(builder != null, 'PathBuilderNode.builder cannot be null'),$type = $type ?? 'pathBuilder',super._();
   factory PathBuilderNode.fromJson(Map<String, dynamic> json) => _$PathBuilderNodeFromJson(json);
 
 @override final  String id;
 /// [path] is the path of this node, wich includes its own id.
-@notSerializable final  WoFormNodeMixin Function(String path)? builder;
+@notSerializable final  WoFormElement Function(String path)? builder;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -729,7 +571,7 @@ abstract mixin class $PathBuilderNodeCopyWith<$Res> implements $WoFormNodeCopyWi
   factory $PathBuilderNodeCopyWith(PathBuilderNode value, $Res Function(PathBuilderNode) _then) = _$PathBuilderNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id,@notSerializable WoFormNodeMixin Function(String path)? builder
+ String id,@notSerializable WoFormElement Function(String path)? builder
 });
 
 
@@ -750,7 +592,7 @@ class _$PathBuilderNodeCopyWithImpl<$Res>
   return _then(PathBuilderNode(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,builder: freezed == builder ? _self.builder : builder // ignore: cast_nullable_to_non_nullable
-as WoFormNodeMixin Function(String path)?,
+as WoFormElement Function(String path)?,
   ));
 }
 
@@ -761,12 +603,12 @@ as WoFormNodeMixin Function(String path)?,
 @JsonSerializable()
 
 class SelectorNode extends WoFormNode {
-  const SelectorNode({required this.id, @notSerializable this.selector, @notSerializable this.builder, this.initialValue, this.uiSettings = const InputUiSettings(), final  String? $type}): assert(selector != null, 'SelectorNode.selector cannot be null'),assert(builder != null, 'SelectorNode.builder cannot be null'),$type = $type ?? 'selector',super._();
+   SelectorNode({required this.id, @notSerializable this.selector, @notSerializable this.builder, this.initialValue, this.uiSettings = const InputUiSettings(), final  String? $type}): assert(selector != null, 'SelectorNode.selector cannot be null'),assert(builder != null, 'SelectorNode.builder cannot be null'),$type = $type ?? 'selector',super._();
   factory SelectorNode.fromJson(Map<String, dynamic> json) => _$SelectorNodeFromJson(json);
 
 @override final  String id;
 @notSerializable final  Object? Function(WoFormValues values)? selector;
-@notSerializable final  WoFormNodeMixin Function(Object? value)? builder;
+@notSerializable final  WoFormElement Function(Object? value)? builder;
  final  Object? initialValue;
 @JsonKey() final  InputUiSettings uiSettings;
 
@@ -807,7 +649,7 @@ abstract mixin class $SelectorNodeCopyWith<$Res> implements $WoFormNodeCopyWith<
   factory $SelectorNodeCopyWith(SelectorNode value, $Res Function(SelectorNode) _then) = _$SelectorNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id,@notSerializable Object? Function(WoFormValues values)? selector,@notSerializable WoFormNodeMixin Function(Object? value)? builder, Object? initialValue, InputUiSettings uiSettings
+ String id,@notSerializable Object? Function(WoFormValues values)? selector,@notSerializable WoFormElement Function(Object? value)? builder, Object? initialValue, InputUiSettings uiSettings
 });
 
 
@@ -829,7 +671,7 @@ class _$SelectorNodeCopyWithImpl<$Res>
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,selector: freezed == selector ? _self.selector : selector // ignore: cast_nullable_to_non_nullable
 as Object? Function(WoFormValues values)?,builder: freezed == builder ? _self.builder : builder // ignore: cast_nullable_to_non_nullable
-as WoFormNodeMixin Function(Object? value)?,initialValue: freezed == initialValue ? _self.initialValue : initialValue ,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
+as WoFormElement Function(Object? value)?,initialValue: freezed == initialValue ? _self.initialValue : initialValue ,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
 as InputUiSettings,
   ));
 }
@@ -850,12 +692,12 @@ $InputUiSettingsCopyWith<$Res> get uiSettings {
 @JsonSerializable()
 
 class ValueBuilderNode extends WoFormNode {
-  const ValueBuilderNode({required this.id, required this.path, @notSerializable this.builder, this.initialValue, final  String? $type}): assert(builder != null, 'ValueBuilderNode.builder cannot be null'),$type = $type ?? 'valueBuilder',super._();
+   ValueBuilderNode({required this.id, required this.path, @notSerializable this.builder, this.initialValue, final  String? $type}): assert(builder != null, 'ValueBuilderNode.builder cannot be null'),$type = $type ?? 'valueBuilder',super._();
   factory ValueBuilderNode.fromJson(Map<String, dynamic> json) => _$ValueBuilderNodeFromJson(json);
 
 @override final  String id;
  final  String path;
-@notSerializable final  WoFormNodeMixin Function(Object? value)? builder;
+@notSerializable final  WoFormElement Function(Object? value)? builder;
  final  Object? initialValue;
 
 @JsonKey(name: 'runtimeType')
@@ -895,7 +737,7 @@ abstract mixin class $ValueBuilderNodeCopyWith<$Res> implements $WoFormNodeCopyW
   factory $ValueBuilderNodeCopyWith(ValueBuilderNode value, $Res Function(ValueBuilderNode) _then) = _$ValueBuilderNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String path,@notSerializable WoFormNodeMixin Function(Object? value)? builder, Object? initialValue
+ String id, String path,@notSerializable WoFormElement Function(Object? value)? builder, Object? initialValue
 });
 
 
@@ -917,7 +759,7 @@ class _$ValueBuilderNodeCopyWithImpl<$Res>
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,path: null == path ? _self.path : path // ignore: cast_nullable_to_non_nullable
 as String,builder: freezed == builder ? _self.builder : builder // ignore: cast_nullable_to_non_nullable
-as WoFormNodeMixin Function(Object? value)?,initialValue: freezed == initialValue ? _self.initialValue : initialValue ,
+as WoFormElement Function(Object? value)?,initialValue: freezed == initialValue ? _self.initialValue : initialValue ,
   ));
 }
 
@@ -928,7 +770,7 @@ as WoFormNodeMixin Function(Object? value)?,initialValue: freezed == initialValu
 @JsonSerializable()
 
 class ValuesBuilderNode extends WoFormNode {
-  const ValuesBuilderNode({required this.id, required final  List<String> paths, @notSerializable this.builder, final  Map<String, Object?>? initialValues, final  String? $type}): assert(builder != null, 'ValuesBuilderNode.builder cannot be null'),_paths = paths,_initialValues = initialValues,$type = $type ?? 'valuesBuilder',super._();
+   ValuesBuilderNode({required this.id, required final  List<String> paths, @notSerializable this.builder, final  Map<String, Object?>? initialValues, final  String? $type}): assert(builder != null, 'ValuesBuilderNode.builder cannot be null'),_paths = paths,_initialValues = initialValues,$type = $type ?? 'valuesBuilder',super._();
   factory ValuesBuilderNode.fromJson(Map<String, dynamic> json) => _$ValuesBuilderNodeFromJson(json);
 
 @override final  String id;
@@ -939,7 +781,7 @@ class ValuesBuilderNode extends WoFormNode {
   return EqualUnmodifiableListView(_paths);
 }
 
-@notSerializable final  WoFormNodeMixin Function(Map<String, Object?> values)? builder;
+@notSerializable final  WoFormElement Function(Map<String, Object?> values)? builder;
  final  Map<String, Object?>? _initialValues;
  Map<String, Object?>? get initialValues {
   final value = _initialValues;
@@ -987,7 +829,7 @@ abstract mixin class $ValuesBuilderNodeCopyWith<$Res> implements $WoFormNodeCopy
   factory $ValuesBuilderNodeCopyWith(ValuesBuilderNode value, $Res Function(ValuesBuilderNode) _then) = _$ValuesBuilderNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id, List<String> paths,@notSerializable WoFormNodeMixin Function(Map<String, Object?> values)? builder, Map<String, Object?>? initialValues
+ String id, List<String> paths,@notSerializable WoFormElement Function(Map<String, Object?> values)? builder, Map<String, Object?>? initialValues
 });
 
 
@@ -1009,7 +851,7 @@ class _$ValuesBuilderNodeCopyWithImpl<$Res>
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,paths: null == paths ? _self._paths : paths // ignore: cast_nullable_to_non_nullable
 as List<String>,builder: freezed == builder ? _self.builder : builder // ignore: cast_nullable_to_non_nullable
-as WoFormNodeMixin Function(Map<String, Object?> values)?,initialValues: freezed == initialValues ? _self._initialValues : initialValues // ignore: cast_nullable_to_non_nullable
+as WoFormElement Function(Map<String, Object?> values)?,initialValues: freezed == initialValues ? _self._initialValues : initialValues // ignore: cast_nullable_to_non_nullable
 as Map<String, Object?>?,
   ));
 }
@@ -1021,7 +863,7 @@ as Map<String, Object?>?,
 @JsonSerializable()
 
 class ValueListenerNode extends WoFormNode {
-  const ValueListenerNode({required this.path, this.id = 'ValueListenerNode', @notSerializable this.listenWhen, @notSerializable this.listener, final  String? $type}): assert(listener != null, 'ValueListenerNode.listener cannot be null'),$type = $type ?? 'valueListener',super._();
+   ValueListenerNode({required this.path, this.id = 'ValueListenerNode', @notSerializable this.listenWhen, @notSerializable this.listener, final  String? $type}): assert(listener != null, 'ValueListenerNode.listener cannot be null'),$type = $type ?? 'valueListener',super._();
   factory ValueListenerNode.fromJson(Map<String, dynamic> json) => _$ValueListenerNodeFromJson(json);
 
  final  String path;
@@ -1100,7 +942,7 @@ as void Function(BuildContext context, String parentPath, Object? value)?,
 @JsonSerializable()
 
 class WidgetNode extends WoFormNode {
-  const WidgetNode({this.id = 'WidgetNode', @notSerializable this.builder, this.uiSettings = const InputUiSettings(), final  String? $type}): $type = $type ?? 'widget',super._();
+   WidgetNode({this.id = 'WidgetNode', @notSerializable this.builder, this.uiSettings = const InputUiSettings(), final  String? $type}): $type = $type ?? 'widget',super._();
   factory WidgetNode.fromJson(Map<String, dynamic> json) => _$WidgetNodeFromJson(json);
 
 @override@JsonKey() final  String id;
@@ -1185,7 +1027,7 @@ $InputUiSettingsCopyWith<$Res> get uiSettings {
 /// @nodoc
 mixin _$FutureNode<T> {
 
- String get id; Future<T>? get future; WoFormNodeMixin Function(String parentPath, AsyncSnapshot<T?> snapshot) get builder; T? get initialData;/// If true, when the future will be completed, the values of
+ String get id; Future<T>? get future; WoFormElement Function(String parentPath, AsyncSnapshot<T?> snapshot) get builder; T? get initialData;/// If true, when the future will be completed, the values of
 /// the children inputs will be reseted to their getInitialValues.
  bool get willResetToInitialValues; InputUiSettings get uiSettings;
 /// Create a copy of FutureNode
@@ -1218,7 +1060,7 @@ abstract mixin class $FutureNodeCopyWith<T,$Res>  {
   factory $FutureNodeCopyWith(FutureNode<T> value, $Res Function(FutureNode<T>) _then) = _$FutureNodeCopyWithImpl;
 @useResult
 $Res call({
- String id, Future<T>? future, WoFormNodeMixin Function(String parentPath, AsyncSnapshot<T?> snapshot) builder, T? initialData, bool willResetToInitialValues, InputUiSettings uiSettings
+ String id, Future<T>? future, WoFormElement Function(String parentPath, AsyncSnapshot<T?> snapshot) builder, T? initialData, bool willResetToInitialValues, InputUiSettings uiSettings
 });
 
 
@@ -1240,7 +1082,7 @@ class _$FutureNodeCopyWithImpl<T,$Res>
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,future: freezed == future ? _self.future : future // ignore: cast_nullable_to_non_nullable
 as Future<T>?,builder: null == builder ? _self.builder : builder // ignore: cast_nullable_to_non_nullable
-as WoFormNodeMixin Function(String parentPath, AsyncSnapshot<T?> snapshot),initialData: freezed == initialData ? _self.initialData : initialData // ignore: cast_nullable_to_non_nullable
+as WoFormElement Function(String parentPath, AsyncSnapshot<T?> snapshot),initialData: freezed == initialData ? _self.initialData : initialData // ignore: cast_nullable_to_non_nullable
 as T?,willResetToInitialValues: null == willResetToInitialValues ? _self.willResetToInitialValues : willResetToInitialValues // ignore: cast_nullable_to_non_nullable
 as bool,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
 as InputUiSettings,
@@ -1269,7 +1111,7 @@ class _FutureNode<T> extends FutureNode<T> {
 
 @override final  String id;
 @override final  Future<T>? future;
-@override final  WoFormNodeMixin Function(String parentPath, AsyncSnapshot<T?> snapshot) builder;
+@override final  WoFormElement Function(String parentPath, AsyncSnapshot<T?> snapshot) builder;
 @override final  T? initialData;
 /// If true, when the future will be completed, the values of
 /// the children inputs will be reseted to their getInitialValues.
@@ -1306,7 +1148,7 @@ abstract mixin class _$FutureNodeCopyWith<T,$Res> implements $FutureNodeCopyWith
   factory _$FutureNodeCopyWith(_FutureNode<T> value, $Res Function(_FutureNode<T>) _then) = __$FutureNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id, Future<T>? future, WoFormNodeMixin Function(String parentPath, AsyncSnapshot<T?> snapshot) builder, T? initialData, bool willResetToInitialValues, InputUiSettings uiSettings
+ String id, Future<T>? future, WoFormElement Function(String parentPath, AsyncSnapshot<T?> snapshot) builder, T? initialData, bool willResetToInitialValues, InputUiSettings uiSettings
 });
 
 
@@ -1328,7 +1170,7 @@ class __$FutureNodeCopyWithImpl<T,$Res>
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,future: freezed == future ? _self.future : future // ignore: cast_nullable_to_non_nullable
 as Future<T>?,builder: null == builder ? _self.builder : builder // ignore: cast_nullable_to_non_nullable
-as WoFormNodeMixin Function(String parentPath, AsyncSnapshot<T?> snapshot),initialData: freezed == initialData ? _self.initialData : initialData // ignore: cast_nullable_to_non_nullable
+as WoFormElement Function(String parentPath, AsyncSnapshot<T?> snapshot),initialData: freezed == initialData ? _self.initialData : initialData // ignore: cast_nullable_to_non_nullable
 as T?,willResetToInitialValues: null == willResetToInitialValues ? _self.willResetToInitialValues : willResetToInitialValues // ignore: cast_nullable_to_non_nullable
 as bool,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
 as InputUiSettings,
@@ -1351,7 +1193,7 @@ $InputUiSettingsCopyWith<$Res> get uiSettings {
 /// @nodoc
 mixin _$RootNode {
 
- String get id; Json get initialValues;@InputsListConverter() List<WoFormNodeMixin> get children; WoFormUiSettings get uiSettings; ExportSettings get exportSettings;// LATER : issue, how to modify an in-production corrupted data ?
+ String get id; Json get initialValues;@InputsListConverter() List<WoFormElement> get children; WoFormUiSettings get uiSettings; ExportSettings get exportSettings;// LATER : issue, how to modify an in-production corrupted data ?
 // give a way to override it ?
 //
 /// If not empty, this form will be locally persistent, using HydratedCubit.
@@ -1388,7 +1230,7 @@ abstract mixin class $RootNodeCopyWith<$Res>  {
   factory $RootNodeCopyWith(RootNode value, $Res Function(RootNode) _then) = _$RootNodeCopyWithImpl;
 @useResult
 $Res call({
- String id, Json initialValues,@InputsListConverter() List<WoFormNodeMixin> children, WoFormUiSettings uiSettings, ExportSettings exportSettings, String hydratationId
+ String id, Json initialValues,@InputsListConverter() List<WoFormElement> children, WoFormUiSettings uiSettings, ExportSettings exportSettings, String hydratationId
 });
 
 
@@ -1410,7 +1252,7 @@ class _$RootNodeCopyWithImpl<$Res>
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,initialValues: null == initialValues ? _self.initialValues : initialValues // ignore: cast_nullable_to_non_nullable
 as Json,children: null == children ? _self.children : children // ignore: cast_nullable_to_non_nullable
-as List<WoFormNodeMixin>,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
+as List<WoFormElement>,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
 as WoFormUiSettings,exportSettings: null == exportSettings ? _self.exportSettings : exportSettings // ignore: cast_nullable_to_non_nullable
 as ExportSettings,hydratationId: null == hydratationId ? _self.hydratationId : hydratationId // ignore: cast_nullable_to_non_nullable
 as String,
@@ -1443,7 +1285,7 @@ $ExportSettingsCopyWith<$Res> get exportSettings {
 @JsonSerializable()
 
 class _RootNode extends RootNode {
-  const _RootNode({this.id = '#', final  Json initialValues = const {}, @InputsListConverter() final  List<WoFormNodeMixin> children = const [], this.uiSettings = const WoFormUiSettings(), this.exportSettings = const ExportSettings(), this.hydratationId = ''}): _initialValues = initialValues,_children = children,super._();
+  const _RootNode({this.id = '#', final  Json initialValues = const {}, @InputsListConverter() final  List<WoFormElement> children = const [], this.uiSettings = const WoFormUiSettings(), this.exportSettings = const ExportSettings(), this.hydratationId = ''}): _initialValues = initialValues,_children = children,super._();
   factory _RootNode.fromJson(Map<String, dynamic> json) => _$RootNodeFromJson(json);
 
 @override@JsonKey() final  String id;
@@ -1454,8 +1296,8 @@ class _RootNode extends RootNode {
   return EqualUnmodifiableMapView(_initialValues);
 }
 
- final  List<WoFormNodeMixin> _children;
-@override@JsonKey()@InputsListConverter() List<WoFormNodeMixin> get children {
+ final  List<WoFormElement> _children;
+@override@JsonKey()@InputsListConverter() List<WoFormElement> get children {
   if (_children is EqualUnmodifiableListView) return _children;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_children);
@@ -1502,7 +1344,7 @@ abstract mixin class _$RootNodeCopyWith<$Res> implements $RootNodeCopyWith<$Res>
   factory _$RootNodeCopyWith(_RootNode value, $Res Function(_RootNode) _then) = __$RootNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id, Json initialValues,@InputsListConverter() List<WoFormNodeMixin> children, WoFormUiSettings uiSettings, ExportSettings exportSettings, String hydratationId
+ String id, Json initialValues,@InputsListConverter() List<WoFormElement> children, WoFormUiSettings uiSettings, ExportSettings exportSettings, String hydratationId
 });
 
 
@@ -1524,7 +1366,7 @@ class __$RootNodeCopyWithImpl<$Res>
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,initialValues: null == initialValues ? _self._initialValues : initialValues // ignore: cast_nullable_to_non_nullable
 as Json,children: null == children ? _self._children : children // ignore: cast_nullable_to_non_nullable
-as List<WoFormNodeMixin>,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
+as List<WoFormElement>,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
 as WoFormUiSettings,exportSettings: null == exportSettings ? _self.exportSettings : exportSettings // ignore: cast_nullable_to_non_nullable
 as ExportSettings,hydratationId: null == hydratationId ? _self.hydratationId : hydratationId // ignore: cast_nullable_to_non_nullable
 as String,
@@ -1548,6 +1390,164 @@ $ExportSettingsCopyWith<$Res> get exportSettings {
   
   return $ExportSettingsCopyWith<$Res>(_self.exportSettings, (value) {
     return _then(_self.copyWith(exportSettings: value));
+  });
+}
+}
+
+
+/// @nodoc
+mixin _$DynamicInputTemplate {
+
+@InputNullableConverter() WoFormElement? get child;@notSerializable WoFormElement Function()? get childBuilder; DynamicInputUiSettings get uiSettings;
+/// Create a copy of DynamicInputTemplate
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$DynamicInputTemplateCopyWith<DynamicInputTemplate> get copyWith => _$DynamicInputTemplateCopyWithImpl<DynamicInputTemplate>(this as DynamicInputTemplate, _$identity);
+
+  /// Serializes this DynamicInputTemplate to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DynamicInputTemplate&&(identical(other.child, child) || other.child == child)&&(identical(other.childBuilder, childBuilder) || other.childBuilder == childBuilder)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,child,childBuilder,uiSettings);
+
+@override
+String toString() {
+  return 'DynamicInputTemplate(child: $child, childBuilder: $childBuilder, uiSettings: $uiSettings)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $DynamicInputTemplateCopyWith<$Res>  {
+  factory $DynamicInputTemplateCopyWith(DynamicInputTemplate value, $Res Function(DynamicInputTemplate) _then) = _$DynamicInputTemplateCopyWithImpl;
+@useResult
+$Res call({
+@InputNullableConverter() WoFormElement? child,@notSerializable WoFormElement Function()? childBuilder, DynamicInputUiSettings uiSettings
+});
+
+
+$DynamicInputUiSettingsCopyWith<$Res> get uiSettings;
+
+}
+/// @nodoc
+class _$DynamicInputTemplateCopyWithImpl<$Res>
+    implements $DynamicInputTemplateCopyWith<$Res> {
+  _$DynamicInputTemplateCopyWithImpl(this._self, this._then);
+
+  final DynamicInputTemplate _self;
+  final $Res Function(DynamicInputTemplate) _then;
+
+/// Create a copy of DynamicInputTemplate
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? child = freezed,Object? childBuilder = freezed,Object? uiSettings = null,}) {
+  return _then(_self.copyWith(
+child: freezed == child ? _self.child : child // ignore: cast_nullable_to_non_nullable
+as WoFormElement?,childBuilder: freezed == childBuilder ? _self.childBuilder : childBuilder // ignore: cast_nullable_to_non_nullable
+as WoFormElement Function()?,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
+as DynamicInputUiSettings,
+  ));
+}
+/// Create a copy of DynamicInputTemplate
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DynamicInputUiSettingsCopyWith<$Res> get uiSettings {
+  
+  return $DynamicInputUiSettingsCopyWith<$Res>(_self.uiSettings, (value) {
+    return _then(_self.copyWith(uiSettings: value));
+  });
+}
+}
+
+
+
+/// @nodoc
+@JsonSerializable()
+
+class _DynamicInputTemplate extends DynamicInputTemplate {
+   _DynamicInputTemplate({@InputNullableConverter() this.child, @notSerializable this.childBuilder, this.uiSettings = const DynamicInputUiSettings()}): assert((child == null) != (childBuilder == null), 'One of child or childBuilder must be specified'),super._();
+  factory _DynamicInputTemplate.fromJson(Map<String, dynamic> json) => _$DynamicInputTemplateFromJson(json);
+
+@override@InputNullableConverter() final  WoFormElement? child;
+@override@notSerializable final  WoFormElement Function()? childBuilder;
+@override@JsonKey() final  DynamicInputUiSettings uiSettings;
+
+/// Create a copy of DynamicInputTemplate
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$DynamicInputTemplateCopyWith<_DynamicInputTemplate> get copyWith => __$DynamicInputTemplateCopyWithImpl<_DynamicInputTemplate>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$DynamicInputTemplateToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DynamicInputTemplate&&(identical(other.child, child) || other.child == child)&&(identical(other.childBuilder, childBuilder) || other.childBuilder == childBuilder)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,child,childBuilder,uiSettings);
+
+@override
+String toString() {
+  return 'DynamicInputTemplate(child: $child, childBuilder: $childBuilder, uiSettings: $uiSettings)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$DynamicInputTemplateCopyWith<$Res> implements $DynamicInputTemplateCopyWith<$Res> {
+  factory _$DynamicInputTemplateCopyWith(_DynamicInputTemplate value, $Res Function(_DynamicInputTemplate) _then) = __$DynamicInputTemplateCopyWithImpl;
+@override @useResult
+$Res call({
+@InputNullableConverter() WoFormElement? child,@notSerializable WoFormElement Function()? childBuilder, DynamicInputUiSettings uiSettings
+});
+
+
+@override $DynamicInputUiSettingsCopyWith<$Res> get uiSettings;
+
+}
+/// @nodoc
+class __$DynamicInputTemplateCopyWithImpl<$Res>
+    implements _$DynamicInputTemplateCopyWith<$Res> {
+  __$DynamicInputTemplateCopyWithImpl(this._self, this._then);
+
+  final _DynamicInputTemplate _self;
+  final $Res Function(_DynamicInputTemplate) _then;
+
+/// Create a copy of DynamicInputTemplate
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? child = freezed,Object? childBuilder = freezed,Object? uiSettings = null,}) {
+  return _then(_DynamicInputTemplate(
+child: freezed == child ? _self.child : child // ignore: cast_nullable_to_non_nullable
+as WoFormElement?,childBuilder: freezed == childBuilder ? _self.childBuilder : childBuilder // ignore: cast_nullable_to_non_nullable
+as WoFormElement Function()?,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
+as DynamicInputUiSettings,
+  ));
+}
+
+/// Create a copy of DynamicInputTemplate
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DynamicInputUiSettingsCopyWith<$Res> get uiSettings {
+  
+  return $DynamicInputUiSettingsCopyWith<$Res>(_self.uiSettings, (value) {
+    return _then(_self.copyWith(uiSettings: value));
   });
 }
 }

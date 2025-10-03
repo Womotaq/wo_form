@@ -12,8 +12,8 @@ class SelectFieldBuilder<T> extends StatelessWidget {
   final String path;
   final SelectInputUiSettings<T>? uiSettings;
 
-  SelectInput<T> getChild(WoFormNodeMixin form, WoFormValues values) {
-    final input = form.getChild(path: path, parentPath: '', values: values);
+  SelectInput<T> getChild(RootNode form, WoFormValues values) {
+    final input = form.getChild(path: path, values: values);
     if (input is! SelectInput<T>) {
       throw ArgumentError(
         'Expected <SelectInput<$T>> at path: "$path", '
@@ -147,8 +147,8 @@ class SelectStringFieldBuilder extends SelectFieldBuilder<String> {
   });
 
   @override
-  SelectInput<String> getChild(WoFormNodeMixin form, WoFormValues values) {
-    final input = form.getChild(path: path, parentPath: '', values: values);
+  SelectInput<String> getChild(RootNode form, WoFormValues values) {
+    final input = form.getChild(path: path, values: values);
     if (input is! SelectStringInput) {
       throw ArgumentError(
         'Wrong input at path "$path". '

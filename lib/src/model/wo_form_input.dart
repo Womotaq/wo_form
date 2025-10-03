@@ -30,17 +30,11 @@ sealed class WoFormInputError with _$WoFormInputError {
   }) = CustomInputError;
 }
 
-mixin WoFormInputMixin {
+abstract class WoFormInputBase extends WoFormElement {
   WoFormInputError? getError(
     Object? value, {
     required String parentPath,
   });
-
-  WoFormNodeMixin? getChild({
-    required String path,
-    required String parentPath,
-    required WoFormValues values,
-  }) => null;
 
   String? getInvalidExplanation(
     dynamic value,
@@ -59,29 +53,26 @@ mixin WoFormInputMixin {
     return translateError?.call(error) ?? error.toString();
   }
 
-  // WoFormNodeMixin
+  // WoFormElement
 
-  String get id;
-
+  @override
   Iterable<String> getAllInputPaths({
     required WoFormValues values,
     required String parentPath,
   }) => ['$parentPath/$id'];
 
+  @override
   Iterable<WoFormInputError> getErrors({
     required WoFormValues values,
     required String parentPath,
     bool recursive = true,
   }) => [getError(values['$parentPath/$id'], parentPath: parentPath)].nonNulls;
 
+  @override
   String? getExportKey({
     required WoFormValues values,
     required String parentPath,
   }) => id;
-
-  Json toJson();
-
-  Widget toWidget({required String parentPath, Key? key});
 }
 
 typedef GetCustomErrorDef<T> =
@@ -102,7 +93,7 @@ extension _SelectInputUiSettingsX<T> on SelectInputUiSettings<T> {
 }
 
 @freezed
-sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
+sealed class WoFormInput extends WoFormInputBase with _$WoFormInput {
   const factory WoFormInput.boolean({
     required String id,
     bool? initialValue,
@@ -242,7 +233,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
     @Default(StringInputUiSettings()) StringInputUiSettings uiSettings,
   }) = StringInput;
 
-  const WoFormInput._();
+  WoFormInput._();
 
   factory WoFormInput.fromJson(Json json) => _$WoFormInputFromJson(json);
 
@@ -541,8 +532,7 @@ sealed class WoFormInput with _$WoFormInput, WoFormNodeMixin, WoFormInputMixin {
 // Note : when adding a new parameter, make sure to update
 // SelectStringFieldBuilder.
 @Freezed(genericArgumentFactories: true)
-abstract class SelectInput<T>
-    with _$SelectInput<T>, WoFormNodeMixin, WoFormInputMixin {
+abstract class SelectInput<T> extends WoFormInputBase with _$SelectInput<T> {
   const factory SelectInput({
     required String id,
     required int? maxCount,
@@ -579,7 +569,7 @@ abstract class SelectInput<T>
     @notSerializable dynamic Function(dynamic)? fromJsonT,
   }) = _SelectInput<T>;
 
-  const SelectInput._();
+  SelectInput._();
 
   factory SelectInput.fromJson(
     Json json,

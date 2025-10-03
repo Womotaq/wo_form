@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 extension StringX on String {
@@ -14,3 +16,15 @@ extension PushPage on BuildContext {
 }
 
 typedef Json = Map<String, dynamic>;
+
+String generateUid({int length = 6}) {
+  const chars =
+      '0123456789'
+      'abcdefghijklmnopqrstuvwxyz'
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  final random = Random();
+  return List<String>.generate(
+    length,
+    (_) => chars[random.nextInt(chars.length)],
+  ).join();
+}

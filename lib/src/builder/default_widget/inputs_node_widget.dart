@@ -81,11 +81,11 @@ class InputsNodeWidget extends StatelessWidget {
           );
   }
 
-  Widget standardChildBuilder(WoFormNodeMixin child, _) =>
+  Widget standardChildBuilder(WoFormElement child, _) =>
       child.toWidget(parentPath: data.path);
 
   Widget flexibleChildBuilder(
-    WoFormNodeMixin child,
+    WoFormElement child,
     WoFormUiSettings formUiSettings,
   ) => Builder(
     builder: (context) {

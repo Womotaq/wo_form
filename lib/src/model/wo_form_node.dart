@@ -11,10 +11,13 @@ import 'package:wo_form/wo_form.dart';
 part 'wo_form_node.freezed.dart';
 part 'wo_form_node.g.dart';
 
-mixin WoFormNodeMixin {
+abstract class WoFormElement {
+  WoFormElement() : uid = generateUid();
+
+  final String uid;
   String get id;
 
-  static WoFormNodeMixin fromJson(Json json) {
+  static WoFormElement fromJson(Json json) {
     try {
       return WoFormInput.fromJson(json);
     } on CheckedFromJsonException {
@@ -38,7 +41,7 @@ mixin WoFormNodeMixin {
     required String parentPath,
   });
 
-  WoFormNodeMixin? getChild({
+  WoFormElement? getChild({
     required String path,
     required String parentPath,
     required WoFormValues values,
@@ -59,101 +62,81 @@ mixin WoFormNodeMixin {
 
   Widget toWidget({required String parentPath, Key? key});
 
-  WoFormNodeMixin withId({required String id});
+  WoFormElement withId({required String id});
 
   /// Used when OFormUiSettings.scrollable is false
   int? flex(BuildContext context) => null;
 }
 
 @freezed
-abstract class DynamicInputTemplate with _$DynamicInputTemplate {
-  @Assert(
-    '(child == null) != (childBuilder == null)',
-    'One of child or childBuilder must be specified',
-  )
-  factory DynamicInputTemplate({
-    @InputNullableConverter() WoFormNodeMixin? child,
-    @notSerializable WoFormNodeMixin Function()? childBuilder,
-    @Default(DynamicInputUiSettings()) DynamicInputUiSettings uiSettings,
-  }) = _DynamicInputTemplate;
-
-  const DynamicInputTemplate._();
-
-  factory DynamicInputTemplate.fromJson(Json json) =>
-      _$DynamicInputTemplateFromJson(json);
-
-  WoFormNodeMixin getChild() => child == null ? childBuilder!() : child!;
-}
-
-@freezed
-sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
-  const factory WoFormNode.conditionnal({
+sealed class WoFormNode extends WoFormElement with _$WoFormNode {
+  factory WoFormNode.conditionnal({
     required String id,
     required Condition condition,
-    @InputConverter() required WoFormNodeMixin child,
+    @InputConverter() required WoFormElement child,
     @Default(false) bool conditionIsInitiallyMet,
     @Default(true) bool clearChildrenWhenHidden,
     @Default(InputUiSettings()) InputUiSettings uiSettings,
   }) = ConditionnalNode;
 
-  const factory WoFormNode.dynamicInputs({
+  factory WoFormNode.dynamicInputs({
     required String id,
     // @DynamicInputTemplatesConverter()
     @Default([]) List<DynamicInputTemplate> templates,
-    @InputsListConverter() List<WoFormNodeMixin>? initialChildren,
+    @InputsListConverter() List<WoFormElement>? initialChildren,
     @Default(DynamicInputsNodeUiSettings())
     DynamicInputsNodeUiSettings uiSettings,
     @Default(ExportSettings()) ExportSettings exportSettings,
   }) = DynamicInputsNode;
 
-  const factory WoFormNode.empty({
+  factory WoFormNode.empty({
     @Default('EmptyNode') String id,
   }) = EmptyNode;
 
-  const factory WoFormNode.inputs({
+  factory WoFormNode.inputs({
     required String id,
-    @InputsListConverter() @Default([]) List<WoFormNodeMixin> children,
+    @InputsListConverter() @Default([]) List<WoFormElement> children,
     @Default(InputsNodeUiSettings()) InputsNodeUiSettings uiSettings,
     @Default(ExportSettings()) ExportSettings exportSettings,
   }) = InputsNode;
 
   @Assert('builder != null', 'PathBuilderNode.builder cannot be null')
-  const factory WoFormNode.pathBuilder({
+  factory WoFormNode.pathBuilder({
     required String id,
 
     /// [path] is the path of this node, wich includes its own id.
-    @notSerializable WoFormNodeMixin Function(String path)? builder,
+    @notSerializable WoFormElement Function(String path)? builder,
   }) = PathBuilderNode;
 
   @Assert('selector != null', 'SelectorNode.selector cannot be null')
   @Assert('builder != null', 'SelectorNode.builder cannot be null')
-  const factory WoFormNode.selector({
+  factory WoFormNode.selector({
     required String id,
     @notSerializable Object? Function(WoFormValues values)? selector,
-    @notSerializable WoFormNodeMixin Function(Object? value)? builder,
+    @notSerializable WoFormElement Function(Object? value)? builder,
     Object? initialValue,
     @Default(InputUiSettings()) InputUiSettings uiSettings,
   }) = SelectorNode;
 
   @Assert('builder != null', 'ValueBuilderNode.builder cannot be null')
-  const factory WoFormNode.valueBuilder({
+  factory WoFormNode.valueBuilder({
     required String id,
     required String path,
-    @notSerializable WoFormNodeMixin Function(Object? value)? builder,
+    @notSerializable WoFormElement Function(Object? value)? builder,
     Object? initialValue,
   }) = ValueBuilderNode;
 
   @Assert('builder != null', 'ValuesBuilderNode.builder cannot be null')
-  const factory WoFormNode.valuesBuilder({
+  factory WoFormNode.valuesBuilder({
     required String id,
     required List<String> paths,
     @notSerializable
-    WoFormNodeMixin Function(Map<String, Object?> values)? builder,
+    WoFormElement Function(Map<String, Object?> values)? builder,
     Map<String, Object?>? initialValues,
   }) = ValuesBuilderNode;
 
   @Assert('listener != null', 'ValueListenerNode.listener cannot be null')
-  const factory WoFormNode.valueListener({
+  factory WoFormNode.valueListener({
     required String path,
     @Default('ValueListenerNode') String id,
     @notSerializable
@@ -163,13 +146,13 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
     listener,
   }) = ValueListenerNode;
 
-  const factory WoFormNode.widget({
+  factory WoFormNode.widget({
     @Default('WidgetNode') String id,
     @notSerializable Widget Function(BuildContext context)? builder,
     @Default(InputUiSettings()) InputUiSettings uiSettings,
   }) = WidgetNode;
 
-  const WoFormNode._();
+  WoFormNode._();
 
   factory WoFormNode.fromJson(Json json) => _$WoFormNodeFromJson(json);
 
@@ -196,7 +179,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
       case InputsNode(exportSettings: final exportSettings):
         final children = this is InputsNode
             ? (this as InputsNode).children
-            : (values['$parentPath/$id'] as List<WoFormNodeMixin>?) ?? [];
+            : (values['$parentPath/$id'] as List<WoFormElement>?) ?? [];
 
         switch (exportSettings.type) {
           case ExportType.mergeWithParent:
@@ -304,7 +287,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
       case InputsNode():
         final children = this is InputsNode
             ? (this as InputsNode).children
-            : (values['$parentPath/$id'] as List<WoFormNodeMixin>?) ?? [];
+            : (values['$parentPath/$id'] as List<WoFormElement>?) ?? [];
 
         return [
           '$parentPath/$id',
@@ -364,7 +347,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
   ///
   /// The path of the input with id 'name' is '/profile/name'.
   @override
-  WoFormNodeMixin? getChild({
+  WoFormElement? getChild({
     required String path,
     required String parentPath,
     required WoFormValues values,
@@ -393,7 +376,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
       case InputsNode():
         final children = this is InputsNode
             ? (this as InputsNode).children
-            : (values['$parentPath/$id'] as List<WoFormNodeMixin>?) ?? [];
+            : (values['$parentPath/$id'] as List<WoFormElement>?) ?? [];
 
         // if the path ends at the children of this node
         if (secondSlashIndex == -1) {
@@ -469,7 +452,7 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
       case InputsNode():
         final children = this is InputsNode
             ? (this as InputsNode).children
-            : (values['$parentPath/$id'] as List<WoFormNodeMixin>?) ?? [];
+            : (values['$parentPath/$id'] as List<WoFormElement>?) ?? [];
 
         return [
           for (final child in children)
@@ -711,6 +694,13 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
           : node.uiSettings.flex == WoFormNode.flexDeferToChild
           ? node.child.flex(context)
           : node.uiSettings.flex,
+    final PathBuilderNode node =>
+      node
+          .builder!(
+            'path', // TODO
+            // context.read<RootNode>().getPath(nodeUid: uid),
+          )
+          .flex(context),
     final SelectorNode node =>
       node
           .builder!(
@@ -720,7 +710,10 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
           )
           .flex(context),
     final ValueBuilderNode node =>
-      node.builder!(context.select((WoFormValuesCubit c) => c.state[node.path]))
+      node
+          .builder!(
+            context.select((WoFormValuesCubit c) => c.state[node.path]),
+          )
           .flex(context),
     final ValuesBuilderNode node =>
       node
@@ -746,11 +739,11 @@ sealed class WoFormNode with _$WoFormNode, WoFormNodeMixin {
 }
 
 @freezed
-abstract class FutureNode<T> with _$FutureNode<T>, WoFormNodeMixin {
+abstract class FutureNode<T> extends WoFormElement with _$FutureNode<T> {
   const factory FutureNode({
     required String id,
     required Future<T>? future,
-    required WoFormNodeMixin Function(
+    required WoFormElement Function(
       String parentPath,
       AsyncSnapshot<T?> snapshot,
     )
@@ -763,7 +756,7 @@ abstract class FutureNode<T> with _$FutureNode<T>, WoFormNodeMixin {
     @Default(InputUiSettings()) InputUiSettings uiSettings,
   }) = _FutureNode<T>;
 
-  const FutureNode._();
+  FutureNode._();
 
   @override
   Json toJson() => {};
@@ -853,7 +846,7 @@ abstract class FutureNode<T> with _$FutureNode<T>, WoFormNodeMixin {
   ///
   /// The path of the input with id 'name' is '/profile/name'.
   @override
-  WoFormNodeMixin? getChild({
+  WoFormElement? getChild({
     required String path,
     required String parentPath,
     required WoFormValues values,
@@ -910,11 +903,11 @@ abstract class FutureNode<T> with _$FutureNode<T>, WoFormNodeMixin {
 }
 
 @freezed
-abstract class RootNode with _$RootNode, WoFormNodeMixin {
+abstract class RootNode extends WoFormElement with _$RootNode {
   const factory RootNode({
     @Default('#') String id,
     @Default({}) Json initialValues,
-    @InputsListConverter() @Default([]) List<WoFormNodeMixin> children,
+    @InputsListConverter() @Default([]) List<WoFormElement> children,
     @Default(WoFormUiSettings()) WoFormUiSettings uiSettings,
     @Default(ExportSettings()) ExportSettings exportSettings,
 
@@ -925,7 +918,7 @@ abstract class RootNode with _$RootNode, WoFormNodeMixin {
     @Default('') String hydratationId,
   }) = _RootNode;
 
-  const RootNode._();
+  RootNode._();
 
   factory RootNode.fromJson(Json json) => _$RootNodeFromJson(json);
 
@@ -1011,7 +1004,7 @@ abstract class RootNode with _$RootNode, WoFormNodeMixin {
   }) => null;
 
   @override
-  WoFormNodeMixin? getChild({
+  WoFormElement? getChild({
     required String path,
     required WoFormValues values,
     String parentPath = '',
@@ -1056,4 +1049,24 @@ abstract class RootNode with _$RootNode, WoFormNodeMixin {
 
   @override
   RootNode withId({required String id}) => copyWith(id: id);
+}
+
+@freezed
+abstract class DynamicInputTemplate with _$DynamicInputTemplate {
+  @Assert(
+    '(child == null) != (childBuilder == null)',
+    'One of child or childBuilder must be specified',
+  )
+  factory DynamicInputTemplate({
+    @InputNullableConverter() WoFormElement? child,
+    @notSerializable WoFormElement Function()? childBuilder,
+    @Default(DynamicInputUiSettings()) DynamicInputUiSettings uiSettings,
+  }) = _DynamicInputTemplate;
+
+  const DynamicInputTemplate._();
+
+  factory DynamicInputTemplate.fromJson(Json json) =>
+      _$DynamicInputTemplateFromJson(json);
+
+  WoFormElement getChild() => child == null ? childBuilder!() : child!;
 }
