@@ -14,10 +14,7 @@ class DurationFieldBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final root = context.read<RootNode>();
-    final valuesCubit = context.read<WoFormValuesCubit>();
-
-    final input = root.getChild(path: path, values: valuesCubit.state);
+    final input = context.read<WoFormValuesCubit>().getNode(path: path);
     if (input is! DurationInput) {
       throw ArgumentError(
         'Expected <DurationInput> at path: "$path", '
@@ -26,7 +23,10 @@ class DurationFieldBuilder extends StatelessWidget {
     }
 
     final inputSettings = input.uiSettings;
-    var mergedSettings = uiSettings?.merge(inputSettings) ?? inputSettings;
+    var mergedSettings =
+        uiSettings?.merge(inputSettings) ??
+        inputSettings ??
+        const DurationInputUiSettings();
     final woFormTheme = WoFormTheme.of(context);
 
     final showAsterisk =
@@ -77,11 +77,13 @@ class DurationFieldBuilder extends StatelessWidget {
                             : (
                                 Duration? value, {
                                 UpdateStatus updateStatus = UpdateStatus.yes,
-                              }) => valuesCubit.onValueChanged(
-                                path: path,
-                                value: value,
-                                updateStatus: updateStatus,
-                              ),
+                              }) => context
+                                  .read<WoFormValuesCubit>()
+                                  .onValueChanged(
+                                    path: path,
+                                    value: value,
+                                    updateStatus: updateStatus,
+                                  ),
                       );
 
                   return (mergedSettings.widgetBuilder ??

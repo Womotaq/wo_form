@@ -144,14 +144,16 @@ as String,
 @JsonSerializable()
 
 class ConditionnalNode<T extends Object?> extends WoFormNode<T> {
-   ConditionnalNode({required this.id, required this.condition, @InputConverter() required this.child, this.conditionIsInitiallyMet = false, this.clearChildrenWhenHidden = true, this.uiSettings = const InputUiSettings(), final  String? $type}): $type = $type ?? 'conditionnal',super._();
+  const ConditionnalNode({required this.id, required this.condition, @InputConverter() required this.child, this.conditionIsInitiallyMet = false, this.resetChildrenWhenHidden = true, this.uiSettings = const InputUiSettings(), final  String? $type}): $type = $type ?? 'conditionnal',super._();
   factory ConditionnalNode.fromJson(Map<String, dynamic> json) => _$ConditionnalNodeFromJson(json);
 
 @override final  String id;
  final  Condition condition;
 @InputConverter() final  WoFormNode child;
 @JsonKey() final  bool conditionIsInitiallyMet;
-@JsonKey() final  bool clearChildrenWhenHidden;
+/// If true, when the condition goes from met to not met, the values of the
+/// child and its descendant nodes are reset to their initial state.
+@JsonKey() final  bool resetChildrenWhenHidden;
 @JsonKey() final  InputUiSettings uiSettings;
 
 @JsonKey(name: 'runtimeType')
@@ -171,16 +173,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ConditionnalNode<T>&&(identical(other.id, id) || other.id == id)&&(identical(other.condition, condition) || other.condition == condition)&&(identical(other.child, child) || other.child == child)&&(identical(other.conditionIsInitiallyMet, conditionIsInitiallyMet) || other.conditionIsInitiallyMet == conditionIsInitiallyMet)&&(identical(other.clearChildrenWhenHidden, clearChildrenWhenHidden) || other.clearChildrenWhenHidden == clearChildrenWhenHidden)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ConditionnalNode<T>&&(identical(other.id, id) || other.id == id)&&(identical(other.condition, condition) || other.condition == condition)&&(identical(other.child, child) || other.child == child)&&(identical(other.conditionIsInitiallyMet, conditionIsInitiallyMet) || other.conditionIsInitiallyMet == conditionIsInitiallyMet)&&(identical(other.resetChildrenWhenHidden, resetChildrenWhenHidden) || other.resetChildrenWhenHidden == resetChildrenWhenHidden)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,condition,child,conditionIsInitiallyMet,clearChildrenWhenHidden,uiSettings);
+int get hashCode => Object.hash(runtimeType,id,condition,child,conditionIsInitiallyMet,resetChildrenWhenHidden,uiSettings);
 
 @override
 String toString() {
-  return 'WoFormNode<$T>.conditionnal(id: $id, condition: $condition, child: $child, conditionIsInitiallyMet: $conditionIsInitiallyMet, clearChildrenWhenHidden: $clearChildrenWhenHidden, uiSettings: $uiSettings)';
+  return 'WoFormNode<$T>.conditionnal(id: $id, condition: $condition, child: $child, conditionIsInitiallyMet: $conditionIsInitiallyMet, resetChildrenWhenHidden: $resetChildrenWhenHidden, uiSettings: $uiSettings)';
 }
 
 
@@ -191,7 +193,7 @@ abstract mixin class $ConditionnalNodeCopyWith<T extends Object?,$Res> implement
   factory $ConditionnalNodeCopyWith(ConditionnalNode<T> value, $Res Function(ConditionnalNode<T>) _then) = _$ConditionnalNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id, Condition condition,@InputConverter() WoFormNode child, bool conditionIsInitiallyMet, bool clearChildrenWhenHidden, InputUiSettings uiSettings
+ String id, Condition condition,@InputConverter() WoFormNode child, bool conditionIsInitiallyMet, bool resetChildrenWhenHidden, InputUiSettings uiSettings
 });
 
 
@@ -208,13 +210,13 @@ class _$ConditionnalNodeCopyWithImpl<T extends Object?,$Res>
 
 /// Create a copy of WoFormNode
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? condition = null,Object? child = null,Object? conditionIsInitiallyMet = null,Object? clearChildrenWhenHidden = null,Object? uiSettings = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? condition = null,Object? child = null,Object? conditionIsInitiallyMet = null,Object? resetChildrenWhenHidden = null,Object? uiSettings = null,}) {
   return _then(ConditionnalNode<T>(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,condition: null == condition ? _self.condition : condition // ignore: cast_nullable_to_non_nullable
 as Condition,child: null == child ? _self.child : child // ignore: cast_nullable_to_non_nullable
 as WoFormNode,conditionIsInitiallyMet: null == conditionIsInitiallyMet ? _self.conditionIsInitiallyMet : conditionIsInitiallyMet // ignore: cast_nullable_to_non_nullable
-as bool,clearChildrenWhenHidden: null == clearChildrenWhenHidden ? _self.clearChildrenWhenHidden : clearChildrenWhenHidden // ignore: cast_nullable_to_non_nullable
+as bool,resetChildrenWhenHidden: null == resetChildrenWhenHidden ? _self.resetChildrenWhenHidden : resetChildrenWhenHidden // ignore: cast_nullable_to_non_nullable
 as bool,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
 as InputUiSettings,
   ));
@@ -254,7 +256,7 @@ $InputUiSettingsCopyWith<$Res> get uiSettings {
 @JsonSerializable()
 
 class DynamicInputsNode<T extends Object?> extends WoFormNode<T> {
-   DynamicInputsNode({required this.id, final  List<DynamicInputTemplate> templates = const [], @InputsListConverter() final  List<WoFormNode>? initialChildren, this.uiSettings = const DynamicInputsNodeUiSettings(), this.exportSettings = const ExportSettings(), final  String? $type}): _templates = templates,_initialChildren = initialChildren,$type = $type ?? 'dynamicInputs',super._();
+  const DynamicInputsNode({required this.id, final  List<DynamicInputTemplate> templates = const [], @InputsListConverter() final  List<WoFormNode>? initialChildren, this.uiSettings = const DynamicInputsNodeUiSettings(), this.exportSettings = const ExportSettings(), final  String? $type}): _templates = templates,_initialChildren = initialChildren,$type = $type ?? 'dynamicInputs',super._();
   factory DynamicInputsNode.fromJson(Map<String, dynamic> json) => _$DynamicInputsNodeFromJson(json);
 
 @override final  String id;
@@ -369,7 +371,7 @@ $ExportSettingsCopyWith<$Res> get exportSettings {
 @JsonSerializable()
 
 class EmptyNode<T extends Object?> extends WoFormNode<T> {
-   EmptyNode({this.id = 'EmptyNode', final  String? $type}): $type = $type ?? 'empty',super._();
+  const EmptyNode({this.id = 'EmptyNode', final  String? $type}): $type = $type ?? 'empty',super._();
   factory EmptyNode.fromJson(Map<String, dynamic> json) => _$EmptyNodeFromJson(json);
 
 @override@JsonKey() final  String id;
@@ -442,7 +444,7 @@ as String,
 @JsonSerializable()
 
 class FutureNode<T extends Object?> extends WoFormNode<T> {
-   FutureNode({required this.id, @notSerializable this.future, @notSerializable this.builder, @notSerializable this.initialData, this.willResetToInitialValues = true, this.uiSettings = const InputUiSettings(), final  String? $type}): assert(future != null, 'FutureNode.future cannot be null'),assert(builder != null, 'FutureNode.builder cannot be null'),$type = $type ?? 'future',super._();
+  const FutureNode({required this.id, @notSerializable this.future, @notSerializable this.builder, @notSerializable this.initialData, this.willResetToInitialValues = true, this.uiSettings = const InputUiSettings(), final  String? $type}): assert(future != null, 'FutureNode.future cannot be null'),assert(builder != null, 'FutureNode.builder cannot be null'),$type = $type ?? 'future',super._();
   factory FutureNode.fromJson(Map<String, dynamic> json) => _$FutureNodeFromJson(json);
 
 @override final  String id;
@@ -536,7 +538,7 @@ $InputUiSettingsCopyWith<$Res> get uiSettings {
 @JsonSerializable()
 
 class InputsNode<T extends Object?> extends WoFormNode<T> {
-   InputsNode({required this.id, @InputsListConverter() final  List<WoFormNode> children = const [], this.uiSettings = const InputsNodeUiSettings(), this.exportSettings = const ExportSettings(), final  String? $type}): _children = children,$type = $type ?? 'inputs',super._();
+  const InputsNode({required this.id, @InputsListConverter() final  List<WoFormNode> children = const [], this.uiSettings = const InputsNodeUiSettings(), this.exportSettings = const ExportSettings(), final  String? $type}): _children = children,$type = $type ?? 'inputs',super._();
   factory InputsNode.fromJson(Map<String, dynamic> json) => _$InputsNodeFromJson(json);
 
 @override final  String id;
@@ -639,7 +641,7 @@ $ExportSettingsCopyWith<$Res> get exportSettings {
 @JsonSerializable()
 
 class PathBuilderNode<T extends Object?> extends WoFormNode<T> {
-   PathBuilderNode({required this.id, @notSerializable this.builder, final  String? $type}): assert(builder != null, 'PathBuilderNode.builder cannot be null'),$type = $type ?? 'pathBuilder',super._();
+  const PathBuilderNode({required this.id, @notSerializable this.builder, final  String? $type}): assert(builder != null, 'PathBuilderNode.builder cannot be null'),$type = $type ?? 'pathBuilder',super._();
   factory PathBuilderNode.fromJson(Map<String, dynamic> json) => _$PathBuilderNodeFromJson(json);
 
 @override final  String id;
@@ -715,7 +717,7 @@ as WoFormNode Function(String path)?,
 @JsonSerializable()
 
 class RootNode<T extends Object?> extends WoFormNode<T> {
-   RootNode({this.id = 'root', final  Json initialValues = const {}, @InputsListConverter() final  List<WoFormNode> children = const [], this.uiSettings = const WoFormUiSettings(), this.exportSettings = const ExportSettings(), this.hydratationId = '', final  String? $type}): _initialValues = initialValues,_children = children,$type = $type ?? 'root',super._();
+  const RootNode({this.id = 'root', final  Json initialValues = const {}, @InputsListConverter() final  List<WoFormNode> children = const [], this.uiSettings = const WoFormUiSettings(), this.exportSettings = const ExportSettings(), this.hydratationId = '', final  String? $type}): _initialValues = initialValues,_children = children,$type = $type ?? 'root',super._();
   factory RootNode.fromJson(Map<String, dynamic> json) => _$RootNodeFromJson(json);
 
 // The root's id should never be used
@@ -833,7 +835,7 @@ $ExportSettingsCopyWith<$Res> get exportSettings {
 @JsonSerializable()
 
 class SelectorNode<T extends Object?> extends WoFormNode<T> {
-   SelectorNode({required this.id, @notSerializable this.selector, @notSerializable this.builder, this.initialValue, this.uiSettings = const InputUiSettings(), final  String? $type}): assert(selector != null, 'SelectorNode.selector cannot be null'),assert(builder != null, 'SelectorNode.builder cannot be null'),$type = $type ?? 'selector',super._();
+  const SelectorNode({required this.id, @notSerializable this.selector, @notSerializable this.builder, this.initialValue, this.uiSettings = const InputUiSettings(), final  String? $type}): assert(selector != null, 'SelectorNode.selector cannot be null'),assert(builder != null, 'SelectorNode.builder cannot be null'),$type = $type ?? 'selector',super._();
   factory SelectorNode.fromJson(Map<String, dynamic> json) => _$SelectorNodeFromJson(json);
 
 @override final  String id;
@@ -922,7 +924,7 @@ $InputUiSettingsCopyWith<$Res> get uiSettings {
 @JsonSerializable()
 
 class ValueBuilderNode<T extends Object?> extends WoFormNode<T> {
-   ValueBuilderNode({required this.id, required this.path, @notSerializable this.builder, this.initialValue, final  String? $type}): assert(builder != null, 'ValueBuilderNode.builder cannot be null'),$type = $type ?? 'valueBuilder',super._();
+  const ValueBuilderNode({required this.id, required this.path, @notSerializable this.builder, this.initialValue, final  String? $type}): assert(builder != null, 'ValueBuilderNode.builder cannot be null'),$type = $type ?? 'valueBuilder',super._();
   factory ValueBuilderNode.fromJson(Map<String, dynamic> json) => _$ValueBuilderNodeFromJson(json);
 
 @override final  String id;
@@ -1000,7 +1002,7 @@ as WoFormNode Function(Object? value)?,initialValue: freezed == initialValue ? _
 @JsonSerializable()
 
 class ValuesBuilderNode<T extends Object?> extends WoFormNode<T> {
-   ValuesBuilderNode({required this.id, required final  List<String> paths, @notSerializable this.builder, final  Map<String, Object?>? initialValues, final  String? $type}): assert(builder != null, 'ValuesBuilderNode.builder cannot be null'),_paths = paths,_initialValues = initialValues,$type = $type ?? 'valuesBuilder',super._();
+  const ValuesBuilderNode({required this.id, required final  List<String> paths, @notSerializable this.builder, final  Map<String, Object?>? initialValues, final  String? $type}): assert(builder != null, 'ValuesBuilderNode.builder cannot be null'),_paths = paths,_initialValues = initialValues,$type = $type ?? 'valuesBuilder',super._();
   factory ValuesBuilderNode.fromJson(Map<String, dynamic> json) => _$ValuesBuilderNodeFromJson(json);
 
 @override final  String id;
@@ -1093,7 +1095,7 @@ as Map<String, Object?>?,
 @JsonSerializable()
 
 class ValueListenerNode<T extends Object?> extends WoFormNode<T> {
-   ValueListenerNode({required this.path, this.id = 'ValueListenerNode', @notSerializable this.listenWhen, @notSerializable this.listener, final  String? $type}): assert(listener != null, 'ValueListenerNode.listener cannot be null'),$type = $type ?? 'valueListener',super._();
+  const ValueListenerNode({required this.path, this.id = 'ValueListenerNode', @notSerializable this.listenWhen, @notSerializable this.listener, final  String? $type}): assert(listener != null, 'ValueListenerNode.listener cannot be null'),$type = $type ?? 'valueListener',super._();
   factory ValueListenerNode.fromJson(Map<String, dynamic> json) => _$ValueListenerNodeFromJson(json);
 
  final  String path;
@@ -1172,7 +1174,7 @@ as void Function(BuildContext context, String parentPath, Object? value)?,
 @JsonSerializable()
 
 class WidgetNode<T extends Object?> extends WoFormNode<T> {
-   WidgetNode({this.id = 'WidgetNode', @notSerializable this.builder, this.uiSettings = const InputUiSettings(), final  String? $type}): $type = $type ?? 'widget',super._();
+  const WidgetNode({this.id = 'WidgetNode', @notSerializable this.builder, this.uiSettings = const InputUiSettings(), final  String? $type}): $type = $type ?? 'widget',super._();
   factory WidgetNode.fromJson(Map<String, dynamic> json) => _$WidgetNodeFromJson(json);
 
 @override@JsonKey() final  String id;
@@ -1544,7 +1546,7 @@ as String,
 @JsonSerializable()
 
 class BooleanInput<T extends Object?> extends WoFormInput<T> {
-   BooleanInput({required this.id, this.initialValue, this.isRequired = false, @notSerializable this.getCustomError, @notSerializable this.onValueChanged, this.uiSettings, final  String? $type}): $type = $type ?? 'boolean',super._();
+  const BooleanInput({required this.id, this.initialValue, this.isRequired = false, @notSerializable this.getCustomError, @notSerializable this.onValueChanged, this.uiSettings, final  String? $type}): $type = $type ?? 'boolean',super._();
   factory BooleanInput.fromJson(Map<String, dynamic> json) => _$BooleanInputFromJson(json);
 
 @override final  String id;
@@ -1640,7 +1642,7 @@ $BooleanInputUiSettingsCopyWith<$Res>? get uiSettings {
 @JsonSerializable()
 
 class DateTimeInput<T extends Object?> extends WoFormInput<T> {
-   DateTimeInput({required this.id, this.initialValue, this.isRequired = false, this.maxDate, this.minDate, @notSerializable this.getCustomError, this.uiSettings, final  String? $type}): $type = $type ?? 'dateTime',super._();
+  const DateTimeInput({required this.id, this.initialValue, this.isRequired = false, this.maxDate, this.minDate, @notSerializable this.getCustomError, this.uiSettings, final  String? $type}): $type = $type ?? 'dateTime',super._();
   factory DateTimeInput.fromJson(Map<String, dynamic> json) => _$DateTimeInputFromJson(json);
 
 @override final  String id;
@@ -1773,7 +1775,7 @@ $DateTimeInputUiSettingsCopyWith<$Res>? get uiSettings {
 @JsonSerializable()
 
 class DurationInput<T extends Object?> extends WoFormInput<T> {
-   DurationInput({required this.id, @DurationNullableConverter() this.initialValue, this.isRequired = false, this.startDatePath, @DurationNullableConverter() this.maxDuration, @DurationNullableConverter() this.minDuration, @notSerializable this.getCustomError, this.uiSettings, final  String? $type}): $type = $type ?? 'duration',super._();
+  const DurationInput({required this.id, @DurationNullableConverter() this.initialValue, this.isRequired = false, this.startDatePath, @DurationNullableConverter() this.maxDuration, @DurationNullableConverter() this.minDuration, @notSerializable this.getCustomError, this.uiSettings, final  String? $type}): $type = $type ?? 'duration',super._();
   factory DurationInput.fromJson(Map<String, dynamic> json) => _$DurationInputFromJson(json);
 
 @override final  String id;
@@ -1875,7 +1877,7 @@ $DurationInputUiSettingsCopyWith<$Res>? get uiSettings {
 @JsonSerializable()
 
 class MediaInput<T extends Object?> extends WoFormInput<T> {
-   MediaInput({required this.id, required this.importSettings, required this.maxCount, this.minCount = 0, final  List<Media>? initialValues, @notSerializable this.getCustomError, @notSerializable this.onValueChanged, this.submitFormOnSelect = false, this.uploadPath, this.uiSettings, final  String? $type}): assert(maxCount == null || minCount <= maxCount, 'maxCount must be higher or equal to minCount'),_initialValues = initialValues,$type = $type ?? 'media',super._();
+  const MediaInput({required this.id, required this.importSettings, required this.maxCount, this.minCount = 0, final  List<Media>? initialValues, @notSerializable this.getCustomError, @notSerializable this.onValueChanged, this.submitFormOnSelect = false, this.uploadPath, this.uiSettings, final  String? $type}): assert(maxCount == null || minCount <= maxCount, 'maxCount must be higher or equal to minCount'),_initialValues = initialValues,$type = $type ?? 'media',super._();
   factory MediaInput.fromJson(Map<String, dynamic> json) => _$MediaInputFromJson(json);
 
 @override final  String id;
@@ -1998,7 +2000,7 @@ $MediaInputUiSettingsCopyWith<$Res>? get uiSettings {
 @JsonSerializable()
 
 class NumInput<T extends Object?> extends WoFormInput<T> {
-   NumInput({required this.id, this.initialValue, this.isRequired = false, this.maxBound, this.minBound = 0, @notSerializable this.getCustomError, @notSerializable this.onValueChanged, this.uiSettings, final  String? $type}): assert(maxBound == null || minBound <= maxBound, 'maxBound must be higher or equal to minBound'),$type = $type ?? 'num',super._();
+  const NumInput({required this.id, this.initialValue, this.isRequired = false, this.maxBound, this.minBound = 0, @notSerializable this.getCustomError, @notSerializable this.onValueChanged, this.uiSettings, final  String? $type}): assert(maxBound == null || minBound <= maxBound, 'maxBound must be higher or equal to minBound'),$type = $type ?? 'num',super._();
   factory NumInput.fromJson(Map<String, dynamic> json) => _$NumInputFromJson(json);
 
 @override final  String id;
@@ -2098,7 +2100,7 @@ $NumInputUiSettingsCopyWith<$Res>? get uiSettings {
 @JsonSerializable()
 
 class StringInput<T extends Object?> extends WoFormInput<T> {
-   StringInput({required this.id, this.initialValue, this.isRequired = false, this.regexPattern, this.placeAutocompleteSettings, @notSerializable this.getCustomError, this.uiSettings = const StringInputUiSettings(), final  String? $type}): $type = $type ?? 'string',super._();
+  const StringInput({required this.id, this.initialValue, this.isRequired = false, this.regexPattern, this.placeAutocompleteSettings, @notSerializable this.getCustomError, this.uiSettings = const StringInputUiSettings(), final  String? $type}): $type = $type ?? 'string',super._();
   factory StringInput.fromJson(Map<String, dynamic> json) => _$StringInputFromJson(json);
 
 @override final  String id;

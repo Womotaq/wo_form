@@ -14,10 +14,9 @@ class MediaFieldBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final root = context.read<RootNode>();
     final valuesCubit = context.read<WoFormValuesCubit>();
 
-    final input = root.getChild(path: path, values: valuesCubit.state);
+    final input = context.read<WoFormValuesCubit>().getNode(path: path);
     if (input is! MediaInput) {
       throw ArgumentError(
         'Expected <MediaInput> at path: "$path", '
@@ -26,7 +25,9 @@ class MediaFieldBuilder extends StatelessWidget {
     }
 
     final mergedSettings =
-        uiSettings?.merge(input.uiSettings) ?? input.uiSettings;
+        uiSettings?.merge(input.uiSettings) ??
+        input.uiSettings ??
+        const MediaInputUiSettings();
 
     return WoFormNodeFocusManager(
       path: path,
@@ -47,40 +48,46 @@ class MediaFieldBuilder extends StatelessWidget {
                     if (error == null) {
                       errorText = null;
                     } else {
-                      errorText =
-                          context.read<WoFormL10n?>()?.translateError(error);
+                      errorText = context.read<WoFormL10n?>()?.translateError(
+                        error,
+                      );
                     }
                   } else {
                     errorText = null;
                   }
 
-                  final fieldData = WoFieldData<MediaInput, List<Media>,
-                      MediaInputUiSettings>(
-                    path: path,
-                    input: input,
-                    value: selectedValues,
-                    errorText: errorText,
-                    uiSettings: mergedSettings,
-                    onValueChanged: inputIsLocked
-                        ? null
-                        : (
-                            List<Media>? values, {
-                            UpdateStatus updateStatus = UpdateStatus.yes,
-                          }) {
-                            valuesCubit.onValueChanged(
-                              path: path,
-                              value: values,
-                            );
+                  final fieldData =
+                      WoFieldData<
+                        MediaInput,
+                        List<Media>,
+                        MediaInputUiSettings
+                      >(
+                        path: path,
+                        input: input,
+                        value: selectedValues,
+                        errorText: errorText,
+                        uiSettings: mergedSettings,
+                        onValueChanged: inputIsLocked
+                            ? null
+                            : (
+                                List<Media>? values, {
+                                UpdateStatus updateStatus = UpdateStatus.yes,
+                              }) async {
+                                valuesCubit.onValueChanged(
+                                  path: path,
+                                  value: values,
+                                );
 
-                            input.onValueChanged?.call(values);
+                                input.onValueChanged?.call(values);
 
-                            if (input.submitFormOnSelect) {
-                              valuesCubit.submit(context);
-                            }
-                          },
-                  );
+                                if (input.submitFormOnSelect) {
+                                  await valuesCubit.submit(context);
+                                }
+                              },
+                      );
 
-                  final mediaFieldBuilder = mergedSettings.widgetBuilder ??
+                  final mediaFieldBuilder =
+                      mergedSettings.widgetBuilder ??
                       WoFormTheme.of(context)?.mediaFieldBuilder ??
                       MediaField.new;
 

@@ -55,7 +55,7 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
   Future<void> openChildren(BuildContext context) {
     final root = context.read<RootNode>();
 
-    return (widget.data.uiSettings.openChildren ?? Push.page)(
+    return (widget.data.uiSettings.openChildren ?? Push.screen)(
       context: context,
       child: RepositoryProvider.value(
         value: root.copyWith(
@@ -109,13 +109,6 @@ class _InputsNodePage extends StatelessWidget {
                 InputsNodeWidget.new)
             .call(fieldData);
 
-    final wrapped = data.uiSettings.flex == null
-        ? SingleChildScrollView(
-            controller: ScrollControllerProvider.of(context),
-            child: inputsNodeWidget,
-          )
-        : inputsNodeWidget;
-
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
         if (didPop) {
@@ -124,17 +117,13 @@ class _InputsNodePage extends StatelessWidget {
           );
         }
       },
-      child: true
-          ? wrapped
-          : Scaffold(
-              appBar: AppBar(
-                actions: const [
-                  SubmitButtonBuilder(),
-                  SizedBox(width: 8),
-                ],
-              ),
-              body: inputsNodeWidget,
-            ),
+      child:
+          LayoutMethod.fromFlex(data.uiSettings.flex) == LayoutMethod.scrollable
+          ? SingleChildScrollView(
+              controller: ScrollControllerProvider.of(context),
+              child: inputsNodeWidget,
+            )
+          : inputsNodeWidget,
     );
   }
 }

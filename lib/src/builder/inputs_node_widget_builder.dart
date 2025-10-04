@@ -14,10 +14,7 @@ class InputsNodeWidgetBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final form = context.read<RootNode>();
-    final values = context.read<WoFormValuesCubit>().state;
-
-    final node = form.getChild(path: path, values: values);
+    final node = context.read<WoFormValuesCubit>().getNode(path: path);
     if (node is! InputsNode) {
       throw ArgumentError(
         'Expected <InputsNode> at path: "$path", '

@@ -14,10 +14,8 @@ class BooleanFieldBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final root = context.read<RootNode>();
     final valuesCubit = context.read<WoFormValuesCubit>();
-
-    final input = root.getChild(path: path, values: valuesCubit.state);
+    final input = valuesCubit.getNode(path: path);
     if (input is! BooleanInput) {
       throw ArgumentError(
         'Expected <BooleanInput> at path: "$path", '
@@ -26,7 +24,10 @@ class BooleanFieldBuilder extends StatelessWidget {
     }
 
     final inputSettings = input.uiSettings;
-    var mergedSettings = uiSettings?.merge(inputSettings) ?? inputSettings;
+    var mergedSettings =
+        uiSettings?.merge(inputSettings) ??
+        inputSettings ??
+        const BooleanInputUiSettings();
     final woFormTheme = WoFormTheme.of(context);
 
     final showAsterisk =

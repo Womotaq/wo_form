@@ -89,7 +89,7 @@ class _HydratedWoFormValuesCubit extends WoFormValuesCubit
       }
 
       final path = entry.key;
-      final node = _root.getChild(path: path, values: state);
+      final node = getNode(path: path);
       if (node is! SelectInput) continue;
       final fromJsonT = node.fromJsonT;
       if (fromJsonT == null) continue;
@@ -112,7 +112,7 @@ class _HydratedWoFormValuesCubit extends WoFormValuesCubit
       }
 
       final path = entry.key;
-      final node = _root.getChild(path: path, values: state);
+      final node = getNode(path: path);
       if (node is! SelectInput) continue;
       final toJsonT = node.toJsonT;
       if (toJsonT == null) continue;

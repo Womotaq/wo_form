@@ -126,7 +126,7 @@ class WoForm extends StatelessWidget {
               }
             },
             child: pageBuilder == null
-                ? root.toWidget(key: rootKey)
+                ? root.toWidget(parentPath: '', key: rootKey)
                 : Builder(key: rootKey, builder: pageBuilder!),
           ),
         ),

@@ -14,10 +14,7 @@ class DateTimeFieldBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final root = context.read<RootNode>();
-    final valuesCubit = context.read<WoFormValuesCubit>();
-
-    final input = root.getChild(path: path, values: valuesCubit.state);
+    final input = context.read<WoFormValuesCubit>().getNode(path: path);
     if (input is! DateTimeInput) {
       throw ArgumentError(
         'Expected <DateTimeInput> at path: "$path", '
@@ -26,7 +23,10 @@ class DateTimeFieldBuilder extends StatelessWidget {
     }
 
     final inputSettings = input.uiSettings;
-    var mergedSettings = uiSettings?.merge(inputSettings) ?? inputSettings;
+    var mergedSettings =
+        uiSettings?.merge(inputSettings) ??
+        inputSettings ??
+        const DateTimeInputUiSettings();
     final woFormTheme = WoFormTheme.of(context);
 
     final showAsterisk =
@@ -77,11 +77,13 @@ class DateTimeFieldBuilder extends StatelessWidget {
                             : (
                                 DateTime? value, {
                                 UpdateStatus updateStatus = UpdateStatus.yes,
-                              }) => valuesCubit.onValueChanged(
-                                path: path,
-                                value: value,
-                                updateStatus: updateStatus,
-                              ),
+                              }) => context
+                                  .read<WoFormValuesCubit>()
+                                  .onValueChanged(
+                                    path: path,
+                                    value: value,
+                                    updateStatus: updateStatus,
+                                  ),
                       );
 
                   return (mergedSettings.widgetBuilder ??

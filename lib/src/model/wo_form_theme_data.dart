@@ -71,7 +71,7 @@ abstract class WoFormThemeData with _$WoFormThemeData {
     /// The form's entire width won't exceed this value. Defaults to 512.
     double? maxWidth,
 
-    /// This spacing will be placed between each [WoFormNodeMixin].
+    /// This spacing will be placed between each [WoFormNode].
     double? spacing,
 
     /// Add the characters ' *' after the labelText of [WoFormInput]s.

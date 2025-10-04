@@ -13,7 +13,7 @@ ConditionnalNode<T> _$ConditionnalNodeFromJson<T extends Object?>(
   condition: Condition.fromJson(json['condition'] as Map<String, dynamic>),
   child: const InputConverter().fromJson(json['child'] as Map<String, dynamic>),
   conditionIsInitiallyMet: json['conditionIsInitiallyMet'] as bool? ?? false,
-  clearChildrenWhenHidden: json['clearChildrenWhenHidden'] as bool? ?? true,
+  resetChildrenWhenHidden: json['resetChildrenWhenHidden'] as bool? ?? true,
   uiSettings: json['uiSettings'] == null
       ? const InputUiSettings()
       : InputUiSettings.fromJson(json['uiSettings'] as Map<String, dynamic>),
@@ -27,7 +27,7 @@ Map<String, dynamic> _$ConditionnalNodeToJson<T extends Object?>(
   'condition': instance.condition.toJson(),
   'child': const InputConverter().toJson(instance.child),
   'conditionIsInitiallyMet': instance.conditionIsInitiallyMet,
-  'clearChildrenWhenHidden': instance.clearChildrenWhenHidden,
+  'resetChildrenWhenHidden': instance.resetChildrenWhenHidden,
   'uiSettings': instance.uiSettings.toJson(),
   'runtimeType': instance.$type,
 };
@@ -87,15 +87,11 @@ EmptyNode<T> _$EmptyNodeFromJson<T extends Object?>(
 ) => EmptyNode<T>(
   id: json['id'] as String? ?? 'EmptyNode',
   $type: json['runtimeType'] as String?,
-)..uiSettings = json['uiSettings'];
+);
 
 Map<String, dynamic> _$EmptyNodeToJson<T extends Object?>(
   EmptyNode<T> instance,
-) => <String, dynamic>{
-  'uiSettings': instance.uiSettings,
-  'id': instance.id,
-  'runtimeType': instance.$type,
-};
+) => <String, dynamic>{'id': instance.id, 'runtimeType': instance.$type};
 
 FutureNode<T> _$FutureNodeFromJson<T extends Object?>(
   Map<String, dynamic> json,
@@ -150,15 +146,11 @@ PathBuilderNode<T> _$PathBuilderNodeFromJson<T extends Object?>(
 ) => PathBuilderNode<T>(
   id: json['id'] as String,
   $type: json['runtimeType'] as String?,
-)..uiSettings = json['uiSettings'];
+);
 
 Map<String, dynamic> _$PathBuilderNodeToJson<T extends Object?>(
   PathBuilderNode<T> instance,
-) => <String, dynamic>{
-  'uiSettings': instance.uiSettings,
-  'id': instance.id,
-  'runtimeType': instance.$type,
-};
+) => <String, dynamic>{'id': instance.id, 'runtimeType': instance.$type};
 
 RootNode<T> _$RootNodeFromJson<T extends Object?>(
   Map<String, dynamic> json,
@@ -217,12 +209,11 @@ ValueBuilderNode<T> _$ValueBuilderNodeFromJson<T extends Object?>(
   path: json['path'] as String,
   initialValue: json['initialValue'],
   $type: json['runtimeType'] as String?,
-)..uiSettings = json['uiSettings'];
+);
 
 Map<String, dynamic> _$ValueBuilderNodeToJson<T extends Object?>(
   ValueBuilderNode<T> instance,
 ) => <String, dynamic>{
-  'uiSettings': instance.uiSettings,
   'id': instance.id,
   'path': instance.path,
   'initialValue': instance.initialValue,
@@ -236,12 +227,11 @@ ValuesBuilderNode<T> _$ValuesBuilderNodeFromJson<T extends Object?>(
   paths: (json['paths'] as List<dynamic>).map((e) => e as String).toList(),
   initialValues: json['initialValues'] as Map<String, dynamic>?,
   $type: json['runtimeType'] as String?,
-)..uiSettings = json['uiSettings'];
+);
 
 Map<String, dynamic> _$ValuesBuilderNodeToJson<T extends Object?>(
   ValuesBuilderNode<T> instance,
 ) => <String, dynamic>{
-  'uiSettings': instance.uiSettings,
   'id': instance.id,
   'paths': instance.paths,
   'initialValues': instance.initialValues,
@@ -254,12 +244,11 @@ ValueListenerNode<T> _$ValueListenerNodeFromJson<T extends Object?>(
   path: json['path'] as String,
   id: json['id'] as String? ?? 'ValueListenerNode',
   $type: json['runtimeType'] as String?,
-)..uiSettings = json['uiSettings'];
+);
 
 Map<String, dynamic> _$ValueListenerNodeToJson<T extends Object?>(
   ValueListenerNode<T> instance,
 ) => <String, dynamic>{
-  'uiSettings': instance.uiSettings,
   'path': instance.path,
   'id': instance.id,
   'runtimeType': instance.$type,

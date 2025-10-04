@@ -14,10 +14,7 @@ class DynamicInputsNodeWidgetBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final form = context.read<RootNode>();
-    final valuesCubit = context.read<WoFormValuesCubit>();
-
-    final node = form.getChild(path: path, values: valuesCubit.state);
+    final node = context.read<WoFormValuesCubit>().getNode(path: path);
     if (node is! DynamicInputsNode) {
       throw ArgumentError(
         'Expected <DynamicInputsNode> at path: "$path", '
@@ -44,15 +41,11 @@ class DynamicInputsNodeWidgetBuilder extends StatelessWidget {
                   : (
                       List<WoFormNode>? newInputs, {
                       UpdateStatus updateStatus = UpdateStatus.yes,
-                    }) {
-                      valuesCubit.onValueChanged(
-                        path: path,
-                        value: List<WoFormNode>.unmodifiable(
-                          newInputs ?? [],
-                        ),
-                        updateStatus: updateStatus,
-                      );
-                    },
+                    }) => context.read<WoFormValuesCubit>().onValueChanged(
+                      path: path,
+                      value: List<WoFormNode>.unmodifiable(newInputs ?? []),
+                      updateStatus: updateStatus,
+                    ),
             );
 
             return (mergedSettings.widgetBuilder ??

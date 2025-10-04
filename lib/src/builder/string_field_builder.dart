@@ -14,10 +14,7 @@ class StringFieldBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final valuesCubit = context.read<WoFormValuesCubit>();
-
-    final root = context.read<RootNode>();
-    final input = root.getChild(path: path, values: valuesCubit.state);
+    final input = context.read<WoFormValuesCubit>().getNode(path: path);
     if (input is! StringInput) {
       throw ArgumentError(
         'Expected <StringInput> at path: "$path", '
@@ -76,11 +73,13 @@ class StringFieldBuilder extends StatelessWidget {
                                 String? value, {
                                 UpdateStatus updateStatus = UpdateStatus
                                     .yesWithoutErrorUpdateIfPathNotVisited,
-                              }) => valuesCubit.onValueChanged(
-                                path: path,
-                                value: value,
-                                updateStatus: updateStatus,
-                              ),
+                              }) => context
+                                  .read<WoFormValuesCubit>()
+                                  .onValueChanged(
+                                    path: path,
+                                    value: value,
+                                    updateStatus: updateStatus,
+                                  ),
                       );
 
                   return (mergedSettings.widgetBuilder ??

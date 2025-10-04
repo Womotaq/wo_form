@@ -18,8 +18,8 @@ part of 'wo_form_node.dart';
 /// - [SelectInput] : [T] is the type of the values to choose from
 @Freezed(fromJson: true, toJson: true)
 sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
-    with _$WoFormInput {
-  factory WoFormInput.boolean({
+    with _$WoFormInput<T> {
+  const factory WoFormInput.boolean({
     required String id,
     bool? initialValue,
     @Default(false) bool isRequired,
@@ -30,7 +30,7 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
     BooleanInputUiSettings? uiSettings,
   }) = BooleanInput;
 
-  factory WoFormInput.dateTime({
+  const factory WoFormInput.dateTime({
     required String id,
     FlexibleDateTime? initialValue,
     @Default(false) bool isRequired,
@@ -40,7 +40,7 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
     DateTimeInputUiSettings? uiSettings,
   }) = DateTimeInput;
 
-  factory WoFormInput.duration({
+  const factory WoFormInput.duration({
     required String id,
     @DurationNullableConverter() Duration? initialValue,
     @Default(false) bool isRequired,
@@ -79,7 +79,7 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
     'maxCount == null || minCount <= maxCount',
     'maxCount must be higher or equal to minCount',
   )
-  factory WoFormInput.media({
+  const factory WoFormInput.media({
     required String id,
     required MediaImportSettings importSettings,
     required int? maxCount,
@@ -102,7 +102,7 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
     'maxBound == null || minBound <= maxBound',
     'maxBound must be higher or equal to minBound',
   )
-  factory WoFormInput.num({
+  const factory WoFormInput.num({
     required String id,
     num? initialValue,
     @Default(false) bool isRequired,
@@ -146,7 +146,7 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
   //   QuizSettings? quizSettings,
   // }) = SelectStringInput;
 
-  factory WoFormInput.string({
+  const factory WoFormInput.string({
     required String id,
     String? initialValue,
     @Default(false) bool isRequired,
@@ -158,7 +158,7 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
     @Default(StringInputUiSettings()) StringInputUiSettings uiSettings,
   }) = StringInput;
 
-  WoFormInput._() : super._();
+  const WoFormInput._() : super._();
 
   static WoFormInput fromJson(Json json) => _fromJson(json);
   static WoFormInput _fromJson(Json json) {
@@ -555,7 +555,7 @@ abstract class SelectInput<T> extends WoFormInput<T> with _$SelectInput<T> {
     @notSerializable T Function(Object?)? fromJsonT,
   }) = _SelectInput<T>;
 
-  SelectInput._() : super._();
+  const SelectInput._() : super._();
 
   static SelectInput<Object?> fromJson(Json json) {
     final availibleValues = json['availibleValues'];

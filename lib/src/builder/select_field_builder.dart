@@ -12,8 +12,8 @@ class SelectFieldBuilder<T> extends StatelessWidget {
   final String path;
   final SelectInputUiSettings<T>? uiSettings;
 
-  SelectInput<T> getChild(RootNode form, WoFormValues values) {
-    final input = form.getChild(path: path, values: values);
+  SelectInput<T> getChild(WoFormValuesCubit valuesCubit) {
+    final input = valuesCubit.getNode(path: path);
     if (input is! SelectInput<T>) {
       throw ArgumentError(
         'Expected <SelectInput<$T>> at path: "$path", '
@@ -26,10 +26,9 @@ class SelectFieldBuilder<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final root = context.read<RootNode>();
     final valuesCubit = context.read<WoFormValuesCubit>();
 
-    final input = getChild(root, valuesCubit.state);
+    final input = getChild(valuesCubit);
     var mergedSettings =
         uiSettings?.merge(input.uiSettings) ??
         input.uiSettings ??
@@ -139,37 +138,37 @@ class SelectFieldBuilder<T> extends StatelessWidget {
   }
 }
 
-class SelectStringFieldBuilder extends SelectFieldBuilder<String> {
-  const SelectStringFieldBuilder({
-    required super.path,
-    super.uiSettings,
-    super.key,
-  });
+// class SelectStringFieldBuilder extends SelectFieldBuilder<String> {
+//   const SelectStringFieldBuilder({
+//     required super.path,
+//     super.uiSettings,
+//     super.key,
+//   });
 
-  @override
-  SelectInput<String> getChild(RootNode form, WoFormValues values) {
-    final input = form.getChild(path: path, values: values);
-    if (input is! SelectStringInput) {
-      throw ArgumentError(
-        'Wrong input at path "$path". '
-        'Expected SelectStringInput, got ${input.runtimeType}',
-      );
-    }
+//   @override
+//   SelectInput<String> getChild(RootNode form, WoFormValues values) {
+//     final input = form.getChild(path: path, values: values);
+//     if (input is! SelectStringInput) {
+//       throw ArgumentError(
+//         'Wrong input at path "$path". '
+//         'Expected SelectStringInput, got ${input.runtimeType}',
+//       );
+//     }
 
-    return SelectInput<String>(
-      id: input.id,
-      maxCount: input.maxCount,
-      minCount: input.minCount,
-      initialValues: input.initialValues,
-      availibleValues: input.availibleValues,
-      idsOfAvailibleValues: input.idsOfAvailibleValues,
-      onValueChanged: input.onValueChanged,
-      getCustomError: input.getCustomError,
-      submitFormOnSelect: input.submitFormOnSelect,
-      uiSettings: input.uiSettings,
-      quizSettings: input.quizSettings,
-      toJsonT: (value) => value,
-      fromJsonT: (value) => value as String?,
-    );
-  }
-}
+//     return SelectInput<String>(
+//       id: input.id,
+//       maxCount: input.maxCount,
+//       minCount: input.minCount,
+//       initialValues: input.initialValues,
+//       availibleValues: input.availibleValues,
+//       idsOfAvailibleValues: input.idsOfAvailibleValues,
+//       onValueChanged: input.onValueChanged,
+//       getCustomError: input.getCustomError,
+//       submitFormOnSelect: input.submitFormOnSelect,
+//       uiSettings: input.uiSettings,
+//       quizSettings: input.quizSettings,
+//       toJsonT: (value) => value,
+//       fromJsonT: (value) => value as String?,
+//     );
+//   }
+// }

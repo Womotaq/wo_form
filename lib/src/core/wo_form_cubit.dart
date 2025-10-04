@@ -97,7 +97,9 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     ShowErrors showErrors,
   ) {
     // Start with the root's initial values
-    final values = WoFormValues(root.getInitialValues()..addAll(initialValues));
+    final values = WoFormValues(
+      root.getInitialValues(parentPath: '')..addAll(initialValues),
+    );
 
     if (showErrors == ShowErrors.always) {
       // Mark all paths as visited, this way the errors will always appear
@@ -123,6 +125,9 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   /// Return true if the current state is equal to the initial state.
   bool get isPure => state.isPure(initialValues: _initialValues);
+
+  WoFormNode? getNode({required String path}) =>
+      _root.getChild(path: path, parentPath: '', values: state);
 
   // --- MULTI STEP ---
 
@@ -173,6 +178,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
       try {
         return _root.getChild(
           path: tempSubmitData.path,
+          parentPath: '',
           values: state,
         )!;
       } catch (_) {
@@ -280,7 +286,8 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   // --- VALUES ---
 
-  void clearValues() => emit(WoFormValues(_root.getInitialValues()));
+  void clearValues() =>
+      emit(WoFormValues(_root.getInitialValues(parentPath: '')));
 
   /// **Use this method precautiously since there is no type checking !**
   void onValueChanged({
@@ -362,16 +369,11 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   void _updateErrors() => _statusCubit.setInProgress(
     errors: state._visitedPaths
         .map(
-          (path) => _root
-              .getChild(
-                path: path,
-                values: state,
-              )
-              ?.getErrors(
-                values: state,
-                parentPath: path.parentPath,
-                recursive: false,
-              ),
+          (path) => getNode(path: path)?.getErrors(
+            values: state,
+            parentPath: path.parentPath,
+            recursive: false,
+          ),
         )
         .nonNulls
         .expand((list) => list)

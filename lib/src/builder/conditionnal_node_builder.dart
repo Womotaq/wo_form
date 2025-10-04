@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wo_form/src/utils/extensions.dart';
 import 'package:wo_form/wo_form.dart';
 
 class ConditionnalNodeBuilder extends StatelessWidget {
@@ -12,10 +13,8 @@ class ConditionnalNodeBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final form = context.read<RootNode>();
     final valuesCubit = context.read<WoFormValuesCubit>();
-
-    final node = form.getChild(path: path, values: valuesCubit.state);
+    final node = valuesCubit.getNode(path: path);
     if (node is! ConditionnalNode) {
       throw ArgumentError(
         'Expected <ConditionnalNode> at path: "$path", '
@@ -31,14 +30,10 @@ class ConditionnalNodeBuilder extends StatelessWidget {
         builder: (context, conditionsAreMet) {
           // TODO : improve
           if (!conditionsAreMet) {
-            if (node.clearChildrenWhenHidden) {
-              final valuesCubit = context.read<WoFormValuesCubit>();
-              valuesCubit.onValuesChanged({
-                for (final children in valuesCubit.state.keys.where(
-                  (childPath) => childPath.startsWith(path),
-                ))
-                  children: null,
-              });
+            if (node.resetChildrenWhenHidden) {
+              valuesCubit.onValuesChanged(
+                node.child.getInitialValues(parentPath: path.parentPath),
+              );
             }
             return const SizedBox.shrink();
           }

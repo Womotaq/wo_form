@@ -13,12 +13,6 @@ part 'wo_form_input.dart';
 part 'wo_form_node.freezed.dart';
 part 'wo_form_node.g.dart';
 
-abstract class Base {
-  Base() : uid = generateUid();
-  final String uid;
-  Object? uiSettings;
-}
-
 // `fromJson: true` is required because instead of the synatx
 // `factory WoFormInput.fromJson`, wich implies T, we use the syntax
 // `static WoFormInput fromJson`, wich deduces T.
@@ -26,17 +20,20 @@ abstract class Base {
 /// - [FutureNode] : [T] is the type of the data returned by [FutureNode.future]
 /// - [SelectInput] : [T] is the type of the values to choose from
 @Freezed(fromJson: true, toJson: true)
-sealed class WoFormNode<T extends Object?> extends Base with _$WoFormNode {
-  factory WoFormNode.conditionnal({
+sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
+  const factory WoFormNode.conditionnal({
     required String id,
     required Condition condition,
     @InputConverter() required WoFormNode child,
     @Default(false) bool conditionIsInitiallyMet,
-    @Default(true) bool clearChildrenWhenHidden,
+
+    /// If true, when the condition goes from met to not met, the values of the
+    /// child and its descendant nodes are reset to their initial state.
+    @Default(true) bool resetChildrenWhenHidden,
     @Default(InputUiSettings()) InputUiSettings uiSettings,
   }) = ConditionnalNode;
 
-  factory WoFormNode.dynamicInputs({
+  const factory WoFormNode.dynamicInputs({
     required String id,
     // @DynamicInputTemplatesConverter()
     @Default([]) List<DynamicInputTemplate> templates,
@@ -46,13 +43,13 @@ sealed class WoFormNode<T extends Object?> extends Base with _$WoFormNode {
     @Default(ExportSettings()) ExportSettings exportSettings,
   }) = DynamicInputsNode;
 
-  factory WoFormNode.empty({
+  const factory WoFormNode.empty({
     @Default('EmptyNode') String id,
   }) = EmptyNode;
 
   @Assert('future != null', 'FutureNode.future cannot be null')
   @Assert('builder != null', 'FutureNode.builder cannot be null')
-  factory WoFormNode.future({
+  const factory WoFormNode.future({
     required String id,
     @notSerializable Future<T>? future,
     @notSerializable WoFormNode Function(AsyncSnapshot<T?> snapshot)? builder,
@@ -64,7 +61,7 @@ sealed class WoFormNode<T extends Object?> extends Base with _$WoFormNode {
     @Default(InputUiSettings()) InputUiSettings uiSettings,
   }) = FutureNode<T>;
 
-  factory WoFormNode.inputs({
+  const factory WoFormNode.inputs({
     required String id,
     @InputsListConverter() @Default([]) List<WoFormNode> children,
     @Default(InputsNodeUiSettings()) InputsNodeUiSettings uiSettings,
@@ -72,14 +69,14 @@ sealed class WoFormNode<T extends Object?> extends Base with _$WoFormNode {
   }) = InputsNode;
 
   @Assert('builder != null', 'PathBuilderNode.builder cannot be null')
-  factory WoFormNode.pathBuilder({
+  const factory WoFormNode.pathBuilder({
     required String id,
 
     /// [path] is the path of this node, wich includes its own id.
     @notSerializable WoFormNode Function(String path)? builder,
   }) = PathBuilderNode;
 
-  factory WoFormNode.root({
+  const factory WoFormNode.root({
     // The root's id should never be used
     @Default('root') String id,
     @Default({}) Json initialValues,
@@ -96,7 +93,7 @@ sealed class WoFormNode<T extends Object?> extends Base with _$WoFormNode {
 
   @Assert('selector != null', 'SelectorNode.selector cannot be null')
   @Assert('builder != null', 'SelectorNode.builder cannot be null')
-  factory WoFormNode.selector({
+  const factory WoFormNode.selector({
     required String id,
     @notSerializable Object? Function(WoFormValues values)? selector,
     @notSerializable WoFormNode Function(Object? value)? builder,
@@ -105,7 +102,7 @@ sealed class WoFormNode<T extends Object?> extends Base with _$WoFormNode {
   }) = SelectorNode;
 
   @Assert('builder != null', 'ValueBuilderNode.builder cannot be null')
-  factory WoFormNode.valueBuilder({
+  const factory WoFormNode.valueBuilder({
     required String id,
     required String path,
     @notSerializable WoFormNode Function(Object? value)? builder,
@@ -113,7 +110,7 @@ sealed class WoFormNode<T extends Object?> extends Base with _$WoFormNode {
   }) = ValueBuilderNode;
 
   @Assert('builder != null', 'ValuesBuilderNode.builder cannot be null')
-  factory WoFormNode.valuesBuilder({
+  const factory WoFormNode.valuesBuilder({
     required String id,
     required List<String> paths,
     @notSerializable WoFormNode Function(Map<String, Object?> values)? builder,
@@ -121,7 +118,7 @@ sealed class WoFormNode<T extends Object?> extends Base with _$WoFormNode {
   }) = ValuesBuilderNode;
 
   @Assert('listener != null', 'ValueListenerNode.listener cannot be null')
-  factory WoFormNode.valueListener({
+  const factory WoFormNode.valueListener({
     required String path,
     @Default('ValueListenerNode') String id,
     @notSerializable
@@ -131,13 +128,13 @@ sealed class WoFormNode<T extends Object?> extends Base with _$WoFormNode {
     listener,
   }) = ValueListenerNode;
 
-  factory WoFormNode.widget({
+  const factory WoFormNode.widget({
     @Default('WidgetNode') String id,
     @notSerializable Widget Function(BuildContext context)? builder,
     @Default(InputUiSettings()) InputUiSettings uiSettings,
   }) = WidgetNode;
 
-  WoFormNode._();
+  const WoFormNode._();
 
   static WoFormNode fromJson(Json json) => _fromJson(json);
   static WoFormNode _fromJson(Json json) {
@@ -297,6 +294,7 @@ sealed class WoFormNode<T extends Object?> extends Base with _$WoFormNode {
       case ValueListenerNode():
       case WidgetNode():
       case EmptyNode():
+        break;
 
       // WoFormInput overrides this method
       case WoFormInput():
