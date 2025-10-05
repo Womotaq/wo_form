@@ -53,7 +53,7 @@ class _WoFormStandardBody extends StatelessWidget {
           flex:
               !root.uiSettings.layout.supportFlex ||
                   root.children.every(
-                    (child) => (child.flex(context) ?? 0) == 0,
+                    (child) => (child.flex(context, parentPath: '') ?? 0) == 0,
                   )
               ? 0
               : 1,
@@ -64,7 +64,7 @@ class _WoFormStandardBody extends StatelessWidget {
                 .map(
                   (child) => Flexible(
                     flex: root.uiSettings.layout.supportFlex
-                        ? child.flex(context) ?? 0
+                        ? child.flex(context, parentPath: '') ?? 0
                         : 0,
                     child: child.toWidget(parentPath: ''),
                   ),
@@ -154,7 +154,7 @@ class _WoFormMultistepBody extends StatelessWidget {
                   Expanded(
                     flex:
                         root.uiSettings.layout.supportFlex &&
-                            (step.flex(context) ?? 0) == 0
+                            (step.flex(context, parentPath: '') ?? 0) == 0
                         ? 0
                         : 1,
                     child: root.uiSettings.layout.isScrollable

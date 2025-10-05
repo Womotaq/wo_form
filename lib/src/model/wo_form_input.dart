@@ -504,11 +504,12 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
   }
 
   @override
-  int? flex(BuildContext context) => switch (this) {
-    final SelectInput<T> input => input.uiSettings?.flex,
-    // final SelectStringInput input => input.uiSettings?.flex,
-    _ => null,
-  };
+  int? flex(BuildContext context, {required String parentPath}) =>
+      switch (this) {
+        final SelectInput<T> input => input.uiSettings?.flex,
+        // final SelectStringInput input => input.uiSettings?.flex,
+        _ => null,
+      };
 }
 
 // Note : when adding a new parameter, make sure to update

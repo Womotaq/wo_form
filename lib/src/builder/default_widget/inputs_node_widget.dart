@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wo_form/src/utils/extensions.dart';
 import 'package:wo_form/wo_form.dart';
 
 class InputsNodeWidget extends StatelessWidget {
@@ -62,7 +63,11 @@ class InputsNodeWidget extends StatelessWidget {
                 builder: (context) => Flexible(
                   flex:
                       formUiSettings.layout.supportFlex &&
-                          data.input.flex(context) != 0
+                          data.input.flex(
+                                context,
+                                parentPath: data.path.parentPath,
+                              ) !=
+                              0
                       ? 1
                       : 0,
                   child: Flex(
@@ -89,7 +94,7 @@ class InputsNodeWidget extends StatelessWidget {
     WoFormUiSettings formUiSettings,
   ) => Builder(
     builder: (context) {
-      final flex = child.flex(context);
+      final flex = child.flex(context, parentPath: data.path);
       return Flexible(
         flex: formUiSettings.layout.supportFlex && flex != null
             ? flex
