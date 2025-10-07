@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wo_form/src/utils/extensions.dart';
 import 'package:wo_form/wo_form.dart';
 
 class ConditionnalNodeBuilder extends StatelessWidget {
@@ -32,7 +31,7 @@ class ConditionnalNodeBuilder extends StatelessWidget {
           if (!conditionsAreMet) {
             if (node.resetChildrenWhenHidden) {
               valuesCubit.onValuesChanged(
-                node.child.getInitialValues(parentPath: path.parentPath),
+                node.child.getInitialValues(parentPath: path),
               );
             }
             return const SizedBox.shrink();
