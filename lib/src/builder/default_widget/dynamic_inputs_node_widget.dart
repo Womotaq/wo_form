@@ -12,9 +12,7 @@ class DynamicInputsNodeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final addButton =
         (data.input.uiSettings?.addButtonBuilder ??
-        DynamicInputsNodeAddButton.new)(
-          data,
-        );
+        DynamicInputsNodeAddButton.new)(data);
     final addButtonPosition =
         data.input.uiSettings?.addButtonPosition ??
         DynamicInputsNodeAddButtonPosition.header;
@@ -31,9 +29,9 @@ class DynamicInputsNodeWidget extends StatelessWidget {
     final children =
         data.value
             ?.map(
-              (e) => DeletableField(
+              (node) => DeletableField(
                 // This key avoids unnecessary rebuilds
-                key: Key('${data.path}/${e.id}'),
+                key: Key('${data.path}/${node.id}'),
                 onDelete: data.onValueChanged == null
                     ? null
                     : () {
@@ -42,11 +40,11 @@ class DynamicInputsNodeWidget extends StatelessWidget {
                             ?.call(
                               () => data.onValueChanged?.call(data.value ?? []),
                             );
-                        onRemoveChoice(e);
+                        onRemoveChoice(node);
                       },
                 child: WoFormElementBuilder(
-                  path: '${data.path}/${e.id}',
-                  key: Key('${data.path}/${e.id}'),
+                  path: '${data.path}/${node.id}',
+                  key: Key('${data.path}/${node.id}'),
                 ),
               ),
             )

@@ -21,19 +21,19 @@ class DynamicInputsNodeWidgetBuilder extends StatelessWidget {
       builder: (context, inputIsLocked) {
         return WoFormValueBuilder<List<WoFormNode>>(
           path: path,
-          builder: (context, inputs) {
+          builder: (context, children) {
             final fieldData = WoFieldData(
               path: path,
               input: node,
-              value: inputs,
+              value: children,
               onValueChanged: inputIsLocked
                   ? null
                   : (
-                      List<WoFormNode>? newInputs, {
+                      List<WoFormNode>? newChildren, {
                       UpdateStatus updateStatus = UpdateStatus.yes,
                     }) => context.read<WoFormValuesCubit>().onValueChanged(
                       path: path,
-                      value: List<WoFormNode>.unmodifiable(newInputs ?? []),
+                      value: List<WoFormNode>.unmodifiable(newChildren ?? []),
                       updateStatus: updateStatus,
                     ),
             );

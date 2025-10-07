@@ -825,9 +825,11 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
       key: key,
       path: '$parentPath/$id',
     ),
-    PathBuilderNode(builder: final builder) => builder!(
-      '$parentPath/$id',
-    ).toWidget(parentPath: '$parentPath/$id'),
+    PathBuilderNode(builder: final builder) =>
+      builder!('$parentPath/$id').toWidget(
+        key: key,
+        parentPath: '$parentPath/$id',
+      ),
     RootNode() => WoFormPageBuilder(
       key: key,
     ),
@@ -887,9 +889,7 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
       builder == null
           ? SizedBox.shrink(key: key)
           : Builder(key: key, builder: builder),
-    EmptyNode() => SizedBox.shrink(
-      key: key,
-    ),
+    EmptyNode() => SizedBox.shrink(key: key),
 
     // WoFormInput overrides this method
     WoFormInput() => throw UnimplementedError(),

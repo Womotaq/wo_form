@@ -66,16 +66,16 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
               BlocProvider.value(value: context.read<WoFormStatusCubit>()),
               BlocProvider.value(value: context.read<WoFormLockCubit>()),
             ],
-            child: _InputsNodePage(widget.data),
+            child: _InputsNodePage(widget.data.path),
           ),
         ),
       );
 }
 
 class _InputsNodePage extends StatelessWidget {
-  const _InputsNodePage(this.data);
+  const _InputsNodePage(this.path);
 
-  final WoFieldData<InputsNode, void> data;
+  final String path;
 
   @override
   Widget build(BuildContext context) {
@@ -85,33 +85,23 @@ class _InputsNodePage extends StatelessWidget {
         Navigator.pop(context);
         return null;
       },
-      path: data.path,
+      path: path,
     );
 
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
         if (didPop) {
           context.read<WoFormValuesCubit>().removeTemporarySubmitData(
-            path: data.path,
+            path: path,
           );
         }
       },
-      child:
-          (data.input.uiSettings?.widgetBuilder ??
-                  WoFormTheme.of(context)?.inputsNodeWidgetBuilder ??
-                  InputsNodeWidget.new)
-              .call(
-                WoFieldData(
-                  path: data.path,
-                  input: data.input,
-                  value: null,
-                  onValueChanged:
-                      (
-                        _, {
-                        UpdateStatus updateStatus = UpdateStatus.yes,
-                      }) {},
-                ),
-              ),
+      child: InputsNodeWidgetBuilder(
+        path: path,
+        uiSettings: const InputsNodeUiSettings(
+          childrenVisibility: ChildrenVisibility.always,
+        ),
+      ),
     );
   }
 }
