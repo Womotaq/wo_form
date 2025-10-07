@@ -55,10 +55,8 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     this._canSubmit, {
     required this.onStatusUpdate,
     required this.onSubmitting,
-    required this.showErrors,
-    Json initialValues = const {},
   }) : _tempSubmitDatas = [],
-       super(_calculateInitialState(_root, initialValues, showErrors)) {
+       super(_calculateInitialState(_root)) {
     _initialValues = state.asMap();
     if (showErrors == ShowErrors.always) {
       // Update the errors of all visited paths
@@ -66,12 +64,11 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     }
   }
 
-  final RootNode _root;
+  RootNode _root;
   final WoFormStatusCubit _statusCubit;
   final WoFormLockCubit _lockCubit;
   final Future<bool> Function(BuildContext context) _canSubmit;
   final Future<void> Function(RootNode root, WoFormValues values)? onSubmitting;
-  final ShowErrors showErrors;
   late Json _initialValues;
   final Map<String, FocusNode> _focusNodes = {};
 
@@ -91,17 +88,13 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   bool _skipErrorsOfNextSubmit = false;
 
   // A helper method to compute the initial state cleanly.
-  static WoFormValues _calculateInitialState(
-    RootNode root,
-    Json initialValues,
-    ShowErrors showErrors,
-  ) {
+  static WoFormValues _calculateInitialState(RootNode root) {
     // Start with the root's initial values
     final values = WoFormValues(
-      root.getInitialValues(parentPath: '')..addAll(initialValues),
+      root.getInitialValues(parentPath: '')..addAll(root.initialValues),
     );
 
-    if (showErrors == ShowErrors.always) {
+    if (root.uiSettings?.showErrors == ShowErrors.always) {
       // Mark all paths as visited, this way the errors will always appear
       final visitedPaths = Set<String>.from(values._visitedPaths)
         ..addAll(values.keys);
@@ -123,8 +116,17 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     return values;
   }
 
+  void _didUpdateWoForm(RootNode newRoot) {
+    if (!identical(_root, newRoot)) {
+      _root = newRoot;
+      _initialValues = _calculateInitialState(_root).asMap();
+    }
+  }
+
   /// Return true if the current state is equal to the initial state.
   bool get isPure => state.isPure(initialValues: _initialValues);
+  ShowErrors get showErrors =>
+      _root.uiSettings?.showErrors ?? ShowErrors.progressively;
 
   WoFormNode? getNode({required String path}) =>
       _root.getChild(path: path, parentPath: '', values: state);

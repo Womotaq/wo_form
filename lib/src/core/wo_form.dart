@@ -96,10 +96,6 @@ class WoForm extends StatelessWidget {
                       canSubmit ?? (_) async => true,
                       onStatusUpdate: onStatusUpdate,
                       onSubmitting: onSubmitting,
-                      showErrors:
-                          root.uiSettings?.showErrors ??
-                          ShowErrors.progressively,
-                      initialValues: root.initialValues,
                     )
                   : _HydratedWoFormValuesCubit(
                       root.hydratationId,
@@ -109,10 +105,6 @@ class WoForm extends StatelessWidget {
                       canSubmit ?? (_) async => true,
                       onStatusUpdate: onStatusUpdate,
                       onSubmitting: onSubmitting,
-                      showErrors:
-                          root.uiSettings?.showErrors ??
-                          ShowErrors.progressively,
-                      initialValues: root.initialValues,
                     ),
             ),
           ],
@@ -129,9 +121,12 @@ class WoForm extends StatelessWidget {
                 default:
               }
             },
-            child: pageBuilder == null
-                ? root.toWidget(parentPath: '', key: rootKey)
-                : Builder(key: rootKey, builder: pageBuilder!),
+            child: _RootUpdater(
+              root: root,
+              child: pageBuilder == null
+                  ? root.toWidget(parentPath: '', key: rootKey)
+                  : Builder(key: rootKey, builder: pageBuilder!),
+            ),
           ),
         ),
       ),
@@ -153,6 +148,32 @@ class WoForm extends StatelessWidget {
   ) => ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(content: Text('${status.error}')),
   );
+}
+
+class _RootUpdater extends StatefulWidget {
+  /// This widget allows WoFormValuesCubit._root to always be up to date
+  /// with the root of the last hot reload.
+  const _RootUpdater({required this.root, required this.child});
+
+  final RootNode root;
+  final Widget child;
+
+  @override
+  State<_RootUpdater> createState() => __RootUpdaterState();
+}
+
+class __RootUpdaterState extends State<_RootUpdater> {
+  @override
+  void didUpdateWidget(covariant _RootUpdater oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.root != oldWidget.root) {
+      context.read<WoFormValuesCubit>()._didUpdateWoForm(widget.root);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => widget.child;
 }
 
 class RootKey<T extends State<StatefulWidget>> extends GlobalKey<T> {

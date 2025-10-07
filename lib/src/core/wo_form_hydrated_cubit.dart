@@ -61,8 +61,6 @@ class _HydratedWoFormValuesCubit extends WoFormValuesCubit
     super._canSubmit, {
     required super.onStatusUpdate,
     required super.onSubmitting,
-    required super.showErrors,
-    super.initialValues = const {},
   }) : assert(
          hydratationId.isNotEmpty,
          'hydratationId must not be an empty string',
