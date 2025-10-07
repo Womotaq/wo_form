@@ -52,28 +52,22 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
         .call(headerData);
   }
 
-  Future<void> openChildren(BuildContext context) {
-    final root = context.read<RootNode>();
-
-    return (widget.data.uiSettings.openChildren ?? Push.screen)(
-      context: context,
-      child: RepositoryProvider.value(
-        value: root.copyWith(
-          uiSettings: root.uiSettings.copyWith(
-            layout: LayoutMethod.fromFlex(widget.data.uiSettings.flex),
+  Future<void> openChildren(BuildContext context) =>
+      (widget.data.uiSettings.openChildren ?? Push.modalBottomSheet)(
+        context: context,
+        layout: LayoutMethod.fromFlex(widget.data.uiSettings.flexOrDefault),
+        child: RepositoryProvider.value(
+          value: context.read<RootNode>(),
+          child: MultiBlocProvider(
+            providers: [
+              BlocProvider.value(value: context.read<WoFormValuesCubit>()),
+              BlocProvider.value(value: context.read<WoFormStatusCubit>()),
+              BlocProvider.value(value: context.read<WoFormLockCubit>()),
+            ],
+            child: _InputsNodePage(widget.data),
           ),
         ),
-        child: MultiBlocProvider(
-          providers: [
-            BlocProvider.value(value: context.read<WoFormValuesCubit>()),
-            BlocProvider.value(value: context.read<WoFormStatusCubit>()),
-            BlocProvider.value(value: context.read<WoFormLockCubit>()),
-          ],
-          child: _InputsNodePage(widget.data),
-        ),
-      ),
-    );
-  }
+      );
 }
 
 class _InputsNodePage extends StatelessWidget {
@@ -83,6 +77,7 @@ class _InputsNodePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO : better
     context.read<WoFormValuesCubit>().addTemporarySubmitData(
       onSubmitting: () async {
         Navigator.pop(context);
@@ -90,24 +85,6 @@ class _InputsNodePage extends StatelessWidget {
       },
       path: data.path,
     );
-
-    final fieldData = WoFieldData(
-      path: data.path,
-      input: data.input,
-      value: null,
-      uiSettings: data.uiSettings,
-      onValueChanged:
-          (
-            _, {
-            UpdateStatus updateStatus = UpdateStatus.yes,
-          }) {},
-    );
-
-    final inputsNodeWidget =
-        (data.uiSettings.widgetBuilder ??
-                WoFormTheme.of(context)?.inputsNodeWidgetBuilder ??
-                InputsNodeWidget.new)
-            .call(fieldData);
 
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
@@ -118,12 +95,22 @@ class _InputsNodePage extends StatelessWidget {
         }
       },
       child:
-          LayoutMethod.fromFlex(data.uiSettings.flex) == LayoutMethod.scrollable
-          ? SingleChildScrollView(
-              controller: ScrollControllerProvider.of(context),
-              child: inputsNodeWidget,
-            )
-          : inputsNodeWidget,
+          (data.uiSettings.widgetBuilder ??
+                  WoFormTheme.of(context)?.inputsNodeWidgetBuilder ??
+                  InputsNodeWidget.new)
+              .call(
+                WoFieldData(
+                  path: data.path,
+                  input: data.input,
+                  value: null,
+                  uiSettings: data.uiSettings,
+                  onValueChanged:
+                      (
+                        _, {
+                        UpdateStatus updateStatus = UpdateStatus.yes,
+                      }) {},
+                ),
+              ),
     );
   }
 }

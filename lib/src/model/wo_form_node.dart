@@ -104,6 +104,9 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
   @Assert('builder != null', 'ValueBuilderNode.builder cannot be null')
   const factory WoFormNode.valueBuilder({
     required String id,
+
+    /// The path to the value this node listens to.
+    /// TODO : macro example
     required String path,
     @notSerializable WoFormNode Function(Object? value)? builder,
     Object? initialValue,
@@ -886,7 +889,7 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
 
   WoFormNode withId({required String id}) => copyWith(id: id);
 
-  /// Used when OFormUiSettings.scrollable is false
+  /// Used when [WoFormUiSettings.layout] is [LayoutMethod.flexible].
   int? flex(BuildContext context, {required String parentPath}) =>
       switch (this) {
         final ConditionnalNode node =>
@@ -932,7 +935,10 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
               )
               .flex(context, parentPath: '$parentPath/$id'),
         ValueListenerNode _ => null,
-        InputsNode(uiSettings: final uiSettings) => uiSettings.flex,
+        InputsNode(uiSettings: final uiSettings) =>
+          uiSettings.childrenVisibility == ChildrenVisibility.whenAsked
+              ? 0
+              : uiSettings.flex,
         WidgetNode(uiSettings: final uiSettings) => uiSettings.flex,
 
         // WoFormInput overrides this method

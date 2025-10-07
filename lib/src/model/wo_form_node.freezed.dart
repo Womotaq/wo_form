@@ -928,6 +928,8 @@ class ValueBuilderNode<T extends Object?> extends WoFormNode<T> {
   factory ValueBuilderNode.fromJson(Map<String, dynamic> json) => _$ValueBuilderNodeFromJson(json);
 
 @override final  String id;
+/// The path to the value this node listens to.
+/// TODO : macro example
  final  String path;
 @notSerializable final  WoFormNode Function(Object? value)? builder;
  final  Object? initialValue;

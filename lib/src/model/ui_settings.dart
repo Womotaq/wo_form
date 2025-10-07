@@ -332,13 +332,22 @@ typedef HeaderBuilderDef = Widget Function(WoFormHeaderData data);
 @freezed
 abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
   const factory InputsNodeUiSettings({
-    /// Requires [WoFormUiSettings.layout] at [LayoutMethod.flexible].
+    /// This field determines the layout of this node :
+    /// - -1 : [LayoutMethod.scrollable], the node expands, the children are
+    ///        in a scrollable view.
+    /// - 0 : [LayoutMethod.shrinkWrap], the children are shrunk
+    /// - 1 and more : [LayoutMethod.flexible], the node expands, the children
+    ///                share the availible space
     ///
-    /// When [ChildrenVisibility.whenAsked], this field determines the layout
-    /// of the new context :
-    /// - null : [LayoutMethod.scrollable]
-    /// - 0 : [LayoutMethod.shrinkWrap]
-    /// - 1 and more : [LayoutMethod.flexible]
+    /// When [childrenVisibility] is [ChildrenVisibility.whenAsked], the layout
+    /// only applies to the context opened by [openChildren].
+    /// When it is [ChildrenVisibility.always], if [flex] is different than 0,
+    /// the parent widget needs to provide a finite height
+    /// (for example, using [LayoutMethod.flexible]).
+    ///
+    /// The default value depends on [childrenVisibility] :
+    /// - [ChildrenVisibility.always] : 0
+    /// - [ChildrenVisibility.whenAsked] : -1
     int? flex,
 
     /// If flex is higher than 0, the default widget will use ListView.builder.
@@ -423,6 +432,9 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
           expanderBuilder: expanderBuilder ?? other.expanderBuilder,
           inputHeaderBuilder: inputHeaderBuilder ?? other.inputHeaderBuilder,
         );
+
+  int get flexOrDefault =>
+      flex ?? (childrenVisibility == ChildrenVisibility.whenAsked ? -1 : 0);
 }
 
 typedef MediaFieldBuilderDef =
@@ -511,13 +523,28 @@ typedef ValueBuilderDef<T> = Widget Function(T? value);
 @freezed
 abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
   const factory SelectInputUiSettings({
-    /// When [childrenVisibility] is [ChildrenVisibility.always] or null, if
-    /// flex is higher than 0, the default widget will use ListView.builder.
-    /// Requires [WoFormUiSettings.layout] at [LayoutMethod.flexible].
+    // What you can do :
+    // ? a field with always visible options
+    //   ? whole field shrinks to its minimal size
+    //   ? whole field expands and the options are in a scrollable view
+    //     - the size of the field is determined by the parent and [flex]
+    //     - the parent must provide a finite height
+    // ? a field with options shown in a new context (menu, modal, page...)
+    //   ? options shrink to their minimal size
+    //   ? options scrollable
+    //     - allows draggable modal
+    //
+    /// This field determines the layout of this node :
+    /// - 0 : the [SelectInput.availibleValues] shrink to their minimal size
+    /// - other : the [SelectInput.availibleValues] are in a scrollable view
     ///
-    /// When [childrenVisibility] is [ChildrenVisibility.whenAsked],
-    /// if flex is 0, the items will be shrinkWrap-ed. Else, they will be in
-    /// a scrollable context.
+    /// When [childrenVisibility] is [ChildrenVisibility.whenAsked], the layout
+    /// only applies to the context opened by [openChildren].
+    /// When it is [ChildrenVisibility.always], if [flex] is different than 0,
+    /// the parent widget needs to provide a finite height
+    /// (for example, using [LayoutMethod.flexible]).
+    ///
+    /// Defaults to 0.
     int? flex,
     String? labelText,
     String? helperText,
@@ -978,13 +1005,13 @@ enum LayoutMethod {
   /// The body will be wrapped in a SingleChildScrollView, allowing content
   /// that overflows the screen to be scrolled.
   ///
-  /// In this mode, `uiSettings.flex` will have no effect.
+  /// In this mode, children can't use `uiSettings.flex`.
   scrollable,
 
   /// The body will take the least space possible. The entire form will fit
   /// to the size of the body.
   ///
-  /// In this mode, `uiSettings.flex` will have no effect.
+  /// In this mode, children can't use `uiSettings.flex`.
   shrinkWrap,
 
   /// The body will use a flexible layout, allowing its children to be sized
@@ -996,10 +1023,10 @@ enum LayoutMethod {
   bool get supportFlex => this == LayoutMethod.flexible;
 
   /// Transforms a flex value into a layout method. Possible values :
-  /// - `null` or `-1` : scrollable
+  /// - `-1` : scrollable
   /// - `0` : shrinkWrap
   /// - `>= 1` : flexible
-  static LayoutMethod fromFlex(int? flex) => flex == null || flex == -1
+  static LayoutMethod fromFlex(int flex) => flex == -1
       ? LayoutMethod.scrollable
       : flex == 0
       ? LayoutMethod.shrinkWrap

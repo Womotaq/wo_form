@@ -1029,13 +1029,22 @@ as Widget?,
 /// @nodoc
 mixin _$InputsNodeUiSettings {
 
-/// Requires [WoFormUiSettings.layout] at [LayoutMethod.flexible].
+/// This field determines the layout of this node :
+/// - -1 : [LayoutMethod.scrollable], the node expands, the children are
+///        in a scrollable view.
+/// - 0 : [LayoutMethod.shrinkWrap], the children are shrunk
+/// - 1 and more : [LayoutMethod.flexible], the node expands, the children
+///                share the availible space
 ///
-/// When [ChildrenVisibility.whenAsked], this field determines the layout
-/// of the new context :
-/// - null : [LayoutMethod.scrollable]
-/// - 0 : [LayoutMethod.shrinkWrap]
-/// - 1 and more : [LayoutMethod.flexible]
+/// When [childrenVisibility] is [ChildrenVisibility.whenAsked], the layout
+/// only applies to the context opened by [openChildren].
+/// When it is [ChildrenVisibility.always], if [flex] is different than 0,
+/// the parent widget needs to provide a finite height
+/// (for example, using [LayoutMethod.flexible]).
+///
+/// The default value depends on [childrenVisibility] :
+/// - [ChildrenVisibility.always] : 0
+/// - [ChildrenVisibility.whenAsked] : -1
  int? get flex;/// If flex is higher than 0, the default widget will use ListView.builder.
 ///
 /// Defaults to false.
@@ -1148,13 +1157,22 @@ class _InputsNodeUiSettings extends InputsNodeUiSettings {
   const _InputsNodeUiSettings({this.flex, this.scrollable, this.reverse, this.labelText, this.labelTextWhenChildrenHidden, this.labelMaxLines, this.helperText, this.childrenVisibility, this.showChildrenInitially, @PushDefNullableConverter() this.openChildren, this.direction, this.crossAxisAlignment, this.spacing, @notSerializable this.widgetBuilder, @notSerializable this.headerBuilder, @notSerializable this.expanderBuilder, @notSerializable this.inputHeaderBuilder}): super._();
   factory _InputsNodeUiSettings.fromJson(Map<String, dynamic> json) => _$InputsNodeUiSettingsFromJson(json);
 
-/// Requires [WoFormUiSettings.layout] at [LayoutMethod.flexible].
+/// This field determines the layout of this node :
+/// - -1 : [LayoutMethod.scrollable], the node expands, the children are
+///        in a scrollable view.
+/// - 0 : [LayoutMethod.shrinkWrap], the children are shrunk
+/// - 1 and more : [LayoutMethod.flexible], the node expands, the children
+///                share the availible space
 ///
-/// When [ChildrenVisibility.whenAsked], this field determines the layout
-/// of the new context :
-/// - null : [LayoutMethod.scrollable]
-/// - 0 : [LayoutMethod.shrinkWrap]
-/// - 1 and more : [LayoutMethod.flexible]
+/// When [childrenVisibility] is [ChildrenVisibility.whenAsked], the layout
+/// only applies to the context opened by [openChildren].
+/// When it is [ChildrenVisibility.always], if [flex] is different than 0,
+/// the parent widget needs to provide a finite height
+/// (for example, using [LayoutMethod.flexible]).
+///
+/// The default value depends on [childrenVisibility] :
+/// - [ChildrenVisibility.always] : 0
+/// - [ChildrenVisibility.whenAsked] : -1
 @override final  int? flex;
 /// If flex is higher than 0, the default widget will use ListView.builder.
 ///
@@ -1594,13 +1612,28 @@ as NumFieldBuilderDef?,
 /// @nodoc
 mixin _$SelectInputUiSettings<T> {
 
-/// When [childrenVisibility] is [ChildrenVisibility.always] or null, if
-/// flex is higher than 0, the default widget will use ListView.builder.
-/// Requires [WoFormUiSettings.layout] at [LayoutMethod.flexible].
+// What you can do :
+// ? a field with always visible options
+//   ? whole field shrinks to its minimal size
+//   ? whole field expands and the options are in a scrollable view
+//     - the size of the field is determined by the parent and [flex]
+//     - the parent must provide a finite height
+// ? a field with options shown in a new context (menu, modal, page...)
+//   ? options shrink to their minimal size
+//   ? options scrollable
+//     - allows draggable modal
+//
+/// This field determines the layout of this node :
+/// - 0 : the [SelectInput.availibleValues] shrink to their minimal size
+/// - other : the [SelectInput.availibleValues] are in a scrollable view
 ///
-/// When [childrenVisibility] is [ChildrenVisibility.whenAsked],
-/// if flex is 0, the items will be shrinkWrap-ed. Else, they will be in
-/// a scrollable context.
+/// When [childrenVisibility] is [ChildrenVisibility.whenAsked], the layout
+/// only applies to the context opened by [openChildren].
+/// When it is [ChildrenVisibility.always], if [flex] is different than 0,
+/// the parent widget needs to provide a finite height
+/// (for example, using [LayoutMethod.flexible]).
+///
+/// Defaults to 0.
  int? get flex; String? get labelText; String? get helperText; String? get hintText; ChildrenVisibility? get childrenVisibility;/// Only used when [SelectInput.maxCount] is 1
 /// and childrenVisibility is [ChildrenVisibility.whenAsked].
 ///
@@ -1704,13 +1737,28 @@ class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
   const _SelectInputUiSettings({this.flex, this.labelText, this.helperText, this.hintText, this.childrenVisibility, this.headerFlex, @notSerializable this.prefixIcon, @notSerializable this.valueBuilder, @notSerializable this.selectedBuilder, @notSerializable this.helpValueBuilder, @notSerializable this.searchScore, @notSerializable this.searchScreenBuilder, @PushDefNullableConverter() this.openChildren, @notSerializable this.headerBuilder, @notSerializable this.scoreBuilder, @notSerializable this.tileBuilder, @notSerializable this.widgetBuilder}): super._();
   factory _SelectInputUiSettings.fromJson(Map<String, dynamic> json) => _$SelectInputUiSettingsFromJson(json);
 
-/// When [childrenVisibility] is [ChildrenVisibility.always] or null, if
-/// flex is higher than 0, the default widget will use ListView.builder.
-/// Requires [WoFormUiSettings.layout] at [LayoutMethod.flexible].
+// What you can do :
+// ? a field with always visible options
+//   ? whole field shrinks to its minimal size
+//   ? whole field expands and the options are in a scrollable view
+//     - the size of the field is determined by the parent and [flex]
+//     - the parent must provide a finite height
+// ? a field with options shown in a new context (menu, modal, page...)
+//   ? options shrink to their minimal size
+//   ? options scrollable
+//     - allows draggable modal
+//
+/// This field determines the layout of this node :
+/// - 0 : the [SelectInput.availibleValues] shrink to their minimal size
+/// - other : the [SelectInput.availibleValues] are in a scrollable view
 ///
-/// When [childrenVisibility] is [ChildrenVisibility.whenAsked],
-/// if flex is 0, the items will be shrinkWrap-ed. Else, they will be in
-/// a scrollable context.
+/// When [childrenVisibility] is [ChildrenVisibility.whenAsked], the layout
+/// only applies to the context opened by [openChildren].
+/// When it is [ChildrenVisibility.always], if [flex] is different than 0,
+/// the parent widget needs to provide a finite height
+/// (for example, using [LayoutMethod.flexible]).
+///
+/// Defaults to 0.
 @override final  int? flex;
 @override final  String? labelText;
 @override final  String? helperText;

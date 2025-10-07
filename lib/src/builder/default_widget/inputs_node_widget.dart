@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wo_form/src/utils/extensions.dart';
 import 'package:wo_form/wo_form.dart';
 
 class InputsNodeWidget extends StatelessWidget {
@@ -11,7 +9,6 @@ class InputsNodeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final woFormTheme = WoFormTheme.of(context);
-    final formUiSettings = context.read<RootNode>().uiSettings;
 
     final header =
         (data.uiSettings.headerBuilder ??
@@ -24,9 +21,7 @@ class InputsNodeWidget extends StatelessWidget {
               ),
             );
 
-    final childBuilder =
-        formUiSettings.layout.isScrollable &&
-            data.uiSettings.direction == Axis.vertical
+    final childBuilder = data.uiSettings.direction == Axis.vertical
         ? standardChildBuilder
         : flexibleChildBuilder;
 
@@ -34,12 +29,10 @@ class InputsNodeWidget extends StatelessWidget {
     final spacing = data.uiSettings.spacing ?? woFormTheme?.spacing ?? 0;
     final reverse = data.uiSettings.reverse ?? false;
 
-    return (data.uiSettings.flex ?? 0) > 0 &&
-            (data.uiSettings.scrollable ?? false)
+    return LayoutMethod.fromFlex(data.uiSettings.flexOrDefault).isScrollable
         ? ListView.builder(
+            controller: ScrollControllerProvider.of(context),
             reverse: reverse,
-            // TODO : uiSettings.physics
-            // physics: const ClampingScrollPhysics(),
             scrollDirection: direction,
             padding: EdgeInsets.zero,
             itemCount: data.input.children.length + 1,
@@ -49,10 +42,7 @@ class InputsNodeWidget extends StatelessWidget {
                     padding: EdgeInsets.only(
                       bottom: index == data.input.children.length ? 0 : spacing,
                     ),
-                    child: standardChildBuilder(
-                      data.input.children[index - 1],
-                      formUiSettings,
-                    ),
+                    child: standardChildBuilder(data.input.children[index - 1]),
                   ),
           )
         : Column(
@@ -61,24 +51,14 @@ class InputsNodeWidget extends StatelessWidget {
               header,
               Builder(
                 builder: (context) => Flexible(
-                  flex:
-                      formUiSettings.layout.supportFlex &&
-                          data.input.flex(
-                                context,
-                                parentPath: data.path.parentPath,
-                              ) !=
-                              0
-                      ? 1
-                      : 0,
+                  flex: data.uiSettings.flexOrDefault != 0 ? 1 : 0,
                   child: Flex(
                     direction: direction,
                     spacing: spacing,
                     crossAxisAlignment:
                         data.uiSettings.crossAxisAlignment ??
                         CrossAxisAlignment.stretch,
-                    children: data.input.children
-                        .map((child) => childBuilder(child, formUiSettings))
-                        .toList(),
+                    children: data.input.children.map(childBuilder).toList(),
                   ),
                 ),
               ),
@@ -86,22 +66,17 @@ class InputsNodeWidget extends StatelessWidget {
           );
   }
 
-  Widget standardChildBuilder(WoFormNode child, _) =>
+  Widget standardChildBuilder(WoFormNode child) =>
       child.toWidget(parentPath: data.path);
 
-  Widget flexibleChildBuilder(
-    WoFormNode child,
-    WoFormUiSettings formUiSettings,
-  ) => Builder(
+  Widget flexibleChildBuilder(WoFormNode child) => Builder(
     builder: (context) {
       final flex = child.flex(context, parentPath: data.path);
       return Flexible(
-        flex: formUiSettings.layout.supportFlex && flex != null
-            ? flex
-            : data.uiSettings.direction == Axis.horizontal
-            ? flex ?? 1
-            : 0,
-        child: standardChildBuilder(child, formUiSettings),
+        flex:
+            flex ??
+            (data.uiSettings.direction == Axis.horizontal ? flex ?? 1 : 0),
+        child: standardChildBuilder(child),
       );
     },
   );

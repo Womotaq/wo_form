@@ -503,10 +503,14 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
     }
   }
 
+  /// Used when [WoFormUiSettings.layout] is [LayoutMethod.flexible].
   @override
   int? flex(BuildContext context, {required String parentPath}) =>
       switch (this) {
-        final SelectInput<T> input => input.uiSettings?.flex,
+        final SelectInput<T> input =>
+          input.uiSettings?.childrenVisibility == ChildrenVisibility.whenAsked
+              ? 0
+              : input.uiSettings?.flex,
         // final SelectStringInput input => input.uiSettings?.flex,
         _ => null,
       };
@@ -601,6 +605,7 @@ abstract class SelectInput<T> extends WoFormInput<T> with _$SelectInput<T> {
         : QuizSettings.fromJson(json['quizSettings'] as Map<String, dynamic>),
   );
 
+  @override
   Json toJson() => <String, dynamic>{
     'id': id,
     'maxCount': maxCount,

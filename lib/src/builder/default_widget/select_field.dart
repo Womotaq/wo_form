@@ -69,7 +69,9 @@ class SelectField<T> extends StatelessWidget {
             helpValueBuilder: data.uiSettings.helpValueBuilder,
             hintText: data.uiSettings.hintText,
             searchScore: data.uiSettings.searchScore,
-            searchScreenLayout: LayoutMethod.fromFlex(data.uiSettings.flex),
+            searchScreenLayout: (data.uiSettings.flex ?? 0) == 0
+                ? LayoutMethod.shrinkWrap
+                : LayoutMethod.scrollable,
             initialQuery: context.read<WoFormValuesCubit>().state.queryOf(
               selectInputPath: data.path,
             ),
@@ -84,15 +86,9 @@ class SelectField<T> extends StatelessWidget {
               value: context.read<RootNode>(),
               child: MultiBlocProvider(
                 providers: [
-                  BlocProvider.value(
-                    value: context.read<WoFormValuesCubit>(),
-                  ),
-                  BlocProvider.value(
-                    value: context.read<WoFormStatusCubit>(),
-                  ),
-                  BlocProvider.value(
-                    value: context.read<WoFormLockCubit>(),
-                  ),
+                  BlocProvider.value(value: context.read<WoFormValuesCubit>()),
+                  BlocProvider.value(value: context.read<WoFormStatusCubit>()),
+                  BlocProvider.value(value: context.read<WoFormLockCubit>()),
                 ],
                 child: child,
               ),
@@ -139,9 +135,9 @@ class SelectField<T> extends StatelessWidget {
                   helpValueBuilder: data.uiSettings.helpValueBuilder,
                   hintText: data.uiSettings.hintText,
                   searchScore: data.uiSettings.searchScore,
-                  searchScreenLayout: LayoutMethod.fromFlex(
-                    data.uiSettings.flex,
-                  ),
+                  searchScreenLayout: (data.uiSettings.flex ?? 0) == 0
+                      ? LayoutMethod.shrinkWrap
+                      : LayoutMethod.scrollable,
                   initialQuery: context.read<WoFormValuesCubit>().state.queryOf(
                     selectInputPath: data.path,
                   ),
