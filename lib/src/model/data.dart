@@ -9,6 +9,8 @@ abstract class WoFormHeaderData with _$WoFormHeaderData {
   const factory WoFormHeaderData({
     String? labelText,
     String? helperText,
+    Widget? trailing,
+    VoidCallback? onTap,
   }) = _WoFormHeaderData;
 }
 

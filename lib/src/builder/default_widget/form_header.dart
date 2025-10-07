@@ -13,6 +13,8 @@ class FormHeader extends StatelessWidget {
     : data = WoFormHeaderData(
         labelText: data.labelText,
         helperText: data.helperText,
+        trailing: data.trailing,
+        onTap: data.onTap,
       ),
       labelStyle = null;
 
@@ -28,31 +30,44 @@ class FormHeader extends StatelessWidget {
 
     final theme = Theme.of(context);
 
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 16,
-        left: 16,
-        right: 16,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 32),
-          Text(
-            labelText,
-            style:
-                labelStyle ??
-                theme.textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
+    return InkWell(
+      onTap: data.onTap,
+      child: Padding(
+        padding: const EdgeInsets.only(
+          top: 16,
+          left: 16,
+          right: 16,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 32),
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    labelText,
+                    style:
+                        labelStyle ??
+                        theme.textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
                 ),
-          ),
-          Divider(color: theme.colorScheme.primary),
-          if (helperText.isNotEmpty) ...[
-            Text(helperText),
-            const SizedBox(height: 8),
+                if (data.trailing != null) ...[
+                  const SizedBox(height: 16),
+                  data.trailing!,
+                ],
+              ],
+            ),
+            Divider(color: theme.colorScheme.primary),
+            if (helperText.isNotEmpty) ...[
+              Text(helperText),
+              const SizedBox(height: 8),
+            ],
+            const SizedBox(height: 24),
           ],
-          const SizedBox(height: 24),
-        ],
+        ),
       ),
     );
   }

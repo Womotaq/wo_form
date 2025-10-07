@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$WoFormHeaderData {
 
- String? get labelText; String? get helperText;
+ String? get labelText; String? get helperText; Widget? get trailing; VoidCallback? get onTap;
 /// Create a copy of WoFormHeaderData
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $WoFormHeaderDataCopyWith<WoFormHeaderData> get copyWith => _$WoFormHeaderDataCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WoFormHeaderData&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WoFormHeaderData&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.trailing, trailing) || other.trailing == trailing)&&(identical(other.onTap, onTap) || other.onTap == onTap));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,labelText,helperText);
+int get hashCode => Object.hash(runtimeType,labelText,helperText,trailing,onTap);
 
 @override
 String toString() {
-  return 'WoFormHeaderData(labelText: $labelText, helperText: $helperText)';
+  return 'WoFormHeaderData(labelText: $labelText, helperText: $helperText, trailing: $trailing, onTap: $onTap)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $WoFormHeaderDataCopyWith<$Res>  {
   factory $WoFormHeaderDataCopyWith(WoFormHeaderData value, $Res Function(WoFormHeaderData) _then) = _$WoFormHeaderDataCopyWithImpl;
 @useResult
 $Res call({
- String? labelText, String? helperText
+ String? labelText, String? helperText, Widget? trailing, VoidCallback? onTap
 });
 
 
@@ -62,11 +62,13 @@ class _$WoFormHeaderDataCopyWithImpl<$Res>
 
 /// Create a copy of WoFormHeaderData
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? labelText = freezed,Object? helperText = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? labelText = freezed,Object? helperText = freezed,Object? trailing = freezed,Object? onTap = freezed,}) {
   return _then(_self.copyWith(
 labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
 as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,trailing: freezed == trailing ? _self.trailing : trailing // ignore: cast_nullable_to_non_nullable
+as Widget?,onTap: freezed == onTap ? _self.onTap : onTap // ignore: cast_nullable_to_non_nullable
+as VoidCallback?,
   ));
 }
 
@@ -78,11 +80,13 @@ as String?,
 
 
 class _WoFormHeaderData implements WoFormHeaderData {
-  const _WoFormHeaderData({this.labelText, this.helperText});
+  const _WoFormHeaderData({this.labelText, this.helperText, this.trailing, this.onTap});
   
 
 @override final  String? labelText;
 @override final  String? helperText;
+@override final  Widget? trailing;
+@override final  VoidCallback? onTap;
 
 /// Create a copy of WoFormHeaderData
 /// with the given fields replaced by the non-null parameter values.
@@ -94,16 +98,16 @@ _$WoFormHeaderDataCopyWith<_WoFormHeaderData> get copyWith => __$WoFormHeaderDat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WoFormHeaderData&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WoFormHeaderData&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.trailing, trailing) || other.trailing == trailing)&&(identical(other.onTap, onTap) || other.onTap == onTap));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,labelText,helperText);
+int get hashCode => Object.hash(runtimeType,labelText,helperText,trailing,onTap);
 
 @override
 String toString() {
-  return 'WoFormHeaderData(labelText: $labelText, helperText: $helperText)';
+  return 'WoFormHeaderData(labelText: $labelText, helperText: $helperText, trailing: $trailing, onTap: $onTap)';
 }
 
 
@@ -114,7 +118,7 @@ abstract mixin class _$WoFormHeaderDataCopyWith<$Res> implements $WoFormHeaderDa
   factory _$WoFormHeaderDataCopyWith(_WoFormHeaderData value, $Res Function(_WoFormHeaderData) _then) = __$WoFormHeaderDataCopyWithImpl;
 @override @useResult
 $Res call({
- String? labelText, String? helperText
+ String? labelText, String? helperText, Widget? trailing, VoidCallback? onTap
 });
 
 
@@ -131,11 +135,13 @@ class __$WoFormHeaderDataCopyWithImpl<$Res>
 
 /// Create a copy of WoFormHeaderData
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? labelText = freezed,Object? helperText = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? labelText = freezed,Object? helperText = freezed,Object? trailing = freezed,Object? onTap = freezed,}) {
   return _then(_WoFormHeaderData(
 labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
 as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,trailing: freezed == trailing ? _self.trailing : trailing // ignore: cast_nullable_to_non_nullable
+as Widget?,onTap: freezed == onTap ? _self.onTap : onTap // ignore: cast_nullable_to_non_nullable
+as VoidCallback?,
   ));
 }
 
