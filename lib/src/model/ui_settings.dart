@@ -31,9 +31,7 @@ abstract class InputUiSettings with _$InputUiSettings {
 enum BooleanFieldControlType { checkbox, switchButton }
 
 typedef BooleanFieldBuilderDef =
-    Widget Function(
-      WoFieldData<BooleanInput, bool, BooleanInputUiSettings> data,
-    );
+    Widget Function(WoFieldData<BooleanInput, bool> data);
 
 @freezed
 abstract class BooleanInputUiSettings with _$BooleanInputUiSettings {
@@ -64,9 +62,7 @@ abstract class BooleanInputUiSettings with _$BooleanInputUiSettings {
 }
 
 typedef DateTimeFieldBuilderDef =
-    Widget Function(
-      WoFieldData<DateTimeInput, DateTime, DateTimeInputUiSettings> data,
-    );
+    Widget Function(WoFieldData<DateTimeInput, DateTime> data);
 
 enum DateEditMode { date, time, dateAndTime }
 
@@ -150,9 +146,7 @@ abstract class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
 }
 
 typedef DurationFieldBuilderDef =
-    Widget Function(
-      WoFieldData<DurationInput, Duration, DurationInputUiSettings> data,
-    );
+    Widget Function(WoFieldData<DurationInput, Duration> data);
 
 typedef PickDurationDef =
     Future<Duration?> Function({
@@ -235,14 +229,7 @@ enum DynamicInputsNodeAddButtonPosition {
 typedef GenerateIdDef = String Function();
 typedef OnDynamicInputDeletionDef = void Function(VoidCallback cancel);
 typedef DynamicInputsNodeWidgetBuilderDef =
-    Widget Function(
-      WoFieldData<
-        DynamicInputsNode,
-        List<WoFormNode>,
-        DynamicInputsNodeUiSettings
-      >
-      data,
-    );
+    Widget Function(WoFieldData<DynamicInputsNode, List<WoFormNode>> data);
 
 @freezed
 abstract class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
@@ -323,9 +310,7 @@ enum ChildrenVisibility { always, whenAsked }
 //  and let custom functions be launched at submitting, error, and success.
 
 typedef InputNodeWidgetBuilderDef =
-    Widget Function(
-      WoFieldData<InputsNode, void, InputsNodeUiSettings> data,
-    );
+    Widget Function(WoFieldData<InputsNode, void> data);
 
 typedef HeaderBuilderDef = Widget Function(WoFormHeaderData data);
 
@@ -432,15 +417,16 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
           expanderBuilder: expanderBuilder ?? other.expanderBuilder,
           inputHeaderBuilder: inputHeaderBuilder ?? other.inputHeaderBuilder,
         );
+}
 
+extension InputsNodeUiSettingsX on InputsNodeUiSettings? {
   int get flexOrDefault =>
-      flex ?? (childrenVisibility == ChildrenVisibility.whenAsked ? -1 : 0);
+      this?.flex ??
+      (this?.childrenVisibility == ChildrenVisibility.whenAsked ? -1 : 0);
 }
 
 typedef MediaFieldBuilderDef =
-    Widget Function(
-      WoFieldData<MediaInput, List<Media>?, MediaInputUiSettings> data,
-    );
+    Widget Function(WoFieldData<MediaInput, List<Media>?> data);
 
 @freezed
 abstract class MediaInputUiSettings with _$MediaInputUiSettings {
@@ -450,7 +436,7 @@ abstract class MediaInputUiSettings with _$MediaInputUiSettings {
 
     /// For a circle cropping, use MediaService.circleAspectRatio
     double? cropAspectRatioOrCircle,
-    @Default(false) bool cropShowGrid,
+    bool? cropShowGrid,
     @notSerializable MediaFieldBuilderDef? widgetBuilder,
   }) = _MediaInputUiSettings;
 
@@ -463,14 +449,15 @@ abstract class MediaInputUiSettings with _$MediaInputUiSettings {
       ? this
       : MediaInputUiSettings(
           addMediaText: addMediaText ?? other.addMediaText,
+          fieldHeight: fieldHeight ?? other.fieldHeight,
+          cropAspectRatioOrCircle:
+              cropAspectRatioOrCircle ?? other.cropAspectRatioOrCircle,
+          cropShowGrid: cropShowGrid ?? other.cropShowGrid,
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,
         );
 }
 
-typedef NumFieldBuilderDef =
-    Widget Function(
-      WoFieldData<NumInput, num, NumInputUiSettings> data,
-    );
+typedef NumFieldBuilderDef = Widget Function(WoFieldData<NumInput, num> data);
 
 enum NumInputStyle { selector, slider }
 
@@ -511,9 +498,7 @@ abstract class NumInputUiSettings with _$NumInputUiSettings {
 }
 
 typedef SelectFieldBuilderDef<T> =
-    Widget Function(
-      WoFieldData<SelectInput<T>, List<T>, SelectInputUiSettings<T>> data,
-    );
+    Widget Function(WoFieldData<SelectInput<T>, List<T>> data);
 typedef SelectFieldTileBuilderDef<T> =
     Widget Function(T value, VoidCallback onTap, bool isSelected);
 
@@ -644,9 +629,7 @@ enum WoFormAutofocus {
 }
 
 typedef StringFieldBuilderDef =
-    Widget Function(
-      WoFieldData<StringInput, String, StringInputUiSettings> data,
-    );
+    Widget Function(WoFieldData<StringInput, String> data);
 typedef ErrorBuilderDef = Widget Function(WoFormInputError error);
 
 @freezed

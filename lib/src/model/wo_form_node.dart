@@ -30,7 +30,7 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
     /// If true, when the condition goes from met to not met, the values of the
     /// child and its descendant nodes are reset to their initial state.
     @Default(true) bool resetChildrenWhenHidden,
-    @Default(InputUiSettings()) InputUiSettings uiSettings,
+    InputUiSettings? uiSettings,
   }) = ConditionnalNode;
 
   const factory WoFormNode.dynamicInputs({
@@ -38,9 +38,8 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
     // @DynamicInputTemplatesConverter()
     @Default([]) List<DynamicInputTemplate> templates,
     @InputsListConverter() List<WoFormNode>? initialChildren,
-    @Default(DynamicInputsNodeUiSettings())
-    DynamicInputsNodeUiSettings uiSettings,
-    @Default(ExportSettings()) ExportSettings exportSettings,
+    DynamicInputsNodeUiSettings? uiSettings,
+    ExportSettings? exportSettings,
   }) = DynamicInputsNode;
 
   const factory WoFormNode.empty({
@@ -58,14 +57,14 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
     /// If true, when the future will be completed, the values of
     /// the children inputs will be reseted to their getInitialValues.
     @Default(true) bool willResetToInitialValues,
-    @Default(InputUiSettings()) InputUiSettings uiSettings,
+    InputUiSettings? uiSettings,
   }) = FutureNode<T>;
 
   const factory WoFormNode.inputs({
     required String id,
     @InputsListConverter() @Default([]) List<WoFormNode> children,
-    @Default(InputsNodeUiSettings()) InputsNodeUiSettings uiSettings,
-    @Default(ExportSettings()) ExportSettings exportSettings,
+    InputsNodeUiSettings? uiSettings,
+    ExportSettings? exportSettings,
   }) = InputsNode;
 
   @Assert('builder != null', 'PathBuilderNode.builder cannot be null')
@@ -81,8 +80,8 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
     @Default('root') String id,
     @Default({}) Json initialValues,
     @InputsListConverter() @Default([]) List<WoFormNode> children,
-    @Default(WoFormUiSettings()) WoFormUiSettings uiSettings,
-    @Default(ExportSettings()) ExportSettings exportSettings,
+    WoFormUiSettings? uiSettings,
+    ExportSettings? exportSettings,
 
     // LATER : issue, how to modify an in-production corrupted data ?
     // give a way to override it ?
@@ -98,7 +97,7 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
     @notSerializable Object? Function(WoFormValues values)? selector,
     @notSerializable WoFormNode Function(Object? value)? builder,
     Object? initialValue,
-    @Default(InputUiSettings()) InputUiSettings uiSettings,
+    InputUiSettings? uiSettings,
   }) = SelectorNode;
 
   @Assert('builder != null', 'ValueBuilderNode.builder cannot be null')
@@ -134,7 +133,7 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
   const factory WoFormNode.widget({
     @Default('WidgetNode') String id,
     @notSerializable Widget Function(BuildContext context)? builder,
-    @Default(InputUiSettings()) InputUiSettings uiSettings,
+    InputUiSettings? uiSettings,
   }) = WidgetNode;
 
   const WoFormNode._();
@@ -186,9 +185,11 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
             ? (this as InputsNode).children
             : (values['$parentPath/$id'] as List<WoFormNode>?) ?? [];
 
-        switch (exportSettings.type) {
+        switch (exportSettings?.type) {
           case ExportType.mergeWithParent:
-            final data = Json.from(exportSettings.metadata);
+            final data = exportSettings == null
+                ? Json()
+                : Json.from(exportSettings.metadata);
 
             for (final child in children) {
               await child.export(
@@ -204,8 +205,11 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
             } else if (into is Map) {
               into.addAll(data);
             }
+          case null:
           case ExportType.map:
-            final data = Json.from(exportSettings.metadata);
+            final data = exportSettings == null
+                ? Json()
+                : Json.from(exportSettings.metadata);
 
             for (final child in children) {
               await child.export(
@@ -222,7 +226,9 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
               into[getExportKey(values: values, parentPath: parentPath)] = data;
             }
           case ExportType.list:
-            final data = List<dynamic>.from(exportSettings.metadata.values);
+            final data = exportSettings == null
+                ? <dynamic>[]
+                : List<dynamic>.from(exportSettings.metadata.values);
 
             for (final child in children) {
               await child.export(
@@ -249,7 +255,9 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
           'The parentPath of RootNode must always be an empty string.',
         );
 
-        final data = Json.from(exportSettings.metadata);
+        final data = exportSettings == null
+            ? Json()
+            : Json.from(exportSettings.metadata);
 
         for (final child in children) {
           await child.export(
@@ -668,8 +676,8 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
         );
       case DynamicInputsNode(exportSettings: final exportSettings):
       case InputsNode(exportSettings: final exportSettings):
-        return switch (exportSettings.type) {
-          ExportType.map || ExportType.list => id,
+        return switch (exportSettings?.type) {
+          null || ExportType.map || ExportType.list => id,
           ExportType.mergeWithParent => null,
         };
 
@@ -893,17 +901,17 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
   int? flex(BuildContext context, {required String parentPath}) =>
       switch (this) {
         final ConditionnalNode node =>
-          node.uiSettings.flex == null || node.uiSettings.flex! == 0
-              ? node.uiSettings.flex
+          node.uiSettings?.flex == null || node.uiSettings!.flex! == 0
+              ? node.uiSettings?.flex
               : !context.select(
                   (WoFormValuesCubit c) => c.state.meet(node.condition),
                 )
               ? 0
-              : node.uiSettings.flex == WoFormNode.flexDeferToChild
+              : node.uiSettings!.flex == WoFormNode.flexDeferToChild
               ? node.child.flex(context, parentPath: '$parentPath/$id')
-              : node.uiSettings.flex,
+              : node.uiSettings!.flex,
         DynamicInputsNode _ || EmptyNode _ => null,
-        final FutureNode node => node.uiSettings.flex,
+        final FutureNode node => node.uiSettings?.flex,
         final PathBuilderNode node => node.builder!('$parentPath/$id').flex(
           context,
           parentPath: '$parentPath/$id',
@@ -936,10 +944,10 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
               .flex(context, parentPath: '$parentPath/$id'),
         ValueListenerNode _ => null,
         InputsNode(uiSettings: final uiSettings) =>
-          uiSettings.childrenVisibility == ChildrenVisibility.whenAsked
+          uiSettings?.childrenVisibility == ChildrenVisibility.whenAsked
               ? 0
-              : uiSettings.flex,
-        WidgetNode(uiSettings: final uiSettings) => uiSettings.flex,
+              : uiSettings?.flex,
+        WidgetNode(uiSettings: final uiSettings) => uiSettings?.flex,
 
         // WoFormInput overrides this method
         WoFormInput() => throw UnimplementedError(),
@@ -961,7 +969,9 @@ extension RootNodeX on RootNode {
     /// It is not required to be the form's context.
     required BuildContext context,
   }) async {
-    final map = Json.from(exportSettings.metadata);
+    final map = exportSettings == null
+        ? Json()
+        : Json.from(exportSettings!.metadata);
     await export(
       into: map,
       values: values,

@@ -6,7 +6,7 @@ import 'package:wo_form/wo_form.dart';
 class InputsNodeExpander extends StatefulWidget {
   const InputsNodeExpander(this.data, {super.key});
 
-  final WoFieldData<InputsNode, void, InputsNodeUiSettings> data;
+  final WoFieldData<InputsNode, void> data;
 
   @override
   State<InputsNodeExpander> createState() => _InputsNodeExpanderState();
@@ -15,7 +15,7 @@ class InputsNodeExpander extends StatefulWidget {
 class _InputsNodeExpanderState extends State<InputsNodeExpander> {
   @override
   void initState() {
-    if (widget.data.uiSettings.showChildrenInitially ?? false) {
+    if (widget.data.input.uiSettings?.showChildrenInitially ?? false) {
       final valuesCubit = context.read<WoFormValuesCubit>();
       if (!valuesCubit.state.inputsNodeShownChildrenInitially(
         widget.data.path,
@@ -36,26 +36,28 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
   Widget build(BuildContext context) {
     final headerData = WoFormInputHeaderData(
       labelText:
-          widget.data.uiSettings.labelTextWhenChildrenHidden ??
-          widget.data.uiSettings.labelText,
-      labelMaxLines: widget.data.uiSettings.labelMaxLines,
-      helperText: widget.data.uiSettings.helperText,
+          widget.data.input.uiSettings?.labelTextWhenChildrenHidden ??
+          widget.data.input.uiSettings?.labelText,
+      labelMaxLines: widget.data.input.uiSettings?.labelMaxLines,
+      helperText: widget.data.input.uiSettings?.helperText,
       errorText: widget.data.errorText,
       trailing: const Icon(Icons.chevron_right),
       onTap: () => openChildren(context),
       shrinkWrap: false,
     );
 
-    return (widget.data.uiSettings.inputHeaderBuilder ??
+    return (widget.data.input.uiSettings?.inputHeaderBuilder ??
             WoFormTheme.of(context)?.inputHeaderBuilder ??
             InputHeader.new)
         .call(headerData);
   }
 
   Future<void> openChildren(BuildContext context) =>
-      (widget.data.uiSettings.openChildren ?? Push.modalBottomSheet)(
+      (widget.data.input.uiSettings?.openChildren ?? Push.modalBottomSheet)(
         context: context,
-        layout: LayoutMethod.fromFlex(widget.data.uiSettings.flexOrDefault),
+        layout: LayoutMethod.fromFlex(
+          widget.data.input.uiSettings.flexOrDefault,
+        ),
         child: RepositoryProvider.value(
           value: context.read<RootNode>(),
           child: MultiBlocProvider(
@@ -73,7 +75,7 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
 class _InputsNodePage extends StatelessWidget {
   const _InputsNodePage(this.data);
 
-  final WoFieldData<InputsNode, void, InputsNodeUiSettings> data;
+  final WoFieldData<InputsNode, void> data;
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +97,7 @@ class _InputsNodePage extends StatelessWidget {
         }
       },
       child:
-          (data.uiSettings.widgetBuilder ??
+          (data.input.uiSettings?.widgetBuilder ??
                   WoFormTheme.of(context)?.inputsNodeWidgetBuilder ??
                   InputsNodeWidget.new)
               .call(
@@ -103,7 +105,6 @@ class _InputsNodePage extends StatelessWidget {
                   path: data.path,
                   input: data.input,
                   value: null,
-                  uiSettings: data.uiSettings,
                   onValueChanged:
                       (
                         _, {

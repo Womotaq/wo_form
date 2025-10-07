@@ -4,32 +4,33 @@ import 'package:wo_form/wo_form.dart';
 class InputsNodeWidget extends StatelessWidget {
   const InputsNodeWidget(this.data, {super.key});
 
-  final WoFieldData<InputsNode, void, InputsNodeUiSettings> data;
+  final WoFieldData<InputsNode, void> data;
 
   @override
   Widget build(BuildContext context) {
     final woFormTheme = WoFormTheme.of(context);
+    final uiSettings = data.input.uiSettings;
 
     final header =
-        (data.uiSettings.headerBuilder ??
+        (uiSettings?.headerBuilder ??
                 woFormTheme?.headerBuilder ??
                 FormHeader.new)
             .call(
               WoFormHeaderData(
-                labelText: data.uiSettings.labelText,
-                helperText: data.uiSettings.helperText,
+                labelText: uiSettings?.labelText,
+                helperText: uiSettings?.helperText,
               ),
             );
 
-    final childBuilder = data.uiSettings.direction == Axis.vertical
+    final direction = uiSettings?.direction ?? Axis.vertical;
+    final spacing = uiSettings?.spacing ?? woFormTheme?.spacing ?? 0;
+    final reverse = uiSettings?.reverse ?? false;
+
+    final childBuilder = direction == Axis.vertical
         ? standardChildBuilder
         : flexibleChildBuilder;
 
-    final direction = data.uiSettings.direction ?? Axis.vertical;
-    final spacing = data.uiSettings.spacing ?? woFormTheme?.spacing ?? 0;
-    final reverse = data.uiSettings.reverse ?? false;
-
-    return LayoutMethod.fromFlex(data.uiSettings.flexOrDefault).isScrollable
+    return LayoutMethod.fromFlex(uiSettings.flexOrDefault).isScrollable
         ? ListView.builder(
             controller: ScrollControllerProvider.of(context),
             reverse: reverse,
@@ -51,12 +52,12 @@ class InputsNodeWidget extends StatelessWidget {
               header,
               Builder(
                 builder: (context) => Flexible(
-                  flex: data.uiSettings.flexOrDefault != 0 ? 1 : 0,
+                  flex: uiSettings.flexOrDefault != 0 ? 1 : 0,
                   child: Flex(
                     direction: direction,
                     spacing: spacing,
                     crossAxisAlignment:
-                        data.uiSettings.crossAxisAlignment ??
+                        uiSettings?.crossAxisAlignment ??
                         CrossAxisAlignment.stretch,
                     children: data.input.children.map(childBuilder).toList(),
                   ),
@@ -75,7 +76,9 @@ class InputsNodeWidget extends StatelessWidget {
       return Flexible(
         flex:
             flex ??
-            (data.uiSettings.direction == Axis.horizontal ? flex ?? 1 : 0),
+            (data.input.uiSettings?.direction == Axis.horizontal
+                ? flex ?? 1
+                : 0),
         child: standardChildBuilder(child),
       );
     },

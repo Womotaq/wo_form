@@ -26,10 +26,9 @@ abstract class WoFormInputHeaderData with _$WoFormInputHeaderData {
 }
 
 @freezed
-abstract class WoFieldData<I, T, U> with _$WoFieldData<I, T, U> {
+abstract class WoFieldData<I, T> with _$WoFieldData<I, T> {
   /// I : input
   /// T : value
-  /// U : uiSettings
   @Assert(
     'errorText == null || errorWidget == null',
     'Only one of errorWidget and errorText can be specified.',
@@ -38,7 +37,6 @@ abstract class WoFieldData<I, T, U> with _$WoFieldData<I, T, U> {
     required String path,
     required I input,
     required T? value,
-    required U uiSettings,
 
     /// Null means locked field
     required void Function(T? value, {UpdateStatus updateStatus})?

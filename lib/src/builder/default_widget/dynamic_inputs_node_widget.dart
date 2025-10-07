@@ -6,26 +6,22 @@ import 'package:wo_form/wo_form.dart';
 class DynamicInputsNodeWidget extends StatelessWidget {
   const DynamicInputsNodeWidget(this.data, {super.key});
 
-  final WoFieldData<
-    DynamicInputsNode,
-    List<WoFormNode>,
-    DynamicInputsNodeUiSettings
-  >
-  data;
+  final WoFieldData<DynamicInputsNode, List<WoFormNode>> data;
 
   @override
   Widget build(BuildContext context) {
     final addButton =
-        (data.uiSettings.addButtonBuilder ?? DynamicInputsNodeAddButton.new)(
+        (data.input.uiSettings?.addButtonBuilder ??
+        DynamicInputsNodeAddButton.new)(
           data,
         );
     final addButtonPosition =
-        data.uiSettings.addButtonPosition ??
+        data.input.uiSettings?.addButtonPosition ??
         DynamicInputsNodeAddButtonPosition.header;
 
     final headerData = WoFormInputHeaderData(
-      labelText: data.uiSettings.labelText,
-      helperText: data.uiSettings.helperText,
+      labelText: data.input.uiSettings?.labelText,
+      helperText: data.input.uiSettings?.helperText,
       trailing: addButtonPosition == DynamicInputsNodeAddButtonPosition.header
           ? addButton
           : null,
@@ -41,7 +37,7 @@ class DynamicInputsNodeWidget extends StatelessWidget {
                 onDelete: data.onValueChanged == null
                     ? null
                     : () {
-                        (data.uiSettings.onChildDeletion ??
+                        (data.input.uiSettings?.onChildDeletion ??
                                 WoFormTheme.of(context)?.onDynamicInputDeletion)
                             ?.call(
                               () => data.onValueChanged?.call(data.value ?? []),
@@ -77,10 +73,10 @@ class DynamicInputsNodeWidget extends StatelessWidget {
                     data.onValueChanged?.call(newValues);
                   } catch (_) {}
                 },
-          reorderable: data.uiSettings.reorderable ?? true,
+          reorderable: data.input.uiSettings?.reorderable ?? true,
           oddEvenRowColors:
-              data.uiSettings.oddEvenRowColors ??
-              data.uiSettings.reorderable ??
+              data.input.uiSettings?.oddEvenRowColors ??
+              data.input.uiSettings?.reorderable ??
               true,
           children: children,
         ),
@@ -97,18 +93,13 @@ class DynamicInputsNodeWidget extends StatelessWidget {
 class DynamicInputsNodeAddButton extends StatelessWidget {
   const DynamicInputsNodeAddButton(this.data, {super.key});
 
-  final WoFieldData<
-    DynamicInputsNode,
-    List<WoFormNode>,
-    DynamicInputsNodeUiSettings
-  >
-  data;
+  final WoFieldData<DynamicInputsNode, List<WoFormNode>> data;
 
   @override
   Widget build(BuildContext context) {
-    final label = (data.uiSettings.addButtonText ?? '') == ''
+    final label = (data.input.uiSettings?.addButtonText ?? '') == ''
         ? null
-        : Text(data.uiSettings.addButtonText ?? '');
+        : Text(data.input.uiSettings?.addButtonText ?? '');
     final onTap = data.onValueChanged == null
         ? null
         : () {
@@ -118,7 +109,7 @@ class DynamicInputsNodeAddButton extends StatelessWidget {
             );
           };
 
-    switch (data.uiSettings.addButtonPosition) {
+    switch (data.input.uiSettings?.addButtonPosition) {
       case null:
       case DynamicInputsNodeAddButtonPosition.header:
         Widget headerBuiler(VoidCallback? onPressed) => label == null
@@ -157,7 +148,7 @@ class DynamicInputsNodeAddButton extends StatelessWidget {
                     : Text(template.uiSettings.helperText ?? ''),
                 builder: headerBuiler,
                 searchScreenLayout: LayoutMethod.shrinkWrap,
-                openSearchScreen: data.uiSettings.openTemplates,
+                openSearchScreen: data.input.uiSettings?.openTemplates,
               );
       case DynamicInputsNodeAddButtonPosition.footer:
         Widget footerBuilder(VoidCallback? onPressed) => ListTile(
@@ -190,7 +181,7 @@ class DynamicInputsNodeAddButton extends StatelessWidget {
                     : Text(template.uiSettings.helperText ?? ''),
                 builder: footerBuilder,
                 searchScreenLayout: LayoutMethod.shrinkWrap,
-                openSearchScreen: data.uiSettings.openTemplates,
+                openSearchScreen: data.input.uiSettings?.openTemplates,
               );
     }
   }
@@ -198,7 +189,7 @@ class DynamicInputsNodeAddButton extends StatelessWidget {
   void addTemplate(BuildContext context, WoFormNode inputFromTemplate) {
     final input = inputFromTemplate.withId(
       id:
-          (data.uiSettings.generateId ??
+          (data.input.uiSettings?.generateId ??
                   WoFormTheme.of(context)?.generateId ??
                   generateUid)
               .call(),

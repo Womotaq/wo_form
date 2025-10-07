@@ -155,7 +155,7 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
     /// If set, the field will be a place autocomplete.
     PlaceAutocompleteSettings? placeAutocompleteSettings,
     @notSerializable GetCustomErrorDef<String>? getCustomError,
-    @Default(StringInputUiSettings()) StringInputUiSettings uiSettings,
+    StringInputUiSettings? uiSettings,
   }) = StringInput;
 
   const WoFormInput._() : super._();
@@ -450,7 +450,7 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
             !RegExp(regexPattern).hasMatch(value)) {
           return WoFormInputError.custom(
             path: '$parentPath/$id',
-            message: uiSettings.invalidRegexMessage ?? '',
+            message: uiSettings?.invalidRegexMessage ?? '',
           );
         } else {
           return null;

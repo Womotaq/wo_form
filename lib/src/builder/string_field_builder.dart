@@ -14,25 +14,7 @@ class StringFieldBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final input = context.read<WoFormValuesCubit>().getNode(path: path);
-    if (input is! StringInput) {
-      throw ArgumentError(
-        'Expected <StringInput> at path: "$path", '
-        'found: <${input.runtimeType}>',
-      );
-    }
-
-    final inputSettings = input.uiSettings;
-    var mergedSettings = uiSettings?.merge(inputSettings) ?? inputSettings;
-    final woFormTheme = WoFormTheme.of(context);
-
-    final showAsterisk =
-        input.isRequired && (woFormTheme?.showAsteriskIfRequired ?? true);
-    if (showAsterisk && mergedSettings.labelText != null) {
-      mergedSettings = mergedSettings.copyWith(
-        labelText: '${mergedSettings.labelText} *',
-      );
-    }
+    final input = getNode(context);
 
     return WoFormNodeFocusManager(
       path: path,
@@ -49,8 +31,8 @@ class StringFieldBuilder extends StatelessWidget {
                   if (status is InProgressStatus) {
                     final error = status.getError(path: path);
                     if (error != null) {
-                      if (mergedSettings.errorBuilder != null) {
-                        errorWidget = mergedSettings.errorBuilder!(error);
+                      if (input.uiSettings?.errorBuilder != null) {
+                        errorWidget = input.uiSettings!.errorBuilder!(error);
                       } else {
                         errorText = context.read<WoFormL10n?>()?.translateError(
                           error,
@@ -59,31 +41,28 @@ class StringFieldBuilder extends StatelessWidget {
                     }
                   }
 
-                  final fieldData =
-                      WoFieldData<StringInput, String, StringInputUiSettings>(
-                        path: path,
-                        input: input,
-                        value: value,
-                        errorText: errorText,
-                        errorWidget: errorWidget,
-                        uiSettings: mergedSettings,
-                        onValueChanged: inputIsLocked
-                            ? null
-                            : (
-                                String? value, {
-                                UpdateStatus updateStatus = UpdateStatus
-                                    .yesWithoutErrorUpdateIfPathNotVisited,
-                              }) => context
-                                  .read<WoFormValuesCubit>()
-                                  .onValueChanged(
-                                    path: path,
-                                    value: value,
-                                    updateStatus: updateStatus,
-                                  ),
-                      );
+                  final fieldData = WoFieldData(
+                    path: path,
+                    input: input,
+                    value: value,
+                    errorText: errorText,
+                    errorWidget: errorWidget,
+                    onValueChanged: inputIsLocked
+                        ? null
+                        : (
+                            String? value, {
+                            UpdateStatus updateStatus = UpdateStatus
+                                .yesWithoutErrorUpdateIfPathNotVisited,
+                          }) =>
+                              context.read<WoFormValuesCubit>().onValueChanged(
+                                path: path,
+                                value: value,
+                                updateStatus: updateStatus,
+                              ),
+                  );
 
-                  return (mergedSettings.widgetBuilder ??
-                          woFormTheme?.stringFieldBuilder ??
+                  return (input.uiSettings?.widgetBuilder ??
+                          WoFormTheme.of(context)?.stringFieldBuilder ??
                           StringField.new)
                       .call(fieldData);
                 },
@@ -93,5 +72,31 @@ class StringFieldBuilder extends StatelessWidget {
         },
       ),
     );
+  }
+
+  StringInput getNode(BuildContext context) {
+    final input = context.read<WoFormValuesCubit>().getNode(path: path);
+    if (input is! StringInput) {
+      throw ArgumentError(
+        'Expected <StringInput> at path: "$path", '
+        'found: <${input.runtimeType}>',
+      );
+    }
+
+    var mergedSettings =
+        uiSettings?.merge(input.uiSettings) ??
+        input.uiSettings ??
+        const StringInputUiSettings();
+
+    final showAsterisk =
+        input.isRequired &&
+        (WoFormTheme.of(context)?.showAsteriskIfRequired ?? true);
+    if (showAsterisk && mergedSettings.labelText != null) {
+      mergedSettings = mergedSettings.copyWith(
+        labelText: '${mergedSettings.labelText} *',
+      );
+    }
+
+    return input.copyWith(uiSettings: mergedSettings);
   }
 }

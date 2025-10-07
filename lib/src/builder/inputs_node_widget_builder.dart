@@ -14,27 +14,17 @@ class InputsNodeWidgetBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final node = context.read<WoFormValuesCubit>().getNode(path: path);
-    if (node is! InputsNode) {
-      throw ArgumentError(
-        'Expected <InputsNode> at path: "$path", '
-        'found: <${node.runtimeType}>',
-      );
-    }
-
-    final mergedSettings =
-        uiSettings?.merge(node.uiSettings) ?? node.uiSettings;
+    final node = getNode(context);
 
     return Builder(
       builder: (context) {
-        switch (mergedSettings.childrenVisibility) {
+        switch (node.uiSettings?.childrenVisibility) {
           case null:
           case ChildrenVisibility.always:
             final fieldData = WoFieldData(
               path: path,
               input: node,
               value: null,
-              uiSettings: mergedSettings,
               onValueChanged:
                   (
                     _, {
@@ -42,7 +32,7 @@ class InputsNodeWidgetBuilder extends StatelessWidget {
                   }) {},
             );
 
-            return (mergedSettings.widgetBuilder ??
+            return (node.uiSettings?.widgetBuilder ??
                     WoFormTheme.of(context)?.inputsNodeWidgetBuilder ??
                     InputsNodeWidget.new)
                 .call(fieldData);
@@ -69,7 +59,6 @@ class InputsNodeWidgetBuilder extends StatelessWidget {
                   input: node,
                   value: null,
                   errorText: errorText,
-                  uiSettings: mergedSettings,
                   onValueChanged:
                       (
                         _, {
@@ -77,7 +66,7 @@ class InputsNodeWidgetBuilder extends StatelessWidget {
                       }) {},
                 );
 
-                return (mergedSettings.expanderBuilder ??
+                return (node.uiSettings?.expanderBuilder ??
                         WoFormTheme.of(context)?.inputsNodeExpanderBuilder ??
                         InputsNodeExpander.new)
                     .call(expanderData);
@@ -86,5 +75,22 @@ class InputsNodeWidgetBuilder extends StatelessWidget {
         }
       },
     );
+  }
+
+  InputsNode getNode(BuildContext context) {
+    final input = context.read<WoFormValuesCubit>().getNode(path: path);
+    if (input is! InputsNode) {
+      throw ArgumentError(
+        'Expected <InputsNode> at path: "$path", '
+        'found: <${input.runtimeType}>',
+      );
+    }
+
+    final mergedSettings =
+        uiSettings?.merge(input.uiSettings) ??
+        input.uiSettings ??
+        const InputsNodeUiSettings();
+
+    return input.copyWith(uiSettings: mergedSettings);
   }
 }

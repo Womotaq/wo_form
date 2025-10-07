@@ -6,14 +6,14 @@ import 'package:wo_form/wo_form.dart';
 class DateTimeField extends StatelessWidget {
   const DateTimeField(this.data, {super.key});
 
-  final WoFieldData<DateTimeInput, DateTime?, DateTimeInputUiSettings> data;
+  final WoFieldData<DateTimeInput, DateTime?> data;
 
   @override
   Widget build(BuildContext context) {
     return FlexField(
-      headerFlex: data.uiSettings.headerFlex,
-      labelText: data.uiSettings.labelText,
-      helperText: data.uiSettings.helperText,
+      headerFlex: data.input.uiSettings?.headerFlex,
+      labelText: data.input.uiSettings?.labelText,
+      helperText: data.input.uiSettings?.helperText,
       errorText: data.errorText,
       disableMode: data.onValueChanged == null
           ? FlexFieldDisableMode.all
@@ -23,7 +23,7 @@ class DateTimeField extends StatelessWidget {
         minDateTime: data.input.minDate?.resolve(),
         maxDateTime: data.input.maxDate?.resolve(),
         onChanged: data.onValueChanged,
-        settings: data.uiSettings,
+        settings: data.input.uiSettings ?? const DateTimeInputUiSettings(),
         showCloseButton: !data.input.isRequired,
       ),
     );

@@ -7,7 +7,7 @@ class WoFormPageBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     final root = context.read<RootNode>();
 
-    final multistepSettings = root.uiSettings.multistepSettings;
+    final multistepSettings = root.uiSettings?.multistepSettings;
     final body = multistepSettings == null
         ? const _WoFormStandardBody()
         : _WoFormMultistepBody(multistepSettings: multistepSettings);
@@ -15,7 +15,7 @@ class WoFormPageBuilder extends StatelessWidget {
     return _ControllersManager(
       child: Builder(
         builder: (context) =>
-            (root.uiSettings.scaffoldBuilder ??
+            (root.uiSettings?.scaffoldBuilder ??
                     WoFormTheme.of(context)?.standardScaffoldBuilder ??
                     WoFormScaffold.new)
                 .call(body),
@@ -32,18 +32,19 @@ class _WoFormStandardBody extends StatelessWidget {
     final root = context.read<RootNode>();
     final woFormTheme = WoFormTheme.of(context);
     final scrollController = ScrollControllerProvider.of(context);
+    final uiSettings = root.uiSettings ?? const WoFormUiSettings();
 
     final column = Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        if (root.uiSettings.titlePosition == WoFormTitlePosition.header)
+        if (uiSettings.titlePosition == WoFormTitlePosition.header)
           Builder(
             builder: (context) {
               final headerData = WoFormHeaderData(
-                labelText: root.uiSettings.titleText,
+                labelText: uiSettings.titleText,
               );
 
-              return (root.uiSettings.headerBuilder ??
+              return (uiSettings.headerBuilder ??
                       woFormTheme?.headerBuilder ??
                       FormHeader.new)
                   .call(headerData);
@@ -51,7 +52,7 @@ class _WoFormStandardBody extends StatelessWidget {
           ),
         Flexible(
           flex:
-              !root.uiSettings.layout.supportFlex ||
+              !uiSettings.layout.supportFlex ||
                   root.children.every(
                     (child) => (child.flex(context, parentPath: '') ?? 0) == 0,
                   )
@@ -63,7 +64,7 @@ class _WoFormStandardBody extends StatelessWidget {
             children: root.children
                 .map(
                   (child) => Flexible(
-                    flex: root.uiSettings.layout.supportFlex
+                    flex: uiSettings.layout.supportFlex
                         ? child.flex(context, parentPath: '') ?? 0
                         : 0,
                     child: child.toWidget(parentPath: ''),
@@ -72,7 +73,7 @@ class _WoFormStandardBody extends StatelessWidget {
                 .toList(),
           ),
         ),
-        if (root.uiSettings.submitButtonPosition == SubmitButtonPosition.body)
+        if (uiSettings.submitButtonPosition == SubmitButtonPosition.body)
           const SubmitButtonBuilder(),
       ],
     );
@@ -83,7 +84,7 @@ class _WoFormStandardBody extends StatelessWidget {
         constraints: BoxConstraints(
           maxWidth: woFormTheme?.maxWidth ?? WoFormThemeData.DEFAULT_MAX_WIDTH,
         ),
-        child: root.uiSettings.layout.isScrollable
+        child: uiSettings.layout.isScrollable
             ? SingleChildScrollView(
                 controller: scrollController,
                 child: column,
@@ -107,6 +108,7 @@ class _WoFormMultistepBody extends StatelessWidget {
     final woFormTheme = WoFormTheme.of(context);
     final stepController = MultistepController.of(context);
     final scrollController = ScrollControllerProvider.of(context);
+    final uiSettings = root.uiSettings ?? const WoFormUiSettings();
 
     final pageView = Builder(
       builder: (context) {
@@ -153,18 +155,18 @@ class _WoFormMultistepBody extends StatelessWidget {
                 children: [
                   Expanded(
                     flex:
-                        root.uiSettings.layout.supportFlex &&
+                        uiSettings.layout.supportFlex &&
                             (step.flex(context, parentPath: '') ?? 0) == 0
                         ? 0
                         : 1,
-                    child: root.uiSettings.layout.isScrollable
+                    child: uiSettings.layout.isScrollable
                         ? SingleChildScrollView(
                             controller: scrollController,
                             child: stepWidget,
                           )
                         : stepWidget,
                   ),
-                  if (root.uiSettings.submitButtonPosition ==
+                  if (uiSettings.submitButtonPosition ==
                       SubmitButtonPosition.body)
                     SubmitButtonBuilder(path: '/${step.id}'),
                 ],
@@ -177,14 +179,14 @@ class _WoFormMultistepBody extends StatelessWidget {
 
     return Column(
       children: [
-        if (root.uiSettings.titlePosition == WoFormTitlePosition.header)
+        if (uiSettings.titlePosition == WoFormTitlePosition.header)
           Builder(
             builder: (context) {
               final headerData = WoFormHeaderData(
-                labelText: root.uiSettings.titleText,
+                labelText: uiSettings.titleText,
               );
 
-              return (root.uiSettings.headerBuilder ??
+              return (uiSettings.headerBuilder ??
                       woFormTheme?.headerBuilder ??
                       FormHeader.new)
                   .call(headerData);
@@ -292,7 +294,7 @@ class _ControllersManagerState extends State<_ControllersManager> {
   void initState() {
     super.initState();
 
-    if (context.read<RootNode>().uiSettings.multistepSettings != null) {
+    if (context.read<RootNode>().uiSettings?.multistepSettings != null) {
       stepController = MultistepController._(context.read<WoFormValuesCubit>());
     } else {
       stepController = null;

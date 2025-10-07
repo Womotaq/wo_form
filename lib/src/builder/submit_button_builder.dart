@@ -12,8 +12,9 @@ class SubmitButtonBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final root = context.read<RootNode>();
+    final formUiSettings = root.uiSettings ?? const WoFormUiSettings();
 
-    final disabled = switch (root.uiSettings.disableSubmitMode) {
+    final disabled = switch (formUiSettings.disableSubmitMode) {
       DisableSubmitButton.whenInitialOrSubmitSuccess => context.select(
         (WoFormStatusCubit c) =>
             c.state is InitialStatus || c.state is SubmitSuccessStatus,
@@ -23,8 +24,6 @@ class SubmitButtonBuilder extends StatelessWidget {
       ),
       DisableSubmitButton.never => false,
     };
-
-    final formUiSettings = root.uiSettings;
 
     // If multisteping, use nextText :
     //    If submitPath != ''
@@ -62,7 +61,7 @@ class SubmitButtonBuilder extends StatelessWidget {
           );
 
           return (builder ??
-                  root.uiSettings.submitButtonBuilder ??
+                  formUiSettings.submitButtonBuilder ??
                   WoFormTheme.of(context)?.submitButtonBuilder ??
                   SubmitButton.new)
               .call(submitButtonData);

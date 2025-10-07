@@ -288,7 +288,7 @@ _MediaInputUiSettings _$MediaInputUiSettingsFromJson(
   fieldHeight: (json['fieldHeight'] as num?)?.toInt(),
   cropAspectRatioOrCircle: (json['cropAspectRatioOrCircle'] as num?)
       ?.toDouble(),
-  cropShowGrid: json['cropShowGrid'] as bool? ?? false,
+  cropShowGrid: json['cropShowGrid'] as bool?,
 );
 
 Map<String, dynamic> _$MediaInputUiSettingsToJson(

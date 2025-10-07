@@ -12,7 +12,8 @@ class WoFormScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final woFormTheme = WoFormTheme.of(context);
-    final uiSettings = context.read<RootNode>().uiSettings;
+    final uiSettings =
+        context.read<RootNode>().uiSettings ?? const WoFormUiSettings();
 
     final quitButton =
         (uiSettings.quitButtonBuilder ??

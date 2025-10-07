@@ -14,28 +14,7 @@ class DateTimeFieldBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final input = context.read<WoFormValuesCubit>().getNode(path: path);
-    if (input is! DateTimeInput) {
-      throw ArgumentError(
-        'Expected <DateTimeInput> at path: "$path", '
-        'found: <${input.runtimeType}>',
-      );
-    }
-
-    final inputSettings = input.uiSettings;
-    var mergedSettings =
-        uiSettings?.merge(inputSettings) ??
-        inputSettings ??
-        const DateTimeInputUiSettings();
-    final woFormTheme = WoFormTheme.of(context);
-
-    final showAsterisk =
-        input.isRequired && (woFormTheme?.showAsteriskIfRequired ?? true);
-    if (showAsterisk && mergedSettings.labelText != null) {
-      mergedSettings = mergedSettings.copyWith(
-        labelText: '${mergedSettings.labelText} *',
-      );
-    }
+    final input = getNode(context);
 
     return WoFormNodeFocusManager(
       path: path,
@@ -61,33 +40,26 @@ class DateTimeFieldBuilder extends StatelessWidget {
                     errorText = null;
                   }
 
-                  final fieldData =
-                      WoFieldData<
-                        DateTimeInput,
-                        DateTime,
-                        DateTimeInputUiSettings
-                      >(
-                        path: path,
-                        input: input,
-                        value: value,
-                        errorText: errorText,
-                        uiSettings: mergedSettings,
-                        onValueChanged: inputIsLocked
-                            ? null
-                            : (
-                                DateTime? value, {
-                                UpdateStatus updateStatus = UpdateStatus.yes,
-                              }) => context
-                                  .read<WoFormValuesCubit>()
-                                  .onValueChanged(
-                                    path: path,
-                                    value: value,
-                                    updateStatus: updateStatus,
-                                  ),
-                      );
+                  final fieldData = WoFieldData(
+                    path: path,
+                    input: input,
+                    value: value,
+                    errorText: errorText,
+                    onValueChanged: inputIsLocked
+                        ? null
+                        : (
+                            DateTime? value, {
+                            UpdateStatus updateStatus = UpdateStatus.yes,
+                          }) =>
+                              context.read<WoFormValuesCubit>().onValueChanged(
+                                path: path,
+                                value: value,
+                                updateStatus: updateStatus,
+                              ),
+                  );
 
-                  return (mergedSettings.widgetBuilder ??
-                          woFormTheme?.dateTimeFieldBuilder ??
+                  return (input.uiSettings?.widgetBuilder ??
+                          WoFormTheme.of(context)?.dateTimeFieldBuilder ??
                           DateTimeField.new)
                       .call(fieldData);
                 },
@@ -97,5 +69,31 @@ class DateTimeFieldBuilder extends StatelessWidget {
         },
       ),
     );
+  }
+
+  DateTimeInput getNode(BuildContext context) {
+    final input = context.read<WoFormValuesCubit>().getNode(path: path);
+    if (input is! DateTimeInput) {
+      throw ArgumentError(
+        'Expected <DateTimeInput> at path: "$path", '
+        'found: <${input.runtimeType}>',
+      );
+    }
+
+    var mergedSettings =
+        uiSettings?.merge(input.uiSettings) ??
+        input.uiSettings ??
+        const DateTimeInputUiSettings();
+
+    final showAsterisk =
+        input.isRequired &&
+        (WoFormTheme.of(context)?.showAsteriskIfRequired ?? true);
+    if (showAsterisk && mergedSettings.labelText != null) {
+      mergedSettings = mergedSettings.copyWith(
+        labelText: '${mergedSettings.labelText} *',
+      );
+    }
+
+    return input.copyWith(uiSettings: mergedSettings);
   }
 }

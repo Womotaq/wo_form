@@ -96,7 +96,9 @@ class WoForm extends StatelessWidget {
                       canSubmit ?? (_) async => true,
                       onStatusUpdate: onStatusUpdate,
                       onSubmitting: onSubmitting,
-                      showErrors: root.uiSettings.showErrors,
+                      showErrors:
+                          root.uiSettings?.showErrors ??
+                          ShowErrors.progressively,
                       initialValues: root.initialValues,
                     )
                   : _HydratedWoFormValuesCubit(
@@ -107,7 +109,9 @@ class WoForm extends StatelessWidget {
                       canSubmit ?? (_) async => true,
                       onStatusUpdate: onStatusUpdate,
                       onSubmitting: onSubmitting,
-                      showErrors: root.uiSettings.showErrors,
+                      showErrors:
+                          root.uiSettings?.showErrors ??
+                          ShowErrors.progressively,
                       initialValues: root.initialValues,
                     ),
             ),
@@ -133,9 +137,9 @@ class WoForm extends StatelessWidget {
       ),
     );
 
-    if (root.uiSettings.theme != null) {
+    if (root.uiSettings?.theme != null) {
       return WoFormTheme(
-        data: root.uiSettings.theme!.merge(WoFormTheme.of(context)),
+        data: root.uiSettings!.theme!.merge(WoFormTheme.of(context)),
         child: form,
       );
     } else {

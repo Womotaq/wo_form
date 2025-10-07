@@ -12,36 +12,10 @@ class SelectFieldBuilder<T> extends StatelessWidget {
   final String path;
   final SelectInputUiSettings<T>? uiSettings;
 
-  SelectInput<T> getChild(WoFormValuesCubit valuesCubit) {
-    final input = valuesCubit.getNode(path: path);
-    if (input is! SelectInput<T>) {
-      throw ArgumentError(
-        'Expected <SelectInput<$T>> at path: "$path", '
-        'found: <${input.runtimeType}>',
-      );
-    }
-
-    return input;
-  }
-
   @override
   Widget build(BuildContext context) {
     final valuesCubit = context.read<WoFormValuesCubit>();
-
-    final input = getChild(valuesCubit);
-    var mergedSettings =
-        uiSettings?.merge(input.uiSettings) ??
-        input.uiSettings ??
-        const SelectInputUiSettings();
-    final woFormTheme = WoFormTheme.of(context);
-
-    final showAsterisk =
-        input.minCount > 0 && (woFormTheme?.showAsteriskIfRequired ?? true);
-    if (showAsterisk && mergedSettings.labelText != null) {
-      mergedSettings = mergedSettings.copyWith(
-        labelText: '${mergedSettings.labelText} *',
-      );
-    }
+    final input = getNode(context);
 
     return WoFormNodeFocusManager(
       path: path,
@@ -80,52 +54,46 @@ class SelectFieldBuilder<T> extends StatelessWidget {
                     errorText = null;
                   }
 
-                  final fieldData =
-                      WoFieldData<
-                        SelectInput<T>,
-                        List<T>,
-                        SelectInputUiSettings<T>
-                      >(
-                        path: path,
-                        input: input,
-                        value: selectedValues,
-                        errorText: errorText,
-                        uiSettings: mergedSettings,
-                        onValueChanged: inputIsLocked
-                            ? null
-                            : (
-                                List<T>? values, {
-                                UpdateStatus updateStatus = UpdateStatus.yes,
-                              }) async {
-                                if (input.idsOfAvailibleValues != null) {
-                                  valuesCubit.onValueChanged(
-                                    path: path,
-                                    value: values
-                                        ?.map(
-                                          (value) =>
-                                              input.getIdOfValue(value: value),
-                                        )
-                                        .nonNulls
-                                        .toList(),
-                                    updateStatus: updateStatus,
-                                  );
-                                } else {
-                                  valuesCubit.onValueChanged(
-                                    path: path,
-                                    value: values,
-                                  );
-                                }
+                  final fieldData = WoFieldData(
+                    path: path,
+                    input: input,
+                    value: selectedValues,
+                    errorText: errorText,
+                    onValueChanged: inputIsLocked
+                        ? null
+                        : (
+                            List<T>? values, {
+                            UpdateStatus updateStatus = UpdateStatus.yes,
+                          }) async {
+                            if (input.idsOfAvailibleValues != null) {
+                              valuesCubit.onValueChanged(
+                                path: path,
+                                value: values
+                                    ?.map(
+                                      (value) =>
+                                          input.getIdOfValue(value: value),
+                                    )
+                                    .nonNulls
+                                    .toList(),
+                                updateStatus: updateStatus,
+                              );
+                            } else {
+                              valuesCubit.onValueChanged(
+                                path: path,
+                                value: values,
+                              );
+                            }
 
-                                input.onValueChanged?.call(values);
+                            input.onValueChanged?.call(values);
 
-                                if (input.submitFormOnSelect) {
-                                  await valuesCubit.submit(context);
-                                }
-                              },
-                      );
+                            if (input.submitFormOnSelect) {
+                              await valuesCubit.submit(context);
+                            }
+                          },
+                  );
 
-                  return (mergedSettings.widgetBuilder ??
-                          woFormTheme?.selectFieldBuilder ??
+                  return (input.uiSettings?.widgetBuilder ??
+                          WoFormTheme.of(context)?.selectFieldBuilder ??
                           SelectField.new)
                       .call(fieldData);
                 },
@@ -135,6 +103,32 @@ class SelectFieldBuilder<T> extends StatelessWidget {
         },
       ),
     );
+  }
+
+  SelectInput<T> getNode(BuildContext context) {
+    final input = context.read<WoFormValuesCubit>().getNode(path: path);
+    if (input is! SelectInput<T>) {
+      throw ArgumentError(
+        'Expected <SelectInput<$T>> at path: "$path", '
+        'found: <${input.runtimeType}>',
+      );
+    }
+
+    var mergedSettings =
+        uiSettings?.merge(input.uiSettings) ??
+        input.uiSettings ??
+        const SelectInputUiSettings();
+
+    final showAsterisk =
+        input.minCount > 0 &&
+        (WoFormTheme.of(context)?.showAsteriskIfRequired ?? true);
+    if (showAsterisk && mergedSettings.labelText != null) {
+      mergedSettings = mergedSettings.copyWith(
+        labelText: '${mergedSettings.labelText} *',
+      );
+    }
+
+    return input.copyWith(uiSettings: mergedSettings);
   }
 }
 

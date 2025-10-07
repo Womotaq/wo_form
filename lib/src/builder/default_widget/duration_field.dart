@@ -7,7 +7,7 @@ import 'package:wo_form/wo_form.dart';
 class DurationField extends StatelessWidget {
   const DurationField(this.data, {super.key});
 
-  final WoFieldData<DurationInput, Duration?, DurationInputUiSettings> data;
+  final WoFieldData<DurationInput, Duration?> data;
 
   static Future<Duration?> defaultPickDuration({
     required BuildContext context,
@@ -57,15 +57,15 @@ class DurationField extends StatelessWidget {
   Widget build(BuildContext context) {
     final editAsDateTime =
         data.input.startDatePath != null &&
-        data.uiSettings.editMode == DurationEditMode.dateTime;
+        data.input.uiSettings?.editMode == DurationEditMode.dateTime;
     final theme = Theme.of(context);
     final inputDecorationTheme = theme.inputDecorationTheme;
     final themedBorder = inputDecorationTheme.border;
     final initialDuration = data.value;
 
     final hintText = editAsDateTime
-        ? data.uiSettings.dateTimeHintText
-        : data.uiSettings.hintText;
+        ? data.input.uiSettings?.dateTimeHintText
+        : data.input.uiSettings?.hintText;
 
     final selector = editAsDateTime
         ? WoFormValueBuilder<DateTime>(
@@ -87,15 +87,15 @@ class DurationField extends StatelessWidget {
                 },
                 showCloseButton: !data.input.isRequired,
                 settings: DateTimeInputUiSettings(
-                  dateFormat: data.uiSettings.dateFormat,
-                  timeFormat: data.uiSettings.timeFormat,
-                  headerFlex: data.uiSettings.headerFlex,
-                  labelText: data.uiSettings.dateTimeLabelText,
-                  helperText: data.uiSettings.dateTimeHelperText,
-                  hintText: data.uiSettings.dateTimeHintText,
-                  editMode: data.uiSettings.dateTimeEditMode,
-                  pickDate: data.uiSettings.pickDate,
-                  pickTime: data.uiSettings.pickTime,
+                  dateFormat: data.input.uiSettings?.dateFormat,
+                  timeFormat: data.input.uiSettings?.timeFormat,
+                  headerFlex: data.input.uiSettings?.headerFlex,
+                  labelText: data.input.uiSettings?.dateTimeLabelText,
+                  helperText: data.input.uiSettings?.dateTimeHelperText,
+                  hintText: data.input.uiSettings?.dateTimeHintText,
+                  editMode: data.input.uiSettings?.dateTimeEditMode,
+                  pickDate: data.input.uiSettings?.pickDate,
+                  pickTime: data.input.uiSettings?.pickTime,
                 ),
               );
             },
@@ -110,7 +110,7 @@ class DurationField extends StatelessWidget {
                 ? null
                 : () async {
                     final pickDuration =
-                        data.uiSettings.pickDuration ??
+                        data.input.uiSettings?.pickDuration ??
                         WoFormTheme.of(context)?.pickDuration ??
                         DurationField.defaultPickDuration;
 
@@ -145,7 +145,7 @@ class DurationField extends StatelessWidget {
                               style: theme.textTheme.bodyMedium,
                             )
                     : Text(
-                        (data.uiSettings.formatDuration ??
+                        (data.input.uiSettings?.formatDuration ??
                                 WoFormTheme.of(context)?.formatDuration ??
                                 DurationField.defaultFormatDuration)
                             .call(initialDuration),
@@ -156,7 +156,7 @@ class DurationField extends StatelessWidget {
           );
 
     // if (data.input.startDatePath != null &&
-    //     data.uiSettings.initialEditMode == DurationEditMode.dateTime) {
+    //     data.input.uiSettings?.initialEditMode == DurationEditMode.dateTime){
     //   return DateTimeField(
     //     WoFieldData(
     //       path: data.path,
@@ -166,13 +166,13 @@ class DurationField extends StatelessWidget {
     // }
 
     return FlexField(
-      headerFlex: data.uiSettings.headerFlex,
+      headerFlex: data.input.uiSettings?.headerFlex,
       labelText: editAsDateTime
-          ? data.uiSettings.dateTimeLabelText
-          : data.uiSettings.labelText,
+          ? data.input.uiSettings?.dateTimeLabelText
+          : data.input.uiSettings?.labelText,
       helperText: editAsDateTime
-          ? data.uiSettings.dateTimeHelperText
-          : data.uiSettings.helperText,
+          ? data.input.uiSettings?.dateTimeHelperText
+          : data.input.uiSettings?.helperText,
       errorText: data.errorText,
       disableMode: data.onValueChanged == null
           ? FlexFieldDisableMode.all

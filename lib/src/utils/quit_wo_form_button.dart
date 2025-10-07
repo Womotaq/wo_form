@@ -14,7 +14,8 @@ class QuitWoFormButton extends StatelessWidget {
     } else if (await controller.previousStep() ==
         MultistepFailure.startOfForm) {
       if (!context.mounted) return false;
-      return context.read<RootNode>().uiSettings.canQuit?.call(context) ?? true;
+      return context.read<RootNode>().uiSettings?.canQuit?.call(context) ??
+          true;
     } else {
       return false;
     }
@@ -24,11 +25,11 @@ class QuitWoFormButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final actionIconTheme = ActionIconTheme.of(context);
     final formUiSettings = context.read<RootNode>().uiSettings;
-    final close = formUiSettings.presentation.isModal;
+    final close = formUiSettings?.presentation.isModal ?? false;
 
-    final canQuit = formUiSettings.multistepSettings != null
+    final canQuit = formUiSettings?.multistepSettings != null
         ? canQuitMultistep
-        : formUiSettings.canQuit;
+        : formUiSettings?.canQuit;
 
     return PopScope(
       canPop: canQuit == null,

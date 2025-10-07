@@ -15,7 +15,7 @@ ConditionnalNode<T> _$ConditionnalNodeFromJson<T extends Object?>(
   conditionIsInitiallyMet: json['conditionIsInitiallyMet'] as bool? ?? false,
   resetChildrenWhenHidden: json['resetChildrenWhenHidden'] as bool? ?? true,
   uiSettings: json['uiSettings'] == null
-      ? const InputUiSettings()
+      ? null
       : InputUiSettings.fromJson(json['uiSettings'] as Map<String, dynamic>),
   $type: json['runtimeType'] as String?,
 );
@@ -28,7 +28,7 @@ Map<String, dynamic> _$ConditionnalNodeToJson<T extends Object?>(
   'child': const InputConverter().toJson(instance.child),
   'conditionIsInitiallyMet': instance.conditionIsInitiallyMet,
   'resetChildrenWhenHidden': instance.resetChildrenWhenHidden,
-  'uiSettings': instance.uiSettings.toJson(),
+  'uiSettings': instance.uiSettings?.toJson(),
   'runtimeType': instance.$type,
 };
 
@@ -47,12 +47,12 @@ DynamicInputsNode<T> _$DynamicInputsNodeFromJson<T extends Object?>(
         const InputsListConverter().fromJson,
       ),
   uiSettings: json['uiSettings'] == null
-      ? const DynamicInputsNodeUiSettings()
+      ? null
       : DynamicInputsNodeUiSettings.fromJson(
           json['uiSettings'] as Map<String, dynamic>,
         ),
   exportSettings: json['exportSettings'] == null
-      ? const ExportSettings()
+      ? null
       : ExportSettings.fromJson(json['exportSettings'] as Map<String, dynamic>),
   $type: json['runtimeType'] as String?,
 );
@@ -67,8 +67,8 @@ Map<String, dynamic> _$DynamicInputsNodeToJson<T extends Object?>(
         instance.initialChildren,
         const InputsListConverter().toJson,
       ),
-  'uiSettings': instance.uiSettings.toJson(),
-  'exportSettings': instance.exportSettings.toJson(),
+  'uiSettings': instance.uiSettings?.toJson(),
+  'exportSettings': instance.exportSettings?.toJson(),
   'runtimeType': instance.$type,
 };
 
@@ -99,7 +99,7 @@ FutureNode<T> _$FutureNodeFromJson<T extends Object?>(
   id: json['id'] as String,
   willResetToInitialValues: json['willResetToInitialValues'] as bool? ?? true,
   uiSettings: json['uiSettings'] == null
-      ? const InputUiSettings()
+      ? null
       : InputUiSettings.fromJson(json['uiSettings'] as Map<String, dynamic>),
   $type: json['runtimeType'] as String?,
 );
@@ -109,7 +109,7 @@ Map<String, dynamic> _$FutureNodeToJson<T extends Object?>(
 ) => <String, dynamic>{
   'id': instance.id,
   'willResetToInitialValues': instance.willResetToInitialValues,
-  'uiSettings': instance.uiSettings.toJson(),
+  'uiSettings': instance.uiSettings?.toJson(),
   'runtimeType': instance.$type,
 };
 
@@ -121,12 +121,12 @@ InputsNode<T> _$InputsNodeFromJson<T extends Object?>(
       ? const []
       : const InputsListConverter().fromJson(json['children'] as List),
   uiSettings: json['uiSettings'] == null
-      ? const InputsNodeUiSettings()
+      ? null
       : InputsNodeUiSettings.fromJson(
           json['uiSettings'] as Map<String, dynamic>,
         ),
   exportSettings: json['exportSettings'] == null
-      ? const ExportSettings()
+      ? null
       : ExportSettings.fromJson(json['exportSettings'] as Map<String, dynamic>),
   $type: json['runtimeType'] as String?,
 );
@@ -136,8 +136,8 @@ Map<String, dynamic> _$InputsNodeToJson<T extends Object?>(
 ) => <String, dynamic>{
   'id': instance.id,
   'children': const InputsListConverter().toJson(instance.children),
-  'uiSettings': instance.uiSettings.toJson(),
-  'exportSettings': instance.exportSettings.toJson(),
+  'uiSettings': instance.uiSettings?.toJson(),
+  'exportSettings': instance.exportSettings?.toJson(),
   'runtimeType': instance.$type,
 };
 
@@ -161,10 +161,10 @@ RootNode<T> _$RootNodeFromJson<T extends Object?>(
       ? const []
       : const InputsListConverter().fromJson(json['children'] as List),
   uiSettings: json['uiSettings'] == null
-      ? const WoFormUiSettings()
+      ? null
       : WoFormUiSettings.fromJson(json['uiSettings'] as Map<String, dynamic>),
   exportSettings: json['exportSettings'] == null
-      ? const ExportSettings()
+      ? null
       : ExportSettings.fromJson(json['exportSettings'] as Map<String, dynamic>),
   hydratationId: json['hydratationId'] as String? ?? '',
   $type: json['runtimeType'] as String?,
@@ -176,8 +176,8 @@ Map<String, dynamic> _$RootNodeToJson<T extends Object?>(
   'id': instance.id,
   'initialValues': instance.initialValues,
   'children': const InputsListConverter().toJson(instance.children),
-  'uiSettings': instance.uiSettings.toJson(),
-  'exportSettings': instance.exportSettings.toJson(),
+  'uiSettings': instance.uiSettings?.toJson(),
+  'exportSettings': instance.exportSettings?.toJson(),
   'hydratationId': instance.hydratationId,
   'runtimeType': instance.$type,
 };
@@ -188,7 +188,7 @@ SelectorNode<T> _$SelectorNodeFromJson<T extends Object?>(
   id: json['id'] as String,
   initialValue: json['initialValue'],
   uiSettings: json['uiSettings'] == null
-      ? const InputUiSettings()
+      ? null
       : InputUiSettings.fromJson(json['uiSettings'] as Map<String, dynamic>),
   $type: json['runtimeType'] as String?,
 );
@@ -198,7 +198,7 @@ Map<String, dynamic> _$SelectorNodeToJson<T extends Object?>(
 ) => <String, dynamic>{
   'id': instance.id,
   'initialValue': instance.initialValue,
-  'uiSettings': instance.uiSettings.toJson(),
+  'uiSettings': instance.uiSettings?.toJson(),
   'runtimeType': instance.$type,
 };
 
@@ -259,7 +259,7 @@ WidgetNode<T> _$WidgetNodeFromJson<T extends Object?>(
 ) => WidgetNode<T>(
   id: json['id'] as String? ?? 'WidgetNode',
   uiSettings: json['uiSettings'] == null
-      ? const InputUiSettings()
+      ? null
       : InputUiSettings.fromJson(json['uiSettings'] as Map<String, dynamic>),
   $type: json['runtimeType'] as String?,
 );
@@ -268,7 +268,7 @@ Map<String, dynamic> _$WidgetNodeToJson<T extends Object?>(
   WidgetNode<T> instance,
 ) => <String, dynamic>{
   'id': instance.id,
-  'uiSettings': instance.uiSettings.toJson(),
+  'uiSettings': instance.uiSettings?.toJson(),
   'runtimeType': instance.$type,
 };
 
@@ -465,7 +465,7 @@ StringInput<T> _$StringInputFromJson<T extends Object?>(
           json['placeAutocompleteSettings'] as Map<String, dynamic>,
         ),
   uiSettings: json['uiSettings'] == null
-      ? const StringInputUiSettings()
+      ? null
       : StringInputUiSettings.fromJson(
           json['uiSettings'] as Map<String, dynamic>,
         ),
@@ -480,6 +480,6 @@ Map<String, dynamic> _$StringInputToJson<T extends Object?>(
   'isRequired': instance.isRequired,
   'regexPattern': instance.regexPattern,
   'placeAutocompleteSettings': instance.placeAutocompleteSettings?.toJson(),
-  'uiSettings': instance.uiSettings.toJson(),
+  'uiSettings': instance.uiSettings?.toJson(),
   'runtimeType': instance.$type,
 };

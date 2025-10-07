@@ -14,16 +14,7 @@ class DynamicInputsNodeWidgetBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final node = context.read<WoFormValuesCubit>().getNode(path: path);
-    if (node is! DynamicInputsNode) {
-      throw ArgumentError(
-        'Expected <DynamicInputsNode> at path: "$path", '
-        'found: <${node.runtimeType}>',
-      );
-    }
-
-    final mergedSettings =
-        uiSettings?.merge(node.uiSettings) ?? node.uiSettings;
+    final node = getNode(context);
 
     return BlocSelector<WoFormLockCubit, Set<String>, bool>(
       selector: (lockedInputs) => lockedInputs.contains(path),
@@ -35,7 +26,6 @@ class DynamicInputsNodeWidgetBuilder extends StatelessWidget {
               path: path,
               input: node,
               value: inputs,
-              uiSettings: mergedSettings,
               onValueChanged: inputIsLocked
                   ? null
                   : (
@@ -48,7 +38,7 @@ class DynamicInputsNodeWidgetBuilder extends StatelessWidget {
                     ),
             );
 
-            return (mergedSettings.widgetBuilder ??
+            return (node.uiSettings?.widgetBuilder ??
                     WoFormTheme.of(context)?.dynamicInputsNodeWidgetBuilder ??
                     DynamicInputsNodeWidget.new)
                 .call(fieldData);
@@ -56,5 +46,22 @@ class DynamicInputsNodeWidgetBuilder extends StatelessWidget {
         );
       },
     );
+  }
+
+  DynamicInputsNode getNode(BuildContext context) {
+    final input = context.read<WoFormValuesCubit>().getNode(path: path);
+    if (input is! DynamicInputsNode) {
+      throw ArgumentError(
+        'Expected <DynamicInputsNode> at path: "$path", '
+        'found: <${input.runtimeType}>',
+      );
+    }
+
+    final mergedSettings =
+        uiSettings?.merge(input.uiSettings) ??
+        input.uiSettings ??
+        const DynamicInputsNodeUiSettings();
+
+    return input.copyWith(uiSettings: mergedSettings);
   }
 }

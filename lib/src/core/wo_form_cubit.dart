@@ -109,13 +109,13 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
       values._visitedPaths = visitedPaths.toList();
     }
 
-    if (root.uiSettings.multistepSettings != null) {
+    if (root.uiSettings?.multistepSettings != null) {
       final currentStepId = root.children.firstOrNull?.id ?? '';
       values
         .._currentStepId = currentStepId
         .._currentStepIndex = 0
         .._setSubmitPath('/$currentStepId');
-      if (root.uiSettings.multistepSettings!.generatingSteps) {
+      if (root.uiSettings!.multistepSettings!.generatingSteps) {
         values._generatedSteps = [currentStepId];
       }
     }
@@ -137,7 +137,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     final newValues = state.copy();
 
     final generatingSteps =
-        _root.uiSettings.multistepSettings?.generatingSteps ?? false;
+        _root.uiSettings?.multistepSettings?.generatingSteps ?? false;
     final steps = generatingSteps
         ? state.generatedSteps
         : _root.children.map((step) => step.id).toList();
@@ -186,8 +186,8 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
       }
     }
 
-    if (_root.uiSettings.multistepSettings != null) {
-      if (_root.uiSettings.multistepSettings!.generatingSteps) {
+    if (_root.uiSettings?.multistepSettings != null) {
+      if (_root.uiSettings!.multistepSettings!.generatingSteps) {
         final currentStepId = state.currentStepId;
         return _root.children.firstWhereOrNull(
               (step) => step.id == currentStepId,
@@ -489,7 +489,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
         submitWholeForm = await tempSubmitData.onSubmitting() ?? false;
         removeTemporarySubmitData(path: tempSubmitData.path);
         _statusCubit.setInProgress();
-      } else if (_root.uiSettings.multistepSettings != null) {
+      } else if (_root.uiSettings?.multistepSettings != null) {
         submitWholeForm = await _onStepSubmitting(context);
       } else {
         submitWholeForm = true;
@@ -509,7 +509,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
       _statusCubit._setSubmitError(error: e, stackTrace: s);
     }
 
-    if (_root.uiSettings.canModifySubmittedValues ?? true) {
+    if (_root.uiSettings?.canModifySubmittedValues ?? true) {
       for (final path in _lockCubit.state) {
         if (!oldLocks.contains(path)) {
           _lockCubit.unlockInput(path: path);
@@ -521,7 +521,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   /// Return true if [WoForm.onSubmitting] should be called afterward.
   Future<bool> _onStepSubmitting(BuildContext context) async {
     final onStepSubmitting =
-        _root.uiSettings.multistepSettings?.onStepSubmitting;
+        _root.uiSettings?.multistepSettings?.onStepSubmitting;
     final action = onStepSubmitting == null
         ? const MultistepActionNext()
         : await onStepSubmitting.call(context);

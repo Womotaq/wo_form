@@ -15,19 +15,7 @@ class MediaFieldBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final valuesCubit = context.read<WoFormValuesCubit>();
-
-    final input = context.read<WoFormValuesCubit>().getNode(path: path);
-    if (input is! MediaInput) {
-      throw ArgumentError(
-        'Expected <MediaInput> at path: "$path", '
-        'found: <${input.runtimeType}>',
-      );
-    }
-
-    final mergedSettings =
-        uiSettings?.merge(input.uiSettings) ??
-        input.uiSettings ??
-        const MediaInputUiSettings();
+    final input = getNode(context);
 
     return WoFormNodeFocusManager(
       path: path,
@@ -56,38 +44,32 @@ class MediaFieldBuilder extends StatelessWidget {
                     errorText = null;
                   }
 
-                  final fieldData =
-                      WoFieldData<
-                        MediaInput,
-                        List<Media>,
-                        MediaInputUiSettings
-                      >(
-                        path: path,
-                        input: input,
-                        value: selectedValues,
-                        errorText: errorText,
-                        uiSettings: mergedSettings,
-                        onValueChanged: inputIsLocked
-                            ? null
-                            : (
-                                List<Media>? values, {
-                                UpdateStatus updateStatus = UpdateStatus.yes,
-                              }) async {
-                                valuesCubit.onValueChanged(
-                                  path: path,
-                                  value: values,
-                                );
+                  final fieldData = WoFieldData(
+                    path: path,
+                    input: input,
+                    value: selectedValues,
+                    errorText: errorText,
+                    onValueChanged: inputIsLocked
+                        ? null
+                        : (
+                            List<Media>? values, {
+                            UpdateStatus updateStatus = UpdateStatus.yes,
+                          }) async {
+                            valuesCubit.onValueChanged(
+                              path: path,
+                              value: values,
+                            );
 
-                                input.onValueChanged?.call(values);
+                            input.onValueChanged?.call(values);
 
-                                if (input.submitFormOnSelect) {
-                                  await valuesCubit.submit(context);
-                                }
-                              },
-                      );
+                            if (input.submitFormOnSelect) {
+                              await valuesCubit.submit(context);
+                            }
+                          },
+                  );
 
                   final mediaFieldBuilder =
-                      mergedSettings.widgetBuilder ??
+                      input.uiSettings?.widgetBuilder ??
                       WoFormTheme.of(context)?.mediaFieldBuilder ??
                       MediaField.new;
 
@@ -99,5 +81,22 @@ class MediaFieldBuilder extends StatelessWidget {
         },
       ),
     );
+  }
+
+  MediaInput getNode(BuildContext context) {
+    final input = context.read<WoFormValuesCubit>().getNode(path: path);
+    if (input is! MediaInput) {
+      throw ArgumentError(
+        'Expected <MediaInput> at path: "$path", '
+        'found: <${input.runtimeType}>',
+      );
+    }
+
+    final mergedSettings =
+        uiSettings?.merge(input.uiSettings) ??
+        input.uiSettings ??
+        const MediaInputUiSettings();
+
+    return input.copyWith(uiSettings: mergedSettings);
   }
 }

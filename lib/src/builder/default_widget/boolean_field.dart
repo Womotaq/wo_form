@@ -4,7 +4,7 @@ import 'package:wo_form/wo_form.dart';
 class BooleanField extends StatelessWidget {
   const BooleanField(this.data, {super.key});
 
-  final WoFieldData<BooleanInput, bool, BooleanInputUiSettings> data;
+  final WoFieldData<BooleanInput, bool> data;
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +14,10 @@ class BooleanField extends StatelessWidget {
     return buildTile(
       value: data.value ?? false,
       controlAffinity:
-          data.uiSettings.controlAffinity ?? ListTileControlAffinity.platform,
+          data.input.uiSettings?.controlAffinity ??
+          ListTileControlAffinity.platform,
       title: Text(
-        data.uiSettings.labelText ?? '',
+        data.input.uiSettings?.labelText ?? '',
         style: inputDecorationTheme.labelStyle,
       ),
       subtitle: data.errorText != null
@@ -28,15 +29,15 @@ class BooleanField extends StatelessWidget {
                     color: theme.colorScheme.error,
                   ),
             )
-          : (data.uiSettings.helperText ?? '').isNotEmpty
+          : (data.input.uiSettings?.helperText ?? '').isNotEmpty
           ? Text(
-              data.uiSettings.helperText ?? '',
+              data.input.uiSettings?.helperText ?? '',
               style:
                   inputDecorationTheme.helperStyle ??
                   theme.textTheme.labelMedium,
             )
           : null,
-      secondary: data.uiSettings.secondary,
+      secondary: data.input.uiSettings?.secondary,
     );
   }
 
@@ -46,7 +47,7 @@ class BooleanField extends StatelessWidget {
     required Widget title,
     required Widget? subtitle,
     required Widget? secondary,
-  }) => switch (data.uiSettings.controlType) {
+  }) => switch (data.input.uiSettings?.controlType) {
     null || BooleanFieldControlType.switchButton => SwitchListTile(
       contentPadding: EdgeInsets.only(
         left: switch (controlAffinity) {

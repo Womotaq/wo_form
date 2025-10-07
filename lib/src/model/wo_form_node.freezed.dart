@@ -144,7 +144,7 @@ as String,
 @JsonSerializable()
 
 class ConditionnalNode<T extends Object?> extends WoFormNode<T> {
-  const ConditionnalNode({required this.id, required this.condition, @InputConverter() required this.child, this.conditionIsInitiallyMet = false, this.resetChildrenWhenHidden = true, this.uiSettings = const InputUiSettings(), final  String? $type}): $type = $type ?? 'conditionnal',super._();
+  const ConditionnalNode({required this.id, required this.condition, @InputConverter() required this.child, this.conditionIsInitiallyMet = false, this.resetChildrenWhenHidden = true, this.uiSettings, final  String? $type}): $type = $type ?? 'conditionnal',super._();
   factory ConditionnalNode.fromJson(Map<String, dynamic> json) => _$ConditionnalNodeFromJson(json);
 
 @override final  String id;
@@ -154,7 +154,7 @@ class ConditionnalNode<T extends Object?> extends WoFormNode<T> {
 /// If true, when the condition goes from met to not met, the values of the
 /// child and its descendant nodes are reset to their initial state.
 @JsonKey() final  bool resetChildrenWhenHidden;
-@JsonKey() final  InputUiSettings uiSettings;
+ final  InputUiSettings? uiSettings;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -193,11 +193,11 @@ abstract mixin class $ConditionnalNodeCopyWith<T extends Object?,$Res> implement
   factory $ConditionnalNodeCopyWith(ConditionnalNode<T> value, $Res Function(ConditionnalNode<T>) _then) = _$ConditionnalNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id, Condition condition,@InputConverter() WoFormNode child, bool conditionIsInitiallyMet, bool resetChildrenWhenHidden, InputUiSettings uiSettings
+ String id, Condition condition,@InputConverter() WoFormNode child, bool conditionIsInitiallyMet, bool resetChildrenWhenHidden, InputUiSettings? uiSettings
 });
 
 
-$ConditionCopyWith<$Res> get condition;$WoFormNodeCopyWith<Object?, $Res> get child;$InputUiSettingsCopyWith<$Res> get uiSettings;
+$ConditionCopyWith<$Res> get condition;$WoFormNodeCopyWith<Object?, $Res> get child;$InputUiSettingsCopyWith<$Res>? get uiSettings;
 
 }
 /// @nodoc
@@ -210,15 +210,15 @@ class _$ConditionnalNodeCopyWithImpl<T extends Object?,$Res>
 
 /// Create a copy of WoFormNode
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? condition = null,Object? child = null,Object? conditionIsInitiallyMet = null,Object? resetChildrenWhenHidden = null,Object? uiSettings = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? condition = null,Object? child = null,Object? conditionIsInitiallyMet = null,Object? resetChildrenWhenHidden = null,Object? uiSettings = freezed,}) {
   return _then(ConditionnalNode<T>(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,condition: null == condition ? _self.condition : condition // ignore: cast_nullable_to_non_nullable
 as Condition,child: null == child ? _self.child : child // ignore: cast_nullable_to_non_nullable
 as WoFormNode,conditionIsInitiallyMet: null == conditionIsInitiallyMet ? _self.conditionIsInitiallyMet : conditionIsInitiallyMet // ignore: cast_nullable_to_non_nullable
 as bool,resetChildrenWhenHidden: null == resetChildrenWhenHidden ? _self.resetChildrenWhenHidden : resetChildrenWhenHidden // ignore: cast_nullable_to_non_nullable
-as bool,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
-as InputUiSettings,
+as bool,uiSettings: freezed == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
+as InputUiSettings?,
   ));
 }
 
@@ -244,9 +244,12 @@ $WoFormNodeCopyWith<Object?, $Res> get child {
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$InputUiSettingsCopyWith<$Res> get uiSettings {
-  
-  return $InputUiSettingsCopyWith<$Res>(_self.uiSettings, (value) {
+$InputUiSettingsCopyWith<$Res>? get uiSettings {
+    if (_self.uiSettings == null) {
+    return null;
+  }
+
+  return $InputUiSettingsCopyWith<$Res>(_self.uiSettings!, (value) {
     return _then(_self.copyWith(uiSettings: value));
   });
 }
@@ -256,7 +259,7 @@ $InputUiSettingsCopyWith<$Res> get uiSettings {
 @JsonSerializable()
 
 class DynamicInputsNode<T extends Object?> extends WoFormNode<T> {
-  const DynamicInputsNode({required this.id, final  List<DynamicInputTemplate> templates = const [], @InputsListConverter() final  List<WoFormNode>? initialChildren, this.uiSettings = const DynamicInputsNodeUiSettings(), this.exportSettings = const ExportSettings(), final  String? $type}): _templates = templates,_initialChildren = initialChildren,$type = $type ?? 'dynamicInputs',super._();
+  const DynamicInputsNode({required this.id, final  List<DynamicInputTemplate> templates = const [], @InputsListConverter() final  List<WoFormNode>? initialChildren, this.uiSettings, this.exportSettings, final  String? $type}): _templates = templates,_initialChildren = initialChildren,$type = $type ?? 'dynamicInputs',super._();
   factory DynamicInputsNode.fromJson(Map<String, dynamic> json) => _$DynamicInputsNodeFromJson(json);
 
 @override final  String id;
@@ -278,8 +281,8 @@ class DynamicInputsNode<T extends Object?> extends WoFormNode<T> {
   return EqualUnmodifiableListView(value);
 }
 
-@JsonKey() final  DynamicInputsNodeUiSettings uiSettings;
-@JsonKey() final  ExportSettings exportSettings;
+ final  DynamicInputsNodeUiSettings? uiSettings;
+ final  ExportSettings? exportSettings;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -318,11 +321,11 @@ abstract mixin class $DynamicInputsNodeCopyWith<T extends Object?,$Res> implemen
   factory $DynamicInputsNodeCopyWith(DynamicInputsNode<T> value, $Res Function(DynamicInputsNode<T>) _then) = _$DynamicInputsNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id, List<DynamicInputTemplate> templates,@InputsListConverter() List<WoFormNode>? initialChildren, DynamicInputsNodeUiSettings uiSettings, ExportSettings exportSettings
+ String id, List<DynamicInputTemplate> templates,@InputsListConverter() List<WoFormNode>? initialChildren, DynamicInputsNodeUiSettings? uiSettings, ExportSettings? exportSettings
 });
 
 
-$DynamicInputsNodeUiSettingsCopyWith<$Res> get uiSettings;$ExportSettingsCopyWith<$Res> get exportSettings;
+$DynamicInputsNodeUiSettingsCopyWith<$Res>? get uiSettings;$ExportSettingsCopyWith<$Res>? get exportSettings;
 
 }
 /// @nodoc
@@ -335,14 +338,14 @@ class _$DynamicInputsNodeCopyWithImpl<T extends Object?,$Res>
 
 /// Create a copy of WoFormNode
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? templates = null,Object? initialChildren = freezed,Object? uiSettings = null,Object? exportSettings = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? templates = null,Object? initialChildren = freezed,Object? uiSettings = freezed,Object? exportSettings = freezed,}) {
   return _then(DynamicInputsNode<T>(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,templates: null == templates ? _self._templates : templates // ignore: cast_nullable_to_non_nullable
 as List<DynamicInputTemplate>,initialChildren: freezed == initialChildren ? _self._initialChildren : initialChildren // ignore: cast_nullable_to_non_nullable
-as List<WoFormNode>?,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
-as DynamicInputsNodeUiSettings,exportSettings: null == exportSettings ? _self.exportSettings : exportSettings // ignore: cast_nullable_to_non_nullable
-as ExportSettings,
+as List<WoFormNode>?,uiSettings: freezed == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
+as DynamicInputsNodeUiSettings?,exportSettings: freezed == exportSettings ? _self.exportSettings : exportSettings // ignore: cast_nullable_to_non_nullable
+as ExportSettings?,
   ));
 }
 
@@ -350,18 +353,24 @@ as ExportSettings,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$DynamicInputsNodeUiSettingsCopyWith<$Res> get uiSettings {
-  
-  return $DynamicInputsNodeUiSettingsCopyWith<$Res>(_self.uiSettings, (value) {
+$DynamicInputsNodeUiSettingsCopyWith<$Res>? get uiSettings {
+    if (_self.uiSettings == null) {
+    return null;
+  }
+
+  return $DynamicInputsNodeUiSettingsCopyWith<$Res>(_self.uiSettings!, (value) {
     return _then(_self.copyWith(uiSettings: value));
   });
 }/// Create a copy of WoFormNode
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$ExportSettingsCopyWith<$Res> get exportSettings {
-  
-  return $ExportSettingsCopyWith<$Res>(_self.exportSettings, (value) {
+$ExportSettingsCopyWith<$Res>? get exportSettings {
+    if (_self.exportSettings == null) {
+    return null;
+  }
+
+  return $ExportSettingsCopyWith<$Res>(_self.exportSettings!, (value) {
     return _then(_self.copyWith(exportSettings: value));
   });
 }
@@ -444,7 +453,7 @@ as String,
 @JsonSerializable()
 
 class FutureNode<T extends Object?> extends WoFormNode<T> {
-  const FutureNode({required this.id, @notSerializable this.future, @notSerializable this.builder, @notSerializable this.initialData, this.willResetToInitialValues = true, this.uiSettings = const InputUiSettings(), final  String? $type}): assert(future != null, 'FutureNode.future cannot be null'),assert(builder != null, 'FutureNode.builder cannot be null'),$type = $type ?? 'future',super._();
+  const FutureNode({required this.id, @notSerializable this.future, @notSerializable this.builder, @notSerializable this.initialData, this.willResetToInitialValues = true, this.uiSettings, final  String? $type}): assert(future != null, 'FutureNode.future cannot be null'),assert(builder != null, 'FutureNode.builder cannot be null'),$type = $type ?? 'future',super._();
   factory FutureNode.fromJson(Map<String, dynamic> json) => _$FutureNodeFromJson(json);
 
 @override final  String id;
@@ -454,7 +463,7 @@ class FutureNode<T extends Object?> extends WoFormNode<T> {
 /// If true, when the future will be completed, the values of
 /// the children inputs will be reseted to their getInitialValues.
 @JsonKey() final  bool willResetToInitialValues;
-@JsonKey() final  InputUiSettings uiSettings;
+ final  InputUiSettings? uiSettings;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -493,11 +502,11 @@ abstract mixin class $FutureNodeCopyWith<T extends Object?,$Res> implements $WoF
   factory $FutureNodeCopyWith(FutureNode<T> value, $Res Function(FutureNode<T>) _then) = _$FutureNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id,@notSerializable Future<T>? future,@notSerializable WoFormNode Function(AsyncSnapshot<T?> snapshot)? builder,@notSerializable T? initialData, bool willResetToInitialValues, InputUiSettings uiSettings
+ String id,@notSerializable Future<T>? future,@notSerializable WoFormNode Function(AsyncSnapshot<T?> snapshot)? builder,@notSerializable T? initialData, bool willResetToInitialValues, InputUiSettings? uiSettings
 });
 
 
-$InputUiSettingsCopyWith<$Res> get uiSettings;
+$InputUiSettingsCopyWith<$Res>? get uiSettings;
 
 }
 /// @nodoc
@@ -510,15 +519,15 @@ class _$FutureNodeCopyWithImpl<T extends Object?,$Res>
 
 /// Create a copy of WoFormNode
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? future = freezed,Object? builder = freezed,Object? initialData = freezed,Object? willResetToInitialValues = null,Object? uiSettings = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? future = freezed,Object? builder = freezed,Object? initialData = freezed,Object? willResetToInitialValues = null,Object? uiSettings = freezed,}) {
   return _then(FutureNode<T>(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,future: freezed == future ? _self.future : future // ignore: cast_nullable_to_non_nullable
 as Future<T>?,builder: freezed == builder ? _self.builder : builder // ignore: cast_nullable_to_non_nullable
 as WoFormNode Function(AsyncSnapshot<T?> snapshot)?,initialData: freezed == initialData ? _self.initialData : initialData // ignore: cast_nullable_to_non_nullable
 as T?,willResetToInitialValues: null == willResetToInitialValues ? _self.willResetToInitialValues : willResetToInitialValues // ignore: cast_nullable_to_non_nullable
-as bool,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
-as InputUiSettings,
+as bool,uiSettings: freezed == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
+as InputUiSettings?,
   ));
 }
 
@@ -526,9 +535,12 @@ as InputUiSettings,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$InputUiSettingsCopyWith<$Res> get uiSettings {
-  
-  return $InputUiSettingsCopyWith<$Res>(_self.uiSettings, (value) {
+$InputUiSettingsCopyWith<$Res>? get uiSettings {
+    if (_self.uiSettings == null) {
+    return null;
+  }
+
+  return $InputUiSettingsCopyWith<$Res>(_self.uiSettings!, (value) {
     return _then(_self.copyWith(uiSettings: value));
   });
 }
@@ -538,7 +550,7 @@ $InputUiSettingsCopyWith<$Res> get uiSettings {
 @JsonSerializable()
 
 class InputsNode<T extends Object?> extends WoFormNode<T> {
-  const InputsNode({required this.id, @InputsListConverter() final  List<WoFormNode> children = const [], this.uiSettings = const InputsNodeUiSettings(), this.exportSettings = const ExportSettings(), final  String? $type}): _children = children,$type = $type ?? 'inputs',super._();
+  const InputsNode({required this.id, @InputsListConverter() final  List<WoFormNode> children = const [], this.uiSettings, this.exportSettings, final  String? $type}): _children = children,$type = $type ?? 'inputs',super._();
   factory InputsNode.fromJson(Map<String, dynamic> json) => _$InputsNodeFromJson(json);
 
 @override final  String id;
@@ -549,8 +561,8 @@ class InputsNode<T extends Object?> extends WoFormNode<T> {
   return EqualUnmodifiableListView(_children);
 }
 
-@JsonKey() final  InputsNodeUiSettings uiSettings;
-@JsonKey() final  ExportSettings exportSettings;
+ final  InputsNodeUiSettings? uiSettings;
+ final  ExportSettings? exportSettings;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -589,11 +601,11 @@ abstract mixin class $InputsNodeCopyWith<T extends Object?,$Res> implements $WoF
   factory $InputsNodeCopyWith(InputsNode<T> value, $Res Function(InputsNode<T>) _then) = _$InputsNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id,@InputsListConverter() List<WoFormNode> children, InputsNodeUiSettings uiSettings, ExportSettings exportSettings
+ String id,@InputsListConverter() List<WoFormNode> children, InputsNodeUiSettings? uiSettings, ExportSettings? exportSettings
 });
 
 
-$InputsNodeUiSettingsCopyWith<$Res> get uiSettings;$ExportSettingsCopyWith<$Res> get exportSettings;
+$InputsNodeUiSettingsCopyWith<$Res>? get uiSettings;$ExportSettingsCopyWith<$Res>? get exportSettings;
 
 }
 /// @nodoc
@@ -606,13 +618,13 @@ class _$InputsNodeCopyWithImpl<T extends Object?,$Res>
 
 /// Create a copy of WoFormNode
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? children = null,Object? uiSettings = null,Object? exportSettings = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? children = null,Object? uiSettings = freezed,Object? exportSettings = freezed,}) {
   return _then(InputsNode<T>(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,children: null == children ? _self._children : children // ignore: cast_nullable_to_non_nullable
-as List<WoFormNode>,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
-as InputsNodeUiSettings,exportSettings: null == exportSettings ? _self.exportSettings : exportSettings // ignore: cast_nullable_to_non_nullable
-as ExportSettings,
+as List<WoFormNode>,uiSettings: freezed == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
+as InputsNodeUiSettings?,exportSettings: freezed == exportSettings ? _self.exportSettings : exportSettings // ignore: cast_nullable_to_non_nullable
+as ExportSettings?,
   ));
 }
 
@@ -620,18 +632,24 @@ as ExportSettings,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$InputsNodeUiSettingsCopyWith<$Res> get uiSettings {
-  
-  return $InputsNodeUiSettingsCopyWith<$Res>(_self.uiSettings, (value) {
+$InputsNodeUiSettingsCopyWith<$Res>? get uiSettings {
+    if (_self.uiSettings == null) {
+    return null;
+  }
+
+  return $InputsNodeUiSettingsCopyWith<$Res>(_self.uiSettings!, (value) {
     return _then(_self.copyWith(uiSettings: value));
   });
 }/// Create a copy of WoFormNode
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$ExportSettingsCopyWith<$Res> get exportSettings {
-  
-  return $ExportSettingsCopyWith<$Res>(_self.exportSettings, (value) {
+$ExportSettingsCopyWith<$Res>? get exportSettings {
+    if (_self.exportSettings == null) {
+    return null;
+  }
+
+  return $ExportSettingsCopyWith<$Res>(_self.exportSettings!, (value) {
     return _then(_self.copyWith(exportSettings: value));
   });
 }
@@ -717,7 +735,7 @@ as WoFormNode Function(String path)?,
 @JsonSerializable()
 
 class RootNode<T extends Object?> extends WoFormNode<T> {
-  const RootNode({this.id = 'root', final  Json initialValues = const {}, @InputsListConverter() final  List<WoFormNode> children = const [], this.uiSettings = const WoFormUiSettings(), this.exportSettings = const ExportSettings(), this.hydratationId = '', final  String? $type}): _initialValues = initialValues,_children = children,$type = $type ?? 'root',super._();
+  const RootNode({this.id = 'root', final  Json initialValues = const {}, @InputsListConverter() final  List<WoFormNode> children = const [], this.uiSettings, this.exportSettings, this.hydratationId = '', final  String? $type}): _initialValues = initialValues,_children = children,$type = $type ?? 'root',super._();
   factory RootNode.fromJson(Map<String, dynamic> json) => _$RootNodeFromJson(json);
 
 // The root's id should never be used
@@ -736,8 +754,8 @@ class RootNode<T extends Object?> extends WoFormNode<T> {
   return EqualUnmodifiableListView(_children);
 }
 
-@JsonKey() final  WoFormUiSettings uiSettings;
-@JsonKey() final  ExportSettings exportSettings;
+ final  WoFormUiSettings? uiSettings;
+ final  ExportSettings? exportSettings;
 // LATER : issue, how to modify an in-production corrupted data ?
 // give a way to override it ?
 //
@@ -781,11 +799,11 @@ abstract mixin class $RootNodeCopyWith<T extends Object?,$Res> implements $WoFor
   factory $RootNodeCopyWith(RootNode<T> value, $Res Function(RootNode<T>) _then) = _$RootNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id, Json initialValues,@InputsListConverter() List<WoFormNode> children, WoFormUiSettings uiSettings, ExportSettings exportSettings, String hydratationId
+ String id, Json initialValues,@InputsListConverter() List<WoFormNode> children, WoFormUiSettings? uiSettings, ExportSettings? exportSettings, String hydratationId
 });
 
 
-$WoFormUiSettingsCopyWith<$Res> get uiSettings;$ExportSettingsCopyWith<$Res> get exportSettings;
+$WoFormUiSettingsCopyWith<$Res>? get uiSettings;$ExportSettingsCopyWith<$Res>? get exportSettings;
 
 }
 /// @nodoc
@@ -798,14 +816,14 @@ class _$RootNodeCopyWithImpl<T extends Object?,$Res>
 
 /// Create a copy of WoFormNode
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? initialValues = null,Object? children = null,Object? uiSettings = null,Object? exportSettings = null,Object? hydratationId = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? initialValues = null,Object? children = null,Object? uiSettings = freezed,Object? exportSettings = freezed,Object? hydratationId = null,}) {
   return _then(RootNode<T>(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,initialValues: null == initialValues ? _self._initialValues : initialValues // ignore: cast_nullable_to_non_nullable
 as Json,children: null == children ? _self._children : children // ignore: cast_nullable_to_non_nullable
-as List<WoFormNode>,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
-as WoFormUiSettings,exportSettings: null == exportSettings ? _self.exportSettings : exportSettings // ignore: cast_nullable_to_non_nullable
-as ExportSettings,hydratationId: null == hydratationId ? _self.hydratationId : hydratationId // ignore: cast_nullable_to_non_nullable
+as List<WoFormNode>,uiSettings: freezed == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
+as WoFormUiSettings?,exportSettings: freezed == exportSettings ? _self.exportSettings : exportSettings // ignore: cast_nullable_to_non_nullable
+as ExportSettings?,hydratationId: null == hydratationId ? _self.hydratationId : hydratationId // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -814,18 +832,24 @@ as String,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$WoFormUiSettingsCopyWith<$Res> get uiSettings {
-  
-  return $WoFormUiSettingsCopyWith<$Res>(_self.uiSettings, (value) {
+$WoFormUiSettingsCopyWith<$Res>? get uiSettings {
+    if (_self.uiSettings == null) {
+    return null;
+  }
+
+  return $WoFormUiSettingsCopyWith<$Res>(_self.uiSettings!, (value) {
     return _then(_self.copyWith(uiSettings: value));
   });
 }/// Create a copy of WoFormNode
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$ExportSettingsCopyWith<$Res> get exportSettings {
-  
-  return $ExportSettingsCopyWith<$Res>(_self.exportSettings, (value) {
+$ExportSettingsCopyWith<$Res>? get exportSettings {
+    if (_self.exportSettings == null) {
+    return null;
+  }
+
+  return $ExportSettingsCopyWith<$Res>(_self.exportSettings!, (value) {
     return _then(_self.copyWith(exportSettings: value));
   });
 }
@@ -835,14 +859,14 @@ $ExportSettingsCopyWith<$Res> get exportSettings {
 @JsonSerializable()
 
 class SelectorNode<T extends Object?> extends WoFormNode<T> {
-  const SelectorNode({required this.id, @notSerializable this.selector, @notSerializable this.builder, this.initialValue, this.uiSettings = const InputUiSettings(), final  String? $type}): assert(selector != null, 'SelectorNode.selector cannot be null'),assert(builder != null, 'SelectorNode.builder cannot be null'),$type = $type ?? 'selector',super._();
+  const SelectorNode({required this.id, @notSerializable this.selector, @notSerializable this.builder, this.initialValue, this.uiSettings, final  String? $type}): assert(selector != null, 'SelectorNode.selector cannot be null'),assert(builder != null, 'SelectorNode.builder cannot be null'),$type = $type ?? 'selector',super._();
   factory SelectorNode.fromJson(Map<String, dynamic> json) => _$SelectorNodeFromJson(json);
 
 @override final  String id;
 @notSerializable final  Object? Function(WoFormValues values)? selector;
 @notSerializable final  WoFormNode Function(Object? value)? builder;
  final  Object? initialValue;
-@JsonKey() final  InputUiSettings uiSettings;
+ final  InputUiSettings? uiSettings;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -881,11 +905,11 @@ abstract mixin class $SelectorNodeCopyWith<T extends Object?,$Res> implements $W
   factory $SelectorNodeCopyWith(SelectorNode<T> value, $Res Function(SelectorNode<T>) _then) = _$SelectorNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id,@notSerializable Object? Function(WoFormValues values)? selector,@notSerializable WoFormNode Function(Object? value)? builder, Object? initialValue, InputUiSettings uiSettings
+ String id,@notSerializable Object? Function(WoFormValues values)? selector,@notSerializable WoFormNode Function(Object? value)? builder, Object? initialValue, InputUiSettings? uiSettings
 });
 
 
-$InputUiSettingsCopyWith<$Res> get uiSettings;
+$InputUiSettingsCopyWith<$Res>? get uiSettings;
 
 }
 /// @nodoc
@@ -898,13 +922,13 @@ class _$SelectorNodeCopyWithImpl<T extends Object?,$Res>
 
 /// Create a copy of WoFormNode
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? selector = freezed,Object? builder = freezed,Object? initialValue = freezed,Object? uiSettings = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? selector = freezed,Object? builder = freezed,Object? initialValue = freezed,Object? uiSettings = freezed,}) {
   return _then(SelectorNode<T>(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,selector: freezed == selector ? _self.selector : selector // ignore: cast_nullable_to_non_nullable
 as Object? Function(WoFormValues values)?,builder: freezed == builder ? _self.builder : builder // ignore: cast_nullable_to_non_nullable
-as WoFormNode Function(Object? value)?,initialValue: freezed == initialValue ? _self.initialValue : initialValue ,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
-as InputUiSettings,
+as WoFormNode Function(Object? value)?,initialValue: freezed == initialValue ? _self.initialValue : initialValue ,uiSettings: freezed == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
+as InputUiSettings?,
   ));
 }
 
@@ -912,9 +936,12 @@ as InputUiSettings,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$InputUiSettingsCopyWith<$Res> get uiSettings {
-  
-  return $InputUiSettingsCopyWith<$Res>(_self.uiSettings, (value) {
+$InputUiSettingsCopyWith<$Res>? get uiSettings {
+    if (_self.uiSettings == null) {
+    return null;
+  }
+
+  return $InputUiSettingsCopyWith<$Res>(_self.uiSettings!, (value) {
     return _then(_self.copyWith(uiSettings: value));
   });
 }
@@ -1176,12 +1203,12 @@ as void Function(BuildContext context, String parentPath, Object? value)?,
 @JsonSerializable()
 
 class WidgetNode<T extends Object?> extends WoFormNode<T> {
-  const WidgetNode({this.id = 'WidgetNode', @notSerializable this.builder, this.uiSettings = const InputUiSettings(), final  String? $type}): $type = $type ?? 'widget',super._();
+  const WidgetNode({this.id = 'WidgetNode', @notSerializable this.builder, this.uiSettings, final  String? $type}): $type = $type ?? 'widget',super._();
   factory WidgetNode.fromJson(Map<String, dynamic> json) => _$WidgetNodeFromJson(json);
 
 @override@JsonKey() final  String id;
 @notSerializable final  Widget Function(BuildContext context)? builder;
-@JsonKey() final  InputUiSettings uiSettings;
+ final  InputUiSettings? uiSettings;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -1220,11 +1247,11 @@ abstract mixin class $WidgetNodeCopyWith<T extends Object?,$Res> implements $WoF
   factory $WidgetNodeCopyWith(WidgetNode<T> value, $Res Function(WidgetNode<T>) _then) = _$WidgetNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id,@notSerializable Widget Function(BuildContext context)? builder, InputUiSettings uiSettings
+ String id,@notSerializable Widget Function(BuildContext context)? builder, InputUiSettings? uiSettings
 });
 
 
-$InputUiSettingsCopyWith<$Res> get uiSettings;
+$InputUiSettingsCopyWith<$Res>? get uiSettings;
 
 }
 /// @nodoc
@@ -1237,12 +1264,12 @@ class _$WidgetNodeCopyWithImpl<T extends Object?,$Res>
 
 /// Create a copy of WoFormNode
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? builder = freezed,Object? uiSettings = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? builder = freezed,Object? uiSettings = freezed,}) {
   return _then(WidgetNode<T>(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,builder: freezed == builder ? _self.builder : builder // ignore: cast_nullable_to_non_nullable
-as Widget Function(BuildContext context)?,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
-as InputUiSettings,
+as Widget Function(BuildContext context)?,uiSettings: freezed == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
+as InputUiSettings?,
   ));
 }
 
@@ -1250,9 +1277,12 @@ as InputUiSettings,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$InputUiSettingsCopyWith<$Res> get uiSettings {
-  
-  return $InputUiSettingsCopyWith<$Res>(_self.uiSettings, (value) {
+$InputUiSettingsCopyWith<$Res>? get uiSettings {
+    if (_self.uiSettings == null) {
+    return null;
+  }
+
+  return $InputUiSettingsCopyWith<$Res>(_self.uiSettings!, (value) {
     return _then(_self.copyWith(uiSettings: value));
   });
 }
@@ -2102,7 +2132,7 @@ $NumInputUiSettingsCopyWith<$Res>? get uiSettings {
 @JsonSerializable()
 
 class StringInput<T extends Object?> extends WoFormInput<T> {
-  const StringInput({required this.id, this.initialValue, this.isRequired = false, this.regexPattern, this.placeAutocompleteSettings, @notSerializable this.getCustomError, this.uiSettings = const StringInputUiSettings(), final  String? $type}): $type = $type ?? 'string',super._();
+  const StringInput({required this.id, this.initialValue, this.isRequired = false, this.regexPattern, this.placeAutocompleteSettings, @notSerializable this.getCustomError, this.uiSettings, final  String? $type}): $type = $type ?? 'string',super._();
   factory StringInput.fromJson(Map<String, dynamic> json) => _$StringInputFromJson(json);
 
 @override final  String id;
@@ -2112,7 +2142,7 @@ class StringInput<T extends Object?> extends WoFormInput<T> {
 /// If set, the field will be a place autocomplete.
  final  PlaceAutocompleteSettings? placeAutocompleteSettings;
 @override@notSerializable final  GetCustomErrorDef<String>? getCustomError;
-@override@JsonKey() final  StringInputUiSettings uiSettings;
+@override final  StringInputUiSettings? uiSettings;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -2151,11 +2181,11 @@ abstract mixin class $StringInputCopyWith<T extends Object?,$Res> implements $Wo
   factory $StringInputCopyWith(StringInput<T> value, $Res Function(StringInput<T>) _then) = _$StringInputCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String? initialValue, bool isRequired, String? regexPattern, PlaceAutocompleteSettings? placeAutocompleteSettings,@notSerializable GetCustomErrorDef<String>? getCustomError, StringInputUiSettings uiSettings
+ String id, String? initialValue, bool isRequired, String? regexPattern, PlaceAutocompleteSettings? placeAutocompleteSettings,@notSerializable GetCustomErrorDef<String>? getCustomError, StringInputUiSettings? uiSettings
 });
 
 
-$PlaceAutocompleteSettingsCopyWith<$Res>? get placeAutocompleteSettings;$StringInputUiSettingsCopyWith<$Res> get uiSettings;
+$PlaceAutocompleteSettingsCopyWith<$Res>? get placeAutocompleteSettings;$StringInputUiSettingsCopyWith<$Res>? get uiSettings;
 
 }
 /// @nodoc
@@ -2168,7 +2198,7 @@ class _$StringInputCopyWithImpl<T extends Object?,$Res>
 
 /// Create a copy of WoFormInput
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? initialValue = freezed,Object? isRequired = null,Object? regexPattern = freezed,Object? placeAutocompleteSettings = freezed,Object? getCustomError = freezed,Object? uiSettings = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? initialValue = freezed,Object? isRequired = null,Object? regexPattern = freezed,Object? placeAutocompleteSettings = freezed,Object? getCustomError = freezed,Object? uiSettings = freezed,}) {
   return _then(StringInput<T>(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,initialValue: freezed == initialValue ? _self.initialValue : initialValue // ignore: cast_nullable_to_non_nullable
@@ -2176,8 +2206,8 @@ as String?,isRequired: null == isRequired ? _self.isRequired : isRequired // ign
 as bool,regexPattern: freezed == regexPattern ? _self.regexPattern : regexPattern // ignore: cast_nullable_to_non_nullable
 as String?,placeAutocompleteSettings: freezed == placeAutocompleteSettings ? _self.placeAutocompleteSettings : placeAutocompleteSettings // ignore: cast_nullable_to_non_nullable
 as PlaceAutocompleteSettings?,getCustomError: freezed == getCustomError ? _self.getCustomError : getCustomError // ignore: cast_nullable_to_non_nullable
-as GetCustomErrorDef<String>?,uiSettings: null == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
-as StringInputUiSettings,
+as GetCustomErrorDef<String>?,uiSettings: freezed == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
+as StringInputUiSettings?,
   ));
 }
 
@@ -2197,9 +2227,12 @@ $PlaceAutocompleteSettingsCopyWith<$Res>? get placeAutocompleteSettings {
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$StringInputUiSettingsCopyWith<$Res> get uiSettings {
-  
-  return $StringInputUiSettingsCopyWith<$Res>(_self.uiSettings, (value) {
+$StringInputUiSettingsCopyWith<$Res>? get uiSettings {
+    if (_self.uiSettings == null) {
+    return null;
+  }
+
+  return $StringInputUiSettingsCopyWith<$Res>(_self.uiSettings!, (value) {
     return _then(_self.copyWith(uiSettings: value));
   });
 }

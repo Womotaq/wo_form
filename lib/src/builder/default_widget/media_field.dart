@@ -91,19 +91,19 @@ import 'package:wo_form/wo_form.dart';
 class MediaField extends StatelessWidget {
   const MediaField(this.data, {super.key});
 
-  final WoFieldData<MediaInput, List<Media>?, MediaInputUiSettings> data;
+  final WoFieldData<MediaInput, List<Media>?> data;
 
   @override
   Widget build(BuildContext context) {
     final medias = data.value ?? [];
     final media = medias.firstOrNull;
     final onChanged = data.onValueChanged;
-    final fieldHeight = data.uiSettings.fieldHeight?.toDouble() ?? 160;
+    final fieldHeight = data.input.uiSettings?.fieldHeight?.toDouble() ?? 160;
     final aspectRatio =
-        data.uiSettings.cropAspectRatioOrCircle ==
+        data.input.uiSettings?.cropAspectRatioOrCircle ==
             MediaService.circleAspectRatio
         ? 1.0
-        : data.uiSettings.cropAspectRatioOrCircle;
+        : data.input.uiSettings?.cropAspectRatioOrCircle;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -175,11 +175,12 @@ class MediaField extends StatelessWidget {
                               ? null
                               : fieldHeight * aspectRatio,
                           child: AddMediaButon(
-                            addMediaText: data.uiSettings.addMediaText,
+                            addMediaText: data.input.uiSettings?.addMediaText,
                             onChanged: onChanged,
                             cropAspectRatioOrCircle:
-                                data.uiSettings.cropAspectRatioOrCircle,
-                            cropShowGrid: data.uiSettings.cropShowGrid,
+                                data.input.uiSettings?.cropAspectRatioOrCircle,
+                            cropShowGrid:
+                                data.input.uiSettings?.cropShowGrid ?? false,
                             limit: 1,
                             importSettings: data.input.importSettings,
                           ),
@@ -212,7 +213,7 @@ class MediaField extends StatelessWidget {
   Widget? _itemBuilder(BuildContext context, int index) {
     final medias = data.value ?? [];
     final onChanged = data.onValueChanged;
-    final fieldHeight = data.uiSettings.fieldHeight?.toDouble() ?? 160;
+    final fieldHeight = data.input.uiSettings?.fieldHeight?.toDouble() ?? 160;
 
     if (index == medias.length) {
       final limit = data.input.maxCount == null
@@ -223,12 +224,13 @@ class MediaField extends StatelessWidget {
         return SizedBox(
           width: fieldHeight,
           child: AddMediaButon(
-            addMediaText: data.uiSettings.addMediaText,
+            addMediaText: data.input.uiSettings?.addMediaText,
             onChanged: onChanged == null
                 ? null
                 : (newMedias) => onChanged([...medias, ...newMedias]),
-            cropAspectRatioOrCircle: data.uiSettings.cropAspectRatioOrCircle,
-            cropShowGrid: data.uiSettings.cropShowGrid,
+            cropAspectRatioOrCircle:
+                data.input.uiSettings?.cropAspectRatioOrCircle,
+            cropShowGrid: data.input.uiSettings?.cropShowGrid ?? false,
             limit: limit,
             importSettings: data.input.importSettings,
           ),
@@ -264,8 +266,8 @@ class MediaField extends StatelessWidget {
     final cropped = (await context.read<MediaService>().crop(
       context: context,
       medias: [media],
-      cropAspectRatioOrCircle: data.uiSettings.cropAspectRatioOrCircle,
-      showGrid: data.uiSettings.cropShowGrid,
+      cropAspectRatioOrCircle: data.input.uiSettings?.cropAspectRatioOrCircle,
+      showGrid: data.input.uiSettings?.cropShowGrid ?? false,
       maxHeight: data.input.importSettings.imageMaxHeight,
       maxWidth: data.input.importSettings.imageMaxWidth,
     ))?.firstOrNull;
@@ -285,7 +287,7 @@ class _MediaActions extends StatelessWidget {
   });
 
   final Media media;
-  final WoFieldData<MediaInput, List<Media>?, MediaInputUiSettings> data;
+  final WoFieldData<MediaInput, List<Media>?> data;
 
   @override
   Widget build(BuildContext context) {
@@ -343,8 +345,8 @@ class _MediaActions extends StatelessWidget {
                         context: context,
                         medias: [media],
                         cropAspectRatioOrCircle:
-                            data.uiSettings.cropAspectRatioOrCircle,
-                        showGrid: data.uiSettings.cropShowGrid,
+                            data.input.uiSettings?.cropAspectRatioOrCircle,
+                        showGrid: data.input.uiSettings?.cropShowGrid ?? false,
                         maxHeight: data.input.importSettings.imageMaxHeight,
                         maxWidth: data.input.importSettings.imageMaxWidth,
                       ))?.firstOrNull;

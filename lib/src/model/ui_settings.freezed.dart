@@ -1300,7 +1300,7 @@ as InputHeaderBuilderDef?,
 mixin _$MediaInputUiSettings {
 
  String? get addMediaText; int? get fieldHeight;/// For a circle cropping, use MediaService.circleAspectRatio
- double? get cropAspectRatioOrCircle; bool get cropShowGrid;@notSerializable MediaFieldBuilderDef? get widgetBuilder;
+ double? get cropAspectRatioOrCircle; bool? get cropShowGrid;@notSerializable MediaFieldBuilderDef? get widgetBuilder;
 /// Create a copy of MediaInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1333,7 +1333,7 @@ abstract mixin class $MediaInputUiSettingsCopyWith<$Res>  {
   factory $MediaInputUiSettingsCopyWith(MediaInputUiSettings value, $Res Function(MediaInputUiSettings) _then) = _$MediaInputUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String? addMediaText, int? fieldHeight, double? cropAspectRatioOrCircle, bool cropShowGrid,@notSerializable MediaFieldBuilderDef? widgetBuilder
+ String? addMediaText, int? fieldHeight, double? cropAspectRatioOrCircle, bool? cropShowGrid,@notSerializable MediaFieldBuilderDef? widgetBuilder
 });
 
 
@@ -1350,13 +1350,13 @@ class _$MediaInputUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of MediaInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? addMediaText = freezed,Object? fieldHeight = freezed,Object? cropAspectRatioOrCircle = freezed,Object? cropShowGrid = null,Object? widgetBuilder = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? addMediaText = freezed,Object? fieldHeight = freezed,Object? cropAspectRatioOrCircle = freezed,Object? cropShowGrid = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_self.copyWith(
 addMediaText: freezed == addMediaText ? _self.addMediaText : addMediaText // ignore: cast_nullable_to_non_nullable
 as String?,fieldHeight: freezed == fieldHeight ? _self.fieldHeight : fieldHeight // ignore: cast_nullable_to_non_nullable
 as int?,cropAspectRatioOrCircle: freezed == cropAspectRatioOrCircle ? _self.cropAspectRatioOrCircle : cropAspectRatioOrCircle // ignore: cast_nullable_to_non_nullable
-as double?,cropShowGrid: null == cropShowGrid ? _self.cropShowGrid : cropShowGrid // ignore: cast_nullable_to_non_nullable
-as bool,widgetBuilder: freezed == widgetBuilder ? _self.widgetBuilder : widgetBuilder // ignore: cast_nullable_to_non_nullable
+as double?,cropShowGrid: freezed == cropShowGrid ? _self.cropShowGrid : cropShowGrid // ignore: cast_nullable_to_non_nullable
+as bool?,widgetBuilder: freezed == widgetBuilder ? _self.widgetBuilder : widgetBuilder // ignore: cast_nullable_to_non_nullable
 as MediaFieldBuilderDef?,
   ));
 }
@@ -1369,14 +1369,14 @@ as MediaFieldBuilderDef?,
 @JsonSerializable()
 
 class _MediaInputUiSettings extends MediaInputUiSettings {
-  const _MediaInputUiSettings({this.addMediaText, this.fieldHeight, this.cropAspectRatioOrCircle, this.cropShowGrid = false, @notSerializable this.widgetBuilder}): super._();
+  const _MediaInputUiSettings({this.addMediaText, this.fieldHeight, this.cropAspectRatioOrCircle, this.cropShowGrid, @notSerializable this.widgetBuilder}): super._();
   factory _MediaInputUiSettings.fromJson(Map<String, dynamic> json) => _$MediaInputUiSettingsFromJson(json);
 
 @override final  String? addMediaText;
 @override final  int? fieldHeight;
 /// For a circle cropping, use MediaService.circleAspectRatio
 @override final  double? cropAspectRatioOrCircle;
-@override@JsonKey() final  bool cropShowGrid;
+@override final  bool? cropShowGrid;
 @override@notSerializable final  MediaFieldBuilderDef? widgetBuilder;
 
 /// Create a copy of MediaInputUiSettings
@@ -1412,7 +1412,7 @@ abstract mixin class _$MediaInputUiSettingsCopyWith<$Res> implements $MediaInput
   factory _$MediaInputUiSettingsCopyWith(_MediaInputUiSettings value, $Res Function(_MediaInputUiSettings) _then) = __$MediaInputUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String? addMediaText, int? fieldHeight, double? cropAspectRatioOrCircle, bool cropShowGrid,@notSerializable MediaFieldBuilderDef? widgetBuilder
+ String? addMediaText, int? fieldHeight, double? cropAspectRatioOrCircle, bool? cropShowGrid,@notSerializable MediaFieldBuilderDef? widgetBuilder
 });
 
 
@@ -1429,13 +1429,13 @@ class __$MediaInputUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of MediaInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? addMediaText = freezed,Object? fieldHeight = freezed,Object? cropAspectRatioOrCircle = freezed,Object? cropShowGrid = null,Object? widgetBuilder = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? addMediaText = freezed,Object? fieldHeight = freezed,Object? cropAspectRatioOrCircle = freezed,Object? cropShowGrid = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_MediaInputUiSettings(
 addMediaText: freezed == addMediaText ? _self.addMediaText : addMediaText // ignore: cast_nullable_to_non_nullable
 as String?,fieldHeight: freezed == fieldHeight ? _self.fieldHeight : fieldHeight // ignore: cast_nullable_to_non_nullable
 as int?,cropAspectRatioOrCircle: freezed == cropAspectRatioOrCircle ? _self.cropAspectRatioOrCircle : cropAspectRatioOrCircle // ignore: cast_nullable_to_non_nullable
-as double?,cropShowGrid: null == cropShowGrid ? _self.cropShowGrid : cropShowGrid // ignore: cast_nullable_to_non_nullable
-as bool,widgetBuilder: freezed == widgetBuilder ? _self.widgetBuilder : widgetBuilder // ignore: cast_nullable_to_non_nullable
+as double?,cropShowGrid: freezed == cropShowGrid ? _self.cropShowGrid : cropShowGrid // ignore: cast_nullable_to_non_nullable
+as bool?,widgetBuilder: freezed == widgetBuilder ? _self.widgetBuilder : widgetBuilder // ignore: cast_nullable_to_non_nullable
 as MediaFieldBuilderDef?,
   ));
 }

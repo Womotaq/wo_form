@@ -7,8 +7,8 @@ extension OpenForm on BuildContext {
     WoForm form, {
     double initialBottomSheetSize = .7,
     bool showDragHandle = false,
-  }) => switch (form.root.uiSettings.presentation) {
-    WoFormPresentation.page => pushPage(form),
+  }) => switch (form.root.uiSettings?.presentation) {
+    null || WoFormPresentation.page => pushPage(form),
     WoFormPresentation.dialog ||
     WoFormPresentation.bottomSheet => _showWoFormModal(
       context: this,
@@ -29,7 +29,7 @@ Future<T?> _showWoFormModal<T extends Object?>({
   // final size =
   //     acceptScrollController ? ModalSize.flexible : ModalSize.fitContent;
   final isDialog =
-      form.root.uiSettings.presentation == WoFormPresentation.dialog;
+      form.root.uiSettings?.presentation == WoFormPresentation.dialog;
 
   if (isDialog) {
     return showDialog(
@@ -47,9 +47,9 @@ Future<T?> _showWoFormModal<T extends Object?>({
     return Push.modalBottomSheet(
       context: context,
       child: form,
-      layout: form.root.uiSettings.multistepSettings != null
+      layout: form.root.uiSettings?.multistepSettings != null
           ? LayoutMethod.flexible
-          : form.root.uiSettings.layout,
+          : form.root.uiSettings?.layout ?? LayoutMethod.scrollable,
       initialBottomSheetSize: initialBottomSheetSize,
       showDragHandle: showDragHandle,
     );

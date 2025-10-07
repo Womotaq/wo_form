@@ -5,7 +5,7 @@ import 'package:wo_form/wo_form.dart';
 class NumField extends StatefulWidget {
   const NumField(this.data, {super.key});
 
-  final WoFieldData<NumInput, num?, NumInputUiSettings> data;
+  final WoFieldData<NumInput, num?> data;
 
   @override
   State<NumField> createState() => _NumFieldState();
@@ -17,8 +17,8 @@ class _NumFieldState extends State<NumField> {
   @override
   void initState() {
     super.initState();
-    if (widget.data.uiSettings.style == null ||
-        widget.data.uiSettings.style == NumInputStyle.selector) {
+    if (widget.data.input.uiSettings?.style == null ||
+        widget.data.input.uiSettings?.style == NumInputStyle.selector) {
       controller = TextEditingController(
         text: widget.data.value?.toString() ?? '',
       );
@@ -37,14 +37,14 @@ class _NumFieldState extends State<NumField> {
     final max = widget.data.input.maxBound;
 
     return FlexField(
-      headerFlex: widget.data.uiSettings.headerFlex ?? 10,
-      labelText: widget.data.uiSettings.labelText,
-      helperText: widget.data.uiSettings.helperText,
+      headerFlex: widget.data.input.uiSettings?.headerFlex ?? 10,
+      labelText: widget.data.input.uiSettings?.labelText,
+      helperText: widget.data.input.uiSettings?.helperText,
       errorText: widget.data.errorText,
       disableMode: widget.data.onValueChanged == null
           ? FlexFieldDisableMode.header
           : FlexFieldDisableMode.none,
-      child: widget.data.uiSettings.style == NumInputStyle.slider
+      child: widget.data.input.uiSettings?.style == NumInputStyle.slider
           ? Slider(
               padding: EdgeInsets.zero,
               value:
@@ -60,7 +60,7 @@ class _NumFieldState extends State<NumField> {
               axis: Axis.horizontal,
               minCount: min,
               maxCount: max,
-              unit: widget.data.uiSettings.unit,
+              unit: widget.data.input.uiSettings?.unit,
             ),
     );
   }

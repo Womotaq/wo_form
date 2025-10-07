@@ -289,41 +289,41 @@ as bool,
 }
 
 /// @nodoc
-mixin _$WoFieldData<I,T,U> {
+mixin _$WoFieldData<I,T> {
 
- String get path; I get input; T? get value; U get uiSettings;/// Null means locked field
+ String get path; I get input; T? get value;/// Null means locked field
  void Function(T? value, {UpdateStatus updateStatus})? get onValueChanged; String? get errorText; Widget? get errorWidget;
 /// Create a copy of WoFieldData
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$WoFieldDataCopyWith<I, T, U, WoFieldData<I, T, U>> get copyWith => _$WoFieldDataCopyWithImpl<I, T, U, WoFieldData<I, T, U>>(this as WoFieldData<I, T, U>, _$identity);
+$WoFieldDataCopyWith<I, T, WoFieldData<I, T>> get copyWith => _$WoFieldDataCopyWithImpl<I, T, WoFieldData<I, T>>(this as WoFieldData<I, T>, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WoFieldData<I, T, U>&&(identical(other.path, path) || other.path == path)&&const DeepCollectionEquality().equals(other.input, input)&&const DeepCollectionEquality().equals(other.value, value)&&const DeepCollectionEquality().equals(other.uiSettings, uiSettings)&&(identical(other.onValueChanged, onValueChanged) || other.onValueChanged == onValueChanged)&&(identical(other.errorText, errorText) || other.errorText == errorText)&&(identical(other.errorWidget, errorWidget) || other.errorWidget == errorWidget));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WoFieldData<I, T>&&(identical(other.path, path) || other.path == path)&&const DeepCollectionEquality().equals(other.input, input)&&const DeepCollectionEquality().equals(other.value, value)&&(identical(other.onValueChanged, onValueChanged) || other.onValueChanged == onValueChanged)&&(identical(other.errorText, errorText) || other.errorText == errorText)&&(identical(other.errorWidget, errorWidget) || other.errorWidget == errorWidget));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,path,const DeepCollectionEquality().hash(input),const DeepCollectionEquality().hash(value),const DeepCollectionEquality().hash(uiSettings),onValueChanged,errorText,errorWidget);
+int get hashCode => Object.hash(runtimeType,path,const DeepCollectionEquality().hash(input),const DeepCollectionEquality().hash(value),onValueChanged,errorText,errorWidget);
 
 @override
 String toString() {
-  return 'WoFieldData<$I, $T, $U>(path: $path, input: $input, value: $value, uiSettings: $uiSettings, onValueChanged: $onValueChanged, errorText: $errorText, errorWidget: $errorWidget)';
+  return 'WoFieldData<$I, $T>(path: $path, input: $input, value: $value, onValueChanged: $onValueChanged, errorText: $errorText, errorWidget: $errorWidget)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $WoFieldDataCopyWith<I,T,U,$Res>  {
-  factory $WoFieldDataCopyWith(WoFieldData<I, T, U> value, $Res Function(WoFieldData<I, T, U>) _then) = _$WoFieldDataCopyWithImpl;
+abstract mixin class $WoFieldDataCopyWith<I,T,$Res>  {
+  factory $WoFieldDataCopyWith(WoFieldData<I, T> value, $Res Function(WoFieldData<I, T>) _then) = _$WoFieldDataCopyWithImpl;
 @useResult
 $Res call({
- String path, I input, T? value, U uiSettings, void Function(T? value, {UpdateStatus updateStatus})? onValueChanged, String? errorText, Widget? errorWidget
+ String path, I input, T? value, void Function(T? value, {UpdateStatus updateStatus})? onValueChanged, String? errorText, Widget? errorWidget
 });
 
 
@@ -331,22 +331,21 @@ $Res call({
 
 }
 /// @nodoc
-class _$WoFieldDataCopyWithImpl<I,T,U,$Res>
-    implements $WoFieldDataCopyWith<I, T, U, $Res> {
+class _$WoFieldDataCopyWithImpl<I,T,$Res>
+    implements $WoFieldDataCopyWith<I, T, $Res> {
   _$WoFieldDataCopyWithImpl(this._self, this._then);
 
-  final WoFieldData<I, T, U> _self;
-  final $Res Function(WoFieldData<I, T, U>) _then;
+  final WoFieldData<I, T> _self;
+  final $Res Function(WoFieldData<I, T>) _then;
 
 /// Create a copy of WoFieldData
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? path = null,Object? input = freezed,Object? value = freezed,Object? uiSettings = freezed,Object? onValueChanged = freezed,Object? errorText = freezed,Object? errorWidget = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? path = null,Object? input = freezed,Object? value = freezed,Object? onValueChanged = freezed,Object? errorText = freezed,Object? errorWidget = freezed,}) {
   return _then(_self.copyWith(
 path: null == path ? _self.path : path // ignore: cast_nullable_to_non_nullable
 as String,input: freezed == input ? _self.input : input // ignore: cast_nullable_to_non_nullable
 as I,value: freezed == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
-as T?,uiSettings: freezed == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
-as U,onValueChanged: freezed == onValueChanged ? _self.onValueChanged : onValueChanged // ignore: cast_nullable_to_non_nullable
+as T?,onValueChanged: freezed == onValueChanged ? _self.onValueChanged : onValueChanged // ignore: cast_nullable_to_non_nullable
 as void Function(T? value, {UpdateStatus updateStatus})?,errorText: freezed == errorText ? _self.errorText : errorText // ignore: cast_nullable_to_non_nullable
 as String?,errorWidget: freezed == errorWidget ? _self.errorWidget : errorWidget // ignore: cast_nullable_to_non_nullable
 as Widget?,
@@ -360,14 +359,13 @@ as Widget?,
 /// @nodoc
 
 
-class _WoFieldData<I,T,U> implements WoFieldData<I, T, U> {
-  const _WoFieldData({required this.path, required this.input, required this.value, required this.uiSettings, required this.onValueChanged, this.errorText, this.errorWidget}): assert(errorText == null || errorWidget == null, 'Only one of errorWidget and errorText can be specified.');
+class _WoFieldData<I,T> implements WoFieldData<I, T> {
+  const _WoFieldData({required this.path, required this.input, required this.value, required this.onValueChanged, this.errorText, this.errorWidget}): assert(errorText == null || errorWidget == null, 'Only one of errorWidget and errorText can be specified.');
   
 
 @override final  String path;
 @override final  I input;
 @override final  T? value;
-@override final  U uiSettings;
 /// Null means locked field
 @override final  void Function(T? value, {UpdateStatus updateStatus})? onValueChanged;
 @override final  String? errorText;
@@ -377,33 +375,33 @@ class _WoFieldData<I,T,U> implements WoFieldData<I, T, U> {
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$WoFieldDataCopyWith<I, T, U, _WoFieldData<I, T, U>> get copyWith => __$WoFieldDataCopyWithImpl<I, T, U, _WoFieldData<I, T, U>>(this, _$identity);
+_$WoFieldDataCopyWith<I, T, _WoFieldData<I, T>> get copyWith => __$WoFieldDataCopyWithImpl<I, T, _WoFieldData<I, T>>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WoFieldData<I, T, U>&&(identical(other.path, path) || other.path == path)&&const DeepCollectionEquality().equals(other.input, input)&&const DeepCollectionEquality().equals(other.value, value)&&const DeepCollectionEquality().equals(other.uiSettings, uiSettings)&&(identical(other.onValueChanged, onValueChanged) || other.onValueChanged == onValueChanged)&&(identical(other.errorText, errorText) || other.errorText == errorText)&&(identical(other.errorWidget, errorWidget) || other.errorWidget == errorWidget));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WoFieldData<I, T>&&(identical(other.path, path) || other.path == path)&&const DeepCollectionEquality().equals(other.input, input)&&const DeepCollectionEquality().equals(other.value, value)&&(identical(other.onValueChanged, onValueChanged) || other.onValueChanged == onValueChanged)&&(identical(other.errorText, errorText) || other.errorText == errorText)&&(identical(other.errorWidget, errorWidget) || other.errorWidget == errorWidget));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,path,const DeepCollectionEquality().hash(input),const DeepCollectionEquality().hash(value),const DeepCollectionEquality().hash(uiSettings),onValueChanged,errorText,errorWidget);
+int get hashCode => Object.hash(runtimeType,path,const DeepCollectionEquality().hash(input),const DeepCollectionEquality().hash(value),onValueChanged,errorText,errorWidget);
 
 @override
 String toString() {
-  return 'WoFieldData<$I, $T, $U>(path: $path, input: $input, value: $value, uiSettings: $uiSettings, onValueChanged: $onValueChanged, errorText: $errorText, errorWidget: $errorWidget)';
+  return 'WoFieldData<$I, $T>(path: $path, input: $input, value: $value, onValueChanged: $onValueChanged, errorText: $errorText, errorWidget: $errorWidget)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$WoFieldDataCopyWith<I,T,U,$Res> implements $WoFieldDataCopyWith<I, T, U, $Res> {
-  factory _$WoFieldDataCopyWith(_WoFieldData<I, T, U> value, $Res Function(_WoFieldData<I, T, U>) _then) = __$WoFieldDataCopyWithImpl;
+abstract mixin class _$WoFieldDataCopyWith<I,T,$Res> implements $WoFieldDataCopyWith<I, T, $Res> {
+  factory _$WoFieldDataCopyWith(_WoFieldData<I, T> value, $Res Function(_WoFieldData<I, T>) _then) = __$WoFieldDataCopyWithImpl;
 @override @useResult
 $Res call({
- String path, I input, T? value, U uiSettings, void Function(T? value, {UpdateStatus updateStatus})? onValueChanged, String? errorText, Widget? errorWidget
+ String path, I input, T? value, void Function(T? value, {UpdateStatus updateStatus})? onValueChanged, String? errorText, Widget? errorWidget
 });
 
 
@@ -411,22 +409,21 @@ $Res call({
 
 }
 /// @nodoc
-class __$WoFieldDataCopyWithImpl<I,T,U,$Res>
-    implements _$WoFieldDataCopyWith<I, T, U, $Res> {
+class __$WoFieldDataCopyWithImpl<I,T,$Res>
+    implements _$WoFieldDataCopyWith<I, T, $Res> {
   __$WoFieldDataCopyWithImpl(this._self, this._then);
 
-  final _WoFieldData<I, T, U> _self;
-  final $Res Function(_WoFieldData<I, T, U>) _then;
+  final _WoFieldData<I, T> _self;
+  final $Res Function(_WoFieldData<I, T>) _then;
 
 /// Create a copy of WoFieldData
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? path = null,Object? input = freezed,Object? value = freezed,Object? uiSettings = freezed,Object? onValueChanged = freezed,Object? errorText = freezed,Object? errorWidget = freezed,}) {
-  return _then(_WoFieldData<I, T, U>(
+@override @pragma('vm:prefer-inline') $Res call({Object? path = null,Object? input = freezed,Object? value = freezed,Object? onValueChanged = freezed,Object? errorText = freezed,Object? errorWidget = freezed,}) {
+  return _then(_WoFieldData<I, T>(
 path: null == path ? _self.path : path // ignore: cast_nullable_to_non_nullable
 as String,input: freezed == input ? _self.input : input // ignore: cast_nullable_to_non_nullable
 as I,value: freezed == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
-as T?,uiSettings: freezed == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
-as U,onValueChanged: freezed == onValueChanged ? _self.onValueChanged : onValueChanged // ignore: cast_nullable_to_non_nullable
+as T?,onValueChanged: freezed == onValueChanged ? _self.onValueChanged : onValueChanged // ignore: cast_nullable_to_non_nullable
 as void Function(T? value, {UpdateStatus updateStatus})?,errorText: freezed == errorText ? _self.errorText : errorText // ignore: cast_nullable_to_non_nullable
 as String?,errorWidget: freezed == errorWidget ? _self.errorWidget : errorWidget // ignore: cast_nullable_to_non_nullable
 as Widget?,

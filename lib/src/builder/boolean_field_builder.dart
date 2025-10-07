@@ -15,28 +15,7 @@ class BooleanFieldBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final valuesCubit = context.read<WoFormValuesCubit>();
-    final input = valuesCubit.getNode(path: path);
-    if (input is! BooleanInput) {
-      throw ArgumentError(
-        'Expected <BooleanInput> at path: "$path", '
-        'found: <${input.runtimeType}>',
-      );
-    }
-
-    final inputSettings = input.uiSettings;
-    var mergedSettings =
-        uiSettings?.merge(inputSettings) ??
-        inputSettings ??
-        const BooleanInputUiSettings();
-    final woFormTheme = WoFormTheme.of(context);
-
-    final showAsterisk =
-        input.isRequired && (woFormTheme?.showAsteriskIfRequired ?? true);
-    if (showAsterisk && mergedSettings.labelText != null) {
-      mergedSettings = mergedSettings.copyWith(
-        labelText: '${mergedSettings.labelText ?? ''} *',
-      );
-    }
+    final input = getNode(context);
 
     return WoFormNodeFocusManager(
       path: path,
@@ -62,33 +41,31 @@ class BooleanFieldBuilder extends StatelessWidget {
                     errorText = null;
                   }
 
-                  final fieldData =
-                      WoFieldData<BooleanInput, bool, BooleanInputUiSettings>(
-                        path: path,
-                        input: input,
-                        value: value,
-                        errorText: errorText,
-                        uiSettings: mergedSettings,
-                        onValueChanged: inputIsLocked
-                            ? null
-                            : (
-                                bool? value, {
-                                UpdateStatus updateStatus = UpdateStatus.yes,
-                              }) {
-                                valuesCubit.onValueChanged(
-                                  path: path,
-                                  value: value,
-                                  updateStatus: updateStatus,
-                                );
+                  final fieldData = WoFieldData(
+                    path: path,
+                    input: input,
+                    value: value,
+                    errorText: errorText,
+                    onValueChanged: inputIsLocked
+                        ? null
+                        : (
+                            bool? value, {
+                            UpdateStatus updateStatus = UpdateStatus.yes,
+                          }) {
+                            valuesCubit.onValueChanged(
+                              path: path,
+                              value: value,
+                              updateStatus: updateStatus,
+                            );
 
-                                input.onValueChanged?.call(value);
+                            input.onValueChanged?.call(value);
 
-                                FocusScope.of(context).unfocus();
-                              },
-                      );
+                            FocusScope.of(context).unfocus();
+                          },
+                  );
 
-                  return (mergedSettings.widgetBuilder ??
-                          woFormTheme?.booleanFieldBuilder ??
+                  return (input.uiSettings?.widgetBuilder ??
+                          WoFormTheme.of(context)?.booleanFieldBuilder ??
                           BooleanField.new)
                       .call(fieldData);
                 },
@@ -98,5 +75,31 @@ class BooleanFieldBuilder extends StatelessWidget {
         },
       ),
     );
+  }
+
+  BooleanInput getNode(BuildContext context) {
+    final input = context.read<WoFormValuesCubit>().getNode(path: path);
+    if (input is! BooleanInput) {
+      throw ArgumentError(
+        'Expected <BooleanInput> at path: "$path", '
+        'found: <${input.runtimeType}>',
+      );
+    }
+
+    var mergedSettings =
+        uiSettings?.merge(input.uiSettings) ??
+        input.uiSettings ??
+        const BooleanInputUiSettings();
+
+    final showAsterisk =
+        input.isRequired &&
+        (WoFormTheme.of(context)?.showAsteriskIfRequired ?? true);
+    if (showAsterisk && mergedSettings.labelText != null) {
+      mergedSettings = mergedSettings.copyWith(
+        labelText: '${mergedSettings.labelText} *',
+      );
+    }
+
+    return input.copyWith(uiSettings: mergedSettings);
   }
 }

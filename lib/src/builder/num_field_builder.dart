@@ -14,37 +14,15 @@ class NumFieldBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final input = context.read<WoFormValuesCubit>().getNode(path: path);
-    if (input is! NumInput) {
-      throw ArgumentError(
-        'Expected <NumInput> at path: "$path", '
-        'found: <${input.runtimeType}>',
-      );
-    }
-
-    final inputSettings = input.uiSettings;
-    var mergedSettings =
-        uiSettings?.merge(inputSettings) ??
-        inputSettings ??
-        const NumInputUiSettings();
-    final woFormTheme = WoFormTheme.of(context);
-
-    final showAsterisk =
-        input.isRequired && (woFormTheme?.showAsteriskIfRequired ?? true);
-    if (showAsterisk && mergedSettings.labelText != null) {
-      mergedSettings = mergedSettings.copyWith(
-        labelText: '${mergedSettings.labelText} *',
-      );
-    }
+    final input = getNode(context);
 
     return WoFormNodeFocusManager(
       path: path,
       child: BlocSelector<WoFormLockCubit, Set<String>, bool>(
         selector: (lockedInputs) => lockedInputs.contains(path),
-        builder: (context, inputIsLocked) {
-          return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
-            builder: (context, status) {
-              return WoFormValueBuilder<num>(
+        builder: (context, inputIsLocked) =>
+            BlocBuilder<WoFormStatusCubit, WoFormStatus>(
+              builder: (context, status) => WoFormValueBuilder<num>(
                 path: path,
                 builder: (context, value) {
                   final String? errorText;
@@ -61,40 +39,60 @@ class NumFieldBuilder extends StatelessWidget {
                     errorText = null;
                   }
 
-                  final fieldData =
-                      WoFieldData<NumInput, num, NumInputUiSettings>(
-                        path: path,
-                        input: input,
-                        value: value,
-                        errorText: errorText,
-                        uiSettings: mergedSettings,
-                        onValueChanged: inputIsLocked
-                            ? null
-                            : (
-                                num? value, {
-                                UpdateStatus updateStatus = UpdateStatus.yes,
-                              }) {
-                                context
-                                    .read<WoFormValuesCubit>()
-                                    .onValueChanged(
-                                      path: path,
-                                      value: value,
-                                      updateStatus: updateStatus,
-                                    );
-                                input.onValueChanged?.call(value);
-                              },
-                      );
+                  final fieldData = WoFieldData(
+                    path: path,
+                    input: input,
+                    value: value,
+                    errorText: errorText,
+                    onValueChanged: inputIsLocked
+                        ? null
+                        : (
+                            num? value, {
+                            UpdateStatus updateStatus = UpdateStatus.yes,
+                          }) {
+                            context.read<WoFormValuesCubit>().onValueChanged(
+                              path: path,
+                              value: value,
+                              updateStatus: updateStatus,
+                            );
+                            input.onValueChanged?.call(value);
+                          },
+                  );
 
-                  return (mergedSettings.widgetBuilder ??
-                          woFormTheme?.numFieldBuilder ??
+                  return (input.uiSettings?.widgetBuilder ??
+                          WoFormTheme.of(context)?.numFieldBuilder ??
                           NumField.new)
                       .call(fieldData);
                 },
-              );
-            },
-          );
-        },
+              ),
+            ),
       ),
     );
+  }
+
+  NumInput getNode(BuildContext context) {
+    final input = context.read<WoFormValuesCubit>().getNode(path: path);
+    if (input is! NumInput) {
+      throw ArgumentError(
+        'Expected <NumInput> at path: "$path", '
+        'found: <${input.runtimeType}>',
+      );
+    }
+
+    var mergedSettings =
+        uiSettings?.merge(input.uiSettings) ??
+        input.uiSettings ??
+        const NumInputUiSettings();
+
+    final showAsterisk =
+        input.isRequired &&
+        (WoFormTheme.of(context)?.showAsteriskIfRequired ?? true);
+    if (showAsterisk && mergedSettings.labelText != null) {
+      mergedSettings = mergedSettings.copyWith(
+        labelText: '${mergedSettings.labelText} *',
+      );
+    }
+
+    return input.copyWith(uiSettings: mergedSettings);
   }
 }

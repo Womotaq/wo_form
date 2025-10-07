@@ -7,21 +7,20 @@ import 'package:wo_form/wo_form.dart';
 class SelectField<T> extends StatelessWidget {
   const SelectField(this.data, {super.key});
 
-  final WoFieldData<SelectInput<T>, List<T>, SelectInputUiSettings<T>> data;
+  final WoFieldData<SelectInput<T>, List<T>> data;
 
   @override
   Widget build(BuildContext context) {
     final woTheme = WoFormTheme.of(context);
     final selectedValues = data.value ?? [];
+    final uiSettings = data.input.uiSettings;
     final quizSettings = data.input.quizSettings;
     final scoreWidget = quizSettings == null
         ? null
-        : (data.uiSettings.scoreBuilder ??
-                  woTheme?.scoreBuilder ??
-                  ScoreWidget.new)
+        : (uiSettings?.scoreBuilder ?? woTheme?.scoreBuilder ?? ScoreWidget.new)
               .call(score: quizSettings.score);
 
-    switch (data.uiSettings.childrenVisibility) {
+    switch (uiSettings?.childrenVisibility) {
       case null:
       case ChildrenVisibility.always:
         final header = Padding(
@@ -31,13 +30,13 @@ class SelectField<T> extends StatelessWidget {
             child: Builder(
               builder: (context) {
                 final headerData = WoFormInputHeaderData(
-                  labelText: data.uiSettings.labelText,
-                  helperText: data.uiSettings.helperText,
+                  labelText: uiSettings?.labelText,
+                  helperText: uiSettings?.helperText,
                   errorText: data.errorText,
                   trailing: scoreWidget,
                 );
 
-                return (data.uiSettings.headerBuilder ??
+                return (uiSettings?.headerBuilder ??
                         woTheme?.inputHeaderBuilder ??
                         InputHeader.new)
                     .call(headerData);
@@ -55,8 +54,8 @@ class SelectField<T> extends StatelessWidget {
             }
           },
           header: header,
-          tileBuilder: data.uiSettings.tileBuilder,
-          searchScore: data.uiSettings.searchScore,
+          tileBuilder: uiSettings?.tileBuilder,
+          searchScore: uiSettings?.searchScore,
         );
       case ChildrenVisibility.whenAsked:
         if (data.input.maxCount == 1) {
@@ -64,12 +63,12 @@ class SelectField<T> extends StatelessWidget {
             values: data.input.availibleValues,
             onSelected: data.onValueChanged == null ? null : onUniqueChoice,
             selectedValue: selectedValues.firstOrNull,
-            valueBuilder: data.uiSettings.valueBuilder,
-            selectedBuilder: data.uiSettings.selectedBuilder,
-            helpValueBuilder: data.uiSettings.helpValueBuilder,
-            hintText: data.uiSettings.hintText,
-            searchScore: data.uiSettings.searchScore,
-            searchScreenLayout: (data.uiSettings.flex ?? 0) == 0
+            valueBuilder: uiSettings?.valueBuilder,
+            selectedBuilder: uiSettings?.selectedBuilder,
+            helpValueBuilder: uiSettings?.helpValueBuilder,
+            hintText: uiSettings?.hintText,
+            searchScore: uiSettings?.searchScore,
+            searchScreenLayout: (uiSettings?.flex ?? 0) == 0
                 ? LayoutMethod.shrinkWrap
                 : LayoutMethod.scrollable,
             initialQuery: context.read<WoFormValuesCubit>().state.queryOf(
@@ -80,8 +79,8 @@ class SelectField<T> extends StatelessWidget {
                   path: '${data.path}-query',
                   value: query,
                 ),
-            searchScreenBuilder: data.uiSettings.searchScreenBuilder,
-            openSearchScreen: data.uiSettings.openChildren,
+            searchScreenBuilder: uiSettings?.searchScreenBuilder,
+            openSearchScreen: uiSettings?.openChildren,
             provider: ({required child}) => RepositoryProvider.value(
               value: context.read<RootNode>(),
               child: MultiBlocProvider(
@@ -96,27 +95,27 @@ class SelectField<T> extends StatelessWidget {
           );
 
           return FlexField(
-            headerFlex: data.uiSettings.headerFlex,
-            labelText: data.uiSettings.labelText,
-            helperText: data.uiSettings.helperText,
+            headerFlex: uiSettings?.headerFlex,
+            labelText: uiSettings?.labelText,
+            helperText: uiSettings?.helperText,
             errorText: data.errorText,
             trailing: scoreWidget,
-            prefixIcon: data.uiSettings.prefixIcon == null
+            prefixIcon: uiSettings?.prefixIcon == null
                 ? null
                 : Padding(
                     padding: const EdgeInsets.only(top: 8),
-                    child: data.uiSettings.prefixIcon,
+                    child: uiSettings?.prefixIcon,
                   ),
             disableMode: data.onValueChanged == null
                 ? FlexFieldDisableMode.header
                 : FlexFieldDisableMode.none,
-            headerBuilder: data.uiSettings.headerBuilder,
+            headerBuilder: uiSettings?.headerBuilder,
             child: selector,
           );
         } else {
           final headerData = WoFormInputHeaderData(
-            labelText: data.uiSettings.labelText,
-            helperText: data.uiSettings.helperText,
+            labelText: uiSettings?.labelText,
+            helperText: uiSettings?.helperText,
             errorText: data.errorText,
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
@@ -131,11 +130,11 @@ class SelectField<T> extends StatelessWidget {
                       ? null
                       : onMultipleChoice,
                   selectedValues: selectedValues,
-                  valueBuilder: data.uiSettings.valueBuilder,
-                  helpValueBuilder: data.uiSettings.helpValueBuilder,
-                  hintText: data.uiSettings.hintText,
-                  searchScore: data.uiSettings.searchScore,
-                  searchScreenLayout: (data.uiSettings.flex ?? 0) == 0
+                  valueBuilder: uiSettings?.valueBuilder,
+                  helpValueBuilder: uiSettings?.helpValueBuilder,
+                  hintText: uiSettings?.hintText,
+                  searchScore: uiSettings?.searchScore,
+                  searchScreenLayout: (uiSettings?.flex ?? 0) == 0
                       ? LayoutMethod.shrinkWrap
                       : LayoutMethod.scrollable,
                   initialQuery: context.read<WoFormValuesCubit>().state.queryOf(
@@ -146,8 +145,8 @@ class SelectField<T> extends StatelessWidget {
                         path: '${data.path}-query',
                         value: query,
                       ),
-                  searchScreenBuilder: data.uiSettings.searchScreenBuilder,
-                  openSearchScreen: data.uiSettings.openChildren,
+                  searchScreenBuilder: uiSettings?.searchScreenBuilder,
+                  openSearchScreen: uiSettings?.openChildren,
                   builder: (onPressed) => IconButton.filled(
                     onPressed: onPressed,
                     icon: const Icon(Icons.add),
@@ -180,7 +179,7 @@ class SelectField<T> extends StatelessWidget {
             opacity: data.onValueChanged == null ? 0.3 : 1,
             child: Column(
               children: [
-                (data.uiSettings.headerBuilder ??
+                (uiSettings?.headerBuilder ??
                         woTheme?.inputHeaderBuilder ??
                         InputHeader.new)
                     .call(headerData),
@@ -191,12 +190,12 @@ class SelectField<T> extends StatelessWidget {
                       children: [
                         ...selectedValues.map(
                           (v) => _MultipleSelectChip(
-                            helper: data.uiSettings.helpValueBuilder?.call(v),
+                            helper: uiSettings?.helpValueBuilder?.call(v),
                             onDeleted: data.onValueChanged == null
                                 ? null
                                 : () => onMultipleChoice(v),
                             label:
-                                data.uiSettings.valueBuilder?.call(v) ??
+                                uiSettings?.valueBuilder?.call(v) ??
                                 Text(v.toString()),
                           ),
                         ),
@@ -236,7 +235,7 @@ class _AlwaysVisibleSelectField<T> extends StatelessWidget {
     this.searchScore,
   });
 
-  final WoFieldData<SelectInput<T>, List<T>, SelectInputUiSettings<T>> data;
+  final WoFieldData<SelectInput<T>, List<T>> data;
   final void Function(T) onChanged;
   final Widget header;
   final Widget Function(T value, VoidCallback onTap, bool isSelected)?
@@ -289,7 +288,7 @@ class _AlwaysVisibleSelectField<T> extends StatelessWidget {
             onTapOutside: (event) => FocusScope.of(context).unfocus(),
           ),
         ),
-      if ((data.uiSettings.flex ?? 0) > 0)
+      if ((data.input.uiSettings?.flex ?? 0) > 0)
         Expanded(
           child: ListView.builder(
             itemCount: values.length,
@@ -317,8 +316,9 @@ class _AlwaysVisibleSelectField<T> extends StatelessWidget {
       toggleable: true,
       value: value,
       title:
-          data.uiSettings.valueBuilder?.call(value) ?? Text(value.toString()),
-      subtitle: data.uiSettings.helpValueBuilder?.call(value),
+          data.input.uiSettings?.valueBuilder?.call(value) ??
+          Text(value.toString()),
+      subtitle: data.input.uiSettings?.helpValueBuilder?.call(value),
     ),
   );
 
@@ -326,8 +326,10 @@ class _AlwaysVisibleSelectField<T> extends StatelessWidget {
     contentPadding: const EdgeInsets.only(left: 6, right: 16),
     value: data.value?.contains(value) ?? false,
     onChanged: data.onValueChanged == null ? null : (_) => onChanged(value),
-    title: data.uiSettings.valueBuilder?.call(value) ?? Text(value.toString()),
-    subtitle: data.uiSettings.helpValueBuilder?.call(
+    title:
+        data.input.uiSettings?.valueBuilder?.call(value) ??
+        Text(value.toString()),
+    subtitle: data.input.uiSettings?.helpValueBuilder?.call(
       value,
     ),
     controlAffinity: ListTileControlAffinity.leading,
