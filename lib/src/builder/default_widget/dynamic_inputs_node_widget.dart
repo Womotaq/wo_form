@@ -10,11 +10,15 @@ class DynamicInputsNodeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final woFormTheme = WoFormTheme.of(context);
+
     final addButton =
         (data.input.uiSettings?.addButtonBuilder ??
+        woFormTheme?.dynamicInputsNodeAddButtonBuilder ??
         DynamicInputsNodeAddButton.new)(data);
     final addButtonPosition =
         data.input.uiSettings?.addButtonPosition ??
+        woFormTheme?.dynamicInputsNodeAddButtonPosition ??
         DynamicInputsNodeAddButtonPosition.header;
 
     final headerData = WoFormInputHeaderData(
@@ -53,9 +57,7 @@ class DynamicInputsNodeWidget extends StatelessWidget {
 
     return Column(
       children: [
-        (WoFormTheme.of(context)?.inputHeaderBuilder ?? InputHeader.new).call(
-          headerData,
-        ),
+        (woFormTheme?.inputHeaderBuilder ?? InputHeader.new).call(headerData),
         WoReorderableByGrabListView(
           onReorder: data.onValueChanged == null
               ? null

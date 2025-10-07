@@ -8,6 +8,10 @@ part of 'wo_form_theme_data.dart';
 
 _WoFormThemeData _$WoFormThemeDataFromJson(Map<String, dynamic> json) =>
     _WoFormThemeData(
+      dynamicInputsNodeAddButtonPosition: $enumDecodeNullable(
+        _$DynamicInputsNodeAddButtonPositionEnumMap,
+        json['dynamicInputsNodeAddButtonPosition'],
+      ),
       stringFieldErrorLocation: $enumDecodeNullable(
         _$StringFieldLocationEnumMap,
         json['stringFieldErrorLocation'],
@@ -31,6 +35,9 @@ _WoFormThemeData _$WoFormThemeDataFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$WoFormThemeDataToJson(_WoFormThemeData instance) =>
     <String, dynamic>{
+      'dynamicInputsNodeAddButtonPosition':
+          _$DynamicInputsNodeAddButtonPositionEnumMap[instance
+              .dynamicInputsNodeAddButtonPosition],
       'stringFieldErrorLocation':
           _$StringFieldLocationEnumMap[instance.stringFieldErrorLocation],
       'stringFieldHelperLocation':
@@ -43,6 +50,11 @@ Map<String, dynamic> _$WoFormThemeDataToJson(_WoFormThemeData instance) =>
       'spacing': instance.spacing,
       'showAsteriskIfRequired': instance.showAsteriskIfRequired,
     };
+
+const _$DynamicInputsNodeAddButtonPositionEnumMap = {
+  DynamicInputsNodeAddButtonPosition.header: 'header',
+  DynamicInputsNodeAddButtonPosition.footer: 'footer',
+};
 
 const _$StringFieldLocationEnumMap = {
   StringFieldLocation.inside: 'inside',

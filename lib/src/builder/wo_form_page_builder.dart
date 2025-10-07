@@ -38,18 +38,12 @@ class _WoFormStandardBody extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         if (uiSettings.titlePosition == WoFormTitlePosition.header)
-          Builder(
-            builder: (context) {
-              final headerData = WoFormHeaderData(
-                labelText: uiSettings.titleText,
-              );
-
-              return (uiSettings.headerBuilder ??
-                      woFormTheme?.headerBuilder ??
-                      FormHeader.new)
-                  .call(headerData);
-            },
-          ),
+          (uiSettings.headerBuilder ??
+                  woFormTheme?.headerBuilder ??
+                  FormHeader.new)
+              .call(
+                WoFormHeaderData(labelText: uiSettings.titleText),
+              ),
         Flexible(
           flex:
               !uiSettings.layout.supportFlex ||

@@ -23,6 +23,9 @@ abstract class WoFormThemeData with _$WoFormThemeData {
     @notSerializable IsoCode? defaultPhoneCoutry,
     @notSerializable DurationFieldBuilderDef? durationFieldBuilder,
     @notSerializable
+    DynamicInputsNodeWidgetBuilderDef? dynamicInputsNodeAddButtonBuilder,
+    DynamicInputsNodeAddButtonPosition? dynamicInputsNodeAddButtonPosition,
+    @notSerializable
     DynamicInputsNodeWidgetBuilderDef? dynamicInputsNodeWidgetBuilder,
     @notSerializable FormatDurationDef? formatDuration,
     @notSerializable WidgetBuilderDef? formPageBuilder,
@@ -98,6 +101,12 @@ abstract class WoFormThemeData with _$WoFormThemeData {
           defaultPhoneCoutry: defaultPhoneCoutry ?? other.defaultPhoneCoutry,
           durationFieldBuilder:
               durationFieldBuilder ?? other.durationFieldBuilder,
+          dynamicInputsNodeAddButtonBuilder:
+              dynamicInputsNodeAddButtonBuilder ??
+              other.dynamicInputsNodeAddButtonBuilder,
+          dynamicInputsNodeAddButtonPosition:
+              dynamicInputsNodeAddButtonPosition ??
+              other.dynamicInputsNodeAddButtonPosition,
           dynamicInputsNodeWidgetBuilder:
               dynamicInputsNodeWidgetBuilder ??
               other.dynamicInputsNodeWidgetBuilder,
