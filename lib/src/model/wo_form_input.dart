@@ -503,17 +503,22 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
     }
   }
 
+  /// This method returns the value to provide to [Flexible.flex].
+  ///
   /// Used when [WoFormUiSettings.layout] is [LayoutMethod.flexible].
   @override
-  int? flex(BuildContext context, {required String parentPath}) =>
-      switch (this) {
-        final SelectInput<T> input =>
-          input.uiSettings?.childrenVisibility == ChildrenVisibility.whenAsked
-              ? 0
-              : input.uiSettings?.flex,
-        // final SelectStringInput input => input.uiSettings?.flex,
-        _ => null,
-      };
+  int? flex(BuildContext context, {required String parentPath}) {
+    final flexRaw = switch (this) {
+      final SelectInput<T> input =>
+        input.uiSettings?.childrenVisibility == ChildrenVisibility.whenAsked
+            ? 0
+            : input.uiSettings?.flex,
+      // final SelectStringInput input => input.uiSettings?.flex,
+      _ => null,
+    };
+
+    return (flexRaw != null && flexRaw < 0) ? 1 : flexRaw;
+  }
 }
 
 // Note : when adding a new parameter, make sure to update

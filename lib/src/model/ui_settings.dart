@@ -335,11 +335,6 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
     /// - [ChildrenVisibility.whenAsked] : -1
     int? flex,
 
-    /// If flex is higher than 0, the default widget will use ListView.builder.
-    ///
-    /// Defaults to false.
-    bool? scrollable,
-
     /// If scollable is true, the children order will be inverted,
     /// including the header.
     ///

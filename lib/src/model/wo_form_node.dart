@@ -897,61 +897,66 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
 
   WoFormNode withId({required String id}) => copyWith(id: id);
 
+  /// This method returns the value to provide to [Flexible.flex].
+  ///
   /// Used when [WoFormUiSettings.layout] is [LayoutMethod.flexible].
-  int? flex(BuildContext context, {required String parentPath}) =>
-      switch (this) {
-        final ConditionnalNode node =>
-          node.uiSettings?.flex == null || node.uiSettings!.flex! == 0
-              ? node.uiSettings?.flex
-              : !context.select(
-                  (WoFormValuesCubit c) => c.state.meet(node.condition),
-                )
-              ? 0
-              : node.uiSettings!.flex == WoFormNode.flexDeferToChild
-              ? node.child.flex(context, parentPath: '$parentPath/$id')
-              : node.uiSettings!.flex,
-        DynamicInputsNode _ || EmptyNode _ => null,
-        final FutureNode node => node.uiSettings?.flex,
-        final PathBuilderNode node => node.builder!('$parentPath/$id').flex(
-          context,
-          parentPath: '$parentPath/$id',
-        ),
-        RootNode _ => null,
-        final SelectorNode node =>
-          node
-              .builder!(
-                context.select(
-                  (WoFormValuesCubit c) => node.selector!(c.state),
-                ),
+  int? flex(BuildContext context, {required String parentPath}) {
+    final flexRaw = switch (this) {
+      final ConditionnalNode node =>
+        node.uiSettings?.flex == null || node.uiSettings!.flex! == 0
+            ? node.uiSettings?.flex
+            : !context.select(
+                (WoFormValuesCubit c) => c.state.meet(node.condition),
               )
-              // skip root's id
-              .flex(context, parentPath: ''),
-        final ValueBuilderNode node =>
-          node
-              .builder!(
-                context.select((WoFormValuesCubit c) => c.state[node.path]),
-              )
-              .flex(context, parentPath: '$parentPath/$id'),
-        final ValuesBuilderNode node =>
-          node
-              .builder!(
-                context.select(
-                  (WoFormValuesCubit c) => {
-                    for (final path in node.paths) path: c.state[path],
-                  },
-                ),
-              )
-              .flex(context, parentPath: '$parentPath/$id'),
-        ValueListenerNode _ => null,
-        InputsNode(uiSettings: final uiSettings) =>
-          uiSettings?.childrenVisibility == ChildrenVisibility.whenAsked
-              ? 0
-              : uiSettings?.flex,
-        WidgetNode(uiSettings: final uiSettings) => uiSettings?.flex,
+            ? 0
+            : node.uiSettings!.flex == WoFormNode.flexDeferToChild
+            ? node.child.flex(context, parentPath: '$parentPath/$id')
+            : node.uiSettings!.flex,
+      DynamicInputsNode _ || EmptyNode _ => null,
+      final FutureNode node => node.uiSettings?.flex,
+      final PathBuilderNode node => node.builder!('$parentPath/$id').flex(
+        context,
+        parentPath: '$parentPath/$id',
+      ),
+      RootNode _ => null,
+      final SelectorNode node =>
+        node
+            .builder!(
+              context.select(
+                (WoFormValuesCubit c) => node.selector!(c.state),
+              ),
+            )
+            // skip root's id
+            .flex(context, parentPath: ''),
+      final ValueBuilderNode node =>
+        node
+            .builder!(
+              context.select((WoFormValuesCubit c) => c.state[node.path]),
+            )
+            .flex(context, parentPath: '$parentPath/$id'),
+      final ValuesBuilderNode node =>
+        node
+            .builder!(
+              context.select(
+                (WoFormValuesCubit c) => {
+                  for (final path in node.paths) path: c.state[path],
+                },
+              ),
+            )
+            .flex(context, parentPath: '$parentPath/$id'),
+      ValueListenerNode _ => null,
+      InputsNode(uiSettings: final uiSettings) =>
+        uiSettings?.childrenVisibility == ChildrenVisibility.whenAsked
+            ? 0
+            : uiSettings?.flex,
+      WidgetNode(uiSettings: final uiSettings) => uiSettings?.flex,
 
-        // WoFormInput overrides this method
-        WoFormInput() => throw UnimplementedError(),
-      };
+      // WoFormInput overrides this method
+      WoFormInput() => throw UnimplementedError(),
+    };
+
+    return (flexRaw != null && flexRaw < 0) ? 1 : flexRaw;
+  }
 
   /// If uiSettings.flex is set to flexDeferToChild, the flex will be based on
   /// the child's flex.

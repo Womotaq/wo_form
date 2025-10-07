@@ -26,10 +26,6 @@ class InputsNodeWidget extends StatelessWidget {
     final spacing = uiSettings?.spacing ?? woFormTheme?.spacing ?? 0;
     final reverse = uiSettings?.reverse ?? false;
 
-    final childBuilder = direction == Axis.vertical
-        ? standardChildBuilder
-        : flexibleChildBuilder;
-
     return LayoutMethod.fromFlex(uiSettings.flexOrDefault).isScrollable
         ? ListView.builder(
             controller: ScrollControllerProvider.of(context),
@@ -59,7 +55,13 @@ class InputsNodeWidget extends StatelessWidget {
                     crossAxisAlignment:
                         uiSettings?.crossAxisAlignment ??
                         CrossAxisAlignment.stretch,
-                    children: data.input.children.map(childBuilder).toList(),
+                    children: data.input.children
+                        .map(
+                          uiSettings.flexOrDefault != 0
+                              ? flexibleChildBuilder
+                              : standardChildBuilder,
+                        )
+                        .toList(),
                   ),
                 ),
               ),
@@ -76,9 +78,7 @@ class InputsNodeWidget extends StatelessWidget {
       return Flexible(
         flex:
             flex ??
-            (data.input.uiSettings?.direction == Axis.horizontal
-                ? flex ?? 1
-                : 0),
+            (data.input.uiSettings?.direction == Axis.horizontal ? 1 : 0),
         child: standardChildBuilder(child),
       );
     },

@@ -219,7 +219,6 @@ _InputsNodeUiSettings _$InputsNodeUiSettingsFromJson(
   Map<String, dynamic> json,
 ) => _InputsNodeUiSettings(
   flex: (json['flex'] as num?)?.toInt(),
-  scrollable: json['scrollable'] as bool?,
   reverse: json['reverse'] as bool?,
   labelText: json['labelText'] as String?,
   labelTextWhenChildrenHidden: json['labelTextWhenChildrenHidden'] as String?,
@@ -245,7 +244,6 @@ Map<String, dynamic> _$InputsNodeUiSettingsToJson(
   _InputsNodeUiSettings instance,
 ) => <String, dynamic>{
   'flex': instance.flex,
-  'scrollable': instance.scrollable,
   'reverse': instance.reverse,
   'labelText': instance.labelText,
   'labelTextWhenChildrenHidden': instance.labelTextWhenChildrenHidden,
