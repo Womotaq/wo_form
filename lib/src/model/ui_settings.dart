@@ -335,7 +335,7 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
     /// - [ChildrenVisibility.whenAsked] : -1
     int? flex,
 
-    /// If scollable is true, the children order will be inverted,
+    /// If [flex] is -1, the children order will be inverted,
     /// including the header.
     ///
     /// Defaults to false.

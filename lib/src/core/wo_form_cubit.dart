@@ -725,6 +725,21 @@ class WoFormValues {
   }
 
   /// path can be a key, or a string starting with #, like #endsAt.
+  /// Then, the result is the first key that ends with path.
+  ///
+  /// Returns null if no key matches the path.
+  String? getKeyOrNull(String path) {
+    if (!path.startsWith('#')) return path;
+
+    final lastSection = '/${path.substring(1)}';
+    for (final key in _values.keys) {
+      if (key.endsWith(lastSection)) return key;
+    }
+
+    return null;
+  }
+
+  /// path can be a key, or a string starting with #, like #endsAt.
   /// Then, the result is the value corresponding to the first key
   /// that ends with path.
   dynamic getValue(String path, {String? parentPath}) {

@@ -86,7 +86,8 @@ extension ConditionMeeter on WoFormValues {
           return (value == null) == isNull;
         }
         if (isFocused != null) {
-          return this.isFocused(path);
+          final pathOrNull = getKeyOrNull(path);
+          return pathOrNull != null && this.isFocused(pathOrNull);
         }
         if (matchesRegex != null) {
           if (value is! String) return false;

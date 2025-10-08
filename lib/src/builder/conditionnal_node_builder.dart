@@ -32,6 +32,7 @@ class ConditionnalNodeBuilder extends StatelessWidget {
             if (node.resetChildrenWhenHidden) {
               valuesCubit.onValuesChanged(
                 node.child.getInitialValues(parentPath: path),
+                updateStatus: UpdateStatus.ifPathAlreadyVisited,
               );
             }
             return const SizedBox.shrink();
