@@ -1067,6 +1067,9 @@ sealed class MultistepSettings with _$MultistepSettings {
     /// Text for the submit button if it navigates to the next form page.
     /// Falls back to submitText if not provided.
     String? nextText,
+
+    /// Defaults to [MultistepUrlStrategy.none].
+    MultistepUrlStrategy? urlStrategy,
     @Default(true) bool showProgressIndicator,
 
     @notSerializable
@@ -1091,6 +1094,22 @@ sealed class MultistepSettings with _$MultistepSettings {
   // --
 
   bool get generatingSteps => onStepSubmitting != null;
+}
+
+/// Defines how the url on web will be updated when the user navigates through
+/// the steps.
+enum MultistepUrlStrategy {
+  /// Navigating won't modify the url.
+  ///
+  /// Example : example.com/form
+  none,
+
+  /// Uses query parameters.
+  /// The id of the current step is the value placed after '?step='.
+  /// The first page won't have a query parameter.
+  ///
+  /// Example : example.com/form?step=email
+  query,
 }
 
 typedef OnStepSubmittingDef =

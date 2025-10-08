@@ -571,6 +571,10 @@ const _$WoFormPresentationEnumMap = {
 _MultistepSettings _$MultistepSettingsFromJson(Map<String, dynamic> json) =>
     _MultistepSettings(
       nextText: json['nextText'] as String?,
+      urlStrategy: $enumDecodeNullable(
+        _$MultistepUrlStrategyEnumMap,
+        json['urlStrategy'],
+      ),
       showProgressIndicator: json['showProgressIndicator'] as bool? ?? true,
       fieldsPadding: const EdgeInsetsNullableConverter().fromJson(
         json['fieldsPadding'] as Map<String, dynamic>?,
@@ -580,8 +584,14 @@ _MultistepSettings _$MultistepSettingsFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$MultistepSettingsToJson(_MultistepSettings instance) =>
     <String, dynamic>{
       'nextText': instance.nextText,
+      'urlStrategy': _$MultistepUrlStrategyEnumMap[instance.urlStrategy],
       'showProgressIndicator': instance.showProgressIndicator,
       'fieldsPadding': const EdgeInsetsNullableConverter().toJson(
         instance.fieldsPadding,
       ),
     };
+
+const _$MultistepUrlStrategyEnumMap = {
+  MultistepUrlStrategy.none: 'none',
+  MultistepUrlStrategy.query: 'query',
+};

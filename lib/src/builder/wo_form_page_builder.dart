@@ -203,19 +203,47 @@ class _WoFormMultistepBody extends StatelessWidget {
 }
 
 class MultistepController {
-  MultistepController._(this.valuesCubit) : _controller = PageController();
+  MultistepController._(this.valuesCubit) : _controller = PageController() {
+    if (kIsWeb &&
+        valuesCubit._root.uiSettings?.multistepSettings?.urlStrategy ==
+            MultistepUrlStrategy.query) {
+      _initialLocation = html.window.location.href;
+
+      _onPopStream = html.window.onPopState.listen((event) async {
+        if (html.window.location.href == _initialLocation) {
+          // Required since the first step doesn't fill
+          // the 'step' query parameter
+          await animateToStep(0);
+          return;
+        }
+
+        final uri = Uri.parse(html.window.location.href);
+        final queriedStep = uri.queryParameters['step'];
+        if (queriedStep == null) return;
+
+        final steps =
+            (valuesCubit._root.uiSettings?.multistepSettings?.generatingSteps ??
+                false)
+            ? valuesCubit.state.generatedSteps
+            : valuesCubit._root.children.map((step) => step.id).toList();
+        final stepIndex = steps.indexed
+            .firstWhereOrNull((data) => data.$2 == queriedStep)
+            ?.$1;
+
+        if (stepIndex != null) {
+          _skipNextWebHistoryUpdate = true;
+          await animateToStep(stepIndex);
+        }
+      });
+    }
+  }
 
   final PageController _controller;
   final WoFormValuesCubit valuesCubit;
 
-  // static MultistepController? of(BuildContext context, {bool listen = true}) =>
-  //     listen
-  //     ? context
-  //           .dependOnInheritedWidgetOfExactType<_MultistepControllerProvider>()
-  //           ?.controller
-  //     : context
-  //           .getInheritedWidgetOfExactType<_MultistepControllerProvider>()
-  //           ?.controller;
+  late String _initialLocation;
+  late final StreamSubscription<html.PopStateEvent>? _onPopStream;
+  bool _skipNextWebHistoryUpdate = false;
 
   static MultistepController? of(BuildContext context) => context
       .getInheritedWidgetOfExactType<_MultistepControllerProvider>()
@@ -249,6 +277,8 @@ class MultistepController {
     final failure = valuesCubit._onMultistepControllerUpdate(step);
     if (failure == null) {
       _controller.jumpToPage(step);
+
+      updateWebHistory();
     }
     return failure;
   }
@@ -261,8 +291,44 @@ class MultistepController {
         duration: WoFormTheme.STEP_TRANSITION_DURATION,
         curve: Curves.easeIn,
       );
+
+      updateWebHistory();
     }
     return failure;
+  }
+
+  void updateWebHistory() {
+    if (kIsWeb &&
+        valuesCubit._root.uiSettings?.multistepSettings?.urlStrategy ==
+            MultistepUrlStrategy.query) {
+      if (_skipNextWebHistoryUpdate) {
+        _skipNextWebHistoryUpdate = false;
+        return;
+      }
+
+      final currentStepIndex = valuesCubit.state.currentStepIndex ?? 0;
+
+      if (currentStepIndex == 0) {
+        html.window.history.pushState(
+          null,
+          '',
+          '${html.window.location.pathname}',
+        );
+      } else {
+        final steps =
+            (valuesCubit._root.uiSettings?.multistepSettings?.generatingSteps ??
+                false)
+            ? valuesCubit.state.generatedSteps
+            : valuesCubit._root.children.map((step) => step.id).toList();
+        final currentStepId = steps[currentStepIndex];
+
+        html.window.history.pushState(
+          null,
+          '',
+          '${html.window.location.pathname}?step=$currentStepId',
+        );
+      }
+    }
   }
 
   Future<MultistepFailure?> nextStep() =>
@@ -271,7 +337,10 @@ class MultistepController {
   Future<MultistepFailure?> previousStep() =>
       animateToStep((_controller.page?.toInt() ?? 0) - 1);
 
-  void dispose() => _controller.dispose();
+  Future<void> dispose() async {
+    await _onPopStream?.cancel();
+    _controller.dispose();
+  }
 }
 
 enum MultistepFailure { error, endOfForm, startOfForm }
@@ -306,8 +375,8 @@ class _ControllersManagerState extends State<_ControllersManager> {
   }
 
   @override
-  void dispose() {
-    stepController?.dispose();
+  Future<void> dispose() async {
+    await stepController?.dispose();
     if (!inheritedScrollController) scrollController.dispose();
     super.dispose();
   }
