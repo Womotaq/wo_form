@@ -173,27 +173,31 @@ class _WoFormMultistepBody extends StatelessWidget {
       },
     );
 
-    return Column(
-      children: [
-        if (uiSettings.titlePosition == WoFormTitlePosition.header)
-          Builder(
-            builder: (context) {
-              final headerData = WoFormHeaderData(
-                labelText: uiSettings.titleText,
-              );
+    // WoFormPopScope blocks pop events, and transforms them in
+    // MultistepController.previousStep
+    return WoFormPopScope(
+      builder: (context, _) => Column(
+        children: [
+          if (uiSettings.titlePosition == WoFormTitlePosition.header)
+            Builder(
+              builder: (context) {
+                final headerData = WoFormHeaderData(
+                  labelText: uiSettings.titleText,
+                );
 
-              return (uiSettings.headerBuilder ??
-                      woFormTheme?.headerBuilder ??
-                      FormHeader.new)
-                  .call(headerData);
-            },
-          ),
-        if (multistepSettings.showProgressIndicator)
-          (multistepSettings.progressIndicatorBuilder ??
-              woFormTheme?.multiStepProgressIndicatorBuilder ??
-              MultiStepProgressIndicator.new)(),
-        Expanded(child: pageView),
-      ],
+                return (uiSettings.headerBuilder ??
+                        woFormTheme?.headerBuilder ??
+                        FormHeader.new)
+                    .call(headerData);
+              },
+            ),
+          if (multistepSettings.showProgressIndicator)
+            (multistepSettings.progressIndicatorBuilder ??
+                woFormTheme?.multiStepProgressIndicatorBuilder ??
+                MultiStepProgressIndicator.new)(),
+          Expanded(child: pageView),
+        ],
+      ),
     );
   }
 }
