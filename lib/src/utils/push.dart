@@ -10,7 +10,8 @@ class Push {
     required BuildContext context,
     required Widget child,
     LayoutMethod layout = LayoutMethod.scrollable,
-  }) => context.pushPage(child);
+    bool dismissible = false,
+  }) => context.pushPage(child, dismissible: dismissible);
 
   /// Use this method when you want to push a widget in a new page,
   /// but this widget isn't a page, i.e. it doesn't have navigation controls.
@@ -18,6 +19,7 @@ class Push {
     required BuildContext context,
     required Widget child,
     LayoutMethod layout = LayoutMethod.scrollable,
+    bool dismissible = false,
   }) => page(
     context: context,
     child: Scaffold(
@@ -25,14 +27,17 @@ class Push {
       body: child,
     ),
     layout: layout,
+    dismissible: dismissible,
   );
 
   static Future<V?> dialog<V extends Object?>({
     required Widget child,
     required BuildContext context,
+    bool dismissible = true,
     LayoutMethod layout = LayoutMethod.scrollable,
   }) => showDialog(
     context: context,
+    barrierDismissible: dismissible,
     builder: (context) => Dialog(
       clipBehavior: Clip.hardEdge,
       child: child,
@@ -50,6 +55,7 @@ class Push {
     ///
     /// If flexible, the modal does the same size as initialBottomSheetSize.
     LayoutMethod layout = LayoutMethod.scrollable,
+    bool dismissible = true,
     double initialBottomSheetSize = .7,
     bool showDragHandle = false,
   }) {
@@ -71,6 +77,10 @@ class Push {
       context: context,
       isScrollControlled: true,
       useSafeArea: true,
+      isDismissible: dismissible,
+      // When the drag is enabled, the modal can be closed by swapping down,
+      // even when isDismissible is set to true.
+      enableDrag: dismissible,
       clipBehavior: Clip.hardEdge,
       builder: (context) => Padding(
         // This padding allows the modal to adjust to the keyboard
@@ -98,10 +108,12 @@ class Push {
     required BuildContext context,
     required Widget child,
     LayoutMethod layout = LayoutMethod.scrollable,
+    bool dismissible = true,
     double overlayMaxWidth = 256,
     double overlayMaxHeight = 384,
   }) => showPopover(
     context: context,
+    barrierDismissible: dismissible,
     backgroundColor: Theme.of(context).colorScheme.surfaceBright,
     constraints: BoxConstraints(
       maxWidth: overlayMaxWidth,
@@ -168,6 +180,7 @@ typedef PushDef =
       required BuildContext context,
       required Widget child,
       LayoutMethod layout,
+      bool dismissible,
     });
 
 class PushDefNullableConverter extends JsonConverter<PushDef?, String?> {
