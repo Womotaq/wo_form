@@ -354,6 +354,7 @@ Map<String, dynamic> _$SelectInputUiSettingsToJson<T>(
 _StringInputUiSettings _$StringInputUiSettingsFromJson(
   Map<String, dynamic> json,
 ) => _StringInputUiSettings(
+  flex: (json['flex'] as num?)?.toInt(),
   headerFlex: (json['headerFlex'] as num?)?.toInt(),
   labelText: json['labelText'] as String?,
   labelLocation: $enumDecodeNullable(
@@ -397,11 +398,15 @@ _StringInputUiSettings _$StringInputUiSettingsFromJson(
   maxLines: (json['maxLines'] as num?)?.toInt(),
   invalidRegexMessage: json['invalidRegexMessage'] as String?,
   collapsed: json['collapsed'] as bool?,
+  padding: const EdgeInsetsNullableConverter().fromJson(
+    json['padding'] as Map<String, dynamic>?,
+  ),
 );
 
 Map<String, dynamic> _$StringInputUiSettingsToJson(
   _StringInputUiSettings instance,
 ) => <String, dynamic>{
+  'flex': instance.flex,
   'headerFlex': instance.headerFlex,
   'labelText': instance.labelText,
   'labelLocation': _$StringFieldLocationEnumMap[instance.labelLocation],
@@ -425,6 +430,7 @@ Map<String, dynamic> _$StringInputUiSettingsToJson(
   'maxLines': instance.maxLines,
   'invalidRegexMessage': instance.invalidRegexMessage,
   'collapsed': instance.collapsed,
+  'padding': const EdgeInsetsNullableConverter().toJson(instance.padding),
 };
 
 const _$StringFieldLocationEnumMap = {

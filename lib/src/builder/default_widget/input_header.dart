@@ -45,12 +45,12 @@ class InputHeader extends StatelessWidget {
     return InkWell(
       onTap: data.onTap,
       child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: data.shrinkWrap
-              ? 0
-              : theme.listTileTheme.minVerticalPadding ?? 4,
-        ),
+        padding:
+            data.padding ??
+            EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: data.shrinkWrap ? 0 : 4,
+            ),
         child: Row(
           children: [
             Expanded(
@@ -71,7 +71,7 @@ class InputHeader extends StatelessWidget {
                         maxLines: data.labelMaxLines,
                         overflow: TextOverflow.ellipsis,
                       ),
-                    if (subtitleWidget != null) subtitleWidget,
+                    ?subtitleWidget,
                   ],
                 ),
               ),

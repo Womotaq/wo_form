@@ -115,37 +115,6 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
     NumInputUiSettings? uiSettings,
   }) = NumInput;
 
-  // TODO : delete
-  // @Assert(
-  //   'maxCount == null || minCount <= maxCount',
-  //   'maxCount must be higher or equal to minCount',
-  // )
-  // factory WoFormInput.selectString({
-  //   required String id,
-  //   required int? maxCount,
-  //   @Default(0) int minCount,
-  //   List<String>? initialValues,
-  //   @Default([]) List<String> availibleValues,
-  //   // idsOfAvailibleValues allows to set an identifier to each value.
-  //   // This way, we keep the advantage of a list : the order
-  //   // and we gain the advantage of a map : the identifiers
-  //   // while staying jsonifiable.
-  //   // If set, the object stored at the path of this input in WoFormValuesCubit
-  //   // will be the id of the selected value.
-  //   List<String>? idsOfAvailibleValues,
-  //   @notSerializable GetCustomErrorForListDef<String>? getCustomError,
-
-  //   /// An optionnal callback when the value changed
-  //   @notSerializable void Function(List<String>? value)? onValueChanged,
-
-  //   /// Only applies if maxCount is 1
-  //   @Default(false) bool submitFormOnSelect,
-  //   @JsonKey(toJson: _SelectInputUiSettingsX.staticToJsonString)
-  //   SelectInputUiSettings<String>? uiSettings,
-  //   // The correct answer is the index of availibleValues
-  //   QuizSettings? quizSettings,
-  // }) = SelectStringInput;
-
   const factory WoFormInput.string({
     required String id,
     String? initialValue,
@@ -250,12 +219,6 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
           toJsonT: toJsonT,
           asList: maxCount != 1,
         );
-      // case SelectStringInput(maxCount: final maxCount):
-      //   return SelectInput._selectedValuesToJson(
-      //     selectedValues: value as List<String>?,
-      //     toJsonT: (value) => value,
-      //     asList: maxCount != 1,
-      //   );
       case StringInput():
         return value as String?;
     }
@@ -409,25 +372,6 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
           getCustomError: getCustomError,
         );
 
-      // case SelectStringInput(
-      //   id: final inputId,
-      //   availibleValues: final availibleValues,
-      //   idsOfAvailibleValues: final idsOfAvailibleValues,
-      //   minCount: final minCount,
-      //   maxCount: final maxCount,
-      //   getCustomError: final getCustomError,
-      // ):
-      //   return SelectInput._validator<String>(
-      //     inputId: inputId,
-      //     parentPath: parentPath,
-      //     selectedValues: (value as List<String>?) ?? [],
-      //     availibleValues: availibleValues,
-      //     idsOfAvailibleValues: idsOfAvailibleValues,
-      //     minCount: minCount,
-      //     maxCount: maxCount,
-      //     getCustomError: getCustomError,
-      //   );
-
       case StringInput(
         isRequired: final isRequired,
         regexPattern: final regexPattern,
@@ -475,8 +419,6 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
         return {'$parentPath/$id': initialValue};
       case SelectInput(initialValues: final initialValues):
         return {'$parentPath/$id': initialValues};
-      // case SelectStringInput(initialValues: final initialValues):
-      //   return {'$parentPath/$id': initialValues};
     }
   }
 
@@ -498,8 +440,6 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
         return StringFieldBuilder(key: key, path: path);
       case SelectInput():
         return SelectFieldBuilder<T>(key: key, path: path);
-      // case SelectStringInput():
-      //   return SelectStringFieldBuilder(key: key, path: path);
     }
   }
 
@@ -513,7 +453,7 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
         input.uiSettings?.childrenVisibility == ChildrenVisibility.whenAsked
             ? 0
             : input.uiSettings?.flex,
-      // final SelectStringInput input => input.uiSettings?.flex,
+      final StringInput input => input.uiSettings?.flex,
       _ => null,
     };
 
@@ -728,22 +668,6 @@ typedef GetCustomErrorForListDef<T> =
       String path,
     );
 
-// extension SelectStringInputX on SelectStringInput {
-//   String? getAvailibleValue({required String id}) {
-//     final index = idsOfAvailibleValues?.indexOf(id) ?? -1;
-//     return (index < 0 || index >= availibleValues.length)
-//         ? null
-//         : availibleValues[index];
-//   }
-
-//   String? getIdOfValue({required String value}) {
-//     final index = availibleValues.indexOf(value);
-//     return (index < 0 || index >= (idsOfAvailibleValues?.length ?? -1))
-//         ? null
-//         : idsOfAvailibleValues![index];
-//   }
-// }
-
 extension SelectInputX<T> on SelectInput<T> {
   T? getAvailibleValue({required String id}) {
     final index = idsOfAvailibleValues?.indexOf(id) ?? -1;
@@ -759,10 +683,3 @@ extension SelectInputX<T> on SelectInput<T> {
         : idsOfAvailibleValues![index];
   }
 }
-
-// extension _SelectInputUiSettingsX<T> on SelectInputUiSettings<T> {
-//   static Json staticToJsonString(
-//     // TODO : remove
-//     SelectInputUiSettings<String> object,
-//   ) => object.toJson();
-// }

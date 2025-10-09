@@ -284,6 +284,7 @@ class _StringFieldState extends State<StringField> {
               child: uiSettings?.prefixIcon,
             )
           : null,
+      padding: uiSettings?.padding,
       child: textField,
     );
   }

@@ -24,6 +24,11 @@ abstract class WoFormInputHeaderData with _$WoFormInputHeaderData {
     Widget? trailing,
     VoidCallback? onTap,
     @Default(true) bool shrinkWrap,
+
+    /// By default :
+    /// - horizontal : 16
+    /// - vertical : shrinkWrap ? 0 : 4
+    EdgeInsets? padding,
   }) = _WoFormInputHeaderData;
 }
 

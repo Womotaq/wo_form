@@ -15,6 +15,7 @@ class FlexField extends StatelessWidget {
     this.onTapHeader,
     this.shrinkWrapHeader = true,
     this.disableMode = FlexFieldDisableMode.none,
+    this.padding,
     this.headerBuilder,
     super.key,
   });
@@ -36,6 +37,11 @@ class FlexField extends StatelessWidget {
   final Widget? trailing;
   final VoidCallback? onTapHeader;
   final bool shrinkWrapHeader;
+
+  /// By default :
+  /// - horizontal : 16
+  /// - vertical : 8 (+ 4 on top if not [shrinkWrapHeader])
+  final EdgeInsets? padding;
   final InputHeaderBuilderDef? headerBuilder;
 
   final Widget? prefixIcon;
@@ -43,6 +49,13 @@ class FlexField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final padding =
+        this.padding ??
+        const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 8,
+        );
+
     final header =
         (headerBuilder ??
                 WoFormTheme.of(context)?.inputHeaderBuilder ??
@@ -55,6 +68,12 @@ class FlexField extends StatelessWidget {
                 trailing: trailing,
                 onTap: onTapHeader,
                 shrinkWrap: shrinkWrapHeader,
+                padding: EdgeInsets.only(
+                  left: padding.left,
+                  right: padding.right,
+                  top: shrinkWrapHeader ? 0 : 4,
+                  bottom: shrinkWrapHeader ? 0 : 4,
+                ),
               ),
             );
 
@@ -67,7 +86,7 @@ class FlexField extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 8),
+          SizedBox(height: padding.top),
           if (headerFlex == null || headerFlex == 0)
             Padding(
               padding: const EdgeInsets.only(bottom: 4),
@@ -80,7 +99,7 @@ class FlexField extends StatelessWidget {
             children: [
               if (prefixIcon != null)
                 Padding(
-                  padding: const EdgeInsets.only(left: 16),
+                  padding: EdgeInsets.only(left: padding.left),
                   child: prefixIcon,
                 ),
               Expanded(
@@ -91,8 +110,9 @@ class FlexField extends StatelessWidget {
                       Expanded(
                         flex: headerFlex == -1 ? 1 : headerFlex!,
                         child: headerDisabled,
-                      ),
-                    const SizedBox(width: 16),
+                      )
+                    else
+                      SizedBox(width: padding.left),
                     Expanded(
                       flex: headerFlex == -1 ? 0 : 10,
                       child: Align(
@@ -103,10 +123,10 @@ class FlexField extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(width: 16),
+              SizedBox(width: padding.right),
             ],
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: padding.bottom),
         ],
       ),
     );

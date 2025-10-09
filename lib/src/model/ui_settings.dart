@@ -630,6 +630,9 @@ typedef ErrorBuilderDef = Widget Function(WoFormInputError error);
 @freezed
 abstract class StringInputUiSettings with _$StringInputUiSettings {
   const factory StringInputUiSettings({
+    /// Requires [WoFormUiSettings.layout] at [LayoutMethod.flexible].
+    int? flex,
+
     /// If null or O, header will be placed above the field.
     /// Else, header and selector will be in a the same row.
     /// If -1, the field will take as much space as he wants
@@ -687,12 +690,14 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
 
     // If true, InputDecoration.collapsed will be used.
     bool? collapsed,
+    @EdgeInsetsNullableConverter() EdgeInsets? padding,
     @notSerializable TextStyle? style,
     @notSerializable StringFieldBuilderDef? widgetBuilder,
     @notSerializable ErrorBuilderDef? errorBuilder,
   }) = _StringInputUiSettings;
 
   factory StringInputUiSettings.email({
+    int? flex,
     int? headerFlex,
     String? labelText,
     StringFieldLocation? labelLocation,
@@ -708,10 +713,12 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     WoFormAutofocus? autofocus,
     TextInputAction? textInputAction,
     String? invalidRegexMessage,
+    EdgeInsets? padding,
     TextStyle? style,
     StringFieldBuilderDef? widgetBuilder,
     ErrorBuilderDef? errorBuilder,
   }) => StringInputUiSettings(
+    flex: flex,
     headerFlex: headerFlex,
     labelText: labelText,
     labelLocation: labelLocation,
@@ -727,6 +734,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     autofocus: autofocus,
     textInputAction: textInputAction,
     invalidRegexMessage: invalidRegexMessage,
+    padding: padding,
     style: style,
     widgetBuilder: widgetBuilder,
     errorBuilder: errorBuilder,
@@ -737,6 +745,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
   );
 
   factory StringInputUiSettings.password({
+    int? flex,
     int? headerFlex,
     String? labelText,
     StringFieldLocation? labelLocation,
@@ -752,10 +761,12 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     WoFormAutofocus? autofocus = WoFormAutofocus.no,
     TextInputAction? textInputAction,
     String? invalidRegexMessage,
+    EdgeInsets? padding,
     TextStyle? style,
     StringFieldBuilderDef? widgetBuilder,
     ErrorBuilderDef? errorBuilder,
   }) => StringInputUiSettings(
+    flex: flex,
     headerFlex: headerFlex,
     labelText: labelText,
     labelLocation: labelLocation,
@@ -770,6 +781,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
     textInputAction: textInputAction,
     invalidRegexMessage: invalidRegexMessage,
+    padding: padding,
     style: style,
     widgetBuilder: widgetBuilder,
     errorBuilder: errorBuilder,
@@ -786,6 +798,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
   );
 
   factory StringInputUiSettings.phone({
+    int? flex,
     int? headerFlex,
     String? labelText,
     StringFieldLocation? labelLocation,
@@ -800,10 +813,12 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     bool? submitFormOnFieldSubmitted,
     WoFormAutofocus? autofocus,
     TextInputAction? textInputAction,
+    EdgeInsets? padding,
     TextStyle? style,
     StringFieldBuilderDef? widgetBuilder,
     ErrorBuilderDef? errorBuilder,
   }) => StringInputUiSettings(
+    flex: flex,
     headerFlex: headerFlex,
     labelText: labelText,
     labelLocation: labelLocation,
@@ -818,6 +833,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
     autofocus: autofocus,
     textInputAction: textInputAction,
+    padding: padding,
     style: style,
     widgetBuilder: widgetBuilder,
     errorBuilder: errorBuilder,
@@ -835,6 +851,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
   StringInputUiSettings merge(StringInputUiSettings? other) => other == null
       ? this
       : StringInputUiSettings(
+          flex: flex ?? other.flex,
           headerFlex: headerFlex ?? other.headerFlex,
           labelText: labelText ?? other.labelText,
           labelLocation: labelLocation ?? other.labelLocation,
@@ -859,6 +876,7 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
           maxLines: maxLines ?? other.maxLines,
           invalidRegexMessage: invalidRegexMessage ?? other.invalidRegexMessage,
           collapsed: collapsed ?? other.collapsed,
+          padding: padding ?? other.padding,
           style: style ?? other.style,
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,
           errorBuilder: errorBuilder ?? other.errorBuilder,

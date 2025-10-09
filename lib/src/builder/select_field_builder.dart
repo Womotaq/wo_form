@@ -131,38 +131,3 @@ class SelectFieldBuilder<T> extends StatelessWidget {
     return input.copyWith(uiSettings: mergedSettings);
   }
 }
-
-// class SelectStringFieldBuilder extends SelectFieldBuilder<String> {
-//   const SelectStringFieldBuilder({
-//     required super.path,
-//     super.uiSettings,
-//     super.key,
-//   });
-
-//   @override
-//   SelectInput<String> getChild(RootNode form, WoFormValues values) {
-//     final input = form.getChild(path: path, values: values);
-//     if (input is! SelectStringInput) {
-//       throw ArgumentError(
-//         'Wrong input at path "$path". '
-//         'Expected SelectStringInput, got ${input.runtimeType}',
-//       );
-//     }
-
-//     return SelectInput<String>(
-//       id: input.id,
-//       maxCount: input.maxCount,
-//       minCount: input.minCount,
-//       initialValues: input.initialValues,
-//       availibleValues: input.availibleValues,
-//       idsOfAvailibleValues: input.idsOfAvailibleValues,
-//       onValueChanged: input.onValueChanged,
-//       getCustomError: input.getCustomError,
-//       submitFormOnSelect: input.submitFormOnSelect,
-//       uiSettings: input.uiSettings,
-//       quizSettings: input.quizSettings,
-//       toJsonT: (value) => value,
-//       fromJsonT: (value) => value as String?,
-//     );
-//   }
-// }

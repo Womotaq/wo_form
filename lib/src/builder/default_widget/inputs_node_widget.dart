@@ -53,7 +53,7 @@ class InputsNodeWidget extends StatelessWidget {
                   crossAxisAlignment:
                       uiSettings?.crossAxisAlignment ??
                       (direction == Axis.horizontal
-                          ? CrossAxisAlignment.center
+                          ? CrossAxisAlignment.start
                           : CrossAxisAlignment.stretch),
                   children: data.input.children
                       .map(

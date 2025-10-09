@@ -83,7 +83,7 @@ class _HydratedWoFormValuesCubit extends WoFormValuesCubit
       if (entry.value is! List) continue; // SelectInput's value is a list
       final values = entry.value as List;
       if (values.firstOrNull is String) {
-        continue; // id of selected value or SelectStringInput
+        continue; // id of selected value
       }
 
       final path = entry.key;
@@ -106,7 +106,7 @@ class _HydratedWoFormValuesCubit extends WoFormValuesCubit
       if (entry.value is! List) continue; // SelectInput's value is a list
       final values = entry.value as List;
       if (values.firstOrNull is String) {
-        continue; // id of selected value or SelectStringInput
+        continue; // id of selected value
       }
 
       final path = entry.key;
