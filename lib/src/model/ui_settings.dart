@@ -426,6 +426,7 @@ typedef MediaFieldBuilderDef =
 @freezed
 abstract class MediaInputUiSettings with _$MediaInputUiSettings {
   const factory MediaInputUiSettings({
+    @notSerializable Widget? addMediaIcon,
     String? addMediaText,
     int? fieldHeight,
 

@@ -175,6 +175,7 @@ class MediaField extends StatelessWidget {
                               ? null
                               : fieldHeight * aspectRatio,
                           child: AddMediaButon(
+                            addMediaIcon: data.input.uiSettings?.addMediaIcon,
                             addMediaText: data.input.uiSettings?.addMediaText,
                             onChanged: onChanged,
                             cropAspectRatioOrCircle:
@@ -224,6 +225,7 @@ class MediaField extends StatelessWidget {
         return SizedBox(
           width: fieldHeight,
           child: AddMediaButon(
+            addMediaIcon: data.input.uiSettings?.addMediaIcon,
             addMediaText: data.input.uiSettings?.addMediaText,
             onChanged: onChanged == null
                 ? null
@@ -372,6 +374,7 @@ class _MediaActions extends StatelessWidget {
 
 class AddMediaButon extends StatefulWidget {
   const AddMediaButon({
+    required this.addMediaIcon,
     required this.addMediaText,
     required this.onChanged,
     required this.cropAspectRatioOrCircle,
@@ -381,6 +384,7 @@ class AddMediaButon extends StatefulWidget {
     super.key,
   });
 
+  final Widget? addMediaIcon;
   final String? addMediaText;
   final void Function(List<Media>)? onChanged;
   final double? cropAspectRatioOrCircle;
@@ -399,6 +403,11 @@ class _AddMediaButonState extends State<AddMediaButon> {
   Widget build(BuildContext context) {
     return Material(
       child: InkWell(
+        borderRadius:
+            widget.cropAspectRatioOrCircle == MediaService.circleAspectRatio
+            // A big radius, just to ensure the slapsh is a circle
+            ? BorderRadius.circular(512)
+            : null,
         onTap: widget.onChanged == null
             ? null
             : () async {
@@ -431,51 +440,68 @@ class _AddMediaButonState extends State<AddMediaButon> {
                   setState(() => waiting = false);
                 }
               },
-        child: DottedBorder(
-          options: RectDottedBorderOptions(
-            strokeWidth: 2,
-            color: Theme.of(context).colorScheme.outlineVariant,
-            dashPattern: const [8, 4],
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ColoredBox(
-                    color: Colors.transparent,
-                    child: waiting
-                        ? SizedBox.square(
-                            dimension: 48,
-                            child: CircularProgressIndicator(
-                              color: Theme.of(
-                                context,
-                              ).colorScheme.outlineVariant,
-                              padding: const EdgeInsets.all(8),
-                            ),
-                          )
-                        : Icon(
-                            Icons.add,
-                            color: Theme.of(context).colorScheme.outlineVariant,
-                            size: 48,
-                          ),
-                  ),
-                  if (widget.addMediaText != '') ...[
-                    const SizedBox(height: 8),
-                    Text(
-                      // LATER : woForm.l10n
-                      widget.addMediaText ?? 'Ajouter une image',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
+        child: Builder(
+          builder: (context) {
+            final theme = Theme.of(context);
+
+            return DottedBorder(
+              options:
+                  widget.cropAspectRatioOrCircle ==
+                      MediaService.circleAspectRatio
+                  ? CircularDottedBorderOptions(
+                      strokeWidth: 2,
+                      color: theme.colorScheme.outlineVariant,
+                      dashPattern: const [8, 4],
+                    )
+                  : RectDottedBorderOptions(
+                      strokeWidth: 2,
+                      color: theme.colorScheme.outlineVariant,
+                      dashPattern: const [8, 4],
                     ),
-                  ],
-                ],
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ColoredBox(
+                        color: Colors.transparent,
+                        child: waiting
+                            ? SizedBox.square(
+                                dimension: 48,
+                                child: CircularProgressIndicator(
+                                  color: theme.colorScheme.outlineVariant,
+                                  padding: const EdgeInsets.all(8),
+                                ),
+                              )
+                            : IconTheme(
+                                data: IconThemeData(
+                                  color: theme.colorScheme.outlineVariant,
+                                  size: 48,
+                                ),
+                                child:
+                                    widget.addMediaIcon ??
+                                    const Icon(Icons.add),
+                              ),
+                      ),
+                      if (widget.addMediaText != '') ...[
+                        const SizedBox(height: 8),
+                        Text(
+                          // LATER : woForm.l10n
+                          widget.addMediaText ?? 'Ajouter une image',
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ),
+            );
+          },
         ),
       ),
     );

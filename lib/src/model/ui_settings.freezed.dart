@@ -1290,7 +1290,7 @@ as InputHeaderBuilderDef?,
 /// @nodoc
 mixin _$MediaInputUiSettings {
 
- String? get addMediaText; int? get fieldHeight;/// For a circle cropping, use MediaService.circleAspectRatio
+@notSerializable Widget? get addMediaIcon; String? get addMediaText; int? get fieldHeight;/// For a circle cropping, use MediaService.circleAspectRatio
  double? get cropAspectRatioOrCircle; bool? get cropShowGrid;@notSerializable MediaFieldBuilderDef? get widgetBuilder;
 /// Create a copy of MediaInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -1304,16 +1304,16 @@ $MediaInputUiSettingsCopyWith<MediaInputUiSettings> get copyWith => _$MediaInput
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaInputUiSettings&&(identical(other.addMediaText, addMediaText) || other.addMediaText == addMediaText)&&(identical(other.fieldHeight, fieldHeight) || other.fieldHeight == fieldHeight)&&(identical(other.cropAspectRatioOrCircle, cropAspectRatioOrCircle) || other.cropAspectRatioOrCircle == cropAspectRatioOrCircle)&&(identical(other.cropShowGrid, cropShowGrid) || other.cropShowGrid == cropShowGrid)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaInputUiSettings&&(identical(other.addMediaIcon, addMediaIcon) || other.addMediaIcon == addMediaIcon)&&(identical(other.addMediaText, addMediaText) || other.addMediaText == addMediaText)&&(identical(other.fieldHeight, fieldHeight) || other.fieldHeight == fieldHeight)&&(identical(other.cropAspectRatioOrCircle, cropAspectRatioOrCircle) || other.cropAspectRatioOrCircle == cropAspectRatioOrCircle)&&(identical(other.cropShowGrid, cropShowGrid) || other.cropShowGrid == cropShowGrid)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,addMediaText,fieldHeight,cropAspectRatioOrCircle,cropShowGrid,widgetBuilder);
+int get hashCode => Object.hash(runtimeType,addMediaIcon,addMediaText,fieldHeight,cropAspectRatioOrCircle,cropShowGrid,widgetBuilder);
 
 @override
 String toString() {
-  return 'MediaInputUiSettings(addMediaText: $addMediaText, fieldHeight: $fieldHeight, cropAspectRatioOrCircle: $cropAspectRatioOrCircle, cropShowGrid: $cropShowGrid, widgetBuilder: $widgetBuilder)';
+  return 'MediaInputUiSettings(addMediaIcon: $addMediaIcon, addMediaText: $addMediaText, fieldHeight: $fieldHeight, cropAspectRatioOrCircle: $cropAspectRatioOrCircle, cropShowGrid: $cropShowGrid, widgetBuilder: $widgetBuilder)';
 }
 
 
@@ -1324,7 +1324,7 @@ abstract mixin class $MediaInputUiSettingsCopyWith<$Res>  {
   factory $MediaInputUiSettingsCopyWith(MediaInputUiSettings value, $Res Function(MediaInputUiSettings) _then) = _$MediaInputUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String? addMediaText, int? fieldHeight, double? cropAspectRatioOrCircle, bool? cropShowGrid,@notSerializable MediaFieldBuilderDef? widgetBuilder
+@notSerializable Widget? addMediaIcon, String? addMediaText, int? fieldHeight, double? cropAspectRatioOrCircle, bool? cropShowGrid,@notSerializable MediaFieldBuilderDef? widgetBuilder
 });
 
 
@@ -1341,9 +1341,10 @@ class _$MediaInputUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of MediaInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? addMediaText = freezed,Object? fieldHeight = freezed,Object? cropAspectRatioOrCircle = freezed,Object? cropShowGrid = freezed,Object? widgetBuilder = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? addMediaIcon = freezed,Object? addMediaText = freezed,Object? fieldHeight = freezed,Object? cropAspectRatioOrCircle = freezed,Object? cropShowGrid = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_self.copyWith(
-addMediaText: freezed == addMediaText ? _self.addMediaText : addMediaText // ignore: cast_nullable_to_non_nullable
+addMediaIcon: freezed == addMediaIcon ? _self.addMediaIcon : addMediaIcon // ignore: cast_nullable_to_non_nullable
+as Widget?,addMediaText: freezed == addMediaText ? _self.addMediaText : addMediaText // ignore: cast_nullable_to_non_nullable
 as String?,fieldHeight: freezed == fieldHeight ? _self.fieldHeight : fieldHeight // ignore: cast_nullable_to_non_nullable
 as int?,cropAspectRatioOrCircle: freezed == cropAspectRatioOrCircle ? _self.cropAspectRatioOrCircle : cropAspectRatioOrCircle // ignore: cast_nullable_to_non_nullable
 as double?,cropShowGrid: freezed == cropShowGrid ? _self.cropShowGrid : cropShowGrid // ignore: cast_nullable_to_non_nullable
@@ -1360,9 +1361,10 @@ as MediaFieldBuilderDef?,
 @JsonSerializable()
 
 class _MediaInputUiSettings extends MediaInputUiSettings {
-  const _MediaInputUiSettings({this.addMediaText, this.fieldHeight, this.cropAspectRatioOrCircle, this.cropShowGrid, @notSerializable this.widgetBuilder}): super._();
+  const _MediaInputUiSettings({@notSerializable this.addMediaIcon, this.addMediaText, this.fieldHeight, this.cropAspectRatioOrCircle, this.cropShowGrid, @notSerializable this.widgetBuilder}): super._();
   factory _MediaInputUiSettings.fromJson(Map<String, dynamic> json) => _$MediaInputUiSettingsFromJson(json);
 
+@override@notSerializable final  Widget? addMediaIcon;
 @override final  String? addMediaText;
 @override final  int? fieldHeight;
 /// For a circle cropping, use MediaService.circleAspectRatio
@@ -1383,16 +1385,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MediaInputUiSettings&&(identical(other.addMediaText, addMediaText) || other.addMediaText == addMediaText)&&(identical(other.fieldHeight, fieldHeight) || other.fieldHeight == fieldHeight)&&(identical(other.cropAspectRatioOrCircle, cropAspectRatioOrCircle) || other.cropAspectRatioOrCircle == cropAspectRatioOrCircle)&&(identical(other.cropShowGrid, cropShowGrid) || other.cropShowGrid == cropShowGrid)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MediaInputUiSettings&&(identical(other.addMediaIcon, addMediaIcon) || other.addMediaIcon == addMediaIcon)&&(identical(other.addMediaText, addMediaText) || other.addMediaText == addMediaText)&&(identical(other.fieldHeight, fieldHeight) || other.fieldHeight == fieldHeight)&&(identical(other.cropAspectRatioOrCircle, cropAspectRatioOrCircle) || other.cropAspectRatioOrCircle == cropAspectRatioOrCircle)&&(identical(other.cropShowGrid, cropShowGrid) || other.cropShowGrid == cropShowGrid)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,addMediaText,fieldHeight,cropAspectRatioOrCircle,cropShowGrid,widgetBuilder);
+int get hashCode => Object.hash(runtimeType,addMediaIcon,addMediaText,fieldHeight,cropAspectRatioOrCircle,cropShowGrid,widgetBuilder);
 
 @override
 String toString() {
-  return 'MediaInputUiSettings(addMediaText: $addMediaText, fieldHeight: $fieldHeight, cropAspectRatioOrCircle: $cropAspectRatioOrCircle, cropShowGrid: $cropShowGrid, widgetBuilder: $widgetBuilder)';
+  return 'MediaInputUiSettings(addMediaIcon: $addMediaIcon, addMediaText: $addMediaText, fieldHeight: $fieldHeight, cropAspectRatioOrCircle: $cropAspectRatioOrCircle, cropShowGrid: $cropShowGrid, widgetBuilder: $widgetBuilder)';
 }
 
 
@@ -1403,7 +1405,7 @@ abstract mixin class _$MediaInputUiSettingsCopyWith<$Res> implements $MediaInput
   factory _$MediaInputUiSettingsCopyWith(_MediaInputUiSettings value, $Res Function(_MediaInputUiSettings) _then) = __$MediaInputUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String? addMediaText, int? fieldHeight, double? cropAspectRatioOrCircle, bool? cropShowGrid,@notSerializable MediaFieldBuilderDef? widgetBuilder
+@notSerializable Widget? addMediaIcon, String? addMediaText, int? fieldHeight, double? cropAspectRatioOrCircle, bool? cropShowGrid,@notSerializable MediaFieldBuilderDef? widgetBuilder
 });
 
 
@@ -1420,9 +1422,10 @@ class __$MediaInputUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of MediaInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? addMediaText = freezed,Object? fieldHeight = freezed,Object? cropAspectRatioOrCircle = freezed,Object? cropShowGrid = freezed,Object? widgetBuilder = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? addMediaIcon = freezed,Object? addMediaText = freezed,Object? fieldHeight = freezed,Object? cropAspectRatioOrCircle = freezed,Object? cropShowGrid = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_MediaInputUiSettings(
-addMediaText: freezed == addMediaText ? _self.addMediaText : addMediaText // ignore: cast_nullable_to_non_nullable
+addMediaIcon: freezed == addMediaIcon ? _self.addMediaIcon : addMediaIcon // ignore: cast_nullable_to_non_nullable
+as Widget?,addMediaText: freezed == addMediaText ? _self.addMediaText : addMediaText // ignore: cast_nullable_to_non_nullable
 as String?,fieldHeight: freezed == fieldHeight ? _self.fieldHeight : fieldHeight // ignore: cast_nullable_to_non_nullable
 as int?,cropAspectRatioOrCircle: freezed == cropAspectRatioOrCircle ? _self.cropAspectRatioOrCircle : cropAspectRatioOrCircle // ignore: cast_nullable_to_non_nullable
 as double?,cropShowGrid: freezed == cropShowGrid ? _self.cropShowGrid : cropShowGrid // ignore: cast_nullable_to_non_nullable

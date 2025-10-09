@@ -242,7 +242,7 @@ class MultistepController {
   final WoFormValuesCubit valuesCubit;
 
   late String _initialLocation;
-  late final StreamSubscription<html.PopStateEvent>? _onPopStream;
+  StreamSubscription<html.PopStateEvent>? _onPopStream;
   bool _skipNextWebHistoryUpdate = false;
 
   static MultistepController? of(BuildContext context) => context
@@ -376,9 +376,10 @@ class _ControllersManagerState extends State<_ControllersManager> {
 
   @override
   Future<void> dispose() async {
-    await stepController?.dispose();
-    if (!inheritedScrollController) scrollController.dispose();
     super.dispose();
+
+    if (!inheritedScrollController) scrollController.dispose();
+    await stepController?.dispose();
   }
 
   @override
