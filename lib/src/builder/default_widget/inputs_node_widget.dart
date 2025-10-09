@@ -45,24 +45,24 @@ class InputsNodeWidget extends StatelessWidget {
         : Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              header,
-              Builder(
-                builder: (context) => Flexible(
-                  flex: uiSettings.flexOrDefault != 0 ? 1 : 0,
-                  child: Flex(
-                    direction: direction,
-                    spacing: spacing,
-                    crossAxisAlignment:
-                        uiSettings?.crossAxisAlignment ??
-                        CrossAxisAlignment.stretch,
-                    children: data.input.children
-                        .map(
-                          uiSettings.flexOrDefault != 0
-                              ? flexibleChildBuilder
-                              : standardChildBuilder,
-                        )
-                        .toList(),
-                  ),
+              Flexible(
+                flex: uiSettings.flexOrDefault != 0 ? 1 : 0,
+                child: Flex(
+                  direction: direction,
+                  spacing: spacing,
+                  crossAxisAlignment:
+                      uiSettings?.crossAxisAlignment ??
+                      (direction == Axis.horizontal
+                          ? CrossAxisAlignment.center
+                          : CrossAxisAlignment.stretch),
+                  children: data.input.children
+                      .map(
+                        uiSettings.flexOrDefault != 0 ||
+                                direction == Axis.horizontal
+                            ? flexibleChildBuilder
+                            : standardChildBuilder,
+                      )
+                      .toList(),
                 ),
               ),
             ],
