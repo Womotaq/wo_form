@@ -104,8 +104,6 @@ class _NumSelectorState extends State<NumSelector> {
                     }
                   }
 
-                  FocusScope.of(context).unfocus();
-
                   controller.text = newVal.toString();
                   widget.onChanged!(newVal);
                 },

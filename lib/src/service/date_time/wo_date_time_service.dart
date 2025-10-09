@@ -13,8 +13,6 @@ class DateTimeService {
     DatePickerMode? initialDatePickerMode,
     String? dateFormat,
   }) {
-    FocusScope.of(context).unfocus();
-
     final ref = initialDate ?? DateTime.now();
 
     return showDatePicker(
@@ -46,8 +44,6 @@ class DateTimeService {
     if (minDate != null && maxDate != null && minDate.isAfter(maxDate)) {
       throw AssertionError('minDate must be before maxDate');
     }
-
-    FocusScope.of(context).unfocus();
 
     final screenSize = MediaQuery.of(context).size;
     if (screenSize.width > 500 && screenSize.height > 700) {

@@ -431,8 +431,6 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   }
 
   Future<void> submit(BuildContext context) async {
-    FocusScope.of(context).unfocus();
-
     final node = currentNode;
 
     final submitPath = state.submitPath;

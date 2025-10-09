@@ -205,15 +205,11 @@ class DateTimeSelector extends StatelessWidget {
     required BuildContext context,
     required TimeOfDay initialTime,
     TimePickerEntryMode? initialEntryMode,
-  }) {
-    FocusScope.of(context).unfocus();
-
-    return showTimePicker(
-      context: context,
-      initialTime: initialTime,
-      initialEntryMode: initialEntryMode ?? TimePickerEntryMode.dial,
-    );
-  }
+  }) => showTimePicker(
+    context: context,
+    initialTime: initialTime,
+    initialEntryMode: initialEntryMode ?? TimePickerEntryMode.dial,
+  );
 }
 
 class ClickableInputField extends StatelessWidget {

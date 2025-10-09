@@ -402,8 +402,6 @@ class _AddMediaButonState extends State<AddMediaButon> {
         onTap: widget.onChanged == null
             ? null
             : () async {
-                FocusScope.of(context).unfocus();
-
                 try {
                   setState(() => waiting = true);
 
