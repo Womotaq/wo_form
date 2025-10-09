@@ -284,6 +284,7 @@ _MediaInputUiSettings _$MediaInputUiSettingsFromJson(
 ) => _MediaInputUiSettings(
   addMediaText: json['addMediaText'] as String?,
   fieldHeight: (json['fieldHeight'] as num?)?.toInt(),
+  fit: $enumDecodeNullable(_$BoxFitEnumMap, json['fit']),
   cropAspectRatioOrCircle: (json['cropAspectRatioOrCircle'] as num?)
       ?.toDouble(),
   cropShowGrid: json['cropShowGrid'] as bool?,
@@ -294,8 +295,19 @@ Map<String, dynamic> _$MediaInputUiSettingsToJson(
 ) => <String, dynamic>{
   'addMediaText': instance.addMediaText,
   'fieldHeight': instance.fieldHeight,
+  'fit': _$BoxFitEnumMap[instance.fit],
   'cropAspectRatioOrCircle': instance.cropAspectRatioOrCircle,
   'cropShowGrid': instance.cropShowGrid,
+};
+
+const _$BoxFitEnumMap = {
+  BoxFit.fill: 'fill',
+  BoxFit.contain: 'contain',
+  BoxFit.cover: 'cover',
+  BoxFit.fitWidth: 'fitWidth',
+  BoxFit.fitHeight: 'fitHeight',
+  BoxFit.none: 'none',
+  BoxFit.scaleDown: 'scaleDown',
 };
 
 _NumInputUiSettings _$NumInputUiSettingsFromJson(Map<String, dynamic> json) =>

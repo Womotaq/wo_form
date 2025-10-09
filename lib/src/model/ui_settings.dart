@@ -429,6 +429,7 @@ abstract class MediaInputUiSettings with _$MediaInputUiSettings {
     @notSerializable Widget? addMediaIcon,
     String? addMediaText,
     int? fieldHeight,
+    BoxFit? fit,
 
     /// For a circle cropping, use MediaService.circleAspectRatio
     double? cropAspectRatioOrCircle,

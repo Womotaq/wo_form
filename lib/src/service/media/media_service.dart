@@ -62,6 +62,7 @@ abstract class MediaService {
     BoxFit? fit,
     Alignment alignment,
     String? package,
+    bool circle,
     Key? key,
   });
 

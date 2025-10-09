@@ -99,9 +99,10 @@ class MediaField extends StatelessWidget {
     final media = medias.firstOrNull;
     final onChanged = data.onValueChanged;
     final fieldHeight = data.input.uiSettings?.fieldHeight?.toDouble() ?? 160;
-    final aspectRatio =
+    final circle =
         data.input.uiSettings?.cropAspectRatioOrCircle ==
-            MediaService.circleAspectRatio
+        MediaService.circleAspectRatio;
+    final aspectRatio = circle
         ? 1.0
         : data.input.uiSettings?.cropAspectRatioOrCircle;
 
@@ -123,7 +124,11 @@ class MediaField extends StatelessWidget {
                                 : fieldHeight * aspectRatio,
                             child: context
                                 .read<MediaService>()
-                                .mediaWidgetBuilder(media: media),
+                                .mediaWidgetBuilder(
+                                  media: media,
+                                  fit: data.input.uiSettings?.fit,
+                                  circle: circle,
+                                ),
                           ),
                         ),
                       ),
@@ -137,24 +142,12 @@ class MediaField extends StatelessWidget {
                           child: Column(
                             children: [
                               IconButton(
-                                // style: IconButton.styleFrom(
-                                //   backgroundColor: Theme.of(context)
-                                //       .colorScheme
-                                //       .surfaceContainerLowest
-                                //       .withAlpha(160),
-                                // ),
                                 onPressed: onChanged == null
                                     ? null
                                     : () => onChanged.call([]),
                                 icon: const Icon(Icons.close),
                               ),
                               IconButton(
-                                // style: IconButton.styleFrom(
-                                //   backgroundColor: Theme.of(context)
-                                //       .colorScheme
-                                //       .surfaceContainerLowest
-                                //       .withAlpha(160),
-                                // ),
                                 icon: const Icon(Icons.edit),
                                 onPressed: onChanged == null
                                     ? null
@@ -252,6 +245,10 @@ class MediaField extends StatelessWidget {
             child: Center(
               child: context.read<MediaService>().mediaWidgetBuilder(
                 media: media,
+                fit: data.input.uiSettings?.fit,
+                circle:
+                    data.input.uiSettings?.cropAspectRatioOrCircle ==
+                    MediaService.circleAspectRatio,
               ),
             ),
           ),
