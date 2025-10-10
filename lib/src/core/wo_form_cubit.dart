@@ -68,7 +68,8 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   final WoFormStatusCubit _statusCubit;
   final WoFormLockCubit _lockCubit;
   final Future<bool> Function(BuildContext context) _canSubmit;
-  final Future<void> Function(RootNode root, WoFormValues values)? onSubmitting;
+  final Future<Object?> Function(RootNode root, WoFormValues values)?
+  onSubmitting;
   late Json _initialValues;
   final Map<String, FocusNode> _focusNodes = {};
 
@@ -497,7 +498,8 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
       if (submitWholeForm && context.mounted) {
         if (await _canSubmit(context)) {
-          await onSubmitting?.call(_root, state);
+          final result = await onSubmitting?.call(_root, state);
+          emit(state.copy().._set(WoFormValues.SUBMISSION_RESULT_KEY, result));
           _statusCubit._setSubmitSuccess();
         } else {
           _statusCubit.setInProgress();
@@ -858,6 +860,12 @@ class WoFormValues {
       ];
   bool inputsNodeShownChildrenInitially(String path) =>
       _inputsNodeShownChildrenInitially.contains(path);
+
+  // --- SUBMISSION RESULT ---
+
+  // ignore: constant_identifier_names
+  static const SUBMISSION_RESULT_KEY = '/__wo_reserved_submission_result';
+  Object? get submissionResult => this[SUBMISSION_RESULT_KEY];
 }
 
 typedef _TempSubmitData = ({

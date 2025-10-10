@@ -60,7 +60,8 @@ class WoForm extends StatelessWidget {
   final Future<void> Function(RootNode root, WoFormValues values)?
   onStatusUpdate;
   final Future<bool> Function(BuildContext context)? canSubmit;
-  final Future<void> Function(RootNode root, WoFormValues values)? onSubmitting;
+  final Future<Object?> Function(RootNode root, WoFormValues values)?
+  onSubmitting;
   final OnSubmitErrorDef? onSubmitError;
   final void Function(BuildContext context)? onSubmitSuccess;
   final WidgetBuilderDef? pageBuilder;
