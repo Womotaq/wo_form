@@ -62,7 +62,7 @@ abstract class MediaService {
     BoxFit? fit,
     Alignment alignment,
     String? package,
-    bool circle,
+    bool circle = false,
     Key? key,
   });
 
@@ -89,7 +89,7 @@ abstract class MediaService {
 
       // Replace the extension of the original image by png,
       // since Cropper produces bytes in PNG format.
-      var filename = '${withoutExtension(media.name ?? 'image')}.png';
+      var filename = '${withoutExtension(media.name)}.png';
       // Remove potential old prefix 'croppedXXXX-'
       filename = filename.replaceFirst(RegExp(r'^cropped\d{4}-'), '');
       // Add a new prefix. This prefix ensures the image is considered

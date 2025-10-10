@@ -6,24 +6,6 @@ part of 'media.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-MediaUrl _$MediaUrlFromJson(Map<String, dynamic> json) =>
-    MediaUrl(url: json['url'] as String, $type: json['runtimeType'] as String?);
-
-Map<String, dynamic> _$MediaUrlToJson(MediaUrl instance) => <String, dynamic>{
-  'url': instance.url,
-  'runtimeType': instance.$type,
-};
-
-MediaFile _$MediaFileFromJson(Map<String, dynamic> json) => MediaFile(
-  file: const XFileConverter().fromJson(json['file'] as Map<String, dynamic>),
-  $type: json['runtimeType'] as String?,
-);
-
-Map<String, dynamic> _$MediaFileToJson(MediaFile instance) => <String, dynamic>{
-  'file': const XFileConverter().toJson(instance.file),
-  'runtimeType': instance.$type,
-};
-
 _MediaImportSettings _$MediaImportSettingsFromJson(Map<String, dynamic> json) =>
     _MediaImportSettings(
       type: $enumDecode(_$MediaTypeEnumMap, json['type']),

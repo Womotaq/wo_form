@@ -11,111 +11,95 @@ part of 'media.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-Media _$MediaFromJson(
-  Map<String, dynamic> json
-) {
-        switch (json['runtimeType']) {
-                  case 'url':
-          return MediaUrl.fromJson(
-            json
-          );
-                case 'file':
-          return MediaFile.fromJson(
-            json
-          );
-        
-          default:
-            throw CheckedFromJsonException(
-  json,
-  'runtimeType',
-  'Media',
-  'Invalid union type "${json['runtimeType']}"!'
-);
-        }
-      
-}
-
 /// @nodoc
-mixin _$Media implements DiagnosticableTreeMixin {
+mixin _$Media {
 
-
-
-  /// Serializes this Media to a JSON map.
-  Map<String, dynamic> toJson();
-
-@override
-void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
-    ..add(DiagnosticsProperty('type', 'Media'))
-    ;
-}
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Media);
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'Media()';
-}
-
-
-}
-
-/// @nodoc
-class $MediaCopyWith<$Res>  {
-$MediaCopyWith(Media _, $Res Function(Media) __);
-}
-
-
-
-/// @nodoc
-@JsonSerializable()
-
-class MediaUrl extends Media with DiagnosticableTreeMixin {
-  const MediaUrl({required this.url, final  String? $type}): $type = $type ?? 'url',super._();
-  factory MediaUrl.fromJson(Map<String, dynamic> json) => _$MediaUrlFromJson(json);
-
- final  String url;
-
-@JsonKey(name: 'runtimeType')
-final String $type;
-
-
+ String? get name;
 /// Create a copy of Media
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$MediaUrlCopyWith<MediaUrl> get copyWith => _$MediaUrlCopyWithImpl<MediaUrl>(this, _$identity);
+$MediaCopyWith<Media> get copyWith => _$MediaCopyWithImpl<Media>(this as Media, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$MediaUrlToJson(this, );
-}
-@override
-void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
-    ..add(DiagnosticsProperty('type', 'Media.url'))
-    ..add(DiagnosticsProperty('url', url));
-}
+
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaUrl&&(identical(other.url, url) || other.url == url));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Media&&(identical(other.name, name) || other.name == name));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,name);
+
+@override
+String toString() {
+  return 'Media(name: $name)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $MediaCopyWith<$Res>  {
+  factory $MediaCopyWith(Media value, $Res Function(Media) _then) = _$MediaCopyWithImpl;
+@useResult
+$Res call({
+ String? name
+});
+
+
+
+
+}
+/// @nodoc
+class _$MediaCopyWithImpl<$Res>
+    implements $MediaCopyWith<$Res> {
+  _$MediaCopyWithImpl(this._self, this._then);
+
+  final Media _self;
+  final $Res Function(Media) _then;
+
+/// Create a copy of Media
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? name = freezed,}) {
+  return _then(_self.copyWith(
+name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+}
+
+
+
+
+
+
+/// @nodoc
+mixin _$MediaUrl {
+
+ String get url; String get name;
+/// Create a copy of MediaUrl
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$MediaUrlCopyWith<MediaUrl> get copyWith => _$MediaUrlCopyWithImpl<MediaUrl>(this as MediaUrl, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaUrl&&(identical(other.url, url) || other.url == url)&&(identical(other.name, name) || other.name == name));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,url);
+int get hashCode => Object.hash(runtimeType,url,name);
 
 @override
-String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'Media.url(url: $url)';
+String toString() {
+  return 'MediaUrl(url: $url, name: $name)';
 }
 
 
@@ -126,7 +110,7 @@ abstract mixin class $MediaUrlCopyWith<$Res> implements $MediaCopyWith<$Res> {
   factory $MediaUrlCopyWith(MediaUrl value, $Res Function(MediaUrl) _then) = _$MediaUrlCopyWithImpl;
 @useResult
 $Res call({
- String url
+ String url, String? name
 });
 
 
@@ -141,60 +125,44 @@ class _$MediaUrlCopyWithImpl<$Res>
   final MediaUrl _self;
   final $Res Function(MediaUrl) _then;
 
-/// Create a copy of Media
+/// Create a copy of MediaUrl
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? url = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? url = null,Object? name = freezed,}) {
   return _then(MediaUrl(
 url: null == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
-as String,
+as String,name: freezed == name ? _self.name! : name // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
-
 }
 
+
+
 /// @nodoc
-@JsonSerializable()
+mixin _$MediaFile {
 
-class MediaFile extends Media with DiagnosticableTreeMixin {
-  const MediaFile({@XFileConverter() required this.file, final  String? $type}): $type = $type ?? 'file',super._();
-  factory MediaFile.fromJson(Map<String, dynamic> json) => _$MediaFileFromJson(json);
-
-@XFileConverter() final  XFile file;
-
-@JsonKey(name: 'runtimeType')
-final String $type;
-
-
-/// Create a copy of Media
+ XFile get file; String get name;
+/// Create a copy of MediaFile
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$MediaFileCopyWith<MediaFile> get copyWith => _$MediaFileCopyWithImpl<MediaFile>(this, _$identity);
+$MediaFileCopyWith<MediaFile> get copyWith => _$MediaFileCopyWithImpl<MediaFile>(this as MediaFile, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$MediaFileToJson(this, );
-}
-@override
-void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
-    ..add(DiagnosticsProperty('type', 'Media.file'))
-    ..add(DiagnosticsProperty('file', file));
-}
+
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaFile&&(identical(other.file, file) || other.file == file));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaFile&&(identical(other.file, file) || other.file == file)&&(identical(other.name, name) || other.name == name));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,file);
 
 @override
-String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'Media.file(file: $file)';
+int get hashCode => Object.hash(runtimeType,file,name);
+
+@override
+String toString() {
+  return 'MediaFile(file: $file, name: $name)';
 }
 
 
@@ -205,7 +173,7 @@ abstract mixin class $MediaFileCopyWith<$Res> implements $MediaCopyWith<$Res> {
   factory $MediaFileCopyWith(MediaFile value, $Res Function(MediaFile) _then) = _$MediaFileCopyWithImpl;
 @useResult
 $Res call({
-@XFileConverter() XFile file
+ XFile file, String? name
 });
 
 
@@ -220,21 +188,23 @@ class _$MediaFileCopyWithImpl<$Res>
   final MediaFile _self;
   final $Res Function(MediaFile) _then;
 
-/// Create a copy of Media
+/// Create a copy of MediaFile
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? file = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? file = null,Object? name = freezed,}) {
   return _then(MediaFile(
 file: null == file ? _self.file : file // ignore: cast_nullable_to_non_nullable
-as XFile,
+as XFile,name: freezed == name ? _self.name! : name // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
-
 }
 
 
+
+
 /// @nodoc
-mixin _$MediaImportSettings implements DiagnosticableTreeMixin {
+mixin _$MediaImportSettings {
 
  MediaType get type; List<MediaImportMethod> get methods; double? get imageMaxHeight; double? get imageMaxWidth; int? get imageQuality; bool get imageRequestFullMetadata;@DurationNullableConverter() Duration? get videoMaxDuration; bool get preferFrontCamera;
 /// Create a copy of MediaImportSettings
@@ -246,12 +216,6 @@ $MediaImportSettingsCopyWith<MediaImportSettings> get copyWith => _$MediaImportS
   /// Serializes this MediaImportSettings to a JSON map.
   Map<String, dynamic> toJson();
 
-@override
-void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
-    ..add(DiagnosticsProperty('type', 'MediaImportSettings'))
-    ..add(DiagnosticsProperty('type', type))..add(DiagnosticsProperty('methods', methods))..add(DiagnosticsProperty('imageMaxHeight', imageMaxHeight))..add(DiagnosticsProperty('imageMaxWidth', imageMaxWidth))..add(DiagnosticsProperty('imageQuality', imageQuality))..add(DiagnosticsProperty('imageRequestFullMetadata', imageRequestFullMetadata))..add(DiagnosticsProperty('videoMaxDuration', videoMaxDuration))..add(DiagnosticsProperty('preferFrontCamera', preferFrontCamera));
-}
 
 @override
 bool operator ==(Object other) {
@@ -263,7 +227,7 @@ bool operator ==(Object other) {
 int get hashCode => Object.hash(runtimeType,type,const DeepCollectionEquality().hash(methods),imageMaxHeight,imageMaxWidth,imageQuality,imageRequestFullMetadata,videoMaxDuration,preferFrontCamera);
 
 @override
-String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+String toString() {
   return 'MediaImportSettings(type: $type, methods: $methods, imageMaxHeight: $imageMaxHeight, imageMaxWidth: $imageMaxWidth, imageQuality: $imageQuality, imageRequestFullMetadata: $imageRequestFullMetadata, videoMaxDuration: $videoMaxDuration, preferFrontCamera: $preferFrontCamera)';
 }
 
@@ -313,7 +277,7 @@ as bool,
 /// @nodoc
 @JsonSerializable()
 
-class _MediaImportSettings extends MediaImportSettings with DiagnosticableTreeMixin {
+class _MediaImportSettings extends MediaImportSettings {
   const _MediaImportSettings({required this.type, required final  List<MediaImportMethod> methods, this.imageMaxHeight, this.imageMaxWidth, this.imageQuality, this.imageRequestFullMetadata = true, @DurationNullableConverter() this.videoMaxDuration, this.preferFrontCamera = false}): _methods = methods,super._();
   factory _MediaImportSettings.fromJson(Map<String, dynamic> json) => _$MediaImportSettingsFromJson(json);
 
@@ -342,12 +306,6 @@ _$MediaImportSettingsCopyWith<_MediaImportSettings> get copyWith => __$MediaImpo
 Map<String, dynamic> toJson() {
   return _$MediaImportSettingsToJson(this, );
 }
-@override
-void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
-    ..add(DiagnosticsProperty('type', 'MediaImportSettings'))
-    ..add(DiagnosticsProperty('type', type))..add(DiagnosticsProperty('methods', methods))..add(DiagnosticsProperty('imageMaxHeight', imageMaxHeight))..add(DiagnosticsProperty('imageMaxWidth', imageMaxWidth))..add(DiagnosticsProperty('imageQuality', imageQuality))..add(DiagnosticsProperty('imageRequestFullMetadata', imageRequestFullMetadata))..add(DiagnosticsProperty('videoMaxDuration', videoMaxDuration))..add(DiagnosticsProperty('preferFrontCamera', preferFrontCamera));
-}
 
 @override
 bool operator ==(Object other) {
@@ -359,7 +317,7 @@ bool operator ==(Object other) {
 int get hashCode => Object.hash(runtimeType,type,const DeepCollectionEquality().hash(_methods),imageMaxHeight,imageMaxWidth,imageQuality,imageRequestFullMetadata,videoMaxDuration,preferFrontCamera);
 
 @override
-String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+String toString() {
   return 'MediaImportSettings(type: $type, methods: $methods, imageMaxHeight: $imageMaxHeight, imageMaxWidth: $imageMaxWidth, imageQuality: $imageQuality, imageRequestFullMetadata: $imageRequestFullMetadata, videoMaxDuration: $videoMaxDuration, preferFrontCamera: $preferFrontCamera)';
 }
 
@@ -434,19 +392,13 @@ MediaImportMethod _$MediaImportMethodFromJson(
 }
 
 /// @nodoc
-mixin _$MediaImportMethod implements DiagnosticableTreeMixin {
+mixin _$MediaImportMethod {
 
 
 
   /// Serializes this MediaImportMethod to a JSON map.
   Map<String, dynamic> toJson();
 
-@override
-void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
-    ..add(DiagnosticsProperty('type', 'MediaImportMethod'))
-    ;
-}
 
 @override
 bool operator ==(Object other) {
@@ -458,7 +410,7 @@ bool operator ==(Object other) {
 int get hashCode => runtimeType.hashCode;
 
 @override
-String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+String toString() {
   return 'MediaImportMethod()';
 }
 
@@ -475,7 +427,7 @@ $MediaImportMethodCopyWith(MediaImportMethod _, $Res Function(MediaImportMethod)
 /// @nodoc
 @JsonSerializable()
 
-class MediaImportMethodPickMedias extends MediaImportMethod with DiagnosticableTreeMixin {
+class MediaImportMethodPickMedias extends MediaImportMethod {
   const MediaImportMethodPickMedias({required this.source, this.type, final  String? $type}): $type = $type ?? 'pickMedias',super._();
   factory MediaImportMethodPickMedias.fromJson(Map<String, dynamic> json) => _$MediaImportMethodPickMediasFromJson(json);
 
@@ -497,12 +449,6 @@ $MediaImportMethodPickMediasCopyWith<MediaImportMethodPickMedias> get copyWith =
 Map<String, dynamic> toJson() {
   return _$MediaImportMethodPickMediasToJson(this, );
 }
-@override
-void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
-    ..add(DiagnosticsProperty('type', 'MediaImportMethod.pickMedias'))
-    ..add(DiagnosticsProperty('source', source))..add(DiagnosticsProperty('type', type));
-}
 
 @override
 bool operator ==(Object other) {
@@ -514,7 +460,7 @@ bool operator ==(Object other) {
 int get hashCode => Object.hash(runtimeType,source,type);
 
 @override
-String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+String toString() {
   return 'MediaImportMethod.pickMedias(source: $source, type: $type)';
 }
 
@@ -557,7 +503,7 @@ as MediaType?,
 /// @nodoc
 @JsonSerializable()
 
-class MediaImportMethodUrl extends MediaImportMethod with DiagnosticableTreeMixin {
+class MediaImportMethodUrl extends MediaImportMethod {
   const MediaImportMethodUrl({final  String? $type}): $type = $type ?? 'url',super._();
   factory MediaImportMethodUrl.fromJson(Map<String, dynamic> json) => _$MediaImportMethodUrlFromJson(json);
 
@@ -572,12 +518,6 @@ final String $type;
 Map<String, dynamic> toJson() {
   return _$MediaImportMethodUrlToJson(this, );
 }
-@override
-void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
-    ..add(DiagnosticsProperty('type', 'MediaImportMethod.url'))
-    ;
-}
 
 @override
 bool operator ==(Object other) {
@@ -589,7 +529,7 @@ bool operator ==(Object other) {
 int get hashCode => runtimeType.hashCode;
 
 @override
-String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+String toString() {
   return 'MediaImportMethod.url()';
 }
 
@@ -602,7 +542,7 @@ String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
 /// @nodoc
 @JsonSerializable()
 
-class MediaImportMethodCustom extends MediaImportMethod with DiagnosticableTreeMixin {
+class MediaImportMethodCustom extends MediaImportMethod {
   const MediaImportMethodCustom({required this.id, final  String? $type}): $type = $type ?? 'custom',super._();
   factory MediaImportMethodCustom.fromJson(Map<String, dynamic> json) => _$MediaImportMethodCustomFromJson(json);
 
@@ -622,12 +562,6 @@ $MediaImportMethodCustomCopyWith<MediaImportMethodCustom> get copyWith => _$Medi
 Map<String, dynamic> toJson() {
   return _$MediaImportMethodCustomToJson(this, );
 }
-@override
-void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
-    ..add(DiagnosticsProperty('type', 'MediaImportMethod.custom'))
-    ..add(DiagnosticsProperty('id', id));
-}
 
 @override
 bool operator ==(Object other) {
@@ -639,7 +573,7 @@ bool operator ==(Object other) {
 int get hashCode => Object.hash(runtimeType,id);
 
 @override
-String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+String toString() {
   return 'MediaImportMethod.custom(id: $id)';
 }
 
