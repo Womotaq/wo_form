@@ -45,6 +45,7 @@ class InputsNodeWidget extends StatelessWidget {
         : Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              header,
               Flexible(
                 flex: uiSettings.flexOrDefault != 0 ? 1 : 0,
                 child: Flex(
