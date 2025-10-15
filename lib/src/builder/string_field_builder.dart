@@ -34,9 +34,7 @@ class StringFieldBuilder extends StatelessWidget {
                       if (input.uiSettings?.errorBuilder != null) {
                         errorWidget = input.uiSettings!.errorBuilder!(error);
                       } else {
-                        errorText = context.read<WoFormL10n?>()?.translateError(
-                          error,
-                        );
+                        errorText = context.woFormL10n.translateError(error);
                       }
                     }
                   }

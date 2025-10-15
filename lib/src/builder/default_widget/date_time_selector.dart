@@ -95,11 +95,7 @@ class DateTimeSelector extends StatelessWidget {
                   ),
           ),
           child: dateTime == null
-              ? Text(
-                  settings.addDateText ??
-                      context.read<WoFormL10n?>()?.addDate?.call() ??
-                      'Select a date',
-                )
+              ? Text(settings.addDateText ?? context.woFormL10n.selectDate)
               : Text(
                   DateFormat(
                     settings.dateFormat ?? 'yMMMMd',
@@ -121,11 +117,7 @@ class DateTimeSelector extends StatelessWidget {
                   ),
           ),
           child: dateTime == null
-              ? Text(
-                  settings.addTimeText ??
-                      context.read<WoFormL10n?>()?.addTime?.call() ??
-                      'Select a time',
-                )
+              ? Text(settings.addTimeText ?? context.woFormL10n.selectTime)
               : Text(
                   DateFormat(
                     settings.dateFormat ?? 'HH:mm',
@@ -187,11 +179,7 @@ class DateTimeSelector extends StatelessWidget {
                   ),
           ),
           child: dateTime == null
-              ? Text(
-                  settings.addDateText ??
-                      context.read<WoFormL10n?>()?.addDate?.call() ??
-                      'Select a date',
-                )
+              ? Text(settings.addDateText ?? context.woFormL10n.selectDate)
               : Text(
                   DateFormat(
                     settings.dateFormat ?? 'yMMMMd',

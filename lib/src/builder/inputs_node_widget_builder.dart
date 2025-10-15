@@ -37,8 +37,6 @@ class InputsNodeWidgetBuilder extends StatelessWidget {
                     InputsNodeWidget.new)
                 .call(fieldData);
           case ChildrenVisibility.whenAsked:
-            final woFormL10n = context.read<WoFormL10n?>();
-
             return BlocSelector<
               WoFormStatusCubit,
               WoFormStatus,
@@ -51,7 +49,7 @@ class InputsNodeWidgetBuilder extends StatelessWidget {
                     .where((error) => error.path.startsWith(path))
                     .length;
                 final errorText = nErrors > 0
-                    ? woFormL10n?.errors(nErrors)
+                    ? context.woFormL10n.errors(nErrors)
                     : null;
 
                 final expanderData = WoFieldData(

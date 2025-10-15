@@ -31,9 +31,7 @@ class NumFieldBuilder extends StatelessWidget {
                     if (error == null) {
                       errorText = null;
                     } else {
-                      errorText = context.read<WoFormL10n?>()?.translateError(
-                        error,
-                      );
+                      errorText = context.woFormL10n.translateError(error);
                     }
                   } else {
                     errorText = null;

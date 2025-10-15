@@ -49,9 +49,8 @@ class SubmitButtonBuilder extends StatelessWidget {
           final submitButtonData = SubmitButtonData(
             text: isTemporarySubmit
                 ? formUiSettings.multistepSettings?.nextText ??
-                      context.read<WoFormL10n?>()?.next()
-                : formUiSettings.submitText ??
-                      context.read<WoFormL10n?>()?.submit(),
+                      context.woFormL10n.next
+                : formUiSettings.submitText ?? context.woFormL10n.submit,
             icon: isTemporarySubmit ? null : formUiSettings.submitIcon,
             onPressed: disabled
                 ? null

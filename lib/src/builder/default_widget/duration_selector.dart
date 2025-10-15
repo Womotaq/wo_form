@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/wo_form.dart';
 
 class DurationSelector extends StatefulWidget {
@@ -33,10 +32,12 @@ class _DurationSelectorState extends State<DurationSelector> {
     duration = widget.initialDuration ?? Duration.zero;
 
     daysController = TextEditingController(text: duration.inDays.toString());
-    hoursController =
-        TextEditingController(text: (duration.inHours % 24).toString());
-    minutesController =
-        TextEditingController(text: (duration.inMinutes % 60).toString());
+    hoursController = TextEditingController(
+      text: (duration.inHours % 24).toString(),
+    );
+    minutesController = TextEditingController(
+      text: (duration.inMinutes % 60).toString(),
+    );
   }
 
   void _onValueChanged(Duration newDuration) {
@@ -54,7 +55,7 @@ class _DurationSelectorState extends State<DurationSelector> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.read<WoFormL10n?>();
+    final l10n = context.woFormL10n;
 
     return Row(
       children: [
@@ -72,7 +73,7 @@ class _DurationSelectorState extends State<DurationSelector> {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(8),
-                  child: Text(l10n?.days?.call(duration.inDays) ?? 'Days'),
+                  child: Text(l10n.days.call(duration.inDays)),
                 ),
               ),
             ],
@@ -93,8 +94,9 @@ class _DurationSelectorState extends State<DurationSelector> {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(8),
-                  child:
-                      Text(l10n?.hours?.call(duration.inHours % 24) ?? 'Hours'),
+                  child: Text(
+                    l10n.hours.call(duration.inHours % 24),
+                  ),
                 ),
               ),
             ],
@@ -117,7 +119,7 @@ class _DurationSelectorState extends State<DurationSelector> {
                 child: Padding(
                   padding: const EdgeInsets.all(8),
                   child: Text(
-                    l10n?.minutes?.call(duration.inMinutes % 60) ?? 'Minutes',
+                    l10n.minutes.call(duration.inMinutes % 60),
                   ),
                 ),
               ),
