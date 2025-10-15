@@ -227,7 +227,8 @@ enum DynamicInputsNodeAddButtonPosition {
 }
 
 typedef GenerateIdDef = String Function();
-typedef OnDynamicInputDeletionDef = void Function(VoidCallback cancel);
+typedef OnDynamicInputDeletionDef =
+    void Function(BuildContext context, VoidCallback cancel);
 typedef DynamicInputsNodeWidgetBuilderDef =
     Widget Function(WoFieldData<DynamicInputsNode, List<WoFormNode>> data);
 

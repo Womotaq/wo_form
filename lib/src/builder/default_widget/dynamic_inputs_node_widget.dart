@@ -42,6 +42,7 @@ class DynamicInputsNodeWidget extends StatelessWidget {
                         (data.input.uiSettings?.onChildDeletion ??
                                 WoFormTheme.of(context)?.onDynamicInputDeletion)
                             ?.call(
+                              context,
                               () => data.onValueChanged?.call(data.value ?? []),
                             );
                         onRemoveChoice(node);
