@@ -53,10 +53,11 @@ sealed class Media with _$Media {
       http.get(uri).then((response) => response.bodyBytes),
   };
 
-  Future<int> get length => switch (this) {
+  /// The length of this media, in bytes.
+  Future<int> get lengthInBytes => switch (this) {
     MediaFile(file: final file) => file.length(),
     MediaUrl(uri: final uri) =>
-      http.get(uri).then((response) => response.bodyBytes.length),
+      http.get(uri).then((response) => response.bodyBytes.lengthInBytes),
   };
 
   Future<String?> get mimeType async => switch (this) {
