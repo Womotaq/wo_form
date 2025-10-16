@@ -1,8 +1,11 @@
 // ignore_for_file: annotate_overrides
 
+import 'dart:io' show File;
+
 import 'package:flutter/foundation.dart' show Uint8List, kIsWeb;
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart';
 import 'package:wo_form/src/model/json_converter/duration.dart';
 import 'package:wo_form/src/utils/extensions.dart';
 import 'package:wo_form/wo_form.dart';
@@ -35,6 +38,35 @@ sealed class Media with _$Media {
 
   // --
 
+  static Future<MediaFile> fromBytes({
+    required Uint8List bytes,
+    required String filename,
+    required String mimeType,
+  }) async {
+    if (kIsWeb) {
+      return MediaFile(
+        file: XFile.fromData(
+          bytes,
+          name: filename,
+          mimeType: mimeType,
+          lastModified: DateTime.now(),
+        ),
+      );
+    } else {
+      final tempDir = await getTemporaryDirectory();
+      final filePath = '${tempDir.path}/$filename';
+      await File(filePath).writeAsBytes(bytes);
+      return MediaFile(
+        file: XFile(
+          filePath,
+          name: filename,
+          mimeType: mimeType,
+          lastModified: DateTime.now(),
+        ),
+      );
+    }
+  }
+
   String get urlOrPath => switch (this) {
     final MediaUrl media => media.url,
     final MediaFile media => media.file.path,
@@ -44,8 +76,6 @@ sealed class Media with _$Media {
     final MediaFile media =>
       kIsWeb ? Uri.parse(media.file.path) : Uri.file(media.file.path),
   };
-
-  // TODO : cache http.get(uri)
 
   Future<Uint8List> get bytes => switch (this) {
     MediaFile(file: final file) => file.readAsBytes(),

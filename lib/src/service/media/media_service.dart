@@ -1,11 +1,8 @@
-import 'dart:io';
 import 'dart:math' hide log;
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:wo_form/wo_form.dart';
 
 /// If you want to use MediaInput,
@@ -101,31 +98,13 @@ abstract class MediaService {
         (_) => random.nextInt(10).toString(),
       ).reduce((a, b) => a + b);
       filename = 'cropped$uid-$filename';
-
-      if (kIsWeb) {
-        result.add(
-          MediaFile(
-            file: XFile.fromData(
-              bytes,
-              name: filename,
-              mimeType: 'image/png',
-            ),
-          ),
-        );
-      } else {
-        final tempDir = await getTemporaryDirectory();
-        final filePath = '${tempDir.path}/$filename';
-        await File(filePath).writeAsBytes(bytes);
-        result.add(
-          MediaFile(
-            file: XFile(
-              filePath,
-              name: filename,
-              mimeType: 'image/png',
-            ),
-          ),
-        );
-      }
+      result.add(
+        await Media.fromBytes(
+          bytes: bytes,
+          filename: filename,
+          mimeType: 'image/png',
+        ),
+      );
     }
 
     return result;
