@@ -16,7 +16,7 @@ sealed class WoFormStatus with _$WoFormStatus {
   }) = InProgressStatus;
   const factory WoFormStatus.submitting() = SubmittingStatus;
   const factory WoFormStatus.submitError({
-    @notSerializable Object? error,
+    @notSerializable @Default('error') Object error,
     @notSerializable StackTrace? stackTrace,
   }) = SubmitErrorStatus;
   const factory WoFormStatus.submitSuccess() = SubmitSuccessStatus;

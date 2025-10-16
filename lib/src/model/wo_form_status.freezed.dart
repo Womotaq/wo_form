@@ -243,10 +243,10 @@ String toString() {
 @JsonSerializable()
 
 class SubmitErrorStatus implements WoFormStatus {
-  const SubmitErrorStatus({@notSerializable this.error, @notSerializable this.stackTrace, final  String? $type}): $type = $type ?? 'submitError';
+  const SubmitErrorStatus({@notSerializable this.error = 'error', @notSerializable this.stackTrace, final  String? $type}): $type = $type ?? 'submitError';
   factory SubmitErrorStatus.fromJson(Map<String, dynamic> json) => _$SubmitErrorStatusFromJson(json);
 
-@notSerializable final  Object? error;
+@notSerializable final  Object error;
 @notSerializable final  StackTrace? stackTrace;
 
 @JsonKey(name: 'runtimeType')
@@ -286,7 +286,7 @@ abstract mixin class $SubmitErrorStatusCopyWith<$Res> implements $WoFormStatusCo
   factory $SubmitErrorStatusCopyWith(SubmitErrorStatus value, $Res Function(SubmitErrorStatus) _then) = _$SubmitErrorStatusCopyWithImpl;
 @useResult
 $Res call({
-@notSerializable Object? error,@notSerializable StackTrace? stackTrace
+@notSerializable Object error,@notSerializable StackTrace? stackTrace
 });
 
 
@@ -303,9 +303,9 @@ class _$SubmitErrorStatusCopyWithImpl<$Res>
 
 /// Create a copy of WoFormStatus
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? error = freezed,Object? stackTrace = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? error = null,Object? stackTrace = freezed,}) {
   return _then(SubmitErrorStatus(
-error: freezed == error ? _self.error : error ,stackTrace: freezed == stackTrace ? _self.stackTrace : stackTrace // ignore: cast_nullable_to_non_nullable
+error: null == error ? _self.error : error ,stackTrace: freezed == stackTrace ? _self.stackTrace : stackTrace // ignore: cast_nullable_to_non_nullable
 as StackTrace?,
   ));
 }

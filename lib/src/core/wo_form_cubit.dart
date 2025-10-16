@@ -21,7 +21,7 @@ class WoFormStatusCubit extends Cubit<WoFormStatus> {
     if (!isClosed) emit(const SubmittingStatus());
   }
 
-  void _setSubmitError({Object? error, StackTrace? stackTrace}) {
+  void _setSubmitError({required Object error, StackTrace? stackTrace}) {
     if (!isClosed) {
       emit(SubmitErrorStatus(error: error, stackTrace: stackTrace));
     }

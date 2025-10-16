@@ -206,7 +206,8 @@ as String?,
 /// @nodoc
 mixin _$MediaImportSettings {
 
- MediaType get type; List<MediaImportMethod> get methods; double? get imageMaxHeight; double? get imageMaxWidth; int? get imageQuality; bool get imageRequestFullMetadata;@DurationNullableConverter() Duration? get videoMaxDuration; bool get preferFrontCamera;
+ MediaType get type; List<MediaImportMethod> get methods; double? get imageMaxHeight; double? get imageMaxWidth; int? get imageQuality; bool get imageRequestFullMetadata;@DurationNullableConverter() Duration? get videoMaxDuration;/// Supported on all iPhones/iPads and some Android devices.
+ bool get preferFrontCamera;
 /// Create a copy of MediaImportSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -294,6 +295,7 @@ class _MediaImportSettings extends MediaImportSettings {
 @override final  int? imageQuality;
 @override@JsonKey() final  bool imageRequestFullMetadata;
 @override@DurationNullableConverter() final  Duration? videoMaxDuration;
+/// Supported on all iPhones/iPads and some Android devices.
 @override@JsonKey() final  bool preferFrontCamera;
 
 /// Create a copy of MediaImportSettings
