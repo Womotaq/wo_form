@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:crop_your_image/crop_your_image.dart';
@@ -13,13 +14,14 @@ Future<Uint8List?> showImageCropperDialog({
   /// For a circle cropping, use MediaService.circleAspectRatio
   double? cropAspectRatioOrCircle,
   bool showGrid = false,
-  void Function(BuildContext context, Uint8List croppedImage)? onCropSuccess,
+  ErrorCallback? onError,
 }) => showDialog(
   context: context,
   builder: (context) => _ImageCropperDialog(
     image: image,
     cropAspectRatioOrCircle: cropAspectRatioOrCircle,
     showGrid: showGrid,
+    onError: onError,
   ),
 );
 
@@ -28,6 +30,7 @@ class _ImageCropperDialog extends StatefulWidget {
     required this.image,
     this.cropAspectRatioOrCircle,
     this.showGrid = false,
+    this.onError,
   });
 
   final Media image;
@@ -35,6 +38,7 @@ class _ImageCropperDialog extends StatefulWidget {
   /// For a circle cropping, use MediaService.circleAspectRatio
   final double? cropAspectRatioOrCircle;
   final bool showGrid;
+  final ErrorCallback? onError;
 
   @override
   State<_ImageCropperDialog> createState() => __ImageCropperDialogState();
@@ -51,20 +55,25 @@ class __ImageCropperDialogState extends State<_ImageCropperDialog> {
   @override
   void initState() {
     super.initState();
-    _init();
+    unawaited(_init());
   }
 
   Future<void> _init() async {
-    final bytes_ = await widget.image.bytes;
-    final image = await decodeImageFromList(await widget.image.bytes);
-    imageHeight = image.height;
-    imageWidth = image.width;
-    final originalAspectRatio_ = image.width / image.height;
+    try {
+      final bytes_ = await widget.image.bytes;
+      final image = await decodeImageFromList(bytes_);
+      imageHeight = image.height;
+      imageWidth = image.width;
+      final originalAspectRatio_ = image.width / image.height;
 
-    setState(() {
-      bytes = bytes_;
-      originalAspectRatio = originalAspectRatio_;
-    });
+      setState(() {
+        bytes = bytes_;
+        originalAspectRatio = originalAspectRatio_;
+      });
+    } catch (error, stackTrace) {
+      widget.onError?.call(error, stackTrace);
+      if (mounted) Navigator.of(context).pop();
+    }
   }
 
   @override
@@ -200,3 +209,5 @@ class _GridPainter extends CustomPainter {
   @override
   bool shouldRepaint(_GridPainter oldDelegate) => false;
 }
+
+typedef ErrorCallback = void Function(Object exception, StackTrace stackTrace);

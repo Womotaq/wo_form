@@ -83,6 +83,7 @@ abstract class MediaService {
         image: media,
         cropAspectRatioOrCircle: cropAspectRatioOrCircle,
         showGrid: showGrid,
+        onError: onCropError,
       );
 
       if (bytes == null) continue;
@@ -129,6 +130,8 @@ abstract class MediaService {
 
     return result;
   }
+
+  void onCropError(Object exception, StackTrace stackTrace) {}
 
   Future<List<Media>> _importMedias({
     required int? limit,
