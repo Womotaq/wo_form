@@ -3,6 +3,7 @@
 import 'dart:io' show File;
 
 import 'package:flutter/foundation.dart' show Uint8List, kIsWeb;
+import 'package:flutter/painting.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
@@ -82,6 +83,11 @@ sealed class Media with _$Media {
     MediaUrl(uri: final uri) =>
       http.get(uri).then((response) => response.bodyBytes),
   };
+
+  Future<Size> get size async {
+    final image = await decodeImageFromList(await bytes);
+    return Size(image.width.toDouble(), image.height.toDouble());
+  }
 
   /// The length of this media, in bytes.
   Future<int> get lengthInBytes => switch (this) {
