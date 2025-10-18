@@ -106,7 +106,9 @@ class _StringFieldState extends State<StringField> {
             helperText: helperLocation.isInside && uiSettings?.helper == null
                 ? uiSettings?.helperText
                 : null,
-            helperMaxLines: uiSettings?.helperMaxLines,
+            helperMaxLines: uiSettings?.helperMaxLines == 0
+                ? null
+                : uiSettings?.helperMaxLines ?? 1,
             helper: helperLocation.isInside ? uiSettings?.helper : null,
             hintText: uiSettings?.hintText,
             errorText: errorLocation.isInside

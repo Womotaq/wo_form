@@ -652,6 +652,8 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     StringFieldLocation? labelLocation,
     String? hintText,
     String? helperText,
+
+    /// Defaults to 1. If you want to set it to null, enter 0.
     int? helperMaxLines,
     @notSerializable Widget? helper,
 

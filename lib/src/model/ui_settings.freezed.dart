@@ -1883,7 +1883,8 @@ mixin _$StringInputUiSettings {
 ///
 /// Only used when [labelLocation] is [StringFieldLocation.outside].
  int? get headerFlex; String? get labelText;/// Default to StringFieldLocation.inside
- StringFieldLocation? get labelLocation; String? get hintText; String? get helperText; int? get helperMaxLines;@notSerializable Widget? get helper;/// Default to StringFieldLocation.inside
+ StringFieldLocation? get labelLocation; String? get hintText; String? get helperText;/// Defaults to 1. If you want to set it to null, enter 0.
+ int? get helperMaxLines;@notSerializable Widget? get helper;/// Default to StringFieldLocation.inside
  StringFieldLocation? get helperLocation;@notSerializable Widget? get prefixIcon;/// Default to StringFieldLocation.outside
  StringFieldLocation? get prefixIconLocation;/// Default to StringFieldLocation.inside
  StringFieldLocation? get errorLocation; StringFieldAction? get action;/// By default, this is determined by [textInputAction]:
@@ -2009,6 +2010,7 @@ class _StringInputUiSettings extends StringInputUiSettings {
 @override final  StringFieldLocation? labelLocation;
 @override final  String? hintText;
 @override final  String? helperText;
+/// Defaults to 1. If you want to set it to null, enter 0.
 @override final  int? helperMaxLines;
 @override@notSerializable final  Widget? helper;
 /// Default to StringFieldLocation.inside
