@@ -102,6 +102,8 @@ class MediaField extends StatelessWidget {
     final circle =
         data.input.uiSettings?.cropAspectRatioOrCircle ==
         MediaService.circleAspectRatio;
+    final canCropFirstMedia =
+        media != null && (data.input.uiSettings?.canCrop?.call(media) ?? true);
     final aspectRatio = circle
         ? 1.0
         : data.input.uiSettings?.cropAspectRatioOrCircle;
@@ -114,17 +116,19 @@ class MediaField extends StatelessWidget {
                     children: [
                       Center(
                         child: GestureDetector(
-                          onTap: onChanged == null
+                          onTap: onChanged == null || !canCropFirstMedia
                               ? null
-                              : () => edit(context, media),
+                              : () => cropMedia(context, media),
                           child: SizedBox(
                             height: fieldHeight,
                             width: aspectRatio == null || aspectRatio == 0
                                 ? null
                                 : fieldHeight * aspectRatio,
-                            child: context
-                                .read<MediaService>()
-                                .mediaWidgetBuilder(
+                            child:
+                                (data.input.uiSettings?.mediaWidgetBuilder ??
+                                context
+                                    .read<MediaService>()
+                                    .mediaWidgetBuilder)(
                                   media: media,
                                   fit: data.input.uiSettings?.fit,
                                   circle: circle,
@@ -147,12 +151,13 @@ class MediaField extends StatelessWidget {
                                     : () => onChanged.call([]),
                                 icon: const Icon(Icons.close),
                               ),
-                              IconButton(
-                                icon: const Icon(Icons.edit),
-                                onPressed: onChanged == null
-                                    ? null
-                                    : () => edit(context, media),
-                              ),
+                              if (canCropFirstMedia)
+                                IconButton(
+                                  icon: const Icon(Icons.crop),
+                                  onPressed: onChanged == null
+                                      ? null
+                                      : () => cropMedia(context, media),
+                                ),
                             ],
                           ),
                         ),
@@ -175,6 +180,7 @@ class MediaField extends StatelessWidget {
                                 data.input.uiSettings?.cropAspectRatioOrCircle,
                             cropShowGrid:
                                 data.input.uiSettings?.cropShowGrid ?? false,
+                            canCrop: data.input.uiSettings?.canCrop,
                             limit: 1,
                             importSettings: data.input.importSettings,
                           ),
@@ -225,6 +231,7 @@ class MediaField extends StatelessWidget {
                 : (newMedias) => onChanged([...medias, ...newMedias]),
             cropAspectRatioOrCircle:
                 data.input.uiSettings?.cropAspectRatioOrCircle,
+            canCrop: data.input.uiSettings?.canCrop,
             cropShowGrid: data.input.uiSettings?.cropShowGrid ?? false,
             limit: limit,
             importSettings: data.input.importSettings,
@@ -235,21 +242,26 @@ class MediaField extends StatelessWidget {
     }
 
     final media = medias[index];
+    final canCrop = data.input.uiSettings?.canCrop?.call(media) ?? true;
 
     return SizedBox(
       width: fieldHeight,
       child: Stack(
         children: [
           GestureDetector(
-            onTap: onChanged == null ? null : () => edit(context, media),
+            onTap: onChanged == null || !canCrop
+                ? null
+                : () => cropMedia(context, media),
             child: Center(
-              child: context.read<MediaService>().mediaWidgetBuilder(
-                media: media,
-                fit: data.input.uiSettings?.fit,
-                circle:
-                    data.input.uiSettings?.cropAspectRatioOrCircle ==
-                    MediaService.circleAspectRatio,
-              ),
+              child:
+                  (data.input.uiSettings?.mediaWidgetBuilder ??
+                  context.read<MediaService>().mediaWidgetBuilder)(
+                    media: media,
+                    fit: data.input.uiSettings?.fit,
+                    circle:
+                        data.input.uiSettings?.cropAspectRatioOrCircle ==
+                        MediaService.circleAspectRatio,
+                  ),
             ),
           ),
           _MediaActions(media: media, data: data),
@@ -258,7 +270,7 @@ class MediaField extends StatelessWidget {
     );
   }
 
-  Future<void> edit(
+  Future<void> cropMedia(
     BuildContext context,
     Media media,
   ) async {
@@ -335,27 +347,33 @@ class _MediaActions extends StatelessWidget {
               icon: const Icon(Icons.keyboard_arrow_right),
             ),
             const Expanded(child: SizedBox.shrink()),
-            IconButton(
-              icon: const Icon(Icons.edit),
-              onPressed: onChanged == null
-                  ? null
-                  : () async {
-                      final cropped = (await context.read<MediaService>().crop(
-                        context: context,
-                        medias: [media],
-                        cropAspectRatioOrCircle:
-                            data.input.uiSettings?.cropAspectRatioOrCircle,
-                        showGrid: data.input.uiSettings?.cropShowGrid ?? false,
-                        maxHeight: data.input.importSettings.imageMaxHeight,
-                        maxWidth: data.input.importSettings.imageMaxWidth,
-                      ))?.firstOrNull;
-                      if (cropped == null) return;
+            if (data.input.uiSettings?.canCrop?.call(media) ?? true)
+              IconButton(
+                icon: const Icon(Icons.crop),
+                onPressed: onChanged == null
+                    ? null
+                    : () async {
+                        final cropped =
+                            (await context.read<MediaService>().crop(
+                              context: context,
+                              medias: [media],
+                              cropAspectRatioOrCircle: data
+                                  .input
+                                  .uiSettings
+                                  ?.cropAspectRatioOrCircle,
+                              showGrid:
+                                  data.input.uiSettings?.cropShowGrid ?? false,
+                              maxHeight:
+                                  data.input.importSettings.imageMaxHeight,
+                              maxWidth: data.input.importSettings.imageMaxWidth,
+                            ))?.firstOrNull;
+                        if (cropped == null) return;
 
-                      final newMedias = List<Media>.from(medias);
-                      newMedias[medias.indexOf(media)] = cropped;
-                      onChanged(newMedias);
-                    },
-            ),
+                        final newMedias = List<Media>.from(medias);
+                        newMedias[medias.indexOf(media)] = cropped;
+                        onChanged(newMedias);
+                      },
+              ),
             IconButton(
               icon: const Icon(Icons.close),
               onPressed: onChanged == null
@@ -376,6 +394,7 @@ class AddMediaButon extends StatefulWidget {
     required this.onChanged,
     required this.cropAspectRatioOrCircle,
     required this.cropShowGrid,
+    required this.canCrop,
     required this.limit,
     required this.importSettings,
     super.key,
@@ -386,6 +405,7 @@ class AddMediaButon extends StatefulWidget {
   final void Function(List<Media>)? onChanged;
   final double? cropAspectRatioOrCircle;
   final bool cropShowGrid;
+  final CanCropDef? canCrop;
   final int? limit;
   final MediaImportSettings importSettings;
 
@@ -418,7 +438,9 @@ class _AddMediaButonState extends State<AddMediaButon> {
                   );
                   if (newMedias.isEmpty) return;
 
-                  if (widget.cropAspectRatioOrCircle != null) {
+                  if (widget.cropAspectRatioOrCircle != null &&
+                      // LATER : try canCrop on each media, crop only valid ones
+                      (widget.canCrop?.call(newMedias.first) ?? true)) {
                     if (!context.mounted) return;
                     final croppedMedias = await mediaService.crop(
                       context: context,

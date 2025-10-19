@@ -54,6 +54,8 @@ abstract class MediaService {
   );
 
   /// Used by MediaField to display a media
+  ///
+  /// Uses the signature of [MediaWidgetBuilderDef].
   Widget mediaWidgetBuilder({
     required Media media,
     BoxFit? fit,

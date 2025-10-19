@@ -8,8 +8,9 @@ import 'package:wo_form/wo_form.dart';
 /// This allows the field [initialValue] to be dynamically set by a
 /// [ValueBuilderNode] or any other builder node.
 ///
-/// Note : thanks to this widget, editing [initialValue] also works on hot
-/// reload.
+/// IMPORTANT : thanks to this widget, editing [initialValue] also works on hot
+/// reload. The drawback is that when using [ShowErrors.afterSubmission],
+/// hot reloading will always reset to the initial value.
 class InitialValueKeeper<T> extends StatefulWidget {
   const InitialValueKeeper({
     required this.initialValue,
