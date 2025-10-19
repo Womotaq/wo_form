@@ -25,10 +25,18 @@ class QuitWoFormButton extends StatelessWidget {
   }
 }
 
+/// WoFormPopScope blocks pop events,
+/// transforms them in [MultistepController.previousStep] if multisteping,
+/// or calls [WoFormUiSettings.canQuit].
 class WoFormPopScope extends StatelessWidget {
-  const WoFormPopScope({required this.builder, super.key});
+  const WoFormPopScope({
+    required this.builder,
+    this.usePopScope = false,
+    super.key,
+  });
 
   final Widget Function(BuildContext context, VoidCallback? tryPop) builder;
+  final bool usePopScope;
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +49,22 @@ class WoFormPopScope extends StatelessWidget {
             ? context.read<RootNode>().uiSettings?.canQuit
             : goPreviousStep;
 
+        final child = builder(
+          context,
+          canQuit == null
+              ? navigatorCanPop
+                    ? Navigator.of(context).pop
+                    : null
+              : () async {
+                  final confirmPop = await canQuit(context) ?? false;
+                  if (confirmPop && context.mounted && navigatorCanPop) {
+                    Navigator.of(context).pop();
+                  }
+                },
+        );
+
+        if (!usePopScope) return child;
+
         return PopScope(
           canPop: navigatorCanPop && canQuit == null,
           onPopInvokedWithResult: (didPop, result) async {
@@ -52,19 +76,7 @@ class WoFormPopScope extends StatelessWidget {
               Navigator.of(context).pop();
             }
           },
-          child: builder(
-            context,
-            canQuit == null
-                ? navigatorCanPop
-                      ? Navigator.of(context).pop
-                      : null
-                : () async {
-                    final confirmPop = await canQuit(context) ?? false;
-                    if (confirmPop && context.mounted && navigatorCanPop) {
-                      Navigator.of(context).pop();
-                    }
-                  },
-          ),
+          child: child,
         );
       },
     );
