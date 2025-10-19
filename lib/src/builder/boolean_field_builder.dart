@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wo_form/src/utils/initial_value_keeper.dart';
 import 'package:wo_form/wo_form.dart';
 
 class BooleanFieldBuilder extends StatelessWidget {
@@ -17,58 +18,62 @@ class BooleanFieldBuilder extends StatelessWidget {
     final valuesCubit = context.read<WoFormValuesCubit>();
     final input = getNode(context);
 
-    return WoFormNodeFocusManager(
+    return InitialValueKeeper(
+      initialValue: input.initialValue,
       path: path,
-      child: BlocSelector<WoFormLockCubit, Set<String>, bool>(
-        selector: (lockedInputs) => lockedInputs.contains(path),
-        builder: (context, inputIsLocked) {
-          return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
-            builder: (context, status) {
-              return WoFormValueBuilder<bool>(
-                path: path,
-                builder: (context, value) {
-                  final String? errorText;
-                  if (status is InProgressStatus) {
-                    final error = status.getError(path: path);
-                    if (error == null) {
-                      errorText = null;
+      child: WoFormNodeFocusManager(
+        path: path,
+        child: BlocSelector<WoFormLockCubit, Set<String>, bool>(
+          selector: (lockedInputs) => lockedInputs.contains(path),
+          builder: (context, inputIsLocked) {
+            return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
+              builder: (context, status) {
+                return WoFormValueBuilder<bool>(
+                  path: path,
+                  builder: (context, value) {
+                    final String? errorText;
+                    if (status is InProgressStatus) {
+                      final error = status.getError(path: path);
+                      if (error == null) {
+                        errorText = null;
+                      } else {
+                        errorText = context.woFormL10n.translateError(error);
+                      }
                     } else {
-                      errorText = context.woFormL10n.translateError(error);
+                      errorText = null;
                     }
-                  } else {
-                    errorText = null;
-                  }
 
-                  final fieldData = WoFieldData(
-                    path: path,
-                    input: input,
-                    value: value,
-                    errorText: errorText,
-                    onValueChanged: inputIsLocked
-                        ? null
-                        : (
-                            bool? value, {
-                            UpdateStatus updateStatus = UpdateStatus.yes,
-                          }) {
-                            valuesCubit.onValueChanged(
-                              path: path,
-                              value: value,
-                              updateStatus: updateStatus,
-                            );
+                    final fieldData = WoFieldData(
+                      path: path,
+                      input: input,
+                      value: value,
+                      errorText: errorText,
+                      onValueChanged: inputIsLocked
+                          ? null
+                          : (
+                              bool? value, {
+                              UpdateStatus updateStatus = UpdateStatus.yes,
+                            }) {
+                              valuesCubit.onValueChanged(
+                                path: path,
+                                value: value,
+                                updateStatus: updateStatus,
+                              );
 
-                            input.onValueChanged?.call(value);
-                          },
-                  );
+                              input.onValueChanged?.call(value);
+                            },
+                    );
 
-                  return (input.uiSettings?.widgetBuilder ??
-                          WoFormTheme.of(context)?.booleanFieldBuilder ??
-                          BooleanField.new)
-                      .call(fieldData);
-                },
-              );
-            },
-          );
-        },
+                    return (input.uiSettings?.widgetBuilder ??
+                            WoFormTheme.of(context)?.booleanFieldBuilder ??
+                            BooleanField.new)
+                        .call(fieldData);
+                  },
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wo_form/src/utils/initial_value_keeper.dart';
 import 'package:wo_form/wo_form.dart';
 
 class DateTimeFieldBuilder extends StatelessWidget {
@@ -16,55 +17,60 @@ class DateTimeFieldBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     final input = getNode(context);
 
-    return WoFormNodeFocusManager(
+    return InitialValueKeeper(
+      initialValue: input.initialValue,
       path: path,
-      child: BlocSelector<WoFormLockCubit, Set<String>, bool>(
-        selector: (lockedInputs) => lockedInputs.contains(path),
-        builder: (context, inputIsLocked) {
-          return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
-            builder: (context, status) {
-              return WoFormValueBuilder<DateTime>(
-                path: path,
-                builder: (context, value) {
-                  final String? errorText;
-                  if (status is InProgressStatus) {
-                    final error = status.getError(path: path);
-                    if (error == null) {
-                      errorText = null;
+      child: WoFormNodeFocusManager(
+        path: path,
+        child: BlocSelector<WoFormLockCubit, Set<String>, bool>(
+          selector: (lockedInputs) => lockedInputs.contains(path),
+          builder: (context, inputIsLocked) {
+            return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
+              builder: (context, status) {
+                return WoFormValueBuilder<DateTime>(
+                  path: path,
+                  builder: (context, value) {
+                    final String? errorText;
+                    if (status is InProgressStatus) {
+                      final error = status.getError(path: path);
+                      if (error == null) {
+                        errorText = null;
+                      } else {
+                        errorText = context.woFormL10n.translateError(error);
+                      }
                     } else {
-                      errorText = context.woFormL10n.translateError(error);
+                      errorText = null;
                     }
-                  } else {
-                    errorText = null;
-                  }
 
-                  final fieldData = WoFieldData(
-                    path: path,
-                    input: input,
-                    value: value,
-                    errorText: errorText,
-                    onValueChanged: inputIsLocked
-                        ? null
-                        : (
-                            DateTime? value, {
-                            UpdateStatus updateStatus = UpdateStatus.yes,
-                          }) =>
-                              context.read<WoFormValuesCubit>().onValueChanged(
-                                path: path,
-                                value: value,
-                                updateStatus: updateStatus,
-                              ),
-                  );
+                    final fieldData = WoFieldData(
+                      path: path,
+                      input: input,
+                      value: value,
+                      errorText: errorText,
+                      onValueChanged: inputIsLocked
+                          ? null
+                          : (
+                              DateTime? value, {
+                              UpdateStatus updateStatus = UpdateStatus.yes,
+                            }) => context
+                                .read<WoFormValuesCubit>()
+                                .onValueChanged(
+                                  path: path,
+                                  value: value,
+                                  updateStatus: updateStatus,
+                                ),
+                    );
 
-                  return (input.uiSettings?.widgetBuilder ??
-                          WoFormTheme.of(context)?.dateTimeFieldBuilder ??
-                          DateTimeField.new)
-                      .call(fieldData);
-                },
-              );
-            },
-          );
-        },
+                    return (input.uiSettings?.widgetBuilder ??
+                            WoFormTheme.of(context)?.dateTimeFieldBuilder ??
+                            DateTimeField.new)
+                        .call(fieldData);
+                  },
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }

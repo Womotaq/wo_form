@@ -841,6 +841,9 @@ class WoFormValues {
   set _visitedPaths(Iterable<String> paths) =>
       _values[_VISITED_PATHS_KEY] = paths;
 
+  /// Return true if the user had an interaction with the field at this path.
+  bool isVisited({required String path}) => _visitedPaths.contains(path);
+
   // --- SELECT INPUT QUERY ---
 
   WoFormQuery? queryOf({required String selectInputPath}) =>

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wo_form/src/utils/initial_value_keeper.dart';
 import 'package:wo_form/wo_form.dart';
 
 class MediaFieldBuilder extends StatelessWidget {
@@ -17,66 +18,70 @@ class MediaFieldBuilder extends StatelessWidget {
     final valuesCubit = context.read<WoFormValuesCubit>();
     final input = getNode(context);
 
-    return WoFormNodeFocusManager(
+    return InitialValueKeeper(
+      initialValue: input.initialValues,
       path: path,
-      child: BlocSelector<WoFormLockCubit, Set<String>, bool>(
-        selector: (lockedInputs) => lockedInputs.contains(path),
-        builder: (context, inputIsLocked) {
-          return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
-            builder: (context, status) {
-              return WoFormValueBuilder<List<dynamic>>(
-                path: path,
-                builder: (context, selectedValues_) {
-                  final selectedValues =
-                      selectedValues_?.whereType<Media>().toList() ?? [];
+      child: WoFormNodeFocusManager(
+        path: path,
+        child: BlocSelector<WoFormLockCubit, Set<String>, bool>(
+          selector: (lockedInputs) => lockedInputs.contains(path),
+          builder: (context, inputIsLocked) {
+            return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
+              builder: (context, status) {
+                return WoFormValueBuilder<List<dynamic>>(
+                  path: path,
+                  builder: (context, selectedValues_) {
+                    final selectedValues =
+                        selectedValues_?.whereType<Media>().toList() ?? [];
 
-                  final String? errorText;
-                  if (status is InProgressStatus) {
-                    final error = status.getError(path: path);
-                    if (error == null) {
-                      errorText = null;
+                    final String? errorText;
+                    if (status is InProgressStatus) {
+                      final error = status.getError(path: path);
+                      if (error == null) {
+                        errorText = null;
+                      } else {
+                        errorText = context.woFormL10n.translateError(error);
+                      }
                     } else {
-                      errorText = context.woFormL10n.translateError(error);
+                      errorText = null;
                     }
-                  } else {
-                    errorText = null;
-                  }
 
-                  final fieldData = WoFieldData(
-                    path: path,
-                    input: input,
-                    value: selectedValues,
-                    errorText: errorText,
-                    onValueChanged: inputIsLocked
-                        ? null
-                        : (
-                            List<Media>? values, {
-                            UpdateStatus updateStatus = UpdateStatus.yes,
-                          }) async {
-                            valuesCubit.onValueChanged(
-                              path: path,
-                              value: values,
-                            );
+                    final fieldData = WoFieldData(
+                      path: path,
+                      input: input,
+                      value: selectedValues,
+                      errorText: errorText,
+                      onValueChanged: inputIsLocked
+                          ? null
+                          : (
+                              List<Media>? values, {
+                              UpdateStatus updateStatus = UpdateStatus.yes,
+                            }) async {
+                              valuesCubit.onValueChanged(
+                                path: path,
+                                value: values,
+                              );
 
-                            input.onValueChanged?.call(values);
+                              input.onValueChanged?.call(values);
 
-                            if (input.submitFormOnSelect) {
-                              await valuesCubit.submit(context);
-                            }
-                          },
-                  );
+                              if (input.submitFormOnSelect) {
+                                await valuesCubit.submit(context);
+                              }
+                            },
+                    );
 
-                  final mediaFieldBuilder =
-                      input.uiSettings?.widgetBuilder ??
-                      WoFormTheme.of(context)?.mediaFieldBuilder ??
-                      MediaField.new;
+                    final mediaFieldBuilder =
+                        input.uiSettings?.widgetBuilder ??
+                        WoFormTheme.of(context)?.mediaFieldBuilder ??
+                        MediaField.new;
 
-                  return mediaFieldBuilder(fieldData);
-                },
-              );
-            },
-          );
-        },
+                    return mediaFieldBuilder(fieldData);
+                  },
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }
