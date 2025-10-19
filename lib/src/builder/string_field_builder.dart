@@ -23,7 +23,8 @@ class StringFieldBuilder extends StatelessWidget {
       child: WoFormNodeFocusManager(
         path: path,
         child: BlocSelector<WoFormLockCubit, Set<String>, bool>(
-          selector: (lockedInputs) => lockedInputs.contains(path),
+          selector: (lockedInputs) =>
+              input.isLocked || lockedInputs.contains(path),
           builder: (context, inputIsLocked) {
             return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
               builder: (context, status) {
