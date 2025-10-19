@@ -57,59 +57,43 @@ class Push {
     LayoutMethod layout = LayoutMethod.scrollable,
     bool dismissible = true,
     double initialBottomSheetSize = .7,
-    bool showDragHandle = false,
-  }) {
-    final wrapped = _BottomSheetDragHandle(
-      flex: layout.isScrollable ? 1 : 0,
-      showDragHandle: showDragHandle,
-      child: layout.supportFlex
-          ? Builder(
-              builder: (context) {
-                final data = MediaQuery.of(context);
-                return SizedBox(
-                  height:
-                      // Move all the modal up when the keyboard appears
-                      data.viewInsets.bottom +
-                      data.size.height * initialBottomSheetSize,
-                  child: child,
-                );
-              },
-            )
-          : child,
-    );
-
-    return showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      useSafeArea: true,
-      isDismissible: dismissible,
-      // When the drag is enabled, the modal can be closed by swapping down,
-      // even when isDismissible is set to true.
-      enableDrag: dismissible,
-      clipBehavior: Clip.hardEdge,
-      builder: (context) => switch (layout) {
-        LayoutMethod.scrollable => DraggableScrollableSheet(
-          expand: false,
-          initialChildSize: initialBottomSheetSize,
-          minChildSize: initialBottomSheetSize * 2 / 3,
-          builder: (context, scrollController) => ScrollControllerProvider(
-            controller: scrollController,
-            child: wrapped,
-          ),
+  }) => showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    useSafeArea: true,
+    isDismissible: dismissible,
+    // When the drag is enabled, the modal can be closed by swapping down,
+    // even when isDismissible is set to true.
+    enableDrag: dismissible,
+    clipBehavior: Clip.hardEdge,
+    builder: (context) => switch (layout) {
+      LayoutMethod.scrollable => DraggableScrollableSheet(
+        expand: false,
+        initialChildSize: initialBottomSheetSize,
+        minChildSize: initialBottomSheetSize * 2 / 3,
+        builder: (context, scrollController) => ScrollControllerProvider(
+          controller: scrollController,
+          child: child,
         ),
-        LayoutMethod.flexible => wrapped,
-        LayoutMethod.shrinkWrap => Padding(
-          padding: EdgeInsets.only(
-            // When WoForm uses LayoutMethod.shrinkWrap, it isn't wrapped
-            // by a Scaffold, so it doesn't deal with the keyboard.
-            // See : https://stackoverflow.com/questions/53869078/how-to-move-bottomsheet-along-with-keyboard-which-has-textfieldautofocused-is-t
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-          ),
-          child: wrapped,
+      ),
+      LayoutMethod.flexible => SizedBox(
+        height:
+            // Move all the modal up when the keyboard appears
+            MediaQuery.of(context).viewInsets.bottom +
+            MediaQuery.of(context).size.height * initialBottomSheetSize,
+        child: child,
+      ),
+      LayoutMethod.shrinkWrap => Padding(
+        padding: EdgeInsets.only(
+          // When WoForm uses LayoutMethod.shrinkWrap, it isn't wrapped
+          // by a Scaffold, so it doesn't deal with the keyboard.
+          // See : https://stackoverflow.com/questions/53869078/how-to-move-bottomsheet-along-with-keyboard-which-has-textfieldautofocused-is-t
+          bottom: MediaQuery.of(context).viewInsets.bottom,
         ),
-      },
-    );
-  }
+        child: child,
+      ),
+    },
+  );
 
   static Future<T?> menu<T extends Object?>({
     required BuildContext context,
@@ -130,52 +114,6 @@ class Push {
     ),
     bodyBuilder: (_) => child,
   );
-}
-
-class _BottomSheetDragHandle extends StatelessWidget {
-  const _BottomSheetDragHandle({
-    required this.child,
-    required this.flex,
-    this.showDragHandle = true,
-  });
-
-  final Widget child;
-  final int flex;
-  final bool showDragHandle;
-
-  @override
-  Widget build(BuildContext context) {
-    if (!showDragHandle) return child;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Expanded(
-          flex: flex,
-          child: Stack(
-            children: [
-              child,
-              Align(
-                alignment: Alignment.topCenter,
-                child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                      borderRadius: const BorderRadius.all(Radius.circular(8)),
-                    ),
-                    width: 48,
-                    height: 6,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
 }
 
 typedef PushDef =

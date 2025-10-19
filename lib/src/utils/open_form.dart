@@ -6,7 +6,6 @@ extension OpenForm on BuildContext {
   Future<T?> openForm<T extends Object?>(
     WoForm form, {
     double initialBottomSheetSize = .7,
-    bool showDragHandle = false,
     bool dismissible = true,
   }) => switch (form.root.uiSettings?.presentation) {
     null || WoFormPresentation.page => pushPage(
@@ -19,7 +18,6 @@ extension OpenForm on BuildContext {
       form: form,
       dismissible: dismissible,
       initialBottomSheetSize: initialBottomSheetSize,
-      showDragHandle: showDragHandle,
     ),
   };
 }
@@ -29,7 +27,6 @@ Future<T?> _showWoFormModal<T extends Object?>({
   required BuildContext context,
   required WoForm form,
   required double initialBottomSheetSize,
-  required bool showDragHandle,
   required bool dismissible,
 }) {
   // final size =
@@ -60,7 +57,6 @@ Future<T?> _showWoFormModal<T extends Object?>({
           : form.root.uiSettings?.layout ?? LayoutMethod.scrollable,
       dismissible: dismissible,
       initialBottomSheetSize: initialBottomSheetSize,
-      showDragHandle: showDragHandle,
     );
   }
 }
