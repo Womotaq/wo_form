@@ -56,47 +56,53 @@ class _ShrinkableScaffoldState extends State<ShrinkableScaffold> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Theme.of(context).scaffoldBackgroundColor,
-      child: Column(
-        mainAxisSize: widget.shrinkWrap ? MainAxisSize.min : MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            flex: widget.shrinkWrap ? 0 : 1,
-            child: Stack(
-              children: [
-                Column(
-                  children: [
-                    if (widget.appBarLeading != null ||
-                        widget.appBarTitle != null ||
-                        widget.appBarActions.isNotEmpty)
-                      AppBar(
-                        leading: widget.appBarLeading,
-                        automaticallyImplyLeading: false,
-                        title: widget.appBarTitle,
-                        actions: widget.appBarActions,
-                        elevation: elevation,
-                        toolbarHeight: widget.appBarHeight,
-                      ),
-                    Expanded(
-                      flex: widget.shrinkWrap ? 0 : 1,
-                      child: widget.body,
+    final content = Column(
+      mainAxisSize: widget.shrinkWrap ? MainAxisSize.min : MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Expanded(
+          flex: widget.shrinkWrap ? 0 : 1,
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  if (widget.appBarLeading != null ||
+                      widget.appBarTitle != null ||
+                      widget.appBarActions.isNotEmpty)
+                    AppBar(
+                      leading: widget.appBarLeading,
+                      automaticallyImplyLeading: false,
+                      title: widget.appBarTitle,
+                      actions: widget.appBarActions,
+                      elevation: elevation,
+                      toolbarHeight: widget.appBarHeight,
                     ),
-                  ],
-                ),
-                if (widget.floatingActionButton != null)
-                  Positioned(
-                    bottom: 16,
-                    right: 16,
-                    child: widget.floatingActionButton!,
+                  Expanded(
+                    flex: widget.shrinkWrap ? 0 : 1,
+                    child: widget.body,
                   ),
-              ],
-            ),
+                ],
+              ),
+              if (widget.floatingActionButton != null)
+                Positioned(
+                  bottom: 16,
+                  right: 16,
+                  child: widget.floatingActionButton!,
+                ),
+            ],
           ),
-          ?widget.bottomNavigationBar,
-        ],
-      ),
+        ),
+        ?widget.bottomNavigationBar,
+      ],
     );
+
+    return widget.shrinkWrap
+        ? Material(
+            color: Theme.of(context).scaffoldBackgroundColor,
+            child: content,
+          )
+        // This scaffold ensures basic flutter functionnalities like adapting
+        // size when the keyboard appears.
+        : Scaffold(body: content);
   }
 }

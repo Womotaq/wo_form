@@ -62,15 +62,20 @@ class Push {
     final wrapped = _BottomSheetDragHandle(
       flex: layout.isScrollable ? 1 : 0,
       showDragHandle: showDragHandle,
-      child: Builder(
-        builder: (context) => SizedBox(
-          height: layout == LayoutMethod.flexible
-              ? MediaQuery.of(context).heightWithoutKeyboard *
-                    initialBottomSheetSize
-              : null,
-          child: child,
-        ),
-      ),
+      child: layout.supportFlex
+          ? Builder(
+              builder: (context) {
+                final data = MediaQuery.of(context);
+                return SizedBox(
+                  height:
+                      // Move all the modal up when the keyboard appears
+                      data.viewInsets.bottom +
+                      data.size.height * initialBottomSheetSize,
+                  child: child,
+                );
+              },
+            )
+          : child,
     );
 
     return showModalBottomSheet(
@@ -82,25 +87,27 @@ class Push {
       // even when isDismissible is set to true.
       enableDrag: dismissible,
       clipBehavior: Clip.hardEdge,
-      builder: (context) => Padding(
-        // This padding allows the modal to adjust to the keyboard
-        // See : https://stackoverflow.com/questions/53869078/how-to-move-bottomsheet-along-with-keyboard-which-has-textfieldautofocused-is-t
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
+      builder: (context) => switch (layout) {
+        LayoutMethod.scrollable => DraggableScrollableSheet(
+          expand: false,
+          initialChildSize: initialBottomSheetSize,
+          minChildSize: initialBottomSheetSize * 2 / 3,
+          builder: (context, scrollController) => ScrollControllerProvider(
+            controller: scrollController,
+            child: wrapped,
+          ),
         ),
-        child: layout.isScrollable
-            ? DraggableScrollableSheet(
-                expand: false,
-                initialChildSize: initialBottomSheetSize,
-                minChildSize: initialBottomSheetSize * 2 / 3,
-                builder: (context, scrollController) =>
-                    ScrollControllerProvider(
-                      controller: scrollController,
-                      child: wrapped,
-                    ),
-              )
-            : wrapped,
-      ),
+        LayoutMethod.flexible => wrapped,
+        LayoutMethod.shrinkWrap => Padding(
+          padding: EdgeInsets.only(
+            // When WoForm uses LayoutMethod.shrinkWrap, it isn't wrapped
+            // by a Scaffold, so it doesn't deal with the keyboard.
+            // See : https://stackoverflow.com/questions/53869078/how-to-move-bottomsheet-along-with-keyboard-which-has-textfieldautofocused-is-t
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: wrapped,
+        ),
+      },
     );
   }
 
@@ -123,10 +130,6 @@ class Push {
     ),
     bodyBuilder: (_) => child,
   );
-}
-
-extension on MediaQueryData {
-  double get heightWithoutKeyboard => size.height - viewInsets.bottom;
 }
 
 class _BottomSheetDragHandle extends StatelessWidget {
