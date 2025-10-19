@@ -186,7 +186,6 @@ SelectorNode<T> _$SelectorNodeFromJson<T extends Object?>(
   Map<String, dynamic> json,
 ) => SelectorNode<T>(
   id: json['id'] as String,
-  initialValue: json['initialValue'],
   uiSettings: json['uiSettings'] == null
       ? null
       : InputUiSettings.fromJson(json['uiSettings'] as Map<String, dynamic>),
@@ -197,7 +196,6 @@ Map<String, dynamic> _$SelectorNodeToJson<T extends Object?>(
   SelectorNode<T> instance,
 ) => <String, dynamic>{
   'id': instance.id,
-  'initialValue': instance.initialValue,
   'uiSettings': instance.uiSettings?.toJson(),
   'runtimeType': instance.$type,
 };

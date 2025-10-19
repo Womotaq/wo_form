@@ -94,9 +94,12 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
   @Assert('builder != null', 'SelectorNode.builder cannot be null')
   const factory WoFormNode.selector({
     required String id,
-    @notSerializable Object? Function(WoFormValues values)? selector,
-    @notSerializable WoFormNode Function(Object? value)? builder,
-    Object? initialValue,
+
+    @notSerializable T Function(WoFormValues values)? selector,
+    @notSerializable WoFormNode Function(T value)? builder,
+
+    /// If not set, [selector] will be called with an empty WoFormValues.
+    @notSerializable T? initialValue,
     InputUiSettings? uiSettings,
   }) = SelectorNode;
 
@@ -780,9 +783,15 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
         };
 
       case SelectorNode(
+        selector: final selector,
         builder: final builder,
         initialValue: final initialValue,
       ):
+        final child = builder!(
+          initialValue ?? selector!(const WoFormValues({})),
+        );
+        return child.getInitialValues(parentPath: '$parentPath/$id');
+
       case ValueBuilderNode(
         builder: final builder,
         initialValue: final initialValue,

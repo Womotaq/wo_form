@@ -859,13 +859,14 @@ $ExportSettingsCopyWith<$Res>? get exportSettings {
 @JsonSerializable()
 
 class SelectorNode<T extends Object?> extends WoFormNode<T> {
-  const SelectorNode({required this.id, @notSerializable this.selector, @notSerializable this.builder, this.initialValue, this.uiSettings, final  String? $type}): assert(selector != null, 'SelectorNode.selector cannot be null'),assert(builder != null, 'SelectorNode.builder cannot be null'),$type = $type ?? 'selector',super._();
+  const SelectorNode({required this.id, @notSerializable this.selector, @notSerializable this.builder, @notSerializable this.initialValue, this.uiSettings, final  String? $type}): assert(selector != null, 'SelectorNode.selector cannot be null'),assert(builder != null, 'SelectorNode.builder cannot be null'),$type = $type ?? 'selector',super._();
   factory SelectorNode.fromJson(Map<String, dynamic> json) => _$SelectorNodeFromJson(json);
 
 @override final  String id;
-@notSerializable final  Object? Function(WoFormValues values)? selector;
-@notSerializable final  WoFormNode Function(Object? value)? builder;
- final  Object? initialValue;
+@notSerializable final  T Function(WoFormValues values)? selector;
+@notSerializable final  WoFormNode Function(T value)? builder;
+/// If not set, [selector] will be called with an empty WoFormValues.
+@notSerializable final  T? initialValue;
  final  InputUiSettings? uiSettings;
 
 @JsonKey(name: 'runtimeType')
@@ -905,7 +906,7 @@ abstract mixin class $SelectorNodeCopyWith<T extends Object?,$Res> implements $W
   factory $SelectorNodeCopyWith(SelectorNode<T> value, $Res Function(SelectorNode<T>) _then) = _$SelectorNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id,@notSerializable Object? Function(WoFormValues values)? selector,@notSerializable WoFormNode Function(Object? value)? builder, Object? initialValue, InputUiSettings? uiSettings
+ String id,@notSerializable T Function(WoFormValues values)? selector,@notSerializable WoFormNode Function(T value)? builder,@notSerializable T? initialValue, InputUiSettings? uiSettings
 });
 
 
@@ -926,8 +927,9 @@ class _$SelectorNodeCopyWithImpl<T extends Object?,$Res>
   return _then(SelectorNode<T>(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,selector: freezed == selector ? _self.selector : selector // ignore: cast_nullable_to_non_nullable
-as Object? Function(WoFormValues values)?,builder: freezed == builder ? _self.builder : builder // ignore: cast_nullable_to_non_nullable
-as WoFormNode Function(Object? value)?,initialValue: freezed == initialValue ? _self.initialValue : initialValue ,uiSettings: freezed == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
+as T Function(WoFormValues values)?,builder: freezed == builder ? _self.builder : builder // ignore: cast_nullable_to_non_nullable
+as WoFormNode Function(T value)?,initialValue: freezed == initialValue ? _self.initialValue : initialValue // ignore: cast_nullable_to_non_nullable
+as T?,uiSettings: freezed == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
 as InputUiSettings?,
   ));
 }
