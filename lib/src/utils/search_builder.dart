@@ -1,4 +1,8 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:diacritic/diacritic.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// A widget that handles the logic for filtering and ranking a local dataset
@@ -9,17 +13,21 @@ import 'package:flutter/material.dart';
 /// [TextEditingController], listening to text changes, and performing the
 /// filtering and sorting of [data].
 class SearchBuilder<T> extends StatefulWidget {
-  const SearchBuilder({
-    required this.data,
+  SearchBuilder({
     required this.searchScore,
     required this.builder,
+    Iterable<T>? data,
+
+    /// If set, [data] won't be used.
+    LoadDataDef<T>? loadData,
     this.initialQuery,
     this.onQueryChanged,
     super.key,
-  });
-
-  /// The data you want to search through.
-  final Iterable<T> data;
+  }) : assert(
+         (data != null) || (loadData != null),
+         "One of 'data' or 'loadData' must be specified.",
+       ),
+       loadData = loadData ?? ((_) => Future.value(data));
 
   /// A function that calculates how well a piece of [data] matches the search.
   ///
@@ -47,6 +55,10 @@ class SearchBuilder<T> extends StatefulWidget {
   )
   builder;
 
+  /// A method that load the data you want to search through, based on
+  /// the query.
+  final Future<Iterable<T>> Function(WoFormQuery) loadData;
+
   final WoFormQuery? initialQuery;
   final ValueChanged<WoFormQuery>? onQueryChanged;
 
@@ -56,35 +68,47 @@ class SearchBuilder<T> extends StatefulWidget {
 
 class _SearchBuilderState<T> extends State<SearchBuilder<T>> {
   late final TextEditingController _textController;
+  late WoFormQuery _query;
   late List<T> _results;
+  int _activeRequestId = 0;
 
   @override
   void initState() {
     super.initState();
 
-    _textController = TextEditingController(text: widget.initialQuery?.raw)
-      ..addListener(_filterData);
-    _results = widget.data.toList();
+    _query = widget.initialQuery ?? WoFormQuery('');
+    _textController = TextEditingController(text: _query.raw)
+      ..addListener(onTextChanged);
+    _results = [];
 
-    if (widget.initialQuery != null) {
-      _filterData();
-    }
+    unawaited(loadData());
   }
 
-  // Search, scoring, and filtering logic
-  void _filterData() {
-    final query = WoFormQuery(_textController.text);
+  void onTextChanged() {
+    _query = WoFormQuery(_textController.text);
+    widget.onQueryChanged?.call(_query);
+    unawaited(loadData());
+  }
 
-    if (query.clean.isEmpty) {
-      // If the query is empty, return all data
-      setState(() => _results = widget.data.toList());
-      widget.onQueryChanged?.call(query);
+  Future<void> loadData() async {
+    final requestId = ++_activeRequestId;
+    final Iterable<T> loadedData;
+    try {
+      loadedData = await widget.loadData(_query);
+      // Ensure this is the latest request and widget still mounted
+      if (requestId != _activeRequestId || !mounted) return;
+    } catch (e) {
+      if (kDebugMode) log('Error in SearchBuilder.loadData : $e');
       return;
     }
 
+    if (_query.clean.isEmpty) {
+      setState(() => _results = loadedData.toList());
+    }
+
     final scoredItems = <_ScoredItem<T>>[];
-    for (final item in widget.data) {
-      final score = widget.searchScore(query, item);
+    for (final item in _results) {
+      final score = widget.searchScore(_query, item);
       if (score > 0) {
         scoredItems.add(_ScoredItem(item, score));
       }
@@ -94,23 +118,22 @@ class _SearchBuilderState<T> extends State<SearchBuilder<T>> {
     setState(
       () => _results = scoredItems.map((s) => s.value).toList(),
     );
-    widget.onQueryChanged?.call(query);
   }
 
   @override
   void didUpdateWidget(covariant SearchBuilder<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (widget.data != oldWidget.data ||
+    if (widget.loadData != oldWidget.loadData ||
         widget.searchScore != oldWidget.searchScore) {
-      _filterData();
+      unawaited(loadData());
     }
   }
 
   @override
   void dispose() {
     _textController
-      ..removeListener(_filterData)
+      ..removeListener(onTextChanged)
       ..dispose();
 
     super.dispose();
@@ -120,6 +143,8 @@ class _SearchBuilderState<T> extends State<SearchBuilder<T>> {
   Widget build(BuildContext context) =>
       widget.builder(context, _results, _textController);
 }
+
+typedef LoadDataDef<T> = Future<Iterable<T>> Function(WoFormQuery query);
 
 class _ScoredItem<T> {
   _ScoredItem(this.value, this.score);

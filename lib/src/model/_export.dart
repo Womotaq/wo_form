@@ -6,6 +6,7 @@ export 'json_converter/_export.dart';
 export 'media.dart';
 export 'place_autocomplete_settings.dart';
 export 'quiz_settings.dart';
+export 'search_settings.dart';
 export 'ui_settings.dart';
 export 'wo_form_node.dart';
 export 'wo_form_status.dart';

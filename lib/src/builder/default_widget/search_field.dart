@@ -12,7 +12,7 @@ class SearchField<T> extends StatelessWidget {
     this.hintText,
     Widget Function(T?)? selectedBuilder,
     this.showArrow = true,
-    this.searchScore,
+    this.searchSettings,
     this.initialQuery,
     this.onQueryChanged,
     this.provider,
@@ -34,7 +34,7 @@ class SearchField<T> extends StatelessWidget {
     this.valueBuilder,
     this.helpValueBuilder,
     this.hintText,
-    this.searchScore,
+    this.searchSettings,
     this.initialQuery,
     this.onQueryChanged,
     this.provider,
@@ -55,7 +55,7 @@ class SearchField<T> extends StatelessWidget {
   final String? hintText;
   final Widget Function(Iterable<T?> values)? selectedBuilder;
   final bool showArrow;
-  final double Function(WoFormQuery query, T value)? searchScore;
+  final SearchSettings<T>? searchSettings;
   final WoFormQuery? initialQuery;
   final void Function(WoFormQuery query)? onQueryChanged;
   final Widget Function({required Widget child})? provider;
@@ -171,7 +171,7 @@ class SearchField<T> extends StatelessWidget {
             Navigator.of(context).pop();
             onSelected!(value);
           },
-          searchScore: searchScore,
+          searchSettings: searchSettings,
           initialQuery: initialQuery,
           onQueryChanged: onQueryChanged,
           layout: searchScreenLayout,
@@ -180,7 +180,7 @@ class SearchField<T> extends StatelessWidget {
     );
 
     await (openSearchScreen ??
-        (searchScore == null ? Push.menu : _fullscreenModalBottomSheet))(
+        (searchSettings == null ? Push.menu : _fullscreenModalBottomSheet))(
       context: context,
       child: searchScreen,
       layout: searchScreenLayout,
@@ -204,7 +204,7 @@ typedef SearchScreenDef<T> =
       required Iterable<T> values,
       required Widget Function(BuildContext context, T value) tileBuilder,
       required void Function(T value) onSelect,
-      double Function(WoFormQuery query, T value)? searchScore,
+      SearchSettings<T>? searchSettings,
       WoFormQuery? initialQuery,
       void Function(WoFormQuery query)? onQueryChanged,
       LayoutMethod layout,
@@ -217,7 +217,7 @@ class SearchScreen<T> extends StatelessWidget {
     required this.tileBuilder,
     required this.onSelect,
     this.bottomChildren,
-    this.searchScore,
+    this.searchSettings,
     this.onQueryChanged,
     this.initialQuery,
     this.layout = LayoutMethod.scrollable,
@@ -229,7 +229,7 @@ class SearchScreen<T> extends StatelessWidget {
   final Widget Function(BuildContext context, T value) tileBuilder;
   final void Function(T value) onSelect;
   final List<Widget>? bottomChildren;
-  final double Function(WoFormQuery query, T value)? searchScore;
+  final SearchSettings<T>? searchSettings;
   final void Function(WoFormQuery query)? onQueryChanged;
   final WoFormQuery? initialQuery;
   final LayoutMethod layout;
@@ -237,10 +237,11 @@ class SearchScreen<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (searchScore != null) {
+    if (searchSettings != null) {
       return SearchBuilder(
         data: values,
-        searchScore: searchScore!,
+        loadData: searchSettings!.loadAvailibleData,
+        searchScore: searchSettings!.searchScore,
         initialQuery: initialQuery,
         onQueryChanged: onQueryChanged,
         builder: (context, results, textController) => ShrinkableScaffold(

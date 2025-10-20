@@ -565,17 +565,13 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
     @notSerializable ValueBuilderDef<T>? selectedBuilder,
     @notSerializable Widget? Function(T value)? helpValueBuilder,
 
-    /// A function that calculates how well a [value] matches the search.
-    ///
-    /// This function must return a score between 0.0 (no match) and 1.0
-    /// (perfect match).
-    ///
-    /// The [query] passed to this function is guaranteed to be lowercase and
-    /// without diacritics (e.g., accents, umlauts).
-    @notSerializable double Function(WoFormQuery query, T value)? searchScore,
+    /// Only used when [SelectInput.searchSettings] is set.
     @notSerializable SearchScreenDef<T>? searchScreenBuilder,
 
-    /// Defaults to [Push.menu].
+    /// Only used when [ChildrenVisibility.whenAsked].
+    ///
+    /// Defaults to [Push.menu] if [searchScore] is null, else
+    /// [Push.modalBottomSheet] with initialBottomSheetSize at 0.9.
     /// Serializable if you use on of Push's default methods.
     @PushDefNullableConverter() PushDef? openChildren,
     @notSerializable InputHeaderBuilderDef? headerBuilder,
@@ -604,7 +600,6 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
           valueBuilder: valueBuilder ?? other.valueBuilder,
           selectedBuilder: selectedBuilder ?? other.selectedBuilder,
           helpValueBuilder: helpValueBuilder ?? other.helpValueBuilder,
-          searchScore: searchScore ?? other.searchScore,
           searchScreenBuilder: searchScreenBuilder ?? other.searchScreenBuilder,
           openChildren: openChildren ?? other.openChildren,
           headerBuilder: headerBuilder ?? other.headerBuilder,

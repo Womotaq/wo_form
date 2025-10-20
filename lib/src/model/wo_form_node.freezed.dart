@@ -2255,7 +2255,7 @@ mixin _$SelectInput<T> {
 /// will be the id of the selected value.
  List<String>? get idsOfAvailibleValues;/// An optionnal callback when the value changed
 @notSerializable void Function(List<T>? value)? get onValueChanged;@notSerializable GetCustomErrorForListDef<T>? get getCustomError;/// Only applies if maxCount is 1
- bool get submitFormOnSelect; SelectInputUiSettings<T>? get uiSettings; QuizSettings? get quizSettings;/// The following fields are mostly usefull for hydrataion
+ bool get submitFormOnSelect; QuizSettings? get quizSettings; SearchSettings<T>? get searchSettings; SelectInputUiSettings<T>? get uiSettings;/// The following fields are mostly usefull for hydrataion
 ///
 /// Ex :
 /// SelectInput&lt;TimeControl&gt;(
@@ -2273,16 +2273,16 @@ $SelectInputCopyWith<T, SelectInput<T>> get copyWith => _$SelectInputCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SelectInput<T>&&(identical(other.id, id) || other.id == id)&&(identical(other.maxCount, maxCount) || other.maxCount == maxCount)&&(identical(other.minCount, minCount) || other.minCount == minCount)&&const DeepCollectionEquality().equals(other.initialValues, initialValues)&&const DeepCollectionEquality().equals(other.availibleValues, availibleValues)&&const DeepCollectionEquality().equals(other.idsOfAvailibleValues, idsOfAvailibleValues)&&(identical(other.onValueChanged, onValueChanged) || other.onValueChanged == onValueChanged)&&(identical(other.getCustomError, getCustomError) || other.getCustomError == getCustomError)&&(identical(other.submitFormOnSelect, submitFormOnSelect) || other.submitFormOnSelect == submitFormOnSelect)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings)&&(identical(other.quizSettings, quizSettings) || other.quizSettings == quizSettings)&&(identical(other.toJsonT, toJsonT) || other.toJsonT == toJsonT)&&(identical(other.fromJsonT, fromJsonT) || other.fromJsonT == fromJsonT));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SelectInput<T>&&(identical(other.id, id) || other.id == id)&&(identical(other.maxCount, maxCount) || other.maxCount == maxCount)&&(identical(other.minCount, minCount) || other.minCount == minCount)&&const DeepCollectionEquality().equals(other.initialValues, initialValues)&&const DeepCollectionEquality().equals(other.availibleValues, availibleValues)&&const DeepCollectionEquality().equals(other.idsOfAvailibleValues, idsOfAvailibleValues)&&(identical(other.onValueChanged, onValueChanged) || other.onValueChanged == onValueChanged)&&(identical(other.getCustomError, getCustomError) || other.getCustomError == getCustomError)&&(identical(other.submitFormOnSelect, submitFormOnSelect) || other.submitFormOnSelect == submitFormOnSelect)&&(identical(other.quizSettings, quizSettings) || other.quizSettings == quizSettings)&&(identical(other.searchSettings, searchSettings) || other.searchSettings == searchSettings)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings)&&(identical(other.toJsonT, toJsonT) || other.toJsonT == toJsonT)&&(identical(other.fromJsonT, fromJsonT) || other.fromJsonT == fromJsonT));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,maxCount,minCount,const DeepCollectionEquality().hash(initialValues),const DeepCollectionEquality().hash(availibleValues),const DeepCollectionEquality().hash(idsOfAvailibleValues),onValueChanged,getCustomError,submitFormOnSelect,uiSettings,quizSettings,toJsonT,fromJsonT);
+int get hashCode => Object.hash(runtimeType,id,maxCount,minCount,const DeepCollectionEquality().hash(initialValues),const DeepCollectionEquality().hash(availibleValues),const DeepCollectionEquality().hash(idsOfAvailibleValues),onValueChanged,getCustomError,submitFormOnSelect,quizSettings,searchSettings,uiSettings,toJsonT,fromJsonT);
 
 @override
 String toString() {
-  return 'SelectInput<$T>(id: $id, maxCount: $maxCount, minCount: $minCount, initialValues: $initialValues, availibleValues: $availibleValues, idsOfAvailibleValues: $idsOfAvailibleValues, onValueChanged: $onValueChanged, getCustomError: $getCustomError, submitFormOnSelect: $submitFormOnSelect, uiSettings: $uiSettings, quizSettings: $quizSettings, toJsonT: $toJsonT, fromJsonT: $fromJsonT)';
+  return 'SelectInput<$T>(id: $id, maxCount: $maxCount, minCount: $minCount, initialValues: $initialValues, availibleValues: $availibleValues, idsOfAvailibleValues: $idsOfAvailibleValues, onValueChanged: $onValueChanged, getCustomError: $getCustomError, submitFormOnSelect: $submitFormOnSelect, quizSettings: $quizSettings, searchSettings: $searchSettings, uiSettings: $uiSettings, toJsonT: $toJsonT, fromJsonT: $fromJsonT)';
 }
 
 
@@ -2293,11 +2293,11 @@ abstract mixin class $SelectInputCopyWith<T,$Res> implements $WoFormInputCopyWit
   factory $SelectInputCopyWith(SelectInput<T> value, $Res Function(SelectInput<T>) _then) = _$SelectInputCopyWithImpl;
 @useResult
 $Res call({
- String id, int? maxCount, int minCount, List<T>? initialValues, List<T> availibleValues, List<String>? idsOfAvailibleValues,@notSerializable void Function(List<T>? value)? onValueChanged,@notSerializable GetCustomErrorForListDef<T>? getCustomError, bool submitFormOnSelect, SelectInputUiSettings<T>? uiSettings, QuizSettings? quizSettings,@notSerializable Object? Function(T)? toJsonT,@notSerializable T Function(Object?)? fromJsonT
+ String id, int? maxCount, int minCount, List<T>? initialValues, List<T> availibleValues, List<String>? idsOfAvailibleValues,@notSerializable void Function(List<T>? value)? onValueChanged,@notSerializable GetCustomErrorForListDef<T>? getCustomError, bool submitFormOnSelect, QuizSettings? quizSettings, SearchSettings<T>? searchSettings, SelectInputUiSettings<T>? uiSettings,@notSerializable Object? Function(T)? toJsonT,@notSerializable T Function(Object?)? fromJsonT
 });
 
 
-$SelectInputUiSettingsCopyWith<T, $Res>? get uiSettings;$QuizSettingsCopyWith<$Res>? get quizSettings;
+$QuizSettingsCopyWith<$Res>? get quizSettings;$SearchSettingsCopyWith<T, $Res>? get searchSettings;$SelectInputUiSettingsCopyWith<T, $Res>? get uiSettings;
 
 }
 /// @nodoc
@@ -2310,7 +2310,7 @@ class _$SelectInputCopyWithImpl<T,$Res>
 
 /// Create a copy of SelectInput
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? maxCount = freezed,Object? minCount = null,Object? initialValues = freezed,Object? availibleValues = null,Object? idsOfAvailibleValues = freezed,Object? onValueChanged = freezed,Object? getCustomError = freezed,Object? submitFormOnSelect = null,Object? uiSettings = freezed,Object? quizSettings = freezed,Object? toJsonT = freezed,Object? fromJsonT = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? maxCount = freezed,Object? minCount = null,Object? initialValues = freezed,Object? availibleValues = null,Object? idsOfAvailibleValues = freezed,Object? onValueChanged = freezed,Object? getCustomError = freezed,Object? submitFormOnSelect = null,Object? quizSettings = freezed,Object? searchSettings = freezed,Object? uiSettings = freezed,Object? toJsonT = freezed,Object? fromJsonT = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,maxCount: freezed == maxCount ? _self.maxCount : maxCount // ignore: cast_nullable_to_non_nullable
@@ -2321,26 +2321,15 @@ as List<T>,idsOfAvailibleValues: freezed == idsOfAvailibleValues ? _self.idsOfAv
 as List<String>?,onValueChanged: freezed == onValueChanged ? _self.onValueChanged : onValueChanged // ignore: cast_nullable_to_non_nullable
 as void Function(List<T>? value)?,getCustomError: freezed == getCustomError ? _self.getCustomError : getCustomError // ignore: cast_nullable_to_non_nullable
 as GetCustomErrorForListDef<T>?,submitFormOnSelect: null == submitFormOnSelect ? _self.submitFormOnSelect : submitFormOnSelect // ignore: cast_nullable_to_non_nullable
-as bool,uiSettings: freezed == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
-as SelectInputUiSettings<T>?,quizSettings: freezed == quizSettings ? _self.quizSettings : quizSettings // ignore: cast_nullable_to_non_nullable
-as QuizSettings?,toJsonT: freezed == toJsonT ? _self.toJsonT : toJsonT // ignore: cast_nullable_to_non_nullable
+as bool,quizSettings: freezed == quizSettings ? _self.quizSettings : quizSettings // ignore: cast_nullable_to_non_nullable
+as QuizSettings?,searchSettings: freezed == searchSettings ? _self.searchSettings : searchSettings // ignore: cast_nullable_to_non_nullable
+as SearchSettings<T>?,uiSettings: freezed == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
+as SelectInputUiSettings<T>?,toJsonT: freezed == toJsonT ? _self.toJsonT : toJsonT // ignore: cast_nullable_to_non_nullable
 as Object? Function(T)?,fromJsonT: freezed == fromJsonT ? _self.fromJsonT : fromJsonT // ignore: cast_nullable_to_non_nullable
 as T Function(Object?)?,
   ));
 }
 /// Create a copy of SelectInput
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$SelectInputUiSettingsCopyWith<T, $Res>? get uiSettings {
-    if (_self.uiSettings == null) {
-    return null;
-  }
-
-  return $SelectInputUiSettingsCopyWith<T, $Res>(_self.uiSettings!, (value) {
-    return _then(_self.copyWith(uiSettings: value));
-  });
-}/// Create a copy of SelectInput
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -2352,6 +2341,30 @@ $QuizSettingsCopyWith<$Res>? get quizSettings {
   return $QuizSettingsCopyWith<$Res>(_self.quizSettings!, (value) {
     return _then(_self.copyWith(quizSettings: value));
   });
+}/// Create a copy of SelectInput
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$SearchSettingsCopyWith<T, $Res>? get searchSettings {
+    if (_self.searchSettings == null) {
+    return null;
+  }
+
+  return $SearchSettingsCopyWith<T, $Res>(_self.searchSettings!, (value) {
+    return _then(_self.copyWith(searchSettings: value));
+  });
+}/// Create a copy of SelectInput
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$SelectInputUiSettingsCopyWith<T, $Res>? get uiSettings {
+    if (_self.uiSettings == null) {
+    return null;
+  }
+
+  return $SelectInputUiSettingsCopyWith<T, $Res>(_self.uiSettings!, (value) {
+    return _then(_self.copyWith(uiSettings: value));
+  });
 }
 }
 
@@ -2361,7 +2374,7 @@ $QuizSettingsCopyWith<$Res>? get quizSettings {
 
 
 class _SelectInput<T> extends SelectInput<T> {
-  const _SelectInput({required this.id, required this.maxCount, this.minCount = 0, final  List<T>? initialValues, final  List<T> availibleValues = const [], final  List<String>? idsOfAvailibleValues, @notSerializable this.onValueChanged, @notSerializable this.getCustomError, this.submitFormOnSelect = false, this.uiSettings, this.quizSettings, @notSerializable this.toJsonT, @notSerializable this.fromJsonT}): assert(maxCount == null || minCount <= maxCount, 'maxCount must be higher or equal to minCount'),_initialValues = initialValues,_availibleValues = availibleValues,_idsOfAvailibleValues = idsOfAvailibleValues,super._();
+  const _SelectInput({required this.id, required this.maxCount, this.minCount = 0, final  List<T>? initialValues, final  List<T> availibleValues = const [], final  List<String>? idsOfAvailibleValues, @notSerializable this.onValueChanged, @notSerializable this.getCustomError, this.submitFormOnSelect = false, this.quizSettings, this.searchSettings, this.uiSettings, @notSerializable this.toJsonT, @notSerializable this.fromJsonT}): assert(maxCount == null || minCount <= maxCount, 'maxCount must be higher or equal to minCount'),_initialValues = initialValues,_availibleValues = availibleValues,_idsOfAvailibleValues = idsOfAvailibleValues,super._();
   
 
 @override final  String id;
@@ -2409,8 +2422,9 @@ class _SelectInput<T> extends SelectInput<T> {
 @override@notSerializable final  GetCustomErrorForListDef<T>? getCustomError;
 /// Only applies if maxCount is 1
 @override@JsonKey() final  bool submitFormOnSelect;
-@override final  SelectInputUiSettings<T>? uiSettings;
 @override final  QuizSettings? quizSettings;
+@override final  SearchSettings<T>? searchSettings;
+@override final  SelectInputUiSettings<T>? uiSettings;
 /// The following fields are mostly usefull for hydrataion
 ///
 /// Ex :
@@ -2431,16 +2445,16 @@ _$SelectInputCopyWith<T, _SelectInput<T>> get copyWith => __$SelectInputCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SelectInput<T>&&(identical(other.id, id) || other.id == id)&&(identical(other.maxCount, maxCount) || other.maxCount == maxCount)&&(identical(other.minCount, minCount) || other.minCount == minCount)&&const DeepCollectionEquality().equals(other._initialValues, _initialValues)&&const DeepCollectionEquality().equals(other._availibleValues, _availibleValues)&&const DeepCollectionEquality().equals(other._idsOfAvailibleValues, _idsOfAvailibleValues)&&(identical(other.onValueChanged, onValueChanged) || other.onValueChanged == onValueChanged)&&(identical(other.getCustomError, getCustomError) || other.getCustomError == getCustomError)&&(identical(other.submitFormOnSelect, submitFormOnSelect) || other.submitFormOnSelect == submitFormOnSelect)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings)&&(identical(other.quizSettings, quizSettings) || other.quizSettings == quizSettings)&&(identical(other.toJsonT, toJsonT) || other.toJsonT == toJsonT)&&(identical(other.fromJsonT, fromJsonT) || other.fromJsonT == fromJsonT));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SelectInput<T>&&(identical(other.id, id) || other.id == id)&&(identical(other.maxCount, maxCount) || other.maxCount == maxCount)&&(identical(other.minCount, minCount) || other.minCount == minCount)&&const DeepCollectionEquality().equals(other._initialValues, _initialValues)&&const DeepCollectionEquality().equals(other._availibleValues, _availibleValues)&&const DeepCollectionEquality().equals(other._idsOfAvailibleValues, _idsOfAvailibleValues)&&(identical(other.onValueChanged, onValueChanged) || other.onValueChanged == onValueChanged)&&(identical(other.getCustomError, getCustomError) || other.getCustomError == getCustomError)&&(identical(other.submitFormOnSelect, submitFormOnSelect) || other.submitFormOnSelect == submitFormOnSelect)&&(identical(other.quizSettings, quizSettings) || other.quizSettings == quizSettings)&&(identical(other.searchSettings, searchSettings) || other.searchSettings == searchSettings)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings)&&(identical(other.toJsonT, toJsonT) || other.toJsonT == toJsonT)&&(identical(other.fromJsonT, fromJsonT) || other.fromJsonT == fromJsonT));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,maxCount,minCount,const DeepCollectionEquality().hash(_initialValues),const DeepCollectionEquality().hash(_availibleValues),const DeepCollectionEquality().hash(_idsOfAvailibleValues),onValueChanged,getCustomError,submitFormOnSelect,uiSettings,quizSettings,toJsonT,fromJsonT);
+int get hashCode => Object.hash(runtimeType,id,maxCount,minCount,const DeepCollectionEquality().hash(_initialValues),const DeepCollectionEquality().hash(_availibleValues),const DeepCollectionEquality().hash(_idsOfAvailibleValues),onValueChanged,getCustomError,submitFormOnSelect,quizSettings,searchSettings,uiSettings,toJsonT,fromJsonT);
 
 @override
 String toString() {
-  return 'SelectInput<$T>(id: $id, maxCount: $maxCount, minCount: $minCount, initialValues: $initialValues, availibleValues: $availibleValues, idsOfAvailibleValues: $idsOfAvailibleValues, onValueChanged: $onValueChanged, getCustomError: $getCustomError, submitFormOnSelect: $submitFormOnSelect, uiSettings: $uiSettings, quizSettings: $quizSettings, toJsonT: $toJsonT, fromJsonT: $fromJsonT)';
+  return 'SelectInput<$T>(id: $id, maxCount: $maxCount, minCount: $minCount, initialValues: $initialValues, availibleValues: $availibleValues, idsOfAvailibleValues: $idsOfAvailibleValues, onValueChanged: $onValueChanged, getCustomError: $getCustomError, submitFormOnSelect: $submitFormOnSelect, quizSettings: $quizSettings, searchSettings: $searchSettings, uiSettings: $uiSettings, toJsonT: $toJsonT, fromJsonT: $fromJsonT)';
 }
 
 
@@ -2451,11 +2465,11 @@ abstract mixin class _$SelectInputCopyWith<T,$Res> implements $SelectInputCopyWi
   factory _$SelectInputCopyWith(_SelectInput<T> value, $Res Function(_SelectInput<T>) _then) = __$SelectInputCopyWithImpl;
 @override @useResult
 $Res call({
- String id, int? maxCount, int minCount, List<T>? initialValues, List<T> availibleValues, List<String>? idsOfAvailibleValues,@notSerializable void Function(List<T>? value)? onValueChanged,@notSerializable GetCustomErrorForListDef<T>? getCustomError, bool submitFormOnSelect, SelectInputUiSettings<T>? uiSettings, QuizSettings? quizSettings,@notSerializable Object? Function(T)? toJsonT,@notSerializable T Function(Object?)? fromJsonT
+ String id, int? maxCount, int minCount, List<T>? initialValues, List<T> availibleValues, List<String>? idsOfAvailibleValues,@notSerializable void Function(List<T>? value)? onValueChanged,@notSerializable GetCustomErrorForListDef<T>? getCustomError, bool submitFormOnSelect, QuizSettings? quizSettings, SearchSettings<T>? searchSettings, SelectInputUiSettings<T>? uiSettings,@notSerializable Object? Function(T)? toJsonT,@notSerializable T Function(Object?)? fromJsonT
 });
 
 
-@override $SelectInputUiSettingsCopyWith<T, $Res>? get uiSettings;@override $QuizSettingsCopyWith<$Res>? get quizSettings;
+@override $QuizSettingsCopyWith<$Res>? get quizSettings;@override $SearchSettingsCopyWith<T, $Res>? get searchSettings;@override $SelectInputUiSettingsCopyWith<T, $Res>? get uiSettings;
 
 }
 /// @nodoc
@@ -2468,7 +2482,7 @@ class __$SelectInputCopyWithImpl<T,$Res>
 
 /// Create a copy of SelectInput
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? maxCount = freezed,Object? minCount = null,Object? initialValues = freezed,Object? availibleValues = null,Object? idsOfAvailibleValues = freezed,Object? onValueChanged = freezed,Object? getCustomError = freezed,Object? submitFormOnSelect = null,Object? uiSettings = freezed,Object? quizSettings = freezed,Object? toJsonT = freezed,Object? fromJsonT = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? maxCount = freezed,Object? minCount = null,Object? initialValues = freezed,Object? availibleValues = null,Object? idsOfAvailibleValues = freezed,Object? onValueChanged = freezed,Object? getCustomError = freezed,Object? submitFormOnSelect = null,Object? quizSettings = freezed,Object? searchSettings = freezed,Object? uiSettings = freezed,Object? toJsonT = freezed,Object? fromJsonT = freezed,}) {
   return _then(_SelectInput<T>(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,maxCount: freezed == maxCount ? _self.maxCount : maxCount // ignore: cast_nullable_to_non_nullable
@@ -2479,27 +2493,16 @@ as List<T>,idsOfAvailibleValues: freezed == idsOfAvailibleValues ? _self._idsOfA
 as List<String>?,onValueChanged: freezed == onValueChanged ? _self.onValueChanged : onValueChanged // ignore: cast_nullable_to_non_nullable
 as void Function(List<T>? value)?,getCustomError: freezed == getCustomError ? _self.getCustomError : getCustomError // ignore: cast_nullable_to_non_nullable
 as GetCustomErrorForListDef<T>?,submitFormOnSelect: null == submitFormOnSelect ? _self.submitFormOnSelect : submitFormOnSelect // ignore: cast_nullable_to_non_nullable
-as bool,uiSettings: freezed == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
-as SelectInputUiSettings<T>?,quizSettings: freezed == quizSettings ? _self.quizSettings : quizSettings // ignore: cast_nullable_to_non_nullable
-as QuizSettings?,toJsonT: freezed == toJsonT ? _self.toJsonT : toJsonT // ignore: cast_nullable_to_non_nullable
+as bool,quizSettings: freezed == quizSettings ? _self.quizSettings : quizSettings // ignore: cast_nullable_to_non_nullable
+as QuizSettings?,searchSettings: freezed == searchSettings ? _self.searchSettings : searchSettings // ignore: cast_nullable_to_non_nullable
+as SearchSettings<T>?,uiSettings: freezed == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
+as SelectInputUiSettings<T>?,toJsonT: freezed == toJsonT ? _self.toJsonT : toJsonT // ignore: cast_nullable_to_non_nullable
 as Object? Function(T)?,fromJsonT: freezed == fromJsonT ? _self.fromJsonT : fromJsonT // ignore: cast_nullable_to_non_nullable
 as T Function(Object?)?,
   ));
 }
 
 /// Create a copy of SelectInput
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$SelectInputUiSettingsCopyWith<T, $Res>? get uiSettings {
-    if (_self.uiSettings == null) {
-    return null;
-  }
-
-  return $SelectInputUiSettingsCopyWith<T, $Res>(_self.uiSettings!, (value) {
-    return _then(_self.copyWith(uiSettings: value));
-  });
-}/// Create a copy of SelectInput
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -2510,6 +2513,30 @@ $QuizSettingsCopyWith<$Res>? get quizSettings {
 
   return $QuizSettingsCopyWith<$Res>(_self.quizSettings!, (value) {
     return _then(_self.copyWith(quizSettings: value));
+  });
+}/// Create a copy of SelectInput
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$SearchSettingsCopyWith<T, $Res>? get searchSettings {
+    if (_self.searchSettings == null) {
+    return null;
+  }
+
+  return $SearchSettingsCopyWith<T, $Res>(_self.searchSettings!, (value) {
+    return _then(_self.copyWith(searchSettings: value));
+  });
+}/// Create a copy of SelectInput
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$SelectInputUiSettingsCopyWith<T, $Res>? get uiSettings {
+    if (_self.uiSettings == null) {
+    return null;
+  }
+
+  return $SelectInputUiSettingsCopyWith<T, $Res>(_self.uiSettings!, (value) {
+    return _then(_self.copyWith(uiSettings: value));
   });
 }
 }

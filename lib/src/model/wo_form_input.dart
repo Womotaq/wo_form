@@ -495,8 +495,9 @@ abstract class SelectInput<T> extends WoFormInput<T> with _$SelectInput<T> {
 
     /// Only applies if maxCount is 1
     @Default(false) bool submitFormOnSelect,
-    SelectInputUiSettings<T>? uiSettings,
     QuizSettings? quizSettings,
+    SearchSettings<T>? searchSettings,
+    SelectInputUiSettings<T>? uiSettings,
 
     /// The following fields are mostly usefull for hydrataion
     ///

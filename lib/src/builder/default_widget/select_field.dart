@@ -13,8 +13,9 @@ class SelectField<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     final woTheme = WoFormTheme.of(context);
     final selectedValues = data.value ?? [];
-    final uiSettings = data.input.uiSettings;
     final quizSettings = data.input.quizSettings;
+    final searchSettings = data.input.searchSettings;
+    final uiSettings = data.input.uiSettings;
     final scoreWidget = quizSettings == null
         ? null
         : (uiSettings?.scoreBuilder ?? woTheme?.scoreBuilder ?? ScoreWidget.new)
@@ -55,7 +56,7 @@ class SelectField<T> extends StatelessWidget {
           },
           header: header,
           tileBuilder: uiSettings?.tileBuilder,
-          searchScore: uiSettings?.searchScore,
+          searchSettings: searchSettings,
         );
       case ChildrenVisibility.whenAsked:
         if (data.input.maxCount == 1) {
@@ -67,7 +68,7 @@ class SelectField<T> extends StatelessWidget {
             selectedBuilder: uiSettings?.selectedBuilder,
             helpValueBuilder: uiSettings?.helpValueBuilder,
             hintText: uiSettings?.hintText,
-            searchScore: uiSettings?.searchScore,
+            searchSettings: searchSettings,
             searchScreenLayout: (uiSettings?.flex ?? 0) == 0
                 ? LayoutMethod.shrinkWrap
                 : LayoutMethod.scrollable,
@@ -133,7 +134,7 @@ class SelectField<T> extends StatelessWidget {
                   valueBuilder: uiSettings?.valueBuilder,
                   helpValueBuilder: uiSettings?.helpValueBuilder,
                   hintText: uiSettings?.hintText,
-                  searchScore: uiSettings?.searchScore,
+                  searchSettings: searchSettings,
                   searchScreenLayout: (uiSettings?.flex ?? 0) == 0
                       ? LayoutMethod.shrinkWrap
                       : LayoutMethod.scrollable,
@@ -232,7 +233,7 @@ class _AlwaysVisibleSelectField<T> extends StatelessWidget {
     required this.onChanged,
     required this.header,
     this.tileBuilder,
-    this.searchScore,
+    this.searchSettings,
   });
 
   final WoFieldData<SelectInput<T>, List<T>> data;
@@ -240,16 +241,17 @@ class _AlwaysVisibleSelectField<T> extends StatelessWidget {
   final Widget header;
   final Widget Function(T value, VoidCallback onTap, bool isSelected)?
   tileBuilder;
-  final double Function(WoFormQuery query, T value)? searchScore;
+  final SearchSettings<T>? searchSettings;
 
   @override
   Widget build(BuildContext context) {
-    return searchScore == null
+    return searchSettings == null
         ? layout(context, data.input.availibleValues)
         : SearchBuilder(
             key: Key('${data.path}-SearchBuilder'),
             data: data.input.availibleValues,
-            searchScore: searchScore!,
+            loadData: searchSettings!.loadAvailibleData,
+            searchScore: searchSettings!.searchScore,
             initialQuery: context.read<WoFormValuesCubit>().state.queryOf(
               selectInputPath: data.path,
             ),
