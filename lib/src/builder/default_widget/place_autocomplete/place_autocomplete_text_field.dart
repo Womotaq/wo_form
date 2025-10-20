@@ -1,5 +1,7 @@
 // Credits : https://pub.dev/packages/google_places_flutter
 
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,7 +14,7 @@ class PlaceAutocompleteTextField extends StatefulWidget {
     required this.textEditingController,
     required this.onChanged,
     this.onSelectedWithDetails,
-    this.debounceTime = 600,
+    this.debounceDuration,
     this.placeType,
     this.language,
     this.countries = const [],
@@ -45,7 +47,8 @@ class PlaceAutocompleteTextField extends StatefulWidget {
 
   /// --- API ---
 
-  final int debounceTime;
+  /// Defaults to [WoFormTheme.DEBOUNCE_DURATION].
+  final Duration? debounceDuration;
   final PlaceType? placeType;
   final String? language;
   final List<String>? countries;
@@ -91,7 +94,7 @@ class _PlaceAutoCompleteTextFieldState
     super.initState();
     subject.stream
         .distinct()
-        .debounceTime(Duration(milliseconds: widget.debounceTime))
+        .debounceTime(widget.debounceDuration ?? WoFormTheme.DEBOUNCE_DURATION)
         .listen(textChanged);
 
     // Add focus listener
@@ -105,7 +108,7 @@ class _PlaceAutoCompleteTextFieldState
 
   @override
   void dispose() {
-    subject.close();
+    unawaited(subject.close());
     removeOverlay();
     super.dispose();
   }

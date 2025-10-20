@@ -16,6 +16,10 @@ class WoFormTheme extends InheritedTheme {
   // ignore: constant_identifier_names
   static const Duration ANIMATION_DURATION = Durations.medium1;
 
+  /// Default debounce duration for text fields that trigger api calls.
+  // ignore: constant_identifier_names
+  static const Duration DEBOUNCE_DURATION = Durations.short4;
+
   /// The closest instance of this class that encloses the given context.
   ///
   /// Typical usage is as follows:

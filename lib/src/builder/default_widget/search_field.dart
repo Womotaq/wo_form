@@ -241,6 +241,7 @@ class SearchScreen<T> extends StatelessWidget {
       return SearchBuilder(
         data: values,
         loadData: searchSettings!.loadAvailibleData,
+        debounceDuration: searchSettings!.debounceDuration,
         searchScore: searchSettings!.searchScore,
         initialQuery: initialQuery,
         onQueryChanged: onQueryChanged,

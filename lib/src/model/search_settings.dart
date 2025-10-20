@@ -18,7 +18,8 @@ abstract class SearchSettings<T> with _$SearchSettings<T> {
     /// Called each time the query changes.
     LoadDataDef<T>? loadAvailibleData,
 
-    // TODO : debounceTime
+    /// Defaults to [WoFormTheme.DEBOUNCE_DURATION].
+    Duration? debounceDuration,
   }) = _SearchSettings<T>;
 
   /// Required for the override getter

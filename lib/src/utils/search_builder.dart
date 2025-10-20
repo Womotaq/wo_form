@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
+import 'package:rxdart/rxdart.dart';
+import 'package:wo_form/wo_form.dart';
 
 /// A widget that handles the logic for filtering and ranking a local dataset
 /// of type [T] based on user text input, and then uses a [builder] function to
@@ -21,6 +23,7 @@ class SearchBuilder<T> extends StatefulWidget {
     LoadDataDef<T>? loadData,
     this.initialQuery,
     this.onQueryChanged,
+    this.debounceDuration,
     super.key,
   }) : assert(
          (data != null) || (loadData != null),
@@ -59,7 +62,13 @@ class SearchBuilder<T> extends StatefulWidget {
   final Future<Iterable<T>> Function(WoFormQuery) loadData;
 
   final WoFormQuery? initialQuery;
+
+  /// Called each time the query changes, before calling [loadData].
   final ValueChanged<WoFormQuery>? onQueryChanged;
+
+  /// Debounce duration for text changes. Set to Duration.zero to disable.
+  /// Defaults to [WoFormTheme.DEBOUNCE_DURATION].
+  final Duration? debounceDuration;
 
   @override
   State<SearchBuilder<T>> createState() => _SearchBuilderState<T>();
@@ -68,8 +77,9 @@ class SearchBuilder<T> extends StatefulWidget {
 class _SearchBuilderState<T> extends State<SearchBuilder<T>> {
   late final TextEditingController _textController;
   late WoFormQuery _query;
-  late FutureData<List<T>> _results;
+  FutureData<List<T>> _results = const DataLoading('initialData', []);
   int _activeRequestId = 0;
+  final subject = PublishSubject<String>();
 
   @override
   void initState() {
@@ -78,13 +88,19 @@ class _SearchBuilderState<T> extends State<SearchBuilder<T>> {
     _query = widget.initialQuery ?? WoFormQuery('');
     _textController = TextEditingController(text: _query.raw)
       ..addListener(onTextChanged);
-    _results = const DataLoading('initialData', []);
+
+    subject.stream
+        .distinct()
+        .debounceTime(widget.debounceDuration ?? WoFormTheme.DEBOUNCE_DURATION)
+        .listen(onSubjectChanged);
 
     unawaited(loadData());
   }
 
-  void onTextChanged() {
-    _query = WoFormQuery(_textController.text);
+  void onTextChanged() => subject.add(_textController.text);
+
+  void onSubjectChanged(String text) {
+    _query = WoFormQuery(text);
     widget.onQueryChanged?.call(_query);
     unawaited(loadData());
   }
@@ -137,6 +153,7 @@ class _SearchBuilderState<T> extends State<SearchBuilder<T>> {
     _textController
       ..removeListener(onTextChanged)
       ..dispose();
+    unawaited(subject.close());
 
     super.dispose();
   }

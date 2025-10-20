@@ -1651,7 +1651,7 @@ mixin _$SelectInputUiSettings<T> {
  int? get headerFlex;@notSerializable Widget? get prefixIcon;@notSerializable ValueBuilderDef<T>? get valueBuilder;@notSerializable ValueBuilderDef<T>? get selectedBuilder;@notSerializable Widget? Function(T value)? get helpValueBuilder;/// Only used when [SelectInput.searchSettings] is set.
 @notSerializable SearchScreenDef<T>? get searchScreenBuilder;/// Only used when [ChildrenVisibility.whenAsked].
 ///
-/// Defaults to [Push.menu] if [searchScore] is null, else
+/// Defaults to [Push.menu] if [SelectInput.searchSettings] is null, else
 /// [Push.modalBottomSheet] with initialBottomSheetSize at 0.9.
 /// Serializable if you use on of Push's default methods.
 @PushDefNullableConverter() PushDef? get openChildren;@notSerializable InputHeaderBuilderDef? get headerBuilder;@notSerializable ScoreWidgetBuilderDef? get scoreBuilder;/// Only used when childrenVisibility is always.
@@ -1783,7 +1783,7 @@ class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
 @override@notSerializable final  SearchScreenDef<T>? searchScreenBuilder;
 /// Only used when [ChildrenVisibility.whenAsked].
 ///
-/// Defaults to [Push.menu] if [searchScore] is null, else
+/// Defaults to [Push.menu] if [SelectInput.searchSettings] is null, else
 /// [Push.modalBottomSheet] with initialBottomSheetSize at 0.9.
 /// Serializable if you use on of Push's default methods.
 @override@PushDefNullableConverter() final  PushDef? openChildren;

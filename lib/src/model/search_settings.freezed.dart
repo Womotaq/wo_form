@@ -22,7 +22,8 @@ mixin _$SearchSettings<T> {
 /// The [query] passed to this function is guaranteed to be lowercase and
 /// without diacritics (e.g., accents, umlauts).
  double Function(WoFormQuery query, T value) get searchScore;/// Called each time the query changes.
- LoadDataDef<T>? get loadAvailibleData;
+ LoadDataDef<T>? get loadAvailibleData;/// Defaults to [WoFormTheme.DEBOUNCE_DURATION].
+ Duration? get debounceDuration;
 /// Create a copy of SearchSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -33,16 +34,16 @@ $SearchSettingsCopyWith<T, SearchSettings<T>> get copyWith => _$SearchSettingsCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchSettings<T>&&(identical(other.searchScore, searchScore) || other.searchScore == searchScore)&&(identical(other.loadAvailibleData, loadAvailibleData) || other.loadAvailibleData == loadAvailibleData));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchSettings<T>&&(identical(other.searchScore, searchScore) || other.searchScore == searchScore)&&(identical(other.loadAvailibleData, loadAvailibleData) || other.loadAvailibleData == loadAvailibleData)&&(identical(other.debounceDuration, debounceDuration) || other.debounceDuration == debounceDuration));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,searchScore,loadAvailibleData);
+int get hashCode => Object.hash(runtimeType,searchScore,loadAvailibleData,debounceDuration);
 
 @override
 String toString() {
-  return 'SearchSettings<$T>(searchScore: $searchScore, loadAvailibleData: $loadAvailibleData)';
+  return 'SearchSettings<$T>(searchScore: $searchScore, loadAvailibleData: $loadAvailibleData, debounceDuration: $debounceDuration)';
 }
 
 
@@ -53,7 +54,7 @@ abstract mixin class $SearchSettingsCopyWith<T,$Res>  {
   factory $SearchSettingsCopyWith(SearchSettings<T> value, $Res Function(SearchSettings<T>) _then) = _$SearchSettingsCopyWithImpl;
 @useResult
 $Res call({
- double Function(WoFormQuery query, T value) searchScore, LoadDataDef<T>? loadAvailibleData
+ double Function(WoFormQuery query, T value) searchScore, LoadDataDef<T>? loadAvailibleData, Duration? debounceDuration
 });
 
 
@@ -70,11 +71,12 @@ class _$SearchSettingsCopyWithImpl<T,$Res>
 
 /// Create a copy of SearchSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? searchScore = null,Object? loadAvailibleData = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? searchScore = null,Object? loadAvailibleData = freezed,Object? debounceDuration = freezed,}) {
   return _then(_self.copyWith(
 searchScore: null == searchScore ? _self.searchScore : searchScore // ignore: cast_nullable_to_non_nullable
 as double Function(WoFormQuery query, T value),loadAvailibleData: freezed == loadAvailibleData ? _self.loadAvailibleData : loadAvailibleData // ignore: cast_nullable_to_non_nullable
-as LoadDataDef<T>?,
+as LoadDataDef<T>?,debounceDuration: freezed == debounceDuration ? _self.debounceDuration : debounceDuration // ignore: cast_nullable_to_non_nullable
+as Duration?,
   ));
 }
 
@@ -86,7 +88,7 @@ as LoadDataDef<T>?,
 
 
 class _SearchSettings<T> extends SearchSettings<T> {
-  const _SearchSettings({required this.searchScore, this.loadAvailibleData}): super._();
+  const _SearchSettings({required this.searchScore, this.loadAvailibleData, this.debounceDuration}): super._();
   
 
 /// A function that calculates how well a [value] matches the search.
@@ -99,6 +101,8 @@ class _SearchSettings<T> extends SearchSettings<T> {
 @override final  double Function(WoFormQuery query, T value) searchScore;
 /// Called each time the query changes.
 @override final  LoadDataDef<T>? loadAvailibleData;
+/// Defaults to [WoFormTheme.DEBOUNCE_DURATION].
+@override final  Duration? debounceDuration;
 
 /// Create a copy of SearchSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -110,16 +114,16 @@ _$SearchSettingsCopyWith<T, _SearchSettings<T>> get copyWith => __$SearchSetting
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchSettings<T>&&(identical(other.searchScore, searchScore) || other.searchScore == searchScore)&&(identical(other.loadAvailibleData, loadAvailibleData) || other.loadAvailibleData == loadAvailibleData));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchSettings<T>&&(identical(other.searchScore, searchScore) || other.searchScore == searchScore)&&(identical(other.loadAvailibleData, loadAvailibleData) || other.loadAvailibleData == loadAvailibleData)&&(identical(other.debounceDuration, debounceDuration) || other.debounceDuration == debounceDuration));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,searchScore,loadAvailibleData);
+int get hashCode => Object.hash(runtimeType,searchScore,loadAvailibleData,debounceDuration);
 
 @override
 String toString() {
-  return 'SearchSettings<$T>(searchScore: $searchScore, loadAvailibleData: $loadAvailibleData)';
+  return 'SearchSettings<$T>(searchScore: $searchScore, loadAvailibleData: $loadAvailibleData, debounceDuration: $debounceDuration)';
 }
 
 
@@ -130,7 +134,7 @@ abstract mixin class _$SearchSettingsCopyWith<T,$Res> implements $SearchSettings
   factory _$SearchSettingsCopyWith(_SearchSettings<T> value, $Res Function(_SearchSettings<T>) _then) = __$SearchSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- double Function(WoFormQuery query, T value) searchScore, LoadDataDef<T>? loadAvailibleData
+ double Function(WoFormQuery query, T value) searchScore, LoadDataDef<T>? loadAvailibleData, Duration? debounceDuration
 });
 
 
@@ -147,11 +151,12 @@ class __$SearchSettingsCopyWithImpl<T,$Res>
 
 /// Create a copy of SearchSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? searchScore = null,Object? loadAvailibleData = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? searchScore = null,Object? loadAvailibleData = freezed,Object? debounceDuration = freezed,}) {
   return _then(_SearchSettings<T>(
 searchScore: null == searchScore ? _self.searchScore : searchScore // ignore: cast_nullable_to_non_nullable
 as double Function(WoFormQuery query, T value),loadAvailibleData: freezed == loadAvailibleData ? _self.loadAvailibleData : loadAvailibleData // ignore: cast_nullable_to_non_nullable
-as LoadDataDef<T>?,
+as LoadDataDef<T>?,debounceDuration: freezed == debounceDuration ? _self.debounceDuration : debounceDuration // ignore: cast_nullable_to_non_nullable
+as Duration?,
   ));
 }
 

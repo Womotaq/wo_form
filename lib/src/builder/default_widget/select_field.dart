@@ -251,6 +251,7 @@ class _AlwaysVisibleSelectField<T> extends StatelessWidget {
             key: Key('${data.path}-SearchBuilder'),
             data: data.input.availibleValues,
             loadData: searchSettings!.loadAvailibleData,
+            debounceDuration: searchSettings!.debounceDuration,
             searchScore: searchSettings!.searchScore,
             initialQuery: context.read<WoFormValuesCubit>().state.queryOf(
               selectInputPath: data.path,

@@ -145,7 +145,6 @@ class _StringFieldState extends State<StringField> {
             textEditingController: textEditingController!,
             inputDecoration: inputDecoration,
             textInputAction: uiSettings?.textInputAction,
-            debounceTime: 300, // TODO : customizable
             countries: placeAutocompleteSettings.countries
                 ?.map((isoCode) => isoCode.name)
                 .toList(),

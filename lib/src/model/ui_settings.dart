@@ -570,7 +570,7 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
 
     /// Only used when [ChildrenVisibility.whenAsked].
     ///
-    /// Defaults to [Push.menu] if [searchScore] is null, else
+    /// Defaults to [Push.menu] if [SelectInput.searchSettings] is null, else
     /// [Push.modalBottomSheet] with initialBottomSheetSize at 0.9.
     /// Serializable if you use on of Push's default methods.
     @PushDefNullableConverter() PushDef? openChildren,
