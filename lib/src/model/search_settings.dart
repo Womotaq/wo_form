@@ -18,19 +18,6 @@ abstract class SearchSettings<T> with _$SearchSettings<T> {
     /// Called each time the query changes.
     LoadDataDef<T>? loadAvailibleData,
 
-    /// Called when the user scrolled through all the availible data. You may
-    /// want to load more.
-    ///
-    /// If null is returned, [onEndReached] won't be called again, until the
-    /// query changes and the user scrolles again through all the data.
-    ///
-    /// If some data are returned, they will be added to the other availible
-    /// data.
-    ///
-    /// Not compatible with [LayoutMethod.shrinkWrap], which is choosen when
-    /// [SelectInputUiSettings.flex] is at 0.
-    Iterable<T>? Function()? onEndReached,
-
     // TODO : debounceTime
   }) = _SearchSettings<T>;
 

@@ -246,7 +246,7 @@ class _AlwaysVisibleSelectField<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return searchSettings == null
-        ? layout(context, data.input.availibleValues)
+        ? layout(context, DataValue('', data.input.availibleValues))
         : SearchBuilder(
             key: Key('${data.path}-SearchBuilder'),
             data: data.input.availibleValues,
@@ -266,7 +266,7 @@ class _AlwaysVisibleSelectField<T> extends StatelessWidget {
 
   Widget layout(
     BuildContext context,
-    List<T> values, [
+    FutureData<List<T>> data, [
     TextEditingController? queryController,
   ]) => Column(
     children: [
@@ -290,15 +290,28 @@ class _AlwaysVisibleSelectField<T> extends StatelessWidget {
             onTapOutside: (event) => FocusScope.of(context).unfocus(),
           ),
         ),
-      if ((data.input.uiSettings?.flex ?? 0) > 0)
-        Expanded(
-          child: ListView.builder(
-            itemCount: values.length,
-            itemBuilder: (_, index) => valueBuilder(values[index]),
-          ),
-        )
-      else
-        ...values.map(valueBuilder),
+      ...switch (data) {
+        DataError() => [],
+        DataLoading(data: final results) || DataValue(data: final results) => [
+          if (data is DataLoading)
+            const LinearProgressIndicator()
+          else if (searchSettings != null)
+            SizedBox(
+              height:
+                  Theme.of(context).progressIndicatorTheme.linearMinHeight ?? 4,
+            ),
+          if (results != null && results.isNotEmpty)
+            if ((this.data.input.uiSettings?.flex ?? 0) > 0)
+              Expanded(
+                child: ListView.builder(
+                  itemCount: results.length,
+                  itemBuilder: (_, index) => valueBuilder(results[index]),
+                ),
+              )
+            else
+              ...results.map(valueBuilder),
+        ],
+      },
     ],
   );
 

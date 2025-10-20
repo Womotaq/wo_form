@@ -263,25 +263,38 @@ class SearchScreen<T> extends StatelessWidget {
         ),
       );
     } else {
-      return body(context, values);
+      return body(context, DataValue('', values));
     }
   }
 
-  Widget body(BuildContext context, Iterable<T> results) => ListView(
+  Widget body(BuildContext context, FutureData<Iterable<T>> data) => ListView(
     padding: EdgeInsets.zero,
     controller: ScrollControllerProvider.of(context),
     shrinkWrap: layout.shrinks,
-    children: [
-      if (results.isEmpty)
-        ?onNotFound
-      else
-        ...results.map(
-          (e) => InkWell(
-            onTap: () => onSelect(e),
-            child: tileBuilder(context, e),
+    children: switch (data) {
+      DataError() => [
+        ?onNotFound,
+        ...?bottomChildren,
+      ],
+      DataLoading(data: final results) || DataValue(data: final results) => [
+        if (data is DataLoading)
+          const LinearProgressIndicator()
+        else if (searchSettings != null)
+          SizedBox(
+            height:
+                Theme.of(context).progressIndicatorTheme.linearMinHeight ?? 4,
           ),
-        ),
-      ...?bottomChildren,
-    ],
+        if (results == null || results.isEmpty)
+          ?onNotFound
+        else
+          ...results.map(
+            (e) => InkWell(
+              onTap: () => onSelect(e),
+              child: tileBuilder(context, e),
+            ),
+          ),
+        ...?bottomChildren,
+      ],
+    },
   );
 }

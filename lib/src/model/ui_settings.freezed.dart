@@ -1652,7 +1652,7 @@ mixin _$SelectInputUiSettings<T> {
 @notSerializable SearchScreenDef<T>? get searchScreenBuilder;/// Only used when [ChildrenVisibility.whenAsked].
 ///
 /// Defaults to [Push.menu] if [searchScore] is null, else
-/// [Push.modalBottomSheet] with initialBottomSheetSize at 1.
+/// [Push.modalBottomSheet] with initialBottomSheetSize at 0.9.
 /// Serializable if you use on of Push's default methods.
 @PushDefNullableConverter() PushDef? get openChildren;@notSerializable InputHeaderBuilderDef? get headerBuilder;@notSerializable ScoreWidgetBuilderDef? get scoreBuilder;/// Only used when childrenVisibility is always.
 @notSerializable SelectFieldTileBuilderDef<T>? get tileBuilder;@notSerializable SelectFieldBuilderDef<T>? get widgetBuilder;
@@ -1784,7 +1784,7 @@ class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
 /// Only used when [ChildrenVisibility.whenAsked].
 ///
 /// Defaults to [Push.menu] if [searchScore] is null, else
-/// [Push.modalBottomSheet] with initialBottomSheetSize at 1.
+/// [Push.modalBottomSheet] with initialBottomSheetSize at 0.9.
 /// Serializable if you use on of Push's default methods.
 @override@PushDefNullableConverter() final  PushDef? openChildren;
 @override@notSerializable final  InputHeaderBuilderDef? headerBuilder;

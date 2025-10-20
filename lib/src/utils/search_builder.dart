@@ -1,8 +1,7 @@
 import 'dart:async';
-import 'dart:developer';
 
+import 'package:collection/collection.dart';
 import 'package:diacritic/diacritic.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// A widget that handles the logic for filtering and ranking a local dataset
@@ -50,7 +49,7 @@ class SearchBuilder<T> extends StatefulWidget {
   /// If the query is empty, all the data is returned in results.
   final Widget Function(
     BuildContext context,
-    List<T> results,
+    FutureData<List<T>> results,
     TextEditingController textController,
   )
   builder;
@@ -69,7 +68,7 @@ class SearchBuilder<T> extends StatefulWidget {
 class _SearchBuilderState<T> extends State<SearchBuilder<T>> {
   late final TextEditingController _textController;
   late WoFormQuery _query;
-  late List<T> _results;
+  late FutureData<List<T>> _results;
   int _activeRequestId = 0;
 
   @override
@@ -79,7 +78,7 @@ class _SearchBuilderState<T> extends State<SearchBuilder<T>> {
     _query = widget.initialQuery ?? WoFormQuery('');
     _textController = TextEditingController(text: _query.raw)
       ..addListener(onTextChanged);
-    _results = [];
+    _results = const DataLoading('initialData', []);
 
     unawaited(loadData());
   }
@@ -91,32 +90,35 @@ class _SearchBuilderState<T> extends State<SearchBuilder<T>> {
   }
 
   Future<void> loadData() async {
+    /// Query hasn't changed, don't need to load data
+    if (_results.id == _query.raw) return;
+
     final requestId = ++_activeRequestId;
+    setState(() => _results = DataLoading(_query.raw, _results.data));
+
     final Iterable<T> loadedData;
     try {
       loadedData = await widget.loadData(_query);
       // Ensure this is the latest request and widget still mounted
       if (requestId != _activeRequestId || !mounted) return;
-    } catch (e) {
-      if (kDebugMode) log('Error in SearchBuilder.loadData : $e');
+    } catch (error) {
+      setState(() => _results = DataError(_query.raw, error));
       return;
     }
 
-    if (_query.clean.isEmpty) {
-      setState(() => _results = loadedData.toList());
+    Iterable<(double, T)> scoredItems = loadedData
+        .map((item) => (widget.searchScore(_query, item), item))
+        .toList()
+        .sortedBy((data) => -data.$1);
+    if (_query.clean.isNotEmpty) {
+      scoredItems = scoredItems.where((data) => data.$1 > 0);
     }
 
-    final scoredItems = <_ScoredItem<T>>[];
-    for (final item in _results) {
-      final score = widget.searchScore(_query, item);
-      if (score > 0) {
-        scoredItems.add(_ScoredItem(item, score));
-      }
-    }
-
-    scoredItems.sort((a, b) => b.score.compareTo(a.score));
     setState(
-      () => _results = scoredItems.map((s) => s.value).toList(),
+      () => _results = DataValue(
+        _query.raw,
+        scoredItems.map((s) => s.$2).toList(),
+      ),
     );
   }
 
@@ -146,13 +148,6 @@ class _SearchBuilderState<T> extends State<SearchBuilder<T>> {
 
 typedef LoadDataDef<T> = Future<Iterable<T>> Function(WoFormQuery query);
 
-class _ScoredItem<T> {
-  _ScoredItem(this.value, this.score);
-
-  final T value;
-  final double score;
-}
-
 class WoFormQuery {
   WoFormQuery(this.raw) : clean = toQuery(raw);
 
@@ -177,4 +172,53 @@ class WoFormQuery {
 
     return 0;
   }
+}
+
+sealed class FutureData<T> {
+  const FutureData();
+
+  /// An identifier for the data, like an uuid or a query
+  String get id;
+  T? get data;
+
+  bool get isLoading => this is DataLoading;
+  Object? get error => null;
+}
+
+final class DataLoading<T> extends FutureData<T> {
+  /// Waiting for the first data
+  const DataLoading(this.id, this.data);
+
+  @override
+  final String id;
+
+  /// The data before the loading was triggered.
+  @override
+  final T? data;
+}
+
+final class DataValue<T> extends FutureData<T> {
+  DataValue(this.id, this.data)
+    : error = data == null
+          ? Exception('Data not found (dataId: $id, dataType: $T)')
+          : null;
+
+  @override
+  final String id;
+  @override
+  final T? data;
+  @override
+  final Object? error;
+}
+
+final class DataError<T> extends FutureData<T> {
+  /// An error occured while loading the data
+  const DataError(this.id, this.error);
+
+  @override
+  final String id;
+  @override
+  T? get data => null;
+  @override
+  final Object error;
 }
