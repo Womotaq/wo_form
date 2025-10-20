@@ -81,6 +81,7 @@ class SelectField<T> extends StatelessWidget {
                   value: query,
                 ),
             searchScreenBuilder: uiSettings?.searchScreenBuilder,
+            autofocus: data.input.uiSettings?.searchAutofocus ?? true,
             openSearchScreen: uiSettings?.openChildren,
             provider: ({required child}) => RepositoryProvider.value(
               value: context.read<RootNode>(),
@@ -147,6 +148,7 @@ class SelectField<T> extends StatelessWidget {
                         value: query,
                       ),
                   searchScreenBuilder: uiSettings?.searchScreenBuilder,
+                  autofocus: data.input.uiSettings?.searchAutofocus ?? true,
                   openSearchScreen: uiSettings?.openChildren,
                   builder: (onPressed) => IconButton.filled(
                     onPressed: onPressed,
@@ -267,7 +269,7 @@ class _AlwaysVisibleSelectField<T> extends StatelessWidget {
 
   Widget layout(
     BuildContext context,
-    FutureData<List<T>> data, [
+    FutureData<List<T>> future, [
     TextEditingController? queryController,
   ]) => Column(
     children: [
@@ -284,6 +286,7 @@ class _AlwaysVisibleSelectField<T> extends StatelessWidget {
               prefixIcon: Icon(Icons.search),
             ),
             autocorrect: false,
+            autofocus: data.input.uiSettings?.searchAutofocus ?? true,
             // Flutter's default behaviour :
             // - web : tapping outside instantly unfocuses the field.
             // - mobile : tapping outside does nothing.
@@ -291,7 +294,7 @@ class _AlwaysVisibleSelectField<T> extends StatelessWidget {
             onTapOutside: (event) => FocusScope.of(context).unfocus(),
           ),
         ),
-      ...switch (data) {
+      ...switch (future) {
         DataError() => [],
         DataLoading(data: final results) || DataValue(data: final results) => [
           if (data is DataLoading)

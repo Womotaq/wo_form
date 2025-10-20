@@ -18,6 +18,7 @@ class SearchField<T> extends StatelessWidget {
     this.provider,
     this.searchScreenLayout = LayoutMethod.scrollable,
     this.searchScreenBuilder,
+    this.autofocus = true,
     this.openSearchScreen,
     super.key,
   }) : _builder = null,
@@ -40,6 +41,7 @@ class SearchField<T> extends StatelessWidget {
     this.provider,
     this.searchScreenLayout = LayoutMethod.scrollable,
     this.searchScreenBuilder,
+    this.autofocus = true,
     this.openSearchScreen,
     super.key,
   }) : selectedBuilder = ((_) => const SizedBox.shrink()),
@@ -61,6 +63,7 @@ class SearchField<T> extends StatelessWidget {
   final Widget Function({required Widget child})? provider;
   final LayoutMethod searchScreenLayout;
   final SearchScreenDef<T>? searchScreenBuilder;
+  final bool autofocus;
   final PushDef? openSearchScreen;
 
   @override
@@ -175,6 +178,7 @@ class SearchField<T> extends StatelessWidget {
           initialQuery: initialQuery,
           onQueryChanged: onQueryChanged,
           layout: searchScreenLayout,
+          autofocus: autofocus,
         ),
       ),
     );
@@ -208,6 +212,7 @@ typedef SearchScreenDef<T> =
       WoFormQuery? initialQuery,
       void Function(WoFormQuery query)? onQueryChanged,
       LayoutMethod layout,
+      bool autofocus,
       Key? key,
     });
 
@@ -222,6 +227,7 @@ class SearchScreen<T> extends StatelessWidget {
     this.initialQuery,
     this.layout = LayoutMethod.scrollable,
     this.onNotFound,
+    this.autofocus = true,
     super.key,
   });
 
@@ -234,6 +240,7 @@ class SearchScreen<T> extends StatelessWidget {
   final WoFormQuery? initialQuery;
   final LayoutMethod layout;
   final Widget? onNotFound;
+  final bool autofocus;
 
   @override
   Widget build(BuildContext context) {
@@ -250,7 +257,7 @@ class SearchScreen<T> extends StatelessWidget {
           appBarHeight: 56 + 32,
           appBarTitle: TextField(
             controller: textController,
-            autofocus: true,
+            autofocus: autofocus,
             decoration: const InputDecoration(
               prefixIcon: Icon(Icons.search),
             ),

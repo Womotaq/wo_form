@@ -343,6 +343,7 @@ _SelectInputUiSettings<T> _$SelectInputUiSettingsFromJson<T>(
     json['childrenVisibility'],
   ),
   headerFlex: (json['headerFlex'] as num?)?.toInt(),
+  searchAutofocus: json['searchAutofocus'] as bool?,
   openChildren: const PushDefNullableConverter().fromJson(
     json['openChildren'] as String?,
   ),
@@ -358,6 +359,7 @@ Map<String, dynamic> _$SelectInputUiSettingsToJson<T>(
   'childrenVisibility':
       _$ChildrenVisibilityEnumMap[instance.childrenVisibility],
   'headerFlex': instance.headerFlex,
+  'searchAutofocus': instance.searchAutofocus,
   'openChildren': const PushDefNullableConverter().toJson(
     instance.openChildren,
   ),
