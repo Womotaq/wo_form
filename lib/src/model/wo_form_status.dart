@@ -12,7 +12,6 @@ sealed class WoFormStatus with _$WoFormStatus {
   const factory WoFormStatus.initial() = InitialStatus;
   const factory WoFormStatus.inProgress({
     @notSerializable @Default([]) List<WoFormInputError> errors,
-    String? firstInvalidInputPath,
   }) = InProgressStatus;
   const factory WoFormStatus.submitting() = SubmittingStatus;
   const factory WoFormStatus.submitError({

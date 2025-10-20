@@ -145,7 +145,7 @@ class _PlaceAutoCompleteTextFieldState
 
   void textChanged(String text) {
     if (text.isNotEmpty) {
-      updatePredictions(text);
+      unawaited(updatePredictions(text));
     } else {
       removeOverlay();
     }
@@ -259,7 +259,7 @@ class _PlaceAutoCompleteTextFieldState
                       widget.onChanged?.call(prediction.description);
 
                       if (widget.onSelectedWithDetails != null) {
-                        completeWithDetails(prediction);
+                        unawaited(completeWithDetails(prediction));
                       }
                       removeOverlay();
                     },

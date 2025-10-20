@@ -643,7 +643,7 @@ Object? _defaultToJsonT<T>(T value) {
 }
 
 @freezed
-sealed class WoFormInputError with _$WoFormInputError {
+sealed class WoFormInputError with _$WoFormInputError implements Exception {
   const factory WoFormInputError.empty({
     required String path,
   }) = EmptyInputError;

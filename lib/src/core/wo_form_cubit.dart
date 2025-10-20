@@ -3,18 +3,8 @@ part of 'wo_form.dart';
 class WoFormStatusCubit extends Cubit<WoFormStatus> {
   WoFormStatusCubit(super.initialState);
 
-  void setInProgress({
-    List<WoFormInputError> errors = const [],
-    String? firstInvalidInputPath,
-  }) {
-    if (!isClosed) {
-      emit(
-        InProgressStatus(
-          errors: errors,
-          firstInvalidInputPath: firstInvalidInputPath,
-        ),
-      );
-    }
+  void setInProgress({List<WoFormInputError> errors = const []}) {
+    if (!isClosed) emit(InProgressStatus(errors: errors));
   }
 
   void _setSubmitting() {
@@ -462,10 +452,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
             ..nextFocus();
         }
 
-        return _statusCubit.setInProgress(
-          errors: errors.toList(),
-          firstInvalidInputPath: errors.first.path,
-        );
+        return _statusCubit.setInProgress(errors: errors.toList());
       }
     } else {
       _skipErrorsOfNextSubmit = false;
@@ -508,7 +495,11 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
         _statusCubit.setInProgress();
       }
     } catch (e, s) {
-      _statusCubit._setSubmitError(error: e, stackTrace: s);
+      if (e is WoFormInputError) {
+        _statusCubit.setInProgress(errors: [e]);
+      } else {
+        _statusCubit._setSubmitError(error: e, stackTrace: s);
+      }
     }
 
     if (_root.uiSettings?.canModifySubmittedValues ?? true) {
@@ -847,7 +838,12 @@ class WoFormValues {
   // --- SELECT INPUT QUERY ---
 
   WoFormQuery? queryOf({required String selectInputPath}) =>
-      this['$selectInputPath-query'] as WoFormQuery?;
+      get<WoFormQuery>('$selectInputPath-query');
+
+  // --- STRING INPUT PLACE AUTOCOMPLETE ---
+
+  PlaceDetails? placeDetailsOf({required String stringInputPath}) =>
+      get<PlaceDetails>('$stringInputPath+details');
 
   // --- INPUTS NODE ---
 

@@ -67,6 +67,7 @@ enum PlacesDetailsStatus {
   UNKNOWN_ERROR,
 }
 
+/// See : https://developers.google.com/maps/documentation/places/web-service/legacy/details#Place
 @freezed
 abstract class PlaceDetails with _$PlaceDetails {
   @JsonSerializable(explicitToJson: true)

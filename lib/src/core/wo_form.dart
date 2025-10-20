@@ -60,6 +60,12 @@ class WoForm extends StatelessWidget {
   final Future<void> Function(RootNode root, WoFormValues values)?
   onStatusUpdate;
   final Future<bool> Function(BuildContext context)? canSubmit;
+
+  /// Called when the user presses the submit button, or when a field can submit
+  /// the form, like [StringInputUiSettings.submitFormOnFieldSubmitted].
+  ///
+  /// You can throw a [WoFormInputError] in this method, the error will be shown
+  /// in the corresponding node.
   final Future<Object?> Function(RootNode root, WoFormValues values)?
   onSubmitting;
   final OnSubmitErrorDef? onSubmitError;
