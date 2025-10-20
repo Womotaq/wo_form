@@ -1,4 +1,9 @@
+import 'dart:async';
+import 'dart:math';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:popover/popover.dart';
 import 'package:wo_form/src/utils/extensions.dart';
@@ -67,13 +72,16 @@ class Push {
     enableDrag: dismissible,
     clipBehavior: Clip.hardEdge,
     builder: (context) => switch (layout) {
-      LayoutMethod.scrollable => DraggableScrollableSheet(
-        expand: false,
-        initialChildSize: initialBottomSheetSize,
-        minChildSize: initialBottomSheetSize * 2 / 3,
-        builder: (context, scrollController) => ScrollControllerProvider(
-          controller: scrollController,
-          child: child,
+      LayoutMethod.scrollable => DraggableScrollableControllerProvider(
+        builder: (context, draggableController) => DraggableScrollableSheet(
+          controller: draggableController,
+          expand: false,
+          initialChildSize: initialBottomSheetSize,
+          minChildSize: initialBottomSheetSize * 2 / 3,
+          builder: (context, scrollController) => ScrollControllerProvider(
+            controller: scrollController,
+            child: child,
+          ),
         ),
       ),
       LayoutMethod.flexible => SizedBox(
@@ -148,4 +156,62 @@ class PushDefNullableConverter extends JsonConverter<PushDef?, String?> {
     Push.menu => 'menu',
     _ => null,
   };
+}
+
+/// This widget provides a DraggableScrollableController with the ability
+/// to adjust its size based on the keyboard.
+class DraggableScrollableControllerProvider extends StatefulWidget {
+  const DraggableScrollableControllerProvider({
+    required this.builder,
+    super.key,
+  });
+
+  final Widget Function(
+    BuildContext context,
+    DraggableScrollableController controller,
+  )
+  builder;
+
+  @override
+  State<DraggableScrollableControllerProvider> createState() =>
+      _DraggableScrollableControllerProviderState();
+}
+
+class _DraggableScrollableControllerProviderState
+    extends State<DraggableScrollableControllerProvider> {
+  final DraggableScrollableController _controller =
+      DraggableScrollableController();
+  // Between 0 and 1, pourcent of sreen height
+  double _keyboardSize = 0;
+  double _totalDelta = 0;
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final keyboardSize = mediaQuery.viewInsets.bottom / mediaQuery.size.height;
+    if (keyboardSize != _keyboardSize) {
+      final delta = keyboardSize - _keyboardSize;
+      final newControllerSizeRaw = clampDouble(_controller.size + delta, 0, 1);
+      final double newTotalDelta = max(
+        0,
+        _totalDelta + newControllerSizeRaw - _controller.size,
+      );
+      final effectiveDelta = newTotalDelta - _totalDelta;
+      final newControllerSize = _controller.size + effectiveDelta;
+      _totalDelta = newTotalDelta;
+      _keyboardSize = keyboardSize;
+
+      SchedulerBinding.instance.addPostFrameCallback(
+        (_) => _controller.jumpTo(newControllerSize),
+      );
+    }
+
+    return widget.builder(context, _controller);
+  }
 }
