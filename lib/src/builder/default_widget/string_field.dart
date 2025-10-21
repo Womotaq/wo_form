@@ -153,12 +153,15 @@ class _StringFieldState extends State<StringField> {
                 : null,
             suffixIcon: switch (uiSettings?.action) {
               null => null,
-              StringFieldAction.clear => IconButton(
-                onPressed: widget.onValueChanged == null
+              StringFieldAction.clear =>
+                (widget.text ?? '').isEmpty
                     ? null
-                    : () => widget.onValueChanged!(null),
-                icon: const Icon(Icons.clear),
-              ),
+                    : IconButton(
+                        onPressed: widget.onValueChanged == null
+                            ? null
+                            : () => widget.onValueChanged!(null),
+                        icon: const Icon(Icons.clear),
+                      ),
               StringFieldAction.obscure => IconButton(
                 onPressed: () => setState(() => obscureText = !obscureText),
                 icon: obscureText

@@ -246,6 +246,7 @@ class SearchScreen<T> extends StatelessWidget {
     prefixIcon: Icon(Icons.search),
     prefixIconLocation: StringFieldLocation.inside,
     autofocus: WoFormAutofocus.yes,
+    action: StringFieldAction.clear,
     submitFormOnFieldSubmitted: false,
     padding: EdgeInsets.zero,
   );
