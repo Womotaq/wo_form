@@ -18,7 +18,7 @@ class SearchField<T> extends StatelessWidget {
     this.provider,
     this.searchScreenLayout = LayoutMethod.scrollable,
     this.searchScreenBuilder,
-    this.autofocus = true,
+    this.searchInputUiSettings,
     this.openSearchScreen,
     super.key,
   }) : _builder = null,
@@ -41,7 +41,7 @@ class SearchField<T> extends StatelessWidget {
     this.provider,
     this.searchScreenLayout = LayoutMethod.scrollable,
     this.searchScreenBuilder,
-    this.autofocus = true,
+    this.searchInputUiSettings,
     this.openSearchScreen,
     super.key,
   }) : selectedBuilder = ((_) => const SizedBox.shrink()),
@@ -63,7 +63,7 @@ class SearchField<T> extends StatelessWidget {
   final Widget Function({required Widget child})? provider;
   final LayoutMethod searchScreenLayout;
   final SearchScreenDef<T>? searchScreenBuilder;
-  final bool autofocus;
+  final StringInputUiSettings? searchInputUiSettings;
   final PushDef? openSearchScreen;
 
   @override
@@ -178,7 +178,7 @@ class SearchField<T> extends StatelessWidget {
           initialQuery: initialQuery,
           onQueryChanged: onQueryChanged,
           layout: searchScreenLayout,
-          autofocus: autofocus,
+          searchInputUiSettings: searchInputUiSettings,
         ),
       ),
     );
@@ -212,7 +212,7 @@ typedef SearchScreenDef<T> =
       WoFormQuery? initialQuery,
       void Function(WoFormQuery query)? onQueryChanged,
       LayoutMethod layout,
-      bool autofocus,
+      StringInputUiSettings? searchInputUiSettings,
       Key? key,
     });
 
@@ -227,7 +227,7 @@ class SearchScreen<T> extends StatelessWidget {
     this.initialQuery,
     this.layout = LayoutMethod.scrollable,
     this.onNotFound,
-    this.autofocus = true,
+    this.searchInputUiSettings,
     super.key,
   });
 
@@ -240,7 +240,14 @@ class SearchScreen<T> extends StatelessWidget {
   final WoFormQuery? initialQuery;
   final LayoutMethod layout;
   final Widget? onNotFound;
-  final bool autofocus;
+  final StringInputUiSettings? searchInputUiSettings;
+
+  static const defaultSearchInputUiSettings = StringInputUiSettings(
+    prefixIcon: Icon(Icons.search),
+    prefixIconLocation: StringFieldLocation.inside,
+    autofocus: WoFormAutofocus.yes,
+    padding: EdgeInsets.zero,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -255,18 +262,39 @@ class SearchScreen<T> extends StatelessWidget {
         builder: (context, results, textController) => ShrinkableScaffold(
           shrinkWrap: layout.shrinks,
           appBarHeight: 56 + 32,
-          appBarTitle: TextField(
-            controller: textController,
-            autofocus: autofocus,
-            decoration: const InputDecoration(
-              prefixIcon: Icon(Icons.search),
+          appBarTitle: StringField(
+            WoFieldData(
+              path: 'not_needed',
+              input: StringInput(
+                id: 'not_needed',
+                uiSettings:
+                    searchInputUiSettings?.merge(
+                      SearchScreen.defaultSearchInputUiSettings,
+                    ) ??
+                    SearchScreen.defaultSearchInputUiSettings,
+              ),
+              value: textController.text,
+              onValueChanged:
+                  (
+                    _, {
+                    UpdateStatus updateStatus =
+                        UpdateStatus.yesWithoutErrorUpdateIfPathNotVisited,
+                  }) {},
             ),
-            // Flutter's default behaviour :
-            // - web : tapping outside instantly unfocuses the field.
-            // - mobile : tapping outside does nothing.
-            // wo_form decided to unfocus search fields on tap down.
-            onTapOutside: (event) => FocusScope.of(context).unfocus(),
           ),
+
+          // TextField(
+          //   controller: textController,
+          //   autofocus: autofocus,
+          //   decoration: const InputDecoration(
+          //     prefixIcon: Icon(Icons.search),
+          //   ),
+          //   // Flutter's default behaviour :
+          //   // - web : tapping outside instantly unfocuses the field.
+          //   // - mobile : tapping outside does nothing.
+          //   // wo_form decided to unfocus search fields on tap down.
+          //   onTapOutside: (event) => FocusScope.of(context).unfocus(),
+          // ),
           body: body(context, results),
         ),
       );

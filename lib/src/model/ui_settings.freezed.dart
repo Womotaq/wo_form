@@ -1648,10 +1648,10 @@ mixin _$SelectInputUiSettings<T> {
 /// (might not work with all fields).
 /// Else, the field will be wrapped in a Flexible with a flex value of 10,
 /// and the header with a flex value of [headerFlex].
- int? get headerFlex;@notSerializable Widget? get prefixIcon;@notSerializable ValueBuilderDef<T>? get valueBuilder;@notSerializable ValueBuilderDef<T>? get selectedBuilder;@notSerializable Widget? Function(T value)? get helpValueBuilder;/// Whether the search field should be autofocused when it appears or not.
+ int? get headerFlex;@notSerializable Widget? get prefixIcon;@notSerializable ValueBuilderDef<T>? get valueBuilder;@notSerializable ValueBuilderDef<T>? get selectedBuilder;@notSerializable Widget? Function(T value)? get helpValueBuilder;/// Settings for the search input, in the search screen.
 ///
-/// Defaults to true.
- bool? get searchAutofocus;/// Only used when [SelectInput.searchSettings] is set.
+/// By default, autofocus is [WoFormAutofocus.yes].
+ StringInputUiSettings? get searchInputUiSettings;/// Only used when [SelectInput.searchSettings] is set.
 @notSerializable SearchScreenDef<T>? get searchScreenBuilder;/// Only used when [ChildrenVisibility.whenAsked].
 ///
 /// Defaults to [Push.menu] if [SelectInput.searchSettings] is null, else
@@ -1671,16 +1671,16 @@ $SelectInputUiSettingsCopyWith<T, SelectInputUiSettings<T>> get copyWith => _$Se
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SelectInputUiSettings<T>&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.valueBuilder, valueBuilder) || other.valueBuilder == valueBuilder)&&(identical(other.selectedBuilder, selectedBuilder) || other.selectedBuilder == selectedBuilder)&&(identical(other.helpValueBuilder, helpValueBuilder) || other.helpValueBuilder == helpValueBuilder)&&(identical(other.searchAutofocus, searchAutofocus) || other.searchAutofocus == searchAutofocus)&&(identical(other.searchScreenBuilder, searchScreenBuilder) || other.searchScreenBuilder == searchScreenBuilder)&&(identical(other.openChildren, openChildren) || other.openChildren == openChildren)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.scoreBuilder, scoreBuilder) || other.scoreBuilder == scoreBuilder)&&(identical(other.tileBuilder, tileBuilder) || other.tileBuilder == tileBuilder)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SelectInputUiSettings<T>&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.valueBuilder, valueBuilder) || other.valueBuilder == valueBuilder)&&(identical(other.selectedBuilder, selectedBuilder) || other.selectedBuilder == selectedBuilder)&&(identical(other.helpValueBuilder, helpValueBuilder) || other.helpValueBuilder == helpValueBuilder)&&(identical(other.searchInputUiSettings, searchInputUiSettings) || other.searchInputUiSettings == searchInputUiSettings)&&(identical(other.searchScreenBuilder, searchScreenBuilder) || other.searchScreenBuilder == searchScreenBuilder)&&(identical(other.openChildren, openChildren) || other.openChildren == openChildren)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.scoreBuilder, scoreBuilder) || other.scoreBuilder == scoreBuilder)&&(identical(other.tileBuilder, tileBuilder) || other.tileBuilder == tileBuilder)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,flex,labelText,helperText,hintText,childrenVisibility,headerFlex,prefixIcon,valueBuilder,selectedBuilder,helpValueBuilder,searchAutofocus,searchScreenBuilder,openChildren,headerBuilder,scoreBuilder,tileBuilder,widgetBuilder);
+int get hashCode => Object.hash(runtimeType,flex,labelText,helperText,hintText,childrenVisibility,headerFlex,prefixIcon,valueBuilder,selectedBuilder,helpValueBuilder,searchInputUiSettings,searchScreenBuilder,openChildren,headerBuilder,scoreBuilder,tileBuilder,widgetBuilder);
 
 @override
 String toString() {
-  return 'SelectInputUiSettings<$T>(flex: $flex, labelText: $labelText, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, headerFlex: $headerFlex, prefixIcon: $prefixIcon, valueBuilder: $valueBuilder, selectedBuilder: $selectedBuilder, helpValueBuilder: $helpValueBuilder, searchAutofocus: $searchAutofocus, searchScreenBuilder: $searchScreenBuilder, openChildren: $openChildren, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder, tileBuilder: $tileBuilder, widgetBuilder: $widgetBuilder)';
+  return 'SelectInputUiSettings<$T>(flex: $flex, labelText: $labelText, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, headerFlex: $headerFlex, prefixIcon: $prefixIcon, valueBuilder: $valueBuilder, selectedBuilder: $selectedBuilder, helpValueBuilder: $helpValueBuilder, searchInputUiSettings: $searchInputUiSettings, searchScreenBuilder: $searchScreenBuilder, openChildren: $openChildren, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder, tileBuilder: $tileBuilder, widgetBuilder: $widgetBuilder)';
 }
 
 
@@ -1691,11 +1691,11 @@ abstract mixin class $SelectInputUiSettingsCopyWith<T,$Res>  {
   factory $SelectInputUiSettingsCopyWith(SelectInputUiSettings<T> value, $Res Function(SelectInputUiSettings<T>) _then) = _$SelectInputUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- int? flex, String? labelText, String? helperText, String? hintText, ChildrenVisibility? childrenVisibility, int? headerFlex,@notSerializable Widget? prefixIcon,@notSerializable ValueBuilderDef<T>? valueBuilder,@notSerializable ValueBuilderDef<T>? selectedBuilder,@notSerializable Widget? Function(T value)? helpValueBuilder, bool? searchAutofocus,@notSerializable SearchScreenDef<T>? searchScreenBuilder,@PushDefNullableConverter() PushDef? openChildren,@notSerializable InputHeaderBuilderDef? headerBuilder,@notSerializable ScoreWidgetBuilderDef? scoreBuilder,@notSerializable SelectFieldTileBuilderDef<T>? tileBuilder,@notSerializable SelectFieldBuilderDef<T>? widgetBuilder
+ int? flex, String? labelText, String? helperText, String? hintText, ChildrenVisibility? childrenVisibility, int? headerFlex,@notSerializable Widget? prefixIcon,@notSerializable ValueBuilderDef<T>? valueBuilder,@notSerializable ValueBuilderDef<T>? selectedBuilder,@notSerializable Widget? Function(T value)? helpValueBuilder, StringInputUiSettings? searchInputUiSettings,@notSerializable SearchScreenDef<T>? searchScreenBuilder,@PushDefNullableConverter() PushDef? openChildren,@notSerializable InputHeaderBuilderDef? headerBuilder,@notSerializable ScoreWidgetBuilderDef? scoreBuilder,@notSerializable SelectFieldTileBuilderDef<T>? tileBuilder,@notSerializable SelectFieldBuilderDef<T>? widgetBuilder
 });
 
 
-
+$StringInputUiSettingsCopyWith<$Res>? get searchInputUiSettings;
 
 }
 /// @nodoc
@@ -1708,7 +1708,7 @@ class _$SelectInputUiSettingsCopyWithImpl<T,$Res>
 
 /// Create a copy of SelectInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? flex = freezed,Object? labelText = freezed,Object? helperText = freezed,Object? hintText = freezed,Object? childrenVisibility = freezed,Object? headerFlex = freezed,Object? prefixIcon = freezed,Object? valueBuilder = freezed,Object? selectedBuilder = freezed,Object? helpValueBuilder = freezed,Object? searchAutofocus = freezed,Object? searchScreenBuilder = freezed,Object? openChildren = freezed,Object? headerBuilder = freezed,Object? scoreBuilder = freezed,Object? tileBuilder = freezed,Object? widgetBuilder = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? flex = freezed,Object? labelText = freezed,Object? helperText = freezed,Object? hintText = freezed,Object? childrenVisibility = freezed,Object? headerFlex = freezed,Object? prefixIcon = freezed,Object? valueBuilder = freezed,Object? selectedBuilder = freezed,Object? helpValueBuilder = freezed,Object? searchInputUiSettings = freezed,Object? searchScreenBuilder = freezed,Object? openChildren = freezed,Object? headerBuilder = freezed,Object? scoreBuilder = freezed,Object? tileBuilder = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_self.copyWith(
 flex: freezed == flex ? _self.flex : flex // ignore: cast_nullable_to_non_nullable
 as int?,labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
@@ -1720,8 +1720,8 @@ as int?,prefixIcon: freezed == prefixIcon ? _self.prefixIcon : prefixIcon // ign
 as Widget?,valueBuilder: freezed == valueBuilder ? _self.valueBuilder : valueBuilder // ignore: cast_nullable_to_non_nullable
 as ValueBuilderDef<T>?,selectedBuilder: freezed == selectedBuilder ? _self.selectedBuilder : selectedBuilder // ignore: cast_nullable_to_non_nullable
 as ValueBuilderDef<T>?,helpValueBuilder: freezed == helpValueBuilder ? _self.helpValueBuilder : helpValueBuilder // ignore: cast_nullable_to_non_nullable
-as Widget? Function(T value)?,searchAutofocus: freezed == searchAutofocus ? _self.searchAutofocus : searchAutofocus // ignore: cast_nullable_to_non_nullable
-as bool?,searchScreenBuilder: freezed == searchScreenBuilder ? _self.searchScreenBuilder : searchScreenBuilder // ignore: cast_nullable_to_non_nullable
+as Widget? Function(T value)?,searchInputUiSettings: freezed == searchInputUiSettings ? _self.searchInputUiSettings : searchInputUiSettings // ignore: cast_nullable_to_non_nullable
+as StringInputUiSettings?,searchScreenBuilder: freezed == searchScreenBuilder ? _self.searchScreenBuilder : searchScreenBuilder // ignore: cast_nullable_to_non_nullable
 as SearchScreenDef<T>?,openChildren: freezed == openChildren ? _self.openChildren : openChildren // ignore: cast_nullable_to_non_nullable
 as PushDef?,headerBuilder: freezed == headerBuilder ? _self.headerBuilder : headerBuilder // ignore: cast_nullable_to_non_nullable
 as InputHeaderBuilderDef?,scoreBuilder: freezed == scoreBuilder ? _self.scoreBuilder : scoreBuilder // ignore: cast_nullable_to_non_nullable
@@ -1730,7 +1730,19 @@ as SelectFieldTileBuilderDef<T>?,widgetBuilder: freezed == widgetBuilder ? _self
 as SelectFieldBuilderDef<T>?,
   ));
 }
+/// Create a copy of SelectInputUiSettings
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$StringInputUiSettingsCopyWith<$Res>? get searchInputUiSettings {
+    if (_self.searchInputUiSettings == null) {
+    return null;
+  }
 
+  return $StringInputUiSettingsCopyWith<$Res>(_self.searchInputUiSettings!, (value) {
+    return _then(_self.copyWith(searchInputUiSettings: value));
+  });
+}
 }
 
 
@@ -1739,7 +1751,7 @@ as SelectFieldBuilderDef<T>?,
 @JsonSerializable()
 
 class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
-  const _SelectInputUiSettings({this.flex, this.labelText, this.helperText, this.hintText, this.childrenVisibility, this.headerFlex, @notSerializable this.prefixIcon, @notSerializable this.valueBuilder, @notSerializable this.selectedBuilder, @notSerializable this.helpValueBuilder, this.searchAutofocus, @notSerializable this.searchScreenBuilder, @PushDefNullableConverter() this.openChildren, @notSerializable this.headerBuilder, @notSerializable this.scoreBuilder, @notSerializable this.tileBuilder, @notSerializable this.widgetBuilder}): super._();
+  const _SelectInputUiSettings({this.flex, this.labelText, this.helperText, this.hintText, this.childrenVisibility, this.headerFlex, @notSerializable this.prefixIcon, @notSerializable this.valueBuilder, @notSerializable this.selectedBuilder, @notSerializable this.helpValueBuilder, this.searchInputUiSettings, @notSerializable this.searchScreenBuilder, @PushDefNullableConverter() this.openChildren, @notSerializable this.headerBuilder, @notSerializable this.scoreBuilder, @notSerializable this.tileBuilder, @notSerializable this.widgetBuilder}): super._();
   factory _SelectInputUiSettings.fromJson(Map<String, dynamic> json) => _$SelectInputUiSettingsFromJson(json);
 
 // What you can do :
@@ -1783,10 +1795,10 @@ class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
 @override@notSerializable final  ValueBuilderDef<T>? valueBuilder;
 @override@notSerializable final  ValueBuilderDef<T>? selectedBuilder;
 @override@notSerializable final  Widget? Function(T value)? helpValueBuilder;
-/// Whether the search field should be autofocused when it appears or not.
+/// Settings for the search input, in the search screen.
 ///
-/// Defaults to true.
-@override final  bool? searchAutofocus;
+/// By default, autofocus is [WoFormAutofocus.yes].
+@override final  StringInputUiSettings? searchInputUiSettings;
 /// Only used when [SelectInput.searchSettings] is set.
 @override@notSerializable final  SearchScreenDef<T>? searchScreenBuilder;
 /// Only used when [ChildrenVisibility.whenAsked].
@@ -1814,16 +1826,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SelectInputUiSettings<T>&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.valueBuilder, valueBuilder) || other.valueBuilder == valueBuilder)&&(identical(other.selectedBuilder, selectedBuilder) || other.selectedBuilder == selectedBuilder)&&(identical(other.helpValueBuilder, helpValueBuilder) || other.helpValueBuilder == helpValueBuilder)&&(identical(other.searchAutofocus, searchAutofocus) || other.searchAutofocus == searchAutofocus)&&(identical(other.searchScreenBuilder, searchScreenBuilder) || other.searchScreenBuilder == searchScreenBuilder)&&(identical(other.openChildren, openChildren) || other.openChildren == openChildren)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.scoreBuilder, scoreBuilder) || other.scoreBuilder == scoreBuilder)&&(identical(other.tileBuilder, tileBuilder) || other.tileBuilder == tileBuilder)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SelectInputUiSettings<T>&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.valueBuilder, valueBuilder) || other.valueBuilder == valueBuilder)&&(identical(other.selectedBuilder, selectedBuilder) || other.selectedBuilder == selectedBuilder)&&(identical(other.helpValueBuilder, helpValueBuilder) || other.helpValueBuilder == helpValueBuilder)&&(identical(other.searchInputUiSettings, searchInputUiSettings) || other.searchInputUiSettings == searchInputUiSettings)&&(identical(other.searchScreenBuilder, searchScreenBuilder) || other.searchScreenBuilder == searchScreenBuilder)&&(identical(other.openChildren, openChildren) || other.openChildren == openChildren)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.scoreBuilder, scoreBuilder) || other.scoreBuilder == scoreBuilder)&&(identical(other.tileBuilder, tileBuilder) || other.tileBuilder == tileBuilder)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,flex,labelText,helperText,hintText,childrenVisibility,headerFlex,prefixIcon,valueBuilder,selectedBuilder,helpValueBuilder,searchAutofocus,searchScreenBuilder,openChildren,headerBuilder,scoreBuilder,tileBuilder,widgetBuilder);
+int get hashCode => Object.hash(runtimeType,flex,labelText,helperText,hintText,childrenVisibility,headerFlex,prefixIcon,valueBuilder,selectedBuilder,helpValueBuilder,searchInputUiSettings,searchScreenBuilder,openChildren,headerBuilder,scoreBuilder,tileBuilder,widgetBuilder);
 
 @override
 String toString() {
-  return 'SelectInputUiSettings<$T>(flex: $flex, labelText: $labelText, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, headerFlex: $headerFlex, prefixIcon: $prefixIcon, valueBuilder: $valueBuilder, selectedBuilder: $selectedBuilder, helpValueBuilder: $helpValueBuilder, searchAutofocus: $searchAutofocus, searchScreenBuilder: $searchScreenBuilder, openChildren: $openChildren, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder, tileBuilder: $tileBuilder, widgetBuilder: $widgetBuilder)';
+  return 'SelectInputUiSettings<$T>(flex: $flex, labelText: $labelText, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, headerFlex: $headerFlex, prefixIcon: $prefixIcon, valueBuilder: $valueBuilder, selectedBuilder: $selectedBuilder, helpValueBuilder: $helpValueBuilder, searchInputUiSettings: $searchInputUiSettings, searchScreenBuilder: $searchScreenBuilder, openChildren: $openChildren, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder, tileBuilder: $tileBuilder, widgetBuilder: $widgetBuilder)';
 }
 
 
@@ -1834,11 +1846,11 @@ abstract mixin class _$SelectInputUiSettingsCopyWith<T,$Res> implements $SelectI
   factory _$SelectInputUiSettingsCopyWith(_SelectInputUiSettings<T> value, $Res Function(_SelectInputUiSettings<T>) _then) = __$SelectInputUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- int? flex, String? labelText, String? helperText, String? hintText, ChildrenVisibility? childrenVisibility, int? headerFlex,@notSerializable Widget? prefixIcon,@notSerializable ValueBuilderDef<T>? valueBuilder,@notSerializable ValueBuilderDef<T>? selectedBuilder,@notSerializable Widget? Function(T value)? helpValueBuilder, bool? searchAutofocus,@notSerializable SearchScreenDef<T>? searchScreenBuilder,@PushDefNullableConverter() PushDef? openChildren,@notSerializable InputHeaderBuilderDef? headerBuilder,@notSerializable ScoreWidgetBuilderDef? scoreBuilder,@notSerializable SelectFieldTileBuilderDef<T>? tileBuilder,@notSerializable SelectFieldBuilderDef<T>? widgetBuilder
+ int? flex, String? labelText, String? helperText, String? hintText, ChildrenVisibility? childrenVisibility, int? headerFlex,@notSerializable Widget? prefixIcon,@notSerializable ValueBuilderDef<T>? valueBuilder,@notSerializable ValueBuilderDef<T>? selectedBuilder,@notSerializable Widget? Function(T value)? helpValueBuilder, StringInputUiSettings? searchInputUiSettings,@notSerializable SearchScreenDef<T>? searchScreenBuilder,@PushDefNullableConverter() PushDef? openChildren,@notSerializable InputHeaderBuilderDef? headerBuilder,@notSerializable ScoreWidgetBuilderDef? scoreBuilder,@notSerializable SelectFieldTileBuilderDef<T>? tileBuilder,@notSerializable SelectFieldBuilderDef<T>? widgetBuilder
 });
 
 
-
+@override $StringInputUiSettingsCopyWith<$Res>? get searchInputUiSettings;
 
 }
 /// @nodoc
@@ -1851,7 +1863,7 @@ class __$SelectInputUiSettingsCopyWithImpl<T,$Res>
 
 /// Create a copy of SelectInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? flex = freezed,Object? labelText = freezed,Object? helperText = freezed,Object? hintText = freezed,Object? childrenVisibility = freezed,Object? headerFlex = freezed,Object? prefixIcon = freezed,Object? valueBuilder = freezed,Object? selectedBuilder = freezed,Object? helpValueBuilder = freezed,Object? searchAutofocus = freezed,Object? searchScreenBuilder = freezed,Object? openChildren = freezed,Object? headerBuilder = freezed,Object? scoreBuilder = freezed,Object? tileBuilder = freezed,Object? widgetBuilder = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? flex = freezed,Object? labelText = freezed,Object? helperText = freezed,Object? hintText = freezed,Object? childrenVisibility = freezed,Object? headerFlex = freezed,Object? prefixIcon = freezed,Object? valueBuilder = freezed,Object? selectedBuilder = freezed,Object? helpValueBuilder = freezed,Object? searchInputUiSettings = freezed,Object? searchScreenBuilder = freezed,Object? openChildren = freezed,Object? headerBuilder = freezed,Object? scoreBuilder = freezed,Object? tileBuilder = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_SelectInputUiSettings<T>(
 flex: freezed == flex ? _self.flex : flex // ignore: cast_nullable_to_non_nullable
 as int?,labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
@@ -1863,8 +1875,8 @@ as int?,prefixIcon: freezed == prefixIcon ? _self.prefixIcon : prefixIcon // ign
 as Widget?,valueBuilder: freezed == valueBuilder ? _self.valueBuilder : valueBuilder // ignore: cast_nullable_to_non_nullable
 as ValueBuilderDef<T>?,selectedBuilder: freezed == selectedBuilder ? _self.selectedBuilder : selectedBuilder // ignore: cast_nullable_to_non_nullable
 as ValueBuilderDef<T>?,helpValueBuilder: freezed == helpValueBuilder ? _self.helpValueBuilder : helpValueBuilder // ignore: cast_nullable_to_non_nullable
-as Widget? Function(T value)?,searchAutofocus: freezed == searchAutofocus ? _self.searchAutofocus : searchAutofocus // ignore: cast_nullable_to_non_nullable
-as bool?,searchScreenBuilder: freezed == searchScreenBuilder ? _self.searchScreenBuilder : searchScreenBuilder // ignore: cast_nullable_to_non_nullable
+as Widget? Function(T value)?,searchInputUiSettings: freezed == searchInputUiSettings ? _self.searchInputUiSettings : searchInputUiSettings // ignore: cast_nullable_to_non_nullable
+as StringInputUiSettings?,searchScreenBuilder: freezed == searchScreenBuilder ? _self.searchScreenBuilder : searchScreenBuilder // ignore: cast_nullable_to_non_nullable
 as SearchScreenDef<T>?,openChildren: freezed == openChildren ? _self.openChildren : openChildren // ignore: cast_nullable_to_non_nullable
 as PushDef?,headerBuilder: freezed == headerBuilder ? _self.headerBuilder : headerBuilder // ignore: cast_nullable_to_non_nullable
 as InputHeaderBuilderDef?,scoreBuilder: freezed == scoreBuilder ? _self.scoreBuilder : scoreBuilder // ignore: cast_nullable_to_non_nullable
@@ -1874,7 +1886,19 @@ as SelectFieldBuilderDef<T>?,
   ));
 }
 
+/// Create a copy of SelectInputUiSettings
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$StringInputUiSettingsCopyWith<$Res>? get searchInputUiSettings {
+    if (_self.searchInputUiSettings == null) {
+    return null;
+  }
 
+  return $StringInputUiSettingsCopyWith<$Res>(_self.searchInputUiSettings!, (value) {
+    return _then(_self.copyWith(searchInputUiSettings: value));
+  });
+}
 }
 
 

@@ -123,7 +123,7 @@ String toString() {
 @JsonSerializable()
 
 class InProgressStatus implements WoFormStatus {
-  const InProgressStatus({@notSerializable final  List<WoFormInputError> errors = const [], this.firstInvalidInputPath, final  String? $type}): _errors = errors,$type = $type ?? 'inProgress';
+  const InProgressStatus({@notSerializable final  List<WoFormInputError> errors = const [], final  String? $type}): _errors = errors,$type = $type ?? 'inProgress';
   factory InProgressStatus.fromJson(Map<String, dynamic> json) => _$InProgressStatusFromJson(json);
 
  final  List<WoFormInputError> _errors;
@@ -133,7 +133,6 @@ class InProgressStatus implements WoFormStatus {
   return EqualUnmodifiableListView(_errors);
 }
 
- final  String? firstInvalidInputPath;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -152,16 +151,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is InProgressStatus&&const DeepCollectionEquality().equals(other._errors, _errors)&&(identical(other.firstInvalidInputPath, firstInvalidInputPath) || other.firstInvalidInputPath == firstInvalidInputPath));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is InProgressStatus&&const DeepCollectionEquality().equals(other._errors, _errors));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_errors),firstInvalidInputPath);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_errors));
 
 @override
 String toString() {
-  return 'WoFormStatus.inProgress(errors: $errors, firstInvalidInputPath: $firstInvalidInputPath)';
+  return 'WoFormStatus.inProgress(errors: $errors)';
 }
 
 
@@ -172,7 +171,7 @@ abstract mixin class $InProgressStatusCopyWith<$Res> implements $WoFormStatusCop
   factory $InProgressStatusCopyWith(InProgressStatus value, $Res Function(InProgressStatus) _then) = _$InProgressStatusCopyWithImpl;
 @useResult
 $Res call({
-@notSerializable List<WoFormInputError> errors, String? firstInvalidInputPath
+@notSerializable List<WoFormInputError> errors
 });
 
 
@@ -189,11 +188,10 @@ class _$InProgressStatusCopyWithImpl<$Res>
 
 /// Create a copy of WoFormStatus
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? errors = null,Object? firstInvalidInputPath = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? errors = null,}) {
   return _then(InProgressStatus(
 errors: null == errors ? _self._errors : errors // ignore: cast_nullable_to_non_nullable
-as List<WoFormInputError>,firstInvalidInputPath: freezed == firstInvalidInputPath ? _self.firstInvalidInputPath : firstInvalidInputPath // ignore: cast_nullable_to_non_nullable
-as String?,
+as List<WoFormInputError>,
   ));
 }
 

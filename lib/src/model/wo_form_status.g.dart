@@ -13,16 +13,10 @@ Map<String, dynamic> _$InitialStatusToJson(InitialStatus instance) =>
     <String, dynamic>{'runtimeType': instance.$type};
 
 InProgressStatus _$InProgressStatusFromJson(Map<String, dynamic> json) =>
-    InProgressStatus(
-      firstInvalidInputPath: json['firstInvalidInputPath'] as String?,
-      $type: json['runtimeType'] as String?,
-    );
+    InProgressStatus($type: json['runtimeType'] as String?);
 
 Map<String, dynamic> _$InProgressStatusToJson(InProgressStatus instance) =>
-    <String, dynamic>{
-      'firstInvalidInputPath': instance.firstInvalidInputPath,
-      'runtimeType': instance.$type,
-    };
+    <String, dynamic>{'runtimeType': instance.$type};
 
 SubmittingStatus _$SubmittingStatusFromJson(Map<String, dynamic> json) =>
     SubmittingStatus($type: json['runtimeType'] as String?);

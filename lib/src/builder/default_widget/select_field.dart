@@ -81,7 +81,7 @@ class SelectField<T> extends StatelessWidget {
                   value: query,
                 ),
             searchScreenBuilder: uiSettings?.searchScreenBuilder,
-            autofocus: data.input.uiSettings?.searchAutofocus ?? true,
+            searchInputUiSettings: data.input.uiSettings?.searchInputUiSettings,
             openSearchScreen: uiSettings?.openChildren,
             provider: ({required child}) => RepositoryProvider.value(
               value: context.read<RootNode>(),
@@ -148,7 +148,8 @@ class SelectField<T> extends StatelessWidget {
                         value: query,
                       ),
                   searchScreenBuilder: uiSettings?.searchScreenBuilder,
-                  autofocus: data.input.uiSettings?.searchAutofocus ?? true,
+                  searchInputUiSettings:
+                      data.input.uiSettings?.searchInputUiSettings,
                   openSearchScreen: uiSettings?.openChildren,
                   builder: (onPressed) => IconButton.filled(
                     onPressed: onPressed,
@@ -280,19 +281,40 @@ class _AlwaysVisibleSelectField<T> extends StatelessWidget {
             horizontal: 16,
             vertical: 4,
           ),
-          child: TextField(
-            controller: queryController,
-            decoration: const InputDecoration(
-              prefixIcon: Icon(Icons.search),
+          child: StringField(
+            WoFieldData(
+              path: 'not_needed',
+              input: StringInput(
+                id: 'not_needed',
+                uiSettings:
+                    data.input.uiSettings?.searchInputUiSettings?.merge(
+                      SearchScreen.defaultSearchInputUiSettings,
+                    ) ??
+                    SearchScreen.defaultSearchInputUiSettings,
+              ),
+              value: queryController.text,
+              onValueChanged:
+                  (
+                    _, {
+                    UpdateStatus updateStatus =
+                        UpdateStatus.yesWithoutErrorUpdateIfPathNotVisited,
+                  }) {},
             ),
-            autocorrect: false,
-            autofocus: data.input.uiSettings?.searchAutofocus ?? true,
-            // Flutter's default behaviour :
-            // - web : tapping outside instantly unfocuses the field.
-            // - mobile : tapping outside does nothing.
-            // wo_form decided to unfocus search fields on tap down.
-            onTapOutside: (event) => FocusScope.of(context).unfocus(),
           ),
+
+          // TextField(
+          //   controller: queryController,
+          //   decoration: const InputDecoration(
+          //     prefixIcon: Icon(Icons.search),
+          //   ),
+          //   autocorrect: false,
+          //   autofocus: data.input.uiSettings?.searchAutofocus ?? true,
+          //   // Flutter's default behaviour :
+          //   // - web : tapping outside instantly unfocuses the field.
+          //   // - mobile : tapping outside does nothing.
+          //   // wo_form decided to unfocus search fields on tap down.
+          //   onTapOutside: (event) => FocusScope.of(context).unfocus(),
+          // ),
         ),
       ...switch (future) {
         DataError() => [],
@@ -305,7 +327,7 @@ class _AlwaysVisibleSelectField<T> extends StatelessWidget {
                   Theme.of(context).progressIndicatorTheme.linearMinHeight ?? 4,
             ),
           if (results != null && results.isNotEmpty)
-            if ((this.data.input.uiSettings?.flex ?? 0) > 0)
+            if ((data.input.uiSettings?.flex ?? 0) > 0)
               Expanded(
                 child: ListView.builder(
                   itemCount: results.length,

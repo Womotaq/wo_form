@@ -565,10 +565,10 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
     @notSerializable ValueBuilderDef<T>? selectedBuilder,
     @notSerializable Widget? Function(T value)? helpValueBuilder,
 
-    /// Whether the search field should be autofocused when it appears or not.
+    /// Settings for the search input, in the search screen.
     ///
-    /// Defaults to true.
-    bool? searchAutofocus,
+    /// By default, autofocus is [WoFormAutofocus.yes].
+    StringInputUiSettings? searchInputUiSettings,
 
     /// Only used when [SelectInput.searchSettings] is set.
     @notSerializable SearchScreenDef<T>? searchScreenBuilder,
@@ -605,7 +605,9 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
           valueBuilder: valueBuilder ?? other.valueBuilder,
           selectedBuilder: selectedBuilder ?? other.selectedBuilder,
           helpValueBuilder: helpValueBuilder ?? other.helpValueBuilder,
-          searchAutofocus: searchAutofocus ?? other.searchAutofocus,
+          searchInputUiSettings:
+              searchInputUiSettings?.merge(other.searchInputUiSettings) ??
+              other.searchInputUiSettings,
           searchScreenBuilder: searchScreenBuilder ?? other.searchScreenBuilder,
           openChildren: openChildren ?? other.openChildren,
           headerBuilder: headerBuilder ?? other.headerBuilder,
