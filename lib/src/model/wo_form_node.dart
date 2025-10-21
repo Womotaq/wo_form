@@ -928,7 +928,7 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
         parentPath: '$parentPath/$id',
       ),
       RootNode _ => null,
-      final SelectorNode node =>
+      final SelectorNode<T> node =>
         node
             .builder!(
               context.select(
