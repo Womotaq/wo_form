@@ -173,6 +173,7 @@ class _StringFieldState extends State<StringField> {
             countries: placeAutocompleteSettings.countries
                 ?.map((isoCode) => isoCode.name)
                 .toList(),
+            debounceDuration: placeAutocompleteSettings.debounceDuration,
             onChanged: widget.onValueChanged,
             onFieldSubmitted:
                 (uiSettings?.submitFormOnFieldSubmitted ??

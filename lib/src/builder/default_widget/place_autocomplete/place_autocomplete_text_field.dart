@@ -227,47 +227,55 @@ class _PlaceAutoCompleteTextFieldState
     final offset = renderBox.localToGlobal(Offset.zero);
 
     return OverlayEntry(
-      builder: (context) => Positioned(
-        left: offset.dx,
-        top: size.height + offset.dy,
-        width: size.width,
-        child: CompositedTransformFollower(
-          showWhenUnlinked: false,
-          link: _layerLink,
-          offset: Offset(0, size.height + 5.0),
-          child: GestureDetector(
-            onPanDown: (_) => _overlayIsFocused = true,
-            onPanEnd: (_) => _overlayIsFocused = false,
-            onPanCancel: () => _overlayIsFocused = false,
-            child: Material(
-              elevation: 4,
-              child: ListView.separated(
-                padding: EdgeInsets.zero,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: predictions.length,
-                separatorBuilder: (context, pos) =>
-                    widget.seperatedBuilder ?? const SizedBox(),
-                itemBuilder: (BuildContext context, int index) {
-                  final prediction = predictions[index];
-                  return InkWell(
-                    onTap: () {
-                      widget.onChanged?.call(prediction.description);
-                      removeOverlay();
-                    },
-                    child: widget.itemBuilder != null
-                        ? widget.itemBuilder!(context, index, prediction)
-                        : Container(
-                            padding: const EdgeInsets.all(10),
-                            child: Text(prediction.description),
-                          ),
-                  );
-                },
+      builder: (context) {
+        final theme = Theme.of(context);
+
+        return Positioned(
+          left: offset.dx,
+          top: size.height + offset.dy,
+          width: size.width,
+          child: CompositedTransformFollower(
+            showWhenUnlinked: false,
+            link: _layerLink,
+            offset: Offset(0, size.height + 5.0),
+            child: GestureDetector(
+              onPanDown: (_) => _overlayIsFocused = true,
+              onPanEnd: (_) => _overlayIsFocused = false,
+              onPanCancel: () => _overlayIsFocused = false,
+              child: Material(
+                elevation: 4,
+                // Same color as text input
+                color: theme.inputDecorationTheme.filled
+                    ? theme.inputDecorationTheme.fillColor
+                    : null,
+                child: ListView.separated(
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: predictions.length,
+                  separatorBuilder: (context, pos) =>
+                      widget.seperatedBuilder ?? const SizedBox(),
+                  itemBuilder: (BuildContext context, int index) {
+                    final prediction = predictions[index];
+                    return InkWell(
+                      onTap: () {
+                        widget.onChanged?.call(prediction.description);
+                        removeOverlay();
+                      },
+                      child: widget.itemBuilder != null
+                          ? widget.itemBuilder!(context, index, prediction)
+                          : Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Text(prediction.description),
+                            ),
+                    );
+                  },
+                ),
               ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 

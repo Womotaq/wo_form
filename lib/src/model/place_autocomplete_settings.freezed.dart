@@ -16,9 +16,10 @@ T _$identity<T>(T value) => value;
 mixin _$PlaceAutocompleteSettings {
 
  PlaceType? get type;/// The list of countries in which restrict the research.
- List<IsoCode>? get countries;/// If true, extra data, like latitude & latitude,
-/// will be availible at '{pinputPath}+details'.
- bool get includeDetails;
+ List<IsoCode>? get countries;/// Time before a text entry triggers an API call to [PlaceRepositoryMixin].
+///
+/// Defaults to [WoFormTheme.DEBOUNCE_DURATION].
+ Duration? get debounceDuration;
 /// Create a copy of PlaceAutocompleteSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -31,16 +32,16 @@ $PlaceAutocompleteSettingsCopyWith<PlaceAutocompleteSettings> get copyWith => _$
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PlaceAutocompleteSettings&&(identical(other.type, type) || other.type == type)&&const DeepCollectionEquality().equals(other.countries, countries)&&(identical(other.includeDetails, includeDetails) || other.includeDetails == includeDetails));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PlaceAutocompleteSettings&&(identical(other.type, type) || other.type == type)&&const DeepCollectionEquality().equals(other.countries, countries)&&(identical(other.debounceDuration, debounceDuration) || other.debounceDuration == debounceDuration));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,type,const DeepCollectionEquality().hash(countries),includeDetails);
+int get hashCode => Object.hash(runtimeType,type,const DeepCollectionEquality().hash(countries),debounceDuration);
 
 @override
 String toString() {
-  return 'PlaceAutocompleteSettings(type: $type, countries: $countries, includeDetails: $includeDetails)';
+  return 'PlaceAutocompleteSettings(type: $type, countries: $countries, debounceDuration: $debounceDuration)';
 }
 
 
@@ -51,7 +52,7 @@ abstract mixin class $PlaceAutocompleteSettingsCopyWith<$Res>  {
   factory $PlaceAutocompleteSettingsCopyWith(PlaceAutocompleteSettings value, $Res Function(PlaceAutocompleteSettings) _then) = _$PlaceAutocompleteSettingsCopyWithImpl;
 @useResult
 $Res call({
- PlaceType? type, List<IsoCode>? countries, bool includeDetails
+ PlaceType? type, List<IsoCode>? countries, Duration? debounceDuration
 });
 
 
@@ -68,12 +69,12 @@ class _$PlaceAutocompleteSettingsCopyWithImpl<$Res>
 
 /// Create a copy of PlaceAutocompleteSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? type = freezed,Object? countries = freezed,Object? includeDetails = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? type = freezed,Object? countries = freezed,Object? debounceDuration = freezed,}) {
   return _then(_self.copyWith(
 type: freezed == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as PlaceType?,countries: freezed == countries ? _self.countries : countries // ignore: cast_nullable_to_non_nullable
-as List<IsoCode>?,includeDetails: null == includeDetails ? _self.includeDetails : includeDetails // ignore: cast_nullable_to_non_nullable
-as bool,
+as List<IsoCode>?,debounceDuration: freezed == debounceDuration ? _self.debounceDuration : debounceDuration // ignore: cast_nullable_to_non_nullable
+as Duration?,
   ));
 }
 
@@ -85,7 +86,7 @@ as bool,
 @JsonSerializable()
 
 class _PlaceAutocompleteSettings extends PlaceAutocompleteSettings {
-  const _PlaceAutocompleteSettings({this.type, final  List<IsoCode>? countries, this.includeDetails = true}): _countries = countries,super._();
+  const _PlaceAutocompleteSettings({this.type, final  List<IsoCode>? countries, this.debounceDuration}): _countries = countries,super._();
   factory _PlaceAutocompleteSettings.fromJson(Map<String, dynamic> json) => _$PlaceAutocompleteSettingsFromJson(json);
 
 @override final  PlaceType? type;
@@ -100,9 +101,10 @@ class _PlaceAutocompleteSettings extends PlaceAutocompleteSettings {
   return EqualUnmodifiableListView(value);
 }
 
-/// If true, extra data, like latitude & latitude,
-/// will be availible at '{pinputPath}+details'.
-@override@JsonKey() final  bool includeDetails;
+/// Time before a text entry triggers an API call to [PlaceRepositoryMixin].
+///
+/// Defaults to [WoFormTheme.DEBOUNCE_DURATION].
+@override final  Duration? debounceDuration;
 
 /// Create a copy of PlaceAutocompleteSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -117,16 +119,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PlaceAutocompleteSettings&&(identical(other.type, type) || other.type == type)&&const DeepCollectionEquality().equals(other._countries, _countries)&&(identical(other.includeDetails, includeDetails) || other.includeDetails == includeDetails));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PlaceAutocompleteSettings&&(identical(other.type, type) || other.type == type)&&const DeepCollectionEquality().equals(other._countries, _countries)&&(identical(other.debounceDuration, debounceDuration) || other.debounceDuration == debounceDuration));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,type,const DeepCollectionEquality().hash(_countries),includeDetails);
+int get hashCode => Object.hash(runtimeType,type,const DeepCollectionEquality().hash(_countries),debounceDuration);
 
 @override
 String toString() {
-  return 'PlaceAutocompleteSettings(type: $type, countries: $countries, includeDetails: $includeDetails)';
+  return 'PlaceAutocompleteSettings(type: $type, countries: $countries, debounceDuration: $debounceDuration)';
 }
 
 
@@ -137,7 +139,7 @@ abstract mixin class _$PlaceAutocompleteSettingsCopyWith<$Res> implements $Place
   factory _$PlaceAutocompleteSettingsCopyWith(_PlaceAutocompleteSettings value, $Res Function(_PlaceAutocompleteSettings) _then) = __$PlaceAutocompleteSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- PlaceType? type, List<IsoCode>? countries, bool includeDetails
+ PlaceType? type, List<IsoCode>? countries, Duration? debounceDuration
 });
 
 
@@ -154,12 +156,12 @@ class __$PlaceAutocompleteSettingsCopyWithImpl<$Res>
 
 /// Create a copy of PlaceAutocompleteSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? type = freezed,Object? countries = freezed,Object? includeDetails = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? type = freezed,Object? countries = freezed,Object? debounceDuration = freezed,}) {
   return _then(_PlaceAutocompleteSettings(
 type: freezed == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as PlaceType?,countries: freezed == countries ? _self._countries : countries // ignore: cast_nullable_to_non_nullable
-as List<IsoCode>?,includeDetails: null == includeDetails ? _self.includeDetails : includeDetails // ignore: cast_nullable_to_non_nullable
-as bool,
+as List<IsoCode>?,debounceDuration: freezed == debounceDuration ? _self.debounceDuration : debounceDuration // ignore: cast_nullable_to_non_nullable
+as Duration?,
   ));
 }
 

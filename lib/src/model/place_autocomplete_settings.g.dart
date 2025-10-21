@@ -13,7 +13,9 @@ _PlaceAutocompleteSettings _$PlaceAutocompleteSettingsFromJson(
   countries: (json['countries'] as List<dynamic>?)
       ?.map((e) => $enumDecode(_$IsoCodeEnumMap, e))
       .toList(),
-  includeDetails: json['includeDetails'] as bool? ?? true,
+  debounceDuration: json['debounceDuration'] == null
+      ? null
+      : Duration(microseconds: (json['debounceDuration'] as num).toInt()),
 );
 
 Map<String, dynamic> _$PlaceAutocompleteSettingsToJson(
@@ -21,7 +23,7 @@ Map<String, dynamic> _$PlaceAutocompleteSettingsToJson(
 ) => <String, dynamic>{
   'type': _$PlaceTypeEnumMap[instance.type],
   'countries': instance.countries?.map((e) => e.toJson()).toList(),
-  'includeDetails': instance.includeDetails,
+  'debounceDuration': instance.debounceDuration?.inMicroseconds,
 };
 
 const _$PlaceTypeEnumMap = {
