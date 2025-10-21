@@ -78,9 +78,11 @@ class _PlaceAutoCompleteTextFieldState
     extends State<PlaceAutocompleteTextField> {
   final subject = PublishSubject<String>();
   late final FocusNode _focusNode;
+  late final bool _ownFocusNode;
   bool _overlayIsFocused = false;
   OverlayEntry? _overlayEntry;
   List<PlacePrediction> predictions = [];
+  int _requestId = 0;
 
   final LayerLink _layerLink = LayerLink();
 
@@ -93,18 +95,18 @@ class _PlaceAutoCompleteTextFieldState
         .listen(textChanged);
 
     // Add focus listener
+
+    _ownFocusNode = widget.focusNode == null;
     _focusNode = widget.focusNode ?? FocusNode();
-    _focusNode.addListener(() {
-      if (!_focusNode.hasFocus && !_overlayIsFocused) {
-        removeOverlay();
-      }
-    });
+    _focusNode.addListener(focusListener);
   }
 
   @override
   void dispose() {
     unawaited(subject.close());
     removeOverlay();
+    _focusNode.removeListener(focusListener);
+    if (_ownFocusNode) _focusNode.dispose();
     super.dispose();
   }
 
@@ -148,8 +150,9 @@ class _PlaceAutoCompleteTextFieldState
   }
 
   Future<void> updatePredictions(String text) async {
-    // TODO : requestId
     if (text.isEmpty) return removeOverlay();
+    // requestId: ensure we ignore out-of-order responses
+    final currentRequest = ++_requestId;
 
     final language = widget.language ?? Intl.defaultLocale;
     var input = '$text&language=$language';
@@ -195,8 +198,10 @@ class _PlaceAutoCompleteTextFieldState
     try {
       final response = await getPlacePredictions(input);
 
-      if (kDebugMode && context.mounted) {
-        // ignore: use_build_context_synchronously
+      // If a newer request was started while we awaited, ignore this response
+      if (currentRequest != _requestId || !mounted) return;
+
+      if (kDebugMode) {
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
       }
 
@@ -211,11 +216,13 @@ class _PlaceAutoCompleteTextFieldState
 
       _overlayEntry?.remove();
       _overlayEntry = _createOverlayEntry();
-      if (context.mounted) {
-        // ignore: use_build_context_synchronously
+      if (mounted) {
         Overlay.of(context).insert(_overlayEntry!);
       }
     } catch (e) {
+      // If a newer request was started, ignore the error from this stale
+      // request
+      if (currentRequest != _requestId) return;
       if (kDebugMode) _showSnackBar('An error occured : $e');
     }
   }
@@ -239,9 +246,9 @@ class _PlaceAutoCompleteTextFieldState
             link: _layerLink,
             offset: Offset(0, size.height + 5.0),
             child: GestureDetector(
-              onPanDown: (_) => _overlayIsFocused = true,
-              onPanEnd: (_) => _overlayIsFocused = false,
-              onPanCancel: () => _overlayIsFocused = false,
+              onTapDown: (_) => _overlayIsFocused = true,
+              onTapCancel: () => _overlayIsFocused = false,
+              onTapUp: (_) => _overlayIsFocused = false,
               child: Material(
                 elevation: 4,
                 // Same color as text input
@@ -259,6 +266,8 @@ class _PlaceAutoCompleteTextFieldState
                     final prediction = predictions[index];
                     return InkWell(
                       onTap: () {
+                        widget.textEditingController.text =
+                            prediction.description;
                         widget.onChanged?.call(prediction.description);
                         removeOverlay();
                       },
@@ -277,6 +286,12 @@ class _PlaceAutoCompleteTextFieldState
         );
       },
     );
+  }
+
+  void focusListener() {
+    if (!_focusNode.hasFocus && !_overlayIsFocused) {
+      removeOverlay();
+    }
   }
 
   void removeOverlay() {
