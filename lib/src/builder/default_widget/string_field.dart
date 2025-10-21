@@ -1,47 +1,49 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:phone_form_field/phone_form_field.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:wo_form/src/builder/default_widget/flex_field.dart';
-import 'package:wo_form/src/builder/default_widget/place_autocomplete/_export.dart';
 import 'package:wo_form/wo_form.dart';
 
-class StringField extends StatefulWidget {
+class StringField<T extends Object?> extends StatefulWidget {
   const StringField({
     required this.text,
     required this.onValueChanged,
     this.uiSettings,
-    this.placeAutocompleteSettings,
+    this.suggestionsSettings,
     this.errorText,
     this.errorWidget,
     super.key,
   });
 
-  factory StringField.fromData(WoFieldData<StringInput, String> data) =>
-      StringField(
+  factory StringField.fromData(WoFieldData<StringInput<T>, String> data) =>
+      StringField<T>(
         text: data.value,
         onValueChanged: data.onValueChanged,
         uiSettings: data.input.uiSettings,
-        placeAutocompleteSettings: data.input.placeAutocompleteSettings,
+        suggestionsSettings: data.input.suggestionsSettings,
         errorText: data.errorText,
         errorWidget: data.errorWidget,
       );
 
   final String? text;
   final void Function(String? text)? onValueChanged;
-  final StringInputUiSettings? uiSettings;
-  final PlaceAutocompleteSettings? placeAutocompleteSettings;
+  final StringInputUiSettings<T>? uiSettings;
+  final SuggestionsSettings<T>? suggestionsSettings;
   final String? errorText;
   final Widget? errorWidget;
   // final WoFieldData<StringInput, String> data;
 
   @override
-  State<StringField> createState() => _StringFieldState();
+  State<StringField> createState() => _StringFieldState<T>();
 }
 
-class _StringFieldState extends State<StringField> {
+class _StringFieldState<T> extends State<StringField<T>> {
   TextEditingController? textEditingController;
   PhoneController? phoneController;
   late final bool autofocus;
@@ -163,17 +165,14 @@ class _StringFieldState extends State<StringField> {
             },
           );
 
-    final placeAutocompleteSettings = widget.placeAutocompleteSettings;
+    final suggestionsSettings = widget.suggestionsSettings;
 
-    final textField = placeAutocompleteSettings != null
-        ? PlaceAutocompleteTextField(
+    final textField = suggestionsSettings != null
+        ? SuggestionsTextField<T>(
+            suggestionsSettings: suggestionsSettings,
             textEditingController: textEditingController!,
             inputDecoration: inputDecoration,
             textInputAction: uiSettings?.textInputAction,
-            countries: placeAutocompleteSettings.countries
-                ?.map((isoCode) => isoCode.name)
-                .toList(),
-            debounceDuration: placeAutocompleteSettings.debounceDuration,
             onChanged: widget.onValueChanged,
             onFieldSubmitted:
                 (uiSettings?.submitFormOnFieldSubmitted ??
@@ -195,27 +194,6 @@ class _StringFieldState extends State<StringField> {
               }
               tapPosition = null;
             },
-            itemBuilder: (context, index, PlacePrediction prediction) =>
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8,
-                  ),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.location_on),
-                      const SizedBox(width: 7),
-                      Expanded(
-                        child: Text(
-                          prediction.description,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-            placeType: placeAutocompleteSettings.type,
           )
         : uiSettings?.keyboardType == TextInputType.phone
         ? PhoneFormField(
@@ -315,4 +293,255 @@ class _StringFieldState extends State<StringField> {
         TextInputAction.newline => false,
         _ => true,
       };
+}
+
+// TODO : keyboard navigation in suggestions
+
+class SuggestionsTextField<T> extends StatefulWidget {
+  const SuggestionsTextField({
+    required this.suggestionsSettings,
+    required this.textEditingController,
+    required this.onChanged,
+
+    // Ui
+    this.seperatedBuilder,
+
+    // TextField parameters
+    this.inputDecoration,
+    this.textStyle,
+    this.focusNode,
+    this.textInputAction,
+    this.autofocus = false,
+    this.textCapitalization,
+    this.onFieldSubmitted,
+    this.onTapOutside,
+    this.onTapUpOutside,
+    super.key,
+  });
+
+  final SuggestionsSettings<T> suggestionsSettings;
+  final void Function(String? text)? onChanged;
+
+  /// --- UI ---
+  final Widget? seperatedBuilder;
+
+  /// --- TEXT FIELD ---
+  final InputDecoration? inputDecoration;
+  final TextStyle? textStyle;
+  final TextEditingController textEditingController;
+  final FocusNode? focusNode;
+  final TextInputAction? textInputAction;
+  final bool autofocus;
+  final TextCapitalization? textCapitalization;
+  final ValueChanged<String>? onFieldSubmitted;
+  final ValueChanged<PointerEvent>? onTapOutside;
+  final ValueChanged<PointerUpEvent>? onTapUpOutside;
+
+  @override
+  State<SuggestionsTextField<T>> createState() => _SuggestionsTextFieldState();
+}
+
+class _SuggestionsTextFieldState<T> extends State<SuggestionsTextField<T>> {
+  final subject = PublishSubject<String>();
+  late final FocusNode _focusNode;
+  late final bool _ownFocusNode;
+  bool _overlayIsFocused = false;
+  OverlayEntry? _overlayEntry;
+  final List<T> _suggestions = [];
+  int _requestId = 0;
+
+  final LayerLink _layerLink = LayerLink();
+
+  @override
+  void initState() {
+    super.initState();
+    subject.stream
+        .distinct()
+        .debounceTime(
+          widget.suggestionsSettings.debounceDuration ??
+              WoFormTheme.DEBOUNCE_DURATION,
+        )
+        .listen(textChanged);
+
+    // Add focus listener
+
+    _ownFocusNode = widget.focusNode == null;
+    _focusNode = widget.focusNode ?? FocusNode();
+    _focusNode.addListener(focusListener);
+  }
+
+  @override
+  void dispose() {
+    unawaited(subject.close());
+    removeOverlay();
+    _focusNode.removeListener(focusListener);
+    if (_ownFocusNode) _focusNode.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CompositedTransformTarget(
+      link: _layerLink,
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Row(
+          children: [
+            Expanded(
+              child: TextFormField(
+                decoration: widget.inputDecoration,
+                style: widget.textStyle,
+                controller: widget.textEditingController,
+                focusNode: _focusNode,
+                autofocus: widget.autofocus,
+                textInputAction: widget.textInputAction ?? TextInputAction.done,
+                textCapitalization:
+                    widget.textCapitalization ?? TextCapitalization.none,
+                onFieldSubmitted: widget.onFieldSubmitted,
+                onChanged: subject.add,
+                onTapOutside: widget.onTapOutside,
+                onTapUpOutside: widget.onTapUpOutside,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void textChanged(String text) {
+    if (text.isNotEmpty) {
+      unawaited(updatePredictions(text));
+    } else {
+      removeOverlay();
+    }
+    widget.onChanged?.call(text);
+  }
+
+  Future<void> updatePredictions(String text) async {
+    if (text.isEmpty) return removeOverlay();
+    // requestId: ensure we ignore out-of-order responses
+    final currentRequest = ++_requestId;
+
+    try {
+      final suggestions = await widget.suggestionsSettings.loadSuggestions(
+        text,
+      );
+
+      // If a newer request was started while we awaited, ignore this response
+      if (currentRequest != _requestId || !mounted) return;
+
+      _suggestions
+        ..clear()
+        ..addAll(suggestions);
+
+      _overlayEntry?.remove();
+      _overlayEntry = _createOverlayEntry();
+      if (mounted) {
+        Overlay.of(context).insert(_overlayEntry!);
+      }
+    } catch (e) {
+      // If a newer request was started, ignore the error from this stale
+      // request
+      if (currentRequest != _requestId) return;
+
+      // TODO : use a context provided error handler
+      if (kDebugMode) _showSnackBar('An error occured : $e');
+    }
+  }
+
+  OverlayEntry? _createOverlayEntry() {
+    final renderBox = context.findRenderObject() as RenderBox?;
+    if (renderBox == null) return null;
+    final size = renderBox.size;
+    final offset = renderBox.localToGlobal(Offset.zero);
+
+    return OverlayEntry(
+      builder: (context) {
+        final theme = Theme.of(context);
+
+        return Positioned(
+          left: offset.dx,
+          top: size.height + offset.dy,
+          width: size.width,
+          child: CompositedTransformFollower(
+            showWhenUnlinked: false,
+            link: _layerLink,
+            offset: Offset(0, size.height + 5.0),
+            child: GestureDetector(
+              onTapDown: (_) => _overlayIsFocused = true,
+              onTapCancel: () => _overlayIsFocused = false,
+              onTapUp: (_) => _overlayIsFocused = false,
+              child: Material(
+                elevation: 4,
+                // Same color as text input
+                color: theme.inputDecorationTheme.filled
+                    ? theme.inputDecorationTheme.fillColor
+                    : null,
+                child: ListView.separated(
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: _suggestions.length,
+                  separatorBuilder: (context, pos) =>
+                      widget.seperatedBuilder ?? const SizedBox(),
+                  itemBuilder: (BuildContext context, int index) {
+                    final suggestion = _suggestions[index];
+                    return InkWell(
+                      onTap: () {
+                        final newText =
+                            widget.suggestionsSettings.suggestionToText?.call(
+                              suggestion,
+                            ) ??
+                            suggestion.toString();
+
+                        widget.textEditingController.text = newText;
+                        widget.onChanged?.call(newText);
+                        removeOverlay();
+                      },
+                      child:
+                          widget.suggestionsSettings.suggestionTileBuilder !=
+                              null
+                          ? widget.suggestionsSettings.suggestionTileBuilder!(
+                              suggestion,
+                            )
+                          : Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Text(
+                                widget.suggestionsSettings.suggestionToText
+                                        ?.call(suggestion) ??
+                                    suggestion.toString(),
+                              ),
+                            ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void focusListener() {
+    if (!_focusNode.hasFocus && !_overlayIsFocused) {
+      removeOverlay();
+    }
+  }
+
+  void removeOverlay() {
+    _suggestions.clear();
+    _overlayEntry?.remove();
+    _overlayEntry = null;
+    _overlayIsFocused = false;
+  }
+
+  void _showSnackBar(String errorData) {
+    if (kDebugMode) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(errorData)),
+      );
+    }
+  }
 }

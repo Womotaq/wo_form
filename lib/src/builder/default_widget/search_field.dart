@@ -63,7 +63,7 @@ class SearchField<T> extends StatelessWidget {
   final Widget Function({required Widget child})? provider;
   final LayoutMethod searchScreenLayout;
   final SearchScreenDef<T>? searchScreenBuilder;
-  final StringInputUiSettings? searchInputUiSettings;
+  final StringInputUiSettings<T>? searchInputUiSettings;
   final PushDef? openSearchScreen;
 
   @override
@@ -212,7 +212,7 @@ typedef SearchScreenDef<T> =
       WoFormQuery? initialQuery,
       void Function(WoFormQuery query)? onQueryChanged,
       LayoutMethod layout,
-      StringInputUiSettings? searchInputUiSettings,
+      StringInputUiSettings<T>? searchInputUiSettings,
       Key? key,
     });
 
@@ -240,10 +240,11 @@ class SearchScreen<T> extends StatelessWidget {
   final WoFormQuery? initialQuery;
   final LayoutMethod layout;
   final Widget? onNotFound;
-  final StringInputUiSettings? searchInputUiSettings;
+  final StringInputUiSettings<T>? searchInputUiSettings;
 
-  static const defaultSearchInputUiSettings = StringInputUiSettings(
-    prefixIcon: Icon(Icons.search),
+  static StringInputUiSettings<T>
+  defaultSearchInputUiSettings<T extends Object?>() => StringInputUiSettings(
+    prefixIcon: const Icon(Icons.search),
     prefixIconLocation: StringFieldLocation.inside,
     autofocus: WoFormAutofocus.yes,
     action: StringFieldAction.clear,
@@ -268,9 +269,9 @@ class SearchScreen<T> extends StatelessWidget {
             text: textController.text,
             uiSettings:
                 searchInputUiSettings?.merge(
-                  SearchScreen.defaultSearchInputUiSettings,
+                  SearchScreen.defaultSearchInputUiSettings(),
                 ) ??
-                SearchScreen.defaultSearchInputUiSettings,
+                SearchScreen.defaultSearchInputUiSettings(),
             onValueChanged: (text) => textController.text = text ?? '',
           ),
 

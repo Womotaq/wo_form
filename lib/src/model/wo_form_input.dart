@@ -125,10 +125,9 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
     /// on the value provided by a [ValueBuilderNode] for example.
     @Default(false) bool isLocked,
 
-    /// If set, the field will be a place autocomplete.
-    PlaceAutocompleteSettings? placeAutocompleteSettings,
+    @notSerializable SuggestionsSettings<T>? suggestionsSettings,
     @notSerializable GetCustomErrorDef<String>? getCustomError,
-    StringInputUiSettings? uiSettings,
+    StringInputUiSettings<T>? uiSettings,
   }) = StringInput;
 
   const WoFormInput._() : super._();
@@ -441,7 +440,7 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
       case NumInput():
         return NumFieldBuilder(key: key, path: path);
       case StringInput():
-        return StringFieldBuilder(key: key, path: path);
+        return StringFieldBuilder<T>(key: key, path: path);
       case SelectInput():
         return SelectFieldBuilder<T>(key: key, path: path);
     }

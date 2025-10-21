@@ -2134,7 +2134,7 @@ $NumInputUiSettingsCopyWith<$Res>? get uiSettings {
 @JsonSerializable()
 
 class StringInput<T extends Object?> extends WoFormInput<T> {
-  const StringInput({required this.id, this.initialValue, this.isRequired = false, this.regexPattern, this.isLocked = false, this.placeAutocompleteSettings, @notSerializable this.getCustomError, this.uiSettings, final  String? $type}): $type = $type ?? 'string',super._();
+  const StringInput({required this.id, this.initialValue, this.isRequired = false, this.regexPattern, this.isLocked = false, @notSerializable this.suggestionsSettings, @notSerializable this.getCustomError, this.uiSettings, final  String? $type}): $type = $type ?? 'string',super._();
   factory StringInput.fromJson(Map<String, dynamic> json) => _$StringInputFromJson(json);
 
 @override final  String id;
@@ -2144,10 +2144,9 @@ class StringInput<T extends Object?> extends WoFormInput<T> {
 /// Use [isLocked] if you want to lock / unlock this input based
 /// on the value provided by a [ValueBuilderNode] for example.
 @JsonKey() final  bool isLocked;
-/// If set, the field will be a place autocomplete.
- final  PlaceAutocompleteSettings? placeAutocompleteSettings;
+@notSerializable final  SuggestionsSettings<T>? suggestionsSettings;
 @override@notSerializable final  GetCustomErrorDef<String>? getCustomError;
-@override final  StringInputUiSettings? uiSettings;
+@override final  StringInputUiSettings<T>? uiSettings;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -2166,16 +2165,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StringInput<T>&&(identical(other.id, id) || other.id == id)&&(identical(other.initialValue, initialValue) || other.initialValue == initialValue)&&(identical(other.isRequired, isRequired) || other.isRequired == isRequired)&&(identical(other.regexPattern, regexPattern) || other.regexPattern == regexPattern)&&(identical(other.isLocked, isLocked) || other.isLocked == isLocked)&&(identical(other.placeAutocompleteSettings, placeAutocompleteSettings) || other.placeAutocompleteSettings == placeAutocompleteSettings)&&(identical(other.getCustomError, getCustomError) || other.getCustomError == getCustomError)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StringInput<T>&&(identical(other.id, id) || other.id == id)&&(identical(other.initialValue, initialValue) || other.initialValue == initialValue)&&(identical(other.isRequired, isRequired) || other.isRequired == isRequired)&&(identical(other.regexPattern, regexPattern) || other.regexPattern == regexPattern)&&(identical(other.isLocked, isLocked) || other.isLocked == isLocked)&&(identical(other.suggestionsSettings, suggestionsSettings) || other.suggestionsSettings == suggestionsSettings)&&(identical(other.getCustomError, getCustomError) || other.getCustomError == getCustomError)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,initialValue,isRequired,regexPattern,isLocked,placeAutocompleteSettings,getCustomError,uiSettings);
+int get hashCode => Object.hash(runtimeType,id,initialValue,isRequired,regexPattern,isLocked,suggestionsSettings,getCustomError,uiSettings);
 
 @override
 String toString() {
-  return 'WoFormInput<$T>.string(id: $id, initialValue: $initialValue, isRequired: $isRequired, regexPattern: $regexPattern, isLocked: $isLocked, placeAutocompleteSettings: $placeAutocompleteSettings, getCustomError: $getCustomError, uiSettings: $uiSettings)';
+  return 'WoFormInput<$T>.string(id: $id, initialValue: $initialValue, isRequired: $isRequired, regexPattern: $regexPattern, isLocked: $isLocked, suggestionsSettings: $suggestionsSettings, getCustomError: $getCustomError, uiSettings: $uiSettings)';
 }
 
 
@@ -2186,11 +2185,11 @@ abstract mixin class $StringInputCopyWith<T extends Object?,$Res> implements $Wo
   factory $StringInputCopyWith(StringInput<T> value, $Res Function(StringInput<T>) _then) = _$StringInputCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String? initialValue, bool isRequired, String? regexPattern, bool isLocked, PlaceAutocompleteSettings? placeAutocompleteSettings,@notSerializable GetCustomErrorDef<String>? getCustomError, StringInputUiSettings? uiSettings
+ String id, String? initialValue, bool isRequired, String? regexPattern, bool isLocked,@notSerializable SuggestionsSettings<T>? suggestionsSettings,@notSerializable GetCustomErrorDef<String>? getCustomError, StringInputUiSettings<T>? uiSettings
 });
 
 
-$PlaceAutocompleteSettingsCopyWith<$Res>? get placeAutocompleteSettings;$StringInputUiSettingsCopyWith<$Res>? get uiSettings;
+$SuggestionsSettingsCopyWith<T, $Res>? get suggestionsSettings;$StringInputUiSettingsCopyWith<T, $Res>? get uiSettings;
 
 }
 /// @nodoc
@@ -2203,17 +2202,17 @@ class _$StringInputCopyWithImpl<T extends Object?,$Res>
 
 /// Create a copy of WoFormInput
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? initialValue = freezed,Object? isRequired = null,Object? regexPattern = freezed,Object? isLocked = null,Object? placeAutocompleteSettings = freezed,Object? getCustomError = freezed,Object? uiSettings = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? initialValue = freezed,Object? isRequired = null,Object? regexPattern = freezed,Object? isLocked = null,Object? suggestionsSettings = freezed,Object? getCustomError = freezed,Object? uiSettings = freezed,}) {
   return _then(StringInput<T>(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,initialValue: freezed == initialValue ? _self.initialValue : initialValue // ignore: cast_nullable_to_non_nullable
 as String?,isRequired: null == isRequired ? _self.isRequired : isRequired // ignore: cast_nullable_to_non_nullable
 as bool,regexPattern: freezed == regexPattern ? _self.regexPattern : regexPattern // ignore: cast_nullable_to_non_nullable
 as String?,isLocked: null == isLocked ? _self.isLocked : isLocked // ignore: cast_nullable_to_non_nullable
-as bool,placeAutocompleteSettings: freezed == placeAutocompleteSettings ? _self.placeAutocompleteSettings : placeAutocompleteSettings // ignore: cast_nullable_to_non_nullable
-as PlaceAutocompleteSettings?,getCustomError: freezed == getCustomError ? _self.getCustomError : getCustomError // ignore: cast_nullable_to_non_nullable
+as bool,suggestionsSettings: freezed == suggestionsSettings ? _self.suggestionsSettings : suggestionsSettings // ignore: cast_nullable_to_non_nullable
+as SuggestionsSettings<T>?,getCustomError: freezed == getCustomError ? _self.getCustomError : getCustomError // ignore: cast_nullable_to_non_nullable
 as GetCustomErrorDef<String>?,uiSettings: freezed == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
-as StringInputUiSettings?,
+as StringInputUiSettings<T>?,
   ));
 }
 
@@ -2221,24 +2220,24 @@ as StringInputUiSettings?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$PlaceAutocompleteSettingsCopyWith<$Res>? get placeAutocompleteSettings {
-    if (_self.placeAutocompleteSettings == null) {
+$SuggestionsSettingsCopyWith<T, $Res>? get suggestionsSettings {
+    if (_self.suggestionsSettings == null) {
     return null;
   }
 
-  return $PlaceAutocompleteSettingsCopyWith<$Res>(_self.placeAutocompleteSettings!, (value) {
-    return _then(_self.copyWith(placeAutocompleteSettings: value));
+  return $SuggestionsSettingsCopyWith<T, $Res>(_self.suggestionsSettings!, (value) {
+    return _then(_self.copyWith(suggestionsSettings: value));
   });
 }/// Create a copy of WoFormInput
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$StringInputUiSettingsCopyWith<$Res>? get uiSettings {
+$StringInputUiSettingsCopyWith<T, $Res>? get uiSettings {
     if (_self.uiSettings == null) {
     return null;
   }
 
-  return $StringInputUiSettingsCopyWith<$Res>(_self.uiSettings!, (value) {
+  return $StringInputUiSettingsCopyWith<T, $Res>(_self.uiSettings!, (value) {
     return _then(_self.copyWith(uiSettings: value));
   });
 }

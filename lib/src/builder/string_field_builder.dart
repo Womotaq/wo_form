@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/src/utils/initial_value_keeper.dart';
 import 'package:wo_form/wo_form.dart';
 
-class StringFieldBuilder extends StatelessWidget {
+class StringFieldBuilder<T extends Object?> extends StatelessWidget {
   const StringFieldBuilder({
     required this.path,
     this.uiSettings,
@@ -11,7 +11,7 @@ class StringFieldBuilder extends StatelessWidget {
   });
 
   final String path;
-  final StringInputUiSettings? uiSettings;
+  final StringInputUiSettings<T>? uiSettings;
 
   @override
   Widget build(BuildContext context) {
@@ -79,11 +79,11 @@ class StringFieldBuilder extends StatelessWidget {
     );
   }
 
-  StringInput getNode(BuildContext context) {
+  StringInput<T> getNode(BuildContext context) {
     final input = context.read<WoFormValuesCubit>().getNode(path: path);
-    if (input is! StringInput) {
+    if (input is! StringInput<T>) {
       throw ArgumentError(
-        'Expected <StringInput> at path: "$path", '
+        'Expected <StringInput<$T>> at path: "$path", '
         'found: <${input.runtimeType}>',
       );
     }

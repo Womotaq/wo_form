@@ -568,7 +568,7 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
     /// Settings for the search input, in the search screen.
     ///
     /// By default, autofocus is [WoFormAutofocus.yes].
-    StringInputUiSettings? searchInputUiSettings,
+    StringInputUiSettings<T>? searchInputUiSettings,
 
     /// Only used when [SelectInput.searchSettings] is set.
     @notSerializable SearchScreenDef<T>? searchScreenBuilder,
@@ -645,12 +645,12 @@ enum WoFormAutofocus {
   no,
 }
 
-typedef StringFieldBuilderDef =
-    Widget Function(WoFieldData<StringInput, String> data);
+typedef StringFieldBuilderDef<T extends Object?> =
+    Widget Function(WoFieldData<StringInput<T>, String> data);
 typedef ErrorBuilderDef = Widget Function(WoFormInputError error);
 
 @freezed
-abstract class StringInputUiSettings with _$StringInputUiSettings {
+abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
   const factory StringInputUiSettings({
     /// Requires [WoFormUiSettings.layout] at [LayoutMethod.flexible].
     int? flex,
@@ -716,9 +716,9 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
     bool? collapsed,
     @EdgeInsetsNullableConverter() EdgeInsets? padding,
     @notSerializable TextStyle? style,
-    @notSerializable StringFieldBuilderDef? widgetBuilder,
+    @notSerializable StringFieldBuilderDef<T>? widgetBuilder,
     @notSerializable ErrorBuilderDef? errorBuilder,
-  }) = _StringInputUiSettings;
+  }) = _StringInputUiSettings<T>;
 
   factory StringInputUiSettings.email({
     int? flex,
@@ -872,7 +872,8 @@ abstract class StringInputUiSettings with _$StringInputUiSettings {
   factory StringInputUiSettings.fromJson(Json json) =>
       _$StringInputUiSettingsFromJson(json);
 
-  StringInputUiSettings merge(StringInputUiSettings? other) => other == null
+  StringInputUiSettings<T> merge(StringInputUiSettings<T>? other) =>
+      other == null
       ? this
       : StringInputUiSettings(
           flex: flex ?? other.flex,

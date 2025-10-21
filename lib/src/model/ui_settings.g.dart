@@ -345,7 +345,7 @@ _SelectInputUiSettings<T> _$SelectInputUiSettingsFromJson<T>(
   headerFlex: (json['headerFlex'] as num?)?.toInt(),
   searchInputUiSettings: json['searchInputUiSettings'] == null
       ? null
-      : StringInputUiSettings.fromJson(
+      : StringInputUiSettings<T>.fromJson(
           json['searchInputUiSettings'] as Map<String, dynamic>,
         ),
   openChildren: const PushDefNullableConverter().fromJson(
@@ -369,9 +369,9 @@ Map<String, dynamic> _$SelectInputUiSettingsToJson<T>(
   ),
 };
 
-_StringInputUiSettings _$StringInputUiSettingsFromJson(
+_StringInputUiSettings<T> _$StringInputUiSettingsFromJson<T>(
   Map<String, dynamic> json,
-) => _StringInputUiSettings(
+) => _StringInputUiSettings<T>(
   flex: (json['flex'] as num?)?.toInt(),
   headerFlex: (json['headerFlex'] as num?)?.toInt(),
   labelText: json['labelText'] as String?,
@@ -421,8 +421,8 @@ _StringInputUiSettings _$StringInputUiSettingsFromJson(
   ),
 );
 
-Map<String, dynamic> _$StringInputUiSettingsToJson(
-  _StringInputUiSettings instance,
+Map<String, dynamic> _$StringInputUiSettingsToJson<T>(
+  _StringInputUiSettings<T> instance,
 ) => <String, dynamic>{
   'flex': instance.flex,
   'headerFlex': instance.headerFlex,

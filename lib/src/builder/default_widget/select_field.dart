@@ -284,9 +284,9 @@ class _AlwaysVisibleSelectField<T> extends StatelessWidget {
           child: StringField(
             uiSettings:
                 data.input.uiSettings?.searchInputUiSettings?.merge(
-                  SearchScreen.defaultSearchInputUiSettings,
+                  SearchScreen.defaultSearchInputUiSettings(),
                 ) ??
-                SearchScreen.defaultSearchInputUiSettings,
+                SearchScreen.defaultSearchInputUiSettings(),
             text: queryController.text,
             onValueChanged: (text) => queryController.text = text ?? '',
           ),

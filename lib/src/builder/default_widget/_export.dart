@@ -11,7 +11,6 @@ export 'media_field.dart';
 export 'multi_step_progress_indicator.dart';
 export 'num_field.dart';
 export 'num_selector.dart';
-export 'place_autocomplete/model/place_type.dart';
 export 'score_widget.dart';
 export 'search_field.dart';
 export 'select_field.dart';

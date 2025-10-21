@@ -458,14 +458,9 @@ StringInput<T> _$StringInputFromJson<T extends Object?>(
   isRequired: json['isRequired'] as bool? ?? false,
   regexPattern: json['regexPattern'] as String?,
   isLocked: json['isLocked'] as bool? ?? false,
-  placeAutocompleteSettings: json['placeAutocompleteSettings'] == null
-      ? null
-      : PlaceAutocompleteSettings.fromJson(
-          json['placeAutocompleteSettings'] as Map<String, dynamic>,
-        ),
   uiSettings: json['uiSettings'] == null
       ? null
-      : StringInputUiSettings.fromJson(
+      : StringInputUiSettings<T>.fromJson(
           json['uiSettings'] as Map<String, dynamic>,
         ),
   $type: json['runtimeType'] as String?,
@@ -479,7 +474,6 @@ Map<String, dynamic> _$StringInputToJson<T extends Object?>(
   'isRequired': instance.isRequired,
   'regexPattern': instance.regexPattern,
   'isLocked': instance.isLocked,
-  'placeAutocompleteSettings': instance.placeAutocompleteSettings?.toJson(),
   'uiSettings': instance.uiSettings?.toJson(),
   'runtimeType': instance.$type,
 };
