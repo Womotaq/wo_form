@@ -9,9 +9,41 @@ import 'package:wo_form/src/builder/default_widget/place_autocomplete/_export.da
 import 'package:wo_form/wo_form.dart';
 
 class StringField extends StatefulWidget {
-  const StringField(this.data, {super.key});
+  const StringField({
+    required this.text,
+    required this.onValueChanged,
+    this.uiSettings,
+    this.placeAutocompleteSettings,
+    this.onPlaceDetails,
+    this.errorText,
+    this.errorWidget,
+    super.key,
+  });
 
-  final WoFieldData<StringInput, String> data;
+  factory StringField.fromData(WoFieldData<StringInput, String> data) =>
+      StringField(
+        text: data.value,
+        onValueChanged: data.onValueChanged,
+        uiSettings: data.input.uiSettings,
+        placeAutocompleteSettings: data.input.placeAutocompleteSettings,
+        onPlaceDetails: (BuildContext context, PlaceDetails details) =>
+            context.read<WoFormValuesCubit>().onValueChanged(
+              path: '${data.path}+details',
+              value: details,
+            ),
+        errorText: data.errorText,
+        errorWidget: data.errorWidget,
+      );
+
+  final String? text;
+  final void Function(String? text)? onValueChanged;
+  final StringInputUiSettings? uiSettings;
+  final PlaceAutocompleteSettings? placeAutocompleteSettings;
+  final void Function(BuildContext context, PlaceDetails details)?
+  onPlaceDetails;
+  final String? errorText;
+  final Widget? errorWidget;
+  // final WoFieldData<StringInput, String> data;
 
   @override
   State<StringField> createState() => _StringFieldState();
@@ -28,14 +60,13 @@ class _StringFieldState extends State<StringField> {
   void initState() {
     super.initState();
 
-    autofocus = switch (widget.data.input.uiSettings?.autofocus) {
+    autofocus = switch (widget.uiSettings?.autofocus) {
       WoFormAutofocus.yes => true,
-      WoFormAutofocus.ifEmpty =>
-        widget.data.value == null || widget.data.value == '',
+      WoFormAutofocus.ifEmpty => widget.text == null || widget.text == '',
       null || WoFormAutofocus.no => false,
     };
-    obscureText = widget.data.input.uiSettings?.obscureText ?? false;
-    if (widget.data.input.uiSettings?.keyboardType == TextInputType.phone) {
+    obscureText = widget.uiSettings?.obscureText ?? false;
+    if (widget.uiSettings?.keyboardType == TextInputType.phone) {
       var isoCode = WoFormTheme.of(context, listen: false)?.defaultPhoneCoutry;
       if (isoCode == null) {
         final countryCode =
@@ -46,13 +77,13 @@ class _StringFieldState extends State<StringField> {
 
       phoneController = PhoneController(
         initialValue: PhoneNumber.parse(
-          widget.data.value ?? '',
+          widget.text ?? '',
           callerCountry: isoCode,
         ),
       );
     } else {
       textEditingController = TextEditingController(
-        text: widget.data.value ?? '',
+        text: widget.text ?? '',
       );
     }
   }
@@ -67,18 +98,18 @@ class _StringFieldState extends State<StringField> {
   @override
   Widget build(BuildContext context) {
     if (textEditingController != null) {
-      if ((widget.data.value ?? '') != textEditingController?.text) {
-        textEditingController?.text = widget.data.value ?? '';
+      if ((widget.text ?? '') != textEditingController?.text) {
+        textEditingController?.text = widget.text ?? '';
       }
     }
     if (phoneController != null) {
-      if ((widget.data.value ?? '') != textEditingController?.text) {
-        textEditingController?.text = widget.data.value ?? '';
+      if ((widget.text ?? '') != textEditingController?.text) {
+        textEditingController?.text = widget.text ?? '';
       }
     }
 
     final woFormTheme = WoFormTheme.of(context);
-    final uiSettings = widget.data.input.uiSettings;
+    final uiSettings = widget.uiSettings;
     final collapsed = uiSettings?.collapsed ?? false;
     final labelLocation =
         uiSettings?.labelLocation ??
@@ -112,20 +143,20 @@ class _StringFieldState extends State<StringField> {
             helper: helperLocation.isInside ? uiSettings?.helper : null,
             hintText: uiSettings?.hintText,
             errorText: errorLocation.isInside
-                ? widget.data.errorText
-                : widget.data.errorText?.isNotEmpty ?? false
+                ? widget.errorText
+                : widget.errorText?.isNotEmpty ?? false
                 ? ''
                 : null,
-            error: widget.data.errorWidget,
+            error: widget.errorWidget,
             prefixIcon: prefixIconLocation.isInside
                 ? uiSettings?.prefixIcon
                 : null,
             suffixIcon: switch (uiSettings?.action) {
               null => null,
               StringFieldAction.clear => IconButton(
-                onPressed: widget.data.onValueChanged == null
+                onPressed: widget.onValueChanged == null
                     ? null
-                    : () => widget.data.onValueChanged!(null),
+                    : () => widget.onValueChanged!(null),
                 icon: const Icon(Icons.clear),
               ),
               StringFieldAction.obscure => IconButton(
@@ -137,8 +168,7 @@ class _StringFieldState extends State<StringField> {
             },
           );
 
-    final placeAutocompleteSettings =
-        widget.data.input.placeAutocompleteSettings;
+    final placeAutocompleteSettings = widget.placeAutocompleteSettings;
 
     final textField = placeAutocompleteSettings != null
         ? PlaceAutocompleteTextField(
@@ -148,15 +178,12 @@ class _StringFieldState extends State<StringField> {
             countries: placeAutocompleteSettings.countries
                 ?.map((isoCode) => isoCode.name)
                 .toList(),
-            onChanged: widget.data.onValueChanged,
+            onChanged: widget.onValueChanged,
             onSelectedWithDetails:
                 placeAutocompleteSettings.includeDetails &&
-                    widget.data.onValueChanged != null
-                ? (PlaceDetails details) =>
-                      context.read<WoFormValuesCubit>().onValueChanged(
-                        path: '${widget.data.path}+details',
-                        value: details,
-                      )
+                    widget.onValueChanged != null &&
+                    widget.onPlaceDetails != null
+                ? (details) => widget.onPlaceDetails!(context, details)
                 : null,
             onFieldSubmitted:
                 (uiSettings?.submitFormOnFieldSubmitted ??
@@ -202,11 +229,11 @@ class _StringFieldState extends State<StringField> {
           )
         : uiSettings?.keyboardType == TextInputType.phone
         ? PhoneFormField(
-            enabled: widget.data.onValueChanged != null,
+            enabled: widget.onValueChanged != null,
             controller: phoneController,
-            onChanged: widget.data.onValueChanged == null
+            onChanged: widget.onValueChanged == null
                 ? null
-                : (number) => widget.data.onValueChanged!(
+                : (number) => widget.onValueChanged!(
                     '+${number.countryCode} ${number.formatNsn()}',
                   ),
             onSubmitted:
@@ -227,9 +254,9 @@ class _StringFieldState extends State<StringField> {
                 const CountrySelectorNavigator.draggableBottomSheet(),
           )
         : TextFormField(
-            enabled: widget.data.onValueChanged != null,
+            enabled: widget.onValueChanged != null,
             controller: textEditingController,
-            onChanged: widget.data.onValueChanged,
+            onChanged: widget.onValueChanged,
             onFieldSubmitted:
                 (uiSettings?.submitFormOnFieldSubmitted ??
                     defaultSubmitFormOnFieldSubmitted())
@@ -271,7 +298,7 @@ class _StringFieldState extends State<StringField> {
       headerFlex: uiSettings?.headerFlex,
       labelText: labelLocation.isOutside ? uiSettings?.labelText : null,
       helperText: helperLocation.isOutside ? uiSettings?.helperText : null,
-      errorText: errorLocation.isOutside ? widget.data.errorText : null,
+      errorText: errorLocation.isOutside ? widget.errorText : null,
       prefixIcon: prefixIconLocation.isOutside && uiSettings?.prefixIcon != null
           ? Padding(
               padding: EdgeInsets.only(
@@ -291,7 +318,7 @@ class _StringFieldState extends State<StringField> {
   }
 
   bool defaultSubmitFormOnFieldSubmitted() =>
-      switch (widget.data.input.uiSettings?.textInputAction) {
+      switch (widget.uiSettings?.textInputAction) {
         TextInputAction.next ||
         TextInputAction.previous ||
         TextInputAction.continueAction ||

@@ -67,7 +67,7 @@ class StringFieldBuilder extends StatelessWidget {
 
                     return (input.uiSettings?.widgetBuilder ??
                             WoFormTheme.of(context)?.stringFieldBuilder ??
-                            StringField.new)
+                            StringField.fromData)
                         .call(fieldData);
                   },
                 );

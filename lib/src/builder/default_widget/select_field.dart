@@ -282,24 +282,13 @@ class _AlwaysVisibleSelectField<T> extends StatelessWidget {
             vertical: 4,
           ),
           child: StringField(
-            WoFieldData(
-              path: 'not_needed',
-              input: StringInput(
-                id: 'not_needed',
-                uiSettings:
-                    data.input.uiSettings?.searchInputUiSettings?.merge(
-                      SearchScreen.defaultSearchInputUiSettings,
-                    ) ??
-                    SearchScreen.defaultSearchInputUiSettings,
-              ),
-              value: queryController.text,
-              onValueChanged:
-                  (
-                    _, {
-                    UpdateStatus updateStatus =
-                        UpdateStatus.yesWithoutErrorUpdateIfPathNotVisited,
-                  }) {},
-            ),
+            uiSettings:
+                data.input.uiSettings?.searchInputUiSettings?.merge(
+                  SearchScreen.defaultSearchInputUiSettings,
+                ) ??
+                SearchScreen.defaultSearchInputUiSettings,
+            text: queryController.text,
+            onValueChanged: (text) => queryController.text = text ?? '',
           ),
 
           // TextField(

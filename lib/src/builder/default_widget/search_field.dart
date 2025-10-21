@@ -246,6 +246,7 @@ class SearchScreen<T> extends StatelessWidget {
     prefixIcon: Icon(Icons.search),
     prefixIconLocation: StringFieldLocation.inside,
     autofocus: WoFormAutofocus.yes,
+    submitFormOnFieldSubmitted: false,
     padding: EdgeInsets.zero,
   );
 
@@ -263,24 +264,13 @@ class SearchScreen<T> extends StatelessWidget {
           shrinkWrap: layout.shrinks,
           appBarHeight: 56 + 32,
           appBarTitle: StringField(
-            WoFieldData(
-              path: 'not_needed',
-              input: StringInput(
-                id: 'not_needed',
-                uiSettings:
-                    searchInputUiSettings?.merge(
-                      SearchScreen.defaultSearchInputUiSettings,
-                    ) ??
-                    SearchScreen.defaultSearchInputUiSettings,
-              ),
-              value: textController.text,
-              onValueChanged:
-                  (
-                    _, {
-                    UpdateStatus updateStatus =
-                        UpdateStatus.yesWithoutErrorUpdateIfPathNotVisited,
-                  }) {},
-            ),
+            text: textController.text,
+            uiSettings:
+                searchInputUiSettings?.merge(
+                  SearchScreen.defaultSearchInputUiSettings,
+                ) ??
+                SearchScreen.defaultSearchInputUiSettings,
+            onValueChanged: (text) => textController.text = text ?? '',
           ),
 
           // TextField(
