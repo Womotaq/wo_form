@@ -507,7 +507,7 @@ abstract class SelectInput<T> extends WoFormInput<T> with _$SelectInput<T> {
     /// ),
     @notSerializable Object? Function(T)? toJsonT,
     @notSerializable T Function(Object?)? fromJsonT,
-  }) = _SelectInput<T>;
+  }) = SelectInputBase<T>;
 
   const SelectInput._() : super._();
 
@@ -527,10 +527,10 @@ abstract class SelectInput<T> extends WoFormInput<T> with _$SelectInput<T> {
     throw ArgumentError("Couldn't infer type based on availibleValues");
   }
 
-  static _SelectInput<V> _fromJson<V>(
+  static SelectInputBase<V> _fromJson<V>(
     Map<String, dynamic> json,
     V Function(Object? json) fromJsonT,
-  ) => _SelectInput<V>(
+  ) => SelectInputBase<V>(
     id: json['id'] as String,
     maxCount: (json['maxCount'] as num?)?.toInt(),
     minCount: (json['minCount'] as num?)?.toInt() ?? 0,

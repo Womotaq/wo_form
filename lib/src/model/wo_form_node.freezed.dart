@@ -2372,8 +2372,8 @@ $SelectInputUiSettingsCopyWith<T, $Res>? get uiSettings {
 /// @nodoc
 
 
-class _SelectInput<T> extends SelectInput<T> {
-  const _SelectInput({required this.id, required this.maxCount, this.minCount = 0, final  List<T>? initialValues, final  List<T> availibleValues = const [], final  List<String>? idsOfAvailibleValues, @notSerializable this.onValueChanged, @notSerializable this.getCustomError, this.submitFormOnSelect = false, this.quizSettings, this.searchSettings, this.uiSettings, @notSerializable this.toJsonT, @notSerializable this.fromJsonT}): assert(maxCount == null || minCount <= maxCount, 'maxCount must be higher or equal to minCount'),_initialValues = initialValues,_availibleValues = availibleValues,_idsOfAvailibleValues = idsOfAvailibleValues,super._();
+class SelectInputBase<T> extends SelectInput<T> {
+  const SelectInputBase({required this.id, required this.maxCount, this.minCount = 0, final  List<T>? initialValues, final  List<T> availibleValues = const [], final  List<String>? idsOfAvailibleValues, @notSerializable this.onValueChanged, @notSerializable this.getCustomError, this.submitFormOnSelect = false, this.quizSettings, this.searchSettings, this.uiSettings, @notSerializable this.toJsonT, @notSerializable this.fromJsonT}): assert(maxCount == null || minCount <= maxCount, 'maxCount must be higher or equal to minCount'),_initialValues = initialValues,_availibleValues = availibleValues,_idsOfAvailibleValues = idsOfAvailibleValues,super._();
   
 
 @override final  String id;
@@ -2438,13 +2438,13 @@ class _SelectInput<T> extends SelectInput<T> {
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$SelectInputCopyWith<T, _SelectInput<T>> get copyWith => __$SelectInputCopyWithImpl<T, _SelectInput<T>>(this, _$identity);
+$SelectInputBaseCopyWith<T, SelectInputBase<T>> get copyWith => _$SelectInputBaseCopyWithImpl<T, SelectInputBase<T>>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SelectInput<T>&&(identical(other.id, id) || other.id == id)&&(identical(other.maxCount, maxCount) || other.maxCount == maxCount)&&(identical(other.minCount, minCount) || other.minCount == minCount)&&const DeepCollectionEquality().equals(other._initialValues, _initialValues)&&const DeepCollectionEquality().equals(other._availibleValues, _availibleValues)&&const DeepCollectionEquality().equals(other._idsOfAvailibleValues, _idsOfAvailibleValues)&&(identical(other.onValueChanged, onValueChanged) || other.onValueChanged == onValueChanged)&&(identical(other.getCustomError, getCustomError) || other.getCustomError == getCustomError)&&(identical(other.submitFormOnSelect, submitFormOnSelect) || other.submitFormOnSelect == submitFormOnSelect)&&(identical(other.quizSettings, quizSettings) || other.quizSettings == quizSettings)&&(identical(other.searchSettings, searchSettings) || other.searchSettings == searchSettings)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings)&&(identical(other.toJsonT, toJsonT) || other.toJsonT == toJsonT)&&(identical(other.fromJsonT, fromJsonT) || other.fromJsonT == fromJsonT));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SelectInputBase<T>&&(identical(other.id, id) || other.id == id)&&(identical(other.maxCount, maxCount) || other.maxCount == maxCount)&&(identical(other.minCount, minCount) || other.minCount == minCount)&&const DeepCollectionEquality().equals(other._initialValues, _initialValues)&&const DeepCollectionEquality().equals(other._availibleValues, _availibleValues)&&const DeepCollectionEquality().equals(other._idsOfAvailibleValues, _idsOfAvailibleValues)&&(identical(other.onValueChanged, onValueChanged) || other.onValueChanged == onValueChanged)&&(identical(other.getCustomError, getCustomError) || other.getCustomError == getCustomError)&&(identical(other.submitFormOnSelect, submitFormOnSelect) || other.submitFormOnSelect == submitFormOnSelect)&&(identical(other.quizSettings, quizSettings) || other.quizSettings == quizSettings)&&(identical(other.searchSettings, searchSettings) || other.searchSettings == searchSettings)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings)&&(identical(other.toJsonT, toJsonT) || other.toJsonT == toJsonT)&&(identical(other.fromJsonT, fromJsonT) || other.fromJsonT == fromJsonT));
 }
 
 
@@ -2460,8 +2460,8 @@ String toString() {
 }
 
 /// @nodoc
-abstract mixin class _$SelectInputCopyWith<T,$Res> implements $SelectInputCopyWith<T, $Res> {
-  factory _$SelectInputCopyWith(_SelectInput<T> value, $Res Function(_SelectInput<T>) _then) = __$SelectInputCopyWithImpl;
+abstract mixin class $SelectInputBaseCopyWith<T,$Res> implements $SelectInputCopyWith<T, $Res> {
+  factory $SelectInputBaseCopyWith(SelectInputBase<T> value, $Res Function(SelectInputBase<T>) _then) = _$SelectInputBaseCopyWithImpl;
 @override @useResult
 $Res call({
  String id, int? maxCount, int minCount, List<T>? initialValues, List<T> availibleValues, List<String>? idsOfAvailibleValues,@notSerializable void Function(List<T>? value)? onValueChanged,@notSerializable GetCustomErrorForListDef<T>? getCustomError, bool submitFormOnSelect, QuizSettings? quizSettings, SearchSettings<T>? searchSettings, SelectInputUiSettings<T>? uiSettings,@notSerializable Object? Function(T)? toJsonT,@notSerializable T Function(Object?)? fromJsonT
@@ -2472,17 +2472,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$SelectInputCopyWithImpl<T,$Res>
-    implements _$SelectInputCopyWith<T, $Res> {
-  __$SelectInputCopyWithImpl(this._self, this._then);
+class _$SelectInputBaseCopyWithImpl<T,$Res>
+    implements $SelectInputBaseCopyWith<T, $Res> {
+  _$SelectInputBaseCopyWithImpl(this._self, this._then);
 
-  final _SelectInput<T> _self;
-  final $Res Function(_SelectInput<T>) _then;
+  final SelectInputBase<T> _self;
+  final $Res Function(SelectInputBase<T>) _then;
 
 /// Create a copy of SelectInput
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? maxCount = freezed,Object? minCount = null,Object? initialValues = freezed,Object? availibleValues = null,Object? idsOfAvailibleValues = freezed,Object? onValueChanged = freezed,Object? getCustomError = freezed,Object? submitFormOnSelect = null,Object? quizSettings = freezed,Object? searchSettings = freezed,Object? uiSettings = freezed,Object? toJsonT = freezed,Object? fromJsonT = freezed,}) {
-  return _then(_SelectInput<T>(
+  return _then(SelectInputBase<T>(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,maxCount: freezed == maxCount ? _self.maxCount : maxCount // ignore: cast_nullable_to_non_nullable
 as int?,minCount: null == minCount ? _self.minCount : minCount // ignore: cast_nullable_to_non_nullable
