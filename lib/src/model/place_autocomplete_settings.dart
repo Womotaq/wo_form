@@ -12,10 +12,6 @@ abstract class PlaceAutocompleteSettings with _$PlaceAutocompleteSettings {
 
     /// The list of countries in which restrict the research.
     List<IsoCode>? countries,
-
-    /// If true, extra data, like latitude & latitude,
-    /// will be availible at '{pinputPath}+details'.
-    @Default(true) bool includeDetails,
   }) = _PlaceAutocompleteSettings;
 
   /// Required for the override getter

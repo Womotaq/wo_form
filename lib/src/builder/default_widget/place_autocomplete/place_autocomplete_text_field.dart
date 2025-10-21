@@ -13,7 +13,6 @@ class PlaceAutocompleteTextField extends StatefulWidget {
   const PlaceAutocompleteTextField({
     required this.textEditingController,
     required this.onChanged,
-    this.onSelectedWithDetails,
     this.debounceDuration,
     this.placeType,
     this.language,
@@ -40,10 +39,6 @@ class PlaceAutocompleteTextField extends StatefulWidget {
   });
 
   final void Function(String? text)? onChanged;
-
-  /// If provided, will be called when a prediction is selected,
-  /// right after [onChanged].
-  final void Function(PlaceDetails details)? onSelectedWithDetails;
 
   /// --- API ---
 
@@ -153,6 +148,7 @@ class _PlaceAutoCompleteTextFieldState
   }
 
   Future<void> updatePredictions(String text) async {
+    // TODO : requestId
     if (text.isEmpty) return removeOverlay();
 
     final language = widget.language ?? Intl.defaultLocale;
@@ -257,10 +253,6 @@ class _PlaceAutoCompleteTextFieldState
                   return InkWell(
                     onTap: () {
                       widget.onChanged?.call(prediction.description);
-
-                      if (widget.onSelectedWithDetails != null) {
-                        unawaited(completeWithDetails(prediction));
-                      }
                       removeOverlay();
                     },
                     child: widget.itemBuilder != null
@@ -284,37 +276,6 @@ class _PlaceAutoCompleteTextFieldState
     _overlayEntry?.remove();
     _overlayEntry = null;
     _overlayIsFocused = false;
-  }
-
-  Future<void> completeWithDetails(PlacePrediction prediction) async {
-    final placeId = prediction.placeId;
-    if (placeId == null) return;
-
-    /// 'https://maps.googleapis.com/maps/api/place/details/json?key=${widget.googleAPIKey}&placeid=' + placeId
-    try {
-      final getPlaceDetails = context
-          .read<PlaceRepositoryMixin?>()
-          ?.getPlaceDetails;
-      if (getPlaceDetails == null) {
-        throw UnimplementedError(
-          'You need to provide a PlaceRepository for '
-          'address autocompletion : \n'
-          '```\n'
-          'RepositoryProvider<PlaceRepositoryMixin>(\n'
-          '  create: (context) => YourPlaceRepository(),\n'
-          '),\n'
-          '```',
-        );
-      }
-
-      final response = await getPlaceDetails(placeId);
-      if (response.status == PlacesDetailsStatus.OK) {
-        widget.onSelectedWithDetails?.call(response.result);
-      }
-      // TODO : communicate in case of error
-    } catch (e) {
-      if (kDebugMode) _showSnackBar('An error occured : $e');
-    }
   }
 
   void _showSnackBar(String errorData) {

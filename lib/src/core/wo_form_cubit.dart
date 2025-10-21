@@ -840,11 +840,6 @@ class WoFormValues {
   WoFormQuery? queryOf({required String selectInputPath}) =>
       get<WoFormQuery>('$selectInputPath-query');
 
-  // --- STRING INPUT PLACE AUTOCOMPLETE ---
-
-  PlaceDetails? placeDetailsOf({required String stringInputPath}) =>
-      get<PlaceDetails>('$stringInputPath+details');
-
   // --- INPUTS NODE ---
 
   // ignore: constant_identifier_names

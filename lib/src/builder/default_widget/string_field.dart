@@ -14,7 +14,6 @@ class StringField extends StatefulWidget {
     required this.onValueChanged,
     this.uiSettings,
     this.placeAutocompleteSettings,
-    this.onPlaceDetails,
     this.errorText,
     this.errorWidget,
     super.key,
@@ -26,11 +25,6 @@ class StringField extends StatefulWidget {
         onValueChanged: data.onValueChanged,
         uiSettings: data.input.uiSettings,
         placeAutocompleteSettings: data.input.placeAutocompleteSettings,
-        onPlaceDetails: (BuildContext context, PlaceDetails details) =>
-            context.read<WoFormValuesCubit>().onValueChanged(
-              path: '${data.path}+details',
-              value: details,
-            ),
         errorText: data.errorText,
         errorWidget: data.errorWidget,
       );
@@ -39,8 +33,6 @@ class StringField extends StatefulWidget {
   final void Function(String? text)? onValueChanged;
   final StringInputUiSettings? uiSettings;
   final PlaceAutocompleteSettings? placeAutocompleteSettings;
-  final void Function(BuildContext context, PlaceDetails details)?
-  onPlaceDetails;
   final String? errorText;
   final Widget? errorWidget;
   // final WoFieldData<StringInput, String> data;
@@ -182,12 +174,6 @@ class _StringFieldState extends State<StringField> {
                 ?.map((isoCode) => isoCode.name)
                 .toList(),
             onChanged: widget.onValueChanged,
-            onSelectedWithDetails:
-                placeAutocompleteSettings.includeDetails &&
-                    widget.onValueChanged != null &&
-                    widget.onPlaceDetails != null
-                ? (details) => widget.onPlaceDetails!(context, details)
-                : null,
             onFieldSubmitted:
                 (uiSettings?.submitFormOnFieldSubmitted ??
                     defaultSubmitFormOnFieldSubmitted())
