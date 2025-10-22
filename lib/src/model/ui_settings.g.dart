@@ -224,6 +224,7 @@ _InputsNodeUiSettings _$InputsNodeUiSettingsFromJson(
   labelTextWhenChildrenHidden: json['labelTextWhenChildrenHidden'] as String?,
   labelMaxLines: (json['labelMaxLines'] as num?)?.toInt(),
   helperText: json['helperText'] as String?,
+  helperTextWhenChildrenHidden: json['helperTextWhenChildrenHidden'] as String?,
   childrenVisibility: $enumDecodeNullable(
     _$ChildrenVisibilityEnumMap,
     json['childrenVisibility'],
@@ -249,6 +250,7 @@ Map<String, dynamic> _$InputsNodeUiSettingsToJson(
   'labelTextWhenChildrenHidden': instance.labelTextWhenChildrenHidden,
   'labelMaxLines': instance.labelMaxLines,
   'helperText': instance.helperText,
+  'helperTextWhenChildrenHidden': instance.helperTextWhenChildrenHidden,
   'childrenVisibility':
       _$ChildrenVisibilityEnumMap[instance.childrenVisibility],
   'showChildrenInitially': instance.showChildrenInitially,

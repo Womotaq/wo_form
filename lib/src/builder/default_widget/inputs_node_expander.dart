@@ -36,12 +36,17 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
   Widget build(BuildContext context) {
     final labelTextWhenChildrenHidden =
         widget.data.input.uiSettings?.labelTextWhenChildrenHidden ?? '';
+    final helperTextWhenChildrenHidden =
+        widget.data.input.uiSettings?.helperTextWhenChildrenHidden ?? '';
+
     final headerData = WoFormInputHeaderData(
       labelText: labelTextWhenChildrenHidden.isNotEmpty
           ? labelTextWhenChildrenHidden
           : widget.data.input.uiSettings?.labelText,
       labelMaxLines: widget.data.input.uiSettings?.labelMaxLines,
-      helperText: widget.data.input.uiSettings?.helperText,
+      helperText: helperTextWhenChildrenHidden.isNotEmpty
+          ? helperTextWhenChildrenHidden
+          : widget.data.input.uiSettings?.helperText,
       errorText: widget.data.errorText,
       trailing: const Icon(Icons.chevron_right),
       onTap: () => openChildren(context),
