@@ -1049,10 +1049,10 @@ mixin _$InputsNodeUiSettings {
 /// including the header.
 ///
 /// Defaults to false.
- bool? get reverse; String? get labelText;/// If set, this will replace [labelText] int the field when the children
-/// are hidden (see [InputsNodeUiSettings.childrenVisibility]).
- String? get labelTextWhenChildrenHidden; int? get labelMaxLines; String? get helperText;/// If set, this will replace [helperText] int the field when the children
-/// are hidden (see [InputsNodeUiSettings.childrenVisibility]).
+ bool? get reverse; String? get labelText;/// If set and not empty, this will replace [labelText] int the field when
+/// the children are hidden (see [InputsNodeUiSettings.childrenVisibility]).
+ String? get labelTextWhenChildrenHidden; int? get labelMaxLines; String? get helperText;/// If set and not empty, this will replace [helperText] int the field when
+/// the children are hidden (see [InputsNodeUiSettings.childrenVisibility]).
  String? get helperTextWhenChildrenHidden;/// Default to always.
  ChildrenVisibility? get childrenVisibility;/// Only used when [ChildrenVisibility.whenAsked].
 /// If true, when the widget will be rendered,
@@ -1181,13 +1181,13 @@ class _InputsNodeUiSettings extends InputsNodeUiSettings {
 /// Defaults to false.
 @override final  bool? reverse;
 @override final  String? labelText;
-/// If set, this will replace [labelText] int the field when the children
-/// are hidden (see [InputsNodeUiSettings.childrenVisibility]).
+/// If set and not empty, this will replace [labelText] int the field when
+/// the children are hidden (see [InputsNodeUiSettings.childrenVisibility]).
 @override final  String? labelTextWhenChildrenHidden;
 @override final  int? labelMaxLines;
 @override final  String? helperText;
-/// If set, this will replace [helperText] int the field when the children
-/// are hidden (see [InputsNodeUiSettings.childrenVisibility]).
+/// If set and not empty, this will replace [helperText] int the field when
+/// the children are hidden (see [InputsNodeUiSettings.childrenVisibility]).
 @override final  String? helperTextWhenChildrenHidden;
 /// Default to always.
 @override final  ChildrenVisibility? childrenVisibility;
@@ -1302,7 +1302,7 @@ as InputHeaderBuilderDef?,
 mixin _$MediaInputUiSettings {
 
 @notSerializable Widget? get addMediaIcon; String? get addMediaText; int? get fieldHeight; BoxFit? get fit;/// For a circle cropping, use MediaService.circleAspectRatio
- double? get cropAspectRatioOrCircle; bool? get cropShowGrid;@notSerializable CanCropDef? get canCrop;/// Use this to overwrite [MediaService.mediaWidgetBuilder].
+ double? get cropAspectRatioOrCircle; bool? get cropShowGrid;@notSerializable MediaEditButtonBuilderDef? get editButtonBuilder;/// Use this to overwrite [MediaService.mediaWidgetBuilder].
 @notSerializable MediaWidgetBuilderDef? get mediaWidgetBuilder;@notSerializable MediaFieldBuilderDef? get widgetBuilder;
 /// Create a copy of MediaInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -1316,16 +1316,16 @@ $MediaInputUiSettingsCopyWith<MediaInputUiSettings> get copyWith => _$MediaInput
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaInputUiSettings&&(identical(other.addMediaIcon, addMediaIcon) || other.addMediaIcon == addMediaIcon)&&(identical(other.addMediaText, addMediaText) || other.addMediaText == addMediaText)&&(identical(other.fieldHeight, fieldHeight) || other.fieldHeight == fieldHeight)&&(identical(other.fit, fit) || other.fit == fit)&&(identical(other.cropAspectRatioOrCircle, cropAspectRatioOrCircle) || other.cropAspectRatioOrCircle == cropAspectRatioOrCircle)&&(identical(other.cropShowGrid, cropShowGrid) || other.cropShowGrid == cropShowGrid)&&(identical(other.canCrop, canCrop) || other.canCrop == canCrop)&&(identical(other.mediaWidgetBuilder, mediaWidgetBuilder) || other.mediaWidgetBuilder == mediaWidgetBuilder)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaInputUiSettings&&(identical(other.addMediaIcon, addMediaIcon) || other.addMediaIcon == addMediaIcon)&&(identical(other.addMediaText, addMediaText) || other.addMediaText == addMediaText)&&(identical(other.fieldHeight, fieldHeight) || other.fieldHeight == fieldHeight)&&(identical(other.fit, fit) || other.fit == fit)&&(identical(other.cropAspectRatioOrCircle, cropAspectRatioOrCircle) || other.cropAspectRatioOrCircle == cropAspectRatioOrCircle)&&(identical(other.cropShowGrid, cropShowGrid) || other.cropShowGrid == cropShowGrid)&&(identical(other.editButtonBuilder, editButtonBuilder) || other.editButtonBuilder == editButtonBuilder)&&(identical(other.mediaWidgetBuilder, mediaWidgetBuilder) || other.mediaWidgetBuilder == mediaWidgetBuilder)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,addMediaIcon,addMediaText,fieldHeight,fit,cropAspectRatioOrCircle,cropShowGrid,canCrop,mediaWidgetBuilder,widgetBuilder);
+int get hashCode => Object.hash(runtimeType,addMediaIcon,addMediaText,fieldHeight,fit,cropAspectRatioOrCircle,cropShowGrid,editButtonBuilder,mediaWidgetBuilder,widgetBuilder);
 
 @override
 String toString() {
-  return 'MediaInputUiSettings(addMediaIcon: $addMediaIcon, addMediaText: $addMediaText, fieldHeight: $fieldHeight, fit: $fit, cropAspectRatioOrCircle: $cropAspectRatioOrCircle, cropShowGrid: $cropShowGrid, canCrop: $canCrop, mediaWidgetBuilder: $mediaWidgetBuilder, widgetBuilder: $widgetBuilder)';
+  return 'MediaInputUiSettings(addMediaIcon: $addMediaIcon, addMediaText: $addMediaText, fieldHeight: $fieldHeight, fit: $fit, cropAspectRatioOrCircle: $cropAspectRatioOrCircle, cropShowGrid: $cropShowGrid, editButtonBuilder: $editButtonBuilder, mediaWidgetBuilder: $mediaWidgetBuilder, widgetBuilder: $widgetBuilder)';
 }
 
 
@@ -1336,7 +1336,7 @@ abstract mixin class $MediaInputUiSettingsCopyWith<$Res>  {
   factory $MediaInputUiSettingsCopyWith(MediaInputUiSettings value, $Res Function(MediaInputUiSettings) _then) = _$MediaInputUiSettingsCopyWithImpl;
 @useResult
 $Res call({
-@notSerializable Widget? addMediaIcon, String? addMediaText, int? fieldHeight, BoxFit? fit, double? cropAspectRatioOrCircle, bool? cropShowGrid,@notSerializable CanCropDef? canCrop,@notSerializable MediaWidgetBuilderDef? mediaWidgetBuilder,@notSerializable MediaFieldBuilderDef? widgetBuilder
+@notSerializable Widget? addMediaIcon, String? addMediaText, int? fieldHeight, BoxFit? fit, double? cropAspectRatioOrCircle, bool? cropShowGrid,@notSerializable MediaEditButtonBuilderDef? editButtonBuilder,@notSerializable MediaWidgetBuilderDef? mediaWidgetBuilder,@notSerializable MediaFieldBuilderDef? widgetBuilder
 });
 
 
@@ -1353,7 +1353,7 @@ class _$MediaInputUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of MediaInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? addMediaIcon = freezed,Object? addMediaText = freezed,Object? fieldHeight = freezed,Object? fit = freezed,Object? cropAspectRatioOrCircle = freezed,Object? cropShowGrid = freezed,Object? canCrop = freezed,Object? mediaWidgetBuilder = freezed,Object? widgetBuilder = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? addMediaIcon = freezed,Object? addMediaText = freezed,Object? fieldHeight = freezed,Object? fit = freezed,Object? cropAspectRatioOrCircle = freezed,Object? cropShowGrid = freezed,Object? editButtonBuilder = freezed,Object? mediaWidgetBuilder = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_self.copyWith(
 addMediaIcon: freezed == addMediaIcon ? _self.addMediaIcon : addMediaIcon // ignore: cast_nullable_to_non_nullable
 as Widget?,addMediaText: freezed == addMediaText ? _self.addMediaText : addMediaText // ignore: cast_nullable_to_non_nullable
@@ -1361,8 +1361,8 @@ as String?,fieldHeight: freezed == fieldHeight ? _self.fieldHeight : fieldHeight
 as int?,fit: freezed == fit ? _self.fit : fit // ignore: cast_nullable_to_non_nullable
 as BoxFit?,cropAspectRatioOrCircle: freezed == cropAspectRatioOrCircle ? _self.cropAspectRatioOrCircle : cropAspectRatioOrCircle // ignore: cast_nullable_to_non_nullable
 as double?,cropShowGrid: freezed == cropShowGrid ? _self.cropShowGrid : cropShowGrid // ignore: cast_nullable_to_non_nullable
-as bool?,canCrop: freezed == canCrop ? _self.canCrop : canCrop // ignore: cast_nullable_to_non_nullable
-as CanCropDef?,mediaWidgetBuilder: freezed == mediaWidgetBuilder ? _self.mediaWidgetBuilder : mediaWidgetBuilder // ignore: cast_nullable_to_non_nullable
+as bool?,editButtonBuilder: freezed == editButtonBuilder ? _self.editButtonBuilder : editButtonBuilder // ignore: cast_nullable_to_non_nullable
+as MediaEditButtonBuilderDef?,mediaWidgetBuilder: freezed == mediaWidgetBuilder ? _self.mediaWidgetBuilder : mediaWidgetBuilder // ignore: cast_nullable_to_non_nullable
 as MediaWidgetBuilderDef?,widgetBuilder: freezed == widgetBuilder ? _self.widgetBuilder : widgetBuilder // ignore: cast_nullable_to_non_nullable
 as MediaFieldBuilderDef?,
   ));
@@ -1376,7 +1376,7 @@ as MediaFieldBuilderDef?,
 @JsonSerializable()
 
 class _MediaInputUiSettings extends MediaInputUiSettings {
-  const _MediaInputUiSettings({@notSerializable this.addMediaIcon, this.addMediaText, this.fieldHeight, this.fit, this.cropAspectRatioOrCircle, this.cropShowGrid, @notSerializable this.canCrop, @notSerializable this.mediaWidgetBuilder, @notSerializable this.widgetBuilder}): super._();
+  const _MediaInputUiSettings({@notSerializable this.addMediaIcon, this.addMediaText, this.fieldHeight, this.fit, this.cropAspectRatioOrCircle, this.cropShowGrid, @notSerializable this.editButtonBuilder, @notSerializable this.mediaWidgetBuilder, @notSerializable this.widgetBuilder}): super._();
   factory _MediaInputUiSettings.fromJson(Map<String, dynamic> json) => _$MediaInputUiSettingsFromJson(json);
 
 @override@notSerializable final  Widget? addMediaIcon;
@@ -1386,7 +1386,7 @@ class _MediaInputUiSettings extends MediaInputUiSettings {
 /// For a circle cropping, use MediaService.circleAspectRatio
 @override final  double? cropAspectRatioOrCircle;
 @override final  bool? cropShowGrid;
-@override@notSerializable final  CanCropDef? canCrop;
+@override@notSerializable final  MediaEditButtonBuilderDef? editButtonBuilder;
 /// Use this to overwrite [MediaService.mediaWidgetBuilder].
 @override@notSerializable final  MediaWidgetBuilderDef? mediaWidgetBuilder;
 @override@notSerializable final  MediaFieldBuilderDef? widgetBuilder;
@@ -1404,16 +1404,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MediaInputUiSettings&&(identical(other.addMediaIcon, addMediaIcon) || other.addMediaIcon == addMediaIcon)&&(identical(other.addMediaText, addMediaText) || other.addMediaText == addMediaText)&&(identical(other.fieldHeight, fieldHeight) || other.fieldHeight == fieldHeight)&&(identical(other.fit, fit) || other.fit == fit)&&(identical(other.cropAspectRatioOrCircle, cropAspectRatioOrCircle) || other.cropAspectRatioOrCircle == cropAspectRatioOrCircle)&&(identical(other.cropShowGrid, cropShowGrid) || other.cropShowGrid == cropShowGrid)&&(identical(other.canCrop, canCrop) || other.canCrop == canCrop)&&(identical(other.mediaWidgetBuilder, mediaWidgetBuilder) || other.mediaWidgetBuilder == mediaWidgetBuilder)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MediaInputUiSettings&&(identical(other.addMediaIcon, addMediaIcon) || other.addMediaIcon == addMediaIcon)&&(identical(other.addMediaText, addMediaText) || other.addMediaText == addMediaText)&&(identical(other.fieldHeight, fieldHeight) || other.fieldHeight == fieldHeight)&&(identical(other.fit, fit) || other.fit == fit)&&(identical(other.cropAspectRatioOrCircle, cropAspectRatioOrCircle) || other.cropAspectRatioOrCircle == cropAspectRatioOrCircle)&&(identical(other.cropShowGrid, cropShowGrid) || other.cropShowGrid == cropShowGrid)&&(identical(other.editButtonBuilder, editButtonBuilder) || other.editButtonBuilder == editButtonBuilder)&&(identical(other.mediaWidgetBuilder, mediaWidgetBuilder) || other.mediaWidgetBuilder == mediaWidgetBuilder)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,addMediaIcon,addMediaText,fieldHeight,fit,cropAspectRatioOrCircle,cropShowGrid,canCrop,mediaWidgetBuilder,widgetBuilder);
+int get hashCode => Object.hash(runtimeType,addMediaIcon,addMediaText,fieldHeight,fit,cropAspectRatioOrCircle,cropShowGrid,editButtonBuilder,mediaWidgetBuilder,widgetBuilder);
 
 @override
 String toString() {
-  return 'MediaInputUiSettings(addMediaIcon: $addMediaIcon, addMediaText: $addMediaText, fieldHeight: $fieldHeight, fit: $fit, cropAspectRatioOrCircle: $cropAspectRatioOrCircle, cropShowGrid: $cropShowGrid, canCrop: $canCrop, mediaWidgetBuilder: $mediaWidgetBuilder, widgetBuilder: $widgetBuilder)';
+  return 'MediaInputUiSettings(addMediaIcon: $addMediaIcon, addMediaText: $addMediaText, fieldHeight: $fieldHeight, fit: $fit, cropAspectRatioOrCircle: $cropAspectRatioOrCircle, cropShowGrid: $cropShowGrid, editButtonBuilder: $editButtonBuilder, mediaWidgetBuilder: $mediaWidgetBuilder, widgetBuilder: $widgetBuilder)';
 }
 
 
@@ -1424,7 +1424,7 @@ abstract mixin class _$MediaInputUiSettingsCopyWith<$Res> implements $MediaInput
   factory _$MediaInputUiSettingsCopyWith(_MediaInputUiSettings value, $Res Function(_MediaInputUiSettings) _then) = __$MediaInputUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
-@notSerializable Widget? addMediaIcon, String? addMediaText, int? fieldHeight, BoxFit? fit, double? cropAspectRatioOrCircle, bool? cropShowGrid,@notSerializable CanCropDef? canCrop,@notSerializable MediaWidgetBuilderDef? mediaWidgetBuilder,@notSerializable MediaFieldBuilderDef? widgetBuilder
+@notSerializable Widget? addMediaIcon, String? addMediaText, int? fieldHeight, BoxFit? fit, double? cropAspectRatioOrCircle, bool? cropShowGrid,@notSerializable MediaEditButtonBuilderDef? editButtonBuilder,@notSerializable MediaWidgetBuilderDef? mediaWidgetBuilder,@notSerializable MediaFieldBuilderDef? widgetBuilder
 });
 
 
@@ -1441,7 +1441,7 @@ class __$MediaInputUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of MediaInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? addMediaIcon = freezed,Object? addMediaText = freezed,Object? fieldHeight = freezed,Object? fit = freezed,Object? cropAspectRatioOrCircle = freezed,Object? cropShowGrid = freezed,Object? canCrop = freezed,Object? mediaWidgetBuilder = freezed,Object? widgetBuilder = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? addMediaIcon = freezed,Object? addMediaText = freezed,Object? fieldHeight = freezed,Object? fit = freezed,Object? cropAspectRatioOrCircle = freezed,Object? cropShowGrid = freezed,Object? editButtonBuilder = freezed,Object? mediaWidgetBuilder = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_MediaInputUiSettings(
 addMediaIcon: freezed == addMediaIcon ? _self.addMediaIcon : addMediaIcon // ignore: cast_nullable_to_non_nullable
 as Widget?,addMediaText: freezed == addMediaText ? _self.addMediaText : addMediaText // ignore: cast_nullable_to_non_nullable
@@ -1449,8 +1449,8 @@ as String?,fieldHeight: freezed == fieldHeight ? _self.fieldHeight : fieldHeight
 as int?,fit: freezed == fit ? _self.fit : fit // ignore: cast_nullable_to_non_nullable
 as BoxFit?,cropAspectRatioOrCircle: freezed == cropAspectRatioOrCircle ? _self.cropAspectRatioOrCircle : cropAspectRatioOrCircle // ignore: cast_nullable_to_non_nullable
 as double?,cropShowGrid: freezed == cropShowGrid ? _self.cropShowGrid : cropShowGrid // ignore: cast_nullable_to_non_nullable
-as bool?,canCrop: freezed == canCrop ? _self.canCrop : canCrop // ignore: cast_nullable_to_non_nullable
-as CanCropDef?,mediaWidgetBuilder: freezed == mediaWidgetBuilder ? _self.mediaWidgetBuilder : mediaWidgetBuilder // ignore: cast_nullable_to_non_nullable
+as bool?,editButtonBuilder: freezed == editButtonBuilder ? _self.editButtonBuilder : editButtonBuilder // ignore: cast_nullable_to_non_nullable
+as MediaEditButtonBuilderDef?,mediaWidgetBuilder: freezed == mediaWidgetBuilder ? _self.mediaWidgetBuilder : mediaWidgetBuilder // ignore: cast_nullable_to_non_nullable
 as MediaWidgetBuilderDef?,widgetBuilder: freezed == widgetBuilder ? _self.widgetBuilder : widgetBuilder // ignore: cast_nullable_to_non_nullable
 as MediaFieldBuilderDef?,
   ));

@@ -431,7 +431,8 @@ extension InputsNodeUiSettingsX on InputsNodeUiSettings? {
       (this?.childrenVisibility == ChildrenVisibility.whenAsked ? -1 : 0);
 }
 
-typedef CanCropDef = bool Function(Media media);
+typedef MediaEditButtonBuilderDef =
+    Widget Function(VoidCallback? onPressed, Media media);
 typedef MediaWidgetBuilderDef =
     Widget Function({
       required Media media,
@@ -455,7 +456,8 @@ abstract class MediaInputUiSettings with _$MediaInputUiSettings {
     /// For a circle cropping, use MediaService.circleAspectRatio
     double? cropAspectRatioOrCircle,
     bool? cropShowGrid,
-    @notSerializable CanCropDef? canCrop,
+
+    @notSerializable MediaEditButtonBuilderDef? editButtonBuilder,
 
     /// Use this to overwrite [MediaService.mediaWidgetBuilder].
     @notSerializable MediaWidgetBuilderDef? mediaWidgetBuilder,
@@ -475,7 +477,7 @@ abstract class MediaInputUiSettings with _$MediaInputUiSettings {
           cropAspectRatioOrCircle:
               cropAspectRatioOrCircle ?? other.cropAspectRatioOrCircle,
           cropShowGrid: cropShowGrid ?? other.cropShowGrid,
-          canCrop: canCrop ?? other.canCrop,
+          editButtonBuilder: editButtonBuilder ?? other.editButtonBuilder,
           mediaWidgetBuilder: mediaWidgetBuilder ?? other.mediaWidgetBuilder,
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,
         );

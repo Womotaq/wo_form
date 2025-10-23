@@ -85,6 +85,7 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
     required int? maxCount,
     @Default(0) int minCount,
     List<Media>? initialValues,
+    @notSerializable OnEditMediaDef? onEdit,
     @notSerializable GetCustomErrorForListDef<Media>? getCustomError,
 
     /// An optionnal callback when the value changed
@@ -670,6 +671,12 @@ typedef GetCustomErrorForListDef<T> =
     WoFormInputError? Function(
       List<T> value,
       String path,
+    );
+typedef OnEditMediaDef =
+    Future<void> Function(
+      BuildContext context,
+      Media media,
+      WoFieldData<MediaInput<Object?>, List<Media>?> data,
     );
 
 extension SelectInputX<T> on SelectInput<T> {

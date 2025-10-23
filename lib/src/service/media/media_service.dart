@@ -32,8 +32,6 @@ abstract class MediaService {
     ],
   );
 
-  Future<MediaType> typeOfMediaUrl(MediaUrl media);
-
   Future<MediaUrl> upload({
     required Media media,
     required String path,

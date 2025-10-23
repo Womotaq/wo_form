@@ -1911,7 +1911,7 @@ $DurationInputUiSettingsCopyWith<$Res>? get uiSettings {
 @JsonSerializable()
 
 class MediaInput<T extends Object?> extends WoFormInput<T> {
-  const MediaInput({required this.id, required this.importSettings, required this.maxCount, this.minCount = 0, final  List<Media>? initialValues, @notSerializable this.getCustomError, @notSerializable this.onValueChanged, this.submitFormOnSelect = false, this.uploadPath, this.uiSettings, final  String? $type}): assert(maxCount == null || minCount <= maxCount, 'maxCount must be higher or equal to minCount'),_initialValues = initialValues,$type = $type ?? 'media',super._();
+  const MediaInput({required this.id, required this.importSettings, required this.maxCount, this.minCount = 0, final  List<Media>? initialValues, @notSerializable this.onEdit, @notSerializable this.getCustomError, @notSerializable this.onValueChanged, this.submitFormOnSelect = false, this.uploadPath, this.uiSettings, final  String? $type}): assert(maxCount == null || minCount <= maxCount, 'maxCount must be higher or equal to minCount'),_initialValues = initialValues,$type = $type ?? 'media',super._();
   factory MediaInput.fromJson(Map<String, dynamic> json) => _$MediaInputFromJson(json);
 
 @override final  String id;
@@ -1927,6 +1927,7 @@ class MediaInput<T extends Object?> extends WoFormInput<T> {
   return EqualUnmodifiableListView(value);
 }
 
+@notSerializable final  OnEditMediaDef? onEdit;
 @override@notSerializable final  GetCustomErrorForListDef<Media>? getCustomError;
 /// An optionnal callback when the value changed
 @notSerializable final  void Function(List<Media>? value)? onValueChanged;
@@ -1953,16 +1954,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaInput<T>&&(identical(other.id, id) || other.id == id)&&(identical(other.importSettings, importSettings) || other.importSettings == importSettings)&&(identical(other.maxCount, maxCount) || other.maxCount == maxCount)&&(identical(other.minCount, minCount) || other.minCount == minCount)&&const DeepCollectionEquality().equals(other._initialValues, _initialValues)&&(identical(other.getCustomError, getCustomError) || other.getCustomError == getCustomError)&&(identical(other.onValueChanged, onValueChanged) || other.onValueChanged == onValueChanged)&&(identical(other.submitFormOnSelect, submitFormOnSelect) || other.submitFormOnSelect == submitFormOnSelect)&&(identical(other.uploadPath, uploadPath) || other.uploadPath == uploadPath)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaInput<T>&&(identical(other.id, id) || other.id == id)&&(identical(other.importSettings, importSettings) || other.importSettings == importSettings)&&(identical(other.maxCount, maxCount) || other.maxCount == maxCount)&&(identical(other.minCount, minCount) || other.minCount == minCount)&&const DeepCollectionEquality().equals(other._initialValues, _initialValues)&&(identical(other.onEdit, onEdit) || other.onEdit == onEdit)&&(identical(other.getCustomError, getCustomError) || other.getCustomError == getCustomError)&&(identical(other.onValueChanged, onValueChanged) || other.onValueChanged == onValueChanged)&&(identical(other.submitFormOnSelect, submitFormOnSelect) || other.submitFormOnSelect == submitFormOnSelect)&&(identical(other.uploadPath, uploadPath) || other.uploadPath == uploadPath)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,importSettings,maxCount,minCount,const DeepCollectionEquality().hash(_initialValues),getCustomError,onValueChanged,submitFormOnSelect,uploadPath,uiSettings);
+int get hashCode => Object.hash(runtimeType,id,importSettings,maxCount,minCount,const DeepCollectionEquality().hash(_initialValues),onEdit,getCustomError,onValueChanged,submitFormOnSelect,uploadPath,uiSettings);
 
 @override
 String toString() {
-  return 'WoFormInput<$T>.media(id: $id, importSettings: $importSettings, maxCount: $maxCount, minCount: $minCount, initialValues: $initialValues, getCustomError: $getCustomError, onValueChanged: $onValueChanged, submitFormOnSelect: $submitFormOnSelect, uploadPath: $uploadPath, uiSettings: $uiSettings)';
+  return 'WoFormInput<$T>.media(id: $id, importSettings: $importSettings, maxCount: $maxCount, minCount: $minCount, initialValues: $initialValues, onEdit: $onEdit, getCustomError: $getCustomError, onValueChanged: $onValueChanged, submitFormOnSelect: $submitFormOnSelect, uploadPath: $uploadPath, uiSettings: $uiSettings)';
 }
 
 
@@ -1973,7 +1974,7 @@ abstract mixin class $MediaInputCopyWith<T extends Object?,$Res> implements $WoF
   factory $MediaInputCopyWith(MediaInput<T> value, $Res Function(MediaInput<T>) _then) = _$MediaInputCopyWithImpl;
 @override @useResult
 $Res call({
- String id, MediaImportSettings importSettings, int? maxCount, int minCount, List<Media>? initialValues,@notSerializable GetCustomErrorForListDef<Media>? getCustomError,@notSerializable void Function(List<Media>? value)? onValueChanged, bool submitFormOnSelect, String? uploadPath, MediaInputUiSettings? uiSettings
+ String id, MediaImportSettings importSettings, int? maxCount, int minCount, List<Media>? initialValues,@notSerializable OnEditMediaDef? onEdit,@notSerializable GetCustomErrorForListDef<Media>? getCustomError,@notSerializable void Function(List<Media>? value)? onValueChanged, bool submitFormOnSelect, String? uploadPath, MediaInputUiSettings? uiSettings
 });
 
 
@@ -1990,14 +1991,15 @@ class _$MediaInputCopyWithImpl<T extends Object?,$Res>
 
 /// Create a copy of WoFormInput
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? importSettings = null,Object? maxCount = freezed,Object? minCount = null,Object? initialValues = freezed,Object? getCustomError = freezed,Object? onValueChanged = freezed,Object? submitFormOnSelect = null,Object? uploadPath = freezed,Object? uiSettings = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? importSettings = null,Object? maxCount = freezed,Object? minCount = null,Object? initialValues = freezed,Object? onEdit = freezed,Object? getCustomError = freezed,Object? onValueChanged = freezed,Object? submitFormOnSelect = null,Object? uploadPath = freezed,Object? uiSettings = freezed,}) {
   return _then(MediaInput<T>(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,importSettings: null == importSettings ? _self.importSettings : importSettings // ignore: cast_nullable_to_non_nullable
 as MediaImportSettings,maxCount: freezed == maxCount ? _self.maxCount : maxCount // ignore: cast_nullable_to_non_nullable
 as int?,minCount: null == minCount ? _self.minCount : minCount // ignore: cast_nullable_to_non_nullable
 as int,initialValues: freezed == initialValues ? _self._initialValues : initialValues // ignore: cast_nullable_to_non_nullable
-as List<Media>?,getCustomError: freezed == getCustomError ? _self.getCustomError : getCustomError // ignore: cast_nullable_to_non_nullable
+as List<Media>?,onEdit: freezed == onEdit ? _self.onEdit : onEdit // ignore: cast_nullable_to_non_nullable
+as OnEditMediaDef?,getCustomError: freezed == getCustomError ? _self.getCustomError : getCustomError // ignore: cast_nullable_to_non_nullable
 as GetCustomErrorForListDef<Media>?,onValueChanged: freezed == onValueChanged ? _self.onValueChanged : onValueChanged // ignore: cast_nullable_to_non_nullable
 as void Function(List<Media>? value)?,submitFormOnSelect: null == submitFormOnSelect ? _self.submitFormOnSelect : submitFormOnSelect // ignore: cast_nullable_to_non_nullable
 as bool,uploadPath: freezed == uploadPath ? _self.uploadPath : uploadPath // ignore: cast_nullable_to_non_nullable
