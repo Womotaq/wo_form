@@ -146,27 +146,6 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
     }
   }
 
-  // WoFormNode TODO : sort
-
-  @override
-  Iterable<String> getAllInputPaths({
-    required WoFormValues values,
-    required String parentPath,
-  }) => ['$parentPath/$id'];
-
-  @override
-  Iterable<WoFormInputError> getErrors({
-    required WoFormValues values,
-    required String parentPath,
-    bool recursive = true,
-  }) => [getError(values['$parentPath/$id'], parentPath: parentPath)].nonNulls;
-
-  @override
-  String? getExportKey({
-    required WoFormValues values,
-    required String parentPath,
-  }) => id;
-
   // --
 
   @override
@@ -218,15 +197,22 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
       case NumInput():
         return value as num?;
       case SelectInput(maxCount: final maxCount, toJsonT: final toJsonT):
-        return SelectInput._selectedValuesToJson<T>(
-          selectedValues: value as List<T>?,
-          toJsonT: toJsonT,
-          asList: maxCount != 1,
-        );
+        final selectedValues = value as List<T>?;
+        if (selectedValues == null) return null;
+
+        final valuesToJson = selectedValues.map(toJsonT ?? _defaultToJsonT);
+
+        return maxCount != 1 ? valuesToJson.toList() : valuesToJson.firstOrNull;
       case StringInput():
         return value as String?;
     }
   }
+
+  @override
+  Iterable<String> getAllInputPaths({
+    required WoFormValues values,
+    required String parentPath,
+  }) => ['$parentPath/$id'];
 
   WoFormInputError? getError(dynamic value, {required String parentPath}) {
     switch (this) {
@@ -318,7 +304,7 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
         maxCount: final maxCount,
         getCustomError: final getCustomError,
       ):
-        return SelectInput._validator<Media>(
+        return _listValidator<Media>(
           inputId: inputId,
           parentPath: parentPath,
           selectedValues: (value as List<Media>?) ?? [],
@@ -365,7 +351,7 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
         maxCount: final maxCount,
         getCustomError: final getCustomError,
       ):
-        return SelectInput._validator<T>(
+        return _listValidator<T>(
           inputId: id,
           parentPath: parentPath,
           selectedValues: (value as List?)?.whereType<T>().toList() ?? [],
@@ -405,6 +391,19 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
         }
     }
   }
+
+  @override
+  Iterable<WoFormInputError> getErrors({
+    required WoFormValues values,
+    required String parentPath,
+    bool recursive = true,
+  }) => [getError(values['$parentPath/$id'], parentPath: parentPath)].nonNulls;
+
+  @override
+  String? getExportKey({
+    required WoFormValues values,
+    required String parentPath,
+  }) => id;
 
   @override
   Json getInitialValues({required String parentPath}) {
@@ -462,6 +461,54 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
     };
 
     return (flexRaw != null && flexRaw < 0) ? 1 : flexRaw;
+  }
+
+  // TODO : if selectString deleted, move in WoFormInput
+  static WoFormInputError? _listValidator<T>({
+    required String inputId,
+    required String parentPath,
+    required List<T> selectedValues,
+    required List<T> availibleValues,
+    required List<String>? idsOfAvailibleValues,
+    required int minCount,
+    required int? maxCount,
+    required GetCustomErrorForListDef<T>? getCustomError,
+  }) {
+    final customError = getCustomError?.call(
+      selectedValues,
+      '$parentPath/$inputId',
+    );
+    if (customError != null) return customError;
+
+    if (minCount == 1 && maxCount == 1 && selectedValues.isEmpty) {
+      return WoFormInputError.empty(path: '$parentPath/$inputId');
+    }
+
+    if (selectedValues.length < minCount) {
+      return WoFormInputError.minBound(path: '$parentPath/$inputId');
+    }
+
+    if (maxCount != null && selectedValues.length > maxCount) {
+      return WoFormInputError.maxBound(path: '$parentPath/$inputId');
+    }
+
+    if (idsOfAvailibleValues != null) {
+      if (idsOfAvailibleValues.isNotEmpty) {
+        for (final value in selectedValues) {
+          if (!idsOfAvailibleValues.contains(value)) {
+            return WoFormInputError.invalid(path: '$parentPath/$inputId');
+          }
+        }
+      }
+    } else if (availibleValues.isNotEmpty) {
+      for (final value in selectedValues) {
+        if (!availibleValues.contains(value)) {
+          return WoFormInputError.invalid(path: '$parentPath/$inputId');
+        }
+      }
+    }
+
+    return null;
   }
 }
 
@@ -567,69 +614,6 @@ abstract class SelectInput<T> extends WoFormInput<T> with _$SelectInput<T> {
     'uiSettings': uiSettings?.toJson(),
     'quizSettings': quizSettings?.toJson(),
   };
-
-  // --
-
-  // TODO : if selectString deleted, move in WoFormInput
-  static WoFormInputError? _validator<T>({
-    required String inputId,
-    required String parentPath,
-    required List<T> selectedValues,
-    required List<T> availibleValues,
-    required List<String>? idsOfAvailibleValues,
-    required int minCount,
-    required int? maxCount,
-    required GetCustomErrorForListDef<T>? getCustomError,
-  }) {
-    final customError = getCustomError?.call(
-      selectedValues,
-      '$parentPath/$inputId',
-    );
-    if (customError != null) return customError;
-
-    if (minCount == 1 && maxCount == 1 && selectedValues.isEmpty) {
-      return WoFormInputError.empty(path: '$parentPath/$inputId');
-    }
-
-    if (selectedValues.length < minCount) {
-      return WoFormInputError.minBound(path: '$parentPath/$inputId');
-    }
-
-    if (maxCount != null && selectedValues.length > maxCount) {
-      return WoFormInputError.maxBound(path: '$parentPath/$inputId');
-    }
-
-    if (idsOfAvailibleValues != null) {
-      if (idsOfAvailibleValues.isNotEmpty) {
-        for (final value in selectedValues) {
-          if (!idsOfAvailibleValues.contains(value)) {
-            return WoFormInputError.invalid(path: '$parentPath/$inputId');
-          }
-        }
-      }
-    } else if (availibleValues.isNotEmpty) {
-      for (final value in selectedValues) {
-        if (!availibleValues.contains(value)) {
-          return WoFormInputError.invalid(path: '$parentPath/$inputId');
-        }
-      }
-    }
-
-    return null;
-  }
-
-  // TODO : if selectString deleted, move in WoFormInput
-  static Object? _selectedValuesToJson<T>({
-    required List<T>? selectedValues,
-    required Object? Function(T)? toJsonT,
-    required bool asList,
-  }) {
-    if (selectedValues == null) return null;
-
-    final valuesToJson = selectedValues.map(toJsonT ?? _defaultToJsonT);
-
-    return asList ? valuesToJson.toList() : valuesToJson.firstOrNull;
-  }
 }
 
 Object? _defaultToJsonT<T>(T value) {
