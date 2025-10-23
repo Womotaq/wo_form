@@ -730,9 +730,21 @@ class WoFormValues {
     return null;
   }
 
-  /// path can be a key, or a string starting with #, like #endsAt.
+  /// [path] can be a key, or a string starting with #, like #endsAt.
   /// Then, the result is the value corresponding to the first key
   /// that ends with path.
+  ///
+  /// ```dart
+  /// values = WoFormValues({
+  ///   '/list/firstName': 'John',
+  ///   '/list/lastName': 'Doe',
+  ///   '/anotherlist/firstName': 'Davy',
+  /// });
+  ///
+  /// final firstName = values.getValue('/list/firstName'); // John
+  /// final firstName = values.getValue('#firstName'); // John
+  /// final firstName = values.getValue('#anotherlist#firstName'); // Davy
+  /// ```
   dynamic getValue(String path, {String? parentPath}) {
     if (parentPath != null) {
       // ignore: parameter_assignments
@@ -740,10 +752,17 @@ class WoFormValues {
     }
 
     if (!path.startsWith('#')) return _values[path];
+    final sections = path.substring(1).split('#').map((section) => '/$section');
+    final lastSection = sections.last;
+    final middleSections = sections
+        .take(sections.length - 1)
+        .map((section) => '$section/');
 
-    final lastSection = '/${path.substring(1)}';
     for (final entry in _values.entries) {
-      if (entry.key.endsWith(lastSection)) return entry.value;
+      if (entry.key.endsWith(lastSection) &&
+          (middleSections.every(entry.key.contains))) {
+        return entry.value;
+      }
     }
 
     return null;
@@ -756,6 +775,22 @@ class WoFormValues {
 
   /// If the value at [path] is [T], then the value is returned, casted.
   /// Else, null is returned.
+  ///
+  /// [path] can be a key, or a string starting with #, like #endsAt.
+  /// Then, the result is the value corresponding to the first key
+  /// that ends with path.
+  ///
+  /// ```dart
+  /// values = WoFormValues({
+  ///   '/list/firstName': 'John',
+  ///   '/list/lastName': 'Doe',
+  ///   '/anotherlist/firstName': 'Davy',
+  /// });
+  ///
+  /// final firstName = values.get<String>('/list/firstName'); // John
+  /// final firstName = values.get<String>('#firstName'); // John
+  /// final firstName = values.get<String>('#anotherlist#firstName'); // Davy
+  /// ```
   T? get<T>(String path) {
     final value = getValue(path);
     if (value is T) return value;

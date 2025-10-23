@@ -904,8 +904,6 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
     WoFormInput() => throw UnimplementedError(),
   };
 
-  WoFormNode withId({required String id}) => copyWith(id: id);
-
   /// This method returns the value to provide to [Flexible.flex].
   ///
   /// Used when [WoFormUiSettings.layout] is [LayoutMethod.flexible].

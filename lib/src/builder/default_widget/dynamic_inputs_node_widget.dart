@@ -188,7 +188,7 @@ class DynamicInputsNodeAddButton extends StatelessWidget {
   }
 
   void addTemplate(BuildContext context, WoFormNode inputFromTemplate) {
-    final input = inputFromTemplate.withId(
+    final input = inputFromTemplate.copyWith(
       id:
           (data.input.uiSettings?.generateId ??
                   WoFormTheme.of(context)?.generateId ??
