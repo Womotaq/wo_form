@@ -67,8 +67,8 @@ class Push {
     isScrollControlled: true,
     useSafeArea: true,
     isDismissible: dismissible,
-    // When the drag is enabled, the modal can be closed by swapping down,
-    // even when isDismissible is set to true.
+    // When isDismissible is set to true, if the drag is enabled, the modal
+    // still can be closed by swapping down, so we need to disable it.
     enableDrag: dismissible,
     clipBehavior: Clip.hardEdge,
     builder: (context) => switch (layout) {
@@ -78,6 +78,7 @@ class Push {
           expand: false,
           initialChildSize: initialBottomSheetSize,
           minChildSize: initialBottomSheetSize * 2 / 3,
+          shouldCloseOnMinExtent: dismissible,
           builder: (context, scrollController) => ScrollControllerProvider(
             controller: scrollController,
             child: child,
