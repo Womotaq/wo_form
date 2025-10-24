@@ -108,6 +108,7 @@ class _SearchBuilderState<T> extends State<SearchBuilder<T>> {
   Future<void> loadData() async {
     /// Query hasn't changed, don't need to load data
     if (_results.id == _query.raw) return;
+    if (!mounted) return;
 
     final requestId = ++_activeRequestId;
     setState(() => _results = DataLoading(_query.raw, _results.data));
@@ -118,6 +119,7 @@ class _SearchBuilderState<T> extends State<SearchBuilder<T>> {
       // Ensure this is the latest request and widget still mounted
       if (requestId != _activeRequestId || !mounted) return;
     } catch (error) {
+      if (!mounted) return;
       setState(() => _results = DataError(_query.raw, error));
       return;
     }

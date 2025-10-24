@@ -11,6 +11,7 @@ QuizSettingsSingleString _$QuizSettingsSingleStringFromJson(
 ) => QuizSettingsSingleString(
   correctAnswer: json['correctAnswer'] as String,
   score: json['score'] as num? ?? 1,
+  $type: json['runtimeType'] as String?,
 );
 
 Map<String, dynamic> _$QuizSettingsSingleStringToJson(
@@ -18,4 +19,11 @@ Map<String, dynamic> _$QuizSettingsSingleStringToJson(
 ) => <String, dynamic>{
   'correctAnswer': instance.correctAnswer,
   'score': instance.score,
+  'runtimeType': instance.$type,
 };
+
+_QuizSettingsTBR _$QuizSettingsTBRFromJson(Map<String, dynamic> json) =>
+    _QuizSettingsTBR($type: json['runtimeType'] as String?);
+
+Map<String, dynamic> _$QuizSettingsTBRToJson(_QuizSettingsTBR instance) =>
+    <String, dynamic>{'runtimeType': instance.$type};

@@ -27,6 +27,11 @@ sealed class QuizSettings with _$QuizSettings {
     @Default(1) num score,
   }) = QuizSettingsSingleString;
 
+  /// If there is only one request type, the key 'type' won't be generated
+  /// in the json. This is temporary, until a new QuizSettings type appears
+  // ignore: unused_element, non_constant_identifier_names
+  const factory QuizSettings._TBR() = _QuizSettingsTBR;
+
   const QuizSettings._();
 
   factory QuizSettings.fromJson(Json json) => _$QuizSettingsFromJson(json);

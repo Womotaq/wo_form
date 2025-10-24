@@ -16,10 +16,10 @@ class SelectField<T> extends StatelessWidget {
     final quizSettings = data.input.quizSettings;
     final searchSettings = data.input.searchSettings;
     final uiSettings = data.input.uiSettings;
-    final scoreWidget = quizSettings == null
-        ? null
-        : (uiSettings?.scoreBuilder ?? woTheme?.scoreBuilder ?? ScoreWidget.new)
-              .call(score: quizSettings.score);
+    final scoreWidget = quizSettings is QuizSettingsSingleString
+        ? (uiSettings?.scoreBuilder ?? woTheme?.scoreBuilder ?? ScoreWidget.new)
+              .call(score: quizSettings.score)
+        : null;
 
     switch (uiSettings?.childrenVisibility) {
       case null:

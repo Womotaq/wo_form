@@ -14,20 +14,31 @@ T _$identity<T>(T value) => value;
 QuizSettings _$QuizSettingsFromJson(
   Map<String, dynamic> json
 ) {
-    return QuizSettingsSingleString.fromJson(
-      json
-    );
+        switch (json['runtimeType']) {
+                  case 'singleString':
+          return QuizSettingsSingleString.fromJson(
+            json
+          );
+                case '_TBR':
+          return _QuizSettingsTBR.fromJson(
+            json
+          );
+        
+          default:
+            throw CheckedFromJsonException(
+  json,
+  'runtimeType',
+  'QuizSettings',
+  'Invalid union type "${json['runtimeType']}"!'
+);
+        }
+      
 }
 
 /// @nodoc
 mixin _$QuizSettings {
 
- String get correctAnswer; num get score;
-/// Create a copy of QuizSettings
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$QuizSettingsCopyWith<QuizSettings> get copyWith => _$QuizSettingsCopyWithImpl<QuizSettings>(this as QuizSettings, _$identity);
+
 
   /// Serializes this QuizSettings to a JSON map.
   Map<String, dynamic> toJson();
@@ -35,51 +46,24 @@ $QuizSettingsCopyWith<QuizSettings> get copyWith => _$QuizSettingsCopyWithImpl<Q
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is QuizSettings&&(identical(other.correctAnswer, correctAnswer) || other.correctAnswer == correctAnswer)&&(identical(other.score, score) || other.score == score));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is QuizSettings);
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,correctAnswer,score);
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'QuizSettings(correctAnswer: $correctAnswer, score: $score)';
+  return 'QuizSettings()';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $QuizSettingsCopyWith<$Res>  {
-  factory $QuizSettingsCopyWith(QuizSettings value, $Res Function(QuizSettings) _then) = _$QuizSettingsCopyWithImpl;
-@useResult
-$Res call({
- String correctAnswer, num score
-});
-
-
-
-
-}
-/// @nodoc
-class _$QuizSettingsCopyWithImpl<$Res>
-    implements $QuizSettingsCopyWith<$Res> {
-  _$QuizSettingsCopyWithImpl(this._self, this._then);
-
-  final QuizSettings _self;
-  final $Res Function(QuizSettings) _then;
-
-/// Create a copy of QuizSettings
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? correctAnswer = null,Object? score = null,}) {
-  return _then(_self.copyWith(
-correctAnswer: null == correctAnswer ? _self.correctAnswer : correctAnswer // ignore: cast_nullable_to_non_nullable
-as String,score: null == score ? _self.score : score // ignore: cast_nullable_to_non_nullable
-as num,
-  ));
-}
-
+class $QuizSettingsCopyWith<$Res>  {
+$QuizSettingsCopyWith(QuizSettings _, $Res Function(QuizSettings) __);
 }
 
 
@@ -88,15 +72,19 @@ as num,
 @JsonSerializable()
 
 class QuizSettingsSingleString extends QuizSettings {
-  const QuizSettingsSingleString({required this.correctAnswer, this.score = 1}): assert(score > 0, 'score must be positive'),super._();
+  const QuizSettingsSingleString({required this.correctAnswer, this.score = 1, final  String? $type}): assert(score > 0, 'score must be positive'),$type = $type ?? 'singleString',super._();
   factory QuizSettingsSingleString.fromJson(Map<String, dynamic> json) => _$QuizSettingsSingleStringFromJson(json);
 
-@override final  String correctAnswer;
-@override@JsonKey() final  num score;
+ final  String correctAnswer;
+@JsonKey() final  num score;
+
+@JsonKey(name: 'runtimeType')
+final String $type;
+
 
 /// Create a copy of QuizSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $QuizSettingsSingleStringCopyWith<QuizSettingsSingleString> get copyWith => _$QuizSettingsSingleStringCopyWithImpl<QuizSettingsSingleString>(this, _$identity);
 
@@ -125,7 +113,7 @@ String toString() {
 /// @nodoc
 abstract mixin class $QuizSettingsSingleStringCopyWith<$Res> implements $QuizSettingsCopyWith<$Res> {
   factory $QuizSettingsSingleStringCopyWith(QuizSettingsSingleString value, $Res Function(QuizSettingsSingleString) _then) = _$QuizSettingsSingleStringCopyWithImpl;
-@override @useResult
+@useResult
 $Res call({
  String correctAnswer, num score
 });
@@ -144,7 +132,7 @@ class _$QuizSettingsSingleStringCopyWithImpl<$Res>
 
 /// Create a copy of QuizSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? correctAnswer = null,Object? score = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? correctAnswer = null,Object? score = null,}) {
   return _then(QuizSettingsSingleString(
 correctAnswer: null == correctAnswer ? _self.correctAnswer : correctAnswer // ignore: cast_nullable_to_non_nullable
 as String,score: null == score ? _self.score : score // ignore: cast_nullable_to_non_nullable
@@ -154,5 +142,44 @@ as num,
 
 
 }
+
+/// @nodoc
+@JsonSerializable()
+
+class _QuizSettingsTBR extends QuizSettings {
+  const _QuizSettingsTBR({final  String? $type}): $type = $type ?? '_TBR',super._();
+  factory _QuizSettingsTBR.fromJson(Map<String, dynamic> json) => _$QuizSettingsTBRFromJson(json);
+
+
+
+@JsonKey(name: 'runtimeType')
+final String $type;
+
+
+
+@override
+Map<String, dynamic> toJson() {
+  return _$QuizSettingsTBRToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _QuizSettingsTBR);
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'QuizSettings._TBR()';
+}
+
+
+}
+
+
+
 
 // dart format on
