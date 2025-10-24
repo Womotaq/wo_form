@@ -123,6 +123,9 @@ class DynamicInputsNodeAddButton extends StatelessWidget {
                 onPressed: onPressed,
                 label: label,
                 icon: const Icon(Icons.add),
+                style: WoFormTheme.of(
+                  context,
+                )?.submitButtonStyle?.call(context),
               );
 
         return data.input.templates.length == 1
