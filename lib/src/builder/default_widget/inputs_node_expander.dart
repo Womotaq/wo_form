@@ -79,32 +79,49 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
       );
 }
 
-class _InputsNodePage extends StatelessWidget {
+class _InputsNodePage extends StatefulWidget {
   const _InputsNodePage(this.path);
 
   final String path;
 
   @override
-  Widget build(BuildContext context) {
-    // TODO : better
+  State<_InputsNodePage> createState() => _InputsNodePageState();
+}
+
+class _InputsNodePageState extends State<_InputsNodePage> {
+  @override
+  void initState() {
+    super.initState();
+
     context.read<WoFormValuesCubit>().addTemporarySubmitData(
       onSubmitting: () async {
-        Navigator.pop(context);
+        // Context cannot be poped anymore if valuesCubit.submit was called
+        // from the following PopScope.onPopInvokedWithResult
+        if (context.mounted && Navigator.of(context).canPop()) {
+          Navigator.pop(context);
+        }
         return null;
       },
-      path: path,
+      path: widget.path,
     );
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return PopScope(
-      onPopInvokedWithResult: (didPop, result) {
+      onPopInvokedWithResult: (didPop, result) async {
         if (didPop) {
-          context.read<WoFormValuesCubit>().removeTemporarySubmitData(
-            path: path,
-          );
+          final valuesCubit = context.read<WoFormValuesCubit>();
+          if (valuesCubit.state.submitPath == widget.path) {
+            // The context has been poped without submitting the temporary
+            // submit data. In order to mark the children as visited, we need
+            // to enforce a submission.
+            await valuesCubit.submit(context);
+          }
         }
       },
       child: InputsNodeWidgetBuilder(
-        path: path,
+        path: widget.path,
         uiSettings: const InputsNodeUiSettings(
           childrenVisibility: ChildrenVisibility.always,
         ),
