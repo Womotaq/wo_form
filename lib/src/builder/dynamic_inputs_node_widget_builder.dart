@@ -18,14 +18,20 @@ class DynamicInputsNodeWidgetBuilder extends StatelessWidget {
 
     return BlocSelector<WoFormLockCubit, Set<String>, bool>(
       selector: (lockedInputs) => lockedInputs.contains(path),
-      builder: (context, inputIsLocked) {
-        return WoFormValueBuilder<List<WoFormNode>>(
+      builder: (context, inputIsLocked) => WoFormErrorBuilder(
+        path: path,
+        builder: (context, error) => WoFormValueBuilder<List<WoFormNode>>(
           path: path,
           builder: (context, children) {
+            final errorText = error == null
+                ? null
+                : context.woFormL10n.translateError(error);
+
             final fieldData = WoFieldData(
               path: path,
               input: node,
               value: children,
+              errorText: errorText,
               onValueChanged: inputIsLocked
                   ? null
                   : (
@@ -43,8 +49,8 @@ class DynamicInputsNodeWidgetBuilder extends StatelessWidget {
                     DynamicInputsNodeWidget.new)
                 .call(fieldData);
           },
-        );
-      },
+        ),
+      ),
     );
   }
 

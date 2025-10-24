@@ -35,8 +35,8 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
 
   const factory WoFormNode.dynamicInputs({
     required String id,
-    // @DynamicInputTemplatesConverter()
     @Default([]) List<DynamicInputTemplate> templates,
+    int? maxCount,
     @InputsListConverter() List<WoFormNode>? initialChildren,
     DynamicInputsNodeUiSettings? uiSettings,
     ExportSettings? exportSettings,
@@ -591,7 +591,23 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
           parentPath: '$parentPath/$id',
         );
 
-      case DynamicInputsNode():
+      case DynamicInputsNode(maxCount: final maxCount):
+        final children = values.get<List<WoFormNode>>('$parentPath/$id') ?? [];
+
+        WoFormInputError? error;
+        if (maxCount != null && children.length > maxCount) {
+          error = WoFormInputError.maxBound(path: '$parentPath/$id');
+        }
+
+        return [
+          ?error,
+          for (final child in children)
+            ...child.getErrors(
+              values: values,
+              parentPath: '$parentPath/$id',
+            ),
+        ].nonNulls;
+
       case InputsNode():
         final children = this is InputsNode
             ? (this as InputsNode).children

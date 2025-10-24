@@ -41,6 +41,7 @@ DynamicInputsNode<T> _$DynamicInputsNodeFromJson<T extends Object?>(
           ?.map((e) => DynamicInputTemplate.fromJson(e as Map<String, dynamic>))
           .toList() ??
       const [],
+  maxCount: (json['maxCount'] as num?)?.toInt(),
   initialChildren:
       _$JsonConverterFromJson<List<dynamic>, List<WoFormNode<Object?>>>(
         json['initialChildren'],
@@ -62,6 +63,7 @@ Map<String, dynamic> _$DynamicInputsNodeToJson<T extends Object?>(
 ) => <String, dynamic>{
   'id': instance.id,
   'templates': instance.templates.map((e) => e.toJson()).toList(),
+  'maxCount': instance.maxCount,
   'initialChildren':
       _$JsonConverterToJson<List<dynamic>, List<WoFormNode<Object?>>>(
         instance.initialChildren,

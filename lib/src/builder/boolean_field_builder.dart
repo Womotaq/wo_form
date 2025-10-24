@@ -25,54 +25,43 @@ class BooleanFieldBuilder extends StatelessWidget {
         path: path,
         child: BlocSelector<WoFormLockCubit, Set<String>, bool>(
           selector: (lockedInputs) => lockedInputs.contains(path),
-          builder: (context, inputIsLocked) {
-            return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
-              builder: (context, status) {
-                return WoFormValueBuilder<bool>(
+          builder: (context, inputIsLocked) => WoFormErrorBuilder(
+            path: path,
+            builder: (context, error) => WoFormValueBuilder<bool>(
+              path: path,
+              builder: (context, value) {
+                final errorText = error == null
+                    ? null
+                    : context.woFormL10n.translateError(error);
+
+                final fieldData = WoFieldData(
                   path: path,
-                  builder: (context, value) {
-                    final String? errorText;
-                    if (status is InProgressStatus) {
-                      final error = status.getError(path: path);
-                      if (error == null) {
-                        errorText = null;
-                      } else {
-                        errorText = context.woFormL10n.translateError(error);
-                      }
-                    } else {
-                      errorText = null;
-                    }
+                  input: input,
+                  value: value,
+                  errorText: errorText,
+                  onValueChanged: inputIsLocked
+                      ? null
+                      : (
+                          bool? value, {
+                          UpdateStatus updateStatus = UpdateStatus.yes,
+                        }) {
+                          valuesCubit.onValueChanged(
+                            path: path,
+                            value: value,
+                            updateStatus: updateStatus,
+                          );
 
-                    final fieldData = WoFieldData(
-                      path: path,
-                      input: input,
-                      value: value,
-                      errorText: errorText,
-                      onValueChanged: inputIsLocked
-                          ? null
-                          : (
-                              bool? value, {
-                              UpdateStatus updateStatus = UpdateStatus.yes,
-                            }) {
-                              valuesCubit.onValueChanged(
-                                path: path,
-                                value: value,
-                                updateStatus: updateStatus,
-                              );
-
-                              input.onValueChanged?.call(value);
-                            },
-                    );
-
-                    return (input.uiSettings?.widgetBuilder ??
-                            WoFormTheme.of(context)?.booleanFieldBuilder ??
-                            BooleanField.new)
-                        .call(fieldData);
-                  },
+                          input.onValueChanged?.call(value);
+                        },
                 );
+
+                return (input.uiSettings?.widgetBuilder ??
+                        WoFormTheme.of(context)?.booleanFieldBuilder ??
+                        BooleanField.new)
+                    .call(fieldData);
               },
-            );
-          },
+            ),
+          ),
         ),
       ),
     );

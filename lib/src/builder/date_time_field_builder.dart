@@ -24,52 +24,39 @@ class DateTimeFieldBuilder extends StatelessWidget {
         path: path,
         child: BlocSelector<WoFormLockCubit, Set<String>, bool>(
           selector: (lockedInputs) => lockedInputs.contains(path),
-          builder: (context, inputIsLocked) {
-            return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
-              builder: (context, status) {
-                return WoFormValueBuilder<DateTime>(
+          builder: (context, inputIsLocked) => WoFormErrorBuilder(
+            path: path,
+            builder: (context, error) => WoFormValueBuilder<DateTime>(
+              path: path,
+              builder: (context, value) {
+                final errorText = error == null
+                    ? null
+                    : context.woFormL10n.translateError(error);
+
+                final fieldData = WoFieldData(
                   path: path,
-                  builder: (context, value) {
-                    final String? errorText;
-                    if (status is InProgressStatus) {
-                      final error = status.getError(path: path);
-                      if (error == null) {
-                        errorText = null;
-                      } else {
-                        errorText = context.woFormL10n.translateError(error);
-                      }
-                    } else {
-                      errorText = null;
-                    }
-
-                    final fieldData = WoFieldData(
-                      path: path,
-                      input: input,
-                      value: value,
-                      errorText: errorText,
-                      onValueChanged: inputIsLocked
-                          ? null
-                          : (
-                              DateTime? value, {
-                              UpdateStatus updateStatus = UpdateStatus.yes,
-                            }) => context
-                                .read<WoFormValuesCubit>()
-                                .onValueChanged(
-                                  path: path,
-                                  value: value,
-                                  updateStatus: updateStatus,
-                                ),
-                    );
-
-                    return (input.uiSettings?.widgetBuilder ??
-                            WoFormTheme.of(context)?.dateTimeFieldBuilder ??
-                            DateTimeField.new)
-                        .call(fieldData);
-                  },
+                  input: input,
+                  value: value,
+                  errorText: errorText,
+                  onValueChanged: inputIsLocked
+                      ? null
+                      : (
+                          DateTime? value, {
+                          UpdateStatus updateStatus = UpdateStatus.yes,
+                        }) => context.read<WoFormValuesCubit>().onValueChanged(
+                          path: path,
+                          value: value,
+                          updateStatus: updateStatus,
+                        ),
                 );
+
+                return (input.uiSettings?.widgetBuilder ??
+                        WoFormTheme.of(context)?.dateTimeFieldBuilder ??
+                        DateTimeField.new)
+                    .call(fieldData);
               },
-            );
-          },
+            ),
+          ),
         ),
       ),
     );

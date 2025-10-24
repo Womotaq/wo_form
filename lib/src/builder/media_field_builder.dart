@@ -25,62 +25,51 @@ class MediaFieldBuilder extends StatelessWidget {
         path: path,
         child: BlocSelector<WoFormLockCubit, Set<String>, bool>(
           selector: (lockedInputs) => lockedInputs.contains(path),
-          builder: (context, inputIsLocked) {
-            return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
-              builder: (context, status) {
-                return WoFormValueBuilder<List<dynamic>>(
+          builder: (context, inputIsLocked) => WoFormErrorBuilder(
+            path: path,
+            builder: (context, error) => WoFormValueBuilder<List<dynamic>>(
+              path: path,
+              builder: (context, selectedValues_) {
+                final selectedValues =
+                    selectedValues_?.whereType<Media>().toList() ?? [];
+
+                final errorText = error == null
+                    ? null
+                    : context.woFormL10n.translateError(error);
+
+                final fieldData = WoFieldData(
                   path: path,
-                  builder: (context, selectedValues_) {
-                    final selectedValues =
-                        selectedValues_?.whereType<Media>().toList() ?? [];
+                  input: input,
+                  value: selectedValues,
+                  errorText: errorText,
+                  onValueChanged: inputIsLocked
+                      ? null
+                      : (
+                          List<Media>? values, {
+                          UpdateStatus updateStatus = UpdateStatus.yes,
+                        }) async {
+                          valuesCubit.onValueChanged(
+                            path: path,
+                            value: values,
+                          );
 
-                    final String? errorText;
-                    if (status is InProgressStatus) {
-                      final error = status.getError(path: path);
-                      if (error == null) {
-                        errorText = null;
-                      } else {
-                        errorText = context.woFormL10n.translateError(error);
-                      }
-                    } else {
-                      errorText = null;
-                    }
+                          input.onValueChanged?.call(values);
 
-                    final fieldData = WoFieldData(
-                      path: path,
-                      input: input,
-                      value: selectedValues,
-                      errorText: errorText,
-                      onValueChanged: inputIsLocked
-                          ? null
-                          : (
-                              List<Media>? values, {
-                              UpdateStatus updateStatus = UpdateStatus.yes,
-                            }) async {
-                              valuesCubit.onValueChanged(
-                                path: path,
-                                value: values,
-                              );
-
-                              input.onValueChanged?.call(values);
-
-                              if (input.submitFormOnSelect) {
-                                await valuesCubit.submit(context);
-                              }
-                            },
-                    );
-
-                    final mediaFieldBuilder =
-                        input.uiSettings?.widgetBuilder ??
-                        WoFormTheme.of(context)?.mediaFieldBuilder ??
-                        MediaField.new;
-
-                    return mediaFieldBuilder(fieldData);
-                  },
+                          if (input.submitFormOnSelect) {
+                            await valuesCubit.submit(context);
+                          }
+                        },
                 );
+
+                final mediaFieldBuilder =
+                    input.uiSettings?.widgetBuilder ??
+                    WoFormTheme.of(context)?.mediaFieldBuilder ??
+                    MediaField.new;
+
+                return mediaFieldBuilder(fieldData);
               },
-            );
-          },
+            ),
+          ),
         ),
       ),
     );

@@ -25,55 +25,47 @@ class StringFieldBuilder<T extends Object?> extends StatelessWidget {
         child: BlocSelector<WoFormLockCubit, Set<String>, bool>(
           selector: (lockedInputs) =>
               input.isLocked || lockedInputs.contains(path),
-          builder: (context, inputIsLocked) {
-            return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
-              builder: (context, status) {
-                return WoFormValueBuilder<String>(
+          builder: (context, inputIsLocked) => WoFormErrorBuilder(
+            path: path,
+            builder: (context, error) => WoFormValueBuilder<String>(
+              path: path,
+              builder: (context, value) {
+                String? errorText;
+                Widget? errorWidget;
+                if (error != null) {
+                  if (input.uiSettings?.errorBuilder != null) {
+                    errorWidget = input.uiSettings!.errorBuilder!(error);
+                  } else {
+                    errorText = context.woFormL10n.translateError(error);
+                  }
+                }
+
+                final fieldData = WoFieldData(
                   path: path,
-                  builder: (context, value) {
-                    String? errorText;
-                    Widget? errorWidget;
-                    if (status is InProgressStatus) {
-                      final error = status.getError(path: path);
-                      if (error != null) {
-                        if (input.uiSettings?.errorBuilder != null) {
-                          errorWidget = input.uiSettings!.errorBuilder!(error);
-                        } else {
-                          errorText = context.woFormL10n.translateError(error);
-                        }
-                      }
-                    }
-
-                    final fieldData = WoFieldData(
-                      path: path,
-                      input: input,
-                      value: value,
-                      errorText: errorText,
-                      errorWidget: errorWidget,
-                      onValueChanged: inputIsLocked
-                          ? null
-                          : (
-                              String? value, {
-                              UpdateStatus updateStatus = UpdateStatus
-                                  .yesWithoutErrorUpdateIfPathNotVisited,
-                            }) => context
-                                .read<WoFormValuesCubit>()
-                                .onValueChanged(
-                                  path: path,
-                                  value: value,
-                                  updateStatus: updateStatus,
-                                ),
-                    );
-
-                    return (input.uiSettings?.widgetBuilder ??
-                            WoFormTheme.of(context)?.stringFieldBuilder ??
-                            StringField.fromData)
-                        .call(fieldData);
-                  },
+                  input: input,
+                  value: value,
+                  errorText: errorText,
+                  errorWidget: errorWidget,
+                  onValueChanged: inputIsLocked
+                      ? null
+                      : (
+                          String? value, {
+                          UpdateStatus updateStatus = UpdateStatus
+                              .yesWithoutErrorUpdateIfPathNotVisited,
+                        }) => context.read<WoFormValuesCubit>().onValueChanged(
+                          path: path,
+                          value: value,
+                          updateStatus: updateStatus,
+                        ),
                 );
+
+                return (input.uiSettings?.widgetBuilder ??
+                        WoFormTheme.of(context)?.stringFieldBuilder ??
+                        StringField.fromData)
+                    .call(fieldData);
               },
-            );
-          },
+            ),
+          ),
         ),
       ),
     );

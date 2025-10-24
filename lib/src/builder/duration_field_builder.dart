@@ -24,52 +24,39 @@ class DurationFieldBuilder extends StatelessWidget {
         path: path,
         child: BlocSelector<WoFormLockCubit, Set<String>, bool>(
           selector: (lockedInputs) => lockedInputs.contains(path),
-          builder: (context, inputIsLocked) {
-            return BlocBuilder<WoFormStatusCubit, WoFormStatus>(
-              builder: (context, status) {
-                return WoFormValueBuilder<Duration>(
+          builder: (context, inputIsLocked) => WoFormErrorBuilder(
+            path: path,
+            builder: (context, error) => WoFormValueBuilder<Duration>(
+              path: path,
+              builder: (context, value) {
+                final errorText = error == null
+                    ? null
+                    : context.woFormL10n.translateError(error);
+
+                final fieldData = WoFieldData(
                   path: path,
-                  builder: (context, value) {
-                    final String? errorText;
-                    if (status is InProgressStatus) {
-                      final error = status.getError(path: path);
-                      if (error == null) {
-                        errorText = null;
-                      } else {
-                        errorText = context.woFormL10n.translateError(error);
-                      }
-                    } else {
-                      errorText = null;
-                    }
-
-                    final fieldData = WoFieldData(
-                      path: path,
-                      input: input,
-                      value: value,
-                      errorText: errorText,
-                      onValueChanged: inputIsLocked
-                          ? null
-                          : (
-                              Duration? value, {
-                              UpdateStatus updateStatus = UpdateStatus.yes,
-                            }) => context
-                                .read<WoFormValuesCubit>()
-                                .onValueChanged(
-                                  path: path,
-                                  value: value,
-                                  updateStatus: updateStatus,
-                                ),
-                    );
-
-                    return (input.uiSettings?.widgetBuilder ??
-                            WoFormTheme.of(context)?.durationFieldBuilder ??
-                            DurationField.new)
-                        .call(fieldData);
-                  },
+                  input: input,
+                  value: value,
+                  errorText: errorText,
+                  onValueChanged: inputIsLocked
+                      ? null
+                      : (
+                          Duration? value, {
+                          UpdateStatus updateStatus = UpdateStatus.yes,
+                        }) => context.read<WoFormValuesCubit>().onValueChanged(
+                          path: path,
+                          value: value,
+                          updateStatus: updateStatus,
+                        ),
                 );
+
+                return (input.uiSettings?.widgetBuilder ??
+                        WoFormTheme.of(context)?.durationFieldBuilder ??
+                        DurationField.new)
+                    .call(fieldData);
               },
-            );
-          },
+            ),
+          ),
         ),
       ),
     );

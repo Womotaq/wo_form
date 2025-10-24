@@ -259,19 +259,18 @@ $InputUiSettingsCopyWith<$Res>? get uiSettings {
 @JsonSerializable()
 
 class DynamicInputsNode<T extends Object?> extends WoFormNode<T> {
-  const DynamicInputsNode({required this.id, final  List<DynamicInputTemplate> templates = const [], @InputsListConverter() final  List<WoFormNode>? initialChildren, this.uiSettings, this.exportSettings, final  String? $type}): _templates = templates,_initialChildren = initialChildren,$type = $type ?? 'dynamicInputs',super._();
+  const DynamicInputsNode({required this.id, final  List<DynamicInputTemplate> templates = const [], this.maxCount, @InputsListConverter() final  List<WoFormNode>? initialChildren, this.uiSettings, this.exportSettings, final  String? $type}): _templates = templates,_initialChildren = initialChildren,$type = $type ?? 'dynamicInputs',super._();
   factory DynamicInputsNode.fromJson(Map<String, dynamic> json) => _$DynamicInputsNodeFromJson(json);
 
 @override final  String id;
-// @DynamicInputTemplatesConverter()
  final  List<DynamicInputTemplate> _templates;
-// @DynamicInputTemplatesConverter()
 @JsonKey() List<DynamicInputTemplate> get templates {
   if (_templates is EqualUnmodifiableListView) return _templates;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_templates);
 }
 
+ final  int? maxCount;
  final  List<WoFormNode>? _initialChildren;
 @InputsListConverter() List<WoFormNode>? get initialChildren {
   final value = _initialChildren;
@@ -301,16 +300,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DynamicInputsNode<T>&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other._templates, _templates)&&const DeepCollectionEquality().equals(other._initialChildren, _initialChildren)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings)&&(identical(other.exportSettings, exportSettings) || other.exportSettings == exportSettings));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DynamicInputsNode<T>&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other._templates, _templates)&&(identical(other.maxCount, maxCount) || other.maxCount == maxCount)&&const DeepCollectionEquality().equals(other._initialChildren, _initialChildren)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings)&&(identical(other.exportSettings, exportSettings) || other.exportSettings == exportSettings));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_templates),const DeepCollectionEquality().hash(_initialChildren),uiSettings,exportSettings);
+int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_templates),maxCount,const DeepCollectionEquality().hash(_initialChildren),uiSettings,exportSettings);
 
 @override
 String toString() {
-  return 'WoFormNode<$T>.dynamicInputs(id: $id, templates: $templates, initialChildren: $initialChildren, uiSettings: $uiSettings, exportSettings: $exportSettings)';
+  return 'WoFormNode<$T>.dynamicInputs(id: $id, templates: $templates, maxCount: $maxCount, initialChildren: $initialChildren, uiSettings: $uiSettings, exportSettings: $exportSettings)';
 }
 
 
@@ -321,7 +320,7 @@ abstract mixin class $DynamicInputsNodeCopyWith<T extends Object?,$Res> implemen
   factory $DynamicInputsNodeCopyWith(DynamicInputsNode<T> value, $Res Function(DynamicInputsNode<T>) _then) = _$DynamicInputsNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id, List<DynamicInputTemplate> templates,@InputsListConverter() List<WoFormNode>? initialChildren, DynamicInputsNodeUiSettings? uiSettings, ExportSettings? exportSettings
+ String id, List<DynamicInputTemplate> templates, int? maxCount,@InputsListConverter() List<WoFormNode>? initialChildren, DynamicInputsNodeUiSettings? uiSettings, ExportSettings? exportSettings
 });
 
 
@@ -338,11 +337,12 @@ class _$DynamicInputsNodeCopyWithImpl<T extends Object?,$Res>
 
 /// Create a copy of WoFormNode
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? templates = null,Object? initialChildren = freezed,Object? uiSettings = freezed,Object? exportSettings = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? templates = null,Object? maxCount = freezed,Object? initialChildren = freezed,Object? uiSettings = freezed,Object? exportSettings = freezed,}) {
   return _then(DynamicInputsNode<T>(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,templates: null == templates ? _self._templates : templates // ignore: cast_nullable_to_non_nullable
-as List<DynamicInputTemplate>,initialChildren: freezed == initialChildren ? _self._initialChildren : initialChildren // ignore: cast_nullable_to_non_nullable
+as List<DynamicInputTemplate>,maxCount: freezed == maxCount ? _self.maxCount : maxCount // ignore: cast_nullable_to_non_nullable
+as int?,initialChildren: freezed == initialChildren ? _self._initialChildren : initialChildren // ignore: cast_nullable_to_non_nullable
 as List<WoFormNode>?,uiSettings: freezed == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
 as DynamicInputsNodeUiSettings?,exportSettings: freezed == exportSettings ? _self.exportSettings : exportSettings // ignore: cast_nullable_to_non_nullable
 as ExportSettings?,

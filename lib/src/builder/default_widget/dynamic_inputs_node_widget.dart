@@ -13,9 +13,11 @@ class DynamicInputsNodeWidget extends StatelessWidget {
     final woFormTheme = WoFormTheme.of(context);
 
     final addButton =
-        (data.input.uiSettings?.addButtonBuilder ??
-        woFormTheme?.dynamicInputsNodeAddButtonBuilder ??
-        DynamicInputsNodeAddButton.new)(data);
+        ((data.value?.length ?? 0) >= (data.input.maxCount ?? double.infinity))
+        ? null
+        : (data.input.uiSettings?.addButtonBuilder ??
+              woFormTheme?.dynamicInputsNodeAddButtonBuilder ??
+              DynamicInputsNodeAddButton.new)(data);
     final addButtonPosition =
         data.input.uiSettings?.addButtonPosition ??
         woFormTheme?.dynamicInputsNodeAddButtonPosition ??
@@ -24,6 +26,7 @@ class DynamicInputsNodeWidget extends StatelessWidget {
     final headerData = WoFormInputHeaderData(
       labelText: data.input.uiSettings?.labelText,
       helperText: data.input.uiSettings?.helperText,
+      errorText: data.errorText,
       trailing: addButtonPosition == DynamicInputsNodeAddButtonPosition.header
           ? addButton
           : null,
@@ -82,7 +85,7 @@ class DynamicInputsNodeWidget extends StatelessWidget {
           children: children,
         ),
         if (addButtonPosition == DynamicInputsNodeAddButtonPosition.footer)
-          addButton,
+          ?addButton,
       ],
     );
   }
