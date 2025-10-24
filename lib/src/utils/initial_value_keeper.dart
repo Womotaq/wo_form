@@ -10,7 +10,11 @@ import 'package:wo_form/wo_form.dart';
 ///
 /// IMPORTANT : thanks to this widget, editing [initialValue] also works on hot
 /// reload. The drawback is that when using [ShowErrors.afterSubmission],
-/// hot reloading will always reset to the initial value.
+/// hot reloading will always reset to the initial value. You may also see your
+/// fields reset unexpectedly, even after interacting with them. This happens
+/// because [ShowErrors.afterSubmission] only marks your inputs as visited once
+/// you submitted the form, so [InitialValueKeeper] thinks the fields is free to
+/// overwrite.
 class InitialValueKeeper<T> extends StatefulWidget {
   const InitialValueKeeper({
     required this.initialValue,
