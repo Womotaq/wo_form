@@ -98,7 +98,9 @@ class _InputsNodePageState extends State<_InputsNodePage> {
         // Context cannot be poped anymore if valuesCubit.submit was called
         // from the following PopScope.onPopInvokedWithResult
         if (context.mounted && Navigator.of(context).canPop()) {
-          Navigator.pop(context);
+          SchedulerBinding.instance.addPostFrameCallback((_) {
+            Navigator.pop(context);
+          });
         }
         return null;
       },
