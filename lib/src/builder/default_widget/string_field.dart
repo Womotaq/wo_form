@@ -136,6 +136,7 @@ class _StringFieldState<T> extends State<StringField<T>> {
                 : uiSettings?.helperMaxLines ?? 1,
             helper: helperLocation.isInside ? uiSettings?.helper : null,
             hintText: uiSettings?.hintText,
+            hintStyle: const TextStyle(fontStyle: FontStyle.italic),
             errorText: errorLocation.isInside
                 ? widget.errorText
                 : widget.errorText?.isNotEmpty ?? false
@@ -265,6 +266,7 @@ class _StringFieldState<T> extends State<StringField<T>> {
     return FlexField(
       headerFlex: uiSettings?.headerFlex,
       labelText: labelLocation.isOutside ? uiSettings?.labelText : null,
+      labelMaxLines: uiSettings?.labelMaxLines,
       helperText: helperLocation.isOutside ? uiSettings?.helperText : null,
       errorText: errorLocation.isOutside ? widget.errorText : null,
       prefixIcon: prefixIconLocation.isOutside && uiSettings?.prefixIcon != null
