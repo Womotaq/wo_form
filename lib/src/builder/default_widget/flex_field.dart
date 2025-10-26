@@ -8,6 +8,7 @@ class FlexField extends StatelessWidget {
     required this.child,
     required this.headerFlex,
     this.labelText,
+    this.labelMaxLines,
     this.helperText,
     this.errorText,
     this.trailing,
@@ -32,6 +33,7 @@ class FlexField extends StatelessWidget {
 
   // --- HEADER ---
   final String? labelText;
+  final int? labelMaxLines;
   final String? helperText;
   final String? errorText;
   final Widget? trailing;
@@ -63,6 +65,7 @@ class FlexField extends StatelessWidget {
             .call(
               WoFormInputHeaderData(
                 labelText: labelText,
+                labelMaxLines: labelMaxLines,
                 helperText: helperText,
                 errorText: errorText,
                 trailing: trailing,

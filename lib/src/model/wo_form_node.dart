@@ -129,8 +129,7 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
     @notSerializable
     bool Function(Object? previous, Object? current)? listenWhen,
     @notSerializable
-    void Function(BuildContext context, String parentPath, Object? value)?
-    listener,
+    void Function(BuildContext context, Object? value)? listener,
   }) = ValueListenerNode;
 
   const factory WoFormNode.widget({
@@ -903,11 +902,7 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
           parentPath: '$parentPath/$id',
         ),
         listenWhen: listenWhen,
-        listener: (context, value) => listener!(
-          context,
-          '$parentPath/$id',
-          value,
-        ),
+        listener: (context, value) => listener!(context, value),
         child: const SizedBox.shrink(),
       ),
     WidgetNode(builder: final builder) =>

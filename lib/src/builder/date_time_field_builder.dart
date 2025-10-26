@@ -18,7 +18,7 @@ class DateTimeFieldBuilder extends StatelessWidget {
     final input = getNode(context);
 
     return InitialValueKeeper(
-      initialValue: input.initialValue,
+      initialValue: input.initialValue?.resolve(),
       path: path,
       child: WoFormNodeFocusManager(
         path: path,

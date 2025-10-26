@@ -63,15 +63,10 @@ _DateTimeInputUiSettings _$DateTimeInputUiSettingsFromJson(
       : FlexibleDateTime.fromJson(
           json['initialEditValue'] as Map<String, dynamic>,
         ),
-  initialDateEntryMode: $enumDecodeNullable(
-    _$DatePickerEntryModeEnumMap,
-    json['initialDateEntryMode'],
-  ),
-  initialDatePickerMode: $enumDecodeNullable(
-    _$DatePickerModeEnumMap,
-    json['initialDatePickerMode'],
-  ),
   editMode: $enumDecodeNullable(_$DateEditModeEnumMap, json['editMode']),
+  pickDate: const PickDateDefNullableConverter().fromJson(
+    json['pickDate'] as String?,
+  ),
   initialTimeEntryMode: $enumDecodeNullable(
     _$TimePickerEntryModeEnumMap,
     json['initialTimeEntryMode'],
@@ -90,25 +85,10 @@ Map<String, dynamic> _$DateTimeInputUiSettingsToJson(
   'addDateText': instance.addDateText,
   'addTimeText': instance.addTimeText,
   'initialEditValue': instance.initialEditValue?.toJson(),
-  'initialDateEntryMode':
-      _$DatePickerEntryModeEnumMap[instance.initialDateEntryMode],
-  'initialDatePickerMode':
-      _$DatePickerModeEnumMap[instance.initialDatePickerMode],
   'editMode': _$DateEditModeEnumMap[instance.editMode],
+  'pickDate': const PickDateDefNullableConverter().toJson(instance.pickDate),
   'initialTimeEntryMode':
       _$TimePickerEntryModeEnumMap[instance.initialTimeEntryMode],
-};
-
-const _$DatePickerEntryModeEnumMap = {
-  DatePickerEntryMode.calendar: 'calendar',
-  DatePickerEntryMode.input: 'input',
-  DatePickerEntryMode.calendarOnly: 'calendarOnly',
-  DatePickerEntryMode.inputOnly: 'inputOnly',
-};
-
-const _$DatePickerModeEnumMap = {
-  DatePickerMode.day: 'day',
-  DatePickerMode.year: 'year',
 };
 
 const _$DateEditModeEnumMap = {
@@ -377,6 +357,7 @@ _StringInputUiSettings<T> _$StringInputUiSettingsFromJson<T>(
   flex: (json['flex'] as num?)?.toInt(),
   headerFlex: (json['headerFlex'] as num?)?.toInt(),
   labelText: json['labelText'] as String?,
+  labelMaxLines: (json['labelMaxLines'] as num?)?.toInt(),
   labelLocation: $enumDecodeNullable(
     _$StringFieldLocationEnumMap,
     json['labelLocation'],
@@ -429,6 +410,7 @@ Map<String, dynamic> _$StringInputUiSettingsToJson<T>(
   'flex': instance.flex,
   'headerFlex': instance.headerFlex,
   'labelText': instance.labelText,
+  'labelMaxLines': instance.labelMaxLines,
   'labelLocation': _$StringFieldLocationEnumMap[instance.labelLocation],
   'hintText': instance.hintText,
   'helperText': instance.helperText,

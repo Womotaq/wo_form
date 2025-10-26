@@ -66,17 +66,6 @@ typedef DateTimeFieldBuilderDef =
 
 enum DateEditMode { date, time, dateAndTime }
 
-typedef PickDateDef =
-    Future<DateTime?> Function({
-      required BuildContext context,
-      DateTime? initialDate,
-      DateTime? maxDate,
-      DateTime? minDate,
-      DatePickerEntryMode? initialEntryMode,
-      DatePickerMode? initialDatePickerMode,
-      String? dateFormat,
-    });
-
 typedef PickTimeDef =
     Future<TimeOfDay?> Function({
       required BuildContext context,
@@ -106,10 +95,8 @@ abstract class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
 
     /// If DateTimeInput.initialValue is null, this value will be used instead.
     FlexibleDateTime? initialEditValue,
-    DatePickerEntryMode? initialDateEntryMode,
-    DatePickerMode? initialDatePickerMode,
     DateEditMode? editMode,
-    @notSerializable PickDateDef? pickDate,
+    @PickDateDefNullableConverter() PickDateDef? pickDate,
     @notSerializable PickTimeDef? pickTime,
     TimePickerEntryMode? initialTimeEntryMode,
     @notSerializable DateTimeFieldBuilderDef? widgetBuilder,
@@ -132,10 +119,6 @@ abstract class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
           prefixIcon: prefixIcon ?? other.prefixIcon,
           addDateText: addDateText ?? other.addDateText,
           addTimeText: addTimeText ?? other.addTimeText,
-          initialDateEntryMode:
-              initialDateEntryMode ?? other.initialDateEntryMode,
-          initialDatePickerMode:
-              initialDatePickerMode ?? other.initialDatePickerMode,
           editMode: editMode ?? other.editMode,
           pickDate: pickDate ?? other.pickDate,
           pickTime: pickTime ?? other.pickTime,
@@ -679,6 +662,11 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
 
     String? labelText,
 
+    /// Only used when [labelLocation] is [StringFieldLocation.outside].
+    ///
+    /// Defaults to null.
+    int? labelMaxLines,
+
     /// Default to StringFieldLocation.inside
     StringFieldLocation? labelLocation,
     String? hintText,
@@ -736,6 +724,7 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     int? flex,
     int? headerFlex,
     String? labelText,
+    int? labelMaxLines,
     StringFieldLocation? labelLocation,
     String? hintText,
     String? helperText,
@@ -757,6 +746,7 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     flex: flex,
     headerFlex: headerFlex,
     labelText: labelText,
+    labelMaxLines: labelMaxLines,
     labelLocation: labelLocation,
     hintText: hintText,
     helperText: helperText,
@@ -784,6 +774,7 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     int? flex,
     int? headerFlex,
     String? labelText,
+    int? labelMaxLines,
     StringFieldLocation? labelLocation,
     String? hintText,
     String? helperText,
@@ -805,6 +796,7 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     flex: flex,
     headerFlex: headerFlex,
     labelText: labelText,
+    labelMaxLines: labelMaxLines,
     labelLocation: labelLocation,
     hintText: hintText,
     helperText: helperText,
@@ -837,6 +829,7 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     int? flex,
     int? headerFlex,
     String? labelText,
+    int? labelMaxLines,
     StringFieldLocation? labelLocation,
     String? hintText,
     String? helperText,
@@ -857,6 +850,7 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     flex: flex,
     headerFlex: headerFlex,
     labelText: labelText,
+    labelMaxLines: labelMaxLines,
     labelLocation: labelLocation,
     hintText: hintText,
     helperText: helperText,
@@ -891,6 +885,7 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
           flex: flex ?? other.flex,
           headerFlex: headerFlex ?? other.headerFlex,
           labelText: labelText ?? other.labelText,
+          labelMaxLines: labelMaxLines ?? other.labelMaxLines,
           labelLocation: labelLocation ?? other.labelLocation,
           hintText: hintText ?? other.hintText,
           helperText: helperText ?? other.helperText,

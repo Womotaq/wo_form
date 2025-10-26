@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'dart:async';
 import 'dart:math';
 
@@ -123,6 +125,14 @@ class Push {
     ),
     bodyBuilder: (_) => child,
   );
+
+  // The folowing fields are simply here to ensure
+  // the methods follow PushDef's signature
+  static const PushDef _page = page;
+  static const PushDef _screen = screen;
+  static const PushDef _dialog = dialog;
+  static const PushDef _modalBottomSheet = modalBottomSheet;
+  static const PushDef _menu = menu;
 }
 
 typedef PushDef =

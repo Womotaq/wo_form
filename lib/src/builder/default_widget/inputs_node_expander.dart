@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wo_form/src/utils/shrinkable_scaffold.dart';
 import 'package:wo_form/wo_form.dart';
 
 class InputsNodeExpander extends StatefulWidget {
@@ -59,36 +60,47 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
         .call(headerData);
   }
 
-  Future<void> openChildren(BuildContext context) =>
-      (widget.data.input.uiSettings?.openChildren ?? Push.modalBottomSheet)(
-        context: context,
-        layout: LayoutMethod.fromFlex(
-          widget.data.input.uiSettings.flexOrDefault,
-        ),
-        child: RepositoryProvider.value(
-          value: context.read<RootNode>(),
-          child: MultiBlocProvider(
-            providers: [
-              BlocProvider.value(value: context.read<WoFormValuesCubit>()),
-              BlocProvider.value(value: context.read<WoFormStatusCubit>()),
-              BlocProvider.value(value: context.read<WoFormLockCubit>()),
-            ],
-            child: _InputsNodePage(widget.data.path),
+  Future<void> openChildren(BuildContext context) {
+    final layout = LayoutMethod.fromFlex(
+      widget.data.input.uiSettings.flexOrDefault,
+    );
+
+    return (widget.data.input.uiSettings?.openChildren ??
+        Push.modalBottomSheet)(
+      context: context,
+      layout: layout,
+      child: RepositoryProvider.value(
+        value: context.read<RootNode>(),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider.value(value: context.read<WoFormValuesCubit>()),
+            BlocProvider.value(value: context.read<WoFormStatusCubit>()),
+            BlocProvider.value(value: context.read<WoFormLockCubit>()),
+          ],
+          child: _InputsNodePage(
+            path: widget.data.path,
+            shrinkWrap: layout.shrinks,
           ),
         ),
-      );
+      ),
+    );
+  }
 }
 
 class _InputsNodePage extends StatefulWidget {
-  const _InputsNodePage(this.path);
+  const _InputsNodePage({required this.path, required this.shrinkWrap});
 
   final String path;
+  final bool shrinkWrap;
 
   @override
   State<_InputsNodePage> createState() => _InputsNodePageState();
 }
 
 class _InputsNodePageState extends State<_InputsNodePage> {
+  // This prevents the widget from poping the context twice.
+  bool shouldPop = true;
+
   @override
   void initState() {
     super.initState();
@@ -97,7 +109,9 @@ class _InputsNodePageState extends State<_InputsNodePage> {
       onSubmitting: () async {
         // Context cannot be poped anymore if valuesCubit.submit was called
         // from the following PopScope.onPopInvokedWithResult
-        if (context.mounted && Navigator.of(context).canPop()) {
+        if (shouldPop && context.mounted && Navigator.of(context).canPop()) {
+          shouldPop = false;
+
           SchedulerBinding.instance.addPostFrameCallback((_) {
             Navigator.pop(context);
           });
@@ -113,6 +127,8 @@ class _InputsNodePageState extends State<_InputsNodePage> {
     return PopScope(
       onPopInvokedWithResult: (didPop, result) async {
         if (didPop) {
+          shouldPop = false;
+
           final valuesCubit = context.read<WoFormValuesCubit>();
           if (valuesCubit.state.submitPath == widget.path) {
             // The context has been poped without submitting the temporary
@@ -122,10 +138,13 @@ class _InputsNodePageState extends State<_InputsNodePage> {
           }
         }
       },
-      child: InputsNodeWidgetBuilder(
-        path: widget.path,
-        uiSettings: const InputsNodeUiSettings(
-          childrenVisibility: ChildrenVisibility.always,
+      child: ShrinkableScaffold(
+        shrinkWrap: widget.shrinkWrap,
+        body: InputsNodeWidgetBuilder(
+          path: widget.path,
+          uiSettings: const InputsNodeUiSettings(
+            childrenVisibility: ChildrenVisibility.always,
+          ),
         ),
       ),
     );

@@ -1132,7 +1132,7 @@ class ValueListenerNode<T extends Object?> extends WoFormNode<T> {
  final  String path;
 @override@JsonKey() final  String id;
 @notSerializable final  bool Function(Object? previous, Object? current)? listenWhen;
-@notSerializable final  void Function(BuildContext context, String parentPath, Object? value)? listener;
+@notSerializable final  void Function(BuildContext context, Object? value)? listener;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -1171,7 +1171,7 @@ abstract mixin class $ValueListenerNodeCopyWith<T extends Object?,$Res> implemen
   factory $ValueListenerNodeCopyWith(ValueListenerNode<T> value, $Res Function(ValueListenerNode<T>) _then) = _$ValueListenerNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String path, String id,@notSerializable bool Function(Object? previous, Object? current)? listenWhen,@notSerializable void Function(BuildContext context, String parentPath, Object? value)? listener
+ String path, String id,@notSerializable bool Function(Object? previous, Object? current)? listenWhen,@notSerializable void Function(BuildContext context, Object? value)? listener
 });
 
 
@@ -1194,7 +1194,7 @@ path: null == path ? _self.path : path // ignore: cast_nullable_to_non_nullable
 as String,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,listenWhen: freezed == listenWhen ? _self.listenWhen : listenWhen // ignore: cast_nullable_to_non_nullable
 as bool Function(Object? previous, Object? current)?,listener: freezed == listener ? _self.listener : listener // ignore: cast_nullable_to_non_nullable
-as void Function(BuildContext context, String parentPath, Object? value)?,
+as void Function(BuildContext context, Object? value)?,
   ));
 }
 

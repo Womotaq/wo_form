@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -25,15 +24,13 @@ class DateTimeSelector extends StatelessWidget {
     final pickDate =
         settings.pickDate ??
         WoFormTheme.of(context)?.pickDate ??
-        context.read<DateTimeService>().pickDate;
+        PickDate.calendarVerticalScroll;
 
     final selectedDate = await pickDate(
       context: context,
       initialDate: dateTime ?? settings.initialEditValue?.resolve(),
       minDate: minDateTime,
       maxDate: maxDateTime,
-      initialEntryMode: settings.initialDateEntryMode,
-      initialDatePickerMode: settings.initialDatePickerMode,
       dateFormat: settings.dateFormat,
     );
 
