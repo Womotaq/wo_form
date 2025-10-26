@@ -43,11 +43,19 @@ class DateTimeFieldBuilder extends StatelessWidget {
                       : (
                           DateTime? value, {
                           UpdateStatus updateStatus = UpdateStatus.yes,
-                        }) => context.read<WoFormValuesCubit>().onValueChanged(
-                          path: path,
-                          value: value,
-                          updateStatus: updateStatus,
-                        ),
+                        }) async {
+                          context.read<WoFormValuesCubit>().onValueChanged(
+                            path: path,
+                            value: value,
+                            updateStatus: updateStatus,
+                          );
+
+                          if (input.submitFormOnPick) {
+                            await context.read<WoFormValuesCubit>().submit(
+                              context,
+                            );
+                          }
+                        },
                 );
 
                 return (input.uiSettings?.widgetBuilder ??

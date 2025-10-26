@@ -1676,7 +1676,7 @@ $BooleanInputUiSettingsCopyWith<$Res>? get uiSettings {
 @JsonSerializable()
 
 class DateTimeInput<T extends Object?> extends WoFormInput<T> {
-  const DateTimeInput({required this.id, this.initialValue, this.isRequired = false, this.maxDate, this.minDate, @notSerializable this.getCustomError, this.uiSettings, final  String? $type}): $type = $type ?? 'dateTime',super._();
+  const DateTimeInput({required this.id, this.initialValue, this.isRequired = false, this.maxDate, this.minDate, this.submitFormOnPick = false, @notSerializable this.getCustomError, this.uiSettings, final  String? $type}): $type = $type ?? 'dateTime',super._();
   factory DateTimeInput.fromJson(Map<String, dynamic> json) => _$DateTimeInputFromJson(json);
 
 @override final  String id;
@@ -1684,6 +1684,7 @@ class DateTimeInput<T extends Object?> extends WoFormInput<T> {
 @JsonKey() final  bool isRequired;
  final  FlexibleDateTime? maxDate;
  final  FlexibleDateTime? minDate;
+@JsonKey() final  bool submitFormOnPick;
 @override@notSerializable final  GetCustomErrorDef<DateTime>? getCustomError;
 @override final  DateTimeInputUiSettings? uiSettings;
 
@@ -1704,16 +1705,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DateTimeInput<T>&&(identical(other.id, id) || other.id == id)&&(identical(other.initialValue, initialValue) || other.initialValue == initialValue)&&(identical(other.isRequired, isRequired) || other.isRequired == isRequired)&&(identical(other.maxDate, maxDate) || other.maxDate == maxDate)&&(identical(other.minDate, minDate) || other.minDate == minDate)&&(identical(other.getCustomError, getCustomError) || other.getCustomError == getCustomError)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DateTimeInput<T>&&(identical(other.id, id) || other.id == id)&&(identical(other.initialValue, initialValue) || other.initialValue == initialValue)&&(identical(other.isRequired, isRequired) || other.isRequired == isRequired)&&(identical(other.maxDate, maxDate) || other.maxDate == maxDate)&&(identical(other.minDate, minDate) || other.minDate == minDate)&&(identical(other.submitFormOnPick, submitFormOnPick) || other.submitFormOnPick == submitFormOnPick)&&(identical(other.getCustomError, getCustomError) || other.getCustomError == getCustomError)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,initialValue,isRequired,maxDate,minDate,getCustomError,uiSettings);
+int get hashCode => Object.hash(runtimeType,id,initialValue,isRequired,maxDate,minDate,submitFormOnPick,getCustomError,uiSettings);
 
 @override
 String toString() {
-  return 'WoFormInput<$T>.dateTime(id: $id, initialValue: $initialValue, isRequired: $isRequired, maxDate: $maxDate, minDate: $minDate, getCustomError: $getCustomError, uiSettings: $uiSettings)';
+  return 'WoFormInput<$T>.dateTime(id: $id, initialValue: $initialValue, isRequired: $isRequired, maxDate: $maxDate, minDate: $minDate, submitFormOnPick: $submitFormOnPick, getCustomError: $getCustomError, uiSettings: $uiSettings)';
 }
 
 
@@ -1724,7 +1725,7 @@ abstract mixin class $DateTimeInputCopyWith<T extends Object?,$Res> implements $
   factory $DateTimeInputCopyWith(DateTimeInput<T> value, $Res Function(DateTimeInput<T>) _then) = _$DateTimeInputCopyWithImpl;
 @override @useResult
 $Res call({
- String id, FlexibleDateTime? initialValue, bool isRequired, FlexibleDateTime? maxDate, FlexibleDateTime? minDate,@notSerializable GetCustomErrorDef<DateTime>? getCustomError, DateTimeInputUiSettings? uiSettings
+ String id, FlexibleDateTime? initialValue, bool isRequired, FlexibleDateTime? maxDate, FlexibleDateTime? minDate, bool submitFormOnPick,@notSerializable GetCustomErrorDef<DateTime>? getCustomError, DateTimeInputUiSettings? uiSettings
 });
 
 
@@ -1741,14 +1742,15 @@ class _$DateTimeInputCopyWithImpl<T extends Object?,$Res>
 
 /// Create a copy of WoFormInput
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? initialValue = freezed,Object? isRequired = null,Object? maxDate = freezed,Object? minDate = freezed,Object? getCustomError = freezed,Object? uiSettings = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? initialValue = freezed,Object? isRequired = null,Object? maxDate = freezed,Object? minDate = freezed,Object? submitFormOnPick = null,Object? getCustomError = freezed,Object? uiSettings = freezed,}) {
   return _then(DateTimeInput<T>(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,initialValue: freezed == initialValue ? _self.initialValue : initialValue // ignore: cast_nullable_to_non_nullable
 as FlexibleDateTime?,isRequired: null == isRequired ? _self.isRequired : isRequired // ignore: cast_nullable_to_non_nullable
 as bool,maxDate: freezed == maxDate ? _self.maxDate : maxDate // ignore: cast_nullable_to_non_nullable
 as FlexibleDateTime?,minDate: freezed == minDate ? _self.minDate : minDate // ignore: cast_nullable_to_non_nullable
-as FlexibleDateTime?,getCustomError: freezed == getCustomError ? _self.getCustomError : getCustomError // ignore: cast_nullable_to_non_nullable
+as FlexibleDateTime?,submitFormOnPick: null == submitFormOnPick ? _self.submitFormOnPick : submitFormOnPick // ignore: cast_nullable_to_non_nullable
+as bool,getCustomError: freezed == getCustomError ? _self.getCustomError : getCustomError // ignore: cast_nullable_to_non_nullable
 as GetCustomErrorDef<DateTime>?,uiSettings: freezed == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
 as DateTimeInputUiSettings?,
   ));

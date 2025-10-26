@@ -331,6 +331,7 @@ DateTimeInput<T> _$DateTimeInputFromJson<T extends Object?>(
   minDate: json['minDate'] == null
       ? null
       : FlexibleDateTime.fromJson(json['minDate'] as Map<String, dynamic>),
+  submitFormOnPick: json['submitFormOnPick'] as bool? ?? false,
   uiSettings: json['uiSettings'] == null
       ? null
       : DateTimeInputUiSettings.fromJson(
@@ -347,6 +348,7 @@ Map<String, dynamic> _$DateTimeInputToJson<T extends Object?>(
   'isRequired': instance.isRequired,
   'maxDate': instance.maxDate?.toJson(),
   'minDate': instance.minDate?.toJson(),
+  'submitFormOnPick': instance.submitFormOnPick,
   'uiSettings': instance.uiSettings?.toJson(),
   'runtimeType': instance.$type,
 };

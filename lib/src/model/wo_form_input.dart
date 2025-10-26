@@ -36,6 +36,7 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
     @Default(false) bool isRequired,
     FlexibleDateTime? maxDate,
     FlexibleDateTime? minDate,
+    @Default(false) bool submitFormOnPick,
     @notSerializable GetCustomErrorDef<DateTime>? getCustomError,
     DateTimeInputUiSettings? uiSettings,
   }) = DateTimeInput;
