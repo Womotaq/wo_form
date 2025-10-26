@@ -2491,7 +2491,7 @@ mixin _$MultistepSettings {
 @notSerializable OnStepSubmittingDef? get onStepSubmitting;/// Applied around the fields, not the progress indicator,
 /// nor the submit button.
 ///
-/// Defaults to EdgeInsets.only(top: 16, bottom: 32).
+/// Defaults to EdgeInsets.zero.
 @EdgeInsetsNullableConverter() EdgeInsets? get fieldsPadding;
 /// Create a copy of MultistepSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -2578,7 +2578,7 @@ class _MultistepSettings extends MultistepSettings {
 /// Applied around the fields, not the progress indicator,
 /// nor the submit button.
 ///
-/// Defaults to EdgeInsets.only(top: 16, bottom: 32).
+/// Defaults to EdgeInsets.zero.
 @override@EdgeInsetsNullableConverter() final  EdgeInsets? fieldsPadding;
 
 /// Create a copy of MultistepSettings

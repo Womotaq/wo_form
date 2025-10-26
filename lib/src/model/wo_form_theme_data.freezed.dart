@@ -22,7 +22,7 @@ mixin _$WoFormThemeData {
 @notSerializable InputNodeWidgetBuilderDef? get inputsNodeExpanderBuilder;@notSerializable InputNodeWidgetBuilderDef? get inputsNodeWidgetBuilder;@notSerializable MediaFieldBuilderDef? get mediaFieldBuilder;@notSerializable MultiStepProgressIndicatorBuilderDef? get multiStepProgressIndicatorBuilder;@notSerializable NumFieldBuilderDef? get numFieldBuilder;@notSerializable PickDateDef? get pickDate;@notSerializable PickDurationDef? get pickDuration;@notSerializable PickTimeDef? get pickTime;/// If this is set and returns null, there won't be a quit button.
 @notSerializable QuitButtonBuilderDef? get quitButtonBuilder;@notSerializable ScoreWidgetBuilderDef? get scoreBuilder;@notSerializable SelectFieldBuilderDef<dynamic>? get selectFieldBuilder;@notSerializable ScaffoldBuilderDef? get standardScaffoldBuilder;@notSerializable StringFieldBuilderDef? get stringFieldBuilder; StringFieldLocation? get stringFieldErrorLocation; StringFieldLocation? get stringFieldHelperLocation; StringFieldLocation? get stringFieldLabelLocation; StringFieldLocation? get stringFieldPrefixIconLocation;@notSerializable SubmitButtonBuilderDef? get submitButtonBuilder;/// Default values :
 /// - SubmitButtonPosition.body: EdgeInsets.only(top: 32, bottom: 12)
-/// - SubmitButtonPosition.bottomBar : EdgeInsets.symmetric(vertical: 16)
+/// - SubmitButtonPosition.bottomBar : EdgeInsets.all(16)
 ///
 /// For appBar and floating, the margin is not implemented yet.
 @notSerializable SubmitButtonMarginDef? get submitButtonMargin;/// Not compatible with SubmitButtonPosition.floating.
@@ -171,7 +171,7 @@ class _WoFormThemeData extends WoFormThemeData {
 @override@notSerializable final  SubmitButtonBuilderDef? submitButtonBuilder;
 /// Default values :
 /// - SubmitButtonPosition.body: EdgeInsets.only(top: 32, bottom: 12)
-/// - SubmitButtonPosition.bottomBar : EdgeInsets.symmetric(vertical: 16)
+/// - SubmitButtonPosition.bottomBar : EdgeInsets.all(16)
 ///
 /// For appBar and floating, the margin is not implemented yet.
 @override@notSerializable final  SubmitButtonMarginDef? submitButtonMargin;

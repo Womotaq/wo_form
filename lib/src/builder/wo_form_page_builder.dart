@@ -135,10 +135,7 @@ class _WoFormMultistepBody extends StatelessWidget {
             }
 
             final stepWidget = Padding(
-              padding:
-                  // TODO : rework fieldsPadding
-                  multistepSettings.fieldsPadding ??
-                  const EdgeInsets.only(top: 16, bottom: 32),
+              padding: multistepSettings.fieldsPadding ?? EdgeInsets.zero,
               child: step.toWidget(parentPath: ''),
             );
 

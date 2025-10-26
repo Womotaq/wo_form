@@ -1132,7 +1132,7 @@ sealed class MultistepSettings with _$MultistepSettings {
     /// Applied around the fields, not the progress indicator,
     /// nor the submit button.
     ///
-    /// Defaults to EdgeInsets.only(top: 16, bottom: 32).
+    /// Defaults to EdgeInsets.zero.
     @EdgeInsetsNullableConverter() EdgeInsets? fieldsPadding,
   }) = _MultistepSettings;
 

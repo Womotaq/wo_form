@@ -61,7 +61,7 @@ abstract class WoFormThemeData with _$WoFormThemeData {
 
     /// Default values :
     /// - SubmitButtonPosition.body: EdgeInsets.only(top: 32, bottom: 12)
-    /// - SubmitButtonPosition.bottomBar : EdgeInsets.symmetric(vertical: 16)
+    /// - SubmitButtonPosition.bottomBar : EdgeInsets.all(16)
     ///
     /// For appBar and floating, the margin is not implemented yet.
     @notSerializable SubmitButtonMarginDef? submitButtonMargin,
