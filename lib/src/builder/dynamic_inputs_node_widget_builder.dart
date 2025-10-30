@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wo_form/src/utils/initial_value_keeper.dart';
 import 'package:wo_form/wo_form.dart';
 
 class DynamicInputsNodeWidgetBuilder extends StatelessWidget {
@@ -16,39 +17,43 @@ class DynamicInputsNodeWidgetBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     final node = getNode(context);
 
-    return BlocSelector<WoFormLockCubit, Set<String>, bool>(
-      selector: (lockedInputs) => lockedInputs.contains(path),
-      builder: (context, inputIsLocked) => WoFormErrorBuilder(
-        path: path,
-        builder: (context, error) => WoFormValueBuilder<List<WoFormNode>>(
+    return InitialValueKeeper(
+      initialValue: node.initialChildren,
+      path: path,
+      child: BlocSelector<WoFormLockCubit, Set<String>, bool>(
+        selector: (lockedInputs) => lockedInputs.contains(path),
+        builder: (context, inputIsLocked) => WoFormErrorBuilder(
           path: path,
-          builder: (context, children) {
-            final errorText = error == null
-                ? null
-                : context.woFormL10n.translateError(error);
-
-            final fieldData = WoFieldData(
-              path: path,
-              input: node,
-              value: children,
-              errorText: errorText,
-              onValueChanged: inputIsLocked
+          builder: (context, error) => WoFormValueBuilder<List<WoFormNode>>(
+            path: path,
+            builder: (context, children) {
+              final errorText = error == null
                   ? null
-                  : (
-                      List<WoFormNode>? newChildren, {
-                      UpdateStatus updateStatus = UpdateStatus.yes,
-                    }) => context.read<WoFormValuesCubit>().onValueChanged(
-                      path: path,
-                      value: List<WoFormNode>.unmodifiable(newChildren ?? []),
-                      updateStatus: updateStatus,
-                    ),
-            );
+                  : context.woFormL10n.translateError(error);
 
-            return (node.uiSettings?.widgetBuilder ??
-                    WoFormTheme.of(context)?.dynamicInputsNodeWidgetBuilder ??
-                    DynamicInputsNodeWidget.new)
-                .call(fieldData);
-          },
+              final fieldData = WoFieldData(
+                path: path,
+                input: node,
+                value: children,
+                errorText: errorText,
+                onValueChanged: inputIsLocked
+                    ? null
+                    : (
+                        List<WoFormNode>? newChildren, {
+                        UpdateStatus updateStatus = UpdateStatus.yes,
+                      }) => context.read<WoFormValuesCubit>().onValueChanged(
+                        path: path,
+                        value: List<WoFormNode>.unmodifiable(newChildren ?? []),
+                        updateStatus: updateStatus,
+                      ),
+              );
+
+              return (node.uiSettings?.widgetBuilder ??
+                      WoFormTheme.of(context)?.dynamicInputsNodeWidgetBuilder ??
+                      DynamicInputsNodeWidget.new)
+                  .call(fieldData);
+            },
+          ),
         ),
       ),
     );
