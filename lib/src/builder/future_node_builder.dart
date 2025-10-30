@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wo_form/src/utils/extensions.dart';
 import 'package:wo_form/wo_form.dart';
 
 class FutureNodeBuilder<T> extends StatefulWidget {
@@ -54,17 +53,23 @@ class _FutureNodeBuilderState<T> extends State<FutureNodeBuilder<T>> {
     }
 
     unawaited(
-      getData(
-        (snapshot) => valuesCubit.onValueChanged(
-          path: widget.path,
-          value: snapshot,
+      _getData(
+        (snapshot) => valuesCubit.onValuesChanged(
+          {
+            widget.path: snapshot,
+            if (snapshot.connectionState == ConnectionState.done &&
+                node.willResetToInitialValues)
+              ...node.builder!(snapshot).getInitialValues(
+                parentPath: widget.path,
+              ),
+          },
           updateStatus: UpdateStatus.ifPathAlreadyVisited,
         ),
       ),
     );
   }
 
-  Future<void> getData(
+  Future<void> _getData(
     void Function(AsyncSnapshot<T?> snapshot) onSnapshotChanged,
   ) async {
     try {
@@ -75,23 +80,6 @@ class _FutureNodeBuilderState<T> extends State<FutureNodeBuilder<T>> {
 
       final snapshot = AsyncSnapshot.withData(ConnectionState.done, data);
       onSnapshotChanged(snapshot);
-
-      if (node.willResetToInitialValues) {
-        final valuesCubit = context.read<WoFormValuesCubit>();
-
-        final newInitialValues = node.getInitialValues(
-          parentPath: widget.path.parentPath,
-        );
-
-        // Overrides the initial snapshot as the one with provided data.
-        // It may keep the form pure if none of the paths were visited.
-        newInitialValues[widget.path] = snapshot;
-
-        valuesCubit.onValuesChanged(
-          newInitialValues,
-          updateStatus: UpdateStatus.ifPathAlreadyVisited,
-        );
-      }
     } catch (error) {
       onSnapshotChanged(AsyncSnapshot.withError(ConnectionState.done, error));
     }

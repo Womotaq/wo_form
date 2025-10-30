@@ -460,8 +460,11 @@ class FutureNode<T extends Object?> extends WoFormNode<T> {
 @notSerializable final  Future<T>? future;
 @notSerializable final  WoFormNode Function(AsyncSnapshot<T?> snapshot)? builder;
 @notSerializable final  T? initialData;
-/// If true, when the future will be completed, the values of
-/// the children inputs will be reseted to their getInitialValues.
+/// If true, when the future completes (i.e. when connextionState is
+/// [ConnectionState.done]), the values of the children inputs will be
+/// reseted to their initialValues, using
+/// [FutureNode.builder].getInitialValues instead of
+/// [FutureNode.initialData].
 @JsonKey() final  bool willResetToInitialValues;
  final  InputUiSettings? uiSettings;
 

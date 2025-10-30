@@ -54,8 +54,11 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
     @notSerializable WoFormNode Function(AsyncSnapshot<T?> snapshot)? builder,
     @notSerializable T? initialData,
 
-    /// If true, when the future will be completed, the values of
-    /// the children inputs will be reseted to their getInitialValues.
+    /// If true, when the future completes (i.e. when connextionState is
+    /// [ConnectionState.done]), the values of the children inputs will be
+    /// reseted to their initialValues, using
+    /// [FutureNode.builder].getInitialValues instead of
+    /// [FutureNode.initialData].
     @Default(true) bool willResetToInitialValues,
     InputUiSettings? uiSettings,
   }) = FutureNode<T>;
