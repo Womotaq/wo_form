@@ -136,6 +136,12 @@ class _InputsNodePageState extends State<_InputsNodePage> {
             // to enforce a submission.
             await valuesCubit.submit(context);
           }
+
+          if (valuesCubit.state.submitPath == widget.path) {
+            // Happens when this node or a child contains an error, so the
+            // temporary onSubmitting has not been called
+            valuesCubit.removeTemporarySubmitData(path: widget.path);
+          }
         }
       },
       child: ShrinkableScaffold(
