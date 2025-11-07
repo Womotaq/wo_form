@@ -19,9 +19,9 @@ Map<String, dynamic> _$FixedDateTimeToJson(FixedDateTime instance) =>
     };
 
 TodayDate _$TodayDateFromJson(Map<String, dynamic> json) => TodayDate(
-  addYears: (json['addYears'] as num?)?.toInt() ?? 0,
-  addMonths: (json['addMonths'] as num?)?.toInt() ?? 0,
-  addDays: (json['addDays'] as num?)?.toInt() ?? 0,
+  addYears: (json['addYears'] as num?)?.toInt(),
+  addMonths: (json['addMonths'] as num?)?.toInt(),
+  addDays: (json['addDays'] as num?)?.toInt(),
   replaceYears: (json['replaceYears'] as num?)?.toInt(),
   replaceMonths: (json['replaceMonths'] as num?)?.toInt(),
   replaceDays: (json['replaceDays'] as num?)?.toInt(),

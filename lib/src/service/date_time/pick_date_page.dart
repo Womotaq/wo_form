@@ -57,11 +57,16 @@ class PickDatePage extends StatelessWidget {
       case _DisplayMode.page:
         return Scaffold(
           appBar: AppBar(
-            bottom: const PreferredSize(
-              preferredSize: Size(double.maxFinite, kToolbarHeight),
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: DaysOfWeek(),
+            bottom: PreferredSize(
+              preferredSize: const Size(double.maxFinite, kToolbarHeight),
+              child: DefaultTextStyle(
+                style: TextStyle(
+                  color: AppBarTheme.of(context).foregroundColor,
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: DaysOfWeek(),
+                ),
               ),
             ),
           ),

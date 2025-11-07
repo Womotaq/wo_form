@@ -11,9 +11,9 @@ sealed class FlexibleDateTime with _$FlexibleDateTime {
   }) = FixedDateTime;
 
   const factory FlexibleDateTime.today({
-    @Default(0) int addYears,
-    @Default(0) int addMonths,
-    @Default(0) int addDays,
+    int? addYears,
+    int? addMonths,
+    int? addDays,
     int? replaceYears,
     int? replaceMonths,
     int? replaceDays,
@@ -46,9 +46,9 @@ sealed class FlexibleDateTime with _$FlexibleDateTime {
       ):
         final now = DateTime.now();
         final date = DateTime(
-          replaceYears ?? now.year + addYears,
-          replaceMonths ?? now.month + addMonths,
-          replaceDays ?? now.day + addDays,
+          replaceYears ?? now.year + (addYears ?? 0),
+          replaceMonths ?? now.month + (addMonths ?? 0),
+          replaceDays ?? now.day + (addDays ?? 0),
         );
 
         if (replaceWeekday != null) {

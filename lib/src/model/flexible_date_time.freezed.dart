@@ -145,12 +145,12 @@ as DateTime,
 @JsonSerializable()
 
 class TodayDate extends FlexibleDateTime {
-  const TodayDate({this.addYears = 0, this.addMonths = 0, this.addDays = 0, this.replaceYears, this.replaceMonths, this.replaceDays, this.replaceWeekday, final  String? $type}): $type = $type ?? 'today',super._();
+  const TodayDate({this.addYears, this.addMonths, this.addDays, this.replaceYears, this.replaceMonths, this.replaceDays, this.replaceWeekday, final  String? $type}): $type = $type ?? 'today',super._();
   factory TodayDate.fromJson(Map<String, dynamic> json) => _$TodayDateFromJson(json);
 
-@JsonKey() final  int addYears;
-@JsonKey() final  int addMonths;
-@JsonKey() final  int addDays;
+ final  int? addYears;
+ final  int? addMonths;
+ final  int? addDays;
  final  int? replaceYears;
  final  int? replaceMonths;
  final  int? replaceDays;
@@ -195,7 +195,7 @@ abstract mixin class $TodayDateCopyWith<$Res> implements $FlexibleDateTimeCopyWi
   factory $TodayDateCopyWith(TodayDate value, $Res Function(TodayDate) _then) = _$TodayDateCopyWithImpl;
 @useResult
 $Res call({
- int addYears, int addMonths, int addDays, int? replaceYears, int? replaceMonths, int? replaceDays, int? replaceWeekday
+ int? addYears, int? addMonths, int? addDays, int? replaceYears, int? replaceMonths, int? replaceDays, int? replaceWeekday
 });
 
 
@@ -212,12 +212,12 @@ class _$TodayDateCopyWithImpl<$Res>
 
 /// Create a copy of FlexibleDateTime
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? addYears = null,Object? addMonths = null,Object? addDays = null,Object? replaceYears = freezed,Object? replaceMonths = freezed,Object? replaceDays = freezed,Object? replaceWeekday = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? addYears = freezed,Object? addMonths = freezed,Object? addDays = freezed,Object? replaceYears = freezed,Object? replaceMonths = freezed,Object? replaceDays = freezed,Object? replaceWeekday = freezed,}) {
   return _then(TodayDate(
-addYears: null == addYears ? _self.addYears : addYears // ignore: cast_nullable_to_non_nullable
-as int,addMonths: null == addMonths ? _self.addMonths : addMonths // ignore: cast_nullable_to_non_nullable
-as int,addDays: null == addDays ? _self.addDays : addDays // ignore: cast_nullable_to_non_nullable
-as int,replaceYears: freezed == replaceYears ? _self.replaceYears : replaceYears // ignore: cast_nullable_to_non_nullable
+addYears: freezed == addYears ? _self.addYears : addYears // ignore: cast_nullable_to_non_nullable
+as int?,addMonths: freezed == addMonths ? _self.addMonths : addMonths // ignore: cast_nullable_to_non_nullable
+as int?,addDays: freezed == addDays ? _self.addDays : addDays // ignore: cast_nullable_to_non_nullable
+as int?,replaceYears: freezed == replaceYears ? _self.replaceYears : replaceYears // ignore: cast_nullable_to_non_nullable
 as int?,replaceMonths: freezed == replaceMonths ? _self.replaceMonths : replaceMonths // ignore: cast_nullable_to_non_nullable
 as int?,replaceDays: freezed == replaceDays ? _self.replaceDays : replaceDays // ignore: cast_nullable_to_non_nullable
 as int?,replaceWeekday: freezed == replaceWeekday ? _self.replaceWeekday : replaceWeekday // ignore: cast_nullable_to_non_nullable

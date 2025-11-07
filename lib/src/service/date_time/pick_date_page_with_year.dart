@@ -589,7 +589,6 @@ class DaysOfWeek extends StatelessWidget {
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 512 - 32),
         child: GridView.builder(
-          // padding: const EdgeInsets.symmetric(horizontal: 16),
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
