@@ -53,9 +53,25 @@ _DateTimeInputUiSettings _$DateTimeInputUiSettingsFromJson(
   dateFormat: json['dateFormat'] as String?,
   timeFormat: json['timeFormat'] as String?,
   labelText: json['labelText'] as String?,
-  helperText: json['helperText'] as String?,
+  labelLocation: $enumDecodeNullable(
+    _$FieldElementLocationEnumMap,
+    json['labelLocation'],
+  ),
   hintText: json['hintText'] as String?,
+  helperText: json['helperText'] as String?,
+  helperLocation: $enumDecodeNullable(
+    _$FieldElementLocationEnumMap,
+    json['helperLocation'],
+  ),
   headerFlex: (json['headerFlex'] as num?)?.toInt(),
+  prefixIconLocation: $enumDecodeNullable(
+    _$FieldElementLocationEnumMap,
+    json['prefixIconLocation'],
+  ),
+  errorLocation: $enumDecodeNullable(
+    _$FieldElementLocationEnumMap,
+    json['errorLocation'],
+  ),
   addDateText: json['addDateText'] as String?,
   addTimeText: json['addTimeText'] as String?,
   initialEditValue: json['initialEditValue'] == null
@@ -79,9 +95,14 @@ Map<String, dynamic> _$DateTimeInputUiSettingsToJson(
   'dateFormat': instance.dateFormat,
   'timeFormat': instance.timeFormat,
   'labelText': instance.labelText,
-  'helperText': instance.helperText,
+  'labelLocation': _$FieldElementLocationEnumMap[instance.labelLocation],
   'hintText': instance.hintText,
+  'helperText': instance.helperText,
+  'helperLocation': _$FieldElementLocationEnumMap[instance.helperLocation],
   'headerFlex': instance.headerFlex,
+  'prefixIconLocation':
+      _$FieldElementLocationEnumMap[instance.prefixIconLocation],
+  'errorLocation': _$FieldElementLocationEnumMap[instance.errorLocation],
   'addDateText': instance.addDateText,
   'addTimeText': instance.addTimeText,
   'initialEditValue': instance.initialEditValue?.toJson(),
@@ -89,6 +110,11 @@ Map<String, dynamic> _$DateTimeInputUiSettingsToJson(
   'pickDate': const PickDateDefNullableConverter().toJson(instance.pickDate),
   'initialTimeEntryMode':
       _$TimePickerEntryModeEnumMap[instance.initialTimeEntryMode],
+};
+
+const _$FieldElementLocationEnumMap = {
+  FieldElementLocation.inside: 'inside',
+  FieldElementLocation.outside: 'outside',
 };
 
 const _$DateEditModeEnumMap = {
@@ -359,22 +385,22 @@ _StringInputUiSettings<T> _$StringInputUiSettingsFromJson<T>(
   labelText: json['labelText'] as String?,
   labelMaxLines: (json['labelMaxLines'] as num?)?.toInt(),
   labelLocation: $enumDecodeNullable(
-    _$StringFieldLocationEnumMap,
+    _$FieldElementLocationEnumMap,
     json['labelLocation'],
   ),
   hintText: json['hintText'] as String?,
   helperText: json['helperText'] as String?,
   helperMaxLines: (json['helperMaxLines'] as num?)?.toInt(),
   helperLocation: $enumDecodeNullable(
-    _$StringFieldLocationEnumMap,
+    _$FieldElementLocationEnumMap,
     json['helperLocation'],
   ),
   prefixIconLocation: $enumDecodeNullable(
-    _$StringFieldLocationEnumMap,
+    _$FieldElementLocationEnumMap,
     json['prefixIconLocation'],
   ),
   errorLocation: $enumDecodeNullable(
-    _$StringFieldLocationEnumMap,
+    _$FieldElementLocationEnumMap,
     json['errorLocation'],
   ),
   action: $enumDecodeNullable(_$StringFieldActionEnumMap, json['action']),
@@ -411,14 +437,14 @@ Map<String, dynamic> _$StringInputUiSettingsToJson<T>(
   'headerFlex': instance.headerFlex,
   'labelText': instance.labelText,
   'labelMaxLines': instance.labelMaxLines,
-  'labelLocation': _$StringFieldLocationEnumMap[instance.labelLocation],
+  'labelLocation': _$FieldElementLocationEnumMap[instance.labelLocation],
   'hintText': instance.hintText,
   'helperText': instance.helperText,
   'helperMaxLines': instance.helperMaxLines,
-  'helperLocation': _$StringFieldLocationEnumMap[instance.helperLocation],
+  'helperLocation': _$FieldElementLocationEnumMap[instance.helperLocation],
   'prefixIconLocation':
-      _$StringFieldLocationEnumMap[instance.prefixIconLocation],
-  'errorLocation': _$StringFieldLocationEnumMap[instance.errorLocation],
+      _$FieldElementLocationEnumMap[instance.prefixIconLocation],
+  'errorLocation': _$FieldElementLocationEnumMap[instance.errorLocation],
   'action': _$StringFieldActionEnumMap[instance.action],
   'submitFormOnFieldSubmitted': instance.submitFormOnFieldSubmitted,
   'keyboardType': const TextInputTypeConverter().toJson(instance.keyboardType),
@@ -433,11 +459,6 @@ Map<String, dynamic> _$StringInputUiSettingsToJson<T>(
   'invalidRegexMessage': instance.invalidRegexMessage,
   'collapsed': instance.collapsed,
   'padding': const EdgeInsetsNullableConverter().toJson(instance.padding),
-};
-
-const _$StringFieldLocationEnumMap = {
-  StringFieldLocation.inside: 'inside',
-  StringFieldLocation.outside: 'outside',
 };
 
 const _$StringFieldActionEnumMap = {

@@ -9,6 +9,7 @@ class DateTimeSelector extends StatelessWidget {
     this.maxDateTime,
     this.onChanged,
     this.settings = const DateTimeInputUiSettings(),
+    this.errorText,
     this.showCloseButton = true,
     super.key,
   });
@@ -18,6 +19,7 @@ class DateTimeSelector extends StatelessWidget {
   final DateTime? maxDateTime;
   final void Function(DateTime? value)? onChanged;
   final DateTimeInputUiSettings settings;
+  final String? errorText;
   final bool showCloseButton;
 
   Future<void> pickDate(BuildContext context) async {
@@ -75,22 +77,26 @@ class DateTimeSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final decoration = InputDecoration(
+      labelText: settings.labelText,
+      helperText: settings.helperText,
+      errorText: errorText,
+      prefixIcon: (settings.prefixIconLocation?.isInside ?? false)
+          ? settings.prefixIcon
+          : null,
+      suffixIcon: dateTime == null || !showCloseButton
+          ? null
+          : IconButton(
+              onPressed: onChanged == null ? null : () => onChanged!(null),
+              icon: const Icon(Icons.close),
+            ),
+    );
 
     switch (settings.editMode) {
       case DateEditMode.date:
         return ClickableInputField(
           onTap: onChanged == null ? null : () => pickDate(context),
-          decoration: InputDecoration(
-            prefixIcon: settings.prefixIcon,
-            suffixIcon: dateTime == null || !showCloseButton
-                ? null
-                : IconButton(
-                    onPressed: onChanged == null
-                        ? null
-                        : () => onChanged!(null),
-                    icon: const Icon(Icons.close),
-                  ),
-          ),
+          decoration: decoration,
           child: dateTime == null
               ? Text(settings.addDateText ?? context.woFormL10n.selectDate)
               : Text(
@@ -102,17 +108,7 @@ class DateTimeSelector extends StatelessWidget {
       case DateEditMode.time:
         return ClickableInputField(
           onTap: onChanged == null ? null : () => pickTime(context),
-          decoration: InputDecoration(
-            prefixIcon: settings.prefixIcon,
-            suffixIcon: dateTime == null || !showCloseButton
-                ? null
-                : IconButton(
-                    onPressed: onChanged == null
-                        ? null
-                        : () => onChanged!(null),
-                    icon: const Icon(Icons.close),
-                  ),
-          ),
+          decoration: decoration,
           child: dateTime == null
               ? Text(settings.addTimeText ?? context.woFormL10n.selectTime)
               : Text(
@@ -125,8 +121,7 @@ class DateTimeSelector extends StatelessWidget {
       case DateEditMode.dateAndTime:
         return ClickableInputField(
           onTap: onChanged == null ? null : () => pickDate(context),
-          decoration: InputDecoration(
-            prefixIcon: settings.prefixIcon,
+          decoration: decoration.copyWith(
             suffixIcon: dateTime == null
                 ? null
                 : DecoratedBox(
@@ -157,19 +152,20 @@ class DateTimeSelector extends StatelessWidget {
                               ),
                             ),
                           ),
-                          VerticalDivider(
-                            width: 1,
-                            color: theme.colorScheme.onSurface.withAlpha(
-                              128,
+                          if (showCloseButton) ...[
+                            VerticalDivider(
+                              width: 1,
+                              color: theme.colorScheme.onSurface.withAlpha(
+                                128,
+                              ),
                             ),
-                          ),
-                          if (showCloseButton)
                             IconButton(
                               onPressed: onChanged == null
                                   ? null
                                   : () => onChanged!(null),
                               icon: const Icon(Icons.close),
                             ),
+                          ],
                         ],
                       ),
                     ),
@@ -214,25 +210,18 @@ class ClickableInputField extends StatelessWidget {
     final theme = Theme.of(context);
     final inputDecorationTheme = theme.inputDecorationTheme;
     final themedBorder = inputDecorationTheme.border;
+    final borderRadius = themedBorder is OutlineInputBorder
+        ? themedBorder.borderRadius
+        : themedBorder is UnderlineInputBorder
+        ? themedBorder.borderRadius
+        : BorderRadius.zero;
 
-    return ClipRRect(
-      borderRadius: themedBorder is OutlineInputBorder
-          ? themedBorder.borderRadius
-          : themedBorder is UnderlineInputBorder
-          ? themedBorder.borderRadius
-          : BorderRadius.zero,
-      clipBehavior: Clip.hardEdge,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: themedBorder is OutlineInputBorder
-            ? themedBorder.borderRadius
-            : themedBorder is UnderlineInputBorder
-            ? themedBorder.borderRadius
-            : BorderRadius.zero,
-        child: InputDecorator(
-          decoration: decoration,
-          child: child,
-        ),
+    return InkWell(
+      onTap: onTap,
+      borderRadius: borderRadius,
+      child: InputDecorator(
+        decoration: decoration,
+        child: child,
       ),
     );
   }

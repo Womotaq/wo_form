@@ -108,19 +108,19 @@ class _StringFieldState<T> extends State<StringField<T>> {
     final labelLocation =
         uiSettings?.labelLocation ??
         woFormTheme?.stringFieldLabelLocation ??
-        StringFieldLocation.inside;
+        FieldElementLocation.inside;
     final helperLocation =
         uiSettings?.helperLocation ??
         woFormTheme?.stringFieldHelperLocation ??
-        StringFieldLocation.inside;
+        FieldElementLocation.inside;
     final errorLocation =
         uiSettings?.errorLocation ??
         woFormTheme?.stringFieldErrorLocation ??
-        StringFieldLocation.inside;
+        FieldElementLocation.inside;
     final prefixIconLocation =
         uiSettings?.prefixIconLocation ??
         woFormTheme?.stringFieldPrefixIconLocation ??
-        StringFieldLocation.outside;
+        FieldElementLocation.outside;
 
     final inputDecoration = collapsed
         ? InputDecoration.collapsed(
@@ -391,6 +391,7 @@ class _SuggestionsTextFieldState<T> extends State<SuggestionsTextField<T>> {
           children: [
             Expanded(
               child: TextFormField(
+                enabled: widget.onChanged != null,
                 decoration: widget.inputDecoration,
                 style: widget.textStyle,
                 controller: widget.textEditingController,
@@ -400,7 +401,7 @@ class _SuggestionsTextFieldState<T> extends State<SuggestionsTextField<T>> {
                 textCapitalization:
                     widget.textCapitalization ?? TextCapitalization.none,
                 onFieldSubmitted: widget.onFieldSubmitted,
-                onChanged: subject.add,
+                onChanged: widget.onChanged == null ? null : subject.add,
                 onTapOutside: widget.onTapOutside,
                 onTapUpOutside: widget.onTapUpOutside,
               ),

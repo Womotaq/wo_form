@@ -9,6 +9,14 @@ import 'package:wo_form/wo_form.dart';
 part 'ui_settings.freezed.dart';
 part 'ui_settings.g.dart';
 
+enum FieldElementLocation {
+  inside,
+  outside;
+
+  bool get isInside => this == inside;
+  bool get isOutside => this == outside;
+}
+
 @freezed
 abstract class InputUiSettings with _$InputUiSettings {
   const factory InputUiSettings({
@@ -79,8 +87,14 @@ abstract class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
     String? dateFormat,
     String? timeFormat,
     String? labelText,
-    String? helperText,
+
+    /// Default to [FieldElementLocation.inside].
+    FieldElementLocation? labelLocation,
     String? hintText,
+    String? helperText,
+
+    /// Default to [FieldElementLocation.inside].
+    FieldElementLocation? helperLocation,
 
     /// If null or O, header will be placed above the field.
     /// Else, header and selector will be in a the same row.
@@ -90,6 +104,12 @@ abstract class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
     /// and the header with a flex value of [headerFlex].
     int? headerFlex,
     @notSerializable Widget? prefixIcon,
+
+    /// Default to [FieldElementLocation.outside].
+    FieldElementLocation? prefixIconLocation,
+
+    /// Default to FieldElementLocation.inside
+    FieldElementLocation? errorLocation,
     String? addDateText,
     String? addTimeText,
 
@@ -113,10 +133,14 @@ abstract class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
           dateFormat: dateFormat ?? other.dateFormat,
           timeFormat: timeFormat ?? other.timeFormat,
           labelText: labelText ?? other.labelText,
+          labelLocation: labelLocation ?? other.labelLocation,
           helperText: helperText ?? other.helperText,
+          helperLocation: helperLocation ?? other.helperLocation,
           hintText: hintText ?? other.hintText,
           headerFlex: headerFlex ?? other.headerFlex,
           prefixIcon: prefixIcon ?? other.prefixIcon,
+          prefixIconLocation: prefixIconLocation ?? other.prefixIconLocation,
+          errorLocation: errorLocation ?? other.errorLocation,
           addDateText: addDateText ?? other.addDateText,
           addTimeText: addTimeText ?? other.addTimeText,
           editMode: editMode ?? other.editMode,
@@ -614,14 +638,6 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
 
 enum StringFieldAction { clear, obscure }
 
-enum StringFieldLocation {
-  inside,
-  outside;
-
-  bool get isInside => this == inside;
-  bool get isOutside => this == outside;
-}
-
 /// Whether this text field should focus itself if nothing else is already
 /// focused.
 ///
@@ -657,18 +673,18 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     /// Else, the field will be wrapped in a Flexible with a flex value of 10,
     /// and the header with a flex value of [headerFlex].
     ///
-    /// Only used when [labelLocation] is [StringFieldLocation.outside].
+    /// Only used when [labelLocation] is [FieldElementLocation.outside].
     int? headerFlex,
 
     String? labelText,
 
-    /// Only used when [labelLocation] is [StringFieldLocation.outside].
+    /// Only used when [labelLocation] is [FieldElementLocation.outside].
     ///
     /// Defaults to null.
     int? labelMaxLines,
 
-    /// Default to StringFieldLocation.inside
-    StringFieldLocation? labelLocation,
+    /// Default to [FieldElementLocation.inside].
+    FieldElementLocation? labelLocation,
     String? hintText,
     String? helperText,
 
@@ -676,15 +692,15 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     int? helperMaxLines,
     @notSerializable Widget? helper,
 
-    /// Default to StringFieldLocation.inside
-    StringFieldLocation? helperLocation,
+    /// Default to [FieldElementLocation.inside].
+    FieldElementLocation? helperLocation,
     @notSerializable Widget? prefixIcon,
 
-    /// Default to StringFieldLocation.outside
-    StringFieldLocation? prefixIconLocation,
+    /// Default to [FieldElementLocation.outside].
+    FieldElementLocation? prefixIconLocation,
 
-    /// Default to StringFieldLocation.inside
-    StringFieldLocation? errorLocation,
+    /// Default to FieldElementLocation.inside
+    FieldElementLocation? errorLocation,
     StringFieldAction? action,
 
     /// By default, this is determined by [textInputAction]:
@@ -725,15 +741,15 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     int? headerFlex,
     String? labelText,
     int? labelMaxLines,
-    StringFieldLocation? labelLocation,
+    FieldElementLocation? labelLocation,
     String? hintText,
     String? helperText,
     int? helperMaxLines,
     Widget? helper,
-    StringFieldLocation? helperLocation,
+    FieldElementLocation? helperLocation,
     Widget? prefixIcon,
-    StringFieldLocation? prefixIconLocation,
-    StringFieldLocation? errorLocation,
+    FieldElementLocation? prefixIconLocation,
+    FieldElementLocation? errorLocation,
     bool? submitFormOnFieldSubmitted,
     WoFormAutofocus? autofocus,
     TextInputAction? textInputAction,
@@ -775,15 +791,15 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     int? headerFlex,
     String? labelText,
     int? labelMaxLines,
-    StringFieldLocation? labelLocation,
+    FieldElementLocation? labelLocation,
     String? hintText,
     String? helperText,
     int? helperMaxLines,
     Widget? helper,
-    StringFieldLocation? helperLocation,
+    FieldElementLocation? helperLocation,
     Widget? prefixIcon,
-    StringFieldLocation? prefixIconLocation,
-    StringFieldLocation? errorLocation,
+    FieldElementLocation? prefixIconLocation,
+    FieldElementLocation? errorLocation,
     bool? submitFormOnFieldSubmitted,
     WoFormAutofocus? autofocus = WoFormAutofocus.no,
     TextInputAction? textInputAction,
@@ -830,15 +846,15 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     int? headerFlex,
     String? labelText,
     int? labelMaxLines,
-    StringFieldLocation? labelLocation,
+    FieldElementLocation? labelLocation,
     String? hintText,
     String? helperText,
     int? helperMaxLines,
     Widget? helper,
-    StringFieldLocation? helperLocation,
+    FieldElementLocation? helperLocation,
     Widget? prefixIcon,
-    StringFieldLocation? prefixIconLocation,
-    StringFieldLocation? errorLocation,
+    FieldElementLocation? prefixIconLocation,
+    FieldElementLocation? errorLocation,
     bool? submitFormOnFieldSubmitted,
     WoFormAutofocus? autofocus,
     TextInputAction? textInputAction,

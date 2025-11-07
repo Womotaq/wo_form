@@ -53,10 +53,10 @@ abstract class WoFormThemeData with _$WoFormThemeData {
     @notSerializable SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
     @notSerializable ScaffoldBuilderDef? standardScaffoldBuilder,
     @notSerializable StringFieldBuilderDef? stringFieldBuilder,
-    StringFieldLocation? stringFieldErrorLocation,
-    StringFieldLocation? stringFieldHelperLocation,
-    StringFieldLocation? stringFieldLabelLocation,
-    StringFieldLocation? stringFieldPrefixIconLocation,
+    FieldElementLocation? stringFieldErrorLocation,
+    FieldElementLocation? stringFieldHelperLocation,
+    FieldElementLocation? stringFieldLabelLocation,
+    FieldElementLocation? stringFieldPrefixIconLocation,
     @notSerializable SubmitButtonBuilderDef? submitButtonBuilder,
 
     /// Default values :

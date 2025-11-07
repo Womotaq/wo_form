@@ -13,19 +13,19 @@ _WoFormThemeData _$WoFormThemeDataFromJson(Map<String, dynamic> json) =>
         json['dynamicInputsNodeAddButtonPosition'],
       ),
       stringFieldErrorLocation: $enumDecodeNullable(
-        _$StringFieldLocationEnumMap,
+        _$FieldElementLocationEnumMap,
         json['stringFieldErrorLocation'],
       ),
       stringFieldHelperLocation: $enumDecodeNullable(
-        _$StringFieldLocationEnumMap,
+        _$FieldElementLocationEnumMap,
         json['stringFieldHelperLocation'],
       ),
       stringFieldLabelLocation: $enumDecodeNullable(
-        _$StringFieldLocationEnumMap,
+        _$FieldElementLocationEnumMap,
         json['stringFieldLabelLocation'],
       ),
       stringFieldPrefixIconLocation: $enumDecodeNullable(
-        _$StringFieldLocationEnumMap,
+        _$FieldElementLocationEnumMap,
         json['stringFieldPrefixIconLocation'],
       ),
       maxWidth: (json['maxWidth'] as num?)?.toDouble(),
@@ -39,13 +39,13 @@ Map<String, dynamic> _$WoFormThemeDataToJson(_WoFormThemeData instance) =>
           _$DynamicInputsNodeAddButtonPositionEnumMap[instance
               .dynamicInputsNodeAddButtonPosition],
       'stringFieldErrorLocation':
-          _$StringFieldLocationEnumMap[instance.stringFieldErrorLocation],
+          _$FieldElementLocationEnumMap[instance.stringFieldErrorLocation],
       'stringFieldHelperLocation':
-          _$StringFieldLocationEnumMap[instance.stringFieldHelperLocation],
+          _$FieldElementLocationEnumMap[instance.stringFieldHelperLocation],
       'stringFieldLabelLocation':
-          _$StringFieldLocationEnumMap[instance.stringFieldLabelLocation],
+          _$FieldElementLocationEnumMap[instance.stringFieldLabelLocation],
       'stringFieldPrefixIconLocation':
-          _$StringFieldLocationEnumMap[instance.stringFieldPrefixIconLocation],
+          _$FieldElementLocationEnumMap[instance.stringFieldPrefixIconLocation],
       'maxWidth': instance.maxWidth,
       'spacing': instance.spacing,
       'showAsteriskIfRequired': instance.showAsteriskIfRequired,
@@ -56,7 +56,7 @@ const _$DynamicInputsNodeAddButtonPositionEnumMap = {
   DynamicInputsNodeAddButtonPosition.footer: 'footer',
 };
 
-const _$StringFieldLocationEnumMap = {
-  StringFieldLocation.inside: 'inside',
-  StringFieldLocation.outside: 'outside',
+const _$FieldElementLocationEnumMap = {
+  FieldElementLocation.inside: 'inside',
+  FieldElementLocation.outside: 'outside',
 };

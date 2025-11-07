@@ -245,7 +245,7 @@ class SearchScreen<T> extends StatelessWidget {
   static StringInputUiSettings<T>
   defaultSearchInputUiSettings<T extends Object?>() => StringInputUiSettings(
     prefixIcon: const Icon(Icons.search),
-    prefixIconLocation: StringFieldLocation.inside,
+    prefixIconLocation: FieldElementLocation.inside,
     autofocus: WoFormAutofocus.yes,
     action: StringFieldAction.clear,
     submitFormOnFieldSubmitted: false,
