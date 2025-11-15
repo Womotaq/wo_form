@@ -22,41 +22,33 @@ extension OpenForm on BuildContext {
   };
 }
 
-/// TODO : implement dialog support
 Future<T?> _showWoFormModal<T extends Object?>({
   required BuildContext context,
   required WoForm form,
   required double initialBottomSheetSize,
   required bool dismissible,
 }) {
-  // final size =
-  //     acceptScrollController ? ModalSize.flexible : ModalSize.fitContent;
-  final isDialog =
-      form.root.uiSettings?.presentation == WoFormPresentation.dialog;
-
-  if (isDialog) {
-    // TODO : Push.dialog
-    return showDialog(
+  if (form.root.uiSettings?.presentation == WoFormPresentation.dialog) {
+    return Push.dialog(
       context: context,
-      barrierDismissible: dismissible,
-      builder: (dialogContext) => SimpleDialog(
-        children: [
-          SizedBox(
-            width: 512, // TODO : WoForm.MAX_WIDTH ?
-            child: form,
-          ),
-        ],
+      layout: form.root.uiSettings?.multistepSettings != null
+          ? LayoutMethod.flexible
+          : form.root.uiSettings?.layout ?? LayoutMethod.scrollable,
+      dismissible: dismissible,
+      child: SizedBox(
+        width: WoFormTheme.of(context)?.maxWidth ?? WoFormTheme.MAX_WIDTH,
+        child: form,
       ),
     );
   } else {
     return Push.modalBottomSheet(
       context: context,
-      child: form,
       layout: form.root.uiSettings?.multistepSettings != null
           ? LayoutMethod.flexible
           : form.root.uiSettings?.layout ?? LayoutMethod.scrollable,
       dismissible: dismissible,
       initialBottomSheetSize: initialBottomSheetSize,
+      child: form,
     );
   }
 }

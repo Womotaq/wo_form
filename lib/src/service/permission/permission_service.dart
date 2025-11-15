@@ -1,5 +1,3 @@
-// TODO : implement & use
-
 /// TODO : documentation
 /// SETUP :
 ///

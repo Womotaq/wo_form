@@ -77,7 +77,7 @@ class _WoFormStandardBody extends StatelessWidget {
       alignment: Alignment.topCenter,
       child: ConstrainedBox(
         constraints: BoxConstraints(
-          maxWidth: woFormTheme?.maxWidth ?? WoFormThemeData.DEFAULT_MAX_WIDTH,
+          maxWidth: woFormTheme?.maxWidth ?? WoFormTheme.MAX_WIDTH,
         ),
         child: uiSettings.layout.isScrollable
             ? SingleChildScrollView(
@@ -141,8 +141,7 @@ class _WoFormMultistepBody extends StatelessWidget {
 
             return Builder(
               builder: (context) => ConstrainedColumn(
-                maxWidth:
-                    woFormTheme?.maxWidth ?? WoFormThemeData.DEFAULT_MAX_WIDTH,
+                maxWidth: woFormTheme?.maxWidth ?? WoFormTheme.MAX_WIDTH,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Expanded(

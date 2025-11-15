@@ -15,7 +15,11 @@ class QuitWoFormButton extends StatelessWidget {
     return WoFormPopScope(
       builder: (context, tryPop) => IconButton(
         icon: IconTheme(
-          data: IconThemeData(color: appBarTheme.foregroundColor),
+          data: IconThemeData(
+            color:
+                appBarTheme.foregroundColor ??
+                Theme.of(context).colorScheme.onSurface,
+          ),
           child:
               actionIconTheme?.backButtonIconBuilder?.call(context) ??
               (close ? const Icon(Icons.close) : const Icon(Icons.arrow_back)),
