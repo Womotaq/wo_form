@@ -210,8 +210,18 @@ class _StringFieldState<T> extends State<StringField<T>> {
                     defaultSubmitFormOnFieldSubmitted())
                 ? (_) => context.read<WoFormValuesCubit>().submit(context)
                 : null,
-            // TODO : onTapUpOutside
-            onTapOutside: (event) => FocusScope.of(context).unfocus(),
+            // Flutter's default behaviour :
+            // - web : tapping outside instantly unfocuses the field.
+            // - mobile : tapping outside does nothing.
+            // For better consistency across all plateforms, wo_form decided to
+            // unfocus text fields on tap up.
+            onTapOutside: (event) => tapPosition = event.position,
+            onTapUpOutside: (event) {
+              if (event.position == tapPosition) {
+                FocusScope.of(context).unfocus();
+              }
+              tapPosition = null;
+            },
             style: uiSettings?.style,
             obscureText: obscureText,
             autocorrect: uiSettings?.autocorrect ?? true,

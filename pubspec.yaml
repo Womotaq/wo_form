@@ -30,6 +30,12 @@ dependencies:
   rxdart: ^0.28.0
   universal_html: ^2.2.4
 
+dependency_overrides:
+  phone_form_field:
+    git:
+      url: git@github.com:Chresyr/phone_form_field.git
+      ref: feat/tap-up-outside
+
 dev_dependencies:
   build_runner: ^2.4.13
   freezed: ^3.0.0
