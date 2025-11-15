@@ -145,7 +145,6 @@ typedef TranslateInputErrorDef = String? Function(WoFormInputError error);
 typedef CountDef = String Function(int count);
 typedef CountNullableDef = String? Function(int count);
 
-// TODO : in README.md, teach how to use a custom language
 class WoFormL10nProvider extends InheritedWidget {
   const WoFormL10nProvider({
     required this.l10n,
