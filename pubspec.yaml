@@ -17,6 +17,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^9.0.0
+  flutter_typeahead: ^5.2.0
   freezed_annotation: ^3.0.0
   http: ^1.4.0
   hydrated_bloc: ^10.0.0
