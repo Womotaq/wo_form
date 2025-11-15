@@ -3,10 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/wo_form.dart';
 
 class ConditionnalNodeBuilder extends StatelessWidget {
-  const ConditionnalNodeBuilder({
-    required this.path,
-    super.key,
-  });
+  const ConditionnalNodeBuilder({required this.path, super.key});
 
   final String path;
 
@@ -26,21 +23,39 @@ class ConditionnalNodeBuilder extends StatelessWidget {
       alignment: Alignment.topCenter,
       child: BlocSelector<WoFormValuesCubit, WoFormValues, bool>(
         selector: (values) => values.meet(node.condition),
-        builder: (context, conditionsAreMet) {
-          // TODO : improve
-          if (!conditionsAreMet) {
-            if (node.resetChildrenWhenHidden) {
-              valuesCubit.onValuesChanged(
-                node.child.getInitialValues(parentPath: path),
-                updateStatus: UpdateStatus.ifPathAlreadyVisited,
-              );
-            }
-            return const SizedBox.shrink();
-          }
-
-          return node.child.toWidget(parentPath: path);
-        },
+        builder: (context, conditionIsMet) => conditionIsMet
+            ? node.child.toWidget(parentPath: path)
+            : _HiddenChildren(node: node, path: path),
       ),
     );
   }
+}
+
+class _HiddenChildren extends StatefulWidget {
+  const _HiddenChildren({required this.node, required this.path});
+
+  final ConditionnalNode node;
+  final String path;
+
+  @override
+  State<_HiddenChildren> createState() => __HiddenChildrenState();
+}
+
+class __HiddenChildrenState extends State<_HiddenChildren> {
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.node.resetChildrenWhenHidden) {
+      context.read<WoFormValuesCubit>().onValuesChanged(
+        widget.node.child.getInitialValues(parentPath: widget.path),
+        updateStatus: UpdateStatus.ifPathAlreadyVisited,
+      );
+    }
+  }
+
+  @override
+  /// _HiddenChildren is used only when the condition isn't met, which means
+  /// the node should render nothing.
+  Widget build(BuildContext context) => const SizedBox.shrink();
 }

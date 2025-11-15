@@ -146,8 +146,7 @@ class _WoFormMultistepBody extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Expanded(
-                    // 0 means shrinking. Shrink if :
-                    // - TODO : documentation
+                    // 0 means shrinking
                     flex:
                         uiSettings.layout.supportFlex &&
                             (step.flex(context, parentPath: '') ?? 0) == 0
