@@ -318,19 +318,6 @@ class InfiniteListView extends StatelessWidget {
   Widget build(BuildContext context) {
     if (scrollDirection != Axis.vertical) throw UnimplementedError();
 
-    if (maxIndex != null && centerIndex > maxIndex!) {
-      throw AssertionError(
-        'centerIndex ($centerIndex) must be lower or equal to '
-        'maxIndex ($maxIndex)',
-      );
-    }
-    if (minIndex != null && centerIndex < minIndex!) {
-      throw AssertionError(
-        'centerIndex ($centerIndex) must be higher or equal to '
-        'minIndex ($minIndex)',
-      );
-    }
-
     final Key forwardListKey = UniqueKey();
     return Scrollable(
       viewportBuilder: (BuildContext context, ViewportOffset offset) {
