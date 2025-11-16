@@ -1,4 +1,4 @@
-## 1.4.0
+## 2.0.0
 
 - Merged wo_form_service into wo_form (DateTimeService, GooglePlaces, media handling)
 - Reworked MultistepSettings and navigation
