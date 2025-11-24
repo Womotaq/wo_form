@@ -17,8 +17,6 @@ Source code : https://github.com/Womotaq/wo_form/tree/main/example
 
 ## Example
 
-See https://github.com/Womotaq/wo_form_example.
-
 ```dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
