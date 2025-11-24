@@ -5,8 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:wo_form/src/utils/extensions.dart';
 import 'package:wo_form/wo_form.dart';
 
-// TODO : use TabBar.foregroundColor ?
-
 class PickDatePage extends StatelessWidget {
   const PickDatePage({
     required this.minDate,
@@ -319,19 +317,6 @@ class InfiniteListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (scrollDirection != Axis.vertical) throw UnimplementedError();
-
-    if (maxIndex != null && centerIndex > maxIndex!) {
-      throw AssertionError(
-        'centerIndex ($centerIndex) must be lower or equal to '
-        'maxIndex ($maxIndex)',
-      );
-    }
-    if (minIndex != null && centerIndex < minIndex!) {
-      throw AssertionError(
-        'centerIndex ($centerIndex) must be higher or equal to '
-        'minIndex ($minIndex)',
-      );
-    }
 
     final Key forwardListKey = UniqueKey();
     return Scrollable(

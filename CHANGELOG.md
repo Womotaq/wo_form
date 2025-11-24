@@ -1,7 +1,14 @@
-## 1.4.0
+## 2.0.0
 
-- Merged wo_form & wo_form_service
-- Improved date selection
+- Merged wo_form_service into wo_form (DateTimeService, GooglePlaces, media handling)
+- Reworked MultistepSettings and navigation
+- Reworked SuggestionsTextField (replaced PlaceAutocompleteTextField)
+- Reworked WoFormL10n localization
+- Added 50+ new customization options (SearchSettings, WoFormPresentation, FieldElementLocation, etc.)
+- Improved date/time picker UI and keyboard handling
+- Fixed issues with flex layout, ConditionnalNode, DynamicInputsNode, and SelectInput
+- Better form state management and TextField unfocus behavior
+- Breaking: Removed WoFormNodeMixin/WoFormInputMixin, merged wo_form_service, changed APIs
 
 ## 1.3.2
 

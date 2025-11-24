@@ -464,7 +464,6 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
     return (flexRaw != null && flexRaw < 0) ? 1 : flexRaw;
   }
 
-  // TODO : if selectString deleted, move in WoFormInput
   static WoFormInputError? _listValidator<T>({
     required String inputId,
     required String parentPath,

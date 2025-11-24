@@ -9,6 +9,12 @@ wo_form is a powerful Dart package that takes the pain out of form creation and 
 - **Rich Widget Library** – Leverage advanced, prebuilt input widgets for common use cases.
 - **Seamless Integration** – Drop into new or existing projects without boilerplate.
 
+## 🚀 Demo
+
+See live examples here : https://wo-form-examples.womotaq.com
+
+Source code : https://github.com/Womotaq/wo_form/tree/main/example
+
 ## Example
 
 See https://github.com/Womotaq/wo_form_example.
@@ -33,12 +39,8 @@ class ReportPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return WoForm(
       uiSettings: const WoFormUiSettings(
-        titleText: 'Signaler un utilisateur',
-        submitMode: StandardSubmitMode(
-          submitText: 'Envoyer',
-          disableSubmitMode: DisableSubmitButton.whenInvalid,
-          buttonPosition: SubmitButtonPosition.floating,
-        ),
+        titleText: 'Report a player',
+        disableSubmitMode: DisableSubmitButton.whenInvalid,
       ),
       exportSettings: const ExportSettings(
         metadata: {
@@ -56,11 +58,11 @@ class ReportPage extends StatelessWidget {
             labelText: 'Motif',
             valueBuilder: (type) => Text(
               switch (type) {
-                null => 'Sélectionnez un motif',
-                ReportType.cheating => 'Triche',
+                null => 'Select a reason',
+                ReportType.cheating => 'Cheating',
                 ReportType.fairPlay => 'Fair play',
-                ReportType.verbalAbuse => 'Violence verbale',
-                ReportType.other => 'Autre',
+                ReportType.verbalAbuse => 'Verbal abuse',
+                ReportType.other => 'Other',
               },
             ),
           ),
@@ -68,7 +70,7 @@ class ReportPage extends StatelessWidget {
         const StringInput(
           id: 'message',
           uiSettings: StringInputUiSettings(
-            hintText: 'Dites-en plus !',
+            hintText: 'Tell us more !',
             textCapitalization: TextCapitalization.sentences,
             maxLines: 5,
           ),
@@ -76,7 +78,7 @@ class ReportPage extends StatelessWidget {
         const BooleanInput(
           id: 'block',
           uiSettings: BooleanInputUiSettings(
-            labelText: 'Bloquer cette raclure ?',
+            labelText: 'Do you want to block this player ?',
             controlType: BooleanFieldControlType.checkbox,
             controlAffinity: ListTileControlAffinity.leading,
           ),
@@ -84,13 +86,48 @@ class ReportPage extends StatelessWidget {
         WidgetNode(builder: (_) => const SizedBox(height: 64)),
       ],
       onSubmitting: (root, values) async {
-        // Save the values here
-      },
-      onSubmitSuccess: (context) async {
-        // You can pop the context here, or push a new page...
+        final json = await root.exportToMap(values: values, context: context);
+
+        if (!context.mounted) throw Exception("Context isn't mounted anymore");
+
+        await showDialog<void>(
+          context: context,
+          builder: (BuildContext dialogContext) {
+            return AlertDialog(
+              title: const Text('This JSON will be sent.'),
+              content: Text(readableJson(json)),
+              actions: [
+                FilledButton.tonalIcon(
+                  onPressed: () => Navigator.of(dialogContext).pop(),
+                  label: const Text('Ok'),
+                ),
+              ],
+            );
+          },
+        );
+
+        return;
       },
     );
   }
 }
 
 ```
+
+The standard language is english. For customization, provide the L10n at the top of your widget tree :
+
+## Localizations
+
+```dart
+WoFormL10nProvider(
+  l10n: WoFormL10n.fromLanguageCode(
+    languageCode: 'en',
+
+    // Overrides are possible here
+    submit: 'Valider',
+  ),
+  child: MyApp(),
+)
+```
+
+Notes: built-in languages: `en`, `fr`. For any other language build a `WoFormL10n` and pass it to the provider.

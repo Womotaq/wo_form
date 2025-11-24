@@ -89,9 +89,6 @@ abstract class WoFormThemeData with _$WoFormThemeData {
 
   // --
 
-  // ignore: constant_identifier_names
-  static const DEFAULT_MAX_WIDTH = 512.0;
-
   WoFormThemeData merge(WoFormThemeData? other) => other == null
       ? this
       : WoFormThemeData(

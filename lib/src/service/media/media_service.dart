@@ -150,8 +150,7 @@ abstract class MediaService {
           );
           return video == null ? [] : [MediaFile(file: video)];
         } else if (!includeVideos) {
-          // TODO : take multiple photos with camera
-          // TODO : take photo with webcam on web -> https://github.com/flutter/flutter/issues/85195
+          // LATER : take photo with webcam on web -> https://github.com/flutter/flutter/issues/85195
 
           if (limit == 1 || source == ImageSource.camera) {
             final image = await ImagePicker().pickImage(

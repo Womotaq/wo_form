@@ -961,7 +961,7 @@ class ValueBuilderNode<T extends Object?> extends WoFormNode<T> {
 
 @override final  String id;
 /// The path to the value this node listens to.
-/// TODO : macro example
+/// See : [WoFormValues.getValue].
  final  String path;
 @notSerializable final  WoFormNode Function(Object? value)? builder;
  final  Object? initialValue;

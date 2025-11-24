@@ -11,6 +11,10 @@ class WoFormTheme extends InheritedTheme {
   /// The configuration of this theme.
   final WoFormThemeData data;
 
+  /// Default max width for WoForm.
+  // ignore: constant_identifier_names
+  static const MAX_WIDTH = 512.0;
+
   // ignore: constant_identifier_names
   static const Duration STEP_TRANSITION_DURATION = Durations.short4;
   // ignore: constant_identifier_names

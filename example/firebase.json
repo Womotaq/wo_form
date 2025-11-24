@@ -1,0 +1,37 @@
+{
+  "hosting": {
+    "public": "build/web",
+    "site": "wo-form-example",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "frameworksBackend": { "region": "europe-west1" }
+  },
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "womotaq-f",
+          "appId": "1:737965928048:android:d3a4417ae251922e400eb5",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "womotaq-f",
+          "appId": "1:737965928048:ios:a62349504420ed27400eb5",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "womotaq-f",
+          "configurations": {
+            "android": "1:737965928048:android:d3a4417ae251922e400eb5",
+            "ios": "1:737965928048:ios:a62349504420ed27400eb5",
+            "web": "1:737965928048:web:f9684afc9f1df23a400eb5"
+          }
+        }
+      }
+    }
+  }
+}

@@ -111,7 +111,7 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
     required String id,
 
     /// The path to the value this node listens to.
-    /// TODO : macro example
+    /// See : [WoFormValues.getValue].
     required String path,
     @notSerializable WoFormNode Function(Object? value)? builder,
     Object? initialValue,
