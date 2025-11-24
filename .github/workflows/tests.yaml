@@ -22,9 +22,8 @@ jobs:
           channel: "stable"
       - run: flutter --version
 
-      - name: Create Firebase Options file (lib/firebase_options.dart)
-        run: |
-          echo "${{ secrets.FIREBASE_OPTIONS_DART }}" > lib/firebase_options.dart
+      - name: Create Example's Firebase Options file (lib/firebase_options.dart)
+        run: echo "${{ secrets.FIREBASE_OPTIONS_DART }}" > example/lib/firebase_options.dart
         shell: bash
 
       - name: Analyze project source
