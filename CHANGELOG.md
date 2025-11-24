@@ -9,6 +9,7 @@
 - Fixed issues with flex layout, ConditionnalNode, DynamicInputsNode, and SelectInput
 - Better form state management and TextField unfocus behavior
 - Breaking: Removed WoFormNodeMixin/WoFormInputMixin, merged wo_form_service, changed APIs
+- Moved demo back in example folder
 
 ## 1.3.2
 
