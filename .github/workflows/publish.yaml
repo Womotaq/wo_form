@@ -15,5 +15,5 @@ permissions:
 jobs:
   call-flutter_deploy_web:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    uses: Womotaq/github_actions/.github/workflows/flutter_publish_package.yaml@main
+    uses: Womotaq/github_actions/.github/workflows/flutter_publish_package.yaml@v2.0.0
     secrets: inherit
