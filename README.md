@@ -13,7 +13,7 @@ wo_form is a powerful Dart package that takes the pain out of form creation and 
 
 See live examples here : https://wo-form-examples.womotaq.com
 
-Source code : https://github.com/Womotaq/wo_form_example
+Source code : https://github.com/Womotaq/wo_form/tree/main/example
 
 ## Example
 
