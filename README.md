@@ -15,6 +15,14 @@ See live examples here : https://wo-form-examples.womotaq.com
 
 Source code : https://github.com/Womotaq/wo_form/tree/main/example
 
+## Support
+    
+If you find this package useful, you can support it for free by giving it a like on pub.dev and a star on GitHub!
+    
+You can also buy me a coffee:
+    
+<a href="https://ko-fi.com/chresyr"><img src="https://storage.ko-fi.com/cdn/kofi2.png?v=3" height="36"></a>
+
 ## Example
 
 ```dart
