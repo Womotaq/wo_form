@@ -136,3 +136,31 @@ app.*.symbols
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
 !.vscode/settings.json
+
+
+## Example
+# Miscellaneous
+.build/
+.swiftpm/
+migrate_working_dir/
+
+# Flutter/Dart/Pub related
+example/build/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# Firebase
+**/firebase_options.dart
+.firebase/
+firebase-service-account.json
+GoogleService-Info.plist
+google-services.json

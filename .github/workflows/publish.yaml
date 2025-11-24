@@ -1,12 +1,15 @@
-name: Publish to pub.dev
+name: Publish
 
 on:
-  push:
-    tags:
-      - "*"
+  workflow_run:
+    workflows: ["Tests"]
+    types:
+      - completed
+    branches:
+      - main
 
 jobs:
-  publish:
-    permissions:
-      id-token: write # Required for authentication using OIDC
-    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+  call-flutter_deploy_web:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    uses: Womotaq/github_actions/.github/workflows/flutter_publish_package.yaml@main
+    secrets: inherit
