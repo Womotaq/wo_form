@@ -1,6 +1,6 @@
 name: wo_form_example
 description: "A showcase of the multiple possibilities the package wo_form offers."
-publish_to: "none" # Remove this line if you wish to publish to pub.dev
+publish_to: "none"
 version: 1.0.4
 
 environment:
