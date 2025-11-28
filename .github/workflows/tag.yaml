@@ -2,7 +2,7 @@ name: Create version tag
 
 on:
   workflow_run:
-    workflows: ["Tests"]
+    workflows: ["Run tests"]
     types:
       - completed
     branches:
