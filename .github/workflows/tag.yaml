@@ -16,4 +16,6 @@ jobs:
   call-flutter_deploy_web:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     uses: Womotaq/github_actions/.github/workflows/flutter_tag.yaml@v2.0.0
-    secrets: inherit
+    secrets:
+      PAT: ${{ secrets.PAT_WOFORM_TAGGER }}
+
