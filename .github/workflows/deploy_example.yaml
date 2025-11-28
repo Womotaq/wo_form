@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    uses: Womotaq/github_actions/.github/workflows/flutter_build.yaml@main
+    uses: Womotaq/github_actions/.github/workflows/flutter_build.yaml@v2.0.0
     with:
       working_directory: example
     secrets:
