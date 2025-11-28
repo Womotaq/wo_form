@@ -3,8 +3,7 @@ name: Deploy example to wo-form-example.web.app
 on:
   push:
     tags:
-      - 'v*'
-      # - 'v[0-9]+.[0-9]+.[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
   build:
