@@ -134,10 +134,26 @@ _DurationInputUiSettings _$DurationInputUiSettingsFromJson(
   Map<String, dynamic> json,
 ) => _DurationInputUiSettings(
   labelText: json['labelText'] as String?,
+  labelLocation: $enumDecodeNullable(
+    _$FieldElementLocationEnumMap,
+    json['labelLocation'],
+  ),
   helperText: json['helperText'] as String?,
+  helperLocation: $enumDecodeNullable(
+    _$FieldElementLocationEnumMap,
+    json['helperLocation'],
+  ),
   hintText: json['hintText'] as String?,
   editMode: $enumDecodeNullable(_$DurationEditModeEnumMap, json['editMode']),
   headerFlex: (json['headerFlex'] as num?)?.toInt(),
+  prefixIconLocation: $enumDecodeNullable(
+    _$FieldElementLocationEnumMap,
+    json['prefixIconLocation'],
+  ),
+  errorLocation: $enumDecodeNullable(
+    _$FieldElementLocationEnumMap,
+    json['errorLocation'],
+  ),
   dateTimeLabelText: json['dateTimeLabelText'] as String?,
   dateTimeHelperText: json['dateTimeHelperText'] as String?,
   dateTimeHintText: json['dateTimeHintText'] as String?,
@@ -153,10 +169,15 @@ Map<String, dynamic> _$DurationInputUiSettingsToJson(
   _DurationInputUiSettings instance,
 ) => <String, dynamic>{
   'labelText': instance.labelText,
+  'labelLocation': _$FieldElementLocationEnumMap[instance.labelLocation],
   'helperText': instance.helperText,
+  'helperLocation': _$FieldElementLocationEnumMap[instance.helperLocation],
   'hintText': instance.hintText,
   'editMode': _$DurationEditModeEnumMap[instance.editMode],
   'headerFlex': instance.headerFlex,
+  'prefixIconLocation':
+      _$FieldElementLocationEnumMap[instance.prefixIconLocation],
+  'errorLocation': _$FieldElementLocationEnumMap[instance.errorLocation],
   'dateTimeLabelText': instance.dateTimeLabelText,
   'dateTimeHelperText': instance.dateTimeHelperText,
   'dateTimeHintText': instance.dateTimeHintText,

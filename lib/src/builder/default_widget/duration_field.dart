@@ -53,128 +53,168 @@ class DurationField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final editAsDateTime =
-        data.input.startDatePath != null &&
-        data.input.uiSettings?.editMode == DurationEditMode.dateTime;
     final theme = Theme.of(context);
     final inputDecorationTheme = theme.inputDecorationTheme;
     final themedBorder = inputDecorationTheme.border;
     final initialDuration = data.value;
 
+    final uiSettings = data.input.uiSettings;
+
+    final woFormTheme = WoFormTheme.of(context);
+    final labelLocation =
+        uiSettings?.labelLocation ??
+        woFormTheme?.stringFieldLabelLocation ??
+        FieldElementLocation.inside;
+    final helperLocation =
+        uiSettings?.helperLocation ??
+        woFormTheme?.stringFieldHelperLocation ??
+        FieldElementLocation.inside;
+    final errorLocation =
+        uiSettings?.errorLocation ??
+        woFormTheme?.stringFieldErrorLocation ??
+        FieldElementLocation.inside;
+    final prefixIconLocation =
+        uiSettings?.prefixIconLocation ??
+        woFormTheme?.stringFieldPrefixIconLocation ??
+        FieldElementLocation.outside;
+
+    final editAsDateTime =
+        data.input.startDatePath != null &&
+        uiSettings?.editMode == DurationEditMode.dateTime;
+
     final hintText = editAsDateTime
         ? data.input.uiSettings?.dateTimeHintText
         : data.input.uiSettings?.hintText;
 
-    final selector = editAsDateTime
-        ? WoFormValueBuilder<DateTime>(
-            path: data.input.startDatePath ?? '',
-            builder: (context, start) {
-              start ??= DateTime.now();
+    final StatelessWidget selector;
+    if (editAsDateTime) {
+      selector = WoFormValueBuilder<DateTime>(
+        path: data.input.startDatePath ?? '',
+        builder: (context, start) {
+          start ??= DateTime.now();
 
-              return DateTimeSelector(
-                dateTime: data.value == null ? start : start.add(data.value!),
-                minDateTime: data.input.minDuration == null
-                    ? start
-                    : start.add(data.input.minDuration!),
-                maxDateTime: data.input.maxDuration == null
-                    ? null
-                    : start.add(data.input.maxDuration!),
-                onChanged: (date) {
-                  if (date == null) return;
-                  data.onValueChanged!(date.difference(start!));
-                },
-                showCloseButton: !data.input.isRequired,
-                settings: DateTimeInputUiSettings(
-                  dateFormat: data.input.uiSettings?.dateFormat,
-                  timeFormat: data.input.uiSettings?.timeFormat,
-                  headerFlex: data.input.uiSettings?.headerFlex,
-                  labelText: data.input.uiSettings?.dateTimeLabelText,
-                  helperText: data.input.uiSettings?.dateTimeHelperText,
-                  hintText: data.input.uiSettings?.dateTimeHintText,
-                  editMode: data.input.uiSettings?.dateTimeEditMode,
-                  pickDate: data.input.uiSettings?.pickDate,
-                  pickTime: data.input.uiSettings?.pickTime,
-                ),
-              );
-            },
-          )
-        : InkWell(
-            borderRadius: themedBorder is OutlineInputBorder
-                ? themedBorder.borderRadius
-                : themedBorder is UnderlineInputBorder
-                ? themedBorder.borderRadius
-                : BorderRadius.zero,
-            onTap: data.onValueChanged == null
+          return DateTimeSelector(
+            dateTime: data.value == null ? start : start.add(data.value!),
+            minDateTime: data.input.minDuration == null
+                ? start
+                : start.add(data.input.minDuration!),
+            maxDateTime: data.input.maxDuration == null
                 ? null
-                : () async {
-                    final pickDuration =
-                        data.input.uiSettings?.pickDuration ??
-                        WoFormTheme.of(context)?.pickDuration ??
-                        DurationField.defaultPickDuration;
-
-                    final selectedDuration = await pickDuration(
-                      context: context,
-                      initialDuration: initialDuration,
-                      minDuration: data.input.minDuration,
-                      maxDuration: data.input.maxDuration,
-                    );
-
-                    if (selectedDuration != null) {
-                      data.onValueChanged!(selectedDuration);
-                    }
-                  },
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: inputDecorationTheme.fillColor,
-                border: Border.all(
-                  strokeAlign: BorderSide.strokeAlignOutside,
-                  color: theme.colorScheme.onSurface,
-                  width: .6,
-                ),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Center(
-                child: initialDuration == null
-                    ? hintText == null
-                          ? const Icon(Icons.timer)
-                          : Text(
-                              hintText,
-                              style: theme.textTheme.bodyMedium,
-                            )
-                    : Text(
-                        (data.input.uiSettings?.formatDuration ??
-                                WoFormTheme.of(context)?.formatDuration ??
-                                DurationField.defaultFormatDuration)
-                            .call(initialDuration),
-                        style: theme.textTheme.bodyMedium,
-                      ),
-              ),
+                : start.add(data.input.maxDuration!),
+            onChanged: (date) {
+              if (date == null) return;
+              data.onValueChanged!(date.difference(start!));
+            },
+            errorText: errorLocation.isOutside ? null : data.errorText,
+            showCloseButton: !data.input.isRequired,
+            settings: DateTimeInputUiSettings(
+              dateFormat: data.input.uiSettings?.dateFormat,
+              timeFormat: data.input.uiSettings?.timeFormat,
+              headerFlex: data.input.uiSettings?.headerFlex,
+              labelText: labelLocation.isOutside ? null : uiSettings?.labelText,
+              labelLocation: data.input.uiSettings?.labelLocation,
+              helperText: helperLocation.isOutside
+                  ? null
+                  : uiSettings?.helperText,
+              helperLocation: data.input.uiSettings?.helperLocation,
+              prefixIcon: prefixIconLocation.isOutside
+                  ? null
+                  : uiSettings?.prefixIcon,
+              prefixIconLocation: data.input.uiSettings?.prefixIconLocation,
+              hintText: data.input.uiSettings?.dateTimeHintText,
+              editMode: data.input.uiSettings?.dateTimeEditMode,
+              pickDate: data.input.uiSettings?.pickDate,
+              pickTime: data.input.uiSettings?.pickTime,
             ),
           );
+        },
+      );
+    } else {
+      selector = InkWell(
+        borderRadius: themedBorder is OutlineInputBorder
+            ? themedBorder.borderRadius
+            : themedBorder is UnderlineInputBorder
+            ? themedBorder.borderRadius
+            : BorderRadius.zero,
+        onTap: data.onValueChanged == null
+            ? null
+            : () async {
+                final pickDuration =
+                    data.input.uiSettings?.pickDuration ??
+                    WoFormTheme.of(context)?.pickDuration ??
+                    DurationField.defaultPickDuration;
 
-    // if (data.input.startDatePath != null &&
-    //     data.input.uiSettings?.initialEditMode == DurationEditMode.dateTime){
-    //   return DateTimeField(
-    //     WoFieldData(
-    //       path: data.path,
-    //       errorText: data.errorText,
-    //     ),
-    //   );
-    // }
+                final selectedDuration = await pickDuration(
+                  context: context,
+                  initialDuration: initialDuration,
+                  minDuration: data.input.minDuration,
+                  maxDuration: data.input.maxDuration,
+                );
+
+                if (selectedDuration != null) {
+                  data.onValueChanged!(selectedDuration);
+                }
+              },
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: inputDecorationTheme.fillColor,
+            border: Border.all(
+              strokeAlign: BorderSide.strokeAlignOutside,
+              color: theme.colorScheme.onSurface,
+              width: .6,
+            ),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Center(
+            child: initialDuration == null
+                ? hintText == null
+                      ? const Icon(Icons.timer)
+                      : Text(
+                          hintText,
+                          style: theme.textTheme.bodyMedium,
+                        )
+                : Text(
+                    (data.input.uiSettings?.formatDuration ??
+                            WoFormTheme.of(context)?.formatDuration ??
+                            DurationField.defaultFormatDuration)
+                        .call(initialDuration),
+                    style: theme.textTheme.bodyMedium,
+                  ),
+          ),
+        ),
+      );
+    }
 
     return FlexField(
-      headerFlex: data.input.uiSettings?.headerFlex,
-      labelText: editAsDateTime
-          ? data.input.uiSettings?.dateTimeLabelText
-          : data.input.uiSettings?.labelText,
-      helperText: editAsDateTime
-          ? data.input.uiSettings?.dateTimeHelperText
-          : data.input.uiSettings?.helperText,
-      errorText: data.errorText,
+      headerFlex: uiSettings?.headerFlex,
+      labelText: labelLocation.isOutside
+          ? editAsDateTime
+                ? data.input.uiSettings?.dateTimeLabelText
+                : data.input.uiSettings?.labelText
+          : null,
+      helperText: helperLocation.isOutside
+          ? editAsDateTime
+                ? data.input.uiSettings?.dateTimeHelperText
+                : data.input.uiSettings?.helperText
+          : null,
+      errorText: errorLocation.isOutside ? data.errorText : null,
       disableMode: data.onValueChanged == null
           ? FlexFieldDisableMode.all
           : FlexFieldDisableMode.none,
+      prefixIcon: prefixIconLocation.isOutside && uiSettings?.prefixIcon != null
+          ? Padding(
+              padding: EdgeInsets.only(
+                top:
+                    (Theme.of(
+                          context,
+                        ).inputDecorationTheme.contentPadding?.vertical ??
+                        32) /
+                    2,
+              ),
+              child: uiSettings?.prefixIcon,
+            )
+          : null,
       child: selector,
     );
   }
