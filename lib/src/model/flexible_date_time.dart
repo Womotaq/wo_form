@@ -14,6 +14,8 @@ sealed class FlexibleDateTime with _$FlexibleDateTime {
     int? addYears,
     int? addMonths,
     int? addDays,
+    int? addHours,
+    int? addMinutes,
     int? replaceYears,
     int? replaceMonths,
     int? replaceDays,
@@ -21,6 +23,8 @@ sealed class FlexibleDateTime with _$FlexibleDateTime {
     /// A number from 1 (Monday) to 7 (Sunday). In accordance with ISO 8601.
     /// Applied after [replaceDays].
     int? replaceWeekday,
+    int? replaceHours,
+    int? replaceMinutes,
   }) = TodayDate;
 
   /// Required for the override getter
@@ -39,16 +43,22 @@ sealed class FlexibleDateTime with _$FlexibleDateTime {
         addYears: final addYears,
         addMonths: final addMonths,
         addDays: final addDays,
+        addHours: final addHours,
+        addMinutes: final addMinutes,
         replaceYears: final replaceYears,
         replaceMonths: final replaceMonths,
         replaceDays: final replaceDays,
         replaceWeekday: final replaceWeekday,
+        replaceHours: final replaceHours,
+        replaceMinutes: final replaceMinutes,
       ):
         final now = DateTime.now();
         final date = DateTime(
           replaceYears ?? now.year + (addYears ?? 0),
           replaceMonths ?? now.month + (addMonths ?? 0),
           replaceDays ?? now.day + (addDays ?? 0),
+          replaceHours ?? now.hour + (addHours ?? 0),
+          replaceMinutes ?? now.minute + (addMinutes ?? 0),
         );
 
         if (replaceWeekday != null) {
