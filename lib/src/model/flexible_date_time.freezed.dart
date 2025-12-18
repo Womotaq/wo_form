@@ -145,14 +145,12 @@ as DateTime,
 @JsonSerializable()
 
 class TodayDate extends FlexibleDateTime {
-  const TodayDate({this.addYears, this.addMonths, this.addDays, this.addHours, this.addMinutes, this.replaceYears, this.replaceMonths, this.replaceDays, this.replaceWeekday, this.replaceHours, this.replaceMinutes, final  String? $type}): $type = $type ?? 'today',super._();
+  const TodayDate({this.addYears, this.addMonths, this.addDays, this.replaceYears, this.replaceMonths, this.replaceDays, this.replaceWeekday, this.replaceHours, this.replaceMinutes, final  String? $type}): $type = $type ?? 'today',super._();
   factory TodayDate.fromJson(Map<String, dynamic> json) => _$TodayDateFromJson(json);
 
  final  int? addYears;
  final  int? addMonths;
  final  int? addDays;
- final  int? addHours;
- final  int? addMinutes;
  final  int? replaceYears;
  final  int? replaceMonths;
  final  int? replaceDays;
@@ -179,16 +177,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TodayDate&&(identical(other.addYears, addYears) || other.addYears == addYears)&&(identical(other.addMonths, addMonths) || other.addMonths == addMonths)&&(identical(other.addDays, addDays) || other.addDays == addDays)&&(identical(other.addHours, addHours) || other.addHours == addHours)&&(identical(other.addMinutes, addMinutes) || other.addMinutes == addMinutes)&&(identical(other.replaceYears, replaceYears) || other.replaceYears == replaceYears)&&(identical(other.replaceMonths, replaceMonths) || other.replaceMonths == replaceMonths)&&(identical(other.replaceDays, replaceDays) || other.replaceDays == replaceDays)&&(identical(other.replaceWeekday, replaceWeekday) || other.replaceWeekday == replaceWeekday)&&(identical(other.replaceHours, replaceHours) || other.replaceHours == replaceHours)&&(identical(other.replaceMinutes, replaceMinutes) || other.replaceMinutes == replaceMinutes));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TodayDate&&(identical(other.addYears, addYears) || other.addYears == addYears)&&(identical(other.addMonths, addMonths) || other.addMonths == addMonths)&&(identical(other.addDays, addDays) || other.addDays == addDays)&&(identical(other.replaceYears, replaceYears) || other.replaceYears == replaceYears)&&(identical(other.replaceMonths, replaceMonths) || other.replaceMonths == replaceMonths)&&(identical(other.replaceDays, replaceDays) || other.replaceDays == replaceDays)&&(identical(other.replaceWeekday, replaceWeekday) || other.replaceWeekday == replaceWeekday)&&(identical(other.replaceHours, replaceHours) || other.replaceHours == replaceHours)&&(identical(other.replaceMinutes, replaceMinutes) || other.replaceMinutes == replaceMinutes));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,addYears,addMonths,addDays,addHours,addMinutes,replaceYears,replaceMonths,replaceDays,replaceWeekday,replaceHours,replaceMinutes);
+int get hashCode => Object.hash(runtimeType,addYears,addMonths,addDays,replaceYears,replaceMonths,replaceDays,replaceWeekday,replaceHours,replaceMinutes);
 
 @override
 String toString() {
-  return 'FlexibleDateTime.today(addYears: $addYears, addMonths: $addMonths, addDays: $addDays, addHours: $addHours, addMinutes: $addMinutes, replaceYears: $replaceYears, replaceMonths: $replaceMonths, replaceDays: $replaceDays, replaceWeekday: $replaceWeekday, replaceHours: $replaceHours, replaceMinutes: $replaceMinutes)';
+  return 'FlexibleDateTime.today(addYears: $addYears, addMonths: $addMonths, addDays: $addDays, replaceYears: $replaceYears, replaceMonths: $replaceMonths, replaceDays: $replaceDays, replaceWeekday: $replaceWeekday, replaceHours: $replaceHours, replaceMinutes: $replaceMinutes)';
 }
 
 
@@ -199,7 +197,7 @@ abstract mixin class $TodayDateCopyWith<$Res> implements $FlexibleDateTimeCopyWi
   factory $TodayDateCopyWith(TodayDate value, $Res Function(TodayDate) _then) = _$TodayDateCopyWithImpl;
 @useResult
 $Res call({
- int? addYears, int? addMonths, int? addDays, int? addHours, int? addMinutes, int? replaceYears, int? replaceMonths, int? replaceDays, int? replaceWeekday, int? replaceHours, int? replaceMinutes
+ int? addYears, int? addMonths, int? addDays, int? replaceYears, int? replaceMonths, int? replaceDays, int? replaceWeekday, int? replaceHours, int? replaceMinutes
 });
 
 
@@ -216,13 +214,11 @@ class _$TodayDateCopyWithImpl<$Res>
 
 /// Create a copy of FlexibleDateTime
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? addYears = freezed,Object? addMonths = freezed,Object? addDays = freezed,Object? addHours = freezed,Object? addMinutes = freezed,Object? replaceYears = freezed,Object? replaceMonths = freezed,Object? replaceDays = freezed,Object? replaceWeekday = freezed,Object? replaceHours = freezed,Object? replaceMinutes = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? addYears = freezed,Object? addMonths = freezed,Object? addDays = freezed,Object? replaceYears = freezed,Object? replaceMonths = freezed,Object? replaceDays = freezed,Object? replaceWeekday = freezed,Object? replaceHours = freezed,Object? replaceMinutes = freezed,}) {
   return _then(TodayDate(
 addYears: freezed == addYears ? _self.addYears : addYears // ignore: cast_nullable_to_non_nullable
 as int?,addMonths: freezed == addMonths ? _self.addMonths : addMonths // ignore: cast_nullable_to_non_nullable
 as int?,addDays: freezed == addDays ? _self.addDays : addDays // ignore: cast_nullable_to_non_nullable
-as int?,addHours: freezed == addHours ? _self.addHours : addHours // ignore: cast_nullable_to_non_nullable
-as int?,addMinutes: freezed == addMinutes ? _self.addMinutes : addMinutes // ignore: cast_nullable_to_non_nullable
 as int?,replaceYears: freezed == replaceYears ? _self.replaceYears : replaceYears // ignore: cast_nullable_to_non_nullable
 as int?,replaceMonths: freezed == replaceMonths ? _self.replaceMonths : replaceMonths // ignore: cast_nullable_to_non_nullable
 as int?,replaceDays: freezed == replaceDays ? _self.replaceDays : replaceDays // ignore: cast_nullable_to_non_nullable
