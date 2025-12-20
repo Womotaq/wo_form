@@ -48,6 +48,7 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
       helperText: helperTextWhenChildrenHidden.isNotEmpty
           ? helperTextWhenChildrenHidden
           : widget.data.input.uiSettings?.helperText,
+      prefixIcon: widget.data.input.uiSettings?.prefixIcon,
       errorText: widget.data.errorText,
       trailing: const Icon(Icons.chevron_right),
       onTap: () => openChildren(context),

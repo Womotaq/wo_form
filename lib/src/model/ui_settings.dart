@@ -374,6 +374,7 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
     /// If set and not empty, this will replace [helperText] int the field when
     /// the children are hidden (see [InputsNodeUiSettings.childrenVisibility]).
     String? helperTextWhenChildrenHidden,
+    @notSerializable Widget? prefixIcon,
 
     /// Default to always.
     ChildrenVisibility? childrenVisibility,
@@ -433,6 +434,7 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
           helperTextWhenChildrenHidden:
               helperTextWhenChildrenHidden ??
               other.helperTextWhenChildrenHidden,
+          prefixIcon: prefixIcon ?? other.prefixIcon,
           childrenVisibility: childrenVisibility ?? other.childrenVisibility,
           showChildrenInitially:
               showChildrenInitially ?? other.showChildrenInitially,

@@ -13,6 +13,7 @@ class FormHeader extends StatelessWidget {
     : data = WoFormHeaderData(
         labelText: data.labelText,
         helperText: data.helperText,
+        prefixIcon: data.prefixIcon,
         trailing: data.trailing,
         onTap: data.onTap,
       ),
@@ -44,6 +45,10 @@ class FormHeader extends StatelessWidget {
             const SizedBox(height: 32),
             Row(
               children: [
+                if (data.prefixIcon != null) ...[
+                  ?data.prefixIcon,
+                  const SizedBox(width: 16),
+                ],
                 Expanded(
                   child: Text(
                     labelText,

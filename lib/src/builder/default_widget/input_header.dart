@@ -53,6 +53,10 @@ class InputHeader extends StatelessWidget {
             ),
         child: Row(
           children: [
+            if (data.prefixIcon != null) ...[
+              ?data.prefixIcon,
+              const SizedBox(width: 16),
+            ],
             Expanded(
               child: ConstrainedBox(
                 constraints: BoxConstraints(

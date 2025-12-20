@@ -19,6 +19,7 @@ class InputsNodeWidget extends StatelessWidget {
               WoFormHeaderData(
                 labelText: uiSettings?.labelText,
                 helperText: uiSettings?.helperText,
+                prefixIcon: uiSettings?.prefixIcon,
               ),
             );
 
