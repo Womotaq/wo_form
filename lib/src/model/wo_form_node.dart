@@ -33,6 +33,9 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
     InputUiSettings? uiSettings,
   }) = ConditionnalNode;
 
+  /// The value of this node is of type List&lt;WoFormNode&gt;. It gives you
+  /// access to the ids of the child nodes. You can then find their values using
+  /// values.get('#dynamicInputsId#childId').
   const factory WoFormNode.dynamicInputs({
     required String id,
     @Default([]) List<DynamicInputTemplate> templates,
