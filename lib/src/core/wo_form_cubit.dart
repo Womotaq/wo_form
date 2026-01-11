@@ -32,8 +32,16 @@ class WoFormLockCubit extends Cubit<Set<String>> {
     if (!isClosed) emit(Set<String>.from(state)..add(path));
   }
 
+  void lockInputs({required Iterable<String> paths}) {
+    if (!isClosed) emit(Set<String>.from(state)..addAll(paths));
+  }
+
   void unlockInput({required String path}) {
     if (!isClosed) emit(Set<String>.from(state)..remove(path));
+  }
+
+  void unlockInputs({required Iterable<String> paths}) {
+    if (!isClosed) emit(Set<String>.from(state)..removeAll(paths));
   }
 }
 

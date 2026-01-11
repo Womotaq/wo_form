@@ -123,10 +123,6 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
     @Default(false) bool isRequired,
     String? regexPattern,
 
-    /// Use [isLocked] if you want to lock / unlock this input based
-    /// on the value provided by a [ValueBuilderNode] for example.
-    @Default(false) bool isLocked,
-
     @notSerializable SuggestionsSettings<T>? suggestionsSettings,
     @notSerializable GetCustomErrorDef<String>? getCustomError,
     StringInputUiSettings<T>? uiSettings,

@@ -143,6 +143,24 @@ Map<String, dynamic> _$InputsNodeToJson<T extends Object?>(
   'runtimeType': instance.$type,
 };
 
+LockerNode<T> _$LockerNodeFromJson<T extends Object?>(
+  Map<String, dynamic> json,
+) => LockerNode<T>(
+  id: json['id'] as String,
+  isLocked: json['isLocked'] as bool,
+  child: const InputConverter().fromJson(json['child'] as Map<String, dynamic>),
+  $type: json['runtimeType'] as String?,
+);
+
+Map<String, dynamic> _$LockerNodeToJson<T extends Object?>(
+  LockerNode<T> instance,
+) => <String, dynamic>{
+  'id': instance.id,
+  'isLocked': instance.isLocked,
+  'child': const InputConverter().toJson(instance.child),
+  'runtimeType': instance.$type,
+};
+
 PathBuilderNode<T> _$PathBuilderNodeFromJson<T extends Object?>(
   Map<String, dynamic> json,
 ) => PathBuilderNode<T>(
@@ -461,7 +479,6 @@ StringInput<T> _$StringInputFromJson<T extends Object?>(
   initialValue: json['initialValue'] as String?,
   isRequired: json['isRequired'] as bool? ?? false,
   regexPattern: json['regexPattern'] as String?,
-  isLocked: json['isLocked'] as bool? ?? false,
   uiSettings: json['uiSettings'] == null
       ? null
       : StringInputUiSettings<T>.fromJson(
@@ -477,7 +494,6 @@ Map<String, dynamic> _$StringInputToJson<T extends Object?>(
   'initialValue': instance.initialValue,
   'isRequired': instance.isRequired,
   'regexPattern': instance.regexPattern,
-  'isLocked': instance.isLocked,
   'uiSettings': instance.uiSettings?.toJson(),
   'runtimeType': instance.$type,
 };

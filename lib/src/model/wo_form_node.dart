@@ -73,6 +73,17 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
     ExportSettings? exportSettings,
   }) = InputsNode;
 
+  /// A node that can dynamically lock all its descendants.
+  /// Note that this node doesn't store any value in [WoFormValues].
+  const factory WoFormNode.locker({
+    required String id,
+
+    /// Use [isLocked] to lock / unlock this node and its descendants based
+    /// for example on a value provided by a [ValueBuilderNode].
+    required bool isLocked,
+    @InputConverter() required WoFormNode child,
+  }) = LockerNode;
+
   @Assert('builder != null', 'PathBuilderNode.builder cannot be null')
   const factory WoFormNode.pathBuilder({
     required String id,
@@ -254,6 +265,14 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
             }
         }
 
+      case LockerNode(child: final child):
+        return child.export(
+          into: into,
+          values: values,
+          parentPath: '$parentPath/$id',
+          context: context,
+        );
+
       case RootNode(
         children: final children,
         exportSettings: final exportSettings,
@@ -321,6 +340,8 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
     }
   }
 
+  /// Returns this node absolute path followed by all its descendants absolute
+  /// paths.
   Iterable<String> getAllInputPaths({
     required WoFormValues values,
     required String parentPath,
@@ -359,6 +380,15 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
               values: values,
               parentPath: '$parentPath/$id',
             ),
+        ];
+
+      case LockerNode(child: final child):
+        return [
+          '$parentPath/$id',
+          ...child.getAllInputPaths(
+            values: values,
+            parentPath: '$parentPath/$id',
+          ),
         ];
 
       case RootNode(children: final children):
@@ -495,6 +525,18 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
               values: values,
             );
 
+      case LockerNode(child: final child):
+        // if the path ends at the child of this node
+        if (secondSlashIndex == -1) {
+          return (child.id == path.substring(1)) ? child : null;
+        }
+
+        return child.getChild(
+          path: path.substring(secondSlashIndex + 1),
+          parentPath: '$parentPath/$id',
+          values: values,
+        );
+
       case RootNode(children: final children):
         assert(
           parentPath == '',
@@ -626,6 +668,12 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
             ),
         ].nonNulls;
 
+      case LockerNode(child: final child):
+        return child.getErrors(
+          values: values,
+          parentPath: '$parentPath/$id',
+        );
+
       case RootNode(children: final children):
         assert(
           parentPath == '',
@@ -704,6 +752,12 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
           null || ExportType.map || ExportType.list => id,
           ExportType.mergeWithParent => null,
         };
+
+      case LockerNode(child: final child):
+        return child.getExportKey(
+          values: values,
+          parentPath: '$parentPath/$id',
+        );
 
       case RootNode():
         assert(
@@ -787,6 +841,9 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
             ...child.getInitialValues(parentPath: '$parentPath/$id'),
         };
 
+      case LockerNode(child: final child):
+        return child.getInitialValues(parentPath: '$parentPath/$id');
+
       case PathBuilderNode(builder: final builder):
         final child = builder!('$parentPath/$id');
         return child.getInitialValues(parentPath: '$parentPath/$id');
@@ -852,6 +909,10 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
       path: '$parentPath/$id',
     ),
     InputsNode() => InputsNodeWidgetBuilder(
+      key: key,
+      path: '$parentPath/$id',
+    ),
+    LockerNode() => LockerNodeBuilder(
       key: key,
       path: '$parentPath/$id',
     ),
@@ -939,6 +1000,10 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
       DynamicInputsNode _ || EmptyNode _ => null,
       final FutureNode node => node.uiSettings?.flex,
       final PathBuilderNode node => node.builder!('$parentPath/$id').flex(
+        context,
+        parentPath: '$parentPath/$id',
+      ),
+      final LockerNode node => node.child.flex(
         context,
         parentPath: '$parentPath/$id',
       ),
