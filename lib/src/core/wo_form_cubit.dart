@@ -468,14 +468,11 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
     _statusCubit._setSubmitting();
 
-    final oldLocks = _lockCubit.state;
-
-    for (final path in currentNode.getAllInputPaths(
+    final nodesLockWhileSubmitting = currentNode.getAllInputPaths(
       values: state,
       parentPath: submitPath.parentPath,
-    )) {
-      _lockCubit.lockInput(path: path);
-    }
+    );
+    _lockCubit.lockInputs(paths: nodesLockWhileSubmitting);
 
     try {
       final tempSubmitData = _tempSubmitDatas.lastOrNull;
@@ -511,11 +508,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     }
 
     if (_root.uiSettings?.canModifySubmittedValues ?? true) {
-      for (final path in _lockCubit.state) {
-        if (!oldLocks.contains(path)) {
-          _lockCubit.unlockInput(path: path);
-        }
-      }
+      _lockCubit.unlockInputs(paths: nodesLockWhileSubmitting);
     }
   }
 
