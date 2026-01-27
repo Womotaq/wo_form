@@ -61,6 +61,7 @@ class _InitialValueKeeperState<T> extends State<InitialValueKeeper<T>> {
         path: widget.path,
         value: widget.initialValue,
         updateStatus: UpdateStatus.no,
+        bypassLock: true,
       );
     }
   }

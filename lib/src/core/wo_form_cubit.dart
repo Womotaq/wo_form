@@ -295,18 +295,29 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     required String path,
     required dynamic value,
     UpdateStatus updateStatus = UpdateStatus.yes,
-  }) => onValuesChanged({path: value}, updateStatus: updateStatus);
+
+    /// If false, an update on a locked input won't have any effect.
+    bool bypassLock = false,
+  }) => onValuesChanged(
+    {path: value},
+    updateStatus: updateStatus,
+    bypassLock: bypassLock,
+  );
 
   /// **Use this method precautiously since there is no type checking !**
   void onValuesChanged(
     Json values, {
     UpdateStatus updateStatus = UpdateStatus.yes,
+
+    /// If false, an update on a locked input won't have any effect.
+    bool bypassLock = false,
   }) {
     // Remove paths of locked inputs and transform any #path
     // ignore: parameter_assignments
     values = {
       for (final entry in values.entries)
-        if (!_lockCubit.inputIsLocked(path: state.getKey(entry.key)))
+        if (bypassLock ||
+            !_lockCubit.inputIsLocked(path: state.getKey(entry.key)))
           state.getKey(entry.key): entry.value,
     };
     if (values.isEmpty) return;
