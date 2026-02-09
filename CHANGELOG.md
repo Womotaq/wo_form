@@ -1,3 +1,7 @@
+## 2.0.1
+
+- Added InputsNodeUiSettings.helperMaxLines
+
 ## 2.0.0
 
 - Merged wo_form_service into wo_form (DateTimeService, GooglePlaces, media handling)

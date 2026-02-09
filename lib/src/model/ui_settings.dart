@@ -370,6 +370,7 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
     String? labelTextWhenChildrenHidden,
     int? labelMaxLines,
     String? helperText,
+    int? helperMaxLines,
 
     /// If set and not empty, this will replace [helperText] int the field when
     /// the children are hidden (see [InputsNodeUiSettings.childrenVisibility]).
@@ -431,6 +432,7 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
               labelTextWhenChildrenHidden ?? other.labelTextWhenChildrenHidden,
           labelMaxLines: labelMaxLines ?? other.labelMaxLines,
           helperText: helperText ?? other.helperText,
+          helperMaxLines: helperMaxLines ?? other.helperMaxLines,
           helperTextWhenChildrenHidden:
               helperTextWhenChildrenHidden ??
               other.helperTextWhenChildrenHidden,

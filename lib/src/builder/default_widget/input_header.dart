@@ -39,6 +39,8 @@ class InputHeader extends StatelessWidget {
             helperText,
             style:
                 inputDecorationTheme.helperStyle ?? theme.textTheme.labelMedium,
+            maxLines: data.helperMaxLines,
+            overflow: TextOverflow.ellipsis,
           )
         : null;
 
