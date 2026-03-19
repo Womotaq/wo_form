@@ -28,10 +28,7 @@ class InputsNodeWidgetBuilder extends StatelessWidget {
               value: null,
               onValueChanged: inputIsLocked
                   ? null
-                  : (
-                      _, {
-                      UpdateStatus updateStatus = UpdateStatus.yes,
-                    }) {},
+                  : (_, {updateStatus = UpdateStatus.yes}) {},
             );
 
             return (node.uiSettings?.widgetBuilder ??
@@ -61,10 +58,7 @@ class InputsNodeWidgetBuilder extends StatelessWidget {
                   errorText: errorText,
                   onValueChanged: inputIsLocked
                       ? null
-                      : (
-                          _, {
-                          UpdateStatus updateStatus = UpdateStatus.yes,
-                        }) {},
+                      : (_, {updateStatus = UpdateStatus.yes}) {},
                 );
 
                 return (node.uiSettings?.expanderBuilder ??

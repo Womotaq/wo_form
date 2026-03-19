@@ -40,10 +40,7 @@ class DateTimeFieldBuilder extends StatelessWidget {
                   errorText: errorText,
                   onValueChanged: inputIsLocked
                       ? null
-                      : (
-                          DateTime? value, {
-                          UpdateStatus updateStatus = UpdateStatus.yes,
-                        }) async {
+                      : (value, {updateStatus = UpdateStatus.yes}) async {
                           context.read<WoFormValuesCubit>().onValueChanged(
                             path: path,
                             value: value,

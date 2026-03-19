@@ -40,7 +40,7 @@ class DynamicInputsNodeWidgetBuilder extends StatelessWidget {
                     ? null
                     : (
                         List<WoFormNode>? newChildren, {
-                        UpdateStatus updateStatus = UpdateStatus.yes,
+                        updateStatus = UpdateStatus.yes,
                       }) => context.read<WoFormValuesCubit>().onValueChanged(
                         path: path,
                         value: List<WoFormNode>.unmodifiable(newChildren ?? []),
