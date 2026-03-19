@@ -49,7 +49,7 @@ class StringFieldBuilder<T extends Object?> extends StatelessWidget {
                       ? null
                       : (
                           String? value, {
-                          UpdateStatus updateStatus = UpdateStatus
+                          updateStatus = UpdateStatus
                               .yesWithoutErrorUpdateIfPathNotVisited,
                         }) => context.read<WoFormValuesCubit>().onValueChanged(
                           path: path,

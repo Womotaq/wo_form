@@ -48,17 +48,24 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
       helperText: helperTextWhenChildrenHidden.isNotEmpty
           ? helperTextWhenChildrenHidden
           : widget.data.input.uiSettings?.helperText,
+      helperMaxLines: widget.data.input.uiSettings?.helperMaxLines,
       prefixIcon: widget.data.input.uiSettings?.prefixIcon,
       errorText: widget.data.errorText,
       trailing: const Icon(Icons.chevron_right),
-      onTap: () => openChildren(context),
+      onTap: widget.data.onValueChanged == null
+          ? null
+          : () => openChildren(context),
       shrinkWrap: false,
     );
 
-    return (widget.data.input.uiSettings?.inputHeaderBuilder ??
-            WoFormTheme.of(context)?.inputHeaderBuilder ??
-            InputHeader.new)
-        .call(headerData);
+    return Opacity(
+      opacity: widget.data.onValueChanged == null ? .3 : 1,
+      child:
+          (widget.data.input.uiSettings?.inputHeaderBuilder ??
+                  WoFormTheme.of(context)?.inputHeaderBuilder ??
+                  InputHeader.new)
+              .call(headerData),
+    );
   }
 
   Future<void> openChildren(BuildContext context) {

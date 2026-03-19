@@ -40,14 +40,12 @@ class DurationFieldBuilder extends StatelessWidget {
                   errorText: errorText,
                   onValueChanged: inputIsLocked
                       ? null
-                      : (
-                          Duration? value, {
-                          UpdateStatus updateStatus = UpdateStatus.yes,
-                        }) => context.read<WoFormValuesCubit>().onValueChanged(
-                          path: path,
-                          value: value,
-                          updateStatus: updateStatus,
-                        ),
+                      : (value, {updateStatus = UpdateStatus.yes}) =>
+                            context.read<WoFormValuesCubit>().onValueChanged(
+                              path: path,
+                              value: value,
+                              updateStatus: updateStatus,
+                            ),
                 );
 
                 return (input.uiSettings?.widgetBuilder ??

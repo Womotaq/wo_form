@@ -60,12 +60,12 @@ extension ConditionMeeter on WoFormValues {
   bool meet(Condition condition) {
     switch (condition) {
       case ConditionValue(
-        path: final path,
-        isEqualTo: final isEqualTo,
-        isNotEqualTo: final isNotEqualTo,
-        isNull: final isNull,
-        isFocused: final isFocused,
-        matchesRegex: final matchesRegex,
+        :final path,
+        :final isEqualTo,
+        :final isNotEqualTo,
+        :final isNull,
+        :final isFocused,
+        :final matchesRegex,
       ):
         final value = this[path];
         if (isEqualTo != null) {
@@ -95,17 +95,17 @@ extension ConditionMeeter on WoFormValues {
         }
 
         throw AssertionError('Exactly one operator must be specified');
-      case ConditionAnd(conditions: final conditions):
+      case ConditionAnd(:final conditions):
         for (final condition in conditions) {
           if (!meet(condition)) return false;
         }
         return true;
-      case ConditionOr(conditions: final conditions):
+      case ConditionOr(:final conditions):
         for (final condition in conditions) {
           if (meet(condition)) return true;
         }
         return false;
-      case ConditionNot(condition: final condition):
+      case ConditionNot(:final condition):
         return !meet(condition);
     }
   }

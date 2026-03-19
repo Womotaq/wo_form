@@ -323,6 +323,7 @@ class _StringFieldState<T> extends State<StringField<T>> {
       labelText: labelLocation.isOutside ? uiSettings?.labelText : null,
       labelMaxLines: uiSettings?.labelMaxLines,
       helperText: helperLocation.isOutside ? uiSettings?.helperText : null,
+      helperMaxLines: uiSettings?.helperMaxLines,
       errorText: errorLocation.isOutside ? widget.errorText : null,
       prefixIcon: prefixIconLocation.isOutside && uiSettings?.prefixIcon != null
           ? Padding(

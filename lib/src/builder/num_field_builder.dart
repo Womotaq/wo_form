@@ -40,10 +40,7 @@ class NumFieldBuilder extends StatelessWidget {
                   errorText: errorText,
                   onValueChanged: inputIsLocked
                       ? null
-                      : (
-                          num? value, {
-                          UpdateStatus updateStatus = UpdateStatus.yes,
-                        }) {
+                      : (num? value, {updateStatus = UpdateStatus.yes}) {
                           context.read<WoFormValuesCubit>().onValueChanged(
                             path: path,
                             value: value,

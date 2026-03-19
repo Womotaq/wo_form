@@ -10,6 +10,8 @@ analyzer:
     invalid_annotation_target: ignore
     document_ignores: ignore
     avoid_catches_without_on_clauses: ignore
+    avoid_types_on_closure_parameters: ignore
+    parameter_assignments: ignore
 
 linter:
   rules:
@@ -18,4 +20,3 @@ linter:
     comment_references: false
     prefer_asserts_with_message: false
     avoid_positional_boolean_parameters: false
-    use_if_null_to_convert_nulls_to_bools: false

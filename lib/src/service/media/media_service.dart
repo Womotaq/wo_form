@@ -128,8 +128,8 @@ abstract class MediaService {
         final media = await enterMediaUrl();
         return media == null ? [] : [media];
       case MediaImportMethodPickMedias(
-        source: final source,
-        type: final type,
+        :final source,
+        :final type,
       ):
         final granted = await switch (source) {
           ImageSource.camera => permissionService.requireCamera(),

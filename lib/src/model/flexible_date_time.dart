@@ -35,18 +35,18 @@ sealed class FlexibleDateTime with _$FlexibleDateTime {
 
   DateTime resolve() {
     switch (this) {
-      case FixedDateTime(date: final date):
+      case FixedDateTime(:final date):
         return date;
       case TodayDate(
-        addYears: final addYears,
-        addMonths: final addMonths,
-        addDays: final addDays,
-        replaceYears: final replaceYears,
-        replaceMonths: final replaceMonths,
-        replaceDays: final replaceDays,
-        replaceWeekday: final replaceWeekday,
-        replaceHours: final replaceHours,
-        replaceMinutes: final replaceMinutes,
+        :final addYears,
+        :final addMonths,
+        :final addDays,
+        :final replaceYears,
+        :final replaceMonths,
+        :final replaceDays,
+        :final replaceWeekday,
+        :final replaceHours,
+        :final replaceMinutes,
       ):
         final now = DateTime.now();
         final date = DateTime(
