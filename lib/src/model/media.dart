@@ -79,7 +79,7 @@ sealed class Media with _$Media {
   };
 
   Future<Uint8List> get bytes => switch (this) {
-    MediaFile(file: final file) => file.readAsBytes(),
+    MediaFile(:final file) => file.readAsBytes(),
     MediaUrl(uri: final uri) =>
       http.get(uri).then((response) => response.bodyBytes),
   };
@@ -91,13 +91,13 @@ sealed class Media with _$Media {
 
   /// The length of this media, in bytes.
   Future<int> get lengthInBytes => switch (this) {
-    MediaFile(file: final file) => file.length(),
+    MediaFile(:final file) => file.length(),
     MediaUrl(uri: final uri) =>
       http.get(uri).then((response) => response.bodyBytes.lengthInBytes),
   };
 
   Future<String?> get mimeType async => switch (this) {
-    MediaFile(file: final file) => file.mimeType,
+    MediaFile(:final file) => file.mimeType,
     MediaUrl(uri: final uri) => http.get(uri).then(
       (response) {
         if (response.statusCode != 200) return null;
@@ -169,7 +169,8 @@ class MediaFile extends Media with _$MediaFile {
 enum MediaType {
   imageOrVideo,
   image,
-  video;
+  video
+  ;
 
   bool get includeImages => switch (this) {
     imageOrVideo || image => true,

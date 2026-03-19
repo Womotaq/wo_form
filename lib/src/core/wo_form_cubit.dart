@@ -558,8 +558,8 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
         );
         return failure == MultistepFailure.endOfForm;
       case MultistepActionPopUntil(
-        predicate: final predicate,
-        replacementStepId: final replacementStepId,
+        :final predicate,
+        :final replacementStepId,
       ):
         final generatedSteps = state.generatedSteps;
         final currentIndex = state.currentStepIndex ?? 0;

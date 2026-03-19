@@ -179,7 +179,7 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
     required BuildContext context,
   }) async {
     switch (this) {
-      case ConditionnalNode(condition: final condition, child: final child):
+      case ConditionnalNode(:final condition, :final child):
         if (values.meet(condition)) {
           await child.export(
             into: into,
@@ -188,7 +188,7 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
             context: context,
           );
         }
-      case FutureNode(builder: final builder):
+      case FutureNode(:final builder):
         final snapshot = values.get<AsyncSnapshot<T?>>('$parentPath/$id');
         if (snapshot == null) return;
 
@@ -198,8 +198,8 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
           parentPath: '$parentPath/$id',
           context: context,
         );
-      case DynamicInputsNode(exportSettings: final exportSettings):
-      case InputsNode(exportSettings: final exportSettings):
+      case DynamicInputsNode(:final exportSettings):
+      case InputsNode(:final exportSettings):
         final children = this is InputsNode
             ? (this as InputsNode).children
             : (values['$parentPath/$id'] as List<WoFormNode>?) ?? [];
@@ -265,7 +265,7 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
             }
         }
 
-      case LockerNode(child: final child):
+      case LockerNode(:final child):
         return child.export(
           into: into,
           values: values,
@@ -274,8 +274,8 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
         );
 
       case RootNode(
-        children: final children,
-        exportSettings: final exportSettings,
+        :final children,
+        :final exportSettings,
       ):
         assert(
           parentPath == '',
@@ -306,20 +306,21 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
       case ValueBuilderNode():
       case ValuesBuilderNode():
         final child = switch (this) {
-          PathBuilderNode(builder: final builder) => builder!(
+          PathBuilderNode(:final builder) => builder!(
             '$parentPath/$id',
           ),
-          SelectorNode(selector: final selector, builder: final builder) =>
-            builder!(selector!(values)),
-          ValueBuilderNode(path: final path, builder: final builder) =>
-            builder!(values.getValue(path, parentPath: '$parentPath/$id')),
-          ValuesBuilderNode(paths: final paths, builder: final builder) =>
-            builder!(
-              {
-                for (final path in paths)
-                  path: values.getValue(path, parentPath: '$parentPath/$id'),
-              },
-            ),
+          SelectorNode(:final selector, :final builder) => builder!(
+            selector!(values),
+          ),
+          ValueBuilderNode(:final path, :final builder) => builder!(
+            values.getValue(path, parentPath: '$parentPath/$id'),
+          ),
+          ValuesBuilderNode(:final paths, :final builder) => builder!(
+            {
+              for (final path in paths)
+                path: values.getValue(path, parentPath: '$parentPath/$id'),
+            },
+          ),
           _ => throw AssertionError(),
         };
 
@@ -347,7 +348,7 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
     required String parentPath,
   }) {
     switch (this) {
-      case ConditionnalNode(condition: final condition, child: final child):
+      case ConditionnalNode(:final condition, :final child):
         return [
           '$parentPath/$id',
           if (values.meet(condition))
@@ -356,7 +357,7 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
               parentPath: '$parentPath/$id',
             ),
         ];
-      case FutureNode(builder: final builder):
+      case FutureNode(:final builder):
         final snapshot = values.get<AsyncSnapshot<T?>>('$parentPath/$id');
 
         return [
@@ -382,7 +383,7 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
             ),
         ];
 
-      case LockerNode(child: final child):
+      case LockerNode(:final child):
         return [
           '$parentPath/$id',
           ...child.getAllInputPaths(
@@ -391,7 +392,7 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
           ),
         ];
 
-      case RootNode(children: final children):
+      case RootNode(:final children):
         assert(
           parentPath == '',
           'The parentPath of RootNode must always be an empty string.',
@@ -411,20 +412,21 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
       case ValueBuilderNode():
       case ValuesBuilderNode():
         final child = switch (this) {
-          PathBuilderNode(builder: final builder) => builder!(
+          PathBuilderNode(:final builder) => builder!(
             '$parentPath/$id',
           ),
-          SelectorNode(selector: final selector, builder: final builder) =>
-            builder!(selector!(values)),
-          ValueBuilderNode(path: final path, builder: final builder) =>
-            builder!(values.getValue(path, parentPath: '$parentPath/$id')),
-          ValuesBuilderNode(paths: final paths, builder: final builder) =>
-            builder!(
-              {
-                for (final path in paths)
-                  path: values.getValue(path, parentPath: '$parentPath/$id'),
-              },
-            ),
+          SelectorNode(:final selector, :final builder) => builder!(
+            selector!(values),
+          ),
+          ValueBuilderNode(:final path, :final builder) => builder!(
+            values.getValue(path, parentPath: '$parentPath/$id'),
+          ),
+          ValuesBuilderNode(:final paths, :final builder) => builder!(
+            {
+              for (final path in paths)
+                path: values.getValue(path, parentPath: '$parentPath/$id'),
+            },
+          ),
           _ => throw AssertionError(),
         };
 
@@ -474,7 +476,7 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
     final secondSlashIndex = path.substring(1).indexOf('/');
 
     switch (this) {
-      case ConditionnalNode(condition: final condition, child: final child):
+      case ConditionnalNode(:final condition, :final child):
         if (!values.meet(condition)) return null;
 
         // if the path ends at the child of this node
@@ -487,7 +489,7 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
           parentPath: '$parentPath/$id',
           values: values,
         );
-      case FutureNode(builder: final builder):
+      case FutureNode(:final builder):
         final snapshot = values.get<AsyncSnapshot<T?>>('$parentPath/$id');
         if (snapshot == null) return null;
 
@@ -525,7 +527,7 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
               values: values,
             );
 
-      case LockerNode(child: final child):
+      case LockerNode(:final child):
         // if the path ends at the child of this node
         if (secondSlashIndex == -1) {
           return (child.id == path.substring(1)) ? child : null;
@@ -537,7 +539,7 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
           values: values,
         );
 
-      case RootNode(children: final children):
+      case RootNode(:final children):
         assert(
           parentPath == '',
           'The parentPath of RootNode must always be an empty string.',
@@ -576,20 +578,21 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
       case ValueBuilderNode():
       case ValuesBuilderNode():
         final child = switch (this) {
-          PathBuilderNode(builder: final builder) => builder!(
+          PathBuilderNode(:final builder) => builder!(
             '$parentPath/$id',
           ),
-          SelectorNode(selector: final selector, builder: final builder) =>
-            builder!(selector!(values)),
-          ValueBuilderNode(path: final path, builder: final builder) =>
-            builder!(values.getValue(path, parentPath: '$parentPath/$id')),
-          ValuesBuilderNode(paths: final paths, builder: final builder) =>
-            builder!(
-              {
-                for (final path in paths)
-                  path: values.getValue(path, parentPath: '$parentPath/$id'),
-              },
-            ),
+          SelectorNode(:final selector, :final builder) => builder!(
+            selector!(values),
+          ),
+          ValueBuilderNode(:final path, :final builder) => builder!(
+            values.getValue(path, parentPath: '$parentPath/$id'),
+          ),
+          ValuesBuilderNode(:final paths, :final builder) => builder!(
+            {
+              for (final path in paths)
+                path: values.getValue(path, parentPath: '$parentPath/$id'),
+            },
+          ),
           _ => throw AssertionError(),
         };
 
@@ -622,14 +625,14 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
     if (!recursive) return [];
 
     switch (this) {
-      case ConditionnalNode(condition: final condition, child: final child):
+      case ConditionnalNode(:final condition, :final child):
         if (!values.meet(condition)) return [];
 
         return child.getErrors(
           values: values,
           parentPath: '$parentPath/$id',
         );
-      case FutureNode(builder: final builder):
+      case FutureNode(:final builder):
         final snapshot = values.get<AsyncSnapshot<T?>>('$parentPath/$id');
         if (snapshot == null) return [];
 
@@ -638,7 +641,7 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
           parentPath: '$parentPath/$id',
         );
 
-      case DynamicInputsNode(maxCount: final maxCount):
+      case DynamicInputsNode(:final maxCount):
         final children = values.get<List<WoFormNode>>('$parentPath/$id') ?? [];
 
         WoFormInputError? error;
@@ -668,13 +671,13 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
             ),
         ].nonNulls;
 
-      case LockerNode(child: final child):
+      case LockerNode(:final child):
         return child.getErrors(
           values: values,
           parentPath: '$parentPath/$id',
         );
 
-      case RootNode(children: final children):
+      case RootNode(:final children):
         assert(
           parentPath == '',
           'The parentPath of RootNode must always be an empty string.',
@@ -694,20 +697,21 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
       case ValueBuilderNode():
       case ValuesBuilderNode():
         final child = switch (this) {
-          PathBuilderNode(builder: final builder) => builder!(
+          PathBuilderNode(:final builder) => builder!(
             '$parentPath/$id',
           ),
-          SelectorNode(selector: final selector, builder: final builder) =>
-            builder!(selector!(values)),
-          ValueBuilderNode(path: final path, builder: final builder) =>
-            builder!(values.getValue(path, parentPath: '$parentPath/$id')),
-          ValuesBuilderNode(paths: final paths, builder: final builder) =>
-            builder!(
-              {
-                for (final path in paths)
-                  path: values.getValue(path, parentPath: '$parentPath/$id'),
-              },
-            ),
+          SelectorNode(:final selector, :final builder) => builder!(
+            selector!(values),
+          ),
+          ValueBuilderNode(:final path, :final builder) => builder!(
+            values.getValue(path, parentPath: '$parentPath/$id'),
+          ),
+          ValuesBuilderNode(:final paths, :final builder) => builder!(
+            {
+              for (final path in paths)
+                path: values.getValue(path, parentPath: '$parentPath/$id'),
+            },
+          ),
           _ => throw AssertionError(),
         };
 
@@ -731,14 +735,14 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
     required String parentPath,
   }) {
     switch (this) {
-      case ConditionnalNode(condition: final condition, child: final child):
+      case ConditionnalNode(:final condition, :final child):
         if (!values.meet(condition)) return null;
 
         return child.getExportKey(
           values: values,
           parentPath: '$parentPath/$id',
         );
-      case FutureNode(builder: final builder):
+      case FutureNode(:final builder):
         final snapshot = values.get<AsyncSnapshot<T?>>('$parentPath/$id');
         if (snapshot == null) return null;
 
@@ -746,14 +750,14 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
           values: values,
           parentPath: '$parentPath/$id',
         );
-      case DynamicInputsNode(exportSettings: final exportSettings):
-      case InputsNode(exportSettings: final exportSettings):
+      case DynamicInputsNode(:final exportSettings):
+      case InputsNode(:final exportSettings):
         return switch (exportSettings?.type) {
           null || ExportType.map || ExportType.list => id,
           ExportType.mergeWithParent => null,
         };
 
-      case LockerNode(child: final child):
+      case LockerNode(:final child):
         return child.getExportKey(
           values: values,
           parentPath: '$parentPath/$id',
@@ -772,20 +776,21 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
       case ValueBuilderNode():
       case ValuesBuilderNode():
         final child = switch (this) {
-          PathBuilderNode(builder: final builder) => builder!(
+          PathBuilderNode(:final builder) => builder!(
             '$parentPath/$id',
           ),
-          SelectorNode(selector: final selector, builder: final builder) =>
-            builder!(selector!(values)),
-          ValueBuilderNode(path: final path, builder: final builder) =>
-            builder!(values.getValue(path, parentPath: '$parentPath/$id')),
-          ValuesBuilderNode(paths: final paths, builder: final builder) =>
-            builder!(
-              {
-                for (final path in paths)
-                  path: values.getValue(path, parentPath: '$parentPath/$id'),
-              },
-            ),
+          SelectorNode(:final selector, :final builder) => builder!(
+            selector!(values),
+          ),
+          ValueBuilderNode(:final path, :final builder) => builder!(
+            values.getValue(path, parentPath: '$parentPath/$id'),
+          ),
+          ValuesBuilderNode(:final paths, :final builder) => builder!(
+            {
+              for (final path in paths)
+                path: values.getValue(path, parentPath: '$parentPath/$id'),
+            },
+          ),
           _ => throw AssertionError(),
         };
 
@@ -807,15 +812,15 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
   Json getInitialValues({required String parentPath}) {
     switch (this) {
       case ConditionnalNode(
-        conditionIsInitiallyMet: final conditionIsInitiallyMet,
-        child: final child,
+        :final conditionIsInitiallyMet,
+        :final child,
       ):
         if (!conditionIsInitiallyMet) return {};
 
         return child.getInitialValues(parentPath: '$parentPath/$id');
       case FutureNode(
-        initialData: final initialData,
-        builder: final builder,
+        :final initialData,
+        :final builder,
       ):
         final initialSnapshot = AsyncSnapshot.withData(
           ConnectionState.waiting,
@@ -827,7 +832,7 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
           '$parentPath/$id': initialSnapshot,
           ...child.getInitialValues(parentPath: '$parentPath/$id'),
         };
-      case DynamicInputsNode(initialChildren: final initialChildren):
+      case DynamicInputsNode(:final initialChildren):
         return {
           '$parentPath/$id': initialChildren,
           if (initialChildren != null)
@@ -835,20 +840,20 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
               ...child.getInitialValues(parentPath: '$parentPath/$id'),
         };
 
-      case InputsNode(children: final children):
+      case InputsNode(:final children):
         return {
           for (final child in children)
             ...child.getInitialValues(parentPath: '$parentPath/$id'),
         };
 
-      case LockerNode(child: final child):
+      case LockerNode(:final child):
         return child.getInitialValues(parentPath: '$parentPath/$id');
 
-      case PathBuilderNode(builder: final builder):
+      case PathBuilderNode(:final builder):
         final child = builder!('$parentPath/$id');
         return child.getInitialValues(parentPath: '$parentPath/$id');
 
-      case RootNode(children: final children):
+      case RootNode(:final children):
         assert(
           parentPath == '',
           'The parentPath of RootNode must always be an empty string.',
@@ -861,9 +866,9 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
         };
 
       case SelectorNode(
-        selector: final selector,
-        builder: final builder,
-        initialValue: final initialValue,
+        :final selector,
+        :final builder,
+        :final initialValue,
       ):
         final child = builder!(
           initialValue ?? selector!(const WoFormValues({})),
@@ -871,15 +876,15 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
         return child.getInitialValues(parentPath: '$parentPath/$id');
 
       case ValueBuilderNode(
-        builder: final builder,
-        initialValue: final initialValue,
+        :final builder,
+        :final initialValue,
       ):
         final child = builder!(initialValue);
         return child.getInitialValues(parentPath: '$parentPath/$id');
 
       case ValuesBuilderNode(
-        builder: final builder,
-        initialValues: final initialValues,
+        :final builder,
+        :final initialValues,
       ):
         final child = builder!(initialValues ?? {});
         return child.getInitialValues(parentPath: '$parentPath/$id');
@@ -916,17 +921,16 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
       key: key,
       path: '$parentPath/$id',
     ),
-    PathBuilderNode(builder: final builder) =>
-      builder!('$parentPath/$id').toWidget(
-        key: key,
-        parentPath: '$parentPath/$id',
-      ),
+    PathBuilderNode(:final builder) => builder!('$parentPath/$id').toWidget(
+      key: key,
+      parentPath: '$parentPath/$id',
+    ),
     RootNode() => WoFormPageBuilder(
       key: key,
     ),
     SelectorNode(
-      selector: final selector,
-      builder: final builder,
+      :final selector,
+      :final builder,
     ) =>
       WoFormValueSelector(
         key: key,
@@ -935,8 +939,8 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
             builder!(value).toWidget(parentPath: '$parentPath/$id'),
       ),
     ValueBuilderNode(
-      path: final path,
-      builder: final builder,
+      :final path,
+      :final builder,
     ) =>
       WoFormValueBuilder<dynamic>(
         key: key,
@@ -948,8 +952,8 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
             builder!(value).toWidget(parentPath: '$parentPath/$id'),
       ),
     ValuesBuilderNode(
-      paths: final paths,
-      builder: final builder,
+      :final paths,
+      :final builder,
     ) =>
       WoFormValuesBuilder(
         key: key,
@@ -958,9 +962,9 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
             builder!(values).toWidget(parentPath: '$parentPath/$id'),
       ),
     ValueListenerNode(
-      path: final path,
-      listenWhen: final listenWhen,
-      listener: final listener,
+      :final path,
+      :final listenWhen,
+      :final listener,
     ) =>
       WoFormValueListener<dynamic>(
         key: key,
@@ -972,7 +976,7 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
         listener: (context, value) => listener!(context, value),
         child: const SizedBox.shrink(),
       ),
-    WidgetNode(builder: final builder) =>
+    WidgetNode(:final builder) =>
       builder == null
           ? SizedBox.shrink(key: key)
           : Builder(key: key, builder: builder),
@@ -1034,11 +1038,11 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
             )
             .flex(context, parentPath: '$parentPath/$id'),
       ValueListenerNode _ => null,
-      InputsNode(uiSettings: final uiSettings) =>
+      InputsNode(:final uiSettings) =>
         uiSettings?.childrenVisibility == ChildrenVisibility.whenAsked
             ? 0
             : uiSettings?.flex,
-      WidgetNode(uiSettings: final uiSettings) => uiSettings?.flex,
+      WidgetNode(:final uiSettings) => uiSettings?.flex,
 
       // WoFormInput overrides this method
       WoFormInput() => throw UnimplementedError(),
