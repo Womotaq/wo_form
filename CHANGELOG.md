@@ -1,6 +1,8 @@
 ## 2.0.1
 
 - Added InputsNodeUiSettings.helperMaxLines
+- Hidden bottom bar when keyboard is visible
+- Added bypassLock in WoFormValuesCubit.onValueChanged
 
 ## 2.0.0
 
