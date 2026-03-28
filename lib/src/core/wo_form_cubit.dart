@@ -55,7 +55,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     required this.onSubmitting,
   }) : _tempSubmitDatas = [],
        super(_calculateInitialState(_root)) {
-    _initialValues = state.asMap();
+    _initialValues = state;
     if (showErrors == ShowErrors.always) {
       // Update the errors of all visited paths
       SchedulerBinding.instance.addPostFrameCallback((_) => _updateErrors());
@@ -68,7 +68,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   final Future<bool> Function(BuildContext context) _canSubmit;
   final Future<Object?> Function(RootNode root, WoFormValues values)?
   onSubmitting;
-  late Json _initialValues;
+  late WoFormValues _initialValues;
   final Map<String, FocusNode> _focusNodes = {};
 
   /// Called each time a value changed, accordingly to [UpdateStatus].
@@ -118,7 +118,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   void _didUpdateWoForm(RootNode newRoot) {
     if (!identical(_root, newRoot)) {
       _root = newRoot;
-      _initialValues = _calculateInitialState(_root).asMap();
+      _initialValues = _calculateInitialState(_root);
     }
   }
 
@@ -341,7 +341,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     // If the status isn't updated and we are still at initial state, then the
     // initial state should be updated to match the current state.
     // This allows a FutureNode to update its value without changing isPure.
-    if (!shouldUpdateStatus && isPure) _initialValues = newValues.asMap();
+    if (!shouldUpdateStatus && isPure) _initialValues = newValues;
 
     emit(newValues);
 
@@ -780,9 +780,10 @@ class WoFormValues {
     return null;
   }
 
-  bool isPure({required Json initialValues}) => mapEquals(
+  bool isPure({required WoFormValues initialValues}) => mapEquals(
     asMap()..removeWhere((path, _) => path.startsWith('/__wo_reserved')),
-    initialValues,
+    initialValues.asMap()
+      ..removeWhere((path, _) => path.startsWith('/__wo_reserved')),
   );
 
   /// If the value at [path] is [T], then the value is returned, casted.
