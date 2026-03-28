@@ -1,3 +1,7 @@
+## 2.0.2
+
+- Solved minor bugs
+
 ## 2.0.1
 
 - Added InputsNodeUiSettings.helperMaxLines
