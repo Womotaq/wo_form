@@ -112,7 +112,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
       }
     }
 
-    return values;
+    return WoFormValues._locked(values._values);
   }
 
   void _didUpdateWoForm(RootNode newRoot) {
@@ -780,11 +780,12 @@ class WoFormValues {
     return null;
   }
 
-  bool isPure({required WoFormValues initialValues}) => mapEquals(
-    asMap()..removeWhere((path, _) => path.startsWith('/__wo_reserved')),
-    initialValues.asMap()
-      ..removeWhere((path, _) => path.startsWith('/__wo_reserved')),
-  );
+  bool isPure({required WoFormValues initialValues}) =>
+      const DeepCollectionEquality().equals(
+        asMap()..removeWhere((path, _) => path.startsWith('/__wo_reserved')),
+        initialValues.asMap()
+          ..removeWhere((path, _) => path.startsWith('/__wo_reserved')),
+      );
 
   /// If the value at [path] is [T], then the value is returned, casted.
   /// Else, null is returned.
