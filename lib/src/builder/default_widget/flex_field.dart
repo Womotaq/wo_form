@@ -10,6 +10,7 @@ class FlexField extends StatelessWidget {
     this.labelText,
     this.labelMaxLines,
     this.helperText,
+    this.helperMaxLines,
     this.errorText,
     this.trailing,
     this.prefixIcon,
@@ -35,6 +36,7 @@ class FlexField extends StatelessWidget {
   final String? labelText;
   final int? labelMaxLines;
   final String? helperText;
+  final int? helperMaxLines;
   final String? errorText;
   final Widget? trailing;
   final VoidCallback? onTapHeader;
@@ -67,6 +69,7 @@ class FlexField extends StatelessWidget {
                 labelText: labelText,
                 labelMaxLines: labelMaxLines,
                 helperText: helperText,
+                helperMaxLines: helperMaxLines,
                 errorText: errorText,
                 trailing: trailing,
                 onTap: onTapHeader,

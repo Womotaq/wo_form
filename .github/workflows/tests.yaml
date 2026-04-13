@@ -1,9 +1,4 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-name: Tests
+name: Run tests
 
 on:
   push:
@@ -17,14 +12,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
         with:
           channel: "stable"
-      - run: flutter --version
 
-      - name: Create Example's Firebase Options file (lib/firebase_options.dart)
-        run: echo "${{ secrets.FIREBASE_OPTIONS_DART }}" > example/lib/firebase_options.dart
-        shell: bash
+      - run: flutter --version
 
       - name: Analyze project source
         run: flutter analyze

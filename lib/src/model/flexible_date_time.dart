@@ -21,6 +21,8 @@ sealed class FlexibleDateTime with _$FlexibleDateTime {
     /// A number from 1 (Monday) to 7 (Sunday). In accordance with ISO 8601.
     /// Applied after [replaceDays].
     int? replaceWeekday,
+    int? replaceHours,
+    int? replaceMinutes,
   }) = TodayDate;
 
   /// Required for the override getter
@@ -33,22 +35,26 @@ sealed class FlexibleDateTime with _$FlexibleDateTime {
 
   DateTime resolve() {
     switch (this) {
-      case FixedDateTime(date: final date):
+      case FixedDateTime(:final date):
         return date;
       case TodayDate(
-        addYears: final addYears,
-        addMonths: final addMonths,
-        addDays: final addDays,
-        replaceYears: final replaceYears,
-        replaceMonths: final replaceMonths,
-        replaceDays: final replaceDays,
-        replaceWeekday: final replaceWeekday,
+        :final addYears,
+        :final addMonths,
+        :final addDays,
+        :final replaceYears,
+        :final replaceMonths,
+        :final replaceDays,
+        :final replaceWeekday,
+        :final replaceHours,
+        :final replaceMinutes,
       ):
         final now = DateTime.now();
         final date = DateTime(
           replaceYears ?? now.year + (addYears ?? 0),
           replaceMonths ?? now.month + (addMonths ?? 0),
           replaceDays ?? now.day + (addDays ?? 0),
+          replaceHours ?? 0,
+          replaceMinutes ?? 0,
         );
 
         if (replaceWeekday != null) {

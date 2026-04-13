@@ -41,10 +41,7 @@ class BooleanFieldBuilder extends StatelessWidget {
                   errorText: errorText,
                   onValueChanged: inputIsLocked
                       ? null
-                      : (
-                          bool? value, {
-                          UpdateStatus updateStatus = UpdateStatus.yes,
-                        }) {
+                      : (bool? value, {updateStatus = UpdateStatus.yes}) {
                           valuesCubit.onValueChanged(
                             path: path,
                             value: value,

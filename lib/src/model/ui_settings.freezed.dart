@@ -309,7 +309,7 @@ mixin _$DateTimeInputUiSettings {
 /// Else, the field will be wrapped in a Flexible with a flex value of 10,
 /// and the header with a flex value of [headerFlex].
  int? get headerFlex;@notSerializable Widget? get prefixIcon;/// Default to [FieldElementLocation.outside].
- FieldElementLocation? get prefixIconLocation;/// Default to FieldElementLocation.inside
+ FieldElementLocation? get prefixIconLocation;/// Default to [FieldElementLocation.inside].
  FieldElementLocation? get errorLocation; String? get addDateText; String? get addTimeText;/// If DateTimeInput.initialValue is null, this value will be used instead.
  FlexibleDateTime? get initialEditValue; DateEditMode? get editMode;@PickDateDefNullableConverter() PickDateDef? get pickDate;@notSerializable PickTimeDef? get pickTime; TimePickerEntryMode? get initialTimeEntryMode;@notSerializable DateTimeFieldBuilderDef? get widgetBuilder;
 /// Create a copy of DateTimeInputUiSettings
@@ -428,7 +428,7 @@ class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
 @override@notSerializable final  Widget? prefixIcon;
 /// Default to [FieldElementLocation.outside].
 @override final  FieldElementLocation? prefixIconLocation;
-/// Default to FieldElementLocation.inside
+/// Default to [FieldElementLocation.inside].
 @override final  FieldElementLocation? errorLocation;
 @override final  String? addDateText;
 @override final  String? addTimeText;
@@ -534,13 +534,17 @@ $FlexibleDateTimeCopyWith<$Res>? get initialEditValue {
 /// @nodoc
 mixin _$DurationInputUiSettings {
 
- String? get labelText; String? get helperText; String? get hintText; DurationEditMode? get editMode;/// If null or O, header will be placed above the field.
+ String? get labelText;/// Default to [FieldElementLocation.inside].
+ FieldElementLocation? get labelLocation; String? get helperText;/// Default to [FieldElementLocation.inside].
+ FieldElementLocation? get helperLocation; String? get hintText; DurationEditMode? get editMode;/// If null or O, header will be placed above the field.
 /// Else, header and selector will be in a the same row.
 /// If -1, the field will take as much space as he wants
 /// (might not work with all fields).
 /// Else, the field will be wrapped in a Flexible with a flex value of 10,
 /// and the header with a flex value of [headerFlex].
- int? get headerFlex;@notSerializable PickDurationDef? get pickDuration;@notSerializable FormatDurationDef? get formatDuration;@notSerializable DurationFieldBuilderDef? get widgetBuilder;/// The following fields are used if editMode is dateTime
+ int? get headerFlex;@notSerializable Widget? get prefixIcon;/// Default to [FieldElementLocation.outside].
+ FieldElementLocation? get prefixIconLocation;/// Default to [FieldElementLocation.inside].
+ FieldElementLocation? get errorLocation;@notSerializable PickDurationDef? get pickDuration;@notSerializable FormatDurationDef? get formatDuration;@notSerializable DurationFieldBuilderDef? get widgetBuilder;/// The following fields are used if editMode is dateTime
  String? get dateTimeLabelText; String? get dateTimeHelperText; String? get dateTimeHintText; String? get dateFormat; String? get timeFormat; DateEditMode? get dateTimeEditMode;@notSerializable PickDateDef? get pickDate;@notSerializable PickTimeDef? get pickTime;
 /// Create a copy of DurationInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -554,16 +558,16 @@ $DurationInputUiSettingsCopyWith<DurationInputUiSettings> get copyWith => _$Dura
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DurationInputUiSettings&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.editMode, editMode) || other.editMode == editMode)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.pickDuration, pickDuration) || other.pickDuration == pickDuration)&&(identical(other.formatDuration, formatDuration) || other.formatDuration == formatDuration)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.dateTimeLabelText, dateTimeLabelText) || other.dateTimeLabelText == dateTimeLabelText)&&(identical(other.dateTimeHelperText, dateTimeHelperText) || other.dateTimeHelperText == dateTimeHelperText)&&(identical(other.dateTimeHintText, dateTimeHintText) || other.dateTimeHintText == dateTimeHintText)&&(identical(other.dateFormat, dateFormat) || other.dateFormat == dateFormat)&&(identical(other.timeFormat, timeFormat) || other.timeFormat == timeFormat)&&(identical(other.dateTimeEditMode, dateTimeEditMode) || other.dateTimeEditMode == dateTimeEditMode)&&(identical(other.pickDate, pickDate) || other.pickDate == pickDate)&&(identical(other.pickTime, pickTime) || other.pickTime == pickTime));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DurationInputUiSettings&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelLocation, labelLocation) || other.labelLocation == labelLocation)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.helperLocation, helperLocation) || other.helperLocation == helperLocation)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.editMode, editMode) || other.editMode == editMode)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.prefixIconLocation, prefixIconLocation) || other.prefixIconLocation == prefixIconLocation)&&(identical(other.errorLocation, errorLocation) || other.errorLocation == errorLocation)&&(identical(other.pickDuration, pickDuration) || other.pickDuration == pickDuration)&&(identical(other.formatDuration, formatDuration) || other.formatDuration == formatDuration)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.dateTimeLabelText, dateTimeLabelText) || other.dateTimeLabelText == dateTimeLabelText)&&(identical(other.dateTimeHelperText, dateTimeHelperText) || other.dateTimeHelperText == dateTimeHelperText)&&(identical(other.dateTimeHintText, dateTimeHintText) || other.dateTimeHintText == dateTimeHintText)&&(identical(other.dateFormat, dateFormat) || other.dateFormat == dateFormat)&&(identical(other.timeFormat, timeFormat) || other.timeFormat == timeFormat)&&(identical(other.dateTimeEditMode, dateTimeEditMode) || other.dateTimeEditMode == dateTimeEditMode)&&(identical(other.pickDate, pickDate) || other.pickDate == pickDate)&&(identical(other.pickTime, pickTime) || other.pickTime == pickTime));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,labelText,helperText,hintText,editMode,headerFlex,pickDuration,formatDuration,widgetBuilder,dateTimeLabelText,dateTimeHelperText,dateTimeHintText,dateFormat,timeFormat,dateTimeEditMode,pickDate,pickTime);
+int get hashCode => Object.hashAll([runtimeType,labelText,labelLocation,helperText,helperLocation,hintText,editMode,headerFlex,prefixIcon,prefixIconLocation,errorLocation,pickDuration,formatDuration,widgetBuilder,dateTimeLabelText,dateTimeHelperText,dateTimeHintText,dateFormat,timeFormat,dateTimeEditMode,pickDate,pickTime]);
 
 @override
 String toString() {
-  return 'DurationInputUiSettings(labelText: $labelText, helperText: $helperText, hintText: $hintText, editMode: $editMode, headerFlex: $headerFlex, pickDuration: $pickDuration, formatDuration: $formatDuration, widgetBuilder: $widgetBuilder, dateTimeLabelText: $dateTimeLabelText, dateTimeHelperText: $dateTimeHelperText, dateTimeHintText: $dateTimeHintText, dateFormat: $dateFormat, timeFormat: $timeFormat, dateTimeEditMode: $dateTimeEditMode, pickDate: $pickDate, pickTime: $pickTime)';
+  return 'DurationInputUiSettings(labelText: $labelText, labelLocation: $labelLocation, helperText: $helperText, helperLocation: $helperLocation, hintText: $hintText, editMode: $editMode, headerFlex: $headerFlex, prefixIcon: $prefixIcon, prefixIconLocation: $prefixIconLocation, errorLocation: $errorLocation, pickDuration: $pickDuration, formatDuration: $formatDuration, widgetBuilder: $widgetBuilder, dateTimeLabelText: $dateTimeLabelText, dateTimeHelperText: $dateTimeHelperText, dateTimeHintText: $dateTimeHintText, dateFormat: $dateFormat, timeFormat: $timeFormat, dateTimeEditMode: $dateTimeEditMode, pickDate: $pickDate, pickTime: $pickTime)';
 }
 
 
@@ -574,7 +578,7 @@ abstract mixin class $DurationInputUiSettingsCopyWith<$Res>  {
   factory $DurationInputUiSettingsCopyWith(DurationInputUiSettings value, $Res Function(DurationInputUiSettings) _then) = _$DurationInputUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String? labelText, String? helperText, String? hintText, DurationEditMode? editMode, int? headerFlex,@notSerializable PickDurationDef? pickDuration,@notSerializable FormatDurationDef? formatDuration,@notSerializable DurationFieldBuilderDef? widgetBuilder, String? dateTimeLabelText, String? dateTimeHelperText, String? dateTimeHintText, String? dateFormat, String? timeFormat, DateEditMode? dateTimeEditMode,@notSerializable PickDateDef? pickDate,@notSerializable PickTimeDef? pickTime
+ String? labelText, FieldElementLocation? labelLocation, String? helperText, FieldElementLocation? helperLocation, String? hintText, DurationEditMode? editMode, int? headerFlex,@notSerializable Widget? prefixIcon, FieldElementLocation? prefixIconLocation, FieldElementLocation? errorLocation,@notSerializable PickDurationDef? pickDuration,@notSerializable FormatDurationDef? formatDuration,@notSerializable DurationFieldBuilderDef? widgetBuilder, String? dateTimeLabelText, String? dateTimeHelperText, String? dateTimeHintText, String? dateFormat, String? timeFormat, DateEditMode? dateTimeEditMode,@notSerializable PickDateDef? pickDate,@notSerializable PickTimeDef? pickTime
 });
 
 
@@ -591,14 +595,19 @@ class _$DurationInputUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of DurationInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? labelText = freezed,Object? helperText = freezed,Object? hintText = freezed,Object? editMode = freezed,Object? headerFlex = freezed,Object? pickDuration = freezed,Object? formatDuration = freezed,Object? widgetBuilder = freezed,Object? dateTimeLabelText = freezed,Object? dateTimeHelperText = freezed,Object? dateTimeHintText = freezed,Object? dateFormat = freezed,Object? timeFormat = freezed,Object? dateTimeEditMode = freezed,Object? pickDate = freezed,Object? pickTime = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? labelText = freezed,Object? labelLocation = freezed,Object? helperText = freezed,Object? helperLocation = freezed,Object? hintText = freezed,Object? editMode = freezed,Object? headerFlex = freezed,Object? prefixIcon = freezed,Object? prefixIconLocation = freezed,Object? errorLocation = freezed,Object? pickDuration = freezed,Object? formatDuration = freezed,Object? widgetBuilder = freezed,Object? dateTimeLabelText = freezed,Object? dateTimeHelperText = freezed,Object? dateTimeHintText = freezed,Object? dateFormat = freezed,Object? timeFormat = freezed,Object? dateTimeEditMode = freezed,Object? pickDate = freezed,Object? pickTime = freezed,}) {
   return _then(_self.copyWith(
 labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
-as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
-as String?,hintText: freezed == hintText ? _self.hintText : hintText // ignore: cast_nullable_to_non_nullable
+as String?,labelLocation: freezed == labelLocation ? _self.labelLocation : labelLocation // ignore: cast_nullable_to_non_nullable
+as FieldElementLocation?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
+as String?,helperLocation: freezed == helperLocation ? _self.helperLocation : helperLocation // ignore: cast_nullable_to_non_nullable
+as FieldElementLocation?,hintText: freezed == hintText ? _self.hintText : hintText // ignore: cast_nullable_to_non_nullable
 as String?,editMode: freezed == editMode ? _self.editMode : editMode // ignore: cast_nullable_to_non_nullable
 as DurationEditMode?,headerFlex: freezed == headerFlex ? _self.headerFlex : headerFlex // ignore: cast_nullable_to_non_nullable
-as int?,pickDuration: freezed == pickDuration ? _self.pickDuration : pickDuration // ignore: cast_nullable_to_non_nullable
+as int?,prefixIcon: freezed == prefixIcon ? _self.prefixIcon : prefixIcon // ignore: cast_nullable_to_non_nullable
+as Widget?,prefixIconLocation: freezed == prefixIconLocation ? _self.prefixIconLocation : prefixIconLocation // ignore: cast_nullable_to_non_nullable
+as FieldElementLocation?,errorLocation: freezed == errorLocation ? _self.errorLocation : errorLocation // ignore: cast_nullable_to_non_nullable
+as FieldElementLocation?,pickDuration: freezed == pickDuration ? _self.pickDuration : pickDuration // ignore: cast_nullable_to_non_nullable
 as PickDurationDef?,formatDuration: freezed == formatDuration ? _self.formatDuration : formatDuration // ignore: cast_nullable_to_non_nullable
 as FormatDurationDef?,widgetBuilder: freezed == widgetBuilder ? _self.widgetBuilder : widgetBuilder // ignore: cast_nullable_to_non_nullable
 as DurationFieldBuilderDef?,dateTimeLabelText: freezed == dateTimeLabelText ? _self.dateTimeLabelText : dateTimeLabelText // ignore: cast_nullable_to_non_nullable
@@ -621,11 +630,15 @@ as PickTimeDef?,
 @JsonSerializable()
 
 class _DurationInputUiSettings extends DurationInputUiSettings {
-  const _DurationInputUiSettings({this.labelText, this.helperText, this.hintText, this.editMode, this.headerFlex, @notSerializable this.pickDuration, @notSerializable this.formatDuration, @notSerializable this.widgetBuilder, this.dateTimeLabelText, this.dateTimeHelperText, this.dateTimeHintText, this.dateFormat, this.timeFormat, this.dateTimeEditMode, @notSerializable this.pickDate, @notSerializable this.pickTime}): super._();
+  const _DurationInputUiSettings({this.labelText, this.labelLocation, this.helperText, this.helperLocation, this.hintText, this.editMode, this.headerFlex, @notSerializable this.prefixIcon, this.prefixIconLocation, this.errorLocation, @notSerializable this.pickDuration, @notSerializable this.formatDuration, @notSerializable this.widgetBuilder, this.dateTimeLabelText, this.dateTimeHelperText, this.dateTimeHintText, this.dateFormat, this.timeFormat, this.dateTimeEditMode, @notSerializable this.pickDate, @notSerializable this.pickTime}): super._();
   factory _DurationInputUiSettings.fromJson(Map<String, dynamic> json) => _$DurationInputUiSettingsFromJson(json);
 
 @override final  String? labelText;
+/// Default to [FieldElementLocation.inside].
+@override final  FieldElementLocation? labelLocation;
 @override final  String? helperText;
+/// Default to [FieldElementLocation.inside].
+@override final  FieldElementLocation? helperLocation;
 @override final  String? hintText;
 @override final  DurationEditMode? editMode;
 /// If null or O, header will be placed above the field.
@@ -635,6 +648,11 @@ class _DurationInputUiSettings extends DurationInputUiSettings {
 /// Else, the field will be wrapped in a Flexible with a flex value of 10,
 /// and the header with a flex value of [headerFlex].
 @override final  int? headerFlex;
+@override@notSerializable final  Widget? prefixIcon;
+/// Default to [FieldElementLocation.outside].
+@override final  FieldElementLocation? prefixIconLocation;
+/// Default to [FieldElementLocation.inside].
+@override final  FieldElementLocation? errorLocation;
 @override@notSerializable final  PickDurationDef? pickDuration;
 @override@notSerializable final  FormatDurationDef? formatDuration;
 @override@notSerializable final  DurationFieldBuilderDef? widgetBuilder;
@@ -661,16 +679,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DurationInputUiSettings&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.editMode, editMode) || other.editMode == editMode)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.pickDuration, pickDuration) || other.pickDuration == pickDuration)&&(identical(other.formatDuration, formatDuration) || other.formatDuration == formatDuration)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.dateTimeLabelText, dateTimeLabelText) || other.dateTimeLabelText == dateTimeLabelText)&&(identical(other.dateTimeHelperText, dateTimeHelperText) || other.dateTimeHelperText == dateTimeHelperText)&&(identical(other.dateTimeHintText, dateTimeHintText) || other.dateTimeHintText == dateTimeHintText)&&(identical(other.dateFormat, dateFormat) || other.dateFormat == dateFormat)&&(identical(other.timeFormat, timeFormat) || other.timeFormat == timeFormat)&&(identical(other.dateTimeEditMode, dateTimeEditMode) || other.dateTimeEditMode == dateTimeEditMode)&&(identical(other.pickDate, pickDate) || other.pickDate == pickDate)&&(identical(other.pickTime, pickTime) || other.pickTime == pickTime));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DurationInputUiSettings&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelLocation, labelLocation) || other.labelLocation == labelLocation)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.helperLocation, helperLocation) || other.helperLocation == helperLocation)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.editMode, editMode) || other.editMode == editMode)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.prefixIconLocation, prefixIconLocation) || other.prefixIconLocation == prefixIconLocation)&&(identical(other.errorLocation, errorLocation) || other.errorLocation == errorLocation)&&(identical(other.pickDuration, pickDuration) || other.pickDuration == pickDuration)&&(identical(other.formatDuration, formatDuration) || other.formatDuration == formatDuration)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.dateTimeLabelText, dateTimeLabelText) || other.dateTimeLabelText == dateTimeLabelText)&&(identical(other.dateTimeHelperText, dateTimeHelperText) || other.dateTimeHelperText == dateTimeHelperText)&&(identical(other.dateTimeHintText, dateTimeHintText) || other.dateTimeHintText == dateTimeHintText)&&(identical(other.dateFormat, dateFormat) || other.dateFormat == dateFormat)&&(identical(other.timeFormat, timeFormat) || other.timeFormat == timeFormat)&&(identical(other.dateTimeEditMode, dateTimeEditMode) || other.dateTimeEditMode == dateTimeEditMode)&&(identical(other.pickDate, pickDate) || other.pickDate == pickDate)&&(identical(other.pickTime, pickTime) || other.pickTime == pickTime));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,labelText,helperText,hintText,editMode,headerFlex,pickDuration,formatDuration,widgetBuilder,dateTimeLabelText,dateTimeHelperText,dateTimeHintText,dateFormat,timeFormat,dateTimeEditMode,pickDate,pickTime);
+int get hashCode => Object.hashAll([runtimeType,labelText,labelLocation,helperText,helperLocation,hintText,editMode,headerFlex,prefixIcon,prefixIconLocation,errorLocation,pickDuration,formatDuration,widgetBuilder,dateTimeLabelText,dateTimeHelperText,dateTimeHintText,dateFormat,timeFormat,dateTimeEditMode,pickDate,pickTime]);
 
 @override
 String toString() {
-  return 'DurationInputUiSettings(labelText: $labelText, helperText: $helperText, hintText: $hintText, editMode: $editMode, headerFlex: $headerFlex, pickDuration: $pickDuration, formatDuration: $formatDuration, widgetBuilder: $widgetBuilder, dateTimeLabelText: $dateTimeLabelText, dateTimeHelperText: $dateTimeHelperText, dateTimeHintText: $dateTimeHintText, dateFormat: $dateFormat, timeFormat: $timeFormat, dateTimeEditMode: $dateTimeEditMode, pickDate: $pickDate, pickTime: $pickTime)';
+  return 'DurationInputUiSettings(labelText: $labelText, labelLocation: $labelLocation, helperText: $helperText, helperLocation: $helperLocation, hintText: $hintText, editMode: $editMode, headerFlex: $headerFlex, prefixIcon: $prefixIcon, prefixIconLocation: $prefixIconLocation, errorLocation: $errorLocation, pickDuration: $pickDuration, formatDuration: $formatDuration, widgetBuilder: $widgetBuilder, dateTimeLabelText: $dateTimeLabelText, dateTimeHelperText: $dateTimeHelperText, dateTimeHintText: $dateTimeHintText, dateFormat: $dateFormat, timeFormat: $timeFormat, dateTimeEditMode: $dateTimeEditMode, pickDate: $pickDate, pickTime: $pickTime)';
 }
 
 
@@ -681,7 +699,7 @@ abstract mixin class _$DurationInputUiSettingsCopyWith<$Res> implements $Duratio
   factory _$DurationInputUiSettingsCopyWith(_DurationInputUiSettings value, $Res Function(_DurationInputUiSettings) _then) = __$DurationInputUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String? labelText, String? helperText, String? hintText, DurationEditMode? editMode, int? headerFlex,@notSerializable PickDurationDef? pickDuration,@notSerializable FormatDurationDef? formatDuration,@notSerializable DurationFieldBuilderDef? widgetBuilder, String? dateTimeLabelText, String? dateTimeHelperText, String? dateTimeHintText, String? dateFormat, String? timeFormat, DateEditMode? dateTimeEditMode,@notSerializable PickDateDef? pickDate,@notSerializable PickTimeDef? pickTime
+ String? labelText, FieldElementLocation? labelLocation, String? helperText, FieldElementLocation? helperLocation, String? hintText, DurationEditMode? editMode, int? headerFlex,@notSerializable Widget? prefixIcon, FieldElementLocation? prefixIconLocation, FieldElementLocation? errorLocation,@notSerializable PickDurationDef? pickDuration,@notSerializable FormatDurationDef? formatDuration,@notSerializable DurationFieldBuilderDef? widgetBuilder, String? dateTimeLabelText, String? dateTimeHelperText, String? dateTimeHintText, String? dateFormat, String? timeFormat, DateEditMode? dateTimeEditMode,@notSerializable PickDateDef? pickDate,@notSerializable PickTimeDef? pickTime
 });
 
 
@@ -698,14 +716,19 @@ class __$DurationInputUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of DurationInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? labelText = freezed,Object? helperText = freezed,Object? hintText = freezed,Object? editMode = freezed,Object? headerFlex = freezed,Object? pickDuration = freezed,Object? formatDuration = freezed,Object? widgetBuilder = freezed,Object? dateTimeLabelText = freezed,Object? dateTimeHelperText = freezed,Object? dateTimeHintText = freezed,Object? dateFormat = freezed,Object? timeFormat = freezed,Object? dateTimeEditMode = freezed,Object? pickDate = freezed,Object? pickTime = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? labelText = freezed,Object? labelLocation = freezed,Object? helperText = freezed,Object? helperLocation = freezed,Object? hintText = freezed,Object? editMode = freezed,Object? headerFlex = freezed,Object? prefixIcon = freezed,Object? prefixIconLocation = freezed,Object? errorLocation = freezed,Object? pickDuration = freezed,Object? formatDuration = freezed,Object? widgetBuilder = freezed,Object? dateTimeLabelText = freezed,Object? dateTimeHelperText = freezed,Object? dateTimeHintText = freezed,Object? dateFormat = freezed,Object? timeFormat = freezed,Object? dateTimeEditMode = freezed,Object? pickDate = freezed,Object? pickTime = freezed,}) {
   return _then(_DurationInputUiSettings(
 labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
-as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
-as String?,hintText: freezed == hintText ? _self.hintText : hintText // ignore: cast_nullable_to_non_nullable
+as String?,labelLocation: freezed == labelLocation ? _self.labelLocation : labelLocation // ignore: cast_nullable_to_non_nullable
+as FieldElementLocation?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
+as String?,helperLocation: freezed == helperLocation ? _self.helperLocation : helperLocation // ignore: cast_nullable_to_non_nullable
+as FieldElementLocation?,hintText: freezed == hintText ? _self.hintText : hintText // ignore: cast_nullable_to_non_nullable
 as String?,editMode: freezed == editMode ? _self.editMode : editMode // ignore: cast_nullable_to_non_nullable
 as DurationEditMode?,headerFlex: freezed == headerFlex ? _self.headerFlex : headerFlex // ignore: cast_nullable_to_non_nullable
-as int?,pickDuration: freezed == pickDuration ? _self.pickDuration : pickDuration // ignore: cast_nullable_to_non_nullable
+as int?,prefixIcon: freezed == prefixIcon ? _self.prefixIcon : prefixIcon // ignore: cast_nullable_to_non_nullable
+as Widget?,prefixIconLocation: freezed == prefixIconLocation ? _self.prefixIconLocation : prefixIconLocation // ignore: cast_nullable_to_non_nullable
+as FieldElementLocation?,errorLocation: freezed == errorLocation ? _self.errorLocation : errorLocation // ignore: cast_nullable_to_non_nullable
+as FieldElementLocation?,pickDuration: freezed == pickDuration ? _self.pickDuration : pickDuration // ignore: cast_nullable_to_non_nullable
 as PickDurationDef?,formatDuration: freezed == formatDuration ? _self.formatDuration : formatDuration // ignore: cast_nullable_to_non_nullable
 as FormatDurationDef?,widgetBuilder: freezed == widgetBuilder ? _self.widgetBuilder : widgetBuilder // ignore: cast_nullable_to_non_nullable
 as DurationFieldBuilderDef?,dateTimeLabelText: freezed == dateTimeLabelText ? _self.dateTimeLabelText : dateTimeLabelText // ignore: cast_nullable_to_non_nullable
@@ -1065,9 +1088,9 @@ mixin _$InputsNodeUiSettings {
 /// Defaults to false.
  bool? get reverse; String? get labelText;/// If set and not empty, this will replace [labelText] int the field when
 /// the children are hidden (see [InputsNodeUiSettings.childrenVisibility]).
- String? get labelTextWhenChildrenHidden; int? get labelMaxLines; String? get helperText;/// If set and not empty, this will replace [helperText] int the field when
+ String? get labelTextWhenChildrenHidden; int? get labelMaxLines; String? get helperText; int? get helperMaxLines;/// If set and not empty, this will replace [helperText] int the field when
 /// the children are hidden (see [InputsNodeUiSettings.childrenVisibility]).
- String? get helperTextWhenChildrenHidden;/// Default to always.
+ String? get helperTextWhenChildrenHidden;@notSerializable Widget? get prefixIcon;/// Default to always.
  ChildrenVisibility? get childrenVisibility;/// Only used when [ChildrenVisibility.whenAsked].
 /// If true, when the widget will be rendered,
 /// the children's visibility will be asked.
@@ -1101,16 +1124,16 @@ $InputsNodeUiSettingsCopyWith<InputsNodeUiSettings> get copyWith => _$InputsNode
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is InputsNodeUiSettings&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.reverse, reverse) || other.reverse == reverse)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelTextWhenChildrenHidden, labelTextWhenChildrenHidden) || other.labelTextWhenChildrenHidden == labelTextWhenChildrenHidden)&&(identical(other.labelMaxLines, labelMaxLines) || other.labelMaxLines == labelMaxLines)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.helperTextWhenChildrenHidden, helperTextWhenChildrenHidden) || other.helperTextWhenChildrenHidden == helperTextWhenChildrenHidden)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.showChildrenInitially, showChildrenInitially) || other.showChildrenInitially == showChildrenInitially)&&(identical(other.openChildren, openChildren) || other.openChildren == openChildren)&&(identical(other.direction, direction) || other.direction == direction)&&(identical(other.crossAxisAlignment, crossAxisAlignment) || other.crossAxisAlignment == crossAxisAlignment)&&(identical(other.spacing, spacing) || other.spacing == spacing)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.expanderBuilder, expanderBuilder) || other.expanderBuilder == expanderBuilder)&&(identical(other.inputHeaderBuilder, inputHeaderBuilder) || other.inputHeaderBuilder == inputHeaderBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is InputsNodeUiSettings&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.reverse, reverse) || other.reverse == reverse)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelTextWhenChildrenHidden, labelTextWhenChildrenHidden) || other.labelTextWhenChildrenHidden == labelTextWhenChildrenHidden)&&(identical(other.labelMaxLines, labelMaxLines) || other.labelMaxLines == labelMaxLines)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.helperMaxLines, helperMaxLines) || other.helperMaxLines == helperMaxLines)&&(identical(other.helperTextWhenChildrenHidden, helperTextWhenChildrenHidden) || other.helperTextWhenChildrenHidden == helperTextWhenChildrenHidden)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.showChildrenInitially, showChildrenInitially) || other.showChildrenInitially == showChildrenInitially)&&(identical(other.openChildren, openChildren) || other.openChildren == openChildren)&&(identical(other.direction, direction) || other.direction == direction)&&(identical(other.crossAxisAlignment, crossAxisAlignment) || other.crossAxisAlignment == crossAxisAlignment)&&(identical(other.spacing, spacing) || other.spacing == spacing)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.expanderBuilder, expanderBuilder) || other.expanderBuilder == expanderBuilder)&&(identical(other.inputHeaderBuilder, inputHeaderBuilder) || other.inputHeaderBuilder == inputHeaderBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,flex,reverse,labelText,labelTextWhenChildrenHidden,labelMaxLines,helperText,helperTextWhenChildrenHidden,childrenVisibility,showChildrenInitially,openChildren,direction,crossAxisAlignment,spacing,widgetBuilder,headerBuilder,expanderBuilder,inputHeaderBuilder);
+int get hashCode => Object.hashAll([runtimeType,flex,reverse,labelText,labelTextWhenChildrenHidden,labelMaxLines,helperText,helperMaxLines,helperTextWhenChildrenHidden,prefixIcon,childrenVisibility,showChildrenInitially,openChildren,direction,crossAxisAlignment,spacing,widgetBuilder,headerBuilder,expanderBuilder,inputHeaderBuilder]);
 
 @override
 String toString() {
-  return 'InputsNodeUiSettings(flex: $flex, reverse: $reverse, labelText: $labelText, labelTextWhenChildrenHidden: $labelTextWhenChildrenHidden, labelMaxLines: $labelMaxLines, helperText: $helperText, helperTextWhenChildrenHidden: $helperTextWhenChildrenHidden, childrenVisibility: $childrenVisibility, showChildrenInitially: $showChildrenInitially, openChildren: $openChildren, direction: $direction, crossAxisAlignment: $crossAxisAlignment, spacing: $spacing, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, expanderBuilder: $expanderBuilder, inputHeaderBuilder: $inputHeaderBuilder)';
+  return 'InputsNodeUiSettings(flex: $flex, reverse: $reverse, labelText: $labelText, labelTextWhenChildrenHidden: $labelTextWhenChildrenHidden, labelMaxLines: $labelMaxLines, helperText: $helperText, helperMaxLines: $helperMaxLines, helperTextWhenChildrenHidden: $helperTextWhenChildrenHidden, prefixIcon: $prefixIcon, childrenVisibility: $childrenVisibility, showChildrenInitially: $showChildrenInitially, openChildren: $openChildren, direction: $direction, crossAxisAlignment: $crossAxisAlignment, spacing: $spacing, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, expanderBuilder: $expanderBuilder, inputHeaderBuilder: $inputHeaderBuilder)';
 }
 
 
@@ -1121,7 +1144,7 @@ abstract mixin class $InputsNodeUiSettingsCopyWith<$Res>  {
   factory $InputsNodeUiSettingsCopyWith(InputsNodeUiSettings value, $Res Function(InputsNodeUiSettings) _then) = _$InputsNodeUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- int? flex, bool? reverse, String? labelText, String? labelTextWhenChildrenHidden, int? labelMaxLines, String? helperText, String? helperTextWhenChildrenHidden, ChildrenVisibility? childrenVisibility, bool? showChildrenInitially,@PushDefNullableConverter() PushDef? openChildren, Axis? direction, CrossAxisAlignment? crossAxisAlignment, double? spacing,@notSerializable InputNodeWidgetBuilderDef? widgetBuilder,@notSerializable HeaderBuilderDef? headerBuilder,@notSerializable InputNodeWidgetBuilderDef? expanderBuilder,@notSerializable InputHeaderBuilderDef? inputHeaderBuilder
+ int? flex, bool? reverse, String? labelText, String? labelTextWhenChildrenHidden, int? labelMaxLines, String? helperText, int? helperMaxLines, String? helperTextWhenChildrenHidden,@notSerializable Widget? prefixIcon, ChildrenVisibility? childrenVisibility, bool? showChildrenInitially,@PushDefNullableConverter() PushDef? openChildren, Axis? direction, CrossAxisAlignment? crossAxisAlignment, double? spacing,@notSerializable InputNodeWidgetBuilderDef? widgetBuilder,@notSerializable HeaderBuilderDef? headerBuilder,@notSerializable InputNodeWidgetBuilderDef? expanderBuilder,@notSerializable InputHeaderBuilderDef? inputHeaderBuilder
 });
 
 
@@ -1138,7 +1161,7 @@ class _$InputsNodeUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of InputsNodeUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? flex = freezed,Object? reverse = freezed,Object? labelText = freezed,Object? labelTextWhenChildrenHidden = freezed,Object? labelMaxLines = freezed,Object? helperText = freezed,Object? helperTextWhenChildrenHidden = freezed,Object? childrenVisibility = freezed,Object? showChildrenInitially = freezed,Object? openChildren = freezed,Object? direction = freezed,Object? crossAxisAlignment = freezed,Object? spacing = freezed,Object? widgetBuilder = freezed,Object? headerBuilder = freezed,Object? expanderBuilder = freezed,Object? inputHeaderBuilder = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? flex = freezed,Object? reverse = freezed,Object? labelText = freezed,Object? labelTextWhenChildrenHidden = freezed,Object? labelMaxLines = freezed,Object? helperText = freezed,Object? helperMaxLines = freezed,Object? helperTextWhenChildrenHidden = freezed,Object? prefixIcon = freezed,Object? childrenVisibility = freezed,Object? showChildrenInitially = freezed,Object? openChildren = freezed,Object? direction = freezed,Object? crossAxisAlignment = freezed,Object? spacing = freezed,Object? widgetBuilder = freezed,Object? headerBuilder = freezed,Object? expanderBuilder = freezed,Object? inputHeaderBuilder = freezed,}) {
   return _then(_self.copyWith(
 flex: freezed == flex ? _self.flex : flex // ignore: cast_nullable_to_non_nullable
 as int?,reverse: freezed == reverse ? _self.reverse : reverse // ignore: cast_nullable_to_non_nullable
@@ -1146,8 +1169,10 @@ as bool?,labelText: freezed == labelText ? _self.labelText : labelText // ignore
 as String?,labelTextWhenChildrenHidden: freezed == labelTextWhenChildrenHidden ? _self.labelTextWhenChildrenHidden : labelTextWhenChildrenHidden // ignore: cast_nullable_to_non_nullable
 as String?,labelMaxLines: freezed == labelMaxLines ? _self.labelMaxLines : labelMaxLines // ignore: cast_nullable_to_non_nullable
 as int?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
-as String?,helperTextWhenChildrenHidden: freezed == helperTextWhenChildrenHidden ? _self.helperTextWhenChildrenHidden : helperTextWhenChildrenHidden // ignore: cast_nullable_to_non_nullable
-as String?,childrenVisibility: freezed == childrenVisibility ? _self.childrenVisibility : childrenVisibility // ignore: cast_nullable_to_non_nullable
+as String?,helperMaxLines: freezed == helperMaxLines ? _self.helperMaxLines : helperMaxLines // ignore: cast_nullable_to_non_nullable
+as int?,helperTextWhenChildrenHidden: freezed == helperTextWhenChildrenHidden ? _self.helperTextWhenChildrenHidden : helperTextWhenChildrenHidden // ignore: cast_nullable_to_non_nullable
+as String?,prefixIcon: freezed == prefixIcon ? _self.prefixIcon : prefixIcon // ignore: cast_nullable_to_non_nullable
+as Widget?,childrenVisibility: freezed == childrenVisibility ? _self.childrenVisibility : childrenVisibility // ignore: cast_nullable_to_non_nullable
 as ChildrenVisibility?,showChildrenInitially: freezed == showChildrenInitially ? _self.showChildrenInitially : showChildrenInitially // ignore: cast_nullable_to_non_nullable
 as bool?,openChildren: freezed == openChildren ? _self.openChildren : openChildren // ignore: cast_nullable_to_non_nullable
 as PushDef?,direction: freezed == direction ? _self.direction : direction // ignore: cast_nullable_to_non_nullable
@@ -1169,7 +1194,7 @@ as InputHeaderBuilderDef?,
 @JsonSerializable()
 
 class _InputsNodeUiSettings extends InputsNodeUiSettings {
-  const _InputsNodeUiSettings({this.flex, this.reverse, this.labelText, this.labelTextWhenChildrenHidden, this.labelMaxLines, this.helperText, this.helperTextWhenChildrenHidden, this.childrenVisibility, this.showChildrenInitially, @PushDefNullableConverter() this.openChildren, this.direction, this.crossAxisAlignment, this.spacing, @notSerializable this.widgetBuilder, @notSerializable this.headerBuilder, @notSerializable this.expanderBuilder, @notSerializable this.inputHeaderBuilder}): super._();
+  const _InputsNodeUiSettings({this.flex, this.reverse, this.labelText, this.labelTextWhenChildrenHidden, this.labelMaxLines, this.helperText, this.helperMaxLines, this.helperTextWhenChildrenHidden, @notSerializable this.prefixIcon, this.childrenVisibility, this.showChildrenInitially, @PushDefNullableConverter() this.openChildren, this.direction, this.crossAxisAlignment, this.spacing, @notSerializable this.widgetBuilder, @notSerializable this.headerBuilder, @notSerializable this.expanderBuilder, @notSerializable this.inputHeaderBuilder}): super._();
   factory _InputsNodeUiSettings.fromJson(Map<String, dynamic> json) => _$InputsNodeUiSettingsFromJson(json);
 
 /// This field determines the layout of this node :
@@ -1200,9 +1225,11 @@ class _InputsNodeUiSettings extends InputsNodeUiSettings {
 @override final  String? labelTextWhenChildrenHidden;
 @override final  int? labelMaxLines;
 @override final  String? helperText;
+@override final  int? helperMaxLines;
 /// If set and not empty, this will replace [helperText] int the field when
 /// the children are hidden (see [InputsNodeUiSettings.childrenVisibility]).
 @override final  String? helperTextWhenChildrenHidden;
+@override@notSerializable final  Widget? prefixIcon;
 /// Default to always.
 @override final  ChildrenVisibility? childrenVisibility;
 /// Only used when [ChildrenVisibility.whenAsked].
@@ -1248,16 +1275,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _InputsNodeUiSettings&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.reverse, reverse) || other.reverse == reverse)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelTextWhenChildrenHidden, labelTextWhenChildrenHidden) || other.labelTextWhenChildrenHidden == labelTextWhenChildrenHidden)&&(identical(other.labelMaxLines, labelMaxLines) || other.labelMaxLines == labelMaxLines)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.helperTextWhenChildrenHidden, helperTextWhenChildrenHidden) || other.helperTextWhenChildrenHidden == helperTextWhenChildrenHidden)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.showChildrenInitially, showChildrenInitially) || other.showChildrenInitially == showChildrenInitially)&&(identical(other.openChildren, openChildren) || other.openChildren == openChildren)&&(identical(other.direction, direction) || other.direction == direction)&&(identical(other.crossAxisAlignment, crossAxisAlignment) || other.crossAxisAlignment == crossAxisAlignment)&&(identical(other.spacing, spacing) || other.spacing == spacing)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.expanderBuilder, expanderBuilder) || other.expanderBuilder == expanderBuilder)&&(identical(other.inputHeaderBuilder, inputHeaderBuilder) || other.inputHeaderBuilder == inputHeaderBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _InputsNodeUiSettings&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.reverse, reverse) || other.reverse == reverse)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelTextWhenChildrenHidden, labelTextWhenChildrenHidden) || other.labelTextWhenChildrenHidden == labelTextWhenChildrenHidden)&&(identical(other.labelMaxLines, labelMaxLines) || other.labelMaxLines == labelMaxLines)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.helperMaxLines, helperMaxLines) || other.helperMaxLines == helperMaxLines)&&(identical(other.helperTextWhenChildrenHidden, helperTextWhenChildrenHidden) || other.helperTextWhenChildrenHidden == helperTextWhenChildrenHidden)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.showChildrenInitially, showChildrenInitially) || other.showChildrenInitially == showChildrenInitially)&&(identical(other.openChildren, openChildren) || other.openChildren == openChildren)&&(identical(other.direction, direction) || other.direction == direction)&&(identical(other.crossAxisAlignment, crossAxisAlignment) || other.crossAxisAlignment == crossAxisAlignment)&&(identical(other.spacing, spacing) || other.spacing == spacing)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.expanderBuilder, expanderBuilder) || other.expanderBuilder == expanderBuilder)&&(identical(other.inputHeaderBuilder, inputHeaderBuilder) || other.inputHeaderBuilder == inputHeaderBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,flex,reverse,labelText,labelTextWhenChildrenHidden,labelMaxLines,helperText,helperTextWhenChildrenHidden,childrenVisibility,showChildrenInitially,openChildren,direction,crossAxisAlignment,spacing,widgetBuilder,headerBuilder,expanderBuilder,inputHeaderBuilder);
+int get hashCode => Object.hashAll([runtimeType,flex,reverse,labelText,labelTextWhenChildrenHidden,labelMaxLines,helperText,helperMaxLines,helperTextWhenChildrenHidden,prefixIcon,childrenVisibility,showChildrenInitially,openChildren,direction,crossAxisAlignment,spacing,widgetBuilder,headerBuilder,expanderBuilder,inputHeaderBuilder]);
 
 @override
 String toString() {
-  return 'InputsNodeUiSettings(flex: $flex, reverse: $reverse, labelText: $labelText, labelTextWhenChildrenHidden: $labelTextWhenChildrenHidden, labelMaxLines: $labelMaxLines, helperText: $helperText, helperTextWhenChildrenHidden: $helperTextWhenChildrenHidden, childrenVisibility: $childrenVisibility, showChildrenInitially: $showChildrenInitially, openChildren: $openChildren, direction: $direction, crossAxisAlignment: $crossAxisAlignment, spacing: $spacing, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, expanderBuilder: $expanderBuilder, inputHeaderBuilder: $inputHeaderBuilder)';
+  return 'InputsNodeUiSettings(flex: $flex, reverse: $reverse, labelText: $labelText, labelTextWhenChildrenHidden: $labelTextWhenChildrenHidden, labelMaxLines: $labelMaxLines, helperText: $helperText, helperMaxLines: $helperMaxLines, helperTextWhenChildrenHidden: $helperTextWhenChildrenHidden, prefixIcon: $prefixIcon, childrenVisibility: $childrenVisibility, showChildrenInitially: $showChildrenInitially, openChildren: $openChildren, direction: $direction, crossAxisAlignment: $crossAxisAlignment, spacing: $spacing, widgetBuilder: $widgetBuilder, headerBuilder: $headerBuilder, expanderBuilder: $expanderBuilder, inputHeaderBuilder: $inputHeaderBuilder)';
 }
 
 
@@ -1268,7 +1295,7 @@ abstract mixin class _$InputsNodeUiSettingsCopyWith<$Res> implements $InputsNode
   factory _$InputsNodeUiSettingsCopyWith(_InputsNodeUiSettings value, $Res Function(_InputsNodeUiSettings) _then) = __$InputsNodeUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- int? flex, bool? reverse, String? labelText, String? labelTextWhenChildrenHidden, int? labelMaxLines, String? helperText, String? helperTextWhenChildrenHidden, ChildrenVisibility? childrenVisibility, bool? showChildrenInitially,@PushDefNullableConverter() PushDef? openChildren, Axis? direction, CrossAxisAlignment? crossAxisAlignment, double? spacing,@notSerializable InputNodeWidgetBuilderDef? widgetBuilder,@notSerializable HeaderBuilderDef? headerBuilder,@notSerializable InputNodeWidgetBuilderDef? expanderBuilder,@notSerializable InputHeaderBuilderDef? inputHeaderBuilder
+ int? flex, bool? reverse, String? labelText, String? labelTextWhenChildrenHidden, int? labelMaxLines, String? helperText, int? helperMaxLines, String? helperTextWhenChildrenHidden,@notSerializable Widget? prefixIcon, ChildrenVisibility? childrenVisibility, bool? showChildrenInitially,@PushDefNullableConverter() PushDef? openChildren, Axis? direction, CrossAxisAlignment? crossAxisAlignment, double? spacing,@notSerializable InputNodeWidgetBuilderDef? widgetBuilder,@notSerializable HeaderBuilderDef? headerBuilder,@notSerializable InputNodeWidgetBuilderDef? expanderBuilder,@notSerializable InputHeaderBuilderDef? inputHeaderBuilder
 });
 
 
@@ -1285,7 +1312,7 @@ class __$InputsNodeUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of InputsNodeUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? flex = freezed,Object? reverse = freezed,Object? labelText = freezed,Object? labelTextWhenChildrenHidden = freezed,Object? labelMaxLines = freezed,Object? helperText = freezed,Object? helperTextWhenChildrenHidden = freezed,Object? childrenVisibility = freezed,Object? showChildrenInitially = freezed,Object? openChildren = freezed,Object? direction = freezed,Object? crossAxisAlignment = freezed,Object? spacing = freezed,Object? widgetBuilder = freezed,Object? headerBuilder = freezed,Object? expanderBuilder = freezed,Object? inputHeaderBuilder = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? flex = freezed,Object? reverse = freezed,Object? labelText = freezed,Object? labelTextWhenChildrenHidden = freezed,Object? labelMaxLines = freezed,Object? helperText = freezed,Object? helperMaxLines = freezed,Object? helperTextWhenChildrenHidden = freezed,Object? prefixIcon = freezed,Object? childrenVisibility = freezed,Object? showChildrenInitially = freezed,Object? openChildren = freezed,Object? direction = freezed,Object? crossAxisAlignment = freezed,Object? spacing = freezed,Object? widgetBuilder = freezed,Object? headerBuilder = freezed,Object? expanderBuilder = freezed,Object? inputHeaderBuilder = freezed,}) {
   return _then(_InputsNodeUiSettings(
 flex: freezed == flex ? _self.flex : flex // ignore: cast_nullable_to_non_nullable
 as int?,reverse: freezed == reverse ? _self.reverse : reverse // ignore: cast_nullable_to_non_nullable
@@ -1293,8 +1320,10 @@ as bool?,labelText: freezed == labelText ? _self.labelText : labelText // ignore
 as String?,labelTextWhenChildrenHidden: freezed == labelTextWhenChildrenHidden ? _self.labelTextWhenChildrenHidden : labelTextWhenChildrenHidden // ignore: cast_nullable_to_non_nullable
 as String?,labelMaxLines: freezed == labelMaxLines ? _self.labelMaxLines : labelMaxLines // ignore: cast_nullable_to_non_nullable
 as int?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
-as String?,helperTextWhenChildrenHidden: freezed == helperTextWhenChildrenHidden ? _self.helperTextWhenChildrenHidden : helperTextWhenChildrenHidden // ignore: cast_nullable_to_non_nullable
-as String?,childrenVisibility: freezed == childrenVisibility ? _self.childrenVisibility : childrenVisibility // ignore: cast_nullable_to_non_nullable
+as String?,helperMaxLines: freezed == helperMaxLines ? _self.helperMaxLines : helperMaxLines // ignore: cast_nullable_to_non_nullable
+as int?,helperTextWhenChildrenHidden: freezed == helperTextWhenChildrenHidden ? _self.helperTextWhenChildrenHidden : helperTextWhenChildrenHidden // ignore: cast_nullable_to_non_nullable
+as String?,prefixIcon: freezed == prefixIcon ? _self.prefixIcon : prefixIcon // ignore: cast_nullable_to_non_nullable
+as Widget?,childrenVisibility: freezed == childrenVisibility ? _self.childrenVisibility : childrenVisibility // ignore: cast_nullable_to_non_nullable
 as ChildrenVisibility?,showChildrenInitially: freezed == showChildrenInitially ? _self.showChildrenInitially : showChildrenInitially // ignore: cast_nullable_to_non_nullable
 as bool?,openChildren: freezed == openChildren ? _self.openChildren : openChildren // ignore: cast_nullable_to_non_nullable
 as PushDef?,direction: freezed == direction ? _self.direction : direction // ignore: cast_nullable_to_non_nullable

@@ -46,7 +46,7 @@ class MediaFieldBuilder extends StatelessWidget {
                       ? null
                       : (
                           List<Media>? values, {
-                          UpdateStatus updateStatus = UpdateStatus.yes,
+                          updateStatus = UpdateStatus.yes,
                         }) async {
                           valuesCubit.onValueChanged(
                             path: path,

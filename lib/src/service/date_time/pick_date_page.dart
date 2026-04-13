@@ -28,15 +28,8 @@ class PickDatePage extends StatelessWidget {
   final String? dateFormat;
   final _DisplayMode _displayMode;
 
-  DateTime _clamp(DateTime date) {
-    if (minDate != null && date.isBefore(minDate!)) return minDate!;
-    if (maxDate != null && date.isAfter(maxDate!)) return maxDate!;
-    return date;
-  }
-
-  void selectDate(BuildContext context, DateTime date) {
-    if (_clamp(date) == date) Navigator.of(context).pop(date);
-  }
+  void selectDate(BuildContext context, DateTime date) =>
+      Navigator.of(context).pop(date);
 
   @override
   Widget build(BuildContext context) {

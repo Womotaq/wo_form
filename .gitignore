@@ -159,7 +159,6 @@ app.*.map.json
 /android/app/release
 
 # Firebase
-**/firebase_options.dart
 .firebase/
 firebase-service-account.json
 GoogleService-Info.plist

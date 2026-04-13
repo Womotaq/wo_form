@@ -1,3 +1,13 @@
+## 2.0.2
+
+- Solved minor bugs
+
+## 2.0.1
+
+- Added InputsNodeUiSettings.helperMaxLines
+- Hidden bottom bar when keyboard is visible
+- Added bypassLock in WoFormValuesCubit.onValueChanged
+
 ## 2.0.0
 
 - Merged wo_form_service into wo_form (DateTimeService, GooglePlaces, media handling)
@@ -9,6 +19,7 @@
 - Fixed issues with flex layout, ConditionnalNode, DynamicInputsNode, and SelectInput
 - Better form state management and TextField unfocus behavior
 - Breaking: Removed WoFormNodeMixin/WoFormInputMixin, merged wo_form_service, changed APIs
+- Moved demo back in example folder
 
 ## 1.3.2
 

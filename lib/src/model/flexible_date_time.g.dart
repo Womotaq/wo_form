@@ -26,6 +26,8 @@ TodayDate _$TodayDateFromJson(Map<String, dynamic> json) => TodayDate(
   replaceMonths: (json['replaceMonths'] as num?)?.toInt(),
   replaceDays: (json['replaceDays'] as num?)?.toInt(),
   replaceWeekday: (json['replaceWeekday'] as num?)?.toInt(),
+  replaceHours: (json['replaceHours'] as num?)?.toInt(),
+  replaceMinutes: (json['replaceMinutes'] as num?)?.toInt(),
   $type: json['runtimeType'] as String?,
 );
 
@@ -37,5 +39,7 @@ Map<String, dynamic> _$TodayDateToJson(TodayDate instance) => <String, dynamic>{
   'replaceMonths': instance.replaceMonths,
   'replaceDays': instance.replaceDays,
   'replaceWeekday': instance.replaceWeekday,
+  'replaceHours': instance.replaceHours,
+  'replaceMinutes': instance.replaceMinutes,
   'runtimeType': instance.$type,
 };

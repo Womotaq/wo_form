@@ -56,7 +56,7 @@ class SelectFieldBuilder<T> extends StatelessWidget {
                       ? null
                       : (
                           List<T>? values, {
-                          UpdateStatus updateStatus = UpdateStatus.yes,
+                          updateStatus = UpdateStatus.yes,
                         }) async {
                           if (input.idsOfAvailibleValues != null) {
                             valuesCubit.onValueChanged(

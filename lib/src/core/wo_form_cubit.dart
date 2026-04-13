@@ -32,8 +32,16 @@ class WoFormLockCubit extends Cubit<Set<String>> {
     if (!isClosed) emit(Set<String>.from(state)..add(path));
   }
 
+  void lockInputs({required Iterable<String> paths}) {
+    if (!isClosed) emit(Set<String>.from(state)..addAll(paths));
+  }
+
   void unlockInput({required String path}) {
     if (!isClosed) emit(Set<String>.from(state)..remove(path));
+  }
+
+  void unlockInputs({required Iterable<String> paths}) {
+    if (!isClosed) emit(Set<String>.from(state)..removeAll(paths));
   }
 }
 
@@ -47,7 +55,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     required this.onSubmitting,
   }) : _tempSubmitDatas = [],
        super(_calculateInitialState(_root)) {
-    _initialValues = state.asMap();
+    _initialValues = state;
     if (showErrors == ShowErrors.always) {
       // Update the errors of all visited paths
       SchedulerBinding.instance.addPostFrameCallback((_) => _updateErrors());
@@ -60,7 +68,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   final Future<bool> Function(BuildContext context) _canSubmit;
   final Future<Object?> Function(RootNode root, WoFormValues values)?
   onSubmitting;
-  late Json _initialValues;
+  late WoFormValues _initialValues;
   final Map<String, FocusNode> _focusNodes = {};
 
   /// Called each time a value changed, accordingly to [UpdateStatus].
@@ -110,7 +118,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
   void _didUpdateWoForm(RootNode newRoot) {
     if (!identical(_root, newRoot)) {
       _root = newRoot;
-      _initialValues = _calculateInitialState(_root).asMap();
+      _initialValues = _calculateInitialState(_root);
     }
   }
 
@@ -287,18 +295,29 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     required String path,
     required dynamic value,
     UpdateStatus updateStatus = UpdateStatus.yes,
-  }) => onValuesChanged({path: value}, updateStatus: updateStatus);
+
+    /// If false, an update on a locked input won't have any effect.
+    bool bypassLock = false,
+  }) => onValuesChanged(
+    {path: value},
+    updateStatus: updateStatus,
+    bypassLock: bypassLock,
+  );
 
   /// **Use this method precautiously since there is no type checking !**
   void onValuesChanged(
     Json values, {
     UpdateStatus updateStatus = UpdateStatus.yes,
+
+    /// If false, an update on a locked input won't have any effect.
+    bool bypassLock = false,
   }) {
     // Remove paths of locked inputs and transform any #path
     // ignore: parameter_assignments
     values = {
       for (final entry in values.entries)
-        if (!_lockCubit.inputIsLocked(path: state.getKey(entry.key)))
+        if (bypassLock ||
+            !_lockCubit.inputIsLocked(path: state.getKey(entry.key)))
           state.getKey(entry.key): entry.value,
     };
     if (values.isEmpty) return;
@@ -322,7 +341,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     // If the status isn't updated and we are still at initial state, then the
     // initial state should be updated to match the current state.
     // This allows a FutureNode to update its value without changing isPure.
-    if (!shouldUpdateStatus && isPure) _initialValues = newValues.asMap();
+    if (!shouldUpdateStatus && isPure) _initialValues = newValues;
 
     emit(newValues);
 
@@ -460,14 +479,11 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
     _statusCubit._setSubmitting();
 
-    final oldLocks = _lockCubit.state;
-
-    for (final path in currentNode.getAllInputPaths(
+    final nodesLockWhileSubmitting = currentNode.getAllInputPaths(
       values: state,
       parentPath: submitPath.parentPath,
-    )) {
-      _lockCubit.lockInput(path: path);
-    }
+    );
+    _lockCubit.lockInputs(paths: nodesLockWhileSubmitting);
 
     try {
       final tempSubmitData = _tempSubmitDatas.lastOrNull;
@@ -503,11 +519,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     }
 
     if (_root.uiSettings?.canModifySubmittedValues ?? true) {
-      for (final path in _lockCubit.state) {
-        if (!oldLocks.contains(path)) {
-          _lockCubit.unlockInput(path: path);
-        }
-      }
+      _lockCubit.unlockInputs(paths: nodesLockWhileSubmitting);
     }
   }
 
@@ -546,8 +558,8 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
         );
         return failure == MultistepFailure.endOfForm;
       case MultistepActionPopUntil(
-        predicate: final predicate,
-        replacementStepId: final replacementStepId,
+        :final predicate,
+        :final replacementStepId,
       ):
         final generatedSteps = state.generatedSteps;
         final currentIndex = state.currentStepIndex ?? 0;
@@ -768,9 +780,10 @@ class WoFormValues {
     return null;
   }
 
-  bool isPure({required Json initialValues}) => mapEquals(
+  bool isPure({required WoFormValues initialValues}) => mapEquals(
     asMap()..removeWhere((path, _) => path.startsWith('/__wo_reserved')),
-    initialValues,
+    initialValues.asMap()
+      ..removeWhere((path, _) => path.startsWith('/__wo_reserved')),
   );
 
   /// If the value at [path] is [T], then the value is returned, casted.

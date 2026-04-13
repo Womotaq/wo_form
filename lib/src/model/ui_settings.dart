@@ -108,7 +108,7 @@ abstract class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
     /// Default to [FieldElementLocation.outside].
     FieldElementLocation? prefixIconLocation,
 
-    /// Default to FieldElementLocation.inside
+    /// Default to [FieldElementLocation.inside].
     FieldElementLocation? errorLocation,
     String? addDateText,
     String? addTimeText,
@@ -175,7 +175,13 @@ enum DurationEditMode {
 abstract class DurationInputUiSettings with _$DurationInputUiSettings {
   const factory DurationInputUiSettings({
     String? labelText,
+
+    /// Default to [FieldElementLocation.inside].
+    FieldElementLocation? labelLocation,
     String? helperText,
+
+    /// Default to [FieldElementLocation.inside].
+    FieldElementLocation? helperLocation,
     String? hintText,
     DurationEditMode? editMode,
 
@@ -186,6 +192,14 @@ abstract class DurationInputUiSettings with _$DurationInputUiSettings {
     /// Else, the field will be wrapped in a Flexible with a flex value of 10,
     /// and the header with a flex value of [headerFlex].
     int? headerFlex,
+    @notSerializable Widget? prefixIcon,
+
+    /// Default to [FieldElementLocation.outside].
+    FieldElementLocation? prefixIconLocation,
+
+    /// Default to [FieldElementLocation.inside].
+    FieldElementLocation? errorLocation,
+
     @notSerializable PickDurationDef? pickDuration,
     @notSerializable FormatDurationDef? formatDuration,
     @notSerializable DurationFieldBuilderDef? widgetBuilder,
@@ -214,6 +228,7 @@ abstract class DurationInputUiSettings with _$DurationInputUiSettings {
           hintText: hintText ?? other.hintText,
           editMode: editMode ?? other.editMode,
           headerFlex: headerFlex ?? other.headerFlex,
+          prefixIcon: prefixIcon ?? other.prefixIcon,
           pickDuration: pickDuration ?? other.pickDuration,
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,
           dateTimeLabelText: dateTimeLabelText ?? other.dateTimeLabelText,
@@ -355,10 +370,12 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
     String? labelTextWhenChildrenHidden,
     int? labelMaxLines,
     String? helperText,
+    int? helperMaxLines,
 
     /// If set and not empty, this will replace [helperText] int the field when
     /// the children are hidden (see [InputsNodeUiSettings.childrenVisibility]).
     String? helperTextWhenChildrenHidden,
+    @notSerializable Widget? prefixIcon,
 
     /// Default to always.
     ChildrenVisibility? childrenVisibility,
@@ -415,9 +432,11 @@ abstract class InputsNodeUiSettings with _$InputsNodeUiSettings {
               labelTextWhenChildrenHidden ?? other.labelTextWhenChildrenHidden,
           labelMaxLines: labelMaxLines ?? other.labelMaxLines,
           helperText: helperText ?? other.helperText,
+          helperMaxLines: helperMaxLines ?? other.helperMaxLines,
           helperTextWhenChildrenHidden:
               helperTextWhenChildrenHidden ??
               other.helperTextWhenChildrenHidden,
+          prefixIcon: prefixIcon ?? other.prefixIcon,
           childrenVisibility: childrenVisibility ?? other.childrenVisibility,
           showChildrenInitially:
               showChildrenInitially ?? other.showChildrenInitially,

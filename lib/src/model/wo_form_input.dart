@@ -123,10 +123,6 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
     @Default(false) bool isRequired,
     String? regexPattern,
 
-    /// Use [isLocked] if you want to lock / unlock this input based
-    /// on the value provided by a [ValueBuilderNode] for example.
-    @Default(false) bool isLocked,
-
     @notSerializable SuggestionsSettings<T>? suggestionsSettings,
     @notSerializable GetCustomErrorDef<String>? getCustomError,
     StringInputUiSettings<T>? uiSettings,
@@ -176,7 +172,7 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
         return value as DateTime?;
       case DurationInput():
         return value as Duration?;
-      case MediaInput(uploadPath: final uploadPath):
+      case MediaInput(:final uploadPath):
         if (uploadPath == null) {
           throw AssertionError(
             'You must provide uploadPath in order to use MediaInput.export()',
@@ -218,8 +214,8 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
   WoFormInputError? getError(dynamic value, {required String parentPath}) {
     switch (this) {
       case BooleanInput(
-        isRequired: final isRequired,
-        getCustomError: final getCustomError,
+        :final isRequired,
+        :final getCustomError,
       ):
         value as bool?;
 
@@ -234,10 +230,10 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
             : null;
 
       case DateTimeInput(
-        isRequired: final isRequired,
-        minDate: final minDate,
-        maxDate: final maxDate,
-        getCustomError: final getCustomError,
+        :final isRequired,
+        :final minDate,
+        :final maxDate,
+        :final getCustomError,
       ):
         value as DateTime?;
 
@@ -269,10 +265,10 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
         return null;
 
       case DurationInput(
-        isRequired: final isRequired,
-        minDuration: final minDuration,
-        maxDuration: final maxDuration,
-        getCustomError: final getCustomError,
+        :final isRequired,
+        :final minDuration,
+        :final maxDuration,
+        :final getCustomError,
       ):
         value as Duration?;
 
@@ -301,9 +297,9 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
 
       case MediaInput(
         id: final inputId,
-        minCount: final minCount,
-        maxCount: final maxCount,
-        getCustomError: final getCustomError,
+        :final minCount,
+        :final maxCount,
+        :final getCustomError,
       ):
         return _listValidator<Media>(
           inputId: inputId,
@@ -317,10 +313,10 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
         );
 
       case NumInput(
-        isRequired: final isRequired,
-        minBound: final minBound,
-        maxBound: final maxBound,
-        getCustomError: final getCustomError,
+        :final isRequired,
+        :final minBound,
+        :final maxBound,
+        :final getCustomError,
       ):
         value as num?;
 
@@ -364,10 +360,10 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
         );
 
       case StringInput(
-        isRequired: final isRequired,
-        regexPattern: final regexPattern,
-        getCustomError: final getCustomError,
-        uiSettings: final uiSettings,
+        :final isRequired,
+        :final regexPattern,
+        :final getCustomError,
+        :final uiSettings,
       ):
         value as String?;
 
@@ -409,17 +405,17 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
   @override
   Json getInitialValues({required String parentPath}) {
     switch (this) {
-      case BooleanInput(initialValue: final initialValue):
+      case BooleanInput(:final initialValue):
         return {'$parentPath/$id': initialValue};
-      case DateTimeInput(initialValue: final initialValue):
+      case DateTimeInput(:final initialValue):
         return {'$parentPath/$id': initialValue?.resolve()};
-      case DurationInput(initialValue: final initialValue):
+      case DurationInput(:final initialValue):
         return {'$parentPath/$id': initialValue};
-      case MediaInput(initialValues: final initialValues):
+      case MediaInput(:final initialValues):
         return {'$parentPath/$id': initialValues};
-      case NumInput(initialValue: final initialValue):
+      case NumInput(:final initialValue):
         return {'$parentPath/$id': initialValue};
-      case StringInput(initialValue: final initialValue):
+      case StringInput(:final initialValue):
         return {'$parentPath/$id': initialValue};
       case SelectInput(initialValues: final initialValues):
         return {'$parentPath/$id': initialValues};

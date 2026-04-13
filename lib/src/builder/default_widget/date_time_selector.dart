@@ -37,7 +37,9 @@ class DateTimeSelector extends StatelessWidget {
     );
 
     if (selectedDate != null) {
-      final initialDate = dateTime == null ? DateTime.now() : dateTime!;
+      final initialDate = dateTime == null
+          ? DateTime.now().copyWith(minute: 00)
+          : dateTime!;
 
       onChanged!(
         settings.editMode == DateEditMode.date

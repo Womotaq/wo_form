@@ -126,7 +126,6 @@ class _SearchBuilderState<T> extends State<SearchBuilder<T>> {
 
     Iterable<(double, T)> scoredItems = loadedData
         .map((item) => (widget.searchScore(_query, item), item))
-        .toList()
         .sortedBy((data) => -data.$1);
     if (_query.clean.isNotEmpty) {
       scoredItems = scoredItems.where((data) => data.$1 > 0);
@@ -174,7 +173,8 @@ class WoFormQuery {
   final String clean;
 
   /// Return a string adapted to querying
-  static String toQuery(String str) => removeDiacritics(str.toLowerCase());
+  static String toQuery(String str) =>
+      removeDiacritics(str.toLowerCase()).trim();
 
   /// Default method that returns a search score for a given [text].
   double searchScore(String? text) {

@@ -16,20 +16,19 @@ class InputsNodeWidgetBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     final node = getNode(context);
 
-    return Builder(
-      builder: (context) {
+    return BlocSelector<WoFormLockCubit, Set<String>, bool>(
+      selector: (lockedInputs) => lockedInputs.contains(path),
+      builder: (context, inputIsLocked) {
         switch (node.uiSettings?.childrenVisibility) {
           case null:
           case ChildrenVisibility.always:
-            final fieldData = WoFieldData(
+            final fieldData = WoFieldData<InputsNode<Object?>, void>(
               path: path,
               input: node,
               value: null,
-              onValueChanged:
-                  (
-                    _, {
-                    UpdateStatus updateStatus = UpdateStatus.yes,
-                  }) {},
+              onValueChanged: inputIsLocked
+                  ? null
+                  : (_, {updateStatus = UpdateStatus.yes}) {},
             );
 
             return (node.uiSettings?.widgetBuilder ??
@@ -52,16 +51,14 @@ class InputsNodeWidgetBuilder extends StatelessWidget {
                     ? context.woFormL10n.errors(nErrors)
                     : null;
 
-                final expanderData = WoFieldData(
+                final expanderData = WoFieldData<InputsNode<Object?>, void>(
                   path: path,
                   input: node,
                   value: null,
                   errorText: errorText,
-                  onValueChanged:
-                      (
-                        _, {
-                        UpdateStatus updateStatus = UpdateStatus.yes,
-                      }) {},
+                  onValueChanged: inputIsLocked
+                      ? null
+                      : (_, {updateStatus = UpdateStatus.yes}) {},
                 );
 
                 return (node.uiSettings?.expanderBuilder ??

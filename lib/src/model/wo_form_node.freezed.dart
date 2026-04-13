@@ -35,6 +35,10 @@ WoFormNode<T> _$WoFormNodeFromJson<T extends Object?>(
           return InputsNode<T>.fromJson(
             json
           );
+                case 'locker':
+          return LockerNode<T>.fromJson(
+            json
+          );
                 case 'pathBuilder':
           return PathBuilderNode<T>.fromJson(
             json
@@ -654,6 +658,94 @@ $ExportSettingsCopyWith<$Res>? get exportSettings {
 
   return $ExportSettingsCopyWith<$Res>(_self.exportSettings!, (value) {
     return _then(_self.copyWith(exportSettings: value));
+  });
+}
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class LockerNode<T extends Object?> extends WoFormNode<T> {
+  const LockerNode({required this.id, required this.isLocked, @InputConverter() required this.child, final  String? $type}): $type = $type ?? 'locker',super._();
+  factory LockerNode.fromJson(Map<String, dynamic> json) => _$LockerNodeFromJson(json);
+
+@override final  String id;
+/// Use [isLocked] to lock / unlock this node and its descendants based
+/// for example on a value provided by a [ValueBuilderNode].
+ final  bool isLocked;
+@InputConverter() final  WoFormNode child;
+
+@JsonKey(name: 'runtimeType')
+final String $type;
+
+
+/// Create a copy of WoFormNode
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LockerNodeCopyWith<T, LockerNode<T>> get copyWith => _$LockerNodeCopyWithImpl<T, LockerNode<T>>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$LockerNodeToJson<T>(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LockerNode<T>&&(identical(other.id, id) || other.id == id)&&(identical(other.isLocked, isLocked) || other.isLocked == isLocked)&&(identical(other.child, child) || other.child == child));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,isLocked,child);
+
+@override
+String toString() {
+  return 'WoFormNode<$T>.locker(id: $id, isLocked: $isLocked, child: $child)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $LockerNodeCopyWith<T extends Object?,$Res> implements $WoFormNodeCopyWith<T, $Res> {
+  factory $LockerNodeCopyWith(LockerNode<T> value, $Res Function(LockerNode<T>) _then) = _$LockerNodeCopyWithImpl;
+@override @useResult
+$Res call({
+ String id, bool isLocked,@InputConverter() WoFormNode child
+});
+
+
+$WoFormNodeCopyWith<Object?, $Res> get child;
+
+}
+/// @nodoc
+class _$LockerNodeCopyWithImpl<T extends Object?,$Res>
+    implements $LockerNodeCopyWith<T, $Res> {
+  _$LockerNodeCopyWithImpl(this._self, this._then);
+
+  final LockerNode<T> _self;
+  final $Res Function(LockerNode<T>) _then;
+
+/// Create a copy of WoFormNode
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? isLocked = null,Object? child = null,}) {
+  return _then(LockerNode<T>(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,isLocked: null == isLocked ? _self.isLocked : isLocked // ignore: cast_nullable_to_non_nullable
+as bool,child: null == child ? _self.child : child // ignore: cast_nullable_to_non_nullable
+as WoFormNode,
+  ));
+}
+
+/// Create a copy of WoFormNode
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$WoFormNodeCopyWith<Object?, $Res> get child {
+  
+  return $WoFormNodeCopyWith<Object?, $Res>(_self.child, (value) {
+    return _then(_self.copyWith(child: value));
   });
 }
 }
@@ -2141,16 +2233,13 @@ $NumInputUiSettingsCopyWith<$Res>? get uiSettings {
 @JsonSerializable()
 
 class StringInput<T extends Object?> extends WoFormInput<T> {
-  const StringInput({required this.id, this.initialValue, this.isRequired = false, this.regexPattern, this.isLocked = false, @notSerializable this.suggestionsSettings, @notSerializable this.getCustomError, this.uiSettings, final  String? $type}): $type = $type ?? 'string',super._();
+  const StringInput({required this.id, this.initialValue, this.isRequired = false, this.regexPattern, @notSerializable this.suggestionsSettings, @notSerializable this.getCustomError, this.uiSettings, final  String? $type}): $type = $type ?? 'string',super._();
   factory StringInput.fromJson(Map<String, dynamic> json) => _$StringInputFromJson(json);
 
 @override final  String id;
  final  String? initialValue;
 @JsonKey() final  bool isRequired;
  final  String? regexPattern;
-/// Use [isLocked] if you want to lock / unlock this input based
-/// on the value provided by a [ValueBuilderNode] for example.
-@JsonKey() final  bool isLocked;
 @notSerializable final  SuggestionsSettings<T>? suggestionsSettings;
 @override@notSerializable final  GetCustomErrorDef<String>? getCustomError;
 @override final  StringInputUiSettings<T>? uiSettings;
@@ -2172,16 +2261,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StringInput<T>&&(identical(other.id, id) || other.id == id)&&(identical(other.initialValue, initialValue) || other.initialValue == initialValue)&&(identical(other.isRequired, isRequired) || other.isRequired == isRequired)&&(identical(other.regexPattern, regexPattern) || other.regexPattern == regexPattern)&&(identical(other.isLocked, isLocked) || other.isLocked == isLocked)&&(identical(other.suggestionsSettings, suggestionsSettings) || other.suggestionsSettings == suggestionsSettings)&&(identical(other.getCustomError, getCustomError) || other.getCustomError == getCustomError)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StringInput<T>&&(identical(other.id, id) || other.id == id)&&(identical(other.initialValue, initialValue) || other.initialValue == initialValue)&&(identical(other.isRequired, isRequired) || other.isRequired == isRequired)&&(identical(other.regexPattern, regexPattern) || other.regexPattern == regexPattern)&&(identical(other.suggestionsSettings, suggestionsSettings) || other.suggestionsSettings == suggestionsSettings)&&(identical(other.getCustomError, getCustomError) || other.getCustomError == getCustomError)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,initialValue,isRequired,regexPattern,isLocked,suggestionsSettings,getCustomError,uiSettings);
+int get hashCode => Object.hash(runtimeType,id,initialValue,isRequired,regexPattern,suggestionsSettings,getCustomError,uiSettings);
 
 @override
 String toString() {
-  return 'WoFormInput<$T>.string(id: $id, initialValue: $initialValue, isRequired: $isRequired, regexPattern: $regexPattern, isLocked: $isLocked, suggestionsSettings: $suggestionsSettings, getCustomError: $getCustomError, uiSettings: $uiSettings)';
+  return 'WoFormInput<$T>.string(id: $id, initialValue: $initialValue, isRequired: $isRequired, regexPattern: $regexPattern, suggestionsSettings: $suggestionsSettings, getCustomError: $getCustomError, uiSettings: $uiSettings)';
 }
 
 
@@ -2192,7 +2281,7 @@ abstract mixin class $StringInputCopyWith<T extends Object?,$Res> implements $Wo
   factory $StringInputCopyWith(StringInput<T> value, $Res Function(StringInput<T>) _then) = _$StringInputCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String? initialValue, bool isRequired, String? regexPattern, bool isLocked,@notSerializable SuggestionsSettings<T>? suggestionsSettings,@notSerializable GetCustomErrorDef<String>? getCustomError, StringInputUiSettings<T>? uiSettings
+ String id, String? initialValue, bool isRequired, String? regexPattern,@notSerializable SuggestionsSettings<T>? suggestionsSettings,@notSerializable GetCustomErrorDef<String>? getCustomError, StringInputUiSettings<T>? uiSettings
 });
 
 
@@ -2209,14 +2298,13 @@ class _$StringInputCopyWithImpl<T extends Object?,$Res>
 
 /// Create a copy of WoFormInput
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? initialValue = freezed,Object? isRequired = null,Object? regexPattern = freezed,Object? isLocked = null,Object? suggestionsSettings = freezed,Object? getCustomError = freezed,Object? uiSettings = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? initialValue = freezed,Object? isRequired = null,Object? regexPattern = freezed,Object? suggestionsSettings = freezed,Object? getCustomError = freezed,Object? uiSettings = freezed,}) {
   return _then(StringInput<T>(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,initialValue: freezed == initialValue ? _self.initialValue : initialValue // ignore: cast_nullable_to_non_nullable
 as String?,isRequired: null == isRequired ? _self.isRequired : isRequired // ignore: cast_nullable_to_non_nullable
 as bool,regexPattern: freezed == regexPattern ? _self.regexPattern : regexPattern // ignore: cast_nullable_to_non_nullable
-as String?,isLocked: null == isLocked ? _self.isLocked : isLocked // ignore: cast_nullable_to_non_nullable
-as bool,suggestionsSettings: freezed == suggestionsSettings ? _self.suggestionsSettings : suggestionsSettings // ignore: cast_nullable_to_non_nullable
+as String?,suggestionsSettings: freezed == suggestionsSettings ? _self.suggestionsSettings : suggestionsSettings // ignore: cast_nullable_to_non_nullable
 as SuggestionsSettings<T>?,getCustomError: freezed == getCustomError ? _self.getCustomError : getCustomError // ignore: cast_nullable_to_non_nullable
 as GetCustomErrorDef<String>?,uiSettings: freezed == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
 as StringInputUiSettings<T>?,
