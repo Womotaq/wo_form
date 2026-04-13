@@ -1,3 +1,7 @@
+## 2.0.3
+
+- Fixed WoFormValues.isPure()
+
 ## 2.0.2
 
 - Solved minor bugs
