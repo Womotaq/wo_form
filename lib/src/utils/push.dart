@@ -207,20 +207,26 @@ class _DraggableScrollableControllerProviderState
     final mediaQuery = MediaQuery.of(context);
     final keyboardSize = mediaQuery.viewInsets.bottom / mediaQuery.size.height;
     if (keyboardSize != _keyboardSize) {
-      final delta = keyboardSize - _keyboardSize;
-      final newControllerSizeRaw = clampDouble(_controller.size + delta, 0, 1);
-      final double newTotalDelta = max(
-        0,
-        _totalDelta + newControllerSizeRaw - _controller.size,
-      );
-      final effectiveDelta = newTotalDelta - _totalDelta;
-      final newControllerSize = _controller.size + effectiveDelta;
-      _totalDelta = newTotalDelta;
-      _keyboardSize = keyboardSize;
+      if (_controller.isAttached) {
+        final delta = keyboardSize - _keyboardSize;
+        final newControllerSizeRaw = clampDouble(
+          _controller.size + delta,
+          0,
+          1,
+        );
+        final double newTotalDelta = max(
+          0,
+          _totalDelta + newControllerSizeRaw - _controller.size,
+        );
+        final effectiveDelta = newTotalDelta - _totalDelta;
+        final newControllerSize = _controller.size + effectiveDelta;
+        _totalDelta = newTotalDelta;
+        _keyboardSize = keyboardSize;
 
-      SchedulerBinding.instance.addPostFrameCallback(
-        (_) => _controller.jumpTo(newControllerSize),
-      );
+        SchedulerBinding.instance.addPostFrameCallback(
+          (_) => _controller.jumpTo(newControllerSize),
+        );
+      }
     }
 
     return widget.builder(context, _controller);
