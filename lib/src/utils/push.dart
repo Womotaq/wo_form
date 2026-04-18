@@ -169,8 +169,6 @@ class PushDefNullableConverter extends JsonConverter<PushDef?, String?> {
   };
 }
 
-/// This widget provides a DraggableScrollableController with the ability
-/// to adjust its size based on the keyboard.
 class DraggableScrollableControllerProvider extends StatefulWidget {
   const DraggableScrollableControllerProvider({
     required this.builder,
@@ -189,46 +187,75 @@ class DraggableScrollableControllerProvider extends StatefulWidget {
 }
 
 class _DraggableScrollableControllerProviderState
-    extends State<DraggableScrollableControllerProvider> {
+    extends State<DraggableScrollableControllerProvider>
+    with WidgetsBindingObserver {
   final DraggableScrollableController _controller =
       DraggableScrollableController();
-  // Between 0 and 1, pourcent of sreen height
+
   double _keyboardSize = 0;
   double _totalDelta = 0;
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _controller.dispose();
     super.dispose();
   }
 
+  /// This is called automatically whenever the keyboard slides up or down.
   @override
-  Widget build(BuildContext context) {
-    final mediaQuery = MediaQuery.of(context);
-    final keyboardSize = mediaQuery.viewInsets.bottom / mediaQuery.size.height;
-    if (keyboardSize != _keyboardSize) {
+  void didChangeMetrics() {
+    _handleKeyboardMetrics();
+  }
+
+  void _handleKeyboardMetrics() {
+    final view = View.of(context);
+    final bottomInset = view.viewInsets.bottom;
+    final screenHeight = view.physicalSize.height / view.devicePixelRatio;
+
+    final currentKeyboardSize = bottomInset / screenHeight;
+
+    if (currentKeyboardSize != _keyboardSize) {
       if (_controller.isAttached) {
-        final delta = keyboardSize - _keyboardSize;
+        final delta = currentKeyboardSize - _keyboardSize;
+
         final newControllerSizeRaw = clampDouble(
           _controller.size + delta,
           0,
           1,
         );
+
         final double newTotalDelta = max(
           0,
           _totalDelta + newControllerSizeRaw - _controller.size,
         );
+
         final effectiveDelta = newTotalDelta - _totalDelta;
         final newControllerSize = _controller.size + effectiveDelta;
-        _totalDelta = newTotalDelta;
-        _keyboardSize = keyboardSize;
 
-        SchedulerBinding.instance.addPostFrameCallback(
-          (_) => _controller.jumpTo(newControllerSize),
-        );
+        _totalDelta = newTotalDelta;
+        _keyboardSize = currentKeyboardSize;
+
+        // Use SchedulerBinding to ensure the jump happens after the
+        // current engine pass, avoiding layout conflicts.
+        SchedulerBinding.instance.addPostFrameCallback((_) {
+          if (_controller.isAttached) {
+            _controller.jumpTo(newControllerSize);
+          }
+        });
+      } else {
+        // Even if not attached, keep track of the keyboard state
+        _keyboardSize = currentKeyboardSize;
       }
     }
-
-    return widget.builder(context, _controller);
   }
+
+  @override
+  Widget build(BuildContext context) => widget.builder(context, _controller);
 }
