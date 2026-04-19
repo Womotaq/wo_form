@@ -64,6 +64,7 @@ class Push {
     LayoutMethod layout = LayoutMethod.scrollable,
     bool dismissible = true,
     double initialBottomSheetSize = .7,
+    Color? backgroundColor,
   }) => showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -73,6 +74,7 @@ class Push {
     // still can be closed by swapping down, so we need to disable it.
     enableDrag: dismissible,
     clipBehavior: Clip.hardEdge,
+    backgroundColor: backgroundColor,
     builder: (context) => switch (layout) {
       LayoutMethod.scrollable => DraggableScrollableControllerProvider(
         builder: (context, draggableController) => DraggableScrollableSheet(
