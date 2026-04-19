@@ -70,18 +70,6 @@ class EventsPage extends StatelessWidget {
   }
 }
 
-class CreateEventButton extends StatelessWidget {
-  const CreateEventButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: () {},
-      icon: const Icon(Icons.add),
-    );
-  }
-}
-
 class EventCard extends StatelessWidget {
   const EventCard(this.event, {super.key});
 

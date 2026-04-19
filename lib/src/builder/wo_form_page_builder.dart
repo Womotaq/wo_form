@@ -140,29 +140,31 @@ class _WoFormMultistepBody extends StatelessWidget {
             );
 
             return Builder(
-              builder: (context) => ConstrainedColumn(
-                maxWidth: woFormTheme?.maxWidth ?? WoFormTheme.MAX_WIDTH,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(
-                    // 0 means shrinking
-                    flex:
-                        uiSettings.layout.supportFlex &&
-                            (step.flex(context, parentPath: '') ?? 0) == 0
-                        ? 0
-                        : 1,
-                    child: uiSettings.layout.isScrollable
-                        ? SingleChildScrollView(
-                            controller: scrollController,
-                            child: stepWidget,
-                          )
-                        : stepWidget,
-                  ),
-                  if (uiSettings.submitButtonPosition ==
-                      SubmitButtonPosition.body)
-                    SubmitButtonBuilder(path: '/${step.id}'),
-                ],
-              ),
+              builder: (context) {
+                final stepFlex = step.flex(context, parentPath: '') ?? 0;
+
+                return ConstrainedColumn(
+                  maxWidth: woFormTheme?.maxWidth ?? WoFormTheme.MAX_WIDTH,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(
+                      // 0 means shrinking
+                      flex: uiSettings.layout.supportFlex && stepFlex == 0
+                          ? 0
+                          : 1,
+                      child: uiSettings.layout.isScrollable && stepFlex <= 0
+                          ? SingleChildScrollView(
+                              controller: scrollController,
+                              child: stepWidget,
+                            )
+                          : stepWidget,
+                    ),
+                    if (uiSettings.submitButtonPosition ==
+                        SubmitButtonPosition.body)
+                      SubmitButtonBuilder(path: '/${step.id}'),
+                  ],
+                );
+              },
             );
           },
         );
