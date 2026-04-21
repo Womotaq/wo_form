@@ -132,6 +132,9 @@ class _StringFieldState<T> extends State<StringField<T>> {
             hintText: uiSettings?.hintText,
           )
         : InputDecoration(
+            floatingLabelBehavior: (uiSettings?.maxLines ?? 0) > 1
+                ? FloatingLabelBehavior.always
+                : null,
             labelText: labelLocation.isInside ? uiSettings?.labelText : null,
             helperText: helperLocation.isInside && uiSettings?.helper == null
                 ? uiSettings?.helperText
