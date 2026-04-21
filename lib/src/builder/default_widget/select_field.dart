@@ -32,6 +32,7 @@ class SelectField<T> extends StatelessWidget {
               builder: (context) {
                 final headerData = WoFormInputHeaderData(
                   labelText: uiSettings?.labelText,
+                  labelMaxLines: uiSettings?.labelMaxLines,
                   helperText: uiSettings?.helperText,
                   errorText: data.errorText,
                   trailing: scoreWidget,
@@ -99,6 +100,7 @@ class SelectField<T> extends StatelessWidget {
           return FlexField(
             headerFlex: uiSettings?.headerFlex,
             labelText: uiSettings?.labelText,
+            labelMaxLines: uiSettings?.labelMaxLines,
             helperText: uiSettings?.helperText,
             errorText: data.errorText,
             trailing: scoreWidget,
@@ -117,6 +119,7 @@ class SelectField<T> extends StatelessWidget {
         } else {
           final headerData = WoFormInputHeaderData(
             labelText: uiSettings?.labelText,
+            labelMaxLines: uiSettings?.labelMaxLines,
             helperText: uiSettings?.helperText,
             errorText: data.errorText,
             trailing: Row(

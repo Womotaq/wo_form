@@ -367,6 +367,7 @@ _SelectInputUiSettings<T> _$SelectInputUiSettingsFromJson<T>(
 ) => _SelectInputUiSettings<T>(
   flex: (json['flex'] as num?)?.toInt(),
   labelText: json['labelText'] as String?,
+  labelMaxLines: (json['labelMaxLines'] as num?)?.toInt(),
   helperText: json['helperText'] as String?,
   hintText: json['hintText'] as String?,
   childrenVisibility: $enumDecodeNullable(
@@ -389,6 +390,7 @@ Map<String, dynamic> _$SelectInputUiSettingsToJson<T>(
 ) => <String, dynamic>{
   'flex': instance.flex,
   'labelText': instance.labelText,
+  'labelMaxLines': instance.labelMaxLines,
   'helperText': instance.helperText,
   'hintText': instance.hintText,
   'childrenVisibility':
