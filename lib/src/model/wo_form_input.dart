@@ -519,8 +519,8 @@ abstract class SelectInput<T> extends WoFormInput<T> with _$SelectInput<T> {
   )
   const factory SelectInput({
     required String id,
-    required int? maxCount,
     @Default(0) int minCount,
+    required int? maxCount,
     List<T>? initialValues,
     @Default([]) List<T> availibleValues,
 
