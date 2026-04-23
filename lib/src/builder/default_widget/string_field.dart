@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:phone_form_field/phone_form_field.dart';
@@ -16,6 +17,7 @@ class StringField<T extends Object?> extends StatefulWidget {
     this.suggestionsSettings,
     this.errorText,
     this.errorWidget,
+    this.maxLength,
     super.key,
   });
 
@@ -27,6 +29,7 @@ class StringField<T extends Object?> extends StatefulWidget {
         suggestionsSettings: data.input.suggestionsSettings,
         errorText: data.errorText,
         errorWidget: data.errorWidget,
+        maxLength: data.input.maxLength,
       );
 
   final String? text;
@@ -35,7 +38,7 @@ class StringField<T extends Object?> extends StatefulWidget {
   final SuggestionsSettings<T>? suggestionsSettings;
   final String? errorText;
   final Widget? errorWidget;
-  // final WoFieldData<StringInput, String> data;
+  final int? maxLength;
 
   @override
   State<StringField> createState() => _StringFieldState<T>();
@@ -172,9 +175,24 @@ class _StringFieldState<T> extends State<StringField<T>> {
                     : const Icon(Icons.visibility_outlined),
               ),
             },
+            counter: widget.maxLength == null
+                ? null
+                : (uiSettings?.counterBuilder ??
+                          woFormTheme?.stringFieldCounterBuilder)
+                      ?.call(
+                        (widget.text ?? '').length,
+                        widget.maxLength!,
+                      ),
+            counterText: widget.maxLength == null
+                ? null
+                : '${(widget.text ?? '').length}/${widget.maxLength}',
           );
 
     final suggestionsSettings = widget.suggestionsSettings;
+    final formatters = [
+      if (widget.maxLength != null)
+        LengthLimitingTextInputFormatter(widget.maxLength),
+    ];
 
     final textField = suggestionsSettings != null
         ? TypeAheadField<T>(
@@ -228,9 +246,7 @@ class _StringFieldState<T> extends State<StringField<T>> {
               maxLines: uiSettings?.maxLines == 0
                   ? null
                   : uiSettings?.maxLines ?? 1,
-              inputFormatters: const [
-                // LATER : LengthLimitingTextInputFormatter
-              ],
+              inputFormatters: formatters,
               decoration: inputDecoration,
             ),
             itemBuilder: (context, suggestion) =>
@@ -276,6 +292,7 @@ class _StringFieldState<T> extends State<StringField<T>> {
             autofillHints: uiSettings?.autofillHints,
             autofocus: autofocus,
             textInputAction: uiSettings?.textInputAction,
+            inputFormatters: formatters,
             decoration: inputDecoration,
             countrySelectorNavigator:
                 const CountrySelectorNavigator.draggableBottomSheet(),
@@ -313,9 +330,7 @@ class _StringFieldState<T> extends State<StringField<T>> {
             maxLines: uiSettings?.maxLines == 0
                 ? null
                 : uiSettings?.maxLines ?? 1,
-            inputFormatters: const [
-              // LATER : LengthLimitingTextInputFormatter
-            ],
+            inputFormatters: formatters,
             decoration: inputDecoration,
           );
 

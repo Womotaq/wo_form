@@ -122,6 +122,7 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
     String? initialValue,
     @Default(false) bool isRequired,
     String? regexPattern,
+    int? maxLength,
 
     @notSerializable SuggestionsSettings<T>? suggestionsSettings,
     @notSerializable GetCustomErrorDef<String>? getCustomError,
@@ -362,6 +363,7 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
       case StringInput(
         :final isRequired,
         :final regexPattern,
+        :final maxLength,
         :final getCustomError,
         :final uiSettings,
       ):
@@ -383,6 +385,8 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
             path: '$parentPath/$id',
             message: uiSettings?.invalidRegexMessage ?? '',
           );
+        } else if (maxLength != null && value.length > maxLength) {
+          return WoFormInputError.maxBound(path: '$parentPath/$id');
         } else {
           return null;
         }

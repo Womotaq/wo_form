@@ -681,6 +681,7 @@ enum WoFormAutofocus {
 typedef StringFieldBuilderDef<T extends Object?> =
     Widget Function(WoFieldData<StringInput<T>, String> data);
 typedef ErrorBuilderDef = Widget Function(WoFormInputError error);
+typedef CounterBuilderDef = Widget Function(int length, int maxLength);
 
 @freezed
 abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
@@ -756,6 +757,7 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     @notSerializable TextStyle? style,
     @notSerializable StringFieldBuilderDef<T>? widgetBuilder,
     @notSerializable ErrorBuilderDef? errorBuilder,
+    @notSerializable CounterBuilderDef? counterBuilder,
   }) = _StringInputUiSettings<T>;
 
   factory StringInputUiSettings.email({

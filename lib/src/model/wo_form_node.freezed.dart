@@ -2239,13 +2239,14 @@ $NumInputUiSettingsCopyWith<$Res>? get uiSettings {
 @JsonSerializable()
 
 class StringInput<T extends Object?> extends WoFormInput<T> {
-  const StringInput({required this.id, this.initialValue, this.isRequired = false, this.regexPattern, @notSerializable this.suggestionsSettings, @notSerializable this.getCustomError, this.uiSettings, final  String? $type}): $type = $type ?? 'string',super._();
+  const StringInput({required this.id, this.initialValue, this.isRequired = false, this.regexPattern, this.maxLength, @notSerializable this.suggestionsSettings, @notSerializable this.getCustomError, this.uiSettings, final  String? $type}): $type = $type ?? 'string',super._();
   factory StringInput.fromJson(Map<String, dynamic> json) => _$StringInputFromJson(json);
 
 @override final  String id;
  final  String? initialValue;
 @JsonKey() final  bool isRequired;
  final  String? regexPattern;
+ final  int? maxLength;
 @notSerializable final  SuggestionsSettings<T>? suggestionsSettings;
 @override@notSerializable final  GetCustomErrorDef<String>? getCustomError;
 @override final  StringInputUiSettings<T>? uiSettings;
@@ -2267,16 +2268,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StringInput<T>&&(identical(other.id, id) || other.id == id)&&(identical(other.initialValue, initialValue) || other.initialValue == initialValue)&&(identical(other.isRequired, isRequired) || other.isRequired == isRequired)&&(identical(other.regexPattern, regexPattern) || other.regexPattern == regexPattern)&&(identical(other.suggestionsSettings, suggestionsSettings) || other.suggestionsSettings == suggestionsSettings)&&(identical(other.getCustomError, getCustomError) || other.getCustomError == getCustomError)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StringInput<T>&&(identical(other.id, id) || other.id == id)&&(identical(other.initialValue, initialValue) || other.initialValue == initialValue)&&(identical(other.isRequired, isRequired) || other.isRequired == isRequired)&&(identical(other.regexPattern, regexPattern) || other.regexPattern == regexPattern)&&(identical(other.maxLength, maxLength) || other.maxLength == maxLength)&&(identical(other.suggestionsSettings, suggestionsSettings) || other.suggestionsSettings == suggestionsSettings)&&(identical(other.getCustomError, getCustomError) || other.getCustomError == getCustomError)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,initialValue,isRequired,regexPattern,suggestionsSettings,getCustomError,uiSettings);
+int get hashCode => Object.hash(runtimeType,id,initialValue,isRequired,regexPattern,maxLength,suggestionsSettings,getCustomError,uiSettings);
 
 @override
 String toString() {
-  return 'WoFormInput<$T>.string(id: $id, initialValue: $initialValue, isRequired: $isRequired, regexPattern: $regexPattern, suggestionsSettings: $suggestionsSettings, getCustomError: $getCustomError, uiSettings: $uiSettings)';
+  return 'WoFormInput<$T>.string(id: $id, initialValue: $initialValue, isRequired: $isRequired, regexPattern: $regexPattern, maxLength: $maxLength, suggestionsSettings: $suggestionsSettings, getCustomError: $getCustomError, uiSettings: $uiSettings)';
 }
 
 
@@ -2287,7 +2288,7 @@ abstract mixin class $StringInputCopyWith<T extends Object?,$Res> implements $Wo
   factory $StringInputCopyWith(StringInput<T> value, $Res Function(StringInput<T>) _then) = _$StringInputCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String? initialValue, bool isRequired, String? regexPattern,@notSerializable SuggestionsSettings<T>? suggestionsSettings,@notSerializable GetCustomErrorDef<String>? getCustomError, StringInputUiSettings<T>? uiSettings
+ String id, String? initialValue, bool isRequired, String? regexPattern, int? maxLength,@notSerializable SuggestionsSettings<T>? suggestionsSettings,@notSerializable GetCustomErrorDef<String>? getCustomError, StringInputUiSettings<T>? uiSettings
 });
 
 
@@ -2304,13 +2305,14 @@ class _$StringInputCopyWithImpl<T extends Object?,$Res>
 
 /// Create a copy of WoFormInput
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? initialValue = freezed,Object? isRequired = null,Object? regexPattern = freezed,Object? suggestionsSettings = freezed,Object? getCustomError = freezed,Object? uiSettings = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? initialValue = freezed,Object? isRequired = null,Object? regexPattern = freezed,Object? maxLength = freezed,Object? suggestionsSettings = freezed,Object? getCustomError = freezed,Object? uiSettings = freezed,}) {
   return _then(StringInput<T>(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,initialValue: freezed == initialValue ? _self.initialValue : initialValue // ignore: cast_nullable_to_non_nullable
 as String?,isRequired: null == isRequired ? _self.isRequired : isRequired // ignore: cast_nullable_to_non_nullable
 as bool,regexPattern: freezed == regexPattern ? _self.regexPattern : regexPattern // ignore: cast_nullable_to_non_nullable
-as String?,suggestionsSettings: freezed == suggestionsSettings ? _self.suggestionsSettings : suggestionsSettings // ignore: cast_nullable_to_non_nullable
+as String?,maxLength: freezed == maxLength ? _self.maxLength : maxLength // ignore: cast_nullable_to_non_nullable
+as int?,suggestionsSettings: freezed == suggestionsSettings ? _self.suggestionsSettings : suggestionsSettings // ignore: cast_nullable_to_non_nullable
 as SuggestionsSettings<T>?,getCustomError: freezed == getCustomError ? _self.getCustomError : getCustomError // ignore: cast_nullable_to_non_nullable
 as GetCustomErrorDef<String>?,uiSettings: freezed == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
 as StringInputUiSettings<T>?,

@@ -481,6 +481,7 @@ StringInput<T> _$StringInputFromJson<T extends Object?>(
   initialValue: json['initialValue'] as String?,
   isRequired: json['isRequired'] as bool? ?? false,
   regexPattern: json['regexPattern'] as String?,
+  maxLength: (json['maxLength'] as num?)?.toInt(),
   uiSettings: json['uiSettings'] == null
       ? null
       : StringInputUiSettings<T>.fromJson(
@@ -496,6 +497,7 @@ Map<String, dynamic> _$StringInputToJson<T extends Object?>(
   'initialValue': instance.initialValue,
   'isRequired': instance.isRequired,
   'regexPattern': instance.regexPattern,
+  'maxLength': instance.maxLength,
   'uiSettings': instance.uiSettings?.toJson(),
   'runtimeType': instance.$type,
 };

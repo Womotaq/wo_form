@@ -57,6 +57,7 @@ abstract class WoFormThemeData with _$WoFormThemeData {
     @notSerializable SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
     @notSerializable ScaffoldBuilderDef? standardScaffoldBuilder,
     @notSerializable StringFieldBuilderDef? stringFieldBuilder,
+    @notSerializable CounterBuilderDef? stringFieldCounterBuilder,
     FieldElementLocation? stringFieldErrorLocation,
     FieldElementLocation? stringFieldHelperLocation,
     FieldElementLocation? stringFieldLabelLocation,
@@ -132,6 +133,8 @@ abstract class WoFormThemeData with _$WoFormThemeData {
           standardScaffoldBuilder:
               standardScaffoldBuilder ?? other.standardScaffoldBuilder,
           stringFieldBuilder: stringFieldBuilder ?? other.stringFieldBuilder,
+          stringFieldCounterBuilder:
+              stringFieldCounterBuilder ?? other.stringFieldCounterBuilder,
           stringFieldErrorLocation:
               stringFieldErrorLocation ?? other.stringFieldErrorLocation,
           stringFieldHelperLocation:
