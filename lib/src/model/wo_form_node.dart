@@ -1096,6 +1096,9 @@ abstract class DynamicInputTemplate with _$DynamicInputTemplate {
   )
   factory DynamicInputTemplate({
     @InputNullableConverter() WoFormNode? child,
+
+    /// [childBuilder] has better reload results the [child],
+    /// it's just a DX option.
     @notSerializable WoFormNode Function()? childBuilder,
     @Default(DynamicInputUiSettings()) DynamicInputUiSettings uiSettings,
   }) = _DynamicInputTemplate;

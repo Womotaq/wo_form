@@ -1391,7 +1391,9 @@ $InputUiSettingsCopyWith<$Res>? get uiSettings {
 /// @nodoc
 mixin _$DynamicInputTemplate {
 
-@InputNullableConverter() WoFormNode? get child;@notSerializable WoFormNode Function()? get childBuilder; DynamicInputUiSettings get uiSettings;
+@InputNullableConverter() WoFormNode? get child;/// [childBuilder] has better reload results the [child],
+/// it's just a DX option.
+@notSerializable WoFormNode Function()? get childBuilder; DynamicInputUiSettings get uiSettings;
 /// Create a copy of DynamicInputTemplate
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1483,6 +1485,8 @@ class _DynamicInputTemplate extends DynamicInputTemplate {
   factory _DynamicInputTemplate.fromJson(Map<String, dynamic> json) => _$DynamicInputTemplateFromJson(json);
 
 @override@InputNullableConverter() final  WoFormNode? child;
+/// [childBuilder] has better reload results the [child],
+/// it's just a DX option.
 @override@notSerializable final  WoFormNode Function()? childBuilder;
 @override@JsonKey() final  DynamicInputUiSettings uiSettings;
 

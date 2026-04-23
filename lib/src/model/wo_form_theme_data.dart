@@ -49,6 +49,10 @@ abstract class WoFormThemeData with _$WoFormThemeData {
 
     /// If this is set and returns null, there won't be a quit button.
     @notSerializable QuitButtonBuilderDef? quitButtonBuilder,
+
+    /// Called when the user starts to reorder a reorderable list
+    /// (like in DynamicInputsNode). Intended for haptic feedback.
+    @notSerializable VoidCallback? reorderFeedback,
     @notSerializable ScoreWidgetBuilderDef? scoreBuilder,
     @notSerializable SelectFieldBuilderDef<dynamic>? selectFieldBuilder,
     @notSerializable ScaffoldBuilderDef? standardScaffoldBuilder,
@@ -122,6 +126,7 @@ abstract class WoFormThemeData with _$WoFormThemeData {
           pickDuration: pickDuration ?? other.pickDuration,
           pickTime: pickTime ?? other.pickTime,
           quitButtonBuilder: quitButtonBuilder ?? other.quitButtonBuilder,
+          reorderFeedback: reorderFeedback ?? other.reorderFeedback,
           scoreBuilder: scoreBuilder ?? other.scoreBuilder,
           selectFieldBuilder: selectFieldBuilder ?? other.selectFieldBuilder,
           standardScaffoldBuilder:
