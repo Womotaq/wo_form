@@ -82,6 +82,9 @@ class DynamicInputsNodeWidget extends StatelessWidget {
               data.input.uiSettings?.oddEvenRowColors ??
               data.input.uiSettings?.reorderable ??
               true,
+          grabHandleLocation:
+              data.input.uiSettings?.grabHandleLocation ??
+              ListTileControlAffinity.platform,
           children: children,
         ),
         if (addButtonPosition == DynamicInputsNodeAddButtonPosition.footer)

@@ -264,6 +264,10 @@ abstract class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
     /// Default to true
     bool? reorderable,
 
+    /// Defaults to [ListTileControlAffinity.platform], which always transforms
+    /// into [ListTileControlAffinity.leading].
+    ListTileControlAffinity? grabHandleLocation,
+
     /// Default to [reorderable].
     bool? oddEvenRowColors,
 
@@ -295,6 +299,7 @@ abstract class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
           labelText: labelText ?? other.labelText,
           helperText: helperText ?? other.helperText,
           reorderable: reorderable ?? other.reorderable,
+          grabHandleLocation: grabHandleLocation ?? other.grabHandleLocation,
           oddEvenRowColors: oddEvenRowColors ?? other.oddEvenRowColors,
           addButtonText: addButtonText ?? other.addButtonText,
           addButtonPosition: addButtonPosition ?? other.addButtonPosition,

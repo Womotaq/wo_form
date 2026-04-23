@@ -8,6 +8,7 @@ class WoReorderableByGrabListView extends StatefulWidget {
     required this.onReorder,
     this.reorderable = true,
     this.oddEvenRowColors = true,
+    this.grabHandleLocation = ListTileControlAffinity.platform,
     super.key,
   });
 
@@ -15,6 +16,7 @@ class WoReorderableByGrabListView extends StatefulWidget {
   final void Function(int oldIndex, int newIndex)? onReorder;
   final bool reorderable;
   final bool oddEvenRowColors;
+  final ListTileControlAffinity grabHandleLocation;
 
   @override
   State<WoReorderableByGrabListView> createState() =>
@@ -91,6 +93,10 @@ class _WoReorderableByGrabListViewState
               color: e.$1.isOdd ? oddItemColor : evenItemColor,
               child: Row(
                 children: [
+                  if (widget.grabHandleLocation ==
+                      ListTileControlAffinity.trailing)
+                    Expanded(child: e.$2),
+
                   if (widget.reorderable)
                     ReorderableDragStartListener(
                       enabled: widget.onReorder != null,
@@ -107,7 +113,10 @@ class _WoReorderableByGrabListViewState
                         ),
                       ),
                     ),
-                  Expanded(child: e.$2),
+
+                  if (widget.grabHandleLocation !=
+                      ListTileControlAffinity.trailing)
+                    Expanded(child: e.$2),
                 ],
               ),
             ),

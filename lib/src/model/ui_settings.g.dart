@@ -197,6 +197,10 @@ _DynamicInputsNodeUiSettings _$DynamicInputsNodeUiSettingsFromJson(
   labelText: json['labelText'] as String?,
   helperText: json['helperText'] as String?,
   reorderable: json['reorderable'] as bool?,
+  grabHandleLocation: $enumDecodeNullable(
+    _$ListTileControlAffinityEnumMap,
+    json['grabHandleLocation'],
+  ),
   oddEvenRowColors: json['oddEvenRowColors'] as bool?,
   addButtonText: json['addButtonText'] as String?,
   addButtonPosition: $enumDecodeNullable(
@@ -214,6 +218,8 @@ Map<String, dynamic> _$DynamicInputsNodeUiSettingsToJson(
   'labelText': instance.labelText,
   'helperText': instance.helperText,
   'reorderable': instance.reorderable,
+  'grabHandleLocation':
+      _$ListTileControlAffinityEnumMap[instance.grabHandleLocation],
   'oddEvenRowColors': instance.oddEvenRowColors,
   'addButtonText': instance.addButtonText,
   'addButtonPosition':
