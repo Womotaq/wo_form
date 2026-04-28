@@ -40,6 +40,7 @@ class InputsForm extends WoForm {
                 labelText: 'Mot de passe',
                 prefixIcon: const Icon(Icons.key),
                 prefixIconLocation: FieldElementLocation.inside,
+                autofillHints: [AutofillHints.newPassword],
               ),
             ),
             StringInput(
