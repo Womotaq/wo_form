@@ -106,7 +106,6 @@ class _ShrinkableScaffoldState extends State<ShrinkableScaffold> {
         // size when the keyboard appears.
         : Scaffold(
             body: content,
-            resizeToAvoidBottomInset: true,
             bottomNavigationBar: widget.bottomNavigationBar,
           );
   }
