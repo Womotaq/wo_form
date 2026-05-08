@@ -196,6 +196,7 @@ class _StringFieldState<T> extends State<StringField<T>> {
 
     final textField = suggestionsSettings != null
         ? TypeAheadField<T>(
+            autoFlipDirection: true,
             controller: textEditingController,
 
             debounceDuration:
@@ -259,6 +260,10 @@ class _StringFieldState<T> extends State<StringField<T>> {
                           suggestion.toString(),
                     ),
                   ),
+
+            hideOnEmpty: true,
+            hideOnLoading: true,
+            hideOnError: true,
           )
         : uiSettings?.keyboardType == TextInputType.phone
         ? PhoneFormField(
