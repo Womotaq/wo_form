@@ -53,6 +53,7 @@ _DateTimeInputUiSettings _$DateTimeInputUiSettingsFromJson(
   dateFormat: json['dateFormat'] as String?,
   timeFormat: json['timeFormat'] as String?,
   labelText: json['labelText'] as String?,
+  labelMaxLines: (json['labelMaxLines'] as num?)?.toInt(),
   labelLocation: $enumDecodeNullable(
     _$FieldElementLocationEnumMap,
     json['labelLocation'],
@@ -95,6 +96,7 @@ Map<String, dynamic> _$DateTimeInputUiSettingsToJson(
   'dateFormat': instance.dateFormat,
   'timeFormat': instance.timeFormat,
   'labelText': instance.labelText,
+  'labelMaxLines': instance.labelMaxLines,
   'labelLocation': _$FieldElementLocationEnumMap[instance.labelLocation],
   'hintText': instance.hintText,
   'helperText': instance.helperText,

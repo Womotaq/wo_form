@@ -88,6 +88,7 @@ abstract class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
     String? dateFormat,
     String? timeFormat,
     String? labelText,
+    int? labelMaxLines,
 
     /// Default to [FieldElementLocation.inside].
     FieldElementLocation? labelLocation,
@@ -134,6 +135,7 @@ abstract class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
           dateFormat: dateFormat ?? other.dateFormat,
           timeFormat: timeFormat ?? other.timeFormat,
           labelText: labelText ?? other.labelText,
+          labelMaxLines: labelMaxLines ?? other.labelMaxLines,
           labelLocation: labelLocation ?? other.labelLocation,
           helperText: helperText ?? other.helperText,
           helperLocation: helperLocation ?? other.helperLocation,

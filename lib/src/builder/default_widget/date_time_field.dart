@@ -32,6 +32,7 @@ class DateTimeField extends StatelessWidget {
     return FlexField(
       headerFlex: uiSettings?.headerFlex,
       labelText: labelLocation.isOutside ? uiSettings?.labelText : null,
+      labelMaxLines: uiSettings?.labelMaxLines,
       helperText: helperLocation.isOutside ? uiSettings?.helperText : null,
       errorText: errorLocation.isOutside ? data.errorText : null,
       disableMode: data.onValueChanged == null
