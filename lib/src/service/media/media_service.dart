@@ -133,7 +133,10 @@ abstract class MediaService {
       ):
         final granted = await switch (source) {
           ImageSource.camera => permissionService.requireCamera(),
-          ImageSource.gallery => permissionService.requirePhotos(),
+
+          // The ImagePicker package doesn't need the photos permission
+          // since the app will only have access to the selected photos.
+          ImageSource.gallery => Future.value(true),
         };
         if (!granted) return [];
 
