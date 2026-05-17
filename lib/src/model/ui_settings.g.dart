@@ -60,6 +60,7 @@ _DateTimeInputUiSettings _$DateTimeInputUiSettingsFromJson(
   ),
   hintText: json['hintText'] as String?,
   helperText: json['helperText'] as String?,
+  helperMaxLines: (json['helperMaxLines'] as num?)?.toInt(),
   helperLocation: $enumDecodeNullable(
     _$FieldElementLocationEnumMap,
     json['helperLocation'],
@@ -100,6 +101,7 @@ Map<String, dynamic> _$DateTimeInputUiSettingsToJson(
   'labelLocation': _$FieldElementLocationEnumMap[instance.labelLocation],
   'hintText': instance.hintText,
   'helperText': instance.helperText,
+  'helperMaxLines': instance.helperMaxLines,
   'helperLocation': _$FieldElementLocationEnumMap[instance.helperLocation],
   'headerFlex': instance.headerFlex,
   'prefixIconLocation':

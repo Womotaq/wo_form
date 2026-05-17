@@ -301,7 +301,7 @@ as BooleanFieldBuilderDef?,
 mixin _$DateTimeInputUiSettings {
 
  String? get dateFormat; String? get timeFormat; String? get labelText; int? get labelMaxLines;/// Default to [FieldElementLocation.inside].
- FieldElementLocation? get labelLocation; String? get hintText; String? get helperText;/// Default to [FieldElementLocation.inside].
+ FieldElementLocation? get labelLocation; String? get hintText; String? get helperText; int? get helperMaxLines;/// Default to [FieldElementLocation.inside].
  FieldElementLocation? get helperLocation;/// If null or O, header will be placed above the field.
 /// Else, header and selector will be in a the same row.
 /// If -1, the field will take as much space as he wants
@@ -324,16 +324,16 @@ $DateTimeInputUiSettingsCopyWith<DateTimeInputUiSettings> get copyWith => _$Date
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DateTimeInputUiSettings&&(identical(other.dateFormat, dateFormat) || other.dateFormat == dateFormat)&&(identical(other.timeFormat, timeFormat) || other.timeFormat == timeFormat)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelMaxLines, labelMaxLines) || other.labelMaxLines == labelMaxLines)&&(identical(other.labelLocation, labelLocation) || other.labelLocation == labelLocation)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.helperLocation, helperLocation) || other.helperLocation == helperLocation)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.prefixIconLocation, prefixIconLocation) || other.prefixIconLocation == prefixIconLocation)&&(identical(other.errorLocation, errorLocation) || other.errorLocation == errorLocation)&&(identical(other.addDateText, addDateText) || other.addDateText == addDateText)&&(identical(other.addTimeText, addTimeText) || other.addTimeText == addTimeText)&&(identical(other.initialEditValue, initialEditValue) || other.initialEditValue == initialEditValue)&&(identical(other.editMode, editMode) || other.editMode == editMode)&&(identical(other.pickDate, pickDate) || other.pickDate == pickDate)&&(identical(other.pickTime, pickTime) || other.pickTime == pickTime)&&(identical(other.initialTimeEntryMode, initialTimeEntryMode) || other.initialTimeEntryMode == initialTimeEntryMode)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DateTimeInputUiSettings&&(identical(other.dateFormat, dateFormat) || other.dateFormat == dateFormat)&&(identical(other.timeFormat, timeFormat) || other.timeFormat == timeFormat)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelMaxLines, labelMaxLines) || other.labelMaxLines == labelMaxLines)&&(identical(other.labelLocation, labelLocation) || other.labelLocation == labelLocation)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.helperMaxLines, helperMaxLines) || other.helperMaxLines == helperMaxLines)&&(identical(other.helperLocation, helperLocation) || other.helperLocation == helperLocation)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.prefixIconLocation, prefixIconLocation) || other.prefixIconLocation == prefixIconLocation)&&(identical(other.errorLocation, errorLocation) || other.errorLocation == errorLocation)&&(identical(other.addDateText, addDateText) || other.addDateText == addDateText)&&(identical(other.addTimeText, addTimeText) || other.addTimeText == addTimeText)&&(identical(other.initialEditValue, initialEditValue) || other.initialEditValue == initialEditValue)&&(identical(other.editMode, editMode) || other.editMode == editMode)&&(identical(other.pickDate, pickDate) || other.pickDate == pickDate)&&(identical(other.pickTime, pickTime) || other.pickTime == pickTime)&&(identical(other.initialTimeEntryMode, initialTimeEntryMode) || other.initialTimeEntryMode == initialTimeEntryMode)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,dateFormat,timeFormat,labelText,labelMaxLines,labelLocation,hintText,helperText,helperLocation,headerFlex,prefixIcon,prefixIconLocation,errorLocation,addDateText,addTimeText,initialEditValue,editMode,pickDate,pickTime,initialTimeEntryMode,widgetBuilder]);
+int get hashCode => Object.hashAll([runtimeType,dateFormat,timeFormat,labelText,labelMaxLines,labelLocation,hintText,helperText,helperMaxLines,helperLocation,headerFlex,prefixIcon,prefixIconLocation,errorLocation,addDateText,addTimeText,initialEditValue,editMode,pickDate,pickTime,initialTimeEntryMode,widgetBuilder]);
 
 @override
 String toString() {
-  return 'DateTimeInputUiSettings(dateFormat: $dateFormat, timeFormat: $timeFormat, labelText: $labelText, labelMaxLines: $labelMaxLines, labelLocation: $labelLocation, hintText: $hintText, helperText: $helperText, helperLocation: $helperLocation, headerFlex: $headerFlex, prefixIcon: $prefixIcon, prefixIconLocation: $prefixIconLocation, errorLocation: $errorLocation, addDateText: $addDateText, addTimeText: $addTimeText, initialEditValue: $initialEditValue, editMode: $editMode, pickDate: $pickDate, pickTime: $pickTime, initialTimeEntryMode: $initialTimeEntryMode, widgetBuilder: $widgetBuilder)';
+  return 'DateTimeInputUiSettings(dateFormat: $dateFormat, timeFormat: $timeFormat, labelText: $labelText, labelMaxLines: $labelMaxLines, labelLocation: $labelLocation, hintText: $hintText, helperText: $helperText, helperMaxLines: $helperMaxLines, helperLocation: $helperLocation, headerFlex: $headerFlex, prefixIcon: $prefixIcon, prefixIconLocation: $prefixIconLocation, errorLocation: $errorLocation, addDateText: $addDateText, addTimeText: $addTimeText, initialEditValue: $initialEditValue, editMode: $editMode, pickDate: $pickDate, pickTime: $pickTime, initialTimeEntryMode: $initialTimeEntryMode, widgetBuilder: $widgetBuilder)';
 }
 
 
@@ -344,7 +344,7 @@ abstract mixin class $DateTimeInputUiSettingsCopyWith<$Res>  {
   factory $DateTimeInputUiSettingsCopyWith(DateTimeInputUiSettings value, $Res Function(DateTimeInputUiSettings) _then) = _$DateTimeInputUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String? dateFormat, String? timeFormat, String? labelText, int? labelMaxLines, FieldElementLocation? labelLocation, String? hintText, String? helperText, FieldElementLocation? helperLocation, int? headerFlex,@notSerializable Widget? prefixIcon, FieldElementLocation? prefixIconLocation, FieldElementLocation? errorLocation, String? addDateText, String? addTimeText, FlexibleDateTime? initialEditValue, DateEditMode? editMode,@PickDateDefNullableConverter() PickDateDef? pickDate,@notSerializable PickTimeDef? pickTime, TimePickerEntryMode? initialTimeEntryMode,@notSerializable DateTimeFieldBuilderDef? widgetBuilder
+ String? dateFormat, String? timeFormat, String? labelText, int? labelMaxLines, FieldElementLocation? labelLocation, String? hintText, String? helperText, int? helperMaxLines, FieldElementLocation? helperLocation, int? headerFlex,@notSerializable Widget? prefixIcon, FieldElementLocation? prefixIconLocation, FieldElementLocation? errorLocation, String? addDateText, String? addTimeText, FlexibleDateTime? initialEditValue, DateEditMode? editMode,@PickDateDefNullableConverter() PickDateDef? pickDate,@notSerializable PickTimeDef? pickTime, TimePickerEntryMode? initialTimeEntryMode,@notSerializable DateTimeFieldBuilderDef? widgetBuilder
 });
 
 
@@ -361,7 +361,7 @@ class _$DateTimeInputUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of DateTimeInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? dateFormat = freezed,Object? timeFormat = freezed,Object? labelText = freezed,Object? labelMaxLines = freezed,Object? labelLocation = freezed,Object? hintText = freezed,Object? helperText = freezed,Object? helperLocation = freezed,Object? headerFlex = freezed,Object? prefixIcon = freezed,Object? prefixIconLocation = freezed,Object? errorLocation = freezed,Object? addDateText = freezed,Object? addTimeText = freezed,Object? initialEditValue = freezed,Object? editMode = freezed,Object? pickDate = freezed,Object? pickTime = freezed,Object? initialTimeEntryMode = freezed,Object? widgetBuilder = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? dateFormat = freezed,Object? timeFormat = freezed,Object? labelText = freezed,Object? labelMaxLines = freezed,Object? labelLocation = freezed,Object? hintText = freezed,Object? helperText = freezed,Object? helperMaxLines = freezed,Object? helperLocation = freezed,Object? headerFlex = freezed,Object? prefixIcon = freezed,Object? prefixIconLocation = freezed,Object? errorLocation = freezed,Object? addDateText = freezed,Object? addTimeText = freezed,Object? initialEditValue = freezed,Object? editMode = freezed,Object? pickDate = freezed,Object? pickTime = freezed,Object? initialTimeEntryMode = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_self.copyWith(
 dateFormat: freezed == dateFormat ? _self.dateFormat : dateFormat // ignore: cast_nullable_to_non_nullable
 as String?,timeFormat: freezed == timeFormat ? _self.timeFormat : timeFormat // ignore: cast_nullable_to_non_nullable
@@ -370,7 +370,8 @@ as String?,labelMaxLines: freezed == labelMaxLines ? _self.labelMaxLines : label
 as int?,labelLocation: freezed == labelLocation ? _self.labelLocation : labelLocation // ignore: cast_nullable_to_non_nullable
 as FieldElementLocation?,hintText: freezed == hintText ? _self.hintText : hintText // ignore: cast_nullable_to_non_nullable
 as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
-as String?,helperLocation: freezed == helperLocation ? _self.helperLocation : helperLocation // ignore: cast_nullable_to_non_nullable
+as String?,helperMaxLines: freezed == helperMaxLines ? _self.helperMaxLines : helperMaxLines // ignore: cast_nullable_to_non_nullable
+as int?,helperLocation: freezed == helperLocation ? _self.helperLocation : helperLocation // ignore: cast_nullable_to_non_nullable
 as FieldElementLocation?,headerFlex: freezed == headerFlex ? _self.headerFlex : headerFlex // ignore: cast_nullable_to_non_nullable
 as int?,prefixIcon: freezed == prefixIcon ? _self.prefixIcon : prefixIcon // ignore: cast_nullable_to_non_nullable
 as Widget?,prefixIconLocation: freezed == prefixIconLocation ? _self.prefixIconLocation : prefixIconLocation // ignore: cast_nullable_to_non_nullable
@@ -407,7 +408,7 @@ $FlexibleDateTimeCopyWith<$Res>? get initialEditValue {
 @JsonSerializable()
 
 class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
-  const _DateTimeInputUiSettings({this.dateFormat, this.timeFormat, this.labelText, this.labelMaxLines, this.labelLocation, this.hintText, this.helperText, this.helperLocation, this.headerFlex, @notSerializable this.prefixIcon, this.prefixIconLocation, this.errorLocation, this.addDateText, this.addTimeText, this.initialEditValue, this.editMode, @PickDateDefNullableConverter() this.pickDate, @notSerializable this.pickTime, this.initialTimeEntryMode, @notSerializable this.widgetBuilder}): super._();
+  const _DateTimeInputUiSettings({this.dateFormat, this.timeFormat, this.labelText, this.labelMaxLines, this.labelLocation, this.hintText, this.helperText, this.helperMaxLines, this.helperLocation, this.headerFlex, @notSerializable this.prefixIcon, this.prefixIconLocation, this.errorLocation, this.addDateText, this.addTimeText, this.initialEditValue, this.editMode, @PickDateDefNullableConverter() this.pickDate, @notSerializable this.pickTime, this.initialTimeEntryMode, @notSerializable this.widgetBuilder}): super._();
   factory _DateTimeInputUiSettings.fromJson(Map<String, dynamic> json) => _$DateTimeInputUiSettingsFromJson(json);
 
 @override final  String? dateFormat;
@@ -418,6 +419,7 @@ class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
 @override final  FieldElementLocation? labelLocation;
 @override final  String? hintText;
 @override final  String? helperText;
+@override final  int? helperMaxLines;
 /// Default to [FieldElementLocation.inside].
 @override final  FieldElementLocation? helperLocation;
 /// If null or O, header will be placed above the field.
@@ -455,16 +457,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DateTimeInputUiSettings&&(identical(other.dateFormat, dateFormat) || other.dateFormat == dateFormat)&&(identical(other.timeFormat, timeFormat) || other.timeFormat == timeFormat)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelMaxLines, labelMaxLines) || other.labelMaxLines == labelMaxLines)&&(identical(other.labelLocation, labelLocation) || other.labelLocation == labelLocation)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.helperLocation, helperLocation) || other.helperLocation == helperLocation)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.prefixIconLocation, prefixIconLocation) || other.prefixIconLocation == prefixIconLocation)&&(identical(other.errorLocation, errorLocation) || other.errorLocation == errorLocation)&&(identical(other.addDateText, addDateText) || other.addDateText == addDateText)&&(identical(other.addTimeText, addTimeText) || other.addTimeText == addTimeText)&&(identical(other.initialEditValue, initialEditValue) || other.initialEditValue == initialEditValue)&&(identical(other.editMode, editMode) || other.editMode == editMode)&&(identical(other.pickDate, pickDate) || other.pickDate == pickDate)&&(identical(other.pickTime, pickTime) || other.pickTime == pickTime)&&(identical(other.initialTimeEntryMode, initialTimeEntryMode) || other.initialTimeEntryMode == initialTimeEntryMode)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DateTimeInputUiSettings&&(identical(other.dateFormat, dateFormat) || other.dateFormat == dateFormat)&&(identical(other.timeFormat, timeFormat) || other.timeFormat == timeFormat)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelMaxLines, labelMaxLines) || other.labelMaxLines == labelMaxLines)&&(identical(other.labelLocation, labelLocation) || other.labelLocation == labelLocation)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.helperMaxLines, helperMaxLines) || other.helperMaxLines == helperMaxLines)&&(identical(other.helperLocation, helperLocation) || other.helperLocation == helperLocation)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.prefixIconLocation, prefixIconLocation) || other.prefixIconLocation == prefixIconLocation)&&(identical(other.errorLocation, errorLocation) || other.errorLocation == errorLocation)&&(identical(other.addDateText, addDateText) || other.addDateText == addDateText)&&(identical(other.addTimeText, addTimeText) || other.addTimeText == addTimeText)&&(identical(other.initialEditValue, initialEditValue) || other.initialEditValue == initialEditValue)&&(identical(other.editMode, editMode) || other.editMode == editMode)&&(identical(other.pickDate, pickDate) || other.pickDate == pickDate)&&(identical(other.pickTime, pickTime) || other.pickTime == pickTime)&&(identical(other.initialTimeEntryMode, initialTimeEntryMode) || other.initialTimeEntryMode == initialTimeEntryMode)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,dateFormat,timeFormat,labelText,labelMaxLines,labelLocation,hintText,helperText,helperLocation,headerFlex,prefixIcon,prefixIconLocation,errorLocation,addDateText,addTimeText,initialEditValue,editMode,pickDate,pickTime,initialTimeEntryMode,widgetBuilder]);
+int get hashCode => Object.hashAll([runtimeType,dateFormat,timeFormat,labelText,labelMaxLines,labelLocation,hintText,helperText,helperMaxLines,helperLocation,headerFlex,prefixIcon,prefixIconLocation,errorLocation,addDateText,addTimeText,initialEditValue,editMode,pickDate,pickTime,initialTimeEntryMode,widgetBuilder]);
 
 @override
 String toString() {
-  return 'DateTimeInputUiSettings(dateFormat: $dateFormat, timeFormat: $timeFormat, labelText: $labelText, labelMaxLines: $labelMaxLines, labelLocation: $labelLocation, hintText: $hintText, helperText: $helperText, helperLocation: $helperLocation, headerFlex: $headerFlex, prefixIcon: $prefixIcon, prefixIconLocation: $prefixIconLocation, errorLocation: $errorLocation, addDateText: $addDateText, addTimeText: $addTimeText, initialEditValue: $initialEditValue, editMode: $editMode, pickDate: $pickDate, pickTime: $pickTime, initialTimeEntryMode: $initialTimeEntryMode, widgetBuilder: $widgetBuilder)';
+  return 'DateTimeInputUiSettings(dateFormat: $dateFormat, timeFormat: $timeFormat, labelText: $labelText, labelMaxLines: $labelMaxLines, labelLocation: $labelLocation, hintText: $hintText, helperText: $helperText, helperMaxLines: $helperMaxLines, helperLocation: $helperLocation, headerFlex: $headerFlex, prefixIcon: $prefixIcon, prefixIconLocation: $prefixIconLocation, errorLocation: $errorLocation, addDateText: $addDateText, addTimeText: $addTimeText, initialEditValue: $initialEditValue, editMode: $editMode, pickDate: $pickDate, pickTime: $pickTime, initialTimeEntryMode: $initialTimeEntryMode, widgetBuilder: $widgetBuilder)';
 }
 
 
@@ -475,7 +477,7 @@ abstract mixin class _$DateTimeInputUiSettingsCopyWith<$Res> implements $DateTim
   factory _$DateTimeInputUiSettingsCopyWith(_DateTimeInputUiSettings value, $Res Function(_DateTimeInputUiSettings) _then) = __$DateTimeInputUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String? dateFormat, String? timeFormat, String? labelText, int? labelMaxLines, FieldElementLocation? labelLocation, String? hintText, String? helperText, FieldElementLocation? helperLocation, int? headerFlex,@notSerializable Widget? prefixIcon, FieldElementLocation? prefixIconLocation, FieldElementLocation? errorLocation, String? addDateText, String? addTimeText, FlexibleDateTime? initialEditValue, DateEditMode? editMode,@PickDateDefNullableConverter() PickDateDef? pickDate,@notSerializable PickTimeDef? pickTime, TimePickerEntryMode? initialTimeEntryMode,@notSerializable DateTimeFieldBuilderDef? widgetBuilder
+ String? dateFormat, String? timeFormat, String? labelText, int? labelMaxLines, FieldElementLocation? labelLocation, String? hintText, String? helperText, int? helperMaxLines, FieldElementLocation? helperLocation, int? headerFlex,@notSerializable Widget? prefixIcon, FieldElementLocation? prefixIconLocation, FieldElementLocation? errorLocation, String? addDateText, String? addTimeText, FlexibleDateTime? initialEditValue, DateEditMode? editMode,@PickDateDefNullableConverter() PickDateDef? pickDate,@notSerializable PickTimeDef? pickTime, TimePickerEntryMode? initialTimeEntryMode,@notSerializable DateTimeFieldBuilderDef? widgetBuilder
 });
 
 
@@ -492,7 +494,7 @@ class __$DateTimeInputUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of DateTimeInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? dateFormat = freezed,Object? timeFormat = freezed,Object? labelText = freezed,Object? labelMaxLines = freezed,Object? labelLocation = freezed,Object? hintText = freezed,Object? helperText = freezed,Object? helperLocation = freezed,Object? headerFlex = freezed,Object? prefixIcon = freezed,Object? prefixIconLocation = freezed,Object? errorLocation = freezed,Object? addDateText = freezed,Object? addTimeText = freezed,Object? initialEditValue = freezed,Object? editMode = freezed,Object? pickDate = freezed,Object? pickTime = freezed,Object? initialTimeEntryMode = freezed,Object? widgetBuilder = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? dateFormat = freezed,Object? timeFormat = freezed,Object? labelText = freezed,Object? labelMaxLines = freezed,Object? labelLocation = freezed,Object? hintText = freezed,Object? helperText = freezed,Object? helperMaxLines = freezed,Object? helperLocation = freezed,Object? headerFlex = freezed,Object? prefixIcon = freezed,Object? prefixIconLocation = freezed,Object? errorLocation = freezed,Object? addDateText = freezed,Object? addTimeText = freezed,Object? initialEditValue = freezed,Object? editMode = freezed,Object? pickDate = freezed,Object? pickTime = freezed,Object? initialTimeEntryMode = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_DateTimeInputUiSettings(
 dateFormat: freezed == dateFormat ? _self.dateFormat : dateFormat // ignore: cast_nullable_to_non_nullable
 as String?,timeFormat: freezed == timeFormat ? _self.timeFormat : timeFormat // ignore: cast_nullable_to_non_nullable
@@ -501,7 +503,8 @@ as String?,labelMaxLines: freezed == labelMaxLines ? _self.labelMaxLines : label
 as int?,labelLocation: freezed == labelLocation ? _self.labelLocation : labelLocation // ignore: cast_nullable_to_non_nullable
 as FieldElementLocation?,hintText: freezed == hintText ? _self.hintText : hintText // ignore: cast_nullable_to_non_nullable
 as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
-as String?,helperLocation: freezed == helperLocation ? _self.helperLocation : helperLocation // ignore: cast_nullable_to_non_nullable
+as String?,helperMaxLines: freezed == helperMaxLines ? _self.helperMaxLines : helperMaxLines // ignore: cast_nullable_to_non_nullable
+as int?,helperLocation: freezed == helperLocation ? _self.helperLocation : helperLocation // ignore: cast_nullable_to_non_nullable
 as FieldElementLocation?,headerFlex: freezed == headerFlex ? _self.headerFlex : headerFlex // ignore: cast_nullable_to_non_nullable
 as int?,prefixIcon: freezed == prefixIcon ? _self.prefixIcon : prefixIcon // ignore: cast_nullable_to_non_nullable
 as Widget?,prefixIconLocation: freezed == prefixIconLocation ? _self.prefixIconLocation : prefixIconLocation // ignore: cast_nullable_to_non_nullable
