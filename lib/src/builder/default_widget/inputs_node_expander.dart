@@ -88,6 +88,7 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
           child: _InputsNodePage(
             path: widget.data.path,
             shrinkWrap: layout.shrinks,
+            isPage: widget.data.input.uiSettings?.openChildren == Push.page,
           ),
         ),
       ),
@@ -96,10 +97,15 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
 }
 
 class _InputsNodePage extends StatefulWidget {
-  const _InputsNodePage({required this.path, required this.shrinkWrap});
+  const _InputsNodePage({
+    required this.path,
+    required this.shrinkWrap,
+    this.isPage = false,
+  });
 
   final String path;
   final bool shrinkWrap;
+  final bool isPage;
 
   @override
   State<_InputsNodePage> createState() => _InputsNodePageState();
@@ -160,6 +166,48 @@ class _InputsNodePageState extends State<_InputsNodePage> {
             childrenVisibility: ChildrenVisibility.always,
           ),
         ),
+      ),
+    );
+  }
+}
+
+/// It is recommended to use this widget or a customized equivalent when :
+///
+/// InputsNodeUiSettings(
+///   childrenVisibility: [ChildrenVisibility.whenAsked],
+///   openChildren: [Push.page],
+///   ...
+/// ),
+///
+/// Then add:
+///   widgetBuilder: [InputsNodeExpandedPage.new],
+class InputsNodeExpandedPage extends StatelessWidget {
+  const InputsNodeExpandedPage(this.data, {super.key});
+
+  final WoFieldData<InputsNode, void> data;
+
+  @override
+  Widget build(BuildContext context) {
+    final labelText = data.input.uiSettings?.labelText ?? '';
+
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () => Navigator.of(context).pop(),
+          icon: const Icon(Icons.check),
+        ),
+        title: labelText.isEmpty ? null : Text(labelText),
+      ),
+      body: InputsNodeWidget(
+        labelText.isEmpty
+            ? data
+            : data.copyWith(
+                input: data.input.copyWith(
+                  uiSettings: data.input.uiSettings?.copyWith(
+                    labelText: null,
+                  ),
+                ),
+              ),
       ),
     );
   }
