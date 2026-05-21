@@ -18,6 +18,7 @@ class StringField<T extends Object?> extends StatefulWidget {
     this.errorText,
     this.errorWidget,
     this.maxLength,
+    this.createController,
     super.key,
   });
 
@@ -30,6 +31,7 @@ class StringField<T extends Object?> extends StatefulWidget {
         errorText: data.errorText,
         errorWidget: data.errorWidget,
         maxLength: data.input.maxLength,
+        createController: data.input.createController,
       );
 
   final String? text;
@@ -39,6 +41,7 @@ class StringField<T extends Object?> extends StatefulWidget {
   final String? errorText;
   final Widget? errorWidget;
   final int? maxLength;
+  final CreateTextEditingControllerDef? createController;
 
   @override
   State<StringField> createState() => _StringFieldState<T>();
@@ -46,6 +49,7 @@ class StringField<T extends Object?> extends StatefulWidget {
 
 class _StringFieldState<T> extends State<StringField<T>> {
   TextEditingController? textEditingController;
+  bool _ownController = true;
   PhoneController? phoneController;
   late final bool autofocus;
   bool obscureText = false;
@@ -84,16 +88,31 @@ class _StringFieldState<T> extends State<StringField<T>> {
         ),
       );
     } else {
-      textEditingController = TextEditingController(
-        text: widget.text ?? '',
-      );
+      textEditingController = widget.createController?.call(context);
+      if (textEditingController != null) {
+        _ownController = false;
+      } else {
+        textEditingController = TextEditingController();
+      }
+      textEditingController?.text = widget.text ?? '';
+      textEditingController?.addListener(_onTextChanged);
     }
+  }
+
+  void _onTextChanged() {
+    final newText = textEditingController?.text;
+    if (newText == null) return;
+
+    widget.onValueChanged?.call(newText);
   }
 
   @override
   void dispose() {
-    textEditingController?.dispose();
+    if (_ownController) textEditingController?.dispose();
+    textEditingController?.removeListener(_onTextChanged);
+
     phoneController?.dispose();
+
     super.dispose();
   }
 
@@ -217,7 +236,6 @@ class _StringFieldState<T> extends State<StringField<T>> {
               focusNode: focusNode,
 
               enabled: widget.onValueChanged != null,
-              onChanged: widget.onValueChanged,
               onFieldSubmitted:
                   (uiSettings?.submitFormOnFieldSubmitted ??
                       defaultSubmitFormOnFieldSubmitted())
@@ -305,7 +323,6 @@ class _StringFieldState<T> extends State<StringField<T>> {
         : TextFormField(
             enabled: widget.onValueChanged != null,
             controller: textEditingController,
-            onChanged: widget.onValueChanged,
             onFieldSubmitted:
                 (uiSettings?.submitFormOnFieldSubmitted ??
                     defaultSubmitFormOnFieldSubmitted())
