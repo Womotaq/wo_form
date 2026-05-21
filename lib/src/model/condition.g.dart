@@ -14,6 +14,10 @@ ConditionValue _$ConditionValueFromJson(Map<String, dynamic> json) =>
       isNull: json['isNull'] as bool?,
       isFocused: json['isFocused'] as bool?,
       matchesRegex: json['matchesRegex'] as String?,
+      isLessThan: json['isLessThan'],
+      isLessThanOrEqualTo: json['isLessThanOrEqualTo'],
+      isGreaterThan: json['isGreaterThan'],
+      isGreaterThanOrEqualTo: json['isGreaterThanOrEqualTo'],
       $type: json['runtimeType'] as String?,
     );
 
@@ -25,6 +29,10 @@ Map<String, dynamic> _$ConditionValueToJson(ConditionValue instance) =>
       'isNull': instance.isNull,
       'isFocused': instance.isFocused,
       'matchesRegex': instance.matchesRegex,
+      'isLessThan': instance.isLessThan,
+      'isLessThanOrEqualTo': instance.isLessThanOrEqualTo,
+      'isGreaterThan': instance.isGreaterThan,
+      'isGreaterThanOrEqualTo': instance.isGreaterThanOrEqualTo,
       'runtimeType': instance.$type,
     };
 

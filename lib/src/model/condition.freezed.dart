@@ -80,7 +80,7 @@ $ConditionCopyWith(Condition _, $Res Function(Condition) __);
 @JsonSerializable()
 
 class ConditionValue extends Condition {
-   ConditionValue({required this.path, this.isEqualTo, this.isNotEqualTo, this.isNull, this.isFocused, this.matchesRegex, final  String? $type}): assert(    () {  final operators = [    isEqualTo,    isNotEqualTo,    isNull,    isFocused,    matchesRegex,  ];  final operatorsUsed = operators.where((e) => e != null).length;  return operatorsUsed == 1; }(), 'Exactly one operator must be specified'),$type = $type ?? 'value',super._();
+   ConditionValue({required this.path, this.isEqualTo, this.isNotEqualTo, this.isNull, this.isFocused, this.matchesRegex, this.isLessThan, this.isLessThanOrEqualTo, this.isGreaterThan, this.isGreaterThanOrEqualTo, final  String? $type}): assert(    () {  final operators = [    isEqualTo,    isNotEqualTo,    isNull,    isFocused,    matchesRegex,    isLessThan,    isLessThanOrEqualTo,    isGreaterThan,    isGreaterThanOrEqualTo,  ];  final operatorsUsed = operators.where((e) => e != null).length;  return operatorsUsed == 1; }(), 'Exactly one operator must be specified'),$type = $type ?? 'value',super._();
   factory ConditionValue.fromJson(Map<String, dynamic> json) => _$ConditionValueFromJson(json);
 
  final  String path;
@@ -91,6 +91,10 @@ class ConditionValue extends Condition {
  final  bool? isFocused;
 /// If the value at path is not a string, the condition cannot be met.
  final  String? matchesRegex;
+ final  Object? isLessThan;
+ final  Object? isLessThanOrEqualTo;
+ final  Object? isGreaterThan;
+ final  Object? isGreaterThanOrEqualTo;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -109,16 +113,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ConditionValue&&(identical(other.path, path) || other.path == path)&&const DeepCollectionEquality().equals(other.isEqualTo, isEqualTo)&&const DeepCollectionEquality().equals(other.isNotEqualTo, isNotEqualTo)&&(identical(other.isNull, isNull) || other.isNull == isNull)&&(identical(other.isFocused, isFocused) || other.isFocused == isFocused)&&(identical(other.matchesRegex, matchesRegex) || other.matchesRegex == matchesRegex));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ConditionValue&&(identical(other.path, path) || other.path == path)&&const DeepCollectionEquality().equals(other.isEqualTo, isEqualTo)&&const DeepCollectionEquality().equals(other.isNotEqualTo, isNotEqualTo)&&(identical(other.isNull, isNull) || other.isNull == isNull)&&(identical(other.isFocused, isFocused) || other.isFocused == isFocused)&&(identical(other.matchesRegex, matchesRegex) || other.matchesRegex == matchesRegex)&&const DeepCollectionEquality().equals(other.isLessThan, isLessThan)&&const DeepCollectionEquality().equals(other.isLessThanOrEqualTo, isLessThanOrEqualTo)&&const DeepCollectionEquality().equals(other.isGreaterThan, isGreaterThan)&&const DeepCollectionEquality().equals(other.isGreaterThanOrEqualTo, isGreaterThanOrEqualTo));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,path,const DeepCollectionEquality().hash(isEqualTo),const DeepCollectionEquality().hash(isNotEqualTo),isNull,isFocused,matchesRegex);
+int get hashCode => Object.hash(runtimeType,path,const DeepCollectionEquality().hash(isEqualTo),const DeepCollectionEquality().hash(isNotEqualTo),isNull,isFocused,matchesRegex,const DeepCollectionEquality().hash(isLessThan),const DeepCollectionEquality().hash(isLessThanOrEqualTo),const DeepCollectionEquality().hash(isGreaterThan),const DeepCollectionEquality().hash(isGreaterThanOrEqualTo));
 
 @override
 String toString() {
-  return 'Condition.value(path: $path, isEqualTo: $isEqualTo, isNotEqualTo: $isNotEqualTo, isNull: $isNull, isFocused: $isFocused, matchesRegex: $matchesRegex)';
+  return 'Condition.value(path: $path, isEqualTo: $isEqualTo, isNotEqualTo: $isNotEqualTo, isNull: $isNull, isFocused: $isFocused, matchesRegex: $matchesRegex, isLessThan: $isLessThan, isLessThanOrEqualTo: $isLessThanOrEqualTo, isGreaterThan: $isGreaterThan, isGreaterThanOrEqualTo: $isGreaterThanOrEqualTo)';
 }
 
 
@@ -129,7 +133,7 @@ abstract mixin class $ConditionValueCopyWith<$Res> implements $ConditionCopyWith
   factory $ConditionValueCopyWith(ConditionValue value, $Res Function(ConditionValue) _then) = _$ConditionValueCopyWithImpl;
 @useResult
 $Res call({
- String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull, bool? isFocused, String? matchesRegex
+ String path, Object? isEqualTo, Object? isNotEqualTo, bool? isNull, bool? isFocused, String? matchesRegex, Object? isLessThan, Object? isLessThanOrEqualTo, Object? isGreaterThan, Object? isGreaterThanOrEqualTo
 });
 
 
@@ -146,13 +150,13 @@ class _$ConditionValueCopyWithImpl<$Res>
 
 /// Create a copy of Condition
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? path = null,Object? isEqualTo = freezed,Object? isNotEqualTo = freezed,Object? isNull = freezed,Object? isFocused = freezed,Object? matchesRegex = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? path = null,Object? isEqualTo = freezed,Object? isNotEqualTo = freezed,Object? isNull = freezed,Object? isFocused = freezed,Object? matchesRegex = freezed,Object? isLessThan = freezed,Object? isLessThanOrEqualTo = freezed,Object? isGreaterThan = freezed,Object? isGreaterThanOrEqualTo = freezed,}) {
   return _then(ConditionValue(
 path: null == path ? _self.path : path // ignore: cast_nullable_to_non_nullable
 as String,isEqualTo: freezed == isEqualTo ? _self.isEqualTo : isEqualTo ,isNotEqualTo: freezed == isNotEqualTo ? _self.isNotEqualTo : isNotEqualTo ,isNull: freezed == isNull ? _self.isNull : isNull // ignore: cast_nullable_to_non_nullable
 as bool?,isFocused: freezed == isFocused ? _self.isFocused : isFocused // ignore: cast_nullable_to_non_nullable
 as bool?,matchesRegex: freezed == matchesRegex ? _self.matchesRegex : matchesRegex // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,isLessThan: freezed == isLessThan ? _self.isLessThan : isLessThan ,isLessThanOrEqualTo: freezed == isLessThanOrEqualTo ? _self.isLessThanOrEqualTo : isLessThanOrEqualTo ,isGreaterThan: freezed == isGreaterThan ? _self.isGreaterThan : isGreaterThan ,isGreaterThanOrEqualTo: freezed == isGreaterThanOrEqualTo ? _self.isGreaterThanOrEqualTo : isGreaterThanOrEqualTo ,
   ));
 }
 
