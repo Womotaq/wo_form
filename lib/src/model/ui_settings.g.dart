@@ -463,6 +463,10 @@ _StringInputUiSettings<T> _$StringInputUiSettingsFromJson<T>(
   padding: const EdgeInsetsNullableConverter().fromJson(
     json['padding'] as Map<String, dynamic>?,
   ),
+  unfocusMethod: $enumDecodeNullable(
+    _$FieldUnfocusMethodEnumMap,
+    json['unfocusMethod'],
+  ),
 );
 
 Map<String, dynamic> _$StringInputUiSettingsToJson<T>(
@@ -494,6 +498,7 @@ Map<String, dynamic> _$StringInputUiSettingsToJson<T>(
   'invalidRegexMessage': instance.invalidRegexMessage,
   'collapsed': instance.collapsed,
   'padding': const EdgeInsetsNullableConverter().toJson(instance.padding),
+  'unfocusMethod': _$FieldUnfocusMethodEnumMap[instance.unfocusMethod],
 };
 
 const _$StringFieldActionEnumMap = {
@@ -528,6 +533,12 @@ const _$TextCapitalizationEnumMap = {
   TextCapitalization.sentences: 'sentences',
   TextCapitalization.characters: 'characters',
   TextCapitalization.none: 'none',
+};
+
+const _$FieldUnfocusMethodEnumMap = {
+  FieldUnfocusMethod.onTapUpOutside: 'onTapUpOutside',
+  FieldUnfocusMethod.onTapOutside: 'onTapOutside',
+  FieldUnfocusMethod.systemDefault: 'systemDefault',
 };
 
 _WoFormUiSettings _$WoFormUiSettingsFromJson(Map<String, dynamic> json) =>

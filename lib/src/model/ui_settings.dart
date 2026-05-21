@@ -667,6 +667,42 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
         );
 }
 
+/// Flutter's default behaviour :
+/// - web : tapping outside instantly unfocuses the field.
+/// - mobile : tapping outside does nothing.
+/// For better consistency across all plateforms, wo_form decided to
+/// unfocus text fields on tap up.
+enum FieldUnfocusMethod {
+  /// Unfocus the field each time a tap is done outside the field.
+  ///
+  /// Default value.
+  ///
+  /// Implementation example :
+  /// ```dart
+  /// onTapOutside: (event) => tapPosition = event.position,
+  /// onTapUpOutside: (event) {
+  ///   if (event.position == tapPosition) {
+  ///     FocusScope.of(context).unfocus();
+  ///   }
+  ///   tapPosition = null;
+  /// },
+  /// ```
+  onTapUpOutside,
+
+  /// Unfocus the field each time a tap starts outside the field.
+  /// Note : the tap can become a drag. To avoid unfocusing on dragging, use
+  /// [FieldUnfocusMethod.onTapUpOutside].
+  ///
+  /// Implementation example :
+  /// ```dart
+  /// onTapOutside: (event) => FocusScope.of(context).unfocus(),
+  /// ```
+  onTapOutside,
+
+  /// Doesn't override the default behaviour.
+  systemDefault,
+}
+
 enum StringFieldAction { clear, obscure }
 
 /// Whether this text field should focus itself if nothing else is already
@@ -767,6 +803,7 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     @notSerializable StringFieldBuilderDef<T>? widgetBuilder,
     @notSerializable ErrorBuilderDef? errorBuilder,
     @notSerializable CounterBuilderDef? counterBuilder,
+    FieldUnfocusMethod? unfocusMethod,
   }) = _StringInputUiSettings<T>;
 
   factory StringInputUiSettings.email({
@@ -797,6 +834,7 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     StringFieldBuilderDef? widgetBuilder,
     ErrorBuilderDef? errorBuilder,
     int? maxLines = 1,
+    FieldUnfocusMethod? unfocusMethod,
   }) => StringInputUiSettings(
     flex: flex,
     headerFlex: headerFlex,
@@ -825,6 +863,7 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     widgetBuilder: widgetBuilder,
     errorBuilder: errorBuilder,
     maxLines: maxLines,
+    unfocusMethod: unfocusMethod,
   );
 
   factory StringInputUiSettings.password({
@@ -855,6 +894,7 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     StringFieldBuilderDef? widgetBuilder,
     ErrorBuilderDef? errorBuilder,
     int? maxLines = 1,
+    FieldUnfocusMethod? unfocusMethod,
   }) => StringInputUiSettings(
     flex: flex,
     headerFlex: headerFlex,
@@ -883,6 +923,7 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     errorBuilder: errorBuilder,
     autofocus: autofocus,
     maxLines: maxLines,
+    unfocusMethod: unfocusMethod,
   );
 
   factory StringInputUiSettings.phone({
@@ -912,6 +953,7 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     StringFieldBuilderDef? widgetBuilder,
     ErrorBuilderDef? errorBuilder,
     int? maxLines = 1,
+    FieldUnfocusMethod? unfocusMethod,
   }) => StringInputUiSettings(
     flex: flex,
     headerFlex: headerFlex,
@@ -939,6 +981,7 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     widgetBuilder: widgetBuilder,
     errorBuilder: errorBuilder,
     maxLines: maxLines,
+    unfocusMethod: unfocusMethod,
   );
 
   const StringInputUiSettings._();
@@ -980,6 +1023,7 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
           style: style ?? other.style,
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,
           errorBuilder: errorBuilder ?? other.errorBuilder,
+          unfocusMethod: unfocusMethod ?? other.unfocusMethod,
         );
 }
 

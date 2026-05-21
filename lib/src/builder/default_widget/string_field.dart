@@ -208,6 +208,27 @@ class _StringFieldState<T> extends State<StringField<T>> {
           );
 
     final suggestionsSettings = widget.suggestionsSettings;
+    final unfocusMethod =
+        uiSettings?.unfocusMethod ?? FieldUnfocusMethod.onTapUpOutside;
+    final onTapOutside = switch (unfocusMethod) {
+      FieldUnfocusMethod.onTapOutside => (_) => FocusScope.of(
+        context,
+      ).unfocus(),
+      FieldUnfocusMethod.onTapUpOutside =>
+        (PointerDownEvent event) => tapPosition = event.position,
+      FieldUnfocusMethod.systemDefault => null,
+    };
+    final onTapUpOutside = switch (unfocusMethod) {
+      FieldUnfocusMethod.systemDefault ||
+      FieldUnfocusMethod.onTapOutside => null,
+      FieldUnfocusMethod.onTapUpOutside => (PointerUpEvent event) {
+        if (event.position == tapPosition) {
+          FocusScope.of(context).unfocus();
+        }
+        tapPosition = null;
+      },
+    };
+
     final formatters = [
       if (widget.maxLength != null)
         LengthLimitingTextInputFormatter(widget.maxLength),
@@ -241,18 +262,8 @@ class _StringFieldState<T> extends State<StringField<T>> {
                       defaultSubmitFormOnFieldSubmitted())
                   ? (_) => context.read<WoFormValuesCubit>().submit(context)
                   : null,
-              // Flutter's default behaviour :
-              // - web : tapping outside instantly unfocuses the field.
-              // - mobile : tapping outside does nothing.
-              // For better consistency across all plateforms, wo_form decided
-              // to unfocus text fields on tap up.
-              onTapOutside: (event) => tapPosition = event.position,
-              onTapUpOutside: (event) {
-                if (event.position == tapPosition) {
-                  FocusScope.of(context).unfocus();
-                }
-                tapPosition = null;
-              },
+              onTapOutside: onTapOutside,
+              onTapUpOutside: onTapUpOutside,
               style: uiSettings?.style,
               keyboardType: uiSettings?.keyboardType,
               obscureText: obscureText,
@@ -297,18 +308,8 @@ class _StringFieldState<T> extends State<StringField<T>> {
                     defaultSubmitFormOnFieldSubmitted())
                 ? (_) => context.read<WoFormValuesCubit>().submit(context)
                 : null,
-            // Flutter's default behaviour :
-            // - web : tapping outside instantly unfocuses the field.
-            // - mobile : tapping outside does nothing.
-            // For better consistency across all plateforms, wo_form decided to
-            // unfocus text fields on tap up.
-            onTapOutside: (event) => tapPosition = event.position,
-            onTapUpOutside: (event) {
-              if (event.position == tapPosition) {
-                FocusScope.of(context).unfocus();
-              }
-              tapPosition = null;
-            },
+            onTapOutside: onTapOutside,
+            onTapUpOutside: onTapUpOutside,
             style: uiSettings?.style,
             obscureText: obscureText,
             autocorrect: uiSettings?.autocorrect ?? true,
@@ -328,18 +329,8 @@ class _StringFieldState<T> extends State<StringField<T>> {
                     defaultSubmitFormOnFieldSubmitted())
                 ? (_) => context.read<WoFormValuesCubit>().submit(context)
                 : null,
-            // Flutter's default behaviour :
-            // - web : tapping outside instantly unfocuses the field.
-            // - mobile : tapping outside does nothing.
-            // For better consistency across all plateforms, wo_form decided to
-            // unfocus text fields on tap up.
-            onTapOutside: (event) => tapPosition = event.position,
-            onTapUpOutside: (event) {
-              if (event.position == tapPosition) {
-                FocusScope.of(context).unfocus();
-              }
-              tapPosition = null;
-            },
+            onTapOutside: onTapOutside,
+            onTapUpOutside: onTapUpOutside,
             style: uiSettings?.style,
             keyboardType: uiSettings?.keyboardType,
             obscureText: obscureText,

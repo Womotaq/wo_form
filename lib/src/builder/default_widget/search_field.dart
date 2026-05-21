@@ -274,19 +274,6 @@ class SearchScreen<T> extends StatelessWidget {
                 SearchScreen.defaultSearchInputUiSettings(),
             onValueChanged: (text) => textController.text = text ?? '',
           ),
-
-          // TextField(
-          //   controller: textController,
-          //   autofocus: autofocus,
-          //   decoration: const InputDecoration(
-          //     prefixIcon: Icon(Icons.search),
-          //   ),
-          //   // Flutter's default behaviour :
-          //   // - web : tapping outside instantly unfocuses the field.
-          //   // - mobile : tapping outside does nothing.
-          //   // wo_form decided to unfocus search fields on tap down.
-          //   onTapOutside: (event) => FocusScope.of(context).unfocus(),
-          // ),
           body: body(context, results),
         ),
       );
