@@ -479,10 +479,14 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
     _statusCubit._setSubmitting();
 
-    final nodesLockWhileSubmitting = currentNode.getAllInputPaths(
-      values: state,
-      parentPath: submitPath.parentPath,
-    );
+    final nodesLockWhileSubmitting =
+        currentNode
+            .getAllInputPaths(
+              values: state,
+              parentPath: submitPath.parentPath,
+            )
+            .toSet()
+          ..removeAll(_lockCubit.state);
     _lockCubit.lockInputs(paths: nodesLockWhileSubmitting);
 
     try {
