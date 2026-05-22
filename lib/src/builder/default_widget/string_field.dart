@@ -107,6 +107,22 @@ class _StringFieldState<T> extends State<StringField<T>> {
   }
 
   @override
+  void didUpdateWidget(covariant StringField<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (textEditingController != null) {
+      if ((widget.text ?? '') != textEditingController?.text) {
+        textEditingController?.text = widget.text ?? '';
+      }
+    }
+    if (phoneController != null) {
+      if ((widget.text ?? '') != textEditingController?.text) {
+        textEditingController?.text = widget.text ?? '';
+      }
+    }
+  }
+
+  @override
   void dispose() {
     if (_ownController) textEditingController?.dispose();
     textEditingController?.removeListener(_onTextChanged);
@@ -118,17 +134,6 @@ class _StringFieldState<T> extends State<StringField<T>> {
 
   @override
   Widget build(BuildContext context) {
-    if (textEditingController != null) {
-      if ((widget.text ?? '') != textEditingController?.text) {
-        textEditingController?.text = widget.text ?? '';
-      }
-    }
-    if (phoneController != null) {
-      if ((widget.text ?? '') != textEditingController?.text) {
-        textEditingController?.text = widget.text ?? '';
-      }
-    }
-
     final woFormTheme = WoFormTheme.of(context);
     final uiSettings = widget.uiSettings;
     final collapsed = uiSettings?.collapsed ?? false;
