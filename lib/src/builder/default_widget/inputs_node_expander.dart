@@ -11,6 +11,40 @@ class InputsNodeExpander extends StatefulWidget {
 
   @override
   State<InputsNodeExpander> createState() => _InputsNodeExpanderState();
+
+  static Future<void> openChildren({
+    required BuildContext context,
+    required String inputsNodeAbsolutePath,
+  }) {
+    final valuesCubit = context.read<WoFormValuesCubit>();
+    final inputsNode = valuesCubit.getNode(path: inputsNodeAbsolutePath);
+    if (inputsNode is! InputsNode) {
+      throw ArgumentError(
+        'Expected <InputsNode> at path: "$inputsNodeAbsolutePath", '
+        'found: <${inputsNode.runtimeType}>',
+      );
+    }
+
+    final layout = LayoutMethod.fromFlex(inputsNode.uiSettings.flexOrDefault);
+    return (inputsNode.uiSettings?.openChildren ?? Push.modalBottomSheet)(
+      context: context,
+      layout: layout,
+      child: RepositoryProvider.value(
+        value: context.read<RootNode>(),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider.value(value: valuesCubit),
+            BlocProvider.value(value: context.read<WoFormStatusCubit>()),
+            BlocProvider.value(value: context.read<WoFormLockCubit>()),
+          ],
+          child: _InputsNodePage(
+            path: inputsNodeAbsolutePath,
+            shrinkWrap: layout.shrinks,
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class _InputsNodeExpanderState extends State<InputsNodeExpander> {
@@ -25,7 +59,12 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
         /// containing the InputsNode is popped and then rebuilt.
         valuesCubit.inputsNodeShowingChildrenInitially(widget.data.path);
         SchedulerBinding.instance.addPostFrameCallback(
-          (_) => mounted ? openChildren(context) : null,
+          (_) => mounted
+              ? InputsNodeExpander.openChildren(
+                  context: context,
+                  inputsNodeAbsolutePath: widget.data.path,
+                )
+              : null,
         );
       }
     }
@@ -52,7 +91,10 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
       prefixIcon: widget.data.input.uiSettings?.prefixIcon,
       errorText: widget.data.errorText,
       trailing: const Icon(Icons.chevron_right),
-      onTap: () => openChildren(context),
+      onTap: () => InputsNodeExpander.openChildren(
+        context: context,
+        inputsNodeAbsolutePath: widget.data.path,
+      ),
       shrinkWrap: false,
     );
 
@@ -61,45 +103,16 @@ class _InputsNodeExpanderState extends State<InputsNodeExpander> {
             InputHeader.new)
         .call(headerData);
   }
-
-  Future<void> openChildren(BuildContext context) {
-    final layout = LayoutMethod.fromFlex(
-      widget.data.input.uiSettings.flexOrDefault,
-    );
-
-    return (widget.data.input.uiSettings?.openChildren ??
-        Push.modalBottomSheet)(
-      context: context,
-      layout: layout,
-      child: RepositoryProvider.value(
-        value: context.read<RootNode>(),
-        child: MultiBlocProvider(
-          providers: [
-            BlocProvider.value(value: context.read<WoFormValuesCubit>()),
-            BlocProvider.value(value: context.read<WoFormStatusCubit>()),
-            BlocProvider.value(value: context.read<WoFormLockCubit>()),
-          ],
-          child: _InputsNodePage(
-            path: widget.data.path,
-            shrinkWrap: layout.shrinks,
-            isPage: widget.data.input.uiSettings?.openChildren == Push.page,
-          ),
-        ),
-      ),
-    );
-  }
 }
 
 class _InputsNodePage extends StatefulWidget {
   const _InputsNodePage({
     required this.path,
     required this.shrinkWrap,
-    this.isPage = false,
   });
 
   final String path;
   final bool shrinkWrap;
-  final bool isPage;
 
   @override
   State<_InputsNodePage> createState() => _InputsNodePageState();
