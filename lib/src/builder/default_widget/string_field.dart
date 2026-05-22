@@ -347,7 +347,12 @@ class _StringFieldState<T> extends State<StringField<T>> {
             decoration: inputDecoration,
           );
 
-    if (collapsed) return textField;
+    if (collapsed) {
+      return Padding(
+        padding: uiSettings?.padding ?? EdgeInsets.zero,
+        child: textField,
+      );
+    }
 
     return FlexField(
       headerFlex: uiSettings?.headerFlex,
