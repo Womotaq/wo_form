@@ -128,9 +128,9 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
     @notSerializable GetCustomErrorDef<String>? getCustomError,
     StringInputUiSettings<T>? uiSettings,
 
-    /// If set, the created controller won't be disposed automatically,
+    /// If set, the controller won't be disposed automatically,
     /// you'll have to do it yourself.
-    @notSerializable CreateTextEditingControllerDef? createController,
+    @notSerializable GetTextEditingControllerDef? getController,
   }) = StringInput;
 
   const WoFormInput._() : super._();
@@ -666,7 +666,7 @@ typedef OnEditMediaDef =
       Media media,
       WoFieldData<MediaInput<Object?>, List<Media>?> data,
     );
-typedef CreateTextEditingControllerDef =
+typedef GetTextEditingControllerDef =
     TextEditingController? Function(BuildContext context);
 
 extension SelectInputX<T> on SelectInput<T> {

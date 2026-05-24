@@ -18,7 +18,7 @@ class StringField<T extends Object?> extends StatefulWidget {
     this.errorText,
     this.errorWidget,
     this.maxLength,
-    this.createController,
+    this.getController,
     super.key,
   });
 
@@ -31,7 +31,7 @@ class StringField<T extends Object?> extends StatefulWidget {
         errorText: data.errorText,
         errorWidget: data.errorWidget,
         maxLength: data.input.maxLength,
-        createController: data.input.createController,
+        getController: data.input.getController,
       );
 
   final String? text;
@@ -41,7 +41,7 @@ class StringField<T extends Object?> extends StatefulWidget {
   final String? errorText;
   final Widget? errorWidget;
   final int? maxLength;
-  final CreateTextEditingControllerDef? createController;
+  final GetTextEditingControllerDef? getController;
 
   @override
   State<StringField> createState() => _StringFieldState<T>();
@@ -88,7 +88,7 @@ class _StringFieldState<T> extends State<StringField<T>> {
         ),
       );
     } else {
-      textEditingController = widget.createController?.call(context);
+      textEditingController = widget.getController?.call(context);
       if (textEditingController != null) {
         _ownController = false;
       } else {
