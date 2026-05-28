@@ -100,7 +100,7 @@ class PickDate {
         context: context,
         builder: (context) => Dialog(
           clipBehavior: Clip.hardEdge,
-          child: PickDatePageWithYear.inModal(
+          child: PickDatePageWithYear.dialog(
             minDate: minDate,
             maxDate: maxDate,
             initialDate: initialDate,

@@ -12,13 +12,13 @@ class PickDatePageWithYear extends StatefulWidget {
     super.key,
   }) : _displayMode = _DisplayMode.page;
 
-  const PickDatePageWithYear.inModal({
+  const PickDatePageWithYear.dialog({
     this.minDate,
     this.maxDate,
     this.initialDate,
     this.dateFormat,
     super.key,
-  }) : _displayMode = _DisplayMode.modal;
+  }) : _displayMode = _DisplayMode.dialog;
 
   final DateTime? minDate;
   final DateTime? maxDate;
@@ -175,7 +175,7 @@ class _PickDatePageWithYearState extends State<PickDatePageWithYear> {
         appBar: AppBar(),
         body: picker,
       ),
-      _DisplayMode.modal => Padding(
+      _DisplayMode.dialog => Padding(
         padding: const EdgeInsets.all(16),
         child: SizedBox(
           width: 332,
@@ -194,7 +194,7 @@ class _PickDatePageWithYearState extends State<PickDatePageWithYear> {
   }
 }
 
-enum _DisplayMode { page, modal }
+enum _DisplayMode { page, dialog }
 
 class _SelectedDateCubit extends Cubit<DateTime?> {
   _SelectedDateCubit(
@@ -476,6 +476,11 @@ class MonthlyCalendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final now = DateTime.now();
+    final todayDay = now.fullMonth == fullMonth ? now.day : null;
+
+    final theme = Theme.of(context);
+
     // Generate the calendar grid for the given month
     final days = _generateCalendar(fullMonth.year, fullMonth.month);
 
@@ -511,52 +516,68 @@ class MonthlyCalendar extends StatelessWidget {
             !((minDay != null && day < minDay) ||
                 (maxDay != null && day > maxDay));
 
+        Widget child;
+        if (day != null) {
+          if (selectedDay == day) {
+            child = Container(
+              decoration: selectedDay == day
+                  ? BoxDecoration(
+                      color: theme.colorScheme.secondaryContainer,
+                      shape: BoxShape.circle,
+                    )
+                  : null,
+              child: Center(
+                child: Text(
+                  day.toString(),
+                  style: TextStyle(
+                    color: theme.colorScheme.onSecondaryContainer,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            );
+          } else {
+            child = InkWell(
+              borderRadius: BorderRadius.circular(40),
+              onTap: onSelect == null
+                  ? null
+                  : selectable
+                  ? () => onSelect!(day)
+                  : null,
+              child: Center(
+                child: Text(
+                  day.toString(),
+                  style: selectable
+                      ? null
+                      : TextStyle(
+                          color: theme.disabledColor,
+                        ),
+                ),
+              ),
+            );
+
+            if (day == todayDay) {
+              child = DecoratedBox(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: theme.colorScheme.outline,
+                  ),
+                ),
+                child: child,
+              );
+            }
+          }
+        } else {
+          // Day not in the current month
+          child = const SizedBox.shrink();
+        }
+
         return Center(
           child: SizedBox(
             width: 40,
             height: 40,
-            child: day != null
-                ? selectedDay == day
-                      ? Container(
-                          decoration: selectedDay == day
-                              ? BoxDecoration(
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.secondaryContainer,
-                                  shape: BoxShape.circle,
-                                )
-                              : null,
-                          child: Center(
-                            child: Text(
-                              day.toString(),
-                              style: TextStyle(
-                                color: Theme.of(
-                                  context,
-                                ).colorScheme.onSecondaryContainer,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        )
-                      : InkWell(
-                          borderRadius: BorderRadius.circular(40),
-                          onTap: onSelect == null
-                              ? null
-                              : selectable
-                              ? () => onSelect!(day)
-                              : null,
-                          child: Center(
-                            child: Text(
-                              day.toString(),
-                              style: selectable
-                                  ? null
-                                  : TextStyle(
-                                      color: Theme.of(context).disabledColor,
-                                    ),
-                            ),
-                          ),
-                        )
-                : const SizedBox.shrink(),
+            child: child,
           ),
         );
       },
@@ -596,6 +617,9 @@ class DaysOfWeek extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textStyle = TextStyle(color: Theme.of(context).colorScheme.outline);
+    final formatter = DateFormat(DateFormat.ABBR_WEEKDAY);
+
     return Center(
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 512 - 32),
@@ -606,16 +630,12 @@ class DaysOfWeek extends StatelessWidget {
             crossAxisCount: 7,
           ),
           itemCount: 7,
-          itemBuilder: (context, index) {
-            return Center(
-              child: Text(
-                DateFormat(
-                  DateFormat.ABBR_WEEKDAY,
-                ).format(DateTime(1, 1, 1 + index))[0].toUpperCase(),
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-            );
-          },
+          itemBuilder: (context, index) => Center(
+            child: Text(
+              formatter.format(DateTime(1, 1, 1 + index)),
+              style: textStyle,
+            ),
+          ),
         ),
       ),
     );

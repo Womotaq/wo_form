@@ -48,18 +48,9 @@ class PickDatePage extends StatelessWidget {
       case _DisplayMode.page:
         return Scaffold(
           appBar: AppBar(
-            bottom: PreferredSize(
-              preferredSize: const Size(double.maxFinite, kToolbarHeight),
-              child: DefaultTextStyle(
-                style: TextStyle(
-                  color: AppBarTheme.of(context).foregroundColor,
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: DaysOfWeek(),
-                ),
-              ),
-            ),
+            actions: const [
+              _Test(),
+            ],
           ),
           body: LayoutBuilder(
             builder: (context, constraints) {
@@ -73,36 +64,39 @@ class PickDatePage extends StatelessWidget {
                 centerIndex: ref.fullMonth,
                 minIndex: minDate?.fullMonth,
                 maxIndex: maxDate?.fullMonth,
-                itemBuilder: (context, fullMonth) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 16),
-                      SizedBox(
-                        height: 32,
-                        child: Text(
-                          DateFormat.yMMMM()
-                              .format(DateTime(0, fullMonth))
-                              .capitalized(),
-                          style: Theme.of(context).textTheme.bodyLarge
-                              ?.copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
+                itemBuilder: (context, fullMonth) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 24),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: Text(
+                        DateFormat.yMMMM()
+                            .format(DateTime(0, fullMonth))
+                            .capitalized(),
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      MonthlyCalendar(
-                        fullMonth: fullMonth,
-                        selectedDate: initialDate,
-                        minDate: minDate,
-                        maxDate: maxDate,
-                        onSelect: (day) => selectDate(
-                          context,
-                          DateTime(0, fullMonth, day),
-                        ),
+                    ),
+                    DefaultTextStyle(
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.outline,
                       ),
-                    ],
-                  );
-                },
+                      child: const DaysOfWeek(),
+                    ),
+                    MonthlyCalendar(
+                      fullMonth: fullMonth,
+                      selectedDate: initialDate,
+                      minDate: minDate,
+                      maxDate: maxDate,
+                      onSelect: (day) => selectDate(
+                        context,
+                        DateTime(0, fullMonth, day),
+                      ),
+                    ),
+                  ],
+                ),
               );
             },
           ),
@@ -115,83 +109,81 @@ class PickDatePage extends StatelessWidget {
             minDate: minDate?.fullMonth,
           ),
           child: BlocBuilder<_FullMonthCubit, int>(
-            builder: (context, fullMonth) {
-              return SizedBox(
-                width: 32 + kMinInteractiveDimension * 7,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ColoredBox(
-                      color: Theme.of(context).colorScheme.secondaryContainer,
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          top: 16,
-                          left: 16,
-                          right: 16,
-                        ),
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: kToolbarHeight,
-                              child: Row(
-                                children: [
-                                  IconButton(
-                                    onPressed: () => context
-                                        .read<_FullMonthCubit>()
-                                        .set(fullMonth - 1),
-                                    icon: const Icon(Icons.arrow_back),
-                                  ),
-                                  Expanded(
-                                    child: Center(
-                                      child: Text(
-                                        DateFormat.yMMMM()
-                                            .format(DateTime(0, fullMonth))
-                                            .capitalized(),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyLarge
-                                            ?.copyWith(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                      ),
-                                    ),
-                                  ),
-                                  IconButton(
-                                    onPressed: () => context
-                                        .read<_FullMonthCubit>()
-                                        .set(fullMonth + 1),
-                                    icon: const Icon(Icons.arrow_forward),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const DaysOfWeek(),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
+            builder: (context, fullMonth) => SizedBox(
+              width: 32 + kMinInteractiveDimension * 7,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ColoredBox(
+                    color: Theme.of(context).colorScheme.secondaryContainer,
+                    child: Padding(
                       padding: const EdgeInsets.only(
+                        top: 16,
                         left: 16,
                         right: 16,
-                        bottom: 16,
                       ),
-                      child: MonthlyCalendar(
-                        fullMonth: fullMonth,
-                        selectedDate: initialDate,
-                        minDate: minDate,
-                        maxDate: maxDate,
-                        onSelect: (day) => selectDate(
-                          context,
-                          DateTime(0, fullMonth, day),
-                        ),
-                        shrinkWrap: false,
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: kToolbarHeight,
+                            child: Row(
+                              children: [
+                                IconButton(
+                                  onPressed: () => context
+                                      .read<_FullMonthCubit>()
+                                      .set(fullMonth - 1),
+                                  icon: const Icon(Icons.arrow_back),
+                                ),
+                                Expanded(
+                                  child: Center(
+                                    child: Text(
+                                      DateFormat.yMMMM()
+                                          .format(DateTime(0, fullMonth))
+                                          .capitalized(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge
+                                          ?.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: () => context
+                                      .read<_FullMonthCubit>()
+                                      .set(fullMonth + 1),
+                                  icon: const Icon(Icons.arrow_forward),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const DaysOfWeek(),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              );
-            },
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 16,
+                      right: 16,
+                      bottom: 16,
+                    ),
+                    child: MonthlyCalendar(
+                      fullMonth: fullMonth,
+                      selectedDate: initialDate,
+                      minDate: minDate,
+                      maxDate: maxDate,
+                      onSelect: (day) => selectDate(
+                        context,
+                        DateTime(0, fullMonth, day),
+                      ),
+                      shrinkWrap: false,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         );
     }
@@ -325,4 +317,26 @@ class InfiniteListView extends StatelessWidget {
 
 extension on DateTime {
   int get fullMonth => year * 12 + month;
+}
+
+class _Test extends StatefulWidget {
+  const _Test();
+
+  @override
+  State<_Test> createState() => _TestState();
+}
+
+class _TestState extends State<_Test> {
+  DateTime date = DateTime.now();
+
+  @override
+  Widget build(BuildContext context) {
+    return NotificationListener(
+      onNotification: (notification) {
+        print(notification);
+        return false;
+      },
+      child: Text(DateFormat.yMMMM().format(date)),
+    );
+  }
 }
