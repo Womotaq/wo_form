@@ -506,7 +506,8 @@ class MonthlyCalendar extends StatelessWidget {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 7, // 7 days in a week
+        crossAxisCount: 7,
+        mainAxisExtent: kMinInteractiveDimension,
       ),
       itemCount: days.length,
       itemBuilder: (context, index) {
@@ -628,6 +629,7 @@ class DaysOfWeek extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 7,
+            mainAxisExtent: kMinInteractiveDimension,
           ),
           itemCount: 7,
           itemBuilder: (context, index) => Center(

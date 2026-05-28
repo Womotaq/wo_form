@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,7 +7,10 @@ import 'package:intl/intl.dart';
 import 'package:wo_form/src/utils/extensions.dart';
 import 'package:wo_form/wo_form.dart';
 
-class PickDatePage extends StatelessWidget {
+// Top spacing before the month label.
+const _kMonthTopSpacing = 24.0;
+
+class PickDatePage extends StatefulWidget {
   const PickDatePage({
     required this.minDate,
     this.maxDate,
@@ -28,28 +33,57 @@ class PickDatePage extends StatelessWidget {
   final String? dateFormat;
   final _DisplayMode _displayMode;
 
+  @override
+  State<PickDatePage> createState() => _PickDatePageState();
+}
+
+class _PickDatePageState extends State<PickDatePage> {
+  late final _CalendarController? scrollController;
+  late final DateTime? _initialDate;
+  late final int _initialFullMonth;
+
+  @override
+  void initState() {
+    super.initState();
+
+    var initialDate = widget.initialDate;
+    if (initialDate != null &&
+        widget.minDate != null &&
+        initialDate.isBefore(widget.minDate!)) {
+      initialDate = null;
+    } else if (initialDate != null &&
+        widget.maxDate != null &&
+        initialDate.isAfter(widget.maxDate!)) {
+      initialDate = null;
+    }
+    _initialDate = initialDate;
+    _initialFullMonth = (_initialDate ?? DateTime.now()).fullMonth;
+
+    if (widget._displayMode == _DisplayMode.page) {
+      scrollController = _CalendarController(
+        initialFullMonth: _initialFullMonth,
+      );
+    }
+  }
+
+  @override
+  Future<void> dispose() async {
+    scrollController?.dispose();
+    super.dispose();
+  }
+
   void selectDate(BuildContext context, DateTime date) =>
       Navigator.of(context).pop(date);
 
   @override
   Widget build(BuildContext context) {
-    var initialDate = this.initialDate;
-    if (initialDate != null &&
-        minDate != null &&
-        initialDate.isBefore(minDate!)) {
-      initialDate = null;
-    } else if (initialDate != null &&
-        maxDate != null &&
-        initialDate.isAfter(maxDate!)) {
-      initialDate = null;
-    }
-
-    switch (_displayMode) {
+    switch (widget._displayMode) {
       case _DisplayMode.page:
         return Scaffold(
           appBar: AppBar(
-            actions: const [
-              _Test(),
+            centerTitle: false,
+            actions: [
+              _YearPicker(controller: scrollController!),
             ],
           ),
           body: LayoutBuilder(
@@ -57,39 +91,43 @@ class PickDatePage extends StatelessWidget {
               final sideOverflow = constraints.maxWidth - 512;
               final sidePadding = sideOverflow > 0 ? sideOverflow / 2 : .0;
 
-              final ref = initialDate ?? DateTime.now();
-
               return InfiniteListView(
+                controller: scrollController,
                 padding: EdgeInsets.symmetric(horizontal: 16 + sidePadding),
-                centerIndex: ref.fullMonth,
-                minIndex: minDate?.fullMonth,
-                maxIndex: maxDate?.fullMonth,
+                centerIndex: _initialFullMonth,
+                minIndex: widget.minDate?.fullMonth,
+                maxIndex: widget.maxDate?.fullMonth,
                 itemBuilder: (context, fullMonth) => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 24),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
-                      child: Text(
-                        DateFormat.yMMMM()
-                            .format(DateTime(0, fullMonth))
-                            .capitalized(),
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
+                    const SizedBox(height: _kMonthTopSpacing),
+                    SizedBox(
+                      height: kMinInteractiveDimension,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            DateFormat.yMMMM()
+                                .format(DateTime(0, fullMonth))
+                                .capitalized(),
+                            style:
+                                Theme.of(
+                                  context,
+                                ).textTheme.bodyLarge?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                       ),
                     ),
-                    DefaultTextStyle(
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.outline,
-                      ),
-                      child: const DaysOfWeek(),
-                    ),
+                    const DaysOfWeek(),
                     MonthlyCalendar(
                       fullMonth: fullMonth,
-                      selectedDate: initialDate,
-                      minDate: minDate,
-                      maxDate: maxDate,
+                      selectedDate: _initialDate,
+                      minDate: widget.minDate,
+                      maxDate: widget.maxDate,
                       onSelect: (day) => selectDate(
                         context,
                         DateTime(0, fullMonth, day),
@@ -104,9 +142,9 @@ class PickDatePage extends StatelessWidget {
       case _DisplayMode.dialog:
         return BlocProvider(
           create: (context) => _FullMonthCubit(
-            initialDate?.fullMonth ?? DateTime.now().fullMonth,
-            maxDate: maxDate?.fullMonth,
-            minDate: minDate?.fullMonth,
+            _initialFullMonth,
+            maxDate: widget.maxDate?.fullMonth,
+            minDate: widget.minDate?.fullMonth,
           ),
           child: BlocBuilder<_FullMonthCubit, int>(
             builder: (context, fullMonth) => SizedBox(
@@ -136,16 +174,37 @@ class PickDatePage extends StatelessWidget {
                                 ),
                                 Expanded(
                                   child: Center(
-                                    child: Text(
-                                      DateFormat.yMMMM()
-                                          .format(DateTime(0, fullMonth))
-                                          .capitalized(),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyLarge
-                                          ?.copyWith(
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                    child: OutlinedButton(
+                                      onPressed: () async {
+                                        final fullMonthCubit = context
+                                            .read<_FullMonthCubit>();
+                                        final currentYear =
+                                            (fullMonth - 1) ~/ 12;
+                                        final currentMonth = fullMonth % 12;
+
+                                        final year = await _pickYear(
+                                          context: context,
+                                          initialYear: currentYear,
+                                          displayMode: _DisplayMode.dialog,
+                                        );
+
+                                        if (year != null) {
+                                          await fullMonthCubit.set(
+                                            year * 12 + currentMonth,
+                                          );
+                                        }
+                                      },
+                                      child: Text(
+                                        DateFormat.yMMMM()
+                                            .format(DateTime(0, fullMonth))
+                                            .capitalized(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge
+                                            ?.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -171,9 +230,9 @@ class PickDatePage extends StatelessWidget {
                     ),
                     child: MonthlyCalendar(
                       fullMonth: fullMonth,
-                      selectedDate: initialDate,
-                      minDate: minDate,
-                      maxDate: maxDate,
+                      selectedDate: _initialDate,
+                      minDate: widget.minDate,
+                      maxDate: widget.maxDate,
                       onSelect: (day) => selectDate(
                         context,
                         DateTime(0, fullMonth, day),
@@ -187,28 +246,6 @@ class PickDatePage extends StatelessWidget {
           ),
         );
     }
-  }
-
-  /// Return the amount of weeks in a month
-  int weeksInMonth(int fullMonth) {
-    // Get the first and last days of the month.
-    final firstDayOfMonth = DateTime(0, fullMonth);
-    final lastDayOfMonth = DateTime(
-      0,
-      fullMonth + 1,
-      0,
-    ); // 0 gives the last day of the month.
-
-    // Calculate the weekday of the first and last day.
-    final firstWeekday = firstDayOfMonth.weekday; // 1 (Monday) to 7 (Sunday)
-    final lastWeekday = lastDayOfMonth.weekday;
-
-    // Total days in the month.
-    final daysInMonth = lastDayOfMonth.day;
-
-    // Calculate the total number of weeks.
-    // Weeks overlap if the month doesn't start on Monday or end on Sunday.
-    return ((daysInMonth + firstWeekday - 1 + (7 - lastWeekday)) / 7).ceil();
   }
 }
 
@@ -237,11 +274,50 @@ extension _FullMonth on int {
     if (max != null && this > max) return max;
     return this;
   }
+
+  /// The number of weeks required to display all days of this month
+  /// in a standard calendar grid (starting Monday or Sunday, depending on
+  /// DateTime.weekday's definition).
+  ///
+  /// This calculation accounts for the day of the week the month starts on
+  /// and the total number of days in that month. It effectively calculates
+  /// `ceil(totalDaysIncludingPadding / 7)`.
+  ///
+  /// Example:
+  /// - January 2023 (`2023 * 12 + 0` = 24276): Starts on a Sunday (weekday 7).
+  ///   Has 31 days. It will span 6 weeks.
+  /// - February 2023 (`2023 * 12 + 1` = 24277): Starts on a Wednesday
+  ///   (weekday 3). Has 28 days. It will span 5 weeks.
+  int get weeksCount {
+    // Get the first day of the month.
+    final firstDayOfMonth = DateTime(0, this);
+
+    // Get the last day of the month to find the total number of days.
+    // By setting the day to 0 of the *next* month, DateTime automatically
+    // rolls back to the last day of the *current* month.
+    final daysInMonth = DateTime(0, this + 1, 0).day;
+
+    // Get the day of the week for the 1st of the month.
+    // `DateTime.weekday` returns: 1 = Monday, 2 = Tuesday, ..., 7 = Sunday.
+    final firstDayWeekday = firstDayOfMonth.weekday;
+
+    // Calculate the total number of "slots" needed in a calendar grid.
+    // This includes any leading empty days before the 1st of the month if
+    // the month doesn't start on a Monday (or your preferred start day).
+    // (firstDayWeekday - 1) gives the number of blank days before the 1st.
+    final totalSlots = (firstDayWeekday - 1) + daysInMonth;
+
+    // Calculate the number of weeks using integer ceiling division.
+    // Adding 6 to `totalSlots` before integer division by 7 correctly
+    // implements `ceil(totalSlots / 7)`.
+    return (totalSlots + 6) ~/ 7;
+  }
 }
 
 class InfiniteListView extends StatelessWidget {
   const InfiniteListView({
     required this.itemBuilder,
+    this.controller,
     this.scrollDirection = Axis.vertical,
     this.centerIndex = 0,
     this.minIndex,
@@ -251,6 +327,7 @@ class InfiniteListView extends StatelessWidget {
   });
 
   final Widget? Function(BuildContext context, int index) itemBuilder;
+  final ScrollController? controller;
   final Axis scrollDirection;
 
   /// Will start at this index
@@ -265,6 +342,7 @@ class InfiniteListView extends StatelessWidget {
 
     final Key forwardListKey = UniqueKey();
     return Scrollable(
+      controller: controller,
       viewportBuilder: (BuildContext context, ViewportOffset offset) {
         return Padding(
           padding: padding ?? EdgeInsets.zero,
@@ -319,24 +397,165 @@ extension on DateTime {
   int get fullMonth => year * 12 + month;
 }
 
-class _Test extends StatefulWidget {
-  const _Test();
+class _CalendarController extends ScrollController {
+  _CalendarController({required this.initialFullMonth});
 
-  @override
-  State<_Test> createState() => _TestState();
+  final int initialFullMonth;
+
+  // Height of one month item: fixed top spacing + label row + days-of-week
+  // row + N calendar rows, all at kMinInteractiveDimension per row.
+  static double _monthHeight(int fullMonth) =>
+      _kMonthTopSpacing + kMinInteractiveDimension * (2 + fullMonth.weeksCount);
+
+  // Scroll offset at which the top of [fullMonth] aligns with the viewport top.
+  // Positive = forward (future), negative = backward (past) from
+  // initialFullMonth.
+  double _offsetForFullMonth(int fullMonth) {
+    var offset = 0.0;
+    if (fullMonth > initialFullMonth) {
+      for (var fm = initialFullMonth; fm < fullMonth; fm++) {
+        offset += _monthHeight(fm);
+      }
+    } else {
+      for (var fm = fullMonth; fm < initialFullMonth; fm++) {
+        offset -= _monthHeight(fm);
+      }
+    }
+    return offset;
+  }
+
+  // The month whose top is currently at (or just above) the viewport top.
+  int get visibleFullMonth {
+    if (!hasClients) return initialFullMonth;
+    var fm = initialFullMonth;
+    var remaining = offset;
+    if (remaining >= 0) {
+      while (remaining >= _monthHeight(fm)) {
+        remaining -= _monthHeight(fm);
+        fm++;
+      }
+    } else {
+      while (remaining < 0) {
+        fm--;
+        remaining += _monthHeight(fm);
+      }
+    }
+    return fm;
+  }
+
+  void scrollToFullMonth(int fullMonth) =>
+      jumpTo(_offsetForFullMonth(fullMonth));
 }
 
-class _TestState extends State<_Test> {
-  DateTime date = DateTime.now();
+class _YearPicker extends StatefulWidget {
+  const _YearPicker({required this.controller});
+
+  final _CalendarController controller;
+
+  @override
+  State<_YearPicker> createState() => _YearPickerState();
+}
+
+class _YearPickerState extends State<_YearPicker> {
+  late int _visibleYear;
+
+  @override
+  void initState() {
+    super.initState();
+    _visibleYear = DateTime(0, widget.controller.visibleFullMonth).year;
+    widget.controller.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    widget.controller.removeListener(_onScroll);
+    super.dispose();
+  }
+
+  void _onScroll() {
+    final newYear = DateTime(0, widget.controller.visibleFullMonth).year;
+    if (newYear != _visibleYear) setState(() => _visibleYear = newYear);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return NotificationListener(
-      onNotification: (notification) {
-        print(notification);
-        return false;
-      },
-      child: Text(DateFormat.yMMMM().format(date)),
+    return TextButton.icon(
+      onPressed: _selectYear,
+      icon: const Icon(Icons.arrow_drop_down),
+      iconAlignment: IconAlignment.end,
+      label: Text(
+        DateFormat.y().format(DateTime(_visibleYear)).capitalized(),
+        style: const TextStyle(fontWeight: FontWeight.bold),
+      ),
+      style: TextButton.styleFrom(
+        foregroundColor: AppBarTheme.of(context).foregroundColor,
+      ),
     );
   }
+
+  Future<void> _selectYear() async {
+    final visibleMonth = DateTime(0, widget.controller.visibleFullMonth).month;
+    final year = await _pickYear(
+      context: context,
+      initialYear: _visibleYear,
+      displayMode: _DisplayMode.page,
+    );
+
+    if (year != null) {
+      widget.controller.scrollToFullMonth(year * 12 + visibleMonth);
+    }
+  }
+}
+
+Future<int?> _pickYear({
+  required BuildContext context,
+  required int initialYear,
+  required _DisplayMode displayMode,
+}) async {
+  const padding = 16.0;
+
+  return (displayMode == _DisplayMode.dialog
+      ? Push.dialog
+      : Push.modalBottomSheet)<int>(
+    context: context,
+    layout: LayoutMethod.shrinkWrap,
+    child: SizedBox(
+      height: WoFormTheme.MAX_WIDTH / 2,
+      width: WoFormTheme.of(context)?.maxWidth ?? WoFormTheme.MAX_WIDTH,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          const minButtonWidth = 112;
+          final maxWidth = constraints.maxWidth;
+
+          final buttonsPerRow = max(maxWidth ~/ minButtonWidth, 1);
+
+          return InfiniteListView(
+            padding: const EdgeInsets.symmetric(horizontal: padding),
+            centerIndex: initialYear ~/ buttonsPerRow - 1,
+            itemBuilder: (context, yearBase) => Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Row(
+                spacing: padding,
+                children: List.generate(
+                  buttonsPerRow,
+                  (index) {
+                    final year = yearBase * buttonsPerRow + index;
+                    return Expanded(
+                      child:
+                          (year == initialYear
+                          ? FilledButton.tonal
+                          : OutlinedButton.new)(
+                            onPressed: () => Navigator.of(context).pop(year),
+                            child: Text(year.toString()),
+                          ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    ),
+  );
 }
