@@ -460,6 +460,7 @@ class MonthlyCalendar extends StatelessWidget {
     this.minDate,
     this.maxDate,
     this.onSelect,
+    this.shrinkWrap = true,
     super.key,
   });
 
@@ -468,6 +469,10 @@ class MonthlyCalendar extends StatelessWidget {
   final DateTime? minDate;
   final DateTime? maxDate;
   final void Function(int day)? onSelect;
+
+  /// If true, the calendar will take only the necessary rows to show all
+  /// the days in the month. If false, the calendar will always have 6 rows.
+  final bool shrinkWrap;
 
   @override
   Widget build(BuildContext context) {
@@ -574,6 +579,12 @@ class MonthlyCalendar extends StatelessWidget {
     // Add days of the current month
     for (var i = 1; i <= daysInMonth; i++) {
       days.add(i);
+    }
+
+    if (!shrinkWrap) {
+      while (days.length < 7 * 6) {
+        days.add(null);
+      }
     }
 
     return days;

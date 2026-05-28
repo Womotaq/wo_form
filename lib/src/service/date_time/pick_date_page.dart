@@ -14,13 +14,13 @@ class PickDatePage extends StatelessWidget {
     super.key,
   }) : _displayMode = _DisplayMode.page;
 
-  const PickDatePage.inModal({
+  const PickDatePage.dialog({
     required this.minDate,
     this.maxDate,
     this.initialDate,
     this.dateFormat,
     super.key,
-  }) : _displayMode = _DisplayMode.modal;
+  }) : _displayMode = _DisplayMode.dialog;
 
   final DateTime? minDate;
   final DateTime? maxDate;
@@ -107,7 +107,7 @@ class PickDatePage extends StatelessWidget {
             },
           ),
         );
-      case _DisplayMode.modal:
+      case _DisplayMode.dialog:
         return BlocProvider(
           create: (context) => _FullMonthCubit(
             initialDate?.fullMonth ?? DateTime.now().fullMonth,
@@ -118,11 +118,8 @@ class PickDatePage extends StatelessWidget {
             builder: (context, fullMonth) {
               return SizedBox(
                 width: 32 + kMinInteractiveDimension * 7,
-                height:
-                    32 +
-                    kToolbarHeight +
-                    kMinInteractiveDimension * (1 + fullMonth.weeks),
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     ColoredBox(
                       color: Theme.of(context).colorScheme.secondaryContainer,
@@ -188,6 +185,7 @@ class PickDatePage extends StatelessWidget {
                           context,
                           DateTime(0, fullMonth, day),
                         ),
+                        shrinkWrap: false,
                       ),
                     ),
                   ],
@@ -222,7 +220,7 @@ class PickDatePage extends StatelessWidget {
   }
 }
 
-enum _DisplayMode { page, modal }
+enum _DisplayMode { page, dialog }
 
 class _FullMonthCubit extends Cubit<int> {
   _FullMonthCubit(
@@ -246,44 +244,6 @@ extension _FullMonth on int {
     if (min != null && this < min) return min;
     if (max != null && this > max) return max;
     return this;
-  }
-
-  /// The number of weeks required to display all days of this month
-  /// in a standard calendar grid (starting Monday or Sunday, depending on
-  /// DateTime.weekday's definition).
-  ///
-  /// This calculation accounts for the day of the week the month starts on
-  /// and the total number of days in that month. It effectively calculates
-  /// `ceil(totalDaysIncludingPadding / 7)`.
-  ///
-  /// Example:
-  /// - January 2023 (`2023 * 12 + 0` = 24276): Starts on a Sunday (weekday 7).
-  ///   Has 31 days. It will span 6 weeks.
-  /// - February 2023 (`2023 * 12 + 1` = 24277): Starts on a Wednesday
-  ///   (weekday 3). Has 28 days. It will span 5 weeks.
-  int get weeks {
-    // Get the first day of the month.
-    final firstDayOfMonth = DateTime(0, this);
-
-    // Get the last day of the month to find the total number of days.
-    // By setting the day to 0 of the *next* month, DateTime automatically
-    // rolls back to the last day of the *current* month.
-    final daysInMonth = DateTime(0, this + 1, 0).day;
-
-    // Get the day of the week for the 1st of the month.
-    // `DateTime.weekday` returns: 1 = Monday, 2 = Tuesday, ..., 7 = Sunday.
-    final firstDayWeekday = firstDayOfMonth.weekday;
-
-    // Calculate the total number of "slots" needed in a calendar grid.
-    // This includes any leading empty days before the 1st of the month if
-    // the month doesn't start on a Monday (or your preferred start day).
-    // (firstDayWeekday - 1) gives the number of blank days before the 1st.
-    final totalSlots = (firstDayWeekday - 1) + daysInMonth;
-
-    // Calculate the number of weeks using integer ceiling division.
-    // Adding 6 to `totalSlots` before integer division by 7 correctly
-    // implements `ceil(totalSlots / 7)`.
-    return (totalSlots + 6) ~/ 7;
   }
 }
 
