@@ -8,23 +8,14 @@ class PickDatePageWithYear extends StatefulWidget {
     this.minDate,
     this.maxDate,
     this.initialDate,
-    this.dateFormat,
+    this.uiSettings,
     super.key,
-  }) : _displayMode = _DisplayMode.page;
-
-  const PickDatePageWithYear.dialog({
-    this.minDate,
-    this.maxDate,
-    this.initialDate,
-    this.dateFormat,
-    super.key,
-  }) : _displayMode = _DisplayMode.dialog;
+  });
 
   final DateTime? minDate;
   final DateTime? maxDate;
   final DateTime? initialDate;
-  final String? dateFormat;
-  final _DisplayMode _displayMode;
+  final PickDateUiSettings? uiSettings;
 
   @override
   State<PickDatePageWithYear> createState() => _PickDatePageWithYearState();
@@ -152,7 +143,8 @@ class _PickDatePageWithYearState extends State<PickDatePageWithYear> {
                     return SubmitButton(
                       SubmitButtonData(
                         text: DateFormat(
-                          widget.dateFormat ?? 'yMMMMd',
+                          widget.uiSettings?.dateFormat ??
+                              PickDateUiSettings.defaultDateFormat,
                         ).format(date),
                         onPressed: () => Navigator.of(context).pop(
                           context.read<_SelectedDateCubit>().state,
@@ -170,12 +162,15 @@ class _PickDatePageWithYearState extends State<PickDatePageWithYear> {
       ),
     );
 
-    return switch (widget._displayMode) {
-      _DisplayMode.page => Scaffold(
+    return switch (widget.uiSettings?.presentationMode ??
+        PickDateUiSettings.defaultPresentationMode) {
+      PickDatePresentationMode.page => Scaffold(
         appBar: AppBar(),
-        body: picker,
+        body:
+            (widget.uiSettings?.bodyWrapper ??
+            PickDateUiSettings.defaultBodyWrapper)(context, picker),
       ),
-      _DisplayMode.dialog => Padding(
+      PickDatePresentationMode.dialog => Padding(
         padding: const EdgeInsets.all(16),
         child: SizedBox(
           width: 332,
@@ -193,8 +188,6 @@ class _PickDatePageWithYearState extends State<PickDatePageWithYear> {
     super.dispose();
   }
 }
-
-enum _DisplayMode { page, dialog }
 
 class _SelectedDateCubit extends Cubit<DateTime?> {
   _SelectedDateCubit(

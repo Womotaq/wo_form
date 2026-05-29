@@ -85,6 +85,11 @@ _DateTimeInputUiSettings _$DateTimeInputUiSettingsFromJson(
   pickDate: const PickDateDefNullableConverter().fromJson(
     json['pickDate'] as String?,
   ),
+  pickDateUiSettings: json['pickDateUiSettings'] == null
+      ? null
+      : PickDateUiSettings.fromJson(
+          json['pickDateUiSettings'] as Map<String, dynamic>,
+        ),
   initialTimeEntryMode: $enumDecodeNullable(
     _$TimePickerEntryModeEnumMap,
     json['initialTimeEntryMode'],
@@ -112,6 +117,7 @@ Map<String, dynamic> _$DateTimeInputUiSettingsToJson(
   'initialEditValue': instance.initialEditValue?.toJson(),
   'editMode': _$DateEditModeEnumMap[instance.editMode],
   'pickDate': const PickDateDefNullableConverter().toJson(instance.pickDate),
+  'pickDateUiSettings': instance.pickDateUiSettings?.toJson(),
   'initialTimeEntryMode':
       _$TimePickerEntryModeEnumMap[instance.initialTimeEntryMode],
 };

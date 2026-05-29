@@ -120,6 +120,7 @@ abstract class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
     FlexibleDateTime? initialEditValue,
     DateEditMode? editMode,
     @PickDateDefNullableConverter() PickDateDef? pickDate,
+    PickDateUiSettings? pickDateUiSettings,
     @notSerializable PickTimeDef? pickTime,
     TimePickerEntryMode? initialTimeEntryMode,
     @notSerializable DateTimeFieldBuilderDef? widgetBuilder,

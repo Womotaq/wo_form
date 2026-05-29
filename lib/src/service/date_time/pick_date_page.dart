@@ -7,6 +7,9 @@ import 'package:intl/intl.dart';
 import 'package:wo_form/src/utils/extensions.dart';
 import 'package:wo_form/wo_form.dart';
 
+// TODO : dots under dates to show where the user already has events
+// RoundedBody
+
 // Top spacing before the month label.
 const _kMonthTopSpacing = 24.0;
 
@@ -15,23 +18,14 @@ class PickDatePage extends StatefulWidget {
     required this.minDate,
     this.maxDate,
     this.initialDate,
-    this.dateFormat,
+    this.uiSettings,
     super.key,
-  }) : _displayMode = _DisplayMode.page;
-
-  const PickDatePage.dialog({
-    required this.minDate,
-    this.maxDate,
-    this.initialDate,
-    this.dateFormat,
-    super.key,
-  }) : _displayMode = _DisplayMode.dialog;
+  });
 
   final DateTime? minDate;
   final DateTime? maxDate;
   final DateTime? initialDate;
-  final String? dateFormat;
-  final _DisplayMode _displayMode;
+  final PickDateUiSettings? uiSettings;
 
   @override
   State<PickDatePage> createState() => _PickDatePageState();
@@ -59,7 +53,9 @@ class _PickDatePageState extends State<PickDatePage> {
     _initialDate = initialDate;
     _initialFullMonth = (_initialDate ?? DateTime.now()).fullMonth;
 
-    if (widget._displayMode == _DisplayMode.page) {
+    if ((widget.uiSettings?.presentationMode ??
+            PickDateUiSettings.defaultPresentationMode) ==
+        PickDatePresentationMode.page) {
       scrollController = _CalendarController(
         initialFullMonth: _initialFullMonth,
       );
@@ -77,69 +73,80 @@ class _PickDatePageState extends State<PickDatePage> {
 
   @override
   Widget build(BuildContext context) {
-    switch (widget._displayMode) {
-      case _DisplayMode.page:
+    switch (widget.uiSettings?.presentationMode ??
+        PickDateUiSettings.defaultPresentationMode) {
+      case PickDatePresentationMode.page:
         return Scaffold(
           appBar: AppBar(
-            centerTitle: false,
             actions: [
               _YearPicker(controller: scrollController!),
             ],
           ),
-          body: LayoutBuilder(
-            builder: (context, constraints) {
-              final sideOverflow = constraints.maxWidth - 512;
-              final sidePadding = sideOverflow > 0 ? sideOverflow / 2 : .0;
+          body:
+              (widget.uiSettings?.bodyWrapper ??
+              PickDateUiSettings.defaultBodyWrapper)(
+                context,
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    final sideOverflow = constraints.maxWidth - 512;
+                    final sidePadding = sideOverflow > 0
+                        ? sideOverflow / 2
+                        : .0;
 
-              return InfiniteListView(
-                controller: scrollController,
-                padding: EdgeInsets.symmetric(horizontal: 16 + sidePadding),
-                centerIndex: _initialFullMonth,
-                minIndex: widget.minDate?.fullMonth,
-                maxIndex: widget.maxDate?.fullMonth,
-                itemBuilder: (context, fullMonth) => Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: _kMonthTopSpacing),
-                    SizedBox(
-                      height: kMinInteractiveDimension,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            DateFormat.yMMMM()
-                                .format(DateTime(0, fullMonth))
-                                .capitalized(),
-                            style:
-                                Theme.of(
-                                  context,
-                                ).textTheme.bodyLarge?.copyWith(
-                                  fontWeight: FontWeight.bold,
+                    return InfiniteListView(
+                      controller: scrollController,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16 + sidePadding,
+                      ),
+                      centerIndex: _initialFullMonth,
+                      minIndex: widget.minDate?.fullMonth,
+                      maxIndex: widget.maxDate?.fullMonth,
+                      itemBuilder: (context, fullMonth) => Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: _kMonthTopSpacing),
+                          SizedBox(
+                            height: kMinInteractiveDimension,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                              ),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  DateFormat.yMMMM()
+                                      .format(DateTime(0, fullMonth))
+                                      .capitalized(),
+                                  style:
+                                      Theme.of(
+                                        context,
+                                      ).textTheme.bodyLarge?.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
-                            overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
                           ),
-                        ),
+                          const DaysOfWeek(),
+                          MonthlyCalendar(
+                            fullMonth: fullMonth,
+                            selectedDate: _initialDate,
+                            minDate: widget.minDate,
+                            maxDate: widget.maxDate,
+                            onSelect: (day) => selectDate(
+                              context,
+                              DateTime(0, fullMonth, day),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    const DaysOfWeek(),
-                    MonthlyCalendar(
-                      fullMonth: fullMonth,
-                      selectedDate: _initialDate,
-                      minDate: widget.minDate,
-                      maxDate: widget.maxDate,
-                      onSelect: (day) => selectDate(
-                        context,
-                        DateTime(0, fullMonth, day),
-                      ),
-                    ),
-                  ],
+                    );
+                  },
                 ),
-              );
-            },
-          ),
+              ),
         );
-      case _DisplayMode.dialog:
+      case PickDatePresentationMode.dialog:
         return BlocProvider(
           create: (context) => _FullMonthCubit(
             _initialFullMonth,
@@ -185,7 +192,8 @@ class _PickDatePageState extends State<PickDatePage> {
                                         final year = await _pickYear(
                                           context: context,
                                           initialYear: currentYear,
-                                          displayMode: _DisplayMode.dialog,
+                                          displayMode:
+                                              PickDatePresentationMode.dialog,
                                         );
 
                                         if (year != null) {
@@ -248,8 +256,6 @@ class _PickDatePageState extends State<PickDatePage> {
     }
   }
 }
-
-enum _DisplayMode { page, dialog }
 
 class _FullMonthCubit extends Cubit<int> {
   _FullMonthCubit(
@@ -498,7 +504,7 @@ class _YearPickerState extends State<_YearPicker> {
     final year = await _pickYear(
       context: context,
       initialYear: _visibleYear,
-      displayMode: _DisplayMode.page,
+      displayMode: PickDatePresentationMode.page,
     );
 
     if (year != null) {
@@ -510,11 +516,11 @@ class _YearPickerState extends State<_YearPicker> {
 Future<int?> _pickYear({
   required BuildContext context,
   required int initialYear,
-  required _DisplayMode displayMode,
+  required PickDatePresentationMode displayMode,
 }) async {
   const padding = 16.0;
 
-  return (displayMode == _DisplayMode.dialog
+  return (displayMode == PickDatePresentationMode.dialog
       ? Push.dialog
       : Push.modalBottomSheet)<int>(
     context: context,

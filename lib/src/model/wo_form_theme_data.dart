@@ -44,6 +44,7 @@ abstract class WoFormThemeData with _$WoFormThemeData {
     MultiStepProgressIndicatorBuilderDef? multiStepProgressIndicatorBuilder,
     @notSerializable NumFieldBuilderDef? numFieldBuilder,
     @notSerializable PickDateDef? pickDate,
+    PickDateUiSettings? pickDateUiSettings,
     @notSerializable PickDurationDef? pickDuration,
     @notSerializable PickTimeDef? pickTime,
 

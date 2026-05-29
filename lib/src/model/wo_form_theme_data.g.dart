@@ -12,6 +12,11 @@ _WoFormThemeData _$WoFormThemeDataFromJson(Map<String, dynamic> json) =>
         _$DynamicInputsNodeAddButtonPositionEnumMap,
         json['dynamicInputsNodeAddButtonPosition'],
       ),
+      pickDateUiSettings: json['pickDateUiSettings'] == null
+          ? null
+          : PickDateUiSettings.fromJson(
+              json['pickDateUiSettings'] as Map<String, dynamic>,
+            ),
       stringFieldErrorLocation: $enumDecodeNullable(
         _$FieldElementLocationEnumMap,
         json['stringFieldErrorLocation'],
@@ -38,6 +43,7 @@ Map<String, dynamic> _$WoFormThemeDataToJson(_WoFormThemeData instance) =>
       'dynamicInputsNodeAddButtonPosition':
           _$DynamicInputsNodeAddButtonPositionEnumMap[instance
               .dynamicInputsNodeAddButtonPosition],
+      'pickDateUiSettings': instance.pickDateUiSettings?.toJson(),
       'stringFieldErrorLocation':
           _$FieldElementLocationEnumMap[instance.stringFieldErrorLocation],
       'stringFieldHelperLocation':
