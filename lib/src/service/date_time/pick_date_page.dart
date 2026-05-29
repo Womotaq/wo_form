@@ -79,7 +79,11 @@ class _PickDatePageState extends State<PickDatePage> {
         return Scaffold(
           appBar: AppBar(
             actions: [
-              _YearPicker(controller: scrollController!),
+              _YearPicker(
+                controller: scrollController!,
+                minYear: widget.minDate?.year,
+                maxYear: widget.maxDate?.year,
+              ),
             ],
           ),
           body:
@@ -192,6 +196,8 @@ class _PickDatePageState extends State<PickDatePage> {
                                         final year = await _pickYear(
                                           context: context,
                                           initialYear: currentYear,
+                                          minYear: widget.minDate?.year,
+                                          maxYear: widget.maxDate?.year,
                                           displayMode:
                                               PickDatePresentationMode.dialog,
                                         );
@@ -454,9 +460,15 @@ class _CalendarController extends ScrollController {
 }
 
 class _YearPicker extends StatefulWidget {
-  const _YearPicker({required this.controller});
+  const _YearPicker({
+    required this.controller,
+    required this.minYear,
+    required this.maxYear,
+  });
 
   final _CalendarController controller;
+  final int? minYear;
+  final int? maxYear;
 
   @override
   State<_YearPicker> createState() => _YearPickerState();
@@ -504,6 +516,8 @@ class _YearPickerState extends State<_YearPicker> {
     final year = await _pickYear(
       context: context,
       initialYear: _visibleYear,
+      minYear: widget.minYear,
+      maxYear: widget.maxYear,
       displayMode: PickDatePresentationMode.page,
     );
 
@@ -516,6 +530,8 @@ class _YearPickerState extends State<_YearPicker> {
 Future<int?> _pickYear({
   required BuildContext context,
   required int initialYear,
+  required int? minYear,
+  required int? maxYear,
   required PickDatePresentationMode displayMode,
 }) async {
   const padding = 16.0;
@@ -538,6 +554,8 @@ Future<int?> _pickYear({
           return InfiniteListView(
             padding: const EdgeInsets.symmetric(horizontal: padding),
             centerIndex: initialYear ~/ buttonsPerRow - 1,
+            minIndex: minYear == null ? null : minYear ~/ buttonsPerRow - 1,
+            maxIndex: maxYear == null ? null : maxYear ~/ buttonsPerRow + 1,
             itemBuilder: (context, yearBase) => Padding(
               padding: const EdgeInsets.only(top: 8),
               child: Row(
@@ -546,12 +564,18 @@ Future<int?> _pickYear({
                   buttonsPerRow,
                   (index) {
                     final year = yearBase * buttonsPerRow + index;
+                    final active =
+                        (minYear == null || year >= minYear) &&
+                        (maxYear == null || year <= maxYear);
+
                     return Expanded(
                       child:
                           (year == initialYear
                           ? FilledButton.tonal
                           : OutlinedButton.new)(
-                            onPressed: () => Navigator.of(context).pop(year),
+                            onPressed: active
+                                ? () => Navigator.of(context).pop(year)
+                                : null,
                             child: Text(year.toString()),
                           ),
                     );
