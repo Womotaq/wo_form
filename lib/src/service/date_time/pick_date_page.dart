@@ -7,9 +7,6 @@ import 'package:intl/intl.dart';
 import 'package:wo_form/src/utils/extensions.dart';
 import 'package:wo_form/wo_form.dart';
 
-// TODO : dots under dates to show where the user already has events
-// RoundedBody
-
 // Top spacing before the month label.
 const _kMonthTopSpacing = 24.0;
 
