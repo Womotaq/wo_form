@@ -285,6 +285,7 @@ class SearchScreen<T> extends StatelessWidget {
   Widget body(BuildContext context, FutureData<Iterable<T>> data) => ListView(
     padding: EdgeInsets.zero,
     controller: ScrollControllerProvider.of(context),
+    physics: layout.shrinks ? const NeverScrollableScrollPhysics() : null,
     shrinkWrap: layout.shrinks,
     children: switch (data) {
       DataError() => [
