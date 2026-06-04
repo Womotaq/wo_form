@@ -300,8 +300,8 @@ as BooleanFieldBuilderDef?,
 /// @nodoc
 mixin _$DateTimeInputUiSettings {
 
- String? get dateFormat; String? get timeFormat; String? get labelText;/// Default to [FieldElementLocation.inside].
- FieldElementLocation? get labelLocation; String? get hintText; String? get helperText;/// Default to [FieldElementLocation.inside].
+ String? get dateFormat; String? get timeFormat; String? get labelText; int? get labelMaxLines;/// Default to [FieldElementLocation.inside].
+ FieldElementLocation? get labelLocation; String? get hintText; String? get helperText; int? get helperMaxLines;/// Default to [FieldElementLocation.inside].
  FieldElementLocation? get helperLocation;/// If null or O, header will be placed above the field.
 /// Else, header and selector will be in a the same row.
 /// If -1, the field will take as much space as he wants
@@ -311,7 +311,7 @@ mixin _$DateTimeInputUiSettings {
  int? get headerFlex;@notSerializable Widget? get prefixIcon;/// Default to [FieldElementLocation.outside].
  FieldElementLocation? get prefixIconLocation;/// Default to [FieldElementLocation.inside].
  FieldElementLocation? get errorLocation; String? get addDateText; String? get addTimeText;/// If DateTimeInput.initialValue is null, this value will be used instead.
- FlexibleDateTime? get initialEditValue; DateEditMode? get editMode;@PickDateDefNullableConverter() PickDateDef? get pickDate;@notSerializable PickTimeDef? get pickTime; TimePickerEntryMode? get initialTimeEntryMode;@notSerializable DateTimeFieldBuilderDef? get widgetBuilder;
+ FlexibleDateTime? get initialEditValue; DateEditMode? get editMode;@PickDateDefNullableConverter() PickDateDef? get pickDate; PickDateUiSettings? get pickDateUiSettings;@notSerializable PickTimeDef? get pickTime; TimePickerEntryMode? get initialTimeEntryMode;@notSerializable DateTimeFieldBuilderDef? get widgetBuilder;
 /// Create a copy of DateTimeInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -324,16 +324,16 @@ $DateTimeInputUiSettingsCopyWith<DateTimeInputUiSettings> get copyWith => _$Date
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DateTimeInputUiSettings&&(identical(other.dateFormat, dateFormat) || other.dateFormat == dateFormat)&&(identical(other.timeFormat, timeFormat) || other.timeFormat == timeFormat)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelLocation, labelLocation) || other.labelLocation == labelLocation)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.helperLocation, helperLocation) || other.helperLocation == helperLocation)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.prefixIconLocation, prefixIconLocation) || other.prefixIconLocation == prefixIconLocation)&&(identical(other.errorLocation, errorLocation) || other.errorLocation == errorLocation)&&(identical(other.addDateText, addDateText) || other.addDateText == addDateText)&&(identical(other.addTimeText, addTimeText) || other.addTimeText == addTimeText)&&(identical(other.initialEditValue, initialEditValue) || other.initialEditValue == initialEditValue)&&(identical(other.editMode, editMode) || other.editMode == editMode)&&(identical(other.pickDate, pickDate) || other.pickDate == pickDate)&&(identical(other.pickTime, pickTime) || other.pickTime == pickTime)&&(identical(other.initialTimeEntryMode, initialTimeEntryMode) || other.initialTimeEntryMode == initialTimeEntryMode)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DateTimeInputUiSettings&&(identical(other.dateFormat, dateFormat) || other.dateFormat == dateFormat)&&(identical(other.timeFormat, timeFormat) || other.timeFormat == timeFormat)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelMaxLines, labelMaxLines) || other.labelMaxLines == labelMaxLines)&&(identical(other.labelLocation, labelLocation) || other.labelLocation == labelLocation)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.helperMaxLines, helperMaxLines) || other.helperMaxLines == helperMaxLines)&&(identical(other.helperLocation, helperLocation) || other.helperLocation == helperLocation)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.prefixIconLocation, prefixIconLocation) || other.prefixIconLocation == prefixIconLocation)&&(identical(other.errorLocation, errorLocation) || other.errorLocation == errorLocation)&&(identical(other.addDateText, addDateText) || other.addDateText == addDateText)&&(identical(other.addTimeText, addTimeText) || other.addTimeText == addTimeText)&&(identical(other.initialEditValue, initialEditValue) || other.initialEditValue == initialEditValue)&&(identical(other.editMode, editMode) || other.editMode == editMode)&&(identical(other.pickDate, pickDate) || other.pickDate == pickDate)&&(identical(other.pickDateUiSettings, pickDateUiSettings) || other.pickDateUiSettings == pickDateUiSettings)&&(identical(other.pickTime, pickTime) || other.pickTime == pickTime)&&(identical(other.initialTimeEntryMode, initialTimeEntryMode) || other.initialTimeEntryMode == initialTimeEntryMode)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,dateFormat,timeFormat,labelText,labelLocation,hintText,helperText,helperLocation,headerFlex,prefixIcon,prefixIconLocation,errorLocation,addDateText,addTimeText,initialEditValue,editMode,pickDate,pickTime,initialTimeEntryMode,widgetBuilder]);
+int get hashCode => Object.hashAll([runtimeType,dateFormat,timeFormat,labelText,labelMaxLines,labelLocation,hintText,helperText,helperMaxLines,helperLocation,headerFlex,prefixIcon,prefixIconLocation,errorLocation,addDateText,addTimeText,initialEditValue,editMode,pickDate,pickDateUiSettings,pickTime,initialTimeEntryMode,widgetBuilder]);
 
 @override
 String toString() {
-  return 'DateTimeInputUiSettings(dateFormat: $dateFormat, timeFormat: $timeFormat, labelText: $labelText, labelLocation: $labelLocation, hintText: $hintText, helperText: $helperText, helperLocation: $helperLocation, headerFlex: $headerFlex, prefixIcon: $prefixIcon, prefixIconLocation: $prefixIconLocation, errorLocation: $errorLocation, addDateText: $addDateText, addTimeText: $addTimeText, initialEditValue: $initialEditValue, editMode: $editMode, pickDate: $pickDate, pickTime: $pickTime, initialTimeEntryMode: $initialTimeEntryMode, widgetBuilder: $widgetBuilder)';
+  return 'DateTimeInputUiSettings(dateFormat: $dateFormat, timeFormat: $timeFormat, labelText: $labelText, labelMaxLines: $labelMaxLines, labelLocation: $labelLocation, hintText: $hintText, helperText: $helperText, helperMaxLines: $helperMaxLines, helperLocation: $helperLocation, headerFlex: $headerFlex, prefixIcon: $prefixIcon, prefixIconLocation: $prefixIconLocation, errorLocation: $errorLocation, addDateText: $addDateText, addTimeText: $addTimeText, initialEditValue: $initialEditValue, editMode: $editMode, pickDate: $pickDate, pickDateUiSettings: $pickDateUiSettings, pickTime: $pickTime, initialTimeEntryMode: $initialTimeEntryMode, widgetBuilder: $widgetBuilder)';
 }
 
 
@@ -344,11 +344,11 @@ abstract mixin class $DateTimeInputUiSettingsCopyWith<$Res>  {
   factory $DateTimeInputUiSettingsCopyWith(DateTimeInputUiSettings value, $Res Function(DateTimeInputUiSettings) _then) = _$DateTimeInputUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String? dateFormat, String? timeFormat, String? labelText, FieldElementLocation? labelLocation, String? hintText, String? helperText, FieldElementLocation? helperLocation, int? headerFlex,@notSerializable Widget? prefixIcon, FieldElementLocation? prefixIconLocation, FieldElementLocation? errorLocation, String? addDateText, String? addTimeText, FlexibleDateTime? initialEditValue, DateEditMode? editMode,@PickDateDefNullableConverter() PickDateDef? pickDate,@notSerializable PickTimeDef? pickTime, TimePickerEntryMode? initialTimeEntryMode,@notSerializable DateTimeFieldBuilderDef? widgetBuilder
+ String? dateFormat, String? timeFormat, String? labelText, int? labelMaxLines, FieldElementLocation? labelLocation, String? hintText, String? helperText, int? helperMaxLines, FieldElementLocation? helperLocation, int? headerFlex,@notSerializable Widget? prefixIcon, FieldElementLocation? prefixIconLocation, FieldElementLocation? errorLocation, String? addDateText, String? addTimeText, FlexibleDateTime? initialEditValue, DateEditMode? editMode,@PickDateDefNullableConverter() PickDateDef? pickDate, PickDateUiSettings? pickDateUiSettings,@notSerializable PickTimeDef? pickTime, TimePickerEntryMode? initialTimeEntryMode,@notSerializable DateTimeFieldBuilderDef? widgetBuilder
 });
 
 
-$FlexibleDateTimeCopyWith<$Res>? get initialEditValue;
+$FlexibleDateTimeCopyWith<$Res>? get initialEditValue;$PickDateUiSettingsCopyWith<$Res>? get pickDateUiSettings;
 
 }
 /// @nodoc
@@ -361,15 +361,17 @@ class _$DateTimeInputUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of DateTimeInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? dateFormat = freezed,Object? timeFormat = freezed,Object? labelText = freezed,Object? labelLocation = freezed,Object? hintText = freezed,Object? helperText = freezed,Object? helperLocation = freezed,Object? headerFlex = freezed,Object? prefixIcon = freezed,Object? prefixIconLocation = freezed,Object? errorLocation = freezed,Object? addDateText = freezed,Object? addTimeText = freezed,Object? initialEditValue = freezed,Object? editMode = freezed,Object? pickDate = freezed,Object? pickTime = freezed,Object? initialTimeEntryMode = freezed,Object? widgetBuilder = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? dateFormat = freezed,Object? timeFormat = freezed,Object? labelText = freezed,Object? labelMaxLines = freezed,Object? labelLocation = freezed,Object? hintText = freezed,Object? helperText = freezed,Object? helperMaxLines = freezed,Object? helperLocation = freezed,Object? headerFlex = freezed,Object? prefixIcon = freezed,Object? prefixIconLocation = freezed,Object? errorLocation = freezed,Object? addDateText = freezed,Object? addTimeText = freezed,Object? initialEditValue = freezed,Object? editMode = freezed,Object? pickDate = freezed,Object? pickDateUiSettings = freezed,Object? pickTime = freezed,Object? initialTimeEntryMode = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_self.copyWith(
 dateFormat: freezed == dateFormat ? _self.dateFormat : dateFormat // ignore: cast_nullable_to_non_nullable
 as String?,timeFormat: freezed == timeFormat ? _self.timeFormat : timeFormat // ignore: cast_nullable_to_non_nullable
 as String?,labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
-as String?,labelLocation: freezed == labelLocation ? _self.labelLocation : labelLocation // ignore: cast_nullable_to_non_nullable
+as String?,labelMaxLines: freezed == labelMaxLines ? _self.labelMaxLines : labelMaxLines // ignore: cast_nullable_to_non_nullable
+as int?,labelLocation: freezed == labelLocation ? _self.labelLocation : labelLocation // ignore: cast_nullable_to_non_nullable
 as FieldElementLocation?,hintText: freezed == hintText ? _self.hintText : hintText // ignore: cast_nullable_to_non_nullable
 as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
-as String?,helperLocation: freezed == helperLocation ? _self.helperLocation : helperLocation // ignore: cast_nullable_to_non_nullable
+as String?,helperMaxLines: freezed == helperMaxLines ? _self.helperMaxLines : helperMaxLines // ignore: cast_nullable_to_non_nullable
+as int?,helperLocation: freezed == helperLocation ? _self.helperLocation : helperLocation // ignore: cast_nullable_to_non_nullable
 as FieldElementLocation?,headerFlex: freezed == headerFlex ? _self.headerFlex : headerFlex // ignore: cast_nullable_to_non_nullable
 as int?,prefixIcon: freezed == prefixIcon ? _self.prefixIcon : prefixIcon // ignore: cast_nullable_to_non_nullable
 as Widget?,prefixIconLocation: freezed == prefixIconLocation ? _self.prefixIconLocation : prefixIconLocation // ignore: cast_nullable_to_non_nullable
@@ -379,7 +381,8 @@ as String?,addTimeText: freezed == addTimeText ? _self.addTimeText : addTimeText
 as String?,initialEditValue: freezed == initialEditValue ? _self.initialEditValue : initialEditValue // ignore: cast_nullable_to_non_nullable
 as FlexibleDateTime?,editMode: freezed == editMode ? _self.editMode : editMode // ignore: cast_nullable_to_non_nullable
 as DateEditMode?,pickDate: freezed == pickDate ? _self.pickDate : pickDate // ignore: cast_nullable_to_non_nullable
-as PickDateDef?,pickTime: freezed == pickTime ? _self.pickTime : pickTime // ignore: cast_nullable_to_non_nullable
+as PickDateDef?,pickDateUiSettings: freezed == pickDateUiSettings ? _self.pickDateUiSettings : pickDateUiSettings // ignore: cast_nullable_to_non_nullable
+as PickDateUiSettings?,pickTime: freezed == pickTime ? _self.pickTime : pickTime // ignore: cast_nullable_to_non_nullable
 as PickTimeDef?,initialTimeEntryMode: freezed == initialTimeEntryMode ? _self.initialTimeEntryMode : initialTimeEntryMode // ignore: cast_nullable_to_non_nullable
 as TimePickerEntryMode?,widgetBuilder: freezed == widgetBuilder ? _self.widgetBuilder : widgetBuilder // ignore: cast_nullable_to_non_nullable
 as DateTimeFieldBuilderDef?,
@@ -397,6 +400,18 @@ $FlexibleDateTimeCopyWith<$Res>? get initialEditValue {
   return $FlexibleDateTimeCopyWith<$Res>(_self.initialEditValue!, (value) {
     return _then(_self.copyWith(initialEditValue: value));
   });
+}/// Create a copy of DateTimeInputUiSettings
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$PickDateUiSettingsCopyWith<$Res>? get pickDateUiSettings {
+    if (_self.pickDateUiSettings == null) {
+    return null;
+  }
+
+  return $PickDateUiSettingsCopyWith<$Res>(_self.pickDateUiSettings!, (value) {
+    return _then(_self.copyWith(pickDateUiSettings: value));
+  });
 }
 }
 
@@ -406,16 +421,18 @@ $FlexibleDateTimeCopyWith<$Res>? get initialEditValue {
 @JsonSerializable()
 
 class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
-  const _DateTimeInputUiSettings({this.dateFormat, this.timeFormat, this.labelText, this.labelLocation, this.hintText, this.helperText, this.helperLocation, this.headerFlex, @notSerializable this.prefixIcon, this.prefixIconLocation, this.errorLocation, this.addDateText, this.addTimeText, this.initialEditValue, this.editMode, @PickDateDefNullableConverter() this.pickDate, @notSerializable this.pickTime, this.initialTimeEntryMode, @notSerializable this.widgetBuilder}): super._();
+  const _DateTimeInputUiSettings({this.dateFormat, this.timeFormat, this.labelText, this.labelMaxLines, this.labelLocation, this.hintText, this.helperText, this.helperMaxLines, this.helperLocation, this.headerFlex, @notSerializable this.prefixIcon, this.prefixIconLocation, this.errorLocation, this.addDateText, this.addTimeText, this.initialEditValue, this.editMode, @PickDateDefNullableConverter() this.pickDate, this.pickDateUiSettings, @notSerializable this.pickTime, this.initialTimeEntryMode, @notSerializable this.widgetBuilder}): super._();
   factory _DateTimeInputUiSettings.fromJson(Map<String, dynamic> json) => _$DateTimeInputUiSettingsFromJson(json);
 
 @override final  String? dateFormat;
 @override final  String? timeFormat;
 @override final  String? labelText;
+@override final  int? labelMaxLines;
 /// Default to [FieldElementLocation.inside].
 @override final  FieldElementLocation? labelLocation;
 @override final  String? hintText;
 @override final  String? helperText;
+@override final  int? helperMaxLines;
 /// Default to [FieldElementLocation.inside].
 @override final  FieldElementLocation? helperLocation;
 /// If null or O, header will be placed above the field.
@@ -436,6 +453,7 @@ class _DateTimeInputUiSettings extends DateTimeInputUiSettings {
 @override final  FlexibleDateTime? initialEditValue;
 @override final  DateEditMode? editMode;
 @override@PickDateDefNullableConverter() final  PickDateDef? pickDate;
+@override final  PickDateUiSettings? pickDateUiSettings;
 @override@notSerializable final  PickTimeDef? pickTime;
 @override final  TimePickerEntryMode? initialTimeEntryMode;
 @override@notSerializable final  DateTimeFieldBuilderDef? widgetBuilder;
@@ -453,16 +471,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DateTimeInputUiSettings&&(identical(other.dateFormat, dateFormat) || other.dateFormat == dateFormat)&&(identical(other.timeFormat, timeFormat) || other.timeFormat == timeFormat)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelLocation, labelLocation) || other.labelLocation == labelLocation)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.helperLocation, helperLocation) || other.helperLocation == helperLocation)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.prefixIconLocation, prefixIconLocation) || other.prefixIconLocation == prefixIconLocation)&&(identical(other.errorLocation, errorLocation) || other.errorLocation == errorLocation)&&(identical(other.addDateText, addDateText) || other.addDateText == addDateText)&&(identical(other.addTimeText, addTimeText) || other.addTimeText == addTimeText)&&(identical(other.initialEditValue, initialEditValue) || other.initialEditValue == initialEditValue)&&(identical(other.editMode, editMode) || other.editMode == editMode)&&(identical(other.pickDate, pickDate) || other.pickDate == pickDate)&&(identical(other.pickTime, pickTime) || other.pickTime == pickTime)&&(identical(other.initialTimeEntryMode, initialTimeEntryMode) || other.initialTimeEntryMode == initialTimeEntryMode)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DateTimeInputUiSettings&&(identical(other.dateFormat, dateFormat) || other.dateFormat == dateFormat)&&(identical(other.timeFormat, timeFormat) || other.timeFormat == timeFormat)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelMaxLines, labelMaxLines) || other.labelMaxLines == labelMaxLines)&&(identical(other.labelLocation, labelLocation) || other.labelLocation == labelLocation)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.helperMaxLines, helperMaxLines) || other.helperMaxLines == helperMaxLines)&&(identical(other.helperLocation, helperLocation) || other.helperLocation == helperLocation)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.prefixIconLocation, prefixIconLocation) || other.prefixIconLocation == prefixIconLocation)&&(identical(other.errorLocation, errorLocation) || other.errorLocation == errorLocation)&&(identical(other.addDateText, addDateText) || other.addDateText == addDateText)&&(identical(other.addTimeText, addTimeText) || other.addTimeText == addTimeText)&&(identical(other.initialEditValue, initialEditValue) || other.initialEditValue == initialEditValue)&&(identical(other.editMode, editMode) || other.editMode == editMode)&&(identical(other.pickDate, pickDate) || other.pickDate == pickDate)&&(identical(other.pickDateUiSettings, pickDateUiSettings) || other.pickDateUiSettings == pickDateUiSettings)&&(identical(other.pickTime, pickTime) || other.pickTime == pickTime)&&(identical(other.initialTimeEntryMode, initialTimeEntryMode) || other.initialTimeEntryMode == initialTimeEntryMode)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,dateFormat,timeFormat,labelText,labelLocation,hintText,helperText,helperLocation,headerFlex,prefixIcon,prefixIconLocation,errorLocation,addDateText,addTimeText,initialEditValue,editMode,pickDate,pickTime,initialTimeEntryMode,widgetBuilder]);
+int get hashCode => Object.hashAll([runtimeType,dateFormat,timeFormat,labelText,labelMaxLines,labelLocation,hintText,helperText,helperMaxLines,helperLocation,headerFlex,prefixIcon,prefixIconLocation,errorLocation,addDateText,addTimeText,initialEditValue,editMode,pickDate,pickDateUiSettings,pickTime,initialTimeEntryMode,widgetBuilder]);
 
 @override
 String toString() {
-  return 'DateTimeInputUiSettings(dateFormat: $dateFormat, timeFormat: $timeFormat, labelText: $labelText, labelLocation: $labelLocation, hintText: $hintText, helperText: $helperText, helperLocation: $helperLocation, headerFlex: $headerFlex, prefixIcon: $prefixIcon, prefixIconLocation: $prefixIconLocation, errorLocation: $errorLocation, addDateText: $addDateText, addTimeText: $addTimeText, initialEditValue: $initialEditValue, editMode: $editMode, pickDate: $pickDate, pickTime: $pickTime, initialTimeEntryMode: $initialTimeEntryMode, widgetBuilder: $widgetBuilder)';
+  return 'DateTimeInputUiSettings(dateFormat: $dateFormat, timeFormat: $timeFormat, labelText: $labelText, labelMaxLines: $labelMaxLines, labelLocation: $labelLocation, hintText: $hintText, helperText: $helperText, helperMaxLines: $helperMaxLines, helperLocation: $helperLocation, headerFlex: $headerFlex, prefixIcon: $prefixIcon, prefixIconLocation: $prefixIconLocation, errorLocation: $errorLocation, addDateText: $addDateText, addTimeText: $addTimeText, initialEditValue: $initialEditValue, editMode: $editMode, pickDate: $pickDate, pickDateUiSettings: $pickDateUiSettings, pickTime: $pickTime, initialTimeEntryMode: $initialTimeEntryMode, widgetBuilder: $widgetBuilder)';
 }
 
 
@@ -473,11 +491,11 @@ abstract mixin class _$DateTimeInputUiSettingsCopyWith<$Res> implements $DateTim
   factory _$DateTimeInputUiSettingsCopyWith(_DateTimeInputUiSettings value, $Res Function(_DateTimeInputUiSettings) _then) = __$DateTimeInputUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String? dateFormat, String? timeFormat, String? labelText, FieldElementLocation? labelLocation, String? hintText, String? helperText, FieldElementLocation? helperLocation, int? headerFlex,@notSerializable Widget? prefixIcon, FieldElementLocation? prefixIconLocation, FieldElementLocation? errorLocation, String? addDateText, String? addTimeText, FlexibleDateTime? initialEditValue, DateEditMode? editMode,@PickDateDefNullableConverter() PickDateDef? pickDate,@notSerializable PickTimeDef? pickTime, TimePickerEntryMode? initialTimeEntryMode,@notSerializable DateTimeFieldBuilderDef? widgetBuilder
+ String? dateFormat, String? timeFormat, String? labelText, int? labelMaxLines, FieldElementLocation? labelLocation, String? hintText, String? helperText, int? helperMaxLines, FieldElementLocation? helperLocation, int? headerFlex,@notSerializable Widget? prefixIcon, FieldElementLocation? prefixIconLocation, FieldElementLocation? errorLocation, String? addDateText, String? addTimeText, FlexibleDateTime? initialEditValue, DateEditMode? editMode,@PickDateDefNullableConverter() PickDateDef? pickDate, PickDateUiSettings? pickDateUiSettings,@notSerializable PickTimeDef? pickTime, TimePickerEntryMode? initialTimeEntryMode,@notSerializable DateTimeFieldBuilderDef? widgetBuilder
 });
 
 
-@override $FlexibleDateTimeCopyWith<$Res>? get initialEditValue;
+@override $FlexibleDateTimeCopyWith<$Res>? get initialEditValue;@override $PickDateUiSettingsCopyWith<$Res>? get pickDateUiSettings;
 
 }
 /// @nodoc
@@ -490,15 +508,17 @@ class __$DateTimeInputUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of DateTimeInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? dateFormat = freezed,Object? timeFormat = freezed,Object? labelText = freezed,Object? labelLocation = freezed,Object? hintText = freezed,Object? helperText = freezed,Object? helperLocation = freezed,Object? headerFlex = freezed,Object? prefixIcon = freezed,Object? prefixIconLocation = freezed,Object? errorLocation = freezed,Object? addDateText = freezed,Object? addTimeText = freezed,Object? initialEditValue = freezed,Object? editMode = freezed,Object? pickDate = freezed,Object? pickTime = freezed,Object? initialTimeEntryMode = freezed,Object? widgetBuilder = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? dateFormat = freezed,Object? timeFormat = freezed,Object? labelText = freezed,Object? labelMaxLines = freezed,Object? labelLocation = freezed,Object? hintText = freezed,Object? helperText = freezed,Object? helperMaxLines = freezed,Object? helperLocation = freezed,Object? headerFlex = freezed,Object? prefixIcon = freezed,Object? prefixIconLocation = freezed,Object? errorLocation = freezed,Object? addDateText = freezed,Object? addTimeText = freezed,Object? initialEditValue = freezed,Object? editMode = freezed,Object? pickDate = freezed,Object? pickDateUiSettings = freezed,Object? pickTime = freezed,Object? initialTimeEntryMode = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_DateTimeInputUiSettings(
 dateFormat: freezed == dateFormat ? _self.dateFormat : dateFormat // ignore: cast_nullable_to_non_nullable
 as String?,timeFormat: freezed == timeFormat ? _self.timeFormat : timeFormat // ignore: cast_nullable_to_non_nullable
 as String?,labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
-as String?,labelLocation: freezed == labelLocation ? _self.labelLocation : labelLocation // ignore: cast_nullable_to_non_nullable
+as String?,labelMaxLines: freezed == labelMaxLines ? _self.labelMaxLines : labelMaxLines // ignore: cast_nullable_to_non_nullable
+as int?,labelLocation: freezed == labelLocation ? _self.labelLocation : labelLocation // ignore: cast_nullable_to_non_nullable
 as FieldElementLocation?,hintText: freezed == hintText ? _self.hintText : hintText // ignore: cast_nullable_to_non_nullable
 as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
-as String?,helperLocation: freezed == helperLocation ? _self.helperLocation : helperLocation // ignore: cast_nullable_to_non_nullable
+as String?,helperMaxLines: freezed == helperMaxLines ? _self.helperMaxLines : helperMaxLines // ignore: cast_nullable_to_non_nullable
+as int?,helperLocation: freezed == helperLocation ? _self.helperLocation : helperLocation // ignore: cast_nullable_to_non_nullable
 as FieldElementLocation?,headerFlex: freezed == headerFlex ? _self.headerFlex : headerFlex // ignore: cast_nullable_to_non_nullable
 as int?,prefixIcon: freezed == prefixIcon ? _self.prefixIcon : prefixIcon // ignore: cast_nullable_to_non_nullable
 as Widget?,prefixIconLocation: freezed == prefixIconLocation ? _self.prefixIconLocation : prefixIconLocation // ignore: cast_nullable_to_non_nullable
@@ -508,7 +528,8 @@ as String?,addTimeText: freezed == addTimeText ? _self.addTimeText : addTimeText
 as String?,initialEditValue: freezed == initialEditValue ? _self.initialEditValue : initialEditValue // ignore: cast_nullable_to_non_nullable
 as FlexibleDateTime?,editMode: freezed == editMode ? _self.editMode : editMode // ignore: cast_nullable_to_non_nullable
 as DateEditMode?,pickDate: freezed == pickDate ? _self.pickDate : pickDate // ignore: cast_nullable_to_non_nullable
-as PickDateDef?,pickTime: freezed == pickTime ? _self.pickTime : pickTime // ignore: cast_nullable_to_non_nullable
+as PickDateDef?,pickDateUiSettings: freezed == pickDateUiSettings ? _self.pickDateUiSettings : pickDateUiSettings // ignore: cast_nullable_to_non_nullable
+as PickDateUiSettings?,pickTime: freezed == pickTime ? _self.pickTime : pickTime // ignore: cast_nullable_to_non_nullable
 as PickTimeDef?,initialTimeEntryMode: freezed == initialTimeEntryMode ? _self.initialTimeEntryMode : initialTimeEntryMode // ignore: cast_nullable_to_non_nullable
 as TimePickerEntryMode?,widgetBuilder: freezed == widgetBuilder ? _self.widgetBuilder : widgetBuilder // ignore: cast_nullable_to_non_nullable
 as DateTimeFieldBuilderDef?,
@@ -526,6 +547,18 @@ $FlexibleDateTimeCopyWith<$Res>? get initialEditValue {
 
   return $FlexibleDateTimeCopyWith<$Res>(_self.initialEditValue!, (value) {
     return _then(_self.copyWith(initialEditValue: value));
+  });
+}/// Create a copy of DateTimeInputUiSettings
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$PickDateUiSettingsCopyWith<$Res>? get pickDateUiSettings {
+    if (_self.pickDateUiSettings == null) {
+    return null;
+  }
+
+  return $PickDateUiSettingsCopyWith<$Res>(_self.pickDateUiSettings!, (value) {
+    return _then(_self.copyWith(pickDateUiSettings: value));
   });
 }
 }
@@ -751,7 +784,9 @@ as PickTimeDef?,
 mixin _$DynamicInputsNodeUiSettings {
 
  String? get labelText; String? get helperText;/// Default to true
- bool? get reorderable;/// Default to [reorderable].
+ bool? get reorderable;/// Defaults to [ListTileControlAffinity.platform], which always transforms
+/// into [ListTileControlAffinity.leading].
+ ListTileControlAffinity? get grabHandleLocation;/// Default to [reorderable].
  bool? get oddEvenRowColors;/// if null, the add button will be an IconButton with a '+'.
  String? get addButtonText;/// Defaults to [DynamicInputsNodeAddButtonPosition.header].
  DynamicInputsNodeAddButtonPosition? get addButtonPosition;@notSerializable DynamicInputsNodeWidgetBuilderDef? get addButtonBuilder;/// Defaults to [Push.modalBottomSheet] with initialBottomSheetSize at 0.9.
@@ -769,16 +804,16 @@ $DynamicInputsNodeUiSettingsCopyWith<DynamicInputsNodeUiSettings> get copyWith =
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DynamicInputsNodeUiSettings&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.reorderable, reorderable) || other.reorderable == reorderable)&&(identical(other.oddEvenRowColors, oddEvenRowColors) || other.oddEvenRowColors == oddEvenRowColors)&&(identical(other.addButtonText, addButtonText) || other.addButtonText == addButtonText)&&(identical(other.addButtonPosition, addButtonPosition) || other.addButtonPosition == addButtonPosition)&&(identical(other.addButtonBuilder, addButtonBuilder) || other.addButtonBuilder == addButtonBuilder)&&(identical(other.openTemplates, openTemplates) || other.openTemplates == openTemplates)&&(identical(other.generateId, generateId) || other.generateId == generateId)&&(identical(other.onChildDeletion, onChildDeletion) || other.onChildDeletion == onChildDeletion)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DynamicInputsNodeUiSettings&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.reorderable, reorderable) || other.reorderable == reorderable)&&(identical(other.grabHandleLocation, grabHandleLocation) || other.grabHandleLocation == grabHandleLocation)&&(identical(other.oddEvenRowColors, oddEvenRowColors) || other.oddEvenRowColors == oddEvenRowColors)&&(identical(other.addButtonText, addButtonText) || other.addButtonText == addButtonText)&&(identical(other.addButtonPosition, addButtonPosition) || other.addButtonPosition == addButtonPosition)&&(identical(other.addButtonBuilder, addButtonBuilder) || other.addButtonBuilder == addButtonBuilder)&&(identical(other.openTemplates, openTemplates) || other.openTemplates == openTemplates)&&(identical(other.generateId, generateId) || other.generateId == generateId)&&(identical(other.onChildDeletion, onChildDeletion) || other.onChildDeletion == onChildDeletion)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,labelText,helperText,reorderable,oddEvenRowColors,addButtonText,addButtonPosition,addButtonBuilder,openTemplates,generateId,onChildDeletion,widgetBuilder);
+int get hashCode => Object.hash(runtimeType,labelText,helperText,reorderable,grabHandleLocation,oddEvenRowColors,addButtonText,addButtonPosition,addButtonBuilder,openTemplates,generateId,onChildDeletion,widgetBuilder);
 
 @override
 String toString() {
-  return 'DynamicInputsNodeUiSettings(labelText: $labelText, helperText: $helperText, reorderable: $reorderable, oddEvenRowColors: $oddEvenRowColors, addButtonText: $addButtonText, addButtonPosition: $addButtonPosition, addButtonBuilder: $addButtonBuilder, openTemplates: $openTemplates, generateId: $generateId, onChildDeletion: $onChildDeletion, widgetBuilder: $widgetBuilder)';
+  return 'DynamicInputsNodeUiSettings(labelText: $labelText, helperText: $helperText, reorderable: $reorderable, grabHandleLocation: $grabHandleLocation, oddEvenRowColors: $oddEvenRowColors, addButtonText: $addButtonText, addButtonPosition: $addButtonPosition, addButtonBuilder: $addButtonBuilder, openTemplates: $openTemplates, generateId: $generateId, onChildDeletion: $onChildDeletion, widgetBuilder: $widgetBuilder)';
 }
 
 
@@ -789,7 +824,7 @@ abstract mixin class $DynamicInputsNodeUiSettingsCopyWith<$Res>  {
   factory $DynamicInputsNodeUiSettingsCopyWith(DynamicInputsNodeUiSettings value, $Res Function(DynamicInputsNodeUiSettings) _then) = _$DynamicInputsNodeUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- String? labelText, String? helperText, bool? reorderable, bool? oddEvenRowColors, String? addButtonText, DynamicInputsNodeAddButtonPosition? addButtonPosition,@notSerializable DynamicInputsNodeWidgetBuilderDef? addButtonBuilder,@PushDefNullableConverter() PushDef? openTemplates,@notSerializable GenerateIdDef? generateId,@notSerializable OnDynamicInputDeletionDef? onChildDeletion,@notSerializable DynamicInputsNodeWidgetBuilderDef? widgetBuilder
+ String? labelText, String? helperText, bool? reorderable, ListTileControlAffinity? grabHandleLocation, bool? oddEvenRowColors, String? addButtonText, DynamicInputsNodeAddButtonPosition? addButtonPosition,@notSerializable DynamicInputsNodeWidgetBuilderDef? addButtonBuilder,@PushDefNullableConverter() PushDef? openTemplates,@notSerializable GenerateIdDef? generateId,@notSerializable OnDynamicInputDeletionDef? onChildDeletion,@notSerializable DynamicInputsNodeWidgetBuilderDef? widgetBuilder
 });
 
 
@@ -806,12 +841,13 @@ class _$DynamicInputsNodeUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of DynamicInputsNodeUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? labelText = freezed,Object? helperText = freezed,Object? reorderable = freezed,Object? oddEvenRowColors = freezed,Object? addButtonText = freezed,Object? addButtonPosition = freezed,Object? addButtonBuilder = freezed,Object? openTemplates = freezed,Object? generateId = freezed,Object? onChildDeletion = freezed,Object? widgetBuilder = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? labelText = freezed,Object? helperText = freezed,Object? reorderable = freezed,Object? grabHandleLocation = freezed,Object? oddEvenRowColors = freezed,Object? addButtonText = freezed,Object? addButtonPosition = freezed,Object? addButtonBuilder = freezed,Object? openTemplates = freezed,Object? generateId = freezed,Object? onChildDeletion = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_self.copyWith(
 labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
 as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
 as String?,reorderable: freezed == reorderable ? _self.reorderable : reorderable // ignore: cast_nullable_to_non_nullable
-as bool?,oddEvenRowColors: freezed == oddEvenRowColors ? _self.oddEvenRowColors : oddEvenRowColors // ignore: cast_nullable_to_non_nullable
+as bool?,grabHandleLocation: freezed == grabHandleLocation ? _self.grabHandleLocation : grabHandleLocation // ignore: cast_nullable_to_non_nullable
+as ListTileControlAffinity?,oddEvenRowColors: freezed == oddEvenRowColors ? _self.oddEvenRowColors : oddEvenRowColors // ignore: cast_nullable_to_non_nullable
 as bool?,addButtonText: freezed == addButtonText ? _self.addButtonText : addButtonText // ignore: cast_nullable_to_non_nullable
 as String?,addButtonPosition: freezed == addButtonPosition ? _self.addButtonPosition : addButtonPosition // ignore: cast_nullable_to_non_nullable
 as DynamicInputsNodeAddButtonPosition?,addButtonBuilder: freezed == addButtonBuilder ? _self.addButtonBuilder : addButtonBuilder // ignore: cast_nullable_to_non_nullable
@@ -831,13 +867,16 @@ as DynamicInputsNodeWidgetBuilderDef?,
 @JsonSerializable()
 
 class _DynamicInputsNodeUiSettings extends DynamicInputsNodeUiSettings {
-  const _DynamicInputsNodeUiSettings({this.labelText, this.helperText, this.reorderable, this.oddEvenRowColors, this.addButtonText, this.addButtonPosition, @notSerializable this.addButtonBuilder, @PushDefNullableConverter() this.openTemplates, @notSerializable this.generateId, @notSerializable this.onChildDeletion, @notSerializable this.widgetBuilder}): super._();
+  const _DynamicInputsNodeUiSettings({this.labelText, this.helperText, this.reorderable, this.grabHandleLocation, this.oddEvenRowColors, this.addButtonText, this.addButtonPosition, @notSerializable this.addButtonBuilder, @PushDefNullableConverter() this.openTemplates, @notSerializable this.generateId, @notSerializable this.onChildDeletion, @notSerializable this.widgetBuilder}): super._();
   factory _DynamicInputsNodeUiSettings.fromJson(Map<String, dynamic> json) => _$DynamicInputsNodeUiSettingsFromJson(json);
 
 @override final  String? labelText;
 @override final  String? helperText;
 /// Default to true
 @override final  bool? reorderable;
+/// Defaults to [ListTileControlAffinity.platform], which always transforms
+/// into [ListTileControlAffinity.leading].
+@override final  ListTileControlAffinity? grabHandleLocation;
 /// Default to [reorderable].
 @override final  bool? oddEvenRowColors;
 /// if null, the add button will be an IconButton with a '+'.
@@ -865,16 +904,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DynamicInputsNodeUiSettings&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.reorderable, reorderable) || other.reorderable == reorderable)&&(identical(other.oddEvenRowColors, oddEvenRowColors) || other.oddEvenRowColors == oddEvenRowColors)&&(identical(other.addButtonText, addButtonText) || other.addButtonText == addButtonText)&&(identical(other.addButtonPosition, addButtonPosition) || other.addButtonPosition == addButtonPosition)&&(identical(other.addButtonBuilder, addButtonBuilder) || other.addButtonBuilder == addButtonBuilder)&&(identical(other.openTemplates, openTemplates) || other.openTemplates == openTemplates)&&(identical(other.generateId, generateId) || other.generateId == generateId)&&(identical(other.onChildDeletion, onChildDeletion) || other.onChildDeletion == onChildDeletion)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DynamicInputsNodeUiSettings&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.reorderable, reorderable) || other.reorderable == reorderable)&&(identical(other.grabHandleLocation, grabHandleLocation) || other.grabHandleLocation == grabHandleLocation)&&(identical(other.oddEvenRowColors, oddEvenRowColors) || other.oddEvenRowColors == oddEvenRowColors)&&(identical(other.addButtonText, addButtonText) || other.addButtonText == addButtonText)&&(identical(other.addButtonPosition, addButtonPosition) || other.addButtonPosition == addButtonPosition)&&(identical(other.addButtonBuilder, addButtonBuilder) || other.addButtonBuilder == addButtonBuilder)&&(identical(other.openTemplates, openTemplates) || other.openTemplates == openTemplates)&&(identical(other.generateId, generateId) || other.generateId == generateId)&&(identical(other.onChildDeletion, onChildDeletion) || other.onChildDeletion == onChildDeletion)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,labelText,helperText,reorderable,oddEvenRowColors,addButtonText,addButtonPosition,addButtonBuilder,openTemplates,generateId,onChildDeletion,widgetBuilder);
+int get hashCode => Object.hash(runtimeType,labelText,helperText,reorderable,grabHandleLocation,oddEvenRowColors,addButtonText,addButtonPosition,addButtonBuilder,openTemplates,generateId,onChildDeletion,widgetBuilder);
 
 @override
 String toString() {
-  return 'DynamicInputsNodeUiSettings(labelText: $labelText, helperText: $helperText, reorderable: $reorderable, oddEvenRowColors: $oddEvenRowColors, addButtonText: $addButtonText, addButtonPosition: $addButtonPosition, addButtonBuilder: $addButtonBuilder, openTemplates: $openTemplates, generateId: $generateId, onChildDeletion: $onChildDeletion, widgetBuilder: $widgetBuilder)';
+  return 'DynamicInputsNodeUiSettings(labelText: $labelText, helperText: $helperText, reorderable: $reorderable, grabHandleLocation: $grabHandleLocation, oddEvenRowColors: $oddEvenRowColors, addButtonText: $addButtonText, addButtonPosition: $addButtonPosition, addButtonBuilder: $addButtonBuilder, openTemplates: $openTemplates, generateId: $generateId, onChildDeletion: $onChildDeletion, widgetBuilder: $widgetBuilder)';
 }
 
 
@@ -885,7 +924,7 @@ abstract mixin class _$DynamicInputsNodeUiSettingsCopyWith<$Res> implements $Dyn
   factory _$DynamicInputsNodeUiSettingsCopyWith(_DynamicInputsNodeUiSettings value, $Res Function(_DynamicInputsNodeUiSettings) _then) = __$DynamicInputsNodeUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String? labelText, String? helperText, bool? reorderable, bool? oddEvenRowColors, String? addButtonText, DynamicInputsNodeAddButtonPosition? addButtonPosition,@notSerializable DynamicInputsNodeWidgetBuilderDef? addButtonBuilder,@PushDefNullableConverter() PushDef? openTemplates,@notSerializable GenerateIdDef? generateId,@notSerializable OnDynamicInputDeletionDef? onChildDeletion,@notSerializable DynamicInputsNodeWidgetBuilderDef? widgetBuilder
+ String? labelText, String? helperText, bool? reorderable, ListTileControlAffinity? grabHandleLocation, bool? oddEvenRowColors, String? addButtonText, DynamicInputsNodeAddButtonPosition? addButtonPosition,@notSerializable DynamicInputsNodeWidgetBuilderDef? addButtonBuilder,@PushDefNullableConverter() PushDef? openTemplates,@notSerializable GenerateIdDef? generateId,@notSerializable OnDynamicInputDeletionDef? onChildDeletion,@notSerializable DynamicInputsNodeWidgetBuilderDef? widgetBuilder
 });
 
 
@@ -902,12 +941,13 @@ class __$DynamicInputsNodeUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of DynamicInputsNodeUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? labelText = freezed,Object? helperText = freezed,Object? reorderable = freezed,Object? oddEvenRowColors = freezed,Object? addButtonText = freezed,Object? addButtonPosition = freezed,Object? addButtonBuilder = freezed,Object? openTemplates = freezed,Object? generateId = freezed,Object? onChildDeletion = freezed,Object? widgetBuilder = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? labelText = freezed,Object? helperText = freezed,Object? reorderable = freezed,Object? grabHandleLocation = freezed,Object? oddEvenRowColors = freezed,Object? addButtonText = freezed,Object? addButtonPosition = freezed,Object? addButtonBuilder = freezed,Object? openTemplates = freezed,Object? generateId = freezed,Object? onChildDeletion = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_DynamicInputsNodeUiSettings(
 labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
 as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
 as String?,reorderable: freezed == reorderable ? _self.reorderable : reorderable // ignore: cast_nullable_to_non_nullable
-as bool?,oddEvenRowColors: freezed == oddEvenRowColors ? _self.oddEvenRowColors : oddEvenRowColors // ignore: cast_nullable_to_non_nullable
+as bool?,grabHandleLocation: freezed == grabHandleLocation ? _self.grabHandleLocation : grabHandleLocation // ignore: cast_nullable_to_non_nullable
+as ListTileControlAffinity?,oddEvenRowColors: freezed == oddEvenRowColors ? _self.oddEvenRowColors : oddEvenRowColors // ignore: cast_nullable_to_non_nullable
 as bool?,addButtonText: freezed == addButtonText ? _self.addButtonText : addButtonText // ignore: cast_nullable_to_non_nullable
 as String?,addButtonPosition: freezed == addButtonPosition ? _self.addButtonPosition : addButtonPosition // ignore: cast_nullable_to_non_nullable
 as DynamicInputsNodeAddButtonPosition?,addButtonBuilder: freezed == addButtonBuilder ? _self.addButtonBuilder : addButtonBuilder // ignore: cast_nullable_to_non_nullable
@@ -1693,7 +1733,7 @@ mixin _$SelectInputUiSettings<T> {
 /// (for example, using [LayoutMethod.flexible]).
 ///
 /// Defaults to 0.
- int? get flex; String? get labelText; String? get helperText; String? get hintText; ChildrenVisibility? get childrenVisibility;/// Only used when [SelectInput.maxCount] is 1
+ int? get flex; String? get labelText; int? get labelMaxLines; String? get helperText; String? get hintText; ChildrenVisibility? get childrenVisibility;/// Only used when [SelectInput.maxCount] is 1
 /// and childrenVisibility is [ChildrenVisibility.whenAsked].
 ///
 /// If null or O, header will be placed above the field.
@@ -1725,16 +1765,16 @@ $SelectInputUiSettingsCopyWith<T, SelectInputUiSettings<T>> get copyWith => _$Se
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SelectInputUiSettings<T>&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.valueBuilder, valueBuilder) || other.valueBuilder == valueBuilder)&&(identical(other.selectedBuilder, selectedBuilder) || other.selectedBuilder == selectedBuilder)&&(identical(other.helpValueBuilder, helpValueBuilder) || other.helpValueBuilder == helpValueBuilder)&&(identical(other.searchInputUiSettings, searchInputUiSettings) || other.searchInputUiSettings == searchInputUiSettings)&&(identical(other.searchScreenBuilder, searchScreenBuilder) || other.searchScreenBuilder == searchScreenBuilder)&&(identical(other.openChildren, openChildren) || other.openChildren == openChildren)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.scoreBuilder, scoreBuilder) || other.scoreBuilder == scoreBuilder)&&(identical(other.tileBuilder, tileBuilder) || other.tileBuilder == tileBuilder)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SelectInputUiSettings<T>&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelMaxLines, labelMaxLines) || other.labelMaxLines == labelMaxLines)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.valueBuilder, valueBuilder) || other.valueBuilder == valueBuilder)&&(identical(other.selectedBuilder, selectedBuilder) || other.selectedBuilder == selectedBuilder)&&(identical(other.helpValueBuilder, helpValueBuilder) || other.helpValueBuilder == helpValueBuilder)&&(identical(other.searchInputUiSettings, searchInputUiSettings) || other.searchInputUiSettings == searchInputUiSettings)&&(identical(other.searchScreenBuilder, searchScreenBuilder) || other.searchScreenBuilder == searchScreenBuilder)&&(identical(other.openChildren, openChildren) || other.openChildren == openChildren)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.scoreBuilder, scoreBuilder) || other.scoreBuilder == scoreBuilder)&&(identical(other.tileBuilder, tileBuilder) || other.tileBuilder == tileBuilder)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,flex,labelText,helperText,hintText,childrenVisibility,headerFlex,prefixIcon,valueBuilder,selectedBuilder,helpValueBuilder,searchInputUiSettings,searchScreenBuilder,openChildren,headerBuilder,scoreBuilder,tileBuilder,widgetBuilder);
+int get hashCode => Object.hash(runtimeType,flex,labelText,labelMaxLines,helperText,hintText,childrenVisibility,headerFlex,prefixIcon,valueBuilder,selectedBuilder,helpValueBuilder,searchInputUiSettings,searchScreenBuilder,openChildren,headerBuilder,scoreBuilder,tileBuilder,widgetBuilder);
 
 @override
 String toString() {
-  return 'SelectInputUiSettings<$T>(flex: $flex, labelText: $labelText, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, headerFlex: $headerFlex, prefixIcon: $prefixIcon, valueBuilder: $valueBuilder, selectedBuilder: $selectedBuilder, helpValueBuilder: $helpValueBuilder, searchInputUiSettings: $searchInputUiSettings, searchScreenBuilder: $searchScreenBuilder, openChildren: $openChildren, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder, tileBuilder: $tileBuilder, widgetBuilder: $widgetBuilder)';
+  return 'SelectInputUiSettings<$T>(flex: $flex, labelText: $labelText, labelMaxLines: $labelMaxLines, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, headerFlex: $headerFlex, prefixIcon: $prefixIcon, valueBuilder: $valueBuilder, selectedBuilder: $selectedBuilder, helpValueBuilder: $helpValueBuilder, searchInputUiSettings: $searchInputUiSettings, searchScreenBuilder: $searchScreenBuilder, openChildren: $openChildren, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder, tileBuilder: $tileBuilder, widgetBuilder: $widgetBuilder)';
 }
 
 
@@ -1745,7 +1785,7 @@ abstract mixin class $SelectInputUiSettingsCopyWith<T,$Res>  {
   factory $SelectInputUiSettingsCopyWith(SelectInputUiSettings<T> value, $Res Function(SelectInputUiSettings<T>) _then) = _$SelectInputUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- int? flex, String? labelText, String? helperText, String? hintText, ChildrenVisibility? childrenVisibility, int? headerFlex,@notSerializable Widget? prefixIcon,@notSerializable ValueBuilderDef<T>? valueBuilder,@notSerializable ValueBuilderDef<T>? selectedBuilder,@notSerializable Widget? Function(T value)? helpValueBuilder, StringInputUiSettings<T>? searchInputUiSettings,@notSerializable SearchScreenDef<T>? searchScreenBuilder,@PushDefNullableConverter() PushDef? openChildren,@notSerializable InputHeaderBuilderDef? headerBuilder,@notSerializable ScoreWidgetBuilderDef? scoreBuilder,@notSerializable SelectFieldTileBuilderDef<T>? tileBuilder,@notSerializable SelectFieldBuilderDef<T>? widgetBuilder
+ int? flex, String? labelText, int? labelMaxLines, String? helperText, String? hintText, ChildrenVisibility? childrenVisibility, int? headerFlex,@notSerializable Widget? prefixIcon,@notSerializable ValueBuilderDef<T>? valueBuilder,@notSerializable ValueBuilderDef<T>? selectedBuilder,@notSerializable Widget? Function(T value)? helpValueBuilder, StringInputUiSettings<T>? searchInputUiSettings,@notSerializable SearchScreenDef<T>? searchScreenBuilder,@PushDefNullableConverter() PushDef? openChildren,@notSerializable InputHeaderBuilderDef? headerBuilder,@notSerializable ScoreWidgetBuilderDef? scoreBuilder,@notSerializable SelectFieldTileBuilderDef<T>? tileBuilder,@notSerializable SelectFieldBuilderDef<T>? widgetBuilder
 });
 
 
@@ -1762,11 +1802,12 @@ class _$SelectInputUiSettingsCopyWithImpl<T,$Res>
 
 /// Create a copy of SelectInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? flex = freezed,Object? labelText = freezed,Object? helperText = freezed,Object? hintText = freezed,Object? childrenVisibility = freezed,Object? headerFlex = freezed,Object? prefixIcon = freezed,Object? valueBuilder = freezed,Object? selectedBuilder = freezed,Object? helpValueBuilder = freezed,Object? searchInputUiSettings = freezed,Object? searchScreenBuilder = freezed,Object? openChildren = freezed,Object? headerBuilder = freezed,Object? scoreBuilder = freezed,Object? tileBuilder = freezed,Object? widgetBuilder = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? flex = freezed,Object? labelText = freezed,Object? labelMaxLines = freezed,Object? helperText = freezed,Object? hintText = freezed,Object? childrenVisibility = freezed,Object? headerFlex = freezed,Object? prefixIcon = freezed,Object? valueBuilder = freezed,Object? selectedBuilder = freezed,Object? helpValueBuilder = freezed,Object? searchInputUiSettings = freezed,Object? searchScreenBuilder = freezed,Object? openChildren = freezed,Object? headerBuilder = freezed,Object? scoreBuilder = freezed,Object? tileBuilder = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_self.copyWith(
 flex: freezed == flex ? _self.flex : flex // ignore: cast_nullable_to_non_nullable
 as int?,labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
-as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
+as String?,labelMaxLines: freezed == labelMaxLines ? _self.labelMaxLines : labelMaxLines // ignore: cast_nullable_to_non_nullable
+as int?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
 as String?,hintText: freezed == hintText ? _self.hintText : hintText // ignore: cast_nullable_to_non_nullable
 as String?,childrenVisibility: freezed == childrenVisibility ? _self.childrenVisibility : childrenVisibility // ignore: cast_nullable_to_non_nullable
 as ChildrenVisibility?,headerFlex: freezed == headerFlex ? _self.headerFlex : headerFlex // ignore: cast_nullable_to_non_nullable
@@ -1805,7 +1846,7 @@ $StringInputUiSettingsCopyWith<T, $Res>? get searchInputUiSettings {
 @JsonSerializable()
 
 class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
-  const _SelectInputUiSettings({this.flex, this.labelText, this.helperText, this.hintText, this.childrenVisibility, this.headerFlex, @notSerializable this.prefixIcon, @notSerializable this.valueBuilder, @notSerializable this.selectedBuilder, @notSerializable this.helpValueBuilder, this.searchInputUiSettings, @notSerializable this.searchScreenBuilder, @PushDefNullableConverter() this.openChildren, @notSerializable this.headerBuilder, @notSerializable this.scoreBuilder, @notSerializable this.tileBuilder, @notSerializable this.widgetBuilder}): super._();
+  const _SelectInputUiSettings({this.flex, this.labelText, this.labelMaxLines, this.helperText, this.hintText, this.childrenVisibility, this.headerFlex, @notSerializable this.prefixIcon, @notSerializable this.valueBuilder, @notSerializable this.selectedBuilder, @notSerializable this.helpValueBuilder, this.searchInputUiSettings, @notSerializable this.searchScreenBuilder, @PushDefNullableConverter() this.openChildren, @notSerializable this.headerBuilder, @notSerializable this.scoreBuilder, @notSerializable this.tileBuilder, @notSerializable this.widgetBuilder}): super._();
   factory _SelectInputUiSettings.fromJson(Map<String, dynamic> json) => _$SelectInputUiSettingsFromJson(json);
 
 // What you can do :
@@ -1832,6 +1873,7 @@ class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
 /// Defaults to 0.
 @override final  int? flex;
 @override final  String? labelText;
+@override final  int? labelMaxLines;
 @override final  String? helperText;
 @override final  String? hintText;
 @override final  ChildrenVisibility? childrenVisibility;
@@ -1880,16 +1922,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SelectInputUiSettings<T>&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.valueBuilder, valueBuilder) || other.valueBuilder == valueBuilder)&&(identical(other.selectedBuilder, selectedBuilder) || other.selectedBuilder == selectedBuilder)&&(identical(other.helpValueBuilder, helpValueBuilder) || other.helpValueBuilder == helpValueBuilder)&&(identical(other.searchInputUiSettings, searchInputUiSettings) || other.searchInputUiSettings == searchInputUiSettings)&&(identical(other.searchScreenBuilder, searchScreenBuilder) || other.searchScreenBuilder == searchScreenBuilder)&&(identical(other.openChildren, openChildren) || other.openChildren == openChildren)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.scoreBuilder, scoreBuilder) || other.scoreBuilder == scoreBuilder)&&(identical(other.tileBuilder, tileBuilder) || other.tileBuilder == tileBuilder)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SelectInputUiSettings<T>&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelMaxLines, labelMaxLines) || other.labelMaxLines == labelMaxLines)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.childrenVisibility, childrenVisibility) || other.childrenVisibility == childrenVisibility)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.valueBuilder, valueBuilder) || other.valueBuilder == valueBuilder)&&(identical(other.selectedBuilder, selectedBuilder) || other.selectedBuilder == selectedBuilder)&&(identical(other.helpValueBuilder, helpValueBuilder) || other.helpValueBuilder == helpValueBuilder)&&(identical(other.searchInputUiSettings, searchInputUiSettings) || other.searchInputUiSettings == searchInputUiSettings)&&(identical(other.searchScreenBuilder, searchScreenBuilder) || other.searchScreenBuilder == searchScreenBuilder)&&(identical(other.openChildren, openChildren) || other.openChildren == openChildren)&&(identical(other.headerBuilder, headerBuilder) || other.headerBuilder == headerBuilder)&&(identical(other.scoreBuilder, scoreBuilder) || other.scoreBuilder == scoreBuilder)&&(identical(other.tileBuilder, tileBuilder) || other.tileBuilder == tileBuilder)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,flex,labelText,helperText,hintText,childrenVisibility,headerFlex,prefixIcon,valueBuilder,selectedBuilder,helpValueBuilder,searchInputUiSettings,searchScreenBuilder,openChildren,headerBuilder,scoreBuilder,tileBuilder,widgetBuilder);
+int get hashCode => Object.hash(runtimeType,flex,labelText,labelMaxLines,helperText,hintText,childrenVisibility,headerFlex,prefixIcon,valueBuilder,selectedBuilder,helpValueBuilder,searchInputUiSettings,searchScreenBuilder,openChildren,headerBuilder,scoreBuilder,tileBuilder,widgetBuilder);
 
 @override
 String toString() {
-  return 'SelectInputUiSettings<$T>(flex: $flex, labelText: $labelText, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, headerFlex: $headerFlex, prefixIcon: $prefixIcon, valueBuilder: $valueBuilder, selectedBuilder: $selectedBuilder, helpValueBuilder: $helpValueBuilder, searchInputUiSettings: $searchInputUiSettings, searchScreenBuilder: $searchScreenBuilder, openChildren: $openChildren, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder, tileBuilder: $tileBuilder, widgetBuilder: $widgetBuilder)';
+  return 'SelectInputUiSettings<$T>(flex: $flex, labelText: $labelText, labelMaxLines: $labelMaxLines, helperText: $helperText, hintText: $hintText, childrenVisibility: $childrenVisibility, headerFlex: $headerFlex, prefixIcon: $prefixIcon, valueBuilder: $valueBuilder, selectedBuilder: $selectedBuilder, helpValueBuilder: $helpValueBuilder, searchInputUiSettings: $searchInputUiSettings, searchScreenBuilder: $searchScreenBuilder, openChildren: $openChildren, headerBuilder: $headerBuilder, scoreBuilder: $scoreBuilder, tileBuilder: $tileBuilder, widgetBuilder: $widgetBuilder)';
 }
 
 
@@ -1900,7 +1942,7 @@ abstract mixin class _$SelectInputUiSettingsCopyWith<T,$Res> implements $SelectI
   factory _$SelectInputUiSettingsCopyWith(_SelectInputUiSettings<T> value, $Res Function(_SelectInputUiSettings<T>) _then) = __$SelectInputUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- int? flex, String? labelText, String? helperText, String? hintText, ChildrenVisibility? childrenVisibility, int? headerFlex,@notSerializable Widget? prefixIcon,@notSerializable ValueBuilderDef<T>? valueBuilder,@notSerializable ValueBuilderDef<T>? selectedBuilder,@notSerializable Widget? Function(T value)? helpValueBuilder, StringInputUiSettings<T>? searchInputUiSettings,@notSerializable SearchScreenDef<T>? searchScreenBuilder,@PushDefNullableConverter() PushDef? openChildren,@notSerializable InputHeaderBuilderDef? headerBuilder,@notSerializable ScoreWidgetBuilderDef? scoreBuilder,@notSerializable SelectFieldTileBuilderDef<T>? tileBuilder,@notSerializable SelectFieldBuilderDef<T>? widgetBuilder
+ int? flex, String? labelText, int? labelMaxLines, String? helperText, String? hintText, ChildrenVisibility? childrenVisibility, int? headerFlex,@notSerializable Widget? prefixIcon,@notSerializable ValueBuilderDef<T>? valueBuilder,@notSerializable ValueBuilderDef<T>? selectedBuilder,@notSerializable Widget? Function(T value)? helpValueBuilder, StringInputUiSettings<T>? searchInputUiSettings,@notSerializable SearchScreenDef<T>? searchScreenBuilder,@PushDefNullableConverter() PushDef? openChildren,@notSerializable InputHeaderBuilderDef? headerBuilder,@notSerializable ScoreWidgetBuilderDef? scoreBuilder,@notSerializable SelectFieldTileBuilderDef<T>? tileBuilder,@notSerializable SelectFieldBuilderDef<T>? widgetBuilder
 });
 
 
@@ -1917,11 +1959,12 @@ class __$SelectInputUiSettingsCopyWithImpl<T,$Res>
 
 /// Create a copy of SelectInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? flex = freezed,Object? labelText = freezed,Object? helperText = freezed,Object? hintText = freezed,Object? childrenVisibility = freezed,Object? headerFlex = freezed,Object? prefixIcon = freezed,Object? valueBuilder = freezed,Object? selectedBuilder = freezed,Object? helpValueBuilder = freezed,Object? searchInputUiSettings = freezed,Object? searchScreenBuilder = freezed,Object? openChildren = freezed,Object? headerBuilder = freezed,Object? scoreBuilder = freezed,Object? tileBuilder = freezed,Object? widgetBuilder = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? flex = freezed,Object? labelText = freezed,Object? labelMaxLines = freezed,Object? helperText = freezed,Object? hintText = freezed,Object? childrenVisibility = freezed,Object? headerFlex = freezed,Object? prefixIcon = freezed,Object? valueBuilder = freezed,Object? selectedBuilder = freezed,Object? helpValueBuilder = freezed,Object? searchInputUiSettings = freezed,Object? searchScreenBuilder = freezed,Object? openChildren = freezed,Object? headerBuilder = freezed,Object? scoreBuilder = freezed,Object? tileBuilder = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_SelectInputUiSettings<T>(
 flex: freezed == flex ? _self.flex : flex // ignore: cast_nullable_to_non_nullable
 as int?,labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
-as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
+as String?,labelMaxLines: freezed == labelMaxLines ? _self.labelMaxLines : labelMaxLines // ignore: cast_nullable_to_non_nullable
+as int?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
 as String?,hintText: freezed == hintText ? _self.hintText : hintText // ignore: cast_nullable_to_non_nullable
 as String?,childrenVisibility: freezed == childrenVisibility ? _self.childrenVisibility : childrenVisibility // ignore: cast_nullable_to_non_nullable
 as ChildrenVisibility?,headerFlex: freezed == headerFlex ? _self.headerFlex : headerFlex // ignore: cast_nullable_to_non_nullable
@@ -1988,7 +2031,7 @@ mixin _$StringInputUiSettings<T> {
  WoFormAutofocus? get autofocus; TextInputAction? get textInputAction;/// Defaults to TextCapitalization.none.
  TextCapitalization? get textCapitalization;/// Defaults to 1. If you want to set it to null, enter 0.
  int? get maxLines; String? get invalidRegexMessage;// If true, InputDecoration.collapsed will be used.
- bool? get collapsed;@EdgeInsetsNullableConverter() EdgeInsets? get padding;@notSerializable TextStyle? get style;@notSerializable StringFieldBuilderDef<T>? get widgetBuilder;@notSerializable ErrorBuilderDef? get errorBuilder;
+ bool? get collapsed;@EdgeInsetsNullableConverter() EdgeInsets? get padding;@notSerializable TextStyle? get style;@notSerializable StringFieldBuilderDef<T>? get widgetBuilder;@notSerializable ErrorBuilderDef? get errorBuilder;@notSerializable CounterBuilderDef? get counterBuilder; FieldUnfocusMethod? get unfocusMethod;
 /// Create a copy of StringInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2001,16 +2044,16 @@ $StringInputUiSettingsCopyWith<T, StringInputUiSettings<T>> get copyWith => _$St
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StringInputUiSettings<T>&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelMaxLines, labelMaxLines) || other.labelMaxLines == labelMaxLines)&&(identical(other.labelLocation, labelLocation) || other.labelLocation == labelLocation)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.helperMaxLines, helperMaxLines) || other.helperMaxLines == helperMaxLines)&&(identical(other.helper, helper) || other.helper == helper)&&(identical(other.helperLocation, helperLocation) || other.helperLocation == helperLocation)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.prefixIconLocation, prefixIconLocation) || other.prefixIconLocation == prefixIconLocation)&&(identical(other.errorLocation, errorLocation) || other.errorLocation == errorLocation)&&(identical(other.action, action) || other.action == action)&&(identical(other.submitFormOnFieldSubmitted, submitFormOnFieldSubmitted) || other.submitFormOnFieldSubmitted == submitFormOnFieldSubmitted)&&(identical(other.keyboardType, keyboardType) || other.keyboardType == keyboardType)&&(identical(other.obscureText, obscureText) || other.obscureText == obscureText)&&(identical(other.autocorrect, autocorrect) || other.autocorrect == autocorrect)&&const DeepCollectionEquality().equals(other.autofillHints, autofillHints)&&(identical(other.autofocus, autofocus) || other.autofocus == autofocus)&&(identical(other.textInputAction, textInputAction) || other.textInputAction == textInputAction)&&(identical(other.textCapitalization, textCapitalization) || other.textCapitalization == textCapitalization)&&(identical(other.maxLines, maxLines) || other.maxLines == maxLines)&&(identical(other.invalidRegexMessage, invalidRegexMessage) || other.invalidRegexMessage == invalidRegexMessage)&&(identical(other.collapsed, collapsed) || other.collapsed == collapsed)&&(identical(other.padding, padding) || other.padding == padding)&&(identical(other.style, style) || other.style == style)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.errorBuilder, errorBuilder) || other.errorBuilder == errorBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StringInputUiSettings<T>&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelMaxLines, labelMaxLines) || other.labelMaxLines == labelMaxLines)&&(identical(other.labelLocation, labelLocation) || other.labelLocation == labelLocation)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.helperMaxLines, helperMaxLines) || other.helperMaxLines == helperMaxLines)&&(identical(other.helper, helper) || other.helper == helper)&&(identical(other.helperLocation, helperLocation) || other.helperLocation == helperLocation)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.prefixIconLocation, prefixIconLocation) || other.prefixIconLocation == prefixIconLocation)&&(identical(other.errorLocation, errorLocation) || other.errorLocation == errorLocation)&&(identical(other.action, action) || other.action == action)&&(identical(other.submitFormOnFieldSubmitted, submitFormOnFieldSubmitted) || other.submitFormOnFieldSubmitted == submitFormOnFieldSubmitted)&&(identical(other.keyboardType, keyboardType) || other.keyboardType == keyboardType)&&(identical(other.obscureText, obscureText) || other.obscureText == obscureText)&&(identical(other.autocorrect, autocorrect) || other.autocorrect == autocorrect)&&const DeepCollectionEquality().equals(other.autofillHints, autofillHints)&&(identical(other.autofocus, autofocus) || other.autofocus == autofocus)&&(identical(other.textInputAction, textInputAction) || other.textInputAction == textInputAction)&&(identical(other.textCapitalization, textCapitalization) || other.textCapitalization == textCapitalization)&&(identical(other.maxLines, maxLines) || other.maxLines == maxLines)&&(identical(other.invalidRegexMessage, invalidRegexMessage) || other.invalidRegexMessage == invalidRegexMessage)&&(identical(other.collapsed, collapsed) || other.collapsed == collapsed)&&(identical(other.padding, padding) || other.padding == padding)&&(identical(other.style, style) || other.style == style)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.errorBuilder, errorBuilder) || other.errorBuilder == errorBuilder)&&(identical(other.counterBuilder, counterBuilder) || other.counterBuilder == counterBuilder)&&(identical(other.unfocusMethod, unfocusMethod) || other.unfocusMethod == unfocusMethod));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,flex,headerFlex,labelText,labelMaxLines,labelLocation,hintText,helperText,helperMaxLines,helper,helperLocation,prefixIcon,prefixIconLocation,errorLocation,action,submitFormOnFieldSubmitted,keyboardType,obscureText,autocorrect,const DeepCollectionEquality().hash(autofillHints),autofocus,textInputAction,textCapitalization,maxLines,invalidRegexMessage,collapsed,padding,style,widgetBuilder,errorBuilder]);
+int get hashCode => Object.hashAll([runtimeType,flex,headerFlex,labelText,labelMaxLines,labelLocation,hintText,helperText,helperMaxLines,helper,helperLocation,prefixIcon,prefixIconLocation,errorLocation,action,submitFormOnFieldSubmitted,keyboardType,obscureText,autocorrect,const DeepCollectionEquality().hash(autofillHints),autofocus,textInputAction,textCapitalization,maxLines,invalidRegexMessage,collapsed,padding,style,widgetBuilder,errorBuilder,counterBuilder,unfocusMethod]);
 
 @override
 String toString() {
-  return 'StringInputUiSettings<$T>(flex: $flex, headerFlex: $headerFlex, labelText: $labelText, labelMaxLines: $labelMaxLines, labelLocation: $labelLocation, hintText: $hintText, helperText: $helperText, helperMaxLines: $helperMaxLines, helper: $helper, helperLocation: $helperLocation, prefixIcon: $prefixIcon, prefixIconLocation: $prefixIconLocation, errorLocation: $errorLocation, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage, collapsed: $collapsed, padding: $padding, style: $style, widgetBuilder: $widgetBuilder, errorBuilder: $errorBuilder)';
+  return 'StringInputUiSettings<$T>(flex: $flex, headerFlex: $headerFlex, labelText: $labelText, labelMaxLines: $labelMaxLines, labelLocation: $labelLocation, hintText: $hintText, helperText: $helperText, helperMaxLines: $helperMaxLines, helper: $helper, helperLocation: $helperLocation, prefixIcon: $prefixIcon, prefixIconLocation: $prefixIconLocation, errorLocation: $errorLocation, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage, collapsed: $collapsed, padding: $padding, style: $style, widgetBuilder: $widgetBuilder, errorBuilder: $errorBuilder, counterBuilder: $counterBuilder, unfocusMethod: $unfocusMethod)';
 }
 
 
@@ -2021,7 +2064,7 @@ abstract mixin class $StringInputUiSettingsCopyWith<T,$Res>  {
   factory $StringInputUiSettingsCopyWith(StringInputUiSettings<T> value, $Res Function(StringInputUiSettings<T>) _then) = _$StringInputUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- int? flex, int? headerFlex, String? labelText, int? labelMaxLines, FieldElementLocation? labelLocation, String? hintText, String? helperText, int? helperMaxLines,@notSerializable Widget? helper, FieldElementLocation? helperLocation,@notSerializable Widget? prefixIcon, FieldElementLocation? prefixIconLocation, FieldElementLocation? errorLocation, StringFieldAction? action, bool? submitFormOnFieldSubmitted,@TextInputTypeConverter() TextInputType? keyboardType, bool? obscureText, bool? autocorrect, List<String>? autofillHints, WoFormAutofocus? autofocus, TextInputAction? textInputAction, TextCapitalization? textCapitalization, int? maxLines, String? invalidRegexMessage, bool? collapsed,@EdgeInsetsNullableConverter() EdgeInsets? padding,@notSerializable TextStyle? style,@notSerializable StringFieldBuilderDef<T>? widgetBuilder,@notSerializable ErrorBuilderDef? errorBuilder
+ int? flex, int? headerFlex, String? labelText, int? labelMaxLines, FieldElementLocation? labelLocation, String? hintText, String? helperText, int? helperMaxLines,@notSerializable Widget? helper, FieldElementLocation? helperLocation,@notSerializable Widget? prefixIcon, FieldElementLocation? prefixIconLocation, FieldElementLocation? errorLocation, StringFieldAction? action, bool? submitFormOnFieldSubmitted,@TextInputTypeConverter() TextInputType? keyboardType, bool? obscureText, bool? autocorrect, List<String>? autofillHints, WoFormAutofocus? autofocus, TextInputAction? textInputAction, TextCapitalization? textCapitalization, int? maxLines, String? invalidRegexMessage, bool? collapsed,@EdgeInsetsNullableConverter() EdgeInsets? padding,@notSerializable TextStyle? style,@notSerializable StringFieldBuilderDef<T>? widgetBuilder,@notSerializable ErrorBuilderDef? errorBuilder,@notSerializable CounterBuilderDef? counterBuilder, FieldUnfocusMethod? unfocusMethod
 });
 
 
@@ -2038,7 +2081,7 @@ class _$StringInputUiSettingsCopyWithImpl<T,$Res>
 
 /// Create a copy of StringInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? flex = freezed,Object? headerFlex = freezed,Object? labelText = freezed,Object? labelMaxLines = freezed,Object? labelLocation = freezed,Object? hintText = freezed,Object? helperText = freezed,Object? helperMaxLines = freezed,Object? helper = freezed,Object? helperLocation = freezed,Object? prefixIcon = freezed,Object? prefixIconLocation = freezed,Object? errorLocation = freezed,Object? action = freezed,Object? submitFormOnFieldSubmitted = freezed,Object? keyboardType = freezed,Object? obscureText = freezed,Object? autocorrect = freezed,Object? autofillHints = freezed,Object? autofocus = freezed,Object? textInputAction = freezed,Object? textCapitalization = freezed,Object? maxLines = freezed,Object? invalidRegexMessage = freezed,Object? collapsed = freezed,Object? padding = freezed,Object? style = freezed,Object? widgetBuilder = freezed,Object? errorBuilder = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? flex = freezed,Object? headerFlex = freezed,Object? labelText = freezed,Object? labelMaxLines = freezed,Object? labelLocation = freezed,Object? hintText = freezed,Object? helperText = freezed,Object? helperMaxLines = freezed,Object? helper = freezed,Object? helperLocation = freezed,Object? prefixIcon = freezed,Object? prefixIconLocation = freezed,Object? errorLocation = freezed,Object? action = freezed,Object? submitFormOnFieldSubmitted = freezed,Object? keyboardType = freezed,Object? obscureText = freezed,Object? autocorrect = freezed,Object? autofillHints = freezed,Object? autofocus = freezed,Object? textInputAction = freezed,Object? textCapitalization = freezed,Object? maxLines = freezed,Object? invalidRegexMessage = freezed,Object? collapsed = freezed,Object? padding = freezed,Object? style = freezed,Object? widgetBuilder = freezed,Object? errorBuilder = freezed,Object? counterBuilder = freezed,Object? unfocusMethod = freezed,}) {
   return _then(_self.copyWith(
 flex: freezed == flex ? _self.flex : flex // ignore: cast_nullable_to_non_nullable
 as int?,headerFlex: freezed == headerFlex ? _self.headerFlex : headerFlex // ignore: cast_nullable_to_non_nullable
@@ -2069,7 +2112,9 @@ as bool?,padding: freezed == padding ? _self.padding : padding // ignore: cast_n
 as EdgeInsets?,style: freezed == style ? _self.style : style // ignore: cast_nullable_to_non_nullable
 as TextStyle?,widgetBuilder: freezed == widgetBuilder ? _self.widgetBuilder : widgetBuilder // ignore: cast_nullable_to_non_nullable
 as StringFieldBuilderDef<T>?,errorBuilder: freezed == errorBuilder ? _self.errorBuilder : errorBuilder // ignore: cast_nullable_to_non_nullable
-as ErrorBuilderDef?,
+as ErrorBuilderDef?,counterBuilder: freezed == counterBuilder ? _self.counterBuilder : counterBuilder // ignore: cast_nullable_to_non_nullable
+as CounterBuilderDef?,unfocusMethod: freezed == unfocusMethod ? _self.unfocusMethod : unfocusMethod // ignore: cast_nullable_to_non_nullable
+as FieldUnfocusMethod?,
   ));
 }
 
@@ -2081,7 +2126,7 @@ as ErrorBuilderDef?,
 @JsonSerializable()
 
 class _StringInputUiSettings<T> extends StringInputUiSettings<T> {
-  const _StringInputUiSettings({this.flex, this.headerFlex, this.labelText, this.labelMaxLines, this.labelLocation, this.hintText, this.helperText, this.helperMaxLines, @notSerializable this.helper, this.helperLocation, @notSerializable this.prefixIcon, this.prefixIconLocation, this.errorLocation, this.action, this.submitFormOnFieldSubmitted, @TextInputTypeConverter() this.keyboardType, this.obscureText, this.autocorrect, final  List<String>? autofillHints, this.autofocus, this.textInputAction, this.textCapitalization, this.maxLines, this.invalidRegexMessage, this.collapsed, @EdgeInsetsNullableConverter() this.padding, @notSerializable this.style, @notSerializable this.widgetBuilder, @notSerializable this.errorBuilder}): _autofillHints = autofillHints,super._();
+  const _StringInputUiSettings({this.flex, this.headerFlex, this.labelText, this.labelMaxLines, this.labelLocation, this.hintText, this.helperText, this.helperMaxLines, @notSerializable this.helper, this.helperLocation, @notSerializable this.prefixIcon, this.prefixIconLocation, this.errorLocation, this.action, this.submitFormOnFieldSubmitted, @TextInputTypeConverter() this.keyboardType, this.obscureText, this.autocorrect, final  List<String>? autofillHints, this.autofocus, this.textInputAction, this.textCapitalization, this.maxLines, this.invalidRegexMessage, this.collapsed, @EdgeInsetsNullableConverter() this.padding, @notSerializable this.style, @notSerializable this.widgetBuilder, @notSerializable this.errorBuilder, @notSerializable this.counterBuilder, this.unfocusMethod}): _autofillHints = autofillHints,super._();
   factory _StringInputUiSettings.fromJson(Map<String, dynamic> json) => _$StringInputUiSettingsFromJson(json);
 
 /// Requires [WoFormUiSettings.layout] at [LayoutMethod.flexible].
@@ -2150,6 +2195,8 @@ class _StringInputUiSettings<T> extends StringInputUiSettings<T> {
 @override@notSerializable final  TextStyle? style;
 @override@notSerializable final  StringFieldBuilderDef<T>? widgetBuilder;
 @override@notSerializable final  ErrorBuilderDef? errorBuilder;
+@override@notSerializable final  CounterBuilderDef? counterBuilder;
+@override final  FieldUnfocusMethod? unfocusMethod;
 
 /// Create a copy of StringInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -2164,16 +2211,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StringInputUiSettings<T>&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelMaxLines, labelMaxLines) || other.labelMaxLines == labelMaxLines)&&(identical(other.labelLocation, labelLocation) || other.labelLocation == labelLocation)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.helperMaxLines, helperMaxLines) || other.helperMaxLines == helperMaxLines)&&(identical(other.helper, helper) || other.helper == helper)&&(identical(other.helperLocation, helperLocation) || other.helperLocation == helperLocation)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.prefixIconLocation, prefixIconLocation) || other.prefixIconLocation == prefixIconLocation)&&(identical(other.errorLocation, errorLocation) || other.errorLocation == errorLocation)&&(identical(other.action, action) || other.action == action)&&(identical(other.submitFormOnFieldSubmitted, submitFormOnFieldSubmitted) || other.submitFormOnFieldSubmitted == submitFormOnFieldSubmitted)&&(identical(other.keyboardType, keyboardType) || other.keyboardType == keyboardType)&&(identical(other.obscureText, obscureText) || other.obscureText == obscureText)&&(identical(other.autocorrect, autocorrect) || other.autocorrect == autocorrect)&&const DeepCollectionEquality().equals(other._autofillHints, _autofillHints)&&(identical(other.autofocus, autofocus) || other.autofocus == autofocus)&&(identical(other.textInputAction, textInputAction) || other.textInputAction == textInputAction)&&(identical(other.textCapitalization, textCapitalization) || other.textCapitalization == textCapitalization)&&(identical(other.maxLines, maxLines) || other.maxLines == maxLines)&&(identical(other.invalidRegexMessage, invalidRegexMessage) || other.invalidRegexMessage == invalidRegexMessage)&&(identical(other.collapsed, collapsed) || other.collapsed == collapsed)&&(identical(other.padding, padding) || other.padding == padding)&&(identical(other.style, style) || other.style == style)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.errorBuilder, errorBuilder) || other.errorBuilder == errorBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StringInputUiSettings<T>&&(identical(other.flex, flex) || other.flex == flex)&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelMaxLines, labelMaxLines) || other.labelMaxLines == labelMaxLines)&&(identical(other.labelLocation, labelLocation) || other.labelLocation == labelLocation)&&(identical(other.hintText, hintText) || other.hintText == hintText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.helperMaxLines, helperMaxLines) || other.helperMaxLines == helperMaxLines)&&(identical(other.helper, helper) || other.helper == helper)&&(identical(other.helperLocation, helperLocation) || other.helperLocation == helperLocation)&&(identical(other.prefixIcon, prefixIcon) || other.prefixIcon == prefixIcon)&&(identical(other.prefixIconLocation, prefixIconLocation) || other.prefixIconLocation == prefixIconLocation)&&(identical(other.errorLocation, errorLocation) || other.errorLocation == errorLocation)&&(identical(other.action, action) || other.action == action)&&(identical(other.submitFormOnFieldSubmitted, submitFormOnFieldSubmitted) || other.submitFormOnFieldSubmitted == submitFormOnFieldSubmitted)&&(identical(other.keyboardType, keyboardType) || other.keyboardType == keyboardType)&&(identical(other.obscureText, obscureText) || other.obscureText == obscureText)&&(identical(other.autocorrect, autocorrect) || other.autocorrect == autocorrect)&&const DeepCollectionEquality().equals(other._autofillHints, _autofillHints)&&(identical(other.autofocus, autofocus) || other.autofocus == autofocus)&&(identical(other.textInputAction, textInputAction) || other.textInputAction == textInputAction)&&(identical(other.textCapitalization, textCapitalization) || other.textCapitalization == textCapitalization)&&(identical(other.maxLines, maxLines) || other.maxLines == maxLines)&&(identical(other.invalidRegexMessage, invalidRegexMessage) || other.invalidRegexMessage == invalidRegexMessage)&&(identical(other.collapsed, collapsed) || other.collapsed == collapsed)&&(identical(other.padding, padding) || other.padding == padding)&&(identical(other.style, style) || other.style == style)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder)&&(identical(other.errorBuilder, errorBuilder) || other.errorBuilder == errorBuilder)&&(identical(other.counterBuilder, counterBuilder) || other.counterBuilder == counterBuilder)&&(identical(other.unfocusMethod, unfocusMethod) || other.unfocusMethod == unfocusMethod));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,flex,headerFlex,labelText,labelMaxLines,labelLocation,hintText,helperText,helperMaxLines,helper,helperLocation,prefixIcon,prefixIconLocation,errorLocation,action,submitFormOnFieldSubmitted,keyboardType,obscureText,autocorrect,const DeepCollectionEquality().hash(_autofillHints),autofocus,textInputAction,textCapitalization,maxLines,invalidRegexMessage,collapsed,padding,style,widgetBuilder,errorBuilder]);
+int get hashCode => Object.hashAll([runtimeType,flex,headerFlex,labelText,labelMaxLines,labelLocation,hintText,helperText,helperMaxLines,helper,helperLocation,prefixIcon,prefixIconLocation,errorLocation,action,submitFormOnFieldSubmitted,keyboardType,obscureText,autocorrect,const DeepCollectionEquality().hash(_autofillHints),autofocus,textInputAction,textCapitalization,maxLines,invalidRegexMessage,collapsed,padding,style,widgetBuilder,errorBuilder,counterBuilder,unfocusMethod]);
 
 @override
 String toString() {
-  return 'StringInputUiSettings<$T>(flex: $flex, headerFlex: $headerFlex, labelText: $labelText, labelMaxLines: $labelMaxLines, labelLocation: $labelLocation, hintText: $hintText, helperText: $helperText, helperMaxLines: $helperMaxLines, helper: $helper, helperLocation: $helperLocation, prefixIcon: $prefixIcon, prefixIconLocation: $prefixIconLocation, errorLocation: $errorLocation, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage, collapsed: $collapsed, padding: $padding, style: $style, widgetBuilder: $widgetBuilder, errorBuilder: $errorBuilder)';
+  return 'StringInputUiSettings<$T>(flex: $flex, headerFlex: $headerFlex, labelText: $labelText, labelMaxLines: $labelMaxLines, labelLocation: $labelLocation, hintText: $hintText, helperText: $helperText, helperMaxLines: $helperMaxLines, helper: $helper, helperLocation: $helperLocation, prefixIcon: $prefixIcon, prefixIconLocation: $prefixIconLocation, errorLocation: $errorLocation, action: $action, submitFormOnFieldSubmitted: $submitFormOnFieldSubmitted, keyboardType: $keyboardType, obscureText: $obscureText, autocorrect: $autocorrect, autofillHints: $autofillHints, autofocus: $autofocus, textInputAction: $textInputAction, textCapitalization: $textCapitalization, maxLines: $maxLines, invalidRegexMessage: $invalidRegexMessage, collapsed: $collapsed, padding: $padding, style: $style, widgetBuilder: $widgetBuilder, errorBuilder: $errorBuilder, counterBuilder: $counterBuilder, unfocusMethod: $unfocusMethod)';
 }
 
 
@@ -2184,7 +2231,7 @@ abstract mixin class _$StringInputUiSettingsCopyWith<T,$Res> implements $StringI
   factory _$StringInputUiSettingsCopyWith(_StringInputUiSettings<T> value, $Res Function(_StringInputUiSettings<T>) _then) = __$StringInputUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- int? flex, int? headerFlex, String? labelText, int? labelMaxLines, FieldElementLocation? labelLocation, String? hintText, String? helperText, int? helperMaxLines,@notSerializable Widget? helper, FieldElementLocation? helperLocation,@notSerializable Widget? prefixIcon, FieldElementLocation? prefixIconLocation, FieldElementLocation? errorLocation, StringFieldAction? action, bool? submitFormOnFieldSubmitted,@TextInputTypeConverter() TextInputType? keyboardType, bool? obscureText, bool? autocorrect, List<String>? autofillHints, WoFormAutofocus? autofocus, TextInputAction? textInputAction, TextCapitalization? textCapitalization, int? maxLines, String? invalidRegexMessage, bool? collapsed,@EdgeInsetsNullableConverter() EdgeInsets? padding,@notSerializable TextStyle? style,@notSerializable StringFieldBuilderDef<T>? widgetBuilder,@notSerializable ErrorBuilderDef? errorBuilder
+ int? flex, int? headerFlex, String? labelText, int? labelMaxLines, FieldElementLocation? labelLocation, String? hintText, String? helperText, int? helperMaxLines,@notSerializable Widget? helper, FieldElementLocation? helperLocation,@notSerializable Widget? prefixIcon, FieldElementLocation? prefixIconLocation, FieldElementLocation? errorLocation, StringFieldAction? action, bool? submitFormOnFieldSubmitted,@TextInputTypeConverter() TextInputType? keyboardType, bool? obscureText, bool? autocorrect, List<String>? autofillHints, WoFormAutofocus? autofocus, TextInputAction? textInputAction, TextCapitalization? textCapitalization, int? maxLines, String? invalidRegexMessage, bool? collapsed,@EdgeInsetsNullableConverter() EdgeInsets? padding,@notSerializable TextStyle? style,@notSerializable StringFieldBuilderDef<T>? widgetBuilder,@notSerializable ErrorBuilderDef? errorBuilder,@notSerializable CounterBuilderDef? counterBuilder, FieldUnfocusMethod? unfocusMethod
 });
 
 
@@ -2201,7 +2248,7 @@ class __$StringInputUiSettingsCopyWithImpl<T,$Res>
 
 /// Create a copy of StringInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? flex = freezed,Object? headerFlex = freezed,Object? labelText = freezed,Object? labelMaxLines = freezed,Object? labelLocation = freezed,Object? hintText = freezed,Object? helperText = freezed,Object? helperMaxLines = freezed,Object? helper = freezed,Object? helperLocation = freezed,Object? prefixIcon = freezed,Object? prefixIconLocation = freezed,Object? errorLocation = freezed,Object? action = freezed,Object? submitFormOnFieldSubmitted = freezed,Object? keyboardType = freezed,Object? obscureText = freezed,Object? autocorrect = freezed,Object? autofillHints = freezed,Object? autofocus = freezed,Object? textInputAction = freezed,Object? textCapitalization = freezed,Object? maxLines = freezed,Object? invalidRegexMessage = freezed,Object? collapsed = freezed,Object? padding = freezed,Object? style = freezed,Object? widgetBuilder = freezed,Object? errorBuilder = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? flex = freezed,Object? headerFlex = freezed,Object? labelText = freezed,Object? labelMaxLines = freezed,Object? labelLocation = freezed,Object? hintText = freezed,Object? helperText = freezed,Object? helperMaxLines = freezed,Object? helper = freezed,Object? helperLocation = freezed,Object? prefixIcon = freezed,Object? prefixIconLocation = freezed,Object? errorLocation = freezed,Object? action = freezed,Object? submitFormOnFieldSubmitted = freezed,Object? keyboardType = freezed,Object? obscureText = freezed,Object? autocorrect = freezed,Object? autofillHints = freezed,Object? autofocus = freezed,Object? textInputAction = freezed,Object? textCapitalization = freezed,Object? maxLines = freezed,Object? invalidRegexMessage = freezed,Object? collapsed = freezed,Object? padding = freezed,Object? style = freezed,Object? widgetBuilder = freezed,Object? errorBuilder = freezed,Object? counterBuilder = freezed,Object? unfocusMethod = freezed,}) {
   return _then(_StringInputUiSettings<T>(
 flex: freezed == flex ? _self.flex : flex // ignore: cast_nullable_to_non_nullable
 as int?,headerFlex: freezed == headerFlex ? _self.headerFlex : headerFlex // ignore: cast_nullable_to_non_nullable
@@ -2232,7 +2279,9 @@ as bool?,padding: freezed == padding ? _self.padding : padding // ignore: cast_n
 as EdgeInsets?,style: freezed == style ? _self.style : style // ignore: cast_nullable_to_non_nullable
 as TextStyle?,widgetBuilder: freezed == widgetBuilder ? _self.widgetBuilder : widgetBuilder // ignore: cast_nullable_to_non_nullable
 as StringFieldBuilderDef<T>?,errorBuilder: freezed == errorBuilder ? _self.errorBuilder : errorBuilder // ignore: cast_nullable_to_non_nullable
-as ErrorBuilderDef?,
+as ErrorBuilderDef?,counterBuilder: freezed == counterBuilder ? _self.counterBuilder : counterBuilder // ignore: cast_nullable_to_non_nullable
+as CounterBuilderDef?,unfocusMethod: freezed == unfocusMethod ? _self.unfocusMethod : unfocusMethod // ignore: cast_nullable_to_non_nullable
+as FieldUnfocusMethod?,
   ));
 }
 

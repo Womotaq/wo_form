@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wo_form/wo_form.dart';
@@ -43,9 +44,17 @@ class _InitialValueKeeperState<T> extends State<InitialValueKeeper<T>> {
   void didUpdateWidget(covariant InitialValueKeeper<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (widget.path == oldWidget.path &&
-        widget.initialValue != oldWidget.initialValue) {
-      tryEnforceInitialValue();
+    if (widget.path == oldWidget.path) {
+      if (widget.initialValue is List && oldWidget.initialValue is List) {
+        if (const ListEquality<dynamic>().equals(
+          widget.initialValue as List,
+          oldWidget.initialValue as List,
+        )) {
+          tryEnforceInitialValue();
+        }
+      } else if (widget.initialValue != oldWidget.initialValue) {
+        tryEnforceInitialValue();
+      }
     }
   }
 

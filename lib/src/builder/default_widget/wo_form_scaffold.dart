@@ -44,7 +44,22 @@ class WoFormScaffold extends StatelessWidget {
       body: body,
       bottomNavigationBar:
           uiSettings.submitButtonPosition == SubmitButtonPosition.bottomBar
-          ? const SubmitButtonBuilder()
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Flexible(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: woFormTheme?.maxWidth ?? WoFormTheme.MAX_WIDTH,
+                    ),
+                    child: const SizedBox(
+                      width: double.infinity,
+                      child: SubmitButtonBuilder(),
+                    ),
+                  ),
+                ),
+              ],
+            )
           : null,
       floatingActionButton:
           uiSettings.submitButtonPosition == SubmitButtonPosition.floating

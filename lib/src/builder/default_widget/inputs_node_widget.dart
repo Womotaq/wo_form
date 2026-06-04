@@ -27,7 +27,7 @@ class InputsNodeWidget extends StatelessWidget {
     final spacing = uiSettings?.spacing ?? woFormTheme?.spacing ?? 0;
     final reverse = uiSettings?.reverse ?? false;
 
-    return LayoutMethod.fromFlex(uiSettings.flexOrDefault).isScrollable
+    final view = LayoutMethod.fromFlex(uiSettings.flexOrDefault).isScrollable
         ? ListView.builder(
             controller: ScrollControllerProvider.of(context),
             reverse: reverse,
@@ -69,6 +69,16 @@ class InputsNodeWidget extends StatelessWidget {
               ),
             ],
           );
+
+    return Align(
+      alignment: Alignment.topCenter,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: woFormTheme?.maxWidth ?? WoFormTheme.MAX_WIDTH,
+        ),
+        child: view,
+      ),
+    );
   }
 
   Widget standardChildBuilder(WoFormNode child) =>

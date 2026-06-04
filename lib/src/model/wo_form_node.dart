@@ -36,9 +36,14 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
   /// The value of this node is of type List&lt;WoFormNode&gt;. It gives you
   /// access to the ids of the child nodes. You can then find their values using
   /// values.get('#dynamicInputsId#childId').
+  @Assert(
+    'maxCount == null || minCount <= maxCount',
+    'maxCount must be higher or equal to minCount',
+  )
   const factory WoFormNode.dynamicInputs({
     required String id,
     @Default([]) List<DynamicInputTemplate> templates,
+    @Default(0) int minCount,
     int? maxCount,
     @InputsListConverter() List<WoFormNode>? initialChildren,
     DynamicInputsNodeUiSettings? uiSettings,
@@ -641,11 +646,14 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
           parentPath: '$parentPath/$id',
         );
 
-      case DynamicInputsNode(:final maxCount):
+      case DynamicInputsNode(:final minCount, :final maxCount):
         final children = values.get<List<WoFormNode>>('$parentPath/$id') ?? [];
 
         WoFormInputError? error;
-        if (maxCount != null && children.length > maxCount) {
+
+        if (children.length < minCount) {
+          error = WoFormInputError.minBound(path: '$parentPath/$id');
+        } else if (maxCount != null && children.length > maxCount) {
           error = WoFormInputError.maxBound(path: '$parentPath/$id');
         }
 
@@ -1088,6 +1096,9 @@ abstract class DynamicInputTemplate with _$DynamicInputTemplate {
   )
   factory DynamicInputTemplate({
     @InputNullableConverter() WoFormNode? child,
+
+    /// [childBuilder] has better reload results the [child],
+    /// it's just a DX option.
     @notSerializable WoFormNode Function()? childBuilder,
     @Default(DynamicInputUiSettings()) DynamicInputUiSettings uiSettings,
   }) = _DynamicInputTemplate;

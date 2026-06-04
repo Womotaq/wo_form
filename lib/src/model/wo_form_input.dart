@@ -122,10 +122,15 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
     String? initialValue,
     @Default(false) bool isRequired,
     String? regexPattern,
+    int? maxLength,
 
     @notSerializable SuggestionsSettings<T>? suggestionsSettings,
     @notSerializable GetCustomErrorDef<String>? getCustomError,
     StringInputUiSettings<T>? uiSettings,
+
+    /// If set, the controller won't be disposed automatically,
+    /// you'll have to do it yourself.
+    @notSerializable GetTextEditingControllerDef? getController,
   }) = StringInput;
 
   const WoFormInput._() : super._();
@@ -362,6 +367,7 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
       case StringInput(
         :final isRequired,
         :final regexPattern,
+        :final maxLength,
         :final getCustomError,
         :final uiSettings,
       ):
@@ -383,6 +389,8 @@ sealed class WoFormInput<T extends Object?> extends WoFormNode<T>
             path: '$parentPath/$id',
             message: uiSettings?.invalidRegexMessage ?? '',
           );
+        } else if (maxLength != null && value.length > maxLength) {
+          return WoFormInputError.maxBound(path: '$parentPath/$id');
         } else {
           return null;
         }
@@ -519,8 +527,8 @@ abstract class SelectInput<T> extends WoFormInput<T> with _$SelectInput<T> {
   )
   const factory SelectInput({
     required String id,
-    required int? maxCount,
     @Default(0) int minCount,
+    required int? maxCount,
     List<T>? initialValues,
     @Default([]) List<T> availibleValues,
 
@@ -658,6 +666,8 @@ typedef OnEditMediaDef =
       Media media,
       WoFieldData<MediaInput<Object?>, List<Media>?> data,
     );
+typedef GetTextEditingControllerDef =
+    TextEditingController? Function(BuildContext context);
 
 extension SelectInputX<T> on SelectInput<T> {
   T? getAvailibleValue({required String id}) {

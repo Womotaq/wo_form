@@ -11,7 +11,7 @@ typedef PickDateDef =
       DateTime? initialDate,
       DateTime? maxDate,
       DateTime? minDate,
-      String? dateFormat,
+      PickDateUiSettings? uiSettings,
     });
 
 class PickDate {
@@ -20,7 +20,7 @@ class PickDate {
     DateTime? initialDate,
     DateTime? maxDate,
     DateTime? minDate,
-    String? dateFormat,
+    PickDateUiSettings? uiSettings,
   }) async {
     var date = initialDate;
 
@@ -69,7 +69,7 @@ class PickDate {
     DateTime? minDate,
     DatePickerEntryMode? initialEntryMode,
     DatePickerMode? initialDatePickerMode,
-    String? dateFormat,
+    PickDateUiSettings? uiSettings,
   }) {
     final ref = initialDate ?? DateTime.now();
 
@@ -88,38 +88,43 @@ class PickDate {
     DateTime? initialDate,
     DateTime? maxDate,
     DateTime? minDate,
-    String? dateFormat,
+    PickDateUiSettings? uiSettings,
   }) {
     if (minDate != null && maxDate != null && minDate.isAfter(maxDate)) {
       throw AssertionError('minDate must be before maxDate');
     }
 
-    final screenSize = MediaQuery.of(context).size;
-    if (screenSize.width > 500 && screenSize.height > 700) {
+    var presentationMode = uiSettings?.presentationMode;
+    if (presentationMode == null) {
+      final screenSize = MediaQuery.of(context).size;
+      if (screenSize.width > 500 && screenSize.height > 700) {
+        presentationMode = PickDatePresentationMode.dialog;
+      }
+      presentationMode = PickDateUiSettings.defaultPresentationMode;
+    }
+
+    final picker = PickDatePageWithYear(
+      minDate: minDate,
+      maxDate: maxDate,
+      initialDate: initialDate,
+      uiSettings: (uiSettings ?? const PickDateUiSettings()).copyWith(
+        presentationMode: presentationMode,
+      ),
+    );
+
+    if (presentationMode == PickDatePresentationMode.dialog) {
       return showDialog(
         context: context,
         builder: (context) => Dialog(
           clipBehavior: Clip.hardEdge,
-          child: PickDatePageWithYear.inModal(
-            minDate: minDate,
-            maxDate: maxDate,
-            initialDate: initialDate,
-            dateFormat: dateFormat,
-          ),
+          child: picker,
         ),
       );
     }
 
     return Navigator.push(
       context,
-      MaterialPageRoute<DateTime>(
-        builder: (_) => PickDatePageWithYear(
-          minDate: minDate,
-          maxDate: maxDate,
-          initialDate: initialDate,
-          dateFormat: dateFormat,
-        ),
-      ),
+      MaterialPageRoute<DateTime>(builder: (_) => picker),
     );
   }
 
@@ -128,38 +133,43 @@ class PickDate {
     DateTime? initialDate,
     DateTime? maxDate,
     DateTime? minDate,
-    String? dateFormat,
+    PickDateUiSettings? uiSettings,
   }) {
     if (minDate != null && maxDate != null && minDate.isAfter(maxDate)) {
       throw AssertionError('minDate must be before maxDate');
     }
 
-    final screenSize = MediaQuery.of(context).size;
-    if (screenSize.width > 500 && screenSize.height > 700) {
+    var presentationMode = uiSettings?.presentationMode;
+    if (presentationMode == null) {
+      final screenSize = MediaQuery.of(context).size;
+      if (screenSize.width > 500 && screenSize.height > 700) {
+        presentationMode = PickDatePresentationMode.dialog;
+      }
+      presentationMode = PickDateUiSettings.defaultPresentationMode;
+    }
+
+    final picker = PickDatePage(
+      minDate: minDate,
+      maxDate: maxDate,
+      initialDate: initialDate,
+      uiSettings: (uiSettings ?? const PickDateUiSettings()).copyWith(
+        presentationMode: presentationMode,
+      ),
+    );
+
+    if (presentationMode == PickDatePresentationMode.dialog) {
       return showDialog(
         context: context,
         builder: (context) => Dialog(
           clipBehavior: Clip.hardEdge,
-          child: PickDatePage.inModal(
-            minDate: minDate,
-            maxDate: maxDate,
-            initialDate: initialDate,
-            dateFormat: dateFormat,
-          ),
+          child: picker,
         ),
       );
     }
 
     return Navigator.push(
       context,
-      MaterialPageRoute<DateTime>(
-        builder: (_) => PickDatePage(
-          minDate: minDate,
-          maxDate: maxDate,
-          initialDate: initialDate,
-          dateFormat: dateFormat,
-        ),
-      ),
+      MaterialPageRoute<DateTime>(builder: (_) => picker),
     );
   }
 

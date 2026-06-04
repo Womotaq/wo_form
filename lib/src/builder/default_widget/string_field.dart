@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:phone_form_field/phone_form_field.dart';
@@ -16,6 +17,8 @@ class StringField<T extends Object?> extends StatefulWidget {
     this.suggestionsSettings,
     this.errorText,
     this.errorWidget,
+    this.maxLength,
+    this.getController,
     super.key,
   });
 
@@ -27,6 +30,8 @@ class StringField<T extends Object?> extends StatefulWidget {
         suggestionsSettings: data.input.suggestionsSettings,
         errorText: data.errorText,
         errorWidget: data.errorWidget,
+        maxLength: data.input.maxLength,
+        getController: data.input.getController,
       );
 
   final String? text;
@@ -35,7 +40,8 @@ class StringField<T extends Object?> extends StatefulWidget {
   final SuggestionsSettings<T>? suggestionsSettings;
   final String? errorText;
   final Widget? errorWidget;
-  // final WoFieldData<StringInput, String> data;
+  final int? maxLength;
+  final GetTextEditingControllerDef? getController;
 
   @override
   State<StringField> createState() => _StringFieldState<T>();
@@ -43,6 +49,7 @@ class StringField<T extends Object?> extends StatefulWidget {
 
 class _StringFieldState<T> extends State<StringField<T>> {
   TextEditingController? textEditingController;
+  bool _ownController = true;
   PhoneController? phoneController;
   late final bool autofocus;
   bool obscureText = false;
@@ -81,21 +88,28 @@ class _StringFieldState<T> extends State<StringField<T>> {
         ),
       );
     } else {
-      textEditingController = TextEditingController(
-        text: widget.text ?? '',
-      );
+      textEditingController = widget.getController?.call(context);
+      if (textEditingController != null) {
+        _ownController = false;
+      } else {
+        textEditingController = TextEditingController();
+      }
+      textEditingController?.text = widget.text ?? '';
+      textEditingController?.addListener(_onTextChanged);
     }
   }
 
-  @override
-  void dispose() {
-    textEditingController?.dispose();
-    phoneController?.dispose();
-    super.dispose();
+  void _onTextChanged() {
+    final newText = textEditingController?.text;
+    if (newText == null) return;
+
+    widget.onValueChanged?.call(newText);
   }
 
   @override
-  Widget build(BuildContext context) {
+  void didUpdateWidget(covariant StringField<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
     if (textEditingController != null) {
       if ((widget.text ?? '') != textEditingController?.text) {
         textEditingController?.text = widget.text ?? '';
@@ -106,7 +120,20 @@ class _StringFieldState<T> extends State<StringField<T>> {
         textEditingController?.text = widget.text ?? '';
       }
     }
+  }
 
+  @override
+  void dispose() {
+    if (_ownController) textEditingController?.dispose();
+    textEditingController?.removeListener(_onTextChanged);
+
+    phoneController?.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final woFormTheme = WoFormTheme.of(context);
     final uiSettings = widget.uiSettings;
     final collapsed = uiSettings?.collapsed ?? false;
@@ -132,6 +159,9 @@ class _StringFieldState<T> extends State<StringField<T>> {
             hintText: uiSettings?.hintText,
           )
         : InputDecoration(
+            floatingLabelBehavior: (uiSettings?.maxLines ?? 0) > 1
+                ? FloatingLabelBehavior.always
+                : null,
             labelText: labelLocation.isInside ? uiSettings?.labelText : null,
             helperText: helperLocation.isInside && uiSettings?.helper == null
                 ? uiSettings?.helperText
@@ -169,12 +199,49 @@ class _StringFieldState<T> extends State<StringField<T>> {
                     : const Icon(Icons.visibility_outlined),
               ),
             },
+            counter: widget.maxLength == null
+                ? null
+                : (uiSettings?.counterBuilder ??
+                          woFormTheme?.stringFieldCounterBuilder)
+                      ?.call(
+                        (widget.text ?? '').length,
+                        widget.maxLength!,
+                      ),
+            counterText: widget.maxLength == null
+                ? null
+                : '${(widget.text ?? '').length}/${widget.maxLength}',
           );
 
     final suggestionsSettings = widget.suggestionsSettings;
+    final unfocusMethod =
+        uiSettings?.unfocusMethod ?? FieldUnfocusMethod.onTapUpOutside;
+    final onTapOutside = switch (unfocusMethod) {
+      FieldUnfocusMethod.onTapOutside => (_) => FocusScope.of(
+        context,
+      ).unfocus(),
+      FieldUnfocusMethod.onTapUpOutside =>
+        (PointerDownEvent event) => tapPosition = event.position,
+      FieldUnfocusMethod.systemDefault => null,
+    };
+    final onTapUpOutside = switch (unfocusMethod) {
+      FieldUnfocusMethod.systemDefault ||
+      FieldUnfocusMethod.onTapOutside => null,
+      FieldUnfocusMethod.onTapUpOutside => (PointerUpEvent event) {
+        if (event.position == tapPosition) {
+          FocusScope.of(context).unfocus();
+        }
+        tapPosition = null;
+      },
+    };
+
+    final formatters = [
+      if (widget.maxLength != null)
+        LengthLimitingTextInputFormatter(widget.maxLength),
+    ];
 
     final textField = suggestionsSettings != null
         ? TypeAheadField<T>(
+            autoFlipDirection: true,
             controller: textEditingController,
 
             debounceDuration:
@@ -195,24 +262,13 @@ class _StringFieldState<T> extends State<StringField<T>> {
               focusNode: focusNode,
 
               enabled: widget.onValueChanged != null,
-              onChanged: widget.onValueChanged,
               onFieldSubmitted:
                   (uiSettings?.submitFormOnFieldSubmitted ??
                       defaultSubmitFormOnFieldSubmitted())
                   ? (_) => context.read<WoFormValuesCubit>().submit(context)
                   : null,
-              // Flutter's default behaviour :
-              // - web : tapping outside instantly unfocuses the field.
-              // - mobile : tapping outside does nothing.
-              // For better consistency across all plateforms, wo_form decided
-              // to unfocus text fields on tap up.
-              onTapOutside: (event) => tapPosition = event.position,
-              onTapUpOutside: (event) {
-                if (event.position == tapPosition) {
-                  FocusScope.of(context).unfocus();
-                }
-                tapPosition = null;
-              },
+              onTapOutside: onTapOutside,
+              onTapUpOutside: onTapUpOutside,
               style: uiSettings?.style,
               keyboardType: uiSettings?.keyboardType,
               obscureText: obscureText,
@@ -225,9 +281,7 @@ class _StringFieldState<T> extends State<StringField<T>> {
               maxLines: uiSettings?.maxLines == 0
                   ? null
                   : uiSettings?.maxLines ?? 1,
-              inputFormatters: const [
-                // LATER : LengthLimitingTextInputFormatter
-              ],
+              inputFormatters: formatters,
               decoration: inputDecoration,
             ),
             itemBuilder: (context, suggestion) =>
@@ -240,6 +294,10 @@ class _StringFieldState<T> extends State<StringField<T>> {
                           suggestion.toString(),
                     ),
                   ),
+
+            hideOnEmpty: true,
+            hideOnLoading: true,
+            hideOnError: true,
           )
         : uiSettings?.keyboardType == TextInputType.phone
         ? PhoneFormField(
@@ -255,24 +313,15 @@ class _StringFieldState<T> extends State<StringField<T>> {
                     defaultSubmitFormOnFieldSubmitted())
                 ? (_) => context.read<WoFormValuesCubit>().submit(context)
                 : null,
-            // Flutter's default behaviour :
-            // - web : tapping outside instantly unfocuses the field.
-            // - mobile : tapping outside does nothing.
-            // For better consistency across all plateforms, wo_form decided to
-            // unfocus text fields on tap up.
-            onTapOutside: (event) => tapPosition = event.position,
-            onTapUpOutside: (event) {
-              if (event.position == tapPosition) {
-                FocusScope.of(context).unfocus();
-              }
-              tapPosition = null;
-            },
+            onTapOutside: onTapOutside,
+            onTapUpOutside: onTapUpOutside,
             style: uiSettings?.style,
             obscureText: obscureText,
             autocorrect: uiSettings?.autocorrect ?? true,
             autofillHints: uiSettings?.autofillHints,
             autofocus: autofocus,
             textInputAction: uiSettings?.textInputAction,
+            inputFormatters: formatters,
             decoration: inputDecoration,
             countrySelectorNavigator:
                 const CountrySelectorNavigator.draggableBottomSheet(),
@@ -280,24 +329,13 @@ class _StringFieldState<T> extends State<StringField<T>> {
         : TextFormField(
             enabled: widget.onValueChanged != null,
             controller: textEditingController,
-            onChanged: widget.onValueChanged,
             onFieldSubmitted:
                 (uiSettings?.submitFormOnFieldSubmitted ??
                     defaultSubmitFormOnFieldSubmitted())
                 ? (_) => context.read<WoFormValuesCubit>().submit(context)
                 : null,
-            // Flutter's default behaviour :
-            // - web : tapping outside instantly unfocuses the field.
-            // - mobile : tapping outside does nothing.
-            // For better consistency across all plateforms, wo_form decided to
-            // unfocus text fields on tap up.
-            onTapOutside: (event) => tapPosition = event.position,
-            onTapUpOutside: (event) {
-              if (event.position == tapPosition) {
-                FocusScope.of(context).unfocus();
-              }
-              tapPosition = null;
-            },
+            onTapOutside: onTapOutside,
+            onTapUpOutside: onTapUpOutside,
             style: uiSettings?.style,
             keyboardType: uiSettings?.keyboardType,
             obscureText: obscureText,
@@ -310,13 +348,16 @@ class _StringFieldState<T> extends State<StringField<T>> {
             maxLines: uiSettings?.maxLines == 0
                 ? null
                 : uiSettings?.maxLines ?? 1,
-            inputFormatters: const [
-              // LATER : LengthLimitingTextInputFormatter
-            ],
+            inputFormatters: formatters,
             decoration: inputDecoration,
           );
 
-    if (collapsed) return textField;
+    if (collapsed) {
+      return Padding(
+        padding: uiSettings?.padding ?? EdgeInsets.zero,
+        child: textField,
+      );
+    }
 
     return FlexField(
       headerFlex: uiSettings?.headerFlex,

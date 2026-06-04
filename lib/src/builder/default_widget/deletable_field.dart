@@ -17,9 +17,13 @@ class DeletableField extends StatelessWidget {
       minTileHeight: 0,
       minVerticalPadding: 0,
       horizontalTitleGap: 0,
-      leading: IconButton(
-        onPressed: onDelete,
-        icon: const Icon(Icons.close),
+      // Ignoring the focus of this button allows the focus navigation
+      // to switch from a string input to an other without closing the keyboard
+      leading: ExcludeFocus(
+        child: IconButton(
+          onPressed: onDelete,
+          icon: const Icon(Icons.close),
+        ),
       ),
       title: child,
     );

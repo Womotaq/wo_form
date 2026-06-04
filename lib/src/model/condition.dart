@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/src/utils/extensions.dart';
@@ -16,6 +18,10 @@ sealed class Condition with _$Condition {
         '    isNull,'
         '    isFocused,'
         '    matchesRegex,'
+        '    isLessThan,'
+        '    isLessThanOrEqualTo,'
+        '    isGreaterThan,'
+        '    isGreaterThanOrEqualTo,'
         '  ];'
         '  final operatorsUsed = operators.where((e) => e != null).length;'
         '  return operatorsUsed == 1; '
@@ -33,6 +39,11 @@ sealed class Condition with _$Condition {
 
     /// If the value at path is not a string, the condition cannot be met.
     String? matchesRegex,
+
+    Object? isLessThan,
+    Object? isLessThanOrEqualTo,
+    Object? isGreaterThan,
+    Object? isGreaterThanOrEqualTo,
   }) = ConditionValue;
 
   const factory Condition.and(
@@ -66,6 +77,10 @@ extension ConditionMeeter on WoFormValues {
         :final isNull,
         :final isFocused,
         :final matchesRegex,
+        :final isLessThan,
+        :final isLessThanOrEqualTo,
+        :final isGreaterThan,
+        :final isGreaterThanOrEqualTo,
       ):
         final value = this[path];
         if (isEqualTo != null) {
@@ -92,6 +107,30 @@ extension ConditionMeeter on WoFormValues {
         if (matchesRegex != null) {
           if (value is! String) return false;
           return RegExp(matchesRegex).hasMatch(value);
+        }
+
+        int compareValueTo(Object other) {
+          if (value is Comparable && other is Comparable) {
+            return value.compareTo(other);
+          } else {
+            log(
+              'Can‘t compare values : '
+              '${value.runtimeType} and ${other.runtimeType}',
+            );
+            throw TypeError();
+          }
+        }
+        if (isLessThan != null) {
+          return compareValueTo(isLessThan) < 0;
+        }
+        if (isLessThanOrEqualTo != null) {
+          return compareValueTo(isLessThanOrEqualTo) <= 0;
+        }
+        if (isGreaterThan != null) {
+          return compareValueTo(isGreaterThan) > 0;
+        }
+        if (isGreaterThanOrEqualTo != null) {
+          return compareValueTo(isGreaterThanOrEqualTo) >= 0;
         }
 
         throw AssertionError('Exactly one operator must be specified');

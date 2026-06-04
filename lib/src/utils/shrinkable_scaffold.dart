@@ -92,12 +92,8 @@ class _ShrinkableScaffoldState extends State<ShrinkableScaffold> {
             ],
           ),
         ),
-        if (widget.bottomNavigationBar != null)
-          KeyboardVisibleBuilder(
-            builder: (context, isKeyboardVisible) => isKeyboardVisible
-                ? const SizedBox.shrink()
-                : widget.bottomNavigationBar!,
-          ),
+        if (widget.shrinkWrap && widget.bottomNavigationBar != null)
+          widget.bottomNavigationBar!,
       ],
     );
 
@@ -108,43 +104,9 @@ class _ShrinkableScaffoldState extends State<ShrinkableScaffold> {
           )
         // This scaffold ensures basic flutter functionnalities like adapting
         // size when the keyboard appears.
-        : Scaffold(body: content);
+        : Scaffold(
+            body: content,
+            bottomNavigationBar: widget.bottomNavigationBar,
+          );
   }
-}
-
-class KeyboardVisibleBuilder extends StatefulWidget {
-  const KeyboardVisibleBuilder({required this.builder, super.key});
-
-  final Widget Function(BuildContext context, bool isKeyboardVisible) builder;
-
-  @override
-  State<KeyboardVisibleBuilder> createState() => _KeyboardVisibleBuilderState();
-}
-
-class _KeyboardVisibleBuilderState extends State<KeyboardVisibleBuilder>
-    with WidgetsBindingObserver {
-  bool _isKeyboardVisible = false;
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  @override
-  void didChangeMetrics() {
-    // Check the keyboard visibility when the metrics change
-    final bottomInset = View.of(context).viewInsets.bottom;
-    setState(() => _isKeyboardVisible = bottomInset > 0);
-  }
-
-  @override
-  Widget build(BuildContext context) =>
-      widget.builder(context, _isKeyboardVisible);
 }

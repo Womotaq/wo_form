@@ -41,6 +41,7 @@ DynamicInputsNode<T> _$DynamicInputsNodeFromJson<T extends Object?>(
           ?.map((e) => DynamicInputTemplate.fromJson(e as Map<String, dynamic>))
           .toList() ??
       const [],
+  minCount: (json['minCount'] as num?)?.toInt() ?? 0,
   maxCount: (json['maxCount'] as num?)?.toInt(),
   initialChildren:
       _$JsonConverterFromJson<List<dynamic>, List<WoFormNode<Object?>>>(
@@ -63,6 +64,7 @@ Map<String, dynamic> _$DynamicInputsNodeToJson<T extends Object?>(
 ) => <String, dynamic>{
   'id': instance.id,
   'templates': instance.templates.map((e) => e.toJson()).toList(),
+  'minCount': instance.minCount,
   'maxCount': instance.maxCount,
   'initialChildren':
       _$JsonConverterToJson<List<dynamic>, List<WoFormNode<Object?>>>(
@@ -479,6 +481,7 @@ StringInput<T> _$StringInputFromJson<T extends Object?>(
   initialValue: json['initialValue'] as String?,
   isRequired: json['isRequired'] as bool? ?? false,
   regexPattern: json['regexPattern'] as String?,
+  maxLength: (json['maxLength'] as num?)?.toInt(),
   uiSettings: json['uiSettings'] == null
       ? null
       : StringInputUiSettings<T>.fromJson(
@@ -494,6 +497,7 @@ Map<String, dynamic> _$StringInputToJson<T extends Object?>(
   'initialValue': instance.initialValue,
   'isRequired': instance.isRequired,
   'regexPattern': instance.regexPattern,
+  'maxLength': instance.maxLength,
   'uiSettings': instance.uiSettings?.toJson(),
   'runtimeType': instance.$type,
 };

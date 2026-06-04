@@ -11,7 +11,8 @@ part 'ui_settings.g.dart';
 
 enum FieldElementLocation {
   inside,
-  outside;
+  outside
+  ;
 
   bool get isInside => this == inside;
   bool get isOutside => this == outside;
@@ -87,11 +88,13 @@ abstract class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
     String? dateFormat,
     String? timeFormat,
     String? labelText,
+    int? labelMaxLines,
 
     /// Default to [FieldElementLocation.inside].
     FieldElementLocation? labelLocation,
     String? hintText,
     String? helperText,
+    int? helperMaxLines,
 
     /// Default to [FieldElementLocation.inside].
     FieldElementLocation? helperLocation,
@@ -117,6 +120,7 @@ abstract class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
     FlexibleDateTime? initialEditValue,
     DateEditMode? editMode,
     @PickDateDefNullableConverter() PickDateDef? pickDate,
+    PickDateUiSettings? pickDateUiSettings,
     @notSerializable PickTimeDef? pickTime,
     TimePickerEntryMode? initialTimeEntryMode,
     @notSerializable DateTimeFieldBuilderDef? widgetBuilder,
@@ -133,8 +137,10 @@ abstract class DateTimeInputUiSettings with _$DateTimeInputUiSettings {
           dateFormat: dateFormat ?? other.dateFormat,
           timeFormat: timeFormat ?? other.timeFormat,
           labelText: labelText ?? other.labelText,
+          labelMaxLines: labelMaxLines ?? other.labelMaxLines,
           labelLocation: labelLocation ?? other.labelLocation,
           helperText: helperText ?? other.helperText,
+          helperMaxLines: helperMaxLines ?? other.helperMaxLines,
           helperLocation: helperLocation ?? other.helperLocation,
           hintText: hintText ?? other.hintText,
           headerFlex: headerFlex ?? other.headerFlex,
@@ -263,6 +269,10 @@ abstract class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
     /// Default to true
     bool? reorderable,
 
+    /// Defaults to [ListTileControlAffinity.platform], which always transforms
+    /// into [ListTileControlAffinity.leading].
+    ListTileControlAffinity? grabHandleLocation,
+
     /// Default to [reorderable].
     bool? oddEvenRowColors,
 
@@ -294,6 +304,7 @@ abstract class DynamicInputsNodeUiSettings with _$DynamicInputsNodeUiSettings {
           labelText: labelText ?? other.labelText,
           helperText: helperText ?? other.helperText,
           reorderable: reorderable ?? other.reorderable,
+          grabHandleLocation: grabHandleLocation ?? other.grabHandleLocation,
           oddEvenRowColors: oddEvenRowColors ?? other.oddEvenRowColors,
           addButtonText: addButtonText ?? other.addButtonText,
           addButtonPosition: addButtonPosition ?? other.addButtonPosition,
@@ -584,6 +595,7 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
     /// Defaults to 0.
     int? flex,
     String? labelText,
+    int? labelMaxLines,
     String? helperText,
     String? hintText,
     ChildrenVisibility? childrenVisibility,
@@ -636,6 +648,7 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
       : SelectInputUiSettings(
           flex: flex ?? other.flex,
           labelText: labelText ?? other.labelText,
+          labelMaxLines: labelMaxLines ?? other.labelMaxLines,
           helperText: helperText ?? other.helperText,
           hintText: hintText ?? other.hintText,
           childrenVisibility: childrenVisibility ?? other.childrenVisibility,
@@ -653,6 +666,42 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
           tileBuilder: tileBuilder ?? other.tileBuilder,
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,
         );
+}
+
+/// Flutter's default behaviour :
+/// - web : tapping outside instantly unfocuses the field.
+/// - mobile : tapping outside does nothing.
+/// For better consistency across all plateforms, wo_form decided to
+/// unfocus text fields on tap up.
+enum FieldUnfocusMethod {
+  /// Unfocus the field each time a tap is done outside the field.
+  ///
+  /// Default value.
+  ///
+  /// Implementation example :
+  /// ```dart
+  /// onTapOutside: (event) => tapPosition = event.position,
+  /// onTapUpOutside: (event) {
+  ///   if (event.position == tapPosition) {
+  ///     FocusScope.of(context).unfocus();
+  ///   }
+  ///   tapPosition = null;
+  /// },
+  /// ```
+  onTapUpOutside,
+
+  /// Unfocus the field each time a tap starts outside the field.
+  /// Note : the tap can become a drag. To avoid unfocusing on dragging, use
+  /// [FieldUnfocusMethod.onTapUpOutside].
+  ///
+  /// Implementation example :
+  /// ```dart
+  /// onTapOutside: (event) => FocusScope.of(context).unfocus(),
+  /// ```
+  onTapOutside,
+
+  /// Doesn't override the default behaviour.
+  systemDefault,
 }
 
 enum StringFieldAction { clear, obscure }
@@ -678,6 +727,7 @@ enum WoFormAutofocus {
 typedef StringFieldBuilderDef<T extends Object?> =
     Widget Function(WoFieldData<StringInput<T>, String> data);
 typedef ErrorBuilderDef = Widget Function(WoFormInputError error);
+typedef CounterBuilderDef = Widget Function(int length, int maxLength);
 
 @freezed
 abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
@@ -753,6 +803,8 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     @notSerializable TextStyle? style,
     @notSerializable StringFieldBuilderDef<T>? widgetBuilder,
     @notSerializable ErrorBuilderDef? errorBuilder,
+    @notSerializable CounterBuilderDef? counterBuilder,
+    FieldUnfocusMethod? unfocusMethod,
   }) = _StringInputUiSettings<T>;
 
   factory StringInputUiSettings.email({
@@ -769,7 +821,12 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     Widget? prefixIcon,
     FieldElementLocation? prefixIconLocation,
     FieldElementLocation? errorLocation,
+    StringFieldAction? action,
     bool? submitFormOnFieldSubmitted,
+    TextInputType? keyboardType = TextInputType.emailAddress,
+    bool? obscureText,
+    bool? autocorrect = false,
+    List<String>? autofillHints = const [AutofillHints.email],
     WoFormAutofocus? autofocus,
     TextInputAction? textInputAction,
     String? invalidRegexMessage,
@@ -777,6 +834,8 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     TextStyle? style,
     StringFieldBuilderDef? widgetBuilder,
     ErrorBuilderDef? errorBuilder,
+    int? maxLines = 1,
+    FieldUnfocusMethod? unfocusMethod,
   }) => StringInputUiSettings(
     flex: flex,
     headerFlex: headerFlex,
@@ -791,7 +850,12 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     prefixIcon: prefixIcon,
     prefixIconLocation: prefixIconLocation,
     errorLocation: errorLocation,
+    action: action,
     submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
+    keyboardType: keyboardType,
+    obscureText: obscureText,
+    autocorrect: autocorrect,
+    autofillHints: autofillHints,
     autofocus: autofocus,
     textInputAction: textInputAction,
     invalidRegexMessage: invalidRegexMessage,
@@ -799,10 +863,8 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     style: style,
     widgetBuilder: widgetBuilder,
     errorBuilder: errorBuilder,
-    keyboardType: TextInputType.emailAddress,
-    autocorrect: false,
-    autofillHints: const [AutofillHints.email],
-    maxLines: 1,
+    maxLines: maxLines,
+    unfocusMethod: unfocusMethod,
   );
 
   factory StringInputUiSettings.password({
@@ -819,7 +881,12 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     Widget? prefixIcon,
     FieldElementLocation? prefixIconLocation,
     FieldElementLocation? errorLocation,
+    StringFieldAction? action = StringFieldAction.obscure,
     bool? submitFormOnFieldSubmitted,
+    TextInputType? keyboardType = TextInputType.visiblePassword,
+    bool? obscureText = true,
+    bool? autocorrect = false,
+    List<String>? autofillHints = const [AutofillHints.password],
     WoFormAutofocus? autofocus = WoFormAutofocus.no,
     TextInputAction? textInputAction,
     String? invalidRegexMessage,
@@ -827,6 +894,8 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     TextStyle? style,
     StringFieldBuilderDef? widgetBuilder,
     ErrorBuilderDef? errorBuilder,
+    int? maxLines = 1,
+    FieldUnfocusMethod? unfocusMethod,
   }) => StringInputUiSettings(
     flex: flex,
     headerFlex: headerFlex,
@@ -841,23 +910,21 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     prefixIcon: prefixIcon,
     prefixIconLocation: prefixIconLocation,
     errorLocation: errorLocation,
+    action: action,
     submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
+    keyboardType: keyboardType,
+    obscureText: obscureText,
+    autocorrect: autocorrect,
+    autofillHints: autofillHints,
     textInputAction: textInputAction,
     invalidRegexMessage: invalidRegexMessage,
     padding: padding,
     style: style,
     widgetBuilder: widgetBuilder,
     errorBuilder: errorBuilder,
-    action: StringFieldAction.obscure,
-    keyboardType: TextInputType.visiblePassword,
-    obscureText: true,
-    autocorrect: false,
-    autofillHints: const [
-      AutofillHints.password,
-      AutofillHints.newPassword,
-    ],
     autofocus: autofocus,
-    maxLines: 1,
+    maxLines: maxLines,
+    unfocusMethod: unfocusMethod,
   );
 
   factory StringInputUiSettings.phone({
@@ -874,13 +941,20 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     Widget? prefixIcon,
     FieldElementLocation? prefixIconLocation,
     FieldElementLocation? errorLocation,
+    StringFieldAction? action,
     bool? submitFormOnFieldSubmitted,
+    TextInputType? keyboardType = TextInputType.phone,
+    bool? obscureText,
+    bool? autocorrect = false,
+    List<String>? autofillHints = const [AutofillHints.telephoneNumber],
     WoFormAutofocus? autofocus,
     TextInputAction? textInputAction,
     EdgeInsets? padding,
     TextStyle? style,
     StringFieldBuilderDef? widgetBuilder,
     ErrorBuilderDef? errorBuilder,
+    int? maxLines = 1,
+    FieldUnfocusMethod? unfocusMethod,
   }) => StringInputUiSettings(
     flex: flex,
     headerFlex: headerFlex,
@@ -895,17 +969,20 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
     prefixIcon: prefixIcon,
     prefixIconLocation: prefixIconLocation,
     errorLocation: errorLocation,
+    action: action,
     submitFormOnFieldSubmitted: submitFormOnFieldSubmitted,
+    keyboardType: keyboardType,
+    obscureText: obscureText,
+    autocorrect: autocorrect,
+    autofillHints: autofillHints,
     autofocus: autofocus,
     textInputAction: textInputAction,
     padding: padding,
     style: style,
     widgetBuilder: widgetBuilder,
     errorBuilder: errorBuilder,
-    keyboardType: TextInputType.phone,
-    autocorrect: false,
-    autofillHints: const [AutofillHints.telephoneNumber],
-    maxLines: 1,
+    maxLines: maxLines,
+    unfocusMethod: unfocusMethod,
   );
 
   const StringInputUiSettings._();
@@ -947,6 +1024,7 @@ abstract class StringInputUiSettings<T> with _$StringInputUiSettings<T> {
           style: style ?? other.style,
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,
           errorBuilder: errorBuilder ?? other.errorBuilder,
+          unfocusMethod: unfocusMethod ?? other.unfocusMethod,
         );
 }
 
@@ -1079,7 +1157,8 @@ enum LayoutMethod {
 
   /// The body will use a flexible layout, allowing its children to be sized
   /// using `uiSettings.flex` and expand to fill the available screen space.
-  flexible;
+  flexible
+  ;
 
   bool get isScrollable => this == LayoutMethod.scrollable;
   bool get shrinks => this == LayoutMethod.shrinkWrap;
@@ -1135,7 +1214,8 @@ enum WoFormPresentation {
   /// Suitable for forms that you will display in a bottom sheet.
   ///
   /// By default, there is no quit button.
-  bottomSheet;
+  bottomSheet
+  ;
 
   bool get isModal => this != page;
 }

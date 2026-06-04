@@ -53,12 +53,14 @@ _DateTimeInputUiSettings _$DateTimeInputUiSettingsFromJson(
   dateFormat: json['dateFormat'] as String?,
   timeFormat: json['timeFormat'] as String?,
   labelText: json['labelText'] as String?,
+  labelMaxLines: (json['labelMaxLines'] as num?)?.toInt(),
   labelLocation: $enumDecodeNullable(
     _$FieldElementLocationEnumMap,
     json['labelLocation'],
   ),
   hintText: json['hintText'] as String?,
   helperText: json['helperText'] as String?,
+  helperMaxLines: (json['helperMaxLines'] as num?)?.toInt(),
   helperLocation: $enumDecodeNullable(
     _$FieldElementLocationEnumMap,
     json['helperLocation'],
@@ -83,6 +85,11 @@ _DateTimeInputUiSettings _$DateTimeInputUiSettingsFromJson(
   pickDate: const PickDateDefNullableConverter().fromJson(
     json['pickDate'] as String?,
   ),
+  pickDateUiSettings: json['pickDateUiSettings'] == null
+      ? null
+      : PickDateUiSettings.fromJson(
+          json['pickDateUiSettings'] as Map<String, dynamic>,
+        ),
   initialTimeEntryMode: $enumDecodeNullable(
     _$TimePickerEntryModeEnumMap,
     json['initialTimeEntryMode'],
@@ -95,9 +102,11 @@ Map<String, dynamic> _$DateTimeInputUiSettingsToJson(
   'dateFormat': instance.dateFormat,
   'timeFormat': instance.timeFormat,
   'labelText': instance.labelText,
+  'labelMaxLines': instance.labelMaxLines,
   'labelLocation': _$FieldElementLocationEnumMap[instance.labelLocation],
   'hintText': instance.hintText,
   'helperText': instance.helperText,
+  'helperMaxLines': instance.helperMaxLines,
   'helperLocation': _$FieldElementLocationEnumMap[instance.helperLocation],
   'headerFlex': instance.headerFlex,
   'prefixIconLocation':
@@ -108,6 +117,7 @@ Map<String, dynamic> _$DateTimeInputUiSettingsToJson(
   'initialEditValue': instance.initialEditValue?.toJson(),
   'editMode': _$DateEditModeEnumMap[instance.editMode],
   'pickDate': const PickDateDefNullableConverter().toJson(instance.pickDate),
+  'pickDateUiSettings': instance.pickDateUiSettings?.toJson(),
   'initialTimeEntryMode':
       _$TimePickerEntryModeEnumMap[instance.initialTimeEntryMode],
 };
@@ -197,6 +207,10 @@ _DynamicInputsNodeUiSettings _$DynamicInputsNodeUiSettingsFromJson(
   labelText: json['labelText'] as String?,
   helperText: json['helperText'] as String?,
   reorderable: json['reorderable'] as bool?,
+  grabHandleLocation: $enumDecodeNullable(
+    _$ListTileControlAffinityEnumMap,
+    json['grabHandleLocation'],
+  ),
   oddEvenRowColors: json['oddEvenRowColors'] as bool?,
   addButtonText: json['addButtonText'] as String?,
   addButtonPosition: $enumDecodeNullable(
@@ -214,6 +228,8 @@ Map<String, dynamic> _$DynamicInputsNodeUiSettingsToJson(
   'labelText': instance.labelText,
   'helperText': instance.helperText,
   'reorderable': instance.reorderable,
+  'grabHandleLocation':
+      _$ListTileControlAffinityEnumMap[instance.grabHandleLocation],
   'oddEvenRowColors': instance.oddEvenRowColors,
   'addButtonText': instance.addButtonText,
   'addButtonPosition':
@@ -367,6 +383,7 @@ _SelectInputUiSettings<T> _$SelectInputUiSettingsFromJson<T>(
 ) => _SelectInputUiSettings<T>(
   flex: (json['flex'] as num?)?.toInt(),
   labelText: json['labelText'] as String?,
+  labelMaxLines: (json['labelMaxLines'] as num?)?.toInt(),
   helperText: json['helperText'] as String?,
   hintText: json['hintText'] as String?,
   childrenVisibility: $enumDecodeNullable(
@@ -389,6 +406,7 @@ Map<String, dynamic> _$SelectInputUiSettingsToJson<T>(
 ) => <String, dynamic>{
   'flex': instance.flex,
   'labelText': instance.labelText,
+  'labelMaxLines': instance.labelMaxLines,
   'helperText': instance.helperText,
   'hintText': instance.hintText,
   'childrenVisibility':
@@ -451,6 +469,10 @@ _StringInputUiSettings<T> _$StringInputUiSettingsFromJson<T>(
   padding: const EdgeInsetsNullableConverter().fromJson(
     json['padding'] as Map<String, dynamic>?,
   ),
+  unfocusMethod: $enumDecodeNullable(
+    _$FieldUnfocusMethodEnumMap,
+    json['unfocusMethod'],
+  ),
 );
 
 Map<String, dynamic> _$StringInputUiSettingsToJson<T>(
@@ -482,6 +504,7 @@ Map<String, dynamic> _$StringInputUiSettingsToJson<T>(
   'invalidRegexMessage': instance.invalidRegexMessage,
   'collapsed': instance.collapsed,
   'padding': const EdgeInsetsNullableConverter().toJson(instance.padding),
+  'unfocusMethod': _$FieldUnfocusMethodEnumMap[instance.unfocusMethod],
 };
 
 const _$StringFieldActionEnumMap = {
@@ -516,6 +539,12 @@ const _$TextCapitalizationEnumMap = {
   TextCapitalization.sentences: 'sentences',
   TextCapitalization.characters: 'characters',
   TextCapitalization.none: 'none',
+};
+
+const _$FieldUnfocusMethodEnumMap = {
+  FieldUnfocusMethod.onTapUpOutside: 'onTapUpOutside',
+  FieldUnfocusMethod.onTapOutside: 'onTapOutside',
+  FieldUnfocusMethod.systemDefault: 'systemDefault',
 };
 
 _WoFormUiSettings _$WoFormUiSettingsFromJson(Map<String, dynamic> json) =>

@@ -23,17 +23,26 @@ class DateTimeSelector extends StatelessWidget {
   final bool showCloseButton;
 
   Future<void> pickDate(BuildContext context) async {
+    final woTheme = WoFormTheme.of(context);
+
     final pickDate =
         settings.pickDate ??
-        WoFormTheme.of(context)?.pickDate ??
+        woTheme?.pickDate ??
         PickDate.calendarVerticalScroll;
+
+    final pickDateUiSettings =
+        settings.pickDateUiSettings?.merge(woTheme?.pickDateUiSettings) ??
+        woTheme?.pickDateUiSettings ??
+        const PickDateUiSettings();
 
     final selectedDate = await pickDate(
       context: context,
       initialDate: dateTime ?? settings.initialEditValue?.resolve(),
       minDate: minDateTime,
       maxDate: maxDateTime,
-      dateFormat: settings.dateFormat,
+      uiSettings: pickDateUiSettings.copyWith(
+        dateFormat: settings.dateFormat ?? pickDateUiSettings.dateFormat,
+      ),
     );
 
     if (selectedDate != null) {

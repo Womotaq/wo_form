@@ -479,10 +479,14 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
     _statusCubit._setSubmitting();
 
-    final nodesLockWhileSubmitting = currentNode.getAllInputPaths(
-      values: state,
-      parentPath: submitPath.parentPath,
-    );
+    final nodesLockWhileSubmitting =
+        currentNode
+            .getAllInputPaths(
+              values: state,
+              parentPath: submitPath.parentPath,
+            )
+            .toSet()
+          ..removeAll(_lockCubit.state);
     _lockCubit.lockInputs(paths: nodesLockWhileSubmitting);
 
     try {
@@ -712,6 +716,25 @@ class WoFormValues {
   Json asMap() => Json.from(_values);
   WoFormValues copy() => WoFormValues(Map.from(_values));
 
+  String? _getKey({required String hashtagPath}) {
+    final sections = hashtagPath
+        .substring(1)
+        .split('#')
+        .map((section) => '/$section');
+    final lastSection = sections.last;
+    final middleSections = sections
+        .take(sections.length - 1)
+        .map((section) => '$section/');
+
+    for (final key in _values.keys) {
+      if (key.endsWith(lastSection) && (middleSections.every(key.contains))) {
+        return key;
+      }
+    }
+
+    return null;
+  }
+
   /// path can be a key, or a string starting with #, like #endsAt.
   /// Then, the result is the first key that ends with path.
   ///
@@ -719,10 +742,8 @@ class WoFormValues {
   String getKey(String path) {
     if (!path.startsWith('#')) return path;
 
-    final lastSection = '/${path.substring(1)}';
-    for (final key in _values.keys) {
-      if (key.endsWith(lastSection)) return key;
-    }
+    final key = _getKey(hashtagPath: path);
+    if (key != null) return key;
 
     throw ArgumentError('No key matches the path : $path');
   }
@@ -734,12 +755,7 @@ class WoFormValues {
   String? getKeyOrNull(String path) {
     if (!path.startsWith('#')) return path;
 
-    final lastSection = '/${path.substring(1)}';
-    for (final key in _values.keys) {
-      if (key.endsWith(lastSection)) return key;
-    }
-
-    return null;
+    return _getKey(hashtagPath: path);
   }
 
   /// [path] can be a key, or a string starting with #, like #endsAt.
@@ -764,20 +780,9 @@ class WoFormValues {
     }
 
     if (!path.startsWith('#')) return _values[path];
-    final sections = path.substring(1).split('#').map((section) => '/$section');
-    final lastSection = sections.last;
-    final middleSections = sections
-        .take(sections.length - 1)
-        .map((section) => '$section/');
 
-    for (final entry in _values.entries) {
-      if (entry.key.endsWith(lastSection) &&
-          (middleSections.every(entry.key.contains))) {
-        return entry.value;
-      }
-    }
-
-    return null;
+    final key = _getKey(hashtagPath: path);
+    return key == null ? null : _values[key];
   }
 
   bool isPure({required WoFormValues initialValues}) =>

@@ -8,23 +8,14 @@ class PickDatePageWithYear extends StatefulWidget {
     this.minDate,
     this.maxDate,
     this.initialDate,
-    this.dateFormat,
+    this.uiSettings,
     super.key,
-  }) : _displayMode = _DisplayMode.page;
-
-  const PickDatePageWithYear.inModal({
-    this.minDate,
-    this.maxDate,
-    this.initialDate,
-    this.dateFormat,
-    super.key,
-  }) : _displayMode = _DisplayMode.modal;
+  });
 
   final DateTime? minDate;
   final DateTime? maxDate;
   final DateTime? initialDate;
-  final String? dateFormat;
-  final _DisplayMode _displayMode;
+  final PickDateUiSettings? uiSettings;
 
   @override
   State<PickDatePageWithYear> createState() => _PickDatePageWithYearState();
@@ -152,7 +143,8 @@ class _PickDatePageWithYearState extends State<PickDatePageWithYear> {
                     return SubmitButton(
                       SubmitButtonData(
                         text: DateFormat(
-                          widget.dateFormat ?? 'yMMMMd',
+                          widget.uiSettings?.dateFormat ??
+                              PickDateUiSettings.defaultDateFormat,
                         ).format(date),
                         onPressed: () => Navigator.of(context).pop(
                           context.read<_SelectedDateCubit>().state,
@@ -170,12 +162,15 @@ class _PickDatePageWithYearState extends State<PickDatePageWithYear> {
       ),
     );
 
-    return switch (widget._displayMode) {
-      _DisplayMode.page => Scaffold(
+    return switch (widget.uiSettings?.presentationMode ??
+        PickDateUiSettings.defaultPresentationMode) {
+      PickDatePresentationMode.page => Scaffold(
         appBar: AppBar(),
-        body: picker,
+        body:
+            (widget.uiSettings?.bodyWrapper ??
+            PickDateUiSettings.defaultBodyWrapper)(context, picker),
       ),
-      _DisplayMode.modal => Padding(
+      PickDatePresentationMode.dialog => Padding(
         padding: const EdgeInsets.all(16),
         child: SizedBox(
           width: 332,
@@ -193,8 +188,6 @@ class _PickDatePageWithYearState extends State<PickDatePageWithYear> {
     super.dispose();
   }
 }
-
-enum _DisplayMode { page, modal }
 
 class _SelectedDateCubit extends Cubit<DateTime?> {
   _SelectedDateCubit(
@@ -460,6 +453,7 @@ class MonthlyCalendar extends StatelessWidget {
     this.minDate,
     this.maxDate,
     this.onSelect,
+    this.shrinkWrap = true,
     super.key,
   });
 
@@ -469,8 +463,17 @@ class MonthlyCalendar extends StatelessWidget {
   final DateTime? maxDate;
   final void Function(int day)? onSelect;
 
+  /// If true, the calendar will take only the necessary rows to show all
+  /// the days in the month. If false, the calendar will always have 6 rows.
+  final bool shrinkWrap;
+
   @override
   Widget build(BuildContext context) {
+    final now = DateTime.now();
+    final todayDay = now.fullMonth == fullMonth ? now.day : null;
+
+    final theme = Theme.of(context);
+
     // Generate the calendar grid for the given month
     final days = _generateCalendar(fullMonth.year, fullMonth.month);
 
@@ -496,7 +499,8 @@ class MonthlyCalendar extends StatelessWidget {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 7, // 7 days in a week
+        crossAxisCount: 7,
+        mainAxisExtent: kMinInteractiveDimension,
       ),
       itemCount: days.length,
       itemBuilder: (context, index) {
@@ -506,52 +510,68 @@ class MonthlyCalendar extends StatelessWidget {
             !((minDay != null && day < minDay) ||
                 (maxDay != null && day > maxDay));
 
+        Widget child;
+        if (day != null) {
+          if (selectedDay == day) {
+            child = Container(
+              decoration: selectedDay == day
+                  ? BoxDecoration(
+                      color: theme.colorScheme.secondaryContainer,
+                      shape: BoxShape.circle,
+                    )
+                  : null,
+              child: Center(
+                child: Text(
+                  day.toString(),
+                  style: TextStyle(
+                    color: theme.colorScheme.onSecondaryContainer,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            );
+          } else {
+            child = InkWell(
+              borderRadius: BorderRadius.circular(40),
+              onTap: onSelect == null
+                  ? null
+                  : selectable
+                  ? () => onSelect!(day)
+                  : null,
+              child: Center(
+                child: Text(
+                  day.toString(),
+                  style: selectable
+                      ? null
+                      : TextStyle(
+                          color: theme.disabledColor,
+                        ),
+                ),
+              ),
+            );
+
+            if (day == todayDay) {
+              child = DecoratedBox(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: theme.colorScheme.outline,
+                  ),
+                ),
+                child: child,
+              );
+            }
+          }
+        } else {
+          // Day not in the current month
+          child = const SizedBox.shrink();
+        }
+
         return Center(
           child: SizedBox(
             width: 40,
             height: 40,
-            child: day != null
-                ? selectedDay == day
-                      ? Container(
-                          decoration: selectedDay == day
-                              ? BoxDecoration(
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.secondaryContainer,
-                                  shape: BoxShape.circle,
-                                )
-                              : null,
-                          child: Center(
-                            child: Text(
-                              day.toString(),
-                              style: TextStyle(
-                                color: Theme.of(
-                                  context,
-                                ).colorScheme.onSecondaryContainer,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        )
-                      : InkWell(
-                          borderRadius: BorderRadius.circular(40),
-                          onTap: onSelect == null
-                              ? null
-                              : selectable
-                              ? () => onSelect!(day)
-                              : null,
-                          child: Center(
-                            child: Text(
-                              day.toString(),
-                              style: selectable
-                                  ? null
-                                  : TextStyle(
-                                      color: Theme.of(context).disabledColor,
-                                    ),
-                            ),
-                          ),
-                        )
-                : const SizedBox.shrink(),
+            child: child,
           ),
         );
       },
@@ -576,6 +596,12 @@ class MonthlyCalendar extends StatelessWidget {
       days.add(i);
     }
 
+    if (!shrinkWrap) {
+      while (days.length < 7 * 6) {
+        days.add(null);
+      }
+    }
+
     return days;
   }
 }
@@ -585,6 +611,9 @@ class DaysOfWeek extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textStyle = TextStyle(color: Theme.of(context).colorScheme.outline);
+    final formatter = DateFormat(DateFormat.ABBR_WEEKDAY);
+
     return Center(
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 512 - 32),
@@ -593,18 +622,15 @@ class DaysOfWeek extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 7,
+            mainAxisExtent: kMinInteractiveDimension,
           ),
           itemCount: 7,
-          itemBuilder: (context, index) {
-            return Center(
-              child: Text(
-                DateFormat(
-                  DateFormat.ABBR_WEEKDAY,
-                ).format(DateTime(1, 1, 1 + index))[0].toUpperCase(),
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-            );
-          },
+          itemBuilder: (context, index) => Center(
+            child: Text(
+              formatter.format(DateTime(1, 1, 1 + index)),
+              style: textStyle,
+            ),
+          ),
         ),
       ),
     );
