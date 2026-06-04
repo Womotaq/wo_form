@@ -1,3 +1,9 @@
+## 2.0.5
+
+- Enhanced date picking
+- Added 15+ new customization options
+- Solved minor issues
+
 ## 2.0.4
 
 - Solved minor bugs
