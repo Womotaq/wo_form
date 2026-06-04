@@ -73,7 +73,7 @@ class _WoReorderableByGrabListViewState
         ),
       ),
       onReorderStart: (_) => WoFormTheme.of(context)?.reorderFeedback?.call(),
-      onReorder: (oldIndex, newIndex) {
+      onReorderItem: (oldIndex, newIndex) {
         if (widget.onReorder == null) return;
 
         if (oldIndex < newIndex) newIndex -= 1;
