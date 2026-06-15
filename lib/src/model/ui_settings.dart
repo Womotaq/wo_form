@@ -11,8 +11,7 @@ part 'ui_settings.g.dart';
 
 enum FieldElementLocation {
   inside,
-  outside
-  ;
+  outside;
 
   bool get isInside => this == inside;
   bool get isOutside => this == outside;
@@ -631,8 +630,6 @@ abstract class SelectInputUiSettings<T> with _$SelectInputUiSettings<T> {
     @PushDefNullableConverter() PushDef? openChildren,
     @notSerializable InputHeaderBuilderDef? headerBuilder,
     @notSerializable ScoreWidgetBuilderDef? scoreBuilder,
-
-    /// Only used when childrenVisibility is always.
     @notSerializable SelectFieldTileBuilderDef<T>? tileBuilder,
     @notSerializable SelectFieldBuilderDef<T>? widgetBuilder,
   }) = _SelectInputUiSettings<T>;
@@ -1157,8 +1154,7 @@ enum LayoutMethod {
 
   /// The body will use a flexible layout, allowing its children to be sized
   /// using `uiSettings.flex` and expand to fill the available screen space.
-  flexible
-  ;
+  flexible;
 
   bool get isScrollable => this == LayoutMethod.scrollable;
   bool get shrinks => this == LayoutMethod.shrinkWrap;
@@ -1214,8 +1210,7 @@ enum WoFormPresentation {
   /// Suitable for forms that you will display in a bottom sheet.
   ///
   /// By default, there is no quit button.
-  bottomSheet
-  ;
+  bottomSheet;
 
   bool get isModal => this != page;
 }

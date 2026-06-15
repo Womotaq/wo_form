@@ -1751,8 +1751,7 @@ mixin _$SelectInputUiSettings<T> {
 /// Defaults to [Push.menu] if [SelectInput.searchSettings] is null, else
 /// [Push.modalBottomSheet] with initialBottomSheetSize at 0.9.
 /// Serializable if you use on of Push's default methods.
-@PushDefNullableConverter() PushDef? get openChildren;@notSerializable InputHeaderBuilderDef? get headerBuilder;@notSerializable ScoreWidgetBuilderDef? get scoreBuilder;/// Only used when childrenVisibility is always.
-@notSerializable SelectFieldTileBuilderDef<T>? get tileBuilder;@notSerializable SelectFieldBuilderDef<T>? get widgetBuilder;
+@PushDefNullableConverter() PushDef? get openChildren;@notSerializable InputHeaderBuilderDef? get headerBuilder;@notSerializable ScoreWidgetBuilderDef? get scoreBuilder;@notSerializable SelectFieldTileBuilderDef<T>? get tileBuilder;@notSerializable SelectFieldBuilderDef<T>? get widgetBuilder;
 /// Create a copy of SelectInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1905,7 +1904,6 @@ class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
 @override@PushDefNullableConverter() final  PushDef? openChildren;
 @override@notSerializable final  InputHeaderBuilderDef? headerBuilder;
 @override@notSerializable final  ScoreWidgetBuilderDef? scoreBuilder;
-/// Only used when childrenVisibility is always.
 @override@notSerializable final  SelectFieldTileBuilderDef<T>? tileBuilder;
 @override@notSerializable final  SelectFieldBuilderDef<T>? widgetBuilder;
 

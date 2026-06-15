@@ -69,6 +69,7 @@ class SelectField<T> extends StatelessWidget {
             selectedBuilder: uiSettings?.selectedBuilder,
             helpValueBuilder: uiSettings?.helpValueBuilder,
             hintText: uiSettings?.hintText,
+            tileBuilder: uiSettings?.tileBuilder,
             searchSettings: searchSettings,
             searchScreenLayout: (uiSettings?.flex ?? 0) == 0
                 ? LayoutMethod.shrinkWrap
@@ -138,6 +139,7 @@ class SelectField<T> extends StatelessWidget {
                   valueBuilder: uiSettings?.valueBuilder,
                   helpValueBuilder: uiSettings?.helpValueBuilder,
                   hintText: uiSettings?.hintText,
+                  tileBuilder: uiSettings?.tileBuilder,
                   searchSettings: searchSettings,
                   searchScreenLayout: (uiSettings?.flex ?? 0) == 0
                       ? LayoutMethod.shrinkWrap

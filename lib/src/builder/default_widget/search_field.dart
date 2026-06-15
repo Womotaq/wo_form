@@ -11,6 +11,7 @@ class SearchField<T> extends StatelessWidget {
     this.helpValueBuilder,
     this.hintText,
     Widget Function(T?)? selectedBuilder,
+    this.tileBuilder,
     this.showArrow = true,
     this.searchSettings,
     this.initialQuery,
@@ -35,6 +36,7 @@ class SearchField<T> extends StatelessWidget {
     this.valueBuilder,
     this.helpValueBuilder,
     this.hintText,
+    this.tileBuilder,
     this.searchSettings,
     this.initialQuery,
     this.onQueryChanged,
@@ -56,6 +58,7 @@ class SearchField<T> extends StatelessWidget {
   final Widget? Function(T value)? helpValueBuilder;
   final String? hintText;
   final Widget Function(Iterable<T?> values)? selectedBuilder;
+  final SelectFieldTileBuilderDef<T>? tileBuilder;
   final bool showArrow;
   final SearchSettings<T>? searchSettings;
   final WoFormQuery? initialQuery;
@@ -144,24 +147,35 @@ class SearchField<T> extends StatelessWidget {
     BuildContext context,
     Widget Function(T value) valueBuilderSafe,
   ) async {
-    ListTile tileBuilder(BuildContext context, T e) {
+    Widget searchScreenTileBuilder(
+      BuildContext context,
+      T value,
+      VoidCallback onTap,
+    ) {
       final theme = Theme.of(context);
 
-      final selected = selectedValues.contains(e);
-      final subtitle = helpValueBuilder?.call(e);
-      return ListTile(
-        title: valueBuilderSafe(e),
-        subtitle: subtitle == null
-            ? null
-            : DefaultTextStyle(
-                style: theme.textTheme.labelMedium!.copyWith(
-                  color: theme.disabledColor,
-                ),
-                child: subtitle,
-              ),
-        selected: selected,
-        selectedColor: theme.colorScheme.onSurface,
-        selectedTileColor: theme.colorScheme.primaryContainer,
+      final selected = selectedValues.contains(value);
+      final subtitle = helpValueBuilder?.call(value);
+      return ListTileTheme(
+        data: ListTileThemeData(
+          selectedColor: theme.colorScheme.onSurface,
+          selectedTileColor: theme.colorScheme.primaryContainer,
+          subtitleTextStyle: theme.textTheme.labelMedium!.copyWith(
+            color: theme.disabledColor,
+          ),
+        ),
+        child:
+            tileBuilder?.call(
+              value,
+              onTap,
+              selected,
+            ) ??
+            ListTile(
+              onTap: onTap,
+              title: valueBuilderSafe(value),
+              subtitle: subtitle,
+              selected: selected,
+            ),
       );
     }
 
@@ -169,7 +183,7 @@ class SearchField<T> extends StatelessWidget {
       builder: (context) => (provider ?? ({required Widget child}) => child)(
         child: (searchScreenBuilder ?? SearchScreen.new).call(
           values: values,
-          tileBuilder: tileBuilder,
+          tileBuilder: searchScreenTileBuilder,
           onSelect: (value) {
             Navigator.of(context).pop();
             onSelected!(value);
@@ -206,7 +220,12 @@ class SearchField<T> extends StatelessWidget {
 typedef SearchScreenDef<T> =
     Widget Function({
       required Iterable<T> values,
-      required Widget Function(BuildContext context, T value) tileBuilder,
+      required Widget Function(
+        BuildContext context,
+        T value,
+        VoidCallback onTap,
+      )
+      tileBuilder,
       required void Function(T value) onSelect,
       SearchSettings<T>? searchSettings,
       WoFormQuery? initialQuery,
@@ -232,7 +251,8 @@ class SearchScreen<T> extends StatelessWidget {
   });
 
   final Iterable<T> values;
-  final Widget Function(BuildContext context, T value) tileBuilder;
+  final Widget Function(BuildContext context, T value, VoidCallback onTap)
+  tileBuilder;
   final void Function(T value) onSelect;
   final List<Widget>? bottomChildren;
   final SearchSettings<T>? searchSettings;
@@ -303,12 +323,7 @@ class SearchScreen<T> extends StatelessWidget {
         if (results == null || results.isEmpty)
           ?onNotFound
         else
-          ...results.map(
-            (e) => InkWell(
-              onTap: () => onSelect(e),
-              child: tileBuilder(context, e),
-            ),
-          ),
+          ...results.map((e) => tileBuilder(context, e, () => onSelect(e))),
         ...?bottomChildren,
       ],
     },
