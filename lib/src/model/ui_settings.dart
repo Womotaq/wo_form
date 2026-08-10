@@ -526,7 +526,7 @@ enum NumInputStyle { selector, slider }
 @freezed
 abstract class NumInputUiSettings with _$NumInputUiSettings {
   const factory NumInputUiSettings({
-    /// If null or O, header will be placed above the field.
+    /// If O, header will be placed above the field.
     /// Else, header and selector will be in a the same row.
     /// If -1, the field will take as much space as he wants
     /// (might not work with all fields).
@@ -536,7 +536,9 @@ abstract class NumInputUiSettings with _$NumInputUiSettings {
     /// Only with [NumInputStyle.slider].
     int? headerFlex,
     String? labelText,
+    int? labelMaxLines,
     String? helperText,
+    int? helperMaxLines,
     NumInputStyle? style,
     @notSerializable Widget? unit,
     @notSerializable NumFieldBuilderDef? widgetBuilder,
@@ -552,7 +554,9 @@ abstract class NumInputUiSettings with _$NumInputUiSettings {
       : NumInputUiSettings(
           headerFlex: headerFlex ?? other.headerFlex,
           labelText: labelText ?? other.labelText,
+          labelMaxLines: labelMaxLines ?? other.labelMaxLines,
           helperText: helperText ?? other.helperText,
+          helperMaxLines: helperMaxLines ?? other.helperMaxLines,
           style: style ?? other.style,
           unit: unit ?? other.unit,
           widgetBuilder: widgetBuilder ?? other.widgetBuilder,
