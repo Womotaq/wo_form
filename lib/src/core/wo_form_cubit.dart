@@ -151,7 +151,8 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
       .._currentStepId = steps[multistepIndex]
       .._currentStepIndex = multistepIndex;
 
-    // ignore: cascade_invocations
+    // DO NOT use cascade invocations here !
+    // Or else newValues.currentStepPath will not be up-to-date
     newValues._setSubmitPath(
       _tempSubmitDatas.lastOrNull?.path ?? newValues.currentStepPath ?? '',
     );

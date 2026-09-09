@@ -6,6 +6,7 @@ analyzer:
     - "**.freezed.dart"
     - "**.g.dart"
     - "**localizations**.dart"
+    - build/**
   errors:
     invalid_annotation_target: ignore
     document_ignores: ignore
@@ -13,6 +14,7 @@ analyzer:
     avoid_types_on_closure_parameters: ignore
     parameter_assignments: ignore
     always_put_required_named_parameters_first: ignore
+    cascade_invocations: ignore
 
 linter:
   rules:
