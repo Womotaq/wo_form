@@ -1,3 +1,8 @@
+## 2.0.6
+
+- Added few customization options
+- Solved minor issues
+
 ## 2.0.5
 
 - Enhanced date picking
