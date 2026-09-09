@@ -6,6 +6,10 @@ analyzer:
     - "**.freezed.dart"
     - "**.g.dart"
     - "**localizations**.dart"
+    - build/**
+    - android/**
+    - ios/**
+    - web/**
   errors:
     invalid_annotation_target: ignore
     avoid_catches_without_on_clauses: ignore

@@ -1546,7 +1546,7 @@ as MediaFieldBuilderDef?,
 /// @nodoc
 mixin _$NumInputUiSettings {
 
-/// If null or O, header will be placed above the field.
+/// If O, header will be placed above the field.
 /// Else, header and selector will be in a the same row.
 /// If -1, the field will take as much space as he wants
 /// (might not work with all fields).
@@ -1554,7 +1554,7 @@ mixin _$NumInputUiSettings {
 /// and the header with a flex value of [headerFlex].
 ///
 /// Only with [NumInputStyle.slider].
- int? get headerFlex; String? get labelText; String? get helperText; NumInputStyle? get style;@notSerializable Widget? get unit;@notSerializable NumFieldBuilderDef? get widgetBuilder;
+ int? get headerFlex; String? get labelText; int? get labelMaxLines; String? get helperText; int? get helperMaxLines; NumInputStyle? get style;@notSerializable Widget? get unit;@notSerializable NumFieldBuilderDef? get widgetBuilder;
 /// Create a copy of NumInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1567,16 +1567,16 @@ $NumInputUiSettingsCopyWith<NumInputUiSettings> get copyWith => _$NumInputUiSett
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NumInputUiSettings&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.style, style) || other.style == style)&&(identical(other.unit, unit) || other.unit == unit)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NumInputUiSettings&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelMaxLines, labelMaxLines) || other.labelMaxLines == labelMaxLines)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.helperMaxLines, helperMaxLines) || other.helperMaxLines == helperMaxLines)&&(identical(other.style, style) || other.style == style)&&(identical(other.unit, unit) || other.unit == unit)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,headerFlex,labelText,helperText,style,unit,widgetBuilder);
+int get hashCode => Object.hash(runtimeType,headerFlex,labelText,labelMaxLines,helperText,helperMaxLines,style,unit,widgetBuilder);
 
 @override
 String toString() {
-  return 'NumInputUiSettings(headerFlex: $headerFlex, labelText: $labelText, helperText: $helperText, style: $style, unit: $unit, widgetBuilder: $widgetBuilder)';
+  return 'NumInputUiSettings(headerFlex: $headerFlex, labelText: $labelText, labelMaxLines: $labelMaxLines, helperText: $helperText, helperMaxLines: $helperMaxLines, style: $style, unit: $unit, widgetBuilder: $widgetBuilder)';
 }
 
 
@@ -1587,7 +1587,7 @@ abstract mixin class $NumInputUiSettingsCopyWith<$Res>  {
   factory $NumInputUiSettingsCopyWith(NumInputUiSettings value, $Res Function(NumInputUiSettings) _then) = _$NumInputUiSettingsCopyWithImpl;
 @useResult
 $Res call({
- int? headerFlex, String? labelText, String? helperText, NumInputStyle? style,@notSerializable Widget? unit,@notSerializable NumFieldBuilderDef? widgetBuilder
+ int? headerFlex, String? labelText, int? labelMaxLines, String? helperText, int? helperMaxLines, NumInputStyle? style,@notSerializable Widget? unit,@notSerializable NumFieldBuilderDef? widgetBuilder
 });
 
 
@@ -1604,12 +1604,14 @@ class _$NumInputUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of NumInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? headerFlex = freezed,Object? labelText = freezed,Object? helperText = freezed,Object? style = freezed,Object? unit = freezed,Object? widgetBuilder = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? headerFlex = freezed,Object? labelText = freezed,Object? labelMaxLines = freezed,Object? helperText = freezed,Object? helperMaxLines = freezed,Object? style = freezed,Object? unit = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_self.copyWith(
 headerFlex: freezed == headerFlex ? _self.headerFlex : headerFlex // ignore: cast_nullable_to_non_nullable
 as int?,labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
-as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
-as String?,style: freezed == style ? _self.style : style // ignore: cast_nullable_to_non_nullable
+as String?,labelMaxLines: freezed == labelMaxLines ? _self.labelMaxLines : labelMaxLines // ignore: cast_nullable_to_non_nullable
+as int?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
+as String?,helperMaxLines: freezed == helperMaxLines ? _self.helperMaxLines : helperMaxLines // ignore: cast_nullable_to_non_nullable
+as int?,style: freezed == style ? _self.style : style // ignore: cast_nullable_to_non_nullable
 as NumInputStyle?,unit: freezed == unit ? _self.unit : unit // ignore: cast_nullable_to_non_nullable
 as Widget?,widgetBuilder: freezed == widgetBuilder ? _self.widgetBuilder : widgetBuilder // ignore: cast_nullable_to_non_nullable
 as NumFieldBuilderDef?,
@@ -1624,10 +1626,10 @@ as NumFieldBuilderDef?,
 @JsonSerializable()
 
 class _NumInputUiSettings extends NumInputUiSettings {
-  const _NumInputUiSettings({this.headerFlex, this.labelText, this.helperText, this.style, @notSerializable this.unit, @notSerializable this.widgetBuilder}): super._();
+  const _NumInputUiSettings({this.headerFlex, this.labelText, this.labelMaxLines, this.helperText, this.helperMaxLines, this.style, @notSerializable this.unit, @notSerializable this.widgetBuilder}): super._();
   factory _NumInputUiSettings.fromJson(Map<String, dynamic> json) => _$NumInputUiSettingsFromJson(json);
 
-/// If null or O, header will be placed above the field.
+/// If O, header will be placed above the field.
 /// Else, header and selector will be in a the same row.
 /// If -1, the field will take as much space as he wants
 /// (might not work with all fields).
@@ -1637,7 +1639,9 @@ class _NumInputUiSettings extends NumInputUiSettings {
 /// Only with [NumInputStyle.slider].
 @override final  int? headerFlex;
 @override final  String? labelText;
+@override final  int? labelMaxLines;
 @override final  String? helperText;
+@override final  int? helperMaxLines;
 @override final  NumInputStyle? style;
 @override@notSerializable final  Widget? unit;
 @override@notSerializable final  NumFieldBuilderDef? widgetBuilder;
@@ -1655,16 +1659,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NumInputUiSettings&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.style, style) || other.style == style)&&(identical(other.unit, unit) || other.unit == unit)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NumInputUiSettings&&(identical(other.headerFlex, headerFlex) || other.headerFlex == headerFlex)&&(identical(other.labelText, labelText) || other.labelText == labelText)&&(identical(other.labelMaxLines, labelMaxLines) || other.labelMaxLines == labelMaxLines)&&(identical(other.helperText, helperText) || other.helperText == helperText)&&(identical(other.helperMaxLines, helperMaxLines) || other.helperMaxLines == helperMaxLines)&&(identical(other.style, style) || other.style == style)&&(identical(other.unit, unit) || other.unit == unit)&&(identical(other.widgetBuilder, widgetBuilder) || other.widgetBuilder == widgetBuilder));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,headerFlex,labelText,helperText,style,unit,widgetBuilder);
+int get hashCode => Object.hash(runtimeType,headerFlex,labelText,labelMaxLines,helperText,helperMaxLines,style,unit,widgetBuilder);
 
 @override
 String toString() {
-  return 'NumInputUiSettings(headerFlex: $headerFlex, labelText: $labelText, helperText: $helperText, style: $style, unit: $unit, widgetBuilder: $widgetBuilder)';
+  return 'NumInputUiSettings(headerFlex: $headerFlex, labelText: $labelText, labelMaxLines: $labelMaxLines, helperText: $helperText, helperMaxLines: $helperMaxLines, style: $style, unit: $unit, widgetBuilder: $widgetBuilder)';
 }
 
 
@@ -1675,7 +1679,7 @@ abstract mixin class _$NumInputUiSettingsCopyWith<$Res> implements $NumInputUiSe
   factory _$NumInputUiSettingsCopyWith(_NumInputUiSettings value, $Res Function(_NumInputUiSettings) _then) = __$NumInputUiSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- int? headerFlex, String? labelText, String? helperText, NumInputStyle? style,@notSerializable Widget? unit,@notSerializable NumFieldBuilderDef? widgetBuilder
+ int? headerFlex, String? labelText, int? labelMaxLines, String? helperText, int? helperMaxLines, NumInputStyle? style,@notSerializable Widget? unit,@notSerializable NumFieldBuilderDef? widgetBuilder
 });
 
 
@@ -1692,12 +1696,14 @@ class __$NumInputUiSettingsCopyWithImpl<$Res>
 
 /// Create a copy of NumInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? headerFlex = freezed,Object? labelText = freezed,Object? helperText = freezed,Object? style = freezed,Object? unit = freezed,Object? widgetBuilder = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? headerFlex = freezed,Object? labelText = freezed,Object? labelMaxLines = freezed,Object? helperText = freezed,Object? helperMaxLines = freezed,Object? style = freezed,Object? unit = freezed,Object? widgetBuilder = freezed,}) {
   return _then(_NumInputUiSettings(
 headerFlex: freezed == headerFlex ? _self.headerFlex : headerFlex // ignore: cast_nullable_to_non_nullable
 as int?,labelText: freezed == labelText ? _self.labelText : labelText // ignore: cast_nullable_to_non_nullable
-as String?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
-as String?,style: freezed == style ? _self.style : style // ignore: cast_nullable_to_non_nullable
+as String?,labelMaxLines: freezed == labelMaxLines ? _self.labelMaxLines : labelMaxLines // ignore: cast_nullable_to_non_nullable
+as int?,helperText: freezed == helperText ? _self.helperText : helperText // ignore: cast_nullable_to_non_nullable
+as String?,helperMaxLines: freezed == helperMaxLines ? _self.helperMaxLines : helperMaxLines // ignore: cast_nullable_to_non_nullable
+as int?,style: freezed == style ? _self.style : style // ignore: cast_nullable_to_non_nullable
 as NumInputStyle?,unit: freezed == unit ? _self.unit : unit // ignore: cast_nullable_to_non_nullable
 as Widget?,widgetBuilder: freezed == widgetBuilder ? _self.widgetBuilder : widgetBuilder // ignore: cast_nullable_to_non_nullable
 as NumFieldBuilderDef?,
@@ -1751,8 +1757,7 @@ mixin _$SelectInputUiSettings<T> {
 /// Defaults to [Push.menu] if [SelectInput.searchSettings] is null, else
 /// [Push.modalBottomSheet] with initialBottomSheetSize at 0.9.
 /// Serializable if you use on of Push's default methods.
-@PushDefNullableConverter() PushDef? get openChildren;@notSerializable InputHeaderBuilderDef? get headerBuilder;@notSerializable ScoreWidgetBuilderDef? get scoreBuilder;/// Only used when childrenVisibility is always.
-@notSerializable SelectFieldTileBuilderDef<T>? get tileBuilder;@notSerializable SelectFieldBuilderDef<T>? get widgetBuilder;
+@PushDefNullableConverter() PushDef? get openChildren;@notSerializable InputHeaderBuilderDef? get headerBuilder;@notSerializable ScoreWidgetBuilderDef? get scoreBuilder;@notSerializable SelectFieldTileBuilderDef<T>? get tileBuilder;@notSerializable SelectFieldBuilderDef<T>? get widgetBuilder;
 /// Create a copy of SelectInputUiSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1905,7 +1910,6 @@ class _SelectInputUiSettings<T> extends SelectInputUiSettings<T> {
 @override@PushDefNullableConverter() final  PushDef? openChildren;
 @override@notSerializable final  InputHeaderBuilderDef? headerBuilder;
 @override@notSerializable final  ScoreWidgetBuilderDef? scoreBuilder;
-/// Only used when childrenVisibility is always.
 @override@notSerializable final  SelectFieldTileBuilderDef<T>? tileBuilder;
 @override@notSerializable final  SelectFieldBuilderDef<T>? widgetBuilder;
 

@@ -93,7 +93,6 @@ class MediaServiceImpl extends MediaService {
   }) async {
     switch (media) {
       case MediaUrl():
-        // LATER : download media and upload it to firebase storage
         return media;
       case MediaFile():
         return MediaUrl(url: 'url-of-uploaded-file');

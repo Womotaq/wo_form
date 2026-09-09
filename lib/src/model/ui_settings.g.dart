@@ -361,7 +361,9 @@ _NumInputUiSettings _$NumInputUiSettingsFromJson(Map<String, dynamic> json) =>
     _NumInputUiSettings(
       headerFlex: (json['headerFlex'] as num?)?.toInt(),
       labelText: json['labelText'] as String?,
+      labelMaxLines: (json['labelMaxLines'] as num?)?.toInt(),
       helperText: json['helperText'] as String?,
+      helperMaxLines: (json['helperMaxLines'] as num?)?.toInt(),
       style: $enumDecodeNullable(_$NumInputStyleEnumMap, json['style']),
     );
 
@@ -369,7 +371,9 @@ Map<String, dynamic> _$NumInputUiSettingsToJson(_NumInputUiSettings instance) =>
     <String, dynamic>{
       'headerFlex': instance.headerFlex,
       'labelText': instance.labelText,
+      'labelMaxLines': instance.labelMaxLines,
       'helperText': instance.helperText,
+      'helperMaxLines': instance.helperMaxLines,
       'style': _$NumInputStyleEnumMap[instance.style],
     };
 

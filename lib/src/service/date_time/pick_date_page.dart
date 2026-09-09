@@ -106,28 +106,11 @@ class _PickDatePageState extends State<PickDatePage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const SizedBox(height: _kMonthTopSpacing),
-                          SizedBox(
-                            height: kMinInteractiveDimension,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 12,
-                              ),
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  DateFormat.yMMMM()
-                                      .format(DateTime(0, fullMonth))
-                                      .capitalized(),
-                                  style:
-                                      Theme.of(
-                                        context,
-                                      ).textTheme.bodyLarge?.copyWith(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ),
+                          _MonthHeader(
+                            fullMonth: fullMonth,
+                            controller: scrollController!,
+                            minYear: widget.minDate?.year,
+                            maxYear: widget.maxDate?.year,
                           ),
                           const DaysOfWeek(),
                           MonthlyCalendar(
@@ -454,6 +437,53 @@ class _CalendarController extends ScrollController {
 
   void scrollToFullMonth(int fullMonth) =>
       jumpTo(_offsetForFullMonth(fullMonth));
+}
+
+class _MonthHeader extends StatelessWidget {
+  const _MonthHeader({
+    required this.fullMonth,
+    required this.controller,
+    required this.minYear,
+    required this.maxYear,
+  });
+
+  final int fullMonth;
+  final _CalendarController controller;
+  final int? minYear;
+  final int? maxYear;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () => selectYear(context),
+      borderRadius: BorderRadius.circular(16),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Text(
+          DateFormat.yMMMM().format(DateTime(0, fullMonth)).capitalized(),
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+          overflow: TextOverflow.ellipsis,
+        ),
+      ),
+    );
+  }
+
+  Future<void> selectYear(BuildContext context) async {
+    final date = DateTime(0, fullMonth);
+    final year = await _pickYear(
+      context: context,
+      initialYear: date.year,
+      minYear: minYear,
+      maxYear: maxYear,
+      displayMode: PickDatePresentationMode.page,
+    );
+
+    if (year != null) {
+      controller.scrollToFullMonth(year * 12 + date.month);
+    }
+  }
 }
 
 class _YearPicker extends StatefulWidget {

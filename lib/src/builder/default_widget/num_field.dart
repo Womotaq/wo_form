@@ -39,7 +39,9 @@ class _NumFieldState extends State<NumField> {
     return FlexField(
       headerFlex: widget.data.input.uiSettings?.headerFlex ?? 10,
       labelText: widget.data.input.uiSettings?.labelText,
+      labelMaxLines: widget.data.input.uiSettings?.labelMaxLines,
       helperText: widget.data.input.uiSettings?.helperText,
+      helperMaxLines: widget.data.input.uiSettings?.helperMaxLines,
       errorText: widget.data.errorText,
       disableMode: widget.data.onValueChanged == null
           ? FlexFieldDisableMode.header

@@ -99,8 +99,9 @@ class PickDate {
       final screenSize = MediaQuery.of(context).size;
       if (screenSize.width > 500 && screenSize.height > 700) {
         presentationMode = PickDatePresentationMode.dialog;
+      } else {
+        presentationMode = PickDateUiSettings.defaultPresentationMode;
       }
-      presentationMode = PickDateUiSettings.defaultPresentationMode;
     }
 
     final picker = PickDatePageWithYear(
@@ -144,8 +145,9 @@ class PickDate {
       final screenSize = MediaQuery.of(context).size;
       if (screenSize.width > 500 && screenSize.height > 700) {
         presentationMode = PickDatePresentationMode.dialog;
+      } else {
+        presentationMode = PickDateUiSettings.defaultPresentationMode;
       }
-      presentationMode = PickDateUiSettings.defaultPresentationMode;
     }
 
     final picker = PickDatePage(
