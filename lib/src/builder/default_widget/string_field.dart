@@ -348,6 +348,8 @@ class _StringFieldState<T> extends State<StringField<T>> {
             maxLines: uiSettings?.maxLines == 0
                 ? null
                 : uiSettings?.maxLines ?? 1,
+            expands: uiSettings?.flex == 1,
+            textAlignVertical: TextAlignVertical.top,
             inputFormatters: formatters,
             decoration: inputDecoration,
           );
@@ -360,6 +362,7 @@ class _StringFieldState<T> extends State<StringField<T>> {
     }
 
     return FlexField(
+      nodeFlex: uiSettings?.flex,
       headerFlex: uiSettings?.headerFlex,
       labelText: labelLocation.isOutside ? uiSettings?.labelText : null,
       labelMaxLines: uiSettings?.labelMaxLines,
