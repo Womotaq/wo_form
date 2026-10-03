@@ -54,6 +54,9 @@ class _StringFieldState<T> extends State<StringField<T>> {
   late final bool autofocus;
   bool obscureText = false;
   Offset? tapPosition;
+  // The controller also notifies on selection changes (e.g. when an autofocused
+  // field gets focus), so we only report a value change when the text differs.
+  String? _lastNotifiedText;
 
   @override
   void initState() {
@@ -95,14 +98,16 @@ class _StringFieldState<T> extends State<StringField<T>> {
         textEditingController = TextEditingController();
       }
       textEditingController?.text = widget.text ?? '';
+      _lastNotifiedText = textEditingController?.text;
       textEditingController?.addListener(_onTextChanged);
     }
   }
 
   void _onTextChanged() {
     final newText = textEditingController?.text;
-    if (newText == null) return;
+    if (newText == null || newText == _lastNotifiedText) return;
 
+    _lastNotifiedText = newText;
     widget.onValueChanged?.call(newText);
   }
 
