@@ -882,8 +882,9 @@ class WoFormValues {
 
   // ignore: constant_identifier_names
   static const _VISITED_PATHS_KEY = '/__wo_reserved_visited_paths';
+  // A hydrated list comes back as List<dynamic>, hence the cast.
   Iterable<String> get _visitedPaths =>
-      this[_VISITED_PATHS_KEY] as Iterable<String>? ?? {};
+      (this[_VISITED_PATHS_KEY] as Iterable?)?.cast<String>() ?? {};
   set _visitedPaths(Iterable<String> paths) =>
       _values[_VISITED_PATHS_KEY] = paths;
 
