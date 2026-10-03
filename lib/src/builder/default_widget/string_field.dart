@@ -115,15 +115,17 @@ class _StringFieldState<T> extends State<StringField<T>> {
   void didUpdateWidget(covariant StringField<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (textEditingController != null) {
-      if ((widget.text ?? '') != textEditingController?.text) {
-        textEditingController?.text = widget.text ?? '';
-      }
-    }
-    if (phoneController != null) {
-      if ((widget.text ?? '') != textEditingController?.text) {
-        textEditingController?.text = widget.text ?? '';
-      }
+    final controller = textEditingController;
+    final text = widget.text ?? '';
+    if (controller != null && text != controller.text) {
+      // The value changed from elsewhere, e.g. cleared. Unlike setting
+      // controller.text, this keeps a cursor, at the end: a focused field
+      // would otherwise lose it, along with anything relying on it.
+      _lastNotifiedText = text;
+      controller.value = TextEditingValue(
+        text: text,
+        selection: TextSelection.collapsed(offset: text.length),
+      );
     }
   }
 

@@ -832,7 +832,7 @@ as WoFormNode Function(String path)?,
 @JsonSerializable()
 
 class RootNode<T extends Object?> extends WoFormNode<T> {
-  const RootNode({this.id = 'root', final  Json initialValues = const {}, @InputsListConverter() final  List<WoFormNode> children = const [], this.uiSettings, this.exportSettings, this.hydratationId = '', final  String? $type}): _initialValues = initialValues,_children = children,$type = $type ?? 'root',super._();
+  const RootNode({this.id = 'root', final  Json initialValues = const {}, @InputsListConverter() final  List<WoFormNode> children = const [], this.uiSettings, this.exportSettings, this.persistenceSettings, final  String? $type}): _initialValues = initialValues,_children = children,$type = $type ?? 'root',super._();
   factory RootNode.fromJson(Map<String, dynamic> json) => _$RootNodeFromJson(json);
 
 // The root's id should never be used
@@ -856,8 +856,9 @@ class RootNode<T extends Object?> extends WoFormNode<T> {
 // LATER : issue, how to modify an in-production corrupted data ?
 // give a way to override it ?
 //
-/// If not empty, this form will be locally persistent, using HydratedCubit.
-@JsonKey() final  String hydratationId;
+/// If not null, the form's values are saved on this device. See
+/// [PersistenceSettings].
+ final  PersistenceSettings? persistenceSettings;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -876,16 +877,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RootNode<T>&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other._initialValues, _initialValues)&&const DeepCollectionEquality().equals(other._children, _children)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings)&&(identical(other.exportSettings, exportSettings) || other.exportSettings == exportSettings)&&(identical(other.hydratationId, hydratationId) || other.hydratationId == hydratationId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RootNode<T>&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other._initialValues, _initialValues)&&const DeepCollectionEquality().equals(other._children, _children)&&(identical(other.uiSettings, uiSettings) || other.uiSettings == uiSettings)&&(identical(other.exportSettings, exportSettings) || other.exportSettings == exportSettings)&&(identical(other.persistenceSettings, persistenceSettings) || other.persistenceSettings == persistenceSettings));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_initialValues),const DeepCollectionEquality().hash(_children),uiSettings,exportSettings,hydratationId);
+int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_initialValues),const DeepCollectionEquality().hash(_children),uiSettings,exportSettings,persistenceSettings);
 
 @override
 String toString() {
-  return 'WoFormNode<$T>.root(id: $id, initialValues: $initialValues, children: $children, uiSettings: $uiSettings, exportSettings: $exportSettings, hydratationId: $hydratationId)';
+  return 'WoFormNode<$T>.root(id: $id, initialValues: $initialValues, children: $children, uiSettings: $uiSettings, exportSettings: $exportSettings, persistenceSettings: $persistenceSettings)';
 }
 
 
@@ -896,11 +897,11 @@ abstract mixin class $RootNodeCopyWith<T extends Object?,$Res> implements $WoFor
   factory $RootNodeCopyWith(RootNode<T> value, $Res Function(RootNode<T>) _then) = _$RootNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id, Json initialValues,@InputsListConverter() List<WoFormNode> children, WoFormUiSettings? uiSettings, ExportSettings? exportSettings, String hydratationId
+ String id, Json initialValues,@InputsListConverter() List<WoFormNode> children, WoFormUiSettings? uiSettings, ExportSettings? exportSettings, PersistenceSettings? persistenceSettings
 });
 
 
-$WoFormUiSettingsCopyWith<$Res>? get uiSettings;$ExportSettingsCopyWith<$Res>? get exportSettings;
+$WoFormUiSettingsCopyWith<$Res>? get uiSettings;$ExportSettingsCopyWith<$Res>? get exportSettings;$PersistenceSettingsCopyWith<$Res>? get persistenceSettings;
 
 }
 /// @nodoc
@@ -913,15 +914,15 @@ class _$RootNodeCopyWithImpl<T extends Object?,$Res>
 
 /// Create a copy of WoFormNode
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? initialValues = null,Object? children = null,Object? uiSettings = freezed,Object? exportSettings = freezed,Object? hydratationId = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? initialValues = null,Object? children = null,Object? uiSettings = freezed,Object? exportSettings = freezed,Object? persistenceSettings = freezed,}) {
   return _then(RootNode<T>(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,initialValues: null == initialValues ? _self._initialValues : initialValues // ignore: cast_nullable_to_non_nullable
 as Json,children: null == children ? _self._children : children // ignore: cast_nullable_to_non_nullable
 as List<WoFormNode>,uiSettings: freezed == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
 as WoFormUiSettings?,exportSettings: freezed == exportSettings ? _self.exportSettings : exportSettings // ignore: cast_nullable_to_non_nullable
-as ExportSettings?,hydratationId: null == hydratationId ? _self.hydratationId : hydratationId // ignore: cast_nullable_to_non_nullable
-as String,
+as ExportSettings?,persistenceSettings: freezed == persistenceSettings ? _self.persistenceSettings : persistenceSettings // ignore: cast_nullable_to_non_nullable
+as PersistenceSettings?,
   ));
 }
 
@@ -948,6 +949,18 @@ $ExportSettingsCopyWith<$Res>? get exportSettings {
 
   return $ExportSettingsCopyWith<$Res>(_self.exportSettings!, (value) {
     return _then(_self.copyWith(exportSettings: value));
+  });
+}/// Create a copy of WoFormNode
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$PersistenceSettingsCopyWith<$Res>? get persistenceSettings {
+    if (_self.persistenceSettings == null) {
+    return null;
+  }
+
+  return $PersistenceSettingsCopyWith<$Res>(_self.persistenceSettings!, (value) {
+    return _then(_self.copyWith(persistenceSettings: value));
   });
 }
 }
@@ -2368,7 +2381,7 @@ mixin _$SelectInput<T> {
 ///   toJsonT: (value) => value.toJson(),
 ///   fromJsonT: (json) => TimeControl.fromJson(json as Json),
 /// ),
-@notSerializable Object? Function(T)? get toJsonT;@notSerializable T Function(Object?)? get fromJsonT;
+@notSerializable Object? Function(T value)? get toJsonT;@notSerializable T Function(Object? json)? get fromJsonT;
 /// Create a copy of SelectInput
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2399,7 +2412,7 @@ abstract mixin class $SelectInputCopyWith<T,$Res> implements $WoFormInputCopyWit
   factory $SelectInputCopyWith(SelectInput<T> value, $Res Function(SelectInput<T>) _then) = _$SelectInputCopyWithImpl;
 @useResult
 $Res call({
- String id, int minCount, int? maxCount, List<T>? initialValues, List<T> availibleValues, List<String>? idsOfAvailibleValues,@notSerializable void Function(List<T>? value)? onValueChanged,@notSerializable GetCustomErrorForListDef<T>? getCustomError, bool submitFormOnSelect, QuizSettings? quizSettings, SearchSettings<T>? searchSettings, SelectInputUiSettings<T>? uiSettings,@notSerializable Object? Function(T)? toJsonT,@notSerializable T Function(Object?)? fromJsonT
+ String id, int minCount, int? maxCount, List<T>? initialValues, List<T> availibleValues, List<String>? idsOfAvailibleValues,@notSerializable void Function(List<T>? value)? onValueChanged,@notSerializable GetCustomErrorForListDef<T>? getCustomError, bool submitFormOnSelect, QuizSettings? quizSettings, SearchSettings<T>? searchSettings, SelectInputUiSettings<T>? uiSettings,@notSerializable Object? Function(T value)? toJsonT,@notSerializable T Function(Object? json)? fromJsonT
 });
 
 
@@ -2431,8 +2444,8 @@ as bool,quizSettings: freezed == quizSettings ? _self.quizSettings : quizSetting
 as QuizSettings?,searchSettings: freezed == searchSettings ? _self.searchSettings : searchSettings // ignore: cast_nullable_to_non_nullable
 as SearchSettings<T>?,uiSettings: freezed == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
 as SelectInputUiSettings<T>?,toJsonT: freezed == toJsonT ? _self.toJsonT : toJsonT // ignore: cast_nullable_to_non_nullable
-as Object? Function(T)?,fromJsonT: freezed == fromJsonT ? _self.fromJsonT : fromJsonT // ignore: cast_nullable_to_non_nullable
-as T Function(Object?)?,
+as Object? Function(T value)?,fromJsonT: freezed == fromJsonT ? _self.fromJsonT : fromJsonT // ignore: cast_nullable_to_non_nullable
+as T Function(Object? json)?,
   ));
 }
 /// Create a copy of SelectInput
@@ -2538,8 +2551,8 @@ class SelectInputBase<T> extends SelectInput<T> {
 ///   toJsonT: (value) => value.toJson(),
 ///   fromJsonT: (json) => TimeControl.fromJson(json as Json),
 /// ),
-@override@notSerializable final  Object? Function(T)? toJsonT;
-@override@notSerializable final  T Function(Object?)? fromJsonT;
+@override@notSerializable final  Object? Function(T value)? toJsonT;
+@override@notSerializable final  T Function(Object? json)? fromJsonT;
 
 /// Create a copy of SelectInput
 /// with the given fields replaced by the non-null parameter values.
@@ -2571,7 +2584,7 @@ abstract mixin class $SelectInputBaseCopyWith<T,$Res> implements $SelectInputCop
   factory $SelectInputBaseCopyWith(SelectInputBase<T> value, $Res Function(SelectInputBase<T>) _then) = _$SelectInputBaseCopyWithImpl;
 @override @useResult
 $Res call({
- String id, int minCount, int? maxCount, List<T>? initialValues, List<T> availibleValues, List<String>? idsOfAvailibleValues,@notSerializable void Function(List<T>? value)? onValueChanged,@notSerializable GetCustomErrorForListDef<T>? getCustomError, bool submitFormOnSelect, QuizSettings? quizSettings, SearchSettings<T>? searchSettings, SelectInputUiSettings<T>? uiSettings,@notSerializable Object? Function(T)? toJsonT,@notSerializable T Function(Object?)? fromJsonT
+ String id, int minCount, int? maxCount, List<T>? initialValues, List<T> availibleValues, List<String>? idsOfAvailibleValues,@notSerializable void Function(List<T>? value)? onValueChanged,@notSerializable GetCustomErrorForListDef<T>? getCustomError, bool submitFormOnSelect, QuizSettings? quizSettings, SearchSettings<T>? searchSettings, SelectInputUiSettings<T>? uiSettings,@notSerializable Object? Function(T value)? toJsonT,@notSerializable T Function(Object? json)? fromJsonT
 });
 
 
@@ -2603,8 +2616,8 @@ as bool,quizSettings: freezed == quizSettings ? _self.quizSettings : quizSetting
 as QuizSettings?,searchSettings: freezed == searchSettings ? _self.searchSettings : searchSettings // ignore: cast_nullable_to_non_nullable
 as SearchSettings<T>?,uiSettings: freezed == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
 as SelectInputUiSettings<T>?,toJsonT: freezed == toJsonT ? _self.toJsonT : toJsonT // ignore: cast_nullable_to_non_nullable
-as Object? Function(T)?,fromJsonT: freezed == fromJsonT ? _self.fromJsonT : fromJsonT // ignore: cast_nullable_to_non_nullable
-as T Function(Object?)?,
+as Object? Function(T value)?,fromJsonT: freezed == fromJsonT ? _self.fromJsonT : fromJsonT // ignore: cast_nullable_to_non_nullable
+as T Function(Object? json)?,
   ));
 }
 

@@ -108,8 +108,9 @@ sealed class WoFormNode<T extends Object?> with _$WoFormNode<T> {
     // LATER : issue, how to modify an in-production corrupted data ?
     // give a way to override it ?
     //
-    /// If not empty, this form will be locally persistent, using HydratedCubit.
-    @Default('') String hydratationId,
+    /// If not null, the form's values are saved on this device. See
+    /// [PersistenceSettings].
+    PersistenceSettings? persistenceSettings,
   }) = RootNode;
 
   @Assert('selector != null', 'SelectorNode.selector cannot be null')
