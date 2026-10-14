@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wo_form/wo_form.dart';
 
@@ -20,6 +21,9 @@ abstract class SearchSettings<T> with _$SearchSettings<T> {
 
     /// Defaults to [WoFormTheme.DEBOUNCE_DURATION].
     Duration? debounceDuration,
+
+    /// The widget shown when the search returns no data.
+    Widget? onNotFound,
   }) = _SearchSettings<T>;
 
   /// Required for the override getter

@@ -2381,7 +2381,7 @@ mixin _$SelectInput<T> {
 ///   toJsonT: (value) => value.toJson(),
 ///   fromJsonT: (json) => TimeControl.fromJson(json as Json),
 /// ),
-@notSerializable Object? Function(T value)? get toJsonT;@notSerializable T Function(Object? json)? get fromJsonT;
+@notSerializable Object? Function(T)? get toJsonT;@notSerializable T Function(Object?)? get fromJsonT;
 /// Create a copy of SelectInput
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2412,7 +2412,7 @@ abstract mixin class $SelectInputCopyWith<T,$Res> implements $WoFormInputCopyWit
   factory $SelectInputCopyWith(SelectInput<T> value, $Res Function(SelectInput<T>) _then) = _$SelectInputCopyWithImpl;
 @useResult
 $Res call({
- String id, int minCount, int? maxCount, List<T>? initialValues, List<T> availibleValues, List<String>? idsOfAvailibleValues,@notSerializable void Function(List<T>? value)? onValueChanged,@notSerializable GetCustomErrorForListDef<T>? getCustomError, bool submitFormOnSelect, QuizSettings? quizSettings, SearchSettings<T>? searchSettings, SelectInputUiSettings<T>? uiSettings,@notSerializable Object? Function(T value)? toJsonT,@notSerializable T Function(Object? json)? fromJsonT
+ String id, int minCount, int? maxCount, List<T>? initialValues, List<T> availibleValues, List<String>? idsOfAvailibleValues,@notSerializable void Function(List<T>? value)? onValueChanged,@notSerializable GetCustomErrorForListDef<T>? getCustomError, bool submitFormOnSelect, QuizSettings? quizSettings, SearchSettings<T>? searchSettings, SelectInputUiSettings<T>? uiSettings,@notSerializable Object? Function(T)? toJsonT,@notSerializable T Function(Object?)? fromJsonT
 });
 
 
@@ -2444,8 +2444,8 @@ as bool,quizSettings: freezed == quizSettings ? _self.quizSettings : quizSetting
 as QuizSettings?,searchSettings: freezed == searchSettings ? _self.searchSettings : searchSettings // ignore: cast_nullable_to_non_nullable
 as SearchSettings<T>?,uiSettings: freezed == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
 as SelectInputUiSettings<T>?,toJsonT: freezed == toJsonT ? _self.toJsonT : toJsonT // ignore: cast_nullable_to_non_nullable
-as Object? Function(T value)?,fromJsonT: freezed == fromJsonT ? _self.fromJsonT : fromJsonT // ignore: cast_nullable_to_non_nullable
-as T Function(Object? json)?,
+as Object? Function(T)?,fromJsonT: freezed == fromJsonT ? _self.fromJsonT : fromJsonT // ignore: cast_nullable_to_non_nullable
+as T Function(Object?)?,
   ));
 }
 /// Create a copy of SelectInput
@@ -2551,8 +2551,8 @@ class SelectInputBase<T> extends SelectInput<T> {
 ///   toJsonT: (value) => value.toJson(),
 ///   fromJsonT: (json) => TimeControl.fromJson(json as Json),
 /// ),
-@override@notSerializable final  Object? Function(T value)? toJsonT;
-@override@notSerializable final  T Function(Object? json)? fromJsonT;
+@override@notSerializable final  Object? Function(T)? toJsonT;
+@override@notSerializable final  T Function(Object?)? fromJsonT;
 
 /// Create a copy of SelectInput
 /// with the given fields replaced by the non-null parameter values.
@@ -2584,7 +2584,7 @@ abstract mixin class $SelectInputBaseCopyWith<T,$Res> implements $SelectInputCop
   factory $SelectInputBaseCopyWith(SelectInputBase<T> value, $Res Function(SelectInputBase<T>) _then) = _$SelectInputBaseCopyWithImpl;
 @override @useResult
 $Res call({
- String id, int minCount, int? maxCount, List<T>? initialValues, List<T> availibleValues, List<String>? idsOfAvailibleValues,@notSerializable void Function(List<T>? value)? onValueChanged,@notSerializable GetCustomErrorForListDef<T>? getCustomError, bool submitFormOnSelect, QuizSettings? quizSettings, SearchSettings<T>? searchSettings, SelectInputUiSettings<T>? uiSettings,@notSerializable Object? Function(T value)? toJsonT,@notSerializable T Function(Object? json)? fromJsonT
+ String id, int minCount, int? maxCount, List<T>? initialValues, List<T> availibleValues, List<String>? idsOfAvailibleValues,@notSerializable void Function(List<T>? value)? onValueChanged,@notSerializable GetCustomErrorForListDef<T>? getCustomError, bool submitFormOnSelect, QuizSettings? quizSettings, SearchSettings<T>? searchSettings, SelectInputUiSettings<T>? uiSettings,@notSerializable Object? Function(T)? toJsonT,@notSerializable T Function(Object?)? fromJsonT
 });
 
 
@@ -2616,8 +2616,8 @@ as bool,quizSettings: freezed == quizSettings ? _self.quizSettings : quizSetting
 as QuizSettings?,searchSettings: freezed == searchSettings ? _self.searchSettings : searchSettings // ignore: cast_nullable_to_non_nullable
 as SearchSettings<T>?,uiSettings: freezed == uiSettings ? _self.uiSettings : uiSettings // ignore: cast_nullable_to_non_nullable
 as SelectInputUiSettings<T>?,toJsonT: freezed == toJsonT ? _self.toJsonT : toJsonT // ignore: cast_nullable_to_non_nullable
-as Object? Function(T value)?,fromJsonT: freezed == fromJsonT ? _self.fromJsonT : fromJsonT // ignore: cast_nullable_to_non_nullable
-as T Function(Object? json)?,
+as Object? Function(T)?,fromJsonT: freezed == fromJsonT ? _self.fromJsonT : fromJsonT // ignore: cast_nullable_to_non_nullable
+as T Function(Object?)?,
   ));
 }
 

@@ -295,41 +295,32 @@ class _AlwaysVisibleSelectField<T> extends StatelessWidget {
             text: queryController.text,
             onValueChanged: (text) => queryController.text = text ?? '',
           ),
-
-          // TextField(
-          //   controller: queryController,
-          //   decoration: const InputDecoration(
-          //     prefixIcon: Icon(Icons.search),
-          //   ),
-          //   autocorrect: false,
-          //   autofocus: data.input.uiSettings?.searchAutofocus ?? true,
-          //   // Flutter's default behaviour :
-          //   // - web : tapping outside instantly unfocuses the field.
-          //   // - mobile : tapping outside does nothing.
-          //   // wo_form decided to unfocus search fields on tap down.
-          //   onTapOutside: (event) => FocusScope.of(context).unfocus(),
-          // ),
         ),
       ...switch (future) {
         DataError() => [],
         DataLoading(data: final results) || DataValue(data: final results) => [
-          if (data is DataLoading)
+          if (future is DataLoading)
             const LinearProgressIndicator()
           else if (searchSettings != null)
             SizedBox(
               height:
                   Theme.of(context).progressIndicatorTheme.linearMinHeight ?? 4,
             ),
-          if (results != null && results.isNotEmpty)
-            if ((data.input.uiSettings?.flex ?? 0) > 0)
-              Expanded(
-                child: ListView.builder(
-                  itemCount: results.length,
-                  itemBuilder: (_, index) => valueBuilder(results[index]),
-                ),
-              )
+
+          if (results == null || results.isEmpty)
+            if (future is! DataLoading)
+              ?data.input.searchSettings?.onNotFound
             else
-              ...results.map(valueBuilder),
+              ?null
+          else if ((data.input.uiSettings?.flex ?? 0) > 0)
+            Expanded(
+              child: ListView.builder(
+                itemCount: results.length,
+                itemBuilder: (_, index) => valueBuilder(results[index]),
+              ),
+            )
+          else
+            ...results.map(valueBuilder),
         ],
       },
     ],
