@@ -6,6 +6,7 @@ enum FlexFieldDisableMode { none, header, all }
 class FlexField extends StatelessWidget {
   const FlexField({
     required this.child,
+    this.nodeFlex,
     required this.headerFlex,
     this.labelText,
     this.labelMaxLines,
@@ -23,6 +24,8 @@ class FlexField extends StatelessWidget {
   });
 
   final Widget child;
+
+  final int? nodeFlex;
 
   /// If null or O, header will be placed above the field.
   /// Else, header and selector will be in a the same row.
@@ -98,39 +101,42 @@ class FlexField extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 4),
               child: headerDisabled,
             ),
-          Flex(
-            direction: Axis.horizontal,
-            // This sticks the prefixIcon to the top
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (prefixIcon != null)
-                Padding(
-                  padding: EdgeInsets.only(left: padding.left),
-                  child: prefixIcon,
-                ),
-              Expanded(
-                child: Row(
-                  // This keeps the header & the child centered
-                  children: [
-                    if (headerFlex != null && headerFlex != 0)
+          Flexible(
+            flex: nodeFlex == null ? 0 : 1,
+            child: Flex(
+              direction: Axis.horizontal,
+              // This sticks the prefixIcon to the top
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (prefixIcon != null)
+                  Padding(
+                    padding: EdgeInsets.only(left: padding.left),
+                    child: prefixIcon,
+                  ),
+                Expanded(
+                  child: Row(
+                    // This keeps the header & the child centered
+                    children: [
+                      if (headerFlex != null && headerFlex != 0)
+                        Expanded(
+                          flex: headerFlex == -1 ? 1 : headerFlex!,
+                          child: headerDisabled,
+                        )
+                      else
+                        SizedBox(width: padding.left),
                       Expanded(
-                        flex: headerFlex == -1 ? 1 : headerFlex!,
-                        child: headerDisabled,
-                      )
-                    else
-                      SizedBox(width: padding.left),
-                    Expanded(
-                      flex: headerFlex == -1 ? 0 : 10,
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: child,
+                        flex: headerFlex == -1 ? 0 : 10,
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: child,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(width: padding.right),
-            ],
+                SizedBox(width: padding.right),
+              ],
+            ),
           ),
           SizedBox(height: padding.bottom),
         ],

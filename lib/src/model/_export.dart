@@ -4,6 +4,7 @@ export 'export_settings.dart';
 export 'flexible_date_time.dart';
 export 'json_converter/_export.dart';
 export 'media.dart';
+export 'persistence_settings.dart';
 export 'quiz_settings.dart';
 export 'search_settings.dart';
 export 'suggestions_settings.dart';

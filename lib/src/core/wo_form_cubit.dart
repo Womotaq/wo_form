@@ -97,7 +97,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
       // Mark all paths as visited, this way the errors will always appear
       final visitedPaths = Set<String>.from(values._visitedPaths)
         ..addAll(values.keys);
-      // Cannot store a set in values, or the hydratation won't work
+      // Cannot store a set in values, or the persistence won't work
       values._visitedPaths = visitedPaths.toList();
     }
 
@@ -124,6 +124,17 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
 
   /// Return true if the current state is equal to the initial state.
   bool get isPure => state.isPure(initialValues: _initialValues);
+
+  /// Whether this form keeps a draft on this device. Only a form with
+  /// [PersistenceSettings] does, and only once its values differ from the
+  /// initial ones, among those that can be saved: local files, for instance,
+  /// never are.
+  bool get hasSavedDraft => false;
+
+  /// Whether leaving the form now would lose changes. Without
+  /// [PersistenceSettings], that's any change. With them, only the changes
+  /// its draft can't hold, like local files.
+  bool get hasUnsavedChanges => !isPure;
   ShowErrors get showErrors =>
       _root.uiSettings?.showErrors ?? ShowErrors.progressively;
 
@@ -432,7 +443,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
     final newValues = state.copy();
     final visitedPaths = Set<String>.from(newValues._visitedPaths)
       ..addAll(paths);
-    // Do not store a set in values, or the hydratation won't work
+    // Do not store a set in values, or the persistence won't work
     newValues._visitedPaths = visitedPaths.toList();
     emit(newValues);
   }
@@ -508,6 +519,7 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
         if (await _canSubmit(context)) {
           final result = await onSubmitting?.call(_root, state);
           emit(state.copy().._set(WoFormValues.SUBMISSION_RESULT_KEY, result));
+          _onSubmitSucceeded();
           _statusCubit._setSubmitSuccess();
         } else {
           _statusCubit.setInProgress();
@@ -527,6 +539,10 @@ class WoFormValuesCubit extends Cubit<WoFormValues> {
       _lockCubit.unlockInputs(paths: nodesLockWhileSubmitting);
     }
   }
+
+  /// Called once the submission succeeded, before [SubmitSuccessStatus] is set,
+  /// so that the form's listeners can't save anything after this.
+  void _onSubmitSucceeded() {}
 
   /// Return true if [WoForm.onSubmitting] should be called afterward.
   Future<bool> _onStepSubmitting(BuildContext context) async {
@@ -786,12 +802,39 @@ class WoFormValues {
     return key == null ? null : _values[key];
   }
 
+  /// Whether these values hold the same content as [initialValues]. Empty
+  /// values count as no value, see [isEmptyValue]: a field typed in then
+  /// erased is unchanged, even if it started as null.
   bool isPure({required WoFormValues initialValues}) =>
       const DeepCollectionEquality().equals(
-        asMap()..removeWhere((path, _) => path.startsWith('/__wo_reserved')),
-        initialValues.asMap()
-          ..removeWhere((path, _) => path.startsWith('/__wo_reserved')),
+        _content(asMap()),
+        _content(initialValues.asMap()),
       );
+
+  /// Whether [value] holds nothing: null, a blank string, or a collection of
+  /// such values, however deep. Forms treat it as no value.
+  ///
+  /// The one rule for emptiness: anything that must agree with forms on it,
+  /// like a draft kept outside a form, should use it too.
+  static bool isEmptyValue(Object? value) => switch (value) {
+    null => true,
+    String() => value.trim().isEmpty,
+    Iterable() => value.every(isEmptyValue),
+    Map() => value.values.every(isEmptyValue),
+    _ => false,
+  };
+
+  /// The values that make the form's content: no internal entries, and no
+  /// empty values.
+  static Json _content(Json values) => {
+    for (final MapEntry(:key, :value) in values.entries)
+      if (!key.startsWith('/__wo_reserved') && !isEmptyValue(value)) key: value,
+  };
+
+  /// Whether [a] and [b] hold the same content, empty values being equal.
+  static bool _sameContent(Object? a, Object? b) =>
+      (isEmptyValue(a) && isEmptyValue(b)) ||
+      const DeepCollectionEquality().equals(a, b);
 
   /// If the value at [path] is [T], then the value is returned, casted.
   /// Else, null is returned.
@@ -869,6 +912,16 @@ class WoFormValues {
   set _generatedSteps(List<String> steps) =>
       _values[_GENERATED_STEPS_KEY] = steps;
 
+  /// Where the user stands in the form: the step shown, and the node the next
+  /// submit targets. The widgets showing it don't outlive the form, so a form
+  /// opened again must start over from its initial position.
+  static const List<String> _navigationKeys = [
+    _SUBMIT_PATH_KEY,
+    CURRENT_STEP_PATH_KEY,
+    CURRENT_STEP_INDEX_KEY,
+    _GENERATED_STEPS_KEY,
+  ];
+
   // --- FOCUS ---
 
   // ignore: constant_identifier_names
@@ -882,8 +935,9 @@ class WoFormValues {
 
   // ignore: constant_identifier_names
   static const _VISITED_PATHS_KEY = '/__wo_reserved_visited_paths';
+  // A hydrated list comes back as List<dynamic>, hence the cast.
   Iterable<String> get _visitedPaths =>
-      this[_VISITED_PATHS_KEY] as Iterable<String>? ?? {};
+      (this[_VISITED_PATHS_KEY] as Iterable?)?.cast<String>() ?? {};
   set _visitedPaths(Iterable<String> paths) =>
       _values[_VISITED_PATHS_KEY] = paths;
 

@@ -245,7 +245,6 @@ class SearchScreen<T> extends StatelessWidget {
     this.onQueryChanged,
     this.initialQuery,
     this.layout = LayoutMethod.scrollable,
-    this.onNotFound,
     this.searchInputUiSettings,
     super.key,
   });
@@ -259,7 +258,6 @@ class SearchScreen<T> extends StatelessWidget {
   final void Function(WoFormQuery query)? onQueryChanged;
   final WoFormQuery? initialQuery;
   final LayoutMethod layout;
-  final Widget? onNotFound;
   final StringInputUiSettings<T>? searchInputUiSettings;
 
   static StringInputUiSettings<T>
@@ -309,7 +307,7 @@ class SearchScreen<T> extends StatelessWidget {
     shrinkWrap: layout.shrinks,
     children: switch (data) {
       DataError() => [
-        ?onNotFound,
+        ?searchSettings?.onNotFound,
         ...?bottomChildren,
       ],
       DataLoading(data: final results) || DataValue(data: final results) => [
@@ -321,7 +319,7 @@ class SearchScreen<T> extends StatelessWidget {
                 Theme.of(context).progressIndicatorTheme.linearMinHeight ?? 4,
           ),
         if (results == null || results.isEmpty)
-          ?onNotFound
+          ?searchSettings?.onNotFound
         else
           ...results.map((e) => tileBuilder(context, e, () => onSelect(e))),
         ...?bottomChildren,

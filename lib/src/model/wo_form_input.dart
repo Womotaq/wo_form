@@ -563,6 +563,19 @@ abstract class SelectInput<T> extends WoFormInput<T> with _$SelectInput<T> {
 
   const SelectInput._() : super._();
 
+  /// Converts [values] to their JSON form, with [toJsonT] or the enum name.
+  ///
+  /// These methods use [T] from this instance, so they work even when the
+  /// input is only known as a `SelectInput<dynamic>`. Reading [toJsonT] from
+  /// such a reference would fail at runtime, since its parameter type is
+  /// checked against `dynamic`.
+  List<Object?> valuesToJson(List<T> values) =>
+      values.map(toJsonT ?? _defaultToJsonT).toList();
+
+  /// Converts JSON [values] back to their type, with [fromJsonT].
+  List<T> valuesFromJson(List<Object?> values) =>
+      values.map(fromJsonT!).toList();
+
   static SelectInput<Object?> fromJson(Json json) {
     final availibleValues = json['availibleValues'];
     if (availibleValues is! Iterable || availibleValues.isEmpty) {

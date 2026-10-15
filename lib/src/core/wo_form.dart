@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
@@ -24,8 +25,9 @@ class WoForm extends StatelessWidget {
     WoFormUiSettings? uiSettings,
     Json? initialValues,
 
-    /// If not empty, this form will be locally persistent, using HydratedCubit.
-    String hydratationId = '',
+    /// If not null, the form's values are saved on this device, and restored
+    /// when the form is opened again. See [PersistenceSettings].
+    PersistenceSettings? persistenceSettings,
     this.onStatusUpdate,
     this.canSubmit,
     this.onSubmitting,
@@ -38,7 +40,7 @@ class WoForm extends StatelessWidget {
          exportSettings: exportSettings ?? const ExportSettings(),
          uiSettings: uiSettings ?? const WoFormUiSettings(),
          initialValues: initialValues ?? const {},
-         hydratationId: hydratationId,
+         persistenceSettings: persistenceSettings,
          children: children,
        );
 
@@ -73,30 +75,59 @@ class WoForm extends StatelessWidget {
   final WidgetBuilderDef? pageBuilder;
   final RootKey? rootKey;
 
+  /// The values saved by a form whose [PersistenceSettings.key] is [key], by
+  /// path, without the form's internal entries. Null when nothing is saved.
+  ///
+  /// Lets a page read a draft without opening its form. To only know whether
+  /// there is one, use [hasSavedDraft].
+  static Map<String, Object?>? readSavedValues(String key) {
+    try {
+      final json = HydratedBloc.storage.read(_valuesStorageId(key));
+      if (json is! Map) return null;
+
+      return {
+        for (final MapEntry(:key, :value) in json.entries)
+          if (key is String && !key.startsWith('/__wo_reserved')) key: value,
+      };
+    } catch (_) {
+      // No storage, or an unreadable one: there is no draft to tell about.
+      return null;
+    }
+  }
+
+  static String _valuesStorageId(String key) => '$key-WoFormValuesCubit';
+
+  /// Whether a form whose [PersistenceSettings.key] is [key] left a draft on
+  /// this device. A form left unchanged deletes its draft, so any saved values
+  /// are a draft. See [WoFormValuesCubit.hasSavedDraft].
+  static bool hasSavedDraft(String key) => readSavedValues(key) != null;
+
   @override
   Widget build(BuildContext context) {
+    final persistence = root.persistenceSettings;
+
     final form = FocusScope(
       child: MultiRepositoryProvider(
         providers: [RepositoryProvider.value(value: root)],
         child: MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (context) => root.hydratationId.isEmpty
+              create: (context) => persistence == null
                   ? WoFormStatusCubit(
                       const InitialStatus(),
                     )
                   : _HydratedWoFormStatusCubit(
-                      root.hydratationId,
+                      persistence.key,
                       const InitialStatus(),
                     ),
             ),
             BlocProvider(
-              create: (context) => root.hydratationId.isEmpty
+              create: (context) => persistence == null
                   ? WoFormLockCubit._()
-                  : _HydratedWoFormLockCubit(root.hydratationId),
+                  : _HydratedWoFormLockCubit(persistence.key),
             ),
             BlocProvider(
-              create: (context) => root.hydratationId.isEmpty
+              create: (context) => persistence == null
                   ? WoFormValuesCubit._(
                       context.read(),
                       context.read(),
@@ -106,7 +137,7 @@ class WoForm extends StatelessWidget {
                       onSubmitting: onSubmitting,
                     )
                   : _HydratedWoFormValuesCubit(
-                      root.hydratationId,
+                      persistence,
                       context.read(),
                       context.read(),
                       context.read(),

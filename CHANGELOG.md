@@ -1,3 +1,14 @@
+## 2.1.0
+
+- Breaking: Replaced WoForm.hydratationId with WoForm.persistenceSettings (see PersistenceSettings)
+- Breaking: Moved SearchScreen.onNotFound to SearchSettings.onNotFound
+- Reworked persistence: only drafts are saved, and they are cleared after a successful submit (see PersistenceSettings.clearOnSubmit)
+- Added WoForm.hasSavedDraft, WoForm.readSavedValues, WoFormValuesCubit.hasSavedDraft and WoFormValuesCubit.hasUnsavedChanges
+- isPure treats empty values as no value (see WoFormValues.isEmptyValue)
+- A StringField with a flex of 1 expands to fill its available height
+- Solved persistence issues
+- Solved StringField issues with text selection and cursor position
+
 ## 2.0.6
 
 - Added few customization options

@@ -188,7 +188,11 @@ RootNode<T> _$RootNodeFromJson<T extends Object?>(
   exportSettings: json['exportSettings'] == null
       ? null
       : ExportSettings.fromJson(json['exportSettings'] as Map<String, dynamic>),
-  hydratationId: json['hydratationId'] as String? ?? '',
+  persistenceSettings: json['persistenceSettings'] == null
+      ? null
+      : PersistenceSettings.fromJson(
+          json['persistenceSettings'] as Map<String, dynamic>,
+        ),
   $type: json['runtimeType'] as String?,
 );
 
@@ -200,7 +204,7 @@ Map<String, dynamic> _$RootNodeToJson<T extends Object?>(
   'children': const InputsListConverter().toJson(instance.children),
   'uiSettings': instance.uiSettings?.toJson(),
   'exportSettings': instance.exportSettings?.toJson(),
-  'hydratationId': instance.hydratationId,
+  'persistenceSettings': instance.persistenceSettings?.toJson(),
   'runtimeType': instance.$type,
 };
 

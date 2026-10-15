@@ -54,6 +54,9 @@ class _StringFieldState<T> extends State<StringField<T>> {
   late final bool autofocus;
   bool obscureText = false;
   Offset? tapPosition;
+  // The controller also notifies on selection changes (e.g. when an autofocused
+  // field gets focus), so we only report a value change when the text differs.
+  String? _lastNotifiedText;
 
   @override
   void initState() {
@@ -95,14 +98,16 @@ class _StringFieldState<T> extends State<StringField<T>> {
         textEditingController = TextEditingController();
       }
       textEditingController?.text = widget.text ?? '';
+      _lastNotifiedText = textEditingController?.text;
       textEditingController?.addListener(_onTextChanged);
     }
   }
 
   void _onTextChanged() {
     final newText = textEditingController?.text;
-    if (newText == null) return;
+    if (newText == null || newText == _lastNotifiedText) return;
 
+    _lastNotifiedText = newText;
     widget.onValueChanged?.call(newText);
   }
 
@@ -110,15 +115,17 @@ class _StringFieldState<T> extends State<StringField<T>> {
   void didUpdateWidget(covariant StringField<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (textEditingController != null) {
-      if ((widget.text ?? '') != textEditingController?.text) {
-        textEditingController?.text = widget.text ?? '';
-      }
-    }
-    if (phoneController != null) {
-      if ((widget.text ?? '') != textEditingController?.text) {
-        textEditingController?.text = widget.text ?? '';
-      }
+    final controller = textEditingController;
+    final text = widget.text ?? '';
+    if (controller != null && text != controller.text) {
+      // The value changed from elsewhere, e.g. cleared. Unlike setting
+      // controller.text, this keeps a cursor, at the end: a focused field
+      // would otherwise lose it, along with anything relying on it.
+      _lastNotifiedText = text;
+      controller.value = TextEditingValue(
+        text: text,
+        selection: TextSelection.collapsed(offset: text.length),
+      );
     }
   }
 
@@ -348,6 +355,8 @@ class _StringFieldState<T> extends State<StringField<T>> {
             maxLines: uiSettings?.maxLines == 0
                 ? null
                 : uiSettings?.maxLines ?? 1,
+            expands: uiSettings?.flex == 1,
+            textAlignVertical: TextAlignVertical.top,
             inputFormatters: formatters,
             decoration: inputDecoration,
           );
@@ -360,6 +369,7 @@ class _StringFieldState<T> extends State<StringField<T>> {
     }
 
     return FlexField(
+      nodeFlex: uiSettings?.flex,
       headerFlex: uiSettings?.headerFlex,
       labelText: labelLocation.isOutside ? uiSettings?.labelText : null,
       labelMaxLines: uiSettings?.labelMaxLines,
