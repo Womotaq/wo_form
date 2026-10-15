@@ -1,14 +1,13 @@
-## Unreleased
+## 2.1.0
 
-- Renamed `WoForm.hydratationId` to `WoForm.persistenceSettings`, which takes a `PersistenceSettings(key: ...)`
-- Saved values are cleared after a successful submit, unless `clearOnSubmit: false`
-- Fields whose values can't be saved are skipped and logged, the other fields are still saved
-- Restored fields are no longer reset to their initial value
-- `isPure` treats empty values as no value: null, blank strings, and collections of them, see `WoFormValues.isEmptyValue`. A field typed in then erased no longer counts as a change
-- A persisted form only saves a draft: values that hold no change aren't saved, and a saved draft is deleted with its status and locks once the values come back to their initial content, or when the form opens without one
-- Added `WoFormValuesCubit.hasSavedDraft` and `WoFormValuesCubit.hasUnsavedChanges`, to tell whether leaving keeps a draft or loses changes, like local files a draft can't hold
-- Added `WoForm.hasSavedDraft` and `WoForm.readSavedValues`, to read a form's draft without opening it
-- When a `StringField`'s value changes from elsewhere, its cursor moves to the end of the new text, instead of being lost
+- Breaking: Replaced WoForm.hydratationId with WoForm.persistenceSettings (see PersistenceSettings)
+- Breaking: Moved SearchScreen.onNotFound to SearchSettings.onNotFound
+- Reworked persistence: only drafts are saved, and they are cleared after a successful submit (see PersistenceSettings.clearOnSubmit)
+- Added WoForm.hasSavedDraft, WoForm.readSavedValues, WoFormValuesCubit.hasSavedDraft and WoFormValuesCubit.hasUnsavedChanges
+- isPure treats empty values as no value (see WoFormValues.isEmptyValue)
+- A StringField with a flex of 1 expands to fill its available height
+- Solved persistence issues
+- Solved StringField issues with text selection and cursor position
 
 ## 2.0.6
 
